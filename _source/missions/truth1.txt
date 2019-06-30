@@ -1,0 +1,3032 @@
+:TRUTH1
+thread 'TRUTH1' 
+gosub @TRUTH1_54 
+if 
+wasted_or_busted 
+jf @TRUTH1_45 
+$11033 = 0 
+gosub @TRUTH1_19003 
+
+:TRUTH1_45
+gosub @TRUTH1_19187 
+end_thread 
+
+:TRUTH1_54
+increment_mission_attempts 
+054C: use_GXT_table 'TRU1' 
+$ONMISSION = 1 
+wait 0 
+select_interior 12 
+02E4: load_cutscene_data 'TRUTH_1' 
+
+:TRUTH1_93
+if 
+86B9:   not cutscene_data_loaded 
+jf @TRUTH1_117 
+wait 0 
+jump @TRUTH1_93 
+
+:TRUTH1_117
+02E7: start_cutscene 
+fade 1 1000 
+
+:TRUTH1_126
+if 
+82E9:   not cutscene_reached_end 
+jf @TRUTH1_150 
+wait 0 
+jump @TRUTH1_126 
+
+:TRUTH1_150
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:TRUTH1_165
+if 
+fading 
+jf @TRUTH1_189 
+wait 0 
+jump @TRUTH1_165 
+
+:TRUTH1_189
+select_interior 0 
+0169: set_fade_color_RGB 0 0 0 
+Model.Load(#COMBINE)
+Model.Load(#TRACTOR)
+Model.Load(#KMB_MARIJUANA)
+07C0: load_path 348 
+Model.Load(#SW_HAYBREAK02)
+Model.Load(#CUNTGUN)
+Model.Load(#WALTON)
+Model.Load(#SHOVEL)
+Model.Load(#CWFYHB)
+Model.Load(#CWMOHB2)
+Model.Load(#CWMYHB1)
+038B: load_requested_models 
+
+:TRUTH1_258
+if or
+   not Model.Available(#COMBINE)
+   not Model.Available(#TRACTOR)
+   not Model.Available(#KMB_MARIJUANA)
+   not Model.Available(#CWFYHB)
+   not Model.Available(#CWMOHB2)
+jf @TRUTH1_305 
+wait 0 
+jump @TRUTH1_258 
+
+:TRUTH1_305
+if or
+87C1:   not path 348 available 
+   not Model.Available(#SW_HAYBREAK02)
+   not Model.Available(#CUNTGUN)
+   not Model.Available(#CWMYHB1)
+jf @TRUTH1_347 
+wait 0 
+jump @TRUTH1_305 
+
+:TRUTH1_347
+if or
+   not Model.Available(#WALTON)
+   not Model.Available(#SHOVEL)
+jf @TRUTH1_379 
+wait 0 
+jump @TRUTH1_347 
+
+:TRUTH1_379
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+018A: 116@ = create_checkpoint_at -1047.593 -1347.254 129.216 
+060A: create_decision_maker_type 0 store_to 97@ // decision\allowed\m_.ped files 
+0708: reset_decision_maker 97@ event 7 
+0709: set_decision_maker 97@ on_event 7 taskID 1000 respect 50.0 hate 50.0 like 50.0 dislike 50.0 in_car 1 on_foot 1 // see *.ped files 
+060A: create_decision_maker_type 2 store_to 98@ // decision\allowed\m_.ped files 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+Actor.PutAt($PLAYER_ACTOR, -2195.9, -2258.029, 30.0)
+Actor.Angle($PLAYER_ACTOR) = 141.0
+0A0B: set_rendering_origin_at_3D_coord -2196.46 -2256.96 31.43 angle 141.0 
+fade 1 500 
+117@ = 0 
+119@ = 0 
+120@ = 0 
+121@ = 0 
+122@ = 0 
+123@ = 0 
+124@ = 0 
+125@ = 0 
+126@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+130@ = 0 
+131@ = 0 
+132@ = 0 
+133@ = 0 
+134@ = 0 
+135@ = 0 
+136@ = 0 
+137@ = 0 
+138@ = 0 
+139@ = 0 
+140@ = 0 
+141@ = 0 
+142@ = 0 
+118@ = 0 
+143@ = 0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+00BC: show_text_highpriority GXT 'TRU1_1' time 10000 flag 1  // Get to the ~y~farm ~s~where the combine harvester is located.
+if 
+  122@ == 100 
+jf @TRUTH1_895 
+43@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+44@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+45@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+46@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+47@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+48@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+122@ = 101 
+
+:TRUTH1_895
+03C7: set_sensitivity_to_crime 0.3 
+if 
+  $6993[16] > 0 
+jf @TRUTH1_942 
+0950: set_trip_skip -1084.219 -1341.156 128.365 angle 257.771 
+
+:TRUTH1_942
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @TRUTH1_968 
+jump @TRUTH1_19049 
+
+:TRUTH1_968
+if 
+  118@ == 0 
+jf @TRUTH1_4525 
+if 
+  117@ == 0 
+jf @TRUTH1_2282 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1047.593 -1347.254 129.39 radius 4.0 4.0 4.0 
+jf @TRUTH1_2282 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(116@)
+fade 0 500 
+
+:TRUTH1_1075
+if 
+fading 
+jf @TRUTH1_1099 
+wait 0 
+jump @TRUTH1_1075 
+
+:TRUTH1_1099
+if 
+  $6993[16] == 0 
+jf @TRUTH1_1124 
+$6993[16] = 1 
+
+:TRUTH1_1124
+0951: disable_trip_skip 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRUTH1_1150 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+
+:TRUTH1_1150
+34@ = Car.Create(#COMBINE, -1060.25, -1044.209, 128.2188)
+Car.Angle(34@) = 84.2638
+04E0: car 34@ abandon_path_radius 100 
+Car.DriveTo(34@, -1136.78, -1044.209, 128.2188)
+Car.SetMaxSpeed(34@, 7.0)
+38@ = Actor.CreateAsDriver(Mission2, #CWMOHB2, 34@)
+wait 500 
+fade 1 1000 
+Camera.SetPosition(-1073.802, -1038.203, 128.492, 0.0, 0.0, 0.0)
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_1302 
+Camera.OnVehicle(34@, 15, 2)
+
+:TRUTH1_1302
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRUTH1_1343 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+Car.Angle($TEMPVAR_ACTOR_CAR) = 355.69
+jump @TRUTH1_1353 
+
+:TRUTH1_1343
+Actor.Angle($PLAYER_ACTOR) = 355.73
+
+:TRUTH1_1353
+90@ = Car.Create(#TRACTOR, -1043.989, -1312.677, 128.772)
+Car.Angle(90@) = 1.243
+053F: set_car 90@ tires_vulnerability 0 
+Car.Health(90@) = 2000
+60@ = Object.Init(#SW_HAYBREAK02, -1053.792, -1187.624, 129.396)
+61@ = Object.Init(#SW_HAYBREAK02, -1038.506, -1154.722, 129.699)
+62@ = Object.Init(#SW_HAYBREAK02, -1105.419, -1112.451, 128.864)
+63@ = Object.Init(#SW_HAYBREAK02, -1182.346, -1043.797, 129.699)
+64@ = Object.Init(#SW_HAYBREAK02, -1141.389, -1008.254, 129.735)
+65@ = Object.Init(#SW_HAYBREAK02, -1197.385, -1084.951, 129.743)
+66@ = Object.Init(#SW_HAYBREAK02, -1161.353, -1117.198, 129.049)
+35@ = Car.Create(#TRACTOR, -1115.569, -1115.231, 128.366)
+39@ = Actor.CreateAsDriver(Mission2, #CWMOHB2, 35@)
+Car.Angle(35@) = 274.604
+49@ = Actor.Create(Mission1, #CWMOHB2, -1064.341, -1283.63, 128.247)
+Actor.Angle(49@) = 116.09
+0605: actor 49@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 49@ decision_maker_to 97@ 
+Actor.Health(49@) = 50
+0648: unknown_actor 49@ task_set 100.0 // float 
+Actor.GiveWeaponAndAmmo(49@, Rifle, 99999)
+50@ = Actor.Create(Mission1, #CWFYHB, -1074.646, -1095.812, 128.245)
+Actor.Angle(50@) = 96.069
+0605: actor 50@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 50@ decision_maker_to 97@ 
+Actor.Health(50@) = 50
+0648: unknown_actor 50@ task_set 100.0 // float 
+52@ = Actor.Create(Mission1, #CWFYHB, -1135.339, -1134.299, 128.259)
+Actor.Angle(52@) = 90.157
+0605: actor 52@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 52@ decision_maker_to 97@ 
+Actor.Health(52@) = 50
+0648: unknown_actor 52@ task_set 100.0 // float 
+53@ = Actor.Create(Mission1, #CWMYHB1, -1121.739, -1095.64, 128.247)
+Actor.Angle(53@) = 94.64
+0605: actor 53@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 53@ decision_maker_to 97@ 
+Actor.Health(53@) = 50
+54@ = Actor.Create(Mission1, #CWFYHB, -1121.713, -1084.165, 128.247)
+Actor.Angle(54@) = 79.746
+0605: actor 54@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 54@ decision_maker_to 97@ 
+Actor.Health(54@) = 50
+0648: unknown_actor 54@ task_set 100.0 // float 
+55@ = Actor.Create(Mission1, #CWMYHB1, -1159.367, -1134.375, 128.259)
+Actor.Angle(55@) = 270.749
+0605: actor 55@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 55@ decision_maker_to 97@ 
+Actor.Health(55@) = 50
+0648: unknown_actor 55@ task_set 100.0 // float 
+00BC: show_text_highpriority GXT 'TRU1_2' time 7000 flag 1  // ~s~The ~b~combine harvester ~s~is located at the field towards the back of the farm.
+wait 200 
+51@ = Actor.Create(Mission1, #CWMYHB1, -1074.332, -1084.388, 128.244)
+Actor.Angle(51@) = 60.659
+0605: actor 51@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 51@ decision_maker_to 97@ 
+Actor.Health(51@) = 50
+0648: unknown_actor 51@ task_set 30.0 // float 
+32@ = 0 
+33@ = 0 
+117@ = 1 
+
+:TRUTH1_2282
+if 
+  33@ > 1800 
+jf @TRUTH1_2400 
+if 
+  117@ == 1 
+jf @TRUTH1_2400 
+121@ = 0 
+0707: start_scene_skip_to @TRUTH1_2756 
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH1_2386 
+04E0: car 35@ abandon_path_radius 100 
+Car.DriveTo(35@, -1061.058, -1116.129, 128.366)
+Car.SetMaxSpeed(35@, 10.0)
+
+:TRUTH1_2386
+33@ = 0 
+117@ = 2 
+
+:TRUTH1_2400
+if 
+  117@ == 2 
+jf @TRUTH1_2594 
+if 
+  33@ > 5000 
+jf @TRUTH1_2594 
+Camera.SetPosition(-1057.875, -1120.592, 136.4117, 0.0, 0.0, 0.0)
+Camera.PointAt(-1058.704, -1120.088, 136.1667, 2)
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_2564 
+Car.PutAt(34@, -1082.138, -1046.893, 129.29)
+Car.Angle(34@) = 84.2638
+Car.DriveTo(34@, -1195.58, -1045.87, 129.1)
+Car.SetMaxSpeed(34@, 7.0)
+
+:TRUTH1_2564
+00BC: show_text_highpriority GXT 'TRU1_3' time 7000 flag 1  // ~s~There are several groups of survivalists working, they will not take kindly to any strangers.
+33@ = 0 
+117@ = 3 
+
+:TRUTH1_2594
+if 
+  117@ == 3 
+jf @TRUTH1_2712 
+if 
+  33@ > 7000 
+jf @TRUTH1_2712 
+Camera.SetPosition(-1035.782, -1331.041, 134.0494, 0.0, 0.0, 0.0)
+Camera.PointAt(-1036.184, -1330.134, 133.9223, 2)
+00BC: show_text_highpriority GXT 'TRU1_4' time 10000 flag 1  // ~s~Get into the farm and steal the ~b~combine harvester~s~.
+33@ = 0 
+117@ = 4 
+
+:TRUTH1_2712
+if 
+  117@ == 4 
+jf @TRUTH1_4525 
+if 
+  33@ > 5000 
+jf @TRUTH1_4525 
+121@ = 1 
+
+:TRUTH1_2756
+0701: end_scene_skip 
+if 
+  121@ == 0 
+jf @TRUTH1_3577 
+fade 0 500 
+
+:TRUTH1_2783
+if 
+fading 
+jf @TRUTH1_2807 
+wait 0 
+jump @TRUTH1_2783 
+
+:TRUTH1_2807
+Car.Destroy(34@)
+Car.Destroy(35@)
+Object.Destroy(43@)
+Object.Destroy(44@)
+Object.Destroy(45@)
+Object.Destroy(46@)
+Object.Destroy(47@)
+Object.Destroy(48@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(49@)
+Actor.DestroyInstantly(50@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+49@ = Actor.Create(Mission1, #CWMOHB2, -1064.341, -1283.63, 128.247)
+Actor.Angle(49@) = 116.09
+0605: actor 49@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 49@ decision_maker_to 97@ 
+Actor.Health(49@) = 50
+0648: unknown_actor 49@ task_set 100.0 // float 
+Actor.GiveWeaponAndAmmo(49@, Rifle, 99999)
+50@ = Actor.Create(Mission1, #CWFYHB, -1074.646, -1095.812, 128.245)
+Actor.Angle(50@) = 96.069
+0605: actor 50@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 50@ decision_maker_to 97@ 
+Actor.Health(50@) = 50
+0648: unknown_actor 50@ task_set 100.0 // float 
+51@ = Actor.Create(Mission1, #CWMYHB1, -1074.332, -1084.388, 128.244)
+Actor.Angle(51@) = 60.659
+0605: actor 51@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 51@ decision_maker_to 97@ 
+Actor.Health(51@) = 50
+0648: unknown_actor 51@ task_set 100.0 // float 
+52@ = Actor.Create(Mission1, #CWFYHB, -1135.339, -1134.299, 128.259)
+Actor.Angle(52@) = 90.157
+0605: actor 52@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 52@ decision_maker_to 97@ 
+Actor.Health(52@) = 50
+0648: unknown_actor 52@ task_set 100.0 // float 
+53@ = Actor.Create(Mission1, #CWMYHB1, -1121.739, -1095.64, 128.247)
+Actor.Angle(53@) = 94.64
+0605: actor 53@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 53@ decision_maker_to 97@ 
+Actor.Health(53@) = 50
+54@ = Actor.Create(Mission1, #CWFYHB, -1121.713, -1084.165, 128.247)
+Actor.Angle(54@) = 79.746
+0605: actor 54@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 54@ decision_maker_to 97@ 
+Actor.Health(54@) = 50
+0648: unknown_actor 54@ task_set 100.0 // float 
+55@ = Actor.Create(Mission1, #CWMYHB1, -1159.367, -1134.375, 128.259)
+Actor.Angle(55@) = 270.749
+0605: actor 55@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 55@ decision_maker_to 97@ 
+Actor.Health(55@) = 50
+0648: unknown_actor 55@ task_set 100.0 // float 
+Camera.SetAtPos(-1049.08, -1268.08, 127.81)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+fade 1 500 
+
+:TRUTH1_3553
+if 
+fading 
+jf @TRUTH1_3577 
+wait 0 
+jump @TRUTH1_3553 
+
+:TRUTH1_3577
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'TRU1_4' time 7000 flag 1  // ~s~Get into the farm and steal the ~b~combine harvester~s~.
+Car.Destroy(34@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Car.Destroy(35@)
+34@ = Car.Create(#COMBINE, -1023.706, -933.357, 129.292)
+Car.Angle(34@) = 177.348
+04E0: car 34@ abandon_path_radius 20 
+38@ = Actor.CreateAsDriver(Mission2, #CWMOHB2, 34@)
+060B: set_actor 38@ decision_maker_to 97@ 
+Actor.WeaponAccuracy(38@) = 30
+Car.Health(34@) = 9000
+116@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 116@ type_to 1 
+053F: set_car 34@ tires_vulnerability 0 
+56@ = Car.Create(#TRACTOR, -1029.287, -1183.826, 128.184)
+Car.Angle(56@) = 90.725
+57@ = Actor.CreateAsDriver(Mission2, #CWMYHB1, 56@)
+060B: set_actor 57@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(57@, Shovel, 1)
+Actor.WeaponAccuracy(57@) = 50
+58@ = Car.Create(#TRACTOR, -1067.128, -1153.574, 128.2188)
+Car.Angle(58@) = 272.1696
+59@ = Actor.CreateAsDriver(Mission2, #CWFYHB, 58@)
+060B: set_actor 59@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(59@, Shovel, 1)
+Actor.WeaponAccuracy(59@) = 50
+118@ = 1 
+if 
+   not Actor.Dead(50@)
+jf @TRUTH1_3901 
+Actor.GiveWeaponAndAmmo(50@, Rifle, 99999)
+
+:TRUTH1_3901
+if 
+   not Actor.Dead(52@)
+jf @TRUTH1_3926 
+Actor.GiveWeaponAndAmmo(52@, Shovel, 1)
+
+:TRUTH1_3926
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_3951 
+Actor.GiveWeaponAndAmmo(53@, Shovel, 1)
+
+:TRUTH1_3951
+if 
+   not Actor.Dead(51@)
+jf @TRUTH1_4009 
+Actor.PutAt(51@, -1070.71, -1126.36, 128.23)
+Actor.Angle(51@) = 345.592
+Actor.GiveWeaponAndAmmo(51@, Rifle, 99999)
+
+:TRUTH1_4009
+if 
+   not Actor.Dead(54@)
+jf @TRUTH1_4067 
+Actor.PutAt(54@, -1111.92, -1107.797, 127.892)
+Actor.Angle(54@) = 212.87
+Actor.GiveWeaponAndAmmo(54@, Rifle, 99999)
+
+:TRUTH1_4067
+if 
+   not Actor.Dead(55@)
+jf @TRUTH1_4125 
+Actor.PutAt(55@, -1154.72, -1116.097, 127.27)
+Actor.Angle(55@) = 238.5
+Actor.GiveWeaponAndAmmo(55@, Rifle, 99999)
+
+:TRUTH1_4125
+91@ = Actor.Create(Mission1, #CWMYHB1, -1043.28, -1055.5, 128.22)
+Actor.Angle(91@) = 175.56
+Actor.GiveWeaponAndAmmo(91@, Rifle, 99999)
+060B: set_actor 91@ decision_maker_to 98@ 
+060F: set_actor 91@ melee_accuracy_to 80.0 
+92@ = Actor.Create(Mission1, #CWFYHB, -1147.91, -1023.34, 128.22)
+Actor.GiveWeaponAndAmmo(92@, Shovel, 1)
+060B: set_actor 92@ decision_maker_to 98@ 
+060F: set_actor 92@ melee_accuracy_to 80.0 
+93@ = Actor.Create(Mission1, #CWMOHB2, -1094.89, -999.528, 128.21)
+Actor.Angle(93@) = 175.56
+Actor.GiveWeaponAndAmmo(93@, Shovel, 1)
+Actor.WeaponAccuracy(93@) = 50
+060B: set_actor 93@ decision_maker_to 98@ 
+060F: set_actor 93@ melee_accuracy_to 150.0 
+94@ = Actor.Create(Mission1, #CWMOHB2, -1181.37, -992.4972, 128.2188)
+Actor.Angle(94@) = 170.5759
+Actor.GiveWeaponAndAmmo(94@, Rifle, 1)
+Actor.WeaponAccuracy(94@) = 50
+060B: set_actor 94@ decision_maker_to 98@ 
+060F: set_actor 94@ melee_accuracy_to 150.0 
+95@ = Actor.Create(Mission1, #CWMOHB2, -1008.989, -998.692, 128.2188)
+Actor.Angle(95@) = 170.5759
+Actor.GiveWeaponAndAmmo(95@, Shovel, 1)
+Actor.WeaponAccuracy(95@) = 50
+060B: set_actor 95@ decision_maker_to 98@ 
+060F: set_actor 95@ melee_accuracy_to 150.0 
+96@ = Actor.Create(Mission1, #CWMOHB2, -1151.001, -1011.517, 128.2188)
+Actor.Angle(96@) = 170.5759
+Actor.GiveWeaponAndAmmo(96@, Rifle, 1)
+Actor.WeaponAccuracy(96@) = 50
+060B: set_actor 96@ decision_maker_to 98@ 
+060F: set_actor 96@ melee_accuracy_to 150.0 
+117@ = 5 
+
+:TRUTH1_4525
+if 
+  118@ == 1 
+jf @TRUTH1_18583 
+if 
+  123@ == 0 
+jf @TRUTH1_4665 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_4665 
+if or
+00F2:   actor 49@ near_actor $PLAYER_ACTOR radius 15.0 15.0 0 
+051A:   actor 49@ damaged_by_actor $PLAYER_ACTOR 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1074.33 -1321.1 cornerB -1022.5 -1271.43 
+jf @TRUTH1_4665 
+143@ = 1 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+123@ = 1 
+
+:TRUTH1_4665
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1096.488 -1170.56 cornerB -1032.682 -1249.599 
+jf @TRUTH1_4907 
+if 
+  124@ == 0 
+jf @TRUTH1_4787 
+if 
+   not Car.Wrecked(56@)
+jf @TRUTH1_4787 
+if 
+   not Actor.Dead(57@)
+jf @TRUTH1_4787 
+if 
+0448:   actor 57@ in_car 56@ 
+jf @TRUTH1_4787 
+05EB: assign_car 56@ to_path 348 
+124@ = 1 
+
+:TRUTH1_4787
+if 
+  125@ == 0 
+jf @TRUTH1_4907 
+if 
+   not Car.Wrecked(58@)
+jf @TRUTH1_4907 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_4907 
+if 
+0448:   actor 59@ in_car 58@ 
+jf @TRUTH1_4907 
+Car.SetSpeedInstantly(58@, 12.0)
+05D1: AS_actor 59@ drive_car 58@ to -1045.147 -1152.724 127.5258 speed 20.0 0 model #NULL 0 
+125@ = 1 
+
+:TRUTH1_4907
+if 
+  124@ == 1 
+jf @TRUTH1_5029 
+if 
+   not Car.Wrecked(56@)
+jf @TRUTH1_5029 
+if 
+   not Actor.Dead(57@)
+jf @TRUTH1_5029 
+if 
+0448:   actor 57@ in_car 56@ 
+jf @TRUTH1_5029 
+if 
+860E:   not car 56@ assigned_to_path 
+jf @TRUTH1_5029 
+143@ = 8 
+0085: 102@ = 57@ // (int) 
+0085: 101@ = 56@ // (int) 
+gosub @TRUTH1_18959 
+124@ = 2 
+
+:TRUTH1_5029
+if 
+  125@ == 1 
+jf @TRUTH1_5166 
+if 
+   not Car.Wrecked(58@)
+jf @TRUTH1_5166 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_5166 
+if 
+0448:   actor 59@ in_car 58@ 
+jf @TRUTH1_5166 
+if 
+01AD:   car 58@ sphere 0 near_point -1045.147 -1152.724 radius 6.0 6.0 
+jf @TRUTH1_5166 
+0085: 102@ = 59@ // (int) 
+0085: 101@ = 58@ // (int) 
+gosub @TRUTH1_18959 
+125@ = 2 
+
+:TRUTH1_5166
+if 
+  124@ == 2 
+jf @TRUTH1_5274 
+if 
+   not Car.Wrecked(56@)
+jf @TRUTH1_5274 
+if 
+   not Actor.Dead(57@)
+jf @TRUTH1_5274 
+if 
+0448:   actor 57@ in_car 56@ 
+jf @TRUTH1_5274 
+if 
+0A1B:   actor 57@ colliding_with_actor $PLAYER_ACTOR 
+jf @TRUTH1_5274 
+06C7: AS_actor 57@ driver_of_car 56@ perform_action 3 timelimit 3000 
+124@ = 3 
+
+:TRUTH1_5274
+if 
+  124@ == 3 
+jf @TRUTH1_5402 
+if 
+   not Car.Wrecked(56@)
+jf @TRUTH1_5402 
+if 
+   not Actor.Dead(57@)
+jf @TRUTH1_5402 
+if 
+0448:   actor 57@ in_car 56@ 
+jf @TRUTH1_5402 
+062E: get_actor 57@ task 1735 status_store_to 110@ // ret 7 if not found 
+if 
+04A4:   110@ == 7 // == constant 
+jf @TRUTH1_5402 
+0085: 102@ = 57@ // (int) 
+0085: 101@ = 56@ // (int) 
+gosub @TRUTH1_18959 
+124@ = 2 
+
+:TRUTH1_5402
+if 
+  125@ == 2 
+jf @TRUTH1_5510 
+if 
+   not Car.Wrecked(58@)
+jf @TRUTH1_5510 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_5510 
+if 
+0448:   actor 59@ in_car 58@ 
+jf @TRUTH1_5510 
+if 
+0A1B:   actor 59@ colliding_with_actor $PLAYER_ACTOR 
+jf @TRUTH1_5510 
+06C7: AS_actor 59@ driver_of_car 58@ perform_action 3 timelimit 3000 
+125@ = 3 
+
+:TRUTH1_5510
+if 
+  125@ == 3 
+jf @TRUTH1_5638 
+if 
+   not Car.Wrecked(58@)
+jf @TRUTH1_5638 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_5638 
+if 
+0448:   actor 59@ in_car 58@ 
+jf @TRUTH1_5638 
+062E: get_actor 59@ task 1735 status_store_to 110@ // ret 7 if not found 
+if 
+04A4:   110@ == 7 // == constant 
+jf @TRUTH1_5638 
+0085: 102@ = 59@ // (int) 
+0085: 101@ = 58@ // (int) 
+gosub @TRUTH1_18959 
+125@ = 2 
+
+:TRUTH1_5638
+if 
+  126@ == 0 
+jf @TRUTH1_6079 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1033.47 -1067.18 cornerB -1202.46 -1149.65 
+jf @TRUTH1_5740 
+if 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @TRUTH1_5717 
+126@ = 1 
+
+:TRUTH1_5717
+if 
+068C:   is_player_autoaiming $PLAYER_CHAR 
+jf @TRUTH1_5740 
+126@ = 1 
+
+:TRUTH1_5740
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1033.47 -1067.18 cornerB -1202.46 -1149.65 
+jf @TRUTH1_5785 
+126@ = 1 
+
+:TRUTH1_5785
+if 
+056D:   actor 50@ defined 
+jf @TRUTH1_5827 
+if 
+051A:   actor 50@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_5827 
+126@ = 1 
+
+:TRUTH1_5827
+if 
+056D:   actor 50@ defined 
+jf @TRUTH1_5869 
+if 
+051A:   actor 50@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_5869 
+126@ = 1 
+
+:TRUTH1_5869
+if 
+056D:   actor 51@ defined 
+jf @TRUTH1_5911 
+if 
+051A:   actor 51@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_5911 
+126@ = 1 
+
+:TRUTH1_5911
+if 
+056D:   actor 52@ defined 
+jf @TRUTH1_5953 
+if 
+051A:   actor 52@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_5953 
+126@ = 1 
+
+:TRUTH1_5953
+if 
+056D:   actor 53@ defined 
+jf @TRUTH1_5995 
+if 
+051A:   actor 53@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_5995 
+126@ = 1 
+
+:TRUTH1_5995
+if 
+056D:   actor 54@ defined 
+jf @TRUTH1_6037 
+if 
+051A:   actor 54@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_6037 
+126@ = 1 
+
+:TRUTH1_6037
+if 
+056D:   actor 55@ defined 
+jf @TRUTH1_6079 
+if 
+051A:   actor 55@ damaged_by_actor $PLAYER_ACTOR 
+jf @TRUTH1_6079 
+126@ = 1 
+
+:TRUTH1_6079
+if 
+  126@ == 1 
+jf @TRUTH1_6276 
+143@ = 12 
+if 
+   not Actor.Dead(50@)
+jf @TRUTH1_6128 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:TRUTH1_6128
+if 
+   not Actor.Dead(51@)
+jf @TRUTH1_6159 
+05E2: AS_actor 51@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(51@) = 50
+
+:TRUTH1_6159
+if 
+   not Actor.Dead(52@)
+jf @TRUTH1_6183 
+05E2: AS_actor 52@ kill_actor $PLAYER_ACTOR 
+
+:TRUTH1_6183
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_6207 
+05E2: AS_actor 53@ kill_actor $PLAYER_ACTOR 
+
+:TRUTH1_6207
+if 
+   not Actor.Dead(54@)
+jf @TRUTH1_6238 
+05E2: AS_actor 54@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(54@) = 60
+
+:TRUTH1_6238
+if 
+   not Actor.Dead(55@)
+jf @TRUTH1_6269 
+05E2: AS_actor 55@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(55@) = 70
+
+:TRUTH1_6269
+126@ = 2 
+
+:TRUTH1_6276
+if 
+  128@ == 0 
+jf @TRUTH1_6469 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_6469 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_6469 
+if 
+0448:   actor 38@ in_car 34@ 
+jf @TRUTH1_6469 
+04C4: store_coords_to $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD from_actor 38@ with_offset 0.0 10.0 0.0 
+if or
+00EF:   actor $PLAYER_ACTOR sphere 0 near_point $TEMPVAR_X_COORD $TEMPVAR_Y_COORD radius 12.0 12.0 stopped 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point $TEMPVAR_X_COORD $TEMPVAR_Y_COORD radius 12.0 12.0 
+jf @TRUTH1_6469 
+Actor.GiveWeaponAndAmmo(38@, Rifle, 50)
+Actor.WeaponAccuracy(38@) = 20
+05E2: AS_actor 38@ kill_actor $PLAYER_ACTOR 
+143@ = 23 
+128@ = 1 
+
+:TRUTH1_6469
+if 
+  117@ > 4 
+jf @TRUTH1_6702 
+if 
+  119@ == 0 
+jf @TRUTH1_6588 
+if 
+  128@ == 0 
+jf @TRUTH1_6588 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_6588 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_6588 
+if 
+0448:   actor 38@ in_car 34@ 
+jf @TRUTH1_6588 
+gosub @TRUTH1_18802 
+119@ = 1 
+
+:TRUTH1_6588
+if 
+  119@ == 1 
+jf @TRUTH1_6702 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_6702 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_6702 
+if 
+0448:   actor 38@ in_car 34@ 
+jf @TRUTH1_6702 
+if 
+01AD:   car 34@ sphere 0 near_point -1031.46 -935.51 radius 10.0 10.0 
+jf @TRUTH1_6702 
+119@ = 0 
+
+:TRUTH1_6702
+if 
+  119@ >= 0 
+jf @TRUTH1_7948 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_7948 
+if 
+00B0:   car 34@ sphere 0 in_rectangle_cornerA -1201.518 -926.777 cornerB -1016.98 -1052.652 
+jf @TRUTH1_7948 
+046C: 106@ = car 34@ driver 
+if 
+   not 106@ == -1 
+jf @TRUTH1_7948 
+if 
+  120@ == 100 
+jf @TRUTH1_6956 
+43@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+44@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+45@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+46@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+47@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+48@ = Object.Create(#KMB_MARIJUANA, 1.1, 2.2, 3.3)
+
+:TRUTH1_6956
+if 
+  120@ == 0 
+jf @TRUTH1_7126 
+if 
+  32@ > 1250 
+jf @TRUTH1_7126 
+if 
+03CA:   object 43@ exists 
+jf @TRUTH1_7014 
+Object.Destroy(43@)
+
+:TRUTH1_7014
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+43@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(43@) = True
+Object.Throw(43@, 0.0, 0.0, -1.0)
+034D: rotate_object 43@ from_angle 68.0 to_angle 10.0 flag 0 
+050E: set_object 43@ no_collision_with_car 34@ 
+32@ = 0 
+120@ = 1 
+
+:TRUTH1_7126
+if 
+  120@ == 1 
+jf @TRUTH1_7289 
+if 
+  32@ > 2250 
+jf @TRUTH1_7289 
+if 
+03CA:   object 44@ exists 
+jf @TRUTH1_7184 
+Object.Destroy(44@)
+
+:TRUTH1_7184
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+44@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(44@) = True
+Object.Throw(44@, 0.0, 0.0, -1.0)
+034D: rotate_object 44@ from_angle 73.0 to_angle 10.0 flag 0 
+050E: set_object 44@ no_collision_with_car 34@ 
+120@ = 2 
+
+:TRUTH1_7289
+if 
+  120@ == 2 
+jf @TRUTH1_7452 
+if 
+  32@ > 4250 
+jf @TRUTH1_7452 
+if 
+03CA:   object 45@ exists 
+jf @TRUTH1_7347 
+Object.Destroy(45@)
+
+:TRUTH1_7347
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+45@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(45@) = True
+Object.Throw(45@, 0.0, 0.0, -1.0)
+034D: rotate_object 45@ from_angle 90.0 to_angle 10.0 flag 0 
+050E: set_object 45@ no_collision_with_car 34@ 
+120@ = 3 
+
+:TRUTH1_7452
+if 
+  120@ == 3 
+jf @TRUTH1_7615 
+if 
+  32@ > 6250 
+jf @TRUTH1_7615 
+if 
+03CA:   object 46@ exists 
+jf @TRUTH1_7510 
+Object.Destroy(46@)
+
+:TRUTH1_7510
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+46@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(46@) = True
+Object.Throw(46@, 0.0, 0.0, -1.0)
+034D: rotate_object 46@ from_angle 180.0 to_angle 10.0 flag 0 
+050E: set_object 46@ no_collision_with_car 34@ 
+120@ = 4 
+
+:TRUTH1_7615
+if 
+  120@ == 4 
+jf @TRUTH1_7778 
+if 
+  32@ > 8250 
+jf @TRUTH1_7778 
+if 
+03CA:   object 47@ exists 
+jf @TRUTH1_7673 
+Object.Destroy(47@)
+
+:TRUTH1_7673
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+47@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(47@) = True
+Object.Throw(47@, 0.0, 0.0, -1.0)
+034D: rotate_object 47@ from_angle 80.0 to_angle 10.0 flag 0 
+050E: set_object 47@ no_collision_with_car 34@ 
+120@ = 5 
+
+:TRUTH1_7778
+if 
+  120@ == 5 
+jf @TRUTH1_7948 
+if 
+  32@ > 10250 
+jf @TRUTH1_7948 
+if 
+03CA:   object 48@ exists 
+jf @TRUTH1_7836 
+Object.Destroy(48@)
+
+:TRUTH1_7836
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset -1.3 -3.3 1.3 
+48@ = Object.Create(#KMB_MARIJUANA, 40@, 41@, 42@)
+Object.ToggleInMovingList(48@) = True
+Object.Throw(48@, 0.0, 0.0, -1.0)
+034D: rotate_object 48@ from_angle 180.0 to_angle 10.0 flag 0 
+050E: set_object 48@ no_collision_with_car 34@ 
+32@ = 0 
+120@ = 0 
+
+:TRUTH1_7948
+if 
+  131@ == 0 
+jf @TRUTH1_8928 
+if 
+  129@ == 1 
+jf @TRUTH1_8928 
+Actor.DestroyInstantly(49@)
+Actor.DestroyInstantly(50@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(53@)
+0615: define_AS_pack_begin 109@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 109@ 
+67@ = Actor.Create(Mission1, #CWMOHB2, -1205.812, -1092.725, 127.2578)
+Actor.Angle(67@) = 359.4852
+Actor.GiveWeaponAndAmmo(67@, Rifle, 9999)
+060B: set_actor 67@ decision_maker_to 97@ 
+Actor.Health(67@) = 50
+0618: assign_actor 67@ to_AS_pack 109@ 
+68@ = Actor.Create(Mission1, #CWMYHB1, -1205.812, -1090.725, 127.2578)
+Actor.Angle(68@) = 359.4852
+Actor.GiveWeaponAndAmmo(68@, Rifle, 9999)
+060B: set_actor 68@ decision_maker_to 97@ 
+Actor.Health(68@) = 50
+0618: assign_actor 68@ to_AS_pack 109@ 
+69@ = Actor.Create(Mission1, #CWFYHB, -1181.8, -1116.735, 127.2578)
+Actor.Angle(69@) = 79.3899
+Actor.GiveWeaponAndAmmo(69@, Rifle, 9999)
+060B: set_actor 69@ decision_maker_to 97@ 
+Actor.Health(69@) = 50
+0618: assign_actor 69@ to_AS_pack 109@ 
+70@ = Actor.Create(Mission1, #CWMOHB2, -1211.422, -1090.977, 127.2578)
+Actor.Angle(70@) = 2.4516
+Actor.GiveWeaponAndAmmo(70@, Rifle, 9999)
+060B: set_actor 70@ decision_maker_to 97@ 
+Actor.Health(70@) = 50
+0618: assign_actor 70@ to_AS_pack 109@ 
+71@ = Actor.Create(Mission1, #CWMYHB1, -1179.283, -1113.823, 127.2578)
+Actor.Angle(71@) = 74.1823
+Actor.GiveWeaponAndAmmo(71@, Rifle, 9999)
+060B: set_actor 71@ decision_maker_to 97@ 
+Actor.Health(71@) = 50
+0618: assign_actor 71@ to_AS_pack 109@ 
+72@ = Actor.Create(Mission1, #CWFYHB, -1145.651, -1111.67, 127.2595)
+Actor.Angle(72@) = 90.0989
+Actor.GiveWeaponAndAmmo(72@, Rifle, 9999)
+060B: set_actor 72@ decision_maker_to 97@ 
+Actor.Health(72@) = 50
+0618: assign_actor 72@ to_AS_pack 109@ 
+73@ = Actor.Create(Mission1, #CWMYHB1, -1146.601, -1114.956, 127.2595)
+Actor.Angle(73@) = 102.0699
+Actor.GiveWeaponAndAmmo(73@, Rifle, 9999)
+060B: set_actor 73@ decision_maker_to 97@ 
+Actor.Health(73@) = 50
+0618: assign_actor 73@ to_AS_pack 109@ 
+74@ = Actor.Create(Mission1, #CWMOHB2, -1051.497, -1133.651, 127.2669)
+Actor.Angle(74@) = 10.9064
+Actor.GiveWeaponAndAmmo(74@, Rifle, 9999)
+060B: set_actor 74@ decision_maker_to 97@ 
+Actor.Health(74@) = 50
+0618: assign_actor 74@ to_AS_pack 109@ 
+75@ = Actor.Create(Mission1, #CWFYHB, -1048.588, -1131.942, 127.2595)
+Actor.Angle(75@) = 57.544
+Actor.GiveWeaponAndAmmo(75@, Rifle, 9999)
+060B: set_actor 75@ decision_maker_to 97@ 
+Actor.Health(75@) = 50
+0618: assign_actor 75@ to_AS_pack 109@ 
+76@ = Actor.Create(Mission1, #CWMYHB1, -1118.818, -1116.196, 127.2595)
+Actor.Angle(76@) = 90.5502
+Actor.GiveWeaponAndAmmo(76@, Rifle, 9999)
+060B: set_actor 76@ decision_maker_to 97@ 
+Actor.Health(76@) = 50
+0618: assign_actor 76@ to_AS_pack 109@ 
+77@ = Actor.Create(Mission1, #CWMYHB1, -1120.998, -1112.729, 127.2595)
+Actor.Angle(77@) = 57.544
+Actor.GiveWeaponAndAmmo(77@, Rifle, 9999)
+060B: set_actor 77@ decision_maker_to 97@ 
+Actor.Health(77@) = 50
+0618: assign_actor 77@ to_AS_pack 109@ 
+78@ = Actor.Create(Mission1, #CWMOHB2, -1115.596, -1115.524, 127.2595)
+Actor.Angle(78@) = 57.544
+Actor.GiveWeaponAndAmmo(78@, Rifle, 9999)
+060B: set_actor 78@ decision_maker_to 97@ 
+Actor.Health(78@) = 50
+0618: assign_actor 78@ to_AS_pack 109@ 
+79@ = Actor.Create(Mission1, #CWMOHB2, -1117.894, -1111.266, 127.2595)
+Actor.Angle(79@) = 57.544
+Actor.GiveWeaponAndAmmo(79@, Rifle, 9999)
+060B: set_actor 79@ decision_maker_to 97@ 
+Actor.Health(79@) = 50
+0618: assign_actor 79@ to_AS_pack 109@ 
+061B: remove_references_to_AS_pack 109@ 
+131@ = 1 
+
+:TRUTH1_8928
+if 
+  131@ == 1 
+jf @TRUTH1_9773 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_9773 
+if 
+  132@ == 0 
+jf @TRUTH1_9116 
+if 
+01AD:   car 34@ sphere 0 near_point -1205.812 -1090.725 radius 20.0 20.0 
+jf @TRUTH1_9116 
+0615: define_AS_pack_begin 107@ 
+0638: AS_actor -1 stay_put 0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 30.0 timelimit 30000 
+0616: define_AS_pack_end 107@ 
+if 
+   not Actor.Dead(67@)
+jf @TRUTH1_9073 
+0618: assign_actor 67@ to_AS_pack 107@ 
+
+:TRUTH1_9073
+if 
+   not Actor.Dead(68@)
+jf @TRUTH1_9097 
+0618: assign_actor 68@ to_AS_pack 107@ 
+
+:TRUTH1_9097
+143@ = 28 
+061B: remove_references_to_AS_pack 107@ 
+132@ = 1 
+
+:TRUTH1_9116
+if 
+  133@ == 0 
+jf @TRUTH1_9263 
+if 
+01AD:   car 34@ sphere 0 near_point -1181.8 -1116.735 radius 20.0 20.0 
+jf @TRUTH1_9263 
+0615: define_AS_pack_begin 107@ 
+0638: AS_actor -1 stay_put 0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 30.0 timelimit 30000 
+0616: define_AS_pack_end 107@ 
+if 
+   not Actor.Dead(69@)
+jf @TRUTH1_9227 
+0618: assign_actor 69@ to_AS_pack 107@ 
+
+:TRUTH1_9227
+if 
+   not Actor.Dead(71@)
+jf @TRUTH1_9251 
+0618: assign_actor 71@ to_AS_pack 107@ 
+
+:TRUTH1_9251
+061B: remove_references_to_AS_pack 107@ 
+133@ = 1 
+
+:TRUTH1_9263
+if 
+  134@ == 0 
+jf @TRUTH1_9386 
+if 
+01AD:   car 34@ sphere 0 near_point -1211.422 -1090.977 radius 25.0 25.0 
+jf @TRUTH1_9386 
+0615: define_AS_pack_begin 107@ 
+0638: AS_actor -1 stay_put 0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 30.0 timelimit 30000 
+0616: define_AS_pack_end 107@ 
+if 
+   not Actor.Dead(70@)
+jf @TRUTH1_9374 
+0618: assign_actor 70@ to_AS_pack 107@ 
+
+:TRUTH1_9374
+061B: remove_references_to_AS_pack 107@ 
+134@ = 1 
+
+:TRUTH1_9386
+if 
+  135@ == 0 
+jf @TRUTH1_9571 
+if 
+01AD:   car 34@ sphere 0 near_point -1145.651 -1111.67 radius 20.0 20.0 
+jf @TRUTH1_9571 
+if 
+   not Actor.Dead(72@)
+jf @TRUTH1_9503 
+0085: 102@ = 72@ // (int) 
+103@ = -1113.777 
+104@ = 1128.22 
+105@ = 128.22 
+gosub @TRUTH1_18741 
+
+:TRUTH1_9503
+if 
+   not Actor.Dead(73@)
+jf @TRUTH1_9564 
+0085: 102@ = 73@ // (int) 
+103@ = -1055.94 
+104@ = -1120.62 
+105@ = 128.56 
+gosub @TRUTH1_18741 
+
+:TRUTH1_9564
+135@ = 1 
+
+:TRUTH1_9571
+if 
+  136@ == 0 
+jf @TRUTH1_9773 
+if 
+00B0:   car 34@ sphere 0 in_rectangle_cornerA -1224.06 -1135.61 cornerB -999.06 -1063.3 
+jf @TRUTH1_9773 
+0615: define_AS_pack_begin 107@ 
+0638: AS_actor -1 stay_put 0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 30.0 timelimit 30000 
+0616: define_AS_pack_end 107@ 
+if 
+   not Actor.Dead(76@)
+jf @TRUTH1_9682 
+0618: assign_actor 76@ to_AS_pack 107@ 
+
+:TRUTH1_9682
+if 
+   not Actor.Dead(77@)
+jf @TRUTH1_9706 
+0618: assign_actor 77@ to_AS_pack 107@ 
+
+:TRUTH1_9706
+if 
+   not Actor.Dead(78@)
+jf @TRUTH1_9730 
+0618: assign_actor 78@ to_AS_pack 107@ 
+
+:TRUTH1_9730
+if 
+   not Actor.Dead(79@)
+jf @TRUTH1_9754 
+0618: assign_actor 79@ to_AS_pack 107@ 
+
+:TRUTH1_9754
+061B: remove_references_to_AS_pack 107@ 
+141@ = 1 
+136@ = 1 
+
+:TRUTH1_9773
+if 
+  141@ == 1 
+jf @TRUTH1_10567 
+if 
+   not Actor.Dead(54@)
+jf @TRUTH1_9828 
+if 
+82CB:   not actor 54@ bounding_sphere_visible 
+jf @TRUTH1_9828 
+Actor.DestroyInstantly(54@)
+
+:TRUTH1_9828
+if 
+   not Actor.Dead(55@)
+jf @TRUTH1_9865 
+if 
+82CB:   not actor 55@ bounding_sphere_visible 
+jf @TRUTH1_9865 
+Actor.DestroyInstantly(55@)
+
+:TRUTH1_9865
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_9902 
+if 
+82CB:   not actor 49@ bounding_sphere_visible 
+jf @TRUTH1_9902 
+Actor.DestroyInstantly(67@)
+
+:TRUTH1_9902
+if 
+   not Actor.Dead(50@)
+jf @TRUTH1_9939 
+if 
+82CB:   not actor 50@ bounding_sphere_visible 
+jf @TRUTH1_9939 
+Actor.DestroyInstantly(68@)
+
+:TRUTH1_9939
+if 
+   not Actor.Dead(51@)
+jf @TRUTH1_9976 
+if 
+82CB:   not actor 51@ bounding_sphere_visible 
+jf @TRUTH1_9976 
+Actor.DestroyInstantly(69@)
+
+:TRUTH1_9976
+if 
+   not Actor.Dead(52@)
+jf @TRUTH1_10013 
+if 
+82CB:   not actor 52@ bounding_sphere_visible 
+jf @TRUTH1_10013 
+Actor.DestroyInstantly(70@)
+
+:TRUTH1_10013
+0615: define_AS_pack_begin 109@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 109@ 
+80@ = Actor.Create(Mission1, #CWMYHB1, -1050.942, -1171.55, 127.4132)
+Actor.Angle(80@) = 57.544
+Actor.GiveWeaponAndAmmo(80@, Rifle, 9999)
+060B: set_actor 80@ decision_maker_to 97@ 
+Actor.Health(80@) = 50
+0618: assign_actor 80@ to_AS_pack 109@ 
+81@ = Actor.Create(Mission1, #CWMOHB2, -1048.379, -1172.351, 127.4308)
+Actor.Angle(81@) = 57.544
+Actor.GiveWeaponAndAmmo(81@, Rifle, 9999)
+060B: set_actor 81@ decision_maker_to 97@ 
+Actor.Health(81@) = 50
+0618: assign_actor 81@ to_AS_pack 109@ 
+82@ = Actor.Create(Mission1, #CWMYHB1, -1047.927, -1177.559, 127.507)
+Actor.Angle(82@) = 57.544
+Actor.GiveWeaponAndAmmo(82@, Rifle, 9999)
+060B: set_actor 82@ decision_maker_to 97@ 
+Actor.Health(82@) = 50
+0618: assign_actor 82@ to_AS_pack 109@ 
+83@ = Actor.Create(Mission1, #CWFYHB, -1051.159, -1180.129, 127.5367)
+Actor.Angle(83@) = 57.544
+Actor.GiveWeaponAndAmmo(83@, Rifle, 9999)
+060B: set_actor 83@ decision_maker_to 97@ 
+Actor.Health(83@) = 50
+0618: assign_actor 83@ to_AS_pack 109@ 
+0674: set_car_model #WALTON numberplate "__HOM__" 
+87@ = Car.Create(#WALTON, -1049.0, -1296.0, 128.3)
+Car.Angle(87@) = 277.382
+84@ = Actor.Create(Mission1, #CWMYHB1, -1049.19, -1291.94, 127.7206)
+Actor.Angle(84@) = 57.544
+Actor.GiveWeaponAndAmmo(84@, Rifle, 9999)
+060B: set_actor 84@ decision_maker_to 97@ 
+Actor.Health(84@) = 50
+0618: assign_actor 84@ to_AS_pack 109@ 
+0674: set_car_model #WALTON numberplate "__HOM__" 
+88@ = Car.Create(#WALTON, -1154.086, -1339.716, 126.61)
+Car.Angle(88@) = 272.428
+86@ = Actor.CreateAsDriver(Mission2, #CWFYHB, 88@)
+85@ = Actor.Create(Mission1, #CWMYHB1, -1049.19, -1295.94, 0.0)
+060B: set_actor 85@ decision_maker_to 97@ 
+0464: put_actor 85@ into_turret_on_car 88@ at_car_offset 0.0 -1.0 0.9 position 0 shooting_angle_limit 360.0 with_weapon 33 
+0638: AS_actor 85@ stay_put 1 
+061B: remove_references_to_AS_pack 109@ 
+141@ = 2 
+
+:TRUTH1_10567
+if 
+  141@ == 2 
+jf @TRUTH1_10778 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_10778 
+if 
+01AD:   car 34@ sphere 0 near_point -1050.942 -1171.55 radius 15.0 15.0 
+jf @TRUTH1_10778 
+0615: define_AS_pack_begin 107@ 
+0638: AS_actor -1 stay_put 0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 30.0 timelimit 30000 
+0616: define_AS_pack_end 107@ 
+if 
+   not Actor.Dead(80@)
+jf @TRUTH1_10694 
+0618: assign_actor 80@ to_AS_pack 107@ 
+
+:TRUTH1_10694
+if 
+   not Actor.Dead(81@)
+jf @TRUTH1_10718 
+0618: assign_actor 81@ to_AS_pack 107@ 
+
+:TRUTH1_10718
+if 
+   not Actor.Dead(82@)
+jf @TRUTH1_10742 
+0618: assign_actor 82@ to_AS_pack 107@ 
+
+:TRUTH1_10742
+if 
+   not Actor.Dead(83@)
+jf @TRUTH1_10766 
+0618: assign_actor 83@ to_AS_pack 107@ 
+
+:TRUTH1_10766
+061B: remove_references_to_AS_pack 107@ 
+141@ = 3 
+
+:TRUTH1_10778
+if 
+  141@ > 1 
+jf @TRUTH1_11127 
+if 
+  142@ == 0 
+jf @TRUTH1_11127 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -974.32 -1287.37 cornerB -1129.14 -1330.41 
+jf @TRUTH1_11127 
+if 
+   not Car.Wrecked(88@)
+jf @TRUTH1_10938 
+if 
+   not Actor.Dead(86@)
+jf @TRUTH1_10938 
+Car.SetSpeedInstantly(88@, 30.0)
+if 
+   not Actor.Dead(85@)
+jf @TRUTH1_10918 
+05E2: AS_actor 85@ kill_actor $PLAYER_ACTOR 
+
+:TRUTH1_10918
+06E1: AS_actor 86@ using_car 88@ target_car 88@ with_order 4 max_speed 30.0 traffic_flag 3 
+
+:TRUTH1_10938
+143@ = 100 
+Model.Destroy(#KMB_MARIJUANA)
+Model.Destroy(#SW_HAYBREAK02)
+Object.RemoveReferences(60@)
+Object.RemoveReferences(61@)
+Object.RemoveReferences(62@)
+Object.RemoveReferences(63@)
+Object.RemoveReferences(64@)
+Object.RemoveReferences(65@)
+Object.RemoveReferences(66@)
+Object.RemoveReferences(43@)
+Object.RemoveReferences(44@)
+Object.RemoveReferences(45@)
+Object.RemoveReferences(46@)
+Object.RemoveReferences(47@)
+Object.RemoveReferences(48@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+Actor.RemoveReferences(79@)
+Car.RemoveReferences(90@)
+Actor.RemoveReferences(91@)
+Actor.RemoveReferences(92@)
+Actor.RemoveReferences(93@)
+Actor.RemoveReferences(94@)
+Actor.RemoveReferences(95@)
+Actor.RemoveReferences(96@)
+142@ = 1 
+
+:TRUTH1_11127
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_11240 
+if 
+  130@ == 0 
+jf @TRUTH1_11240 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH1_11240 
+Car.RemoveReferences(90@)
+129@ = 1 
+00BC: show_text_highpriority GXT 'TRU1_5' time 5000 flag 1  // ~s~Take the combine harvester back to ~y~The Truth's farm~s~.
+Marker.Disable(116@)
+018A: 116@ = create_checkpoint_at -1114.25 -1619.96 76.68 
+130@ = 1 
+
+:TRUTH1_11240
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_11354 
+if 
+  130@ == 1 
+jf @TRUTH1_11354 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH1_11354 
+if 
+   not 129@ > 1 
+jf @TRUTH1_11354 
+00BC: show_text_highpriority GXT 'TRU1_7' time 5000 flag 1  // ~s~Get back in ~b~the combine harvester ~s~and get it back to The Truth!
+Marker.Disable(116@)
+116@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 116@ type_to 1 
+130@ = 0 
+
+:TRUTH1_11354
+if 
+  129@ == 1 
+jf @TRUTH1_11546 
+if 
+  130@ == 1 
+jf @TRUTH1_11546 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_11546 
+if 
+01AF:   car 34@ sphere 1 in_sphere -1100.007 -1620.949 75.375 radius 5.0 5.0 5.0 
+jf @TRUTH1_11546 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH1_11546 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRUTH1_11497 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+
+:TRUTH1_11497
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:TRUTH1_11511
+if 
+fading 
+jf @TRUTH1_11535 
+wait 0 
+jump @TRUTH1_11511 
+
+:TRUTH1_11535
+02A3: enable_widescreen 1 
+129@ = 2 
+
+:TRUTH1_11546
+if 
+  129@ == 2 
+jf @TRUTH1_12178 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_12178 
+Car.RemoveReferences(56@)
+Car.Destroy(56@)
+Actor.RemoveReferences(57@)
+Car.RemoveReferences(58@)
+Car.Destroy(58@)
+Actor.RemoveReferences(59@)
+Car.RemoveReferences(88@)
+Actor.RemoveReferences(85@)
+Actor.RemoveReferences(86@)
+Model.Destroy(#TRACTOR)
+Model.Destroy(#KMB_MARIJUANA)
+Model.Destroy(#SW_HAYBREAK02)
+Model.Destroy(#CUNTGUN)
+Model.Destroy(#WALTON)
+Model.Destroy(#SHOVEL)
+023C: load_special_actor 'TRUTH' as 1 // models 290-299 
+Model.Load(#BFINJECT)
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 41040 as 1 
+03CF: load_wav 41041 as 2 
+038B: load_requested_models 
+
+:TRUTH1_11701
+if or
+823D:   not special_actor 1 loaded 
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+   not Model.Available(#BFINJECT)
+jf @TRUTH1_11740 
+wait 0 
+jump @TRUTH1_11701 
+
+:TRUTH1_11740
+32@ = 0 
+33@ = 0 
+0395: clear_area 1 at -1100.007 -1620.949 200.0 radius 200.0 
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH1_11824 
+Car.PutAt(34@, -1102.21, -1620.017, 77.345)
+Car.Angle(34@) = 90.738
+
+:TRUTH1_11824
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @TRUTH1_11854 
+wait 0 
+jump @TRUTH1_11824 
+
+:TRUTH1_11854
+56@ = Car.Create(#BFINJECT, -1074.53, -1643.624, 75.066)
+Car.Angle(56@) = 84.918
+89@ = Actor.Create(Mission2, #SPECIAL01, -1088.84, -1623.997, 75.375)
+Actor.Angle(89@) = 91.269
+0489: set_actor 89@ muted 1 
+Actor.SetImmunities(89@, 1, 1, 1, 1, 1)
+060B: set_actor 89@ decision_maker_to 97@ 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @TRUTH1_12005 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1098.84 -1623.997 75.375 
+Actor.Angle($PLAYER_ACTOR) = 264.123
+jump @TRUTH1_12035 
+
+:TRUTH1_12005
+Actor.PutAt($PLAYER_ACTOR, -1098.84, -1623.997, 75.375)
+Actor.Angle($PLAYER_ACTOR) = 264.123
+
+:TRUTH1_12035
+Camera.SetPosition(-1087.733, -1625.124, 76.7194, 0.0, 0.0, 0.0)
+Camera.PointAt(-1088.662, -1624.758, 76.6608, 2)
+Marker.Disable(116@)
+fade 1 1000 
+if 
+   not Actor.Dead(89@)
+jf @TRUTH1_12139 
+05D3: AS_actor 89@ goto_point -1093.189 -1624.021 75.375 mode 4 time 5000 ms // versionA 
+
+:TRUTH1_12139
+05D3: AS_actor $PLAYER_ACTOR goto_point -1094.931 -1623.946 75.375 mode 4 time 5000 ms // versionA 
+32@ = 0 
+129@ = 3 
+
+:TRUTH1_12178
+if 
+  129@ == 3 
+jf @TRUTH1_12417 
+if 
+   not Actor.Dead(89@)
+jf @TRUTH1_12417 
+if or
+  32@ > 2500 
+00F0:   actor 89@ 0 near_point -1093.189 -1624.021 radius 1.5 1.5 stopped_on_foot 
+jf @TRUTH1_12417 
+Camera.SetPosition(-1092.296, -1624.917, 76.9985, 0.0, 0.0, 0.0)
+Camera.PointAt(-1093.117, -1624.372, 76.8283, 2)
+0792: disembark_instantly_actor 89@ 
+Actor.PutAt(89@, -1093.189, -1624.021, 75.375)
+Actor.Angle(89@) = 88.0345
+Actor.PutAt($PLAYER_ACTOR, -1094.931, -1623.946, 75.375)
+Actor.Angle($PLAYER_ACTOR) = 264.123
+0605: actor 89@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+129@ = 4 
+
+:TRUTH1_12417
+if 
+  129@ == 4 
+jf @TRUTH1_12462 
+00BC: show_text_highpriority GXT 'TRU1_ZA' time 4000 flag 1  // ~z~Man, you've brought peace back to my valley, thank you, friend.
+03D1: play_wav 1 
+129@ = 5 
+
+:TRUTH1_12462
+if 
+  129@ == 5 
+jf @TRUTH1_12537 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_12537 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 41042 as 1 
+00BC: show_text_highpriority GXT 'TRU1_ZB' time 4000 flag 1  // ~z~I'll call you when the whoop-de-doo is ready,
+03D1: play_wav 2 
+129@ = 6 
+
+:TRUTH1_12537
+if 
+  129@ == 6 
+jf @TRUTH1_12612 
+if 
+03D2:   wav 2 ended 
+jf @TRUTH1_12612 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_12612 
+00BC: show_text_highpriority GXT 'TRU1_ZC' time 4000 flag 1  // ~z~just make sure you get that cash.
+03D1: play_wav 1 
+129@ = 7 
+
+:TRUTH1_12612
+if 
+  129@ == 7 
+jf @TRUTH1_12732 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_12732 
+00BE: text_clear_all 
+05D3: AS_actor $PLAYER_ACTOR goto_point -1092.25 -1629.82 76.0 mode 4 time 5000 ms // versionA 
+wait 250 
+if 
+   not Actor.Dead(89@)
+jf @TRUTH1_12718 
+05D3: AS_actor 89@ goto_point -1099.96 -1623.7 76.4 mode 4 time 5000 ms // versionA 
+
+:TRUTH1_12718
+32@ = 0 
+129@ = 8 
+
+:TRUTH1_12732
+if 
+  129@ == 8 
+jf @TRUTH1_12925 
+if 
+  32@ > 1000 
+jf @TRUTH1_12925 
+fade 0 1000 
+
+:TRUTH1_12776
+if 
+fading 
+jf @TRUTH1_12800 
+wait 0 
+jump @TRUTH1_12776 
+
+:TRUTH1_12800
+Model.Load(#CELLPHONE)
+03CF: load_wav 23000 as 3 
+038B: load_requested_models 
+
+:TRUTH1_12814
+if or
+   not Model.Available(#CELLPHONE)
+83D0:   not wav 3 loaded 
+jf @TRUTH1_12845 
+wait 0 
+jump @TRUTH1_12814 
+
+:TRUTH1_12845
+Car.Destroy(34@)
+Actor.DestroyInstantly(89@)
+02A3: enable_widescreen 0 
+Actor.PutAt($PLAYER_ACTOR, -1092.561, -1633.628, 75.37)
+Actor.Angle($PLAYER_ACTOR) = 273.438
+fade 1 1000 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03D1: play_wav 3 
+Player.CanMove($PLAYER_CHAR) = True
+32@ = 0 
+129@ = 9 
+
+:TRUTH1_12925
+if 
+  129@ == 9 
+jf @TRUTH1_12994 
+if 
+  32@ > 1000 
+jf @TRUTH1_12994 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+040D: unload_wav 3 
+32@ = 0 
+129@ = 10 
+
+:TRUTH1_12994
+if 
+  129@ == 10 
+jf @TRUTH1_13052 
+if 
+  32@ > 2000 
+jf @TRUTH1_13052 
+144@ = 1 
+145@ = 0 
+129@ = 11 
+
+:TRUTH1_13052
+if 
+  129@ == 11 
+jf @TRUTH1_14339 
+gosub @TRUTH1_18632 
+if 
+  144@ == 1 
+jf @TRUTH1_13142 
+if 
+  145@ == 0 
+jf @TRUTH1_13142 
+04AF: 113@ = 25256 // = constant 
+05AA: 114@s = 'MCES05A' // @s = 'short'  // ~z~Eh.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13142
+if 
+  144@ == 2 
+jf @TRUTH1_13207 
+if 
+  145@ == 0 
+jf @TRUTH1_13207 
+04AF: 113@ = 25257 // = constant 
+05AA: 114@s = 'MCES05B' // @s = 'short'  // ~z~Carl, it's Cesar.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13207
+if 
+  144@ == 3 
+jf @TRUTH1_13272 
+if 
+  145@ == 0 
+jf @TRUTH1_13272 
+04AF: 113@ = 25258 // = constant 
+05AA: 114@s = 'MCES05C' // @s = 'short'  // ~z~Whassup?
+gosub @TRUTH1_18590 
+
+:TRUTH1_13272
+if 
+  144@ == 4 
+jf @TRUTH1_13337 
+if 
+  145@ == 0 
+jf @TRUTH1_13337 
+04AF: 113@ = 25259 // = constant 
+05AA: 114@s = 'MCES05D' // @s = 'short'  // ~z~Bad stinking shit, that's wassup, holmes.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13337
+if 
+  144@ == 5 
+jf @TRUTH1_13402 
+if 
+  145@ == 0 
+jf @TRUTH1_13402 
+04AF: 113@ = 25260 // = constant 
+05AA: 114@s = 'MCES05E' // @s = 'short'  // ~z~What's wrong, where's Kendl, is she OK?
+gosub @TRUTH1_18590 
+
+:TRUTH1_13402
+if 
+  144@ == 6 
+jf @TRUTH1_13467 
+if 
+  145@ == 0 
+jf @TRUTH1_13467 
+04AF: 113@ = 25261 // = constant 
+05AA: 114@s = 'MCES05F' // @s = 'short'  // ~z~She's with me, she's OK for now.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13467
+if 
+  144@ == 7 
+jf @TRUTH1_13532 
+if 
+  145@ == 0 
+jf @TRUTH1_13532 
+04AF: 113@ = 25262 // = constant 
+05AA: 114@s = 'MCES05G' // @s = 'short'  // ~z~The Varrios Los Aztecas; it's all over.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13532
+if 
+  144@ == 8 
+jf @TRUTH1_13597 
+if 
+  145@ == 0 
+jf @TRUTH1_13597 
+04AF: 113@ = 25263 // = constant 
+05AA: 114@s = 'MCES05H' // @s = 'short'  // ~z~There's a price on my head, maybe Kendl's too.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13597
+if 
+  144@ == 9 
+jf @TRUTH1_13662 
+if 
+  145@ == 0 
+jf @TRUTH1_13662 
+04AF: 113@ = 25264 // = constant 
+05AA: 114@s = 'MCES05J' // @s = 'short'  // ~z~What happened?
+gosub @TRUTH1_18590 
+
+:TRUTH1_13662
+if 
+  144@ == 10 
+jf @TRUTH1_13727 
+if 
+  145@ == 0 
+jf @TRUTH1_13727 
+04AF: 113@ = 25265 // = constant 
+05AA: 114@s = 'MCES05K' // @s = 'short'  // ~z~Trust respect, honor; they don't mean jack in Los Santos now.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13727
+if 
+  144@ == 11 
+jf @TRUTH1_13792 
+if 
+  145@ == 0 
+jf @TRUTH1_13792 
+04AF: 113@ = 25266 // = constant 
+05AA: 114@s = 'MCES05L' // @s = 'short'  // ~z~My OG's, my eses, all dead or in hiding, eh.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13792
+if 
+  144@ == 12 
+jf @TRUTH1_13857 
+if 
+  145@ == 0 
+jf @TRUTH1_13857 
+04AF: 113@ = 25267 // = constant 
+05AA: 114@s = 'MCES05M' // @s = 'short'  // ~z~Get out of town.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13857
+if 
+  144@ == 13 
+jf @TRUTH1_13922 
+if 
+  145@ == 0 
+jf @TRUTH1_13922 
+04AF: 113@ = 25268 // = constant 
+05AA: 114@s = 'MCES05N' // @s = 'short'  // ~z~Head over to Angel Pine, rent you and Kendl a trailer and I'll meet you there.
+gosub @TRUTH1_18590 
+
+:TRUTH1_13922
+if 
+  144@ == 14 
+jf @TRUTH1_13987 
+if 
+  145@ == 0 
+jf @TRUTH1_13987 
+04AF: 113@ = 25269 // = constant 
+05AA: 114@s = 'MCES05O' // @s = 'short'  // ~z~OK, I just got some shit to take care of and,
+gosub @TRUTH1_18590 
+
+:TRUTH1_13987
+if 
+  144@ == 15 
+jf @TRUTH1_14052 
+if 
+  145@ == 0 
+jf @TRUTH1_14052 
+04AF: 113@ = 25270 // = constant 
+05AA: 114@s = 'MCES05P' // @s = 'short'  // ~z~No! Just get my sister out of town and someplace safe!
+gosub @TRUTH1_18590 
+
+:TRUTH1_14052
+if 
+  144@ == 16 
+jf @TRUTH1_14117 
+if 
+  145@ == 0 
+jf @TRUTH1_14117 
+04AF: 113@ = 25271 // = constant 
+05AA: 114@s = 'MCES05Q' // @s = 'short'  // ~z~Don't shit with me on this one, I can't lose her, man!
+gosub @TRUTH1_18590 
+
+:TRUTH1_14117
+if 
+  144@ == 17 
+jf @TRUTH1_14182 
+if 
+  145@ == 0 
+jf @TRUTH1_14182 
+04AF: 113@ = 25272 // = constant 
+05AA: 114@s = 'MCES05R' // @s = 'short'  // ~z~Sure thing, holmes, We'll see you in Angel Pine.
+gosub @TRUTH1_18590 
+
+:TRUTH1_14182
+if 
+  144@ == 18 
+jf @TRUTH1_14228 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+32@ = 0 
+144@ = 19 
+
+:TRUTH1_14228
+if 
+  144@ == 19 
+jf @TRUTH1_14279 
+if 
+  32@ > 2000 
+jf @TRUTH1_14279 
+jump @TRUTH1_19049 
+144@ = 20 
+
+:TRUTH1_14279
+if 
+  146@ == 0 
+jf @TRUTH1_14339 
+if 
+00E1:   player 0 pressed_key 15 
+jf @TRUTH1_14339 
+040D: unload_wav 1 
+145@ = 0 
+144@ = 18 
+146@ = 1 
+
+:TRUTH1_14339
+if 
+  117@ > 4 
+jf @TRUTH1_14414 
+if 
+   Car.Wrecked(34@)
+jf @TRUTH1_14414 
+if 
+  8 > 129@ 
+jf @TRUTH1_14414 
+00BC: show_text_highpriority GXT 'TRU1_16' time 5000 flag 1  // ~r~The combine harvester is wrecked!
+jump @TRUTH1_19003 
+
+:TRUTH1_14414
+if 
+  100 > 143@ 
+jf @TRUTH1_18583 
+if 
+  143@ == 1 
+jf @TRUTH1_14631 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_14631 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 5 
+if 
+  20@ == 0 
+jf @TRUTH1_14513 
+03CF: load_wav 41029 as 1 
+jump @TRUTH1_14624 
+
+:TRUTH1_14513
+if 
+  20@ == 1 
+jf @TRUTH1_14547 
+03CF: load_wav 41037 as 1 
+jump @TRUTH1_14624 
+
+:TRUTH1_14547
+if 
+  20@ == 2 
+jf @TRUTH1_14581 
+03CF: load_wav 41013 as 1 
+jump @TRUTH1_14624 
+
+:TRUTH1_14581
+if 
+  20@ == 3 
+jf @TRUTH1_14615 
+03CF: load_wav 41006 as 1 
+jump @TRUTH1_14624 
+
+:TRUTH1_14615
+03CF: load_wav 41007 as 1 
+
+:TRUTH1_14624
+143@ = 2 
+
+:TRUTH1_14631
+if 
+  143@ == 2 
+jf @TRUTH1_14885 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_14885 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_14885 
+0489: set_actor 49@ muted 1 
+if 
+  20@ == 0 
+jf @TRUTH1_14728 
+00BC: show_text_highpriority GXT 'TRU1_DF' time 4000 flag 1  // ~z~You come to the wrong farm, boy.
+jump @TRUTH1_14867 
+
+:TRUTH1_14728
+if 
+  20@ == 1 
+jf @TRUTH1_14769 
+00BC: show_text_highpriority GXT 'TRU1_FF' time 4000 flag 1  // ~z~This here's private land, stranger.
+jump @TRUTH1_14867 
+
+:TRUTH1_14769
+if 
+  20@ == 2 
+jf @TRUTH1_14810 
+00BC: show_text_highpriority GXT 'TRU1_BF' time 4000 flag 1  // ~z~Whatever you want, it ain't here, mister!
+jump @TRUTH1_14867 
+
+:TRUTH1_14810
+if 
+  20@ == 3 
+jf @TRUTH1_14851 
+00BC: show_text_highpriority GXT 'TRU1_AG' time 4000 flag 1  // ~z~You don't belong around here!
+jump @TRUTH1_14867 
+
+:TRUTH1_14851
+00BC: show_text_highpriority GXT 'TRU1_AH' time 4000 flag 1  // ~z~We got a snooper, folks!
+
+:TRUTH1_14867
+03D1: play_wav 1 
+143@ = 3 
+20@ = 0 
+
+:TRUTH1_14885
+if 
+  143@ == 3 
+jf @TRUTH1_14927 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_14927 
+00BE: text_clear_all 
+143@ = 4 
+
+:TRUTH1_14927
+if 
+  143@ == 4 
+jf @TRUTH1_15126 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_15126 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 5 
+if 
+  20@ == 0 
+jf @TRUTH1_15008 
+03CF: load_wav 41030 as 1 
+jump @TRUTH1_15119 
+
+:TRUTH1_15008
+if 
+  20@ == 1 
+jf @TRUTH1_15042 
+03CF: load_wav 41022 as 1 
+jump @TRUTH1_15119 
+
+:TRUTH1_15042
+if 
+  20@ == 2 
+jf @TRUTH1_15076 
+03CF: load_wav 41014 as 1 
+jump @TRUTH1_15119 
+
+:TRUTH1_15076
+if 
+  20@ == 3 
+jf @TRUTH1_15110 
+03CF: load_wav 41009 as 1 
+jump @TRUTH1_15119 
+
+:TRUTH1_15110
+03CF: load_wav 41005 as 1 
+
+:TRUTH1_15119
+143@ = 5 
+
+:TRUTH1_15126
+if 
+  143@ == 5 
+jf @TRUTH1_15380 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_15380 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_15380 
+if 
+  20@ == 0 
+jf @TRUTH1_15216 
+00BC: show_text_highpriority GXT 'TRU1_DG' time 4000 flag 1  // ~z~This ain't no country club, fella!
+jump @TRUTH1_15355 
+
+:TRUTH1_15216
+if 
+  20@ == 1 
+jf @TRUTH1_15257 
+00BC: show_text_highpriority GXT 'TRU1_CG' time 4000 flag 1  // ~z~You ain't welcome, not no way, not no how!
+jump @TRUTH1_15355 
+
+:TRUTH1_15257
+if 
+  20@ == 2 
+jf @TRUTH1_15298 
+00BC: show_text_highpriority GXT 'TRU1_BG' time 4000 flag 1  // ~z~We didn't order no shit delivery!
+jump @TRUTH1_15355 
+
+:TRUTH1_15298
+if 
+  20@ == 3 
+jf @TRUTH1_15339 
+00BC: show_text_highpriority GXT 'TRU1_BB' time 4000 flag 1  // ~z~He ain't got no good about him!
+jump @TRUTH1_15355 
+
+:TRUTH1_15339
+00BC: show_text_highpriority GXT 'TRU1_AF' time 4000 flag 1  // ~z~He ain't sleeping with my sister!
+
+:TRUTH1_15355
+20@ = 0 
+0949: link_wav 1 to_actor 49@ 
+03D1: play_wav 1 
+143@ = 6 
+
+:TRUTH1_15380
+if 
+  143@ == 6 
+jf @TRUTH1_15445 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_15445 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(49@)
+jf @TRUTH1_15438 
+0489: set_actor 49@ muted 0 
+
+:TRUTH1_15438
+143@ = 7 
+
+:TRUTH1_15445
+if 
+  143@ == 8 
+jf @TRUTH1_15576 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_15576 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 3 
+if 
+  20@ == 0 
+jf @TRUTH1_15526 
+03CF: load_wav 41035 as 1 
+jump @TRUTH1_15569 
+
+:TRUTH1_15526
+if 
+  20@ == 1 
+jf @TRUTH1_15560 
+03CF: load_wav 41039 as 1 
+jump @TRUTH1_15569 
+
+:TRUTH1_15560
+03CF: load_wav 41015 as 1 
+
+:TRUTH1_15569
+143@ = 9 
+
+:TRUTH1_15576
+if 
+  143@ == 9 
+jf @TRUTH1_15748 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_15748 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_15748 
+if 
+  20@ == 0 
+jf @TRUTH1_15666 
+00BC: show_text_highpriority GXT 'TRU1_FD' time 4000 flag 1  // ~z~Beat him down, it's all he's good for!
+jump @TRUTH1_15723 
+
+:TRUTH1_15666
+if 
+  20@ == 1 
+jf @TRUTH1_15707 
+00BC: show_text_highpriority GXT 'TRU1_FH' time 4000 flag 1  // ~z~Don't ignore us, you dumb mute!
+jump @TRUTH1_15723 
+
+:TRUTH1_15707
+00BC: show_text_highpriority GXT 'TRU1_BH' time 4000 flag 1  // ~z~Feed him to the pigs!
+
+:TRUTH1_15723
+20@ = 0 
+03D1: play_wav 1 
+0489: set_actor 59@ muted 1 
+143@ = 10 
+
+:TRUTH1_15748
+if 
+  143@ == 10 
+jf @TRUTH1_15813 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_15813 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(59@)
+jf @TRUTH1_15806 
+0489: set_actor 59@ muted 0 
+
+:TRUTH1_15806
+143@ = 11 
+
+:TRUTH1_15813
+if 
+  143@ == 12 
+jf @TRUTH1_16027 
+if 
+   not Actor.Dead(52@)
+jf @TRUTH1_16027 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_16027 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 5 
+if 
+  20@ == 0 
+jf @TRUTH1_15909 
+03CF: load_wav 41032 as 1 
+jump @TRUTH1_16020 
+
+:TRUTH1_15909
+if 
+  20@ == 1 
+jf @TRUTH1_15943 
+03CF: load_wav 41000 as 1 
+jump @TRUTH1_16020 
+
+:TRUTH1_15943
+if 
+  20@ == 2 
+jf @TRUTH1_15977 
+03CF: load_wav 41008 as 1 
+jump @TRUTH1_16020 
+
+:TRUTH1_15977
+if 
+  20@ == 3 
+jf @TRUTH1_16011 
+03CF: load_wav 41016 as 1 
+jump @TRUTH1_16020 
+
+:TRUTH1_16011
+03CF: load_wav 41024 as 1 
+
+:TRUTH1_16020
+143@ = 13 
+
+:TRUTH1_16027
+if 
+  143@ == 13 
+jf @TRUTH1_16274 
+if 
+   not Actor.Dead(52@)
+jf @TRUTH1_16274 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_16274 
+if 
+  20@ == 0 
+jf @TRUTH1_16117 
+00BC: show_text_highpriority GXT 'TRU1_FA' time 4000 flag 1  // ~z~Hey, who is this guy?
+jump @TRUTH1_16256 
+
+:TRUTH1_16117
+if 
+  20@ == 1 
+jf @TRUTH1_16158 
+00BC: show_text_highpriority GXT 'TRU1_AA' time 4000 flag 1  // ~z~Who's this guy?
+jump @TRUTH1_16256 
+
+:TRUTH1_16158
+if 
+  20@ == 2 
+jf @TRUTH1_16199 
+00BC: show_text_highpriority GXT 'TRU1_BA' time 4000 flag 1  // ~z~Who's the smog sucker?!
+jump @TRUTH1_16256 
+
+:TRUTH1_16199
+if 
+  20@ == 3 
+jf @TRUTH1_16240 
+00BC: show_text_highpriority GXT 'TRU1_CA' time 4000 flag 1  // ~z~Who's this dang chicken wrangler?!
+jump @TRUTH1_16256 
+
+:TRUTH1_16240
+00BC: show_text_highpriority GXT 'TRU1_DA' time 4000 flag 1  // ~z~Who's this city slicker?
+
+:TRUTH1_16256
+20@ = 0 
+03D1: play_wav 1 
+143@ = 14 
+
+:TRUTH1_16274
+if 
+  143@ == 14 
+jf @TRUTH1_16316 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_16316 
+00BE: text_clear_all 
+143@ = 15 
+
+:TRUTH1_16316
+if 
+  143@ == 15 
+jf @TRUTH1_16522 
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_16522 
+0489: set_actor 53@ muted 1 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 5 
+if 
+  20@ == 0 
+jf @TRUTH1_16404 
+03CF: load_wav 41001 as 1 
+jump @TRUTH1_16515 
+
+:TRUTH1_16404
+if 
+  20@ == 1 
+jf @TRUTH1_16438 
+03CF: load_wav 41017 as 1 
+jump @TRUTH1_16515 
+
+:TRUTH1_16438
+if 
+  20@ == 2 
+jf @TRUTH1_16472 
+03CF: load_wav 41021 as 1 
+jump @TRUTH1_16515 
+
+:TRUTH1_16472
+if 
+  20@ == 3 
+jf @TRUTH1_16506 
+03CF: load_wav 41025 as 1 
+jump @TRUTH1_16515 
+
+:TRUTH1_16506
+03CF: load_wav 41011 as 1 
+
+:TRUTH1_16515
+143@ = 16 
+
+:TRUTH1_16522
+if 
+  143@ == 16 
+jf @TRUTH1_16769 
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_16769 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_16769 
+if 
+  20@ == 0 
+jf @TRUTH1_16612 
+00BC: show_text_highpriority GXT 'TRU1_AB' time 4000 flag 1  // ~z~Dunno but he looks kinda shifty!
+jump @TRUTH1_16751 
+
+:TRUTH1_16612
+if 
+  20@ == 1 
+jf @TRUTH1_16653 
+00BC: show_text_highpriority GXT 'TRU1_CB' time 4000 flag 1  // ~z~Trouble is all he looks like to me, friend!
+jump @TRUTH1_16751 
+
+:TRUTH1_16653
+if 
+  20@ == 2 
+jf @TRUTH1_16694 
+00BC: show_text_highpriority GXT 'TRU1_CF' time 4000 flag 1  // ~z~You'll get nothing but trouble here, son!
+jump @TRUTH1_16751 
+
+:TRUTH1_16694
+if 
+  20@ == 3 
+jf @TRUTH1_16735 
+00BC: show_text_highpriority GXT 'TRU1_DB' time 4000 flag 1  // ~z~He ain't got a clue where he is!
+jump @TRUTH1_16751 
+
+:TRUTH1_16735
+00BC: show_text_highpriority GXT 'TRU1_BD' time 4000 flag 1  // ~z~Ain't nobody knows he's here!
+
+:TRUTH1_16751
+20@ = 0 
+03D1: play_wav 1 
+143@ = 17 
+
+:TRUTH1_16769
+if 
+  143@ == 17 
+jf @TRUTH1_16811 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_16811 
+00BE: text_clear_all 
+143@ = 18 
+
+:TRUTH1_16811
+if 
+  143@ == 18 
+jf @TRUTH1_17010 
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_17010 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 5 
+if 
+  20@ == 0 
+jf @TRUTH1_16892 
+03CF: load_wav 41003 as 1 
+jump @TRUTH1_17003 
+
+:TRUTH1_16892
+if 
+  20@ == 1 
+jf @TRUTH1_16926 
+03CF: load_wav 41033 as 1 
+jump @TRUTH1_17003 
+
+:TRUTH1_16926
+if 
+  20@ == 2 
+jf @TRUTH1_16960 
+03CF: load_wav 41027 as 1 
+jump @TRUTH1_17003 
+
+:TRUTH1_16960
+if 
+  20@ == 3 
+jf @TRUTH1_16994 
+03CF: load_wav 41031 as 1 
+jump @TRUTH1_17003 
+
+:TRUTH1_16994
+03CF: load_wav 41035 as 1 
+
+:TRUTH1_17003
+143@ = 19 
+
+:TRUTH1_17010
+if 
+  143@ == 19 
+jf @TRUTH1_17257 
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_17257 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_17257 
+if 
+  20@ == 0 
+jf @TRUTH1_17100 
+00BC: show_text_highpriority GXT 'TRU1_AD' time 4000 flag 1  // ~z~Roll him in some pig shit!
+jump @TRUTH1_17239 
+
+:TRUTH1_17100
+if 
+  20@ == 1 
+jf @TRUTH1_17141 
+00BC: show_text_highpriority GXT 'TRU1_FB' time 4000 flag 1  // ~z~He don't look all there to me!
+jump @TRUTH1_17239 
+
+:TRUTH1_17141
+if 
+  20@ == 2 
+jf @TRUTH1_17182 
+00BC: show_text_highpriority GXT 'TRU1_DD' time 4000 flag 1  // ~z~Throw him down the pit with the others!!
+jump @TRUTH1_17239 
+
+:TRUTH1_17182
+if 
+  20@ == 3 
+jf @TRUTH1_17223 
+00BC: show_text_highpriority GXT 'TRU1_DH' time 4000 flag 1  // ~z~He's high on evil, beat the Lord into him!
+jump @TRUTH1_17239 
+
+:TRUTH1_17223
+00BC: show_text_highpriority GXT 'TRU1_FD' time 4000 flag 1  // ~z~Beat him down, it's all he's good for!
+
+:TRUTH1_17239
+20@ = 0 
+03D1: play_wav 1 
+143@ = 20 
+
+:TRUTH1_17257
+if 
+  143@ == 21 
+jf @TRUTH1_17322 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_17322 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(53@)
+jf @TRUTH1_17315 
+0489: set_actor 53@ muted 0 
+
+:TRUTH1_17315
+143@ = 22 
+
+:TRUTH1_17322
+if 
+  143@ == 23 
+jf @TRUTH1_17589 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_17589 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 7 
+if 
+  20@ == 0 
+jf @TRUTH1_17403 
+03CF: load_wav 41028 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17403
+if 
+  20@ == 1 
+jf @TRUTH1_17437 
+03CF: load_wav 41038 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17437
+if 
+  20@ == 2 
+jf @TRUTH1_17471 
+03CF: load_wav 41036 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17471
+if 
+  20@ == 3 
+jf @TRUTH1_17505 
+03CF: load_wav 41034 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17505
+if 
+  20@ == 4 
+jf @TRUTH1_17539 
+03CF: load_wav 41020 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17539
+if 
+  20@ == 5 
+jf @TRUTH1_17573 
+03CF: load_wav 41012 as 1 
+jump @TRUTH1_17582 
+
+:TRUTH1_17573
+03CF: load_wav 41004 as 1 
+
+:TRUTH1_17582
+143@ = 24 
+
+:TRUTH1_17589
+if 
+  143@ == 24 
+jf @TRUTH1_17925 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_17925 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_17925 
+0489: set_actor 38@ muted 1 
+if 
+  20@ == 0 
+jf @TRUTH1_17686 
+00BC: show_text_highpriority GXT 'TRU1_DE' time 4000 flag 1  // ~z~He's a combine rustler!! That son of a bitch is stealin' Betsy!
+jump @TRUTH1_17907 
+
+:TRUTH1_17686
+if 
+  20@ == 1 
+jf @TRUTH1_17727 
+00BC: show_text_highpriority GXT 'TRU1_FG' time 4000 flag 1  // ~z~What the, what's he doin'?
+jump @TRUTH1_17907 
+
+:TRUTH1_17727
+if 
+  20@ == 2 
+jf @TRUTH1_17768 
+00BC: show_text_highpriority GXT 'TRU1_FE' time 4000 flag 1  // ~z~He's got the family car!
+jump @TRUTH1_17907 
+
+:TRUTH1_17768
+if 
+  20@ == 3 
+jf @TRUTH1_17809 
+00BC: show_text_highpriority GXT 'TRU1_FC' time 4000 flag 1  // ~z~Somebody run and get the darn sheriff!
+jump @TRUTH1_17907 
+
+:TRUTH1_17809
+if 
+  20@ == 4 
+jf @TRUTH1_17850 
+00BC: show_text_highpriority GXT 'TRU1_CE' time 4000 flag 1  // ~z~Get him! He's got Betsy!
+jump @TRUTH1_17907 
+
+:TRUTH1_17850
+if 
+  20@ == 5 
+jf @TRUTH1_17891 
+00BC: show_text_highpriority GXT 'TRU1_BE' time 4000 flag 1  // ~z~He's got my nooky wagon!
+jump @TRUTH1_17907 
+
+:TRUTH1_17891
+00BC: show_text_highpriority GXT 'TRU1_AE' time 4000 flag 1  // ~z~Oh, my pride and joy!
+
+:TRUTH1_17907
+20@ = 0 
+03D1: play_wav 1 
+143@ = 25 
+
+:TRUTH1_17925
+if 
+  143@ == 26 
+jf @TRUTH1_17990 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_17990 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(38@)
+jf @TRUTH1_17983 
+0489: set_actor 38@ muted 0 
+
+:TRUTH1_17983
+143@ = 27 
+
+:TRUTH1_17990
+if 
+  143@ == 28 
+jf @TRUTH1_18223 
+if 
+   not Actor.Dead(68@)
+jf @TRUTH1_18223 
+040D: unload_wav 1 
+0209: 20@ = random_int_in_ranges 0 6 
+if 
+  20@ == 0 
+jf @TRUTH1_18071 
+03CF: load_wav 41002 as 1 
+jump @TRUTH1_18216 
+
+:TRUTH1_18071
+if 
+  20@ == 1 
+jf @TRUTH1_18105 
+03CF: load_wav 41010 as 1 
+jump @TRUTH1_18216 
+
+:TRUTH1_18105
+if 
+  20@ == 2 
+jf @TRUTH1_18139 
+03CF: load_wav 41018 as 1 
+jump @TRUTH1_18216 
+
+:TRUTH1_18139
+if 
+  20@ == 3 
+jf @TRUTH1_18173 
+03CF: load_wav 41019 as 1 
+jump @TRUTH1_18216 
+
+:TRUTH1_18173
+if 
+  20@ == 4 
+jf @TRUTH1_18207 
+03CF: load_wav 41023 as 1 
+jump @TRUTH1_18216 
+
+:TRUTH1_18207
+03CF: load_wav 41026 as 1 
+
+:TRUTH1_18216
+143@ = 29 
+
+:TRUTH1_18223
+if 
+  143@ == 29 
+jf @TRUTH1_18518 
+if 
+   not Actor.Dead(68@)
+jf @TRUTH1_18518 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_18518 
+0489: set_actor 68@ muted 1 
+if 
+  20@ == 0 
+jf @TRUTH1_18320 
+00BC: show_text_highpriority GXT 'TRU1_AC' time 4000 flag 1  // ~z~Stop that dang varmint!!
+jump @TRUTH1_18500 
+
+:TRUTH1_18320
+if 
+  20@ == 1 
+jf @TRUTH1_18361 
+00BC: show_text_highpriority GXT 'TRU1_BC' time 4000 flag 1  // ~z~Blast the hair-brained coot!
+jump @TRUTH1_18500 
+
+:TRUTH1_18361
+if 
+  20@ == 2 
+jf @TRUTH1_18402 
+00BC: show_text_highpriority GXT 'TRU1_CC' time 4000 flag 1  // ~z~We got ourselves a chase, cue the banjo music!
+jump @TRUTH1_18500 
+
+:TRUTH1_18402
+if 
+  20@ == 3 
+jf @TRUTH1_18443 
+00BC: show_text_highpriority GXT 'TRU1_CD' time 4000 flag 1  // ~z~There he is, get him!
+jump @TRUTH1_18500 
+
+:TRUTH1_18443
+if 
+  20@ == 4 
+jf @TRUTH1_18484 
+00BC: show_text_highpriority GXT 'TRU1_CH' time 4000 flag 1  // ~z~He's some loco drughead, get him!
+jump @TRUTH1_18500 
+
+:TRUTH1_18484
+00BC: show_text_highpriority GXT 'TRU1_DC' time 4000 flag 1  // ~z~Holy snout rings, he's getting away!
+
+:TRUTH1_18500
+20@ = 0 
+03D1: play_wav 1 
+143@ = 30 
+
+:TRUTH1_18518
+if 
+  143@ == 30 
+jf @TRUTH1_18583 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_18583 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(68@)
+jf @TRUTH1_18576 
+0489: set_actor 68@ muted 0 
+
+:TRUTH1_18576
+143@ = 31 
+
+:TRUTH1_18583
+jump @TRUTH1_942 
+
+:TRUTH1_18590
+if 
+  145@ == 0 
+jf @TRUTH1_18630 
+03CF: load_wav 113@ as 1 
+05AA: 111@s = 114@s // @s = 'short' 
+145@ = 1 
+
+:TRUTH1_18630
+return 
+
+:TRUTH1_18632
+if 
+  145@ == 1 
+jf @TRUTH1_18686 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH1_18686 
+00BC: show_text_highpriority GXT 111@s time 4000 flag 1 
+03D1: play_wav 1 
+145@ = 2 
+
+:TRUTH1_18686
+if 
+  145@ == 2 
+jf @TRUTH1_18739 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH1_18739 
+144@ += 1 
+040D: unload_wav 1 
+00BE: text_clear_all 
+145@ = 0 
+
+:TRUTH1_18739
+return 
+
+:TRUTH1_18741
+0615: define_AS_pack_begin 108@ 
+0638: AS_actor -1 stay_put 0 
+05D3: AS_actor -1 goto_point 103@ 104@ 105@ mode 6 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 108@ 
+0618: assign_actor 102@ to_AS_pack 108@ 
+061B: remove_references_to_AS_pack 108@ 
+return 
+
+:TRUTH1_18802
+0615: define_AS_pack_begin 99@ 
+05D1: AS_actor -1 drive_car 34@ to -1025.67 -1029.39 130.5 speed 6.0 0 model #NULL 3 
+05D1: AS_actor -1 drive_car 34@ to -1154.06 -1041.32 130.5 speed 6.0 0 model #NULL 3 
+05D1: AS_actor -1 drive_car 34@ to -1166.82 -941.32 130.21 speed 6.0 0 model #NULL 3 
+05D1: AS_actor -1 drive_car 34@ to -1031.46 -935.51 130.19 speed 6.0 0 model #NULL 3 
+0616: define_AS_pack_end 99@ 
+0618: assign_actor 38@ to_AS_pack 99@ 
+061B: remove_references_to_AS_pack 99@ 
+return 
+
+:TRUTH1_18959
+0615: define_AS_pack_begin 100@ 
+06E1: AS_actor -1 using_car 101@ target_car 101@ with_order 2 max_speed 20.0 traffic_flag 3 
+0616: define_AS_pack_end 100@ 
+0618: assign_actor 102@ to_AS_pack 100@ 
+061B: remove_references_to_AS_pack 100@ 
+return 
+
+:TRUTH1_19003
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @TRUTH1_19031 
+$11033 = 0 
+
+:TRUTH1_19031
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:TRUTH1_19049
+Marker.Disable($484)
+$484 = Marker.CreateIconAndSphere($ICON_CESAR, $X_ANGEL_PINE, $Y_ANGEL_PINE, $Z_ANGEL_PINE)
+014C: set_parked_car_generator $2865 cars_to_generate_to 101 
+014C: set_parked_car_generator $2866 cars_to_generate_to 101 
+014C: set_parked_car_generator $2867 cars_to_generate_to 101 
+014C: set_parked_car_generator $2868 cars_to_generate_to 101 
+014C: set_parked_car_generator $2869 cars_to_generate_to 101 
+014C: set_parked_car_generator $2870 cars_to_generate_to 101 
+014C: set_parked_car_generator $2871 cars_to_generate_to 101 
+014C: set_parked_car_generator $2872 cars_to_generate_to 101 
+0318: set_latest_mission_passed 'TRUTH_1'  // Body Harvest
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 5 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0394: play_music 1 
+0998: add_respect 5 
+Player.ClearWantedLevel($PLAYER_CHAR)
+$TRUTH_TOTAL_PASSED_MISSIONS += 1 
+Marker.Disable($MARKER_TRUTH_FARM)
+return 
+
+:TRUTH1_19187
+$ONMISSION = 0 
+Model.Destroy(#COMBINE)
+Model.Destroy(#TRACTOR)
+Model.Destroy(#KMB_MARIJUANA)
+Model.Destroy(#SW_HAYBREAK02)
+Model.Destroy(#CUNTGUN)
+Model.Destroy(#WALTON)
+Model.Destroy(#CWFYHB)
+Model.Destroy(#CWMOHB2)
+Model.Destroy(#CWMYHB1)
+Model.Destroy(#BFINJECT)
+Model.Destroy(#SHOVEL)
+0296: unload_special_actor 1 
+Marker.Disable(116@)
+Car.RemoveReferences(56@)
+03C7: set_sensitivity_to_crime 1.0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

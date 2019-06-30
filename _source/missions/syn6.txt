@@ -1,0 +1,1578 @@
+:SYN6
+thread 'SYN6' 
+gosub @SYN6_94 
+if 
+wasted_or_busted 
+jf @SYN6_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @SYN6_9204 
+
+:SYN6_85
+gosub @SYN6_9359 
+end_thread 
+
+:SYN6_94
+$ONMISSION = 1 
+$1522 = 1 
+increment_mission_attempts 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetAtPos(-2034.255, 176.5, 27.8359)
+fade 0 2000 
+
+:SYN6_141
+if 
+fading 
+jf @SYN6_165 
+wait 0 
+jump @SYN6_141 
+
+:SYN6_165
+select_interior 0 
+054C: use_GXT_table 'SYN6' 
+Model.Load(#MAVERICK)
+Model.Load(#FCR900)
+Model.Load(#AK47)
+Model.Load(#COLT45)
+Model.Load(#WBDYG1)
+Model.Load(#ROCKETLA)
+Model.Load(#PONY)
+Model.Load(#CELLPHONE)
+Model.Load(#DESERT_EAGLE)
+038B: load_requested_models 
+
+:SYN6_226
+if or
+   not Model.Available(#MAVERICK)
+   not Model.Available(#FCR900)
+   not Model.Available(#AK47)
+   not Model.Available(#COLT45)
+   not Model.Available(#WBDYG1)
+jf @SYN6_272 
+wait 0 
+jump @SYN6_226 
+
+:SYN6_272
+if or
+   not Model.Available(#ROCKETLA)
+   not Model.Available(#PONY)
+   not Model.Available(#CELLPHONE)
+   not Model.Available(#DESERT_EAGLE)
+jf @SYN6_314 
+wait 0 
+jump @SYN6_272 
+
+:SYN6_314
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @SYN6_341 
+wait 0 
+jump @SYN6_314 
+
+:SYN6_341
+47@ = Actor.Create(CivMale, #WBDYG1, -1691.72, 703.6754, 29.6065)
+48@ = Actor.Create(CivMale, #WBDYG1, -1701.061, 712.767, 23.8976)
+49@ = Actor.Create(CivMale, #WBDYG1, -1688.372, 687.4631, 20.615)
+50@ = Actor.Create(CivMale, #WBDYG1, -1686.15, 701.9777, 29.6065)
+51@ = Actor.Create(CivMale, #WBDYG1, -1681.696, 680.8264, 18.8009)
+52@ = Actor.Create(CivMale, #WBDYG1, -1690.15, 716.6064, 29.6065)
+Actor.Angle(47@) = 82.107
+Actor.Angle(48@) = 224.7688
+Actor.Angle(49@) = 118.1096
+085B: AS_actor 49@ set_kinda_stay_in_same_place 1 
+Actor.Angle(50@) = 239.6
+0638: AS_actor 50@ stay_put 1 
+04EB: AS_actor 50@ crouch 1 
+Actor.Angle(51@) = 86.9582
+085B: AS_actor 51@ set_kinda_stay_in_same_place 1 
+Actor.Angle(52@) = 222.9582
+77@ = 0 
+
+:SYN6_580
+if 
+  5 > 77@ 
+jf @SYN6_661 
+Actor.GiveWeaponAndAmmo(47@(77@,6i), Pistol, 9999)
+02A9: set_actor 47@(77@,6i) immune_to_nonplayer 1 
+077A: set_actor 47@(77@,6i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0770: set_actor 47@(77@,6i) target_priority 1 
+77@ += 1 
+jump @SYN6_580 
+
+:SYN6_661
+Actor.GiveWeaponAndAmmo(52@, RPG, 9999)
+02A9: set_actor 52@ immune_to_nonplayer 1 
+077A: set_actor 52@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0770: set_actor 52@ target_priority 1 
+087E: set_actor 52@ weapon_droppable 0 
+0638: AS_actor 52@ stay_put 1 
+Actor.WeaponAccuracy(52@) = 100
+07DD: set_actor 52@ attack_rate 50 // previously known as temper_to 
+081A: set_actor 52@ weapon_skill_to 0 
+032B: 63@ = create_weapon_pickup #ROCKETLA type 3 ammo 60 at -1688.86 695.3077 30.3452 
+032B: 64@ = create_weapon_pickup #AK47 type 3 ammo 120 at -1683.497 716.2739 30.6452 
+53@ = Car.Create(#MAVERICK, -1680.502, 705.6951, 29.6065)
+0825: set_helicopter 53@ instant_rotor_start 
+Car.Angle(53@) = 90.0
+0657: car 53@ open_door 5 
+0657: car 53@ open_door 4 
+Car.SetImmunities(53@, 1, 1, 1, 1, 1)
+0229: set_car 53@ primary_color_to 10 secondary_color_to 125 
+57@ = Car.Create(#FCR900, -1705.198, 682.3814, 23.8906)
+Model.Destroy(#FCR900)
+Car.Angle(57@) = 181.5462
+053F: set_car 57@ tires_vulnerability 0 
+58@ = Car.Create(#PONY, -1665.8, 682.1571, 13.8891)
+Car.Angle(58@) = 214.5462
+0229: set_car 58@ primary_color_to 7 secondary_color_to 1 
+0657: car 58@ open_door 4 
+Model.Destroy(#PONY)
+60@ = -1 
+61@ = 0 
+65@ = 0 
+72@ = 0 
+73@ = 0 
+74@ = 0 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+78@ = 0 
+79@ = 0 
+80@ = 0 
+81@ = 0 
+82@ = 0 
+83@ = 0 
+84@ = 0 
+85@ = 0 
+86@ = 0 
+89@ = 0 
+92@ = 0 
+91@ = 0 
+93@ = 0 
+94@ = 0 
+140@ = 1 
+141@ = 2 
+142@ = 0 
+143@ = 1 
+144@ = 0 
+145@ = 0 
+05AA: 106@s = 'MWUZ01A' // @s = 'short'  // ~z~Carl, it's Woozie, I've got some information for ya.
+05AA: 108@s = 'MWUZ01B' // @s = 'short'  // ~z~Hey Woozie, what's the business?
+05AA: 110@s = 'MWUZ01C' // @s = 'short'  // ~z~My man found that van you were looking for, by the helipad downtown.
+05AA: 112@s = 'MWUZ01D' // @s = 'short'  // ~z~And Toreno?
+05AA: 114@s = 'MWUZ01E' // @s = 'short'  // ~z~Yep, he's there.
+05AA: 116@s = 'MWUZ01F' // @s = 'short'  // ~z~Apparently, he's about to take some merchandise and cut out by helicopter.
+05AA: 118@s = 'MWUZ01G' // @s = 'short'  // ~z~They've already started loading boxes.
+05AA: 120@s = 'MWUZ01H' // @s = 'short'  // ~z~Something about Toreno don't add up.
+05AA: 122@s = 'MWUZ01J' // @s = 'short'  // ~z~I'm gonna go look at this airstrip.
+05AA: 124@s = 'MWUZ01K' // @s = 'short'  // ~z~Holler back if you hear something.
+04AF: 129@ = 30009 // = constant 
+04AF: 130@ = 30010 // = constant 
+04AF: 131@ = 30011 // = constant 
+04AF: 132@ = 30012 // = constant 
+04AF: 133@ = 30013 // = constant 
+04AF: 134@ = 30014 // = constant 
+04AF: 135@ = 30015 // = constant 
+04AF: 136@ = 30016 // = constant 
+04AF: 137@ = 30017 // = constant 
+04AF: 138@ = 30018 // = constant 
+03CF: load_wav 23000 as 3 
+32@ = 0 
+02A3: enable_widescreen 1 
+Actor.PutAt($PLAYER_ACTOR, -2030.25, 148.8279, 27.8359)
+Actor.Angle($PLAYER_ACTOR) = 350.0
+Camera.SetPosition(-2024.214, 147.8178, 28.9808, 0.0, 0.0, 0.0)
+Camera.PointAt(-2025.159, 148.1366, 29.046, 2)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0A0B: set_rendering_origin_at_3D_coord -2024.137 149.9411 27.8359 angle 348.3137 
+wait 0 
+fade 1 2500 
+0A0B: set_rendering_origin_at_3D_coord -2024.137 149.9411 27.8359 angle 348.3137 
+wait 0 
+05D3: AS_actor $PLAYER_ACTOR goto_point -2026.674 148.8807 27.8359 mode 4 time -2 ms // versionA 
+
+:SYN6_1570
+if 
+fading 
+jf @SYN6_1594 
+wait 0 
+jump @SYN6_1570 
+
+:SYN6_1594
+if 
+03D0:   wav 3 loaded 
+jf @SYN6_1613 
+03D1: play_wav 3 
+
+:SYN6_1613
+wait 0 
+32@ = 0 
+84@ = 4 
+85@ = 0 
+86@ = 1 
+
+:SYN6_1645
+wait 0 
+if 
+   not 142@ == 0 
+jf @SYN6_2002 
+if 
+  144@ == 0 
+jf @SYN6_1720 
+if 
+03D0:   wav 141@ loaded 
+jf @SYN6_1706 
+040D: unload_wav 141@ 
+
+:SYN6_1706
+144@ = 1 
+145@ = 1 
+
+:SYN6_1720
+if 
+  144@ == 1 
+jf @SYN6_1757 
+03CF: load_wav 128@(142@,12i) as 140@ 
+144@ = 2 
+
+:SYN6_1757
+if 
+  144@ == 2 
+jf @SYN6_1817 
+if 
+03D0:   wav 140@ loaded 
+jf @SYN6_1817 
+03D1: play_wav 140@ 
+00BC: show_text_highpriority GXT 104@(142@,12s) time 10000 flag 1 
+144@ = 3 
+
+:SYN6_1817
+if 
+  144@ == 3 
+jf @SYN6_2002 
+if 
+03D2:   wav 140@ ended 
+jf @SYN6_1941 
+03D5: remove_text 104@(142@,12s) 
+if 
+  140@ == 1 
+jf @SYN6_1899 
+140@ = 2 
+141@ = 1 
+jump @SYN6_1913 
+
+:SYN6_1899
+140@ = 1 
+141@ = 2 
+
+:SYN6_1913
+142@ = 0 
+144@ = 0 
+145@ = 0 
+jump @SYN6_2002 
+
+:SYN6_1941
+if 
+83D0:   not wav 141@ loaded 
+jf @SYN6_2002 
+if 
+  10 > 142@ 
+jf @SYN6_2002 
+0085: 143@ = 142@ // (int) 
+143@ += 1 
+03CF: load_wav 128@(143@,12i) as 141@ 
+
+:SYN6_2002
+if 
+  89@ == 1 
+jf @SYN6_2024 
+Camera.Shake(20)
+
+:SYN6_2024
+if 
+   not 84@ == -13 
+jf @SYN6_2849 
+if 
+  84@ > 4 
+jf @SYN6_2200 
+if 
+  85@ == 1 
+jf @SYN6_2130 
+if 
+00E1:   player 0 pressed_key 15 
+jf @SYN6_2130 
+
+:SYN6_2095
+if 
+00E1:   player 0 pressed_key 15 
+jf @SYN6_2123 
+wait 0 
+jump @SYN6_2095 
+
+:SYN6_2123
+84@ = 100 
+
+:SYN6_2130
+if 
+  86@ == 1 
+jf @SYN6_2200 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN6_2200 
+
+:SYN6_2165
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN6_2193 
+wait 0 
+jump @SYN6_2165 
+
+:SYN6_2193
+84@ = 10 
+
+:SYN6_2200
+if 
+  84@ == 4 
+jf @SYN6_2263 
+if 
+  32@ > 1000 
+jf @SYN6_2263 
+0687: clear_actor $PLAYER_ACTOR task 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+84@ = 5 
+
+:SYN6_2263
+if 
+  84@ == 5 
+jf @SYN6_2321 
+if 
+  32@ > 5000 
+jf @SYN6_2321 
+142@ = 1 
+32@ = 0 
+84@ = 7 
+
+:SYN6_2321
+if 
+  84@ == 7 
+jf @SYN6_2372 
+if 
+  32@ > 2500 
+jf @SYN6_2372 
+84@ = 10 
+32@ = 0 
+
+:SYN6_2372
+if 
+  84@ == 10 
+jf @SYN6_2433 
+86@ = 0 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+84@ = 15 
+85@ = 1 
+32@ = 0 
+
+:SYN6_2433
+if 
+  84@ > 10 
+jf @SYN6_2849 
+if 
+  145@ == 0 
+jf @SYN6_2849 
+0871: init_jump_table 84@ total_jumps 10 default_jump 0 @SYN6_2849 jumps 15 @SYN6_2597 20 @SYN6_2618 30 @SYN6_2639 40 @SYN6_2660 50 @SYN6_2681 60 @SYN6_2702 70 @SYN6_2723 
+0872: jump_table_jumps 80 @SYN6_2744 90 @SYN6_2765 100 @SYN6_2786 -1 @SYN6_2849 -1 @SYN6_2849 -1 @SYN6_2849 -1 @SYN6_2849 -1 @SYN6_2849 -1 @SYN6_2849 
+
+:SYN6_2597
+142@ = 2 
+84@ = 20 
+jump @SYN6_2849 
+
+:SYN6_2618
+142@ = 3 
+84@ = 30 
+jump @SYN6_2849 
+
+:SYN6_2639
+142@ = 4 
+84@ = 40 
+jump @SYN6_2849 
+
+:SYN6_2660
+142@ = 5 
+84@ = 50 
+jump @SYN6_2849 
+
+:SYN6_2681
+142@ = 6 
+84@ = 60 
+jump @SYN6_2849 
+
+:SYN6_2702
+142@ = 7 
+84@ = 70 
+jump @SYN6_2849 
+
+:SYN6_2723
+142@ = 8 
+84@ = 80 
+jump @SYN6_2849 
+
+:SYN6_2744
+142@ = 9 
+84@ = 90 
+jump @SYN6_2849 
+
+:SYN6_2765
+142@ = 10 
+84@ = 100 
+jump @SYN6_2849 
+
+:SYN6_2786
+142@ = 0 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+Model.Destroy(#CELLPHONE)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+00BC: show_text_highpriority GXT 'SYN6_01' time 6000 flag 1  // ~s~Toreno's boarding a helicopter at a ~y~helipad~s~ nearby. Get there and stop him.
+84@ = 110 
+jump @SYN6_2849 
+
+:SYN6_2849
+if 
+  84@ == 110 
+jf @SYN6_2913 
+0687: clear_actor $PLAYER_ACTOR task 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+018A: 34@ = create_checkpoint_at -1680.377 705.462 30.2209 
+84@ = -13 
+85@ = 0 
+
+:SYN6_2913
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SYN6_2935 
+jump @SYN6_9290 
+
+:SYN6_2935
+if 
+0735:   is_keyboard_key_pressed 80 
+jf @SYN6_2957 
+Player.WantedLevel($PLAYER_CHAR) = 2
+
+:SYN6_2957
+if 
+0735:   is_keyboard_key_pressed 79 
+jf @SYN6_2979 
+Player.WantedLevel($PLAYER_CHAR) = 0
+
+:SYN6_2979
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @SYN6_3007 
+jump @SYN6_9204 
+
+:SYN6_3007
+if 
+  78@ == 1 
+jf @SYN6_3056 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN6_3056 
+60@ = 6 
+78@ = 0 
+
+:SYN6_3056
+if 
+  60@ == -99 
+jf @SYN6_3097 
+149@ = Car.Create(#MAVERICK, -1680.502, 705.6951, 29.6065)
+
+:SYN6_3097
+if 
+  60@ == -1 
+jf @SYN6_3891 
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @SYN6_3203 
+0395: clear_area 0 at -1704.324 637.5129 23.8959 radius 0.5 
+Camera.SetAtPos(-1704.324, 637.5129, 23.8959)
+Actor.PutAt($PLAYER_ACTOR, -1704.324, 637.5129, 23.8959)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.SetBehindPlayer
+
+:SYN6_3203
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1699.991 686.4141 20.0 radius 60.0 60.0 80.0 
+jf @SYN6_3297 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3297
+if 
+  60@ == -1 
+jf @SYN6_3396 
+if 
+056D:   actor 47@ defined 
+jf @SYN6_3396 
+if 
+051A:   actor 47@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3396 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3396
+if 
+  60@ == -1 
+jf @SYN6_3495 
+if 
+056D:   actor 48@ defined 
+jf @SYN6_3495 
+if 
+051A:   actor 48@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3495 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3495
+if 
+  60@ == -1 
+jf @SYN6_3594 
+if 
+056D:   actor 49@ defined 
+jf @SYN6_3594 
+if 
+051A:   actor 49@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3594 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3594
+if 
+  60@ == -1 
+jf @SYN6_3693 
+if 
+056D:   actor 50@ defined 
+jf @SYN6_3693 
+if 
+051A:   actor 50@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3693 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3693
+if 
+  60@ == -1 
+jf @SYN6_3792 
+if 
+056D:   actor 51@ defined 
+jf @SYN6_3792 
+if 
+051A:   actor 51@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3792 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3792
+if 
+  60@ == -1 
+jf @SYN6_3891 
+if 
+056D:   actor 52@ defined 
+jf @SYN6_3891 
+if 
+051A:   actor 52@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_3891 
+84@ = -13 
+0687: clear_actor $PLAYER_ACTOR task 
+Marker.Disable(34@)
+03DC: 62@ = create_marker_above_pickup 63@ 
+Marker.SetColor(62@, 1)
+72@ = 1 
+60@ += 1 
+
+:SYN6_3891
+if 
+  72@ == 1 
+jf @SYN6_4150 
+if 
+  73@ == 0 
+jf @SYN6_4027 
+if 
+   not Actor.Dead(52@)
+jf @SYN6_4027 
+0687: clear_actor 52@ task 
+Actor.StorePos($PLAYER_ACTOR, 69@, 70@, 71@)
+69@ += 5.0 
+70@ += 5.0 
+71@ += 15.0 
+0687: clear_actor 52@ task 
+0668: AS_actor 52@ rotate_and_shoot_at 69@ 70@ 71@ -1 ms 
+73@ = 1 
+33@ = 0 
+
+:SYN6_4027
+if 
+   not Actor.Dead(47@)
+jf @SYN6_4056 
+0687: clear_actor 47@ task 
+05E2: AS_actor 47@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_4056
+if 
+   not Actor.Dead(48@)
+jf @SYN6_4085 
+0687: clear_actor 48@ task 
+05E2: AS_actor 48@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_4085
+if 
+   not Actor.Dead(49@)
+jf @SYN6_4114 
+0687: clear_actor 49@ task 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_4114
+if 
+   not Actor.Dead(51@)
+jf @SYN6_4143 
+0687: clear_actor 51@ task 
+05E2: AS_actor 51@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_4143
+72@ = 2 
+
+:SYN6_4150
+if 
+  73@ == 1 
+jf @SYN6_4232 
+if 
+  33@ > 4000 
+jf @SYN6_4232 
+if 
+   not Actor.Dead(52@)
+jf @SYN6_4232 
+0687: clear_actor 52@ task 
+73@ = 99 
+33@ = 0 
+Actor.GiveWeaponAndAmmo(52@, Pistol, 9999)
+
+:SYN6_4232
+if 
+  73@ == 2 
+jf @SYN6_4276 
+if 
+  33@ > 6000 
+jf @SYN6_4276 
+73@ = 0 
+
+:SYN6_4276
+if 
+  65@ == 0 
+jf @SYN6_4301 
+65@ = 1 
+
+:SYN6_4301
+if 
+  2 > 65@ 
+jf @SYN6_4501 
+if 
+  60@ > 4 
+jf @SYN6_4501 
+if 
+  80@ == 0 
+jf @SYN6_4419 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_4419 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 149@ radius 250.0 250.0 100.0 flag 0 
+jf @SYN6_4419 
+05ED: freeze_car 149@ while_on_path 
+80@ = 1 
+
+:SYN6_4419
+if 
+  80@ == 1 
+jf @SYN6_4501 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_4501 
+if 
+0205:   actor $PLAYER_ACTOR near_car 149@ radius 250.0 250.0 100.0 flag 0 
+jf @SYN6_4501 
+05EE: unfreeze_car 149@ while_on_path 
+80@ = 0 
+
+:SYN6_4501
+if 
+  65@ == 1 
+jf @SYN6_4610 
+if 
+   Pickup.Picked_up(63@)
+jf @SYN6_4610 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_20' time 6000 flag 1  // ~s~Get on to the freeway and shoot that ~r~helicopter~s~ down.
+Marker.Disable(62@)
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_4603 
+34@ = Marker.CreateAboveCar(149@)
+03C4: set_status_text $7315 type 1 GXT 'SYN6_05' // global_variable  // Heli Health
+05EE: unfreeze_car 149@ while_on_path 
+
+:SYN6_4603
+65@ = 2 
+
+:SYN6_4610
+if 
+  65@ == 2 
+jf @SYN6_4628 
+
+:SYN6_4628
+if 
+  60@ == 0 
+jf @SYN6_4908 
+if 
+  60@ == 0 
+jf @SYN6_4762 
+if 
+05FC:   actor $PLAYER_ACTOR in_cube_fll_corner_at -1695.668 693.7705 29.5938 fur_corner_at -1665.865 693.7705 59.5943 angle 28.0 sphere 0 
+jf @SYN6_4762 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN6_4748 
+90@ = Actor.MissionCar($PLAYER_ACTOR)
+91@ = 1 
+
+:SYN6_4748
+92@ = 1 
+60@ += 1 
+
+:SYN6_4762
+if 
+  60@ == 0 
+jf @SYN6_4835 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1683.82 686.5125 23.9687 radius 2.0 2.0 2.0 
+jf @SYN6_4835 
+60@ += 1 
+
+:SYN6_4835
+if 
+  60@ == 0 
+jf @SYN6_4908 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1683.797 692.3915 27.586 radius 5.0 5.0 2.0 
+jf @SYN6_4908 
+60@ += 1 
+
+:SYN6_4908
+if 
+  60@ > 1 
+jf @SYN6_5213 
+if 
+  61@ == 0 
+jf @SYN6_5213 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1448.006 -1533.036 radius 200.0 200.0 
+jf @SYN6_5213 
+41@ = Actor.Create(CivMale, #WBDYG1, -1450.256, -1543.012, 100.7579)
+42@ = Actor.Create(CivMale, #WBDYG1, -1422.854, -1542.103, 100.7514)
+43@ = Actor.Create(CivMale, #WBDYG1, -1431.096, -1506.962, 100.7262)
+44@ = Actor.Create(CivMale, #WBDYG1, -1448.477, -1511.918, 100.7579)
+Actor.Angle(41@) = 269.8948
+Actor.Angle(42@) = 26.8258
+Actor.Angle(43@) = 223.7033
+Actor.Angle(44@) = 266.9233
+77@ = 0 
+
+:SYN6_5125
+if 
+  4 > 77@ 
+jf @SYN6_5206 
+Actor.GiveWeaponAndAmmo(41@(77@,6i), Pistol, 9999)
+02A9: set_actor 41@(77@,6i) immune_to_nonplayer 1 
+077A: set_actor 41@(77@,6i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0770: set_actor 41@(77@,6i) target_priority 1 
+77@ += 1 
+jump @SYN6_5125 
+
+:SYN6_5206
+61@ += 1 
+
+:SYN6_5213
+if 
+  60@ == 1 
+jf @SYN6_6081 
+if 
+07C1:   path 110 available 
+jf @SYN6_6077 
+if 
+   not fading 
+jf @SYN6_6070 
+03D5: remove_text 'SYN6_02'  // ~s~Toreno's men have ~g~heavy duty weaponry~s~ at their disposal. Claim it for yourself!
+Car.Destroy(53@)
+149@ = Car.Create(#MAVERICK, -1680.502, 705.6951, 29.6065)
+0825: set_helicopter 149@ instant_rotor_start 
+0229: set_car 149@ primary_color_to 10 secondary_color_to 125 
+56@ = Object.Create(#CARDBOARDBOX2, -1680.93, 705.7776, 30.6065)
+Object.CollisionDetection(56@) = False
+Object.KeepInMemory(56@) = True
+Object.CollisionDetection(56@) = False
+Car.Angle(149@) = 90.0
+Car.DoorStatus(149@) = 3
+084E: flying_vehicle 149@ use_primary_gun 1 
+Marker.Disable(34@)
+Car.ImmuneToNonPlayer(149@) = True
+Car.Health(149@) = 1500
+150@ = Actor.CreateAsDriver(CivMale, #WBDYG1, 149@)
+0770: set_actor 150@ target_priority 1 
+151@ = Actor.CreateAsPassenger(CivMale, #WBDYG1, 149@, 1)
+152@ = Actor.CreateAsPassenger(CivMale, #WBDYG1, 149@, 2)
+0657: car 149@ open_door 5 
+0657: car 149@ open_door 4 
+39@ = 0 
+
+:SYN6_5468
+if 
+  2 > 39@ 
+jf @SYN6_5588 
+0350: set_actor 151@(39@,2i) maintain_position_when_attacked 1 
+Actor.GiveWeaponAndAmmo(152@, AK47, 9999)
+Actor.GiveWeaponAndAmmo(151@, DesertEagle, 9999)
+02A9: set_actor 151@(39@,2i) immune_to_nonplayer 1 
+0446: set_actor 151@(39@,2i) dismemberment_possible 0 
+Actor.Health(151@(39@,2i)) = 300
+0770: set_actor 151@(39@,2i) target_priority 1 
+Actor.Health(151@(39@,2i)) = 500
+39@ += 1 
+jump @SYN6_5468 
+
+:SYN6_5588
+if 
+   Actor.InCar(151@, 149@)
+jf @SYN6_5689 
+Car.StorePos(149@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0362: remove_actor 151@ from_car_and_place_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0465: remove_actor 151@ from_turret_mode 
+0856: set_actor 151@ enable_crouch 1 
+0464: put_actor 151@ into_turret_on_car 149@ at_car_offset -1.0 -0.3 0.0 position 1 shooting_angle_limit 180.0 with_weapon 30 
+Actor.Angle(151@) = 200.0
+
+:SYN6_5689
+if 
+   Actor.InCar(152@, 149@)
+jf @SYN6_5788 
+Car.StorePos(149@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0362: remove_actor 152@ from_car_and_place_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0465: remove_actor 152@ from_turret_mode 
+0856: set_actor 152@ enable_crouch 1 
+0464: put_actor 152@ into_turret_on_car 149@ at_car_offset 1.2 -0.3 0.0 position 3 shooting_angle_limit 180.0 with_weapon 30 
+0639: AS_actor 152@ rotate_to_actor $PLAYER_ACTOR 
+
+:SYN6_5788
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+Camera.SetPosition(-1675.195, 699.6955, 36.8409, 0.0, 0.0, 0.0)
+Camera.PointAt(-1675.773, 700.2547, 36.2466, 2)
+89@ = 1 
+if 
+  92@ == 0 
+jf @SYN6_5923 
+Actor.PutAt($PLAYER_ACTOR, -1683.849, 692.0139, 27.586)
+Actor.Angle($PLAYER_ACTOR) = 304.0
+jump @SYN6_6008 
+
+:SYN6_5923
+if 
+  91@ == 1 
+jf @SYN6_6001 
+if 
+   not Car.Wrecked(90@)
+jf @SYN6_5994 
+Car.PutAt(90@, -1667.77, 728.9113, 49.8973)
+Car.Angle(90@) = 135.4521
+Car.LockInCurrentPosition(90@) = True
+
+:SYN6_5994
+jump @SYN6_6008 
+
+:SYN6_6001
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+
+:SYN6_6008
+0169: set_fade_color_RGB 1 0 0 
+05EB: assign_car 149@ to_path 110 
+04EB: AS_actor 151@ crouch 1 
+04EB: AS_actor 152@ crouch 1 
+if 
+   not Actor.Dead(50@)
+jf @SYN6_6053 
+
+:SYN6_6053
+06FD: set_car 149@ speed_on_path_to 3.0 
+60@ += 1 
+
+:SYN6_6070
+jump @SYN6_6081 
+
+:SYN6_6077
+07C0: load_path 110 
+
+:SYN6_6081
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_7720 
+if 
+  60@ == 2 
+jf @SYN6_6142 
+if 
+   not fading 
+jf @SYN6_6142 
+60@ += 1 
+33@ = 0 
+
+:SYN6_6142
+if 
+  60@ == 3 
+jf @SYN6_6167 
+60@ += 1 
+
+:SYN6_6167
+if 
+  60@ == 4 
+jf @SYN6_6237 
+if 
+  33@ > 1100 
+jf @SYN6_6237 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_6230 
+06FD: set_car 149@ speed_on_path_to 0.85 
+
+:SYN6_6230
+60@ += 1 
+
+:SYN6_6237
+if 
+  60@ == 5 
+jf @SYN6_6363 
+if 
+  33@ > 3000 
+jf @SYN6_6337 
+Object.Destroy(56@)
+89@ = 0 
+Camera.SetPosition(-1681.265, 685.2078, 30.6465, 0.0, 0.0, 0.0)
+Camera.PointAt(-1681.263, 686.2019, 30.5389, 2)
+
+:SYN6_6337
+if 
+  33@ > 6500 
+jf @SYN6_6363 
+60@ += 1 
+
+:SYN6_6363
+if 
+  60@ == 6 
+jf @SYN6_6938 
+if 
+   not fading 
+jf @SYN6_6938 
+if 
+   Car.Wrecked(57@)
+jf @SYN6_6455 
+Car.RemoveReferences(57@)
+57@ = Car.Create(#FCR900, -1705.198, 682.3814, 23.8906)
+Car.Angle(57@) = 181.5462
+jump @SYN6_6531 
+
+:SYN6_6455
+if 
+81AD:   not car 57@ sphere 0 near_point -1703.949 690.2634 radius 20.0 20.0 
+jf @SYN6_6531 
+Car.RemoveReferences(57@)
+57@ = Car.Create(#FCR900, -1705.198, 682.3814, 23.8906)
+Car.Angle(57@) = 181.5462
+
+:SYN6_6531
+78@ = 0 
+03D5: remove_text 'SYN6_03'  // ~s~The helicopter's airborne! Get that ~g~rocket launcher~s~ to bring it down!
+0169: set_fade_color_RGB 1 0 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+00BC: show_text_highpriority GXT 'SYN6_03' time 8000 flag 1  // ~s~The helicopter's airborne! Get that ~g~rocket launcher~s~ to bring it down!
+03F4: set_all_cars_apply_damage_rules 1 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_6643 
+if 
+   not Actor.Dead(151@)
+jf @SYN6_6620 
+
+:SYN6_6620
+if 
+860E:   not car 149@ assigned_to_path 
+jf @SYN6_6643 
+05EB: assign_car 149@ to_path 110 
+
+:SYN6_6643
+Object.Destroy(56@)
+89@ = 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  92@ == 1 
+jf @SYN6_6739 
+if 
+  91@ == 1 
+jf @SYN6_6732 
+if 
+   not Car.Wrecked(90@)
+jf @SYN6_6725 
+Car.LockInCurrentPosition(90@) = False
+
+:SYN6_6725
+jump @SYN6_6739 
+
+:SYN6_6732
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+
+:SYN6_6739
+if 
+   not Actor.Dead(52@)
+jf @SYN6_6775 
+0687: clear_actor 52@ task 
+085B: AS_actor 52@ set_kinda_stay_in_same_place 1 
+05E2: AS_actor 52@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_6775
+if 
+   not Actor.Dead(50@)
+jf @SYN6_6818 
+0687: clear_actor 50@ task 
+04EB: AS_actor 50@ crouch 0 
+085B: AS_actor 50@ set_kinda_stay_in_same_place 1 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_6818
+06FD: set_car 149@ speed_on_path_to 1.0 
+if 
+  92@ == 1 
+jf @SYN6_6908 
+if 
+  91@ == 1 
+jf @SYN6_6908 
+06FD: set_car 149@ speed_on_path_to 1.5 
+if 
+   not Actor.Dead(151@)
+jf @SYN6_6900 
+Actor.GiveWeaponAndAmmo(151@, RPG, 9999)
+
+:SYN6_6900
+Car.Health(149@) = 3000
+
+:SYN6_6908
+$7315 = 100 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 5000 
+60@ = 8 
+
+:SYN6_6938
+if 
+  60@ == 9 
+jf @SYN6_7016 
+if 
+01AF:   car 149@ sphere 0 in_sphere -1437.098 -1527.995 100.7504 radius 10.0 10.0 4.0 
+jf @SYN6_7016 
+05EC: release_car 149@ from_path 
+60@ += 1 
+
+:SYN6_7016
+if 
+  60@ == 10 
+jf @SYN6_7231 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_7231 
+if 
+0205:   actor $PLAYER_ACTOR near_car 149@ radius 40.0 40.0 40.0 flag 0 
+jf @SYN6_7231 
+00BC: show_text_highpriority GXT 'SYN6_07' time 5000 flag 1  // ~s~It's an ambush! Stop that ~r~helicopter~s~ from getting away!
+60@ += 1 
+if 
+   not Actor.Dead(151@)
+jf @SYN6_7150 
+04EB: AS_actor 151@ crouch 0 
+0465: remove_actor 151@ from_turret_mode 
+0687: clear_actor 151@ task 
+05E2: AS_actor 151@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7150
+if 
+   not Actor.Dead(152@)
+jf @SYN6_7191 
+04EB: AS_actor 152@ crouch 0 
+0687: clear_actor 152@ task 
+0465: remove_actor 152@ from_turret_mode 
+05E2: AS_actor 152@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7191
+Car.SetMaxSpeed(149@, 70.0)
+04A2: set_heli 149@ fly_to -23.2666 1210.668 100.3528 altitude_between 70.0 and 70.0 
+
+:SYN6_7231
+if 
+  60@ == 10 
+jf @SYN6_7429 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_7429 
+if 
+051C:   car 149@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYN6_7429 
+00BC: show_text_highpriority GXT 'SYN6_07' time 5000 flag 1  // ~s~It's an ambush! Stop that ~r~helicopter~s~ from getting away!
+60@ += 1 
+if 
+   not Actor.Dead(151@)
+jf @SYN6_7348 
+04EB: AS_actor 151@ crouch 0 
+0465: remove_actor 151@ from_turret_mode 
+0687: clear_actor 151@ task 
+05E2: AS_actor 151@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7348
+if 
+   not Actor.Dead(152@)
+jf @SYN6_7389 
+04EB: AS_actor 152@ crouch 0 
+0687: clear_actor 152@ task 
+0465: remove_actor 152@ from_turret_mode 
+05E2: AS_actor 152@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7389
+Car.SetMaxSpeed(149@, 70.0)
+04A2: set_heli 149@ fly_to -23.2666 1210.668 100.3528 altitude_between 70.0 and 70.0 
+
+:SYN6_7429
+if 
+  60@ == 11 
+jf @SYN6_7598 
+if 
+   not Actor.Dead(41@)
+jf @SYN6_7483 
+0687: clear_actor 41@ task 
+0961: set_actor 41@ keep_tasks_after_cleanup 1 
+05E2: AS_actor 41@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7483
+if 
+   not Actor.Dead(42@)
+jf @SYN6_7519 
+0687: clear_actor 42@ task 
+0961: set_actor 42@ keep_tasks_after_cleanup 1 
+05E2: AS_actor 42@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7519
+if 
+   not Actor.Dead(43@)
+jf @SYN6_7555 
+0687: clear_actor 43@ task 
+0961: set_actor 43@ keep_tasks_after_cleanup 1 
+05E2: AS_actor 43@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7555
+if 
+   not Actor.Dead(44@)
+jf @SYN6_7591 
+0687: clear_actor 44@ task 
+0961: set_actor 44@ keep_tasks_after_cleanup 1 
+05E2: AS_actor 44@ kill_actor $PLAYER_ACTOR 
+
+:SYN6_7591
+60@ += 1 
+
+:SYN6_7598
+if 
+  60@ == 8 
+jf @SYN6_7720 
+if 
+07C1:   path 111 available 
+jf @SYN6_7716 
+if 
+860E:   not car 149@ assigned_to_path 
+jf @SYN6_7709 
+if 
+  60@ == 8 
+jf @SYN6_7686 
+05EB: assign_car 149@ to_path 111 
+60@ += 1 
+jump @SYN6_7709 
+
+:SYN6_7686
+00BC: show_text_highpriority GXT 'SYN6_06' time 5000 flag 1  // ~r~You failed to destroy the helicopter!
+jump @SYN6_9204 
+
+:SYN6_7709
+jump @SYN6_7720 
+
+:SYN6_7716
+07C0: load_path 111 
+
+:SYN6_7720
+if 
+  60@ > 4 
+jf @SYN6_9079 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_8479 
+79@ = 0 
+$7315 = Car.Health(149@)
+$7315 -= 250 
+$7315 /= 10 
+if 
+  $7315 > 100 
+jf @SYN6_7809 
+$7315 = 100 
+
+:SYN6_7809
+if 
+  1 > $7315 
+jf @SYN6_7901 
+if 
+  83@ == 0 
+jf @SYN6_7894 
+if 
+   not 60@ == 99 
+jf @SYN6_7894 
+05EC: release_car 149@ from_path 
+0564: heli 149@ simulate_crash_landing 
+60@ = 99 
+83@ = 1 
+32@ = 0 
+
+:SYN6_7894
+$7315 = 0 
+
+:SYN6_7901
+if 
+  60@ > 7 
+jf @SYN6_8111 
+if 
+   not 92@ == 1 
+jf @SYN6_8111 
+if 
+   not 91@ == 1 
+jf @SYN6_8111 
+if 
+  79@ == 0 
+jf @SYN6_8021 
+if 
+0202:   actor $PLAYER_ACTOR near_car 149@ radius 100.0 100.0 sphere 0 
+jf @SYN6_8021 
+06FD: set_car 149@ speed_on_path_to 0.75 
+79@ = 1 
+
+:SYN6_8021
+if 
+  79@ == 0 
+jf @SYN6_8111 
+if 
+0202:   actor $PLAYER_ACTOR near_car 149@ radius 200.0 200.0 sphere 0 
+jf @SYN6_8094 
+06FD: set_car 149@ speed_on_path_to 0.5 
+79@ = 1 
+jump @SYN6_8111 
+
+:SYN6_8094
+06FD: set_car 149@ speed_on_path_to 0.3 
+79@ = 1 
+
+:SYN6_8111
+if 
+  10 > 60@ 
+jf @SYN6_8375 
+if 
+  81@ == 0 
+jf @SYN6_8224 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_8224 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 149@ radius 560.0 560.0 500.0 flag 0 
+jf @SYN6_8224 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_12' time 6000 flag 1  // ~s~Toreno's ~r~helicopter~s~ is getting out of range! Keep up!
+81@ = 1 
+
+:SYN6_8224
+if 
+  81@ == 1 
+jf @SYN6_8319 
+if 
+   not Car.Wrecked(149@)
+jf @SYN6_8319 
+if 
+0205:   actor $PLAYER_ACTOR near_car 149@ radius 400.0 400.0 400.0 flag 0 
+jf @SYN6_8319 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_13' time 6000 flag 1  // ~s~Good. Get close to the ~r~helicopter~s~ and shoot it down.
+81@ = 0 
+
+:SYN6_8319
+if 
+8202:   not actor $PLAYER_ACTOR near_car 149@ radius 700.0 700.0 sphere 0 
+jf @SYN6_8375 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_08' time 6000 flag 1  // ~r~Too late! Toreno's helicopter is well out of range now!
+jump @SYN6_9204 
+
+:SYN6_8375
+if 
+  60@ > 10 
+jf @SYN6_8472 
+if 
+   not 60@ == 99 
+jf @SYN6_8472 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 149@ radius 100.0 100.0 50.0 flag 0 
+jf @SYN6_8472 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_10' time 6000 flag 1  // ~r~Toreno's tricked you! He's left and you've got trouble!
+jump @SYN6_9204 
+
+:SYN6_8472
+jump @SYN6_8530 
+
+:SYN6_8479
+00BE: text_clear_all 
+if 
+  83@ == 0 
+jf @SYN6_8530 
+60@ = 99 
+05EC: release_car 149@ from_path 
+0564: heli 149@ simulate_crash_landing 
+83@ = 1 
+32@ = 0 
+
+:SYN6_8530
+if 
+  10 > 60@ 
+jf @SYN6_9079 
+39@ = 0 
+
+:SYN6_8555
+if 
+  2 > 39@ 
+jf @SYN6_9079 
+if 
+   not Actor.Dead(151@(39@,2i))
+jf @SYN6_9056 
+38@ = Actor.Health(151@(39@,2i))
+if 
+  93@(39@,3i) == 0 
+jf @SYN6_8676 
+if 
+  50 > 38@ 
+jf @SYN6_8676 
+04EB: AS_actor 151@(39@,2i) crouch 0 
+93@(39@,3i) = 1 
+0465: remove_actor 151@(39@,2i) from_turret_mode 
+
+:SYN6_8676
+if 
+  60@ > 6 
+jf @SYN6_9049 
+if 
+   not Actor.Dead(152@)
+jf @SYN6_8788 
+062E: get_actor 152@ task 1957 status_store_to 88@ // ret 7 if not found 
+if 
+04A4:   88@ == 7 // == constant 
+jf @SYN6_8788 
+if 
+00F2:   actor 152@ near_actor $PLAYER_ACTOR radius 60.0 60.0 0 
+jf @SYN6_8788 
+01B9: set_actor 152@ armed_weapon_to 30 
+07A5: AS_actor 152@ attack_actor $PLAYER_ACTOR time 4000 
+
+:SYN6_8788
+if 
+   not Actor.Dead(151@)
+jf @SYN6_9049 
+062E: get_actor 151@ task 1957 status_store_to 87@ // ret 7 if not found 
+if 
+04A4:   87@ == 7 // == constant 
+jf @SYN6_9049 
+if 
+  92@ == 1 
+jf @SYN6_8957 
+if 
+00F2:   actor 151@ near_actor $PLAYER_ACTOR radius 160.0 160.0 0 
+jf @SYN6_8950 
+if 
+   not 92@ == 1 
+jf @SYN6_8907 
+01B9: set_actor 151@ armed_weapon_to 24 
+
+:SYN6_8907
+if 
+  92@ == 1 
+jf @SYN6_8939 
+01B9: set_actor 151@ armed_weapon_to 30 
+Actor.WeaponAccuracy(151@) = 100
+
+:SYN6_8939
+07A5: AS_actor 151@ attack_actor $PLAYER_ACTOR time 4000 
+
+:SYN6_8950
+jump @SYN6_9049 
+
+:SYN6_8957
+if 
+00F2:   actor 151@ near_actor $PLAYER_ACTOR radius 60.0 60.0 0 
+jf @SYN6_9049 
+if 
+   not 92@ == 1 
+jf @SYN6_9013 
+01B9: set_actor 151@ armed_weapon_to 24 
+
+:SYN6_9013
+if 
+  92@ == 1 
+jf @SYN6_9038 
+01B9: set_actor 151@ armed_weapon_to 30 
+
+:SYN6_9038
+07A5: AS_actor 151@ attack_actor $PLAYER_ACTOR time 4000 
+
+:SYN6_9049
+jump @SYN6_9065 
+
+:SYN6_9056
+0465: remove_actor 151@(39@,2i) from_turret_mode 
+
+:SYN6_9065
+39@ += 1 
+jump @SYN6_8555 
+
+:SYN6_9079
+if 
+  83@ == 1 
+jf @SYN6_9197 
+if 
+  32@ > 5000 
+jf @SYN6_9197 
+if 
+   not Actor.Dead(151@)
+jf @SYN6_9144 
+04EB: AS_actor 151@ crouch 0 
+0465: remove_actor 151@ from_turret_mode 
+
+:SYN6_9144
+if 
+   not Actor.Dead(152@)
+jf @SYN6_9172 
+04EB: AS_actor 152@ crouch 0 
+0465: remove_actor 152@ from_turret_mode 
+
+:SYN6_9172
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SYN6_09' time 6000 flag 1  // ~s~Excellent. Toreno can't have survived that fireball.
+jump @SYN6_9290 
+
+:SYN6_9197
+jump @SYN6_1645 
+
+:SYN6_9204
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SYN6_9272 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:SYN6_9272
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:SYN6_9290
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$SYNDICATE_TOTAL_PASSED_MISSIONS += 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 18000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 18000
+0998: add_respect 50 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'SYND_6'  // Toreno's Last Flight
+030C: progress_made = 1 
+return 
+
+:SYN6_9359
+$1522 = 2 
+040D: unload_wav 3 
+Marker.Disable(34@)
+Marker.Disable(62@)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN6_9403 
+0555: remove_weapon 35 from_actor $PLAYER_ACTOR 
+
+:SYN6_9403
+0151: remove_status_text $7315 
+Model.Destroy(#ROCKETLA)
+Model.Destroy(#MAVERICK)
+Model.Destroy(#FCR900)
+Model.Destroy(#AK47)
+Model.Destroy(#COLT45)
+Model.Destroy(#WBDYG1)
+Model.Destroy(#PONY)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#DESERT_EAGLE)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

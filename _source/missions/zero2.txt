@@ -1,0 +1,1869 @@
+:ZERO2
+gosub @ZERO2_36 
+if 
+wasted_or_busted 
+jf @ZERO2_27 
+gosub @ZERO2_9413 
+
+:ZERO2_27
+gosub @ZERO2_9415 
+end_thread 
+
+:ZERO2_36
+119@ = 0 
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'ZERO2' 
+Player.CanMove($PLAYER_CHAR) = False
+054C: use_GXT_table 'ZERO2' 
+09B9: show_entered_car_name 0 
+0169: set_fade_color_RGB 0 0 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+select_interior 6 
+Player.CanMove($PLAYER_CHAR) = False
+set_weather 5 
+02E4: load_cutscene_data 'ZERO_2' 
+
+:ZERO2_126
+if 
+86B9:   not cutscene_data_loaded 
+jf @ZERO2_150 
+wait 0 
+jump @ZERO2_126 
+
+:ZERO2_150
+02E7: start_cutscene 
+fade 1 1000 
+Player.CanMove($PLAYER_CHAR) = False
+
+:ZERO2_166
+if 
+82E9:   not cutscene_reached_end 
+jf @ZERO2_190 
+wait 0 
+jump @ZERO2_166 
+
+:ZERO2_190
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:ZERO2_213
+if 
+fading 
+jf @ZERO2_237 
+wait 0 
+jump @ZERO2_213 
+
+:ZERO2_237
+02EA: end_cutscene 
+select_interior 0 
+Player.CanMove($PLAYER_CHAR) = False
+96@ = 1 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+110@ = 0 
+108@ = 0 
+109@ = 0 
+116@ = 0 
+117@ = 0 
+100@ = 0 
+101@ = 0 
+111@ = 0 
+112@ = 0 
+113@ = 0 
+121@ = 0 
+59@ = 390000.0 
+0087: 60@ = 59@ // (float) 
+63@ = -2006.77 
+68@ = 365.69 
+73@ = 34.35 
+78@ = 0.0 
+64@ = -2250.573 
+69@ = 22.8303 
+74@ = 34.4634 
+79@ = 180.0 
+65@ = -2266.27 
+70@ = 53.1194 
+75@ = 34.38 
+80@ = 90.0 
+66@ = -2441.424 
+71@ = 41.963 
+76@ = 33.004 
+81@ = 90.0 
+67@ = -1728.08 
+72@ = 850.89 
+77@ = 23.73 
+82@ = 270.0 
+103@ = 0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+122@ = 0 
+83@ = -2205.44 
+84@ = 128.99 
+85@ = 57.33 
+86@ = 90.0 
+87@ = -2227.0 
+88@ = 113.0 
+89@ = 35.5 
+61@ = 100.0 
+$7423 = 100 
+32@ = 0 
+129@ = 0 
+08E7: disable_entrance_markers 1 
+Model.Load(#RCBARON)
+Model.Load(#TOPFUN)
+Model.Load(#MICRO_UZI)
+Model.Load(#MTBIKE)
+Model.Load(#SANCHEZ)
+023C: load_special_actor 'ZERO' as 1 // models 290-299 
+038B: load_requested_models 
+
+:ZERO2_760
+if or
+   not Model.Available(#RCBARON)
+   not Model.Available(#TOPFUN)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#MTBIKE)
+   not Model.Available(#SANCHEZ)
+jf @ZERO2_807 
+wait 0 
+jump @ZERO2_760 
+
+:ZERO2_807
+if 
+823D:   not special_actor 1 loaded 
+jf @ZERO2_833 
+wait 0 
+jump @ZERO2_807 
+
+:ZERO2_833
+060A: create_decision_maker_type 0 store_to 56@ // decision\allowed\m_.ped files 
+
+:ZERO2_840
+wait 0 
+if 
+  96@ == 1 
+jf @ZERO2_869 
+gosub @ZERO2_951 
+
+:ZERO2_869
+if 
+  116@ == 1 
+jf @ZERO2_894 
+gosub @ZERO2_7177 
+
+:ZERO2_894
+if 
+  100@ == 1 
+jf @ZERO2_919 
+jump @ZERO2_9384 
+
+:ZERO2_919
+if 
+  101@ == 1 
+jf @ZERO2_944 
+jump @ZERO2_9413 
+
+:ZERO2_944
+jump @ZERO2_840 
+
+:ZERO2_951
+0395: clear_area 1 at 87@ 88@ 89@ radius 1000.0 
+35@ = Car.Create(#TOPFUN, -2250.9, 124.6, 28.48)
+0587: enable_car 35@ validate_position 0 
+Car.LockInCurrentPosition(35@) = True
+0657: car 35@ open_door 4 
+0657: car 35@ open_door 5 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+if 
+   not Car.Wrecked(35@)
+jf @ZERO2_1086 
+57@ = Actor.CreateAsPassenger(CivMale, #SPECIAL01, 35@, 0)
+Car.Health(35@) = 1000
+Car.SetImmunities(35@, 1, 1, 1, 1, 1)
+
+:ZERO2_1086
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+046E: put_player $PLAYER_CHAR in_RC_mode_at 83@ 84@ 85@ angle 40.09 RC_model #RCBARON 
+34@ = Player.RC_car($PLAYER_CHAR)
+Car.Angle(34@) = 90.0
+04D6: enable_RC_car_detonation 0 
+048A: set_RC_car_detonation 0 // or opcode 04D6 
+Car.Health(34@) = 1100
+Car.SetImmunities(34@, 0, 1, 1, 0, 0)
+129@ = 0 
+
+:ZERO2_1171
+if 
+  5 > 129@ 
+jf @ZERO2_1776 
+wait 0 
+0395: clear_area 1 at 63@(129@,5f) 68@(129@,5f) 73@(129@,5f) radius 1000.0 
+if 
+  129@ == 0 
+jf @ZERO2_1286 
+46@(129@,5i) = Car.Create(#SANCHEZ, 63@(129@,5f), 68@(129@,5f), 73@(129@,5f))
+Car.Health(46@(129@,5i)) = 1000
+
+:ZERO2_1286
+if 
+  129@ == 1 
+jf @ZERO2_1349 
+46@(129@,5i) = Car.Create(#MTBIKE, 63@(129@,5f), 68@(129@,5f), 73@(129@,5f))
+Car.Health(46@(129@,5i)) = 1500
+
+:ZERO2_1349
+if 
+  129@ == 2 
+jf @ZERO2_1412 
+46@(129@,5i) = Car.Create(#TOPFUN, 63@(129@,5f), 68@(129@,5f), 73@(129@,5f))
+Car.Health(46@(129@,5i)) = 1500
+
+:ZERO2_1412
+if 
+  129@ == 3 
+jf @ZERO2_1475 
+46@(129@,5i) = Car.Create(#TOPFUN, 63@(129@,5f), 68@(129@,5f), 73@(129@,5f))
+Car.Health(46@(129@,5i)) = 1500
+
+:ZERO2_1475
+if 
+  129@ == 4 
+jf @ZERO2_1549 
+46@(129@,5i) = Car.Create(#TOPFUN, 63@(129@,5f), 68@(129@,5f), 73@(129@,5f))
+Car.Health(46@(129@,5i)) = 1500
+Car.DoorStatus(46@(129@,5i)) = 7
+
+:ZERO2_1549
+Car.Angle(46@(129@,5i)) = 78@(129@,5f)
+Car.SetImmunities(46@(129@,5i), 0, 1, 1, 0, 0)
+0560: create_random_actor_in_car 46@(129@,5i) handle_as 36@(129@,5i) 
+Actor.GiveWeaponAndAmmo(36@(129@,5i), MicroUzi, 500)
+Actor.WeaponAccuracy(36@(129@,5i)) = 60
+0587: enable_car 46@(129@,5i) validate_position 0 
+if or
+  129@ == 3 
+  129@ == 0 
+jf @ZERO2_1728 
+0561: 51@(129@,5i) = create_passenger_in_car 46@(129@,5i) seat 0 
+Actor.GiveWeaponAndAmmo(51@(129@,5i), MicroUzi, 500)
+Actor.WeaponAccuracy(51@(129@,5i)) = 60
+060B: set_actor 51@(129@,5i) decision_maker_to 56@ 
+060B: set_actor 36@(129@,5i) decision_maker_to 56@ 
+
+:ZERO2_1728
+05D2: AS_actor 36@(129@,5i) run_to_and_hijack_car 46@(129@,5i) max_search_radius 3.0 traffic_behavior 0 
+103@(129@,5i) = 0 
+129@ += 1 
+jump @ZERO2_1171 
+
+:ZERO2_1776
+33@ = 0 
+Camera.SetPosition(-2273.841, 45.5794, 37.0987, 0.0, 0.0, 0.0)
+Camera.PointAt(-2273.297, 46.4174, 37.1385, 2)
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at -2285.54 41.31 35.01 radius 1000.0 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera -2273.841 45.5794 37.0987 position_to -2280.653 50.3058 35.7357 time 5000 smooth_transition 1 
+0920: point_camera -2273.297 46.4174 37.1385 transverse_to -2280.054 51.104 35.6677 time 5000 smooth_transition 1 
+02A3: enable_widescreen 1 
+32@ = 0 
+33@ = 0 
+0A0B: set_rendering_origin_at_3D_coord -2273.841 45.5794 37.0987 angle 310.0 
+0169: set_fade_color_RGB 0 0 0 
+wait 1000 
+fade 1 1000 
+120@ = 0 
+
+:ZERO2_2023
+if 
+   not 120@ == 10 
+jf @ZERO2_2460 
+wait 0 
+if 
+  120@ == 0 
+jf @ZERO2_2169 
+120@ = 1 
+0707: start_scene_skip_to @ZERO2_2460 
+03CF: load_wav 44801 as 1 
+
+:ZERO2_2086
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_2112 
+wait 0 
+jump @ZERO2_2086 
+
+:ZERO2_2112
+00BC: show_text_highpriority GXT 'ZER2_AB' time 10000 flag 1  // ~z~Berkley has his sycophantic lackeys do all his deliveries.
+03D1: play_wav 1 
+
+:ZERO2_2132
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_2158 
+wait 0 
+jump @ZERO2_2132 
+
+:ZERO2_2158
+03D5: remove_text 'ZER2_AB'  // ~z~Berkley has his sycophantic lackeys do all his deliveries.
+
+:ZERO2_2169
+if 
+  120@ == 1 
+jf @ZERO2_2286 
+120@ = 2 
+03CF: load_wav 44802 as 1 
+
+:ZERO2_2203
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_2229 
+wait 0 
+jump @ZERO2_2203 
+
+:ZERO2_2229
+00BC: show_text_highpriority GXT 'ZER2_AC' time 10000 flag 1  // ~z~Well, we shall hit him where it hurts the most!
+03D1: play_wav 1 
+
+:ZERO2_2249
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_2275 
+wait 0 
+jump @ZERO2_2249 
+
+:ZERO2_2275
+03D5: remove_text 'ZER2_AC'  // ~z~Well, we shall hit him where it hurts the most!
+
+:ZERO2_2286
+if 
+  120@ == 2 
+jf @ZERO2_2403 
+120@ = 3 
+03CF: load_wav 44803 as 1 
+
+:ZERO2_2320
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_2346 
+wait 0 
+jump @ZERO2_2320 
+
+:ZERO2_2346
+00BC: show_text_highpriority GXT 'ZER2_AD' time 10000 flag 1  // ~z~Bring his mail order model business to its knees!
+03D1: play_wav 1 
+
+:ZERO2_2366
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_2392 
+wait 0 
+jump @ZERO2_2366 
+
+:ZERO2_2392
+03D5: remove_text 'ZER2_AD'  // ~z~Bring his mail order model business to its knees!
+
+:ZERO2_2403
+if 
+08D0:   should_skip_cutscene 
+jf @ZERO2_2427 
+040D: unload_wav 1 
+120@ = 10 
+
+:ZERO2_2427
+if 
+  32@ > 5000 
+jf @ZERO2_2453 
+120@ = 10 
+
+:ZERO2_2453
+jump @ZERO2_2023 
+
+:ZERO2_2460
+0701: end_scene_skip 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_2477
+if 
+fading 
+jf @ZERO2_2501 
+wait 0 
+jump @ZERO2_2477 
+
+:ZERO2_2501
+0925: restore_camera_to_user_defined 
+if 
+   not Car.Wrecked(35@)
+jf @ZERO2_2556 
+Car.PutAt(35@, -2233.9, 122.6, 700.48)
+Car.Angle(35@) = 90.0
+Car.LockInCurrentPosition(35@) = True
+
+:ZERO2_2556
+041E: set_radio_station 6 
+if 
+   not Car.Wrecked(35@)
+jf @ZERO2_2581 
+0508: car 35@ close_all_doors 
+
+:ZERO2_2581
+02A3: enable_widescreen 0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Camera.Restore_WithJumpCut
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_2641 
+Camera.OnVehicle(34@, 18, 2)
+Car.LockInCurrentPosition(34@) = False
+wait 0 
+032A: set_behind_camera_mode_to 1 
+
+:ZERO2_2641
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:ZERO2_2656
+if 
+fading 
+jf @ZERO2_2680 
+wait 0 
+jump @ZERO2_2656 
+
+:ZERO2_2680
+Player.CanMove($PLAYER_CHAR) = True
+129@ = 0 
+
+:ZERO2_2694
+if 
+  5 > 129@ 
+jf @ZERO2_2762 
+if 
+   not Actor.Dead(36@(129@,5i))
+jf @ZERO2_2748 
+123@(129@,5i) = Marker.CreateAboveActor(36@(129@,5i))
+
+:ZERO2_2748
+129@ += 1 
+jump @ZERO2_2694 
+
+:ZERO2_2762
+03C4: set_status_text $7423 type 1 GXT 'ZER2_28' // global_variable  // FUEL ~1~
+040D: unload_wav 1 
+03CF: load_wav 44800 as 1 
+
+:ZERO2_2791
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_2817 
+wait 0 
+jump @ZERO2_2791 
+
+:ZERO2_2817
+00BC: show_text_highpriority GXT 'ZER2_AA' time 10000 flag 1  // ~z~Launch the Red Baron!
+03D1: play_wav 1 
+
+:ZERO2_2837
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_2863 
+wait 0 
+jump @ZERO2_2837 
+
+:ZERO2_2863
+03D5: remove_text 'ZER2_AA'  // ~z~Launch the Red Baron!
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_7019 
+
+:ZERO2_2890
+if 
+   not 110@ == 1 
+jf @ZERO2_7019 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_3017 
+if 
+00E1:   player 0 pressed_key 16 
+jf @ZERO2_2989 
+007F: 59@ -= frame_delta_time * 20.0 // (float) 
+0087: 61@ = 59@ // (float) 
+0073: 61@ /= 60@ // (float) 
+61@ *= 100.0 
+0090: $7423 = float 61@ to_integer 
+
+:ZERO2_2989
+Car.StorePos(34@, 83@, 84@, 85@)
+07EF: get_town_number_from_point 83@ 84@ 85@ store_to 58@ 
+
+:ZERO2_3017
+if or
+04A4:   58@ == 1 // == constant 
+04A4:   58@ == 3 // == constant 
+jf @ZERO2_3052 
+020B: explode_car 34@ 
+020B: explode_car 34@ 
+
+:ZERO2_3052
+if 
+  119@ == 0 
+jf @ZERO2_3095 
+03E5: show_text_box 'ZER2_1'  // Press ~k~~VEHICLE_ACCELERATE~ to increase throttle. Press ~k~~VEHICLE_BRAKE~ to decrease throttle.
+119@ = 1 
+32@ = 0 
+
+:ZERO2_3095
+if 
+  119@ == 1 
+jf @ZERO2_3159 
+if 
+  32@ > 8000 
+jf @ZERO2_3159 
+03E6: remove_text_box 
+03E5: show_text_box 'ZER2_2'  // Press ~k~~VEHICLE_LOOKLEFT~ to turn left and ~k~~VEHICLE_LOOKRIGHT~ to turn right using the rudder.
+119@ = 2 
+32@ = 0 
+
+:ZERO2_3159
+if 
+  119@ == 2 
+jf @ZERO2_3223 
+if 
+  32@ > 8000 
+jf @ZERO2_3223 
+03E6: remove_text_box 
+03E5: show_text_box 'ZER2_30'  // Press ~k~~VEHICLE_FIREWEAPON_ALT~ to fire Machine Guns.
+119@ = 3 
+32@ = 0 
+
+:ZERO2_3223
+if 
+  119@ == 3 
+jf @ZERO2_3285 
+if 
+  32@ > 8000 
+jf @ZERO2_3285 
+03E6: remove_text_box 
+00BC: show_text_highpriority GXT 'ZER2_14' time 10000 flag 1  // ~s~Destroy the~r~ couriers ~s~before they complete their deliveries.
+119@ = 4 
+
+:ZERO2_3285
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @ZERO2_3353 
+wait 0 
+wait 0 
+wait 0 
+wait 0 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+100@ = 1 
+101@ = 0 
+return 
+
+:ZERO2_3353
+if 
+  122@ == 0 
+jf @ZERO2_3488 
+if 
+  50 >= $7423 
+jf @ZERO2_3488 
+122@ = 1 
+03CF: load_wav 44811 as 1 
+
+:ZERO2_3405
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_3431 
+wait 0 
+jump @ZERO2_3405 
+
+:ZERO2_3431
+00BC: show_text_highpriority GXT 'ZER2_DA' time 10000 flag 1  // ~z~Watch your fuel, Carl, only half a tank left!
+03D1: play_wav 1 
+
+:ZERO2_3451
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_3477 
+wait 0 
+jump @ZERO2_3451 
+
+:ZERO2_3477
+03D5: remove_text 'ZER2_DA'  // ~z~Watch your fuel, Carl, only half a tank left!
+
+:ZERO2_3488
+if 
+  122@ == 1 
+jf @ZERO2_3623 
+if 
+  10 >= $7423 
+jf @ZERO2_3623 
+122@ = 2 
+03CF: load_wav 44812 as 1 
+
+:ZERO2_3540
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_3566 
+wait 0 
+jump @ZERO2_3540 
+
+:ZERO2_3566
+00BC: show_text_highpriority GXT 'ZER2_DB' time 10000 flag 1  // ~z~You're nearly out of fuel, hurry up!
+03D1: play_wav 1 
+
+:ZERO2_3586
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_3612 
+wait 0 
+jump @ZERO2_3586 
+
+:ZERO2_3612
+03D5: remove_text 'ZER2_DB'  // ~z~You're nearly out of fuel, hurry up!
+
+:ZERO2_3623
+if 
+  0 >= $7423 
+jf @ZERO2_4040 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_3671 
+0918: set_car 34@ engine_operation 0 
+01EC: make_car 34@ very_heavy 1 
+
+:ZERO2_3671
+0151: remove_status_text $7423 
+32@ = 0 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BC: show_text_highpriority GXT 'ZER2_42' time 5000 flag 1  // ~r~You ran out of fuel!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+03CF: load_wav 44623 as 1 
+
+:ZERO2_3773
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_3799 
+wait 0 
+jump @ZERO2_3773 
+
+:ZERO2_3799
+03D1: play_wav 1 
+
+:ZERO2_3803
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_3855 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_3848 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO2_3848
+jump @ZERO2_3803 
+
+:ZERO2_3855
+04DB: exit_RC_mode // on foot version 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_3946 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_3916 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_3936 
+
+:ZERO2_3916
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_3936
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_3946
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_3961
+if 
+fading 
+jf @ZERO2_3985 
+wait 0 
+jump @ZERO2_3961 
+
+:ZERO2_3985
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_4014
+if 
+fading 
+jf @ZERO2_4038 
+wait 0 
+jump @ZERO2_4014 
+
+:ZERO2_4038
+return 
+
+:ZERO2_4040
+if 
+   Car.Wrecked(34@)
+jf @ZERO2_4390 
+0151: remove_status_text $7423 
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+96@ = 0 
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+03CF: load_wav 44622 as 1 
+
+:ZERO2_4123
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_4149 
+wait 0 
+jump @ZERO2_4123 
+
+:ZERO2_4149
+03D1: play_wav 1 
+
+:ZERO2_4153
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_4205 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_4198 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO2_4198
+jump @ZERO2_4153 
+
+:ZERO2_4205
+04DB: exit_RC_mode // on foot version 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_4296 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_4266 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_4286 
+
+:ZERO2_4266
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_4286
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_4296
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_4311
+if 
+fading 
+jf @ZERO2_4335 
+wait 0 
+jump @ZERO2_4311 
+
+:ZERO2_4335
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_4364
+if 
+fading 
+jf @ZERO2_4388 
+wait 0 
+jump @ZERO2_4364 
+
+:ZERO2_4388
+return 
+
+:ZERO2_4390
+129@ = 0 
+
+:ZERO2_4397
+if 
+  5 > 129@ 
+jf @ZERO2_6915 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_5037 
+Car.StorePos(34@, 83@, 84@, 85@)
+if 
+  111@(129@,5i) == 0 
+jf @ZERO2_5037 
+if 
+   not Actor.Dead(36@(129@,5i))
+jf @ZERO2_4516 
+if 
+  103@(129@,5i) == 1 
+jf @ZERO2_4509 
+
+:ZERO2_4509
+jump @ZERO2_5037 
+
+:ZERO2_4516
+111@(129@,5i) = 1 
+Marker.Disable(123@(129@,5i))
+Car.RemoveReferences(46@(129@,5i))
+if or
+  129@ == 3 
+  129@ == 0 
+jf @ZERO2_4579 
+Actor.RemoveReferences(51@(129@,5i))
+
+:ZERO2_4579
+121@ += 1 
+111@(129@,5i) = 1 
+if 
+  121@ == 1 
+jf @ZERO2_4707 
+03CF: load_wav 44806 as 1 
+
+:ZERO2_4624
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_4650 
+wait 0 
+jump @ZERO2_4624 
+
+:ZERO2_4650
+00BC: show_text_highpriority GXT 'ZER2_CA' time 10000 flag 1  // ~z~One down, four to go!
+03D1: play_wav 1 
+
+:ZERO2_4670
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_4696 
+wait 0 
+jump @ZERO2_4670 
+
+:ZERO2_4696
+03D5: remove_text 'ZER2_CA'  // ~z~One down, four to go!
+
+:ZERO2_4707
+if 
+  121@ == 2 
+jf @ZERO2_4817 
+03CF: load_wav 44808 as 1 
+
+:ZERO2_4734
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_4760 
+wait 0 
+jump @ZERO2_4734 
+
+:ZERO2_4760
+00BC: show_text_highpriority GXT 'ZER2_CC' time 10000 flag 1  // ~z~Ha ha, only three delivery boys left!
+03D1: play_wav 1 
+
+:ZERO2_4780
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_4806 
+wait 0 
+jump @ZERO2_4780 
+
+:ZERO2_4806
+03D5: remove_text 'ZER2_CC'  // ~z~Ha ha, only three delivery boys left!
+
+:ZERO2_4817
+if 
+  121@ == 3 
+jf @ZERO2_4927 
+03CF: load_wav 44809 as 1 
+
+:ZERO2_4844
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_4870 
+wait 0 
+jump @ZERO2_4844 
+
+:ZERO2_4870
+00BC: show_text_highpriority GXT 'ZER2_CD' time 10000 flag 1  // ~z~Only two left now, Carl - HUNT THEM DOWN!
+03D1: play_wav 1 
+
+:ZERO2_4890
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_4916 
+wait 0 
+jump @ZERO2_4890 
+
+:ZERO2_4916
+03D5: remove_text 'ZER2_CD'  // ~z~Only two left now, Carl - HUNT THEM DOWN!
+
+:ZERO2_4927
+if 
+  121@ == 4 
+jf @ZERO2_5037 
+03CF: load_wav 44810 as 1 
+
+:ZERO2_4954
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_4980 
+wait 0 
+jump @ZERO2_4954 
+
+:ZERO2_4980
+00BC: show_text_highpriority GXT 'ZER2_CE' time 10000 flag 1  // ~z~Just one more and Berkley's mail order department is finished!
+03D1: play_wav 1 
+
+:ZERO2_5000
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_5026 
+wait 0 
+jump @ZERO2_5000 
+
+:ZERO2_5026
+03D5: remove_text 'ZER2_CE'  // ~z~Just one more and Berkley's mail order department is finished!
+
+:ZERO2_5037
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_6567 
+01BD: 95@ = current_time_in_ms 
+if 
+81AF:   not car 34@ sphere 0 in_sphere 91@ 92@ 93@ radius 1.5 1.5 1.5 
+jf @ZERO2_5137 
+Car.StorePos(34@, 91@, 92@, 93@)
+0085: 94@ = 95@ // (int) 
+94@ += 4000 
+117@ = 0 
+
+:ZERO2_5137
+if 
+01AF:   car 34@ sphere 0 in_sphere 91@ 92@ 93@ radius 1.5 1.5 1.5 
+jf @ZERO2_5625 
+if 
+001D:   95@ > 94@ // (int) 
+jf @ZERO2_5625 
+if 
+  119@ > 3 
+jf @ZERO2_5625 
+if 
+  117@ == 0 
+jf @ZERO2_5252 
+03E5: show_text_box 'ZER2_4'  // Press ~k~~PED_FIREWEAPON~ to self-destruct
+117@ = 1 
+
+:ZERO2_5252
+if 
+00E1:   player 0 pressed_key 17 
+jf @ZERO2_5625 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Car.Health(34@) = 1
+0151: remove_status_text $7423 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_5451 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_5421 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_5441 
+
+:ZERO2_5421
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_5441
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_5451
+020C: create_explosion_with_radius 0 at 91@ 92@ 93@ 
+03CF: load_wav 44623 as 1 
+
+:ZERO2_5473
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_5499 
+wait 0 
+jump @ZERO2_5473 
+
+:ZERO2_5499
+03D1: play_wav 1 
+
+:ZERO2_5503
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_5529 
+wait 0 
+jump @ZERO2_5503 
+
+:ZERO2_5529
+04DB: exit_RC_mode // on foot version 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_5546
+if 
+fading 
+jf @ZERO2_5570 
+wait 0 
+jump @ZERO2_5546 
+
+:ZERO2_5570
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_5599
+if 
+fading 
+jf @ZERO2_5623 
+wait 0 
+jump @ZERO2_5599 
+
+:ZERO2_5623
+return 
+
+:ZERO2_5625
+if 
+   not Car.Wrecked(46@(129@,5i))
+jf @ZERO2_6560 
+if 
+  103@(129@,5i) == 0 
+jf @ZERO2_6313 
+if or
+051D:   car 46@(129@,5i) damaged_by_car 34@ 
+031E:   car 46@(129@,5i) hit_by_weapon 31 
+jf @ZERO2_6313 
+103@(129@,5i) = 1 
+if or
+  129@ == 2 
+  129@ == 1 
+jf @ZERO2_6021 
+if 
+   not Actor.Dead(36@(129@,5i))
+jf @ZERO2_6014 
+05CF: AS_actor 36@(129@,5i) exit_car 46@(129@,5i) in_direction 83@ 84@ 85@ 
+0672: AS_actor 36@(129@,5i) attack_car 34@ 
+if 
+  129@ == 1 
+jf @ZERO2_5904 
+03CF: load_wav 44805 as 1 
+
+:ZERO2_5821
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_5847 
+wait 0 
+jump @ZERO2_5821 
+
+:ZERO2_5847
+00BC: show_text_highpriority GXT 'ZER2_BB' time 10000 flag 1  // ~z~He's armed his lieutenants, be careful, Carl!
+03D1: play_wav 1 
+
+:ZERO2_5867
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_5893 
+wait 0 
+jump @ZERO2_5867 
+
+:ZERO2_5893
+03D5: remove_text 'ZER2_BB'  // ~z~He's armed his lieutenants, be careful, Carl!
+
+:ZERO2_5904
+if 
+  129@ == 2 
+jf @ZERO2_6014 
+03CF: load_wav 44804 as 1 
+
+:ZERO2_5931
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_5957 
+wait 0 
+jump @ZERO2_5931 
+
+:ZERO2_5957
+00BC: show_text_highpriority GXT 'ZER2_BA' time 10000 flag 1  // ~z~Don't let him get away, punish him for his war crimes!
+03D1: play_wav 1 
+
+:ZERO2_5977
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_6003 
+wait 0 
+jump @ZERO2_5977 
+
+:ZERO2_6003
+03D5: remove_text 'ZER2_BA'  // ~z~Don't let him get away, punish him for his war crimes!
+
+:ZERO2_6014
+jump @ZERO2_6102 
+
+:ZERO2_6021
+if 
+   not Car.Wrecked(46@(129@,5i))
+jf @ZERO2_6102 
+if 
+   not Actor.Dead(36@(129@,5i))
+jf @ZERO2_6102 
+if 
+   not 129@ == 4 
+jf @ZERO2_6102 
+05D2: AS_actor 36@(129@,5i) run_to_and_hijack_car 46@(129@,5i) max_search_radius 12.0 traffic_behavior 3 
+
+:ZERO2_6102
+if or
+  129@ == 3 
+  129@ == 0 
+jf @ZERO2_6203 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_6203 
+if 
+   not Actor.Dead(51@(129@,5i))
+jf @ZERO2_6203 
+0713: actor 51@(129@,5i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 1000.0 8 0 firing_rate 100 
+
+:ZERO2_6203
+if 
+  129@ == 0 
+jf @ZERO2_6313 
+03CF: load_wav 44631 as 1 
+
+:ZERO2_6230
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_6256 
+wait 0 
+jump @ZERO2_6230 
+
+:ZERO2_6256
+00BC: show_text_highpriority GXT 'ZER1_FH' time 10000 flag 1  // ~z~Fight or die Carl, it's the only choice we have.
+03D1: play_wav 1 
+
+:ZERO2_6276
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_6302 
+wait 0 
+jump @ZERO2_6276 
+
+:ZERO2_6302
+03D5: remove_text 'ZER1_FH'  // ~z~Fight or die Carl, it's the only choice we have.
+
+:ZERO2_6313
+if 
+  119@ == 4 
+jf @ZERO2_6560 
+if 
+   not Car.Wrecked(46@(129@,5i))
+jf @ZERO2_6560 
+if 
+01AF:   car 46@(129@,5i) sphere 0 in_sphere 83@ 84@ 85@ radius 50.0 50.0 50.0 
+jf @ZERO2_6458 
+if 
+02CA:   car 46@(129@,5i) bounding_sphere_visible 
+jf @ZERO2_6458 
+if 
+  98@ == 0 
+jf @ZERO2_6458 
+00BB: show_text_lowpriority GXT 'ZER2_7' time 5000 flag 1  // ~s~Line up RC Baron behind the ~r~courier~s~.
+98@ = 1 
+
+:ZERO2_6458
+if 
+01AF:   car 46@(129@,5i) sphere 0 in_sphere 83@ 84@ 85@ radius 30.0 30.0 30.0 
+jf @ZERO2_6560 
+if 
+02CA:   car 46@(129@,5i) bounding_sphere_visible 
+jf @ZERO2_6560 
+if 
+  98@ == 1 
+jf @ZERO2_6560 
+03E5: show_text_box 'ZER2_30'  // Press ~k~~VEHICLE_FIREWEAPON_ALT~ to fire Machine Guns.
+98@ = 2 
+
+:ZERO2_6560
+jump @ZERO2_6901 
+
+:ZERO2_6567
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+96@ = 0 
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+0151: remove_status_text $7423 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_6698 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_6668 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_6688 
+
+:ZERO2_6668
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_6688
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_6698
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+03CF: load_wav 44622 as 1 
+
+:ZERO2_6723
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_6749 
+wait 0 
+jump @ZERO2_6723 
+
+:ZERO2_6749
+03D1: play_wav 1 
+
+:ZERO2_6753
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_6805 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_6798 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO2_6798
+jump @ZERO2_6753 
+
+:ZERO2_6805
+04DB: exit_RC_mode // on foot version 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_6822
+if 
+fading 
+jf @ZERO2_6846 
+wait 0 
+jump @ZERO2_6822 
+
+:ZERO2_6846
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_6875
+if 
+fading 
+jf @ZERO2_6899 
+wait 0 
+jump @ZERO2_6875 
+
+:ZERO2_6899
+return 
+
+:ZERO2_6901
+129@ += 1 
+jump @ZERO2_4397 
+
+:ZERO2_6915
+if 
+  111@ == 1 
+jf @ZERO2_7012 
+if 
+  112@ == 1 
+jf @ZERO2_7012 
+if 
+  113@ == 1 
+jf @ZERO2_7012 
+if 
+  114@ == 1 
+jf @ZERO2_7012 
+if 
+  115@ == 1 
+jf @ZERO2_7012 
+110@ = 1 
+
+:ZERO2_7012
+jump @ZERO2_2890 
+
+:ZERO2_7019
+96@ = 0 
+100@ = 0 
+116@ = 1 
+108@ = 0 
+018A: 128@ = create_checkpoint_at -2237.31 140.08 57.23 
+03CF: load_wav 44816 as 1 
+
+:ZERO2_7076
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_7102 
+wait 0 
+jump @ZERO2_7076 
+
+:ZERO2_7102
+00BC: show_text_highpriority GXT 'ZER2_EB' time 10000 flag 1  // ~z~Now get her back home in one piece, before she runs out of fuel!
+03D1: play_wav 1 
+
+:ZERO2_7122
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_7148 
+wait 0 
+jump @ZERO2_7122 
+
+:ZERO2_7148
+03D5: remove_text 'ZER2_EB'  // ~z~Now get her back home in one piece, before she runs out of fuel!
+00BC: show_text_highpriority GXT 'ZER2_41' time 5000 flag 1  // ~s~Fly back to ~y~Zero's roof.
+return 
+
+:ZERO2_7177
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_8352 
+02E3: 62@ = car 34@ speed 
+if 
+00E1:   player 0 pressed_key 16 
+jf @ZERO2_7262 
+007F: 59@ -= frame_delta_time * 20.0 // (float) 
+0087: 61@ = 59@ // (float) 
+0073: 61@ /= 60@ // (float) 
+61@ *= 100.0 
+0090: $7423 = float 61@ to_integer 
+
+:ZERO2_7262
+if or
+04A4:   58@ == 1 // == constant 
+04A4:   58@ == 3 // == constant 
+jf @ZERO2_7297 
+020B: explode_car 34@ 
+020B: explode_car 34@ 
+
+:ZERO2_7297
+01BD: 95@ = current_time_in_ms 
+if 
+81AF:   not car 34@ sphere 0 in_sphere 91@ 92@ 93@ radius 1.5 1.5 1.5 
+jf @ZERO2_7381 
+Car.StorePos(34@, 91@, 92@, 93@)
+0085: 94@ = 95@ // (int) 
+94@ += 4000 
+117@ = 0 
+
+:ZERO2_7381
+if 
+01AF:   car 34@ sphere 0 in_sphere 91@ 92@ 93@ radius 1.5 1.5 1.5 
+jf @ZERO2_7889 
+if 
+001D:   95@ > 94@ // (int) 
+jf @ZERO2_7889 
+if 
+  119@ > 3 
+jf @ZERO2_7889 
+if 
+  117@ == 0 
+jf @ZERO2_7496 
+03E5: show_text_box 'ZER2_4'  // Press ~k~~PED_FIREWEAPON~ to self-destruct
+117@ = 1 
+
+:ZERO2_7496
+if 
+00E1:   player 0 pressed_key 17 
+jf @ZERO2_7889 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Car.Health(34@) = 1
+0151: remove_status_text $7423 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_7695 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_7665 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_7685 
+
+:ZERO2_7665
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_7685
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_7695
+020C: create_explosion_with_radius 0 at 91@ 92@ 93@ 
+020B: explode_car 34@ 
+020B: explode_car 34@ 
+020B: explode_car 34@ 
+020B: explode_car 34@ 
+03CF: load_wav 44623 as 1 
+
+:ZERO2_7737
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_7763 
+wait 0 
+jump @ZERO2_7737 
+
+:ZERO2_7763
+03D1: play_wav 1 
+
+:ZERO2_7767
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_7793 
+wait 0 
+jump @ZERO2_7767 
+
+:ZERO2_7793
+04DB: exit_RC_mode // on foot version 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_7810
+if 
+fading 
+jf @ZERO2_7834 
+wait 0 
+jump @ZERO2_7810 
+
+:ZERO2_7834
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_7863
+if 
+fading 
+jf @ZERO2_7887 
+wait 0 
+jump @ZERO2_7863 
+
+:ZERO2_7887
+return 
+
+:ZERO2_7889
+if 
+01AF:   car 34@ sphere 1 in_sphere -2237.31 140.08 57.23 radius 4.0 4.0 4.0 
+jf @ZERO2_8345 
+Player.CanMove($PLAYER_CHAR) = False
+96@ = 0 
+100@ = 1 
+116@ = 0 
+108@ = 0 
+0918: set_car 34@ engine_operation 0 
+01EC: make_car 34@ very_heavy 1 
+01E3: show_text_1number_styled GXT 'M_PASS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 5000
+0394: play_music 1 
+03CF: load_wav 44818 as 1 
+
+:ZERO2_8026
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_8052 
+wait 0 
+jump @ZERO2_8026 
+
+:ZERO2_8052
+00BC: show_text_highpriority GXT 'ZER2_FB' time 10000 flag 1  // ~z~The smell, you know that ozone smell,
+03D1: play_wav 1 
+
+:ZERO2_8072
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_8098 
+wait 0 
+jump @ZERO2_8072 
+
+:ZERO2_8098
+03D5: remove_text 'ZER2_FB'  // ~z~The smell, you know that ozone smell,
+03CF: load_wav 44819 as 1 
+
+:ZERO2_8118
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_8144 
+wait 0 
+jump @ZERO2_8118 
+
+:ZERO2_8144
+00BC: show_text_highpriority GXT 'ZER2_FC' time 10000 flag 1  // ~z~smells like... victory!
+03D1: play_wav 1 
+
+:ZERO2_8164
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_8190 
+wait 0 
+jump @ZERO2_8164 
+
+:ZERO2_8190
+03D5: remove_text 'ZER2_FC'  // ~z~smells like... victory!
+04DB: exit_RC_mode // on foot version 
+0151: remove_status_text $7423 
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_8314 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_8284 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_8304 
+
+:ZERO2_8284
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_8304
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_8314
+wait 1200 
+
+:ZERO2_8319
+if 
+fading 
+jf @ZERO2_8343 
+wait 0 
+jump @ZERO2_8319 
+
+:ZERO2_8343
+return 
+
+:ZERO2_8345
+jump @ZERO2_8688 
+
+:ZERO2_8352
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+96@ = 0 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+32@ = 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_8485 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_8455 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_8475 
+
+:ZERO2_8455
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_8475
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_8485
+03CF: load_wav 44622 as 1 
+
+:ZERO2_8494
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_8520 
+wait 0 
+jump @ZERO2_8494 
+
+:ZERO2_8520
+03D1: play_wav 1 
+
+:ZERO2_8524
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_8576 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_8569 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO2_8569
+jump @ZERO2_8524 
+
+:ZERO2_8576
+04DB: exit_RC_mode // on foot version 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_8593
+if 
+fading 
+jf @ZERO2_8617 
+wait 0 
+jump @ZERO2_8593 
+
+:ZERO2_8617
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_8646
+if 
+fading 
+jf @ZERO2_8670 
+wait 0 
+jump @ZERO2_8646 
+
+:ZERO2_8670
+00BC: show_text_highpriority GXT 'ZER2_8' time 10000 flag 1  // ~r~The plane was destroyed!
+return 
+
+:ZERO2_8688
+if 
+  122@ == 0 
+jf @ZERO2_8823 
+if 
+  50 >= $7423 
+jf @ZERO2_8823 
+122@ = 1 
+03CF: load_wav 44811 as 1 
+
+:ZERO2_8740
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_8766 
+wait 0 
+jump @ZERO2_8740 
+
+:ZERO2_8766
+00BC: show_text_highpriority GXT 'ZER2_DA' time 10000 flag 1  // ~z~Watch your fuel, Carl, only half a tank left!
+03D1: play_wav 1 
+
+:ZERO2_8786
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_8812 
+wait 0 
+jump @ZERO2_8786 
+
+:ZERO2_8812
+03D5: remove_text 'ZER2_DA'  // ~z~Watch your fuel, Carl, only half a tank left!
+
+:ZERO2_8823
+if 
+  122@ == 1 
+jf @ZERO2_8958 
+if 
+  20 >= $7423 
+jf @ZERO2_8958 
+122@ = 2 
+03CF: load_wav 44812 as 1 
+
+:ZERO2_8875
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_8901 
+wait 0 
+jump @ZERO2_8875 
+
+:ZERO2_8901
+00BC: show_text_highpriority GXT 'ZER2_DB' time 10000 flag 1  // ~z~You're nearly out of fuel, hurry up!
+03D1: play_wav 1 
+
+:ZERO2_8921
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_8947 
+wait 0 
+jump @ZERO2_8921 
+
+:ZERO2_8947
+03D5: remove_text 'ZER2_DB'  // ~z~You're nearly out of fuel, hurry up!
+
+:ZERO2_8958
+if 
+  0 >= $7423 
+jf @ZERO2_9382 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_9006 
+0918: set_car 34@ engine_operation 0 
+01EC: make_car 34@ very_heavy 1 
+
+:ZERO2_9006
+32@ = 0 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BC: show_text_highpriority GXT 'ZER2_42' time 5000 flag 1  // ~r~You ran out of fuel!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+32@ = 0 
+0151: remove_status_text $7423 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO2_9195 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_9165 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+jump @ZERO2_9185 
+
+:ZERO2_9165
+Actor.PutAt($PLAYER_ACTOR, -2244.444, 136.8633, 34.3203)
+
+:ZERO2_9185
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_9195
+03CF: load_wav 44623 as 1 
+
+:ZERO2_9204
+if 
+83D0:   not wav 1 loaded 
+jf @ZERO2_9230 
+wait 0 
+jump @ZERO2_9204 
+
+:ZERO2_9230
+03D1: play_wav 1 
+
+:ZERO2_9234
+if 
+83D2:   not wav 1 ended 
+jf @ZERO2_9286 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO2_9279 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO2_9279
+jump @ZERO2_9234 
+
+:ZERO2_9286
+04DB: exit_RC_mode // on foot version 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:ZERO2_9303
+if 
+fading 
+jf @ZERO2_9327 
+wait 0 
+jump @ZERO2_9303 
+
+:ZERO2_9327
+Camera.SetAtPos(-2245.026, 126.895, 34.3047)
+wait 1000 
+fade 1 1000 
+
+:ZERO2_9356
+if 
+fading 
+jf @ZERO2_9380 
+wait 0 
+jump @ZERO2_9356 
+
+:ZERO2_9380
+return 
+
+:ZERO2_9382
+return 
+
+:ZERO2_9384
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'ZERO_2'  // Supply Lines...
+030C: progress_made = 1 
+$ZERO_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:ZERO2_9413
+return 
+
+:ZERO2_9415
+08E7: disable_entrance_markers 0 
+0925: restore_camera_to_user_defined 
+09B9: show_entered_car_name 1 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @ZERO2_9494 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO2_9494 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO2_9494
+$ONMISSION = 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+if 
+   not Car.Wrecked(35@)
+jf @ZERO2_9554 
+Car.Health(35@) = 300
+0587: enable_car 35@ validate_position 1 
+Car.SetImmunities(35@, 0, 0, 0, 0, 0)
+
+:ZERO2_9554
+Car.RemoveReferences(35@)
+01B7: release_weather 
+Marker.Disable(128@)
+Car.Destroy(46@)
+Car.Destroy(47@)
+Car.Destroy(48@)
+Car.Destroy(49@)
+Car.Destroy(50@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(54@)
+Marker.Disable(123@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+Marker.Disable(126@)
+Marker.Disable(127@)
+04DB: exit_RC_mode // on foot version 
+Model.Destroy(#TOPFUN)
+Model.Destroy(#RCBARON)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#MTBIKE)
+Model.Destroy(#SANCHEZ)
+0296: unload_special_actor 1 
+Actor.DestroyWithFade(57@)
+0151: remove_status_text $7423 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+00BE: text_clear_all 
+mission_cleanup 
+return

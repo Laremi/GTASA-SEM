@@ -1,0 +1,2293 @@
+:SYND4
+thread 'SYND4' 
+gosub @SYND4_94 
+if 
+wasted_or_busted 
+jf @SYND4_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @SYND4_12038 
+
+:SYND4_85
+gosub @SYND4_12483 
+end_thread 
+
+:SYND4_94
+$7303 = 0.0 
+$7304 = 0.0 
+$7305 = 0.0 
+$7306 = 0.0 
+$7307 = 0.0 
+$7308 = 0.0 
+$7309 = 0 
+$7310 = 0 
+$7311 = 0 
+$7312 = 0 
+117@ = 0 
+97@ = 2 
+054C: use_GXT_table 'SYN4' 
+07FB: set_interior 'PDOMES' access 1  // The Pleasure Domes
+07FB: set_interior 'PDOMES2' access 0  // The Pleasure Domes
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:SYND4_248
+if 
+fading 
+jf @SYND4_272 
+wait 0 
+jump @SYND4_248 
+
+:SYND4_272
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E4: load_cutscene_data 'SYND_4A' 
+
+:SYND4_311
+if 
+86B9:   not cutscene_data_loaded 
+jf @SYND4_335 
+wait 0 
+jump @SYND4_311 
+
+:SYND4_335
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:SYND4_352
+if 
+82E9:   not cutscene_reached_end 
+jf @SYND4_376 
+wait 0 
+jump @SYND4_352 
+
+:SYND4_376
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:SYND4_390
+if 
+fading 
+jf @SYND4_414 
+wait 0 
+jump @SYND4_390 
+
+:SYND4_414
+02EA: end_cutscene 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+select_interior 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_475 
+08C7: put_actor $PLAYER_ACTOR at -2031.196 161.1839 27.8516 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 268.0468
+Camera.SetBehindPlayer
+
+:SYND4_475
+0169: set_fade_color_RGB 0 0 0 
+Model.Load(#SILENCED)
+Model.Load(#BMYBOUN)
+Model.Load(#WMYBOUN)
+Model.Load(#STRETCH)
+Model.Load(#MICRO_UZI)
+Model.Load(#BROADWAY)
+Model.Load(#STRETCH)
+Model.Load(#BMOSEC)
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 3 of_actors_pedtype 25 to_actors_pedtype 0 
+0746: set_acquaintance 1 of_actors_pedtype 25 to_actors_pedtype 25 
+060A: create_decision_maker_type 0 store_to 55@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 47@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 88@ // decision\allowed\m_.ped files 
+
+:SYND4_568
+if or
+   not Model.Available(#SILENCED)
+   not Model.Available(#BMYBOUN)
+   not Model.Available(#WMYBOUN)
+   not Model.Available(#STRETCH)
+   not Model.Available(#MICRO_UZI)
+jf @SYND4_615 
+wait 0 
+jump @SYND4_568 
+
+:SYND4_615
+if or
+   not Model.Available(#STRETCH)
+   not Model.Available(#BROADWAY)
+   not Model.Available(#BMOSEC)
+jf @SYND4_652 
+wait 0 
+jump @SYND4_615 
+
+:SYND4_652
+0A0B: set_rendering_origin_at_3D_coord -2031.196 161.1839 27.8359 angle 268.0468 
+0395: clear_area 1 at -2624.548 1412.131 6.1094 radius 10.0 
+062F: 52@ = create_group_type 2 
+06AE: create_group_decision_maker_type 0 store_to 53@ // decision\allowed\mission.grp 
+06AD: set_group 52@ group_decision_maker_to 53@ 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_788 
+0615: define_AS_pack_begin 58@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2643.993 1405.895 905.2734 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0638: AS_actor -1 stay_put 1 
+05D6: clear_scmpath 
+0616: define_AS_pack_end 58@ 
+
+:SYND4_788
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_964 
+0615: define_AS_pack_begin 120@ 
+0603: AS_actor -1 goto_point_any_means -2664.286 1420.904 905.2812 mode 4 use_car -1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 120@ 
+0615: define_AS_pack_begin 121@ 
+0603: AS_actor -1 goto_point_any_means -2662.241 1418.222 905.277 mode 4 use_car -1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 121@ 
+0615: define_AS_pack_begin 122@ 
+0603: AS_actor -1 goto_point_any_means -2671.858 1420.603 905.2812 mode 4 use_car -1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 122@ 
+0615: define_AS_pack_begin 123@ 
+0603: AS_actor -1 goto_point_any_means -2667.221 1421.774 905.2812 mode 4 use_car -1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 123@ 
+
+:SYND4_964
+0615: define_AS_pack_begin 72@ 
+0603: AS_actor -1 goto_point_any_means -2674.171 1394.553 917.3582 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 94.4524 
+0643: set_AS_pack 72@ loop 1 
+0616: define_AS_pack_end 72@ 
+0615: define_AS_pack_begin 81@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2666.142 1420.576 905.277 
+05D7: add_point_to_scmpath -2654.33 1420.092 905.2812 
+05D8: AS_assign_scmpath to_actor -1 flags 7 0 
+05D6: clear_scmpath 
+0616: define_AS_pack_end 81@ 
+0615: define_AS_pack_begin 73@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2663.897 1420.509 905.2812 
+05D7: add_point_to_scmpath -2655.542 1418.905 905.2812 
+05D7: add_point_to_scmpath -2648.745 1416.988 905.2812 
+05D7: add_point_to_scmpath -2645.276 1410.547 905.2812 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05D6: clear_scmpath 
+0616: define_AS_pack_end 73@ 
+0615: define_AS_pack_begin 67@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2627.831 1404.959 905.4609 
+05D7: add_point_to_scmpath -2627.514 1406.607 905.4609 
+05D7: add_point_to_scmpath -2635.924 1408.306 905.4609 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+05D6: clear_scmpath 
+05B9: AS_actor -1 stay_idle 4000 ms 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2629.451 1406.773 905.4609 
+05D7: add_point_to_scmpath -2626.714 1403.41 905.4609 
+05D7: add_point_to_scmpath -2629.224 1402.585 905.4598 
+05D7: add_point_to_scmpath -2639.513 1399.569 911.4133 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+05D6: clear_scmpath 
+0616: define_AS_pack_end 67@ 
+0615: define_AS_pack_begin 57@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2663.024 1430.271 911.3984 
+05D7: add_point_to_scmpath -2677.841 1429.663 911.3921 
+05D7: add_point_to_scmpath -2688.757 1426.88 905.4531 
+05D7: add_point_to_scmpath -2686.493 1422.207 905.4531 
+05D7: add_point_to_scmpath -2677.769 1421.948 905.4531 
+05D7: add_point_to_scmpath -2664.318 1423.618 905.2734 
+05D7: add_point_to_scmpath -2651.408 1423.601 905.2734 
+05D7: add_point_to_scmpath -2642.101 1416.098 905.2812 
+05D8: AS_assign_scmpath to_actor -1 flags 7 0 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2633.106 1415.721 905.4531 
+05D8: AS_assign_scmpath to_actor -1 flags 7 0 
+05D6: clear_scmpath 
+0616: define_AS_pack_end 57@ 
+0615: define_AS_pack_begin 42@ 
+05C9: AS_actor -1 on_guard 4000 ms 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05C8: AS_actor -1 look_around 
+0643: set_AS_pack 42@ loop 1 
+0616: define_AS_pack_end 42@ 
+0615: define_AS_pack_begin 68@ 
+0638: AS_actor -1 stay_put 1 
+074D: AS_actor -1 turns_to_and_look_at_actor $PLAYER_ACTOR timelimit -1 
+0643: set_AS_pack 68@ loop 1 
+0616: define_AS_pack_end 68@ 
+62@ = Car.Create(#STRETCH, -2634.061, 1395.498, 6.1186)
+Car.Angle(62@) = 3.5285
+0229: set_car 62@ primary_color_to 0 secondary_color_to 0 
+053F: set_car 62@ tires_vulnerability 0 
+Car.Health(62@) = 2000
+63@ = Car.Create(#STRETCH, -2613.48, 1416.568, 6.1432)
+Car.Angle(63@) = 272.3133
+0229: set_car 63@ primary_color_to 0 secondary_color_to 0 
+053F: set_car 63@ tires_vulnerability 0 
+Car.Health(63@) = 2000
+0674: set_car_model #BROADWAY numberplate "HO_2_HO_" 
+64@ = Car.Create(#BROADWAY, -2611.471, 1409.036, 6.1335)
+Car.Angle(64@) = 274.4727
+0229: set_car 64@ primary_color_to 4 secondary_color_to 4 
+Car.Health(64@) = 1000
+0615: define_AS_pack_begin 124@ 
+0603: AS_actor -1 goto_point_any_means -2622.981 1413.107 6.1137 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 196.019 
+0643: set_AS_pack 124@ loop 1 
+0616: define_AS_pack_end 124@ 
+0615: define_AS_pack_begin 125@ 
+0603: AS_actor -1 goto_point_any_means -2626.409 1411.96 6.1094 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 190.6977 
+0643: set_AS_pack 125@ loop 1 
+0616: define_AS_pack_end 125@ 
+49@ = Actor.Create(Mission2, #BMYBOUN, -2622.981, 1413.107, 6.1137)
+Actor.Angle(49@) = 196.019
+50@ = Actor.Create(Mission2, #WMYBOUN, -2626.409, 1411.96, 6.1094)
+Actor.Angle(50@) = 190.6977
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 30000)
+01B9: set_actor 49@ armed_weapon_to 28 
+Actor.WeaponAccuracy(49@) = 90
+Actor.GiveWeaponAndAmmo(50@, MicroUzi, 30000)
+01B9: set_actor 50@ armed_weapon_to 28 
+Actor.WeaponAccuracy(50@) = 90
+060B: set_actor 49@ decision_maker_to 47@ 
+060B: set_actor 50@ decision_maker_to 47@ 
+0618: assign_actor 49@ to_AS_pack 124@ 
+0618: assign_actor 50@ to_AS_pack 125@ 
+018A: 59@ = create_checkpoint_at -2623.937 1410.79 6.1152 
+018A: 60@ = create_checkpoint_at -2636.385 1402.485 905.4609 
+08DC: create_interior_marker 60@ at -2661.74 1423.483 radius 100.0 
+018B: set_marker 60@ radar_mode 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_2098 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Silenced, 200)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 23 
+
+:SYND4_2098
+32@ = 0 
+0169: set_fade_color_RGB 0 0 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+00BC: show_text_highpriority GXT 'SYN4_20' time 9000 flag 1  // ~s~Go pay Jizzy a visit at the ~y~Pleasure Domes club~s~!
+
+:SYND4_2144
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_3535 
+wait 0 
+gosub @SYND4_12990 
+gosub @SYND4_13804 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SYND4_2200 
+jump @SYND4_12321 
+
+:SYND4_2200
+if 
+  117@ == 0 
+jf @SYND4_2418 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_2318 
+if 
+0457:   player $PLAYER_CHAR aiming_at_actor 49@ 
+jf @SYND4_2318 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_2282 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_2282
+if 
+   not Actor.Dead(50@)
+jf @SYND4_2311 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_2311
+117@ = 1 
+
+:SYND4_2318
+if 
+   not Actor.Dead(50@)
+jf @SYND4_2418 
+if 
+0457:   player $PLAYER_CHAR aiming_at_actor 50@ 
+jf @SYND4_2418 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_2382 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_2382
+if 
+   not Actor.Dead(50@)
+jf @SYND4_2411 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_2411
+117@ = 1 
+
+:SYND4_2418
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_3473 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere -2623.937 1410.79 6.1152 radius 1.2 1.2 1.2 on_foot 
+jf @SYND4_3473 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_2505 
+Player.CanMove($PLAYER_CHAR) = False
+
+:SYND4_2505
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Marker.Disable(59@)
+gosub @SYND4_12858 
+if and
+   not Actor.Dead(49@)
+   not Actor.Dead(50@)
+jf @SYND4_3234 
+if and
+851A:   not actor 49@ damaged_by_actor $PLAYER_ACTOR 
+851A:   not actor 50@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYND4_3234 
+05BF: AS_actor 50@ look_at_actor $PLAYER_ACTOR 6000 ms 
+gosub @SYND4_12858 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_2646 
+08C7: put_actor $PLAYER_ACTOR at -2624.112 1410.473 6.1149 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 13.4662
+
+:SYND4_2646
+05BF: AS_actor 49@ look_at_actor $PLAYER_ACTOR 6000 ms 
+Camera.SetPosition(-2623.714, 1409.642, 7.7873, 0.0, 0.0, 0.0)
+Camera.PointAt(-2623.871, 1410.628, 7.7269, 2)
+wait 1000 
+0209: $7309 = random_int_in_ranges 0 3 
+0871: init_jump_table $7309 total_jumps 3 default_jump 0 @SYND4_3166 jumps 0 @SYND4_2785 1 @SYND4_2912 2 @SYND4_3039 -1 @SYND4_3166 -1 @SYND4_3166 -1 @SYND4_3166 -1 @SYND4_3166 
+
+:SYND4_2785
+040D: unload_wav 1 
+03CF: load_wav 39411 as 1 
+
+:SYND4_2798
+if 
+83D0:   not wav 1 loaded 
+jf @SYND4_2824 
+wait 0 
+jump @SYND4_2798 
+
+:SYND4_2824
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN4_BA' time 4000 flag 1  // ~z~Sorry, man, private function.
+33@ = 0 
+
+:SYND4_2851
+if 
+  4000 > 33@ 
+jf @SYND4_2905 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_2898 
+jump @SYND4_3398 
+
+:SYND4_2898
+jump @SYND4_2851 
+
+:SYND4_2905
+jump @SYND4_3166 
+
+:SYND4_2912
+040D: unload_wav 1 
+03CF: load_wav 39412 as 1 
+
+:SYND4_2925
+if 
+83D0:   not wav 1 loaded 
+jf @SYND4_2951 
+wait 0 
+jump @SYND4_2925 
+
+:SYND4_2951
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN4_BB' time 4000 flag 1  // ~z~Jizzy doesn't want to be disturbed.
+33@ = 0 
+
+:SYND4_2978
+if 
+  4000 > 33@ 
+jf @SYND4_3032 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_3025 
+jump @SYND4_3398 
+
+:SYND4_3025
+jump @SYND4_2978 
+
+:SYND4_3032
+jump @SYND4_3166 
+
+:SYND4_3039
+040D: unload_wav 1 
+03CF: load_wav 39413 as 1 
+
+:SYND4_3052
+if 
+83D0:   not wav 1 loaded 
+jf @SYND4_3078 
+wait 0 
+jump @SYND4_3052 
+
+:SYND4_3078
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN4_BC' time 4000 flag 1  // ~z~You ain't getting in!
+33@ = 0 
+
+:SYND4_3105
+if 
+  4000 > 33@ 
+jf @SYND4_3159 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_3152 
+jump @SYND4_3398 
+
+:SYND4_3152
+jump @SYND4_3105 
+
+:SYND4_3159
+jump @SYND4_3166 
+
+:SYND4_3166
+33@ = 0 
+
+:SYND4_3173
+if 
+  1000 > 33@ 
+jf @SYND4_3234 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_3227 
+70@ = 1 
+jump @SYND4_3398 
+
+:SYND4_3227
+jump @SYND4_3173 
+
+:SYND4_3234
+Camera.SetPosition(-2671.127, 1432.594, 25.4663, 0.0, 0.0, 0.0)
+Camera.PointAt(-2670.43, 1431.881, 25.3871, 2)
+00BC: show_text_highpriority GXT 'SYN4_12' time 5000 flag 1  // ~s~Use the ~y~Skylight ~s~to get into the club!
+0876: unknown_cube_cornera 2682.42 1420.237 28.0 cornerB -2630.365 1411.699 28.0 flag 3 flag 0 
+33@ = 0 
+
+:SYND4_3344
+if 
+  5000 > 33@ 
+jf @SYND4_3398 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_3391 
+jump @SYND4_3398 
+
+:SYND4_3391
+jump @SYND4_3344 
+
+:SYND4_3398
+gosub @SYND4_12889 
+018A: 61@ = create_checkpoint_at -2661.924 1424.278 22.8906 
+if 
+  70@ == 1 
+jf @SYND4_3459 
+00BC: show_text_highpriority GXT 'SYN4_12' time 5000 flag 1  // ~s~Use the ~y~Skylight ~s~to get into the club!
+
+:SYND4_3459
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+jump @SYND4_3542 
+
+:SYND4_3473
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2660.145 1419.211 22.8906 radius 5.0 5.0 5.0 
+jf @SYND4_3528 
+jump @SYND4_3542 
+
+:SYND4_3528
+jump @SYND4_2144 
+
+:SYND4_3535
+jump @SYND4_12038 
+
+:SYND4_3542
+Model.Load(#BMYDRUG)
+Model.Load(#HMYDRUG)
+Model.Load(#HFYRI)
+Model.Load(#BFYPRO)
+Model.Load(#BMYDJ)
+Model.Load(#MICRO_UZI)
+Model.Load(#VWFYWAI)
+Model.Load(#COLT45)
+023C: load_special_actor 'JIZZY' as 1 // models 290-299 
+Model.Load(#VHFYST3)
+04ED: load_animation "SWAT" 
+
+:SYND4_3603
+if or
+   not Model.Available(#BMYDRUG)
+   not Model.Available(#HMYDRUG)
+   not Model.Available(#HFYRI)
+   not Model.Available(#BFYPRO)
+   not Model.Available(#BMYDJ)
+jf @SYND4_3645 
+wait 0 
+jump @SYND4_3603 
+
+:SYND4_3645
+if or
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#VWFYWAI)
+   not Model.Available(#COLT45)
+823D:   not special_actor 1 loaded 
+84EE:   not animation "SWAT" loaded 
+   not Model.Available(#VHFYST3)
+jf @SYND4_3699 
+wait 0 
+jump @SYND4_3645 
+
+:SYND4_3699
+39@ = Actor.Create(Special, #SPECIAL01, -2669.127, 1426.919, 905.4609)
+0860: link_actor 39@ to_interior 3 
+Actor.SetWalkStyle(39@, "GANG1")
+0746: set_acquaintance 4 of_actors_pedtype 23 to_actors_pedtype 0 
+Actor.Angle(39@) = 238.0256
+060F: set_actor 39@ melee_accuracy_to 5.0 
+060B: set_actor 39@ decision_maker_to 55@ 
+44@ = Actor.Create(CivFemale, #BFYPRO, -2667.656, 1425.854, 905.4609)
+0860: link_actor 44@ to_interior 3 
+Actor.Angle(44@) = 76.4221
+0568: set_actor 44@ untargetable 1 
+0677: AS_actor 39@ chat_with_actor 44@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 44@ chat_with_actor 39@ lead_speaker_flag 0 unknown_flag 1 
+43@ = Marker.CreateAboveActor(39@)
+018B: set_marker 43@ radar_mode 0 
+0615: define_AS_pack_begin 79@ 
+06B0: AS_actor -1 sit_down 200000 ms 
+05C9: AS_actor -1 on_guard 2000 ms 
+0643: set_AS_pack 79@ loop 1 
+0616: define_AS_pack_end 79@ 
+0615: define_AS_pack_begin 80@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0618: assign_actor -1 to_AS_pack 79@ 
+0616: define_AS_pack_end 80@ 
+34@ = Actor.Create(Mission1, #BMYDRUG, -2665.236, 1429.884, 905.4609)
+Actor.Angle(34@) = 133.1702
+0618: assign_actor 34@ to_AS_pack 80@ 
+35@ = Actor.Create(Mission1, #HMYDRUG, -2667.102, 1430.024, 905.4609)
+Actor.Angle(35@) = 180.876
+0618: assign_actor 35@ to_AS_pack 79@ 
+36@ = Actor.Create(Mission1, #BMYDRUG, -2665.064, 1428.402, 905.4609)
+Actor.Angle(36@) = 106.0457
+0618: assign_actor 36@ to_AS_pack 79@ 
+37@ = Actor.Create(Mission1, #BFYPRO, -2668.117, 1429.933, 905.4609)
+Actor.Angle(37@) = 180.876
+0618: assign_actor 37@ to_AS_pack 80@ 
+0615: define_AS_pack_begin 112@ 
+0603: AS_actor -1 goto_point_any_means -2655.508 1410.566 905.2734 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 263.3926 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0603: AS_actor -1 goto_point_any_means -2655.892 1406.675 905.2734 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 181.7338 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0643: set_AS_pack 112@ loop 1 
+0616: define_AS_pack_end 112@ 
+0615: define_AS_pack_begin 113@ 
+0603: AS_actor -1 goto_point_any_means -2660.268 1413.959 905.2734 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 348.451 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0603: AS_actor -1 goto_point_any_means -2662.841 1413.732 905.2808 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 96.5734 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0643: set_AS_pack 113@ loop 1 
+0616: define_AS_pack_end 113@ 
+102@ = Actor.Create(Mission3, #VWFYWAI, -2655.508, 1410.566, 905.2734)
+Actor.Angle(102@) = 263.3926
+103@ = Actor.Create(Mission3, #VWFYWAI, -2660.268, 1413.959, 905.2734)
+Actor.Angle(103@) = 348.451
+0618: assign_actor 102@ to_AS_pack 112@ 
+0618: assign_actor 103@ to_AS_pack 113@ 
+104@ = Actor.Create(Mission3, #BMYDRUG, -2657.269, 1403.575, 905.2812)
+Actor.Angle(104@) = 271.0479
+105@ = Actor.Create(Mission3, #BFYPRO, -2654.617, 1404.656, 905.2812)
+Actor.Angle(105@) = 87.3589
+0677: AS_actor 104@ chat_with_actor 105@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 105@ chat_with_actor 104@ lead_speaker_flag 1 unknown_flag 1 
+40@ = 0 
+
+:SYND4_4466
+if 
+   not Actor.Dead(34@(40@,5i))
+jf @SYND4_4556 
+0860: link_actor 34@(40@,5i) to_interior 3 
+0770: set_actor 34@(40@,5i) target_priority 1 
+Actor.GiveWeaponAndAmmo(34@(40@,5i), MicroUzi, 30000)
+01B9: set_actor 34@(40@,5i) armed_weapon_to 28 
+Actor.WeaponAccuracy(34@(40@,5i)) = 70
+060B: set_actor 34@(40@,5i) decision_maker_to 55@ 
+
+:SYND4_4556
+if 
+   not Actor.Dead(102@(40@,10i))
+jf @SYND4_4587 
+0860: link_actor 102@(40@,10i) to_interior 3 
+
+:SYND4_4587
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_4466 
+$ONMISSION = 1 
+increment_mission_attempts 
+018A: 54@ = create_checkpoint_at -2655.075 1431.789 912.4016 
+08DC: create_interior_marker 54@ at -2661.74 1423.483 radius 100.0 
+018B: set_marker 54@ radar_mode 0 
+Camera.SetBehindPlayer
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2653.217 1424.867 906.7266 
+32@ = 0 
+
+:SYND4_4692
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_5263 
+wait 0 
+if 
+  117@ == 0 
+jf @SYND4_4930 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_4830 
+if 
+0457:   player $PLAYER_CHAR aiming_at_actor 49@ 
+jf @SYND4_4830 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_4794 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_4794
+if 
+   not Actor.Dead(50@)
+jf @SYND4_4823 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_4823
+117@ = 1 
+
+:SYND4_4830
+if 
+   not Actor.Dead(50@)
+jf @SYND4_4930 
+if 
+0457:   player $PLAYER_CHAR aiming_at_actor 50@ 
+jf @SYND4_4930 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_4894 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_4894
+if 
+   not Actor.Dead(50@)
+jf @SYND4_4923 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_4923
+117@ = 1 
+
+:SYND4_4930
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @SYND4_4952 
+jump @SYND4_12321 
+
+:SYND4_4952
+gosub @SYND4_12990 
+gosub @SYND4_13804 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2661.01 1415.384 921.1953 radius 20.0 20.0 20.0 
+  48@ == 0 
+jf @SYND4_5256 
+07FB: set_interior 'PDOMES' access 0  // The Pleasure Domes
+if 
+075C:   marker 59@ enabled 
+jf @SYND4_5055 
+Marker.Disable(59@)
+
+:SYND4_5055
+Marker.Disable(61@)
+018A: 45@ = create_checkpoint_at -2667.368 1427.435 905.4609 
+08DC: create_interior_marker 45@ at -2661.74 1423.483 radius 100.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_5151 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+08C7: put_actor $PLAYER_ACTOR at -2661.055 1416.019 921.1953 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 180.0
+
+:SYND4_5151
+48@ = 1 
+if 
+   not Actor.Dead(49@)
+jf @SYND4_5179 
+Actor.DestroyInstantly(49@)
+
+:SYND4_5179
+if 
+   not Actor.Dead(50@)
+jf @SYND4_5200 
+Actor.DestroyInstantly(50@)
+
+:SYND4_5200
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_5226 
+Actor.Angle($PLAYER_ACTOR) = 197.6688
+
+:SYND4_5226
+00BC: show_text_highpriority GXT 'SYN4_99' time 4000 flag 1  // ~s~Sneak up to ~y~Jizzy~s~, you need to get that number.
+03C7: set_sensitivity_to_crime 0.0 
+jump @SYND4_5270 
+
+:SYND4_5256
+jump @SYND4_4692 
+
+:SYND4_5263
+jump @SYND4_12038 
+
+:SYND4_5270
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12031 
+wait 0 
+gosub @SYND4_12990 
+gosub @SYND4_13804 
+if 
+  46@ == 0 
+jf @SYND4_7660 
+if 
+  83@ == 1 
+jf @SYND4_5354 
+115@ = 1 
+jump @SYND4_12038 
+
+:SYND4_5354
+40@ = 0 
+
+:SYND4_5361
+if 
+051A:   actor 34@(40@,5i) damaged_by_actor $PLAYER_ACTOR 
+jf @SYND4_5414 
+00BC: show_text_highpriority GXT 'SYN4_08' time 4000 flag 1  // ~r~You scared Jizzy before he made the call.
+83@ = 1 
+32@ = 0 
+
+:SYND4_5414
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_5361 
+if 
+051A:   actor 39@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYND4_5484 
+00BC: show_text_highpriority GXT 'SYN4_06' time 4000 flag 1  // ~r~You killed Jizzy before he made the call.
+83@ = 1 
+32@ = 0 
+
+:SYND4_5484
+if 
+051A:   actor 44@ damaged_by_actor $PLAYER_ACTOR 
+jf @SYND4_5533 
+00BC: show_text_highpriority GXT 'SYN4_08' time 4000 flag 1  // ~r~You scared Jizzy before he made the call.
+83@ = 1 
+32@ = 0 
+
+:SYND4_5533
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2668.716 1421.846 905.277 radius 15.0 15.0 15.0 
+jf @SYND4_7660 
+07FB: set_interior 'PDOMES2' access 1  // The Pleasure Domes
+0169: set_fade_color_RGB 0 0 0 
+fade 0 500 
+
+:SYND4_5609
+if 
+fading 
+jf @SYND4_5633 
+wait 0 
+jump @SYND4_5609 
+
+:SYND4_5633
+40@ = 0 
+
+:SYND4_5640
+Actor.DestroyInstantly(34@(40@,5i))
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_5640 
+if 
+   not Actor.Dead(44@)
+jf @SYND4_5691 
+Actor.DestroyInstantly(44@)
+
+:SYND4_5691
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_5712 
+Marker.Disable(43@)
+
+:SYND4_5712
+if 
+   not Actor.Dead(39@)
+jf @SYND4_5733 
+Actor.DestroyInstantly(39@)
+
+:SYND4_5733
+02E4: load_cutscene_data 'SYND_4B' 
+
+:SYND4_5744
+if 
+86B9:   not cutscene_data_loaded 
+jf @SYND4_5768 
+wait 0 
+jump @SYND4_5744 
+
+:SYND4_5768
+02E7: start_cutscene 
+fade 1 1000 
+
+:SYND4_5777
+if 
+82E9:   not cutscene_reached_end 
+jf @SYND4_5801 
+wait 0 
+jump @SYND4_5777 
+
+:SYND4_5801
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:SYND4_5816
+if 
+fading 
+jf @SYND4_5840 
+wait 0 
+jump @SYND4_5816 
+
+:SYND4_5840
+gosub @SYND4_12858 
+39@ = Actor.Create(Special, #SPECIAL01, -2669.127, 1426.919, 905.4609)
+0860: link_actor 39@ to_interior 3 
+Actor.SetWalkStyle(39@, "GANG1")
+0746: set_acquaintance 4 of_actors_pedtype 23 to_actors_pedtype 0 
+Actor.Angle(39@) = 238.0256
+060F: set_actor 39@ melee_accuracy_to 5.0 
+060B: set_actor 39@ decision_maker_to 55@ 
+34@ = Actor.Create(Mission1, #BMYDRUG, -2665.236, 1429.884, 905.4609)
+Actor.Angle(34@) = 133.1702
+0618: assign_actor 34@ to_AS_pack 80@ 
+35@ = Actor.Create(Mission1, #HMYDRUG, -2667.102, 1430.024, 905.4609)
+Actor.Angle(35@) = 180.876
+0618: assign_actor 35@ to_AS_pack 79@ 
+36@ = Actor.Create(Mission1, #BMYDRUG, -2665.064, 1428.402, 905.4609)
+Actor.Angle(36@) = 106.0457
+0618: assign_actor 36@ to_AS_pack 79@ 
+37@ = Actor.Create(Mission1, #BFYPRO, -2668.117, 1429.933, 905.4609)
+Actor.Angle(37@) = 180.876
+0618: assign_actor 37@ to_AS_pack 80@ 
+43@ = Marker.CreateAboveActor(39@)
+018B: set_marker 43@ radar_mode 0 
+0296: unload_special_actor 1 
+40@ = 0 
+
+:SYND4_6121
+0860: link_actor 34@(40@,5i) to_interior 3 
+Actor.GiveWeaponAndAmmo(34@(40@,5i), MicroUzi, 30000)
+01B9: set_actor 34@(40@,5i) armed_weapon_to 28 
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_6121 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_6235 
+Camera.SetPosition(-2669.57, 1410.871, 907.8965, 0.0, 0.0, 0.0)
+Camera.OnPed(39@, 15, 2)
+
+:SYND4_6235
+87@ = Actor.Create(Mission1, #BMYBOUN, -2667.152, 1421.553, 905.2812)
+Actor.Angle(87@) = 275.4244
+0688: AS_actor 87@ unknown_toggle_ped_threat_scanner 0 0 0 
+0860: link_actor 87@ to_interior 3 
+wait 100 
+fade 1 0 
+
+:SYND4_6298
+if 
+fading 
+jf @SYND4_6322 
+wait 0 
+jump @SYND4_6298 
+
+:SYND4_6322
+00BC: show_text_highpriority GXT 'SYN4_05' time 4000 flag 1  // ~r~Jizzy's ~s~escaping, Hunt him down!
+if 
+   not Actor.Dead(87@)
+jf @SYND4_6362 
+0618: assign_actor 87@ to_AS_pack 73@ 
+
+:SYND4_6362
+40@ = 0 
+
+:SYND4_6369
+if 
+   not Actor.Dead(102@(40@,10i))
+jf @SYND4_6409 
+0792: disembark_instantly_actor 102@(40@,10i) 
+05C5: AS_actor 102@(40@,10i) cower -2 ms 
+
+:SYND4_6409
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_6369 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_6520 
+0687: clear_actor 39@ task 
+08C7: put_actor 39@ at -2664.462 1421.766 905.277 dont_warp_gang 
+Actor.Angle(39@) = 249.6271
+0618: assign_actor 39@ to_AS_pack 73@ 
+Actor.AddArmour(39@, 150)
+Actor.Health(39@) = 300
+Actor.SetMaxHealth(39@, 300)
+0446: set_actor 39@ dismemberment_possible 0 
+
+:SYND4_6520
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_6573 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+08C7: put_actor $PLAYER_ACTOR at -2666.638 1410.305 905.2812 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.SetBehindPlayer
+
+:SYND4_6573
+wait 1000 
+33@ = 0 
+
+:SYND4_6585
+if 
+  3000 > 33@ 
+jf @SYND4_6639 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_6632 
+jump @SYND4_6639 
+
+:SYND4_6632
+jump @SYND4_6585 
+
+:SYND4_6639
+gosub @SYND4_12889 
+0615: define_AS_pack_begin 128@ 
+0603: AS_actor -1 goto_point_any_means -2639.277 1409.022 905.4646 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 63.4408 
+0616: define_AS_pack_end 128@ 
+0615: define_AS_pack_begin 126@ 
+0618: assign_actor -1 to_AS_pack 128@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 2000 
+0638: AS_actor -1 stay_put 0 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_OUT_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 126@ loop 1 
+0616: define_AS_pack_end 126@ 
+0615: define_AS_pack_begin 127@ 
+0603: AS_actor -1 goto_point_any_means -2639.352 1402.766 905.4646 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 73.286 
+0616: define_AS_pack_end 127@ 
+0615: define_AS_pack_begin 129@ 
+0618: assign_actor -1 to_AS_pack 127@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 2000 
+0638: AS_actor -1 stay_put 0 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_OUT_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 129@ loop 1 
+0616: define_AS_pack_end 129@ 
+130@ = Actor.Create(Mission1, #BMYBOUN, -2639.277, 1409.022, 905.4646)
+0860: link_actor 130@ to_interior 1 
+Actor.Angle(130@) = 63.4408
+060B: set_actor 130@ decision_maker_to 55@ 
+0618: assign_actor 130@ to_AS_pack 126@ 
+131@ = Actor.Create(Mission1, #WMYBOUN, -2639.352, 1402.766, 905.4646)
+0860: link_actor 131@ to_interior 1 
+Actor.Angle(131@) = 73.286
+060B: set_actor 131@ decision_maker_to 55@ 
+0618: assign_actor 131@ to_AS_pack 129@ 
+Actor.GiveWeaponAndAmmo(130@, MicroUzi, 30000)
+01B9: set_actor 130@ armed_weapon_to 28 
+Actor.GiveWeaponAndAmmo(131@, MicroUzi, 30000)
+01B9: set_actor 131@ armed_weapon_to 28 
+if 
+   not Actor.Dead(34@)
+jf @SYND4_7358 
+08C7: put_actor 34@ at -2671.761 1420.303 905.2812 dont_warp_gang 
+Actor.Angle(34@) = 214.6866
+
+:SYND4_7358
+if 
+   not Actor.Dead(35@)
+jf @SYND4_7404 
+08C7: put_actor 35@ at -2665.095 1421.339 905.2812 dont_warp_gang 
+Actor.Angle(35@) = 167.6077
+
+:SYND4_7404
+if 
+   not Actor.Dead(39@)
+jf @SYND4_7483 
+0792: disembark_instantly_actor 39@ 
+018B: set_marker 43@ radar_mode 0 
+08C7: put_actor 39@ at -2621.465 1411.338 905.4609 dont_warp_gang 
+Actor.LockInCurrentPosition(39@) = True
+Actor.Angle(39@) = 277.734
+0860: link_actor 39@ to_interior 0 
+74@ = 1 
+
+:SYND4_7483
+if 
+   not Actor.Dead(87@)
+jf @SYND4_7541 
+0792: disembark_instantly_actor 87@ 
+08C7: put_actor 87@ at -2625.836 1404.75 6.0938 dont_warp_gang 
+Actor.Angle(87@) = 279.9147
+0860: link_actor 87@ to_interior 0 
+
+:SYND4_7541
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+40@ = 0 
+
+:SYND4_7556
+if 
+   not Actor.Dead(34@(40@,5i))
+jf @SYND4_7609 
+0792: disembark_instantly_actor 34@(40@,5i) 
+05E2: AS_actor 34@(40@,5i) kill_actor $PLAYER_ACTOR 
+060B: set_actor 34@(40@,5i) decision_maker_to 47@ 
+
+:SYND4_7609
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_7556 
+018B: set_marker 60@ radar_mode 3 
+018B: set_marker 45@ radar_mode 0 
+Camera.SetBehindPlayer
+41@ = 1 
+46@ = 1 
+
+:SYND4_7660
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2640.998 1406.275 905.4609 radius 8.0 8.0 8.0 
+jf @SYND4_7794 
+if and
+   not Actor.Dead(130@)
+  98@ == 0 
+jf @SYND4_7751 
+0792: disembark_instantly_actor 130@ 
+05E2: AS_actor 130@ kill_actor $PLAYER_ACTOR 
+98@ = 1 
+
+:SYND4_7751
+if and
+   not Actor.Dead(131@)
+  99@ == 0 
+jf @SYND4_7794 
+0792: disembark_instantly_actor 131@ 
+05E2: AS_actor 131@ kill_actor $PLAYER_ACTOR 
+99@ = 1 
+
+:SYND4_7794
+if 
+  46@ == 1 
+jf @SYND4_11405 
+if 
+  41@ == 1 
+jf @SYND4_9245 
+if and
+   Actor.Dead(39@)
+  85@ == 0 
+jf @SYND4_7881 
+if 
+075C:   marker 60@ enabled 
+jf @SYND4_7874 
+Marker.Disable(60@)
+
+:SYND4_7874
+jump @SYND4_12321 
+
+:SYND4_7881
+if 
+   not Actor.Dead(39@)
+jf @SYND4_8024 
+if and
+00FE:   actor 39@ sphere 0 in_sphere -2636.385 1402.485 905.4609 radius 2.0 2.0 2.0 
+  74@ == 0 
+jf @SYND4_8024 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_8024 
+0687: clear_actor 39@ task 
+018B: set_marker 43@ radar_mode 0 
+08C7: put_actor 39@ at -2621.465 1411.338 6.1094 dont_warp_gang 
+Actor.Angle(39@) = 277.734
+0860: link_actor 39@ to_interior 0 
+74@ = 1 
+
+:SYND4_8024
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2624.8 1411.54 6.1015 radius 4.0 4.0 4.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2661.85 1426.39 22.8985 radius 4.0 4.0 4.0 
+jf @SYND4_9245 
+gosub @SYND4_12924 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_8159 
+08C7: put_actor 39@ at -2621.465 1411.338 6.1094 dont_warp_gang 
+Actor.LockInCurrentPosition(39@) = False
+
+:SYND4_8159
+07FB: set_interior 'PDOMES' access 0  // The Pleasure Domes
+07FB: set_interior 'PDOMES2' access 0  // The Pleasure Domes
+0994: unknown_create_escape_at -2686.415 1235.572 54.4297 
+0994: unknown_create_escape_at -2671.298 1236.492 54.4297 
+if 
+   Car.Wrecked(64@)
+jf @SYND4_8380 
+Car.Destroy(64@)
+0395: clear_area 1 at -2611.471 1409.036 6.1335 radius 20.0 
+Model.Load(#PIZZABOY)
+Model.Load(#WMYPIZZ)
+
+:SYND4_8274
+if or
+   not Model.Available(#PIZZABOY)
+   not Model.Available(#WMYPIZZ)
+jf @SYND4_8306 
+wait 0 
+jump @SYND4_8274 
+
+:SYND4_8306
+64@ = Car.Create(#PIZZABOY, -2611.471, 1409.036, 6.1335)
+Car.Angle(64@) = 274.4727
+132@ = Actor.CreateAsDriver(CivMale, #WMYPIZZ, 64@)
+Actor.DestroyInstantly(87@)
+if 
+   not Actor.Dead(39@)
+jf @SYND4_8380 
+08C6: set_actor 39@ stay_on_bike 3 
+
+:SYND4_8380
+0615: define_AS_pack_begin 75@ 
+05CB: AS_actor -1 enter_car 64@ as_driver 5000 ms 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05D2: AS_actor -1 run_to_and_hijack_car 64@ max_search_radius 20.0 traffic_behavior 2 
+0616: define_AS_pack_end 75@ 
+0615: define_AS_pack_begin 76@ 
+05CD: AS_actor -1 exit_car 64@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 76@ 
+0229: set_car 64@ primary_color_to 4 secondary_color_to 4 
+0395: clear_area 1 at -2621.81 1398.744 6.086 radius 20.0 
+Marker.Disable(60@)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_9245 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+set_weather 9 
+select_interior 0 
+Camera.SetBehindPlayer
+if 
+   not Actor.Dead(39@)
+jf @SYND4_8562 
+08C7: put_actor 39@ at -2624.485 1411.353 6.1015 dont_warp_gang 
+Actor.Angle(39@) = 267.9166
+
+:SYND4_8562
+if 
+   not Actor.Dead(87@)
+jf @SYND4_8652 
+0792: disembark_instantly_actor 87@ 
+08C7: put_actor 87@ at -2620.604 1406.97 6.1016 dont_warp_gang 
+Actor.Angle(87@) = 277.7697
+Actor.GiveWeaponAndAmmo(87@, Pistol, 30000)
+01B9: set_actor 87@ armed_weapon_to 22 
+060B: set_actor 87@ decision_maker_to 88@ 
+Actor.WeaponAccuracy(87@) = 30
+07DD: set_actor 87@ attack_rate 30 // previously known as temper_to 
+
+:SYND4_8652
+Actor.DestroyInstantly(44@)
+40@ = 0 
+
+:SYND4_8664
+Actor.DestroyInstantly(34@(40@,5i))
+40@ += 1 
+  40@ >= 4 
+jf @SYND4_8664 
+gosub @SYND4_12858 
+if and
+   not Actor.Dead(39@)
+   not Car.Wrecked(64@)
+jf @SYND4_8786 
+Camera.SetPosition(-2626.019, 1411.502, 9.1763, 0.0, 0.0, 0.0)
+Camera.PointAt(-2625.058, 1411.35, 8.9421, 2)
+0792: disembark_instantly_actor 39@ 
+0618: assign_actor 39@ to_AS_pack 75@ 
+
+:SYND4_8786
+if 
+   not Actor.Dead(87@)
+jf @SYND4_8820 
+0792: disembark_instantly_actor 87@ 
+05CA: AS_actor 87@ enter_car 64@ passenger_seat 0 time 5000 
+
+:SYND4_8820
+gosub @SYND4_12957 
+33@ = 0 
+
+:SYND4_8834
+if 
+  4000 > 33@ 
+jf @SYND4_8886 
+wait 0 
+if and
+00E1:   player 0 pressed_key 16 
+   Actor.Dead(132@)
+jf @SYND4_8879 
+
+:SYND4_8879
+jump @SYND4_8834 
+
+:SYND4_8886
+85@ = 1 
+gosub @SYND4_12889 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_8946 
+08C7: put_actor $PLAYER_ACTOR at -2627.1 1410.399 6.1015 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 279.1925
+
+:SYND4_8946
+0615: define_AS_pack_begin 133@ 
+05B9: AS_actor -1 stay_idle 4000 ms 
+0713: actor -1 driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 10.0 8 0 firing_rate 30 
+0643: set_AS_pack 133@ loop 1 
+0616: define_AS_pack_end 133@ 
+if 
+   not Car.Wrecked(64@)
+jf @SYND4_9199 
+if and
+   not Actor.Dead(87@)
+   not Actor.Dead(39@)
+jf @SYND4_9090 
+if 
+   not Actor.InCar(87@, 64@)
+jf @SYND4_9071 
+0430: put_actor 87@ into_car 64@ passenger_seat 0 
+
+:SYND4_9071
+0688: AS_actor 87@ unknown_toggle_ped_threat_scanner 1 1 1 
+0618: assign_actor 87@ to_AS_pack 133@ 
+
+:SYND4_9090
+if and
+   not Actor.Dead(39@)
+   not Car.Wrecked(64@)
+jf @SYND4_9199 
+Actor.GiveWeaponAndAmmo(39@, MicroUzi, 30000)
+01B9: set_actor 39@ armed_weapon_to 28 
+Actor.WeaponAccuracy(39@) = 90
+if 
+   not Actor.InCar(39@, 64@)
+jf @SYND4_9199 
+if 
+   not Actor.Dead(132@)
+jf @SYND4_9191 
+if 
+   Actor.Driving(132@)
+jf @SYND4_9191 
+Actor.DestroyInstantly(132@)
+
+:SYND4_9191
+036A: put_actor 39@ in_car 64@ 
+
+:SYND4_9199
+00BE: text_clear_all 
+018B: set_marker 43@ radar_mode 3 
+00BC: show_text_highpriority GXT 'SYN4_02' time 10000 flag 1  // ~r~Jizzy's ~s~escaping with the phone, hunt him down!
+32@ = 0 
+03C7: set_sensitivity_to_crime 1.0 
+41@ = 2 
+
+:SYND4_9245
+if 
+   not Actor.Dead(39@)
+jf @SYND4_9415 
+Actor.StorePos(39@, $7304, $7306, $7303)
+if 
+   Actor.Driving(39@)
+jf @SYND4_9299 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar(39@)
+
+:SYND4_9299
+080E: get_actor 39@ ped_event_to $7313 
+if 
+04A3:   $7313 == 7 // == constant 
+jf @SYND4_9361 
+0687: clear_actor 39@ task 
+0751: AS_actor 39@ flee_from_actor $PLAYER_ACTOR run_distance 200.0 time 9999999 change_course 1 unknown 3000 1000 away_radius 10.0 
+
+:SYND4_9361
+if 
+04A3:   $7313 == 17 // == constant 
+jf @SYND4_9415 
+0687: clear_actor 39@ task 
+0751: AS_actor 39@ flee_from_actor $PLAYER_ACTOR run_distance 200.0 time 9999999 change_course 1 unknown 3000 1000 away_radius 10.0 
+
+:SYND4_9415
+if 
+   not Actor.Dead(87@)
+jf @SYND4_9501 
+080E: get_actor 87@ ped_event_to $7313 
+if 
+04A3:   $7313 == 17 // == constant 
+jf @SYND4_9470 
+0687: clear_actor 87@ task 
+05E2: AS_actor 87@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_9470
+if 
+04A3:   $7313 == 7 // == constant 
+jf @SYND4_9501 
+0687: clear_actor 87@ task 
+05E2: AS_actor 87@ kill_actor $PLAYER_ACTOR 
+
+:SYND4_9501
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @SYND4_9736 
+90@ = Car.Health($TEMPVAR_ACTOR_CAR)
+if 
+  200 > 90@ 
+jf @SYND4_9617 
+89@ = 1 
+if and
+   not Actor.Dead(87@)
+  93@ == 0 
+jf @SYND4_9610 
+0615: define_AS_pack_begin 134@ 
+0622: AS_actor -1 bail_car $TEMPVAR_ACTOR_CAR 
+05BE: AS_actor -1 die 
+0616: define_AS_pack_end 134@ 
+0618: assign_actor 87@ to_AS_pack 134@ 
+93@ = 1 
+
+:SYND4_9610
+jump @SYND4_9624 
+
+:SYND4_9617
+89@ = 0 
+
+:SYND4_9624
+if and
+0495:   car $TEMPVAR_ACTOR_CAR burning 
+  94@ == 0 
+   not Actor.Dead(39@)
+jf @SYND4_9736 
+0615: define_AS_pack_begin 135@ 
+0622: AS_actor -1 bail_car $TEMPVAR_ACTOR_CAR 
+0751: AS_actor -1 flee_from_actor $PLAYER_ACTOR run_distance 200.0 time 9999999 change_course 1 unknown 3000 1000 away_radius 10.0 
+0643: set_AS_pack 135@ loop 1 
+0616: define_AS_pack_end 135@ 
+060B: set_actor 39@ decision_maker_to 55@ 
+33@ = 0 
+0618: assign_actor 39@ to_AS_pack 135@ 
+94@ = 1 
+
+:SYND4_9736
+if 
+  41@ == 2 
+jf @SYND4_10255 
+if and
+   Car.Wrecked(64@)
+  77@ == 0 
+jf @SYND4_9800 
+00BC: show_text_highpriority GXT 'SYN4_32' time 5000 flag 1  // ~r~You blew up the phone.
+jump @SYND4_12038 
+
+:SYND4_9800
+if and
+   not Car.Wrecked(64@)
+   not Actor.Dead(39@)
+jf @SYND4_9861 
+if 
+   Actor.InCar(39@, 64@)
+jf @SYND4_9854 
+77@ = 0 
+jump @SYND4_9861 
+
+:SYND4_9854
+77@ = 1 
+
+:SYND4_9861
+if 
+   not Actor.Dead(39@)
+jf @SYND4_10144 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $7304 $7306 $7303 radius 20.0 20.0 20.0 
+jf @SYND4_10035 
+if and
+   not Car.Wrecked(64@)
+  86@ == 0 
+jf @SYND4_10028 
+if 
+8495:   not car 64@ burning 
+jf @SYND4_10028 
+if 
+  89@ == 0 
+jf @SYND4_10002 
+06E1: AS_actor 39@ using_car 64@ target_car -1 with_order 1 max_speed 25.0 traffic_flag 2 
+jump @SYND4_10021 
+
+:SYND4_10002
+06E1: AS_actor 39@ using_car 64@ target_car -1 with_order 1 max_speed 32.0 traffic_flag 2 
+
+:SYND4_10021
+86@ = 1 
+
+:SYND4_10028
+jump @SYND4_10144 
+
+:SYND4_10035
+if and
+   not Car.Wrecked(64@)
+  86@ == 1 
+jf @SYND4_10144 
+if 
+8495:   not car 64@ burning 
+jf @SYND4_10144 
+if 
+  89@ == 0 
+jf @SYND4_10118 
+06E1: AS_actor 39@ using_car 64@ target_car -1 with_order 1 max_speed 23.0 traffic_flag 2 
+jump @SYND4_10137 
+
+:SYND4_10118
+06E1: AS_actor 39@ using_car 64@ target_car -1 with_order 1 max_speed 28.0 traffic_flag 2 
+
+:SYND4_10137
+86@ = 0 
+
+:SYND4_10144
+if 
+   not Actor.Dead(39@)
+jf @SYND4_10255 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere $7304 $7306 $7303 radius 150.0 150.0 150.0 
+jf @SYND4_10225 
+00BC: show_text_highpriority GXT 'SYN4_29' time 4000 flag 1  // ~r~You let Jizzy escape with the phone.
+jump @SYND4_12038 
+
+:SYND4_10225
+if and
+   not Actor.Driving(39@)
+  91@ == 0 
+jf @SYND4_10255 
+91@ = 1 
+
+:SYND4_10255
+if and
+   not Actor.Dead(39@)
+   not Car.Wrecked(64@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_10970 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYND4_10970 
+84@ = Actor.MissionCar($PLAYER_ACTOR)
+92@ += 1 
+if 
+  92@ > 100 
+jf @SYND4_10342 
+054F: clear_car 64@ damage 
+92@ = 0 
+
+:SYND4_10342
+if and
+   not Car.Wrecked(84@)
+  32@ > 12000 
+jf @SYND4_10970 
+if 
+051D:   car 64@ damaged_by_car 84@ 
+jf @SYND4_10970 
+if 
+876F:   not text_priority_displayed 
+jf @SYND4_10970 
+100@ += 1 
+if 
+  100@ == 1 
+jf @SYND4_10454 
+05AA: 118@s = 'SYN4_AA' // @s = 'short'  // ~z~Hey, I thought we was friends!
+04AF: 96@ = 39400 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10454
+if 
+  100@ == 2 
+jf @SYND4_10503 
+05AA: 118@s = 'SYN4_AB' // @s = 'short'  // ~z~You're blowing your chance to be a playa!
+04AF: 96@ = 39401 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10503
+if 
+  100@ == 3 
+jf @SYND4_10552 
+05AA: 118@s = 'SYN4_AC' // @s = 'short'  // ~z~We can talk about this, homie!
+04AF: 96@ = 39402 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10552
+if 
+  100@ == 4 
+jf @SYND4_10601 
+05AA: 118@s = 'SYN4_AD' // @s = 'short'  // ~z~You're wrecking my ride!
+04AF: 96@ = 39403 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10601
+if 
+  100@ == 5 
+jf @SYND4_10650 
+05AA: 118@s = 'SYN4_AE' // @s = 'short'  // ~z~CJ, brother, you're gonna have to reconsider your position!
+04AF: 96@ = 39404 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10650
+if 
+  100@ == 6 
+jf @SYND4_10699 
+05AA: 118@s = 'SYN4_AF' // @s = 'short'  // ~z~I can fix anything for you in this town, anything!
+04AF: 96@ = 39405 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10699
+if 
+  100@ == 7 
+jf @SYND4_10748 
+05AA: 118@s = 'SYN4_AG' // @s = 'short'  // ~z~CJ, you're a fool, A FOOL!
+04AF: 96@ = 39406 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10748
+if 
+  100@ == 8 
+jf @SYND4_10797 
+05AA: 118@s = 'SYN4_AH' // @s = 'short'  // ~z~I won't forget this, CJ, you hear me?
+04AF: 96@ = 39407 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10797
+if 
+  100@ == 9 
+jf @SYND4_10846 
+05AA: 118@s = 'SYN4_AJ' // @s = 'short'  // ~z~You realize how much this paint job cost?
+04AF: 96@ = 39408 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10846
+if 
+  100@ == 10 
+jf @SYND4_10895 
+05AA: 118@s = 'SYN4_AK' // @s = 'short'  // ~z~Back off, fool!
+04AF: 96@ = 39409 // = constant 
+gosub @SYND4_13784 
+
+:SYND4_10895
+if 
+  100@ == 11 
+jf @SYND4_10951 
+05AA: 118@s = 'SYN4_AL' // @s = 'short'  // ~z~I got money - always!
+04AF: 96@ = 39410 // = constant 
+gosub @SYND4_13784 
+100@ = 0 
+
+:SYND4_10951
+32@ = 0 
+92@ = 0 
+054F: clear_car 64@ damage 
+
+:SYND4_10970
+if and
+   Actor.Dead(39@)
+  56@ == 0 
+jf @SYND4_11118 
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_11014 
+Marker.Disable(43@)
+
+:SYND4_11014
+Model.Load(#MOBILE1993B)
+
+:SYND4_11019
+if 
+   not Model.Available(#MOBILE1993B)
+jf @SYND4_11046 
+wait 0 
+jump @SYND4_11019 
+
+:SYND4_11046
+02CE: 136@ = ground_z_at $7304 $7306 $7303 
+136@ += 0.5 
+78@ = Object.Init(#MOBILE1993B, $7304, $7306, 136@)
+69@ = Marker.CreateAboveObject(78@)
+00BC: show_text_highpriority GXT 'SYN4_33' time 4000 flag 1  // ~s~Now collect the ~g~phone~s~.
+56@ = 1 
+
+:SYND4_11118
+if 
+  56@ == 1 
+jf @SYND4_11136 
+
+:SYND4_11136
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $7304 $7306 $7303 radius 1.2 1.2 2.0 
+  56@ == 1 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @SYND4_11269 
+00BE: text_clear_all 
+Object.Destroy(78@)
+if 
+075C:   marker 69@ enabled 
+jf @SYND4_11218 
+Marker.Disable(69@)
+
+:SYND4_11218
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_11239 
+Marker.Disable(43@)
+
+:SYND4_11239
+00BC: show_text_highpriority GXT 'SYN4_11' time 2000 flag 1  // Phone collected!
+33@ = 0 
+56@ = 2 
+
+:SYND4_11269
+if and
+  56@ == 2 
+  33@ > 2000 
+895D:   not actor $PLAYER_ACTOR stuck_under_car 
+jf @SYND4_11405 
+gosub @SYND4_12858 
+
+:SYND4_11307
+Model.Load(#CELLPHONE)
+
+:SYND4_11312
+if 
+   not Model.Available(#CELLPHONE)
+jf @SYND4_11339 
+wait 0 
+jump @SYND4_11312 
+
+:SYND4_11339
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11379 
+0687: clear_actor $PLAYER_ACTOR task 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+
+:SYND4_11379
+wait 2000 
+gosub @SYND4_12889 
+46@ = 2 
+33@ = 0 
+
+:SYND4_11405
+if 
+  46@ == 2 
+jf @SYND4_12024 
+if 
+00E1:   player 0 pressed_key 15 
+jf @SYND4_11454 
+95@ = 6 
+95@ = 6 
+
+:SYND4_11454
+if and
+  97@ == 2 
+  95@ == 0 
+jf @SYND4_11539 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11503 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+
+:SYND4_11503
+05AA: 118@s = 'MCES11A' // @s = 'short'  // ~z~Eh Cesar!
+04AF: 96@ = 25314 // = constant 
+gosub @SYND4_13784 
+95@ = 1 
+
+:SYND4_11539
+if and
+  97@ == 2 
+  95@ == 1 
+jf @SYND4_11621 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11585 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYND4_11585
+05AA: 118@s = 'MCES11B' // @s = 'short'  // ~z~Hey, dude, whassup?
+04AF: 96@ = 25315 // = constant 
+gosub @SYND4_13784 
+95@ = 2 
+
+:SYND4_11621
+if and
+  97@ == 2 
+  95@ == 2 
+jf @SYND4_11706 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11670 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+
+:SYND4_11670
+05AA: 118@s = 'MCES11C' // @s = 'short'  // ~z~I need you to meet me at Pier 69.
+04AF: 96@ = 25316 // = constant 
+gosub @SYND4_13784 
+95@ = 3 
+
+:SYND4_11706
+if and
+  97@ == 2 
+  95@ == 3 
+jf @SYND4_11788 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11752 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYND4_11752
+05AA: 118@s = 'MCES11D' // @s = 'short'  // ~z~We're going to take down the Loco Syndicate.
+04AF: 96@ = 25317 // = constant 
+gosub @SYND4_13784 
+95@ = 4 
+
+:SYND4_11788
+if and
+  97@ == 2 
+  95@ == 4 
+jf @SYND4_11849 
+05AA: 118@s = 'MCES11E' // @s = 'short'  // ~z~OK, holmes. You need some backup?
+04AF: 96@ = 25318 // = constant 
+gosub @SYND4_13784 
+95@ = 5 
+
+:SYND4_11849
+if and
+  97@ == 2 
+  95@ == 5 
+jf @SYND4_11934 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11898 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+
+:SYND4_11898
+05AA: 118@s = 'MCES11F' // @s = 'short'  // ~z~No, man, I got it covered!
+04AF: 96@ = 25319 // = constant 
+gosub @SYND4_13784 
+95@ = 6 
+
+:SYND4_11934
+if and
+  97@ == 2 
+  95@ == 6 
+jf @SYND4_12024 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_11980 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYND4_11980
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12010 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+
+:SYND4_12010
+gosub @SYND4_12889 
+jump @SYND4_12321 
+
+:SYND4_12024
+jump @SYND4_5270 
+
+:SYND4_12031
+jump @SYND4_12038 
+
+:SYND4_12038
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_12059 
+Marker.Disable(43@)
+
+:SYND4_12059
+if 
+075C:   marker 45@ enabled 
+jf @SYND4_12080 
+Marker.Disable(45@)
+
+:SYND4_12080
+if 
+075C:   marker 54@ enabled 
+jf @SYND4_12101 
+Marker.Disable(54@)
+
+:SYND4_12101
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SYND4_12169 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:SYND4_12169
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if or
+  41@ == 1 
+  115@ == 1 
+jf @SYND4_12317 
+gosub @SYND4_12924 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12310 
+41@ = 1 
+select_interior 0 
+04E4: refresh_game_renderer_at -2623.805 1409.816 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+08C7: put_actor $PLAYER_ACTOR at -2624.461 1410.706 6.1015 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 176.884
+Camera.SetAtPos(-2624.461, 1410.706, 6.1015)
+
+:SYND4_12310
+gosub @SYND4_12957 
+
+:SYND4_12317
+Camera.SetBehindPlayer
+return 
+
+:SYND4_12321
+00BE: text_clear_all 
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_12344 
+Marker.Disable(43@)
+
+:SYND4_12344
+if 
+075C:   marker 45@ enabled 
+jf @SYND4_12365 
+Marker.Disable(45@)
+
+:SYND4_12365
+if 
+075C:   marker 54@ enabled 
+jf @SYND4_12386 
+Marker.Disable(54@)
+
+:SYND4_12386
+$SYNDICATE_TOTAL_PASSED_MISSIONS += 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 12000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 12000
+Marker.Disable($526)
+0998: add_respect 30 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'SYND_4'  // Ice Cold Killa
+030C: progress_made = 1 
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$MARKER_TRIADS_SF_GARAGE = Marker.CreateIconAndSphere($ICON_CESAR, -1717.05, 1280.91, 6.23)
+return 
+
+:SYND4_12483
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12504 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYND4_12504
+if 
+   not Actor.Dead(39@)
+jf @SYND4_12525 
+Actor.DestroyWithFade(39@)
+
+:SYND4_12525
+07FB: set_interior 'PDOMES' access 0  // The Pleasure Domes
+07FB: set_interior 'PDOMES2' access 0  // The Pleasure Domes
+03C7: set_sensitivity_to_crime 1.0 
+0995: unknown_remove_escapes 
+if 
+075C:   marker 69@ enabled 
+jf @SYND4_12581 
+Marker.Disable(69@)
+
+:SYND4_12581
+if 
+075C:   marker 59@ enabled 
+jf @SYND4_12602 
+Marker.Disable(59@)
+
+:SYND4_12602
+if 
+075C:   marker 43@ enabled 
+jf @SYND4_12623 
+Marker.Disable(43@)
+
+:SYND4_12623
+if 
+075C:   marker 45@ enabled 
+jf @SYND4_12644 
+Marker.Disable(45@)
+
+:SYND4_12644
+if 
+075C:   marker 54@ enabled 
+jf @SYND4_12665 
+Marker.Disable(54@)
+
+:SYND4_12665
+if 
+075C:   marker 60@ enabled 
+jf @SYND4_12686 
+Marker.Disable(60@)
+
+:SYND4_12686
+if 
+075C:   marker 61@ enabled 
+jf @SYND4_12707 
+Marker.Disable(61@)
+
+:SYND4_12707
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+Model.Destroy(#SILENCED)
+Model.Destroy(#BMYDRUG)
+Model.Destroy(#HMYDRUG)
+Model.Destroy(#BFYPRO)
+Model.Destroy(#HFYRI)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#MOBILE1993B)
+Model.Destroy(#WAREHOUSE_DOOR2B)
+Model.Destroy(#STRETCH)
+Model.Destroy(#BMYDJ)
+Model.Destroy(#STRETCH)
+Model.Destroy(#BROADWAY)
+Model.Destroy(#BMYBOUN)
+Model.Destroy(#WMYBOUN)
+Model.Destroy(#BMOSEC)
+Model.Destroy(#VWFYWAI)
+Model.Destroy(#COLT45)
+Model.Destroy(#PIZZABOY)
+Model.Destroy(#WMYPIZZ)
+Model.Destroy(#VHFYST3)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12833 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:SYND4_12833
+04EF: release_animation "SWAT" 
+0296: unload_special_actor 1 
+$ONMISSION = 0 
+01B7: release_weather 
+mission_cleanup 
+return 
+
+:SYND4_12858
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12887 
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+
+:SYND4_12887
+return 
+
+:SYND4_12889
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_12922 
+00BE: text_clear_all 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+
+:SYND4_12922
+return 
+
+:SYND4_12924
+fade 0 500 
+
+:SYND4_12931
+if 
+fading 
+jf @SYND4_12955 
+wait 0 
+jump @SYND4_12931 
+
+:SYND4_12955
+return 
+
+:SYND4_12957
+fade 1 500 
+
+:SYND4_12964
+if 
+fading 
+jf @SYND4_12988 
+wait 0 
+jump @SYND4_12964 
+
+:SYND4_12988
+return 
+
+:SYND4_12990
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @SYND4_13051 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_13051 
+08C7: put_actor $PLAYER_ACTOR at -2623.977 1404.812 6.111 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 352.628
+
+:SYND4_13051
+if 
+0736:   is_keyboard_key_just_pressed 81 
+jf @SYND4_13089 
+if 
+   not Car.Wrecked(64@)
+jf @SYND4_13089 
+Car.LockInCurrentPosition(64@) = True
+
+:SYND4_13089
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @SYND4_13125 
+077E: get_active_interior_to $7314 
+065D: NOP $7314 "AREA_NAME" 
+
+:SYND4_13125
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @SYND4_13176 
+0876: unknown_cube_cornera -2616.109 1408.629 6.5 cornerB -2618.498 1415.866 6.5 flag 3 flag 0 
+
+:SYND4_13176
+if 
+0736:   is_keyboard_key_just_pressed 71 
+jf @SYND4_13239 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_13239 
+08C7: put_actor $PLAYER_ACTOR at -2661.192 1426.128 22.8906 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 188.7666
+Camera.SetBehindPlayer
+
+:SYND4_13239
+if 
+0736:   is_keyboard_key_just_pressed 69 
+jf @SYND4_13302 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_13302 
+08C7: put_actor $PLAYER_ACTOR at -2661.493 1403.067 905.277 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 85.1708
+Camera.SetBehindPlayer
+
+:SYND4_13302
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @SYND4_13346 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYND4_13346 
+065D: NOP $7311 "HEALTH" 
+
+:SYND4_13346
+if 
+0736:   is_keyboard_key_just_pressed 90 
+jf @SYND4_13368 
+jump @SYND4_11307 
+
+:SYND4_13368
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @SYND4_13407 
+if 
+   not Car.Wrecked(64@)
+jf @SYND4_13407 
+Car.Health(64@) = 200
+
+:SYND4_13407
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @SYND4_13782 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_13445 
+Actor.Health(39@) = 1
+
+:SYND4_13445
+gosub @SYND4_12858 
+08C7: put_actor 39@ at -2659.382 1530.248 53.9453 dont_warp_gang 
+Actor.Angle(39@) = 0.0
+Camera.SetPosition(-2655.093, 1543.846, 55.7815, 0.0, 0.0, 0.0)
+Camera.PointAt(-2655.444, 1542.918, 55.652, 2)
+if 
+   not Actor.Dead(39@)
+jf @SYND4_13561 
+0792: disembark_instantly_actor 39@ 
+05BC: AS_actor 39@ jump 0 
+
+:SYND4_13561
+wait 1000 
+015D: set_gamespeed 0.4 
+if 
+   not Actor.Dead(39@)
+jf @SYND4_13630 
+Camera.SetPosition(-2630.056, 1557.202, 18.3729, 0.0, 0.0, 0.0)
+Camera.OnPed(39@, 15, 2)
+
+:SYND4_13630
+33@ = 0 
+
+:SYND4_13637
+if 
+  750 > 33@ 
+jf @SYND4_13691 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_13684 
+jump @SYND4_13759 
+
+:SYND4_13684
+jump @SYND4_13637 
+
+:SYND4_13691
+015D: set_gamespeed 1.0 
+33@ = 0 
+
+:SYND4_13705
+if 
+  1500 > 33@ 
+jf @SYND4_13759 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYND4_13752 
+jump @SYND4_13759 
+
+:SYND4_13752
+jump @SYND4_13705 
+
+:SYND4_13759
+gosub @SYND4_12889 
+00BC: show_text_highpriority GXT 'SYN4_29' time 4000 flag 1  // ~r~You let Jizzy escape with the phone.
+
+:SYND4_13782
+return 
+
+:SYND4_13784
+040D: unload_wav 1 
+03CF: load_wav 96@ as 1 
+97@ = 0 
+return 
+
+:SYND4_13804
+if and
+03D0:   wav 1 loaded 
+  97@ == 0 
+jf @SYND4_13847 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 118@s time 10000 flag 1 
+97@ = 1 
+
+:SYND4_13847
+if and
+03D2:   wav 1 ended 
+  97@ == 1 
+jf @SYND4_13885 
+040D: unload_wav 1 
+03D5: remove_text 118@s 
+97@ = 2 
+
+:SYND4_13885
+return

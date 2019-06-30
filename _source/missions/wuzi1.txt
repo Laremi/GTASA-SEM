@@ -1,0 +1,4184 @@
+:WUZI1
+thread 'WUZI1' 
+gosub @WUZI1_94 
+if 
+wasted_or_busted 
+jf @WUZI1_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+gosub @WUZI1_28288 
+
+:WUZI1_85
+gosub @WUZI1_28438 
+end_thread 
+
+:WUZI1_94
+231@ = 15 
+232@ = 33 
+233@ = 38 
+234@ = 39 
+235@ = 40 
+236@ = 41 
+237@ = 42 
+265@ = 0 
+054C: use_GXT_table 'WUZI1' 
+03D5: remove_text 'M_FAIL'  // ~r~MISSION FAILED!
+$ONMISSION = 1 
+increment_mission_attempts 
+if 
+  71@ == 99 
+jf @WUZI1_278 
+35@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+104@ = Car.Create(#ESPERANT, 0.0, 0.0, 0.0)
+062F: 157@ = create_group_type 2 
+107@ = Marker.CreateAboveActor(35@)
+109@ = Marker.CreateAboveActor(35@)
+108@ = Marker.CreateAboveActor(35@)
+
+:WUZI1_278
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @WUZI1_304 
+jump @WUZI1_28374 
+
+:WUZI1_304
+if 
+0735:   is_keyboard_key_pressed 88 
+jf @WUZI1_375 
+Actor.PutAt($PLAYER_ACTOR, -2175.735, 653.6188, 48.4453)
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_375 
+Actor.PutAt(35@, -2176.735, 653.6188, 48.4453)
+
+:WUZI1_375
+if 
+0735:   is_keyboard_key_pressed 90 
+jf @WUZI1_446 
+Actor.PutAt($PLAYER_ACTOR, -2247.749, 649.4075, 48.4375)
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_446 
+Actor.PutAt(35@, -2246.749, 649.4075, 48.4375)
+
+:WUZI1_446
+0871: init_jump_table 71@ total_jumps 11 default_jump 0 @WUZI1_742 jumps 0 @WUZI1_574 1 @WUZI1_595 2 @WUZI1_616 3 @WUZI1_630 4 @WUZI1_644 5 @WUZI1_658 6 @WUZI1_672 
+0872: jump_table_jumps 7 @WUZI1_686 8 @WUZI1_700 9 @WUZI1_714 10 @WUZI1_728 -1 @WUZI1_742 -1 @WUZI1_742 -1 @WUZI1_742 -1 @WUZI1_742 -1 @WUZI1_742 
+
+:WUZI1_574
+gosub @WUZI1_2400 
+71@ = 1 
+jump @WUZI1_742 
+
+:WUZI1_595
+gosub @WUZI1_1214 
+71@ = 2 
+jump @WUZI1_742 
+
+:WUZI1_616
+gosub @WUZI1_2678 
+jump @WUZI1_742 
+
+:WUZI1_630
+gosub @WUZI1_7123 
+jump @WUZI1_742 
+
+:WUZI1_644
+gosub @WUZI1_13180 
+jump @WUZI1_742 
+
+:WUZI1_658
+gosub @WUZI1_13816 
+jump @WUZI1_742 
+
+:WUZI1_672
+gosub @WUZI1_16500 
+jump @WUZI1_742 
+
+:WUZI1_686
+gosub @WUZI1_17153 
+jump @WUZI1_742 
+
+:WUZI1_700
+gosub @WUZI1_19015 
+jump @WUZI1_742 
+
+:WUZI1_714
+gosub @WUZI1_19915 
+jump @WUZI1_742 
+
+:WUZI1_728
+jump @WUZI1_28374 
+jump @WUZI1_742 
+
+:WUZI1_742
+gosub @WUZI1_885 
+gosub @WUZI1_953 
+gosub @WUZI1_23202 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+Actor.StorePos($PLAYER_ACTOR, 228@, 229@, 230@)
+if or
+  71@ == 2 
+  71@ == 4 
+  71@ == 6 
+jf @WUZI1_851 
+gosub @WUZI1_20390 
+gosub @WUZI1_22877 
+gosub @WUZI1_23091 
+gosub @WUZI1_23200 
+
+:WUZI1_851
+if 
+  36@ == 1 
+jf @WUZI1_876 
+jump @WUZI1_28288 
+
+:WUZI1_876
+jump @WUZI1_278 
+return 
+
+:WUZI1_885
+if 
+  37@ == 1 
+jf @WUZI1_951 
+if 
+   Actor.Dead(35@)
+jf @WUZI1_951 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'WZ1_40' time 5000 flag 1  // ~r~Woozie Died!
+36@ = 1 
+jump @WUZI1_28288 
+
+:WUZI1_951
+return 
+
+:WUZI1_953
+if 
+  73@ == 1 
+jf @WUZI1_1212 
+if 
+  72@ == 1 
+jf @WUZI1_1076 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_1076 
+if 
+86EE:   not actor 35@ in_group $PLAYER_GROUP 
+jf @WUZI1_1076 
+72@ = 0 
+Marker.Disable(108@)
+108@ = Marker.CreateAboveActor(35@)
+07E0: set_marker 108@ type_to 1 
+018B: set_marker 107@ radar_mode 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'WZ1_41' time 4000 flag 1  // ~s~You left ~b~Woozie~s~ behind! Go back and get him.
+
+:WUZI1_1076
+if 
+  72@ == 0 
+jf @WUZI1_1212 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_1212 
+if 
+06EE:   actor 35@ in_group $PLAYER_GROUP 
+jf @WUZI1_1143 
+72@ = 1 
+jump @WUZI1_1212 
+
+:WUZI1_1143
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 35@ radius 6.0 6.0 0 
+jf @WUZI1_1212 
+09DD: unknown_player_group 1 
+0631: put_actor 35@ in_group $PLAYER_GROUP 
+07CB: set_actor 35@ supporting_fire 0 
+Marker.Disable(108@)
+018B: set_marker 107@ radar_mode 3 
+72@ = 1 
+
+:WUZI1_1212
+return 
+
+:WUZI1_1214
+191@ = 4 
+023C: load_special_actor 'WUZIMU' as 1 // models 290-299 
+Model.Load(#MICRO_UZI)
+Model.Load(#DNB1)
+Model.Load(#DNB2)
+Model.Load(#DNB3)
+Model.Load(#TRIADA)
+Model.Load(#TRIADB)
+Model.Load(#SNIPER)
+Model.Load(#SENTINEL)
+Model.Load(#SANCHEZ)
+Model.Load(#OMOST)
+04ED: load_animation "WUZI" 
+07C0: load_path 169 
+07C0: load_path 139 
+
+:WUZI1_1296
+if or
+823D:   not special_actor 1 loaded 
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#SNIPER)
+   not Model.Available(#DNB1)
+   not Model.Available(#DNB2)
+   not Model.Available(#DNB3)
+jf @WUZI1_1344 
+wait 0 
+jump @WUZI1_1296 
+
+:WUZI1_1344
+if or
+   not Model.Available(#SENTINEL)
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#TRIADA)
+   not Model.Available(#TRIADB)
+   not Model.Available(#OMOST)
+jf @WUZI1_1388 
+wait 0 
+jump @WUZI1_1344 
+
+:WUZI1_1388
+if or
+87C1:   not path 169 available 
+87C1:   not path 139 available 
+jf @WUZI1_1420 
+wait 0 
+jump @WUZI1_1388 
+
+:WUZI1_1420
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 1 of_actors_pedtype 25 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 25 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+060A: create_decision_maker_type 2 store_to 34@ // decision\allowed\m_.ped files 
+0708: reset_decision_maker 34@ event 31 
+0708: reset_decision_maker 34@ event 9 
+0708: reset_decision_maker 34@ event 49 
+0708: reset_decision_maker 34@ event 15 
+0709: set_decision_maker 34@ on_event 31 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 34@ on_event 9 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+if 
+03CA:   object $2666 exists 
+jf @WUZI1_1576 
+Object.Destroy($2666)
+
+:WUZI1_1576
+$2666 = Object.Init(#CT_GATEXR, -2179.353, 661.232, 50.214)
+Object.Indestructibility($2666) = False
+Model.Destroy(#CT_GATEXR)
+68@ = Object.Init(#CT_STALL1, -2213.413, 640.908, 48.43)
+Object.Angle(68@) = 90.0
+58@ = Object.Init(#CT_TABLE, -2201.436, 647.109, 48.413)
+49@ = Object.Init(#CHINATGARAGEDOOR, -2184.415, 711.556, 54.523)
+50@ = Object.Init(#CHINATGARAGEDOOR, -2178.87, 711.556, 54.523)
+45@ = Object.Init(#TMP_BIN, -2183.968, 647.055, 49.185)
+46@ = Object.Init(#TMP_BIN, -2172.813, 654.019, 49.185)
+47@ = Object.Init(#TMP_BIN, -2172.813, 649.293, 49.185)
+Object.Angle(46@) = 270.0
+Object.Angle(47@) = 270.0
+Object.Angle($2666) = 0.0
+03C7: set_sensitivity_to_crime 0.2 
+Player.WantedLevel($PLAYER_CHAR) = 0
+73@ = 1 
+06D0: enable_emergency_traffic 0 
+77@ = 99 
+201@ = -2199.0 
+205@ = 645.4869 
+209@ = 48.4453 
+213@ = -2194.68 
+217@ = 646.1572 
+221@ = 48.4453 
+202@ = -2199.0 
+206@ = 640.8279 
+210@ = 48.4453 
+214@ = -2194.043 
+218@ = 638.7194 
+222@ = 48.4453 
+203@ = -2195.839 
+207@ = 635.439 
+211@ = 48.4453 
+215@ = -2189.367 
+219@ = 636.7801 
+223@ = 48.4453 
+204@ = -2213.005 
+208@ = 638.9453 
+212@ = 48.4459 
+216@ = -2204.778 
+220@ = 639.4221 
+224@ = 48.4453 
+35@ = Actor.Create(Mission2, #SPECIAL01, -2155.462, 645.8904, 51.3516)
+0085: 741@ = 35@ // (int) 
+37@ = 1 
+Actor.GiveWeaponAndAmmo(35@, MicroUzi, 5000)
+01B9: set_actor 35@ armed_weapon_to 0 
+Actor.Angle(35@) = 180.0
+Actor.Health(35@) = 250
+Actor.SetMaxHealth(35@, 250)
+161@ = 250 
+0446: set_actor 35@ dismemberment_possible 0 
+0296: unload_special_actor 1 
+018A: 107@ = create_checkpoint_at -2244.995 642.8972 48.4077 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @WUZI1_2250 
+Actor.PutAt($PLAYER_ACTOR, -2155.266, 645.0895, 51.3516)
+Actor.Angle($PLAYER_ACTOR) = 270.0
+
+:WUZI1_2250
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_2315 
+Actor.SetWalkStyle(35@, "BLINDMAN")
+060B: set_actor 35@ decision_maker_to 34@ 
+0568: set_actor 35@ untargetable 1 
+09DD: unknown_player_group 1 
+0631: put_actor 35@ in_group $PLAYER_GROUP 
+72@ = 1 
+
+:WUZI1_2315
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0A0B: set_rendering_origin_at_3D_coord -2155.266 645.0895 51.3516 angle 270.0 
+04E4: refresh_game_renderer_at -2155.0 645.0 
+fade 1 1000 
+Camera.SetAtPos(-2155.266, 645.0895, 51.3)
+71@ = 2 
+42@ = 0 
+return 
+
+:WUZI1_2400
+054C: use_GXT_table 'WUZI1' 
+Player.CanMove($PLAYER_CHAR) = False
+select_interior 1 
+02E4: load_cutscene_data 'WOOZI1A' 
+
+:WUZI1_2433
+if 
+86B9:   not cutscene_data_loaded 
+jf @WUZI1_2457 
+wait 0 
+jump @WUZI1_2433 
+
+:WUZI1_2457
+02E7: start_cutscene 
+fade 1 1000 
+
+:WUZI1_2466
+if 
+82E9:   not cutscene_reached_end 
+jf @WUZI1_2490 
+wait 0 
+jump @WUZI1_2466 
+
+:WUZI1_2490
+if 
+08D0:   should_skip_cutscene 
+jf @WUZI1_2510 
+238@ = 1 
+
+:WUZI1_2510
+fade 0 0 
+
+:WUZI1_2516
+if 
+fading 
+jf @WUZI1_2540 
+wait 0 
+jump @WUZI1_2516 
+
+:WUZI1_2540
+02EA: end_cutscene 
+if 
+  238@ == 0 
+jf @WUZI1_2660 
+02E4: load_cutscene_data 'WOOZI1B' 
+
+:WUZI1_2571
+if 
+86B9:   not cutscene_data_loaded 
+jf @WUZI1_2595 
+wait 0 
+jump @WUZI1_2571 
+
+:WUZI1_2595
+02E7: start_cutscene 
+fade 1 1000 
+
+:WUZI1_2604
+if 
+82E9:   not cutscene_reached_end 
+jf @WUZI1_2628 
+wait 0 
+jump @WUZI1_2604 
+
+:WUZI1_2628
+fade 0 0 
+
+:WUZI1_2634
+if 
+fading 
+jf @WUZI1_2658 
+wait 0 
+jump @WUZI1_2634 
+
+:WUZI1_2658
+02EA: end_cutscene 
+
+:WUZI1_2660
+select_interior 0 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+return 
+
+:WUZI1_2678
+if 
+  38@ == 0 
+jf @WUZI1_3801 
+if 
+  75@ == 0 
+jf @WUZI1_2771 
+637@ = 1 
+638@ = 2 
+75@ = 1 
+if 
+03CA:   object $2666 exists 
+jf @WUZI1_2771 
+0453: set_object $2666 XYZ_rotation 0.0 0.0 330.0 
+
+:WUZI1_2771
+if 
+  75@ == 1 
+jf @WUZI1_2830 
+if 
+  637@ == 0 
+jf @WUZI1_2830 
+00BB: show_text_lowpriority GXT 'WZ1_1' time 8000 flag 1  // ~s~Take Woozie to the Tong ~y~meeting~s~.
+75@ = 2 
+
+:WUZI1_2830
+if 
+  75@ == 2 
+jf @WUZI1_3801 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+  43@ == 0 
+jf @WUZI1_2918 
+if or
+  627.0 > $TEMPVAR_Y_COORD 
+  $TEMPVAR_Y_COORD > 657.0 
+jf @WUZI1_2918 
+43@ = 1 
+
+:WUZI1_2918
+if 
+  43@ == 1 
+jf @WUZI1_2975 
+if 
+  637@ == 0 
+jf @WUZI1_2975 
+637@ = 3 
+638@ = 2 
+43@ = 2 
+
+:WUZI1_2975
+if 
+  43@ == 2 
+jf @WUZI1_3021 
+if 
+  -2164.0 > $TEMPVAR_X_COORD 
+jf @WUZI1_3021 
+43@ = 3 
+
+:WUZI1_3021
+if 
+  43@ == 3 
+jf @WUZI1_3078 
+if 
+  637@ == 0 
+jf @WUZI1_3078 
+637@ = 5 
+638@ = 3 
+43@ = 4 
+
+:WUZI1_3078
+if 
+  43@ == 4 
+jf @WUZI1_3134 
+if and
+  707.0 > $TEMPVAR_Y_COORD 
+  $TEMPVAR_Y_COORD > 587.0 
+jf @WUZI1_3134 
+43@ = 5 
+
+:WUZI1_3134
+if 
+  43@ == 5 
+jf @WUZI1_3191 
+if 
+  637@ == 0 
+jf @WUZI1_3191 
+637@ = 9 
+638@ = 2 
+43@ = 6 
+
+:WUZI1_3191
+if 
+  43@ == 7 
+jf @WUZI1_3240 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_3240 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+43@ = 8 
+
+:WUZI1_3240
+if 
+  43@ == 8 
+jf @WUZI1_3350 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_3316 
+Player.CanMove($PLAYER_CHAR) = True
+43@ = 11 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_3309 
+06C9: remove_actor 35@ from_group 
+
+:WUZI1_3309
+jump @WUZI1_3350 
+
+:WUZI1_3316
+062E: get_actor $PLAYER_ACTOR task 1587 status_store_to 195@ // ret 7 if not found 
+if 
+04A4:   195@ == 7 // == constant 
+jf @WUZI1_3350 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+
+:WUZI1_3350
+if 
+  239@ == 1 
+jf @WUZI1_3414 
+if and
+  636@ == 1 
+  637@ == 0 
+jf @WUZI1_3414 
+637@ = 11 
+638@ = 4 
+239@ = 2 
+
+:WUZI1_3414
+if 
+  239@ == 2 
+jf @WUZI1_3487 
+if and
+  636@ == 1 
+  637@ == 0 
+jf @WUZI1_3487 
+00BB: show_text_lowpriority GXT 'WZ1_B4' time 5000 flag 1  // ~s~Stick close to ~b~Woozie~s~.
+38@ = 1 
+239@ = 3 
+
+:WUZI1_3487
+if 
+  7 > 43@ 
+jf @WUZI1_3801 
+if 
+  72@ == 1 
+jf @WUZI1_3801 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_3801 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -2248.077 651.3163 48.3815 radius 4.0 4.0 4.0 
+jf @WUZI1_3801 
+if 
+80FE:   not actor 35@ sphere 0 in_sphere -2248.077 651.3163 48.3815 radius 6.0 6.0 6.0 
+jf @WUZI1_3658 
+00BC: show_text_highpriority GXT 'WZ1_2' time 1000 flag 1  // ~s~Wait for Woozie.
+jump @WUZI1_3801 
+
+:WUZI1_3658
+239@ = 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_3775 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+Player.CanMove($PLAYER_CHAR) = False
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 600 
+0085: 159@ = 32@ // (int) 
+159@ += 600 
+if 
+   Actor.Driving(35@)
+jf @WUZI1_3775 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0633: AS_actor -1 exit_car 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_3775
+636@ = 6 
+Marker.Disable(107@)
+43@ = 7 
+73@ = 0 
+
+:WUZI1_3801
+if 
+  38@ == 1 
+jf @WUZI1_3925 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_3925 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_3925 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 300 ms 
+05F5: AS_actor -1 goto_point_using_paths -2244.439 643.4277 48.4375 mode 4 time -2 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+253@ = 20 
+38@ = 2 
+
+:WUZI1_3925
+if 
+  38@ == 2 
+jf @WUZI1_7121 
+if 
+  240@ == 0 
+jf @WUZI1_4436 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+  646.0 > $TEMPVAR_Y_COORD 
+jf @WUZI1_4436 
+0376: 243@ = create_random_actor_at -2182.969 645.0695 48.4453 
+0376: 244@ = create_random_actor_at -2183.643 642.2832 48.4453 
+0376: 245@ = create_random_actor_at -2190.507 636.5036 48.4429 
+0376: 246@ = create_random_actor_at -2200.647 641.6252 48.4429 
+0376: 247@ = create_random_actor_at -2200.622 642.8997 48.4429 
+0376: 248@ = create_random_actor_at -2223.243 644.5712 48.4448 
+0376: 249@ = create_random_actor_at -2235.814 642.5659 48.4472 
+0085: 250@ = 32@ // (int) 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 2000 ms 
+05DC: AS_actor -1 run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 243@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+05D3: AS_actor 244@ goto_point -2190.978 646.0287 48.4453 mode 4 time -2 ms // versionA 
+05D3: AS_actor 245@ goto_point -2192.964 644.2189 48.4453 mode 4 time -2 ms // versionA 
+0615: define_AS_pack_begin 132@ 
+0639: AS_actor -1 rotate_to_actor 247@ 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 6000 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 246@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0615: define_AS_pack_begin 132@ 
+0639: AS_actor -1 rotate_to_actor 246@ 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 6000 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 247@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+05D3: AS_actor 248@ goto_point -2200.941 644.4352 48.4429 mode 4 time -2 ms // versionA 
+05D3: AS_actor 249@ goto_point -2213.171 638.7413 48.4496 mode 4 time -2 ms // versionA 
+240@ = 1 
+
+:WUZI1_4436
+if 
+  240@ > 0 
+jf @WUZI1_5280 
+0085: 251@ = 32@ // (int) 
+0062: 251@ -= 250@ // (int) 
+if 
+  252@ == 0 
+jf @WUZI1_4558 
+if 
+  251@ > 3500 
+jf @WUZI1_4558 
+if 
+   not Actor.Dead(244@)
+jf @WUZI1_4551 
+05DC: AS_actor 244@ run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+
+:WUZI1_4551
+252@ = 1 
+
+:WUZI1_4558
+if 
+  252@ == 1 
+jf @WUZI1_4704 
+if 
+  251@ > 6000 
+jf @WUZI1_4704 
+if 
+   not Actor.Dead(245@)
+jf @WUZI1_4697 
+0615: define_AS_pack_begin 132@ 
+05DC: AS_actor -1 run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 5000 
+05BB: AS_actor -1 fall_down 0 time_on_ground 500 
+05DC: AS_actor -1 run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 245@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_4697
+252@ = 2 
+
+:WUZI1_4704
+if 
+  252@ == 2 
+jf @WUZI1_4792 
+if 
+  251@ > 9000 
+jf @WUZI1_4792 
+if 
+   not Actor.Dead(246@)
+jf @WUZI1_4785 
+05DC: AS_actor 246@ run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+
+:WUZI1_4785
+252@ = 3 
+
+:WUZI1_4792
+if 
+  252@ == 3 
+jf @WUZI1_4938 
+if 
+  251@ > 8000 
+jf @WUZI1_4938 
+if 
+   not Actor.Dead(247@)
+jf @WUZI1_4931 
+0615: define_AS_pack_begin 132@ 
+05DC: AS_actor -1 run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 3000 
+05BB: AS_actor -1 fall_down 0 time_on_ground 500 
+05DC: AS_actor -1 run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 247@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_4931
+252@ = 4 
+
+:WUZI1_4938
+if 
+  252@ == 4 
+jf @WUZI1_5026 
+if 
+  251@ > 10000 
+jf @WUZI1_5026 
+if 
+   not Actor.Dead(248@)
+jf @WUZI1_5019 
+05DC: AS_actor 248@ run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+
+:WUZI1_5019
+252@ = 5 
+
+:WUZI1_5026
+if 
+  252@ == 5 
+jf @WUZI1_5114 
+if 
+  251@ > 12000 
+jf @WUZI1_5114 
+if 
+   not Actor.Dead(249@)
+jf @WUZI1_5107 
+05DC: AS_actor 249@ run_away_from_point -2181.969 645.0695 48.4453 stop_at_radius 80.0 timelimit 30000 
+
+:WUZI1_5107
+252@ = 6 
+
+:WUZI1_5114
+if 
+  252@ == 6 
+jf @WUZI1_5280 
+if 
+  251@ > 52000 
+jf @WUZI1_5280 
+130@ = 0 
+
+:WUZI1_5160
+if 
+  7 > 130@ 
+jf @WUZI1_5273 
+if 
+   not Actor.Dead(243@(130@,7i))
+jf @WUZI1_5259 
+05B9: AS_actor 243@(130@,7i) stay_idle 1 ms 
+Actor.RemoveReferences(243@(130@,7i))
+05DE: AS_actor 243@(130@,7i) walk_around_ped_path 
+022B: create_forbidden_for_peds_cube_cornerA -2239.251 636.6675 53.1933 cornerB -2165.047 720.0577 49.5456 
+
+:WUZI1_5259
+130@ += 1 
+jump @WUZI1_5160 
+
+:WUZI1_5273
+252@ = 7 
+
+:WUZI1_5280
+if 
+  240@ == 1 
+jf @WUZI1_5582 
+if and
+  251@ > 12000 
+  22000 > 251@ 
+jf @WUZI1_5582 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_5582 
+Actor.StorePos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  $TEMPVAR_FLOAT_1 > -2240.276 
+  -2227.0 > $TEMPVAR_FLOAT_1 
+jf @WUZI1_5582 
+if 
+0104:   actor 35@ near_actor $PLAYER_ACTOR radius 8.0 8.0 8.0 sphere 0 
+jf @WUZI1_5582 
+0687: clear_actor 35@ task 
+05B9: AS_actor 35@ stay_idle 1 ms 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2232.999 643.0717 48.4466 
+05D7: add_point_to_scmpath -2213.888 643.3788 48.4462 
+05D7: add_point_to_scmpath -2172.958 644.4861 48.4453 
+0615: define_AS_pack_begin 132@ 
+05C8: AS_actor -1 look_around 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 5000 ms 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05B9: AS_actor -1 stay_idle 0 ms 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05BB: AS_actor -1 fall_down 0 time_on_ground 500 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+637@ = 69 
+638@ = 4 
+240@ = 2 
+253@ = 21 
+
+:WUZI1_5582
+if 
+  253@ == 1 
+jf @WUZI1_5833 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_5833 
+062E: get_actor 35@ task -1 status_store_to 158@ // ret 7 if not found 
+if 
+04A4:   158@ == 7 // == constant 
+jf @WUZI1_5833 
+if and
+  637@ == 0 
+  636@ == 1 
+jf @WUZI1_5833 
+0615: define_AS_pack_begin 132@ 
+0605: actor -1 perform_animation "WUZI_GRND_CHK" IFP "WUZI" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 4000 
+05D3: AS_actor -1 goto_point -2214.083 641.1605 48.4489 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0708: reset_decision_maker 34@ event 44 
+637@ = 73 
+638@ = 3 
+253@ = 20 
+
+:WUZI1_5833
+if 
+  253@ == 20 
+jf @WUZI1_6197 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_6197 
+062E: get_actor 35@ task -1 status_store_to 158@ // ret 7 if not found 
+if 
+04A4:   158@ == 7 // == constant 
+jf @WUZI1_6197 
+if and
+  637@ == 0 
+  636@ == 1 
+jf @WUZI1_6197 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2232.999 643.0717 48.4466 
+05D7: add_point_to_scmpath -2213.888 643.3788 48.4462 
+05D7: add_point_to_scmpath -2172.958 644.4861 48.4453 
+if 
+0104:   actor 35@ near_actor $PLAYER_ACTOR radius 13.0 13.0 10.0 sphere 0 
+jf @WUZI1_6023 
+254@ = 1 
+jump @WUZI1_6030 
+
+:WUZI1_6023
+254@ = 0 
+
+:WUZI1_6030
+0615: define_AS_pack_begin 132@ 
+0605: actor -1 perform_animation "WUZI_GRND_CHK" IFP "WUZI" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05B9: AS_actor -1 stay_idle 1000 ms 
+if 
+  254@ == 1 
+jf @WUZI1_6143 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 3500 
+
+:WUZI1_6143
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0708: reset_decision_maker 34@ event 44 
+637@ = 73 
+638@ = 3 
+253@ = 21 
+
+:WUZI1_6197
+if 
+  253@ == 21 
+jf @WUZI1_6535 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_6535 
+062E: get_actor 35@ task 1560 status_store_to 158@ // ret 7 if not found 
+Actor.StorePos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  $TEMPVAR_FLOAT_1 > -2181.276 
+jf @WUZI1_6339 
+0615: define_AS_pack_begin 132@ 
+05D3: AS_actor -1 goto_point -2172.958 644.4861 48.4453 mode 6 time -2 ms // versionA 
+05BB: AS_actor -1 fall_down 0 time_on_ground 500 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+253@ = 22 
+
+:WUZI1_6339
+if and
+  -2243.0 > $TEMPVAR_FLOAT_1 
+  257@ == 1 
+jf @WUZI1_6482 
+257@ = 2 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2244.83 643.3638 48.439 
+05D7: add_point_to_scmpath -2232.999 643.0717 48.4466 
+05D7: add_point_to_scmpath -2213.888 643.3788 48.4462 
+05D7: add_point_to_scmpath -2172.958 644.4861 48.4453 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_6482
+if 
+  $TEMPVAR_FLOAT_1 > -2240.0 
+jf @WUZI1_6535 
+if or
+  257@ == 0 
+  257@ == 2 
+jf @WUZI1_6535 
+257@ = 1 
+
+:WUZI1_6535
+if 
+  253@ == 22 
+jf @WUZI1_6680 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_6680 
+062E: get_actor 35@ task 1560 status_store_to 158@ // ret 7 if not found 
+if 
+04A4:   158@ == 1 // == constant 
+jf @WUZI1_6680 
+if 
+  255@ == 0 
+jf @WUZI1_6680 
+0646: unknown_get_actor 35@ task_1560_status_store_to 132@ // similar to 062E 
+if or
+  132@ == 1 
+04A4:   158@ == 7 // == constant 
+jf @WUZI1_6680 
+09D5: play_sound_of_actor 35@ soundslot 345 unknown_flags 1 0 0 as 256@ // extended 0947 
+253@ = 23 
+255@ = 1 
+
+:WUZI1_6680
+if 
+  253@ == 23 
+jf @WUZI1_6831 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_6831 
+062E: get_actor 35@ task 1560 status_store_to 158@ // ret 7 if not found 
+if 
+04A4:   158@ == 7 // == constant 
+jf @WUZI1_6831 
+0615: define_AS_pack_begin 132@ 
+05C8: AS_actor -1 look_around 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 5000 ms 
+05B9: AS_actor -1 stay_idle 4000 ms 
+05D3: AS_actor -1 goto_point -2176.184 653.9911 48.4453 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+637@ = 78 
+638@ = 4 
+253@ = 10 
+
+:WUZI1_6831
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_7121 
+if 
+  78@ == 0 
+jf @WUZI1_6903 
+if 
+   not Actor.Driving(35@)
+jf @WUZI1_6903 
+108@ = Marker.CreateAboveActor(35@)
+07E0: set_marker 108@ type_to 1 
+78@ = 1 
+
+:WUZI1_6903
+if and
+  637@ == 0 
+  636@ == 1 
+jf @WUZI1_7121 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2175.872 659.7667 49.4793 radius 6.0 6.0 6.0 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2191.513 711.8201 63.4591 cornerB -2171.859 648.7307 48.1132 
+jf @WUZI1_7121 
+71@ = 3 
+42@ = 0 
+0085: 266@ = 32@ // (int) 
+266@ += 1500 
+06C9: remove_actor 35@ from_group 
+Marker.Disable(108@)
+130@ = 0 
+
+:WUZI1_7060
+if 
+  7 > 130@ 
+jf @WUZI1_7121 
+if 
+056D:   actor 243@(130@,7i) defined 
+jf @WUZI1_7107 
+Actor.DestroyInstantly(243@(130@,7i))
+
+:WUZI1_7107
+130@ += 1 
+jump @WUZI1_7060 
+
+:WUZI1_7121
+return 
+
+:WUZI1_7123
+03C7: set_sensitivity_to_crime 0.1 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+if 
+  92@ == 1 
+jf @WUZI1_7169 
+
+:WUZI1_7169
+if 
+  39@ == 0 
+jf @WUZI1_7218 
+39@ = 1 
+if 
+00E1:   player 0 pressed_key 16 
+jf @WUZI1_7218 
+40@ = 1 
+
+:WUZI1_7218
+if 
+00E1:   player 0 pressed_key 16 
+jf @WUZI1_7300 
+if 
+  40@ == 0 
+jf @WUZI1_7293 
+if 
+001D:   32@ > 266@ // (int) 
+jf @WUZI1_7293 
+42@ = 13 
+159@ = 0 
+636@ = 6 
+
+:WUZI1_7293
+jump @WUZI1_7325 
+
+:WUZI1_7300
+if 
+  40@ == 1 
+jf @WUZI1_7325 
+40@ = 0 
+
+:WUZI1_7325
+if 
+  42@ == 0 
+jf @WUZI1_8452 
+041D: set_camera_near_clip 0.1 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+088D: set_objects_in_sphere -2175.213 662.718 50.8582 radius 10.5 with_model #CT_GATEXR collision_detection 0 
+0470: 196@ = actor $PLAYER_ACTOR current_weapon 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetPosition(-2172.251, 660.9875, 48.5695, 0.0, 0.0, 0.0)
+Camera.PointAt(-2173.039, 660.4017, 48.7593, 2)
+Object.Indestructibility($2666) = True
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+07C0: load_path 169 
+100@ = Car.Create(#SENTINEL, -2183.575, 705.0761, 52.8984)
+99@ = Car.Create(#SENTINEL, -2174.429, 703.2332, 52.8918)
+Car.Angle(99@) = 218.7637
+Car.Angle(100@) = 347.2325
+Car.LockInCurrentPosition(99@) = True
+Car.LockInCurrentPosition(100@) = True
+073C: car 99@ damage_componentB 0 
+073C: car 99@ damage_componentB 0 
+073C: car 99@ damage_componentB 0 
+073C: car 99@ damage_componentB 3 
+073C: car 99@ damage_componentB 3 
+073C: car 99@ damage_componentB 3 
+073C: car 99@ damage_componentB 5 
+073C: car 99@ damage_componentB 1 
+073C: car 99@ damage_componentB 1 
+073C: car 99@ damage_componentB 1 
+073C: car 99@ damage_componentB 2 
+073C: car 99@ damage_componentB 2 
+0730: car 99@ damage_door 1 
+0730: car 99@ damage_door 1 
+0730: car 99@ damage_door 5 
+0730: car 99@ damage_door 4 
+0730: car 99@ damage_door 4 
+0730: car 99@ damage_door 1 
+0730: car 99@ damage_door 1 
+0730: car 99@ damage_door 5 
+073C: car 100@ damage_componentB 0 
+073C: car 100@ damage_componentB 0 
+073C: car 100@ damage_componentB 3 
+073C: car 100@ damage_componentB 3 
+073C: car 100@ damage_componentB 5 
+0730: car 100@ damage_door 1 
+0730: car 100@ damage_door 1 
+0730: car 100@ damage_door 5 
+073C: car 100@ damage_componentB 1 
+073C: car 100@ damage_componentB 1 
+073C: car 100@ damage_componentB 0 
+073C: car 100@ damage_componentB 0 
+073C: car 100@ damage_componentB 2 
+073C: car 100@ damage_componentB 2 
+0730: car 100@ damage_door 1 
+0730: car 100@ damage_door 1 
+0730: car 100@ damage_door 5 
+0657: car 99@ open_door 3 
+0657: car 99@ open_door 5 
+0657: car 100@ open_door 3 
+04FE: deflate_tire 1 on_car 100@ 
+04E1: open_and_freeze_car_trunk 100@ 
+067F: set_car 99@ lights 2 
+08CB: explode_car 99@ shake 0 effect 0 sound 0 
+08CB: explode_car 100@ shake 0 effect 0 sound 0 
+0395: clear_area 0 at -2180.443 703.3992 55.7186 radius 20.0 
+0395: clear_area 0 at -2175.947 660.2386 49.7032 radius 10.0 
+02CF: 258@ = create_fire_at -2183.575 705.0761 52.8984 propagation 3 size 2 
+02CF: 259@ = create_fire_at -2174.429 703.2332 52.8918 propagation 5 size 2 
+0828: set_max_fire_generations 0 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_8397 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, -2176.33, 654.2678, 48.4453)
+Actor.PutAt($PLAYER_ACTOR, -2175.33, 653.2678, 48.4453)
+Actor.Angle($PLAYER_ACTOR) = 280.0
+Actor.Angle(35@) = 270.0
+05D3: AS_actor $PLAYER_ACTOR goto_point -2173.952 657.6135 49.8762 mode 4 time -2 ms // versionA 
+0615: define_AS_pack_begin 132@ 
+05D3: AS_actor -1 goto_point -2174.468 658.379 48.4453 mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 72.0 
+0605: actor -1 perform_animation "WUZI_GREET_WUZI" IFP "WUZI" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+754@ = 1 
+$7248 = 1 
+285@ = 15 
+329@ = 12 
+289@ = 395 
+290@ = 4202 
+291@ = 7380 
+292@ = 13000 
+293@ = 14516 
+294@ = 17352 
+295@ = 19617 
+296@ = 21861 
+297@ = 23540 
+298@ = 26894 
+299@ = 28934 
+300@ = 33619 
+309@ = 15 
+310@ = 16 
+311@ = 17 
+312@ = 18 
+313@ = 19 
+314@ = 20 
+315@ = 21 
+316@ = 22 
+317@ = 23 
+318@ = 24 
+319@ = 25 
+320@ = 26 
+
+:WUZI1_8397
+03BA: clear_cars_from_cube_cornerA -2168.53 717.8694 68.3455 cornerB -2254.379 608.9255 44.7364 
+0085: 159@ = 32@ // (int) 
+159@ += 7880 
+42@ = 1 
+
+:WUZI1_8452
+if 
+  42@ == 1 
+jf @WUZI1_8676 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_8676 
+05D6: clear_scmpath 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_8572 
+05D7: add_point_to_scmpath -2175.939 662.5935 48.7831 
+05D7: add_point_to_scmpath -2175.389 658.0797 48.4453 
+0615: define_AS_pack_begin 132@ 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_8572
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2174.71 658.746 48.4453 
+05D7: add_point_to_scmpath -2175.939 662.5935 48.7831 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 1200 ms 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0085: 159@ = 32@ // (int) 
+159@ += 3000 
+42@ = 2 
+92@ = 1 
+
+:WUZI1_8676
+if 
+  42@ == 2 
+jf @WUZI1_8720 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_8720 
+42@ = 3 
+
+:WUZI1_8720
+if 
+  42@ == 3 
+jf @WUZI1_9151 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_9151 
+Camera.SetPosition(-2176.838, 696.095, 53.828, 0.0, 0.0, 0.0)
+Camera.PointAt(-2178.171, 693.774, 54.725, 2)
+134@ = Actor.Create(CivMale, #TRIADA, -2177.462, 698.151, 52.923)
+135@ = Actor.Create(CivMale, #TRIADB, -2182.442, 704.3199, 52.8984)
+136@ = Actor.Create(CivMale, #TRIADA, -2176.552, 702.9572, 52.8984)
+137@ = Actor.Create(CivMale, #TRIADB, -2178.468, 707.6988, 52.8971)
+Actor.Angle(134@) = 77.5
+Actor.Angle(135@) = 229.921
+Actor.Angle(136@) = 148.6859
+Actor.Angle(137@) = 12.4516
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+05BE: AS_actor 135@ die 
+05BE: AS_actor 136@ die 
+05BE: AS_actor 137@ die 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_9128 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt($PLAYER_ACTOR, -2177.034, 690.892, 52.9)
+Actor.PutAt(35@, -2177.995, 690.775, 52.9)
+Actor.Angle(35@) = 0.0
+Actor.Angle($PLAYER_ACTOR) = 0.0
+0605: actor $PLAYER_ACTOR perform_animation "CS_PLYR_PT1" IFP "WUZI" framedelta 1000.0 loop 0 lockX 1 lockY 1 lockF 0 time -2 
+0605: actor 35@ perform_animation "CS_WUZI_PT1" IFP "WUZI" framedelta 1000.0 loop 0 lockX 1 lockY 1 lockF 0 time -2 
+
+:WUZI1_9128
+42@ = 4 
+0085: 159@ = 32@ // (int) 
+159@ += 3000 
+
+:WUZI1_9151
+if 
+  42@ == 4 
+jf @WUZI1_9310 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_9310 
+if 
+   not Actor.Dead(134@)
+jf @WUZI1_9310 
+Actor.PutAt(134@, -2177.602, 698.151, 53.0)
+Actor.Angle(134@) = 77.5
+0812: AS_actor 134@ perform_animation "CS_DEAD_GUY" IFP "WUZI" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+Actor.LockInCurrentPosition(134@) = True
+0619: enable_actor 134@ collision_detection 0 
+0085: 159@ = 32@ // (int) 
+159@ += 766 
+42@ = 5 
+
+:WUZI1_9310
+if 
+  42@ == 5 
+jf @WUZI1_9575 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_9575 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_9575 
+42@ = 6 
+Camera.SetPosition(-2178.133, 693.2726, 54.0799, 0.0, 0.0, 0.0)
+Camera.PointAt(-2178.13, 694.2693, 54.0, 2)
+Actor.PutAt($PLAYER_ACTOR, -2177.034, 694.913, 52.87)
+Actor.PutAt(35@, -2177.994, 696.476, 52.87)
+Actor.Angle(35@) = 0.0
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 35@ 
+0812: AS_actor $PLAYER_ACTOR perform_animation "CS_PLYR_PT2" IFP "WUZI" framedelta 1000.0 loopA 0 lockX 1 lockY 1 lockF 0 time -2 // versionB 
+0812: AS_actor 35@ perform_animation "CS_WUZI_PT2" IFP "WUZI" framedelta 1000.0 loopA 0 lockX 1 lockY 1 lockF 0 time -2 // versionB 
+0085: 159@ = 32@ // (int) 
+159@ += 2234 
+
+:WUZI1_9575
+if 
+  42@ == 6 
+jf @WUZI1_9724 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_9724 
+if 
+   not Actor.Dead(134@)
+jf @WUZI1_9724 
+Actor.PutAt(134@, -2177.602, 698.151, 53.0)
+0812: AS_actor 134@ perform_animation "CS_DEAD_GUY" IFP "WUZI" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+Actor.LockInCurrentPosition(134@) = True
+0619: enable_actor 134@ collision_detection 0 
+0085: 159@ = 32@ // (int) 
+159@ += 3833 
+42@ = 7 
+
+:WUZI1_9724
+if 
+  42@ == 7 
+jf @WUZI1_10139 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_10139 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_10139 
+Camera.SetPosition(-2177.798, 695.7769, 54.2318, 0.0, 0.0, 0.0)
+Camera.PointAt(-2177.627, 696.7596, 54.3015, 2)
+0085: 159@ = 32@ // (int) 
+159@ += 3000 
+42@ = 8 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_9877 
+Actor.GiveWeaponAndAmmo(35@, MicroUzi, 5000)
+
+:WUZI1_9877
+101@ = Car.Create(#SENTINEL, -2177.524, 642.8537, 48.4453)
+92@ = 0 
+Object.Angle($2666) = 0.0
+138@ = Actor.CreateAsDriver(Mission2, #DNB1, 101@)
+139@ = Actor.CreateAsPassenger(Mission2, #DNB2, 101@, 0)
+140@ = Actor.CreateAsPassenger(Mission2, #DNB3, 101@, 1)
+141@ = Actor.CreateAsPassenger(Mission2, #DNB2, 101@, 2)
+Actor.GiveWeaponAndAmmo(138@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(139@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(140@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(141@, MicroUzi, 500)
+Actor.WeaponAccuracy(138@) = 60
+Actor.WeaponAccuracy(139@) = 60
+Actor.WeaponAccuracy(140@) = 60
+Actor.WeaponAccuracy(141@) = 60
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 25 
+Car.SetSpeedInstantly(101@, 20.0)
+060B: set_actor 138@ decision_maker_to 34@ 
+060B: set_actor 139@ decision_maker_to 34@ 
+060B: set_actor 140@ decision_maker_to 34@ 
+060B: set_actor 141@ decision_maker_to 34@ 
+156@ = Actor.Create(CivMale, #TRIADA, -2180.265, 712.9368, 52.905)
+0085: 742@ = 156@ // (int) 
+Actor.Angle(156@) = 180.0
+
+:WUZI1_10139
+if 
+  42@ == 8 
+jf @WUZI1_10267 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_10267 
+if 
+   not Actor.Dead(156@)
+jf @WUZI1_10267 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_10226 
+01B9: set_actor 35@ armed_weapon_to 28 
+0635: AS_actor 35@ aim_at_actor 156@ 4000 ms 
+
+:WUZI1_10226
+0635: AS_actor $PLAYER_ACTOR aim_at_actor 156@ 4000 ms 
+0085: 159@ = 32@ // (int) 
+159@ += 2000 
+42@ = 9 
+260@ = 1 
+
+:WUZI1_10267
+if 
+  42@ == 9 
+jf @WUZI1_10477 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_10477 
+if 
+   not Actor.Dead(156@)
+jf @WUZI1_10453 
+05C4: AS_actor 156@ hands_up 5000 ms 
+0615: define_AS_pack_begin 132@ 
+05B9: AS_actor -1 stay_idle 6000 ms 
+0605: actor -1 perform_animation "FLEE_LKAROUND_01" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0085: 159@ = 32@ // (int) 
+159@ += 8000 
+42@ = 10 
+263@ = 3 
+0085: 262@ = 32@ // (int) 
+262@ += 8500 
+261@ = 1 
+
+:WUZI1_10453
+04AF: 281@ = 28000 // = constant 
+0085: 283@ = 32@ // (int) 
+283@ += 6000 
+
+:WUZI1_10477
+if 
+  260@ == 1 
+jf @WUZI1_10640 
+if 
+  263@ == 0 
+jf @WUZI1_10540 
+097A: play_audio_at -2178.554 704.7785 54.2349 event 1153 
+263@ = 1 
+
+:WUZI1_10540
+if 
+034E: move_object 50@ to -2178.87 711.556 57.523 speed 0.0 0.0 0.08 collision_check 0 
+jf @WUZI1_10640 
+if 
+  263@ == 1 
+jf @WUZI1_10640 
+097A: play_audio_at -2178.554 704.7785 54.2349 event 1154 
+263@ = 2 
+260@ = 2 
+
+:WUZI1_10640
+if 
+  261@ == 1 
+jf @WUZI1_10684 
+if 
+001D:   32@ > 262@ // (int) 
+jf @WUZI1_10684 
+261@ = 2 
+
+:WUZI1_10684
+if 
+  261@ == 2 
+jf @WUZI1_10840 
+if 
+  263@ == 3 
+jf @WUZI1_10747 
+097A: play_audio_at -2178.554 704.7785 54.2349 event 1153 
+263@ = 4 
+
+:WUZI1_10747
+if 
+034E: move_object 50@ to -2178.87 711.556 54.523 speed 0.0 0.0 0.08 collision_check 0 
+jf @WUZI1_10840 
+if 
+  263@ == 4 
+jf @WUZI1_10840 
+097A: play_audio_at -2178.554 704.7785 54.2349 event 1154 
+263@ = 5 
+
+:WUZI1_10840
+if 
+  42@ == 10 
+jf @WUZI1_10900 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_10900 
+0085: 159@ = 32@ // (int) 
+159@ += 1000 
+42@ = 11 
+
+:WUZI1_10900
+if 
+  42@ == 11 
+jf @WUZI1_11070 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_11070 
+Camera.SetPosition(-2172.674, 674.1689, 53.0772, 0.0, 0.0, 0.0)
+Camera.PointAt(-2173.268, 673.4052, 52.8255, 2)
+if 
+   not Actor.Dead(134@)
+jf @WUZI1_11011 
+Actor.Health(134@) = 0
+
+:WUZI1_11011
+if and
+   not Car.Wrecked(101@)
+   not Actor.Dead(138@)
+jf @WUZI1_11040 
+05EB: assign_car 101@ to_path 169 
+
+:WUZI1_11040
+Object.Indestructibility($2666) = True
+42@ = 14 
+0085: 159@ = 32@ // (int) 
+159@ += 600 
+
+:WUZI1_11070
+if 
+  42@ == 14 
+jf @WUZI1_11157 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_11157 
+0723: break_object $2666 intensity 0 
+097A: play_audio_at -2177.422 662.1031 51.0185 event 1141 
+42@ = 12 
+0085: 159@ = 32@ // (int) 
+159@ += 2800 
+
+:WUZI1_11157
+if 
+  42@ == 12 
+jf @WUZI1_11290 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_11290 
+if 
+   not Actor.Dead(138@)
+jf @WUZI1_11290 
+if 
+   not Car.Wrecked(101@)
+jf @WUZI1_11290 
+068B: set_car 101@ all_disembark 
+42@ = 13 
+0085: 159@ = 32@ // (int) 
+159@ += 2000 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2178.472 676.4617 48.8898 
+05D7: add_point_to_scmpath -2178.472 695.4617 52.8898 
+
+:WUZI1_11290
+if 
+  42@ == 13 
+jf @WUZI1_11455 
+if 
+   not Actor.Dead(138@)
+jf @WUZI1_11406 
+if 
+   not Actor.Driving(138@)
+jf @WUZI1_11406 
+062E: get_actor 138@ task 1560 status_store_to 158@ // ret 7 if not found 
+if 
+04A4:   158@ == 7 // == constant 
+jf @WUZI1_11406 
+0615: define_AS_pack_begin 132@ 
+04EB: AS_actor -1 crouch 1 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 138@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_11406
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_11455 
+42@ = 15 
+fade 0 1000 
+0085: 159@ = 32@ // (int) 
+159@ += 1000 
+
+:WUZI1_11455
+if 
+  42@ == 15 
+jf @WUZI1_13178 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_13178 
+92@ = 0 
+if 
+03CA:   object $2666 exists 
+jf @WUZI1_11520 
+Object.Destroy($2666)
+
+:WUZI1_11520
+if 
+   not Car.Wrecked(101@)
+jf @WUZI1_11566 
+Car.PutAt(101@, -2174.727, 673.9934, 51.8769)
+Car.Angle(101@) = 337.6978
+
+:WUZI1_11566
+Model.Load(#TRIADA)
+Model.Load(#TRIADB)
+07C0: load_path 169 
+
+:WUZI1_11579
+if or
+   not Model.Available(#TRIADA)
+   not Model.Available(#TRIADB)
+87C1:   not path 169 available 
+jf @WUZI1_11614 
+wait 0 
+jump @WUZI1_11579 
+
+:WUZI1_11614
+if 
+   Car.Wrecked(101@)
+jf @WUZI1_11653 
+101@ = Car.Create(#SENTINEL, -2174.727, 673.9934, 51.8769)
+
+:WUZI1_11653
+if 
+   not Car.Wrecked(101@)
+jf @WUZI1_11698 
+if 
+860E:   not car 101@ assigned_to_path 
+jf @WUZI1_11693 
+05EB: assign_car 101@ to_path 169 
+
+:WUZI1_11693
+06C5: release_car 101@ from_path 
+
+:WUZI1_11698
+Actor.DestroyInstantly(138@)
+Actor.DestroyInstantly(139@)
+Actor.DestroyInstantly(140@)
+Actor.DestroyInstantly(141@)
+if 
+   not Actor.Dead(138@)
+jf @WUZI1_11804 
+if 
+   Actor.Driving(138@)
+jf @WUZI1_11777 
+0362: remove_actor 138@ from_car_and_place_at -2176.649 669.7497 50.7274 
+jump @WUZI1_11797 
+
+:WUZI1_11777
+Actor.PutAt(138@, -2176.649, 669.7497, 50.7274)
+
+:WUZI1_11797
+jump @WUZI1_11828 
+
+:WUZI1_11804
+138@ = Actor.Create(Mission1, #DNB1, -2176.649, 669.7497, 50.7274)
+
+:WUZI1_11828
+Actor.Angle(138@) = 34.4985
+if 
+   not Actor.Dead(139@)
+jf @WUZI1_11924 
+if 
+   Actor.Driving(139@)
+jf @WUZI1_11897 
+0362: remove_actor 139@ from_car_and_place_at -2172.771 671.1902 51.1101 
+jump @WUZI1_11917 
+
+:WUZI1_11897
+Actor.PutAt(139@, -2172.771, 671.1902, 51.1101)
+
+:WUZI1_11917
+jump @WUZI1_11948 
+
+:WUZI1_11924
+139@ = Actor.Create(Mission1, #DNB2, -2172.771, 671.1902, 51.1101)
+
+:WUZI1_11948
+Actor.Angle(139@) = 28.6454
+if 
+   not Actor.Dead(140@)
+jf @WUZI1_12044 
+if 
+   Actor.Driving(140@)
+jf @WUZI1_12017 
+0362: remove_actor 140@ from_car_and_place_at -2176.143 676.2279 52.4792 
+jump @WUZI1_12037 
+
+:WUZI1_12017
+Actor.PutAt(140@, -2176.143, 676.2279, 52.4792)
+
+:WUZI1_12037
+jump @WUZI1_12068 
+
+:WUZI1_12044
+140@ = Actor.Create(Mission1, #DNB3, -2176.143, 676.2279, 52.4792)
+
+:WUZI1_12068
+Actor.Angle(140@) = 6.8518
+if 
+   not Actor.Dead(141@)
+jf @WUZI1_12164 
+if 
+   Actor.Driving(141@)
+jf @WUZI1_12137 
+0362: remove_actor 141@ from_car_and_place_at -2177.82 675.736 52.3458 
+jump @WUZI1_12157 
+
+:WUZI1_12137
+Actor.PutAt(141@, -2177.82, 675.736, 52.3458)
+
+:WUZI1_12157
+jump @WUZI1_12188 
+
+:WUZI1_12164
+141@ = Actor.Create(Mission1, #DNB2, -2177.82, 675.736, 52.3458)
+
+:WUZI1_12188
+Actor.Angle(141@) = 6.2257
+Actor.GiveWeaponAndAmmo(138@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(139@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(140@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(141@, MicroUzi, 5000)
+Actor.WeaponAccuracy(138@) = 60
+Actor.WeaponAccuracy(139@) = 60
+Actor.WeaponAccuracy(140@) = 60
+Actor.WeaponAccuracy(141@) = 60
+074E: unknown_set_actor_threat_scanner_flags 138@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 139@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 140@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 141@ radius 30.0 peds_to_scan 8 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2178.004 685.6806 52.8942 
+05D8: AS_assign_scmpath to_actor 141@ flags 6 0 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2176.004 685.6806 52.8942 
+05D8: AS_assign_scmpath to_actor 140@ flags 6 0 
+060F: set_actor 138@ melee_accuracy_to 40.0 
+060F: set_actor 139@ melee_accuracy_to 40.0 
+060F: set_actor 140@ melee_accuracy_to 40.0 
+060F: set_actor 141@ melee_accuracy_to 40.0 
+Actor.DestroyInstantly(134@)
+Actor.DestroyInstantly(135@)
+Actor.DestroyInstantly(136@)
+Actor.DestroyInstantly(137@)
+111@ = Marker.CreateAboveActor(138@)
+112@ = Marker.CreateAboveActor(139@)
+113@ = Marker.CreateAboveActor(140@)
+114@ = Marker.CreateAboveActor(141@)
+134@ = Actor.Create(CivMale, #TRIADA, -2177.946, 670.3361, 50.8814)
+135@ = Actor.Create(CivMale, #TRIADB, -2182.442, 704.3199, 52.8984)
+136@ = Actor.Create(CivMale, #TRIADA, -2176.552, 702.9572, 52.8984)
+137@ = Actor.Create(CivMale, #TRIADB, -2178.468, 707.6988, 52.8971)
+Actor.Angle(134@) = 77.5
+Actor.Angle(135@) = 229.921
+Actor.Angle(136@) = 148.6859
+Actor.Angle(137@) = 12.4516
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+05BE: AS_actor 134@ die 
+05BE: AS_actor 135@ die 
+05BE: AS_actor 136@ die 
+05BE: AS_actor 137@ die 
+060B: set_actor 138@ decision_maker_to 34@ 
+060B: set_actor 139@ decision_maker_to 34@ 
+060B: set_actor 140@ decision_maker_to 34@ 
+060B: set_actor 141@ decision_maker_to 34@ 
+0856: set_actor 138@ enable_crouch 0 
+0856: set_actor 139@ enable_crouch 0 
+0350: set_actor 138@ maintain_position_when_attacked 1 
+0350: set_actor 139@ maintain_position_when_attacked 1 
+if 
+   not Car.Wrecked(99@)
+jf @WUZI1_12740 
+99@ = Car.Create(#SENTINEL, -2174.429, 703.2332, 52.8918)
+Car.Angle(99@) = 218.7637
+070C: explode_car_without_radius_damage 99@ 
+
+:WUZI1_12740
+if 
+   not Car.Wrecked(100@)
+jf @WUZI1_12794 
+100@ = Car.Create(#SENTINEL, -2183.575, 705.0761, 52.8984)
+Car.Angle(100@) = 347.2325
+070C: explode_car_without_radius_damage 100@ 
+
+:WUZI1_12794
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB3)
+if 
+03CA:   object 50@ exists 
+jf @WUZI1_12843 
+Object.PutAt(50@, -2178.87, 711.556, 54.523)
+
+:WUZI1_12843
+wait 1000 
+00BE: text_clear_all 
+088D: set_objects_in_sphere -2175.213 662.718 50.8582 radius 10.5 with_model #CT_GATEXR collision_detection 1 
+088D: set_objects_in_sphere -2175.213 662.718 50.8582 radius 10.5 with_model #CHINA_TOWN_GATEB collision_detection 1 
+71@ = 4 
+38@ = 0 
+200@ = 1 
+77@ = 0 
+96@ = 1 
+$7248 = 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_13061 
+0792: disembark_instantly_actor 35@ 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2178.972, 704.3181, 52.8971)
+Actor.PutAt(35@, -2180.423, 703.6827, 52.8971)
+Actor.Angle($PLAYER_ACTOR) = 190.0
+Actor.Angle(35@) = 196.0
+Actor.Health(35@) = 250
+01B9: set_actor 35@ armed_weapon_to 28 
+
+:WUZI1_13061
+$7247 = 100 
+03C4: set_status_text $7247 type 1 GXT 'WZ1_19' // global_variable  // Woozie
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_13127 
+108@ = Marker.CreateAboveActor(35@)
+07E0: set_marker 108@ type_to 1 
+09DD: unknown_player_group 1 
+0631: put_actor 35@ in_group $PLAYER_GROUP 
+
+:WUZI1_13127
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 196@ 
+0085: 277@ = 32@ // (int) 
+277@ += 3000 
+754@ = 0 
+04EF: release_animation "WUZI" 
+fade 1 1000 
+wait 1000 
+
+:WUZI1_13178
+return 
+
+:WUZI1_13180
+if 
+  264@ == 0 
+jf @WUZI1_13237 
+if 
+  637@ == 0 
+jf @WUZI1_13237 
+637@ = 30 
+264@ = 1 
+73@ = 1 
+
+:WUZI1_13237
+if 
+  264@ == 1 
+jf @WUZI1_13296 
+if 
+  637@ == 0 
+jf @WUZI1_13296 
+00BB: show_text_lowpriority GXT 'WZ1_B1' time 4000 flag 1  // ~s~Get out of the alleyway and protect Woozie from the attacking gang!
+264@ = 2 
+
+:WUZI1_13296
+if 
+  72@ == 1 
+jf @WUZI1_13692 
+if 
+  636@ == 1 
+jf @WUZI1_13692 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_13692 
+if 
+  265@ == 0 
+jf @WUZI1_13474 
+if and
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+80A4:   not actor 35@ sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+jf @WUZI1_13474 
+00BB: show_text_lowpriority GXT 'WZ1_B3' time 5000 flag 1  // ~s~If you leave now Woozie will lose face. Go back and take out the remaining ~r~enemies!
+265@ = 1 
+
+:WUZI1_13474
+if 
+  265@ == 1 
+jf @WUZI1_13692 
+if and
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+00A4:   actor 35@ sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+jf @WUZI1_13584 
+265@ = 0 
+
+:WUZI1_13584
+if and
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2100.185 779.1667 93.8637 cornerB -2279.236 534.3701 7.2048 
+80A4:   not actor 35@ sphere 0 in_cube_cornerA -2100.185 779.1667 93.8637 cornerB -2279.236 534.3701 7.2048 
+jf @WUZI1_13692 
+00BB: show_text_lowpriority GXT 'VAL_A9' time 4000 flag 1  // ~r~You strayed too far.
+36@ = 1 
+
+:WUZI1_13692
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2179.776 654.5721 51.7195 cornerB -2172.287 632.6477 48.3312 
+jf @WUZI1_13814 
+71@ = 5 
+42@ = 8 
+77@ = 7 
+0085: 41@ = 32@ // (int) 
+41@ += 2000 
+39@ = 0 
+40@ = 0 
+754@ = 1 
+0085: 266@ = 32@ // (int) 
+266@ += 2500 
+
+:WUZI1_13814
+return 
+
+:WUZI1_13816
+if 
+  39@ == 0 
+jf @WUZI1_13861 
+39@ = 1 
+if 
+08D0:   should_skip_cutscene 
+jf @WUZI1_13861 
+40@ = 1 
+
+:WUZI1_13861
+if 
+08D0:   should_skip_cutscene 
+jf @WUZI1_13939 
+if 
+  40@ == 0 
+jf @WUZI1_13932 
+if 
+001D:   32@ > 266@ // (int) 
+jf @WUZI1_13932 
+42@ = 8 
+159@ = 0 
+636@ = 6 
+
+:WUZI1_13932
+jump @WUZI1_13964 
+
+:WUZI1_13939
+if 
+  40@ == 1 
+jf @WUZI1_13964 
+40@ = 0 
+
+:WUZI1_13964
+if 
+  42@ == 0 
+jf @WUZI1_14485 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_14485 
+42@ = 1 
+637@ = 47 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2176.936, 641.8041, 49.2832, 0.0, 0.0, 0.0)
+Camera.PointAt(-2177.295, 642.7374, 49.3052, 2)
+03BA: clear_cars_from_cube_cornerA -2179.249 659.2075 50.1335 cornerB -2172.263 641.8954 50.377 
+if 
+   not Car.Wrecked(101@)
+jf @WUZI1_14203 
+if 
+00B1:   car 101@ sphere 0 in_cube_cornerA -2182.094 653.1942 50.6565 cornerB -2173.951 636.2528 47.0812 
+jf @WUZI1_14203 
+Car.PutAt(101@, -2175.715, 636.0, 48.445)
+Car.Angle(101@) = 306.9228
+
+:WUZI1_14203
+146@ = Actor.Create(Mission1, #DNB1, -2218.225, 636.991, 53.9509)
+074E: unknown_set_actor_threat_scanner_flags 146@ radius 30.0 peds_to_scan 8 
+0350: set_actor 146@ maintain_position_when_attacked 1 
+Actor.WeaponAccuracy(146@) = 100
+060B: set_actor 146@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(146@, SniperRifle, 9999)
+07DD: set_actor 146@ attack_rate 20 // previously known as temper_to 
+0667: AS_actor 146@ aim_at -2182.917 645.9363 48.9215 -2 ms 
+Actor.Angle(146@) = 289.0
+04EB: AS_actor 146@ crouch 1 
+if 
+   not Car.Wrecked(102@)
+jf @WUZI1_14401 
+if 
+00B0:   car 102@ sphere 0 in_rectangle_cornerA -2187.034 633.111 cornerB -2172.262 660.5647 
+jf @WUZI1_14401 
+Car.PutAt(102@, -2176.387, 641.4572, 50.5019)
+Car.Angle(102@) = 320.0
+
+:WUZI1_14401
+if 
+   not Car.Wrecked(103@)
+jf @WUZI1_14485 
+if 
+00B0:   car 103@ sphere 0 in_rectangle_cornerA -2187.034 633.111 cornerB -2172.262 660.5647 
+jf @WUZI1_14485 
+Car.PutAt(103@, -2175.383, 640.9232, 50.5734)
+Car.Angle(103@) = 320.0
+
+:WUZI1_14485
+if 
+  42@ == 1 
+jf @WUZI1_14691 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Camera.SetPosition(-2176.936, 641.8041, 49.2832, 0.0, 0.0, 0.0)
+Camera.PointAt(-2177.295, 642.7374, 49.3052, 2)
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_14624 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, -2175.697, 650.9794, 48.4429)
+05D3: AS_actor 35@ goto_point -2179.958 641.7931 48.4453 mode 4 time -2 ms // versionA 
+
+:WUZI1_14624
+Actor.PutAt($PLAYER_ACTOR, -2176.897, 650.9794, 48.4429)
+05D3: AS_actor $PLAYER_ACTOR goto_point -2180.958 641.7931 48.4453 mode 4 time -2 ms // versionA 
+42@ = 2 
+0085: 41@ = 32@ // (int) 
+41@ += 2500 
+
+:WUZI1_14691
+if 
+  42@ == 2 
+jf @WUZI1_14797 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_14797 
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_14767 
+0668: AS_actor 146@ rotate_and_shoot_at -2179.924 646.69 48.4548 200 ms 
+
+:WUZI1_14767
+0085: 41@ = 32@ // (int) 
+41@ += 300 
+42@ = 3 
+75@ = 0 
+
+:WUZI1_14797
+if 
+  42@ == 3 
+jf @WUZI1_14981 
+if 
+  75@ == 0 
+jf @WUZI1_14914 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_14914 
+0673: AS_actor $PLAYER_ACTOR dive_to_offset -1.0 -1.0 time_on_ground 1000 ms 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_14891 
+05C3: AS_actor 35@ hands_cower 
+
+:WUZI1_14891
+0085: 41@ = 32@ // (int) 
+41@ += 400 
+75@ = 1 
+
+:WUZI1_14914
+if 
+  75@ == 1 
+jf @WUZI1_14981 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_14981 
+42@ = 4 
+637@ = 36 
+0085: 41@ = 32@ // (int) 
+41@ += 1000 
+
+:WUZI1_14981
+if 
+  42@ == 4 
+jf @WUZI1_15160 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_15160 
+Camera.SetPosition(-2220.552, 639.9709, 53.7095, 0.0, 0.0, 0.0)
+Camera.PointAt(-2219.638, 639.5733, 53.7963, 2)
+Actor.PutAt($PLAYER_ACTOR, -2178.298, 648.3584, 48.4429)
+Actor.Angle($PLAYER_ACTOR) = 133.2868
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_15137 
+0667: AS_actor 146@ aim_at -2184.709 635.0774 49.4781 -2 ms 
+
+:WUZI1_15137
+0085: 41@ = 32@ // (int) 
+41@ += 2500 
+42@ = 5 
+
+:WUZI1_15160
+if 
+  42@ == 5 
+jf @WUZI1_15640 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_15640 
+147@ = Actor.Create(Mission1, #DNB2, -2219.587, 643.4511, 48.4472)
+148@ = Actor.Create(Mission1, #DNB3, -2223.587, 642.4511, 48.4472)
+149@ = Actor.Create(Mission1, #DNB2, -2227.587, 644.4511, 48.4472)
+150@ = Actor.Create(Mission1, #DNB3, -2230.587, 643.4511, 48.4472)
+074E: unknown_set_actor_threat_scanner_flags 147@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 148@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 149@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 150@ radius 30.0 peds_to_scan 8 
+Actor.WeaponAccuracy(147@) = 80
+Actor.WeaponAccuracy(148@) = 80
+Actor.WeaponAccuracy(149@) = 80
+Actor.WeaponAccuracy(150@) = 85
+060B: set_actor 147@ decision_maker_to 34@ 
+060B: set_actor 148@ decision_maker_to 34@ 
+060B: set_actor 149@ decision_maker_to 34@ 
+060B: set_actor 150@ decision_maker_to 34@ 
+05D3: AS_actor 147@ goto_point -2194.902 645.9846 48.4453 mode 6 time -2 ms // versionA 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2200.209 644.2397 48.4429 
+05D7: add_point_to_scmpath -2199.939 641.5246 48.4429 
+0350: set_actor 147@ maintain_position_when_attacked 1 
+0350: set_actor 148@ maintain_position_when_attacked 1 
+0350: set_actor 149@ maintain_position_when_attacked 1 
+0350: set_actor 150@ maintain_position_when_attacked 1 
+Actor.GiveWeaponAndAmmo(147@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(148@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(149@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(150@, MicroUzi, 5000)
+0615: define_AS_pack_begin 132@ 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05D4: AS_actor -1 rotate_angle 270.0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 148@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+05D3: AS_actor 149@ goto_point -2204.851 641.7612 48.4429 mode 6 time -2 ms // versionA 
+05D3: AS_actor 150@ goto_point -2214.371 641.3669 48.4515 mode 6 time -2 ms // versionA 
+0085: 41@ = 32@ // (int) 
+41@ += 500 
+42@ = 6 
+
+:WUZI1_15640
+if 
+  42@ == 6 
+jf @WUZI1_15758 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_15758 
+Camera.SetPosition(-2229.436, 644.2267, 48.4907, 0.0, 0.0, 0.0)
+Camera.PointAt(-2228.486, 643.9835, 48.6883, 2)
+637@ = 46 
+0085: 41@ = 32@ // (int) 
+41@ += 3000 
+42@ = 7 
+
+:WUZI1_15758
+if 
+  42@ == 7 
+jf @WUZI1_15802 
+if 
+001D:   32@ > 41@ // (int) 
+jf @WUZI1_15802 
+42@ = 8 
+
+:WUZI1_15802
+if 
+  42@ == 8 
+jf @WUZI1_16498 
+if 
+856D:   not actor 146@ defined 
+jf @WUZI1_15909 
+146@ = Actor.Create(Mission1, #DNB3, -2218.225, 636.991, 53.9509)
+0350: set_actor 146@ maintain_position_when_attacked 1 
+060B: set_actor 146@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(146@, SniperRifle, 9999)
+07DD: set_actor 146@ attack_rate 20 // previously known as temper_to 
+Actor.Angle(146@) = 289.0
+04EB: AS_actor 146@ crouch 1 
+
+:WUZI1_15909
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_15932 
+Actor.WeaponAccuracy(146@) = 50
+
+:WUZI1_15932
+Actor.DestroyInstantly(147@)
+Actor.DestroyInstantly(148@)
+Actor.DestroyInstantly(149@)
+Actor.DestroyInstantly(150@)
+147@ = Actor.Create(Mission1, #DNB1, -2203.491, 647.0372, 48.4453)
+148@ = Actor.Create(Mission1, #DNB2, -2200.694, 637.1932, 48.4429)
+149@ = Actor.Create(Mission1, #DNB3, -2196.943, 635.1917, 48.4429)
+150@ = Actor.Create(Mission1, #DNB1, -2214.378, 641.6099, 48.4484)
+Actor.Angle(147@) = 255.1494
+Actor.Angle(148@) = 285.6451
+Actor.Angle(149@) = 295.4749
+Actor.Angle(150@) = 277.3081
+Actor.WeaponAccuracy(147@) = 60
+Actor.WeaponAccuracy(148@) = 60
+Actor.WeaponAccuracy(149@) = 60
+Actor.WeaponAccuracy(150@) = 60
+07DD: set_actor 147@ attack_rate 85 // previously known as temper_to 
+07DD: set_actor 148@ attack_rate 85 // previously known as temper_to 
+07DD: set_actor 149@ attack_rate 85 // previously known as temper_to 
+07DD: set_actor 150@ attack_rate 85 // previously known as temper_to 
+05C5: AS_actor 147@ cower 1000 ms 
+05C5: AS_actor 149@ cower 3000 ms 
+0350: set_actor 147@ maintain_position_when_attacked 1 
+0350: set_actor 148@ maintain_position_when_attacked 1 
+0350: set_actor 149@ maintain_position_when_attacked 1 
+0350: set_actor 150@ maintain_position_when_attacked 1 
+060F: set_actor 147@ melee_accuracy_to 40.0 
+060F: set_actor 148@ melee_accuracy_to 40.0 
+060F: set_actor 149@ melee_accuracy_to 40.0 
+060F: set_actor 150@ melee_accuracy_to 40.0 
+Actor.GiveWeaponAndAmmo(147@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(148@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(149@, MicroUzi, 5000)
+Actor.GiveWeaponAndAmmo(150@, MicroUzi, 5000)
+151@ = Actor.Create(Mission1, #DNB1, -2205.344, 648.4099, 48.4429)
+074E: unknown_set_actor_threat_scanner_flags 151@ radius 30.0 peds_to_scan 8 
+Actor.GiveWeaponAndAmmo(151@, MicroUzi, 500)
+Actor.Angle(151@) = 270.0
+0350: set_actor 151@ maintain_position_when_attacked 1 
+120@ = Marker.CreateAboveActor(147@)
+121@ = Marker.CreateAboveActor(148@)
+122@ = Marker.CreateAboveActor(149@)
+123@ = Marker.CreateAboveActor(150@)
+124@ = Marker.CreateAboveActor(151@)
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_16400 
+Marker.Disable(119@)
+119@ = Marker.CreateAboveActor(146@)
+
+:WUZI1_16400
+060B: set_actor 147@ decision_maker_to 34@ 
+060B: set_actor 148@ decision_maker_to 34@ 
+060B: set_actor 149@ decision_maker_to 34@ 
+060B: set_actor 150@ decision_maker_to 34@ 
+060B: set_actor 151@ decision_maker_to 34@ 
+71@ = 6 
+200@ = 4 
+0085: 86@ = 32@ // (int) 
+86@ += 4000 
+77@ = 8 
+38@ = 0 
+265@ = 0 
+754@ = 0 
+
+:WUZI1_16498
+return 
+
+:WUZI1_16500
+if 
+  72@ == 1 
+jf @WUZI1_16896 
+if 
+  636@ == 1 
+jf @WUZI1_16896 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_16896 
+if 
+  265@ == 0 
+jf @WUZI1_16678 
+if and
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+80A4:   not actor 35@ sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+jf @WUZI1_16678 
+00BB: show_text_lowpriority GXT 'WZ1_B3' time 5000 flag 1  // ~s~If you leave now Woozie will lose face. Go back and take out the remaining ~r~enemies!
+265@ = 1 
+
+:WUZI1_16678
+if 
+  265@ == 1 
+jf @WUZI1_16896 
+if and
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+00A4:   actor 35@ sphere 0 in_cube_cornerA -2170.185 719.1667 63.8637 cornerB -2239.236 594.3701 37.2048 
+jf @WUZI1_16788 
+265@ = 0 
+
+:WUZI1_16788
+if and
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2100.185 779.1667 93.8637 cornerB -2279.236 534.3701 7.2048 
+80A4:   not actor 35@ sphere 0 in_cube_cornerA -2100.185 779.1667 93.8637 cornerB -2279.236 534.3701 7.2048 
+jf @WUZI1_16896 
+00BB: show_text_lowpriority GXT 'VAL_A9' time 4000 flag 1  // ~r~You strayed too far.
+36@ = 1 
+
+:WUZI1_16896
+if 
+  267@ == 0 
+jf @WUZI1_16978 
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_16978 
+if 
+02E0:   actor 146@ firing_weapon 
+jf @WUZI1_16978 
+if 
+  637@ == 0 
+jf @WUZI1_16978 
+637@ = 36 
+267@ = 1 
+
+:WUZI1_16978
+if 
+  267@ == 1 
+jf @WUZI1_17060 
+if 
+   not Actor.Dead(146@)
+jf @WUZI1_17060 
+if 
+02E0:   actor 146@ firing_weapon 
+jf @WUZI1_17060 
+if 
+  637@ == 0 
+jf @WUZI1_17060 
+637@ = 43 
+267@ = 2 
+
+:WUZI1_17060
+if 
+  95@ == 10 
+jf @WUZI1_17151 
+71@ = 7 
+42@ = 0 
+0085: 159@ = 32@ // (int) 
+159@ += 2500 
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+Model.Destroy(#SNIPER)
+Model.Destroy(#SANCHEZ)
+04EF: release_animation "WUZI" 
+0873: release_path 169 
+0873: release_path 139 
+265@ = 0 
+
+:WUZI1_17151
+return 
+
+:WUZI1_17153
+if 
+  42@ == 0 
+jf @WUZI1_17304 
+if 
+  636@ == 1 
+jf @WUZI1_17304 
+if 
+  637@ == 0 
+jf @WUZI1_17304 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_17228 
+06C9: remove_actor 35@ from_group 
+
+:WUZI1_17228
+0151: remove_status_text $7247 
+04ED: load_animation "GANGS" 
+04ED: load_animation "CAR_CHAT" 
+07C0: load_path 136 
+07C0: load_path 137 
+07C0: load_path 138 
+637@ = 55 
+$7248 = 1 
+754@ = 1 
+42@ = 6 
+72@ = 0 
+
+:WUZI1_17304
+if 
+  42@ == 6 
+jf @WUZI1_18042 
+if 
+  636@ == 1 
+jf @WUZI1_18042 
+if 
+  637@ == 0 
+jf @WUZI1_18042 
+if and
+001D:   32@ > 159@ // (int) 
+07C1:   path 136 available 
+07C1:   path 137 available 
+07C1:   path 138 available 
+jf @WUZI1_18042 
+754@ = 0 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_17459 
+Car.DoorStatus(104@) = 1
+Car.LockInCurrentPosition(104@) = False
+Car.PutAt(104@, -2218.93, 642.3626, 48.4475)
+Car.Angle(104@) = 267.1711
+
+:WUZI1_17459
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_17494 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+
+:WUZI1_17494
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_17527 
+0792: disembark_instantly_actor 35@ 
+04EB: AS_actor 35@ crouch 0 
+
+:WUZI1_17527
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @WUZI1_17548 
+Car.Destroy($TEMPVAR_ACTOR_CAR)
+
+:WUZI1_17548
+Camera.SetPosition(-2212.125, 644.6052, 51.6509, 0.0, 0.0, 0.0)
+Camera.PointAt(-2213.062, 644.5379, 51.3082, 2)
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_17745 
+Actor.PutAt($PLAYER_ACTOR, -2212.38, 643.0919, 48.4466)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+05CB: AS_actor $PLAYER_ACTOR enter_car 104@ as_driver -2 ms 
+Car.SetImmunities(104@, 1, 1, 1, 1, 1)
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_17745 
+07DD: set_actor 35@ attack_rate 80 // previously known as temper_to 
+077A: set_actor 35@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+Actor.PutAt(35@, -2217.78, 640.998, 48.4549)
+Actor.Angle(35@) = 77.0
+05CA: AS_actor 35@ enter_car 104@ passenger_seat 0 time 2600 
+
+:WUZI1_17745
+130@ = 0 
+
+:WUZI1_17752
+if 
+  18 > 130@ 
+jf @WUZI1_17793 
+Actor.RemoveReferences(138@(130@,18i))
+130@ += 1 
+jump @WUZI1_17752 
+
+:WUZI1_17793
+105@ = Car.Create(#SENTINEL, -2245.343, 715.4953, 48.4375)
+Car.Angle(105@) = 180.0
+138@ = Actor.CreateAsDriver(Mission2, #DNB2, 105@)
+139@ = Actor.CreateAsPassenger(Mission2, #DNB3, 105@, 0)
+Actor.GiveWeaponAndAmmo(139@, MicroUzi, 5000)
+05EB: assign_car 105@ to_path 136 
+106@ = Car.Create(#SENTINEL, -2251.676, 612.6026, 42.259)
+Car.Angle(106@) = 0.0
+140@ = Actor.CreateAsDriver(Mission2, #DNB1, 106@)
+141@ = Actor.CreateAsPassenger(Mission2, #DNB2, 106@, 0)
+Actor.GiveWeaponAndAmmo(141@, MicroUzi, 5000)
+060B: set_actor 138@ decision_maker_to 34@ 
+060B: set_actor 139@ decision_maker_to 34@ 
+060B: set_actor 140@ decision_maker_to 34@ 
+060B: set_actor 141@ decision_maker_to 34@ 
+0708: reset_decision_maker 34@ event 36 
+0708: reset_decision_maker 34@ event 79 
+0709: set_decision_maker 34@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+42@ = 7 
+0085: 159@ = 32@ // (int) 
+159@ += 2600 
+
+:WUZI1_18042
+if 
+  42@ == 7 
+jf @WUZI1_18137 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_18137 
+Camera.SetPosition(-2217.869, 642.181, 49.7208, 0.0, 0.0, 0.0)
+Camera.PointAt(-2218.82, 642.4485, 49.5654, 2)
+42@ = 8 
+
+:WUZI1_18137
+if 
+  42@ == 8 
+jf @WUZI1_18218 
+if and
+   not Car.Wrecked(105@)
+   not Actor.Dead(138@)
+jf @WUZI1_18218 
+Car.StorePos(105@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  653.8901 > $TEMPVAR_FLOAT_2 
+jf @WUZI1_18218 
+42@ = 9 
+
+:WUZI1_18218
+if 
+  42@ == 9 
+jf @WUZI1_18341 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_18341 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_18268 
+
+:WUZI1_18268
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 3000 
+637@ = 60 
+42@ = 10 
+0085: 159@ = 32@ // (int) 
+159@ += 3200 
+
+:WUZI1_18341
+if 
+  42@ == 10 
+jf @WUZI1_18461 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_18461 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_18461 
+01EC: make_car 104@ very_heavy 1 
+05EB: assign_car 104@ to_path 138 
+if 
+   not Car.Wrecked(105@)
+jf @WUZI1_18438 
+05EC: release_car 105@ from_path 
+05EB: assign_car 105@ to_path 137 
+
+:WUZI1_18438
+42@ = 11 
+0085: 159@ = 32@ // (int) 
+159@ += 2000 
+
+:WUZI1_18461
+if 
+  42@ == 11 
+jf @WUZI1_18616 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_18616 
+Camera.SetPosition(-2251.02, 649.9792, 52.244, 0.0, 0.0, 0.0)
+if 
+   not Car.Wrecked(105@)
+jf @WUZI1_18573 
+Car.StorePos(105@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:WUZI1_18573
+097A: play_audio_at -2243.918 642.959 49.6897 event 1140 
+42@ = 12 
+0085: 159@ = 32@ // (int) 
+159@ += 800 
+
+:WUZI1_18616
+if 
+  42@ == 12 
+jf @WUZI1_18684 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_18684 
+0085: 270@ = 32@ // (int) 
+42@ = 13 
+0085: 159@ = 32@ // (int) 
+159@ += 2500 
+
+:WUZI1_18684
+if 
+  42@ == 13 
+jf @WUZI1_18916 
+0085: 271@ = 32@ // (int) 
+0062: 271@ -= 270@ // (int) 
+0093: 225@ = integer 271@ to_float 
+0087: 226@ = 225@ // (float) 
+226@ /= 2500.0 
+if and
+   not Car.Wrecked(104@)
+   not Car.Wrecked(105@)
+jf @WUZI1_18890 
+Car.StorePos(105@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.StorePos(104@, 228@, 229@, 230@)
+0087: 268@ = 228@ // (float) 
+0065: 268@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 269@ = 229@ // (float) 
+0065: 269@ -= $TEMPVAR_FLOAT_2 // (float) 
+006B: 268@ *= 226@ // (float) 
+006B: 269@ *= 226@ // (float) 
+268@ /= 2.0 
+269@ /= 2.0 
+005D: 268@ += $TEMPVAR_FLOAT_1 // (float) 
+005D: 269@ += $TEMPVAR_FLOAT_2 // (float) 
+Camera.PointAt(268@, 269@, $TEMPVAR_FLOAT_3, 2)
+
+:WUZI1_18890
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_18916 
+42@ = 14 
+
+:WUZI1_18916
+if 
+  42@ == 14 
+jf @WUZI1_19013 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_18987 
+01EC: make_car 104@ very_heavy 0 
+Car.SetImmunities(104@, 0, 0, 0, 0, 0)
+
+:WUZI1_18987
+71@ = 8 
+38@ = 0 
+637@ = 63 
+Marker.Disable(108@)
+
+:WUZI1_19013
+return 
+
+:WUZI1_19015
+if 
+  38@ == 0 
+jf @WUZI1_19308 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_19098 
+077A: set_actor 35@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+07DD: set_actor 35@ attack_rate 80 // previously known as temper_to 
+Actor.GiveWeaponAndAmmo(35@, MicroUzi, 99999)
+
+:WUZI1_19098
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_19228 
+if and
+   not Car.Wrecked(105@)
+   not Actor.Dead(138@)
+jf @WUZI1_19171 
+06E1: AS_actor 138@ using_car 105@ target_car 104@ with_order 2 max_speed 20.0 traffic_flag 3 
+Car.Health(105@) = 800
+109@ = Marker.CreateAboveActor(138@)
+
+:WUZI1_19171
+if and
+   not Car.Wrecked(106@)
+   not Actor.Dead(140@)
+jf @WUZI1_19228 
+06E1: AS_actor 140@ using_car 106@ target_car 104@ with_order 2 max_speed 20.0 traffic_flag 3 
+Car.Health(106@) = 800
+110@ = Marker.CreateAboveActor(140@)
+
+:WUZI1_19228
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_19259 
+Car.Health(104@) = 3000
+053F: set_car 104@ tires_vulnerability 0 
+
+:WUZI1_19259
+81@ = 1 
+82@ = 1 
+73@ = 1 
+72@ = 0 
+38@ = 1 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+
+:WUZI1_19308
+if 
+  38@ == 1 
+jf @WUZI1_19678 
+if 
+  272@ == 0 
+jf @WUZI1_19385 
+if 
+  637@ == 0 
+jf @WUZI1_19385 
+272@ = 1 
+00BB: show_text_lowpriority GXT 'WZ1_37' time 4000 flag 1  // ~s~Let Woozie destroy the attacking ~r~cars~s~.
+
+:WUZI1_19385
+if 
+  81@ == 1 
+jf @WUZI1_19463 
+if 
+   Actor.Dead(138@)
+jf @WUZI1_19463 
+if 
+  273@ == 0 
+jf @WUZI1_19451 
+273@ = 1 
+637@ = 64 
+
+:WUZI1_19451
+Marker.Disable(109@)
+81@ = 0 
+
+:WUZI1_19463
+if 
+  82@ == 1 
+jf @WUZI1_19541 
+if 
+   Actor.Dead(140@)
+jf @WUZI1_19541 
+if 
+  273@ == 0 
+jf @WUZI1_19529 
+273@ = 1 
+637@ = 64 
+
+:WUZI1_19529
+Marker.Disable(110@)
+82@ = 0 
+
+:WUZI1_19541
+if and
+  81@ == 0 
+  82@ == 0 
+jf @WUZI1_19678 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_19678 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 35@ radius 5.0 5.0 5.0 sphere 0 
+jf @WUZI1_19678 
+637@ = 82 
+638@ = 8 
+38@ = 2 
+Marker.Disable(107@)
+018A: 107@ = create_checkpoint_at -2151.589 639.5962 51.218 
+73@ = 1 
+72@ = 0 
+
+:WUZI1_19678
+if 
+  38@ == 2 
+jf @WUZI1_19913 
+if 
+  637@ == 0 
+jf @WUZI1_19755 
+if 
+  274@ == 0 
+jf @WUZI1_19755 
+274@ = 1 
+00BB: show_text_lowpriority GXT 'WZ1_39' time 4000 flag 1  // ~s~Drive Woozie back to ~y~his place~s~.
+
+:WUZI1_19755
+if 
+  72@ == 1 
+jf @WUZI1_19913 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -2150.165 642.3364 51.2188 radius 4.0 4.0 4.0 
+jf @WUZI1_19913 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_19913 
+if 
+00FE:   actor 35@ sphere 0 in_sphere -2150.165 642.3364 51.2188 radius 8.0 8.0 8.0 
+jf @WUZI1_19913 
+71@ = 9 
+42@ = 0 
+637@ = 90 
+638@ = 4 
+
+:WUZI1_19913
+return 
+
+:WUZI1_19915
+if 
+  42@ == 0 
+jf @WUZI1_20009 
+73@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_19986 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:WUZI1_19986
+0085: 159@ = 32@ // (int) 
+159@ += 3000 
+42@ = 1 
+
+:WUZI1_20009
+if 
+  42@ == 1 
+jf @WUZI1_20301 
+if 
+  637@ == 0 
+jf @WUZI1_20301 
+Camera.SetPosition(-2156.872, 649.7653, 51.6094, 0.0, 0.0, 0.0)
+Camera.PointAt(-2156.362, 648.9217, 51.7758, 2)
+02A3: enable_widescreen 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_20154 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+Car.PutAt($TEMPVAR_ACTOR_CAR, -2150.165, 642.3364, 51.2188)
+Car.Angle($TEMPVAR_ACTOR_CAR) = 0.0
+
+:WUZI1_20154
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_20278 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2155.15 645.1982 51.2293 
+05D7: add_point_to_scmpath -2162.023 645.1555 51.7499 
+if 
+   Actor.Driving(35@)
+jf @WUZI1_20269 
+06C9: remove_actor 35@ from_group 
+0615: define_AS_pack_begin 132@ 
+0633: AS_actor -1 exit_car 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 35@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+jump @WUZI1_20278 
+
+:WUZI1_20269
+05D8: AS_assign_scmpath to_actor 35@ flags 6 0 
+
+:WUZI1_20278
+42@ = 2 
+0085: 159@ = 32@ // (int) 
+159@ += 5000 
+
+:WUZI1_20301
+if 
+  42@ == 2 
+jf @WUZI1_20388 
+if 
+001D:   32@ > 159@ // (int) 
+jf @WUZI1_20388 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_20367 
+Actor.DestroyInstantly(35@)
+
+:WUZI1_20367
+37@ = 0 
+Player.CanMove($PLAYER_CHAR) = True
+71@ = 10 
+
+:WUZI1_20388
+return 
+
+:WUZI1_20390
+if 
+  200@ > 0 
+jf @WUZI1_20528 
+130@ = 0 
+95@ = 0 
+
+:WUZI1_20422
+if 
+  18 > 130@ 
+jf @WUZI1_20528 
+if 
+056D:   actor 138@(130@,18i) defined 
+jf @WUZI1_20514 
+if 
+   Actor.Dead(138@(130@,18i))
+jf @WUZI1_20514 
+Marker.Disable(111@(130@,18i))
+if 
+  130@ > 7 
+jf @WUZI1_20514 
+95@ += 1 
+
+:WUZI1_20514
+130@ += 1 
+jump @WUZI1_20422 
+
+:WUZI1_20528
+if 
+  200@ == 1 
+jf @WUZI1_21220 
+if or
+  676.0 > $TEMPVAR_Y_COORD 
+  676.0 > 229@ 
+jf @WUZI1_21220 
+102@ = Car.Create(#SANCHEZ, -2191.274, 644.4189, 48.4453)
+103@ = Car.Create(#SANCHEZ, -2200.205, 644.3219, 48.4429)
+Car.Angle(102@) = 270.0
+Car.Angle(103@) = 270.0
+Model.Destroy(#SANCHEZ)
+07C0: load_path 139 
+142@ = Actor.CreateAsDriver(Mission2, #DNB3, 102@)
+143@ = Actor.CreateAsPassenger(Mission2, #DNB1, 102@, 0)
+144@ = Actor.CreateAsDriver(Mission2, #DNB2, 103@)
+145@ = Actor.CreateAsPassenger(Mission2, #DNB3, 103@, 0)
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB2)
+Actor.GiveWeaponAndAmmo(142@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(143@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(144@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(145@, MicroUzi, 500)
+Actor.WeaponAccuracy(142@) = 80
+Actor.WeaponAccuracy(143@) = 85
+Actor.WeaponAccuracy(144@) = 90
+Actor.WeaponAccuracy(145@) = 85
+115@ = Marker.CreateAboveActor(142@)
+116@ = Marker.CreateAboveActor(143@)
+117@ = Marker.CreateAboveActor(144@)
+118@ = Marker.CreateAboveActor(145@)
+087E: set_actor 142@ weapon_droppable 0 
+087E: set_actor 143@ weapon_droppable 0 
+087E: set_actor 144@ weapon_droppable 0 
+087E: set_actor 145@ weapon_droppable 0 
+Car.SetSpeedInstantly(102@, 20.0)
+Car.SetSpeedInstantly(103@, 20.0)
+060B: set_actor 142@ decision_maker_to 34@ 
+060B: set_actor 143@ decision_maker_to 34@ 
+060B: set_actor 144@ decision_maker_to 34@ 
+060B: set_actor 145@ decision_maker_to 34@ 
+060F: set_actor 142@ melee_accuracy_to 40.0 
+060F: set_actor 143@ melee_accuracy_to 40.0 
+060F: set_actor 144@ melee_accuracy_to 40.0 
+060F: set_actor 145@ melee_accuracy_to 40.0 
+074E: unknown_set_actor_threat_scanner_flags 142@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 143@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 144@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 145@ radius 30.0 peds_to_scan 8 
+085B: AS_actor 142@ set_kinda_stay_in_same_place 1 
+085B: AS_actor 143@ set_kinda_stay_in_same_place 1 
+085B: AS_actor 144@ set_kinda_stay_in_same_place 1 
+085B: AS_actor 145@ set_kinda_stay_in_same_place 1 
+0615: define_AS_pack_begin 132@ 
+05D1: AS_actor -1 drive_car 102@ to -2177.164 645.6417 48.4453 speed 15.0 2 model #NULL 3 
+06C7: AS_actor -1 driver_of_car 102@ perform_action 4 timelimit 2000 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -2172.865 652.5621 48.4429 mode 6 time 4000 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 142@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+0615: define_AS_pack_begin 132@ 
+05D1: AS_actor -1 drive_car 103@ to -2174.811 644.3727 48.4453 speed 15.0 2 model #NULL 3 
+06C7: AS_actor -1 driver_of_car 103@ perform_action 4 timelimit 2000 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -2176.99 650.9326 48.4429 mode 6 time 3000 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 144@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+200@ = 2 
+
+:WUZI1_21220
+if 
+  200@ == 2 
+jf @WUZI1_21410 
+129@ = 0 
+if 
+   not Actor.Dead(142@)
+jf @WUZI1_21269 
+0811: 129@ = actor 142@ used_car 
+
+:WUZI1_21269
+if or
+  129@ == -1 
+   Actor.Dead(142@)
+jf @WUZI1_21410 
+if 
+   not Actor.Dead(143@)
+jf @WUZI1_21329 
+if 
+   Actor.Driving(143@)
+jf @WUZI1_21329 
+0633: AS_actor 143@ exit_car 
+
+:WUZI1_21329
+if 
+   not Actor.Dead(144@)
+jf @WUZI1_21366 
+if 
+   Actor.Driving(144@)
+jf @WUZI1_21366 
+0633: AS_actor 144@ exit_car 
+
+:WUZI1_21366
+if 
+   not Actor.Dead(145@)
+jf @WUZI1_21403 
+if 
+   Actor.Driving(145@)
+jf @WUZI1_21403 
+0633: AS_actor 145@ exit_car 
+
+:WUZI1_21403
+200@ = 3 
+
+:WUZI1_21410
+if 
+  200@ == 4 
+jf @WUZI1_22875 
+if 
+  93@ == 0 
+jf @WUZI1_21574 
+if 
+   not Actor.Dead(151@)
+jf @WUZI1_21574 
+if or
+  -2193.0 > $TEMPVAR_X_COORD 
+  -2193.0 > 228@ 
+jf @WUZI1_21574 
+93@ = 1 
+0615: define_AS_pack_begin 132@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 151@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_21574
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2171.857 658.2869 52.1667 cornerB -2240.303 631.7034 48.0251 
+jf @WUZI1_21858 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @WUZI1_21754 
+if 
+  84@ == 0 
+jf @WUZI1_21747 
+84@ = 1 
+130@ = 9 
+
+:WUZI1_21670
+if 
+  13 > 130@ 
+jf @WUZI1_21747 
+if 
+   not Actor.Dead(138@(130@,18i))
+jf @WUZI1_21733 
+Actor.WeaponAccuracy(138@(130@,18i)) = 100
+074D: AS_actor 138@(130@,18i) turns_to_and_look_at_actor $PLAYER_ACTOR timelimit -2 
+
+:WUZI1_21733
+130@ += 1 
+jump @WUZI1_21670 
+
+:WUZI1_21747
+jump @WUZI1_21858 
+
+:WUZI1_21754
+if 
+  84@ == 1 
+jf @WUZI1_21858 
+84@ = 0 
+130@ = 9 
+
+:WUZI1_21786
+if 
+  13 > 130@ 
+jf @WUZI1_21858 
+if 
+   not Actor.Dead(138@(130@,18i))
+jf @WUZI1_21844 
+Actor.WeaponAccuracy(138@(130@,18i)) = 80
+0687: clear_actor 138@(130@,18i) task 
+
+:WUZI1_21844
+130@ += 1 
+jump @WUZI1_21786 
+
+:WUZI1_21858
+if 
+  85@ == 0 
+jf @WUZI1_22123 
+if 
+001D:   32@ > 86@ // (int) 
+jf @WUZI1_22123 
+0209: 130@ = random_int_in_ranges 9 13 
+91@ = 0 
+
+:WUZI1_21911
+if 
+  4 > 91@ 
+jf @WUZI1_22107 
+0085: 131@ = 130@ // (int) 
+131@ -= 9 
+if and
+   not Actor.Dead(138@(130@,18i))
+  87@(131@,4i) == 0 
+jf @WUZI1_22061 
+87@(131@,4i) = 1 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 201@(131@,4f) 205@(131@,4f) 209@(131@,4f) 
+05D7: add_point_to_scmpath 213@(131@,4f) 217@(131@,4f) 221@(131@,4f) 
+05D8: AS_assign_scmpath to_actor 138@(130@,18i) flags 6 0 
+91@ = 4 
+jump @WUZI1_22093 
+
+:WUZI1_22061
+130@ += 1 
+if 
+  130@ > 12 
+jf @WUZI1_22093 
+130@ = 9 
+
+:WUZI1_22093
+91@ += 1 
+jump @WUZI1_21911 
+
+:WUZI1_22107
+0085: 86@ = 32@ // (int) 
+86@ += 10000 
+
+:WUZI1_22123
+if 
+  94@ == 0 
+jf @WUZI1_22595 
+if or
+  -2197.0 > $TEMPVAR_X_COORD 
+  95@ > 1 
+jf @WUZI1_22595 
+94@ = 1 
+152@ = Actor.Create(Mission1, #DNB3, -2205.861, 625.282, 48.4396)
+153@ = Actor.Create(Mission1, #DNB1, -2207.076, 627.3953, 48.4384)
+Actor.GiveWeaponAndAmmo(152@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(153@, MicroUzi, 500)
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2205.808 626.6268 48.4429 
+05D7: add_point_to_scmpath -2205.849 635.5339 48.4453 
+05D8: AS_assign_scmpath to_actor 152@ flags 6 0 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2205.808 626.6268 48.4429 
+05D7: add_point_to_scmpath -2204.58 634.2507 48.4453 
+05D8: AS_assign_scmpath to_actor 153@ flags 6 0 
+104@ = Car.Create(#SENTINEL, -2267.322, 659.5334, 48.2969)
+Car.SetImmunities(104@, 1, 1, 1, 1, 1)
+Car.Angle(104@) = 344.0
+Car.DoorStatus(104@) = 3
+154@ = Actor.CreateAsDriver(Mission2, #DNB1, 104@)
+155@ = Actor.CreateAsPassenger(Mission2, #DNB2, 104@, 0)
+Actor.GiveWeaponAndAmmo(154@, MicroUzi, 500)
+Actor.GiveWeaponAndAmmo(155@, MicroUzi, 500)
+060B: set_actor 152@ decision_maker_to 34@ 
+060B: set_actor 153@ decision_maker_to 34@ 
+060B: set_actor 154@ decision_maker_to 34@ 
+060B: set_actor 155@ decision_maker_to 34@ 
+125@ = Marker.CreateAboveActor(152@)
+126@ = Marker.CreateAboveActor(153@)
+127@ = Marker.CreateAboveActor(154@)
+128@ = Marker.CreateAboveActor(155@)
+060F: set_actor 152@ melee_accuracy_to 40.0 
+060F: set_actor 153@ melee_accuracy_to 40.0 
+060F: set_actor 154@ melee_accuracy_to 40.0 
+060F: set_actor 155@ melee_accuracy_to 40.0 
+074E: unknown_set_actor_threat_scanner_flags 152@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 153@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 154@ radius 30.0 peds_to_scan 8 
+074E: unknown_set_actor_threat_scanner_flags 155@ radius 30.0 peds_to_scan 8 
+05EB: assign_car 104@ to_path 139 
+
+:WUZI1_22595
+if 
+  94@ == 1 
+jf @WUZI1_22811 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_22811 
+Car.StorePos(104@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  $TEMPVAR_FLOAT_1 > -2227.0 
+jf @WUZI1_22811 
+94@ = 2 
+if 
+   not Actor.Dead(154@)
+jf @WUZI1_22741 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2214.633 642.2872 48.447 
+0615: define_AS_pack_begin 132@ 
+0633: AS_actor -1 exit_car 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 154@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_22741
+if 
+   not Actor.Dead(154@)
+jf @WUZI1_22811 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2214.373 639.3536 48.4511 
+0615: define_AS_pack_begin 132@ 
+0633: AS_actor -1 exit_car 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 132@ 
+0618: assign_actor 155@ to_AS_pack 132@ 
+061B: remove_references_to_AS_pack 132@ 
+
+:WUZI1_22811
+if 
+  94@ == 2 
+jf @WUZI1_22875 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_22875 
+if 
+860E:   not car 104@ assigned_to_path 
+jf @WUZI1_22875 
+94@ = 3 
+Car.LockInCurrentPosition(104@) = True
+
+:WUZI1_22875
+return 
+
+:WUZI1_22877
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_23087 
+if 
+02E0:   actor 35@ firing_weapon 
+jf @WUZI1_23087 
+if 
+001D:   32@ > 277@ // (int) 
+jf @WUZI1_23087 
+if 
+  637@ == 0 
+jf @WUZI1_23087 
+if 
+  6 > 275@ 
+jf @WUZI1_23087 
+0209: 276@ = random_int_in_ranges 0 6 
+
+:WUZI1_22973
+if 
+  232@(276@,6i) == 0 
+jf @WUZI1_23034 
+276@ += 1 
+if 
+  276@ > 5 
+jf @WUZI1_23027 
+276@ = 0 
+
+:WUZI1_23027
+jump @WUZI1_22973 
+
+:WUZI1_23034
+275@ += 1 
+0085: 637@ = 232@(276@,6i) // (int) 
+232@(276@,6i) = 0 
+279@ = 0 
+0085: 277@ = 32@ // (int) 
+277@ += 8000 
+
+:WUZI1_23087
+return 
+return 
+
+:WUZI1_23091
+if 
+  96@ == 1 
+jf @WUZI1_23198 
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_23198 
+0085: 278@ = 161@ // (int) 
+161@ = Actor.Health(35@)
+if 
+803B:   not  161@ == 278@ // (int) 
+jf @WUZI1_23175 
+0085: 278@ = 161@ // (int) 
+279@ = 1 
+
+:WUZI1_23175
+008A: $7247 = 161@ // (int) 
+$7247 *= 100 
+$7247 /= 250 
+
+:WUZI1_23198
+return 
+
+:WUZI1_23200
+return 
+
+:WUZI1_23202
+if 
+   not 281@ == 0 
+jf @WUZI1_23395 
+if 
+  280@ == 0 
+jf @WUZI1_23256 
+040D: unload_wav 3 
+03CF: load_wav 281@ as 3 
+280@ = 1 
+
+:WUZI1_23256
+if 
+  280@ == 1 
+jf @WUZI1_23319 
+if 
+03D0:   wav 3 loaded 
+jf @WUZI1_23319 
+if 
+001D:   32@ > 283@ // (int) 
+jf @WUZI1_23319 
+03D1: play_wav 3 
+280@ = 2 
+
+:WUZI1_23319
+if or
+  280@ == 2 
+08D0:   should_skip_cutscene 
+jf @WUZI1_23395 
+if 
+03D2:   wav 3 ended 
+jf @WUZI1_23395 
+040D: unload_wav 3 
+0085: 281@ = 282@ // (int) 
+282@ = 0 
+0085: 283@ = 284@ // (int) 
+284@ = 0 
+280@ = 0 
+
+:WUZI1_23395
+if 
+   not 285@ == 0 
+jf @WUZI1_23602 
+if 
+  286@ == 0 
+jf @WUZI1_23473 
+286@ = 1 
+0085: 287@ = 32@ // (int) 
+288@ = 0 
+0085: 750@ = 287@ // (int) 
+005A: 750@ += 289@(288@,20i) // (int) 
+
+:WUZI1_23473
+if 
+  286@ == 1 
+jf @WUZI1_23602 
+if and
+001D:   32@ > 750@ // (int) 
+  637@ == 0 
+jf @WUZI1_23602 
+0085: 637@ = 309@(288@,20i) // (int) 
+288@ += 1 
+329@ -= 1 
+if 
+  329@ == 0 
+jf @WUZI1_23582 
+285@ = 0 
+286@ = 0 
+jump @WUZI1_23602 
+
+:WUZI1_23582
+0085: 750@ = 287@ // (int) 
+005A: 750@ += 289@(288@,20i) // (int) 
+
+:WUZI1_23602
+0871: init_jump_table 636@ total_jumps 7 default_jump 0 @WUZI1_28286 jumps 0 @WUZI1_23665 1 @WUZI1_26901 2 @WUZI1_27745 3 @WUZI1_27844 4 @WUZI1_27925 5 @WUZI1_28069 6 @WUZI1_28180 
+
+:WUZI1_23665
+if 
+  636@ == 1 
+jf @WUZI1_23733 
+748@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+752@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+
+:WUZI1_23733
+0209: 20@ = random_int_in_ranges 0 2 
+04AF: 532@ = 43800 // = constant 
+04AF: 533@ = 43801 // = constant 
+04AF: 534@ = 43804 // = constant 
+04AF: 535@ = 43805 // = constant 
+04AF: 536@ = 43806 // = constant 
+04AF: 537@ = 43807 // = constant 
+04AF: 538@ = 43808 // = constant 
+04AF: 539@ = 65535 // = constant 
+04AF: 540@ = 43809 // = constant 
+04AF: 541@ = 43810 // = constant 
+04AF: 542@ = 43811 // = constant 
+04AF: 543@ = 43812 // = constant 
+04AF: 544@ = 43813 // = constant 
+04AF: 545@ = 43814 // = constant 
+if 
+  20@ == 0 
+jf @WUZI1_23927 
+04AF: 546@ = 43845 // = constant 
+04AF: 547@ = 43847 // = constant 
+jump @WUZI1_23947 
+
+:WUZI1_23927
+04AF: 546@ = 43846 // = constant 
+04AF: 547@ = 43848 // = constant 
+
+:WUZI1_23947
+04AF: 548@ = 43844 // = constant 
+04AF: 549@ = 43849 // = constant 
+04AF: 550@ = 43850 // = constant 
+04AF: 551@ = 43851 // = constant 
+04AF: 552@ = 43852 // = constant 
+04AF: 553@ = 43853 // = constant 
+04AF: 554@ = 43854 // = constant 
+04AF: 555@ = 43855 // = constant 
+04AF: 556@ = 43856 // = constant 
+04AF: 557@ = 43857 // = constant 
+04AF: 558@ = 65535 // = constant 
+04AF: 559@ = 65535 // = constant 
+04AF: 560@ = 65535 // = constant 
+04AF: 561@ = 43858 // = constant 
+04AF: 562@ = 43859 // = constant 
+04AF: 563@ = 43860 // = constant 
+04AF: 564@ = 43861 // = constant 
+04AF: 565@ = 43862 // = constant 
+04AF: 566@ = 43863 // = constant 
+04AF: 567@ = 43864 // = constant 
+04AF: 568@ = 43865 // = constant 
+04AF: 569@ = 43866 // = constant 
+04AF: 570@ = 43867 // = constant 
+04AF: 571@ = 43868 // = constant 
+04AF: 572@ = 43869 // = constant 
+04AF: 573@ = 43870 // = constant 
+04AF: 574@ = 43871 // = constant 
+04AF: 575@ = 43872 // = constant 
+04AF: 576@ = 43873 // = constant 
+04AF: 577@ = 43874 // = constant 
+04AF: 578@ = 43875 // = constant 
+04AF: 579@ = 43876 // = constant 
+04AF: 580@ = 43877 // = constant 
+04AF: 581@ = 43878 // = constant 
+04AF: 582@ = 43879 // = constant 
+04AF: 583@ = 43880 // = constant 
+04AF: 584@ = 43881 // = constant 
+04AF: 585@ = 43882 // = constant 
+04AF: 586@ = 43883 // = constant 
+04AF: 587@ = 43884 // = constant 
+04AF: 588@ = 43885 // = constant 
+04AF: 589@ = 43886 // = constant 
+04AF: 590@ = 43887 // = constant 
+04AF: 591@ = 43888 // = constant 
+04AF: 592@ = 43889 // = constant 
+04AF: 593@ = 43890 // = constant 
+04AF: 594@ = 43892 // = constant 
+04AF: 595@ = 43893 // = constant 
+04AF: 596@ = 43894 // = constant 
+04AF: 597@ = 43902 // = constant 
+04AF: 598@ = 43895 // = constant 
+04AF: 599@ = 43905 // = constant 
+if 
+  20@ == 0 
+jf @WUZI1_24542 
+04AF: 600@ = 43815 // = constant 
+04AF: 601@ = 43816 // = constant 
+04AF: 602@ = 43817 // = constant 
+04AF: 603@ = 43818 // = constant 
+04AF: 604@ = 43832 // = constant 
+jump @WUZI1_24592 
+
+:WUZI1_24542
+04AF: 600@ = 43819 // = constant 
+04AF: 601@ = 43820 // = constant 
+04AF: 602@ = 43821 // = constant 
+04AF: 603@ = 43822 // = constant 
+04AF: 604@ = 43833 // = constant 
+
+:WUZI1_24592
+04AF: 605@ = 43839 // = constant 
+04AF: 606@ = 43840 // = constant 
+04AF: 607@ = 65535 // = constant 
+04AF: 608@ = 43826 // = constant 
+04AF: 609@ = 43841 // = constant 
+04AF: 610@ = 43842 // = constant 
+04AF: 611@ = 43843 // = constant 
+04AF: 612@ = 43844 // = constant 
+04AF: 613@ = 43894 // = constant 
+04AF: 614@ = 43895 // = constant 
+04AF: 615@ = 43896 // = constant 
+04AF: 616@ = 43897 // = constant 
+04AF: 617@ = 43898 // = constant 
+04AF: 618@ = 43899 // = constant 
+04AF: 619@ = 43900 // = constant 
+04AF: 620@ = 43901 // = constant 
+04AF: 621@ = 43902 // = constant 
+04AF: 622@ = 43903 // = constant 
+04AF: 623@ = 43904 // = constant 
+04AF: 624@ = 43905 // = constant 
+05AA: 333@s = 'WUZ1_AA' // @s = 'short'  // ~z~We'll need a ride, mine's getting some bodywork done to it.
+05AA: 335@s = 'WUZ1_AB' // @s = 'short'  // ~z~Alright, don't trip.
+05AA: 337@s = 'WUZ1_CA' // @s = 'short'  // ~z~The Blood Feather Triad have a storehouse around the block.
+05AA: 339@s = 'WUZ1_CB' // @s = 'short'  // ~z~We shall see what excuses they have to offer.
+05AA: 341@s = 'WUZ1_CC' // @s = 'short'  // ~z~OK. So what's all this talk of business?
+05AA: 343@s = 'WUZ1_CD' // @s = 'short'  // ~z~Some small time Vietnamese gangs have been making trouble lately.
+05AA: 345@s = 'WUZ1_CE' // @s = 'short'  // ~z~We're not sure why they're gaining any courage now, but I'm nervous about the situation.
+05AA: 349@s = 'WUZ1_CG' // @s = 'short'  // ~z~How do I fit in all of this?
+05AA: 351@s = 'WUZ1_CH' // @s = 'short'  // ~z~You're an outsider.
+05AA: 353@s = 'WUZ1_DA' // @s = 'short'  // ~z~This is the place!
+05AA: 355@s = 'WUZ1_DB' // @s = 'short'  // ~z~What's that smell?
+05AA: 357@s = 'WUZ1_DC' // @s = 'short'  // ~z~Laundry.
+05AA: 359@s = 'WUZ1_DD' // @s = 'short'  // ~z~Come on, it's this way.
+if 
+  20@ == 0 
+jf @WUZI1_25027 
+05AA: 361@s = 'WUZ1_LA' // @s = 'short'  // ~z~Ah, we're here! This way!
+05AA: 363@s = 'WUZ1_LC' // @s = 'short'  // ~z~Strange, this gate is usually locked.
+jump @WUZI1_25055 
+
+:WUZI1_25027
+05AA: 361@s = 'WUZ1_LB' // @s = 'short'  // ~z~Here, this is the place.
+05AA: 363@s = 'WUZ1_LD' // @s = 'short'  // ~z~Odd, this gate should be locked...
+
+:WUZI1_25055
+05AA: 365@s = 'WUZ1_KD' // @s = 'short'  // ~z~Stick Close!
+05AA: 367@s = 'WUZ1_MA' // @s = 'short'  // ~z~Oh man, Woozie...
+05AA: 369@s = 'WUZ1_MB' // @s = 'short'  // ~z~What's got spooked?
+05AA: 371@s = 'WUZ1_MC' // @s = 'short'  // ~z~Oh, oh sorry, didn't see you lying down there.
+05AA: 373@s = 'WUZ1_MD' // @s = 'short'  // ~z~He's dead. They all are.
+05AA: 375@s = 'WUZ1_ME' // @s = 'short'  // ~z~The Blood Feathers, wiped out?
+05AA: 377@s = 'WUZ1_MF' // @s = 'short'  // ~z~Dai Dai Lo! Forgive me, I was too scared to fight, so I hid.
+05AA: 379@s = 'WUZ1_MG' // @s = 'short'  // ~z~Enough! What happened here?
+05AA: 381@s = 'WUZ1_MH' // @s = 'short'  // ~z~Vietnamese surprised us, cut us all down.
+05AA: 383@s = 'WUZ1_MJ' // @s = 'short'  // ~z~Shit, here they come again!
+05AA: 387@s = 'WUZ1_MH' // @s = 'short'  // ~z~Vietnamese surprised us, cut us all down.
+05AA: 389@s = 'WUZ1_MJ' // @s = 'short'  // ~z~Shit, here they come again!
+05AA: 391@s = 'WUZ1_NA' // @s = 'short'  // ~z~The Triads must have vengeance!
+05AA: 393@s = 'WUZ1_NB' // @s = 'short'  // ~z~CJ, follow me and stick close!
+05AA: 395@s = 'WUZ1_NC' // @s = 'short'  // ~z~Ready?
+05AA: 397@s = 'WUZ1_ND' // @s = 'short'  // ~z~DIE YOU MOTHERFUCKING SONS OF WHORES!
+05AA: 399@s = 'WUZ1_NE' // @s = 'short'  // ~z~Looks clear to me, go! Go!
+05AA: 401@s = 'WUZ1_NF' // @s = 'short'  // ~z~I think I got them all!
+05AA: 403@s = 'WUZ1_NG' // @s = 'short'  // ~z~Hell's sewers, that was a sniper bullet!
+05AA: 405@s = 'WUZ1_NH' // @s = 'short'  // ~z~Damn, I err, got something in my eyes, is it safe to move?
+05AA: 407@s = 'WUZ1_NJ' // @s = 'short'  // ~z~YOUR MOTHERS WERE DEMON SLUTS!
+05AA: 409@s = 'WUZ1_NK' // @s = 'short'  // ~z~YOUR BLOOD WILL RUN LIKE WINE!
+05AA: 411@s = 'WUZ1_NL' // @s = 'short'  // ~z~EAT THIS HOT LEADEN SHIT!
+05AA: 413@s = 'WUZ1_NM' // @s = 'short'  // ~z~YOU WILL WANDER AS GHOSTS!
+05AA: 415@s = 'WUZ1_NN' // @s = 'short'  // ~z~CURSED ASSHOLES!
+05AA: 417@s = 'WUZ1_NO' // @s = 'short'  // ~z~CJ, take out that sniper!
+05AA: 419@s = 'WUZ1_NP' // @s = 'short'  // ~z~Cover me, CJ, I'm moving up!
+05AA: 421@s = 'WUZ1_NQ' // @s = 'short'  // ~z~I'm breaking cover, CJ, spray 'em!
+05AA: 423@s = 'WUZ1_OA' // @s = 'short'  // ~z~Oh fuck, man, more up ahead!
+05AA: 425@s = 'WUZ1_OB' // @s = 'short'  // ~z~Shit, man, they really want you dead!
+05AA: 427@s = 'WUZ1_OC' // @s = 'short'  // ~z~I see him. He on the roof!
+05AA: 429@s = 'WUZ1_OD' // @s = 'short'  // ~z~OK, clear, Woozie, GO!
+05AA: 431@s = 'WUZ1_OE' // @s = 'short'  // ~z~Break for it, Woozie!
+05AA: 433@s = 'WUZ1_OF' // @s = 'short' 
+05AA: 435@s = 'WUZ1_OG' // @s = 'short'  // ~z~Hold up, Woozie, we still got trouble!
+05AA: 437@s = 'WUZ1_OH' // @s = 'short'  // ~z~Lay low!
+05AA: 439@s = 'WUZ1_OJ' // @s = 'short'  // ~z~Woozie, keep it down, we still got trouble!
+05AA: 441@s = 'WUZ1_OK' // @s = 'short'  // ~z~In the car, quick!
+05AA: 443@s = 'WUZ1_OL' // @s = 'short'  // ~z~Get on the back of the bike!
+05AA: 445@s = 'WUZ1_OM' // @s = 'short'  // ~z~On the bike, quick!
+05AA: 447@s = 'WUZ1_ON' // @s = 'short'  // ~z~Let's get the fuck out of here!
+05AA: 449@s = 'WUZ1_OO' // @s = 'short'  // ~z~Let's get the hell out of here!
+05AA: 451@s = 'WUZ1_OP' // @s = 'short'  // ~z~We got more company!
+05AA: 453@s = 'WUZ1_OQ' // @s = 'short'  // ~z~Cars on our tail!
+05AA: 455@s = 'WUZ1_OR' // @s = 'short'  // ~z~More of them, in cars!
+05AA: 457@s = 'WUZ1_PA' // @s = 'short'  // ~z~You drive, I'll send them back to the sewers!
+05AA: 459@s = 'WUZ1_PB' // @s = 'short'  // ~z~Keep driving, I'll take care of these murderous scum!
+05AA: 461@s = 'WUZ1_QA' // @s = 'short'  // ~z~That look like the last of 'em.
+05AA: 463@s = 'WUZ1_RA' // @s = 'short'  // ~z~Thank you, Carl, you saved me from having to kill them all myself.
+05AA: 465@s = 'WUZ1_QB' // @s = 'short'  // ~z~OK, let's get back to my place.
+05AA: 467@s = 'WUZ1_RD' // @s = 'short'  // ~z~Here, a token of the Tong's appreciation for what you did today.
+if 
+  20@ == 0 
+jf @WUZI1_25864 
+05AA: 469@s = 'WUZ1_EA' // @s = 'short'  // ~z~Hey, what's with all these people?
+05AA: 471@s = 'WUZ1_EB' // @s = 'short'  // ~z~Where they going?
+05AA: 473@s = 'WUZ1_EC' // @s = 'short'  // ~z~Something isn't right here. We should be careful...
+05AA: 475@s = 'WUZ1_EE' // @s = 'short'  // ~z~Follow me.
+05AA: 477@s = 'WUZ1_GJ' // @s = 'short'  // ~z~Now... where's that loose cobble?
+jump @WUZI1_25934 
+
+:WUZI1_25864
+05AA: 469@s = 'WUZ1_FA' // @s = 'short'  // ~z~Something's not right.
+05AA: 471@s = 'WUZ1_FB' // @s = 'short'  // ~z~No shit, where everybody at?
+05AA: 473@s = 'WUZ1_FC' // @s = 'short'  // ~z~Hiding, scared. I can smell them.
+05AA: 475@s = 'WUZ1_FD' // @s = 'short'  // ~z~We should proceed with caution.
+05AA: 477@s = 'WUZ1_GK' // @s = 'short'  // ~z~Should be a sewer right about here...
+
+:WUZI1_25934
+05AA: 479@s = 'WUZ1_JA' // @s = 'short'  // ~z~Hey, what the hell you doin'?
+05AA: 481@s = 'WUZ1_JB' // @s = 'short'  // ~z~Just, eerr, checking the, um, y'know. Shut up, Carl.... THIS WAY!
+05AA: 485@s = 'WUZ1_GC' // @s = 'short'  // ~z~Hmmm, yes, intriguing...
+05AA: 487@s = 'WUZ1_KA' // @s = 'short'  // ~z~What's wrong? You lost? Need a hand?
+05AA: 489@s = 'WUZ1_KB' // @s = 'short'  // ~z~NO!
+05AA: 491@s = 'WUZ1_KC' // @s = 'short'  // ~z~No, I was just, you know, getting the feel of the place.
+05AA: 493@s = 'WUZ1_KD' // @s = 'short'  // ~z~Stick Close!
+05AA: 495@s = 'WUZ1_QA' // @s = 'short'  // ~z~That look like the last of 'em.
+05AA: 497@s = 'WUZ1_QB' // @s = 'short'  // ~z~OK, let's get back to my place.
+05AA: 499@s = 'WUZ1_QC' // @s = 'short'  // ~z~This is a black day for the Red Gecko Tong.
+05AA: 501@s = 'WUZ1_QD' // @s = 'short'  // ~z~We've lost a Triad to interlopers.
+05AA: 503@s = 'WUZ1_QE' // @s = 'short'  // ~z~The Mountain Cloud Boys will not rest until the Blood Feathers are avenged.
+05AA: 505@s = 'WUZ1_QF' // @s = 'short'  // ~z~Another day, Woozie, another day.
+05AA: 507@s = 'WUZ1_QG' // @s = 'short'  // ~z~Yes.
+05AA: 509@s = 'WUZ1_QH' // @s = 'short'  // ~z~First we must mourn and make funerary arrangements.
+05AA: 511@s = 'WUZ1_RA' // @s = 'short'  // ~z~Thank you, Carl, you saved me from having to kill them all myself.
+05AA: 513@s = 'WUZ1_RB' // @s = 'short'  // ~z~Yeah, well. Give me a call if you need some more help, man.
+05AA: 515@s = 'WUZ1_RC' // @s = 'short'  // ~z~Sure thing.
+05AA: 517@s = 'WUZ1_RD' // @s = 'short'  // ~z~Here, a token of the Tong's appreciation for what you did today.
+640@ = 2 
+641@ = 1 
+642@ = 2 
+643@ = 2 
+644@ = 1 
+645@ = 2 
+646@ = 2 
+647@ = 2 
+648@ = 1 
+649@ = 2 
+650@ = 2 
+651@ = 2 
+652@ = 1 
+653@ = 2 
+654@ = 2 
+655@ = 2 
+656@ = 2 
+657@ = 1 
+658@ = 2 
+659@ = 2 
+660@ = 1 
+661@ = 2 
+662@ = 3 
+663@ = 2 
+664@ = 3 
+665@ = 3 
+666@ = 2 
+667@ = 2 
+668@ = 2 
+669@ = 2 
+670@ = 2 
+671@ = 2 
+672@ = 1 
+673@ = 2 
+674@ = 2 
+675@ = 0 
+676@ = 2 
+677@ = 1 
+678@ = 2 
+679@ = 2 
+680@ = 2 
+681@ = 2 
+682@ = 2 
+683@ = 2 
+684@ = 2 
+685@ = 0 
+686@ = 2 
+687@ = 2 
+688@ = 2 
+689@ = 2 
+690@ = 2 
+691@ = 2 
+692@ = 1 
+693@ = 2 
+694@ = 2 
+695@ = 1 
+696@ = 1 
+697@ = 1 
+698@ = 2 
+699@ = 1 
+700@ = 2 
+701@ = 2 
+702@ = 1 
+703@ = 2 
+704@ = 2 
+705@ = 1 
+706@ = 1 
+707@ = 1 
+708@ = 2 
+709@ = 1 
+710@ = 2 
+711@ = 2 
+712@ = 2 
+713@ = 1 
+714@ = 2 
+715@ = 2 
+716@ = 2 
+717@ = 1 
+718@ = 2 
+719@ = 2 
+720@ = 2 
+721@ = 0 
+722@ = 0 
+723@ = 0 
+724@ = 0 
+725@ = 0 
+726@ = 0 
+727@ = 0 
+728@ = 0 
+729@ = 0 
+730@ = 0 
+731@ = 0 
+732@ = 0 
+008B: 740@ = $PLAYER_ACTOR // (int) 
+636@ = 1 
+03CF: load_wav 532@ as 1 
+03CF: load_wav 533@ as 2 
+632@ = 1 
+633@ = 2 
+jump @WUZI1_28286 
+
+:WUZI1_26901
+if 
+   not 637@ == 0 
+jf @WUZI1_27738 
+if 
+  265@ == 0 
+jf @WUZI1_27738 
+if 
+001D:   32@ > 755@ // (int) 
+jf @WUZI1_27738 
+if and
+03D2:   wav 1 ended 
+03D2:   wav 2 ended 
+jf @WUZI1_27738 
+if 
+003B:   632@ == 637@ // (int) 
+jf @WUZI1_27008 
+634@ = 1 
+jump @WUZI1_27071 
+
+:WUZI1_27008
+if 
+003B:   633@ == 637@ // (int) 
+jf @WUZI1_27041 
+634@ = 2 
+jump @WUZI1_27071 
+
+:WUZI1_27041
+634@ = 1 
+0085: 632@ = 637@ // (int) 
+040D: unload_wav 1 
+03CF: load_wav 531@(637@,100i) as 1 
+
+:WUZI1_27071
+if 
+03D0:   wav 634@ loaded 
+jf @WUZI1_27726 
+0085: 747@ = 639@(637@,100i) // (int) 
+0085: 748@ = 739@(747@,7i) // (int) 
+if 
+   not 754@ == 1 
+jf @WUZI1_27299 
+751@ = 1 
+753@ = 0 
+
+:WUZI1_27143
+if 
+  7 > 751@ 
+jf @WUZI1_27299 
+0085: 752@ = 739@(751@,7i) // (int) 
+if 
+   not 752@ == 0 
+jf @WUZI1_27285 
+if 
+803B:   not  752@ == 748@ // (int) 
+jf @WUZI1_27285 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27285 
+if 
+   not Actor.Dead(752@)
+jf @WUZI1_27285 
+if 
+0104:   actor 748@ near_actor 752@ radius 10.0 10.0 10.0 sphere 0 
+jf @WUZI1_27285 
+753@ += 1 
+
+:WUZI1_27285
+751@ += 1 
+jump @WUZI1_27143 
+
+:WUZI1_27299
+if or
+  754@ == 1 
+  753@ > 0 
+  639@(637@,100i) == 0 
+jf @WUZI1_27712 
+if 
+   not 639@(637@,100i) == 0 
+jf @WUZI1_27444 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27444 
+if 
+  $7248 == 0 
+jf @WUZI1_27399 
+0949: link_wav 634@ to_actor 748@ 
+
+:WUZI1_27399
+if 
+894D:   not actor 748@ mutally_active 
+jf @WUZI1_27437 
+746@ = 1 
+0967: actor 748@ move_mouth 15000 ms 
+jump @WUZI1_27444 
+
+:WUZI1_27437
+094E: set_actor 748@ mute_pain_audio 0 
+
+:WUZI1_27444
+if 
+  639@(637@,100i) == 0 
+jf @WUZI1_27473 
+746@ = 1 
+
+:WUZI1_27473
+if 
+  746@ == 1 
+jf @WUZI1_27705 
+if 
+   not 748@ == 0 
+jf @WUZI1_27532 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27532 
+0A09: set_actor 748@ muted 1 // versionB 
+
+:WUZI1_27532
+03D1: play_wav 634@ 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 331@(637@,100s) time 10000 flag 1 
+636@ += 1 
+746@ = 0 
+637@ += 1 
+0085: 635@ = 637@ // (int) 
+if 
+   not 531@(637@,100i) == 0 
+jf @WUZI1_27705 
+if 
+  634@ == 1 
+jf @WUZI1_27667 
+if 
+803B:   not  633@ == 637@ // (int) 
+jf @WUZI1_27660 
+03CF: load_wav 531@(637@,100i) as 2 
+0085: 633@ = 637@ // (int) 
+
+:WUZI1_27660
+jump @WUZI1_27705 
+
+:WUZI1_27667
+if 
+803B:   not  632@ == 637@ // (int) 
+jf @WUZI1_27705 
+03CF: load_wav 531@(637@,100i) as 1 
+0085: 632@ = 637@ // (int) 
+
+:WUZI1_27705
+jump @WUZI1_27719 
+
+:WUZI1_27712
+636@ = 6 
+
+:WUZI1_27719
+jump @WUZI1_27738 
+
+:WUZI1_27726
+03CF: load_wav 531@(637@,100i) as 634@ 
+
+:WUZI1_27738
+jump @WUZI1_28286 
+
+:WUZI1_27745
+if 
+03D2:   wav 634@ ended 
+jf @WUZI1_27798 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27784 
+0A09: set_actor 748@ muted 0 // versionB 
+
+:WUZI1_27784
+636@ += 1 
+jump @WUZI1_27837 
+
+:WUZI1_27798
+if 
+056D:   actor 748@ defined 
+jf @WUZI1_27837 
+if 
+   Actor.Dead(748@)
+jf @WUZI1_27837 
+636@ += 1 
+
+:WUZI1_27837
+jump @WUZI1_28286 
+
+:WUZI1_27844
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27867 
+0A09: set_actor 748@ muted 0 // versionB 
+
+:WUZI1_27867
+040D: unload_wav 634@ 
+631@(634@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27911 
+0968: actor 748@ stop_mouth 
+094F: enable_actor 748@ pain_audio 
+
+:WUZI1_27911
+636@ += 1 
+jump @WUZI1_28286 
+
+:WUZI1_27925
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_27948 
+0A09: set_actor 748@ muted 0 // versionB 
+
+:WUZI1_27948
+637@ += 1 
+if 
+   not 531@(637@,100i) == 0 
+jf @WUZI1_28001 
+03CF: load_wav 531@(637@,100i) as 634@ 
+0085: 631@(634@,3i) = 637@ // (int) 
+
+:WUZI1_28001
+638@ -= 1 
+if 
+   not 638@ > 0 
+jf @WUZI1_28047 
+637@ = 0 
+638@ = 0 
+jump @WUZI1_28055 
+
+:WUZI1_28047
+0085: 637@ = 635@ // (int) 
+
+:WUZI1_28055
+636@ = 1 
+jump @WUZI1_28286 
+
+:WUZI1_28069
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_28092 
+0A09: set_actor 748@ muted 0 // versionB 
+
+:WUZI1_28092
+636@ = 1 
+637@ = 0 
+638@ = 0 
+285@ = 0 
+329@ = 0 
+$7248 = 0 
+040D: unload_wav 634@ 
+631@(634@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_28173 
+094F: enable_actor 748@ pain_audio 
+
+:WUZI1_28173
+jump @WUZI1_28286 
+
+:WUZI1_28180
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_28203 
+0A09: set_actor 748@ muted 0 // versionB 
+
+:WUZI1_28203
+636@ = 2 
+637@ = 0 
+638@ = 0 
+285@ = 0 
+329@ = 0 
+$7248 = 0 
+631@(634@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(748@)
+jf @WUZI1_28279 
+094F: enable_actor 748@ pain_audio 
+
+:WUZI1_28279
+jump @WUZI1_28286 
+
+:WUZI1_28286
+return 
+
+:WUZI1_28288
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @WUZI1_28356 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+
+:WUZI1_28356
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:WUZI1_28374
+01E3: show_text_1number_styled GXT 'M_PASSS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 5000
+0998: add_respect 10 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'WUZI_1'  // Mountain Cloud Boys
+$WUZIMU_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:WUZI1_28438
+130@ = 0 
+
+:WUZI1_28445
+if 
+  18 > 130@ 
+jf @WUZI1_28538 
+Marker.Disable(111@(130@,18i))
+if 
+   not Actor.Dead(138@(130@,18i))
+jf @WUZI1_28524 
+05E2: AS_actor 138@(130@,18i) kill_actor $PLAYER_ACTOR 
+0961: set_actor 138@(130@,18i) keep_tasks_after_cleanup 1 
+Actor.RemoveReferences(138@(130@,18i))
+
+:WUZI1_28524
+130@ += 1 
+jump @WUZI1_28445 
+
+:WUZI1_28538
+03E6: remove_text_box 
+if 
+   not Car.Wrecked(104@)
+jf @WUZI1_28585 
+01EC: make_car 104@ very_heavy 0 
+Car.SetImmunities(104@, 0, 0, 0, 0, 0)
+Car.DoorStatus(104@) = 1
+
+:WUZI1_28585
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @WUZI1_28608 
+Player.CanMove($PLAYER_CHAR) = True
+
+:WUZI1_28608
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+0296: unload_special_actor 1 
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB2)
+Model.Destroy(#DNB3)
+Model.Destroy(#SNIPER)
+Model.Destroy(#SENTINEL)
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+Model.Destroy(#OMOST)
+Model.Destroy(#SANCHEZ)
+04EF: release_animation "SWAT" 
+04EF: release_animation "WUZI" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "CAR_CHAT" 
+0873: release_path 136 
+0873: release_path 137 
+0873: release_path 138 
+0873: release_path 139 
+0873: release_path 169 
+091E: create_forbidden_for_boats_cube_cornerA -2239.251 636.6675 53.1933 cornerB -2165.047 720.0577 49.5456 
+0151: remove_status_text $7247 
+06D7: enable_train_traffic 1 
+03C7: set_sensitivity_to_crime 1.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @WUZI1_28803 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:WUZI1_28803
+if 
+   not Actor.Dead(35@)
+jf @WUZI1_28824 
+Actor.DestroyWithFade(35@)
+
+:WUZI1_28824
+Marker.Disable(107@)
+Marker.Disable(108@)
+Marker.Disable(109@)
+Marker.Disable(110@)
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+02D1: remove_fire 258@ 
+02D1: remove_fire 259@ 
+065C: release_decision_maker 34@ 
+06D0: enable_emergency_traffic 1 
+$ONMISSION = 0 
+088D: set_objects_in_sphere -2175.213 662.718 50.8582 radius 10.5 with_model #CT_GATEXR collision_detection 1 
+088D: set_objects_in_sphere -2175.213 662.718 50.8582 radius 10.5 with_model #CHINA_TOWN_GATEB collision_detection 1 
+mission_cleanup 
+return

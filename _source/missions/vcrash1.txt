@@ -1,0 +1,1304 @@
+:VCRASH1
+gosub @VCRASH1_36 
+if 
+wasted_or_busted 
+jf @VCRASH1_27 
+gosub @VCRASH1_8507 
+
+:VCRASH1_27
+gosub @VCRASH1_8675 
+end_thread 
+
+:VCRASH1_36
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'VCRASH1' 
+wait 0 
+054C: use_GXT_table 'VCR1' 
+08F5: save_player_group 
+02E4: load_cutscene_data 'CRASHV1' 
+
+:VCRASH1_84
+if 
+86B9:   not cutscene_data_loaded 
+jf @VCRASH1_108 
+wait 0 
+jump @VCRASH1_84 
+
+:VCRASH1_108
+set_weather 11 
+02E7: start_cutscene 
+0395: clear_area 0 at 1653.347 2668.373 10.8203 radius 10.0 
+fade 1 1000 
+
+:VCRASH1_145
+if 
+82E9:   not cutscene_reached_end 
+jf @VCRASH1_169 
+wait 0 
+jump @VCRASH1_145 
+
+:VCRASH1_169
+fade 0 0 
+
+:VCRASH1_175
+if 
+fading 
+jf @VCRASH1_199 
+wait 0 
+jump @VCRASH1_175 
+
+:VCRASH1_199
+02EA: end_cutscene 
+
+:VCRASH1_201
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @VCRASH1_228 
+wait 0 
+jump @VCRASH1_201 
+
+:VCRASH1_228
+Model.Load(#WMYBU)
+
+:VCRASH1_233
+if 
+   not Model.Available(#WMYBU)
+jf @VCRASH1_260 
+wait 0 
+jump @VCRASH1_233 
+
+:VCRASH1_260
+0395: clear_area 0 at 1599.09 2667.725 9.8203 radius 0.5 
+Camera.SetAtPos(1599.09, 2667.725, 9.8203)
+Actor.PutAt($PLAYER_ACTOR, 1599.09, 2667.725, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+Camera.SetBehindPlayer
+01B7: release_weather 
+08F6: restore_player_group 
+fade 1 1000 
+
+:VCRASH1_344
+if 
+fading 
+jf @VCRASH1_368 
+wait 0 
+jump @VCRASH1_344 
+
+:VCRASH1_368
+09FF: set_restart_closest_to 1599.09 2667.725 9.8203 
+00BC: show_text_highpriority GXT 'VCR1__1' time 15000 flag 1  // ~s~Kill the ~r~target ~s~and grab the evidence dossier.
+018A: 34@ = create_checkpoint_at -1306.191 2532.48 86.7332 
+Marker.SetColor(34@, 0)
+59@ = 0 
+60@ = 0 
+61@ = 0 
+49@ = 0 
+
+:VCRASH1_456
+if 
+  10 > 49@ 
+jf @VCRASH1_499 
+62@(49@,10i) = 0 
+49@ += 1 
+jump @VCRASH1_456 
+
+:VCRASH1_499
+36@ = 0 
+72@ = 0 
+73@ = 0 
+if 
+  36@ == 1 
+jf @VCRASH1_557 
+106@ = Pickup.Create(#BRIEFCASE, 3, 103@, 104@, 105@)
+
+:VCRASH1_557
+077A: set_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+if 
+  $2879 == 1 
+jf @VCRASH1_606 
+0950: set_trip_skip -1346.614 2304.482 93.539 angle 4.8156 
+
+:VCRASH1_606
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @VCRASH1_633 
+jump @VCRASH1_606 
+
+:VCRASH1_633
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @VCRASH1_655 
+jump @VCRASH1_8614 
+
+:VCRASH1_655
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2511.364 2388.914 6.2421 radius 38.6 26.4 3.4 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1306.191 2532.48 radius 200.0 200.0 
+jf @VCRASH1_742 
+Player.WantedLevel($PLAYER_CHAR) = 0
+
+:VCRASH1_742
+if 
+  36@ == 0 
+jf @VCRASH1_3144 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1306.191 2532.48 radius 250.0 250.0 
+jf @VCRASH1_3144 
+44@ = 1 
+if 
+   not Model.Available(#MAVERICK)
+jf @VCRASH1_833 
+Model.Load(#MAVERICK)
+jump @VCRASH1_840 
+
+:VCRASH1_833
+44@ += 1 
+
+:VCRASH1_840
+if 
+   not Model.Available(#MESA)
+jf @VCRASH1_868 
+Model.Load(#MESA)
+jump @VCRASH1_875 
+
+:VCRASH1_868
+44@ += 1 
+
+:VCRASH1_875
+if 
+   not Model.Available(#FBIRANCH)
+jf @VCRASH1_903 
+Model.Load(#FBIRANCH)
+jump @VCRASH1_910 
+
+:VCRASH1_903
+44@ += 1 
+
+:VCRASH1_910
+if 
+   not Model.Available(#SANCHEZ)
+jf @VCRASH1_938 
+Model.Load(#SANCHEZ)
+jump @VCRASH1_945 
+
+:VCRASH1_938
+44@ += 1 
+
+:VCRASH1_945
+if 
+   not Model.Available(#BUFFALO)
+jf @VCRASH1_973 
+Model.Load(#BUFFALO)
+jump @VCRASH1_980 
+
+:VCRASH1_973
+44@ += 1 
+
+:VCRASH1_980
+if 
+   not Model.Available(#AK47)
+jf @VCRASH1_1008 
+Model.Load(#AK47)
+jump @VCRASH1_1015 
+
+:VCRASH1_1008
+44@ += 1 
+
+:VCRASH1_1015
+if 
+   not Model.Available(#FBI)
+jf @VCRASH1_1043 
+Model.Load(#FBI)
+jump @VCRASH1_1050 
+
+:VCRASH1_1043
+44@ += 1 
+
+:VCRASH1_1050
+if 
+   not Model.Available(#MICRO_UZI)
+jf @VCRASH1_1078 
+Model.Load(#MICRO_UZI)
+jump @VCRASH1_1085 
+
+:VCRASH1_1078
+44@ += 1 
+
+:VCRASH1_1085
+if 
+87C1:   not path 114 available 
+jf @VCRASH1_1111 
+07C0: load_path 114 
+jump @VCRASH1_1118 
+
+:VCRASH1_1111
+44@ += 1 
+
+:VCRASH1_1118
+if 
+87C1:   not path 109 available 
+jf @VCRASH1_1144 
+07C0: load_path 109 
+jump @VCRASH1_1151 
+
+:VCRASH1_1144
+44@ += 1 
+
+:VCRASH1_1151
+if 
+  44@ == 11 
+jf @VCRASH1_3144 
+$2879 = 1 
+74@ = Car.Create(#MAVERICK, -1325.514, 2559.87, 87.6329)
+Car.Angle(74@) = 90.0
+Car.DoorStatus(74@) = 3
+Car.Health(74@) = 50000
+Car.SetImmunities(74@, 1, 1, 1, 1, 1)
+05EB: assign_car 74@ to_path 114 
+06FD: set_car 74@ speed_on_path_to 0.0 
+0825: set_helicopter 74@ instant_rotor_start 
+75@ = Car.Create(#MAVERICK, -1343.22, 2538.337, 87.0107)
+Car.Angle(75@) = 10.304
+Car.SetImmunities(75@, 1, 1, 1, 1, 1)
+76@ = Car.Create(#MESA, -1304.416, 2498.821, 87.0571)
+Car.Angle(76@) = 240.0877
+77@ = Car.Create(#FBIRANCH, -1291.948, 2497.782, 87.1105)
+Car.Angle(77@) = 107.4866
+78@ = Car.Create(#SANCHEZ, -1311.13, 2512.169, 86.7085)
+Car.Angle(78@) = 177.3181
+79@ = Car.Create(#SANCHEZ, -1308.107, 2542.577, 87.4072)
+Car.Angle(79@) = 179.8761
+80@ = Actor.Create(Mission1, #WMYBU, -1312.008, 2549.6, 86.7332)
+Actor.Angle(80@) = 259.3965
+Actor.GiveWeaponAndAmmo(80@, MicroUzi, 9999)
+074E: unknown_set_actor_threat_scanner_flags 80@ radius 30.0 peds_to_scan 5 
+Marker.Disable(34@)
+34@ = Marker.CreateAboveActor(80@)
+02A9: set_actor 80@ immune_to_nonplayer 1 
+Actor.Health(80@) = 200
+07E5: copy_decision_maker -1 to 90@ 
+0708: reset_decision_maker 90@ event 31 
+060B: set_actor 80@ decision_maker_to 90@ 
+91@ = 0 
+81@ = Actor.Create(Mission1, #FBI, -1302.715, 2534.374, 86.7332)
+Actor.Angle(81@) = 183.0002
+Actor.GiveWeaponAndAmmo(81@, AK47, 9999)
+0688: AS_actor 81@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 81@ radius 30.0 peds_to_scan 8 
+077A: set_actor 81@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 81@ melee_accuracy_to 70.0 
+0961: set_actor 81@ keep_tasks_after_cleanup 1 
+82@ = Actor.Create(Mission1, #FBI, -1325.868, 2525.352, 89.2044)
+Actor.Angle(82@) = 226.106
+Actor.GiveWeaponAndAmmo(82@, AK47, 9999)
+0688: AS_actor 82@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 82@ radius 30.0 peds_to_scan 8 
+077A: set_actor 82@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 82@ melee_accuracy_to 70.0 
+0961: set_actor 82@ keep_tasks_after_cleanup 1 
+83@ = Actor.Create(Mission1, #FBI, -1303.204, 2530.197, 86.6889)
+Actor.Angle(83@) = 4.8042
+Actor.GiveWeaponAndAmmo(83@, AK47, 9999)
+0688: AS_actor 83@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 83@ radius 30.0 peds_to_scan 8 
+077A: set_actor 83@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 83@ melee_accuracy_to 70.0 
+0961: set_actor 83@ keep_tasks_after_cleanup 1 
+84@ = Actor.Create(Mission1, #FBI, -1315.782, 2502.167, 88.8673)
+Actor.Angle(84@) = 242.7848
+Actor.GiveWeaponAndAmmo(84@, AK47, 9999)
+0688: AS_actor 84@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 84@ radius 30.0 peds_to_scan 8 
+077A: set_actor 84@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 84@ melee_accuracy_to 70.0 
+0961: set_actor 84@ keep_tasks_after_cleanup 1 
+85@ = Actor.Create(Mission1, #FBI, -1299.54, 2555.919, 86.5877)
+Actor.GiveWeaponAndAmmo(85@, AK47, 9999)
+0688: AS_actor 85@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 85@ radius 30.0 peds_to_scan 8 
+077A: set_actor 85@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 85@ melee_accuracy_to 70.0 
+0961: set_actor 85@ keep_tasks_after_cleanup 1 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -1299.54 2555.919 86.5877 
+05D7: add_point_to_scmpath -1310.96 2556.232 86.7332 
+05D7: add_point_to_scmpath -1311.968 2538.963 86.7332 
+05D7: add_point_to_scmpath -1321.357 2531.076 86.6104 
+05D7: add_point_to_scmpath -1321.043 2522.5 86.285 
+05D7: add_point_to_scmpath -1314.539 2513.364 86.0349 
+05D7: add_point_to_scmpath -1309.208 2508.24 86.0349 
+05D7: add_point_to_scmpath -1296.686 2524.012 86.4456 
+05D8: AS_assign_scmpath to_actor 85@ flags 4 3 
+86@ = Actor.Create(Mission1, #FBI, -1328.974, 2533.528, 86.409)
+Actor.GiveWeaponAndAmmo(86@, AK47, 9999)
+0688: AS_actor 86@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 86@ radius 30.0 peds_to_scan 8 
+077A: set_actor 86@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 86@ melee_accuracy_to 70.0 
+0961: set_actor 86@ keep_tasks_after_cleanup 1 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -1328.974 2533.528 86.409 
+05D7: add_point_to_scmpath -1329.293 2521.88 86.0349 
+05D7: add_point_to_scmpath -1309.194 2521.418 86.3435 
+05D7: add_point_to_scmpath -1308.755 2535.446 86.7332 
+05D8: AS_assign_scmpath to_actor 86@ flags 4 3 
+87@ = Actor.Create(Mission1, #FBI, -1288.024, 2516.431, 86.1473)
+Actor.GiveWeaponAndAmmo(87@, AK47, 9999)
+0688: AS_actor 87@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 87@ radius 30.0 peds_to_scan 8 
+077A: set_actor 87@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 87@ melee_accuracy_to 70.0 
+0961: set_actor 87@ keep_tasks_after_cleanup 1 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -1288.024 2516.431 86.1473 
+05D7: add_point_to_scmpath -1287.43 2508.768 86.0176 
+05D7: add_point_to_scmpath -1295.208 2506.548 85.9726 
+05D7: add_point_to_scmpath -1310.584 2517.543 86.191 
+05D7: add_point_to_scmpath -1311.336 2524.432 86.4621 
+05D7: add_point_to_scmpath -1305.55 2521.813 86.359 
+05D7: add_point_to_scmpath -1300.198 2521.183 86.3342 
+05D7: add_point_to_scmpath -1296.416 2525.185 86.4917 
+05D8: AS_assign_scmpath to_actor 87@ flags 4 2 
+88@ = Actor.Create(Mission1, #FBI, -1294.97, 2499.619, 85.9347)
+Actor.Angle(88@) = 102.9169
+Actor.GiveWeaponAndAmmo(88@, AK47, 9999)
+0688: AS_actor 88@ unknown_toggle_ped_threat_scanner 0 0 1 
+074E: unknown_set_actor_threat_scanner_flags 88@ radius 30.0 peds_to_scan 8 
+077A: set_actor 88@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 88@ melee_accuracy_to 70.0 
+0961: set_actor 88@ keep_tasks_after_cleanup 1 
+89@ = Actor.Create(Mission1, #FBI, -1296.548, 2499.436, 85.9413)
+Actor.Angle(89@) = 281.057
+Actor.GiveWeaponAndAmmo(89@, AK47, 9999)
+0688: AS_actor 89@ unknown_toggle_ped_threat_scanner 0 0 1 
+0677: AS_actor 88@ chat_with_actor 89@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 89@ chat_with_actor 88@ lead_speaker_flag 0 unknown_flag 1 
+074E: unknown_set_actor_threat_scanner_flags 89@ radius 30.0 peds_to_scan 12 
+077A: set_actor 89@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 89@ melee_accuracy_to 70.0 
+0961: set_actor 89@ keep_tasks_after_cleanup 1 
+92@ = Car.Create(#BUFFALO, 2077.761, 2420.901, 48.5234)
+Car.Angle(92@) = 90.0
+05EB: assign_car 92@ to_path 109 
+06FD: set_car 92@ speed_on_path_to 0.0 
+Car.SetImmunities(92@, 1, 1, 1, 1, 1)
+Car.Health(92@) = 50000
+Car.DoorStatus(92@) = 3
+93@ = Car.Create(#BUFFALO, 2077.761, 2416.901, 48.5234)
+Car.Angle(93@) = 90.0
+Car.Health(93@) = 1750
+Car.DoorStatus(93@) = 3
+0615: define_AS_pack_begin 94@ 
+05D3: AS_actor -1 goto_point -1324.902 2554.654 87.8548 mode 7 time -2 ms // versionA 
+05CB: AS_actor -1 enter_car 74@ as_driver 20000 ms 
+0616: define_AS_pack_end 94@ 
+0615: define_AS_pack_begin 95@ 
+0633: AS_actor -1 exit_car 
+0637: AS_actor -1 goto 2112.607 2422.873 59.8223 mode 7 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2097.288 2436.618 59.8223 mode 7 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2096.757 2440.394 59.8151 mode 7 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2074.036 2440.098 48.5176 mode 7 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2078.0 2427.004 48.5244 mode 7 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+05CB: AS_actor -1 enter_car 92@ as_driver 20000 ms 
+0616: define_AS_pack_end 95@ 
+36@ += 1 
+
+:VCRASH1_3144
+if 
+  72@ == 0 
+jf @VCRASH1_3230 
+if 
+  62@(91@,10i) == 2 
+jf @VCRASH1_3230 
+00BC: show_text_highpriority GXT 'VCR1__7' time 8000 flag 1  // ~s~The ~r~target ~s~is escaping in a helicopter.
+014C: set_parked_car_generator $PARKED_PLANES[7] cars_to_generate_to 0 
+008B: 37@ = $CURRENT_TIME_IN_MS2 // (int) 
+37@ += 8000 
+72@ += 1 
+
+:VCRASH1_3230
+if 
+  72@ == 1 
+jf @VCRASH1_3378 
+if 
+  1 > 61@ 
+jf @VCRASH1_3378 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 37@ // (int) 
+jf @VCRASH1_3378 
+if 
+   not Car.Wrecked(75@)
+jf @VCRASH1_3355 
+if 
+84A9:   not actor $PLAYER_ACTOR driving_heli 
+jf @VCRASH1_3355 
+00BC: show_text_highpriority GXT 'VCR1__9' time 6000 flag 1  // ~s~Follow the target using the remaining ~b~helicopter.
+35@ = Marker.CreateAboveCar(75@)
+07E0: set_marker 35@ type_to 1 
+018B: set_marker 34@ radar_mode 1 
+
+:VCRASH1_3355
+008B: 37@ = $CURRENT_TIME_IN_MS2 // (int) 
+37@ += 6000 
+72@ += 1 
+
+:VCRASH1_3378
+if 
+  72@ == 2 
+jf @VCRASH1_3560 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 37@ // (int) 
+jf @VCRASH1_3560 
+if 
+04A9:   actor $PLAYER_ACTOR driving_heli 
+jf @VCRASH1_3528 
+00BC: show_text_highpriority GXT 'VCR1_10' time 5000 flag 1  // ~s~Don't let the ~r~target ~s~get away!
+if 
+   not Car.Wrecked(74@)
+jf @VCRASH1_3478 
+Car.SetImmunities(74@, 0, 0, 0, 0, 0)
+
+:VCRASH1_3478
+if 
+   not Car.Wrecked(75@)
+jf @VCRASH1_3509 
+Car.SetImmunities(75@, 0, 0, 0, 0, 0)
+
+:VCRASH1_3509
+018B: set_marker 34@ radar_mode 3 
+Marker.Disable(35@)
+72@ += 1 
+
+:VCRASH1_3528
+if 
+   Actor.Dead(80@(91@,10i))
+jf @VCRASH1_3560 
+Marker.Disable(35@)
+72@ += 1 
+
+:VCRASH1_3560
+if 
+  36@ > 0 
+jf @VCRASH1_6860 
+49@ = 0 
+
+:VCRASH1_3585
+if 
+  10 > 49@ 
+jf @VCRASH1_6860 
+if 
+003B:   49@ == 91@ // (int) 
+jf @VCRASH1_6166 
+if 
+   not Actor.Dead(80@(49@,10i))
+jf @VCRASH1_5861 
+if 
+  62@(91@,10i) == 0 
+jf @VCRASH1_3709 
+if 
+  59@ > 0 
+jf @VCRASH1_3709 
+0618: assign_actor 80@(91@,10i) to_AS_pack 94@ 
+07A8: enable_area69_sam 0 
+62@(91@,10i) += 1 
+
+:VCRASH1_3709
+if 
+   not Car.Wrecked(74@)
+jf @VCRASH1_4091 
+if 
+  62@(91@,10i) == 1 
+jf @VCRASH1_3804 
+if 
+   Actor.InCar(80@(91@,10i), 74@)
+jf @VCRASH1_3804 
+Car.Health(74@) = 1750
+Car.SetImmunities(74@, 0, 0, 0, 0, 0)
+62@(91@,10i) += 1 
+
+:VCRASH1_3804
+if 
+  62@(91@,10i) == 2 
+jf @VCRASH1_4091 
+Car.StorePos(74@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 51@, 52@, 53@)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 51@ 52@ 
+96@ = 7000.0 
+0077: 96@ /= $DISTANCE_BETWEEN_POINTS // (float) 
+96@ /= 100.0 
+if 
+  96@ > 2.0 
+jf @VCRASH1_3930 
+96@ = 2.0 
+
+:VCRASH1_3930
+if 
+  0.3 > 96@ 
+jf @VCRASH1_3961 
+96@ = 0.3 
+
+:VCRASH1_3961
+06FD: set_car 74@ speed_on_path_to 96@ 
+if 
+860E:   not car 74@ assigned_to_path 
+jf @VCRASH1_4091 
+if 
+   not Car.Wrecked(93@)
+jf @VCRASH1_4008 
+Car.DoorStatus(93@) = 1
+
+:VCRASH1_4008
+0618: assign_actor 80@(91@,10i) to_AS_pack 95@ 
+00BC: show_text_highpriority GXT 'VCR1__8' time 5000 flag 1  // ~s~The ~r~target ~s~has abandoned the helicopter.
+Marker.Disable(35@)
+018B: set_marker 34@ radar_mode 3 
+01E8: create_forbidden_for_cars_cube_cornerA 2475.428 2345.007 2.7255 cornerB 2517.416 2398.874 12.369 
+62@(91@,10i) += 1 
+
+:VCRASH1_4091
+if 
+   not Car.Wrecked(92@)
+jf @VCRASH1_4532 
+if 
+  62@(91@,10i) == 3 
+jf @VCRASH1_4283 
+if 
+   Actor.InCar(80@(91@,10i), 92@)
+jf @VCRASH1_4283 
+Car.Health(92@) = 1750
+Car.SetImmunities(92@, 0, 0, 0, 0, 0)
+Car.RemoveReferences(74@)
+Car.RemoveReferences(75@)
+Car.RemoveReferences(76@)
+Car.RemoveReferences(77@)
+Car.RemoveReferences(78@)
+Car.RemoveReferences(79@)
+42@ = 0 
+
+:VCRASH1_4212
+if 
+  10 > 42@ 
+jf @VCRASH1_4272 
+if 
+803B:   not  42@ == 91@ // (int) 
+jf @VCRASH1_4258 
+Actor.RemoveReferences(80@(42@,10i))
+
+:VCRASH1_4258
+42@ += 1 
+jump @VCRASH1_4212 
+
+:VCRASH1_4272
+62@(91@,10i) += 1 
+
+:VCRASH1_4283
+if 
+  62@(91@,10i) == 4 
+jf @VCRASH1_4532 
+if 
+060E:   car 92@ assigned_to_path 
+jf @VCRASH1_4477 
+Car.StorePos(92@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 51@, 52@, 53@)
+050A: $DISTANCE_BETWEEN_POINTS = distance_between_XYZ $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_XYZ 51@ 52@ 53@ 
+96@ = 5000.0 
+0077: 96@ /= $DISTANCE_BETWEEN_POINTS // (float) 
+96@ /= 100.0 
+if 
+  96@ > 1.1 
+jf @VCRASH1_4431 
+96@ = 1.1 
+
+:VCRASH1_4431
+if 
+  0.6 > 96@ 
+jf @VCRASH1_4462 
+96@ = 0.6 
+
+:VCRASH1_4462
+06FD: set_car 92@ speed_on_path_to 96@ 
+jump @VCRASH1_4532 
+
+:VCRASH1_4477
+05D1: AS_actor 80@(91@,10i) drive_car -1 to 2538.067 2389.819 3.22 speed 100.0 0 model #CSPLAY 2 
+04E0: car 92@ abandon_path_radius 1 
+62@(91@,10i) += 1 
+
+:VCRASH1_4532
+if 
+  62@(91@,10i) == 5 
+jf @VCRASH1_5565 
+if 
+   Actor.Driving(80@(91@,10i))
+jf @VCRASH1_5554 
+97@ = Actor.CurrentCar(80@(91@,10i))
+00AE: set_car 97@ traffic_behaviour_to 2 
+04E0: car 97@ abandon_path_radius 1 
+Car.StorePos(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 51@, 52@, 53@)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 51@ 52@ 
+57@ = 3000.0 
+0077: 57@ /= $DISTANCE_BETWEEN_POINTS // (float) 
+if 
+0100:   actor 80@(91@,10i) in_sphere 2506.65 2355.857 10.8203 radius 29.9399 15.57 2.0 sphere 0 in_car 
+jf @VCRASH1_4725 
+57@ = 20.0 
+
+:VCRASH1_4725
+if 
+  57@ > 100.0 
+jf @VCRASH1_4756 
+57@ = 100.0 
+
+:VCRASH1_4756
+if 
+  15.0 > 57@ 
+jf @VCRASH1_4787 
+57@ = 15.0 
+
+:VCRASH1_4787
+Car.SetMaxSpeed(97@, 57@)
+40@ = Car.Health(97@)
+if 
+  251 > 40@ 
+jf @VCRASH1_4887 
+Car.SetAnimation(97@, 4, 5000)
+Actor.StorePos(80@(91@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+05DA: AS_actor 80@(91@,10i) run_away_in_panic_from $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 away_radius 15.0 timelimit 1500 
+62@(91@,10i) += 1 
+
+:VCRASH1_4887
+if and
+01F4:   car 97@ flipped 
+01C1:   car 97@ stopped 
+jf @VCRASH1_5147 
+if 
+0202:   actor $PLAYER_ACTOR near_car 97@ radius 90.0 90.0 sphere 0 
+jf @VCRASH1_5008 
+03ED: set_car 97@ disable_flipped_explosion_when_empty 0 
+Actor.StorePos(80@(91@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+05DA: AS_actor 80@(91@,10i) run_away_in_panic_from $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 away_radius 15.0 timelimit 1500 
+62@(91@,10i) += 1 
+jump @VCRASH1_5147 
+
+:VCRASH1_5008
+if 
+838A:   not any_car_in_cube_cornerA $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 cornerB 4.0 4.0 4.0 
+jf @VCRASH1_5147 
+if 
+82CA:   not car 97@ bounding_sphere_visible 
+jf @VCRASH1_5147 
+Car.StorePos(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03D3: get_route_nearest_for $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 Z_angle_to $TEMPVAR_ANGLE 
+if 
+80C2:   not sphere_onscreen $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 4.0 
+jf @VCRASH1_5147 
+Car.PutAt(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.Angle(97@) = $TEMPVAR_ANGLE
+
+:VCRASH1_5147
+if 
+01AF:   car 97@ sphere 0 in_sphere 98@ 99@ 100@ radius 4.0 4.0 4.0 
+jf @VCRASH1_5454 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 101@ // (int) 
+jf @VCRASH1_5447 
+if 
+0202:   actor $PLAYER_ACTOR near_car 97@ radius 90.0 90.0 sphere 0 
+jf @VCRASH1_5308 
+03ED: set_car 97@ disable_flipped_explosion_when_empty 0 
+Actor.StorePos(80@(91@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+05DA: AS_actor 80@(91@,10i) run_away_in_panic_from $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 away_radius 15.0 timelimit 500 
+62@(91@,10i) += 1 
+jump @VCRASH1_5447 
+
+:VCRASH1_5308
+if 
+82CA:   not car 97@ bounding_sphere_visible 
+jf @VCRASH1_5447 
+Car.StorePos(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03D3: get_route_nearest_for $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 Z_angle_to $TEMPVAR_ANGLE 
+if 
+838A:   not any_car_in_cube_cornerA $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 cornerB 4.0 4.0 4.0 
+jf @VCRASH1_5447 
+if 
+80C2:   not sphere_onscreen $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 4.0 
+jf @VCRASH1_5447 
+Car.PutAt(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.Angle(97@) = $TEMPVAR_ANGLE
+
+:VCRASH1_5447
+jump @VCRASH1_5484 
+
+:VCRASH1_5454
+Car.StorePos(97@, 98@, 99@, 100@)
+008B: 101@ = $CURRENT_TIME_IN_MS2 // (int) 
+101@ += 5000 
+
+:VCRASH1_5484
+if 
+0100:   actor 80@(91@,10i) in_sphere 2538.067 2389.819 3.22 radius 5.0 5.0 2.0 sphere 0 in_car 
+jf @VCRASH1_5547 
+62@(91@,10i) = 7 
+
+:VCRASH1_5547
+jump @VCRASH1_5565 
+
+:VCRASH1_5554
+62@(91@,10i) += 1 
+
+:VCRASH1_5565
+if 
+  62@(91@,10i) == 6 
+jf @VCRASH1_5710 
+062E: get_actor 80@(91@,10i) task 1498 status_store_to $416 // ret 7 if not found 
+062E: get_actor 80@(91@,10i) task 1489 status_store_to 102@ // ret 7 if not found 
+if or
+04A3:   $416 == 7 // == constant 
+   Actor.Driving(80@(91@,10i))
+jf @VCRASH1_5710 
+if 
+04A4:   102@ == 7 // == constant 
+jf @VCRASH1_5710 
+05D1: AS_actor 80@(91@,10i) drive_car -1 to 2538.067 2389.819 3.22 speed 100.0 0 model #CSPLAY 2 
+62@(91@,10i) -= 1 
+
+:VCRASH1_5710
+if 
+   Actor.Driving(80@(91@,10i))
+jf @VCRASH1_5762 
+if 
+  60@ == 0 
+jf @VCRASH1_5755 
+60@ = 1 
+
+:VCRASH1_5755
+jump @VCRASH1_5787 
+
+:VCRASH1_5762
+if 
+  60@ == 1 
+jf @VCRASH1_5787 
+60@ = 0 
+
+:VCRASH1_5787
+if 
+  62@(91@,10i) == 7 
+jf @VCRASH1_5854 
+062E: get_actor 80@(91@,10i) task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCRASH1_5854 
+05E2: AS_actor 80@(91@,10i) kill_actor $PLAYER_ACTOR 
+
+:VCRASH1_5854
+jump @VCRASH1_6159 
+
+:VCRASH1_5861
+if 
+  62@(91@,10i) == 2 
+jf @VCRASH1_5936 
+if 
+   not Car.Wrecked(74@)
+jf @VCRASH1_5936 
+if 
+060E:   car 74@ assigned_to_path 
+jf @VCRASH1_5920 
+05EC: release_car 74@ from_path 
+
+:VCRASH1_5920
+0564: heli 74@ simulate_crash_landing 
+62@(91@,10i) = 90 
+
+:VCRASH1_5936
+if 
+056D:   actor 80@(91@,10i) defined 
+jf @VCRASH1_6111 
+if 
+84AD:   not actor 80@(91@,10i) in_water 
+jf @VCRASH1_6081 
+if 
+  61@ == 0 
+jf @VCRASH1_6074 
+Marker.Disable(34@)
+Actor.StoreDeadActorPos(80@(91@,10i), 103@, 104@, 105@)
+106@ = Pickup.Create(#BRIEFCASE, 3, 103@, 104@, 105@)
+03DC: 34@ = create_marker_above_pickup 106@ 
+00BC: show_text_highpriority GXT 'VCR1__3' time 5000 flag 1  // ~s~The target is dead and has dropped the ~g~evidence dossier~s~, grab it before anyone else does.
+60@ = 2 
+61@ = 1 
+
+:VCRASH1_6074
+jump @VCRASH1_6104 
+
+:VCRASH1_6081
+00BC: show_text_highpriority GXT 'VCR1__4' time 5000 flag 1  // ~r~The evidence dossier is at the bottom of the sea!
+jump @VCRASH1_8507 
+
+:VCRASH1_6104
+jump @VCRASH1_6134 
+
+:VCRASH1_6111
+00BC: show_text_highpriority GXT 'VCR1__5' time 5000 flag 1  // ~r~You destroyed the evidence dossier in the explosion!
+jump @VCRASH1_8507 
+
+:VCRASH1_6134
+if 
+  59@ == 0 
+jf @VCRASH1_6159 
+59@ = 1 
+
+:VCRASH1_6159
+jump @VCRASH1_6742 
+
+:VCRASH1_6166
+if 
+   not Actor.Dead(80@(49@,10i))
+jf @VCRASH1_6706 
+if 
+  3 > 62@(91@,10i) 
+jf @VCRASH1_6699 
+if 
+  62@(49@,10i) == 0 
+jf @VCRASH1_6440 
+if 
+  73@ == 1 
+jf @VCRASH1_6293 
+062E: get_actor 80@(49@,10i) task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCRASH1_6293 
+05E2: AS_actor 80@(49@,10i) kill_actor $PLAYER_ACTOR 
+
+:VCRASH1_6293
+if 
+  2 > 62@(49@,10i) 
+jf @VCRASH1_6440 
+if 
+  61@ == 1 
+jf @VCRASH1_6440 
+if 
+00ED:   actor 80@(49@,10i) sphere 0 near_point 103@ 104@ radius 65.0 65.0 on_foot 
+jf @VCRASH1_6440 
+Actor.GiveWeaponAndAmmo(80@(49@,10i), MicroUzi, 9999)
+01B9: set_actor 80@(49@,10i) armed_weapon_to 28 
+0637: AS_actor 80@(49@,10i) goto 103@ 104@ 105@ mode 6 turn_radius 1.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+62@(49@,10i) += 1 
+
+:VCRASH1_6440
+if 
+  62@(49@,10i) == 1 
+jf @VCRASH1_6699 
+if 
+  61@ == 1 
+jf @VCRASH1_6688 
+062E: get_actor 80@(49@,10i) task 1591 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCRASH1_6681 
+if 
+00ED:   actor 80@(49@,10i) sphere 0 near_point 103@ 104@ radius 2.0 2.0 on_foot 
+jf @VCRASH1_6681 
+Actor.RemoveReferences(80@(91@,10i))
+80@(91@,10i) = -1 
+0085: 91@ = 49@ // (int) 
+Marker.Disable(34@)
+Pickup.Destroy(106@)
+34@ = Marker.CreateAboveActor(80@(91@,10i))
+02A9: set_actor 80@(91@,10i) immune_to_nonplayer 1 
+if 
+8457:   not player $PLAYER_CHAR aiming_at_actor 80@(91@,10i) 
+jf @VCRASH1_6647 
+Actor.Health(80@(91@,10i)) = 200
+
+:VCRASH1_6647
+62@(91@,10i) = 0 
+00BC: show_text_highpriority GXT 'VCR1__2' time 5000 flag 1  // ~s~You were too slow. One of the guards has grabbed the stuff.
+61@ = 0 
+
+:VCRASH1_6681
+jump @VCRASH1_6699 
+
+:VCRASH1_6688
+62@(49@,10i) -= 1 
+
+:VCRASH1_6699
+jump @VCRASH1_6742 
+
+:VCRASH1_6706
+Actor.RemoveReferences(80@(49@,10i))
+if 
+  59@ == 0 
+jf @VCRASH1_6742 
+0951: disable_trip_skip 
+59@ = 1 
+
+:VCRASH1_6742
+if 
+  59@ == 0 
+jf @VCRASH1_6846 
+if or
+074F:   actor 80@(49@,10i) ped_event == 36 
+074F:   actor 80@(49@,10i) ped_event == 12 
+074F:   actor 80@(49@,10i) ped_event == 15 
+074F:   actor 80@(49@,10i) ped_event == 11 
+074F:   actor 80@(49@,10i) ped_event == 49 
+074F:   actor 80@(49@,10i) ped_event == 30 
+jf @VCRASH1_6846 
+0951: disable_trip_skip 
+59@ = 1 
+
+:VCRASH1_6846
+49@ += 1 
+jump @VCRASH1_3585 
+
+:VCRASH1_6860
+if 
+  73@ == 0 
+jf @VCRASH1_6935 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1308.928 2527.466 92.816 radius 26.85 38.6399 8.9 
+jf @VCRASH1_6935 
+0951: disable_trip_skip 
+73@ += 1 
+
+:VCRASH1_6935
+if 
+  59@ == 1 
+jf @VCRASH1_7635 
+0209: 200@ = random_int_in_ranges 0 2 
+if 
+  200@ == 1 
+jf @VCRASH1_6996 
+03CF: load_wav 42201 as 1 
+jump @VCRASH1_7005 
+
+:VCRASH1_6996
+03CF: load_wav 42202 as 1 
+
+:VCRASH1_7005
+if 
+83D0:   not wav 1 loaded 
+jf @VCRASH1_7031 
+wait 0 
+jump @VCRASH1_7005 
+
+:VCRASH1_7031
+03D1: play_wav 1 
+if 
+  200@ == 1 
+jf @VCRASH1_7076 
+00BC: show_text_highpriority GXT 'VCR1_AB' time 3000 flag 1  // ~z~Hold it right there and identify yourself!
+jump @VCRASH1_7092 
+
+:VCRASH1_7076
+00BC: show_text_highpriority GXT 'VCR1_AC' time 3000 flag 1  // ~z~FBI! What's your business here?
+
+:VCRASH1_7092
+if 
+83D2:   not wav 1 ended 
+jf @VCRASH1_7118 
+wait 0 
+jump @VCRASH1_7092 
+
+:VCRASH1_7118
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @VCRASH1_7165 
+03CF: load_wav 42203 as 1 
+jump @VCRASH1_7208 
+
+:VCRASH1_7165
+if 
+  200@ == 1 
+jf @VCRASH1_7199 
+03CF: load_wav 42204 as 1 
+jump @VCRASH1_7208 
+
+:VCRASH1_7199
+03CF: load_wav 42205 as 1 
+
+:VCRASH1_7208
+if 
+83D0:   not wav 1 loaded 
+jf @VCRASH1_7234 
+wait 0 
+jump @VCRASH1_7208 
+
+:VCRASH1_7234
+03D1: play_wav 1 
+if 
+  200@ == 0 
+jf @VCRASH1_7279 
+00BC: show_text_highpriority GXT 'VCR1_AD' time 3000 flag 1  // ~z~Hitman! Take cover!
+jump @VCRASH1_7336 
+
+:VCRASH1_7279
+if 
+  200@ == 1 
+jf @VCRASH1_7320 
+00BC: show_text_highpriority GXT 'VCR1_AE' time 3000 flag 1  // ~z~It's a hit!
+jump @VCRASH1_7336 
+
+:VCRASH1_7320
+00BC: show_text_highpriority GXT 'VCR1_AF' time 3000 flag 1  // ~z~Everybody down!
+
+:VCRASH1_7336
+if 
+83D2:   not wav 1 ended 
+jf @VCRASH1_7362 
+wait 0 
+jump @VCRASH1_7336 
+
+:VCRASH1_7362
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @VCRASH1_7409 
+03CF: load_wav 42206 as 1 
+jump @VCRASH1_7452 
+
+:VCRASH1_7409
+if 
+  200@ == 1 
+jf @VCRASH1_7443 
+03CF: load_wav 42207 as 1 
+jump @VCRASH1_7452 
+
+:VCRASH1_7443
+03CF: load_wav 42208 as 1 
+
+:VCRASH1_7452
+if 
+83D0:   not wav 1 loaded 
+jf @VCRASH1_7478 
+wait 0 
+jump @VCRASH1_7452 
+
+:VCRASH1_7478
+03D1: play_wav 1 
+if 
+  200@ == 0 
+jf @VCRASH1_7523 
+00BC: show_text_highpriority GXT 'VCR1_AG' time 3000 flag 1  // ~z~Get that dossier out of here!
+jump @VCRASH1_7580 
+
+:VCRASH1_7523
+if 
+  200@ == 1 
+jf @VCRASH1_7564 
+00BC: show_text_highpriority GXT 'VCR1_AH' time 3000 flag 1  // ~z~Get out of here, I'll handle this guy!
+jump @VCRASH1_7580 
+
+:VCRASH1_7564
+00BC: show_text_highpriority GXT 'VCR1_AI' time 3000 flag 1  // ~z~Get out of here, I'll cover you!
+
+:VCRASH1_7580
+if 
+83D2:   not wav 1 ended 
+jf @VCRASH1_7606 
+wait 0 
+jump @VCRASH1_7580 
+
+:VCRASH1_7606
+040D: unload_wav 1 
+00BC: show_text_highpriority GXT 'VCR1_11' time 5000 flag 1  // ~s~They have spotted you! The ~r~target ~s~will try to escape, don't let him get away.
+0951: disable_trip_skip 
+59@ += 1 
+
+:VCRASH1_7635
+if 
+  36@ == 1 
+jf @VCRASH1_8175 
+if 
+  62@(91@,10i) > 2 
+jf @VCRASH1_8175 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2511.364 2388.914 6.2421 radius 38.6 26.4 3.4 
+jf @VCRASH1_8175 
+107@ = Car.Create(#BUFFALO, 2522.211, 2383.629, 4.0162)
+Car.Angle(107@) = 339.2576
+108@ = Car.Create(#BUFFALO, 2518.511, 2393.82, 4.0104)
+Car.Angle(108@) = 168.2849
+109@ = Car.Create(#BUFFALO, 2510.336, 2380.583, 4.0139)
+Car.Angle(109@) = 110.7153
+110@ = 2524.221 
+120@ = 2385.007 
+111@ = 2520.053 
+121@ = 2392.282 
+112@ = 2513.938 
+122@ = 2381.334 
+113@ = 2513.91 
+123@ = 2385.471 
+114@ = 2511.99 
+124@ = 2392.347 
+115@ = 2519.308 
+125@ = 2399.535 
+116@ = 2530.169 
+126@ = 2388.519 
+117@ = 2504.144 
+127@ = 2382.468 
+118@ = 2504.832 
+128@ = 2397.616 
+119@ = 2506.832 
+129@ = 2397.616 
+43@ = 0 
+
+:VCRASH1_8029
+if 
+  10 > 43@ 
+jf @VCRASH1_8152 
+if 
+803B:   not  43@ == 91@ // (int) 
+jf @VCRASH1_8138 
+80@(43@,10i) = Actor.Create(Mission1, #FBI, 110@(43@,10f), 120@(43@,10f), 3.2262)
+Actor.Angle(80@(43@,10i)) = 91.4967
+Actor.GiveWeaponAndAmmo(80@(43@,10i), MicroUzi, 9999)
+0961: set_actor 80@(43@,10i) keep_tasks_after_cleanup 1 
+
+:VCRASH1_8138
+43@ += 1 
+jump @VCRASH1_8029 
+
+:VCRASH1_8152
+008B: 37@ = $CURRENT_TIME_IN_MS2 // (int) 
+37@ += 3000 
+36@ += 1 
+
+:VCRASH1_8175
+if 
+  36@ == 2 
+jf @VCRASH1_8323 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 37@ // (int) 
+jf @VCRASH1_8323 
+43@ = 0 
+
+:VCRASH1_8219
+if 
+  10 > 43@ 
+jf @VCRASH1_8300 
+if 
+   not Actor.Dead(80@(43@,10i))
+jf @VCRASH1_8286 
+074E: unknown_set_actor_threat_scanner_flags 80@(43@,10i) radius 50.0 peds_to_scan 8 
+077A: set_actor 80@(43@,10i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:VCRASH1_8286
+43@ += 1 
+jump @VCRASH1_8219 
+
+:VCRASH1_8300
+008B: 37@ = $CURRENT_TIME_IN_MS2 // (int) 
+37@ += 3000 
+36@ += 1 
+
+:VCRASH1_8323
+if 
+  36@ == 3 
+jf @VCRASH1_8438 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 37@ // (int) 
+jf @VCRASH1_8438 
+43@ = 0 
+
+:VCRASH1_8367
+if 
+  10 > 43@ 
+jf @VCRASH1_8431 
+if 
+   not Actor.Dead(80@(43@,10i))
+jf @VCRASH1_8417 
+05E2: AS_actor 80@(43@,10i) kill_actor $PLAYER_ACTOR 
+
+:VCRASH1_8417
+43@ += 1 
+jump @VCRASH1_8367 
+
+:VCRASH1_8431
+36@ += 1 
+
+:VCRASH1_8438
+if 
+  61@ == 1 
+jf @VCRASH1_8500 
+if 
+   Pickup.Picked_up(106@)
+jf @VCRASH1_8500 
+Marker.Disable(34@)
+00BC: show_text_highpriority GXT 'VCR1__6' time 5000 flag 1  // ~s~Congratulations, you have the evidence dossier.
+jump @VCRASH1_8614 
+
+:VCRASH1_8500
+jump @VCRASH1_606 
+
+:VCRASH1_8507
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+   not Actor.Dead(80@(91@,10i))
+jf @VCRASH1_8612 
+if 
+   not Car.Wrecked(74@)
+jf @VCRASH1_8612 
+if 
+   Actor.InCar(80@(91@,10i), 74@)
+jf @VCRASH1_8612 
+04A2: set_heli 74@ fly_to 0.0 0.0 0.0 altitude_between 20.0 and 40.0 
+
+:VCRASH1_8612
+return 
+
+:VCRASH1_8614
+$598 += 1 
+00BA: show_text_styled GXT 'M_PASSD' time 5000 style 1  // MISSION PASSED!
+Player.Money($PLAYER_CHAR) += 0
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'VCRASH1'  // Misappropriation
+030C: progress_made = 1 
+Marker.Disable($583)
+return 
+
+:VCRASH1_8675
+Marker.Disable(34@)
+Marker.Disable(35@)
+07A8: enable_area69_sam 1 
+Pickup.Destroy(106@)
+if 
+   not Car.Wrecked(75@)
+jf @VCRASH1_8725 
+Car.SetImmunities(75@, 0, 0, 0, 0, 0)
+
+:VCRASH1_8725
+01E7: remove_forbidden_for_cars_cube_cornerA 2475.428 2345.007 2.7255 cornerB 2517.416 2398.874 12.369 
+if 
+  $PILOT_LICENSE_OBTAINED == 1 
+jf @VCRASH1_8782 
+014C: set_parked_car_generator $PARKED_PLANES[7] cars_to_generate_to 101 
+
+:VCRASH1_8782
+Model.Destroy(#MAVERICK)
+Model.Destroy(#MESA)
+Model.Destroy(#FBIRANCH)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#BUFFALO)
+Model.Destroy(#AK47)
+Model.Destroy(#FBI)
+Model.Destroy(#WMYBU)
+Model.Destroy(#MICRO_UZI)
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @VCRASH1_8852 
+077B: clear_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+
+:VCRASH1_8852
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

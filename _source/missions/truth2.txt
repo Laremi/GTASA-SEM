@@ -1,0 +1,2727 @@
+:TRUTH2
+thread 'TRUTH2' 
+gosub @TRUTH2_47 
+if 
+wasted_or_busted 
+jf @TRUTH2_38 
+gosub @TRUTH2_11910 
+
+:TRUTH2_38
+gosub @TRUTH2_12153 
+end_thread 
+
+:TRUTH2_47
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'TRU2' 
+if 
+  $ONMISSION == 0 
+jf @TRUTH2_159 
+018A: 42@ = create_checkpoint_at -1111.7 -1622.7 76.4 
+032B: 41@ = create_weapon_pickup #ROCKETLA type 3 ammo 10 at -1100.3 -1640.4 76.4 
+032B: 40@ = create_weapon_pickup #ROCKETLA type 3 ammo 10 at -1100.3 -1640.4 76.4 
+
+:TRUTH2_159
+00BE: text_clear_all 
+wait 0 
+$7012 = 331000 
+87@ = 0 
+88@ = 0 
+89@ = 0 
+90@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+95@ = 0 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+108@ = 0 
+109@ = 0 
+110@ = 0 
+111@ = 0 
+112@ = 0 
+113@ = 0 
+114@ = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+119@ = 0 
+120@ = 0 
+121@ = 0 
+122@ = 0 
+123@ = 0 
+124@ = 0 
+125@ = 0 
+126@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+130@ = 0 
+131@ = 0 
+132@ = 0 
+133@ = 0 
+134@ = 0 
+$7011 = 44 
+135@ = 0 
+136@ = 0 
+148@ = 0 
+149@ = 0 
+137@ = 0 
+138@ = 0.0 
+139@ = 0.0 
+140@ = 0.0 
+141@ = 0.0 
+142@ = 0.0 
+143@ = 0.0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+147@ = 44 
+151@ = 0 
+152@ = 0 
+153@ = 0 
+202@ = 0 
+203@ = 0 
+204@ = 0 
+205@ = 0 
+206@ = 0 
+207@ = 0 
+208@ = 0 
+209@ = 0 
+210@ = 0 
+211@ = 0 
+150@ = 0 
+213@ = 0 
+214@ = 0 
+212@ = 0 
+08F5: save_player_group 
+0395: clear_area 1 at -1110.2 -1638.5 76.0 radius 20.0 
+02E4: load_cutscene_data 'TRUTH_2' 
+
+:TRUTH2_797
+if 
+86B9:   not cutscene_data_loaded 
+jf @TRUTH2_821 
+wait 0 
+jump @TRUTH2_797 
+
+:TRUTH2_821
+02E7: start_cutscene 
+fade 1 1000 
+
+:TRUTH2_830
+if 
+82E9:   not cutscene_reached_end 
+jf @TRUTH2_854 
+wait 0 
+jump @TRUTH2_830 
+
+:TRUTH2_854
+fade 0 0 
+
+:TRUTH2_860
+if 
+fading 
+jf @TRUTH2_884 
+wait 0 
+jump @TRUTH2_860 
+
+:TRUTH2_884
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+Model.Load(#CAMPER)
+Model.Load(#SADLER)
+Model.Load(#POLMAV)
+Model.Load(#CSHER)
+Model.Load(#FLAME)
+Model.Load(#COLT45)
+023C: load_special_actor 'TRUTH' as 1 // models 290-299 
+0777: delete_objects_in_object_group "TRUTHSFARM" 
+0776: create_objects_in_object_group "TRUTHSFARM" 
+038B: load_requested_models 
+0828: set_max_fire_generations 2 
+0395: clear_area 1 at -913.3 -1720.5 76.6 radius 300.0 
+07E5: copy_decision_maker 65542 to 216@ 
+0395: clear_area 1 at -913.3 -1720.5 76.6 radius 1.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -913.3, -1720.5, 76.6)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, FlameThrower, 3000)
+0395: clear_area 1 at -1079.404 -1640.694 75.375 radius 20.0 
+$ACTOR_TRUTH = Actor.Create(Mission1, #SPECIAL01, -1079.404, -1640.694, 75.375)
+087E: set_actor $ACTOR_TRUTH weapon_droppable 0 
+09F6: set_actor $ACTOR_TRUTH unjackable_through_driver_seat 0 
+060B: set_actor $ACTOR_TRUTH decision_maker_to 216@ 
+Actor.Angle($ACTOR_TRUTH) = 299.7411
+Actor.GiveWeaponAndAmmo($ACTOR_TRUTH, FlameThrower, 3000)
+0568: set_actor $ACTOR_TRUTH untargetable 1 
+039E: set_actor $ACTOR_TRUTH locked 1 while_in_car 
+0615: define_AS_pack_begin 215@ 
+05D3: AS_actor -1 goto_point -1070.1 -1636.5 75.4 mode 6 time -1 ms // versionA 
+0668: AS_actor -1 rotate_and_shoot_at -1062.2 -1631.1 75.3 -1 ms 
+0616: define_AS_pack_end 215@ 
+0618: assign_actor $ACTOR_TRUTH to_AS_pack 215@ 
+061B: remove_references_to_AS_pack 215@ 
+0395: clear_area 1 at -1077.6 -1650.2 75.3 radius 20.0 
+0674: set_car_model #CAMPER numberplate "OUTTHERE" 
+34@ = Car.Create(#CAMPER, -1077.6, -1650.2, 75.3)
+0229: set_car 34@ primary_color_to 1 secondary_color_to 1 
+06ED: set_car 34@ paintjob 0 
+0294: set_car 34@ sprayable 0 
+Car.DoorStatus(34@) = 3
+0423: set_car 34@ improved_handling_to 2.0 // (float) 
+Car.Angle(34@) = 256.4
+Car.LockInCurrentPosition(34@) = True
+Car.SetImmunities(34@, 0, 0, 1, 0, 0)
+0395: clear_area 1 at -946.6 -1735.0 76.9 radius 5.0 
+39@ = Car.Create(#SADLER, -946.6, -1735.0, 76.9)
+Car.Angle(39@) = 1.4
+Car.SetImmunities(39@, 0, 0, 1, 0, 0)
+0395: clear_area 1 at -918.5 -1751.1 97.3 radius 5.0 
+35@ = Car.Create(#POLMAV, -918.5, -1751.1, 97.3)
+0825: set_helicopter 35@ instant_rotor_start 
+36@ = Actor.CreateAsDriver(Mission2, #CSHER, 35@)
+06C1: create_searchlight 38@ on_car 35@ with_offset 0.0 0.0 -1.0 radius 1.0 target -936.6 -1723.2 76.8 radius 6.0 
+06B6: set_searchlight 38@ follow_actor $ACTOR_TRUTH speed 10.0 
+0726: heli 35@ follow_actor $ACTOR_TRUTH follow_car -1 radius 20.0 
+Car.DoorStatus(35@) = 2
+054A: set_actor 36@ can_be_shot_in_a_car 0 
+060B: set_actor 36@ decision_maker_to 216@ 
+018A: 43@ = create_checkpoint_at -1062.1 -1631.7 75.3 
+Marker.SetIconSize(43@, 1)
+08FB: set_checkpoint 43@ type_to 2 
+018A: 44@ = create_checkpoint_at -1052.3 -1631.7 75.3 
+Marker.SetIconSize(44@, 1)
+08FB: set_checkpoint 44@ type_to 2 
+018A: 45@ = create_checkpoint_at -1042.4 -1631.7 75.3 
+Marker.SetIconSize(45@, 1)
+08FB: set_checkpoint 45@ type_to 2 
+018A: 46@ = create_checkpoint_at -1032.6 -1631.7 75.3 
+Marker.SetIconSize(46@, 1)
+08FB: set_checkpoint 46@ type_to 2 
+018A: 47@ = create_checkpoint_at -1023.1 -1631.7 75.3 
+Marker.SetIconSize(47@, 1)
+08FB: set_checkpoint 47@ type_to 2 
+018A: 48@ = create_checkpoint_at -1062.1 -1622.2 75.3 
+Marker.SetIconSize(48@, 1)
+08FB: set_checkpoint 48@ type_to 2 
+018A: 49@ = create_checkpoint_at -1052.3 -1622.2 75.3 
+Marker.SetIconSize(49@, 1)
+08FB: set_checkpoint 49@ type_to 2 
+018A: 50@ = create_checkpoint_at -1042.4 -1622.2 75.3 
+Marker.SetIconSize(50@, 1)
+08FB: set_checkpoint 50@ type_to 2 
+018A: 51@ = create_checkpoint_at -1032.6 -1622.2 75.3 
+Marker.SetIconSize(51@, 1)
+08FB: set_checkpoint 51@ type_to 2 
+018A: 52@ = create_checkpoint_at -1023.1 -1622.2 75.3 
+Marker.SetIconSize(52@, 1)
+08FB: set_checkpoint 52@ type_to 2 
+018A: 53@ = create_checkpoint_at -991.92 -1703.1 75.3 
+Marker.SetIconSize(53@, 1)
+08FB: set_checkpoint 53@ type_to 2 
+018A: 54@ = create_checkpoint_at -982.38 -1703.1 75.3 
+Marker.SetIconSize(54@, 1)
+08FB: set_checkpoint 54@ type_to 2 
+018A: 55@ = create_checkpoint_at -991.92 -1693.6 75.3 
+Marker.SetIconSize(55@, 1)
+08FB: set_checkpoint 55@ type_to 2 
+018A: 56@ = create_checkpoint_at -982.38 -1693.6 75.3 
+Marker.SetIconSize(56@, 1)
+08FB: set_checkpoint 56@ type_to 2 
+018A: 57@ = create_checkpoint_at -991.92 -1684.1 75.3 
+Marker.SetIconSize(57@, 1)
+08FB: set_checkpoint 57@ type_to 2 
+018A: 58@ = create_checkpoint_at -982.38 -1684.1 75.3 
+Marker.SetIconSize(58@, 1)
+08FB: set_checkpoint 58@ type_to 2 
+018A: 59@ = create_checkpoint_at -1011.8 -1667.6 75.3 
+Marker.SetIconSize(59@, 1)
+08FB: set_checkpoint 59@ type_to 2 
+018A: 60@ = create_checkpoint_at -1011.8 -1658.1 75.3 
+Marker.SetIconSize(60@, 1)
+08FB: set_checkpoint 60@ type_to 2 
+018A: 61@ = create_checkpoint_at -1011.8 -1648.7 75.3 
+Marker.SetIconSize(61@, 1)
+08FB: set_checkpoint 61@ type_to 2 
+018A: 62@ = create_checkpoint_at -1000.7 -1667.6 75.3 
+Marker.SetIconSize(62@, 1)
+08FB: set_checkpoint 62@ type_to 2 
+018A: 63@ = create_checkpoint_at -1000.7 -1658.1 75.3 
+Marker.SetIconSize(63@, 1)
+08FB: set_checkpoint 63@ type_to 2 
+018A: 64@ = create_checkpoint_at -1000.7 -1648.7 75.3 
+Marker.SetIconSize(64@, 1)
+08FB: set_checkpoint 64@ type_to 2 
+018A: 65@ = create_checkpoint_at -1011.8 -1672.3 75.3 
+Marker.SetIconSize(65@, 1)
+08FB: set_checkpoint 65@ type_to 2 
+018A: 66@ = create_checkpoint_at -991.92 -1688.8 75.3 
+Marker.SetIconSize(66@, 1)
+08FB: set_checkpoint 66@ type_to 2 
+018A: 67@ = create_checkpoint_at -982.38 -1688.8 75.3 
+Marker.SetIconSize(67@, 1)
+08FB: set_checkpoint 67@ type_to 2 
+018A: 68@ = create_checkpoint_at -982.38 -1698.2 75.3 
+Marker.SetIconSize(68@, 1)
+08FB: set_checkpoint 68@ type_to 2 
+018A: 69@ = create_checkpoint_at -991.92 -1698.2 75.3 
+Marker.SetIconSize(69@, 1)
+08FB: set_checkpoint 69@ type_to 2 
+018A: 70@ = create_checkpoint_at -982.38 -1707.7 75.3 
+Marker.SetIconSize(70@, 1)
+08FB: set_checkpoint 70@ type_to 2 
+018A: 71@ = create_checkpoint_at -1011.8 -1662.8 75.3 
+Marker.SetIconSize(71@, 1)
+08FB: set_checkpoint 71@ type_to 2 
+018A: 72@ = create_checkpoint_at -1000.7 -1672.3 75.3 
+Marker.SetIconSize(72@, 1)
+08FB: set_checkpoint 72@ type_to 2 
+018A: 73@ = create_checkpoint_at -1011.8 -1653.4 75.3 
+Marker.SetIconSize(73@, 1)
+08FB: set_checkpoint 73@ type_to 2 
+018A: 74@ = create_checkpoint_at -1032.6 -1636.3 75.3 
+Marker.SetIconSize(74@, 1)
+08FB: set_checkpoint 74@ type_to 2 
+018A: 75@ = create_checkpoint_at -1052.3 -1636.3 75.3 
+Marker.SetIconSize(75@, 1)
+08FB: set_checkpoint 75@ type_to 2 
+018A: 76@ = create_checkpoint_at -1042.4 -1636.3 75.3 
+Marker.SetIconSize(76@, 1)
+08FB: set_checkpoint 76@ type_to 2 
+018A: 77@ = create_checkpoint_at -1062.1 -1626.8 75.3 
+Marker.SetIconSize(77@, 1)
+08FB: set_checkpoint 77@ type_to 2 
+018A: 78@ = create_checkpoint_at -991.92 -1707.7 75.3 
+Marker.SetIconSize(78@, 1)
+08FB: set_checkpoint 78@ type_to 2 
+018A: 79@ = create_checkpoint_at -1023.1 -1626.8 75.3 
+Marker.SetIconSize(79@, 1)
+08FB: set_checkpoint 79@ type_to 2 
+018A: 80@ = create_checkpoint_at -1000.7 -1662.8 75.3 
+Marker.SetIconSize(80@, 1)
+08FB: set_checkpoint 80@ type_to 2 
+018A: 81@ = create_checkpoint_at -1000.7 -1653.4 75.3 
+Marker.SetIconSize(81@, 1)
+08FB: set_checkpoint 81@ type_to 2 
+018A: 82@ = create_checkpoint_at -1032.6 -1626.8 75.3 
+Marker.SetIconSize(82@, 1)
+08FB: set_checkpoint 82@ type_to 2 
+018A: 83@ = create_checkpoint_at -1042.4 -1626.8 75.3 
+Marker.SetIconSize(83@, 1)
+08FB: set_checkpoint 83@ type_to 2 
+018A: 84@ = create_checkpoint_at -1052.3 -1626.8 75.3 
+Marker.SetIconSize(84@, 1)
+08FB: set_checkpoint 84@ type_to 2 
+018A: 85@ = create_checkpoint_at -1062.1 -1636.3 75.3 
+Marker.SetIconSize(85@, 1)
+08FB: set_checkpoint 85@ type_to 2 
+018A: 86@ = create_checkpoint_at -1023.1 -1636.3 75.3 
+Marker.SetIconSize(86@, 1)
+08FB: set_checkpoint 86@ type_to 2 
+03C3: set_timer_to $7012 type 1 GXT 'TRU2_06' // global_variable  // Cops arrival
+Actor.PutAt($PLAYER_ACTOR, -1089.9, -1644.1, 75.4)
+Actor.Angle($PLAYER_ACTOR) = 283.3
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+00BB: show_text_lowpriority GXT 'TRU2_01' time 7000 flag 1  // ~s~Go and help The Truth destroy the ~r~weed~s~.
+00BB: show_text_lowpriority GXT 'TRU2_02' time 7000 flag 1  // ~s~To burn a weed field, cover it in flames.
+32@ = 0 
+33@ = 0 
+
+:TRUTH2_3224
+wait 0 
+gosub @TRUTH2_14570 
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @TRUTH2_3262 
+jump @TRUTH2_11942 
+
+:TRUTH2_3262
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_3294 
+jump @TRUTH2_11910 
+
+:TRUTH2_3294
+if 
+  87@ == 0 
+jf @TRUTH2_7881 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @TRUTH2_3388 
+151@ = 0 
+if 
+  88@ == 0 
+jf @TRUTH2_3361 
+00BE: text_clear_all 
+88@ = 1 
+
+:TRUTH2_3361
+Actor.PutAt($PLAYER_ACTOR, -1104.7, -1648.0, 75.4)
+$7011 = 0 
+
+:TRUTH2_3388
+if 
+  88@ == 0 
+jf @TRUTH2_3461 
+if 
+  20 > $7011 
+jf @TRUTH2_3461 
+00BE: text_clear_all 
+151@ = 1 
+152@ = 0 
+gosub @TRUTH2_14975 
+88@ = 1 
+32@ = 0 
+
+:TRUTH2_3461
+if 
+  88@ == 1 
+jf @TRUTH2_3514 
+if 
+  151@ == 0 
+jf @TRUTH2_3514 
+05CB: AS_actor $ACTOR_TRUTH enter_car 34@ as_driver -1 ms 
+88@ = 2 
+
+:TRUTH2_3514
+gosub @TRUTH2_12789 
+if 
+  91@ == 0 
+jf @TRUTH2_3618 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1062.1 -1631.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_3618 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(43@)
+$7011 -= 1 
+91@ = 1 
+
+:TRUTH2_3618
+if 
+  92@ == 0 
+jf @TRUTH2_3715 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1052.3 -1631.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_3715 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(44@)
+$7011 -= 1 
+92@ = 1 
+
+:TRUTH2_3715
+if 
+  93@ == 0 
+jf @TRUTH2_3812 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1042.4 -1631.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_3812 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(45@)
+$7011 -= 1 
+93@ = 1 
+
+:TRUTH2_3812
+if 
+  94@ == 0 
+jf @TRUTH2_3909 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1032.6 -1631.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_3909 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(46@)
+$7011 -= 1 
+94@ = 1 
+
+:TRUTH2_3909
+if 
+  95@ == 0 
+jf @TRUTH2_4006 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1023.1 -1631.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4006 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(47@)
+$7011 -= 1 
+95@ = 1 
+
+:TRUTH2_4006
+if 
+  96@ == 0 
+jf @TRUTH2_4103 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1062.1 -1622.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4103 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(48@)
+$7011 -= 1 
+96@ = 1 
+
+:TRUTH2_4103
+if 
+  97@ == 0 
+jf @TRUTH2_4200 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1052.3 -1622.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4200 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(49@)
+$7011 -= 1 
+97@ = 1 
+
+:TRUTH2_4200
+if 
+  98@ == 0 
+jf @TRUTH2_4297 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1042.4 -1622.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4297 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(50@)
+$7011 -= 1 
+98@ = 1 
+
+:TRUTH2_4297
+if 
+  99@ == 0 
+jf @TRUTH2_4394 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1032.6 -1622.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4394 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(51@)
+$7011 -= 1 
+99@ = 1 
+
+:TRUTH2_4394
+if 
+  100@ == 0 
+jf @TRUTH2_4491 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1023.1 -1622.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4491 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(52@)
+$7011 -= 1 
+100@ = 1 
+
+:TRUTH2_4491
+if 
+  101@ == 0 
+jf @TRUTH2_4588 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1703.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4588 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(53@)
+$7011 -= 1 
+101@ = 1 
+
+:TRUTH2_4588
+if 
+  102@ == 0 
+jf @TRUTH2_4685 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1703.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4685 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(54@)
+$7011 -= 1 
+102@ = 1 
+
+:TRUTH2_4685
+if 
+  103@ == 0 
+jf @TRUTH2_4782 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1693.6 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4782 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(55@)
+$7011 -= 1 
+103@ = 1 
+
+:TRUTH2_4782
+if 
+  104@ == 0 
+jf @TRUTH2_4879 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1693.6 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4879 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(56@)
+$7011 -= 1 
+104@ = 1 
+
+:TRUTH2_4879
+if 
+  105@ == 0 
+jf @TRUTH2_4976 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1684.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_4976 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(57@)
+$7011 -= 1 
+105@ = 1 
+
+:TRUTH2_4976
+if 
+  106@ == 0 
+jf @TRUTH2_5073 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1684.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5073 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(58@)
+$7011 -= 1 
+106@ = 1 
+
+:TRUTH2_5073
+if 
+  107@ == 0 
+jf @TRUTH2_5170 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1667.6 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5170 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(59@)
+$7011 -= 1 
+107@ = 1 
+
+:TRUTH2_5170
+if 
+  108@ == 0 
+jf @TRUTH2_5267 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1658.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5267 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(60@)
+$7011 -= 1 
+108@ = 1 
+
+:TRUTH2_5267
+if 
+  109@ == 0 
+jf @TRUTH2_5364 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1648.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5364 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(61@)
+$7011 -= 1 
+109@ = 1 
+
+:TRUTH2_5364
+if 
+  110@ == 0 
+jf @TRUTH2_5461 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1667.6 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5461 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(62@)
+$7011 -= 1 
+110@ = 1 
+
+:TRUTH2_5461
+if 
+  111@ == 0 
+jf @TRUTH2_5558 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1658.1 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5558 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(63@)
+$7011 -= 1 
+111@ = 1 
+
+:TRUTH2_5558
+if 
+  112@ == 0 
+jf @TRUTH2_5655 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1648.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5655 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(64@)
+$7011 -= 1 
+112@ = 1 
+
+:TRUTH2_5655
+if 
+  113@ == 0 
+jf @TRUTH2_5752 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1672.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5752 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(65@)
+$7011 -= 1 
+113@ = 1 
+
+:TRUTH2_5752
+if 
+  114@ == 0 
+jf @TRUTH2_5849 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1688.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5849 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(66@)
+$7011 -= 1 
+114@ = 1 
+
+:TRUTH2_5849
+if 
+  115@ == 0 
+jf @TRUTH2_5946 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1688.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_5946 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(67@)
+$7011 -= 1 
+115@ = 1 
+
+:TRUTH2_5946
+if 
+  116@ == 0 
+jf @TRUTH2_6043 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1698.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6043 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(68@)
+$7011 -= 1 
+116@ = 1 
+
+:TRUTH2_6043
+if 
+  117@ == 0 
+jf @TRUTH2_6140 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1698.2 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6140 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(69@)
+$7011 -= 1 
+117@ = 1 
+
+:TRUTH2_6140
+if 
+  118@ == 0 
+jf @TRUTH2_6237 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -982.38 -1707.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6237 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(70@)
+$7011 -= 1 
+118@ = 1 
+
+:TRUTH2_6237
+if 
+  119@ == 0 
+jf @TRUTH2_6334 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1662.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6334 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(71@)
+$7011 -= 1 
+119@ = 1 
+
+:TRUTH2_6334
+if 
+  120@ == 0 
+jf @TRUTH2_6431 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1672.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6431 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(72@)
+$7011 -= 1 
+120@ = 1 
+
+:TRUTH2_6431
+if 
+  121@ == 0 
+jf @TRUTH2_6528 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1011.8 -1653.4 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6528 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(73@)
+$7011 -= 1 
+121@ = 1 
+
+:TRUTH2_6528
+if 
+  122@ == 0 
+jf @TRUTH2_6625 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1032.6 -1636.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6625 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(74@)
+$7011 -= 1 
+122@ = 1 
+
+:TRUTH2_6625
+if 
+  123@ == 0 
+jf @TRUTH2_6722 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1052.3 -1636.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6722 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(75@)
+$7011 -= 1 
+123@ = 1 
+
+:TRUTH2_6722
+if 
+  124@ == 0 
+jf @TRUTH2_6819 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1042.4 -1636.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6819 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(76@)
+$7011 -= 1 
+124@ = 1 
+
+:TRUTH2_6819
+if 
+  125@ == 0 
+jf @TRUTH2_6916 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1062.1 -1626.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_6916 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(77@)
+$7011 -= 1 
+125@ = 1 
+
+:TRUTH2_6916
+if 
+  126@ == 0 
+jf @TRUTH2_7013 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -991.92 -1707.7 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7013 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(78@)
+$7011 -= 1 
+126@ = 1 
+
+:TRUTH2_7013
+if 
+  127@ == 0 
+jf @TRUTH2_7110 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1023.1 -1626.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7110 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(79@)
+$7011 -= 1 
+127@ = 1 
+
+:TRUTH2_7110
+if 
+  128@ == 0 
+jf @TRUTH2_7207 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1662.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7207 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(80@)
+$7011 -= 1 
+128@ = 1 
+
+:TRUTH2_7207
+if 
+  129@ == 0 
+jf @TRUTH2_7304 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1000.7 -1653.4 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7304 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(81@)
+$7011 -= 1 
+129@ = 1 
+
+:TRUTH2_7304
+if 
+  130@ == 0 
+jf @TRUTH2_7401 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1032.6 -1626.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7401 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(82@)
+$7011 -= 1 
+130@ = 1 
+
+:TRUTH2_7401
+if 
+  131@ == 0 
+jf @TRUTH2_7498 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1042.4 -1626.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7498 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(83@)
+$7011 -= 1 
+131@ = 1 
+
+:TRUTH2_7498
+if 
+  132@ == 0 
+jf @TRUTH2_7595 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1052.3 -1626.8 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7595 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(84@)
+$7011 -= 1 
+132@ = 1 
+
+:TRUTH2_7595
+if 
+  133@ == 0 
+jf @TRUTH2_7692 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1062.1 -1636.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7692 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(85@)
+$7011 -= 1 
+133@ = 1 
+
+:TRUTH2_7692
+if 
+  134@ == 0 
+jf @TRUTH2_7789 
+if 
+0716:   object_model #GRASSPLANT in_object_group_at -1023.1 -1636.3 75.3 radius 1.0 destroyed 0 1 
+jf @TRUTH2_7789 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+Marker.Disable(86@)
+$7011 -= 1 
+134@ = 1 
+
+:TRUTH2_7789
+if 
+  $7011 == 0 
+jf @TRUTH2_7881 
+Model.Destroy(#FLAME)
+Marker.Disable(42@)
+018A: 42@ = create_checkpoint_at -1075.5 -1648.5 75.1 
+08FB: set_checkpoint 42@ type_to 1 
+00BB: show_text_lowpriority GXT 'TRU2_14' time 11000 flag 1  // ~s~Go and speak to the ~b~Truth~s~.
+144@ = 0 
+88@ = 0 
+87@ = 1 
+
+:TRUTH2_7881
+if 
+  87@ == 1 
+jf @TRUTH2_9383 
+if 
+  88@ == 0 
+jf @TRUTH2_8279 
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH2_8231 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere -1075.5 -1648.0 75.1 radius 1.2 1.2 2.0 sphere 1 stopped_on_foot 
+jf @TRUTH2_8224 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+09F5: disable_player_mutal_activities 1 
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+Pickup.Destroy(40@)
+0396: pause_timer 1 
+Model.Load(#ROCKETLA)
+038B: load_requested_models 
+0395: clear_area 1 at -1075.5 -1648.0 75.1 radius 5.0 
+Actor.PutAt($PLAYER_ACTOR, -1075.5, -1648.0, 75.1)
+Actor.Angle($PLAYER_ACTOR) = 157.1
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 6.0 loop 1 lockX 0 lockY 0 lockF 0 time 4000 
+Camera.SetPosition(-1071.3, -1647.8, 75.4, 0.0, 0.0, 0.0)
+Camera.PointAt(-1078.8, -1648.8, 76.3, 2)
+00BE: text_clear_all 
+89@ = 1 
+0707: start_scene_skip_to @TRUTH2_8545 
+151@ = 8 
+152@ = 0 
+gosub @TRUTH2_14975 
+88@ = 1 
+
+:TRUTH2_8224
+jump @TRUTH2_8279 
+
+:TRUTH2_8231
+Car.LockInCurrentPosition(34@) = False
+05D1: AS_actor $ACTOR_TRUTH drive_car 34@ to -939.5 -1718.8 76.7 speed 10.0 0 model #NULL 2 
+88@ = 5 
+
+:TRUTH2_8279
+if 
+  88@ == 1 
+jf @TRUTH2_8351 
+if 
+  151@ == 0 
+jf @TRUTH2_8351 
+0687: clear_actor $PLAYER_ACTOR task 
+05D3: AS_actor $PLAYER_ACTOR goto_point -1081.4 -1650.3 75.4 mode 4 time -1 ms // versionA 
+88@ = 2 
+
+:TRUTH2_8351
+if 
+  88@ == 2 
+jf @TRUTH2_8435 
+062E: get_actor $PLAYER_ACTOR task 1491 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TRUTH2_8435 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, RPG, 10)
+151@ = 9 
+152@ = 0 
+gosub @TRUTH2_14975 
+88@ = 3 
+
+:TRUTH2_8435
+if 
+  88@ == 3 
+jf @TRUTH2_8502 
+if 
+  152@ == 1 
+jf @TRUTH2_8502 
+05D3: AS_actor $PLAYER_ACTOR goto_point -1075.5 -1648.0 75.1 mode 4 time -1 ms // versionA 
+88@ = 4 
+
+:TRUTH2_8502
+if 
+  88@ == 4 
+jf @TRUTH2_8967 
+if 
+  151@ == 0 
+jf @TRUTH2_8967 
+89@ = 0 
+
+:TRUTH2_8545
+0701: end_scene_skip 
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_8579 
+jump @TRUTH2_11910 
+
+:TRUTH2_8579
+if 
+  89@ == 1 
+jf @TRUTH2_8745 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 0 
+fade 0 500 
+
+:TRUTH2_8626
+if 
+fading 
+jf @TRUTH2_8650 
+wait 0 
+jump @TRUTH2_8626 
+
+:TRUTH2_8650
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_8682 
+jump @TRUTH2_11910 
+
+:TRUTH2_8682
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, RPG, 10)
+0395: clear_area 1 at -1075.5 -1648.0 75.1 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, -1075.5, -1648.0, 75.1)
+Actor.Angle($PLAYER_ACTOR) = 268.0
+
+:TRUTH2_8745
+09F5: disable_player_mutal_activities 0 
+0396: pause_timer 0 
+Car.LockInCurrentPosition(34@) = False
+Player.SetHandlingResponsiveness($PLAYER_CHAR, 145@)
+Player.SetDrunkVisuals($PLAYER_CHAR, 146@)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+05D1: AS_actor $ACTOR_TRUTH drive_car 34@ to -939.5 -1718.8 76.7 speed 10.0 0 model #NULL 2 
+Marker.Disable(42@)
+42@ = Marker.CreateAboveCar(35@)
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH2_8872 
+00BC: show_text_highpriority GXT 'TRU2_15' time 7000 flag 1  // ~s~Take out the ~r~chopper~s~.
+
+:TRUTH2_8872
+if 
+  89@ == 1 
+jf @TRUTH2_8953 
+fade 1 500 
+
+:TRUTH2_8897
+if 
+fading 
+jf @TRUTH2_8921 
+wait 0 
+jump @TRUTH2_8897 
+
+:TRUTH2_8921
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_8953 
+jump @TRUTH2_11910 
+
+:TRUTH2_8953
+33@ = 0 
+88@ = 5 
+
+:TRUTH2_8967
+if 
+  88@ == 5 
+jf @TRUTH2_9383 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @TRUTH2_9041 
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH2_9021 
+020B: explode_car 35@ 
+
+:TRUTH2_9021
+Actor.PutAt($PLAYER_ACTOR, -946.8, -1733.5, 76.8)
+
+:TRUTH2_9041
+if 
+  153@ == 2 
+jf @TRUTH2_9099 
+if 
+8A2A:   not text_box 'SYN3_23' displayed  // When you're targeting, press ~k~~PED_FIREWEAPON~ to fire a rocket.
+jf @TRUTH2_9099 
+03E5: show_text_box 'SYN3_24'  // Use the camera movement controls to move the target position.
+153@ = 3 
+
+:TRUTH2_9099
+if 
+  153@ == 1 
+jf @TRUTH2_9157 
+if 
+8A2A:   not text_box 'SYN3_22' displayed  // Hold ~k~~PED_LOCK_TARGET~ to target using the rocket launcher.
+jf @TRUTH2_9157 
+03E5: show_text_box 'SYN3_23'  // When you're targeting, press ~k~~PED_FIREWEAPON~ to fire a rocket.
+153@ = 2 
+
+:TRUTH2_9157
+if 
+  153@ == 0 
+jf @TRUTH2_9212 
+if 
+  33@ > 7000 
+jf @TRUTH2_9212 
+03E5: show_text_box 'SYN3_22'  // Hold ~k~~PED_LOCK_TARGET~ to target using the rocket launcher.
+153@ = 1 
+
+:TRUTH2_9212
+if 
+   Car.Wrecked(35@)
+jf @TRUTH2_9376 
+014F: stop_timer $7012 
+00BE: text_clear_all 
+041E: set_radio_station 2 
+00BB: show_text_lowpriority GXT 'TRU2_17' time 11000 flag 1  // ~s~Get inside the ~b~mothership~s~.
+03A2: set_car 34@ action 3 
+Car.SetMaxSpeed(34@, 0.0)
+Car.SetAnimation(34@, 6, 1000)
+if 
+   Actor.Driving($ACTOR_TRUTH)
+jf @TRUTH2_9318 
+0362: remove_actor $ACTOR_TRUTH from_car_and_place_at -1516.4 -1596.9 41.0 
+
+:TRUTH2_9318
+0430: put_actor $ACTOR_TRUTH into_car 34@ passenger_seat -1 
+Car.DoorStatus(34@) = 1
+Marker.Disable(42@)
+42@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 42@ type_to 1 
+88@ = 0 
+87@ = 2 
+jump @TRUTH2_9383 
+
+:TRUTH2_9376
+gosub @TRUTH2_14224 
+
+:TRUTH2_9383
+if 
+  87@ == 2 
+jf @TRUTH2_9591 
+if 
+  88@ == 0 
+jf @TRUTH2_9546 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_9546 
+03A2: set_car 34@ action 0 
+03D5: remove_text 'TRU2_17'  // ~s~Get inside the ~b~mothership~s~.
+00BC: show_text_highpriority GXT 'TRU2_12' time 7000 flag 1  // ~s~Drive the Mothership to the ~y~garage~s~ in San Fierro.
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_TRUTH muted 1 // versionB 
+Marker.Disable(42@)
+018A: 42@ = create_checkpoint_at -2031.3 178.5 27.9 
+07E0: set_marker 42@ type_to 0 
+33@ = 0 
+136@ = 1 
+88@ = 0 
+87@ = 3 
+
+:TRUTH2_9546
+if 
+8202:   not actor $PLAYER_ACTOR near_car 34@ radius 200.0 200.0 sphere 0 
+jf @TRUTH2_9591 
+88@ = 0 
+87@ = 4 
+
+:TRUTH2_9591
+if 
+  87@ == 3 
+jf @TRUTH2_10299 
+if 
+  151@ == 3 
+jf @TRUTH2_9679 
+if 
+  152@ == 6 
+jf @TRUTH2_9679 
+if 
+00E1:   player 0 pressed_key 15 
+jf @TRUTH2_9679 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 0 
+
+:TRUTH2_9679
+if 
+  88@ == 0 
+jf @TRUTH2_9769 
+if 
+  33@ > 7000 
+jf @TRUTH2_9769 
+if 
+  151@ == 0 
+jf @TRUTH2_9769 
+151@ = 3 
+152@ = 0 
+gosub @TRUTH2_14975 
+33@ = 0 
+88@ = 1 
+
+:TRUTH2_9769
+if 
+  88@ == 1 
+jf @TRUTH2_10105 
+if 
+  151@ == 0 
+jf @TRUTH2_10105 
+if 
+  33@ > 7000 
+jf @TRUTH2_10105 
+0209: 151@ = random_int_in_ranges 4 8 
+if 
+  151@ == 4 
+jf @TRUTH2_9883 
+if 
+  202@ == 1 
+jf @TRUTH2_9876 
+151@ = 0 
+
+:TRUTH2_9876
+202@ = 1 
+
+:TRUTH2_9883
+if 
+  151@ == 5 
+jf @TRUTH2_9933 
+if 
+  203@ == 1 
+jf @TRUTH2_9926 
+151@ = 0 
+
+:TRUTH2_9926
+203@ = 1 
+
+:TRUTH2_9933
+if 
+  151@ == 6 
+jf @TRUTH2_9983 
+if 
+  204@ == 1 
+jf @TRUTH2_9976 
+151@ = 0 
+
+:TRUTH2_9976
+204@ = 1 
+
+:TRUTH2_9983
+if 
+  151@ == 7 
+jf @TRUTH2_10033 
+if 
+  205@ == 1 
+jf @TRUTH2_10026 
+151@ = 0 
+
+:TRUTH2_10026
+205@ = 1 
+
+:TRUTH2_10033
+if 
+  206@ == 0 
+jf @TRUTH2_10091 
+0842: 137@ = player $PLAYER_CHAR town_number 
+if 
+04A4:   137@ == 2 // == constant 
+jf @TRUTH2_10091 
+206@ = 1 
+151@ = 10 
+
+:TRUTH2_10091
+152@ = 0 
+gosub @TRUTH2_14975 
+
+:TRUTH2_10105
+if 
+  2 > 88@ 
+jf @TRUTH2_10292 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_10292 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @TRUTH2_10187 
+Car.PutAt(34@, -2009.3, 145.2, 26.7)
+Car.Angle(34@) = 359.8
+
+:TRUTH2_10187
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -2031.3 178.5 27.9 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @TRUTH2_10292 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 0 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_TRUTH muted 0 // versionB 
+Player.CanMove($PLAYER_CHAR) = False
+Model.Destroy(#CSHER)
+88@ = 0 
+87@ = 5 
+
+:TRUTH2_10292
+gosub @TRUTH2_14428 
+
+:TRUTH2_10299
+if 
+  87@ == 4 
+jf @TRUTH2_10975 
+gosub @ENTEXT_59 
+if 
+  $38 == 1 
+jf @TRUTH2_10780 
+if 
+  88@ == 0 
+jf @TRUTH2_10780 
+00BE: text_clear_all 
+fade 0 500 
+
+:TRUTH2_10369
+if 
+fading 
+jf @TRUTH2_10393 
+wait 0 
+jump @TRUTH2_10369 
+
+:TRUTH2_10393
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_10425 
+jump @TRUTH2_11910 
+
+:TRUTH2_10425
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 0 
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+02A9: set_actor $ACTOR_TRUTH immune_to_nonplayer 1 
+04C4: store_coords_to 138@ 139@ 140@ from_actor $ACTOR_TRUTH with_offset 0.0 -10.0 5.0 
+Model.Load(#NITESTICK)
+Camera.SetAtPos(138@, 139@, 140@)
+0395: clear_area 1 at 138@ 139@ 140@ radius 30.0 
+Camera.SetPosition(138@, 139@, 140@, 0.0, 0.0, 0.0)
+Camera.OnPed($ACTOR_TRUTH, 15, 2)
+0687: clear_actor $ACTOR_TRUTH task 
+if 
+   Actor.InCar($ACTOR_TRUTH, 34@)
+jf @TRUTH2_10613 
+06C7: AS_actor $ACTOR_TRUTH driver_of_car 34@ perform_action 6 timelimit 2000000 
+
+:TRUTH2_10613
+04D3: get_nearest_car_path_coords_from 138@ 139@ 140@ type 1 store_to 141@ 142@ 143@ 
+37@ = Actor.Create(Mission1, #CSHER, 141@, 142@, 143@)
+if 
+   Actor.Driving($ACTOR_TRUTH)
+jf @TRUTH2_10679 
+Actor.GiveWeaponAndAmmo(37@, NightStick, 1)
+
+:TRUTH2_10679
+06E4: AS_actor 37@ attempt_to_bust_actor $ACTOR_TRUTH 
+00BC: show_text_highpriority GXT 'TRU2_10' time 7000 flag 1  // ~r~The Truth has been arrested!
+fade 1 500 
+
+:TRUTH2_10710
+if 
+fading 
+jf @TRUTH2_10734 
+wait 0 
+jump @TRUTH2_10710 
+
+:TRUTH2_10734
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_10766 
+jump @TRUTH2_11910 
+
+:TRUTH2_10766
+32@ = 0 
+88@ = 1 
+
+:TRUTH2_10780
+if 
+  88@ == 1 
+jf @TRUTH2_10975 
+if 
+  32@ > 7000 
+jf @TRUTH2_10975 
+fade 0 500 
+
+:TRUTH2_10824
+if 
+fading 
+jf @TRUTH2_10848 
+wait 0 
+jump @TRUTH2_10824 
+
+:TRUTH2_10848
+if 
+06B3:   searchlight 38@ active 
+jf @TRUTH2_10869 
+06B2: destroy_searchlight 38@ 
+
+:TRUTH2_10869
+Actor.DestroyInstantly($ACTOR_TRUTH)
+0296: unload_special_actor 1 
+Car.Destroy(34@)
+Actor.DestroyInstantly(37@)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+00BC: show_text_highpriority GXT 'TRU2_10' time 5500 flag 1  // ~r~The Truth has been arrested!
+fade 1 500 
+
+:TRUTH2_10944
+if 
+fading 
+jf @TRUTH2_10968 
+wait 0 
+jump @TRUTH2_10944 
+
+:TRUTH2_10968
+jump @TRUTH2_11910 
+
+:TRUTH2_10975
+if 
+  87@ == 5 
+jf @TRUTH2_11839 
+if 
+  88@ == 0 
+jf @TRUTH2_11037 
+if 
+  32@ > 1500 
+jf @TRUTH2_11037 
+88@ = 1 
+
+:TRUTH2_11037
+if 
+  88@ == 1 
+jf @TRUTH2_11617 
+fade 0 500 
+
+:TRUTH2_11062
+if 
+fading 
+jf @TRUTH2_11086 
+wait 0 
+jump @TRUTH2_11062 
+
+:TRUTH2_11086
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_11118 
+jump @TRUTH2_11910 
+
+:TRUTH2_11118
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+Camera.SetPosition(-2025.0, 172.3, 28.0, 0.0, 0.0, 0.0)
+Camera.PointAt(-2032.9, 163.0, 30.88, 2)
+09F5: disable_player_mutal_activities 1 
+0395: clear_area 1 at -2028.9 172.3 27.8 radius 30.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2028.9, 172.3, 27.8)
+Actor.Angle($PLAYER_ACTOR) = 167.6
+0615: define_AS_pack_begin 215@ 
+05D3: AS_actor -1 goto_point -2029.9 167.7 27.8 mode 4 time -1 ms // versionA 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0605: actor -1 perform_animation "IDLE_TIRED" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 4000 
+05D3: AS_actor -1 goto_point -2033.0 161.4 28.0 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 215@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 215@ 
+061B: remove_references_to_AS_pack 215@ 
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+0395: clear_area 1 at -2030.9 172.3 27.8 radius 30.0 
+0792: disembark_instantly_actor $ACTOR_TRUTH 
+Actor.PutAt($ACTOR_TRUTH, -2030.9, 172.3, 27.8)
+Actor.Angle($ACTOR_TRUTH) = 167.6
+0615: define_AS_pack_begin 215@ 
+05D3: AS_actor -1 goto_point -2030.9 167.7 27.8 mode 4 time -1 ms // versionA 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05D3: AS_actor -1 goto_point -2033.0 161.4 28.0 mode 4 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 115.2 
+0616: define_AS_pack_end 215@ 
+0618: assign_actor $ACTOR_TRUTH to_AS_pack 215@ 
+061B: remove_references_to_AS_pack 215@ 
+fade 1 500 
+
+:TRUTH2_11523
+if 
+fading 
+jf @TRUTH2_11547 
+wait 0 
+jump @TRUTH2_11523 
+
+:TRUTH2_11547
+gosub @TRUTH2_12668 
+if 
+  90@ == 1 
+jf @TRUTH2_11579 
+jump @TRUTH2_11910 
+
+:TRUTH2_11579
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+151@ = 11 
+152@ = 0 
+gosub @TRUTH2_14975 
+88@ = 2 
+
+:TRUTH2_11617
+if 
+  88@ == 2 
+jf @TRUTH2_11667 
+if 
+  151@ == 0 
+jf @TRUTH2_11667 
+88@ = 3 
+32@ = 0 
+
+:TRUTH2_11667
+if 
+  88@ == 3 
+jf @TRUTH2_11839 
+if 
+  32@ > 1000 
+jf @TRUTH2_11839 
+fade 0 500 
+
+:TRUTH2_11711
+if 
+fading 
+jf @TRUTH2_11735 
+wait 0 
+jump @TRUTH2_11711 
+
+:TRUTH2_11735
+if 
+06B3:   searchlight 38@ active 
+jf @TRUTH2_11756 
+06B2: destroy_searchlight 38@ 
+
+:TRUTH2_11756
+Actor.DestroyInstantly($ACTOR_TRUTH)
+0296: unload_special_actor 1 
+Car.Destroy(34@)
+Actor.DestroyInstantly(37@)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+09F5: disable_player_mutal_activities 0 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+
+:TRUTH2_11808
+if 
+fading 
+jf @TRUTH2_11832 
+wait 0 
+jump @TRUTH2_11808 
+
+:TRUTH2_11832
+jump @TRUTH2_11942 
+
+:TRUTH2_11839
+if 
+  2 > 87@ 
+jf @TRUTH2_11896 
+if 
+  $7012 == 0 
+jf @TRUTH2_11896 
+87@ = 4 
+88@ = 0 
+Actor.Health($ACTOR_TRUTH) = 10
+
+:TRUTH2_11896
+gosub @TRUTH2_17153 
+jump @TRUTH2_3224 
+
+:TRUTH2_11910
+0555: remove_weapon 37 from_actor $PLAYER_ACTOR 
+0555: remove_weapon 35 from_actor $PLAYER_ACTOR 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:TRUTH2_11942
+0629: change_integer_stat 338 to 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 15 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 15 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'TRUTH_2'  // Are you going to San Fierro?
+030C: progress_made = 1 
+$TRUTH_TOTAL_PASSED_MISSIONS += 1 
+Marker.Disable($MARKER_TRUTH_FARM)
+end_thread_named 'MOB_SF' 
+create_thread @MOB_SF 
+Marker.Disable($1732)
+0570: $1732 = create_asset_radar_marker_with_icon 35 at $SAVE_PICKUPS_X[15] $SAVE_PICKUPS_Y[15] $SAVE_PICKUPS_Z[15] 
+018B: set_marker $1732 radar_mode 2 
+create_thread @GARAGE 
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$MARKER_TRIADS_SF_GARAGE = Marker.CreateIconAndSphere(15, $X_SF_GARAGE, $Y_SF_GARAGE, $Z_SF_GARAGE)
+Pickup.Destroy($SAVE_PICKUPS[15])
+$SAVE_PICKUPS[15] = Pickup.Create(#PICKUPSAVE, 3, $SAVE_PICKUPS_X[15], $SAVE_PICKUPS_Y[15], $SAVE_PICKUPS_Z[15])
+$TOTAL_AVAILABLE_SAVE_PICKUPS = 16 
+Garage.Activate('MDSSFSE')
+Marker.Disable($2589)
+$2589 = Marker.CreateIconWithoutSphere(27, -1941.0, 251.7, 33.4)
+return 
+
+:TRUTH2_12153
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @TRUTH2_12183 
+Player.SetHandlingResponsiveness($PLAYER_CHAR, 0)
+Player.SetDrunkVisuals($PLAYER_CHAR, 0)
+
+:TRUTH2_12183
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @TRUTH2_12201 
+Camera.Restore_WithJumpCut
+
+:TRUTH2_12201
+0778: recreate_objects_in_object_group "TRUTHSFARM" 
+Marker.Disable(42@)
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH2_12266 
+04A2: set_heli 35@ fly_to 0.0 0.0 200.0 altitude_between 0.0 and 200.0 
+
+:TRUTH2_12266
+if 
+   not Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_12287 
+0465: remove_actor $ACTOR_TRUTH from_turret_mode 
+
+:TRUTH2_12287
+if 
+   not Car.Wrecked(39@)
+jf @TRUTH2_12318 
+Car.SetImmunities(39@, 0, 0, 0, 0, 0)
+
+:TRUTH2_12318
+if 
+   not Car.Wrecked(34@)
+jf @TRUTH2_12341 
+Car.DoorStatus(34@) = 1
+
+:TRUTH2_12341
+Pickup.Destroy(40@)
+Pickup.Destroy(41@)
+Model.Destroy(#CAMPER)
+Model.Destroy(#SADLER)
+Model.Destroy(#POLMAV)
+Model.Destroy(#CSHER)
+Model.Destroy(#FLAME)
+Model.Destroy(#ROCKETLA)
+Model.Destroy(#COLT45)
+Model.Destroy(#NITESTICK)
+Actor.DestroyWithFade($ACTOR_TRUTH)
+0296: unload_special_actor 1 
+014F: stop_timer $7012 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @TRUTH2_12428 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:TRUTH2_12428
+09F5: disable_player_mutal_activities 0 
+Marker.Disable(43@)
+Marker.Disable(44@)
+Marker.Disable(45@)
+Marker.Disable(46@)
+Marker.Disable(47@)
+Marker.Disable(48@)
+Marker.Disable(49@)
+Marker.Disable(50@)
+Marker.Disable(51@)
+Marker.Disable(52@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+Marker.Disable(55@)
+Marker.Disable(56@)
+Marker.Disable(57@)
+Marker.Disable(58@)
+Marker.Disable(59@)
+Marker.Disable(60@)
+Marker.Disable(61@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+Marker.Disable(65@)
+Marker.Disable(66@)
+Marker.Disable(67@)
+Marker.Disable(68@)
+Marker.Disable(69@)
+Marker.Disable(70@)
+Marker.Disable(71@)
+Marker.Disable(72@)
+Marker.Disable(73@)
+Marker.Disable(74@)
+Marker.Disable(75@)
+Marker.Disable(76@)
+Marker.Disable(77@)
+Marker.Disable(78@)
+Marker.Disable(79@)
+Marker.Disable(80@)
+Marker.Disable(81@)
+Marker.Disable(82@)
+Marker.Disable(83@)
+Marker.Disable(84@)
+Marker.Disable(85@)
+Marker.Disable(86@)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:TRUTH2_12668
+if 
+   Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_12709 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'TRU2_08' time 7000 flag 1  // ~r~The Truth has been killed!
+90@ = 1 
+
+:TRUTH2_12709
+if 
+   Car.Wrecked(34@)
+jf @TRUTH2_12750 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'TRU2_09' time 7000 flag 1  // ~r~The Mothership has been destroyed!
+90@ = 1 
+
+:TRUTH2_12750
+if 
+   Car.Wrecked(35@)
+jf @TRUTH2_12787 
+if 
+06B3:   searchlight 38@ active 
+jf @TRUTH2_12787 
+06B2: destroy_searchlight 38@ 
+
+:TRUTH2_12787
+return 
+
+:TRUTH2_12789
+if 
+  148@ == 0 
+jf @TRUTH2_13016 
+041A: 149@ = actor $PLAYER_ACTOR weapon 37 ammo 
+if 
+  149@ == 0 
+jf @TRUTH2_13016 
+Marker.Disable(43@)
+Marker.Disable(44@)
+Marker.Disable(45@)
+Marker.Disable(46@)
+Marker.Disable(47@)
+Marker.Disable(48@)
+Marker.Disable(49@)
+Marker.Disable(50@)
+Marker.Disable(51@)
+Marker.Disable(52@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+Marker.Disable(55@)
+Marker.Disable(56@)
+Marker.Disable(57@)
+Marker.Disable(58@)
+Marker.Disable(59@)
+Marker.Disable(60@)
+Marker.Disable(61@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+Marker.Disable(42@)
+032B: 40@ = create_weapon_pickup #FLAME type 3 ammo 3000 at -1100.3 -1640.4 76.4 
+03DC: 42@ = create_marker_above_pickup 40@ 
+07E0: set_marker 42@ type_to 0 
+00BC: show_text_highpriority GXT 'TRU2_13' time 7000 flag 1  // ~s~There is more ~g~ammo~s~ near the barn.
+148@ = 1 
+
+:TRUTH2_13016
+if 
+  148@ == 1 
+jf @TRUTH2_14222 
+if 
+   Pickup.Picked_up(40@)
+jf @TRUTH2_14222 
+Marker.Disable(42@)
+if 
+  91@ == 0 
+jf @TRUTH2_13107 
+018A: 43@ = create_checkpoint_at -1061.9 -1630.7 75.3 
+Marker.SetIconSize(43@, 1)
+08FB: set_checkpoint 43@ type_to 2 
+
+:TRUTH2_13107
+if 
+  92@ == 0 
+jf @TRUTH2_13159 
+018A: 44@ = create_checkpoint_at -1062.3 -1621.4 75.3 
+Marker.SetIconSize(44@, 1)
+08FB: set_checkpoint 44@ type_to 2 
+
+:TRUTH2_13159
+if 
+  93@ == 0 
+jf @TRUTH2_13211 
+018A: 45@ = create_checkpoint_at -1052.8 -1630.8 75.3 
+Marker.SetIconSize(45@, 1)
+08FB: set_checkpoint 45@ type_to 2 
+
+:TRUTH2_13211
+if 
+  94@ == 0 
+jf @TRUTH2_13263 
+018A: 46@ = create_checkpoint_at -1052.8 -1621.4 75.3 
+Marker.SetIconSize(46@, 1)
+08FB: set_checkpoint 46@ type_to 2 
+
+:TRUTH2_13263
+if 
+  95@ == 0 
+jf @TRUTH2_13315 
+018A: 47@ = create_checkpoint_at -1042.8 -1630.8 75.3 
+Marker.SetIconSize(47@, 1)
+08FB: set_checkpoint 47@ type_to 2 
+
+:TRUTH2_13315
+if 
+  96@ == 0 
+jf @TRUTH2_13367 
+018A: 48@ = create_checkpoint_at -1042.8 -1621.4 75.3 
+Marker.SetIconSize(48@, 1)
+08FB: set_checkpoint 48@ type_to 2 
+
+:TRUTH2_13367
+if 
+  97@ == 0 
+jf @TRUTH2_13419 
+018A: 49@ = create_checkpoint_at -1032.8 -1630.8 75.3 
+Marker.SetIconSize(49@, 1)
+08FB: set_checkpoint 49@ type_to 2 
+
+:TRUTH2_13419
+if 
+  98@ == 0 
+jf @TRUTH2_13471 
+018A: 50@ = create_checkpoint_at -1032.8 -1621.4 75.3 
+Marker.SetIconSize(50@, 1)
+08FB: set_checkpoint 50@ type_to 2 
+
+:TRUTH2_13471
+if 
+  99@ == 0 
+jf @TRUTH2_13523 
+018A: 51@ = create_checkpoint_at -1022.8 -1630.8 75.3 
+Marker.SetIconSize(51@, 1)
+08FB: set_checkpoint 51@ type_to 2 
+
+:TRUTH2_13523
+if 
+  100@ == 0 
+jf @TRUTH2_13575 
+018A: 52@ = create_checkpoint_at -1022.8 -1621.4 75.3 
+Marker.SetIconSize(52@, 1)
+08FB: set_checkpoint 52@ type_to 2 
+
+:TRUTH2_13575
+if 
+  101@ == 0 
+jf @TRUTH2_13627 
+018A: 53@ = create_checkpoint_at -1012.1 -1666.8 75.3 
+Marker.SetIconSize(53@, 1)
+08FB: set_checkpoint 53@ type_to 2 
+
+:TRUTH2_13627
+if 
+  102@ == 0 
+jf @TRUTH2_13679 
+018A: 54@ = create_checkpoint_at -1012.8 -1657.4 75.3 
+Marker.SetIconSize(54@, 1)
+08FB: set_checkpoint 54@ type_to 2 
+
+:TRUTH2_13679
+if 
+  103@ == 0 
+jf @TRUTH2_13731 
+018A: 55@ = create_checkpoint_at -1012.8 -1648.4 75.3 
+Marker.SetIconSize(55@, 1)
+08FB: set_checkpoint 55@ type_to 2 
+
+:TRUTH2_13731
+if 
+  104@ == 0 
+jf @TRUTH2_13783 
+018A: 56@ = create_checkpoint_at -1000.1 -1666.8 75.3 
+Marker.SetIconSize(56@, 1)
+08FB: set_checkpoint 56@ type_to 2 
+
+:TRUTH2_13783
+if 
+  105@ == 0 
+jf @TRUTH2_13835 
+018A: 57@ = create_checkpoint_at -1000.8 -1657.4 75.3 
+Marker.SetIconSize(57@, 1)
+08FB: set_checkpoint 57@ type_to 2 
+
+:TRUTH2_13835
+if 
+  106@ == 0 
+jf @TRUTH2_13887 
+018A: 58@ = create_checkpoint_at -1000.8 -1648.4 75.3 
+Marker.SetIconSize(58@, 1)
+08FB: set_checkpoint 58@ type_to 2 
+
+:TRUTH2_13887
+if 
+  107@ == 0 
+jf @TRUTH2_13939 
+018A: 59@ = create_checkpoint_at -992.1 -1702.8 75.3 
+Marker.SetIconSize(59@, 1)
+08FB: set_checkpoint 59@ type_to 2 
+
+:TRUTH2_13939
+if 
+  108@ == 0 
+jf @TRUTH2_13991 
+018A: 60@ = create_checkpoint_at -992.8 -1693.4 75.3 
+Marker.SetIconSize(60@, 1)
+08FB: set_checkpoint 60@ type_to 2 
+
+:TRUTH2_13991
+if 
+  109@ == 0 
+jf @TRUTH2_14043 
+018A: 61@ = create_checkpoint_at -992.8 -1684.4 75.3 
+Marker.SetIconSize(61@, 1)
+08FB: set_checkpoint 61@ type_to 2 
+
+:TRUTH2_14043
+if 
+  110@ == 0 
+jf @TRUTH2_14095 
+018A: 62@ = create_checkpoint_at -982.1 -1702.8 75.3 
+Marker.SetIconSize(62@, 1)
+08FB: set_checkpoint 62@ type_to 2 
+
+:TRUTH2_14095
+if 
+  111@ == 0 
+jf @TRUTH2_14147 
+018A: 63@ = create_checkpoint_at -982.8 -1693.4 75.3 
+Marker.SetIconSize(63@, 1)
+08FB: set_checkpoint 63@ type_to 2 
+
+:TRUTH2_14147
+if 
+  112@ == 0 
+jf @TRUTH2_14199 
+018A: 64@ = create_checkpoint_at -982.8 -1684.4 75.3 
+Marker.SetIconSize(64@, 1)
+08FB: set_checkpoint 64@ type_to 2 
+
+:TRUTH2_14199
+00BC: show_text_highpriority GXT 'TRU2_01' time 11000 flag 1  // ~s~Go and help The Truth destroy the ~r~weed~s~.
+148@ = 0 
+
+:TRUTH2_14222
+return 
+
+:TRUTH2_14224
+if 
+  150@ == 0 
+jf @TRUTH2_14340 
+041A: 149@ = actor $PLAYER_ACTOR weapon 35 ammo 
+if 
+  149@ == 0 
+jf @TRUTH2_14340 
+Marker.Disable(42@)
+032B: 41@ = create_weapon_pickup #ROCKETLA type 3 ammo 10 at -1100.3 -1640.4 76.4 
+03DC: 42@ = create_marker_above_pickup 41@ 
+07E0: set_marker 42@ type_to 0 
+00BC: show_text_highpriority GXT 'TRU2_13' time 7000 flag 1  // ~s~There is more ~g~ammo~s~ near the barn.
+150@ = 1 
+
+:TRUTH2_14340
+if 
+  150@ == 1 
+jf @TRUTH2_14426 
+if 
+   Pickup.Picked_up(41@)
+jf @TRUTH2_14426 
+Marker.Disable(42@)
+if 
+   not Car.Wrecked(35@)
+jf @TRUTH2_14419 
+42@ = Marker.CreateAboveCar(35@)
+00BC: show_text_highpriority GXT 'TRU2_15' time 11000 flag 1  // ~s~Take out the ~r~chopper~s~.
+
+:TRUTH2_14419
+150@ = 0 
+
+:TRUTH2_14426
+return 
+
+:TRUTH2_14428
+if 
+  136@ == 0 
+jf @TRUTH2_14504 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_14504 
+Marker.Disable(42@)
+018A: 42@ = create_checkpoint_at -2031.3 178.5 27.9 
+07E0: set_marker 42@ type_to 0 
+136@ = 1 
+
+:TRUTH2_14504
+if 
+  136@ == 1 
+jf @TRUTH2_14568 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_14568 
+Marker.Disable(42@)
+42@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 42@ type_to 1 
+136@ = 0 
+
+:TRUTH2_14568
+return 
+
+:TRUTH2_14570
+if 
+  87@ == 0 
+jf @TRUTH2_14881 
+if 
+  $7011 > 0 
+jf @TRUTH2_14665 
+if 
+001F:   147@ > $7011 // (int) 
+jf @TRUTH2_14665 
+if 
+  200 > 146@ 
+jf @TRUTH2_14658 
+146@ += 1 
+146@ += 1 
+
+:TRUTH2_14658
+147@ -= 1 
+
+:TRUTH2_14665
+if 
+  144@ == 0 
+jf @TRUTH2_14715 
+if 
+  40 > $7011 
+jf @TRUTH2_14715 
+145@ += 1 
+144@ = 1 
+
+:TRUTH2_14715
+if 
+  144@ == 1 
+jf @TRUTH2_14765 
+if 
+  30 > $7011 
+jf @TRUTH2_14765 
+145@ += 1 
+144@ = 2 
+
+:TRUTH2_14765
+if 
+  144@ == 2 
+jf @TRUTH2_14815 
+if 
+  20 > $7011 
+jf @TRUTH2_14815 
+145@ += 1 
+144@ = 3 
+
+:TRUTH2_14815
+if 
+  144@ == 3 
+jf @TRUTH2_14865 
+if 
+  10 > $7011 
+jf @TRUTH2_14865 
+145@ += 1 
+144@ = 4 
+
+:TRUTH2_14865
+Player.SetHandlingResponsiveness($PLAYER_CHAR, 145@)
+Player.SetDrunkVisuals($PLAYER_CHAR, 146@)
+
+:TRUTH2_14881
+if or
+  87@ == 2 
+  87@ == 3 
+jf @TRUTH2_14973 
+if 
+  32@ > 660 
+jf @TRUTH2_14973 
+if 
+  146@ > 1 
+jf @TRUTH2_14950 
+146@ -= 1 
+
+:TRUTH2_14950
+Player.SetHandlingResponsiveness($PLAYER_CHAR, 145@)
+Player.SetDrunkVisuals($PLAYER_CHAR, 146@)
+32@ = 0 
+
+:TRUTH2_14973
+return 
+
+:TRUTH2_14975
+if 
+  151@ == 1 
+jf @TRUTH2_15192 
+05AA: 154@s = 'TRU2_AA' // @s = 'short'  // ~z~Assholes! Right-wing assholes!
+05AA: 156@s = 'TRU2_AB' // @s = 'short'  // ~z~I don't, I don't feel too good...
+05AA: 158@s = 'TRU2_AC' // @s = 'short'  // ~z~It's a crying shame, ain't it.
+05AA: 160@s = 'TRU2_AD' // @s = 'short'  // ~z~No I mean I think I'm gonna black out!
+05AA: 162@s = 'TRU2_AE' // @s = 'short'  // ~z~Fight the ocean and you will drown, brother!
+05AA: 164@s = 'TRU2_BA' // @s = 'short'  // ~z~Carl, man, we'll take the mothership and get our shit out of here!
+05AA: 166@s = 'TRU2_BB' // @s = 'short'  // ~z~Go get her fired up!
+05AA: 168@s = 'TRU2_BC' // @s = 'short'  // ~z~I'll finish burnin' and I'll follow you!
+04AF: 186@ = 41200 // = constant 
+04AF: 187@ = 41201 // = constant 
+04AF: 188@ = 41202 // = constant 
+04AF: 189@ = 41203 // = constant 
+04AF: 190@ = 41204 // = constant 
+04AF: 191@ = 41205 // = constant 
+04AF: 192@ = 41206 // = constant 
+04AF: 193@ = 41207 // = constant 
+207@ = 8 
+
+:TRUTH2_15192
+if 
+  151@ == 2 
+jf @TRUTH2_15265 
+05AA: 154@s = 'TRU2_CA' // @s = 'short'  // ~z~Hey, I'm kinda busy, lemme get back at you.
+05AA: 156@s = 'TRU2_CB' // @s = 'short'  // ~z~Carl, it's me! Get those cops off my damn tail!
+04AF: 186@ = 41208 // = constant 
+04AF: 187@ = 41209 // = constant 
+207@ = 2 
+
+:TRUTH2_15265
+if 
+  151@ == 3 
+jf @TRUTH2_15576 
+05AA: 154@s = 'TRU2_DA' // @s = 'short'  // ~z~What you pull over for?
+05AA: 156@s = 'TRU2_DB' // @s = 'short'  // ~z~You better drive. I haven't driven in 15 years.
+05AA: 158@s = 'TRU2_DC' // @s = 'short'  // ~z~You was doin' alright.
+05AA: 160@s = 'TRU2_DD' // @s = 'short'  // ~z~Yeah, then the fear hit me.
+05AA: 162@s = 'TRU2_DE' // @s = 'short'  // ~z~Now I'm rolling a number to calm the waves!
+05AA: 164@s = 'TRU2_DF' // @s = 'short' 
+05AA: 166@s = 'TRU2_OA' // @s = 'short'  // ~z~Shit, I better call Cesar!
+05AA: 168@s = 'TRU2_OB' // @s = 'short'  // ~z~(Dialing number)
+05AA: 170@s = 'TRU2_OC' // @s = 'short'  // ~z~Hey Cesar, no time to talk, man!
+05AA: 172@s = 'TRU2_OD' // @s = 'short'  // ~z~I'm on my way to San Fierro, OK,
+05AA: 174@s = 'TRU2_OE' // @s = 'short'  // ~z~I'll meet you and Kendl at that garage I won at that races!
+05AA: 176@s = 'TRU2_OF' // @s = 'short'  // ~z~Holla at y'all later!
+04AF: 186@ = 41210 // = constant 
+04AF: 187@ = 41211 // = constant 
+04AF: 188@ = 41212 // = constant 
+04AF: 189@ = 41213 // = constant 
+04AF: 190@ = 41214 // = constant 
+04AF: 191@ = 41215 // = constant 
+04AF: 192@ = 41268 // = constant 
+04AF: 193@ = 3600 // = constant 
+04AF: 194@ = 41269 // = constant 
+04AF: 195@ = 41270 // = constant 
+04AF: 196@ = 41271 // = constant 
+04AF: 197@ = 41272 // = constant 
+207@ = 12 
+
+:TRUTH2_15576
+if 
+  151@ == 4 
+jf @TRUTH2_15745 
+05AA: 154@s = 'TRU2_EA' // @s = 'short'  // ~z~Jesus, we're screwed, when'd you get this?
+05AA: 156@s = 'TRU2_EB' // @s = 'short'  // ~z~1967.
+05AA: 158@s = 'TRU2_EC' // @s = 'short'  // ~z~How you get around if you don't drive?
+05AA: 160@s = 'TRU2_ED' // @s = 'short'  // ~z~I have an astral goat called 'Herbie'.
+05AA: 162@s = 'TRU2_EF' // @s = 'short'  // ~z~She's faster than most, but gettin' old...
+05AA: 164@s = 'TRU2_EG' // @s = 'short'  // ~z~Yeah, whatever man, you talkin' shit.
+04AF: 186@ = 41216 // = constant 
+04AF: 187@ = 41217 // = constant 
+04AF: 188@ = 41218 // = constant 
+04AF: 189@ = 41219 // = constant 
+04AF: 190@ = 41220 // = constant 
+04AF: 191@ = 41221 // = constant 
+207@ = 6 
+
+:TRUTH2_15745
+if 
+  151@ == 5 
+jf @TRUTH2_16010 
+05AA: 154@s = 'TRU2_FA' // @s = 'short'  // ~z~Hey, you want a hit on this? A little Temple Charas
+05AA: 156@s = 'TRU2_FB' // @s = 'short'  // ~z~in a cocktail with some Nepalese munga munga.
+05AA: 158@s = 'TRU2_FC' // @s = 'short'  // ~z~Put that thing out, man, I can't see.
+05AA: 160@s = 'TRU2_FD' // @s = 'short'  // ~z~Hey, mellow out, brother. It's good shit.
+05AA: 162@s = 'TRU2_FE' // @s = 'short'  // ~z~Put it out, motherfucker, I'm warning you!
+05AA: 164@s = 'TRU2_FF' // @s = 'short'  // ~z~Wooah, chill the fuck out!
+05AA: 166@s = 'TRU2_FG' // @s = 'short'  // ~z~Firstly, you are a real buzz killer, amigo.
+05AA: 168@s = 'TRU2_FH' // @s = 'short'  // ~z~And secondly, I never made love to my mother. She wouldn't.
+05AA: 170@s = 'TRU2_FJ' // @s = 'short'  // ~z~And thirdly, we're in this together, so be cool.
+05AA: 172@s = 'TRU2_FK' // @s = 'short'  // ~z~Sorry, man, I just don't drive when I'm faded.
+04AF: 186@ = 41222 // = constant 
+04AF: 187@ = 41223 // = constant 
+04AF: 188@ = 41224 // = constant 
+04AF: 189@ = 41225 // = constant 
+04AF: 190@ = 41226 // = constant 
+04AF: 191@ = 41227 // = constant 
+04AF: 192@ = 41228 // = constant 
+04AF: 193@ = 41229 // = constant 
+04AF: 194@ = 41230 // = constant 
+04AF: 195@ = 41231 // = constant 
+207@ = 10 
+
+:TRUTH2_16010
+if 
+  151@ == 6 
+jf @TRUTH2_16227 
+05AA: 154@s = 'TRU2_GA' // @s = 'short'  // ~z~Hey, this thing go any faster?
+05AA: 156@s = 'TRU2_GB' // @s = 'short'  // ~z~Man, we got 3 tons of grass on board,
+05AA: 158@s = 'TRU2_GC' // @s = 'short'  // ~z~the engine block is held together with a macramž hammock, and it's running on 15-year-old cooking oil.
+05AA: 160@s = 'TRU2_GE' // @s = 'short'  // ~z~Shit. Can you shoot?
+05AA: 162@s = 'TRU2_GF' // @s = 'short'  // ~z~Shoot? I'm a hippy!
+05AA: 164@s = 'TRU2_GG' // @s = 'short'  // ~z~The only thing I've shot is acid.
+05AA: 166@s = 'TRU2_GH' // @s = 'short'  // ~z~I heard about this dude who snorted it once.
+05AA: 168@s = 'TRU2_GJ' // @s = 'short'  // ~z~Thought his nose was a kangaroo and the moon was a dog. Whooo!
+04AF: 186@ = 41232 // = constant 
+04AF: 187@ = 41233 // = constant 
+04AF: 188@ = 41234 // = constant 
+04AF: 189@ = 41235 // = constant 
+04AF: 190@ = 41236 // = constant 
+04AF: 191@ = 41237 // = constant 
+04AF: 192@ = 41238 // = constant 
+04AF: 193@ = 41239 // = constant 
+207@ = 8 
+
+:TRUTH2_16227
+if 
+  151@ == 7 
+jf @TRUTH2_16588 
+05AA: 154@s = 'TRU2_HA' // @s = 'short'  // ~z~What's with all the aluminum foil, man?
+05AA: 156@s = 'TRU2_HB' // @s = 'short'  // ~z~Protection from mind control, dude.
+05AA: 158@s = 'TRU2_HC' // @s = 'short'  // ~z~Mind control?
+05AA: 160@s = 'TRU2_HD' // @s = 'short'  // ~z~Induction of images, sound or emotion using microwave radiation.
+05AA: 162@s = 'TRU2_HE' // @s = 'short'  // ~z~D'you know how many government satellites
+05AA: 164@s = 'TRU2_HF' // @s = 'short'  // ~z~are watching any citizen at any moment?
+05AA: 166@s = 'TRU2_HG' // @s = 'short'  // ~z~No.
+05AA: 168@s = 'TRU2_HH' // @s = 'short'  // ~z~Twenty-three.
+05AA: 170@s = 'TRU2_HJ' // @s = 'short'  // ~z~Do you know how many religious relics are kept at the Pentagon?
+05AA: 172@s = 'TRU2_HK' // @s = 'short'  // ~z~No I don't.
+05AA: 174@s = 'TRU2_HL' // @s = 'short'  // ~z~Twenty-three.
+05AA: 176@s = 'TRU2_HM' // @s = 'short'  // ~z~You see a pattern emerging here, man?
+05AA: 178@s = 'TRU2_HN' // @s = 'short'  // ~z~Man, I'm seeing patterns all over the place!
+05AA: 180@s = 'TRU2_HO' // @s = 'short'  // ~z~Get that smoke outta my face!
+04AF: 186@ = 41240 // = constant 
+04AF: 187@ = 41241 // = constant 
+04AF: 188@ = 41242 // = constant 
+04AF: 189@ = 41243 // = constant 
+04AF: 190@ = 41244 // = constant 
+04AF: 191@ = 41245 // = constant 
+04AF: 192@ = 41246 // = constant 
+04AF: 193@ = 41247 // = constant 
+04AF: 194@ = 41248 // = constant 
+04AF: 195@ = 41249 // = constant 
+04AF: 196@ = 41250 // = constant 
+04AF: 197@ = 41251 // = constant 
+04AF: 198@ = 41252 // = constant 
+04AF: 199@ = 41253 // = constant 
+207@ = 14 
+
+:TRUTH2_16588
+if 
+  151@ == 8 
+jf @TRUTH2_16661 
+05AA: 154@s = 'TRU2_JA' // @s = 'short'  // ~z~We got a chopper on our tail, we'll never shake 'em now.
+05AA: 156@s = 'TRU2_JB' // @s = 'short'  // ~z~Hold on, I got a little something back here I was saving for a rainy day.
+04AF: 186@ = 41254 // = constant 
+04AF: 187@ = 41255 // = constant 
+207@ = 2 
+
+:TRUTH2_16661
+if 
+  151@ == 9 
+jf @TRUTH2_16782 
+05AA: 154@s = 'TRU2_KA' // @s = 'short'  // ~z~Holy motherfucker!
+05AA: 156@s = 'TRU2_KB' // @s = 'short'  // ~z~Where'd you get that?
+05AA: 158@s = 'TRU2_KC' // @s = 'short'  // ~z~Found it in a bail of Thai Sticks.
+05AA: 160@s = 'TRU2_KD' // @s = 'short'  // ~z~Shame really, I was going to make it into a lamp.
+04AF: 186@ = 41256 // = constant 
+04AF: 187@ = 41257 // = constant 
+04AF: 188@ = 41258 // = constant 
+04AF: 189@ = 41259 // = constant 
+207@ = 4 
+
+:TRUTH2_16782
+if 
+  151@ == 10 
+jf @TRUTH2_16951 
+05AA: 154@s = 'TRU2_LA' // @s = 'short'  // ~z~There she is, brother; San Fierro: the City of Psychedelic Wonders!
+05AA: 156@s = 'TRU2_LB' // @s = 'short'  // ~z~Man, I can't believe I ain't been here before.
+05AA: 158@s = 'TRU2_LC' // @s = 'short'  // ~z~There ain't a better place to escape the man, man.
+05AA: 160@s = 'TRU2_MA' // @s = 'short'  // ~z~OK, Mr. San Fierro, where's the spot at?
+05AA: 162@s = 'TRU2_MB' // @s = 'short'  // ~z~It's in Doherty on the East side of Fierro,
+05AA: 164@s = 'TRU2_MC' // @s = 'short'  // ~z~between Garcia and Easter Basin.
+04AF: 186@ = 41260 // = constant 
+04AF: 187@ = 41261 // = constant 
+04AF: 188@ = 41262 // = constant 
+04AF: 189@ = 41263 // = constant 
+04AF: 190@ = 41264 // = constant 
+04AF: 191@ = 41265 // = constant 
+207@ = 6 
+
+:TRUTH2_16951
+if 
+  151@ == 11 
+jf @TRUTH2_17024 
+05AA: 154@s = 'TRU2_NA' // @s = 'short'  // ~z~This is the place.
+05AA: 156@s = 'TRU2_NB' // @s = 'short'  // ~z~Whoa, Jesus dude, looks like you've been fed a bummer.
+04AF: 186@ = 41266 // = constant 
+04AF: 187@ = 41267 // = constant 
+207@ = 2 
+
+:TRUTH2_17024
+if 
+  151@ == 12 
+jf @TRUTH2_17122 
+05AA: 154@s = 'TRUX_AA' // @s = 'short'  // ~z~Get in the car, quick!
+05AA: 156@s = 'TRUX_AB' // @s = 'short'  // ~z~Get in the car, it's a Faraday cage, man!
+05AA: 158@s = 'TRUX_AC' // @s = 'short'  // ~z~C'mon, Carl, get the fuck in!
+04AF: 186@ = 41400 // = constant 
+04AF: 187@ = 41401 // = constant 
+04AF: 188@ = 41402 // = constant 
+0085: 207@ = 212@ // (int) 
+
+:TRUTH2_17122
+0085: 210@ = 152@ // (int) 
+208@ = 0 
+209@ = 0 
+211@ = 1 
+return 
+
+:TRUTH2_17153
+if or
+  151@ == 1 
+  151@ == 2 
+  151@ == 8 
+  151@ == 9 
+  151@ == 11 
+jf @TRUTH2_17307 
+if 
+001D:   207@ > 152@ // (int) 
+jf @TRUTH2_17300 
+gosub @TRUTH2_18267 
+gosub @TRUTH2_18374 
+if 
+   not Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_17262 
+gosub @TRUTH2_18528 
+jump @TRUTH2_17293 
+
+:TRUTH2_17262
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+208@ = 0 
+209@ = 0 
+
+:TRUTH2_17293
+jump @TRUTH2_17307 
+
+:TRUTH2_17300
+151@ = 0 
+
+:TRUTH2_17307
+if or
+  87@ == 3 
+  87@ == 4 
+jf @TRUTH2_17806 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH2_17670 
+if 
+  151@ == 3 
+jf @TRUTH2_17484 
+if 
+001D:   207@ > 152@ // (int) 
+jf @TRUTH2_17470 
+gosub @TRUTH2_18267 
+gosub @TRUTH2_18374 
+if 
+   not Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_17432 
+gosub @TRUTH2_18528 
+jump @TRUTH2_17463 
+
+:TRUTH2_17432
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+208@ = 0 
+209@ = 0 
+
+:TRUTH2_17463
+jump @TRUTH2_17484 
+
+:TRUTH2_17470
+33@ = 0 
+151@ = 0 
+
+:TRUTH2_17484
+if or
+  151@ == 4 
+  151@ == 5 
+  151@ == 6 
+  151@ == 7 
+  151@ == 10 
+jf @TRUTH2_17670 
+if 
+001D:   207@ > 152@ // (int) 
+jf @TRUTH2_17631 
+gosub @TRUTH2_18267 
+gosub @TRUTH2_18374 
+if 
+   not Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_17593 
+gosub @TRUTH2_18528 
+jump @TRUTH2_17624 
+
+:TRUTH2_17593
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+208@ = 0 
+209@ = 0 
+
+:TRUTH2_17624
+jump @TRUTH2_17670 
+
+:TRUTH2_17631
+if 
+  145@ > 0 
+jf @TRUTH2_17656 
+145@ -= 1 
+
+:TRUTH2_17656
+33@ = 0 
+151@ = 0 
+
+:TRUTH2_17670
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_17806 
+if 
+  12 > 151@ 
+jf @TRUTH2_17806 
+if 
+001D:   207@ > 152@ // (int) 
+jf @TRUTH2_17733 
+152@ += 1 
+
+:TRUTH2_17733
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+00BE: text_clear_all 
+0085: 214@ = 151@ // (int) 
+0085: 213@ = 152@ // (int) 
+151@ = 12 
+0209: 152@ = random_int_in_ranges 0 3 
+0085: 212@ = 152@ // (int) 
+212@ += 1 
+gosub @TRUTH2_14975 
+
+:TRUTH2_17806
+if 
+  4 > 87@ 
+jf @TRUTH2_18265 
+if 
+  151@ == 12 
+jf @TRUTH2_18037 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_17985 
+if 
+001D:   207@ > 152@ // (int) 
+jf @TRUTH2_17962 
+gosub @TRUTH2_18267 
+gosub @TRUTH2_18374 
+if 
+   not Actor.Dead($ACTOR_TRUTH)
+jf @TRUTH2_17924 
+gosub @TRUTH2_18528 
+jump @TRUTH2_17955 
+
+:TRUTH2_17924
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+208@ = 0 
+209@ = 0 
+
+:TRUTH2_17955
+jump @TRUTH2_17985 
+
+:TRUTH2_17962
+00BB: show_text_lowpriority GXT 'TRU2_17' time 11000 flag 1  // ~s~Get inside the ~b~mothership~s~.
+151@ = 13 
+
+:TRUTH2_17985
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH2_18037 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+151@ = 14 
+152@ = 0 
+00BE: text_clear_all 
+
+:TRUTH2_18037
+if 
+  151@ == 13 
+jf @TRUTH2_18090 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH2_18090 
+151@ = 14 
+152@ = 0 
+00BE: text_clear_all 
+
+:TRUTH2_18090
+if 
+  151@ == 14 
+jf @TRUTH2_18265 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @TRUTH2_18191 
+33@ = 0 
+0085: 151@ = 214@ // (int) 
+0085: 152@ = 213@ // (int) 
+gosub @TRUTH2_14975 
+if 
+  214@ == 0 
+jf @TRUTH2_18191 
+00BB: show_text_lowpriority GXT 'TRU2_12' time 7000 flag 1  // ~s~Drive the Mothership to the ~y~garage~s~ in San Fierro.
+
+:TRUTH2_18191
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @TRUTH2_18265 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 154@(152@,16s) 
+151@ = 12 
+0209: 152@ = random_int_in_ranges 0 3 
+0085: 212@ = 152@ // (int) 
+212@ += 1 
+gosub @TRUTH2_14975 
+
+:TRUTH2_18265
+return 
+
+:TRUTH2_18267
+if 
+001D:   207@ > 210@ // (int) 
+jf @TRUTH2_18372 
+if 
+  208@ == 0 
+jf @TRUTH2_18329 
+03CF: load_wav 186@(210@,16i) as 1 
+210@ += 1 
+208@ = 1 
+
+:TRUTH2_18329
+if 
+  209@ == 0 
+jf @TRUTH2_18372 
+03CF: load_wav 186@(210@,16i) as 2 
+210@ += 1 
+209@ = 1 
+
+:TRUTH2_18372
+return 
+
+:TRUTH2_18374
+if 
+  211@ == 1 
+jf @TRUTH2_18450 
+if 
+  208@ == 1 
+jf @TRUTH2_18450 
+if 
+03D0:   wav 1 loaded 
+jf @TRUTH2_18450 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 154@(152@,16s) time 4500 flag 1 
+208@ = 2 
+
+:TRUTH2_18450
+if 
+  211@ == 2 
+jf @TRUTH2_18526 
+if 
+  209@ == 1 
+jf @TRUTH2_18526 
+if 
+03D0:   wav 2 loaded 
+jf @TRUTH2_18526 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 154@(152@,16s) time 4500 flag 1 
+209@ = 2 
+
+:TRUTH2_18526
+return 
+
+:TRUTH2_18528
+if 
+  208@ == 2 
+jf @TRUTH2_18591 
+if 
+03D2:   wav 1 ended 
+jf @TRUTH2_18591 
+03D5: remove_text 154@(152@,16s) 
+152@ += 1 
+211@ = 2 
+208@ = 0 
+
+:TRUTH2_18591
+if 
+  209@ == 2 
+jf @TRUTH2_18654 
+if 
+03D2:   wav 2 ended 
+jf @TRUTH2_18654 
+03D5: remove_text 154@(152@,16s) 
+152@ += 1 
+211@ = 1 
+209@ = 0 
+
+:TRUTH2_18654
+return

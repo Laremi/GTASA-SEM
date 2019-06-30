@@ -1,0 +1,529 @@
+:STUNT
+gosub @STUNT_43 
+if 
+wasted_or_busted 
+jf @STUNT_34 
+$11033 = 0 
+gosub @STUNT_1650 
+
+:STUNT_34
+gosub @STUNT_2171 
+end_thread 
+
+:STUNT_43
+$ONMISSION = 1 
+if and
+  $STUNT_MISSION_TYPE == 0 
+  $MISSION_BMX_STUNT_PASSED == 0 
+jf @STUNT_84 
+increment_mission_attempts 
+jump @STUNT_111 
+
+:STUNT_84
+if and
+  $STUNT_MISSION_TYPE == 1 
+  $MISSION_NRG500_STUNT_PASSED == 0 
+jf @STUNT_111 
+increment_mission_attempts 
+
+:STUNT_111
+thread 'STUNT' 
+wait 0 
+054C: use_GXT_table 'STUNT' 
+
+:STUNT_137
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @STUNT_164 
+wait 0 
+jump @STUNT_137 
+
+:STUNT_164
+34@ = Actor.MissionCar($PLAYER_ACTOR)
+Car.Health(34@) = 3000
+gosub @STUNT_2272 
+35@ = 1 
+56@ = 0 
+
+:STUNT_201
+if 
+001D:   187@ > 56@ // (int) 
+jf @STUNT_245 
+36@(56@,20i) = 0 
+56@ += 1 
+jump @STUNT_201 
+
+:STUNT_245
+if 
+  $ONMISSION == 0 
+jf @STUNT_277 
+018A: 57@ = create_checkpoint_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:STUNT_277
+58@ = 0 
+59@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+Camera.SetPosition(188@, 189@, 190@, 0.0, 0.0, 0.0)
+Camera.PointAt(191@, 192@, 193@, 2)
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+0084: $8267 = $CURRENT_TIME_IN_MS2 // (int) 
+$8267 += 5000 
+00BC: show_text_highpriority GXT 'STUNT_6' time 5000 flag 1  // ~s~Collect all of the ~r~checkpoints~s~ before the time runs out.
+80@ = 0 
+
+:STUNT_403
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+  58@ == 0 
+jf @STUNT_558 
+if 
+00E1:   player 0 pressed_key 16 
+jf @STUNT_551 
+if 
+  80@ == 1 
+jf @STUNT_544 
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+$8267 = 11000 
+03C3: set_timer_to $8267 type 1 GXT 'STUNT_2' // global_variable  // TIME LEFT
+008B: 81@ = $CURRENT_TIME_IN_MS2 // (int) 
+58@ = 1 
+80@ = 0 
+
+:STUNT_544
+jump @STUNT_558 
+
+:STUNT_551
+80@ = 1 
+
+:STUNT_558
+if 
+  58@ == 0 
+jf @STUNT_667 
+if 
+001C:   $CURRENT_TIME_IN_MS2 > $8267 // (int) 
+jf @STUNT_667 
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+$8267 = 11000 
+03C3: set_timer_to $8267 type 1 GXT 'STUNT_2' // global_variable  // TIME LEFT
+008B: 81@ = $CURRENT_TIME_IN_MS2 // (int) 
+58@ = 1 
+
+:STUNT_667
+if 
+   not Car.Wrecked(34@)
+jf @STUNT_1553 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @STUNT_1228 
+if 
+  35@ == 1 
+jf @STUNT_904 
+03D5: remove_text 'STUNT_1'  // ~s~You have ~1~ seconds to return to your ~b~vehicle~s~.
+Marker.Disable(57@)
+56@ = 0 
+
+:STUNT_743
+if 
+001D:   187@ > 56@ // (int) 
+jf @STUNT_897 
+if 
+  36@(56@,20i) == 0 
+jf @STUNT_883 
+018A: 82@(56@,20i) = create_checkpoint_at 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) 
+Marker.SetColor(82@(56@,20i), 0)
+06D5: 102@(56@,20i) = create_racing_checkpoint_at 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) point_to 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) type 3 radius 0.8 
+
+:STUNT_883
+56@ += 1 
+jump @STUNT_743 
+
+:STUNT_897
+35@ = 0 
+
+:STUNT_904
+56@ = 0 
+
+:STUNT_911
+if 
+001D:   187@ > 56@ // (int) 
+jf @STUNT_1221 
+if 
+  36@(56@,20i) == 0 
+jf @STUNT_1207 
+0996: set_racing_checkpoint 102@(56@,20i) Z_angle_to 60@(56@,20f) 
+016F: create_particle 2 rotation_factor 0.0 size 1.0 intensity 150 flags 0 0 0 at 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) 
+60@(56@,20f) += 10.0 
+if 
+  60@(56@,20f) > 360.0 
+jf @STUNT_1065 
+60@(56@,20f) -= 360.0 
+
+:STUNT_1065
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) radius 2.5 2.5 2.5 sphere 0 in_car 
+jf @STUNT_1207 
+Marker.Disable(82@(56@,20i))
+06D6: disable_racing_checkpoint 102@(56@,20i) 
+097A: play_audio_at 127@(56@,20f) 147@(56@,20f) 167@(56@,20f) event 1058 
+$8267 += 10000 
+01E5: show_text_1number_highpriority GXT 'STUNT_3' number 10 time 1500 flag 1  // ~s~+~1~ seconds
+59@ += 1 
+36@(56@,20i) += 1 
+
+:STUNT_1207
+56@ += 1 
+jump @STUNT_911 
+
+:STUNT_1221
+jump @STUNT_1546 
+
+:STUNT_1228
+if 
+  35@ == 0 
+jf @STUNT_1384 
+56@ = 0 
+
+:STUNT_1253
+if 
+001D:   187@ > 56@ // (int) 
+jf @STUNT_1304 
+Marker.Disable(82@(56@,20i))
+06D6: disable_racing_checkpoint 102@(56@,20i) 
+56@ += 1 
+jump @STUNT_1253 
+
+:STUNT_1304
+57@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 57@ type_to 1 
+if 
+  $8267 > 25400 
+jf @STUNT_1361 
+008B: 122@ = $CURRENT_TIME_IN_MS2 // (int) 
+122@ += 25400 
+jump @STUNT_1377 
+
+:STUNT_1361
+008B: 122@ = $CURRENT_TIME_IN_MS2 // (int) 
+005C: 122@ += $8267 // (int) 
+
+:STUNT_1377
+35@ = 1 
+
+:STUNT_1384
+0085: 123@ = 122@ // (int) 
+0064: 123@ -= $CURRENT_TIME_IN_MS2 // (int) 
+123@ /= 1000 
+if 
+  1 > 123@ 
+jf @STUNT_1433 
+123@ = 0 
+
+:STUNT_1433
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 122@ // (int) 
+jf @STUNT_1475 
+00BC: show_text_highpriority GXT 'STUNT_4' time 5000 flag 1  // ~r~You left your vehicle.
+jump @STUNT_1650 
+
+:STUNT_1475
+if 
+  123@ == 1 
+jf @STUNT_1523 
+09C1: add_next_text_to_brief_history 0 
+01E5: show_text_1number_highpriority GXT 'STUNT_8' number 123@ time 200 flag 1  // ~s~You have ~1~ second to return to your ~b~vehicle~s~.
+jump @STUNT_1546 
+
+:STUNT_1523
+09C1: add_next_text_to_brief_history 0 
+01E5: show_text_1number_highpriority GXT 'STUNT_1' number 123@ time 200 flag 1  // ~s~You have ~1~ seconds to return to your ~b~vehicle~s~.
+
+:STUNT_1546
+jump @STUNT_1576 
+
+:STUNT_1553
+00BC: show_text_highpriority GXT 'STUNT_5' time 5000 flag 1  // ~r~You destroyed your vehicle!
+jump @STUNT_1650 
+
+:STUNT_1576
+if 
+003B:   59@ == 187@ // (int) 
+jf @STUNT_1602 
+jump @STUNT_1668 
+
+:STUNT_1602
+if 
+  $8267 == 0 
+jf @STUNT_1643 
+00BC: show_text_highpriority GXT 'STUNT_7' time 5000 flag 1  // ~r~You ran out of time!
+jump @STUNT_1650 
+
+:STUNT_1643
+jump @STUNT_403 
+
+:STUNT_1650
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:STUNT_1668
+Player.Money($PLAYER_CHAR) += 1000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 2 
+008B: 124@ = $CURRENT_TIME_IN_MS2 // (int) 
+0062: 124@ -= 81@ // (int) 
+124@ /= 1000 
+if and
+  $STUNT_MISSION_TYPE == 0 
+  $MISSION_BMX_STUNT_PASSED == 0 
+jf @STUNT_1749 
+030C: progress_made = 1 
+0394: play_music 2 
+$MISSION_BMX_STUNT_PASSED = 1 
+
+:STUNT_1749
+if and
+  $STUNT_MISSION_TYPE == 1 
+  $MISSION_NRG500_STUNT_PASSED == 0 
+jf @STUNT_1789 
+030C: progress_made = 1 
+0394: play_music 2 
+$MISSION_NRG500_STUNT_PASSED = 1 
+
+:STUNT_1789
+0085: 125@ = 124@ // (int) 
+125@ /= 60 
+0085: 126@ = 125@ // (int) 
+126@ *= 60 
+0085: 123@ = 124@ // (int) 
+0062: 123@ -= 126@ // (int) 
+if 
+001E:   $STUNT_MISSIONS_BESTTIME($STUNT_MISSION_TYPE,2i) > 124@ // (int) 
+jf @STUNT_2004 
+if 
+  10 > 123@ 
+jf @STUNT_1905 
+036D: show_text_2numbers_styled GXT 'STUNTN0' numbers 125@ 123@ time 5000 style 1  // MISSION PASSED!~n~~w~NEW BEST TIME ~1~:0~1~
+jump @STUNT_1927 
+
+:STUNT_1905
+036D: show_text_2numbers_styled GXT 'STUNTPN' numbers 125@ 123@ time 5000 style 1  // MISSION PASSED!~n~~w~NEW BEST TIME ~1~:~1~
+
+:STUNT_1927
+008A: $STUNT_MISSIONS_BESTTIME($STUNT_MISSION_TYPE,2i) = 124@ // (int) 
+if 
+  $STUNT_MISSION_TYPE == 1 
+jf @STUNT_1972 
+042E: downdate_integer_stat 222 to 124@ // same as 0582 
+jump @STUNT_1997 
+
+:STUNT_1972
+if 
+  $STUNT_MISSION_TYPE == 0 
+jf @STUNT_1997 
+042E: downdate_integer_stat 49 to 124@ // same as 0582 
+
+:STUNT_1997
+jump @STUNT_2073 
+
+:STUNT_2004
+if 
+  10 > 123@ 
+jf @STUNT_2051 
+036D: show_text_2numbers_styled GXT 'STUNTT0' numbers 125@ 123@ time 5000 style 1  // MISSION PASSED!~n~~w~TIME ~1~:0~1~
+jump @STUNT_2073 
+
+:STUNT_2051
+036D: show_text_2numbers_styled GXT 'STUNTPT' numbers 125@ 123@ time 5000 style 1  // MISSION PASSED!~n~~w~TIME ~1~:~1~
+
+:STUNT_2073
+if and
+  $MISSION_BMX_STUNT_PASSED == 1 
+  $MISSION_NRG500_STUNT_PASSED == 1 
+jf @STUNT_2169 
+0793: save_player_clothes 
+Player.SetClothes($PLAYER_CHAR, "ORAN12", "HOODYA", Torso)
+0794: restore_player_clothes 
+Player.Build($PLAYER_CHAR)
+0512: show_permanent_text_box 'BIKWON' 
+wait 9000 
+03E6: remove_text_box 
+$702 = 1 
+$MISSION_BMX_STUNT_PASSED = 2 
+$MISSION_NRG500_STUNT_PASSED = 2 
+
+:STUNT_2169
+return 
+
+:STUNT_2171
+03D5: remove_text 'STUNT_1'  // ~s~You have ~1~ seconds to return to your ~b~vehicle~s~.
+03D5: remove_text 'STUNT_3'  // ~s~+~1~ seconds
+56@ = 0 
+
+:STUNT_2200
+if 
+001D:   187@ > 56@ // (int) 
+jf @STUNT_2251 
+Marker.Disable(82@(56@,20i))
+06D6: disable_racing_checkpoint 102@(56@,20i) 
+56@ += 1 
+jump @STUNT_2200 
+
+:STUNT_2251
+Marker.Disable(57@)
+014F: stop_timer $8267 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:STUNT_2272
+0871: init_jump_table $STUNT_MISSION_TYPE total_jumps 2 default_jump 0 @STUNT_3593 jumps 0 @STUNT_2335 1 @STUNT_2979 -1 @STUNT_3593 -1 @STUNT_3593 -1 @STUNT_3593 -1 @STUNT_3593 -1 @STUNT_3593 
+
+:STUNT_2335
+127@ = 1955.012 
+147@ = -1367.72 
+167@ = 24.7354 
+128@ = 1954.609 
+148@ = -1376.964 
+168@ = 24.2187 
+129@ = 1887.392 
+149@ = -1362.954 
+169@ = 19.4329 
+130@ = 1914.137 
+150@ = -1427.099 
+170@ = 15.5805 
+131@ = 1908.552 
+151@ = -1388.389 
+171@ = 10.3294 
+132@ = 1882.362 
+152@ = -1427.686 
+172@ = 10.3294 
+133@ = 1953.349 
+153@ = -1426.586 
+173@ = 10.3294 
+134@ = 1878.189 
+154@ = -1388.81 
+174@ = 15.2464 
+135@ = 1878.184 
+155@ = -1388.839 
+175@ = 18.1461 
+136@ = 1872.327 
+156@ = -1451.051 
+176@ = 15.7645 
+137@ = 1905.178 
+157@ = -1413.675 
+177@ = 13.5322 
+138@ = 1949.502 
+158@ = -1411.546 
+178@ = 15.1837 
+139@ = 1867.153 
+159@ = -1410.006 
+179@ = 13.5322 
+140@ = 1909.341 
+160@ = -1369.846 
+180@ = 16.7966 
+141@ = 1939.243 
+161@ = -1388.132 
+181@ = 19.2615 
+142@ = 1904.888 
+162@ = -1360.622 
+182@ = 13.5322 
+143@ = 1930.234 
+163@ = -1398.62 
+183@ = 16.8554 
+144@ = 1888.765 
+164@ = -1399.326 
+184@ = 17.2408 
+145@ = 1900.948 
+165@ = -1397.83 
+185@ = 15.6868 
+187@ = 19 
+188@ = 1964.753 
+189@ = -1368.362 
+190@ = 29.6217 
+191@ = 1963.934 
+192@ = -1368.818 
+193@ = 29.2725 
+jump @STUNT_3593 
+
+:STUNT_2979
+127@ = -1632.058 
+147@ = 143.152 
+167@ = 3.4111 
+128@ = -1632.021 
+148@ = 83.0413 
+168@ = 7.5331 
+129@ = -1689.148 
+149@ = 53.3936 
+169@ = 11.7703 
+130@ = -1606.423 
+150@ = 133.4396 
+170@ = -10.9911 
+131@ = -1680.386 
+151@ = 87.0915 
+171@ = 8.2325 
+132@ = -1666.295 
+152@ = 102.0489 
+172@ = -1.5025 
+133@ = -1654.692 
+153@ = 60.7782 
+173@ = 7.6501 
+134@ = -1684.866 
+154@ = 74.6374 
+174@ = -7.0328 
+135@ = -1583.797 
+155@ = 126.1577 
+175@ = 4.157 
+136@ = -1667.705 
+156@ = 49.5191 
+176@ = 6.5634 
+137@ = -1611.585 
+157@ = 106.3131 
+177@ = -3.6465 
+138@ = -1590.556 
+158@ = 148.9676 
+178@ = 4.113 
+139@ = -1671.959 
+159@ = 98.6 
+179@ = 8.9263 
+140@ = -1693.32 
+160@ = 65.1187 
+180@ = 8.7997 
+141@ = -1660.951 
+161@ = 107.6739 
+181@ = -2.1545 
+142@ = -1654.071 
+162@ = 77.2629 
+182@ = -10.2893 
+143@ = -1645.494 
+163@ = 107.2477 
+183@ = -10.6617 
+144@ = -1673.735 
+164@ = 56.9287 
+184@ = -10.674 
+187@ = 18 
+188@ = -1681.464 
+189@ = 27.2091 
+190@ = 9.6606 
+191@ = -1681.252 
+192@ = 28.183 
+193@ = 9.5773 
+jump @STUNT_3593 
+
+:STUNT_3593
+return

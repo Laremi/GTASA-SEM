@@ -1,0 +1,5027 @@
+:STEAL2
+thread 'STEAL2' 
+gosub @STEAL2_94 
+if 
+wasted_or_busted 
+jf @STEAL2_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @STEAL2_26060 
+
+:STEAL2_85
+gosub @STEAL2_26217 
+end_thread 
+
+:STEAL2_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'STEAL2' 
+00BE: text_clear_all 
+wait 0 
+99@ = 0 
+100@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+162@ = 0.0 
+163@ = 0.0 
+164@ = 0.0 
+165@ = 0.0 
+166@ = 0.0 
+167@ = 0.0 
+168@ = 0.0 
+112@ = 0 
+113@ = 0 
+114@ = 0 
+154@ = 0 
+155@ = 0 
+156@ = 0 
+157@ = 0 
+158@ = 0 
+160@ = 0 
+161@ = 0 
+108@ = 0 
+109@ = 0 
+08F5: save_player_group 
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E4: load_cutscene_data 'STEAL_2' 
+
+:STEAL2_378
+if 
+86B9:   not cutscene_data_loaded 
+jf @STEAL2_402 
+wait 0 
+jump @STEAL2_378 
+
+:STEAL2_402
+02E7: start_cutscene 
+fade 1 1000 
+
+:STEAL2_411
+if 
+82E9:   not cutscene_reached_end 
+jf @STEAL2_435 
+wait 0 
+jump @STEAL2_411 
+
+:STEAL2_435
+fade 0 0 
+
+:STEAL2_441
+if 
+fading 
+jf @STEAL2_465 
+wait 0 
+jump @STEAL2_441 
+
+:STEAL2_465
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+Model.Load(#SULTAN)
+Model.Load(#ELEGY)
+Model.Load(#WMYBU)
+06E9: load_car_component #NTO_B_S 
+023C: load_special_actor 'CESAR' as 1 // models 290-299 
+038B: load_requested_models 
+0632: release_group $PLAYER_GROUP 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+060A: create_decision_maker_type 2 store_to 169@ // decision\allowed\m_.ped files 
+07E5: copy_decision_maker 65542 to 170@ 
+Camera.SetAtPos(-2032.4, 171.8, 27.8)
+0395: clear_area 1 at -2032.4 171.8 27.8 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, -2032.4, 171.8, 27.8)
+Actor.Angle($PLAYER_ACTOR) = 308.7
+0395: clear_area 1 at -2032.3 161.9 28.0 radius 1.0 
+$ACTOR_CESAR = Actor.Create(Mission1, #SPECIAL01, -2032.3, 161.9, 28.0)
+0568: set_actor $ACTOR_CESAR untargetable 1 
+060B: set_actor $ACTOR_CESAR decision_maker_to 170@ 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+07B3: set_group $PLAYER_GROUP give_command 1 
+060B: set_actor $ACTOR_CESAR decision_maker_to 169@ 
+104@ = 1 
+0395: clear_area 1 at -1656.2 1210.2 12.3 radius 5.0 
+04AF: 110@ = 562 // = constant 
+gosub @STEAL2_27802 
+34@ = Car.Create(#ELEGY, -1656.2, 1210.2, 12.3)
+03AB: set_car 34@ strong 1 
+Car.Angle(34@) = 316.1
+Car.DoorStatus(34@) = 3
+00AE: set_car 34@ traffic_behaviour_to 2 
+Car.Health(34@) = 2000
+053F: set_car 34@ tires_vulnerability 0 
+Car.LockInCurrentPosition(34@) = True
+06E7: $TEMPVAR_ACTOR_CAR = add_car_component #NTO_B_S to_car 34@ 
+0395: clear_area 1 at -1662.3 1211.0 12.3 radius 5.0 
+04AF: 110@ = 560 // = constant 
+gosub @STEAL2_27802 
+35@ = Car.Create(#SULTAN, -1662.3, 1211.0, 12.3)
+Car.Angle(35@) = 316.1
+Car.DoorStatus(35@) = 3
+0229: set_car 35@ primary_color_to 59 secondary_color_to 12 
+Car.Health(35@) = 2000
+Car.LockInCurrentPosition(35@) = True
+06E7: $TEMPVAR_ACTOR_CAR = add_car_component #NTO_B_S to_car 35@ 
+06D7: enable_train_traffic 0 
+018A: 98@ = create_checkpoint_at -1632.9 1207.4 6.1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+
+:STEAL2_1035
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @STEAL2_1061 
+jump @STEAL2_26146 
+
+:STEAL2_1061
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_1093 
+jump @STEAL2_26060 
+
+:STEAL2_1093
+if 
+  99@ == 0 
+jf @STEAL2_6462 
+if 
+  100@ == 0 
+jf @STEAL2_1666 
+gosub @STEAL2_26522 
+if 
+  114@ == 0 
+jf @STEAL2_1182 
+112@ = 1 
+113@ = 0 
+gosub @STEAL2_30346 
+114@ = 1 
+
+:STEAL2_1182
+if 
+  114@ == 1 
+jf @STEAL2_1262 
+if 
+  112@ == 0 
+jf @STEAL2_1262 
+00BB: show_text_lowpriority GXT 'STE2_01' time 7000 flag 1  // ~s~Go and get the cars from the ~y~car showroom~s~.
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+33@ = 0 
+114@ = 2 
+
+:STEAL2_1262
+if 
+  114@ == 2 
+jf @STEAL2_1366 
+if 
+  33@ > 7000 
+jf @STEAL2_1366 
+if 
+  112@ == 0 
+jf @STEAL2_1366 
+112@ = 2 
+113@ = 0 
+gosub @STEAL2_30346 
+33@ = 0 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 3 
+
+:STEAL2_1366
+if 
+  114@ == 3 
+jf @STEAL2_1449 
+if 
+  33@ > 7000 
+jf @STEAL2_1449 
+if 
+  112@ == 0 
+jf @STEAL2_1449 
+112@ = 3 
+113@ = 0 
+gosub @STEAL2_30346 
+114@ = 4 
+
+:STEAL2_1449
+if 
+  114@ == 4 
+jf @STEAL2_1506 
+if 
+  112@ == 0 
+jf @STEAL2_1506 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 5 
+
+:STEAL2_1506
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_1666 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1632.9 1207.4 6.1 radius 4.0 4.0 4.0 
+jf @STEAL2_1666 
+if 
+00FE:   actor $ACTOR_CESAR sphere 1 in_sphere -1632.9 1207.4 6.1 radius 4.0 4.0 4.0 
+jf @STEAL2_1666 
+Player.CanMove($PLAYER_CHAR) = False
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+112@ = 0 
+100@ = 1 
+
+:STEAL2_1666
+if 
+  100@ == 1 
+jf @STEAL2_2155 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at -1662.3 1211.0 13.4 radius 15.0 
+Car.DoorStatus(35@) = 1
+Marker.Disable(98@)
+0395: clear_area 1 at -1656.7 1213.8 12.7 radius 1.0 
+96@ = Actor.Create(Mission1, #WMYBU, -1656.7, 1213.8, 12.7)
+Actor.Angle(96@) = 132.3
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_1839 
+06C9: remove_actor $ACTOR_CESAR from_group 
+0687: clear_actor $ACTOR_CESAR task 
+
+:STEAL2_1839
+0615: define_AS_pack_begin 171@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -1642.3 1204.1 6.2 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1651.2 1204.0 6.2 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1663.5 1204.2 6.2 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+0615: define_AS_pack_begin 171@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -1640.3 1204.4 6.2 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1651.7 1205.0 6.2 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1662.3 1204.8 6.2 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+112@ = 4 
+0209: 113@ = random_int_in_ranges 0 3 
+0085: 159@ = 113@ // (int) 
+159@ += 1 
+gosub @STEAL2_30346 
+Camera.SetPosition(-1624.5, 1201.5, 7.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-1664.6, 1207.1, 10.9, 2)
+101@ = 1 
+0707: start_scene_skip_to @STEAL2_3026 
+32@ = 0 
+114@ = 0 
+100@ = 2 
+
+:STEAL2_2155
+if 
+  100@ == 2 
+jf @STEAL2_2731 
+if 
+  114@ == 0 
+jf @STEAL2_2254 
+if 
+  112@ == 0 
+jf @STEAL2_2254 
+112@ = 4 
+0209: 113@ = random_int_in_ranges 3 6 
+0085: 159@ = 113@ // (int) 
+159@ += 1 
+gosub @STEAL2_30346 
+114@ = 1 
+
+:STEAL2_2254
+if 
+  114@ == 1 
+jf @STEAL2_2335 
+if 
+  112@ == 0 
+jf @STEAL2_2335 
+112@ = 4 
+0209: 113@ = random_int_in_ranges 6 9 
+0085: 159@ = 113@ // (int) 
+159@ += 1 
+gosub @STEAL2_30346 
+114@ = 2 
+
+:STEAL2_2335
+if 
+  32@ > 8000 
+jf @STEAL2_2731 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 1 at -1659.6 1203.3 11.4 radius 400.0 
+Actor.PutAt($PLAYER_ACTOR, -1659.6, 1203.3, 11.4)
+Actor.Angle($PLAYER_ACTOR) = 96.8
+0792: disembark_instantly_actor $ACTOR_CESAR 
+0395: clear_area 1 at -1659.8 1205.0 11.4 radius 1.0 
+Actor.PutAt($ACTOR_CESAR, -1659.8, 1205.0, 11.4)
+Actor.Angle($ACTOR_CESAR) = 91.3
+0615: define_AS_pack_begin 171@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -1662.6 1202.6 12.7 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1666.0 1208.8 12.7 mode 4 time -1 ms // versionA 
+05CB: AS_actor -1 enter_car 35@ as_driver -1 ms 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+0615: define_AS_pack_begin 171@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -1662.7 1204.8 12.7 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1662.9 1206.5 12.7 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1660.3 1208.8 12.7 mode 4 time -1 ms // versionA 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05CB: AS_actor -1 enter_car 34@ as_driver -1 ms 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+Camera.SetPosition(-1661.1, 1219.7, 15.15, 0.0, 0.0, 0.0)
+Camera.PointAt(-1658.9, 1204.6, 13.85, 2)
+32@ = 0 
+100@ = 3 
+
+:STEAL2_2731
+if 
+  100@ == 3 
+jf @STEAL2_2832 
+062E: get_actor $ACTOR_CESAR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @STEAL2_2832 
+0646: unknown_get_actor $ACTOR_CESAR task_1560_status_store_to 107@ // similar to 062E 
+if 
+  107@ == 2 
+jf @STEAL2_2832 
+112@ = 5 
+113@ = 0 
+gosub @STEAL2_30346 
+100@ = 4 
+
+:STEAL2_2832
+if 
+  100@ == 4 
+jf @STEAL2_2983 
+if 
+  113@ == 2 
+jf @STEAL2_2983 
+if 
+   not Actor.Dead(96@)
+jf @STEAL2_2976 
+0615: define_AS_pack_begin 171@ 
+05D3: AS_actor -1 goto_point -1660.6 1210.1 12.7 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1664.0 1205.3 12.7 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point -1651.3 1203.2 6.2 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor 96@ to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+
+:STEAL2_2976
+100@ = 5 
+
+:STEAL2_2983
+if 
+  100@ == 5 
+jf @STEAL2_5717 
+if 
+  112@ == 0 
+jf @STEAL2_5717 
+101@ = 0 
+
+:STEAL2_3026
+0701: end_scene_skip 
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_3060 
+jump @STEAL2_26060 
+
+:STEAL2_3060
+if 
+  101@ == 1 
+jf @STEAL2_3244 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+112@ = 0 
+fade 0 500 
+
+:STEAL2_3102
+if 
+fading 
+jf @STEAL2_3126 
+wait 0 
+jump @STEAL2_3102 
+
+:STEAL2_3126
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_3158 
+jump @STEAL2_26060 
+
+:STEAL2_3158
+if 
+   not Actor.Dead(96@)
+jf @STEAL2_3218 
+0395: clear_area 1 at -1651.3 1203.2 6.2 radius 1.0 
+Actor.PutAt(96@, -1651.3, 1203.2, 6.2)
+
+:STEAL2_3218
+0792: disembark_instantly_actor $ACTOR_CESAR 
+036A: put_actor $ACTOR_CESAR in_car 34@ 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:STEAL2_3244
+if 
+   Actor.InCar($ACTOR_CESAR, 34@)
+jf @STEAL2_5717 
+if 
+   Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_5717 
+Car.LockInCurrentPosition(34@) = False
+Car.LockInCurrentPosition(35@) = False
+Actor.RemoveReferences(96@)
+Model.Destroy(#WMYBU)
+Model.Load(#MULE)
+Model.Load(#CARDBOARDBOX)
+Model.Load(#TRAM)
+038B: load_requested_models 
+0506: set_car_model #MULE next_variation 1 1 // first param is useless 
+0395: clear_area 1 at -1580.1 938.2 6.8 radius 5.0 
+04AF: 110@ = 414 // = constant 
+gosub @STEAL2_27802 
+36@ = Car.Create(#MULE, -1580.1, 938.2, 6.8)
+Car.Angle(36@) = 90.0
+0587: enable_car 36@ validate_position 1 
+0395: clear_area 1 at -1576.0 938.9 6.5 radius 5.0 
+0376: 58@ = create_random_actor_at -1576.0 938.9 6.5 
+Actor.Angle(58@) = 84.9
+060B: set_actor 58@ decision_maker_to 170@ 
+0395: clear_area 1 at -1575.1 940.7 6.4 radius 10.0 
+80@ = Object.Create(#CARDBOARDBOX, -1575.1, 940.7, 6.4)
+Object.CollisionDetection(80@) = True
+Object.ToggleInMovingList(80@) = True
+81@ = Object.Create(#CARDBOARDBOX, -1574.9, 941.7, 6.4)
+Object.CollisionDetection(81@) = True
+Object.ToggleInMovingList(81@) = True
+82@ = Object.Create(#CARDBOARDBOX, -1573.1, 942.7, 6.4)
+Object.CollisionDetection(82@) = True
+Object.ToggleInMovingList(82@) = True
+83@ = Object.Create(#CARDBOARDBOX, -1575.1, 940.7, 7.0)
+Object.CollisionDetection(83@) = True
+Object.ToggleInMovingList(83@) = True
+84@ = Object.Create(#CARDBOARDBOX, -1573.1, 942.7, 7.0)
+Object.CollisionDetection(84@) = True
+Object.ToggleInMovingList(84@) = True
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_3811 
+0395: clear_area 1 at -1626.9 1202.5 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+38@ = Car.Create(108@, -1626.9, 1202.5, 5.7)
+Car.Angle(38@) = 222.7
+Car.DoorStatus(38@) = 2
+0560: create_random_actor_in_car 38@ handle_as 60@ 
+0587: enable_car 38@ validate_position 1 
+054A: set_actor 60@ can_be_shot_in_a_car 0 
+
+:STEAL2_3811
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_3940 
+0395: clear_area 1 at -1609.2 1160.4 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+39@ = Car.Create(108@, -1609.2, 1160.4, 5.7)
+Car.Angle(39@) = 184.3
+Car.DoorStatus(39@) = 2
+0560: create_random_actor_in_car 39@ handle_as 61@ 
+0587: enable_car 39@ validate_position 1 
+054A: set_actor 61@ can_be_shot_in_a_car 0 
+
+:STEAL2_3940
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4069 
+0395: clear_area 1 at -1600.9 1111.7 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+40@ = Car.Create(108@, -1600.9, 1111.7, 5.7)
+Car.Angle(40@) = 183.3
+Car.DoorStatus(40@) = 2
+0560: create_random_actor_in_car 40@ handle_as 62@ 
+0587: enable_car 40@ validate_position 1 
+054A: set_actor 62@ can_be_shot_in_a_car 0 
+
+:STEAL2_4069
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4198 
+0395: clear_area 1 at -1608.2 1094.0 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+41@ = Car.Create(108@, -1608.2, 1094.0, 5.7)
+Car.Angle(41@) = 180.0
+Car.DoorStatus(41@) = 2
+0560: create_random_actor_in_car 41@ handle_as 63@ 
+0587: enable_car 41@ validate_position 1 
+054A: set_actor 63@ can_be_shot_in_a_car 0 
+
+:STEAL2_4198
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4327 
+0395: clear_area 1 at -1608.2 1046.5 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+42@ = Car.Create(108@, -1608.2, 1046.5, 5.7)
+Car.Angle(42@) = 183.5
+Car.DoorStatus(42@) = 2
+0560: create_random_actor_in_car 42@ handle_as 64@ 
+0587: enable_car 42@ validate_position 1 
+054A: set_actor 64@ can_be_shot_in_a_car 0 
+
+:STEAL2_4327
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4456 
+0395: clear_area 1 at -1595.7 1012.0 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+43@ = Car.Create(108@, -1595.7, 1012.0, 5.7)
+Car.Angle(43@) = 207.3
+Car.DoorStatus(43@) = 2
+0560: create_random_actor_in_car 43@ handle_as 65@ 
+0587: enable_car 43@ validate_position 1 
+054A: set_actor 65@ can_be_shot_in_a_car 0 
+
+:STEAL2_4456
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4585 
+0395: clear_area 1 at -1540.5 959.8 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+44@ = Car.Create(108@, -1540.5, 959.8, 5.7)
+Car.Angle(44@) = 24.3
+Car.DoorStatus(44@) = 2
+0560: create_random_actor_in_car 44@ handle_as 66@ 
+0587: enable_car 44@ validate_position 1 
+054A: set_actor 66@ can_be_shot_in_a_car 0 
+
+:STEAL2_4585
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4714 
+0395: clear_area 1 at -1556.0 995.6 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+45@ = Car.Create(108@, -1556.0, 995.6, 5.7)
+Car.Angle(45@) = 41.0
+Car.DoorStatus(45@) = 2
+0560: create_random_actor_in_car 45@ handle_as 67@ 
+0587: enable_car 45@ validate_position 1 
+054A: set_actor 67@ can_be_shot_in_a_car 0 
+
+:STEAL2_4714
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4843 
+0395: clear_area 1 at -1587.6 1036.7 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+46@ = Car.Create(108@, -1587.6, 1036.7, 5.7)
+Car.Angle(46@) = 3.3
+Car.DoorStatus(46@) = 2
+0560: create_random_actor_in_car 46@ handle_as 68@ 
+0587: enable_car 46@ validate_position 1 
+054A: set_actor 68@ can_be_shot_in_a_car 0 
+
+:STEAL2_4843
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_4972 
+0395: clear_area 1 at -1579.6 1140.1 5.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+48@ = Car.Create(108@, -1579.6, 1140.1, 5.7)
+Car.Angle(48@) = 2.0
+Car.DoorStatus(48@) = 2
+0560: create_random_actor_in_car 48@ handle_as 70@ 
+0587: enable_car 48@ validate_position 1 
+054A: set_actor 70@ can_be_shot_in_a_car 0 
+
+:STEAL2_4972
+0395: clear_area 1 at -1542.9 974.0 5.3 radius 5.0 
+06D8: 95@ = create_train_at -1542.9 974.0 5.3 type 9 direction 0 
+06DC: set_train 95@ acc 0.0 
+06DD: set_train 95@ speed 0.0 
+Car.DoorStatus(95@) = 2
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_5176 
+0395: clear_area 1 at -1592.8 934.7 6.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+49@ = Car.Create(108@, -1592.8, 934.7, 6.2)
+Car.Angle(49@) = 91.3
+Car.DoorStatus(49@) = 2
+0560: create_random_actor_in_car 49@ handle_as 71@ 
+0587: enable_car 49@ validate_position 1 
+054A: set_actor 71@ can_be_shot_in_a_car 0 
+
+:STEAL2_5176
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_5305 
+0395: clear_area 1 at -1608.8 934.3 6.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+50@ = Car.Create(108@, -1608.8, 934.3, 6.2)
+Car.Angle(50@) = 91.3
+Car.DoorStatus(50@) = 2
+0560: create_random_actor_in_car 50@ handle_as 72@ 
+0587: enable_car 50@ validate_position 1 
+054A: set_actor 72@ can_be_shot_in_a_car 0 
+
+:STEAL2_5305
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_5434 
+0395: clear_area 1 at -1704.4 916.0 23.4 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+51@ = Car.Create(108@, -1704.4, 916.0, 23.4)
+Car.Angle(51@) = 269.1
+Car.DoorStatus(51@) = 2
+0560: create_random_actor_in_car 51@ handle_as 73@ 
+0587: enable_car 51@ validate_position 1 
+054A: set_actor 73@ can_be_shot_in_a_car 0 
+
+:STEAL2_5434
+0395: clear_area 1 at -1642.2 1210.5 6.2 radius 15.0 
+0376: 97@ = create_random_actor_at -1642.2 1210.5 6.2 
+060B: set_actor 97@ decision_maker_to 170@ 
+0615: define_AS_pack_begin 171@ 
+05D3: AS_actor -1 goto_point -1645.5 1214.0 6.2 mode 4 time -1 ms // versionA 
+0605: actor -1 perform_animation "COWER" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 30000 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor 97@ to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+01EB: set_traffic_density_multiplier_to 0.0 
+Camera.SetPosition(-1640.4, 1212.9, 6.6, 0.0, 0.0, 0.0)
+Camera.PointAt(-1651.3, 1215.3, 10.6, 2)
+if 
+  101@ == 1 
+jf @STEAL2_5703 
+fade 1 500 
+
+:STEAL2_5647
+if 
+fading 
+jf @STEAL2_5671 
+wait 0 
+jump @STEAL2_5647 
+
+:STEAL2_5671
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_5703 
+jump @STEAL2_26060 
+
+:STEAL2_5703
+32@ = 0 
+100@ = 6 
+
+:STEAL2_5717
+if 
+  100@ == 6 
+jf @STEAL2_5971 
+if 
+   not Actor.Dead(97@)
+jf @STEAL2_5971 
+if 
+00EC:   actor 97@ sphere 0 near_point -1646.0 1214.4 radius 2.0 2.0 
+jf @STEAL2_5971 
+05EB: assign_car 34@ to_path 70 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_5819 
+05EB: assign_car 38@ to_path 71 
+
+:STEAL2_5819
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_5842 
+05EB: assign_car 39@ to_path 72 
+
+:STEAL2_5842
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_5865 
+05EB: assign_car 40@ to_path 73 
+
+:STEAL2_5865
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_5888 
+05EB: assign_car 41@ to_path 74 
+
+:STEAL2_5888
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_5911 
+05EB: assign_car 42@ to_path 75 
+
+:STEAL2_5911
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_5934 
+05EB: assign_car 43@ to_path 76 
+
+:STEAL2_5934
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_5957 
+05EB: assign_car 95@ to_path 77 
+
+:STEAL2_5957
+32@ = 0 
+100@ = 7 
+
+:STEAL2_5971
+if 
+  100@ == 7 
+jf @STEAL2_6036 
+if 
+  32@ > 500 
+jf @STEAL2_6036 
+112@ = 6 
+113@ = 0 
+gosub @STEAL2_30346 
+100@ = 8 
+
+:STEAL2_6036
+if 
+  100@ == 8 
+jf @STEAL2_6372 
+if 
+  32@ > 2500 
+jf @STEAL2_6372 
+if 
+   not Actor.Dead(97@)
+jf @STEAL2_6107 
+05DD: AS_actor 97@ flee_from_actor $PLAYER_ACTOR from_origin_radius 200.0 timelimit 600000 
+
+:STEAL2_6107
+05ED: freeze_car 34@ while_on_path 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_6133 
+05ED: freeze_car 38@ while_on_path 
+
+:STEAL2_6133
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_6154 
+05ED: freeze_car 39@ while_on_path 
+
+:STEAL2_6154
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_6175 
+05ED: freeze_car 40@ while_on_path 
+
+:STEAL2_6175
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_6196 
+05ED: freeze_car 41@ while_on_path 
+
+:STEAL2_6196
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_6217 
+05ED: freeze_car 42@ while_on_path 
+
+:STEAL2_6217
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_6238 
+05ED: freeze_car 43@ while_on_path 
+
+:STEAL2_6238
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_6259 
+05ED: freeze_car 95@ while_on_path 
+
+:STEAL2_6259
+03DE: set_pedestrians_density_multiplier_to 0.5 
+09F5: disable_player_mutal_activities 0 
+98@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 98@ type_to 1 
+Actor.RemoveReferences(97@)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BB: show_text_lowpriority GXT 'STE2_02' time 7000 flag 1  // ~s~Stay close to ~b~Cesar~s~ as you return to the garage.
+32@ = 0 
+33@ = 0 
+114@ = 0 
+105@ = 1 
+100@ = 0 
+99@ = 1 
+
+:STEAL2_6372
+if 
+  100@ == 0 
+jf @STEAL2_6462 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @STEAL2_6462 
+Camera.SetAtPos(-1638.7, 1199.4, 6.2)
+Actor.PutAt($PLAYER_ACTOR, -1638.7, 1199.4, 6.2)
+Actor.PutAt($ACTOR_CESAR, -1639.7, 1199.4, 6.2)
+
+:STEAL2_6462
+if 
+  99@ == 1 
+jf @STEAL2_7440 
+if 
+  114@ == 0 
+jf @STEAL2_6577 
+if 
+  112@ == 0 
+jf @STEAL2_6577 
+if 
+  33@ > 7000 
+jf @STEAL2_6577 
+112@ = 7 
+113@ = 0 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_6577
+if 
+  114@ == 1 
+jf @STEAL2_6634 
+if 
+  112@ == 0 
+jf @STEAL2_6634 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 2 
+
+:STEAL2_6634
+if 
+  103@ == 0 
+jf @STEAL2_6652 
+
+:STEAL2_6652
+if 
+  100@ == 0 
+jf @STEAL2_6725 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere -1656.2 1210.2 12.3 radius 7.0 7.0 7.0 
+jf @STEAL2_6725 
+100@ = 1 
+
+:STEAL2_6725
+if 
+  100@ == 1 
+jf @STEAL2_7036 
+05EE: unfreeze_car 34@ while_on_path 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_6769 
+05EE: unfreeze_car 38@ while_on_path 
+
+:STEAL2_6769
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_6790 
+05EE: unfreeze_car 39@ while_on_path 
+
+:STEAL2_6790
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_6811 
+05EE: unfreeze_car 40@ while_on_path 
+
+:STEAL2_6811
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_6832 
+05EE: unfreeze_car 41@ while_on_path 
+
+:STEAL2_6832
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_6853 
+05EE: unfreeze_car 42@ while_on_path 
+
+:STEAL2_6853
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_6874 
+05EE: unfreeze_car 43@ while_on_path 
+
+:STEAL2_6874
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_6895 
+05EE: unfreeze_car 95@ while_on_path 
+
+:STEAL2_6895
+if 
+   not Car.Wrecked(44@)
+jf @STEAL2_6926 
+Car.SetMaxSpeed(44@, 15.0)
+Car.SetToPsychoDriver(44@)
+
+:STEAL2_6926
+if 
+   not Car.Wrecked(45@)
+jf @STEAL2_6957 
+Car.SetMaxSpeed(45@, 15.0)
+Car.SetToPsychoDriver(45@)
+
+:STEAL2_6957
+if 
+   not Car.Wrecked(46@)
+jf @STEAL2_6988 
+Car.SetMaxSpeed(46@, 15.0)
+Car.SetToPsychoDriver(46@)
+
+:STEAL2_6988
+if 
+   not Car.Wrecked(48@)
+jf @STEAL2_7019 
+Car.SetMaxSpeed(48@, 15.0)
+Car.SetToPsychoDriver(48@)
+
+:STEAL2_7019
+Model.Load(#COPCARSF)
+Model.Load(#SFPD1)
+100@ = 2 
+
+:STEAL2_7036
+if 
+  100@ == 2 
+jf @STEAL2_7440 
+gosub @STEAL2_26961 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_7440 
+05EB: assign_car 34@ to_path 79 
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_7107 
+05EB: assign_car 95@ to_path 78 
+
+:STEAL2_7107
+if 
+   not Car.Wrecked(49@)
+jf @STEAL2_7163 
+Car.SetSpeedInstantly(49@, 15.0)
+Car.SetMaxSpeed(49@, 15.0)
+Car.DriveTo(49@, -1881.4, 1038.7, 44.8)
+
+:STEAL2_7163
+if 
+   not Car.Wrecked(50@)
+jf @STEAL2_7219 
+Car.SetSpeedInstantly(50@, 15.0)
+Car.SetMaxSpeed(50@, 15.0)
+Car.DriveTo(50@, -1880.1, 1029.8, 44.8)
+
+:STEAL2_7219
+if 
+   not Car.Wrecked(51@)
+jf @STEAL2_7260 
+Car.SetSpeedInstantly(51@, 15.0)
+Car.SetMaxSpeed(51@, 15.0)
+Car.SetToPsychoDriver(51@)
+
+:STEAL2_7260
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(70@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(46@)
+Car.RemoveReferences(48@)
+Object.RemoveReferences(80@)
+Object.RemoveReferences(81@)
+Object.RemoveReferences(82@)
+Object.RemoveReferences(83@)
+Object.RemoveReferences(84@)
+Model.Destroy(#MULE)
+Model.Destroy(#CARDBOARDBOX)
+33@ = 0 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 2 
+
+:STEAL2_7440
+if 
+  99@ == 2 
+jf @STEAL2_9701 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_7550 
+if 
+  112@ == 0 
+jf @STEAL2_7550 
+112@ = 8 
+113@ = 0 
+159@ = 1 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_7550
+if 
+  114@ == 1 
+jf @STEAL2_7659 
+if 
+01AD:   car 34@ sphere 0 near_point -1702.4 921.4 radius 3.0 3.0 
+jf @STEAL2_7659 
+if 
+  112@ == 0 
+jf @STEAL2_7659 
+112@ = 8 
+113@ = 1 
+159@ = 2 
+gosub @STEAL2_30346 
+114@ = 2 
+
+:STEAL2_7659
+if 
+  114@ == 2 
+jf @STEAL2_7716 
+if 
+  112@ == 0 
+jf @STEAL2_7716 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 3 
+
+:STEAL2_7716
+if 
+  103@ == 0 
+jf @STEAL2_7734 
+
+:STEAL2_7734
+if 
+  100@ == 0 
+jf @STEAL2_7769 
+Model.Load(#COPCARSF)
+Model.Load(#SFPD1)
+100@ = 1 
+
+:STEAL2_7769
+if 
+  100@ == 1 
+jf @STEAL2_9444 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_7916 
+0395: clear_area 1 at -1802.9 853.6 23.4 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+37@ = Car.Create(108@, -1802.9, 853.6, 23.4)
+Car.Angle(37@) = 89.3
+Car.DoorStatus(37@) = 2
+0560: create_random_actor_in_car 37@ handle_as 59@ 
+0587: enable_car 37@ validate_position 1 
+054A: set_actor 59@ can_be_shot_in_a_car 0 
+
+:STEAL2_7916
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8045 
+0395: clear_area 1 at -1852.2 836.7 33.8 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+39@ = Car.Create(108@, -1852.2, 836.7, 33.8)
+Car.Angle(39@) = 270.9
+Car.DoorStatus(39@) = 2
+0560: create_random_actor_in_car 39@ handle_as 61@ 
+0587: enable_car 39@ validate_position 1 
+054A: set_actor 61@ can_be_shot_in_a_car 0 
+
+:STEAL2_8045
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8174 
+0395: clear_area 1 at -1876.7 836.3 33.8 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+40@ = Car.Create(108@, -1876.7, 836.3, 33.8)
+Car.Angle(40@) = 270.9
+Car.DoorStatus(40@) = 2
+0560: create_random_actor_in_car 40@ handle_as 62@ 
+0587: enable_car 40@ validate_position 1 
+054A: set_actor 62@ can_be_shot_in_a_car 0 
+
+:STEAL2_8174
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8303 
+0395: clear_area 1 at -1903.1 826.2 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+42@ = Car.Create(108@, -1903.1, 826.2, 33.7)
+Car.Angle(42@) = 178.0
+Car.DoorStatus(42@) = 2
+0560: create_random_actor_in_car 42@ handle_as 64@ 
+0587: enable_car 42@ validate_position 1 
+054A: set_actor 64@ can_be_shot_in_a_car 0 
+
+:STEAL2_8303
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8432 
+0395: clear_area 1 at -1915.7 836.6 34.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+43@ = Car.Create(108@, -1915.7, 836.6, 34.2)
+Car.Angle(43@) = 272.0
+Car.DoorStatus(43@) = 2
+0560: create_random_actor_in_car 43@ handle_as 65@ 
+0587: enable_car 43@ validate_position 1 
+054A: set_actor 65@ can_be_shot_in_a_car 0 
+
+:STEAL2_8432
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8561 
+0395: clear_area 1 at -1902.8 866.4 34.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+44@ = Car.Create(108@, -1902.8, 866.4, 34.2)
+Car.Angle(44@) = 179.4
+Car.DoorStatus(44@) = 2
+0560: create_random_actor_in_car 44@ handle_as 66@ 
+0587: enable_car 44@ validate_position 1 
+054A: set_actor 66@ can_be_shot_in_a_car 0 
+
+:STEAL2_8561
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8690 
+0395: clear_area 1 at -1902.7 882.1 34.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+45@ = Car.Create(108@, -1902.7, 882.1, 34.2)
+Car.Angle(45@) = 179.4
+Car.DoorStatus(45@) = 2
+0560: create_random_actor_in_car 45@ handle_as 67@ 
+0587: enable_car 45@ validate_position 1 
+054A: set_actor 67@ can_be_shot_in_a_car 0 
+
+:STEAL2_8690
+0395: clear_area 1 at -1805.5 900.3 23.9 radius 5.0 
+0376: 68@ = create_random_actor_at -1805.5 900.3 23.9 
+Actor.Angle(68@) = 352.4
+0395: clear_area 1 at -1804.5 901.3 23.9 radius 5.0 
+0376: 69@ = create_random_actor_at -1804.5 901.3 23.9 
+Actor.Angle(69@) = 169.0
+0677: AS_actor 68@ chat_with_actor 69@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 69@ chat_with_actor 68@ lead_speaker_flag 0 unknown_flag 1 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_8951 
+0395: clear_area 1 at -1988.1 933.5 43.9 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+57@ = Car.Create(108@, -1988.1, 933.5, 43.9)
+Car.Angle(57@) = 85.7
+Car.DoorStatus(57@) = 2
+0560: create_random_actor_in_car 57@ handle_as 79@ 
+0587: enable_car 57@ validate_position 1 
+054A: set_actor 79@ can_be_shot_in_a_car 0 
+
+:STEAL2_8951
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_9080 
+0395: clear_area 1 at -2007.7 1039.2 55.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+52@ = Car.Create(108@, -2007.7, 1039.2, 55.2)
+Car.Angle(52@) = 178.1
+Car.DoorStatus(52@) = 2
+0560: create_random_actor_in_car 52@ handle_as 74@ 
+0587: enable_car 52@ validate_position 1 
+054A: set_actor 74@ can_be_shot_in_a_car 0 
+
+:STEAL2_9080
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_9209 
+0395: clear_area 1 at -2009.2 962.6 44.1 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+53@ = Car.Create(108@, -2009.2, 962.6, 44.1)
+Car.Angle(53@) = 179.8
+Car.DoorStatus(53@) = 2
+0560: create_random_actor_in_car 53@ handle_as 75@ 
+0587: enable_car 53@ validate_position 1 
+054A: set_actor 75@ can_be_shot_in_a_car 0 
+
+:STEAL2_9209
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_9323 
+0395: clear_area 1 at -1998.2 825.3 44.1 radius 5.0 
+54@ = Car.Create(#COPCARSF, -1998.2, 825.3, 44.1)
+Car.Angle(54@) = 6.4
+76@ = Actor.CreateAsDriver(Mission2, #SFPD1, 54@)
+00AE: set_car 54@ traffic_behaviour_to 2 
+Car.DoorStatus(54@) = 2
+0587: enable_car 54@ validate_position 1 
+054A: set_actor 76@ can_be_shot_in_a_car 0 
+
+:STEAL2_9323
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_9437 
+0395: clear_area 1 at -1997.5 815.6 44.1 radius 5.0 
+55@ = Car.Create(#COPCARSF, -1997.5, 815.6, 44.1)
+Car.Angle(55@) = 1.0
+77@ = Actor.CreateAsDriver(Mission2, #SFPD1, 55@)
+00AE: set_car 55@ traffic_behaviour_to 2 
+Car.DoorStatus(55@) = 2
+0587: enable_car 55@ validate_position 1 
+054A: set_actor 77@ can_be_shot_in_a_car 0 
+
+:STEAL2_9437
+100@ = 2 
+
+:STEAL2_9444
+if 
+  100@ == 2 
+jf @STEAL2_9701 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_9701 
+Car.RemoveReferences(51@)
+Actor.RemoveReferences(73@)
+05EB: assign_car 34@ to_path 81 
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_9518 
+05EB: assign_car 95@ to_path 80 
+
+:STEAL2_9518
+if 
+   not Car.Wrecked(37@)
+jf @STEAL2_9574 
+Car.SetSpeedInstantly(37@, 15.0)
+Car.SetMaxSpeed(37@, 15.0)
+Car.DriveTo(37@, -1881.4, 853.7, 35.7)
+
+:STEAL2_9574
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_9630 
+Car.SetSpeedInstantly(39@, 15.0)
+Car.SetMaxSpeed(39@, 15.0)
+Car.DriveTo(39@, -1717.8, 755.3, 24.8)
+
+:STEAL2_9630
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_9666 
+Car.SetSpeedInstantly(40@, 15.0)
+Car.SetMaxSpeed(40@, 15.0)
+
+:STEAL2_9666
+33@ = 0 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 3 
+
+:STEAL2_9701
+if 
+  99@ == 3 
+jf @STEAL2_10146 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_9849 
+if 
+01AD:   car 34@ sphere 0 near_point -1855.2 916.9 radius 3.0 3.0 
+jf @STEAL2_9849 
+if 
+  112@ == 0 
+jf @STEAL2_9849 
+112@ = 8 
+113@ = 2 
+159@ = 3 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_9849
+if 
+  114@ == 1 
+jf @STEAL2_9906 
+if 
+  112@ == 0 
+jf @STEAL2_9906 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 2 
+
+:STEAL2_9906
+if 
+  103@ == 0 
+jf @STEAL2_9924 
+
+:STEAL2_9924
+if 
+  100@ == 0 
+jf @STEAL2_9949 
+100@ = 1 
+
+:STEAL2_9949
+if 
+  100@ == 1 
+jf @STEAL2_10146 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_10146 
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(69@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Object.Destroy(80@)
+Object.Destroy(81@)
+Object.Destroy(82@)
+Object.Destroy(83@)
+Object.Destroy(84@)
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_10111 
+05EB: assign_car 95@ to_path 83 
+
+:STEAL2_10111
+05EB: assign_car 34@ to_path 84 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 4 
+
+:STEAL2_10146
+if 
+  99@ == 4 
+jf @STEAL2_12881 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_10256 
+if 
+  112@ == 0 
+jf @STEAL2_10256 
+112@ = 8 
+113@ = 3 
+159@ = 4 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_10256
+if 
+  114@ == 1 
+jf @STEAL2_10306 
+if 
+  112@ == 0 
+jf @STEAL2_10306 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+114@ = 2 
+
+:STEAL2_10306
+if 
+  114@ == 2 
+jf @STEAL2_10363 
+if 
+  112@ == 0 
+jf @STEAL2_10363 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 3 
+
+:STEAL2_10363
+if 
+  103@ == 0 
+jf @STEAL2_10381 
+
+:STEAL2_10381
+if 
+  100@ == 0 
+jf @STEAL2_11888 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_10528 
+0395: clear_area 1 at -2350.7 1091.2 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+36@ = Car.Create(108@, -2350.7, 1091.2, 54.2)
+Car.Angle(36@) = 72.3
+Car.DoorStatus(36@) = 2
+0560: create_random_actor_in_car 36@ handle_as 58@ 
+0587: enable_car 36@ validate_position 1 
+054A: set_actor 58@ can_be_shot_in_a_car 0 
+
+:STEAL2_10528
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_10657 
+0395: clear_area 1 at -2347.8 1081.2 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+37@ = Car.Create(108@, -2347.8, 1081.2, 54.2)
+Car.Angle(37@) = 73.7
+Car.DoorStatus(37@) = 2
+0560: create_random_actor_in_car 37@ handle_as 59@ 
+0587: enable_car 37@ validate_position 1 
+054A: set_actor 59@ can_be_shot_in_a_car 0 
+
+:STEAL2_10657
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_10793 
+0395: clear_area 1 at -2124.1 1080.8 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+38@ = Car.Create(108@, -2124.1, 1080.8, 54.2)
+Car.Angle(38@) = 90.7
+Car.DoorStatus(38@) = 2
+0560: create_random_actor_in_car 38@ handle_as 60@ 
+0714: unknown_car 38@ flag 1 
+0587: enable_car 38@ validate_position 1 
+054A: set_actor 60@ can_be_shot_in_a_car 0 
+
+:STEAL2_10793
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_10929 
+0395: clear_area 1 at -2132.0 1059.0 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+39@ = Car.Create(108@, -2132.0, 1059.0, 54.2)
+Car.Angle(39@) = 269.2
+Car.DoorStatus(39@) = 2
+0560: create_random_actor_in_car 39@ handle_as 61@ 
+0466: unknown_car 39@ flag 1 
+0587: enable_car 39@ validate_position 1 
+054A: set_actor 61@ can_be_shot_in_a_car 0 
+
+:STEAL2_10929
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11065 
+0395: clear_area 1 at -2166.7 1050.8 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+40@ = Car.Create(108@, -2166.7, 1050.8, 54.2)
+Car.Angle(40@) = 270.2
+Car.DoorStatus(40@) = 2
+0560: create_random_actor_in_car 40@ handle_as 62@ 
+0714: unknown_car 40@ flag 1 
+0587: enable_car 40@ validate_position 1 
+054A: set_actor 62@ can_be_shot_in_a_car 0 
+
+:STEAL2_11065
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11201 
+0395: clear_area 1 at -2231.0 1059.8 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+41@ = Car.Create(108@, -2231.0, 1059.8, 54.2)
+Car.Angle(41@) = 268.2
+Car.DoorStatus(41@) = 2
+0560: create_random_actor_in_car 41@ handle_as 63@ 
+0466: unknown_car 41@ flag 1 
+0587: enable_car 41@ validate_position 1 
+054A: set_actor 63@ can_be_shot_in_a_car 0 
+
+:STEAL2_11201
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11337 
+0395: clear_area 1 at -2299.5 1052.1 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+42@ = Car.Create(108@, -2299.5, 1052.1, 54.2)
+Car.Angle(42@) = 272.2
+Car.DoorStatus(42@) = 2
+0560: create_random_actor_in_car 42@ handle_as 64@ 
+0714: unknown_car 42@ flag 1 
+0587: enable_car 42@ validate_position 1 
+054A: set_actor 64@ can_be_shot_in_a_car 0 
+
+:STEAL2_11337
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11473 
+0395: clear_area 1 at -2338.1 1066.2 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+43@ = Car.Create(108@, -2338.1, 1066.2, 54.2)
+Car.Angle(43@) = 255.2
+Car.DoorStatus(43@) = 2
+0560: create_random_actor_in_car 43@ handle_as 65@ 
+0466: unknown_car 43@ flag 1 
+0587: enable_car 43@ validate_position 1 
+054A: set_actor 65@ can_be_shot_in_a_car 0 
+
+:STEAL2_11473
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11609 
+0395: clear_area 1 at -2344.3 1058.8 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+44@ = Car.Create(108@, -2344.3, 1058.8, 54.2)
+Car.Angle(44@) = 257.1
+Car.DoorStatus(44@) = 2
+0560: create_random_actor_in_car 44@ handle_as 66@ 
+0714: unknown_car 44@ flag 1 
+0587: enable_car 44@ validate_position 1 
+054A: set_actor 66@ can_be_shot_in_a_car 0 
+
+:STEAL2_11609
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11745 
+0395: clear_area 1 at -2446.5 1097.0 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+45@ = Car.Create(108@, -2446.5, 1097.0, 54.2)
+Car.Angle(45@) = 266.7
+Car.DoorStatus(45@) = 2
+0560: create_random_actor_in_car 45@ handle_as 67@ 
+0466: unknown_car 45@ flag 1 
+0587: enable_car 45@ validate_position 1 
+054A: set_actor 67@ can_be_shot_in_a_car 0 
+
+:STEAL2_11745
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_11881 
+0395: clear_area 1 at -2427.5 1087.2 54.2 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+46@ = Car.Create(108@, -2427.5, 1087.2, 54.2)
+Car.Angle(46@) = 261.0
+Car.DoorStatus(46@) = 2
+0560: create_random_actor_in_car 46@ handle_as 68@ 
+0714: unknown_car 46@ flag 1 
+0587: enable_car 46@ validate_position 1 
+054A: set_actor 68@ can_be_shot_in_a_car 0 
+
+:STEAL2_11881
+100@ = 1 
+
+:STEAL2_11888
+if 
+  100@ == 1 
+jf @STEAL2_12230 
+if 
+01AD:   car 34@ sphere 0 near_point -1990.0 838.0 radius 3.0 3.0 
+jf @STEAL2_12230 
+if 
+   not Car.Wrecked(51@)
+jf @STEAL2_11967 
+05EB: assign_car 51@ to_path 85 
+
+:STEAL2_11967
+if 
+   not Car.Wrecked(52@)
+jf @STEAL2_12023 
+Car.SetSpeedInstantly(52@, 15.0)
+Car.SetMaxSpeed(52@, 15.0)
+Car.DriveTo(52@, -2008.2, 581.2, 35.3)
+
+:STEAL2_12023
+if 
+   not Car.Wrecked(53@)
+jf @STEAL2_12079 
+Car.SetSpeedInstantly(53@, 15.0)
+Car.SetMaxSpeed(53@, 15.0)
+Car.DriveTo(53@, -2008.2, 571.2, 35.3)
+
+:STEAL2_12079
+if 
+   not Car.Wrecked(54@)
+jf @STEAL2_12151 
+Car.SetSpeedInstantly(54@, 15.0)
+Car.SetMaxSpeed(54@, 40.0)
+if 
+   not Car.Wrecked(34@)
+jf @STEAL2_12151 
+07F8: car 54@ follow_car 34@ radius 10.0 
+0397: enable_car 54@ siren 1 
+
+:STEAL2_12151
+if 
+   not Car.Wrecked(55@)
+jf @STEAL2_12223 
+Car.SetSpeedInstantly(55@, 15.0)
+Car.SetMaxSpeed(55@, 40.0)
+if 
+   not Car.Wrecked(34@)
+jf @STEAL2_12223 
+07F8: car 55@ follow_car 34@ radius 20.0 
+0397: enable_car 55@ siren 1 
+
+:STEAL2_12223
+100@ = 2 
+
+:STEAL2_12230
+if 
+  100@ == 2 
+jf @STEAL2_12881 
+Model.Load(#COACH)
+Model.Load(#PCJ600)
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_12881 
+Actor.RemoveReferences(79@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Car.RemoveReferences(57@)
+Car.RemoveReferences(52@)
+Car.RemoveReferences(53@)
+Car.RemoveReferences(54@)
+Car.RemoveReferences(55@)
+Car.RemoveReferences(95@)
+Model.Destroy(#TRAM)
+05EB: assign_car 34@ to_path 86 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_12364 
+05EB: assign_car 38@ to_path 87 
+
+:STEAL2_12364
+if 
+   not Car.Wrecked(51@)
+jf @STEAL2_12401 
+if 
+860E:   not car 51@ assigned_to_path 
+jf @STEAL2_12401 
+05EC: release_car 51@ from_path 
+
+:STEAL2_12401
+0873: release_path 85 
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_12461 
+Car.SetSpeedInstantly(39@, 15.0)
+Car.SetMaxSpeed(39@, 15.0)
+Car.DriveTo(39@, -1896.9, 1060.1, 44.2)
+
+:STEAL2_12461
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_12517 
+Car.SetSpeedInstantly(40@, 15.0)
+Car.SetMaxSpeed(40@, 15.0)
+Car.DriveTo(40@, -1896.9, 1050.1, 44.2)
+
+:STEAL2_12517
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_12573 
+Car.SetSpeedInstantly(41@, 15.0)
+Car.SetMaxSpeed(41@, 15.0)
+Car.DriveTo(41@, -1906.9, 1060.1, 48.2)
+
+:STEAL2_12573
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_12629 
+Car.SetSpeedInstantly(42@, 15.0)
+Car.SetMaxSpeed(42@, 15.0)
+Car.DriveTo(42@, -1906.9, 1050.1, 48.2)
+
+:STEAL2_12629
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_12685 
+Car.SetSpeedInstantly(43@, 15.0)
+Car.SetMaxSpeed(43@, 15.0)
+Car.DriveTo(43@, -1916.9, 1060.1, 52.2)
+
+:STEAL2_12685
+if 
+   not Car.Wrecked(44@)
+jf @STEAL2_12741 
+Car.SetSpeedInstantly(44@, 15.0)
+Car.SetMaxSpeed(44@, 15.0)
+Car.DriveTo(44@, -1916.9, 1050.1, 52.2)
+
+:STEAL2_12741
+if 
+   not Car.Wrecked(45@)
+jf @STEAL2_12797 
+Car.SetSpeedInstantly(45@, 15.0)
+Car.SetMaxSpeed(45@, 15.0)
+Car.DriveTo(45@, -1926.9, 1060.1, 56.2)
+
+:STEAL2_12797
+if 
+   not Car.Wrecked(46@)
+jf @STEAL2_12853 
+Car.SetSpeedInstantly(46@, 15.0)
+Car.SetMaxSpeed(46@, 15.0)
+Car.DriveTo(46@, -1926.9, 1050.1, 56.2)
+
+:STEAL2_12853
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 5 
+
+:STEAL2_12881
+if 
+  99@ == 5 
+jf @STEAL2_14411 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_12991 
+if 
+  112@ == 0 
+jf @STEAL2_12991 
+112@ = 8 
+113@ = 4 
+159@ = 5 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_12991
+if 
+  114@ == 1 
+jf @STEAL2_13032 
+03E5: show_text_box 'STE2_03'  // Press ~k~~PED_FIREWEAPON~ to trigger a nitro.
+09E9: car 34@ set_single_nitro 
+114@ = 2 
+
+:STEAL2_13032
+if 
+  114@ == 2 
+jf @STEAL2_13141 
+if 
+01AD:   car 34@ sphere 0 near_point -2319.8 1080.2 radius 3.0 3.0 
+jf @STEAL2_13141 
+if 
+  112@ == 0 
+jf @STEAL2_13141 
+112@ = 8 
+113@ = 5 
+159@ = 6 
+gosub @STEAL2_30346 
+114@ = 3 
+
+:STEAL2_13141
+if 
+  114@ == 3 
+jf @STEAL2_13198 
+if 
+  112@ == 0 
+jf @STEAL2_13198 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 4 
+
+:STEAL2_13198
+if 
+  103@ == 0 
+jf @STEAL2_13216 
+
+:STEAL2_13216
+if 
+  100@ == 0 
+jf @STEAL2_14051 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_13363 
+0395: clear_area 1 at -2503.3 1237.0 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+47@ = Car.Create(108@, -2503.3, 1237.0, 33.7)
+Car.Angle(47@) = 249.3
+Car.DoorStatus(47@) = 2
+0560: create_random_actor_in_car 47@ handle_as 69@ 
+0587: enable_car 47@ validate_position 1 
+054A: set_actor 69@ can_be_shot_in_a_car 0 
+
+:STEAL2_13363
+0395: clear_area 1 at -2741.5 1058.2 48.1 radius 5.0 
+50@ = Car.Create(#PCJ600, -2741.5, 1058.2, 48.1)
+Car.Angle(50@) = 337.2
+0560: create_random_actor_in_car 50@ handle_as 72@ 
+0587: enable_car 50@ validate_position 1 
+054A: set_actor 72@ can_be_shot_in_a_car 0 
+0395: clear_area 1 at -2513.7 1246.2 34.1 radius 5.0 
+52@ = Car.Create(#COACH, -2513.7, 1246.2, 34.1)
+Car.Angle(52@) = 82.5
+0560: create_random_actor_in_car 52@ handle_as 74@ 
+0587: enable_car 52@ validate_position 1 
+Car.DoorStatus(52@) = 2
+054A: set_actor 74@ can_be_shot_in_a_car 0 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_13657 
+0395: clear_area 1 at -2471.6 1219.7 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+53@ = Car.Create(108@, -2471.6, 1219.7, 33.7)
+Car.Angle(53@) = 50.8
+Car.DoorStatus(53@) = 2
+0560: create_random_actor_in_car 53@ handle_as 75@ 
+0587: enable_car 53@ validate_position 1 
+054A: set_actor 75@ can_be_shot_in_a_car 0 
+
+:STEAL2_13657
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_13786 
+0395: clear_area 1 at -2459.1 1224.3 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+54@ = Car.Create(108@, -2459.1, 1224.3, 33.7)
+Car.Angle(54@) = 163.8
+Car.DoorStatus(54@) = 2
+0560: create_random_actor_in_car 54@ handle_as 76@ 
+0587: enable_car 54@ validate_position 1 
+054A: set_actor 76@ can_be_shot_in_a_car 0 
+
+:STEAL2_13786
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_13915 
+0395: clear_area 1 at -2458.1 1234.3 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+55@ = Car.Create(108@, -2458.1, 1234.3, 33.7)
+Car.Angle(55@) = 178.2
+Car.DoorStatus(55@) = 2
+0560: create_random_actor_in_car 55@ handle_as 77@ 
+0587: enable_car 55@ validate_position 1 
+054A: set_actor 77@ can_be_shot_in_a_car 0 
+
+:STEAL2_13915
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_14044 
+0395: clear_area 1 at -2474.5 1196.9 34.4 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+56@ = Car.Create(108@, -2474.5, 1196.9, 34.4)
+Car.Angle(56@) = 310.3
+Car.DoorStatus(56@) = 2
+0560: create_random_actor_in_car 56@ handle_as 78@ 
+0587: enable_car 56@ validate_position 1 
+054A: set_actor 78@ can_be_shot_in_a_car 0 
+
+:STEAL2_14044
+100@ = 1 
+
+:STEAL2_14051
+if 
+  100@ == 1 
+jf @STEAL2_14411 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_14411 
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(46@)
+if 
+   not Car.Wrecked(47@)
+jf @STEAL2_14251 
+Car.SetSpeedInstantly(47@, 15.0)
+Car.SetMaxSpeed(47@, 15.0)
+Car.DriveTo(47@, -2293.5, 1172.3, 54.8)
+
+:STEAL2_14251
+if 
+   not Car.Wrecked(50@)
+jf @STEAL2_14274 
+05EB: assign_car 50@ to_path 91 
+
+:STEAL2_14274
+if 
+   not Car.Wrecked(52@)
+jf @STEAL2_14297 
+05EB: assign_car 52@ to_path 90 
+
+:STEAL2_14297
+if 
+   not Car.Wrecked(53@)
+jf @STEAL2_14320 
+05EB: assign_car 53@ to_path 89 
+
+:STEAL2_14320
+if 
+   not Car.Wrecked(56@)
+jf @STEAL2_14376 
+Car.SetSpeedInstantly(56@, 15.0)
+Car.SetMaxSpeed(56@, 15.0)
+Car.DriveTo(56@, -2283.5, 1172.3, 54.8)
+
+:STEAL2_14376
+05EB: assign_car 34@ to_path 88 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 6 
+
+:STEAL2_14411
+if 
+  99@ == 6 
+jf @STEAL2_15289 
+gosub @STEAL2_26961 
+if 
+  103@ == 0 
+jf @STEAL2_14454 
+
+:STEAL2_14454
+if 
+  100@ == 0 
+jf @STEAL2_14978 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_14601 
+0395: clear_area 1 at -2533.8 1242.8 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+48@ = Car.Create(108@, -2533.8, 1242.8, 33.7)
+Car.Angle(48@) = 288.3
+Car.DoorStatus(48@) = 2
+0560: create_random_actor_in_car 48@ handle_as 70@ 
+0587: enable_car 48@ validate_position 1 
+054A: set_actor 70@ can_be_shot_in_a_car 0 
+
+:STEAL2_14601
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_14730 
+0395: clear_area 1 at -2594.0 1213.9 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+49@ = Car.Create(108@, -2594.0, 1213.9, 33.7)
+Car.Angle(49@) = 317.3
+Car.DoorStatus(49@) = 2
+0560: create_random_actor_in_car 49@ handle_as 71@ 
+0587: enable_car 49@ validate_position 1 
+054A: set_actor 71@ can_be_shot_in_a_car 0 
+
+:STEAL2_14730
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_14859 
+0395: clear_area 1 at -2732.9 1098.0 45.0 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+51@ = Car.Create(108@, -2732.9, 1098.0, 45.0)
+Car.Angle(51@) = 218.5
+Car.DoorStatus(51@) = 2
+0560: create_random_actor_in_car 51@ handle_as 73@ 
+0587: enable_car 51@ validate_position 1 
+054A: set_actor 73@ can_be_shot_in_a_car 0 
+
+:STEAL2_14859
+if 
+   not Car.Wrecked(48@)
+jf @STEAL2_14915 
+Car.SetSpeedInstantly(48@, 15.0)
+Car.SetMaxSpeed(48@, 15.0)
+Car.DriveTo(48@, -2303.5, 1172.3, 54.8)
+
+:STEAL2_14915
+if 
+   not Car.Wrecked(49@)
+jf @STEAL2_14971 
+Car.SetSpeedInstantly(49@, 15.0)
+Car.SetMaxSpeed(49@, 15.0)
+Car.DriveTo(49@, -2313.5, 1060.1, 44.2)
+
+:STEAL2_14971
+100@ = 1 
+
+:STEAL2_14978
+if 
+  100@ == 1 
+jf @STEAL2_15111 
+if 
+   not Car.Wrecked(50@)
+jf @STEAL2_15104 
+if 
+01AD:   car 34@ sphere 0 near_point -2599.3 1206.5 radius 3.0 3.0 
+jf @STEAL2_15097 
+if 
+060E:   car 50@ assigned_to_path 
+jf @STEAL2_15090 
+05EC: release_car 50@ from_path 
+Car.RemoveReferences(50@)
+100@ = 2 
+jump @STEAL2_15097 
+
+:STEAL2_15090
+100@ = 2 
+
+:STEAL2_15097
+jump @STEAL2_15111 
+
+:STEAL2_15104
+100@ = 2 
+
+:STEAL2_15111
+if 
+  100@ == 2 
+jf @STEAL2_15289 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_15289 
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+Car.RemoveReferences(47@)
+Car.RemoveReferences(48@)
+Car.RemoveReferences(49@)
+Car.RemoveReferences(50@)
+Car.RemoveReferences(51@)
+Car.RemoveReferences(52@)
+Car.RemoveReferences(53@)
+Car.RemoveReferences(54@)
+Car.RemoveReferences(55@)
+Car.RemoveReferences(56@)
+0873: release_path 91 
+05EB: assign_car 34@ to_path 92 
+Model.Destroy(#PCJ600)
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 7 
+
+:STEAL2_15289
+if 
+  99@ == 7 
+jf @STEAL2_18220 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_15392 
+if 
+  112@ == 0 
+jf @STEAL2_15392 
+112@ = 9 
+113@ = 0 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_15392
+if 
+  114@ == 1 
+jf @STEAL2_15501 
+if 
+01AD:   car 34@ sphere 0 near_point -2622.2 999.7 radius 3.0 3.0 
+jf @STEAL2_15501 
+if 
+  112@ == 0 
+jf @STEAL2_15501 
+112@ = 8 
+113@ = 7 
+159@ = 8 
+gosub @STEAL2_30346 
+114@ = 2 
+
+:STEAL2_15501
+if 
+  114@ == 2 
+jf @STEAL2_15610 
+if 
+01AD:   car 34@ sphere 0 near_point -2608.9 913.3 radius 3.0 3.0 
+jf @STEAL2_15610 
+if 
+  112@ == 0 
+jf @STEAL2_15610 
+112@ = 8 
+113@ = 8 
+159@ = 9 
+gosub @STEAL2_30346 
+114@ = 3 
+
+:STEAL2_15610
+if 
+  114@ == 3 
+jf @STEAL2_15667 
+if 
+  112@ == 0 
+jf @STEAL2_15667 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 4 
+
+:STEAL2_15667
+if 
+  103@ == 0 
+jf @STEAL2_15685 
+
+:STEAL2_15685
+if 
+  100@ == 0 
+jf @STEAL2_17650 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_15832 
+0395: clear_area 1 at -2595.6 1006.4 76.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+36@ = Car.Create(108@, -2595.6, 1006.4, 76.7)
+Car.Angle(36@) = 89.4
+Car.DoorStatus(36@) = 2
+0560: create_random_actor_in_car 36@ handle_as 58@ 
+0587: enable_car 36@ validate_position 1 
+054A: set_actor 58@ can_be_shot_in_a_car 0 
+
+:STEAL2_15832
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_15961 
+0395: clear_area 1 at -2595.6 1000.9 76.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+37@ = Car.Create(108@, -2595.6, 1000.9, 76.7)
+Car.Angle(37@) = 274.4
+Car.DoorStatus(37@) = 2
+0560: create_random_actor_in_car 37@ handle_as 59@ 
+0587: enable_car 37@ validate_position 1 
+054A: set_actor 59@ can_be_shot_in_a_car 0 
+
+:STEAL2_15961
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16090 
+0395: clear_area 1 at -2604.0 963.9 76.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+38@ = Car.Create(108@, -2604.0, 963.9, 76.7)
+Car.Angle(38@) = 360.0
+Car.DoorStatus(38@) = 2
+0560: create_random_actor_in_car 38@ handle_as 60@ 
+0587: enable_car 38@ validate_position 1 
+054A: set_actor 60@ can_be_shot_in_a_car 0 
+
+:STEAL2_16090
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16219 
+0395: clear_area 1 at -2616.4 905.6 64.5 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+39@ = Car.Create(108@, -2616.4, 905.6, 64.5)
+Car.Angle(39@) = 269.5
+Car.DoorStatus(39@) = 2
+0560: create_random_actor_in_car 39@ handle_as 61@ 
+0587: enable_car 39@ validate_position 1 
+054A: set_actor 61@ can_be_shot_in_a_car 0 
+
+:STEAL2_16219
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16348 
+0395: clear_area 1 at -2536.9 911.1 63.5 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+40@ = Car.Create(108@, -2536.9, 911.1, 63.5)
+Car.Angle(40@) = 89.8
+Car.DoorStatus(40@) = 2
+0560: create_random_actor_in_car 40@ handle_as 62@ 
+0587: enable_car 40@ validate_position 1 
+054A: set_actor 62@ can_be_shot_in_a_car 0 
+
+:STEAL2_16348
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_16462 
+0395: clear_area 1 at -2609.3 1012.8 76.8 radius 5.0 
+41@ = Car.Create(#COPCARSF, -2609.3, 1012.8, 76.8)
+Car.Angle(41@) = 178.8
+Car.DoorStatus(41@) = 2
+63@ = Actor.CreateAsDriver(Mission2, #SFPD1, 41@)
+00AE: set_car 41@ traffic_behaviour_to 2 
+0587: enable_car 41@ validate_position 1 
+054A: set_actor 63@ can_be_shot_in_a_car 0 
+
+:STEAL2_16462
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_16576 
+0395: clear_area 1 at -2603.7 1011.2 76.8 radius 5.0 
+42@ = Car.Create(#COPCARSF, -2603.7, 1011.2, 76.8)
+Car.Angle(42@) = 179.1
+Car.DoorStatus(42@) = 2
+64@ = Actor.CreateAsDriver(Mission2, #SFPD1, 42@)
+00AE: set_car 42@ traffic_behaviour_to 2 
+0587: enable_car 42@ validate_position 1 
+054A: set_actor 64@ can_be_shot_in_a_car 0 
+
+:STEAL2_16576
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16712 
+0395: clear_area 1 at -2590.0 705.9 26.6 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+43@ = Car.Create(108@, -2590.0, 705.9, 26.6)
+Car.Angle(43@) = 268.3
+Car.DoorStatus(43@) = 2
+0560: create_random_actor_in_car 43@ handle_as 65@ 
+00AE: set_car 43@ traffic_behaviour_to 4 
+0587: enable_car 43@ validate_position 1 
+054A: set_actor 65@ can_be_shot_in_a_car 0 
+
+:STEAL2_16712
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16848 
+0395: clear_area 1 at -2463.0 710.6 33.9 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+44@ = Car.Create(108@, -2463.0, 710.6, 33.9)
+Car.Angle(44@) = 90.3
+Car.DoorStatus(44@) = 2
+0560: create_random_actor_in_car 44@ handle_as 66@ 
+00AE: set_car 44@ traffic_behaviour_to 4 
+0587: enable_car 44@ validate_position 1 
+054A: set_actor 66@ can_be_shot_in_a_car 0 
+
+:STEAL2_16848
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_16977 
+0395: clear_area 1 at -2501.6 562.7 13.1 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+45@ = Car.Create(108@, -2501.6, 562.7, 13.1)
+Car.Angle(45@) = 271.8
+Car.DoorStatus(45@) = 2
+0560: create_random_actor_in_car 45@ handle_as 67@ 
+0587: enable_car 45@ validate_position 1 
+054A: set_actor 67@ can_be_shot_in_a_car 0 
+
+:STEAL2_16977
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_17113 
+0395: clear_area 1 at -2390.9 581.7 23.9 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+46@ = Car.Create(108@, -2390.9, 581.7, 23.9)
+Car.Angle(46@) = 184.1
+Car.DoorStatus(46@) = 2
+0560: create_random_actor_in_car 46@ handle_as 68@ 
+00AE: set_car 46@ traffic_behaviour_to 4 
+0587: enable_car 46@ validate_position 1 
+054A: set_actor 68@ can_be_shot_in_a_car 0 
+
+:STEAL2_17113
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_17242 
+0395: clear_area 1 at -2361.7 510.9 27.9 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+47@ = Car.Create(108@, -2361.7, 510.9, 27.9)
+Car.Angle(47@) = 100.0
+Car.DoorStatus(47@) = 2
+0560: create_random_actor_in_car 47@ handle_as 69@ 
+0587: enable_car 47@ validate_position 1 
+054A: set_actor 69@ can_be_shot_in_a_car 0 
+
+:STEAL2_17242
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_17371 
+0395: clear_area 1 at -2281.3 569.6 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+48@ = Car.Create(108@, -2281.3, 569.6, 33.7)
+Car.Angle(48@) = 87.6
+Car.DoorStatus(48@) = 2
+0560: create_random_actor_in_car 48@ handle_as 70@ 
+0587: enable_car 48@ validate_position 1 
+054A: set_actor 70@ can_be_shot_in_a_car 0 
+
+:STEAL2_17371
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_17507 
+0395: clear_area 1 at -2358.9 569.9 23.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+49@ = Car.Create(108@, -2358.9, 569.9, 23.7)
+Car.Angle(49@) = 90.7
+Car.DoorStatus(49@) = 2
+0560: create_random_actor_in_car 49@ handle_as 71@ 
+00AE: set_car 49@ traffic_behaviour_to 4 
+0587: enable_car 49@ validate_position 1 
+054A: set_actor 71@ can_be_shot_in_a_car 0 
+
+:STEAL2_17507
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_17643 
+0395: clear_area 1 at -2373.1 569.6 23.4 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+50@ = Car.Create(108@, -2373.1, 569.6, 23.4)
+Car.Angle(50@) = 91.3
+Car.DoorStatus(50@) = 2
+0560: create_random_actor_in_car 50@ handle_as 72@ 
+00AE: set_car 50@ traffic_behaviour_to 4 
+0587: enable_car 50@ validate_position 1 
+054A: set_actor 72@ can_be_shot_in_a_car 0 
+
+:STEAL2_17643
+100@ = 1 
+
+:STEAL2_17650
+if 
+  100@ == 1 
+jf @STEAL2_17913 
+if 
+01AD:   car 34@ sphere 0 near_point -2610.7 992.2 radius 3.0 3.0 
+jf @STEAL2_17913 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_17762 
+Car.SetSpeedInstantly(38@, 15.0)
+Car.SetMaxSpeed(38@, 15.0)
+Car.DriveTo(38@, -2736.4, 1006.9, 53.0)
+
+:STEAL2_17762
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_17834 
+Car.SetSpeedInstantly(41@, 15.0)
+Car.SetMaxSpeed(41@, 40.0)
+if 
+   not Car.Wrecked(34@)
+jf @STEAL2_17834 
+07F8: car 41@ follow_car 34@ radius 10.0 
+0397: enable_car 41@ siren 1 
+
+:STEAL2_17834
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_17906 
+Car.SetSpeedInstantly(42@, 15.0)
+Car.SetMaxSpeed(42@, 40.0)
+if 
+   not Car.Wrecked(34@)
+jf @STEAL2_17906 
+07F8: car 42@ follow_car 34@ radius 20.0 
+0397: enable_car 42@ siren 1 
+
+:STEAL2_17906
+100@ = 2 
+
+:STEAL2_17913
+if 
+  100@ == 2 
+jf @STEAL2_18055 
+if 
+01AD:   car 34@ sphere 0 near_point -2610.4 922.8 radius 3.0 3.0 
+jf @STEAL2_18055 
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_17992 
+05EB: assign_car 39@ to_path 93 
+
+:STEAL2_17992
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_18048 
+Car.SetSpeedInstantly(40@, 15.0)
+Car.SetMaxSpeed(40@, 15.0)
+Car.DriveTo(40@, -2604.0, 963.9, 76.7)
+
+:STEAL2_18048
+100@ = 3 
+
+:STEAL2_18055
+if 
+  100@ == 3 
+jf @STEAL2_18220 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_18220 
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_18162 
+05EB: assign_car 43@ to_path 95 
+
+:STEAL2_18162
+if 
+   not Car.Wrecked(44@)
+jf @STEAL2_18185 
+05EB: assign_car 44@ to_path 96 
+
+:STEAL2_18185
+05EB: assign_car 34@ to_path 94 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 8 
+
+:STEAL2_18220
+if 
+  99@ == 8 
+jf @STEAL2_18913 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_18368 
+if 
+01AD:   car 34@ sphere 0 near_point -2528.9 737.7 radius 3.0 3.0 
+jf @STEAL2_18368 
+if 
+  112@ == 0 
+jf @STEAL2_18368 
+112@ = 8 
+113@ = 9 
+159@ = 10 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_18368
+if 
+  114@ == 1 
+jf @STEAL2_18425 
+if 
+  112@ == 0 
+jf @STEAL2_18425 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 2 
+
+:STEAL2_18425
+if 
+  103@ == 0 
+jf @STEAL2_18443 
+
+:STEAL2_18443
+if 
+  100@ == 0 
+jf @STEAL2_18468 
+100@ = 1 
+
+:STEAL2_18468
+if 
+  100@ == 1 
+jf @STEAL2_18913 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_18913 
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+if 
+   not Car.Wrecked(45@)
+jf @STEAL2_18598 
+Car.SetSpeedInstantly(45@, 15.0)
+Car.SetMaxSpeed(45@, 15.0)
+Car.DriveTo(45@, -2400.7, 562.2, 23.4)
+
+:STEAL2_18598
+if 
+   not Car.Wrecked(46@)
+jf @STEAL2_18654 
+Car.SetSpeedInstantly(46@, 15.0)
+Car.SetMaxSpeed(46@, 15.0)
+Car.DriveTo(46@, -2319.5, 424.7, 33.6)
+
+:STEAL2_18654
+if 
+   not Car.Wrecked(47@)
+jf @STEAL2_18710 
+Car.SetSpeedInstantly(47@, 15.0)
+Car.SetMaxSpeed(47@, 15.0)
+Car.DriveTo(47@, -2383.1, 551.4, 23.6)
+
+:STEAL2_18710
+if 
+   not Car.Wrecked(48@)
+jf @STEAL2_18766 
+Car.SetSpeedInstantly(48@, 15.0)
+Car.SetMaxSpeed(48@, 15.0)
+Car.DriveTo(48@, -2372.9, 569.6, 23.4)
+
+:STEAL2_18766
+if 
+   not Car.Wrecked(49@)
+jf @STEAL2_18822 
+Car.SetSpeedInstantly(49@, 15.0)
+Car.SetMaxSpeed(49@, 15.0)
+Car.DriveTo(49@, -2516.5, 569.9, 13.1)
+
+:STEAL2_18822
+if 
+   not Car.Wrecked(50@)
+jf @STEAL2_18878 
+Car.SetSpeedInstantly(50@, 15.0)
+Car.SetMaxSpeed(50@, 15.0)
+Car.DriveTo(50@, -2383.9, 655.8, 33.6)
+
+:STEAL2_18878
+05EB: assign_car 34@ to_path 97 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 9 
+
+:STEAL2_18913
+if 
+  99@ == 9 
+jf @STEAL2_20830 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_19036 
+if 
+01AD:   car 34@ sphere 0 near_point -2528.6 656.4 radius 3.0 3.0 
+jf @STEAL2_19036 
+112@ = 10 
+113@ = 0 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_19036
+if 
+  114@ == 1 
+jf @STEAL2_19145 
+if 
+01AD:   car 34@ sphere 0 near_point -2375.0 566.2 radius 3.0 3.0 
+jf @STEAL2_19145 
+if 
+  112@ == 0 
+jf @STEAL2_19145 
+112@ = 8 
+113@ = 10 
+159@ = 11 
+gosub @STEAL2_30346 
+114@ = 2 
+
+:STEAL2_19145
+if 
+  114@ == 2 
+jf @STEAL2_19193 
+if 
+  112@ == 0 
+jf @STEAL2_19193 
+Player.ClearWantedLevel($PLAYER_CHAR)
+114@ = 3 
+
+:STEAL2_19193
+if 
+  114@ == 3 
+jf @STEAL2_19250 
+if 
+  112@ == 0 
+jf @STEAL2_19250 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 4 
+
+:STEAL2_19250
+if 
+  103@ == 0 
+jf @STEAL2_19268 
+
+:STEAL2_19268
+if 
+  100@ == 0 
+jf @STEAL2_20376 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_19415 
+0395: clear_area 1 at -2269.1 5748.0 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+36@ = Car.Create(108@, -2269.1, 5748.0, 33.7)
+Car.Angle(36@) = 182.3
+Car.DoorStatus(36@) = 2
+0560: create_random_actor_in_car 36@ handle_as 58@ 
+0587: enable_car 36@ validate_position 1 
+054A: set_actor 58@ can_be_shot_in_a_car 0 
+
+:STEAL2_19415
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_19544 
+0395: clear_area 1 at -2251.1 561.9 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+37@ = Car.Create(108@, -2251.1, 561.9, 33.7)
+Car.Angle(37@) = 271.1
+Car.DoorStatus(37@) = 2
+0560: create_random_actor_in_car 37@ handle_as 59@ 
+0587: enable_car 37@ validate_position 1 
+054A: set_actor 59@ can_be_shot_in_a_car 0 
+
+:STEAL2_19544
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_19673 
+0395: clear_area 1 at -2212.5 569.9 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+38@ = Car.Create(108@, -2212.5, 569.9, 33.7)
+Car.Angle(38@) = 91.3
+Car.DoorStatus(38@) = 2
+0560: create_random_actor_in_car 38@ handle_as 60@ 
+0587: enable_car 38@ validate_position 1 
+054A: set_actor 60@ can_be_shot_in_a_car 0 
+
+:STEAL2_19673
+0395: clear_area 1 at -2229.4 532.7 34.0 radius 5.0 
+39@ = Car.Create(#COACH, -2229.4, 532.7, 34.0)
+Car.Angle(39@) = 180.3
+0560: create_random_actor_in_car 39@ handle_as 61@ 
+0587: enable_car 39@ validate_position 1 
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_19874 
+0395: clear_area 1 at -2342.8 505.3 28.3 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+41@ = Car.Create(108@, -2342.8, 505.3, 28.3)
+Car.Angle(41@) = 269.2
+Car.DoorStatus(41@) = 2
+0560: create_random_actor_in_car 41@ handle_as 63@ 
+0587: enable_car 41@ validate_position 1 
+054A: set_actor 63@ can_be_shot_in_a_car 0 
+
+:STEAL2_19874
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_20003 
+0395: clear_area 1 at -2293.5 505.4 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+42@ = Car.Create(108@, -2293.5, 505.4, 33.7)
+Car.Angle(42@) = 270.0
+Car.DoorStatus(42@) = 2
+0560: create_random_actor_in_car 42@ handle_as 64@ 
+0587: enable_car 42@ validate_position 1 
+054A: set_actor 64@ can_be_shot_in_a_car 0 
+
+:STEAL2_20003
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_20132 
+0395: clear_area 1 at -2238.9 511.2 34.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+43@ = Car.Create(108@, -2238.9, 511.2, 34.7)
+Car.Angle(43@) = 90.6
+Car.DoorStatus(43@) = 2
+0560: create_random_actor_in_car 43@ handle_as 65@ 
+0587: enable_car 43@ validate_position 1 
+054A: set_actor 65@ can_be_shot_in_a_car 0 
+
+:STEAL2_20132
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_20261 
+0395: clear_area 1 at -2224.0 496.6 33.7 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+44@ = Car.Create(108@, -2224.0, 496.6, 33.7)
+Car.Angle(44@) = 0.0
+Car.DoorStatus(44@) = 2
+0560: create_random_actor_in_car 44@ handle_as 66@ 
+0587: enable_car 44@ validate_position 1 
+054A: set_actor 66@ can_be_shot_in_a_car 0 
+
+:STEAL2_20261
+0395: clear_area 1 at -2232.2 529.5 34.2 radius 5.0 
+0376: 77@ = create_random_actor_at -2232.2 529.5 34.2 
+Actor.Angle(77@) = 174.2
+0395: clear_area 1 at -2232.5 531.0 34.2 radius 5.0 
+0376: 78@ = create_random_actor_at -2232.5 531.0 34.2 
+Actor.Angle(78@) = 174.2
+100@ = 1 
+
+:STEAL2_20376
+if 
+  100@ == 1 
+jf @STEAL2_20830 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_20830 
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(46@)
+Car.RemoveReferences(47@)
+Car.RemoveReferences(48@)
+Car.RemoveReferences(49@)
+Car.RemoveReferences(50@)
+if 
+   not Car.Wrecked(36@)
+jf @STEAL2_20526 
+Car.SetSpeedInstantly(36@, 15.0)
+Car.SetMaxSpeed(36@, 15.0)
+Car.DriveTo(36@, -2174.9, 561.8, 33.6)
+
+:STEAL2_20526
+if 
+   not Car.Wrecked(37@)
+jf @STEAL2_20582 
+Car.SetSpeedInstantly(37@, 15.0)
+Car.SetMaxSpeed(37@, 15.0)
+Car.DriveTo(37@, -2160.2, 561.9, 33.6)
+
+:STEAL2_20582
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_20638 
+Car.SetSpeedInstantly(41@, 15.0)
+Car.SetMaxSpeed(41@, 15.0)
+Car.DriveTo(41@, -2252.6, 505.7, 33.7)
+
+:STEAL2_20638
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_20694 
+Car.SetSpeedInstantly(42@, 15.0)
+Car.SetMaxSpeed(42@, 15.0)
+Car.DriveTo(42@, -2239.4, 505.7, 33.7)
+
+:STEAL2_20694
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_20750 
+Car.SetSpeedInstantly(43@, 15.0)
+Car.SetMaxSpeed(43@, 15.0)
+Car.DriveTo(43@, -2361.2, 511.5, 27.9)
+
+:STEAL2_20750
+05EB: assign_car 34@ to_path 98 
+Model.Destroy(#COACH)
+Model.Destroy(#TRAM)
+Model.Load(#DYN_ROADBARRIER_3)
+Model.Load(#DYN_ROADBARRIER_4)
+Model.Load(#KMB_SKIP)
+Model.Load(#DYN_DUMPSTER)
+Model.Load(#DOZER)
+Model.Load(#CEMENT)
+Model.Load(#DYN_RAMP)
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 10 
+
+:STEAL2_20830
+if 
+  99@ == 10 
+jf @STEAL2_21805 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_20978 
+if 
+01AD:   car 34@ sphere 0 near_point -2264.5 546.1 radius 3.0 3.0 
+jf @STEAL2_20978 
+if 
+  112@ == 0 
+jf @STEAL2_20978 
+112@ = 8 
+113@ = 11 
+159@ = 12 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_20978
+if 
+  114@ == 1 
+jf @STEAL2_21057 
+if 
+01AD:   car 34@ sphere 0 near_point -2224.1 454.8 radius 3.0 3.0 
+jf @STEAL2_21057 
+00BC: show_text_highpriority GXT 'STE2_04' time 4000 flag 1  // ~s~Follow ~b~Cesar~s~ into the alleyway.
+114@ = 2 
+
+:STEAL2_21057
+if 
+  114@ == 2 
+jf @STEAL2_21114 
+if 
+  112@ == 0 
+jf @STEAL2_21114 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 3 
+
+:STEAL2_21114
+if 
+  103@ == 0 
+jf @STEAL2_21132 
+
+:STEAL2_21132
+if 
+  100@ == 0 
+jf @STEAL2_21173 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_21173 
+100@ = 1 
+
+:STEAL2_21173
+if 
+  100@ == 1 
+jf @STEAL2_21805 
+if 
+00EE:   actor $PLAYER_ACTOR sphere 0 near_point -2213.9 453.0 radius 5.0 5.0 in_car 
+jf @STEAL2_21805 
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+09B2: get_random_available_car_unk 1 model_to 108@ class_to 109@ 
+if 
+  108@ >= 0 
+jf @STEAL2_21448 
+0395: clear_area 1 at -2228.8 521.1 33.8 radius 5.0 
+0085: 110@ = 108@ // (int) 
+gosub @STEAL2_27802 
+46@ = Car.Create(108@, -2228.8, 521.1, 33.8)
+Car.Angle(46@) = 179.4
+Car.DoorStatus(46@) = 2
+0560: create_random_actor_in_car 46@ handle_as 68@ 
+0587: enable_car 46@ validate_position 1 
+054A: set_actor 68@ can_be_shot_in_a_car 0 
+
+:STEAL2_21448
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_21562 
+0395: clear_area 1 at -2149.4 462.0 33.8 radius 5.0 
+47@ = Car.Create(#COPCARSF, -2149.4, 462.0, 33.8)
+Car.Angle(47@) = 174.8
+Car.DoorStatus(47@) = 2
+69@ = Actor.CreateAsDriver(Mission2, #SFPD1, 47@)
+00AE: set_car 47@ traffic_behaviour_to 2 
+0587: enable_car 47@ validate_position 1 
+054A: set_actor 69@ can_be_shot_in_a_car 0 
+
+:STEAL2_21562
+if 
+   Model.Available(#COPCARSF)
+jf @STEAL2_21676 
+0395: clear_area 1 at -2148.8 444.0 33.8 radius 5.0 
+48@ = Car.Create(#COPCARSF, -2148.8, 444.0, 33.8)
+Car.Angle(48@) = 360.0
+Car.DoorStatus(48@) = 2
+70@ = Actor.CreateAsDriver(Mission2, #SFPD1, 48@)
+00AE: set_car 48@ traffic_behaviour_to 2 
+0587: enable_car 48@ validate_position 1 
+054A: set_actor 70@ can_be_shot_in_a_car 0 
+
+:STEAL2_21676
+if 
+   not Car.Wrecked(34@)
+jf @STEAL2_21699 
+05EB: assign_car 34@ to_path 65 
+
+:STEAL2_21699
+if 
+   not Car.Wrecked(47@)
+jf @STEAL2_21729 
+05EB: assign_car 47@ to_path 66 
+0397: enable_car 47@ siren 1 
+
+:STEAL2_21729
+if 
+   not Car.Wrecked(48@)
+jf @STEAL2_21759 
+05EB: assign_car 48@ to_path 67 
+0397: enable_car 48@ siren 1 
+
+:STEAL2_21759
+03D5: remove_text 'STE2_04'  // ~s~Follow ~b~Cesar~s~ into the alleyway.
+33@ = 0 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 11 
+
+:STEAL2_21805
+if 
+  99@ == 11 
+jf @STEAL2_22932 
+if 
+  114@ == 0 
+jf @STEAL2_21902 
+if 
+  33@ > 1000 
+jf @STEAL2_21902 
+112@ = 11 
+113@ = 0 
+gosub @STEAL2_30346 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_21902
+if 
+  114@ == 1 
+jf @STEAL2_21952 
+if 
+  112@ == 0 
+jf @STEAL2_21952 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+114@ = 2 
+
+:STEAL2_21952
+if 
+  114@ == 2 
+jf @STEAL2_22009 
+if 
+  112@ == 0 
+jf @STEAL2_22009 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 3 
+
+:STEAL2_22009
+if 
+  103@ == 0 
+jf @STEAL2_22027 
+
+:STEAL2_22027
+if 
+  100@ == 0 
+jf @STEAL2_22863 
+0395: clear_area 1 at -2128.1 496.6 34.0 radius 100.0 
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+Actor.RemoveReferences(79@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(49@)
+Car.RemoveReferences(50@)
+Car.RemoveReferences(51@)
+Car.RemoveReferences(52@)
+Car.RemoveReferences(53@)
+Car.RemoveReferences(54@)
+Car.RemoveReferences(55@)
+Car.RemoveReferences(56@)
+Car.RemoveReferences(57@)
+80@ = Object.Create(#DYN_ROADBARRIER_3, -2128.1, 496.6, 34.0)
+Object.Angle(80@) = 270.0
+81@ = Object.Create(#DYN_ROADBARRIER_4, -2128.1, 501.6, 34.0)
+Object.Angle(81@) = 270.0
+82@ = Object.Create(#DYN_ROADBARRIER_3, -2128.1, 503.6, 34.0)
+Object.Angle(82@) = 270.0
+83@ = Object.Create(#DYN_ROADBARRIER_4, -2128.1, 506.8, 34.0)
+Object.Angle(83@) = 270.0
+84@ = Object.Create(#DYN_ROADBARRIER_3, -2128.1, 511.6, 34.0)
+Object.Angle(84@) = 270.0
+85@ = Object.Create(#DYN_ROADBARRIER_3, -2016.1, 496.6, 34.0)
+Object.Angle(85@) = 90.0
+86@ = Object.Create(#DYN_ROADBARRIER_4, -2016.1, 501.6, 34.0)
+Object.Angle(86@) = 90.0
+87@ = Object.Create(#DYN_ROADBARRIER_3, -2016.1, 503.6, 34.0)
+Object.Angle(87@) = 90.0
+88@ = Object.Create(#DYN_ROADBARRIER_4, -2016.1, 506.8, 34.0)
+Object.Angle(88@) = 90.0
+89@ = Object.Create(#DYN_ROADBARRIER_3, -2016.1, 511.6, 34.0)
+Object.Angle(89@) = 90.0
+90@ = Object.Create(#KMB_SKIP, -2096.1, 501.8, 34.0)
+Object.Angle(90@) = 90.0
+91@ = Object.Create(#DYN_DUMPSTER, -2096.1, 504.8, 34.0)
+Object.Angle(91@) = 270.0
+92@ = Object.Create(#DYN_RAMP, -2056.9, 503.8, 34.0)
+Object.Angle(92@) = 270.0
+if 
+   Model.Available(#DOZER)
+jf @STEAL2_22744 
+36@ = Car.Create(#DOZER, -2084.6, 501.2, 34.4)
+Car.Angle(36@) = 269.7
+0587: enable_car 36@ validate_position 1 
+
+:STEAL2_22744
+if 
+   Model.Available(#DOZER)
+jf @STEAL2_22800 
+37@ = Car.Create(#DOZER, -2045.1, 500.9, 34.3)
+Car.Angle(37@) = 156.1
+0587: enable_car 37@ validate_position 1 
+
+:STEAL2_22800
+if 
+   Model.Available(#CEMENT)
+jf @STEAL2_22856 
+38@ = Car.Create(#CEMENT, -2048.3, 508.4, 35.0)
+Car.Angle(38@) = 88.4
+0587: enable_car 38@ validate_position 1 
+
+:STEAL2_22856
+100@ = 1 
+
+:STEAL2_22863
+if 
+  100@ == 1 
+jf @STEAL2_22932 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_22932 
+05EB: assign_car 34@ to_path 99 
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 12 
+
+:STEAL2_22932
+if 
+  99@ == 12 
+jf @STEAL2_23220 
+gosub @STEAL2_26961 
+if 
+  114@ == 0 
+jf @STEAL2_22975 
+
+:STEAL2_22975
+if 
+  103@ == 0 
+jf @STEAL2_22993 
+
+:STEAL2_22993
+if 
+  100@ == 0 
+jf @STEAL2_23018 
+100@ = 1 
+
+:STEAL2_23018
+if 
+  100@ == 1 
+jf @STEAL2_23220 
+if 
+860E:   not car 34@ assigned_to_path 
+jf @STEAL2_23220 
+01EB: set_traffic_density_multiplier_to 1.0 
+0615: define_AS_pack_begin 171@ 
+05D1: AS_actor -1 drive_car 34@ to -2009.7 192.2 26.0 speed 45.0 1 model #CSPLAY 2 
+05D1: AS_actor -1 drive_car 34@ to -2031.7 180.1 27.4 speed 10.0 1 model #CSPLAY 2 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+if 
+   Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_23192 
+Marker.Disable(98@)
+018A: 98@ = create_checkpoint_at -2024.7 179.4 27.4 
+
+:STEAL2_23192
+114@ = 0 
+103@ = 0 
+100@ = 0 
+99@ = 13 
+
+:STEAL2_23220
+if 
+  99@ == 13 
+jf @STEAL2_23985 
+if 
+  114@ == 0 
+jf @STEAL2_23415 
+if 
+  112@ == 0 
+jf @STEAL2_23415 
+112@ = 12 
+113@ = 0 
+gosub @STEAL2_30346 
+if 
+   not Car.Wrecked(47@)
+jf @STEAL2_23394 
+if 
+   not Car.Wrecked(48@)
+jf @STEAL2_23394 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 47@ radius 30.0 30.0 sphere 0 
+jf @STEAL2_23394 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 48@ radius 30.0 30.0 sphere 0 
+jf @STEAL2_23394 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:STEAL2_23394
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+114@ = 1 
+
+:STEAL2_23415
+if 
+  114@ == 1 
+jf @STEAL2_23474 
+if 
+  112@ == 0 
+jf @STEAL2_23474 
+00BB: show_text_lowpriority GXT 'STE2_05' time 4000 flag 1  // ~s~Drive back to the ~y~garage~s~.
+114@ = 2 
+
+:STEAL2_23474
+if 
+  114@ == 2 
+jf @STEAL2_23531 
+if 
+  112@ == 0 
+jf @STEAL2_23531 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+114@ = 3 
+
+:STEAL2_23531
+if 
+  100@ == 0 
+jf @STEAL2_23892 
+062E: get_actor $ACTOR_CESAR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL2_23892 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+Actor.RemoveReferences(79@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Car.RemoveReferences(39@)
+Car.RemoveReferences(40@)
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(46@)
+Car.RemoveReferences(47@)
+Car.RemoveReferences(48@)
+Car.RemoveReferences(49@)
+Car.RemoveReferences(50@)
+Car.RemoveReferences(51@)
+Car.RemoveReferences(52@)
+Car.RemoveReferences(53@)
+Car.RemoveReferences(54@)
+Car.RemoveReferences(55@)
+Car.RemoveReferences(56@)
+Car.RemoveReferences(57@)
+Car.RemoveReferences(95@)
+Object.RemoveReferences(80@)
+Object.RemoveReferences(81@)
+Object.RemoveReferences(82@)
+Object.RemoveReferences(83@)
+Object.RemoveReferences(84@)
+Object.RemoveReferences(85@)
+Object.RemoveReferences(86@)
+Object.RemoveReferences(87@)
+Object.RemoveReferences(88@)
+Object.RemoveReferences(89@)
+Object.RemoveReferences(90@)
+Object.RemoveReferences(91@)
+Object.RemoveReferences(92@)
+Object.RemoveReferences(93@)
+Object.RemoveReferences(94@)
+100@ = 1 
+
+:STEAL2_23892
+if 
+   Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_23985 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -2024.7 179.4 27.4 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @STEAL2_23985 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Player.CanMove($PLAYER_CHAR) = False
+100@ = 0 
+99@ = 14 
+
+:STEAL2_23985
+if 
+  99@ == 14 
+jf @STEAL2_24980 
+if 
+  100@ == 0 
+jf @STEAL2_24572 
+fade 0 500 
+
+:STEAL2_24028
+if 
+fading 
+jf @STEAL2_24052 
+wait 0 
+jump @STEAL2_24028 
+
+:STEAL2_24052
+Garage.Open('HBGDSFS')
+
+:STEAL2_24063
+if 
+   not Garage.IsOpen('HBGDSFS')
+jf @STEAL2_24096 
+wait 0 
+jump @STEAL2_24063 
+
+:STEAL2_24096
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_24128 
+jump @STEAL2_26060 
+
+:STEAL2_24128
+select_interior 1 
+09F5: disable_player_mutal_activities 1 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+112@ = 0 
+04ED: load_animation "PLAYIDLES" 
+038B: load_requested_models 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+0395: clear_area 1 at -2043.7 171.4 27.6 radius 100.0 
+0840: link_car 34@ to_interior 1 
+Car.PutAt(34@, -2043.7, 171.4, 27.6)
+Car.Angle(34@) = 91.6
+0A0B: set_rendering_origin_at_3D_coord -2045.4 173.1 27.8 angle 309.5 
+0860: link_actor $ACTOR_CESAR to_interior 1 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, -2045.4, 173.1, 27.8)
+Actor.Angle($ACTOR_CESAR) = 325.5
+0840: link_car 35@ to_interior 1 
+Car.PutAt(35@, -2033.8, 178.6, 27.6)
+Car.Angle(35@) = 90.0
+if 
+   not Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_24384 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:STEAL2_24384
+0615: define_AS_pack_begin 171@ 
+05D1: AS_actor -1 drive_car 35@ to -2044.4 177.6 27.6 speed 5.0 1 model #CSPLAY 2 
+0633: AS_actor -1 exit_car 
+0639: AS_actor -1 rotate_to_actor $ACTOR_CESAR 
+0616: define_AS_pack_end 171@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 171@ 
+061B: remove_references_to_AS_pack 171@ 
+Camera.SetPosition(-2049.3, 172.8, 28.78, 0.0, 0.0, 0.0)
+Camera.PointAt(-2034.7, 177.4, 29.8, 2)
+fade 1 1000 
+
+:STEAL2_24509
+if 
+fading 
+jf @STEAL2_24533 
+wait 0 
+jump @STEAL2_24509 
+
+:STEAL2_24533
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_24565 
+jump @STEAL2_26060 
+
+:STEAL2_24565
+100@ = 1 
+
+:STEAL2_24572
+if 
+  100@ == 1 
+jf @STEAL2_24675 
+if 
+00B0:   car 35@ sphere 0 in_rectangle_cornerA -2039.3 175.1 cornerB -2041.9 181.6 
+jf @STEAL2_24675 
+0605: actor $ACTOR_CESAR perform_animation "STRETCH" IFP "PLAYIDLES" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+100@ = 2 
+
+:STEAL2_24675
+if 
+  100@ == 2 
+jf @STEAL2_24980 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL2_24980 
+fade 0 500 
+
+:STEAL2_24729
+if 
+fading 
+jf @STEAL2_24753 
+wait 0 
+jump @STEAL2_24729 
+
+:STEAL2_24753
+Garage.Close('HBGDSFS')
+
+:STEAL2_24764
+if 
+   not Garage.IsClosed('HBGDSFS')
+jf @STEAL2_24797 
+wait 0 
+jump @STEAL2_24764 
+
+:STEAL2_24797
+gosub @STEAL2_26397 
+if 
+  102@ == 1 
+jf @STEAL2_24829 
+jump @STEAL2_26060 
+
+:STEAL2_24829
+09F5: disable_player_mutal_activities 0 
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Camera.SetAtPos(-2045.4, 173.1, 27.8)
+0A0B: set_rendering_origin_at_3D_coord -2045.4 173.1 27.8 angle 309.5 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2027.2, 179.5, 27.8)
+Actor.Angle($PLAYER_ACTOR) = 277.5
+fade 1 500 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:STEAL2_24949
+if 
+fading 
+jf @STEAL2_24973 
+wait 0 
+jump @STEAL2_24949 
+
+:STEAL2_24973
+jump @STEAL2_26146 
+
+:STEAL2_24980
+if 
+  99@ == 0 
+jf @STEAL2_25188 
+if 
+87C1:   not path 70 available 
+jf @STEAL2_25017 
+07C0: load_path 70 
+
+:STEAL2_25017
+if 
+87C1:   not path 71 available 
+jf @STEAL2_25036 
+07C0: load_path 71 
+
+:STEAL2_25036
+if 
+87C1:   not path 72 available 
+jf @STEAL2_25055 
+07C0: load_path 72 
+
+:STEAL2_25055
+if 
+87C1:   not path 73 available 
+jf @STEAL2_25074 
+07C0: load_path 73 
+
+:STEAL2_25074
+if 
+87C1:   not path 74 available 
+jf @STEAL2_25093 
+07C0: load_path 74 
+
+:STEAL2_25093
+if 
+87C1:   not path 75 available 
+jf @STEAL2_25112 
+07C0: load_path 75 
+
+:STEAL2_25112
+if 
+87C1:   not path 76 available 
+jf @STEAL2_25131 
+07C0: load_path 76 
+
+:STEAL2_25131
+if 
+87C1:   not path 77 available 
+jf @STEAL2_25150 
+07C0: load_path 77 
+
+:STEAL2_25150
+if 
+87C1:   not path 78 available 
+jf @STEAL2_25169 
+07C0: load_path 78 
+
+:STEAL2_25169
+if 
+87C1:   not path 79 available 
+jf @STEAL2_25188 
+07C0: load_path 79 
+
+:STEAL2_25188
+if 
+  99@ == 2 
+jf @STEAL2_25301 
+if 
+87C1:   not path 80 available 
+jf @STEAL2_25225 
+07C0: load_path 80 
+
+:STEAL2_25225
+if 
+87C1:   not path 81 available 
+jf @STEAL2_25244 
+07C0: load_path 81 
+
+:STEAL2_25244
+if 
+87C1:   not path 83 available 
+jf @STEAL2_25263 
+07C0: load_path 83 
+
+:STEAL2_25263
+if 
+87C1:   not path 84 available 
+jf @STEAL2_25282 
+07C0: load_path 84 
+
+:STEAL2_25282
+if 
+87C1:   not path 85 available 
+jf @STEAL2_25301 
+07C0: load_path 85 
+
+:STEAL2_25301
+if 
+  99@ == 4 
+jf @STEAL2_25357 
+if 
+87C1:   not path 86 available 
+jf @STEAL2_25338 
+07C0: load_path 86 
+
+:STEAL2_25338
+if 
+87C1:   not path 87 available 
+jf @STEAL2_25357 
+07C0: load_path 87 
+
+:STEAL2_25357
+if 
+  99@ == 5 
+jf @STEAL2_25451 
+if 
+87C1:   not path 88 available 
+jf @STEAL2_25394 
+07C0: load_path 88 
+
+:STEAL2_25394
+if 
+87C1:   not path 89 available 
+jf @STEAL2_25413 
+07C0: load_path 89 
+
+:STEAL2_25413
+if 
+87C1:   not path 90 available 
+jf @STEAL2_25432 
+07C0: load_path 90 
+
+:STEAL2_25432
+if 
+87C1:   not path 91 available 
+jf @STEAL2_25451 
+07C0: load_path 91 
+
+:STEAL2_25451
+if 
+  99@ == 6 
+jf @STEAL2_25507 
+if 
+87C1:   not path 92 available 
+jf @STEAL2_25488 
+07C0: load_path 92 
+
+:STEAL2_25488
+if 
+87C1:   not path 93 available 
+jf @STEAL2_25507 
+07C0: load_path 93 
+
+:STEAL2_25507
+if 
+  99@ == 7 
+jf @STEAL2_25601 
+if 
+87C1:   not path 94 available 
+jf @STEAL2_25544 
+07C0: load_path 94 
+
+:STEAL2_25544
+if 
+87C1:   not path 95 available 
+jf @STEAL2_25563 
+07C0: load_path 95 
+
+:STEAL2_25563
+if 
+87C1:   not path 96 available 
+jf @STEAL2_25582 
+07C0: load_path 96 
+
+:STEAL2_25582
+if 
+87C1:   not path 97 available 
+jf @STEAL2_25601 
+07C0: load_path 97 
+
+:STEAL2_25601
+if 
+  99@ == 8 
+jf @STEAL2_25695 
+if 
+87C1:   not path 98 available 
+jf @STEAL2_25638 
+07C0: load_path 98 
+
+:STEAL2_25638
+if 
+87C1:   not path 65 available 
+jf @STEAL2_25657 
+07C0: load_path 65 
+
+:STEAL2_25657
+if 
+87C1:   not path 66 available 
+jf @STEAL2_25676 
+07C0: load_path 66 
+
+:STEAL2_25676
+if 
+87C1:   not path 67 available 
+jf @STEAL2_25695 
+07C0: load_path 67 
+
+:STEAL2_25695
+if 
+  99@ == 11 
+jf @STEAL2_25732 
+if 
+87C1:   not path 99 available 
+jf @STEAL2_25732 
+07C0: load_path 99 
+
+:STEAL2_25732
+if 
+  99@ > 0 
+jf @STEAL2_26003 
+if 
+  13 > 99@ 
+jf @STEAL2_26003 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 34@ radius 150.0 150.0 sphere 0 
+jf @STEAL2_25840 
+if 
+82CA:   not car 34@ bounding_sphere_visible 
+jf @STEAL2_25840 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_06' time 4000 flag 1  // ~r~You lost Cesar!
+jump @STEAL2_26060 
+
+:STEAL2_25840
+if 
+8202:   not actor $PLAYER_ACTOR near_car 35@ radius 120.0 120.0 sphere 0 
+jf @STEAL2_25912 
+if 
+82CA:   not car 35@ bounding_sphere_visible 
+jf @STEAL2_25912 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_09' time 4000 flag 1  // ~r~The police recovered one of the cars!
+jump @STEAL2_26060 
+
+:STEAL2_25912
+if 
+   not Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_26003 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 35@ radius 160.0 160.0 sphere 0 
+jf @STEAL2_26003 
+if 
+82CA:   not car 35@ bounding_sphere_visible 
+jf @STEAL2_26003 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_08' time 4000 flag 1  // ~r~The target car was destroyed.
+jump @STEAL2_26060 
+
+:STEAL2_26003
+if 
+  99@ > 0 
+jf @STEAL2_26046 
+if 
+  14 > 99@ 
+jf @STEAL2_26046 
+gosub @STEAL2_26705 
+
+:STEAL2_26046
+gosub @STEAL2_29034 
+jump @STEAL2_1035 
+
+:STEAL2_26060
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @STEAL2_26128 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:STEAL2_26128
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:STEAL2_26146
+$STEAL_TOTAL_PASSED_MISSIONS += 1 
+014C: set_parked_car_generator $2791 cars_to_generate_to 101 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 5000
+0998: add_respect 5 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'STEAL_2'  // Test Drive
+030C: progress_made = 1 
+return 
+
+:STEAL2_26217
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @STEAL2_26235 
+Camera.Restore_WithJumpCut
+
+:STEAL2_26235
+Actor.DestroyWithFade($ACTOR_CESAR)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @STEAL2_26263 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:STEAL2_26263
+09F5: disable_player_mutal_activities 0 
+Model.Destroy(#ELEGY)
+Model.Destroy(#SULTAN)
+Model.Destroy(#WMYBU)
+Model.Destroy(#MULE)
+Model.Destroy(#CARDBOARDBOX)
+Model.Destroy(#TRAM)
+Model.Destroy(#COPCARSF)
+Model.Destroy(#SFPD1)
+Model.Destroy(#COACH)
+Model.Destroy(#PCJ600)
+06EB: release_car_component #NTO_B_S 
+Model.Destroy(#DOZER)
+Model.Destroy(#CEMENT)
+Model.Destroy(#DYN_ROADBARRIER_3)
+Model.Destroy(#DYN_ROADBARRIER_4)
+Model.Destroy(#KMB_SKIP)
+Model.Destroy(#DYN_DUMPSTER)
+Model.Destroy(#DYN_RAMP)
+0734: reset_random_car_generator_models 
+04EF: release_animation "PLAYIDLES" 
+Marker.Disable(98@)
+0296: unload_special_actor 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:STEAL2_26397
+if 
+   Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_26438 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_07' time 4000 flag 1  // ~r~Cesar was killed.
+102@ = 1 
+
+:STEAL2_26438
+if 
+   Car.Wrecked(35@)
+jf @STEAL2_26479 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_08' time 4000 flag 1  // ~r~The target car was destroyed.
+102@ = 1 
+
+:STEAL2_26479
+if 
+   Car.Wrecked(34@)
+jf @STEAL2_26520 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE2_08' time 4000 flag 1  // ~r~The target car was destroyed.
+102@ = 1 
+
+:STEAL2_26520
+return 
+
+:STEAL2_26522
+if 
+  104@ == 1 
+jf @STEAL2_26586 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_26586 
+Marker.Disable(98@)
+98@ = Marker.CreateAboveActor($ACTOR_CESAR)
+07E0: set_marker 98@ type_to 1 
+104@ = 0 
+
+:STEAL2_26586
+if 
+  104@ == 0 
+jf @STEAL2_26703 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 8.0 8.0 8.0 sphere 0 
+jf @STEAL2_26703 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_26671 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+
+:STEAL2_26671
+Marker.Disable(98@)
+018A: 98@ = create_checkpoint_at -1632.9 1207.4 6.1 
+104@ = 1 
+
+:STEAL2_26703
+return 
+
+:STEAL2_26705
+if 
+  105@ == 0 
+jf @STEAL2_26857 
+if 
+   Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_26857 
+03D5: remove_text 'IN_VEH'  // ~s~Hey! Get back in the ~b~vehicle~s~!
+Marker.Disable(98@)
+if 
+  99@ == 13 
+jf @STEAL2_26819 
+018A: 98@ = create_checkpoint_at -2024.7 179.4 27.4 
+00BB: show_text_lowpriority GXT 'STE2_05' time 4000 flag 1  // ~s~Drive back to the ~y~garage~s~.
+jump @STEAL2_26850 
+
+:STEAL2_26819
+98@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 98@ type_to 1 
+00BB: show_text_lowpriority GXT 'STE2_02' time 7000 flag 1  // ~s~Stay close to ~b~Cesar~s~ as you return to the garage.
+
+:STEAL2_26850
+105@ = 1 
+
+:STEAL2_26857
+if 
+  105@ == 1 
+jf @STEAL2_26959 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 35@)
+jf @STEAL2_26959 
+03D5: remove_text 'STE2_05'  // ~s~Drive back to the ~y~garage~s~.
+03D5: remove_text 'STE2_02'  // ~s~Stay close to ~b~Cesar~s~ as you return to the garage.
+00BB: show_text_lowpriority GXT 'STE2_11' time 7000 flag 1  // ~s~Get back in the ~b~car~s~.
+Marker.Disable(98@)
+98@ = Marker.CreateAboveCar(35@)
+07E0: set_marker 98@ type_to 1 
+105@ = 0 
+
+:STEAL2_26959
+return 
+
+:STEAL2_26961
+Actor.StorePos($PLAYER_ACTOR, 162@, 163@, $TEMPVAR_FLOAT_3)
+Car.StorePos(34@, 164@, 165@, $TEMPVAR_FLOAT_3)
+0509: 166@ = distance_between_XY 162@ 163@ and_XY 164@ 165@ 
+if 
+  21.0 > 166@ 
+jf @STEAL2_27070 
+166@ /= 20.0 
+0087: 167@ = 166@ // (float) 
+166@ = 2.0 
+0063: 166@ -= 167@ // (float) 
+jump @STEAL2_27116 
+
+:STEAL2_27070
+166@ -= 20.0 
+166@ /= 90.0 
+0087: 167@ = 166@ // (float) 
+166@ = 1.0 
+0063: 166@ -= 167@ // (float) 
+
+:STEAL2_27116
+166@ += 0.3 
+0087: 168@ = 166@ // (float) 
+if 
+  168@ > 2.0 
+jf @STEAL2_27165 
+168@ = 2.0 
+
+:STEAL2_27165
+if 
+  0.5 > 168@ 
+jf @STEAL2_27196 
+168@ = 0.5 
+
+:STEAL2_27196
+if 
+060E:   car 34@ assigned_to_path 
+jf @STEAL2_27220 
+06FD: set_car 34@ speed_on_path_to 168@ 
+
+:STEAL2_27220
+if 
+   not Car.Wrecked(95@)
+jf @STEAL2_27260 
+if 
+060E:   car 95@ assigned_to_path 
+jf @STEAL2_27260 
+06FD: set_car 95@ speed_on_path_to 168@ 
+
+:STEAL2_27260
+if 
+  99@ == 1 
+jf @STEAL2_27518 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_27318 
+if 
+060E:   car 38@ assigned_to_path 
+jf @STEAL2_27318 
+06FD: set_car 38@ speed_on_path_to 168@ 
+
+:STEAL2_27318
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_27358 
+if 
+060E:   car 39@ assigned_to_path 
+jf @STEAL2_27358 
+06FD: set_car 39@ speed_on_path_to 168@ 
+
+:STEAL2_27358
+if 
+   not Car.Wrecked(40@)
+jf @STEAL2_27398 
+if 
+060E:   car 40@ assigned_to_path 
+jf @STEAL2_27398 
+06FD: set_car 40@ speed_on_path_to 168@ 
+
+:STEAL2_27398
+if 
+   not Car.Wrecked(41@)
+jf @STEAL2_27438 
+if 
+060E:   car 41@ assigned_to_path 
+jf @STEAL2_27438 
+06FD: set_car 41@ speed_on_path_to 168@ 
+
+:STEAL2_27438
+if 
+   not Car.Wrecked(42@)
+jf @STEAL2_27478 
+if 
+060E:   car 42@ assigned_to_path 
+jf @STEAL2_27478 
+06FD: set_car 42@ speed_on_path_to 168@ 
+
+:STEAL2_27478
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_27518 
+if 
+060E:   car 43@ assigned_to_path 
+jf @STEAL2_27518 
+06FD: set_car 43@ speed_on_path_to 168@ 
+
+:STEAL2_27518
+if 
+  99@ == 4 
+jf @STEAL2_27560 
+if 
+   not Car.Wrecked(51@)
+jf @STEAL2_27560 
+06FD: set_car 51@ speed_on_path_to 168@ 
+
+:STEAL2_27560
+if 
+  99@ == 5 
+jf @STEAL2_27602 
+if 
+   not Car.Wrecked(38@)
+jf @STEAL2_27602 
+06FD: set_car 38@ speed_on_path_to 168@ 
+
+:STEAL2_27602
+if 
+  99@ == 6 
+jf @STEAL2_27692 
+if 
+   not Car.Wrecked(50@)
+jf @STEAL2_27644 
+06FD: set_car 50@ speed_on_path_to 168@ 
+
+:STEAL2_27644
+if 
+   not Car.Wrecked(52@)
+jf @STEAL2_27668 
+06FD: set_car 52@ speed_on_path_to 168@ 
+
+:STEAL2_27668
+if 
+   not Car.Wrecked(53@)
+jf @STEAL2_27692 
+06FD: set_car 53@ speed_on_path_to 168@ 
+
+:STEAL2_27692
+if 
+  99@ == 7 
+jf @STEAL2_27734 
+if 
+   not Car.Wrecked(39@)
+jf @STEAL2_27734 
+06FD: set_car 39@ speed_on_path_to 168@ 
+
+:STEAL2_27734
+if 
+  99@ == 8 
+jf @STEAL2_27800 
+if 
+   not Car.Wrecked(43@)
+jf @STEAL2_27776 
+06FD: set_car 43@ speed_on_path_to 168@ 
+
+:STEAL2_27776
+if 
+   not Car.Wrecked(44@)
+jf @STEAL2_27800 
+06FD: set_car 44@ speed_on_path_to 168@ 
+
+:STEAL2_27800
+return 
+
+:STEAL2_27802
+0209: 111@ = random_int_in_ranges 0 37 
+if 
+  111@ == 0 
+jf @STEAL2_27844 
+0674: set_car_model 110@ numberplate "GOT_M00_" 
+
+:STEAL2_27844
+if 
+  111@ == 1 
+jf @STEAL2_27877 
+0674: set_car_model 110@ numberplate "M00TV_4U" 
+
+:STEAL2_27877
+if 
+  111@ == 2 
+jf @STEAL2_27910 
+0674: set_car_model 110@ numberplate "MATHEW_2" 
+
+:STEAL2_27910
+if 
+  111@ == 3 
+jf @STEAL2_27943 
+0674: set_car_model 110@ numberplate "D4_DEW0R" 
+
+:STEAL2_27943
+if 
+  111@ == 4 
+jf @STEAL2_27976 
+0674: set_car_model 110@ numberplate "D0DE_777" 
+
+:STEAL2_27976
+if 
+  111@ == 5 
+jf @STEAL2_28009 
+0674: set_car_model 110@ numberplate "DAM0_666" 
+
+:STEAL2_28009
+if 
+  111@ == 6 
+jf @STEAL2_28042 
+0674: set_car_model 110@ numberplate "C0NEY_88" 
+
+:STEAL2_28042
+if 
+  111@ == 7 
+jf @STEAL2_28075 
+0674: set_car_model 110@ numberplate "PRE4CHER" 
+
+:STEAL2_28075
+if 
+  111@ == 8 
+jf @STEAL2_28108 
+0674: set_car_model 110@ numberplate "DBP_4NDY" 
+
+:STEAL2_28108
+if 
+  111@ == 9 
+jf @STEAL2_28141 
+0674: set_car_model 110@ numberplate "EV1L_SLY" 
+
+:STEAL2_28141
+if 
+  111@ == 10 
+jf @STEAL2_28174 
+0674: set_car_model 110@ numberplate "N1_R4V3N" 
+
+:STEAL2_28174
+if 
+  111@ == 11 
+jf @STEAL2_28207 
+0674: set_car_model 110@ numberplate "D1VX_Z00" 
+
+:STEAL2_28207
+if 
+  111@ == 12 
+jf @STEAL2_28240 
+0674: set_car_model 110@ numberplate "MR_B3NN_" 
+
+:STEAL2_28240
+if 
+  111@ == 13 
+jf @STEAL2_28273 
+0674: set_car_model 110@ numberplate "R3D_R4SP" 
+
+:STEAL2_28273
+if 
+  111@ == 14 
+jf @STEAL2_28306 
+0674: set_car_model 110@ numberplate "LA_B0MBA" 
+
+:STEAL2_28306
+if 
+  111@ == 15 
+jf @STEAL2_28339 
+0674: set_car_model 110@ numberplate "L3337_0G" 
+
+:STEAL2_28339
+if 
+  111@ == 16 
+jf @STEAL2_28372 
+0674: set_car_model 110@ numberplate "BUDD4H_X" 
+
+:STEAL2_28372
+if 
+  111@ == 17 
+jf @STEAL2_28405 
+0674: set_car_model 110@ numberplate "T3H_BUCK" 
+
+:STEAL2_28405
+if 
+  111@ == 18 
+jf @STEAL2_28438 
+0674: set_car_model 110@ numberplate "CHUNKY_1" 
+
+:STEAL2_28438
+if 
+  111@ == 19 
+jf @STEAL2_28471 
+0674: set_car_model 110@ numberplate "EV1L_BNZ" 
+
+:STEAL2_28471
+if 
+  111@ == 20 
+jf @STEAL2_28504 
+0674: set_car_model 110@ numberplate "S4ND_M4N" 
+
+:STEAL2_28504
+if 
+  111@ == 21 
+jf @STEAL2_28537 
+0674: set_car_model 110@ numberplate "RKK_DBP1" 
+
+:STEAL2_28537
+if 
+  111@ == 22 
+jf @STEAL2_28570 
+0674: set_car_model 110@ numberplate "RE1_K0KU" 
+
+:STEAL2_28570
+if 
+  111@ == 23 
+jf @STEAL2_28603 
+0674: set_car_model 110@ numberplate "S3XY_JUD" 
+
+:STEAL2_28603
+if 
+  111@ == 24 
+jf @STEAL2_28636 
+0674: set_car_model 110@ numberplate "SUNRA_93" 
+
+:STEAL2_28636
+if 
+  111@ == 25 
+jf @STEAL2_28669 
+0674: set_car_model 110@ numberplate "UG_FUX69" 
+
+:STEAL2_28669
+if 
+  111@ == 26 
+jf @STEAL2_28702 
+0674: set_car_model 110@ numberplate "LI0N_CUM" 
+
+:STEAL2_28702
+if 
+  111@ == 27 
+jf @STEAL2_28735 
+0674: set_car_model 110@ numberplate "RKK_PWND" 
+
+:STEAL2_28735
+if 
+  111@ == 28 
+jf @STEAL2_28768 
+0674: set_car_model 110@ numberplate "HAZE_B0B" 
+
+:STEAL2_28768
+if 
+  111@ == 29 
+jf @STEAL2_28801 
+0674: set_car_model 110@ numberplate "T3H_FLUF" 
+
+:STEAL2_28801
+if 
+  111@ == 30 
+jf @STEAL2_28834 
+0674: set_car_model 110@ numberplate "BM_4NDY_" 
+
+:STEAL2_28834
+if 
+  111@ == 31 
+jf @STEAL2_28867 
+0674: set_car_model 110@ numberplate "BM_D34N_" 
+
+:STEAL2_28867
+if 
+  111@ == 32 
+jf @STEAL2_28900 
+0674: set_car_model 110@ numberplate "BM_L4C3Y" 
+
+:STEAL2_28900
+if 
+  111@ == 33 
+jf @STEAL2_28933 
+0674: set_car_model 110@ numberplate "BM_D3V__" 
+
+:STEAL2_28933
+if 
+  111@ == 34 
+jf @STEAL2_28966 
+0674: set_car_model 110@ numberplate "NU_SK00L" 
+
+:STEAL2_28966
+if 
+  111@ == 35 
+jf @STEAL2_28999 
+0674: set_car_model 110@ numberplate "G4L_AVET" 
+
+:STEAL2_28999
+if 
+  111@ == 36 
+jf @STEAL2_29032 
+0674: set_car_model 110@ numberplate "M0J0_J0J" 
+
+:STEAL2_29032
+return 
+
+:STEAL2_29034
+if 
+  112@ == 1 
+jf @STEAL2_29160 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29153 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_29115 
+gosub @STEAL2_32494 
+jump @STEAL2_29146 
+
+:STEAL2_29115
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+155@ = 0 
+156@ = 0 
+
+:STEAL2_29146
+jump @STEAL2_29160 
+
+:STEAL2_29153
+112@ = 0 
+
+:STEAL2_29160
+if or
+  112@ == 4 
+  112@ == 5 
+  112@ == 6 
+jf @STEAL2_29246 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29239 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+gosub @STEAL2_32494 
+jump @STEAL2_29246 
+
+:STEAL2_29239
+112@ = 0 
+
+:STEAL2_29246
+if or
+  112@ == 7 
+  112@ == 8 
+  112@ == 9 
+  112@ == 10 
+  112@ == 11 
+  112@ == 12 
+jf @STEAL2_29407 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29400 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_29362 
+gosub @STEAL2_32494 
+jump @STEAL2_29393 
+
+:STEAL2_29362
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+155@ = 0 
+156@ = 0 
+
+:STEAL2_29393
+jump @STEAL2_29407 
+
+:STEAL2_29400
+112@ = 0 
+
+:STEAL2_29407
+if 
+  99@ == 0 
+jf @STEAL2_30344 
+if 
+  100@ == 0 
+jf @STEAL2_30344 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_29813 
+if 
+0104:   actor $ACTOR_CESAR near_actor $PLAYER_ACTOR radius 10.0 10.0 8.0 sphere 0 
+jf @STEAL2_29806 
+if and
+044B:   actor $PLAYER_ACTOR on_foot 
+044B:   actor $ACTOR_CESAR on_foot 
+jf @STEAL2_29652 
+if or
+  112@ == 2 
+  112@ == 3 
+jf @STEAL2_29652 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29645 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_29607 
+gosub @STEAL2_32494 
+jump @STEAL2_29638 
+
+:STEAL2_29607
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+155@ = 0 
+156@ = 0 
+
+:STEAL2_29638
+jump @STEAL2_29652 
+
+:STEAL2_29645
+112@ = 0 
+
+:STEAL2_29652
+if and
+   Actor.Driving($PLAYER_ACTOR)
+   Actor.Driving($ACTOR_CESAR)
+jf @STEAL2_29806 
+if or
+  112@ == 2 
+  112@ == 3 
+jf @STEAL2_29806 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29799 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_29761 
+gosub @STEAL2_32494 
+jump @STEAL2_29792 
+
+:STEAL2_29761
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+155@ = 0 
+156@ = 0 
+
+:STEAL2_29792
+jump @STEAL2_29806 
+
+:STEAL2_29799
+112@ = 0 
+
+:STEAL2_29806
+jump @STEAL2_29930 
+
+:STEAL2_29813
+if 
+  14 > 112@ 
+jf @STEAL2_29930 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_29857 
+113@ += 1 
+
+:STEAL2_29857
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+00BE: text_clear_all 
+0085: 160@ = 112@ // (int) 
+0085: 161@ = 113@ // (int) 
+112@ = 14 
+0209: 113@ = random_int_in_ranges 0 4 
+0085: 159@ = 113@ // (int) 
+159@ += 1 
+gosub @STEAL2_30346 
+
+:STEAL2_29930
+if 
+  112@ == 14 
+jf @STEAL2_30121 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_30098 
+if 
+001D:   154@ > 113@ // (int) 
+jf @STEAL2_30068 
+gosub @STEAL2_32233 
+gosub @STEAL2_32340 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @STEAL2_30030 
+gosub @STEAL2_32494 
+jump @STEAL2_30061 
+
+:STEAL2_30030
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+155@ = 0 
+156@ = 0 
+
+:STEAL2_30061
+jump @STEAL2_30091 
+
+:STEAL2_30068
+00BB: show_text_lowpriority GXT 'STE2_10' time 7000 flag 1  // ~s~You have left ~b~Cesar~s~ behind.
+112@ = 15 
+
+:STEAL2_30091
+jump @STEAL2_30121 
+
+:STEAL2_30098
+00BB: show_text_lowpriority GXT 'STE2_10' time 7000 flag 1  // ~s~You have left ~b~Cesar~s~ behind.
+112@ = 15 
+
+:STEAL2_30121
+if 
+  112@ == 15 
+jf @STEAL2_30174 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_30174 
+112@ = 16 
+113@ = 0 
+00BE: text_clear_all 
+
+:STEAL2_30174
+if 
+  112@ == 16 
+jf @STEAL2_30344 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @STEAL2_30289 
+33@ = 0 
+0085: 112@ = 160@ // (int) 
+0085: 113@ = 161@ // (int) 
+gosub @STEAL2_30346 
+if 
+  160@ == 0 
+jf @STEAL2_30282 
+00BB: show_text_lowpriority GXT 'STE2_01' time 7000 flag 1  // ~s~Go and get the cars from the ~y~car showroom~s~.
+33@ = 0 
+
+:STEAL2_30282
+jump @STEAL2_30344 
+
+:STEAL2_30289
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 115@(113@,13s) 
+112@ = 14 
+0209: 113@ = random_int_in_ranges 0 4 
+0085: 159@ = 113@ // (int) 
+159@ += 1 
+gosub @STEAL2_30346 
+
+:STEAL2_30344
+return 
+
+:STEAL2_30346
+if 
+  112@ == 1 
+jf @STEAL2_30395 
+05AA: 115@s = 'STL2_AA' // @s = 'short'  // ~z~OK, let's go get those wheels!
+04AF: 141@ = 36800 // = constant 
+154@ = 1 
+
+:STEAL2_30395
+if 
+  112@ == 2 
+jf @STEAL2_30708 
+05AA: 115@s = 'STL2_BA' // @s = 'short'  // ~z~I like this place, you know.
+05AA: 117@s = 'STL2_BB' // @s = 'short'  // ~z~Where?
+05AA: 119@s = 'STL2_BC' // @s = 'short'  // ~z~San Fierro, man.
+05AA: 121@s = 'STL2_BD' // @s = 'short'  // ~z~My home will always be the Varrios and El Corona,
+05AA: 123@s = 'STL2_BE' // @s = 'short'  // ~z~but this city, it has something gentle about it.
+05AA: 125@s = 'STL2_BF' // @s = 'short'  // ~z~Yeah, I know what you mean.
+05AA: 127@s = 'STL2_BG' // @s = 'short'  // ~z~Kendl seems to like it too, you know?
+05AA: 129@s = 'STL2_BH' // @s = 'short'  // ~z~Oh yeah, she's really getting her head into this business thing.
+05AA: 131@s = 'STL2_BJ' // @s = 'short'  // ~z~That's good, she's always been the brains in the family.
+05AA: 133@s = 'STL2_BK' // @s = 'short'  // ~z~She should get out the ghetto and make something of herself.
+05AA: 135@s = 'STL2_BL' // @s = 'short'  // ~z~I think she's aiming to make something out of ALL of us, eh!
+05AA: 137@s = 'STL2_BM' // @s = 'short'  // ~z~Yeah, she's the moms of the family now...
+04AF: 141@ = 36801 // = constant 
+04AF: 142@ = 36802 // = constant 
+04AF: 143@ = 36803 // = constant 
+04AF: 144@ = 36804 // = constant 
+04AF: 145@ = 36805 // = constant 
+04AF: 146@ = 36806 // = constant 
+04AF: 147@ = 36807 // = constant 
+04AF: 148@ = 36808 // = constant 
+04AF: 149@ = 36809 // = constant 
+04AF: 150@ = 36810 // = constant 
+04AF: 151@ = 36811 // = constant 
+04AF: 152@ = 36812 // = constant 
+154@ = 12 
+
+:STEAL2_30708
+if 
+  112@ == 3 
+jf @STEAL2_30901 
+05AA: 115@s = 'STL2_CA' // @s = 'short'  // ~z~Hey, who's this 'Truth' guy, holmes? I don't think he's wrapped too tight!
+05AA: 117@s = 'STL2_CB' // @s = 'short'  // ~z~He just sees everything from a different perspective, that's all.
+05AA: 119@s = 'STL2_CC' // @s = 'short'  // ~z~At first I thought he was just another acid casualty fruit cake.
+05AA: 121@s = 'STL2_CD' // @s = 'short'  // ~z~But some of the things he say...
+05AA: 123@s = 'STL2_CE' // @s = 'short'  // ~z~I don't know, man, it ain't all bullshit....
+05AA: 125@s = 'STL2_CF' // @s = 'short'  // ~z~Hey, you gonna become an alien hunter, holmes?
+05AA: 127@s = 'STL2_CG' // @s = 'short'  // ~z~I'll take a rain check on that one.
+04AF: 141@ = 36813 // = constant 
+04AF: 142@ = 36814 // = constant 
+04AF: 143@ = 36815 // = constant 
+04AF: 144@ = 36816 // = constant 
+04AF: 145@ = 36817 // = constant 
+04AF: 146@ = 36818 // = constant 
+04AF: 147@ = 36819 // = constant 
+154@ = 7 
+
+:STEAL2_30901
+if 
+  112@ == 4 
+jf @STEAL2_31143 
+05AA: 115@s = 'STL2_DA' // @s = 'short'  // ~z~This is the place!
+05AA: 117@s = 'STL2_DB' // @s = 'short'  // ~z~Here we go, holmes.
+05AA: 119@s = 'STL2_DC' // @s = 'short'  // ~z~This is it, CJ!
+05AA: 121@s = 'STL2_DD' // @s = 'short'  // ~z~The cars are upstairs!
+05AA: 123@s = 'STL2_DE' // @s = 'short'  // ~z~The cars are on the second floor.
+05AA: 125@s = 'STL2_DF' // @s = 'short'  // ~z~They're in the second floor showroom.
+05AA: 127@s = 'STL2_DH' // @s = 'short'  // ~z~What? How we gonna get 'em down?
+05AA: 129@s = 'STL2_DJ' // @s = 'short'  // ~z~Second floor? Shit!
+05AA: 131@s = 'STL2_DK' // @s = 'short'  // ~z~Aw great! Why is nothing ever easy?
+04AF: 141@ = 36820 // = constant 
+04AF: 142@ = 36821 // = constant 
+04AF: 143@ = 36822 // = constant 
+04AF: 144@ = 36823 // = constant 
+04AF: 145@ = 36824 // = constant 
+04AF: 146@ = 36825 // = constant 
+04AF: 147@ = 36826 // = constant 
+04AF: 148@ = 36827 // = constant 
+04AF: 149@ = 36828 // = constant 
+0085: 154@ = 159@ // (int) 
+
+:STEAL2_31143
+if 
+  112@ == 5 
+jf @STEAL2_31288 
+05AA: 115@s = 'STL2_EA' // @s = 'short'  // ~z~Can I help you two, eerr, gentlemen?
+05AA: 117@s = 'STL2_EB' // @s = 'short'  // ~z~Yeah, you can help us by going to help some other motherfucker.
+05AA: 119@s = 'STL2_EC' // @s = 'short'  // ~z~Y- yeah, that sounds like a good idea!
+05AA: 121@s = 'STL2_ED' // @s = 'short'  // ~z~Alright, CJ, it's time to roll!
+05AA: 123@s = 'STL2_EE' // @s = 'short'  // ~z~It's follow the leader, you better keep up!
+04AF: 141@ = 36829 // = constant 
+04AF: 142@ = 36830 // = constant 
+04AF: 143@ = 36831 // = constant 
+04AF: 144@ = 36832 // = constant 
+04AF: 145@ = 36833 // = constant 
+154@ = 5 
+
+:STEAL2_31288
+if 
+  112@ == 6 
+jf @STEAL2_31337 
+05AA: 115@s = 'STL2_EF' // @s = 'short'  // ~z~Aw, you a maniac, ese!
+04AF: 141@ = 36834 // = constant 
+154@ = 1 
+
+:STEAL2_31337
+if 
+  112@ == 7 
+jf @STEAL2_31434 
+05AA: 115@s = 'STL2_FA' // @s = 'short'  // ~z~Hey, CJ, is this walkie talkie working?
+05AA: 117@s = 'STL2_FB' // @s = 'short'  // ~z~Yeah, reading you loud and clear!
+05AA: 119@s = 'STL2_FC' // @s = 'short'  // ~z~C'mon, CJ, see if you can keep up with Cesar Vialpando!
+04AF: 141@ = 36835 // = constant 
+04AF: 142@ = 36836 // = constant 
+04AF: 143@ = 36837 // = constant 
+154@ = 3 
+
+:STEAL2_31434
+if 
+  112@ == 8 
+jf @STEAL2_31724 
+05AA: 115@s = 'STL2_FD' // @s = 'short'  // ~z~Beat the tram up the hill!
+05AA: 117@s = 'STL2_FE' // @s = 'short'  // ~z~Piece of chocolate cake!
+05AA: 119@s = 'STL2_FF' // @s = 'short'  // ~z~This tram driver must be shitting himself, holmes!
+05AA: 121@s = 'STL2_FG' // @s = 'short'  // ~z~Hello cops, what took you, eh?
+05AA: 123@s = 'STL2_FH' // @s = 'short'  // ~z~Hey, CJ, watch this ... NITRO!
+05AA: 125@s = 'STL2_FJ' // @s = 'short'  // ~z~Follow me down the hill, holmes!
+05AA: 129@s = 'STL2_FO' // @s = 'short'  // ~z~Hello. Cops, back again you idiotas?
+05AA: 131@s = 'STL2_FP' // @s = 'short'  // ~z~Get out of the fucking road!
+05AA: 133@s = 'STL2_FQ' // @s = 'short'  // ~z~Holy SHIIIIIIIT!
+05AA: 135@s = 'STL2_HB' // @s = 'short'  // ~z~I think we lost 'em.
+05AA: 137@s = 'STL2_HC' // @s = 'short'  // ~z~There's a shortcut this way!
+04AF: 141@ = 36838 // = constant 
+04AF: 142@ = 36839 // = constant 
+04AF: 143@ = 36840 // = constant 
+04AF: 144@ = 36841 // = constant 
+04AF: 145@ = 36842 // = constant 
+04AF: 146@ = 36843 // = constant 
+04AF: 148@ = 36848 // = constant 
+04AF: 149@ = 36849 // = constant 
+04AF: 150@ = 36850 // = constant 
+04AF: 151@ = 36855 // = constant 
+04AF: 152@ = 36856 // = constant 
+0085: 154@ = 159@ // (int) 
+
+:STEAL2_31724
+if 
+  112@ == 9 
+jf @STEAL2_31821 
+05AA: 115@s = 'STL2_FL' // @s = 'short'  // ~z~OK, Cesar, that's enough fun.
+05AA: 117@s = 'STL2_FM' // @s = 'short'  // ~z~Let's get these cars back to the garage!
+05AA: 119@s = 'STL2_FN' // @s = 'short'  // ~z~OK, CJ, hey, I know a quick route!
+04AF: 141@ = 36845 // = constant 
+04AF: 142@ = 36846 // = constant 
+04AF: 143@ = 36847 // = constant 
+154@ = 3 
+
+:STEAL2_31821
+if 
+  112@ == 10 
+jf @STEAL2_31942 
+05AA: 115@s = 'STL2_FR' // @s = 'short'  // ~z~Fuck, holmes, did you see that?
+05AA: 117@s = 'STL2_GA' // @s = 'short'  // ~z~Can we think about getting back
+05AA: 119@s = 'STL2_GB' // @s = 'short'  // ~z~before I end up in a carwreck barbeque?
+05AA: 121@s = 'STL2_HA' // @s = 'short'  // ~z~Sure thing, holmes.
+04AF: 141@ = 36851 // = constant 
+04AF: 142@ = 36852 // = constant 
+04AF: 143@ = 36853 // = constant 
+04AF: 144@ = 36854 // = constant 
+154@ = 4 
+
+:STEAL2_31942
+if 
+  112@ == 11 
+jf @STEAL2_32015 
+05AA: 115@s = 'STL2_HD' // @s = 'short'  // ~z~Uh-oh, more cops!
+05AA: 117@s = 'STL2_HE' // @s = 'short'  // ~z~BACK UP, HOLMES, BACK UP! BACK UP!
+04AF: 141@ = 36857 // = constant 
+04AF: 142@ = 36858 // = constant 
+154@ = 2 
+
+:STEAL2_32015
+if 
+  112@ == 12 
+jf @STEAL2_32088 
+05AA: 115@s = 'STL2_HF' // @s = 'short'  // ~z~OK, we're good.
+05AA: 117@s = 'STL2_HG' // @s = 'short'  // ~z~See you back at the garage, CJ!
+04AF: 141@ = 36859 // = constant 
+04AF: 142@ = 36860 // = constant 
+154@ = 2 
+
+:STEAL2_32088
+if 
+  112@ == 14 
+jf @STEAL2_32202 
+05AA: 115@s = 'CESX_BA' // @s = 'short'  // ~z~Wait up, CJ!
+05AA: 117@s = 'CESX_BB' // @s = 'short'  // ~z~Hang ten, CJ!
+05AA: 119@s = 'CESX_BC' // @s = 'short'  // ~z~Hold up!
+05AA: 121@s = 'CESX_BD' // @s = 'short'  // ~z~Slow down, Carl!
+04AF: 141@ = 10406 // = constant 
+04AF: 142@ = 10407 // = constant 
+04AF: 143@ = 10408 // = constant 
+04AF: 144@ = 10409 // = constant 
+0085: 154@ = 159@ // (int) 
+
+:STEAL2_32202
+0085: 157@ = 113@ // (int) 
+155@ = 0 
+156@ = 0 
+158@ = 1 
+return 
+
+:STEAL2_32233
+if 
+001D:   154@ > 157@ // (int) 
+jf @STEAL2_32338 
+if 
+  155@ == 0 
+jf @STEAL2_32295 
+03CF: load_wav 141@(157@,13i) as 1 
+157@ += 1 
+155@ = 1 
+
+:STEAL2_32295
+if 
+  156@ == 0 
+jf @STEAL2_32338 
+03CF: load_wav 141@(157@,13i) as 2 
+157@ += 1 
+156@ = 1 
+
+:STEAL2_32338
+return 
+
+:STEAL2_32340
+if 
+  158@ == 1 
+jf @STEAL2_32416 
+if 
+  155@ == 1 
+jf @STEAL2_32416 
+if 
+03D0:   wav 1 loaded 
+jf @STEAL2_32416 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 115@(113@,13s) time 4500 flag 1 
+155@ = 2 
+
+:STEAL2_32416
+if 
+  158@ == 2 
+jf @STEAL2_32492 
+if 
+  156@ == 1 
+jf @STEAL2_32492 
+if 
+03D0:   wav 2 loaded 
+jf @STEAL2_32492 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 115@(113@,13s) time 4500 flag 1 
+156@ = 2 
+
+:STEAL2_32492
+return 
+
+:STEAL2_32494
+if 
+  155@ == 2 
+jf @STEAL2_32557 
+if 
+03D2:   wav 1 ended 
+jf @STEAL2_32557 
+03D5: remove_text 115@(113@,13s) 
+113@ += 1 
+158@ = 2 
+155@ = 0 
+
+:STEAL2_32557
+if 
+  156@ == 2 
+jf @STEAL2_32620 
+if 
+03D2:   wav 2 ended 
+jf @STEAL2_32620 
+03D5: remove_text 115@(113@,13s) 
+113@ += 1 
+158@ = 1 
+156@ = 0 
+
+:STEAL2_32620
+return

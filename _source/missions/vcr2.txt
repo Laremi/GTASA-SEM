@@ -1,0 +1,763 @@
+:VCR2
+gosub @VCR2_36 
+if 
+wasted_or_busted 
+jf @VCR2_27 
+gosub @VCR2_5300 
+
+:VCR2_27
+gosub @VCR2_5386 
+end_thread 
+
+:VCR2_36
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'VCR2' 
+wait 0 
+054C: use_GXT_table 'VCR2' 
+08F5: save_player_group 
+02E4: load_cutscene_data 'CRASV2A' 
+
+:VCR2_84
+if 
+86B9:   not cutscene_data_loaded 
+jf @VCR2_108 
+wait 0 
+jump @VCR2_84 
+
+:VCR2_108
+set_weather 17 
+0395: clear_area 0 at -359.5421 2225.525 42.4562 radius 30.9 
+02E7: start_cutscene 
+fade 1 1000 
+
+:VCR2_145
+if 
+82E9:   not cutscene_reached_end 
+jf @VCR2_169 
+wait 0 
+jump @VCR2_145 
+
+:VCR2_169
+fade 0 0 
+
+:VCR2_175
+if 
+fading 
+jf @VCR2_199 
+wait 0 
+jump @VCR2_175 
+
+:VCR2_199
+02EA: end_cutscene 
+if 
+856A:   not cutscene_skipped 
+jf @VCR2_342 
+02E4: load_cutscene_data 'CRASV2B' 
+
+:VCR2_225
+if 
+86B9:   not cutscene_data_loaded 
+jf @VCR2_249 
+wait 0 
+jump @VCR2_225 
+
+:VCR2_249
+set_weather 17 
+0395: clear_area 0 at -359.5421 2225.525 42.4562 radius 30.9 
+02E7: start_cutscene 
+fade 1 1000 
+
+:VCR2_286
+if 
+82E9:   not cutscene_reached_end 
+jf @VCR2_310 
+wait 0 
+jump @VCR2_286 
+
+:VCR2_310
+fade 0 0 
+
+:VCR2_316
+if 
+fading 
+jf @VCR2_340 
+wait 0 
+jump @VCR2_316 
+
+:VCR2_340
+02EA: end_cutscene 
+
+:VCR2_342
+023C: load_special_actor 'PULASKI' as 1 // models 290-299 
+Model.Load(#BANDITO)
+Model.Load(#BUFFALO)
+Model.Load(#DESERT_EAGLE)
+038B: load_requested_models 
+
+:VCR2_372
+if or
+   not Model.Available(#BANDITO)
+   not Model.Available(#BUFFALO)
+   not Model.Available(#DESERT_EAGLE)
+823D:   not special_actor 1 loaded 
+jf @VCR2_413 
+wait 0 
+jump @VCR2_372 
+
+:VCR2_413
+05AA: 48@s = 'VCR2_AA' // @s = 'short'  // ~z~Hey Eddie! You know Tenpenny gonna rub you out too!
+05AA: 50@s = 'VCR2_AB' // @s = 'short'  // ~z~Carl, you got it all wrong, pal!
+05AA: 52@s = 'VCR2_AC' // @s = 'short'  // ~z~Tenpenny was the one saving your ass!
+05AA: 54@s = 'VCR2_AD' // @s = 'short'  // ~z~Every time I wanted to get rid of you he'd find some excuse to keep you alive!
+05AA: 56@s = 'VCR2_AE' // @s = 'short'  // ~z~Well, now it's up to me, and I ain't such a fucking soft touch!
+05AA: 58@s = 'VCR2_BA' // @s = 'short'  // ~z~So how's your sister?
+05AA: 60@s = 'VCR2_BB' // @s = 'short'  // ~z~I always had a thing for her.
+05AA: 62@s = 'VCR2_BC' // @s = 'short'  // ~z~Tenpenny and I got some great shots of her and her varrio boyfriend going at it like a couple of horny Chihuahuas.
+05AA: 64@s = 'VCR2_BE' // @s = 'short'  // ~z~Man, does she put out like a pro!
+05AA: 66@s = 'VCR2_BF' // @s = 'short'  // ~z~Screw you Pulaski!
+05AA: 68@s = 'VCR2_BG' // @s = 'short'  // ~z~I know what you're trying to do, and you ain't gonna crawl inside my head.
+05AA: 70@s = 'VCR2_BH' // @s = 'short'  // ~z~I ain't kidding!
+05AA: 72@s = 'VCR2_BJ' // @s = 'short'  // ~z~It's the best stake-out I ever done!
+05AA: 74@s = 'VCR2_CA' // @s = 'short'  // ~z~Carl, you should have seen your moms before she was buried.
+05AA: 76@s = 'VCR2_CB' // @s = 'short'  // ~z~She was a real mess - most her face was hanging off!
+05AA: 78@s = 'VCR2_CC' // @s = 'short'  // ~z~Don't fucking talk about my Moms!
+05AA: 80@s = 'VCR2_CD' // @s = 'short'  // ~z~The boys, you know, they fooled around with her at the scene, you know...
+05AA: 82@s = 'VCR2_CE' // @s = 'short'  // ~z~... touching her, joking around and shit.
+05AA: 84@s = 'VCR2_CF' // @s = 'short'  // ~z~Fuck you, Pulaski, FUCK YOU!
+05AA: 86@s = 'VCR2_CG' // @s = 'short'  // ~z~Heh heh heh!
+04AF: 88@ = 42400 // = constant 
+04AF: 89@ = 42401 // = constant 
+04AF: 90@ = 42402 // = constant 
+04AF: 91@ = 42403 // = constant 
+04AF: 92@ = 42404 // = constant 
+04AF: 93@ = 42405 // = constant 
+04AF: 94@ = 42406 // = constant 
+04AF: 95@ = 42407 // = constant 
+04AF: 96@ = 42408 // = constant 
+04AF: 97@ = 42409 // = constant 
+04AF: 98@ = 42410 // = constant 
+04AF: 99@ = 42411 // = constant 
+04AF: 100@ = 42412 // = constant 
+04AF: 101@ = 42413 // = constant 
+04AF: 102@ = 42414 // = constant 
+04AF: 103@ = 42415 // = constant 
+04AF: 104@ = 42416 // = constant 
+04AF: 105@ = 42417 // = constant 
+04AF: 106@ = 42418 // = constant 
+04AF: 107@ = 42419 // = constant 
+109@ = 0 
+110@ = 1 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+008B: 111@ = $CURRENT_TIME_IN_MS2 // (int) 
+111@ += 6000 
+0674: set_car_model #BUFFALO numberplate "PULASKI" 
+112@ = Car.Create(#BUFFALO, -371.0292, 2209.82, 41.4921)
+Car.Angle(112@) = 159.2268
+0229: set_car 112@ primary_color_to 8 secondary_color_to 0 
+09C4: set_car 112@ gas_tank_explosion_enabled 0 
+Car.ImmuneToNonPlayer(112@) = True
+073B: unknown_car 112@ flag 1 
+Car.SetImmunities(112@, 1, 1, 1, 1, 1)
+Car.Health(112@) = 2250
+113@ = Actor.Create(Mission1, #SPECIAL01, -335.4141, 2218.942, 41.4921)
+077A: set_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+Actor.Angle(113@) = 104.108
+02A9: set_actor 113@ immune_to_nonplayer 1 
+Actor.SetMaxHealth(113@, 500)
+Actor.Health(113@) = 500
+0446: set_actor 113@ dismemberment_possible 0 
+0946: set_actor 113@ actions_uninterupted_by_weapon_fire 1 
+Actor.WeaponAccuracy(113@) = 80
+Actor.SetImmunities(113@, 1, 1, 1, 0, 0)
+0615: define_AS_pack_begin 37@ 
+05D3: AS_actor -1 goto_point -346.4254 2216.427 41.4921 mode 6 time -2 ms // versionA 
+05CB: AS_actor -1 enter_car 112@ as_driver -2 ms 
+05D1: AS_actor -1 drive_car 112@ to -472.778 1958.194 83.5515 speed 40.0 0 model #CSPLAY 2 
+0616: define_AS_pack_end 37@ 
+0618: assign_actor 113@ to_AS_pack 37@ 
+061B: remove_references_to_AS_pack 37@ 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+wait 0 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+Camera.SetPosition(-341.3325, 2213.11, 42.837, 0.0, 0.0, 0.0)
+Camera.PointAt(-340.718, 2213.898, 42.8258, 2)
+0A0B: set_rendering_origin_at_3D_coord -341.3325 2213.11 42.837 angle 327.4725 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 0 at -334.1724 2214.62 40.4911 radius 30.0 
+Camera.SetAtPos(-334.1724, 2214.62, 40.4911)
+Actor.PutAt($PLAYER_ACTOR, -334.1724, 2214.62, 40.4911)
+Actor.Angle($PLAYER_ACTOR) = 232.082
+Camera.SetBehindPlayer
+114@ = Car.Create(#BANDITO, -342.2552, 2221.39, 41.4911)
+Car.Angle(114@) = 168.7771
+fade 1 500 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 1500 
+47@ = 0 
+115@ = 0 
+01B7: release_weather 
+
+:VCR2_1480
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @VCR2_1511 
+jump @VCR2_5318 
+
+:VCR2_1511
+if 
+   Actor.Dead(113@)
+jf @VCR2_1568 
+if 
+  9 > 47@ 
+jf @VCR2_1568 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 2000 
+47@ = 9 
+
+:VCR2_1568
+if 
+  47@ == 0 
+jf @VCR2_1653 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_1653 
+05D3: AS_actor $PLAYER_ACTOR goto_point -337.9653 2218.594 41.4911 mode 6 time 2000 ms // versionA 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 1500 
+47@ += 1 
+
+:VCR2_1653
+if 
+  47@ == 1 
+jf @VCR2_1832 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_1832 
+Actor.PutAt($PLAYER_ACTOR, -337.9653, 2218.594, 41.4911)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+Actor.PutAt(113@, -359.3949, 2213.404, 41.4911)
+Actor.Angle(113@) = 90.0
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+34@ = Marker.CreateAboveActor(113@)
+00BC: show_text_highpriority GXT 'VCR2__1' time 15000 flag 1  // ~s~Kill ~r~Pulaski!
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 26000 
+47@ += 1 
+
+:VCR2_1832
+if 
+  47@ == 2 
+jf @VCR2_2019 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_2019 
+05D2: AS_actor 113@ run_to_and_hijack_car -1 max_search_radius 40.0 traffic_behavior 2 
+Actor.GiveWeaponAndAmmo(113@, DesertEagle, 9999)
+077A: set_actor 113@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.SetImmunities(113@, 0, 1, 1, 0, 0)
+if 
+  115@ == 0 
+jf @VCR2_1994 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_1987 
+Car.SetImmunities(112@, 0, 0, 0, 0, 0)
+072F: enable_car 112@ stuck_check_distance 4.0 time 4000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 0 to_path -1 // extended 03CC 
+
+:VCR2_1987
+115@ = 1 
+
+:VCR2_1994
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 240000 
+47@ += 1 
+
+:VCR2_2019
+if 
+  47@ == 3 
+jf @VCR2_2782 
+if 
+00EC:   actor 113@ sphere 0 near_point 184.0797 1715.949 radius 40.6 1108.668 
+jf @VCR2_2160 
+062E: get_actor 113@ task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCR2_2160 
+05D1: AS_actor 113@ drive_car -1 to -2466.309 2244.328 3.8078 speed 40.0 0 model #CSPLAY 2 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 10000 
+47@ = 2 
+
+:VCR2_2160
+if 
+00EC:   actor 113@ sphere 0 near_point -2747.482 2334.301 radius 36.34 5.86 
+jf @VCR2_2283 
+062E: get_actor 113@ task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCR2_2283 
+05D1: AS_actor 113@ drive_car -1 to -1446.225 2670.991 54.9682 speed 40.0 0 model #CSPLAY 2 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 10000 
+47@ = 2 
+
+:VCR2_2283
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 113@ radius 200.0 200.0 0 
+jf @VCR2_2375 
+008B: 116@ = $CURRENT_TIME_IN_MS2 // (int) 
+116@ += 8000 
+if 
+875C:   not marker 34@ enabled 
+jf @VCR2_2368 
+05D2: AS_actor 113@ run_to_and_hijack_car -1 max_search_radius 50.0 traffic_behavior 2 
+34@ = Marker.CreateAboveActor(113@)
+
+:VCR2_2368
+jump @VCR2_2468 
+
+:VCR2_2375
+if 
+075C:   marker 34@ enabled 
+jf @VCR2_2426 
+05D2: AS_actor 113@ run_to_and_hijack_car -1 max_search_radius 28.0 traffic_behavior 2 
+00BC: show_text_highpriority GXT 'VCR2__2' time 5000 flag 1  // ~r~Pulaski is getting away!
+Marker.Disable(34@)
+
+:VCR2_2426
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 116@ // (int) 
+jf @VCR2_2468 
+00BC: show_text_highpriority GXT 'VCR2__3' time 5000 flag 1  // ~r~Pulaski got away!
+jump @VCR2_5300 
+
+:VCR2_2468
+if 
+  20 > 109@ 
+jf @VCR2_2695 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 113@ radius 30.0 30.0 0 
+jf @VCR2_2695 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 111@ // (int) 
+jf @VCR2_2695 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_2695 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 48@(109@,20s) // s$ 
+008A: $ACTOR_SPEECH_WAV_FILE = 88@(109@,21i) // (int) 
+create_thread @AUDIOL -1 0 1 110@ 109@ 
+if 
+  110@ == 1 
+jf @VCR2_2630 
+110@ = 2 
+jump @VCR2_2637 
+
+:VCR2_2630
+110@ = 1 
+
+:VCR2_2637
+008B: 111@ = $CURRENT_TIME_IN_MS2 // (int) 
+111@ += 500 
+109@ += 1 
+if 
+  20 > 109@ 
+jf @VCR2_2695 
+040D: unload_wav 110@ 
+03CF: load_wav 88@(109@,21i) as 110@ 
+
+:VCR2_2695
+if 
+   not Actor.Driving(113@)
+jf @VCR2_2782 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 113@ radius 20.0 20.0 0 
+jf @VCR2_2782 
+062E: get_actor 113@ task 1957 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VCR2_2782 
+07A5: AS_actor 113@ attack_actor $PLAYER_ACTOR time 4000 
+
+:VCR2_2782
+if 
+  47@ == 9 
+jf @VCR2_2863 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_2863 
+if 
+04AD:   actor 113@ in_water 
+jf @VCR2_2849 
+jump @VCR2_5318 
+jump @VCR2_2863 
+
+:VCR2_2849
+fade 0 500 
+47@ += 1 
+
+:VCR2_2863
+if 
+  47@ == 10 
+jf @VCR2_3045 
+04ED: load_animation "SWAT" 
+if 
+   not fading 
+jf @VCR2_3045 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Car.Destroy(112@)
+0889: store_actor 113@ center_of_body_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.DestroyInstantly(113@)
+02C1: store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 car_path_coords_closest_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0395: clear_area 1 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 100.0 
+0674: set_car_model #BUFFALO numberplate "PULASKI" 
+112@ = Car.Create(#BUFFALO, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0229: set_car 112@ primary_color_to 8 secondary_color_to 0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 100 
+47@ += 1 
+
+:VCR2_3045
+if 
+  47@ == 11 
+jf @VCR2_3649 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_3649 
+if 
+04EE:   animation "SWAT" loaded 
+jf @VCR2_3649 
+if 
+   Car.Wrecked(112@)
+jf @VCR2_3131 
+fade 1 500 
+jump @VCR2_5318 
+
+:VCR2_3131
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.6 -1.0 0.0 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+117@ = Actor.Create(Mission1, #SPECIAL01, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Car.Angle(112@)
+$TEMPVAR_ANGLE += -90.0 
+Actor.Angle(117@) = $TEMPVAR_ANGLE
+0332: set_actor 117@ bleeding 1 
+0812: AS_actor 117@ perform_animation "GNSTWALL_INJURD" IFP "SWAT" framedelta 9999.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 3.0 -1.0 0.0 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Car.Angle(112@)
+$TEMPVAR_ANGLE += 90.0 
+Actor.Angle($PLAYER_ACTOR) = $TEMPVAR_ANGLE
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 3.3455 -1.6234 1.1443 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 2.5461 -1.3539 0.6073 
+Camera.OnPed(117@, 15, 2)
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+040D: unload_wav 1 
+03CF: load_wav 42420 as 1 
+fade 1 500 
+if 
+   not Car.Wrecked(114@)
+jf @VCR2_3621 
+Car.StorePos(112@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+01AD:   car 114@ sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 6.0 6.0 
+jf @VCR2_3614 
+Car.Destroy(114@)
+
+:VCR2_3614
+jump @VCR2_3626 
+
+:VCR2_3621
+Car.Destroy(114@)
+
+:VCR2_3626
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 400 
+47@ += 1 
+
+:VCR2_3649
+if 
+  47@ == 12 
+jf @VCR2_3839 
+if 
+   not fading 
+jf @VCR2_3839 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_3839 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VCR2_DA' // s$  // ~z~Not feeling so fucking full of yourself now, huh?
+04AE: $ACTOR_SPEECH_WAV_FILE = 42420 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 42421 as 2 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_3816 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+
+:VCR2_3816
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_3839
+if 
+  47@ == 13 
+jf @VCR2_4035 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4035 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4035 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VCR2_DB' // s$  // ~z~Yeah, well them's the breaks... fuck...
+04AE: $ACTOR_SPEECH_WAV_FILE = 42421 // = constant 
+create_thread @AUDIOL 117@ 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 42422 as 1 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_4012 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+
+:VCR2_4012
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4035
+if 
+  47@ == 14 
+jf @VCR2_4231 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4231 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4231 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VCR2_DC' // s$  // ~z~Any last requests?
+04AE: $ACTOR_SPEECH_WAV_FILE = 42422 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 42423 as 2 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_4208 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+
+:VCR2_4208
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4231
+if 
+  47@ == 15 
+jf @VCR2_4427 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4427 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4427 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VCR2_DD' // s$  // ~z~Yeah... can I fuck your sister?
+04AE: $ACTOR_SPEECH_WAV_FILE = 42423 // = constant 
+create_thread @AUDIOL 117@ 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 42424 as 1 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_4404 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+
+:VCR2_4404
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4427
+if 
+  47@ == 16 
+jf @VCR2_4696 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4696 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4696 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VCR2_DE' // s$  // ~z~You a asshole to the end. Punk motherfucker!
+04AE: $ACTOR_SPEECH_WAV_FILE = 42424 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 28203 as 2 
+041D: set_camera_near_clip 0.1 
+if 
+   not Car.Wrecked(112@)
+jf @VCR2_4673 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 1.2837 -0.8452 -0.2859 
+06A9: AS_actor $PLAYER_ACTOR look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 20000 ms 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 112@ with_offset 2.1414 -0.908 0.2244 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:VCR2_4673
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4696
+if 
+  47@ == 17 
+jf @VCR2_4826 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4826 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4826 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MPUL01M' // s$ 
+04AE: $ACTOR_SPEECH_WAV_FILE = 28203 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 28204 as 1 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4826
+if 
+  47@ == 18 
+jf @VCR2_4945 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_4945 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_4945 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MPUL01O' // s$ 
+04AE: $ACTOR_SPEECH_WAV_FILE = 28204 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 500 
+47@ += 1 
+
+:VCR2_4945
+if 
+  47@ == 19 
+jf @VCR2_5042 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_5042 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @VCR2_5042 
+0605: actor $PLAYER_ACTOR perform_animation "FIGHTA_G" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+47@ += 1 
+
+:VCR2_5042
+if 
+  47@ == 20 
+jf @VCR2_5199 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "FIGHTA_G"
+jf @VCR2_5199 
+0613: 118@ = actor $PLAYER_ACTOR animation "FIGHTA_G" time 
+if 
+  118@ > 0.351 
+jf @VCR2_5199 
+097A: play_audio_at 0.0 0.0 0.0 event 1136 
+043C: disable_sounds_after_fadeout 0 
+fade 0 0 
+if 
+   not Actor.Dead(117@)
+jf @VCR2_5176 
+05BE: AS_actor 117@ die 
+
+:VCR2_5176
+008B: 35@ = $CURRENT_TIME_IN_MS2 // (int) 
+35@ += 1000 
+47@ += 1 
+
+:VCR2_5199
+if 
+  47@ == 21 
+jf @VCR2_5293 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 35@ // (int) 
+jf @VCR2_5293 
+fade 1 500 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+jump @VCR2_5318 
+
+:VCR2_5293
+jump @VCR2_1480 
+
+:VCR2_5300
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:VCR2_5318
+00BA: show_text_styled GXT 'M_PASSD' time 5000 style 1  // MISSION PASSED!
+Player.Money($PLAYER_CHAR) += 0
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'VCRASH2'  // High Noon
+030C: progress_made = 1 
+Marker.Disable($583)
+0629: change_integer_stat 339 to 1 
+$598 += 1 
+return 
+
+:VCR2_5386
+Marker.Disable(34@)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+0296: unload_special_actor 1 
+Model.Destroy(#BANDITO)
+Model.Destroy(#BUFFALO)
+Model.Destroy(#DESERT_EAGLE)
+043C: disable_sounds_after_fadeout 1 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @VCR2_5444 
+077B: clear_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+
+:VCR2_5444
+04EF: release_animation "SWAT" 
+$ONMISSION = 0 
+mission_cleanup 
+return

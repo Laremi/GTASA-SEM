@@ -1,0 +1,4907 @@
+:TWAR7
+thread 'TWAR7' 
+gosub @TWAR7_94 
+if 
+wasted_or_busted 
+jf @TWAR7_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+gosub @TWAR7_23200 
+
+:TWAR7_85
+gosub @TWAR7_23373 
+end_thread 
+
+:TWAR7_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'SMOKE1' 
+if 
+  $ONMISSION == 0 
+jf @TWAR7_177 
+$ACTOR_OG_LOC = Actor.Create(Mission2, #SPECIAL03, 1543.2, -1687.0, 12.5)
+018A: 66@ = create_checkpoint_at 2454.4 -1284.5 22.7 
+
+:TWAR7_177
+00BE: text_clear_all 
+wait 0 
+67@ = 0 
+68@ = 0 
+69@ = 0 
+70@ = 0 
+85@ = 0 
+71@ = 0 
+72@ = 0 
+73@ = 0 
+79@ = 0 
+80@ = 0 
+133@ = 0.0 
+134@ = 0.0 
+135@ = 0.0 
+136@ = 0.0 
+137@ = 0.0 
+138@ = 0.0 
+139@ = 0.0 
+140@ = 0.0 
+83@ = 0 
+84@ = 0 
+85@ = 0 
+125@ = 0 
+126@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+130@ = 0 
+131@ = 0 
+132@ = 0 
+141@ = 0.0 
+142@ = 0.0 
+143@ = 0.0 
+144@ = 0.0 
+74@ = 0 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+78@ = 0 
+81@ = 0 
+82@ = 0.0 
+08F5: save_player_group 
+0395: clear_area 1 at 2072.3 -1695.2 12.5 radius 80.0 
+65@ = Object.Create(#LAE_SMOKECUTSCENE, 2055.0, -1695.0, 12.5)
+02E4: load_cutscene_data 'SMOKE1A' 
+
+:TWAR7_562
+if 
+86B9:   not cutscene_data_loaded 
+jf @TWAR7_586 
+wait 0 
+jump @TWAR7_562 
+
+:TWAR7_586
+02E7: start_cutscene 
+fade 1 1000 
+
+:TWAR7_595
+if 
+82E9:   not cutscene_reached_end 
+jf @TWAR7_619 
+wait 0 
+jump @TWAR7_595 
+
+:TWAR7_619
+fade 0 0 
+
+:TWAR7_625
+if 
+fading 
+jf @TWAR7_649 
+wait 0 
+jump @TWAR7_625 
+
+:TWAR7_649
+02EA: end_cutscene 
+Object.Destroy(65@)
+08F6: restore_player_group 
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+Model.Load(#GLENDALE)
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+023C: load_special_actor 'SWEET' as 2 // models 290-299 
+038B: load_requested_models 
+0632: release_group $PLAYER_GROUP 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+08F5: save_player_group 
+Camera.SetPosition(2073.87, -1682.701, 14.1963, 0.0, 0.0, 0.0)
+Camera.PointAt(2073.698, -1683.686, 14.1768, 2)
+060A: create_decision_maker_type 2 store_to 148@ // decision\allowed\m_.ped files 
+07E5: copy_decision_maker 65542 to 149@ 
+06AE: create_group_decision_maker_type 0 store_to 146@ // decision\allowed\mission.grp 
+0749: reset_group_decision_maker 146@ event 54 
+074A: set_group_decision_maker 146@ on_event 54 taskID 1513 respect 100.0 hate 100.0 like 100.0 dislike 100.0 in_car 1 on_foot 1 // see *.ped files 
+0749: reset_group_decision_maker 146@ event 36 
+074A: set_group_decision_maker 146@ on_event 36 taskID 1510 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+0749: reset_group_decision_maker 146@ event 71 
+0749: reset_group_decision_maker 146@ event 9 
+06AD: set_group $PLAYER_GROUP group_decision_maker_to 146@ 
+0395: clear_area 1 at 2075.0 -1688.5 12.29 radius 10.0 
+0674: set_car_model #GLENDALE numberplate "_A2TMFK_" 
+37@ = Car.Create(#GLENDALE, 2075.0, -1688.5, 12.29)
+Car.Angle(37@) = 359.74
+0229: set_car 37@ primary_color_to 98 secondary_color_to 14 
+0294: set_car 37@ sprayable 0 
+041E: set_radio_station 3 
+0395: clear_area 1 at 2077.0 -1691.1 12.5 radius 1.0 
+$ACTOR_SMOKE = Actor.Create(Mission2, #SPECIAL01, 2077.0, -1691.1, 12.5)
+09F6: set_actor $ACTOR_SMOKE unjackable_through_driver_seat 0 
+Actor.Angle($ACTOR_SMOKE) = 255.7
+0568: set_actor $ACTOR_SMOKE untargetable 1 
+039E: set_actor $ACTOR_SMOKE locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_SMOKE, "FATMAN")
+07A1: set_walk_speed 4 
+05CA: AS_actor $ACTOR_SMOKE enter_car 37@ passenger_seat 0 time -2 
+060B: set_actor $ACTOR_SMOKE decision_maker_to 149@ 
+0395: clear_area 1 at 2075.3 -1693.4 12.5 radius 1.0 
+$ACTOR_SWEET = Actor.Create(Mission2, #SPECIAL02, 2075.3, -1693.4, 12.5)
+09F6: set_actor $ACTOR_SWEET unjackable_through_driver_seat 0 
+0568: set_actor $ACTOR_SWEET untargetable 1 
+039E: set_actor $ACTOR_SWEET locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_SWEET, "GANG2")
+07A1: set_walk_speed 4 
+05CA: AS_actor $ACTOR_SWEET enter_car 37@ passenger_seat 2 time -2 
+060B: set_actor $ACTOR_SWEET decision_maker_to 149@ 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 1 at 2072.9 -1690.6 12.5 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2072.9, -1690.6, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 33.0
+07A1: set_walk_speed 4 
+05CB: AS_actor $PLAYER_ACTOR enter_car 37@ as_driver -2 ms 
+06D7: enable_train_traffic 0 
+06DB: destroy_all_trains 
+09D2: set_cops_chase_criminals 0 
+07FB: set_interior 'LAHS1A' access 0  // House
+fade 1 500 
+69@ = 1 
+0707: start_scene_skip_to @TWAR7_1803 
+
+:TWAR7_1353
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @TWAR7_1379 
+jump @TWAR7_23286 
+
+:TWAR7_1379
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_1411 
+jump @TWAR7_23200 
+
+:TWAR7_1411
+if or
+  67@ == 0 
+  67@ == 1 
+jf @TWAR7_1721 
+if 
+  81@ == 1 
+jf @TWAR7_1721 
+if 
+0A36:   trip_skip_finished_by_script_is_ready_to_fade_in 
+jf @TWAR7_1721 
+Player.CanMove($PLAYER_CHAR) = False
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 0 // versionB 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+if 
+   Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_1645 
+04ED: load_animation "CAR_CHAT" 
+023C: load_special_actor 'OGLOC' as 3 // models 290-299 
+038B: load_requested_models 
+$ACTOR_OG_LOC = Actor.Create(Mission2, #SPECIAL03, 1543.2, -1687.0, 12.5)
+09F6: set_actor $ACTOR_OG_LOC unjackable_through_driver_seat 0 
+Actor.Angle($ACTOR_OG_LOC) = 97.2
+0568: set_actor $ACTOR_OG_LOC untargetable 1 
+039E: set_actor $ACTOR_OG_LOC locked 1 while_in_car 
+0446: set_actor $ACTOR_OG_LOC dismemberment_possible 0 
+02A9: set_actor $ACTOR_OG_LOC immune_to_nonplayer 1 
+0430: put_actor $ACTOR_OG_LOC into_car 37@ passenger_seat -1 
+060F: set_actor $ACTOR_OG_LOC melee_accuracy_to 80.0 
+
+:TWAR7_1645
+Marker.Disable(66@)
+018A: 66@ = create_checkpoint_at 2454.4 -1284.5 22.7 
+00BC: show_text_highpriority GXT 'SMK1_10' time 7000 flag 1  // ~s~Drive to ~y~Freddy's house~s~.
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+85@ = 2 
+68@ = 2 
+67@ = 1 
+
+:TWAR7_1721
+if 
+  67@ == 0 
+jf @TWAR7_2311 
+if 
+   Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_2311 
+if 
+   Actor.InCar($ACTOR_SMOKE, 37@)
+jf @TWAR7_2311 
+if 
+   Actor.InCar($ACTOR_SWEET, 37@)
+jf @TWAR7_2311 
+69@ = 0 
+
+:TWAR7_1803
+0701: end_scene_skip 
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_1837 
+jump @TWAR7_23200 
+
+:TWAR7_1837
+if 
+  69@ == 1 
+jf @TWAR7_1961 
+fade 0 500 
+
+:TWAR7_1862
+if 
+fading 
+jf @TWAR7_1886 
+wait 0 
+jump @TWAR7_1862 
+
+:TWAR7_1886
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_1918 
+jump @TWAR7_23200 
+
+:TWAR7_1918
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+036A: put_actor $PLAYER_ACTOR in_car 37@ 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+0430: put_actor $ACTOR_SMOKE into_car 37@ passenger_seat 0 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0430: put_actor $ACTOR_SWEET into_car 37@ passenger_seat 2 
+
+:TWAR7_1961
+if 
+  $2704 == 1 
+jf @TWAR7_2056 
+09E0: trip_skip 1526.9 -1654.5 12.1 angle 180.0 when_in_car 37@ 
+if 
+  $2705 == 0 
+jf @TWAR7_2040 
+03E5: show_text_box 'SKIP_1'  // If you have previously completed a journey in a mission that you failed you may press ~k~~CONVERSATION_YES~ to activate a 'Trip Skip'.
+$2705 = 1 
+
+:TWAR7_2040
+00BC: show_text_highpriority GXT 'SMK1_02' time 7000 flag 1  // ~s~Go and pick up OG Loc from the ~y~Police Station~s~.
+
+:TWAR7_2056
+if 
+  $2704 == 2 
+jf @TWAR7_2142 
+0A35: trip_skip 2453.8 -1305.0 22.5 angle 0.0 when_in_car 37@ finished_by_script 
+if 
+  $2705 == 0 
+jf @TWAR7_2135 
+03E5: show_text_box 'SKIP_1'  // If you have previously completed a journey in a mission that you failed you may press ~k~~CONVERSATION_YES~ to activate a 'Trip Skip'.
+$2705 = 1 
+
+:TWAR7_2135
+81@ = 1 
+
+:TWAR7_2142
+018A: 66@ = create_checkpoint_at 1532.8 -1672.9 12.4 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+08F6: restore_player_group 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'SMK1_02' time 5000 flag 1  // ~s~Go and pick up OG Loc from the ~y~Police Station~s~.
+if 
+  69@ == 1 
+jf @TWAR7_2283 
+fade 1 500 
+
+:TWAR7_2227
+if 
+fading 
+jf @TWAR7_2251 
+wait 0 
+jump @TWAR7_2227 
+
+:TWAR7_2251
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_2283 
+jump @TWAR7_23200 
+
+:TWAR7_2283
+33@ = 0 
+68@ = 0 
+71@ = 1 
+67@ = 1 
+
+:TWAR7_2311
+if 
+  67@ == 1 
+jf @TWAR7_4099 
+if 
+  68@ == 0 
+jf @TWAR7_2687 
+if 
+  83@ == 0 
+jf @TWAR7_2451 
+if 
+  85@ == 0 
+jf @TWAR7_2451 
+if 
+  33@ > 7000 
+jf @TWAR7_2451 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 1 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 1 // versionB 
+83@ = 1 
+84@ = 0 
+gosub @TWAR7_29894 
+85@ = 1 
+
+:TWAR7_2451
+if 
+  85@ == 1 
+jf @TWAR7_2515 
+if 
+  83@ == 0 
+jf @TWAR7_2515 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+85@ = 2 
+
+:TWAR7_2515
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @TWAR7_2566 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @TWAR7_2566 
+Actor.PutAt($PLAYER_ACTOR, 1531.4, -1693.7, 12.4)
+
+:TWAR7_2566
+if 
+   Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_2687 
+if 
+   Actor.InCar($ACTOR_SMOKE, 37@)
+jf @TWAR7_2687 
+if 
+   Actor.InCar($ACTOR_SWEET, 37@)
+jf @TWAR7_2687 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 1532.8 -1672.9 12.4 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @TWAR7_2687 
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = False
+68@ = 1 
+
+:TWAR7_2687
+if 
+  68@ == 1 
+jf @TWAR7_3649 
+Player.CanMove($PLAYER_CHAR) = False
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+if 
+  $2704 == 0 
+jf @TWAR7_2775 
+$2704 = 1 
+
+:TWAR7_2775
+0951: disable_trip_skip 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 2000 
+
+:TWAR7_2792
+if 
+fading 
+jf @TWAR7_2816 
+wait 0 
+jump @TWAR7_2792 
+
+:TWAR7_2816
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+0395: clear_area 1 at 1532.8 -1672.9 12.4 radius 300.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1496.5, -1672.6, 13.2)
+Actor.DestroyInstantly($ACTOR_SMOKE)
+Actor.DestroyInstantly($ACTOR_SWEET)
+Car.Destroy(37@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+Model.Destroy(#GLENDALE)
+0390: load_txd_dictionary 'LD_BUM' 
+038F: load_texture "BUM2" as 1 // Load dictionary with 0390 first 
+038F: load_texture "BUM1" as 2 // Load dictionary with 0390 first 
+038B: load_requested_models 
+02E4: load_cutscene_data 'SMOKE1B' 
+
+:TWAR7_2960
+if 
+86B9:   not cutscene_data_loaded 
+jf @TWAR7_2984 
+wait 0 
+jump @TWAR7_2960 
+
+:TWAR7_2984
+02E7: start_cutscene 
+fade 1 1000 
+32@ = 0 
+
+:TWAR7_3000
+if 
+82E9:   not cutscene_reached_end 
+jf @TWAR7_3024 
+wait 0 
+jump @TWAR7_3000 
+
+:TWAR7_3024
+02EA: end_cutscene 
+fade 0 0 
+
+:TWAR7_3032
+if 
+fading 
+jf @TWAR7_3056 
+wait 0 
+jump @TWAR7_3032 
+
+:TWAR7_3056
+Model.Load(#GLENDALE)
+04ED: load_animation "CAR_CHAT" 
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+023C: load_special_actor 'SWEET' as 2 // models 290-299 
+023C: load_special_actor 'OGLOC' as 3 // models 290-299 
+038B: load_requested_models 
+0674: set_car_model #GLENDALE numberplate "_A2TMFK_" 
+37@ = Car.Create(#GLENDALE, 1532.8, -1672.9, 12.4)
+Car.Angle(37@) = 184.0
+0229: set_car 37@ primary_color_to 98 secondary_color_to 14 
+0294: set_car 37@ sprayable 0 
+036A: put_actor $PLAYER_ACTOR in_car 37@ 
+041E: set_radio_station 3 
+$ACTOR_SMOKE = Actor.Create(Mission2, #SPECIAL01, 2072.3, -1697.2, 12.5)
+09F6: set_actor $ACTOR_SMOKE unjackable_through_driver_seat 0 
+Actor.Angle($ACTOR_SMOKE) = 255.7
+0568: set_actor $ACTOR_SMOKE untargetable 1 
+039E: set_actor $ACTOR_SMOKE locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_SMOKE, "FATMAN")
+05CA: AS_actor $ACTOR_SMOKE enter_car 37@ passenger_seat 0 time -2 
+060B: set_actor $ACTOR_SMOKE decision_maker_to 149@ 
+0430: put_actor $ACTOR_SMOKE into_car 37@ passenger_seat -1 
+$ACTOR_SWEET = Actor.Create(Mission2, #SPECIAL02, 2072.3, -1696.2, 12.5)
+09F6: set_actor $ACTOR_SWEET unjackable_through_driver_seat 0 
+0568: set_actor $ACTOR_SWEET untargetable 1 
+039E: set_actor $ACTOR_SWEET locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_SWEET, "GANG2")
+05CA: AS_actor $ACTOR_SWEET enter_car 37@ passenger_seat 2 time -2 
+060B: set_actor $ACTOR_SWEET decision_maker_to 149@ 
+0430: put_actor $ACTOR_SWEET into_car 37@ passenger_seat -1 
+$ACTOR_OG_LOC = Actor.Create(Mission2, #SPECIAL03, 1543.2, -1687.0, 12.5)
+09F6: set_actor $ACTOR_OG_LOC unjackable_through_driver_seat 0 
+Actor.Angle($ACTOR_OG_LOC) = 97.2
+0568: set_actor $ACTOR_OG_LOC untargetable 1 
+039E: set_actor $ACTOR_OG_LOC locked 1 while_in_car 
+0446: set_actor $ACTOR_OG_LOC dismemberment_possible 0 
+02A9: set_actor $ACTOR_OG_LOC immune_to_nonplayer 1 
+0430: put_actor $ACTOR_OG_LOC into_car 37@ passenger_seat -1 
+060F: set_actor $ACTOR_OG_LOC melee_accuracy_to 80.0 
+0708: reset_decision_maker 148@ event 79 
+0708: reset_decision_maker 148@ event 36 
+0709: set_decision_maker 148@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+060B: set_actor $ACTOR_OG_LOC decision_maker_to 148@ 
+Marker.Disable(66@)
+018A: 66@ = create_checkpoint_at 2454.4 -1284.5 22.7 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_3605 
+jump @TWAR7_23200 
+
+:TWAR7_3605
+fade 1 1000 
+00BC: show_text_highpriority GXT 'SMK1_10' time 7000 flag 1  // ~s~Drive to ~y~Freddy's house~s~.
+33@ = 0 
+85@ = 0 
+68@ = 2 
+
+:TWAR7_3649
+if 
+  68@ == 2 
+jf @TWAR7_4099 
+if 
+  83@ == 0 
+jf @TWAR7_3778 
+if 
+  85@ == 0 
+jf @TWAR7_3778 
+if 
+  33@ > 7000 
+jf @TWAR7_3778 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 1 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 1 // versionB 
+0A09: set_actor $ACTOR_OG_LOC muted 1 // versionB 
+83@ = 2 
+84@ = 0 
+gosub @TWAR7_29894 
+85@ = 1 
+
+:TWAR7_3778
+if 
+  85@ == 1 
+jf @TWAR7_3849 
+if 
+  83@ == 0 
+jf @TWAR7_3849 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+0A09: set_actor $ACTOR_OG_LOC muted 0 // versionB 
+85@ = 2 
+
+:TWAR7_3849
+if 
+   Actor.Driving($ACTOR_OG_LOC)
+jf @TWAR7_3948 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @TWAR7_3948 
+if 
+   Actor.Driving($ACTOR_SMOKE)
+jf @TWAR7_3948 
+if 
+   Actor.Driving($ACTOR_SWEET)
+jf @TWAR7_3948 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @TWAR7_3948 
+Actor.PutAt($PLAYER_ACTOR, 2454.7, -1294.5, 22.7)
+
+:TWAR7_3948
+if 
+   Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_4099 
+if 
+   Actor.InCar($ACTOR_SMOKE, 37@)
+jf @TWAR7_4099 
+if 
+   Actor.InCar($ACTOR_SWEET, 37@)
+jf @TWAR7_4099 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 2454.4 -1284.5 22.7 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @TWAR7_4099 
+if 
+  $2704 == 1 
+jf @TWAR7_4078 
+$2704 = 2 
+
+:TWAR7_4078
+85@ = 0 
+68@ = 0 
+67@ = 2 
+
+:TWAR7_4099
+if 
+  67@ == 2 
+jf @TWAR7_5716 
+if 
+  68@ == 0 
+jf @TWAR7_4363 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+09F5: disable_player_mutal_activities 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Camera.SetPosition(2451.2, -1295.1, 24.8, 0.0, 0.0, 0.0)
+Camera.PointAt(2459.7, -1284.6, 26.5, 2)
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SMOKE muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+0A09: set_actor $ACTOR_OG_LOC muted 0 // versionB 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+69@ = 1 
+0707: start_scene_skip_to @TWAR7_4976 
+0605: actor $ACTOR_OG_LOC perform_animation "CAR_SC1_BR" IFP "CAR_CHAT" framedelta 6.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+83@ = 3 
+84@ = 0 
+gosub @TWAR7_29894 
+32@ = 0 
+68@ = 1 
+
+:TWAR7_4363
+if 
+  68@ == 1 
+jf @TWAR7_4490 
+if 
+  84@ == 1 
+jf @TWAR7_4490 
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 6.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor $ACTOR_SWEET perform_animation "CAR_SC1_BL" IFP "CAR_CHAT" framedelta 6.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 2 
+
+:TWAR7_4490
+if 
+  68@ == 2 
+jf @TWAR7_4575 
+if 
+  84@ == 4 
+jf @TWAR7_4575 
+0605: actor $ACTOR_SMOKE perform_animation "CAR_SC1_FR" IFP "CAR_CHAT" framedelta 6.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 3 
+
+:TWAR7_4575
+if 
+  68@ == 3 
+jf @TWAR7_4762 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+if 
+  83@ == 0 
+jf @TWAR7_4762 
+if 
+01C1:   car 37@ stopped 
+jf @TWAR7_4762 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2457.4 -1286.1 23.0 mode 6 time 60000 ms // versionA 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2458.4 -1287.8 23.0 mode 6 time 60000 ms // versionA 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+68@ = 4 
+
+:TWAR7_4762
+if 
+  68@ == 4 
+jf @TWAR7_4911 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_4911 
+if 
+   Actor.Driving($ACTOR_SMOKE)
+jf @TWAR7_4867 
+0362: remove_actor $ACTOR_SMOKE from_car_and_place_at 2472.8 -1277.9 28.9 
+
+:TWAR7_4867
+036A: put_actor $ACTOR_SMOKE in_car 37@ 
+Car.DoorStatus(37@) = 2
+05D2: AS_actor $ACTOR_SMOKE run_to_and_hijack_car 37@ max_search_radius 15.0 traffic_behavior 2 
+32@ = 0 
+68@ = 5 
+
+:TWAR7_4911
+if 
+  68@ == 5 
+jf @TWAR7_5716 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+if 
+  32@ > 0 
+jf @TWAR7_5716 
+69@ = 0 
+
+:TWAR7_4976
+0701: end_scene_skip 
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_5010 
+jump @TWAR7_23200 
+
+:TWAR7_5010
+if 
+  69@ == 1 
+jf @TWAR7_5390 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+fade 0 500 
+
+:TWAR7_5052
+if 
+fading 
+jf @TWAR7_5120 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+wait 0 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+jump @TWAR7_5052 
+
+:TWAR7_5120
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_5152 
+jump @TWAR7_23200 
+
+:TWAR7_5152
+0395: clear_area 1 at 2457.4 -1286.1 23.0 radius 1.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2457.4, -1286.1, 23.0)
+Actor.Angle($PLAYER_ACTOR) = 230.2
+0395: clear_area 1 at 2458.4 -1287.8 23.0 radius 1.0 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+Actor.PutAt($ACTOR_OG_LOC, 2458.4, -1287.8, 23.0)
+Actor.Angle($ACTOR_OG_LOC) = 230.2
+0395: clear_area 1 at 2452.4 -1267.6 23.8 radius 5.0 
+Car.PutAt(37@, 2452.4, -1267.6, 23.8)
+Car.Angle(37@) = 0.0
+if 
+   Actor.Driving($ACTOR_SMOKE)
+jf @TWAR7_5360 
+0362: remove_actor $ACTOR_SMOKE from_car_and_place_at 2472.8 -1277.9 28.9 
+
+:TWAR7_5360
+036A: put_actor $ACTOR_SMOKE in_car 37@ 
+Car.DoorStatus(37@) = 2
+05D2: AS_actor $ACTOR_SMOKE run_to_and_hijack_car 37@ max_search_radius 15.0 traffic_behavior 2 
+
+:TWAR7_5390
+0615: define_AS_pack_begin 145@ 
+05D3: AS_actor -1 goto_point 2463.5 -1286.9 25.2 mode 6 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 2463.9 -1278.4 29.0 mode 6 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 2467.8 -1277.1 28.9 mode 6 time -2 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+04EF: release_animation "CAR_CHAT" 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+08F6: restore_player_group 
+02A3: enable_widescreen 0 
+09F5: disable_player_mutal_activities 0 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BE: text_clear_all 
+Marker.Disable(66@)
+018A: 66@ = create_checkpoint_at 2468.8 -1278.4 28.9 
+07E0: set_marker 66@ type_to 0 
+00BC: show_text_highpriority GXT 'SMK1_03' time 7000 flag 1  // ~s~Go and ring the ~y~doorbell~s~.
+if 
+  69@ == 1 
+jf @TWAR7_5702 
+fade 1 500 
+
+:TWAR7_5602
+if 
+fading 
+jf @TWAR7_5670 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+wait 0 
+03A1: show_sphere_at 2468.8 -1278.2 29.1 radius 1.2 
+jump @TWAR7_5602 
+
+:TWAR7_5670
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_5702 
+jump @TWAR7_23200 
+
+:TWAR7_5702
+68@ = 0 
+67@ = 3 
+
+:TWAR7_5716
+if 
+  67@ == 3 
+jf @TWAR7_8919 
+if 
+  68@ == 0 
+jf @TWAR7_5807 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere 2468.8 -1278.2 29.1 radius 1.2 1.2 3.0 sphere 1 stopped_on_foot 
+jf @TWAR7_5807 
+68@ = 1 
+
+:TWAR7_5807
+if 
+  68@ == 1 
+jf @TWAR7_6788 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+040D: unload_wav 3 
+83@ = 0 
+fade 0 500 
+
+:TWAR7_5853
+if 
+fading 
+jf @TWAR7_5877 
+wait 0 
+jump @TWAR7_5853 
+
+:TWAR7_5877
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_5909 
+jump @TWAR7_23200 
+
+:TWAR7_5909
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+09F5: disable_player_mutal_activities 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Model.Load(#PCJ600)
+Model.Load(#TEC9)
+Model.Load(#MICRO_UZI)
+04ED: load_animation "CRIB" 
+04ED: load_animation "MISC" 
+04ED: load_animation "GANGS" 
+04ED: load_animation "RAPPING" 
+023C: load_special_actor 'FREDDY' as 4 // models 290-299 
+038B: load_requested_models 
+03F0: enable_text_draw 1 
+03CF: load_wav 1817 as 3 
+
+:TWAR7_6010
+if 
+83D0:   not wav 3 loaded 
+jf @TWAR7_6036 
+wait 0 
+jump @TWAR7_6010 
+
+:TWAR7_6036
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_6068 
+jump @TWAR7_23200 
+
+:TWAR7_6068
+038B: load_requested_models 
+0395: clear_area 1 at 2471.0 -1285.1 28.3 radius 30.0 
+36@ = Car.Create(#PCJ600, 2471.0, -1285.1, 28.3)
+Car.Angle(36@) = 272.5
+053F: set_car 36@ tires_vulnerability 0 
+0395: clear_area 1 at 2488.2 -1279.9 30.0 radius 30.0 
+35@ = Car.Create(#PCJ600, 2488.2, -1279.9, 30.0)
+Car.ImmuneToNonPlayer(35@) = True
+Car.Angle(35@) = 286.4
+07EE: car 35@ enable_tire_marks 1 
+053F: set_car 35@ tires_vulnerability 0 
+Car.SetImmunities(35@, 1, 1, 1, 1, 1)
+0395: clear_area 1 at 2483.9 -1280.2 29.4 radius 30.0 
+34@ = Actor.Create(Mission1, #SPECIAL04, 2483.9, -1280.2, 29.4)
+0A09: set_actor 34@ muted 1 // versionB 
+03FE: set_actor 34@ money 500 
+Actor.Angle(34@) = 261.6
+Actor.GiveWeaponAndAmmo(34@, Tec9, 30000)
+0446: set_actor 34@ dismemberment_possible 0 
+02A9: set_actor 34@ immune_to_nonplayer 1 
+08C6: set_actor 34@ stay_on_bike 1 
+0350: set_actor 34@ maintain_position_when_attacked 1 
+Actor.SetImmunities(34@, 1, 1, 0, 1, 1)
+07DD: set_actor 34@ attack_rate 20 // previously known as temper_to 
+060B: set_actor 34@ decision_maker_to 149@ 
+0615: define_AS_pack_begin 147@ 
+0713: actor -1 driveby_actor 34@ car -1 point 0.0 0.0 0.0 radius 300.0 8 0 firing_rate 100 
+0616: define_AS_pack_end 147@ 
+087D: assign_group $PLAYER_GROUP to_AS_pack 147@ 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+0395: clear_area 1 at 2468.0 -1278.5 29.1 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2468.0, -1278.5, 29.1)
+Actor.Angle($PLAYER_ACTOR) = 269.4
+0395: clear_area 1 at 2467.4 -1275.8 28.8 radius 1.0 
+Actor.PutAt($ACTOR_OG_LOC, 2467.4, -1275.8, 28.8)
+Actor.Angle($ACTOR_OG_LOC) = 282.8
+0615: define_AS_pack_begin 145@ 
+05D3: AS_actor -1 goto_point 2469.2 -1278.7 29.3 mode 4 time 60000 ms // versionA 
+05D4: AS_actor -1 rotate_angle 262.0 
+0605: actor -1 perform_animation "CRIB_USE_SWITCH" IFP "CRIB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 800 
+05BF: AS_actor -1 look_at_actor $ACTOR_OG_LOC 7000 ms 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+69@ = 1 
+0707: start_scene_skip_to @TWAR7_8200 
+00BE: text_clear_all 
+Camera.SetPosition(2461.7, -1273.7, 30.0, 0.0, 0.0, 0.0)
+Camera.PointAt(2470.1, -1277.1, 30.7, 2)
+fade 1 500 
+
+:TWAR7_6725
+if 
+fading 
+jf @TWAR7_6749 
+wait 0 
+jump @TWAR7_6725 
+
+:TWAR7_6749
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_6781 
+jump @TWAR7_23200 
+
+:TWAR7_6781
+68@ = 2 
+
+:TWAR7_6788
+if 
+  68@ == 2 
+jf @TWAR7_6912 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "CRIB_USE_SWITCH"
+jf @TWAR7_6912 
+0613: 82@ = actor $PLAYER_ACTOR animation "CRIB_USE_SWITCH" time 
+if 
+  82@ > 0.65 
+jf @TWAR7_6912 
+097A: play_audio_at 2469.2 -1278.7 29.3 event 1102 
+68@ = 3 
+
+:TWAR7_6912
+if 
+  68@ == 3 
+jf @TWAR7_7114 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_7114 
+0615: define_AS_pack_begin 145@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKE" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05D3: AS_actor -1 goto_point 2467.8 -1274.4 28.8 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 2468.6 -1273.3 28.8 mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 278.7 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+83@ = 4 
+84@ = 0 
+130@ = 5 
+gosub @TWAR7_29894 
+68@ = 4 
+
+:TWAR7_7114
+if 
+  68@ == 4 
+jf @TWAR7_7226 
+if 
+  84@ > 2 
+jf @TWAR7_7226 
+0615: define_AS_pack_begin 145@ 
+0639: AS_actor -1 rotate_to_actor $ACTOR_OG_LOC 
+0605: actor -1 perform_animation "PLYR_SHKHEAD" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+68@ = 5 
+
+:TWAR7_7226
+if 
+  68@ == 5 
+jf @TWAR7_7430 
+if 
+  83@ == 0 
+jf @TWAR7_7430 
+0615: define_AS_pack_begin 145@ 
+0605: actor -1 perform_animation "BNG_WNDW" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+0615: define_AS_pack_begin 145@ 
+0605: actor -1 perform_animation "LAUGH_01" IFP "RAPPING" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+83@ = 4 
+84@ = 5 
+130@ = 9 
+gosub @TWAR7_29894 
+32@ = 0 
+68@ = 6 
+
+:TWAR7_7430
+if 
+  68@ == 6 
+jf @TWAR7_7540 
+if 
+   Actor.Animation($ACTOR_OG_LOC) == "BNG_WNDW"
+jf @TWAR7_7540 
+0613: 82@ = actor $ACTOR_OG_LOC animation "BNG_WNDW" time 
+if 
+  82@ > 0.4 
+jf @TWAR7_7540 
+097A: play_audio_at 2468.6 -1273.3 28.8 event 1103 
+68@ = 7 
+
+:TWAR7_7540
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_8919 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_8919 
+if 
+  68@ == 7 
+jf @TWAR7_7726 
+if 
+  83@ == 0 
+jf @TWAR7_7726 
+0615: define_AS_pack_begin 145@ 
+05CB: AS_actor -1 enter_car 35@ as_driver -1 ms 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor 34@ to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+83@ = 4 
+84@ = 9 
+130@ = 10 
+gosub @TWAR7_29894 
+Camera.SetPosition(2495.4, -1282.3, 32.6, 0.0, 0.0, 0.0)
+Camera.PointAt(2479.2, -1272.5, 30.5, 2)
+68@ = 8 
+
+:TWAR7_7726
+if 
+  68@ == 8 
+jf @TWAR7_7784 
+if 
+   Actor.InCar(34@, 35@)
+jf @TWAR7_7784 
+05EB: assign_car 35@ to_path 30 
+32@ = 0 
+68@ = 9 
+
+:TWAR7_7784
+if 
+  68@ == 9 
+jf @TWAR7_8098 
+if 
+  32@ > 2000 
+jf @TWAR7_8098 
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_8098 
+0395: clear_area 1 at 2468.4 -1282.4 28.8 radius 1.0 
+Actor.PutAt($ACTOR_OG_LOC, 2468.4, -1282.4, 28.8)
+Actor.Angle($ACTOR_OG_LOC) = 171.7
+07A1: set_walk_speed 6 
+0615: define_AS_pack_begin 145@ 
+05CA: AS_actor -1 enter_car 36@ passenger_seat -1 time -2 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+0395: clear_area 1 at 2467.4 -1281.2 28.8 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2467.4, -1281.2, 28.8)
+Actor.Angle($PLAYER_ACTOR) = 171.7
+07A1: set_walk_speed 6 
+0615: define_AS_pack_begin 145@ 
+05CB: AS_actor -1 enter_car 36@ as_driver -2 ms 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+Camera.SetPosition(2460.9, -1283.7, 30.6, 0.0, 0.0, 0.0)
+Camera.PointAt(2472.6, -1284.4, 31.1, 2)
+83@ = 5 
+84@ = 0 
+gosub @TWAR7_29894 
+68@ = 10 
+
+:TWAR7_8098
+if 
+  68@ == 10 
+jf @TWAR7_8919 
+if 
+  83@ == 0 
+jf @TWAR7_8919 
+if 
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_8919 
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_8919 
+if and
+   Actor.InCar($PLAYER_ACTOR, 36@)
+   Actor.InCar($ACTOR_OG_LOC, 36@)
+jf @TWAR7_8919 
+69@ = 0 
+
+:TWAR7_8200
+0701: end_scene_skip 
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_8234 
+jump @TWAR7_23200 
+
+:TWAR7_8234
+if 
+  69@ == 1 
+jf @TWAR7_8486 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+040D: unload_wav 3 
+83@ = 0 
+fade 0 500 
+03F0: enable_text_draw 0 
+
+:TWAR7_8284
+if 
+fading 
+jf @TWAR7_8308 
+wait 0 
+jump @TWAR7_8284 
+
+:TWAR7_8308
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_8340 
+jump @TWAR7_23200 
+
+:TWAR7_8340
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_8404 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_8404 
+0687: clear_actor 34@ task 
+if 
+   not Actor.InCar(34@, 35@)
+jf @TWAR7_8404 
+036A: put_actor 34@ in_car 35@ 
+
+:TWAR7_8404
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_8486 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 36@)
+jf @TWAR7_8457 
+036A: put_actor $PLAYER_ACTOR in_car 36@ 
+
+:TWAR7_8457
+if 
+   not Actor.InCar($ACTOR_OG_LOC, 36@)
+jf @TWAR7_8486 
+072B: put_actor $ACTOR_OG_LOC into_car 36@ passengerseat -1 
+
+:TWAR7_8486
+0563: give_player $PLAYER_CHAR ammo 78 
+Actor.GiveWeaponAndAmmo($ACTOR_OG_LOC, Tec9, 30000)
+01B9: set_actor $ACTOR_OG_LOC armed_weapon_to 32 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+72@ = 1 
+71@ = 1 
+077A: set_actor $ACTOR_OG_LOC acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_8628 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_8628 
+if 
+060E:   car 35@ assigned_to_path 
+jf @TWAR7_8598 
+05EC: release_car 35@ from_path 
+
+:TWAR7_8598
+Car.PutAt(35@, 2521.2, -1359.0, 27.3)
+Car.Angle(35@) = 295.2
+
+:TWAR7_8628
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+04EF: release_animation "CRIB" 
+04EF: release_animation "MISC" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "RAPPING" 
+03E6: remove_text_box 
+00BC: show_text_highpriority GXT 'SMK1_04' time 7000 flag 1  // ~s~Catch and kill ~r~Freddy~s~!
+Marker.Disable(66@)
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_8722 
+66@ = Marker.CreateAboveActor(34@)
+07E0: set_marker 66@ type_to 0 
+
+:TWAR7_8722
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+09F5: disable_player_mutal_activities 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0391: release_textures 
+$MISSION_RUNNING_DOG_FAILED = 1 
+if 
+  69@ == 1 
+jf @TWAR7_8838 
+fade 1 500 
+
+:TWAR7_8782
+if 
+fading 
+jf @TWAR7_8806 
+wait 0 
+jump @TWAR7_8782 
+
+:TWAR7_8806
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_8838 
+jump @TWAR7_23200 
+
+:TWAR7_8838
+Actor.DestroyInstantly($ACTOR_SMOKE)
+Actor.DestroyInstantly($ACTOR_SWEET)
+Car.Destroy(37@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+Model.Destroy(#GLENDALE)
+040D: unload_wav 3 
+if or
+   Car.Wrecked(35@)
+   Car.Wrecked(36@)
+jf @TWAR7_8898 
+jump @TWAR7_23200 
+
+:TWAR7_8898
+85@ = 0 
+68@ = 0 
+67@ = 4 
+
+:TWAR7_8919
+if 
+  67@ > 3 
+jf @TWAR7_18538 
+if 
+  15 > 67@ 
+jf @TWAR7_18538 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_18404 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_18263 
+if 
+  67@ == 4 
+jf @TWAR7_9882 
+if 
+  85@ == 0 
+jf @TWAR7_9119 
+if 
+  83@ == 0 
+jf @TWAR7_9119 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_9119 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_9112 
+83@ = 6 
+84@ = 0 
+130@ = 1 
+gosub @TWAR7_29894 
+
+:TWAR7_9112
+85@ = 1 
+
+:TWAR7_9119
+if 
+  73@ == 0 
+jf @TWAR7_9335 
+01E8: create_forbidden_for_cars_cube_cornerA 2563.7 -1435.0 10.0 cornerB 2580.3 -1266.4 100.6 
+01E8: create_forbidden_for_cars_cube_cornerA 2635.0 -1434.4 10.0 cornerB 2652.0 -1263.6 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2714.9 -1501.6 10.0 cornerB 2746.1 -1266.4 100.0 
+0376: 40@ = create_random_actor_at 2579.8 -1348.3 35.5 
+05BE: AS_actor 40@ die 
+0376: 41@ = create_random_actor_at 2578.8 -1348.3 35.5 
+Actor.Angle(41@) = 260.0
+0605: actor 41@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+73@ = 1 
+
+:TWAR7_9335
+if 
+  73@ == 1 
+jf @TWAR7_9430 
+if 
+01AD:   car 35@ sphere 0 near_point 2582.6 -1351.8 radius 5.0 5.0 
+jf @TWAR7_9430 
+01E7: remove_forbidden_for_cars_cube_cornerA 2563.7 -1435.0 10.0 cornerB 2580.3 -1266.4 100.6 
+73@ = 2 
+
+:TWAR7_9430
+if 
+  73@ == 2 
+jf @TWAR7_9525 
+if 
+01AD:   car 35@ sphere 0 near_point 2653.0 -1329.8 radius 5.0 5.0 
+jf @TWAR7_9525 
+01E7: remove_forbidden_for_cars_cube_cornerA 2635.0 -1434.4 10.0 cornerB 2652.0 -1263.6 100.0 
+73@ = 3 
+
+:TWAR7_9525
+if 
+  73@ == 3 
+jf @TWAR7_9620 
+if 
+01AD:   car 35@ sphere 0 near_point 2748.3 -1320.3 radius 5.0 5.0 
+jf @TWAR7_9620 
+01E7: remove_forbidden_for_cars_cube_cornerA 2714.9 -1501.6 10.0 cornerB 2746.1 -1266.4 100.0 
+73@ = 4 
+
+:TWAR7_9620
+if 
+  68@ == 0 
+jf @TWAR7_9703 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+jf @TWAR7_9703 
+05EB: assign_car 35@ to_path 31 
+0873: release_path 30 
+68@ = 1 
+
+:TWAR7_9703
+if 
+  68@ == 1 
+jf @TWAR7_9868 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_9868 
+01E7: remove_forbidden_for_cars_cube_cornerA 2563.7 -1435.0 10.0 cornerB 2580.3 -1266.4 100.6 
+01E7: remove_forbidden_for_cars_cube_cornerA 2635.0 -1434.4 10.0 cornerB 2652.0 -1263.6 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2714.9 -1501.6 10.0 cornerB 2746.1 -1266.4 100.0 
+32@ = 0 
+85@ = 0 
+68@ = 0 
+73@ = 0 
+67@ = 5 
+
+:TWAR7_9868
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_9882
+if 
+  67@ == 5 
+jf @TWAR7_10894 
+if 
+  85@ == 0 
+jf @TWAR7_10021 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_9996 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_9989 
+83@ = 6 
+84@ = 1 
+130@ = 2 
+gosub @TWAR7_29894 
+
+:TWAR7_9989
+85@ = 1 
+
+:TWAR7_9996
+if 
+  68@ == 1 
+jf @TWAR7_10021 
+85@ = 1 
+
+:TWAR7_10021
+if 
+  73@ == 0 
+jf @TWAR7_10206 
+01E8: create_forbidden_for_cars_cube_cornerA 2713.9 -1499.3 10.0 cornerB 2746.6 -1266.3 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2714.6 -1249.9 10.0 cornerB 2744.7 -1332.9 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2634.6 -1396.6 10.0 cornerB 2651.0 -1264.2 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2635.1 -1248.0 10.0 cornerB 2651.0 -1055.3 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2651.5 -1263.8 10.0 cornerB 2579.5 -1248.7 100.0 
+73@ = 1 
+
+:TWAR7_10206
+if 
+  73@ == 1 
+jf @TWAR7_10333 
+if 
+01AD:   car 35@ sphere 0 near_point 2712.7 -1265.7 radius 5.0 5.0 
+jf @TWAR7_10333 
+01E7: remove_forbidden_for_cars_cube_cornerA 2713.9 -1499.3 10.0 cornerB 2746.6 -1266.3 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2714.6 -1249.9 10.0 cornerB 2744.7 -1332.9 100.0 
+73@ = 2 
+
+:TWAR7_10333
+if 
+  73@ == 2 
+jf @TWAR7_10492 
+if 
+01AD:   car 35@ sphere 0 near_point 2630.5 -1248.3 radius 5.0 5.0 
+jf @TWAR7_10492 
+01E7: remove_forbidden_for_cars_cube_cornerA 2634.6 -1396.6 10.0 cornerB 2651.0 -1264.2 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2635.1 -1248.0 10.0 cornerB 2651.0 -1055.3 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2651.5 -1263.8 10.0 cornerB 2579.5 -1248.7 100.0 
+73@ = 3 
+
+:TWAR7_10492
+if 
+  68@ == 0 
+jf @TWAR7_10641 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_10641 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_10596 
+Actor.SetImmunities(34@, 0, 0, 0, 0, 0)
+
+:TWAR7_10596
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_10627 
+Car.SetImmunities(35@, 0, 0, 0, 0, 0)
+
+:TWAR7_10627
+05EB: assign_car 35@ to_path 32 
+68@ = 1 
+
+:TWAR7_10641
+if 
+  68@ == 1 
+jf @TWAR7_10880 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_10880 
+Actor.RemoveReferences(41@)
+Actor.RemoveReferences(40@)
+01E7: remove_forbidden_for_cars_cube_cornerA 2713.9 -1499.3 10.0 cornerB 2746.6 -1266.3 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2714.6 -1249.9 10.0 cornerB 2744.7 -1332.9 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2634.6 -1396.6 10.0 cornerB 2651.0 -1264.2 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2635.1 -1248.0 10.0 cornerB 2651.0 -1055.3 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2651.5 -1263.8 10.0 cornerB 2579.5 -1248.7 100.0 
+32@ = 0 
+85@ = 0 
+73@ = 0 
+68@ = 0 
+67@ = 6 
+
+:TWAR7_10880
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_10894
+if 
+  67@ == 6 
+jf @TWAR7_11923 
+if 
+  85@ == 0 
+jf @TWAR7_11060 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 35.0 35.0 0 
+jf @TWAR7_11035 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_11028 
+83@ = 6 
+84@ = 2 
+130@ = 3 
+gosub @TWAR7_29894 
+
+:TWAR7_11028
+85@ = 1 
+
+:TWAR7_11035
+if 
+  68@ == 1 
+jf @TWAR7_11060 
+85@ = 1 
+
+:TWAR7_11060
+if 
+  73@ == 0 
+jf @TWAR7_11245 
+01E8: create_forbidden_for_cars_cube_cornerA 2563.7 -1248.6 10.0 cornerB 2578.9 -1192.2 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2443.7 -1249.2 10.0 cornerB 2459.1 -1191.9 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2363.5 -1253.4 10.0 cornerB 2378.7 -1145.5 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2311.2 -1144.7 10.0 cornerB 2379.1 -1162.1 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2239.9 -1130.0 10.0 cornerB 2017.6 -928.3 100.0 
+73@ = 1 
+
+:TWAR7_11245
+if 
+  73@ == 1 
+jf @TWAR7_11340 
+if 
+01AD:   car 35@ sphere 0 near_point 2563.2 -1191.8 radius 5.0 5.0 
+jf @TWAR7_11340 
+01E7: remove_forbidden_for_cars_cube_cornerA 2563.7 -1248.6 10.0 cornerB 2578.9 -1192.2 100.6 
+73@ = 2 
+
+:TWAR7_11340
+if 
+  73@ == 2 
+jf @TWAR7_11435 
+if 
+01AD:   car 35@ sphere 0 near_point 2442.4 -1191.4 radius 5.0 5.0 
+jf @TWAR7_11435 
+01E7: remove_forbidden_for_cars_cube_cornerA 2443.7 -1249.2 10.0 cornerB 2459.1 -1191.9 100.0 
+73@ = 3 
+
+:TWAR7_11435
+if 
+  73@ == 3 
+jf @TWAR7_11530 
+if 
+01AD:   car 35@ sphere 0 near_point 2360.1 -1164.8 radius 5.0 5.0 
+jf @TWAR7_11530 
+01E7: remove_forbidden_for_cars_cube_cornerA 2363.5 -1253.4 10.0 cornerB 2378.7 -1145.5 100.0 
+73@ = 4 
+
+:TWAR7_11530
+if 
+  73@ == 4 
+jf @TWAR7_11625 
+if 
+01AD:   car 35@ sphere 0 near_point 2315.0 -1145.9 radius 5.0 5.0 
+jf @TWAR7_11625 
+01E7: remove_forbidden_for_cars_cube_cornerA 2311.2 -1144.7 10.0 cornerB 2379.1 -1162.1 100.0 
+73@ = 5 
+
+:TWAR7_11625
+if 
+  68@ == 0 
+jf @TWAR7_11712 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_11712 
+05EB: assign_car 35@ to_path 33 
+68@ = 1 
+
+:TWAR7_11712
+if 
+  68@ == 1 
+jf @TWAR7_11909 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_11909 
+01E7: remove_forbidden_for_cars_cube_cornerA 2563.7 -1248.6 10.0 cornerB 2578.9 -1192.2 100.6 
+01E7: remove_forbidden_for_cars_cube_cornerA 2443.7 -1249.2 10.0 cornerB 2459.1 -1191.9 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2363.5 -1253.4 10.0 cornerB 2378.7 -1145.5 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2311.2 -1144.7 10.0 cornerB 2379.1 -1162.1 100.0 
+32@ = 0 
+85@ = 0 
+73@ = 0 
+68@ = 0 
+67@ = 7 
+
+:TWAR7_11909
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_11923
+if 
+  67@ == 7 
+jf @TWAR7_12423 
+if 
+  85@ == 0 
+jf @TWAR7_12069 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_12044 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_12037 
+83@ = 6 
+84@ = 3 
+130@ = 4 
+gosub @TWAR7_29894 
+
+:TWAR7_12037
+85@ = 1 
+
+:TWAR7_12044
+if 
+  68@ == 1 
+jf @TWAR7_12069 
+85@ = 1 
+
+:TWAR7_12069
+if 
+  73@ == 0 
+jf @TWAR7_12126 
+01E8: create_forbidden_for_cars_cube_cornerA 1930.6 -1031.9 10.0 cornerB 1574.4 -879.9 100.0 
+73@ = 1 
+
+:TWAR7_12126
+if 
+  73@ == 1 
+jf @TWAR7_12221 
+if 
+01AD:   car 35@ sphere 0 near_point 2149.8 -996.1 radius 5.0 5.0 
+jf @TWAR7_12221 
+01E7: remove_forbidden_for_cars_cube_cornerA 2239.9 -1130.0 10.0 cornerB 2017.6 -928.3 100.0 
+73@ = 2 
+
+:TWAR7_12221
+if 
+  68@ == 0 
+jf @TWAR7_12308 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_12308 
+05EB: assign_car 35@ to_path 34 
+68@ = 1 
+
+:TWAR7_12308
+if 
+  68@ == 1 
+jf @TWAR7_12409 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_12409 
+01E7: remove_forbidden_for_cars_cube_cornerA 2239.9 -1130.0 10.0 cornerB 2017.6 -928.3 100.0 
+32@ = 0 
+85@ = 0 
+73@ = 0 
+68@ = 0 
+67@ = 8 
+
+:TWAR7_12409
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_12423
+if 
+  67@ == 8 
+jf @TWAR7_14003 
+if 
+  85@ == 0 
+jf @TWAR7_12562 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_12537 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_12530 
+83@ = 6 
+84@ = 4 
+130@ = 5 
+gosub @TWAR7_29894 
+
+:TWAR7_12530
+85@ = 1 
+
+:TWAR7_12537
+if 
+  68@ == 1 
+jf @TWAR7_12562 
+85@ = 1 
+
+:TWAR7_12562
+if 
+  73@ == 0 
+jf @TWAR7_12619 
+01E8: create_forbidden_for_cars_cube_cornerA 1879.6 -1024.3 10.0 cornerB 1600.0 -1521.7 100.0 
+73@ = 1 
+
+:TWAR7_12619
+if 
+  73@ == 1 
+jf @TWAR7_12714 
+if 
+01AD:   car 35@ sphere 0 near_point 1819.4 -1034.0 radius 5.0 5.0 
+jf @TWAR7_12714 
+01E7: remove_forbidden_for_cars_cube_cornerA 1930.6 -1031.9 10.0 cornerB 1574.4 -879.9 100.0 
+73@ = 2 
+
+:TWAR7_12714
+if 
+  73@ == 2 
+jf @TWAR7_12809 
+if 
+01AD:   car 35@ sphere 0 near_point 1755.3 -1489.1 radius 5.0 5.0 
+jf @TWAR7_12809 
+01E7: remove_forbidden_for_cars_cube_cornerA 1879.6 -1024.3 10.0 cornerB 1552.0 -1521.7 100.0 
+73@ = 3 
+
+:TWAR7_12809
+if 
+  68@ == 0 
+jf @TWAR7_13749 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_13749 
+04AF: 78@ = 410 // = constant 
+gosub @TWAR7_26271 
+42@ = Car.Create(#MANANA, 1688.5, -1111.7, 58.5)
+0560: create_random_actor_in_car 42@ handle_as 52@ 
+0587: enable_car 42@ validate_position 1 
+Car.Angle(42@) = 322.3
+05EB: assign_car 42@ to_path 50 
+04AF: 78@ = 410 // = constant 
+gosub @TWAR7_26271 
+43@ = Car.Create(#MANANA, 1679.7, -1131.6, 59.7)
+0560: create_random_actor_in_car 43@ handle_as 53@ 
+0587: enable_car 43@ validate_position 1 
+Car.Angle(43@) = 321.2
+05EB: assign_car 43@ to_path 51 
+44@ = Car.Create(#PCJ600, 1644.8, -1177.5, 54.3)
+0560: create_random_actor_in_car 44@ handle_as 54@ 
+0587: enable_car 44@ validate_position 1 
+Car.Angle(44@) = 320.8
+05EB: assign_car 44@ to_path 52 
+04AF: 78@ = 410 // = constant 
+gosub @TWAR7_26271 
+45@ = Car.Create(#MANANA, 1637.0, -1203.8, 51.5)
+0560: create_random_actor_in_car 45@ handle_as 55@ 
+0587: enable_car 45@ validate_position 1 
+Car.Angle(45@) = 350.3
+05EB: assign_car 45@ to_path 53 
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13245 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+46@ = Car.Create(74@, 1618.2, -1306.4, 35.6)
+Car.Angle(46@) = 343.7
+0587: enable_car 46@ validate_position 1 
+0560: create_random_actor_in_car 46@ handle_as 56@ 
+05EB: assign_car 46@ to_path 54 
+
+:TWAR7_13245
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13343 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+47@ = Car.Create(74@, 1621.8, -1317.9, 33.0)
+Car.Angle(47@) = 348.7
+0587: enable_car 47@ validate_position 1 
+0560: create_random_actor_in_car 47@ handle_as 57@ 
+05EB: assign_car 47@ to_path 55 
+
+:TWAR7_13343
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13441 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+48@ = Car.Create(74@, 1615.6, -1327.7, 31.5)
+Car.Angle(48@) = 352.1
+0587: enable_car 48@ validate_position 1 
+0560: create_random_actor_in_car 48@ handle_as 58@ 
+05EB: assign_car 48@ to_path 56 
+
+:TWAR7_13441
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13539 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+49@ = Car.Create(74@, 1612.3, -1394.0, 27.6)
+Car.Angle(49@) = 353.6
+0587: enable_car 49@ validate_position 1 
+0560: create_random_actor_in_car 49@ handle_as 59@ 
+05EB: assign_car 49@ to_path 57 
+
+:TWAR7_13539
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13637 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+50@ = Car.Create(74@, 1612.3, -1462.2, 27.1)
+Car.Angle(50@) = 357.2
+0587: enable_car 50@ validate_position 1 
+0560: create_random_actor_in_car 50@ handle_as 60@ 
+05EB: assign_car 50@ to_path 58 
+
+:TWAR7_13637
+09B2: get_random_available_car_unk 1 model_to 74@ class_to 75@ 
+if 
+  74@ >= 0 
+jf @TWAR7_13735 
+0085: 78@ = 74@ // (int) 
+gosub @TWAR7_26271 
+51@ = Car.Create(74@, 1663.4, -1457.0, 24.3)
+Car.Angle(51@) = 51.9
+0587: enable_car 51@ validate_position 1 
+0560: create_random_actor_in_car 51@ handle_as 61@ 
+05EB: assign_car 51@ to_path 60 
+
+:TWAR7_13735
+05EB: assign_car 35@ to_path 35 
+68@ = 1 
+
+:TWAR7_13749
+if 
+  68@ == 1 
+jf @TWAR7_13856 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_13790 
+68@ = 2 
+
+:TWAR7_13790
+if 
+   not Car.Wrecked(51@)
+jf @TWAR7_13856 
+if 
+01AD:   car 51@ sphere 0 near_point 1601.4 -1389.5 radius 5.0 5.0 
+jf @TWAR7_13856 
+05EC: release_car 51@ from_path 
+68@ = 2 
+
+:TWAR7_13856
+if 
+  68@ == 2 
+jf @TWAR7_13989 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_13989 
+01E7: remove_forbidden_for_cars_cube_cornerA 1930.6 -1031.9 10.0 cornerB 1574.4 -879.9 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1879.6 -1024.3 10.0 cornerB 1552.0 -1521.7 100.0 
+32@ = 0 
+73@ = 0 
+85@ = 0 
+68@ = 0 
+67@ = 9 
+
+:TWAR7_13989
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_14003
+if 
+  67@ == 9 
+jf @TWAR7_14663 
+if 
+  85@ == 0 
+jf @TWAR7_14149 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_14124 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_14117 
+83@ = 6 
+84@ = 5 
+130@ = 6 
+gosub @TWAR7_29894 
+
+:TWAR7_14117
+85@ = 1 
+
+:TWAR7_14124
+if 
+  68@ == 1 
+jf @TWAR7_14149 
+85@ = 1 
+
+:TWAR7_14149
+if 
+  73@ == 0 
+jf @TWAR7_14206 
+01E8: create_forbidden_for_cars_cube_cornerA 1725.8 -1433.3 10.0 cornerB 1838.0 -1459.4 100.0 
+73@ = 1 
+
+:TWAR7_14206
+if 
+  73@ == 1 
+jf @TWAR7_14301 
+if 
+01AD:   car 35@ sphere 0 near_point 1781.3 -1437.9 radius 5.0 5.0 
+jf @TWAR7_14301 
+01E7: remove_forbidden_for_cars_cube_cornerA 1725.8 -1433.3 10.0 cornerB 1838.0 -1459.4 100.0 
+73@ = 2 
+
+:TWAR7_14301
+if 
+  68@ == 0 
+jf @TWAR7_14548 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_14548 
+Car.RemoveReferences(42@)
+Car.RemoveReferences(43@)
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(46@)
+Car.RemoveReferences(47@)
+Car.RemoveReferences(48@)
+Car.RemoveReferences(49@)
+Car.RemoveReferences(50@)
+Car.RemoveReferences(51@)
+Actor.RemoveReferences(52@)
+Actor.RemoveReferences(53@)
+Actor.RemoveReferences(54@)
+Actor.RemoveReferences(55@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(57@)
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Actor.RemoveReferences(61@)
+0376: 38@ = create_random_actor_at 1778.4 -1343.1 14.7 
+Actor.Angle(38@) = 180.0
+0376: 39@ = create_random_actor_at 1778.4 -1344.1 14.7 
+Actor.Angle(39@) = 0.0
+05EB: assign_car 35@ to_path 36 
+68@ = 1 
+
+:TWAR7_14548
+if 
+  68@ == 1 
+jf @TWAR7_14649 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_14649 
+01E7: remove_forbidden_for_cars_cube_cornerA 1725.8 -1433.3 10.0 cornerB 1838.0 -1459.4 100.0 
+32@ = 0 
+73@ = 0 
+85@ = 0 
+68@ = 0 
+67@ = 10 
+
+:TWAR7_14649
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_14663
+if 
+  67@ == 10 
+jf @TWAR7_15364 
+if 
+  85@ == 0 
+jf @TWAR7_14809 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_14784 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_14777 
+83@ = 6 
+84@ = 6 
+130@ = 7 
+gosub @TWAR7_29894 
+
+:TWAR7_14777
+85@ = 1 
+
+:TWAR7_14784
+if 
+  68@ == 1 
+jf @TWAR7_14809 
+85@ = 1 
+
+:TWAR7_14809
+if 
+  73@ == 0 
+jf @TWAR7_14930 
+01E8: create_forbidden_for_cars_cube_cornerA 1838.4 -1453.6 10.0 cornerB 1853.7 -1303.4 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 1979.3 -1468.7 10.0 cornerB 1853.5 -1452.5 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2334.0 -1556.1 10.0 cornerB 2350.5 -1489.7 100.0 
+73@ = 1 
+
+:TWAR7_14930
+if 
+  73@ == 1 
+jf @TWAR7_15025 
+if 
+01AD:   car 35@ sphere 0 near_point 1855.7 -1379.0 radius 5.0 5.0 
+jf @TWAR7_15025 
+01E7: remove_forbidden_for_cars_cube_cornerA 1838.4 -1453.6 10.0 cornerB 1853.7 -1303.4 100.0 
+73@ = 2 
+
+:TWAR7_15025
+if 
+  73@ == 2 
+jf @TWAR7_15120 
+if 
+01AD:   car 35@ sphere 0 near_point 1971.5 -1474.6 radius 5.0 5.0 
+jf @TWAR7_15120 
+01E7: remove_forbidden_for_cars_cube_cornerA 1979.3 -1468.7 10.0 cornerB 1853.5 -1452.5 100.0 
+73@ = 3 
+
+:TWAR7_15120
+if 
+  68@ == 0 
+jf @TWAR7_15207 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_15207 
+05EB: assign_car 35@ to_path 37 
+68@ = 1 
+
+:TWAR7_15207
+if 
+  68@ == 1 
+jf @TWAR7_15350 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_15350 
+Actor.RemoveReferences(38@)
+Actor.RemoveReferences(39@)
+01E7: remove_forbidden_for_cars_cube_cornerA 1838.4 -1453.6 10.0 cornerB 1853.7 -1303.4 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1979.3 -1468.7 10.0 cornerB 1853.5 -1452.5 100.0 
+32@ = 0 
+73@ = 0 
+85@ = 0 
+68@ = 0 
+67@ = 11 
+
+:TWAR7_15350
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_15364
+if 
+  67@ == 11 
+jf @TWAR7_15928 
+if 
+  85@ == 0 
+jf @TWAR7_15510 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_15485 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_15478 
+83@ = 6 
+84@ = 7 
+130@ = 8 
+gosub @TWAR7_29894 
+
+:TWAR7_15478
+85@ = 1 
+
+:TWAR7_15485
+if 
+  68@ == 1 
+jf @TWAR7_15510 
+85@ = 1 
+
+:TWAR7_15510
+if 
+  73@ == 0 
+jf @TWAR7_15567 
+01E8: create_forbidden_for_cars_cube_cornerA 2350.1 -1516.0 10.0 cornerB 2423.9 -1532.5 100.0 
+73@ = 1 
+
+:TWAR7_15567
+if 
+  73@ == 1 
+jf @TWAR7_15694 
+if 
+01AD:   car 35@ sphere 0 near_point 2394.8 -1508.7 radius 5.0 5.0 
+jf @TWAR7_15694 
+01E7: remove_forbidden_for_cars_cube_cornerA 2350.1 -1516.0 10.0 cornerB 2423.9 -1532.5 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2334.0 -1556.1 10.0 cornerB 2350.5 -1489.7 100.0 
+73@ = 2 
+
+:TWAR7_15694
+if 
+  68@ == 0 
+jf @TWAR7_15781 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_15781 
+05EB: assign_car 35@ to_path 38 
+68@ = 1 
+
+:TWAR7_15781
+if 
+  68@ == 1 
+jf @TWAR7_15914 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_15914 
+01E7: remove_forbidden_for_cars_cube_cornerA 2350.1 -1516.0 10.0 cornerB 2423.9 -1532.5 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2334.0 -1556.1 10.0 cornerB 2350.5 -1489.7 100.0 
+32@ = 0 
+73@ = 0 
+85@ = 0 
+68@ = 0 
+67@ = 12 
+
+:TWAR7_15914
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_15928
+if 
+  67@ == 12 
+jf @TWAR7_16428 
+if 
+  85@ == 0 
+jf @TWAR7_16074 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_16049 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_16042 
+83@ = 6 
+84@ = 8 
+130@ = 9 
+gosub @TWAR7_29894 
+
+:TWAR7_16042
+85@ = 1 
+
+:TWAR7_16049
+if 
+  68@ == 1 
+jf @TWAR7_16074 
+85@ = 1 
+
+:TWAR7_16074
+if 
+  73@ == 0 
+jf @TWAR7_16131 
+01E8: create_forbidden_for_cars_cube_cornerA 2379.8 -1373.3 10.0 cornerB 2423.7 -1452.6 100.0 
+73@ = 1 
+
+:TWAR7_16131
+if 
+  73@ == 1 
+jf @TWAR7_16226 
+if 
+01AD:   car 35@ sphere 0 near_point 2398.6 -1432.4 radius 5.0 5.0 
+jf @TWAR7_16226 
+01E7: remove_forbidden_for_cars_cube_cornerA 2379.8 -1373.3 10.0 cornerB 2423.7 -1452.6 100.0 
+73@ = 2 
+
+:TWAR7_16226
+if 
+  68@ == 0 
+jf @TWAR7_16313 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_16313 
+05EB: assign_car 35@ to_path 39 
+68@ = 1 
+
+:TWAR7_16313
+if 
+  68@ == 1 
+jf @TWAR7_16414 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_16414 
+01E7: remove_forbidden_for_cars_cube_cornerA 2379.8 -1373.3 10.0 cornerB 2423.7 -1452.6 100.0 
+32@ = 0 
+73@ = 0 
+85@ = 0 
+68@ = 0 
+67@ = 13 
+
+:TWAR7_16414
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+
+:TWAR7_16428
+if 
+  67@ == 13 
+jf @TWAR7_17849 
+gosub @TWAR7_25566 
+gosub @TWAR7_25304 
+if 
+  85@ == 0 
+jf @TWAR7_16588 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_16563 
+33@ = 0 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_16556 
+83@ = 6 
+84@ = 11 
+130@ = 12 
+gosub @TWAR7_29894 
+
+:TWAR7_16556
+85@ = 1 
+
+:TWAR7_16563
+if 
+  68@ == 1 
+jf @TWAR7_16588 
+85@ = 1 
+
+:TWAR7_16588
+if 
+  73@ == 0 
+jf @TWAR7_16741 
+01E8: create_forbidden_for_cars_cube_cornerA 2363.5 -1291.7 10.0 cornerB 2379.5 -1181.2 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2295.9 -1291.5 10.0 cornerB 2311.5 -1162.3 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2333.9 -1392.1 10.0 cornerB 2220.2 -1377.1 100.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2334.6 -1493.6 10.0 cornerB 2219.8 -1475.2 100.0 
+73@ = 1 
+
+:TWAR7_16741
+if 
+  73@ == 1 
+jf @TWAR7_16836 
+if 
+01AD:   car 35@ sphere 0 near_point 2362.8 -1259.3 radius 5.0 5.0 
+jf @TWAR7_16836 
+01E7: remove_forbidden_for_cars_cube_cornerA 2363.5 -1291.7 10.0 cornerB 2379.5 -1181.2 100.0 
+73@ = 2 
+
+:TWAR7_16836
+if 
+  73@ == 2 
+jf @TWAR7_16931 
+if 
+01AD:   car 35@ sphere 0 near_point 2294.5 -1263.5 radius 5.0 5.0 
+jf @TWAR7_16931 
+01E7: remove_forbidden_for_cars_cube_cornerA 2295.9 -1291.5 10.0 cornerB 2311.5 -1162.3 100.0 
+73@ = 3 
+
+:TWAR7_16931
+if 
+  73@ == 3 
+jf @TWAR7_17026 
+if 
+01AD:   car 35@ sphere 0 near_point 2284.2 -1393.8 radius 5.0 5.0 
+jf @TWAR7_17026 
+01E7: remove_forbidden_for_cars_cube_cornerA 2333.9 -1392.1 10.0 cornerB 2220.2 -1377.1 100.0 
+73@ = 4 
+
+:TWAR7_17026
+if 
+  73@ == 4 
+jf @TWAR7_17121 
+if 
+01AD:   car 35@ sphere 0 near_point 2293.8 -1491.7 radius 5.0 5.0 
+jf @TWAR7_17121 
+01E7: remove_forbidden_for_cars_cube_cornerA 2334.6 -1493.6 10.0 cornerB 2219.8 -1475.2 100.0 
+73@ = 5 
+
+:TWAR7_17121
+if 
+  68@ == 0 
+jf @TWAR7_17430 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+  32@ > 4000 
+jf @TWAR7_17430 
+if 
+   Model.Available(#LSV3)
+jf @TWAR7_17268 
+62@ = Actor.Create(Mission2, #LSV3, 2301.9, -1504.1, 24.3)
+Actor.Angle(62@) = 358.5
+Actor.GiveWeaponAndAmmo(62@, Tec9, 30000)
+0816: set_actor 62@ dont_chase_victim 1 
+060B: set_actor 62@ decision_maker_to 149@ 
+
+:TWAR7_17268
+if 
+   Model.Available(#LSV3)
+jf @TWAR7_17342 
+63@ = Actor.Create(Mission2, #LSV3, 2302.5, -1502.3, 24.3)
+Actor.Angle(63@) = 18.5
+Actor.GiveWeaponAndAmmo(63@, Tec9, 30000)
+0816: set_actor 63@ dont_chase_victim 1 
+060B: set_actor 63@ decision_maker_to 149@ 
+
+:TWAR7_17342
+if 
+   Model.Available(#LSV3)
+jf @TWAR7_17416 
+64@ = Actor.Create(Mission2, #LSV3, 2300.6, -1503.9, 24.3)
+Actor.Angle(64@) = 5.9
+Actor.GiveWeaponAndAmmo(64@, Tec9, 30000)
+0816: set_actor 64@ dont_chase_victim 1 
+060B: set_actor 64@ decision_maker_to 149@ 
+
+:TWAR7_17416
+05EB: assign_car 35@ to_path 40 
+68@ = 1 
+
+:TWAR7_17430
+if 
+  68@ == 1 
+jf @TWAR7_17681 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @TWAR7_17681 
+01E7: remove_forbidden_for_cars_cube_cornerA 2363.5 -1291.7 10.0 cornerB 2379.5 -1181.2 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2295.9 -1291.5 10.0 cornerB 2311.5 -1162.3 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2333.9 -1392.1 10.0 cornerB 2220.2 -1377.1 100.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2334.6 -1493.6 10.0 cornerB 2219.8 -1475.2 100.0 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2300.3 -1502.8 24.3 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 205.1 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor 34@ to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_17674 
+07EE: car 35@ enable_tire_marks 0 
+
+:TWAR7_17674
+68@ = 2 
+
+:TWAR7_17681
+if 
+  68@ == 2 
+jf @TWAR7_17849 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 34@ radius 30.0 30.0 0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+jf @TWAR7_17849 
+if 
+06EE:   actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_17770 
+06C9: remove_actor $ACTOR_OG_LOC from_group 
+
+:TWAR7_17770
+09F4: set_actor $ACTOR_OG_LOC ignore_height_difference_following_nodes 1 
+0648: unknown_actor $ACTOR_OG_LOC task_set 50.0 // float 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05E2: AS_actor -1 kill_actor 34@ 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+85@ = 0 
+73@ = 0 
+68@ = 0 
+67@ = 14 
+
+:TWAR7_17849
+if 
+  67@ == 14 
+jf @TWAR7_18256 
+if 
+  85@ == 0 
+jf @TWAR7_17947 
+if or
+0364:   actor $ACTOR_OG_LOC spotted_actor 34@ 
+0364:   actor 34@ spotted_actor $ACTOR_OG_LOC 
+jf @TWAR7_17947 
+83@ = 7 
+84@ = 0 
+gosub @TWAR7_29894 
+33@ = 0 
+85@ = 1 
+
+:TWAR7_17947
+if 
+  85@ == 1 
+jf @TWAR7_18011 
+if 
+  83@ == 0 
+jf @TWAR7_18011 
+83@ = 17 
+84@ = 0 
+gosub @TWAR7_29894 
+85@ = 2 
+
+:TWAR7_18011
+if 
+  68@ == 0 
+jf @TWAR7_18256 
+Marker.Disable(66@)
+66@ = Marker.CreateAboveActor(34@)
+02A9: set_actor 34@ immune_to_nonplayer 0 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+0639: AS_actor -1 rotate_to_actor $ACTOR_OG_LOC 
+05E2: AS_actor -1 kill_actor $ACTOR_OG_LOC 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor 34@ to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+if 
+   not Actor.Dead(62@)
+jf @TWAR7_18143 
+062E: get_actor 62@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_18143 
+05E2: AS_actor 62@ kill_actor $PLAYER_ACTOR 
+
+:TWAR7_18143
+if 
+   not Actor.Dead(63@)
+jf @TWAR7_18196 
+062E: get_actor 63@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_18196 
+05E2: AS_actor 63@ kill_actor $PLAYER_ACTOR 
+
+:TWAR7_18196
+if 
+   not Actor.Dead(64@)
+jf @TWAR7_18249 
+062E: get_actor 64@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_18249 
+05E2: AS_actor 64@ kill_actor $PLAYER_ACTOR 
+
+:TWAR7_18249
+68@ = 1 
+
+:TWAR7_18256
+jump @TWAR7_18397 
+
+:TWAR7_18263
+Marker.Disable(66@)
+if 
+   not Actor.Dead(62@)
+jf @TWAR7_18299 
+05DB: AS_actor 62@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18299
+if 
+   not Actor.Dead(63@)
+jf @TWAR7_18330 
+05DB: AS_actor 63@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18330
+if 
+   not Actor.Dead(64@)
+jf @TWAR7_18361 
+05DB: AS_actor 64@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18361
+040D: unload_wav 1 
+040D: unload_wav 2 
+32@ = 0 
+68@ = 0 
+85@ = 0 
+67@ = 15 
+
+:TWAR7_18397
+jump @TWAR7_18538 
+
+:TWAR7_18404
+Marker.Disable(66@)
+if 
+   not Actor.Dead(62@)
+jf @TWAR7_18440 
+05DB: AS_actor 62@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18440
+if 
+   not Actor.Dead(63@)
+jf @TWAR7_18471 
+05DB: AS_actor 63@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18471
+if 
+   not Actor.Dead(64@)
+jf @TWAR7_18502 
+05DB: AS_actor 64@ flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit -2 
+
+:TWAR7_18502
+040D: unload_wav 1 
+040D: unload_wav 2 
+32@ = 0 
+68@ = 0 
+85@ = 0 
+67@ = 15 
+
+:TWAR7_18538
+if 
+  67@ == 15 
+jf @TWAR7_21103 
+if 
+  68@ == 0 
+jf @TWAR7_20019 
+if 
+  32@ > 2000 
+jf @TWAR7_20019 
+gosub @ENTEXT_59 
+if 
+  $38 == 1 
+jf @TWAR7_20019 
+00BE: text_clear_all 
+fade 0 500 
+
+:TWAR7_18627
+if 
+fading 
+jf @TWAR7_18651 
+wait 0 
+jump @TWAR7_18627 
+
+:TWAR7_18651
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_18683 
+jump @TWAR7_23200 
+
+:TWAR7_18683
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+Actor.DestroyInstantly(62@)
+Actor.DestroyInstantly(63@)
+Actor.DestroyInstantly(64@)
+091D: remove_forbidden_for_boats_cube_cornerA 2563.7 -1435.0 10.0 cornerB 2580.3 -1266.4 100.6 
+091D: remove_forbidden_for_boats_cube_cornerA 2635.0 -1434.4 10.0 cornerB 2652.0 -1263.6 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2714.9 -1501.6 10.0 cornerB 2746.1 -1266.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2713.9 -1499.3 10.0 cornerB 2746.6 -1266.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2714.6 -1249.9 10.0 cornerB 2744.7 -1332.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2634.6 -1396.6 10.0 cornerB 2651.0 -1264.2 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2635.1 -1248.0 10.0 cornerB 2651.0 -1055.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2651.5 -1263.8 10.0 cornerB 2579.5 -1248.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2563.7 -1248.6 10.0 cornerB 2578.9 -1192.2 100.6 
+091D: remove_forbidden_for_boats_cube_cornerA 2443.7 -1249.2 10.0 cornerB 2459.1 -1191.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2363.5 -1253.4 10.0 cornerB 2378.7 -1145.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2311.2 -1144.7 10.0 cornerB 2379.1 -1162.1 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2239.9 -1130.0 10.0 cornerB 2017.6 -928.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1930.6 -1031.9 10.0 cornerB 1574.4 -879.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1879.6 -1024.3 10.0 cornerB 1552.0 -1521.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1725.8 -1433.3 10.0 cornerB 1838.0 -1459.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1838.4 -1453.6 10.0 cornerB 1853.7 -1303.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1979.3 -1468.7 10.0 cornerB 1853.5 -1452.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2334.0 -1556.1 10.0 cornerB 2350.5 -1489.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2350.1 -1516.0 10.0 cornerB 2423.9 -1532.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2379.8 -1373.3 10.0 cornerB 2423.7 -1452.6 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2363.5 -1291.7 10.0 cornerB 2379.5 -1181.2 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2295.9 -1291.5 10.0 cornerB 2311.5 -1162.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2333.9 -1392.1 10.0 cornerB 2220.2 -1377.1 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2334.6 -1493.6 10.0 cornerB 2219.8 -1475.2 100.0 
+Car.RemoveReferences(36@)
+Car.RemoveReferences(35@)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+Model.Destroy(#PCJ600)
+04ED: load_animation "MISC" 
+038B: load_requested_models 
+04E4: refresh_game_renderer_at 2293.4 -1490.2 
+0A0B: set_rendering_origin_at_3D_coord 2293.4 -1490.2 22.2 angle 90.0 
+0395: clear_area 1 at 2293.4 -1490.2 22.2 radius 20.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+09F5: disable_player_mutal_activities 1 
+08F5: save_player_group 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_19651 
+07EE: car 35@ enable_tire_marks 0 
+
+:TWAR7_19651
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.StorePos($PLAYER_ACTOR, 141@, 142@, 143@)
+144@ = Actor.Angle($PLAYER_ACTOR)
+06C9: remove_actor $ACTOR_OG_LOC from_group 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+0395: clear_area 1 at 2290.4 -1490.2 22.3 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2290.4, -1490.2, 22.3)
+Actor.Angle($PLAYER_ACTOR) = 265.8
+05D3: AS_actor $PLAYER_ACTOR goto_point 2295.6 -1490.5 21.3 mode 4 time -1 ms // versionA 
+0470: 76@ = actor $PLAYER_ACTOR current_weapon 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+0395: clear_area 1 at 2295.3 -1491.3 22.3 radius 1.0 
+Actor.PutAt($ACTOR_OG_LOC, 2295.3, -1491.3, 22.3)
+Actor.Angle($ACTOR_OG_LOC) = 268.4
+0667: AS_actor $ACTOR_OG_LOC aim_at 2299.3 -1490.6 22.8 10000 ms 
+Camera.SetPosition(2299.3, -1490.6, 22.8, 0.0, 0.0, 0.0)
+Camera.PointAt(2255.6, -1493.3, 38.3, 2)
+83@ = 8 
+84@ = 0 
+gosub @TWAR7_29894 
+68@ = 1 
+fade 1 1500 
+
+:TWAR7_19949
+if 
+fading 
+jf @TWAR7_19973 
+wait 0 
+jump @TWAR7_19949 
+
+:TWAR7_19973
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_20005 
+jump @TWAR7_23200 
+
+:TWAR7_20005
+69@ = 1 
+0707: start_scene_skip_to @TWAR7_20613 
+
+:TWAR7_20019
+if 
+  68@ == 1 
+jf @TWAR7_20150 
+062E: get_actor $PLAYER_ACTOR task 1491 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_20150 
+0639: AS_actor $ACTOR_OG_LOC rotate_to_actor $PLAYER_ACTOR 
+0615: define_AS_pack_begin 145@ 
+0639: AS_actor -1 rotate_to_actor $ACTOR_OG_LOC 
+0605: actor -1 perform_animation "IDLE_CHAT_02" IFP "MISC" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+68@ = 2 
+
+:TWAR7_20150
+if 
+  68@ == 2 
+jf @TWAR7_20234 
+if 
+  84@ > 2 
+jf @TWAR7_20234 
+0687: clear_actor $PLAYER_ACTOR task 
+0605: actor $ACTOR_OG_LOC perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 3 
+
+:TWAR7_20234
+if 
+  68@ == 3 
+jf @TWAR7_20318 
+if 
+  84@ > 3 
+jf @TWAR7_20318 
+0687: clear_actor $ACTOR_OG_LOC task 
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 4 
+
+:TWAR7_20318
+if 
+  68@ == 4 
+jf @TWAR7_20402 
+if 
+  84@ > 4 
+jf @TWAR7_20402 
+0687: clear_actor $PLAYER_ACTOR task 
+0605: actor $ACTOR_OG_LOC perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 5 
+
+:TWAR7_20402
+if 
+  68@ == 5 
+jf @TWAR7_20486 
+if 
+  84@ > 5 
+jf @TWAR7_20486 
+0687: clear_actor $ACTOR_OG_LOC task 
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 6 
+
+:TWAR7_20486
+if 
+  68@ == 6 
+jf @TWAR7_20570 
+if 
+  84@ > 6 
+jf @TWAR7_20570 
+0687: clear_actor $PLAYER_ACTOR task 
+0605: actor $ACTOR_OG_LOC perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+68@ = 7 
+
+:TWAR7_20570
+if 
+  68@ == 7 
+jf @TWAR7_21103 
+if 
+  83@ == 0 
+jf @TWAR7_21103 
+69@ = 0 
+
+:TWAR7_20613
+0701: end_scene_skip 
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_20647 
+jump @TWAR7_23200 
+
+:TWAR7_20647
+0687: clear_actor $ACTOR_OG_LOC task 
+if 
+  69@ == 1 
+jf @TWAR7_20687 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+
+:TWAR7_20687
+fade 0 500 
+
+:TWAR7_20694
+if 
+fading 
+jf @TWAR7_20718 
+wait 0 
+jump @TWAR7_20694 
+
+:TWAR7_20718
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_20750 
+jump @TWAR7_23200 
+
+:TWAR7_20750
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+143@ -= 1.0 
+0395: clear_area 1 at 141@ 142@ 143@ radius 1.0 
+04E4: refresh_game_renderer_at 141@ 142@ 
+038B: load_requested_models 
+Actor.PutAt($PLAYER_ACTOR, 141@, 142@, 143@)
+Actor.Angle($PLAYER_ACTOR) = 144@
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 76@ 
+0792: disembark_instantly_actor $ACTOR_OG_LOC 
+02C0: store_to 137@ 138@ 139@ ped_path_coords_closest_to 141@ 142@ 143@ 
+04E4: refresh_game_renderer_at 137@ 138@ 
+038B: load_requested_models 
+139@ += 2.0 
+02CE: 143@ = ground_z_at 137@ 138@ 139@ 
+0395: clear_area 1 at 137@ 138@ 143@ radius 1.0 
+Actor.PutAt($ACTOR_OG_LOC, 137@, 138@, 143@)
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+72@ = 1 
+Camera.SetAtPos(141@, 142@, 143@)
+04EF: release_animation "MISC" 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Marker.Disable(66@)
+018A: 66@ = create_checkpoint_at 783.2 -1630.3 12.2 
+07E0: set_marker 66@ type_to 1 
+02A3: enable_widescreen 0 
+09F5: disable_player_mutal_activities 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 1500 
+
+:TWAR7_21019
+if 
+fading 
+jf @TWAR7_21043 
+wait 0 
+jump @TWAR7_21019 
+
+:TWAR7_21043
+gosub @TWAR7_24368 
+if 
+  70@ == 1 
+jf @TWAR7_21075 
+jump @TWAR7_23200 
+
+:TWAR7_21075
+68@ = 0 
+85@ = 0 
+67@ = 16 
+33@ = 0 
+
+:TWAR7_21103
+if 
+  67@ == 16 
+jf @TWAR7_21405 
+if 
+  83@ == 0 
+jf @TWAR7_21185 
+if 
+  85@ == 0 
+jf @TWAR7_21185 
+83@ = 9 
+84@ = 0 
+gosub @TWAR7_29894 
+85@ = 1 
+
+:TWAR7_21185
+if 
+  83@ == 0 
+jf @TWAR7_21244 
+if 
+  85@ == 1 
+jf @TWAR7_21244 
+00BC: show_text_highpriority GXT 'SMK1_13' time 8500 flag 1  // ~s~Take OG Loc to the employees' door at the back of the ~y~Burger Shot~s~.
+85@ = 2 
+
+:TWAR7_21244
+if 
+  68@ == 0 
+jf @TWAR7_21398 
+if 
+06EE:   actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_21398 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 783.2 -1630.3 12.2 radius 4.0 4.0 4.0 
+jf @TWAR7_21398 
+if 
+00FE:   actor $ACTOR_OG_LOC sphere 0 in_sphere 783.2 -1630.3 12.2 radius 4.0 4.0 4.0 
+jf @TWAR7_21398 
+Player.CanMove($PLAYER_CHAR) = False
+68@ = 0 
+67@ = 17 
+
+:TWAR7_21398
+gosub @TWAR7_25304 
+
+:TWAR7_21405
+if 
+  67@ == 17 
+jf @TWAR7_21800 
+if 
+  68@ == 0 
+jf @TWAR7_21664 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+09F5: disable_player_mutal_activities 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+06C9: remove_actor $ACTOR_OG_LOC from_group 
+0615: define_AS_pack_begin 145@ 
+05B9: AS_actor -1 stay_idle 1500 ms 
+0633: AS_actor -1 exit_car 
+0639: AS_actor -1 rotate_to_actor $ACTOR_OG_LOC 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 792.1 -1626.0 12.4 mode 4 time -2 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+83@ = 10 
+84@ = 0 
+gosub @TWAR7_29894 
+Camera.SetPosition(776.7145, -1637.248, 14.084, 0.0, 0.0, 0.0)
+Camera.PointAt(777.5906, -1636.769, 14.1398, 2)
+68@ = 1 
+
+:TWAR7_21664
+if 
+  68@ == 1 
+jf @TWAR7_21800 
+if 
+  83@ == 0 
+jf @TWAR7_21800 
+fade 0 500 
+
+:TWAR7_21707
+if 
+fading 
+jf @TWAR7_21731 
+wait 0 
+jump @TWAR7_21707 
+
+:TWAR7_21731
+Actor.DestroyInstantly($ACTOR_OG_LOC)
+Marker.Disable(66@)
+09F5: disable_player_mutal_activities 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+
+:TWAR7_21769
+if 
+fading 
+jf @TWAR7_21793 
+wait 0 
+jump @TWAR7_21769 
+
+:TWAR7_21793
+jump @TWAR7_23286 
+
+:TWAR7_21800
+if 
+  67@ > 3 
+jf @TWAR7_21917 
+if 
+  14 > 67@ 
+jf @TWAR7_21917 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_21917 
+062E: get_actor 34@ task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @TWAR7_21917 
+0713: actor 34@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 300.0 8 0 firing_rate 100 
+
+:TWAR7_21917
+if 
+  67@ > 3 
+jf @TWAR7_22030 
+if 
+  15 > 67@ 
+jf @TWAR7_22030 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_22030 
+if 
+80F2:   not actor $PLAYER_ACTOR near_actor 34@ radius 250.0 250.0 0 
+jf @TWAR7_22030 
+if 
+82CB:   not actor 34@ bounding_sphere_visible 
+jf @TWAR7_22030 
+68@ = 0 
+67@ = 20 
+
+:TWAR7_22030
+if 
+  67@ == 20 
+jf @TWAR7_22507 
+if 
+  68@ == 0 
+jf @TWAR7_22308 
+if 
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_22236 
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_22236 
+if 
+   Actor.InCar($ACTOR_OG_LOC, 36@)
+jf @TWAR7_22236 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+83@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+00BC: show_text_highpriority GXT 'SMK1_12' time 4000 flag 1  // ~r~Freddy got away!
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @TWAR7_22186 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+
+:TWAR7_22186
+06C9: remove_actor $ACTOR_OG_LOC from_group 
+0615: define_AS_pack_begin 145@ 
+0633: AS_actor -1 exit_car 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor $ACTOR_OG_LOC to_AS_pack 145@ 
+061B: remove_references_to_AS_pack 145@ 
+32@ = 0 
+68@ = 1 
+
+:TWAR7_22236
+if 
+   Car.Wrecked(36@)
+jf @TWAR7_22259 
+68@ = 2 
+
+:TWAR7_22259
+if 
+   Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_22282 
+68@ = 2 
+
+:TWAR7_22282
+if 
+   not Actor.InCar($ACTOR_OG_LOC, 36@)
+jf @TWAR7_22308 
+68@ = 2 
+
+:TWAR7_22308
+if 
+  68@ == 1 
+jf @TWAR7_22464 
+if 
+  32@ > 3000 
+jf @TWAR7_22464 
+fade 0 500 
+
+:TWAR7_22352
+if 
+fading 
+jf @TWAR7_22376 
+wait 0 
+jump @TWAR7_22352 
+
+:TWAR7_22376
+Actor.DestroyInstantly($ACTOR_OG_LOC)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @TWAR7_22404 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+
+:TWAR7_22404
+Marker.Disable(66@)
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+
+:TWAR7_22433
+if 
+fading 
+jf @TWAR7_22457 
+wait 0 
+jump @TWAR7_22433 
+
+:TWAR7_22457
+68@ = 2 
+
+:TWAR7_22464
+if 
+  68@ == 2 
+jf @TWAR7_22507 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_12' time 4000 flag 1  // ~r~Freddy got away!
+jump @TWAR7_23200 
+
+:TWAR7_22507
+if 
+  67@ == 3 
+jf @TWAR7_22563 
+if 
+87C1:   not path 30 available 
+jf @TWAR7_22544 
+07C0: load_path 30 
+
+:TWAR7_22544
+if 
+87C1:   not path 31 available 
+jf @TWAR7_22563 
+07C0: load_path 31 
+
+:TWAR7_22563
+if 
+  67@ == 4 
+jf @TWAR7_22600 
+if 
+87C1:   not path 32 available 
+jf @TWAR7_22600 
+07C0: load_path 32 
+
+:TWAR7_22600
+if 
+  67@ == 5 
+jf @TWAR7_22637 
+if 
+87C1:   not path 33 available 
+jf @TWAR7_22637 
+07C0: load_path 33 
+
+:TWAR7_22637
+if 
+  67@ == 6 
+jf @TWAR7_22674 
+if 
+87C1:   not path 34 available 
+jf @TWAR7_22674 
+07C0: load_path 34 
+
+:TWAR7_22674
+if 
+  67@ == 7 
+jf @TWAR7_22906 
+if 
+87C1:   not path 35 available 
+jf @TWAR7_22711 
+07C0: load_path 35 
+
+:TWAR7_22711
+if 
+87C1:   not path 50 available 
+jf @TWAR7_22730 
+07C0: load_path 50 
+
+:TWAR7_22730
+if 
+87C1:   not path 51 available 
+jf @TWAR7_22749 
+07C0: load_path 51 
+
+:TWAR7_22749
+if 
+87C1:   not path 52 available 
+jf @TWAR7_22768 
+07C0: load_path 52 
+
+:TWAR7_22768
+if 
+87C1:   not path 53 available 
+jf @TWAR7_22787 
+07C0: load_path 53 
+
+:TWAR7_22787
+if 
+87C1:   not path 54 available 
+jf @TWAR7_22806 
+07C0: load_path 54 
+
+:TWAR7_22806
+if 
+87C1:   not path 55 available 
+jf @TWAR7_22825 
+07C0: load_path 55 
+
+:TWAR7_22825
+if 
+87C1:   not path 56 available 
+jf @TWAR7_22844 
+07C0: load_path 56 
+
+:TWAR7_22844
+if 
+87C1:   not path 57 available 
+jf @TWAR7_22863 
+07C0: load_path 57 
+
+:TWAR7_22863
+if 
+87C1:   not path 58 available 
+jf @TWAR7_22882 
+07C0: load_path 58 
+
+:TWAR7_22882
+if 
+87C1:   not path 35 available 
+jf @TWAR7_22901 
+07C0: load_path 60 
+
+:TWAR7_22901
+Model.Load(#MANANA)
+
+:TWAR7_22906
+if 
+  67@ == 8 
+jf @TWAR7_22943 
+if 
+87C1:   not path 36 available 
+jf @TWAR7_22943 
+07C0: load_path 36 
+
+:TWAR7_22943
+if 
+  67@ == 9 
+jf @TWAR7_22985 
+Model.Destroy(#MANANA)
+if 
+87C1:   not path 37 available 
+jf @TWAR7_22985 
+07C0: load_path 37 
+
+:TWAR7_22985
+if 
+  67@ == 10 
+jf @TWAR7_23022 
+if 
+87C1:   not path 38 available 
+jf @TWAR7_23022 
+07C0: load_path 38 
+
+:TWAR7_23022
+if 
+  67@ == 11 
+jf @TWAR7_23059 
+if 
+87C1:   not path 39 available 
+jf @TWAR7_23059 
+07C0: load_path 39 
+
+:TWAR7_23059
+if 
+  67@ == 12 
+jf @TWAR7_23100 
+if 
+87C1:   not path 40 available 
+jf @TWAR7_23096 
+07C0: load_path 40 
+
+:TWAR7_23096
+Model.Load(#LSV3)
+
+:TWAR7_23100
+if 
+  67@ > 0 
+jf @TWAR7_23143 
+if 
+  3 > 67@ 
+jf @TWAR7_23143 
+gosub @TWAR7_24785 
+
+:TWAR7_23143
+if 
+  67@ > 3 
+jf @TWAR7_23186 
+if 
+  14 > 67@ 
+jf @TWAR7_23186 
+gosub @TWAR7_24994 
+
+:TWAR7_23186
+gosub @TWAR7_27503 
+jump @TWAR7_1353 
+
+:TWAR7_23200
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @TWAR7_23268 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+
+:TWAR7_23268
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:TWAR7_23286
+00BE: text_clear_all 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 5 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 5 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'SMOKE_1'  // OG Loc
+030C: progress_made = 1 
+$SMOKE_TOTAL_PASSED_MISSIONS += 1 
+create_thread @STRAP 
+Marker.Disable($437)
+$437 = Marker.CreateIconAndSphere($ICON_OG_LOC, $X_OG_LOC_WORK, $Y_OG_LOC_WORK, $Z_OG_LOC_WORK)
+return 
+
+:TWAR7_23373
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @TWAR7_23391 
+Camera.Restore_WithJumpCut
+
+:TWAR7_23391
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @TWAR7_23414 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:TWAR7_23414
+09F5: disable_player_mutal_activities 0 
+Marker.Disable(66@)
+040D: unload_wav 3 
+Model.Destroy(#MANANA)
+Model.Destroy(#PCJ600)
+Model.Destroy(#TEC9)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+Model.Destroy(#GLENDALE)
+Model.Destroy(#MICRO_UZI)
+04EF: release_animation "CAR_CHAT" 
+04EF: release_animation "CRIB" 
+04EF: release_animation "MISC" 
+04EF: release_animation "RAPPING" 
+091D: remove_forbidden_for_boats_cube_cornerA 2563.7 -1435.0 10.0 cornerB 2580.3 -1266.4 100.6 
+091D: remove_forbidden_for_boats_cube_cornerA 2635.0 -1434.4 10.0 cornerB 2652.0 -1263.6 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2714.9 -1501.6 10.0 cornerB 2746.1 -1266.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2713.9 -1499.3 10.0 cornerB 2746.6 -1266.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2714.6 -1249.9 10.0 cornerB 2744.7 -1332.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2634.6 -1396.6 10.0 cornerB 2651.0 -1264.2 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2635.1 -1248.0 10.0 cornerB 2651.0 -1055.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2651.5 -1263.8 10.0 cornerB 2579.5 -1248.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2563.7 -1248.6 10.0 cornerB 2578.9 -1192.2 100.6 
+091D: remove_forbidden_for_boats_cube_cornerA 2443.7 -1249.2 10.0 cornerB 2459.1 -1191.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2363.5 -1253.4 10.0 cornerB 2378.7 -1145.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2311.2 -1144.7 10.0 cornerB 2379.1 -1162.1 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2239.9 -1130.0 10.0 cornerB 2017.6 -928.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1930.6 -1031.9 10.0 cornerB 1574.4 -879.9 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1879.6 -1024.3 10.0 cornerB 1552.0 -1521.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1725.8 -1433.3 10.0 cornerB 1838.0 -1459.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1838.4 -1453.6 10.0 cornerB 1853.7 -1303.4 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 1979.3 -1468.7 10.0 cornerB 1853.5 -1452.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2334.0 -1556.1 10.0 cornerB 2350.5 -1489.7 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2350.1 -1516.0 10.0 cornerB 2423.9 -1532.5 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2379.8 -1373.3 10.0 cornerB 2423.7 -1452.6 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2363.5 -1291.7 10.0 cornerB 2379.5 -1181.2 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2295.9 -1291.5 10.0 cornerB 2311.5 -1162.3 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2333.9 -1392.1 10.0 cornerB 2220.2 -1377.1 100.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2334.6 -1493.6 10.0 cornerB 2219.8 -1475.2 100.0 
+07FB: set_interior 'LAHS1A' access 1  // House
+06D7: enable_train_traffic 1 
+Actor.DestroyWithFade($ACTOR_SMOKE)
+Actor.DestroyWithFade($ACTOR_SWEET)
+Actor.DestroyWithFade($ACTOR_OG_LOC)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+09D2: set_cops_chase_criminals 1 
+061B: remove_references_to_AS_pack 147@ 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:TWAR7_24368
+if 
+  4 > 67@ 
+jf @TWAR7_24509 
+if 
+   Actor.Dead($ACTOR_SMOKE)
+jf @TWAR7_24427 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_06' time 7000 flag 1  // ~r~Big Smoke has been killed!
+70@ = 1 
+
+:TWAR7_24427
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @TWAR7_24468 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_07' time 7000 flag 1  // ~r~Sweet has been killed!
+70@ = 1 
+
+:TWAR7_24468
+if 
+   Car.Wrecked(37@)
+jf @TWAR7_24509 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_08' time 7000 flag 1  // ~r~Smoke's car has been destroyed.
+70@ = 1 
+
+:TWAR7_24509
+if 
+  67@ == 1 
+jf @TWAR7_24570 
+if 
+  68@ == 1 
+jf @TWAR7_24570 
+if 
+  70@ == 1 
+jf @TWAR7_24570 
+70@ = 0 
+
+:TWAR7_24570
+if 
+  67@ == 1 
+jf @TWAR7_24647 
+if 
+  68@ == 2 
+jf @TWAR7_24647 
+if 
+   Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_24647 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_05' time 7000 flag 1  // ~r~OG Loc has been killed!
+70@ = 1 
+
+:TWAR7_24647
+if 
+  67@ > 1 
+jf @TWAR7_24706 
+if 
+   Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_24706 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_05' time 7000 flag 1  // ~r~OG Loc has been killed!
+70@ = 1 
+
+:TWAR7_24706
+if 
+  67@ > 3 
+jf @TWAR7_24783 
+if 
+  15 > 67@ 
+jf @TWAR7_24783 
+if 
+   Car.Wrecked(36@)
+jf @TWAR7_24783 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SMK1_14' time 7000 flag 1  // ~r~The bike you needed was destroyed!
+70@ = 1 
+
+:TWAR7_24783
+return 
+
+:TWAR7_24785
+if 
+  71@ == 0 
+jf @TWAR7_24928 
+if 
+   Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_24928 
+03D5: remove_text 'SMK1_01'  // ~s~Get back in ~b~Smoke's car~s~.
+Marker.Disable(66@)
+if 
+  67@ == 1 
+jf @TWAR7_24921 
+if 
+  68@ == 0 
+jf @TWAR7_24901 
+018A: 66@ = create_checkpoint_at 1532.8 -1672.9 12.4 
+jump @TWAR7_24921 
+
+:TWAR7_24901
+018A: 66@ = create_checkpoint_at 2454.4 -1284.5 22.7 
+
+:TWAR7_24921
+71@ = 1 
+
+:TWAR7_24928
+if 
+  71@ == 1 
+jf @TWAR7_24992 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_24992 
+Marker.Disable(66@)
+66@ = Marker.CreateAboveCar(37@)
+07E0: set_marker 66@ type_to 1 
+71@ = 0 
+
+:TWAR7_24992
+return 
+
+:TWAR7_24994
+if 
+  72@ == 1 
+jf @TWAR7_25302 
+if 
+  67@ > 3 
+jf @TWAR7_25302 
+if 
+  14 > 67@ 
+jf @TWAR7_25302 
+if 
+  71@ == 0 
+jf @TWAR7_25175 
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_25175 
+if 
+   Actor.InCar($PLAYER_ACTOR, 36@)
+jf @TWAR7_25175 
+03D5: remove_text 86@(84@,13s) 
+03D5: remove_text 'SMK1_11'  // ~s~Get back on the ~b~bike~s~.
+03D5: remove_text 'SMK1_04'  // ~s~Catch and kill ~r~Freddy~s~!
+00BC: show_text_highpriority GXT 'SMK1_04' time 7000 flag 1  // ~s~Catch and kill ~r~Freddy~s~!
+Marker.Disable(66@)
+66@ = Marker.CreateAboveActor(34@)
+07E0: set_marker 66@ type_to 0 
+71@ = 1 
+
+:TWAR7_25175
+if 
+  71@ == 1 
+jf @TWAR7_25302 
+if 
+   not Car.Wrecked(36@)
+jf @TWAR7_25302 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 36@)
+jf @TWAR7_25302 
+03D5: remove_text 86@(84@,13s) 
+03D5: remove_text 'SMK1_11'  // ~s~Get back on the ~b~bike~s~.
+03D5: remove_text 'SMK1_04'  // ~s~Catch and kill ~r~Freddy~s~!
+00BC: show_text_highpriority GXT 'SMK1_11' time 7000 flag 1  // ~s~Get back on the ~b~bike~s~.
+Marker.Disable(66@)
+66@ = Marker.CreateAboveCar(36@)
+07E0: set_marker 66@ type_to 1 
+71@ = 0 
+
+:TWAR7_25302
+return 
+
+:TWAR7_25304
+if 
+  72@ == 1 
+jf @TWAR7_25368 
+if 
+86EE:   not actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_25368 
+Marker.Disable(66@)
+66@ = Marker.CreateAboveActor($ACTOR_OG_LOC)
+07E0: set_marker 66@ type_to 1 
+72@ = 0 
+
+:TWAR7_25368
+if 
+  72@ == 0 
+jf @TWAR7_25564 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_OG_LOC radius 8.0 8.0 8.0 sphere 0 
+jf @TWAR7_25564 
+if 
+86EE:   not actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_25453 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+
+:TWAR7_25453
+if 
+  16 > 67@ 
+jf @TWAR7_25532 
+Marker.Disable(66@)
+if 
+   Actor.InCar($PLAYER_ACTOR, 36@)
+jf @TWAR7_25510 
+66@ = Marker.CreateAboveActor(34@)
+jump @TWAR7_25525 
+
+:TWAR7_25510
+66@ = Marker.CreateAboveCar(36@)
+07E0: set_marker 66@ type_to 1 
+
+:TWAR7_25525
+jump @TWAR7_25557 
+
+:TWAR7_25532
+Marker.Disable(66@)
+018A: 66@ = create_checkpoint_at 783.2 -1630.3 12.2 
+
+:TWAR7_25557
+72@ = 1 
+
+:TWAR7_25564
+return 
+
+:TWAR7_25566
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_26232 
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_26225 
+if 
+   Actor.InCar(34@, 35@)
+jf @TWAR7_26188 
+if 
+  80@ == 0 
+jf @TWAR7_25677 
+if or
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+051C:   car 35@ damaged_by_actor $PLAYER_ACTOR 
+jf @TWAR7_25677 
+Car.Health(35@) = 350
+80@ = 1 
+
+:TWAR7_25677
+Actor.StorePos($PLAYER_ACTOR, 133@, 134@, 137@)
+Car.StorePos(35@, 135@, 136@, 137@)
+0509: 137@ = distance_between_XY 133@ 134@ and_XY 135@ 136@ 
+if 
+  21.0 > 137@ 
+jf @TWAR7_25786 
+137@ /= 20.0 
+0087: 138@ = 137@ // (float) 
+137@ = 2.0 
+0063: 137@ -= 138@ // (float) 
+jump @TWAR7_25832 
+
+:TWAR7_25786
+137@ -= 20.0 
+137@ /= 90.0 
+0087: 138@ = 137@ // (float) 
+137@ = 1.0 
+0063: 137@ -= 138@ // (float) 
+
+:TWAR7_25832
+0087: 140@ = 137@ // (float) 
+if 
+  140@ > 2.0 
+jf @TWAR7_25871 
+140@ = 2.0 
+
+:TWAR7_25871
+if 
+  0.5 > 140@ 
+jf @TWAR7_25902 
+140@ = 0.5 
+
+:TWAR7_25902
+if 
+060E:   car 35@ assigned_to_path 
+jf @TWAR7_25926 
+06FD: set_car 35@ speed_on_path_to 140@ 
+
+:TWAR7_25926
+if 
+  67@ == 8 
+jf @TWAR7_26154 
+if 
+  10 > 79@ 
+jf @TWAR7_26147 
+if 
+   not Car.Wrecked(42@(79@,10i))
+jf @TWAR7_26133 
+if 
+   not Actor.Dead(52@(79@,10i))
+jf @TWAR7_26104 
+if 
+   Actor.InCar(52@(79@,10i), 42@(79@,10i))
+jf @TWAR7_26068 
+if 
+060E:   car 42@(79@,10i) assigned_to_path 
+jf @TWAR7_26061 
+06FD: set_car 42@(79@,10i) speed_on_path_to 140@ 
+
+:TWAR7_26061
+jump @TWAR7_26097 
+
+:TWAR7_26068
+if 
+060E:   car 42@(79@,10i) assigned_to_path 
+jf @TWAR7_26097 
+05EC: release_car 42@(79@,10i) from_path 
+
+:TWAR7_26097
+jump @TWAR7_26133 
+
+:TWAR7_26104
+if 
+060E:   car 42@(79@,10i) assigned_to_path 
+jf @TWAR7_26133 
+05EC: release_car 42@(79@,10i) from_path 
+
+:TWAR7_26133
+79@ += 1 
+jump @TWAR7_26154 
+
+:TWAR7_26147
+79@ = 0 
+
+:TWAR7_26154
+if 
+   not Actor.InCar(34@, 35@)
+jf @TWAR7_26181 
+036A: put_actor 34@ in_car 35@ 
+
+:TWAR7_26181
+jump @TWAR7_26225 
+
+:TWAR7_26188
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_26225 
+if 
+060E:   car 35@ assigned_to_path 
+jf @TWAR7_26225 
+05EC: release_car 35@ from_path 
+
+:TWAR7_26225
+jump @TWAR7_26269 
+
+:TWAR7_26232
+if 
+   not Car.Wrecked(35@)
+jf @TWAR7_26269 
+if 
+060E:   car 35@ assigned_to_path 
+jf @TWAR7_26269 
+05EC: release_car 35@ from_path 
+
+:TWAR7_26269
+return 
+
+:TWAR7_26271
+0209: 77@ = random_int_in_ranges 0 37 
+if 
+  77@ == 0 
+jf @TWAR7_26313 
+0674: set_car_model 78@ numberplate "GOT_M00_" 
+
+:TWAR7_26313
+if 
+  77@ == 1 
+jf @TWAR7_26346 
+0674: set_car_model 78@ numberplate "M00TV_4U" 
+
+:TWAR7_26346
+if 
+  77@ == 2 
+jf @TWAR7_26379 
+0674: set_car_model 78@ numberplate "MATHEW_2" 
+
+:TWAR7_26379
+if 
+  77@ == 3 
+jf @TWAR7_26412 
+0674: set_car_model 78@ numberplate "D4_DEW0R" 
+
+:TWAR7_26412
+if 
+  77@ == 4 
+jf @TWAR7_26445 
+0674: set_car_model 78@ numberplate "D0DE_777" 
+
+:TWAR7_26445
+if 
+  77@ == 5 
+jf @TWAR7_26478 
+0674: set_car_model 78@ numberplate "DAM0_666" 
+
+:TWAR7_26478
+if 
+  77@ == 6 
+jf @TWAR7_26511 
+0674: set_car_model 78@ numberplate "C0NEY_88" 
+
+:TWAR7_26511
+if 
+  77@ == 7 
+jf @TWAR7_26544 
+0674: set_car_model 78@ numberplate "PRE4CHER" 
+
+:TWAR7_26544
+if 
+  77@ == 8 
+jf @TWAR7_26577 
+0674: set_car_model 78@ numberplate "DBP_4NDY" 
+
+:TWAR7_26577
+if 
+  77@ == 9 
+jf @TWAR7_26610 
+0674: set_car_model 78@ numberplate "EV1L_SLY" 
+
+:TWAR7_26610
+if 
+  77@ == 10 
+jf @TWAR7_26643 
+0674: set_car_model 78@ numberplate "N1_R4V3N" 
+
+:TWAR7_26643
+if 
+  77@ == 11 
+jf @TWAR7_26676 
+0674: set_car_model 78@ numberplate "D1VX_Z00" 
+
+:TWAR7_26676
+if 
+  77@ == 12 
+jf @TWAR7_26709 
+0674: set_car_model 78@ numberplate "MR_B3NN_" 
+
+:TWAR7_26709
+if 
+  77@ == 13 
+jf @TWAR7_26742 
+0674: set_car_model 78@ numberplate "R3D_R4SP" 
+
+:TWAR7_26742
+if 
+  77@ == 14 
+jf @TWAR7_26775 
+0674: set_car_model 78@ numberplate "LA_B0MBA" 
+
+:TWAR7_26775
+if 
+  77@ == 15 
+jf @TWAR7_26808 
+0674: set_car_model 78@ numberplate "L3337_0G" 
+
+:TWAR7_26808
+if 
+  77@ == 16 
+jf @TWAR7_26841 
+0674: set_car_model 78@ numberplate "BUDD4H_X" 
+
+:TWAR7_26841
+if 
+  77@ == 17 
+jf @TWAR7_26874 
+0674: set_car_model 78@ numberplate "T3H_BUCK" 
+
+:TWAR7_26874
+if 
+  77@ == 18 
+jf @TWAR7_26907 
+0674: set_car_model 78@ numberplate "CHUNKY_1" 
+
+:TWAR7_26907
+if 
+  77@ == 19 
+jf @TWAR7_26940 
+0674: set_car_model 78@ numberplate "EV1L_BNZ" 
+
+:TWAR7_26940
+if 
+  77@ == 20 
+jf @TWAR7_26973 
+0674: set_car_model 78@ numberplate "S4ND_M4N" 
+
+:TWAR7_26973
+if 
+  77@ == 21 
+jf @TWAR7_27006 
+0674: set_car_model 78@ numberplate "RKK_DBP1" 
+
+:TWAR7_27006
+if 
+  77@ == 22 
+jf @TWAR7_27039 
+0674: set_car_model 78@ numberplate "RE1_K0KU" 
+
+:TWAR7_27039
+if 
+  77@ == 23 
+jf @TWAR7_27072 
+0674: set_car_model 78@ numberplate "S3XY_JUD" 
+
+:TWAR7_27072
+if 
+  77@ == 24 
+jf @TWAR7_27105 
+0674: set_car_model 78@ numberplate "SUNRA_93" 
+
+:TWAR7_27105
+if 
+  77@ == 25 
+jf @TWAR7_27138 
+0674: set_car_model 78@ numberplate "UG_FUX69" 
+
+:TWAR7_27138
+if 
+  77@ == 26 
+jf @TWAR7_27171 
+0674: set_car_model 78@ numberplate "LI0N_CUM" 
+
+:TWAR7_27171
+if 
+  77@ == 27 
+jf @TWAR7_27204 
+0674: set_car_model 78@ numberplate "RKK_PWND" 
+
+:TWAR7_27204
+if 
+  77@ == 28 
+jf @TWAR7_27237 
+0674: set_car_model 78@ numberplate "HAZE_B0B" 
+
+:TWAR7_27237
+if 
+  77@ == 29 
+jf @TWAR7_27270 
+0674: set_car_model 78@ numberplate "T3H_FLUF" 
+
+:TWAR7_27270
+if 
+  77@ == 30 
+jf @TWAR7_27303 
+0674: set_car_model 78@ numberplate "BM_4NDY_" 
+
+:TWAR7_27303
+if 
+  77@ == 31 
+jf @TWAR7_27336 
+0674: set_car_model 78@ numberplate "BM_D34N_" 
+
+:TWAR7_27336
+if 
+  77@ == 32 
+jf @TWAR7_27369 
+0674: set_car_model 78@ numberplate "BM_L4C3Y" 
+
+:TWAR7_27369
+if 
+  77@ == 33 
+jf @TWAR7_27402 
+0674: set_car_model 78@ numberplate "BM_D3V__" 
+
+:TWAR7_27402
+if 
+  77@ == 34 
+jf @TWAR7_27435 
+0674: set_car_model 78@ numberplate "NU_SK00L" 
+
+:TWAR7_27435
+if 
+  77@ == 35 
+jf @TWAR7_27468 
+0674: set_car_model 78@ numberplate "G4L_AVET" 
+
+:TWAR7_27468
+if 
+  77@ == 36 
+jf @TWAR7_27501 
+0674: set_car_model 78@ numberplate "M0J0_J0J" 
+
+:TWAR7_27501
+return 
+
+:TWAR7_27503
+if 
+  67@ == 1 
+jf @TWAR7_28522 
+if 
+0448:   actor $PLAYER_ACTOR in_car 37@ 
+jf @TWAR7_27792 
+if or
+  83@ == 1 
+  83@ == 2 
+jf @TWAR7_27792 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_27785 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+  68@ == 0 
+jf @TWAR7_27682 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+jf @TWAR7_27651 
+gosub @TWAR7_33121 
+jump @TWAR7_27682 
+
+:TWAR7_27651
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_27682
+if or
+  68@ == 1 
+  68@ == 2 
+jf @TWAR7_27778 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_27747 
+gosub @TWAR7_33121 
+jump @TWAR7_27778 
+
+:TWAR7_27747
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_27778
+jump @TWAR7_27792 
+
+:TWAR7_27785
+83@ = 0 
+
+:TWAR7_27792
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_27928 
+if 
+  11 > 83@ 
+jf @TWAR7_27928 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_27855 
+84@ += 1 
+
+:TWAR7_27855
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+03D5: remove_text 86@(84@,13s) 
+0085: 132@ = 83@ // (int) 
+0085: 131@ = 84@ // (int) 
+83@ = 11 
+0209: 84@ = random_int_in_ranges 0 5 
+0085: 130@ = 84@ // (int) 
+130@ += 1 
+gosub @TWAR7_29894 
+
+:TWAR7_27928
+if 
+  83@ == 11 
+jf @TWAR7_28253 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_28201 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_28178 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+  68@ == 0 
+jf @TWAR7_28082 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+jf @TWAR7_28051 
+gosub @TWAR7_33121 
+jump @TWAR7_28082 
+
+:TWAR7_28051
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_28082
+if 
+  68@ == 1 
+jf @TWAR7_28171 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_28140 
+gosub @TWAR7_33121 
+jump @TWAR7_28171 
+
+:TWAR7_28140
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_28171
+jump @TWAR7_28201 
+
+:TWAR7_28178
+00BC: show_text_highpriority GXT 'SMK1_01' time 11000 flag 1  // ~s~Get back in ~b~Smoke's car~s~.
+83@ = 12 
+
+:TWAR7_28201
+if 
+0448:   actor $PLAYER_ACTOR in_car 37@ 
+jf @TWAR7_28253 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+83@ = 13 
+84@ = 0 
+00BE: text_clear_all 
+
+:TWAR7_28253
+if 
+  83@ == 12 
+jf @TWAR7_28306 
+if 
+0448:   actor $PLAYER_ACTOR in_car 37@ 
+jf @TWAR7_28306 
+83@ = 13 
+84@ = 0 
+00BE: text_clear_all 
+
+:TWAR7_28306
+if 
+  83@ == 13 
+jf @TWAR7_28522 
+if 
+0448:   actor $PLAYER_ACTOR in_car 37@ 
+jf @TWAR7_28448 
+33@ = 0 
+0085: 83@ = 132@ // (int) 
+0085: 84@ = 131@ // (int) 
+gosub @TWAR7_29894 
+if 
+  132@ == 0 
+jf @TWAR7_28448 
+if 
+  68@ == 0 
+jf @TWAR7_28432 
+00BC: show_text_highpriority GXT 'SMK1_02' time 7000 flag 1  // ~s~Go and pick up OG Loc from the ~y~Police Station~s~.
+jump @TWAR7_28448 
+
+:TWAR7_28432
+00BC: show_text_highpriority GXT 'SMK1_10' time 7000 flag 1  // ~s~Drive to ~y~Freddy's house~s~.
+
+:TWAR7_28448
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @TWAR7_28522 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+83@ = 11 
+0209: 84@ = random_int_in_ranges 0 5 
+0085: 130@ = 84@ // (int) 
+130@ += 1 
+gosub @TWAR7_29894 
+
+:TWAR7_28522
+if or
+  83@ == 3 
+  83@ == 4 
+  83@ == 5 
+  83@ == 8 
+  83@ == 10 
+jf @TWAR7_28622 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_28615 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+gosub @TWAR7_33121 
+jump @TWAR7_28622 
+
+:TWAR7_28615
+83@ = 0 
+
+:TWAR7_28622
+if 
+  67@ > 3 
+jf @TWAR7_29628 
+if or
+  14 > 67@ 
+  67@ == 16 
+jf @TWAR7_29628 
+if 
+06EE:   actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_29021 
+if 
+0104:   actor $ACTOR_OG_LOC near_actor $PLAYER_ACTOR radius 10.0 10.0 8.0 sphere 0 
+jf @TWAR7_29014 
+if and
+044B:   actor $PLAYER_ACTOR on_foot 
+044B:   actor $ACTOR_OG_LOC on_foot 
+jf @TWAR7_28867 
+if 
+  83@ == 9 
+jf @TWAR7_28867 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_28860 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_28822 
+gosub @TWAR7_33121 
+jump @TWAR7_28853 
+
+:TWAR7_28822
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_28853
+jump @TWAR7_28867 
+
+:TWAR7_28860
+83@ = 0 
+
+:TWAR7_28867
+if and
+   Actor.Driving($PLAYER_ACTOR)
+   Actor.Driving($ACTOR_OG_LOC)
+jf @TWAR7_29014 
+if 
+  83@ == 9 
+jf @TWAR7_29014 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_29007 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_28969 
+gosub @TWAR7_33121 
+jump @TWAR7_29000 
+
+:TWAR7_28969
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_29000
+jump @TWAR7_29014 
+
+:TWAR7_29007
+83@ = 0 
+
+:TWAR7_29014
+jump @TWAR7_29138 
+
+:TWAR7_29021
+if 
+  14 > 83@ 
+jf @TWAR7_29138 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_29065 
+84@ += 1 
+
+:TWAR7_29065
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+00BE: text_clear_all 
+0085: 132@ = 83@ // (int) 
+0085: 131@ = 84@ // (int) 
+83@ = 14 
+0209: 84@ = random_int_in_ranges 0 3 
+0085: 130@ = 84@ // (int) 
+130@ += 1 
+gosub @TWAR7_29894 
+
+:TWAR7_29138
+if 
+  83@ == 14 
+jf @TWAR7_29329 
+if 
+86EE:   not actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_29306 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_29276 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_29238 
+gosub @TWAR7_33121 
+jump @TWAR7_29269 
+
+:TWAR7_29238
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_29269
+jump @TWAR7_29299 
+
+:TWAR7_29276
+00BC: show_text_highpriority GXT 'SMK1_09' time 7000 flag 1  // ~s~You have left ~b~OG Loc~s~ behind.
+83@ = 15 
+
+:TWAR7_29299
+jump @TWAR7_29329 
+
+:TWAR7_29306
+00BC: show_text_highpriority GXT 'SMK1_09' time 7000 flag 1  // ~s~You have left ~b~OG Loc~s~ behind.
+83@ = 15 
+
+:TWAR7_29329
+if 
+  83@ == 15 
+jf @TWAR7_29382 
+if 
+06EE:   actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_29382 
+83@ = 16 
+84@ = 0 
+00BE: text_clear_all 
+
+:TWAR7_29382
+if 
+  83@ == 16 
+jf @TWAR7_29628 
+if 
+06EE:   actor $ACTOR_OG_LOC in_group $PLAYER_GROUP 
+jf @TWAR7_29573 
+33@ = 0 
+0085: 83@ = 132@ // (int) 
+0085: 84@ = 131@ // (int) 
+gosub @TWAR7_29894 
+if 
+  132@ == 0 
+jf @TWAR7_29566 
+if 
+  14 > 67@ 
+jf @TWAR7_29550 
+if 
+   Actor.InCar($PLAYER_ACTOR, 36@)
+jf @TWAR7_29527 
+00BC: show_text_highpriority GXT 'SMK1_04' time 7000 flag 1  // ~s~Catch and kill ~r~Freddy~s~!
+jump @TWAR7_29543 
+
+:TWAR7_29527
+00BC: show_text_highpriority GXT 'SMK1_11' time 7000 flag 1  // ~s~Get back on the ~b~bike~s~.
+
+:TWAR7_29543
+jump @TWAR7_29566 
+
+:TWAR7_29550
+00BC: show_text_highpriority GXT 'SMK1_13' time 8500 flag 1  // ~s~Take OG Loc to the employees' door at the back of the ~y~Burger Shot~s~.
+
+:TWAR7_29566
+jump @TWAR7_29628 
+
+:TWAR7_29573
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+83@ = 14 
+0209: 84@ = random_int_in_ranges 0 3 
+0085: 130@ = 84@ // (int) 
+130@ += 1 
+gosub @TWAR7_29894 
+
+:TWAR7_29628
+if or
+  83@ == 6 
+  83@ == 7 
+jf @TWAR7_29761 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_29754 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if 
+   not Actor.Dead(34@)
+jf @TWAR7_29716 
+gosub @TWAR7_33121 
+jump @TWAR7_29747 
+
+:TWAR7_29716
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_29747
+jump @TWAR7_29761 
+
+:TWAR7_29754
+83@ = 0 
+
+:TWAR7_29761
+if 
+  83@ == 17 
+jf @TWAR7_29892 
+if 
+001D:   125@ > 84@ // (int) 
+jf @TWAR7_29885 
+gosub @TWAR7_32442 
+gosub @TWAR7_32549 
+if and
+   not Actor.Dead(34@)
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @TWAR7_29847 
+gosub @TWAR7_33121 
+jump @TWAR7_29878 
+
+:TWAR7_29847
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 86@(84@,13s) 
+126@ = 0 
+127@ = 0 
+
+:TWAR7_29878
+jump @TWAR7_29892 
+
+:TWAR7_29885
+83@ = 0 
+
+:TWAR7_29892
+return 
+
+:TWAR7_29894
+if 
+  83@ == 1 
+jf @TWAR7_30111 
+05AA: 86@s = 'SMO1_AA' // @s = 'short'  // ~z~Good to hang with you, brother. I'm sorry I can get a little tense.
+05AA: 88@s = 'SMO1_AC' // @s = 'short'  // ~z~Don't worry about it.
+05AA: 90@s = 'SMO1_AD' // @s = 'short'  // ~z~Hey, it ain't Jeffrey no more. It's OG Loc.
+05AA: 92@s = 'SMO1_AE' // @s = 'short'  // ~z~OG Loc?
+05AA: 94@s = 'SMO1_AF' // @s = 'short'  // ~z~Oh yeah, he's a real gangsta now.
+05AA: 96@s = 'SMO1_AG' // @s = 'short'  // ~z~I see. And what'd he do?
+05AA: 98@s = 'SMO1_AH' // @s = 'short'  // ~z~Anything he could to get thrown in jail for. For his career.
+05AA: 100@s = 'SMO1_AJ' // @s = 'short'  // ~z~Joyriding, parking fines or some other bullshit.
+04AF: 112@ = 35000 // = constant 
+04AF: 113@ = 35001 // = constant 
+04AF: 114@ = 35002 // = constant 
+04AF: 115@ = 35003 // = constant 
+04AF: 116@ = 35004 // = constant 
+04AF: 117@ = 35005 // = constant 
+04AF: 118@ = 35006 // = constant 
+04AF: 119@ = 35007 // = constant 
+125@ = 8 
+
+:TWAR7_30111
+if 
+  83@ == 2 
+jf @TWAR7_30304 
+05AA: 86@s = 'SMO1_BA' // @s = 'short'  // ~z~What's your plan, big gangsta? Now you a free man and all.
+05AA: 88@s = 'SMO1_BB' // @s = 'short'  // ~z~Man, I ain't free, my parole officer lined me up with a job!
+05AA: 90@s = 'SMO1_BC' // @s = 'short'  // ~z~Motherfucker always trying to keep a player down.
+05AA: 92@s = 'SMO1_BD' // @s = 'short'  // ~z~You got that right!
+05AA: 94@s = 'SMO1_BE' // @s = 'short'  // ~z~Still, ain't so bad, I'm gonna be a 'hygiene technician'.
+05AA: 96@s = 'SMO1_BF' // @s = 'short'  // ~z~Coming up in the world, huh?
+05AA: 98@s = 'SMO1_BG' // @s = 'short'  // ~z~Just a stepping-stone to greatness.
+04AF: 112@ = 35008 // = constant 
+04AF: 113@ = 35009 // = constant 
+04AF: 114@ = 35010 // = constant 
+04AF: 115@ = 35011 // = constant 
+04AF: 116@ = 35012 // = constant 
+04AF: 117@ = 35013 // = constant 
+04AF: 118@ = 35014 // = constant 
+125@ = 7 
+
+:TWAR7_30304
+if 
+  83@ == 3 
+jf @TWAR7_30497 
+05AA: 86@s = 'SMO1_CA' // @s = 'short'  // ~z~Man, this is the spot!
+05AA: 88@s = 'SMO1_CB' // @s = 'short'  // ~z~Ain't this a Vagos' 'hood?
+05AA: 90@s = 'SMO1_CC' // @s = 'short'  // ~z~Man, I don't give a shit, I'm gangsta!
+05AA: 92@s = 'SMO1_CD' // @s = 'short'  // ~z~C'mon, let's leave Loc to deal with Casanova.
+05AA: 94@s = 'SMO1_CE' // @s = 'short'  // ~z~Hey, I'll stick with Jeff - I mean, Loc!
+05AA: 96@s = 'SMO1_CF' // @s = 'short'  // ~z~OK, cool.
+05AA: 98@s = 'SMO1_CG' // @s = 'short'  // ~z~I'll see you guys back on the set.
+04AF: 112@ = 35015 // = constant 
+04AF: 113@ = 35016 // = constant 
+04AF: 114@ = 35017 // = constant 
+04AF: 115@ = 35018 // = constant 
+04AF: 116@ = 35019 // = constant 
+04AF: 117@ = 35020 // = constant 
+04AF: 118@ = 35021 // = constant 
+125@ = 7 
+
+:TWAR7_30497
+if 
+  83@ == 4 
+jf @TWAR7_30763 
+05AA: 86@s = 'SMO1_CH' // @s = 'short'  // ~z~Freddy! I've come for you, you motherfucker!
+05AA: 88@s = 'SMO1_DB' // @s = 'short'  // ~z~Hey, Loc, hold up!
+05AA: 90@s = 'SMO1_CJ' // @s = 'short'  // ~z~Jeffrey, you got the wrong idea, man - that was just a prison thing!
+05AA: 92@s = 'SMO1_CK' // @s = 'short'  // ~z~I got plenty of muchachas on the outside,
+05AA: 94@s = 'SMO1_CL' // @s = 'short'  // ~z~I don't need your scrawny ass!
+05AA: 96@s = 'SMO1_CM' // @s = 'short'  // ~z~Man, ignore him, CJ, I don't know what he talking about.
+05AA: 98@s = 'SMO1_CN' // @s = 'short'  // ~z~Hey, yo, gimme back my rhymes you thief, I'm gangsta!
+05AA: 100@s = 'SMO1_CO' // @s = 'short'  // ~z~You dropped the soap, sugar,
+05AA: 102@s = 'SMO1_CP' // @s = 'short'  // ~z~I don't know nothing about any rhymes!
+05AA: 104@s = 'SMO1_DA' // @s = 'short'  // ~z~Hey, hey! Motherfucker's making a run for it!
+04AF: 112@ = 35022 // = constant 
+04AF: 113@ = 35031 // = constant 
+04AF: 114@ = 35023 // = constant 
+04AF: 115@ = 35024 // = constant 
+04AF: 116@ = 35025 // = constant 
+04AF: 117@ = 35026 // = constant 
+04AF: 118@ = 35027 // = constant 
+04AF: 119@ = 35028 // = constant 
+04AF: 120@ = 35029 // = constant 
+04AF: 121@ = 35030 // = constant 
+0085: 125@ = 130@ // (int) 
+
+:TWAR7_30763
+if 
+  83@ == 5 
+jf @TWAR7_30860 
+05AA: 86@s = 'SMO1_EA' // @s = 'short'  // ~z~Hey Loc, get back here, nigga you crazy!
+05AA: 88@s = 'SMO1_EB' // @s = 'short'  // ~z~Eh yo, back off me CJ, I gotta protect my rep!
+05AA: 90@s = 'SMO1_DC' // @s = 'short'  // ~z~Ah shit, he gonna get caught violating his parole!
+04AF: 112@ = 35033 // = constant 
+04AF: 113@ = 35034 // = constant 
+04AF: 114@ = 35032 // = constant 
+125@ = 3 
+
+:TWAR7_30860
+if 
+  83@ == 6 
+jf @TWAR7_31328 
+05AA: 86@s = 'SMO1_FA' // @s = 'short'  // ~z~Oooo! Chase me! Chase me!
+05AA: 88@s = 'SMO1_FB' // @s = 'short'  // ~z~C'mon, honey, I'm losing my patience!
+05AA: 90@s = 'SMO1_FC' // @s = 'short'  // ~z~I like the fast ass, not the slow ass!
+05AA: 92@s = 'SMO1_FD' // @s = 'short'  // ~z~I thought you were keen, cute buns!
+05AA: 94@s = 'SMO1_FE' // @s = 'short'  // ~z~Catch me if you caaAAAaan!
+05AA: 96@s = 'SMO1_FF' // @s = 'short'  // ~z~Yoohoo! Over here!
+05AA: 98@s = 'SMO1_FG' // @s = 'short'  // ~z~Cooweee, Jeffrey!
+04AF: 112@ = 35035 // = constant 
+04AF: 113@ = 35036 // = constant 
+04AF: 114@ = 35037 // = constant 
+04AF: 115@ = 35038 // = constant 
+04AF: 116@ = 35039 // = constant 
+04AF: 117@ = 35040 // = constant 
+04AF: 118@ = 35041 // = constant 
+0209: 200@ = random_int_in_ranges 0 2 
+if 
+  200@ == 0 
+jf @TWAR7_31200 
+05AA: 100@s = 'SMO1_FK' // @s = 'short'  // ~z~Try to show a little bit more enthusiasm, darling.
+05AA: 102@s = 'SMO1_FL' // @s = 'short'  // ~z~Hey, honey buns, I'm over here!
+05AA: 104@s = 'SMO1_FH' // @s = 'short'  // ~z~You know I love the thrill of the chase!
+05AA: 106@s = 'SMO1_FJ' // @s = 'short'  // ~z~Hey baby, move those sweet cheeks!
+05AA: 108@s = 'SMO1_FM' // @s = 'short'  // ~z~The anticipation is so unbearable!
+04AF: 119@ = 35044 // = constant 
+04AF: 120@ = 35045 // = constant 
+04AF: 121@ = 35042 // = constant 
+04AF: 122@ = 35043 // = constant 
+04AF: 123@ = 35046 // = constant 
+jump @TWAR7_31320 
+
+:TWAR7_31200
+05AA: 100@s = 'SMO1_FH' // @s = 'short'  // ~z~You know I love the thrill of the chase!
+05AA: 102@s = 'SMO1_FJ' // @s = 'short'  // ~z~Hey baby, move those sweet cheeks!
+05AA: 104@s = 'SMO1_FK' // @s = 'short'  // ~z~Try to show a little bit more enthusiasm, darling.
+05AA: 106@s = 'SMO1_FL' // @s = 'short'  // ~z~Hey, honey buns, I'm over here!
+05AA: 108@s = 'SMO1_FM' // @s = 'short'  // ~z~The anticipation is so unbearable!
+04AF: 119@ = 35042 // = constant 
+04AF: 120@ = 35043 // = constant 
+04AF: 121@ = 35044 // = constant 
+04AF: 122@ = 35045 // = constant 
+04AF: 123@ = 35046 // = constant 
+
+:TWAR7_31320
+0085: 125@ = 130@ // (int) 
+
+:TWAR7_31328
+if 
+  83@ == 7 
+jf @TWAR7_31401 
+05AA: 86@s = 'SMO1_GA' // @s = 'short'  // ~z~He's broken my heart!
+05AA: 88@s = 'SMO1_GB' // @s = 'short'  // ~z~Get him, boys!
+04AF: 112@ = 35047 // = constant 
+04AF: 113@ = 35048 // = constant 
+125@ = 2 
+
+:TWAR7_31401
+if 
+  83@ == 8 
+jf @TWAR7_31618 
+05AA: 86@s = 'SMO1_HA' // @s = 'short'  // ~z~Don't you say a damn thing, CJ.
+05AA: 88@s = 'SMO1_HB' // @s = 'short'  // ~z~Was you lonely, Loc?
+05AA: 90@s = 'SMO1_HC' // @s = 'short'  // ~z~Hey, I like a nice mustache myself!
+05AA: 92@s = 'SMO1_HD' // @s = 'short'  // ~z~I keep it real, unlike you fake ass motherfuckers.
+05AA: 94@s = 'SMO1_HE' // @s = 'short'  // ~z~C'mon, gangsta. Let's get back to the Grove.
+05AA: 96@s = 'SMO1_HF' // @s = 'short'  // ~z~Nah, I can't, I gotta go and sign in for this damn job!
+05AA: 98@s = 'SMO1_HG' // @s = 'short'  // ~z~Whatever you want. You want a ride anyway?
+05AA: 100@s = 'SMO1_HH' // @s = 'short'  // ~z~Sure thing. Let's roll.
+04AF: 112@ = 35053 // = constant 
+04AF: 113@ = 35054 // = constant 
+04AF: 114@ = 35055 // = constant 
+04AF: 115@ = 35056 // = constant 
+04AF: 116@ = 35057 // = constant 
+04AF: 117@ = 35058 // = constant 
+04AF: 118@ = 35059 // = constant 
+04AF: 119@ = 35060 // = constant 
+125@ = 8 
+
+:TWAR7_31618
+if 
+  83@ == 9 
+jf @TWAR7_31883 
+05AA: 86@s = 'SMO1_JA' // @s = 'short'  // ~z~Eh, take me to the Burger Shot in Verona Beach.
+05AA: 88@s = 'SMO1_JB' // @s = 'short'  // ~z~You're the boss.
+05AA: 90@s = 'SMO1_JC' // @s = 'short'  // ~z~Coz I'm keen, With the hygiene,
+05AA: 92@s = 'SMO1_JD' // @s = 'short'  // ~z~On a mission, Like a super technician, baby
+05AA: 94@s = 'SMO1_JG' // @s = 'short'  // ~z~Get on with that shit man.
+05AA: 96@s = 'SMO1_JM' // @s = 'short'  // ~z~Look at you, all muscley and shit.
+05AA: 98@s = 'SMO1_JH' // @s = 'short'  // ~z~Man, I got 17s on the hang.
+05AA: 100@s = 'SMO1_JJ' // @s = 'short'  // ~z~You coulda did that out here.
+05AA: 102@s = 'SMO1_JK' // @s = 'short'  // ~z~Because I did it in the joint, it's real now.
+05AA: 104@s = 'SMO1_JL' // @s = 'short'  // ~z~Yeah, I guess it is, gangsta.
+04AF: 112@ = 35061 // = constant 
+04AF: 113@ = 35062 // = constant 
+04AF: 114@ = 35063 // = constant 
+04AF: 115@ = 35064 // = constant 
+04AF: 116@ = 35065 // = constant 
+04AF: 117@ = 35070 // = constant 
+04AF: 118@ = 35066 // = constant 
+04AF: 119@ = 35067 // = constant 
+04AF: 120@ = 35068 // = constant 
+04AF: 121@ = 35069 // = constant 
+125@ = 10 
+
+:TWAR7_31883
+if 
+  83@ == 10 
+jf @TWAR7_32028 
+05AA: 86@s = 'SMO1_KA' // @s = 'short'  // ~z~Thanks for the ride, CJ.
+05AA: 88@s = 'SMO1_KB' // @s = 'short'  // ~z~Don't be a stranger, fool.
+05AA: 90@s = 'SMO1_KC' // @s = 'short'  // ~z~Yeah, for sure. I'll see you around.
+05AA: 92@s = 'SMO1_KD' // @s = 'short'  // ~z~Like a quarter pound!
+05AA: 94@s = 'SMO1_KE' // @s = 'short'  // ~z~Later.
+04AF: 112@ = 35071 // = constant 
+04AF: 113@ = 35072 // = constant 
+04AF: 114@ = 35073 // = constant 
+04AF: 115@ = 35074 // = constant 
+04AF: 116@ = 35075 // = constant 
+125@ = 5 
+
+:TWAR7_32028
+if 
+  83@ == 11 
+jf @TWAR7_32198 
+05AA: 86@s = 'SMOX_AA' // @s = 'short'  // ~z~Get in
+05AA: 88@s = 'SMOX_AB' // @s = 'short'  // ~z~In the ride!
+05AA: 90@s = 'SMOX_AC' // @s = 'short'  // ~z~Get in the car!
+05AA: 92@s = 'SMOX_AD' // @s = 'short'  // ~z~Come on, playa, get in!
+05AA: 94@s = 'SMOX_AE' // @s = 'short'  // ~z~Come on, wise man, get in the car!
+05AA: 96@s = 'SMOX_AF' // @s = 'short' 
+04AF: 112@ = 35800 // = constant 
+04AF: 113@ = 35801 // = constant 
+04AF: 114@ = 35802 // = constant 
+04AF: 115@ = 35803 // = constant 
+04AF: 116@ = 35804 // = constant 
+04AF: 117@ = 35805 // = constant 
+0085: 125@ = 130@ // (int) 
+
+:TWAR7_32198
+if 
+  83@ == 14 
+jf @TWAR7_32290 
+05AA: 86@s = 'LOCX_AA' // @s = 'short'  // ~z~Hold up, CJ!
+05AA: 88@s = 'LOCX_AB' // @s = 'short'  // ~z~Wait, wait for your boy!
+05AA: 90@s = 'LOCX_AC' // @s = 'short'  // ~z~Hey, wait up, dog!
+04AF: 112@ = 22400 // = constant 
+04AF: 113@ = 22401 // = constant 
+04AF: 114@ = 22402 // = constant 
+0085: 125@ = 130@ // (int) 
+
+:TWAR7_32290
+if 
+  83@ == 17 
+jf @TWAR7_32411 
+05AA: 86@s = 'SMO1_GC' // @s = 'short'  // ~z~Yo, I'm gonna kill that loud mouthed mother fucker!
+05AA: 88@s = 'SMO1_GD' // @s = 'short'  // ~z~Your ass is mine!
+05AA: 90@s = 'SMO1_GE' // @s = 'short'  // ~z~Oh, no no no, I didn't mean it like that!
+05AA: 92@s = 'SMO1_GF' // @s = 'short'  // ~z~CJ, help me out here!
+04AF: 112@ = 35049 // = constant 
+04AF: 113@ = 35050 // = constant 
+04AF: 114@ = 35051 // = constant 
+04AF: 115@ = 35052 // = constant 
+125@ = 4 
+
+:TWAR7_32411
+0085: 128@ = 84@ // (int) 
+126@ = 0 
+127@ = 0 
+129@ = 1 
+return 
+
+:TWAR7_32442
+if 
+001D:   125@ > 128@ // (int) 
+jf @TWAR7_32547 
+if 
+  126@ == 0 
+jf @TWAR7_32504 
+03CF: load_wav 112@(128@,13i) as 1 
+128@ += 1 
+126@ = 1 
+
+:TWAR7_32504
+if 
+  127@ == 0 
+jf @TWAR7_32547 
+03CF: load_wav 112@(128@,13i) as 2 
+128@ += 1 
+127@ = 1 
+
+:TWAR7_32547
+return 
+
+:TWAR7_32549
+if 
+  129@ == 1 
+jf @TWAR7_32834 
+if 
+  126@ == 1 
+jf @TWAR7_32834 
+if 
+03D0:   wav 1 loaded 
+jf @TWAR7_32834 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 86@(84@,13s) time 4500 flag 1 
+126@ = 2 
+if 
+05AE:   86@(84@,13s) == 'SMO1_CO' // @s == 'short'  // ~z~You dropped the soap, sugar,
+jf @TWAR7_32834 
+154@ = 0 
+155@ = 0.0 
+03F0: enable_text_draw 1 
+
+:TWAR7_32675
+wait 5 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 2 position 140.0 150.0 size 155@ 155@ RGBA 220 220 220 154@ 
+154@ += 10 
+155@ += 2.5 
+if 
+  154@ > 250 
+jf @TWAR7_32675 
+154@ = 250 
+
+:TWAR7_32759
+wait 5 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 2 position 140.0 150.0 size 155@ 155@ RGBA 220 220 220 154@ 
+154@ -= 10 
+155@ -= 2.5 
+if 
+  154@ == 0 
+jf @TWAR7_32759 
+
+:TWAR7_32834
+if 
+  129@ == 2 
+jf @TWAR7_33119 
+if 
+  127@ == 1 
+jf @TWAR7_33119 
+if 
+03D0:   wav 2 loaded 
+jf @TWAR7_33119 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 86@(84@,13s) time 4500 flag 1 
+127@ = 2 
+if 
+05AE:   86@(84@,13s) == 'SMO1_CP' // @s == 'short'  // ~z~I don't know nothing about any rhymes!
+jf @TWAR7_33119 
+154@ = 0 
+155@ = 0.0 
+03F0: enable_text_draw 1 
+
+:TWAR7_32960
+wait 5 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 1 position 140.0 150.0 size 155@ 155@ RGBA 220 220 220 154@ 
+154@ += 10 
+155@ += 2.5 
+if 
+  154@ > 250 
+jf @TWAR7_32960 
+154@ = 250 
+
+:TWAR7_33044
+wait 5 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 1 position 140.0 150.0 size 155@ 155@ RGBA 220 220 220 154@ 
+154@ -= 10 
+155@ -= 2.5 
+if 
+  154@ == 0 
+jf @TWAR7_33044 
+
+:TWAR7_33119
+return 
+
+:TWAR7_33121
+if 
+  126@ == 2 
+jf @TWAR7_33184 
+if 
+03D2:   wav 1 ended 
+jf @TWAR7_33184 
+03D5: remove_text 86@(84@,13s) 
+84@ += 1 
+129@ = 2 
+126@ = 0 
+
+:TWAR7_33184
+if 
+  127@ == 2 
+jf @TWAR7_33247 
+if 
+03D2:   wav 2 ended 
+jf @TWAR7_33247 
+03D5: remove_text 86@(84@,13s) 
+84@ += 1 
+129@ = 1 
+127@ = 0 
+
+:TWAR7_33247
+return

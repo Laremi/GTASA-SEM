@@ -1,0 +1,2478 @@
+:SYN7
+thread 'SYN7' 
+gosub @SYN7_94 
+if 
+wasted_or_busted 
+jf @SYN7_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @SYN7_16017 
+
+:SYN7_85
+gosub @SYN7_16186 
+end_thread 
+
+:SYN7_94
+054C: use_GXT_table 'SYN7' 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:SYN7_120
+if 
+fading 
+jf @SYN7_144 
+wait 0 
+jump @SYN7_120 
+
+:SYN7_144
+0776: create_objects_in_object_group "CRACK" 
+0363: create_static_object_at -2166.86 -236.5 40.86 radius 40.0 model #CRACKFACT_SFS visibility 1 
+0363: create_static_object_at -2185.49 -215.55 34.31 radius 40.0 model #CF_EXT_DEM_SFS visibility 0 
+0363: create_static_object_at -2166.86 -236.5 40.86 radius 40.0 model #LODCRACKFACT_SFS visibility 1 
+0363: create_static_object_at -2185.49 -215.55 34.31 radius 40.0 model #LODEXT_DEM_SFS visibility 0 
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E4: load_cutscene_data 'SYND_7' 
+
+:SYN7_296
+if 
+86B9:   not cutscene_data_loaded 
+jf @SYN7_320 
+wait 0 
+jump @SYN7_296 
+
+:SYN7_320
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:SYN7_337
+if 
+82E9:   not cutscene_reached_end 
+jf @SYN7_361 
+wait 0 
+jump @SYN7_337 
+
+:SYN7_361
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:SYN7_375
+if 
+fading 
+jf @SYN7_399 
+wait 0 
+jump @SYN7_375 
+
+:SYN7_399
+02EA: end_cutscene 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+select_interior 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_467 
+Actor.PutAt($PLAYER_ACTOR, -2031.196, 161.1839, 27.8516)
+Actor.Angle($PLAYER_ACTOR) = 268.0468
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = False
+
+:SYN7_467
+0169: set_fade_color_RGB 0 0 0 
+$ONMISSION = 1 
+48@ = 0 
+$7318 = 40000 
+117@ = 2 
+increment_mission_attempts 
+Garage.ChangeType('BSHOPSF', 1)
+Marker.Disable($11019)
+060A: create_decision_maker_type 0 store_to 35@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 3 store_to 34@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 36@ // decision\allowed\m_.ped files 
+wait 0 
+jump @SYN7_1232 
+
+:SYN7_558
+0615: define_AS_pack_begin 130@ 
+0603: AS_actor -1 goto_point_any_means -2160.533 -247.0836 35.5234 mode 4 use_car -1 
+0605: actor -1 perform_animation "WASH_UP" IFP "INT_HOUSE" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 130@ loop 1 
+0616: define_AS_pack_end 130@ 
+0615: define_AS_pack_begin 131@ 
+0603: AS_actor -1 goto_point_any_means -2163.767 -249.1202 35.5234 mode 4 use_car -1 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0605: actor -1 perform_animation "WASH_UP" IFP "INT_HOUSE" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 131@ loop 1 
+0616: define_AS_pack_end 131@ 
+0615: define_AS_pack_begin 132@ 
+0603: AS_actor -1 goto_point_any_means -2167.631 -249.1143 35.5234 mode 4 use_car -1 
+05B9: AS_actor -1 stay_idle 500 ms 
+0605: actor -1 perform_animation "WASH_UP" IFP "INT_HOUSE" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 132@ loop 1 
+0616: define_AS_pack_end 132@ 
+0615: define_AS_pack_begin 133@ 
+0603: AS_actor -1 goto_point_any_means -2157.0 -248.9899 35.5234 mode 4 use_car -1 
+05B9: AS_actor -1 stay_idle 250 ms 
+0605: actor -1 perform_animation "WASH_UP" IFP "INT_HOUSE" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 133@ loop 1 
+0616: define_AS_pack_end 133@ 
+86@ = Actor.Create(Mission1, #BMYCG, -2146.045, -242.5144, 35.5234)
+Actor.Angle(86@) = 90.433
+081A: set_actor 86@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(86@, Pistol, 9999)
+Actor.WeaponAccuracy(86@) = 30
+07DD: set_actor 86@ attack_rate 30 // previously known as temper_to 
+060B: set_actor 86@ decision_maker_to 36@ 
+87@ = Actor.Create(CivFemale, #WFYCRK, -2160.533, -247.0836, 35.5234)
+Actor.Angle(87@) = 176.3351
+0618: assign_actor 87@ to_AS_pack 130@ 
+88@ = Actor.Create(CivFemale, #WFYCRK, -2163.767, -249.1202, 35.5234)
+Actor.Angle(88@) = 11.5708
+0618: assign_actor 88@ to_AS_pack 131@ 
+89@ = Actor.Create(CivMale, #HMYCM, -2167.631, -249.1143, 35.5234)
+Actor.Angle(89@) = 1.311
+0618: assign_actor 89@ to_AS_pack 132@ 
+90@ = Actor.Create(CivMale, #HMYCM, -2157.0, -248.9899, 35.5234)
+Actor.Angle(90@) = 0.8891
+0618: assign_actor 90@ to_AS_pack 133@ 
+47@ = 0 
+
+:SYN7_1148
+if 
+   not 47@ == 0 
+jf @SYN7_1209 
+if 
+   not Actor.Dead(86@(47@,8i))
+jf @SYN7_1209 
+0770: set_actor 86@(47@,8i) target_priority 0 
+060B: set_actor 86@(47@,8i) decision_maker_to 34@ 
+
+:SYN7_1209
+47@ += 1 
+  47@ >= 5 
+jf @SYN7_1148 
+return 
+
+:SYN7_1232
+06F0: set_group $PLAYER_GROUP distance_limit_to 100.0 
+022B: create_forbidden_for_peds_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+01E8: create_forbidden_for_cars_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+022B: create_forbidden_for_peds_cube_cornerA -2107.98 -71.8985 30.0 cornerB -2160.256 -89.7108 37.0 
+32@ = 0 
+Camera.SetBehindPlayer
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_1373 
+Actor.Angle($PLAYER_ACTOR) = 280.0
+
+:SYN7_1373
+018A: 40@ = create_checkpoint_at -1688.901 1035.95 43.7187 
+Model.Load(#TAMPA)
+Model.Load(#TRIADB)
+04ED: load_animation "CAR" 
+Model.Load(#CELLPHONE)
+Model.Load(#HEALTH)
+Model.Load(#COLT45)
+
+:SYN7_1424
+if or
+   not Model.Available(#TAMPA)
+   not Model.Available(#TRIADB)
+84EE:   not animation "CAR" loaded 
+   not Model.Available(#CELLPHONE)
+   not Model.Available(#HEALTH)
+jf @SYN7_1472 
+wait 0 
+jump @SYN7_1424 
+
+:SYN7_1472
+if 
+   not Model.Available(#COLT45)
+jf @SYN7_1499 
+wait 0 
+jump @SYN7_1472 
+
+:SYN7_1499
+121@ = Pickup.Create(#HEALTH, 3, -2182.652, -247.3813, 36.4)
+fade 1 1000 
+Player.CanMove($PLAYER_CHAR) = True
+Object.Destroy($11017)
+45@ = Object.Create(#WONGS_GATE, -2127.0, -80.8, 34.3281)
+Object.Angle(45@) = 180.0
+46@ = Object.Create(#DYN_RAMP, -2175.2, -209.7745, 34.3281)
+Object.Angle(46@) = 85.6854
+0674: set_car_model #TAMPA numberplate "TIMEBOMB" 
+38@ = Car.Create(#TAMPA, -1688.901, 1035.95, 44.6)
+0878: set_car 38@ dirt_level 12.0 
+Car.LockInCurrentPosition(38@) = True
+053F: set_car 38@ tires_vulnerability 0 
+Car.Angle(38@) = 90.0
+Car.Health(38@) = 1000
+37@ = Actor.Create(CivMale, #TRIADB, -1689.12, 1038.2, 44.2)
+Actor.Health(37@) = 800
+Actor.SetMaxHealth(37@, 800)
+0568: set_actor 37@ untargetable 1 
+0619: enable_actor 37@ collision_detection 0 
+Actor.Angle(37@) = 0.0
+0605: actor 37@ perform_animation "FIXN_CAR_LOOP" IFP "CAR" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time 0 
+Actor.WeaponAccuracy(37@) = 100
+060B: set_actor 37@ decision_maker_to 35@ 
+03DE: set_pedestrians_density_multiplier_to 0.5 
+01EB: set_traffic_density_multiplier_to 1.0 
+0746: set_acquaintance 1 of_actors_pedtype 24 to_actors_pedtype 24 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 0 to_actors_pedtype 24 
+33@ = 0 
+03CF: load_wav 23000 as 3 
+
+:SYN7_1860
+if 
+83D0:   not wav 3 loaded 
+jf @SYN7_1886 
+wait 0 
+jump @SYN7_1860 
+
+:SYN7_1886
+03D1: play_wav 3 
+gosub @SYN7_16756 
+Camera.SetPosition(-2029.134, 164.0932, 29.0052, 0.0, 0.0, 0.0)
+Camera.PointAt(-2029.778, 163.3323, 28.9291, 2)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_1978 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+
+:SYN7_1978
+wait 2000 
+00BC: show_text_highpriority GXT 'MTG01A' time 4000 flag 1  // ~z~Yeah?
+040D: unload_wav 1 
+03CF: load_wav 29400 as 1 
+
+:SYN7_2010
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_2036 
+wait 0 
+jump @SYN7_2010 
+
+:SYN7_2036
+03D1: play_wav 1 
+33@ = 0 
+
+:SYN7_2047
+if 
+83D2:   not wav 1 ended 
+jf @SYN7_2073 
+wait 0 
+jump @SYN7_2047 
+
+:SYN7_2073
+wait 500 
+gosub @SYN7_16789 
+
+:SYN7_2085
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_14750 
+wait 0 
+gosub @SYN7_16892 
+gosub @SYN7_17192 
+if and
+00E1:   player 0 pressed_key 15 
+   not 113@ == 8 
+   not 113@ == 0 
+jf @SYN7_2157 
+113@ = 7 
+
+:SYN7_2157
+if and
+  117@ == 2 
+  113@ == 0 
+jf @SYN7_2218 
+05AA: 127@s = 'MTG01B' // @s = 'short'  // ~z~CJ?
+04AF: 118@ = 29401 // = constant 
+gosub @SYN7_17172 
+113@ = 1 
+
+:SYN7_2218
+if and
+  117@ == 2 
+  113@ == 1 
+jf @SYN7_2303 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2267 
+0967: actor $PLAYER_ACTOR move_mouth 5000 ms 
+
+:SYN7_2267
+05AA: 127@s = 'MTG01C' // @s = 'short'  // ~z~Who is this?
+04AF: 118@ = 29402 // = constant 
+gosub @SYN7_17172 
+113@ = 2 
+
+:SYN7_2303
+if and
+  117@ == 2 
+  113@ == 2 
+jf @SYN7_2385 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2349 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_2349
+05AA: 127@s = 'MTG01D' // @s = 'short'  // ~z~I work for Woozie he told me to call you.
+04AF: 118@ = 29403 // = constant 
+gosub @SYN7_17172 
+113@ = 3 
+
+:SYN7_2385
+if and
+  117@ == 2 
+  113@ == 3 
+jf @SYN7_2470 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2434 
+0967: actor $PLAYER_ACTOR move_mouth 5000 ms 
+
+:SYN7_2434
+05AA: 127@s = 'MTG01E' // @s = 'short'  // ~z~Alright, wassup?
+04AF: 118@ = 29404 // = constant 
+gosub @SYN7_17172 
+113@ = 4 
+
+:SYN7_2470
+if and
+  117@ == 2 
+  113@ == 4 
+jf @SYN7_2552 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2516 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_2516
+05AA: 127@s = 'MTG01F' // @s = 'short'  // ~z~I'm rigging a car with explosives so you can take out the crack factory!
+04AF: 118@ = 29405 // = constant 
+gosub @SYN7_17172 
+113@ = 5 
+
+:SYN7_2552
+if and
+  117@ == 2 
+  113@ == 5 
+jf @SYN7_2613 
+05AA: 127@s = 'MTG01G' // @s = 'short'  // ~z~Drop 'round the garage Downtown.
+04AF: 118@ = 29406 // = constant 
+gosub @SYN7_17172 
+113@ = 6 
+
+:SYN7_2613
+if and
+  117@ == 2 
+  113@ == 6 
+jf @SYN7_2698 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2662 
+0967: actor $PLAYER_ACTOR move_mouth 5000 ms 
+
+:SYN7_2662
+05AA: 127@s = 'MTG01H' // @s = 'short'  // ~z~Cool. I'll be at you in a minute.
+04AF: 118@ = 29407 // = constant 
+gosub @SYN7_17172 
+113@ = 7 
+
+:SYN7_2698
+if and
+  117@ == 2 
+  113@ == 7 
+jf @SYN7_2802 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2744 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_2744
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_2774 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+
+:SYN7_2774
+Model.Destroy(#CELLPHONE)
+00BC: show_text_highpriority GXT 'SYN7_01' time 9000 flag 1  // ~s~Go and pick up the wired car from the ~y~Bomb Shop~s~.
+113@ = 8 
+
+:SYN7_2802
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @SYN7_2824 
+jump @SYN7_14833 
+
+:SYN7_2824
+06AC: $7317 = actor $PLAYER_ACTOR movement_speed 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2129.308 -129.0417 34.3203 radius 50.0 50.0 500.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2149.624 -244.8758 35.5234 radius 98.0 98.0 500.0 
+jf @SYN7_2938 
+$7319 = 1 
+03C7: set_sensitivity_to_crime 0.0 
+jump @SYN7_2952 
+
+:SYN7_2938
+$7319 = 0 
+03C7: set_sensitivity_to_crime 1.0 
+
+:SYN7_2952
+if and
+  48@ == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_5914 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1699.484 1030.651 44.2187 radius 4.0 4.0 4.0 
+jf @SYN7_5914 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_3046 
+Player.CanMove($PLAYER_CHAR) = False
+
+:SYN7_3046
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_3085 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:SYN7_3085
+113@ = 8 
+gosub @SYN7_16756 
+Camera.SetPosition(-1721.071, 1024.804, 49.7941, 0.0, 0.0, 0.0)
+Camera.PointAt(-1720.161, 1025.186, 49.6318, 2)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_3183 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+wait 2000 
+jump @SYN7_3208 
+
+:SYN7_3183
+05D3: AS_actor $PLAYER_ACTOR goto_point -1696.49 1034.98 45.11 mode 4 time 2000 ms // versionA 
+
+:SYN7_3208
+gosub @SYN7_16826 
+03CF: load_wav 1825 as 3 
+
+:SYN7_3222
+if 
+83D0:   not wav 3 loaded 
+jf @SYN7_3248 
+wait 0 
+jump @SYN7_3222 
+
+:SYN7_3248
+Model.Load(#WFYCRK)
+Model.Load(#HMYCM)
+Model.Load(#BMYCG)
+Model.Load(#SFR3)
+Model.Load(#SFR2)
+Model.Load(#MICRO_UZI)
+Model.Load(#VOODOO)
+04ED: load_animation "INT_HOUSE" 
+
+:SYN7_3296
+if or
+   not Model.Available(#WFYCRK)
+   not Model.Available(#HMYCM)
+   not Model.Available(#BMYCG)
+   not Model.Available(#SFR3)
+   not Model.Available(#SFR2)
+jf @SYN7_3343 
+wait 0 
+jump @SYN7_3296 
+
+:SYN7_3343
+if or
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#VOODOO)
+84EE:   not animation "INT_HOUSE" loaded 
+jf @SYN7_3388 
+wait 0 
+jump @SYN7_3343 
+
+:SYN7_3388
+07C0: load_path 483 
+
+:SYN7_3393
+if 
+87C1:   not path 483 available 
+jf @SYN7_3420 
+wait 0 
+jump @SYN7_3393 
+
+:SYN7_3420
+if 
+   not Actor.Dead(37@)
+jf @SYN7_3482 
+0615: define_AS_pack_begin 137@ 
+05D3: AS_actor -1 goto_point -1692.068 1036.196 44.2109 mode 4 time -2 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 37@ 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 137@ 
+
+:SYN7_3482
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_3598 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_3553 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_3553 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1693.32 1034.32 44.2109 
+
+:SYN7_3553
+Actor.PutAt($PLAYER_ACTOR, -1693.32, 1034.32, 44.2109)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Actor.Angle($PLAYER_ACTOR) = 329.4165
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 137@ 
+
+:SYN7_3598
+wait 1500 
+00BE: text_clear_all 
+Camera.SetPosition(-1694.216, 1036.72, 45.3716, 0.0, 0.0, 0.0)
+Camera.PointAt(-1693.236, 1036.801, 45.1866, 2)
+fade 1 1000 
+32@ = 0 
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_3708 
+39@ = Marker.CreateAboveCar(38@)
+018B: set_marker 39@ radar_mode 0 
+07E0: set_marker 39@ type_to 1 
+
+:SYN7_3708
+if 
+   not Actor.Dead(37@)
+jf @SYN7_3732 
+09F1: play_audio_at_actor 37@ event 1152 
+
+:SYN7_3732
+040D: unload_wav 1 
+03CF: load_wav 39800 as 1 
+
+:SYN7_3745
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_3771 
+wait 0 
+jump @SYN7_3745 
+
+:SYN7_3771
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_AA' time 3000 flag 1  // ~z~Hey man, is it ready?
+32@ = 0 
+
+:SYN7_3798
+if 
+  2000 > 32@ 
+jf @SYN7_3852 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_3845 
+jump @SYN7_5358 
+
+:SYN7_3845
+jump @SYN7_3798 
+
+:SYN7_3852
+040D: unload_wav 1 
+03CF: load_wav 39801 as 1 
+
+:SYN7_3865
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_3891 
+wait 0 
+jump @SYN7_3865 
+
+:SYN7_3891
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_AB' time 2000 flag 1  // ~z~She's all set. Get in.
+32@ = 0 
+
+:SYN7_3918
+if 
+  1000 > 32@ 
+jf @SYN7_3972 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_3965 
+jump @SYN7_5358 
+
+:SYN7_3965
+jump @SYN7_3918 
+
+:SYN7_3972
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_4036 
+0615: define_AS_pack_begin 138@ 
+0605: actor -1 perform_animation "FIXN_CAR_OUT" IFP "CAR" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time 0 
+0616: define_AS_pack_end 138@ 
+
+:SYN7_4036
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(38@)
+jf @SYN7_4099 
+04EB: AS_actor $PLAYER_ACTOR crouch 0 
+05D3: AS_actor $PLAYER_ACTOR goto_point -1690.423 1034.002 44.2109 mode 4 time 6000 ms // versionA 
+05CB: AS_actor $PLAYER_ACTOR enter_car 38@ as_driver -1 ms 
+
+:SYN7_4099
+32@ = 0 
+
+:SYN7_4106
+if 
+  500 > 32@ 
+jf @SYN7_4160 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_4153 
+jump @SYN7_5358 
+
+:SYN7_4153
+jump @SYN7_4106 
+
+:SYN7_4160
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4184 
+0618: assign_actor 37@ to_AS_pack 138@ 
+
+:SYN7_4184
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4208 
+09F1: play_audio_at_actor 37@ event 1151 
+
+:SYN7_4208
+32@ = 0 
+
+:SYN7_4215
+if 
+  1500 > 32@ 
+jf @SYN7_4269 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_4262 
+jump @SYN7_5358 
+
+:SYN7_4262
+jump @SYN7_4215 
+
+:SYN7_4269
+040D: unload_wav 1 
+03CF: load_wav 39802 as 1 
+
+:SYN7_4282
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_4308 
+wait 0 
+jump @SYN7_4282 
+
+:SYN7_4308
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_AC' time 3000 flag 1  // ~z~She's packing enough to take out that crack lab.
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4352 
+0967: actor 37@ move_mouth 5000 ms 
+
+:SYN7_4352
+Camera.SetPosition(-1690.172, 1033.266, 45.4626, 0.0, 0.0, 0.0)
+Camera.PointAt(-1689.64, 1034.11, 45.3904, 2)
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4434 
+0619: enable_actor 37@ collision_detection 1 
+0639: AS_actor 37@ rotate_to_actor $PLAYER_ACTOR 
+
+:SYN7_4434
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_4570 
+Car.PutAt(38@, -1688.901, 1034.95, 43.7187)
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4563 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 37@ 5000 ms 
+0605: actor 37@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+Actor.PutAt(37@, -1689.12, 1036.9, 44.3187)
+Actor.Angle(37@) = 180.0
+
+:SYN7_4563
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+
+:SYN7_4570
+33@ = 0 
+
+:SYN7_4577
+if 
+83D2:   not wav 1 ended 
+jf @SYN7_4627 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_4620 
+jump @SYN7_5358 
+
+:SYN7_4620
+jump @SYN7_4577 
+
+:SYN7_4627
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4648 
+0968: actor 37@ stop_mouth 
+
+:SYN7_4648
+32@ = 0 
+
+:SYN7_4655
+if 
+  2500 > 32@ 
+jf @SYN7_4709 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_4702 
+jump @SYN7_5358 
+
+:SYN7_4702
+jump @SYN7_4655 
+
+:SYN7_4709
+040D: unload_wav 1 
+03CF: load_wav 39803 as 1 
+
+:SYN7_4722
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_4748 
+wait 0 
+jump @SYN7_4722 
+
+:SYN7_4748
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_AD' time 4000 flag 1  // ~z~I've wired in a delay timer, to give you time to get out.
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4792 
+0967: actor 37@ move_mouth 5000 ms 
+
+:SYN7_4792
+33@ = 0 
+
+:SYN7_4799
+if 
+83D2:   not wav 1 ended 
+jf @SYN7_4849 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_4842 
+jump @SYN7_5358 
+
+:SYN7_4842
+jump @SYN7_4799 
+
+:SYN7_4849
+if 
+   not Actor.Dead(37@)
+jf @SYN7_4870 
+0968: actor 37@ stop_mouth 
+
+:SYN7_4870
+040D: unload_wav 1 
+03CF: load_wav 39804 as 1 
+
+:SYN7_4883
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_4909 
+wait 0 
+jump @SYN7_4883 
+
+:SYN7_4909
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_4933 
+0967: actor $PLAYER_ACTOR move_mouth 5000 ms 
+
+:SYN7_4933
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_AE' time 4000 flag 1  // ~z~Cool. Good lookin'.
+33@ = 0 
+
+:SYN7_4960
+if 
+83D2:   not wav 1 ended 
+jf @SYN7_5010 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_5003 
+jump @SYN7_5358 
+
+:SYN7_5003
+jump @SYN7_4960 
+
+:SYN7_5010
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_5031 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_5031
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_5092 
+if 
+   not Actor.Dead(37@)
+jf @SYN7_5092 
+0687: clear_actor 37@ task 
+0603: AS_actor 37@ goto_point_any_means -1683.17 1037.342 45.2173 mode 4 use_car -1 
+
+:SYN7_5092
+32@ = 0 
+
+:SYN7_5099
+if 
+  1000 > 32@ 
+jf @SYN7_5153 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_5146 
+jump @SYN7_5358 
+
+:SYN7_5146
+jump @SYN7_5099 
+
+:SYN7_5153
+gosub @SYN7_16826 
+00BE: text_clear_all 
+0395: clear_area 1 at -1704.693 1027.476 44.211 radius 30.0 
+0A0B: set_rendering_origin_at_3D_coord -1696.585 1038.498 44.2173 angle 150.0018 
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_5239 
+Car.LockInCurrentPosition(38@) = False
+05EB: assign_car 38@ to_path 483 
+
+:SYN7_5239
+Camera.SetPosition(-1696.99, 1045.54, 48.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-1701.21, 1036.55, 45.7, 2)
+gosub @SYN7_16859 
+32@ = 0 
+
+:SYN7_5304
+if 
+  2000 > 32@ 
+jf @SYN7_5358 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SYN7_5351 
+jump @SYN7_5358 
+
+:SYN7_5351
+jump @SYN7_5304 
+
+:SYN7_5358
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_5379 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_5379
+Actor.DestroyInstantly(37@)
+04EF: release_animation "CAR" 
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_5441 
+Car.LockInCurrentPosition(38@) = False
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_5441 
+036A: put_actor $PLAYER_ACTOR in_car 38@ 
+
+:SYN7_5441
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_5539 
+if 
+060E:   car 38@ assigned_to_path 
+jf @SYN7_5485 
+06C5: release_car 38@ from_path 
+jump @SYN7_5539 
+
+:SYN7_5485
+0395: clear_area 1 at -1704.615 1026.202 44.1953 radius 20.0 
+Car.PutAt(38@, -1704.615, 1026.202, 44.1953)
+Car.Angle(38@) = 168.8963
+
+:SYN7_5539
+32@ = 0 
+Marker.Disable(40@)
+018B: set_marker 39@ radar_mode 0 
+018A: 41@ = create_checkpoint_at -2128.12 -83.3848 34.314 
+gosub @SYN7_16789 
+00BC: show_text_highpriority GXT 'SYN7_03' time 7000 flag 1  // ~s~ Park the car inside the ~y~Crack lab~s~.
+0615: define_AS_pack_begin 139@ 
+0603: AS_actor -1 goto_point_any_means -2128.848 -79.3918 34.2565 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 0.0 
+0643: set_AS_pack 139@ loop 1 
+0616: define_AS_pack_end 139@ 
+0615: define_AS_pack_begin 140@ 
+0603: AS_actor -1 goto_point_any_means -2128.848 -79.3918 34.2565 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 0.0 
+0643: set_AS_pack 140@ loop 1 
+0616: define_AS_pack_end 140@ 
+42@ = Actor.Create(Mission1, #BMYCG, -2128.848, -79.3918, 34.2565)
+Actor.GiveWeaponAndAmmo(42@, MicroUzi, 1000)
+Actor.Angle(42@) = 0.0
+43@ = Actor.Create(Mission1, #SFR3, -2128.848, -79.3918, 34.2565)
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 1000)
+Actor.Angle(43@) = 0.0
+0618: assign_actor 42@ to_AS_pack 139@ 
+0618: assign_actor 43@ to_AS_pack 140@ 
+47@ = 0 
+
+:SYN7_5812
+Actor.WeaponAccuracy(42@(47@,3i)) = 40
+060B: set_actor 42@(47@,3i) decision_maker_to 36@ 
+077A: set_actor 42@(47@,3i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 42@(47@,3i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+060F: set_actor 42@(47@,3i) melee_accuracy_to 150.0 
+0770: set_actor 42@(47@,3i) target_priority 1 
+47@ += 1 
+  47@ >= 2 
+jf @SYN7_5812 
+48@ = 1 
+
+:SYN7_5914
+if 
+  48@ == 1 
+jf @SYN7_8114 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2124.501 -77.7719 34.1719 radius 50.0 50.0 50.0 
+   not Actor.Dead(42@)
+   not Actor.Dead(43@)
+jf @SYN7_6109 
+if 
+  83@ == 0 
+jf @SYN7_6109 
+gosub @SYN7_558 
+00BC: show_text_highpriority GXT 'SYN7_52' time 4000 flag 1  // ~s~Kill the ~r~Guards~s~, that will get their attention.
+83@ = 1 
+if 
+075C:   marker 41@ enabled 
+jf @SYN7_6061 
+018B: set_marker 41@ radar_mode 0 
+
+:SYN7_6061
+if 
+   not Actor.Dead(42@)
+jf @SYN7_6085 
+84@ = Marker.CreateAboveActor(42@)
+
+:SYN7_6085
+if 
+   not Actor.Dead(43@)
+jf @SYN7_6109 
+85@ = Marker.CreateAboveActor(43@)
+
+:SYN7_6109
+if 
+   not Actor.Dead(43@)
+jf @SYN7_6258 
+if 
+00FE:   actor 43@ sphere 0 in_sphere -2126.911 -79.3953 34.2567 radius 10.0 10.0 10.0 
+jf @SYN7_6187 
+115@ = 1 
+jump @SYN7_6258 
+
+:SYN7_6187
+091E: create_forbidden_for_boats_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+091E: create_forbidden_for_boats_cube_cornerA -2107.98 -71.8985 30.0 cornerB -2160.256 -89.7108 37.0 
+115@ = 0 
+
+:SYN7_6258
+if 
+   not Actor.Dead(42@)
+jf @SYN7_6407 
+if 
+00FE:   actor 42@ sphere 0 in_sphere -2126.911 -79.3953 34.2567 radius 10.0 10.0 10.0 
+jf @SYN7_6336 
+114@ = 1 
+jump @SYN7_6407 
+
+:SYN7_6336
+091E: create_forbidden_for_boats_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+091E: create_forbidden_for_boats_cube_cornerA -2107.98 -71.8985 30.0 cornerB -2160.256 -89.7108 37.0 
+114@ = 0 
+
+:SYN7_6407
+if 
+  83@ == 1 
+jf @SYN7_6499 
+if 
+   Actor.Dead(42@)
+jf @SYN7_6462 
+if 
+075C:   marker 84@ enabled 
+jf @SYN7_6462 
+Marker.Disable(84@)
+
+:SYN7_6462
+if 
+   Actor.Dead(43@)
+jf @SYN7_6499 
+if 
+075C:   marker 85@ enabled 
+jf @SYN7_6499 
+Marker.Disable(85@)
+
+:SYN7_6499
+077E: get_active_interior_to 120@ 
+if and
+   Actor.Dead(42@)
+   Actor.Dead(43@)
+  120@ == 0 
+jf @SYN7_8114 
+gosub @SYN7_16826 
+04ED: load_animation "ON_LOOKERS" 
+
+:SYN7_6553
+if 
+84EE:   not animation "ON_LOOKERS" loaded 
+jf @SYN7_6589 
+wait 0 
+jump @SYN7_6553 
+
+:SYN7_6589
+gosub @SYN7_16756 
+52@ = Actor.Create(Mission1, #SFR2, -2125.871, -97.1422, 34.3281)
+081A: set_actor 52@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(52@, Pistol, 9999)
+0605: actor 52@ perform_animation "POINT_LOOP" IFP "ON_LOOKERS" framedelta 8.0 loop 1 lockX 0 lockY 0 lockF 1 time 3000 
+if or
+  115@ == 1 
+  114@ == 1 
+jf @SYN7_6766 
+Camera.SetPosition(-2113.15, -72.3184, 40.9064, 0.0, 0.0, 0.0)
+Camera.PointAt(-2113.918, -72.8274, 40.5167, 2)
+jump @SYN7_6817 
+
+:SYN7_6766
+Camera.SetPosition(-2125.642, -95.0874, 35.6371, 0.0, 0.0, 0.0)
+Camera.PointAt(-2125.762, -96.0758, 35.7291, 2)
+
+:SYN7_6817
+gosub @SYN7_16859 
+0209: $7320 = random_int_in_ranges 0 3 
+0871: init_jump_table $7320 total_jumps 3 default_jump 0 @SYN7_7094 jumps 0 @SYN7_6896 1 @SYN7_6962 2 @SYN7_7028 -1 @SYN7_7094 -1 @SYN7_7094 -1 @SYN7_7094 -1 @SYN7_7094 
+
+:SYN7_6896
+040D: unload_wav 1 
+03CF: load_wav 39805 as 1 
+
+:SYN7_6909
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_6935 
+wait 0 
+jump @SYN7_6909 
+
+:SYN7_6935
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_BA' time 4000 flag 1  // ~z~Hey, some loco bastard is blasting on our homeboys!
+jump @SYN7_7094 
+
+:SYN7_6962
+040D: unload_wav 1 
+03CF: load_wav 39806 as 1 
+
+:SYN7_6975
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_7001 
+wait 0 
+jump @SYN7_6975 
+
+:SYN7_7001
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_BB' time 4000 flag 1  // ~z~It's a hit!
+jump @SYN7_7094 
+
+:SYN7_7028
+040D: unload_wav 1 
+03CF: load_wav 39807 as 1 
+
+:SYN7_7041
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_7067 
+wait 0 
+jump @SYN7_7041 
+
+:SYN7_7067
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_BC' time 4000 flag 1  // ~z~We're being hit!
+jump @SYN7_7094 
+
+:SYN7_7094
+wait 4000 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(38@)
+jf @SYN7_7193 
+if 
+   Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_7193 
+0395: clear_area 1 at -2127.799 -68.8104 34.1719 radius 10.0 
+Car.PutAt(38@, -2127.799, -68.8104, 34.1719)
+Car.Angle(38@) = 180.0
+
+:SYN7_7193
+0395: clear_area 1 at -2129.256 -74.4958 34.1719 radius 100.0 
+50@ = Actor.Create(Mission1, #BMYCG, -2119.011, -99.2082, 34.3281)
+Actor.GiveWeaponAndAmmo(50@, MicroUzi, 1000)
+51@ = Actor.Create(Mission1, #SFR3, -2121.173, -108.9207, 34.3281)
+Actor.GiveWeaponAndAmmo(51@, MicroUzi, 1000)
+53@ = Actor.Create(Mission1, #SFR3, -2104.2, -162.4759, 34.3273)
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 1000)
+54@ = Actor.Create(Mission1, #SFR2, -2100.096, -157.8681, 34.3273)
+081A: set_actor 54@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(54@, Pistol, 9999)
+55@ = Actor.Create(Mission1, #BMYCG, -2162.635, -224.1719, 35.5156)
+Actor.Angle(55@) = 350.5417
+Actor.GiveWeaponAndAmmo(55@, MicroUzi, 1000)
+47@ = 0 
+
+:SYN7_7416
+if 
+   not Actor.Dead(50@(47@,10i))
+jf @SYN7_7507 
+07DD: set_actor 50@(47@,10i) attack_rate 30 // previously known as temper_to 
+Actor.WeaponAccuracy(50@(47@,10i)) = 30
+0770: set_actor 50@(47@,10i) target_priority 1 
+060B: set_actor 50@(47@,10i) decision_maker_to 36@ 
+077A: set_actor 50@(47@,10i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 50@(47@,10i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+
+:SYN7_7507
+47@ += 1 
+  47@ >= 6 
+jf @SYN7_7416 
+0615: define_AS_pack_begin 141@ 
+05D3: AS_actor -1 goto_point -2126.144 -82.2896 34.3203 mode 6 time -1 ms // versionA 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit -1 stop_within_radius 5.0 
+0616: define_AS_pack_end 141@ 
+0618: assign_actor 50@ to_AS_pack 141@ 
+0618: assign_actor 51@ to_AS_pack 141@ 
+if 
+   not Actor.Dead(52@)
+jf @SYN7_7657 
+0792: disembark_instantly_actor 52@ 
+0605: actor 52@ perform_animation "POINT_LOOP" IFP "ON_LOOKERS" framedelta 8.0 loop 1 lockX 0 lockY 0 lockF 1 time 3000 
+
+:SYN7_7657
+05D9: AS_actor 53@ run_to_actor $PLAYER_ACTOR timelimit -1 stop_within_radius 5.0 
+05D9: AS_actor 54@ run_to_actor $PLAYER_ACTOR timelimit -1 stop_within_radius 5.0 
+Camera.SetPosition(-2119.4, -92.22, 34.61, 0.0, 0.0, 0.0)
+Camera.PointAt(-2170.17, -161.04, 46.68, 2)
+0209: $7320 = random_int_in_ranges 0 3 
+0871: init_jump_table $7320 total_jumps 3 default_jump 0 @SYN7_8008 jumps 0 @SYN7_7810 1 @SYN7_7876 2 @SYN7_7942 -1 @SYN7_8008 -1 @SYN7_8008 -1 @SYN7_8008 -1 @SYN7_8008 
+
+:SYN7_7810
+040D: unload_wav 1 
+03CF: load_wav 39808 as 1 
+
+:SYN7_7823
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_7849 
+wait 0 
+jump @SYN7_7823 
+
+:SYN7_7849
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_CA' time 4000 flag 1  // ~z~Get out there and kill the fool!
+jump @SYN7_8008 
+
+:SYN7_7876
+040D: unload_wav 1 
+03CF: load_wav 39809 as 1 
+
+:SYN7_7889
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_7915 
+wait 0 
+jump @SYN7_7889 
+
+:SYN7_7915
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_CB' time 4000 flag 1  // ~z~Open the gates and waste the dumb fuck, holmes!
+jump @SYN7_8008 
+
+:SYN7_7942
+040D: unload_wav 1 
+03CF: load_wav 39810 as 1 
+
+:SYN7_7955
+if 
+83D0:   not wav 1 loaded 
+jf @SYN7_7981 
+wait 0 
+jump @SYN7_7955 
+
+:SYN7_7981
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SYN7_CC' time 4000 flag 1  // ~z~Blast the moron, open the gate!
+jump @SYN7_8008 
+
+:SYN7_8008
+wait 4000 
+gosub @SYN7_16789 
+Marker.Disable(41@)
+018A: 70@ = create_checkpoint_at -2175.243 -209.7745 34.3281 
+if and
+   not Car.Wrecked(38@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_8092 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_8092 
+018B: set_marker 70@ radar_mode 0 
+
+:SYN7_8092
+33@ = 0 
+097B: play_audio_at_object 45@ event 1100 
+48@ = 2 
+
+:SYN7_8114
+if and
+  48@ == 2 
+   not Car.Wrecked(38@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_8633 
+if 
+03CA:   object 45@ exists 
+jf @SYN7_8270 
+Object.StorePos(45@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  -2117.0 > $TEMPVAR_FLOAT_1 
+jf @SYN7_8237 
+034E: move_object 45@ to -2117.0 -80.8 34.3281 speed 0.2 0.0 0.0 collision_check 0 
+jump @SYN7_8270 
+
+:SYN7_8237
+if 
+  122@ == 0 
+jf @SYN7_8270 
+097B: play_audio_at_object 45@ event 1101 
+122@ = 1 
+
+:SYN7_8270
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2138.212 -201.8113 34.3281 radius 20.0 20.0 20.0 
+  72@ == 0 
+jf @SYN7_8422 
+00BC: show_text_highpriority GXT 'SYN7_35' time 4000 flag 1  // ~s~Use the ~y~Ramp ~s~to get into the crack lab.
+47@ = 0 
+
+:SYN7_8348
+Actor.DestroyInstantly(50@(47@,10i))
+47@ += 1 
+  47@ >= 6 
+jf @SYN7_8348 
+47@ = 0 
+
+:SYN7_8385
+Actor.DestroyInstantly(42@(47@,3i))
+47@ += 1 
+  47@ >= 2 
+jf @SYN7_8385 
+72@ = 1 
+
+:SYN7_8422
+if 
+   Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_8633 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2181.76 -209.4146 35.5234 radius 4.0 4.0 4.0 
+jf @SYN7_8537 
+00BC: show_text_highpriority GXT 'SYN7_34' time 6000 flag 1  // ~s~Park the car near the ~y~Chemical containers~s~.
+Marker.Disable(70@)
+018A: 71@ = create_checkpoint_at -2184.059 -263.4215 35.5234 
+48@ = 3 
+
+:SYN7_8537
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2184.983 -218.1104 35.5234 radius 4.0 4.0 4.0 
+jf @SYN7_8633 
+00BC: show_text_highpriority GXT 'SYN7_34' time 6000 flag 1  // ~s~Park the car near the ~y~Chemical containers~s~.
+Marker.Disable(70@)
+018A: 71@ = create_checkpoint_at -2184.059 -263.4215 35.5234 
+48@ = 3 
+
+:SYN7_8633
+if and
+  48@ == 3 
+   not Car.Wrecked(38@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_10250 
+if 
+   Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_10248 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2150.527 -241.7461 35.5234 radius 4.0 4.0 4.0 
+   not Actor.Dead(86@)
+  94@ == 0 
+jf @SYN7_9009 
+0209: $7320 = random_int_in_ranges 0 5 
+0871: init_jump_table $7320 total_jumps 5 default_jump 0 @SYN7_9002 jumps 0 @SYN7_8812 1 @SYN7_8850 2 @SYN7_8888 3 @SYN7_8926 4 @SYN7_8964 -1 @SYN7_9002 -1 @SYN7_9002 
+
+:SYN7_8812
+05AA: 127@s = 'SYN7_DA' // @s = 'short'  // ~z~Who the fuck are you!
+04AF: 118@ = 39811 // = constant 
+gosub @SYN7_17172 
+jump @SYN7_9002 
+
+:SYN7_8850
+05AA: 127@s = 'SYN7_DB' // @s = 'short'  // ~z~What the fuck is he doing?
+04AF: 118@ = 39812 // = constant 
+gosub @SYN7_17172 
+jump @SYN7_9002 
+
+:SYN7_8888
+05AA: 127@s = 'SYN7_DC' // @s = 'short'  // ~z~This ain't no parking lot!
+04AF: 118@ = 39813 // = constant 
+gosub @SYN7_17172 
+jump @SYN7_9002 
+
+:SYN7_8926
+05AA: 127@s = 'SYN7_DD' // @s = 'short'  // ~z~Shit, I'm so fried I'm seeing shit!
+04AF: 118@ = 39814 // = constant 
+gosub @SYN7_17172 
+jump @SYN7_9002 
+
+:SYN7_8964
+05AA: 127@s = 'SYN7_DE' // @s = 'short'  // ~z~Have I missed something here?
+04AF: 118@ = 39815 // = constant 
+gosub @SYN7_17172 
+jump @SYN7_9002 
+
+:SYN7_9002
+94@ = 1 
+
+:SYN7_9009
+if 
+00FE:   actor $PLAYER_ACTOR sphere 73@ in_sphere -2184.059 -263.4215 35.5234 radius 4.0 4.0 4.0 
+jf @SYN7_10232 
+0512: show_permanent_text_box 'SYN7_20'  // ~k~~PED_FIREWEAPON~ Activate bomb.
+73@ = 0 
+if 
+00E1:   player 0 pressed_key 17 
+jf @SYN7_10225 
+48@ = 4 
+03E6: remove_text_box 
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_9149 
+Car.LockInCurrentPosition(38@) = True
+0919: enable_car 38@ parking_lights 0 
+0615: define_AS_pack_begin 74@ 
+05CD: AS_actor -1 exit_car 38@ 
+0616: define_AS_pack_end 74@ 
+
+:SYN7_9149
+0615: define_AS_pack_begin 142@ 
+05F5: AS_actor -1 goto_point_using_paths -2146.042 -259.7312 39.7195 mode 6 time -2 
+05F5: AS_actor -1 goto_point_using_paths -2146.229 -267.7039 39.7195 mode 6 time -2 
+05F5: AS_actor -1 goto_point_using_paths -2156.51 -268.1435 39.7195 mode 6 time -2 
+0616: define_AS_pack_end 142@ 
+60@ = Actor.Create(Mission1, #BMYCG, -2140.931, -253.9011, 39.7195)
+Actor.Angle(60@) = 150.6317
+0618: assign_actor 60@ to_AS_pack 142@ 
+061B: remove_references_to_AS_pack 142@ 
+0615: define_AS_pack_begin 142@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2157.726 -231.4555 35.5234 
+05D7: add_point_to_scmpath -2153.749 -236.6368 35.5234 
+05D7: add_point_to_scmpath -2153.623 -246.5058 35.5234 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05D6: clear_scmpath 
+05F5: AS_actor -1 goto_point_using_paths -2162.264 -260.4177 35.5234 mode 6 time -2 
+05F5: AS_actor -1 goto_point_using_paths -2167.765 -261.495 35.5234 mode 6 time -2 
+0616: define_AS_pack_end 142@ 
+61@ = Actor.Create(Mission1, #SFR3, -2162.236, -230.954, 35.522)
+Actor.Angle(61@) = 231.2343
+0618: assign_actor 61@ to_AS_pack 142@ 
+061B: remove_references_to_AS_pack 142@ 
+0615: define_AS_pack_begin 142@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2157.726 -231.4555 35.5234 
+05D7: add_point_to_scmpath -2153.749 -236.6368 35.5234 
+05D7: add_point_to_scmpath -2153.623 -246.5058 35.5234 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05D6: clear_scmpath 
+05F5: AS_actor -1 goto_point_using_paths -2154.923 -248.2299 35.5234 mode 6 time -2 
+0616: define_AS_pack_end 142@ 
+62@ = Actor.Create(Mission1, #SFR2, -2168.337, -228.406, 35.522)
+Actor.Angle(62@) = 294.489
+0618: assign_actor 62@ to_AS_pack 142@ 
+061B: remove_references_to_AS_pack 142@ 
+0615: define_AS_pack_begin 142@ 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath -2157.726 -231.4555 35.5234 
+05D7: add_point_to_scmpath -2153.749 -236.6368 35.5234 
+05D7: add_point_to_scmpath -2153.623 -246.5058 35.5234 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+05D6: clear_scmpath 
+05F5: AS_actor -1 goto_point_using_paths -2156.835 -234.232 35.5234 mode 6 time -2 
+0616: define_AS_pack_end 142@ 
+63@ = Actor.Create(Mission1, #SFR2, -2168.74, -231.348, 35.5234)
+Actor.Angle(63@) = 278.3553
+0618: assign_actor 63@ to_AS_pack 142@ 
+061B: remove_references_to_AS_pack 142@ 
+64@ = Actor.Create(Mission1, #SFR2, -2162.417, -227.2437, 35.5143)
+Actor.Angle(64@) = 196.0546
+0638: AS_actor 64@ stay_put 1 
+47@ = 0 
+
+:SYN7_9780
+07DD: set_actor 60@(47@,10i) attack_rate 30 // previously known as temper_to 
+Actor.WeaponAccuracy(60@(47@,10i)) = 30
+0770: set_actor 60@(47@,10i) target_priority 1 
+if 
+  47@ == 4 
+jf @SYN7_9863 
+081A: set_actor 60@(47@,10i) weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(60@(47@,10i), Pistol, 9999)
+jump @SYN7_9888 
+
+:SYN7_9863
+Actor.GiveWeaponAndAmmo(60@(47@,10i), MicroUzi, 30000)
+01B9: set_actor 60@(47@,10i) armed_weapon_to 28 
+
+:SYN7_9888
+060B: set_actor 60@(47@,10i) decision_maker_to 36@ 
+077A: set_actor 60@(47@,10i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 60@(47@,10i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+47@ += 1 
+  47@ >= 5 
+jf @SYN7_9780 
+gosub @SYN7_16756 
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(88@)
+Actor.DestroyInstantly(89@)
+Actor.DestroyInstantly(90@)
+0A0B: set_rendering_origin_at_3D_coord -2150.44 -239.1755 35.5234 angle 52.2777 
+Camera.SetPosition(-2152.86, -236.6111, 37.0321, 0.0, 0.0, 0.0)
+Camera.PointAt(-2153.623, -235.9684, 36.9637, 2)
+if 
+   not Actor.Dead(64@)
+jf @SYN7_10108 
+0605: actor 64@ perform_animation "POINT_LOOP" IFP "ON_LOOKERS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 4000 
+
+:SYN7_10108
+00BC: show_text_highpriority GXT 'SYN7_37' time 4000 flag 1  // ~s~Get out of the warehouse before the timer runs out.
+03C7: set_sensitivity_to_crime 0.0 
+wait 4000 
+gosub @SYN7_16789 
+if and
+   not Car.Wrecked(38@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_10172 
+05CD: AS_actor $PLAYER_ACTOR exit_car 38@ 
+
+:SYN7_10172
+Marker.Disable(71@)
+03C3: set_timer_to $7318 type 1 GXT 'SYN7_18' // global_variable  // Bomb ~1~
+018A: 75@ = create_checkpoint_at -2162.964 -225.5678 35.5156 
+32@ = 0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:SYN7_10225
+jump @SYN7_10241 
+
+:SYN7_10232
+03E6: remove_text_box 
+73@ = 1 
+
+:SYN7_10241
+jump @SYN7_10250 
+
+:SYN7_10248
+03E6: remove_text_box 
+
+:SYN7_10250
+if 
+  48@ == 4 
+jf @SYN7_12242 
+if and
+  32@ > 4000 
+  78@ == 0 
+jf @SYN7_10301 
+78@ = 1 
+
+:SYN7_10301
+if 
+  $7318 == 0 
+jf @SYN7_10333 
+76@ = 1 
+jump @SYN7_11986 
+
+:SYN7_10333
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2162.964 -225.5678 35.5156 radius 1.2 1.2 1.2 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2186.166 -216.9555 35.5143 radius 6.0 6.0 6.0 
+jf @SYN7_12242 
+gosub @SYN7_16826 
+gosub @SYN7_16756 
+Camera.SetAtPos(-2187.505, -263.5027, 36.5551)
+0A0B: set_rendering_origin_at_3D_coord -2157.059 -262.1108 35.5156 angle 89.9913 
+Marker.Disable(75@)
+018A: 41@ = create_checkpoint_at -2127.2 -84.9324 34.3273 
+014F: stop_timer $7318 
+Camera.SetPosition(-2168.97, -262.731, 36.3878, 0.0, 0.0, 0.0)
+Camera.PointAt(-2169.968, -262.7543, 36.453, 2)
+gosub @SYN7_16859 
+if 
+   not Car.Wrecked(38@)
+jf @SYN7_10586 
+08CB: explode_car 38@ shake 1 effect 1 sound 1 
+
+:SYN7_10586
+wait 100 
+020C: create_explosion_with_radius 0 at -2187.505 -263.5027 36.5551 
+wait 500 
+020C: create_explosion_with_radius 0 at -2187.18 -263.8283 39.8421 
+wait 500 
+020C: create_explosion_with_radius 0 at -2187.18 -263.8283 42.8421 
+wait 500 
+020C: create_explosion_with_radius 0 at -2187.432 -259.6525 42.0391 
+020C: create_explosion_with_radius 0 at -2188.399 -266.6203 42.6058 
+wait 500 
+020C: create_explosion_with_radius 0 at -2185.595 -265.3064 47.5696 
+wait 500 
+020C: create_explosion_with_radius 0 at -2184.774 -262.4794 37.4383 
+020C: create_explosion_with_radius 0 at -2187.574 -262.5659 39.7252 
+wait 500 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2163.6 -225.62 36.0 radius 10.0 10.0 10.0 
+jf @SYN7_10937 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_10900 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2162.734 -225.3373 35.4984 
+0395: clear_area 1 at -2162.734 -225.3373 35.4984 radius 10.0 
+Car.Destroy($TEMPVAR_ACTOR_CAR)
+jump @SYN7_10920 
+
+:SYN7_10900
+Actor.PutAt($PLAYER_ACTOR, -2162.734, -225.3373, 35.4984)
+
+:SYN7_10920
+Actor.Angle($PLAYER_ACTOR) = 0.0
+77@ = 0 
+
+:SYN7_10937
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2186.166 -216.9555 35.5143 radius 10.0 10.0 10.0 
+jf @SYN7_11122 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_11065 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2162.734 -225.3373 35.4984 
+0395: clear_area 1 at -2162.734 -225.3373 35.4984 radius 10.0 
+Car.Destroy($TEMPVAR_ACTOR_CAR)
+jump @SYN7_11085 
+
+:SYN7_11065
+Actor.PutAt($PLAYER_ACTOR, -2162.734, -225.3373, 35.4984)
+
+:SYN7_11085
+Actor.PutAt($PLAYER_ACTOR, -2181.331, -217.6694, 35.5078)
+Actor.Angle($PLAYER_ACTOR) = 286.3482
+77@ = 1 
+
+:SYN7_11122
+gosub @SYN7_16826 
+0777: delete_objects_in_object_group "CRACK" 
+0363: create_static_object_at -2166.86 -236.5 40.86 radius 40.0 model #CRACKFACT_SFS visibility 0 
+0363: create_static_object_at -2185.49 -215.55 34.31 radius 40.0 model #CF_EXT_DEM_SFS visibility 1 
+0363: create_static_object_at -2166.86 -236.5 40.86 radius 40.0 model #LODCRACKFACT_SFS visibility 0 
+0363: create_static_object_at -2185.49 -215.55 34.31 radius 40.0 model #LODEXT_DEM_SFS visibility 1 
+wait 1000 
+if 
+  77@ == 0 
+jf @SYN7_11311 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_11311 
+Actor.PutAt($PLAYER_ACTOR, -2160.729, -220.985, 34.3203)
+Actor.Angle($PLAYER_ACTOR) = 336.7796
+
+:SYN7_11311
+if 
+  77@ == 1 
+jf @SYN7_11375 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_11375 
+Actor.PutAt($PLAYER_ACTOR, -2175.513, -214.8866, 34.3203)
+Actor.Angle($PLAYER_ACTOR) = 298.3929
+
+:SYN7_11375
+gosub @SYN7_14757 
+0A0B: set_rendering_origin_at_3D_coord -2162.283 -220.5315 34.3203 angle 324.4546 
+gosub @SYN7_16789 
+95@ = Actor.Create(Mission1, #BMYCG, -2132.044, -168.6656, 34.3273)
+Actor.Angle(95@) = 168.3635
+05D3: AS_actor 95@ goto_point -2141.766 -206.9254 34.3203 mode 6 time -1 ms // versionA 
+96@ = Actor.Create(Mission1, #SFR3, -2136.878, -167.5268, 34.3203)
+Actor.Angle(96@) = 172.0629
+05D3: AS_actor 96@ goto_point -2141.766 -206.9254 34.3203 mode 6 time -1 ms // versionA 
+105@ = Car.Create(#VOODOO, -2124.606, -87.9687, 34.3203)
+053F: set_car 105@ tires_vulnerability 0 
+Car.SetMaxSpeed(105@, 40.0)
+Car.Angle(105@) = 231.2455
+97@ = Actor.CreateAsDriver(Mission2, #BMYCG, 105@)
+98@ = Actor.CreateAsPassenger(Mission2, #BMYCG, 105@, 0)
+99@ = Actor.Create(Mission1, #BMYCG, -2103.291, -133.9342, 34.3273)
+Actor.Angle(99@) = 170.6763
+100@ = Actor.Create(Mission1, #SFR3, -2107.37, -146.9669, 34.3273)
+Actor.Angle(100@) = 174.6227
+101@ = Actor.Create(Mission1, #SFR3, -2145.116, -181.3902, 37.6913)
+Actor.Angle(101@) = 176.688
+0638: AS_actor 101@ stay_put 1 
+04EB: AS_actor 101@ crouch 1 
+102@ = Actor.Create(Mission1, #SFR3, -2111.808, -159.8649, 34.3273)
+Actor.Angle(102@) = 138.7297
+0638: AS_actor 102@ stay_put 1 
+47@ = 0 
+
+:SYN7_11775
+Actor.GiveWeaponAndAmmo(95@(47@,10i), MicroUzi, 1000)
+Actor.WeaponAccuracy(95@(47@,10i)) = 30
+07DD: set_actor 95@(47@,10i) attack_rate 30 // previously known as temper_to 
+060B: set_actor 95@(47@,10i) decision_maker_to 36@ 
+077A: set_actor 95@(47@,10i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 95@(47@,10i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+060F: set_actor 95@(47@,10i) melee_accuracy_to 70.0 
+0770: set_actor 95@(47@,10i) target_priority 1 
+47@ += 1 
+  47@ >= 8 
+jf @SYN7_11775 
+07C0: load_path 485 
+
+:SYN7_11900
+if 
+87C1:   not path 485 available 
+jf @SYN7_11927 
+wait 0 
+jump @SYN7_11900 
+
+:SYN7_11927
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_11956 
+05EB: assign_car 105@ to_path 485 
+05ED: freeze_car 105@ while_on_path 
+
+:SYN7_11956
+gosub @SYN7_16859 
+if and
+  76@ == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_12219 
+
+:SYN7_11986
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+47@ = 0 
+
+:SYN7_12007
+05BE: AS_actor $PLAYER_ACTOR die 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0208: $7316 = random_float_in_ranges -3.0 3.0 
+0059: $TEMPVAR_FLOAT_1 += $7316 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $7316 // (float) 
+020C: create_explosion_with_radius 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0208: $7316 = random_float_in_ranges -3.0 3.0 
+0059: $TEMPVAR_FLOAT_1 += $7316 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $7316 // (float) 
+020C: create_explosion_with_radius 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0208: $7316 = random_float_in_ranges -3.0 3.0 
+0059: $TEMPVAR_FLOAT_1 += $7316 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $7316 // (float) 
+020C: create_explosion_with_radius 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+wait 500 
+47@ += 1 
+  47@ >= 4 
+jf @SYN7_12007 
+jump @SYN7_16017 
+
+:SYN7_12219
+00BC: show_text_highpriority GXT 'SYN7_23' time 4000 flag 1  // ~s~Escape out the ~y~Main gates~s~.
+48@ = 5 
+
+:SYN7_12242
+if 
+  48@ == 5 
+jf @SYN7_13870 
+if 
+  124@ == 0 
+jf @SYN7_12433 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2118.54 -169.3188 34.3273 radius 10.0 10.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2118.54 -169.3188 34.3273 radius 10.0 10.0 10.0 
+jf @SYN7_12433 
+if 
+   not Actor.Dead(102@)
+jf @SYN7_12426 
+0615: define_AS_pack_begin 126@ 
+0638: AS_actor -1 stay_put 0 
+04EB: AS_actor -1 crouch 1 
+06E3: AS_actor -1 roll_sideways 0 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 126@ 
+0618: assign_actor 102@ to_AS_pack 126@ 
+061B: remove_references_to_AS_pack 126@ 
+
+:SYN7_12426
+124@ = 1 
+
+:SYN7_12433
+if 
+  123@ == 1 
+jf @SYN7_12538 
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_12538 
+if 
+860E:   not car 105@ assigned_to_path 
+jf @SYN7_12538 
+if 
+   not Actor.Dead(97@)
+jf @SYN7_12507 
+05CD: AS_actor 97@ exit_car 105@ 
+
+:SYN7_12507
+if 
+   not Actor.Dead(98@)
+jf @SYN7_12531 
+05CD: AS_actor 98@ exit_car 105@ 
+
+:SYN7_12531
+123@ = 2 
+
+:SYN7_12538
+if and
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2097.723 -109.9725 30.0 cornerB -2155.992 -122.742 40.0 
+  123@ == 0 
+jf @SYN7_12642 
+if and
+   not Car.Wrecked(105@)
+060E:   car 105@ assigned_to_path 
+jf @SYN7_12635 
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_12635 
+05EE: unfreeze_car 105@ while_on_path 
+
+:SYN7_12635
+123@ = 1 
+
+:SYN7_12642
+if and
+  $7319 == 0 
+  123@ == 0 
+jf @SYN7_12730 
+if and
+   not Car.Wrecked(105@)
+060E:   car 105@ assigned_to_path 
+jf @SYN7_12709 
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_12709 
+05EE: unfreeze_car 105@ while_on_path 
+
+:SYN7_12709
+32@ = 0 
+79@ = 1 
+123@ = 1 
+
+:SYN7_12730
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2127.37 -85.497 35.5234 radius 20.0 20.0 10.0 
+  79@ == 0 
+jf @SYN7_12815 
+32@ = 0 
+79@ = 1 
+00BC: show_text_highpriority GXT 'SYN7_13' time 3000 flag 1  // ~s~They've shut the gate!
+
+:SYN7_12815
+if and
+  32@ > 4500 
+  79@ == 1 
+jf @SYN7_13225 
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_12890 
+if 
+  125@ == 0 
+jf @SYN7_12890 
+107@ = Marker.CreateAboveCar(105@)
+07E0: set_marker 107@ type_to 1 
+
+:SYN7_12890
+018A: 81@ = create_checkpoint_at -2145.963 -117.1968 38.1988 
+018B: set_marker 81@ radar_mode 0 
+Marker.Disable(41@)
+00BC: show_text_highpriority GXT 'SYN7_38' time 5000 flag 1  // ~s~Use the ~b~Car ~s~to ramp over the wall.
+79@ = 2 
+108@ = Actor.Create(Mission1, #SFR3, -2107.37, -146.9669, 34.3273)
+Actor.Angle(108@) = 174.6227
+109@ = Actor.Create(Mission1, #BMYCG, -2107.37, -146.9669, 34.3273)
+Actor.Angle(109@) = 174.6227
+110@ = Actor.Create(Mission1, #SFR3, -2136.109, -180.0674, 34.3203)
+Actor.Angle(110@) = 297.2213
+111@ = Actor.Create(Mission1, #BMYCG, -2140.6, -169.5873, 34.3203)
+Actor.Angle(111@) = 258.2443
+112@ = Actor.Create(Mission1, #BMYCG, -2143.463, -147.7724, 35.3922)
+Actor.Angle(112@) = 209.4012
+47@ = 0 
+
+:SYN7_13127
+Actor.GiveWeaponAndAmmo(108@(47@,5i), MicroUzi, 1000)
+060B: set_actor 108@(47@,5i) decision_maker_to 36@ 
+077A: set_actor 108@(47@,5i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 108@(47@,5i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+060F: set_actor 108@(47@,5i) melee_accuracy_to 70.0 
+0770: set_actor 108@(47@,5i) target_priority 1 
+47@ += 1 
+  47@ >= 5 
+jf @SYN7_13127 
+
+:SYN7_13225
+if and
+  32@ > 10000 
+  79@ == 2 
+jf @SYN7_13258 
+79@ = 3 
+
+:SYN7_13258
+if 
+   Car.Wrecked(105@)
+jf @SYN7_13302 
+if 
+075C:   marker 107@ enabled 
+jf @SYN7_13295 
+Marker.Disable(107@)
+
+:SYN7_13295
+018B: set_marker 81@ radar_mode 3 
+
+:SYN7_13302
+if 
+   not Car.Wrecked(105@)
+jf @SYN7_13411 
+if and
+   not Actor.InCar($PLAYER_ACTOR, 105@)
+  79@ > 1 
+jf @SYN7_13381 
+018B: set_marker 107@ radar_mode 3 
+if 
+075C:   marker 81@ enabled 
+jf @SYN7_13374 
+018B: set_marker 81@ radar_mode 0 
+
+:SYN7_13374
+jump @SYN7_13411 
+
+:SYN7_13381
+018B: set_marker 107@ radar_mode 0 
+if 
+075C:   marker 81@ enabled 
+jf @SYN7_13411 
+018B: set_marker 81@ radar_mode 3 
+
+:SYN7_13411
+if 
+  $7319 == 0 
+jf @SYN7_13535 
+if 
+075C:   marker 41@ enabled 
+jf @SYN7_13450 
+Marker.Disable(41@)
+
+:SYN7_13450
+if 
+075C:   marker 81@ enabled 
+jf @SYN7_13471 
+Marker.Disable(81@)
+
+:SYN7_13471
+if 
+075C:   marker 81@ enabled 
+jf @SYN7_13492 
+Marker.Disable(107@)
+
+:SYN7_13492
+48@ = 6 
+018A: 82@ = create_checkpoint_at -2029.603 156.7249 27.8429 
+00BC: show_text_highpriority GXT 'SYN7_39' time 6000 flag 1  // ~s~Get back to the ~y~Garage~s~.
+
+:SYN7_13535
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2149.364 -111.5658 40.9064 radius 3.0 3.0 3.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2143.429 -111.1119 41.0391 radius 3.0 3.0 3.0 
+jf @SYN7_13870 
+if and
+  $7317 > 10.0 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SYN7_13870 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+Car.SetSpeedInstantly($TEMPVAR_ACTOR_CAR, 25.0)
+02A3: enable_widescreen 1 
+03E6: remove_text_box 
+00BE: text_clear_all 
+015D: set_gamespeed 0.4 
+Actor.Angle($PLAYER_ACTOR) = 0.6201
+Camera.SetPosition(-2133.065, -103.294, 37.6357, 0.0, 0.0, 0.0)
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+wait 1700 
+015D: set_gamespeed 1.0 
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2146.676 -90.7008 40.5966 radius 4.0 4.0 6.0 
+jf @SYN7_13870 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_13842 
+Actor.PutAt($PLAYER_ACTOR, -2152.423, -75.3105, 34.3203)
+Actor.Angle($PLAYER_ACTOR) = 357.8863
+
+:SYN7_13842
+Camera.SetBehindPlayer
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @SYN7_13870 
+Car.SetSpeedInstantly($TEMPVAR_ACTOR_CAR, 0.0)
+
+:SYN7_13870
+if 
+03CA:   object 45@ exists 
+jf @SYN7_13965 
+Object.StorePos(45@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  $TEMPVAR_FLOAT_1 > -2127.0 
+  79@ == 1 
+jf @SYN7_13965 
+034E: move_object 45@ to -2127.0 -80.8 34.3281 speed 0.2 0.0 0.0 collision_check 0 
+
+:SYN7_13965
+if 
+  48@ == 6 
+jf @SYN7_14064 
+if 
+075C:   marker 107@ enabled 
+jf @SYN7_14004 
+Marker.Disable(107@)
+
+:SYN7_14004
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -2029.603 156.7249 27.8429 radius 4.0 4.0 4.0 
+jf @SYN7_14064 
+Marker.Disable(82@)
+jump @SYN7_14833 
+
+:SYN7_14064
+if and
+   not Car.Wrecked(38@)
+   not 48@ == 0 
+   not 48@ > 3 
+jf @SYN7_14349 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @SYN7_14242 
+00BC: show_text_highpriority GXT 'SYN7_32' time 100 flag 1  // ~s~Get back in the ~b~car~s~!
+if 
+  49@ == 0 
+jf @SYN7_14235 
+018B: set_marker 39@ radar_mode 3 
+if 
+  48@ == 1 
+jf @SYN7_14178 
+018B: set_marker 41@ radar_mode 0 
+
+:SYN7_14178
+if 
+  48@ == 2 
+jf @SYN7_14203 
+018B: set_marker 70@ radar_mode 0 
+
+:SYN7_14203
+if 
+  48@ == 3 
+jf @SYN7_14228 
+018B: set_marker 71@ radar_mode 0 
+
+:SYN7_14228
+49@ = 1 
+
+:SYN7_14235
+jump @SYN7_14349 
+
+:SYN7_14242
+if 
+  49@ == 1 
+jf @SYN7_14349 
+018B: set_marker 39@ radar_mode 0 
+if 
+  48@ == 1 
+jf @SYN7_14292 
+018B: set_marker 41@ radar_mode 3 
+
+:SYN7_14292
+if 
+  48@ == 2 
+jf @SYN7_14317 
+018B: set_marker 70@ radar_mode 3 
+
+:SYN7_14317
+if 
+  48@ == 3 
+jf @SYN7_14342 
+018B: set_marker 71@ radar_mode 3 
+
+:SYN7_14342
+49@ = 0 
+
+:SYN7_14349
+if and
+   Car.Wrecked(38@)
+  4 > 48@ 
+jf @SYN7_14395 
+00BC: show_text_highpriority GXT 'SYN7_36' time 4000 flag 1  // ~r~The car has been destroyed!
+jump @SYN7_16017 
+
+:SYN7_14395
+if and
+   Car.Wrecked(105@)
+  48@ >= 5 
+  79@ >= 2 
+jf @SYN7_14743 
+if 
+   not 48@ == 6 
+jf @SYN7_14459 
+00BC: show_text_highpriority GXT 'SYN7_53' time 4000 flag 1  // ~s~Find another ~b~car ~s~so you can stunt jump out of the yard!
+
+:SYN7_14459
+if 
+075C:   marker 107@ enabled 
+jf @SYN7_14480 
+Marker.Disable(107@)
+
+:SYN7_14480
+if 
+  $7319 == 1 
+jf @SYN7_14743 
+Car.RemoveReferences(105@)
+125@ = 1 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere -2116.264 -200.0631 34.3273 radius 30.0 30.0 30.0 
+jf @SYN7_14654 
+0395: clear_area 1 at -2116.264 -200.0631 34.3273 radius 10.0 
+105@ = Car.Create(#VOODOO, -2116.264, -200.0631, 34.3273)
+053F: set_car 105@ tires_vulnerability 0 
+Car.SetMaxSpeed(105@, 40.0)
+Car.Angle(105@) = 352.5713
+107@ = Marker.CreateAboveCar(105@)
+07E0: set_marker 107@ type_to 1 
+jump @SYN7_14743 
+
+:SYN7_14654
+0395: clear_area 1 at -2116.264 -200.0631 34.3273 radius 10.0 
+105@ = Car.Create(#VOODOO, -2124.606, -87.9687, 34.3203)
+053F: set_car 105@ tires_vulnerability 0 
+Car.SetMaxSpeed(105@, 40.0)
+Car.Angle(105@) = 231.2455
+107@ = Marker.CreateAboveCar(105@)
+07E0: set_marker 107@ type_to 1 
+
+:SYN7_14743
+jump @SYN7_2085 
+
+:SYN7_14750
+jump @SYN7_16017 
+
+:SYN7_14757
+47@ = 0 
+
+:SYN7_14764
+Actor.DestroyInstantly(86@(47@,8i))
+47@ += 1 
+  47@ >= 5 
+jf @SYN7_14764 
+47@ = 0 
+
+:SYN7_14801
+Actor.DestroyInstantly(60@(47@,10i))
+47@ += 1 
+  47@ >= 5 
+jf @SYN7_14801 
+return 
+
+:SYN7_14833
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+0777: delete_objects_in_object_group "BARRIERS2" 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 25000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 25000
+0998: add_respect 60 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'SYND_7'  // Yay Ka-Boom-Boom
+$SYNDICATE_TOTAL_PASSED_MISSIONS += 1 
+0629: change_integer_stat 181 to 2 
+0629: change_integer_stat 305 to 1 
+01E7: remove_forbidden_for_cars_cube_cornerA -2696.464 1239.866 40.7599 cornerB -2665.359 2190.96 70.8125 
+01E7: remove_forbidden_for_cars_cube_cornerA -2740.694 2233.618 40.8431 cornerB -2720.91 2338.224 80.4822 
+01E7: remove_forbidden_for_cars_cube_cornerA -2695.584 1237.981 40.7328 cornerB -2664.417 1454.767 60.8126 
+01E7: remove_forbidden_for_cars_cube_cornerA -995.0013 -416.2032 30.4207 cornerB -940.5399 -251.8564 40.6762 
+01E7: remove_forbidden_for_cars_cube_cornerA -205.8387 250.7443 7.2472 cornerB -131.0039 481.8496 15.9152 
+01E7: remove_forbidden_for_cars_cube_cornerA -100.7515 -927.8298 18.0 cornerB -68.3752 -891.9871 14.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 609.7595 327.3437 15.8783 cornerB 429.8884 616.0168 20.289 
+01E7: remove_forbidden_for_cars_cube_cornerA 317.1688 707.7672 7.0 cornerB 437.5726 709.0657 20.5578 
+01E7: remove_forbidden_for_cars_cube_cornerA 391.1194 640.015 7.0 cornerB 402.2627 664.798 18.5098 
+01E7: remove_forbidden_for_cars_cube_cornerA 289.2904 636.3991 7.8675 cornerB 409.4943 702.3849 20.0345 
+01E7: remove_forbidden_for_cars_cube_cornerA 300.3153 718.7909 7.7846 cornerB 316.7906 781.0926 14.0795 
+01E7: remove_forbidden_for_cars_cube_cornerA 254.9982 837.029 10.1731 cornerB 270.7453 929.2404 30.2553 
+01E7: remove_forbidden_for_cars_cube_cornerA 210.7811 939.2068 10.9062 cornerB 249.4799 959.1111 30.2141 
+01E7: remove_forbidden_for_cars_cube_cornerA 230.4545 946.0961 20.6674 cornerB 255.9772 969.2755 30.4776 
+01E7: remove_forbidden_for_cars_cube_cornerA 249.4279 899.7975 10.5871 cornerB 268.6826 933.5995 30.3975 
+01E7: remove_forbidden_for_cars_cube_cornerA 312.1081 694.1089 6.0 cornerB 324.0811 733.0005 10.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 324.4526 804.9198 9.6186 cornerB 332.8747 814.356 14.3925 
+01E7: remove_forbidden_for_cars_cube_cornerA 1690.819 376.5103 28.1103 cornerB 1730.223 445.2955 30.8414 
+01E7: remove_forbidden_for_cars_cube_cornerA 1643.536 227.3723 27.4457 cornerB 1673.062 295.5788 30.0815 
+01E7: remove_forbidden_for_cars_cube_cornerA 1673.765 388.1013 40.2331 cornerB 1815.862 804.9291 10.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1705.156 308.3448 20.0 cornerB 1710.948 316.4094 23.5612 
+01E7: remove_forbidden_for_cars_cube_cornerA -12.7067 -1522.455 1.0 cornerB 80.8463 -1517.111 5.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -16.3392 -1532.882 0.0394 cornerB 69.3401 -1523.771 5.922 
+01E7: remove_forbidden_for_cars_cube_cornerA 618.7253 -1189.606 18.0 cornerB 623.5441 -1161.981 22.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -33.4208 -1341.84 9.0 cornerB 35.3764 -1303.948 13.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -41.2393 -1385.87 8.0 cornerB -3.5883 -1368.856 10.5 
+01E7: remove_forbidden_for_cars_cube_cornerA -1690.705 539.6102 30.3278 cornerB -1100.567 1140.569 50.735 
+01E7: remove_forbidden_for_cars_cube_cornerA -1799.54 379.7155 16.0 cornerB -1780.199 392.2779 18.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -1092.429 1286.505 30.0 cornerB -1077.038 1319.495 35.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -1860.133 314.7891 38.0 cornerB -1638.563 557.4354 40.0 
+01E7: remove_forbidden_for_cars_cube_cornerA -1737.333 455.9431 30.3573 cornerB -1710.363 500.6261 40.4891 
+01E7: remove_forbidden_for_cars_cube_cornerA -1689.229 513.0995 30.2597 cornerB -1679.124 524.8383 40.25 
+01E7: remove_forbidden_for_cars_cube_cornerA -1742.906 500.7302 30.4679 cornerB -1650.312 551.8201 40.7455 
+01E8: create_forbidden_for_cars_cube_cornerA -1761.95 507.8931 35.0533 cornerB -1751.36 531.5917 41.3335 
+return 
+
+:SYN7_16017
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SYN7_16085 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:SYN7_16085
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16162 
+if 
+0741:   actor $PLAYER_ACTOR busted 
+jf @SYN7_16155 
+016E: override_next_restart at -1605.792 716.8598 11.0241 angle 355.2978 
+
+:SYN7_16155
+jump @SYN7_16184 
+
+:SYN7_16162
+016E: override_next_restart at -2670.285 616.4364 13.4531 angle 183.1042 
+
+:SYN7_16184
+return 
+
+:SYN7_16186
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16207 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:SYN7_16207
+0873: release_path 483 
+0873: release_path 485 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+014F: stop_timer $7318 
+091D: remove_forbidden_for_boats_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+091E: create_forbidden_for_boats_cube_cornerA -2175.817 -55.8818 27.0 cornerB -2059.205 -99.4399 37.0 
+091E: create_forbidden_for_boats_cube_cornerA -2107.98 -71.8985 30.0 cornerB -2160.256 -89.7108 37.0 
+if 
+075C:   marker 40@ enabled 
+jf @SYN7_16353 
+Marker.Disable(40@)
+
+:SYN7_16353
+if 
+075C:   marker 39@ enabled 
+jf @SYN7_16374 
+Marker.Disable(39@)
+
+:SYN7_16374
+if 
+075C:   marker 41@ enabled 
+jf @SYN7_16395 
+Marker.Disable(41@)
+
+:SYN7_16395
+if 
+075C:   marker 70@ enabled 
+jf @SYN7_16416 
+Marker.Disable(70@)
+
+:SYN7_16416
+if 
+075C:   marker 71@ enabled 
+jf @SYN7_16437 
+Marker.Disable(71@)
+
+:SYN7_16437
+if 
+075C:   marker 75@ enabled 
+jf @SYN7_16458 
+Marker.Disable(75@)
+
+:SYN7_16458
+if 
+075C:   marker 81@ enabled 
+jf @SYN7_16479 
+Marker.Disable(81@)
+
+:SYN7_16479
+if 
+075C:   marker 107@ enabled 
+jf @SYN7_16500 
+Marker.Disable(107@)
+
+:SYN7_16500
+47@ = 0 
+
+:SYN7_16507
+if 
+075C:   marker 84@(47@,2i) enabled 
+jf @SYN7_16536 
+Marker.Disable(84@(47@,2i))
+
+:SYN7_16536
+47@ += 1 
+  47@ >= 2 
+jf @SYN7_16507 
+if 
+048C:   pickup_at -2182.652 -247.3813 36.4 available_to_be_picked_up 
+jf @SYN7_16590 
+Pickup.Destroy(121@)
+
+:SYN7_16590
+Garage.ChangeType('BSHOPSF', 2)
+$11019 = Marker.CreateIconWithoutSphere(9, -1687.784, 1035.536, 12.5469)
+$ONMISSION = 0 
+06F0: set_group $PLAYER_GROUP distance_limit_to 30.0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+031A: remove_all_fires 
+Model.Destroy(#TAMPA)
+Model.Destroy(#TRIADB)
+04EF: release_animation "CAR" 
+04EF: release_animation "ON_LOOKERS" 
+04EF: release_animation "INT_HOUSE" 
+Model.Destroy(#BMYCG)
+Model.Destroy(#SFR3)
+Model.Destroy(#SFR2)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#VOODOO)
+Model.Destroy(#DYN_RAMP)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#WFYCRK)
+Model.Destroy(#HMYCM)
+Model.Destroy(#MOLOTOV)
+Model.Destroy(#HEALTH)
+Model.Destroy(#COLT45)
+mission_cleanup 
+return 
+
+:SYN7_16756
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16787 
+00BE: text_clear_all 
+03E6: remove_text_box 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+
+:SYN7_16787
+return 
+
+:SYN7_16789
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16824 
+00BE: text_clear_all 
+03E6: remove_text_box 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+
+:SYN7_16824
+return 
+
+:SYN7_16826
+fade 0 500 
+
+:SYN7_16833
+if 
+fading 
+jf @SYN7_16857 
+wait 0 
+jump @SYN7_16833 
+
+:SYN7_16857
+return 
+
+:SYN7_16859
+fade 1 500 
+
+:SYN7_16866
+if 
+fading 
+jf @SYN7_16890 
+wait 0 
+jump @SYN7_16866 
+
+:SYN7_16890
+return 
+
+:SYN7_16892
+if 
+0736:   is_keyboard_key_just_pressed 89 
+jf @SYN7_16990 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16960 
+Actor.PutAt($PLAYER_ACTOR, -1705.882, 1028.967, 44.1953)
+Actor.Angle($PLAYER_ACTOR) = 299.134
+113@ = 8 
+
+:SYN7_16960
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_16990 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+
+:SYN7_16990
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @SYN7_17051 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_17051 
+Actor.PutAt($PLAYER_ACTOR, -2064.057, -68.6422, 34.1563)
+Actor.Angle($PLAYER_ACTOR) = 94.0454
+
+:SYN7_17051
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @SYN7_17087 
+0777: delete_objects_in_object_group "CRACK" 
+0776: create_objects_in_object_group "FUKDCRAK" 
+
+:SYN7_17087
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @SYN7_17148 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SYN7_17148 
+Actor.PutAt($PLAYER_ACTOR, -2064.057, -68.6422, 34.1563)
+Actor.Angle($PLAYER_ACTOR) = 94.0454
+
+:SYN7_17148
+if 
+0736:   is_keyboard_key_just_pressed 76 
+jf @SYN7_17170 
+48@ = 5 
+
+:SYN7_17170
+return 
+
+:SYN7_17172
+040D: unload_wav 1 
+03CF: load_wav 118@ as 1 
+117@ = 0 
+return 
+
+:SYN7_17192
+if and
+03D0:   wav 1 loaded 
+  117@ == 0 
+jf @SYN7_17235 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 127@s time 10000 flag 1 
+117@ = 1 
+
+:SYN7_17235
+if and
+03D2:   wav 1 ended 
+  117@ == 1 
+jf @SYN7_17273 
+040D: unload_wav 1 
+03D5: remove_text 127@s 
+117@ = 2 
+
+:SYN7_17273
+return

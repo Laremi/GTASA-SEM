@@ -1,0 +1,1661 @@
+:STEAL5
+thread 'STEAL5' 
+gosub @STEAL5_94 
+if 
+wasted_or_busted 
+jf @STEAL5_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @STEAL5_5174 
+
+:STEAL5_85
+gosub @STEAL5_5338 
+end_thread 
+
+:STEAL5_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'STEAL5' 
+if 
+  $ONMISSION == 0 
+jf @STEAL5_175 
+36@ = Object.Create(#TEMP_STINGER2, -2025.8, 169.2, 27.7)
+018A: 40@ = create_checkpoint_at -2025.8 169.2 27.7 
+
+:STEAL5_175
+00BE: text_clear_all 
+wait 0 
+41@ = 0 
+42@ = 0 
+43@ = 0 
+44@ = 0 
+45@ = 0 
+$7416 = 3 
+46@ = 0 
+47@ = 0 
+48@ = 0 
+49@ = 0 
+50@ = 0 
+79@ = 0.0 
+80@ = 0.0 
+81@ = 0.0 
+82@ = 0.0 
+83@ = 0.0 
+84@ = 0.0 
+85@ = 0.0 
+86@ = 0.0 
+87@ = 0.0 
+88@ = 0.0 
+51@ = 0 
+52@ = 0 
+53@ = 0 
+54@ = 0 
+73@ = 0 
+74@ = 0 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+78@ = 0 
+08F5: save_player_group 
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E4: load_cutscene_data 'STEAL_5' 
+
+:STEAL5_469
+if 
+86B9:   not cutscene_data_loaded 
+jf @STEAL5_493 
+wait 0 
+jump @STEAL5_469 
+
+:STEAL5_493
+02E7: start_cutscene 
+fade 1 1000 
+
+:STEAL5_502
+if 
+82E9:   not cutscene_reached_end 
+jf @STEAL5_526 
+wait 0 
+jump @STEAL5_502 
+
+:STEAL5_526
+fade 0 0 
+
+:STEAL5_532
+if 
+fading 
+jf @STEAL5_556 
+wait 0 
+jump @STEAL5_532 
+
+:STEAL5_556
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+Model.Load(#STRATUM)
+Model.Load(#TAMPA)
+Model.Load(#HFYRI)
+Model.Load(#TEMP_STINGER2)
+Model.Load(#CELLPHONE)
+03CF: load_wav 1822 as 3 
+
+:STEAL5_621
+if 
+83D0:   not wav 3 loaded 
+jf @STEAL5_647 
+wait 0 
+jump @STEAL5_621 
+
+:STEAL5_647
+038B: load_requested_models 
+0395: clear_area 1 at -2025.8 169.2 27.7 radius 5.0 
+04AF: 49@ = 549 // = constant 
+gosub @STEAL5_7401 
+39@ = Car.Create(#TAMPA, -2025.8, 169.2, 27.7)
+0395: clear_area 1 at -1913.5 -593.8 36.9 radius 5.0 
+04AF: 49@ = 561 // = constant 
+gosub @STEAL5_7401 
+34@ = Car.Create(#STRATUM, -1913.5, -593.8, 36.9)
+Car.Angle(34@) = 180.0
+0294: set_car 34@ sprayable 0 
+073B: unknown_car 34@ flag 1 
+Car.DoorStatus(34@) = 3
+0587: enable_car 34@ validate_position 0 
+40@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 40@ type_to 0 
+45@ = 1 
+00AE: set_car 34@ traffic_behaviour_to 2 
+Car.ImmuneToNonPlayer(34@) = True
+072F: enable_car 34@ stuck_check_distance 0.5 time 4000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 7 // extended 03CC 
+35@ = Actor.CreateAsDriver(CivFemale, #HFYRI, 34@)
+0588: disable_actor 35@ validate_position 1 
+054A: set_actor 35@ can_be_shot_in_a_car 0 
+03C4: set_status_text $7416 type 0 GXT 'STE5_04' // global_variable  // Stingers
+00BC: show_text_highpriority GXT 'STE5_12' time 7000 flag 1  // ~s~Get in the ~b~car~s~. This ~b~car~s~ has been modded to use stingers.
+0395: clear_area 1 at -2028.6 162.9 27.8 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, -2028.6, 162.9, 27.8)
+Actor.Angle($PLAYER_ACTOR) = 336.6
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+Garage.ChangeType('AMUMIS', 19)
+fade 1 500 
+33@ = 0 
+
+:STEAL5_1018
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @STEAL5_1044 
+jump @STEAL5_5260 
+
+:STEAL5_1044
+gosub @STEAL5_5446 
+if 
+  44@ == 1 
+jf @STEAL5_1076 
+jump @STEAL5_5174 
+
+:STEAL5_1076
+if 
+  41@ == 0 
+jf @STEAL5_1119 
+if 
+  47@ == 1 
+jf @STEAL5_1119 
+gosub @STEAL5_5548 
+
+:STEAL5_1119
+if 
+  41@ == 0 
+jf @STEAL5_1789 
+if 
+  45@ == 1 
+jf @STEAL5_1238 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 39@)
+jf @STEAL5_1238 
+Marker.Disable(40@)
+40@ = Marker.CreateAboveCar(39@)
+07E0: set_marker 40@ type_to 1 
+if 
+  33@ > 14000 
+jf @STEAL5_1229 
+00BC: show_text_highpriority GXT 'STE5_06' time 4000 flag 1  // ~s~You need to be in the ~b~car~s~ modded to use stingers.
+
+:STEAL5_1229
+03E6: remove_text_box 
+45@ = 0 
+
+:STEAL5_1238
+if 
+  45@ == 0 
+jf @STEAL5_1337 
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @STEAL5_1337 
+Marker.Disable(40@)
+40@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 40@ type_to 0 
+if 
+  33@ > 14000 
+jf @STEAL5_1330 
+00BC: show_text_highpriority GXT 'STE5_07' time 4000 flag 1  // ~s~Burst the tires of the ~r~target car~s~.
+
+:STEAL5_1330
+45@ = 1 
+
+:STEAL5_1337
+if 
+  33@ > 14000 
+jf @STEAL5_1442 
+if 
+  $7416 == 3 
+jf @STEAL5_1440 
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @STEAL5_1424 
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @STEAL5_1417 
+0512: show_permanent_text_box 'STE5_03'  // Press ~k~~PED_FIREWEAPON~ to drop a Stinger.
+
+:STEAL5_1417
+jump @STEAL5_1426 
+
+:STEAL5_1424
+03E6: remove_text_box 
+
+:STEAL5_1426
+47@ = 1 
+jump @STEAL5_1442 
+
+:STEAL5_1440
+03E6: remove_text_box 
+
+:STEAL5_1442
+if 
+  $7416 == 0 
+jf @STEAL5_1504 
+if 
+  32@ > 5000 
+jf @STEAL5_1504 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_05' time 4000 flag 1  // ~r~You ran out of stingers.
+jump @STEAL5_5174 
+
+:STEAL5_1504
+gosub @STEAL5_6464 
+gosub @STEAL5_6588 
+gosub @STEAL5_6643 
+if 
+  42@ == 0 
+jf @STEAL5_1610 
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @STEAL5_1610 
+00BC: show_text_highpriority GXT 'STE5_01' time 7000 flag 1  // ~s~Burst the tires of the ~r~target car~s~ using stingers.
+01E4: show_text_1number_lowpriority GXT 'STE5_02' number 3 time 7000 flag 1  // ~s~You only have ~1~ stingers available.
+33@ = 0 
+42@ = 1 
+
+:STEAL5_1610
+if 
+  42@ == 1 
+jf @STEAL5_1789 
+if 
+0496:   tire 2 on_car 34@ deflated 
+jf @STEAL5_1789 
+Car.DoorStatus(34@) = 1
+03CD: disable_car 34@ stuck_check 
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_1789 
+0615: define_AS_pack_begin 89@ 
+0633: AS_actor -1 exit_car 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit 100000 
+0616: define_AS_pack_end 89@ 
+0618: assign_actor 35@ to_AS_pack 89@ 
+061B: remove_references_to_AS_pack 89@ 
+gosub @STEAL5_9406 
+Marker.Disable(40@)
+40@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 40@ type_to 1 
+039C: set_car 34@ watertight 0 
+00BC: show_text_highpriority GXT 'STE5_13' time 7000 flag 1  // ~s~Get in the ~b~car~s~.
+32@ = 0 
+42@ = 0 
+41@ = 1 
+
+:STEAL5_1789
+if 
+  41@ == 1 
+jf @STEAL5_2907 
+if 
+  42@ == 0 
+jf @STEAL5_1886 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @STEAL5_1879 
+if 
+0202:   actor $PLAYER_ACTOR near_car 34@ radius 5.0 5.0 sphere 0 
+jf @STEAL5_1879 
+42@ = 1 
+
+:STEAL5_1879
+gosub @STEAL5_5548 
+
+:STEAL5_1886
+if 
+  42@ == 1 
+jf @STEAL5_2017 
+040D: unload_wav 1 
+040D: unload_wav 2 
+040D: unload_wav 3 
+00BE: text_clear_all 
+51@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+43@ = 1 
+0707: start_scene_skip_to @STEAL5_2471 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+03E6: remove_text_box 
+0151: remove_status_text $7416 
+51@ = 3 
+53@ = 0 
+gosub @STEAL5_8633 
+32@ = 0 
+42@ = 2 
+
+:STEAL5_2017
+if 
+  42@ == 2 
+jf @STEAL5_2100 
+if 
+  32@ > 2000 
+jf @STEAL5_2100 
+if 
+  51@ == 0 
+jf @STEAL5_2100 
+51@ = 1 
+53@ = 0 
+gosub @STEAL5_8633 
+42@ = 3 
+
+:STEAL5_2100
+if 
+  42@ == 3 
+jf @STEAL5_2157 
+if 
+  51@ == 0 
+jf @STEAL5_2157 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+42@ = 4 
+
+:STEAL5_2157
+if 
+  42@ == 4 
+jf @STEAL5_2359 
+062E: get_actor $PLAYER_ACTOR task 1833 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL5_2359 
+0615: define_AS_pack_begin 89@ 
+0772: AS_actor -1 run_to_car 34@ -2 ms stop_at_distance 1.0 
+0616: define_AS_pack_end 89@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 89@ 
+061B: remove_references_to_AS_pack 89@ 
+043C: disable_sounds_after_fadeout 0 
+0A2C: hide_priority_text_while_fading 0 
+fade 0 700 
+
+:STEAL5_2256
+if 
+fading 
+jf @STEAL5_2280 
+wait 0 
+jump @STEAL5_2256 
+
+:STEAL5_2280
+03CF: load_wav 32000 as 3 
+
+:STEAL5_2287
+if 
+83D0:   not wav 3 loaded 
+jf @STEAL5_2313 
+wait 0 
+jump @STEAL5_2287 
+
+:STEAL5_2313
+gosub @STEAL5_5446 
+if 
+  44@ == 1 
+jf @STEAL5_2345 
+jump @STEAL5_5174 
+
+:STEAL5_2345
+32@ = 0 
+42@ = 5 
+
+:STEAL5_2359
+if 
+  42@ == 5 
+jf @STEAL5_2428 
+if 
+  32@ > 1000 
+jf @STEAL5_2428 
+03D1: play_wav 3 
+51@ = 2 
+53@ = 0 
+gosub @STEAL5_8633 
+42@ = 6 
+
+:STEAL5_2428
+if 
+  42@ == 6 
+jf @STEAL5_2907 
+if 
+  51@ == 0 
+jf @STEAL5_2907 
+43@ = 0 
+
+:STEAL5_2471
+0701: end_scene_skip 
+$193 = 0 
+gosub @STEAL5_5446 
+if 
+  44@ == 1 
+jf @STEAL5_2512 
+jump @STEAL5_5174 
+
+:STEAL5_2512
+043C: disable_sounds_after_fadeout 1 
+0A2C: hide_priority_text_while_fading 1 
+if 
+  43@ == 1 
+jf @STEAL5_2620 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+51@ = 0 
+fade 0 500 
+
+:STEAL5_2562
+if 
+fading 
+jf @STEAL5_2586 
+wait 0 
+jump @STEAL5_2562 
+
+:STEAL5_2586
+gosub @STEAL5_5446 
+if 
+  44@ == 1 
+jf @STEAL5_2618 
+jump @STEAL5_5174 
+
+:STEAL5_2618
+00BE: text_clear_all 
+
+:STEAL5_2620
+040D: unload_wav 3 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.DestroyInstantly(35@)
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_2693 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+Car.ImmuneToNonPlayer(34@) = False
+0699: set_car 34@ repair_tire 2 
+0699: set_car 34@ repair_tire 0 
+0699: set_car 34@ repair_tire 1 
+0699: set_car 34@ repair_tire 3 
+
+:STEAL5_2693
+Object.Destroy(36@)
+Actor.StorePos($PLAYER_ACTOR, 83@, 84@, 85@)
+Camera.SetAtPos(83@, 84@, 85@)
+Car.RemoveReferences(39@)
+Actor.RemoveReferences(35@)
+Model.Destroy(#TAMPA)
+Model.Destroy(#HFYRI)
+Model.Destroy(#TEMP_STINGER2)
+Car.ImmuneToNonPlayer(34@) = False
+09F5: disable_player_mutal_activities 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+Marker.Disable(40@)
+018A: 40@ = create_checkpoint_at -2026.9 179.1 27.5 
+45@ = 1 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_11' time 7000 flag 1  // ~s~Get the car back to the ~y~garage~s~.
+fade 1 500 
+
+:STEAL5_2837
+if 
+fading 
+jf @STEAL5_2861 
+wait 0 
+jump @STEAL5_2837 
+
+:STEAL5_2861
+gosub @STEAL5_5446 
+if 
+  44@ == 1 
+jf @STEAL5_2893 
+jump @STEAL5_5174 
+
+:STEAL5_2893
+42@ = 0 
+41@ = 2 
+
+:STEAL5_2907
+if 
+  41@ == 2 
+jf @STEAL5_4303 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @STEAL5_2986 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_2986 
+Car.PutAt(34@, -2011.8, 176.5, 26.6)
+Car.Angle(34@) = 97.7
+
+:STEAL5_2986
+if 
+  42@ == 0 
+jf @STEAL5_3458 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_3458 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @STEAL5_3458 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -2033.1 178.6 27.8 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @STEAL5_3458 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:STEAL5_3101
+if 
+fading 
+jf @STEAL5_3125 
+wait 0 
+jump @STEAL5_3101 
+
+:STEAL5_3125
+select_interior 1 
+Marker.Disable(40@)
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+51@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+0395: clear_area 1 at -2033.3 179.1 27.4 radius 25.0 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_3253 
+0840: link_car 34@ to_interior 1 
+Car.PutAt(34@, -2033.3, 179.1, 27.4)
+Car.Angle(34@) = 90.8
+
+:STEAL5_3253
+0A0B: set_rendering_origin_at_3D_coord -2048.1 178.0 28.8 angle 270.0 
+Camera.SetPosition(-2048.1, 178.0, 28.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-2037.9, 178.8, 27.4, 2)
+fade 1 1000 
+
+:STEAL5_3333
+if 
+fading 
+jf @STEAL5_3357 
+wait 0 
+jump @STEAL5_3333 
+
+:STEAL5_3357
+Garage.Open('HBGDSFS')
+
+:STEAL5_3368
+if 
+   not Garage.IsOpen('HBGDSFS')
+jf @STEAL5_3401 
+wait 0 
+jump @STEAL5_3368 
+
+:STEAL5_3401
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_3451 
+05D1: AS_actor $PLAYER_ACTOR drive_car 34@ to -2045.4 178.3 27.6 speed 10.0 0 model #NULL 3 
+
+:STEAL5_3451
+42@ = 1 
+
+:STEAL5_3458
+if 
+  42@ == 1 
+jf @STEAL5_3585 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_3585 
+062E: get_actor $PLAYER_ACTOR task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL5_3585 
+0615: define_AS_pack_begin 89@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -2035.471 176.6342 27.8359 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 89@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 89@ 
+061B: remove_references_to_AS_pack 89@ 
+32@ = 0 
+42@ = 2 
+
+:STEAL5_3585
+if 
+  42@ == 2 
+jf @STEAL5_4116 
+if 
+  32@ > 2000 
+jf @STEAL5_4116 
+fade 0 500 
+
+:STEAL5_3629
+if 
+fading 
+jf @STEAL5_3653 
+wait 0 
+jump @STEAL5_3629 
+
+:STEAL5_3653
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Camera.SetAtPos(-2045.4, 173.1, 27.8)
+0A0B: set_rendering_origin_at_3D_coord -2045.4 173.1 27.8 angle 309.5 
+00BE: text_clear_all 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Car.Destroy(34@)
+0395: clear_area 1 at -2027.2 179.5 27.8 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, -2027.2, 179.5, 27.8)
+Actor.Angle($PLAYER_ACTOR) = 275.9
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+Garage.Close('HBGDSFS')
+
+:STEAL5_3802
+if 
+   not Garage.IsClosed('HBGDSFS')
+jf @STEAL5_3835 
+wait 0 
+jump @STEAL5_3802 
+
+:STEAL5_3835
+04A6: $1938 = create_asset_money_pickup_at -1969.463 289.5335 34.6719 money $1937 $1937 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetAtPos(-1980.301, 288.1622, 38.2246)
+Camera.SetPosition(-1980.301, 288.1622, 38.2246, 0.0, 0.0, 0.0)
+Camera.PointAt(-1979.313, 288.0155, 38.1743, 2)
+fade 1 500 
+
+:STEAL5_3947
+if 
+fading 
+jf @STEAL5_3971 
+wait 0 
+jump @STEAL5_3947 
+
+:STEAL5_3971
+0394: play_music 1 
+00BA: show_text_styled GXT 'ASS_ACQ' time 5000 style 6  // Asset acquired!
+wait 5000 
+Camera.SetPosition(-1972.185, 291.1454, 35.7724, 0.0, 0.0, 0.0)
+Camera.PointAt(-1971.343, 290.6249, 35.6284, 2)
+01E5: show_text_1number_highpriority GXT 'ASS_LUV' number $1937 time 6000 flag 1  // This property will now generate revenue up to a maximum of $~1~. Make sure you collect it regularly!
+wait 6000 
+fade 0 500 
+
+:STEAL5_4078
+if 
+fading 
+jf @STEAL5_4102 
+wait 0 
+jump @STEAL5_4078 
+
+:STEAL5_4102
+fade 1 500 
+jump @STEAL5_5260 
+
+:STEAL5_4116
+if 
+  45@ == 1 
+jf @STEAL5_4198 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @STEAL5_4198 
+Marker.Disable(40@)
+40@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 40@ type_to 1 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_08' time 4000 flag 1  // ~s~Get back in the ~b~car~s~.
+45@ = 0 
+
+:STEAL5_4198
+if 
+  45@ == 0 
+jf @STEAL5_4303 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @STEAL5_4303 
+Marker.Disable(40@)
+if 
+  42@ == 0 
+jf @STEAL5_4278 
+018A: 40@ = create_checkpoint_at -2033.1 178.6 27.8 
+
+:STEAL5_4278
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_11' time 7000 flag 1  // ~s~Get the car back to the ~y~garage~s~.
+45@ = 1 
+
+:STEAL5_4303
+if 
+  41@ == 10 
+jf @STEAL5_5160 
+gosub @ENTEXT_59 
+if 
+  $38 == 1 
+jf @STEAL5_4863 
+if 
+  50@ == 0 
+jf @STEAL5_4863 
+00BE: text_clear_all 
+fade 0 500 
+
+:STEAL5_4373
+if 
+fading 
+jf @STEAL5_4397 
+wait 0 
+jump @STEAL5_4373 
+
+:STEAL5_4397
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+51@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0395: clear_area 1 at -2125.5 -2467.5 29.6 radius 1.0 
+Actor.StorePos($PLAYER_ACTOR, 86@, 87@, 88@)
+04E4: refresh_game_renderer_at -2125.5 -2467.5 
+Camera.SetAtPos(-2125.5, -2467.5, 29.6)
+Actor.PutAt($PLAYER_ACTOR, -2125.5, -2467.5, 29.6)
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_4542 
+0687: clear_actor 35@ task 
+
+:STEAL5_4542
+04E4: refresh_game_renderer_at -2117.8 -2456.8 
+Camera.SetAtPos(-2115.6, -2456.5, 30.6)
+038B: load_requested_models 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_4648 
+03CD: disable_car 34@ stuck_check 
+0395: clear_area 1 at -2117.8 -2456.8 29.3 radius 30.0 
+Car.PutAt(34@, -2117.8, -2456.8, 29.3)
+Car.Angle(34@) = 233.8
+
+:STEAL5_4648
+Camera.SetPosition(-2106.0, -2465.7, 30.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-2112.2, -2461.1, 29.6, 2)
+00BC: show_text_highpriority GXT 'STE5_14' time 5000 flag 1  // ~r~You missed the car!
+fade 1 500 
+
+:STEAL5_4722
+if 
+fading 
+jf @STEAL5_4746 
+wait 0 
+jump @STEAL5_4722 
+
+:STEAL5_4746
+Garage.Open('AMUMIS')
+
+:STEAL5_4757
+if 
+   not Garage.IsOpen('AMUMIS')
+jf @STEAL5_4790 
+wait 0 
+jump @STEAL5_4757 
+
+:STEAL5_4790
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_4856 
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_4856 
+05D1: AS_actor 35@ drive_car 34@ to -2108.0 -2464.2 29.6 speed 10.0 0 model #NULL 3 
+
+:STEAL5_4856
+50@ = 1 
+
+:STEAL5_4863
+if 
+  50@ == 1 
+jf @STEAL5_5160 
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_5160 
+062E: get_actor 35@ task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL5_5160 
+Garage.Close('AMUMIS')
+
+:STEAL5_4937
+if 
+   not Garage.IsClosed('AMUMIS')
+jf @STEAL5_4970 
+wait 0 
+jump @STEAL5_4937 
+
+:STEAL5_4970
+fade 0 500 
+
+:STEAL5_4977
+if 
+fading 
+jf @STEAL5_5001 
+wait 0 
+jump @STEAL5_4977 
+
+:STEAL5_5001
+04E4: refresh_game_renderer_at 86@ 87@ 
+88@ -= 1.0 
+Camera.SetAtPos(86@, 87@, 88@)
+038B: load_requested_models 
+0395: clear_area 1 at 86@ 87@ 88@ radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 86@, 87@, 88@)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+00BC: show_text_highpriority GXT 'STE5_14' time 5500 flag 1  // ~r~You missed the car!
+fade 1 500 
+
+:STEAL5_5129
+if 
+fading 
+jf @STEAL5_5153 
+wait 0 
+jump @STEAL5_5129 
+
+:STEAL5_5153
+jump @STEAL5_5174 
+
+:STEAL5_5160
+gosub @STEAL5_8929 
+jump @STEAL5_1018 
+
+:STEAL5_5174
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @STEAL5_5242 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:STEAL5_5242
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:STEAL5_5260
+$STEAL_TOTAL_PASSED_MISSIONS += 1 
+Marker.Disable($525)
+014C: set_parked_car_generator $2794 cars_to_generate_to 101 
+00BE: text_clear_all 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 5000
+0998: add_respect 5 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'STEAL_5'  // Puncture Wounds
+030C: progress_made = 1 
+return 
+
+:STEAL5_5338
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @STEAL5_5356 
+Camera.Restore_WithJumpCut
+
+:STEAL5_5356
+043C: disable_sounds_after_fadeout 1 
+Marker.Disable(40@)
+040D: unload_wav 3 
+0151: remove_status_text $7416 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @STEAL5_5397 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:STEAL5_5397
+09F5: disable_player_mutal_activities 0 
+Object.Destroy(36@)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#STRATUM)
+Model.Destroy(#TAMPA)
+Model.Destroy(#HFYRI)
+Model.Destroy(#TEMP_STINGER2)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:STEAL5_5446
+if 
+   Car.Wrecked(34@)
+jf @STEAL5_5487 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_09' time 4000 flag 1  // ~r~The target car has been destroyed!
+44@ = 1 
+
+:STEAL5_5487
+if 
+  41@ == 0 
+jf @STEAL5_5546 
+if 
+   Car.Wrecked(39@)
+jf @STEAL5_5546 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'STE5_10' time 7000 flag 1  // ~r~The stinger car has been destroyed!
+44@ = 1 
+
+:STEAL5_5546
+return 
+
+:STEAL5_5548
+if 
+   not Car.Wrecked(39@)
+jf @STEAL5_5795 
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @STEAL5_5795 
+if 
+  32@ > 5000 
+jf @STEAL5_5775 
+if 
+  $7416 > 0 
+jf @STEAL5_5770 
+if 
+00E1:   player 0 pressed_key 17 
+jf @STEAL5_5763 
+Object.Destroy(36@)
+0407: store_coords_to 83@ 84@ 85@ from_car 39@ with_offset 0.0 -3.0 -0.5 
+$TEMPVAR_ANGLE = Car.Angle(39@)
+$TEMPVAR_ANGLE += 90.0 
+02CE: 85@ = ground_z_at 83@ 84@ 85@ 
+36@ = Object.Create(#TEMP_STINGER2, 83@, 84@, 85@)
+Object.Angle(36@) = $TEMPVAR_ANGLE
+097A: play_audio_at 83@ 84@ 85@ event 1125 
+78@ = 1 
+$7416 -= 1 
+32@ = 0 
+
+:STEAL5_5763
+jump @STEAL5_5775 
+
+:STEAL5_5770
+0151: remove_status_text $7416 
+
+:STEAL5_5775
+if 
+   not $7416 == 3 
+jf @STEAL5_5795 
+03E6: remove_text_box 
+
+:STEAL5_5795
+if 
+  78@ == 1 
+jf @STEAL5_5878 
+if 
+03D2:   wav 3 ended 
+jf @STEAL5_5878 
+0407: store_coords_to 83@ 84@ 85@ from_car 39@ with_offset 0.0 -3.0 -0.5 
+097A: play_audio_at 83@ 84@ 85@ event 1104 
+78@ = 2 
+
+:STEAL5_5878
+if 
+03CA:   object 36@ exists 
+jf @STEAL5_6440 
+0400: store_coords_to 79@ 81@ 85@ from_object 36@ with_offset -0.5 2.5 0.0 
+0400: store_coords_to 80@ 82@ 85@ from_object 36@ with_offset -0.5 -2.5 0.0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @STEAL5_6111 
+38@ = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 79@ 81@ lr_corner_at 80@ 82@ angle 1.0 sphere 0 in_car 
+jf @STEAL5_6111 
+if 
+8496:   not tire 2 on_car 38@ deflated 
+jf @STEAL5_6036 
+04FE: deflate_tire 2 on_car 38@ 
+
+:STEAL5_6036
+if 
+8496:   not tire 0 on_car 38@ deflated 
+jf @STEAL5_6061 
+04FE: deflate_tire 0 on_car 38@ 
+
+:STEAL5_6061
+if 
+8496:   not tire 1 on_car 38@ deflated 
+jf @STEAL5_6086 
+04FE: deflate_tire 1 on_car 38@ 
+
+:STEAL5_6086
+if 
+8496:   not tire 3 on_car 38@ deflated 
+jf @STEAL5_6111 
+04FE: deflate_tire 3 on_car 38@ 
+
+:STEAL5_6111
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_6262 
+if 
+05F8:   actor 35@ in_rectangle_ll_corner_at 79@ 81@ lr_corner_at 80@ 82@ angle 1.0 sphere 0 in_car 
+jf @STEAL5_6262 
+if 
+8496:   not tire 2 on_car 34@ deflated 
+jf @STEAL5_6187 
+04FE: deflate_tire 2 on_car 34@ 
+
+:STEAL5_6187
+if 
+8496:   not tire 0 on_car 34@ deflated 
+jf @STEAL5_6212 
+04FE: deflate_tire 0 on_car 34@ 
+
+:STEAL5_6212
+if 
+8496:   not tire 1 on_car 34@ deflated 
+jf @STEAL5_6237 
+04FE: deflate_tire 1 on_car 34@ 
+
+:STEAL5_6237
+if 
+8496:   not tire 3 on_car 34@ deflated 
+jf @STEAL5_6262 
+04FE: deflate_tire 3 on_car 34@ 
+
+:STEAL5_6262
+09C0: 37@ = get_random_car_in_area 79@ 81@ 80@ 82@ 1.0 with_actors -1 
+if 
+   not Car.Wrecked(37@)
+jf @STEAL5_6440 
+if 
+803B:   not  37@ == 34@ // (int) 
+jf @STEAL5_6440 
+if 
+803B:   not  37@ == 39@ // (int) 
+jf @STEAL5_6440 
+if 
+8496:   not tire 2 on_car 37@ deflated 
+jf @STEAL5_6365 
+04FE: deflate_tire 2 on_car 37@ 
+
+:STEAL5_6365
+if 
+8496:   not tire 0 on_car 37@ deflated 
+jf @STEAL5_6390 
+04FE: deflate_tire 0 on_car 37@ 
+
+:STEAL5_6390
+if 
+8496:   not tire 1 on_car 37@ deflated 
+jf @STEAL5_6415 
+04FE: deflate_tire 1 on_car 37@ 
+
+:STEAL5_6415
+if 
+8496:   not tire 3 on_car 37@ deflated 
+jf @STEAL5_6440 
+04FE: deflate_tire 3 on_car 37@ 
+
+:STEAL5_6440
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @STEAL5_6462 
+04FE: deflate_tire 2 on_car 34@ 
+
+:STEAL5_6462
+return 
+
+:STEAL5_6464
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_6586 
+if 
+0202:   actor $PLAYER_ACTOR near_car 34@ radius 60.0 60.0 sphere 0 
+jf @STEAL5_6528 
+Car.SetMaxSpeed(34@, 50.0)
+jump @STEAL5_6586 
+
+:STEAL5_6528
+if 
+0202:   actor $PLAYER_ACTOR near_car 34@ radius 100.0 100.0 sphere 0 
+jf @STEAL5_6576 
+Car.SetMaxSpeed(34@, 20.0)
+jump @STEAL5_6586 
+
+:STEAL5_6576
+Car.SetMaxSpeed(34@, 15.0)
+
+:STEAL5_6586
+return 
+
+:STEAL5_6588
+if 
+   not Car.Wrecked(34@)
+jf @STEAL5_6641 
+if 
+02CA:   car 34@ bounding_sphere_visible 
+jf @STEAL5_6634 
+039C: set_car 34@ watertight 0 
+jump @STEAL5_6641 
+
+:STEAL5_6634
+039C: set_car 34@ watertight 1 
+
+:STEAL5_6641
+return 
+
+:STEAL5_6643
+if 
+   not Actor.Dead(35@)
+jf @STEAL5_7399 
+if 
+   Actor.InCar(35@, 34@)
+jf @STEAL5_7399 
+if 
+  46@ == 0 
+jf @STEAL5_6990 
+0615: define_AS_pack_begin 89@ 
+05D1: AS_actor -1 drive_car 34@ to -1913.1 -593.8 38.3 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1912.6 -744.7 44.7 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1914.2 -894.9 45.0 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1914.3 -1045.0 38.3 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1907.9 -1195.2 39.5 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1910.7 -1345.3 40.4 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1795.1 -1442.4 35.5 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1658.5 -1506.1 35.7 speed 20.0 0 model #NULL 2 
+0616: define_AS_pack_end 89@ 
+0618: assign_actor 35@ to_AS_pack 89@ 
+061B: remove_references_to_AS_pack 89@ 
+46@ = 1 
+
+:STEAL5_6990
+if 
+  46@ == 1 
+jf @STEAL5_7331 
+062E: get_actor 35@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL5_7331 
+0615: define_AS_pack_begin 89@ 
+05D1: AS_actor -1 drive_car 34@ to -1704.1 -1649.1 36.3 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1832.4 -1727.6 29.2 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -1954.5 -1815.3 34.4 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -2046.9 -1932.7 52.4 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -2106.8 -2070.0 63.5 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -2213.2 -2175.1 42.2 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -2160.4 -2315.1 30.5 speed 20.0 0 model #NULL 2 
+05D1: AS_actor -1 drive_car 34@ to -2120.2 -2456.7 29.6 speed 20.0 0 model #NULL 2 
+0616: define_AS_pack_end 89@ 
+0618: assign_actor 35@ to_AS_pack 89@ 
+061B: remove_references_to_AS_pack 89@ 
+46@ = 2 
+
+:STEAL5_7331
+if 
+  46@ == 2 
+jf @STEAL5_7399 
+062E: get_actor 35@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @STEAL5_7399 
+50@ = 0 
+41@ = 10 
+46@ = 3 
+
+:STEAL5_7399
+return 
+
+:STEAL5_7401
+0209: 48@ = random_int_in_ranges 0 37 
+if 
+  48@ == 0 
+jf @STEAL5_7443 
+0674: set_car_model 34@ numberplate "GOT_M00_" 
+
+:STEAL5_7443
+if 
+  48@ == 1 
+jf @STEAL5_7476 
+0674: set_car_model 34@ numberplate "M00TV_4U" 
+
+:STEAL5_7476
+if 
+  48@ == 2 
+jf @STEAL5_7509 
+0674: set_car_model 34@ numberplate "MATHEW_2" 
+
+:STEAL5_7509
+if 
+  48@ == 3 
+jf @STEAL5_7542 
+0674: set_car_model 34@ numberplate "D4_DEW0R" 
+
+:STEAL5_7542
+if 
+  48@ == 4 
+jf @STEAL5_7575 
+0674: set_car_model 34@ numberplate "D0DE_777" 
+
+:STEAL5_7575
+if 
+  48@ == 5 
+jf @STEAL5_7608 
+0674: set_car_model 34@ numberplate "DAM0_666" 
+
+:STEAL5_7608
+if 
+  48@ == 6 
+jf @STEAL5_7641 
+0674: set_car_model 34@ numberplate "C0NEY_88" 
+
+:STEAL5_7641
+if 
+  48@ == 7 
+jf @STEAL5_7674 
+0674: set_car_model 34@ numberplate "PRE4CHER" 
+
+:STEAL5_7674
+if 
+  48@ == 8 
+jf @STEAL5_7707 
+0674: set_car_model 34@ numberplate "DBP_4NDY" 
+
+:STEAL5_7707
+if 
+  48@ == 9 
+jf @STEAL5_7740 
+0674: set_car_model 34@ numberplate "EV1L_SLY" 
+
+:STEAL5_7740
+if 
+  48@ == 10 
+jf @STEAL5_7773 
+0674: set_car_model 34@ numberplate "N1_R4V3N" 
+
+:STEAL5_7773
+if 
+  48@ == 11 
+jf @STEAL5_7806 
+0674: set_car_model 34@ numberplate "D1VX_Z00" 
+
+:STEAL5_7806
+if 
+  48@ == 12 
+jf @STEAL5_7839 
+0674: set_car_model 34@ numberplate "MR_B3NN_" 
+
+:STEAL5_7839
+if 
+  48@ == 13 
+jf @STEAL5_7872 
+0674: set_car_model 34@ numberplate "R3D_R4SP" 
+
+:STEAL5_7872
+if 
+  48@ == 14 
+jf @STEAL5_7905 
+0674: set_car_model 34@ numberplate "LA_B0MBA" 
+
+:STEAL5_7905
+if 
+  48@ == 15 
+jf @STEAL5_7938 
+0674: set_car_model 34@ numberplate "L3337_0G" 
+
+:STEAL5_7938
+if 
+  48@ == 16 
+jf @STEAL5_7971 
+0674: set_car_model 34@ numberplate "BUDD4H_X" 
+
+:STEAL5_7971
+if 
+  48@ == 17 
+jf @STEAL5_8004 
+0674: set_car_model 34@ numberplate "T3H_BUCK" 
+
+:STEAL5_8004
+if 
+  48@ == 18 
+jf @STEAL5_8037 
+0674: set_car_model 34@ numberplate "CHUNKY_1" 
+
+:STEAL5_8037
+if 
+  48@ == 19 
+jf @STEAL5_8070 
+0674: set_car_model 34@ numberplate "EV1L_BNZ" 
+
+:STEAL5_8070
+if 
+  48@ == 20 
+jf @STEAL5_8103 
+0674: set_car_model 34@ numberplate "S4ND_M4N" 
+
+:STEAL5_8103
+if 
+  48@ == 21 
+jf @STEAL5_8136 
+0674: set_car_model 34@ numberplate "RKK_DBP1" 
+
+:STEAL5_8136
+if 
+  48@ == 22 
+jf @STEAL5_8169 
+0674: set_car_model 34@ numberplate "RE1_K0KU" 
+
+:STEAL5_8169
+if 
+  48@ == 23 
+jf @STEAL5_8202 
+0674: set_car_model 34@ numberplate "S3XY_JUD" 
+
+:STEAL5_8202
+if 
+  48@ == 24 
+jf @STEAL5_8235 
+0674: set_car_model 34@ numberplate "SUNRA_93" 
+
+:STEAL5_8235
+if 
+  48@ == 25 
+jf @STEAL5_8268 
+0674: set_car_model 34@ numberplate "UG_FUX69" 
+
+:STEAL5_8268
+if 
+  48@ == 26 
+jf @STEAL5_8301 
+0674: set_car_model 34@ numberplate "LI0N_CUM" 
+
+:STEAL5_8301
+if 
+  48@ == 27 
+jf @STEAL5_8334 
+0674: set_car_model 34@ numberplate "RKK_PWND" 
+
+:STEAL5_8334
+if 
+  48@ == 28 
+jf @STEAL5_8367 
+0674: set_car_model 34@ numberplate "HAZE_B0B" 
+
+:STEAL5_8367
+if 
+  48@ == 29 
+jf @STEAL5_8400 
+0674: set_car_model 34@ numberplate "T3H_FLUF" 
+
+:STEAL5_8400
+if 
+  48@ == 30 
+jf @STEAL5_8433 
+0674: set_car_model 34@ numberplate "BM_4NDY_" 
+
+:STEAL5_8433
+if 
+  48@ == 31 
+jf @STEAL5_8466 
+0674: set_car_model 34@ numberplate "BM_D34N_" 
+
+:STEAL5_8466
+if 
+  48@ == 32 
+jf @STEAL5_8499 
+0674: set_car_model 34@ numberplate "BM_L4C3Y" 
+
+:STEAL5_8499
+if 
+  48@ == 33 
+jf @STEAL5_8532 
+0674: set_car_model 34@ numberplate "BM_D3V__" 
+
+:STEAL5_8532
+if 
+  48@ == 34 
+jf @STEAL5_8565 
+0674: set_car_model 34@ numberplate "NU_SK00L" 
+
+:STEAL5_8565
+if 
+  48@ == 35 
+jf @STEAL5_8598 
+0674: set_car_model 34@ numberplate "G4L_AVET" 
+
+:STEAL5_8598
+if 
+  48@ == 36 
+jf @STEAL5_8631 
+0674: set_car_model 34@ numberplate "M0J0_J0J" 
+
+:STEAL5_8631
+return 
+
+:STEAL5_8633
+if 
+  51@ == 1 
+jf @STEAL5_8778 
+05AA: 55@s = 'STL5_AA' // @s = 'short'  // ~z~Hey, CJ, how's it going with that crazy bitch?
+05AA: 57@s = 'STL5_AB' // @s = 'short'  // ~z~Popped her!
+05AA: 59@s = 'STL5_AC' // @s = 'short'  // ~z~Just about to fix the tires, should be back any minute.
+05AA: 61@s = 'STL5_AD' // @s = 'short'  // ~z~OK, careful with that puncture repair shit, CJ, it's nasty stuff!
+05AA: 63@s = 'STL5_AE' // @s = 'short'  // ~z~Will do. Later, man.
+04AF: 67@ = 37200 // = constant 
+04AF: 68@ = 37201 // = constant 
+04AF: 69@ = 37202 // = constant 
+04AF: 70@ = 37203 // = constant 
+04AF: 71@ = 37204 // = constant 
+73@ = 5 
+
+:STEAL5_8778
+if 
+  51@ == 2 
+jf @STEAL5_8851 
+05AA: 55@s = 'STL5_AF' // @s = 'short'  // ~z~Man, this stuff is disgusting.
+05AA: 57@s = 'STL5_AG' // @s = 'short'  // ~z~Aw shit, all over my clothes!
+04AF: 67@ = 37205 // = constant 
+04AF: 68@ = 37206 // = constant 
+73@ = 2 
+
+:STEAL5_8851
+if 
+  51@ == 3 
+jf @STEAL5_8898 
+05AA: 55@s = 'MOBRING' // @s = 'short'  // ~z~(Phone ringing)
+04AF: 67@ = 23000 // = constant 
+73@ = 1 
+
+:STEAL5_8898
+0085: 76@ = 53@ // (int) 
+74@ = 0 
+75@ = 0 
+77@ = 1 
+return 
+
+:STEAL5_8929
+if or
+  51@ == 1 
+  51@ == 2 
+  51@ == 3 
+jf @STEAL5_9015 
+if 
+001D:   73@ > 53@ // (int) 
+jf @STEAL5_9008 
+gosub @STEAL5_9017 
+gosub @STEAL5_9124 
+gosub @STEAL5_9278 
+jump @STEAL5_9015 
+
+:STEAL5_9008
+51@ = 0 
+
+:STEAL5_9015
+return 
+
+:STEAL5_9017
+if 
+001D:   73@ > 76@ // (int) 
+jf @STEAL5_9122 
+if 
+  74@ == 0 
+jf @STEAL5_9079 
+03CF: load_wav 67@(76@,6i) as 1 
+76@ += 1 
+74@ = 1 
+
+:STEAL5_9079
+if 
+  75@ == 0 
+jf @STEAL5_9122 
+03CF: load_wav 67@(76@,6i) as 2 
+76@ += 1 
+75@ = 1 
+
+:STEAL5_9122
+return 
+
+:STEAL5_9124
+if 
+  77@ == 1 
+jf @STEAL5_9200 
+if 
+  74@ == 1 
+jf @STEAL5_9200 
+if 
+03D0:   wav 1 loaded 
+jf @STEAL5_9200 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 55@(53@,6s) time 4500 flag 1 
+74@ = 2 
+
+:STEAL5_9200
+if 
+  77@ == 2 
+jf @STEAL5_9276 
+if 
+  75@ == 1 
+jf @STEAL5_9276 
+if 
+03D0:   wav 2 loaded 
+jf @STEAL5_9276 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 55@(53@,6s) time 4500 flag 1 
+75@ = 2 
+
+:STEAL5_9276
+return 
+
+:STEAL5_9278
+if 
+  74@ == 2 
+jf @STEAL5_9341 
+if 
+03D2:   wav 1 ended 
+jf @STEAL5_9341 
+03D5: remove_text 55@(53@,6s) 
+53@ += 1 
+77@ = 2 
+74@ = 0 
+
+:STEAL5_9341
+if 
+  75@ == 2 
+jf @STEAL5_9404 
+if 
+03D2:   wav 2 ended 
+jf @STEAL5_9404 
+03D5: remove_text 55@(53@,6s) 
+53@ += 1 
+77@ = 1 
+75@ = 0 
+
+:STEAL5_9404
+return 
+
+:STEAL5_9406
+040D: unload_wav 1 
+0209: 100@ = random_int_in_ranges 37207 37213 
+03CF: load_wav 100@ as 1 
+
+:STEAL5_9432
+if 
+83D0:   not wav 1 loaded 
+jf @STEAL5_9458 
+wait 0 
+jump @STEAL5_9432 
+
+:STEAL5_9458
+03D1: play_wav 1 
+if 
+  100@ == 37207 
+jf @STEAL5_9506 
+00BC: show_text_highpriority GXT 'STL5_BA' time 3000 flag 1  // ~z~You loco idiota!
+jump @STEAL5_9698 
+
+:STEAL5_9506
+if 
+  100@ == 37208 
+jf @STEAL5_9550 
+00BC: show_text_highpriority GXT 'STL5_BB' time 3000 flag 1  // ~z~Aye cabron, what the fuck you tryin' to do?
+jump @STEAL5_9698 
+
+:STEAL5_9550
+if 
+  100@ == 37209 
+jf @STEAL5_9594 
+00BC: show_text_highpriority GXT 'STL5_BC' time 3000 flag 1  // ~z~You trying to kill me, asshole?
+jump @STEAL5_9698 
+
+:STEAL5_9594
+if 
+  100@ == 37210 
+jf @STEAL5_9638 
+00BC: show_text_highpriority GXT 'STL5_BD' time 3000 flag 1  // ~z~Back off, you crazy man!
+jump @STEAL5_9698 
+
+:STEAL5_9638
+if 
+  100@ == 37211 
+jf @STEAL5_9682 
+00BC: show_text_highpriority GXT 'STL5_BE' time 3000 flag 1  // ~z~Hell, you'll get me killed!
+jump @STEAL5_9698 
+
+:STEAL5_9682
+00BC: show_text_highpriority GXT 'STL5_BF' time 3000 flag 1  // ~z~Fuck you, asshole!
+
+:STEAL5_9698
+if 
+83D2:   not wav 1 ended 
+jf @STEAL5_9724 
+wait 0 
+jump @STEAL5_9698 
+
+:STEAL5_9724
+040D: unload_wav 1 
+return

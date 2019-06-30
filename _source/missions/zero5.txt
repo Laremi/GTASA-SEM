@@ -1,0 +1,362 @@
+:ZERO5
+gosub @ZERO5_36 
+if 
+wasted_or_busted 
+jf @ZERO5_27 
+gosub @ZERO5_1896 
+
+:ZERO5_27
+gosub @ZERO5_1993 
+end_thread 
+
+:ZERO5_36
+66@ = 0 
+$ONMISSION = 1 
+0A0E: disable_text_with_style 1 
+increment_mission_attempts 
+thread 'ZERO5' 
+Player.CanMove($PLAYER_CHAR) = False
+wait 0 
+48@ = 1 
+49@ = 0 
+50@ = 0 
+51@ = 0 
+57@ = 0 
+55@ = 0 
+56@ = 0 
+63@ = 0 
+64@ = 0 
+52@ = 0 
+53@ = 0 
+$BEEFYBARON_SCORE = 0 
+$BEEFYBARON_TIME = 180000 
+40@ = -2205.44 
+41@ = 128.99 
+42@ = 57.33 
+43@ = 90.0 
+44@ = -2227.0 
+45@ = 113.0 
+46@ = 35.5 
+0297: reset_player $PLAYER_CHAR destroyed_model_counters 
+32@ = 0 
+69@ = 0 
+Model.Load(#RCBARON)
+Model.Load(#TOPFUN)
+
+:ZERO5_271
+if or
+   not Model.Available(#RCBARON)
+   not Model.Available(#TOPFUN)
+jf @ZERO5_303 
+wait 0 
+jump @ZERO5_271 
+
+:ZERO5_303
+09B9: show_entered_car_name 0 
+054C: use_GXT_table 'ZERO2' 
+08E7: disable_entrance_markers 1 
+
+:ZERO5_322
+wait 0 
+if 
+  48@ == 1 
+jf @ZERO5_351 
+gosub @ZERO5_408 
+
+:ZERO5_351
+if 
+  52@ == 1 
+jf @ZERO5_376 
+jump @ZERO5_1859 
+
+:ZERO5_376
+if 
+  53@ == 1 
+jf @ZERO5_401 
+jump @ZERO5_1896 
+
+:ZERO5_401
+jump @ZERO5_322 
+
+:ZERO5_408
+33@ = 0 
+0395: clear_area 1 at 44@ 45@ 46@ radius 1000.0 
+35@ = Car.Create(#TOPFUN, -2250.9, 124.6, 28.48)
+0587: enable_car 35@ validate_position 0 
+0657: car 35@ open_door 4 
+0657: car 35@ open_door 5 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+0169: set_fade_color_RGB 0 0 0 
+if 
+   not Car.Wrecked(35@)
+jf @ZERO5_557 
+Car.PutAt(35@, -2233.9, 122.6, 746.48)
+Car.Angle(35@) = 90.0
+Car.LockInCurrentPosition(35@) = True
+
+:ZERO5_557
+wait 1000 
+if 
+   not Car.Wrecked(35@)
+jf @ZERO5_583 
+0508: car 35@ close_all_doors 
+
+:ZERO5_583
+select_interior 0 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at -2240.854 129.3346 radius 1.5 
+Camera.SetAtPos(40@, 41@, 42@)
+046E: put_player $PLAYER_CHAR in_RC_mode_at 40@ 41@ 42@ angle 40.09 RC_model #RCBARON 
+34@ = Player.RC_car($PLAYER_CHAR)
+Car.Angle(34@) = 90.0
+04D6: enable_RC_car_detonation 0 
+048A: set_RC_car_detonation 0 // or opcode 04D6 
+Car.Health(34@) = 1000
+Car.SetImmunities(34@, 0, 1, 1, 0, 0)
+02A3: enable_widescreen 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO5_733 
+Camera.OnVehicle(34@, 18, 2)
+Car.LockInCurrentPosition(34@) = False
+wait 0 
+032A: set_behind_camera_mode_to 1 
+
+:ZERO5_733
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:ZERO5_748
+if 
+fading 
+jf @ZERO5_772 
+wait 0 
+jump @ZERO5_748 
+
+:ZERO5_772
+Player.CanMove($PLAYER_CHAR) = True
+03C3: set_timer_to $BEEFYBARON_TIME type 1 GXT 'ZER2_5' // global_variable  // TIME ~1~
+03C4: set_status_text $BEEFYBARON_SCORE type 0 GXT 'ZER2_43' // global_variable  // Score ~1~
+00BC: show_text_highpriority GXT 'ZER2_45' time 5000 flag 1  // ~s~Destroy as many of Berkley's delivery vans within the time limit as possible!
+09BF: set_random_traffic_spawn_to_model #TOPFUN // Load the vehicle model before using this 
+
+:ZERO5_832
+if 
+   not 57@ == 1 
+jf @ZERO5_1857 
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @ZERO5_913 
+48@ = 0 
+49@ = 0 
+50@ = 0 
+51@ = 0 
+52@ = 1 
+53@ = 0 
+return 
+
+:ZERO5_913
+if 
+  0 >= $BEEFYBARON_TIME 
+jf @ZERO5_1156 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO5_961 
+0918: set_car 34@ engine_operation 0 
+01EC: make_car 34@ very_heavy 1 
+
+:ZERO5_961
+04DB: exit_RC_mode // on foot version 
+32@ = 0 
+48@ = 0 
+49@ = 0 
+50@ = 0 
+51@ = 0 
+52@ = 1 
+53@ = 0 
+01E3: show_text_1number_styled GXT 'ZER2_43' number $BEEFYBARON_SCORE time 5000 style 1  // Score ~1~
+0394: play_music 1 
+wait 2000 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at -2241.854 128.3346 radius 1.5 
+Camera.SetAtPos(-2241.854, 128.3346, 1034.641)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO5_1120 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2220.146 135.956 1034.641 
+jump @ZERO5_1140 
+
+:ZERO5_1120
+Actor.PutAt($PLAYER_ACTOR, -2220.146, 135.956, 1034.641)
+
+:ZERO5_1140
+Actor.Angle($PLAYER_ACTOR) = 183.6951
+select_interior 6 
+return 
+
+:ZERO5_1156
+if 
+   not Car.Wrecked(34@)
+jf @ZERO5_1681 
+if 
+   Player.InRemoteMode($PLAYER_CHAR)
+jf @ZERO5_1674 
+01BD: 70@ = current_time_in_ms 
+if 
+81AF:   not car 34@ sphere 0 in_sphere 72@ 73@ 74@ radius 1.5 1.5 1.5 
+jf @ZERO5_1272 
+Car.StorePos(34@, 72@, 73@, 74@)
+0085: 71@ = 70@ // (int) 
+71@ += 4000 
+64@ = 0 
+
+:ZERO5_1272
+if 
+01AF:   car 34@ sphere 0 in_sphere 72@ 73@ 74@ radius 1.5 1.5 1.5 
+jf @ZERO5_1612 
+if 
+001D:   70@ > 71@ // (int) 
+jf @ZERO5_1612 
+if 
+  64@ == 0 
+jf @ZERO5_1369 
+03E5: show_text_box 'ZER2_4'  // Press ~k~~PED_FIREWEAPON~ to self-destruct
+64@ = 1 
+
+:ZERO5_1369
+if 
+00E1:   player 0 pressed_key 17 
+jf @ZERO5_1612 
+53@ = 1 
+48@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Car.Health(34@) = 1
+020C: create_explosion_with_radius 0 at 72@ 73@ 74@ 
+04DB: exit_RC_mode // on foot version 
+53@ = 1 
+48@ = 0 
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+wait 2000 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at -2241.854 128.3346 radius 1.5 
+Camera.SetAtPos(-2241.854, 128.3346, 1034.641)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO5_1576 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2220.146 135.956 1034.641 
+jump @ZERO5_1596 
+
+:ZERO5_1576
+Actor.PutAt($PLAYER_ACTOR, -2220.146, 135.956, 1034.641)
+
+:ZERO5_1596
+Actor.Angle($PLAYER_ACTOR) = 183.6951
+select_interior 6 
+return 
+
+:ZERO5_1612
+Car.StorePos(34@, 37@, 38@, 39@)
+073E: get_car_in_sphere 37@ 38@ 39@ radius 30.0 model #TOPFUN handle_as 36@ 
+if 
+   not Car.Wrecked(36@)
+jf @ZERO5_1674 
+Car.SetMaxSpeed(36@, 10.0)
+
+:ZERO5_1674
+jump @ZERO5_1839 
+
+:ZERO5_1681
+53@ = 1 
+48@ = 0 
+00BC: show_text_highpriority GXT 'ZER2_8' time 5000 flag 1  // ~r~The plane was destroyed!
+Player.CanMove($PLAYER_CHAR) = False
+wait 2000 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at -2241.854 128.3346 radius 1.5 
+Camera.SetAtPos(-2241.854, 128.3346, 1034.641)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO5_1803 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2220.146 135.956 1034.641 
+jump @ZERO5_1823 
+
+:ZERO5_1803
+Actor.PutAt($PLAYER_ACTOR, -2220.146, 135.956, 1034.641)
+
+:ZERO5_1823
+Actor.Angle($PLAYER_ACTOR) = 183.6951
+select_interior 6 
+return 
+
+:ZERO5_1839
+0298: get_player $PLAYER_CHAR destroyed_model #TOPFUN quantity_to $BEEFYBARON_SCORE 
+jump @ZERO5_832 
+
+:ZERO5_1857
+return 
+
+:ZERO5_1859
+Player.CanMove($PLAYER_CHAR) = True
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO5_1894 
+Player.CanMove($PLAYER_CHAR) = True
+
+:ZERO5_1894
+return 
+
+:ZERO5_1896
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @ZERO5_1919 
+Player.CanMove($PLAYER_CHAR) = True
+
+:ZERO5_1919
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+
+:ZERO5_1935
+if 
+  3000 > 32@ 
+jf @ZERO5_1991 
+wait 0 
+if 
+   not Car.Wrecked(34@)
+jf @ZERO5_1984 
+Car.SetSpeedInstantly(34@, 0.0)
+
+:ZERO5_1984
+jump @ZERO5_1935 
+
+:ZERO5_1991
+return 
+
+:ZERO5_1993
+0925: restore_camera_to_user_defined 
+$ONMISSION = 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+Car.RemoveReferences(35@)
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @ZERO5_2076 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @ZERO5_2076 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2244.444 136.8633 34.3203 
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:ZERO5_2076
+01B7: release_weather 
+Player.CanMove($PLAYER_CHAR) = True
+08E7: disable_entrance_markers 0 
+04DB: exit_RC_mode // on foot version 
+Model.Destroy(#TOPFUN)
+Model.Destroy(#RCBARON)
+014F: stop_timer $BEEFYBARON_TIME 
+0151: remove_status_text $BEEFYBARON_SCORE 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+09B9: show_entered_car_name 1 
+mission_cleanup 
+return

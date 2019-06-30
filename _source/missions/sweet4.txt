@@ -1,0 +1,4198 @@
+:SWEET4
+thread 'SWEET4' 
+gosub @SWEET4_4559 
+if 
+wasted_or_busted 
+jf @SWEET4_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @SWEET4_24333 
+
+:SWEET4_85
+gosub @SWEET4_24521 
+end_thread 
+
+:SWEET4_94
+Model.Load(#GREENWOO)
+Model.Load(#TEC9)
+Model.Load(#COLT45)
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+023C: load_special_actor 'RYDER2' as 2 // models 290-299 
+023C: load_special_actor 'SWEET' as 3 // models 290-299 
+038B: load_requested_models 
+
+:SWEET4_150
+if or
+   not Model.Available(#GREENWOO)
+   not Model.Available(#TEC9)
+   not Model.Available(#COLT45)
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+823D:   not special_actor 3 loaded 
+jf @SWEET4_199 
+wait 0 
+jump @SWEET4_150 
+
+:SWEET4_199
+return 
+
+:SWEET4_201
+397@ = 2510.76 
+398@ = -1665.82 
+399@ = 12.3835 
+400@ = 213.1638 
+0395: clear_area 1 at 397@ 398@ 399@ radius 1.0 
+394@ = Actor.Create(CivMale, #SPECIAL01, 397@, 398@, 399@)
+09F6: set_actor 394@ unjackable_through_driver_seat 0 
+Actor.GiveWeaponAndAmmo(394@, Tec9, $6639)
+01B9: set_actor 394@ armed_weapon_to 32 
+Actor.Angle(394@) = 400@
+Actor.WeaponAccuracy(394@) = 90
+Actor.SetWalkStyle(394@, "FATMAN")
+Actor.SetImmunities(394@, 1, 0, 0, 0, 0)
+return 
+
+:SWEET4_347
+404@ = 2509.39 
+405@ = -1672.07 
+406@ = 12.3835 
+407@ = 59.592 
+0395: clear_area 1 at 404@ 405@ 406@ radius 1.0 
+401@ = Actor.Create(CivMale, #SPECIAL02, 404@, 405@, 406@)
+09F6: set_actor 401@ unjackable_through_driver_seat 0 
+Actor.GiveWeaponAndAmmo(401@, Tec9, $6639)
+01B9: set_actor 401@ armed_weapon_to 32 
+Actor.Angle(401@) = 407@
+Actor.WeaponAccuracy(401@) = 90
+Actor.SetWalkStyle(401@, "GANG1")
+Actor.SetImmunities(401@, 1, 0, 0, 0, 0)
+return 
+Actor.RemoveReferences(401@)
+return 
+
+:SWEET4_499
+411@ = 2514.29 
+412@ = -1670.46 
+413@ = 12.3835 
+414@ = 41.1276 
+0395: clear_area 1 at 411@ 412@ 413@ radius 1.0 
+408@ = Actor.Create(CivMale, #SPECIAL03, 411@, 412@, 413@)
+09F6: set_actor 408@ unjackable_through_driver_seat 0 
+Actor.GiveWeaponAndAmmo(408@, Tec9, $6639)
+01B9: set_actor 408@ armed_weapon_to 32 
+Actor.Angle(408@) = 414@
+Actor.WeaponAccuracy(408@) = 90
+Actor.SetWalkStyle(408@, "GANG2")
+Actor.SetImmunities(408@, 1, 0, 0, 0, 0)
+return 
+
+:SWEET4_644
+Model.Load(#BALLAS1)
+Model.Load(#BALLAS2)
+Model.Load(#COLT45)
+Model.Load(#VOODOO)
+Model.Load(#SPRAYCAN)
+038B: load_requested_models 
+
+:SWEET4_669
+if or
+   not Model.Available(#BALLAS1)
+   not Model.Available(#BALLAS2)
+   not Model.Available(#COLT45)
+   not Model.Available(#VOODOO)
+   not Model.Available(#SPRAYCAN)
+jf @SWEET4_714 
+wait 0 
+jump @SWEET4_669 
+
+:SWEET4_714
+04ED: load_animation "GANGS" 
+04ED: load_animation "GHANDS" 
+04ED: load_animation "GHETTO_DB" 
+
+:SWEET4_746
+if or
+84EE:   not animation "GANGS" loaded 
+84EE:   not animation "GHANDS" loaded 
+84EE:   not animation "GHETTO_DB" loaded 
+jf @SWEET4_800 
+wait 0 
+jump @SWEET4_746 
+
+:SWEET4_800
+42@ = 1 
+return 
+018A: $6658 = create_checkpoint_at 2075.55 -1831.09 12.21 
+195@ = Actor.Create(Gang1, #BALLAS1, 465@, 483@, 501@)
+326@ = Actor.Create(Gang1, #BALLAS1, 465@, 483@, 501@)
+395@ = Marker.CreateAboveActor(394@)
+409@ = Marker.CreateAboveActor(408@)
+402@ = Marker.CreateAboveActor(401@)
+
+:SWEET4_889
+527@ = 2077.18 
+531@ = -1362.05 
+535@ = 23.65 
+539@ = 180.0 
+451@ = 2079.42 
+469@ = -1364.08 
+487@ = 23.04 
+505@ = 314.1323 
+0395: clear_area 1 at 527@ 531@ 535@ radius 0.5 
+523@ = Car.Create(#VOODOO, 527@, 531@, 535@)
+415@ = Actor.CreateAsDriver(Gang1, #BALLAS1, 523@)
+Car.Angle(523@) = 539@
+0732: random_car_generator_disable_model #VOODOO 
+0657: car 523@ open_door 2 
+Actor.GiveWeaponAndAmmo(415@, Tec9, $6639)
+Actor.WeaponAccuracy(415@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1080 
+433@ = Marker.CreateAboveActor(415@)
+
+:SWEET4_1080
+452@ = 2075.95 
+470@ = -1365.74 
+488@ = 24.02 
+506@ = 315.85 
+0395: clear_area 1 at 452@ 470@ 488@ radius 0.5 
+416@ = Actor.Create(Gang1, #BALLAS2, 452@, 470@, 488@)
+Actor.GiveWeaponAndAmmo(416@, Pistol, $6639)
+Actor.Angle(416@) = 506@
+Actor.WeaponAccuracy(416@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1208 
+434@ = Marker.CreateAboveActor(416@)
+
+:SWEET4_1208
+453@ = 2079.87 
+471@ = -1361.88 
+489@ = 24.02 
+507@ = 54.15 
+0395: clear_area 1 at 453@ 471@ 489@ radius 0.5 
+417@ = Actor.Create(Gang1, #BALLAS1, 453@, 471@, 489@)
+Actor.GiveWeaponAndAmmo(417@, Pistol, $6639)
+Actor.Angle(417@) = 507@
+Actor.WeaponAccuracy(417@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1336 
+435@ = Marker.CreateAboveActor(417@)
+
+:SWEET4_1336
+454@ = 2079.34 
+472@ = -1360.02 
+490@ = 24.02 
+508@ = 214.36 
+0395: clear_area 1 at 454@ 472@ 490@ radius 0.5 
+418@ = Actor.Create(Gang1, #BALLAS1, 454@, 472@, 490@)
+Actor.GiveWeaponAndAmmo(418@, Pistol, $6639)
+Actor.Angle(418@) = 508@
+Actor.WeaponAccuracy(418@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1464 
+436@ = Marker.CreateAboveActor(418@)
+
+:SWEET4_1464
+return 
+
+:SWEET4_1466
+528@ = 2101.57 
+532@ = -1287.65 
+536@ = 24.17 
+540@ = 5.0 
+455@ = 2101.57 
+473@ = -1287.65 
+491@ = 24.17 
+509@ = 5.0 
+0395: clear_area 1 at 455@ 473@ 491@ radius 0.5 
+524@ = Car.Create(#VOODOO, 528@, 532@, 536@)
+419@ = Actor.CreateAsDriver(Gang1, #BALLAS1, 524@)
+Car.Angle(524@) = 540@
+04E1: open_and_freeze_car_trunk 524@ 
+Actor.GiveWeaponAndAmmo(419@, Tec9, $6639)
+Actor.WeaponAccuracy(419@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1650 
+437@ = Marker.CreateAboveActor(419@)
+
+:SWEET4_1650
+456@ = 2101.58 
+474@ = -1291.78 
+492@ = 24.02 
+510@ = 182.8706 
+0395: clear_area 1 at 456@ 474@ 492@ radius 0.5 
+420@ = Actor.Create(Gang1, #BALLAS2, 456@, 474@, 492@)
+Actor.GiveWeaponAndAmmo(420@, Pistol, $6639)
+Actor.Angle(420@) = 510@
+Actor.WeaponAccuracy(420@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1778 
+438@ = Marker.CreateAboveActor(420@)
+
+:SWEET4_1778
+457@ = 2099.3 
+475@ = -1291.12 
+493@ = 24.02 
+511@ = 105.53 
+0395: clear_area 1 at 457@ 475@ 493@ radius 0.5 
+421@ = Actor.Create(Gang1, #BALLAS1, 457@, 475@, 493@)
+Actor.GiveWeaponAndAmmo(421@, Pistol, $6639)
+Actor.Angle(421@) = 511@
+Actor.WeaponAccuracy(421@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_1906 
+439@ = Marker.CreateAboveActor(421@)
+
+:SWEET4_1906
+458@ = 2093.84 
+476@ = -1290.07 
+494@ = 23.15 
+512@ = 58.035 
+0395: clear_area 1 at 458@ 476@ 494@ radius 0.5 
+422@ = Actor.Create(Gang1, #BALLAS2, 458@, 476@, 494@)
+Actor.GiveWeaponAndAmmo(422@, Pistol, $6639)
+Actor.Angle(422@) = 512@
+Actor.WeaponAccuracy(422@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2034 
+440@ = Marker.CreateAboveActor(422@)
+
+:SWEET4_2034
+return 
+
+:SWEET4_2036
+459@ = 2161.07 
+477@ = -1265.92 
+495@ = 23.02 
+513@ = 257.59 
+0395: clear_area 1 at 459@ 477@ 495@ radius 0.5 
+423@ = Actor.Create(Gang1, #BALLAS1, 459@, 477@, 495@)
+Actor.GiveWeaponAndAmmo(423@, Tec9, $6639)
+Actor.Angle(423@) = 513@
+Actor.WeaponAccuracy(423@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2164 
+441@ = Marker.CreateAboveActor(423@)
+
+:SWEET4_2164
+460@ = 2162.18 
+478@ = -1264.69 
+496@ = 23.03 
+514@ = 238.46 
+0395: clear_area 1 at 460@ 478@ 496@ radius 0.5 
+424@ = Actor.Create(Gang1, #BALLAS1, 460@, 478@, 496@)
+Actor.GiveWeaponAndAmmo(424@, Pistol, $6639)
+Actor.Angle(424@) = 514@
+Actor.WeaponAccuracy(424@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2292 
+442@ = Marker.CreateAboveActor(424@)
+
+:SWEET4_2292
+461@ = 2162.97 
+479@ = -1261.92 
+497@ = 23.02 
+515@ = 45.33 
+0395: clear_area 1 at 461@ 479@ 497@ radius 0.5 
+425@ = Actor.Create(Gang1, #BALLAS2, 461@, 479@, 497@)
+Actor.GiveWeaponAndAmmo(425@, Pistol, $6639)
+Actor.Angle(425@) = 515@
+Actor.WeaponAccuracy(425@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2420 
+443@ = Marker.CreateAboveActor(425@)
+
+:SWEET4_2420
+462@ = 2160.12 
+480@ = -1262.98 
+498@ = 23.03 
+516@ = 18.46 
+0395: clear_area 1 at 462@ 480@ 498@ radius 0.5 
+426@ = Actor.Create(Gang1, #BALLAS2, 462@, 480@, 498@)
+Actor.GiveWeaponAndAmmo(426@, Pistol, $6639)
+Actor.Angle(426@) = 516@
+Actor.WeaponAccuracy(426@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2548 
+444@ = Marker.CreateAboveActor(426@)
+
+:SWEET4_2548
+return 
+
+:SWEET4_2550
+463@ = 1983.8 
+481@ = -1235.98 
+499@ = 20.17 
+517@ = 318.72 
+0395: clear_area 1 at 463@ 481@ 499@ radius 0.5 
+427@ = Actor.Create(Gang1, #BALLAS1, 463@, 481@, 499@)
+Actor.GiveWeaponAndAmmo(427@, Tec9, $6639)
+Actor.Angle(427@) = 517@
+Actor.WeaponAccuracy(427@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2678 
+445@ = Marker.CreateAboveActor(427@)
+
+:SWEET4_2678
+464@ = 1981.3 
+482@ = -1233.94 
+500@ = 20.04 
+518@ = 254.99 
+0395: clear_area 1 at 464@ 482@ 500@ radius 0.5 
+428@ = Actor.Create(Gang1, #BALLAS2, 464@, 482@, 500@)
+Actor.GiveWeaponAndAmmo(428@, Pistol, $6639)
+Actor.Angle(428@) = 518@
+Actor.WeaponAccuracy(428@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2806 
+446@ = Marker.CreateAboveActor(428@)
+
+:SWEET4_2806
+465@ = 1986.67 
+483@ = -1239.76 
+501@ = 19.17 
+519@ = 98.28 
+0395: clear_area 1 at 465@ 483@ 501@ radius 0.5 
+429@ = Actor.Create(Gang1, #BALLAS1, 465@, 483@, 501@)
+Actor.GiveWeaponAndAmmo(429@, SprayPaint, $6639)
+0638: AS_actor 429@ stay_put 1 
+Actor.Angle(429@) = 519@
+Actor.WeaponAccuracy(429@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_2941 
+447@ = Marker.CreateAboveActor(429@)
+
+:SWEET4_2941
+466@ = 1986.54 
+484@ = -1233.03 
+502@ = 20.07 
+520@ = 143.42 
+0395: clear_area 1 at 466@ 484@ 502@ radius 0.5 
+430@ = Actor.Create(Gang1, #BALLAS2, 466@, 484@, 502@)
+Actor.GiveWeaponAndAmmo(430@, Pistol, $6639)
+Actor.Angle(430@) = 520@
+Actor.WeaponAccuracy(430@) = $6638
+if 
+  $6659 == 0 
+jf @SWEET4_3069 
+448@ = Marker.CreateAboveActor(430@)
+
+:SWEET4_3069
+return 
+
+:SWEET4_3071
+Actor.RemoveReferences(415@)
+Actor.RemoveReferences(416@)
+Actor.RemoveReferences(417@)
+Actor.RemoveReferences(418@)
+Actor.RemoveReferences(419@)
+Actor.RemoveReferences(420@)
+Actor.RemoveReferences(421@)
+Actor.RemoveReferences(422@)
+Actor.RemoveReferences(423@)
+Actor.RemoveReferences(424@)
+Actor.RemoveReferences(425@)
+Actor.RemoveReferences(426@)
+Actor.RemoveReferences(427@)
+Actor.RemoveReferences(428@)
+Actor.RemoveReferences(429@)
+Actor.RemoveReferences(430@)
+return 
+
+:SWEET4_3153
+545@ = 2508.16 
+546@ = -1666.47 
+547@ = 13.0 
+548@ = 16.0 
+014C: set_parked_car_generator $2765 cars_to_generate_to 0 
+0674: set_car_model #GREENWOO numberplate "GROVE4L_" 
+0395: clear_area 1 at 545@ 546@ 547@ radius 6.0 
+543@ = Car.Create(#GREENWOO, 545@, 546@, 547@)
+0229: set_car 543@ primary_color_to 59 secondary_color_to 34 
+Car.Angle(543@) = 548@
+544@ = Marker.CreateAboveCar(543@)
+07E0: set_marker 544@ type_to 1 
+053F: set_car 543@ tires_vulnerability 0 
+Car.Health(543@) = 1450
+Player.WantedLevel($PLAYER_CHAR) = 0
+return 
+
+:SWEET4_3306
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_3343 
+if 
+82CA:   not car 543@ bounding_sphere_visible 
+jf @SWEET4_3343 
+Car.Destroy(543@)
+
+:SWEET4_3343
+Model.Destroy(#GREENWOO)
+return 
+
+:SWEET4_3350
+return 
+
+:SWEET4_3352
+return 
+
+:SWEET4_3354
+if and
+   not Actor.Dead(423@)
+   not Actor.Dead(424@)
+   not Actor.Dead(425@)
+   not Actor.Dead(426@)
+jf @SWEET4_3424 
+062F: 192@ = create_group_type 0 
+0630: put_actor 423@ in_group 192@ as_leader 
+0631: put_actor 424@ in_group 192@ 
+0631: put_actor 425@ in_group 192@ 
+0631: put_actor 426@ in_group 192@ 
+
+:SWEET4_3424
+return 
+
+:SWEET4_3426
+if and
+   not Actor.Dead(427@)
+   not Actor.Dead(428@)
+   not Actor.Dead(429@)
+   not Actor.Dead(430@)
+jf @SWEET4_3496 
+062F: 193@ = create_group_type 0 
+0630: put_actor 427@ in_group 193@ as_leader 
+0631: put_actor 428@ in_group 193@ 
+0631: put_actor 429@ in_group 193@ 
+0631: put_actor 430@ in_group 193@ 
+
+:SWEET4_3496
+return 
+
+:SWEET4_3498
+if and
+   not Car.Wrecked(523@)
+   not Car.Wrecked(543@)
+jf @SWEET4_3549 
+0615: define_AS_pack_begin 98@ 
+05CD: AS_actor -1 exit_car 523@ 
+0638: AS_actor -1 stay_put 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 98@ 
+
+:SWEET4_3549
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_3627 
+0615: define_AS_pack_begin 99@ 
+0637: AS_actor -1 goto 2075.15 -1363.85 23.85 mode 6 turn_radius 0.5 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0638: AS_actor -1 stay_put 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 99@ 
+
+:SWEET4_3627
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_3683 
+0615: define_AS_pack_begin 100@ 
+0673: AS_actor -1 dive_to_offset 1.0 1.0 time_on_ground 500 ms 
+0638: AS_actor -1 stay_put 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 100@ 
+
+:SWEET4_3683
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_3793 
+0615: define_AS_pack_begin 118@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKG" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKH" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0616: define_AS_pack_end 118@ 
+
+:SWEET4_3793
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_3832 
+0615: define_AS_pack_begin 101@ 
+0638: AS_actor -1 stay_put 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 101@ 
+
+:SWEET4_3832
+return 
+
+:SWEET4_3834
+if and
+   not Car.Wrecked(524@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_3907 
+0615: define_AS_pack_begin 102@ 
+05CD: AS_actor -1 exit_car 524@ 
+0637: AS_actor -1 goto 545@ 546@ 547@ mode 4 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 102@ 
+
+:SWEET4_3907
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_3946 
+0615: define_AS_pack_begin 103@ 
+06E3: AS_actor -1 roll_sideways 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 103@ 
+
+:SWEET4_3946
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4013 
+0615: define_AS_pack_begin 104@ 
+0637: AS_actor -1 goto 2080.66 -1292.61 24.02 mode 6 turn_radius 0.5 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 104@ 
+
+:SWEET4_4013
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4080 
+0615: define_AS_pack_begin 105@ 
+0637: AS_actor -1 goto 2132.0 -1307.0 24.0 mode 6 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 105@ 
+
+:SWEET4_4080
+return 
+
+:SWEET4_4082
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4183 
+0615: define_AS_pack_begin 106@ 
+0637: AS_actor -1 goto 2163.0 -1262.0 24.0 mode 6 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2080.0 -1261.0 24.0 mode 6 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 106@ 
+
+:SWEET4_4183
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4216 
+0615: define_AS_pack_begin 107@ 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 107@ 
+
+:SWEET4_4216
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_4260 
+0615: define_AS_pack_begin 108@ 
+0638: AS_actor -1 stay_put 1 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 108@ 
+
+:SWEET4_4260
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4361 
+0615: define_AS_pack_begin 109@ 
+0637: AS_actor -1 goto 2163.0 -1262.0 24.0 mode 6 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 2080.0 -1261.0 24.0 mode 6 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 109@ 
+
+:SWEET4_4361
+return 
+
+:SWEET4_4363
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4424 
+0615: define_AS_pack_begin 110@ 
+0637: AS_actor -1 goto 545@ 546@ 547@ mode 4 turn_radius 1.0 stop_radius 5.0 look_at_actor $PLAYER_ACTOR 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 110@ 
+
+:SWEET4_4424
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_4462 
+0615: define_AS_pack_begin 111@ 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 111@ 
+
+:SWEET4_4462
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4524 
+0615: define_AS_pack_begin 112@ 
+0668: AS_actor -1 rotate_and_shoot_at 1984.21 -1239.04 20.5 6000 ms 
+05DB: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 50.0 timelimit -1 
+0616: define_AS_pack_end 112@ 
+
+:SWEET4_4524
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_4557 
+0615: define_AS_pack_begin 113@ 
+0672: AS_actor -1 attack_car 543@ 
+0616: define_AS_pack_end 113@ 
+
+:SWEET4_4557
+return 
+
+:SWEET4_4559
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+$6637 = 0 
+43@ = 0 
+$6638 = 30 
+$6639 = 30000 
+$6659 = 0 
+$6660 = 0 
+49@ = 0 
+50@ = 0 
+51@ = 0 
+52@ = 0 
+48@ = 0 
+396@ = 0 
+403@ = 0 
+410@ = 0 
+$6661 = 0 
+$6662 = 0 
+$6663 = 0 
+$6664 = 0 
+$6665 = 0 
+$6666 = 0 
+$6667 = 0 
+$6668 = 0 
+77@ = 0 
+$6640 = 0 
+$6641 = 0 
+$6642 = 0 
+$6643 = 0 
+$6644 = 0 
+$6645 = 0 
+$6646 = 0 
+$6647 = 0 
+$6648 = 0 
+$6649 = 0 
+$6650 = 0 
+$6651 = 0 
+$6652 = 0 
+$6653 = 0 
+$6654 = 0 
+$6655 = 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+34@ = 0 
+42@ = 0 
+84@ = 0 
+94@ = 0 
+98@ = 1 
+99@ = 2 
+100@ = 3 
+101@ = 4 
+117@ = 5 
+116@ = 6 
+96@ = 7 
+97@ = 8 
+118@ = 9 
+77@ = 0 
+85@ = 25.0 
+451@ = 2227.72 
+469@ = -1315.79 
+487@ = 24.04 
+456@ = 2099.8 
+474@ = -1288.37 
+492@ = 24.35 
+461@ = 2184.97 
+479@ = -1230.92 
+497@ = 24.02 
+466@ = 2157.77 
+484@ = -1345.03 
+502@ = 24.04 
+89@ = 2507.0 
+90@ = -1671.0 
+91@ = 12.0 
+119@ = 2500.026 
+129@ = -1661.18 
+139@ = 17.763 
+120@ = 2194.35 
+130@ = -1380.42 
+140@ = 24.34 
+121@ = 2082.42 
+131@ = -1362.58 
+141@ = 26.81 
+122@ = 2078.99 
+132@ = -1366.22 
+142@ = 25.09 
+123@ = 2152.0 
+133@ = -1339.0 
+143@ = 30.0 
+124@ = 2502.16 
+134@ = -1661.95 
+144@ = 15.76 
+125@ = 2509.18 
+135@ = -1662.81 
+145@ = 14.07 
+126@ = 2510.63 
+136@ = -1665.81 
+146@ = 13.83 
+127@ = 2511.89 
+137@ = -1668.39 
+147@ = 14.26 
+128@ = 0.0 
+138@ = 0.0 
+148@ = 0.0 
+54@ = 2132.239 
+55@ = -1379.652 
+56@ = 22.8281 
+455@ = 2101.57 
+473@ = -1287.65 
+491@ = 24.17 
+509@ = 5.0 
+459@ = 2161.07 
+477@ = -1265.92 
+495@ = 23.02 
+513@ = 257.59 
+463@ = 1983.8 
+481@ = -1235.98 
+499@ = 20.17 
+517@ = 318.72 
+391@ = 1 
+392@ = 2 
+389@ = 0 
+393@ = 1 
+390@ = 0 
+05AA: 204@s = 'SWE4_AA' // @s = 'short'  // ~z~Where we going, homie?
+0209: 20@ = random_int_in_ranges 0 3 
+if 
+  20@ == 0 
+jf @SWEET4_5679 
+05AA: 206@s = 'SWE4_AB' // @s = 'short'  // ~z~Rollin' Heights Ballas country.
+jump @SWEET4_5732 
+
+:SWEET4_5679
+if 
+  20@ == 1 
+jf @SWEET4_5718 
+05AA: 206@s = 'SWE4_AC' // @s = 'short'  // ~z~Front Yard Ballas country.
+jump @SWEET4_5732 
+
+:SWEET4_5718
+05AA: 206@s = 'SWE4_AD' // @s = 'short'  // ~z~Kilo Trays country.
+
+:SWEET4_5732
+05AA: 208@s = 'SWE4_AC' // @s = 'short'  // ~z~Front Yard Ballas country.
+05AA: 210@s = 'SWE4_AD' // @s = 'short'  // ~z~Kilo Trays country.
+05AA: 212@s = 'SWE4_AE' // @s = 'short'  // ~z~Do us a little drive by, huh?
+05AA: 214@s = 'SWE4_AF' // @s = 'short'  // ~z~For real. You down, Carl?
+05AA: 216@s = 'SWE4_AG' // @s = 'short'  // ~z~Man I ain't even strapped.
+05AA: 218@s = 'SWE4_AH' // @s = 'short'  // ~z~You ain't cold enough for that shit, CJ.
+05AA: 220@s = 'SWE4_AI' // @s = 'short'  // ~z~You know somethin', matter of fact, you're our chauffeur for this little gig. C'mon.
+05AA: 222@s = 'SWE4_AJ' // @s = 'short'  // ~z~Gee, thanks G.
+05AA: 224@s = 'SWE4_AK' // @s = 'short'  // ~z~Just don't drive like no fool.
+05AA: 226@s = 'SWE4_BA' // @s = 'short'  // ~z~Yeah - Ballas turf. You dogs ready?
+05AA: 228@s = 'SWE4_BB' // @s = 'short'  // ~z~Yeah, for sure, I'm ready.
+05AA: 230@s = 'SWE4_BC' // @s = 'short'  // ~z~Carl, Just concentrate on the driving and we'll take care of the shooting.
+05AA: 232@s = 'SWE4_BD' // @s = 'short'  // ~z~Listen to the man, fool! And try not to park us up a tree or something.
+05AA: 234@s = 'SWE4_BE' // @s = 'short'  // ~z~Yeah if the car stops, we're dead meat.
+05AA: 236@s = 'SWE4_CA' // @s = 'short'  // ~z~What did I say? Told y'all CJ drives like a blind motherfucker.
+05AA: 238@s = 'SWE4_CB' // @s = 'short'  // ~z~CJ, you a mark. Don't ever by a ride, never.
+05AA: 240@s = 'SWE4_CC' // @s = 'short'  // ~z~This fool crashing on purpose - I swear!
+05AA: 242@s = 'SWE4_DA' // @s = 'short'  // ~z~Shit! Get us out of here! We're sitting ducks!
+05AA: 244@s = 'SWE4_DB' // @s = 'short'  // ~z~Damn, man, move! MOVE!
+05AA: 246@s = 'SWE4_DC' // @s = 'short'  // ~z~What is you doing! CJ?!
+05AA: 248@s = 'SWE4_DD' // @s = 'short'  // ~z~Get us the hell out of here!
+05AA: 250@s = 'SWE4_DE' // @s = 'short'  // ~z~Man, they trying to get us popped!
+05AA: 252@s = 'SWE4_DF' // @s = 'short'  // ~z~What the fuck are you doing, CJ? Move it!
+05AA: 254@s = 'SWE4_EA' // @s = 'short'  // ~z~Man, what'd I tell y'all - told you he was a buster!
+05AA: 256@s = 'SWE4_EB' // @s = 'short'  // ~z~Carl, don't run out on me again!
+05AA: 258@s = 'SWE4_EC' // @s = 'short'  // ~z~Carl's quitting on us!
+05AA: 260@s = 'SWE4_FA' // @s = 'short'  // ~z~Damn, he's shook us!
+05AA: 262@s = 'SWE4_FB' // @s = 'short'  // ~z~Fuck you, CJ! I'm on it.
+05AA: 264@s = 'SWE4_FC' // @s = 'short'  // ~z~I'll get us up out of here!
+05AA: 266@s = 'SWE4_FD' // @s = 'short'  // ~z~Motherfucker! I've got the wheel!
+if 
+  20@ == 0 
+jf @SWEET4_6191 
+05AA: 268@s = 'SWE4_GA' // @s = 'short'  // ~z~Smash on it, Carl, smash!
+jump @SWEET4_6244 
+
+:SWEET4_6191
+if 
+  20@ == 1 
+jf @SWEET4_6230 
+05AA: 268@s = 'SWE4_GB' // @s = 'short'  // ~z~Damn, the ride is hot! Every one-time in South Central is going to be looking for this car!
+jump @SWEET4_6244 
+
+:SWEET4_6230
+05AA: 268@s = 'SWE4_OB' // @s = 'short'  // ~z~CJ, get us to a spray shop!
+
+:SWEET4_6244
+05AA: 270@s = 'SWE4_GB' // @s = 'short'  // ~z~Damn, the ride is hot! Every one-time in South Central is going to be looking for this car!
+05AA: 272@s = 'SWE4_HA' // @s = 'short'  // ~z~That's right! Now let's get back to the Grove!
+05AA: 274@s = 'SWE4_HB' // @s = 'short'  // ~z~Yeah, what you waiting for, Carl?
+05AA: 276@s = 'SWE4_KA' // @s = 'short'  // ~z~Yeah, Grove is back, man, Grove is back!
+05AA: 278@s = 'SWE4_KB' // @s = 'short'  // ~z~Yeah for sure. They was slippin' man!
+05AA: 280@s = 'SWE4_KC' // @s = 'short'  // ~z~Man. I'm shocked you didn't get us killed, CJ!
+05AA: 282@s = 'SWE4_KD' // @s = 'short'  // ~z~Let me check myself. Am I dead?
+05AA: 284@s = 'SWE4_KF' // @s = 'short'  // ~z~Hey, Carl, ignore that motherfucker, you did good today.
+05AA: 286@s = 'SWE4_KG' // @s = 'short'  // ~z~You're down with the Grove and the Ballas know it,
+05AA: 288@s = 'SWE4_KH' // @s = 'short'  // ~z~so watch yourself from now on, CJ.
+05AA: 290@s = 'SWE4_KE' // @s = 'short'  // ~z~Yeah, yeah, for sure, you know that. I'll see y'all later.
+05AA: 292@s = 'SWE4_KI' // @s = 'short'  // ~z~Here, take this, go get yourself some beers.
+05AA: 294@s = 'SWE4_LA' // @s = 'short'  // ~z~We iced them! CJ, let's hunt down some more!
+05AA: 296@s = 'SWE4_LB' // @s = 'short'  // ~z~That was way too easy! Let's go blast on some more Ballas fools.
+05AA: 298@s = 'SWE4_LC' // @s = 'short'  // ~z~What you waiting for, CJ? Find us some more Ballas so we can cap 'em.
+05AA: 300@s = 'SWE4_MA' // @s = 'short'  // ~z~Some of those fools are still standing, we gotta make another pass!
+05AA: 302@s = 'SWE4_MB' // @s = 'short'  // ~z~We didn't get all those motherfuckers!
+05AA: 304@s = 'SWE4_MC' // @s = 'short'  // ~z~Let's finish 'em off! Woo Woo!
+05AA: 306@s = 'SWE4_MD' // @s = 'short'  // ~z~Where you going CJ? There's sill some more Ballas need to get popped.
+05AA: 308@s = 'SWE4_NA' // @s = 'short'  // ~z~CJ! You such a liability, man!
+05AA: 310@s = 'SWE4_NB' // @s = 'short'  // ~z~The one-times' on us again!
+05AA: 312@s = 'SWE4_NC' // @s = 'short'  // ~z~CJ! Are you trying to get us pinched?
+05AA: 314@s = 'SWE4_OA' // @s = 'short'  // ~z~C'mon, CJ, we gotta lose this attention!
+05AA: 316@s = 'SWE4_OB' // @s = 'short'  // ~z~CJ, get us to a spray shop!
+05AA: 318@s = 'SWE4_OC' // @s = 'short'  // ~z~C'mon, CJ, get us someplace safe!
+05AA: 320@s = 'SWE4_PA' // @s = 'short'  // ~z~Now, what was I sayin'?
+05AA: 322@s = 'SWE4_PB' // @s = 'short'  // ~z~Hey, what was we hollerin' about?
+05AA: 324@s = 'SWE4_PC' // @s = 'short'  // ~z~OK, we're cool. Now what was I sayin'?
+04AF: 328@ = 38000 // = constant 
+if 
+  20@ == 0 
+jf @SWEET4_6681 
+04AF: 329@ = 38001 // = constant 
+jump @SWEET4_6726 
+
+:SWEET4_6681
+if 
+  20@ == 1 
+jf @SWEET4_6716 
+04AF: 329@ = 38002 // = constant 
+jump @SWEET4_6726 
+
+:SWEET4_6716
+04AF: 329@ = 38003 // = constant 
+
+:SWEET4_6726
+04AF: 330@ = 38002 // = constant 
+04AF: 331@ = 38003 // = constant 
+04AF: 332@ = 38004 // = constant 
+04AF: 333@ = 38005 // = constant 
+04AF: 334@ = 38006 // = constant 
+04AF: 335@ = 38007 // = constant 
+04AF: 336@ = 38008 // = constant 
+04AF: 337@ = 38009 // = constant 
+04AF: 338@ = 38010 // = constant 
+04AF: 339@ = 38011 // = constant 
+04AF: 340@ = 38012 // = constant 
+04AF: 341@ = 38013 // = constant 
+04AF: 342@ = 38014 // = constant 
+04AF: 343@ = 38015 // = constant 
+04AF: 344@ = 38016 // = constant 
+04AF: 345@ = 38017 // = constant 
+04AF: 346@ = 38018 // = constant 
+04AF: 347@ = 38019 // = constant 
+04AF: 348@ = 38020 // = constant 
+04AF: 349@ = 38021 // = constant 
+04AF: 350@ = 38022 // = constant 
+04AF: 351@ = 38023 // = constant 
+04AF: 352@ = 38024 // = constant 
+04AF: 353@ = 38025 // = constant 
+04AF: 354@ = 38026 // = constant 
+04AF: 355@ = 38027 // = constant 
+04AF: 356@ = 38028 // = constant 
+04AF: 357@ = 38029 // = constant 
+04AF: 358@ = 38030 // = constant 
+04AF: 359@ = 38031 // = constant 
+if 
+  20@ == 0 
+jf @SWEET4_7061 
+04AF: 360@ = 38032 // = constant 
+jump @SWEET4_7106 
+
+:SWEET4_7061
+if 
+  20@ == 1 
+jf @SWEET4_7096 
+04AF: 360@ = 38033 // = constant 
+jump @SWEET4_7106 
+
+:SWEET4_7096
+04AF: 360@ = 38056 // = constant 
+
+:SWEET4_7106
+04AF: 361@ = 38033 // = constant 
+04AF: 362@ = 38034 // = constant 
+04AF: 363@ = 38035 // = constant 
+04AF: 364@ = 38036 // = constant 
+04AF: 365@ = 38037 // = constant 
+04AF: 366@ = 38038 // = constant 
+04AF: 367@ = 38039 // = constant 
+04AF: 368@ = 38041 // = constant 
+04AF: 369@ = 38042 // = constant 
+04AF: 370@ = 38043 // = constant 
+04AF: 371@ = 38040 // = constant 
+04AF: 372@ = 38044 // = constant 
+04AF: 373@ = 38045 // = constant 
+04AF: 374@ = 38046 // = constant 
+04AF: 375@ = 38047 // = constant 
+04AF: 376@ = 38048 // = constant 
+04AF: 377@ = 38049 // = constant 
+04AF: 378@ = 38050 // = constant 
+04AF: 379@ = 38051 // = constant 
+04AF: 380@ = 38052 // = constant 
+04AF: 381@ = 38053 // = constant 
+04AF: 382@ = 38054 // = constant 
+04AF: 383@ = 38055 // = constant 
+04AF: 384@ = 38056 // = constant 
+04AF: 385@ = 38057 // = constant 
+04AF: 386@ = 38058 // = constant 
+04AF: 387@ = 38059 // = constant 
+04AF: 388@ = 38060 // = constant 
+03D5: remove_text 'M_FAIL'  // ~r~MISSION FAILED!
+054C: use_GXT_table 'SWEET4' 
+0395: clear_area 0 at 2518.0 -1673.0 14.0 radius 50.0 
+fade 0 1000 
+
+:SWEET4_7439
+if 
+fading 
+jf @SWEET4_7463 
+wait 0 
+jump @SWEET4_7439 
+
+:SWEET4_7463
+02E4: load_cutscene_data 'SWEET4A' 
+fade 0 0 
+
+:SWEET4_7480
+if 
+86B9:   not cutscene_data_loaded 
+jf @SWEET4_7504 
+wait 0 
+jump @SWEET4_7480 
+
+:SWEET4_7504
+fade 0 0 
+02E7: start_cutscene 
+fade 0 0 
+fade 1 1000 
+
+:SWEET4_7525
+if 
+82E9:   not cutscene_reached_end 
+jf @SWEET4_7549 
+wait 0 
+jump @SWEET4_7525 
+
+:SWEET4_7549
+fade 0 0 
+
+:SWEET4_7555
+if 
+fading 
+jf @SWEET4_7579 
+wait 0 
+jump @SWEET4_7555 
+
+:SWEET4_7579
+02EA: end_cutscene 
+043C: disable_sounds_after_fadeout 0 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+041E: set_radio_station 7 
+08EA: enable_gangs_spawn 0 
+gosub @SWEET4_94 
+gosub @SWEET4_201 
+gosub @SWEET4_347 
+gosub @SWEET4_499 
+gosub @SWEET4_3153 
+if and
+   not Actor.Dead(394@)
+   not Actor.Dead(401@)
+   not Actor.Dead(408@)
+   not Car.Wrecked(543@)
+jf @SWEET4_7813 
+07A1: set_walk_speed 4 
+0615: define_AS_pack_begin 97@ 
+05BA: AS_actor -1 move_mouth 1000 ms 
+05CA: AS_actor -1 enter_car 543@ passenger_seat 0 time -1 
+0616: define_AS_pack_end 97@ 
+0618: assign_actor 394@ to_AS_pack 97@ 
+07A1: set_walk_speed 4 
+05CA: AS_actor 401@ enter_car 543@ passenger_seat 1 time -1 
+07A1: set_walk_speed 4 
+05CA: AS_actor 408@ enter_car 543@ passenger_seat 2 time -1 
+060A: create_decision_maker_type 0 store_to 47@ // decision\allowed\m_.ped files 
+060B: set_actor 394@ decision_maker_to 47@ 
+060B: set_actor 401@ decision_maker_to 47@ 
+060B: set_actor 408@ decision_maker_to 47@ 
+039E: set_actor $PLAYER_ACTOR locked 1 while_in_car 
+039E: set_actor 394@ locked 1 while_in_car 
+039E: set_actor 401@ locked 1 while_in_car 
+039E: set_actor 408@ locked 1 while_in_car 
+01BD: $6669 = current_time_in_ms 
+$6672 = -1 
+
+:SWEET4_7813
+050F: get_max_wanted_level_to 53@ 
+01F0: set_max_wanted_level_to 0 
+099E: enable_police_patrols 0 
+Camera.SetBehindPlayer
+03C7: set_sensitivity_to_crime 0.7 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_7888 
+Actor.PutAt($PLAYER_ACTOR, 2516.92, -1679.45, 13.42)
+Actor.Angle($PLAYER_ACTOR) = 27.25
+
+:SWEET4_7888
+gosub @SWEET4_644 
+00BC: show_text_highpriority GXT 'SWE4_00' time 5000 flag 1  // ~s~Get in the ~b~car~s~.
+01BD: 61@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+
+:SWEET4_7947
+wait 0 
+if 
+   not 389@ == 0 
+jf @SWEET4_8399 
+if 
+  390@ == 0 
+jf @SWEET4_8015 
+if 
+03D0:   wav 392@ loaded 
+jf @SWEET4_8008 
+040D: unload_wav 392@ 
+
+:SWEET4_8008
+390@ = 1 
+
+:SWEET4_8015
+if 
+  390@ == 1 
+jf @SWEET4_8059 
+03CF: load_wav 327@(389@,62i) as 391@ 
+gosub @SWEET4_25101 
+390@ = 2 
+
+:SWEET4_8059
+if 
+  390@ == 2 
+jf @SWEET4_8168 
+if 
+03D0:   wav 391@ loaded 
+jf @SWEET4_8168 
+if 
+   not 326@ == 0 
+jf @SWEET4_8142 
+if 
+   not Actor.Dead(326@)
+jf @SWEET4_8142 
+0967: actor 326@ move_mouth 10000 ms 
+0A09: set_actor 326@ muted 1 // versionB 
+
+:SWEET4_8142
+03D1: play_wav 391@ 
+00BC: show_text_highpriority GXT 202@(389@,62s) time 10000 flag 1 
+390@ = 3 
+
+:SWEET4_8168
+if 
+  390@ == 3 
+jf @SWEET4_8399 
+if 
+03D2:   wav 391@ ended 
+jf @SWEET4_8338 
+03D5: remove_text 202@(389@,62s) 
+if 
+   not 326@ == 0 
+jf @SWEET4_8257 
+if 
+   not Actor.Dead(326@)
+jf @SWEET4_8257 
+0968: actor 326@ stop_mouth 
+0A09: set_actor 326@ muted 0 // versionB 
+
+:SWEET4_8257
+if 
+  391@ == 1 
+jf @SWEET4_8296 
+391@ = 2 
+392@ = 1 
+jump @SWEET4_8310 
+
+:SWEET4_8296
+391@ = 1 
+392@ = 2 
+
+:SWEET4_8310
+389@ = 0 
+390@ = 0 
+$6672 += 1 
+jump @SWEET4_8399 
+
+:SWEET4_8338
+if 
+83D0:   not wav 392@ loaded 
+jf @SWEET4_8399 
+if 
+  60 > 389@ 
+jf @SWEET4_8399 
+0085: 393@ = 389@ // (int) 
+393@ += 1 
+03CF: load_wav 327@(393@,62i) as 392@ 
+
+:SWEET4_8399
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SWEET4_8421 
+jump @SWEET4_24419 
+
+:SWEET4_8421
+if or
+  8 > $6637 
+  $6637 == 666 
+jf @SWEET4_8496 
+if or
+   Actor.Dead(394@)
+   Actor.Dead(401@)
+   Actor.Dead(408@)
+jf @SWEET4_8496 
+00BC: show_text_highpriority GXT 'SWE4_04' time 5000 flag 1  // ~r~Your homies didn't make it.
+jump @SWEET4_24333 
+
+:SWEET4_8496
+if 
+   Car.Wrecked(543@)
+jf @SWEET4_8535 
+00BC: show_text_highpriority GXT 'SWE4_04' time 5000 flag 1  // ~r~Your homies didn't make it.
+jump @SWEET4_24333 
+
+:SWEET4_8535
+if 
+  $6637 == 0 
+jf @SWEET4_9494 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_9494 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(394@)
+   not Actor.Dead(401@)
+   not Actor.Dead(408@)
+jf @SWEET4_9494 
+if and
+   Actor.InCar($PLAYER_ACTOR, 543@)
+   Actor.InCar(394@, 543@)
+   Actor.InCar(401@, 543@)
+   Actor.InCar(408@, 543@)
+jf @SWEET4_8689 
+00BE: text_clear_all 
+0647: AS_actor 394@ clear_look_task 
+Marker.Disable(544@)
+Marker.Disable(395@)
+Marker.Disable(402@)
+Marker.Disable(409@)
+01BD: $6669 = current_time_in_ms 
+$6659 = 0 
+$6637 = 1 
+
+:SWEET4_8689
+if 
+   Actor.InCar($PLAYER_ACTOR, 543@)
+jf @SWEET4_9494 
+if 
+  396@ == 0 
+jf @SWEET4_8772 
+if 
+   not Actor.InCar(394@, 543@)
+jf @SWEET4_8772 
+Marker.Disable(544@)
+395@ = Marker.CreateAboveActor(394@)
+07E0: set_marker 395@ type_to 1 
+396@ = 1 
+
+:SWEET4_8772
+if 
+  396@ == 1 
+jf @SWEET4_8886 
+if 
+   not Actor.InCar(394@, 543@)
+jf @SWEET4_8886 
+if 
+8203:   not actor 394@ near_car 543@ radius 8.0 8.0 flag 0 on_foot 
+jf @SWEET4_8862 
+00BC: show_text_highpriority GXT 'SWE4_09' time 100 flag 1  // ~s~You've left ~b~Smoke ~s~behind!
+jump @SWEET4_8886 
+
+:SWEET4_8862
+05CA: AS_actor 394@ enter_car 543@ passenger_seat 0 time -1 
+01BD: 61@ = current_time_in_ms 
+396@ = 2 
+
+:SWEET4_8886
+if 
+  396@ == 2 
+jf @SWEET4_8970 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 1000 
+jf @SWEET4_8970 
+if 
+  73@ > 3000 
+jf @SWEET4_8970 
+396@ = 1 
+
+:SWEET4_8970
+if 
+  403@ == 0 
+jf @SWEET4_9034 
+if 
+   not Actor.InCar(401@, 543@)
+jf @SWEET4_9034 
+Marker.Disable(544@)
+402@ = Marker.CreateAboveActor(401@)
+07E0: set_marker 402@ type_to 1 
+403@ = 1 
+
+:SWEET4_9034
+if 
+  403@ == 1 
+jf @SWEET4_9148 
+if 
+   not Actor.InCar(401@, 543@)
+jf @SWEET4_9148 
+if 
+8203:   not actor 401@ near_car 543@ radius 8.0 8.0 flag 0 on_foot 
+jf @SWEET4_9124 
+00BC: show_text_highpriority GXT 'SWE4_10' time 100 flag 1  // ~s~You've left ~b~Ryder ~s~behind!
+jump @SWEET4_9148 
+
+:SWEET4_9124
+05CA: AS_actor 401@ enter_car 543@ passenger_seat 1 time -1 
+01BD: 61@ = current_time_in_ms 
+403@ = 2 
+
+:SWEET4_9148
+if 
+  403@ == 2 
+jf @SWEET4_9232 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 1000 
+jf @SWEET4_9232 
+if 
+  73@ > 3000 
+jf @SWEET4_9232 
+403@ = 1 
+
+:SWEET4_9232
+if 
+  410@ == 0 
+jf @SWEET4_9296 
+if 
+   not Actor.InCar(408@, 543@)
+jf @SWEET4_9296 
+Marker.Disable(544@)
+409@ = Marker.CreateAboveActor(408@)
+07E0: set_marker 409@ type_to 1 
+410@ = 1 
+
+:SWEET4_9296
+if 
+  410@ == 1 
+jf @SWEET4_9410 
+if 
+   not Actor.InCar(408@, 543@)
+jf @SWEET4_9410 
+if 
+8203:   not actor 408@ near_car 543@ radius 8.0 8.0 flag 0 on_foot 
+jf @SWEET4_9386 
+00BC: show_text_highpriority GXT 'SWE4_11' time 100 flag 1  // ~s~You've left ~b~Sweet ~s~behind!
+jump @SWEET4_9410 
+
+:SWEET4_9386
+05CA: AS_actor 408@ enter_car 543@ passenger_seat 2 time -1 
+01BD: 61@ = current_time_in_ms 
+410@ = 2 
+
+:SWEET4_9410
+if 
+  410@ == 2 
+jf @SWEET4_9494 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 1000 
+jf @SWEET4_9494 
+if 
+  73@ > 3000 
+jf @SWEET4_9494 
+410@ = 1 
+
+:SWEET4_9494
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(394@)
+   not Actor.Dead(401@)
+   not Actor.Dead(408@)
+jf @SWEET4_10465 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_10465 
+if and
+   Actor.InCar($PLAYER_ACTOR, 543@)
+   Actor.InCar(394@, 543@)
+   Actor.InCar(401@, 543@)
+   Actor.InCar(408@, 543@)
+jf @SWEET4_10465 
+if 
+  $6637 == 1 
+jf @SWEET4_9609 
+$6637 = 2 
+
+:SWEET4_9609
+if 
+  $6637 == 2 
+jf @SWEET4_9667 
+$6660 = 0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+018A: 57@ = create_checkpoint_at 54@ 55@ 56@ 
+01BD: 61@ = current_time_in_ms 
+$6637 = 3 
+
+:SWEET4_9667
+if 
+  $6637 == 3 
+jf @SWEET4_9825 
+if 
+  43@ == 0 
+jf @SWEET4_9755 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 6000 
+jf @SWEET4_9755 
+01BD: 61@ = current_time_in_ms 
+43@ = 1 
+
+:SWEET4_9755
+if 
+  43@ == 1 
+jf @SWEET4_9825 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 5000 
+jf @SWEET4_9825 
+01BD: 61@ = current_time_in_ms 
+43@ = 2 
+
+:SWEET4_9825
+if 
+  $6637 == 3 
+jf @SWEET4_10465 
+if and
+  $6666 == 0 
+  34@ == 0 
+jf @SWEET4_10465 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_10465 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 54@ 55@ 56@ radius 150.0 150.0 150.0 sphere 0 in_car 
+jf @SWEET4_9951 
+if 
+  42@ == 0 
+jf @SWEET4_9951 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+
+:SWEET4_9951
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 54@ 55@ 56@ radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @SWEET4_10465 
+if 
+0448:   actor $PLAYER_ACTOR in_car 543@ 
+jf @SWEET4_10465 
+Player.CanMove($PLAYER_CHAR) = False
+$6672 = 9 
+Marker.Disable(57@)
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+fade 0 300 
+01BD: $6669 = current_time_in_ms 
+0605: actor $PLAYER_ACTOR perform_animation "GDB_CAR_PLY" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+01B9: set_actor 394@ armed_weapon_to 32 
+0605: actor 394@ perform_animation "GDB_CAR_SMO" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+01B9: set_actor 408@ armed_weapon_to 32 
+0605: actor 408@ perform_animation "GDB_CAR_SWE" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+01B9: set_actor 401@ armed_weapon_to 32 
+0605: actor 401@ perform_animation "GDB_CAR_RYD" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0852: set_car 543@ damages_visible 0 
+198@ = Object.Create(#KB_BEER, 2440.58, -1979.89, 14.2)
+gosub @SWEET4_889 
+gosub @SWEET4_3350 
+gosub @SWEET4_3498 
+if 
+   not Actor.Dead(418@)
+jf @SWEET4_10365 
+06AB: set_actor 418@ all_weapons_hidden 1 
+070A: AS_actor 418@ attach_to_object 198@ offset 0.1 0.1 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time -1 
+
+:SWEET4_10365
+Model.Load(#LAEROAD30)
+
+:SWEET4_10369
+if 
+fading 
+jf @SWEET4_10393 
+wait 0 
+jump @SWEET4_10369 
+
+:SWEET4_10393
+if 
+   not Model.Available(#LAEROAD30)
+jf @SWEET4_10419 
+wait 0 
+jump @SWEET4_10393 
+
+:SWEET4_10419
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_10444 
+0697: set_car 543@ remove_component 4 visible_effect_flag 1 
+
+:SWEET4_10444
+$6637 = 4 
+34@ = 1 
+$6665 = 1 
+
+:SWEET4_10465
+if and
+  $6637 == 4 
+  $6660 == 0 
+jf @SWEET4_10549 
+if and
+   not Actor.Dead(401@)
+   not Actor.Dead(394@)
+jf @SWEET4_10549 
+if and
+   not Car.Wrecked(543@)
+   not Actor.Dead(408@)
+jf @SWEET4_10549 
+01BD: 59@ = current_time_in_ms 
+01BD: $6669 = current_time_in_ms 
+$6660 = 1 
+
+:SWEET4_10549
+if 
+  $6637 == 4 
+jf @SWEET4_11823 
+if 
+  $6660 > 0 
+jf @SWEET4_10665 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 2000 
+jf @SWEET4_10665 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SWEET4_10665 
+00BE: text_clear_all 
+$6672 = 14 
+50@ = 1 
+$6660 = 4 
+
+:SWEET4_10665
+if 
+  $6660 == 1 
+jf @SWEET4_10919 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 300 
+jf @SWEET4_10919 
+if 
+  $6665 == 1 
+jf @SWEET4_10919 
+if 
+   not Actor.Dead(401@)
+jf @SWEET4_10919 
+041D: set_camera_near_clip 0.1 
+0407: store_coords_to 120@ 130@ 140@ from_car 543@ with_offset -0.337 1.566 0.657 
+0407: store_coords_to 122@ 132@ 142@ from_car 543@ with_offset 0.038 -1.033 0.088 
+Camera.SetPosition(120@, 130@, 140@, 0.0, 0.0, 0.0)
+Camera.PointAt(122@, 132@, 142@, 2)
+01BD: 59@ = current_time_in_ms 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 300 
+
+:SWEET4_10881
+if 
+fading 
+jf @SWEET4_10905 
+wait 0 
+jump @SWEET4_10881 
+
+:SWEET4_10905
+$6672 = 9 
+$6660 = 2 
+
+:SWEET4_10919
+if 
+  $6660 == 2 
+jf @SWEET4_11041 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 10700 
+jf @SWEET4_11041 
+if 
+  $6665 == 1 
+jf @SWEET4_11041 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 300 
+
+:SWEET4_11010
+if 
+fading 
+jf @SWEET4_11034 
+wait 0 
+jump @SWEET4_11010 
+
+:SWEET4_11034
+$6660 = 31 
+
+:SWEET4_11041
+if 
+  $6660 == 31 
+jf @SWEET4_11203 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 11000 
+jf @SWEET4_11203 
+041D: set_camera_near_clip 0.1 
+0169: set_fade_color_RGB 0 0 0 
+Camera.SetPosition(2098.139, -1385.882, 30.5735, 0.0, 0.0, 0.0)
+Camera.PointAt(2098.952, -1385.364, 30.3086, 2)
+fade 1 300 
+
+:SWEET4_11172
+if 
+fading 
+jf @SWEET4_11196 
+wait 0 
+jump @SWEET4_11172 
+
+:SWEET4_11196
+$6660 = 3 
+
+:SWEET4_11203
+if 
+  $6660 == 3 
+jf @SWEET4_11462 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 13000 
+jf @SWEET4_11462 
+if 
+  $6665 == 1 
+jf @SWEET4_11462 
+if 
+   not Car.Wrecked(523@)
+jf @SWEET4_11462 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2098.139 -1385.882 30.5735 position_to 2075.787 -1369.657 23.6289 time 3500 smooth_transition 1 
+0920: point_camera 2098.952 -1385.364 30.3086 transverse_to 2076.316 -1368.814 23.7227 time 3500 smooth_transition 1 
+if 
+   not Actor.Dead(417@)
+jf @SWEET4_11431 
+0605: actor 417@ perform_animation "GSIGN1" IFP "GHANDS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+
+:SWEET4_11431
+if 
+   not Actor.Dead(416@)
+jf @SWEET4_11455 
+0618: assign_actor 416@ to_AS_pack 118@ 
+
+:SWEET4_11455
+$6660 = 4 
+
+:SWEET4_11462
+if 
+  $6660 == 4 
+jf @SWEET4_11549 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if or
+  71@ > 20000 
+  50@ == 1 
+jf @SWEET4_11549 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 300 
+$6660 = 6 
+
+:SWEET4_11549
+if 
+  $6660 == 6 
+jf @SWEET4_11823 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if or
+  71@ > 21000 
+  50@ == 1 
+jf @SWEET4_11823 
+00BE: text_clear_all 
+$6672 = 14 
+Model.Destroy(#LAEROAD30)
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 300 
+04EF: release_animation "GANGS" 
+04EF: release_animation "GHANDS" 
+01BD: 62@ = current_time_in_ms 
+01BD: 63@ = current_time_in_ms 
+01BD: 64@ = current_time_in_ms 
+03E5: show_text_box 'SWE4_13'  // Press ~k~~VEHICLE_LOOKLEFT~ or ~k~~VEHICLE_LOOKRIGHT~ to look left or right when in a car.
+0698: set_car 543@ repair_componentB 4 
+0395: clear_area 1 at 54@ 55@ 56@ radius 4.0 
+0852: set_car 543@ damages_visible 1 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_11802 
+$6674 = Car.Health(543@)
+if 
+  $6674 > 250 
+jf @SWEET4_11787 
+$6674 -= 250 
+
+:SWEET4_11787
+0084: $6673 = $6674 // (int) 
+$6673 /= 10 
+
+:SWEET4_11802
+$6659 = 1 
+50@ = 0 
+$6637 = 5 
+
+:SWEET4_11823
+if and
+  $6637 == 5 
+  $6660 >= 6 
+jf @SWEET4_13092 
+01BD: 70@ = current_time_in_ms 
+0085: 76@ = 70@ // (int) 
+0062: 76@ -= 64@ // (int) 
+if 
+  76@ > 5000 
+jf @SWEET4_11950 
+if 
+  84@ == 0 
+jf @SWEET4_11950 
+0151: remove_status_text $6673 
+03C4: set_status_text $6673 type 1 GXT 'SWE4_08' // global_variable  // CAR HEALTH
+03E5: show_text_box 'SWE4_15'  // This will allow you to see where your enemies are located.
+01BD: 62@ = current_time_in_ms 
+84@ = 1 
+
+:SWEET4_11950
+if and
+  $6661 == 0 
+  $6665 == 1 
+jf @SWEET4_12155 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12155 
+if and
+   not Actor.Dead(415@)
+   not Actor.Dead(394@)
+jf @SWEET4_12155 
+if or
+01AF:   car 543@ sphere 0 in_sphere 451@ 469@ 487@ radius 85@ 85@ 85@ 
+02E0:   actor 394@ firing_weapon 
+jf @SWEET4_12155 
+if and
+   not Actor.Dead(416@)
+   not Actor.Dead(417@)
+   not Actor.Dead(418@)
+   not Car.Wrecked(523@)
+jf @SWEET4_12155 
+Object.Destroy(198@)
+01B9: set_actor 418@ armed_weapon_to 22 
+0618: assign_actor 415@ to_AS_pack 98@ 
+061B: remove_references_to_AS_pack 98@ 
+0618: assign_actor 416@ to_AS_pack 99@ 
+061B: remove_references_to_AS_pack 99@ 
+0618: assign_actor 417@ to_AS_pack 100@ 
+061B: remove_references_to_AS_pack 100@ 
+0618: assign_actor 418@ to_AS_pack 101@ 
+061B: remove_references_to_AS_pack 101@ 
+$6661 = 1 
+
+:SWEET4_12155
+if and
+  $6662 == 0 
+  $6666 == 1 
+jf @SWEET4_12348 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12348 
+if and
+   not Actor.Dead(419@)
+   not Actor.Dead(394@)
+jf @SWEET4_12348 
+if or
+01AF:   car 543@ sphere 0 in_sphere 455@ 473@ 491@ radius 85@ 85@ 85@ 
+02E0:   actor 394@ firing_weapon 
+jf @SWEET4_12348 
+if and
+   not Actor.Dead(420@)
+   not Actor.Dead(421@)
+   not Actor.Dead(422@)
+   not Car.Wrecked(524@)
+jf @SWEET4_12348 
+0618: assign_actor 419@ to_AS_pack 102@ 
+061B: remove_references_to_AS_pack 102@ 
+0618: assign_actor 420@ to_AS_pack 103@ 
+061B: remove_references_to_AS_pack 103@ 
+0618: assign_actor 421@ to_AS_pack 104@ 
+061B: remove_references_to_AS_pack 104@ 
+0618: assign_actor 422@ to_AS_pack 105@ 
+061B: remove_references_to_AS_pack 105@ 
+$6662 = 1 
+
+:SWEET4_12348
+if and
+  $6663 == 0 
+  $6667 == 1 
+jf @SWEET4_12536 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12536 
+if and
+   not Actor.Dead(423@)
+   not Actor.Dead(394@)
+jf @SWEET4_12536 
+if or
+01AF:   car 543@ sphere 0 in_sphere 459@ 477@ 495@ radius 85@ 85@ 85@ 
+02E0:   actor 394@ firing_weapon 
+jf @SWEET4_12536 
+if and
+   not Actor.Dead(424@)
+   not Actor.Dead(425@)
+   not Actor.Dead(426@)
+jf @SWEET4_12536 
+0618: assign_actor 423@ to_AS_pack 106@ 
+061B: remove_references_to_AS_pack 106@ 
+0618: assign_actor 424@ to_AS_pack 107@ 
+061B: remove_references_to_AS_pack 107@ 
+0618: assign_actor 425@ to_AS_pack 108@ 
+061B: remove_references_to_AS_pack 108@ 
+0618: assign_actor 426@ to_AS_pack 109@ 
+061B: remove_references_to_AS_pack 109@ 
+$6663 = 1 
+
+:SWEET4_12536
+if and
+  $6664 == 0 
+  $6668 == 1 
+jf @SWEET4_12724 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12724 
+if and
+   not Actor.Dead(427@)
+   not Actor.Dead(394@)
+jf @SWEET4_12724 
+if or
+01AF:   car 543@ sphere 0 in_sphere 463@ 481@ 499@ radius 85@ 85@ 85@ 
+02E0:   actor 394@ firing_weapon 
+jf @SWEET4_12724 
+if and
+   not Actor.Dead(428@)
+   not Actor.Dead(429@)
+   not Actor.Dead(430@)
+jf @SWEET4_12724 
+0618: assign_actor 427@ to_AS_pack 110@ 
+061B: remove_references_to_AS_pack 110@ 
+0618: assign_actor 428@ to_AS_pack 111@ 
+061B: remove_references_to_AS_pack 111@ 
+0618: assign_actor 429@ to_AS_pack 112@ 
+061B: remove_references_to_AS_pack 112@ 
+0618: assign_actor 430@ to_AS_pack 113@ 
+061B: remove_references_to_AS_pack 113@ 
+$6664 = 1 
+
+:SWEET4_12724
+if and
+  $6666 == 0 
+  34@ == 2 
+  $6659 == 0 
+jf @SWEET4_12868 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12868 
+if 
+80C2:   not sphere_onscreen 455@ 473@ 491@ radius 4.0 
+jf @SWEET4_12868 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 455@ 473@ 491@ radius 85@ 85@ 85@ 
+jf @SWEET4_12868 
+gosub @SWEET4_1466 
+gosub @SWEET4_3352 
+gosub @SWEET4_3834 
+Model.Destroy(#VOODOO)
+$6666 = 1 
+
+:SWEET4_12868
+if and
+  $6667 == 0 
+  34@ == 3 
+  $6659 == 0 
+jf @SWEET4_12980 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_12980 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 459@ 477@ 495@ radius 85@ 85@ 85@ 
+jf @SWEET4_12980 
+gosub @SWEET4_2036 
+gosub @SWEET4_3354 
+gosub @SWEET4_4082 
+$6667 = 1 
+
+:SWEET4_12980
+if and
+  $6668 == 0 
+  34@ == 4 
+  $6659 == 0 
+jf @SWEET4_13092 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_13092 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 463@ 481@ 499@ radius 85@ 85@ 85@ 
+jf @SWEET4_13092 
+gosub @SWEET4_2550 
+gosub @SWEET4_3426 
+gosub @SWEET4_4363 
+$6668 = 1 
+
+:SWEET4_13092
+if 
+  $6637 > 4 
+jf @SWEET4_15027 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(394@)
+   not Actor.Dead(401@)
+   not Actor.Dead(408@)
+jf @SWEET4_13405 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_13405 
+if and
+   Actor.InCar($PLAYER_ACTOR, 543@)
+   Actor.InCar(394@, 543@)
+   Actor.InCar(401@, 543@)
+   Actor.InCar(408@, 543@)
+jf @SWEET4_13405 
+if 
+8495:   not car 543@ burning 
+jf @SWEET4_13375 
+if 
+  48@ == 1 
+jf @SWEET4_13262 
+0151: remove_status_text $6673 
+03C4: set_status_text $6673 type 1 GXT 'SWE4_08' // global_variable  // CAR HEALTH
+48@ = 0 
+
+:SWEET4_13262
+$6674 = Car.Health(543@)
+$6674 -= 250 
+0084: $6673 = $6674 // (int) 
+$6673 /= 12 
+if 
+0103:   actor $PLAYER_ACTOR in_sphere 2067.0 -1831.0 13.0 radius 5.0 5.0 5.0 sphere 0 stopped_in_car 
+jf @SWEET4_13368 
+if 
+  $6674 == 750 
+jf @SWEET4_13368 
+Car.Health(543@) = 1450
+
+:SWEET4_13368
+jump @SWEET4_13405 
+
+:SWEET4_13375
+if 
+  48@ == 0 
+jf @SWEET4_13405 
+0151: remove_status_text $6673 
+48@ = 1 
+
+:SWEET4_13405
+01BD: 68@ = current_time_in_ms 
+0085: 74@ = 68@ // (int) 
+0062: 74@ -= 62@ // (int) 
+if or
+  74@ > 2000 
+   Actor.Dead(195@)
+jf @SWEET4_13516 
+04AF: 41@ = 8 // = constant 
+0085: 194@ = 408@ // (int) 
+gosub @SWEET4_24810 
+04AF: 41@ = 8 // = constant 
+0085: 194@ = 401@ // (int) 
+gosub @SWEET4_24810 
+04AF: 41@ = 8 // = constant 
+0085: 194@ = 394@ // (int) 
+gosub @SWEET4_24810 
+
+:SWEET4_13516
+if 
+  $6665 == 1 
+jf @SWEET4_13905 
+if 
+  34@ == 1 
+jf @SWEET4_13905 
+if 
+  $6640 == 0 
+jf @SWEET4_13610 
+if 
+   Actor.Dead(415@)
+jf @SWEET4_13610 
+Marker.Disable(433@)
+Actor.RemoveReferences(415@)
+77@ += 1 
+$6640 = 1 
+
+:SWEET4_13610
+if 
+  $6641 == 0 
+jf @SWEET4_13668 
+if 
+   Actor.Dead(416@)
+jf @SWEET4_13668 
+Marker.Disable(434@)
+Actor.RemoveReferences(416@)
+77@ += 1 
+$6641 = 1 
+
+:SWEET4_13668
+if 
+  $6642 == 0 
+jf @SWEET4_13726 
+if 
+   Actor.Dead(417@)
+jf @SWEET4_13726 
+Marker.Disable(435@)
+Actor.RemoveReferences(417@)
+77@ += 1 
+$6642 = 1 
+
+:SWEET4_13726
+if 
+  $6643 == 0 
+jf @SWEET4_13784 
+if 
+   Actor.Dead(418@)
+jf @SWEET4_13784 
+Marker.Disable(436@)
+Actor.RemoveReferences(418@)
+77@ += 1 
+$6643 = 1 
+
+:SWEET4_13784
+if 
+  35@ == 0 
+jf @SWEET4_13905 
+if and
+  $6640 == 1 
+  $6641 == 1 
+  $6642 == 1 
+  $6643 == 1 
+jf @SWEET4_13905 
+if 
+  $6659 == 0 
+jf @SWEET4_13891 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_13891 
+389@ = 46 
+
+:SWEET4_13891
+34@ = 2 
+35@ = 1 
+
+:SWEET4_13905
+if 
+  $6666 == 1 
+jf @SWEET4_14294 
+if 
+  34@ == 2 
+jf @SWEET4_14294 
+if 
+  $6644 == 0 
+jf @SWEET4_13999 
+if 
+   Actor.Dead(419@)
+jf @SWEET4_13999 
+Marker.Disable(437@)
+Actor.RemoveReferences(419@)
+77@ += 1 
+$6644 = 1 
+
+:SWEET4_13999
+if 
+  $6645 == 0 
+jf @SWEET4_14057 
+if 
+   Actor.Dead(420@)
+jf @SWEET4_14057 
+Marker.Disable(438@)
+Actor.RemoveReferences(420@)
+77@ += 1 
+$6645 = 1 
+
+:SWEET4_14057
+if 
+  $6646 == 0 
+jf @SWEET4_14115 
+if 
+   Actor.Dead(421@)
+jf @SWEET4_14115 
+Marker.Disable(439@)
+Actor.RemoveReferences(421@)
+77@ += 1 
+$6646 = 1 
+
+:SWEET4_14115
+if 
+  $6647 == 0 
+jf @SWEET4_14173 
+if 
+   Actor.Dead(422@)
+jf @SWEET4_14173 
+Marker.Disable(440@)
+Actor.RemoveReferences(422@)
+77@ += 1 
+$6647 = 1 
+
+:SWEET4_14173
+if 
+  36@ == 0 
+jf @SWEET4_14294 
+if and
+  $6644 == 1 
+  $6645 == 1 
+  $6646 == 1 
+  $6647 == 1 
+jf @SWEET4_14294 
+if 
+  $6659 == 0 
+jf @SWEET4_14280 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_14280 
+389@ = 47 
+
+:SWEET4_14280
+34@ = 3 
+36@ = 1 
+
+:SWEET4_14294
+if 
+  $6667 == 1 
+jf @SWEET4_14683 
+if 
+  34@ == 3 
+jf @SWEET4_14683 
+if 
+  $6648 == 0 
+jf @SWEET4_14388 
+if 
+   Actor.Dead(423@)
+jf @SWEET4_14388 
+Marker.Disable(441@)
+Actor.RemoveReferences(423@)
+77@ += 1 
+$6648 = 1 
+
+:SWEET4_14388
+if 
+  $6649 == 0 
+jf @SWEET4_14446 
+if 
+   Actor.Dead(424@)
+jf @SWEET4_14446 
+Marker.Disable(442@)
+Actor.RemoveReferences(424@)
+77@ += 1 
+$6649 = 1 
+
+:SWEET4_14446
+if 
+  $6650 == 0 
+jf @SWEET4_14504 
+if 
+   Actor.Dead(425@)
+jf @SWEET4_14504 
+Marker.Disable(443@)
+Actor.RemoveReferences(425@)
+77@ += 1 
+$6650 = 1 
+
+:SWEET4_14504
+if 
+  $6651 == 0 
+jf @SWEET4_14562 
+if 
+   Actor.Dead(426@)
+jf @SWEET4_14562 
+Marker.Disable(444@)
+Actor.RemoveReferences(426@)
+77@ += 1 
+$6651 = 1 
+
+:SWEET4_14562
+if 
+  37@ == 0 
+jf @SWEET4_14683 
+if and
+  $6648 == 1 
+  $6649 == 1 
+  $6650 == 1 
+  $6651 == 1 
+jf @SWEET4_14683 
+if 
+  $6659 == 0 
+jf @SWEET4_14669 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_14669 
+389@ = 48 
+
+:SWEET4_14669
+34@ = 4 
+37@ = 1 
+
+:SWEET4_14683
+if 
+  $6668 == 1 
+jf @SWEET4_15027 
+if 
+  34@ == 4 
+jf @SWEET4_15027 
+if 
+  $6652 == 0 
+jf @SWEET4_14777 
+if 
+   Actor.Dead(427@)
+jf @SWEET4_14777 
+Marker.Disable(445@)
+Actor.RemoveReferences(427@)
+77@ += 1 
+$6652 = 1 
+
+:SWEET4_14777
+if 
+  $6653 == 0 
+jf @SWEET4_14835 
+if 
+   Actor.Dead(428@)
+jf @SWEET4_14835 
+Marker.Disable(446@)
+Actor.RemoveReferences(428@)
+77@ += 1 
+$6653 = 1 
+
+:SWEET4_14835
+if 
+  $6654 == 0 
+jf @SWEET4_14893 
+if 
+   Actor.Dead(429@)
+jf @SWEET4_14893 
+Marker.Disable(447@)
+Actor.RemoveReferences(429@)
+77@ += 1 
+$6654 = 1 
+
+:SWEET4_14893
+if 
+  $6655 == 0 
+jf @SWEET4_14951 
+if 
+   Actor.Dead(430@)
+jf @SWEET4_14951 
+Marker.Disable(448@)
+Actor.RemoveReferences(430@)
+77@ += 1 
+$6655 = 1 
+
+:SWEET4_14951
+if 
+  38@ == 0 
+jf @SWEET4_15027 
+if and
+  $6652 == 1 
+  $6653 == 1 
+  $6654 == 1 
+  $6655 == 1 
+jf @SWEET4_15027 
+01BD: $6669 = current_time_in_ms 
+34@ = 1 
+38@ = 0 
+
+:SWEET4_15027
+if 
+  $6637 == 5 
+jf @SWEET4_16818 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_16487 
+if 
+  45@ == 0 
+jf @SWEET4_15515 
+if and
+01C1:   car 543@ stopped 
+   Actor.InCar($PLAYER_ACTOR, 543@)
+jf @SWEET4_15515 
+01BD: 59@ = current_time_in_ms 
+0209: 44@ = random_int_in_ranges 0 5 
+$6638 = 50 
+if 
+   not Actor.Dead(415@)
+jf @SWEET4_15148 
+Actor.WeaponAccuracy(415@) = $6638
+
+:SWEET4_15148
+if 
+   not Actor.Dead(416@)
+jf @SWEET4_15172 
+Actor.WeaponAccuracy(416@) = $6638
+
+:SWEET4_15172
+if 
+   not Actor.Dead(417@)
+jf @SWEET4_15196 
+Actor.WeaponAccuracy(417@) = $6638
+
+:SWEET4_15196
+if 
+   not Actor.Dead(418@)
+jf @SWEET4_15220 
+Actor.WeaponAccuracy(418@) = $6638
+
+:SWEET4_15220
+if 
+   not Actor.Dead(419@)
+jf @SWEET4_15244 
+Actor.WeaponAccuracy(419@) = $6638
+
+:SWEET4_15244
+if 
+   not Actor.Dead(420@)
+jf @SWEET4_15268 
+Actor.WeaponAccuracy(420@) = $6638
+
+:SWEET4_15268
+if 
+   not Actor.Dead(421@)
+jf @SWEET4_15292 
+Actor.WeaponAccuracy(421@) = $6638
+
+:SWEET4_15292
+if 
+   not Actor.Dead(422@)
+jf @SWEET4_15316 
+Actor.WeaponAccuracy(422@) = $6638
+
+:SWEET4_15316
+if 
+   not Actor.Dead(423@)
+jf @SWEET4_15340 
+Actor.WeaponAccuracy(423@) = $6638
+
+:SWEET4_15340
+if 
+   not Actor.Dead(424@)
+jf @SWEET4_15364 
+Actor.WeaponAccuracy(424@) = $6638
+
+:SWEET4_15364
+if 
+   not Actor.Dead(425@)
+jf @SWEET4_15388 
+Actor.WeaponAccuracy(425@) = $6638
+
+:SWEET4_15388
+if 
+   not Actor.Dead(426@)
+jf @SWEET4_15412 
+Actor.WeaponAccuracy(426@) = $6638
+
+:SWEET4_15412
+if 
+   not Actor.Dead(427@)
+jf @SWEET4_15436 
+Actor.WeaponAccuracy(427@) = $6638
+
+:SWEET4_15436
+if 
+   not Actor.Dead(428@)
+jf @SWEET4_15460 
+Actor.WeaponAccuracy(428@) = $6638
+
+:SWEET4_15460
+if 
+   not Actor.Dead(429@)
+jf @SWEET4_15484 
+Actor.WeaponAccuracy(429@) = $6638
+
+:SWEET4_15484
+if 
+   not Actor.Dead(430@)
+jf @SWEET4_15508 
+Actor.WeaponAccuracy(430@) = $6638
+
+:SWEET4_15508
+45@ = 1 
+
+:SWEET4_15515
+if 
+  45@ == 1 
+jf @SWEET4_16015 
+01BD: 69@ = current_time_in_ms 
+0085: 75@ = 69@ // (int) 
+0062: 75@ -= 63@ // (int) 
+if 
+  75@ > 3000 
+jf @SWEET4_16015 
+if 
+01C1:   car 543@ stopped 
+jf @SWEET4_16008 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 250 
+jf @SWEET4_16001 
+if 
+  44@ == 0 
+jf @SWEET4_15691 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_15691 
+389@ = 20 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_15691
+if 
+  44@ == 1 
+jf @SWEET4_15753 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_15753 
+389@ = 21 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_15753
+if 
+  44@ == 2 
+jf @SWEET4_15815 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_15815 
+389@ = 22 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_15815
+if 
+  44@ == 3 
+jf @SWEET4_15877 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_15877 
+389@ = 23 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_15877
+if 
+  44@ == 4 
+jf @SWEET4_15939 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_15939 
+389@ = 24 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_15939
+if 
+  44@ == 5 
+jf @SWEET4_16001 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_16001 
+389@ = 25 
+01BD: 59@ = current_time_in_ms 
+45@ = 2 
+
+:SWEET4_16001
+jump @SWEET4_16015 
+
+:SWEET4_16008
+45@ = 2 
+
+:SWEET4_16015
+if 
+  45@ == 2 
+jf @SWEET4_16487 
+if 
+81C1:   not car 543@ stopped 
+jf @SWEET4_16487 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 3100 
+jf @SWEET4_16096 
+45@ = 0 
+
+:SWEET4_16096
+$6638 = 30 
+if 
+   not Actor.Dead(415@)
+jf @SWEET4_16127 
+Actor.WeaponAccuracy(415@) = $6638
+
+:SWEET4_16127
+if 
+   not Actor.Dead(416@)
+jf @SWEET4_16151 
+Actor.WeaponAccuracy(416@) = $6638
+
+:SWEET4_16151
+if 
+   not Actor.Dead(417@)
+jf @SWEET4_16175 
+Actor.WeaponAccuracy(417@) = $6638
+
+:SWEET4_16175
+if 
+   not Actor.Dead(418@)
+jf @SWEET4_16199 
+Actor.WeaponAccuracy(418@) = $6638
+
+:SWEET4_16199
+if 
+   not Actor.Dead(419@)
+jf @SWEET4_16223 
+Actor.WeaponAccuracy(419@) = $6638
+
+:SWEET4_16223
+if 
+   not Actor.Dead(420@)
+jf @SWEET4_16247 
+Actor.WeaponAccuracy(420@) = $6638
+
+:SWEET4_16247
+if 
+   not Actor.Dead(421@)
+jf @SWEET4_16271 
+Actor.WeaponAccuracy(421@) = $6638
+
+:SWEET4_16271
+if 
+   not Actor.Dead(422@)
+jf @SWEET4_16295 
+Actor.WeaponAccuracy(422@) = $6638
+
+:SWEET4_16295
+if 
+   not Actor.Dead(423@)
+jf @SWEET4_16319 
+Actor.WeaponAccuracy(423@) = $6638
+
+:SWEET4_16319
+if 
+   not Actor.Dead(424@)
+jf @SWEET4_16343 
+Actor.WeaponAccuracy(424@) = $6638
+
+:SWEET4_16343
+if 
+   not Actor.Dead(425@)
+jf @SWEET4_16367 
+Actor.WeaponAccuracy(425@) = $6638
+
+:SWEET4_16367
+if 
+   not Actor.Dead(426@)
+jf @SWEET4_16391 
+Actor.WeaponAccuracy(426@) = $6638
+
+:SWEET4_16391
+if 
+   not Actor.Dead(427@)
+jf @SWEET4_16415 
+Actor.WeaponAccuracy(427@) = $6638
+
+:SWEET4_16415
+if 
+   not Actor.Dead(428@)
+jf @SWEET4_16439 
+Actor.WeaponAccuracy(428@) = $6638
+
+:SWEET4_16439
+if 
+   not Actor.Dead(429@)
+jf @SWEET4_16463 
+Actor.WeaponAccuracy(429@) = $6638
+
+:SWEET4_16463
+if 
+   not Actor.Dead(430@)
+jf @SWEET4_16487 
+Actor.WeaponAccuracy(430@) = $6638
+
+:SWEET4_16487
+if 
+  77@ == 16 
+jf @SWEET4_16549 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_16549 
+389@ = 33 
+01BD: 82@ = current_time_in_ms 
+77@ = 17 
+
+:SWEET4_16549
+if 
+  77@ == 17 
+jf @SWEET4_16818 
+01BD: 81@ = current_time_in_ms 
+0085: 80@ = 81@ // (int) 
+0062: 80@ -= 82@ // (int) 
+if 
+  80@ > 3000 
+jf @SWEET4_16818 
+0335: enable_free_respray 1 
+00BE: text_clear_all 
+01F0: set_max_wanted_level_to 53@ 
+if 
+  49@ == 0 
+jf @SWEET4_16647 
+099E: enable_police_patrols 1 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+
+:SWEET4_16647
+Car.DoorStatus(543@) = 1
+0151: remove_status_text $6673 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+01BD: 82@ = current_time_in_ms 
+03DE: set_pedestrians_density_multiplier_to 0.5 
+Marker.Disable(433@)
+Marker.Disable(434@)
+Marker.Disable(435@)
+Marker.Disable(436@)
+Marker.Disable(437@)
+Marker.Disable(438@)
+Marker.Disable(439@)
+Marker.Disable(440@)
+Marker.Disable(441@)
+Marker.Disable(442@)
+Marker.Disable(443@)
+Marker.Disable(444@)
+Marker.Disable(445@)
+Marker.Disable(446@)
+Marker.Disable(447@)
+Marker.Disable(448@)
+01BD: $6669 = current_time_in_ms 
+$6672 = 14 
+$6660 = 0 
+$6637 = 6 
+03C7: set_sensitivity_to_crime 1.0 
+83@ = 0 
+
+:SWEET4_16818
+if and
+  $6637 == 6 
+  $6672 == 18 
+jf @SWEET4_18350 
+01BD: 81@ = current_time_in_ms 
+0085: 80@ = 81@ // (int) 
+0062: 80@ -= 82@ // (int) 
+if 
+  83@ == 0 
+jf @SWEET4_16924 
+if 
+  80@ > 500 
+jf @SWEET4_16924 
+03E5: show_text_box 'SWE4_07'  // The spray shop icon is marked on the radar as a spray can.
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_16924
+if 
+  83@ == 1 
+jf @SWEET4_16995 
+if 
+  80@ > 1000 
+jf @SWEET4_16995 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_16995
+if 
+  83@ == 2 
+jf @SWEET4_17044 
+if 
+  80@ > 1500 
+jf @SWEET4_17044 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17044
+if 
+  83@ == 3 
+jf @SWEET4_17115 
+if 
+  80@ > 2000 
+jf @SWEET4_17115 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17115
+if 
+  83@ == 4 
+jf @SWEET4_17164 
+if 
+  80@ > 2500 
+jf @SWEET4_17164 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17164
+if 
+  83@ == 5 
+jf @SWEET4_17235 
+if 
+  80@ > 3000 
+jf @SWEET4_17235 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17235
+if 
+  83@ == 6 
+jf @SWEET4_17284 
+if 
+  80@ > 3500 
+jf @SWEET4_17284 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17284
+if 
+  83@ == 7 
+jf @SWEET4_17355 
+if 
+  80@ > 4000 
+jf @SWEET4_17355 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17355
+if 
+  83@ == 8 
+jf @SWEET4_17404 
+if 
+  80@ > 4500 
+jf @SWEET4_17404 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17404
+if 
+  83@ == 9 
+jf @SWEET4_17475 
+if 
+  80@ > 5000 
+jf @SWEET4_17475 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17475
+if 
+  83@ == 10 
+jf @SWEET4_17524 
+if 
+  80@ > 5500 
+jf @SWEET4_17524 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17524
+if 
+  83@ == 11 
+jf @SWEET4_17595 
+if 
+  80@ > 6000 
+jf @SWEET4_17595 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17595
+if 
+  83@ == 12 
+jf @SWEET4_17644 
+if 
+  80@ > 6500 
+jf @SWEET4_17644 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17644
+if 
+  83@ == 13 
+jf @SWEET4_17715 
+if 
+  80@ > 7000 
+jf @SWEET4_17715 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17715
+if 
+  83@ == 14 
+jf @SWEET4_17764 
+if 
+  80@ > 7500 
+jf @SWEET4_17764 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17764
+if 
+  83@ == 15 
+jf @SWEET4_17835 
+if 
+  80@ > 8000 
+jf @SWEET4_17835 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17835
+if 
+  83@ == 16 
+jf @SWEET4_17884 
+if 
+  80@ > 8500 
+jf @SWEET4_17884 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_17884
+if 
+  83@ == 17 
+jf @SWEET4_17955 
+if 
+  80@ > 9000 
+jf @SWEET4_17955 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+83@ += 1 
+
+:SWEET4_17955
+if 
+  83@ == 18 
+jf @SWEET4_18004 
+if 
+  80@ > 9500 
+jf @SWEET4_18004 
+Marker.Disable($449)
+83@ += 1 
+
+:SWEET4_18004
+if 
+  83@ == 19 
+jf @SWEET4_18100 
+if 
+  80@ > 10000 
+jf @SWEET4_18100 
+Marker.Disable($449)
+02A8: $449 = create_marker 63 at 2067.4 -1831.2 13.5 
+Marker.Disable($6658)
+018A: $6658 = create_checkpoint_at 2075.55 -1831.09 12.21 
+83@ += 1 
+
+:SWEET4_18100
+if 
+  $6660 == 0 
+jf @SWEET4_18207 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SWEET4_18207 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 2075.55 -1831.09 12.21 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @SWEET4_18207 
+00BE: text_clear_all 
+03E5: show_text_box 'SWE4_06'  // Drive your vehicle into the spray shop to lose your ~h~wanted level~w~, ~h~repair ~w~and ~h~respray ~w~your vehicle. Cost - ~h~$100~w~. This time it's free.
+Marker.Disable($6658)
+$6660 = 1 
+
+:SWEET4_18207
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 0
+jf @SWEET4_18350 
+if or
+0100:   actor $PLAYER_ACTOR in_sphere 2075.55 -1831.09 12.21 radius 20.0 20.0 20.0 sphere 1 in_car 
+0100:   actor $PLAYER_ACTOR in_sphere 1024.55 -1039.09 35.21 radius 20.0 20.0 20.0 sphere 1 in_car 
+jf @SWEET4_18343 
+03E6: remove_text_box 
+01BD: 59@ = current_time_in_ms 
+Marker.Disable($6658)
+$6637 = 7 
+$6660 = 0 
+jump @SWEET4_18350 
+
+:SWEET4_18343
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+
+:SWEET4_18350
+if 
+  $6637 == 7 
+jf @SWEET4_18989 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 5000 
+jf @SWEET4_18499 
+if 
+  43@ == 2 
+jf @SWEET4_18499 
+0335: enable_free_respray 0 
+03E5: show_text_box 'WANT_L'  // Your wanted level has been suspended, if you commit a crime whilst the stars are flashing your full wanted level will be reinstated.
+018A: 58@ = create_checkpoint_at 545@ 546@ 547@ 
+Marker.Disable($449)
+$449 = Marker.CreateIconWithoutSphere(63, 2067.4, -1831.2, 13.5)
+01BD: 59@ = current_time_in_ms 
+01BD: $6669 = current_time_in_ms 
+43@ = 3 
+
+:SWEET4_18499
+if 
+  43@ == 3 
+jf @SWEET4_18617 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 5000 
+jf @SWEET4_18617 
+if 
+  49@ == 0 
+jf @SWEET4_18610 
+$6672 = 18 
+01BD: $6669 = current_time_in_ms 
+00BC: show_text_highpriority GXT 'SWE4_14' time 8000 flag 1  // ~s~Take your homies back to ~y~the hood~s~.
+49@ = 1 
+
+:SWEET4_18610
+43@ = 4 
+
+:SWEET4_18617
+if 
+  43@ == 4 
+jf @SWEET4_18989 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_18989 
+if 
+   Actor.InCar($PLAYER_ACTOR, 543@)
+jf @SWEET4_18989 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 545@ 546@ 547@ radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @SWEET4_18989 
+if 
+0448:   actor $PLAYER_ACTOR in_car 543@ 
+jf @SWEET4_18989 
+Player.CanMove($PLAYER_CHAR) = False
+06C7: AS_actor $PLAYER_ACTOR driver_of_car 543@ perform_action 6 timelimit 2000000 
+0395: clear_area 0 at 2518.0 -1673.0 14.0 radius 50.0 
+00BE: text_clear_all 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+02A3: enable_widescreen 1 
+fade 0 300 
+01BD: 59@ = current_time_in_ms 
+01BD: $6669 = current_time_in_ms 
+0605: actor $PLAYER_ACTOR perform_animation "GDB_CAR2_PLY" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time 0 
+01B9: set_actor 394@ armed_weapon_to 32 
+0605: actor 394@ perform_animation "GDB_CAR2_SMO" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+01B9: set_actor 408@ armed_weapon_to 32 
+0605: actor 408@ perform_animation "GDB_CAR2_SWE" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0852: set_car 543@ damages_visible 0 
+$6660 = 0 
+$6637 = 8 
+
+:SWEET4_18989
+if 
+  $6637 == 8 
+jf @SWEET4_20296 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_20296 
+if 
+  $6660 == 0 
+jf @SWEET4_19430 
+if 
+  52@ == 0 
+jf @SWEET4_19321 
+if 
+  390@ == 0 
+jf @SWEET4_19321 
+if 
+01C1:   car 543@ stopped 
+jf @SWEET4_19321 
+if 
+   not Actor.Dead(401@)
+jf @SWEET4_19174 
+0697: set_car 543@ remove_component 4 visible_effect_flag 1 
+0169: set_fade_color_RGB 0 0 0 
+0615: define_AS_pack_begin 117@ 
+05CD: AS_actor -1 exit_car 543@ 
+05D3: AS_actor -1 goto_point 2513.79 -1663.09 14.56 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 117@ 
+0618: assign_actor 401@ to_AS_pack 117@ 
+
+:SWEET4_19174
+0407: store_coords_to 120@ 130@ 140@ from_car 543@ with_offset -0.4 1.566 0.657 
+0407: store_coords_to 122@ 132@ 142@ from_car 543@ with_offset 0.038 -1.033 0.088 
+Camera.SetPosition(120@, 130@, 140@, 0.0, 0.0, 0.0)
+Camera.PointAt(122@, 132@, 142@, 2)
+fade 1 300 
+
+:SWEET4_19278
+if 
+fading 
+jf @SWEET4_19302 
+wait 0 
+jump @SWEET4_19278 
+
+:SWEET4_19302
+389@ = 42 
+01BD: 59@ = current_time_in_ms 
+52@ = 1 
+
+:SWEET4_19321
+if 
+  52@ == 1 
+jf @SWEET4_19430 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 1000 
+jf @SWEET4_19430 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_19430 
+389@ = 43 
+01BD: 59@ = current_time_in_ms 
+52@ = 2 
+$6660 = 3 
+
+:SWEET4_19430
+if 
+  $6660 == 3 
+jf @SWEET4_19769 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 1000 
+jf @SWEET4_19555 
+Actor.DestroyWithFade(401@)
+if 
+  52@ == 2 
+jf @SWEET4_19555 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_19555 
+389@ = 44 
+01BD: 59@ = current_time_in_ms 
+52@ = 3 
+
+:SWEET4_19555
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  52@ == 3 
+jf @SWEET4_19657 
+if 
+  71@ > 1000 
+jf @SWEET4_19657 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_19657 
+389@ = 45 
+01BD: 59@ = current_time_in_ms 
+52@ = 4 
+
+:SWEET4_19657
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+   not Actor.Dead(408@)
+jf @SWEET4_19769 
+if 
+  71@ > 1000 
+jf @SWEET4_19769 
+062E: get_actor 408@ task 1541 status_store_to 410@ // ret 7 if not found 
+if or
+04A4:   410@ == 7 // == constant 
+  52@ == 4 
+jf @SWEET4_19769 
+0618: assign_actor 408@ to_AS_pack 117@ 
+01BD: 59@ = current_time_in_ms 
+$6660 = 4 
+
+:SWEET4_19769
+if 
+  $6660 == 4 
+jf @SWEET4_19886 
+if 
+   not Actor.Dead(394@)
+jf @SWEET4_19886 
+062E: get_actor 394@ task 1541 status_store_to 396@ // ret 7 if not found 
+if or
+04A4:   396@ == 7 // == constant 
+  390@ == 0 
+jf @SWEET4_19886 
+0618: assign_actor 394@ to_AS_pack 117@ 
+wait 100 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 117@ 
+01BD: 59@ = current_time_in_ms 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1500 
+$6660 = 5 
+
+:SWEET4_19886
+if 
+  $6660 == 5 
+jf @SWEET4_20153 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 1000 
+jf @SWEET4_20153 
+
+:SWEET4_19944
+if 
+fading 
+jf @SWEET4_19968 
+wait 0 
+jump @SWEET4_19944 
+
+:SWEET4_19968
+0605: actor $PLAYER_ACTOR perform_animation "GDB_CAR2_PLY" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SWEET4_20056 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2511.0 -1671.0 12.5 
+jump @SWEET4_20076 
+
+:SWEET4_20056
+Actor.PutAt($PLAYER_ACTOR, 2511.0, -1671.0, 12.5)
+
+:SWEET4_20076
+0605: actor $PLAYER_ACTOR perform_animation "GDB_CAR2_PLY" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 1 
+Actor.Angle($PLAYER_ACTOR) = 223.0
+Actor.DestroyWithFade(408@)
+Actor.DestroyWithFade(394@)
+01BD: 59@ = current_time_in_ms 
+$6660 = 7 
+
+:SWEET4_20153
+if 
+  $6660 == 7 
+jf @SWEET4_20296 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 100 
+jf @SWEET4_20296 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_20296 
+Actor.DestroyInstantly(394@)
+Actor.DestroyInstantly(394@)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+fade 1 2000 
+
+:SWEET4_20258
+if 
+fading 
+jf @SWEET4_20282 
+wait 0 
+jump @SWEET4_20258 
+
+:SWEET4_20282
+jump @SWEET4_24419 
+$6660 = 8 
+
+:SWEET4_20296
+if and
+  $6637 > 2 
+  8 > $6637 
+jf @SWEET4_22339 
+if 
+  $6659 == 0 
+jf @SWEET4_21026 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_21026 
+if and
+   not Actor.InCar($PLAYER_ACTOR, 543@)
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @SWEET4_21026 
+0508: car 543@ close_all_doors 
+if 
+  51@ == 0 
+jf @SWEET4_20445 
+0615: define_AS_pack_begin 96@ 
+0676: AS_actor -1 in_car 543@ move_from_passengerseat_to_driverseat 
+05D2: AS_actor -1 run_to_and_hijack_car 543@ max_search_radius 50.0 traffic_behavior 2 
+0616: define_AS_pack_end 96@ 
+51@ = 1 
+
+:SWEET4_20445
+46@ = 0 
+79@ = 15000 
+544@ = Marker.CreateAboveCar(543@)
+07E0: set_marker 544@ type_to 1 
+if 
+  $6637 == 3 
+jf @SWEET4_20498 
+Marker.Disable(57@)
+
+:SWEET4_20498
+if 
+  $6637 == 5 
+jf @SWEET4_20961 
+0151: remove_status_text $6673 
+if 
+  34@ == 1 
+jf @SWEET4_20631 
+if 
+  $6640 == 0 
+jf @SWEET4_20562 
+Marker.Disable(433@)
+
+:SWEET4_20562
+if 
+  $6641 == 0 
+jf @SWEET4_20585 
+Marker.Disable(434@)
+
+:SWEET4_20585
+if 
+  $6642 == 0 
+jf @SWEET4_20608 
+Marker.Disable(435@)
+
+:SWEET4_20608
+if 
+  $6643 == 0 
+jf @SWEET4_20631 
+Marker.Disable(436@)
+
+:SWEET4_20631
+if 
+  34@ == 2 
+jf @SWEET4_20741 
+if 
+  $6644 == 0 
+jf @SWEET4_20672 
+Marker.Disable(437@)
+
+:SWEET4_20672
+if 
+  $6645 == 0 
+jf @SWEET4_20695 
+Marker.Disable(438@)
+
+:SWEET4_20695
+if 
+  $6646 == 0 
+jf @SWEET4_20718 
+Marker.Disable(439@)
+
+:SWEET4_20718
+if 
+  $6647 == 0 
+jf @SWEET4_20741 
+Marker.Disable(440@)
+
+:SWEET4_20741
+if 
+  34@ == 3 
+jf @SWEET4_20851 
+if 
+  $6648 == 0 
+jf @SWEET4_20782 
+Marker.Disable(441@)
+
+:SWEET4_20782
+if 
+  $6649 == 0 
+jf @SWEET4_20805 
+Marker.Disable(442@)
+
+:SWEET4_20805
+if 
+  $6650 == 0 
+jf @SWEET4_20828 
+Marker.Disable(443@)
+
+:SWEET4_20828
+if 
+  $6651 == 0 
+jf @SWEET4_20851 
+Marker.Disable(444@)
+
+:SWEET4_20851
+if 
+  34@ == 4 
+jf @SWEET4_20961 
+if 
+  $6652 == 0 
+jf @SWEET4_20892 
+Marker.Disable(445@)
+
+:SWEET4_20892
+if 
+  $6653 == 0 
+jf @SWEET4_20915 
+Marker.Disable(446@)
+
+:SWEET4_20915
+if 
+  $6654 == 0 
+jf @SWEET4_20938 
+Marker.Disable(447@)
+
+:SWEET4_20938
+if 
+  $6655 == 0 
+jf @SWEET4_20961 
+Marker.Disable(448@)
+
+:SWEET4_20961
+if 
+  $6637 == 6 
+jf @SWEET4_20984 
+Marker.Disable($6658)
+
+:SWEET4_20984
+if 
+  $6637 == 7 
+jf @SWEET4_21007 
+Marker.Disable(58@)
+
+:SWEET4_21007
+Car.DoorStatus(543@) = 1
+01BD: 61@ = current_time_in_ms 
+$6659 = 1 
+
+:SWEET4_21026
+if 
+  $6659 == 1 
+jf @SWEET4_22339 
+if 
+  78@ >= 0 
+jf @SWEET4_21383 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+79@ = 10000 
+0062: 79@ -= 73@ // (int) 
+0085: 78@ = 79@ // (int) 
+78@ /= 1000 
+if 
+  46@ == 0 
+jf @SWEET4_21154 
+01BD: 59@ = current_time_in_ms 
+0209: 44@ = random_int_in_ranges 0 2 
+46@ = 1 
+
+:SWEET4_21154
+if 
+  46@ == 1 
+jf @SWEET4_21383 
+01BD: 65@ = current_time_in_ms 
+0085: 71@ = 65@ // (int) 
+0062: 71@ -= 59@ // (int) 
+if 
+  71@ > 200 
+jf @SWEET4_21383 
+if 
+  44@ == 0 
+jf @SWEET4_21269 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_21269 
+389@ = 26 
+44@ = 5 
+
+:SWEET4_21269
+if 
+  44@ == 1 
+jf @SWEET4_21326 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_21326 
+389@ = 27 
+44@ = 5 
+
+:SWEET4_21326
+if 
+  44@ == 2 
+jf @SWEET4_21383 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_21383 
+389@ = 28 
+44@ = 5 
+
+:SWEET4_21383
+if and
+  100 > 79@ 
+  79@ > 0 
+jf @SWEET4_21451 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 543@ radius 15.0 15.0 15.0 flag 0 
+jf @SWEET4_21451 
+Car.DoorStatus(543@) = 2
+
+:SWEET4_21451
+if 
+  0 > 78@ 
+jf @SWEET4_21476 
+78@ = 0 
+
+:SWEET4_21476
+if 
+  78@ == 0 
+jf @SWEET4_21613 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 543@ radius 15.0 15.0 15.0 flag 0 
+jf @SWEET4_21613 
+if 
+   not Actor.Dead(394@)
+jf @SWEET4_21613 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_21613 
+Car.DoorStatus(543@) = 2
+0618: assign_actor 394@ to_AS_pack 96@ 
+00BE: text_clear_all 
+389@ = 29 
+01BD: 61@ = current_time_in_ms 
+Marker.Disable(544@)
+$6637 = 666 
+
+:SWEET4_21613
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(543@)
+jf @SWEET4_22339 
+if 
+   Actor.InCar($PLAYER_ACTOR, 543@)
+jf @SWEET4_22339 
+46@ = 0 
+Marker.Disable(544@)
+if 
+  $6637 == 3 
+jf @SWEET4_21697 
+018A: 57@ = create_checkpoint_at 54@ 55@ 56@ 
+
+:SWEET4_21697
+if 
+  $6637 == 5 
+jf @SWEET4_22218 
+if 
+  84@ == 1 
+jf @SWEET4_21754 
+0151: remove_status_text $6673 
+03C4: set_status_text $6673 type 1 GXT 'SWE4_08' // global_variable  // CAR HEALTH
+
+:SWEET4_21754
+if 
+   not Actor.Dead(415@)
+jf @SWEET4_21783 
+Marker.Disable(433@)
+433@ = Marker.CreateAboveActor(415@)
+
+:SWEET4_21783
+if 
+   not Actor.Dead(416@)
+jf @SWEET4_21812 
+Marker.Disable(434@)
+434@ = Marker.CreateAboveActor(416@)
+
+:SWEET4_21812
+if 
+   not Actor.Dead(417@)
+jf @SWEET4_21841 
+Marker.Disable(435@)
+435@ = Marker.CreateAboveActor(417@)
+
+:SWEET4_21841
+if 
+   not Actor.Dead(418@)
+jf @SWEET4_21870 
+Marker.Disable(436@)
+436@ = Marker.CreateAboveActor(418@)
+
+:SWEET4_21870
+if 
+   not Actor.Dead(419@)
+jf @SWEET4_21899 
+Marker.Disable(437@)
+437@ = Marker.CreateAboveActor(419@)
+
+:SWEET4_21899
+if 
+   not Actor.Dead(420@)
+jf @SWEET4_21928 
+Marker.Disable(438@)
+438@ = Marker.CreateAboveActor(420@)
+
+:SWEET4_21928
+if 
+   not Actor.Dead(421@)
+jf @SWEET4_21957 
+Marker.Disable(439@)
+439@ = Marker.CreateAboveActor(421@)
+
+:SWEET4_21957
+if 
+   not Actor.Dead(422@)
+jf @SWEET4_21986 
+Marker.Disable(440@)
+440@ = Marker.CreateAboveActor(422@)
+
+:SWEET4_21986
+if 
+   not Actor.Dead(423@)
+jf @SWEET4_22015 
+Marker.Disable(441@)
+441@ = Marker.CreateAboveActor(423@)
+
+:SWEET4_22015
+if 
+   not Actor.Dead(424@)
+jf @SWEET4_22044 
+Marker.Disable(442@)
+442@ = Marker.CreateAboveActor(424@)
+
+:SWEET4_22044
+if 
+   not Actor.Dead(425@)
+jf @SWEET4_22073 
+Marker.Disable(443@)
+443@ = Marker.CreateAboveActor(425@)
+
+:SWEET4_22073
+if 
+   not Actor.Dead(426@)
+jf @SWEET4_22102 
+Marker.Disable(444@)
+444@ = Marker.CreateAboveActor(426@)
+
+:SWEET4_22102
+if 
+   not Actor.Dead(427@)
+jf @SWEET4_22131 
+Marker.Disable(445@)
+445@ = Marker.CreateAboveActor(427@)
+
+:SWEET4_22131
+if 
+   not Actor.Dead(428@)
+jf @SWEET4_22160 
+Marker.Disable(446@)
+446@ = Marker.CreateAboveActor(428@)
+
+:SWEET4_22160
+if 
+   not Actor.Dead(429@)
+jf @SWEET4_22189 
+Marker.Disable(447@)
+447@ = Marker.CreateAboveActor(429@)
+
+:SWEET4_22189
+if 
+   not Actor.Dead(430@)
+jf @SWEET4_22218 
+Marker.Disable(448@)
+448@ = Marker.CreateAboveActor(430@)
+
+:SWEET4_22218
+if 
+  $6637 == 6 
+jf @SWEET4_22281 
+$6672 = 18 
+01BD: 82@ = current_time_in_ms 
+82@ -= 5000 
+Marker.Disable($6658)
+018A: $6658 = create_checkpoint_at 2075.55 -1831.09 12.21 
+
+:SWEET4_22281
+if 
+  $6637 == 7 
+jf @SWEET4_22318 
+Marker.Disable(58@)
+018A: 58@ = create_checkpoint_at 89@ 90@ 91@ 
+
+:SWEET4_22318
+00BE: text_clear_all 
+78@ = 1 
+01BD: $6669 = current_time_in_ms 
+$6659 = 0 
+
+:SWEET4_22339
+if 
+  $6637 == 666 
+jf @SWEET4_22474 
+01BD: 67@ = current_time_in_ms 
+0085: 73@ = 67@ // (int) 
+0062: 73@ -= 61@ // (int) 
+if 
+  73@ > 1000 
+jf @SWEET4_22474 
+if and
+   not Actor.Dead(394@)
+   not Car.Wrecked(543@)
+jf @SWEET4_22474 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22474 
+05D2: AS_actor 394@ run_to_and_hijack_car 543@ max_search_radius 50.0 traffic_behavior 2 
+389@ = 32 
+$6637 = 667 
+
+:SWEET4_22474
+if 
+  $6637 == 667 
+jf @SWEET4_22573 
+if 
+   not Car.Wrecked(543@)
+jf @SWEET4_22573 
+if or
+82CA:   not car 543@ bounding_sphere_visible 
+8205:   not actor $PLAYER_ACTOR near_car 543@ radius 50.0 50.0 50.0 flag 0 
+jf @SWEET4_22573 
+00BC: show_text_highpriority GXT 'SWE4_05' time 5000 flag 1  // ~r~You sure you're down for the 'hood?
+jump @SWEET4_24333 
+
+:SWEET4_22573
+if 
+  $6659 == 0 
+jf @SWEET4_24326 
+if 
+  $6637 == 3 
+jf @SWEET4_23157 
+if 
+  $6672 == -1 
+jf @SWEET4_22714 
+if 
+  390@ == 0 
+jf @SWEET4_22660 
+00BB: show_text_lowpriority GXT 'SWE4_01' time 100 flag 1  // ~s~Drive your homies into ~y~Balla territory~s~.
+
+:SWEET4_22660
+01BD: $6670 = current_time_in_ms 
+0084: $6671 = $6670 // (int) 
+0060: $6671 -= $6669 // (int) 
+if 
+  $6671 > 3000 
+jf @SWEET4_22714 
+00BE: text_clear_all 
+$6672 += 1 
+01BD: $6669 = current_time_in_ms 
+
+:SWEET4_22714
+if 
+  $6672 == 0 
+jf @SWEET4_22764 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22764 
+389@ = 1 
+
+:SWEET4_22764
+if 
+  $6672 == 1 
+jf @SWEET4_22814 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22814 
+389@ = 2 
+
+:SWEET4_22814
+if 
+  $6672 == 2 
+jf @SWEET4_22864 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22864 
+389@ = 5 
+
+:SWEET4_22864
+if 
+  $6672 == 3 
+jf @SWEET4_22914 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22914 
+389@ = 6 
+
+:SWEET4_22914
+if 
+  $6672 == 4 
+jf @SWEET4_22964 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_22964 
+389@ = 7 
+
+:SWEET4_22964
+if 
+  $6672 == 5 
+jf @SWEET4_23014 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23014 
+389@ = 8 
+
+:SWEET4_23014
+if 
+  $6672 == 6 
+jf @SWEET4_23064 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23064 
+389@ = 9 
+
+:SWEET4_23064
+if 
+  $6672 == 7 
+jf @SWEET4_23114 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23114 
+389@ = 10 
+
+:SWEET4_23114
+if 
+  $6672 == 8 
+jf @SWEET4_23157 
+if 
+  390@ == 0 
+jf @SWEET4_23157 
+389@ = 11 
+
+:SWEET4_23157
+if 
+  $6637 == 4 
+jf @SWEET4_23533 
+if 
+  $6672 == 9 
+jf @SWEET4_23225 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23225 
+389@ = 12 
+
+:SWEET4_23225
+if 
+  $6672 == 10 
+jf @SWEET4_23275 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23275 
+389@ = 13 
+
+:SWEET4_23275
+if 
+  $6672 == 11 
+jf @SWEET4_23325 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23325 
+389@ = 14 
+
+:SWEET4_23325
+if 
+  $6672 == 12 
+jf @SWEET4_23375 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23375 
+389@ = 15 
+
+:SWEET4_23375
+if 
+  $6672 == 13 
+jf @SWEET4_23533 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23533 
+389@ = 16 
+if 
+   not Actor.Dead(417@)
+jf @SWEET4_23477 
+0605: actor 417@ perform_animation "GSIGN3" IFP "GHANDS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+
+:SWEET4_23477
+if 
+   not Actor.Dead(418@)
+jf @SWEET4_23533 
+0605: actor 418@ perform_animation "DRNKBR_PRTL" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+
+:SWEET4_23533
+if 
+  $6637 == 6 
+jf @SWEET4_23911 
+if 
+  49@ == 0 
+jf @SWEET4_23765 
+if 
+  $6672 == 14 
+jf @SWEET4_23654 
+00BB: show_text_lowpriority GXT 'SWE4_12' time 100 flag 1  // ~s~You have a two star wanted level, the cops will chase you down.
+01BD: $6670 = current_time_in_ms 
+0084: $6671 = $6670 // (int) 
+0060: $6671 -= $6669 // (int) 
+if 
+  $6671 > 4000 
+jf @SWEET4_23654 
+$6672 += 1 
+01BD: $6669 = current_time_in_ms 
+
+:SWEET4_23654
+if 
+  $6672 == 15 
+jf @SWEET4_23758 
+00BB: show_text_lowpriority GXT 'SWE4_03' time 100 flag 1  // ~s~Get to the ~y~spray shop~s~, you can lose the police there!
+01BD: $6670 = current_time_in_ms 
+0084: $6671 = $6670 // (int) 
+0060: $6671 -= $6669 // (int) 
+if 
+  $6671 > 4000 
+jf @SWEET4_23758 
+01BD: 82@ = current_time_in_ms 
+$6672 += 1 
+$6672 += 1 
+$6672 += 1 
+01BD: $6669 = current_time_in_ms 
+
+:SWEET4_23758
+jump @SWEET4_23911 
+
+:SWEET4_23765
+if 
+  $6672 == 14 
+jf @SWEET4_23815 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23815 
+389@ = 55 
+
+:SWEET4_23815
+if 
+  $6672 == 15 
+jf @SWEET4_23865 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_23865 
+389@ = 56 
+
+:SWEET4_23865
+if 
+  $6672 == 16 
+jf @SWEET4_23911 
+00BB: show_text_lowpriority GXT 'SWE4_03' time 4000 flag 1  // ~s~Get to the ~y~spray shop~s~, you can lose the police there!
+$6672 += 1 
+01BD: $6669 = current_time_in_ms 
+
+:SWEET4_23911
+if and
+  $6637 == 7 
+  43@ == 4 
+jf @SWEET4_24326 
+01BD: $6670 = current_time_in_ms 
+0084: $6671 = $6670 // (int) 
+0060: $6671 -= $6669 // (int) 
+if 
+  $6671 > 6000 
+jf @SWEET4_24026 
+if 
+  $6672 == 18 
+jf @SWEET4_24026 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24026 
+389@ = 37 
+
+:SWEET4_24026
+if 
+  $6672 == 19 
+jf @SWEET4_24076 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24076 
+389@ = 38 
+
+:SWEET4_24076
+if 
+  $6672 == 20 
+jf @SWEET4_24126 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24126 
+389@ = 35 
+
+:SWEET4_24126
+if 
+  $6672 == 21 
+jf @SWEET4_24176 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24176 
+389@ = 36 
+
+:SWEET4_24176
+if 
+  $6672 == 22 
+jf @SWEET4_24226 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24226 
+389@ = 39 
+
+:SWEET4_24226
+if 
+  $6672 == 23 
+jf @SWEET4_24276 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24276 
+389@ = 40 
+
+:SWEET4_24276
+if 
+  $6672 == 24 
+jf @SWEET4_24326 
+if and
+  390@ == 0 
+  389@ == 0 
+jf @SWEET4_24326 
+389@ = 41 
+
+:SWEET4_24326
+jump @SWEET4_7947 
+
+:SWEET4_24333
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SWEET4_24401 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:SWEET4_24401
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:SWEET4_24419
+0746: set_acquaintance 4 of_actors_pedtype 7 to_actors_pedtype 0 
+$SWEET_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'SWEET_4'  // Drive-By
+030C: progress_made = 1 
+Player.Money($PLAYER_CHAR) += 500
+0998: add_respect 6 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 500 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+0394: play_music 1 
+create_thread @RYDER 
+Marker.Disable($436)
+$436 = Marker.CreateIconAndSphere($ICON_RYDER, $X_RYDER_HOUSE, $Y_RYDER_HOUSE, $Z_RYDER_HOUSE)
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:SWEET4_24521
+gosub @SWEET4_3306 
+gosub @SWEET4_3071 
+Actor.DestroyWithFade(408@)
+Actor.DestroyWithFade(401@)
+Actor.DestroyWithFade(394@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+Model.Destroy(#BALLAS1)
+Model.Destroy(#BALLAS2)
+Model.Destroy(#TEC9)
+Model.Destroy(#COLT45)
+Model.Destroy(#VOODOO)
+Model.Destroy(#SPRAYCAN)
+04EF: release_animation "GHANDS" 
+04EF: release_animation "GANGS" 
+Marker.Disable(544@)
+Marker.Disable(57@)
+Marker.Disable(58@)
+Marker.Disable(433@)
+Marker.Disable(434@)
+Marker.Disable(435@)
+Marker.Disable(436@)
+Marker.Disable(437@)
+Marker.Disable(438@)
+Marker.Disable(439@)
+Marker.Disable(440@)
+Marker.Disable(441@)
+Marker.Disable(442@)
+Marker.Disable(443@)
+Marker.Disable(444@)
+Marker.Disable(445@)
+Marker.Disable(446@)
+Marker.Disable(447@)
+Marker.Disable(448@)
+Marker.Disable($449)
+Marker.Disable($6658)
+$449 = Marker.CreateIconWithoutSphere(63, 2067.4, -1831.2, 13.5)
+0335: enable_free_respray 0 
+03C7: set_sensitivity_to_crime 1.0 
+01F0: set_max_wanted_level_to 53@ 
+099E: enable_police_patrols 1 
+014C: set_parked_car_generator $2765 cars_to_generate_to 101 
+0733: random_car_generator_enable_model #VOODOO 
+04EF: release_animation "GHETTO_DB" 
+0151: remove_status_text $6673 
+043C: disable_sounds_after_fadeout 1 
+08EA: enable_gangs_spawn 1 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return 
+
+:SWEET4_24810
+if 
+   not Actor.Dead(194@)
+jf @SWEET4_24840 
+Actor.StorePos(194@, 86@, 87@, 88@)
+
+:SWEET4_24840
+195@ = -1 
+199@ = 99999.9 
+39@ = 0 
+
+:SWEET4_24864
+if 
+  18 > 39@ 
+jf @SWEET4_25010 
+if 
+   not Actor.Dead(415@(39@,18i))
+jf @SWEET4_24996 
+Actor.StorePos(415@(39@,18i), 451@(39@,18f), 469@(39@,18f), 487@(39@,18f))
+0509: 200@ = distance_between_XY 86@ 87@ and_XY 451@(39@,18f) 469@(39@,18f) 
+if 
+0025:   199@ > 200@ // (float) 
+jf @SWEET4_24996 
+0087: 199@ = 200@ // (float) 
+0085: 195@ = 415@(39@,18i) // (int) 
+
+:SWEET4_24996
+39@ += 1 
+jump @SWEET4_24864 
+
+:SWEET4_25010
+if 
+  195@ >= 0 
+jf @SWEET4_25094 
+if and
+   not Actor.Dead(195@)
+   not Actor.Dead(194@)
+jf @SWEET4_25094 
+0713: actor 194@ driveby_actor 195@ car -1 point 0.0 0.0 0.0 radius 40.0 41@ 40@ firing_rate 99 
+01B9: set_actor 194@ armed_weapon_to 32 
+
+:SWEET4_25094
+01BD: 62@ = current_time_in_ms 
+return 
+
+:SWEET4_25101
+if and
+   not 389@ > 11 
+   not 17 > 389@ 
+jf @SWEET4_25133 
+326@ = 0 
+
+:SWEET4_25133
+if and
+   not 389@ > 41 
+   not 46 > 389@ 
+jf @SWEET4_25165 
+326@ = 0 
+
+:SWEET4_25165
+if or
+  389@ == 12 
+  389@ == 14 
+  389@ == 16 
+  389@ == 42 
+  389@ == 43 
+jf @SWEET4_25219 
+0085: 326@ = 408@ // (int) 
+
+:SWEET4_25219
+if or
+  389@ == 13 
+  389@ == 44 
+jf @SWEET4_25252 
+008B: 326@ = $PLAYER_ACTOR // (int) 
+
+:SWEET4_25252
+if 
+  389@ == 15 
+jf @SWEET4_25278 
+0085: 326@ = 401@ // (int) 
+
+:SWEET4_25278
+if 
+  389@ == 45 
+jf @SWEET4_25304 
+0085: 326@ = 394@ // (int) 
+
+:SWEET4_25304
+return
