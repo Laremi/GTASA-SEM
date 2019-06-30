@@ -9,5 +9,8 @@ This mod was tested on a downgraded version of Steam GTA San Andreas with ModLoa
 3. ModLoader by LINK/2012
 ## Installation
 Create a folder inside of ModLoader called 'Storyline Enhancement Mod' and drop 'data', 'models', 'text' and 'loader.txt' into it.
+## Planned
+Support for other languages once English localization is complete
+Fix soft lock issue where phone call unlocking 'Saint Marks Bistro' never happens
 ## Credits
 DeeZire, Laremi Story, Junior_Djjr
