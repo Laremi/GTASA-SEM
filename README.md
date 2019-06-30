@@ -7,5 +7,7 @@ This mod was tested on a downgraded version of Steam GTA San Andreas with ModLoa
 1. Grand Theft Auto: San Andreas v1.0
 2. Ultimate ASI Loader by ThirteenAG
 3. ModLoader by LINK/2012
+## Installation
+Create a folder inside of ModLoader called 'Storyline Enhancement Mod' and drop 'data', 'models', 'text' and 'loader.txt' into it.
 ## Credits
 DeeZire, Laremi Story, Junior_Djjr
