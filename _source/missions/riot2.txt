@@ -1,0 +1,6132 @@
+:RIOT2
+thread 'RIOT2' 
+gosub @RIOT2_94 
+if 
+wasted_or_busted 
+jf @RIOT2_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @RIOT2_30318 
+
+:RIOT2_85
+gosub @RIOT2_30644 
+end_thread 
+
+:RIOT2_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'RIOT2' 
+if 
+  $ONMISSION == 0 
+jf @RIOT2_397 
+88@ = Object.Create(#BBALL_INGAME, 0.0, 0.0, 0.0)
+018A: 89@ = create_checkpoint_at 1774.9 -1974.9 13.1 
+37@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+43@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+49@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+55@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+61@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+79@ = Actor.Create(Mission2, 146@(148@,2i), 1831.9, -2004.6, 12.6)
+96@ = Marker.CreateAboveActor(37@)
+102@ = Marker.CreateAboveActor(43@)
+108@ = Marker.CreateAboveActor(49@)
+114@ = Marker.CreateAboveActor(55@)
+120@ = Marker.CreateAboveActor(61@)
+132@ = Marker.CreateAboveActor(79@)
+
+:RIOT2_397
+00BE: text_clear_all 
+wait 0 
+142@ = 0 
+143@ = 0 
+144@ = 0 
+145@ = 0 
+187@ = 0 
+04AF: 146@ = 108 // = constant 
+04AF: 147@ = 109 // = constant 
+148@ = 0 
+149@ = 2 
+150@ = 0 
+152@ = 0 
+153@ = 0 
+154@ = 0 
+155@ = 0 
+156@ = 0 
+157@ = 0 
+158@ = 0 
+159@ = 0 
+160@ = 0 
+161@ = 0 
+162@ = 0 
+163@ = 0 
+164@ = 0 
+165@ = 0 
+166@ = 0 
+167@ = 0 
+170@ = 0 
+171@ = 0 
+172@ = 0 
+173@ = 0 
+174@ = 0 
+175@ = 0 
+176@ = 0 
+262@ = 0.0 
+263@ = 0.0 
+264@ = 0.0 
+168@ = 0 
+169@ = 0 
+177@ = 0 
+178@ = 0 
+185@ = 0 
+188@ = 0 
+255@ = 0 
+256@ = 0 
+257@ = 0 
+258@ = 0 
+259@ = 0 
+260@ = 0 
+261@ = 0 
+183@ = 0.0 
+180@ = 0 
+181@ = 60 
+270@ = 0 
+08F5: save_player_group 
+select_interior 1 
+02E4: load_cutscene_data 'RIOT_2' 
+
+:RIOT2_803
+if 
+86B9:   not cutscene_data_loaded 
+jf @RIOT2_827 
+wait 0 
+jump @RIOT2_803 
+
+:RIOT2_827
+02E7: start_cutscene 
+fade 1 1000 
+
+:RIOT2_836
+if 
+82E9:   not cutscene_reached_end 
+jf @RIOT2_860 
+wait 0 
+jump @RIOT2_836 
+
+:RIOT2_860
+fade 0 0 
+
+:RIOT2_866
+if 
+fading 
+jf @RIOT2_890 
+wait 0 
+jump @RIOT2_866 
+
+:RIOT2_890
+select_interior 0 
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+023C: load_special_actor 'CESAR' as 1 // models 290-299 
+023C: load_special_actor 'SUNNY' as 2 // models 290-299 
+023C: load_special_actor 'GAL' as 3 // models 290-299 
+023C: load_special_actor 'HAZER' as 4 // models 290-299 
+Model.Load(#LSV1)
+Model.Load(#LSV2)
+Model.Load(#KATANA)
+Model.Load(#DESERT_EAGLE)
+Model.Load(#TEC9)
+038B: load_requested_models 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 25 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 24 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 0 
+0746: set_acquaintance 0 of_actors_pedtype 25 to_actors_pedtype 25 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+060A: create_decision_maker_type 2 store_to 265@ // decision\allowed\m_.ped files 
+07E5: copy_decision_maker 65542 to 266@ 
+06AE: create_group_decision_maker_type 0 store_to 267@ // decision\allowed\mission.grp 
+0395: clear_area 1 at 2520.8 -1678.5 14.2 radius 30.0 
+Camera.SetAtPos(2520.8, -1678.5, 14.2)
+Actor.PutAt($PLAYER_ACTOR, 2520.8, -1678.5, 14.2)
+Actor.Angle($PLAYER_ACTOR) = 68.6
+0395: clear_area 1 at 2520.8 -1678.5 14.2 radius 1.0 
+$ACTOR_CESAR = Actor.Create(Mission1, #SPECIAL01, 2519.8, -1677.5, 13.7)
+Actor.Angle($ACTOR_CESAR) = 68.6
+Actor.GiveWeaponAndAmmo($ACTOR_CESAR, DesertEagle, 30000)
+0568: set_actor $ACTOR_CESAR untargetable 1 
+Actor.AddArmour($ACTOR_CESAR, 100)
+077A: set_actor $ACTOR_CESAR acquaintance 0 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor $ACTOR_CESAR immune_to_nonplayer 1 
+0446: set_actor $ACTOR_CESAR dismemberment_possible 0 
+060B: set_actor $ACTOR_CESAR decision_maker_to 265@ 
+022B: create_forbidden_for_peds_cube_cornerA 1945.8 -1956.5 0.0 cornerB 1642.9 -2174.3 50.0 
+0395: clear_area 1 at 1784.6 -1969.5 13.1 radius 30.0 
+35@ = Actor.Create(Mission1, #SPECIAL02, 1784.6, -1969.5, 13.1)
+Actor.Angle(35@) = 103.1
+Actor.GiveWeaponAndAmmo(35@, Tec9, 30000)
+0568: set_actor 35@ untargetable 1 
+Actor.AddArmour(35@, 100)
+077A: set_actor 35@ acquaintance 0 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor 35@ immune_to_nonplayer 1 
+0446: set_actor 35@ dismemberment_possible 0 
+060B: set_actor 35@ decision_maker_to 266@ 
+34@ = Actor.Create(Mission1, #SPECIAL03, 1784.4, -1971.1, 13.1)
+Actor.Angle(34@) = 52.8
+Actor.GiveWeaponAndAmmo(34@, Tec9, 30000)
+0568: set_actor 34@ untargetable 1 
+Actor.AddArmour(34@, 100)
+077A: set_actor 34@ acquaintance 0 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor 34@ immune_to_nonplayer 1 
+0446: set_actor 34@ dismemberment_possible 0 
+060B: set_actor 34@ decision_maker_to 266@ 
+36@ = Actor.Create(Mission1, #SPECIAL04, 1782.6, -1969.4, 13.1)
+Actor.Angle(36@) = 250.2
+Actor.GiveWeaponAndAmmo(36@, Katana, 30000)
+0568: set_actor 36@ untargetable 1 
+Actor.AddArmour(36@, 100)
+077A: set_actor 36@ acquaintance 0 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor 36@ immune_to_nonplayer 1 
+0446: set_actor 36@ dismemberment_possible 0 
+Actor.SetImmunities(36@, 1, 0, 0, 0, 0)
+060B: set_actor 36@ decision_maker_to 266@ 
+Garage.ChangeType('DUF_LAS', 15)
+06D0: enable_emergency_traffic 0 
+Garage.Close('DUF_LAS')
+09B7: set_zone 'ELCO' disable_footcops 1  // El Corona
+184@ = Pickup.Create(#HEALTH, 15, 1877.54, -1982.63, 13.48)
+09D2: set_cops_chase_criminals 0 
+
+:RIOT2_1662
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @RIOT2_1688 
+jump @RIOT2_30404 
+
+:RIOT2_1688
+Player.WantedLevel($PLAYER_CHAR) = 0
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_1727 
+jump @RIOT2_30318 
+
+:RIOT2_1727
+01BD: 174@ = current_time_in_ms 
+0085: 175@ = 174@ // (int) 
+0062: 175@ -= 176@ // (int) 
+0085: 176@ = 174@ // (int) 
+005A: 170@ += 175@ // (int) 
+005A: 171@ += 175@ // (int) 
+005A: 172@ += 175@ // (int) 
+005A: 173@ += 175@ // (int) 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @RIOT2_1843 
+Actor.PutAt($PLAYER_ACTOR, 1776.0, -1988.1, 12.9)
+Actor.PutAt($ACTOR_CESAR, 1776.0, -1990.1, 12.9)
+
+:RIOT2_1843
+07F6: get_group $PLAYER_GROUP number_of_leaders_to $TIME_MINS number_of_members_to 177@ 
+if 
+  142@ == 0 
+jf @RIOT2_3385 
+if 
+  143@ == 0 
+jf @RIOT2_2193 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Camera.SetPosition(2509.0, -1672.7, 13.3, 0.0, 0.0, 0.0)
+Camera.PointAt(2523.1, -1678.2, 15.2, 2)
+09F5: disable_player_mutal_activities 1 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 2512.8 -1673.2 12.5 mode 4 time -1 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 2514.1 -1675.2 12.5 mode 4 time -1 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $ACTOR_CESAR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+fade 1 500 
+
+:RIOT2_2095
+if 
+fading 
+jf @RIOT2_2119 
+wait 0 
+jump @RIOT2_2095 
+
+:RIOT2_2119
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_2151 
+jump @RIOT2_30318 
+
+:RIOT2_2151
+185@ = 1 
+186@ = 0 
+gosub @RIOT2_41057 
+143@ = 1 
+144@ = 1 
+0707: start_scene_skip_to @RIOT2_2326 
+
+:RIOT2_2193
+if 
+  143@ == 1 
+jf @RIOT2_2283 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_2283 
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+143@ = 2 
+
+:RIOT2_2283
+if 
+  143@ == 2 
+jf @RIOT2_2684 
+if 
+  185@ == 0 
+jf @RIOT2_2684 
+144@ = 0 
+
+:RIOT2_2326
+0701: end_scene_skip 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_2360 
+jump @RIOT2_30318 
+
+:RIOT2_2360
+if 
+  144@ == 1 
+jf @RIOT2_2518 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_2402
+if 
+fading 
+jf @RIOT2_2426 
+wait 0 
+jump @RIOT2_2402 
+
+:RIOT2_2426
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_2458 
+jump @RIOT2_30318 
+
+:RIOT2_2458
+Actor.PutAt($PLAYER_ACTOR, 2512.8, -1673.2, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 40.6
+Actor.PutAt($ACTOR_CESAR, 2514.1, -1675.2, 12.5)
+Actor.Angle($ACTOR_CESAR) = 220.0
+
+:RIOT2_2518
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+167@ = 1 
+06AD: set_group $PLAYER_GROUP group_decision_maker_to 267@ 
+09F5: disable_player_mutal_activities 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'R2_01' time 60000 flag 1  // ~s~Recruit a couple of Grove street Families gang members.
+if 
+  144@ == 1 
+jf @RIOT2_2677 
+fade 1 500 
+
+:RIOT2_2621
+if 
+fading 
+jf @RIOT2_2645 
+wait 0 
+jump @RIOT2_2621 
+
+:RIOT2_2645
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_2677 
+jump @RIOT2_30318 
+
+:RIOT2_2677
+143@ = 3 
+
+:RIOT2_2684
+if 
+  143@ > 2 
+jf @RIOT2_2709 
+gosub @RIOT2_38004 
+
+:RIOT2_2709
+if 
+  143@ == 3 
+jf @RIOT2_2807 
+if 
+  177@ > 2 
+jf @RIOT2_2807 
+Marker.Disable(89@)
+018A: 89@ = create_checkpoint_at 1774.9 -1974.9 13.1 
+07E0: set_marker 89@ type_to 0 
+00BC: show_text_highpriority GXT 'R2_13' time 7000 flag 1  // ~s~Go and meet up with the veteranos at ~y~Unity Station~s~.
+33@ = 0 
+143@ = 4 
+
+:RIOT2_2807
+if 
+  143@ == 4 
+jf @RIOT2_3385 
+if 
+  187@ == 0 
+jf @RIOT2_2904 
+if 
+  33@ > 7000 
+jf @RIOT2_2904 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+185@ = 2 
+186@ = 0 
+gosub @RIOT2_41057 
+187@ = 1 
+
+:RIOT2_2904
+if 
+  187@ == 1 
+jf @RIOT2_2954 
+if 
+  185@ == 0 
+jf @RIOT2_2954 
+33@ = 0 
+187@ = 2 
+
+:RIOT2_2954
+if 
+  187@ == 2 
+jf @RIOT2_3019 
+if 
+  33@ > 7000 
+jf @RIOT2_3019 
+185@ = 3 
+186@ = 0 
+gosub @RIOT2_41057 
+187@ = 3 
+
+:RIOT2_3019
+if 
+  187@ == 3 
+jf @RIOT2_3076 
+if 
+  185@ == 0 
+jf @RIOT2_3076 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+187@ = 4 
+
+:RIOT2_3076
+if 
+  167@ == 1 
+jf @RIOT2_3284 
+07F6: get_group $PLAYER_GROUP number_of_leaders_to $TIME_MINS number_of_members_to 177@ 
+if 
+  178@ == 0 
+jf @RIOT2_3182 
+if 
+  3 > 177@ 
+jf @RIOT2_3182 
+Marker.Disable(89@)
+03D5: remove_text 'R2_13'  // ~s~Go and meet up with the veteranos at ~y~Unity Station~s~.
+00BC: show_text_highpriority GXT 'R2_01' time 60000 flag 1  // ~s~Recruit a couple of Grove street Families gang members.
+178@ = 1 
+
+:RIOT2_3182
+if 
+  178@ == 1 
+jf @RIOT2_3284 
+if 
+  177@ > 2 
+jf @RIOT2_3284 
+Marker.Disable(89@)
+018A: 89@ = create_checkpoint_at 1774.9 -1974.9 13.1 
+07E0: set_marker 89@ type_to 0 
+03D5: remove_text 'R2_01'  // ~s~Recruit a couple of Grove street Families gang members.
+00BC: show_text_highpriority GXT 'R2_13' time 7000 flag 1  // ~s~Go and meet up with the veteranos at ~y~Unity Station~s~.
+178@ = 0 
+
+:RIOT2_3284
+if 
+  178@ == 0 
+jf @RIOT2_3385 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 1774.9 -1974.9 13.1 radius 4.0 4.0 4.0 
+jf @RIOT2_3385 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+187@ = 0 
+143@ = 0 
+142@ = 1 
+
+:RIOT2_3385
+if 
+  142@ == 1 
+jf @RIOT2_6874 
+if 
+  143@ == 0 
+jf @RIOT2_4052 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_3445
+if 
+fading 
+jf @RIOT2_3469 
+wait 0 
+jump @RIOT2_3445 
+
+:RIOT2_3469
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_3501 
+jump @RIOT2_30318 
+
+:RIOT2_3501
+0395: clear_area 1 at 1781.1 -1974.8 13.1 radius 30.0 
+09F5: disable_player_mutal_activities 1 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+06C9: remove_actor $ACTOR_CESAR from_group 
+Model.Load(#BBALL_INGAME)
+04ED: load_animation "BSKTBALL" 
+04ED: load_animation "SMOKING" 
+04ED: load_animation "GANGS" 
+038B: load_requested_models 
+08F5: save_player_group 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @RIOT2_3695 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1781.1, -1974.8, 13.1)
+Actor.Angle($PLAYER_ACTOR) = 325.3
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1781.8, -1976.4, 13.1)
+Actor.Angle($ACTOR_CESAR) = 302.3
+jump @RIOT2_3733 
+
+:RIOT2_3695
+87@ = Actor.CurrentCar($PLAYER_ACTOR)
+Car.PutAt(87@, 1774.9, -1974.9, 13.1)
+0633: AS_actor $PLAYER_ACTOR exit_car 
+0633: AS_actor $ACTOR_CESAR exit_car 
+
+:RIOT2_3733
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1781.1, -1974.8, 13.1)
+Actor.Angle($PLAYER_ACTOR) = 325.3
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1781.8, -1976.4, 13.1)
+Actor.Angle($ACTOR_CESAR) = 302.3
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKB" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 35@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Camera.SetPosition(1781.1, -1970.4, 14.7, 0.0, 0.0, 0.0)
+Camera.PointAt(1783.2, -1969.9, 14.5, 2)
+fade 1 500 
+
+:RIOT2_3975
+if 
+fading 
+jf @RIOT2_3999 
+wait 0 
+jump @RIOT2_3975 
+
+:RIOT2_3999
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_4031 
+jump @RIOT2_30318 
+
+:RIOT2_4031
+143@ = 1 
+144@ = 1 
+0707: start_scene_skip_to @RIOT2_6071 
+
+:RIOT2_4052
+if 
+  143@ == 1 
+jf @RIOT2_4105 
+185@ = 4 
+186@ = 0 
+188@ = 2 
+gosub @RIOT2_41057 
+143@ = 2 
+
+:RIOT2_4105
+if 
+  143@ == 2 
+jf @RIOT2_4336 
+if 
+  185@ == 0 
+jf @RIOT2_4336 
+Camera.SetPosition(1784.5, -1967.7, 14.7, 0.0, 0.0, 0.0)
+Camera.PointAt(1781.4, -1973.5, 14.3, 2)
+05D3: AS_actor $PLAYER_ACTOR goto_point 1782.3 -1972.8 13.1 mode 4 time -1 ms // versionA 
+0639: AS_actor 36@ rotate_to_actor $PLAYER_ACTOR 
+05D3: AS_actor 34@ goto_point 1783.8 -1972.4 13.1 mode 4 time -1 ms // versionA 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1783.3 -1973.0 13.1 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+185@ = 4 
+186@ = 2 
+188@ = 4 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 3 
+
+:RIOT2_4336
+if 
+  143@ == 3 
+jf @RIOT2_4444 
+if 
+  185@ == 0 
+jf @RIOT2_4444 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKD" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+143@ = 4 
+
+:RIOT2_4444
+if 
+  143@ == 4 
+jf @RIOT2_4663 
+if 
+  185@ == 0 
+jf @RIOT2_4663 
+062E: get_actor $ACTOR_CESAR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_4663 
+0687: clear_actor 34@ task 
+0615: define_AS_pack_begin 268@ 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKC" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKE" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+185@ = 4 
+186@ = 4 
+188@ = 6 
+gosub @RIOT2_41057 
+143@ = 5 
+
+:RIOT2_4663
+if 
+  143@ == 5 
+jf @RIOT2_4713 
+if 
+  185@ == 0 
+jf @RIOT2_4713 
+32@ = 0 
+143@ = 6 
+
+:RIOT2_4713
+if 
+  143@ == 6 
+jf @RIOT2_5305 
+if 
+  32@ > 1000 
+jf @RIOT2_5305 
+fade 0 500 
+
+:RIOT2_4757
+if 
+fading 
+jf @RIOT2_4781 
+wait 0 
+jump @RIOT2_4757 
+
+:RIOT2_4781
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_4813 
+jump @RIOT2_30318 
+
+:RIOT2_4813
+0395: clear_area 1 at 1793.8 -1970.6 12.5 radius 30.0 
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.PutAt($PLAYER_ACTOR, 1789.5, -1968.5, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 234.3
+05D3: AS_actor $PLAYER_ACTOR goto_point 1798.2 -1974.4 12.5 mode 4 time -1 ms // versionA 
+0687: clear_actor $ACTOR_CESAR task 
+Actor.PutAt($ACTOR_CESAR, 1789.0, -1970.6, 12.5)
+Actor.Angle($ACTOR_CESAR) = 231.5
+05D3: AS_actor $ACTOR_CESAR goto_point 1794.0 -1973.5 12.5 mode 4 time -1 ms // versionA 
+Actor.PutAt(35@, 1789.3, -1967.4, 12.5)
+Actor.Angle(35@) = 231.5
+05D3: AS_actor 35@ goto_point 1796.3 -1970.7 12.5 mode 4 time -1 ms // versionA 
+Actor.PutAt(36@, 1787.4, -1967.2, 12.5)
+Actor.Angle(36@) = 234.5
+05D3: AS_actor 36@ goto_point 1792.9 -1972.3 12.5 mode 4 time -1 ms // versionA 
+Actor.PutAt(34@, 1786.3, -1966.7, 12.5)
+Actor.Angle(34@) = 251.5
+05D3: AS_actor 34@ goto_point 1793.8 -1970.6 12.5 mode 4 time -1 ms // versionA 
+if 
+  150@ == 0 
+jf @RIOT2_5149 
+gosub @RIOT2_31377 
+150@ = 1 
+
+:RIOT2_5149
+Camera.SetPosition(1788.0, -1968.0, 14.5, 0.0, 0.0, 0.0)
+Camera.PointAt(1799.5, -1973.8, 13.6, 2)
+fade 1 500 
+
+:RIOT2_5207
+if 
+fading 
+jf @RIOT2_5231 
+wait 0 
+jump @RIOT2_5207 
+
+:RIOT2_5231
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_5263 
+jump @RIOT2_30318 
+
+:RIOT2_5263
+185@ = 4 
+186@ = 7 
+188@ = 9 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 7 
+
+:RIOT2_5305
+if 
+  143@ == 7 
+jf @RIOT2_5453 
+if 
+  185@ == 0 
+jf @RIOT2_5453 
+if 
+  32@ > 4000 
+jf @RIOT2_5453 
+185@ = 4 
+186@ = 10 
+188@ = 11 
+gosub @RIOT2_41057 
+Camera.SetPosition(1823.1, -1997.4, 13.5, 0.0, 0.0, 0.0)
+Camera.PointAt(1829.3, -2003.7, 14.4, 2)
+32@ = 0 
+143@ = 8 
+
+:RIOT2_5453
+if 
+  143@ == 8 
+jf @RIOT2_5991 
+if 
+   not Actor.Dead(38@)
+jf @RIOT2_5752 
+if 
+0685:   object 88@ attached 
+jf @RIOT2_5714 
+if 
+   Actor.Animation(38@) == "BBALL_IDLELOOP"
+jf @RIOT2_5707 
+0613: 183@ = actor 38@ animation "BBALL_IDLELOOP" time 
+if 
+0837:   object 88@ animation == "BBALL_IDLELOOP_O" 
+jf @RIOT2_5626 
+083A: set_object 88@ animation "BBALL_IDLELOOP_O" progress_to 183@ 
+jump @RIOT2_5707 
+
+:RIOT2_5626
+if 
+075A: set_object 88@ animation "BBALL_IDLELOOP_O" IFP_file "BSKTBALL" 10000.0 lockF 0 loop 0 // IF AND SET 
+jf @RIOT2_5707 
+0836: set_object 88@ animation "BBALL_IDLELOOP_O" at 0.0 times_normal_rate 
+
+:RIOT2_5707
+jump @RIOT2_5752 
+
+:RIOT2_5714
+069B: attach_object 88@ to_actor 38@ with_offset 0.0 0.5 -1.0 rotation 0.0 0.0 0.0 
+
+:RIOT2_5752
+if 
+  185@ == 0 
+jf @RIOT2_5991 
+if 
+  32@ > 4000 
+jf @RIOT2_5991 
+Camera.SetPosition(1827.4, -1998.7, 13.1, 0.0, 0.0, 0.0)
+Camera.PointAt(1830.2, -1995.2, 13.4, 2)
+if 
+   not Actor.Dead(42@)
+jf @RIOT2_5949 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 1831.1 -1995.9 12.6 mode 4 time -1 
+05D4: AS_actor -1 rotate_angle 180.0 
+0605: actor -1 perform_animation "M_SMK_IN" IFP "SMOKING" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 42@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_5949
+185@ = 4 
+186@ = 11 
+188@ = 12 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 9 
+
+:RIOT2_5991
+if 
+  143@ == 9 
+jf @RIOT2_6874 
+if 
+  185@ == 0 
+jf @RIOT2_6874 
+if 
+  32@ > 4000 
+jf @RIOT2_6874 
+if 
+  185@ == 0 
+jf @RIOT2_6874 
+144@ = 0 
+
+:RIOT2_6071
+0701: end_scene_skip 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_6105 
+jump @RIOT2_30318 
+
+:RIOT2_6105
+if 
+  144@ == 1 
+jf @RIOT2_6522 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_6147
+if 
+fading 
+jf @RIOT2_6171 
+wait 0 
+jump @RIOT2_6147 
+
+:RIOT2_6171
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_6203 
+jump @RIOT2_30318 
+
+:RIOT2_6203
+if 
+  150@ == 0 
+jf @RIOT2_6235 
+gosub @RIOT2_31377 
+150@ = 1 
+
+:RIOT2_6235
+if 
+   not Actor.Dead(42@)
+jf @RIOT2_6347 
+0792: disembark_instantly_actor 42@ 
+Actor.PutAt(42@, 1831.1, -1995.9, 12.6)
+Actor.Angle(42@) = 180.0
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "M_SMK_IN" IFP "SMOKING" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 42@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_6347
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1793.8, -1970.6, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 234.3
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1792.9, -1972.3, 12.5)
+Actor.Angle($ACTOR_CESAR) = 231.5
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1794.8, -1969.8, 12.5)
+Actor.Angle(35@) = 231.5
+0792: disembark_instantly_actor 36@ 
+Actor.PutAt(36@, 1791.8, -1971.1, 12.5)
+Actor.Angle(36@) = 234.5
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1792.5, -1970.4, 12.5)
+Actor.Angle(34@) = 251.5
+
+:RIOT2_6522
+Object.Destroy(88@)
+Model.Destroy(#BBALL_INGAME)
+if 
+   not Actor.Dead(38@)
+jf @RIOT2_6563 
+Actor.GiveWeaponAndAmmo(38@, Tec9, 3000)
+0792: disembark_instantly_actor 38@ 
+
+:RIOT2_6563
+if 
+   not Actor.Dead(39@)
+jf @RIOT2_6584 
+0792: disembark_instantly_actor 38@ 
+
+:RIOT2_6584
+if 
+   not Actor.Dead(38@)
+jf @RIOT2_6640 
+if 
+   not Actor.Dead(39@)
+jf @RIOT2_6640 
+0677: AS_actor 38@ chat_with_actor 39@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 39@ chat_with_actor 38@ lead_speaker_flag 0 unknown_flag 1 
+
+:RIOT2_6640
+if 
+   not Actor.Dead(42@)
+jf @RIOT2_6666 
+Actor.GiveWeaponAndAmmo(42@, Tec9, 3000)
+
+:RIOT2_6666
+060B: set_actor 35@ decision_maker_to 265@ 
+060B: set_actor 34@ decision_maker_to 265@ 
+060B: set_actor 36@ decision_maker_to 265@ 
+08F6: restore_player_group 
+098A: set_gunshot_sense_range_for_riot2 15.0 
+04EF: release_animation "GANGS" 
+09F5: disable_player_mutal_activities 0 
+Marker.Disable(89@)
+89@ = Marker.CreateAboveActor($ACTOR_CESAR)
+07E0: set_marker 89@ type_to 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'R2_03' time 7000 flag 1  // ~s~Help ~b~Cesar~s~ and the OG's clear out the neighborhood.
+if 
+  144@ == 1 
+jf @RIOT2_6853 
+fade 1 500 
+
+:RIOT2_6797
+if 
+fading 
+jf @RIOT2_6821 
+wait 0 
+jump @RIOT2_6797 
+
+:RIOT2_6821
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_6853 
+jump @RIOT2_30318 
+
+:RIOT2_6853
+143@ = 0 
+142@ = 2 
+33@ = 0 
+
+:RIOT2_6874
+if 
+  142@ == 2 
+jf @RIOT2_13956 
+if 
+  150@ == 1 
+jf @RIOT2_7180 
+if 
+  6 > 151@ 
+jf @RIOT2_7173 
+if 
+   not Actor.Dead(37@(151@,6i))
+jf @RIOT2_7152 
+if 
+0364:   actor 37@(151@,6i) spotted_actor $PLAYER_ACTOR 
+jf @RIOT2_7108 
+if 
+   not Actor.Dead(40@)
+jf @RIOT2_7036 
+0615: define_AS_pack_begin 268@ 
+06A8: AS_actor -1 run_to_and_look_at_actor $PLAYER_ACTOR timelimit -1 approach_distance 1.5 approach_angle 0.0 
+0643: set_AS_pack 268@ loop 1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 40@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_7036
+if 
+   not Actor.Dead(41@)
+jf @RIOT2_7101 
+0615: define_AS_pack_begin 268@ 
+06A8: AS_actor -1 run_to_and_look_at_actor $PLAYER_ACTOR timelimit -1 approach_distance 3.0 approach_angle 0.0 
+0643: set_AS_pack 268@ loop 1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 41@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_7101
+150@ = 3 
+
+:RIOT2_7108
+164@ = Actor.Health(37@(151@,6i))
+if 
+  100 > 164@ 
+jf @RIOT2_7145 
+150@ = 4 
+
+:RIOT2_7145
+jump @RIOT2_7159 
+
+:RIOT2_7152
+150@ = 4 
+
+:RIOT2_7159
+151@ += 1 
+jump @RIOT2_7180 
+
+:RIOT2_7173
+151@ = 0 
+
+:RIOT2_7180
+if 
+  150@ == 3 
+jf @RIOT2_7380 
+if 
+  6 > 151@ 
+jf @RIOT2_7373 
+if 
+   not Actor.Dead(37@(151@,6i))
+jf @RIOT2_7352 
+164@ = Actor.Health(37@(151@,6i))
+if 
+  100 > 164@ 
+jf @RIOT2_7273 
+150@ = 4 
+
+:RIOT2_7273
+if 
+   not Actor.Dead(37@)
+jf @RIOT2_7315 
+if 
+0364:   actor 37@ spotted_actor $PLAYER_ACTOR 
+jf @RIOT2_7315 
+150@ = 4 
+
+:RIOT2_7315
+if 
+0457:   player $PLAYER_CHAR aiming_at_actor 37@(151@,6i) 
+jf @RIOT2_7345 
+150@ = 4 
+
+:RIOT2_7345
+jump @RIOT2_7359 
+
+:RIOT2_7352
+150@ = 4 
+
+:RIOT2_7359
+151@ += 1 
+jump @RIOT2_7380 
+
+:RIOT2_7373
+151@ = 0 
+
+:RIOT2_7380
+if 
+  150@ == 4 
+jf @RIOT2_7498 
+if 
+  185@ == 0 
+jf @RIOT2_7491 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_7491 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_7491 
+185@ = 5 
+186@ = 11 
+188@ = 12 
+gosub @RIOT2_41057 
+
+:RIOT2_7491
+150@ = 5 
+
+:RIOT2_7498
+if 
+  150@ > 3 
+jf @RIOT2_7735 
+if or
+  158@ == 0 
+  161@ == 0 
+  152@ == 0 
+  155@ == 0 
+jf @RIOT2_7603 
+if 
+   not Actor.Dead(37@)
+jf @RIOT2_7603 
+if 
+  149@ == 2 
+jf @RIOT2_7596 
+149@ = 0 
+
+:RIOT2_7596
+gosub @RIOT2_32181 
+
+:RIOT2_7603
+if 
+  158@ > 0 
+jf @RIOT2_7735 
+if 
+  161@ > 0 
+jf @RIOT2_7735 
+if 
+  152@ > 0 
+jf @RIOT2_7735 
+if 
+  155@ > 0 
+jf @RIOT2_7735 
+if 
+   not Actor.Dead(37@)
+jf @RIOT2_7735 
+062E: get_actor 37@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_7735 
+05E2: AS_actor 37@ kill_actor $PLAYER_ACTOR 
+149@ = 3 
+
+:RIOT2_7735
+if 
+  150@ == 5 
+jf @RIOT2_7985 
+if 
+   Actor.Dead(37@)
+jf @RIOT2_7985 
+if 
+   Actor.Dead(38@)
+jf @RIOT2_7985 
+if 
+   Actor.Dead(39@)
+jf @RIOT2_7985 
+if 
+   Actor.Dead(40@)
+jf @RIOT2_7985 
+if 
+   Actor.Dead(41@)
+jf @RIOT2_7985 
+if 
+   Actor.Dead(42@)
+jf @RIOT2_7985 
+Marker.Disable(96@)
+Marker.Disable(97@)
+Marker.Disable(98@)
+Marker.Disable(99@)
+Marker.Disable(100@)
+Marker.Disable(101@)
+Actor.RemoveReferences(37@)
+Actor.RemoveReferences(38@)
+Actor.RemoveReferences(39@)
+Actor.RemoveReferences(40@)
+Actor.RemoveReferences(41@)
+Actor.RemoveReferences(42@)
+if and
+  158@ == 0 
+  161@ == 0 
+  152@ == 0 
+  155@ == 0 
+jf @RIOT2_7955 
+158@ = 1 
+
+:RIOT2_7955
+04EF: release_animation "BSKTBALL" 
+04EF: release_animation "SMOKING" 
+150@ = 6 
+
+:RIOT2_7985
+if 
+  6 > 150@ 
+jf @RIOT2_8159 
+if 
+   Actor.Dead(37@)
+jf @RIOT2_8029 
+Marker.Disable(96@)
+Actor.RemoveReferences(37@)
+
+:RIOT2_8029
+if 
+   Actor.Dead(38@)
+jf @RIOT2_8055 
+Marker.Disable(97@)
+Actor.RemoveReferences(38@)
+
+:RIOT2_8055
+if 
+   Actor.Dead(39@)
+jf @RIOT2_8081 
+Marker.Disable(98@)
+Actor.RemoveReferences(39@)
+
+:RIOT2_8081
+if 
+   Actor.Dead(40@)
+jf @RIOT2_8107 
+Marker.Disable(99@)
+Actor.RemoveReferences(40@)
+
+:RIOT2_8107
+if 
+   Actor.Dead(41@)
+jf @RIOT2_8133 
+Marker.Disable(100@)
+Actor.RemoveReferences(41@)
+
+:RIOT2_8133
+if 
+   Actor.Dead(42@)
+jf @RIOT2_8159 
+Marker.Disable(101@)
+Actor.RemoveReferences(42@)
+
+:RIOT2_8159
+if 
+  152@ == 1 
+jf @RIOT2_8198 
+gosub @RIOT2_32692 
+171@ = 0 
+152@ = 2 
+
+:RIOT2_8198
+if 
+  152@ == 2 
+jf @RIOT2_8275 
+if 
+   Actor.Dead(43@)
+jf @RIOT2_8275 
+if 
+   Actor.Dead(44@)
+jf @RIOT2_8275 
+Marker.Disable(102@)
+Actor.RemoveReferences(43@)
+Marker.Disable(103@)
+Actor.RemoveReferences(44@)
+152@ = 3 
+
+:RIOT2_8275
+if 
+  3 > 152@ 
+jf @RIOT2_8345 
+if 
+   Actor.Dead(43@)
+jf @RIOT2_8319 
+Marker.Disable(102@)
+Actor.RemoveReferences(43@)
+
+:RIOT2_8319
+if 
+   Actor.Dead(44@)
+jf @RIOT2_8345 
+Marker.Disable(103@)
+Actor.RemoveReferences(44@)
+
+:RIOT2_8345
+if 
+  152@ > 0 
+jf @RIOT2_8428 
+if 
+  153@ == 0 
+jf @RIOT2_8428 
+if 
+  171@ > 500 
+jf @RIOT2_8428 
+153@ = 1 
+gosub @RIOT2_32692 
+153@ = 2 
+171@ = 0 
+
+:RIOT2_8428
+if 
+  153@ == 2 
+jf @RIOT2_8505 
+if 
+   Actor.Dead(45@)
+jf @RIOT2_8505 
+if 
+   Actor.Dead(46@)
+jf @RIOT2_8505 
+Marker.Disable(104@)
+Actor.RemoveReferences(45@)
+Marker.Disable(105@)
+Actor.RemoveReferences(46@)
+153@ = 3 
+
+:RIOT2_8505
+if 
+  3 > 153@ 
+jf @RIOT2_8575 
+if 
+   Actor.Dead(45@)
+jf @RIOT2_8549 
+Marker.Disable(104@)
+Actor.RemoveReferences(45@)
+
+:RIOT2_8549
+if 
+   Actor.Dead(46@)
+jf @RIOT2_8575 
+Marker.Disable(105@)
+Actor.RemoveReferences(46@)
+
+:RIOT2_8575
+if 
+  152@ > 0 
+jf @RIOT2_8676 
+if 
+  153@ > 0 
+jf @RIOT2_8676 
+if 
+  154@ == 0 
+jf @RIOT2_8676 
+if 
+  171@ > 500 
+jf @RIOT2_8676 
+154@ = 1 
+gosub @RIOT2_32692 
+154@ = 2 
+171@ = 0 
+
+:RIOT2_8676
+if 
+  154@ == 2 
+jf @RIOT2_8753 
+if 
+   Actor.Dead(47@)
+jf @RIOT2_8753 
+if 
+   Actor.Dead(48@)
+jf @RIOT2_8753 
+Marker.Disable(106@)
+Actor.RemoveReferences(47@)
+Marker.Disable(107@)
+Actor.RemoveReferences(48@)
+154@ = 3 
+
+:RIOT2_8753
+if 
+  3 > 154@ 
+jf @RIOT2_8823 
+if 
+   Actor.Dead(47@)
+jf @RIOT2_8797 
+Marker.Disable(106@)
+Actor.RemoveReferences(47@)
+
+:RIOT2_8797
+if 
+   Actor.Dead(48@)
+jf @RIOT2_8823 
+Marker.Disable(107@)
+Actor.RemoveReferences(48@)
+
+:RIOT2_8823
+if 
+  152@ == 3 
+jf @RIOT2_9047 
+if 
+  153@ == 3 
+jf @RIOT2_9047 
+if 
+  154@ == 3 
+jf @RIOT2_9047 
+if 
+  155@ == 0 
+jf @RIOT2_8909 
+155@ = 1 
+jump @RIOT2_8966 
+
+:RIOT2_8909
+if 
+  158@ == 0 
+jf @RIOT2_8941 
+158@ = 1 
+jump @RIOT2_8966 
+
+:RIOT2_8941
+if 
+  161@ == 0 
+jf @RIOT2_8966 
+161@ = 1 
+
+:RIOT2_8966
+Actor.RemoveReferences(43@)
+Actor.RemoveReferences(44@)
+Actor.RemoveReferences(45@)
+Actor.RemoveReferences(46@)
+Actor.RemoveReferences(47@)
+Actor.RemoveReferences(48@)
+Marker.Disable(102@)
+Marker.Disable(103@)
+Marker.Disable(104@)
+Marker.Disable(105@)
+Marker.Disable(106@)
+Marker.Disable(107@)
+152@ = 4 
+153@ = 4 
+154@ = 4 
+
+:RIOT2_9047
+if 
+  155@ == 1 
+jf @RIOT2_9086 
+gosub @RIOT2_34020 
+170@ = 0 
+155@ = 2 
+
+:RIOT2_9086
+if 
+  155@ == 2 
+jf @RIOT2_9163 
+if 
+   Actor.Dead(49@)
+jf @RIOT2_9163 
+if 
+   Actor.Dead(50@)
+jf @RIOT2_9163 
+Marker.Disable(108@)
+Actor.RemoveReferences(49@)
+Marker.Disable(109@)
+Actor.RemoveReferences(50@)
+155@ = 3 
+
+:RIOT2_9163
+if 
+  3 > 155@ 
+jf @RIOT2_9233 
+if 
+   Actor.Dead(49@)
+jf @RIOT2_9207 
+Marker.Disable(108@)
+Actor.RemoveReferences(49@)
+
+:RIOT2_9207
+if 
+   Actor.Dead(50@)
+jf @RIOT2_9233 
+Marker.Disable(109@)
+Actor.RemoveReferences(50@)
+
+:RIOT2_9233
+if 
+  155@ > 0 
+jf @RIOT2_9316 
+if 
+  156@ == 0 
+jf @RIOT2_9316 
+if 
+  170@ > 500 
+jf @RIOT2_9316 
+156@ = 1 
+gosub @RIOT2_34020 
+156@ = 2 
+170@ = 0 
+
+:RIOT2_9316
+if 
+  156@ == 2 
+jf @RIOT2_9393 
+if 
+   Actor.Dead(51@)
+jf @RIOT2_9393 
+if 
+   Actor.Dead(52@)
+jf @RIOT2_9393 
+Marker.Disable(110@)
+Actor.RemoveReferences(51@)
+Marker.Disable(111@)
+Actor.RemoveReferences(52@)
+156@ = 3 
+
+:RIOT2_9393
+if 
+  3 > 156@ 
+jf @RIOT2_9463 
+if 
+   Actor.Dead(51@)
+jf @RIOT2_9437 
+Marker.Disable(110@)
+Actor.RemoveReferences(51@)
+
+:RIOT2_9437
+if 
+   Actor.Dead(52@)
+jf @RIOT2_9463 
+Marker.Disable(111@)
+Actor.RemoveReferences(52@)
+
+:RIOT2_9463
+if 
+  155@ > 0 
+jf @RIOT2_9564 
+if 
+  156@ > 0 
+jf @RIOT2_9564 
+if 
+  157@ == 0 
+jf @RIOT2_9564 
+if 
+  170@ > 500 
+jf @RIOT2_9564 
+157@ = 1 
+gosub @RIOT2_34020 
+157@ = 2 
+170@ = 0 
+
+:RIOT2_9564
+if 
+  157@ == 2 
+jf @RIOT2_9641 
+if 
+   Actor.Dead(53@)
+jf @RIOT2_9641 
+if 
+   Actor.Dead(54@)
+jf @RIOT2_9641 
+Marker.Disable(112@)
+Actor.RemoveReferences(53@)
+Marker.Disable(113@)
+Actor.RemoveReferences(54@)
+157@ = 3 
+
+:RIOT2_9641
+if 
+  3 > 157@ 
+jf @RIOT2_9711 
+if 
+   Actor.Dead(53@)
+jf @RIOT2_9685 
+Marker.Disable(112@)
+Actor.RemoveReferences(53@)
+
+:RIOT2_9685
+if 
+   Actor.Dead(54@)
+jf @RIOT2_9711 
+Marker.Disable(113@)
+Actor.RemoveReferences(54@)
+
+:RIOT2_9711
+if 
+  155@ == 3 
+jf @RIOT2_9935 
+if 
+  156@ == 3 
+jf @RIOT2_9935 
+if 
+  157@ == 3 
+jf @RIOT2_9935 
+if 
+  161@ == 0 
+jf @RIOT2_9797 
+161@ = 1 
+jump @RIOT2_9854 
+
+:RIOT2_9797
+if 
+  152@ == 0 
+jf @RIOT2_9829 
+152@ = 1 
+jump @RIOT2_9854 
+
+:RIOT2_9829
+if 
+  158@ == 0 
+jf @RIOT2_9854 
+158@ = 1 
+
+:RIOT2_9854
+Actor.RemoveReferences(49@)
+Actor.RemoveReferences(50@)
+Actor.RemoveReferences(51@)
+Actor.RemoveReferences(52@)
+Actor.RemoveReferences(53@)
+Actor.RemoveReferences(54@)
+Marker.Disable(108@)
+Marker.Disable(109@)
+Marker.Disable(110@)
+Marker.Disable(111@)
+Marker.Disable(112@)
+Marker.Disable(113@)
+155@ = 4 
+156@ = 4 
+157@ = 4 
+
+:RIOT2_9935
+if 
+  158@ == 1 
+jf @RIOT2_9974 
+gosub @RIOT2_35348 
+173@ = 0 
+158@ = 2 
+
+:RIOT2_9974
+if 
+  158@ == 2 
+jf @RIOT2_10051 
+if 
+   Actor.Dead(55@)
+jf @RIOT2_10051 
+if 
+   Actor.Dead(56@)
+jf @RIOT2_10051 
+Marker.Disable(114@)
+Actor.RemoveReferences(55@)
+Marker.Disable(115@)
+Actor.RemoveReferences(56@)
+158@ = 3 
+
+:RIOT2_10051
+if 
+  3 > 158@ 
+jf @RIOT2_10121 
+if 
+   Actor.Dead(55@)
+jf @RIOT2_10095 
+Marker.Disable(114@)
+Actor.RemoveReferences(55@)
+
+:RIOT2_10095
+if 
+   Actor.Dead(56@)
+jf @RIOT2_10121 
+Marker.Disable(115@)
+Actor.RemoveReferences(56@)
+
+:RIOT2_10121
+if 
+  158@ > 0 
+jf @RIOT2_10204 
+if 
+  159@ == 0 
+jf @RIOT2_10204 
+if 
+  173@ > 500 
+jf @RIOT2_10204 
+159@ = 1 
+gosub @RIOT2_35348 
+159@ = 2 
+173@ = 0 
+
+:RIOT2_10204
+if 
+  159@ == 2 
+jf @RIOT2_10281 
+if 
+   Actor.Dead(57@)
+jf @RIOT2_10281 
+if 
+   Actor.Dead(58@)
+jf @RIOT2_10281 
+Marker.Disable(116@)
+Actor.RemoveReferences(57@)
+Marker.Disable(117@)
+Actor.RemoveReferences(58@)
+159@ = 3 
+
+:RIOT2_10281
+if 
+  3 > 159@ 
+jf @RIOT2_10351 
+if 
+   Actor.Dead(57@)
+jf @RIOT2_10325 
+Marker.Disable(116@)
+Actor.RemoveReferences(57@)
+
+:RIOT2_10325
+if 
+   Actor.Dead(58@)
+jf @RIOT2_10351 
+Marker.Disable(117@)
+Actor.RemoveReferences(58@)
+
+:RIOT2_10351
+if 
+  158@ > 0 
+jf @RIOT2_10452 
+if 
+  159@ > 0 
+jf @RIOT2_10452 
+if 
+  160@ == 0 
+jf @RIOT2_10452 
+if 
+  173@ > 500 
+jf @RIOT2_10452 
+160@ = 1 
+gosub @RIOT2_35348 
+160@ = 2 
+173@ = 0 
+
+:RIOT2_10452
+if 
+  160@ == 2 
+jf @RIOT2_10529 
+if 
+   Actor.Dead(59@)
+jf @RIOT2_10529 
+if 
+   Actor.Dead(60@)
+jf @RIOT2_10529 
+Marker.Disable(118@)
+Actor.RemoveReferences(59@)
+Marker.Disable(119@)
+Actor.RemoveReferences(60@)
+160@ = 3 
+
+:RIOT2_10529
+if 
+  3 > 160@ 
+jf @RIOT2_10599 
+if 
+   Actor.Dead(59@)
+jf @RIOT2_10573 
+Marker.Disable(118@)
+Actor.RemoveReferences(59@)
+
+:RIOT2_10573
+if 
+   Actor.Dead(60@)
+jf @RIOT2_10599 
+Marker.Disable(119@)
+Actor.RemoveReferences(60@)
+
+:RIOT2_10599
+if 
+  158@ == 3 
+jf @RIOT2_10823 
+if 
+  159@ == 3 
+jf @RIOT2_10823 
+if 
+  160@ == 3 
+jf @RIOT2_10823 
+if 
+  152@ == 0 
+jf @RIOT2_10685 
+152@ = 1 
+jump @RIOT2_10742 
+
+:RIOT2_10685
+if 
+  161@ == 0 
+jf @RIOT2_10717 
+161@ = 1 
+jump @RIOT2_10742 
+
+:RIOT2_10717
+if 
+  155@ == 0 
+jf @RIOT2_10742 
+155@ = 1 
+
+:RIOT2_10742
+Actor.RemoveReferences(55@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(57@)
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(60@)
+Marker.Disable(114@)
+Marker.Disable(115@)
+Marker.Disable(116@)
+Marker.Disable(117@)
+Marker.Disable(118@)
+Marker.Disable(119@)
+158@ = 4 
+159@ = 4 
+160@ = 4 
+
+:RIOT2_10823
+if 
+  161@ == 1 
+jf @RIOT2_10862 
+gosub @RIOT2_36676 
+172@ = 0 
+161@ = 2 
+
+:RIOT2_10862
+if 
+  161@ == 2 
+jf @RIOT2_10939 
+if 
+   Actor.Dead(61@)
+jf @RIOT2_10939 
+if 
+   Actor.Dead(62@)
+jf @RIOT2_10939 
+Marker.Disable(120@)
+Actor.RemoveReferences(61@)
+Marker.Disable(121@)
+Actor.RemoveReferences(62@)
+161@ = 3 
+
+:RIOT2_10939
+if 
+  3 > 161@ 
+jf @RIOT2_11009 
+if 
+   Actor.Dead(61@)
+jf @RIOT2_10983 
+Marker.Disable(120@)
+Actor.RemoveReferences(61@)
+
+:RIOT2_10983
+if 
+   Actor.Dead(62@)
+jf @RIOT2_11009 
+Marker.Disable(121@)
+Actor.RemoveReferences(62@)
+
+:RIOT2_11009
+if 
+  161@ > 0 
+jf @RIOT2_11092 
+if 
+  162@ == 0 
+jf @RIOT2_11092 
+if 
+  172@ > 500 
+jf @RIOT2_11092 
+162@ = 1 
+gosub @RIOT2_36676 
+162@ = 2 
+172@ = 0 
+
+:RIOT2_11092
+if 
+  162@ == 2 
+jf @RIOT2_11169 
+if 
+   Actor.Dead(63@)
+jf @RIOT2_11169 
+if 
+   Actor.Dead(64@)
+jf @RIOT2_11169 
+Marker.Disable(122@)
+Actor.RemoveReferences(63@)
+Marker.Disable(123@)
+Actor.RemoveReferences(64@)
+162@ = 3 
+
+:RIOT2_11169
+if 
+  3 > 162@ 
+jf @RIOT2_11239 
+if 
+   Actor.Dead(63@)
+jf @RIOT2_11213 
+Marker.Disable(122@)
+Actor.RemoveReferences(63@)
+
+:RIOT2_11213
+if 
+   Actor.Dead(64@)
+jf @RIOT2_11239 
+Marker.Disable(123@)
+Actor.RemoveReferences(64@)
+
+:RIOT2_11239
+if 
+  161@ > 0 
+jf @RIOT2_11340 
+if 
+  162@ > 0 
+jf @RIOT2_11340 
+if 
+  163@ == 0 
+jf @RIOT2_11340 
+if 
+  172@ > 500 
+jf @RIOT2_11340 
+163@ = 1 
+gosub @RIOT2_36676 
+163@ = 2 
+172@ = 0 
+
+:RIOT2_11340
+if 
+  163@ == 2 
+jf @RIOT2_11417 
+if 
+   Actor.Dead(65@)
+jf @RIOT2_11417 
+if 
+   Actor.Dead(66@)
+jf @RIOT2_11417 
+Marker.Disable(124@)
+Actor.RemoveReferences(65@)
+Marker.Disable(125@)
+Actor.RemoveReferences(66@)
+163@ = 3 
+
+:RIOT2_11417
+if 
+  3 > 163@ 
+jf @RIOT2_11487 
+if 
+   Actor.Dead(65@)
+jf @RIOT2_11461 
+Marker.Disable(124@)
+Actor.RemoveReferences(65@)
+
+:RIOT2_11461
+if 
+   Actor.Dead(66@)
+jf @RIOT2_11487 
+Marker.Disable(125@)
+Actor.RemoveReferences(66@)
+
+:RIOT2_11487
+if 
+  161@ == 3 
+jf @RIOT2_11711 
+if 
+  162@ == 3 
+jf @RIOT2_11711 
+if 
+  163@ == 3 
+jf @RIOT2_11711 
+if 
+  158@ == 0 
+jf @RIOT2_11573 
+158@ = 1 
+jump @RIOT2_11630 
+
+:RIOT2_11573
+if 
+  155@ == 0 
+jf @RIOT2_11605 
+155@ = 1 
+jump @RIOT2_11630 
+
+:RIOT2_11605
+if 
+  152@ == 0 
+jf @RIOT2_11630 
+152@ = 1 
+
+:RIOT2_11630
+Actor.RemoveReferences(61@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+161@ = 4 
+162@ = 4 
+163@ = 4 
+
+:RIOT2_11711
+if 
+  187@ == 0 
+jf @RIOT2_11873 
+if 
+  6 > 165@ 
+jf @RIOT2_11873 
+if 
+  33@ > 7000 
+jf @RIOT2_11873 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_11873 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_11873 
+if 
+  185@ == 0 
+jf @RIOT2_11873 
+0A09: set_actor $ACTOR_CESAR muted 1 // versionB 
+185@ = 5 
+186@ = 3 
+188@ = 4 
+gosub @RIOT2_41057 
+187@ = 1 
+
+:RIOT2_11873
+if 
+  165@ == 0 
+jf @RIOT2_12014 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1824.9 -1986.7 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1822.3 -1986.7 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1820.9 -1984.7 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1824.5 -1984.0 12.6 mode 4 time -2 
+165@ = 1 
+
+:RIOT2_12014
+if 
+  165@ == 1 
+jf @RIOT2_12562 
+if 
+  150@ == 6 
+jf @RIOT2_12266 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1856.6 -2008.5 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1859.6 -2007.5 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1853.6 -2007.5 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1854.8 -2005.5 12.6 mode 4 time -2 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_12259 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_12259 
+if 
+  185@ == 0 
+jf @RIOT2_12259 
+185@ = 5 
+186@ = 4 
+188@ = 5 
+gosub @RIOT2_41057 
+
+:RIOT2_12259
+165@ = 2 
+
+:RIOT2_12266
+if 
+   Actor.Dead(38@)
+jf @RIOT2_12562 
+if 
+   Actor.Dead(39@)
+jf @RIOT2_12562 
+if 
+   Actor.Dead(40@)
+jf @RIOT2_12562 
+if 
+   Actor.Dead(41@)
+jf @RIOT2_12562 
+if 
+   Actor.Dead(42@)
+jf @RIOT2_12562 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1856.6 -2008.5 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1859.6 -2007.5 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1853.6 -2007.5 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1854.8 -2005.5 12.6 mode 4 time -2 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_12555 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_12555 
+if 
+  185@ == 0 
+jf @RIOT2_12555 
+185@ = 5 
+186@ = 5 
+188@ = 6 
+gosub @RIOT2_41057 
+
+:RIOT2_12555
+165@ = 2 
+
+:RIOT2_12562
+if 
+  165@ == 2 
+jf @RIOT2_12814 
+if 
+  158@ == 4 
+jf @RIOT2_12814 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1858.8 -1993.7 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1858.8 -1991.6 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1858.8 -1989.7 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1858.8 -1987.7 12.6 mode 4 time -2 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_12807 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_12807 
+if 
+  185@ == 0 
+jf @RIOT2_12807 
+185@ = 5 
+186@ = 6 
+188@ = 7 
+gosub @RIOT2_41057 
+
+:RIOT2_12807
+165@ = 3 
+
+:RIOT2_12814
+if 
+  165@ == 3 
+jf @RIOT2_13066 
+if 
+  152@ == 4 
+jf @RIOT2_13066 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1886.2 -1995.2 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1886.2 -1993.2 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1886.2 -1991.2 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1886.2 -1989.2 12.6 mode 4 time -2 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_13059 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_13059 
+if 
+  185@ == 0 
+jf @RIOT2_13059 
+185@ = 5 
+186@ = 7 
+188@ = 8 
+gosub @RIOT2_41057 
+
+:RIOT2_13059
+165@ = 4 
+
+:RIOT2_13066
+if 
+  165@ == 4 
+jf @RIOT2_13318 
+if 
+  155@ == 4 
+jf @RIOT2_13318 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+05F5: AS_actor 34@ goto_point_using_paths 1903.1 -2009.3 12.6 mode 4 time -2 
+05F5: AS_actor 35@ goto_point_using_paths 1905.1 -2009.3 12.6 mode 4 time -2 
+05F5: AS_actor 36@ goto_point_using_paths 1907.1 -2009.3 12.6 mode 4 time -2 
+05F5: AS_actor $ACTOR_CESAR goto_point_using_paths 1909.1 -2009.3 12.6 mode 4 time -2 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_13311 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_13311 
+if 
+  185@ == 0 
+jf @RIOT2_13311 
+185@ = 5 
+186@ = 8 
+188@ = 9 
+gosub @RIOT2_41057 
+
+:RIOT2_13311
+165@ = 5 
+
+:RIOT2_13318
+if 
+  165@ == 5 
+jf @RIOT2_13800 
+if 
+  161@ == 4 
+jf @RIOT2_13800 
+0687: clear_actor 34@ task 
+0687: clear_actor 35@ task 
+0687: clear_actor 36@ task 
+0687: clear_actor $ACTOR_CESAR task 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 1916.8 -2059.2 12.4 mode 6 time -2 
+05D3: AS_actor -1 goto_point 1921.6 -2077.1 12.5 mode 6 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 5.1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 1914.5 -2058.4 12.4 mode 6 time -2 
+05D3: AS_actor -1 goto_point 1922.6 -2077.1 12.5 mode 6 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 5.1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 1918.1 -2061.8 12.4 mode 6 time -2 
+05D3: AS_actor -1 goto_point 1923.6 -2077.1 12.5 mode 6 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 5.1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 35@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 1919.8 -2059.6 12.4 mode 6 time -2 
+05D3: AS_actor -1 goto_point 1924.6 -2077.1 12.5 mode 6 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 5.1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 36@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_13761 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 60.0 60.0 0 
+jf @RIOT2_13761 
+185@ = 5 
+186@ = 0 
+188@ = 1 
+gosub @RIOT2_41057 
+
+:RIOT2_13761
+Marker.Disable(89@)
+018A: 89@ = create_checkpoint_at 1922.8 -2075.0 12.5 
+187@ = 0 
+165@ = 6 
+
+:RIOT2_13800
+if 
+  165@ == 6 
+jf @RIOT2_13956 
+if 
+  187@ == 0 
+jf @RIOT2_13877 
+if 
+  185@ == 0 
+jf @RIOT2_13877 
+00BC: show_text_highpriority GXT 'R2_04' time 11000 flag 1  // ~s~Head to the ~y~alleyway~s~!
+187@ = 1 
+
+:RIOT2_13877
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere 1922.8 -2075.0 12.5 radius 1.2 1.2 2.0 on_foot 
+jf @RIOT2_13956 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+143@ = 0 
+142@ = 3 
+
+:RIOT2_13956
+if 
+  142@ == 3 
+jf @RIOT2_19360 
+if 
+  143@ == 0 
+jf @RIOT2_15388 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_14016
+if 
+fading 
+jf @RIOT2_14040 
+wait 0 
+jump @RIOT2_14016 
+
+:RIOT2_14040
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_14072 
+jump @RIOT2_30318 
+
+:RIOT2_14072
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+0A09: set_actor $ACTOR_CESAR muted 0 // versionB 
+01EB: set_traffic_density_multiplier_to 0.0 
+if 
+   not Garage.IsClosed('DUF_LAS')
+jf @RIOT2_14143 
+Garage.Close('DUF_LAS')
+
+:RIOT2_14143
+Model.Load(#GLENDALE)
+Model.Load(#ROCKETLA)
+04ED: load_animation "CAR" 
+04ED: load_animation "SWAT" 
+04ED: load_animation "CRACK" 
+04ED: load_animation "CASINO" 
+038B: load_requested_models 
+0708: reset_decision_maker 265@ event 36 
+0708: reset_decision_maker 265@ event 37 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_14235 
+jump @RIOT2_30318 
+
+:RIOT2_14235
+0395: clear_area 1 at 1897.0 -2103.8 12.3 radius 300.0 
+67@ = Car.Create(#GLENDALE, 1897.0, -2103.8, 12.3)
+Car.Angle(67@) = 2.4
+Car.LockInCurrentPosition(67@) = True
+Car.DoorStatus(67@) = 2
+Car.SetImmunities(67@, 1, 1, 1, 1, 1)
+68@ = Car.Create(#GLENDALE, 1857.3, -2101.3, 12.3)
+Car.LockInCurrentPosition(68@) = True
+Car.Angle(68@) = 359.7
+Car.DoorStatus(68@) = 2
+0209: 148@ = random_int_in_ranges 0 2 
+69@ = Actor.Create(Mission2, 146@(148@,2i), 1860.9, -2099.6, 12.6)
+Actor.Angle(69@) = 270.0
+Actor.GiveWeaponAndAmmo(69@, Tec9, 3000)
+060B: set_actor 69@ decision_maker_to 266@ 
+0605: actor 69@ perform_animation "FIXN_CAR_LOOP" IFP "CAR" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+126@ = Marker.CreateAboveActor(69@)
+Marker.SetIconSize(126@, 1)
+Actor.WeaponAccuracy(69@) = 181@
+Actor.AddArmour(69@, 50)
+0209: 148@ = random_int_in_ranges 0 2 
+70@ = Actor.Create(Mission2, 146@(148@,2i), 1859.9, -2102.5, 12.5)
+Actor.Angle(70@) = 48.0
+Actor.GiveWeaponAndAmmo(70@, Tec9, 3000)
+060B: set_actor 70@ decision_maker_to 266@ 
+127@ = Marker.CreateAboveActor(70@)
+Marker.SetIconSize(127@, 1)
+Actor.WeaponAccuracy(70@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+71@ = Actor.Create(Mission2, 146@(148@,2i), 1855.6, -2102.6, 12.5)
+Actor.Angle(71@) = 282.0
+Actor.GiveWeaponAndAmmo(71@, Tec9, 3000)
+060B: set_actor 71@ decision_maker_to 266@ 
+0605: actor 71@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+128@ = Marker.CreateAboveActor(71@)
+Marker.SetIconSize(128@, 1)
+Actor.WeaponAccuracy(71@) = 181@
+Actor.AddArmour(71@, 50)
+0209: 148@ = random_int_in_ranges 0 2 
+72@ = Actor.Create(Mission2, 146@(148@,2i), 1855.6, -2099.6, 12.5)
+Actor.Angle(72@) = 282.0
+Actor.GiveWeaponAndAmmo(72@, Tec9, 3000)
+060B: set_actor 72@ decision_maker_to 266@ 
+0605: actor 72@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+129@ = Marker.CreateAboveActor(72@)
+Marker.SetIconSize(129@, 1)
+Actor.WeaponAccuracy(72@) = 181@
+144@ = 1 
+0707: start_scene_skip_to @RIOT2_16340 
+0395: clear_area 1 at 1918.1 -2076.9 12.5 radius 30.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1918.1, -2076.9, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 171.1
+05D3: AS_actor $PLAYER_ACTOR goto_point 1916.1 -2093.3 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1919.1, -2077.7, 12.5)
+Actor.Angle($ACTOR_CESAR) = 171.5
+05D3: AS_actor $ACTOR_CESAR goto_point 1917.1 -2094.1 12.5 mode 4 time -1 ms // versionA 
+060B: set_actor $ACTOR_CESAR decision_maker_to 266@ 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1920.3, -2075.3, 12.5)
+Actor.Angle(35@) = 189.5
+Actor.GiveWeaponAndAmmo(35@, RPG, 1)
+05D3: AS_actor 35@ goto_point 1918.3 -2091.7 12.5 mode 4 time -1 ms // versionA 
+060B: set_actor 35@ decision_maker_to 266@ 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1918.8, -2075.3, 12.5)
+Actor.Angle(34@) = 165.9
+05D3: AS_actor 34@ goto_point 1916.8 -2091.7 12.5 mode 4 time -1 ms // versionA 
+060B: set_actor 34@ decision_maker_to 266@ 
+0792: disembark_instantly_actor 36@ 
+Actor.PutAt(36@, 1919.6, -2074.0, 12.5)
+Actor.Angle(36@) = 173.0
+05D3: AS_actor 36@ goto_point 1917.6 -2090.4 12.5 mode 4 time -1 ms // versionA 
+060B: set_actor 36@ decision_maker_to 266@ 
+Camera.SetPosition(1914.65, -2087.8, 13.4, 0.0, 0.0, 0.0)
+Camera.PointAt(1917.9, -2080.7, 13.0, 2)
+fade 1 500 
+
+:RIOT2_15290
+if 
+fading 
+jf @RIOT2_15314 
+wait 0 
+jump @RIOT2_15290 
+
+:RIOT2_15314
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_15346 
+jump @RIOT2_30318 
+
+:RIOT2_15346
+185@ = 6 
+186@ = 0 
+188@ = 6 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 1 
+
+:RIOT2_15388
+if 
+  143@ == 1 
+jf @RIOT2_15809 
+if 
+  32@ > 8000 
+jf @RIOT2_15809 
+0395: clear_area 1 at 1916.9 -2101.1 12.6 radius 30.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1916.9, -2101.1, 12.6)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+05D3: AS_actor $PLAYER_ACTOR goto_point 1912.4 -2101.1 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1916.9, -2102.1, 12.6)
+Actor.Angle($ACTOR_CESAR) = 90.0
+05D3: AS_actor $ACTOR_CESAR goto_point 1912.4 -2102.1 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1916.9, -2103.1, 12.6)
+Actor.Angle(35@) = 90.0
+05D3: AS_actor 35@ goto_point 1912.4 -2103.1 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor 36@ 
+Actor.PutAt(36@, 1916.9, -2100.1, 12.6)
+Actor.Angle(36@) = 90.0
+05D3: AS_actor 36@ goto_point 1912.4 -2100.1 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1916.9, -2099.1, 12.6)
+Actor.Angle(34@) = 90.0
+05D3: AS_actor 34@ goto_point 1912.4 -2099.1 12.5 mode 4 time -1 ms // versionA 
+Camera.SetPosition(1916.5, -2100.9, 12.8, 0.0, 0.0, 0.0)
+Camera.PointAt(1906.2, -2101.0, 14.8, 2)
+32@ = 0 
+143@ = 2 
+
+:RIOT2_15809
+if 
+  143@ == 2 
+jf @RIOT2_16278 
+if 
+  185@ == 0 
+jf @RIOT2_16278 
+if 
+  32@ > 4000 
+jf @RIOT2_16278 
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_15963 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "FIXN_CAR_OUT" IFP "CAR" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0668: AS_actor -1 rotate_and_shoot_at 1916.5 -2100.9 12.8 3000 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 69@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_15963
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_16037 
+0615: define_AS_pack_begin 268@ 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+04EB: AS_actor -1 crouch 1 
+0668: AS_actor -1 rotate_and_shoot_at 1916.5 -2100.9 12.8 3000 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 70@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_16037
+if 
+   not Actor.Dead(71@)
+jf @RIOT2_16111 
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 700 ms 
+05BA: AS_actor -1 move_mouth 100 ms 
+0668: AS_actor -1 rotate_and_shoot_at 1916.5 -2100.9 12.8 3000 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 71@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_16111
+if 
+   not Actor.Dead(72@)
+jf @RIOT2_16185 
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05BA: AS_actor -1 move_mouth 100 ms 
+0668: AS_actor -1 rotate_and_shoot_at 1916.5 -2100.9 12.8 3000 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 72@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_16185
+185@ = 6 
+186@ = 6 
+188@ = 7 
+gosub @RIOT2_41057 
+Camera.SetPosition(1866.1, -2101.8, 13.4, 0.0, 0.0, 0.0)
+Camera.PointAt(1849.9, -2101.0, 14.98, 2)
+32@ = 0 
+143@ = 3 
+
+:RIOT2_16278
+if 
+  143@ == 3 
+jf @RIOT2_19360 
+if 
+  185@ == 0 
+jf @RIOT2_19360 
+if 
+  32@ > 4000 
+jf @RIOT2_19360 
+144@ = 0 
+
+:RIOT2_16340
+0701: end_scene_skip 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_16374 
+jump @RIOT2_30318 
+
+:RIOT2_16374
+if 
+  144@ == 1 
+jf @RIOT2_16731 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_16416
+if 
+fading 
+jf @RIOT2_16440 
+wait 0 
+jump @RIOT2_16416 
+
+:RIOT2_16440
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_16472 
+jump @RIOT2_30318 
+
+:RIOT2_16472
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1912.4, -2101.1, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1912.4, -2102.1, 12.5)
+Actor.Angle($ACTOR_CESAR) = 90.0
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1912.4, -2103.1, 12.5)
+Actor.Angle(35@) = 90.0
+0792: disembark_instantly_actor 36@ 
+Actor.PutAt(36@, 1912.4, -2100.1, 12.5)
+Actor.Angle(36@) = 90.0
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1912.4, -2099.1, 12.5)
+Actor.Angle(34@) = 90.0
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_16668 
+0792: disembark_instantly_actor 69@ 
+
+:RIOT2_16668
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_16689 
+0792: disembark_instantly_actor 70@ 
+
+:RIOT2_16689
+if 
+   not Actor.Dead(71@)
+jf @RIOT2_16710 
+0792: disembark_instantly_actor 71@ 
+
+:RIOT2_16710
+if 
+   not Actor.Dead(72@)
+jf @RIOT2_16731 
+0792: disembark_instantly_actor 72@ 
+
+:RIOT2_16731
+0350: set_actor $ACTOR_CESAR maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 269@ 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 10 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1871.1 -2102.3 14.6 168@ ms 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+05B9: AS_actor -1 stay_idle 168@ ms 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1898.7 -2102.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1912.4, -2103.1, 12.5)
+Actor.Angle(35@) = 90.0
+0350: set_actor 35@ maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 269@ 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 10 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1878.7 -2105.5 14.6 168@ ms 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+05B9: AS_actor -1 stay_idle 168@ ms 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1898.7 -2106.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+if 
+   not Car.Wrecked(68@)
+jf @RIOT2_17191 
+0672: AS_actor -1 attack_car 68@ 
+
+:RIOT2_17191
+05B9: AS_actor -1 stay_idle 500 ms 
+0605: actor -1 perform_animation "MANWINB" IFP "CASINO" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 35@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+0350: set_actor 34@ maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 269@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1891.2 -2099.6 14.0 168@ ms 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 1903.7 -2096.6 12.5 angle 75.0 radius -1.0 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1903.5 -2096.6 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 75.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1894.6 -2099.2 12.4 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0812: AS_actor -1 perform_animation "CROUCH_ROLL_L" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+05D3: AS_actor -1 goto_point 1884.6 -2107.6 12.4 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1874.9 -2102.8 12.4 mode 6 time -1 ms // versionA 
+0812: AS_actor -1 perform_animation "KO_SPIN_R" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "CRCKIDLE4" IFP "CRACK" framedelta 8.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 36@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_18142 
+0350: set_actor 69@ maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 269@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 168@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 1872.8 -2096.1 12.5 angle 275.0 radius -1.0 animation "SWT_WLLSHOOT_OUT_L" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1872.8 -2096.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 69@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+
+:RIOT2_18142
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_18166 
+05E2: AS_actor 70@ kill_actor $PLAYER_ACTOR 
+
+:RIOT2_18166
+if 
+   not Actor.Dead(71@)
+jf @RIOT2_18501 
+0350: set_actor 71@ maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 269@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 168@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 1864.1 -2107.4 12.6 angle 275.0 radius -0.1 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1864.1 -2107.4 12.6 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 71@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+
+:RIOT2_18501
+if 
+   not Actor.Dead(72@)
+jf @RIOT2_18525 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+
+:RIOT2_18525
+0209: 148@ = random_int_in_ranges 0 2 
+73@ = Actor.Create(Mission2, 146@(148@,2i), 1806.1, -2121.7, 12.5)
+Actor.Angle(73@) = 357.8
+Actor.GiveWeaponAndAmmo(73@, Tec9, 3000)
+060B: set_actor 73@ decision_maker_to 266@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1837.5 -2102.3 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 73@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+130@ = Marker.CreateAboveActor(73@)
+Marker.SetIconSize(130@, 1)
+Actor.WeaponAccuracy(73@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+74@ = Actor.Create(Mission2, 146@(148@,2i), 1801.5, -2120.7, 12.5)
+Actor.Angle(74@) = 357.8
+Actor.GiveWeaponAndAmmo(74@, Tec9, 3000)
+060B: set_actor 74@ decision_maker_to 266@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1833.8 -2097.8 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 74@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+131@ = Marker.CreateAboveActor(74@)
+Marker.SetIconSize(131@, 1)
+Actor.WeaponAccuracy(74@) = 181@
+Actor.AddArmour(74@, 50)
+0209: 148@ = random_int_in_ranges 0 2 
+75@ = Actor.Create(Mission2, 146@(148@,2i), 1879.7, -2094.9, 12.5)
+Actor.Angle(75@) = 180.0
+Actor.GiveWeaponAndAmmo(75@, Tec9, 3000)
+060B: set_actor 75@ decision_maker_to 266@ 
+0350: set_actor 75@ maintain_position_when_attacked 1 
+Actor.WeaponAccuracy(75@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+76@ = Actor.Create(Mission2, 146@(148@,2i), 1878.7, -2094.9, 12.5)
+Actor.Angle(76@) = 180.0
+Actor.GiveWeaponAndAmmo(76@, Tec9, 3000)
+060B: set_actor 76@ decision_maker_to 266@ 
+0350: set_actor 76@ maintain_position_when_attacked 1 
+Actor.WeaponAccuracy(76@) = 181@
+Actor.AddArmour(76@, 50)
+0209: 148@ = random_int_in_ranges 0 2 
+77@ = Actor.Create(Mission2, 146@(148@,2i), 1876.7, -2094.9, 12.5)
+Actor.Angle(77@) = 180.0
+Actor.GiveWeaponAndAmmo(77@, Tec9, 3000)
+060B: set_actor 77@ decision_maker_to 266@ 
+0350: set_actor 77@ maintain_position_when_attacked 1 
+Actor.WeaponAccuracy(77@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+78@ = Actor.Create(Mission2, 146@(148@,2i), 1875.2, -2094.9, 12.5)
+Actor.Angle(78@) = 180.0
+Actor.GiveWeaponAndAmmo(78@, Tec9, 3000)
+060B: set_actor 78@ decision_maker_to 266@ 
+Actor.SetImmunities(78@, 1, 1, 1, 1, 1)
+0350: set_actor 78@ maintain_position_when_attacked 1 
+Actor.WeaponAccuracy(78@) = 181@
+Actor.AddArmour(78@, 50)
+Marker.Disable(89@)
+89@ = Marker.CreateAboveActor($ACTOR_CESAR)
+07E0: set_marker 89@ type_to 1 
+098A: set_gunshot_sense_range_for_riot2 -1.0 
+09F5: disable_player_mutal_activities 1 
+04EF: release_animation "CAR" 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BC: show_text_highpriority GXT 'R2_05' time 7000 flag 1  // ~S~Stay close to ~b~Cesar~s~ and clear out the alleyway.
+if 
+  144@ == 1 
+jf @RIOT2_19346 
+fade 1 500 
+
+:RIOT2_19290
+if 
+fading 
+jf @RIOT2_19314 
+wait 0 
+jump @RIOT2_19290 
+
+:RIOT2_19314
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_19346 
+jump @RIOT2_30318 
+
+:RIOT2_19346
+143@ = 0 
+142@ = 4 
+
+:RIOT2_19360
+if 
+  142@ == 4 
+jf @RIOT2_21107 
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_19477 
+if or
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1877.6 -2050.8 cornerB 1815.3 -2171.4 
+051A:   actor 69@ damaged_by_actor $PLAYER_ACTOR 
+jf @RIOT2_19477 
+062E: get_actor 69@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_19477 
+05E2: AS_actor 69@ kill_actor $PLAYER_ACTOR 
+
+:RIOT2_19477
+if 
+   not Actor.Dead(71@)
+jf @RIOT2_19576 
+if or
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1872.6 -2050.8 cornerB 1815.3 -2171.4 
+051A:   actor 71@ damaged_by_actor $PLAYER_ACTOR 
+jf @RIOT2_19576 
+062E: get_actor 71@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_19576 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+
+:RIOT2_19576
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_19649 
+180@ = Actor.Health($ACTOR_CESAR)
+if 
+  50 > 180@ 
+jf @RIOT2_19649 
+0829: actor $ACTOR_CESAR perform_animation "KO_SHOT_STOM" IFP_file "PED" 8.0 time 0 and_dies 
+
+:RIOT2_19649
+if 
+   not Actor.Dead(34@)
+jf @RIOT2_19722 
+180@ = Actor.Health(34@)
+if 
+  50 > 180@ 
+jf @RIOT2_19722 
+0829: actor 34@ perform_animation "KO_SHOT_STOM" IFP_file "PED" 8.0 time 0 and_dies 
+
+:RIOT2_19722
+if 
+  143@ == 0 
+jf @RIOT2_19813 
+062E: get_actor 36@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_19813 
+0646: unknown_get_actor 36@ task_1560_status_store_to 270@ // similar to 062E 
+if 
+  270@ >= 3 
+jf @RIOT2_19813 
+Garage.Open('DUF_LAS')
+143@ = 1 
+
+:RIOT2_19813
+if 
+  143@ == 1 
+jf @RIOT2_20479 
+062E: get_actor 36@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_20479 
+0646: unknown_get_actor 36@ task_1560_status_store_to 270@ // similar to 062E 
+if 
+  270@ >= 5 
+jf @RIOT2_20479 
+if 
+   not Actor.Dead(75@)
+jf @RIOT2_20011 
+0615: define_AS_pack_begin 269@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+07A5: AS_actor -1 attack_actor 36@ time 3000 
+05D3: AS_actor -1 goto_point 1872.8 -2096.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 75@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+138@ = Marker.CreateAboveActor(75@)
+Marker.SetIconSize(138@, 1)
+
+:RIOT2_20011
+if 
+   not Actor.Dead(76@)
+jf @RIOT2_20160 
+0350: set_actor 76@ maintain_position_when_attacked 0 
+0615: define_AS_pack_begin 268@ 
+07A5: AS_actor -1 attack_actor 36@ time 3000 
+05D3: AS_actor -1 goto_point 1872.8 -2096.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+0812: AS_actor -1 perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 76@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+139@ = Marker.CreateAboveActor(76@)
+Marker.SetIconSize(139@, 1)
+
+:RIOT2_20160
+if 
+   not Actor.Dead(77@)
+jf @RIOT2_20290 
+0350: set_actor 77@ maintain_position_when_attacked 0 
+0615: define_AS_pack_begin 268@ 
+07A5: AS_actor -1 attack_actor 36@ time 3000 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 77@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0816: set_actor 77@ dont_chase_victim 1 
+140@ = Marker.CreateAboveActor(77@)
+Marker.SetIconSize(140@, 1)
+
+:RIOT2_20290
+if 
+   not Actor.Dead(78@)
+jf @RIOT2_20435 
+0350: set_actor 78@ maintain_position_when_attacked 0 
+Actor.SetImmunities(78@, 0, 0, 0, 0, 0)
+0615: define_AS_pack_begin 268@ 
+07A5: AS_actor -1 attack_actor 36@ time 3000 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 78@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0816: set_actor 78@ dont_chase_victim 1 
+141@ = Marker.CreateAboveActor(78@)
+Marker.SetIconSize(141@, 1)
+
+:RIOT2_20435
+00BE: text_clear_all 
+185@ = 7 
+186@ = 0 
+gosub @RIOT2_41057 
+0332: set_actor 36@ bleeding 1 
+33@ = 0 
+143@ = 2 
+
+:RIOT2_20479
+if 
+  143@ == 2 
+jf @RIOT2_20530 
+if 
+  33@ > 1000 
+jf @RIOT2_20530 
+0619: enable_actor 36@ collision_detection 0 
+143@ = 3 
+
+:RIOT2_20530
+if 
+  143@ == 3 
+jf @RIOT2_20829 
+if 
+   Actor.Dead(69@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(70@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(71@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(72@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(73@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(74@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(75@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(76@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(77@)
+jf @RIOT2_20829 
+if 
+   Actor.Dead(78@)
+jf @RIOT2_20829 
+Marker.Disable(126@)
+Marker.Disable(127@)
+Marker.Disable(128@)
+Marker.Disable(129@)
+Marker.Disable(130@)
+Marker.Disable(131@)
+Marker.Disable(138@)
+Marker.Disable(139@)
+Marker.Disable(140@)
+Marker.Disable(141@)
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(75@)
+Actor.RemoveReferences(76@)
+Actor.RemoveReferences(77@)
+Actor.RemoveReferences(78@)
+32@ = 0 
+143@ = 0 
+142@ = 5 
+
+:RIOT2_20829
+if 
+   Actor.Dead(69@)
+jf @RIOT2_20855 
+Actor.RemoveReferences(69@)
+Marker.Disable(126@)
+
+:RIOT2_20855
+if 
+   Actor.Dead(70@)
+jf @RIOT2_20881 
+Actor.RemoveReferences(70@)
+Marker.Disable(127@)
+
+:RIOT2_20881
+if 
+   Actor.Dead(71@)
+jf @RIOT2_20907 
+Actor.RemoveReferences(71@)
+Marker.Disable(128@)
+
+:RIOT2_20907
+if 
+   Actor.Dead(72@)
+jf @RIOT2_20933 
+Actor.RemoveReferences(72@)
+Marker.Disable(129@)
+
+:RIOT2_20933
+if 
+   Actor.Dead(73@)
+jf @RIOT2_20959 
+Actor.RemoveReferences(73@)
+Marker.Disable(130@)
+
+:RIOT2_20959
+if 
+   Actor.Dead(74@)
+jf @RIOT2_20985 
+Actor.RemoveReferences(74@)
+Marker.Disable(131@)
+
+:RIOT2_20985
+if 
+  143@ > 1 
+jf @RIOT2_21107 
+if 
+   Actor.Dead(75@)
+jf @RIOT2_21029 
+Actor.RemoveReferences(75@)
+Marker.Disable(138@)
+
+:RIOT2_21029
+if 
+   Actor.Dead(76@)
+jf @RIOT2_21055 
+Actor.RemoveReferences(76@)
+Marker.Disable(139@)
+
+:RIOT2_21055
+if 
+   Actor.Dead(77@)
+jf @RIOT2_21081 
+Actor.RemoveReferences(77@)
+Marker.Disable(140@)
+
+:RIOT2_21081
+if 
+   Actor.Dead(78@)
+jf @RIOT2_21107 
+Actor.RemoveReferences(78@)
+Marker.Disable(141@)
+
+:RIOT2_21107
+if 
+  142@ == 5 
+jf @RIOT2_24618 
+if 
+  143@ == 0 
+jf @RIOT2_21572 
+if 
+  32@ > 2000 
+jf @RIOT2_21572 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Car.Destroy(68@)
+0395: clear_area 1 at 1905.1 -2103.9 12.5 radius 60.0 
+Actor.PutAt($PLAYER_ACTOR, 1905.1, -2103.9, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 80.2
+0687: clear_actor $ACTOR_CESAR task 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1897.8 -2099.5 12.5 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1890.8 -2099.5 12.5 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1877.2 -2101.2 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 110.0 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1900.4, -2098.2, 12.5)
+Actor.Angle(34@) = 92.3
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1875.7 -2102.4 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 95.0 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+144@ = 1 
+0707: start_scene_skip_to @RIOT2_21923 
+Camera.SetPosition(1900.4, -2099.6, 12.8, 0.0, 0.0, 0.0)
+Camera.PointAt(1879.4, -2107.7, 17.9, 2)
+32@ = 0 
+143@ = 1 
+
+:RIOT2_21572
+if 
+  143@ == 1 
+jf @RIOT2_21861 
+if 
+  32@ > 3000 
+jf @RIOT2_21861 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1875.7, -2102.4, 12.5)
+Actor.Angle(34@) = 95.0
+0605: actor 34@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+Actor.PutAt($ACTOR_CESAR, 1881.2, -2099.6, 12.5)
+Actor.Angle($ACTOR_CESAR) = 69.4
+Actor.PutAt($PLAYER_ACTOR, 1886.2, -2099.6, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 69.4
+05D3: AS_actor $PLAYER_ACTOR goto_point 1877.6 -2099.8 12.5 mode 4 time -1 ms // versionA 
+gosub @RIOT2_38212 
+Camera.SetPosition(1880.2, -2103.1, 14.46, 0.0, 0.0, 0.0)
+Camera.PointAt(1874.3, -2100.77, 12.8, 2)
+185@ = 8 
+186@ = 0 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 2 
+
+:RIOT2_21861
+if 
+  143@ == 2 
+jf @RIOT2_24618 
+if 
+  185@ == 0 
+jf @RIOT2_24618 
+if 
+  32@ > 8000 
+jf @RIOT2_24618 
+144@ = 0 
+
+:RIOT2_21923
+0701: end_scene_skip 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_21957 
+jump @RIOT2_30318 
+
+:RIOT2_21957
+if 
+  144@ == 1 
+jf @RIOT2_22947 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_21999
+if 
+fading 
+jf @RIOT2_22023 
+wait 0 
+jump @RIOT2_21999 
+
+:RIOT2_22023
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_22055 
+jump @RIOT2_30318 
+
+:RIOT2_22055
+gosub @RIOT2_38212 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1875.7, -2102.4, 12.5)
+Actor.Angle(34@) = 95.0
+0605: actor 34@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1881.2, -2099.6, 12.5)
+Actor.Angle($ACTOR_CESAR) = 69.4
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1879.7, -2101.7, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+0792: disembark_instantly_actor 79@ 
+060B: set_actor 79@ decision_maker_to 265@ 
+Actor.PutAt(79@, 1861.1, -2096.9, 12.5)
+Actor.Angle(79@) = 270.3
+062E: get_actor 80@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_22421 
+0792: disembark_instantly_actor 80@ 
+0605: actor 80@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+078F: AS_actor -1 climb 1 
+0668: AS_actor -1 rotate_and_shoot_at 1874.4 -2101.5 14.8 2000 ms 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 80@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_22421
+062E: get_actor 81@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_22599 
+0792: disembark_instantly_actor 81@ 
+0605: actor 81@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 2000 ms 
+078F: AS_actor -1 climb 1 
+0668: AS_actor -1 rotate_and_shoot_at 1874.4 -2101.5 14.8 2000 ms 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 81@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_22599
+0792: disembark_instantly_actor 82@ 
+060B: set_actor 82@ decision_maker_to 265@ 
+Actor.PutAt(82@, 1859.1, -2106.0, 14.0)
+Actor.Angle(82@) = 264.4
+062E: get_actor 83@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_22791 
+0792: disembark_instantly_actor 83@ 
+0605: actor 83@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+078F: AS_actor -1 climb 1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 83@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_22791
+062E: get_actor 84@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+84A3:   not  $416 == 7 // == constant 
+jf @RIOT2_22947 
+0792: disembark_instantly_actor 84@ 
+0605: actor 84@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 3000 ms 
+078F: AS_actor -1 climb 1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 84@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_22947
+0709: set_decision_maker 265@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 265@ on_event 37 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+85@ = Pickup.Create(#HEALTH, 15, 1875.6, -2091.4, 13.5)
+032B: 86@ = create_weapon_pickup #TEC9 type 15 ammo 48 at 1878.3 -2091.1 13.5 
+0615: define_AS_pack_begin 269@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1864.9 -2101.2 14.0 168@ ms 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 1874.9 -2096.5 12.5 angle 75.0 radius -0.1 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1874.9 -2096.5 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 75.0 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+0615: define_AS_pack_begin 269@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1862.6 -2104.1 14.0 168@ ms 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 1873.3 -2107.4 12.5 angle 98.8 radius -0.1 animation "SWT_WLLSHOOT_OUT_L" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1873.3 -2107.4 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 98.8 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+Actor.GiveWeaponAndAmmo(35@, RPG, 1)
+0615: define_AS_pack_begin 269@ 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 10 
+0209: 168@ = random_int_in_ranges 1500 4000 
+0668: AS_actor -1 rotate_and_shoot_at 1878.7 -2105.5 14.6 168@ ms 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0209: 168@ = random_int_in_ranges 1500 4000 
+05B9: AS_actor -1 stay_idle 168@ ms 
+0643: set_AS_pack 269@ loop 1 
+0616: define_AS_pack_end 269@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1898.7 -2106.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0668: AS_actor -1 rotate_and_shoot_at 1852.1 -2096.6 16.5 10 ms 
+0618: assign_actor -1 to_AS_pack 269@ 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 35@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 269@ 
+0209: 148@ = random_int_in_ranges 0 2 
+69@ = Actor.Create(Mission2, 146@(148@,2i), 1913.7, -2109.2, 12.6)
+Actor.Angle(69@) = 90.5
+Actor.GiveWeaponAndAmmo(69@, Tec9, 3000)
+060B: set_actor 69@ decision_maker_to 266@ 
+0350: set_actor 69@ maintain_position_when_attacked 1 
+Actor.SetImmunities(69@, 1, 1, 1, 1, 1)
+Actor.WeaponAccuracy(69@) = 181@
+Actor.AddArmour(69@, 50)
+0209: 148@ = random_int_in_ranges 0 2 
+70@ = Actor.Create(Mission2, 146@(148@,2i), 1916.5, -2113.1, 12.6)
+Actor.Angle(70@) = 20.1
+Actor.GiveWeaponAndAmmo(70@, Tec9, 3000)
+060B: set_actor 70@ decision_maker_to 266@ 
+0350: set_actor 70@ maintain_position_when_attacked 1 
+Actor.SetImmunities(70@, 1, 1, 1, 1, 1)
+Actor.WeaponAccuracy(70@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+73@ = Actor.Create(Mission2, 146@(148@,2i), 1806.1, -2121.7, 12.5)
+Actor.Angle(73@) = 357.8
+Actor.GiveWeaponAndAmmo(73@, Tec9, 3000)
+060B: set_actor 73@ decision_maker_to 265@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1837.5 -2102.3 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 73@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Marker.Disable(130@)
+130@ = Marker.CreateAboveActor(73@)
+Marker.SetIconSize(130@, 1)
+Actor.WeaponAccuracy(73@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+74@ = Actor.Create(Mission2, 146@(148@,2i), 1801.5, -2120.7, 12.5)
+Actor.Angle(74@) = 357.8
+Actor.GiveWeaponAndAmmo(74@, Tec9, 3000)
+060B: set_actor 74@ decision_maker_to 265@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1833.8 -2097.8 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 275.0 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 74@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Marker.Disable(131@)
+131@ = Marker.CreateAboveActor(74@)
+Marker.SetIconSize(131@, 1)
+Actor.WeaponAccuracy(74@) = 181@
+Actor.AddArmour(74@, 50)
+09F5: disable_player_mutal_activities 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BC: show_text_highpriority GXT 'R2_06' time 4000 flag 1  // ~S~Defend ~b~Cesar~s~.
+if 
+  144@ == 1 
+jf @RIOT2_24597 
+fade 1 500 
+
+:RIOT2_24541
+if 
+fading 
+jf @RIOT2_24565 
+wait 0 
+jump @RIOT2_24541 
+
+:RIOT2_24565
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_24597 
+jump @RIOT2_30318 
+
+:RIOT2_24597
+32@ = 0 
+143@ = 0 
+142@ = 6 
+
+:RIOT2_24618
+if 
+  142@ == 6 
+jf @RIOT2_26187 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_24709 
+180@ = Actor.Health($ACTOR_CESAR)
+if 
+  50 > 180@ 
+jf @RIOT2_24709 
+0829: actor $ACTOR_CESAR perform_animation "KO_SHOT_STOM" IFP_file "PED" 8.0 time 0 and_dies 
+
+:RIOT2_24709
+if 
+   not Actor.Dead(34@)
+jf @RIOT2_24782 
+180@ = Actor.Health(34@)
+if 
+  50 > 180@ 
+jf @RIOT2_24782 
+0829: actor 34@ perform_animation "KO_SHOT_STOM" IFP_file "PED" 8.0 time 0 and_dies 
+
+:RIOT2_24782
+if 
+  169@ == 0 
+jf @RIOT2_24956 
+if 
+   Actor.Dead(79@)
+jf @RIOT2_24903 
+if 
+   Actor.Dead(80@)
+jf @RIOT2_24903 
+if 
+   Actor.Dead(81@)
+jf @RIOT2_24903 
+if 
+   Actor.Dead(82@)
+jf @RIOT2_24903 
+if 
+   Actor.Dead(83@)
+jf @RIOT2_24903 
+if 
+   Actor.Dead(84@)
+jf @RIOT2_24903 
+169@ = 1 
+
+:RIOT2_24903
+if or
+  32@ > 15000 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1893.6 -2043.3 cornerB 1888.1 -2175.6 
+jf @RIOT2_24956 
+169@ = 1 
+
+:RIOT2_24956
+if 
+  169@ == 1 
+jf @RIOT2_25091 
+185@ = 9 
+0209: 186@ = random_int_in_ranges 0 3 
+0085: 188@ = 186@ // (int) 
+188@ += 1 
+gosub @RIOT2_41057 
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_25048 
+Marker.Disable(126@)
+126@ = Marker.CreateAboveActor(69@)
+Marker.SetIconSize(126@, 1)
+
+:RIOT2_25048
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_25084 
+Marker.Disable(127@)
+127@ = Marker.CreateAboveActor(70@)
+Marker.SetIconSize(127@, 1)
+
+:RIOT2_25084
+169@ = 2 
+
+:RIOT2_25091
+if 
+  169@ == 2 
+jf @RIOT2_25521 
+if 
+02CB:   actor 35@ bounding_sphere_visible 
+jf @RIOT2_25521 
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_25240 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1913.5 -2106.1 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0668: AS_actor -1 rotate_and_shoot_at 1900.8 -2106.2 12.6 1500 ms 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 69@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Actor.SetImmunities(69@, 0, 0, 0, 0, 0)
+
+:RIOT2_25240
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_25355 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1914.2 -2104.2 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0668: AS_actor -1 rotate_and_shoot_at 1900.8 -2106.2 12.6 1500 ms 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 70@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Actor.SetImmunities(70@, 0, 0, 0, 0, 0)
+
+:RIOT2_25355
+Actor.GiveWeaponAndAmmo(35@, RPG, 1)
+0615: define_AS_pack_begin 268@ 
+05D4: AS_actor -1 rotate_angle 269.0 
+05B9: AS_actor -1 stay_idle 200 ms 
+0668: AS_actor -1 rotate_and_shoot_at 1951.1 -2103.9 19.3 500 ms 
+0812: AS_actor -1 perform_animation "KO_SHOT_FACE" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "CRCKIDLE1" IFP "CRACK" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 35@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0332: set_actor 35@ bleeding 1 
+32@ = 0 
+169@ = 3 
+
+:RIOT2_25521
+if 
+  143@ == 0 
+jf @RIOT2_25826 
+if 
+   Actor.Dead(79@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(80@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(81@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(82@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(83@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(84@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(73@)
+jf @RIOT2_25826 
+if 
+   Actor.Dead(74@)
+jf @RIOT2_25826 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1895.3 -2102.2 12.6 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 274.7 
+0668: AS_actor -1 rotate_and_shoot_at 1913.5 -2104.4 13.9 -2 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1895.6 -2104.2 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 271.0 
+0668: AS_actor -1 rotate_and_shoot_at 1912.9 -2106.4 13.9 -2 ms 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+143@ = 1 
+
+:RIOT2_25826
+if 
+  143@ == 1 
+jf @RIOT2_25927 
+if 
+   Actor.Dead(69@)
+jf @RIOT2_25927 
+if 
+   Actor.Dead(70@)
+jf @RIOT2_25927 
+Actor.RemoveReferences(69@)
+Actor.RemoveReferences(70@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+04EF: release_animation "CASINO" 
+32@ = 0 
+143@ = 0 
+142@ = 7 
+
+:RIOT2_25927
+if 
+   Actor.Dead(69@)
+jf @RIOT2_25953 
+Actor.RemoveReferences(69@)
+Marker.Disable(126@)
+
+:RIOT2_25953
+if 
+   Actor.Dead(70@)
+jf @RIOT2_25979 
+Actor.RemoveReferences(70@)
+Marker.Disable(127@)
+
+:RIOT2_25979
+if 
+   Actor.Dead(73@)
+jf @RIOT2_26005 
+Actor.RemoveReferences(73@)
+Marker.Disable(130@)
+
+:RIOT2_26005
+if 
+   Actor.Dead(74@)
+jf @RIOT2_26031 
+Actor.RemoveReferences(74@)
+Marker.Disable(131@)
+
+:RIOT2_26031
+if 
+   Actor.Dead(79@)
+jf @RIOT2_26057 
+Actor.RemoveReferences(79@)
+Marker.Disable(132@)
+
+:RIOT2_26057
+if 
+   Actor.Dead(80@)
+jf @RIOT2_26083 
+Actor.RemoveReferences(80@)
+Marker.Disable(133@)
+
+:RIOT2_26083
+if 
+   Actor.Dead(81@)
+jf @RIOT2_26109 
+Actor.RemoveReferences(81@)
+Marker.Disable(134@)
+
+:RIOT2_26109
+if 
+   Actor.Dead(82@)
+jf @RIOT2_26135 
+Actor.RemoveReferences(82@)
+Marker.Disable(135@)
+
+:RIOT2_26135
+if 
+   Actor.Dead(83@)
+jf @RIOT2_26161 
+Actor.RemoveReferences(83@)
+Marker.Disable(136@)
+
+:RIOT2_26161
+if 
+   Actor.Dead(84@)
+jf @RIOT2_26187 
+Actor.RemoveReferences(84@)
+Marker.Disable(137@)
+
+:RIOT2_26187
+if 
+  142@ == 7 
+jf @RIOT2_29060 
+if 
+  143@ == 0 
+jf @RIOT2_27351 
+if 
+  32@ > 2000 
+jf @RIOT2_27351 
+fade 0 500 
+
+:RIOT2_26249
+if 
+fading 
+jf @RIOT2_26273 
+wait 0 
+jump @RIOT2_26249 
+
+:RIOT2_26273
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_26305 
+jump @RIOT2_30318 
+
+:RIOT2_26305
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+04EF: release_animation "SWAT" 
+Model.Load(#FLAME)
+0708: reset_decision_maker 265@ event 36 
+0708: reset_decision_maker 265@ event 37 
+Camera.SetAtPos(1855.5, -2101.8, 12.5)
+69@ = Actor.Create(Mission2, #LSV1, 1805.0, -2126.0, 17.8)
+Actor.Angle(69@) = 306.5
+0350: set_actor 69@ maintain_position_when_attacked 1 
+Actor.AddArmour(69@, 100)
+0446: set_actor 69@ dismemberment_possible 0 
+Actor.GiveWeaponAndAmmo(69@, RPG, 30000)
+060B: set_actor 69@ decision_maker_to 266@ 
+90@ = Marker.CreateAboveActor(69@)
+Marker.SetIconSize(90@, 1)
+Actor.WeaponAccuracy(69@) = 181@
+Actor.AddArmour(69@, 100)
+0209: 148@ = random_int_in_ranges 0 2 
+70@ = Actor.Create(Mission2, 146@(148@,2i), 1811.8, -2124.0, 12.6)
+Actor.Angle(70@) = 287.5
+0350: set_actor 70@ maintain_position_when_attacked 1 
+Actor.GiveWeaponAndAmmo(70@, FlameThrower, 30000)
+060B: set_actor 70@ decision_maker_to 266@ 
+91@ = Marker.CreateAboveActor(70@)
+Marker.SetIconSize(91@, 1)
+Actor.WeaponAccuracy(70@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+71@ = Actor.Create(Mission2, 146@(148@,2i), 1795.0, -2126.7, 12.5)
+Actor.Angle(71@) = 358.6
+Actor.GiveWeaponAndAmmo(71@, Tec9, 3000)
+0816: set_actor 71@ dont_chase_victim 1 
+060B: set_actor 71@ decision_maker_to 266@ 
+92@ = Marker.CreateAboveActor(71@)
+Marker.SetIconSize(92@, 1)
+Actor.WeaponAccuracy(71@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+72@ = Actor.Create(Mission2, 146@(148@,2i), 1795.0, -2130.7, 12.5)
+Actor.Angle(72@) = 357.8
+Actor.GiveWeaponAndAmmo(72@, Tec9, 3000)
+0816: set_actor 72@ dont_chase_victim 1 
+060B: set_actor 72@ decision_maker_to 266@ 
+93@ = Marker.CreateAboveActor(72@)
+Marker.SetIconSize(93@, 1)
+Actor.WeaponAccuracy(72@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+73@ = Actor.Create(Mission2, 146@(148@,2i), 1806.1, -2121.7, 12.5)
+Actor.Angle(73@) = 357.8
+Actor.GiveWeaponAndAmmo(73@, Tec9, 3000)
+0350: set_actor 73@ maintain_position_when_attacked 1 
+060B: set_actor 73@ decision_maker_to 266@ 
+94@ = Marker.CreateAboveActor(73@)
+Marker.SetIconSize(94@, 1)
+Actor.WeaponAccuracy(73@) = 181@
+Actor.AddArmour(73@, 100)
+0209: 148@ = random_int_in_ranges 0 2 
+74@ = Actor.Create(Mission2, 146@(148@,2i), 1801.5, -2120.7, 12.5)
+Actor.Angle(74@) = 357.8
+Actor.GiveWeaponAndAmmo(74@, Tec9, 3000)
+0350: set_actor 74@ maintain_position_when_attacked 1 
+060B: set_actor 74@ decision_maker_to 266@ 
+95@ = Marker.CreateAboveActor(74@)
+Marker.SetIconSize(95@, 1)
+Actor.WeaponAccuracy(74@) = 181@
+Actor.AddArmour(74@, 100)
+0395: clear_area 1 at 1855.5 -2101.8 12.5 radius 30.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1855.5, -2101.8, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+05D3: AS_actor $PLAYER_ACTOR goto_point 1846.6 -2102.8 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1855.5, -2102.8, 12.5)
+Actor.Angle($ACTOR_CESAR) = 90.0
+05D3: AS_actor $ACTOR_CESAR goto_point 1846.6 -2102.8 12.5 mode 4 time -1 ms // versionA 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1855.5, -2100.8, 12.5)
+Actor.Angle(34@) = 90.0
+05D3: AS_actor 34@ goto_point 1846.6 -2100.8 12.5 mode 4 time -1 ms // versionA 
+Camera.SetPosition(1846.6, -2101.8, 13.88, 0.0, 0.0, 0.0)
+Camera.PointAt(1853.9, -2101.4, 12.7, 2)
+fade 1 500 
+
+:RIOT2_27246
+if 
+fading 
+jf @RIOT2_27270 
+wait 0 
+jump @RIOT2_27246 
+
+:RIOT2_27270
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_27302 
+jump @RIOT2_30318 
+
+:RIOT2_27302
+144@ = 1 
+0707: start_scene_skip_to @RIOT2_27901 
+185@ = 10 
+186@ = 0 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 1 
+
+:RIOT2_27351
+if 
+  143@ == 1 
+jf @RIOT2_27652 
+if 
+  185@ == 0 
+jf @RIOT2_27652 
+if 
+  32@ > 4000 
+jf @RIOT2_27652 
+fade 0 500 
+
+:RIOT2_27413
+if 
+fading 
+jf @RIOT2_27437 
+wait 0 
+jump @RIOT2_27413 
+
+:RIOT2_27437
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_27469 
+jump @RIOT2_30318 
+
+:RIOT2_27469
+Camera.SetAtPos(1809.8, -2123.4, 12.7)
+Camera.SetPosition(1816.2, -2116.8, 13.16, 0.0, 0.0, 0.0)
+Camera.PointAt(1808.6, -2123.8, 15.0, 2)
+fade 1 500 
+
+:RIOT2_27544
+if 
+fading 
+jf @RIOT2_27568 
+wait 0 
+jump @RIOT2_27544 
+
+:RIOT2_27568
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_27600 
+jump @RIOT2_30318 
+
+:RIOT2_27600
+185@ = 11 
+0209: 186@ = random_int_in_ranges 0 3 
+0085: 188@ = 186@ // (int) 
+188@ += 1 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 2 
+
+:RIOT2_27652
+if 
+  143@ == 2 
+jf @RIOT2_27839 
+if 
+  185@ == 0 
+jf @RIOT2_27839 
+if 
+  32@ > 4000 
+jf @RIOT2_27839 
+Camera.SetPosition(1816.2, -2116.8, 13.16, 0.0, 0.0, 0.0)
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_27787 
+Camera.OnPed(70@, 15, 1)
+0668: AS_actor 70@ rotate_and_shoot_at 1831.6 -2118.9 12.5 4000 ms 
+
+:RIOT2_27787
+185@ = 12 
+0209: 186@ = random_int_in_ranges 0 3 
+0085: 188@ = 186@ // (int) 
+188@ += 1 
+gosub @RIOT2_41057 
+32@ = 0 
+143@ = 3 
+
+:RIOT2_27839
+if 
+  143@ == 3 
+jf @RIOT2_29060 
+if 
+  185@ == 0 
+jf @RIOT2_29060 
+if 
+  32@ > 4000 
+jf @RIOT2_29060 
+144@ = 0 
+
+:RIOT2_27901
+0701: end_scene_skip 
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_27935 
+jump @RIOT2_30318 
+
+:RIOT2_27935
+if 
+  144@ == 1 
+jf @RIOT2_28033 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+fade 0 500 
+
+:RIOT2_27977
+if 
+fading 
+jf @RIOT2_28001 
+wait 0 
+jump @RIOT2_27977 
+
+:RIOT2_28001
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_28033 
+jump @RIOT2_30318 
+
+:RIOT2_28033
+if 
+   not Actor.Dead(69@)
+jf @RIOT2_28253 
+0615: define_AS_pack_begin 268@ 
+0668: AS_actor -1 rotate_and_shoot_at 1832.7 -2090.1 14.1 500 ms 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 1000 
+0668: AS_actor -1 rotate_and_shoot_at 1853.6 -2087.0 20.5 500 ms 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time 1000 
+0668: AS_actor -1 rotate_and_shoot_at 1819.5 -2113.1 12.9 500 ms 
+0605: actor -1 perform_animation "GUN_STAND" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 1000 
+0643: set_AS_pack 268@ loop 1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 69@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28253
+if 
+   not Actor.Dead(70@)
+jf @RIOT2_28328 
+0615: define_AS_pack_begin 268@ 
+0668: AS_actor -1 rotate_and_shoot_at 1831.6 -2118.9 12.5 2000 ms 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0643: set_AS_pack 268@ loop 1 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 70@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28328
+if 
+   not Actor.Dead(71@)
+jf @RIOT2_28412 
+0615: define_AS_pack_begin 268@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 1795.0 -2106.7 12.5 mode 4 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 277.9 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 71@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28412
+if 
+   not Actor.Dead(72@)
+jf @RIOT2_28496 
+0615: define_AS_pack_begin 268@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 1792.0 -2103.7 12.5 mode 4 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 277.9 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 72@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28496
+if 
+   not Actor.Dead(73@)
+jf @RIOT2_28565 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1809.4 -2116.3 12.5 mode 6 time -1 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 73@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28565
+if 
+   not Actor.Dead(74@)
+jf @RIOT2_28634 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1809.4 -2111.8 12.5 mode 6 time -1 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 74@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_28634
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1833.9, -2104.2, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 122.4
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1833.0, -2106.6, 12.5)
+Actor.Angle($ACTOR_CESAR) = 122.3
+0350: set_actor $ACTOR_CESAR maintain_position_when_attacked 1 
+060B: set_actor $ACTOR_CESAR decision_maker_to 265@ 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1834.4, -2102.0, 12.5)
+Actor.Angle(34@) = 99.6
+0350: set_actor 34@ maintain_position_when_attacked 1 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1814.1 -2102.4 12.5 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 112.7 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Actor.RemoveReferences(79@)
+Actor.RemoveReferences(80@)
+Actor.RemoveReferences(81@)
+Actor.RemoveReferences(82@)
+Actor.RemoveReferences(83@)
+Actor.RemoveReferences(84@)
+0709: set_decision_maker 265@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 265@ on_event 37 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+09F5: disable_player_mutal_activities 0 
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BC: show_text_highpriority GXT 'R2_07' time 4000 flag 1  // ~S~Finish off the last ~r~Vagos~s~.
+if 
+  144@ == 1 
+jf @RIOT2_29046 
+fade 1 500 
+
+:RIOT2_28990
+if 
+fading 
+jf @RIOT2_29014 
+wait 0 
+jump @RIOT2_28990 
+
+:RIOT2_29014
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_29046 
+jump @RIOT2_30318 
+
+:RIOT2_29046
+143@ = 0 
+142@ = 8 
+
+:RIOT2_29060
+if 
+  142@ == 8 
+jf @RIOT2_30304 
+if 
+  143@ == 0 
+jf @RIOT2_29332 
+if 
+   Actor.Dead(69@)
+jf @RIOT2_29117 
+Marker.Disable(90@)
+
+:RIOT2_29117
+if 
+   Actor.Dead(70@)
+jf @RIOT2_29138 
+Marker.Disable(91@)
+
+:RIOT2_29138
+if 
+   Actor.Dead(71@)
+jf @RIOT2_29159 
+Marker.Disable(92@)
+
+:RIOT2_29159
+if 
+   Actor.Dead(72@)
+jf @RIOT2_29180 
+Marker.Disable(93@)
+
+:RIOT2_29180
+if 
+   Actor.Dead(73@)
+jf @RIOT2_29201 
+Marker.Disable(94@)
+
+:RIOT2_29201
+if 
+   Actor.Dead(74@)
+jf @RIOT2_29222 
+Marker.Disable(95@)
+
+:RIOT2_29222
+if 
+   Actor.Dead(69@)
+jf @RIOT2_29332 
+if 
+   Actor.Dead(70@)
+jf @RIOT2_29332 
+if 
+   Actor.Dead(71@)
+jf @RIOT2_29332 
+if 
+   Actor.Dead(72@)
+jf @RIOT2_29332 
+if 
+   Actor.Dead(73@)
+jf @RIOT2_29332 
+if 
+   Actor.Dead(74@)
+jf @RIOT2_29332 
+32@ = 0 
+143@ = 1 
+
+:RIOT2_29332
+if 
+  143@ == 1 
+jf @RIOT2_29927 
+if 
+  32@ > 2000 
+jf @RIOT2_29927 
+fade 0 500 
+
+:RIOT2_29376
+if 
+fading 
+jf @RIOT2_29400 
+wait 0 
+jump @RIOT2_29376 
+
+:RIOT2_29400
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_29432 
+jump @RIOT2_30318 
+
+:RIOT2_29432
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+185@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+Camera.SetAtPos(1814.9, -2112.1, 12.4)
+0395: clear_area 1 at 1814.9 -2112.1 12.4 radius 30.0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1814.9, -2112.1, 12.4)
+Actor.Angle($PLAYER_ACTOR) = 127.9
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1807.8 -2122.0 12.5 mode 4 time -1 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $ACTOR_CESAR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0792: disembark_instantly_actor $ACTOR_CESAR 
+Actor.PutAt($ACTOR_CESAR, 1812.4, -2111.3, 12.4)
+Actor.Angle($ACTOR_CESAR) = 127.9
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1804.8 -2120.2 12.5 mode 4 time -1 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1810.4, -2111.0, 12.4)
+Actor.Angle(34@) = 135.1
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1807.0 -2118.8 12.5 mode 4 time -1 ms // versionA 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+Camera.SetPosition(1812.6, -2114.5, 13.0, 0.0, 0.0, 0.0)
+Camera.PointAt(1804.5, -2123.6, 15.0, 2)
+fade 1 500 
+
+:RIOT2_29836
+if 
+fading 
+jf @RIOT2_29860 
+wait 0 
+jump @RIOT2_29836 
+
+:RIOT2_29860
+gosub @RIOT2_31211 
+if 
+  145@ == 1 
+jf @RIOT2_29892 
+jump @RIOT2_30318 
+
+:RIOT2_29892
+185@ = 13 
+186@ = 0 
+188@ = 4 
+gosub @RIOT2_41057 
+143@ = 2 
+
+:RIOT2_29927
+if 
+  143@ == 2 
+jf @RIOT2_30058 
+if 
+  185@ == 0 
+jf @RIOT2_30058 
+0615: define_AS_pack_begin 268@ 
+0639: AS_actor -1 rotate_to_actor $ACTOR_CESAR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+185@ = 13 
+186@ = 4 
+188@ = 8 
+gosub @RIOT2_41057 
+143@ = 3 
+
+:RIOT2_30058
+if 
+  143@ == 3 
+jf @RIOT2_30246 
+if 
+  185@ == 0 
+jf @RIOT2_30246 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1794.8 -2124.5 12.5 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1794.8 -2137.2 12.5 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor $ACTOR_CESAR to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0615: define_AS_pack_begin 268@ 
+05D3: AS_actor -1 goto_point 1794.8 -2122.5 12.4 mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1794.8 -2137.2 12.5 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 34@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+32@ = 0 
+143@ = 4 
+
+:RIOT2_30246
+if 
+  143@ == 4 
+jf @RIOT2_30304 
+if 
+  32@ > 3000 
+jf @RIOT2_30304 
+09F5: disable_player_mutal_activities 0 
+Actor.DestroyInstantly($ACTOR_CESAR)
+Actor.DestroyInstantly(34@)
+jump @RIOT2_30404 
+
+:RIOT2_30304
+gosub @RIOT2_39623 
+jump @RIOT2_1662 
+
+:RIOT2_30318
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @RIOT2_30386 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:RIOT2_30386
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:RIOT2_30404
+$RIOT_TOTAL_PASSED_MISSIONS += 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 60 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 60 
+Marker.Disable($MARKER_SWEET_HOUSE)
+076C: set_zone 'ELCO1' gang 7 density_to 40 
+076C: set_zone 'ELCO2' gang 7 density_to 40 
+076C: set_zone 'ELCO1' gang 2 density_to 0 
+076C: set_zone 'ELCO2' gang 2 density_to 0 
+076C: set_zone 'ELCO1' gang 1 density_to 0 
+076C: set_zone 'ELCO2' gang 1 density_to 0 
+076C: set_zone 'LMEX1A' gang 7 density_to 40 
+076C: set_zone 'LMEX1B' gang 7 density_to 40 
+076C: set_zone 'LMEX1A' gang 2 density_to 0 
+076C: set_zone 'LMEX1B' gang 2 density_to 0 
+076C: set_zone 'LMEX1A' gang 1 density_to 0 
+076C: set_zone 'LMEX1B' gang 1 density_to 0 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'RIOT_2'  // Los Desperados
+030C: progress_made = 1 
+return 
+
+:RIOT2_30644
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @RIOT2_30662 
+Camera.Restore_WithJumpCut
+
+:RIOT2_30662
+09B7: set_zone 'ELCO' disable_footcops 0  // El Corona
+if 
+   not Actor.Dead(36@)
+jf @RIOT2_30703 
+0619: enable_actor 36@ collision_detection 1 
+Actor.DestroyWithFade(36@)
+
+:RIOT2_30703
+create_thread @DOORS 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+0296: unload_special_actor 4 
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV2)
+06D0: enable_emergency_traffic 1 
+Model.Destroy(#KATANA)
+Model.Destroy(#DESERT_EAGLE)
+Model.Destroy(#TEC9)
+Model.Destroy(#ROCKETLA)
+Model.Destroy(#FLAME)
+Model.Destroy(#GLENDALE)
+Model.Destroy(#BBALL_INGAME)
+091E: create_forbidden_for_boats_cube_cornerA 1945.8 -1956.5 0.0 cornerB 1642.9 -2174.3 50.0 
+Pickup.Destroy(85@)
+Pickup.Destroy(86@)
+Pickup.Destroy(184@)
+04EF: release_animation "CAR" 
+04EF: release_animation "BSKTBALL" 
+04EF: release_animation "SMOKING" 
+04EF: release_animation "SWAT" 
+04EF: release_animation "CASINO" 
+04EF: release_animation "CRACK" 
+04EF: release_animation "GANGS" 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RIOT2_30906 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:RIOT2_30906
+09F5: disable_player_mutal_activities 0 
+Actor.DestroyWithFade($ACTOR_CESAR)
+0296: unload_special_actor 1 
+098A: set_gunshot_sense_range_for_riot2 -1.0 
+Marker.Disable(89@)
+Marker.Disable(90@)
+Marker.Disable(91@)
+Marker.Disable(92@)
+Marker.Disable(93@)
+Marker.Disable(94@)
+Marker.Disable(95@)
+Marker.Disable(96@)
+Marker.Disable(97@)
+Marker.Disable(98@)
+Marker.Disable(99@)
+Marker.Disable(100@)
+Marker.Disable(101@)
+Marker.Disable(102@)
+Marker.Disable(103@)
+Marker.Disable(104@)
+Marker.Disable(105@)
+Marker.Disable(106@)
+Marker.Disable(107@)
+Marker.Disable(108@)
+Marker.Disable(109@)
+Marker.Disable(110@)
+Marker.Disable(111@)
+Marker.Disable(112@)
+Marker.Disable(113@)
+Marker.Disable(114@)
+Marker.Disable(115@)
+Marker.Disable(116@)
+Marker.Disable(117@)
+Marker.Disable(118@)
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+Marker.Disable(126@)
+Marker.Disable(127@)
+Marker.Disable(128@)
+Marker.Disable(129@)
+Marker.Disable(130@)
+Marker.Disable(131@)
+Marker.Disable(132@)
+Marker.Disable(133@)
+Marker.Disable(134@)
+Marker.Disable(135@)
+Marker.Disable(136@)
+Marker.Disable(137@)
+Marker.Disable(138@)
+Marker.Disable(139@)
+Marker.Disable(140@)
+Marker.Disable(141@)
+09D2: set_cops_chase_criminals 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:RIOT2_31211
+if 
+   Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_31252 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R2_08' time 7000 flag 1  // ~r~Cesar has been killed!
+145@ = 1 
+
+:RIOT2_31252
+if 
+   Actor.Dead(35@)
+jf @RIOT2_31293 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R2_09' time 7000 flag 1  // ~r~Sunny has been killed!
+145@ = 1 
+
+:RIOT2_31293
+if 
+   Actor.Dead(34@)
+jf @RIOT2_31334 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R2_10' time 7000 flag 1  // ~r~Gal has been killed!
+145@ = 1 
+
+:RIOT2_31334
+if 
+   Actor.Dead(36@)
+jf @RIOT2_31375 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R2_11' time 7000 flag 1  // ~r~Hazer has been killed!
+145@ = 1 
+
+:RIOT2_31375
+return 
+
+:RIOT2_31377
+0209: 148@ = random_int_in_ranges 0 2 
+37@ = Actor.Create(Mission2, 146@(148@,2i), 1831.6, -2004.6, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 37@ radius 8.0 peds_to_scan 6 
+Actor.Angle(37@) = 90.0
+Actor.GiveWeaponAndAmmo(37@, Tec9, 3000)
+0605: actor 37@ perform_animation "M_SMKLEAN_LOOP" IFP "SMOKING" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 37@ decision_maker_to 266@ 
+96@ = Marker.CreateAboveActor(37@)
+Marker.SetIconSize(96@, 1)
+Actor.WeaponAccuracy(37@) = 181@
+Actor.AddArmour(37@, 100)
+0209: 148@ = random_int_in_ranges 0 2 
+38@ = Actor.Create(Mission2, 146@(148@,2i), 1825.5, -2002.4, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 38@ radius 8.0 peds_to_scan 6 
+Actor.Angle(38@) = 89.7
+0605: actor 38@ perform_animation "BBALL_IDLELOOP" IFP "BSKTBALL" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+88@ = Object.Create(#BBALL_INGAME, 0.0, 0.0, 0.0)
+97@ = Marker.CreateAboveActor(38@)
+Marker.SetIconSize(97@, 1)
+Actor.WeaponAccuracy(38@) = 181@
+060B: set_actor 38@ decision_maker_to 265@ 
+0816: set_actor 38@ dont_chase_victim 1 
+0209: 148@ = random_int_in_ranges 0 2 
+39@ = Actor.Create(Mission2, 146@(148@,2i), 1824.3, -2002.4, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 39@ radius 8.0 peds_to_scan 6 
+Actor.Angle(39@) = 270.0
+Actor.GiveWeaponAndAmmo(39@, Tec9, 3000)
+0605: actor 39@ perform_animation "BBALL_DEF_LOOP" IFP "BSKTBALL" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+060B: set_actor 39@ decision_maker_to 265@ 
+0816: set_actor 39@ dont_chase_victim 1 
+98@ = Marker.CreateAboveActor(39@)
+Marker.SetIconSize(98@, 1)
+Actor.WeaponAccuracy(39@) = 181@
+Actor.AddArmour(39@, 100)
+0209: 148@ = random_int_in_ranges 0 2 
+40@ = Actor.Create(Mission2, 146@(148@,2i), 1827.7, -1999.1, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 40@ radius 8.0 peds_to_scan 6 
+Actor.Angle(40@) = 133.6
+Actor.GiveWeaponAndAmmo(40@, Tec9, 3000)
+060B: set_actor 40@ decision_maker_to 265@ 
+0816: set_actor 40@ dont_chase_victim 1 
+99@ = Marker.CreateAboveActor(40@)
+Marker.SetIconSize(99@, 1)
+Actor.WeaponAccuracy(40@) = 181@
+0209: 148@ = random_int_in_ranges 0 2 
+41@ = Actor.Create(Mission2, 146@(148@,2i), 1828.2, -2000.4, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 41@ radius 8.0 peds_to_scan 6 
+Actor.Angle(41@) = 108.2
+Actor.GiveWeaponAndAmmo(41@, Tec9, 3000)
+060B: set_actor 41@ decision_maker_to 265@ 
+0816: set_actor 41@ dont_chase_victim 1 
+100@ = Marker.CreateAboveActor(41@)
+Marker.SetIconSize(100@, 1)
+Actor.WeaponAccuracy(41@) = 181@
+Actor.AddArmour(41@, 100)
+0209: 148@ = random_int_in_ranges 0 2 
+42@ = Actor.Create(Mission2, 146@(148@,2i), 1834.3, -1995.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 42@ radius 8.0 peds_to_scan 6 
+Actor.Angle(42@) = 88.1
+060B: set_actor 42@ decision_maker_to 265@ 
+0816: set_actor 42@ dont_chase_victim 1 
+101@ = Marker.CreateAboveActor(42@)
+Marker.SetIconSize(101@, 1)
+Actor.WeaponAccuracy(42@) = 181@
+return 
+
+:RIOT2_32181
+if 
+  158@ == 0 
+jf @RIOT2_32236 
+262@ = 1857.2 
+263@ = -2020.6 
+264@ = 12.6 
+jump @RIOT2_32394 
+
+:RIOT2_32236
+if 
+  152@ == 0 
+jf @RIOT2_32291 
+262@ = 1865.3 
+263@ = -1992.2 
+264@ = 12.6 
+jump @RIOT2_32394 
+
+:RIOT2_32291
+if 
+  155@ == 0 
+jf @RIOT2_32346 
+262@ = 1899.3 
+263@ = -1991.7 
+264@ = 12.6 
+jump @RIOT2_32394 
+
+:RIOT2_32346
+if 
+  161@ == 0 
+jf @RIOT2_32394 
+262@ = 1908.3 
+263@ = -2020.1 
+264@ = 12.6 
+
+:RIOT2_32394
+if 
+   not Actor.Dead(37@)
+jf @RIOT2_32690 
+if 
+  149@ == 0 
+jf @RIOT2_32475 
+0615: define_AS_pack_begin 268@ 
+05F5: AS_actor -1 goto_point_using_paths 262@ 263@ 264@ mode 7 time -2 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 37@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+149@ = 1 
+
+:RIOT2_32475
+if 
+  149@ == 1 
+jf @RIOT2_32690 
+062E: get_actor 37@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @RIOT2_32690 
+if 
+  158@ == 0 
+jf @RIOT2_32564 
+0947: actor 37@ speak_from_audio_table 65 store_spoken_phrase_id_to 182@ 
+158@ = 1 
+jump @RIOT2_32683 
+
+:RIOT2_32564
+if 
+  152@ == 0 
+jf @RIOT2_32606 
+0947: actor 37@ speak_from_audio_table 65 store_spoken_phrase_id_to 182@ 
+152@ = 1 
+jump @RIOT2_32683 
+
+:RIOT2_32606
+if 
+  155@ == 0 
+jf @RIOT2_32648 
+0947: actor 37@ speak_from_audio_table 65 store_spoken_phrase_id_to 182@ 
+155@ = 1 
+jump @RIOT2_32683 
+
+:RIOT2_32648
+if 
+  161@ == 0 
+jf @RIOT2_32683 
+0947: actor 37@ speak_from_audio_table 65 store_spoken_phrase_id_to 182@ 
+161@ = 1 
+
+:RIOT2_32683
+149@ = 2 
+
+:RIOT2_32690
+return 
+
+:RIOT2_32692
+if 
+  152@ == 1 
+jf @RIOT2_33134 
+034D: rotate_object $2709 from_angle 270.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+43@ = Actor.Create(Mission2, 146@(148@,2i), 1850.3, -1990.0, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 43@ radius 8.0 peds_to_scan 6 
+Actor.Angle(43@) = 270.0
+Actor.GiveWeaponAndAmmo(43@, Tec9, 3000)
+060B: set_actor 43@ decision_maker_to 266@ 
+0816: set_actor 43@ dont_chase_victim 1 
+102@ = Marker.CreateAboveActor(43@)
+Marker.SetIconSize(102@, 1)
+Actor.WeaponAccuracy(43@) = 181@
+Actor.AddArmour(43@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1852.9 -1990.0 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1853.9 -1984.1 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 355.4 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 43@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+44@ = Actor.Create(Mission2, 146@(148@,2i), 1851.7, -1989.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 44@ radius 8.0 peds_to_scan 6 
+Actor.Angle(44@) = 270.7
+Actor.GiveWeaponAndAmmo(44@, Tec9, 3000)
+060B: set_actor 44@ decision_maker_to 266@ 
+0816: set_actor 44@ dont_chase_victim 1 
+103@ = Marker.CreateAboveActor(44@)
+Marker.SetIconSize(103@, 1)
+Actor.WeaponAccuracy(44@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1852.9 -1990.0 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1854.5 -1985.1 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 186.2 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 44@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_33134
+if 
+  153@ == 1 
+jf @RIOT2_33576 
+034D: rotate_object $2710 from_angle 180.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+45@ = Actor.Create(Mission2, 146@(148@,2i), 1867.7, -1983.7, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 45@ radius 8.0 peds_to_scan 6 
+Actor.Angle(45@) = 180.0
+Actor.GiveWeaponAndAmmo(45@, Tec9, 3000)
+060B: set_actor 45@ decision_maker_to 266@ 
+0816: set_actor 45@ dont_chase_victim 1 
+104@ = Marker.CreateAboveActor(45@)
+Marker.SetIconSize(104@, 1)
+Actor.WeaponAccuracy(45@) = 181@
+Actor.AddArmour(45@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1867.7 -1986.8 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1854.5 -1999.6 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 198.8 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 45@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+46@ = Actor.Create(Mission2, 146@(148@,2i), 1867.7, -1984.7, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 46@ radius 8.0 peds_to_scan 6 
+Actor.Angle(46@) = 180.0
+Actor.GiveWeaponAndAmmo(46@, Tec9, 3000)
+060B: set_actor 46@ decision_maker_to 266@ 
+0816: set_actor 46@ dont_chase_victim 1 
+105@ = Marker.CreateAboveActor(46@)
+Marker.SetIconSize(105@, 1)
+Actor.WeaponAccuracy(46@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1867.7 -1986.8 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1854.5 -1997.6 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 315.1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 46@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_33576
+if 
+  154@ == 1 
+jf @RIOT2_34018 
+034D: rotate_object $2711 from_angle 0.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+47@ = Actor.Create(Mission2, 146@(148@,2i), 1866.2, -1999.7, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 47@ radius 8.0 peds_to_scan 6 
+Actor.Angle(47@) = 0.0
+Actor.GiveWeaponAndAmmo(47@, Tec9, 3000)
+060B: set_actor 47@ decision_maker_to 266@ 
+0816: set_actor 47@ dont_chase_victim 1 
+106@ = Marker.CreateAboveActor(47@)
+Marker.SetIconSize(106@, 1)
+Actor.WeaponAccuracy(47@) = 181@
+Actor.AddArmour(47@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1866.2 -1997.0 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1859.5 -1996.2 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 148.0 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 47@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+48@ = Actor.Create(Mission2, 146@(148@,2i), 1865.9, -1998.7, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 48@ radius 8.0 peds_to_scan 6 
+Actor.Angle(48@) = 0.0
+Actor.GiveWeaponAndAmmo(48@, Tec9, 3000)
+060B: set_actor 48@ decision_maker_to 266@ 
+0816: set_actor 48@ dont_chase_victim 1 
+107@ = Marker.CreateAboveActor(48@)
+Marker.SetIconSize(107@, 1)
+Actor.WeaponAccuracy(48@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1866.2 -1997.0 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1860.0 -1994.0 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 280.2 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 48@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_34018
+return 
+
+:RIOT2_34020
+if 
+  155@ == 1 
+jf @RIOT2_34462 
+034D: rotate_object $2712 from_angle 180.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+49@ = Actor.Create(Mission2, 146@(148@,2i), 1900.1, -1983.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 49@ radius 8.0 peds_to_scan 6 
+Actor.Angle(49@) = 180.0
+Actor.GiveWeaponAndAmmo(49@, Tec9, 3000)
+060B: set_actor 49@ decision_maker_to 266@ 
+0816: set_actor 49@ dont_chase_victim 1 
+108@ = Marker.CreateAboveActor(49@)
+Marker.SetIconSize(108@, 1)
+Actor.WeaponAccuracy(49@) = 181@
+Actor.AddArmour(49@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1900.1 -1987.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1905.0 -1987.2 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 267.4 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 49@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+50@ = Actor.Create(Mission2, 146@(148@,2i), 1900.1, -1984.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 50@ radius 8.0 peds_to_scan 6 
+Actor.Angle(50@) = 180.7
+Actor.GiveWeaponAndAmmo(50@, Tec9, 3000)
+060B: set_actor 50@ decision_maker_to 266@ 
+0816: set_actor 50@ dont_chase_victim 1 
+109@ = Marker.CreateAboveActor(50@)
+Marker.SetIconSize(109@, 1)
+Actor.WeaponAccuracy(50@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1900.1 -1987.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1904.4 -1988.1 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 108.9 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 50@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_34462
+if 
+  156@ == 1 
+jf @RIOT2_34904 
+034D: rotate_object $2713 from_angle 90.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+51@ = Actor.Create(Mission2, 146@(148@,2i), 1915.8, -1993.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 51@ radius 8.0 peds_to_scan 6 
+Actor.Angle(51@) = 90.0
+Actor.GiveWeaponAndAmmo(51@, Tec9, 3000)
+060B: set_actor 51@ decision_maker_to 266@ 
+0816: set_actor 51@ dont_chase_victim 1 
+110@ = Marker.CreateAboveActor(51@)
+Marker.SetIconSize(110@, 1)
+Actor.WeaponAccuracy(51@) = 181@
+Actor.AddArmour(51@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1912.1 -1993.2 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1911.9 -1998.5 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 198.9 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 51@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+52@ = Actor.Create(Mission2, 146@(148@,2i), 1914.8, -1993.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 52@ radius 8.0 peds_to_scan 6 
+Actor.Angle(52@) = 90.0
+Actor.GiveWeaponAndAmmo(52@, Tec9, 3000)
+060B: set_actor 52@ decision_maker_to 266@ 
+0816: set_actor 52@ dont_chase_victim 1 
+111@ = Marker.CreateAboveActor(52@)
+Marker.SetIconSize(111@, 1)
+Actor.WeaponAccuracy(52@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1912.1 -1993.2 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1911.0 -1997.1 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 36.7 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 52@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_34904
+if 
+  157@ == 1 
+jf @RIOT2_35346 
+034D: rotate_object $2714 from_angle 0.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+53@ = Actor.Create(Mission2, 146@(148@,2i), 1898.3, -1999.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 53@ radius 8.0 peds_to_scan 6 
+Actor.Angle(53@) = 0.0
+Actor.GiveWeaponAndAmmo(53@, Tec9, 3000)
+060B: set_actor 53@ decision_maker_to 266@ 
+0816: set_actor 53@ dont_chase_victim 1 
+112@ = Marker.CreateAboveActor(53@)
+Marker.SetIconSize(112@, 1)
+Actor.WeaponAccuracy(53@) = 181@
+Actor.AddArmour(53@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1898.4 -1996.8 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1891.8 -1996.0 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 71.9 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 53@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+54@ = Actor.Create(Mission2, 146@(148@,2i), 1898.3, -1998.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 54@ radius 8.0 peds_to_scan 6 
+Actor.Angle(54@) = 0.0
+Actor.GiveWeaponAndAmmo(54@, Tec9, 3000)
+060B: set_actor 54@ decision_maker_to 266@ 
+0816: set_actor 54@ dont_chase_victim 1 
+113@ = Marker.CreateAboveActor(54@)
+Marker.SetIconSize(113@, 1)
+Actor.WeaponAccuracy(54@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1898.4 -1996.8 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1892.4 -1995.1 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 302.4 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 54@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_35346
+return 
+
+:RIOT2_35348
+if 
+  158@ == 1 
+jf @RIOT2_35790 
+034D: rotate_object $2718 from_angle 270.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+55@ = Actor.Create(Mission2, 146@(148@,2i), 1850.4, -2019.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 55@ radius 8.0 peds_to_scan 6 
+Actor.Angle(55@) = 270.0
+Actor.GiveWeaponAndAmmo(55@, Tec9, 3000)
+060B: set_actor 55@ decision_maker_to 266@ 
+0816: set_actor 55@ dont_chase_victim 1 
+114@ = Marker.CreateAboveActor(55@)
+Marker.SetIconSize(114@, 1)
+Actor.WeaponAccuracy(55@) = 181@
+Actor.AddArmour(55@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1854.1 -2019.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1855.3 -2010.4 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 30.7 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 55@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+56@ = Actor.Create(Mission2, 146@(148@,2i), 1851.7, -2019.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 56@ radius 8.0 peds_to_scan 6 
+Actor.Angle(56@) = 270.7
+Actor.GiveWeaponAndAmmo(56@, Tec9, 3000)
+060B: set_actor 56@ decision_maker_to 266@ 
+0816: set_actor 56@ dont_chase_victim 1 
+115@ = Marker.CreateAboveActor(56@)
+Marker.SetIconSize(115@, 1)
+Actor.WeaponAccuracy(56@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1854.1 -2019.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1855.3 -2012.4 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 195.4 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 56@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_35790
+if 
+  159@ == 1 
+jf @RIOT2_36232 
+034D: rotate_object $2719 from_angle 90.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+57@ = Actor.Create(Mission2, 146@(148@,2i), 1866.7, -2021.1, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 57@ radius 8.0 peds_to_scan 6 
+Actor.Angle(57@) = 90.0
+Actor.GiveWeaponAndAmmo(57@, Tec9, 3000)
+060B: set_actor 57@ decision_maker_to 266@ 
+0816: set_actor 57@ dont_chase_victim 1 
+116@ = Marker.CreateAboveActor(57@)
+Marker.SetIconSize(116@, 1)
+Actor.WeaponAccuracy(57@) = 181@
+Actor.AddArmour(57@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1863.3 -2021.2 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1862.9 -2011.7 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 43.3 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 57@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+58@ = Actor.Create(Mission2, 146@(148@,2i), 1865.5, -2021.3, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 58@ radius 8.0 peds_to_scan 6 
+Actor.Angle(58@) = 90.0
+Actor.GiveWeaponAndAmmo(58@, Tec9, 3000)
+060B: set_actor 58@ decision_maker_to 266@ 
+0816: set_actor 58@ dont_chase_victim 1 
+117@ = Marker.CreateAboveActor(58@)
+Marker.SetIconSize(117@, 1)
+Actor.WeaponAccuracy(58@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1863.3 -2021.2 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1863.4 -2013.9 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 154.0 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 58@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_36232
+if 
+  160@ == 1 
+jf @RIOT2_36674 
+034D: rotate_object $2720 from_angle 0.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+59@ = Actor.Create(Mission2, 146@(148@,2i), 1857.2, -2036.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 59@ radius 8.0 peds_to_scan 6 
+Actor.Angle(59@) = 0.0
+Actor.GiveWeaponAndAmmo(59@, Tec9, 3000)
+060B: set_actor 59@ decision_maker_to 266@ 
+0816: set_actor 59@ dont_chase_victim 1 
+118@ = Marker.CreateAboveActor(59@)
+Marker.SetIconSize(118@, 1)
+Actor.WeaponAccuracy(59@) = 181@
+Actor.AddArmour(59@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1857.2 -2032.9 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1854.5 -2026.5 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 198.8 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 59@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+60@ = Actor.Create(Mission2, 146@(148@,2i), 1857.1, -2035.8, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 60@ radius 8.0 peds_to_scan 6 
+Actor.Angle(60@) = 0.0
+Actor.GiveWeaponAndAmmo(60@, Tec9, 3000)
+060B: set_actor 60@ decision_maker_to 266@ 
+0816: set_actor 60@ dont_chase_victim 1 
+119@ = Marker.CreateAboveActor(60@)
+Marker.SetIconSize(119@, 1)
+Actor.WeaponAccuracy(60@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1857.2 -2032.9 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1854.5 -2024.3 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 346.3 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 60@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_36674
+return 
+
+:RIOT2_36676
+if 
+  161@ == 1 
+jf @RIOT2_37118 
+034D: rotate_object $2715 from_angle 270.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+61@ = Actor.Create(Mission2, 146@(148@,2i), 1899.3, -2019.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 61@ radius 8.0 peds_to_scan 6 
+Actor.Angle(61@) = 270.0
+Actor.GiveWeaponAndAmmo(61@, Tec9, 3000)
+060B: set_actor 61@ decision_maker_to 266@ 
+0816: set_actor 61@ dont_chase_victim 1 
+120@ = Marker.CreateAboveActor(61@)
+Marker.SetIconSize(120@, 1)
+Actor.WeaponAccuracy(61@) = 181@
+Actor.AddArmour(61@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1902.1 -2019.7 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1903.2 -2012.3 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 330.8 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 61@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+62@ = Actor.Create(Mission2, 146@(148@,2i), 1900.3, -2019.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 62@ radius 8.0 peds_to_scan 6 
+Actor.Angle(62@) = 270.7
+Actor.GiveWeaponAndAmmo(62@, Tec9, 3000)
+060B: set_actor 62@ decision_maker_to 266@ 
+0816: set_actor 62@ dont_chase_victim 1 
+121@ = Marker.CreateAboveActor(62@)
+Marker.SetIconSize(121@, 1)
+Actor.WeaponAccuracy(62@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1902.1 -2019.7 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1903.2 -2013.6 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 195.6 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 62@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_37118
+if 
+  162@ == 1 
+jf @RIOT2_37560 
+034D: rotate_object $2716 from_angle 90.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+63@ = Actor.Create(Mission2, 146@(148@,2i), 1915.8, -2021.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 63@ radius 8.0 peds_to_scan 6 
+Actor.Angle(63@) = 90.0
+Actor.GiveWeaponAndAmmo(63@, Tec9, 3000)
+060B: set_actor 63@ decision_maker_to 266@ 
+0816: set_actor 63@ dont_chase_victim 1 
+122@ = Marker.CreateAboveActor(63@)
+Marker.SetIconSize(122@, 1)
+Actor.WeaponAccuracy(63@) = 181@
+Actor.AddArmour(63@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1912.8 -2021.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1912.1 -2012.8 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 21.8 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 63@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+64@ = Actor.Create(Mission2, 146@(148@,2i), 1914.8, -2021.5, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 64@ radius 8.0 peds_to_scan 6 
+Actor.Angle(64@) = 90.0
+Actor.GiveWeaponAndAmmo(64@, Tec9, 3000)
+060B: set_actor 64@ decision_maker_to 266@ 
+0816: set_actor 64@ dont_chase_victim 1 
+123@ = Marker.CreateAboveActor(64@)
+Marker.SetIconSize(123@, 1)
+Actor.WeaponAccuracy(64@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1912.8 -2021.4 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1911.7 -2014.3 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 171.0 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 64@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_37560
+if 
+  163@ == 1 
+jf @RIOT2_38002 
+034D: rotate_object $2717 from_angle 0.0 to_angle 360.0 flag 0 
+0209: 148@ = random_int_in_ranges 0 2 
+65@ = Actor.Create(Mission2, 146@(148@,2i), 1906.1, -2036.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 65@ radius 8.0 peds_to_scan 6 
+Actor.Angle(65@) = 0.0
+Actor.GiveWeaponAndAmmo(65@, Tec9, 3000)
+060B: set_actor 65@ decision_maker_to 266@ 
+0816: set_actor 65@ dont_chase_victim 1 
+124@ = Marker.CreateAboveActor(65@)
+Marker.SetIconSize(124@, 1)
+Actor.WeaponAccuracy(65@) = 181@
+Actor.AddArmour(65@, 100)
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 400 ms 
+05D3: AS_actor -1 goto_point 1906.0 -2033.5 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1907.3 -2033.3 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 32.4 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 65@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+0209: 148@ = random_int_in_ranges 0 2 
+66@ = Actor.Create(Mission2, 146@(148@,2i), 1906.1, -2035.9, 12.6)
+074E: unknown_set_actor_threat_scanner_flags 66@ radius 8.0 peds_to_scan 6 
+Actor.Angle(66@) = 0.0
+Actor.GiveWeaponAndAmmo(66@, Tec9, 3000)
+060B: set_actor 66@ decision_maker_to 266@ 
+0816: set_actor 66@ dont_chase_victim 1 
+125@ = Marker.CreateAboveActor(66@)
+Marker.SetIconSize(125@, 1)
+Actor.WeaponAccuracy(66@) = 181@
+0615: define_AS_pack_begin 268@ 
+05B9: AS_actor -1 stay_idle 200 ms 
+05D3: AS_actor -1 goto_point 1906.0 -2033.5 12.5 mode 4 time -1 ms // versionA 
+05F5: AS_actor -1 goto_point_using_paths 1906.3 -2030.3 12.6 mode 7 time -2 
+05D4: AS_actor -1 rotate_angle 315.5 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 66@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+
+:RIOT2_38002
+return 
+
+:RIOT2_38004
+if 
+  167@ == 1 
+jf @RIOT2_38068 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_38068 
+Marker.Disable(89@)
+89@ = Marker.CreateAboveActor($ACTOR_CESAR)
+07E0: set_marker 89@ type_to 1 
+167@ = 0 
+
+:RIOT2_38068
+if 
+  167@ == 0 
+jf @RIOT2_38210 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_CESAR radius 8.0 8.0 8.0 sphere 0 
+jf @RIOT2_38210 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_38153 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+
+:RIOT2_38153
+Marker.Disable(89@)
+if 
+  177@ > 2 
+jf @RIOT2_38203 
+018A: 89@ = create_checkpoint_at 1774.9 -1974.9 13.1 
+07E0: set_marker 89@ type_to 0 
+
+:RIOT2_38203
+167@ = 1 
+
+:RIOT2_38210
+return 
+
+:RIOT2_38212
+if 
+   Actor.Dead(79@)
+jf @RIOT2_38428 
+0209: 148@ = random_int_in_ranges 0 2 
+79@ = Actor.Create(Mission2, 146@(148@,2i), 1860.1, -2094.8, 14.0)
+Actor.Angle(79@) = 187.0
+Actor.GiveWeaponAndAmmo(79@, Tec9, 3000)
+060B: set_actor 79@ decision_maker_to 266@ 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 4000 ms 
+078F: AS_actor -1 climb 1 
+0668: AS_actor -1 rotate_and_shoot_at 1874.4 -2101.5 14.8 2000 ms 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 79@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+132@ = Marker.CreateAboveActor(79@)
+Marker.SetIconSize(132@, 1)
+Actor.WeaponAccuracy(79@) = 181@
+Actor.AddArmour(79@, 50)
+
+:RIOT2_38428
+if 
+   Actor.Dead(80@)
+jf @RIOT2_38677 
+0209: 148@ = random_int_in_ranges 0 2 
+80@ = Actor.Create(Mission2, 146@(148@,2i), 1857.3, -2094.8, 14.0)
+Actor.Angle(80@) = 187.0
+Actor.GiveWeaponAndAmmo(80@, Tec9, 3000)
+060B: set_actor 80@ decision_maker_to 266@ 
+0605: actor 80@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 6000 ms 
+078F: AS_actor -1 climb 1 
+0668: AS_actor -1 rotate_and_shoot_at 1874.4 -2101.5 14.8 2000 ms 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 80@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+133@ = Marker.CreateAboveActor(80@)
+Marker.SetIconSize(133@, 1)
+Actor.WeaponAccuracy(80@) = 181@
+
+:RIOT2_38677
+if 
+   Actor.Dead(81@)
+jf @RIOT2_38933 
+0209: 148@ = random_int_in_ranges 0 2 
+81@ = Actor.Create(Mission2, 146@(148@,2i), 1854.3, -2094.8, 14.0)
+Actor.Angle(81@) = 187.0
+Actor.GiveWeaponAndAmmo(81@, Tec9, 3000)
+060B: set_actor 81@ decision_maker_to 266@ 
+0605: actor 81@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 8000 ms 
+078F: AS_actor -1 climb 1 
+0668: AS_actor -1 rotate_and_shoot_at 1874.4 -2101.5 14.8 2000 ms 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 81@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+134@ = Marker.CreateAboveActor(81@)
+Marker.SetIconSize(134@, 1)
+Actor.WeaponAccuracy(81@) = 181@
+Actor.AddArmour(81@, 50)
+
+:RIOT2_38933
+if 
+   Actor.Dead(82@)
+jf @RIOT2_39160 
+0209: 148@ = random_int_in_ranges 0 2 
+82@ = Actor.Create(Mission2, 146@(148@,2i), 1859.1, -2108.8, 14.0)
+Actor.Angle(82@) = 2.0
+Actor.GiveWeaponAndAmmo(82@, Tec9, 3000)
+060B: set_actor 82@ decision_maker_to 266@ 
+0605: actor 82@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 5000 ms 
+078F: AS_actor -1 climb 1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 82@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+135@ = Marker.CreateAboveActor(82@)
+Marker.SetIconSize(135@, 1)
+Actor.WeaponAccuracy(82@) = 181@
+
+:RIOT2_39160
+if 
+   Actor.Dead(83@)
+jf @RIOT2_39394 
+0209: 148@ = random_int_in_ranges 0 2 
+83@ = Actor.Create(Mission2, 146@(148@,2i), 1856.3, -2108.8, 14.0)
+Actor.Angle(83@) = 2.0
+Actor.GiveWeaponAndAmmo(83@, Tec9, 3000)
+060B: set_actor 83@ decision_maker_to 266@ 
+0605: actor 83@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 7000 ms 
+078F: AS_actor -1 climb 1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 83@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+136@ = Marker.CreateAboveActor(83@)
+Marker.SetIconSize(136@, 1)
+Actor.WeaponAccuracy(83@) = 181@
+Actor.AddArmour(83@, 50)
+
+:RIOT2_39394
+if 
+   Actor.Dead(84@)
+jf @RIOT2_39621 
+0209: 148@ = random_int_in_ranges 0 2 
+84@ = Actor.Create(Mission2, 146@(148@,2i), 1853.3, -2108.8, 14.0)
+Actor.Angle(84@) = 2.0
+Actor.GiveWeaponAndAmmo(84@, Tec9, 3000)
+060B: set_actor 84@ decision_maker_to 266@ 
+0605: actor 84@ perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0615: define_AS_pack_begin 268@ 
+0605: actor -1 perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 9000 ms 
+078F: AS_actor -1 climb 1 
+07BC: set_actor -1 decision_maker_to 265@ // AS_pack_version 
+0616: define_AS_pack_end 268@ 
+0618: assign_actor 84@ to_AS_pack 268@ 
+061B: remove_references_to_AS_pack 268@ 
+137@ = Marker.CreateAboveActor(84@)
+Marker.SetIconSize(137@, 1)
+Actor.WeaponAccuracy(84@) = 181@
+
+:RIOT2_39621
+return 
+
+:RIOT2_39623
+if or
+  185@ == 1 
+  185@ == 4 
+  185@ == 6 
+  185@ == 8 
+  185@ == 9 
+jf @RIOT2_39723 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_39716 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+gosub @RIOT2_43932 
+jump @RIOT2_39723 
+
+:RIOT2_39716
+185@ = 0 
+
+:RIOT2_39723
+if or
+  185@ == 10 
+  185@ == 11 
+  185@ == 12 
+  185@ == 13 
+jf @RIOT2_39816 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_39809 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+gosub @RIOT2_43932 
+jump @RIOT2_39816 
+
+:RIOT2_39809
+185@ = 0 
+
+:RIOT2_39816
+if or
+  185@ == 5 
+  185@ == 7 
+jf @RIOT2_39949 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_39942 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_39904 
+gosub @RIOT2_43932 
+jump @RIOT2_39935 
+
+:RIOT2_39904
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+256@ = 0 
+257@ = 0 
+
+:RIOT2_39935
+jump @RIOT2_39949 
+
+:RIOT2_39942
+185@ = 0 
+
+:RIOT2_39949
+if 
+  185@ == 9 
+jf @RIOT2_40075 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_40068 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+if 
+   not Actor.Dead(35@)
+jf @RIOT2_40030 
+gosub @RIOT2_43932 
+jump @RIOT2_40061 
+
+:RIOT2_40030
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+256@ = 0 
+257@ = 0 
+
+:RIOT2_40061
+jump @RIOT2_40075 
+
+:RIOT2_40068
+185@ = 0 
+
+:RIOT2_40075
+if 
+  142@ == 0 
+jf @RIOT2_41055 
+if 
+  143@ > 2 
+jf @RIOT2_41055 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_40481 
+if 
+0104:   actor $ACTOR_CESAR near_actor $PLAYER_ACTOR radius 10.0 10.0 8.0 sphere 0 
+jf @RIOT2_40474 
+if and
+044B:   actor $PLAYER_ACTOR on_foot 
+044B:   actor $ACTOR_CESAR on_foot 
+jf @RIOT2_40320 
+if or
+  185@ == 2 
+  185@ == 3 
+jf @RIOT2_40320 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_40313 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_40275 
+gosub @RIOT2_43932 
+jump @RIOT2_40306 
+
+:RIOT2_40275
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+256@ = 0 
+257@ = 0 
+
+:RIOT2_40306
+jump @RIOT2_40320 
+
+:RIOT2_40313
+185@ = 0 
+
+:RIOT2_40320
+if and
+   Actor.Driving($PLAYER_ACTOR)
+   Actor.Driving($ACTOR_CESAR)
+jf @RIOT2_40474 
+if or
+  185@ == 2 
+  185@ == 3 
+jf @RIOT2_40474 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_40467 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_40429 
+gosub @RIOT2_43932 
+jump @RIOT2_40460 
+
+:RIOT2_40429
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+256@ = 0 
+257@ = 0 
+
+:RIOT2_40460
+jump @RIOT2_40474 
+
+:RIOT2_40467
+185@ = 0 
+
+:RIOT2_40474
+jump @RIOT2_40598 
+
+:RIOT2_40481
+if 
+  14 > 185@ 
+jf @RIOT2_40598 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_40525 
+186@ += 1 
+
+:RIOT2_40525
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+00BE: text_clear_all 
+0085: 260@ = 185@ // (int) 
+0085: 261@ = 186@ // (int) 
+185@ = 14 
+0209: 186@ = random_int_in_ranges 0 4 
+0085: 188@ = 186@ // (int) 
+188@ += 1 
+gosub @RIOT2_41057 
+
+:RIOT2_40598
+if 
+  185@ == 14 
+jf @RIOT2_40789 
+if 
+86EE:   not actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_40766 
+if 
+001D:   255@ > 186@ // (int) 
+jf @RIOT2_40736 
+gosub @RIOT2_43671 
+gosub @RIOT2_43778 
+if 
+   not Actor.Dead($ACTOR_CESAR)
+jf @RIOT2_40698 
+gosub @RIOT2_43932 
+jump @RIOT2_40729 
+
+:RIOT2_40698
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+256@ = 0 
+257@ = 0 
+
+:RIOT2_40729
+jump @RIOT2_40759 
+
+:RIOT2_40736
+00BC: show_text_highpriority GXT 'R2_12' time 7000 flag 1  // ~s~You have left ~b~Cesar~s~ behind.
+185@ = 15 
+
+:RIOT2_40759
+jump @RIOT2_40789 
+
+:RIOT2_40766
+00BC: show_text_highpriority GXT 'R2_12' time 7000 flag 1  // ~s~You have left ~b~Cesar~s~ behind.
+185@ = 15 
+
+:RIOT2_40789
+if 
+  185@ == 15 
+jf @RIOT2_40842 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_40842 
+185@ = 16 
+186@ = 0 
+00BE: text_clear_all 
+
+:RIOT2_40842
+if 
+  185@ == 16 
+jf @RIOT2_41055 
+if 
+06EE:   actor $ACTOR_CESAR in_group $PLAYER_GROUP 
+jf @RIOT2_41000 
+33@ = 0 
+0085: 185@ = 260@ // (int) 
+0085: 186@ = 261@ // (int) 
+gosub @RIOT2_41057 
+if 
+  260@ == 0 
+jf @RIOT2_40993 
+if 
+  3 > 177@ 
+jf @RIOT2_40970 
+00BC: show_text_highpriority GXT 'R2_01' time 60000 flag 1  // ~s~Recruit a couple of Grove street Families gang members.
+jump @RIOT2_40986 
+
+:RIOT2_40970
+00BC: show_text_highpriority GXT 'R2_13' time 7000 flag 1  // ~s~Go and meet up with the veteranos at ~y~Unity Station~s~.
+
+:RIOT2_40986
+33@ = 0 
+
+:RIOT2_40993
+jump @RIOT2_41055 
+
+:RIOT2_41000
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 189@(186@,22s) 
+185@ = 14 
+0209: 186@ = random_int_in_ranges 0 4 
+0085: 188@ = 186@ // (int) 
+188@ += 1 
+gosub @RIOT2_41057 
+
+:RIOT2_41055
+return 
+
+:RIOT2_41057
+if 
+  185@ == 1 
+jf @RIOT2_41178 
+05AA: 189@s = 'ROT2_AA' // @s = 'short'  // ~z~OK, so what's the plan?
+05AA: 191@s = 'ROT2_AB' // @s = 'short'  // ~z~We're going to meet three of my veterano's over at Unity Station.
+05AA: 193@s = 'ROT2_AD' // @s = 'short'  // ~z~Three, is that all?
+05AA: 195@s = 'ROT2_AE' // @s = 'short'  // ~z~A'ight, I'm a get a couple of Family boys to come through too.
+04AF: 233@ = 33000 // = constant 
+04AF: 234@ = 33001 // = constant 
+04AF: 235@ = 33002 // = constant 
+04AF: 236@ = 33003 // = constant 
+255@ = 4 
+
+:RIOT2_41178
+if 
+  185@ == 2 
+jf @RIOT2_41299 
+05AA: 189@s = 'ROT2_BA' // @s = 'short'  // ~z~Shit's real serious, man, look at the streets, eh.
+05AA: 191@s = 'ROT2_BB' // @s = 'short'  // ~z~Yeah, we better watch ourselves, man.
+05AA: 193@s = 'ROT2_BC' // @s = 'short'  // ~z~Don't want to get caught on Ballas turf while this shit's going down.
+05AA: 195@s = 'ROT2_BD' // @s = 'short'  // ~z~Man, Tenpenny brought the Central to its knees.
+04AF: 233@ = 33004 // = constant 
+04AF: 234@ = 33005 // = constant 
+04AF: 235@ = 33006 // = constant 
+04AF: 236@ = 33007 // = constant 
+255@ = 4 
+
+:RIOT2_41299
+if 
+  185@ == 3 
+jf @RIOT2_41708 
+05AA: 189@s = 'ROT2_CA' // @s = 'short'  // ~z~While we here, I, eerr, I have a question to ask you.
+05AA: 191@s = 'ROT2_CB' // @s = 'short'  // ~z~Yeah? What?
+05AA: 193@s = 'ROT2_CC' // @s = 'short'  // ~z~Well it's... it's personal.
+05AA: 195@s = 'ROT2_CD' // @s = 'short'  // ~z~Come on, man, we're brothers, you and me.
+05AA: 197@s = 'ROT2_CE' // @s = 'short'  // ~z~You can ask me anything.
+05AA: 199@s = 'ROT2_CF' // @s = 'short'  // ~z~OK, here goes.
+05AA: 201@s = 'ROT2_CG' // @s = 'short'  // ~z~I want to ask Kendl the question.
+05AA: 203@s = 'ROT2_CH' // @s = 'short'  // ~z~What's the problem?
+05AA: 205@s = 'ROT2_CJ' // @s = 'short'  // ~z~Call her, dude, here, use my phone.
+05AA: 207@s = 'ROT2_CK' // @s = 'short'  // ~z~Noo, holmes, THE question!
+05AA: 209@s = 'ROT2_CL' // @s = 'short'  // ~z~What? Oh shit, you mean POP THE question.
+05AA: 211@s = 'ROT2_CM' // @s = 'short'  // ~z~Well, I'm OK with that, you know, I appreciate you asking my permission and shit, but -
+05AA: 213@s = 'ROT2_CN' // @s = 'short'  // ~z~Nah. I know you're cool.
+05AA: 215@s = 'ROT2_CO' // @s = 'short'  // ~z~It's Sweet that is the problem, could you talk to him?
+05AA: 217@s = 'ROT2_CP' // @s = 'short'  // ~z~Sure thing, Cesar, I'll talk to him.
+05AA: 219@s = 'ROT2_CQ' // @s = 'short'  // ~z~Thank you, CJ, that means a lot to me.
+04AF: 233@ = 33008 // = constant 
+04AF: 234@ = 33009 // = constant 
+04AF: 235@ = 33010 // = constant 
+04AF: 236@ = 33011 // = constant 
+04AF: 237@ = 33012 // = constant 
+04AF: 238@ = 33013 // = constant 
+04AF: 239@ = 33014 // = constant 
+04AF: 240@ = 33015 // = constant 
+04AF: 241@ = 33016 // = constant 
+04AF: 242@ = 33017 // = constant 
+04AF: 243@ = 33018 // = constant 
+04AF: 244@ = 33019 // = constant 
+04AF: 245@ = 33020 // = constant 
+04AF: 246@ = 33021 // = constant 
+04AF: 247@ = 33022 // = constant 
+04AF: 248@ = 33023 // = constant 
+255@ = 16 
+
+:RIOT2_41708
+if 
+  185@ == 4 
+jf @RIOT2_41998 
+05AA: 189@s = 'ROT2_DA' // @s = 'short'  // ~z~Those Vagos, man, I'm gonna cut those cacos.
+05AA: 191@s = 'ROT2_DB' // @s = 'short'  // ~z~Raspalo hasta el hueso!
+05AA: 193@s = 'ROT2_DC' // @s = 'short'  // ~z~Hey, carnales, what's cracking, holmes?
+05AA: 195@s = 'ROT2_DD' // @s = 'short'  // ~z~Cesar! And you must be CJ.
+05AA: 197@s = 'ROT2_DE' // @s = 'short'  // ~z~Cesar says you cool, so we cool, holmes.
+05AA: 199@s = 'ROT2_DF' // @s = 'short'  // ~z~OK. We will have to work our way through this neighborhood to get to my house.
+05AA: 203@s = 'ROT2_DH' // @s = 'short'  // ~z~We will approach from the rear alleyway, OK?
+05AA: 205@s = 'ROT2_DJ' // @s = 'short'  // ~z~If we stick together those Vagos pendejos won't stand a chance!
+05AA: 207@s = 'ROT2_DK' // @s = 'short'  // ~z~Watch each others' backs, amigos.
+05AA: 209@s = 'ROT2_DL' // @s = 'short'  // ~z~Hasta la muerte!
+05AA: 211@s = 'ROT2_DM' // @s = 'short'  // ~z~HASTA LA MUERTE!
+04AF: 233@ = 33024 // = constant 
+04AF: 234@ = 33025 // = constant 
+04AF: 235@ = 33026 // = constant 
+04AF: 236@ = 33027 // = constant 
+04AF: 237@ = 33028 // = constant 
+04AF: 238@ = 33029 // = constant 
+04AF: 240@ = 33030 // = constant 
+04AF: 241@ = 33031 // = constant 
+04AF: 242@ = 33032 // = constant 
+04AF: 243@ = 33033 // = constant 
+04AF: 244@ = 33034 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_41998
+if 
+  185@ == 5 
+jf @RIOT2_42545 
+0209: 290@ = random_int_in_ranges 0 3 
+05AA: 189@s = 'ROT2_EA' // @s = 'short'  // ~z~That's the last of them, let's move out!
+if 
+  290@ == 0 
+jf @RIOT2_42078 
+05AA: 195@s = 'ROT2_ED' // @s = 'short'  // ~z~Quickly, go! GO!
+jump @RIOT2_42131 
+
+:RIOT2_42078
+if 
+  290@ == 1 
+jf @RIOT2_42117 
+05AA: 195@s = 'ROT2_EB' // @s = 'short'  // ~z~Everybody OK? Let's hit 'em!
+jump @RIOT2_42131 
+
+:RIOT2_42117
+05AA: 195@s = 'ROT2_EC' // @s = 'short'  // ~z~Vagos fools didn't stand a chance!
+
+:RIOT2_42131
+05AA: 197@s = 'ROT2_EE' // @s = 'short'  // ~z~Follow me!
+05AA: 199@s = 'ROT2_EF' // @s = 'short'  // ~z~Keep close!
+05AA: 201@s = 'ROT2_EG' // @s = 'short'  // ~z~Keep together!
+05AA: 203@s = 'ROT2_EH' // @s = 'short'  // ~z~Stay close.
+05AA: 205@s = 'ROT2_EJ' // @s = 'short'  // ~z~Keep it tight!
+if 
+  290@ == 0 
+jf @RIOT2_42240 
+05AA: 211@s = 'ROT2_EM' // @s = 'short'  // ~z~Northside Vagos assholes!
+jump @RIOT2_42293 
+
+:RIOT2_42240
+if 
+  290@ == 1 
+jf @RIOT2_42279 
+05AA: 211@s = 'ROT2_EK' // @s = 'short'  // ~z~Vagos boys!
+jump @RIOT2_42293 
+
+:RIOT2_42279
+05AA: 211@s = 'ROT2_EL' // @s = 'short'  // ~z~LSV's!
+
+:RIOT2_42293
+05AA: 213@s = 'ROT2_EN' // @s = 'short'  // ~z~Up ahead!
+04AF: 233@ = 33035 // = constant 
+if 
+  290@ == 0 
+jf @RIOT2_42352 
+04AF: 236@ = 33038 // = constant 
+jump @RIOT2_42397 
+
+:RIOT2_42352
+if 
+  290@ == 1 
+jf @RIOT2_42387 
+04AF: 236@ = 33036 // = constant 
+jump @RIOT2_42397 
+
+:RIOT2_42387
+04AF: 236@ = 33037 // = constant 
+
+:RIOT2_42397
+04AF: 237@ = 33039 // = constant 
+04AF: 238@ = 33040 // = constant 
+04AF: 239@ = 33041 // = constant 
+04AF: 240@ = 33042 // = constant 
+04AF: 241@ = 33043 // = constant 
+if 
+  290@ == 0 
+jf @RIOT2_42482 
+04AF: 244@ = 33046 // = constant 
+jump @RIOT2_42527 
+
+:RIOT2_42482
+if 
+  290@ == 1 
+jf @RIOT2_42517 
+04AF: 244@ = 33044 // = constant 
+jump @RIOT2_42527 
+
+:RIOT2_42517
+04AF: 244@ = 33045 // = constant 
+
+:RIOT2_42527
+04AF: 245@ = 33047 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_42545
+if 
+  185@ == 6 
+jf @RIOT2_42739 
+05AA: 189@s = 'ROT2_FA' // @s = 'short'  // ~z~That was the easy bit, eh.
+05AA: 191@s = 'ROT2_FB' // @s = 'short'  // ~z~Now we go into the viper's nest.
+05AA: 193@s = 'ROT2_FC' // @s = 'short'  // ~z~This is where it gets tough.
+05AA: 195@s = 'ROT2_FD' // @s = 'short'  // ~z~Luckily we have a little surprise up our sleeves, eh, Sunny!
+05AA: 197@s = 'ROT2_FE' // @s = 'short'  // ~z~That's a rocket launcher man! We'll bring the National Guard down on us!
+05AA: 199@s = 'ROT2_FG' // @s = 'short'  // ~z~Look around you, CJ, the whole city is a war zone!
+05AA: 201@s = 'ROT2_FH' // @s = 'short'  // ~z~C'mon, I want to take my house back!
+04AF: 233@ = 33059 // = constant 
+04AF: 234@ = 33060 // = constant 
+04AF: 235@ = 33061 // = constant 
+04AF: 236@ = 33062 // = constant 
+04AF: 237@ = 33063 // = constant 
+04AF: 238@ = 33064 // = constant 
+04AF: 239@ = 33065 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_42739
+if 
+  185@ == 7 
+jf @RIOT2_42788 
+05AA: 189@s = 'ROT2_GA' // @s = 'short'  // ~z~Hazer!
+04AF: 233@ = 33066 // = constant 
+255@ = 1 
+
+:RIOT2_42788
+if 
+  185@ == 8 
+jf @RIOT2_42909 
+05AA: 189@s = 'ROT2_GB' // @s = 'short'  // ~z~Shit, Hazer...
+05AA: 191@s = 'ROT2_GC' // @s = 'short'  // ~z~He is pretty bad, Cesar...
+05AA: 193@s = 'ROT2_GD' // @s = 'short'  // ~z~Heads up! More Vagos!
+05AA: 195@s = 'ROT2_EW' // @s = 'short'  // ~z~They're coming over the walls!
+04AF: 233@ = 33067 // = constant 
+04AF: 234@ = 33068 // = constant 
+04AF: 235@ = 33069 // = constant 
+04AF: 236@ = 33056 // = constant 
+255@ = 4 
+
+:RIOT2_42909
+if 
+  185@ == 9 
+jf @RIOT2_43007 
+05AA: 189@s = 'ROT2_HA' // @s = 'short'  // ~z~Behind us!
+05AA: 191@s = 'ROT2_HB' // @s = 'short'  // ~z~More Vagos Behind us!
+05AA: 193@s = 'ROT2_HC' // @s = 'short'  // ~z~Northsiders behind us!
+04AF: 233@ = 33070 // = constant 
+04AF: 234@ = 33071 // = constant 
+04AF: 235@ = 33072 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_43007
+if 
+  185@ == 10 
+jf @RIOT2_43080 
+05AA: 189@s = 'ROT2_JA' // @s = 'short'  // ~z~Let's fucking finish this!
+05AA: 191@s = 'ROT2_JB' // @s = 'short'  // ~z~I'm with you man, let's take these punks!
+04AF: 233@ = 33073 // = constant 
+04AF: 234@ = 33074 // = constant 
+255@ = 2 
+
+:RIOT2_43080
+if 
+  185@ == 11 
+jf @RIOT2_43178 
+05AA: 189@s = 'ROT2_KA' // @s = 'short'  // ~z~This is a Vagos neighborhood now!
+05AA: 191@s = 'ROT2_KB' // @s = 'short'  // ~z~Vagos rule this varrio now - Aztecas are no more!
+05AA: 193@s = 'ROT2_KC' // @s = 'short'  // ~z~Find a new home, assholes, Vagos own this 'hood!
+04AF: 233@ = 33075 // = constant 
+04AF: 234@ = 33076 // = constant 
+04AF: 235@ = 33077 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_43178
+if 
+  185@ == 12 
+jf @RIOT2_43276 
+05AA: 189@s = 'ROT2_LA' // @s = 'short'  // ~z~Torch those Aztecas!
+05AA: 191@s = 'ROT2_LB' // @s = 'short'  // ~z~Burn them!
+05AA: 193@s = 'ROT2_LC' // @s = 'short'  // ~z~Burn, Aztecas, burn!
+04AF: 233@ = 33078 // = constant 
+04AF: 234@ = 33079 // = constant 
+04AF: 235@ = 33080 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_43276
+if 
+  185@ == 13 
+jf @RIOT2_43494 
+05AA: 189@s = 'ROT2_MA' // @s = 'short'  // ~z~Alright, that's the last of 'em.
+05AA: 191@s = 'ROT2_MB' // @s = 'short'  // ~z~How is Hazer?
+05AA: 193@s = 'ROT2_MC' // @s = 'short'  // ~z~We need to get him to a hospital.
+05AA: 195@s = 'ROT2_MD' // @s = 'short'  // ~z~Hey, I'll take him.
+05AA: 197@s = 'ROT2_ME' // @s = 'short'  // ~z~CJ, you have done more than enough.
+05AA: 199@s = 'ROT2_MF' // @s = 'short'  // ~z~You should get back to Grove.
+05AA: 201@s = 'ROT2_MG' // @s = 'short'  // ~z~Alright ese, I'll see you after all this is settled down.
+05AA: 203@s = 'ROT2_MH' // @s = 'short'  // ~z~Thank you, CJ and good luck, my friend.
+04AF: 233@ = 33081 // = constant 
+04AF: 234@ = 33082 // = constant 
+04AF: 235@ = 33083 // = constant 
+04AF: 236@ = 33084 // = constant 
+04AF: 237@ = 33085 // = constant 
+04AF: 238@ = 33086 // = constant 
+04AF: 239@ = 33087 // = constant 
+04AF: 240@ = 33088 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_43494
+if 
+  185@ == 14 
+jf @RIOT2_43640 
+05AA: 189@s = 'ROT2_EO' // @s = 'short'  // ~z~Nearly there!
+05AA: 191@s = 'ROT2_EP' // @s = 'short'  // ~z~Careful, we are close!
+05AA: 193@s = 'ROT2_EQ' // @s = 'short'  // ~z~Behind us!
+05AA: 195@s = 'ROT2_ER' // @s = 'short'  // ~z~Watch our backs!
+05AA: 197@s = 'ROT2_ES' // @s = 'short'  // ~z~Watch your backs!
+04AF: 233@ = 33048 // = constant 
+04AF: 234@ = 33049 // = constant 
+04AF: 235@ = 33050 // = constant 
+04AF: 236@ = 33051 // = constant 
+04AF: 237@ = 33052 // = constant 
+0085: 255@ = 188@ // (int) 
+
+:RIOT2_43640
+0085: 258@ = 186@ // (int) 
+256@ = 0 
+257@ = 0 
+259@ = 1 
+return 
+
+:RIOT2_43671
+if 
+001D:   255@ > 258@ // (int) 
+jf @RIOT2_43776 
+if 
+  256@ == 0 
+jf @RIOT2_43733 
+03CF: load_wav 233@(258@,22i) as 1 
+258@ += 1 
+256@ = 1 
+
+:RIOT2_43733
+if 
+  257@ == 0 
+jf @RIOT2_43776 
+03CF: load_wav 233@(258@,22i) as 2 
+258@ += 1 
+257@ = 1 
+
+:RIOT2_43776
+return 
+
+:RIOT2_43778
+if 
+  259@ == 1 
+jf @RIOT2_43854 
+if 
+  256@ == 1 
+jf @RIOT2_43854 
+if 
+03D0:   wav 1 loaded 
+jf @RIOT2_43854 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 189@(186@,22s) time 4500 flag 1 
+256@ = 2 
+
+:RIOT2_43854
+if 
+  259@ == 2 
+jf @RIOT2_43930 
+if 
+  257@ == 1 
+jf @RIOT2_43930 
+if 
+03D0:   wav 2 loaded 
+jf @RIOT2_43930 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 189@(186@,22s) time 4500 flag 1 
+257@ = 2 
+
+:RIOT2_43930
+return 
+
+:RIOT2_43932
+if 
+  256@ == 2 
+jf @RIOT2_43995 
+if 
+03D2:   wav 1 ended 
+jf @RIOT2_43995 
+03D5: remove_text 189@(186@,22s) 
+186@ += 1 
+259@ = 2 
+256@ = 0 
+
+:RIOT2_43995
+if 
+  257@ == 2 
+jf @RIOT2_44058 
+if 
+03D2:   wav 2 ended 
+jf @RIOT2_44058 
+03D5: remove_text 189@(186@,22s) 
+186@ += 1 
+259@ = 1 
+257@ = 0 
+
+:RIOT2_44058
+return

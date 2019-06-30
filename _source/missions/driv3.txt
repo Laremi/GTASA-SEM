@@ -1,0 +1,3026 @@
+:DRIV3
+thread 'DRIV3' 
+gosub @DRIV3_94 
+if 
+wasted_or_busted 
+jf @DRIV3_85 
+$11033 = 1 
+$11029 = 135.0 
+$11032 = -2570.34 
+$11031 = 1363.52 
+$11030 = 6.64 
+gosub @DRIV3_16204 
+
+:DRIV3_85
+gosub @DRIV3_16290 
+end_thread 
+
+:DRIV3_94
+$ONMISSION = 1 
+increment_mission_attempts 
+wait 0 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+0169: set_fade_color_RGB 0 0 0 
+
+:DRIV3_129
+if 
+fading 
+jf @DRIV3_153 
+wait 0 
+jump @DRIV3_129 
+
+:DRIV3_153
+054C: use_GXT_table 'FARLIE3' 
+select_interior 3 
+02E4: load_cutscene_data 'FARL_3A' 
+
+:DRIV3_179
+if 
+86B9:   not cutscene_data_loaded 
+jf @DRIV3_203 
+wait 0 
+jump @DRIV3_179 
+
+:DRIV3_203
+02E7: start_cutscene 
+fade 1 1000 
+
+:DRIV3_212
+if 
+82E9:   not cutscene_reached_end 
+jf @DRIV3_236 
+wait 0 
+jump @DRIV3_212 
+
+:DRIV3_236
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DRIV3_251
+if 
+fading 
+jf @DRIV3_275 
+wait 0 
+jump @DRIV3_251 
+
+:DRIV3_275
+02EA: end_cutscene 
+select_interior 0 
+018A: 127@ = create_checkpoint_at -2071.0 209.0 35.0 
+Marker.Disable(127@)
+80@ = -1906.656 
+81@ = 283.016 
+82@ = 41.0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+132@ = 0 
+107@ = 0 
+112@ = 0 
+108@ = 0 
+59@ = -2615.0 
+60@ = 1397.0 
+61@ = 6.0 
+101@ = 0 
+$1797 = 0 
+$ONMISSION_MIKE_TORENO = 1 
+103@ = 0 
+71@ = -1550.416 
+72@ = -436.4436 
+73@ = 6.9871 
+$1796 = 0 
+74@ = 0.0 
+75@ = -20.0 
+76@ = 0.0 
+100@ = 0 
+102@ = 0 
+109@ = 0 
+110@ = 0 
+89@ = 1 
+90@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+$7321 = 0 
+94@ = 0 
+95@ = 0 
+98@ = 0 
+111@ = 0 
+99@ = 0 
+96@ = 0 
+97@ = 0 
+if 
+075C:   marker $2653 enabled 
+jf @DRIV3_650 
+Marker.Disable($2653)
+
+:DRIV3_650
+032B: 55@ = create_weapon_pickup #DESERT_EAGLE type 15 ammo 30 at -1542.022 -437.7364 5.9258 
+05A9: s$7322[0] = 'FAR3_CA' // s$  // ~z~He says he can hear seagulls!
+05A9: s$7322[1] = 'FAR3_CB' // s$  // ~z~Mike can hear gulls!
+05A9: s$7322[2] = 'FAR3_DA' // s$  // ~z~Seagulls? Shit, that could be anywhere in this town.
+05A9: s$7322[3] = 'FAR3_CC' // s$  // ~z~He can hear heavy machinery!
+05A9: s$7322[4] = 'FAR3_DB' // s$  // ~z~Seagulls and heavy machinery? What is that? A building site, or a landfill or something?
+05A9: s$7322[5] = 'FAR3_EA' // s$  // ~z~There's a building site in Doherty!
+04AF: 133@ = 15200 // = constant 
+04AF: 134@ = 15201 // = constant 
+04AF: 135@ = 15210 // = constant 
+04AF: 136@ = 15202 // = constant 
+04AF: 137@ = 15211 // = constant 
+04AF: 138@ = 15215 // = constant 
+05A9: s$7322[6] = 'FAR3_CF' // s$  // ~z~He says he can hear a truck reversing.
+05A9: s$7322[7] = 'FAR3_CD' // s$  // ~z~He says it's busy, like a freight depot or something.
+05A9: s$7322[8] = 'FAR3_DC' // s$  // ~z~Freight? Aw, they must be down at the docks!
+05A9: s$7322[9] = 'FAR3_EB' // s$  // ~z~Get to the docks in Easter Basin!
+04AF: 139@ = 15205 // = constant 
+04AF: 140@ = 15203 // = constant 
+04AF: 141@ = 15212 // = constant 
+04AF: 142@ = 15216 // = constant 
+05A9: s$7322[10] = 'FAR3_CJ' // s$  // ~z~Shit, he says they stopped, then he heard gunfire.
+05A9: s$7322[11] = 'FAR3_CK' // s$  // ~z~He thinks they just shot there way through a security gate!
+05A9: s$7322[12] = 'FAR3_DD' // s$  // ~z~They don't have heavy security at the docks,
+05A9: s$7322[13] = 'FAR3_DE' // s$  // ~z~but they do at the airport's freight depot!
+05A9: s$7322[14] = 'FAR3_EC' // s$  // ~z~To the airport, rapido!
+04AF: 143@ = 15208 // = constant 
+04AF: 144@ = 15209 // = constant 
+04AF: 145@ = 15213 // = constant 
+04AF: 146@ = 15214 // = constant 
+04AF: 147@ = 15217 // = constant 
+05A9: s$7322[15] = 'FAR3_HA' // s$  // ~z~There's the gate!
+05A9: s$7322[16] = 'FAR3_HB' // s$  // ~z~And some dead security guards!
+05A9: s$7322[17] = 'FAR3_HC' // s$  // ~z~Ey, this is the place, keep your eyes peeled for that van!
+04AF: 148@ = 15225 // = constant 
+04AF: 149@ = 15226 // = constant 
+04AF: 150@ = 15227 // = constant 
+05A9: s$7322[18] = 'FAR3_JA' // s$  // ~z~OK, the tags should work now, holmes.
+05A9: s$7322[19] = 'FAR3_JB' // s$  // ~z~Tag? What the hell is a tag?
+05A9: s$7322[20] = 'FAR3_JC' // s$  // ~z~After that last bit of trouble, Mike hid the transponder in the white.
+05A9: s$7322[21] = 'FAR3_JD' // s$  // ~z~We was going to follow it to the gang, but something must have fucked up
+05A9: s$7322[22] = 'FAR3_JE' // s$  // ~z~and now we gotta use it to find that van and rescue Mike!
+05A9: s$7322[23] = 'FAR3_JF' // s$  // ~z~How it work?
+05A9: s$7322[24] = 'FAR3_JG' // s$  // ~z~Simple. Closer we get, the stronger the signal.
+04AF: 151@ = 15228 // = constant 
+04AF: 152@ = 15229 // = constant 
+04AF: 153@ = 15230 // = constant 
+04AF: 154@ = 15231 // = constant 
+04AF: 155@ = 15232 // = constant 
+04AF: 156@ = 15233 // = constant 
+04AF: 157@ = 15234 // = constant 
+05A9: s$7322[25] = 'FAR3_MA' // s$  // ~z~How long you been working for Jizzy, I haven't seen you before?
+05A9: s$7322[26] = 'FAR3_MB' // s$  // ~z~Just got into town last week. I done a couple jobs here and there.
+05A9: s$7322[27] = 'FAR3_MC' // s$  // ~z~Just got into town, huh? Where were you before that?
+05A9: s$7322[28] = 'FAR3_MD' // s$  // ~z~Hey, what is this?
+05A9: s$7322[29] = 'FAR3_ME' // s$  // ~z~Man, just answer the fucking question.
+05A9: s$7322[30] = 'FAR3_MF' // s$  // ~z~Look man, chill. I been in Los Santos with my family, a'ight?
+05A9: s$7322[31] = 'FAR3_MG' // s$  // ~z~Gimme his wallet.
+05A9: s$7322[32] = 'FAR3_MH' // s$  // ~z~What? Hey, get off!
+05A9: s$7322[33] = 'FAR3_MJ' // s$  // ~z~Quit struggling and concentrate on the road!
+05A9: s$7322[34] = 'FAR3_MK' // s$  // ~z~Here y'go, Mike.
+05A9: s$7322[35] = 'FAR3_ML' // s$  // ~z~Carl Johnson, huh?
+05A9: s$7322[36] = 'FAR3_MM' // s$  // ~z~Alright. I've seen enough. Here.
+05A9: s$7322[37] = 'FAR3_MN' // s$  // ~z~Hey, was a dub in there. Better still be there when I check it.
+05A9: s$7322[38] = 'FAR3_MO' // s$  // ~z~Shut the fuck up.
+05A9: s$7322[39] = 'FAR3_MP' // s$ 
+04AF: 158@ = 15242 // = constant 
+04AF: 159@ = 15243 // = constant 
+04AF: 160@ = 15244 // = constant 
+04AF: 161@ = 15245 // = constant 
+04AF: 162@ = 15246 // = constant 
+04AF: 163@ = 15247 // = constant 
+04AF: 164@ = 15248 // = constant 
+04AF: 165@ = 15249 // = constant 
+04AF: 166@ = 15250 // = constant 
+04AF: 167@ = 15251 // = constant 
+04AF: 168@ = 15252 // = constant 
+04AF: 169@ = 15253 // = constant 
+04AF: 170@ = 15254 // = constant 
+04AF: 171@ = 15255 // = constant 
+04AF: 172@ = 15256 // = constant 
+060A: create_decision_maker_type 2 store_to 86@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 87@ // decision\allowed\m_.ped files 
+Model.Load(#MICRO_UZI)
+Model.Load(#BURRITO)
+023C: load_special_actor 'TBONE' as 2 // models 290-299 
+038B: load_requested_models 
+
+:DRIV3_1596
+if or
+823D:   not special_actor 2 loaded 
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#BURRITO)
+jf @DRIV3_1632 
+wait 0 
+jump @DRIV3_1596 
+
+:DRIV3_1632
+Actor.Angle($PLAYER_ACTOR) = 214.0
+Camera.SetBehindPlayer
+
+:DRIV3_1644
+wait 0 
+if 
+  89@ == 1 
+jf @DRIV3_1673 
+gosub @DRIV3_1805 
+
+:DRIV3_1673
+if 
+  90@ == 1 
+jf @DRIV3_1698 
+gosub @DRIV3_7019 
+
+:DRIV3_1698
+if 
+  94@ == 1 
+jf @DRIV3_1723 
+gosub @DRIV3_8450 
+
+:DRIV3_1723
+if 
+  91@ == 1 
+jf @DRIV3_1748 
+gosub @DRIV3_11419 
+
+:DRIV3_1748
+if 
+  92@ == 1 
+jf @DRIV3_1773 
+jump @DRIV3_16106 
+
+:DRIV3_1773
+if 
+  93@ == 1 
+jf @DRIV3_1798 
+jump @DRIV3_16204 
+
+:DRIV3_1798
+jump @DRIV3_1644 
+
+:DRIV3_1805
+0209: 54@ = random_int_in_ranges 1 4 
+if 
+  54@ == 1 
+jf @DRIV3_1902 
+56@ = -1303.76 
+57@ = -615.4308 
+58@ = 13.1485 
+62@ = -1271.832 
+63@ = -180.8179 
+64@ = 13.1443 
+84@ = 0.0 
+
+:DRIV3_1902
+if 
+  54@ == 2 
+jf @DRIV3_1990 
+56@ = -1216.233 
+57@ = 51.366 
+58@ = 13.0 
+62@ = -1288.832 
+63@ = -159.8179 
+64@ = 13.1443 
+84@ = 120.0 
+
+:DRIV3_1990
+if 
+  54@ == 3 
+jf @DRIV3_2078 
+56@ = -1125.319 
+57@ = 368.3488 
+58@ = 13.1329 
+62@ = -1319.832 
+63@ = -96.8179 
+64@ = 13.8443 
+84@ = 140.0 
+
+:DRIV3_2078
+Model.Load(#PREMIER)
+
+:DRIV3_2083
+if 
+   not Model.Available(#PREMIER)
+jf @DRIV3_2110 
+wait 0 
+jump @DRIV3_2083 
+
+:DRIV3_2110
+38@ = Car.Create(#PREMIER, -2620.0, 1398.0, 6.5)
+Car.Angle(38@) = 204.0
+114@ = Marker.CreateAboveCar(38@)
+07E0: set_marker 114@ type_to 1 
+Car.Health(38@) = 2500
+0956: get_respect_to 113@ 
+08F4: set_max_group_members 113@ 
+09DD: unknown_player_group 2 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRIV3_2203 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:DRIV3_2203
+53@ = Actor.Create(Mission2, #SPECIAL02, -2623.64, 1403.9, 6.2)
+09F6: set_actor 53@ unjackable_through_driver_seat 0 
+0709: set_decision_maker 87@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+Actor.WeaponAccuracy(53@) = 95
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+0A09: set_actor 53@ muted 1 // versionB 
+05CA: AS_actor 53@ enter_car 38@ passenger_seat 0 time -1 
+04D8: set_actor 53@ drowns_in_water 1 
+077A: set_actor 53@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 53@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+060B: set_actor 53@ decision_maker_to 87@ 
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 1000)
+0568: set_actor 53@ untargetable 1 
+02A9: set_actor 53@ immune_to_nonplayer 1 
+0A0B: set_rendering_origin_at_3D_coord -2623.64 1403.9 6.2 angle 214.0 
+fade 1 1000 
+
+:DRIV3_2388
+if 
+fading 
+jf @DRIV3_2412 
+wait 0 
+jump @DRIV3_2388 
+
+:DRIV3_2412
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+$1796 += 330000 
+03C3: set_timer_to $1796 type 1 GXT 'DRI2_9' // global_variable  // BATTERY
+040D: unload_wav 1 
+03CF: load_wav 15218 as 1 
+
+:DRIV3_2460
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_2486 
+wait 0 
+jump @DRIV3_2460 
+
+:DRIV3_2486
+00BC: show_text_highpriority GXT 'FAR3_FA' time 10000 flag 1  // ~z~Gotta make this quick, Mike doesn't got much time on his battery left!
+03D1: play_wav 1 
+
+:DRIV3_2506
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_2532 
+wait 0 
+jump @DRIV3_2506 
+
+:DRIV3_2532
+03D5: remove_text 'FAR3_FA'  // ~z~Gotta make this quick, Mike doesn't got much time on his battery left!
+00BC: show_text_highpriority GXT 'DRI2_1' time 5000 flag 1  // ~s~ Get inside the ~b~car~s~.
+Model.Load(#DNB1)
+Model.Load(#DNB2)
+Model.Load(#DNB3)
+
+:DRIV3_2571
+if or
+   not Model.Available(#DNB1)
+   not Model.Available(#DNB2)
+   not Model.Available(#DNB3)
+jf @DRIV3_2605 
+wait 0 
+jump @DRIV3_2571 
+
+:DRIV3_2605
+if 
+   not Car.Wrecked(38@)
+jf @DRIV3_2926 
+
+:DRIV3_2621
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @DRIV3_2926 
+wait 0 
+if 
+   Actor.Dead(53@)
+jf @DRIV3_2720 
+89@ = 0 
+90@ = 0 
+94@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_31' time 5000 flag 1  // ~r~T-Bone's dead!
+return 
+
+:DRIV3_2720
+if 
+   Car.Wrecked(38@)
+jf @DRIV3_2743 
+jump @DRIV3_2926 
+
+:DRIV3_2743
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DRIV3_2802 
+89@ = 0 
+90@ = 0 
+94@ = 0 
+91@ = 0 
+92@ = 1 
+93@ = 0 
+return 
+
+:DRIV3_2802
+if 
+  0 >= $1796 
+jf @DRIV3_2919 
+89@ = 0 
+93@ = 1 
+040D: unload_wav 1 
+03CF: load_wav 15221 as 1 
+
+:DRIV3_2845
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_2871 
+wait 0 
+jump @DRIV3_2845 
+
+:DRIV3_2871
+00BC: show_text_highpriority GXT 'FAR3_FD' time 10000 flag 1  // ~z~Shit, Mike's phone's dead!
+03D1: play_wav 1 
+
+:DRIV3_2891
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_2917 
+wait 0 
+jump @DRIV3_2891 
+
+:DRIV3_2917
+return 
+
+:DRIV3_2919
+jump @DRIV3_2621 
+
+:DRIV3_2926
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_2980 
+03D5: remove_text 'DRI2_1'  // ~s~ Get inside the ~b~car~s~.
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_2980 
+0631: put_actor 53@ in_group $PLAYER_GROUP 
+
+:DRIV3_2980
+Marker.Disable(114@)
+Model.Destroy(#PREMIER)
+33@ = 0 
+116@ = Marker.CreateIconWithoutSphere(3, 71@, 72@, 73@)
+Marker.Disable(116@)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DRIV3_4467 
+
+:DRIV3_3034
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 71@ 72@ 73@ radius 35.0 35.0 35.0 
+jf @DRIV3_4467 
+wait 0 
+gosub @DRIV3_14792 
+if 
+  93@ == 1 
+jf @DRIV3_3107 
+return 
+
+:DRIV3_3107
+if 
+  109@ == 0 
+jf @DRIV3_4460 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_3149 
+38@ = Actor.MissionCar($PLAYER_ACTOR)
+
+:DRIV3_3149
+if and
+  $7321 >= 0 
+  6 > $7321 
+jf @DRIV3_3181 
+gosub @DRIV3_15727 
+
+:DRIV3_3181
+if 
+  $7321 == 6 
+jf @DRIV3_3333 
+if 
+  32@ > 15000 
+jf @DRIV3_3333 
+040D: unload_wav 1 
+03CF: load_wav 15224 as 1 
+
+:DRIV3_3229
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_3255 
+wait 0 
+jump @DRIV3_3229 
+
+:DRIV3_3255
+00BC: show_text_highpriority GXT 'FAR3_GC' time 10000 flag 1  // ~z~Hey, just hang in there, Mike, help is on the way!
+03D1: play_wav 1 
+
+:DRIV3_3275
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_3301 
+wait 0 
+jump @DRIV3_3275 
+
+:DRIV3_3301
+03D5: remove_text 'FAR3_GC'  // ~z~Hey, just hang in there, Mike, help is on the way!
+32@ = 0 
+$7321 = 7 
+102@ = 0 
+
+:DRIV3_3333
+if 
+  $7321 == 7 
+jf @DRIV3_3420 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_3420 
+if and
+0154:   actor $PLAYER_ACTOR in_zone 'DOH'  // Doherty
+0154:   actor 53@ in_zone 'DOH'  // Doherty
+jf @DRIV3_3420 
+$7321 = 8 
+132@ = 6 
+
+:DRIV3_3420
+if and
+  $7321 >= 8 
+  12 > $7321 
+jf @DRIV3_3452 
+gosub @DRIV3_15727 
+
+:DRIV3_3452
+if 
+  $7321 == 12 
+jf @DRIV3_3604 
+if 
+  32@ > 10000 
+jf @DRIV3_3604 
+040D: unload_wav 1 
+03CF: load_wav 15223 as 1 
+
+:DRIV3_3500
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_3526 
+wait 0 
+jump @DRIV3_3500 
+
+:DRIV3_3526
+00BC: show_text_highpriority GXT 'FAR3_GB' time 10000 flag 1  // ~z~Hey, we'll be there in a minute, Mike!
+03D1: play_wav 1 
+
+:DRIV3_3546
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_3572 
+wait 0 
+jump @DRIV3_3546 
+
+:DRIV3_3572
+03D5: remove_text 'FAR3_GB'  // ~z~Hey, we'll be there in a minute, Mike!
+32@ = 0 
+$7321 = 13 
+102@ = 0 
+
+:DRIV3_3604
+if 
+  $7321 == 13 
+jf @DRIV3_3698 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_3698 
+if and
+0154:   actor $PLAYER_ACTOR in_zone 'EASB'  // Easter Basin
+0154:   actor 53@ in_zone 'EASB'  // Easter Basin
+jf @DRIV3_3698 
+$7321 = 14 
+132@ = 10 
+32@ = 0 
+
+:DRIV3_3698
+if and
+  $7321 >= 14 
+  19 > $7321 
+jf @DRIV3_3730 
+gosub @DRIV3_15727 
+
+:DRIV3_3730
+if 
+  $7321 == 19 
+jf @DRIV3_3875 
+if 
+  32@ > 8000 
+jf @DRIV3_3875 
+32@ = 0 
+$7321 = 20 
+040D: unload_wav 1 
+03CF: load_wav 15207 as 1 
+
+:DRIV3_3792
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_3818 
+wait 0 
+jump @DRIV3_3792 
+
+:DRIV3_3818
+00BC: show_text_highpriority GXT 'FAR3_CH' time 10000 flag 1  // ~z~Mike can hear aircraft taking off and landing.
+03D1: play_wav 1 
+
+:DRIV3_3838
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_3864 
+wait 0 
+jump @DRIV3_3838 
+
+:DRIV3_3864
+03D5: remove_text 'FAR3_CH'  // ~z~Mike can hear aircraft taking off and landing.
+
+:DRIV3_3875
+if 
+  $7321 == 20 
+jf @DRIV3_4027 
+if 
+  32@ > 8000 
+jf @DRIV3_4027 
+32@ = 0 
+$7321 = 21 
+040D: unload_wav 1 
+03CF: load_wav 15222 as 1 
+
+:DRIV3_3937
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_3963 
+wait 0 
+jump @DRIV3_3937 
+
+:DRIV3_3963
+00BC: show_text_highpriority GXT 'FAR3_GA' time 10000 flag 1  // ~z~Hey don't worry, Mike, we're nearly there!
+03D1: play_wav 1 
+
+:DRIV3_3983
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_4009 
+wait 0 
+jump @DRIV3_3983 
+
+:DRIV3_4009
+03D5: remove_text 'FAR3_GA'  // ~z~Hey don't worry, Mike, we're nearly there!
+102@ = 0 
+
+:DRIV3_4027
+if 
+  102@ == 0 
+jf @DRIV3_4185 
+if 
+  103@ == 0 
+jf @DRIV3_4185 
+if 
+  200000 >= $1796 
+jf @DRIV3_4185 
+040D: unload_wav 1 
+03CF: load_wav 15219 as 1 
+
+:DRIV3_4095
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_4121 
+wait 0 
+jump @DRIV3_4095 
+
+:DRIV3_4121
+00BC: show_text_highpriority GXT 'FAR3_FB' time 10000 flag 1  // ~z~Mike's cellphone battery's running low!
+03D1: play_wav 1 
+
+:DRIV3_4141
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_4167 
+wait 0 
+jump @DRIV3_4141 
+
+:DRIV3_4167
+03D5: remove_text 'FAR3_FB'  // ~z~Mike's cellphone battery's running low!
+103@ = 1 
+
+:DRIV3_4185
+if 
+  102@ == 0 
+jf @DRIV3_4343 
+if 
+  103@ == 1 
+jf @DRIV3_4343 
+if 
+  100000 >= $1796 
+jf @DRIV3_4343 
+040D: unload_wav 1 
+03CF: load_wav 15220 as 1 
+
+:DRIV3_4253
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_4279 
+wait 0 
+jump @DRIV3_4253 
+
+:DRIV3_4279
+00BC: show_text_highpriority GXT 'FAR3_FC' time 10000 flag 1  // ~z~Mike's cellphone is nearly dead!
+03D1: play_wav 1 
+
+:DRIV3_4299
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_4325 
+wait 0 
+jump @DRIV3_4299 
+
+:DRIV3_4325
+03D5: remove_text 'FAR3_FC'  // ~z~Mike's cellphone is nearly dead!
+103@ = 2 
+
+:DRIV3_4343
+if 
+  0 >= $1796 
+jf @DRIV3_4460 
+89@ = 0 
+93@ = 1 
+040D: unload_wav 1 
+03CF: load_wav 15221 as 1 
+
+:DRIV3_4386
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_4412 
+wait 0 
+jump @DRIV3_4386 
+
+:DRIV3_4412
+00BC: show_text_highpriority GXT 'FAR3_FD' time 10000 flag 1  // ~z~Shit, Mike's phone's dead!
+03D1: play_wav 1 
+
+:DRIV3_4432
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_4458 
+wait 0 
+jump @DRIV3_4432 
+
+:DRIV3_4458
+return 
+
+:DRIV3_4460
+jump @DRIV3_3034 
+
+:DRIV3_4467
+03E6: remove_text_box 
+Marker.Disable(116@)
+Marker.Disable(127@)
+Model.Load(#FREEWAY)
+
+:DRIV3_4484
+if 
+   not Model.Available(#FREEWAY)
+jf @DRIV3_4511 
+wait 0 
+jump @DRIV3_4484 
+
+:DRIV3_4511
+03C4: set_status_text $1797 type 1 GXT 'DRI2_17' // global_variable  // SIGNAL
+35@ = Car.Create(#BURRITO, 56@, 57@, 58@)
+0229: set_car 35@ primary_color_to 6 secondary_color_to 0 
+115@ = Marker.CreateAboveCar(35@)
+018B: set_marker 115@ radar_mode 1 
+Car.Angle(35@) = 84@
+41@ = Actor.CreateAsDriver(Mission2, #DNB3, 35@)
+Actor.SetImmunities(41@, 1, 0, 0, 0, 0)
+0446: set_actor 41@ dismemberment_possible 0 
+060B: set_actor 41@ decision_maker_to 86@ 
+077A: set_actor 41@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 41@ acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+0709: set_decision_maker 86@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+Car.Health(35@) = 1000
+Car.DoorStatus(35@) = 7
+Car.ImmuneToNonPlayer(35@) = True
+131@ = 0 
+
+:DRIV3_4699
+if 
+  3 > 131@ 
+jf @DRIV3_4881 
+if or
+  131@ == 0 
+  131@ == 2 
+jf @DRIV3_4761 
+42@(131@,9i) = Actor.CreateAsPassenger(Mission2, #DNB1, 35@, 131@)
+
+:DRIV3_4761
+if 
+  131@ == 1 
+jf @DRIV3_4798 
+42@(131@,9i) = Actor.CreateAsPassenger(Mission2, #DNB2, 35@, 131@)
+
+:DRIV3_4798
+Actor.GiveWeaponAndAmmo(42@(131@,9i), MicroUzi, 1000)
+01B9: set_actor 42@(131@,9i) armed_weapon_to 28 
+if 
+  131@ == 0 
+jf @DRIV3_4867 
+060B: set_actor 42@ decision_maker_to 86@ 
+077A: set_actor 42@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 42@ acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+
+:DRIV3_4867
+131@ += 1 
+jump @DRIV3_4699 
+
+:DRIV3_4881
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_5131 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 2.0 -6.0 -0.3 
+36@ = Car.Create(#FREEWAY, 77@, 78@, 79@)
+Car.Angle(36@) = 84@
+51@ = Actor.CreateAsDriver(Mission2, #DNB2, 36@)
+Actor.GiveWeaponAndAmmo(51@, MicroUzi, 1000)
+01B9: set_actor 51@ armed_weapon_to 28 
+060B: set_actor 51@ decision_maker_to 86@ 
+077A: set_actor 51@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 51@ acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+04E0: car 36@ abandon_path_radius 255 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset -2.0 -6.0 -0.3 
+37@ = Car.Create(#FREEWAY, 77@, 78@, 79@)
+Car.Angle(37@) = 84@
+52@ = Actor.CreateAsDriver(Mission2, #DNB1, 37@)
+Actor.GiveWeaponAndAmmo(52@, MicroUzi, 1000)
+01B9: set_actor 52@ armed_weapon_to 28 
+060B: set_actor 52@ decision_maker_to 86@ 
+077A: set_actor 52@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 52@ acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+04E0: car 37@ abandon_path_radius 255 
+
+:DRIV3_5131
+if 
+   not $7321 == 21 
+jf @DRIV3_5163 
+132@ = 18 
+$7321 = 24 
+
+:DRIV3_5163
+if 
+   not 98@ == 1 
+jf @DRIV3_7003 
+wait 0 
+gosub @DRIV3_14792 
+if 
+  93@ == 1 
+jf @DRIV3_5212 
+return 
+
+:DRIV3_5212
+if and
+  $7321 >= 21 
+  24 > $7321 
+jf @DRIV3_5251 
+102@ = 1 
+gosub @DRIV3_15727 
+
+:DRIV3_5251
+if and
+  $7321 >= 24 
+  30 >= $7321 
+jf @DRIV3_5290 
+gosub @DRIV3_15727 
+102@ = 1 
+
+:DRIV3_5290
+if 
+  95@ == 0 
+jf @DRIV3_5363 
+if 
+  $7321 == 31 
+jf @DRIV3_5356 
+00BC: show_text_highpriority GXT 'DRI2_18' time 5000 flag 1  // ~s~Use the reading from the ~b~SIGNAL~s~ bar to find the van.
+$7321 = 32 
+32@ = 0 
+
+:DRIV3_5356
+jump @DRIV3_5370 
+
+:DRIV3_5363
+$7321 = 32 
+
+:DRIV3_5370
+if 
+  $7321 == 32 
+jf @DRIV3_5421 
+if 
+  32@ > 7000 
+jf @DRIV3_5421 
+102@ = 0 
+$7321 = 33 
+
+:DRIV3_5421
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_6964 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 65@ 66@ 67@ radius 30.0 30.0 30.0 
+01AF:   car 35@ sphere 0 in_sphere 62@ 63@ 64@ radius 40.0 40.0 40.0 
+jf @DRIV3_5517 
+98@ = 1 
+
+:DRIV3_5517
+if 
+  95@ == 0 
+jf @DRIV3_5944 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 65@ 66@ 67@ radius 100.0 100.0 100.0 
+02CA:   car 35@ bounding_sphere_visible 
+jf @DRIV3_5944 
+if 
+   not Actor.Dead(41@)
+jf @DRIV3_5626 
+05D1: AS_actor 41@ drive_car 35@ to 62@ 63@ 64@ speed 25.0 1 model #NULL 3 
+
+:DRIV3_5626
+if 
+   not Car.Wrecked(36@)
+jf @DRIV3_5650 
+05F2: set_car 36@ follow_car 35@ keep_3o_clock 
+
+:DRIV3_5650
+if 
+   not Car.Wrecked(37@)
+jf @DRIV3_5674 
+05F1: set_car 37@ follow_car 35@ keep_9o_clock 
+
+:DRIV3_5674
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 15235 15239 
+03CF: load_wav 200@ as 1 
+
+:DRIV3_5696
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_5722 
+wait 0 
+jump @DRIV3_5696 
+
+:DRIV3_5722
+if 
+  200@ == 15235 
+jf @DRIV3_5764 
+00BC: show_text_highpriority GXT 'FAR3_KA' time 10000 flag 1  // ~z~That's the van!
+jump @DRIV3_5864 
+
+:DRIV3_5764
+if 
+  200@ == 15236 
+jf @DRIV3_5806 
+00BC: show_text_highpriority GXT 'FAR3_KB' time 10000 flag 1  // ~z~Over there, man!
+jump @DRIV3_5864 
+
+:DRIV3_5806
+if 
+  200@ == 15237 
+jf @DRIV3_5848 
+00BC: show_text_highpriority GXT 'FAR3_KC' time 10000 flag 1  // ~z~There it is!
+jump @DRIV3_5864 
+
+:DRIV3_5848
+00BC: show_text_highpriority GXT 'FAR3_KD' time 10000 flag 1  // ~z~Shit, there they are!
+
+:DRIV3_5864
+03D1: play_wav 1 
+
+:DRIV3_5868
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_5894 
+wait 0 
+jump @DRIV3_5868 
+
+:DRIV3_5894
+00BE: text_clear_all 
+018B: set_marker 115@ radar_mode 3 
+014F: stop_timer $1796 
+0151: remove_status_text $1797 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_5937 
+38@ = Actor.MissionCar($PLAYER_ACTOR)
+
+:DRIV3_5937
+95@ = 1 
+
+:DRIV3_5944
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_6282 
+if or
+  95@ == 1 
+  95@ == 2 
+jf @DRIV3_6051 
+if 
+01AF:   car 35@ sphere 0 in_sphere 62@ 63@ 64@ radius 20.0 20.0 20.0 
+jf @DRIV3_6051 
+Car.SetMaxSpeed(35@, 0.0)
+Car.SetDriverBehaviour(35@, 11)
+95@ = 3 
+
+:DRIV3_6051
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_6081 
+Car.StorePos(35@, 65@, 66@, 67@)
+
+:DRIV3_6081
+Actor.StorePos($PLAYER_ACTOR, 68@, 69@, 70@)
+050A: 88@ = distance_between_XYZ 68@ 69@ 70@ and_XYZ 65@ 66@ 67@ 
+if or
+  54@ == 3 
+  54@ == 2 
+jf @DRIV3_6216 
+if 
+  88@ > 1000.0 
+jf @DRIV3_6181 
+88@ = 1000.0 
+jump @DRIV3_6209 
+
+:DRIV3_6181
+129@ = 1000.0 
+0063: 129@ -= 88@ // (float) 
+129@ /= 10.0 
+
+:DRIV3_6209
+jump @DRIV3_6282 
+
+:DRIV3_6216
+if 
+  88@ > 500.0 
+jf @DRIV3_6254 
+88@ = 500.0 
+jump @DRIV3_6282 
+
+:DRIV3_6254
+129@ = 500.0 
+0063: 129@ -= 88@ // (float) 
+129@ /= 5.0 
+
+:DRIV3_6282
+if 
+  129@ > 0.0 
+jf @DRIV3_6311 
+0090: $1797 = float 129@ to_integer 
+
+:DRIV3_6311
+if 
+   not 95@ == 1 
+jf @DRIV3_6848 
+if 
+  109@ == 0 
+jf @DRIV3_6780 
+if 
+  102@ == 0 
+jf @DRIV3_6505 
+if 
+  103@ == 0 
+jf @DRIV3_6505 
+if 
+  200000 >= $1796 
+jf @DRIV3_6505 
+040D: unload_wav 1 
+03CF: load_wav 15219 as 1 
+
+:DRIV3_6415
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_6441 
+wait 0 
+jump @DRIV3_6415 
+
+:DRIV3_6441
+00BC: show_text_highpriority GXT 'FAR3_FB' time 10000 flag 1  // ~z~Mike's cellphone battery's running low!
+03D1: play_wav 1 
+
+:DRIV3_6461
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_6487 
+wait 0 
+jump @DRIV3_6461 
+
+:DRIV3_6487
+03D5: remove_text 'FAR3_FB'  // ~z~Mike's cellphone battery's running low!
+103@ = 1 
+
+:DRIV3_6505
+if 
+  102@ == 0 
+jf @DRIV3_6663 
+if 
+  103@ == 1 
+jf @DRIV3_6663 
+if 
+  100000 >= $1796 
+jf @DRIV3_6663 
+040D: unload_wav 1 
+03CF: load_wav 15220 as 1 
+
+:DRIV3_6573
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_6599 
+wait 0 
+jump @DRIV3_6573 
+
+:DRIV3_6599
+00BC: show_text_highpriority GXT 'FAR3_FC' time 10000 flag 1  // ~z~Mike's cellphone is nearly dead!
+03D1: play_wav 1 
+
+:DRIV3_6619
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_6645 
+wait 0 
+jump @DRIV3_6619 
+
+:DRIV3_6645
+03D5: remove_text 'FAR3_FC'  // ~z~Mike's cellphone is nearly dead!
+103@ = 2 
+
+:DRIV3_6663
+if 
+  0 >= $1796 
+jf @DRIV3_6780 
+89@ = 0 
+93@ = 1 
+040D: unload_wav 1 
+03CF: load_wav 15221 as 1 
+
+:DRIV3_6706
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_6732 
+wait 0 
+jump @DRIV3_6706 
+
+:DRIV3_6732
+00BC: show_text_highpriority GXT 'FAR3_FD' time 10000 flag 1  // ~z~Shit, Mike's phone's dead!
+03D1: play_wav 1 
+
+:DRIV3_6752
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_6778 
+wait 0 
+jump @DRIV3_6752 
+
+:DRIV3_6778
+return 
+
+:DRIV3_6780
+if 
+  95@ == 0 
+jf @DRIV3_6848 
+if 
+  0 >= $1796 
+jf @DRIV3_6848 
+89@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_6848
+if 
+  95@ == 1 
+jf @DRIV3_6957 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_6957 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 35@ radius 400.0 400.0 400.0 flag 0 
+jf @DRIV3_6957 
+90@ = 0 
+89@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_26' time 5000 flag 1  // ~r~You fled leaving Toreno behind!
+return 
+
+:DRIV3_6957
+jump @DRIV3_6996 
+
+:DRIV3_6964
+89@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_6996
+jump @DRIV3_5163 
+
+:DRIV3_7003
+89@ = 0 
+90@ = 1 
+return 
+
+:DRIV3_7019
+0615: define_AS_pack_begin 173@ 
+05CD: AS_actor -1 exit_car 35@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 173@ 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_7067 
+38@ = Actor.MissionCar($PLAYER_ACTOR)
+
+:DRIV3_7067
+131@ = 0 
+
+:DRIV3_7074
+if 
+  3 > 131@ 
+jf @DRIV3_7286 
+if 
+   not Actor.Dead(42@(131@,9i))
+jf @DRIV3_7240 
+124@(131@,3i) = Marker.CreateAboveActor(42@(131@,9i))
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_7201 
+0618: assign_actor 42@(131@,9i) to_AS_pack 173@ 
+060B: set_actor 42@(131@,9i) decision_maker_to 86@ 
+077A: set_actor 42@(131@,9i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 42@(131@,9i) acquaintance 1 to_actors_pedtype 24 // see ped.dat 
+jump @DRIV3_7233 
+
+:DRIV3_7201
+90@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_7233
+jump @DRIV3_7272 
+
+:DRIV3_7240
+90@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_7272
+131@ += 1 
+jump @DRIV3_7074 
+
+:DRIV3_7286
+if 
+075C:   marker 115@ enabled 
+jf @DRIV3_7309 
+018B: set_marker 115@ radar_mode 2 
+
+:DRIV3_7309
+if 
+   not Actor.Dead(41@)
+jf @DRIV3_7363 
+Actor.SetImmunities(41@, 0, 0, 0, 0, 0)
+0446: set_actor 41@ dismemberment_possible 1 
+117@ = Marker.CreateAboveActor(41@)
+0618: assign_actor 41@ to_AS_pack 173@ 
+
+:DRIV3_7363
+061B: remove_references_to_AS_pack 173@ 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_7736 
+Car.LockInCurrentPosition(35@) = True
+Car.DoorStatus(35@) = 2
+if 
+   not Actor.Dead(51@)
+jf @DRIV3_7567 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_7567 
+if 
+8205:   not actor 51@ near_car 35@ radius 40.0 40.0 40.0 flag 0 
+jf @DRIV3_7506 
+Actor.Health(51@) = 0
+Actor.RemoveReferences(51@)
+if 
+   not Car.Wrecked(36@)
+jf @DRIV3_7499 
+Car.RemoveReferences(36@)
+
+:DRIV3_7499
+jump @DRIV3_7567 
+
+:DRIV3_7506
+if 
+   not Car.Wrecked(36@)
+jf @DRIV3_7567 
+0615: define_AS_pack_begin 173@ 
+05CD: AS_actor -1 exit_car 36@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 173@ 
+0618: assign_actor 51@ to_AS_pack 173@ 
+061B: remove_references_to_AS_pack 173@ 
+118@ = Marker.CreateAboveActor(51@)
+
+:DRIV3_7567
+if 
+   not Actor.Dead(52@)
+jf @DRIV3_7736 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_7736 
+if 
+8205:   not actor 52@ near_car 35@ radius 40.0 40.0 40.0 flag 0 
+jf @DRIV3_7675 
+Actor.Health(52@) = 0
+Actor.RemoveReferences(52@)
+if 
+   not Car.Wrecked(37@)
+jf @DRIV3_7668 
+Car.RemoveReferences(37@)
+
+:DRIV3_7668
+jump @DRIV3_7736 
+
+:DRIV3_7675
+if 
+   not Car.Wrecked(37@)
+jf @DRIV3_7736 
+0615: define_AS_pack_begin 173@ 
+05CD: AS_actor -1 exit_car 37@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 173@ 
+0618: assign_actor 52@ to_AS_pack 173@ 
+061B: remove_references_to_AS_pack 173@ 
+119@ = Marker.CreateAboveActor(52@)
+
+:DRIV3_7736
+00BC: show_text_highpriority GXT 'DRI2_12' time 5000 flag 1  // ~s~ Kill those ~r~goons.
+
+:DRIV3_7752
+if 
+  $1796 > 0 
+jf @DRIV3_8413 
+wait 0 
+gosub @DRIV3_14792 
+if 
+  93@ == 1 
+jf @DRIV3_7801 
+return 
+
+:DRIV3_7801
+if 
+  109@ == 0 
+jf @DRIV3_8029 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 62@ 63@ 64@ radius 100.0 100.0 100.0 
+jf @DRIV3_8029 
+if 
+  105@ == 0 
+jf @DRIV3_7902 
+00BC: show_text_highpriority GXT 'DRI2_47' time 5000 flag 1  // ~s~Get back to Toreno and the ~r~van!
+105@ = 1 
+
+:DRIV3_7902
+if 
+  105@ == 1 
+jf @DRIV3_8029 
+if 
+  95@ == 1 
+jf @DRIV3_8029 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_8029 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 35@ radius 400.0 400.0 400.0 flag 0 
+jf @DRIV3_8029 
+90@ = 0 
+89@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_26' time 5000 flag 1  // ~r~You fled leaving Toreno behind!
+return 
+
+:DRIV3_8029
+131@ = 0 
+
+:DRIV3_8036
+if 
+  3 > 131@ 
+jf @DRIV3_8117 
+if 
+   Actor.Dead(42@(131@,9i))
+jf @DRIV3_8103 
+if 
+075C:   marker 124@(131@,3i) enabled 
+jf @DRIV3_8103 
+Marker.Disable(124@(131@,3i))
+
+:DRIV3_8103
+131@ += 1 
+jump @DRIV3_8036 
+
+:DRIV3_8117
+131@ = 0 
+
+:DRIV3_8124
+if 
+  2 > 131@ 
+jf @DRIV3_8205 
+if 
+   Actor.Dead(51@(131@,2i))
+jf @DRIV3_8191 
+if 
+075C:   marker 118@(131@,2i) enabled 
+jf @DRIV3_8191 
+Marker.Disable(118@(131@,2i))
+
+:DRIV3_8191
+131@ += 1 
+jump @DRIV3_8124 
+
+:DRIV3_8205
+if 
+   Actor.Dead(41@)
+jf @DRIV3_8242 
+if 
+075C:   marker 117@ enabled 
+jf @DRIV3_8242 
+Marker.Disable(117@)
+
+:DRIV3_8242
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_8374 
+if and
+   Actor.Dead(42@)
+   Actor.Dead(43@)
+   Actor.Dead(44@)
+   Actor.Dead(41@)
+jf @DRIV3_8367 
+Marker.Disable(124@)
+Marker.Disable(125@)
+Marker.Disable(126@)
+Marker.Disable(117@)
+if 
+   Actor.Dead(51@)
+jf @DRIV3_8367 
+Marker.Disable(118@)
+if 
+   Actor.Dead(52@)
+jf @DRIV3_8367 
+Marker.Disable(119@)
+90@ = 0 
+94@ = 1 
+return 
+
+:DRIV3_8367
+jump @DRIV3_8406 
+
+:DRIV3_8374
+90@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_8406
+jump @DRIV3_7752 
+
+:DRIV3_8413
+90@ = 0 
+93@ = 1 
+020B: explode_car 35@ 
+00BC: show_text_highpriority GXT 'DRI2_5' time 5000 flag 1  // ~r~ Toreno's dead
+return 
+
+:DRIV3_8450
+if 
+  99@ == 0 
+jf @DRIV3_10161 
+178@ = 0 
+wait 2000 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+wait 2000 
+fade 0 1000 
+
+:DRIV3_8503
+if 
+fading 
+jf @DRIV3_8527 
+wait 0 
+jump @DRIV3_8503 
+
+:DRIV3_8527
+Model.Load(#STRETCH)
+
+:DRIV3_8532
+if 
+   not Model.Available(#STRETCH)
+jf @DRIV3_8559 
+wait 0 
+jump @DRIV3_8532 
+
+:DRIV3_8559
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_8651 
+Car.PutAt(35@, -1321.8, -189.79, 13.46)
+Car.Angle(35@) = 60.0
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 6.0 10.5 -0.2 
+34@ = Car.Create(#STRETCH, 77@, 78@, 79@)
+
+:DRIV3_8651
+Model.Destroy(#STRETCH)
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_9270 
+if 
+075C:   marker 115@ enabled 
+jf @DRIV3_8695 
+018B: set_marker 115@ radar_mode 3 
+
+:DRIV3_8695
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 6.0 -6.5 -0.5 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_8761 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 77@ 78@ 79@ 
+jump @DRIV3_8775 
+
+:DRIV3_8761
+Actor.PutAt($PLAYER_ACTOR, 77@, 78@, 79@)
+
+:DRIV3_8775
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset -1.0 -3.5 -0.2 
+if 
+   not Car.Wrecked(36@)
+jf @DRIV3_8863 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset -8.0 -8.0 -0.9 
+Car.PutAt(36@, 77@, 78@, 79@)
+
+:DRIV3_8863
+if 
+   not Car.Wrecked(37@)
+jf @DRIV3_8922 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 8.0 -8.0 -0.9 
+Car.PutAt(37@, 77@, 78@, 79@)
+
+:DRIV3_8922
+if 
+   not Car.Wrecked(38@)
+jf @DRIV3_8981 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 15.0 -20.0 -0.9 
+Car.PutAt(38@, 77@, 78@, 79@)
+
+:DRIV3_8981
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset -2.0 -6.5 -0.5 
+Camera.SetPosition(77@, 78@, 79@, 0.0, 0.0, 0.0)
+Camera.OnVehicle(35@, 15, 2)
+Car.DoorStatus(35@) = 1
+023C: load_special_actor 'TORINO' as 1 // models 290-299 
+
+:DRIV3_9065
+if 
+823D:   not special_actor 1 loaded 
+jf @DRIV3_9091 
+wait 0 
+jump @DRIV3_9065 
+
+:DRIV3_9091
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_9263 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset -6.0 -20.0 0.0 
+40@ = Actor.Create(Mission2, #SPECIAL01, 77@, 78@, 79@)
+04D8: set_actor 40@ drowns_in_water 1 
+0A09: set_actor 40@ muted 1 // versionB 
+09F6: set_actor 40@ unjackable_through_driver_seat 0 
+0350: set_actor 40@ maintain_position_when_attacked 1 
+85@ = Actor.Angle(40@)
+077A: set_actor 40@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 40@ decision_maker_to 87@ 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 1000)
+Actor.SetImmunities(40@, 0, 0, 1, 0, 0)
+0568: set_actor 40@ untargetable 1 
+02A9: set_actor 40@ immune_to_nonplayer 1 
+05CD: AS_actor 40@ exit_car 35@ 
+Car.Health(35@) = 1000
+
+:DRIV3_9263
+jump @DRIV3_9302 
+
+:DRIV3_9270
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_22' time 5000 flag 1  // ~r~Toreno is dead!
+return 
+
+:DRIV3_9302
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB2)
+Model.Destroy(#DNB3)
+Model.Destroy(#MICRO_UZI)
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_9388 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_9388 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DRIV3_9388 
+0337: set_actor $PLAYER_ACTOR visibility 0 
+0337: set_actor 53@ visibility 0 
+0337: set_actor 40@ visibility 0 
+
+:DRIV3_9388
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_9595 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_9588 
+if 
+06EE:   actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_9444 
+06C9: remove_actor 53@ from_group 
+
+:DRIV3_9444
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 6.0 -20.0 0.0 
+if 
+   Actor.Driving(53@)
+jf @DRIV3_9510 
+0362: remove_actor 53@ from_car_and_place_at 77@ 78@ 79@ 
+jump @DRIV3_9524 
+
+:DRIV3_9510
+Actor.PutAt(53@, 77@, 78@, 79@)
+
+:DRIV3_9524
+0350: set_actor 53@ maintain_position_when_attacked 1 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 3.0 -20.0 0.0 
+Actor.PutAt($PLAYER_ACTOR, 77@, 78@, 79@)
+06BA: AS_actor $PLAYER_ACTOR turn_to_and_look_at 56@ 57@ 58@ 
+
+:DRIV3_9588
+jump @DRIV3_9627 
+
+:DRIV3_9595
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_22' time 5000 flag 1  // ~r~Toreno is dead!
+return 
+
+:DRIV3_9627
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(52@)
+Car.Destroy(36@)
+Car.Destroy(37@)
+0395: clear_area 1 at 56@ 57@ 58@ radius 1500.0 
+02E4: load_cutscene_data 'FARL_3B' 
+
+:DRIV3_9706
+if 
+86B9:   not cutscene_data_loaded 
+jf @DRIV3_9730 
+wait 0 
+jump @DRIV3_9706 
+
+:DRIV3_9730
+fade 1 1000 
+0395: clear_area 1 at 56@ 57@ 58@ radius 1500.0 
+02E7: start_cutscene 
+
+:DRIV3_9757
+if 
+82E9:   not cutscene_reached_end 
+jf @DRIV3_9799 
+wait 0 
+0395: clear_area 1 at 56@ 57@ 58@ radius 1500.0 
+jump @DRIV3_9757 
+
+:DRIV3_9799
+02EA: end_cutscene 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_9824 
+0337: set_actor 53@ visibility 1 
+
+:DRIV3_9824
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_9847 
+0337: set_actor 40@ visibility 1 
+
+:DRIV3_9847
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRIV3_9870 
+0337: set_actor $PLAYER_ACTOR visibility 1 
+
+:DRIV3_9870
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_9972 
+Car.LockInCurrentPosition(35@) = False
+Car.DoorStatus(35@) = 2
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_9924 
+0672: AS_actor 40@ attack_car 35@ 
+
+:DRIV3_9924
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_9972 
+if 
+06EE:   actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_9964 
+06C9: remove_actor 53@ from_group 
+
+:DRIV3_9964
+0672: AS_actor 53@ attack_car 35@ 
+
+:DRIV3_9972
+fade 0 0 
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_10062 
+0407: store_coords_to 77@ 78@ 79@ from_car 35@ with_offset 6.0 -6.5 -0.5 
+Car.StorePos(35@, 56@, 57@, 58@)
+0604: get_Z_angle_for_point 56@ 57@ store_to 83@ 
+06BA: AS_actor $PLAYER_ACTOR turn_to_and_look_at 56@ 57@ 58@ 
+
+:DRIV3_10062
+0395: clear_area 1 at 56@ 57@ 58@ radius 1000.0 
+wait 2000 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 1000 
+
+:DRIV3_10096
+if 
+fading 
+jf @DRIV3_10120 
+wait 0 
+jump @DRIV3_10096 
+
+:DRIV3_10120
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+00BC: show_text_highpriority GXT 'DRI2_33' time 10000 flag 1  // ~s~ Destroy the ~r~Van.
+99@ = 1 
+
+:DRIV3_10161
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_10184 
+jump @DRIV3_10216 
+
+:DRIV3_10184
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_22' time 5000 flag 1  // ~r~Toreno is dead!
+return 
+
+:DRIV3_10216
+if 
+   Actor.Dead(53@)
+jf @DRIV3_10292 
+89@ = 0 
+90@ = 0 
+94@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_31' time 5000 flag 1  // ~r~T-Bone's dead!
+return 
+
+:DRIV3_10292
+if 
+  96@ == 0 
+jf @DRIV3_10775 
+if 
+   Car.Wrecked(35@)
+jf @DRIV3_10775 
+96@ = 1 
+Marker.Disable(115@)
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+33@ = 0 
+06F0: set_group $PLAYER_GROUP distance_limit_to 30.0 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_10434 
+0350: set_actor 40@ maintain_position_when_attacked 0 
+if 
+86EE:   not actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_10412 
+0631: put_actor 40@ in_group $PLAYER_GROUP 
+
+:DRIV3_10412
+Actor.SetImmunities(40@, 0, 0, 0, 0, 0)
+jump @DRIV3_10466 
+
+:DRIV3_10434
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_22' time 5000 flag 1  // ~r~Toreno is dead!
+return 
+
+:DRIV3_10466
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_10516 
+0350: set_actor 53@ maintain_position_when_attacked 0 
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_10516 
+0631: put_actor 53@ in_group $PLAYER_GROUP 
+
+:DRIV3_10516
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_10775 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_10775 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 40@ radius 30.0 30.0 30.0 sphere 0 
+jf @DRIV3_10775 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 53@ radius 30.0 30.0 30.0 sphere 0 
+jf @DRIV3_10775 
+00BC: show_text_highpriority GXT 'DRI2_4' time 5000 flag 1  // ~s~ Get the hell outta here before the cops come!
+if 
+02BF:   car 35@ sunk 
+jf @DRIV3_10675 
+00BB: show_text_lowpriority GXT 'DRI2_34' time 10000 flag 1  // ~s~ Get out of the Airport.
+jump @DRIV3_10691 
+
+:DRIV3_10675
+00BB: show_text_lowpriority GXT 'DRI2_24' time 10000 flag 1  // ~s~Take Toreno away from the burning van before the police arrive.
+
+:DRIV3_10691
+if 
+  100@ == 0 
+jf @DRIV3_10736 
+018A: 123@ = create_checkpoint_at -1734.05 -579.94 15.56 
+jump @DRIV3_10775 
+
+:DRIV3_10736
+018A: 120@ = create_checkpoint_at 59@ 60@ 61@ 
+if 
+  108@ == 0 
+jf @DRIV3_10775 
+108@ = 1 
+
+:DRIV3_10775
+if 
+  107@ == 0 
+jf @DRIV3_10887 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_10887 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_10887 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_10887 
+if 
+   Actor.Driving(40@)
+jf @DRIV3_10887 
+if 
+   Actor.Driving(53@)
+jf @DRIV3_10887 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+107@ = 1 
+
+:DRIV3_10887
+if 
+  96@ == 1 
+jf @DRIV3_10959 
+gosub @DRIV3_14237 
+if 
+  93@ == 1 
+jf @DRIV3_10932 
+return 
+
+:DRIV3_10932
+gosub @DRIV3_14792 
+if 
+  93@ == 1 
+jf @DRIV3_10959 
+return 
+
+:DRIV3_10959
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 56@ 57@ 58@ radius 150.0 150.0 150.0 
+jf @DRIV3_11033 
+if 
+  97@ == 0 
+jf @DRIV3_11026 
+97@ = 1 
+
+:DRIV3_11026
+jump @DRIV3_11058 
+
+:DRIV3_11033
+if 
+  97@ == 1 
+jf @DRIV3_11058 
+97@ = 0 
+
+:DRIV3_11058
+if 
+   not Car.Wrecked(35@)
+jf @DRIV3_11088 
+Car.StorePos(35@, 56@, 57@, 58@)
+
+:DRIV3_11088
+if 
+  96@ == 1 
+jf @DRIV3_11417 
+Marker.Disable(115@)
+if 
+0104:   actor $PLAYER_ACTOR near_actor 53@ radius 30.0 30.0 30.0 sphere 0 
+jf @DRIV3_11381 
+if 
+  100@ == 0 
+jf @DRIV3_11224 
+if 
+875C:   not marker 123@ enabled 
+jf @DRIV3_11217 
+018A: 123@ = create_checkpoint_at -1734.05 -579.94 15.56 
+00BC: show_text_highpriority GXT 'DRI2_34' time 5000 flag 1  // ~s~ Get out of the Airport.
+
+:DRIV3_11217
+jump @DRIV3_11295 
+
+:DRIV3_11224
+if 
+875C:   not marker 120@ enabled 
+jf @DRIV3_11295 
+018A: 120@ = create_checkpoint_at 59@ 60@ 61@ 
+00BC: show_text_highpriority GXT 'DRI2_25' time 5000 flag 1  // Get back to ~y~The Pleasure Domes~s~.
+if 
+  108@ == 0 
+jf @DRIV3_11295 
+108@ = 1 
+
+:DRIV3_11295
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_11338 
+if 
+86EE:   not actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_11338 
+0631: put_actor 40@ in_group $PLAYER_GROUP 
+
+:DRIV3_11338
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_11381 
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_11381 
+0631: put_actor 53@ in_group $PLAYER_GROUP 
+
+:DRIV3_11381
+Car.RemoveReferences(34@)
+Car.RemoveReferences(38@)
+Model.Destroy(#BURRITO)
+Model.Destroy(#STRETCH)
+91@ = 1 
+94@ = 0 
+return 
+
+:DRIV3_11417
+return 
+
+:DRIV3_11419
+gosub @DRIV3_14237 
+if 
+  93@ == 1 
+jf @DRIV3_11446 
+return 
+
+:DRIV3_11446
+gosub @DRIV3_14792 
+if 
+  93@ == 1 
+jf @DRIV3_11473 
+return 
+
+:DRIV3_11473
+if 
+  100@ == 1 
+jf @DRIV3_11498 
+gosub @DRIV3_13623 
+
+:DRIV3_11498
+if 
+  107@ == 0 
+jf @DRIV3_11610 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_11610 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_11610 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_11610 
+if 
+   Actor.Driving(40@)
+jf @DRIV3_11610 
+if 
+   Actor.Driving(53@)
+jf @DRIV3_11610 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+107@ = 1 
+
+:DRIV3_11610
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_12093 
+if 
+  110@ == 0 
+jf @DRIV3_12093 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_12086 
+if 
+  112@ == 0 
+jf @DRIV3_12079 
+38@ = Actor.MissionCar($PLAYER_ACTOR)
+01EA: 39@ = car 38@ max_passengers 
+if 
+  2 > 39@ 
+jf @DRIV3_12072 
+040D: unload_wav 1 
+if 
+  111@ == 0 
+jf @DRIV3_11824 
+03CF: load_wav 15241 as 1 
+
+:DRIV3_11741
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_11767 
+wait 0 
+jump @DRIV3_11741 
+
+:DRIV3_11767
+00BC: show_text_highpriority GXT 'FAR3_LC' time 10000 flag 1  // ~z~We're not going to fit in that, think on your feet, kid!
+03D1: play_wav 1 
+
+:DRIV3_11787
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_11813 
+wait 0 
+jump @DRIV3_11787 
+
+:DRIV3_11813
+03D5: remove_text 'FAR3_LC'  // ~z~We're not going to fit in that, think on your feet, kid!
+
+:DRIV3_11824
+if 
+  111@ == 1 
+jf @DRIV3_11932 
+03CF: load_wav 15239 as 1 
+
+:DRIV3_11849
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_11875 
+wait 0 
+jump @DRIV3_11849 
+
+:DRIV3_11875
+00BC: show_text_highpriority GXT 'FAR3_LA' time 10000 flag 1  // ~z~We need a bigger car, come on, move it!
+03D1: play_wav 1 
+
+:DRIV3_11895
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_11921 
+wait 0 
+jump @DRIV3_11895 
+
+:DRIV3_11921
+03D5: remove_text 'FAR3_LA'  // ~z~We need a bigger car, come on, move it!
+
+:DRIV3_11932
+if 
+  111@ == 2 
+jf @DRIV3_12040 
+03CF: load_wav 15240 as 1 
+
+:DRIV3_11957
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_11983 
+wait 0 
+jump @DRIV3_11957 
+
+:DRIV3_11983
+00BC: show_text_highpriority GXT 'FAR3_LB' time 10000 flag 1  // ~z~Too small, come on, think!
+03D1: play_wav 1 
+
+:DRIV3_12003
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_12029 
+wait 0 
+jump @DRIV3_12003 
+
+:DRIV3_12029
+03D5: remove_text 'FAR3_LB'  // ~z~Too small, come on, think!
+
+:DRIV3_12040
+111@ += 1 
+if 
+  111@ >= 3 
+jf @DRIV3_12072 
+111@ = 0 
+
+:DRIV3_12072
+112@ = 1 
+
+:DRIV3_12079
+jump @DRIV3_12093 
+
+:DRIV3_12086
+112@ = 0 
+
+:DRIV3_12093
+if 
+  100@ == 0 
+jf @DRIV3_12236 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1734.05 -579.94 15.56 radius 20.0 20.0 20.0 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 62@ 63@ 64@ radius 600.0 600.0 600.0 
+jf @DRIV3_12236 
+100@ = 1 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 3
+jf @DRIV3_12222 
+Player.SetMinWantedLevel($PLAYER_CHAR, 3)
+
+:DRIV3_12222
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+107@ = 1 
+
+:DRIV3_12236
+if 
+  110@ == 0 
+jf @DRIV3_13621 
+if 
+  109@ == 0 
+jf @DRIV3_13621 
+if 
+  100@ == 0 
+jf @DRIV3_12546 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1734.05 -579.94 15.56 radius 20.0 20.0 20.0 
+jf @DRIV3_12498 
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_12498 
+Marker.Disable(123@)
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 3
+jf @DRIV3_12384 
+Player.SetMinWantedLevel($PLAYER_CHAR, 3)
+
+:DRIV3_12384
+02A8: 128@ = create_marker 63 at 80@ 81@ 82@ 
+00BB: show_text_lowpriority GXT 'DRI2_46' time 5000 flag 1  // ~s~Lose the heat! Get to the Pay 'n' Spray.
+104@ = 1 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_12457 
+077B: clear_actor 40@ acquaintance 1 to_actors_pedtype 6 // see ped.dat 
+077A: set_actor 40@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+
+:DRIV3_12457
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_12491 
+077B: clear_actor 53@ acquaintance 1 to_actors_pedtype 6 // see ped.dat 
+077A: set_actor 53@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+
+:DRIV3_12491
+100@ = 1 
+
+:DRIV3_12498
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1734.05 -579.94 15.56 radius 4.0 4.0 4.0 
+jf @DRIV3_12546 
+
+:DRIV3_12546
+if 
+  108@ == 1 
+jf @DRIV3_13621 
+if 
+  100@ == 1 
+jf @DRIV3_12752 
+if and
+  $7321 >= 33 
+  48 > $7321 
+jf @DRIV3_12752 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV3_12752 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_12752 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_12752 
+if 
+   Actor.Driving(53@)
+jf @DRIV3_12752 
+if 
+   Actor.Driving(40@)
+jf @DRIV3_12752 
+if 
+  $7321 == 33 
+jf @DRIV3_12745 
+132@ = 25 
+if 
+  32@ > 10000 
+jf @DRIV3_12738 
+gosub @DRIV3_15727 
+
+:DRIV3_12738
+jump @DRIV3_12752 
+
+:DRIV3_12745
+gosub @DRIV3_15727 
+
+:DRIV3_12752
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 59@ 60@ 61@ radius 4.0 4.0 4.0 
+jf @DRIV3_13621 
+91@ = 0 
+92@ = 1 
+178@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+32@ = 0 
+33@ = 0 
+
+:DRIV3_12840
+if 
+  8000 > 32@ 
+jf @DRIV3_13591 
+wait 0 
+if 
+  178@ == 0 
+jf @DRIV3_13071 
+04C4: store_coords_to 77@ 78@ 79@ from_actor $PLAYER_ACTOR with_offset 3.0 8.0 0.4 
+Camera.SetPosition(77@, 78@, 79@, 0.0, 0.0, 0.0)
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+0395: clear_area 1 at 59@ 60@ 61@ radius 100.0 
+040D: unload_wav 1 
+03CF: load_wav 15257 as 1 
+
+:DRIV3_12974
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_13000 
+wait 0 
+jump @DRIV3_12974 
+
+:DRIV3_13000
+00BC: show_text_highpriority GXT 'FAR3_NA' time 10000 flag 1  // ~z~OK, Carl Johnson, you did good today.
+03D1: play_wav 1 
+
+:DRIV3_13020
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_13046 
+wait 0 
+jump @DRIV3_13020 
+
+:DRIV3_13046
+03D5: remove_text 'FAR3_NA'  // ~z~OK, Carl Johnson, you did good today.
+178@ = 1 
+33@ = 0 
+
+:DRIV3_13071
+if 
+  178@ == 1 
+jf @DRIV3_13341 
+if 
+  33@ > 500 
+jf @DRIV3_13341 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_13341 
+04C4: store_coords_to 77@ 78@ 79@ from_actor 40@ with_offset 3.0 -2.0 0.5 
+Camera.SetPosition(77@, 78@, 79@, 0.0, 0.0, 0.0)
+Camera.OnPed(40@, 15, 2)
+if 
+06EE:   actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_13212 
+06C9: remove_actor 40@ from_group 
+
+:DRIV3_13212
+if 
+   Actor.Driving(40@)
+jf @DRIV3_13233 
+0633: AS_actor 40@ exit_car 
+
+:DRIV3_13233
+040D: unload_wav 1 
+03CF: load_wav 15258 as 1 
+
+:DRIV3_13244
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV3_13270 
+wait 0 
+jump @DRIV3_13244 
+
+:DRIV3_13270
+00BC: show_text_highpriority GXT 'FAR3_NB' time 10000 flag 1  // ~z~Man, now shake the spot, we got shit to talk about.
+03D1: play_wav 1 
+
+:DRIV3_13290
+if 
+83D2:   not wav 1 ended 
+jf @DRIV3_13316 
+wait 0 
+jump @DRIV3_13290 
+
+:DRIV3_13316
+03D5: remove_text 'FAR3_NB'  // ~z~Man, now shake the spot, we got shit to talk about.
+33@ = 0 
+178@ = 2 
+
+:DRIV3_13341
+if 
+  178@ == 2 
+jf @DRIV3_13493 
+if 
+  33@ > 500 
+jf @DRIV3_13493 
+178@ = 3 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_13425 
+05D3: AS_actor 40@ goto_point -2624.57 1410.46 6.5 mode 4 time -1 ms // versionA 
+
+:DRIV3_13425
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_13493 
+if 
+06EE:   actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_13465 
+06C9: remove_actor 53@ from_group 
+
+:DRIV3_13465
+if 
+   Actor.Driving(53@)
+jf @DRIV3_13493 
+0633: AS_actor 53@ exit_car 
+33@ = 0 
+
+:DRIV3_13493
+if 
+  178@ == 3 
+jf @DRIV3_13584 
+if 
+  33@ > 200 
+jf @DRIV3_13584 
+178@ = 4 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_13577 
+05D3: AS_actor 53@ goto_point -2625.57 1409.46 6.5 mode 4 time -1 ms // versionA 
+
+:DRIV3_13577
+33@ = 0 
+
+:DRIV3_13584
+jump @DRIV3_12840 
+
+:DRIV3_13591
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(53@)
+Car.RemoveReferences(38@)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+
+:DRIV3_13621
+return 
+
+:DRIV3_13623
+if 
+  100@ == 1 
+jf @DRIV3_14235 
+if 
+  104@ == 0 
+jf @DRIV3_13901 
+if and
+  110@ == 0 
+  109@ == 0 
+jf @DRIV3_13901 
+if 
+   Player.WantedLevel($PLAYER_CHAR) > 0
+jf @DRIV3_13901 
+104@ = 1 
+if 
+875C:   not marker 128@ enabled 
+jf @DRIV3_13757 
+02A8: 128@ = create_marker 63 at 80@ 81@ 82@ 
+00BB: show_text_lowpriority GXT 'DRI2_46' time 5000 flag 1  // ~s~Lose the heat! Get to the Pay 'n' Spray.
+
+:DRIV3_13757
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_13778 
+Marker.Disable(123@)
+
+:DRIV3_13778
+if 
+075C:   marker 120@ enabled 
+jf @DRIV3_13799 
+Marker.Disable(120@)
+
+:DRIV3_13799
+0709: set_decision_maker 87@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_13867 
+077A: set_actor 40@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+077B: clear_actor 40@ acquaintance 1 to_actors_pedtype 6 // see ped.dat 
+
+:DRIV3_13867
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_13901 
+077A: set_actor 53@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+077B: clear_actor 53@ acquaintance 1 to_actors_pedtype 6 // see ped.dat 
+
+:DRIV3_13901
+if 
+  104@ == 1 
+jf @DRIV3_14235 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 0
+jf @DRIV3_14235 
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_14034 
+077B: clear_actor 40@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+if 
+06EE:   actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_13986 
+06C9: remove_actor 40@ from_group 
+
+:DRIV3_13986
+0687: clear_actor 40@ task 
+if 
+86EE:   not actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_14025 
+0631: put_actor 40@ in_group $PLAYER_GROUP 
+0940: set_group $PLAYER_GROUP enters_leaders_vehicle 1 
+
+:DRIV3_14025
+077A: set_actor 40@ acquaintance 1 to_actors_pedtype 6 // see ped.dat 
+
+:DRIV3_14034
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_14122 
+077B: clear_actor 53@ acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+if 
+06EE:   actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_14083 
+06C9: remove_actor 53@ from_group 
+
+:DRIV3_14083
+0687: clear_actor 53@ task 
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_14122 
+0631: put_actor 53@ in_group $PLAYER_GROUP 
+0940: set_group $PLAYER_GROUP enters_leaders_vehicle 1 
+
+:DRIV3_14122
+0708: reset_decision_maker 87@ event 36 
+104@ = 0 
+32@ = 0 
+if 
+875C:   not marker 120@ enabled 
+jf @DRIV3_14214 
+018A: 120@ = create_checkpoint_at 59@ 60@ 61@ 
+00BC: show_text_highpriority GXT 'DRI2_25' time 5000 flag 1  // Get back to ~y~The Pleasure Domes~s~.
+if 
+  108@ == 0 
+jf @DRIV3_14214 
+108@ = 1 
+
+:DRIV3_14214
+if 
+075C:   marker 128@ enabled 
+jf @DRIV3_14235 
+Marker.Disable(128@)
+
+:DRIV3_14235
+return 
+
+:DRIV3_14237
+if 
+   not Actor.Dead(40@)
+jf @DRIV3_14751 
+if 
+  110@ == 0 
+jf @DRIV3_14391 
+if 
+86EE:   not actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_14391 
+00BC: show_text_highpriority GXT 'DRI2_3' time 5000 flag 1  // ~s~ You left ~b~Toreno~s~ behind. Go back and get him.
+if 
+075C:   marker 120@ enabled 
+jf @DRIV3_14327 
+Marker.Disable(120@)
+
+:DRIV3_14327
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_14348 
+Marker.Disable(123@)
+
+:DRIV3_14348
+if 
+075C:   marker 127@ enabled 
+jf @DRIV3_14369 
+Marker.Disable(127@)
+
+:DRIV3_14369
+121@ = Marker.CreateAboveActor(40@)
+07E0: set_marker 121@ type_to 1 
+110@ = 1 
+
+:DRIV3_14391
+if 
+  110@ == 1 
+jf @DRIV3_14744 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 40@ radius 8.0 8.0 8.0 sphere 0 
+jf @DRIV3_14744 
+if 
+86EE:   not actor 40@ in_group $PLAYER_GROUP 
+jf @DRIV3_14472 
+0631: put_actor 40@ in_group $PLAYER_GROUP 
+
+:DRIV3_14472
+110@ = 0 
+Marker.Disable(121@)
+if 
+  109@ == 0 
+jf @DRIV3_14744 
+if 
+  100@ == 1 
+jf @DRIV3_14692 
+if 
+  104@ == 0 
+jf @DRIV3_14616 
+if 
+875C:   not marker 120@ enabled 
+jf @DRIV3_14609 
+018A: 120@ = create_checkpoint_at 59@ 60@ 61@ 
+00BC: show_text_highpriority GXT 'DRI2_25' time 5000 flag 1  // Get back to ~y~The Pleasure Domes~s~.
+if 
+  108@ == 0 
+jf @DRIV3_14609 
+108@ = 1 
+
+:DRIV3_14609
+jump @DRIV3_14685 
+
+:DRIV3_14616
+if 
+875C:   not marker 128@ enabled 
+jf @DRIV3_14648 
+02A8: 128@ = create_marker 63 at 80@ 81@ 82@ 
+
+:DRIV3_14648
+00BC: show_text_highpriority GXT 'DRI2_46' time 5000 flag 1  // ~s~Lose the heat! Get to the Pay 'n' Spray.
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_14685 
+Marker.Disable(123@)
+
+:DRIV3_14685
+jump @DRIV3_14744 
+
+:DRIV3_14692
+if 
+875C:   not marker 123@ enabled 
+jf @DRIV3_14728 
+018A: 123@ = create_checkpoint_at -1734.05 -579.94 15.56 
+
+:DRIV3_14728
+00BC: show_text_highpriority GXT 'DRI2_34' time 5000 flag 1  // ~s~ Get out of the Airport.
+
+:DRIV3_14744
+jump @DRIV3_14790 
+
+:DRIV3_14751
+94@ = 0 
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_22' time 5000 flag 1  // ~r~Toreno is dead!
+return 
+
+:DRIV3_14790
+return 
+
+:DRIV3_14792
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_15677 
+if 
+  109@ == 0 
+jf @DRIV3_14967 
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_14967 
+00BC: show_text_highpriority GXT 'DRI2_32' time 5000 flag 1  // ~s~ You left ~b~T-Bone~s~ behind. Go back and get him.
+if 
+075C:   marker 120@ enabled 
+jf @DRIV3_14882 
+Marker.Disable(120@)
+
+:DRIV3_14882
+if 
+075C:   marker 127@ enabled 
+jf @DRIV3_14903 
+Marker.Disable(127@)
+
+:DRIV3_14903
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_14924 
+Marker.Disable(123@)
+
+:DRIV3_14924
+if 
+075C:   marker 116@ enabled 
+jf @DRIV3_14945 
+Marker.Disable(116@)
+
+:DRIV3_14945
+122@ = Marker.CreateAboveActor(53@)
+07E0: set_marker 122@ type_to 1 
+109@ = 1 
+
+:DRIV3_14967
+if 
+  109@ == 1 
+jf @DRIV3_15670 
+if 
+   not Actor.Dead(53@)
+jf @DRIV3_15624 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 53@ radius 8.0 8.0 8.0 sphere 0 
+jf @DRIV3_15617 
+if 
+86EE:   not actor 53@ in_group $PLAYER_GROUP 
+jf @DRIV3_15064 
+0631: put_actor 53@ in_group $PLAYER_GROUP 
+
+:DRIV3_15064
+109@ = 0 
+Marker.Disable(122@)
+if 
+  110@ == 0 
+jf @DRIV3_15354 
+if 
+  91@ == 1 
+jf @DRIV3_15354 
+if 
+  100@ == 1 
+jf @DRIV3_15302 
+if 
+  104@ == 0 
+jf @DRIV3_15226 
+if 
+875C:   not marker 120@ enabled 
+jf @DRIV3_15219 
+018A: 120@ = create_checkpoint_at 59@ 60@ 61@ 
+00BC: show_text_highpriority GXT 'DRI2_25' time 5000 flag 1  // Get back to ~y~The Pleasure Domes~s~.
+if 
+  108@ == 0 
+jf @DRIV3_15219 
+108@ = 1 
+
+:DRIV3_15219
+jump @DRIV3_15295 
+
+:DRIV3_15226
+if 
+875C:   not marker 128@ enabled 
+jf @DRIV3_15258 
+02A8: 128@ = create_marker 63 at 80@ 81@ 82@ 
+
+:DRIV3_15258
+00BC: show_text_highpriority GXT 'DRI2_46' time 5000 flag 1  // ~s~Lose the heat! Get to the Pay 'n' Spray.
+if 
+075C:   marker 123@ enabled 
+jf @DRIV3_15295 
+Marker.Disable(123@)
+
+:DRIV3_15295
+jump @DRIV3_15354 
+
+:DRIV3_15302
+if 
+875C:   not marker 123@ enabled 
+jf @DRIV3_15338 
+018A: 123@ = create_checkpoint_at -1734.05 -579.94 15.56 
+
+:DRIV3_15338
+00BC: show_text_highpriority GXT 'DRI2_34' time 5000 flag 1  // ~s~ Get out of the Airport.
+
+:DRIV3_15354
+if 
+  89@ == 1 
+jf @DRIV3_15617 
+if and
+  $7321 >= 5 
+  8 > $7321 
+jf @DRIV3_15433 
+if 
+875C:   not marker 127@ enabled 
+jf @DRIV3_15433 
+018A: 127@ = create_checkpoint_at -2071.0 209.0 35.0 
+
+:DRIV3_15433
+if and
+  $7321 >= 9 
+  15 > $7321 
+jf @DRIV3_15494 
+if 
+875C:   not marker 127@ enabled 
+jf @DRIV3_15494 
+018A: 127@ = create_checkpoint_at -1772.0 152.0 152.0 
+
+:DRIV3_15494
+if and
+  $7321 >= 15 
+  24 > $7321 
+jf @DRIV3_15549 
+if 
+875C:   not marker 127@ enabled 
+jf @DRIV3_15549 
+018A: 116@ = create_checkpoint_at 71@ 72@ 73@ 
+
+:DRIV3_15549
+if 
+  89@ == 1 
+jf @DRIV3_15617 
+if 
+  0 >= $1796 
+jf @DRIV3_15617 
+89@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'FAR3_FD' time 5000 flag 1  // ~z~Shit, Mike's phone's dead!
+return 
+
+:DRIV3_15617
+jump @DRIV3_15670 
+
+:DRIV3_15624
+90@ = 0 
+89@ = 0 
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_31' time 5000 flag 1  // ~r~T-Bone's dead!
+return 
+
+:DRIV3_15670
+jump @DRIV3_15725 
+
+:DRIV3_15677
+90@ = 0 
+89@ = 0 
+94@ = 0 
+93@ = 1 
+00BC: show_text_highpriority GXT 'DRI2_31' time 5000 flag 1  // ~r~T-Bone's dead!
+return 
+return 
+
+:DRIV3_15725
+return 
+
+:DRIV3_15727
+if 
+  106@ == 0 
+jf @DRIV3_15767 
+040D: unload_wav 1 
+03CF: load_wav 133@(132@,40i) as 1 
+106@ = 1 
+
+:DRIV3_15767
+if 
+  106@ == 1 
+jf @DRIV3_16034 
+if 
+03D0:   wav 1 loaded 
+jf @DRIV3_16034 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT $7322(132@,40s) time 10000 flag 1 
+if 
+  $7321 == 0 
+jf @DRIV3_15843 
+102@ = 1 
+
+:DRIV3_15843
+if 
+  $7321 == 5 
+jf @DRIV3_15897 
+if 
+875C:   not marker 127@ enabled 
+jf @DRIV3_15897 
+018A: 127@ = create_checkpoint_at -2071.0 209.0 35.0 
+
+:DRIV3_15897
+if 
+  $7321 == 8 
+jf @DRIV3_15927 
+Marker.Disable(127@)
+102@ = 1 
+
+:DRIV3_15927
+if 
+  $7321 == 11 
+jf @DRIV3_15965 
+018A: 127@ = create_checkpoint_at -1772.0 152.0 152.0 
+
+:DRIV3_15965
+if 
+  $7321 == 14 
+jf @DRIV3_15995 
+102@ = 1 
+Marker.Disable(127@)
+
+:DRIV3_15995
+if 
+  $7321 == 18 
+jf @DRIV3_16027 
+018A: 116@ = create_checkpoint_at 71@ 72@ 73@ 
+
+:DRIV3_16027
+106@ = 2 
+
+:DRIV3_16034
+if 
+  106@ == 2 
+jf @DRIV3_16104 
+if 
+03D2:   wav 1 ended 
+jf @DRIV3_16104 
+32@ = 0 
+106@ = 0 
+03D5: remove_text $7322(132@,40s) 
+132@ += 1 
+$7321 += 1 
+
+:DRIV3_16104
+return 
+
+:DRIV3_16106
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Marker.Disable($526)
+01E3: show_text_1number_styled GXT 'M_PASSS' number 7000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 7000
+0998: add_respect 25 
+$SYNDICATE_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'FAR_3'  // Mike Toreno
+030C: progress_made = 1 
+Marker.Disable($526)
+$526 = Marker.CreateIconAndSphere($ICON_LOCOSYNDICATE, $X_SF_GARAGE, $Y_SF_GARAGE, $Z_SF_GARAGE)
+0629: change_integer_stat 311 to 1 
+return 
+
+:DRIV3_16204
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DRIV3_16272 
+$11033 = 1 
+$11029 = 135.0 
+$11032 = -2570.34 
+$11031 = 1363.52 
+$11030 = 6.64 
+
+:DRIV3_16272
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DRIV3_16290
+$ONMISSION = 0 
+$ONMISSION_MIKE_TORENO = 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRIV3_16327 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:DRIV3_16327
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#BURRITO)
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB2)
+Model.Destroy(#DNB3)
+Pickup.Destroy(55@)
+Model.Destroy(#STRETCH)
+131@ = 0 
+
+:DRIV3_16373
+if 
+  3 > 131@ 
+jf @DRIV3_16414 
+Actor.RemoveReferences(42@(131@,9i))
+131@ += 1 
+jump @DRIV3_16373 
+
+:DRIV3_16414
+Actor.RemoveReferences(51@)
+Actor.RemoveReferences(52@)
+Actor.DestroyWithFade(40@)
+Actor.DestroyWithFade(53@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+Car.RemoveReferences(35@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(34@)
+Model.Destroy(#FREEWAY)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(37@)
+Car.RemoveReferences(38@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+Marker.Disable(126@)
+Marker.Disable(114@)
+Marker.Disable(115@)
+Marker.Disable(116@)
+Marker.Disable(117@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+Marker.Disable(127@)
+Marker.Disable(118@)
+Marker.Disable(119@)
+Marker.Disable(128@)
+Car.RemoveReferences(38@)
+Model.Destroy(#PREMIER)
+014F: stop_timer $1796 
+0151: remove_status_text $1797 
+$2653 = Marker.CreateIconWithoutSphere(63, -1908.9, 292.3, 40.0)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

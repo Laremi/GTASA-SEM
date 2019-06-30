@@ -1,0 +1,559 @@
+:DES10
+gosub @DES10_36 
+if 
+wasted_or_busted 
+jf @DES10_27 
+gosub @DES10_4112 
+
+:DES10_27
+gosub @DES10_4515 
+end_thread 
+
+:DES10_36
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'DES10' 
+wait 0 
+054C: use_GXT_table 'DSERT10' 
+set_weather 17 
+08F5: save_player_group 
+0652: 57@ = integer_stat 21 
+if 
+  57@ > 600 
+jf @DES10_330 
+02E4: load_cutscene_data 'D10_ALT' 
+
+:DES10_114
+if 
+86B9:   not cutscene_data_loaded 
+jf @DES10_138 
+wait 0 
+jump @DES10_114 
+
+:DES10_138
+0395: clear_area 0 at 405.2136 2525.9 16.4918 radius 7.5 
+02E7: start_cutscene 
+fade 1 1000 
+
+:DES10_171
+if 
+82E9:   not cutscene_reached_end 
+jf @DES10_195 
+wait 0 
+jump @DES10_171 
+
+:DES10_195
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DES10_208
+if 
+fading 
+jf @DES10_232 
+wait 0 
+jump @DES10_208 
+
+:DES10_232
+02EA: end_cutscene 
+0395: clear_area 0 at 419.4488 2529.914 15.6219 radius 0.5 
+Camera.SetAtPos(419.4488, 2529.914, 15.6219)
+Actor.PutAt($PLAYER_ACTOR, 419.4488, 2529.914, 15.6219)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Camera.SetBehindPlayer
+fade 1 1500 
+Player.CanMove($PLAYER_CHAR) = True
+return 
+jump @DES10_461 
+
+:DES10_330
+02E4: load_cutscene_data 'DES_10A' 
+
+:DES10_341
+if 
+86B9:   not cutscene_data_loaded 
+jf @DES10_365 
+wait 0 
+jump @DES10_341 
+
+:DES10_365
+0395: clear_area 0 at 419.6919 2529.914 16.6612 radius 6.86 
+02E7: start_cutscene 
+fade 1 1000 
+
+:DES10_398
+if 
+82E9:   not cutscene_reached_end 
+jf @DES10_422 
+wait 0 
+jump @DES10_398 
+
+:DES10_422
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DES10_435
+if 
+fading 
+jf @DES10_459 
+wait 0 
+jump @DES10_435 
+
+:DES10_459
+02EA: end_cutscene 
+
+:DES10_461
+01B7: release_weather 
+Model.Load(#MICRO_UZI)
+Model.Load(#FREIGHT)
+Model.Load(#FREIFLAT)
+Model.Load(#MP5LNG)
+Model.Load(#RHINO)
+Model.Load(#ARMY)
+Model.Load(#JETPACK)
+038B: load_requested_models 
+
+:DES10_500
+if or
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#FREIGHT)
+   not Model.Available(#FREIFLAT)
+   not Model.Available(#MP5LNG)
+   not Model.Available(#RHINO)
+   not Model.Available(#ARMY)
+jf @DES10_552 
+wait 0 
+jump @DES10_500 
+
+:DES10_552
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @DES10_579 
+wait 0 
+jump @DES10_552 
+
+:DES10_579
+06D7: enable_train_traffic 0 
+0395: clear_area 0 at 419.4488 2529.914 15.6219 radius 0.5 
+Camera.SetAtPos(419.4488, 2529.914, 15.6219)
+Actor.PutAt($PLAYER_ACTOR, 419.4488, 2529.914, 15.6219)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Camera.SetBehindPlayer
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+07A7: put_jetpack_on_actor $PLAYER_ACTOR 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 2000)
+
+:DES10_678
+if 
+   not Model.Available(#JETPACK)
+jf @DES10_705 
+wait 0 
+jump @DES10_678 
+
+:DES10_705
+08F6: restore_player_group 
+fade 1 1500 
+Player.CanMove($PLAYER_CHAR) = True
+06D8: 58@ = create_train_at 2120.257 2694.058 9.8359 type 13 direction 0 
+Car.DoorStatus(58@) = 2
+06DC: set_train 58@ acc 5.0 
+06DD: set_train 58@ speed 5.0 
+00BC: show_text_highpriority GXT 'DE10_01' time 5000 flag 1  // ~s~Fly the jet pack to the ~g~train~s~, and steal whatever they least want you to get.
+Car.StorePos(58@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 10.0 
+44@ = 0 
+
+:DES10_819
+if 
+  12 > 44@ 
+jf @DES10_960 
+66@(44@,12i) = Actor.Create(CivMale, #ARMY, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0638: AS_actor 66@(44@,12i) stay_put 1 
+02A9: set_actor 66@(44@,12i) immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(66@(44@,12i), MP5, 9999)
+05E2: AS_actor 66@(44@,12i) kill_actor $PLAYER_ACTOR 
+077A: set_actor 66@(44@,12i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060F: set_actor 66@(44@,12i) melee_accuracy_to 150.0 
+0588: disable_actor 66@(44@,12i) validate_position 0 
+44@ += 1 
+jump @DES10_819 
+
+:DES10_960
+0464: put_actor 66@ into_turret_on_car 58@ at_car_offset -0.0032 -8.3584 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 67@ into_turret_on_car 58@ at_car_offset 0.1129 6.521 1.9285 position 1 shooting_angle_limit 360.0 with_weapon 29 
+078A: 59@ = get_train 58@ carriage 1 handle 
+0464: put_actor 68@ into_turret_on_car 59@ at_car_offset -0.014 -7.179 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 69@ into_turret_on_car 59@ at_car_offset -1.0891 0.6968 -0.055 position 1 shooting_angle_limit 360.0 with_weapon 29 
+78@ = Object.Init(#KMILITARY_CRATE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 78@ to_car 59@ with_offset -0.0485 5.578 -1.0661 rotation 0.0 0.0 90.1967 
+035D: set_object 78@ targetable 1 
+071F: set_object 78@ health_to 180 
+81@ = Marker.CreateAboveObject(78@)
+84@ = Object.Init(#KMILITARY_BASE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 84@ to_car 59@ with_offset -0.0485 5.578 -1.0661 rotation 0.0 0.0 90.1967 
+85@ = Object.Init(#BLOCKPALLET, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 85@ to_car 59@ with_offset 0.2634 1.2508 -0.3321 rotation 0.0 0.0 90.1967 
+86@ = Object.Init(#TEMP_CRATE1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 86@ to_car 59@ with_offset 1.1025 -7.3122 -1.0766 rotation 0.0 0.0 90.1967 
+87@ = Object.Init(#TEMP_CRATE1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 87@ to_car 59@ with_offset 0.8835 -6.5365 -1.1047 rotation 0.0 0.0 93.7464 
+88@ = Object.Init(#TEMP_CRATE1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 88@ to_car 59@ with_offset 1.1395 -5.6969 -1.0827 rotation 0.0 0.0 83.6459 
+89@ = Object.Init(#K_SMASHBOXES, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 89@ to_car 59@ with_offset 0.4817 -1.5356 -1.0651 rotation 0.0 0.0 93.1856 
+078A: 60@ = get_train 58@ carriage 2 handle 
+0464: put_actor 70@ into_turret_on_car 60@ at_car_offset -0.014 -7.179 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 71@ into_turret_on_car 60@ at_car_offset -1.0891 0.6968 -0.055 position 1 shooting_angle_limit 360.0 with_weapon 29 
+078A: 61@ = get_train 58@ carriage 3 handle 
+0464: put_actor 72@ into_turret_on_car 61@ at_car_offset 0.3372 -1.3877 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 73@ into_turret_on_car 61@ at_car_offset -0.0956 2.1291 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+79@ = Object.Init(#KMILITARY_CRATE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 79@ to_car 61@ with_offset -0.0403 4.0293 -1.0661 rotation 0.0 0.0 90.1967 
+035D: set_object 79@ targetable 1 
+071F: set_object 79@ health_to 180 
+82@ = Marker.CreateAboveObject(79@)
+90@ = Object.Init(#KMILITARY_BASE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 90@ to_car 61@ with_offset -0.0403 4.0293 -1.0661 rotation 0.0 0.0 2.7605 
+91@ = Object.Init(#K_CARGO1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 91@ to_car 61@ with_offset -0.0177 0.6971 -1.0662 rotation 0.0 0.0 91.0 
+92@ = Object.Init(#K_SMASHBOXES, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 92@ to_car 61@ with_offset -0.0228 -2.9213 -1.0651 rotation 0.0 0.0 87.9095 
+93@ = Object.Init(#K_SMASHBOXES, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 93@ to_car 61@ with_offset 0.1054 6.4364 -1.0651 rotation 0.0 0.0 89.7187 
+96@ = Object.Init(#K_CARGO4, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 96@ to_car 61@ with_offset 0.4192 -6.0624 -1.0628 rotation 0.0 0.0 2.7605 
+078A: 62@ = get_train 58@ carriage 4 handle 
+0464: put_actor 74@ into_turret_on_car 62@ at_car_offset -0.516 7.4724 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+103@ = Car.Create(#RHINO, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.DoorStatus(103@) = 2
+0683: attach_car 103@ to_car 62@ with_offset 0.0 0.0 0.0 rotation 0.0 0.0 0.0 
+078A: 63@ = get_train 58@ carriage 5 handle 
+0464: put_actor 75@ into_turret_on_car 63@ at_car_offset 0.2861 -5.3712 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 76@ into_turret_on_car 63@ at_car_offset -0.2277 7.3808 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 77@ into_turret_on_car 63@ at_car_offset 0.6604 3.8015 -0.055 position 3 shooting_angle_limit 360.0 with_weapon 29 
+80@ = Object.Init(#KMILITARY_CRATE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 80@ to_car 63@ with_offset 0.0853 5.9501 -1.0583 rotation 0.0 0.0 90.1967 
+035D: set_object 80@ targetable 1 
+071F: set_object 80@ health_to 180 
+83@ = Marker.CreateAboveObject(80@)
+97@ = Object.Init(#KMILITARY_BASE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 97@ to_car 63@ with_offset 0.0853 5.9501 -1.0583 rotation 0.0 0.0 92.239 
+98@ = Object.Init(#K_CARGO4, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 98@ to_car 63@ with_offset -0.8464 -6.5879 -1.0628 rotation 0.0 0.0 0.12 
+100@ = Object.Init(#K_CARGO1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 100@ to_car 63@ with_offset 0.8877 0.1707 -1.0564 rotation 0.0 0.0 177.5167 
+101@ = Object.Init(#K_CARGO1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 101@ to_car 63@ with_offset -0.6907 0.205 -1.0662 rotation 0.0 0.0 179.6863 
+102@ = Object.Init(#K_CARGO1, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0681: attach_object 102@ to_car 63@ with_offset 0.0036 2.2326 -1.0644 rotation 0.0 0.0 267.6086 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+108@ = 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+008B: 36@ = $CURRENT_TIME_IN_MS2 // (int) 
+36@ += 600000 
+35@ = 0 
+109@ = 0 
+03CF: load_wav 40600 as 3 
+
+:DES10_2651
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DES10_2682 
+jump @DES10_4130 
+
+:DES10_2682
+if 
+   not Car.Wrecked(58@)
+jf @DES10_2708 
+06DD: set_train 58@ speed 10.0 
+
+:DES10_2708
+if 
+  109@ == 0 
+jf @DES10_2780 
+if 
+0202:   actor $PLAYER_ACTOR near_car 58@ radius 150.0 150.0 sphere 0 
+jf @DES10_2780 
+00BC: show_text_highpriority GXT 'DE10_06' time 5000 flag 1  // ~s~Shoot the ~g~crates~s~ on the train to find the jar of green goo.
+109@ += 1 
+
+:DES10_2780
+44@ = 0 
+
+:DES10_2787
+if 
+  3 > 44@ 
+jf @DES10_3998 
+if 
+  104@(44@,3i) == 0 
+jf @DES10_2865 
+if 
+03CA:   object 78@(44@,3i) exists 
+jf @DES10_2865 
+107@ += 1 
+104@(44@,3i) += 1 
+
+:DES10_2865
+if 
+  104@(44@,3i) == 1 
+jf @DES10_2934 
+if 
+0366:   object 78@(44@,3i) damaged 
+jf @DES10_2934 
+Marker.Disable(81@(44@,3i))
+108@ += 1 
+104@(44@,3i) += 1 
+
+:DES10_2934
+if 
+  104@(44@,3i) == 2 
+jf @DES10_3393 
+if 
+003B:   108@ == 107@ // (int) 
+jf @DES10_3357 
+Object.StorePos(78@(44@,3i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 1.0 
+Object.Destroy(78@(44@,3i))
+78@(44@,3i) = Object.Init(#GREEN_GLOOP, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  44@ == 0 
+jf @DES10_3116 
+if 
+   not Car.Wrecked(59@)
+jf @DES10_3109 
+0681: attach_object 78@(44@,3i) to_car 59@ with_offset -0.0485 5.578 -0.0661 rotation 0.0 0.0 90.1967 
+
+:DES10_3109
+jump @DES10_3257 
+
+:DES10_3116
+if 
+  44@ == 1 
+jf @DES10_3199 
+if 
+   not Car.Wrecked(61@)
+jf @DES10_3192 
+0681: attach_object 78@(44@,3i) to_car 61@ with_offset -0.0485 5.578 -0.0661 rotation 0.0 0.0 90.1967 
+
+:DES10_3192
+jump @DES10_3257 
+
+:DES10_3199
+if 
+   not Car.Wrecked(63@)
+jf @DES10_3257 
+0681: attach_object 78@(44@,3i) to_car 63@ with_offset -0.0485 5.578 -0.0661 rotation 0.0 0.0 90.1967 
+
+:DES10_3257
+Object.CollisionDetection(78@(44@,3i)) = False
+81@(44@,3i) = Marker.CreateAboveObject(78@(44@,3i))
+00BC: show_text_highpriority GXT 'DE10_02' time 5000 flag 1  // ~s~That's the right one! Grab the ~g~jar of green goo.
+03CF: load_wav 40600 as 3 
+if 
+03D0:   wav 3 loaded 
+jf @DES10_3339 
+097C: attach_wav 3 to_object 78@(44@,3i) 
+03D1: play_wav 3 
+
+:DES10_3339
+104@(44@,3i) = 4 
+jump @DES10_3393 
+
+:DES10_3357
+Object.RemoveReferences(78@(44@,3i))
+00BC: show_text_highpriority GXT 'DE10_03' time 5000 flag 1  // ~s~The ~g~crate~s~ is empty, try another.
+104@(44@,3i) += 1 
+
+:DES10_3393
+if 
+  104@(44@,3i) == 4 
+jf @DES10_3660 
+Object.StorePos(78@(44@,3i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+005B: 110@ += 111@ // (float) 
+if 
+  110@ > 0.2 
+jf @DES10_3472 
+111@ = -0.01 
+
+:DES10_3472
+if 
+  0.0 > 110@ 
+jf @DES10_3513 
+110@ = 0.0 
+111@ = 0.01 
+
+:DES10_3513
+04D5: create_corona_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 110@ type 2 flare 2 RGB 0 255 0 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 1.5 1.5 1.5 
+jf @DES10_3660 
+Object.Destroy(78@(44@,3i))
+040D: unload_wav 3 
+00BC: show_text_highpriority GXT 'DE10_04' time 5000 flag 1  // ~s~You have the jar of green goo. Take it to ~y~The Truth.
+Marker.Disable(81@(44@,3i))
+018A: 81@(44@,3i) = create_checkpoint_at 408.7383 2515.838 15.4918 
+104@(44@,3i) += 1 
+35@ += 1 
+
+:DES10_3660
+if 
+  104@(44@,3i) == 5 
+jf @DES10_3984 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 408.7383 2515.838 15.4918 radius 1.5 1.5 1.5 
+jf @DES10_3984 
+fade 0 1000 
+
+:DES10_3737
+if 
+fading 
+jf @DES10_3761 
+wait 0 
+jump @DES10_3737 
+
+:DES10_3761
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+02E4: load_cutscene_data 'DES_10B' 
+
+:DES10_3777
+if 
+86B9:   not cutscene_data_loaded 
+jf @DES10_3801 
+wait 0 
+jump @DES10_3777 
+
+:DES10_3801
+0395: clear_area 0 at 398.7038 2529.735 16.563 radius 7.35 
+02E7: start_cutscene 
+fade 1 1000 
+
+:DES10_3834
+if 
+82E9:   not cutscene_reached_end 
+jf @DES10_3858 
+wait 0 
+jump @DES10_3834 
+
+:DES10_3858
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DES10_3871
+if 
+fading 
+jf @DES10_3895 
+wait 0 
+jump @DES10_3871 
+
+:DES10_3895
+02EA: end_cutscene 
+0395: clear_area 0 at 402.8737 2531.582 15.5558 radius 0.5 
+Camera.SetAtPos(402.8737, 2531.582, 15.5558)
+Actor.PutAt($PLAYER_ACTOR, 402.8737, 2531.582, 15.5558)
+Actor.Angle($PLAYER_ACTOR) = 224.0
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+jump @DES10_4130 
+
+:DES10_3984
+44@ += 1 
+jump @DES10_2787 
+
+:DES10_3998
+if 
+  35@ == 0 
+jf @DES10_4105 
+if 
+   not Car.Wrecked(58@)
+jf @DES10_4105 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 36@ // (int) 
+jf @DES10_4105 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 58@ radius 300.0 300.0 sphere 0 
+jf @DES10_4105 
+00BC: show_text_highpriority GXT 'DE10_05' time 5000 flag 1  // ~r~You failed to get the green goo in time.
+jump @DES10_4112 
+
+:DES10_4105
+jump @DES10_2651 
+
+:DES10_4112
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DES10_4130
+$7511 = 10000 
+112@ = Pickup.Create(#JETPACK, 15, 431.045, 2537.78, 16.2463)
+04A6: $7512 = create_asset_money_pickup_at 420.5204 2532.687 16.0869 money $7511 $7511 
+Player.CanMove($PLAYER_CHAR) = False
+wait 0 
+02A3: enable_widescreen 1 
+Camera.SetAtPos(407.8369, 2515.65, 18.9138)
+Camera.SetPosition(407.8369, 2515.65, 18.9138, 0.0, 0.0, 0.0)
+Camera.PointAt(408.3296, 2516.52, 18.9449, 2)
+fade 1 500 
+
+:DES10_4279
+if 
+fading 
+jf @DES10_4303 
+wait 0 
+jump @DES10_4279 
+
+:DES10_4303
+0394: play_music 1 
+00BA: show_text_styled GXT 'ASS_ACQ' time 5000 style 6  // Asset acquired!
+wait 5000 
+Camera.SetPosition(419.7284, 2526.546, 16.8, 0.0, 0.0, 0.0)
+Camera.PointAt(419.897, 2527.531, 16.8356, 2)
+01E5: show_text_1number_highpriority GXT 'ASS_LUV' number $7511 time 6000 flag 1  // This property will now generate revenue up to a maximum of $~1~. Make sure you collect it regularly!
+wait 6000 
+fade 0 500 
+
+:DES10_4410
+if 
+fading 
+jf @DES10_4434 
+wait 0 
+jump @DES10_4410 
+
+:DES10_4434
+fade 1 500 
+0629: change_integer_stat 333 to 1 
+Camera.Restore_WithJumpCut
+$TORENO_TOTAL_PASSED_MISSIONS += 1 
+01E3: show_text_1number_styled GXT 'M_PASS' number 20000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 20000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'DESER10'  // Green Goo
+030C: progress_made = 1 
+Marker.Disable($581)
+return 
+
+:DES10_4515
+if 
+003B:   108@ == 107@ // (int) 
+jf @DES10_4538 
+040D: unload_wav 3 
+
+:DES10_4538
+Marker.Disable(81@)
+Marker.Disable(82@)
+Marker.Disable(83@)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#RHINO)
+Model.Destroy(#ARMY)
+Model.Destroy(#JETPACK)
+06D7: enable_train_traffic 1 
+$ONMISSION = 0 
+mission_cleanup 
+return

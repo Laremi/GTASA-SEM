@@ -1,0 +1,246 @@
+:CATCUT
+thread 'CATCUT' 
+gosub @CATCUT_353 
+if 
+wasted_or_busted 
+jf @CATCUT_45 
+$11033 = 0 
+gosub @CATCUT_860 
+
+:CATCUT_45
+gosub @CATCUT_1005 
+end_thread 
+
+:CATCUT_54
+0871: init_jump_table 34@ total_jumps 1 default_jump 0 @CATCUT_351 jumps 0 @CATCUT_117 -1 @CATCUT_351 -1 @CATCUT_351 -1 @CATCUT_351 -1 @CATCUT_351 -1 @CATCUT_351 -1 @CATCUT_351 
+
+:CATCUT_117
+05A9: s$6993[0] = 'MCAT01A' // s$  // ~z~Hello?
+05A9: s$6993[1] = 'MCAT01B' // s$  // ~z~Where you been, asshole?
+05A9: s$6993[2] = 'MCAT01C' // s$  // ~z~Why don't you call, eh?
+05A9: s$6993[3] = 'MCAT01D' // s$  // ~z~Well I was just about to call you but-
+05A9: s$6993[4] = 'MCAT01E' // s$  // ~z~LIAR! You've been hanging out with those stinking putas!
+05A9: s$6993[5] = 'MCAT01F' // s$  // ~z~No! No, if you'd just let me-
+05A9: s$6993[6] = 'MCAT01G' // s$  // ~z~Silence! Get up here, we've got places to rob!
+05A9: s$6993[7] = 'MCAT01H' // s$  // ~z~Look, I'm in the middle of some shit right-
+05A9: s$6993[8] = 'MCAT04F' // s$  // ~z~Hello?
+05A9: s$7011 = 'MSWE12U' // s$  // ~z~Shit....
+04AF: 39@ = 25000 // = constant 
+04AF: 40@ = 25001 // = constant 
+04AF: 41@ = 25002 // = constant 
+04AF: 42@ = 25003 // = constant 
+04AF: 43@ = 25004 // = constant 
+04AF: 44@ = 25005 // = constant 
+04AF: 45@ = 25006 // = constant 
+04AF: 46@ = 25007 // = constant 
+04AE: 47@ = 25023 // = constant 
+04AF: 48@ = 29136 // = constant 
+38@ = 9 
+jump @CATCUT_351 
+
+:CATCUT_351
+return 
+
+:CATCUT_353
+increment_mission_attempts 
+$ONMISSION = 1 
+054C: use_GXT_table 'BCESAR2' 
+wait 0 
+select_interior 2 
+02E4: load_cutscene_data 'BCESAR2' 
+
+:CATCUT_392
+if 
+86B9:   not cutscene_data_loaded 
+jf @CATCUT_416 
+wait 0 
+jump @CATCUT_392 
+
+:CATCUT_416
+02E7: start_cutscene 
+fade 1 1000 
+
+:CATCUT_425
+if 
+82E9:   not cutscene_reached_end 
+jf @CATCUT_449 
+wait 0 
+jump @CATCUT_425 
+
+:CATCUT_449
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CATCUT_462
+if 
+fading 
+jf @CATCUT_486 
+wait 0 
+jump @CATCUT_462 
+
+:CATCUT_486
+02EA: end_cutscene 
+select_interior 0 
+Model.Load(#CELLPHONE)
+
+:CATCUT_497
+if 
+   not Model.Available(#CELLPHONE)
+jf @CATCUT_524 
+wait 0 
+jump @CATCUT_497 
+
+:CATCUT_524
+03CF: load_wav 23000 as 3 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+34@ = 0 
+gosub @CATCUT_54 
+Actor.PutAt($PLAYER_ACTOR, -2042.129, -2528.79, 29.625)
+Actor.Angle($PLAYER_ACTOR) = 284.27
+Camera.SetAtPos(-2042.129, -2528.79, 29.625)
+Camera.Restore_WithJumpCut
+fade 1 1000 
+
+:CATCUT_622
+if 
+83D0:   not wav 3 loaded 
+jf @CATCUT_648 
+wait 0 
+jump @CATCUT_622 
+
+:CATCUT_648
+03D1: play_wav 3 
+32@ = 0 
+
+:CATCUT_659
+if 
+83D2:   not wav 3 ended 
+jf @CATCUT_711 
+wait 0 
+if 
+  1500 > 32@ 
+jf @CATCUT_704 
+jump @CATCUT_711 
+
+:CATCUT_704
+jump @CATCUT_659 
+
+:CATCUT_711
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+32@ = 0 
+
+:CATCUT_732
+if 
+  1500 > 32@ 
+jf @CATCUT_762 
+wait 0 
+jump @CATCUT_732 
+
+:CATCUT_762
+Player.CanMove($PLAYER_CHAR) = True
+
+:CATCUT_769
+if 
+   not 35@ == 10 
+jf @CATCUT_829 
+wait 0 
+gosub @CATCUT_1048 
+if 
+00E1:   player 0 pressed_key 15 
+jf @CATCUT_822 
+jump @CATCUT_829 
+
+:CATCUT_822
+jump @CATCUT_769 
+
+:CATCUT_829
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+jump @CATCUT_906 
+
+:CATCUT_860
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CATCUT_888 
+$11033 = 0 
+
+:CATCUT_888
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CATCUT_906
+Marker.Disable($484)
+Player.ClearWantedLevel($PLAYER_CHAR)
+$2163 = 1 
+Marker.Disable($MARKER_CATALINA)
+$MARKER_CATALINA = Marker.CreateIconAndSphere($ICON_CATALINA, $X_CATALINA_HOUSE, $Y_CATALINA_HOUSE, $Z_CATALINA_HOUSE)
+Marker.Disable($1731)
+0570: $1731 = create_asset_radar_marker_with_icon 35 at $SAVE_PICKUPS_X[14] $SAVE_PICKUPS_Y[14] $SAVE_PICKUPS_Z[14] 
+018B: set_marker $1731 radar_mode 2 
+Pickup.Destroy($SAVE_PICKUPS[14])
+$SAVE_PICKUPS[14] = Pickup.Create(#PICKUPSAVE, 3, $SAVE_PICKUPS_X[14], $SAVE_PICKUPS_Y[14], $SAVE_PICKUPS_Z[14])
+$TOTAL_AVAILABLE_SAVE_PICKUPS = 15 
+return 
+
+:CATCUT_1005
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'TRAILER'  // King in Exile
+mission_cleanup 
+Model.Destroy(#CELLPHONE)
+014C: set_parked_car_generator $2817 cars_to_generate_to 101 
+return 
+
+:CATCUT_1048
+if or
+  36@ == 0 
+  36@ == 1 
+jf @CATCUT_1099 
+if 
+002D:   38@ >= 35@ // (int) 
+jf @CATCUT_1099 
+gosub @CATCUT_1157 
+
+:CATCUT_1099
+if 
+  36@ == 2 
+jf @CATCUT_1155 
+if 
+03D2:   wav 1 ended 
+jf @CATCUT_1155 
+36@ = 0 
+35@ += 1 
+37@ = 0 
+00BE: text_clear_all 
+
+:CATCUT_1155
+return 
+
+:CATCUT_1157
+if 
+  36@ == 0 
+jf @CATCUT_1193 
+03CF: load_wav 39@(35@,9i) as 1 
+36@ = 1 
+
+:CATCUT_1193
+if 
+  36@ == 1 
+jf @CATCUT_1251 
+if 
+03D0:   wav 1 loaded 
+jf @CATCUT_1251 
+00BC: show_text_highpriority GXT $6993(35@,9s) time 4000 flag 1 
+03D1: play_wav 1 
+36@ = 2 
+
+:CATCUT_1251
+return

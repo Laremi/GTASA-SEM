@@ -1,0 +1,2793 @@
+:SHRANGE
+thread 'SHRANGE' 
+set_wb_check_to 0 
+$ONMISSION = 1 
+$ONMISSION_SHOOTING = 1 
+$8017 = 286.1649 
+$8021 = -30.9591 
+$8018 = 301.8877 
+$8022 = -77.2586 
+$8019 = 306.4883 
+$8023 = -141.9047 
+$8020 = 307.0919 
+$8024 = -159.2197 
+$8057[0] = -319 
+$8057[1] = -320 
+$8057[2] = -321 
+$8057[3] = -322 
+$8057[4] = -323 
+$8057[5] = -324 
+$8057[6] = -325 
+$8057[7] = -326 
+$8038[1] = 0.275 
+$8046[1] = -3.502 
+$8038[2] = -0.214 
+$8046[2] = -3.479 
+$8038[3] = 0.245 
+$8046[3] = -2.791 
+$8038[4] = -0.168 
+$8046[4] = -2.806 
+$8038[5] = 0.079 
+$8046[5] = -2.123 
+$8038[6] = -0.589 
+$8046[6] = -2.317 
+$8038[7] = -0.357 
+$8046[7] = -1.855 
+35@ = 290.6264 
+39@ = -24.5548 
+43@ = 1000.523 
+47@ = 3.0583 
+51@ = 6.1726 
+55@ = -13.6242 
+59@ = 0.0 
+36@ = 303.0788 
+40@ = -61.2269 
+44@ = 1000.523 
+48@ = 2.9464 
+52@ = 6.0799 
+56@ = -13.6242 
+60@ = 270.0 
+37@ = 300.1018 
+41@ = -137.0399 
+45@ = 1003.055 
+49@ = 3.1341 
+53@ = 6.1264 
+57@ = -13.6242 
+61@ = 90.0 
+38@ = 299.4518 
+42@ = -166.3517 
+46@ = 998.6105 
+50@ = 3.0055 
+54@ = 4.6018 
+58@ = -13.6242 
+62@ = 90.0 
+$SHOOTING_INDEX = 0 
+
+:SHRANGE_600
+if 
+  3 > $SHOOTING_INDEX 
+jf @SHRANGE_723 
+$8089($SHOOTING_INDEX,3i) = 1 
+$8086($SHOOTING_INDEX,3i) = 0 
+$8028($SHOOTING_INDEX,4i) = 0 
+$8025($SHOOTING_INDEX,3i) = 0 
+$8032($SHOOTING_INDEX,3i) = 0 
+$8054($SHOOTING_INDEX,3f) = 90.0 
+$8121($SHOOTING_INDEX,3i) = 0 
+$8071($SHOOTING_INDEX,3i) = 0 
+$SHOOTING_INDEX += 1 
+jump @SHRANGE_600 
+
+:SHRANGE_723
+$8070 = 0 
+$8075 = 0 
+$8076 = 0 
+0652: $STAT_UNLOCKED_CITIES_NUMBER = integer_stat 181 
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 0 
+jf @SHRANGE_777 
+$5273 = 2 
+
+:SHRANGE_777
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 1 
+jf @SHRANGE_827 
+if 
+  $5273 == 2 
+jf @SHRANGE_820 
+$5274 = 1 
+
+:SHRANGE_820
+$5273 = 3 
+
+:SHRANGE_827
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER > 1 
+jf @SHRANGE_877 
+if 
+  4 > $5273 
+jf @SHRANGE_870 
+$5274 = 1 
+
+:SHRANGE_870
+$5273 = 4 
+
+:SHRANGE_877
+07E5: copy_decision_maker 65538 to $8069 
+0708: reset_decision_maker $8069 event 15 
+0709: set_decision_maker $8069 on_event 15 taskID 300 respect 100.0 hate 100.0 like 100.0 dislike 100.0 in_car 1 on_foot 1 // see *.ped files 
+03CF: load_wav 1801 as 4 
+Model.Load(#TARGET_HEAD)
+Model.Load(#TARGET_LARM)
+Model.Load(#TARGET_RARM)
+Model.Load(#TARGET_LLEG)
+Model.Load(#TARGET_RLEG)
+Model.Load(#TARGET_RTORSO)
+Model.Load(#TARGET_LTORSO)
+Model.Load(#TARGET_FRAME)
+Model.Load(#COLT45)
+Model.Load(#MICRO_UZI)
+Model.Load(#CHROMEGUN)
+Model.Load(#AK47)
+
+:SHRANGE_995
+if or
+   not Model.Available(#COLT45)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#CHROMEGUN)
+   not Model.Available(#AK47)
+jf @SHRANGE_1037 
+wait 0 
+jump @SHRANGE_995 
+
+:SHRANGE_1037
+if or
+   not Model.Available(#TARGET_HEAD)
+   not Model.Available(#TARGET_LARM)
+   not Model.Available(#TARGET_RARM)
+   not Model.Available(#TARGET_LLEG)
+   not Model.Available(#TARGET_RLEG)
+jf @SHRANGE_1084 
+wait 0 
+jump @SHRANGE_1037 
+
+:SHRANGE_1084
+if or
+   not Model.Available(#TARGET_RTORSO)
+   not Model.Available(#TARGET_LTORSO)
+   not Model.Available(#TARGET_FRAME)
+83D0:   not wav 4 loaded 
+jf @SHRANGE_1125 
+wait 0 
+jump @SHRANGE_1084 
+
+:SHRANGE_1125
+if 
+  $ONMISSION_SHOOTING == 47 
+jf @SHRANGE_1201 
+$8097[0] = Object.Init($8057($SHOOTING_INDEX,8i), 293.757, 1.0, 1000.516)
+0376: $8094[0] = create_random_actor_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$8065 = Object.Create(#POOLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:SHRANGE_1201
+077E: get_active_interior_to $8074 
+
+:SHRANGE_1206
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @SHRANGE_1298 
+$SHOOTING_INDEX = 9 
+
+:SHRANGE_1228
+if 
+  16 > $SHOOTING_INDEX 
+jf @SHRANGE_1291 
+if 
+03CA:   object $8097($SHOOTING_INDEX,24i) exists 
+jf @SHRANGE_1277 
+0723: break_object $8097($SHOOTING_INDEX,24i) intensity 1 
+
+:SHRANGE_1277
+$SHOOTING_INDEX += 1 
+jump @SHRANGE_1228 
+
+:SHRANGE_1291
+$8126 = 20 
+
+:SHRANGE_1298
+wait 0 
+077E: get_active_interior_to $SHOOTING_INDEX 
+if 
+803A:   not  $SHOOTING_INDEX == $8074 // (int) 
+jf @SHRANGE_1333 
+jump @SHRANGE_17017 
+
+:SHRANGE_1333
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SHRANGE_1370 
+gosub @SHRANGE_13478 
+gosub @SHRANGE_11089 
+gosub @SHRANGE_1379 
+
+:SHRANGE_1370
+jump @SHRANGE_1206 
+end_thread 
+
+:SHRANGE_1379
+if 
+00E1:   player 0 pressed_key 15 
+jf @SHRANGE_1444 
+if 
+   not $8070 == 0 
+jf @SHRANGE_1444 
+00BE: text_clear_all 
+34@ = 1 
+$8070 = 20 
+$8075 = 1 
+$8076 = 0 
+
+:SHRANGE_1444
+0871: init_jump_table $8070 total_jumps 7 default_jump 0 @SHRANGE_11087 jumps 0 @SHRANGE_1507 1 @SHRANGE_1813 2 @SHRANGE_5136 3 @SHRANGE_5349 4 @SHRANGE_6544 5 @SHRANGE_8395 20 @SHRANGE_10212 
+
+:SHRANGE_1507
+if 
+  $SHOOTING_INDEX_2 == 0 
+jf @SHRANGE_1580 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 286.1649 -30.9591 1000.516 radius 2.0 2.0 2.0 
+jf @SHRANGE_1580 
+$8070 = 1 
+
+:SHRANGE_1580
+if 
+  $SHOOTING_INDEX_2 == 1 
+jf @SHRANGE_1653 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 301.8877 -77.2586 1000.523 radius 2.0 2.0 2.0 
+jf @SHRANGE_1653 
+$8070 = 1 
+
+:SHRANGE_1653
+if 
+  $SHOOTING_INDEX_2 == 2 
+jf @SHRANGE_1726 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 306.4883 -141.9047 1003.055 radius 2.0 2.0 2.0 
+jf @SHRANGE_1726 
+$8070 = 1 
+
+:SHRANGE_1726
+if 
+  $SHOOTING_INDEX_2 == 3 
+jf @SHRANGE_1799 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 307.0919 -159.2197 998.601 radius 2.0 2.0 2.0 
+jf @SHRANGE_1799 
+$8070 = 1 
+
+:SHRANGE_1799
+64@ = 0 
+jump @SHRANGE_11087 
+
+:SHRANGE_1813
+if 
+  $5287 > 0 
+jf @SHRANGE_1881 
+if and
+  7 > $8075 
+  $8075 > 0 
+jf @SHRANGE_1881 
+$8075 = 7 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+00BE: text_clear_all 
+
+:SHRANGE_1881
+if 
+  $8075 == 0 
+jf @SHRANGE_2033 
+34@ = 0 
+0992: set_player $PLAYER_CHAR weapons_scrollable 0 
+04B8: get_weapon_data_from_actor $PLAYER_ACTOR slot 3 weapon $8135 ammo $8131 model $8139 
+04B8: get_weapon_data_from_actor $PLAYER_ACTOR slot 4 weapon $8136 ammo $8132 model $8140 
+04B8: get_weapon_data_from_actor $PLAYER_ACTOR slot 5 weapon $8137 ammo $8133 model $8141 
+04B8: get_weapon_data_from_actor $PLAYER_ACTOR slot 6 weapon $8138 ammo $8134 model $8142 
+$8124 = 0 
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+08F8: display_stat_update_box 0 
+fade 0 1000 
+$8075 = 1 
+008A: $8076 = 32@ // (int) 
+$8076 += 1500 
+
+:SHRANGE_2033
+if 
+  $8075 == 1 
+jf @SHRANGE_2267 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_2267 
+02A3: enable_widescreen 1 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'ANR_1' time 4000 flag 1  // Test your skills in the Ammu-Nation shooting range challenge.
+00BB: show_text_lowpriority GXT 'ANR_2' time 4000 flag 1  // Compete against two other competitors firing a range of weapons.
+00BB: show_text_lowpriority GXT 'ANR_3' time 4000 flag 1  // You must finish first in each round to progress to the next.
+$8083 = -0.83 
+$8084 = 0.47 
+$TEMPVAR_FLOAT_3 = 1.7 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8083 = 0.17 
+$8084 = 0.63 
+$TEMPVAR_FLOAT_3 = 1.7 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+fade 1 1000 
+$8075 = 2 
+008A: $8076 = 32@ // (int) 
+$8076 += 4000 
+
+:SHRANGE_2267
+if 
+  $8075 == 2 
+jf @SHRANGE_2461 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_2461 
+$8086[1] = 3 
+$8089[1] = 0 
+$8083 = -0.63 
+$8084 = -3.47 
+$TEMPVAR_FLOAT_3 = 0.2 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8083 = 0.4 
+$8084 = -2.5 
+$TEMPVAR_FLOAT_3 = 0.5 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+fade 1 1000 
+$8075 = 3 
+008A: $8076 = 32@ // (int) 
+$8076 += 2000 
+
+:SHRANGE_2461
+if 
+  $8075 == 3 
+jf @SHRANGE_2590 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_2590 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Pistol, 99999)
+$8083 = 0.0 
+005F: $8083 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = -1.0 
+gosub @SHRANGE_16849 
+05D3: AS_actor $PLAYER_ACTOR goto_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 mode 4 time -2 ms // versionA 
+$8075 = 4 
+008A: $8076 = 32@ // (int) 
+$8076 += 3000 
+
+:SHRANGE_2590
+if 
+  $8075 == 4 
+jf @SHRANGE_3034 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_3034 
+$8086[1] = 4 
+0088: $8081 = 59@($SHOOTING_INDEX_2,4f) // (float) 
+$8081 += 90.0 
+Actor.Angle($PLAYER_ACTOR) = $8081
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8083 -= 0.8201 
+$8084 = -0.4944 
+$TEMPVAR_FLOAT_3 = 2.1312 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8083 -= 0.1125 
+$8084 = -0.0237 
+$TEMPVAR_FLOAT_3 = 1.6042 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = -2.0 
+$TEMPVAR_FLOAT_3 = 0.0 
+gosub @SHRANGE_16849 
+08C7: put_actor $PLAYER_ACTOR at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 dont_warp_gang 
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = 0.0 
+$TEMPVAR_FLOAT_3 = 0.0 
+gosub @SHRANGE_16849 
+Actor.Angle($PLAYER_ACTOR) = 59@($SHOOTING_INDEX_2,4f)
+05D3: AS_actor $PLAYER_ACTOR goto_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 mode 4 time -2 ms // versionA 
+if 
+  $8124 == 0 
+jf @SHRANGE_2955 
+$8028[0] = 1 
+$8028[2] = 1 
+
+:SHRANGE_2955
+$8086[0] = 1 
+$8086[2] = 1 
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+$8025[0] = 1 
+$8025[1] = 1 
+$8025[2] = 1 
+$8075 = 5 
+008A: $8076 = 32@ // (int) 
+$8076 += 3000 
+
+:SHRANGE_3034
+if 
+  $8075 == 5 
+jf @SHRANGE_3225 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_3225 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'ANR_6' time 2000 style 1  // Pistol ~n~Round 1
+$8083 = 2.1566 
+$8084 = 2.4369 
+$TEMPVAR_FLOAT_3 = 1.4565 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8083 = 1.9771 
+$8084 = 3.4129 
+$TEMPVAR_FLOAT_3 = 1.3326 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+$8075 = 6 
+008A: $8076 = 32@ // (int) 
+$8076 += 3000 
+
+:SHRANGE_3225
+if 
+  $8075 == 6 
+jf @SHRANGE_3464 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_3464 
+if 
+   not Actor.Dead($8094[0])
+jf @SHRANGE_3285 
+Actor.WeaponAccuracy($8094[0]) = 100
+
+:SHRANGE_3285
+03D6: remove_styled_text 'ANR_6'  // Pistol ~n~Round 1
+00BB: show_text_lowpriority GXT 'ANR_7' time 4000 flag 1  // Destroy the targets in your lane as they appear. Aim for the red markers on each target.
+00BB: show_text_lowpriority GXT 'ANR_10' time 4000 flag 1  // Be the first to destroy three targets.
+$8083 = 0.7525 
+$8084 = -0.3628 
+$TEMPVAR_FLOAT_3 = 1.6174 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8083 = 0.1734 
+$8084 = 0.446 
+$TEMPVAR_FLOAT_3 = 1.5146 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+$8075 = 7 
+008A: $8076 = 32@ // (int) 
+$8076 += 8000 
+
+:SHRANGE_3464
+if 
+  $8075 == 7 
+jf @SHRANGE_3595 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_3595 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SHRANGE_3517 
+
+:SHRANGE_3517
+if 
+  $5287 == 0 
+jf @SHRANGE_3572 
+$5287 = 1 
+fade 0 1000 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+jump @SHRANGE_3588 
+
+:SHRANGE_3572
+00BA: show_text_styled GXT 'ANR_6' time 2000 style 1  // Pistol ~n~Round 1
+
+:SHRANGE_3588
+$8075 = 8 
+
+:SHRANGE_3595
+if 
+  $8075 == 8 
+jf @SHRANGE_3903 
+if and
+   not fading 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_3903 
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = 0.0 
+$TEMPVAR_FLOAT_3 = 0.0 
+gosub @SHRANGE_16849 
+if 
+83CA:   not object $8065 exists 
+jf @SHRANGE_3725 
+$8065 = Object.Create(#POOLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0750: set_object $8065 visibility 0 
+Actor.Angle($PLAYER_ACTOR) = 59@($SHOOTING_INDEX_2,4f)
+
+:SHRANGE_3725
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 22 
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 0 
+if 
+  $8124 == 0 
+jf @SHRANGE_3799 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Pistol, 99999)
+
+:SHRANGE_3799
+$8086[1] = 4 
+$8089[1] = 0 
+$8075 = 9 
+008A: $8076 = 32@ // (int) 
+$8076 += 800 
+if 
+  $8124 == 0 
+jf @SHRANGE_3868 
+$8028[0] = 1 
+$8028[2] = 1 
+
+:SHRANGE_3868
+$8086[0] = 1 
+$8086[2] = 1 
+$8032[0] = 4 
+$8032[1] = 4 
+$8032[2] = 4 
+
+:SHRANGE_3903
+if 
+  $8075 == 9 
+jf @SHRANGE_4082 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4082 
+fade 1 1000 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 22 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+$8025[0] = 1 
+$8025[1] = 1 
+$8025[2] = 1 
+if 
+  $5274 == 1 
+jf @SHRANGE_4075 
+03E5: show_text_box 'ANR_56'  // A new weapon challenge is available.
+$5274 = 0 
+
+:SHRANGE_4075
+$8075 = 10 
+
+:SHRANGE_4082
+if 
+  $8075 == 10 
+jf @SHRANGE_4165 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4165 
+00BA: show_text_styled GXT 'RACE2' time 1000 style 4  // ~s~3
+$8075 = 11 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+Player.CanMove($PLAYER_CHAR) = True
+
+:SHRANGE_4165
+if 
+  $8075 == 11 
+jf @SHRANGE_4241 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4241 
+00BA: show_text_styled GXT 'RACE3' time 1000 style 4  // ~s~2
+$8075 = 12 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_4241
+if 
+  $8075 == 12 
+jf @SHRANGE_4317 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4317 
+00BA: show_text_styled GXT 'RACE4' time 1000 style 4  // ~s~1
+$8075 = 13 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_4317
+if 
+  $8075 == 13 
+jf @SHRANGE_4400 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4400 
+00BA: show_text_styled GXT 'RACE5' time 1000 style 4  // ~s~GO!
+$8075 = 14 
+if 
+   not Actor.Dead($8094[0])
+jf @SHRANGE_4400 
+Actor.WeaponAccuracy($8094[0]) = 80
+
+:SHRANGE_4400
+if 
+  $8075 == 14 
+jf @SHRANGE_4432 
+$8070 = 2 
+$8075 = 0 
+
+:SHRANGE_4432
+if 
+  $8075 == 16 
+jf @SHRANGE_4651 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_4651 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SHRANGE_4621 
+if 
+83CA:   not object $8065 exists 
+jf @SHRANGE_4621 
+0088: $8083 = 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = 0.0 
+$TEMPVAR_FLOAT_3 = 0.0 
+gosub @SHRANGE_16849 
+$8065 = Object.Create(#POOLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0750: set_object $8065 visibility 0 
+Actor.Angle($PLAYER_ACTOR) = 59@($SHOOTING_INDEX_2,4f)
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 22 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 0 
+
+:SHRANGE_4621
+fade 0 1000 
+008A: $8076 = 32@ // (int) 
+$8076 += 2500 
+$8075 = 17 
+
+:SHRANGE_4651
+if 
+  $8075 == 17 
+jf @SHRANGE_5036 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_5036 
+if 
+  $8124 == 3 
+jf @SHRANGE_4755 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 99999)
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 28 
+
+:SHRANGE_4755
+if 
+  $8124 == 6 
+jf @SHRANGE_4822 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Shotgun, 99999)
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 25 
+
+:SHRANGE_4822
+if 
+  $8124 == 9 
+jf @SHRANGE_4889 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, AK47, 99999)
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 30 
+
+:SHRANGE_4889
+fade 1 1000 
+00BE: text_clear_all 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  $8124 == 3 
+jf @SHRANGE_4945 
+00BA: show_text_styled GXT 'ANR_47' time 3000 style 1  // Micro SMG ~n~Round 1
+
+:SHRANGE_4945
+if 
+  $8124 == 6 
+jf @SHRANGE_4979 
+00BA: show_text_styled GXT 'ANR_23' time 3000 style 1  // Shotgun ~n~Round 1
+
+:SHRANGE_4979
+if 
+  $8124 == 9 
+jf @SHRANGE_5013 
+00BA: show_text_styled GXT 'ANR_50' time 3000 style 1  // AK47 ~n~Round 1
+
+:SHRANGE_5013
+008A: $8076 = 32@ // (int) 
+$8076 += 4000 
+$8075 = 18 
+
+:SHRANGE_5036
+if 
+  $8075 == 18 
+jf @SHRANGE_5129 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_5129 
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+64@ = 0 
+$8025[0] = 1 
+$8025[1] = 1 
+$8025[2] = 1 
+$8075 = 10 
+
+:SHRANGE_5129
+jump @SHRANGE_11087 
+
+:SHRANGE_5136
+if 
+  $8075 == 0 
+jf @SHRANGE_5207 
+if 
+   not Actor.Dead($8094[0])
+jf @SHRANGE_5177 
+Actor.WeaponAccuracy($8094[0]) = 87
+
+:SHRANGE_5177
+if 
+   not Actor.Dead($8094[2])
+jf @SHRANGE_5200 
+Actor.WeaponAccuracy($8094[2]) = 87
+
+:SHRANGE_5200
+$8075 = 1 
+
+:SHRANGE_5207
+if 
+  $8075 == 1 
+jf @SHRANGE_5342 
+if and
+  $8032[0] == 3 
+  $8025[0] == 3 
+jf @SHRANGE_5264 
+$8070 = 20 
+$8075 = 0 
+
+:SHRANGE_5264
+if and
+  $8032[2] == 3 
+  $8025[2] == 3 
+jf @SHRANGE_5303 
+$8070 = 20 
+$8075 = 0 
+
+:SHRANGE_5303
+if and
+  $8032[1] == 3 
+  $8025[1] == 3 
+jf @SHRANGE_5342 
+$8070 = 3 
+$8075 = 0 
+
+:SHRANGE_5342
+jump @SHRANGE_11087 
+
+:SHRANGE_5349
+if 
+  $8075 == 0 
+jf @SHRANGE_5946 
+if or
+  $8124 == 0 
+  $8124 == 3 
+  $8124 == 6 
+  $8124 == 9 
+jf @SHRANGE_5422 
+00BA: show_text_styled GXT 'ANR_41' time 2000 style 1  // Round 1 Passed!
+
+:SHRANGE_5422
+if or
+  $8124 == 1 
+  $8124 == 4 
+  $8124 == 7 
+  $8124 == 10 
+jf @SHRANGE_5477 
+00BA: show_text_styled GXT 'ANR_42' time 2000 style 1  // Round 2 Passed!
+
+:SHRANGE_5477
+if or
+  $8124 == 2 
+  $8124 == 5 
+  $8124 == 8 
+jf @SHRANGE_5546 
+008A: $8076 = 32@ // (int) 
+$8076 += 5500 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+
+:SHRANGE_5546
+if 
+  $8124 == 11 
+jf @SHRANGE_5617 
+00BA: show_text_styled GXT 'ANR_45' time 3000 style 1  // ~s~You've completed the Ammu-Nation challenge.
+008A: $8076 = 32@ // (int) 
+$8076 += 5500 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+
+:SHRANGE_5617
+if 
+003A:   $8124 == $1861 // (int) 
+jf @SHRANGE_5939 
+if or
+  $8124 == 0 
+  $8124 == 1 
+jf @SHRANGE_5670 
+0624: add 50.0 to_float_stat 69 
+
+:SHRANGE_5670
+if or
+  $8124 == 3 
+  $8124 == 4 
+jf @SHRANGE_5704 
+0624: add 50.0 to_float_stat 75 
+
+:SHRANGE_5704
+if or
+  $8124 == 6 
+  $8124 == 7 
+jf @SHRANGE_5738 
+0624: add 50.0 to_float_stat 72 
+
+:SHRANGE_5738
+if or
+  $8124 == 9 
+  $8124 == 10 
+jf @SHRANGE_5772 
+0624: add 50.0 to_float_stat 77 
+
+:SHRANGE_5772
+if 
+  $8124 == 2 
+jf @SHRANGE_5803 
+0624: add 100.0 to_float_stat 69 
+030C: progress_made = 1 
+
+:SHRANGE_5803
+if 
+  $8124 == 5 
+jf @SHRANGE_5834 
+0624: add 100.0 to_float_stat 75 
+030C: progress_made = 1 
+
+:SHRANGE_5834
+if 
+  $8124 == 8 
+jf @SHRANGE_5865 
+0624: add 100.0 to_float_stat 72 
+030C: progress_made = 1 
+
+:SHRANGE_5865
+if 
+  $8124 == 11 
+jf @SHRANGE_5924 
+0624: add 100.0 to_float_stat 77 
+062A: change_float_stat 69 to 1000.0 
+Player.Money($PLAYER_CHAR) += 10000
+030C: progress_made = 1 
+0394: play_music 2 
+$5272 = 1 
+
+:SHRANGE_5924
+$1861 += 1 
+0629: change_integer_stat 174 to $1861 
+
+:SHRANGE_5939
+$8075 = 1 
+
+:SHRANGE_5946
+if 
+  $8075 == 1 
+jf @SHRANGE_6537 
+if 
+  $8124 == 0 
+jf @SHRANGE_5996 
+$8070 = 4 
+$8075 = 0 
+
+:SHRANGE_5996
+if or
+  $8124 == 3 
+  $8124 == 6 
+  $8124 == 9 
+jf @SHRANGE_6042 
+$8070 = 4 
+$8075 = 10 
+
+:SHRANGE_6042
+if 
+  $8124 == 1 
+jf @SHRANGE_6074 
+$8070 = 5 
+$8075 = 0 
+
+:SHRANGE_6074
+if or
+  $8124 == 4 
+  $8124 == 7 
+  $8124 == 10 
+jf @SHRANGE_6120 
+$8070 = 5 
+$8075 = 10 
+
+:SHRANGE_6120
+if or
+  $8124 == 2 
+  $8124 == 5 
+  $8124 == 8 
+jf @SHRANGE_6166 
+$8070 = 1 
+$8075 = 16 
+
+:SHRANGE_6166
+if 
+  $8124 == 2 
+jf @SHRANGE_6228 
+$8028[0] = 2 
+$8028[2] = 2 
+$8086[0] = 1 
+$8086[2] = 1 
+00BA: show_text_styled GXT 'ANR_29' time 2000 style 1  // Pistol Challenge Passed
+
+:SHRANGE_6228
+if 
+  $8124 == 5 
+jf @SHRANGE_6290 
+$8028[0] = 3 
+$8028[2] = 3 
+$8086[0] = 1 
+$8086[2] = 1 
+00BA: show_text_styled GXT 'ANR_53' time 2000 style 1  // Micro SMG Challenge Passed
+
+:SHRANGE_6290
+if 
+  $8124 == 8 
+jf @SHRANGE_6352 
+$8028[0] = 4 
+$8028[2] = 4 
+$8086[0] = 1 
+$8086[2] = 1 
+00BA: show_text_styled GXT 'ANR_31' time 2000 style 1  // Shotgun Challenge Passed
+
+:SHRANGE_6352
+if 
+  $8124 == 5 
+jf @SHRANGE_6425 
+if 
+  2 >= $5273 
+jf @SHRANGE_6409 
+$8070 = 20 
+$8075 = 1 
+jump @SHRANGE_6425 
+
+:SHRANGE_6409
+00BB: show_text_lowpriority GXT 'ANR_44' time 4000 flag 1  // ~s~Congratulations, you've mastered that weapon. Now let's see you try with another.
+
+:SHRANGE_6425
+if 
+  $8124 == 8 
+jf @SHRANGE_6498 
+if 
+  3 >= $5273 
+jf @SHRANGE_6482 
+$8070 = 20 
+$8075 = 1 
+jump @SHRANGE_6498 
+
+:SHRANGE_6482
+00BB: show_text_lowpriority GXT 'ANR_44' time 4000 flag 1  // ~s~Congratulations, you've mastered that weapon. Now let's see you try with another.
+
+:SHRANGE_6498
+if 
+  $8124 == 11 
+jf @SHRANGE_6530 
+$8070 = 20 
+$8075 = 1 
+
+:SHRANGE_6530
+$8124 += 1 
+
+:SHRANGE_6537
+jump @SHRANGE_11087 
+
+:SHRANGE_6544
+if 
+  $8075 == 0 
+jf @SHRANGE_6655 
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+$8025[0] = 4 
+$8025[1] = 4 
+$8025[2] = 4 
+$8075 = 1 
+008A: $8076 = 32@ // (int) 
+$8076 += 6000 
+64@ = 0 
+
+:SHRANGE_6655
+if 
+  $8075 == 1 
+jf @SHRANGE_6748 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_6748 
+if 
+  3 > $5287 
+jf @SHRANGE_6725 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:SHRANGE_6725
+$8075 = 2 
+008A: $8076 = 32@ // (int) 
+$8076 += 1500 
+
+:SHRANGE_6748
+if 
+  $8075 == 2 
+jf @SHRANGE_7053 
+if 
+  $5287 > 1 
+jf @SHRANGE_6857 
+00BE: text_clear_all 
+if 
+03CA:   object $8097[8] exists 
+jf @SHRANGE_6807 
+Object.Destroy($8097[8])
+
+:SHRANGE_6807
+03D6: remove_styled_text 'ANR_18'  // Pistol ~n~Round 2
+03D6: remove_styled_text 'ANR_19'  // Pistol ~n~Round 3
+$8076 = 0 
+$8075 = 3 
+$8076 = 0 
+jump @SHRANGE_7053 
+
+:SHRANGE_6857
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7053 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+03D6: remove_styled_text 'ANR_41'  // Round 1 Passed!
+00BA: show_text_styled GXT 'ANR_18' time 4000 style 1  // Pistol ~n~Round 2
+00BB: show_text_lowpriority GXT 'ANR_9' time 4000 flag 1  // In this round the targets will advance towards the player.
+00BB: show_text_lowpriority GXT 'ANR_10' time 3000 flag 1  // Be the first to destroy three targets.
+$8083 = -2.0835 
+$8084 = 6.0428 
+$TEMPVAR_FLOAT_3 = 0.0387 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8075 = 3 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+
+:SHRANGE_7053
+if 
+  $8075 == 3 
+jf @SHRANGE_7127 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7127 
+fade 1 1000 
+$8075 = 4 
+008A: $8076 = 32@ // (int) 
+$8076 += 6000 
+64@ = 0 
+
+:SHRANGE_7127
+if 
+  $8075 == 4 
+jf @SHRANGE_7709 
+if 
+  $5287 == 1 
+jf @SHRANGE_7216 
+if 
+03CA:   object $8097[8] exists 
+jf @SHRANGE_7216 
+Object.StorePos($8097[8], $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 -= 2.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:SHRANGE_7216
+if or
+001F:   32@ > $8076 // (int) 
+  $5287 > 1 
+jf @SHRANGE_7709 
+if 
+   not fading 
+jf @SHRANGE_7489 
+if 
+  $5287 == 1 
+jf @SHRANGE_7312 
+if 
+  64@ == 0 
+jf @SHRANGE_7305 
+fade 0 1000 
+64@ = 1 
+
+:SHRANGE_7305
+jump @SHRANGE_7489 
+
+:SHRANGE_7312
+if 
+  64@ == 0 
+jf @SHRANGE_7489 
+if 
+  $8124 == 1 
+jf @SHRANGE_7364 
+00BA: show_text_styled GXT 'ANR_18' time 3000 style 1  // Pistol ~n~Round 2
+
+:SHRANGE_7364
+if 
+  $8124 == 4 
+jf @SHRANGE_7398 
+00BA: show_text_styled GXT 'ANR_48' time 3000 style 1  // Micro SMG ~n~Round 2
+
+:SHRANGE_7398
+if 
+  $8124 == 7 
+jf @SHRANGE_7432 
+00BA: show_text_styled GXT 'ANR_24' time 3000 style 1  // Shotgun ~n~Round 2
+
+:SHRANGE_7432
+if 
+  $8124 == 10 
+jf @SHRANGE_7466 
+00BA: show_text_styled GXT 'ANR_51' time 3000 style 1  // AK47 ~n~Round 2
+
+:SHRANGE_7466
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+64@ = 1 
+
+:SHRANGE_7489
+if 
+   not fading 
+jf @SHRANGE_7709 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7709 
+if 
+  2 > $5287 
+jf @SHRANGE_7621 
+if 
+  64@ == 1 
+jf @SHRANGE_7621 
+64@ = 2 
+fade 1 700 
+$5287 = 2 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 22 
+
+:SHRANGE_7621
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+00BA: show_text_styled GXT 'RACE2' time 1000 style 4  // ~s~3
+$8075 = 5 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+Player.CanMove($PLAYER_CHAR) = True
+
+:SHRANGE_7709
+if 
+  $8075 == 5 
+jf @SHRANGE_7785 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7785 
+00BA: show_text_styled GXT 'RACE3' time 1000 style 4  // ~s~2
+$8075 = 6 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_7785
+if 
+  $8075 == 6 
+jf @SHRANGE_7861 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7861 
+00BA: show_text_styled GXT 'RACE4' time 1000 style 4  // ~s~1
+$8075 = 7 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_7861
+if 
+  $8075 == 7 
+jf @SHRANGE_7921 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_7921 
+00BA: show_text_styled GXT 'RACE5' time 1000 style 4  // ~s~GO!
+$8075 = 8 
+
+:SHRANGE_7921
+if 
+  $8075 == 8 
+jf @SHRANGE_8056 
+if and
+  $8032[0] == 3 
+  $8071[0] == 3 
+jf @SHRANGE_7978 
+$8070 = 20 
+$8075 = 0 
+
+:SHRANGE_7978
+if and
+  $8032[2] == 3 
+  $8071[2] == 3 
+jf @SHRANGE_8017 
+$8070 = 20 
+$8075 = 0 
+
+:SHRANGE_8017
+if and
+  $8032[1] == 3 
+  $8071[1] == 3 
+jf @SHRANGE_8056 
+$8070 = 3 
+$8075 = 0 
+
+:SHRANGE_8056
+if 
+  $8075 == 10 
+jf @SHRANGE_8102 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+$8075 = 11 
+
+:SHRANGE_8102
+if 
+  $8075 == 11 
+jf @SHRANGE_8279 
+if and
+  $8032[0] == 99 
+  $8032[1] == 99 
+  $8032[2] == 99 
+jf @SHRANGE_8279 
+00BE: text_clear_all 
+if 
+  $8124 == 4 
+jf @SHRANGE_8188 
+00BA: show_text_styled GXT 'ANR_48' time 3000 style 1  // Micro SMG ~n~Round 2
+
+:SHRANGE_8188
+if 
+  $8124 == 7 
+jf @SHRANGE_8222 
+00BA: show_text_styled GXT 'ANR_24' time 3000 style 1  // Shotgun ~n~Round 2
+
+:SHRANGE_8222
+if 
+  $8124 == 10 
+jf @SHRANGE_8256 
+00BA: show_text_styled GXT 'ANR_51' time 3000 style 1  // AK47 ~n~Round 2
+
+:SHRANGE_8256
+008A: $8076 = 32@ // (int) 
+$8076 += 4000 
+$8075 = 12 
+
+:SHRANGE_8279
+if 
+  $8075 == 12 
+jf @SHRANGE_8388 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_8388 
+$8025[0] = 4 
+$8025[1] = 4 
+$8025[2] = 4 
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+$8075 = 4 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+Player.CanMove($PLAYER_CHAR) = True
+
+:SHRANGE_8388
+jump @SHRANGE_11087 
+
+:SHRANGE_8395
+if 
+  $5287 > 2 
+jf @SHRANGE_8452 
+if and
+  4 > $8075 
+  $8075 > 1 
+jf @SHRANGE_8452 
+$8076 = 0 
+$8075 = 4 
+
+:SHRANGE_8452
+if 
+  $8075 == 0 
+jf @SHRANGE_8577 
+$8125 = 0 
+$8126 = 0 
+$8127 = 0 
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+$8025[0] = 0 
+$8025[1] = 5 
+$8025[2] = 0 
+$8075 = 1 
+008A: $8076 = 32@ // (int) 
+$8076 += 8000 
+
+:SHRANGE_8577
+if 
+  $8075 == 1 
+jf @SHRANGE_8670 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_8670 
+if 
+  3 > $5287 
+jf @SHRANGE_8647 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:SHRANGE_8647
+$8075 = 2 
+008A: $8076 = 32@ // (int) 
+$8076 += 1500 
+
+:SHRANGE_8670
+if 
+  $8075 == 2 
+jf @SHRANGE_8980 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_8980 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+03D6: remove_styled_text 'ANR_41'  // Round 1 Passed!
+00BA: show_text_styled GXT 'ANR_19' time 4000 style 1  // Pistol ~n~Round 3
+00BB: show_text_lowpriority GXT 'ANR_33' time 3000 flag 1  // ~s~In this round there will only be one target.
+00BB: show_text_lowpriority GXT 'ANR_34' time 3000 flag 1  // ~s~Competitors will shoot the target simultaneously.
+00BB: show_text_lowpriority GXT 'ANR_35' time 3000 flag 1  // ~s~Each element hit will score a point.
+00BB: show_text_lowpriority GXT 'ANR_46' time 3000 flag 1  // ~s~The first to score 20 points will win.
+$8083 = 3.0583 
+$8084 = 0.6889 
+$TEMPVAR_FLOAT_3 = 1.2953 
+gosub @SHRANGE_16849 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+$8083 = 2.9703 
+$8084 = 1.684 
+$TEMPVAR_FLOAT_3 = 1.2513 
+gosub @SHRANGE_16849 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+fade 1 1000 
+$8075 = 3 
+008A: $8076 = 32@ // (int) 
+$8076 += 12000 
+$8032[0] = 5 
+$8032[1] = 0 
+$8032[2] = 5 
+
+:SHRANGE_8980
+if 
+  $8075 == 3 
+jf @SHRANGE_9086 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9086 
+if 
+  3 > $5287 
+jf @SHRANGE_9042 
+fade 0 1000 
+
+:SHRANGE_9042
+008A: $8076 = 32@ // (int) 
+$8076 += 1500 
+$8075 = 4 
+$8125 = 0 
+$8126 = 0 
+$8127 = 0 
+
+:SHRANGE_9086
+if 
+  $8075 == 4 
+jf @SHRANGE_9392 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9392 
+if 
+   not fading 
+jf @SHRANGE_9392 
+03C4: set_status_text $8125 type 0 GXT 'ANR_37' // global_variable  // ~s~Booth1
+04F7: status_text $8126 type 0 line 2 GXT 'ANR_39' // global_variable  // ~s~Carl
+04F7: status_text $8127 type 0 line 3 GXT 'ANR_38' // global_variable  // ~s~Booth2
+fade 1 1000 
+if 
+  3 > $5287 
+jf @SHRANGE_9252 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $8065 offset_from_object_origin 0.0 0.0 1.0 orientation 0 both_side_angle_limit 90.0 lock_weapon 22 
+Camera.Restore_WithJumpCut
+
+:SHRANGE_9252
+if 
+  $5287 == 2 
+jf @SHRANGE_9284 
+$5287 = 3 
+jump @SHRANGE_9300 
+
+:SHRANGE_9284
+00BA: show_text_styled GXT 'ANR_19' time 2000 style 1  // Pistol ~n~Round 3
+
+:SHRANGE_9300
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+$8032[0] = 5 
+$8032[1] = 0 
+$8032[2] = 5 
+00BA: show_text_styled GXT 'RACE2' time 1000 style 4  // ~s~3
+$8075 = 5 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+
+:SHRANGE_9392
+if 
+  $8075 == 5 
+jf @SHRANGE_9468 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9468 
+00BA: show_text_styled GXT 'RACE3' time 1000 style 4  // ~s~2
+$8075 = 6 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_9468
+if 
+  $8075 == 6 
+jf @SHRANGE_9544 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9544 
+00BA: show_text_styled GXT 'RACE4' time 1000 style 4  // ~s~1
+$8075 = 7 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+
+:SHRANGE_9544
+if 
+  $8075 == 7 
+jf @SHRANGE_9625 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9625 
+00BA: show_text_styled GXT 'RACE5' time 1000 style 4  // ~s~GO!
+$8075 = 8 
+$8125 = 0 
+$8126 = 0 
+$8127 = 0 
+
+:SHRANGE_9625
+if 
+  $8075 == 8 
+jf @SHRANGE_9744 
+if 
+  $8126 >= 20 
+jf @SHRANGE_9690 
+$8070 = 3 
+$8075 = 0 
+0151: remove_status_text $8125 
+0151: remove_status_text $8126 
+0151: remove_status_text $8127 
+
+:SHRANGE_9690
+if or
+  $8125 >= 20 
+  $8127 >= 20 
+jf @SHRANGE_9744 
+$8070 = 20 
+$8075 = 0 
+0151: remove_status_text $8125 
+0151: remove_status_text $8126 
+0151: remove_status_text $8127 
+
+:SHRANGE_9744
+if 
+  $8075 == 10 
+jf @SHRANGE_9806 
+$8032[0] = 5 
+$8032[1] = 5 
+$8032[2] = 5 
+008A: $8076 = 32@ // (int) 
+$8076 += 7000 
+$8075 = 11 
+
+:SHRANGE_9806
+if 
+  $8075 == 11 
+jf @SHRANGE_9989 
+if and
+  $8032[0] == 99 
+  $8032[1] == 99 
+  $8032[2] == 99 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_9989 
+if 
+  $8124 == 5 
+jf @SHRANGE_9898 
+00BA: show_text_styled GXT 'ANR_49' time 2000 style 1  // Micro SMG ~n~Round 3
+
+:SHRANGE_9898
+if 
+  $8124 == 8 
+jf @SHRANGE_9932 
+00BA: show_text_styled GXT 'ANR_25' time 2000 style 1  // Shotgun ~n~Round 3
+
+:SHRANGE_9932
+if 
+  $8124 == 11 
+jf @SHRANGE_9966 
+00BA: show_text_styled GXT 'ANR_52' time 2000 style 1  // AK47 ~n~Round 3
+
+:SHRANGE_9966
+008A: $8076 = 32@ // (int) 
+$8076 += 4000 
+$8075 = 12 
+
+:SHRANGE_9989
+if 
+  $8075 == 12 
+jf @SHRANGE_10205 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_10205 
+$8125 = 0 
+$8126 = 0 
+$8127 = 0 
+$8071[1] = 0 
+$8032[1] = 0 
+$8025[0] = 0 
+$8025[1] = 5 
+$8025[2] = 0 
+$8125 = 0 
+$8126 = 0 
+$8127 = 0 
+03C4: set_status_text $8125 type 0 GXT 'ANR_37' // global_variable  // ~s~Booth1
+04F7: status_text $8126 type 0 line 2 GXT 'ANR_39' // global_variable  // ~s~Carl
+04F7: status_text $8127 type 0 line 3 GXT 'ANR_38' // global_variable  // ~s~Booth2
+00BA: show_text_styled GXT 'RACE2' time 1000 style 4  // ~s~3
+$8075 = 5 
+008A: $8076 = 32@ // (int) 
+$8076 += 1000 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+
+:SHRANGE_10205
+jump @SHRANGE_11087 
+
+:SHRANGE_10212
+if 
+  $8075 == 0 
+jf @SHRANGE_10269 
+00BA: show_text_styled GXT 'ANR_16' time 3000 style 1  // ~r~You were beaten.
+008A: $8076 = 32@ // (int) 
+$8076 += 3000 
+$8075 = 1 
+
+:SHRANGE_10269
+if 
+  $8075 == 1 
+jf @SHRANGE_10320 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_10320 
+fade 0 1000 
+$8075 = 2 
+
+:SHRANGE_10320
+if 
+  $8075 == 2 
+jf @SHRANGE_10378 
+if 
+   not fading 
+jf @SHRANGE_10378 
+008A: $8076 = 32@ // (int) 
+$8076 += 500 
+08F8: display_stat_update_box 1 
+$8075 = 3 
+
+:SHRANGE_10378
+if 
+  $8075 == 3 
+jf @SHRANGE_11080 
+if 
+001F:   32@ > $8076 // (int) 
+jf @SHRANGE_11080 
+$8083 = 2.0 
+$8084 = -12.0 
+$TEMPVAR_FLOAT_3 = 0.0 
+0151: remove_status_text $8125 
+0151: remove_status_text $8126 
+0151: remove_status_text $8127 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+gosub @SHRANGE_16849 
+0992: set_player $PLAYER_CHAR weapons_scrollable 1 
+0555: remove_weapon 22 from_actor $PLAYER_ACTOR 
+if 
+  $8131 > 0 
+jf @SHRANGE_10547 
+
+:SHRANGE_10504
+if 
+   not Model.Available($8139)
+jf @SHRANGE_10536 
+Model.Load($8139)
+wait 0 
+jump @SHRANGE_10504 
+
+:SHRANGE_10536
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, $8135, $8131)
+
+:SHRANGE_10547
+0555: remove_weapon 28 from_actor $PLAYER_ACTOR 
+if 
+  $8132 > 0 
+jf @SHRANGE_10615 
+
+:SHRANGE_10572
+if 
+   not Model.Available($8140)
+jf @SHRANGE_10604 
+Model.Load($8140)
+wait 0 
+jump @SHRANGE_10572 
+
+:SHRANGE_10604
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, $8136, $8132)
+
+:SHRANGE_10615
+0555: remove_weapon 25 from_actor $PLAYER_ACTOR 
+if 
+  $8133 > 0 
+jf @SHRANGE_10683 
+
+:SHRANGE_10640
+if 
+   not Model.Available($8141)
+jf @SHRANGE_10672 
+Model.Load($8141)
+wait 0 
+jump @SHRANGE_10640 
+
+:SHRANGE_10672
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, $8137, $8133)
+
+:SHRANGE_10683
+0555: remove_weapon 30 from_actor $PLAYER_ACTOR 
+if 
+  $8134 > 0 
+jf @SHRANGE_10751 
+
+:SHRANGE_10708
+if 
+   not Model.Available($8142)
+jf @SHRANGE_10740 
+Model.Load($8142)
+wait 0 
+jump @SHRANGE_10708 
+
+:SHRANGE_10740
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, $8138, $8134)
+
+:SHRANGE_10751
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 1 
+Object.Destroy($8065)
+00BE: text_clear_all 
+08C7: put_actor $PLAYER_ACTOR at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 dont_warp_gang 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SHRANGE_10802 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+
+:SHRANGE_10802
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SHRANGE_10845 
+Actor.Angle($PLAYER_ACTOR) = 59@($SHOOTING_INDEX_2,4f)
+
+:SHRANGE_10845
+$8089[1] = 1 
+fade 1 1000 
+$8070 = 0 
+$8075 = 0 
+$8071[0] = 0 
+$8071[1] = 0 
+$8071[2] = 0 
+$8028[0] = 0 
+$8028[1] = 0 
+$8028[2] = 0 
+$8086[0] = 1 
+if 
+   Actor.Dead($8094[1])
+jf @SHRANGE_10945 
+$8086[1] = 0 
+
+:SHRANGE_10945
+$8086[2] = 1 
+$8025[0] = 0 
+$8025[1] = 0 
+$8025[2] = 0 
+$8032[0] = 0 
+$8032[1] = 0 
+$8032[2] = 0 
+if 
+  34@ == 1 
+jf @SHRANGE_11039 
+0A0E: disable_text_with_style 1 
+00BB: show_text_lowpriority GXT 'ANR_A1' time 4000 flag 1  // ~s~Shooting range challenge cancelled.
+34@ = 0 
+
+:SHRANGE_11039
+if and
+   not $5273 == 4 
+   not 34@ == 1 
+jf @SHRANGE_11080 
+00BB: show_text_lowpriority GXT 'ANR_55' time 4000 flag 1  // Check back later for new weapon challenges.
+
+:SHRANGE_11080
+jump @SHRANGE_11087 
+
+:SHRANGE_11087
+return 
+
+:SHRANGE_11089
+$SHOOTING_INDEX = 0 
+0084: $8143 = $8032[0] // (int) 
+0084: $8146 = $8032[1] // (int) 
+0084: $8149 = $8032[2] // (int) 
+
+:SHRANGE_11120
+if 
+  3 > $SHOOTING_INDEX 
+jf @SHRANGE_13476 
+0871: init_jump_table $8086($SHOOTING_INDEX,3i) total_jumps 5 default_jump 0 @SHRANGE_13462 jumps 0 @SHRANGE_11205 1 @SHRANGE_11619 2 @SHRANGE_11888 3 @SHRANGE_12876 4 @SHRANGE_13415 -1 @SHRANGE_13462 -1 @SHRANGE_13462 
+
+:SHRANGE_11205
+if 
+  $8089($SHOOTING_INDEX,3i) == 1 
+jf @SHRANGE_11612 
+$8086($SHOOTING_INDEX,3i) = 1 
+0088: $TEMPVAR_FLOAT_1 = 35@($SHOOTING_INDEX_2,4f) // (float) 
+0088: $TEMPVAR_FLOAT_2 = 39@($SHOOTING_INDEX_2,4f) // (float) 
+0088: $TEMPVAR_FLOAT_3 = 43@($SHOOTING_INDEX_2,4f) // (float) 
+0087: 63@ = 59@($SHOOTING_INDEX_2,4f) // (float) 
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_11403 
+if 
+  63@ == 90.0 
+jf @SHRANGE_11337 
+005F: $TEMPVAR_FLOAT_2 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11337
+if 
+  63@ == 270.0 
+jf @SHRANGE_11370 
+0067: $TEMPVAR_FLOAT_2 -= 47@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11370
+if 
+  63@ == 0.0 
+jf @SHRANGE_11403 
+005F: $TEMPVAR_FLOAT_1 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11403
+if 
+  $SHOOTING_INDEX == 2 
+jf @SHRANGE_11520 
+if 
+  63@ == 90.0 
+jf @SHRANGE_11454 
+005F: $TEMPVAR_FLOAT_2 += 51@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11454
+if 
+  63@ == 270.0 
+jf @SHRANGE_11487 
+0067: $TEMPVAR_FLOAT_2 -= 51@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11487
+if 
+  63@ == 0.0 
+jf @SHRANGE_11520 
+005F: $TEMPVAR_FLOAT_1 += 51@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_11520
+0376: $8094($SHOOTING_INDEX,3i) = create_random_actor_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_11612 
+Actor.SetImmunities($8094($SHOOTING_INDEX,3i), 1, 1, 1, 1, 1)
+060B: set_actor $8094($SHOOTING_INDEX,3i) decision_maker_to $8069 
+Actor.WeaponAccuracy($8094($SHOOTING_INDEX,3i)) = 93
+Actor.Angle($8094($SHOOTING_INDEX,3i)) = 63@
+
+:SHRANGE_11612
+jump @SHRANGE_13462 
+
+:SHRANGE_11619
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_11881 
+if 
+  $8028($SHOOTING_INDEX,4i) == 0 
+jf @SHRANGE_11674 
+0209: $8028($SHOOTING_INDEX,4i) = random_int_in_ranges 1 5 
+
+:SHRANGE_11674
+if 
+  $8028($SHOOTING_INDEX,4i) == 1 
+jf @SHRANGE_11723 
+Actor.GiveWeaponAndAmmo($8094($SHOOTING_INDEX,3i), Pistol, 99999)
+01B9: set_actor $8094($SHOOTING_INDEX,3i) armed_weapon_to 22 
+
+:SHRANGE_11723
+if 
+  $8028($SHOOTING_INDEX,4i) == 2 
+jf @SHRANGE_11772 
+Actor.GiveWeaponAndAmmo($8094($SHOOTING_INDEX,3i), MicroUzi, 99999)
+01B9: set_actor $8094($SHOOTING_INDEX,3i) armed_weapon_to 28 
+
+:SHRANGE_11772
+if 
+  $8028($SHOOTING_INDEX,4i) == 3 
+jf @SHRANGE_11821 
+Actor.GiveWeaponAndAmmo($8094($SHOOTING_INDEX,3i), Shotgun, 99999)
+01B9: set_actor $8094($SHOOTING_INDEX,3i) armed_weapon_to 25 
+
+:SHRANGE_11821
+if 
+  $8028($SHOOTING_INDEX,4i) == 4 
+jf @SHRANGE_11870 
+Actor.GiveWeaponAndAmmo($8094($SHOOTING_INDEX,3i), AK47, 99999)
+01B9: set_actor $8094($SHOOTING_INDEX,3i) armed_weapon_to 30 
+
+:SHRANGE_11870
+$8086($SHOOTING_INDEX,3i) = 2 
+
+:SHRANGE_11881
+jump @SHRANGE_13462 
+
+:SHRANGE_11888
+$8077 = 0 
+if 
+  $8032($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_11924 
+$8077 = 1 
+
+:SHRANGE_11924
+if and
+  $8070 == 5 
+  $8032[1] == 2 
+jf @SHRANGE_11956 
+$8077 = 1 
+
+:SHRANGE_11956
+if 
+  $SHOOTING_INDEX == 0 
+jf @SHRANGE_11982 
+0084: $8144 = $8077 // (int) 
+
+:SHRANGE_11982
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_12008 
+0084: $8147 = $8077 // (int) 
+
+:SHRANGE_12008
+if 
+  $SHOOTING_INDEX == 2 
+jf @SHRANGE_12034 
+0084: $8150 = $8077 // (int) 
+
+:SHRANGE_12034
+if 
+  $8077 == 1 
+jf @SHRANGE_12807 
+if 
+001F:   32@ > $8121($SHOOTING_INDEX,3i) // (int) 
+jf @SHRANGE_12800 
+0209: $8077 = random_int_in_ranges 1 8 
+if 
+  $8070 == 5 
+jf @SHRANGE_12116 
+$8077 += 8 
+jump @SHRANGE_12166 
+
+:SHRANGE_12116
+if 
+  $SHOOTING_INDEX == 2 
+jf @SHRANGE_12141 
+$8077 += 16 
+
+:SHRANGE_12141
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_12166 
+$8077 += 8 
+
+:SHRANGE_12166
+$8092 = 0 
+
+:SHRANGE_12173
+if and
+0366:   object $8097($8077,24i) damaged 
+  8 > $8092 
+jf @SHRANGE_12260 
+$8077 += 1 
+$8092 += 1 
+if or
+  $8077 == 8 
+  $8077 == 24 
+  $8077 == 16 
+jf @SHRANGE_12253 
+$8077 -= 7 
+
+:SHRANGE_12253
+jump @SHRANGE_12173 
+
+:SHRANGE_12260
+if 
+  $SHOOTING_INDEX == 0 
+jf @SHRANGE_12286 
+0084: $8145 = $8092 // (int) 
+
+:SHRANGE_12286
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_12312 
+0084: $8148 = $8092 // (int) 
+
+:SHRANGE_12312
+if 
+  $SHOOTING_INDEX == 2 
+jf @SHRANGE_12338 
+0084: $8151 = $8092 // (int) 
+
+:SHRANGE_12338
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_12800 
+Object.StorePos($8097($8077,24i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  $8077 > 8 
+  16 > $8077 
+jf @SHRANGE_12408 
+$8077 -= 8 
+
+:SHRANGE_12408
+if and
+  $8077 > 16 
+  24 > $8077 
+jf @SHRANGE_12440 
+$8077 -= 16 
+
+:SHRANGE_12440
+if 
+  63@ == 0.0 
+jf @SHRANGE_12473 
+0059: $TEMPVAR_FLOAT_1 += $8038($8077,8f) // (float) 
+
+:SHRANGE_12473
+if 
+  63@ == 90.0 
+jf @SHRANGE_12506 
+0059: $TEMPVAR_FLOAT_2 += $8038($8077,8f) // (float) 
+
+:SHRANGE_12506
+if 
+  63@ == 270.0 
+jf @SHRANGE_12539 
+0061: $TEMPVAR_FLOAT_2 -= $8038($8077,8f) // (float) 
+
+:SHRANGE_12539
+0059: $TEMPVAR_FLOAT_3 += $8046($8077,8f) // (float) 
+if 
+  $8124 >= 8 
+jf @SHRANGE_12652 
+062E: get_actor $8094($SHOOTING_INDEX,3i) task 1640 status_store_to $8077 // ret 7 if not found 
+if 
+04A3:   $8077 == 7 // == constant 
+jf @SHRANGE_12645 
+Actor.LockInCurrentPosition($8094($SHOOTING_INDEX,3i)) = True
+0668: AS_actor $8094($SHOOTING_INDEX,3i) rotate_and_shoot_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 800 ms 
+Actor.WeaponAccuracy($8094($SHOOTING_INDEX,3i)) = 95
+
+:SHRANGE_12645
+jump @SHRANGE_12717 
+
+:SHRANGE_12652
+062E: get_actor $8094($SHOOTING_INDEX,3i) task 1640 status_store_to $8077 // ret 7 if not found 
+if 
+04A3:   $8077 == 7 // == constant 
+jf @SHRANGE_12717 
+Actor.LockInCurrentPosition($8094($SHOOTING_INDEX,3i)) = True
+0668: AS_actor $8094($SHOOTING_INDEX,3i) rotate_and_shoot_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 1500 ms 
+
+:SHRANGE_12717
+if 
+  $8124 >= 8 
+jf @SHRANGE_12765 
+0209: $8077 = random_int_in_ranges 200 400 
+$8121($SHOOTING_INDEX,3i) += 600 
+jump @SHRANGE_12776 
+
+:SHRANGE_12765
+0209: $8077 = random_int_in_ranges 200 1600 
+
+:SHRANGE_12776
+008A: $8121($SHOOTING_INDEX,3i) = 32@ // (int) 
+0058: $8121($SHOOTING_INDEX,3i) += $8077 // (int) 
+
+:SHRANGE_12800
+jump @SHRANGE_12869 
+
+:SHRANGE_12807
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_12869 
+062E: get_actor $8094($SHOOTING_INDEX,3i) task 1640 status_store_to $8077 // ret 7 if not found 
+if 
+84A3:   not  $8077 == 7 // == constant 
+jf @SHRANGE_12869 
+0687: clear_actor $8094($SHOOTING_INDEX,3i) task 
+
+:SHRANGE_12869
+jump @SHRANGE_13462 
+
+:SHRANGE_12876
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_13408 
+Actor.StorePos($8094($SHOOTING_INDEX,3i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.LockInCurrentPosition($8094($SHOOTING_INDEX,3i)) = False
+05D6: clear_scmpath 
+0615: define_AS_pack_begin $8079 
+$8083 = 0.0 
+005F: $8083 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = -1.0 
+02F7: $8081 = cosine 59@($SHOOTING_INDEX_2,4f) // (float) 
+02F6: $8082 = sine 59@($SHOOTING_INDEX_2,4f) // (float) 
+if 
+  59@($SHOOTING_INDEX_2,4f) == 0.0 
+jf @SHRANGE_13052 
+0086: $TEMPVAR_FLOAT_1 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8081 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8081 // (float) 
+jump @SHRANGE_13094 
+
+:SHRANGE_13052
+$8084 *= -1.0 
+0086: $TEMPVAR_FLOAT_1 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8082 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8082 // (float) 
+
+:SHRANGE_13094
+005F: $TEMPVAR_FLOAT_1 += 35@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_2 += 39@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_3 += 43@($SHOOTING_INDEX_2,4f) // (float) 
+0087: 63@ = 59@($SHOOTING_INDEX_2,4f) // (float) 
+63@ -= 180.0 
+05D4: AS_actor -1 rotate_angle 63@ 
+0087: 63@ = 59@($SHOOTING_INDEX_2,4f) // (float) 
+05D7: add_point_to_scmpath $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$8083 = -0.5 
+005F: $8083 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+$8084 = -4.5 
+if 
+  59@($SHOOTING_INDEX_2,4f) == 0.0 
+jf @SHRANGE_13278 
+0086: $TEMPVAR_FLOAT_1 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8081 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8081 // (float) 
+jump @SHRANGE_13320 
+
+:SHRANGE_13278
+$8084 *= -1.0 
+0086: $TEMPVAR_FLOAT_1 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8082 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8082 // (float) 
+
+:SHRANGE_13320
+005F: $TEMPVAR_FLOAT_1 += 35@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_2 += 39@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_3 += 43@($SHOOTING_INDEX_2,4f) // (float) 
+05D7: add_point_to_scmpath $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+05D8: AS_assign_scmpath to_actor -1 flags 4 0 
+0616: define_AS_pack_end $8079 
+0618: assign_actor $8094($SHOOTING_INDEX,3i) to_AS_pack $8079 
+061B: remove_references_to_AS_pack $8079 
+$8086($SHOOTING_INDEX,3i) = 99 
+
+:SHRANGE_13408
+jump @SHRANGE_13462 
+
+:SHRANGE_13415
+if 
+   not Actor.Dead($8094($SHOOTING_INDEX,3i))
+jf @SHRANGE_13444 
+Actor.DestroyInstantly($8094($SHOOTING_INDEX,3i))
+
+:SHRANGE_13444
+$8086($SHOOTING_INDEX,3i) = 0 
+jump @SHRANGE_13462 
+
+:SHRANGE_13462
+$SHOOTING_INDEX += 1 
+jump @SHRANGE_11120 
+
+:SHRANGE_13476
+return 
+
+:SHRANGE_13478
+$SHOOTING_INDEX = 0 
+
+:SHRANGE_13485
+if 
+  3 > $SHOOTING_INDEX 
+jf @SHRANGE_16847 
+0871: init_jump_table $8032($SHOOTING_INDEX,3i) total_jumps 6 default_jump 0 @SHRANGE_16833 jumps 0 @SHRANGE_13570 1 @SHRANGE_14352 2 @SHRANGE_14681 3 @SHRANGE_16282 4 @SHRANGE_16584 5 @SHRANGE_16705 -1 @SHRANGE_16833 
+
+:SHRANGE_13570
+0708: reset_decision_maker $8069 event 15 
+$8032($SHOOTING_INDEX,3i) = 1 
+if 
+  $8025($SHOOTING_INDEX,3i) == 0 
+jf @SHRANGE_13656 
+0209: $8025($SHOOTING_INDEX,3i) = random_int_in_ranges 1 3 
+if 
+  $8025($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_13656 
+$8025($SHOOTING_INDEX,3i) = 4 
+
+:SHRANGE_13656
+$TEMPVAR_FLOAT_1 = 0.0 
+$TEMPVAR_FLOAT_2 = 5.0 
+$TEMPVAR_FLOAT_3 = 4.0 
+0087: 63@ = 59@($SHOOTING_INDEX_2,4f) // (float) 
+if 
+  5 > $8025($SHOOTING_INDEX,3i) 
+jf @SHRANGE_13887 
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_13750 
+005F: $TEMPVAR_FLOAT_1 += 47@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_13750
+if 
+  $SHOOTING_INDEX == 2 
+jf @SHRANGE_13780 
+005F: $TEMPVAR_FLOAT_1 += 51@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_13780
+if 
+  $8025($SHOOTING_INDEX,3i) == 1 
+jf @SHRANGE_13812 
+$TEMPVAR_FLOAT_2 += 0.0 
+
+:SHRANGE_13812
+if 
+  $8025($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_13844 
+$TEMPVAR_FLOAT_2 += 5.0 
+
+:SHRANGE_13844
+if or
+  $8025($SHOOTING_INDEX,3i) == 3 
+  $8025($SHOOTING_INDEX,3i) == 4 
+jf @SHRANGE_13887 
+$TEMPVAR_FLOAT_2 += 10.0 
+
+:SHRANGE_13887
+if 
+  $8025($SHOOTING_INDEX,3i) == 5 
+jf @SHRANGE_13971 
+0208: $8085 = random_float_in_ranges 0.0 10.0 
+0059: $TEMPVAR_FLOAT_2 += $8085 // (float) 
+0209: $8080 = random_int_in_ranges 0 2 
+if 
+  $8080 == 1 
+jf @SHRANGE_13971 
+005F: $TEMPVAR_FLOAT_1 += 51@($SHOOTING_INDEX_2,4f) // (float) 
+
+:SHRANGE_13971
+0086: $8083 = $TEMPVAR_FLOAT_1 // (float) 
+0086: $8084 = $TEMPVAR_FLOAT_2 // (float) 
+gosub @SHRANGE_16849 
+0084: $8077 = $SHOOTING_INDEX // (int) 
+$8077 *= 8 
+if 
+03CA:   object $8097($8077,24i) exists 
+jf @SHRANGE_14038 
+Object.Destroy($8097($8077,24i))
+
+:SHRANGE_14038
+$8097($8077,24i) = Object.Init($8057[0], $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0453: set_object $8097($8077,24i) XYZ_rotation 90.0 0.0 63@ 
+097B: play_audio_at_object $8097($8077,24i) event 1032 
+$8054($SHOOTING_INDEX,3f) = 90.0 
+$8092 = 1 
+
+:SHRANGE_14114
+if 
+  8 > $8092 
+jf @SHRANGE_14322 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+0058: $8093 += $8092 // (int) 
+if 
+03CA:   object $8097($8093,24i) exists 
+jf @SHRANGE_14184 
+Object.Destroy($8097($8093,24i))
+
+:SHRANGE_14184
+$8097($8093,24i) = Object.Init($8057($8092,8i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+069A: attach_object $8097($8093,24i) to_object $8097($8077,24i) with_offset 0.0 0.0 0.0 rotation 0.0 0.0 0.0 
+if 
+03CA:   object $8097($8093,24i) exists 
+jf @SHRANGE_14308 
+0453: set_object $8097($8093,24i) XYZ_rotation 90.0 0.0 63@ 
+Object.CollisionDetection($8097($8093,24i)) = False
+
+:SHRANGE_14308
+$8092 += 1 
+jump @SHRANGE_14114 
+
+:SHRANGE_14322
+$8071($SHOOTING_INDEX,3i) += 1 
+008A: $8066($SHOOTING_INDEX,3i) = 32@ // (int) 
+jump @SHRANGE_16833 
+
+:SHRANGE_14352
+008A: $8077 = 32@ // (int) 
+0060: $8077 -= $8066($SHOOTING_INDEX,3i) // (int) 
+if 
+  $8077 > 3000 
+jf @SHRANGE_14399 
+$8077 = 3000 
+
+:SHRANGE_14399
+008D: $8081 = integer $8077 to_float 
+$8081 /= 3000.0 
+$8081 *= -90.0 
+$8081 += 90.0 
+0086: $8054($SHOOTING_INDEX,3f) = $8081 // (float) 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+if 
+03CA:   object $8097($8093,24i) exists 
+jf @SHRANGE_14508 
+0453: set_object $8097($8093,24i) XYZ_rotation $8054($SHOOTING_INDEX,3f) 0.0 63@ 
+
+:SHRANGE_14508
+if 
+  0.0 >= $8054($SHOOTING_INDEX,3f) 
+jf @SHRANGE_14674 
+$8032($SHOOTING_INDEX,3i) = 2 
+008A: $8066($SHOOTING_INDEX,3i) = 32@ // (int) 
+if or
+  $8025($SHOOTING_INDEX,3i) == 4 
+  $8025($SHOOTING_INDEX,3i) == 5 
+jf @SHRANGE_14601 
+097B: play_audio_at_object $8097($8093,24i) event 1033 
+
+:SHRANGE_14601
+$8092 = 0 
+
+:SHRANGE_14608
+if 
+  8 > $8092 
+jf @SHRANGE_14674 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+0058: $8093 += $8092 // (int) 
+Object.CollisionDetection($8097($8093,24i)) = True
+$8092 += 1 
+jump @SHRANGE_14608 
+
+:SHRANGE_14674
+jump @SHRANGE_16833 
+
+:SHRANGE_14681
+if 
+  $8025($SHOOTING_INDEX,3i) == 4 
+jf @SHRANGE_15317 
+008A: $8077 = 32@ // (int) 
+0060: $8077 -= $8066($SHOOTING_INDEX,3i) // (int) 
+if 
+  $8071($SHOOTING_INDEX,3i) == 4 
+jf @SHRANGE_14756 
+$8071($SHOOTING_INDEX,3i) = 1 
+
+:SHRANGE_14756
+if 
+  $8071($SHOOTING_INDEX,3i) == 1 
+jf @SHRANGE_14832 
+if 
+  $8077 > 20000 
+jf @SHRANGE_14832 
+$8077 = 20000 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+
+:SHRANGE_14832
+if 
+  $8071($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_14908 
+if 
+  $8077 > 15000 
+jf @SHRANGE_14908 
+$8077 = 15000 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+
+:SHRANGE_14908
+if 
+  $8071($SHOOTING_INDEX,3i) == 3 
+jf @SHRANGE_14984 
+if 
+  $8077 > 10000 
+jf @SHRANGE_14984 
+$8077 = 10000 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+
+:SHRANGE_14984
+008D: $8081 = integer $8077 to_float 
+if 
+  $8071($SHOOTING_INDEX,3i) == 1 
+jf @SHRANGE_15024 
+$8081 /= 20000.0 
+
+:SHRANGE_15024
+if 
+  $8071($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_15056 
+$8081 /= 15000.0 
+
+:SHRANGE_15056
+if 
+  $8071($SHOOTING_INDEX,3i) == 3 
+jf @SHRANGE_15088 
+$8081 /= 10000.0 
+
+:SHRANGE_15088
+$8081 *= 10.0 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+Object.StorePos($8097($8093,24i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  63@ == 90.0 
+jf @SHRANGE_15182 
+0088: $TEMPVAR_FLOAT_1 = 35@($SHOOTING_INDEX_2,4f) // (float) 
+$TEMPVAR_FLOAT_1 -= 15.0 
+0059: $TEMPVAR_FLOAT_1 += $8081 // (float) 
+
+:SHRANGE_15182
+if 
+  63@ == 270.0 
+jf @SHRANGE_15233 
+0088: $TEMPVAR_FLOAT_1 = 35@($SHOOTING_INDEX_2,4f) // (float) 
+$TEMPVAR_FLOAT_1 += 15.0 
+0061: $TEMPVAR_FLOAT_1 -= $8081 // (float) 
+
+:SHRANGE_15233
+if 
+  63@ == 0.0 
+jf @SHRANGE_15284 
+0088: $TEMPVAR_FLOAT_2 = 39@($SHOOTING_INDEX_2,4f) // (float) 
+$TEMPVAR_FLOAT_2 += 15.0 
+0061: $TEMPVAR_FLOAT_2 -= $8081 // (float) 
+
+:SHRANGE_15284
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+Object.PutAt($8097($8093,24i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:SHRANGE_15317
+if 
+  $8025($SHOOTING_INDEX,3i) == 5 
+jf @SHRANGE_15674 
+008A: $8077 = 32@ // (int) 
+0060: $8077 -= $8066($SHOOTING_INDEX,3i) // (int) 
+if 
+  $8077 > 10000 
+jf @SHRANGE_15523 
+$8077 = 10000 
+$8032($SHOOTING_INDEX,3i) = 3 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+097A: play_audio_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 event 1032 
+008A: $8066($SHOOTING_INDEX,3i) = 32@ // (int) 
+$8092 = 0 
+
+:SHRANGE_15457
+if 
+  8 > $8092 
+jf @SHRANGE_15523 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+0058: $8093 += $8092 // (int) 
+Object.CollisionDetection($8097($8093,24i)) = False
+$8092 += 1 
+jump @SHRANGE_15457 
+
+:SHRANGE_15523
+008D: $8081 = integer $8077 to_float 
+$8081 /= 10000.0 
+006D: $8081 *= 51@($SHOOTING_INDEX_2,4f) // (float) 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+if 
+  $8080 == 0 
+jf @SHRANGE_15601 
+0086: $8083 = $8081 // (float) 
+jump @SHRANGE_15621 
+
+:SHRANGE_15601
+0088: $8083 = 51@($SHOOTING_INDEX_2,4f) // (float) 
+0061: $8083 -= $8081 // (float) 
+
+:SHRANGE_15621
+$TEMPVAR_FLOAT_3 = 4.0 
+0086: $8084 = $8085 // (float) 
+$8084 += 5.0 
+gosub @SHRANGE_16849 
+Object.PutAt($8097($8093,24i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:SHRANGE_15674
+0084: $8077 = $8035($SHOOTING_INDEX,3i) // (int) 
+$8035($SHOOTING_INDEX,3i) = 0 
+$8092 = 0 
+
+:SHRANGE_15704
+if 
+  8 > $8092 
+jf @SHRANGE_15790 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+0058: $8093 += $8092 // (int) 
+if 
+0366:   object $8097($8093,24i) damaged 
+jf @SHRANGE_15776 
+$8035($SHOOTING_INDEX,3i) += 1 
+
+:SHRANGE_15776
+$8092 += 1 
+jump @SHRANGE_15704 
+
+:SHRANGE_15790
+if 
+001C:   $8035($SHOOTING_INDEX,3i) > $8077 // (int) 
+jf @SHRANGE_15825 
+097B: play_audio_at_object $8097($8093,24i) event 1031 
+
+:SHRANGE_15825
+if 
+  $SHOOTING_INDEX == 1 
+jf @SHRANGE_16148 
+if 
+001C:   $8035[1] > $8077 // (int) 
+jf @SHRANGE_16148 
+0084: $8078 = $8035[1] // (int) 
+0060: $8078 -= $8077 // (int) 
+0209: $8077 = random_int_in_ranges 0 2 
+if 
+  $8077 == 0 
+jf @SHRANGE_16030 
+if 
+   not Actor.Dead($8094[0])
+jf @SHRANGE_16023 
+if 
+02E0:   actor $8094[0] firing_weapon 
+jf @SHRANGE_15952 
+0058: $8125 += $8078 // (int) 
+jump @SHRANGE_16023 
+
+:SHRANGE_15952
+if 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @SHRANGE_15983 
+0058: $8126 += $8078 // (int) 
+jump @SHRANGE_16023 
+
+:SHRANGE_15983
+if 
+   not Actor.Dead($8094[2])
+jf @SHRANGE_16023 
+if 
+02E0:   actor $8094[2] firing_weapon 
+jf @SHRANGE_16023 
+0058: $8127 += $8078 // (int) 
+
+:SHRANGE_16023
+jump @SHRANGE_16148 
+
+:SHRANGE_16030
+if 
+   not Actor.Dead($8094[2])
+jf @SHRANGE_16148 
+if 
+02E0:   actor $8094[2] firing_weapon 
+jf @SHRANGE_16077 
+0058: $8127 += $8078 // (int) 
+jump @SHRANGE_16148 
+
+:SHRANGE_16077
+if 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @SHRANGE_16108 
+0058: $8126 += $8078 // (int) 
+jump @SHRANGE_16148 
+
+:SHRANGE_16108
+if 
+   not Actor.Dead($8094[0])
+jf @SHRANGE_16148 
+if 
+02E0:   actor $8094[0] firing_weapon 
+jf @SHRANGE_16148 
+0058: $8125 += $8078 // (int) 
+
+:SHRANGE_16148
+if 
+  $8035($SHOOTING_INDEX,3i) == 7 
+jf @SHRANGE_16275 
+008A: $8066($SHOOTING_INDEX,3i) = 32@ // (int) 
+$8032($SHOOTING_INDEX,3i) = 3 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+097A: play_audio_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 event 1032 
+0708: reset_decision_maker $8069 event 15 
+0709: set_decision_maker $8069 on_event 15 taskID 300 respect 100.0 hate 100.0 like 100.0 dislike 100.0 in_car 1 on_foot 1 // see *.ped files 
+
+:SHRANGE_16275
+jump @SHRANGE_16833 
+
+:SHRANGE_16282
+008A: $8077 = 32@ // (int) 
+0060: $8077 -= $8066($SHOOTING_INDEX,3i) // (int) 
+if 
+  $8077 > 2000 
+jf @SHRANGE_16329 
+$8077 = 2000 
+
+:SHRANGE_16329
+008D: $8081 = integer $8077 to_float 
+$8081 /= 2000.0 
+$8081 *= 90.0 
+0086: $8054($SHOOTING_INDEX,3f) = $8081 // (float) 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+if 
+03CA:   object $8097($8093,24i) exists 
+jf @SHRANGE_16428 
+0453: set_object $8097($8093,24i) XYZ_rotation $8054($SHOOTING_INDEX,3f) 0.0 63@ 
+
+:SHRANGE_16428
+if 
+  $8054($SHOOTING_INDEX,3f) >= 90.0 
+jf @SHRANGE_16577 
+$8032($SHOOTING_INDEX,3i) = 0 
+if 
+  $8025($SHOOTING_INDEX,3i) == 3 
+jf @SHRANGE_16504 
+$8025($SHOOTING_INDEX,3i) = 1 
+jump @SHRANGE_16577 
+
+:SHRANGE_16504
+if 
+  $8025($SHOOTING_INDEX,3i) == 2 
+jf @SHRANGE_16544 
+$8025($SHOOTING_INDEX,3i) = 3 
+jump @SHRANGE_16577 
+
+:SHRANGE_16544
+if 
+  $8025($SHOOTING_INDEX,3i) == 1 
+jf @SHRANGE_16577 
+$8025($SHOOTING_INDEX,3i) = 2 
+
+:SHRANGE_16577
+jump @SHRANGE_16833 
+
+:SHRANGE_16584
+$8092 = 0 
+
+:SHRANGE_16591
+if 
+  8 > $8092 
+jf @SHRANGE_16687 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+0058: $8093 += $8092 // (int) 
+if 
+03CA:   object $8097($8092,24i) exists 
+jf @SHRANGE_16673 
+097B: play_audio_at_object $8097($8092,24i) event 1034 
+Object.Destroy($8097($8092,24i))
+
+:SHRANGE_16673
+$8092 += 1 
+jump @SHRANGE_16591 
+
+:SHRANGE_16687
+$8032($SHOOTING_INDEX,3i) = 99 
+jump @SHRANGE_16833 
+
+:SHRANGE_16705
+$8054($SHOOTING_INDEX,3f) += 1.0 
+0084: $8093 = $SHOOTING_INDEX // (int) 
+$8093 *= 8 
+if 
+03CA:   object $8097($8093,24i) exists 
+jf @SHRANGE_16790 
+097B: play_audio_at_object $8097($8093,24i) event 1034 
+0453: set_object $8097($8093,24i) XYZ_rotation $8054($SHOOTING_INDEX,3f) 0.0 63@ 
+
+:SHRANGE_16790
+if 
+  $8054($SHOOTING_INDEX,3f) >= 90.0 
+jf @SHRANGE_16826 
+$8032($SHOOTING_INDEX,3i) = 4 
+
+:SHRANGE_16826
+jump @SHRANGE_16833 
+
+:SHRANGE_16833
+$SHOOTING_INDEX += 1 
+jump @SHRANGE_13485 
+
+:SHRANGE_16847
+return 
+
+:SHRANGE_16849
+02F7: $8081 = cosine 59@($SHOOTING_INDEX_2,4f) // (float) 
+02F6: $8082 = sine 59@($SHOOTING_INDEX_2,4f) // (float) 
+if 
+  59@($SHOOTING_INDEX_2,4f) == 0.0 
+jf @SHRANGE_16937 
+0086: $TEMPVAR_FLOAT_1 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8081 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8081 // (float) 
+jump @SHRANGE_16979 
+
+:SHRANGE_16937
+$8084 *= -1.0 
+0086: $TEMPVAR_FLOAT_1 = $8084 // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8082 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8083 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8082 // (float) 
+
+:SHRANGE_16979
+005F: $TEMPVAR_FLOAT_1 += 35@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_2 += 39@($SHOOTING_INDEX_2,4f) // (float) 
+005F: $TEMPVAR_FLOAT_3 += 43@($SHOOTING_INDEX_2,4f) // (float) 
+return 
+
+:SHRANGE_17017
+Actor.DestroyInstantly($8094[0])
+Actor.DestroyInstantly($8094[1])
+Actor.DestroyInstantly($8094[2])
+0151: remove_status_text $8125 
+0151: remove_status_text $8126 
+0151: remove_status_text $8127 
+Model.Destroy(#TARGET_HEAD)
+Model.Destroy(#TARGET_LARM)
+Model.Destroy(#TARGET_RARM)
+Model.Destroy(#TARGET_LLEG)
+Model.Destroy(#TARGET_RLEG)
+Model.Destroy(#TARGET_RTORSO)
+Model.Destroy(#TARGET_LTORSO)
+Model.Destroy(#TARGET_FRAME)
+Model.Destroy(#COLT45)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#AK47)
+065C: release_decision_maker $8069 
+040D: unload_wav 4 
+$8092 = 0 
+
+:SHRANGE_17123
+if 
+  24 > $8092 
+jf @SHRANGE_17184 
+if 
+03CA:   object $8097($8092,24i) exists 
+jf @SHRANGE_17170 
+Object.Destroy($8097($8092,24i))
+
+:SHRANGE_17170
+$8092 += 1 
+jump @SHRANGE_17123 
+
+:SHRANGE_17184
+$ONMISSION_SHOOTING = 0 
+$ONMISSION = 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SHRANGE_17221 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+
+:SHRANGE_17221
+end_thread 
+return 
+end_thread

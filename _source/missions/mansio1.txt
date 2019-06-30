@@ -1,0 +1,6031 @@
+:MANSIO1
+thread 'MANSIO1' 
+gosub @MANSIO1_94 
+if 
+wasted_or_busted 
+jf @MANSIO1_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+gosub @MANSIO1_38568 
+
+:MANSIO1_85
+gosub @MANSIO1_39166 
+end_thread 
+
+:MANSIO1_94
+increment_mission_attempts 
+$ONMISSION = 1 
+Actor.PutAt($PLAYER_ACTOR, 2175.412, 1681.548, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2233.5 1712.8 radius 10.0 
+054C: use_GXT_table 'MAN_1' 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+$PLAYER_IN_INTERIOR = 1 
+select_interior 11 
+02E4: load_cutscene_data 'BHILL1' 
+
+:MANSIO1_197
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSIO1_221 
+wait 0 
+jump @MANSIO1_197 
+
+:MANSIO1_221
+02E7: start_cutscene 
+fade 1 1000 
+
+:MANSIO1_230
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSIO1_254 
+wait 0 
+jump @MANSIO1_230 
+
+:MANSIO1_254
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MANSIO1_269
+if 
+fading 
+jf @MANSIO1_293 
+wait 0 
+jump @MANSIO1_269 
+
+:MANSIO1_293
+select_interior 0 
+09BA: show_entered_zone_name 0 
+08F4: set_max_group_members 99 
+create_thread @A_CONT 
+0A0B: set_rendering_origin_at_3D_coord 2171.137 1269.357 32.8078 angle 0.0 
+Model.Load(#ANDROM)
+
+:MANSIO1_340
+if 
+   not Model.Available(#ANDROM)
+jf @MANSIO1_367 
+wait 0 
+jump @MANSIO1_340 
+
+:MANSIO1_367
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+96@ = Car.Create(#ANDROM, 2144.0, 1600.0, 50.0)
+Car.Angle(96@) = 180.0
+041E: set_radio_station 11 
+08E6: set_plane 96@ landing_gear 1 
+Car.LockInCurrentPosition(96@) = True
+0840: link_car 96@ to_interior 0 
+036A: put_actor $PLAYER_ACTOR in_car 96@ 
+49@ = 0 
+set_weather 17 
+00C0: set_current_time_hours_to 6 minutes_to 0 
+Camera.SetPosition(2171.137, 1269.357, 32.8078, 0.0, 0.0, 0.0)
+Camera.PointAt(2170.998, 1270.331, 32.9838, 2)
+09FF: set_restart_closest_to 1581.374 1768.996 9.8203 
+02A3: enable_widescreen 1 
+08FD: enable_heat_visuals 1 
+32@ = 0 
+
+:MANSIO1_540
+if 
+  1000 > 32@ 
+jf @MANSIO1_570 
+wait 0 
+jump @MANSIO1_540 
+
+:MANSIO1_570
+0707: start_scene_skip_to @MANSIO1_750 
+97@ = 1600.0 
+fade 1 1000 
+
+:MANSIO1_594
+if 
+fading 
+jf @MANSIO1_662 
+if 
+   not Car.Wrecked(96@)
+jf @MANSIO1_651 
+97@ -= 1.5 
+Car.PutAt(96@, 2144.0, 97@, 50.0)
+
+:MANSIO1_651
+wait 0 
+jump @MANSIO1_594 
+
+:MANSIO1_662
+32@ = 0 
+
+:MANSIO1_669
+if 
+  9000 > 32@ 
+jf @MANSIO1_743 
+if 
+   not Car.Wrecked(96@)
+jf @MANSIO1_732 
+97@ -= 1.5 
+Car.PutAt(96@, 2144.0, 97@, 50.0)
+
+:MANSIO1_732
+wait 0 
+jump @MANSIO1_669 
+
+:MANSIO1_743
+49@ = 1 
+
+:MANSIO1_750
+0701: end_scene_skip 
+fade 0 1000 
+
+:MANSIO1_759
+if 
+fading 
+jf @MANSIO1_827 
+if 
+   not Car.Wrecked(96@)
+jf @MANSIO1_816 
+97@ -= 1.5 
+Car.PutAt(96@, 2144.0, 97@, 50.0)
+
+:MANSIO1_816
+wait 0 
+jump @MANSIO1_759 
+
+:MANSIO1_827
+08FD: enable_heat_visuals 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO1_874 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1598.951 -785.327 350.1654 
+jump @MANSIO1_894 
+
+:MANSIO1_874
+Actor.PutAt($PLAYER_ACTOR, 1598.951, -785.327, 350.1654)
+
+:MANSIO1_894
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+Model.Destroy(#ANDROM)
+Car.RemoveReferences(96@)
+Model.Load(#TRIADA)
+Model.Load(#TRIADB)
+Model.Load(#LSV1)
+Model.Load(#LSV2)
+Model.Load(#M4)
+Model.Load(#MP5LNG)
+Model.Load(#CARGO_REAR)
+Model.Load(#D9_RAMP)
+Model.Load(#CELLPHONE)
+Model.Load(#PARACHUTE)
+Model.Load(#PARA_PACK)
+04ED: load_animation "PARACHUTE" 
+08A9: load_external_script 1 (PARACHUTE) 
+
+:MANSIO1_979
+if or
+   not Model.Available(#TRIADA)
+   not Model.Available(#TRIADB)
+   not Model.Available(#LSV1)
+   not Model.Available(#LSV2)
+   not Model.Available(#M4)
+   not Model.Available(#MP5LNG)
+jf @MANSIO1_1027 
+wait 0 
+jump @MANSIO1_979 
+
+:MANSIO1_1027
+if or
+   not Model.Available(#CARGO_REAR)
+   not Model.Available(#D9_RAMP)
+   not Model.Available(#CELLPHONE)
+   not Model.Available(#PARACHUTE)
+   not Model.Available(#PARA_PACK)
+84EE:   not animation "PARACHUTE" loaded 
+jf @MANSIO1_1087 
+wait 0 
+jump @MANSIO1_1027 
+
+:MANSIO1_1087
+if 
+88AB:   not external_script 1 (PARACHUTE) loaded 
+jf @MANSIO1_1113 
+wait 0 
+jump @MANSIO1_1087 
+
+:MANSIO1_1113
+52@ = 0 
+060A: create_decision_maker_type 0 store_to 34@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 35@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 35@ on_event 36 taskID 1024 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 35@ on_event 36 taskID 1700 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 35@ on_event 9 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+060A: create_decision_maker_type 0 store_to 36@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 36@ on_event 36 taskID 1024 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 36@ on_event 36 taskID 1700 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 36@ on_event 9 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 36@ on_event 15 taskID 300 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 36@ on_event 65 taskID 300 respect 10.0 hate 10.0 like 10.0 dislike 10.0 in_car 0 on_foot 1 // see *.ped files 
+060A: create_decision_maker_type 0 store_to 37@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 37@ on_event 36 taskID 927 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 37@ on_event 37 taskID 927 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 37@ on_event 9 taskID 911 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+06AE: create_group_decision_maker_type 0 store_to 39@ // decision\allowed\mission.grp 
+0749: reset_group_decision_maker 39@ event 9 
+074A: set_group_decision_maker 39@ on_event 9 taskID 1502 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 25 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 24 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 26 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 26 to_actors_pedtype 24 
+0746: set_acquaintance 3 of_actors_pedtype 26 to_actors_pedtype 25 
+07AF: 44@ = player $PLAYER_CHAR group 
+07B3: set_group 44@ give_command 0 
+06AD: set_group 44@ group_decision_maker_to 39@ 
+98@ = 0 
+if 
+  98@ == 1 
+jf @MANSIO1_1889 
+143@(431@,3i) = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+159@ = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+170@(43@,6i) = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+286@(43@,10i) = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+474@(43@,3i) = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+316@(43@,4i) = Actor.Create(CivMale, #TRIADA, 0.0, 0.0, 0.0)
+194@(43@,6i) = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+146@(43@,3i) = Marker.CreateAboveActor(143@(43@,3i))
+
+:MANSIO1_1889
+0923: enable_air_traffic 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+set_weather 1 
+00C0: set_current_time_hours_to 3 minutes_to 0 
+127@ = Object.Init(#CARGO_REAR, 1595.0, -785.0, 350.0)
+Object.Angle(127@) = 90.0
+Object.KeepInMemory(127@) = True
+128@ = Object.Init(#D9_RAMP, 1595.03, -784.98, 348.758)
+Object.Angle(128@) = 90.0
+Object.KeepInMemory(128@) = True
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Actor.PutAt($PLAYER_ACTOR, 1594.393, -784.7317, 349.0)
+Actor.Angle($PLAYER_ACTOR) = 36.9506
+131@ = Actor.Create(Mission1, #TRIADA, 1595.303, -783.4741, 349.0)
+Actor.Angle(131@) = 205.0
+0860: link_actor 131@ to_interior 0 
+Actor.GiveWeaponAndAmmo(131@, M4, 30000)
+01B9: set_actor 131@ armed_weapon_to 31 
+0568: set_actor 131@ untargetable 1 
+060B: set_actor 131@ decision_maker_to 34@ 
+09B5: set_actor 131@ signal_after_kill 0 
+152@ = Object.Create(#PARA_PACK, 1595.303, -783.4741, 349.0)
+070A: AS_actor 131@ attach_to_object 152@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+Actor.SetImmunities(131@, 1, 0, 0, 0, 0)
+139@ = 0 
+135@ = 0 
+132@ = Actor.Create(Mission1, #TRIADB, 1596.97, -786.8875, 349.0)
+Actor.Angle(132@) = 2.0
+0860: link_actor 132@ to_interior 0 
+Actor.GiveWeaponAndAmmo(132@, M4, 30000)
+01B9: set_actor 132@ armed_weapon_to 31 
+0568: set_actor 132@ untargetable 1 
+060B: set_actor 132@ decision_maker_to 34@ 
+09B5: set_actor 132@ signal_after_kill 0 
+153@ = Object.Create(#PARA_PACK, 1596.97, -786.8875, 349.0)
+070A: AS_actor 132@ attach_to_object 153@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+Actor.SetImmunities(132@, 1, 0, 0, 0, 0)
+140@ = 1500 
+136@ = 0 
+133@ = Actor.Create(Mission1, #TRIADB, 1598.448, -782.9297, 349.0)
+Actor.Angle(133@) = 175.0
+0860: link_actor 133@ to_interior 0 
+Actor.GiveWeaponAndAmmo(133@, M4, 30000)
+01B9: set_actor 133@ armed_weapon_to 31 
+0568: set_actor 133@ untargetable 1 
+060B: set_actor 133@ decision_maker_to 34@ 
+09B5: set_actor 133@ signal_after_kill 0 
+154@ = Object.Create(#PARA_PACK, 1598.448, -782.9297, 349.0)
+070A: AS_actor 133@ attach_to_object 154@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+Actor.SetImmunities(133@, 1, 0, 0, 0, 0)
+141@ = 3000 
+137@ = 0 
+134@ = Actor.Create(Mission1, #TRIADA, 1599.034, -786.9792, 349.0)
+Actor.Angle(134@) = 347.0
+0860: link_actor 134@ to_interior 0 
+Actor.GiveWeaponAndAmmo(134@, M4, 30000)
+01B9: set_actor 134@ armed_weapon_to 31 
+0568: set_actor 134@ untargetable 1 
+060B: set_actor 134@ decision_maker_to 34@ 
+09B5: set_actor 134@ signal_after_kill 0 
+155@ = Object.Create(#PARA_PACK, 1599.034, -786.9792, 349.0)
+070A: AS_actor 134@ attach_to_object 155@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+Actor.SetImmunities(134@, 1, 0, 0, 0, 0)
+142@ = 5000 
+138@ = 0 
+if 
+  49@ == 0 
+jf @MANSIO1_2747 
+jump @MANSIO1_5725 
+
+:MANSIO1_2747
+49@ = 0 
+Camera.SetAtPos(1597.615, -784.5765, 350.0)
+Camera.SetPosition(1598.951, -785.327, 350.1654, 0.0, 0.0, 0.0)
+Camera.PointAt(1598.351, -784.5302, 350.089, 2)
+32@ = 0 
+
+:MANSIO1_2829
+if 
+  500 > 32@ 
+jf @MANSIO1_2859 
+wait 0 
+jump @MANSIO1_2829 
+
+:MANSIO1_2859
+099C: jiggle_camera type 1 timelimit 50000.0 intensity 3.0 
+0470: 109@ = actor $PLAYER_ACTOR current_weapon 
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 1)
+jf @MANSIO1_2952 
+0555: remove_weapon 1 from_actor $PLAYER_ACTOR 
+110@ = 1 
+Model.Load(#BRASSKNUCKLE)
+
+:MANSIO1_2918
+if 
+   not Model.Available(#BRASSKNUCKLE)
+jf @MANSIO1_2945 
+wait 0 
+jump @MANSIO1_2918 
+
+:MANSIO1_2945
+jump @MANSIO1_2959 
+
+:MANSIO1_2952
+110@ = 0 
+
+:MANSIO1_2959
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+fade 1 500 
+
+:MANSIO1_2973
+if 
+fading 
+jf @MANSIO1_2997 
+wait 0 
+jump @MANSIO1_2973 
+
+:MANSIO1_2997
+0707: start_scene_skip_to @MANSIO1_4124 
+0615: define_AS_pack_begin 45@ 
+05BA: AS_actor -1 move_mouth 1500 ms 
+05D3: AS_actor -1 goto_point 1598.05 -784.5205 349.0 mode 4 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 257.9061 
+0638: AS_actor -1 stay_put 1 
+0729: AS_actor -1 hold_cellphone 1 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 45@ 
+$193 = 1 
+061B: remove_references_to_AS_pack 45@ 
+05AA: 76@s = 'MKND02A' // @s = 'short'  // ~z~Hello.
+04AF: 55@ = 27009 // = constant 
+008B: 65@ = $PLAYER_ACTOR // (int) 
+05AA: 78@s = 'MKND02B' // @s = 'short'  // ~z~Hey, what's up, Carl?
+04AF: 56@ = 27010 // = constant 
+66@ = -1 
+05AA: 80@s = 'MKND02C' // @s = 'short'  // ~z~Hey Kendl, wassup?
+04AF: 57@ = 27011 // = constant 
+008B: 67@ = $PLAYER_ACTOR // (int) 
+05AA: 82@s = 'MKND02D' // @s = 'short'  // ~z~Nothing - just thought I'd wish you luck.
+04AF: 58@ = 27012 // = constant 
+68@ = -1 
+05AA: 84@s = 'MKND02E' // @s = 'short'  // ~z~We're gonna drive back to uh San Fierro first,
+04AF: 59@ = 27013 // = constant 
+69@ = -1 
+05AA: 86@s = 'MKND02F' // @s = 'short'  // ~z~Wanna check things out there before we hook up with you guys in Los Santos.
+04AF: 60@ = 27014 // = constant 
+70@ = -1 
+05AA: 88@s = 'MKND02G' // @s = 'short'  // ~z~Alright cool, you be careful.
+04AF: 61@ = 27015 // = constant 
+008B: 71@ = $PLAYER_ACTOR // (int) 
+05AA: 90@s = 'MKND02H' // @s = 'short'  // ~z~I'll be fine, I got Cesar and Madd Dogg to keep me safe.
+04AF: 62@ = 27016 // = constant 
+72@ = -1 
+05AA: 92@s = 'MKND02J' // @s = 'short'  // ~z~You be careful.
+04AF: 63@ = 27017 // = constant 
+73@ = -1 
+05AA: 94@s = 'MKND02K' // @s = 'short'  // ~z~I will. I'll see you in Los Santos.
+04AF: 64@ = 27018 // = constant 
+008B: 74@ = $PLAYER_ACTOR // (int) 
+75@ = 0 
+
+:MANSIO1_3386
+if 
+  46@ == 0 
+jf @MANSIO1_3423 
+wait 0 
+0646: unknown_get_actor $PLAYER_ACTOR task_1560_status_store_to 46@ // similar to 062E 
+jump @MANSIO1_3386 
+
+:MANSIO1_3423
+04AE: $1276 = 23000 // = constant 
+05A9: s$1281 = 'MOBRING' // s$  // ~z~(Phone ringing)
+create_thread @A_ALAP 0 99 
+
+:MANSIO1_3457
+if 
+   not $1285($1288,2i) == -3 
+jf @MANSIO1_3490 
+wait 0 
+jump @MANSIO1_3457 
+
+:MANSIO1_3490
+$1285($1288,2i) = -4 
+0646: unknown_get_actor $PLAYER_ACTOR task_1560_status_store_to 46@ // similar to 062E 
+
+:MANSIO1_3509
+if 
+   not 46@ == 4 
+jf @MANSIO1_3546 
+wait 0 
+0646: unknown_get_actor $PLAYER_ACTOR task_1560_status_store_to 46@ // similar to 062E 
+jump @MANSIO1_3509 
+
+:MANSIO1_3546
+wait 2250 
+
+:MANSIO1_3551
+if 
+  10 > 75@ 
+jf @MANSIO1_3711 
+008A: $1276 = 55@(75@,10i) // (int) 
+05A9: s$1281 = 76@(75@,10s) // s$ 
+if 
+   not 65@(75@,10i) == -1 
+jf @MANSIO1_3641 
+create_thread @A_ALAP 2 100 65@(75@,10i) 
+jump @MANSIO1_3653 
+
+:MANSIO1_3641
+create_thread @A_ALAP 0 100 
+
+:MANSIO1_3653
+if 
+   not $1285($1288,2i) == -3 
+jf @MANSIO1_3686 
+wait 0 
+jump @MANSIO1_3653 
+
+:MANSIO1_3686
+$1285($1288,2i) = -4 
+75@ += 1 
+jump @MANSIO1_3551 
+
+:MANSIO1_3711
+if or
+   not $1285($1287,2i) == -4 
+   not $1285($1288,2i) == -4 
+jf @MANSIO1_3755 
+wait 0 
+jump @MANSIO1_3711 
+
+:MANSIO1_3755
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+wait 2000 
+if 
+   not Actor.Dead(133@)
+jf @MANSIO1_3806 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 133@ 
+0639: AS_actor 133@ rotate_to_actor $PLAYER_ACTOR 
+
+:MANSIO1_3806
+04AE: $1276 = 23808 // = constant 
+05A9: s$1281 = 'MAN1_CA' // s$  // ~z~Me and you gonna go in to clear the place out.
+create_thread @A_ALAP 1 100 $PLAYER_ACTOR 
+
+:MANSIO1_3843
+if 
+   not $1285($1288,2i) == -3 
+jf @MANSIO1_3876 
+wait 0 
+jump @MANSIO1_3843 
+
+:MANSIO1_3876
+$1285($1288,2i) = -4 
+04AE: $1276 = 23810 // = constant 
+05A9: s$1281 = 'MAN1_CC' // s$  // ~z~So the rest of the crew can move in in peace.
+create_thread @A_ALAP 2 100 133@ 
+
+:MANSIO1_3924
+if 
+   not $1285($1288,2i) == -3 
+jf @MANSIO1_3957 
+wait 0 
+jump @MANSIO1_3924 
+
+:MANSIO1_3957
+$1285($1288,2i) = -4 
+04AE: $1276 = 23809 // = constant 
+05A9: s$1281 = 'MAN1_CB' // s$  // ~z~Good idea - the element of surprise.
+create_thread @A_ALAP 1 100 $PLAYER_ACTOR 
+
+:MANSIO1_4005
+if or
+   not $1285($1287,2i) == -4 
+   not $1285($1288,2i) == -4 
+jf @MANSIO1_4049 
+wait 0 
+jump @MANSIO1_4005 
+
+:MANSIO1_4049
+32@ = 0 
+
+:MANSIO1_4056
+if 
+  1000 > 32@ 
+jf @MANSIO1_4086 
+wait 0 
+jump @MANSIO1_4056 
+
+:MANSIO1_4086
+fade 0 500 
+
+:MANSIO1_4093
+if 
+fading 
+jf @MANSIO1_4117 
+wait 0 
+jump @MANSIO1_4093 
+
+:MANSIO1_4117
+49@ = 1 
+
+:MANSIO1_4124
+0701: end_scene_skip 
+$193 = 0 
+00BE: text_clear_all 
+fade 0 0 
+
+:MANSIO1_4141
+if 
+fading 
+jf @MANSIO1_4165 
+wait 0 
+jump @MANSIO1_4141 
+
+:MANSIO1_4165
+if 
+  110@ == 1 
+jf @MANSIO1_4197 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, BrassKnuckles, 1)
+Model.Destroy(#BRASSKNUCKLE)
+
+:MANSIO1_4197
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 109@ 
+0925: restore_camera_to_user_defined 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Model.Destroy(#CELLPHONE)
+if 
+  $1285[0] >= 0 
+jf @MANSIO1_4242 
+$1285[0] = -2 
+
+:MANSIO1_4242
+if 
+  $1285[0] >= 0 
+jf @MANSIO1_4267 
+$1285[1] = -2 
+
+:MANSIO1_4267
+Actor.PutAt($PLAYER_ACTOR, 1096.562, -825.7372, 85.9453)
+if 
+  49@ == 0 
+jf @MANSIO1_4312 
+jump @MANSIO1_5725 
+
+:MANSIO1_4312
+49@ = 0 
+$8271 = 1347.407 
+$8272 = -811.7421 
+$8273 = 96.9707 
+Camera.SetPosition(1385.568, -810.5753, 78.1164, 0.0, 0.0, 0.0)
+Camera.PointAt(1385.498, -809.579, 78.0669, 2)
+103@ = 0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+108@ = 0 
+Camera.SetAtPos(1385.568, -810.5753, 78.1164)
+32@ = 0 
+
+:MANSIO1_4466
+if 
+  800 > 32@ 
+jf @MANSIO1_4496 
+wait 0 
+jump @MANSIO1_4466 
+
+:MANSIO1_4496
+fade 1 500 
+99@ = Actor.Create(Mission1, #TRIADA, 1485.536, -818.0389, 130.0)
+Actor.Angle(99@) = 90.0
+0860: link_actor 99@ to_interior 0 
+0913: run_external_script 1 (PARACHUTE) -1 -25.0 10.0 -3.0 -1.0 5.0 6.5 1 99@  
+08A9: load_external_script 1 (PARACHUTE) 
+0707: start_scene_skip_to @MANSIO1_4932 
+32@ = 0 
+
+:MANSIO1_4604
+if 
+  1000 > 32@ 
+jf @MANSIO1_4640 
+wait 0 
+00C0: set_current_time_hours_to 3 minutes_to 0 
+jump @MANSIO1_4604 
+
+:MANSIO1_4640
+32@ = 0 
+111@ = 0 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 1385.568 -810.5753 78.1164 position_to 1368.495 -855.6013 75.1238 time 12000 smooth_transition 1 
+0920: point_camera 1385.498 -809.579 78.0669 transverse_to 1369.012 -854.7825 75.3725 time 12000 smooth_transition 1 
+
+:MANSIO1_4738
+if 
+  14000 > 32@ 
+jf @MANSIO1_4894 
+wait 0 
+if and
+  111@ == 0 
+  32@ > 3000 
+jf @MANSIO1_4881 
+100@ = Actor.Create(Mission1, #TRIADB, 1485.536, -818.0389, 130.0)
+Actor.Angle(100@) = 90.0
+0860: link_actor 100@ to_interior 0 
+0913: run_external_script 1 (PARACHUTE) -1 -25.0 10.0 -3.0 -1.0 5.0 6.5 1 100@  
+08A9: load_external_script 1 (PARACHUTE) 
+111@ = 1 
+
+:MANSIO1_4881
+00C0: set_current_time_hours_to 3 minutes_to 0 
+jump @MANSIO1_4738 
+
+:MANSIO1_4894
+fade 0 1000 
+
+:MANSIO1_4901
+if 
+fading 
+jf @MANSIO1_4925 
+wait 0 
+jump @MANSIO1_4901 
+
+:MANSIO1_4925
+49@ = 1 
+
+:MANSIO1_4932
+0701: end_scene_skip 
+fade 0 0 
+
+:MANSIO1_4940
+if 
+fading 
+jf @MANSIO1_4964 
+wait 0 
+jump @MANSIO1_4940 
+
+:MANSIO1_4964
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+if 
+  49@ == 0 
+jf @MANSIO1_4993 
+jump @MANSIO1_5725 
+
+:MANSIO1_4993
+49@ = 0 
+115@ = 35.0 
+116@ = 20.0 
+114@ = 100.2 
+$8271 = 1291.266 
+$8272 = -788.1172 
+$8273 = 96.7736 
+117@ = 1291.153 
+118@ = -788.1339 
+119@ = 95.0 
+0A0B: set_rendering_origin_at_3D_coord 1291.266 -788.1172 96.7736 angle 122.0 
+Model.Load(#OPMANS01_CUNTE)
+Model.Load(#CEHOLLYHIL06)
+Model.Load(#SUNSET22_LAWN)
+
+:MANSIO1_5127
+if or
+   not Model.Available(#OPMANS01_CUNTE)
+   not Model.Available(#CEHOLLYHIL06)
+   not Model.Available(#SUNSET22_LAWN)
+jf @MANSIO1_5164 
+wait 0 
+jump @MANSIO1_5127 
+
+:MANSIO1_5164
+167@ = 2 
+32@ = 0 
+
+:MANSIO1_5178
+if 
+  500 > 32@ 
+jf @MANSIO1_5215 
+wait 0 
+gosub @MANSIO1_10605 
+jump @MANSIO1_5178 
+
+:MANSIO1_5215
+064B: 124@ = create_particle "SMOKE_FLARE" at 1291.454 -775.3071 95.5 type 1 
+064B: 125@ = create_particle "SMOKE_FLARE" at 1303.211 -788.2426 95.5 type 1 
+064B: 126@ = create_particle "SMOKE_FLARE" at 1291.159 -800.4006 95.5 type 1 
+101@ = Actor.Create(Mission1, #TRIADB, 1323.17, -783.7548, 117.0)
+Actor.Angle(101@) = 90.0
+0860: link_actor 101@ to_interior 0 
+Actor.GiveWeaponAndAmmo(101@, M4, 30000)
+0913: run_external_script 1 (PARACHUTE) -1 -2.0 1.0 -3.0 -1.0 1.5 3.2 1 101@  
+08A9: load_external_script 1 (PARACHUTE) 
+083C: set_actor 101@ velocity_in_direction_XYZ 0.0 0.0 2.0 
+060B: set_actor 101@ decision_maker_to 34@ 
+102@ = Actor.Create(Mission1, #TRIADA, 1323.442, -798.6427, 120.0)
+Actor.Angle(102@) = 90.0
+0860: link_actor 102@ to_interior 0 
+Actor.GiveWeaponAndAmmo(102@, M4, 30000)
+0913: run_external_script 1 (PARACHUTE) -1 -2.0 1.0 -3.0 -1.0 1.0 2.5 1 102@  
+08A9: load_external_script 1 (PARACHUTE) 
+083C: set_actor 102@ velocity_in_direction_XYZ 0.0 0.0 2.0 
+060B: set_actor 102@ decision_maker_to 34@ 
+fade 1 1000 
+
+:MANSIO1_5577
+if 
+fading 
+jf @MANSIO1_5615 
+wait 0 
+gosub @MANSIO1_10605 
+gosub @MANSIO1_18691 
+jump @MANSIO1_5577 
+
+:MANSIO1_5615
+0707: start_scene_skip_to @MANSIO1_5723 
+32@ = 0 
+
+:MANSIO1_5629
+if 
+  8 > 107@ 
+jf @MANSIO1_5692 
+wait 0 
+gosub @MANSIO1_9401 
+gosub @MANSIO1_10200 
+00C0: set_current_time_hours_to 3 minutes_to 0 
+gosub @MANSIO1_10605 
+gosub @MANSIO1_18691 
+jump @MANSIO1_5629 
+
+:MANSIO1_5692
+fade 0 500 
+
+:MANSIO1_5699
+if 
+fading 
+jf @MANSIO1_5723 
+wait 0 
+jump @MANSIO1_5699 
+
+:MANSIO1_5723
+0701: end_scene_skip 
+
+:MANSIO1_5725
+fade 0 0 
+
+:MANSIO1_5731
+if 
+fading 
+jf @MANSIO1_5755 
+wait 0 
+jump @MANSIO1_5731 
+
+:MANSIO1_5755
+Model.Destroy(#OPMANS01_CUNTE)
+Model.Destroy(#CEHOLLYHIL06)
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+064C: make_particle 124@ visible 
+064C: make_particle 125@ visible 
+064C: make_particle 126@ visible 
+$8271 = 1291.266 
+$8272 = -788.1172 
+$8273 = 96.7736 
+Model.Load(#GUN_PARA)
+Model.Load(#CARDBOARDBOX2)
+03CF: load_wav 1818 as 3 
+
+:MANSIO1_5831
+if or
+   not Model.Available(#GUN_PARA)
+   not Model.Available(#CARDBOARDBOX2)
+83D0:   not wav 3 loaded 
+jf @MANSIO1_5881 
+wait 0 
+167@ = 4 
+gosub @MANSIO1_10605 
+jump @MANSIO1_5831 
+
+:MANSIO1_5881
+05AA: 76@s = 'MAN1_DA' // @s = 'short'  // ~z~You ever jumped before?
+04AF: 55@ = 23811 // = constant 
+0085: 65@ = 131@ // (int) 
+05AA: 78@s = 'MAN1_DB' // @s = 'short'  // ~z~Nah. You?
+04AF: 56@ = 23812 // = constant 
+0085: 66@ = 132@ // (int) 
+05AA: 80@s = 'MAN1_DC' // @s = 'short'  // ~z~Nah.
+04AF: 57@ = 23813 // = constant 
+0085: 67@ = 131@ // (int) 
+05AA: 82@s = 'MAN1_DD' // @s = 'short'  // ~z~When we land, we're going feel invincible!
+04AF: 58@ = 23814 // = constant 
+0085: 68@ = 132@ // (int) 
+05AA: 84@s = 'MAN1_DE' // @s = 'short'  // ~z~I AM INVINCIBLE!
+04AF: 59@ = 23815 // = constant 
+0085: 69@ = 131@ // (int) 
+05AA: 86@s = 'MAN1_DF' // @s = 'short'  // ~z~Hey, wait up!
+04AF: 60@ = 23816 // = constant 
+0085: 70@ = 132@ // (int) 
+05AA: 88@s = 'MAN1_DG' // @s = 'short'  // ~z~WhaaaHOOOOOO!
+04AF: 61@ = 23817 // = constant 
+0085: 71@ = 132@ // (int) 
+05AA: 90@s = 'MAN1_DH' // @s = 'short'  // ~z~WhaaaHEEEEEE!
+04AF: 62@ = 23818 // = constant 
+0085: 72@ = 133@ // (int) 
+05AA: 92@s = 'MAN1_DJ' // @s = 'short'  // ~z~WhoooHOOOOOO!
+04AF: 63@ = 23819 // = constant 
+0085: 73@ = 134@ // (int) 
+129@ = Object.Init(#CARDBOARDBOX2, 1601.759, -785.1198, 349.95)
+Object.Angle(129@) = 90.0
+Object.KeepInMemory(129@) = True
+0750: set_object 129@ visibility 0 
+Object.CollisionDetection(129@) = False
+Camera.Restore_WithJumpCut
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object 129@ offset_from_object_origin 0.0 0.0 0.0 orientation 0 both_side_angle_limit 40.0 lock_weapon 0 
+157@ = 0 
+Camera.SetAtPos(1601.759, -785.1198, 351.0)
+Actor.RemoveReferences(159@)
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 0 
+0901: enable_player $PLAYER_CHAR jump_key 0 
+0881: set_player $PLAYER_CHAR able_to_shoot_weapons 0 
+02A3: enable_widescreen 0 
+0581: enable_radar 0 
+0826: enable_hud 0 
+222@ = 2000 
+221@ = 0 
+220@ = 0.0 
+32@ = 0 
+
+:MANSIO1_6333
+if 
+  500 > 32@ 
+jf @MANSIO1_6370 
+wait 0 
+gosub @MANSIO1_10605 
+jump @MANSIO1_6333 
+
+:MANSIO1_6370
+set_weather 0 
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 500 
+
+:MANSIO1_6388
+if 
+fading 
+jf @MANSIO1_6419 
+wait 0 
+gosub @MANSIO1_10605 
+jump @MANSIO1_6388 
+
+:MANSIO1_6419
+32@ = 0 
+156@ = 0 
+75@ = 0 
+
+:MANSIO1_6440
+if 
+  5 > 75@ 
+jf @MANSIO1_6695 
+wait 0 
+gosub @MANSIO1_10605 
+if 
+  32@ > 1000 
+jf @MANSIO1_6495 
+gosub @MANSIO1_18943 
+
+:MANSIO1_6495
+0871: init_jump_table 156@ total_jumps 3 default_jump 0 @MANSIO1_6688 jumps 0 @MANSIO1_6558 1 @MANSIO1_6584 2 @MANSIO1_6634 -1 @MANSIO1_6688 -1 @MANSIO1_6688 -1 @MANSIO1_6688 -1 @MANSIO1_6688 
+
+:MANSIO1_6558
+if 
+   not 32@ > 800 
+jf @MANSIO1_6584 
+jump @MANSIO1_6688 
+
+:MANSIO1_6584
+008A: $1276 = 55@(75@,10i) // (int) 
+05A9: s$1281 = 76@(75@,10s) // s$ 
+create_thread @A_ALAP 2 100 65@(75@,10i) 
+156@ = 2 
+
+:MANSIO1_6634
+if 
+   not $1285($1288,2i) == -3 
+jf @MANSIO1_6663 
+jump @MANSIO1_6688 
+
+:MANSIO1_6663
+$1285($1288,2i) = -4 
+75@ += 1 
+156@ = 1 
+
+:MANSIO1_6688
+jump @MANSIO1_6440 
+
+:MANSIO1_6695
+32@ = 0 
+01BD: 41@ = current_time_in_ms 
+
+:MANSIO1_6707
+wait 0 
+01BD: 40@ = current_time_in_ms 
+0085: 42@ = 40@ // (int) 
+0062: 42@ -= 41@ // (int) 
+0085: 41@ = 40@ // (int) 
+005A: 158@ += 42@ // (int) 
+43@ = 0 
+
+:MANSIO1_6755
+if 
+  4 > 43@ 
+jf @MANSIO1_6799 
+005A: 160@(43@,4i) += 42@ // (int) 
+43@ += 1 
+jump @MANSIO1_6755 
+
+:MANSIO1_6799
+gosub @MANSIO1_7433 
+gosub @MANSIO1_10890 
+gosub @MANSIO1_10605 
+if 
+  4 > 157@ 
+jf @MANSIO1_6851 
+00C0: set_current_time_hours_to 3 minutes_to 0 
+jump @MANSIO1_6915 
+
+:MANSIO1_6851
+157@ = 0 
+07FB: set_interior 'MADDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 0  // Madd Dogg's Crib
+51@ = Pickup.Create(#BODYARMOUR, 3, 1292.7, -769.0, 95.8)
+jump @MANSIO1_6922 
+
+:MANSIO1_6915
+jump @MANSIO1_6707 
+
+:MANSIO1_6922
+168@ = 4 
+04AF: 182@ = 108 // = constant 
+04AF: 183@ = 109 // = constant 
+04AF: 184@ = 108 // = constant 
+04AF: 185@ = 109 // = constant 
+
+:MANSIO1_6957
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @MANSIO1_6983 
+jump @MANSIO1_38640 
+
+:MANSIO1_6983
+if 
+  52@ == 1 
+jf @MANSIO1_7008 
+jump @MANSIO1_38568 
+
+:MANSIO1_7008
+01BD: 40@ = current_time_in_ms 
+0085: 42@ = 40@ // (int) 
+0062: 42@ -= 41@ // (int) 
+0085: 41@ = 40@ // (int) 
+005A: 158@ += 42@ // (int) 
+43@ = 0 
+
+:MANSIO1_7052
+if 
+  3 > 43@ 
+jf @MANSIO1_7108 
+005A: 160@(43@,4i) += 42@ // (int) 
+005A: 164@(43@,3i) += 42@ // (int) 
+43@ += 1 
+jump @MANSIO1_7052 
+
+:MANSIO1_7108
+005A: 163@ += 42@ // (int) 
+43@ = 0 
+
+:MANSIO1_7123
+if 
+  6 > 43@ 
+jf @MANSIO1_7167 
+005A: 188@(43@,6i) += 42@ // (int) 
+43@ += 1 
+jump @MANSIO1_7123 
+
+:MANSIO1_7167
+gosub @MANSIO1_7844 
+gosub @MANSIO1_10890 
+if 
+  157@ > 5 
+jf @MANSIO1_7206 
+gosub @MANSIO1_12716 
+
+:MANSIO1_7206
+if 
+  2 > 206@ 
+jf @MANSIO1_7238 
+gosub @MANSIO1_16837 
+jump @MANSIO1_7245 
+
+:MANSIO1_7238
+gosub @MANSIO1_14265 
+
+:MANSIO1_7245
+211@ = 0 
+077E: get_active_interior_to 48@ 
+if 
+   not 48@ == 0 
+jf @MANSIO1_7426 
+if 
+00ED:   actor $PLAYER_ACTOR sphere 0 near_point 1257.995 -785.4104 radius 5.0 5.0 on_foot 
+jf @MANSIO1_7426 
+48@ = 0 
+
+:MANSIO1_7320
+if 
+  48@ == 0 
+jf @MANSIO1_7357 
+09E8: 48@ = actor $PLAYER_ACTOR active_interior 
+wait 0 
+jump @MANSIO1_7320 
+
+:MANSIO1_7357
+fade 0 0 
+
+:MANSIO1_7363
+if 
+fading 
+jf @MANSIO1_7387 
+wait 0 
+jump @MANSIO1_7363 
+
+:MANSIO1_7387
+042B: clear_peds_from_cube_cornerA 1288.0 -772.0 1080.0 cornerB 1260.5 -787.5 1100.0 
+jump @MANSIO1_19503 
+
+:MANSIO1_7426
+jump @MANSIO1_6957 
+
+:MANSIO1_7433
+0871: init_jump_table 157@ total_jumps 4 default_jump 0 @MANSIO1_7842 jumps 0 @MANSIO1_7496 1 @MANSIO1_7606 2 @MANSIO1_7624 3 @MANSIO1_7701 -1 @MANSIO1_7842 -1 @MANSIO1_7842 -1 @MANSIO1_7842 
+
+:MANSIO1_7496
+if 
+  32@ > 8300 
+jf @MANSIO1_7599 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Player.CanMove($PLAYER_CHAR) = False
+0603: AS_actor $PLAYER_ACTOR goto_point_any_means 1584.292 -784.9141 347.0 mode 7 use_car -1 
+if 
+   not Actor.HasWeapon($PLAYER_ACTOR, 46)
+jf @MANSIO1_7578 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Parachute, 1)
+
+:MANSIO1_7578
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 46 
+221@ = 2 
+157@ += 1 
+
+:MANSIO1_7599
+jump @MANSIO1_7842 
+
+:MANSIO1_7606
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+157@ += 1 
+jump @MANSIO1_7842 
+
+:MANSIO1_7624
+if 
+00ED:   actor $PLAYER_ACTOR sphere 0 near_point 1584.292 -784.9141 radius 2.75 2.75 on_foot 
+jf @MANSIO1_7694 
+05BC: AS_actor $PLAYER_ACTOR jump 1 
+158@ = 0 
+221@ = 3 
+Camera.Shake(0)
+157@ += 1 
+
+:MANSIO1_7694
+jump @MANSIO1_7842 
+
+:MANSIO1_7701
+if 
+  158@ > 700 
+jf @MANSIO1_7835 
+158@ = 0 
+09BA: show_entered_zone_name 1 
+Object.Destroy(127@)
+Object.Destroy(128@)
+Object.Destroy(129@)
+Model.Destroy(#CARGO_REAR)
+Model.Destroy(#D9_RAMP)
+Player.CanMove($PLAYER_CHAR) = True
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 1 
+0901: enable_player $PLAYER_CHAR jump_key 1 
+0881: set_player $PLAYER_CHAR able_to_shoot_weapons 1 
+0581: enable_radar 1 
+0826: enable_hud 1 
+00BC: show_text_highpriority GXT 'MAN1_03' time 8000 flag 1  // ~s~Try to land on the ~y~mansion roof~s~ with the Triads.
+018A: 47@ = create_checkpoint_at 1290.491 -788.3314 95.4531 
+157@ += 1 
+
+:MANSIO1_7835
+jump @MANSIO1_7842 
+
+:MANSIO1_7842
+return 
+
+:MANSIO1_7844
+0871: init_jump_table 157@ total_jumps 11 default_jump 0 @MANSIO1_9399 jumps 0 @MANSIO1_7972 1 @MANSIO1_8036 2 @MANSIO1_8066 3 @MANSIO1_8284 4 @MANSIO1_8330 5 @MANSIO1_8383 6 @MANSIO1_9032 
+0872: jump_table_jumps 7 @MANSIO1_9149 8 @MANSIO1_9218 9 @MANSIO1_9279 10 @MANSIO1_9339 -1 @MANSIO1_9399 -1 @MANSIO1_9399 -1 @MANSIO1_9399 -1 @MANSIO1_9399 -1 @MANSIO1_9399 
+
+:MANSIO1_7972
+if 
+  $1498 == 2 
+jf @MANSIO1_8004 
+157@ = 2 
+jump @MANSIO1_8029 
+
+:MANSIO1_8004
+if 
+  $1498 == 3 
+jf @MANSIO1_8029 
+157@ += 1 
+
+:MANSIO1_8029
+jump @MANSIO1_9399 
+
+:MANSIO1_8036
+if 
+8818:   not actor $PLAYER_ACTOR in_air 
+jf @MANSIO1_8059 
+157@ += 1 
+
+:MANSIO1_8059
+jump @MANSIO1_9399 
+
+:MANSIO1_8066
+208@ = 0 
+gosub @MANSIO1_17131 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO1_8199 
+if 
+   not 210@ == -1 
+jf @MANSIO1_8176 
+if 
+  6 > 210@ 
+jf @MANSIO1_8146 
+157@ = 5 
+jump @MANSIO1_8169 
+
+:MANSIO1_8146
+00BC: show_text_highpriority GXT 'MAN1_04' time 8000 flag 1  // ~s~Get to the ~y~mansion roof~s~ and help the Triads.
+157@ = 4 
+
+:MANSIO1_8169
+jump @MANSIO1_8199 
+
+:MANSIO1_8176
+00BC: show_text_highpriority GXT 'MAN1_04' time 8000 flag 1  // ~s~Get to the ~y~mansion roof~s~ and help the Triads.
+157@ = 3 
+
+:MANSIO1_8199
+43@ = 0 
+
+:MANSIO1_8206
+if 
+  4 > 43@ 
+jf @MANSIO1_8277 
+if 
+   not Actor.Dead(170@(43@,6i))
+jf @MANSIO1_8263 
+Actor.SetImmunities(170@(43@,6i), 0, 0, 0, 0, 0)
+
+:MANSIO1_8263
+43@ += 1 
+jump @MANSIO1_8206 
+
+:MANSIO1_8277
+jump @MANSIO1_9399 
+
+:MANSIO1_8284
+208@ = 0 
+gosub @MANSIO1_17131 
+if 
+   not 210@ == -1 
+jf @MANSIO1_8323 
+157@ += 1 
+
+:MANSIO1_8323
+jump @MANSIO1_9399 
+
+:MANSIO1_8330
+208@ = 0 
+gosub @MANSIO1_17131 
+if and
+   not 210@ == -1 
+  6 > 210@ 
+jf @MANSIO1_8376 
+157@ += 1 
+
+:MANSIO1_8376
+jump @MANSIO1_9399 
+
+:MANSIO1_8383
+Marker.Disable(47@)
+if 
+  168@ == 0 
+jf @MANSIO1_8429 
+00BC: show_text_highpriority GXT 'MAN1_06' time 8000 flag 1  // ~s~You will have to keep the roof clear until the ~b~Triads~s~ arrive.
+jump @MANSIO1_8445 
+
+:MANSIO1_8429
+00BC: show_text_highpriority GXT 'MAN1_05' time 8000 flag 1  // ~s~Help keep the roof clear until the ~b~Triads~s~ arrive.
+
+:MANSIO1_8445
+Player.ClearWantedLevel($PLAYER_CHAR)
+01F0: set_max_wanted_level_to 0 
+143@ = Actor.Create(Mission1, #TRIADA, 1000.0, -785.0, 200.0)
+Actor.Angle(143@) = 270.0
+0860: link_actor 143@ to_interior 0 
+146@ = Marker.CreateAboveActor(143@)
+018B: set_marker 146@ radar_mode 2 
+07E0: set_marker 146@ type_to 1 
+Actor.GiveWeaponAndAmmo(143@, M4, 30000)
+01B9: set_actor 143@ armed_weapon_to 31 
+0568: set_actor 143@ untargetable 1 
+060B: set_actor 143@ decision_maker_to 34@ 
+149@ = 0 
+164@ = 0 
+0913: run_external_script 1 (PARACHUTE) -1 -26.0 14.0 -3.0 -1.0 5.25 6.75 1 143@  
+08A9: load_external_script 1 (PARACHUTE) 
+144@ = Actor.Create(Mission1, #TRIADB, 1000.0, -770.0, 200.0)
+Actor.Angle(144@) = 270.0
+0860: link_actor 144@ to_interior 0 
+147@ = Marker.CreateAboveActor(144@)
+018B: set_marker 147@ radar_mode 2 
+07E0: set_marker 147@ type_to 1 
+Actor.GiveWeaponAndAmmo(144@, M4, 30000)
+01B9: set_actor 144@ armed_weapon_to 31 
+0568: set_actor 144@ untargetable 1 
+060B: set_actor 144@ decision_maker_to 34@ 
+150@ = 0 
+165@ = 0 
+0913: run_external_script 1 (PARACHUTE) -1 -26.0 14.0 -3.0 -1.0 5.25 6.75 1 144@  
+08A9: load_external_script 1 (PARACHUTE) 
+145@ = Actor.Create(Mission1, #TRIADA, 1000.0, -800.0, 200.0)
+Actor.Angle(145@) = 270.0
+0860: link_actor 145@ to_interior 0 
+148@ = Marker.CreateAboveActor(145@)
+018B: set_marker 148@ radar_mode 2 
+07E0: set_marker 148@ type_to 1 
+Actor.GiveWeaponAndAmmo(145@, M4, 30000)
+01B9: set_actor 145@ armed_weapon_to 31 
+0568: set_actor 145@ untargetable 1 
+060B: set_actor 145@ decision_maker_to 34@ 
+151@ = 0 
+166@ = 0 
+0913: run_external_script 1 (PARACHUTE) -1 -26.0 14.0 -3.0 -1.0 5.25 6.75 1 145@  
+08A9: load_external_script 1 (PARACHUTE) 
+169@ = 0 
+if 
+   not Actor.Dead(131@)
+jf @MANSIO1_8949 
+Actor.Health(131@) = 20
+
+:MANSIO1_8949
+if 
+   not Actor.Dead(132@)
+jf @MANSIO1_8972 
+Actor.Health(132@) = 40
+
+:MANSIO1_8972
+if 
+   not Actor.Dead(133@)
+jf @MANSIO1_8995 
+Actor.Health(133@) = 30
+
+:MANSIO1_8995
+if 
+   not Actor.Dead(134@)
+jf @MANSIO1_9018 
+Actor.Health(134@) = 25
+
+:MANSIO1_9018
+157@ += 1 
+jump @MANSIO1_9399 
+
+:MANSIO1_9032
+if 
+  169@ == 3 
+jf @MANSIO1_9142 
+208@ = 0 
+gosub @MANSIO1_17131 
+if and
+  6 > 210@ 
+   not 210@ == -1 
+jf @MANSIO1_9119 
+00BC: show_text_highpriority GXT 'MAN1_09' time 8000 flag 1  // ~s~Take the ~b~Triads~s~ inside the ~y~mansion~s~.
+157@ = 8 
+jump @MANSIO1_9142 
+
+:MANSIO1_9119
+00BC: show_text_highpriority GXT 'MAN1_10' time 8000 flag 1  // ~s~The ~b~Triads~s~ have arrived, go to the roof and collect them.
+157@ = 7 
+
+:MANSIO1_9142
+jump @MANSIO1_9399 
+
+:MANSIO1_9149
+208@ = 0 
+gosub @MANSIO1_17131 
+if and
+  6 > 210@ 
+   not 210@ == -1 
+jf @MANSIO1_9211 
+00BC: show_text_highpriority GXT 'MAN1_09' time 8000 flag 1  // ~s~Take the ~b~Triads~s~ inside the ~y~mansion~s~.
+157@ = 8 
+
+:MANSIO1_9211
+jump @MANSIO1_9399 
+
+:MANSIO1_9218
+gosub @MANSIO1_13404 
+206@ = 3 
+018A: 47@ = create_checkpoint_at 1257.995 -785.4104 91.0302 
+07FB: set_interior 'MADDOGS' access 1  // Madd Dogg's Crib
+157@ += 1 
+jump @MANSIO1_9399 
+
+:MANSIO1_9279
+208@ = 0 
+gosub @MANSIO1_17131 
+if or
+  210@ == -1 
+  210@ > 10 
+jf @MANSIO1_9332 
+gosub @MANSIO1_13508 
+157@ += 1 
+
+:MANSIO1_9332
+jump @MANSIO1_9399 
+
+:MANSIO1_9339
+208@ = 0 
+gosub @MANSIO1_17131 
+if and
+   not 210@ == -1 
+  10 >= 210@ 
+jf @MANSIO1_9392 
+gosub @MANSIO1_13404 
+157@ -= 1 
+
+:MANSIO1_9392
+jump @MANSIO1_9399 
+
+:MANSIO1_9399
+return 
+
+:MANSIO1_9401
+if 
+   not Actor.Dead(101@)
+jf @MANSIO1_10186 
+0871: init_jump_table 107@ total_jumps 8 default_jump 0 @MANSIO1_10179 jumps 0 @MANSIO1_9545 1 @MANSIO1_9642 2 @MANSIO1_9781 3 @MANSIO1_9833 4 @MANSIO1_9955 5 @MANSIO1_9997 6 @MANSIO1_10093 
+0872: jump_table_jumps 7 @MANSIO1_10146 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 -1 @MANSIO1_10179 
+
+:MANSIO1_9545
+if 
+   Actor.Animation(101@) == "PARA_LAND"
+jf @MANSIO1_9593 
+105@ = 1 
+107@ += 1 
+jump @MANSIO1_9635 
+
+:MANSIO1_9593
+Actor.StorePos(101@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  99.0 > $TEMPVAR_FLOAT_3 
+jf @MANSIO1_9635 
+218@ = 1 
+
+:MANSIO1_9635
+jump @MANSIO1_10179 
+
+:MANSIO1_9642
+if 
+   not Actor.Animation(101@) == "PARA_LAND"
+jf @MANSIO1_9774 
+0615: define_AS_pack_begin 45@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 1291.519 -776.0716 95.4531 mode 6 time -1 ms // versionA 
+05BA: AS_actor -1 move_mouth 400 ms 
+05BA: AS_actor -1 move_mouth 400 ms 
+05D3: AS_actor -1 goto_point 1280.995 -780.3347 95.461 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 110.0 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 101@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+107@ += 1 
+
+:MANSIO1_9774
+jump @MANSIO1_10179 
+
+:MANSIO1_9781
+0646: unknown_get_actor 101@ task_1560_status_store_to 46@ // similar to 062E 
+if 
+  46@ == 4 
+jf @MANSIO1_9826 
+064C: make_particle 124@ visible 
+32@ = 0 
+107@ += 1 
+
+:MANSIO1_9826
+jump @MANSIO1_10179 
+
+:MANSIO1_9833
+if 
+  32@ > 1500 
+jf @MANSIO1_9948 
+107@ += 1 
+159@ = Actor.Create(Mission2, #LSV1, 1281.413, -785.8877, 91.0302)
+Actor.Angle(159@) = 90.0
+0860: link_actor 159@ to_interior 0 
+05D3: AS_actor 159@ goto_point 1268.337 -785.9549 94.9688 mode 4 time -1 ms // versionA 
+060B: set_actor 159@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(159@, MP5, 1)
+01B9: set_actor 159@ armed_weapon_to 29 
+
+:MANSIO1_9948
+jump @MANSIO1_10179 
+
+:MANSIO1_9955
+if 
+  190.0 > 115@ 
+jf @MANSIO1_9983 
+jump @MANSIO1_10179 
+
+:MANSIO1_9983
+32@ = 0 
+107@ += 1 
+
+:MANSIO1_9997
+if 
+  32@ > 2000 
+jf @MANSIO1_10086 
+if 
+   not Actor.Dead(159@)
+jf @MANSIO1_10046 
+Actor.StorePos(159@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:MANSIO1_10046
+$TEMPVAR_FLOAT_3 += 1.0 
+0668: AS_actor 101@ rotate_and_shoot_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 100 ms 
+32@ = 0 
+107@ += 1 
+
+:MANSIO1_10086
+jump @MANSIO1_10179 
+
+:MANSIO1_10093
+if 
+  32@ > 50 
+jf @MANSIO1_10139 
+if 
+   not Actor.Dead(159@)
+jf @MANSIO1_10132 
+0321: AS_actor 159@ die_headshotted 
+
+:MANSIO1_10132
+107@ += 1 
+
+:MANSIO1_10139
+jump @MANSIO1_10179 
+
+:MANSIO1_10146
+if 
+  32@ > 2000 
+jf @MANSIO1_10172 
+107@ += 1 
+
+:MANSIO1_10172
+jump @MANSIO1_10179 
+
+:MANSIO1_10179
+jump @MANSIO1_10198 
+
+:MANSIO1_10186
+Actor.RemoveReferences(101@)
+107@ = -1 
+
+:MANSIO1_10198
+return 
+
+:MANSIO1_10200
+if 
+   not Actor.Dead(102@)
+jf @MANSIO1_10591 
+0871: init_jump_table 108@ total_jumps 4 default_jump 0 @MANSIO1_10584 jumps 0 @MANSIO1_10279 1 @MANSIO1_10327 2 @MANSIO1_10494 3 @MANSIO1_10539 -1 @MANSIO1_10584 -1 @MANSIO1_10584 -1 @MANSIO1_10584 
+
+:MANSIO1_10279
+if 
+   Actor.Animation(102@) == "PARA_LAND"
+jf @MANSIO1_10320 
+106@ = 1 
+108@ += 1 
+
+:MANSIO1_10320
+jump @MANSIO1_10584 
+
+:MANSIO1_10327
+if 
+   not Actor.Animation(102@) == "PARA_LAND"
+jf @MANSIO1_10487 
+0615: define_AS_pack_begin 45@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 1291.213 -799.4603 95.4531 mode 6 time -1 ms // versionA 
+05BA: AS_actor -1 move_mouth 400 ms 
+05BA: AS_actor -1 move_mouth 400 ms 
+05D3: AS_actor -1 goto_point 1302.196 -788.2992 95.4531 mode 6 time -1 ms // versionA 
+05BA: AS_actor -1 move_mouth 400 ms 
+05BA: AS_actor -1 move_mouth 400 ms 
+05D3: AS_actor -1 goto_point 1292.383 -787.4926 95.4476 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 102@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+108@ += 1 
+
+:MANSIO1_10487
+jump @MANSIO1_10584 
+
+:MANSIO1_10494
+0646: unknown_get_actor 102@ task_1560_status_store_to 46@ // similar to 062E 
+if 
+  46@ == 3 
+jf @MANSIO1_10532 
+064C: make_particle 126@ visible 
+108@ += 1 
+
+:MANSIO1_10532
+jump @MANSIO1_10584 
+
+:MANSIO1_10539
+0646: unknown_get_actor 102@ task_1560_status_store_to 46@ // similar to 062E 
+if 
+  46@ == 6 
+jf @MANSIO1_10577 
+064C: make_particle 125@ visible 
+108@ += 1 
+
+:MANSIO1_10577
+jump @MANSIO1_10584 
+
+:MANSIO1_10584
+jump @MANSIO1_10603 
+
+:MANSIO1_10591
+Actor.RemoveReferences(102@)
+108@ = -1 
+
+:MANSIO1_10603
+return 
+
+:MANSIO1_10605
+43@ = 0 
+
+:MANSIO1_10612
+if 
+001D:   167@ > 43@ // (int) 
+jf @MANSIO1_10888 
+if 
+   not 103@(43@,4i) == -1 
+jf @MANSIO1_10874 
+if 
+   not Actor.Dead(99@(43@,4i))
+jf @MANSIO1_10854 
+0871: init_jump_table 103@(43@,4i) total_jumps 2 default_jump 0 @MANSIO1_10847 jumps 0 @MANSIO1_10740 1 @MANSIO1_10789 -1 @MANSIO1_10847 -1 @MANSIO1_10847 -1 @MANSIO1_10847 -1 @MANSIO1_10847 -1 @MANSIO1_10847 
+
+:MANSIO1_10740
+if 
+   Actor.Animation(99@(43@,4i)) == "PARA_LAND"
+jf @MANSIO1_10782 
+103@(43@,4i) += 1 
+
+:MANSIO1_10782
+jump @MANSIO1_10847 
+
+:MANSIO1_10789
+if 
+   not Actor.Animation(99@(43@,4i)) == "PARA_LAND"
+jf @MANSIO1_10840 
+05BE: AS_actor 99@(43@,4i) die 
+103@(43@,4i) += 1 
+
+:MANSIO1_10840
+jump @MANSIO1_10847 
+
+:MANSIO1_10847
+jump @MANSIO1_10874 
+
+:MANSIO1_10854
+Actor.RemoveReferences(99@(43@,4i))
+103@(43@,4i) = -1 
+
+:MANSIO1_10874
+43@ += 1 
+jump @MANSIO1_10612 
+
+:MANSIO1_10888
+return 
+
+:MANSIO1_10890
+43@ = 0 
+
+:MANSIO1_10897
+if 
+  4 > 43@ 
+jf @MANSIO1_12047 
+if 
+   not 135@(43@,4i) == -1 
+jf @MANSIO1_12033 
+if 
+   not Actor.Dead(131@(43@,4i))
+jf @MANSIO1_12006 
+0871: init_jump_table 135@(43@,4i) total_jumps 11 default_jump 0 @MANSIO1_11999 jumps 0 @MANSIO1_11089 1 @MANSIO1_11277 2 @MANSIO1_11291 3 @MANSIO1_11361 4 @MANSIO1_11388 5 @MANSIO1_11456 6 @MANSIO1_11505 
+0872: jump_table_jumps 7 @MANSIO1_11617 8 @MANSIO1_11716 9 @MANSIO1_11808 10 @MANSIO1_11907 -1 @MANSIO1_11999 -1 @MANSIO1_11999 -1 @MANSIO1_11999 -1 @MANSIO1_11999 -1 @MANSIO1_11999 
+
+:MANSIO1_11089
+if 
+001D:   32@ > 139@(43@,4i) // (int) 
+jf @MANSIO1_11270 
+if or
+  43@ == 0 
+  43@ == 2 
+jf @MANSIO1_11172 
+0603: AS_actor 131@(43@,4i) goto_point_any_means 1585.293 -786.5728 347.0 mode 6 use_car -1 
+jump @MANSIO1_11259 
+
+:MANSIO1_11172
+if 
+  43@ == 1 
+jf @MANSIO1_11231 
+04AE: $1276 = 23816 // = constant 
+05A9: s$1281 = 'MAN1_DF' // s$  // ~z~Hey, wait up!
+create_thread @A_ALAP 2 100 65@(75@,10i) 
+
+:MANSIO1_11231
+0603: AS_actor 131@(43@,4i) goto_point_any_means 1585.323 -783.2303 347.0 mode 6 use_car -1 
+
+:MANSIO1_11259
+135@(43@,4i) += 1 
+
+:MANSIO1_11270
+jump @MANSIO1_11999 
+
+:MANSIO1_11277
+gosub @MANSIO1_12049 
+jump @MANSIO1_11999 
+
+:MANSIO1_11291
+if 
+  160@(43@,4i) > 1200 
+jf @MANSIO1_11354 
+070B: set_actor 131@(43@,4i) onbone_attached_object_operation 0 
+160@(43@,4i) = 0 
+gosub @MANSIO1_12439 
+135@(43@,4i) += 1 
+
+:MANSIO1_11354
+jump @MANSIO1_11999 
+
+:MANSIO1_11361
+Object.Destroy(152@(43@,4i))
+135@(43@,4i) += 1 
+jump @MANSIO1_11999 
+
+:MANSIO1_11388
+if 
+  160@(43@,4i) >= 40000 
+jf @MANSIO1_11449 
+if 
+  43@ == 0 
+jf @MANSIO1_11438 
+gosub @MANSIO1_13598 
+
+:MANSIO1_11438
+135@(43@,4i) += 1 
+
+:MANSIO1_11449
+jump @MANSIO1_11999 
+
+:MANSIO1_11456
+if 
+   Actor.Animation(131@(43@,4i)) == "PARA_LAND"
+jf @MANSIO1_11498 
+135@(43@,4i) += 1 
+
+:MANSIO1_11498
+jump @MANSIO1_11999 
+
+:MANSIO1_11505
+if 
+   not Actor.Animation(131@(43@,4i)) == "PARA_LAND"
+jf @MANSIO1_11610 
+if 
+  2 > 206@ 
+jf @MANSIO1_11568 
+206@ = 2 
+gosub @MANSIO1_14107 
+
+:MANSIO1_11568
+Actor.SetImmunities(131@(43@,4i), 0, 0, 0, 0, 0)
+0085: 135@(43@,4i) = 43@ // (int) 
+135@(43@,4i) += 7 
+
+:MANSIO1_11610
+jump @MANSIO1_11999 
+
+:MANSIO1_11617
+0856: set_actor 131@ enable_crouch 0 
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1289.698 -771.6924 94.954 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 100.0 
+04EB: AS_actor -1 crouch 0 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 131@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+135@(43@,4i) = 11 
+jump @MANSIO1_11999 
+
+:MANSIO1_11716
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1285.824 -772.1167 94.953 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 115.0 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 132@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+135@(43@,4i) = 11 
+jump @MANSIO1_11999 
+
+:MANSIO1_11808
+0856: set_actor 133@ enable_crouch 0 
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1277.87 -789.9062 95.4531 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 90.0 
+04EB: AS_actor -1 crouch 0 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 133@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+135@(43@,4i) = 11 
+jump @MANSIO1_11999 
+
+:MANSIO1_11907
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1278.609 -783.3164 95.4531 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 95.0 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 134@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+135@(43@,4i) = 11 
+jump @MANSIO1_11999 
+
+:MANSIO1_11999
+jump @MANSIO1_12033 
+
+:MANSIO1_12006
+Actor.RemoveReferences(131@(43@,4i))
+168@ -= 1 
+135@(43@,4i) = -1 
+
+:MANSIO1_12033
+43@ += 1 
+jump @MANSIO1_10897 
+
+:MANSIO1_12047
+return 
+
+:MANSIO1_12049
+0871: init_jump_table 43@ total_jumps 4 default_jump 0 @MANSIO1_12437 jumps 0 @MANSIO1_12112 1 @MANSIO1_12260 2 @MANSIO1_12112 3 @MANSIO1_12260 -1 @MANSIO1_12437 -1 @MANSIO1_12437 -1 @MANSIO1_12437 
+
+:MANSIO1_12112
+if 
+80ED:   not actor 131@(43@,4i) sphere 0 near_point 1585.293 -786.5728 radius 1.2 1.2 on_foot 
+jf @MANSIO1_12161 
+jump @MANSIO1_12437 
+
+:MANSIO1_12161
+if 
+  43@ == 2 
+jf @MANSIO1_12220 
+04AE: $1276 = 23818 // = constant 
+05A9: s$1281 = 'MAN1_DH' // s$  // ~z~WhaaaHEEEEEE!
+create_thread @A_ALAP 2 100 131@(43@,4i) 
+
+:MANSIO1_12220
+05BC: AS_actor 131@(43@,4i) jump 1 
+160@(43@,4i) = 0 
+135@(43@,4i) += 1 
+jump @MANSIO1_12437 
+
+:MANSIO1_12260
+if 
+80ED:   not actor 131@(43@,4i) sphere 0 near_point 1585.323 -783.2303 radius 1.2 1.2 on_foot 
+jf @MANSIO1_12309 
+jump @MANSIO1_12437 
+
+:MANSIO1_12309
+if 
+  43@ == 1 
+jf @MANSIO1_12356 
+04AE: $1276 = 23817 // = constant 
+05A9: s$1281 = 'MAN1_DG' // s$  // ~z~WhaaaHOOOOOO!
+jump @MANSIO1_12378 
+
+:MANSIO1_12356
+04AE: $1276 = 23819 // = constant 
+05A9: s$1281 = 'MAN1_DJ' // s$  // ~z~WhoooHOOOOOO!
+
+:MANSIO1_12378
+create_thread @A_ALAP 2 100 131@(43@,4i) 
+05BC: AS_actor 131@(43@,4i) jump 1 
+160@(43@,4i) = 0 
+135@(43@,4i) += 1 
+jump @MANSIO1_12437 
+
+:MANSIO1_12437
+return 
+
+:MANSIO1_12439
+0871: init_jump_table 43@ total_jumps 4 default_jump 0 @MANSIO1_12714 jumps 0 @MANSIO1_12502 1 @MANSIO1_12555 2 @MANSIO1_12608 3 @MANSIO1_12661 -1 @MANSIO1_12714 -1 @MANSIO1_12714 -1 @MANSIO1_12714 
+
+:MANSIO1_12502
+0913: run_external_script 1 (PARACHUTE) -1 -29.0 14.0 -3.0 -1.0 5.25 6.75 1 131@  
+08A9: load_external_script 1 (PARACHUTE) 
+jump @MANSIO1_12714 
+
+:MANSIO1_12555
+0913: run_external_script 1 (PARACHUTE) -1 -28.0 14.0 -3.0 -1.0 5.25 6.75 1 132@  
+08A9: load_external_script 1 (PARACHUTE) 
+jump @MANSIO1_12714 
+
+:MANSIO1_12608
+0913: run_external_script 1 (PARACHUTE) -1 -27.0 14.0 -3.0 -1.0 5.25 6.75 1 133@  
+08A9: load_external_script 1 (PARACHUTE) 
+jump @MANSIO1_12714 
+
+:MANSIO1_12661
+0913: run_external_script 1 (PARACHUTE) -1 -26.0 14.0 -3.0 -1.0 5.25 6.75 1 134@  
+08A9: load_external_script 1 (PARACHUTE) 
+jump @MANSIO1_12714 
+
+:MANSIO1_12714
+return 
+
+:MANSIO1_12716
+43@ = 0 
+
+:MANSIO1_12723
+if 
+  3 > 43@ 
+jf @MANSIO1_13402 
+if 
+   not Actor.Dead(143@(43@,3i))
+jf @MANSIO1_13367 
+0871: init_jump_table 149@(43@,3i) total_jumps 6 default_jump 0 @MANSIO1_13360 jumps 0 @MANSIO1_12828 1 @MANSIO1_12967 2 @MANSIO1_13016 3 @MANSIO1_13084 4 @MANSIO1_13176 5 @MANSIO1_13268 -1 @MANSIO1_13360 
+
+:MANSIO1_12828
+if 
+  164@(43@,3i) >= 35000 
+jf @MANSIO1_12960 
+if 
+  43@ == 0 
+jf @MANSIO1_12949 
+208@ = 0 
+gosub @MANSIO1_17131 
+if and
+  6 > 210@ 
+   not 210@ == -1 
+jf @MANSIO1_12933 
+00BC: show_text_highpriority GXT 'MAN1_07' time 8000 flag 1  // ~s~The ~b~Triads~s~ have nearly arrived, don't let any of them die once they land.
+jump @MANSIO1_12949 
+
+:MANSIO1_12933
+00BC: show_text_highpriority GXT 'MAN1_08' time 8000 flag 1  // ~s~Get back to the roof the ~b~Triads~s~ have nearly arrived, don't let any of them die once they land.
+
+:MANSIO1_12949
+149@(43@,3i) += 1 
+
+:MANSIO1_12960
+jump @MANSIO1_13360 
+
+:MANSIO1_12967
+if 
+   Actor.Animation(143@(43@,3i)) == "PARA_LAND"
+jf @MANSIO1_13009 
+149@(43@,3i) += 1 
+
+:MANSIO1_13009
+jump @MANSIO1_13360 
+
+:MANSIO1_13016
+if 
+   not Actor.Animation(143@(43@,3i)) == "PARA_LAND"
+jf @MANSIO1_13077 
+169@ += 1 
+0085: 149@(43@,3i) = 43@ // (int) 
+149@(43@,3i) += 3 
+
+:MANSIO1_13077
+jump @MANSIO1_13360 
+
+:MANSIO1_13084
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1279.681 -786.5801 95.4531 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 86.7391 
+04EB: AS_actor -1 crouch 0 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 143@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+149@(43@,3i) = 6 
+jump @MANSIO1_13360 
+
+:MANSIO1_13176
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1289.565 -775.1545 95.4476 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 76.697 
+04EB: AS_actor -1 crouch 0 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 144@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+149@(43@,3i) = 6 
+jump @MANSIO1_13360 
+
+:MANSIO1_13268
+0615: define_AS_pack_begin 45@ 
+0603: AS_actor -1 goto_point_any_means 1281.683 -779.4835 95.4531 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 84.4451 
+04EB: AS_actor -1 crouch 0 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 145@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+149@(43@,3i) = 6 
+jump @MANSIO1_13360 
+
+:MANSIO1_13360
+jump @MANSIO1_13388 
+
+:MANSIO1_13367
+52@ = 1 
+05AA: 53@s = 'MAN1_11' // @s = 'short'  // ~r~You failed to protect the Triads.
+
+:MANSIO1_13388
+43@ += 1 
+jump @MANSIO1_12723 
+
+:MANSIO1_13402
+return 
+
+:MANSIO1_13404
+43@ = 0 
+
+:MANSIO1_13411
+if 
+  3 > 43@ 
+jf @MANSIO1_13506 
+if 
+   not Actor.Dead(143@(43@,3i))
+jf @MANSIO1_13492 
+0792: disembark_instantly_actor 143@(43@,3i) 
+0638: AS_actor 143@(43@,3i) stay_put 0 
+0631: put_actor 143@(43@,3i) in_group 44@ 
+087F: set_actor 143@(43@,3i) never_leave_group 1 
+
+:MANSIO1_13492
+43@ += 1 
+jump @MANSIO1_13411 
+
+:MANSIO1_13506
+return 
+
+:MANSIO1_13508
+43@ = 0 
+
+:MANSIO1_13515
+if 
+  3 > 43@ 
+jf @MANSIO1_13596 
+if 
+   not Actor.Dead(143@(43@,3i))
+jf @MANSIO1_13582 
+0687: clear_actor 143@(43@,3i) task 
+0638: AS_actor 143@(43@,3i) stay_put 0 
+06C9: remove_actor 143@(43@,3i) from_group 
+
+:MANSIO1_13582
+43@ += 1 
+jump @MANSIO1_13515 
+
+:MANSIO1_13596
+return 
+
+:MANSIO1_13598
+170@ = Actor.Create(Mission2, #LSV1, 1268.069, -783.494, 94.961)
+Actor.Angle(170@) = 275.8136
+Actor.Health(170@) = 200
+Actor.SetMaxHealth(170@, 200)
+060B: set_actor 170@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(170@, MP5, 30000)
+01B9: set_actor 170@ armed_weapon_to 29 
+Actor.SetImmunities(170@, 1, 0, 0, 0, 0)
+0770: set_actor 170@ target_priority 1 
+09B5: set_actor 170@ signal_after_kill 0 
+176@ = -2 
+171@ = Actor.Create(Mission2, #LSV2, 1271.156, -780.8453, 94.9663)
+Actor.Angle(171@) = 254.8986
+Actor.Health(171@) = 200
+Actor.SetMaxHealth(171@, 200)
+060B: set_actor 171@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(171@, MP5, 30000)
+01B9: set_actor 171@ armed_weapon_to 29 
+Actor.SetImmunities(171@, 1, 0, 0, 0, 0)
+0770: set_actor 171@ target_priority 1 
+09B5: set_actor 171@ signal_after_kill 0 
+177@ = -2 
+172@ = Actor.Create(Mission2, #LSV1, 1267.737, -777.1963, 94.9577)
+Actor.Angle(172@) = 302.1641
+Actor.Health(172@) = 200
+Actor.SetMaxHealth(172@, 200)
+060B: set_actor 172@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(172@, MP5, 30000)
+01B9: set_actor 172@ armed_weapon_to 29 
+0770: set_actor 172@ target_priority 1 
+09B5: set_actor 172@ signal_after_kill 0 
+178@ = -2 
+173@ = Actor.Create(Mission2, #LSV2, 1272.534, -774.9141, 94.9466)
+Actor.Angle(173@) = 249.014
+Actor.Health(173@) = 200
+Actor.SetMaxHealth(173@, 200)
+060B: set_actor 173@ decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(173@, MP5, 30000)
+01B9: set_actor 173@ armed_weapon_to 29 
+0770: set_actor 173@ target_priority 1 
+09B5: set_actor 173@ signal_after_kill 0 
+179@ = -2 
+if 
+  2 > 157@ 
+jf @MANSIO1_14090 
+Actor.SetImmunities(170@, 1, 0, 0, 0, 0)
+Actor.SetImmunities(171@, 1, 0, 0, 0, 0)
+Actor.SetImmunities(172@, 1, 0, 0, 0, 0)
+Actor.SetImmunities(173@, 1, 0, 0, 0, 0)
+
+:MANSIO1_14090
+33@ = 3000 
+206@ = 1 
+return 
+
+:MANSIO1_14107
+if 
+   not Actor.Dead(170@)
+jf @MANSIO1_14146 
+060B: set_actor 170@ decision_maker_to 36@ 
+Actor.SetImmunities(170@, 0, 0, 0, 0, 0)
+
+:MANSIO1_14146
+if 
+   not Actor.Dead(171@)
+jf @MANSIO1_14185 
+060B: set_actor 171@ decision_maker_to 36@ 
+Actor.SetImmunities(171@, 0, 0, 0, 0, 0)
+
+:MANSIO1_14185
+if 
+   not Actor.Dead(172@)
+jf @MANSIO1_14224 
+060B: set_actor 172@ decision_maker_to 36@ 
+Actor.SetImmunities(172@, 0, 0, 0, 0, 0)
+
+:MANSIO1_14224
+if 
+   not Actor.Dead(173@)
+jf @MANSIO1_14263 
+060B: set_actor 173@ decision_maker_to 36@ 
+Actor.SetImmunities(173@, 0, 0, 0, 0, 0)
+
+:MANSIO1_14263
+return 
+
+:MANSIO1_14265
+43@ = 0 
+
+:MANSIO1_14272
+if 
+  4 > 43@ 
+jf @MANSIO1_15164 
+if 
+   not Actor.Dead(170@(43@,6i))
+jf @MANSIO1_14517 
+0871: init_jump_table 176@(43@,6i) total_jumps 3 default_jump 0 @MANSIO1_14510 jumps 0 @MANSIO1_14377 1 @MANSIO1_14426 2 @MANSIO1_14474 -1 @MANSIO1_14510 -1 @MANSIO1_14510 -1 @MANSIO1_14510 -1 @MANSIO1_14510 
+
+:MANSIO1_14377
+if 
+  188@(43@,6i) > 100 
+jf @MANSIO1_14419 
+Object.Destroy(194@(43@,6i))
+176@(43@,6i) += 1 
+
+:MANSIO1_14419
+jump @MANSIO1_14510 
+
+:MANSIO1_14426
+0646: unknown_get_actor 170@(43@,6i) task_1560_status_store_to 46@ // similar to 062E 
+if 
+  46@ >= 2 
+jf @MANSIO1_14467 
+176@(43@,6i) += 1 
+
+:MANSIO1_14467
+jump @MANSIO1_14510 
+
+:MANSIO1_14474
+Actor.StorePos(170@(43@,6i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+176@(43@,6i) += 1 
+jump @MANSIO1_14510 
+
+:MANSIO1_14510
+jump @MANSIO1_15150 
+
+:MANSIO1_14517
+if 
+   not 176@(43@,6i) == -1 
+jf @MANSIO1_14568 
+188@(43@,6i) = 0 
+176@(43@,6i) = -1 
+jump @MANSIO1_15150 
+
+:MANSIO1_14568
+if 
+  188@(43@,6i) > 2000 
+jf @MANSIO1_15150 
+Actor.DestroyWithFade(170@(43@,6i))
+if 
+  3 > 206@ 
+jf @MANSIO1_15150 
+208@ = 0 
+gosub @MANSIO1_17131 
+if or
+   not 210@ == -1 
+   not 212@ == 0 
+jf @MANSIO1_15150 
+0085: 205@ = 43@ // (int) 
+if 
+  210@ == -1 
+jf @MANSIO1_14715 
+if 
+   not 212@ == 0 
+jf @MANSIO1_14708 
+gosub @MANSIO1_15513 
+
+:MANSIO1_14708
+jump @MANSIO1_14722 
+
+:MANSIO1_14715
+gosub @MANSIO1_15166 
+
+:MANSIO1_14722
+194@(43@,6i) = Object.Create(#CARDBOARDBOX2, 200@, 201@, 93.0)
+Object.ToggleInMovingList(194@(43@,6i)) = False
+0750: set_object 194@(43@,6i) visibility 0 
+Object.KeepInMemory(194@(43@,6i)) = True
+170@(43@,6i) = Actor.Create(Mission2, 182@(43@,6i), 200@, 201@, 202@)
+0770: set_actor 170@(43@,6i) target_priority 1 
+Actor.Health(170@(43@,6i)) = 200
+Actor.SetMaxHealth(170@(43@,6i), 200)
+Actor.Angle(170@(43@,6i)) = 203@
+060B: set_actor 170@(43@,6i) decision_maker_to 34@ 
+Actor.GiveWeaponAndAmmo(170@(43@,6i), MP5, 30000)
+01B9: set_actor 170@(43@,6i) armed_weapon_to 29 
+Actor.WeaponAccuracy(170@(43@,6i)) = 70
+07DD: set_actor 170@(43@,6i) attack_rate 55 // previously known as temper_to 
+09B5: set_actor 170@(43@,6i) signal_after_kill 0 
+if 
+  4 > 43@ 
+jf @MANSIO1_15150 
+if or
+   not 210@ == -1 
+  212@ > 0 
+jf @MANSIO1_15098 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 170@(43@,6i) with_offset 0.0 3.5 0.0 
+0615: define_AS_pack_begin 45@ 
+078F: AS_actor -1 climb 1 
+04EB: AS_actor -1 crouch 1 
+0603: AS_actor -1 goto_point_any_means $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 94.95 mode 6 use_car -1 
+0638: AS_actor -1 stay_put 0 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 170@(43@,6i) to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+188@(43@,6i) = 0 
+176@(43@,6i) = 0 
+jump @MANSIO1_15143 
+
+:MANSIO1_15098
+0638: AS_actor 170@(43@,6i) stay_put 1 
+07BC: set_actor 170@(43@,6i) decision_maker_to 36@ // AS_pack_version 
+188@(43@,6i) = 0 
+176@(43@,6i) = 3 
+
+:MANSIO1_15143
+jump @MANSIO1_15150 
+
+:MANSIO1_15150
+43@ += 1 
+jump @MANSIO1_14272 
+
+:MANSIO1_15164
+return 
+
+:MANSIO1_15166
+0871: init_jump_table 210@ total_jumps 11 default_jump 1 @MANSIO1_15415 jumps 0 @MANSIO1_15294 1 @MANSIO1_15310 2 @MANSIO1_15326 3 @MANSIO1_15342 4 @MANSIO1_15358 5 @MANSIO1_15374 6 @MANSIO1_15342 
+0872: jump_table_jumps 7 @MANSIO1_15358 8 @MANSIO1_15374 9 @MANSIO1_15326 10 @MANSIO1_15310 -1 @MANSIO1_15429 -1 @MANSIO1_15429 -1 @MANSIO1_15429 -1 @MANSIO1_15429 -1 @MANSIO1_15429 
+
+:MANSIO1_15294
+0209: 204@ = random_int_in_ranges 0 5 
+jump @MANSIO1_15429 
+
+:MANSIO1_15310
+0209: 204@ = random_int_in_ranges 2 5 
+jump @MANSIO1_15429 
+
+:MANSIO1_15326
+0209: 204@ = random_int_in_ranges 3 5 
+jump @MANSIO1_15429 
+
+:MANSIO1_15342
+0209: 204@ = random_int_in_ranges 0 3 
+jump @MANSIO1_15429 
+
+:MANSIO1_15358
+0209: 204@ = random_int_in_ranges 0 2 
+jump @MANSIO1_15429 
+
+:MANSIO1_15374
+0209: 204@ = random_int_in_ranges 0 4 
+if 
+  204@ > 1 
+jf @MANSIO1_15408 
+204@ += 1 
+
+:MANSIO1_15408
+jump @MANSIO1_15429 
+
+:MANSIO1_15415
+204@ = 5 
+jump @MANSIO1_15429 
+
+:MANSIO1_15429
+if 
+  5 > 204@ 
+jf @MANSIO1_15479 
+205@ *= 5 
+005A: 204@ += 205@ // (int) 
+202@ = 94.0 
+jump @MANSIO1_15504 
+
+:MANSIO1_15479
+204@ *= 4 
+005A: 204@ += 205@ // (int) 
+202@ = 95.0 
+
+:MANSIO1_15504
+gosub @MANSIO1_15754 
+return 
+
+:MANSIO1_15513
+0871: init_jump_table 212@ total_jumps 6 default_jump 0 @MANSIO1_15670 jumps -1 @MANSIO1_15656 1 @MANSIO1_15576 2 @MANSIO1_15592 3 @MANSIO1_15608 4 @MANSIO1_15624 5 @MANSIO1_15640 -1 @MANSIO1_15670 
+
+:MANSIO1_15576
+0209: 204@ = random_int_in_ranges 0 5 
+jump @MANSIO1_15670 
+
+:MANSIO1_15592
+0209: 204@ = random_int_in_ranges 3 5 
+jump @MANSIO1_15670 
+
+:MANSIO1_15608
+0209: 204@ = random_int_in_ranges 2 5 
+jump @MANSIO1_15670 
+
+:MANSIO1_15624
+0209: 204@ = random_int_in_ranges 0 2 
+jump @MANSIO1_15670 
+
+:MANSIO1_15640
+0209: 204@ = random_int_in_ranges 0 3 
+jump @MANSIO1_15670 
+
+:MANSIO1_15656
+204@ = 5 
+jump @MANSIO1_15670 
+
+:MANSIO1_15670
+if 
+  5 > 204@ 
+jf @MANSIO1_15720 
+205@ *= 5 
+005A: 204@ += 205@ // (int) 
+202@ = 94.0 
+jump @MANSIO1_15745 
+
+:MANSIO1_15720
+204@ *= 4 
+005A: 204@ += 205@ // (int) 
+202@ = 95.0 
+
+:MANSIO1_15745
+gosub @MANSIO1_15754 
+return 
+
+:MANSIO1_15754
+0871: init_jump_table 204@ total_jumps 24 default_jump 0 @MANSIO1_16835 jumps 0 @MANSIO1_15947 1 @MANSIO1_15984 2 @MANSIO1_16021 3 @MANSIO1_16058 4 @MANSIO1_16095 5 @MANSIO1_16132 6 @MANSIO1_16169 
+0872: jump_table_jumps 7 @MANSIO1_16206 8 @MANSIO1_16243 9 @MANSIO1_16280 10 @MANSIO1_16317 11 @MANSIO1_16354 12 @MANSIO1_16391 13 @MANSIO1_16428 14 @MANSIO1_16465 15 @MANSIO1_16502 
+0872: jump_table_jumps 16 @MANSIO1_16539 17 @MANSIO1_16576 18 @MANSIO1_16613 19 @MANSIO1_16650 20 @MANSIO1_16687 21 @MANSIO1_16724 22 @MANSIO1_16761 23 @MANSIO1_16798 -1 @MANSIO1_16835 
+
+:MANSIO1_15947
+200@ = 1262.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_15984
+200@ = 1266.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16021
+200@ = 1257.0 
+201@ = -784.0 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16058
+200@ = 1269.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16095
+200@ = 1265.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16132
+200@ = 1267.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16169
+200@ = 1263.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16206
+200@ = 1257.0 
+201@ = -781.0 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16243
+200@ = 1264.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16280
+200@ = 1268.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16317
+200@ = 1264.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16354
+200@ = 1268.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16391
+200@ = 1257.0 
+201@ = -778.0 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16428
+200@ = 1267.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16465
+200@ = 1263.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16502
+200@ = 1269.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16539
+200@ = 1265.0 
+201@ = -770.5 
+203@ = 180.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16576
+200@ = 1257.0 
+201@ = -775.0 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16613
+200@ = 1262.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16650
+200@ = 1266.0 
+201@ = -789.5 
+203@ = 0.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16687
+200@ = 1268.069 
+201@ = -783.494 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16724
+200@ = 1271.156 
+201@ = -780.8453 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16761
+200@ = 1267.737 
+201@ = -777.1963 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16798
+200@ = 1272.534 
+201@ = -774.9141 
+203@ = 270.0 
+jump @MANSIO1_16835 
+
+:MANSIO1_16835
+return 
+
+:MANSIO1_16837
+if 
+  33@ > 700 
+jf @MANSIO1_17129 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY 1269.668 -778.8566 and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+if and
+  $TEMPVAR_Z_COORD > 105.0 
+  $DISTANCE_BETWEEN_POINTS > 65.0 
+  130.0 > $DISTANCE_BETWEEN_POINTS 
+jf @MANSIO1_17111 
+0208: $TEMPVAR_FLOAT_1 = random_float_in_ranges -6.0 6.1 
+if 
+  $TEMPVAR_FLOAT_1 > 0.0 
+jf @MANSIO1_16985 
+$TEMPVAR_FLOAT_1 += 1.5 
+jump @MANSIO1_16995 
+
+:MANSIO1_16985
+$TEMPVAR_FLOAT_1 -= 1.5 
+
+:MANSIO1_16995
+0208: $TEMPVAR_FLOAT_3 = random_float_in_ranges -6.0 6.1 
+if 
+  $TEMPVAR_FLOAT_3 > 0.0 
+jf @MANSIO1_17048 
+$TEMPVAR_FLOAT_3 += 1.5 
+jump @MANSIO1_17058 
+
+:MANSIO1_17048
+$TEMPVAR_FLOAT_3 -= 1.5 
+
+:MANSIO1_17058
+04C4: store_coords_to $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD from_actor $PLAYER_ACTOR with_offset $TEMPVAR_FLOAT_1 -10.0 $TEMPVAR_FLOAT_3 
+06BC: create_M4_shoot_from 1269.668 -778.8566 94.9557 target $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD energy 0 
+
+:MANSIO1_17111
+0209: 204@ = random_int_in_ranges 100 401 
+0085: 33@ = 204@ // (int) 
+
+:MANSIO1_17129
+return 
+
+:MANSIO1_17131
+if 
+  208@ == 0 
+jf @MANSIO1_17211 
+if 
+  211@ == 0 
+jf @MANSIO1_17202 
+210@ = -1 
+212@ = 0 
+Actor.StorePos($PLAYER_ACTOR, 215@, 216@, 217@)
+jump @MANSIO1_17204 
+
+:MANSIO1_17202
+return 
+
+:MANSIO1_17204
+jump @MANSIO1_17236 
+
+:MANSIO1_17211
+213@ = -1 
+Actor.StorePos(170@(214@,6i), 215@, 216@, 217@)
+
+:MANSIO1_17236
+if 
+  217@ > 94.5 
+jf @MANSIO1_17271 
+209@ = 0 
+jump @MANSIO1_17348 
+
+:MANSIO1_17271
+if 
+  217@ > 90.5 
+jf @MANSIO1_17306 
+209@ = 1 
+jump @MANSIO1_17348 
+
+:MANSIO1_17306
+if 
+  217@ > 86.0 
+jf @MANSIO1_17341 
+209@ = 2 
+jump @MANSIO1_17348 
+
+:MANSIO1_17341
+209@ = 3 
+
+:MANSIO1_17348
+0871: init_jump_table 209@ total_jumps 4 default_jump 0 @MANSIO1_18497 jumps 0 @MANSIO1_17411 1 @MANSIO1_17665 2 @MANSIO1_17884 3 @MANSIO1_18243 -1 @MANSIO1_18497 -1 @MANSIO1_18497 -1 @MANSIO1_18497 
+
+:MANSIO1_17411
+if and
+  216@ > -802.2 
+  -766.75 > 216@ 
+  215@ > 1257.9 
+  1304.4 > 215@ 
+jf @MANSIO1_17651 
+if 
+  216@ > -774.2 
+jf @MANSIO1_17532 
+if 
+  1262.7 > 215@ 
+jf @MANSIO1_17518 
+207@ = 2 
+jump @MANSIO1_17525 
+
+:MANSIO1_17518
+207@ = 1 
+
+:MANSIO1_17525
+jump @MANSIO1_17644 
+
+:MANSIO1_17532
+if 
+  -785.85 > 216@ 
+jf @MANSIO1_17602 
+if 
+  1262.7 > 215@ 
+jf @MANSIO1_17588 
+207@ = 4 
+jump @MANSIO1_17595 
+
+:MANSIO1_17588
+207@ = 3 
+
+:MANSIO1_17595
+jump @MANSIO1_17644 
+
+:MANSIO1_17602
+if 
+  1262.7 > 215@ 
+jf @MANSIO1_17637 
+207@ = 5 
+jump @MANSIO1_17644 
+
+:MANSIO1_17637
+207@ = 0 
+
+:MANSIO1_17644
+jump @MANSIO1_17658 
+
+:MANSIO1_17651
+207@ = -1 
+
+:MANSIO1_17658
+jump @MANSIO1_18497 
+
+:MANSIO1_17665
+if and
+  216@ > -793.0 
+  -767.6 > 216@ 
+  215@ > 1251.4 
+  1295.7 > 215@ 
+jf @MANSIO1_17870 
+if 
+  216@ > -776.25 
+jf @MANSIO1_17786 
+if 
+  1265.9 > 215@ 
+jf @MANSIO1_17772 
+207@ = 9 
+jump @MANSIO1_17779 
+
+:MANSIO1_17772
+207@ = 10 
+
+:MANSIO1_17779
+jump @MANSIO1_17863 
+
+:MANSIO1_17786
+if 
+  -783.5 > 216@ 
+jf @MANSIO1_17856 
+if 
+  1265.9 > 215@ 
+jf @MANSIO1_17842 
+207@ = 7 
+jump @MANSIO1_17849 
+
+:MANSIO1_17842
+207@ = 6 
+
+:MANSIO1_17849
+jump @MANSIO1_17863 
+
+:MANSIO1_17856
+207@ = 8 
+
+:MANSIO1_17863
+jump @MANSIO1_17877 
+
+:MANSIO1_17870
+207@ = -1 
+
+:MANSIO1_17877
+jump @MANSIO1_18497 
+
+:MANSIO1_17884
+if and
+  216@ > -814.0 
+  -785.0 > 216@ 
+  215@ > 1251.8 
+  1303.5 > 215@ 
+jf @MANSIO1_18229 
+if 
+  216@ > -793.6 
+jf @MANSIO1_18040 
+if 
+  215@ > 1298.8 
+jf @MANSIO1_17991 
+207@ = 13 
+jump @MANSIO1_18033 
+
+:MANSIO1_17991
+if 
+  215@ > 1259.4 
+jf @MANSIO1_18026 
+207@ = 12 
+jump @MANSIO1_18033 
+
+:MANSIO1_18026
+207@ = 11 
+
+:MANSIO1_18033
+jump @MANSIO1_18222 
+
+:MANSIO1_18040
+if 
+  216@ > -807.1 
+jf @MANSIO1_18145 
+if 
+  215@ > 1298.8 
+jf @MANSIO1_18096 
+207@ = 16 
+jump @MANSIO1_18138 
+
+:MANSIO1_18096
+if 
+  215@ > 1259.4 
+jf @MANSIO1_18131 
+207@ = 15 
+jump @MANSIO1_18138 
+
+:MANSIO1_18131
+207@ = 14 
+
+:MANSIO1_18138
+jump @MANSIO1_18222 
+
+:MANSIO1_18145
+if 
+  215@ > 1298.8 
+jf @MANSIO1_18180 
+207@ = 19 
+jump @MANSIO1_18222 
+
+:MANSIO1_18180
+if 
+  215@ > 1259.4 
+jf @MANSIO1_18215 
+207@ = 18 
+jump @MANSIO1_18222 
+
+:MANSIO1_18215
+207@ = 17 
+
+:MANSIO1_18222
+jump @MANSIO1_18236 
+
+:MANSIO1_18229
+207@ = -1 
+
+:MANSIO1_18236
+jump @MANSIO1_18497 
+
+:MANSIO1_18243
+if and
+  216@ > -834.35 
+  -787.3 > 216@ 
+  215@ > 1239.9 
+  1308.4 > 215@ 
+jf @MANSIO1_18483 
+if 
+  -804.2511 > 216@ 
+jf @MANSIO1_18399 
+if 
+  1254.75 > 215@ 
+jf @MANSIO1_18350 
+207@ = 23 
+jump @MANSIO1_18392 
+
+:MANSIO1_18350
+if 
+  1298.6 > 215@ 
+jf @MANSIO1_18385 
+207@ = 24 
+jump @MANSIO1_18392 
+
+:MANSIO1_18385
+207@ = 25 
+
+:MANSIO1_18392
+jump @MANSIO1_18476 
+
+:MANSIO1_18399
+if 
+  1254.75 > 215@ 
+jf @MANSIO1_18434 
+207@ = 20 
+jump @MANSIO1_18476 
+
+:MANSIO1_18434
+if 
+  1298.6 > 215@ 
+jf @MANSIO1_18469 
+207@ = 21 
+jump @MANSIO1_18476 
+
+:MANSIO1_18469
+207@ = 22 
+
+:MANSIO1_18476
+jump @MANSIO1_18490 
+
+:MANSIO1_18483
+207@ = -1 
+
+:MANSIO1_18490
+jump @MANSIO1_18497 
+
+:MANSIO1_18497
+if 
+  207@ == -1 
+jf @MANSIO1_18641 
+if 
+  217@ > 91.5 
+jf @MANSIO1_18634 
+212@ = 0 
+if 
+  215@ > 1279.351 
+jf @MANSIO1_18571 
+212@ += 1 
+
+:MANSIO1_18571
+if 
+  216@ > -766.75 
+jf @MANSIO1_18599 
+212@ += 2 
+
+:MANSIO1_18599
+if 
+  -802.2 > 216@ 
+jf @MANSIO1_18627 
+212@ += 4 
+
+:MANSIO1_18627
+jump @MANSIO1_18641 
+
+:MANSIO1_18634
+212@ = -1 
+
+:MANSIO1_18641
+if 
+  208@ == 0 
+jf @MANSIO1_18681 
+0085: 210@ = 207@ // (int) 
+211@ = 1 
+jump @MANSIO1_18689 
+
+:MANSIO1_18681
+0085: 213@ = 207@ // (int) 
+
+:MANSIO1_18689
+return 
+
+:MANSIO1_18691
+0871: init_jump_table 218@ total_jumps 1 default_jump 0 @MANSIO1_18822 jumps 1 @MANSIO1_18754 -1 @MANSIO1_18822 -1 @MANSIO1_18822 -1 @MANSIO1_18822 -1 @MANSIO1_18822 -1 @MANSIO1_18822 -1 @MANSIO1_18822 
+
+:MANSIO1_18754
+if 
+  190.0 > 115@ 
+jf @MANSIO1_18815 
+115@ += 0.34 
+114@ -= 0.006 
+118@ += 0.01 
+116@ += 0.01 
+
+:MANSIO1_18815
+jump @MANSIO1_18822 
+
+:MANSIO1_18822
+02F7: 122@ = cosine 115@ // (float) 
+02F6: 123@ = sine 115@ // (float) 
+0087: 120@ = 116@ // (float) 
+006B: 120@ *= 122@ // (float) 
+0087: 121@ = 116@ // (float) 
+006B: 121@ *= 123@ // (float) 
+0087: 112@ = 117@ // (float) 
+005B: 112@ += 120@ // (float) 
+0087: 113@ = 118@ // (float) 
+005B: 113@ += 121@ // (float) 
+Camera.SetPosition(112@, 113@, 114@, 0.0, 0.0, 0.0)
+Camera.PointAt(117@, 118@, 119@, 2)
+return 
+
+:MANSIO1_18943
+0871: init_jump_table 219@ total_jumps 2 default_jump 0 @MANSIO1_19092 jumps 0 @MANSIO1_19006 1 @MANSIO1_19021 -1 @MANSIO1_19092 -1 @MANSIO1_19092 -1 @MANSIO1_19092 -1 @MANSIO1_19092 -1 @MANSIO1_19092 
+
+:MANSIO1_19006
+097B: play_audio_at_object 128@ event 1108 
+219@ += 1 
+
+:MANSIO1_19021
+if 
+  220@ > -20.0 
+jf @MANSIO1_19077 
+220@ += -0.1 
+0453: set_object 128@ XYZ_rotation 220@ 0.0 90.0 
+jump @MANSIO1_19092 
+
+:MANSIO1_19077
+097B: play_audio_at_object 128@ event 1109 
+219@ += 1 
+
+:MANSIO1_19092
+return 
+0871: init_jump_table 221@ total_jumps 3 default_jump 0 @MANSIO1_19340 jumps 0 @MANSIO1_19157 1 @MANSIO1_19220 2 @MANSIO1_19329 -1 @MANSIO1_19340 -1 @MANSIO1_19340 -1 @MANSIO1_19340 -1 @MANSIO1_19340 
+
+:MANSIO1_19157
+if 
+002D:   33@ >= 222@ // (int) 
+jf @MANSIO1_19208 
+0209: 223@ = random_int_in_ranges 4000 6001 
+33@ = 0 
+221@ += 1 
+jump @MANSIO1_19213 
+
+:MANSIO1_19208
+Camera.Shake(224@)
+
+:MANSIO1_19213
+jump @MANSIO1_19340 
+
+:MANSIO1_19220
+if 
+002D:   33@ >= 223@ // (int) 
+jf @MANSIO1_19318 
+0209: 224@ = random_int_in_ranges 40 51 
+Camera.Shake(224@)
+0209: 222@ = random_int_in_ranges 2500 5001 
+0085: 225@ = 224@ // (int) 
+225@ *= 2 
+225@ += 150 
+015B: shake_player_controller 0 time 222@ intensity 225@ 
+33@ = 0 
+221@ -= 1 
+jump @MANSIO1_19322 
+
+:MANSIO1_19318
+Camera.Shake(5)
+
+:MANSIO1_19322
+jump @MANSIO1_19340 
+
+:MANSIO1_19329
+Camera.Shake(20)
+jump @MANSIO1_19340 
+
+:MANSIO1_19340
+return 
+
+:MANSIO1_19342
+0650: destroy_particle 124@ 
+0650: destroy_particle 125@ 
+0650: destroy_particle 126@ 
+Marker.Disable(47@)
+Marker.Disable(146@)
+Marker.Disable(147@)
+Marker.Disable(148@)
+Pickup.Destroy(51@)
+43@ = 0 
+
+:MANSIO1_19389
+if 
+  4 > 43@ 
+jf @MANSIO1_19448 
+Actor.RemoveReferences(99@(43@,4i))
+Actor.RemoveReferences(131@(43@,4i))
+Actor.RemoveReferences(170@(43@,6i))
+43@ += 1 
+jump @MANSIO1_19389 
+
+:MANSIO1_19448
+Actor.RemoveReferences(159@)
+Model.Destroy(#PARACHUTE)
+Model.Destroy(#PARA_PACK)
+Model.Destroy(#GUN_PARA)
+04EF: release_animation "PARACHUTE" 
+Model.Destroy(#CARGO_REAR)
+Model.Destroy(#D9_RAMP)
+Model.Destroy(#CARDBOARDBOX2)
+Model.Destroy(#CELLPHONE)
+return 
+
+:MANSIO1_19503
+gosub @MANSIO1_13508 
+gosub @MANSIO1_19342 
+065C: release_decision_maker 39@ 
+08E7: disable_entrance_markers 1 
+Camera.SetAtPos(1267.429, -781.5715, 1090.891)
+060A: create_decision_maker_type 0 store_to 38@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 38@ on_event 9 taskID 911 respect 0.0 hate 100.0 like 100.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 38@ on_event 15 taskID 415 respect 0.0 hate 100.0 like 100.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker 38@ on_event 31 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+Model.Load(#LSV3)
+Model.Load(#BFYST)
+Model.Load(#HFYPRO)
+023C: load_special_actor 'POPPA' as 1 // models 290-299 
+
+:MANSIO1_19677
+if or
+   not Model.Available(#LSV3)
+   not Model.Available(#BFYST)
+   not Model.Available(#HFYPRO)
+823D:   not special_actor 1 loaded 
+jf @MANSIO1_19715 
+wait 0 
+jump @MANSIO1_19677 
+
+:MANSIO1_19715
+51@ = Pickup.Create(#HEALTH, 3, 1278.88, -810.5082, 1086.0)
+Camera.SetPosition(1266.807, -782.0668, 1092.602, 0.0, 0.0, 0.0)
+Camera.PointAt(1267.786, -781.8895, 1092.5, 2)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.PutAt($PLAYER_ACTOR, 1267.785, -781.2607, 1090.898)
+Actor.Angle($PLAYER_ACTOR) = 185.363
+157@ = 0 
+if 
+   not Actor.Dead(143@)
+jf @MANSIO1_19887 
+Actor.PutAt(143@, 1263.087, -782.9864, 1090.898)
+Marker.Disable(146@)
+jump @MANSIO1_19935 
+
+:MANSIO1_19887
+143@ = Actor.Create(Mission1, #TRIADA, 1263.087, -782.9864, 1090.898)
+Actor.GiveWeaponAndAmmo(143@, M4, 30000)
+01B9: set_actor 143@ armed_weapon_to 31 
+0568: set_actor 143@ untargetable 1 
+
+:MANSIO1_19935
+Actor.Angle(143@) = 269.9343
+Actor.Health(143@) = 300
+0860: link_actor 143@ to_interior 5 
+060B: set_actor 143@ decision_maker_to 34@ 
+09B5: set_actor 143@ signal_after_kill 0 
+Actor.WeaponAccuracy(143@) = 75
+07DD: set_actor 143@ attack_rate 60 // previously known as temper_to 
+04AF: 428@ = 117 // = constant 
+149@ = 0 
+if 
+   not Actor.Dead(144@)
+jf @MANSIO1_20051 
+Actor.PutAt(144@, 1261.967, -778.3527, 1090.898)
+Marker.Disable(147@)
+jump @MANSIO1_20099 
+
+:MANSIO1_20051
+144@ = Actor.Create(Mission1, #TRIADB, 1261.967, -778.3527, 1090.898)
+Actor.GiveWeaponAndAmmo(144@, M4, 30000)
+01B9: set_actor 144@ armed_weapon_to 31 
+0568: set_actor 144@ untargetable 1 
+
+:MANSIO1_20099
+Actor.Angle(144@) = 258.1764
+Actor.Health(144@) = 300
+0860: link_actor 144@ to_interior 5 
+060B: set_actor 144@ decision_maker_to 34@ 
+09B5: set_actor 144@ signal_after_kill 0 
+Actor.WeaponAccuracy(144@) = 75
+07DD: set_actor 144@ attack_rate 60 // previously known as temper_to 
+150@ = 1 
+04AF: 429@ = 118 // = constant 
+if 
+   not Actor.Dead(145@)
+jf @MANSIO1_20215 
+Actor.PutAt(145@, 1267.936, -782.3963, 1090.938)
+Marker.Disable(148@)
+jump @MANSIO1_20263 
+
+:MANSIO1_20215
+145@ = Actor.Create(Mission1, #TRIADB, 1267.936, -782.3963, 1090.938)
+Actor.GiveWeaponAndAmmo(145@, M4, 30000)
+01B9: set_actor 145@ armed_weapon_to 31 
+0568: set_actor 145@ untargetable 1 
+
+:MANSIO1_20263
+Actor.Angle(145@) = 7.0205
+Actor.Health(145@) = 300
+0860: link_actor 145@ to_interior 5 
+060B: set_actor 145@ decision_maker_to 34@ 
+43@ = 0 
+
+:MANSIO1_20303
+if 
+  20 > 43@ 
+jf @MANSIO1_20346 
+246@(43@,20i) = -2 
+43@ += 1 
+jump @MANSIO1_20303 
+
+:MANSIO1_20346
+43@ = 0 
+
+:MANSIO1_20353
+if 
+  10 > 43@ 
+jf @MANSIO1_20396 
+296@(43@,10i) = -2 
+43@ += 1 
+jump @MANSIO1_20353 
+
+:MANSIO1_20396
+320@ = -2 
+321@ = -2 
+322@ = -2 
+323@ = -2 
+346@ = 1282.481 
+362@ = -783.0235 
+378@ = 1088.93 
+394@ = 178.1922 
+347@ = 1283.504 
+363@ = -782.3303 
+379@ = 1088.93 
+395@ = 179.0122 
+344@ = 2 
+348@ = 1280.705 
+364@ = -789.9243 
+380@ = 1088.93 
+396@ = 86.8595 
+349@ = 1283.79 
+365@ = -798.3011 
+381@ = 1088.93 
+397@ = 282.0571 
+350@ = 1280.78 
+366@ = -801.7443 
+382@ = 1088.93 
+398@ = 94.8903 
+351@ = 1283.531 
+367@ = -810.207 
+383@ = 1088.93 
+399@ = 277.6203 
+352@ = 1280.724 
+368@ = -813.7949 
+384@ = 1088.93 
+400@ = 92.4805 
+353@ = 1283.641 
+369@ = -822.3738 
+385@ = 1088.93 
+401@ = 281.8632 
+345@ = 8 
+354@ = 1283.491 
+370@ = -785.184 
+386@ = 1088.93 
+402@ = 178.5884 
+355@ = 1281.049 
+371@ = -792.4401 
+387@ = 1088.93 
+403@ = 182.731 
+356@ = 1283.697 
+372@ = -799.8134 
+388@ = 1088.93 
+404@ = 177.1231 
+357@ = 1280.901 
+373@ = -804.8507 
+389@ = 1088.93 
+405@ = 184.0353 
+358@ = 1283.5 
+374@ = -812.0164 
+390@ = 1088.93 
+406@ = 175.55 
+359@ = 1280.848 
+375@ = -816.8154 
+391@ = 1088.93 
+407@ = 188.1912 
+360@ = 1283.654 
+376@ = -831.0235 
+392@ = 1088.93 
+408@ = 71.1923 
+361@ = 1282.427 
+377@ = -834.7235 
+393@ = 1088.93 
+409@ = 92.1225 
+0209: 452@ = random_int_in_ranges 0 4 
+04AF: 444@ = 23824 // = constant 
+05AA: 453@s = 'MAN1_FC' // @s = 'short'  // ~z~Room clear!
+04AF: 445@ = 23825 // = constant 
+05AA: 455@s = 'MAN1_FD' // @s = 'short'  // ~z~This one's clear!
+04AF: 446@ = 23826 // = constant 
+05AA: 457@s = 'MAN1_FE' // @s = 'short'  // ~z~CLEAR!
+04AF: 447@ = 23827 // = constant 
+05AA: 459@s = 'MAN1_FF' // @s = 'short'  // ~z~OK, it's clear!
+04AF: 448@ = 23831 // = constant 
+05AA: 461@s = 'MAN1_FK' // @s = 'short'  // ~z~Room clear!
+04AF: 449@ = 23832 // = constant 
+05AA: 463@s = 'MAN1_FL' // @s = 'short'  // ~z~This room's clean!
+04AF: 450@ = 23833 // = constant 
+05AA: 465@s = 'MAN1_FM' // @s = 'short'  // ~z~No one in there!
+04AF: 451@ = 23834 // = constant 
+05AA: 467@s = 'MAN1_FN' // @s = 'short'  // ~z~No one left in here!
+226@ = Actor.Create(Mission2, #LSV1, 1275.64, -776.5879, 1089.711)
+Actor.Angle(226@) = 127.9642
+Actor.Health(226@) = 200
+Actor.SetMaxHealth(226@, 200)
+0860: link_actor 226@ to_interior 5 
+Actor.GiveWeaponAndAmmo(226@, MP5, 30000)
+01B9: set_actor 226@ armed_weapon_to 29 
+Actor.WeaponAccuracy(226@) = 35
+07DD: set_actor 226@ attack_rate 50 // previously known as temper_to 
+04EB: AS_actor 226@ crouch 1 
+060B: set_actor 226@ decision_maker_to 34@ 
+246@ = 0 
+227@ = Actor.Create(Mission2, #LSV3, 1281.108, -776.7111, 1089.704)
+Actor.Angle(227@) = 99.357
+Actor.Health(227@) = 200
+Actor.SetMaxHealth(227@, 200)
+0860: link_actor 227@ to_interior 5 
+Actor.GiveWeaponAndAmmo(227@, MP5, 30000)
+01B9: set_actor 227@ armed_weapon_to 29 
+Actor.WeaponAccuracy(227@) = 35
+07DD: set_actor 227@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 227@ crouch 1 
+060B: set_actor 227@ decision_maker_to 34@ 
+247@ = 0 
+228@ = Actor.Create(Mission2, #LSV1, 1281.617, -784.6133, 1088.93)
+Actor.Angle(228@) = 90.0
+Actor.Health(228@) = 200
+Actor.SetMaxHealth(228@, 200)
+0860: link_actor 228@ to_interior 5 
+Actor.GiveWeaponAndAmmo(228@, MP5, 30000)
+01B9: set_actor 228@ armed_weapon_to 29 
+Actor.WeaponAccuracy(228@) = 35
+07DD: set_actor 228@ attack_rate 70 // previously known as temper_to 
+060B: set_actor 228@ decision_maker_to 34@ 
+248@ = 0 
+229@ = Actor.Create(Mission2, #LSV3, 1283.19, -786.4687, 1088.93)
+Actor.Angle(229@) = 0.0
+Actor.Health(229@) = 200
+Actor.SetMaxHealth(229@, 200)
+0860: link_actor 229@ to_interior 5 
+Actor.GiveWeaponAndAmmo(229@, MP5, 30000)
+01B9: set_actor 229@ armed_weapon_to 29 
+Actor.WeaponAccuracy(229@) = 35
+07DD: set_actor 229@ attack_rate 50 // previously known as temper_to 
+060B: set_actor 229@ decision_maker_to 34@ 
+249@ = 0 
+487@ = -1 
+490@ = 1275.382 
+496@ = -782.1158 
+502@ = 1088.93 
+508@ = 270.0 
+491@ = 1290.621 
+497@ = -797.5714 
+503@ = 1088.93 
+509@ = 90.0 
+492@ = 1276.333 
+498@ = -813.5852 
+504@ = 1088.93 
+510@ = 270.0 
+493@ = 1274.861 
+499@ = -825.8968 
+505@ = 1088.93 
+511@ = 270.0 
+494@ = 1226.309 
+500@ = -832.0841 
+506@ = 1083.008 
+512@ = 180.0 
+495@ = 1288.024 
+501@ = -821.6524 
+507@ = 1088.93 
+513@ = 90.0 
+04AF: 331@ = 23800 // = constant 
+05AA: 336@s = 'MAN1_AA' // @s = 'short'  // ~z~Die motherfuckers, none of you are leaving this house alive!
+04AF: 332@ = 23801 // = constant 
+05AA: 338@s = 'MAN1_AB' // @s = 'short'  // ~z~Who are you to break into this place, eh?
+04AF: 333@ = 23802 // = constant 
+05AA: 340@s = 'MAN1_AC' // @s = 'short'  // ~z~All you fools are gonna die!
+04AF: 334@ = 23803 // = constant 
+05AA: 342@s = 'MAN1_AD' // @s = 'short'  // ~z~Ain't nobody gonna hear from you again!
+335@ = 0 
+330@ = 0 
+0917: audio_zone 'MADDOGL' enable_sound 1 
+0968: actor $PLAYER_ACTOR stop_mouth 
+fade 1 1000 
+
+:MANSIO1_22063
+if 
+fading 
+jf @MANSIO1_22087 
+wait 0 
+jump @MANSIO1_22063 
+
+:MANSIO1_22087
+32@ = 0 
+49@ = 0 
+04AE: $1276 = 23820 // = constant 
+05A9: s$1281 = 'MAN1_EA' // s$  // ~z~We're heavily outnumbered, but if we all keep our heads, we should kick ass!
+create_thread @A_ALAP 2 100 145@ 
+0707: start_scene_skip_to @MANSIO1_22396 
+
+:MANSIO1_22145
+if 
+  4000 > 32@ 
+jf @MANSIO1_22175 
+wait 0 
+jump @MANSIO1_22145 
+
+:MANSIO1_22175
+if 
+   not Actor.Dead(226@)
+jf @MANSIO1_22205 
+04EB: AS_actor 226@ crouch 0 
+49@ = 1 
+
+:MANSIO1_22205
+if 
+  4400 > 32@ 
+jf @MANSIO1_22235 
+wait 0 
+jump @MANSIO1_22205 
+
+:MANSIO1_22235
+if 
+   not Actor.Dead(226@)
+jf @MANSIO1_22281 
+0668: AS_actor 226@ rotate_and_shoot_at 1267.728 -782.9617 1092.689 300 ms 
+49@ = 2 
+
+:MANSIO1_22281
+if 
+  4700 > 32@ 
+jf @MANSIO1_22311 
+wait 0 
+jump @MANSIO1_22281 
+
+:MANSIO1_22311
+if and
+   not Actor.Dead(226@)
+   not Actor.Dead(145@)
+jf @MANSIO1_22356 
+0687: clear_actor 226@ task 
+04EB: AS_actor 226@ crouch 1 
+0321: AS_actor 145@ die_headshotted 
+49@ = 3 
+
+:MANSIO1_22356
+05D4: AS_actor $PLAYER_ACTOR rotate_angle 270.0 
+
+:MANSIO1_22366
+if 
+  5400 > 32@ 
+jf @MANSIO1_22396 
+wait 0 
+jump @MANSIO1_22366 
+
+:MANSIO1_22396
+0701: end_scene_skip 
+0871: init_jump_table 49@ total_jumps 3 default_jump 0 @MANSIO1_22533 jumps 0 @MANSIO1_22505 1 @MANSIO1_22482 2 @MANSIO1_22461 -1 @MANSIO1_22533 -1 @MANSIO1_22533 -1 @MANSIO1_22533 -1 @MANSIO1_22533 
+
+:MANSIO1_22461
+if 
+   not Actor.Dead(226@)
+jf @MANSIO1_22482 
+0687: clear_actor 226@ task 
+
+:MANSIO1_22482
+if 
+   not Actor.Dead(226@)
+jf @MANSIO1_22505 
+04EB: AS_actor 226@ crouch 1 
+
+:MANSIO1_22505
+if 
+   not Actor.Dead(145@)
+jf @MANSIO1_22526 
+0321: AS_actor 145@ die_headshotted 
+
+:MANSIO1_22526
+jump @MANSIO1_22533 
+
+:MANSIO1_22533
+Actor.Angle($PLAYER_ACTOR) = 270.0
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+04AE: $1276 = 23821 // = constant 
+05A9: s$1281 = 'MAN1_EB' // s$  // ~z~Bastards! LET'S HIT'EM!
+create_thread @A_ALAP 2 101 143@ 
+33@ = 0 
+415@ = 1 
+411@ = 1 
+416@ = -1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+if 
+   not Actor.Dead(143@)
+jf @MANSIO1_22713 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1266.858 -782.4518 1090.898 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 270.5538 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 143@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+
+:MANSIO1_22713
+if 
+   not Actor.Dead(144@)
+jf @MANSIO1_22803 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1268.02 -779.9092 1090.898 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 267.5782 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 144@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+
+:MANSIO1_22803
+if 
+   not Actor.Dead(226@)
+jf @MANSIO1_22827 
+060B: set_actor 226@ decision_maker_to 36@ 
+
+:MANSIO1_22827
+if 
+   not Actor.Dead(227@)
+jf @MANSIO1_22851 
+060B: set_actor 227@ decision_maker_to 36@ 
+
+:MANSIO1_22851
+if 
+   not Actor.Dead(228@)
+jf @MANSIO1_22910 
+0615: define_AS_pack_begin 45@ 
+05BA: AS_actor -1 move_mouth 1000 ms 
+06E3: AS_actor -1 roll_sideways 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 228@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+
+:MANSIO1_22910
+if 
+   not Actor.Dead(229@)
+jf @MANSIO1_23001 
+0615: define_AS_pack_begin 45@ 
+05BA: AS_actor -1 move_mouth 500 ms 
+05D3: AS_actor -1 goto_point 1283.221 -779.912 1088.93 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+04EB: AS_actor -1 crouch 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 229@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+
+:MANSIO1_23001
+01BD: 41@ = current_time_in_ms 
+157@ = 0 
+
+:MANSIO1_23013
+wait 0 
+01BD: 40@ = current_time_in_ms 
+0085: 42@ = 40@ // (int) 
+0062: 42@ -= 41@ // (int) 
+0085: 41@ = 40@ // (int) 
+005A: 164@ += 42@ // (int) 
+005A: 165@ += 42@ // (int) 
+43@ = 0 
+
+:MANSIO1_23069
+if 
+  20 > 43@ 
+jf @MANSIO1_23113 
+005A: 266@(43@,20i) += 42@ // (int) 
+43@ += 1 
+jump @MANSIO1_23069 
+
+:MANSIO1_23113
+43@ = 0 
+
+:MANSIO1_23120
+if 
+  10 > 43@ 
+jf @MANSIO1_23164 
+005A: 306@(43@,10i) += 42@ // (int) 
+43@ += 1 
+jump @MANSIO1_23120 
+
+:MANSIO1_23164
+005A: 480@ += 42@ // (int) 
+005A: 481@ += 42@ // (int) 
+005A: 482@ += 42@ // (int) 
+005A: 324@ += 42@ // (int) 
+005A: 325@ += 42@ // (int) 
+005A: 326@ += 42@ // (int) 
+005A: 327@ += 42@ // (int) 
+gosub @MANSIO1_23362 
+gosub @MANSIO1_29265 
+gosub @MANSIO1_32943 
+gosub @MANSIO1_28236 
+if 
+  157@ > 0 
+jf @MANSIO1_23273 
+gosub @MANSIO1_34365 
+
+:MANSIO1_23273
+if 
+  330@ == 1 
+jf @MANSIO1_23298 
+gosub @MANSIO1_35232 
+
+:MANSIO1_23298
+if 
+   not 521@ == 0 
+jf @MANSIO1_23323 
+gosub @MANSIO1_35825 
+
+:MANSIO1_23323
+if 
+  514@ == 2 
+jf @MANSIO1_23348 
+jump @MANSIO1_36597 
+
+:MANSIO1_23348
+471@ = 0 
+jump @MANSIO1_23013 
+
+:MANSIO1_23362
+0871: init_jump_table 157@ total_jumps 12 default_jump 0 @MANSIO1_28234 jumps 0 @MANSIO1_23490 1 @MANSIO1_24555 2 @MANSIO1_24919 3 @MANSIO1_25067 4 @MANSIO1_25918 5 @MANSIO1_26613 6 @MANSIO1_26838 
+0872: jump_table_jumps 7 @MANSIO1_27010 8 @MANSIO1_27239 9 @MANSIO1_27468 10 @MANSIO1_27735 11 @MANSIO1_27964 -1 @MANSIO1_28234 -1 @MANSIO1_28234 -1 @MANSIO1_28234 -1 @MANSIO1_28234 
+
+:MANSIO1_23490
+if or
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1285.937 -783.2331 cornerB 1279.36 -779.1484 
+  149@ == 6 
+  150@ == 7 
+jf @MANSIO1_24548 
+286@ = Actor.Create(Mission2, #LSV1, 1271.954, -786.6414, 1088.928)
+Actor.Angle(286@) = 248.455
+0860: link_actor 286@ to_interior 5 
+Actor.GiveWeaponAndAmmo(286@, MP5, 30000)
+01B9: set_actor 286@ armed_weapon_to 29 
+Actor.WeaponAccuracy(286@) = 45
+07DD: set_actor 286@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 286@ stay_put 1 
+060B: set_actor 286@ decision_maker_to 36@ 
+296@ = 0 
+287@ = Actor.Create(Mission2, #LSV3, 1272.165, -790.5964, 1088.928)
+Actor.Angle(287@) = 277.2843
+0860: link_actor 287@ to_interior 5 
+Actor.GiveWeaponAndAmmo(287@, MP5, 30000)
+01B9: set_actor 287@ armed_weapon_to 29 
+Actor.WeaponAccuracy(287@) = 45
+07DD: set_actor 287@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 287@ stay_put 1 
+060B: set_actor 287@ decision_maker_to 36@ 
+297@ = 0 
+288@ = Actor.Create(Mission2, #LSV3, 1287.489, -788.2037, 1088.93)
+Actor.Angle(288@) = 176.3381
+0860: link_actor 288@ to_interior 5 
+Actor.GiveWeaponAndAmmo(288@, MP5, 30000)
+01B9: set_actor 288@ armed_weapon_to 29 
+Actor.WeaponAccuracy(288@) = 50
+07DD: set_actor 288@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 288@ stay_put 1 
+060B: set_actor 288@ decision_maker_to 36@ 
+298@ = 0 
+289@ = Actor.Create(Mission2, #LSV1, 1292.456, -788.2022, 1088.93)
+Actor.Angle(289@) = 145.1614
+0860: link_actor 289@ to_interior 5 
+Actor.GiveWeaponAndAmmo(289@, MP5, 30000)
+01B9: set_actor 289@ armed_weapon_to 29 
+Actor.WeaponAccuracy(289@) = 50
+07DD: set_actor 289@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 289@ stay_put 1 
+060B: set_actor 289@ decision_maker_to 36@ 
+299@ = 0 
+290@ = Actor.Create(Mission2, #LSV1, 1271.389, -800.9039, 1088.927)
+Actor.Angle(290@) = 263.9924
+0860: link_actor 290@ to_interior 5 
+Actor.GiveWeaponAndAmmo(290@, MP5, 30000)
+01B9: set_actor 290@ armed_weapon_to 29 
+Actor.WeaponAccuracy(290@) = 50
+07DD: set_actor 290@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 290@ stay_put 1 
+060B: set_actor 290@ decision_maker_to 36@ 
+300@ = 0 
+291@ = Actor.Create(Mission2, #LSV1, 1291.748, -810.5742, 1088.93)
+Actor.Angle(291@) = 87.4676
+0860: link_actor 291@ to_interior 5 
+Actor.GiveWeaponAndAmmo(291@, MP5, 30000)
+01B9: set_actor 291@ armed_weapon_to 29 
+Actor.WeaponAccuracy(291@) = 50
+07DD: set_actor 291@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 291@ stay_put 1 
+060B: set_actor 291@ decision_maker_to 36@ 
+301@ = 0 
+292@ = Actor.Create(Mission2, #LSV3, 1289.562, -801.537, 1088.93)
+Actor.Angle(292@) = 155.5354
+0860: link_actor 292@ to_interior 5 
+Actor.GiveWeaponAndAmmo(292@, MP5, 30000)
+01B9: set_actor 292@ armed_weapon_to 29 
+Actor.WeaponAccuracy(292@) = 50
+07DD: set_actor 292@ attack_rate 35 // previously known as temper_to 
+0638: AS_actor 292@ stay_put 1 
+060B: set_actor 292@ decision_maker_to 36@ 
+302@ = 0 
+293@ = Actor.Create(Mission2, #LSV3, 1272.797, -812.8729, 1088.93)
+Actor.Angle(293@) = 263.3181
+0860: link_actor 293@ to_interior 5 
+Actor.GiveWeaponAndAmmo(293@, MP5, 30000)
+01B9: set_actor 293@ armed_weapon_to 29 
+Actor.WeaponAccuracy(293@) = 60
+07DD: set_actor 293@ attack_rate 45 // previously known as temper_to 
+0638: AS_actor 293@ stay_put 1 
+060B: set_actor 293@ decision_maker_to 36@ 
+303@ = 0 
+294@ = Actor.Create(Mission2, #LSV3, 1292.816, -821.3403, 1088.93)
+Actor.Angle(294@) = 96.7033
+0860: link_actor 294@ to_interior 5 
+Actor.GiveWeaponAndAmmo(294@, MP5, 30000)
+01B9: set_actor 294@ armed_weapon_to 29 
+Actor.WeaponAccuracy(294@) = 60
+07DD: set_actor 294@ attack_rate 45 // previously known as temper_to 
+0638: AS_actor 294@ stay_put 1 
+060B: set_actor 294@ decision_maker_to 36@ 
+304@ = 0 
+295@ = Actor.Create(Mission2, #LSV1, 1292.17, -814.6696, 1088.93)
+Actor.Angle(295@) = 136.5314
+0860: link_actor 295@ to_interior 5 
+Actor.GiveWeaponAndAmmo(295@, MP5, 30000)
+01B9: set_actor 295@ armed_weapon_to 29 
+Actor.WeaponAccuracy(295@) = 60
+07DD: set_actor 295@ attack_rate 45 // previously known as temper_to 
+0638: AS_actor 295@ stay_put 1 
+060B: set_actor 295@ decision_maker_to 36@ 
+305@ = 0 
+477@ = -1 
+478@ = -1 
+479@ = -1 
+480@ = 8000 
+481@ = 4000 
+482@ = 0 
+472@ = 1 
+488@ = 8000 
+157@ += 1 
+
+:MANSIO1_24548
+jump @MANSIO1_28234 
+
+:MANSIO1_24555
+418@ = 1280.15 
+419@ = -791.93 
+420@ = 1284.45 
+421@ = -795.42 
+gosub @MANSIO1_29107 
+if 
+  417@ == 0 
+jf @MANSIO1_24627 
+jump @MANSIO1_28234 
+
+:MANSIO1_24627
+Actor.RemoveReferences(145@)
+0209: 410@ = random_int_in_ranges 0 2 
+if 
+  410@ == 0 
+jf @MANSIO1_24714 
+230@ = Actor.Create(Mission2, #LSV1, 1278.607, -801.3676, 1088.93)
+316@ = Actor.Create(Mission3, #HFYPRO, 1286.281, -809.3582, 1088.93)
+jump @MANSIO1_24762 
+
+:MANSIO1_24714
+230@ = Actor.Create(Mission2, #LSV1, 1286.281, -809.3582, 1088.93)
+316@ = Actor.Create(Mission3, #HFYPRO, 1278.607, -801.3676, 1088.93)
+
+:MANSIO1_24762
+Actor.Angle(230@) = 0.0
+Actor.Health(230@) = 200
+Actor.SetMaxHealth(230@, 200)
+0860: link_actor 230@ to_interior 5 
+Actor.GiveWeaponAndAmmo(230@, MP5, 30000)
+01B9: set_actor 230@ armed_weapon_to 29 
+Actor.WeaponAccuracy(230@) = 70
+07DD: set_actor 230@ attack_rate 60 // previously known as temper_to 
+060B: set_actor 230@ decision_maker_to 36@ 
+if 
+  410@ == 0 
+jf @MANSIO1_24866 
+06E3: AS_actor 230@ roll_sideways 1 
+jump @MANSIO1_24873 
+
+:MANSIO1_24866
+06E3: AS_actor 230@ roll_sideways 0 
+
+:MANSIO1_24873
+250@ = 0 
+Actor.Angle(316@) = 0.0
+0860: link_actor 316@ to_interior 5 
+060B: set_actor 316@ decision_maker_to 37@ 
+320@ = 0 
+157@ += 1 
+
+:MANSIO1_24919
+418@ = 1284.939 
+419@ = -799.527 
+420@ = 1279.67 
+421@ = -803.5135 
+gosub @MANSIO1_29107 
+if 
+  417@ == 0 
+jf @MANSIO1_24991 
+jump @MANSIO1_28234 
+
+:MANSIO1_24991
+413@ = 1 
+018A: 47@ = create_checkpoint_at 1227.226 -834.4195 1083.008 
+08DC: create_interior_marker 47@ at 1258.338 -785.4264 radius 91.0313 
+08FB: set_checkpoint 47@ type_to 2 
+472@ = 0 
+488@ = 10000 
+157@ += 1 
+
+:MANSIO1_25067
+418@ = 1284.94 
+419@ = -823.43 
+420@ = 1280.15 
+421@ = -818.35 
+gosub @MANSIO1_29107 
+if 
+  417@ == 0 
+jf @MANSIO1_25139 
+jump @MANSIO1_28234 
+
+:MANSIO1_25139
+231@ = Actor.Create(Mission2, #LSV3, 1267.936, -836.5694, 1084.633)
+Actor.Angle(231@) = 312.4274
+Actor.Health(231@) = 200
+Actor.SetMaxHealth(231@, 200)
+0860: link_actor 231@ to_interior 5 
+Actor.GiveWeaponAndAmmo(231@, MP5, 30000)
+01B9: set_actor 231@ armed_weapon_to 29 
+Actor.WeaponAccuracy(231@) = 60
+07DD: set_actor 231@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 231@ crouch 1 
+060B: set_actor 231@ decision_maker_to 36@ 
+251@ = 0 
+232@ = Actor.Create(Mission2, #LSV1, 1272.94, -837.6696, 1084.633)
+Actor.Angle(232@) = 325.2802
+Actor.Health(232@) = 200
+Actor.SetMaxHealth(232@, 200)
+0860: link_actor 232@ to_interior 5 
+Actor.GiveWeaponAndAmmo(232@, MP5, 30000)
+01B9: set_actor 232@ armed_weapon_to 29 
+Actor.WeaponAccuracy(232@) = 60
+07DD: set_actor 232@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 232@ crouch 1 
+060B: set_actor 232@ decision_maker_to 36@ 
+252@ = 0 
+233@ = Actor.Create(Mission2, #LSV3, 1278.936, -837.8117, 1084.633)
+Actor.Angle(233@) = 354.8666
+Actor.Health(233@) = 200
+Actor.SetMaxHealth(233@, 200)
+0860: link_actor 233@ to_interior 5 
+Actor.GiveWeaponAndAmmo(233@, MP5, 30000)
+01B9: set_actor 233@ armed_weapon_to 29 
+Actor.WeaponAccuracy(233@) = 60
+07DD: set_actor 233@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 233@ crouch 1 
+060B: set_actor 233@ decision_maker_to 36@ 
+253@ = 0 
+234@ = Actor.Create(Mission2, #LSV1, 1293.434, -837.4308, 1084.633)
+Actor.Angle(234@) = 84.6034
+Actor.Health(234@) = 200
+Actor.SetMaxHealth(234@, 200)
+0860: link_actor 234@ to_interior 5 
+Actor.GiveWeaponAndAmmo(234@, MP5, 30000)
+01B9: set_actor 234@ armed_weapon_to 29 
+Actor.WeaponAccuracy(234@) = 60
+07DD: set_actor 234@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 234@ crouch 1 
+060B: set_actor 234@ decision_maker_to 36@ 
+254@ = 0 
+235@ = Actor.Create(Mission2, #LSV3, 1288.788, -832.1437, 1084.633)
+Actor.Angle(235@) = 93.3971
+Actor.Health(235@) = 200
+Actor.SetMaxHealth(235@, 200)
+0860: link_actor 235@ to_interior 5 
+Actor.GiveWeaponAndAmmo(235@, MP5, 30000)
+01B9: set_actor 235@ armed_weapon_to 29 
+Actor.WeaponAccuracy(235@) = 60
+07DD: set_actor 235@ attack_rate 60 // previously known as temper_to 
+04EB: AS_actor 235@ crouch 1 
+060B: set_actor 235@ decision_maker_to 36@ 
+255@ = 0 
+236@ = Actor.Create(Mission2, #LSV1, 1279.452, -818.7137, 1084.633)
+Actor.Angle(236@) = 169.7489
+Actor.Health(236@) = 200
+Actor.SetMaxHealth(236@, 200)
+0860: link_actor 236@ to_interior 5 
+Actor.GiveWeaponAndAmmo(236@, MP5, 30000)
+01B9: set_actor 236@ armed_weapon_to 29 
+Actor.WeaponAccuracy(236@) = 30
+07DD: set_actor 236@ attack_rate 50 // previously known as temper_to 
+04EB: AS_actor 236@ crouch 1 
+060B: set_actor 236@ decision_maker_to 36@ 
+256@ = 0 
+317@ = Actor.Create(Mission3, #BFYST, 1292.736, -832.9896, 1084.633)
+Actor.Angle(317@) = 90.0
+0860: link_actor 317@ to_interior 5 
+060B: set_actor 317@ decision_maker_to 37@ 
+321@ = 0 
+318@ = Actor.Create(Mission3, #HFYPRO, 1277.984, -813.5414, 1084.64)
+Actor.Angle(318@) = 180.0
+0860: link_actor 318@ to_interior 5 
+060B: set_actor 318@ decision_maker_to 37@ 
+322@ = 0 
+157@ += 1 
+
+:MANSIO1_25918
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1266.533 -831.5337 cornerB 1261.282 -838.8454 
+jf @MANSIO1_26613 
+237@ = Actor.Create(Mission2, #LSV3, 1253.758, -826.5505, 1083.008)
+Actor.Angle(237@) = 197.3586
+Actor.Health(237@) = 200
+Actor.SetMaxHealth(237@, 200)
+0860: link_actor 237@ to_interior 5 
+Actor.GiveWeaponAndAmmo(237@, MP5, 30000)
+01B9: set_actor 237@ armed_weapon_to 29 
+Actor.WeaponAccuracy(237@) = 60
+07DD: set_actor 237@ attack_rate 70 // previously known as temper_to 
+04EB: AS_actor 237@ crouch 1 
+060B: set_actor 237@ decision_maker_to 36@ 
+05D3: AS_actor 237@ goto_point 1255.499 -831.5446 1083.008 mode 6 time -1 ms // versionA 
+257@ = 0 
+238@ = Actor.Create(Mission2, #LSV1, 1233.705, -827.7943, 1083.008)
+Actor.Angle(238@) = 180.0
+Actor.Health(238@) = 200
+Actor.SetMaxHealth(238@, 200)
+0860: link_actor 238@ to_interior 5 
+Actor.GiveWeaponAndAmmo(238@, MP5, 30000)
+01B9: set_actor 238@ armed_weapon_to 29 
+Actor.WeaponAccuracy(238@) = 60
+07DD: set_actor 238@ attack_rate 70 // previously known as temper_to 
+060B: set_actor 238@ decision_maker_to 34@ 
+258@ = 0 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1234.104 -832.2075 1083.008 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1238.847 -833.2389 1083.008 mode 6 time -1 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+07BC: set_actor -1 decision_maker_to 36@ // AS_pack_version 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 238@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+328@ = Actor.Create(Mission2, #SPECIAL01, 1227.226, -834.4195, 1083.008)
+Actor.Angle(328@) = 270.0
+Actor.SetImmunities(328@, 1, 1, 1, 1, 1)
+060B: set_actor 328@ decision_maker_to 34@ 
+0568: set_actor 328@ untargetable 1 
+Marker.Disable(47@)
+329@ = Marker.CreateAboveActor(328@)
+08DC: create_interior_marker 329@ at 1258.338 -785.4264 radius 91.0313 
+018B: set_marker 329@ radar_mode 1 
+516@ = 1227.315 
+517@ = -831.5784 
+0615: define_AS_pack_begin 45@ 
+06E3: AS_actor -1 roll_sideways 1 
+05BA: AS_actor -1 move_mouth 2000 ms 
+05D3: AS_actor -1 goto_point 516@ 517@ 1083.008 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+518@ = 1225.194 
+519@ = -816.5573 
+520@ = 270.0 
+514@ = 0 
+04AE: $1276 = 23804 // = constant 
+05A9: s$1281 = 'MAN1_BA' // s$  // ~z~You chose the wrong house to rob, fool!
+create_thread @A_ALAP 2 200 328@ 
+330@ = 1 
+415@ = -1 
+319@ = Actor.Create(Mission3, #BFYST, 1240.835, -826.6857, 1082.156)
+Actor.Angle(319@) = 143.0862
+0860: link_actor 319@ to_interior 5 
+060B: set_actor 319@ decision_maker_to 37@ 
+323@ = 0 
+157@ += 1 
+
+:MANSIO1_26613
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1229.934 -835.5339 1082.5 cornerB 1224.882 -838.8135 1085.5 
+jf @MANSIO1_26831 
+if 
+  515@ == 0 
+jf @MANSIO1_26702 
+00BC: show_text_highpriority GXT 'MAN1_21' time 8000 flag 1  // ~r~Big Poppa~s~ is making a run for it, chase after him!
+515@ = 1 
+
+:MANSIO1_26702
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_26824 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1231.282 
+517@ = -816.6354 
+05D3: AS_actor 328@ goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+518@ = 1256.583 
+519@ = -812.8542 
+520@ = 270.0 
+514@ = 0 
+
+:MANSIO1_26824
+157@ += 1 
+
+:MANSIO1_26831
+jump @MANSIO1_28234 
+
+:MANSIO1_26838
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1228.68 -829.9222 1082.5 cornerB 1224.883 -825.2996 1085.5 
+jf @MANSIO1_27003 
+239@ = Actor.Create(Mission2, #LSV1, 1228.808, -812.9333, 1083.008)
+Actor.Angle(239@) = 180.0
+Actor.Health(239@) = 200
+Actor.SetMaxHealth(239@, 200)
+0860: link_actor 239@ to_interior 5 
+Actor.GiveWeaponAndAmmo(239@, MP5, 30000)
+01B9: set_actor 239@ armed_weapon_to 29 
+Actor.WeaponAccuracy(239@) = 60
+07DD: set_actor 239@ attack_rate 70 // previously known as temper_to 
+060B: set_actor 239@ decision_maker_to 36@ 
+06E3: AS_actor 239@ roll_sideways 1 
+259@ = 0 
+157@ += 1 
+
+:MANSIO1_27003
+jump @MANSIO1_28234 
+
+:MANSIO1_27010
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1229.799 -810.6401 1082.5 cornerB 1224.884 -819.0158 1085.5 
+jf @MANSIO1_27232 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_27225 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1262.628 
+517@ = -805.6454 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1261.444 -812.2836 1083.015 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+518@ = 1266.928 
+519@ = -801.9423 
+520@ = 270.0 
+514@ = 0 
+
+:MANSIO1_27225
+157@ += 1 
+
+:MANSIO1_27232
+jump @MANSIO1_28234 
+
+:MANSIO1_27239
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1254.281 -810.6465 1082.5 cornerB 1264.045 -813.9205 1085.5 
+jf @MANSIO1_27461 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_27447 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1274.634 
+517@ = -801.9045 
+05D3: AS_actor 328@ goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+518@ = 1257.388 
+519@ = -789.8594 
+520@ = 90.0 
+514@ = 0 
+04AE: $1276 = 23805 // = constant 
+05A9: s$1281 = 'MAN1_BB' // s$  // ~z~You don't know who you're fucking with, do you?
+create_thread @A_ALAP 2 200 328@ 
+
+:MANSIO1_27447
+157@ += 1 
+gosub @MANSIO1_35627 
+
+:MANSIO1_27461
+jump @MANSIO1_28234 
+
+:MANSIO1_27468
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1278.469 -791.9025 1082.5 cornerB 1285.187 -786.7327 1085.5 
+jf @MANSIO1_27728 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_27721 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1249.665 
+517@ = -782.4513 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1250.071 -788.768 1083.015 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+518@ = 1265.614 
+519@ = -769.7585 
+520@ = 270.0 
+514@ = 0 
+04AE: $1276 = 23806 // = constant 
+05A9: s$1281 = 'MAN1_BC' // s$  // ~z~You trying to fuck with my house, with my shit?
+create_thread @A_ALAP 2 200 328@ 
+
+:MANSIO1_27721
+157@ += 1 
+
+:MANSIO1_27728
+jump @MANSIO1_28234 
+
+:MANSIO1_27735
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1251.285 -775.3042 1082.5 cornerB 1247.005 -765.7498 1085.5 
+jf @MANSIO1_27957 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_27950 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1269.674 
+517@ = -774.7773 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1269.4 -769.4953 1083.015 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+518@ = 1280.115 
+519@ = -781.6223 
+520@ = 270.0 
+514@ = 0 
+
+:MANSIO1_27950
+157@ += 1 
+
+:MANSIO1_27957
+jump @MANSIO1_28234 
+
+:MANSIO1_27964
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1260.289 -765.4207 1082.5 cornerB 1267.524 -774.8633 1085.5 
+jf @MANSIO1_28227 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_28220 
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+516@ = 1301.081 
+517@ = -786.3077 
+0615: define_AS_pack_begin 45@ 
+05D3: AS_actor -1 goto_point 1288.806 -780.5795 1083.015 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 1300.839 -781.0582 1083.015 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 516@ 517@ 1083.015 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+518@ = -1.0 
+514@ = 0 
+04AE: $1276 = 23807 // = constant 
+05A9: s$1281 = 'MAN1_BD' // s$  // ~z~I'm a fuck with YOU!
+create_thread @A_ALAP 2 200 328@ 
+
+:MANSIO1_28220
+157@ += 1 
+
+:MANSIO1_28227
+jump @MANSIO1_28234 
+
+:MANSIO1_28234
+return 
+
+:MANSIO1_28236
+if 
+  415@ == 0 
+jf @MANSIO1_29032 
+43@ = 0 
+
+:MANSIO1_28261
+if 
+  4 > 43@ 
+jf @MANSIO1_29025 
+if 
+  411@(43@,4i) == 1 
+jf @MANSIO1_29011 
+0871: init_jump_table 43@ total_jumps 4 default_jump 0 @MANSIO1_29011 jumps 0 @MANSIO1_28364 1 @MANSIO1_28416 2 @MANSIO1_28691 3 @MANSIO1_28743 -1 @MANSIO1_29011 -1 @MANSIO1_29011 -1 @MANSIO1_29011 
+
+:MANSIO1_28364
+00BC: show_text_highpriority GXT 'MAN1_13' time 8000 flag 1  // ~s~Search the mansion for Big Poppa and kill anyone who gets in your way.
+415@ = 1 
+0085: 416@ = 43@ // (int) 
+33@ = 0 
+43@ = 4 
+jump @MANSIO1_29011 
+
+:MANSIO1_28416
+if 
+   not Actor.Dead(143@)
+jf @MANSIO1_28564 
+if 
+0105:   actor $PLAYER_ACTOR near_actor 143@ radius 35.0 35.0 4.0 sphere 0 on_foot 
+jf @MANSIO1_28550 
+if 
+   not Actor.Dead(144@)
+jf @MANSIO1_28513 
+04AE: $1276 = 23822 // = constant 
+05A9: s$1281 = 'MAN1_FA' // s$  // ~z~CJ, clear the corridor and we'll clear each room!
+jump @MANSIO1_28535 
+
+:MANSIO1_28513
+04AE: $1276 = 23823 // = constant 
+05A9: s$1281 = 'MAN1_FB' // s$  // ~z~CJ, clear the corridor and I'll check each room!
+
+:MANSIO1_28535
+create_thread @A_ALAP 2 100 143@ 
+
+:MANSIO1_28550
+415@ = 1 
+jump @MANSIO1_28644 
+
+:MANSIO1_28564
+if 
+0105:   actor $PLAYER_ACTOR near_actor 144@ radius 35.0 35.0 4.0 sphere 0 on_foot 
+jf @MANSIO1_28637 
+04AE: $1276 = 23830 // = constant 
+05A9: s$1281 = 'MAN1_FJ' // s$  // ~z~Clear that corridor and I'll take each room!
+create_thread @A_ALAP 2 100 144@ 
+
+:MANSIO1_28637
+415@ = 1 
+
+:MANSIO1_28644
+if 
+  415@ == 1 
+jf @MANSIO1_28684 
+0085: 416@ = 43@ // (int) 
+33@ = 0 
+43@ = 4 
+
+:MANSIO1_28684
+jump @MANSIO1_29011 
+
+:MANSIO1_28691
+00BC: show_text_highpriority GXT 'MAN1_20' time 8000 flag 1  // ~r~Big Poppa~s~ is downstairs, take him out.
+415@ = 1 
+0085: 416@ = 43@ // (int) 
+33@ = 0 
+43@ = 4 
+jump @MANSIO1_29011 
+
+:MANSIO1_28743
+if 
+   not Actor.Dead(143@)
+jf @MANSIO1_28891 
+if 
+0105:   actor $PLAYER_ACTOR near_actor 143@ radius 35.0 35.0 4.0 sphere 0 on_foot 
+jf @MANSIO1_28877 
+if 
+   not Actor.Dead(144@)
+jf @MANSIO1_28840 
+04AE: $1276 = 23828 // = constant 
+05A9: s$1281 = 'MAN1_FG' // s$  // ~z~You go ahead, CJ, we'll hold the balcony!
+jump @MANSIO1_28862 
+
+:MANSIO1_28840
+04AE: $1276 = 23829 // = constant 
+05A9: s$1281 = 'MAN1_FH' // s$  // ~z~You go ahead, CJ, I'll stay and hold the balcony!
+
+:MANSIO1_28862
+create_thread @A_ALAP 2 100 143@ 
+
+:MANSIO1_28877
+415@ = 1 
+jump @MANSIO1_28971 
+
+:MANSIO1_28891
+if 
+0105:   actor $PLAYER_ACTOR near_actor 144@ radius 35.0 35.0 4.0 sphere 0 on_foot 
+jf @MANSIO1_28964 
+04AE: $1276 = 23835 // = constant 
+05A9: s$1281 = 'MAN1_FO' // s$  // ~z~Go ahead, CJ, I'll hold this balcony!
+create_thread @A_ALAP 2 100 144@ 
+
+:MANSIO1_28964
+415@ = 1 
+
+:MANSIO1_28971
+if 
+  415@ == 1 
+jf @MANSIO1_29011 
+0085: 416@ = 43@ // (int) 
+33@ = 0 
+43@ = 4 
+
+:MANSIO1_29011
+43@ += 1 
+jump @MANSIO1_28261 
+
+:MANSIO1_29025
+jump @MANSIO1_29105 
+
+:MANSIO1_29032
+if 
+  415@ == 1 
+jf @MANSIO1_29105 
+if 
+  33@ > 8000 
+jf @MANSIO1_29105 
+if 
+   not 416@ == -1 
+jf @MANSIO1_29098 
+411@(416@,4i) = -1 
+
+:MANSIO1_29098
+415@ = 0 
+
+:MANSIO1_29105
+return 
+
+:MANSIO1_29107
+417@ = 0 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 418@ 419@ cornerB 420@ 421@ 
+jf @MANSIO1_29153 
+417@ = 1 
+return 
+
+:MANSIO1_29153
+if 
+   not Actor.Dead(143@)
+jf @MANSIO1_29208 
+if 
+00A3:   actor 143@ sphere 0 in_rectangle_cornerA 418@ 419@ cornerB 420@ 421@ 
+jf @MANSIO1_29208 
+417@ = 1 
+return 
+
+:MANSIO1_29208
+if 
+   not Actor.Dead(144@)
+jf @MANSIO1_29263 
+if 
+00A3:   actor 144@ sphere 0 in_rectangle_cornerA 418@ 419@ cornerB 420@ 421@ 
+jf @MANSIO1_29263 
+417@ = 1 
+return 
+
+:MANSIO1_29263
+return 
+
+:MANSIO1_29265
+430@ = 0 
+431@ = 1 
+
+:MANSIO1_29279
+if 
+  2 > 430@ 
+jf @MANSIO1_31042 
+if 
+   not Actor.Dead(143@(430@,3i))
+jf @MANSIO1_30844 
+0871: init_jump_table 149@(430@,3i) total_jumps 18 default_jump 0 @MANSIO1_30837 jumps 0 @MANSIO1_29514 1 @MANSIO1_29514 2 @MANSIO1_29578 3 @MANSIO1_29578 4 @MANSIO1_29640 5 @MANSIO1_29640 6 @MANSIO1_29765 
+0872: jump_table_jumps 7 @MANSIO1_29765 8 @MANSIO1_29833 9 @MANSIO1_29935 10 @MANSIO1_29988 11 @MANSIO1_30064 12 @MANSIO1_30170 13 @MANSIO1_30280 14 @MANSIO1_30347 15 @MANSIO1_30442 
+0872: jump_table_jumps 16 @MANSIO1_30631 17 @MANSIO1_30699 -1 @MANSIO1_30837 -1 @MANSIO1_30837 -1 @MANSIO1_30837 -1 @MANSIO1_30837 -1 @MANSIO1_30837 -1 @MANSIO1_30837 -1 @MANSIO1_30837 
+
+:MANSIO1_29514
+if or
+   not 246@ == -1 
+   not 247@ == -1 
+   not 248@ == -1 
+   not 249@ == -1 
+jf @MANSIO1_29560 
+jump @MANSIO1_30837 
+
+:MANSIO1_29560
+149@(430@,3i) += 2 
+jump @MANSIO1_30837 
+
+:MANSIO1_29578
+0687: clear_actor 143@(430@,3i) task 
+060B: set_actor 143@(430@,3i) decision_maker_to 35@ 
+422@(430@,2i) = -1 
+0085: 424@(430@,2i) = 430@ // (int) 
+149@(430@,3i) += 2 
+jump @MANSIO1_30837 
+
+:MANSIO1_29640
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_29676 
+gosub @MANSIO1_31044 
+jump @MANSIO1_29758 
+
+:MANSIO1_29676
+0687: clear_actor 143@(430@,3i) task 
+060B: set_actor 143@(430@,3i) decision_maker_to 36@ 
+04EB: AS_actor 143@(430@,3i) crouch 1 
+0085: 433@ = 424@(430@,2i) // (int) 
+05D4: AS_actor 143@(430@,3i) rotate_angle 394@(433@,16f) 
+422@(430@,2i) = -1 
+149@(430@,3i) += 2 
+
+:MANSIO1_29758
+jump @MANSIO1_30837 
+
+:MANSIO1_29765
+if 
+  157@ > 0 
+jf @MANSIO1_29826 
+149@(430@,3i) += 2 
+if 
+  432@ == 0 
+jf @MANSIO1_29826 
+412@ = 1 
+432@ = 1 
+
+:MANSIO1_29826
+jump @MANSIO1_30837 
+
+:MANSIO1_29833
+if 
+   not Actor.Dead(143@(431@,3i))
+jf @MANSIO1_29882 
+if 
+   not 149@(431@,3i) == 13 
+jf @MANSIO1_29882 
+jump @MANSIO1_30837 
+
+:MANSIO1_29882
+060B: set_actor 143@(430@,3i) decision_maker_to 35@ 
+422@(430@,2i) = -1 
+0085: 424@(430@,2i) = 344@ // (int) 
+149@(430@,3i) += 2 
+jump @MANSIO1_30837 
+
+:MANSIO1_29935
+060B: set_actor 143@(430@,3i) decision_maker_to 35@ 
+422@(430@,2i) = -1 
+0085: 424@(430@,2i) = 345@ // (int) 
+149@(430@,3i) += 2 
+jump @MANSIO1_30837 
+
+:MANSIO1_29988
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_30024 
+gosub @MANSIO1_31044 
+jump @MANSIO1_30057 
+
+:MANSIO1_30024
+426@(430@,2i) = 1 
+422@(430@,2i) = -1 
+149@(430@,3i) += 2 
+
+:MANSIO1_30057
+jump @MANSIO1_30837 
+
+:MANSIO1_30064
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_30100 
+gosub @MANSIO1_31044 
+jump @MANSIO1_30163 
+
+:MANSIO1_30100
+060B: set_actor 143@(430@,3i) decision_maker_to 36@ 
+0638: AS_actor 143@(430@,3i) stay_put 1 
+04EB: AS_actor 143@(430@,3i) crouch 1 
+422@(430@,2i) = -1 
+345@ += 1 
+149@(430@,3i) += 2 
+
+:MANSIO1_30163
+jump @MANSIO1_30837 
+
+:MANSIO1_30170
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_30206 
+gosub @MANSIO1_31044 
+jump @MANSIO1_30273 
+
+:MANSIO1_30206
+060B: set_actor 143@(430@,3i) decision_maker_to 36@ 
+0638: AS_actor 143@(430@,3i) stay_put 1 
+04EB: AS_actor 143@(430@,3i) crouch 1 
+422@(430@,2i) = -1 
+437@(430@,2i) = -1 
+149@(430@,3i) += 2 
+
+:MANSIO1_30273
+jump @MANSIO1_30837 
+
+:MANSIO1_30280
+if 
+   not Actor.Dead(143@(431@,3i))
+jf @MANSIO1_30329 
+if 
+   not 149@(431@,3i) == 11 
+jf @MANSIO1_30329 
+jump @MANSIO1_30837 
+
+:MANSIO1_30329
+149@(430@,3i) -= 5 
+jump @MANSIO1_30837 
+
+:MANSIO1_30347
+gosub @MANSIO1_31689 
+if 
+  439@ == 1 
+jf @MANSIO1_30435 
+439@ = 0 
+060B: set_actor 143@(430@,3i) decision_maker_to 35@ 
+04EB: AS_actor 143@(430@,3i) crouch 0 
+426@(430@,2i) = 0 
+422@(430@,2i) = -1 
+149@(430@,3i) += 1 
+
+:MANSIO1_30435
+jump @MANSIO1_30837 
+
+:MANSIO1_30442
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_30478 
+gosub @MANSIO1_31044 
+jump @MANSIO1_30624 
+
+:MANSIO1_30478
+if 
+  344@ == 8 
+jf @MANSIO1_30552 
+149@(430@,3i) = 16 
+if 
+   not Actor.Dead(143@(431@,3i))
+jf @MANSIO1_30538 
+149@(431@,3i) = 16 
+
+:MANSIO1_30538
+414@ = 1 
+jump @MANSIO1_30624 
+
+:MANSIO1_30552
+422@(430@,2i) = -1 
+if 
+   not Actor.Dead(143@(431@,3i))
+jf @MANSIO1_30613 
+0085: 424@(430@,2i) = 345@ // (int) 
+149@(430@,3i) -= 4 
+jump @MANSIO1_30624 
+
+:MANSIO1_30613
+149@(430@,3i) -= 7 
+
+:MANSIO1_30624
+jump @MANSIO1_30837 
+
+:MANSIO1_30631
+060B: set_actor 143@(430@,3i) decision_maker_to 35@ 
+422@(430@,2i) = -1 
+433@ = 14 
+005A: 433@ += 430@ // (int) 
+0085: 424@(430@,2i) = 433@ // (int) 
+149@(430@,3i) += 1 
+jump @MANSIO1_30837 
+
+:MANSIO1_30699
+if 
+   not 422@(430@,2i) == 3 
+jf @MANSIO1_30735 
+gosub @MANSIO1_31044 
+jump @MANSIO1_30830 
+
+:MANSIO1_30735
+060B: set_actor 143@(430@,3i) decision_maker_to 36@ 
+0638: AS_actor 143@(430@,3i) stay_put 1 
+if 
+  424@(430@,2i) == 14 
+jf @MANSIO1_30791 
+04EB: AS_actor 143@(430@,3i) crouch 1 
+
+:MANSIO1_30791
+0085: 433@ = 424@(430@,2i) // (int) 
+05D4: AS_actor 143@(430@,3i) rotate_angle 394@(433@,16f) 
+149@(430@,3i) += 1 
+
+:MANSIO1_30830
+jump @MANSIO1_30837 
+
+:MANSIO1_30837
+jump @MANSIO1_31021 
+
+:MANSIO1_30844
+if 
+   not 149@(430@,3i) == -2 
+jf @MANSIO1_31021 
+0871: init_jump_table 149@(430@,3i) total_jumps 1 default_jump 1 @MANSIO1_30933 jumps -1 @MANSIO1_30962 -1 @MANSIO1_31021 -1 @MANSIO1_31021 -1 @MANSIO1_31021 -1 @MANSIO1_31021 -1 @MANSIO1_31021 -1 @MANSIO1_31021 
+
+:MANSIO1_30933
+164@(430@,3i) = 0 
+149@(430@,3i) = -1 
+jump @MANSIO1_31021 
+
+:MANSIO1_30962
+if 
+  10000 > 164@(430@,3i) 
+jf @MANSIO1_30992 
+jump @MANSIO1_31021 
+
+:MANSIO1_30992
+Actor.DestroyWithFade(143@(430@,3i))
+Model.Destroy(428@(430@,2i))
+149@(430@,3i) -= 1 
+
+:MANSIO1_31021
+430@ += 1 
+431@ -= 1 
+jump @MANSIO1_29279 
+
+:MANSIO1_31042
+return 
+
+:MANSIO1_31044
+0085: 433@ = 424@(430@,2i) // (int) 
+0087: 434@ = 346@(433@,16f) // (float) 
+0087: 435@ = 362@(433@,16f) // (float) 
+0087: 436@ = 378@(433@,16f) // (float) 
+if 
+  426@(430@,2i) == 1 
+jf @MANSIO1_31211 
+0871: init_jump_table 344@ total_jumps 6 default_jump 0 @MANSIO1_31211 jumps 2 @MANSIO1_31177 3 @MANSIO1_31194 4 @MANSIO1_31177 5 @MANSIO1_31194 6 @MANSIO1_31177 7 @MANSIO1_31194 -1 @MANSIO1_31211 
+
+:MANSIO1_31177
+434@ -= 3.5 
+jump @MANSIO1_31211 
+
+:MANSIO1_31194
+434@ += 3.5 
+jump @MANSIO1_31211 
+
+:MANSIO1_31211
+0871: init_jump_table 422@(430@,2i) total_jumps 4 default_jump 0 @MANSIO1_31687 jumps -1 @MANSIO1_31278 0 @MANSIO1_31391 1 @MANSIO1_31442 2 @MANSIO1_31606 -1 @MANSIO1_31687 -1 @MANSIO1_31687 -1 @MANSIO1_31687 
+
+:MANSIO1_31278
+if 
+074F:   actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31329 
+0638: AS_actor 143@(430@,3i) stay_put 1 
+422@(430@,2i) = 0 
+jump @MANSIO1_31384 
+
+:MANSIO1_31329
+0638: AS_actor 143@(430@,3i) stay_put 0 
+04EB: AS_actor 143@(430@,3i) crouch 0 
+05D3: AS_actor 143@(430@,3i) goto_point 434@ 435@ 436@ mode 6 time -2 ms // versionA 
+422@(430@,2i) = 1 
+
+:MANSIO1_31384
+jump @MANSIO1_31687 
+
+:MANSIO1_31391
+if 
+874F:   not actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31435 
+164@(430@,3i) = 0 
+422@(430@,2i) = 2 
+
+:MANSIO1_31435
+jump @MANSIO1_31687 
+
+:MANSIO1_31442
+if 
+074F:   actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31482 
+422@(430@,2i) = -1 
+jump @MANSIO1_31599 
+
+:MANSIO1_31482
+if 
+00FF:   actor 143@(430@,3i) sphere 0 in_sphere 434@ 435@ 436@ radius 1.2 1.2 1.5 on_foot 
+jf @MANSIO1_31546 
+422@(430@,2i) = 3 
+jump @MANSIO1_31599 
+
+:MANSIO1_31546
+062E: get_actor 143@(430@,3i) task 1491 status_store_to 50@ // ret 7 if not found 
+if 
+04A4:   50@ == 7 // == constant 
+jf @MANSIO1_31599 
+0687: clear_actor 143@(430@,3i) task 
+422@(430@,2i) = -1 
+
+:MANSIO1_31599
+jump @MANSIO1_31687 
+
+:MANSIO1_31606
+if 
+074F:   actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31646 
+422@(430@,2i) = 0 
+jump @MANSIO1_31680 
+
+:MANSIO1_31646
+if 
+  164@(430@,3i) > 500 
+jf @MANSIO1_31680 
+422@(430@,2i) = -1 
+
+:MANSIO1_31680
+jump @MANSIO1_31687 
+
+:MANSIO1_31687
+return 
+
+:MANSIO1_31689
+0871: init_jump_table 437@(430@,2i) total_jumps 3 default_jump 0 @MANSIO1_31943 jumps -1 @MANSIO1_31756 0 @MANSIO1_31807 1 @MANSIO1_31888 -1 @MANSIO1_31943 -1 @MANSIO1_31943 -1 @MANSIO1_31943 -1 @MANSIO1_31943 
+
+:MANSIO1_31756
+if 
+874F:   not actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31800 
+164@(430@,3i) = 0 
+437@(430@,2i) += 1 
+
+:MANSIO1_31800
+jump @MANSIO1_31943 
+
+:MANSIO1_31807
+if 
+074F:   actor 143@(430@,3i) ped_event == -1 
+jf @MANSIO1_31847 
+437@(430@,2i) -= 1 
+jump @MANSIO1_31881 
+
+:MANSIO1_31847
+if 
+  164@(430@,3i) > 300 
+jf @MANSIO1_31881 
+437@(430@,2i) += 1 
+
+:MANSIO1_31881
+jump @MANSIO1_31943 
+
+:MANSIO1_31888
+gosub @MANSIO1_31945 
+if 
+  439@ == 0 
+jf @MANSIO1_31936 
+164@(430@,3i) = 150 
+437@(430@,2i) -= 1 
+
+:MANSIO1_31936
+jump @MANSIO1_31943 
+
+:MANSIO1_31943
+return 
+
+:MANSIO1_31945
+439@ = 0 
+0871: init_jump_table 344@ total_jumps 6 default_jump 0 @MANSIO1_32475 jumps 2 @MANSIO1_32015 3 @MANSIO1_32094 4 @MANSIO1_32173 5 @MANSIO1_32245 6 @MANSIO1_32324 7 @MANSIO1_32396 -1 @MANSIO1_32475 
+
+:MANSIO1_32015
+if and
+  296@ == -1 
+  297@ == -1 
+jf @MANSIO1_32087 
+439@ = 1 
+440@ = 1271.341 
+441@ = -785.5189 
+442@ = 1278.642 
+443@ = -798.1946 
+
+:MANSIO1_32087
+jump @MANSIO1_32475 
+
+:MANSIO1_32094
+if and
+  298@ == -1 
+  299@ == -1 
+jf @MANSIO1_32166 
+439@ = 1 
+440@ = 1285.97 
+441@ = -785.5347 
+442@ = 1293.101 
+443@ = -799.4673 
+
+:MANSIO1_32166
+jump @MANSIO1_32475 
+
+:MANSIO1_32173
+if 
+  300@ == -1 
+jf @MANSIO1_32238 
+439@ = 1 
+440@ = 1271.417 
+441@ = -799.7592 
+442@ = 1278.639 
+443@ = -810.0243 
+
+:MANSIO1_32238
+jump @MANSIO1_32475 
+
+:MANSIO1_32245
+if and
+  301@ == -1 
+  302@ == -1 
+jf @MANSIO1_32317 
+439@ = 1 
+440@ = 1285.959 
+441@ = -800.8917 
+442@ = 1293.121 
+443@ = -811.5349 
+
+:MANSIO1_32317
+jump @MANSIO1_32475 
+
+:MANSIO1_32324
+if 
+  303@ == -1 
+jf @MANSIO1_32389 
+439@ = 1 
+440@ = 1271.434 
+441@ = -811.7203 
+442@ = 1278.597 
+443@ = -822.8848 
+
+:MANSIO1_32389
+jump @MANSIO1_32475 
+
+:MANSIO1_32396
+if and
+  304@ == -1 
+  305@ == -1 
+jf @MANSIO1_32468 
+439@ = 1 
+440@ = 1285.944 
+441@ = -812.8881 
+442@ = 1293.238 
+443@ = -823.5223 
+
+:MANSIO1_32468
+jump @MANSIO1_32475 
+
+:MANSIO1_32475
+if 
+  439@ == 1 
+jf @MANSIO1_32600 
+43@ = 0 
+
+:MANSIO1_32500
+if 
+  20 > 43@ 
+jf @MANSIO1_32600 
+if 
+   not Actor.Dead(226@(43@,20i))
+jf @MANSIO1_32586 
+if 
+00A3:   actor 226@(43@,20i) sphere 0 in_rectangle_cornerA 440@ 441@ cornerB 442@ 443@ 
+jf @MANSIO1_32586 
+439@ = 0 
+43@ = 20 
+
+:MANSIO1_32586
+43@ += 1 
+jump @MANSIO1_32500 
+
+:MANSIO1_32600
+if 
+  439@ == 1 
+jf @MANSIO1_32725 
+43@ = 0 
+
+:MANSIO1_32625
+if 
+  3 > 43@ 
+jf @MANSIO1_32725 
+if 
+   not Actor.Dead(474@(43@,3i))
+jf @MANSIO1_32711 
+if 
+00A3:   actor 474@(43@,3i) sphere 0 in_rectangle_cornerA 440@ 441@ cornerB 442@ 443@ 
+jf @MANSIO1_32711 
+439@ = 0 
+43@ = 2 
+
+:MANSIO1_32711
+43@ += 1 
+jump @MANSIO1_32625 
+
+:MANSIO1_32725
+if 
+  439@ == 1 
+jf @MANSIO1_32941 
+344@ += 1 
+if 
+876F:   not text_priority_displayed 
+jf @MANSIO1_32941 
+if 
+0105:   actor $PLAYER_ACTOR near_actor 143@(430@,3i) radius 35.0 35.0 4.0 sphere 0 on_foot 
+jf @MANSIO1_32941 
+if 
+  430@ == 0 
+jf @MANSIO1_32852 
+008A: $1276 = 444@(452@,8i) // (int) 
+05A9: s$1281 = 453@(452@,8s) // s$ 
+jump @MANSIO1_32890 
+
+:MANSIO1_32852
+452@ += 4 
+008A: $1276 = 444@(452@,8i) // (int) 
+05A9: s$1281 = 453@(452@,8s) // s$ 
+452@ -= 4 
+
+:MANSIO1_32890
+create_thread @A_ALAP 2 100 143@(430@,3i) 
+452@ += 1 
+if 
+  452@ == 4 
+jf @MANSIO1_32941 
+452@ = 0 
+
+:MANSIO1_32941
+return 
+
+:MANSIO1_32943
+43@ = 0 
+
+:MANSIO1_32950
+if 
+  20 > 43@ 
+jf @MANSIO1_33155 
+0871: init_jump_table 246@(43@,20i) total_jumps 2 default_jump 0 @MANSIO1_33141 jumps 0 @MANSIO1_33035 1 @MANSIO1_33091 -1 @MANSIO1_33141 -1 @MANSIO1_33141 -1 @MANSIO1_33141 -1 @MANSIO1_33141 -1 @MANSIO1_33141 
+
+:MANSIO1_33035
+if 
+   not Actor.Dead(226@(43@,20i))
+jf @MANSIO1_33069 
+jump @MANSIO1_33141 
+jump @MANSIO1_33091 
+
+:MANSIO1_33069
+266@(43@,20i) = 0 
+246@(43@,20i) = 1 
+
+:MANSIO1_33091
+if 
+  266@(43@,20i) > 2500 
+jf @MANSIO1_33134 
+Actor.RemoveReferences(226@(43@,20i))
+246@(43@,20i) = -1 
+
+:MANSIO1_33134
+jump @MANSIO1_33141 
+
+:MANSIO1_33141
+43@ += 1 
+jump @MANSIO1_32950 
+
+:MANSIO1_33155
+43@ = 0 
+
+:MANSIO1_33162
+if 
+  10 > 43@ 
+jf @MANSIO1_33367 
+0871: init_jump_table 296@(43@,10i) total_jumps 2 default_jump 0 @MANSIO1_33353 jumps 0 @MANSIO1_33247 1 @MANSIO1_33303 -1 @MANSIO1_33353 -1 @MANSIO1_33353 -1 @MANSIO1_33353 -1 @MANSIO1_33353 -1 @MANSIO1_33353 
+
+:MANSIO1_33247
+if 
+   not Actor.Dead(286@(43@,10i))
+jf @MANSIO1_33281 
+jump @MANSIO1_33353 
+jump @MANSIO1_33303 
+
+:MANSIO1_33281
+306@(43@,10i) = 0 
+296@(43@,10i) = 1 
+
+:MANSIO1_33303
+if 
+  306@(43@,10i) > 1800 
+jf @MANSIO1_33346 
+Actor.RemoveReferences(286@(43@,10i))
+296@(43@,10i) = -1 
+
+:MANSIO1_33346
+jump @MANSIO1_33353 
+
+:MANSIO1_33353
+43@ += 1 
+jump @MANSIO1_33162 
+
+:MANSIO1_33367
+43@ = 0 
+
+:MANSIO1_33374
+if 
+  4 > 43@ 
+jf @MANSIO1_33579 
+0871: init_jump_table 320@(43@,4i) total_jumps 2 default_jump 0 @MANSIO1_33565 jumps 0 @MANSIO1_33459 1 @MANSIO1_33515 -1 @MANSIO1_33565 -1 @MANSIO1_33565 -1 @MANSIO1_33565 -1 @MANSIO1_33565 -1 @MANSIO1_33565 
+
+:MANSIO1_33459
+if 
+   not Actor.Dead(316@(43@,4i))
+jf @MANSIO1_33493 
+jump @MANSIO1_33565 
+jump @MANSIO1_33515 
+
+:MANSIO1_33493
+324@(43@,4i) = 0 
+320@(43@,4i) = 1 
+
+:MANSIO1_33515
+if 
+  324@(43@,4i) > 1800 
+jf @MANSIO1_33558 
+Actor.RemoveReferences(316@(43@,4i))
+320@(43@,4i) = -1 
+
+:MANSIO1_33558
+jump @MANSIO1_33565 
+
+:MANSIO1_33565
+43@ += 1 
+jump @MANSIO1_33374 
+
+:MANSIO1_33579
+return 
+
+:MANSIO1_33581
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  $TEMPVAR_FLOAT_3 > 1089.0 
+jf @MANSIO1_33990 
+if 
+  $TEMPVAR_FLOAT_2 > -784.0 
+jf @MANSIO1_33651 
+469@ = 0 
+jump @MANSIO1_33983 
+
+:MANSIO1_33651
+if or
+  1271.0 > $TEMPVAR_FLOAT_1 
+  $TEMPVAR_FLOAT_1 > 1294.0 
+jf @MANSIO1_33696 
+469@ = 0 
+jump @MANSIO1_33983 
+
+:MANSIO1_33696
+if 
+  $TEMPVAR_FLOAT_2 > -824.0 
+jf @MANSIO1_33976 
+if 
+  1279.0 > $TEMPVAR_FLOAT_1 
+jf @MANSIO1_33822 
+if 
+  $TEMPVAR_FLOAT_2 > -799.0 
+jf @MANSIO1_33773 
+469@ = 1 
+jump @MANSIO1_33815 
+
+:MANSIO1_33773
+if 
+  $TEMPVAR_FLOAT_2 > -811.0 
+jf @MANSIO1_33808 
+469@ = 3 
+jump @MANSIO1_33815 
+
+:MANSIO1_33808
+469@ = 5 
+
+:MANSIO1_33815
+jump @MANSIO1_33969 
+
+:MANSIO1_33822
+if 
+  $TEMPVAR_FLOAT_1 > 1285.0 
+jf @MANSIO1_33927 
+if 
+  $TEMPVAR_FLOAT_2 > -800.0 
+jf @MANSIO1_33878 
+469@ = 2 
+jump @MANSIO1_33920 
+
+:MANSIO1_33878
+if 
+  $TEMPVAR_FLOAT_2 > -812.0 
+jf @MANSIO1_33913 
+469@ = 4 
+jump @MANSIO1_33920 
+
+:MANSIO1_33913
+469@ = 6 
+
+:MANSIO1_33920
+jump @MANSIO1_33969 
+
+:MANSIO1_33927
+if 
+  $TEMPVAR_FLOAT_2 > -806.0 
+jf @MANSIO1_33962 
+469@ = 7 
+jump @MANSIO1_33969 
+
+:MANSIO1_33962
+469@ = 8 
+
+:MANSIO1_33969
+jump @MANSIO1_33983 
+
+:MANSIO1_33976
+469@ = 9 
+
+:MANSIO1_33983
+jump @MANSIO1_34004 
+
+:MANSIO1_33990
+489@ = 1 
+469@ = 10 
+
+:MANSIO1_34004
+if 
+  472@ == 1 
+jf @MANSIO1_34038 
+0209: 473@ = random_int_in_ranges 0 2 
+jump @MANSIO1_34045 
+
+:MANSIO1_34038
+473@ = 0 
+
+:MANSIO1_34045
+470@ = 0 
+if 
+   not 489@ == 1 
+jf @MANSIO1_34356 
+0871: init_jump_table 469@ total_jumps 11 default_jump 0 @MANSIO1_34356 jumps 0 @MANSIO1_34198 1 @MANSIO1_34219 2 @MANSIO1_34219 3 @MANSIO1_34219 4 @MANSIO1_34272 5 @MANSIO1_34272 6 @MANSIO1_34293 
+0872: jump_table_jumps 7 @MANSIO1_34219 8 @MANSIO1_34314 9 @MANSIO1_34314 10 @MANSIO1_34335 -1 @MANSIO1_34356 -1 @MANSIO1_34356 -1 @MANSIO1_34356 -1 @MANSIO1_34356 -1 @MANSIO1_34356 
+
+:MANSIO1_34198
+08BD: set 470@ bit 1 
+08BD: set 470@ bit 2 
+jump @MANSIO1_34356 
+
+:MANSIO1_34219
+if 
+  473@ == 0 
+jf @MANSIO1_34251 
+08BD: set 470@ bit 2 
+jump @MANSIO1_34258 
+
+:MANSIO1_34251
+08BD: set 470@ bit 5 
+
+:MANSIO1_34258
+08BD: set 470@ bit 3 
+jump @MANSIO1_34356 
+
+:MANSIO1_34272
+08BD: set 470@ bit 1 
+08BD: set 470@ bit 3 
+jump @MANSIO1_34356 
+
+:MANSIO1_34293
+08BD: set 470@ bit 1 
+08BD: set 470@ bit 0 
+jump @MANSIO1_34356 
+
+:MANSIO1_34314
+08BD: set 470@ bit 0 
+08BD: set 470@ bit 4 
+jump @MANSIO1_34356 
+
+:MANSIO1_34335
+08BD: set 470@ bit 2 
+08BD: set 470@ bit 4 
+jump @MANSIO1_34356 
+
+:MANSIO1_34356
+471@ = 1 
+return 
+
+:MANSIO1_34365
+486@ = 0 
+
+:MANSIO1_34372
+if 
+  3 > 486@ 
+jf @MANSIO1_35230 
+if 
+   not Actor.Dead(474@(486@,3i))
+jf @MANSIO1_34618 
+0871: init_jump_table 477@(486@,3i) total_jumps 1 default_jump 0 @MANSIO1_34611 jumps 1 @MANSIO1_34477 -1 @MANSIO1_34611 -1 @MANSIO1_34611 -1 @MANSIO1_34611 -1 @MANSIO1_34611 -1 @MANSIO1_34611 -1 @MANSIO1_34611 
+
+:MANSIO1_34477
+if 
+  4 > 335@ 
+jf @MANSIO1_34604 
+if 
+876F:   not text_priority_displayed 
+jf @MANSIO1_34604 
+if 
+00F2:   actor 474@(486@,3i) near_actor $PLAYER_ACTOR radius 15.0 15.0 0 
+jf @MANSIO1_34604 
+008A: $1276 = 331@(335@,4i) // (int) 
+05A9: s$1281 = 336@(335@,4s) // s$ 
+create_thread @A_ALAP 2 50 474@(486@,3i) 
+477@(486@,3i) = 0 
+335@ += 1 
+
+:MANSIO1_34604
+jump @MANSIO1_34611 
+
+:MANSIO1_34611
+jump @MANSIO1_35216 
+
+:MANSIO1_34618
+0871: init_jump_table 477@(486@,3i) total_jumps 2 default_jump 1 @MANSIO1_35194 jumps -2 @MANSIO1_34789 -1 @MANSIO1_34685 -1 @MANSIO1_35216 -1 @MANSIO1_35216 -1 @MANSIO1_35216 -1 @MANSIO1_35216 -1 @MANSIO1_35216 
+
+:MANSIO1_34685
+if 
+001D:   488@ > 480@(486@,3i) // (int) 
+jf @MANSIO1_34715 
+jump @MANSIO1_35216 
+
+:MANSIO1_34715
+Actor.DestroyWithFade(474@(486@,3i))
+if 
+  486@ == 2 
+jf @MANSIO1_34789 
+if 
+  472@ == 0 
+jf @MANSIO1_34778 
+477@(486@,3i) += 1 
+jump @MANSIO1_34789 
+
+:MANSIO1_34778
+477@(486@,3i) -= 1 
+
+:MANSIO1_34789
+if 
+   not 489@ == 1 
+jf @MANSIO1_35173 
+if 
+  471@ == 0 
+jf @MANSIO1_34832 
+gosub @MANSIO1_33581 
+
+:MANSIO1_34832
+43@ = 0 
+
+:MANSIO1_34839
+if 
+  6 > 43@ 
+jf @MANSIO1_35187 
+if 
+08B9:   test 470@ bit 43@ 
+jf @MANSIO1_35173 
+if 
+803B:   not  43@ == 487@ // (int) 
+jf @MANSIO1_35173 
+if 
+838A:   not any_car_in_cube_cornerA 490@(43@,6f) 496@(43@,6f) 502@(43@,6f) cornerB 1.5 1.5 0.0 
+jf @MANSIO1_35173 
+474@(486@,3i) = Actor.Create(Mission2, #LSV1, 490@(43@,6f), 496@(43@,6f), 502@(43@,6f))
+Actor.Health(474@(486@,3i)) = 200
+Actor.SetMaxHealth(474@(486@,3i), 200)
+Actor.Angle(474@(486@,3i)) = 508@(43@,6f)
+0860: link_actor 474@(486@,3i) to_interior 5 
+Actor.GiveWeaponAndAmmo(474@(486@,3i), MP5, 30000)
+01B9: set_actor 474@(486@,3i) armed_weapon_to 29 
+060B: set_actor 474@(486@,3i) decision_maker_to 36@ 
+087E: set_actor 474@(486@,3i) weapon_droppable 0 
+05E2: AS_actor 474@(486@,3i) kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(474@(486@,3i)) = 50
+07DD: set_actor 474@(486@,3i) attack_rate 60 // previously known as temper_to 
+if 
+  486@ == 0 
+jf @MANSIO1_35147 
+477@(486@,3i) = 1 
+jump @MANSIO1_35158 
+
+:MANSIO1_35147
+477@(486@,3i) = 0 
+
+:MANSIO1_35158
+0085: 487@ = 43@ // (int) 
+43@ = 5 
+
+:MANSIO1_35173
+43@ += 1 
+jump @MANSIO1_34839 
+
+:MANSIO1_35187
+jump @MANSIO1_35216 
+
+:MANSIO1_35194
+480@(486@,3i) = 0 
+477@(486@,3i) = -1 
+
+:MANSIO1_35216
+486@ += 1 
+jump @MANSIO1_34372 
+
+:MANSIO1_35230
+return 
+
+:MANSIO1_35232
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_35625 
+0871: init_jump_table 514@ total_jumps 2 default_jump 0 @MANSIO1_35625 jumps 0 @MANSIO1_35311 1 @MANSIO1_35595 -1 @MANSIO1_35625 -1 @MANSIO1_35625 -1 @MANSIO1_35625 -1 @MANSIO1_35625 -1 @MANSIO1_35625 
+
+:MANSIO1_35311
+if 
+80ED:   not actor 328@ sphere 0 near_point 516@ 517@ radius 1.0 1.0 on_foot 
+jf @MANSIO1_35352 
+jump @MANSIO1_35625 
+
+:MANSIO1_35352
+if 
+   not 518@ == -1.0 
+jf @MANSIO1_35450 
+if 
+  515@ == 0 
+jf @MANSIO1_35414 
+00BC: show_text_highpriority GXT 'MAN1_21' time 8000 flag 1  // ~r~Big Poppa~s~ is making a run for it, chase after him!
+515@ = 1 
+
+:MANSIO1_35414
+0792: disembark_instantly_actor 328@ 
+Actor.PutAt(328@, 518@, 519@, 1083.01)
+Actor.Angle(328@) = 520@
+jump @MANSIO1_35581 
+
+:MANSIO1_35450
+08E7: disable_entrance_markers 0 
+07FB: set_interior 'MDDOGS' access 1  // Madd Dogg's Crib
+018A: 47@ = create_checkpoint_at 1298.74 -795.9946 1083.008 
+08DC: create_interior_marker 47@ at 1258.338 -785.4264 radius 91.0313 
+00BC: show_text_highpriority GXT 'MAN1_22' time 8000 flag 1  // ~r~Big Poppa~s~ has left the ~y~mansion~s~, follow him.
+Actor.PutAt(328@, 1261.031, -815.666, 83.1484)
+Actor.Angle(328@) = 65.0097
+0860: link_actor 328@ to_interior 0 
+0575: set_actor 328@ keep_position 1 
+514@ = 1 
+jump @MANSIO1_35625 
+
+:MANSIO1_35581
+514@ = -1 
+jump @MANSIO1_35625 
+
+:MANSIO1_35595
+077E: get_active_interior_to 48@ 
+if 
+  48@ == 0 
+jf @MANSIO1_35625 
+514@ = 2 
+
+:MANSIO1_35625
+return 
+
+:MANSIO1_35627
+Actor.DestroyInstantly(143@)
+Actor.DestroyInstantly(144@)
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+Model.Destroy(#M4)
+43@ = 0 
+
+:MANSIO1_35657
+if 
+  10 > 43@ 
+jf @MANSIO1_35698 
+Actor.DestroyInstantly(286@(43@,10i))
+43@ += 1 
+jump @MANSIO1_35657 
+
+:MANSIO1_35698
+43@ = 0 
+
+:MANSIO1_35705
+if 
+  13 > 43@ 
+jf @MANSIO1_35746 
+Actor.RemoveReferences(226@(43@,20i))
+43@ += 1 
+jump @MANSIO1_35705 
+
+:MANSIO1_35746
+Actor.RemoveReferences(474@)
+Actor.RemoveReferences(475@)
+Actor.RemoveReferences(476@)
+Actor.RemoveReferences(316@)
+Actor.RemoveReferences(317@)
+Actor.RemoveReferences(318@)
+Actor.RemoveReferences(319@)
+Model.Destroy(#BFYST)
+Model.Destroy(#HFYPRO)
+065C: release_decision_maker 37@ 
+065C: release_decision_maker 35@ 
+Model.Load(#BMYBE)
+Model.Load(#BMYDJ)
+Model.Load(#BFYPRO)
+Model.Load(#BFYBE)
+521@ = 1 
+return 
+
+:MANSIO1_35825
+0871: init_jump_table 521@ total_jumps 2 default_jump 0 @MANSIO1_36595 jumps 1 @MANSIO1_35888 2 @MANSIO1_36307 -1 @MANSIO1_36595 -1 @MANSIO1_36595 -1 @MANSIO1_36595 -1 @MANSIO1_36595 -1 @MANSIO1_36595 
+
+:MANSIO1_35888
+240@ = Actor.Create(Mission2, #LSV3, 1260.064, -793.2798, 1083.241)
+Actor.Angle(240@) = 290.4863
+Actor.Health(240@) = 200
+Actor.SetMaxHealth(240@, 200)
+0860: link_actor 240@ to_interior 5 
+Actor.GiveWeaponAndAmmo(240@, MP5, 30000)
+01B9: set_actor 240@ armed_weapon_to 29 
+Actor.WeaponAccuracy(240@) = 80
+07DD: set_actor 240@ attack_rate 60 // previously known as temper_to 
+060B: set_actor 240@ decision_maker_to 36@ 
+260@ = 0 
+241@ = Actor.Create(Mission2, #LSV3, 1257.702, -767.9689, 1083.008)
+Actor.Angle(241@) = 119.2357
+Actor.Health(241@) = 200
+Actor.SetMaxHealth(241@, 200)
+0860: link_actor 241@ to_interior 5 
+Actor.GiveWeaponAndAmmo(241@, MP5, 30000)
+01B9: set_actor 241@ armed_weapon_to 29 
+Actor.WeaponAccuracy(241@) = 70
+07DD: set_actor 241@ attack_rate 50 // previously known as temper_to 
+060B: set_actor 241@ decision_maker_to 36@ 
+261@ = 0 
+242@ = Actor.Create(Mission2, #LSV3, 1289.814, -778.2963, 1083.008)
+Actor.Angle(242@) = 67.6874
+Actor.Health(242@) = 200
+Actor.SetMaxHealth(242@, 200)
+0860: link_actor 242@ to_interior 5 
+Actor.GiveWeaponAndAmmo(242@, MP5, 30000)
+01B9: set_actor 242@ armed_weapon_to 29 
+Actor.WeaponAccuracy(242@) = 70
+07DD: set_actor 242@ attack_rate 60 // previously known as temper_to 
+060B: set_actor 242@ decision_maker_to 36@ 
+262@ = 0 
+243@ = Actor.Create(Mission2, #LSV3, 1282.886, -779.3019, 1083.015)
+Actor.Angle(243@) = 57.042
+Actor.Health(243@) = 200
+Actor.SetMaxHealth(243@, 200)
+0860: link_actor 243@ to_interior 5 
+Actor.GiveWeaponAndAmmo(243@, MP5, 30000)
+01B9: set_actor 243@ armed_weapon_to 29 
+Actor.WeaponAccuracy(243@) = 70
+07DD: set_actor 243@ attack_rate 60 // previously known as temper_to 
+060B: set_actor 243@ decision_maker_to 36@ 
+263@ = 0 
+521@ += 1 
+
+:MANSIO1_36307
+if or
+   not Model.Available(#BMYBE)
+   not Model.Available(#BMYDJ)
+   not Model.Available(#BFYPRO)
+   not Model.Available(#BFYBE)
+jf @MANSIO1_36342 
+jump @MANSIO1_36595 
+
+:MANSIO1_36342
+522@ = Actor.Create(Mission3, #BMYDJ, 1275.155, -788.5061, 1083.008)
+Actor.Angle(522@) = 152.55
+0860: link_actor 522@ to_interior 5 
+060B: set_actor 522@ decision_maker_to 38@ 
+523@ = Actor.Create(Mission3, #BFYPRO, 1274.54, -790.0915, 1083.008)
+Actor.Angle(523@) = 349.0896
+0860: link_actor 523@ to_interior 5 
+060B: set_actor 523@ decision_maker_to 38@ 
+524@ = Actor.Create(Mission3, #BMYBE, 1273.279, -788.6833, 1083.008)
+Actor.Angle(524@) = 221.2157
+0860: link_actor 524@ to_interior 5 
+060B: set_actor 524@ decision_maker_to 38@ 
+525@ = Actor.Create(Mission3, #BFYBE, 1261.499, -788.9477, 1083.015)
+Actor.Angle(525@) = 154.0331
+0860: link_actor 525@ to_interior 5 
+060B: set_actor 525@ decision_maker_to 38@ 
+526@ = Actor.Create(Mission3, #BMYBE, 1260.887, -790.43, 1083.015)
+Actor.Angle(526@) = 332.9453
+0860: link_actor 526@ to_interior 5 
+060B: set_actor 526@ decision_maker_to 38@ 
+521@ = 0 
+
+:MANSIO1_36595
+return 
+
+:MANSIO1_36597
+00BE: text_clear_all 
+48@ = 5 
+
+:MANSIO1_36606
+if 
+  48@ == 5 
+jf @MANSIO1_36643 
+wait 0 
+09E8: 48@ = actor $PLAYER_ACTOR active_interior 
+jump @MANSIO1_36606 
+
+:MANSIO1_36643
+0917: audio_zone 'MADDOGL' enable_sound 0 
+fade 0 0 
+
+:MANSIO1_36662
+if 
+fading 
+jf @MANSIO1_36686 
+wait 0 
+jump @MANSIO1_36662 
+
+:MANSIO1_36686
+07FB: set_interior 'MADDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 0  // Madd Dogg's Crib
+03BA: clear_cars_from_cube_cornerA 1239.904 -800.9069 80.0 cornerB 1261.751 -817.216 90.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+gosub @MANSIO1_38526 
+01EB: set_traffic_density_multiplier_to 0.5 
+Model.Load(#PHOENIX)
+Model.Load(#WINDSOR)
+07C0: load_path 708 
+
+:MANSIO1_36784
+if or
+   not Model.Available(#PHOENIX)
+   not Model.Available(#WINDSOR)
+87C1:   not path 708 available 
+jf @MANSIO1_36821 
+wait 0 
+jump @MANSIO1_36784 
+
+:MANSIO1_36821
+Camera.SetAtPos(1265.009, -816.3813, 83.6305)
+527@ = Car.Create(#PHOENIX, 1250.519, -812.1237, 83.1484)
+Car.Angle(527@) = 162.4757
+0674: set_car_model #WINDSOR numberplate "J_LOMAX" 
+0506: set_car_model #WINDSOR next_variation 1 1 // first param is useless 
+528@ = Car.Create(#WINDSOR, 1244.026, -808.5705, 83.1484)
+Car.Angle(528@) = 177.4448
+0229: set_car 528@ primary_color_to 126 secondary_color_to 0 
+041E: set_radio_station 3 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_37018 
+0792: disembark_instantly_actor 328@ 
+060B: set_actor 328@ decision_maker_to 34@ 
+0575: set_actor 328@ keep_position 0 
+0860: link_actor 328@ to_interior 0 
+Actor.PutAt(328@, 1268.7, -813.0891, 83.1484)
+Actor.Angle(328@) = 90.0
+Marker.Disable(329@)
+
+:MANSIO1_37018
+Actor.PutAt($PLAYER_ACTOR, 1268.7, -813.0891, 83.1484)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+0925: restore_camera_to_user_defined 
+099C: jiggle_camera type 1 timelimit 50000.0 intensity 0.5 
+Camera.SetPosition(1265.009, -816.3813, 83.6305, 0.0, 0.0, 0.0)
+Camera.PointAt(1264.046, -816.1189, 83.6842, 2)
+fade 1 500 
+
+:MANSIO1_37122
+if 
+fading 
+jf @MANSIO1_37146 
+wait 0 
+jump @MANSIO1_37122 
+
+:MANSIO1_37146
+if and
+   not Actor.Dead(328@)
+   not Car.Wrecked(527@)
+jf @MANSIO1_37257 
+0615: define_AS_pack_begin 45@ 
+05BA: AS_actor -1 move_mouth 1500 ms 
+05CB: AS_actor -1 enter_car 527@ as_driver 9999 ms 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 328@ to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+0615: define_AS_pack_begin 45@ 
+05BA: AS_actor -1 move_mouth 7000 ms 
+05D3: AS_actor -1 goto_point 1251.697 -812.287 83.1484 mode 6 time -2 ms // versionA 
+05BF: AS_actor -1 look_at_actor 328@ 1500 ms 
+0616: define_AS_pack_end 45@ 
+
+:MANSIO1_37257
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 45@ 
+061B: remove_references_to_AS_pack 45@ 
+32@ = 0 
+
+:MANSIO1_37277
+if 
+  1500 > 32@ 
+jf @MANSIO1_37307 
+wait 0 
+jump @MANSIO1_37277 
+
+:MANSIO1_37307
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 1265.009 -816.3813 83.6305 position_to 1253.448 -815.4342 83.4116 time 7500 smooth_transition 1 
+0920: point_camera 1264.046 -816.1189 83.6842 transverse_to 1252.86 -814.6353 83.5422 time 7500 smooth_transition 1 
+49@ = 0 
+
+:MANSIO1_37396
+if 
+  49@ == 0 
+jf @MANSIO1_37464 
+wait 0 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_37457 
+if 
+   Actor.Driving(328@)
+jf @MANSIO1_37457 
+49@ = 1 
+
+:MANSIO1_37457
+jump @MANSIO1_37396 
+
+:MANSIO1_37464
+if 
+   not Car.Wrecked(527@)
+jf @MANSIO1_37536 
+05EB: assign_car 527@ to_path 708 
+Car.SetSpeedInstantly(527@, 40.0)
+Car.DoorStatus(527@) = 2
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_37536 
+Actor.SetImmunities(328@, 0, 0, 0, 0, 0)
+
+:MANSIO1_37536
+32@ = 0 
+
+:MANSIO1_37543
+if 
+  5000 > 32@ 
+jf @MANSIO1_37573 
+wait 0 
+jump @MANSIO1_37543 
+
+:MANSIO1_37573
+if 
+   not Car.Wrecked(527@)
+jf @MANSIO1_37597 
+329@ = Marker.CreateAboveCar(527@)
+
+:MANSIO1_37597
+00BC: show_text_highpriority GXT 'MAN1_23' time 8000 flag 1  // ~s~Chase down ~r~Big Poppa~s~ and run him off the road!
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+01F0: set_max_wanted_level_to 6 
+01EB: set_traffic_density_multiplier_to 0.5 
+
+:MANSIO1_37641
+wait 0 
+if 
+   not Actor.Dead(328@)
+jf @MANSIO1_37758 
+if 
+80F2:   not actor $PLAYER_ACTOR near_actor 328@ radius 250.0 250.0 0 
+jf @MANSIO1_37720 
+52@ = 1 
+05AA: 53@s = 'MAN1_24' // @s = 'short'  // ~r~You lost Big Poppa.
+jump @MANSIO1_38568 
+
+:MANSIO1_37720
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO1_37744 
+530@ = Actor.CurrentCar($PLAYER_ACTOR)
+
+:MANSIO1_37744
+gosub @MANSIO1_38383 
+jump @MANSIO1_38376 
+
+:MANSIO1_37758
+Marker.Disable(329@)
+32@ = 0 
+
+:MANSIO1_37770
+if 
+  2000 > 32@ 
+jf @MANSIO1_37800 
+wait 0 
+jump @MANSIO1_37770 
+
+:MANSIO1_37800
+fade 0 0 
+
+:MANSIO1_37806
+if 
+fading 
+jf @MANSIO1_37830 
+wait 0 
+jump @MANSIO1_37806 
+
+:MANSIO1_37830
+051E: 529@ = get_current_radio_station 
+041E: set_radio_station 11 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+Player.ClearWantedLevel($PLAYER_CHAR)
+02A3: enable_widescreen 1 
+if 
+   not Car.Wrecked(530@)
+jf @MANSIO1_37931 
+531@ = Car.Health(530@)
+if 
+  500 > 531@ 
+jf @MANSIO1_37921 
+Car.Health(530@) = 500
+
+:MANSIO1_37921
+Car.SetSpeedInstantly(530@, 0.0)
+
+:MANSIO1_37931
+Model.Load(#DRG_NU_EXT)
+
+:MANSIO1_37936
+if 
+   not Model.Available(#DRG_NU_EXT)
+jf @MANSIO1_37963 
+wait 0 
+jump @MANSIO1_37936 
+
+:MANSIO1_37963
+Camera.SetPosition(1221.787, -856.6817, 99.5425, 0.0, 0.0, 0.0)
+Camera.PointAt(1222.33, -855.9062, 99.2196, 2)
+0A0B: set_rendering_origin_at_3D_coord 1248.908 -804.626 87.535 angle 297.0012 
+32@ = 0 
+
+:MANSIO1_38043
+if 
+  500 > 32@ 
+jf @MANSIO1_38073 
+wait 0 
+jump @MANSIO1_38043 
+
+:MANSIO1_38073
+fade 1 500 
+
+:MANSIO1_38080
+if 
+fading 
+jf @MANSIO1_38104 
+wait 0 
+jump @MANSIO1_38080 
+
+:MANSIO1_38104
+0707: start_scene_skip_to @MANSIO1_38195 
+00BC: show_text_highpriority GXT 'MAN1_30' time 7000 flag 1  // You have taken back Madd Dogg's mansion.
+32@ = 0 
+
+:MANSIO1_38134
+if 
+  7000 > 32@ 
+jf @MANSIO1_38164 
+wait 0 
+jump @MANSIO1_38134 
+
+:MANSIO1_38164
+fade 0 500 
+
+:MANSIO1_38171
+if 
+fading 
+jf @MANSIO1_38195 
+wait 0 
+jump @MANSIO1_38171 
+
+:MANSIO1_38195
+0701: end_scene_skip 
+fade 0 0 
+
+:MANSIO1_38203
+if 
+fading 
+jf @MANSIO1_38227 
+wait 0 
+jump @MANSIO1_38203 
+
+:MANSIO1_38227
+Model.Destroy(#DRG_NU_EXT)
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+$TEMPVAR_ANGLE = Actor.Angle($PLAYER_ACTOR)
+0A0B: set_rendering_origin_at_3D_coord $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD angle $TEMPVAR_ANGLE 
+32@ = 0 
+
+:MANSIO1_38288
+if 
+  500 > 32@ 
+jf @MANSIO1_38318 
+wait 0 
+jump @MANSIO1_38288 
+
+:MANSIO1_38318
+041E: set_radio_station 529@ 
+fade 1 500 
+
+:MANSIO1_38330
+if 
+fading 
+jf @MANSIO1_38354 
+wait 0 
+jump @MANSIO1_38330 
+
+:MANSIO1_38354
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+jump @MANSIO1_38640 
+
+:MANSIO1_38376
+jump @MANSIO1_37641 
+
+:MANSIO1_38383
+if 
+   not Car.Wrecked(527@)
+jf @MANSIO1_38524 
+0871: init_jump_table 532@ total_jumps 1 default_jump 0 @MANSIO1_38524 jumps 0 @MANSIO1_38462 -1 @MANSIO1_38524 -1 @MANSIO1_38524 -1 @MANSIO1_38524 -1 @MANSIO1_38524 -1 @MANSIO1_38524 -1 @MANSIO1_38524 
+
+:MANSIO1_38462
+if 
+060E:   car 527@ assigned_to_path 
+jf @MANSIO1_38485 
+jump @MANSIO1_38524 
+
+:MANSIO1_38485
+Car.SetMaxSpeed(527@, 25.0)
+05D2: AS_actor 328@ run_to_and_hijack_car 527@ max_search_radius 25.0 traffic_behavior 2 
+532@ += 1 
+jump @MANSIO1_38524 
+
+:MANSIO1_38524
+return 
+
+:MANSIO1_38526
+Marker.Disable(47@)
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV3)
+Model.Destroy(#BMYBE)
+Model.Destroy(#BMYDJ)
+Model.Destroy(#BFYPRO)
+Model.Destroy(#BFYBE)
+Model.Destroy(#MP5LNG)
+065C: release_decision_maker 36@ 
+return 
+
+:MANSIO1_38568
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+07FB: set_interior 'MADDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 0  // Madd Dogg's Crib
+if 
+  52@ == 1 
+jf @MANSIO1_38638 
+00BC: show_text_highpriority GXT 53@s time 8000 flag 1 
+
+:MANSIO1_38638
+return 
+
+:MANSIO1_38640
+43@ = 0 
+
+:MANSIO1_38647
+if 
+  16 > 43@ 
+jf @MANSIO1_38780 
+if 
+   not Actor.Dead(226@(43@,20i))
+jf @MANSIO1_38757 
+0687: clear_actor 226@(43@,20i) task 
+Actor.WeaponAccuracy(226@(43@,20i)) = 20
+07DD: set_actor 226@(43@,20i) attack_rate 25 // previously known as temper_to 
+0638: AS_actor 226@(43@,20i) stay_put 1 
+05E2: AS_actor 226@(43@,20i) kill_actor $PLAYER_ACTOR 
+0961: set_actor 226@(43@,20i) keep_tasks_after_cleanup 1 
+jump @MANSIO1_38766 
+
+:MANSIO1_38757
+Actor.RemoveReferences(226@(43@,20i))
+
+:MANSIO1_38766
+43@ += 1 
+jump @MANSIO1_38647 
+
+:MANSIO1_38780
+43@ = 0 
+
+:MANSIO1_38787
+if 
+  10 > 43@ 
+jf @MANSIO1_38920 
+if 
+   not Actor.Dead(286@(43@,10i))
+jf @MANSIO1_38897 
+0687: clear_actor 286@(43@,10i) task 
+Actor.WeaponAccuracy(226@(43@,20i)) = 20
+07DD: set_actor 226@(43@,20i) attack_rate 25 // previously known as temper_to 
+0638: AS_actor 286@(43@,10i) stay_put 1 
+05E2: AS_actor 286@(43@,10i) kill_actor $PLAYER_ACTOR 
+0961: set_actor 286@(43@,10i) keep_tasks_after_cleanup 1 
+jump @MANSIO1_38906 
+
+:MANSIO1_38897
+Actor.RemoveReferences(286@(43@,10i))
+
+:MANSIO1_38906
+43@ += 1 
+jump @MANSIO1_38787 
+
+:MANSIO1_38920
+43@ = 0 
+
+:MANSIO1_38927
+if 
+  2 > 43@ 
+jf @MANSIO1_39027 
+if 
+   not Actor.Dead(474@(43@,3i))
+jf @MANSIO1_39004 
+0687: clear_actor 474@(43@,3i) task 
+05E2: AS_actor 474@(43@,3i) kill_actor $PLAYER_ACTOR 
+0961: set_actor 474@(43@,3i) keep_tasks_after_cleanup 1 
+jump @MANSIO1_39013 
+
+:MANSIO1_39004
+Actor.RemoveReferences(474@(43@,3i))
+
+:MANSIO1_39013
+43@ += 1 
+jump @MANSIO1_38927 
+
+:MANSIO1_39027
+07FB: set_interior 'MADDOGS' access 1  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 1  // Madd Dogg's Crib
+$MANSION_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'MAN_1'  // A Home In The Hills
+030C: progress_made = 1 
+014C: set_parked_car_generator $5269 cars_to_generate_to 101 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 4 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 40 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+Marker.Disable($582)
+0570: $1718 = create_asset_radar_marker_with_icon 35 at $SAVE_PICKUPS_X[1] $SAVE_PICKUPS_Y[1] $SAVE_PICKUPS_Z[1] 
+018B: set_marker $1718 radar_mode 2 
+Pickup.Destroy($SAVE_PICKUPS[1])
+$SAVE_PICKUPS[1] = Pickup.Create(#PICKUPSAVE, 3, $SAVE_PICKUPS_X[1], $SAVE_PICKUPS_Y[1], $SAVE_PICKUPS_Z[1])
+return 
+
+:MANSIO1_39166
+09BA: show_entered_zone_name 1 
+0917: audio_zone 'MADDOGL' enable_sound 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MANSIO1_39210 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+08F4: set_max_group_members 99 
+
+:MANSIO1_39210
+create_thread @A_TERM 
+Marker.Disable(47@)
+Marker.Disable(329@)
+08E7: disable_entrance_markers 0 
+0923: enable_air_traffic 1 
+01F0: set_max_wanted_level_to 6 
+01EB: set_traffic_density_multiplier_to 1.0 
+$1512 = 0 
+0650: destroy_particle 124@ 
+0650: destroy_particle 125@ 
+0650: destroy_particle 126@ 
+Marker.Disable(47@)
+43@ = 0 
+
+:MANSIO1_39281
+if 
+  4 > 43@ 
+jf @MANSIO1_39340 
+Actor.RemoveReferences(99@(43@,4i))
+Actor.RemoveReferences(131@(43@,4i))
+Actor.RemoveReferences(170@(43@,6i))
+43@ += 1 
+jump @MANSIO1_39281 
+
+:MANSIO1_39340
+43@ = 0 
+
+:MANSIO1_39347
+if 
+  3 > 43@ 
+jf @MANSIO1_39397 
+Actor.RemoveReferences(143@(43@,3i))
+Marker.Disable(146@(43@,3i))
+43@ += 1 
+jump @MANSIO1_39347 
+
+:MANSIO1_39397
+Actor.RemoveReferences(159@)
+Actor.RemoveReferences(328@)
+Car.RemoveReferences(527@)
+Car.RemoveReferences(528@)
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+0296: unload_special_actor 1 
+Model.Destroy(#BFYST)
+Model.Destroy(#HFYPRO)
+Model.Destroy(#BMYBE)
+Model.Destroy(#BMYDJ)
+Model.Destroy(#BFYPRO)
+Model.Destroy(#BFYBE)
+Model.Destroy(#WINDSOR)
+Model.Destroy(#PHOENIX)
+Model.Destroy(#M4)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#PARACHUTE)
+Model.Destroy(#PARA_PACK)
+Model.Destroy(#GUN_PARA)
+Model.Destroy(#CARGO_REAR)
+Model.Destroy(#D9_RAMP)
+Model.Destroy(#CARDBOARDBOX2)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#DRG_NU_EXT)
+090F: end_external_script 1 (PARACHUTE) 
+04EF: release_animation "PARACHUTE" 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

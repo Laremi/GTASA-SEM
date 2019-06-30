@@ -1,0 +1,2295 @@
+:HEIST4
+thread 'HEIST4' 
+gosub @HEIST4_94 
+if 
+wasted_or_busted 
+jf @HEIST4_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+gosub @HEIST4_14079 
+
+:HEIST4_85
+gosub @HEIST4_14220 
+end_thread 
+
+:HEIST4_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'HEIST4' 
+wait 0 
+select_interior 10 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2016.422 1017.102 radius 10.0 
+Actor.PutAt($PLAYER_ACTOR, 2033.974, 1017.29, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 288.0
+07AF: 34@ = player $PLAYER_CHAR group 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+0940: set_group 34@ enters_leaders_vehicle 0 
+0A31: set_player $PLAYER_CHAR group_to_follow_never 1 
+02E4: load_cutscene_data 'HEIST5A' 
+
+:HEIST4_212
+if 
+86B9:   not cutscene_data_loaded 
+jf @HEIST4_236 
+wait 0 
+jump @HEIST4_212 
+
+:HEIST4_236
+02E7: start_cutscene 
+fade 1 1000 
+
+:HEIST4_245
+if 
+82E9:   not cutscene_reached_end 
+jf @HEIST4_269 
+wait 0 
+jump @HEIST4_245 
+
+:HEIST4_269
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:HEIST4_282
+if 
+fading 
+jf @HEIST4_306 
+wait 0 
+jump @HEIST4_282 
+
+:HEIST4_306
+02EA: end_cutscene 
+Camera.SetAtPos(2031.168, 1030.918, 9.813)
+04E4: refresh_game_renderer_at 2031.168 1030.918 
+select_interior 0 
+wait 0 
+Player.CanMove($PLAYER_CHAR) = False
+104@ = 0 
+194@ = 1 
+195@ = 2 
+196@ = 0 
+197@ = 1 
+198@ = 0 
+199@ = 0 
+05AA: 139@s = 'HE4_AA' // @s = 'short'  // ~z~Okay, that should do us.
+05AA: 141@s = 'HE4_AB' // @s = 'short'  // ~z~Take care of those bikes.
+05AA: 143@s = 'HE4_AC' // @s = 'short'  // ~z~Now get out of here!
+05AA: 145@s = 'HE4_BA' // @s = 'short'  // ~z~Come in control; I was doing a walk-the-line on some drunk at the pizza place
+05AA: 147@s = 'HE4_BB' // @s = 'short'  // ~z~and my bike's been stolen!
+05AA: 149@s = 'HE4_BC' // @s = 'short'  // ~z~Larry, some prick's trying your bike for size!
+05AA: 151@s = 'HE4_BD' // @s = 'short'  // ~z~Get him!
+05AA: 153@s = 'HE4_BE' // @s = 'short' 
+05AA: 155@s = 'HE4_BF' // @s = 'short'  // ~z~I'm at the hospital and, well, some joker's stolen my bike!
+05AA: 157@s = 'HE4_BG' // @s = 'short'  // ~z~All units, this is an APB for a serial patrol bike thief.
+05AA: 159@s = 'HE4_BH' // @s = 'short' 
+05AA: 161@s = 'HE4_BJ' // @s = 'short'  // ~z~Suspect is black male, about six feet tall, and light build,
+05AA: 163@s = 'HE4_BK' // @s = 'short'  // ~z~Suspect is black male, about six feet tall, and medium build,
+05AA: 165@s = 'HE4_BL' // @s = 'short'  // ~z~Suspect is black male, about six feet tall, and heavy build,
+05AA: 167@s = 'HE4_BM' // @s = 'short'  // ~z~Oh, and a stupid haircut!
+05AA: 169@s = 'HE4_CA' // @s = 'short'  // ~z~You get the Packer, hit the Julius Thruway and keep moving.
+05AA: 171@s = 'HE4_CB' // @s = 'short'  // ~z~I'll steal the bikes and get them to you.
+04AF: 176@ = 18600 // = constant 
+04AF: 177@ = 18601 // = constant 
+04AF: 178@ = 18602 // = constant 
+04AF: 179@ = 18603 // = constant 
+04AF: 180@ = 18604 // = constant 
+04AF: 181@ = 18605 // = constant 
+04AF: 182@ = 18606 // = constant 
+04AF: 183@ = 18607 // = constant 
+04AF: 184@ = 18608 // = constant 
+04AF: 185@ = 18609 // = constant 
+04AF: 186@ = 18610 // = constant 
+04AF: 187@ = 18611 // = constant 
+04AF: 188@ = 18612 // = constant 
+04AF: 189@ = 18613 // = constant 
+04AF: 190@ = 18614 // = constant 
+04AF: 191@ = 18615 // = constant 
+04AF: 192@ = 18616 // = constant 
+Model.Load(#PACKER)
+Model.Load(#COPBIKE)
+023C: load_special_actor 'LVPDM1' as 1 // models 290-299 
+Model.Load(#COLT45)
+Model.Load(#COPCARVG)
+Model.Load(#DWMOLC1)
+Model.Load(#FREEWAY)
+Model.Load(#DWMYLC1)
+Model.Load(#DWMOLC2)
+Model.Load(#WMYMECH)
+Model.Load(#TRIADA)
+04ED: load_animation "SMOKING" 
+04ED: load_animation "MISC" 
+Actor.Angle($PLAYER_ACTOR) = 342.8127
+038B: load_requested_models 
+
+:HEIST4_864
+if or
+   not Model.Available(#PACKER)
+   not Model.Available(#COPBIKE)
+823D:   not special_actor 1 loaded 
+   not Model.Available(#COLT45)
+   not Model.Available(#DWMOLC1)
+jf @HEIST4_909 
+wait 0 
+jump @HEIST4_864 
+
+:HEIST4_909
+if or
+84EE:   not animation "SMOKING" loaded 
+   not Model.Available(#COPCARVG)
+84EE:   not animation "MISC" loaded 
+   not Model.Available(#FREEWAY)
+jf @HEIST4_960 
+wait 0 
+jump @HEIST4_909 
+
+:HEIST4_960
+if or
+   not Model.Available(#WMYMECH)
+   not Model.Available(#DWMOLC2)
+   not Model.Available(#DWMYLC1)
+   not Model.Available(#TRIADA)
+jf @HEIST4_998 
+wait 0 
+jump @HEIST4_960 
+
+:HEIST4_998
+Camera.SetAtPos(2031.168, 1030.918, 9.813)
+060A: create_decision_maker_type 0 store_to 61@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 62@ // decision\allowed\m_.ped files 
+Actor.StorePos($PLAYER_ACTOR, 111@, 112@, 113@)
+0395: clear_area 0 at 111@ 112@ 113@ radius 1000.0 
+
+:HEIST4_1061
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @HEIST4_1088 
+wait 0 
+jump @HEIST4_1061 
+
+:HEIST4_1088
+204@ = 2710.623 
+224@ = 1397.883 
+205@ = 2711.07 
+225@ = 1175.003 
+206@ = 2590.812 
+226@ = 898.2437 
+207@ = 2203.896 
+227@ = 849.0437 
+208@ = 1833.473 
+228@ = 850.4182 
+209@ = 1541.602 
+229@ = 848.788 
+210@ = 1288.89 
+230@ = 901.789 
+211@ = 1224.975 
+231@ = 1240.59 
+212@ = 1224.064 
+232@ = 1744.703 
+213@ = 1224.173 
+233@ = 2071.703 
+214@ = 1279.245 
+234@ = 2398.683 
+215@ = 1566.816 
+235@ = 2457.233 
+216@ = 1931.45 
+236@ = 2521.858 
+217@ = 2442.573 
+237@ = 2609.429 
+218@ = 2704.658 
+238@ = 2343.654 
+219@ = 2710.891 
+239@ = 2065.317 
+220@ = 2711.892 
+240@ = 1830.5 
+0395: clear_area 0 at 2710.525 1567.009 100.0 radius 100.0 
+0674: set_car_model #PACKER numberplate "CFC_1888" 
+244@ = Car.Create(#PACKER, 2711.326, 1567.045, 6.2)
+Car.Angle(244@) = 175.1379
+0229: set_car 244@ primary_color_to 16 secondary_color_to 16 
+03ED: set_car 244@ disable_flipped_explosion_when_empty 1 
+Car.Health(244@) = 2500
+0190: add_car 244@ to_flipped_check // 6 max 
+03CC: enable_car 244@ stuck_check_distance_to 4.0 time_to 3000 
+0657: car 244@ open_door 3 
+0466: unknown_car 244@ flag 1 
+Car.ImmuneToNonPlayer(244@) = True
+Car.DoorStatus(244@) = 2
+073B: unknown_car 244@ flag 0 
+245@ = Actor.CreateAsDriver(Mission2, #TRIADA, 244@)
+115@ = Actor.Create(Mission1, #WMYMECH, 2715.326, 1569.045, 7.2)
+Actor.SetImmunities(115@, 1, 1, 1, 1, 1)
+0568: set_actor 115@ untargetable 1 
+0464: put_actor 115@ into_turret_on_car 244@ at_car_offset 1.0 3.1 0.4 position 2 shooting_angle_limit 0.0 with_weapon 0 
+0588: disable_actor 115@ validate_position 0 
+060B: set_actor 245@ decision_maker_to 61@ 
+060B: set_actor 115@ decision_maker_to 61@ 
+0588: disable_actor 245@ validate_position 0 
+054A: set_actor 245@ can_be_shot_in_a_car 0 
+039E: set_actor 245@ locked 1 while_in_car 
+0526: set_actor 245@ stay_in_car_when_jacked 1 
+0446: set_actor 245@ dismemberment_possible 0 
+09F6: set_actor 245@ unjackable_through_driver_seat 0 
+0587: enable_car 244@ validate_position 0 
+Model.Destroy(#PACKER)
+246@ = 2770.213 
+250@ = 1433.86 
+254@ = 9.3804 
+258@ = 257.0 
+247@ = 2620.683 
+251@ = 2333.686 
+255@ = 9.8203 
+259@ = 174.5638 
+248@ = 2316.935 
+252@ = 2457.006 
+256@ = 9.8203 
+260@ = 140.3 
+249@ = 1610.588 
+253@ = 1845.602 
+257@ = 9.828 
+261@ = 235.7296 
+60@ = 99 
+$7927 = 720000 
+66@ = 0 
+72@ = 0 
+80@ = 0 
+85@ = 0 
+88@ = 0 
+67@ = 0 
+73@ = 0 
+89@ = 0 
+90@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+106@ = 0 
+107@ = 0 
+108@ = 0 
+109@ = 0 
+110@ = 0 
+114@ = 0 
+131@ = 0 
+48@ = 0 
+if 
+  48@ == -1 
+jf @HEIST4_2152 
+279@(48@,4i) = Car.Create(#COPBIKE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+018A: 35@ = create_checkpoint_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+63@ = Actor.Create(Mission1, #SPECIAL01, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+70@ = Actor.Create(Mission1, #SPECIAL01, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:HEIST4_2152
+if 
+  4 > 48@ 
+jf @HEIST4_2247 
+018A: 283@(48@,4i) = create_checkpoint_at 246@(48@,4f) 250@(48@,4f) 254@(48@,4f) 
+Marker.SetColor(283@(48@,4i), 1)
+262@(48@,4i) = 0 
+266@(48@,4i) = 0 
+48@ += 1 
+jump @HEIST4_2152 
+
+:HEIST4_2247
+270@ = 0.6 
+271@ = 0.0 
+272@ = 1.9 
+273@ = 0 
+274@ = 15.0 
+47@ = 0 
+275@ = 0 
+76@ = Actor.Create(Mission1, #SPECIAL01, 2311.019, 2438.368, 9.8203)
+060B: set_actor 76@ decision_maker_to 61@ 
+Actor.Angle(76@) = 297.0
+Actor.GiveWeaponAndAmmo(76@, Pistol, 2000)
+77@ = Actor.Create(Mission1, #SPECIAL01, 2311.85, 2439.374, 9.8203)
+060B: set_actor 77@ decision_maker_to 61@ 
+Actor.Angle(77@) = 115.0
+Actor.GiveWeaponAndAmmo(77@, Pistol, 2000)
+82@ = Actor.Create(Mission1, #SPECIAL01, 1612.244, 1845.855, 9.828)
+060B: set_actor 82@ decision_maker_to 61@ 
+Actor.Angle(82@) = 110.0
+Actor.GiveWeaponAndAmmo(82@, Pistol, 2000)
+08C6: set_actor 82@ stay_on_bike 3 
+63@ = Actor.Create(Mission1, #SPECIAL01, 2768.797, 1431.239, 9.487)
+Actor.GiveWeaponAndAmmo(63@, Pistol, 2000)
+060B: set_actor 63@ decision_maker_to 61@ 
+Actor.Angle(63@) = 111.0
+0296: unload_special_actor 1 
+68@ = Actor.Create(Mission1, #DWMYLC1, 2767.537, 1424.877, 9.2195)
+Actor.SetWalkStyle(68@, "DRUNKMAN")
+060B: set_actor 68@ decision_maker_to 61@ 
+Actor.Angle(68@) = 347.0
+70@ = Actor.Create(Mission1, #SPECIAL01, 2619.858, 2339.256, 10.0081)
+08C6: set_actor 70@ stay_on_bike 3 
+Actor.GiveWeaponAndAmmo(70@, Pistol, 2000)
+060B: set_actor 70@ decision_maker_to 61@ 
+Actor.Angle(70@) = 300.0
+92@ = Car.Create(#FREEWAY, 2634.011, 2343.212, 9.6797)
+Car.Angle(92@) = 120.0386
+0587: enable_car 92@ validate_position 0 
+93@ = Car.Create(#FREEWAY, 2625.69, 2336.85, 9.6875)
+Car.Angle(93@) = 183.0386
+0587: enable_car 93@ validate_position 0 
+94@ = Car.Create(#FREEWAY, 2637.847, 2347.576, 9.6797)
+Car.Angle(94@) = 126.0963
+0587: enable_car 94@ validate_position 0 
+95@ = Actor.CreateAsDriver(Mission2, #DWMYLC1, 92@)
+060B: set_actor 95@ decision_maker_to 61@ 
+96@ = Actor.CreateAsDriver(Mission2, #DWMOLC1, 93@)
+060B: set_actor 96@ decision_maker_to 61@ 
+97@ = Actor.CreateAsDriver(Mission2, #DWMOLC2, 94@)
+060B: set_actor 97@ decision_maker_to 61@ 
+Model.Destroy(#DWMYLC1)
+Model.Destroy(#DWMOLC1)
+Model.Destroy(#DWMOLC2)
+Model.Destroy(#FREEWAY)
+0677: AS_actor 77@ chat_with_actor 76@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 76@ chat_with_actor 77@ lead_speaker_flag 0 unknown_flag 1 
+0605: actor 82@ perform_animation "M_SMKSTND_LOOP" IFP "SMOKING" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+32@ = 0 
+33@ = 0 
+01EB: set_traffic_density_multiplier_to 1.5 
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_3041 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_3041 
+0687: clear_actor 245@ task 
+0395: clear_area 0 at 2710.525 1731.009 100.0 radius 100.0 
+47@ = 0 
+05D1: AS_actor 245@ drive_car 244@ to 204@(47@,20f) 224@(47@,20f) 6.0 speed 15.0 0 model #NULL 1 
+
+:HEIST4_3041
+116@ = 0 
+203@ = 0 
+276@ = Actor.Create(Mission1, #TRIADA, 2029.56, 1006.041, 9.8203)
+Actor.Angle(276@) = 280.0
+060B: set_actor 276@ decision_maker_to 61@ 
+Model.Destroy(#TRIADA)
+Model.Destroy(#WMYMECH)
+Actor.PutAt($PLAYER_ACTOR, 2028.874, 1006.87, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 265.0
+0395: clear_area 0 at 2033.974 1017.29 9.8203 radius 1000.0 
+wait 1000 
+02A3: enable_widescreen 1 
+Camera.SetPosition(2025.905, 1003.544, 12.1278, 0.0, 0.0, 0.0)
+Camera.PointAt(2026.726, 1004.074, 11.9155, 2)
+if 
+   not Actor.Dead(276@)
+jf @HEIST4_3251 
+0639: AS_actor 276@ rotate_to_actor $PLAYER_ACTOR 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 276@ 
+
+:HEIST4_3251
+fade 1 1000 
+
+:HEIST4_3258
+if 
+fading 
+jf @HEIST4_3282 
+wait 0 
+jump @HEIST4_3258 
+
+:HEIST4_3282
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+275@ = 1 
+32@ = 0 
+
+:HEIST4_3332
+if 
+  104@ == 1 
+jf @HEIST4_3437 
+if 
+00E1:   player 0 pressed_key 16 
+jf @HEIST4_3437 
+
+:HEIST4_3367
+if 
+00E1:   player 0 pressed_key 16 
+jf @HEIST4_3395 
+wait 0 
+jump @HEIST4_3367 
+
+:HEIST4_3395
+if 
+  275@ > 1 
+jf @HEIST4_3437 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+275@ = 5 
+104@ = 0 
+
+:HEIST4_3437
+if 
+  275@ == 1 
+jf @HEIST4_3476 
+196@ = 16 
+275@ = 2 
+32@ = 0 
+
+:HEIST4_3476
+if 
+  275@ == 2 
+jf @HEIST4_3636 
+if 
+  32@ > 3000 
+jf @HEIST4_3636 
+104@ = 1 
+196@ = 17 
+275@ = 3 
+32@ = 0 
+0687: clear_actor $PLAYER_ACTOR task 
+0605: actor $PLAYER_ACTOR perform_animation "ENDCHAT_01" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+if 
+   not Actor.Dead(276@)
+jf @HEIST4_3636 
+0605: actor 276@ perform_animation "ENDCHAT_03" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:HEIST4_3636
+if 
+  275@ == 3 
+jf @HEIST4_3737 
+if 
+  32@ > 2000 
+jf @HEIST4_3737 
+if 
+   not Actor.Dead(276@)
+jf @HEIST4_3737 
+0687: clear_actor $PLAYER_ACTOR task 
+0687: clear_actor 276@ task 
+05D3: AS_actor 276@ goto_point 2030.431 984.6912 9.8131 mode 6 time -2 ms // versionA 
+275@ = 4 
+32@ = 0 
+
+:HEIST4_3737
+if 
+  275@ == 4 
+jf @HEIST4_3781 
+if 
+  32@ > 2000 
+jf @HEIST4_3781 
+275@ = 5 
+
+:HEIST4_3781
+if 
+  275@ == 5 
+jf @HEIST4_3902 
+104@ = 0 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.Angle($PLAYER_ACTOR) = 305.0
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+094F: enable_actor $PLAYER_ACTOR pain_audio 
+Actor.DestroyInstantly(276@)
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'HEI4_01' time 8000 flag 1  // ~s~We need to steal four ~g~police bikes~s~ and get them safely onto the back of a Packer truck.
+32@ = 0 
+33@ = 0 
+60@ = 2 
+275@ = -99 
+
+:HEIST4_3902
+if 
+  203@ == 0 
+jf @HEIST4_3934 
+03CF: load_wav 1096 as 3 
+203@ = 1 
+
+:HEIST4_3934
+if 
+  203@ == 1 
+jf @HEIST4_3974 
+if 
+03D0:   wav 3 loaded 
+jf @HEIST4_3974 
+203@ = 2 
+
+:HEIST4_3974
+if 
+   not 196@ == 0 
+jf @HEIST4_4327 
+if 
+  198@ == 0 
+jf @HEIST4_4045 
+if 
+03D0:   wav 195@ loaded 
+jf @HEIST4_4031 
+040D: unload_wav 195@ 
+
+:HEIST4_4031
+198@ = 1 
+199@ = 1 
+
+:HEIST4_4045
+if 
+  198@ == 1 
+jf @HEIST4_4082 
+03CF: load_wav 175@(196@,19i) as 194@ 
+198@ = 2 
+
+:HEIST4_4082
+if 
+  198@ == 2 
+jf @HEIST4_4142 
+if 
+03D0:   wav 194@ loaded 
+jf @HEIST4_4142 
+03D1: play_wav 194@ 
+00BB: show_text_lowpriority GXT 137@(196@,19s) time 10000 flag 1 
+198@ = 3 
+
+:HEIST4_4142
+if 
+  198@ == 3 
+jf @HEIST4_4327 
+if 
+03D2:   wav 194@ ended 
+jf @HEIST4_4266 
+03D5: remove_text 137@(196@,19s) 
+if 
+  194@ == 1 
+jf @HEIST4_4224 
+194@ = 2 
+195@ = 1 
+jump @HEIST4_4238 
+
+:HEIST4_4224
+194@ = 1 
+195@ = 2 
+
+:HEIST4_4238
+196@ = 0 
+198@ = 0 
+199@ = 0 
+jump @HEIST4_4327 
+
+:HEIST4_4266
+if 
+83D0:   not wav 195@ loaded 
+jf @HEIST4_4327 
+if 
+  15 > 196@ 
+jf @HEIST4_4327 
+0085: 197@ = 196@ // (int) 
+197@ += 1 
+03CF: load_wav 175@(197@,19i) as 195@ 
+
+:HEIST4_4327
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_4428 
+0407: store_coords_to 121@ 122@ 123@ from_car 244@ with_offset -1.3 -40.0 -2.0 
+0407: store_coords_to 124@ 125@ 126@ from_car 244@ with_offset 1.3 0.0 2.0 
+053E: 129@ = get_random_car_with_model -1 in_rectangle_cornerA 121@ 122@ cornerB 124@ 125@ 
+02E3: 127@ = car 244@ speed 
+
+:HEIST4_4428
+if 
+   not Car.Wrecked(129@)
+jf @HEIST4_4470 
+0087: 128@ = 127@ // (float) 
+128@ -= 4.0 
+Car.SetMaxSpeed(129@, 128@)
+
+:HEIST4_4470
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_4549 
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_4549 
+if 
+   not Actor.InCar(245@, 244@)
+jf @HEIST4_4549 
+if 
+   not Actor.Dead(115@)
+jf @HEIST4_4542 
+0465: remove_actor 115@ from_turret_mode 
+
+:HEIST4_4542
+jump @HEIST4_14079 
+
+:HEIST4_4549
+if 
+  114@ == 1 
+jf @HEIST4_4643 
+if 
+  33@ > 1000 
+jf @HEIST4_4643 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_4643 
+Car.StorePos(244@, 118@, 119@, 120@)
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1095 
+114@ = 2 
+
+:HEIST4_4643
+if 
+  114@ == 2 
+jf @HEIST4_4773 
+if 
+  33@ > 1500 
+jf @HEIST4_4773 
+if 
+   not Actor.Dead(115@)
+jf @HEIST4_4766 
+if 
+   not Actor.Animation(115@) == "HIKER_POSE_L"
+jf @HEIST4_4766 
+0605: actor 115@ perform_animation "HIKER_POSE_L" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:HEIST4_4766
+114@ = 3 
+
+:HEIST4_4773
+if 
+  114@ == 3 
+jf @HEIST4_4817 
+if 
+  33@ > 2000 
+jf @HEIST4_4817 
+114@ = 4 
+
+:HEIST4_4817
+if 
+  114@ == 4 
+jf @HEIST4_5033 
+if 
+  33@ > 4000 
+jf @HEIST4_5033 
+0687: clear_actor $PLAYER_ACTOR task 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  273@ == 4 
+jf @HEIST4_4890 
+00BE: text_clear_all 
+
+:HEIST4_4890
+if 
+  273@ == 1 
+jf @HEIST4_4926 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'HEI4_06' time 5000 flag 1  // ~s~Get another ~g~police bike~s~ for the job.
+
+:HEIST4_4926
+if 
+  273@ == 2 
+jf @HEIST4_4962 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'HEI4_08' time 5000 flag 1  // ~s~Two more ~g~bikes~s~ to go.
+
+:HEIST4_4962
+if 
+  273@ == 3 
+jf @HEIST4_5005 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'HEI4_09' time 5000 flag 1  // ~s~One more ~g~bike~s~ to go.
+32@ = 0 
+
+:HEIST4_5005
+if 
+   not Actor.Dead(115@)
+jf @HEIST4_5026 
+0687: clear_actor 115@ task 
+
+:HEIST4_5026
+114@ = 0 
+
+:HEIST4_5033
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @HEIST4_5055 
+jump @HEIST4_14165 
+
+:HEIST4_5055
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @HEIST4_5080 
+$7927 += 60000 
+
+:HEIST4_5080
+if 
+0735:   is_keyboard_key_pressed 80 
+jf @HEIST4_5102 
+Player.WantedLevel($PLAYER_CHAR) = 2
+
+:HEIST4_5102
+if 
+0735:   is_keyboard_key_pressed 79 
+jf @HEIST4_5124 
+Player.WantedLevel($PLAYER_CHAR) = 0
+
+:HEIST4_5124
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @HEIST4_5169 
+Actor.PutAt($PLAYER_ACTOR, 2608.193, 2315.54, 9.6719)
+Actor.Angle($PLAYER_ACTOR) = 354.7109
+
+:HEIST4_5169
+if 
+  103@ == 1 
+jf @HEIST4_5246 
+if 
+00E1:   player 0 pressed_key 16 
+jf @HEIST4_5246 
+
+:HEIST4_5204
+if 
+00E1:   player 0 pressed_key 16 
+jf @HEIST4_5232 
+wait 0 
+jump @HEIST4_5204 
+
+:HEIST4_5232
+102@ = 50 
+103@ = 0 
+
+:HEIST4_5246
+wait 0 
+if 
+  101@ == 0 
+jf @HEIST4_5317 
+if 
+   not Car.Wrecked(280@)
+jf @HEIST4_5317 
+if 
+0448:   actor $PLAYER_ACTOR in_car 280@ 
+jf @HEIST4_5317 
+0397: enable_car 280@ siren 0 
+101@ = 1 
+
+:HEIST4_5317
+if 
+  89@ == 0 
+jf @HEIST4_5468 
+if 
+  33@ > 5000 
+jf @HEIST4_5468 
+Model.Destroy(#COPCARVG)
+Model.Load(#POLMAV)
+
+:HEIST4_5364
+if 
+   not Model.Available(#POLMAV)
+jf @HEIST4_5391 
+wait 0 
+jump @HEIST4_5364 
+
+:HEIST4_5391
+86@ = Car.Create(#POLMAV, 1589.198, 1850.619, 9.8358)
+Car.Angle(86@) = 51.0
+0657: car 86@ open_door 2 
+87@ = Actor.CreateAsDriver(Mission2, #SPECIAL01, 86@)
+0588: disable_actor 87@ validate_position 0 
+0825: set_helicopter 86@ instant_rotor_start 
+Model.Destroy(#POLMAV)
+89@ = 1 
+
+:HEIST4_5468
+if 
+  60@ == 2 
+jf @HEIST4_5589 
+if 
+  32@ > 12000 
+jf @HEIST4_5589 
+if 
+  131@ == 0 
+jf @HEIST4_5589 
+00BE: text_clear_all 
+03D5: remove_text 'HEI4_01'  // ~s~We need to steal four ~g~police bikes~s~ and get them safely onto the back of a Packer truck.
+00BC: show_text_highpriority GXT 'HEI4_11' time 8000 flag 1  // ~s~The Packer's circling the outskirts of town but you'll have to be quick, it leaves soon.
+03C3: set_timer_to $7927 type 1 GXT 'HEI4_12' // global_variable  // time
+131@ = 1 
+60@ = 3 
+32@ = 0 
+
+:HEIST4_5589
+if 
+  60@ == 3 
+jf @HEIST4_5633 
+if 
+  32@ > 10000 
+jf @HEIST4_5633 
+60@ = 4 
+
+:HEIST4_5633
+if 
+  1 > $7927 
+jf @HEIST4_5676 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'HEI4_10' time 8000 flag 1  // ~r~Out of time! The Packer truck has left!
+jump @HEIST4_14079 
+
+:HEIST4_5676
+if 
+  102@ == 0 
+jf @HEIST4_8549 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_8505 
+if 
+01AD:   car 244@ sphere 0 near_point 204@(47@,20f) 224@(47@,20f) radius 15.0 15.0 
+jf @HEIST4_5843 
+47@ += 1 
+if 
+  47@ == 17 
+jf @HEIST4_5784 
+47@ = 0 
+
+:HEIST4_5784
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_5843 
+0687: clear_actor 245@ task 
+05D1: AS_actor 245@ drive_car 244@ to 204@(47@,20f) 224@(47@,20f) 8.0 speed 15.0 0 model #NULL 1 
+
+:HEIST4_5843
+48@ = 0 
+
+:HEIST4_5850
+if 
+  4 > 48@ 
+jf @HEIST4_8308 
+if 
+  2 > 266@(48@,4i) 
+jf @HEIST4_8294 
+if 
+   not Car.Wrecked(279@(48@,4i))
+jf @HEIST4_8036 
+if 
+   Actor.InCar($PLAYER_ACTOR, 279@(48@,4i))
+jf @HEIST4_7736 
+if 
+  266@(48@,4i) == 0 
+jf @HEIST4_6947 
+43@ = 0 
+
+:HEIST4_5962
+if 
+  4 > 43@ 
+jf @HEIST4_6003 
+Marker.Disable(283@(43@,4i))
+43@ += 1 
+jump @HEIST4_5962 
+
+:HEIST4_6003
+if and
+0039:   279@(48@,4i) == 279@  // Note: the incorrect math opcode was used here
+  37@ == 0 
+jf @HEIST4_6083 
+040D: unload_wav 1 
+03CF: load_wav 18603 as 1 
+gosub @HEIST4_6813 
+wait 0 
+03CF: load_wav 18604 as 1 
+gosub @HEIST4_6813 
+37@ = 1 
+jump @HEIST4_6875 
+
+:HEIST4_6083
+if and
+0039:   279@(48@,4i) == 280@  // Note: the incorrect math opcode was used here
+  38@ == 0 
+jf @HEIST4_6653 
+040D: unload_wav 1 
+03CF: load_wav 18609 as 1 
+gosub @HEIST4_6813 
+38@ = 1 
+0652: 36@ = integer_stat 21 
+if 
+  36@ > 500 
+jf @HEIST4_6185 
+03CF: load_wav 18613 as 1 
+gosub @HEIST4_6813 
+jump @HEIST4_6239 
+
+:HEIST4_6185
+if 
+  36@ > 300 
+jf @HEIST4_6225 
+03CF: load_wav 18612 as 1 
+gosub @HEIST4_6813 
+jump @HEIST4_6239 
+
+:HEIST4_6225
+03CF: load_wav 18611 as 1 
+gosub @HEIST4_6813 
+
+:HEIST4_6239
+if or
+0500:   player $PLAYER_CHAR skin == "MOHAWK" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "MOHAWKBLOND" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "MOHAWKPINK" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "MOHAWKBEARD" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "MOHAWKGOATE" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "HAIRBLUE" on_bodypart 1 
+jf @HEIST4_6382 
+03CF: load_wav 18614 as 1 
+gosub @HEIST4_6813 
+jump @HEIST4_6875 
+
+:HEIST4_6382
+if or
+0500:   player $PLAYER_CHAR skin == "HAIRRED" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "HAIRGREEN" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "HAIRPINK" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "HAIRBLOND" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "AFROBLOND" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "ELVISHAIR" on_bodypart 1 
+jf @HEIST4_6519 
+03CF: load_wav 18614 as 1 
+gosub @HEIST4_6813 
+jump @HEIST4_6875 
+
+:HEIST4_6519
+if or
+0500:   player $PLAYER_CHAR skin == "AFRO" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "AFROTASH" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "AFROBEARD" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "AFROGOATEE" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "HIGHAFRO" on_bodypart 1 
+0500:   player $PLAYER_CHAR skin == "CORNROWSB" on_bodypart 1 
+jf @HEIST4_6653 
+03CF: load_wav 18614 as 1 
+gosub @HEIST4_6813 
+jump @HEIST4_6875 
+
+:HEIST4_6653
+if and
+0039:   279@(48@,4i) == 281@  // Note: the incorrect math opcode was used here
+  39@ == 0 
+jf @HEIST4_6733 
+040D: unload_wav 1 
+03CF: load_wav 18605 as 1 
+gosub @HEIST4_6813 
+wait 0 
+03CF: load_wav 18606 as 1 
+gosub @HEIST4_6813 
+39@ = 1 
+jump @HEIST4_6875 
+
+:HEIST4_6733
+if and
+0039:   279@(48@,4i) == 282@  // Note: the incorrect math opcode was used here
+  40@ == 0 
+jf @HEIST4_6875 
+040D: unload_wav 1 
+03CF: load_wav 18607 as 1 
+gosub @HEIST4_6813 
+wait 0 
+03CF: load_wav 18608 as 1 
+gosub @HEIST4_6813 
+40@ = 1 
+jump @HEIST4_6875 
+
+:HEIST4_6813
+if 
+83D0:   not wav 1 loaded 
+jf @HEIST4_6839 
+wait 0 
+jump @HEIST4_6813 
+
+:HEIST4_6839
+03D1: play_wav 1 
+
+:HEIST4_6843
+if 
+83D2:   not wav 1 ended 
+jf @HEIST4_6869 
+wait 0 
+jump @HEIST4_6843 
+
+:HEIST4_6869
+040D: unload_wav 1 
+return 
+
+:HEIST4_6875
+Marker.Disable(35@)
+35@ = Marker.CreateAboveCar(244@)
+07E0: set_marker 35@ type_to 1 
+if 
+   not 273@ == 4 
+jf @HEIST4_6929 
+00BC: show_text_highpriority GXT 'HEI4_02' time 8000 flag 1  // ~s~Drive the bike onto the ~b~Packer~s~ truck.
+
+:HEIST4_6929
+266@(48@,4i) = 1 
+gosub @HEIST4_12517 
+
+:HEIST4_6947
+if 
+  266@(48@,4i) == 1 
+jf @HEIST4_7729 
+if 
+  2 > 273@ 
+jf @HEIST4_7045 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 244@ with_offset -1.3 -3.2 -0.8 
+0407: store_coords_to 52@ 53@ 54@ from_car 244@ with_offset 1.3 -3.2 2.6 
+
+:HEIST4_7045
+if 
+  273@ > 1 
+jf @HEIST4_7121 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 244@ with_offset -1.3 -8.2 -0.8 
+0407: store_coords_to 52@ 53@ 54@ from_car 244@ with_offset 1.3 -8.2 2.6 
+
+:HEIST4_7121
+if 
+0204:   actor $PLAYER_ACTOR near_car 244@ radius 30.0 30.0 sphere 0 in_car 
+jf @HEIST4_7168 
+00BC: show_text_highpriority GXT 'HEI4_13' time 8000 flag 1  // ~s~There's the ~b~Packer~s~ up ahead. Drive up the ramp at a steady speed so it can be attached.
+
+:HEIST4_7168
+if 
+05FE:   actor $PLAYER_ACTOR in_cube_fll_corner_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 fur_corner_at 52@ 53@ 54@ depth 4.8 flag 0 in_car 
+jf @HEIST4_7729 
+02E3: 277@ = car 244@ speed 
+02E3: 278@ = car 279@(48@,4i) speed 
+277@ += 10.0 
+if 
+0025:   277@ > 278@ // (float) 
+jf @HEIST4_7729 
+277@ -= 10.0 
+if 
+0025:   278@ > 277@ // (float) 
+jf @HEIST4_7729 
+0683: attach_car 279@(48@,4i) to_car 244@ with_offset 270@ 271@ 272@ rotation 16.0 0.0 0.0 
+Car.LockInCurrentPosition(279@(48@,4i)) = True
+if or
+  273@ == 1 
+  273@ == 3 
+jf @HEIST4_7379 
+271@ -= 2.5 
+272@ -= 0.7 
+
+:HEIST4_7379
+if 
+  270@ == 0.6 
+jf @HEIST4_7417 
+270@ = -0.6 
+jump @HEIST4_7427 
+
+:HEIST4_7417
+270@ = 0.6 
+
+:HEIST4_7427
+273@ += 1 
+if 
+  4 > 273@ 
+jf @HEIST4_7505 
+067A: put_camera_on_car 244@ with_offset 3.0 5.0 2.2 point_to_car 244@ tilt 0.0 switchstyle 2 
+114@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BE: text_clear_all 
+33@ = 0 
+
+:HEIST4_7505
+274@ += 10.0 
+266@(48@,4i) = 2 
+Marker.Disable(35@)
+03D5: remove_text 'HEI4_02'  // ~s~Drive the bike onto the ~b~Packer~s~ truck.
+43@ = 0 
+
+:HEIST4_7549
+if 
+  4 > 43@ 
+jf @HEIST4_7729 
+if 
+  2 > 266@(43@,4i) 
+jf @HEIST4_7715 
+if 
+  262@(43@,4i) == 1 
+jf @HEIST4_7674 
+Marker.Disable(283@(43@,4i))
+if 
+   not Car.Wrecked(279@(43@,4i))
+jf @HEIST4_7667 
+283@(43@,4i) = Marker.CreateAboveCar(279@(43@,4i))
+Marker.SetColor(283@(43@,4i), 1)
+
+:HEIST4_7667
+jump @HEIST4_7704 
+
+:HEIST4_7674
+018A: 283@(43@,4i) = create_checkpoint_at 246@(43@,4f) 250@(43@,4f) 254@(43@,4f) 
+
+:HEIST4_7704
+Marker.SetColor(283@(43@,4i), 1)
+
+:HEIST4_7715
+43@ += 1 
+jump @HEIST4_7549 
+
+:HEIST4_7729
+jump @HEIST4_8029 
+
+:HEIST4_7736
+if 
+  266@(48@,4i) == 1 
+jf @HEIST4_8029 
+43@ = 0 
+
+:HEIST4_7765
+if 
+  4 > 43@ 
+jf @HEIST4_8029 
+if 
+  266@(43@,4i) == 1 
+jf @HEIST4_7816 
+266@(43@,4i) = 0 
+
+:HEIST4_7816
+if 
+  2 > 266@(43@,4i) 
+jf @HEIST4_8015 
+Marker.Disable(283@(43@,4i))
+if 
+  262@(43@,4i) == 1 
+jf @HEIST4_7953 
+if 
+   not Car.Wrecked(279@(43@,4i))
+jf @HEIST4_7923 
+283@(43@,4i) = Marker.CreateAboveCar(279@(43@,4i))
+Marker.SetColor(283@(43@,4i), 1)
+jump @HEIST4_7946 
+
+:HEIST4_7923
+00BC: show_text_highpriority GXT 'HEI4_04' time 8000 flag 1  // ~r~We needed all those bikes in good working order!
+jump @HEIST4_14079 
+
+:HEIST4_7946
+jump @HEIST4_7983 
+
+:HEIST4_7953
+018A: 283@(43@,4i) = create_checkpoint_at 246@(43@,4f) 250@(43@,4f) 254@(43@,4f) 
+
+:HEIST4_7983
+Marker.Disable(35@)
+Marker.SetColor(283@(43@,4i), 1)
+00BC: show_text_highpriority GXT 'HEI4_03' time 5000 flag 1  // ~s~Get back on the ~g~bike~s~.
+
+:HEIST4_8015
+43@ += 1 
+jump @HEIST4_7765 
+
+:HEIST4_8029
+jump @HEIST4_8294 
+
+:HEIST4_8036
+if 
+  262@(48@,4i) == 0 
+jf @HEIST4_8271 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 246@(48@,4f) 250@(48@,4f) radius 200.0 200.0 
+jf @HEIST4_8264 
+0395: clear_area 0 at 246@(48@,4f) 250@(48@,4f) 254@(48@,4f) radius 40.0 
+279@(48@,4i) = Car.Create(#COPBIKE, 246@(48@,4f), 250@(48@,4f), 254@(48@,4f))
+Car.Angle(279@(48@,4i)) = 258@(48@,4f)
+053F: set_car 279@(48@,4i) tires_vulnerability 0 
+0587: enable_car 279@(48@,4i) validate_position 0 
+if 
+875C:   not marker 35@ enabled 
+jf @HEIST4_8253 
+Marker.Disable(283@(48@,4i))
+283@(48@,4i) = Marker.CreateAboveCar(279@(48@,4i))
+Marker.SetColor(283@(48@,4i), 1)
+
+:HEIST4_8253
+262@(48@,4i) = 1 
+
+:HEIST4_8264
+jump @HEIST4_8294 
+
+:HEIST4_8271
+00BC: show_text_highpriority GXT 'HEI4_04' time 5000 flag 1  // ~r~We needed all those bikes in good working order!
+jump @HEIST4_14079 
+
+:HEIST4_8294
+48@ += 1 
+jump @HEIST4_5850 
+
+:HEIST4_8308
+if 
+0202:   actor $PLAYER_ACTOR near_car 244@ radius 120.0 120.0 sphere 0 
+jf @HEIST4_8354 
+Car.SetMaxSpeed(244@, 274@)
+jump @HEIST4_8364 
+
+:HEIST4_8354
+Car.SetMaxSpeed(244@, 15.0)
+
+:HEIST4_8364
+if or
+018F:   car 244@ flipped_for_2_seconds 
+03CE:   car 244@ stuck 
+jf @HEIST4_8498 
+if 
+82CA:   not car 244@ bounding_sphere_visible 
+jf @HEIST4_8498 
+if 
+80C2:   not sphere_onscreen 204@(47@,20f) 224@(47@,20f) 6.0 radius 4.0 
+jf @HEIST4_8498 
+0395: clear_area 0 at 204@(47@,20f) 224@(47@,20f) 7.0 radius 10.0 
+Car.PutAt(244@, 204@(47@,20f), 224@(47@,20f), 10.0)
+Car.Angle(244@) = $TEMPVAR_ANGLE
+
+:HEIST4_8498
+jump @HEIST4_8549 
+
+:HEIST4_8505
+00BC: show_text_highpriority GXT 'HEI4_05' time 5000 flag 1  // ~r~The Packer is destroyed! How are we going to deliver the bikes now?
+if 
+   not Actor.Dead(115@)
+jf @HEIST4_8542 
+Actor.DestroyInstantly(115@)
+
+:HEIST4_8542
+jump @HEIST4_14079 
+
+:HEIST4_8549
+if 
+  102@ == 0 
+jf @HEIST4_8597 
+if 
+  273@ == 4 
+jf @HEIST4_8597 
+014F: stop_timer $7927 
+102@ = 1 
+
+:HEIST4_8597
+if 
+  102@ == 1 
+jf @HEIST4_9035 
+fade 0 1000 
+00BE: text_clear_all 
+014F: stop_timer $7927 
+Player.CanMove($PLAYER_CHAR) = False
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:HEIST4_8641
+if 
+fading 
+jf @HEIST4_8665 
+wait 0 
+jump @HEIST4_8641 
+
+:HEIST4_8665
+05BC: AS_actor $PLAYER_ACTOR jump 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0A0B: set_rendering_origin_at_3D_coord 1009.781 1929.377 9.6719 angle 122.0 
+wait 0 
+02A3: enable_widescreen 1 
+102@ = 10 
+Camera.SetPosition(1022.831, 1899.513, 18.6192, 0.0, 0.0, 0.0)
+Camera.PointAt(1021.961, 1899.518, 18.126, 2)
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_8932 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_8932 
+0687: clear_actor 245@ task 
+0395: clear_area 0 at 1009.994 1880.02 150.0 radius 150.0 
+Car.PutAt(244@, 1009.994, 1870.02, 9.6797)
+Car.Angle(244@) = 2.3
+0464: put_actor $PLAYER_ACTOR into_turret_on_car 244@ at_car_offset 0.5 -10.0 -0.3 position 2 shooting_angle_limit 10.0 with_weapon 0 
+Actor.Angle($PLAYER_ACTOR) = 300.0
+05D1: AS_actor 245@ drive_car 244@ to 1009.781 1900.377 9.6719 speed 15.0 0 model #NULL 1 
+
+:HEIST4_8932
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+fade 1 500 
+
+:HEIST4_8963
+if 
+fading 
+jf @HEIST4_9011 
+wait 0 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+jump @HEIST4_8963 
+
+:HEIST4_9011
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+
+:HEIST4_9035
+if 
+  102@ == 10 
+jf @HEIST4_9211 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_9211 
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_9211 
+if 
+01C1:   car 244@ stopped 
+jf @HEIST4_9211 
+102@ = 20 
+103@ = 1 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+0615: define_AS_pack_begin 105@ 
+05BC: AS_actor -1 jump 1 
+05D3: AS_actor -1 goto_point 1014.013 1902.325 9.8125 mode 6 time 10000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 245@ 
+0616: define_AS_pack_end 105@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 105@ 
+061B: remove_references_to_AS_pack 105@ 
+32@ = 0 
+
+:HEIST4_9211
+if 
+  201@ > 0 
+jf @HEIST4_9394 
+if 
+  199@ == 0 
+jf @HEIST4_9394 
+0871: init_jump_table 201@ total_jumps 4 default_jump 0 @HEIST4_9394 jumps 1 @HEIST4_9310 2 @HEIST4_9331 3 @HEIST4_9352 4 @HEIST4_9373 -1 @HEIST4_9394 -1 @HEIST4_9394 -1 @HEIST4_9394 
+
+:HEIST4_9310
+196@ = 1 
+201@ = 2 
+jump @HEIST4_9394 
+
+:HEIST4_9331
+196@ = 2 
+201@ = 3 
+jump @HEIST4_9394 
+
+:HEIST4_9352
+196@ = 3 
+201@ = 4 
+jump @HEIST4_9394 
+
+:HEIST4_9373
+196@ = 0 
+201@ = 0 
+jump @HEIST4_9394 
+
+:HEIST4_9394
+if 
+  102@ == 20 
+jf @HEIST4_9476 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+if 
+  32@ > 3000 
+jf @HEIST4_9476 
+201@ = 1 
+102@ = 30 
+32@ = 0 
+
+:HEIST4_9476
+if 
+  102@ == 30 
+jf @HEIST4_9617 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+if 
+  32@ > 3000 
+jf @HEIST4_9617 
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_9617 
+if 
+   not Car.Wrecked(244@)
+jf @HEIST4_9617 
+102@ = 40 
+05D1: AS_actor 245@ drive_car 244@ to 1009.781 2000.377 9.6719 speed 15.0 0 model #NULL 1 
+32@ = 0 
+
+:HEIST4_9617
+if 
+  102@ == 40 
+jf @HEIST4_9718 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+if 
+  32@ > 500 
+jf @HEIST4_9718 
+if 
+   not Actor.Dead(245@)
+jf @HEIST4_9718 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 245@ -2 ms 
+102@ = 45 
+32@ = 0 
+
+:HEIST4_9718
+if 
+  102@ == 45 
+jf @HEIST4_9786 
+0395: clear_area 0 at 1009.994 1910.02 150.0 radius 150.0 
+if 
+  32@ > 3000 
+jf @HEIST4_9786 
+102@ = 50 
+
+:HEIST4_9786
+if 
+  102@ == 50 
+jf @HEIST4_9905 
+103@ = 0 
+Car.Destroy(279@)
+Car.Destroy(280@)
+Car.Destroy(281@)
+Car.Destroy(282@)
+Car.Destroy(244@)
+Actor.DestroyInstantly(245@)
+Actor.DestroyInstantly(115@)
+02A3: enable_widescreen 0 
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.PutAt($PLAYER_ACTOR, 1014.013, 1902.325, 9.8125)
+Actor.Angle($PLAYER_ACTOR) = 59.0
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+00BE: text_clear_all 
+jump @HEIST4_14165 
+
+:HEIST4_9905
+if 
+  102@ == 0 
+jf @HEIST4_10027 
+90@ = 0 
+
+:HEIST4_9930
+if 
+  4 > 90@ 
+jf @HEIST4_10027 
+if 
+  266@(90@,4i) == 2 
+jf @HEIST4_10013 
+if 
+   Car.Wrecked(279@(90@,4i))
+jf @HEIST4_10013 
+00BC: show_text_highpriority GXT 'HEI4_04' time 5000 flag 1  // ~r~We needed all those bikes in good working order!
+jump @HEIST4_14079 
+
+:HEIST4_10013
+90@ += 1 
+jump @HEIST4_9930 
+
+:HEIST4_10027
+if 
+  66@ == 0 
+jf @HEIST4_10314 
+if 
+056D:   actor 63@ defined 
+jf @HEIST4_10205 
+if 
+051A:   actor 63@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10151 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+gosub @HEIST4_13428 
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_10130 
+66@ = 1 
+0687: clear_actor 63@ task 
+05E2: AS_actor 63@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10130
+if 
+   not Actor.Dead(68@)
+jf @HEIST4_10151 
+Actor.RemoveReferences(68@)
+
+:HEIST4_10151
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_10205 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 63@ radius 25.0 25.0 0 
+jf @HEIST4_10205 
+gosub @HEIST4_13428 
+
+:HEIST4_10205
+if 
+056D:   actor 68@ defined 
+jf @HEIST4_10314 
+if 
+051A:   actor 68@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10314 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+if 
+   not Actor.Dead(68@)
+jf @HEIST4_10278 
+05DD: AS_actor 68@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit -1 
+
+:HEIST4_10278
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_10314 
+66@ = 1 
+0687: clear_actor 63@ task 
+05E2: AS_actor 63@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10314
+if 
+  72@ == 0 
+jf @HEIST4_10936 
+if 
+056D:   actor 70@ defined 
+jf @HEIST4_10534 
+if 
+051A:   actor 70@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10480 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+gosub @HEIST4_13574 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_10417 
+72@ = 1 
+0687: clear_actor 70@ task 
+05E2: AS_actor 70@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10417
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_10438 
+Actor.RemoveReferences(95@)
+
+:HEIST4_10438
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_10459 
+Actor.RemoveReferences(96@)
+
+:HEIST4_10459
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_10480 
+Actor.RemoveReferences(97@)
+
+:HEIST4_10480
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_10534 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 70@ radius 30.0 30.0 0 
+jf @HEIST4_10534 
+gosub @HEIST4_13574 
+
+:HEIST4_10534
+if 
+056D:   actor 95@ defined 
+jf @HEIST4_10668 
+if 
+051A:   actor 95@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10668 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_10605 
+72@ = 1 
+0687: clear_actor 70@ task 
+05E2: AS_actor 70@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10605
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_10626 
+Actor.RemoveReferences(95@)
+
+:HEIST4_10626
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_10647 
+Actor.RemoveReferences(96@)
+
+:HEIST4_10647
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_10668 
+Actor.RemoveReferences(97@)
+
+:HEIST4_10668
+if 
+056D:   actor 96@ defined 
+jf @HEIST4_10802 
+if 
+051A:   actor 96@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10802 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_10739 
+72@ = 1 
+0687: clear_actor 70@ task 
+05E2: AS_actor 70@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10739
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_10760 
+Actor.RemoveReferences(95@)
+
+:HEIST4_10760
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_10781 
+Actor.RemoveReferences(96@)
+
+:HEIST4_10781
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_10802 
+Actor.RemoveReferences(97@)
+
+:HEIST4_10802
+if 
+056D:   actor 97@ defined 
+jf @HEIST4_10936 
+if 
+051A:   actor 97@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_10936 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_10873 
+72@ = 1 
+0687: clear_actor 70@ task 
+05E2: AS_actor 70@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_10873
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_10894 
+Actor.RemoveReferences(95@)
+
+:HEIST4_10894
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_10915 
+Actor.RemoveReferences(96@)
+
+:HEIST4_10915
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_10936 
+Actor.RemoveReferences(97@)
+
+:HEIST4_10936
+if 
+  80@ == 0 
+jf @HEIST4_11052 
+if 
+056D:   actor 77@ defined 
+jf @HEIST4_11003 
+if 
+051A:   actor 77@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11003 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+gosub @HEIST4_13126 
+
+:HEIST4_11003
+if 
+056D:   actor 76@ defined 
+jf @HEIST4_11052 
+if 
+051A:   actor 76@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11052 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+gosub @HEIST4_13126 
+
+:HEIST4_11052
+if 
+  85@ == 0 
+jf @HEIST4_11209 
+if 
+056D:   actor 82@ defined 
+jf @HEIST4_11209 
+if 
+051A:   actor 82@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11155 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+gosub @HEIST4_13200 
+if 
+   not Actor.Dead(82@)
+jf @HEIST4_11155 
+85@ = 1 
+0687: clear_actor 82@ task 
+05E2: AS_actor 82@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_11155
+if 
+   not Actor.Dead(82@)
+jf @HEIST4_11209 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 82@ radius 35.0 35.0 0 
+jf @HEIST4_11209 
+gosub @HEIST4_13200 
+
+:HEIST4_11209
+if 
+  106@ == 0 
+jf @HEIST4_11276 
+if 
+056D:   actor 82@ defined 
+jf @HEIST4_11276 
+if 
+051A:   actor 82@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11276 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+106@ = 1 
+
+:HEIST4_11276
+if 
+  107@ == 0 
+jf @HEIST4_11343 
+if 
+056D:   actor 70@ defined 
+jf @HEIST4_11343 
+if 
+051A:   actor 70@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11343 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+107@ = 1 
+
+:HEIST4_11343
+if 
+  108@ == 0 
+jf @HEIST4_11410 
+if 
+056D:   actor 63@ defined 
+jf @HEIST4_11410 
+if 
+051A:   actor 63@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11410 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+108@ = 1 
+
+:HEIST4_11410
+if 
+  109@ == 0 
+jf @HEIST4_11477 
+if 
+056D:   actor 76@ defined 
+jf @HEIST4_11477 
+if 
+051A:   actor 76@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11477 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+109@ = 1 
+
+:HEIST4_11477
+if 
+  110@ == 0 
+jf @HEIST4_11544 
+if 
+056D:   actor 77@ defined 
+jf @HEIST4_11544 
+if 
+051A:   actor 77@ damaged_by_actor $PLAYER_ACTOR 
+jf @HEIST4_11544 
+Player.SetMinWantedLevel($PLAYER_CHAR, 2)
+110@ = 1 
+
+:HEIST4_11544
+if 
+  88@ == 1 
+jf @HEIST4_11631 
+if 
+   not Car.Wrecked(86@)
+jf @HEIST4_11631 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 86@ radius 200.0 200.0 200.0 flag 0 
+jf @HEIST4_11631 
+88@ = 2 
+Actor.RemoveReferences(87@)
+Car.RemoveReferences(86@)
+
+:HEIST4_11631
+if 
+   not Actor.Dead(82@)
+jf @HEIST4_11704 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 82@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_11697 
+0575: set_actor 82@ keep_position 0 
+jump @HEIST4_11704 
+
+:HEIST4_11697
+0575: set_actor 82@ keep_position 1 
+
+:HEIST4_11704
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_11777 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 70@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_11770 
+0575: set_actor 70@ keep_position 0 
+jump @HEIST4_11777 
+
+:HEIST4_11770
+0575: set_actor 70@ keep_position 1 
+
+:HEIST4_11777
+if 
+  73@ == 0 
+jf @HEIST4_12014 
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_11868 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 95@ radius 150.0 150.0 150.0 sphere 0 
+jf @HEIST4_11861 
+0575: set_actor 95@ keep_position 0 
+jump @HEIST4_11868 
+
+:HEIST4_11861
+0575: set_actor 95@ keep_position 1 
+
+:HEIST4_11868
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_11941 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 96@ radius 150.0 150.0 150.0 sphere 0 
+jf @HEIST4_11934 
+0575: set_actor 96@ keep_position 0 
+jump @HEIST4_11941 
+
+:HEIST4_11934
+0575: set_actor 96@ keep_position 1 
+
+:HEIST4_11941
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_12014 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 97@ radius 150.0 150.0 150.0 sphere 0 
+jf @HEIST4_12007 
+0575: set_actor 97@ keep_position 0 
+jump @HEIST4_12014 
+
+:HEIST4_12007
+0575: set_actor 97@ keep_position 1 
+
+:HEIST4_12014
+if 
+  73@ == 1 
+jf @HEIST4_12218 
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_12094 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 95@ radius 120.0 120.0 150.0 sphere 0 
+jf @HEIST4_12094 
+Actor.RemoveReferences(95@)
+Car.RemoveReferences(92@)
+
+:HEIST4_12094
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_12156 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 96@ radius 120.0 120.0 150.0 sphere 0 
+jf @HEIST4_12156 
+Actor.RemoveReferences(96@)
+Car.RemoveReferences(93@)
+
+:HEIST4_12156
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_12218 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 97@ radius 120.0 120.0 150.0 sphere 0 
+jf @HEIST4_12218 
+Actor.RemoveReferences(97@)
+Car.RemoveReferences(94@)
+
+:HEIST4_12218
+if 
+   not Actor.Dead(77@)
+jf @HEIST4_12291 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 77@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_12284 
+0575: set_actor 77@ keep_position 0 
+jump @HEIST4_12291 
+
+:HEIST4_12284
+0575: set_actor 77@ keep_position 1 
+
+:HEIST4_12291
+if 
+   not Actor.Dead(76@)
+jf @HEIST4_12364 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 76@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_12357 
+0575: set_actor 76@ keep_position 0 
+jump @HEIST4_12364 
+
+:HEIST4_12357
+0575: set_actor 76@ keep_position 1 
+
+:HEIST4_12364
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_12437 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 63@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_12430 
+0575: set_actor 63@ keep_position 0 
+jump @HEIST4_12437 
+
+:HEIST4_12430
+0575: set_actor 63@ keep_position 1 
+
+:HEIST4_12437
+if 
+   not Actor.Dead(68@)
+jf @HEIST4_12510 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 68@ radius 120.0 120.0 120.0 sphere 0 
+jf @HEIST4_12503 
+0575: set_actor 68@ keep_position 0 
+jump @HEIST4_12510 
+
+:HEIST4_12503
+0575: set_actor 68@ keep_position 1 
+
+:HEIST4_12510
+jump @HEIST4_3332 
+
+:HEIST4_12517
+if 
+  48@ == 0 
+jf @HEIST4_12683 
+if 
+  66@ == 0 
+jf @HEIST4_12683 
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_12628 
+0687: clear_actor 63@ task 
+0615: define_AS_pack_begin 65@ 
+05D3: AS_actor -1 goto_point 2785.789 1439.454 9.5579 mode 6 time 10000 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 65@ 
+0618: assign_actor 63@ to_AS_pack 65@ 
+061B: remove_references_to_AS_pack 65@ 
+
+:HEIST4_12628
+if 
+   not Actor.Dead(68@)
+jf @HEIST4_12669 
+0687: clear_actor 68@ task 
+Actor.RemoveReferences(68@)
+05DD: AS_actor 68@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit -1 
+
+:HEIST4_12669
+66@ = 1 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+
+:HEIST4_12683
+if 
+  48@ == 1 
+jf @HEIST4_12823 
+if 
+  72@ == 0 
+jf @HEIST4_12823 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_12794 
+0687: clear_actor 70@ task 
+0615: define_AS_pack_begin 71@ 
+05D3: AS_actor -1 goto_point 2646.582 2348.17 9.6797 mode 6 time 10000 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 71@ 
+0618: assign_actor 70@ to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 71@ 
+
+:HEIST4_12794
+72@ = 1 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+Car.RemoveReferences(92@)
+Car.RemoveReferences(93@)
+Car.RemoveReferences(94@)
+
+:HEIST4_12823
+if 
+  48@ == 2 
+jf @HEIST4_12999 
+if 
+  80@ == 0 
+jf @HEIST4_12999 
+if 
+   not Actor.Dead(77@)
+jf @HEIST4_12910 
+0687: clear_actor 77@ task 
+0615: define_AS_pack_begin 79@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 79@ 
+0618: assign_actor 77@ to_AS_pack 79@ 
+061B: remove_references_to_AS_pack 79@ 
+
+:HEIST4_12910
+if 
+   not Actor.Dead(76@)
+jf @HEIST4_12985 
+0687: clear_actor 76@ task 
+0615: define_AS_pack_begin 78@ 
+05D3: AS_actor -1 goto_point 2311.004 2436.764 9.8203 mode 6 time 10000 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 78@ 
+0618: assign_actor 76@ to_AS_pack 78@ 
+061B: remove_references_to_AS_pack 78@ 
+
+:HEIST4_12985
+80@ = 1 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+
+:HEIST4_12999
+if 
+  48@ == 3 
+jf @HEIST4_13124 
+if 
+  85@ == 0 
+jf @HEIST4_13124 
+if 
+   not Actor.Dead(82@)
+jf @HEIST4_13110 
+0687: clear_actor 82@ task 
+0615: define_AS_pack_begin 83@ 
+05D3: AS_actor -1 goto_point 1593.289 1836.808 9.8281 mode 6 time 10000 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 83@ 
+0618: assign_actor 82@ to_AS_pack 83@ 
+061B: remove_references_to_AS_pack 83@ 
+
+:HEIST4_13110
+85@ = 1 
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+
+:HEIST4_13124
+return 
+
+:HEIST4_13126
+if 
+   not Actor.Dead(77@)
+jf @HEIST4_13155 
+0687: clear_actor 77@ task 
+05E2: AS_actor 77@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_13155
+if 
+   not Actor.Dead(76@)
+jf @HEIST4_13184 
+0687: clear_actor 76@ task 
+05E2: AS_actor 76@ kill_actor $PLAYER_ACTOR 
+
+:HEIST4_13184
+Player.SetMinWantedLevel($PLAYER_CHAR, 1)
+80@ = 1 
+return 
+
+:HEIST4_13200
+if 
+  88@ == 0 
+jf @HEIST4_13426 
+if 
+   not Actor.Dead(87@)
+jf @HEIST4_13295 
+if 
+   not Car.Wrecked(86@)
+jf @HEIST4_13295 
+Car.SetMaxSpeed(86@, 100.0)
+0508: car 86@ close_all_doors 
+04A2: set_heli 86@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+
+:HEIST4_13295
+if 
+   not Car.Wrecked(282@)
+jf @HEIST4_13419 
+if 
+   not Actor.Dead(82@)
+jf @HEIST4_13419 
+0687: clear_actor 82@ task 
+0615: define_AS_pack_begin 84@ 
+05CB: AS_actor -1 enter_car 282@ as_driver 6000 ms 
+05D1: AS_actor -1 drive_car 282@ to 1570.712 1834.135 9.6969 speed 15.0 0 model #NULL 2 
+05D2: AS_actor -1 run_to_and_hijack_car 282@ max_search_radius 15.0 traffic_behavior 2 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor 82@ to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+08C6: set_actor 82@ stay_on_bike 3 
+
+:HEIST4_13419
+88@ = 1 
+
+:HEIST4_13426
+return 
+
+:HEIST4_13428
+if 
+  67@ == 0 
+jf @HEIST4_13572 
+if 
+   not Actor.Dead(63@)
+jf @HEIST4_13565 
+if 
+   not Actor.Dead(68@)
+jf @HEIST4_13565 
+0687: clear_actor 68@ task 
+0615: define_AS_pack_begin 69@ 
+0643: set_AS_pack 69@ loop 1 
+05D3: AS_actor -1 goto_point 2762.117 1432.399 9.5325 mode 4 time 30000 ms // versionA 
+05BB: AS_actor -1 fall_down 0 time_on_ground 3000 
+05D3: AS_actor -1 goto_point 2767.537 1424.877 9.2195 mode 4 time 30000 ms // versionA 
+0616: define_AS_pack_end 69@ 
+0618: assign_actor 68@ to_AS_pack 69@ 
+
+:HEIST4_13565
+67@ = 1 
+
+:HEIST4_13572
+return 
+
+:HEIST4_13574
+if 
+  73@ == 0 
+jf @HEIST4_14077 
+if 
+  203@ == 2 
+jf @HEIST4_13614 
+03D1: play_wav 3 
+
+:HEIST4_13614
+if 
+   not Car.Wrecked(92@)
+jf @HEIST4_13721 
+if 
+   not Actor.Dead(95@)
+jf @HEIST4_13721 
+0687: clear_actor 95@ task 
+0615: define_AS_pack_begin 98@ 
+05D1: AS_actor -1 drive_car 92@ to 2648.744 2293.42 9.6875 speed 25.0 0 model #NULL 2 
+05D2: AS_actor -1 run_to_and_hijack_car 92@ max_search_radius 25.0 traffic_behavior 2 
+0616: define_AS_pack_end 98@ 
+0618: assign_actor 95@ to_AS_pack 98@ 
+061B: remove_references_to_AS_pack 98@ 
+
+:HEIST4_13721
+if 
+   not Car.Wrecked(93@)
+jf @HEIST4_13828 
+if 
+   not Actor.Dead(96@)
+jf @HEIST4_13828 
+0687: clear_actor 96@ task 
+0615: define_AS_pack_begin 99@ 
+05D1: AS_actor -1 drive_car 93@ to 2650.566 2290.315 9.6875 speed 26.0 0 model #NULL 2 
+05D2: AS_actor -1 run_to_and_hijack_car 93@ max_search_radius 25.0 traffic_behavior 2 
+0616: define_AS_pack_end 99@ 
+0618: assign_actor 96@ to_AS_pack 99@ 
+061B: remove_references_to_AS_pack 99@ 
+
+:HEIST4_13828
+if 
+   not Car.Wrecked(94@)
+jf @HEIST4_13935 
+if 
+   not Actor.Dead(97@)
+jf @HEIST4_13935 
+0687: clear_actor 97@ task 
+0615: define_AS_pack_begin 100@ 
+05D1: AS_actor -1 drive_car 94@ to 2651.681 2294.87 9.6875 speed 25.0 0 model #NULL 2 
+05D2: AS_actor -1 run_to_and_hijack_car 94@ max_search_radius 25.0 traffic_behavior 2 
+0616: define_AS_pack_end 100@ 
+0618: assign_actor 97@ to_AS_pack 100@ 
+061B: remove_references_to_AS_pack 100@ 
+
+:HEIST4_13935
+if 
+   not Car.Wrecked(280@)
+jf @HEIST4_14070 
+if 
+   not Actor.Dead(70@)
+jf @HEIST4_14059 
+0687: clear_actor 70@ task 
+0615: define_AS_pack_begin 71@ 
+05CB: AS_actor -1 enter_car 280@ as_driver 10000 ms 
+05D1: AS_actor -1 drive_car 280@ to 2647.941 2293.222 9.6875 speed 21.0 0 model #NULL 2 
+05D2: AS_actor -1 run_to_and_hijack_car 280@ max_search_radius 17.0 traffic_behavior 2 
+0616: define_AS_pack_end 71@ 
+0618: assign_actor 70@ to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 71@ 
+08C6: set_actor 70@ stay_on_bike 3 
+
+:HEIST4_14059
+0397: enable_car 280@ siren 1 
+040D: unload_wav 3 
+
+:HEIST4_14070
+73@ = 1 
+
+:HEIST4_14077
+return 
+
+:HEIST4_14079
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @HEIST4_14147 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+
+:HEIST4_14147
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:HEIST4_14165
+$HEIST_TOTAL_PASSED_MISSIONS += 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 20 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 20 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'HEIST_4'  // Cop Wheels
+030C: progress_made = 1 
+return 
+
+:HEIST4_14220
+Player.CanMove($PLAYER_CHAR) = True
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+0940: set_group 34@ enters_leaders_vehicle 1 
+0A31: set_player $PLAYER_CHAR group_to_follow_never 0 
+01EB: set_traffic_density_multiplier_to 1.0 
+040D: unload_wav 3 
+040D: unload_wav 4 
+01B7: release_weather 
+Marker.Disable(35@)
+Marker.Disable(283@)
+Marker.Disable(284@)
+Marker.Disable(285@)
+Marker.Disable(286@)
+Model.Destroy(#PACKER)
+Model.Destroy(#COPBIKE)
+Model.Destroy(#COLT45)
+0296: unload_special_actor 1 
+Model.Destroy(#COPCARVG)
+Model.Destroy(#POLMAV)
+Model.Destroy(#FREEWAY)
+Model.Destroy(#DWMOLC2)
+Model.Destroy(#DWMYLC1)
+Model.Destroy(#WMYMECH)
+Model.Destroy(#TRIADA)
+Model.Destroy(#DWMOLC1)
+04EF: release_animation "SMOKING" 
+04EF: release_animation "MISC" 
+014F: stop_timer $7927 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

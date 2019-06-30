@@ -1,0 +1,3671 @@
+:CASIN10
+thread 'CASIN10' 
+gosub @CASIN10_341 
+if 
+wasted_or_busted 
+jf @CASIN10_85 
+$11033 = 1 
+$11029 = 0.0 
+$11032 = 2158.42 
+$11031 = 1681.77 
+$11030 = 10.28 
+gosub @CASIN10_15844 
+
+:CASIN10_85
+gosub @CASIN10_16213 
+end_thread 
+
+:CASIN10_94
+0871: init_jump_table 134@ total_jumps 2 default_jump 0 @CASIN10_339 jumps 0 @CASIN10_157 1 @CASIN10_259 -1 @CASIN10_339 -1 @CASIN10_339 -1 @CASIN10_339 -1 @CASIN10_339 -1 @CASIN10_339 
+
+:CASIN10_157
+05A9: s$7762[0] = 'CAS11BA' // s$  // ~z~This is private flight CJ101 on approach to Liberty, over.
+05A9: s$7762[1] = 'CAS11BB' // s$  // ~z~Flight CJ101, we have you on our scope.
+05A9: s$7762[2] = 'CAS11BC' // s$  // ~z~Stay on current heading and await final approach instructions...
+05A9: s$7762[3] = 'CAS11CA' // s$  // ~z~Welcome to Liberty City, CJ101...
+04AF: 135@ = 7204 // = constant 
+04AF: 136@ = 7205 // = constant 
+04AF: 137@ = 7206 // = constant 
+04AF: 138@ = 7207 // = constant 
+$DIALOG_ARRAY_SIZE = 3 
+jump @CASIN10_339 
+
+:CASIN10_259
+05A9: s$7762[0] = 'CAS11GA' // s$  // ~z~This is flight CJ101 out of Liberty City,
+05A9: s$7762[1] = 'CAS11GB' // s$  // ~z~requesting final approach to Las Venturas International, over.
+05A9: s$7762[2] = 'CAS11GC' // s$  // ~z~Flight CJ101, you are clear for landing on runway 3.
+04AF: 135@ = 7218 // = constant 
+04AF: 136@ = 7219 // = constant 
+04AF: 137@ = 7220 // = constant 
+$DIALOG_ARRAY_SIZE = 2 
+jump @CASIN10_339 
+
+:CASIN10_339
+return 
+
+:CASIN10_341
+increment_mission_attempts 
+$ONMISSION = 1 
+36@ = 0 
+43@ = 0 
+42@ = 0 
+44@ = 0 
+45@ = 0 
+46@ = 1000 
+48@ = 0 
+49@ = 0 
+51@ = 0 
+52@ = 0 
+54@ = 0 
+55@ = 0 
+57@ = 0 
+58@ = 0 
+60@ = 0 
+61@ = 0 
+63@ = 0 
+64@ = 0 
+66@ = 0 
+68@ = 0 
+70@ = 0 
+72@ = 0 
+99@ = 0.0 
+83@ = 0 
+83@ = 0 
+88@ = 0 
+89@ = 0 
+91@ = 0 
+92@ = 0 
+94@ = 0 
+95@ = 0 
+114@ = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+119@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+76@ = 0 
+74@ = 0 
+80@ = 0 
+78@ = 0 
+82@ = 0 
+85@ = 0 
+152@ = 0 
+153@ = 0 
+155@ = 0 
+157@ = 0 
+154@ = 0 
+156@ = 0 
+158@ = 0 
+159@ = 0 
+054C: use_GXT_table 'CASIN10' 
+wait 0 
+0395: clear_area 1 at 2163.589 1682.247 9.86 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2163.589, 1682.247, 9.86)
+Actor.Angle($PLAYER_ACTOR) = 80.0
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+$PLAYER_IN_INTERIOR = 1 
+select_interior 2 
+02E4: load_cutscene_data 'CAS_11A' 
+
+:CASIN10_830
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASIN10_854 
+wait 0 
+jump @CASIN10_830 
+
+:CASIN10_854
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASIN10_863
+if 
+82E9:   not cutscene_reached_end 
+jf @CASIN10_887 
+wait 0 
+jump @CASIN10_863 
+
+:CASIN10_887
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CASIN10_900
+if 
+fading 
+jf @CASIN10_924 
+wait 0 
+jump @CASIN10_900 
+
+:CASIN10_924
+02EA: end_cutscene 
+select_interior 0 
+$PLAYER_IN_INTERIOR = 0 
+03C7: set_sensitivity_to_crime 0.5 
+Player.CanMove($PLAYER_CHAR) = False
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2233.5 1712.8 radius 10.0 
+wait 1000 
+Model.Load(#SHAMAL)
+Model.Load(#SENTINEL)
+023C: load_special_actor 'MACCER' as 1 // models 290-299 
+023C: load_special_actor 'PAUL' as 2 // models 290-299 
+023C: load_special_actor 'ROSE' as 3 // models 290-299 
+03CF: load_wav 7200 as 1 
+03CF: load_wav 7201 as 2 
+jump @CASIN10_1193 
+0615: define_AS_pack_begin 96@ 
+0638: AS_actor -1 stay_put 0 
+0616: define_AS_pack_end 96@ 
+0615: define_AS_pack_begin 97@ 
+0638: AS_actor -1 stay_put 0 
+0616: define_AS_pack_end 97@ 
+0615: define_AS_pack_begin 98@ 
+0638: AS_actor -1 stay_put 0 
+0616: define_AS_pack_end 98@ 
+0615: define_AS_pack_begin 38@ 
+0638: AS_actor -1 stay_put 0 
+0616: define_AS_pack_end 38@ 
+0615: define_AS_pack_begin 39@ 
+0638: AS_actor -1 stay_put 0 
+0616: define_AS_pack_end 39@ 
+123@ = Car.Create(#SENTINEL, 0.0, 0.0, 0.0)
+Car.Destroy(123@)
+018A: 113@ = create_checkpoint_at 0.0 0.0 0.0 
+Marker.Disable(113@)
+
+:CASIN10_1193
+060A: create_decision_maker_type 2 store_to 105@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 106@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 106@ on_event 49 taskID 311 respect 0.0 hate 100.0 like 100.0 dislike 100.0 in_car 0 on_foot 1 // see *.ped files 
+060A: create_decision_maker_type 0 store_to 110@ // decision\allowed\m_.ped files 
+038B: load_requested_models 
+
+:CASIN10_1250
+if or
+   not Model.Available(#SHAMAL)
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+   not Model.Available(#SENTINEL)
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CASIN10_1298 
+wait 0 
+jump @CASIN10_1250 
+
+:CASIN10_1298
+if 
+823D:   not special_actor 3 loaded 
+jf @CASIN10_1324 
+wait 0 
+jump @CASIN10_1298 
+
+:CASIN10_1324
+0395: clear_area 1 at 2163.589 1682.247 9.86 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2163.589, 1682.247, 9.86)
+Actor.Angle($PLAYER_ACTOR) = 80.0
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+Camera.SetAtPos(2163.589, 1682.247, 9.86)
+01E8: create_forbidden_for_cars_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+022B: create_forbidden_for_peds_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+107@ = Actor.Create(Mission1, #SPECIAL01, 2162.213, 1682.752, 9.86)
+060B: set_actor 107@ decision_maker_to 110@ 
+Actor.Angle(107@) = 280.0
+02A9: set_actor 107@ immune_to_nonplayer 1 
+0639: AS_actor 107@ rotate_to_actor $PLAYER_ACTOR 
+Actor.SetImmunities(107@, 1, 1, 1, 1, 1)
+0A09: set_actor 107@ muted 1 // versionB 
+0395: clear_area 1 at 2160.582 1682.103 9.735 radius 4.0 
+111@ = Car.Create(#SENTINEL, 2160.582, 1682.103, 9.735)
+Car.Angle(111@) = 0.0
+Car.ImmuneToNonPlayer(111@) = True
+Car.SetImmunities(111@, 1, 1, 1, 1, 1)
+109@ = Actor.CreateAsPassenger(Mission2, #SPECIAL03, 111@, 1)
+060B: set_actor 109@ decision_maker_to 110@ 
+02A9: set_actor 109@ immune_to_nonplayer 1 
+Actor.SetImmunities(109@, 1, 1, 1, 1, 1)
+0A09: set_actor 109@ muted 1 // versionB 
+108@ = Actor.CreateAsDriver(Mission2, #SPECIAL02, 111@)
+060B: set_actor 108@ decision_maker_to 110@ 
+02A9: set_actor 108@ immune_to_nonplayer 1 
+Actor.SetImmunities(108@, 1, 1, 1, 1, 1)
+0A09: set_actor 108@ muted 1 // versionB 
+Car.SetToNormalDriver(111@)
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2165.228 1680.256 9.9643 position_to 2164.975 1684.109 11.4927 time 14500 smooth_transition 1 
+0920: point_camera 2162.274 1682.247 11.86 transverse_to 2160.582 1682.103 11.0 time 14500 smooth_transition 1 
+0169: set_fade_color_RGB 0 0 0 
+02A3: enable_widescreen 1 
+08F5: save_player_group 
+fade 1 2000 
+0395: clear_area 1 at 2162.274 1682.247 9.86 radius 120.0 
+
+:CASIN10_1861
+if 
+fading 
+jf @CASIN10_1885 
+wait 0 
+jump @CASIN10_1861 
+
+:CASIN10_1885
+0707: start_scene_skip_to @CASIN10_3976 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CASIN10_1981 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11AA' time 10000 flag 1  // ~z~Alright, you guys better get out of Las Venturas, fast!
+0967: actor $PLAYER_ACTOR move_mouth 999999 ms 
+0812: AS_actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+jump @CASIN10_2000 
+
+:CASIN10_1981
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AA'  // ~z~Alright, you guys better get out of Las Venturas, fast!
+
+:CASIN10_2000
+if 
+83D2:   not wav 1 ended 
+jf @CASIN10_2229 
+wait 0 
+if 
+   Actor.Dead(107@)
+jf @CASIN10_2065 
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+jump @CASIN10_2070 
+
+:CASIN10_2065
+0687: clear_actor 107@ task 
+
+:CASIN10_2070
+if 
+   Actor.Dead(108@)
+jf @CASIN10_2109 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2109
+if 
+   Actor.Dead(109@)
+jf @CASIN10_2148 
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2148
+if 
+   Car.Wrecked(111@)
+jf @CASIN10_2187 
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_2187
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @CASIN10_2222 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AA'  // ~z~Alright, you guys better get out of Las Venturas, fast!
+
+:CASIN10_2222
+jump @CASIN10_2000 
+
+:CASIN10_2229
+040D: unload_wav 1 
+03D5: remove_text 'CAS11AA'  // ~z~Alright, you guys better get out of Las Venturas, fast!
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 7202 as 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS11AB' time 10000 flag 1  // ~z~I'll be in touch.
+0967: actor $PLAYER_ACTOR move_mouth 999999 ms 
+
+:CASIN10_2286
+if or
+83D2:   not wav 2 ended 
+83D0:   not wav 1 loaded 
+jf @CASIN10_2519 
+wait 0 
+if 
+   Actor.Dead(107@)
+jf @CASIN10_2355 
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+jump @CASIN10_2360 
+
+:CASIN10_2355
+0687: clear_actor 107@ task 
+
+:CASIN10_2360
+if 
+   Actor.Dead(108@)
+jf @CASIN10_2399 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2399
+if 
+   Actor.Dead(109@)
+jf @CASIN10_2438 
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2438
+if 
+   Car.Wrecked(111@)
+jf @CASIN10_2477 
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_2477
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @CASIN10_2512 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AB'  // ~z~I'll be in touch.
+
+:CASIN10_2512
+jump @CASIN10_2286 
+
+:CASIN10_2519
+0687: clear_actor $PLAYER_ACTOR task 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AB'  // ~z~I'll be in touch.
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 7203 as 2 
+if 
+   not Actor.Dead(107@)
+jf @CASIN10_2640 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11AC' time 10000 flag 1  // ~z~What about your backup, man, will you be a'right without us?
+0967: actor 107@ move_mouth 999999 ms 
+0812: AS_actor 107@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+jump @CASIN10_2663 
+
+:CASIN10_2640
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2663
+if or
+83D2:   not wav 1 ended 
+83D0:   not wav 2 loaded 
+jf @CASIN10_2868 
+wait 0 
+if 
+   Actor.Dead(107@)
+jf @CASIN10_2744 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AC'  // ~z~What about your backup, man, will you be a'right without us?
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2744
+if 
+   Actor.Dead(108@)
+jf @CASIN10_2783 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2783
+if 
+   Actor.Dead(109@)
+jf @CASIN10_2822 
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2822
+if 
+   Car.Wrecked(111@)
+jf @CASIN10_2861 
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_2861
+jump @CASIN10_2663 
+
+:CASIN10_2868
+040D: unload_wav 1 
+03D5: remove_text 'CAS11AC'  // ~z~What about your backup, man, will you be a'right without us?
+if 
+   not Actor.Dead(107@)
+jf @CASIN10_2916 
+0968: actor 107@ stop_mouth 
+0687: clear_actor 107@ task 
+jump @CASIN10_2939 
+
+:CASIN10_2916
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_2939
+if 
+   not Actor.Dead(109@)
+jf @CASIN10_3002 
+05BF: AS_actor 109@ look_at_actor $PLAYER_ACTOR -2 ms 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS11AD' time 10000 flag 1  // ~z~Of course he will, you fucking moron, come on!
+0967: actor 109@ move_mouth 999999 ms 
+jump @CASIN10_3044 
+
+:CASIN10_3002
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AD'  // ~z~Of course he will, you fucking moron, come on!
+jump @CASIN10_15844 
+
+:CASIN10_3044
+if 
+83D2:   not wav 2 ended 
+jf @CASIN10_3245 
+wait 0 
+if 
+   Actor.Dead(107@)
+jf @CASIN10_3102 
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3102
+if 
+   Actor.Dead(108@)
+jf @CASIN10_3141 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3141
+if 
+   Actor.Dead(109@)
+jf @CASIN10_3199 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AC'  // ~z~What about your backup, man, will you be a'right without us?
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3199
+if 
+   Car.Wrecked(111@)
+jf @CASIN10_3238 
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_3238
+jump @CASIN10_3044 
+
+:CASIN10_3245
+040D: unload_wav 2 
+03D5: remove_text 'CAS11AD'  // ~z~Of course he will, you fucking moron, come on!
+if 
+   not Actor.Dead(109@)
+jf @CASIN10_3293 
+0968: actor 109@ stop_mouth 
+0647: AS_actor 109@ clear_look_task 
+jump @CASIN10_3316 
+
+:CASIN10_3293
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3316
+if 
+   not Car.Wrecked(111@)
+jf @CASIN10_3515 
+if 
+   not Actor.Dead(107@)
+jf @CASIN10_3368 
+05CA: AS_actor 107@ enter_car 111@ passenger_seat 0 time 10000 
+jump @CASIN10_3391 
+
+:CASIN10_3368
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3391
+if 
+   Actor.Dead(107@)
+jf @CASIN10_3430 
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3430
+if 
+   Actor.Dead(109@)
+jf @CASIN10_3469 
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3469
+if 
+   Actor.Dead(108@)
+jf @CASIN10_3508 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3508
+jump @CASIN10_3538 
+
+:CASIN10_3515
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_3538
+if or
+   not Actor.InCar(107@, 111@)
+   not Actor.InCar(108@, 111@)
+   not Actor.InCar(109@, 111@)
+jf @CASIN10_3740 
+wait 0 
+if 
+   Actor.Dead(107@)
+jf @CASIN10_3616 
+00BC: show_text_highpriority GXT 'CM10_11' time 8000 flag 1  // ~r~Maccer is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3616
+if 
+   Actor.Dead(108@)
+jf @CASIN10_3655 
+00BC: show_text_highpriority GXT 'CM10_12' time 8000 flag 1  // ~r~Paul is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3655
+if 
+   Actor.Dead(109@)
+jf @CASIN10_3694 
+00BC: show_text_highpriority GXT 'CM10_13' time 8000 flag 1  // ~r~Rosenberg is dead!
+jump @CASIN10_15844 
+
+:CASIN10_3694
+if 
+   Car.Wrecked(111@)
+jf @CASIN10_3733 
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_3733
+jump @CASIN10_3538 
+
+:CASIN10_3740
+if 
+   not Car.Wrecked(111@)
+jf @CASIN10_3800 
+Car.DriveTo(111@, 2148.048, 1703.466, 9.727)
+00AE: set_car 111@ traffic_behaviour_to 2 
+Car.SetMaxSpeed(111@, 30.0)
+jump @CASIN10_3823 
+
+:CASIN10_3800
+00BC: show_text_highpriority GXT 'CM10_14' time 8000 flag 1  // ~r~The car has been destroyed!
+jump @CASIN10_15844 
+
+:CASIN10_3823
+wait 2000 
+Actor.DestroyInstantly(107@)
+Actor.DestroyInstantly(108@)
+Actor.DestroyInstantly(109@)
+Car.Destroy(111@)
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+Model.Destroy(#SENTINEL)
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+091D: remove_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+091E: create_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+114@ = 1 
+
+:CASIN10_3976
+0701: end_scene_skip 
+if 
+  114@ == 0 
+jf @CASIN10_4284 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CASIN10_4021
+if 
+fading 
+jf @CASIN10_4045 
+wait 0 
+jump @CASIN10_4021 
+
+:CASIN10_4045
+08F6: restore_player_group 
+0395: clear_area 1 at 2163.589 1682.247 9.86 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 2163.589, 1682.247, 9.86)
+Actor.Angle($PLAYER_ACTOR) = 80.0
+Actor.DestroyInstantly(107@)
+Actor.DestroyInstantly(108@)
+Actor.DestroyInstantly(109@)
+Car.Destroy(111@)
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+Model.Destroy(#SENTINEL)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+02A3: enable_widescreen 0 
+0925: restore_camera_to_user_defined 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0169: set_fade_color_RGB 0 0 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+091D: remove_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+091E: create_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+fade 1 1000 
+
+:CASIN10_4239
+if 
+fading 
+jf @CASIN10_4263 
+wait 0 
+jump @CASIN10_4239 
+
+:CASIN10_4263
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+
+:CASIN10_4284
+00BC: show_text_highpriority GXT 'CM10_1' time 10000 flag 1  // ~s~Get to the ~y~airport~s~.
+018A: 35@ = create_checkpoint_at 1707.828 1606.639 9.055 
+0395: clear_area 0 at 1707.828 1606.639 9.055 radius 2.0 
+
+:CASIN10_4344
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 1707.828 1606.639 9.055 radius 4.0 4.0 3.0 
+jf @CASIN10_4425 
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CASIN10_4418 
+jump @CASIN10_16061 
+
+:CASIN10_4418
+jump @CASIN10_4344 
+
+:CASIN10_4425
+Marker.Disable(35@)
+00BC: show_text_highpriority GXT 'CM10_10' time 10000 flag 1  // ~s~The ~b~jet ~s~is at the end of the runway, get into it and fly to Liberty City.
+0395: clear_area 1 at 1479.714 1758.306 12.098 radius 2.0 
+112@ = Car.Create(#SHAMAL, 1479.714, 1758.306, 12.098)
+Car.ImmuneToNonPlayer(112@) = True
+Car.Angle(112@) = 180.0
+34@ = Marker.CreateAboveCar(112@)
+07E0: set_marker 34@ type_to 1 
+
+:CASIN10_4525
+if 
+   not Actor.InCar($PLAYER_ACTOR, 112@)
+jf @CASIN10_4599 
+wait 0 
+if 
+   Car.Wrecked(112@)
+jf @CASIN10_4592 
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+Marker.Disable(34@)
+jump @CASIN10_15844 
+
+:CASIN10_4592
+jump @CASIN10_4525 
+
+:CASIN10_4599
+if 
+   not Car.Wrecked(112@)
+jf @CASIN10_4629 
+Car.ImmuneToNonPlayer(112@) = False
+jump @CASIN10_4657 
+
+:CASIN10_4629
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+Marker.Disable(34@)
+jump @CASIN10_15844 
+
+:CASIN10_4657
+Marker.Disable(34@)
+00BC: show_text_highpriority GXT 'CM10_18' time 8000 flag 1  // ~s~Fly to ~y~Liberty City~s~.
+018A: 126@ = create_checkpoint_at 7500.0 2478.34 200.0 
+32@ = 0 
+
+:CASIN10_4705
+if or
+8100:   not actor $PLAYER_ACTOR in_sphere 7500.0 2478.34 200.0 radius 100.0 100.0 200.0 sphere 0 in_car 
+8448:   not actor $PLAYER_ACTOR in_car 112@ 
+jf @CASIN10_5042 
+wait 0 
+if 
+   Car.Wrecked(112@)
+jf @CASIN10_4811 
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+jump @CASIN10_15844 
+jump @CASIN10_5035 
+
+:CASIN10_4811
+if 
+   Actor.InCar($PLAYER_ACTOR, 112@)
+jf @CASIN10_4967 
+if 
+  159@ == 0 
+jf @CASIN10_4887 
+if 
+  32@ > 40000 
+jf @CASIN10_4887 
+03E5: show_text_box 'CM10_99'  // Press ~k~~CAMERA_CHANGE_VIEW_ALL_SITUATIONS~ to change camera modes.
+159@ = 1 
+
+:CASIN10_4887
+if 
+  129@ == 1 
+jf @CASIN10_4960 
+00BC: show_text_highpriority GXT 'CM10_18' time 8000 flag 1  // ~s~Fly to ~y~Liberty City~s~.
+018A: 126@ = create_checkpoint_at 7500.0 2478.34 200.0 
+Marker.Disable(34@)
+$127 = 1 
+129@ = 0 
+
+:CASIN10_4960
+jump @CASIN10_5035 
+
+:CASIN10_4967
+if 
+  129@ == 0 
+jf @CASIN10_5035 
+Marker.Disable(126@)
+34@ = Marker.CreateAboveCar(112@)
+07E0: set_marker 34@ type_to 1 
+00BC: show_text_highpriority GXT 'IN_VEH' time 5000 flag 1  // ~s~Hey! Get back in the ~b~vehicle~s~!
+$127 = 0 
+129@ = 1 
+
+:CASIN10_5035
+jump @CASIN10_4705 
+
+:CASIN10_5042
+Marker.Disable(126@)
+gosub @CASIN10_6143 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 500 
+
+:CASIN10_5069
+if 
+fading 
+jf @CASIN10_5093 
+wait 0 
+jump @CASIN10_5069 
+
+:CASIN10_5093
+0A19: display_zone_text 'MARKS'  // Saint Mark's
+08F5: save_player_group 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+01F0: set_max_wanted_level_to 0 
+09FF: set_restart_closest_to 1578.446 1770.682 9.8358 
+set_weather 5 
+Model.Load(#VMAFF1)
+Model.Load(#COLT45)
+Model.Load(#TAXI)
+Model.Load(#SENTINEL)
+07C0: load_path 602 
+07C0: load_path 603 
+Model.Load(#BMYBU)
+Model.Load(#WFYBU)
+038B: load_requested_models 
+
+:CASIN10_5197
+if or
+   not Model.Available(#VMAFF1)
+   not Model.Available(#COLT45)
+   not Model.Available(#TAXI)
+   not Model.Available(#SENTINEL)
+87C1:   not path 602 available 
+87C1:   not path 603 available 
+jf @CASIN10_5248 
+wait 0 
+jump @CASIN10_5197 
+
+:CASIN10_5248
+if or
+   not Model.Available(#BMYBU)
+   not Model.Available(#WFYBU)
+jf @CASIN10_5279 
+wait 0 
+jump @CASIN10_5248 
+
+:CASIN10_5279
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+04E4: refresh_game_renderer_at -811.999 457.027 
+0A0B: set_rendering_origin_at_3D_coord -811.999 457.027 1356.622 angle 82.0 
+038B: load_requested_models 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASIN10_5389 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -813.833 459.11 998.989 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+jump @CASIN10_5429 
+
+:CASIN10_5389
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -813.833, 459.11, 998.989)
+
+:CASIN10_5429
+Camera.SetBehindPlayer
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+Car.Destroy(112@)
+Model.Destroy(#SHAMAL)
+161@ = Car.Create(#TAXI, -811.999, 457.027, 1356.622)
+Car.Angle(161@) = 270.0
+0840: link_car 161@ to_interior 1 
+Car.ImmuneToNonPlayer(161@) = True
+160@ = Actor.CreateAsDriver(CivMale, #VMAFF1, 161@)
+0860: link_actor 160@ to_interior 1 
+Car.SetToNormalDriver(161@)
+0430: put_actor $PLAYER_ACTOR into_car 161@ passenger_seat 1 
+163@ = Car.Create(#SENTINEL, -729.2895, 514.4813, 1370.969)
+Car.Angle(163@) = 161.5196
+0840: link_car 163@ to_interior 1 
+0229: set_car 163@ primary_color_to 0 secondary_color_to 0 
+Car.ImmuneToNonPlayer(163@) = True
+164@ = Actor.CreateAsDriver(CivMale, #VMAFF1, 163@)
+0860: link_actor 164@ to_interior 1 
+Car.SetToNormalDriver(163@)
+
+:CASIN10_5616
+if 
+84F1:   not is_car_waiting_for_world_collision 161@ 
+jf @CASIN10_5675 
+wait 0 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_5652 
+
+:CASIN10_5652
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_5668 
+
+:CASIN10_5668
+jump @CASIN10_5616 
+
+:CASIN10_5675
+165@ = Actor.Create(CivMale, #BMYBU, -864.653, 451.569, 1348.584)
+05DE: AS_actor 165@ walk_around_ped_path 
+166@ = Actor.Create(CivFemale, #WFYBU, -884.251, 466.693, 1346.577)
+05DE: AS_actor 166@ walk_around_ped_path 
+167@ = Actor.Create(CivMale, #BMYBU, -857.588, 467.419, 1349.29)
+05DE: AS_actor 167@ walk_around_ped_path 
+168@ = Actor.Create(CivFemale, #WFYBU, -814.46, 466.873, 1356.137)
+05DE: AS_actor 168@ walk_around_ped_path 
+169@ = Actor.Create(CivMale, #BMYBU, -781.615, 468.628, 1363.266)
+05DE: AS_actor 169@ walk_around_ped_path 
+170@ = Actor.Create(CivFemale, #WFYBU, -737.431, 503.6, 1370.968)
+05DE: AS_actor 170@ walk_around_ped_path 
+171@ = Actor.Create(CivMale, #BMYBU, -738.769, 476.826, 1370.306)
+05DE: AS_actor 171@ walk_around_ped_path 
+172@ = Actor.Create(CivFemale, #WFYBU, -771.993, 456.237, 1364.445)
+05DE: AS_actor 172@ walk_around_ped_path 
+173@ = Actor.Create(CivMale, #BMYBU, -799.539, 453.03, 1359.074)
+05DE: AS_actor 173@ walk_around_ped_path 
+174@ = Actor.Create(CivFemale, #WFYBU, -753.076, 484.357, 1369.885)
+05DE: AS_actor 174@ walk_around_ped_path 
+Camera.SetPosition(-751.2452, 449.8578, 1370.5, 0.0, 0.0, 0.0)
+Camera.PointAt(-752.1519, 450.2614, 1370.378, 2)
+if 
+   not Car.Wrecked(161@)
+jf @CASIN10_6055 
+05EB: assign_car 161@ to_path 602 
+06FD: set_car 161@ speed_on_path_to 1.1 
+
+:CASIN10_6055
+if 
+   not Car.Wrecked(163@)
+jf @CASIN10_6089 
+05EB: assign_car 163@ to_path 603 
+06FD: set_car 163@ speed_on_path_to 1.1 
+
+:CASIN10_6089
+wait 800 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_6115 
+05EC: release_car 161@ from_path 
+
+:CASIN10_6115
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_6484 
+05EC: release_car 163@ from_path 
+jump @CASIN10_6484 
+
+:CASIN10_6143
+039E: set_actor $PLAYER_ACTOR locked 1 while_in_car 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 7204 as 1 
+03CF: load_wav 7205 as 2 
+
+:CASIN10_6172
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CASIN10_6202 
+wait 0 
+jump @CASIN10_6172 
+
+:CASIN10_6202
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11BA' time 5000 flag 1  // ~z~This is private flight CJ101 on approach to Liberty, over.
+
+:CASIN10_6222
+if 
+83D2:   not wav 1 ended 
+jf @CASIN10_6248 
+wait 0 
+jump @CASIN10_6222 
+
+:CASIN10_6248
+03D5: remove_text 'CAS11BA'  // ~z~This is private flight CJ101 on approach to Liberty, over.
+040D: unload_wav 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS11BB' time 5000 flag 1  // ~z~Flight CJ101, we have you on our scope.
+
+:CASIN10_6283
+if 
+83D2:   not wav 2 ended 
+jf @CASIN10_6309 
+wait 0 
+jump @CASIN10_6283 
+
+:CASIN10_6309
+03D5: remove_text 'CAS11BB'  // ~z~Flight CJ101, we have you on our scope.
+040D: unload_wav 2 
+03CF: load_wav 7206 as 1 
+03CF: load_wav 7207 as 2 
+
+:CASIN10_6338
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CASIN10_6368 
+wait 0 
+jump @CASIN10_6338 
+
+:CASIN10_6368
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11BC' time 5000 flag 1  // ~z~Stay on current heading and await final approach instructions...
+
+:CASIN10_6388
+if 
+83D2:   not wav 1 ended 
+jf @CASIN10_6414 
+wait 0 
+jump @CASIN10_6388 
+
+:CASIN10_6414
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS11CA' time 5000 flag 1  // ~z~Welcome to Liberty City, CJ101...
+
+:CASIN10_6434
+if 
+83D2:   not wav 2 ended 
+jf @CASIN10_6460 
+wait 0 
+jump @CASIN10_6434 
+
+:CASIN10_6460
+03D5: remove_text 'CAS11CA'  // ~z~Welcome to Liberty City, CJ101...
+040D: unload_wav 2 
+039E: set_actor $PLAYER_ACTOR locked 0 while_in_car 
+return 
+
+:CASIN10_6484
+0169: set_fade_color_RGB 0 0 0 
+02A3: enable_widescreen 1 
+fade 1 2000 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera -751.2452 449.8578 1370.5 position_to -730.0718 483.3791 1373.472 time 8600 smooth_transition 1 
+0920: point_camera -752.1519 450.2614 1370.378 transverse_to -730.9146 483.9166 1373.496 time 8600 smooth_transition 1 
+
+:CASIN10_6587
+if 
+fading 
+jf @CASIN10_6611 
+wait 0 
+jump @CASIN10_6587 
+
+:CASIN10_6611
+057E: set_radar_grey 1 
+09AC: disable_map_icons 1 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_6640 
+05EC: release_car 161@ from_path 
+
+:CASIN10_6640
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_6661 
+05EC: release_car 163@ from_path 
+
+:CASIN10_6661
+0707: start_scene_skip_to @CASIN10_6876 
+
+:CASIN10_6668
+if 
+060E:   car 161@ assigned_to_path 
+jf @CASIN10_6737 
+wait 0 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_6709 
+05EC: release_car 161@ from_path 
+
+:CASIN10_6709
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_6730 
+05EC: release_car 163@ from_path 
+
+:CASIN10_6730
+jump @CASIN10_6668 
+
+:CASIN10_6737
+0615: define_AS_pack_begin 162@ 
+if 
+   not Car.Wrecked(161@)
+jf @CASIN10_6765 
+05CD: AS_actor -1 exit_car 161@ 
+
+:CASIN10_6765
+05D3: AS_actor -1 goto_point -760.2046 492.1819 1370.677 mode 4 time 10000 ms // versionA 
+0616: define_AS_pack_end 162@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 162@ 
+061B: remove_references_to_AS_pack 162@ 
+32@ = 0 
+
+:CASIN10_6814
+if 
+  3000 > 32@ 
+jf @CASIN10_6876 
+wait 0 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_6853 
+
+:CASIN10_6853
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_6869 
+
+:CASIN10_6869
+jump @CASIN10_6814 
+
+:CASIN10_6876
+0701: end_scene_skip 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CASIN10_6893
+if 
+fading 
+jf @CASIN10_6917 
+wait 0 
+jump @CASIN10_6893 
+
+:CASIN10_6917
+0915: sync_weather_with_time_and_location_instantly 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+061B: remove_references_to_AS_pack 162@ 
+if 
+   not Car.Wrecked(161@)
+jf @CASIN10_7080 
+05EC: release_car 161@ from_path 
+if 
+   Actor.InCar($PLAYER_ACTOR, 161@)
+jf @CASIN10_7080 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -760.2046 492.1819 1370.677 
+
+:CASIN10_6989
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASIN10_7080 
+wait 0 
+if 
+   Car.Wrecked(161@)
+jf @CASIN10_7025 
+
+:CASIN10_7025
+if 
+   Car.Wrecked(163@)
+jf @CASIN10_7041 
+
+:CASIN10_7041
+if 
+   Actor.Dead(160@)
+jf @CASIN10_7057 
+
+:CASIN10_7057
+if 
+   Actor.Dead(164@)
+jf @CASIN10_7073 
+
+:CASIN10_7073
+jump @CASIN10_6989 
+
+:CASIN10_7080
+if 
+   not Car.Wrecked(163@)
+jf @CASIN10_7101 
+05EC: release_car 163@ from_path 
+
+:CASIN10_7101
+if 
+   not Actor.HasWeapon($PLAYER_ACTOR, 22)
+jf @CASIN10_7142 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Pistol, 60)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 22 
+jump @CASIN10_7149 
+
+:CASIN10_7142
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 22 
+
+:CASIN10_7149
+0873: release_path 602 
+0873: release_path 603 
+0925: restore_camera_to_user_defined 
+Car.Destroy(161@)
+Actor.DestroyInstantly(160@)
+Car.Destroy(163@)
+Actor.DestroyInstantly(164@)
+Actor.DestroyInstantly(165@)
+Actor.DestroyInstantly(166@)
+Actor.DestroyInstantly(167@)
+Actor.DestroyInstantly(168@)
+Actor.DestroyInstantly(169@)
+Actor.DestroyInstantly(170@)
+Actor.DestroyInstantly(171@)
+Actor.DestroyInstantly(172@)
+Actor.DestroyInstantly(173@)
+Actor.DestroyInstantly(174@)
+Model.Destroy(#BMYBU)
+Model.Destroy(#WFYBU)
+Model.Destroy(#TAXI)
+Model.Load(#VMAFF1)
+Model.Load(#VMAFF2)
+Model.Load(#VMAFF3)
+Model.Load(#CHROMEGUN)
+Model.Load(#MICRO_UZI)
+Model.Load(#COLT45)
+04ED: load_animation "SWAT" 
+Model.Load(#SENTINEL)
+023C: load_special_actor 'FORELLI' as 1 // models 290-299 
+03CF: load_wav 7208 as 1 
+03CF: load_wav 7209 as 2 
+038B: load_requested_models 
+
+:CASIN10_7314
+if or
+   not Model.Available(#VMAFF1)
+   not Model.Available(#VMAFF2)
+84EE:   not animation "SWAT" loaded 
+   not Model.Available(#CHROMEGUN)
+   not Model.Available(#MICRO_UZI)
+823D:   not special_actor 1 loaded 
+jf @CASIN10_7366 
+wait 0 
+jump @CASIN10_7314 
+
+:CASIN10_7366
+if or
+   not Model.Available(#COLT45)
+   not Model.Available(#VMAFF3)
+   not Model.Available(#SENTINEL)
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CASIN10_7410 
+wait 0 
+jump @CASIN10_7366 
+
+:CASIN10_7410
+40@ = Actor.Create(Mission1, #SPECIAL01, -783.62, 505.055, 1370.788)
+0856: set_actor 40@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 30000)
+081A: set_actor 40@ weapon_skill_to 2 
+0946: set_actor 40@ actions_uninterupted_by_weapon_fire 1 
+Actor.Angle(40@) = 348.44
+41@ = Marker.CreateAboveActor(40@)
+060B: set_actor 40@ decision_maker_to 110@ 
+0446: set_actor 40@ dismemberment_possible 0 
+Actor.SetMaxHealth(40@, 1000)
+Actor.Health(40@) = 1000
+Actor.WeaponAccuracy(40@) = 80
+07DD: set_actor 40@ attack_rate 50 // previously known as temper_to 
+47@ = Actor.Create(Mission1, #VMAFF1, -783.223, 497.549, 1370.78)
+0856: set_actor 47@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(47@, Shotgun, 30000)
+Actor.Angle(47@) = 348.44
+060B: set_actor 47@ decision_maker_to 106@ 
+Actor.WeaponAccuracy(47@) = 65
+07DD: set_actor 47@ attack_rate 40 // previously known as temper_to 
+50@ = Actor.Create(Mission1, #VMAFF2, -788.965, 497.522, 1370.78)
+0856: set_actor 50@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(50@, Shotgun, 30000)
+Actor.Angle(50@) = 348.44
+060B: set_actor 50@ decision_maker_to 106@ 
+Actor.WeaponAccuracy(50@) = 65
+07DD: set_actor 50@ attack_rate 45 // previously known as temper_to 
+53@ = Actor.Create(Mission1, #VMAFF3, -791.034, 500.973, 1370.78)
+0856: set_actor 53@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 30000)
+Actor.Angle(53@) = 5.1
+060B: set_actor 53@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(53@) = 70
+07DD: set_actor 53@ attack_rate 50 // previously known as temper_to 
+56@ = Actor.Create(Mission1, #VMAFF1, -780.395, 500.947, 1370.78)
+0856: set_actor 56@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(56@, MicroUzi, 30000)
+Actor.Angle(56@) = 5.1
+060B: set_actor 56@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(56@) = 40
+07DD: set_actor 56@ attack_rate 60 // previously known as temper_to 
+59@ = Actor.Create(Mission1, #VMAFF2, -794.945, 507.819, 1370.788)
+0856: set_actor 59@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(59@, MicroUzi, 30000)
+Actor.Angle(59@) = 174.837
+060B: set_actor 59@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(59@) = 70
+07DD: set_actor 59@ attack_rate 45 // previously known as temper_to 
+62@ = Actor.Create(Mission1, #VMAFF3, -793.0, 506.434, 1370.788)
+0856: set_actor 62@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(62@, MicroUzi, 30000)
+Actor.Angle(62@) = 113.867
+060B: set_actor 62@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(62@) = 65
+07DD: set_actor 62@ attack_rate 40 // previously known as temper_to 
+65@ = Actor.Create(Mission1, #VMAFF2, -785.853, 508.372, 1370.774)
+0856: set_actor 65@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(65@, MicroUzi, 30000)
+Actor.Angle(65@) = 212.0
+060B: set_actor 65@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(65@) = 65
+07DD: set_actor 65@ attack_rate 40 // previously known as temper_to 
+69@ = Actor.Create(Mission1, #VMAFF1, -792.191, 508.908, 1370.788)
+0856: set_actor 69@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(69@, MicroUzi, 30000)
+Actor.Angle(69@) = 188.0
+060B: set_actor 69@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(69@) = 70
+07DD: set_actor 69@ attack_rate 40 // previously known as temper_to 
+73@ = Actor.Create(Mission1, #VMAFF3, -783.975, 498.564, 1375.195)
+0856: set_actor 73@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(73@, MicroUzi, 30000)
+Actor.Angle(73@) = 172.352
+060B: set_actor 73@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(73@) = 65
+07DD: set_actor 73@ attack_rate 40 // previously known as temper_to 
+77@ = Actor.Create(Mission1, #VMAFF1, -792.542, 494.229, 1375.235)
+0856: set_actor 77@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(77@, MicroUzi, 30000)
+Actor.Angle(77@) = 279.542
+060B: set_actor 77@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(77@) = 70
+07DD: set_actor 77@ attack_rate 50 // previously known as temper_to 
+81@ = Actor.Create(Mission1, #VMAFF2, -786.142, 491.815, 1375.235)
+0856: set_actor 81@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(81@, Shotgun, 30000)
+Actor.Angle(81@) = 270.0
+060B: set_actor 81@ decision_maker_to 110@ 
+Actor.WeaponAccuracy(81@) = 75
+07DD: set_actor 81@ attack_rate 40 // previously known as temper_to 
+84@ = Actor.Create(Mission1, #VMAFF1, -793.7, 494.999, 1375.243)
+0856: set_actor 84@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(84@, MicroUzi, 30000)
+Actor.Angle(84@) = 270.0
+060B: set_actor 84@ decision_maker_to 110@ 
+Actor.WeaponAccuracy(84@) = 65
+07DD: set_actor 84@ attack_rate 40 // previously known as temper_to 
+87@ = Actor.Create(Mission1, #VMAFF1, -781.141, 494.625, 1367.571)
+0856: set_actor 87@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(87@, MicroUzi, 30000)
+Actor.Angle(87@) = 90.0
+060B: set_actor 87@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(87@) = 65
+07DD: set_actor 87@ attack_rate 40 // previously known as temper_to 
+90@ = Actor.Create(Mission1, #VMAFF3, -786.705, 501.671, 1366.414)
+0856: set_actor 90@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(90@, MicroUzi, 30000)
+Actor.Angle(90@) = 270.0
+060B: set_actor 90@ decision_maker_to 105@ 
+Actor.WeaponAccuracy(90@) = 65
+07DD: set_actor 90@ attack_rate 40 // previously known as temper_to 
+93@ = Actor.Create(Mission1, #VMAFF2, -790.646, 505.521, 1366.414)
+0856: set_actor 93@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(93@, MicroUzi, 30000)
+Actor.Angle(93@) = 231.0
+060B: set_actor 93@ decision_maker_to 106@ 
+Actor.WeaponAccuracy(93@) = 65
+07DD: set_actor 93@ attack_rate 50 // previously known as temper_to 
+jump @CASIN10_8718 
+120@ = Actor.Create(Mission1, #VMAFF3, -816.005, 493.329, 1358.293)
+Actor.DestroyInstantly(120@)
+121@ = Actor.Create(Mission1, #VMAFF1, -821.268, 508.167, 1358.273)
+Actor.DestroyInstantly(121@)
+122@ = Actor.Create(Mission1, #VMAFF2, -828.77, 510.594, 1357.307)
+Actor.DestroyInstantly(122@)
+
+:CASIN10_8718
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -783.104, 490.814, 1375.235)
+Actor.Angle($PLAYER_ACTOR) = 8.832
+0A0B: set_rendering_origin_at_3D_coord -783.104 490.814 1375.235 angle 8.832 
+Camera.SetPosition(-787.9748, 493.9206, 1375.796, 0.0, 0.0, 0.0)
+Camera.PointAt(-787.056, 494.3102, 1375.859, 2)
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:CASIN10_8841
+if 
+fading 
+jf @CASIN10_8865 
+wait 0 
+jump @CASIN10_8841 
+
+:CASIN10_8865
+116@ = 1 
+0707: start_scene_skip_to @CASIN10_10433 
+05D3: AS_actor $PLAYER_ACTOR goto_point -783.153 495.215 1375.227 mode 4 time -1 ms // versionA 
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_8936 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 73@ -1 ms 
+jump @CASIN10_8975 
+
+:CASIN10_8936
+if 
+  74@ == 0 
+jf @CASIN10_8975 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_8975
+if 
+   not Actor.Dead(77@)
+jf @CASIN10_9008 
+05BF: AS_actor 77@ look_at_actor $PLAYER_ACTOR -1 ms 
+jump @CASIN10_9047 
+
+:CASIN10_9008
+if 
+  78@ == 0 
+jf @CASIN10_9047 
+152@ += 1 
+78@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9047
+0615: define_AS_pack_begin 75@ 
+05F5: AS_actor -1 goto_point_using_paths -783.336 496.837 1375.235 mode 4 time -1 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR -1 ms 
+0635: AS_actor -1 aim_at_actor $PLAYER_ACTOR 15000 ms 
+0616: define_AS_pack_end 75@ 
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_9142 
+0618: assign_actor 73@ to_AS_pack 75@ 
+061B: remove_references_to_AS_pack 75@ 
+jump @CASIN10_9181 
+
+:CASIN10_9142
+if 
+  74@ == 0 
+jf @CASIN10_9181 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9181
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_9241 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11DA' time 10000 flag 1  // ~z~Private function, invitation only!
+0967: actor 73@ move_mouth 999999 ms 
+0A09: set_actor 73@ muted 1 // versionB 
+jump @CASIN10_9284 
+
+:CASIN10_9241
+040D: unload_wav 1 
+if 
+  74@ == 0 
+jf @CASIN10_9284 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9284
+if 
+83D2:   not wav 1 ended 
+jf @CASIN10_9376 
+wait 0 
+gosub @CASIN10_16498 
+if 
+  74@ == 0 
+jf @CASIN10_9369 
+if 
+   Actor.Dead(73@)
+jf @CASIN10_9369 
+040D: unload_wav 1 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9369
+jump @CASIN10_9284 
+
+:CASIN10_9376
+03D5: remove_text 'CAS11DA'  // ~z~Private function, invitation only!
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_9429 
+0968: actor 73@ stop_mouth 
+0A09: set_actor 73@ muted 0 // versionB 
+0638: AS_actor $PLAYER_ACTOR stay_put 1 
+jump @CASIN10_9468 
+
+:CASIN10_9429
+if 
+  74@ == 0 
+jf @CASIN10_9468 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9468
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS11DB' time 4000 flag 1  // ~z~Oh yeah? Well Mr. Leone says otherwise!
+0967: actor $PLAYER_ACTOR move_mouth 999999 ms 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+Camera.SetPosition(-785.9136, 497.3071, 1375.579, 0.0, 0.0, 0.0)
+Camera.PointAt(-785.0042, 496.9065, 1375.69, 2)
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_9623 
+04EB: AS_actor 73@ crouch 1 
+Actor.WeaponAccuracy(73@) = 5
+0668: AS_actor 73@ rotate_and_shoot_at -781.079 495.708 1376.195 10000 ms 
+07DD: set_actor 73@ attack_rate 80 // previously known as temper_to 
+jump @CASIN10_9662 
+
+:CASIN10_9623
+if 
+  74@ == 0 
+jf @CASIN10_9662 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_9662
+0615: define_AS_pack_begin 37@ 
+05D4: AS_actor -1 rotate_angle 270.0 
+0812: AS_actor -1 perform_animation "JMP_WALL1M_180" IFP "SWAT" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+99@ = 0.0 
+0616: define_AS_pack_end 37@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 37@ 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "JMP_WALL1M_180"
+jf @CASIN10_9796 
+0613: 99@ = actor $PLAYER_ACTOR animation "JMP_WALL1M_180" time 
+
+:CASIN10_9796
+if 
+   not 99@ == 1.0 
+jf @CASIN10_9891 
+wait 0 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "JMP_WALL1M_180"
+jf @CASIN10_9877 
+0613: 99@ = actor $PLAYER_ACTOR animation "JMP_WALL1M_180" time 
+
+:CASIN10_9877
+gosub @CASIN10_16498 
+jump @CASIN10_9796 
+
+:CASIN10_9891
+0615: define_AS_pack_begin 67@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -781.563 505.346 1370.782 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 67@ 
+if 
+   not Actor.Dead(65@)
+jf @CASIN10_9979 
+0618: assign_actor 65@ to_AS_pack 67@ 
+061B: remove_references_to_AS_pack 67@ 
+jump @CASIN10_10018 
+
+:CASIN10_9979
+if 
+  66@ == 0 
+jf @CASIN10_10018 
+152@ += 1 
+66@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10018
+0615: define_AS_pack_begin 71@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -786.511 505.073 1370.782 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 71@ 
+if 
+   not Actor.Dead(69@)
+jf @CASIN10_10106 
+0618: assign_actor 69@ to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 71@ 
+jump @CASIN10_10145 
+
+:CASIN10_10106
+if 
+  70@ == 0 
+jf @CASIN10_10145 
+152@ += 1 
+70@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10145
+if 
+83D2:   not wav 2 ended 
+jf @CASIN10_10198 
+wait 0 
+gosub @CASIN10_16498 
+if 
+   Actor.Dead($PLAYER_ACTOR)
+jf @CASIN10_10191 
+040D: unload_wav 2 
+
+:CASIN10_10191
+jump @CASIN10_10145 
+
+:CASIN10_10198
+03D5: remove_text 'CAS11DB'  // ~z~Oh yeah? Well Mr. Leone says otherwise!
+0968: actor $PLAYER_ACTOR stop_mouth 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0615: define_AS_pack_begin 79@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 79@ 
+if 
+   not Actor.Dead(77@)
+jf @CASIN10_10286 
+0618: assign_actor 77@ to_AS_pack 79@ 
+061B: remove_references_to_AS_pack 79@ 
+jump @CASIN10_10325 
+
+:CASIN10_10286
+if 
+  78@ == 0 
+jf @CASIN10_10325 
+152@ += 1 
+78@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10325
+040D: unload_wav 1 
+040D: unload_wav 2 
+02A3: enable_widescreen 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -780.806, 495.717, 1375.0)
+Actor.Angle($PLAYER_ACTOR) = 100.0
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+0812: AS_actor $PLAYER_ACTOR perform_animation "WEAPON_CROUCH" IFP "PED" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+Camera.Restore_WithJumpCut
+061B: remove_references_to_AS_pack 37@ 
+36@ = 1 
+
+:CASIN10_10433
+0701: end_scene_skip 
+if 
+  36@ == 0 
+jf @CASIN10_10761 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0615: define_AS_pack_begin 67@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -781.563 505.346 1370.782 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 67@ 
+if 
+   not Actor.Dead(65@)
+jf @CASIN10_10558 
+0618: assign_actor 65@ to_AS_pack 67@ 
+061B: remove_references_to_AS_pack 67@ 
+jump @CASIN10_10597 
+
+:CASIN10_10558
+if 
+  66@ == 0 
+jf @CASIN10_10597 
+152@ += 1 
+66@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10597
+0615: define_AS_pack_begin 71@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -786.511 505.073 1370.782 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 71@ 
+if 
+   not Actor.Dead(69@)
+jf @CASIN10_10685 
+0618: assign_actor 69@ to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 71@ 
+jump @CASIN10_10724 
+
+:CASIN10_10685
+if 
+  70@ == 0 
+jf @CASIN10_10724 
+152@ += 1 
+70@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10724
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -780.806, 495.717, 1375.0)
+Actor.Angle($PLAYER_ACTOR) = 100.0
+Camera.Restore_WithJumpCut
+
+:CASIN10_10761
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_10882 
+Actor.WeaponAccuracy(73@) = 40
+if 
+  76@ == 0 
+jf @CASIN10_10875 
+07DD: set_actor 73@ attack_rate 40 // previously known as temper_to 
+0638: AS_actor 73@ stay_put 0 
+05E2: AS_actor 73@ kill_actor $PLAYER_ACTOR 
+76@ = 1 
+
+:CASIN10_10875
+jump @CASIN10_10921 
+
+:CASIN10_10882
+if 
+  74@ == 0 
+jf @CASIN10_10921 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_10921
+08F6: restore_player_group 
+if 
+  116@ == 1 
+jf @CASIN10_11414 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -778.0 486.0 1370.0 cornerB -797.0 500.0 1380.0 
+jf @CASIN10_11200 
+if 
+   not Actor.Dead(59@)
+jf @CASIN10_11052 
+if 
+  61@ == 0 
+jf @CASIN10_11045 
+0085: 101@ = 59@ // (int) 
+gosub @CASIN10_19777 
+61@ = 1 
+
+:CASIN10_11045
+jump @CASIN10_11091 
+
+:CASIN10_11052
+if 
+  60@ == 0 
+jf @CASIN10_11091 
+152@ += 1 
+60@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11091
+if 
+   not Actor.Dead(62@)
+jf @CASIN10_11154 
+if 
+  64@ == 0 
+jf @CASIN10_11147 
+0085: 102@ = 62@ // (int) 
+gosub @CASIN10_19860 
+64@ = 1 
+
+:CASIN10_11147
+jump @CASIN10_11193 
+
+:CASIN10_11154
+if 
+  63@ == 0 
+jf @CASIN10_11193 
+152@ += 1 
+63@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11193
+jump @CASIN10_11414 
+
+:CASIN10_11200
+if 
+   not Actor.Dead(59@)
+jf @CASIN10_11268 
+if 
+  61@ == 0 
+jf @CASIN10_11261 
+0687: clear_actor 59@ task 
+0638: AS_actor 59@ stay_put 0 
+05E2: AS_actor 59@ kill_actor $PLAYER_ACTOR 
+61@ = 1 
+
+:CASIN10_11261
+jump @CASIN10_11307 
+
+:CASIN10_11268
+if 
+  60@ == 0 
+jf @CASIN10_11307 
+152@ += 1 
+60@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11307
+if 
+   not Actor.Dead(62@)
+jf @CASIN10_11375 
+if 
+  64@ == 0 
+jf @CASIN10_11368 
+0687: clear_actor 62@ task 
+0638: AS_actor 62@ stay_put 0 
+05E2: AS_actor 62@ kill_actor $PLAYER_ACTOR 
+64@ = 1 
+
+:CASIN10_11368
+jump @CASIN10_11414 
+
+:CASIN10_11375
+if 
+  63@ == 0 
+jf @CASIN10_11414 
+152@ += 1 
+63@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11414
+00BC: show_text_highpriority GXT 'CM10_2' time 10000 flag 1  // ~s~Kill ~r~Forelli~s~ and all his bodyguards.
+
+:CASIN10_11430
+if 
+   not 152@ == 19 
+jf @CASIN10_14375 
+wait 0 
+if 
+  118@ == 0 
+jf @CASIN10_11550 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -777.097 501.709 1365.0 cornerB -784.992 497.66 1370.0 
+jf @CASIN10_11550 
+gosub @CASIN10_20141 
+if 
+  119@ == 0 
+jf @CASIN10_11550 
+gosub @CASIN10_20786 
+
+:CASIN10_11550
+if 
+  119@ == 1 
+jf @CASIN10_11575 
+gosub @CASIN10_21349 
+
+:CASIN10_11575
+gosub @CASIN10_16498 
+if 
+  55@ == 0 
+jf @CASIN10_11846 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -778.0 486.0 1370.0 cornerB -797.0 500.0 1380.0 
+jf @CASIN10_11757 
+if 
+  60@ == 1 
+jf @CASIN10_11750 
+if 
+   not Actor.Dead(53@)
+jf @CASIN10_11711 
+0085: 101@ = 53@ // (int) 
+gosub @CASIN10_19777 
+55@ = 1 
+jump @CASIN10_11750 
+
+:CASIN10_11711
+if 
+  54@ == 0 
+jf @CASIN10_11750 
+152@ += 1 
+54@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11750
+jump @CASIN10_11846 
+
+:CASIN10_11757
+if 
+   not Actor.Dead(53@)
+jf @CASIN10_11807 
+0687: clear_actor 53@ task 
+0638: AS_actor 53@ stay_put 0 
+05E2: AS_actor 53@ kill_actor $PLAYER_ACTOR 
+55@ = 2 
+jump @CASIN10_11846 
+
+:CASIN10_11807
+if 
+  54@ == 0 
+jf @CASIN10_11846 
+152@ += 1 
+54@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_11846
+if 
+  58@ == 0 
+jf @CASIN10_12110 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -778.0 486.0 1370.0 cornerB -797.0 500.0 1380.0 
+jf @CASIN10_12021 
+if 
+  63@ == 1 
+jf @CASIN10_12014 
+if 
+   not Actor.Dead(56@)
+jf @CASIN10_11975 
+0085: 102@ = 56@ // (int) 
+gosub @CASIN10_19860 
+58@ = 1 
+jump @CASIN10_12014 
+
+:CASIN10_11975
+if 
+  57@ == 0 
+jf @CASIN10_12014 
+152@ += 1 
+57@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_12014
+jump @CASIN10_12110 
+
+:CASIN10_12021
+if 
+   not Actor.Dead(56@)
+jf @CASIN10_12071 
+0687: clear_actor 56@ task 
+0638: AS_actor 56@ stay_put 0 
+05E2: AS_actor 56@ kill_actor $PLAYER_ACTOR 
+58@ = 2 
+jump @CASIN10_12110 
+
+:CASIN10_12071
+if 
+  57@ == 0 
+jf @CASIN10_12110 
+152@ += 1 
+57@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_12110
+if 
+  89@ == 0 
+jf @CASIN10_12260 
+if 
+   not Actor.Dead(87@)
+jf @CASIN10_12221 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -792.344 489.644 1370.782 cornerB -783.436 493.662 1366.0 
+jf @CASIN10_12214 
+0085: 103@ = 87@ // (int) 
+gosub @CASIN10_19943 
+89@ = 1 
+
+:CASIN10_12214
+jump @CASIN10_12260 
+
+:CASIN10_12221
+if 
+  88@ == 0 
+jf @CASIN10_12260 
+152@ += 1 
+88@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_12260
+if 
+  92@ == 0 
+jf @CASIN10_12410 
+if 
+   not Actor.Dead(90@)
+jf @CASIN10_12371 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -777.097 501.709 1365.0 cornerB -784.992 497.66 1370.0 
+jf @CASIN10_12364 
+0085: 104@ = 90@ // (int) 
+gosub @CASIN10_20042 
+92@ = 1 
+
+:CASIN10_12364
+jump @CASIN10_12410 
+
+:CASIN10_12371
+if 
+  91@ == 0 
+jf @CASIN10_12410 
+152@ += 1 
+91@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_12410
+if 
+  95@ == 0 
+jf @CASIN10_12565 
+if 
+   not Actor.Dead(93@)
+jf @CASIN10_12526 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -777.097 501.709 1365.0 cornerB -784.992 497.66 1370.0 
+jf @CASIN10_12519 
+0687: clear_actor 93@ task 
+0638: AS_actor 93@ stay_put 1 
+05E2: AS_actor 93@ kill_actor $PLAYER_ACTOR 
+95@ = 1 
+
+:CASIN10_12519
+jump @CASIN10_12565 
+
+:CASIN10_12526
+if 
+  94@ == 0 
+jf @CASIN10_12565 
+152@ += 1 
+94@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_12565
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CASIN10_12595 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+
+:CASIN10_12595
+if 
+  42@ == 0 
+jf @CASIN10_14368 
+if 
+   Actor.Dead(40@)
+jf @CASIN10_12662 
+Marker.Disable(41@)
+152@ += 1 
+42@ = 1 
+jump @CASIN10_14368 
+gosub @CASIN10_21687 
+
+:CASIN10_12662
+46@ = Actor.Health(40@)
+if 
+  43@ == 0 
+jf @CASIN10_12734 
+077B: clear_actor 40@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0792: disembark_instantly_actor 40@ 
+05F5: AS_actor 40@ goto_point_using_paths -781.09 497.79 1370.782 mode 6 time 10000 
+43@ = 1 
+
+:CASIN10_12734
+if 
+  43@ == 1 
+jf @CASIN10_12832 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -781.09 497.79 1370.782 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_12832 
+05F5: AS_actor 40@ goto_point_using_paths -791.749 491.447 1370.782 mode 6 time 10000 
+43@ = 2 
+
+:CASIN10_12832
+if 
+  43@ == 2 
+jf @CASIN10_13117 
+if 
+01A6:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -777.827 510.0 1369.0 cornerB -797.0 494.0 1373.0 on_foot 
+jf @CASIN10_12905 
+117@ = 1 
+
+:CASIN10_12905
+if 
+00FF:   actor 40@ sphere 0 in_sphere -791.749 491.447 1370.782 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13117 
+if 
+  44@ == 0 
+jf @CASIN10_13010 
+Actor.Angle(40@) = 0.0
+0638: AS_actor 40@ stay_put 1 
+05E2: AS_actor 40@ kill_actor $PLAYER_ACTOR 
+33@ = 0 
+44@ = 1 
+
+:CASIN10_13010
+if 
+  117@ == 1 
+jf @CASIN10_13117 
+if 
+  44@ == 1 
+jf @CASIN10_13117 
+if or
+  33@ >= 6000 
+  800 >= 46@ 
+jf @CASIN10_13117 
+0687: clear_actor 40@ task 
+0638: AS_actor 40@ stay_put 0 
+05F5: AS_actor 40@ goto_point_using_paths -779.844 492.67 1367.616 mode 6 time 10000 
+43@ = 3 
+
+:CASIN10_13117
+if 
+  43@ == 3 
+jf @CASIN10_13215 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -779.844 492.67 1367.616 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13215 
+05F5: AS_actor 40@ goto_point_using_paths -779.844 499.811 1367.571 mode 6 time 10000 
+43@ = 4 
+
+:CASIN10_13215
+if 
+  43@ == 4 
+jf @CASIN10_13338 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -779.844 499.811 1367.571 radius 0.75 0.75 2.0 on_foot 
+jf @CASIN10_13338 
+if 
+  46@ > 99 
+jf @CASIN10_13306 
+Actor.Health(40@) = 100
+
+:CASIN10_13306
+05F5: AS_actor 40@ goto_point_using_paths -787.237 499.939 1366.414 mode 6 time 10000 
+43@ = 5 
+
+:CASIN10_13338
+if 
+  43@ == 5 
+jf @CASIN10_13436 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -787.237 499.939 1366.414 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13436 
+05F5: AS_actor 40@ goto_point_using_paths -787.543 508.034 1366.414 mode 6 time 10000 
+43@ = 6 
+
+:CASIN10_13436
+if 
+  43@ == 6 
+jf @CASIN10_13534 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -787.543 508.034 1366.414 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13534 
+05F5: AS_actor 40@ goto_point_using_paths -791.552 507.859 1366.414 mode 6 time 10000 
+43@ = 7 
+
+:CASIN10_13534
+if 
+  43@ == 7 
+jf @CASIN10_13632 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -791.552 507.859 1366.414 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13632 
+05F5: AS_actor 40@ goto_point_using_paths -791.045 498.883 1366.414 mode 6 time 10000 
+43@ = 8 
+
+:CASIN10_13632
+if 
+  43@ == 8 
+jf @CASIN10_13730 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -791.045 498.883 1366.414 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13730 
+05F5: AS_actor 40@ goto_point_using_paths -791.81 492.473 1366.414 mode 6 time 10000 
+43@ = 9 
+
+:CASIN10_13730
+if 
+  43@ == 9 
+jf @CASIN10_13828 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -791.81 492.473 1366.414 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13828 
+05F5: AS_actor 40@ goto_point_using_paths -798.194 492.462 1366.274 mode 6 time 10000 
+43@ = 10 
+
+:CASIN10_13828
+if 
+  43@ == 10 
+jf @CASIN10_13926 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -798.194 492.462 1366.274 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_13926 
+05F5: AS_actor 40@ goto_point_using_paths -799.081 503.71 1361.913 mode 6 time 10000 
+43@ = 11 
+
+:CASIN10_13926
+if 
+  43@ == 11 
+jf @CASIN10_14024 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -799.081 503.71 1361.913 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_14024 
+05F5: AS_actor 40@ goto_point_using_paths -821.412 504.901 1357.35 mode 6 time 10000 
+43@ = 12 
+
+:CASIN10_14024
+if 
+  43@ == 12 
+jf @CASIN10_14224 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -821.412 504.901 1357.358 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_14224 
+0615: define_AS_pack_begin 124@ 
+05F5: AS_actor -1 goto_point_using_paths -830.889 501.107 1357.374 mode 6 time -1 
+05F5: AS_actor -1 goto_point_using_paths -830.711 498.369 1357.385 mode 6 time -1 
+05D4: AS_actor -1 rotate_angle 260.984 
+0616: define_AS_pack_end 124@ 
+if 
+   not Actor.Dead(40@)
+jf @CASIN10_14198 
+0618: assign_actor 40@ to_AS_pack 124@ 
+061B: remove_references_to_AS_pack 124@ 
+43@ = 13 
+jump @CASIN10_14224 
+
+:CASIN10_14198
+Marker.Disable(41@)
+152@ += 1 
+42@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_14224
+if 
+  43@ == 13 
+jf @CASIN10_14368 
+if 
+00FF:   actor 40@ sphere 0 in_sphere -830.711 498.369 1357.385 radius 0.5 0.5 2.0 on_foot 
+jf @CASIN10_14368 
+if 
+   not Actor.Dead(40@)
+jf @CASIN10_14342 
+0638: AS_actor 40@ stay_put 1 
+04EB: AS_actor 40@ crouch 1 
+05E2: AS_actor 40@ kill_actor $PLAYER_ACTOR 
+43@ = 14 
+jump @CASIN10_14368 
+
+:CASIN10_14342
+Marker.Disable(41@)
+152@ += 1 
+42@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_14368
+jump @CASIN10_11430 
+
+:CASIN10_14375
+wait 3000 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CASIN10_14416
+if 
+fading 
+jf @CASIN10_14440 
+wait 0 
+jump @CASIN10_14416 
+
+:CASIN10_14440
+08F5: save_player_group 
+if 
+  118@ == 0 
+jf @CASIN10_14467 
+gosub @CASIN10_20141 
+
+:CASIN10_14467
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(90@)
+Actor.DestroyInstantly(93@)
+Actor.DestroyInstantly(120@)
+Actor.DestroyInstantly(121@)
+Actor.DestroyInstantly(122@)
+Car.Destroy(123@)
+Model.Destroy(#SENTINEL)
+Model.Destroy(#VMAFF1)
+Model.Destroy(#VMAFF2)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+Model.Destroy(#TAXI)
+Model.Destroy(#BMYBU)
+Model.Destroy(#WFYBU)
+04EF: release_animation "SWAT" 
+Actor.DestroyWithFade(40@)
+0296: unload_special_actor 1 
+040D: unload_wav 1 
+Model.Load(#SHAMAL)
+07C0: load_path 601 
+03CF: load_wav 7217 as 1 
+038B: load_requested_models 
+
+:CASIN10_14588
+if or
+   not Model.Available(#SHAMAL)
+87C1:   not path 601 available 
+83D0:   not wav 1 loaded 
+jf @CASIN10_14624 
+wait 0 
+jump @CASIN10_14588 
+
+:CASIN10_14624
+select_interior 0 
+057E: set_radar_grey 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+03E6: remove_text_box 
+00BE: text_clear_all 
+112@ = Car.Create(#SHAMAL, 7500.0, 2478.34, 200.0)
+0745: set_hydra 112@ thrust_to_horizontal 
+Car.ImmuneToNonPlayer(112@) = True
+Car.SetImmunities(112@, 1, 1, 1, 1, 1)
+Car.Angle(112@) = 110.0
+08E6: set_plane 112@ landing_gear 1 
+036A: put_actor $PLAYER_ACTOR in_car 112@ 
+05EB: assign_car 112@ to_path 601 
+Camera.SetPosition(8867.637, 1581.89, 193.188, 0.0, 0.0, 0.0)
+Camera.PointAt(8867.605, 1582.883, 193.0727, 2)
+02A3: enable_widescreen 1 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:CASIN10_14796
+if 
+fading 
+jf @CASIN10_14820 
+wait 0 
+jump @CASIN10_14796 
+
+:CASIN10_14820
+0707: start_scene_skip_to @CASIN10_14927 
+32@ = 0 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS11FA' time 5000 flag 1  // ~z~Flight CJ101, you are cleared for take-off!
+
+:CASIN10_14854
+if and
+  2800 > 32@ 
+83D2:   not wav 1 ended 
+jf @CASIN10_14927 
+wait 0 
+if 
+   Car.Wrecked(112@)
+jf @CASIN10_14920 
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+jump @CASIN10_15844 
+
+:CASIN10_14920
+jump @CASIN10_14854 
+
+:CASIN10_14927
+0701: end_scene_skip 
+03D5: remove_text 'CAS11FA'  // ~z~Flight CJ101, you are cleared for take-off!
+040D: unload_wav 1 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 500 
+
+:CASIN10_14959
+if 
+fading 
+jf @CASIN10_14983 
+wait 0 
+jump @CASIN10_14959 
+
+:CASIN10_14983
+if 
+   not Car.Wrecked(112@)
+jf @CASIN10_15020 
+if 
+060E:   car 112@ assigned_to_path 
+jf @CASIN10_15020 
+05EC: release_car 112@ from_path 
+
+:CASIN10_15020
+0873: release_path 601 
+if 
+   not Car.Wrecked(112@)
+jf @CASIN10_15112 
+Car.PutAt(112@, 7500.0, 2478.34, 200.0)
+Car.LockInCurrentPosition(112@) = True
+0745: set_hydra 112@ thrust_to_horizontal 
+Car.ImmuneToNonPlayer(112@) = False
+Car.SetImmunities(112@, 0, 0, 0, 0, 0)
+Car.Angle(112@) = 110.0
+08E6: set_plane 112@ landing_gear 1 
+
+:CASIN10_15112
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+09AC: disable_map_icons 0 
+01F0: set_max_wanted_level_to 6 
+fade 1 500 
+02A3: enable_widescreen 0 
+
+:CASIN10_15145
+if 
+fading 
+jf @CASIN10_15169 
+wait 0 
+jump @CASIN10_15145 
+
+:CASIN10_15169
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+if 
+   not Car.Wrecked(112@)
+jf @CASIN10_15230 
+Car.LockInCurrentPosition(112@) = False
+Car.SetSpeedInstantly(112@, 30.0)
+jump @CASIN10_15253 
+
+:CASIN10_15230
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+jump @CASIN10_15844 
+
+:CASIN10_15253
+00BC: show_text_highpriority GXT 'CM10_19' time 8000 flag 1  // ~s~Fly back to ~y~Las Venturas Airport~s~.
+018A: 130@ = create_checkpoint_at 1477.225 1640.364 9.86 
+08A8: set_markers_to_long_distance 1 
+131@ = 0 
+132@ = 0 
+133@ = 0 
+134@ = 1 
+gosub @CASIN10_94 
+129@ = 0 
+
+:CASIN10_15335
+if or
+81AC:   not car 112@ sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 stopped 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 
+jf @CASIN10_15813 
+wait 0 
+if 
+   Car.Wrecked(112@)
+jf @CASIN10_15480 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CM10_17' time 8000 flag 1  // ~r~You have destroyed the jet!
+jump @CASIN10_15844 
+jump @CASIN10_15806 
+
+:CASIN10_15480
+if 
+   Actor.InCar($PLAYER_ACTOR, 112@)
+jf @CASIN10_15682 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 1477.225 1640.364 9.86 radius 350.0 350.0 500.0 sphere 0 in_car 
+jf @CASIN10_15554 
+gosub @CASIN10_21144 
+
+:CASIN10_15554
+if 
+81AC:   not car 112@ sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 stopped 
+jf @CASIN10_15675 
+if 
+  129@ == 1 
+jf @CASIN10_15675 
+00BC: show_text_highpriority GXT 'CM10_19' time 8000 flag 1  // ~s~Fly back to ~y~Las Venturas Airport~s~.
+018A: 130@ = create_checkpoint_at 1477.225 1640.364 9.86 
+Marker.Disable(113@)
+$127 = 1 
+129@ = 0 
+
+:CASIN10_15675
+jump @CASIN10_15806 
+
+:CASIN10_15682
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+81AC:   not car 112@ sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 stopped 
+jf @CASIN10_15806 
+if 
+  129@ == 0 
+jf @CASIN10_15806 
+Marker.Disable(130@)
+113@ = Marker.CreateAboveCar(112@)
+07E0: set_marker 34@ type_to 1 
+00BC: show_text_highpriority GXT 'IN_VEH' time 5000 flag 1  // ~s~Hey! Get back in the ~b~vehicle~s~!
+$127 = 0 
+129@ = 1 
+
+:CASIN10_15806
+jump @CASIN10_15335 
+
+:CASIN10_15813
+Marker.Disable(130@)
+Marker.Disable(113@)
+08A8: set_markers_to_long_distance 0 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+jump @CASIN10_16061 
+
+:CASIN10_15844
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if or
+04AD:   actor $PLAYER_ACTOR in_water 
+02BF:   car 112@ sunk 
+jf @CASIN10_15903 
+09AF: set_trip_skip_after_mission 2149.609 1681.117 9.82 angle 90.0 
+
+:CASIN10_15903
+if 
+0818:   actor $PLAYER_ACTOR in_air 
+jf @CASIN10_15991 
+if 
+84C8:   not actor $PLAYER_ACTOR driving_flying_vehicle 
+jf @CASIN10_15991 
+if 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @CASIN10_15991 
+if 
+   not $FREEFALL_STAGE > 0 
+jf @CASIN10_15991 
+09AF: set_trip_skip_after_mission 2149.609 1681.117 9.82 angle 90.0 
+
+:CASIN10_15991
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CASIN10_16059 
+$11033 = 1 
+$11029 = 0.0 
+$11032 = 2158.42 
+$11031 = 1681.77 
+$11030 = 10.28 
+
+:CASIN10_16059
+return 
+
+:CASIN10_16061
+$CASINO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'CASIN10'  // Saint Mark's Bistro
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 20000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 20000
+0998: add_respect 35 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+Marker.Disable($585)
+0629: change_integer_stat 181 to 3 
+create_thread @MANSION 
+Marker.Disable($582)
+$582 = Marker.CreateIconAndSphere($ICON_TRIADS_CASINO, $X_THE_FOUR_DRAGONS_CASINO, $Y_THE_FOUR_DRAGONS_CASINO, $Z_THE_FOUR_DRAGONS_CASINO)
+08DC: create_interior_marker $582 at 2026.603 1007.735 radius 20.0 
+end_thread_named 'MOBLA2' 
+create_thread @MOB_LA2 
+0629: change_integer_stat 329 to 1 
+return 
+
+:CASIN10_16213
+01F0: set_max_wanted_level_to 6 
+03C7: set_sensitivity_to_crime 1.0 
+Actor.DestroyWithFade(40@)
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+091D: remove_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+091E: create_forbidden_for_boats_cube_cornerA 2095.35 1734.179 8.0 cornerB 2337.495 1524.991 15.0 
+061B: remove_references_to_AS_pack 75@ 
+061B: remove_references_to_AS_pack 79@ 
+061B: remove_references_to_AS_pack 97@ 
+061B: remove_references_to_AS_pack 98@ 
+061B: remove_references_to_AS_pack 96@ 
+061B: remove_references_to_AS_pack 162@ 
+061B: remove_references_to_AS_pack 67@ 
+061B: remove_references_to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 38@ 
+061B: remove_references_to_AS_pack 39@ 
+061B: remove_references_to_AS_pack 124@ 
+Marker.Disable(41@)
+Marker.Disable(34@)
+Marker.Disable(35@)
+Marker.Disable(126@)
+Marker.Disable(113@)
+Marker.Disable(130@)
+Model.Destroy(#VMAFF1)
+Model.Destroy(#VMAFF2)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+Model.Destroy(#SHAMAL)
+Model.Destroy(#SENTINEL)
+Model.Destroy(#TAXI)
+Model.Destroy(#BMYBU)
+Model.Destroy(#WFYBU)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+065C: release_decision_maker 105@ 
+065C: release_decision_maker 110@ 
+0873: release_path 601 
+0873: release_path 602 
+0873: release_path 603 
+04EF: release_animation "SWAT" 
+08A8: set_markers_to_long_distance 0 
+057E: set_radar_grey 0 
+mission_cleanup 
+return 
+
+:CASIN10_16498
+if 
+  42@ == 0 
+jf @CASIN10_16558 
+if 
+   Actor.Dead(40@)
+jf @CASIN10_16558 
+Marker.Disable(41@)
+152@ += 1 
+42@ = 1 
+gosub @CASIN10_21687 
+
+:CASIN10_16558
+if 
+  48@ == 0 
+jf @CASIN10_16840 
+if 
+   Actor.Dead(47@)
+jf @CASIN10_16620 
+152@ += 1 
+48@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_16840 
+
+:CASIN10_16620
+if 
+  116@ == 1 
+jf @CASIN10_16840 
+if 
+  42@ == 0 
+jf @CASIN10_16756 
+if 
+  49@ == 0 
+jf @CASIN10_16749 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -796.172 488.58 1370.0 cornerB -777.902 498.668 1378.235 
+jf @CASIN10_16749 
+0687: clear_actor 47@ task 
+0638: AS_actor 47@ stay_put 1 
+05E2: AS_actor 47@ kill_actor $PLAYER_ACTOR 
+49@ = 1 
+
+:CASIN10_16749
+jump @CASIN10_16840 
+
+:CASIN10_16756
+if 
+  49@ == 1 
+jf @CASIN10_16795 
+0638: AS_actor 47@ stay_put 0 
+49@ = 2 
+jump @CASIN10_16840 
+
+:CASIN10_16795
+if 
+   not 49@ == 2 
+jf @CASIN10_16840 
+0687: clear_actor 47@ task 
+0638: AS_actor 47@ stay_put 0 
+05E2: AS_actor 47@ kill_actor $PLAYER_ACTOR 
+49@ = 2 
+
+:CASIN10_16840
+if 
+  51@ == 0 
+jf @CASIN10_17122 
+if 
+   Actor.Dead(50@)
+jf @CASIN10_16902 
+152@ += 1 
+51@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17122 
+
+:CASIN10_16902
+if 
+  116@ == 1 
+jf @CASIN10_17122 
+if 
+  42@ == 0 
+jf @CASIN10_17038 
+if 
+  52@ == 0 
+jf @CASIN10_17031 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -796.172 488.58 1370.0 cornerB -777.902 498.668 1378.235 
+jf @CASIN10_17031 
+0687: clear_actor 50@ task 
+0638: AS_actor 50@ stay_put 1 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+52@ = 1 
+
+:CASIN10_17031
+jump @CASIN10_17122 
+
+:CASIN10_17038
+if 
+  52@ == 1 
+jf @CASIN10_17077 
+0638: AS_actor 50@ stay_put 0 
+52@ = 2 
+jump @CASIN10_17122 
+
+:CASIN10_17077
+if 
+   not 52@ == 2 
+jf @CASIN10_17122 
+0687: clear_actor 50@ task 
+0638: AS_actor 50@ stay_put 0 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+52@ = 2 
+
+:CASIN10_17122
+if 
+  54@ == 0 
+jf @CASIN10_17234 
+if 
+   Actor.Dead(53@)
+jf @CASIN10_17184 
+152@ += 1 
+54@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17234 
+
+:CASIN10_17184
+if 
+  42@ == 1 
+jf @CASIN10_17234 
+if 
+  2 > 55@ 
+jf @CASIN10_17234 
+0638: AS_actor 53@ stay_put 0 
+55@ = 2 
+
+:CASIN10_17234
+if 
+  57@ == 0 
+jf @CASIN10_17346 
+if 
+   Actor.Dead(56@)
+jf @CASIN10_17296 
+152@ += 1 
+57@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17346 
+
+:CASIN10_17296
+if 
+  42@ == 1 
+jf @CASIN10_17346 
+if 
+  2 > 58@ 
+jf @CASIN10_17346 
+0638: AS_actor 56@ stay_put 0 
+58@ = 2 
+
+:CASIN10_17346
+if 
+  60@ == 0 
+jf @CASIN10_17510 
+if 
+   Actor.Dead(59@)
+jf @CASIN10_17408 
+152@ += 1 
+60@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17510 
+
+:CASIN10_17408
+if 
+  42@ == 1 
+jf @CASIN10_17510 
+if 
+  61@ == 0 
+jf @CASIN10_17478 
+0687: clear_actor 59@ task 
+0638: AS_actor 59@ stay_put 0 
+05E2: AS_actor 59@ kill_actor $PLAYER_ACTOR 
+61@ = 1 
+jump @CASIN10_17510 
+
+:CASIN10_17478
+if 
+  2 > 61@ 
+jf @CASIN10_17510 
+0638: AS_actor 59@ stay_put 0 
+61@ = 2 
+
+:CASIN10_17510
+if 
+  63@ == 0 
+jf @CASIN10_17674 
+if 
+   Actor.Dead(62@)
+jf @CASIN10_17572 
+152@ += 1 
+63@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17674 
+
+:CASIN10_17572
+if 
+  42@ == 1 
+jf @CASIN10_17674 
+if 
+  64@ == 0 
+jf @CASIN10_17642 
+0687: clear_actor 62@ task 
+0638: AS_actor 62@ stay_put 0 
+05E2: AS_actor 62@ kill_actor $PLAYER_ACTOR 
+64@ = 1 
+jump @CASIN10_17674 
+
+:CASIN10_17642
+if 
+  2 > 64@ 
+jf @CASIN10_17674 
+0638: AS_actor 62@ stay_put 0 
+64@ = 2 
+
+:CASIN10_17674
+if 
+  66@ == 0 
+jf @CASIN10_17786 
+if 
+   Actor.Dead(65@)
+jf @CASIN10_17736 
+152@ += 1 
+66@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17786 
+
+:CASIN10_17736
+if 
+  42@ == 1 
+jf @CASIN10_17786 
+if 
+  68@ == 0 
+jf @CASIN10_17786 
+0638: AS_actor 65@ stay_put 0 
+68@ = 1 
+
+:CASIN10_17786
+if 
+  70@ == 0 
+jf @CASIN10_17898 
+if 
+   Actor.Dead(69@)
+jf @CASIN10_17848 
+152@ += 1 
+70@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_17898 
+
+:CASIN10_17848
+if 
+  42@ == 1 
+jf @CASIN10_17898 
+if 
+  72@ == 0 
+jf @CASIN10_17898 
+0638: AS_actor 69@ stay_put 0 
+72@ = 1 
+
+:CASIN10_17898
+if 
+  74@ == 0 
+jf @CASIN10_18023 
+if 
+   Actor.Dead(73@)
+jf @CASIN10_17960 
+152@ += 1 
+74@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_18023 
+
+:CASIN10_17960
+if 
+  42@ == 1 
+jf @CASIN10_18023 
+if 
+  76@ == 0 
+jf @CASIN10_18023 
+0687: clear_actor 73@ task 
+0638: AS_actor 73@ stay_put 0 
+05E2: AS_actor 73@ kill_actor $PLAYER_ACTOR 
+76@ = 1 
+
+:CASIN10_18023
+if 
+  78@ == 0 
+jf @CASIN10_18266 
+if 
+   Actor.Dead(77@)
+jf @CASIN10_18085 
+152@ += 1 
+78@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_18266 
+
+:CASIN10_18085
+if 
+  116@ == 1 
+jf @CASIN10_18266 
+if 
+  42@ == 0 
+jf @CASIN10_18221 
+if 
+  80@ == 0 
+jf @CASIN10_18214 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -778.0 486.0 1370.0 cornerB -797.0 500.0 1380.0 
+jf @CASIN10_18214 
+0687: clear_actor 77@ task 
+0638: AS_actor 77@ stay_put 0 
+05E2: AS_actor 77@ kill_actor $PLAYER_ACTOR 
+80@ = 1 
+
+:CASIN10_18214
+jump @CASIN10_18266 
+
+:CASIN10_18221
+if 
+  80@ == 0 
+jf @CASIN10_18266 
+0687: clear_actor 77@ task 
+0638: AS_actor 77@ stay_put 0 
+05E2: AS_actor 77@ kill_actor $PLAYER_ACTOR 
+80@ = 1 
+
+:CASIN10_18266
+if 
+  82@ == 0 
+jf @CASIN10_18637 
+if 
+   Actor.Dead(81@)
+jf @CASIN10_18328 
+152@ += 1 
+82@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_18637 
+
+:CASIN10_18328
+if 
+  116@ == 1 
+jf @CASIN10_18637 
+if 
+  42@ == 0 
+jf @CASIN10_18592 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -781.646 498.659 1374.0 cornerB -780.146 487.315 1378.0 
+jf @CASIN10_18540 
+if 
+  83@ == 0 
+jf @CASIN10_18452 
+0085: 100@ = 81@ // (int) 
+gosub @CASIN10_19553 
+83@ = 1 
+
+:CASIN10_18452
+if 
+  83@ == 1 
+jf @CASIN10_18533 
+if 
+031D:   actor 81@ hit_by_weapon 57 
+jf @CASIN10_18533 
+if 
+  83@ == 1 
+jf @CASIN10_18533 
+0687: clear_actor 81@ task 
+0638: AS_actor 81@ stay_put 0 
+05E2: AS_actor 81@ kill_actor $PLAYER_ACTOR 
+83@ = 2 
+
+:CASIN10_18533
+jump @CASIN10_18585 
+
+:CASIN10_18540
+if 
+  83@ == 1 
+jf @CASIN10_18585 
+0687: clear_actor 81@ task 
+0638: AS_actor 81@ stay_put 0 
+05E2: AS_actor 81@ kill_actor $PLAYER_ACTOR 
+83@ = 2 
+
+:CASIN10_18585
+jump @CASIN10_18637 
+
+:CASIN10_18592
+if 
+   not 83@ == 2 
+jf @CASIN10_18637 
+0687: clear_actor 81@ task 
+0638: AS_actor 81@ stay_put 0 
+05E2: AS_actor 81@ kill_actor $PLAYER_ACTOR 
+83@ = 2 
+
+:CASIN10_18637
+if 
+  85@ == 0 
+jf @CASIN10_19059 
+if 
+   Actor.Dead(84@)
+jf @CASIN10_18699 
+152@ += 1 
+85@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_19059 
+
+:CASIN10_18699
+if 
+  116@ == 1 
+jf @CASIN10_19059 
+if 
+  42@ == 0 
+jf @CASIN10_19014 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -781.646 498.659 1374.0 cornerB -780.146 487.315 1378.0 
+jf @CASIN10_18962 
+if 
+  86@ == 0 
+jf @CASIN10_18815 
+32@ = 0 
+86@ = 1 
+
+:CASIN10_18815
+if 
+  86@ == 1 
+jf @CASIN10_18874 
+if 
+  32@ >= 800 
+jf @CASIN10_18874 
+0085: 100@ = 84@ // (int) 
+gosub @CASIN10_19553 
+86@ = 2 
+
+:CASIN10_18874
+if 
+  86@ == 1 
+jf @CASIN10_18955 
+if 
+031D:   actor 84@ hit_by_weapon 57 
+jf @CASIN10_18955 
+if 
+  3 > 86@ 
+jf @CASIN10_18955 
+0687: clear_actor 84@ task 
+0638: AS_actor 84@ stay_put 0 
+05E2: AS_actor 84@ kill_actor $PLAYER_ACTOR 
+86@ = 3 
+
+:CASIN10_18955
+jump @CASIN10_19007 
+
+:CASIN10_18962
+if 
+  86@ == 2 
+jf @CASIN10_19007 
+0687: clear_actor 84@ task 
+0638: AS_actor 84@ stay_put 0 
+05E2: AS_actor 84@ kill_actor $PLAYER_ACTOR 
+86@ = 3 
+
+:CASIN10_19007
+jump @CASIN10_19059 
+
+:CASIN10_19014
+if 
+  3 > 86@ 
+jf @CASIN10_19059 
+0687: clear_actor 84@ task 
+0638: AS_actor 84@ stay_put 0 
+05E2: AS_actor 84@ kill_actor $PLAYER_ACTOR 
+86@ = 3 
+
+:CASIN10_19059
+if 
+  88@ == 0 
+jf @CASIN10_19223 
+if 
+   Actor.Dead(87@)
+jf @CASIN10_19121 
+152@ += 1 
+88@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_19223 
+
+:CASIN10_19121
+if 
+  42@ == 1 
+jf @CASIN10_19223 
+if 
+  89@ == 0 
+jf @CASIN10_19191 
+0687: clear_actor 87@ task 
+0638: AS_actor 87@ stay_put 0 
+05E2: AS_actor 87@ kill_actor $PLAYER_ACTOR 
+89@ = 1 
+jump @CASIN10_19223 
+
+:CASIN10_19191
+if 
+  2 > 89@ 
+jf @CASIN10_19223 
+0638: AS_actor 87@ stay_put 0 
+89@ = 2 
+
+:CASIN10_19223
+if 
+  91@ == 0 
+jf @CASIN10_19387 
+if 
+   Actor.Dead(90@)
+jf @CASIN10_19285 
+152@ += 1 
+91@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_19387 
+
+:CASIN10_19285
+if 
+  42@ == 1 
+jf @CASIN10_19387 
+if 
+  92@ == 0 
+jf @CASIN10_19355 
+0687: clear_actor 90@ task 
+0638: AS_actor 90@ stay_put 0 
+05E2: AS_actor 90@ kill_actor $PLAYER_ACTOR 
+92@ = 1 
+jump @CASIN10_19387 
+
+:CASIN10_19355
+if 
+  2 > 92@ 
+jf @CASIN10_19387 
+0638: AS_actor 90@ stay_put 0 
+92@ = 2 
+
+:CASIN10_19387
+if 
+  94@ == 0 
+jf @CASIN10_19551 
+if 
+   Actor.Dead(93@)
+jf @CASIN10_19449 
+152@ += 1 
+94@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_19551 
+
+:CASIN10_19449
+if 
+  42@ == 1 
+jf @CASIN10_19551 
+if 
+  95@ == 0 
+jf @CASIN10_19519 
+0687: clear_actor 93@ task 
+0638: AS_actor 93@ stay_put 0 
+05E2: AS_actor 93@ kill_actor $PLAYER_ACTOR 
+95@ = 1 
+jump @CASIN10_19551 
+
+:CASIN10_19519
+if 
+  2 > 95@ 
+jf @CASIN10_19551 
+0638: AS_actor 93@ stay_put 0 
+95@ = 2 
+
+:CASIN10_19551
+return 
+
+:CASIN10_19553
+0615: define_AS_pack_begin 96@ 
+0605: actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 1500 
+0638: AS_actor -1 stay_put 0 
+0605: actor -1 perform_animation "SWT_WLLSHOOT_OUT_R" IFP "SWAT" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0605: actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 96@ loop 1 
+0616: define_AS_pack_end 96@ 
+0618: assign_actor 100@ to_AS_pack 96@ 
+061B: remove_references_to_AS_pack 96@ 
+return 
+
+:CASIN10_19777
+0615: define_AS_pack_begin 97@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -788.611 497.731 1375.227 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 97@ 
+if 
+   not Actor.Dead(101@)
+jf @CASIN10_19853 
+0618: assign_actor 101@ to_AS_pack 97@ 
+
+:CASIN10_19853
+061B: remove_references_to_AS_pack 97@ 
+return 
+
+:CASIN10_19860
+0615: define_AS_pack_begin 98@ 
+04EB: AS_actor -1 crouch 1 
+05F5: AS_actor -1 goto_point_using_paths -789.542 495.862 1376.235 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 98@ 
+if 
+   not Actor.Dead(102@)
+jf @CASIN10_19936 
+0618: assign_actor 102@ to_AS_pack 98@ 
+
+:CASIN10_19936
+061B: remove_references_to_AS_pack 98@ 
+return 
+
+:CASIN10_19943
+0615: define_AS_pack_begin 38@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_L" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 38@ 
+if 
+   not Actor.Dead(103@)
+jf @CASIN10_20035 
+0618: assign_actor 103@ to_AS_pack 38@ 
+
+:CASIN10_20035
+061B: remove_references_to_AS_pack 38@ 
+return 
+
+:CASIN10_20042
+0615: define_AS_pack_begin 39@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 39@ 
+if 
+   not Actor.Dead(104@)
+jf @CASIN10_20134 
+0618: assign_actor 104@ to_AS_pack 39@ 
+
+:CASIN10_20134
+061B: remove_references_to_AS_pack 39@ 
+return 
+
+:CASIN10_20141
+if 
+  48@ == 0 
+jf @CASIN10_20194 
+if 
+   not Actor.Dead(47@)
+jf @CASIN10_20194 
+Actor.DestroyInstantly(47@)
+152@ += 1 
+48@ = 1 
+
+:CASIN10_20194
+if 
+  51@ == 0 
+jf @CASIN10_20247 
+if 
+   not Actor.Dead(50@)
+jf @CASIN10_20247 
+Actor.DestroyInstantly(50@)
+152@ += 1 
+51@ = 1 
+
+:CASIN10_20247
+if 
+  54@ == 0 
+jf @CASIN10_20300 
+if 
+   not Actor.Dead(53@)
+jf @CASIN10_20300 
+Actor.DestroyInstantly(53@)
+152@ += 1 
+54@ = 1 
+
+:CASIN10_20300
+if 
+  57@ == 0 
+jf @CASIN10_20353 
+if 
+   not Actor.Dead(56@)
+jf @CASIN10_20353 
+Actor.DestroyInstantly(56@)
+152@ += 1 
+57@ = 1 
+
+:CASIN10_20353
+if 
+  60@ == 0 
+jf @CASIN10_20406 
+if 
+   not Actor.Dead(59@)
+jf @CASIN10_20406 
+Actor.DestroyInstantly(59@)
+152@ += 1 
+60@ = 1 
+
+:CASIN10_20406
+if 
+  63@ == 0 
+jf @CASIN10_20459 
+if 
+   not Actor.Dead(62@)
+jf @CASIN10_20459 
+Actor.DestroyInstantly(62@)
+152@ += 1 
+63@ = 1 
+
+:CASIN10_20459
+if 
+  66@ == 0 
+jf @CASIN10_20512 
+if 
+   not Actor.Dead(65@)
+jf @CASIN10_20512 
+Actor.DestroyInstantly(65@)
+152@ += 1 
+66@ = 1 
+
+:CASIN10_20512
+if 
+  70@ == 0 
+jf @CASIN10_20565 
+if 
+   not Actor.Dead(69@)
+jf @CASIN10_20565 
+Actor.DestroyInstantly(69@)
+152@ += 1 
+70@ = 1 
+
+:CASIN10_20565
+if 
+  74@ == 0 
+jf @CASIN10_20618 
+if 
+   not Actor.Dead(73@)
+jf @CASIN10_20618 
+Actor.DestroyInstantly(73@)
+152@ += 1 
+74@ = 1 
+
+:CASIN10_20618
+if 
+  78@ == 0 
+jf @CASIN10_20671 
+if 
+   not Actor.Dead(77@)
+jf @CASIN10_20671 
+Actor.DestroyInstantly(77@)
+152@ += 1 
+78@ = 1 
+
+:CASIN10_20671
+if 
+  82@ == 0 
+jf @CASIN10_20724 
+if 
+   not Actor.Dead(81@)
+jf @CASIN10_20724 
+Actor.DestroyInstantly(81@)
+152@ += 1 
+82@ = 0 
+
+:CASIN10_20724
+if 
+  85@ == 0 
+jf @CASIN10_20777 
+if 
+   not Actor.Dead(84@)
+jf @CASIN10_20777 
+Actor.DestroyInstantly(84@)
+152@ += 1 
+85@ = 1 
+
+:CASIN10_20777
+118@ = 1 
+return 
+
+:CASIN10_20786
+0674: set_car_model #SENTINEL numberplate "_4GEDIT_" 
+123@ = Car.Create(#SENTINEL, -831.107, 503.678, 1357.348)
+0229: set_car 123@ primary_color_to 24 secondary_color_to 24 
+Car.Angle(123@) = 292.606
+Car.DoorStatus(123@) = 2
+0840: link_car 123@ to_interior 1 
+120@ = Actor.Create(Mission1, #VMAFF3, -816.005, 493.329, 1358.293)
+0856: set_actor 120@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(120@, MicroUzi, 30000)
+Actor.Angle(120@) = 302.139
+060B: set_actor 120@ decision_maker_to 106@ 
+0638: AS_actor 120@ stay_put 1 
+05E2: AS_actor 120@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(120@) = 80
+07DD: set_actor 120@ attack_rate 50 // previously known as temper_to 
+121@ = Actor.Create(Mission1, #VMAFF1, -821.268, 508.167, 1358.273)
+0856: set_actor 121@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(121@, MicroUzi, 30000)
+Actor.Angle(121@) = 234.012
+060B: set_actor 121@ decision_maker_to 106@ 
+04EB: AS_actor 121@ crouch 1 
+0638: AS_actor 121@ stay_put 1 
+05E2: AS_actor 121@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(121@) = 50
+07DD: set_actor 121@ attack_rate 80 // previously known as temper_to 
+122@ = Actor.Create(Mission1, #VMAFF2, -828.77, 510.594, 1357.307)
+0856: set_actor 122@ enable_crouch 0 
+Actor.GiveWeaponAndAmmo(122@, MicroUzi, 30000)
+Actor.Angle(122@) = 241.767
+060B: set_actor 122@ decision_maker_to 106@ 
+04EB: AS_actor 122@ crouch 1 
+0638: AS_actor 122@ stay_put 1 
+05E2: AS_actor 122@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(122@) = 75
+07DD: set_actor 122@ attack_rate 50 // previously known as temper_to 
+119@ = 1 
+return 
+
+:CASIN10_21144
+if or
+  132@ == 0 
+  132@ == 1 
+jf @CASIN10_21195 
+if 
+002E:   $DIALOG_ARRAY_SIZE >= 131@ // (int) 
+jf @CASIN10_21195 
+gosub @CASIN10_21253 
+
+:CASIN10_21195
+if 
+  132@ == 2 
+jf @CASIN10_21251 
+if 
+03D2:   wav 1 ended 
+jf @CASIN10_21251 
+132@ = 0 
+131@ += 1 
+133@ = 0 
+00BE: text_clear_all 
+
+:CASIN10_21251
+return 
+
+:CASIN10_21253
+if 
+  132@ == 0 
+jf @CASIN10_21289 
+03CF: load_wav 135@(131@,17i) as 1 
+132@ = 1 
+
+:CASIN10_21289
+if 
+  132@ == 1 
+jf @CASIN10_21347 
+if 
+03D0:   wav 1 loaded 
+jf @CASIN10_21347 
+00BC: show_text_highpriority GXT $7762(131@,17s) time 4000 flag 1 
+03D1: play_wav 1 
+132@ = 2 
+
+:CASIN10_21347
+return 
+
+:CASIN10_21349
+if 
+  153@ == 0 
+jf @CASIN10_21461 
+if 
+   Actor.Dead(120@)
+jf @CASIN10_21411 
+152@ += 1 
+153@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_21461 
+
+:CASIN10_21411
+if 
+  42@ == 1 
+jf @CASIN10_21461 
+if 
+  154@ == 0 
+jf @CASIN10_21461 
+0350: set_actor 120@ maintain_position_when_attacked 0 
+154@ = 1 
+
+:CASIN10_21461
+if 
+  155@ == 0 
+jf @CASIN10_21573 
+if 
+   Actor.Dead(121@)
+jf @CASIN10_21523 
+152@ += 1 
+155@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_21573 
+
+:CASIN10_21523
+if 
+  42@ == 1 
+jf @CASIN10_21573 
+if 
+  156@ == 0 
+jf @CASIN10_21573 
+0350: set_actor 121@ maintain_position_when_attacked 0 
+156@ = 1 
+
+:CASIN10_21573
+if 
+  157@ == 0 
+jf @CASIN10_21685 
+if 
+   Actor.Dead(122@)
+jf @CASIN10_21635 
+152@ += 1 
+157@ = 1 
+gosub @CASIN10_21687 
+jump @CASIN10_21685 
+
+:CASIN10_21635
+if 
+  42@ == 1 
+jf @CASIN10_21685 
+if 
+  158@ == 0 
+jf @CASIN10_21685 
+0350: set_actor 122@ maintain_position_when_attacked 0 
+158@ = 1 
+
+:CASIN10_21685
+return 
+
+:CASIN10_21687
+040D: unload_wav 1 
+if 
+  152@ == 2 
+jf @CASIN10_21723 
+03CF: load_wav 7210 as 1 
+jump @CASIN10_21876 
+
+:CASIN10_21723
+if 
+  152@ == 4 
+jf @CASIN10_21755 
+03CF: load_wav 7211 as 1 
+jump @CASIN10_21876 
+
+:CASIN10_21755
+if 
+  152@ == 6 
+jf @CASIN10_21787 
+03CF: load_wav 7212 as 1 
+jump @CASIN10_21876 
+
+:CASIN10_21787
+if 
+  152@ == 8 
+jf @CASIN10_21819 
+03CF: load_wav 7213 as 1 
+jump @CASIN10_21876 
+
+:CASIN10_21819
+if 
+  152@ == 10 
+jf @CASIN10_21851 
+03CF: load_wav 7214 as 1 
+jump @CASIN10_21876 
+
+:CASIN10_21851
+if 
+  152@ == 12 
+jf @CASIN10_22177 
+03CF: load_wav 7215 as 1 
+
+:CASIN10_21876
+if 
+83D0:   not wav 1 loaded 
+jf @CASIN10_21902 
+wait 0 
+jump @CASIN10_21876 
+
+:CASIN10_21902
+03D1: play_wav 1 
+if 
+  152@ == 2 
+jf @CASIN10_21947 
+00BC: show_text_highpriority GXT 'CAS11EA' time 5000 flag 1  // ~z~Salvatore sends his regards!
+jump @CASIN10_22145 
+
+:CASIN10_21947
+if 
+  152@ == 4 
+jf @CASIN10_21988 
+00BC: show_text_highpriority GXT 'CAS11EB' time 5000 flag 1  // ~z~The Forelli's are finished in this town!
+jump @CASIN10_22145 
+
+:CASIN10_21988
+if 
+  152@ == 6 
+jf @CASIN10_22029 
+00BC: show_text_highpriority GXT 'CAS11EC' time 5000 flag 1  // ~z~I'm here to spill pasta sauce!
+jump @CASIN10_22145 
+
+:CASIN10_22029
+if 
+  152@ == 8 
+jf @CASIN10_22070 
+00BC: show_text_highpriority GXT 'CAS11ED' time 5000 flag 1  // ~z~Marco Forelli, I'm here for you!
+jump @CASIN10_22145 
+
+:CASIN10_22070
+if 
+  152@ == 10 
+jf @CASIN10_22111 
+00BC: show_text_highpriority GXT 'CAS11EE' time 5000 flag 1  // ~z~Marco, I'm coming for you!
+jump @CASIN10_22145 
+
+:CASIN10_22111
+if 
+  152@ == 12 
+jf @CASIN10_22177 
+00BC: show_text_highpriority GXT 'CAS11EF' time 5000 flag 1  // ~z~Mafia assholes!
+
+:CASIN10_22145
+if 
+83D2:   not wav 1 ended 
+jf @CASIN10_22171 
+wait 0 
+jump @CASIN10_22145 
+
+:CASIN10_22171
+040D: unload_wav 1 
+00BE: text_clear_all 
+
+:CASIN10_22177
+return

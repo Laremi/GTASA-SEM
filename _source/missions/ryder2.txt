@@ -1,0 +1,6536 @@
+:RYDER2
+thread 'RYDER2' 
+gosub @RYDER2_94 
+if 
+wasted_or_busted 
+jf @RYDER2_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @RYDER2_41638 
+
+:RYDER2_85
+gosub @RYDER2_41824 
+end_thread 
+
+:RYDER2_94
+increment_mission_attempts 
+$ONMISSION = 1 
+34@ = 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+49@ = 0 
+50@ = 0 
+
+:RYDER2_145
+wait 0 
+38@ += 1 
+if 
+  38@ > 9 
+jf @RYDER2_181 
+38@ = 0 
+
+:RYDER2_181
+01BD: 39@ = current_time_in_ms 
+0085: 41@ = 39@ // (int) 
+0062: 41@ -= 40@ // (int) 
+0085: 40@ = 39@ // (int) 
+005A: 141@ += 41@ // (int) 
+005A: 142@ += 41@ // (int) 
+005A: 144@ += 41@ // (int) 
+42@ = 0 
+
+:RYDER2_241
+if 
+  9 > 42@ 
+jf @RYDER2_285 
+005A: 181@(42@,9i) += 41@ // (int) 
+42@ += 1 
+jump @RYDER2_241 
+
+:RYDER2_285
+005A: 51@ += 41@ // (int) 
+005A: 52@ += 41@ // (int) 
+005A: 53@ += 41@ // (int) 
+005A: 54@ += 41@ // (int) 
+005A: 55@ += 41@ // (int) 
+005A: 56@ += 41@ // (int) 
+005A: 57@ += 41@ // (int) 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @RYDER2_363 
+36@ = 1 
+
+:RYDER2_363
+gosub @RYDER2_1035 
+
+:RYDER2_370
+0871: init_jump_table 34@ total_jumps 8 default_jump 0 @RYDER2_610 jumps 0 @RYDER2_498 1 @RYDER2_512 2 @RYDER2_526 3 @RYDER2_540 4 @RYDER2_554 5 @RYDER2_568 6 @RYDER2_582 
+0872: jump_table_jumps 7 @RYDER2_596 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 -1 @RYDER2_610 
+
+:RYDER2_498
+gosub @RYDER2_1620 
+jump @RYDER2_610 
+
+:RYDER2_512
+gosub @RYDER2_3472 
+jump @RYDER2_610 
+
+:RYDER2_526
+gosub @RYDER2_7002 
+jump @RYDER2_610 
+
+:RYDER2_540
+gosub @RYDER2_11719 
+jump @RYDER2_610 
+
+:RYDER2_554
+gosub @RYDER2_12854 
+jump @RYDER2_610 
+
+:RYDER2_568
+gosub @RYDER2_14153 
+jump @RYDER2_610 
+
+:RYDER2_582
+gosub @RYDER2_18319 
+jump @RYDER2_610 
+
+:RYDER2_596
+gosub @RYDER2_30514 
+jump @RYDER2_610 
+
+:RYDER2_610
+gosub @RYDER2_32327 
+if 
+  203@ == 1 
+jf @RYDER2_649 
+203@ = 0 
+jump @RYDER2_370 
+
+:RYDER2_649
+if 
+  37@ == 0 
+jf @RYDER2_715 
+if 
+  36@ == 0 
+jf @RYDER2_699 
+jump @RYDER2_145 
+jump @RYDER2_708 
+
+:RYDER2_699
+gosub @RYDER2_41724 
+return 
+
+:RYDER2_708
+jump @RYDER2_724 
+
+:RYDER2_715
+gosub @RYDER2_41638 
+return 
+
+:RYDER2_724
+jump @RYDER2_1035 
+$ACTOR_RYDER = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+282@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+281@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+308@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+313@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+96@ = Car.Create(#PONY, 0.0, 0.0, 0.0)
+97@ = Car.Create(#PONY, 0.0, 0.0, 0.0)
+018A: 119@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 120@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 121@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 122@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 123@ = create_checkpoint_at 0.0 0.0 0.0 
+93@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+340@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+
+:RYDER2_1035
+if 
+0736:   is_keyboard_key_just_pressed 88 
+jf @RYDER2_1149 
+if 
+  58@ == 0 
+jf @RYDER2_1123 
+58@ = 1 
+0662: printstring "LEVEL_DEBUG_ON" 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_1116 
+02A9: set_actor $ACTOR_RYDER immune_to_nonplayer 1 
+
+:RYDER2_1116
+jump @RYDER2_1149 
+
+:RYDER2_1123
+58@ = 0 
+0662: printstring "LEVEL_DEBUG_OFF" 
+
+:RYDER2_1149
+if 
+  58@ == 1 
+jf @RYDER2_1618 
+if 
+0736:   is_keyboard_key_just_pressed 32 
+jf @RYDER2_1216 
+59@ += 1 
+if 
+  59@ > 2 
+jf @RYDER2_1214 
+59@ = 0 
+
+:RYDER2_1214
+086A: NOP 
+
+:RYDER2_1216
+if 
+  59@ == 1 
+jf @RYDER2_1456 
+008A: $6875 = 34@ // (int) 
+008A: $6876 = 35@ // (int) 
+008A: $6877 = 134@ // (int) 
+008A: $6878 = 132@ // (int) 
+0088: $6887 = 253@ // (float) 
+008A: $6880 = 49@ // (int) 
+008A: $6881 = 50@ // (int) 
+0084: $6882 = $AUDIO_LINE_IS_ACTIVE // (int) 
+065D: NOP $6875 "M_STAGE" 
+065D: NOP $6876 "M_GOALS" 
+065D: NOP $6877 "RYDER_STAGE" 
+065D: NOP $6878 "WAREHOUSE_OPENED" 
+065E: NOP $6887 "GATE2_TARGET_Z" 
+065D: NOP $6880 "DIALOGUE_FLAG" 
+065D: NOP $6881 "DIALOGUE_FLAG2" 
+065D: NOP $6882 "AUDIO_LINE_IS_ACTIVE" 
+
+:RYDER2_1456
+if 
+  59@ == 2 
+jf @RYDER2_1618 
+008A: $6875 = 279@ // (int) 
+008A: $6876 = 127@ // (int) 
+008A: $6877 = 336@ // (int) 
+008A: $6878 = 32@ // (int) 
+008A: $6879 = 51@ // (int) 
+065D: NOP $6875 "RYDER_GET_BOX_FLAG" 
+065D: NOP $6876 "LOADED_BOXES" 
+065D: NOP $6877 "SPAWN_THIS_MANY_GUARDS" 
+065D: NOP $6878 "TIMERA" 
+065D: NOP $6879 "SPAWN_TIMER" 
+
+:RYDER2_1618
+return 
+
+:RYDER2_1620
+if 
+  35@ == 0 
+jf @RYDER2_3293 
+$ACTOR_RYDER = 0 
+95@ = 0 
+99@ = 0 
+124@ = 0 
+125@ = 0 
+126@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+130@ = 0 
+131@ = 0 
+132@ = 0 
+133@ = 0 
+134@ = 0 
+135@ = 0 
+136@ = 0 
+137@ = 0 
+138@ = 0 
+139@ = 0 
+$6891 = 0 
+140@ = 0 
+143@ = 0 
+145@ = 0 
+146@ = 0 
+198@ = 0 
+199@ = 0 
+203@ = 0 
+42@ = 0 
+
+:RYDER2_1834
+if 
+  9 > 42@ 
+jf @RYDER2_1877 
+172@(42@,9i) = 0 
+42@ += 1 
+jump @RYDER2_1834 
+
+:RYDER2_1877
+120@ = 0 
+193@ = 0 
+196@ = 0 
+197@ = 0 
+307@ = 0 
+202@ = 0 
+200@ = 6 
+242@ = 2720.623 
+243@ = -2405.432 
+244@ = 13.989 
+245@ = 2774.361 
+246@ = -2417.829 
+247@ = 14.675 
+347@ = 2721.0 
+357@ = -2380.0 
+367@ = 16.3507 
+377@ = 173.3713 
+387@ = 2721.6 
+397@ = -2384.638 
+407@ = 16.3403 
+417@ = 2732.872 
+427@ = -2385.677 
+437@ = 12.625 
+447@ = 2763.692 
+457@ = -2411.258 
+467@ = 12.6276 
+348@ = 2729.35 
+358@ = -2451.07 
+368@ = 16.6007 
+378@ = 247.5382 
+388@ = 2734.908 
+398@ = -2451.32 
+408@ = 16.5938 
+418@ = 2735.176 
+428@ = -2437.915 
+438@ = 12.6362 
+448@ = 2763.772 
+458@ = -2428.203 
+468@ = 12.4725 
+349@ = 2748.555 
+359@ = -2453.049 
+369@ = 12.8623 
+379@ = 347.9489 
+389@ = 2748.595 
+399@ = -2446.587 
+409@ = 12.6432 
+419@ = 2757.586 
+429@ = -2434.761 
+439@ = 12.4876 
+449@ = 2766.158 
+459@ = -2432.014 
+469@ = 12.6485 
+350@ = 2793.516 
+360@ = -2394.284 
+370@ = 12.8623 
+380@ = 178.5569 
+390@ = 2793.473 
+400@ = -2398.662 
+410@ = 12.6323 
+420@ = 2799.573 
+430@ = -2403.292 
+440@ = 12.6308 
+450@ = 2799.251 
+460@ = -2410.985 
+470@ = 12.6309 
+351@ = 2721.0 
+361@ = -2380.0 
+371@ = 16.3507 
+381@ = 186.1396 
+391@ = 2721.502 
+401@ = -2383.609 
+411@ = 16.3403 
+421@ = 2733.744 
+431@ = -2386.227 
+441@ = 12.625 
+451@ = 2754.885 
+461@ = -2409.502 
+471@ = 12.5104 
+352@ = 2729.35 
+362@ = -2451.07 
+372@ = 16.6007 
+382@ = 246.8993 
+392@ = 2734.468 
+402@ = -2450.824 
+412@ = 16.5938 
+422@ = 2735.573 
+432@ = -2436.667 
+442@ = 12.6361 
+452@ = 2759.36 
+462@ = -2420.356 
+472@ = 12.4948 
+353@ = 2748.551 
+363@ = -2452.828 
+373@ = 12.8623 
+383@ = 339.2833 
+393@ = 2750.67 
+403@ = -2442.944 
+413@ = 12.6432 
+423@ = 2758.147 
+433@ = -2440.491 
+443@ = 12.4936 
+453@ = 2769.029 
+463@ = -2430.337 
+473@ = 12.6485 
+354@ = 2793.638 
+364@ = -2395.226 
+374@ = 12.8623 
+384@ = 170.3273 
+394@ = 2793.903 
+404@ = -2399.063 
+414@ = 12.6322 
+424@ = 2799.384 
+434@ = -2403.474 
+444@ = 12.6309 
+454@ = 2799.41 
+464@ = -2414.336 
+474@ = 12.6309 
+355@ = 2799.764 
+365@ = -2433.002 
+375@ = 12.6308 
+385@ = 358.8697 
+395@ = 2799.902 
+405@ = -2425.694 
+415@ = 12.6307 
+425@ = 2796.654 
+435@ = -2420.463 
+445@ = 12.6315 
+455@ = 2786.01 
+465@ = -2414.445 
+475@ = 12.6341 
+356@ = 2800.008 
+366@ = -2432.285 
+376@ = 12.6307 
+386@ = 2.0796 
+396@ = 2800.023 
+406@ = -2426.153 
+416@ = 12.6307 
+426@ = 2790.801 
+436@ = -2421.917 
+446@ = 12.633 
+456@ = 2786.337 
+466@ = -2421.433 
+476@ = 12.634 
+35@ += 1 
+
+:RYDER2_3293
+if 
+  35@ == 1 
+jf @RYDER2_3329 
+054C: use_GXT_table 'RYDER2' 
+35@ += 1 
+
+:RYDER2_3329
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+060A: create_decision_maker_type 0 store_to 237@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 236@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 235@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 238@ // decision\allowed\m_.ped files 
+03CF: load_wav 1823 as 3 
+
+:RYDER2_3380
+if 
+83D0:   not wav 3 loaded 
+jf @RYDER2_3406 
+wait 0 
+jump @RYDER2_3380 
+
+:RYDER2_3406
+if 
+  35@ == 2 
+jf @RYDER2_3438 
+03C7: set_sensitivity_to_crime 0.2 
+35@ = 99 
+
+:RYDER2_3438
+if 
+  35@ == 99 
+jf @RYDER2_3470 
+34@ += 1 
+35@ = 0 
+
+:RYDER2_3470
+return 
+
+:RYDER2_3472
+if 
+  35@ == 0 
+jf @RYDER2_3628 
+0395: clear_area 1 at 2463.475 -1713.428 12.5025 radius 20.0 
+02E4: load_cutscene_data 'RYDER2A' 
+
+:RYDER2_3525
+if 
+86B9:   not cutscene_data_loaded 
+jf @RYDER2_3549 
+wait 0 
+jump @RYDER2_3525 
+
+:RYDER2_3549
+02E7: start_cutscene 
+fade 1 1000 
+
+:RYDER2_3558
+if 
+82E9:   not cutscene_reached_end 
+jf @RYDER2_3582 
+wait 0 
+jump @RYDER2_3558 
+
+:RYDER2_3582
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:RYDER2_3595
+if 
+fading 
+jf @RYDER2_3619 
+wait 0 
+jump @RYDER2_3595 
+
+:RYDER2_3619
+02EA: end_cutscene 
+35@ += 1 
+
+:RYDER2_3628
+if 
+  35@ == 1 
+jf @RYDER2_4575 
+014C: set_parked_car_generator $2764 cars_to_generate_to 0 
+0395: clear_area 1 at 2472.81 -1690.97 12.53 radius 5.0 
+Model.Load(#MULE)
+023C: load_special_actor 'RYDER2' as 1 // models 290-299 
+Model.Load(#COLT45)
+
+:RYDER2_3700
+if or
+   not Model.Available(#MULE)
+823D:   not special_actor 1 loaded 
+   not Model.Available(#COLT45)
+jf @RYDER2_3736 
+wait 0 
+jump @RYDER2_3700 
+
+:RYDER2_3736
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+0506: set_car_model #MULE next_variation -1 -1 // first param is useless 
+95@ = Car.Create(#MULE, 2475.908, -1679.621, 12.3447)
+Car.Angle(95@) = 69.0573
+Marker.Disable(119@)
+119@ = Marker.CreateAboveCar(95@)
+07E0: set_marker 119@ type_to 1 
+053F: set_car 95@ tires_vulnerability 0 
+0957: set_car 95@ provides_cover_from_gunfire 0 
+0732: random_car_generator_disable_model #MULE 
+$ACTOR_RYDER = Actor.CreateAsPassenger(Mission3, #SPECIAL01, 95@, 0)
+09F6: set_actor $ACTOR_RYDER unjackable_through_driver_seat 0 
+Actor.GiveWeaponAndAmmo($ACTOR_RYDER, Pistol, 99999)
+Actor.WeaponAccuracy($ACTOR_RYDER) = 70
+Actor.SetMaxHealth($ACTOR_RYDER, 500)
+Actor.Health($ACTOR_RYDER) = 500
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 0 0 0 
+0568: set_actor $ACTOR_RYDER untargetable 1 
+0446: set_actor $ACTOR_RYDER dismemberment_possible 0 
+Actor.SetWalkStyle($ACTOR_RYDER, "GANG1")
+060B: set_actor $ACTOR_RYDER decision_maker_to 235@ 
+0708: reset_decision_maker 235@ event 79 
+05BF: AS_actor $ACTOR_RYDER look_at_actor $PLAYER_ACTOR 999999 ms 
+00BC: show_text_highpriority GXT 'RY2_03' time 7000 flag 1  // ~s~Get in the ~b~van~s~ with Ryder.
+49@ = 0 
+039E: set_actor $ACTOR_RYDER locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_RYDER, "MAN")
+Actor.PutAt($PLAYER_ACTOR, 2474.87, -1698.465, 12.521)
+Actor.Angle($PLAYER_ACTOR) = 4.8941
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 0 
+
+:RYDER2_4026
+if 
+fading 
+jf @RYDER2_4050 
+wait 0 
+jump @RYDER2_4026 
+
+:RYDER2_4050
+Player.CanMove($PLAYER_CHAR) = True
+32@ = 0 
+240@ = Object.Init(#KMB_FRONTGATE, 242@, 243@, 244@)
+0400: store_coords_to 248@ 249@ 250@ from_object 240@ with_offset 0.0 10.0 0.0 
+241@ = Object.Init(#WAREHOUSE_DOOR2B, 245@, 246@, 247@)
+0400: store_coords_to 251@ 252@ 253@ from_object 241@ with_offset 0.0 0.0 4.0 
+257@ = Object.Init(#KMB_FRONTGATE, 2720.623, -2504.023, 13.989)
+0400: store_coords_to 254@ 255@ 256@ from_object 257@ with_offset 0.0 10.0 0.0 
+258@ = Object.Init(#WAREHOUSE_DOOR2B, 2774.361, -2493.922, 14.675)
+259@ = Object.Init(#WAREHOUSE_DOOR2B, 2774.361, -2455.925, 14.675)
+87@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2405.394, 14.58)
+88@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2430.215, 14.58)
+89@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2443.486, 14.58)
+90@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2468.254, 14.58)
+91@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2481.711, 14.58)
+92@ = Object.Init(#WAREHOUSE_DOOR1, 2799.75, -2506.313, 14.58)
+42@ = 0 
+
+:RYDER2_4399
+if 
+  6 > 42@ 
+jf @RYDER2_4442 
+Object.KeepInMemory(87@(42@,6i)) = True
+42@ += 1 
+jump @RYDER2_4399 
+
+:RYDER2_4442
+60@ = Object.Create(#SEC_KEYPAD, 2720.475, -2411.856, 13.8768)
+Object.Angle(60@) = 90.0
+071F: set_object 60@ health_to 10 
+Object.KeepInMemory(60@) = True
+Object.CollisionDetection(60@) = False
+61@ = Object.Create(#SEC_KEYPAD, 2774.148, -2423.23, 14.2684)
+Object.Angle(61@) = 270.0
+071F: set_object 61@ health_to 10 
+Object.KeepInMemory(61@) = True
+Object.CollisionDetection(61@) = False
+041E: set_radio_station 5 
+49@ = 0 
+32@ = 0 
+35@ += 1 
+
+:RYDER2_4575
+if 
+  35@ == 2 
+jf @RYDER2_4736 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_4736 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_4736 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_4736 
+Marker.Disable(120@)
+018A: 120@ = create_checkpoint_at 2699.293 -2395.013 12.6172 
+00BC: show_text_highpriority GXT 'RY2_02' time 7000 flag 1  // ~s~Drive down to the compound at ~y~Ocean Docks~s~.
+54@ = 0 
+35@ += 1 
+49@ = 0 
+50@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_4736 
+0647: AS_actor $ACTOR_RYDER clear_look_task 
+
+:RYDER2_4736
+if 
+  35@ == 3 
+jf @RYDER2_6398 
+if 
+  58@ == 1 
+jf @RYDER2_4809 
+if 
+00E1:   player 0 pressed_key 19 
+jf @RYDER2_4809 
+Actor.PutAt($PLAYER_ACTOR, 2699.293, -2395.013, 12.6172)
+
+:RYDER2_4809
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_4966 
+if 
+075C:   marker 120@ enabled 
+jf @RYDER2_4966 
+if 
+01AF:   car 95@ sphere 1 in_sphere 2699.293 -2395.013 12.6172 radius 4.0 4.0 4.0 
+jf @RYDER2_4966 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_4966 
+if 
+09D0:   car 95@ on_wheels 
+jf @RYDER2_4966 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(120@)
+35@ = 99 
+
+:RYDER2_4966
+if 
+  54@ > 7500 
+jf @RYDER2_6398 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_6398 
+if 
+   Actor.Driving($ACTOR_RYDER)
+jf @RYDER2_6398 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($ACTOR_RYDER)
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @RYDER2_6398 
+if 
+   Actor.InCar($PLAYER_ACTOR, $TEMPVAR_ACTOR_CAR)
+jf @RYDER2_6398 
+if 
+  33@ > 1000 
+jf @RYDER2_6398 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_6398 
+0871: init_jump_table 50@ total_jumps 10 default_jump 0 @RYDER2_6398 jumps 0 @RYDER2_5225 1 @RYDER2_5259 2 @RYDER2_5387 3 @RYDER2_5515 4 @RYDER2_5643 5 @RYDER2_5771 6 @RYDER2_5899 
+0872: jump_table_jumps 7 @RYDER2_6027 8 @RYDER2_6155 9 @RYDER2_6283 -1 @RYDER2_6398 -1 @RYDER2_6398 -1 @RYDER2_6398 -1 @RYDER2_6398 -1 @RYDER2_6398 -1 @RYDER2_6398 
+
+:RYDER2_5225
+50@ += 1 
+33@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33805 as 1 
+jump @RYDER2_6398 
+
+:RYDER2_5259
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CA' // s$  // ~z~Hey, Ryder, where we going?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33805 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5327 
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 1 
+jump @RYDER2_5353 
+
+:RYDER2_5327
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 0 
+49@ = 0 
+
+:RYDER2_5353
+50@ += 1 
+33@ = 0 
+040D: unload_wav 2 
+03CF: load_wav 33806 as 2 
+jump @RYDER2_6398 
+
+:RYDER2_5387
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CB' // s$  // ~z~Ocean Docks.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33806 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5455 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 1 
+jump @RYDER2_5481 
+
+:RYDER2_5455
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 0 
+49@ = 0 
+
+:RYDER2_5481
+50@ += 1 
+33@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33807 as 1 
+jump @RYDER2_6398 
+
+:RYDER2_5515
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CC' // s$  // ~z~How we get this van? It wasn't outside when I came through.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33807 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5583 
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 1 
+jump @RYDER2_5609 
+
+:RYDER2_5583
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 0 
+49@ = 0 
+
+:RYDER2_5609
+50@ += 1 
+33@ = 0 
+040D: unload_wav 2 
+03CF: load_wav 33808 as 2 
+jump @RYDER2_6398 
+
+:RYDER2_5643
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CD' // s$  // ~z~My homie LB, he's like a clockwork ninja! Real dependable.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33808 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5711 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 1 
+jump @RYDER2_5737 
+
+:RYDER2_5711
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 0 
+49@ = 0 
+
+:RYDER2_5737
+50@ += 1 
+33@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33809 as 1 
+jump @RYDER2_6398 
+
+:RYDER2_5771
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CE' // s$  // ~z~Unlike some of you motherfuckers...
+04AE: $ACTOR_SPEECH_WAV_FILE = 33809 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5839 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 1 
+jump @RYDER2_5865 
+
+:RYDER2_5839
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+49@ = 0 
+
+:RYDER2_5865
+50@ += 1 
+33@ = 0 
+040D: unload_wav 2 
+03CF: load_wav 33810 as 2 
+jump @RYDER2_6398 
+
+:RYDER2_5899
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CF' // s$  // ~z~Give it a rest, man.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33810 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_5967 
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 2 1 
+jump @RYDER2_5993 
+
+:RYDER2_5967
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 2 0 
+49@ = 0 
+
+:RYDER2_5993
+50@ += 1 
+33@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33811 as 1 
+jump @RYDER2_6398 
+
+:RYDER2_6027
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CG' // s$  // ~z~I lost my little brother and now I lost my Moms.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33811 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_6095 
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 1 
+jump @RYDER2_6121 
+
+:RYDER2_6095
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 0 
+49@ = 0 
+
+:RYDER2_6121
+50@ += 1 
+33@ = 0 
+040D: unload_wav 2 
+03CF: load_wav 33812 as 2 
+jump @RYDER2_6398 
+
+:RYDER2_6155
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CH' // s$  // ~z~Don't matter how much shit this city throws at you, CJ, you gotta stick by yo'homies!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33812 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_6223 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 1 
+jump @RYDER2_6249 
+
+:RYDER2_6223
+create_thread @AUDIOL $ACTOR_RYDER 0 0 2 0 
+49@ = 0 
+
+:RYDER2_6249
+50@ += 1 
+33@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33813 as 1 
+jump @RYDER2_6398 
+
+:RYDER2_6283
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_CJ' // s$  // ~z~Yeah, I guess...
+04AE: $ACTOR_SPEECH_WAV_FILE = 33813 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_6351 
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 1 
+jump @RYDER2_6377 
+
+:RYDER2_6351
+create_thread @AUDIOL $PLAYER_ACTOR 0 0 1 0 
+49@ = 0 
+
+:RYDER2_6377
+50@ += 1 
+33@ = 0 
+jump @RYDER2_6398 
+
+:RYDER2_6398
+if 
+  35@ == 99 
+jf @RYDER2_6430 
+35@ = 0 
+34@ += 1 
+
+:RYDER2_6430
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_7000 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_6917 
+if 
+875C:   not marker 119@ enabled 
+jf @RYDER2_6543 
+Marker.Disable(119@)
+119@ = Marker.CreateAboveCar(95@)
+07E0: set_marker 119@ type_to 1 
+Marker.Disable(120@)
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_6535 
+05BF: AS_actor $ACTOR_RYDER look_at_actor $PLAYER_ACTOR 999999 ms 
+
+:RYDER2_6535
+32@ = 20001 
+
+:RYDER2_6543
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_6910 
+if 
+  32@ > 60000 
+jf @RYDER2_6612 
+00BC: show_text_highpriority GXT 'RY2_03' time 7000 flag 1  // ~s~Get in the ~b~van~s~ with Ryder.
+49@ = 0 
+32@ = 0 
+
+:RYDER2_6612
+if 
+  35@ > 2 
+jf @RYDER2_6910 
+if 
+  32@ > 5000 
+jf @RYDER2_6910 
+if 
+  49@ == 0 
+jf @RYDER2_6910 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_6910 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_RYDER radius 15.0 15.0 15.0 sphere 0 
+jf @RYDER2_6910 
+0209: 42@ = random_int_in_ranges 0 3 
+0871: init_jump_table 42@ total_jumps 3 default_jump 0 @RYDER2_6884 jumps 0 @RYDER2_6791 1 @RYDER2_6822 2 @RYDER2_6853 -1 @RYDER2_6884 -1 @RYDER2_6884 -1 @RYDER2_6884 -1 @RYDER2_6884 
+
+:RYDER2_6791
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_BA' // s$  // ~z~Hey, CJ, you ain't punking out on us again, are you?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33802 // = constant 
+jump @RYDER2_6884 
+
+:RYDER2_6822
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_BB' // s$  // ~z~C'mon CJ, we ain't got all day!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33803 // = constant 
+jump @RYDER2_6884 
+
+:RYDER2_6853
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_BC' // s$  // ~z~Get in and drive, motherfucker!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33804 // = constant 
+jump @RYDER2_6884 
+
+:RYDER2_6884
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ += 1 
+
+:RYDER2_6910
+jump @RYDER2_7000 
+
+:RYDER2_6917
+if 
+075C:   marker 119@ enabled 
+jf @RYDER2_7000 
+Marker.Disable(119@)
+if 
+875C:   not marker 120@ enabled 
+jf @RYDER2_7000 
+Marker.Disable(120@)
+018A: 120@ = create_checkpoint_at 2699.293 -2395.013 12.6172 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_7000 
+0647: AS_actor $ACTOR_RYDER clear_look_task 
+
+:RYDER2_7000
+return 
+
+:RYDER2_7002
+if 
+  35@ == 0 
+jf @RYDER2_7043 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+49@ = -1 
+35@ += 1 
+
+:RYDER2_7043
+if 
+  35@ == 1 
+jf @RYDER2_7100 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_7100 
+if 
+01C1:   car 95@ stopped 
+jf @RYDER2_7100 
+35@ += 1 
+
+:RYDER2_7100
+if 
+  35@ == 2 
+jf @RYDER2_8824 
+fade 0 500 
+
+:RYDER2_7125
+if 
+fading 
+jf @RYDER2_7149 
+wait 0 
+jump @RYDER2_7125 
+
+:RYDER2_7149
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_7195 
+Car.PutAt(95@, 2699.623, -2394.787, 12.6172)
+Car.Angle(95@) = 267.9095
+
+:RYDER2_7195
+0395: clear_area 1 at 2720.611 -2405.38 12.4609 radius 30.0 
+0395: clear_area 1 at 2768.74 -2413.788 12.6172 radius 30.0 
+02A3: enable_widescreen 1 
+Camera.SetPosition(2688.57, -2394.186, 17.6992, 0.0, 0.0, 0.0)
+Camera.PointAt(2689.455, -2394.599, 17.4888, 2)
+Model.Load(#CJ_CARDBRD_PICKUP)
+Model.Load(#ARMY)
+Model.Load(#COLT45)
+Model.Load(#FORKLIFT)
+038B: load_requested_models 
+
+:RYDER2_7320
+if or
+   not Model.Available(#CJ_CARDBRD_PICKUP)
+   not Model.Available(#ARMY)
+   not Model.Available(#COLT45)
+   not Model.Available(#FORKLIFT)
+jf @RYDER2_7362 
+wait 0 
+jump @RYDER2_7320 
+
+:RYDER2_7362
+66@ = Object.Init(#CJ_CARDBRD_PICKUP, 2796.875, -2417.142, 13.23)
+67@ = Object.Init(#CJ_CARDBRD_PICKUP, 2798.009, -2417.107, 13.23)
+68@ = Object.Init(#CJ_CARDBRD_PICKUP, 2796.9, -2418.31, 13.23)
+69@ = Object.Init(#CJ_CARDBRD_PICKUP, 2798.013, -2418.325, 13.23)
+73@ = Object.Init(#CJ_CARDBRD_PICKUP, 2799.886, -2381.203, 13.23)
+74@ = Object.Init(#CJ_CARDBRD_PICKUP, 2799.958, -2379.72, 13.23)
+75@ = Object.Init(#CJ_CARDBRD_PICKUP, 2763.531, -2401.935, 13.23)
+76@ = Object.Init(#CJ_CARDBRD_PICKUP, 2802.75, -2449.835, 13.23)
+77@ = Object.Init(#CJ_CARDBRD_PICKUP, 2802.915, -2448.575, 13.23)
+78@ = Object.Init(#CJ_CARDBRD_PICKUP, 2802.906, -2446.827, 13.23)
+79@ = Object.Init(#CJ_CARDBRD_PICKUP, 2788.932, -2431.271, 13.23)
+80@ = Object.Init(#CJ_CARDBRD_PICKUP, 2790.398, -2431.336, 13.23)
+81@ = Object.Init(#CJ_CARDBRD_PICKUP, 2778.698, -2442.433, 13.23)
+82@ = Object.Init(#CJ_CARDBRD_PICKUP, 2763.565, -2400.641, 13.23)
+83@ = Object.Init(#CJ_CARDBRD_PICKUP, 2780.851, -2392.737, 13.23)
+84@ = Object.Init(#CJ_CARDBRD_PICKUP, 2795.094, -2469.49, 13.23)
+85@ = Object.Init(#CJ_CARDBRD_PICKUP, 2803.067, -2428.38, 13.23)
+Object.Angle(66@) = 91.9411
+Object.Angle(67@) = 0.032
+Object.Angle(68@) = 89.8612
+Object.Angle(69@) = 1.6342
+Object.Angle(73@) = 6.8174
+Object.Angle(74@) = 19.1807
+Object.Angle(75@) = 339.113
+Object.Angle(76@) = 352.3154
+Object.Angle(77@) = 2.8386
+Object.Angle(78@) = 3.2099
+Object.Angle(79@) = 266.6248
+Object.Angle(80@) = 4.6663
+Object.Angle(81@) = 175.8277
+Object.Angle(82@) = 344.0064
+Object.Angle(83@) = 355.9493
+Object.Angle(84@) = 1.9283
+Object.Angle(85@) = 358.0803
+42@ = 0 
+
+:RYDER2_7930
+if 
+  25 > 42@ 
+jf @RYDER2_8046 
+wait 0 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_8032 
+Object.ToggleInMovingList(62@(42@,25i)) = True
+0209: 43@ = random_int_in_ranges 1 8 
+0906: set_object 62@(42@,25i) mass_to 1000.0 // float 
+0908: set_object 62@(42@,25i) turn_mass_to 1000.0 // float 
+0085: 147@(42@,25i) = 43@ // (int) 
+
+:RYDER2_8032
+42@ += 1 
+jump @RYDER2_7930 
+
+:RYDER2_8046
+102@ = Actor.Create(Mission1, #ARMY, 2773.722, -2423.388, 12.6311)
+Actor.Angle(102@) = 68.8849
+04C4: store_coords_to 204@ 205@ 206@ from_actor 102@ with_offset 0.0 1.5 0.0 
+103@ = Actor.Create(Mission1, #ARMY, 2721.944, -2411.565, 12.6198)
+Actor.Angle(103@) = 0.0
+104@ = Actor.Create(Mission1, #ARMY, 2789.524, -2416.372, 12.6333)
+Actor.Angle(104@) = 202.4407
+105@ = Actor.Create(Mission1, #ARMY, 2790.231, -2418.837, 12.6331)
+Actor.Angle(105@) = 23.3411
+106@ = Actor.Create(Mission1, #ARMY, 2774.911, -2404.303, 12.6311)
+Actor.Angle(106@) = 77.8711
+062F: 239@ = create_group_type 2 
+42@ = 0 
+
+:RYDER2_8264
+if 
+  5 > 42@ 
+jf @RYDER2_8456 
+Actor.GiveWeaponAndAmmo(102@(42@,9i), Pistol, 99999)
+Actor.WeaponAccuracy(102@(42@,9i)) = 35
+Actor.Health(102@(42@,9i)) = 100
+0688: AS_actor 102@(42@,9i) unknown_toggle_ped_threat_scanner 0 0 0 
+060B: set_actor 102@(42@,9i) decision_maker_to 236@ 
+060F: set_actor 102@(42@,9i) melee_accuracy_to 100.0 
+if 
+  42@ == 0 
+jf @RYDER2_8394 
+0630: put_actor 102@ in_group 239@ as_leader 
+jump @RYDER2_8431 
+
+:RYDER2_8394
+if and
+   not 42@ == 2 
+   not 42@ == 3 
+jf @RYDER2_8431 
+0631: put_actor 102@(42@,9i) in_group 239@ 
+
+:RYDER2_8431
+087F: set_actor 102@(42@,9i) never_leave_group 1 
+42@ += 1 
+jump @RYDER2_8264 
+
+:RYDER2_8456
+if 
+   not Actor.Dead(104@)
+jf @RYDER2_8480 
+060B: set_actor 104@ decision_maker_to 237@ 
+
+:RYDER2_8480
+if 
+   not Actor.Dead(105@)
+jf @RYDER2_8504 
+060B: set_actor 105@ decision_maker_to 237@ 
+
+:RYDER2_8504
+99@ = Car.Create(#FORKLIFT, 2791.426, -2418.577, 12.66)
+Car.Angle(99@) = 90.0
+Model.Destroy(#FORKLIFT)
+Car.SetImmunities(99@, 1, 0, 0, 0, 0)
+Car.PutAt(99@, 2758.241, -2372.314, 12.6172)
+Car.Angle(99@) = 180.3774
+053F: set_car 99@ tires_vulnerability 0 
+Car.Health(99@) = 3000
+112@ = Actor.CreateAsDriver(Mission2, #ARMY, 99@)
+Model.Load(#PATRIOT)
+
+:RYDER2_8620
+if 
+   not Model.Available(#PATRIOT)
+jf @RYDER2_8647 
+wait 0 
+jump @RYDER2_8620 
+
+:RYDER2_8647
+98@ = Car.Create(#PATRIOT, 2688.963, -2407.676, 12.4609)
+Car.Angle(98@) = 270.0
+111@ = Actor.CreateAsDriver(Mission2, #ARMY, 98@)
+02C2: car 98@ drive_to 2712.854 -2407.825 12.4684 
+Model.Destroy(#PATRIOT)
+if 
+   not Actor.Dead(106@)
+jf @RYDER2_8779 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 2776.53 -2401.042 12.625 
+05D7: add_point_to_scmpath 2798.933 -2400.342 12.631 
+05D8: AS_assign_scmpath to_actor 106@ flags 4 3 
+
+:RYDER2_8779
+fade 1 500 
+
+:RYDER2_8786
+if 
+fading 
+jf @RYDER2_8810 
+wait 0 
+jump @RYDER2_8786 
+
+:RYDER2_8810
+32@ = 0 
+35@ += 1 
+
+:RYDER2_8824
+if 
+  35@ == 3 
+jf @RYDER2_9094 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_9094 
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_9094 
+if 
+01AF:   car 98@ sphere 0 in_sphere 2712.854 -2407.825 12.4684 radius 15.0 15.0 15.0 
+jf @RYDER2_9094 
+Camera.SetPosition(2700.626, -2392.21, 14.9203, 0.0, 0.0, 0.0)
+Camera.PointAt(2701.092, -2393.088, 14.8109, 2)
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_9019 
+02C2: car 99@ drive_to 2768.74 -2413.788 12.6172 
+04E0: car 99@ abandon_path_radius 200 
+
+:RYDER2_9019
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_9073 
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_9073 
+05C0: AS_actor $ACTOR_RYDER look_at_car 98@ 5000 ms 
+05C0: AS_actor $PLAYER_ACTOR look_at_car 98@ 6000 ms 
+
+:RYDER2_9073
+32@ = 0 
+49@ += 1 
+35@ += 1 
+
+:RYDER2_9094
+if 
+  35@ == 4 
+jf @RYDER2_9214 
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_9214 
+if 
+01B0:   car 98@ sphere 0 in_sphere 2712.854 -2407.825 12.4684 radius 4.0 4.0 4.0 stopped 
+jf @RYDER2_9214 
+35@ += 1 
+if 
+03CA:   object 240@ exists 
+jf @RYDER2_9207 
+097B: play_audio_at_object 240@ event 1126 
+
+:RYDER2_9207
+32@ = 0 
+
+:RYDER2_9214
+if 
+  35@ == 5 
+jf @RYDER2_9305 
+if 
+03CA:   object 240@ exists 
+jf @RYDER2_9305 
+if 
+034E: move_object 240@ to 248@ 249@ 250@ speed 0.0 0.2 0.0 collision_check 0 
+jf @RYDER2_9305 
+35@ += 1 
+097B: play_audio_at_object 240@ event 1127 
+
+:RYDER2_9305
+if 
+  35@ == 6 
+jf @RYDER2_9479 
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_9479 
+Camera.SetPosition(2723.094, -2413.245, 14.2659, 0.0, 0.0, 0.0)
+Camera.PointAt(2722.548, -2412.414, 14.1704, 2)
+Car.DriveTo(98@, 2758.492, -2454.51, 12.4766)
+if 
+   not Actor.Dead(102@)
+jf @RYDER2_9436 
+Actor.Angle(102@) = 275.0
+
+:RYDER2_9436
+if 
+   not Actor.Dead(103@)
+jf @RYDER2_9465 
+05C0: AS_actor 103@ look_at_car 98@ 999999 ms 
+
+:RYDER2_9465
+35@ += 1 
+32@ = 0 
+
+:RYDER2_9479
+if 
+  35@ == 7 
+jf @RYDER2_9588 
+if 
+  32@ > 2500 
+jf @RYDER2_9588 
+Camera.SetPosition(2770.979, -2426.933, 13.3413, 0.0, 0.0, 0.0)
+Camera.PointAt(2771.185, -2425.977, 13.5536, 2)
+32@ = 0 
+201@ = 0 
+35@ += 1 
+
+:RYDER2_9588
+if 
+  35@ == 8 
+jf @RYDER2_9870 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_9805 
+if 
+01B0:   car 99@ sphere 0 in_sphere 2768.74 -2413.788 12.6172 radius 4.0 4.0 4.0 stopped 
+jf @RYDER2_9805 
+if 
+   not Actor.Dead(102@)
+jf @RYDER2_9805 
+0615: define_AS_pack_begin 48@ 
+06BA: AS_actor -1 turn_to_and_look_at 2774.267 -2423.22 14.3429 
+0605: actor -1 perform_animation "ATM" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 1000 
+05D3: AS_actor -1 goto_point 2773.722 -2423.388 12.6311 mode 4 time 5000 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 102@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+32@ = 0 
+35@ += 1 
+
+:RYDER2_9805
+if 
+  32@ > 10000 
+jf @RYDER2_9870 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_9870 
+Car.PutAt(99@, 2768.74, -2413.788, 12.6172)
+Car.Angle(99@) = 225.6142
+
+:RYDER2_9870
+if 
+  35@ == 9 
+jf @RYDER2_10100 
+if 
+   not Actor.Dead(102@)
+jf @RYDER2_10100 
+if 
+   Actor.Animation(102@) == "ATM"
+jf @RYDER2_10025 
+if 
+  201@ == 0 
+jf @RYDER2_9957 
+33@ = 0 
+201@ += 1 
+
+:RYDER2_9957
+if 
+  201@ == 1 
+jf @RYDER2_10025 
+if 
+  33@ > 500 
+jf @RYDER2_10025 
+if 
+03CA:   object 61@ exists 
+jf @RYDER2_10025 
+097B: play_audio_at_object 61@ event 1028 
+201@ += 1 
+
+:RYDER2_10025
+062E: get_actor 102@ task 1560 status_store_to 42@ // ret 7 if not found 
+if or
+04A4:   42@ == 7 // == constant 
+  32@ > 4000 
+jf @RYDER2_10100 
+32@ = 0 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_10093 
+097B: play_audio_at_object 241@ event 1035 
+
+:RYDER2_10093
+35@ += 1 
+
+:RYDER2_10100
+if 
+  35@ == 10 
+jf @RYDER2_10234 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_10234 
+if 
+034E: move_object 241@ to 251@ 252@ 253@ speed 0.0 0.0 0.1 collision_check 0 
+jf @RYDER2_10234 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_10234 
+Car.DriveTo(99@, 2785.354, -2416.744, 12.6187)
+32@ = 0 
+097B: play_audio_at_object 241@ event 1036 
+35@ += 1 
+
+:RYDER2_10234
+if 
+  35@ == 11 
+jf @RYDER2_10302 
+if 
+  32@ > 4000 
+jf @RYDER2_10302 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_10295 
+097B: play_audio_at_object 241@ event 1035 
+
+:RYDER2_10295
+35@ += 1 
+
+:RYDER2_10302
+if 
+  35@ == 12 
+jf @RYDER2_10393 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_10393 
+if 
+034E: move_object 241@ to 245@ 246@ 247@ speed 0.0 0.0 0.2 collision_check 0 
+jf @RYDER2_10393 
+097B: play_audio_at_object 241@ event 1036 
+35@ += 1 
+
+:RYDER2_10393
+if 
+  35@ == 13 
+jf @RYDER2_10444 
+if and
+  32@ > 2000 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_10444 
+35@ = 99 
+
+:RYDER2_10444
+if 
+  33@ > 1000 
+jf @RYDER2_11100 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_11100 
+0871: init_jump_table 49@ total_jumps 8 default_jump 0 @RYDER2_11100 jumps 0 @RYDER2_10609 1 @RYDER2_10686 2 @RYDER2_10707 3 @RYDER2_10784 4 @RYDER2_10861 5 @RYDER2_10938 6 @RYDER2_11036 
+0872: jump_table_jumps 7 @RYDER2_11036 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 -1 @RYDER2_11100 
+
+:RYDER2_10609
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DA' // s$  // ~z~This is the spot - National Guard Depot.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33814 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+040D: unload_wav 2 
+03CF: load_wav 33815 as 2 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_10686
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_10707
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DB' // s$  // ~z~Man, this shit look real serious.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33815 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33816 as 1 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_10784
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DC' // s$  // ~z~Are we up for this?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33816 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 33817 as 2 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_10861
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DD' // s$  // ~z~It's National Guard, fool! Weekend soldiers!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33817 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33818 as 1 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_10938
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DE' // s$  // ~z~Ain't no match for Grove Street OGs!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33818 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 33819 as 2 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_11036
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_DF' // s$  // ~z~Now get in there and open the damn gate!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33819 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+49@ += 1 
+33@ = 0 
+jump @RYDER2_11100 
+
+:RYDER2_11100
+if 
+  35@ > 2 
+jf @RYDER2_11142 
+if 
+00E1:   player 0 pressed_key 16 
+jf @RYDER2_11142 
+35@ = 99 
+
+:RYDER2_11142
+if 
+  35@ == 99 
+jf @RYDER2_11717 
+fade 0 250 
+
+:RYDER2_11167
+if 
+fading 
+jf @RYDER2_11191 
+wait 0 
+jump @RYDER2_11167 
+
+:RYDER2_11191
+if 
+03CA:   object 240@ exists 
+jf @RYDER2_11215 
+097B: play_audio_at_object 240@ event 1127 
+
+:RYDER2_11215
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_11239 
+097B: play_audio_at_object 241@ event 1036 
+
+:RYDER2_11239
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_11329 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2700.758, -2392.45, 12.6172)
+Actor.Angle($PLAYER_ACTOR) = 236.0759
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_11329 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+036A: put_actor $ACTOR_RYDER in_car 95@ 
+
+:RYDER2_11329
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_11375 
+Car.PutAt(99@, 2791.426, -2418.31, 13.66)
+Car.Angle(99@) = 270.0
+
+:RYDER2_11375
+if 
+   not Actor.Dead(112@)
+jf @RYDER2_11396 
+Actor.DestroyInstantly(112@)
+
+:RYDER2_11396
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_11442 
+Car.PutAt(98@, 2748.055, -2394.427, 12.6419)
+Car.Angle(98@) = 174.3167
+
+:RYDER2_11442
+if 
+   not Actor.Dead(111@)
+jf @RYDER2_11463 
+Actor.DestroyInstantly(111@)
+
+:RYDER2_11463
+Object.PutAt(240@, 242@, 243@, 244@)
+Object.PutAt(241@, 245@, 246@, 247@)
+42@ = 0 
+
+:RYDER2_11498
+if 
+  25 > 42@ 
+jf @RYDER2_11607 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_11593 
+Object.KeepInMemory(62@(42@,25i)) = False
+Object.Throw(62@(42@,25i), 0.0, 0.0, 0.0)
+Object.ToggleInMovingList(62@(42@,25i)) = False
+Object.CollisionDetection(62@(42@,25i)) = True
+
+:RYDER2_11593
+42@ += 1 
+jump @RYDER2_11498 
+
+:RYDER2_11607
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_11632 
+0689: set_car 95@ remove_door 1 removed_door_visible 0 
+
+:RYDER2_11632
+if 
+   not Actor.Dead(103@)
+jf @RYDER2_11653 
+0647: AS_actor 103@ clear_look_task 
+
+:RYDER2_11653
+06D0: enable_emergency_traffic 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 250 
+
+:RYDER2_11672
+if 
+fading 
+jf @RYDER2_11696 
+wait 0 
+jump @RYDER2_11672 
+
+:RYDER2_11696
+Player.CanMove($PLAYER_CHAR) = True
+35@ = 0 
+34@ += 1 
+
+:RYDER2_11717
+return 
+
+:RYDER2_11719
+if 
+  35@ == 0 
+jf @RYDER2_11939 
+if 
+03CA:   object 60@ exists 
+jf @RYDER2_11774 
+Object.CollisionDetection(60@) = True
+035D: set_object 60@ targetable 0 
+Object.KeepInMemory(60@) = True
+
+:RYDER2_11774
+if 
+03CA:   object 61@ exists 
+jf @RYDER2_11811 
+Object.CollisionDetection(61@) = True
+035D: set_object 61@ targetable 0 
+Object.KeepInMemory(61@) = True
+
+:RYDER2_11811
+00BB: show_text_lowpriority GXT 'RY2_59' time 7000 flag 1  // ~s~Open the front gate by shooting the ~r~switch~s~ on the other side of the wall.
+Marker.Disable(122@)
+018A: 122@ = create_checkpoint_at 2722.075 -2411.271 12.6198 
+Marker.SetColor(122@, 0)
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_11889 
+Car.LockInCurrentPosition(95@) = True
+Car.DoorStatus(95@) = 3
+
+:RYDER2_11889
+191@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_11925 
+05BF: AS_actor $ACTOR_RYDER look_at_actor $PLAYER_ACTOR 99999 ms 
+
+:RYDER2_11925
+142@ = 0 
+35@ += 1 
+
+:RYDER2_11939
+if 
+  35@ == 1 
+jf @RYDER2_12537 
+if 
+  133@ == 2 
+jf @RYDER2_12134 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_12127 
+Marker.Disable(122@)
+07C0: load_path 523 
+
+:RYDER2_12001
+if 
+87C1:   not path 523 available 
+jf @RYDER2_12028 
+wait 0 
+jump @RYDER2_12001 
+
+:RYDER2_12028
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_12052 
+05EB: assign_car 95@ to_path 523 
+
+:RYDER2_12052
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_12073 
+0647: AS_actor $ACTOR_RYDER clear_look_task 
+
+:RYDER2_12073
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_GA' // s$  // ~z~Nice job, CJ, thought that was a suicide mission for sure!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33823 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+wait 100 
+35@ = 99 
+
+:RYDER2_12127
+jump @RYDER2_12537 
+
+:RYDER2_12134
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_12396 
+if 
+0206:   actor $PLAYER_ACTOR near_car 95@ radius 5.0 5.0 3.0 flag 0 on_foot 
+jf @RYDER2_12396 
+if 
+00E1:   player 0 pressed_key 15 
+jf @RYDER2_12396 
+if 
+  190@ == 0 
+jf @RYDER2_12303 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_12289 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_EA' // s$  // ~z~Go open the motherfucking gate, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33820 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+142@ = 0 
+
+:RYDER2_12289
+190@ += 1 
+jump @RYDER2_12396 
+
+:RYDER2_12303
+if 
+  190@ == 1 
+jf @RYDER2_12396 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_12389 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_EB' // s$  // ~z~Get over that wall and open the damned gate!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33821 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+142@ = 0 
+
+:RYDER2_12389
+190@ = 0 
+
+:RYDER2_12396
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_12537 
+if 
+0104:   actor $ACTOR_RYDER near_actor $PLAYER_ACTOR radius 20.0 20.0 20.0 sphere 0 
+jf @RYDER2_12537 
+if 
+  142@ > 40000 
+jf @RYDER2_12537 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_12537 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_FA' // s$  // ~z~Man, just shoot the switch next to the damn gate!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33822 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+142@ = 0 
+
+:RYDER2_12537
+if 
+   not 35@ == 99 
+jf @RYDER2_12806 
+if 
+  38@ == 9 
+jf @RYDER2_12806 
+if and
+   not 132@ == 0 
+  133@ == 0 
+jf @RYDER2_12693 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2785.89 -2417.98 14.36 radius 20.0 20.0 5.0 
+jf @RYDER2_12686 
+if 
+  51@ > 30000 
+jf @RYDER2_12686 
+336@ = 3 
+gosub @RYDER2_40248 
+51@ = 0 
+
+:RYDER2_12686
+jump @RYDER2_12806 
+
+:RYDER2_12693
+if and
+  133@ == 0 
+  132@ == 0 
+jf @RYDER2_12806 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2785.89 -2417.98 14.36 radius 20.0 20.0 5.0 
+jf @RYDER2_12806 
+if 
+  51@ > 30000 
+jf @RYDER2_12806 
+336@ = 3 
+gosub @RYDER2_40248 
+51@ = 0 
+
+:RYDER2_12806
+if 
+  35@ == 99 
+jf @RYDER2_12852 
+34@ += 1 
+35@ = 0 
+191@ = 0 
+336@ = 0 
+
+:RYDER2_12852
+return 
+
+:RYDER2_12854
+if 
+  35@ == 0 
+jf @RYDER2_13001 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_13001 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_13001 
+if 
+  132@ == 0 
+jf @RYDER2_12994 
+018A: 123@ = create_checkpoint_at 2773.101 -2423.418 12.6269 
+Marker.SetColor(123@, 0)
+00BB: show_text_lowpriority GXT 'RY2_60' time 7000 flag 1  // ~s~Open the warehouse door by shooting the ~r~switch~s~ on the wall.
+54@ = 0 
+49@ = 0 
+35@ += 1 
+jump @RYDER2_13001 
+
+:RYDER2_12994
+35@ += 1 
+
+:RYDER2_13001
+if 
+  35@ == 1 
+jf @RYDER2_13087 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_13087 
+if 
+860E:   not car 95@ assigned_to_path 
+jf @RYDER2_13087 
+Car.LockInCurrentPosition(95@) = True
+49@ = 0 
+54@ = 20000 
+35@ += 1 
+32@ = 0 
+
+:RYDER2_13087
+if 
+  35@ == 2 
+jf @RYDER2_13572 
+if 
+   not 132@ == 0 
+jf @RYDER2_13228 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_13221 
+Marker.Disable(123@)
+07C0: load_path 524 
+
+:RYDER2_13149
+if 
+87C1:   not path 524 available 
+jf @RYDER2_13176 
+wait 0 
+jump @RYDER2_13149 
+
+:RYDER2_13176
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_13200 
+05EB: assign_car 95@ to_path 524 
+
+:RYDER2_13200
+32@ = 0 
+49@ = 0 
+35@ += 1 
+
+:RYDER2_13221
+jump @RYDER2_13572 
+
+:RYDER2_13228
+if 
+  54@ > 20000 
+jf @RYDER2_13572 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_13572 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_RYDER radius 15.0 15.0 15.0 sphere 0 
+jf @RYDER2_13572 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_13572 
+0871: init_jump_table 49@ total_jumps 3 default_jump 0 @RYDER2_13572 jumps 0 @RYDER2_13380 1 @RYDER2_13444 2 @RYDER2_13508 -1 @RYDER2_13572 -1 @RYDER2_13572 -1 @RYDER2_13572 -1 @RYDER2_13572 
+
+:RYDER2_13380
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_GB' // s$  // ~z~Now open the warehouse and keep these motherfuckers busy!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33824 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ += 1 
+54@ = 0 
+jump @RYDER2_13572 
+
+:RYDER2_13444
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LA' // s$  // ~z~C'mon, CJ, we don't have all day!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33833 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ += 1 
+54@ = 0 
+jump @RYDER2_13572 
+
+:RYDER2_13508
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LE' // s$  // ~z~What you playing at, CJ?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33837 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 0 
+54@ = 0 
+jump @RYDER2_13572 
+
+:RYDER2_13572
+if 
+  35@ == 3 
+jf @RYDER2_13749 
+49@ = 0 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_13749 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_13699 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_HA' // s$  // ~z~OK, we're in, move it, Ryder!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33825 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 0 
+35@ += 1 
+jump @RYDER2_13749 
+
+:RYDER2_13699
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_HB' // s$  // ~z~Yeah, open for business. Back that van up in here.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33826 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 0 
+35@ += 1 
+
+:RYDER2_13749
+if 
+  35@ == 4 
+jf @RYDER2_13837 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_13837 
+if 
+860E:   not car 95@ assigned_to_path 
+jf @RYDER2_13813 
+35@ = 99 
+jump @RYDER2_13837 
+
+:RYDER2_13813
+if 
+  32@ > 10600 
+jf @RYDER2_13837 
+05EC: release_car 95@ from_path 
+
+:RYDER2_13837
+if 
+  35@ == 99 
+jf @RYDER2_13899 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_13885 
+Car.LockInCurrentPosition(95@) = True
+09B0: set_car 95@ accessible_for_player_using_controller 0 
+
+:RYDER2_13885
+35@ = 0 
+34@ += 1 
+
+:RYDER2_13899
+if 
+  191@ == 0 
+jf @RYDER2_14021 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_14021 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_14021 
+if 
+   not Actor.InCar($ACTOR_RYDER, 95@)
+jf @RYDER2_14021 
+if 
+060E:   car 95@ assigned_to_path 
+jf @RYDER2_13996 
+05ED: freeze_car 95@ while_on_path 
+Car.LockInCurrentPosition(95@) = True
+
+:RYDER2_13996
+05CB: AS_actor $ACTOR_RYDER enter_car 95@ as_driver 10000 ms 
+32@ = 0 
+191@ += 1 
+
+:RYDER2_14021
+if 
+  191@ == 1 
+jf @RYDER2_14151 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_14125 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_14125 
+if 
+   Actor.InCar($ACTOR_RYDER, 95@)
+jf @RYDER2_14125 
+if 
+060E:   car 95@ assigned_to_path 
+jf @RYDER2_14118 
+05EE: unfreeze_car 95@ while_on_path 
+Car.LockInCurrentPosition(95@) = False
+
+:RYDER2_14118
+191@ = 0 
+
+:RYDER2_14125
+if 
+  32@ > 10000 
+jf @RYDER2_14151 
+191@ = 0 
+
+:RYDER2_14151
+return 
+
+:RYDER2_14153
+if 
+  58@ == 1 
+jf @RYDER2_14196 
+if 
+00E1:   player 0 pressed_key 19 
+jf @RYDER2_14196 
+0085: 127@ = 200@ // (int) 
+
+:RYDER2_14196
+if 
+  35@ == 0 
+jf @RYDER2_14618 
+04ED: load_animation "RYDER" 
+
+:RYDER2_14223
+if 
+84EE:   not animation "RYDER" loaded 
+jf @RYDER2_14254 
+wait 0 
+jump @RYDER2_14223 
+
+:RYDER2_14254
+266@ = 0 
+008A: $6892 = 200@ // (int) 
+04F7: status_text $6892 type 0 line 2 GXT 'RY2_21' // global_variable  // Boxes
+04F7: status_text $6891 type 1 line 1 GXT 'RY2_19' // global_variable  // Ryder
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_14427 
+if 
+   Car.Id(95@) == #MULE
+jf @RYDER2_14398 
+0407: store_coords_to 260@ 261@ 262@ from_car 95@ with_offset 0.0 -5.5 0.6 
+0407: store_coords_to 263@ 264@ 265@ from_car 95@ with_offset 3.0 5.5 0.6 
+
+:RYDER2_14398
+01EC: make_car 95@ very_heavy 1 
+03AB: set_car 95@ strong 1 
+Car.Health(95@) = 2500
+Car.DoorStatus(95@) = 3
+
+:RYDER2_14427
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_14500 
+0708: reset_decision_maker 235@ event 12 
+077A: set_actor $ACTOR_RYDER acquaintance 0 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor $ACTOR_RYDER acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 1 1 1 
+if 
+075C:   marker 119@ enabled 
+jf @RYDER2_14500 
+Marker.Disable(119@)
+
+:RYDER2_14500
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_14571 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_14571 
+00BB: show_text_lowpriority GXT 'RY2_55' time 5000 flag 1  // ~s~Get in the ~b~forklift~s~ truck.
+Marker.Disable(119@)
+119@ = Marker.CreateAboveCar(99@)
+07E0: set_marker 119@ type_to 1 
+
+:RYDER2_14571
+197@ = 1 
+267@ = 0 
+54@ = -4000 
+49@ = 0 
+32@ = 0 
+wait 0 
+35@ += 1 
+
+:RYDER2_14618
+if 
+  267@ == 0 
+jf @RYDER2_14698 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_14698 
+if 
+044B:   actor $ACTOR_RYDER on_foot 
+jf @RYDER2_14698 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_14698 
+Car.LockInCurrentPosition(95@) = True
+267@ = 1 
+
+:RYDER2_14698
+if 
+  266@ == 0 
+jf @RYDER2_14802 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_14795 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_KB' // s$  // ~z~I'll watch our backs while you use the forklift to collect the crates.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33831 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+266@ = 1 
+32@ = 0 
+
+:RYDER2_14795
+jump @RYDER2_14864 
+
+:RYDER2_14802
+if 
+  266@ == 1 
+jf @RYDER2_14864 
+if 
+  32@ > 1000 
+jf @RYDER2_14864 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_14864 
+266@ = 2 
+
+:RYDER2_14864
+if 
+  35@ == 1 
+jf @RYDER2_15026 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_15026 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_15026 
+if and
+   Actor.InCar($PLAYER_ACTOR, 99@)
+  266@ == 2 
+jf @RYDER2_14989 
+if 
+  1 > 268@ 
+jf @RYDER2_14964 
+268@ = 1 
+
+:RYDER2_14964
+35@ += 1 
+32@ = 0 
+wait 0 
+jump @RYDER2_15026 
+
+:RYDER2_14989
+if 
+   Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_15026 
+03D5: remove_text 'RY2_55'  // ~s~Get in the ~b~forklift~s~ truck.
+268@ = 1 
+
+:RYDER2_15026
+if and
+  268@ > 0 
+  5 > 268@ 
+jf @RYDER2_15234 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_15234 
+if 
+   Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_15232 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_15225 
+0871: init_jump_table 268@ total_jumps 3 default_jump 0 @RYDER2_15218 jumps 1 @RYDER2_15164 2 @RYDER2_15182 3 @RYDER2_15200 -1 @RYDER2_15218 -1 @RYDER2_15218 -1 @RYDER2_15218 -1 @RYDER2_15218 
+
+:RYDER2_15164
+03E5: show_text_box 'RY2_69'  // Position the forks below the box then raise the forks to lift the box.
+jump @RYDER2_15218 
+
+:RYDER2_15182
+03E5: show_text_box 'RY2_68'  // Use ~k~~VEHICLE_TURRETUP~ and ~k~~VEHICLE_TURRETDOWN~ to control the truck's forks.
+jump @RYDER2_15218 
+
+:RYDER2_15200
+03E5: show_text_box 'RY2_71'  // Use ~k~~VEHICLE_LOOKLEFT~ and ~k~~VEHICLE_LOOKRIGHT~ to look left and right.
+jump @RYDER2_15218 
+
+:RYDER2_15218
+268@ += 1 
+
+:RYDER2_15225
+jump @RYDER2_15234 
+
+:RYDER2_15232
+03E6: remove_text_box 
+
+:RYDER2_15234
+if 
+  35@ == 2 
+jf @RYDER2_15259 
+35@ += 3 
+
+:RYDER2_15259
+if 
+  35@ == 5 
+jf @RYDER2_15477 
+if and
+88FE:   not text_box_displayed 
+876F:   not text_priority_displayed 
+jf @RYDER2_15477 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_15477 
+if 
+  54@ > 1000 
+jf @RYDER2_15477 
+0871: init_jump_table 49@ total_jumps 2 default_jump 0 @RYDER2_15477 jumps 0 @RYDER2_15392 1 @RYDER2_15456 -1 @RYDER2_15477 -1 @RYDER2_15477 -1 @RYDER2_15477 -1 @RYDER2_15477 -1 @RYDER2_15477 
+
+:RYDER2_15392
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_KA' // s$  // ~z~OK, homie, let's load this shit up!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33830 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ += 1 
+54@ = 0 
+jump @RYDER2_15477 
+
+:RYDER2_15456
+49@ = 0 
+35@ += 1 
+jump @RYDER2_15477 
+
+:RYDER2_15477
+if 
+  35@ == 6 
+jf @RYDER2_15568 
+if 
+  54@ > 1000 
+jf @RYDER2_15568 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_15568 
+51@ = 0 
+33@ = 30000 
+142@ = 0 
+32@ = 0 
+35@ += 1 
+
+:RYDER2_15568
+if and
+  35@ > 5 
+  51@ > 30000 
+jf @RYDER2_15608 
+336@ = 1 
+51@ = 0 
+
+:RYDER2_15608
+if 
+  35@ == 8 
+jf @RYDER2_16035 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_16035 
+if and
+88FE:   not text_box_displayed 
+876F:   not text_priority_displayed 
+jf @RYDER2_16035 
+192@ = 1 
+if 
+  142@ > 30000 
+jf @RYDER2_16035 
+0871: init_jump_table 143@ total_jumps 5 default_jump 0 @RYDER2_15996 jumps 0 @RYDER2_15746 1 @RYDER2_15796 2 @RYDER2_15846 3 @RYDER2_15896 4 @RYDER2_15946 -1 @RYDER2_15996 -1 @RYDER2_15996 
+
+:RYDER2_15746
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LA' // s$  // ~z~C'mon, CJ, we don't have all day!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33833 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_15996 
+
+:RYDER2_15796
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LB' // s$  // ~z~Get a move on, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33834 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_15996 
+
+:RYDER2_15846
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LC' // s$  // ~z~Shit's getting hot, get a move on!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33835 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_15996 
+
+:RYDER2_15896
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LD' // s$  // ~z~Giddy up, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33836 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_15996 
+
+:RYDER2_15946
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LE' // s$  // ~z~What you playing at, CJ?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33837 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_15996 
+
+:RYDER2_15996
+143@ += 1 
+if 
+  143@ > 4 
+jf @RYDER2_16028 
+143@ = 0 
+
+:RYDER2_16028
+142@ = 0 
+
+:RYDER2_16035
+if 
+075C:   marker 119@ enabled 
+jf @RYDER2_16109 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_16102 
+if 
+   Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_16102 
+03D5: remove_text 'RY2_55'  // ~s~Get in the ~b~forklift~s~ truck.
+Marker.Disable(119@)
+
+:RYDER2_16102
+jump @RYDER2_16278 
+
+:RYDER2_16109
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_16278 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_16208 
+Marker.Disable(119@)
+119@ = Marker.CreateAboveCar(99@)
+07E0: set_marker 119@ type_to 1 
+if 
+075C:   marker 120@ enabled 
+jf @RYDER2_16185 
+Marker.Disable(120@)
+
+:RYDER2_16185
+00BB: show_text_lowpriority GXT 'RY2_55' time 5000 flag 1  // ~s~Get in the ~b~forklift~s~ truck.
+jump @RYDER2_16278 
+
+:RYDER2_16208
+if 
+  35@ >= 1 
+jf @RYDER2_16278 
+if 
+875C:   not marker 120@ enabled 
+jf @RYDER2_16278 
+Marker.Disable(120@)
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_16278 
+120@ = Marker.CreateAboveCar(95@)
+07E0: set_marker 120@ type_to 1 
+
+:RYDER2_16278
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_17240 
+if 
+  134@ == 0 
+jf @RYDER2_16550 
+062E: get_actor $ACTOR_RYDER task 1560 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_16550 
+
+:RYDER2_16341
+if 
+84EE:   not animation "COLT45" loaded 
+jf @RYDER2_16383 
+04ED: load_animation "COLT45" 
+wait 0 
+jump @RYDER2_16341 
+
+:RYDER2_16383
+0615: define_AS_pack_begin 48@ 
+05D3: AS_actor -1 goto_point 263@ 264@ 265@ mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0638: AS_actor -1 stay_put 1 
+0605: actor -1 perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0605: actor -1 perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0605: actor -1 perform_animation "COLT45_RELOAD" IFP "COLT45" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_16550
+42@ = 0 
+
+:RYDER2_16557
+if 
+  25 > 42@ 
+jf @RYDER2_16836 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_16822 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_16822 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 95@ with_offset 0.0 -2.61 1.04 
+if 
+04E6:   object 62@(42@,25i) near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.71 1.0 1.12 flag 0 
+jf @RYDER2_16822 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_16822 
+if 
+   Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_16822 
+if 
+844B:   not actor $PLAYER_ACTOR on_foot 
+jf @RYDER2_16822 
+if 
+0448:   actor $PLAYER_ACTOR in_car 99@ 
+jf @RYDER2_16822 
+if 
+  270@ == 0 
+jf @RYDER2_16781 
+270@ = 1 
+
+:RYDER2_16781
+if 
+  56@ > 500 
+jf @RYDER2_16822 
+0085: 272@ = 42@ // (int) 
+271@ += 1 
+56@ = 0 
+
+:RYDER2_16822
+42@ += 1 
+jump @RYDER2_16557 
+
+:RYDER2_16836
+if 
+  270@ == 0 
+jf @RYDER2_16861 
+56@ = 0 
+
+:RYDER2_16861
+if 
+   not 271@ == 0 
+jf @RYDER2_17240 
+0871: init_jump_table 271@ total_jumps 4 default_jump 0 @RYDER2_17240 jumps 1 @RYDER2_16942 2 @RYDER2_17065 3 @RYDER2_17105 4 @RYDER2_17190 -1 @RYDER2_17240 -1 @RYDER2_17240 -1 @RYDER2_17240 
+
+:RYDER2_16942
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_16971 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+036A: put_actor $PLAYER_ACTOR in_car 99@ 
+
+:RYDER2_16971
+02A3: enable_widescreen 1 
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetPosition(2767.481, -2410.592, 14.7201, 0.0, 0.0, 0.0)
+Camera.PointAt(2768.132, -2411.346, 14.6336, 2)
+Object.Destroy(62@(272@,25i))
+127@ += 1 
+271@ += 1 
+jump @RYDER2_17240 
+
+:RYDER2_17065
+if 
+  56@ > 1000 
+jf @RYDER2_17098 
+56@ = 0 
+271@ += 1 
+
+:RYDER2_17098
+jump @RYDER2_17240 
+
+:RYDER2_17105
+if 
+  56@ > 1000 
+jf @RYDER2_17138 
+271@ += 1 
+jump @RYDER2_17183 
+
+:RYDER2_17138
+if 
+  500 > 56@ 
+jf @RYDER2_17183 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_17183 
+Car.SetSpeedInstantly(99@, -5.0)
+
+:RYDER2_17183
+jump @RYDER2_17240 
+
+:RYDER2_17190
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+270@ = 0 
+271@ = 0 
+56@ = 0 
+269@ = 1 
+jump @RYDER2_17240 
+
+:RYDER2_17240
+if 
+  38@ == 7 
+jf @RYDER2_17709 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_17709 
+if and
+031D:   actor $ACTOR_RYDER hit_by_weapon 22 
+  57@ > 40000 
+jf @RYDER2_17709 
+273@ += 1 
+if 
+  273@ > 6 
+jf @RYDER2_17334 
+273@ = 1 
+
+:RYDER2_17334
+0871: init_jump_table 273@ total_jumps 6 default_jump 0 @RYDER2_17697 jumps 1 @RYDER2_17397 2 @RYDER2_17447 3 @RYDER2_17497 4 @RYDER2_17547 5 @RYDER2_17597 6 @RYDER2_17647 -1 @RYDER2_17697 
+
+:RYDER2_17397
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_MA' // s$  // ~z~Shit, CJ! Shit!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33842 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17447
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_MB' // s$  // ~z~CJ, help me, motherfucker!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33843 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17497
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_MC' // s$  // ~z~There's too many damned weekend soldiers!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33844 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17547
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_MD' // s$  // ~z~They're crawling out the woodwork!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33845 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17597
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_ME' // s$  // ~z~Punk-ass National Guard!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33846 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17647
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_MF' // s$  // ~z~Gimme a hand, CJ, I'm swamped!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33847 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_17697 
+
+:RYDER2_17697
+0467: clear_actor $ACTOR_RYDER last_weapon_damage 
+57@ = 0 
+
+:RYDER2_17709
+if and
+002D:   127@ >= 200@ // (int) 
+  271@ == 0 
+jf @RYDER2_17831 
+0151: remove_status_text $6892 
+if 
+   not 328@ == -1 
+jf @RYDER2_17824 
+if 
+03CA:   object 62@(328@,25i) exists 
+jf @RYDER2_17824 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_17824 
+if 
+0737:   actor $ACTOR_RYDER lifting_object 62@(328@,25i) 
+jf @RYDER2_17824 
+070B: set_actor $ACTOR_RYDER onbone_attached_object_operation 1 
+
+:RYDER2_17824
+35@ = 99 
+
+:RYDER2_17831
+if and
+  55@ > 30000 
+   not 35@ == 99 
+  1 > 202@ 
+jf @RYDER2_18256 
+if and
+  $AUDIO_LINE_IS_ACTIVE == 0 
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_18256 
+if 
+  38@ == 5 
+jf @RYDER2_18256 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2775.781 -2406.82 10.638 cornerB 2801.433 -2429.618 15.3143 
+jf @RYDER2_18256 
+42@ = 0 
+43@ = 0 
+
+:RYDER2_17966
+if 
+  25 > 42@ 
+jf @RYDER2_18104 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_18090 
+if 
+8366:   not object 62@(42@,25i) damaged 
+jf @RYDER2_18090 
+if 
+04EA:   object 62@(42@,25i) in_cube_cornerA 2774.308 -2405.28 12.6803 cornerB 2801.607 -2430.073 15.3896 flag 0 
+jf @RYDER2_18090 
+43@ += 1 
+42@ = 25 
+
+:RYDER2_18090
+42@ += 1 
+jump @RYDER2_17966 
+
+:RYDER2_18104
+if 
+  43@ == 0 
+jf @RYDER2_18256 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_18199 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LH' // s$  // ~z~There's more outside!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33840 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_18242 
+
+:RYDER2_18199
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LJ' // s$  // ~z~They got more crates outside, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33841 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+
+:RYDER2_18242
+55@ = 0 
+202@ += 1 
+
+:RYDER2_18256
+if 
+  35@ == 99 
+jf @RYDER2_18295 
+203@ = 1 
+35@ = 0 
+34@ += 1 
+
+:RYDER2_18295
+gosub @RYDER2_40248 
+0085: 306@ = 127@ // (int) 
+gosub @RYDER2_37207 
+return 
+
+:RYDER2_18319
+if 
+  35@ == 0 
+jf @RYDER2_18481 
+278@ = 0 
+279@ = 0 
+280@ = 0 
+281@ = 0 
+42@ = 0 
+
+:RYDER2_18372
+if 
+  10 > 42@ 
+jf @RYDER2_18415 
+282@(42@,10i) = 0 
+42@ += 1 
+jump @RYDER2_18372 
+
+:RYDER2_18415
+292@ = 0 
+293@ = 0 
+304@ = 4 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_18460 
+060B: set_actor $ACTOR_RYDER decision_maker_to 237@ 
+
+:RYDER2_18460
+49@ = 0 
+292@ = 0 
+35@ += 1 
+
+:RYDER2_18481
+if 
+  35@ == 1 
+jf @RYDER2_18827 
+296@ = 2765.999 
+297@ = -2419.777 
+298@ = 12.6396 
+0395: clear_area 1 at 296@ 297@ 298@ radius 1.5 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(2761.119, -2421.157, 14.5289, 0.0, 0.0, 0.0)
+Camera.PointAt(2762.002, -2420.691, 14.4766, 2)
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_18694 
+Actor.SetImmunities($ACTOR_RYDER, 1, 1, 1, 1, 1)
+0792: disembark_instantly_actor $ACTOR_RYDER 
+Actor.PutAt($ACTOR_RYDER, 296@, 297@, 298@)
+Actor.Angle($ACTOR_RYDER) = 270.0
+05D3: AS_actor $ACTOR_RYDER goto_point 2771.352 -2418.072 12.644 mode 6 time 5000 ms // versionA 
+
+:RYDER2_18694
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_18813 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_18770 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_ND' // s$  // ~z~C'mon, CJ, we got enough!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33851 // = constant 
+jump @RYDER2_18794 
+
+:RYDER2_18770
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NA' // s$  // ~z~OK, CJ, let's roll!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33848 // = constant 
+
+:RYDER2_18794
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+
+:RYDER2_18813
+32@ = 0 
+35@ += 1 
+
+:RYDER2_18827
+if 
+  35@ == 2 
+jf @RYDER2_18885 
+if and
+  32@ > 2500 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_18885 
+35@ += 1 
+32@ = 0 
+
+:RYDER2_18885
+if 
+  35@ == 3 
+jf @RYDER2_19388 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_19222 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_19222 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+0464: put_actor $ACTOR_RYDER into_turret_on_car 95@ at_car_offset 0.0 -3.0 0.9 position 2 shooting_angle_limit 180.0 with_weapon 0 
+0151: remove_status_text $6891 
+Actor.SetMaxHealth($ACTOR_RYDER, 350)
+Actor.Health($ACTOR_RYDER) = 350
+94@ = Object.Create(#NF_PED_COLL, 0.0, 0.0, 0.0)
+0681: attach_object 94@ to_car 95@ with_offset -0.5 -2.0 0.0 rotation 0.0 0.0 0.0 
+Actor.SetImmunities($ACTOR_RYDER, 1, 1, 1, 1, 1)
+08D2: object 94@ scale_model 0.5 
+Object.SetImmunities(94@, 0, 1, 1, 1, 0)
+299@ = 1000 
+292@ = 1 
+293@ = 1 
+0615: define_AS_pack_begin 48@ 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 2000 ms 
+0812: AS_actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 2000 // versionB 
+0812: AS_actor -1 perform_animation "VAN_STAND" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_19222
+Camera.SetPosition(2774.323, -2420.589, 14.8944, 0.0, 0.0, 0.0)
+Camera.PointAt(2773.441, -2420.132, 14.7784, 2)
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_19331 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NB' // s$  // ~z~CJ, get up front and drive us outta here!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33849 // = constant 
+jump @RYDER2_19355 
+
+:RYDER2_19331
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NC' // s$  // ~z~You got the con, CJ, take us out!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33850 // = constant 
+
+:RYDER2_19355
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+32@ = 0 
+35@ += 1 
+
+:RYDER2_19388
+if 
+  35@ == 4 
+jf @RYDER2_19585 
+if and
+  32@ > 2500 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_19585 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BC: show_text_highpriority GXT 'RY2_67' time 5000 flag 1  // ~s~Get in the ~b~van~s~.
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_19540 
+Marker.Disable(119@)
+Marker.Disable(119@)
+119@ = Marker.CreateAboveCar(95@)
+07E0: set_marker 119@ type_to 1 
+Car.SetImmunities(95@, 0, 0, 1, 0, 0)
+Car.LockInCurrentPosition(95@) = False
+09B0: set_car 95@ accessible_for_player_using_controller 1 
+Car.DoorStatus(95@) = 1
+
+:RYDER2_19540
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_19571 
+Actor.SetImmunities($ACTOR_RYDER, 0, 0, 0, 0, 0)
+
+:RYDER2_19571
+35@ += 1 
+32@ = 0 
+
+:RYDER2_19585
+if 
+  35@ == 5 
+jf @RYDER2_19997 
+43@ = 0 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_19958 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_19663 
+43@ = 1 
+09AD: set_vehicle_camera_mode 3 
+jump @RYDER2_19958 
+
+:RYDER2_19663
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_19958 
+if 
+  49@ == 0 
+jf @RYDER2_19958 
+if or
+  32@ > 30000 
+  43@ == 1 
+jf @RYDER2_19958 
+0209: 42@ = random_int_in_ranges 0 3 
+0871: init_jump_table 42@ total_jumps 3 default_jump 0 @RYDER2_19944 jumps 0 @RYDER2_19794 1 @RYDER2_19844 2 @RYDER2_19894 -1 @RYDER2_19944 -1 @RYDER2_19944 -1 @RYDER2_19944 -1 @RYDER2_19944 
+
+:RYDER2_19794
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NA' // s$  // ~z~OK, CJ, let's roll!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33848 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_19944 
+
+:RYDER2_19844
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NC' // s$  // ~z~You got the con, CJ, take us out!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33850 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_19944 
+
+:RYDER2_19894
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_ND' // s$  // ~z~C'mon, CJ, we got enough!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33851 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_19944 
+
+:RYDER2_19944
+49@ = 1 
+32@ = 0 
+
+:RYDER2_19958
+if 
+  43@ == 1 
+jf @RYDER2_19997 
+32@ = 0 
+54@ = 0 
+35@ += 1 
+
+:RYDER2_19997
+if 
+  35@ == 6 
+jf @RYDER2_21015 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_21015 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_21015 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_20650 
+Car.LockInCurrentPosition(95@) = False
+if 
+075C:   marker 119@ enabled 
+jf @RYDER2_20100 
+Marker.Disable(119@)
+
+:RYDER2_20100
+Marker.Disable(120@)
+if 
+875C:   not marker 120@ enabled 
+jf @RYDER2_20157 
+018A: 120@ = create_checkpoint_at 2454.626 -1972.534 12.5617 
+00BC: show_text_highpriority GXT 'RY2_66' time 6000 flag 1  // ~s~Head to the lock up in ~y~Willowfield~s~.
+
+:RYDER2_20157
+32@ = 0 
+Model.Load(#PATRIOT)
+Model.Load(#ARMY)
+
+:RYDER2_20174
+if or
+   not Model.Available(#PATRIOT)
+   not Model.Available(#ARMY)
+jf @RYDER2_20206 
+wait 0 
+jump @RYDER2_20174 
+
+:RYDER2_20206
+96@ = Car.Create(#PATRIOT, 2780.718, -2456.103, 12.6354)
+Car.Angle(96@) = 90.0
+01EC: make_car 96@ very_heavy 1 
+Car.DoorStatus(96@) = 3
+Car.SetImmunities(96@, 1, 1, 1, 1, 1)
+97@ = Car.Create(#PATRIOT, 2780.557, -2493.346, 12.6287)
+Car.Angle(97@) = 90.0
+01EC: make_car 97@ very_heavy 1 
+Car.DoorStatus(97@) = 3
+Car.SetImmunities(97@, 1, 1, 1, 1, 1)
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_20471 
+113@ = Actor.CreateAsDriver(Mission2, #ARMY, 96@)
+0688: AS_actor 113@ unknown_toggle_ped_threat_scanner 0 0 0 
+00AE: set_car 96@ traffic_behaviour_to 2 
+Car.SetMaxSpeed(96@, 50.0)
+Car.SetImmunities(96@, 0, 0, 0, 0, 0)
+0423: set_car 96@ improved_handling_to 2.0 // (float) 
+01EC: make_car 96@ very_heavy 1 
+Car.Health(96@) = 1300
+117@ = Actor.CreateAsPassenger(Mission2, #ARMY, 96@, 0)
+077A: set_actor 117@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 117@ decision_maker_to 237@ 
+Actor.GiveWeaponAndAmmo(117@, Pistol, 999999)
+
+:RYDER2_20471
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_20612 
+114@ = Actor.CreateAsDriver(Mission2, #ARMY, 97@)
+0688: AS_actor 114@ unknown_toggle_ped_threat_scanner 0 0 0 
+00AE: set_car 97@ traffic_behaviour_to 2 
+Car.SetMaxSpeed(97@, 50.0)
+Car.SetImmunities(97@, 0, 0, 0, 0, 0)
+0423: set_car 97@ improved_handling_to 2.0 // (float) 
+01EC: make_car 97@ very_heavy 1 
+Car.Health(97@) = 1300
+118@ = Actor.CreateAsPassenger(Mission2, #ARMY, 97@, 0)
+077A: set_actor 118@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 118@ decision_maker_to 237@ 
+Actor.GiveWeaponAndAmmo(118@, Pistol, 999999)
+
+:RYDER2_20612
+Model.Destroy(#PATRIOT)
+Model.Destroy(#ARMY)
+54@ = 0 
+49@ = 0 
+35@ += 1 
+jump @RYDER2_21015 
+
+:RYDER2_20650
+if 
+  54@ > 20000 
+jf @RYDER2_21015 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_21015 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_21015 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_RYDER radius 5.0 5.0 3.0 sphere 0 
+jf @RYDER2_21015 
+0209: 42@ = random_int_in_ranges 0 4 
+0871: init_jump_table 42@ total_jumps 4 default_jump 0 @RYDER2_21008 jumps 0 @RYDER2_20808 1 @RYDER2_20858 2 @RYDER2_20908 3 @RYDER2_20958 -1 @RYDER2_21008 -1 @RYDER2_21008 -1 @RYDER2_21008 
+
+:RYDER2_20808
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NA' // s$  // ~z~OK, CJ, let's roll!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33848 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 1 0 1 0 
+jump @RYDER2_21008 
+
+:RYDER2_20858
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NB' // s$  // ~z~CJ, get up front and drive us outta here!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33849 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 1 0 1 0 
+jump @RYDER2_21008 
+
+:RYDER2_20908
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_NC' // s$  // ~z~You got the con, CJ, take us out!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33850 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 1 0 1 0 
+jump @RYDER2_21008 
+
+:RYDER2_20958
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_ND' // s$  // ~z~C'mon, CJ, we got enough!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33851 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 1 0 1 0 
+jump @RYDER2_21008 
+
+:RYDER2_21008
+54@ = 0 
+
+:RYDER2_21015
+if 
+  35@ == 7 
+jf @RYDER2_21129 
+0400: store_coords_to 248@ 249@ 250@ from_object 258@ with_offset 0.0 0.0 4.0 
+0400: store_coords_to 251@ 252@ 253@ from_object 259@ with_offset 0.0 0.0 4.0 
+if 
+03CA:   object 258@ exists 
+jf @RYDER2_21115 
+097B: play_audio_at_object 258@ event 1035 
+
+:RYDER2_21115
+32@ = 0 
+35@ += 1 
+
+:RYDER2_21129
+if 
+  35@ == 8 
+jf @RYDER2_21270 
+if 
+  32@ > 1000 
+jf @RYDER2_21270 
+if and
+034E: move_object 258@ to 248@ 249@ 250@ speed 0.0 0.0 0.2 collision_check 0 
+034E: move_object 259@ to 251@ 252@ 253@ speed 0.0 0.0 0.15 collision_check 0 
+jf @RYDER2_21270 
+if 
+03CA:   object 258@ exists 
+jf @RYDER2_21263 
+097B: play_audio_at_object 258@ event 1036 
+
+:RYDER2_21263
+35@ += 1 
+
+:RYDER2_21270
+if 
+  35@ == 9 
+jf @RYDER2_21598 
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_21314 
+Car.SetSpeedInstantly(96@, 20.0)
+
+:RYDER2_21314
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_21340 
+Car.SetSpeedInstantly(97@, 20.0)
+
+:RYDER2_21340
+49@ = 0 
+50@ = 0 
+54@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 33854 as 1 
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_21442 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_21442 
+if 
+   not Actor.Dead(113@)
+jf @RYDER2_21442 
+06E1: AS_actor 113@ using_car 96@ target_car 95@ with_order 2 max_speed 50.0 traffic_flag 2 
+
+:RYDER2_21442
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_21510 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_21510 
+if 
+   not Actor.Dead(114@)
+jf @RYDER2_21510 
+06E1: AS_actor 114@ using_car 97@ target_car 95@ with_order 4 max_speed 50.0 traffic_flag 2 
+
+:RYDER2_21510
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_21584 
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_21584 
+072F: enable_car 96@ stuck_check_distance 1.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path -1 // extended 03CC 
+072F: enable_car 97@ stuck_check_distance 1.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path -1 // extended 03CC 
+
+:RYDER2_21584
+35@ += 1 
+32@ = 0 
+
+:RYDER2_21598
+if 
+  35@ == 10 
+jf @RYDER2_21765 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_21765 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_21708 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_OA' // s$  // ~z~They got a storage garage up in Willowfield! GO!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33852 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 0 
+jump @RYDER2_21751 
+
+:RYDER2_21708
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_OB' // s$  // ~z~LB's got us a spot in Willowfield - hit the gas!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33853 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 0 
+
+:RYDER2_21751
+32@ = 0 
+35@ += 1 
+
+:RYDER2_21765
+if 
+  35@ == 11 
+jf @RYDER2_22522 
+if 
+  32@ > 1000 
+jf @RYDER2_22522 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_22522 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_22522 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_22522 
+if 
+  54@ > 1000 
+jf @RYDER2_22522 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_22522 
+0871: init_jump_table 50@ total_jumps 8 default_jump 0 @RYDER2_22515 jumps 0 @RYDER2_22017 1 @RYDER2_22087 2 @RYDER2_22157 3 @RYDER2_22227 4 @RYDER2_22297 5 @RYDER2_22374 6 @RYDER2_22444 
+0872: jump_table_jumps 7 @RYDER2_22501 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 -1 @RYDER2_22515 
+
+:RYDER2_22017
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PA' // s$  // ~z~Damn, man, these idiots just don't give up!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33854 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 33855 as 2 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22087
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PB' // s$  // ~z~What's happening back there?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33855 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33856 as 1 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22157
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PC' // s$  // ~z~These part time soldiers got a chip on their shoulders!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33856 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 33857 as 2 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22227
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PD' // s$  // ~z~Nice rhymes, man.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33857 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33858 as 1 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22297
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PE' // s$  // ~z~Hey, we're real heavy, toss some crates!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33858 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 33859 as 2 
+50@ += 1 
+279@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22374
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PF' // s$  // ~z~A'ight, check it out.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33859 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33860 as 1 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22444
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_PG' // s$  // ~z~Sound the horn, I'll throw a crate at 'em.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33860 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+50@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22501
+35@ += 1 
+jump @RYDER2_22515 
+
+:RYDER2_22515
+54@ = 0 
+
+:RYDER2_22522
+if 
+  35@ == 12 
+jf @RYDER2_22547 
+35@ += 1 
+
+:RYDER2_22547
+if 
+  35@ == 13 
+jf @RYDER2_22625 
+03E5: show_text_box 'RY2_72'  // Press ~k~~VEHICLE_HORN~ to make Ryder throw a box.
+293@ = 0 
+32@ = 0 
+193@ = 0 
+194@ = 0 
+195@ = 0 
+49@ = 0 
+35@ += 1 
+
+:RYDER2_22625
+if 
+  35@ == 14 
+jf @RYDER2_24727 
+if 
+  193@ == 0 
+jf @RYDER2_22710 
+if 
+  32@ > 10000 
+jf @RYDER2_22710 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_22710 
+053F: set_car 95@ tires_vulnerability 1 
+193@ = 1 
+
+:RYDER2_22710
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_22828 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_22828 
+if 
+01AF:   car 95@ sphere 1 in_sphere 2454.626 -1972.534 12.5617 radius 4.0 4.0 4.0 
+jf @RYDER2_22828 
+if 
+09D0:   car 95@ on_wheels 
+jf @RYDER2_22828 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(120@)
+35@ = 99 
+
+:RYDER2_22828
+if 
+0735:   is_keyboard_key_pressed 137 
+jf @RYDER2_22880 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_22880 
+Car.PutAt(95@, 2454.626, -1972.534, 12.5617)
+
+:RYDER2_22880
+if 
+  195@ == 0 
+jf @RYDER2_23043 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_23043 
+if 
+01AD:   car 95@ sphere 0 near_point 2454.626 -1972.534 radius 40.0 40.0 
+jf @RYDER2_23043 
+if 
+056E:   car 96@ defined 
+jf @RYDER2_22973 
+Car.RemoveReferences(96@)
+
+:RYDER2_22973
+if 
+056D:   actor 113@ defined 
+jf @RYDER2_22994 
+Actor.RemoveReferences(113@)
+
+:RYDER2_22994
+if 
+056E:   car 97@ defined 
+jf @RYDER2_23015 
+Car.RemoveReferences(97@)
+
+:RYDER2_23015
+if 
+056D:   actor 114@ defined 
+jf @RYDER2_23036 
+Actor.RemoveReferences(114@)
+
+:RYDER2_23036
+195@ += 1 
+
+:RYDER2_23043
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_24521 
+if 
+  32@ > 20000 
+jf @RYDER2_24521 
+if 
+   not 194@ == 99 
+jf @RYDER2_24521 
+if 
+  54@ > 1000 
+jf @RYDER2_24521 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_24521 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_24521 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_RYDER radius 15.0 15.0 5.0 sphere 0 
+jf @RYDER2_24521 
+0871: init_jump_table 194@ total_jumps 10 default_jump 0 @RYDER2_24521 jumps 0 @RYDER2_23312 1 @RYDER2_23389 2 @RYDER2_23517 3 @RYDER2_23645 4 @RYDER2_23773 5 @RYDER2_23901 6 @RYDER2_24029 
+0872: jump_table_jumps 7 @RYDER2_24157 8 @RYDER2_24285 9 @RYDER2_24413 -1 @RYDER2_24521 -1 @RYDER2_24521 -1 @RYDER2_24521 -1 @RYDER2_24521 -1 @RYDER2_24521 -1 @RYDER2_24521 
+
+:RYDER2_23312
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SA' // s$  // ~z~I ain't rolling with you no more, man, 'til you off that water, homie.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33866 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 0 
+040D: unload_wav 2 
+03CF: load_wav 33867 as 2 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_23389
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SB' // s$  // ~z~It mess with your mind.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33867 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_23457 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+jump @RYDER2_23483 
+
+:RYDER2_23457
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 0 
+49@ = 0 
+
+:RYDER2_23483
+040D: unload_wav 1 
+03CF: load_wav 33868 as 1 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_23517
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SC' // s$  // ~z~Whatever you say, fool. You don't know what's going on.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33868 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_23585 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+jump @RYDER2_23611 
+
+:RYDER2_23585
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 0 
+
+:RYDER2_23611
+040D: unload_wav 2 
+03CF: load_wav 33869 as 2 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_23645
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SD' // s$  // ~z~And what that mean?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33869 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_23713 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+jump @RYDER2_23739 
+
+:RYDER2_23713
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 0 
+49@ = 0 
+
+:RYDER2_23739
+040D: unload_wav 1 
+03CF: load_wav 33870 as 1 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_23773
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SE' // s$  // ~z~I ain't listening to no more of your bullshit.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33870 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_23841 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+jump @RYDER2_23867 
+
+:RYDER2_23841
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 0 
+
+:RYDER2_23867
+040D: unload_wav 2 
+03CF: load_wav 33871 as 2 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_23901
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SF' // s$  // ~z~We got the guns. You ain't no gangster, homie.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33871 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_23969 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+jump @RYDER2_23995 
+
+:RYDER2_23969
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 0 
+49@ = 0 
+
+:RYDER2_23995
+040D: unload_wav 1 
+03CF: load_wav 33872 as 1 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_24029
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SG' // s$  // ~z~You want it smooth? You don't want no trouble. I keep it real.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33872 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_24097 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+jump @RYDER2_24123 
+
+:RYDER2_24097
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 0 
+
+:RYDER2_24123
+040D: unload_wav 2 
+03CF: load_wav 33873 as 2 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_24157
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SH' // s$  // ~z~You wouldn't know real if it came and hit you in your cheeks, homie,
+04AE: $ACTOR_SPEECH_WAV_FILE = 33873 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_24225 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+jump @RYDER2_24251 
+
+:RYDER2_24225
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 0 
+49@ = 0 
+
+:RYDER2_24251
+040D: unload_wav 1 
+03CF: load_wav 33874 as 1 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_24285
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SJ' // s$  // ~z~which it could do, if it gave you a hit first.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33874 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_24353 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 1 
+jump @RYDER2_24379 
+
+:RYDER2_24353
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 1 0 
+49@ = 0 
+
+:RYDER2_24379
+040D: unload_wav 2 
+03CF: load_wav 33875 as 2 
+194@ += 1 
+54@ = 0 
+jump @RYDER2_24521 
+
+:RYDER2_24413
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_SK' // s$  // ~z~I ain't listening to you, Carl.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33875 // = constant 
+if 
+  49@ == 0 
+jf @RYDER2_24481 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+jump @RYDER2_24507 
+
+:RYDER2_24481
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 0 
+49@ = 0 
+
+:RYDER2_24507
+194@ = 99 
+jump @RYDER2_24521 
+
+:RYDER2_24521
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_24727 
+if and
+   not 194@ > 0 
+   not 99 >= 194@ 
+jf @RYDER2_24727 
+if 
+  304@ == 0 
+jf @RYDER2_24727 
+293@ = 1 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_24670 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_RA' // s$  // ~z~I ain't throwing no more, we gotta keep some!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33864 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 1 
+jump @RYDER2_24720 
+
+:RYDER2_24670
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_RB' // s$  // ~z~Sorry, CJ, but we gotta keep some of these crates!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33865 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 1 
+
+:RYDER2_24720
+304@ -= 1 
+
+:RYDER2_24727
+if 
+  35@ == 99 
+jf @RYDER2_24791 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_24791 
+if 
+01C1:   car 95@ stopped 
+jf @RYDER2_24791 
+35@ = 0 
+34@ += 1 
+
+:RYDER2_24791
+gosub @RYDER2_37207 
+if 
+03CA:   object 94@ exists 
+jf @RYDER2_25072 
+071E: get_object 94@ health_to 42@ 
+if 
+001D:   299@ > 42@ // (int) 
+jf @RYDER2_25059 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_25059 
+42@ = Actor.Health($ACTOR_RYDER)
+42@ += -17 
+if 
+  1 > 42@ 
+jf @RYDER2_24897 
+42@ = 1 
+
+:RYDER2_24897
+Actor.Health($ACTOR_RYDER) = 42@
+if 
+  42@ == 1 
+jf @RYDER2_24928 
+05BE: AS_actor $ACTOR_RYDER die 
+
+:RYDER2_24928
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor $ACTOR_RYDER with_offset 0.5 0.2 0.4 
+0208: 207@ = random_float_in_ranges -1.0 1.0 
+0208: 208@ = random_float_in_ranges -1.0 1.0 
+0208: 209@ = random_float_in_ranges -1.0 1.0 
+if 
+056D:   actor $ACTOR_RYDER defined 
+jf @RYDER2_25059 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_25059 
+09B8: create_blood_gush_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 with_offset 207@ 208@ 209@ density 20 on_actor $ACTOR_RYDER 
+
+:RYDER2_25059
+0900: clear_object 94@ last_weapon_damage 
+071E: get_object 94@ health_to 299@ 
+
+:RYDER2_25072
+if 
+  292@ == 1 
+jf @RYDER2_27404 
+if 
+  293@ == 0 
+jf @RYDER2_25229 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_25229 
+if 
+  280@ == 0 
+jf @RYDER2_25205 
+if 
+00E1:   player 0 pressed_key 18 
+jf @RYDER2_25198 
+280@ = 1 
+if or
+  279@ == 0 
+  279@ == 3 
+jf @RYDER2_25198 
+279@ += 1 
+
+:RYDER2_25198
+jump @RYDER2_25229 
+
+:RYDER2_25205
+if 
+80E1:   not player 0 pressed_key 18 
+jf @RYDER2_25229 
+280@ = 0 
+
+:RYDER2_25229
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_25295 
+$TEMPVAR_ANGLE = Car.Angle(95@)
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_25287 
+$TEMPVAR_ANGLE += 180.0 
+Actor.Angle($ACTOR_RYDER) = $TEMPVAR_ANGLE
+
+:RYDER2_25287
+06BE: 274@ = car 95@ y_angle 
+
+:RYDER2_25295
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_25319 
+275@ = Car.Angle(95@)
+
+:RYDER2_25319
+0087: 277@ = 275@ // (float) 
+0063: 277@ -= 276@ // (float) 
+if 
+  -180.0 > 277@ 
+jf @RYDER2_25366 
+277@ += 360.0 
+
+:RYDER2_25366
+if 
+  277@ > 180.0 
+jf @RYDER2_25397 
+277@ += -360.0 
+
+:RYDER2_25397
+0087: 276@ = 275@ // (float) 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_27404 
+if 
+  279@ == 0 
+jf @RYDER2_26061 
+if 
+  -60.0 > 274@ 
+jf @RYDER2_25531 
+if 
+   not 278@ == 1 
+jf @RYDER2_25524 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_FALL_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 1 
+
+:RYDER2_25524
+jump @RYDER2_26054 
+
+:RYDER2_25531
+if 
+  274@ > 60.0 
+jf @RYDER2_25623 
+if 
+   not 278@ == 2 
+jf @RYDER2_25616 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_FALL_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 2 
+
+:RYDER2_25616
+jump @RYDER2_26054 
+
+:RYDER2_25623
+if 
+  -5.0 > 274@ 
+jf @RYDER2_25715 
+if 
+   not 278@ == 3 
+jf @RYDER2_25708 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_LEAN_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 3 
+
+:RYDER2_25708
+jump @RYDER2_26054 
+
+:RYDER2_25715
+if 
+  274@ > 5.0 
+jf @RYDER2_25807 
+if 
+   not 278@ == 4 
+jf @RYDER2_25800 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_LEAN_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 4 
+
+:RYDER2_25800
+jump @RYDER2_26054 
+
+:RYDER2_25807
+if 
+  -2.0 > 277@ 
+jf @RYDER2_25899 
+if 
+   not 278@ == 4 
+jf @RYDER2_25892 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_LEAN_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 4 
+
+:RYDER2_25892
+jump @RYDER2_26054 
+
+:RYDER2_25899
+if 
+  277@ > 2.0 
+jf @RYDER2_25991 
+if 
+   not 278@ == 3 
+jf @RYDER2_25984 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_LEAN_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 3 
+
+:RYDER2_25984
+jump @RYDER2_26054 
+
+:RYDER2_25991
+if 
+   not 278@ == 0 
+jf @RYDER2_26054 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_STAND" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 0 
+
+:RYDER2_26054
+jump @RYDER2_27404 
+
+:RYDER2_26061
+if 
+  279@ == 1 
+jf @RYDER2_26281 
+if 
+   not 278@ == 5 
+jf @RYDER2_26152 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_PICKUP_S" IFP "RYDER" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+278@ = 5 
+jump @RYDER2_26281 
+
+:RYDER2_26152
+062E: get_actor $ACTOR_RYDER task 2066 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_26281 
+Actor.StorePos($ACTOR_RYDER, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+281@ = Object.Create(#CM_BOX, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+070A: AS_actor $ACTOR_RYDER attach_to_object 281@ offset -0.096 0.246 0.142 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+Object.CollisionDetection(281@) = False
+306@ -= 1 
+304@ -= 1 
+279@ += 1 
+
+:RYDER2_26281
+if 
+  279@ == 2 
+jf @RYDER2_26408 
+if 
+   not 278@ == 6 
+jf @RYDER2_26372 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_PICKUP_E" IFP "RYDER" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+278@ = 6 
+jump @RYDER2_26408 
+
+:RYDER2_26372
+062E: get_actor $ACTOR_RYDER task 2066 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_26408 
+279@ += 1 
+
+:RYDER2_26408
+if 
+  279@ == 3 
+jf @RYDER2_27079 
+if 
+  -60.0 > 274@ 
+jf @RYDER2_26532 
+if 
+   not 278@ == 1 
+jf @RYDER2_26525 
+gosub @RYDER2_40057 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_FALL_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 1 
+279@ = 0 
+
+:RYDER2_26525
+jump @RYDER2_27079 
+
+:RYDER2_26532
+if 
+  274@ > 60.0 
+jf @RYDER2_26638 
+if 
+   not 278@ == 2 
+jf @RYDER2_26631 
+gosub @RYDER2_40057 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_FALL_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 2 
+279@ = 0 
+
+:RYDER2_26631
+jump @RYDER2_27079 
+
+:RYDER2_26638
+if 
+  -5.0 > 274@ 
+jf @RYDER2_26731 
+if 
+   not 278@ == 7 
+jf @RYDER2_26724 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_CRATE_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 7 
+
+:RYDER2_26724
+jump @RYDER2_27079 
+
+:RYDER2_26731
+if 
+  274@ > 5.0 
+jf @RYDER2_26824 
+if 
+   not 278@ == 8 
+jf @RYDER2_26817 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_CRATE_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 8 
+
+:RYDER2_26817
+jump @RYDER2_27079 
+
+:RYDER2_26824
+if 
+  -2.0 > 277@ 
+jf @RYDER2_26917 
+if 
+   not 278@ == 7 
+jf @RYDER2_26910 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_CRATE_R" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 7 
+
+:RYDER2_26910
+jump @RYDER2_27079 
+
+:RYDER2_26917
+if 
+  277@ > 2.0 
+jf @RYDER2_27010 
+if 
+   not 278@ == 8 
+jf @RYDER2_27003 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_CRATE_L" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 8 
+
+:RYDER2_27003
+jump @RYDER2_27079 
+
+:RYDER2_27010
+if 
+   not 278@ == 9 
+jf @RYDER2_27079 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_STAND_CRATE" IFP "RYDER" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 9 
+
+:RYDER2_27079
+if 
+  279@ == 4 
+jf @RYDER2_27248 
+if 
+   not 278@ == 10 
+jf @RYDER2_27167 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_THROW" IFP "RYDER" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+278@ = 10 
+jump @RYDER2_27248 
+
+:RYDER2_27167
+if 
+   Actor.Animation($ACTOR_RYDER) == "VAN_THROW"
+jf @RYDER2_27248 
+0613: 45@ = actor $ACTOR_RYDER animation "VAN_THROW" time 
+if 
+  45@ > 0.292 
+jf @RYDER2_27248 
+gosub @RYDER2_40057 
+279@ += 1 
+
+:RYDER2_27248
+if 
+  279@ == 5 
+jf @RYDER2_27404 
+062E: get_actor $ACTOR_RYDER task 2066 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_27404 
+if 
+   not 278@ == 0 
+jf @RYDER2_27358 
+0812: AS_actor $ACTOR_RYDER perform_animation "VAN_STAND" IFP "RYDER" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+278@ = 0 
+
+:RYDER2_27358
+if 
+  304@ > 0 
+jf @RYDER2_27390 
+279@ = 1 
+jump @RYDER2_27404 
+
+:RYDER2_27390
+279@ = 0 
+293@ = 1 
+
+:RYDER2_27404
+if 
+   not 292@ == 0 
+jf @RYDER2_27481 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_27481 
+42@ = Actor.Health($ACTOR_RYDER)
+if 
+  100 > 42@ 
+jf @RYDER2_27481 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+05BE: AS_actor $ACTOR_RYDER die 
+292@ = 0 
+
+:RYDER2_27481
+42@ = 0 
+
+:RYDER2_27488
+if 
+  5 > 42@ 
+jf @RYDER2_27845 
+if 
+03CA:   object 282@(42@,10i) exists 
+jf @RYDER2_27831 
+if 
+03CA:   object 282@(42@,10i) exists 
+jf @RYDER2_27625 
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_27625 
+if 
+0897:   car 96@ collided_with_object 282@(42@,10i) 
+jf @RYDER2_27625 
+Object.StorePos(282@(42@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Destroy(282@(42@,10i))
+020C: create_explosion_with_radius 11 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:RYDER2_27625
+if 
+03CA:   object 282@(42@,10i) exists 
+jf @RYDER2_27724 
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_27724 
+if 
+0897:   car 97@ collided_with_object 282@(42@,10i) 
+jf @RYDER2_27724 
+Object.StorePos(282@(42@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Destroy(282@(42@,10i))
+020C: create_explosion_with_radius 11 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:RYDER2_27724
+if 
+03CA:   object 282@(42@,10i) exists 
+jf @RYDER2_27831 
+071E: get_object 282@(42@,10i) health_to 43@ 
+if 
+  950 > 43@ 
+jf @RYDER2_27831 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_27831 
+Object.StorePos(282@(42@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Destroy(282@(42@,10i))
+020C: create_explosion_with_radius 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:RYDER2_27831
+42@ += 1 
+jump @RYDER2_27488 
+
+:RYDER2_27845
+if 
+  35@ > 4 
+jf @RYDER2_28014 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_28014 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_27962 
+if 
+075C:   marker 119@ enabled 
+jf @RYDER2_27919 
+Marker.Disable(119@)
+
+:RYDER2_27919
+if 
+875C:   not marker 120@ enabled 
+jf @RYDER2_27955 
+018A: 120@ = create_checkpoint_at 2454.626 -1972.534 12.5617 
+
+:RYDER2_27955
+jump @RYDER2_28014 
+
+:RYDER2_27962
+if 
+875C:   not marker 119@ enabled 
+jf @RYDER2_27993 
+119@ = Marker.CreateAboveCar(95@)
+07E0: set_marker 119@ type_to 1 
+
+:RYDER2_27993
+if 
+075C:   marker 120@ enabled 
+jf @RYDER2_28014 
+Marker.Disable(120@)
+
+:RYDER2_28014
+if 
+  35@ >= 13 
+jf @RYDER2_28446 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_28446 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_28446 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_28446 
+if and
+   not 194@ > 0 
+   not 99 >= 194@ 
+jf @RYDER2_28446 
+if 
+  54@ > 15000 
+jf @RYDER2_28446 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_28446 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_28446 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_RYDER radius 5.0 5.0 5.0 sphere 0 
+jf @RYDER2_28446 
+0209: 42@ = random_int_in_ranges 0 3 
+0871: init_jump_table 42@ total_jumps 3 default_jump 0 @RYDER2_28439 jumps 0 @RYDER2_28268 1 @RYDER2_28325 2 @RYDER2_28382 -1 @RYDER2_28439 -1 @RYDER2_28439 -1 @RYDER2_28439 -1 @RYDER2_28439 
+
+:RYDER2_28268
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_QA' // s$  // ~z~Where you going? Buster! BUSTER!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33861 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 1 
+jump @RYDER2_28439 
+
+:RYDER2_28325
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_QB' // s$  // ~z~Man, I knew you was a buster all along!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33862 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 1 
+jump @RYDER2_28439 
+
+:RYDER2_28382
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_QC' // s$  // ~z~You ain't changed, CJ. Buster! Still a busta!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33863 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+49@ = 1 
+jump @RYDER2_28439 
+
+:RYDER2_28439
+54@ = 0 
+
+:RYDER2_28446
+if 
+  38@ == 4 
+jf @RYDER2_28999 
+if 
+056E:   car 96@ defined 
+jf @RYDER2_28999 
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_28999 
+if 
+   not Actor.Dead(113@)
+jf @RYDER2_28568 
+if 
+   not Actor.InCar(113@, 96@)
+jf @RYDER2_28568 
+062E: get_actor 113@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_28568 
+05E2: AS_actor 113@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_28568
+if 
+   not Actor.Dead(117@)
+jf @RYDER2_28999 
+if 
+   Actor.InCar(117@, 96@)
+jf @RYDER2_28962 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_28955 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_28791 
+02E3: 45@ = car 95@ speed 
+if 
+  5.0 > 45@ 
+jf @RYDER2_28784 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_28784 
+if 
+0104:   actor 117@ near_actor $ACTOR_RYDER radius 40.0 40.0 20.0 sphere 0 
+jf @RYDER2_28784 
+062E: get_actor 117@ task 1811 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_28784 
+0713: actor 117@ driveby_actor -1 car 95@ point 0.0 0.0 0.0 radius 100.0 8 1 firing_rate 40 
+
+:RYDER2_28784
+jump @RYDER2_28955 
+
+:RYDER2_28791
+if 
+   not Actor.InCar($PLAYER_ACTOR, 96@)
+jf @RYDER2_28918 
+if 
+0104:   actor 117@ near_actor $PLAYER_ACTOR radius 40.0 40.0 20.0 sphere 0 
+jf @RYDER2_28911 
+062E: get_actor 117@ task 1811 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_28911 
+0713: actor 117@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 100.0 8 1 firing_rate 40 
+
+:RYDER2_28911
+jump @RYDER2_28955 
+
+:RYDER2_28918
+062E: get_actor 117@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_28955 
+05E2: AS_actor 117@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_28955
+jump @RYDER2_28999 
+
+:RYDER2_28962
+062E: get_actor 117@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_28999 
+05E2: AS_actor 117@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_28999
+if 
+  38@ == 8 
+jf @RYDER2_29552 
+if 
+056E:   car 97@ defined 
+jf @RYDER2_29552 
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_29552 
+if 
+   not Actor.Dead(114@)
+jf @RYDER2_29121 
+if 
+   not Actor.InCar(114@, 97@)
+jf @RYDER2_29121 
+062E: get_actor 114@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_29121 
+05E2: AS_actor 114@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_29121
+if 
+   not Actor.Dead(118@)
+jf @RYDER2_29552 
+if 
+   Actor.InCar(118@, 97@)
+jf @RYDER2_29515 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_29508 
+if 
+   Actor.InCar($PLAYER_ACTOR, 95@)
+jf @RYDER2_29344 
+02E3: 45@ = car 95@ speed 
+if 
+  5.0 > 45@ 
+jf @RYDER2_29337 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_29337 
+if 
+0104:   actor 118@ near_actor $ACTOR_RYDER radius 40.0 40.0 20.0 sphere 0 
+jf @RYDER2_29337 
+062E: get_actor 118@ task 1811 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_29337 
+0713: actor 118@ driveby_actor -1 car 95@ point 0.0 0.0 0.0 radius 100.0 8 1 firing_rate 60 
+
+:RYDER2_29337
+jump @RYDER2_29508 
+
+:RYDER2_29344
+if 
+   not Actor.InCar($PLAYER_ACTOR, 97@)
+jf @RYDER2_29471 
+if 
+0104:   actor 118@ near_actor $PLAYER_ACTOR radius 40.0 40.0 20.0 sphere 0 
+jf @RYDER2_29464 
+062E: get_actor 118@ task 1811 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_29464 
+0713: actor 118@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 100.0 8 1 firing_rate 60 
+
+:RYDER2_29464
+jump @RYDER2_29508 
+
+:RYDER2_29471
+062E: get_actor 118@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_29508 
+05E2: AS_actor 118@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_29508
+jump @RYDER2_29552 
+
+:RYDER2_29515
+062E: get_actor 118@ task 1506 status_store_to 42@ // ret 7 if not found 
+if 
+04A4:   42@ == 7 // == constant 
+jf @RYDER2_29552 
+05E2: AS_actor 118@ kill_actor $PLAYER_ACTOR 
+
+:RYDER2_29552
+if and
+  38@ == 0 
+  35@ > 10 
+jf @RYDER2_30032 
+if 
+056E:   car 96@ defined 
+jf @RYDER2_30032 
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_30032 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_30032 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 95@ with_offset 0.0 -20.0 0.0 
+if 
+81AD:   not car 96@ sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 40.0 40.0 
+jf @RYDER2_30032 
+if 
+82CA:   not car 96@ bounding_sphere_visible 
+jf @RYDER2_30032 
+42@ = 1 
+43@ = 0 
+
+:RYDER2_29718
+if 
+  43@ == 0 
+jf @RYDER2_29917 
+04D3: get_nearest_car_path_coords_from $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 type 42@ store_to 207@ 208@ 209@ 
+if and
+80C2:   not sphere_onscreen 207@ 208@ 209@ radius 5.0 
+838A:   not any_car_in_cube_cornerA 207@ 208@ 209@ cornerB 5.0 5.0 5.0 
+jf @RYDER2_29878 
+0509: 45@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 207@ 208@ 
+if 
+  45@ > 30.0 
+jf @RYDER2_29864 
+43@ = -1 
+jump @RYDER2_29871 
+
+:RYDER2_29864
+43@ = 1 
+
+:RYDER2_29871
+jump @RYDER2_29910 
+
+:RYDER2_29878
+42@ += 1 
+if 
+  42@ > 10 
+jf @RYDER2_29910 
+43@ = -1 
+
+:RYDER2_29910
+jump @RYDER2_29718 
+
+:RYDER2_29917
+if 
+  43@ == 1 
+jf @RYDER2_30032 
+Car.StorePos(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 294@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 294@ -= 207@ // (float) 
+0089: 295@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 295@ -= 208@ // (float) 
+0604: get_Z_angle_for_point 294@ 295@ store_to $TEMPVAR_ANGLE 
+0395: clear_area 1 at 207@ 208@ 209@ radius 5.0 
+Car.PutAt(96@, 207@, 208@, 209@)
+Car.Angle(96@) = $TEMPVAR_ANGLE
+
+:RYDER2_30032
+if and
+  38@ == 1 
+  35@ > 10 
+jf @RYDER2_30512 
+if 
+056E:   car 97@ defined 
+jf @RYDER2_30512 
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_30512 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_30512 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 95@ with_offset 0.0 -20.0 0.0 
+if 
+81AD:   not car 97@ sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 40.0 40.0 
+jf @RYDER2_30512 
+if 
+82CA:   not car 97@ bounding_sphere_visible 
+jf @RYDER2_30512 
+42@ = 1 
+43@ = 0 
+
+:RYDER2_30198
+if 
+  43@ == 0 
+jf @RYDER2_30397 
+04D3: get_nearest_car_path_coords_from $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 type 42@ store_to 207@ 208@ 209@ 
+if and
+80C2:   not sphere_onscreen 207@ 208@ 209@ radius 5.0 
+838A:   not any_car_in_cube_cornerA 207@ 208@ 209@ cornerB 5.0 5.0 5.0 
+jf @RYDER2_30358 
+0509: 45@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 207@ 208@ 
+if 
+  45@ > 30.0 
+jf @RYDER2_30344 
+43@ = -1 
+jump @RYDER2_30351 
+
+:RYDER2_30344
+43@ = 1 
+
+:RYDER2_30351
+jump @RYDER2_30390 
+
+:RYDER2_30358
+42@ += 1 
+if 
+  42@ > 10 
+jf @RYDER2_30390 
+43@ = -1 
+
+:RYDER2_30390
+jump @RYDER2_30198 
+
+:RYDER2_30397
+if 
+  43@ == 1 
+jf @RYDER2_30512 
+Car.StorePos(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 294@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 294@ -= 207@ // (float) 
+0089: 295@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 295@ -= 208@ // (float) 
+0604: get_Z_angle_for_point 294@ 295@ store_to $TEMPVAR_ANGLE 
+0395: clear_area 1 at 207@ 208@ 209@ radius 5.0 
+Car.PutAt(97@, 207@, 208@, 209@)
+Car.Angle(97@) = $TEMPVAR_ANGLE
+
+:RYDER2_30512
+return 
+
+:RYDER2_30514
+if 
+  35@ == 0 
+jf @RYDER2_31222 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:RYDER2_30546
+if 
+fading 
+jf @RYDER2_30570 
+wait 0 
+jump @RYDER2_30546 
+
+:RYDER2_30570
+Model.Load(#FAM1)
+Model.Load(#FAM2)
+
+:RYDER2_30578
+if or
+   not Model.Available(#FAM1)
+   not Model.Available(#FAM2)
+jf @RYDER2_30608 
+wait 0 
+jump @RYDER2_30578 
+
+:RYDER2_30608
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_30654 
+Car.PutAt(95@, 2455.708, -1972.858, 12.5469)
+Car.Angle(95@) = 343.4514
+
+:RYDER2_30654
+02A3: enable_widescreen 1 
+041D: set_camera_near_clip 0.1 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_30686 
+0687: clear_actor $ACTOR_RYDER task 
+
+:RYDER2_30686
+0395: clear_area 1 at 2447.901 -1980.542 12.8338 radius 20.0 
+Camera.SetPosition(2447.901, -1980.542, 12.8338, 0.0, 0.0, 0.0)
+Camera.PointAt(2448.484, -1979.735, 12.929, 2)
+if 
+   not Actor.Dead(113@)
+jf @RYDER2_30782 
+Actor.DestroyInstantly(113@)
+
+:RYDER2_30782
+if 
+   not Actor.Dead(114@)
+jf @RYDER2_30803 
+Actor.DestroyInstantly(114@)
+
+:RYDER2_30803
+if 
+   not Car.Wrecked(96@)
+jf @RYDER2_30824 
+Car.Destroy(96@)
+
+:RYDER2_30824
+if 
+   not Car.Wrecked(97@)
+jf @RYDER2_30845 
+Car.Destroy(97@)
+
+:RYDER2_30845
+115@ = Actor.Create(CivMale, #FAM1, 2448.476, -1980.751, 12.5947)
+116@ = Actor.Create(CivMale, #FAM2, 2447.553, -1979.883, 12.5947)
+Actor.Angle(115@) = 316.4611
+Actor.Angle(116@) = 319.2614
+060B: set_actor 115@ decision_maker_to 237@ 
+060B: set_actor 116@ decision_maker_to 237@ 
+Model.Destroy(#FAM1)
+Model.Destroy(#FAM2)
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_31083 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+if 
+03CA:   object 281@ exists 
+jf @RYDER2_30984 
+Object.Destroy(281@)
+
+:RYDER2_30984
+Actor.PutAt($ACTOR_RYDER, 2453.002, -1976.576, 12.5469)
+Actor.Angle($ACTOR_RYDER) = 5.1526
+Actor.SetWalkStyle($ACTOR_RYDER, "GANG1")
+0615: define_AS_pack_begin 48@ 
+05D3: AS_actor -1 goto_point 2452.702 -1972.939 12.5469 mode 4 time 10000 ms // versionA 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 3000 ms 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_31083
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2452.29, -1971.682, 12.5469)
+Actor.Angle($PLAYER_ACTOR) = 153.4741
+if 
+   not Actor.Dead(115@)
+jf @RYDER2_31145 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 115@ 4000 ms 
+
+:RYDER2_31145
+040D: unload_wav 1 
+040D: unload_wav 2 
+$AUDIO_LINE_IS_ACTIVE = 0 
+00BE: text_clear_all 
+49@ = 0 
+54@ = 1000 
+32@ = 0 
+fade 1 500 
+
+:RYDER2_31191
+if 
+fading 
+jf @RYDER2_31215 
+wait 0 
+jump @RYDER2_31191 
+
+:RYDER2_31215
+35@ += 1 
+
+:RYDER2_31222
+if 
+  35@ > 0 
+jf @RYDER2_32007 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_32007 
+if 
+  54@ > 1000 
+jf @RYDER2_32007 
+0871: init_jump_table 49@ total_jumps 4 default_jump 0 @RYDER2_32007 jumps 0 @RYDER2_31340 1 @RYDER2_31499 2 @RYDER2_31576 3 @RYDER2_31803 -1 @RYDER2_32007 -1 @RYDER2_32007 -1 @RYDER2_32007 
+
+:RYDER2_31340
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_TA' // s$  // ~z~That shit was tight!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33876 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+040D: unload_wav 2 
+03CF: load_wav 33877 as 2 
+49@ += 1 
+54@ = 0 
+if 
+   not Actor.Dead(115@)
+jf @RYDER2_31451 
+05D3: AS_actor 115@ goto_point 2451.915 -1977.506 12.5947 mode 4 time 10000 ms // versionA 
+
+:RYDER2_31451
+if 
+   not Actor.Dead(116@)
+jf @RYDER2_31492 
+05D3: AS_actor 116@ goto_point 2450.546 -1976.361 12.5947 mode 4 time 10000 ms // versionA 
+
+:RYDER2_31492
+jump @RYDER2_32007 
+
+:RYDER2_31499
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_TB' // s$  // ~z~Tight? Man, that shit was shit.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33877 // = constant 
+create_thread @AUDIOL $PLAYER_ACTOR 0 1 2 1 
+040D: unload_wav 1 
+03CF: load_wav 33878 as 1 
+49@ += 1 
+54@ = 0 
+jump @RYDER2_32007 
+
+:RYDER2_31576
+Camera.SetPosition(2450.046, -1966.412, 15.1296, 0.0, 0.0, 0.0)
+Camera.PointAt(2450.561, -1967.251, 14.9539, 2)
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_TC' // s$  // ~z~Man, you say you down for the homies, but all you do is complain.
+04AE: $ACTOR_SPEECH_WAV_FILE = 33878 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 1 
+040D: unload_wav 2 
+03CF: load_wav 34263 as 2 
+49@ += 1 
+54@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_31796 
+0615: define_AS_pack_begin 48@ 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time 2000 
+05D3: AS_actor -1 goto_point 2452.239 -1980.224 12.5469 mode 4 time 10000 ms // versionA 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_31796
+jump @RYDER2_32007 
+
+:RYDER2_31803
+if 
+   not Actor.Dead(115@)
+jf @RYDER2_31916 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYDX_DD' // s$ 
+04AE: $ACTOR_SPEECH_WAV_FILE = 34263 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 2 1 
+0615: define_AS_pack_begin 48@ 
+05B9: AS_actor -1 stay_idle 2000 ms 
+05D3: AS_actor -1 goto_point 2452.951 -1982.92 12.5469 mode 4 time 10000 ms // versionA 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 115@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_31916
+if 
+   not Actor.Dead(116@)
+jf @RYDER2_31986 
+0615: define_AS_pack_begin 48@ 
+05B9: AS_actor -1 stay_idle 1500 ms 
+05D3: AS_actor -1 goto_point 2452.006 -1983.186 12.5469 mode 4 time 10000 ms // versionA 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 116@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_31986
+49@ += 1 
+54@ = 0 
+jump @RYDER2_32007 
+
+:RYDER2_32007
+if 
+  35@ == 1 
+jf @RYDER2_32111 
+if and
+  49@ > 3 
+  54@ > 5000 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_32087 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+jf @RYDER2_32080 
+35@ += 1 
+
+:RYDER2_32080
+jump @RYDER2_32111 
+
+:RYDER2_32087
+if 
+00E1:   player 0 pressed_key 16 
+jf @RYDER2_32111 
+35@ += 1 
+
+:RYDER2_32111
+if 
+  35@ == 2 
+jf @RYDER2_32325 
+fade 0 1000 
+
+:RYDER2_32136
+if 
+fading 
+jf @RYDER2_32160 
+wait 0 
+jump @RYDER2_32136 
+
+:RYDER2_32160
+Actor.DestroyInstantly(115@)
+Actor.DestroyInstantly(116@)
+Actor.DestroyInstantly($ACTOR_RYDER)
+42@ = 0 
+
+:RYDER2_32182
+if 
+  5 > 42@ 
+jf @RYDER2_32243 
+if 
+03CA:   object 308@(42@,5i) exists 
+jf @RYDER2_32229 
+Object.Destroy(308@(42@,5i))
+
+:RYDER2_32229
+42@ += 1 
+jump @RYDER2_32182 
+
+:RYDER2_32243
+if 
+03CA:   object 313@ exists 
+jf @RYDER2_32264 
+Object.Destroy(313@)
+
+:RYDER2_32264
+040D: unload_wav 1 
+040D: unload_wav 2 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 1000 
+
+:RYDER2_32287
+if 
+fading 
+jf @RYDER2_32311 
+wait 0 
+jump @RYDER2_32287 
+
+:RYDER2_32311
+Player.CanMove($PLAYER_CHAR) = True
+36@ = 1 
+
+:RYDER2_32325
+return 
+
+:RYDER2_32327
+if 
+056D:   actor $ACTOR_RYDER defined 
+jf @RYDER2_32382 
+if 
+   Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_32382 
+37@ = 1 
+00BC: show_text_highpriority GXT 'RY2_22' time 5000 flag 1  // ~r~Ryder is history.
+
+:RYDER2_32382
+if 
+056E:   car 95@ defined 
+jf @RYDER2_32476 
+if 
+   Car.Wrecked(95@)
+jf @RYDER2_32476 
+if 
+  292@ == 1 
+jf @RYDER2_32453 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_32453 
+05BE: AS_actor $ACTOR_RYDER die 
+
+:RYDER2_32453
+37@ = 1 
+00BC: show_text_highpriority GXT 'RY2_25' time 5000 flag 1  // ~r~The van has been destroyed.
+
+:RYDER2_32476
+if 
+  6 > 34@ 
+jf @RYDER2_32595 
+if 
+056E:   car 99@ defined 
+jf @RYDER2_32595 
+if 
+   Car.Wrecked(99@)
+jf @RYDER2_32556 
+37@ = 1 
+00BC: show_text_highpriority GXT 'RY2_40' time 5000 flag 1  // ~r~Forklift truck is history.
+jump @RYDER2_32595 
+
+:RYDER2_32556
+if 
+02BF:   car 99@ sunk 
+jf @RYDER2_32595 
+37@ = 1 
+00BC: show_text_highpriority GXT 'RY2_40' time 5000 flag 1  // ~r~Forklift truck is history.
+
+:RYDER2_32595
+if and
+  34@ > 2 
+  6 > 34@ 
+jf @RYDER2_32944 
+if 
+  38@ == 6 
+jf @RYDER2_32944 
+42@ = 0 
+43@ = 0 
+
+:RYDER2_32652
+if 
+  25 > 42@ 
+jf @RYDER2_32777 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_32763 
+if 
+84E7:   not object 62@(42@,25i) in_water 
+jf @RYDER2_32763 
+Object.StorePos(62@(42@,25i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  $TEMPVAR_FLOAT_3 > 0.0 
+jf @RYDER2_32756 
+43@ += 1 
+
+:RYDER2_32756
+jump @RYDER2_32763 
+
+:RYDER2_32763
+42@ += 1 
+jump @RYDER2_32652 
+
+:RYDER2_32777
+if 
+001E:   $6892 > 43@ // (int) 
+jf @RYDER2_32944 
+0209: 42@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_32873 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LF' // s$  // ~z~Hey, quit smashing the crates!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33838 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+jump @RYDER2_32916 
+
+:RYDER2_32873
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LE' // s$  // ~z~What you playing at, CJ?
+04AE: $ACTOR_SPEECH_WAV_FILE = 33837 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+
+:RYDER2_32916
+wait 4000 
+00BC: show_text_highpriority GXT 'RY2_58' time 5000 flag 1  // ~r~Too many boxes were destroyed!
+37@ = 1 
+
+:RYDER2_32944
+if 
+  34@ >= 3 
+jf @RYDER2_33413 
+if 
+  133@ == 0 
+jf @RYDER2_33060 
+if 
+03CA:   object 60@ exists 
+jf @RYDER2_33053 
+if 
+0366:   object 60@ damaged 
+jf @RYDER2_33053 
+133@ += 1 
+00BE: text_clear_all 
+097B: play_audio_at_object 60@ event 1107 
+if 
+03CA:   object 240@ exists 
+jf @RYDER2_33053 
+097B: play_audio_at_object 240@ event 1126 
+
+:RYDER2_33053
+jump @RYDER2_33151 
+
+:RYDER2_33060
+if 
+  133@ == 1 
+jf @RYDER2_33151 
+if 
+03CA:   object 240@ exists 
+jf @RYDER2_33151 
+if 
+034E: move_object 240@ to 248@ 249@ 250@ speed 0.0 0.2 0.0 collision_check 0 
+jf @RYDER2_33151 
+097B: play_audio_at_object 240@ event 1127 
+133@ += 1 
+
+:RYDER2_33151
+if 
+  132@ == 0 
+jf @RYDER2_33291 
+if 
+03CA:   object 61@ exists 
+jf @RYDER2_33284 
+if 
+0366:   object 61@ damaged 
+jf @RYDER2_33284 
+if 
+03CA:   object 87@ exists 
+jf @RYDER2_33222 
+Object.Destroy(87@)
+
+:RYDER2_33222
+if 
+03CA:   object 88@ exists 
+jf @RYDER2_33243 
+Object.Destroy(88@)
+
+:RYDER2_33243
+097B: play_audio_at_object 61@ event 1107 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_33275 
+097B: play_audio_at_object 241@ event 1035 
+
+:RYDER2_33275
+00BE: text_clear_all 
+132@ += 1 
+
+:RYDER2_33284
+jump @RYDER2_33413 
+
+:RYDER2_33291
+if 
+  132@ == 1 
+jf @RYDER2_33413 
+if 
+03CA:   object 241@ exists 
+jf @RYDER2_33413 
+if 
+034E: move_object 241@ to 251@ 252@ 253@ speed 0.1 0.1 0.1 collision_check 0 
+jf @RYDER2_33413 
+097B: play_audio_at_object 241@ event 1036 
+if 
+   not 133@ == 0 
+jf @RYDER2_33398 
+Marker.Disable(120@)
+
+:RYDER2_33398
+132@ += 1 
+144@ = 30000 
+
+:RYDER2_33413
+if 
+  38@ == 0 
+jf @RYDER2_33508 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 2721.0 -2329.852 cornerB 2810.548 -2565.934 
+jf @RYDER2_33501 
+if 
+  126@ == 0 
+jf @RYDER2_33494 
+126@ = 1 
+
+:RYDER2_33494
+jump @RYDER2_33508 
+
+:RYDER2_33501
+126@ = 0 
+
+:RYDER2_33508
+008A: $6892 = 200@ // (int) 
+0066: $6892 -= 127@ // (int) 
+if 
+  0 > $6892 
+jf @RYDER2_33549 
+$6892 = 0 
+
+:RYDER2_33549
+if 
+  124@ == 1 
+jf @RYDER2_33662 
+if 
+  131@ == 0 
+jf @RYDER2_33662 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_33662 
+077A: set_actor $ACTOR_RYDER acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 0 1 0 
+0709: set_decision_maker 235@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+131@ = 1 
+
+:RYDER2_33662
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_33753 
+$6891 = Actor.Health($ACTOR_RYDER)
+008F: 45@ = integer $6891 to_float 
+45@ /= 500.0 
+45@ *= 100.0 
+if 
+  45@ > 100.0 
+jf @RYDER2_33745 
+45@ = 100.0 
+
+:RYDER2_33745
+0090: $6891 = float 45@ to_integer 
+
+:RYDER2_33753
+if 
+  124@ == 0 
+jf @RYDER2_34554 
+if 
+  38@ == 1 
+jf @RYDER2_34547 
+42@ = 0 
+
+:RYDER2_33796
+if 
+  5 > 42@ 
+jf @RYDER2_33890 
+if 
+   not Actor.Dead(102@(42@,9i))
+jf @RYDER2_33876 
+if or
+051A:   actor 102@(42@,9i) damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 102@(42@,9i) 
+jf @RYDER2_33876 
+124@ = 1 
+
+:RYDER2_33876
+42@ += 1 
+jump @RYDER2_33796 
+
+:RYDER2_33890
+if 
+  124@ == 0 
+jf @RYDER2_34479 
+42@ = 0 
+
+:RYDER2_33915
+if 
+  5 > 42@ 
+jf @RYDER2_34479 
+if 
+   not Actor.Dead(102@(42@,9i))
+jf @RYDER2_34465 
+if 
+  172@(42@,9i) == 0 
+jf @RYDER2_34217 
+if 
+  126@ == 1 
+jf @RYDER2_34217 
+if 
+0364:   actor 102@(42@,9i) spotted_actor $PLAYER_ACTOR 
+jf @RYDER2_34132 
+0635: AS_actor 102@(42@,9i) aim_at_actor $PLAYER_ACTOR 10000 ms 
+if 
+  300@ == 0 
+jf @RYDER2_34103 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_VA' // s$  // ~z~Hey, stop where you are!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33883 // = constant 
+create_thread @AUDIOL 102@(42@,9i) 0 1 1 0 
+300@ += 1 
+
+:RYDER2_34103
+181@(42@,9i) = 0 
+172@(42@,9i) += 1 
+jump @RYDER2_34217 
+
+:RYDER2_34132
+if 
+0105:   actor $PLAYER_ACTOR near_actor 102@(42@,9i) radius 5.0 5.0 2.0 sphere 0 on_foot 
+jf @RYDER2_34217 
+062E: get_actor 102@(42@,9i) task 1593 status_store_to 43@ // ret 7 if not found 
+if 
+04A4:   43@ == 7 // == constant 
+jf @RYDER2_34217 
+0639: AS_actor 102@(42@,9i) rotate_to_actor $PLAYER_ACTOR 
+
+:RYDER2_34217
+if 
+  172@(42@,9i) == 1 
+jf @RYDER2_34465 
+if 
+  181@(42@,9i) > 8000 
+jf @RYDER2_34429 
+if 
+  126@ == 1 
+jf @RYDER2_34422 
+0209: 43@ = random_int_in_ranges 0 2 
+if 
+  42@ == 0 
+jf @RYDER2_34361 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_VB' // s$  // ~z~We've got an intruder, sound the alarm!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33884 // = constant 
+create_thread @AUDIOL 102@(42@,9i) 0 1 1 0 
+jump @RYDER2_34408 
+
+:RYDER2_34361
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_VG' // s$  // ~z~SOUND THE ALARM!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33889 // = constant 
+create_thread @AUDIOL 102@(42@,9i) 0 1 1 0 
+
+:RYDER2_34408
+124@ = 1 
+42@ = 5 
+
+:RYDER2_34422
+jump @RYDER2_34465 
+
+:RYDER2_34429
+if 
+  126@ == 0 
+jf @RYDER2_34465 
+172@(42@,9i) = 0 
+300@ = 0 
+
+:RYDER2_34465
+42@ += 1 
+jump @RYDER2_33915 
+
+:RYDER2_34479
+if 
+  124@ == 1 
+jf @RYDER2_34547 
+42@ = 0 
+
+:RYDER2_34504
+if 
+  9 > 42@ 
+jf @RYDER2_34547 
+172@(42@,9i) = 0 
+42@ += 1 
+jump @RYDER2_34504 
+
+:RYDER2_34547
+jump @RYDER2_35435 
+
+:RYDER2_34554
+if 
+  9 > 38@ 
+jf @RYDER2_35435 
+if 
+   not Actor.Dead(102@(38@,9i))
+jf @RYDER2_35435 
+0871: init_jump_table 38@ total_jumps 4 default_jump 1 @RYDER2_35361 jumps 1 @RYDER2_34655 2 @RYDER2_34735 3 @RYDER2_34965 4 @RYDER2_35188 -1 @RYDER2_35435 -1 @RYDER2_35435 -1 @RYDER2_35435 
+
+:RYDER2_34655
+if 
+  172@(38@,9i) == 0 
+jf @RYDER2_34728 
+0615: define_AS_pack_begin 48@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 102@(38@,9i) to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+172@(38@,9i) += 1 
+
+:RYDER2_34728
+jump @RYDER2_35435 
+
+:RYDER2_34735
+if 
+  132@ == 1 
+jf @RYDER2_34958 
+if 
+  174@ == 0 
+jf @RYDER2_34889 
+077A: set_actor 104@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 104@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+0688: AS_actor 104@ unknown_toggle_ped_threat_scanner 0 0 0 
+0615: define_AS_pack_begin 48@ 
+05D3: AS_actor -1 goto_point 2785.752 -2413.019 12.6316 mode 6 time -2 ms // versionA 
+07BC: set_actor -1 decision_maker_to 236@ // AS_pack_version 
+0688: AS_actor -1 unknown_toggle_ped_threat_scanner 1 1 0 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 104@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+174@ += 1 
+
+:RYDER2_34889
+if 
+  174@ == 1 
+jf @RYDER2_34958 
+if 
+0104:   actor 104@ near_actor $PLAYER_ACTOR radius 5.0 5.0 5.0 sphere 0 
+jf @RYDER2_34958 
+05E2: AS_actor 104@ kill_actor $PLAYER_ACTOR 
+174@ += 1 
+
+:RYDER2_34958
+jump @RYDER2_35435 
+
+:RYDER2_34965
+if 
+  132@ == 1 
+jf @RYDER2_35181 
+if 
+  175@ == 0 
+jf @RYDER2_35112 
+077A: set_actor 105@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 105@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+0688: AS_actor 105@ unknown_toggle_ped_threat_scanner 0 0 0 
+0615: define_AS_pack_begin 48@ 
+05D3: AS_actor -1 goto_point 2786.663 -2422.235 12.634 mode 6 time -2 ms // versionA 
+07BC: set_actor -1 decision_maker_to 236@ // AS_pack_version 
+0688: AS_actor -1 unknown_toggle_ped_threat_scanner 1 1 0 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 105@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+
+:RYDER2_35112
+if 
+  175@ == 1 
+jf @RYDER2_35181 
+if 
+0104:   actor 105@ near_actor $PLAYER_ACTOR radius 5.0 5.0 5.0 sphere 0 
+jf @RYDER2_35181 
+05E2: AS_actor 105@ kill_actor $PLAYER_ACTOR 
+175@ += 1 
+
+:RYDER2_35181
+jump @RYDER2_35435 
+
+:RYDER2_35188
+if 
+  176@ == 0 
+jf @RYDER2_35285 
+0615: define_AS_pack_begin 48@ 
+05D3: AS_actor -1 goto_point 2764.928 -2402.124 12.625 mode 6 time -2 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+0634: AS_actor -1 attack_using_weapon_actor $PLAYER_ACTOR flags 1 perform_actions_after_time 3000 chance_of_action 90 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 106@ to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+176@ += 1 
+
+:RYDER2_35285
+if 
+  176@ == 1 
+jf @RYDER2_35354 
+if 
+0104:   actor 106@ near_actor $PLAYER_ACTOR radius 5.0 5.0 5.0 sphere 0 
+jf @RYDER2_35354 
+05E2: AS_actor 106@ kill_actor $PLAYER_ACTOR 
+176@ += 1 
+
+:RYDER2_35354
+jump @RYDER2_35435 
+
+:RYDER2_35361
+if 
+  172@(38@,9i) == 0 
+jf @RYDER2_35428 
+0615: define_AS_pack_begin 48@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 102@(38@,9i) to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+172@(38@,9i) += 1 
+
+:RYDER2_35428
+jump @RYDER2_35435 
+
+:RYDER2_35435
+if 
+  38@ == 2 
+jf @RYDER2_35934 
+42@ = 0 
+
+:RYDER2_35460
+if 
+  25 > 42@ 
+jf @RYDER2_35934 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_35920 
+if 
+0366:   object 62@(42@,25i) damaged 
+jf @RYDER2_35920 
+Object.StorePos(62@(42@,25i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+0685:   object 62@(42@,25i) attached 
+jf @RYDER2_35563 
+jump @RYDER2_35904 
+
+:RYDER2_35563
+if 
+  147@(42@,25i) == 1 
+jf @RYDER2_35617 
+032B: 210@(42@,25i) = create_weapon_pickup #COLT45 type 3 ammo 30 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @RYDER2_35904 
+
+:RYDER2_35617
+if 
+  147@(42@,25i) == 2 
+jf @RYDER2_35668 
+210@(42@,25i) = Pickup.Create(#BODYARMOUR, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+jump @RYDER2_35904 
+
+:RYDER2_35668
+if 
+  147@(42@,25i) == 3 
+jf @RYDER2_35722 
+032B: 210@(42@,25i) = create_weapon_pickup #GRENADE type 3 ammo 6 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @RYDER2_35904 
+
+:RYDER2_35722
+if 
+  147@(42@,25i) == 4 
+jf @RYDER2_35774 
+210@(42@,25i) = Pickup.Create(#HEALTH, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+jump @RYDER2_35904 
+
+:RYDER2_35774
+if 
+  147@(42@,25i) == 5 
+jf @RYDER2_35803 
+jump @RYDER2_35904 
+
+:RYDER2_35803
+if 
+  147@(42@,25i) == 6 
+jf @RYDER2_35857 
+032B: 210@(42@,25i) = create_weapon_pickup #MICRO_UZI type 3 ammo 30 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @RYDER2_35904 
+
+:RYDER2_35857
+if 
+  147@(42@,25i) == 7 
+jf @RYDER2_35904 
+032B: 210@(42@,25i) = create_weapon_pickup #CHROMEGUN type 3 ammo 30 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:RYDER2_35904
+145@ += 1 
+Object.Destroy(62@(42@,25i))
+
+:RYDER2_35920
+42@ += 1 
+jump @RYDER2_35460 
+
+:RYDER2_35934
+if 
+  197@ == 1 
+jf @RYDER2_36344 
+if 
+  196@ == 0 
+jf @RYDER2_36179 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_36172 
+if 
+   Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_36172 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_36172 
+if 
+860E:   not car 95@ assigned_to_path 
+jf @RYDER2_36172 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_36172 
+if 
+   not Actor.InCar($ACTOR_RYDER, 95@)
+jf @RYDER2_36172 
+if 
+01C1:   car 95@ stopped 
+jf @RYDER2_36172 
+196@ = 1 
+Car.LockInCurrentPosition(95@) = True
+099A: set_car 95@ collision_detection 0 
+if 
+83CA:   not object 93@ exists 
+jf @RYDER2_36172 
+Car.StorePos(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Car.Angle(95@)
+93@ = Object.Init(#FAKE_MULE_COL, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(93@) = $TEMPVAR_ANGLE
+
+:RYDER2_36172
+jump @RYDER2_36344 
+
+:RYDER2_36179
+if 
+  271@ == 0 
+jf @RYDER2_36344 
+if 
+   not Car.Wrecked(99@)
+jf @RYDER2_36246 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 99@)
+jf @RYDER2_36239 
+196@ = 0 
+
+:RYDER2_36239
+jump @RYDER2_36253 
+
+:RYDER2_36246
+196@ = 0 
+
+:RYDER2_36253
+if 
+  196@ == 0 
+jf @RYDER2_36344 
+if 
+03CA:   object 93@ exists 
+jf @RYDER2_36314 
+Object.StorePos(93@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(93@)
+Object.Destroy(93@)
+
+:RYDER2_36314
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_36344 
+099A: set_car 95@ collision_detection 1 
+Car.LockInCurrentPosition(95@) = False
+
+:RYDER2_36344
+if and
+  38@ == 3 
+  34@ >= 3 
+jf @RYDER2_36697 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_36697 
+if 
+03CA:   object 60@ exists 
+jf @RYDER2_36544 
+if 
+8366:   not object 60@ damaged 
+jf @RYDER2_36544 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 2722.114 -2412.055 12.6198 radius 2.0 2.0 2.0 on_foot 
+jf @RYDER2_36519 
+if 
+  301@ == 0 
+jf @RYDER2_36512 
+00BC: show_text_highpriority GXT 'RY2_61' time 5000 flag 1  // ~s~Shoot the ~r~switch~s~ to open the front gate.
+301@ += 1 
+
+:RYDER2_36512
+jump @RYDER2_36544 
+
+:RYDER2_36519
+if 
+   not 301@ == 0 
+jf @RYDER2_36544 
+301@ = 0 
+
+:RYDER2_36544
+if 
+03CA:   object 61@ exists 
+jf @RYDER2_36697 
+if 
+8366:   not object 61@ damaged 
+jf @RYDER2_36697 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 2773.101 -2423.418 12.6269 radius 2.0 2.0 2.0 on_foot 
+jf @RYDER2_36672 
+if 
+  302@ == 0 
+jf @RYDER2_36665 
+00BC: show_text_highpriority GXT 'RY2_62' time 5000 flag 1  // ~s~Shoot ~r~switch~s~ to open warehouse door.
+302@ += 1 
+
+:RYDER2_36665
+jump @RYDER2_36697 
+
+:RYDER2_36672
+if 
+   not 302@ == 0 
+jf @RYDER2_36697 
+302@ = 0 
+
+:RYDER2_36697
+if 
+  38@ == 4 
+jf @RYDER2_37115 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_37115 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_37115 
+if 
+060E:   car 95@ assigned_to_path 
+jf @RYDER2_37115 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 95@ with_offset 0.0 10.0 0.0 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 4.0 4.0 4.0 
+jf @RYDER2_37090 
+if 
+  303@ == 0 
+jf @RYDER2_37083 
+0209: 42@ = random_int_in_ranges 0 3 
+0871: init_jump_table 42@ total_jumps 3 default_jump 0 @RYDER2_37076 jumps 0 @RYDER2_36926 1 @RYDER2_36976 2 @RYDER2_37026 -1 @RYDER2_37076 -1 @RYDER2_37076 -1 @RYDER2_37076 -1 @RYDER2_37076 
+
+:RYDER2_36926
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_JA' // s$  // ~z~Get out the damned way, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33827 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_37076 
+
+:RYDER2_36976
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_JB' // s$  // ~z~Quit trying to kill yourself under the van!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33828 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_37076 
+
+:RYDER2_37026
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_JC' // s$  // ~z~You want me to run you down, just say so!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33829 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 0 1 0 
+jump @RYDER2_37076 
+
+:RYDER2_37076
+303@ += 1 
+
+:RYDER2_37083
+jump @RYDER2_37115 
+
+:RYDER2_37090
+if 
+   not 303@ == 0 
+jf @RYDER2_37115 
+303@ = 0 
+
+:RYDER2_37115
+if 
+  145@ == 3 
+jf @RYDER2_37205 
+if and
+876F:   not text_priority_displayed 
+88FE:   not text_box_displayed 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @RYDER2_37205 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'RYD2_LG' // s$  // ~z~We need those crates, CJ!
+04AE: $ACTOR_SPEECH_WAV_FILE = 33839 // = constant 
+create_thread @AUDIOL $ACTOR_RYDER 0 1 1 0 
+145@ += 1 
+
+:RYDER2_37205
+return 
+
+:RYDER2_37207
+if 
+  306@ == 6 
+jf @RYDER2_37239 
+307@ = 1 
+306@ = 5 
+
+:RYDER2_37239
+if 
+  307@ == 1 
+jf @RYDER2_37364 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_37357 
+if 
+83CA:   not object 313@ exists 
+jf @RYDER2_37357 
+313@ = Object.Create(#CM_BOX, 0.0, 0.0, 0.0)
+Object.CollisionDetection(313@) = False
+0681: attach_object 313@ to_car 95@ with_offset 0.6223 -2.3101 0.2002 rotation 0.0 0.0 317.0214 
+
+:RYDER2_37357
+jump @RYDER2_37385 
+
+:RYDER2_37364
+if 
+03CA:   object 313@ exists 
+jf @RYDER2_37385 
+Object.Destroy(313@)
+
+:RYDER2_37385
+0871: init_jump_table 306@ total_jumps 6 default_jump 0 @RYDER2_39330 jumps 0 @RYDER2_37448 1 @RYDER2_37523 2 @RYDER2_37698 3 @RYDER2_37973 4 @RYDER2_38348 5 @RYDER2_38823 -1 @RYDER2_39330 
+
+:RYDER2_37448
+314@ = 0 
+
+:RYDER2_37455
+if 
+  5 > 314@ 
+jf @RYDER2_37516 
+if 
+03CA:   object 308@(314@,5i) exists 
+jf @RYDER2_37502 
+Object.Destroy(308@(314@,5i))
+
+:RYDER2_37502
+314@ += 1 
+jump @RYDER2_37455 
+
+:RYDER2_37516
+jump @RYDER2_39330 
+
+:RYDER2_37523
+if 
+83CA:   not object 308@ exists 
+jf @RYDER2_37623 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_37623 
+308@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(308@) = False
+0681: attach_object 308@ to_car 95@ with_offset -0.4928 -0.1684 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_37623
+314@ = 1 
+
+:RYDER2_37630
+if 
+  5 > 314@ 
+jf @RYDER2_37691 
+if 
+03CA:   object 308@(314@,5i) exists 
+jf @RYDER2_37677 
+Object.Destroy(308@(314@,5i))
+
+:RYDER2_37677
+314@ += 1 
+jump @RYDER2_37630 
+
+:RYDER2_37691
+jump @RYDER2_39330 
+
+:RYDER2_37698
+if 
+83CA:   not object 309@ exists 
+jf @RYDER2_37798 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_37798 
+309@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(309@) = False
+0681: attach_object 309@ to_car 95@ with_offset 0.4835 -0.2148 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_37798
+if 
+83CA:   not object 308@ exists 
+jf @RYDER2_37898 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_37898 
+308@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(308@) = False
+0681: attach_object 308@ to_car 95@ with_offset -0.4928 -0.1684 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_37898
+314@ = 2 
+
+:RYDER2_37905
+if 
+  5 > 314@ 
+jf @RYDER2_37966 
+if 
+03CA:   object 308@(314@,5i) exists 
+jf @RYDER2_37952 
+Object.Destroy(308@(314@,5i))
+
+:RYDER2_37952
+314@ += 1 
+jump @RYDER2_37905 
+
+:RYDER2_37966
+jump @RYDER2_39330 
+
+:RYDER2_37973
+if 
+83CA:   not object 310@ exists 
+jf @RYDER2_38073 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38073 
+310@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(310@) = False
+0681: attach_object 310@ to_car 95@ with_offset -0.2585 -0.3195 1.1567 rotation 0.0 0.0 23.47 
+
+:RYDER2_38073
+if 
+83CA:   not object 309@ exists 
+jf @RYDER2_38173 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38173 
+309@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(309@) = False
+0681: attach_object 309@ to_car 95@ with_offset 0.4835 -0.2148 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_38173
+if 
+83CA:   not object 308@ exists 
+jf @RYDER2_38273 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38273 
+308@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(308@) = False
+0681: attach_object 308@ to_car 95@ with_offset -0.4928 -0.1684 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_38273
+314@ = 3 
+
+:RYDER2_38280
+if 
+  5 > 314@ 
+jf @RYDER2_38341 
+if 
+03CA:   object 308@(314@,5i) exists 
+jf @RYDER2_38327 
+Object.Destroy(308@(314@,5i))
+
+:RYDER2_38327
+314@ += 1 
+jump @RYDER2_38280 
+
+:RYDER2_38341
+jump @RYDER2_39330 
+
+:RYDER2_38348
+if 
+83CA:   not object 311@ exists 
+jf @RYDER2_38448 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38448 
+311@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(311@) = False
+0681: attach_object 311@ to_car 95@ with_offset -0.4009 -1.7762 0.2292 rotation 0.0 0.0 342.0102 
+
+:RYDER2_38448
+if 
+83CA:   not object 310@ exists 
+jf @RYDER2_38548 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38548 
+310@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(310@) = False
+0681: attach_object 310@ to_car 95@ with_offset -0.2585 -0.3195 1.1567 rotation 0.0 0.0 23.47 
+
+:RYDER2_38548
+if 
+83CA:   not object 309@ exists 
+jf @RYDER2_38648 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38648 
+309@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(309@) = False
+0681: attach_object 309@ to_car 95@ with_offset 0.4835 -0.2148 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_38648
+if 
+83CA:   not object 308@ exists 
+jf @RYDER2_38748 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38748 
+308@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(308@) = False
+0681: attach_object 308@ to_car 95@ with_offset -0.4928 -0.1684 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_38748
+314@ = 4 
+
+:RYDER2_38755
+if 
+  5 > 314@ 
+jf @RYDER2_38816 
+if 
+03CA:   object 308@(314@,5i) exists 
+jf @RYDER2_38802 
+Object.Destroy(308@(314@,5i))
+
+:RYDER2_38802
+314@ += 1 
+jump @RYDER2_38755 
+
+:RYDER2_38816
+jump @RYDER2_39330 
+
+:RYDER2_38823
+if 
+83CA:   not object 312@ exists 
+jf @RYDER2_38923 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_38923 
+312@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(312@) = False
+0681: attach_object 312@ to_car 95@ with_offset -0.4374 -1.7451 0.9021 rotation 0.0 0.0 210.1588 
+
+:RYDER2_38923
+if 
+83CA:   not object 311@ exists 
+jf @RYDER2_39023 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_39023 
+311@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(311@) = False
+0681: attach_object 311@ to_car 95@ with_offset -0.4009 -1.7762 0.2292 rotation 0.0 0.0 342.0102 
+
+:RYDER2_39023
+if 
+83CA:   not object 310@ exists 
+jf @RYDER2_39123 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_39123 
+310@ = Object.Create(#CARDBOARDBOX2, 0.0, 0.0, 0.0)
+Object.CollisionDetection(310@) = False
+0681: attach_object 310@ to_car 95@ with_offset -0.2585 -0.3195 1.1567 rotation 0.0 0.0 23.47 
+
+:RYDER2_39123
+if 
+83CA:   not object 309@ exists 
+jf @RYDER2_39223 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_39223 
+309@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(309@) = False
+0681: attach_object 309@ to_car 95@ with_offset 0.4835 -0.2148 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_39223
+if 
+83CA:   not object 308@ exists 
+jf @RYDER2_39323 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_39323 
+308@ = Object.Create(#CJ_CARDBRD_PICKUP, 0.0, 0.0, 0.0)
+Object.CollisionDetection(308@) = False
+0681: attach_object 308@ to_car 95@ with_offset -0.4928 -0.1684 0.3614 rotation 0.0 0.0 0.0 
+
+:RYDER2_39323
+jump @RYDER2_39330 
+
+:RYDER2_39330
+return 
+
+:RYDER2_39332
+316@ = -1 
+315@ = 0 
+
+:RYDER2_39346
+if 
+  10 > 315@ 
+jf @RYDER2_39413 
+if 
+83CA:   not object 282@(315@,10i) exists 
+jf @RYDER2_39399 
+0085: 316@ = 315@ // (int) 
+315@ = 10 
+
+:RYDER2_39399
+315@ += 1 
+jump @RYDER2_39346 
+
+:RYDER2_39413
+if 
+   not 316@ == -1 
+jf @RYDER2_39468 
+0085: 282@(316@,10i) = 281@ // (int) 
+53@ = 0 
+04D9: object 282@(316@,10i) set_scripted_collision_check 1 
+127@ -= 1 
+
+:RYDER2_39468
+return 
+
+:RYDER2_39470
+if 
+  318@ == -999 
+jf @RYDER2_39513 
+317@ = Actor.Create(Mission1, #MALE01, 0.0, 0.0, 0.0)
+
+:RYDER2_39513
+if 
+   not Actor.Dead(317@)
+jf @RYDER2_39707 
+Actor.GiveWeaponAndAmmo(317@, Pistol, 99999)
+Actor.WeaponAccuracy(317@) = 32
+Actor.Health(317@) = 100
+060B: set_actor 317@ decision_maker_to 236@ 
+077A: set_actor 317@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+if 
+   not 133@ == 0 
+jf @RYDER2_39599 
+077A: set_actor 317@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+
+:RYDER2_39599
+0688: AS_actor 317@ unknown_toggle_ped_threat_scanner 1 1 1 
+060F: set_actor 317@ melee_accuracy_to 100.0 
+if 
+87FD:   not group 239@ alive 
+jf @RYDER2_39648 
+0632: release_group 239@ 
+062F: 239@ = create_group_type 2 
+
+:RYDER2_39648
+07F6: get_group 239@ number_of_leaders_to 318@ number_of_members_to 319@ 
+if 
+  318@ == 0 
+jf @RYDER2_39692 
+0630: put_actor 317@ in_group 239@ as_leader 
+jump @RYDER2_39700 
+
+:RYDER2_39692
+0631: put_actor 317@ in_group 239@ 
+
+:RYDER2_39700
+087F: set_actor 317@ never_leave_group 1 
+
+:RYDER2_39707
+return 
+320@ = 999999.0 
+321@ = -1 
+322@ = 0.0 
+323@ = 0.0 
+324@ = 0.0 
+42@ = 0 
+
+:RYDER2_39763
+if 
+  25 > 42@ 
+jf @RYDER2_40023 
+if 
+03CA:   object 62@(42@,25i) exists 
+jf @RYDER2_40009 
+if 
+8737:   not actor $PLAYER_ACTOR lifting_object 62@(42@,25i) 
+jf @RYDER2_40009 
+if 
+8685:   not object 62@(42@,25i) attached 
+jf @RYDER2_40009 
+if 
+8366:   not object 62@(42@,25i) damaged 
+jf @RYDER2_40009 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_39894 
+Actor.StorePos($ACTOR_RYDER, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:RYDER2_39894
+Object.StorePos(62@(42@,25i), 325@, 326@, 327@)
+0509: 45@ = distance_between_XY 325@ 326@ and_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 
+if 
+  6.0 > 45@ 
+jf @RYDER2_40009 
+if 
+0025:   320@ > 45@ // (float) 
+jf @RYDER2_40009 
+0087: 320@ = 45@ // (float) 
+0085: 321@ = 42@ // (int) 
+0087: 322@ = 325@ // (float) 
+0087: 323@ = 326@ // (float) 
+0087: 324@ = 327@ // (float) 
+
+:RYDER2_40009
+42@ += 1 
+jump @RYDER2_39763 
+
+:RYDER2_40023
+0085: 328@ = 321@ // (int) 
+0087: 325@ = 322@ // (float) 
+0087: 326@ = 323@ // (float) 
+0087: 327@ = 324@ // (float) 
+return 
+
+:RYDER2_40057
+Object.StorePos(281@, 329@, 330@, 331@)
+07C3: get_object 281@ axis_angle_relation_to 332@ 333@ 334@ 335@ 
+070B: set_actor $ACTOR_RYDER onbone_attached_object_operation 1 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_40127 
+02F8: get_car 95@ Z_angle_sine_to 294@ 
+02F9: get_car 95@ Z_angle_cosine_to 295@ 
+
+:RYDER2_40127
+294@ *= -10.0 
+295@ *= -10.0 
+Object.PutAt(281@, 329@, 330@, 331@)
+07C4: set_object 281@ axis_angle_relation_to 332@ 333@ 334@ 335@ 
+Object.ToggleInMovingList(281@) = True
+Object.CollisionDetection(281@) = True
+038C: object 281@ scatter 294@ 295@ 0.0 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_40232 
+050E: set_object 281@ no_collision_with_car 95@ 
+
+:RYDER2_40232
+gosub @RYDER2_39332 
+281@ = 0 
+return 
+
+:RYDER2_40248
+if 
+  336@ > 0 
+jf @RYDER2_41028 
+0871: init_jump_table 339@ total_jumps 4 default_jump 0 @RYDER2_41021 jumps 0 @RYDER2_40329 1 @RYDER2_40371 2 @RYDER2_40546 3 @RYDER2_40812 -1 @RYDER2_41021 -1 @RYDER2_41021 -1 @RYDER2_41021 
+
+:RYDER2_40329
+if 
+   not Model.Available(#ARMY)
+jf @RYDER2_40357 
+Model.Load(#ARMY)
+jump @RYDER2_40364 
+
+:RYDER2_40357
+339@ += 1 
+
+:RYDER2_40364
+jump @RYDER2_41021 
+
+:RYDER2_40371
+345@ = -1 
+346@ = 0 
+
+:RYDER2_40385
+if 
+  5 > 346@ 
+jf @RYDER2_40514 
+if 
+056D:   actor 340@(346@,5i) defined 
+jf @RYDER2_40485 
+if 
+   Actor.Dead(340@(346@,5i))
+jf @RYDER2_40478 
+Actor.RemoveReferences(340@(346@,5i))
+340@(346@,5i) = 0 
+0085: 345@ = 346@ // (int) 
+346@ = 5 
+
+:RYDER2_40478
+jump @RYDER2_40500 
+
+:RYDER2_40485
+0085: 345@ = 346@ // (int) 
+346@ = 5 
+
+:RYDER2_40500
+346@ += 1 
+jump @RYDER2_40385 
+
+:RYDER2_40514
+if 
+   not 345@ == -1 
+jf @RYDER2_40539 
+339@ += 1 
+
+:RYDER2_40539
+jump @RYDER2_41021 
+
+:RYDER2_40546
+if or
+  338@ == 3 
+  338@ == 7 
+  338@ == 8 
+  338@ == 9 
+jf @RYDER2_40599 
+338@ += 1 
+jump @RYDER2_40546 
+
+:RYDER2_40599
+if 
+  338@ > 9 
+jf @RYDER2_40624 
+338@ = 0 
+
+:RYDER2_40624
+if 
+803B:   not  338@ == 337@ // (int) 
+jf @RYDER2_40773 
+if 
+80C2:   not sphere_onscreen 347@(338@,10f) 357@(338@,10f) 367@(338@,10f) radius 2.0 
+jf @RYDER2_40759 
+if 
+838A:   not any_car_in_cube_cornerA 347@(338@,10f) 357@(338@,10f) 367@(338@,10f) cornerB 1.5 1.5 2.0 
+jf @RYDER2_40745 
+339@ += 1 
+jump @RYDER2_40752 
+
+:RYDER2_40745
+338@ += 1 
+
+:RYDER2_40752
+jump @RYDER2_40766 
+
+:RYDER2_40759
+338@ += 1 
+
+:RYDER2_40766
+jump @RYDER2_40780 
+
+:RYDER2_40773
+338@ += 1 
+
+:RYDER2_40780
+if 
+  338@ > 9 
+jf @RYDER2_40805 
+338@ = 0 
+
+:RYDER2_40805
+jump @RYDER2_41021 
+
+:RYDER2_40812
+340@(345@,5i) = Actor.Create(Mission1, #ARMY, 347@(338@,10f), 357@(338@,10f), 367@(338@,10f))
+0085: 317@ = 340@(345@,5i) // (int) 
+gosub @RYDER2_39470 
+0615: define_AS_pack_begin 48@ 
+0688: AS_actor -1 unknown_toggle_ped_threat_scanner 1 1 1 
+05D3: AS_actor -1 goto_point 387@(338@,10f) 397@(338@,10f) 407@(338@,10f) mode 6 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 417@(338@,10f) 427@(338@,10f) 437@(338@,10f) mode 6 time -2 ms // versionA 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_40970 
+05D9: AS_actor -1 run_to_actor $ACTOR_RYDER timelimit 20000 stop_within_radius 25.0 
+
+:RYDER2_40970
+0616: define_AS_pack_end 48@ 
+0618: assign_actor 340@(345@,5i) to_AS_pack 48@ 
+061B: remove_references_to_AS_pack 48@ 
+0085: 337@ = 338@ // (int) 
+336@ += -1 
+339@ = 0 
+jump @RYDER2_41021 
+
+:RYDER2_41021
+jump @RYDER2_41035 
+
+:RYDER2_41028
+339@ = 0 
+
+:RYDER2_41035
+return 
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @RYDER2_41108 
+477@ += 1 
+if 
+  477@ > 24 
+jf @RYDER2_41084 
+477@ = 0 
+
+:RYDER2_41084
+0663: printint "ADJUST_BOX_NUMBER" 477@ 
+
+:RYDER2_41108
+if 
+03CA:   object 62@(477@,25i) exists 
+jf @RYDER2_41205 
+Object.StorePos(62@(477@,25i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(62@(477@,25i))
+$TEMPVAR_FLOAT_3 += 1.0 
+024F: create_corona_with_radius 0.2 type 2 lensflares 0 with_color 255 0 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_FLOAT_3 += -1.0 
+
+:RYDER2_41205
+if 
+0736:   is_keyboard_key_just_pressed 131 
+jf @RYDER2_41231 
+$TEMPVAR_FLOAT_2 += 0.1 
+
+:RYDER2_41231
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @RYDER2_41257 
+$TEMPVAR_FLOAT_2 += -0.1 
+
+:RYDER2_41257
+if 
+0736:   is_keyboard_key_just_pressed 128 
+jf @RYDER2_41283 
+$TEMPVAR_FLOAT_1 += 0.1 
+
+:RYDER2_41283
+if 
+0736:   is_keyboard_key_just_pressed 129 
+jf @RYDER2_41309 
+$TEMPVAR_FLOAT_1 += -0.1 
+
+:RYDER2_41309
+if 
+0736:   is_keyboard_key_just_pressed 145 
+jf @RYDER2_41335 
+$TEMPVAR_FLOAT_3 += 0.01 
+
+:RYDER2_41335
+if 
+0736:   is_keyboard_key_just_pressed 139 
+jf @RYDER2_41361 
+$TEMPVAR_FLOAT_3 += -0.01 
+
+:RYDER2_41361
+if 
+0736:   is_keyboard_key_just_pressed 141 
+jf @RYDER2_41387 
+$TEMPVAR_ANGLE += 1.0 
+
+:RYDER2_41387
+if 
+0736:   is_keyboard_key_just_pressed 143 
+jf @RYDER2_41413 
+$TEMPVAR_ANGLE += -1.0 
+
+:RYDER2_41413
+if 
+03CA:   object 62@(477@,25i) exists 
+jf @RYDER2_41463 
+Object.PutAt(62@(477@,25i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(62@(477@,25i)) = $TEMPVAR_ANGLE
+
+:RYDER2_41463
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @RYDER2_41636 
+03A9: save_newline_to_debug_file 
+05B6: 78 // SCREEN_COORD_X[
+03A7: save_int_to_debug_file 477@ 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_1 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_2 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_3 
+03A8: save_float_to_debug_file $TEMPVAR_ANGLE 
+
+:RYDER2_41636
+return 
+
+:RYDER2_41638
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @RYDER2_41706 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:RYDER2_41706
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:RYDER2_41724
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'RYDER_2'  // Robbing Uncle Sam
+01E3: show_text_1number_styled GXT 'M_PASSR' number 10 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 5 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+030C: progress_made = 1 
+if 
+  $ALL_TAGS_SPRAYED == 0 
+jf @RYDER2_41803 
+0237: set_gang 1 weapons_to 22 32 5 
+
+:RYDER2_41803
+Marker.Disable($436)
+0629: change_integer_stat 310 to 1 
+$RYDER_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:RYDER2_41824
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @RYDER2_41847 
+0A20: disable_player $PLAYER_CHAR group_control_back 0 
+
+:RYDER2_41847
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_41877 
+Car.LockInCurrentPosition(95@) = False
+09B0: set_car 95@ accessible_for_player_using_controller 1 
+
+:RYDER2_41877
+09AD: set_vehicle_camera_mode 2 
+if 
+   not Car.Wrecked(98@)
+jf @RYDER2_41902 
+Car.RemoveReferences(98@)
+
+:RYDER2_41902
+if 
+  124@ == 1 
+jf @RYDER2_42102 
+42@ = 0 
+
+:RYDER2_41927
+if 
+  9 > 42@ 
+jf @RYDER2_42011 
+if 
+056D:   actor 102@(42@,9i) defined 
+jf @RYDER2_41997 
+if 
+   not Actor.Dead(102@(42@,9i))
+jf @RYDER2_41997 
+05E2: AS_actor 102@(42@,9i) kill_actor $PLAYER_ACTOR 
+
+:RYDER2_41997
+42@ += 1 
+jump @RYDER2_41927 
+
+:RYDER2_42011
+42@ = 0 
+
+:RYDER2_42018
+if 
+  5 > 42@ 
+jf @RYDER2_42102 
+if 
+056D:   actor 340@(42@,5i) defined 
+jf @RYDER2_42088 
+if 
+   not Actor.Dead(340@(42@,5i))
+jf @RYDER2_42088 
+05E2: AS_actor 340@(42@,5i) kill_actor $PLAYER_ACTOR 
+
+:RYDER2_42088
+42@ += 1 
+jump @RYDER2_42018 
+
+:RYDER2_42102
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER2_42123 
+Actor.DestroyWithFade($ACTOR_RYDER)
+
+:RYDER2_42123
+Object.RemoveReferences(240@)
+Object.RemoveReferences(241@)
+Object.RemoveReferences(257@)
+Object.RemoveReferences(258@)
+Object.RemoveReferences(259@)
+42@ = 0 
+
+:RYDER2_42155
+if 
+  25 > 42@ 
+jf @RYDER2_42238 
+Object.RemoveReferences(62@(42@,25i))
+if 
+   not 210@(42@,25i) == 0 
+jf @RYDER2_42224 
+Pickup.Destroy(210@(42@,25i))
+210@(42@,25i) = 0 
+
+:RYDER2_42224
+42@ += 1 
+jump @RYDER2_42155 
+
+:RYDER2_42238
+42@ = 0 
+
+:RYDER2_42245
+if 
+  5 > 42@ 
+jf @RYDER2_42277 
+42@ += 1 
+jump @RYDER2_42245 
+
+:RYDER2_42277
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+42@ = 0 
+
+:RYDER2_42309
+if 
+  5 > 42@ 
+jf @RYDER2_42370 
+if 
+03CA:   object 308@(42@,5i) exists 
+jf @RYDER2_42356 
+Object.Destroy(308@(42@,5i))
+
+:RYDER2_42356
+42@ += 1 
+jump @RYDER2_42309 
+
+:RYDER2_42370
+if 
+03CA:   object 313@ exists 
+jf @RYDER2_42391 
+Object.Destroy(313@)
+
+:RYDER2_42391
+if 
+03CA:   object 93@ exists 
+jf @RYDER2_42412 
+Object.Destroy(93@)
+
+:RYDER2_42412
+if 
+056E:   car 95@ defined 
+jf @RYDER2_42458 
+if 
+   not Car.Wrecked(95@)
+jf @RYDER2_42458 
+Car.LockInCurrentPosition(95@) = False
+099A: set_car 95@ collision_detection 1 
+
+:RYDER2_42458
+06D0: enable_emergency_traffic 1 
+065C: release_decision_maker 237@ 
+065C: release_decision_maker 236@ 
+065C: release_decision_maker 235@ 
+065C: release_decision_maker 238@ 
+0733: random_car_generator_enable_model #MULE 
+0151: remove_status_text $6892 
+0151: remove_status_text $6891 
+Model.Destroy(#ARMY)
+Model.Destroy(#MULE)
+Model.Destroy(#PATRIOT)
+Model.Destroy(#MESA)
+Model.Destroy(#COLT45)
+Model.Destroy(#CJ_CARDBRD_PICKUP)
+Model.Destroy(#FAM1)
+Model.Destroy(#FAM2)
+04EF: release_animation "RYDER" 
+04EF: release_animation "COLT45" 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03C7: set_sensitivity_to_crime 1.0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+040D: unload_wav 3 
+Pickup.Destroy($PICKUP_EMMETS_COLT45)
+Marker.Disable($MARKER_EMMETS_GUN)
+$MARKER_EMMETS_GUN = Marker.CreateIconWithoutSphere(18, 2447.773, -1975.663, 12.5469)
+032B: $PICKUP_EMMETS_COLT45 = create_weapon_pickup #AK47 type 15 ammo 50 at 2447.773 -1975.663 13.0 
+$ONMISSION = 0 
+mission_cleanup 
+return

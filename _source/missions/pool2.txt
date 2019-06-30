@@ -1,0 +1,8527 @@
+:POOL2
+thread 'POOL2' 
+gosub @POOL2_54 
+if 
+wasted_or_busted 
+jf @POOL2_45 
+$11033 = 0 
+gosub @POOL2_60821 
+
+:POOL2_45
+gosub @POOL2_60901 
+end_thread 
+
+:POOL2_54
+$ONMISSION = 1 
+01BD: 181@ = current_time_in_ms 
+34@ = 0 
+35@ = 0 
+37@ = 0 
+38@ = 0 
+178@ = 0 
+208@ = -0.957 
+210@ = -0.49 
+209@ = 0.957 
+211@ = 0.49 
+203@ = 0.05 
+204@ = 2.0 
+127@ = 1 
+
+:POOL2_168
+wait 0 
+01BD: 39@ = current_time_in_ms 
+0085: 182@ = 39@ // (int) 
+0062: 182@ -= 181@ // (int) 
+0085: 181@ = 39@ // (int) 
+005A: 183@ += 182@ // (int) 
+005A: 205@ += 182@ // (int) 
+005A: 206@ += 182@ // (int) 
+gosub @POOL2_2295 
+
+:POOL2_232
+0871: init_jump_table 34@ total_jumps 13 default_jump 0 @POOL2_542 jumps 0 @POOL2_360 1 @POOL2_374 2 @POOL2_388 3 @POOL2_402 4 @POOL2_416 5 @POOL2_430 6 @POOL2_444 
+0872: jump_table_jumps 7 @POOL2_458 8 @POOL2_472 9 @POOL2_486 10 @POOL2_500 11 @POOL2_514 12 @POOL2_528 -1 @POOL2_542 -1 @POOL2_542 -1 @POOL2_542 
+
+:POOL2_360
+gosub @POOL2_685 
+jump @POOL2_542 
+
+:POOL2_374
+gosub @POOL2_5415 
+jump @POOL2_542 
+
+:POOL2_388
+gosub @POOL2_8998 
+jump @POOL2_542 
+
+:POOL2_402
+gosub @POOL2_9715 
+jump @POOL2_542 
+
+:POOL2_416
+gosub @POOL2_10543 
+jump @POOL2_542 
+
+:POOL2_430
+gosub @POOL2_12169 
+jump @POOL2_542 
+
+:POOL2_444
+gosub @POOL2_15536 
+jump @POOL2_542 
+
+:POOL2_458
+gosub @POOL2_15538 
+jump @POOL2_542 
+
+:POOL2_472
+gosub @POOL2_20875 
+jump @POOL2_542 
+
+:POOL2_486
+gosub @POOL2_21398 
+jump @POOL2_542 
+
+:POOL2_500
+gosub @POOL2_22790 
+jump @POOL2_542 
+
+:POOL2_514
+gosub @POOL2_24886 
+jump @POOL2_542 
+
+:POOL2_528
+gosub @POOL2_26108 
+jump @POOL2_542 
+
+:POOL2_542
+if 
+803B:   not  179@ == 34@ // (int) 
+jf @POOL2_576 
+0085: 179@ = 34@ // (int) 
+jump @POOL2_232 
+
+:POOL2_576
+gosub @POOL2_26234 
+if 
+  108@ == 0 
+jf @POOL2_683 
+if 
+  38@ == 0 
+jf @POOL2_667 
+if 
+  37@ == 0 
+jf @POOL2_651 
+jump @POOL2_168 
+jump @POOL2_660 
+
+:POOL2_651
+gosub @POOL2_60867 
+return 
+
+:POOL2_660
+jump @POOL2_676 
+
+:POOL2_667
+gosub @POOL2_60821 
+return 
+
+:POOL2_676
+jump @POOL2_685 
+
+:POOL2_683
+return 
+
+:POOL2_685
+if 
+  35@ == -1 
+jf @POOL2_977 
+163@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+$9457 = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+164@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+$9458 = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+168@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+358@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+359@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+82@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+$9459 = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+347@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+213@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+214@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+
+:POOL2_977
+if 
+  35@ == 0 
+jf @POOL2_1163 
+if 
+03CA:   object $9457 exists 
+jf @POOL2_1163 
+008B: 163@ = $9457 // (int) 
+008B: 164@ = $9458 // (int) 
+if 
+   not Actor.Dead(164@)
+jf @POOL2_1087 
+02A9: set_actor 164@ immune_to_nonplayer 1 
+Actor.SetImmunities(164@, 1, 1, 1, 1, 1)
+0619: enable_actor 164@ collision_detection 0 
+060A: create_decision_maker_type 0 store_to 207@ // decision\allowed\m_.ped files 
+060B: set_actor 164@ decision_maker_to 207@ 
+
+:POOL2_1087
+Object.StorePos(163@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0395: clear_area 1 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 100.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+041D: set_camera_near_clip 0.01 
+08F5: save_player_group 
+129@ = 0 
+108@ = 0 
+gosub @POOL2_57863 
+35@ += 1 
+
+:POOL2_1163
+if 
+  35@ == 1 
+jf @POOL2_1341 
+if 
+03CA:   object 163@ exists 
+jf @POOL2_1341 
+Object.StorePos(163@, 102@, 103@, 104@)
+105@ = Object.Angle(163@)
+104@ += -0.1 
+054C: use_GXT_table 'POOL' 
+03CF: load_wav 1802 as 4 
+Model.Load(#K_POOLQ)
+04ED: load_animation "POOL" 
+
+:POOL2_1259
+if or
+84EE:   not animation "POOL" loaded 
+   not Model.Available(#K_POOLQ)
+83D0:   not wav 4 loaded 
+jf @POOL2_1297 
+wait 0 
+jump @POOL2_1259 
+
+:POOL2_1297
+0390: load_txd_dictionary 'LD_POOL' 
+038F: load_texture "BALL" as 3 // Load dictionary with 0390 first 
+038F: load_texture "NIB" as 4 // Load dictionary with 0390 first 
+125@ = 0 
+35@ += 1 
+
+:POOL2_1341
+if 
+  35@ == 2 
+jf @POOL2_1373 
+34@ += 1 
+35@ = 0 
+
+:POOL2_1373
+return 
+0052: NOP 98@ 100@ $TEMPVAR_FLOAT_3 99@ 100@ $TEMPVAR_FLOAT_3 
+0052: NOP 98@ 100@ $TEMPVAR_FLOAT_3 98@ 101@ $TEMPVAR_FLOAT_3 
+0052: NOP 99@ 101@ $TEMPVAR_FLOAT_3 99@ 100@ $TEMPVAR_FLOAT_3 
+0052: NOP 99@ 101@ $TEMPVAR_FLOAT_3 98@ 101@ $TEMPVAR_FLOAT_3 
+if 
+0736:   is_keyboard_key_just_pressed 129 
+jf @POOL2_1481 
+208@ += -0.0001 
+
+:POOL2_1481
+if 
+0736:   is_keyboard_key_just_pressed 128 
+jf @POOL2_1507 
+208@ += 0.0001 
+
+:POOL2_1507
+if 
+0736:   is_keyboard_key_just_pressed 131 
+jf @POOL2_1533 
+210@ += -0.0001 
+
+:POOL2_1533
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @POOL2_1559 
+210@ += 0.0001 
+
+:POOL2_1559
+if 
+0736:   is_keyboard_key_just_pressed 141 
+jf @POOL2_1585 
+209@ += -0.0001 
+
+:POOL2_1585
+if 
+0736:   is_keyboard_key_just_pressed 143 
+jf @POOL2_1611 
+209@ += 0.0001 
+
+:POOL2_1611
+if 
+0736:   is_keyboard_key_just_pressed 139 
+jf @POOL2_1637 
+211@ += -0.0001 
+
+:POOL2_1637
+if 
+0736:   is_keyboard_key_just_pressed 145 
+jf @POOL2_1663 
+211@ += 0.0001 
+
+:POOL2_1663
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @POOL2_2227 
+03A9: save_newline_to_debug_file 
+05B6: 13 // CURRENT_WANTED_LIST = 
+03A8: save_float_to_debug_file 208@ 
+03A9: save_newline_to_debug_file 
+05B6: 14 // MODID, STATUS, PAYOUT, EXP NAME,  CROSS OUT
+03A8: save_float_to_debug_file 210@ 
+03A9: save_newline_to_debug_file 
+05B6: 15 //         
+03A8: save_float_to_debug_file 209@ 
+03A9: save_newline_to_debug_file 
+05B6: 16 //         
+03A8: save_float_to_debug_file 211@ 
+
+:POOL2_2227
+if 
+03CA:   object 163@ exists 
+jf @POOL2_2293 
+0400: store_coords_to 98@ 100@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset 208@ 210@ 0.7 
+0400: store_coords_to 99@ 101@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset 209@ 211@ 0.7 
+
+:POOL2_2293
+return 
+
+:POOL2_2295
+if 
+0736:   is_keyboard_key_just_pressed 32 
+jf @POOL2_2344 
+212@ += 1 
+if 
+  212@ > 11 
+jf @POOL2_2342 
+212@ = 0 
+
+:POOL2_2342
+086A: NOP 
+
+:POOL2_2344
+if 
+  212@ == 1 
+jf @POOL2_2561 
+008A: $6443 = 34@ // (int) 
+008A: $6444 = 35@ // (int) 
+008A: $6445 = 36@ // (int) 
+008A: $6446 = 108@ // (int) 
+008A: $6447 = 125@ // (int) 
+008A: $6448 = 129@ // (int) 
+008A: $6449 = 217@ // (int) 
+008A: $6450 = 218@ // (int) 
+065D: NOP $6443 "M_STAGE" 
+065D: NOP $6444 "M_GOALS" 
+065D: NOP $6445 "FLAG3" 
+065D: NOP $6446 "QUIT" 
+065D: NOP $6447 "PL_CIRCLE_PRESSED" 
+065D: NOP $6448 "OUTPUT_TEXT" 
+065D: NOP $6449 "PLAYER1_COLOUR" 
+065D: NOP $6450 "PLAYER2_COLOUR" 
+
+:POOL2_2561
+if 
+  212@ == 2 
+jf @POOL2_2811 
+008A: $6443 = 66@ // (int) 
+008A: $6444 = 67@ // (int) 
+008A: $6445 = 68@ // (int) 
+008A: $6446 = 69@ // (int) 
+008A: $6447 = 70@ // (int) 
+008A: $6448 = 71@ // (int) 
+008A: $6449 = 72@ // (int) 
+008A: $6450 = 73@ // (int) 
+065D: NOP $6443 "BALL_POTTED[0]" 
+065D: NOP $6444 "BALL_POTTED[1]" 
+065D: NOP $6445 "BALL_POTTED[2]" 
+065D: NOP $6446 "BALL_POTTED[3]" 
+065D: NOP $6447 "BALL_POTTED[4]" 
+065D: NOP $6448 "BALL_POTTED[5]" 
+065D: NOP $6449 "BALL_POTTED[6]" 
+065D: NOP $6450 "BALL_POTTED[7]" 
+
+:POOL2_2811
+if 
+  212@ == 3 
+jf @POOL2_3067 
+008A: $6443 = 74@ // (int) 
+008A: $6444 = 75@ // (int) 
+008A: $6445 = 76@ // (int) 
+008A: $6446 = 77@ // (int) 
+008A: $6447 = 78@ // (int) 
+008A: $6448 = 79@ // (int) 
+008A: $6449 = 80@ // (int) 
+008A: $6450 = 81@ // (int) 
+065D: NOP $6443 "BALL_POTTED[8]" 
+065D: NOP $6444 "BALL_POTTED[9]" 
+065D: NOP $6445 "BALL_POTTED[10]" 
+065D: NOP $6446 "BALL_POTTED[11]" 
+065D: NOP $6447 "BALL_POTTED[12]" 
+065D: NOP $6448 "BALL_POTTED[13]" 
+065D: NOP $6449 "BALL_POTTED[14]" 
+065D: NOP $6450 "BALL_POTTED[15]" 
+
+:POOL2_3067
+if 
+  212@ == 4 
+jf @POOL2_3324 
+008A: $6443 = 219@ // (int) 
+008A: $6444 = 220@ // (int) 
+008A: $6445 = 229@ // (int) 
+008A: $6446 = 230@ // (int) 
+008A: $6447 = 231@ // (int) 
+008A: $6448 = 232@ // (int) 
+008A: $6449 = 251@ // (int) 
+008A: $6450 = 250@ // (int) 
+065D: NOP $6443 "PLAYER1_IS_HUMAN" 
+065D: NOP $6444 "PLAYER2_IS_HUMAN" 
+065D: NOP $6445 "TURN_PLAYER" 
+065D: NOP $6446 "CURRENT_CHAR_IS_HUMAN" 
+065D: NOP $6447 "TURN_COLOUR" 
+065D: NOP $6448 "TURN_IS_SCRATCH" 
+065D: NOP $6449 "THIS_CHAR_GOT_TASK" 
+065D: NOP $6450 "SHOT_PLAYED" 
+
+:POOL2_3324
+if 
+  212@ == 5 
+jf @POOL2_3552 
+008A: $6444 = 233@ // (int) 
+008A: $6445 = 271@ // (int) 
+008A: $6446 = 272@ // (int) 
+008A: $6447 = 273@ // (int) 
+008A: $6448 = 274@ // (int) 
+008A: $6449 = 278@ // (int) 
+008A: $6450 = 236@ // (int) 
+065D: NOP $6444 "SKIP_CHALK_CUE" 
+065D: NOP $6445 "NO_OF_BALLS_POTTED_THIS_TURN" 
+065D: NOP $6446 "SPOTS_POTTED" 
+065D: NOP $6447 "STRIPES_POTTED" 
+065D: NOP $6448 "FOUL_TYPE" 
+065D: NOP $6449 "FIRST_MOVING_BALL" 
+065D: NOP $6450 "CAMERA_MODE" 
+
+:POOL2_3552
+if 
+  212@ == 6 
+jf @POOL2_3890 
+008A: $6443 = 255@ // (int) 
+008A: $6444 = 256@ // (int) 
+008A: $6445 = 257@ // (int) 
+008A: $6446 = 258@ // (int) 
+008A: $6447 = 259@ // (int) 
+008A: $6448 = 260@ // (int) 
+008A: $6449 = 261@ // (int) 
+008A: $6450 = 262@ // (int) 
+065D: NOP $6443 "BALLS_POTTED_THIS_TURN[0]" 
+065D: NOP $6444 "BALLS_POTTED_THIS_TURN[1]" 
+065D: NOP $6445 "BALLS_POTTED_THIS_TURN[2]" 
+065D: NOP $6446 "BALLS_POTTED_THIS_TURN[3]" 
+065D: NOP $6447 "BALLS_POTTED_THIS_TURN[4]" 
+065D: NOP $6448 "BALLS_POTTED_THIS_TURN[5]" 
+065D: NOP $6449 "BALLS_POTTED_THIS_TURN[6]" 
+065D: NOP $6450 "BALLS_POTTED_THIS_TURN[7]" 
+
+:POOL2_3890
+if 
+  212@ == 7 
+jf @POOL2_4234 
+008A: $6443 = 263@ // (int) 
+008A: $6444 = 264@ // (int) 
+008A: $6445 = 265@ // (int) 
+008A: $6446 = 266@ // (int) 
+008A: $6447 = 267@ // (int) 
+008A: $6448 = 268@ // (int) 
+008A: $6449 = 269@ // (int) 
+008A: $6450 = 270@ // (int) 
+065D: NOP $6443 "BALLS_POTTED_THIS_TURN[8]" 
+065D: NOP $6444 "BALLS_POTTED_THIS_TURN[9]" 
+065D: NOP $6445 "BALLS_POTTED_THIS_TURN[10]" 
+065D: NOP $6446 "BALLS_POTTED_THIS_TURN[11]" 
+065D: NOP $6447 "BALLS_POTTED_THIS_TURN[12]" 
+065D: NOP $6448 "BALLS_POTTED_THIS_TURN[13]" 
+065D: NOP $6449 "BALLS_POTTED_THIS_TURN[14]" 
+065D: NOP $6450 "BALLS_POTTED_THIS_TURN[15]" 
+
+:POOL2_4234
+if 
+  212@ == 8 
+jf @POOL2_4540 
+008A: $6443 = 109@ // (int) 
+008A: $6444 = 110@ // (int) 
+008A: $6445 = 111@ // (int) 
+008A: $6446 = 112@ // (int) 
+008A: $6447 = 113@ // (int) 
+008A: $6448 = 114@ // (int) 
+008A: $6449 = 115@ // (int) 
+008A: $6450 = 116@ // (int) 
+065D: NOP $6443 "BALL_IS_STATIONARY[0]" 
+065D: NOP $6444 "BALL_IS_STATIONARY[1]" 
+065D: NOP $6445 "BALL_IS_STATIONARY[2]" 
+065D: NOP $6446 "BALL_IS_STATIONARY[3]" 
+065D: NOP $6447 "BALL_IS_STATIONARY[4]" 
+065D: NOP $6448 "BALL_IS_STATIONARY[5]" 
+065D: NOP $6449 "BALL_IS_STATIONARY[6]" 
+065D: NOP $6450 "BALL_IS_STATIONARY[7]" 
+
+:POOL2_4540
+if 
+  212@ == 9 
+jf @POOL2_4852 
+008A: $6443 = 117@ // (int) 
+008A: $6444 = 118@ // (int) 
+008A: $6445 = 119@ // (int) 
+008A: $6446 = 120@ // (int) 
+008A: $6447 = 121@ // (int) 
+008A: $6448 = 122@ // (int) 
+008A: $6449 = 123@ // (int) 
+008A: $6450 = 124@ // (int) 
+065D: NOP $6443 "BALL_IS_STATIONARY[8]" 
+065D: NOP $6444 "BALL_IS_STATIONARY[9]" 
+065D: NOP $6445 "BALL_IS_STATIONARY[10]" 
+065D: NOP $6446 "BALL_IS_STATIONARY[11]" 
+065D: NOP $6447 "BALL_IS_STATIONARY[12]" 
+065D: NOP $6448 "BALL_IS_STATIONARY[13]" 
+065D: NOP $6449 "BALL_IS_STATIONARY[14]" 
+065D: NOP $6450 "BALL_IS_STATIONARY[15]" 
+
+:POOL2_4852
+if 
+  212@ == 10 
+jf @POOL2_5110 
+0088: $6451 = 48@ // (float) 
+0088: $6452 = 49@ // (float) 
+0088: $6453 = 50@ // (float) 
+0088: $6454 = 51@ // (float) 
+0088: $6455 = 98@ // (float) 
+0088: $6456 = 99@ // (float) 
+0088: $6457 = 100@ // (float) 
+0088: $6458 = 101@ // (float) 
+065E: NOP $6451 "CUE_BALL_SPEED" 
+065E: NOP $6452 "CUE_BALL_ROT_X" 
+065E: NOP $6453 "CUE_BALL_ROT_Y" 
+065E: NOP $6454 "CUE_BALL_ROT_Z" 
+065E: NOP $6455 "POOL_TABLE_MIN_X" 
+065E: NOP $6456 "POOL_TABLE_MAX_X" 
+065E: NOP $6457 "POOL_TABLE_MIN_Y" 
+065E: NOP $6458 "POOL_TABLE_MAX_Y" 
+
+:POOL2_5110
+if 
+  212@ == 11 
+jf @POOL2_5309 
+008A: $6443 = 32@ // (int) 
+008A: $6444 = 33@ // (int) 
+0088: $6453 = 650@ // (float) 
+0088: $6454 = 203@ // (float) 
+0088: $6455 = 204@ // (float) 
+008A: $6448 = 277@ // (int) 
+065D: NOP $6443 "TIMERA" 
+065D: NOP $6444 "TIMERB" 
+065E: NOP $6453 "BALL_TURN_MASS" 
+065E: NOP $6454 "POOL_STOP_VELOCITY" 
+065E: NOP $6455 "POOL_STOP_ROTATION_VELOCITY" 
+065D: NOP $6448 "BALL_STRIKES_CUSHION" 
+
+:POOL2_5309
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @POOL2_5413 
+if 
+  219@ == 1 
+jf @POOL2_5383 
+219@ = 0 
+0662: printstring "CHEAT_PLAYER1_NOT_HUMAN" 
+jump @POOL2_5413 
+
+:POOL2_5383
+219@ = 1 
+0662: printstring "CHEAT_PLAYER1_HUMAN" 
+
+:POOL2_5413
+return 
+
+:POOL2_5415
+if 
+  35@ == -1 
+jf @POOL2_5455 
+107@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+
+:POOL2_5455
+if 
+  35@ == 0 
+jf @POOL2_7136 
+0826: enable_hud 1 
+0581: enable_radar 0 
+$BJACK_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+if 
+001C:   $9460 > $BJACK_PLAYER_CASH // (int) 
+jf @POOL2_5528 
+108@ = 1 
+00BE: text_clear_all 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+jump @POOL2_7083 
+
+:POOL2_5528
+0395: clear_area 1 at 102@ 103@ 104@ radius 15.0 
+Object.PutAt(163@, 102@, 103@, 104@)
+0400: store_coords_to 98@ 100@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.9098 -0.4589 0.7 
+0400: store_coords_to 99@ 101@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.9242 0.4809 0.7 
+if 
+0025:   98@ > 99@ // (float) 
+jf @POOL2_5661 
+0088: $TEMPVAR_FLOAT_1 = 98@ // (float) 
+0087: 98@ = 99@ // (float) 
+0089: 99@ = $TEMPVAR_FLOAT_1 // (float) 
+
+:POOL2_5661
+if 
+0025:   100@ > 101@ // (float) 
+jf @POOL2_5704 
+0088: $TEMPVAR_FLOAT_2 = 100@ // (float) 
+0087: 100@ = 101@ // (float) 
+0089: 101@ = $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_5704
+0830: create_pool_table_collision_cornerA 98@ 100@ $TEMPVAR_FLOAT_3 cornerB 99@ 101@ $TEMPVAR_FLOAT_3 
+0400: store_coords_to 175@ 176@ 177@ from_object 163@ with_offset 0.0 0.0 1.5 
+0509: 42@ = distance_between_XY 98@ 100@ and_XY 99@ 100@ 
+0509: 43@ = distance_between_XY 98@ 100@ and_XY 98@ 101@ 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_5871 
+0087: 42@ = 98@ // (float) 
+005B: 42@ += 99@ // (float) 
+42@ /= 2.0 
+0087: 55@ = 42@ // (float) 
+0087: 61@ = 100@ // (float) 
+0087: 58@ = 42@ // (float) 
+0087: 64@ = 101@ // (float) 
+jump @POOL2_5929 
+
+:POOL2_5871
+0087: 42@ = 100@ // (float) 
+005B: 42@ += 101@ // (float) 
+42@ /= 2.0 
+0087: 55@ = 98@ // (float) 
+0087: 61@ = 42@ // (float) 
+0087: 58@ = 99@ // (float) 
+0087: 64@ = 42@ // (float) 
+
+:POOL2_5929
+0087: 54@ = 98@ // (float) 
+0087: 60@ = 100@ // (float) 
+0087: 56@ = 98@ // (float) 
+0087: 62@ = 101@ // (float) 
+0087: 57@ = 99@ // (float) 
+0087: 63@ = 101@ // (float) 
+0087: 59@ = 99@ // (float) 
+0087: 65@ = 100@ // (float) 
+52@ = 0.037 
+0087: 53@ = 52@ // (float) 
+53@ *= 2.0 
+39@ = 0 
+
+:POOL2_6028
+if 
+  16 > 39@ 
+jf @POOL2_6089 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_6075 
+Object.Destroy(82@(39@,16i))
+
+:POOL2_6075
+39@ += 1 
+jump @POOL2_6028 
+
+:POOL2_6089
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.2734375 -0.0546875 0.9296875 
+82@ = Object.Init(#K_POOLBALLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+Object.Angle(82@) = $TEMPVAR_ANGLE
+0400: store_coords_to 558@ 559@ 560@ from_object 163@ with_offset 0.3408 -0.0284 0.9297 
+561@ = Object.Angle(163@)
+561@ += 90.0 
+83@ = Object.Init(#K_POOLBALLSPT01, 558@, 559@, 560@)
+84@ = Object.Init(#K_POOLBALLSPT02, 0.0, 0.0, 0.0)
+85@ = Object.Init(#K_POOLBALLSPT03, 0.0, 0.0, 0.0)
+86@ = Object.Init(#K_POOLBALLSPT04, 0.0, 0.0, 0.0)
+87@ = Object.Init(#K_POOLBALLSPT05, 0.0, 0.0, 0.0)
+88@ = Object.Init(#K_POOLBALLSPT06, 0.0, 0.0, 0.0)
+89@ = Object.Init(#K_POOLBALLSPT07, 0.0, 0.0, 0.0)
+90@ = Object.Init(#K_POOLBALL8, 0.0, 0.0, 0.0)
+91@ = Object.Init(#K_POOLBALLSTP01, 0.0, 0.0, 0.0)
+92@ = Object.Init(#K_POOLBALLSTP02, 0.0, 0.0, 0.0)
+93@ = Object.Init(#K_POOLBALLSTP03, 0.0, 0.0, 0.0)
+94@ = Object.Init(#K_POOLBALLSTP04, 0.0, 0.0, 0.0)
+95@ = Object.Init(#K_POOLBALLSTP05, 0.0, 0.0, 0.0)
+96@ = Object.Init(#K_POOLBALLSTP06, 0.0, 0.0, 0.0)
+97@ = Object.Init(#K_POOLBALLSTP07, 0.0, 0.0, 0.0)
+gosub @POOL2_50594 
+0581: enable_radar 0 
+Player.CanMove($PLAYER_CHAR) = False
+03E6: remove_text_box 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.5261 -1.9684 1.637 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.0746 -1.0853 1.5092 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+if 
+   not Actor.Dead(164@)
+jf @POOL2_6897 
+0792: disembark_instantly_actor 164@ 
+070B: set_actor 164@ onbone_attached_object_operation 0 
+if 
+03CA:   object $9459 exists 
+jf @POOL2_6697 
+Object.Destroy($9459)
+
+:POOL2_6697
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0219 -1.1236 0.0363 
+Actor.PutAt(164@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0087: 42@ = 105@ // (float) 
+42@ += 130.0 
+Actor.Angle(164@) = 42@
+0615: define_AS_pack_begin 47@ 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.5261 -1.9684 1.637 
+06A9: AS_actor -1 look_at_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 999999 ms 
+if 
+  108@ == 0 
+jf @POOL2_6879 
+0812: AS_actor -1 perform_animation "POOL_IDLE_STANCE" IFP "POOL" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+
+:POOL2_6879
+0616: define_AS_pack_end 47@ 
+0618: assign_actor 164@ to_AS_pack 47@ 
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_6897
+if 
+83CA:   not object 107@ exists 
+jf @POOL2_6942 
+107@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+Object.CollisionDetection(107@) = False
+
+:POOL2_6942
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_7056 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -1.9295 -2.2083 0.0363 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 221@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 222@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 223@ = $TEMPVAR_FLOAT_3 // (float) 
+0087: 42@ = 105@ // (float) 
+42@ += 390.0 
+Actor.Angle($PLAYER_ACTOR) = 42@
+
+:POOL2_7056
+0085: 358@ = 164@ // (int) 
+0085: 359@ = 107@ // (int) 
+gosub @POOL2_30718 
+0A3F: set_unused_flag 0 
+
+:POOL2_7083
+create_thread @CLEANAU 
+$30 = 1 
+fade 1 1000 
+
+:POOL2_7105
+if 
+fading 
+jf @POOL2_7129 
+wait 0 
+jump @POOL2_7105 
+
+:POOL2_7129
+35@ += 1 
+
+:POOL2_7136
+if 
+  35@ == 1 
+jf @POOL2_7583 
+$30 = 1 
+$MISSION_RUNNING_DOG_FAILED = 1 
+if 
+   not Actor.Dead(164@)
+jf @POOL2_7565 
+if 
+   Actor.Model(164@) == #WBDYG2
+jf @POOL2_7387 
+0209: 39@ = random_int_in_ranges 0 3 
+0871: init_jump_table 39@ total_jumps 3 default_jump 0 @POOL2_7361 jumps 0 @POOL2_7274 1 @POOL2_7303 2 @POOL2_7332 -1 @POOL2_7361 -1 @POOL2_7361 -1 @POOL2_7361 -1 @POOL2_7361 
+
+:POOL2_7274
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B1' // s$  // ~z~Let's make a little wager.
+04AE: $ACTOR_SPEECH_WAV_FILE = 31600 // = constant 
+jump @POOL2_7361 
+
+:POOL2_7303
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B2' // s$  // ~z~Game of pool ain't the same without a little money involved.
+04AE: $ACTOR_SPEECH_WAV_FILE = 31601 // = constant 
+jump @POOL2_7361 
+
+:POOL2_7332
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B3' // s$  // ~z~Show me the color of your money
+04AE: $ACTOR_SPEECH_WAV_FILE = 31602 // = constant 
+jump @POOL2_7361 
+
+:POOL2_7361
+create_thread @AUDIOL 164@ 0 1 1 0 
+jump @POOL2_7565 
+
+:POOL2_7387
+0209: 39@ = random_int_in_ranges 0 3 
+0871: init_jump_table 39@ total_jumps 3 default_jump 0 @POOL2_7546 jumps 0 @POOL2_7459 1 @POOL2_7488 2 @POOL2_7517 -1 @POOL2_7546 -1 @POOL2_7546 -1 @POOL2_7546 -1 @POOL2_7546 
+
+:POOL2_7459
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B4' // s$  // ~z~I'll only play you if you want to make it interesting.
+04AE: $ACTOR_SPEECH_WAV_FILE = 31603 // = constant 
+jump @POOL2_7546 
+
+:POOL2_7488
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B5' // s$  // ~z~You want to place a small wager?
+04AE: $ACTOR_SPEECH_WAV_FILE = 31604 // = constant 
+jump @POOL2_7546 
+
+:POOL2_7517
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'POOL_B6' // s$  // ~z~C'mon, put your money where your mouth is playa.
+04AE: $ACTOR_SPEECH_WAV_FILE = 31605 // = constant 
+jump @POOL2_7546 
+
+:POOL2_7546
+create_thread @AUDIOL 164@ 0 1 1 0 
+
+:POOL2_7565
+03F0: enable_text_draw 1 
+32@ = 0 
+35@ += 1 
+
+:POOL2_7583
+if 
+  35@ == 2 
+jf @POOL2_7743 
+if or
+876F:   not text_priority_displayed 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_7743 
+00BE: text_clear_all 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_7646 
+159@ = Player.Money($PLAYER_CHAR)
+
+:POOL2_7646
+0989: set_text_boxes_width 200 
+0512: show_permanent_text_box 'PL_H1'  // ~k~~PED_JUMPING~ Increase Wager~N~~k~~PED_FIREWEAPON~ Decrease Wager~N~~k~~PED_SPRINT~ Proceed~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+$9460 = 50 
+$9461 = 1000 
+008B: 161@ = $9460 // (int) 
+008B: 162@ = $9460 // (int) 
+008B: 155@ = $9460 // (int) 
+008B: 39@ = $9460 // (int) 
+39@ *= -1 
+Player.Money($PLAYER_CHAR) += 39@
+02A3: enable_widescreen 0 
+create_thread @CLEANAU 
+35@ += 1 
+
+:POOL2_7743
+if 
+  35@ == 3 
+jf @POOL2_8937 
+gosub @POOL2_54567 
+$BJACK_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+if 
+00E1:   player 0 pressed_key 14 
+jf @POOL2_8202 
+if and
+   not 126@ == 1 
+   not 126@ == -1 
+jf @POOL2_8151 
+if 
+  155@ >= 10000 
+jf @POOL2_7852 
+160@ = 1000 
+jump @POOL2_7956 
+
+:POOL2_7852
+if 
+  155@ >= 1000 
+jf @POOL2_7885 
+160@ = 100 
+jump @POOL2_7956 
+
+:POOL2_7885
+if 
+  155@ >= 100 
+jf @POOL2_7917 
+160@ = 10 
+jump @POOL2_7956 
+
+:POOL2_7917
+if 
+  155@ == 0 
+jf @POOL2_7949 
+160@ = 2 
+jump @POOL2_7956 
+
+:POOL2_7949
+160@ = 1 
+
+:POOL2_7956
+if 
+001F:   160@ > $BJACK_PLAYER_CASH // (int) 
+jf @POOL2_7983 
+008B: 160@ = $BJACK_PLAYER_CASH // (int) 
+
+:POOL2_7983
+0085: 39@ = 155@ // (int) 
+005A: 39@ += 160@ // (int) 
+if 
+001F:   39@ > $9461 // (int) 
+jf @POOL2_8034 
+008B: 160@ = $9461 // (int) 
+0062: 160@ -= 155@ // (int) 
+
+:POOL2_8034
+if 
+  0 > 160@ 
+jf @POOL2_8059 
+160@ *= -1 
+
+:POOL2_8059
+005A: 155@ += 160@ // (int) 
+005A: 161@ += 160@ // (int) 
+005A: 162@ += 160@ // (int) 
+160@ *= -1 
+Player.Money($PLAYER_CHAR) += 160@
+126@ += 1 
+if 
+  126@ > 1 
+jf @POOL2_8137 
+126@ = 2 
+jump @POOL2_8144 
+
+:POOL2_8137
+32@ = 0 
+
+:POOL2_8144
+jump @POOL2_8195 
+
+:POOL2_8151
+if 
+  126@ == 1 
+jf @POOL2_8195 
+if 
+  32@ > 500 
+jf @POOL2_8195 
+126@ = 2 
+
+:POOL2_8195
+jump @POOL2_8576 
+
+:POOL2_8202
+if 
+   not 126@ == 0 
+jf @POOL2_8227 
+126@ = 0 
+
+:POOL2_8227
+if 
+00E1:   player 0 pressed_key 17 
+jf @POOL2_8551 
+if 
+   not 128@ == 1 
+jf @POOL2_8518 
+if 
+  155@ > 10000 
+jf @POOL2_8296 
+160@ = -1000 
+jump @POOL2_8368 
+
+:POOL2_8296
+if 
+  155@ > 1000 
+jf @POOL2_8329 
+160@ = -100 
+jump @POOL2_8368 
+
+:POOL2_8329
+if 
+  155@ > 100 
+jf @POOL2_8361 
+160@ = -10 
+jump @POOL2_8368 
+
+:POOL2_8361
+160@ = -1 
+
+:POOL2_8368
+0085: 39@ = 155@ // (int) 
+005A: 39@ += 160@ // (int) 
+if 
+001E:   $9460 > 39@ // (int) 
+jf @POOL2_8426 
+0085: 160@ = 155@ // (int) 
+0064: 160@ -= $9460 // (int) 
+160@ *= -1 
+
+:POOL2_8426
+005A: 155@ += 160@ // (int) 
+005A: 161@ += 160@ // (int) 
+005A: 162@ += 160@ // (int) 
+160@ *= -1 
+Player.Money($PLAYER_CHAR) += 160@
+128@ += 1 
+if 
+  128@ > 1 
+jf @POOL2_8504 
+128@ = 2 
+jump @POOL2_8511 
+
+:POOL2_8504
+32@ = 0 
+
+:POOL2_8511
+jump @POOL2_8544 
+
+:POOL2_8518
+if 
+  32@ > 500 
+jf @POOL2_8544 
+128@ = 2 
+
+:POOL2_8544
+jump @POOL2_8576 
+
+:POOL2_8551
+if 
+   not 128@ == 0 
+jf @POOL2_8576 
+128@ = 0 
+
+:POOL2_8576
+if 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_8652 
+$30 = 0 
+if 
+   not Actor.Dead(164@)
+jf @POOL2_8624 
+03FE: set_actor 164@ money 162@ 
+
+:POOL2_8624
+161@ = 0 
+178@ = 0 
+35@ = 99 
+jump @POOL2_8720 
+
+:POOL2_8652
+if 
+00E1:   player 0 pressed_key 4 
+jf @POOL2_8720 
+$30 = 0 
+09D8: NOP 1 
+0A3F: set_unused_flag 1 
+$1904 = 1 
+Player.Money($PLAYER_CHAR) += 161@
+161@ = 0 
+178@ = 1 
+35@ = 99 
+
+:POOL2_8720
+if 
+00E1:   player 0 pressed_key 15 
+jf @POOL2_8912 
+if 
+  127@ == 0 
+jf @POOL2_8905 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_8822 
+223@ += 1.1 
+0792: disembark_instantly_actor 213@ 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_8822
+if 
+   not Actor.Dead(214@)
+jf @POOL2_8889 
+227@ += 1.1 
+0792: disembark_instantly_actor 214@ 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_8889
+03E6: remove_text_box 
+108@ = 1 
+127@ = 1 
+
+:POOL2_8905
+jump @POOL2_8937 
+
+:POOL2_8912
+if 
+  127@ == 1 
+jf @POOL2_8937 
+127@ = 0 
+
+:POOL2_8937
+if 
+  35@ == 99 
+jf @POOL2_8996 
+if 
+   not Actor.Dead(164@)
+jf @POOL2_8976 
+0647: AS_actor 164@ clear_look_task 
+
+:POOL2_8976
+0826: enable_hud 0 
+03E6: remove_text_box 
+35@ = 0 
+34@ += 1 
+
+:POOL2_8996
+return 
+
+:POOL2_8998
+if 
+  35@ == -1 
+jf @POOL2_9154 
+213@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+214@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+215@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+106@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+107@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+216@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+
+:POOL2_9154
+if 
+  35@ == 0 
+jf @POOL2_9713 
+if 
+  178@ == 0 
+jf @POOL2_9225 
+217@ = -1 
+218@ = -1 
+219@ = 1 
+220@ = 0 
+jump @POOL2_9253 
+
+:POOL2_9225
+217@ = -1 
+218@ = -1 
+219@ = 1 
+220@ = 1 
+
+:POOL2_9253
+0400: store_coords_to 221@ 222@ 223@ from_object 163@ with_offset 0.0 1.8 0.0 
+0087: 224@ = 105@ // (float) 
+224@ += 180.0 
+0400: store_coords_to 225@ 226@ 227@ from_object 163@ with_offset 0.0 -1.8 0.0 
+0087: 228@ = 105@ // (float) 
+008B: 213@ = $PLAYER_ACTOR // (int) 
+0085: 214@ = 164@ // (int) 
+if 
+83CA:   not object 106@ exists 
+jf @POOL2_9398 
+106@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+Object.CollisionDetection(106@) = False
+
+:POOL2_9398
+if 
+83CA:   not object 107@ exists 
+jf @POOL2_9443 
+107@ = Object.Create(#K_POOLQ, 0.0, 0.0, 0.0)
+Object.CollisionDetection(107@) = False
+
+:POOL2_9443
+if 
+   not Actor.Dead(213@)
+jf @POOL2_9488 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+06AB: set_actor 213@ all_weapons_hidden 1 
+
+:POOL2_9488
+if 
+   not Actor.Dead(214@)
+jf @POOL2_9533 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+06AB: set_actor 214@ all_weapons_hidden 1 
+
+:POOL2_9533
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+0085: 231@ = 217@ // (int) 
+232@ = 1 
+04AF: 180@ = 0 // = constant 
+278@ = -1 
+279@ = 0 
+236@ = 1 
+if 
+  236@ == 0 
+jf @POOL2_9662 
+242@ = 10.0 
+243@ = 0.02 
+244@ = 0.0 
+jump @POOL2_9692 
+
+:POOL2_9662
+242@ = 22.5 
+243@ = 0.02 
+244@ = 0.0 
+
+:POOL2_9692
+184@ = 1 
+35@ = 0 
+34@ += 1 
+
+:POOL2_9713
+return 
+
+:POOL2_9715
+if 
+  233@ == 0 
+jf @POOL2_10251 
+if 
+  35@ == 0 
+jf @POOL2_10100 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_9813 
+223@ += 1.0 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_9813
+if 
+   not Actor.Dead(214@)
+jf @POOL2_9875 
+227@ += 1.1 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_9875
+if 
+   not Actor.Dead(215@)
+jf @POOL2_10100 
+070B: set_actor 215@ onbone_attached_object_operation 0 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 215@ with_offset 1.0 3.0 1.0 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+Camera.OnPed(215@, 15, 2)
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_CHALKCUE" IFP "POOL" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor -1 perform_animation "POOL_IDLE_STANCE" IFP "POOL" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_10081 
+0618: assign_actor 215@ to_AS_pack 47@ 
+
+:POOL2_10081
+061B: remove_references_to_AS_pack 47@ 
+32@ = 0 
+35@ += 1 
+
+:POOL2_10100
+if 
+  35@ == 1 
+jf @POOL2_10178 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_10178 
+062E: get_actor 215@ task 1560 status_store_to 39@ // ret 7 if not found 
+if or
+04A4:   39@ == 7 // == constant 
+  32@ > 3000 
+jf @POOL2_10178 
+35@ = 99 
+
+:POOL2_10178
+if 
+  32@ > 500 
+jf @POOL2_10244 
+if 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_10244 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_10244 
+126@ = 1 
+35@ = 99 
+
+:POOL2_10244
+jump @POOL2_10274 
+
+:POOL2_10251
+if 
+   not Actor.Dead(215@)
+jf @POOL2_10274 
+35@ = 99 
+
+:POOL2_10274
+if 
+  35@ == 99 
+jf @POOL2_10319 
+040D: unload_wav 4 
+03E6: remove_text_box 
+32@ = 0 
+34@ += 1 
+35@ = 0 
+
+:POOL2_10319
+if 
+00E1:   player 0 pressed_key 15 
+jf @POOL2_10509 
+if and
+  127@ == 0 
+  183@ > 1000 
+jf @POOL2_10502 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_10424 
+223@ += 1.1 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_10424
+if 
+   not Actor.Dead(214@)
+jf @POOL2_10486 
+227@ += 1.1 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_10486
+03E6: remove_text_box 
+108@ = 1 
+127@ = 1 
+
+:POOL2_10502
+jump @POOL2_10541 
+
+:POOL2_10509
+if 
+  127@ == 1 
+jf @POOL2_10534 
+127@ = 0 
+
+:POOL2_10534
+183@ = 0 
+
+:POOL2_10541
+return 
+
+:POOL2_10543
+if and
+   not 232@ == 0 
+  230@ == 1 
+jf @POOL2_10575 
+gosub @POOL2_59434 
+
+:POOL2_10575
+if 
+   not 232@ == 0 
+jf @POOL2_10858 
+if 
+  66@ == 1 
+jf @POOL2_10744 
+if 
+83CA:   not object 82@ exists 
+jf @POOL2_10737 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.35 0.0 0.9296875 
+0089: 627@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 628@ = $TEMPVAR_FLOAT_2 // (float) 
+gosub @POOL2_54047 
+0088: $TEMPVAR_FLOAT_1 = 627@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 628@ // (float) 
+82@ = Object.Init(#K_POOLBALLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+Object.Angle(82@) = $TEMPVAR_ANGLE
+
+:POOL2_10737
+66@ = 0 
+
+:POOL2_10744
+if 
+00E1:   player 0 pressed_key 14 
+jf @POOL2_10833 
+if 
+  128@ == 0 
+jf @POOL2_10826 
+if 
+  198@ == 2 
+jf @POOL2_10811 
+198@ = 0 
+jump @POOL2_10819 
+
+:POOL2_10811
+205@ = 3001 
+
+:POOL2_10819
+128@ = 1 
+
+:POOL2_10826
+jump @POOL2_10858 
+
+:POOL2_10833
+if 
+  128@ == 1 
+jf @POOL2_10858 
+128@ = 0 
+
+:POOL2_10858
+if 
+  232@ == 1 
+jf @POOL2_11092 
+if 
+  35@ == 0 
+jf @POOL2_11092 
+if 
+  230@ == 1 
+jf @POOL2_11009 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.35 0.0 0.0 
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+Object.PutAt(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 560@)
+Object.Angle(82@) = $TEMPVAR_ANGLE
+32@ = 0 
+35@ = 99 
+jump @POOL2_12133 
+jump @POOL2_11092 
+
+:POOL2_11009
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.35 0.0 0.0 
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+Object.PutAt(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 560@)
+Object.Angle(82@) = $TEMPVAR_ANGLE
+35@ = 99 
+jump @POOL2_12133 
+
+:POOL2_11092
+if 
+  232@ == 2 
+jf @POOL2_11879 
+if 
+  35@ == 0 
+jf @POOL2_11508 
+if 
+  230@ == 1 
+jf @POOL2_11386 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.35 0.0 0.0 
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+0089: 627@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 628@ = $TEMPVAR_FLOAT_2 // (float) 
+gosub @POOL2_54047 
+0088: $TEMPVAR_FLOAT_1 = 627@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 628@ // (float) 
+Object.PutAt(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 560@)
+Object.Angle(82@) = $TEMPVAR_ANGLE
+32@ = 0 
+35@ += 1 
+198@ = 0 
+205@ = 0 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 -0.001 2.5 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 0.001 0.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+jump @POOL2_11508 
+
+:POOL2_11386
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.35 0.0 0.0 
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+0089: 627@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 628@ = $TEMPVAR_FLOAT_2 // (float) 
+gosub @POOL2_54047 
+0088: $TEMPVAR_FLOAT_1 = 627@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 628@ // (float) 
+Object.PutAt(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 560@)
+Object.Angle(82@) = $TEMPVAR_ANGLE
+35@ = 99 
+jump @POOL2_12133 
+
+:POOL2_11508
+if 
+  35@ == 1 
+jf @POOL2_11879 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+39@ = 0 
+if or
+00E1:   player 0 pressed_key 0 
+00E1:   player 0 pressed_key 1 
+jf @POOL2_11577 
+39@ = 1 
+
+:POOL2_11577
+if 
+  39@ == 1 
+jf @POOL2_11791 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 235@ = integer $MOVE_AXIS_X to_float 
+008F: 234@ = integer $MOVE_AXIS_Y to_float 
+235@ /= 128.0 
+234@ /= -128.0 
+235@ *= 0.01 
+234@ *= 0.01 
+gosub @POOL2_54416 
+006D: $6466 *= 234@ // (float) 
+006D: $6468 *= 234@ // (float) 
+0059: $TEMPVAR_FLOAT_1 += $6466 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $6468 // (float) 
+006D: $6467 *= 235@ // (float) 
+006D: $6469 *= 235@ // (float) 
+0059: $TEMPVAR_FLOAT_1 += $6467 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $6469 // (float) 
+0089: 627@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 628@ = $TEMPVAR_FLOAT_2 // (float) 
+gosub @POOL2_54047 
+0088: $TEMPVAR_FLOAT_1 = 627@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 628@ // (float) 
+Object.PutAt(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 560@)
+
+:POOL2_11791
+if 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_11854 
+if 
+  126@ == 0 
+jf @POOL2_11847 
+35@ = 99 
+126@ = 1 
+jump @POOL2_12133 
+
+:POOL2_11847
+jump @POOL2_11879 
+
+:POOL2_11854
+if 
+  126@ == 1 
+jf @POOL2_11879 
+126@ = 0 
+
+:POOL2_11879
+if 
+  232@ == 0 
+jf @POOL2_11911 
+35@ = 99 
+jump @POOL2_12133 
+
+:POOL2_11911
+if 
+00E1:   player 0 pressed_key 15 
+jf @POOL2_12101 
+if and
+  127@ == 0 
+  183@ > 1000 
+jf @POOL2_12094 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_12016 
+223@ += 1.1 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_12016
+if 
+   not Actor.Dead(214@)
+jf @POOL2_12078 
+227@ += 1.1 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_12078
+03E6: remove_text_box 
+108@ = 1 
+127@ = 1 
+
+:POOL2_12094
+jump @POOL2_12133 
+
+:POOL2_12101
+if 
+  127@ == 1 
+jf @POOL2_12126 
+127@ = 0 
+
+:POOL2_12126
+183@ = 0 
+
+:POOL2_12133
+if 
+  35@ == 99 
+jf @POOL2_12167 
+34@ += 1 
+35@ = 0 
+03E6: remove_text_box 
+
+:POOL2_12167
+return 
+
+:POOL2_12169
+if 
+  230@ == 1 
+jf @POOL2_15168 
+gosub @POOL2_57079 
+if 
+  35@ == -1 
+jf @POOL2_12234 
+238@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+
+:POOL2_12234
+if 
+  35@ == 0 
+jf @POOL2_13428 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_12314 
+223@ += 1.1 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_12314
+if 
+   not Actor.Dead(214@)
+jf @POOL2_12376 
+227@ += 1.1 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_12376
+if 
+   not Actor.Dead(215@)
+jf @POOL2_12437 
+Actor.StorePos(215@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += -10.0 
+Actor.PutAt(215@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.LockInCurrentPosition(215@) = True
+
+:POOL2_12437
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 -0.001 2.5 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 0.001 0.0 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_12537 
+$TEMPVAR_ANGLE = Object.Angle(82@)
+0453: set_object 82@ XYZ_rotation 0.0 0.0 $TEMPVAR_ANGLE 
+
+:POOL2_12537
+if 
+83CA:   not object 238@ exists 
+jf @POOL2_12626 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 0.0 -10.0 
+238@ = Object.Init(#K_POOLQ2, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.ToggleInMovingList(238@) = False
+Object.CollisionDetection(238@) = False
+0418: set_object 238@ draw_last 1 
+jump @POOL2_12647 
+
+:POOL2_12626
+Object.ToggleInMovingList(238@) = False
+Object.CollisionDetection(238@) = False
+0418: set_object 238@ draw_last 1 
+
+:POOL2_12647
+205@ = 0 
+198@ = 0 
+if 
+  245@ == 0 
+jf @POOL2_13380 
+239@ = -1 
+42@ = 99999.9 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_13229 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  231@ == -1 
+jf @POOL2_12880 
+39@ = 1 
+
+:POOL2_12751
+if 
+  16 > 39@ 
+jf @POOL2_12873 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_12859 
+Object.StorePos(82@(39@,16i), 165@, 166@, 167@)
+0509: 43@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 165@ 166@ 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_12859 
+0085: 239@ = 39@ // (int) 
+0087: 42@ = 43@ // (float) 
+
+:POOL2_12859
+39@ += 1 
+jump @POOL2_12751 
+
+:POOL2_12873
+jump @POOL2_13229 
+
+:POOL2_12880
+if 
+  231@ == 0 
+jf @POOL2_13034 
+39@ = 1 
+
+:POOL2_12905
+if 
+  8 > 39@ 
+jf @POOL2_13027 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_13013 
+Object.StorePos(82@(39@,16i), 165@, 166@, 167@)
+0509: 43@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 165@ 166@ 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_13013 
+0085: 239@ = 39@ // (int) 
+0087: 42@ = 43@ // (float) 
+
+:POOL2_13013
+39@ += 1 
+jump @POOL2_12905 
+
+:POOL2_13027
+jump @POOL2_13229 
+
+:POOL2_13034
+if 
+  231@ == 1 
+jf @POOL2_13188 
+39@ = 9 
+
+:POOL2_13059
+if 
+  16 > 39@ 
+jf @POOL2_13181 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_13167 
+Object.StorePos(82@(39@,16i), 165@, 166@, 167@)
+0509: 43@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 165@ 166@ 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_13167 
+0085: 239@ = 39@ // (int) 
+0087: 42@ = 43@ // (float) 
+
+:POOL2_13167
+39@ += 1 
+jump @POOL2_13059 
+
+:POOL2_13181
+jump @POOL2_13229 
+
+:POOL2_13188
+if 
+  231@ == 2 
+jf @POOL2_13229 
+if 
+03CA:   object 90@ exists 
+jf @POOL2_13229 
+239@ = 8 
+
+:POOL2_13229
+if and
+   not 239@ == -1 
+  16 > 239@ 
+jf @POOL2_13373 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_13373 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+03CA:   object 82@(239@,16i) exists 
+jf @POOL2_13322 
+Object.StorePos(82@(239@,16i), 165@, 166@, 167@)
+
+:POOL2_13322
+0087: 169@ = 165@ // (float) 
+0065: 169@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 170@ = 166@ // (float) 
+0065: 170@ -= $TEMPVAR_FLOAT_2 // (float) 
+0604: get_Z_angle_for_point 169@ 170@ store_to 42@ 
+Object.Angle(82@) = 42@
+
+:POOL2_13373
+jump @POOL2_13387 
+
+:POOL2_13380
+245@ = 0 
+
+:POOL2_13387
+240@ = 0 
+gosub @POOL2_28444 
+199@ = 0.0 
+200@ = 0.0 
+35@ += 1 
+
+:POOL2_13428
+if 
+  35@ == 1 
+jf @POOL2_13658 
+if 
+00E1:   player 0 pressed_key 13 
+jf @POOL2_13633 
+if 
+  237@ == 0 
+jf @POOL2_13541 
+if 
+  236@ == 0 
+jf @POOL2_13520 
+236@ = 1 
+237@ = 1 
+jump @POOL2_13534 
+
+:POOL2_13520
+236@ = 0 
+237@ = 1 
+
+:POOL2_13534
+205@ = 0 
+
+:POOL2_13541
+if 
+  236@ == 0 
+jf @POOL2_13596 
+242@ = 10.0 
+243@ = 0.02 
+244@ = 0.0 
+jump @POOL2_13626 
+
+:POOL2_13596
+242@ = 22.5 
+243@ = 0.02 
+244@ = 0.0 
+
+:POOL2_13626
+jump @POOL2_13658 
+
+:POOL2_13633
+if 
+  237@ == 1 
+jf @POOL2_13658 
+237@ = 0 
+
+:POOL2_13658
+0A4A: store_joystick_X_offset_to 201@ Y_offset_to 202@ 
+if or
+00E1:   player 0 pressed_key 0 
+  201@ > 0.01 
+  -0.01 > 201@ 
+jf @POOL2_13809 
+$TEMPVAR_ANGLE = Object.Angle(82@)
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 42@ = integer $MOVE_AXIS_X to_float 
+42@ /= 128.0 
+42@ *= 1.0 
+005F: $TEMPVAR_ANGLE += 42@ // (float) 
+201@ *= -0.4 
+005F: $TEMPVAR_ANGLE += 201@ // (float) 
+0453: set_object 82@ XYZ_rotation 0.0 0.0 0.0 
+Object.Angle(82@) = $TEMPVAR_ANGLE
+
+:POOL2_13809
+if 
+  236@ == 0 
+jf @POOL2_13924 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 -0.001 2.5 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.0 0.001 0.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:POOL2_13924
+if 
+  236@ == 1 
+jf @POOL2_14039 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 82@ with_offset 0.0 -0.5 0.3 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 82@ with_offset 0.0 0.5 0.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:POOL2_14039
+if 
+  236@ == 0 
+jf @POOL2_14171 
+if 
+00E1:   player 0 pressed_key 14 
+jf @POOL2_14146 
+if 
+  128@ == 0 
+jf @POOL2_14139 
+if 
+  198@ == 2 
+jf @POOL2_14124 
+198@ = 0 
+jump @POOL2_14132 
+
+:POOL2_14124
+205@ = 3001 
+
+:POOL2_14132
+128@ = 1 
+
+:POOL2_14139
+jump @POOL2_14171 
+
+:POOL2_14146
+if 
+  128@ == 1 
+jf @POOL2_14171 
+128@ = 0 
+
+:POOL2_14171
+if 
+03CA:   object 238@ exists 
+jf @POOL2_14310 
+if 
+  236@ == 0 
+jf @POOL2_14237 
+0400: store_coords_to 165@ 166@ 167@ from_object 82@ with_offset 244@ -0.05 243@ 
+jump @POOL2_14262 
+
+:POOL2_14237
+0400: store_coords_to 165@ 166@ 167@ from_object 82@ with_offset 244@ -0.05 243@ 
+
+:POOL2_14262
+$TEMPVAR_ANGLE = Object.Angle(82@)
+$TEMPVAR_ANGLE += 180.0 
+Object.PutAt(238@, 165@, 166@, 167@)
+0453: set_object 238@ XYZ_rotation 242@ 0.0 $TEMPVAR_ANGLE 
+
+:POOL2_14310
+if 
+80E1:   not player 0 pressed_key 0 
+jf @POOL2_14348 
+240@ = 0 
+gosub @POOL2_28444 
+jump @POOL2_14448 
+
+:POOL2_14348
+if 
+   not 240@ == 0 
+jf @POOL2_14434 
+39@ = 0 
+
+:POOL2_14373
+if 
+  10 > 39@ 
+jf @POOL2_14434 
+if 
+03CA:   object 347@(39@,10i) exists 
+jf @POOL2_14420 
+Object.Destroy(347@(39@,10i))
+
+:POOL2_14420
+39@ += 1 
+jump @POOL2_14373 
+
+:POOL2_14434
+240@ = 0 
+32@ = 0 
+
+:POOL2_14448
+if 
+0736:   is_keyboard_key_just_pressed 131 
+jf @POOL2_14474 
+242@ += 0.5 
+
+:POOL2_14474
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @POOL2_14500 
+242@ += -0.5 
+
+:POOL2_14500
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @POOL2_14525 
+243@ += 0.001 
+
+:POOL2_14525
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @POOL2_14550 
+243@ += -0.001 
+
+:POOL2_14550
+if 
+0736:   is_keyboard_key_just_pressed 128 
+jf @POOL2_14576 
+244@ += 0.0001 
+
+:POOL2_14576
+if 
+0736:   is_keyboard_key_just_pressed 129 
+jf @POOL2_14602 
+244@ += -0.0001 
+
+:POOL2_14602
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @POOL2_15029 
+03A9: save_newline_to_debug_file 
+05B6: 17 //         
+03A8: save_float_to_debug_file 242@ 
+03A9: save_newline_to_debug_file 
+05B6: 18 //         
+03A8: save_float_to_debug_file 243@ 
+03A9: save_newline_to_debug_file 
+05B6: 19 // IMPORT DETAILS
+03A8: save_float_to_debug_file 244@ 
+
+:POOL2_15029
+if 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_15106 
+if 
+  126@ == 0 
+jf @POOL2_15099 
+if 
+03CA:   object 238@ exists 
+jf @POOL2_15085 
+Object.Destroy(238@)
+
+:POOL2_15085
+35@ = 99 
+126@ = 1 
+
+:POOL2_15099
+jump @POOL2_15131 
+
+:POOL2_15106
+if 
+  126@ == 1 
+jf @POOL2_15131 
+126@ = 0 
+
+:POOL2_15131
+if 
+0735:   is_keyboard_key_pressed 72 
+jf @POOL2_15161 
+gosub @POOL2_33760 
+Object.Angle(82@) = 363@
+
+:POOL2_15161
+jump @POOL2_15190 
+
+:POOL2_15168
+gosub @POOL2_33760 
+Object.Angle(82@) = 363@
+35@ = 99 
+
+:POOL2_15190
+if 
+00E1:   player 0 pressed_key 15 
+jf @POOL2_15380 
+if and
+  127@ == 0 
+  183@ > 1000 
+jf @POOL2_15373 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_15295 
+223@ += 1.1 
+02CE: 223@ = ground_z_at 221@ 222@ 223@ 
+Actor.PutAt(213@, 221@, 222@, 223@)
+Actor.Angle(213@) = 224@
+
+:POOL2_15295
+if 
+   not Actor.Dead(214@)
+jf @POOL2_15357 
+227@ += 1.1 
+02CE: 227@ = ground_z_at 225@ 226@ 227@ 
+Actor.PutAt(214@, 225@, 226@, 227@)
+Actor.Angle(214@) = 228@
+
+:POOL2_15357
+03E6: remove_text_box 
+108@ = 1 
+127@ = 1 
+
+:POOL2_15373
+jump @POOL2_15412 
+
+:POOL2_15380
+if 
+  127@ == 1 
+jf @POOL2_15405 
+127@ = 0 
+
+:POOL2_15405
+183@ = 0 
+
+:POOL2_15412
+if 
+  35@ == 99 
+jf @POOL2_15534 
+39@ = 0 
+
+:POOL2_15437
+if 
+  10 > 39@ 
+jf @POOL2_15498 
+if 
+03CA:   object 347@(39@,10i) exists 
+jf @POOL2_15484 
+Object.Destroy(347@(39@,10i))
+
+:POOL2_15484
+39@ += 1 
+jump @POOL2_15437 
+
+:POOL2_15498
+199@ = 0.0 
+200@ = 0.0 
+34@ += 2 
+35@ = 0 
+03E6: remove_text_box 
+
+:POOL2_15534
+return 
+
+:POOL2_15536
+return 
+
+:POOL2_15538
+gosub @POOL2_57079 
+if 
+  230@ == 1 
+jf @POOL2_16297 
+if 
+00E1:   player 0 pressed_key 15 
+jf @POOL2_15633 
+if 
+  127@ == 0 
+jf @POOL2_15626 
+34@ = 5 
+35@ = 0 
+127@ = 1 
+245@ = 1 
+
+:POOL2_15626
+jump @POOL2_16290 
+
+:POOL2_15633
+if 
+  127@ == 1 
+jf @POOL2_15658 
+127@ = 0 
+
+:POOL2_15658
+if 
+  35@ == 0 
+jf @POOL2_15690 
+gosub @POOL2_18823 
+35@ += 1 
+
+:POOL2_15690
+if 
+  250@ == 0 
+jf @POOL2_15715 
+gosub @POOL2_53497 
+
+:POOL2_15715
+if 
+  250@ == 0 
+jf @POOL2_16015 
+gosub @POOL2_16755 
+if 
+  252@ == 1 
+jf @POOL2_16005 
+if 
+0A4B:   controls_set_to_joystick 
+jf @POOL2_15874 
+if 
+00E1:   player 0 pressed_key 3 
+jf @POOL2_15857 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 42@ = integer $SPECIAL_AXIS_Y to_float 
+42@ /= 128.0 
+42@ *= -0.2 
+246@ = 0.2 
+005B: 246@ += 42@ // (float) 
+jump @POOL2_15867 
+
+:POOL2_15857
+246@ = 0.2 
+
+:POOL2_15867
+jump @POOL2_15998 
+
+:POOL2_15874
+0A4A: store_joystick_X_offset_to 201@ Y_offset_to 202@ 
+005B: 200@ += 202@ // (float) 
+if 
+  200@ > 128.0 
+jf @POOL2_15921 
+200@ = 128.0 
+
+:POOL2_15921
+if 
+  -128.0 > 200@ 
+jf @POOL2_15952 
+200@ = -128.0 
+
+:POOL2_15952
+0087: 42@ = 200@ // (float) 
+42@ /= 128.0 
+42@ *= -0.2 
+246@ = 0.2 
+005B: 246@ += 42@ // (float) 
+
+:POOL2_15998
+jump @POOL2_16015 
+
+:POOL2_16005
+246@ = 0.0 
+
+:POOL2_16015
+if 
+  250@ == 0 
+jf @POOL2_16075 
+if 
+  246@ > 0.25 
+jf @POOL2_16068 
+gosub @POOL2_19820 
+jump @POOL2_16075 
+
+:POOL2_16068
+gosub @POOL2_18662 
+
+:POOL2_16075
+if 
+  35@ == 1 
+jf @POOL2_16123 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_16123 
+gosub @POOL2_19005 
+35@ += 1 
+
+:POOL2_16123
+if 
+  35@ == 2 
+jf @POOL2_16148 
+gosub @POOL2_17009 
+
+:POOL2_16148
+if 
+  35@ == 3 
+jf @POOL2_16249 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_16249 
+592@ += 1.1 
+02CE: 592@ = ground_z_at 584@ 588@ 592@ 
+Actor.PutAt(215@, 584@, 588@, 592@)
+Actor.Angle(215@) = 596@
+0619: enable_actor 215@ collision_detection 1 
+32@ = 0 
+35@ = 99 
+
+:POOL2_16249
+if 
+  35@ == 99 
+jf @POOL2_16290 
+03E6: remove_text_box 
+32@ = 0 
+34@ += 1 
+35@ = 0 
+
+:POOL2_16290
+jump @POOL2_16753 
+
+:POOL2_16297
+if 
+  35@ == 0 
+jf @POOL2_16329 
+gosub @POOL2_18823 
+35@ += 1 
+
+:POOL2_16329
+if 
+  250@ == 0 
+jf @POOL2_16478 
+gosub @POOL2_16755 
+if 
+  252@ == 1 
+jf @POOL2_16461 
+if 
+  2000 > 32@ 
+jf @POOL2_16408 
+246@ = 0.2 
+jump @POOL2_16454 
+
+:POOL2_16408
+if 
+  3000 > 32@ 
+jf @POOL2_16444 
+246@ = 0.0 
+jump @POOL2_16454 
+
+:POOL2_16444
+246@ = 1.0 
+
+:POOL2_16454
+jump @POOL2_16478 
+
+:POOL2_16461
+32@ = 0 
+246@ = 0.0 
+
+:POOL2_16478
+if 
+  250@ == 0 
+jf @POOL2_16538 
+if 
+  246@ > 0.25 
+jf @POOL2_16531 
+gosub @POOL2_19820 
+jump @POOL2_16538 
+
+:POOL2_16531
+gosub @POOL2_18662 
+
+:POOL2_16538
+if 
+  35@ == 1 
+jf @POOL2_16586 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_16586 
+gosub @POOL2_19005 
+35@ += 1 
+
+:POOL2_16586
+if 
+  35@ == 2 
+jf @POOL2_16611 
+gosub @POOL2_17009 
+
+:POOL2_16611
+if 
+  35@ == 3 
+jf @POOL2_16712 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_16712 
+592@ += 1.1 
+02CE: 592@ = ground_z_at 584@ 588@ 592@ 
+Actor.PutAt(215@, 584@, 588@, 592@)
+Actor.Angle(215@) = 596@
+0619: enable_actor 215@ collision_detection 1 
+32@ = 0 
+35@ = 99 
+
+:POOL2_16712
+if 
+  35@ == 99 
+jf @POOL2_16753 
+03E6: remove_text_box 
+32@ = 0 
+34@ += 1 
+35@ = 0 
+
+:POOL2_16753
+return 
+
+:POOL2_16755
+252@ = 0 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_17007 
+if 
+  600@ == 1 
+jf @POOL2_16836 
+if 
+   Actor.Animation(215@) == "POOL_SHORT_SHOT"
+jf @POOL2_16836 
+252@ = 1 
+
+:POOL2_16836
+if 
+  600@ == 2 
+jf @POOL2_16892 
+if 
+   Actor.Animation(215@) == "POOL_MED_SHOT"
+jf @POOL2_16892 
+252@ = 1 
+
+:POOL2_16892
+if 
+  600@ == 3 
+jf @POOL2_16949 
+if 
+   Actor.Animation(215@) == "POOL_LONG_SHOT"
+jf @POOL2_16949 
+252@ = 1 
+
+:POOL2_16949
+if 
+  600@ == 4 
+jf @POOL2_17007 
+if 
+   Actor.Animation(215@) == "POOL_XLONG_SHOT"
+jf @POOL2_17007 
+252@ = 1 
+
+:POOL2_17007
+return 
+
+:POOL2_17009
+if 
+   not Actor.Dead(215@)
+jf @POOL2_17620 
+if 
+  251@ == 0 
+jf @POOL2_17620 
+if 
+  600@ == 1 
+jf @POOL2_17187 
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_SHORT_START" IFP "POOL" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor -1 perform_animation "POOL_SHORT_SHOT" IFP "POOL" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_17182 
+0618: assign_actor 215@ to_AS_pack 47@ 
+
+:POOL2_17182
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_17187
+if 
+  600@ == 2 
+jf @POOL2_17327 
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_MED_START" IFP "POOL" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor -1 perform_animation "POOL_MED_SHOT" IFP "POOL" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_17322 
+0618: assign_actor 215@ to_AS_pack 47@ 
+
+:POOL2_17322
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_17327
+if 
+  600@ == 3 
+jf @POOL2_17469 
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_LONG_START" IFP "POOL" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor -1 perform_animation "POOL_LONG_SHOT" IFP "POOL" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_17464 
+0618: assign_actor 215@ to_AS_pack 47@ 
+
+:POOL2_17464
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_17469
+if 
+  600@ == 4 
+jf @POOL2_17613 
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_XLONG_START" IFP "POOL" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor -1 perform_animation "POOL_XLONG_SHOT" IFP "POOL" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_17608 
+0618: assign_actor 215@ to_AS_pack 47@ 
+
+:POOL2_17608
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_17613
+251@ += 1 
+
+:POOL2_17620
+if 
+  251@ == 1 
+jf @POOL2_18138 
+if 
+  250@ == 0 
+jf @POOL2_18124 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_18117 
+062E: get_actor 215@ task 1560 status_store_to 39@ // ret 7 if not found 
+if 
+84A4:   not  39@ == 7 // == constant 
+jf @POOL2_18103 
+if 
+  600@ == 1 
+jf @POOL2_17802 
+if 
+   Actor.Animation(215@) == "POOL_SHORT_SHOT"
+jf @POOL2_17802 
+0614: set_actor 215@ animation "POOL_SHORT_SHOT" progress_to 247@ // 0.0 to 1.0 
+0393: actor 215@ perform_animation "POOL_SHORT_SHOT" at 248@ times_normal_rate 
+
+:POOL2_17802
+if 
+  600@ == 2 
+jf @POOL2_17897 
+if 
+   Actor.Animation(215@) == "POOL_MED_SHOT"
+jf @POOL2_17897 
+0614: set_actor 215@ animation "POOL_MED_SHOT" progress_to 247@ // 0.0 to 1.0 
+0393: actor 215@ perform_animation "POOL_MED_SHOT" at 248@ times_normal_rate 
+
+:POOL2_17897
+if 
+  600@ == 3 
+jf @POOL2_17995 
+if 
+   Actor.Animation(215@) == "POOL_LONG_SHOT"
+jf @POOL2_17995 
+0614: set_actor 215@ animation "POOL_LONG_SHOT" progress_to 247@ // 0.0 to 1.0 
+0393: actor 215@ perform_animation "POOL_LONG_SHOT" at 248@ times_normal_rate 
+
+:POOL2_17995
+if 
+  600@ == 4 
+jf @POOL2_18096 
+if 
+   Actor.Animation(215@) == "POOL_XLONG_SHOT"
+jf @POOL2_18096 
+0614: set_actor 215@ animation "POOL_XLONG_SHOT" progress_to 247@ // 0.0 to 1.0 
+0393: actor 215@ perform_animation "POOL_XLONG_SHOT" at 248@ times_normal_rate 
+
+:POOL2_18096
+jump @POOL2_18117 
+
+:POOL2_18103
+32@ = 0 
+251@ += 1 
+
+:POOL2_18117
+jump @POOL2_18138 
+
+:POOL2_18124
+32@ = 0 
+251@ += 1 
+
+:POOL2_18138
+if 
+  251@ == 2 
+jf @POOL2_18557 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_18557 
+062E: get_actor 215@ task 1560 status_store_to 39@ // ret 7 if not found 
+if and
+84A4:   not  39@ == 7 // == constant 
+  5000 > 32@ 
+jf @POOL2_18550 
+42@ = 1.0 
+0063: 42@ -= 248@ // (float) 
+42@ /= 20.0 
+005B: 248@ += 42@ // (float) 
+if 
+  0.8 > 248@ 
+jf @POOL2_18276 
+248@ += 0.01 
+
+:POOL2_18276
+if and
+  1.2 > 248@ 
+  248@ > 0.8 
+jf @POOL2_18317 
+248@ = 1.0 
+
+:POOL2_18317
+if 
+   Actor.Animation(215@) == "POOL_SHORT_SHOT"
+jf @POOL2_18375 
+0393: actor 215@ perform_animation "POOL_SHORT_SHOT" at 248@ times_normal_rate 
+
+:POOL2_18375
+if 
+   Actor.Animation(215@) == "POOL_MED_SHOT"
+jf @POOL2_18429 
+0393: actor 215@ perform_animation "POOL_MED_SHOT" at 248@ times_normal_rate 
+
+:POOL2_18429
+if 
+   Actor.Animation(215@) == "POOL_LONG_SHOT"
+jf @POOL2_18485 
+0393: actor 215@ perform_animation "POOL_LONG_SHOT" at 248@ times_normal_rate 
+
+:POOL2_18485
+if 
+   Actor.Animation(215@) == "POOL_XLONG_SHOT"
+jf @POOL2_18543 
+0393: actor 215@ perform_animation "POOL_XLONG_SHOT" at 248@ times_normal_rate 
+
+:POOL2_18543
+jump @POOL2_18557 
+
+:POOL2_18550
+251@ += 1 
+
+:POOL2_18557
+if 
+  251@ == 3 
+jf @POOL2_18660 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_18653 
+if 
+  108@ == 0 
+jf @POOL2_18653 
+0812: AS_actor 215@ perform_animation "POOL_IDLE_STANCE" IFP "POOL" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:POOL2_18653
+35@ += 1 
+
+:POOL2_18660
+return 
+
+:POOL2_18662
+0087: 42@ = 246@ // (float) 
+0063: 42@ -= 247@ // (float) 
+if or
+  42@ >= 0.05 
+  -0.05 >= 42@ 
+jf @POOL2_18813 
+42@ /= 3.0 
+if and
+  0.01 > 42@ 
+  42@ > -0.01 
+jf @POOL2_18798 
+if 
+  42@ > 0.0 
+jf @POOL2_18788 
+42@ = 0.01 
+jump @POOL2_18798 
+
+:POOL2_18788
+42@ = -0.01 
+
+:POOL2_18798
+005B: 247@ += 42@ // (float) 
+jump @POOL2_18821 
+
+:POOL2_18813
+0087: 247@ = 246@ // (float) 
+
+:POOL2_18821
+return 
+
+:POOL2_18823
+250@ = 0 
+251@ = 0 
+618@ = 565.0 
+619@ = 386.0 
+0087: 622@ = 618@ // (float) 
+0087: 623@ = 619@ // (float) 
+621@ = 67.0 
+620@ = 78.0 
+624@ = 19.0 
+625@ = 16.0 
+248@ = 0.0 
+247@ = 0.0 
+248@ = 0.0 
+246@ = 0.0 
+32@ = 0 
+33@ = 0 
+if 
+   not 230@ == 0 
+jf @POOL2_18996 
+0512: show_permanent_text_box 'PL_H4'  // Use the view controls to strike the cue ball.~N~Use the movement controls to position cue tip.~N~~k~~VEHICLE_ENTER_EXIT~ Back to aiming.
+
+:POOL2_18996
+gosub @POOL2_51474 
+return 
+
+:POOL2_19005
+0619: enable_actor 215@ collision_detection 0 
+0087: 42@ = 104@ // (float) 
+42@ += 1.0 
+02CE: 594@ = ground_z_at 102@ 103@ 42@ 
+Actor.PutAt(215@, 586@, 590@, 594@)
+Actor.Angle(215@) = 598@
+if 
+003B:   213@ == 215@ // (int) 
+jf @POOL2_19271 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_19264 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 213@ with_offset 0.0 -1.5 0.0 
+if 
+   not Actor.Dead(214@)
+jf @POOL2_19264 
+Actor.PutAt(214@, 225@, 226@, 227@)
+if 
+00EC:   actor 214@ sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 2.0 2.0 
+jf @POOL2_19237 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 214@ with_offset -2.0 0.0 -1.0 
+Actor.PutAt(214@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:POOL2_19237
+if 
+03CA:   object 82@ exists 
+jf @POOL2_19264 
+0655: AS_actor 214@ look_at_object 82@ 10000 ms 
+
+:POOL2_19264
+jump @POOL2_19450 
+
+:POOL2_19271
+if 
+   not Actor.Dead(214@)
+jf @POOL2_19450 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 214@ with_offset 0.0 -1.5 0.0 
+if 
+   not Actor.Dead(213@)
+jf @POOL2_19450 
+Actor.PutAt(213@, 221@, 222@, 223@)
+if 
+00EC:   actor 213@ sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 2.0 2.0 
+jf @POOL2_19450 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 213@ with_offset -2.0 0.0 -1.0 
+Actor.PutAt(213@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+03CA:   object 82@ exists 
+jf @POOL2_19450 
+0655: AS_actor 213@ look_at_object 82@ 10000 ms 
+
+:POOL2_19450
+if 
+  600@ == 1 
+jf @POOL2_19565 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 215@ with_offset 0.1532 -0.9733 1.1819 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 215@ with_offset -0.0267 -0.3468 0.4236 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:POOL2_19565
+if 
+  600@ == 2 
+jf @POOL2_19613 
+$TEMPVAR_FLOAT_1 = 0.4 
+$TEMPVAR_FLOAT_2 = -1.0 
+$TEMPVAR_FLOAT_3 = 1.0 
+
+:POOL2_19613
+if 
+  600@ == 3 
+jf @POOL2_19661 
+$TEMPVAR_FLOAT_1 = 0.3 
+$TEMPVAR_FLOAT_2 = -0.5 
+$TEMPVAR_FLOAT_3 = 1.0 
+
+:POOL2_19661
+if 
+  600@ == 4 
+jf @POOL2_19709 
+$TEMPVAR_FLOAT_1 = 0.3 
+$TEMPVAR_FLOAT_2 = -0.5 
+$TEMPVAR_FLOAT_3 = 1.0 
+
+:POOL2_19709
+if 
+   not 600@ == 1 
+jf @POOL2_19818 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 215@ with_offset $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 82@ with_offset 0.0 0.3 0.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:POOL2_19818
+return 
+
+:POOL2_19820
+if 
+  230@ == 1 
+jf @POOL2_19920 
+0087: 249@ = 246@ // (float) 
+0063: 249@ -= 247@ // (float) 
+249@ /= 0.1 
+0087: 248@ = 249@ // (float) 
+248@ *= 2.0 
+if 
+  0.6 > 248@ 
+jf @POOL2_19913 
+248@ = 0.6 
+
+:POOL2_19913
+jump @POOL2_19977 
+
+:POOL2_19920
+0087: 248@ = 364@ // (float) 
+248@ *= 2.0 
+if 
+  0.6 > 248@ 
+jf @POOL2_19969 
+248@ = 0.6 
+
+:POOL2_19969
+0087: 249@ = 364@ // (float) 
+
+:POOL2_19977
+if 
+03CA:   object 82@ exists 
+jf @POOL2_20866 
+$TEMPVAR_ANGLE = Object.Angle(82@)
+02F6: 42@ = sine $TEMPVAR_ANGLE // (float) 
+0087: 169@ = 42@ // (float) 
+169@ *= -1.0 
+02F7: 42@ = cosine $TEMPVAR_ANGLE // (float) 
+0087: 170@ = 42@ // (float) 
+171@ = 0.0 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 165@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 165@ += 169@ // (float) 
+0089: 166@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 166@ += 170@ // (float) 
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 165@ 166@ 
+0073: 169@ /= 42@ // (float) 
+0073: 170@ /= 42@ // (float) 
+006B: 169@ *= 249@ // (float) 
+006B: 170@ *= 249@ // (float) 
+Object.KeepInMemory(82@) = False
+Object.CollisionDetection(82@) = False
+Object.ToggleInMovingList(82@) = False
+Object.Throw(82@, 169@, 170@, 171@)
+278@ = -1 
+279@ = 0 
+277@ = 0 
+206@ = 0 
+39@ = 0 
+
+:POOL2_20218
+if 
+  16 > 39@ 
+jf @POOL2_20261 
+109@(39@,16i) = 0 
+39@ += 1 
+jump @POOL2_20218 
+
+:POOL2_20261
+097B: play_audio_at_object 82@ event 1014 
+253@ = 0.0 
+254@ = 0.0 
+0088: $TEMPVAR_FLOAT_1 = 622@ // (float) 
+0067: $TEMPVAR_FLOAT_1 -= 618@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 623@ // (float) 
+0067: $TEMPVAR_FLOAT_2 -= 619@ // (float) 
+0075: $TEMPVAR_FLOAT_1 /= 620@ // (float) 
+0075: $TEMPVAR_FLOAT_2 /= 621@ // (float) 
+if 
+  230@ == 0 
+jf @POOL2_20385 
+0208: $TEMPVAR_FLOAT_1 = random_float_in_ranges -0.2 0.2 
+0208: $TEMPVAR_FLOAT_2 = random_float_in_ranges -0.2 0.2 
+
+:POOL2_20385
+if or
+  $TEMPVAR_FLOAT_1 > 0.2 
+  -0.2 > $TEMPVAR_FLOAT_1 
+  $TEMPVAR_FLOAT_2 > 0.2 
+  -0.2 > $TEMPVAR_FLOAT_2 
+  230@ == 0 
+jf @POOL2_20556 
+006D: $TEMPVAR_FLOAT_1 *= 249@ // (float) 
+006D: $TEMPVAR_FLOAT_2 *= 249@ // (float) 
+0089: 253@ = $TEMPVAR_FLOAT_1 // (float) 
+253@ *= 0.5 
+0089: 254@ = $TEMPVAR_FLOAT_2 // (float) 
+254@ *= -0.5 
+$TEMPVAR_FLOAT_1 *= 10.0 
+$TEMPVAR_FLOAT_2 *= 10.0 
+if 
+  230@ == 1 
+jf @POOL2_20549 
+05A2: set_object 82@ rotation_velocity_about_an_axis $TEMPVAR_FLOAT_2 0.0 $TEMPVAR_FLOAT_1 through_center_of_mass 
+
+:POOL2_20549
+jump @POOL2_20576 
+
+:POOL2_20556
+253@ = 0.0 
+254@ = 0.0 
+
+:POOL2_20576
+622@ = 559.0 
+623@ = 381.0 
+if 
+  129@ == 1 
+jf @POOL2_20766 
+03A9: save_newline_to_debug_file 
+05B6: 20 // MODID, IMP NAME
+03A8: save_float_to_debug_file 249@ 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_1 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_2 
+03A8: save_float_to_debug_file $TEMPVAR_FLOAT_3 
+
+:POOL2_20766
+Object.CollisionDetection(82@) = True
+Object.ToggleInMovingList(82@) = True
+if 
+   not Actor.Dead(213@)
+jf @POOL2_20823 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_20823 
+0655: AS_actor 213@ look_at_object 82@ 10000 ms 
+
+:POOL2_20823
+if 
+   not Actor.Dead(214@)
+jf @POOL2_20866 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_20866 
+0655: AS_actor 214@ look_at_object 82@ 10000 ms 
+
+:POOL2_20866
+250@ = 1 
+return 
+
+:POOL2_20875
+if 
+  35@ == 0 
+jf @POOL2_21193 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_21193 
+Object.StorePos(163@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 584@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 588@ // (float) 
+005F: $TEMPVAR_FLOAT_1 += 169@ // (float) 
+005F: $TEMPVAR_FLOAT_2 += 170@ // (float) 
+$TEMPVAR_FLOAT_3 += 2.5 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+Object.StorePos(163@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 0.5 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+32@ = 0 
+04C4: store_coords_to 165@ 166@ 167@ from_actor 215@ with_offset 0.0 -0.2 0.0 
+02CE: 167@ = ground_z_at 165@ 166@ 167@ 
+$TEMPVAR_ANGLE = Actor.Angle(215@)
+Actor.PutAt(215@, 610@, 611@, 612@)
+Actor.Angle(215@) = $TEMPVAR_ANGLE
+if 
+  108@ == 0 
+jf @POOL2_21186 
+0812: AS_actor 215@ perform_animation "POOL_IDLE_STANCE" IFP "POOL" framedelta 1000.0 loopA 1 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+
+:POOL2_21186
+35@ += 1 
+
+:POOL2_21193
+if 
+  35@ == 1 
+jf @POOL2_21318 
+39@ = 0 
+40@ = 0 
+
+:POOL2_21225
+if 
+  16 > 39@ 
+jf @POOL2_21286 
+if 
+  109@(39@,16i) == 1 
+jf @POOL2_21272 
+40@ += 1 
+
+:POOL2_21272
+39@ += 1 
+jump @POOL2_21225 
+
+:POOL2_21286
+if 
+  40@ == 16 
+jf @POOL2_21318 
+35@ += 1 
+32@ = 0 
+
+:POOL2_21318
+if 
+  35@ == 2 
+jf @POOL2_21362 
+if 
+  32@ > 700 
+jf @POOL2_21362 
+35@ = 99 
+
+:POOL2_21362
+if 
+  35@ == 99 
+jf @POOL2_21396 
+03E6: remove_text_box 
+34@ += 1 
+35@ = 0 
+
+:POOL2_21396
+return 
+
+:POOL2_21398
+if 
+  35@ == 0 
+jf @POOL2_21430 
+274@ = 0 
+35@ += 1 
+
+:POOL2_21430
+if 
+  35@ == 1 
+jf @POOL2_21480 
+if 
+  278@ == -1 
+jf @POOL2_21473 
+274@ = 1 
+
+:POOL2_21473
+35@ += 1 
+
+:POOL2_21480
+if 
+  35@ == 2 
+jf @POOL2_21716 
+if 
+   not 278@ == -1 
+jf @POOL2_21709 
+if 
+  231@ == -1 
+jf @POOL2_21566 
+if 
+  278@ == 8 
+jf @POOL2_21559 
+274@ = 2 
+
+:POOL2_21559
+jump @POOL2_21709 
+
+:POOL2_21566
+if 
+  231@ == 0 
+jf @POOL2_21616 
+if 
+  278@ >= 8 
+jf @POOL2_21609 
+274@ = 2 
+
+:POOL2_21609
+jump @POOL2_21709 
+
+:POOL2_21616
+if 
+  231@ == 1 
+jf @POOL2_21666 
+if 
+  8 >= 278@ 
+jf @POOL2_21659 
+274@ = 2 
+
+:POOL2_21659
+jump @POOL2_21709 
+
+:POOL2_21666
+if 
+  231@ == 2 
+jf @POOL2_21709 
+if 
+   not 278@ == 8 
+jf @POOL2_21709 
+274@ = 2 
+
+:POOL2_21709
+35@ += 1 
+
+:POOL2_21716
+if 
+  35@ == 3 
+jf @POOL2_21766 
+if 
+  255@ == 1 
+jf @POOL2_21759 
+274@ = 3 
+
+:POOL2_21759
+35@ += 1 
+
+:POOL2_21766
+if 
+  35@ == 4 
+jf @POOL2_22360 
+if 
+  271@ == 1 
+jf @POOL2_22038 
+if 
+   not 274@ == 3 
+jf @POOL2_22031 
+if 
+  231@ == -1 
+jf @POOL2_21881 
+if 
+   not 263@ == 1 
+jf @POOL2_21874 
+if 
+  184@ == 0 
+jf @POOL2_21874 
+
+:POOL2_21874
+jump @POOL2_22031 
+
+:POOL2_21881
+if 
+  231@ == 0 
+jf @POOL2_21931 
+if 
+  273@ > 0 
+jf @POOL2_21924 
+274@ = 4 
+
+:POOL2_21924
+jump @POOL2_22031 
+
+:POOL2_21931
+if 
+  231@ == 1 
+jf @POOL2_21981 
+if 
+  272@ > 0 
+jf @POOL2_21974 
+274@ = 4 
+
+:POOL2_21974
+jump @POOL2_22031 
+
+:POOL2_21981
+if 
+  231@ == 2 
+jf @POOL2_22031 
+if or
+  272@ > 0 
+  273@ > 0 
+jf @POOL2_22031 
+274@ = 4 
+
+:POOL2_22031
+jump @POOL2_22353 
+
+:POOL2_22038
+if 
+  271@ > 1 
+jf @POOL2_22353 
+if 
+  231@ == -1 
+jf @POOL2_22203 
+if and
+  272@ > 0 
+  273@ == 0 
+jf @POOL2_22135 
+if 
+   not 263@ == 1 
+jf @POOL2_22135 
+if 
+  184@ == 0 
+jf @POOL2_22135 
+
+:POOL2_22135
+if and
+  272@ == 0 
+  273@ > 0 
+jf @POOL2_22196 
+if 
+   not 263@ == 1 
+jf @POOL2_22196 
+if 
+  184@ == 0 
+jf @POOL2_22196 
+
+:POOL2_22196
+jump @POOL2_22353 
+
+:POOL2_22203
+if 
+  231@ == 0 
+jf @POOL2_22253 
+if 
+  273@ > 0 
+jf @POOL2_22246 
+274@ = 4 
+
+:POOL2_22246
+jump @POOL2_22353 
+
+:POOL2_22253
+if 
+  231@ == 1 
+jf @POOL2_22303 
+if 
+  272@ > 0 
+jf @POOL2_22296 
+274@ = 4 
+
+:POOL2_22296
+jump @POOL2_22353 
+
+:POOL2_22303
+if 
+  231@ == 2 
+jf @POOL2_22353 
+if or
+  273@ > 0 
+  272@ > 0 
+jf @POOL2_22353 
+274@ = 4 
+
+:POOL2_22353
+35@ += 1 
+
+:POOL2_22360
+if 
+  35@ == 5 
+jf @POOL2_22478 
+if 
+   not 231@ == 2 
+jf @POOL2_22428 
+if 
+  263@ == 1 
+jf @POOL2_22421 
+274@ = 5 
+
+:POOL2_22421
+jump @POOL2_22471 
+
+:POOL2_22428
+if 
+  263@ == 1 
+jf @POOL2_22471 
+if 
+   not 274@ == 0 
+jf @POOL2_22471 
+274@ = 5 
+
+:POOL2_22471
+35@ += 1 
+
+:POOL2_22478
+if 
+  35@ == 6 
+jf @POOL2_22564 
+if 
+  274@ == 0 
+jf @POOL2_22557 
+if 
+  271@ == 0 
+jf @POOL2_22557 
+if 
+  277@ == 0 
+jf @POOL2_22557 
+274@ = 6 
+
+:POOL2_22557
+35@ = 99 
+
+:POOL2_22564
+if 
+  35@ == 99 
+jf @POOL2_22788 
+if and
+  274@ == 0 
+  184@ == 0 
+  271@ > 0 
+  231@ == -1 
+jf @POOL2_22772 
+if 
+001D:   272@ > 273@ // (int) 
+jf @POOL2_22700 
+if 
+  229@ == 1 
+jf @POOL2_22679 
+217@ = 0 
+218@ = 1 
+jump @POOL2_22693 
+
+:POOL2_22679
+217@ = 1 
+218@ = 0 
+
+:POOL2_22693
+jump @POOL2_22772 
+
+:POOL2_22700
+if 
+001D:   273@ > 272@ // (int) 
+jf @POOL2_22772 
+if 
+  229@ == 1 
+jf @POOL2_22758 
+217@ = 1 
+218@ = 0 
+jump @POOL2_22772 
+
+:POOL2_22758
+217@ = 0 
+218@ = 1 
+
+:POOL2_22772
+03E6: remove_text_box 
+35@ = 0 
+34@ += 1 
+
+:POOL2_22788
+return 
+
+:POOL2_22790
+if 
+  35@ == 0 
+jf @POOL2_24616 
+32@ = 0 
+if and
+  67@ == 1 
+  68@ == 1 
+  69@ == 1 
+  70@ == 1 
+  71@ == 1 
+jf @POOL2_22936 
+if and
+  72@ == 1 
+  73@ == 1 
+jf @POOL2_22936 
+if 
+  217@ == 0 
+jf @POOL2_22911 
+217@ = 2 
+
+:POOL2_22911
+if 
+  218@ == 0 
+jf @POOL2_22936 
+218@ = 2 
+
+:POOL2_22936
+if and
+  75@ == 1 
+  76@ == 1 
+  77@ == 1 
+  78@ == 1 
+  79@ == 1 
+jf @POOL2_23057 
+if and
+  80@ == 1 
+  81@ == 1 
+jf @POOL2_23057 
+if 
+  217@ == 1 
+jf @POOL2_23032 
+217@ = 2 
+
+:POOL2_23032
+if 
+  218@ == 1 
+jf @POOL2_23057 
+218@ = 2 
+
+:POOL2_23057
+0871: init_jump_table 274@ total_jumps 7 default_jump 0 @POOL2_24501 jumps 0 @POOL2_23120 1 @POOL2_23451 2 @POOL2_23649 3 @POOL2_23847 4 @POOL2_24045 5 @POOL2_24243 6 @POOL2_24303 
+
+:POOL2_23120
+if 
+  271@ > 0 
+jf @POOL2_23253 
+if 
+   not 74@ == 1 
+jf @POOL2_23225 
+232@ = 0 
+233@ = 1 
+if 
+  229@ == 1 
+jf @POOL2_23203 
+0085: 231@ = 217@ // (int) 
+jump @POOL2_23211 
+
+:POOL2_23203
+0085: 231@ = 218@ // (int) 
+
+:POOL2_23211
+35@ = 99 
+jump @POOL2_23246 
+
+:POOL2_23225
+276@ = 1 
+275@ = 1 
+35@ = 99 
+
+:POOL2_23246
+jump @POOL2_23444 
+
+:POOL2_23253
+if 
+  229@ == 1 
+jf @POOL2_23377 
+232@ = 0 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_23356 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_23363 
+
+:POOL2_23356
+04AF: 180@ = 0 // = constant 
+
+:POOL2_23363
+35@ = 99 
+jump @POOL2_23444 
+
+:POOL2_23377
+232@ = 0 
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_23444
+jump @POOL2_24501 
+
+:POOL2_23451
+if 
+  229@ == 1 
+jf @POOL2_23575 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_23554 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_23561 
+
+:POOL2_23554
+04AF: 180@ = 0 // = constant 
+
+:POOL2_23561
+35@ = 99 
+jump @POOL2_23642 
+
+:POOL2_23575
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_23642
+jump @POOL2_24501 
+
+:POOL2_23649
+if 
+  229@ == 1 
+jf @POOL2_23773 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_23752 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_23759 
+
+:POOL2_23752
+04AF: 180@ = 0 // = constant 
+
+:POOL2_23759
+35@ = 99 
+jump @POOL2_23840 
+
+:POOL2_23773
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_23840
+jump @POOL2_24501 
+
+:POOL2_23847
+if 
+  229@ == 1 
+jf @POOL2_23971 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_23950 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_23957 
+
+:POOL2_23950
+04AF: 180@ = 0 // = constant 
+
+:POOL2_23957
+35@ = 99 
+jump @POOL2_24038 
+
+:POOL2_23971
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_24038
+jump @POOL2_24501 
+
+:POOL2_24045
+if 
+  229@ == 1 
+jf @POOL2_24169 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_24148 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_24155 
+
+:POOL2_24148
+04AF: 180@ = 0 // = constant 
+
+:POOL2_24155
+35@ = 99 
+jump @POOL2_24236 
+
+:POOL2_24169
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_24236
+jump @POOL2_24501 
+
+:POOL2_24243
+if 
+  184@ == 0 
+jf @POOL2_24275 
+275@ = 0 
+jump @POOL2_24282 
+
+:POOL2_24275
+275@ = 1 
+
+:POOL2_24282
+276@ = 1 
+35@ = 99 
+jump @POOL2_24501 
+
+:POOL2_24303
+if 
+  229@ == 1 
+jf @POOL2_24427 
+229@ = 2 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+0085: 230@ = 220@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 218@ // (int) 
+if 
+  220@ == 1 
+jf @POOL2_24406 
+04AF: 180@ = 1 // = constant 
+jump @POOL2_24413 
+
+:POOL2_24406
+04AF: 180@ = 0 // = constant 
+
+:POOL2_24413
+35@ = 99 
+jump @POOL2_24494 
+
+:POOL2_24427
+229@ = 1 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+0085: 230@ = 219@ // (int) 
+232@ = 2 
+233@ = 0 
+0085: 231@ = 217@ // (int) 
+04AF: 180@ = 0 // = constant 
+35@ = 99 
+
+:POOL2_24494
+jump @POOL2_24501 
+
+:POOL2_24501
+if 
+  178@ == 0 
+jf @POOL2_24555 
+if 
+  230@ == 1 
+jf @POOL2_24548 
+0512: show_permanent_text_box 'PL_H5'  // ~k~~PED_SPRINT~ Continue.
+
+:POOL2_24548
+jump @POOL2_24602 
+
+:POOL2_24555
+if 
+04A4:   180@ == 0 // == constant 
+jf @POOL2_24591 
+0512: show_permanent_text_box 'PL_H8'  // Player 1 press ~k~~PED_SPRINT~ to continue.
+jump @POOL2_24602 
+
+:POOL2_24591
+0512: show_permanent_text_box 'PL_H9'  // Player 2 press ~k~~PED_SPRINT~ to continue.
+
+:POOL2_24602
+32@ = 0 
+33@ = 0 
+
+:POOL2_24616
+if 
+  35@ == 99 
+jf @POOL2_24722 
+gosub @POOL2_54874 
+if 
+  230@ == 1 
+jf @POOL2_24690 
+if 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_24683 
+35@ += 1 
+
+:POOL2_24683
+jump @POOL2_24722 
+
+:POOL2_24690
+if or
+  33@ > 2000 
+00E1:   player 0 pressed_key 16 
+jf @POOL2_24722 
+35@ += 1 
+
+:POOL2_24722
+if 
+  35@ == 100 
+jf @POOL2_24884 
+03E6: remove_text_box 
+39@ = 0 
+271@ = 0 
+
+:POOL2_24756
+if 
+  16 > 39@ 
+jf @POOL2_24799 
+255@(39@,16i) = 0 
+39@ += 1 
+jump @POOL2_24756 
+
+:POOL2_24799
+272@ = 0 
+273@ = 0 
+if 
+  276@ == 1 
+jf @POOL2_24859 
+184@ = 1 
+34@ += 1 
+35@ = 0 
+jump @POOL2_24880 
+
+:POOL2_24859
+184@ = 0 
+34@ = 3 
+35@ = 0 
+
+:POOL2_24880
+wait 0 
+
+:POOL2_24884
+return 
+
+:POOL2_24886
+if 
+  35@ == 0 
+jf @POOL2_25367 
+if 
+  275@ == 0 
+jf @POOL2_24986 
+if 
+  229@ == 1 
+jf @POOL2_24963 
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+jump @POOL2_24979 
+
+:POOL2_24963
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+
+:POOL2_24979
+jump @POOL2_25043 
+
+:POOL2_24986
+if 
+  229@ == 1 
+jf @POOL2_25027 
+0085: 215@ = 213@ // (int) 
+0085: 216@ = 106@ // (int) 
+jump @POOL2_25043 
+
+:POOL2_25027
+0085: 215@ = 214@ // (int) 
+0085: 216@ = 107@ // (int) 
+
+:POOL2_25043
+if 
+   not Actor.Dead(215@)
+jf @POOL2_25367 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 215@ with_offset 1.0 2.0 0.0 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+Camera.OnPed(215@, 15, 2)
+if 
+  178@ == 0 
+jf @POOL2_25281 
+if 
+003B:   215@ == 213@ // (int) 
+jf @POOL2_25236 
+0085: 39@ = 162@ // (int) 
+39@ *= 2 
+Player.Money($PLAYER_CHAR) += 39@
+create_thread @CASHWIN 39@ 5000 80 
+0623: add 1 to_integer_stat 196 
+if 
+   not Actor.Dead(164@)
+jf @POOL2_25229 
+03FE: set_actor 164@ money 0 
+
+:POOL2_25229
+jump @POOL2_25274 
+
+:POOL2_25236
+0085: 39@ = 162@ // (int) 
+39@ *= -1 
+create_thread @CASHWIN 39@ 5000 80 
+0623: add 1 to_integer_stat 197 
+
+:POOL2_25274
+jump @POOL2_25353 
+
+:POOL2_25281
+if 
+003B:   215@ == 213@ // (int) 
+jf @POOL2_25330 
+00BA: show_text_styled GXT 'PL_08' time 5000 style 1  // Player 1 Wins!
+0623: add 1 to_integer_stat 196 
+jump @POOL2_25353 
+
+:POOL2_25330
+00BA: show_text_styled GXT 'PL_09' time 5000 style 1  // Player 2 Wins!
+0623: add 1 to_integer_stat 197 
+
+:POOL2_25353
+32@ = 0 
+35@ += 1 
+
+:POOL2_25367
+if 
+  35@ == 1 
+jf @POOL2_25411 
+if 
+  32@ > 5000 
+jf @POOL2_25411 
+35@ += 1 
+
+:POOL2_25411
+if 
+  35@ == 2 
+jf @POOL2_25984 
+fade 0 500 
+
+:POOL2_25436
+if 
+fading 
+jf @POOL2_25460 
+wait 0 
+jump @POOL2_25436 
+
+:POOL2_25460
+39@ = 0 
+
+:POOL2_25467
+if 
+  16 > 39@ 
+jf @POOL2_25528 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_25514 
+Object.Destroy(82@(39@,16i))
+
+:POOL2_25514
+39@ += 1 
+jump @POOL2_25467 
+
+:POOL2_25528
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.2734375 -0.0546875 0.9296875 
+82@ = Object.Init(#K_POOLBALLCUE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(163@)
+$TEMPVAR_ANGLE += 270.0 
+Object.Angle(82@) = $TEMPVAR_ANGLE
+0400: store_coords_to 558@ 559@ 560@ from_object 163@ with_offset 0.3408 -0.0284 0.9297 
+561@ = Object.Angle(163@)
+561@ += 90.0 
+83@ = Object.Init(#K_POOLBALLSPT01, 558@, 559@, 560@)
+84@ = Object.Init(#K_POOLBALLSPT02, 0.0, 0.0, 0.0)
+85@ = Object.Init(#K_POOLBALLSPT03, 0.0, 0.0, 0.0)
+86@ = Object.Init(#K_POOLBALLSPT04, 0.0, 0.0, 0.0)
+87@ = Object.Init(#K_POOLBALLSPT05, 0.0, 0.0, 0.0)
+88@ = Object.Init(#K_POOLBALLSPT06, 0.0, 0.0, 0.0)
+89@ = Object.Init(#K_POOLBALLSPT07, 0.0, 0.0, 0.0)
+90@ = Object.Init(#K_POOLBALL8, 0.0, 0.0, 0.0)
+91@ = Object.Init(#K_POOLBALLSTP01, 0.0, 0.0, 0.0)
+92@ = Object.Init(#K_POOLBALLSTP02, 0.0, 0.0, 0.0)
+93@ = Object.Init(#K_POOLBALLSTP03, 0.0, 0.0, 0.0)
+94@ = Object.Init(#K_POOLBALLSTP04, 0.0, 0.0, 0.0)
+95@ = Object.Init(#K_POOLBALLSTP05, 0.0, 0.0, 0.0)
+96@ = Object.Init(#K_POOLBALLSTP06, 0.0, 0.0, 0.0)
+97@ = Object.Init(#K_POOLBALLSTP07, 0.0, 0.0, 0.0)
+gosub @POOL2_50594 
+35@ = 99 
+
+:POOL2_25984
+if 
+  35@ == 99 
+jf @POOL2_26018 
+03E6: remove_text_box 
+34@ += 1 
+35@ = 0 
+
+:POOL2_26018
+return 
+03E4: set_text_draw_align_right 0 
+0341: set_text_draw_align_justify 0 
+0343: set_text_draw_linewidth 640.0 
+0348: enable_text_draw_proportional 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.3 3.36 
+0342: set_text_draw_centered 1 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+0349: set_text_draw_font 3 
+0904: get_interface 6 color_RGBA_to $COLOR_RED $COLOR_GREEN $GAMBLES_CASHWIN $3400 
+0340: set_text_draw_RGBA $COLOR_RED $COLOR_GREEN $GAMBLES_CASHWIN 255 
+return 
+
+:POOL2_26108
+275@ = 0 
+271@ = 0 
+272@ = 0 
+273@ = 0 
+274@ = 0 
+39@ = 0 
+
+:POOL2_26150
+if 
+  16 > 39@ 
+jf @POOL2_26204 
+255@(39@,16i) = 0 
+66@(39@,16i) = 0 
+39@ += 1 
+jump @POOL2_26150 
+
+:POOL2_26204
+232@ = 0 
+276@ = 0 
+34@ = 1 
+35@ = 0 
+return 
+
+:POOL2_26234
+if 
+03CA:   object 163@ exists 
+jf @POOL2_26282 
+Object.StorePos(163@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0395: clear_area 1 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 10.0 
+
+:POOL2_26282
+if 
+03CA:   object 82@ exists 
+jf @POOL2_26320 
+05A8: get_object 82@ speed_to 48@ 
+05A6: get_object 82@ rotation_velocity_about_an_axis_X 49@ axis_Y 50@ axis_Z 51@ through_center_of_body 
+
+:POOL2_26320
+if 
+  206@ > 2000 
+jf @POOL2_26810 
+0088: $TEMPVAR_FLOAT_1 = 204@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+39@ = 0 
+
+:POOL2_26364
+if 
+  16 > 39@ 
+jf @POOL2_26810 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_26785 
+05A8: get_object 82@(39@,16i) speed_to 42@ 
+if 
+0025:   203@ > 42@ // (float) 
+jf @POOL2_26767 
+if 
+  0.005 > 42@ 
+jf @POOL2_26683 
+05A6: get_object 82@(39@,16i) rotation_velocity_about_an_axis_X 42@ axis_Y 43@ axis_Z 44@ through_center_of_body 
+40@ = 0 
+if or
+0025:   42@ > 204@ // (float) 
+0026:   $TEMPVAR_FLOAT_1 > 42@ // (float) 
+jf @POOL2_26513 
+40@ = 1 
+
+:POOL2_26513
+if or
+0025:   43@ > 204@ // (float) 
+0026:   $TEMPVAR_FLOAT_1 > 43@ // (float) 
+jf @POOL2_26547 
+40@ = 1 
+
+:POOL2_26547
+if or
+0025:   44@ > 204@ // (float) 
+0026:   $TEMPVAR_FLOAT_1 > 44@ // (float) 
+jf @POOL2_26581 
+40@ = 1 
+
+:POOL2_26581
+if 
+  40@ == 0 
+jf @POOL2_26665 
+Object.Throw(82@(39@,16i), 0.0, 0.0, 0.0)
+05A2: set_object 82@(39@,16i) rotation_velocity_about_an_axis 0.0 0.0 0.0 through_center_of_mass 
+109@(39@,16i) = 1 
+jump @POOL2_26676 
+
+:POOL2_26665
+109@(39@,16i) = 0 
+
+:POOL2_26676
+jump @POOL2_26760 
+
+:POOL2_26683
+059F: get_object 82@(39@,16i) velocity_in_direction $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_FLOAT_1 *= 0.9 
+$TEMPVAR_FLOAT_2 *= 0.9 
+$TEMPVAR_FLOAT_3 *= 0.9 
+Object.Throw(82@(39@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+109@(39@,16i) = 0 
+
+:POOL2_26760
+jump @POOL2_26778 
+
+:POOL2_26767
+109@(39@,16i) = 0 
+
+:POOL2_26778
+jump @POOL2_26796 
+
+:POOL2_26785
+109@(39@,16i) = 1 
+
+:POOL2_26796
+39@ += 1 
+jump @POOL2_26364 
+
+:POOL2_26810
+if 
+   not 108@ == 1 
+jf @POOL2_26874 
+0085: 358@ = 213@ // (int) 
+0085: 359@ = 106@ // (int) 
+gosub @POOL2_30718 
+0085: 358@ = 214@ // (int) 
+0085: 359@ = 107@ // (int) 
+gosub @POOL2_30718 
+
+:POOL2_26874
+253@ *= 0.98 
+254@ *= 0.98 
+39@ = 0 
+
+:POOL2_26901
+if 
+  16 > 39@ 
+jf @POOL2_27175 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_27161 
+Object.StorePos(82@(39@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0087: 43@ = 52@ // (float) 
+43@ *= 2.0 
+0087: 42@ = 560@ // (float) 
+0063: 42@ -= 43@ // (float) 
+if 
+0027:   42@ > $TEMPVAR_FLOAT_3 // (float) 
+jf @POOL2_27161 
+if 
+  66@(39@,16i) == 0 
+jf @POOL2_27161 
+097A: play_audio_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 event 1017 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_27075 
+Object.Destroy(82@(39@,16i))
+
+:POOL2_27075
+66@(39@,16i) = 1 
+255@(39@,16i) = 1 
+271@ += 1 
+if and
+  39@ > 0 
+  8 > 39@ 
+jf @POOL2_27136 
+272@ += 1 
+
+:POOL2_27136
+if 
+  39@ > 8 
+jf @POOL2_27161 
+273@ += 1 
+
+:POOL2_27161
+39@ += 1 
+jump @POOL2_26901 
+
+:POOL2_27175
+39@ = 0 
+
+:POOL2_27182
+if 
+  16 > 39@ 
+jf @POOL2_27561 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_27547 
+if 
+08FF:   object 82@(39@,16i) received_damage_type 54 
+jf @POOL2_27274 
+277@ += 1 
+if 
+  39@ == 0 
+jf @POOL2_27274 
+279@ = 1 
+
+:POOL2_27274
+if 
+  278@ == -1 
+jf @POOL2_27390 
+if 
+  39@ > 0 
+jf @POOL2_27390 
+if 
+08FF:   object 82@(39@,16i) received_damage_type 53 
+jf @POOL2_27390 
+0085: 278@ = 39@ // (int) 
+if 
+  279@ == 0 
+jf @POOL2_27390 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_27390 
+05A7: set_object 82@ velocity_in_direction_X 253@ direction_Y 254@ direction_Z 0.0 
+
+:POOL2_27390
+if 
+08FF:   object 82@(39@,16i) received_damage_type 50 
+jf @POOL2_27538 
+277@ += 1 
+if 
+  39@ == 0 
+jf @POOL2_27444 
+279@ = 1 
+
+:POOL2_27444
+if 
+  278@ == -1 
+jf @POOL2_27538 
+if 
+  39@ > 0 
+jf @POOL2_27538 
+0085: 278@ = 39@ // (int) 
+if 
+  279@ == 0 
+jf @POOL2_27538 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_27538 
+05A7: set_object 82@ velocity_in_direction_X 253@ direction_Y 254@ direction_Z 0.0 
+
+:POOL2_27538
+0900: clear_object 82@(39@,16i) last_weapon_damage 
+
+:POOL2_27547
+39@ += 1 
+jump @POOL2_27182 
+
+:POOL2_27561
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @POOL2_27652 
+if 
+  129@ == 1 
+jf @POOL2_27627 
+129@ = 0 
+0662: printstring "OUTPUT_TEXT_OFF" 
+jump @POOL2_27652 
+
+:POOL2_27627
+129@ = 1 
+0662: printstring "OUTPUT_TEXT_ON" 
+
+:POOL2_27652
+if 
+83CA:   not object 163@ exists 
+jf @POOL2_27675 
+34@ = 99 
+
+:POOL2_27675
+if 
+   not Actor.Dead(164@)
+jf @POOL2_27699 
+$6459 = Actor.Health(164@)
+
+:POOL2_27699
+if 
+   Actor.Dead(164@)
+jf @POOL2_27722 
+34@ = 99 
+
+:POOL2_27722
+if 
+  108@ == 1 
+jf @POOL2_28285 
+0826: enable_hud 1 
+if 
+  161@ > 0 
+jf @POOL2_27770 
+Player.Money($PLAYER_CHAR) += 161@
+
+:POOL2_27770
+if 
+   not Actor.Dead(164@)
+jf @POOL2_27842 
+Actor.LockInCurrentPosition(164@) = False
+065C: release_decision_maker 207@ 
+060A: create_decision_maker_type 2 store_to 207@ // decision\allowed\m_.ped files 
+060B: set_actor 164@ decision_maker_to 207@ 
+0619: enable_actor 164@ collision_detection 1 
+Actor.SetImmunities(164@, 0, 0, 0, 0, 0)
+06AB: set_actor 164@ all_weapons_hidden 1 
+
+:POOL2_27842
+03DE: set_pedestrians_density_multiplier_to 1.0 
+03F0: enable_text_draw 0 
+0581: enable_radar 1 
+39@ = 0 
+
+:POOL2_27864
+if 
+  16 > 39@ 
+jf @POOL2_27905 
+Object.RemoveReferences(82@(39@,16i))
+39@ += 1 
+jump @POOL2_27864 
+
+:POOL2_27905
+Camera.Restore_WithJumpCut
+if 
+03CA:   object 238@ exists 
+jf @POOL2_27928 
+Object.Destroy(238@)
+
+:POOL2_27928
+104@ += 0.1 
+Object.PutAt(163@, 102@, 103@, 104@)
+0400: store_coords_to 98@ 100@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset -0.96 -0.49 0.7 
+0400: store_coords_to 99@ 101@ $TEMPVAR_FLOAT_3 from_object 163@ with_offset 0.96 0.49 0.7 
+if 
+0025:   98@ > 99@ // (float) 
+jf @POOL2_28053 
+0088: $TEMPVAR_FLOAT_1 = 98@ // (float) 
+0087: 98@ = 99@ // (float) 
+0089: 99@ = $TEMPVAR_FLOAT_1 // (float) 
+
+:POOL2_28053
+if 
+0025:   100@ > 101@ // (float) 
+jf @POOL2_28096 
+0088: $TEMPVAR_FLOAT_2 = 100@ // (float) 
+0087: 100@ = 101@ // (float) 
+0089: 101@ = $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_28096
+0830: create_pool_table_collision_cornerA 98@ 100@ $TEMPVAR_FLOAT_3 cornerB 99@ 101@ $TEMPVAR_FLOAT_3 
+39@ = 0 
+
+:POOL2_28123
+if 
+  16 > 39@ 
+jf @POOL2_28221 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_28207 
+Object.StorePos(82@(39@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 0.1 
+Object.PutAt(82@(39@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:POOL2_28207
+39@ += 1 
+jump @POOL2_28123 
+
+:POOL2_28221
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_28263 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:POOL2_28263
+Object.Destroy(106@)
+Object.Destroy(107@)
+Model.Destroy(#K_POOLQ)
+04EF: release_animation "POOL" 
+
+:POOL2_28285
+if and
+  34@ == 99 
+  108@ == 0 
+jf @POOL2_28330 
+03F0: enable_text_draw 0 
+0581: enable_radar 1 
+34@ = 0 
+wait 500 
+
+:POOL2_28330
+if 
+0736:   is_keyboard_key_just_pressed 73 
+jf @POOL2_28442 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_28442 
+Object.KeepInMemory(82@) = False
+Object.CollisionDetection(82@) = False
+Object.ToggleInMovingList(82@) = False
+0208: $TEMPVAR_FLOAT_1 = random_float_in_ranges -5.0 5.0 
+0208: $TEMPVAR_FLOAT_2 = random_float_in_ranges -5.0 5.0 
+Object.Throw(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 0.0)
+Object.CollisionDetection(82@) = True
+Object.ToggleInMovingList(82@) = True
+
+:POOL2_28442
+return 
+
+:POOL2_28444
+281@ = 0 
+280@ = 1.7 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_28667 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0087: 42@ = 98@ // (float) 
+42@ += 0.02 
+if 
+0027:   42@ > $TEMPVAR_FLOAT_1 // (float) 
+jf @POOL2_28535 
+281@ = 99 
+
+:POOL2_28535
+0087: 42@ = 99@ // (float) 
+42@ -= 0.02 
+if 
+0026:   $TEMPVAR_FLOAT_1 > 42@ // (float) 
+jf @POOL2_28579 
+281@ = 99 
+
+:POOL2_28579
+0087: 42@ = 100@ // (float) 
+42@ += 0.02 
+if 
+0027:   42@ > $TEMPVAR_FLOAT_2 // (float) 
+jf @POOL2_28623 
+281@ = 99 
+
+:POOL2_28623
+0087: 42@ = 101@ // (float) 
+42@ -= 0.02 
+if 
+0026:   $TEMPVAR_FLOAT_2 > 42@ // (float) 
+jf @POOL2_28667 
+281@ = 99 
+
+:POOL2_28667
+if 
+   not 281@ == 99 
+jf @POOL2_30716 
+if 
+   not 240@ == 0 
+jf @POOL2_28710 
+281@ = 2 
+
+:POOL2_28710
+if 
+  281@ == 0 
+jf @POOL2_29319 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_29319 
+39@ = 0 
+
+:POOL2_28751
+if 
+  3 > 39@ 
+jf @POOL2_28895 
+304@(39@,3f) = -999999.9 
+307@(39@,3f) = -999999.9 
+310@(39@,3f) = -999999.9 
+313@(39@,3f) = -999999.9 
+316@(39@,3f) = -999999.9 
+319@(39@,3f) = -999999.9 
+322@(39@,3f) = -999999.9 
+325@(39@,3f) = -999999.9 
+39@ += 1 
+jump @POOL2_28751 
+
+:POOL2_28895
+0087: 301@ = 280@ // (float) 
+0087: 301@ = 280@ // (float) 
+0087: 300@ = 280@ // (float) 
+300@ /= 10.0 
+$TEMPVAR_ANGLE = Object.Angle(82@)
+0453: set_object 82@ XYZ_rotation 0.0 0.0 $TEMPVAR_ANGLE 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+0027:   98@ > $TEMPVAR_FLOAT_1 // (float) 
+jf @POOL2_29006 
+0088: $TEMPVAR_FLOAT_1 = 98@ // (float) 
+$TEMPVAR_FLOAT_1 += 0.01 
+
+:POOL2_29006
+if 
+0026:   $TEMPVAR_FLOAT_1 > 99@ // (float) 
+jf @POOL2_29043 
+0088: $TEMPVAR_FLOAT_1 = 99@ // (float) 
+$TEMPVAR_FLOAT_1 -= 0.01 
+
+:POOL2_29043
+if 
+0027:   100@ > $TEMPVAR_FLOAT_2 // (float) 
+jf @POOL2_29080 
+0088: $TEMPVAR_FLOAT_2 = 100@ // (float) 
+$TEMPVAR_FLOAT_2 += 0.01 
+
+:POOL2_29080
+if 
+0026:   $TEMPVAR_FLOAT_2 > 101@ // (float) 
+jf @POOL2_29117 
+0088: $TEMPVAR_FLOAT_2 = 101@ // (float) 
+$TEMPVAR_FLOAT_2 -= 0.01 
+
+:POOL2_29117
+0400: store_coords_to 165@ 166@ 167@ from_object 82@ with_offset 0.0 1.0 0.0 
+0087: 282@ = 165@ // (float) 
+0065: 282@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 283@ = 166@ // (float) 
+0065: 283@ -= $TEMPVAR_FLOAT_2 // (float) 
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 165@ 166@ 
+0073: 282@ /= 42@ // (float) 
+0073: 283@ /= 42@ // (float) 
+006B: 282@ *= 301@ // (float) 
+006B: 283@ *= 301@ // (float) 
+0089: 487@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 488@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 304@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 307@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 483@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 483@ += 282@ // (float) 
+0089: 484@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 484@ += 283@ // (float) 
+284@ = 0 
+328@ = 0 
+515@ = 0 
+281@ += 1 
+
+:POOL2_29319
+if 
+  281@ == 1 
+jf @POOL2_29738 
+241@ = 0 
+
+:POOL2_29344
+if and
+  301@ > 0.0 
+  3 > 284@ 
+jf @POOL2_29724 
+gosub @POOL2_48237 
+0087: 310@(284@,3f) = 505@ // (float) 
+0087: 313@(284@,3f) = 506@ // (float) 
+0085: 39@ = 284@ // (int) 
+39@ += 1 
+if 
+  3 > 39@ 
+jf @POOL2_29460 
+0087: 304@(39@,3f) = 505@ // (float) 
+0087: 307@(39@,3f) = 506@ // (float) 
+
+:POOL2_29460
+0509: 42@ = distance_between_XY 304@(284@,3f) 307@(284@,3f) and_XY 310@(284@,3f) 313@(284@,3f) 
+0063: 301@ -= 42@ // (float) 
+if 
+  485@ == 0 
+jf @POOL2_29710 
+if 
+   not 504@ == -1 
+jf @POOL2_29554 
+301@ *= 0.5 
+jump @POOL2_29564 
+
+:POOL2_29554
+301@ *= 0.75 
+
+:POOL2_29564
+if 
+  328@ == 0 
+jf @POOL2_29632 
+if 
+   not 504@ == -1 
+jf @POOL2_29632 
+0085: 328@ = 504@ // (int) 
+0087: 329@ = 301@ // (float) 
+0087: 330@ = 509@ // (float) 
+0087: 331@ = 510@ // (float) 
+
+:POOL2_29632
+0087: 487@ = 505@ // (float) 
+0087: 488@ = 506@ // (float) 
+006B: 507@ *= 301@ // (float) 
+006B: 508@ *= 301@ // (float) 
+0087: 483@ = 487@ // (float) 
+005B: 483@ += 507@ // (float) 
+0087: 484@ = 488@ // (float) 
+005B: 484@ += 508@ // (float) 
+284@ += 1 
+jump @POOL2_29717 
+
+:POOL2_29710
+284@ = 3 
+
+:POOL2_29717
+jump @POOL2_29344 
+
+:POOL2_29724
+240@ += 1 
+281@ += 1 
+
+:POOL2_29738
+if 
+  281@ == 2 
+jf @POOL2_30684 
+39@ = 0 
+
+:POOL2_29763
+if 
+  10 > 39@ 
+jf @POOL2_29875 
+if 
+03CA:   object 347@(39@,10i) exists 
+jf @POOL2_29810 
+Object.Destroy(347@(39@,10i))
+
+:POOL2_29810
+347@(39@,10i) = Object.Create(#K_POOLBALLCUE, 0.0, 0.0, 0.0)
+Object.CollisionDetection(347@(39@,10i)) = False
+08D2: object 347@(39@,10i) scale_model 0.3 
+39@ += 1 
+jump @POOL2_29763 
+
+:POOL2_29875
+357@ = 0 
+343@ = 0.005 
+007B: 342@ += frame_delta_time * 343@ // (float) 
+if 
+0025:   342@ > 300@ // (float) 
+jf @POOL2_29927 
+0063: 342@ -= 300@ // (float) 
+
+:POOL2_29927
+346@ = 0.0 
+39@ = 0 
+
+:POOL2_29944
+if 
+  3 > 39@ 
+jf @POOL2_30677 
+if and
+  304@(39@,3f) > -9999.9 
+  307@(39@,3f) > -9999.9 
+  310@(39@,3f) > -9999.9 
+  313@(39@,3f) > -9999.9 
+jf @POOL2_30663 
+0509: 42@ = distance_between_XY 304@(39@,3f) 307@(39@,3f) and_XY 310@(39@,3f) 313@(39@,3f) 
+0087: 169@ = 310@(39@,3f) // (float) 
+0063: 169@ -= 304@(39@,3f) // (float) 
+0087: 170@ = 313@(39@,3f) // (float) 
+0063: 170@ -= 307@(39@,3f) // (float) 
+0087: 43@ = 42@ // (float) 
+0073: 43@ /= 300@ // (float) 
+0092: 40@ = float 43@ to_integer 
+40@ += 1 
+0073: 169@ /= 42@ // (float) 
+0073: 170@ /= 42@ // (float) 
+0087: 344@ = 169@ // (float) 
+0087: 345@ = 170@ // (float) 
+006B: 344@ *= 342@ // (float) 
+006B: 345@ *= 342@ // (float) 
+006B: 169@ *= 300@ // (float) 
+006B: 170@ *= 300@ // (float) 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_30383 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+0027:   98@ > $TEMPVAR_FLOAT_1 // (float) 
+jf @POOL2_30272 
+0088: $TEMPVAR_FLOAT_1 = 98@ // (float) 
+$TEMPVAR_FLOAT_1 += 0.01 
+
+:POOL2_30272
+if 
+0026:   $TEMPVAR_FLOAT_1 > 99@ // (float) 
+jf @POOL2_30309 
+0088: $TEMPVAR_FLOAT_1 = 99@ // (float) 
+$TEMPVAR_FLOAT_1 -= 0.01 
+
+:POOL2_30309
+if 
+0027:   100@ > $TEMPVAR_FLOAT_2 // (float) 
+jf @POOL2_30346 
+0088: $TEMPVAR_FLOAT_2 = 100@ // (float) 
+$TEMPVAR_FLOAT_2 += 0.01 
+
+:POOL2_30346
+if 
+0026:   $TEMPVAR_FLOAT_2 > 101@ // (float) 
+jf @POOL2_30383 
+0088: $TEMPVAR_FLOAT_2 = 101@ // (float) 
+$TEMPVAR_FLOAT_2 -= 0.01 
+
+:POOL2_30383
+0087: 196@ = 304@(39@,3f) // (float) 
+0063: 196@ -= 169@ // (float) 
+0087: 197@ = 307@(39@,3f) // (float) 
+0063: 197@ -= 170@ // (float) 
+005B: 196@ += 344@ // (float) 
+005B: 197@ += 345@ // (float) 
+005A: 40@ += 357@ // (int) 
+
+:POOL2_30447
+if and
+001D:   40@ > 357@ // (int) 
+  10 > 357@ 
+jf @POOL2_30663 
+0088: $TEMPVAR_FLOAT_1 = 196@ // (float) 
+005F: $TEMPVAR_FLOAT_1 += 169@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 197@ // (float) 
+005F: $TEMPVAR_FLOAT_2 += 170@ // (float) 
+0089: 196@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 197@ = $TEMPVAR_FLOAT_2 // (float) 
+if 
+03CA:   object 347@(357@,10i) exists 
+jf @POOL2_30649 
+if or
+0026:   $TEMPVAR_FLOAT_1 > 99@ // (float) 
+0027:   98@ > $TEMPVAR_FLOAT_1 // (float) 
+0026:   $TEMPVAR_FLOAT_2 > 101@ // (float) 
+0027:   100@ > $TEMPVAR_FLOAT_2 // (float) 
+jf @POOL2_30620 
+0750: set_object 347@(357@,10i) visibility 0 
+Object.PutAt(347@(357@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+jump @POOL2_30649 
+
+:POOL2_30620
+0750: set_object 347@(357@,10i) visibility 1 
+Object.PutAt(347@(357@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:POOL2_30649
+357@ += 1 
+jump @POOL2_30447 
+
+:POOL2_30663
+39@ += 1 
+jump @POOL2_29944 
+
+:POOL2_30677
+281@ += 1 
+
+:POOL2_30684
+if 
+  281@ == 3 
+jf @POOL2_30709 
+281@ = 99 
+
+:POOL2_30709
+jump @POOL2_28667 
+
+:POOL2_30716
+return 
+
+:POOL2_30718
+if 
+   not Actor.Dead(358@)
+jf @POOL2_33758 
+if 
+07D6:   358@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @POOL2_30767 
+360@ = 0 
+jump @POOL2_30774 
+
+:POOL2_30767
+360@ = 1 
+
+:POOL2_30774
+if 
+   Actor.Animation(358@) == "POOL_XLONG_SHOT"
+jf @POOL2_31040 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_30867 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_30867
+0613: 42@ = actor 358@ animation "POOL_XLONG_SHOT" time 
+if 
+0837:   object 359@ animation == "POOL_XLONG_SHOT_O" 
+jf @POOL2_30961 
+083A: set_object 359@ animation "POOL_XLONG_SHOT_O" progress_to 42@ 
+jump @POOL2_31040 
+
+:POOL2_30961
+if 
+075A: set_object 359@ animation "POOL_XLONG_SHOT_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_31040 
+0836: set_object 359@ animation "POOL_XLONG_SHOT_O" at 0.0 times_normal_rate 
+
+:POOL2_31040
+if and
+   Actor.Animation(358@) == "POOL_XLONG_START"
+   not Actor.Animation(358@) == "POOL_XLONG_SHOT"
+jf @POOL2_31334 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_31156 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_31156
+0613: 42@ = actor 358@ animation "POOL_XLONG_START" time 
+if 
+0837:   object 359@ animation == "POOL_XLONG_START_O" 
+jf @POOL2_31253 
+083A: set_object 359@ animation "POOL_XLONG_START_O" progress_to 42@ 
+jump @POOL2_31334 
+
+:POOL2_31253
+if 
+075A: set_object 359@ animation "POOL_XLONG_START_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_31334 
+0836: set_object 359@ animation "POOL_XLONG_START_O" at 0.0 times_normal_rate 
+
+:POOL2_31334
+if 
+   Actor.Animation(358@) == "POOL_LONG_SHOT"
+jf @POOL2_31594 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_31426 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_31426
+0613: 42@ = actor 358@ animation "POOL_LONG_SHOT" time 
+if 
+0837:   object 359@ animation == "POOL_LONG_SHOT_O" 
+jf @POOL2_31517 
+083A: set_object 359@ animation "POOL_LONG_SHOT_O" progress_to 42@ 
+jump @POOL2_31594 
+
+:POOL2_31517
+if 
+075A: set_object 359@ animation "POOL_LONG_SHOT_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_31594 
+0836: set_object 359@ animation "POOL_LONG_SHOT_O" at 0.0 times_normal_rate 
+
+:POOL2_31594
+if and
+   Actor.Animation(358@) == "POOL_LONG_START"
+   not Actor.Animation(358@) == "POOL_LONG_SHOT"
+jf @POOL2_31881 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_31708 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_31708
+0613: 42@ = actor 358@ animation "POOL_LONG_START" time 
+if 
+0837:   object 359@ animation == "POOL_LONG_START_O" 
+jf @POOL2_31802 
+083A: set_object 359@ animation "POOL_LONG_START_O" progress_to 42@ 
+jump @POOL2_31881 
+
+:POOL2_31802
+if 
+075A: set_object 359@ animation "POOL_LONG_START_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_31881 
+0836: set_object 359@ animation "POOL_LONG_START_O" at 0.0 times_normal_rate 
+
+:POOL2_31881
+if 
+   Actor.Animation(358@) == "POOL_MED_SHOT"
+jf @POOL2_32135 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_31972 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_31972
+0613: 42@ = actor 358@ animation "POOL_MED_SHOT" time 
+if 
+0837:   object 359@ animation == "POOL_MED_SHOT_O" 
+jf @POOL2_32060 
+083A: set_object 359@ animation "POOL_MED_SHOT_O" progress_to 42@ 
+jump @POOL2_32135 
+
+:POOL2_32060
+if 
+075A: set_object 359@ animation "POOL_MED_SHOT_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_32135 
+0836: set_object 359@ animation "POOL_MED_SHOT_O" at 0.0 times_normal_rate 
+
+:POOL2_32135
+if and
+   Actor.Animation(358@) == "POOL_MED_START"
+   not Actor.Animation(358@) == "POOL_MED_SHOT"
+jf @POOL2_32415 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_32247 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_32247
+0613: 42@ = actor 358@ animation "POOL_MED_START" time 
+if 
+0837:   object 359@ animation == "POOL_MED_START_O" 
+jf @POOL2_32338 
+083A: set_object 359@ animation "POOL_MED_START_O" progress_to 42@ 
+jump @POOL2_32415 
+
+:POOL2_32338
+if 
+075A: set_object 359@ animation "POOL_MED_START_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_32415 
+0836: set_object 359@ animation "POOL_MED_START_O" at 0.0 times_normal_rate 
+
+:POOL2_32415
+if 
+   Actor.Animation(358@) == "POOL_SHORT_SHOT"
+jf @POOL2_32681 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_32508 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_32508
+0613: 42@ = actor 358@ animation "POOL_SHORT_SHOT" time 
+if 
+0837:   object 359@ animation == "POOL_SHORT_SHOT_O" 
+jf @POOL2_32602 
+083A: set_object 359@ animation "POOL_SHORT_SHOT_O" progress_to 42@ 
+jump @POOL2_32681 
+
+:POOL2_32602
+if 
+075A: set_object 359@ animation "POOL_SHORT_SHOT_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_32681 
+0836: set_object 359@ animation "POOL_SHORT_SHOT_O" at 0.0 times_normal_rate 
+
+:POOL2_32681
+if and
+   Actor.Animation(358@) == "POOL_SHORT_START"
+   not Actor.Animation(358@) == "POOL_SHORT_SHOT"
+jf @POOL2_32975 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_32797 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_32797
+0613: 42@ = actor 358@ animation "POOL_SHORT_START" time 
+if 
+0837:   object 359@ animation == "POOL_SHORT_START_O" 
+jf @POOL2_32894 
+083A: set_object 359@ animation "POOL_SHORT_START_O" progress_to 42@ 
+jump @POOL2_32975 
+
+:POOL2_32894
+if 
+075A: set_object 359@ animation "POOL_SHORT_START_O" IFP_file "POOL" 10000.0 lockF 0 loop 1 // IF AND SET 
+jf @POOL2_32975 
+0836: set_object 359@ animation "POOL_SHORT_START_O" at 0.0 times_normal_rate 
+
+:POOL2_32975
+if 
+   Actor.Animation(358@) == "POOL_CHALKCUE"
+jf @POOL2_33178 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_33066 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_33066
+0613: 42@ = actor 358@ animation "POOL_CHALKCUE" time 
+if 
+  42@ > 0.28 
+jf @POOL2_33171 
+if 
+   not 361@(360@,2i) == 1 
+jf @POOL2_33171 
+Object.StorePos(359@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+097A: play_audio_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 event 1018 
+361@(360@,2i) = 1 
+
+:POOL2_33171
+jump @POOL2_33211 
+
+:POOL2_33178
+if 
+   not 361@(360@,2i) == 0 
+jf @POOL2_33211 
+361@(360@,2i) = 0 
+
+:POOL2_33211
+if 
+   Actor.Animation(358@) == "POOL_IDLE_STANCE"
+jf @POOL2_33305 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_33305 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_33305
+if 
+   Actor.Animation(358@) == "POOL_WALK"
+jf @POOL2_33392 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_33392 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_33392
+if 
+   Actor.Animation(358@) == "POOL_WALK_START"
+jf @POOL2_33485 
+if 
+8737:   not actor 358@ lifting_object 359@ 
+jf @POOL2_33485 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+
+:POOL2_33485
+39@ = 0 
+if and
+   Actor.Animation(358@) == "IDLE_STANCE"
+803B:   not  215@ == 358@ // (int) 
+jf @POOL2_33536 
+39@ = 1 
+
+:POOL2_33536
+if and
+   Actor.Animation(358@) == "IDLE_STANCE"
+  35@ == 6 
+jf @POOL2_33579 
+39@ = 1 
+
+:POOL2_33579
+if 
+  39@ == 1 
+jf @POOL2_33758 
+062E: get_actor 358@ task 1560 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @POOL2_33758 
+070B: set_actor 358@ onbone_attached_object_operation 0 
+070A: AS_actor 358@ attach_to_object 359@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 1 
+0615: define_AS_pack_begin 47@ 
+0812: AS_actor -1 perform_animation "POOL_IDLE_STANCE" IFP "POOL" framedelta 4.0 loopA 1 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end 47@ 
+if 
+  108@ == 0 
+jf @POOL2_33753 
+0618: assign_actor 358@ to_AS_pack 47@ 
+
+:POOL2_33753
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_33758
+return 
+
+:POOL2_33760
+369@ = 99999.9 
+370@ = 99999.9 
+371@ = 99999.9 
+363@ = 99999.9 
+365@ = 0.0 
+364@ = 99999.9 
+366@ = 0 
+
+:POOL2_33827
+if 
+  6 > 366@ 
+jf @POOL2_34069 
+382@(366@,6f) = 0.0 
+388@(366@,6f) = 0.0 
+394@(366@,6f) = 0.0 
+400@(366@,6f) = 0.0 
+406@(366@,6f) = 0.0 
+412@(366@,6f) = 0.0 
+418@(366@,6f) = 0.0 
+424@(366@,6f) = 0.0 
+430@(366@,6f) = 0.0 
+436@(366@,6f) = 0.0 
+442@(366@,6f) = 0.0 
+448@(366@,6f) = 0.0 
+454@(366@,6f) = 0.0 
+460@(366@,6f) = 0.0 
+466@(366@,6f) = 0.0 
+366@ += 1 
+jump @POOL2_33827 
+
+:POOL2_34069
+366@ = 1 
+
+:POOL2_34076
+if 
+  16 > 366@ 
+jf @POOL2_38347 
+wait 0 
+381@ = 0 
+if 
+03CA:   object 82@(366@,16i) exists 
+jf @POOL2_37280 
+if 
+  66@(366@,16i) == 0 
+jf @POOL2_37266 
+if 
+  8 > 366@ 
+jf @POOL2_34179 
+368@ = 0 
+jump @POOL2_34218 
+
+:POOL2_34179
+if 
+  366@ == 8 
+jf @POOL2_34211 
+368@ = 2 
+jump @POOL2_34218 
+
+:POOL2_34211
+368@ = 1 
+
+:POOL2_34218
+if or
+003B:   368@ == 231@ // (int) 
+  231@ == -1 
+jf @POOL2_37252 
+if and
+  231@ == -1 
+  368@ == 2 
+jf @POOL2_34283 
+381@ = 1 
+jump @POOL2_37245 
+
+:POOL2_34283
+if 
+  129@ == 1 
+jf @POOL2_34440 
+03A9: save_newline_to_debug_file 
+03A9: save_newline_to_debug_file 
+05B6: 21 //          
+03A7: save_int_to_debug_file 366@ 
+
+:POOL2_34440
+367@ = 0 
+
+:POOL2_34447
+if 
+  6 > 367@ 
+jf @POOL2_37245 
+if 
+  129@ == 1 
+jf @POOL2_34620 
+03A9: save_newline_to_debug_file 
+05B6: 22 // UNLOCKED_IMPORT_CARS ARRAY
+03A7: save_int_to_debug_file 367@ 
+
+:POOL2_34620
+0085: 516@ = 82@(366@,16i) // (int) 
+0085: 517@ = 367@ // (int) 
+gosub @POOL2_48823 
+if 
+  129@ == 1 
+jf @POOL2_34802 
+03A9: save_newline_to_debug_file 
+05B6: 23 // UNLOCKED_IMPORT_CARS[
+03A8: save_float_to_debug_file 519@ 
+
+:POOL2_34802
+if 
+  518@ == 1 
+jf @POOL2_36788 
+0085: 481@ = 82@(366@,16i) // (int) 
+482@ = 0 
+0087: 483@ = 54@(367@,6f) // (float) 
+0087: 484@ = 60@(367@,6f) // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_34905 
+473@ = 1.0 
+jump @POOL2_34951 
+
+:POOL2_34905
+if 
+003B:   486@ == 368@ // (int) 
+jf @POOL2_34941 
+473@ = 0.2 
+jump @POOL2_34951 
+
+:POOL2_34941
+473@ = 0.1 
+
+:POOL2_34951
+if 
+  129@ == 1 
+jf @POOL2_35106 
+03A9: save_newline_to_debug_file 
+05B6: 24 // ] = 
+03A8: save_float_to_debug_file 473@ 
+
+:POOL2_35106
+Object.StorePos(82@(366@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 54@(367@,6f) 60@(367@,6f) 
+475@ = 2.3 
+0063: 475@ -= 42@ // (float) 
+475@ /= 2.3 
+if 
+  129@ == 1 
+jf @POOL2_35332 
+03A9: save_newline_to_debug_file 
+05B6: 25 // EDIT_X1 = 
+03A8: save_float_to_debug_file 475@ 
+
+:POOL2_35332
+476@ = 90.0 
+0063: 476@ -= 519@ // (float) 
+476@ /= 90.0 
+if 
+  129@ == 1 
+jf @POOL2_35515 
+03A9: save_newline_to_debug_file 
+05B6: 26 // EDIT_Y1 = 
+03A8: save_float_to_debug_file 476@ 
+
+:POOL2_35515
+0085: 481@ = 82@ // (int) 
+0085: 482@ = 82@(366@,16i) // (int) 
+0087: 483@ = 526@ // (float) 
+0087: 484@ = 527@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_35593 
+474@ = 1.0 
+jump @POOL2_35824 
+
+:POOL2_35593
+if 
+  129@ == 1 
+jf @POOL2_35743 
+03A9: save_newline_to_debug_file 
+05B6: 27 // EDIT_X2 = 
+
+:POOL2_35743
+if 
+  231@ == -1 
+jf @POOL2_35778 
+474@ = 0.05 
+jump @POOL2_35824 
+
+:POOL2_35778
+if 
+003B:   486@ == 231@ // (int) 
+jf @POOL2_35814 
+474@ = 0.05 
+jump @POOL2_35824 
+
+:POOL2_35814
+474@ = -1000.0 
+
+:POOL2_35824
+if 
+  129@ == 1 
+jf @POOL2_35979 
+03A9: save_newline_to_debug_file 
+05B6: 28 // EDIT_Y2 = 
+03A8: save_float_to_debug_file 474@ 
+
+:POOL2_35979
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 526@ 527@ 
+if 
+  0.3 > 42@ 
+jf @POOL2_36067 
+43@ = 0.3 
+0063: 43@ -= 42@ // (float) 
+42@ = 0.3 
+005B: 42@ += 43@ // (float) 
+
+:POOL2_36067
+42@ += -0.3 
+43@ = 2.0 
+0063: 43@ -= 42@ // (float) 
+43@ /= 2.0 
+0087: 472@ = 43@ // (float) 
+if 
+  129@ == 1 
+jf @POOL2_36268 
+03A9: save_newline_to_debug_file 
+05B6: 29 // BUTT_ANGLE = 
+03A8: save_float_to_debug_file 472@ 
+
+:POOL2_36268
+473@ *= 1.0 
+474@ *= 1.0 
+472@ *= 0.3 
+475@ *= 0.4 
+476@ *= 0.8 
+0087: 477@ = 473@ // (float) 
+005B: 477@ += 474@ // (float) 
+005B: 477@ += 472@ // (float) 
+005B: 477@ += 475@ // (float) 
+005B: 477@ += 476@ // (float) 
+477@ /= 5.0 
+0871: init_jump_table 366@ total_jumps 15 default_jump 0 @POOL2_36781 jumps 1 @POOL2_36496 2 @POOL2_36515 3 @POOL2_36534 4 @POOL2_36553 5 @POOL2_36572 6 @POOL2_36591 7 @POOL2_36610 
+0872: jump_table_jumps 8 @POOL2_36629 9 @POOL2_36648 10 @POOL2_36667 11 @POOL2_36686 12 @POOL2_36705 13 @POOL2_36724 14 @POOL2_36743 15 @POOL2_36762 -1 @POOL2_36781 
+
+:POOL2_36496
+0087: 382@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36515
+0087: 388@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36534
+0087: 394@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36553
+0087: 400@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36572
+0087: 406@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36591
+0087: 412@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36610
+0087: 418@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36629
+0087: 424@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36648
+0087: 430@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36667
+0087: 436@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36686
+0087: 442@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36705
+0087: 448@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36724
+0087: 454@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36743
+0087: 460@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36762
+0087: 466@(367@,6f) = 477@ // (float) 
+jump @POOL2_36781 
+
+:POOL2_36781
+jump @POOL2_37231 
+
+:POOL2_36788
+0871: init_jump_table 366@ total_jumps 15 default_jump 0 @POOL2_37231 jumps 1 @POOL2_36916 2 @POOL2_36937 3 @POOL2_36958 4 @POOL2_36979 5 @POOL2_37000 6 @POOL2_37021 7 @POOL2_37042 
+0872: jump_table_jumps 8 @POOL2_37063 9 @POOL2_37084 10 @POOL2_37105 11 @POOL2_37126 12 @POOL2_37147 13 @POOL2_37168 14 @POOL2_37189 15 @POOL2_37210 -1 @POOL2_37231 
+
+:POOL2_36916
+382@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_36937
+388@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_36958
+394@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_36979
+400@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37000
+406@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37021
+412@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37042
+418@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37063
+424@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37084
+430@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37105
+436@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37126
+442@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37147
+448@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37168
+454@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37189
+460@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37210
+466@(367@,6f) = -1.0 
+jump @POOL2_37231 
+
+:POOL2_37231
+367@ += 1 
+jump @POOL2_34447 
+
+:POOL2_37245
+jump @POOL2_37259 
+
+:POOL2_37252
+381@ = 1 
+
+:POOL2_37259
+jump @POOL2_37273 
+
+:POOL2_37266
+381@ = 1 
+
+:POOL2_37273
+jump @POOL2_37287 
+
+:POOL2_37280
+381@ = 1 
+
+:POOL2_37287
+if 
+  381@ == 1 
+jf @POOL2_38333 
+0871: init_jump_table 366@ total_jumps 15 default_jump 0 @POOL2_38333 jumps 1 @POOL2_37433 2 @POOL2_37493 3 @POOL2_37553 4 @POOL2_37613 5 @POOL2_37673 6 @POOL2_37733 7 @POOL2_37793 
+0872: jump_table_jumps 8 @POOL2_37853 9 @POOL2_37913 10 @POOL2_37973 11 @POOL2_38033 12 @POOL2_38093 13 @POOL2_38153 14 @POOL2_38213 15 @POOL2_38273 -1 @POOL2_38333 
+
+:POOL2_37433
+367@ = 0 
+
+:POOL2_37440
+if 
+  6 > 367@ 
+jf @POOL2_37486 
+382@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37440 
+
+:POOL2_37486
+jump @POOL2_38333 
+
+:POOL2_37493
+367@ = 0 
+
+:POOL2_37500
+if 
+  6 > 367@ 
+jf @POOL2_37546 
+388@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37500 
+
+:POOL2_37546
+jump @POOL2_38333 
+
+:POOL2_37553
+367@ = 0 
+
+:POOL2_37560
+if 
+  6 > 367@ 
+jf @POOL2_37606 
+394@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37560 
+
+:POOL2_37606
+jump @POOL2_38333 
+
+:POOL2_37613
+367@ = 0 
+
+:POOL2_37620
+if 
+  6 > 367@ 
+jf @POOL2_37666 
+400@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37620 
+
+:POOL2_37666
+jump @POOL2_38333 
+
+:POOL2_37673
+367@ = 0 
+
+:POOL2_37680
+if 
+  6 > 367@ 
+jf @POOL2_37726 
+406@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37680 
+
+:POOL2_37726
+jump @POOL2_38333 
+
+:POOL2_37733
+367@ = 0 
+
+:POOL2_37740
+if 
+  6 > 367@ 
+jf @POOL2_37786 
+412@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37740 
+
+:POOL2_37786
+jump @POOL2_38333 
+
+:POOL2_37793
+367@ = 0 
+
+:POOL2_37800
+if 
+  6 > 367@ 
+jf @POOL2_37846 
+418@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37800 
+
+:POOL2_37846
+jump @POOL2_38333 
+
+:POOL2_37853
+367@ = 0 
+
+:POOL2_37860
+if 
+  6 > 367@ 
+jf @POOL2_37906 
+424@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37860 
+
+:POOL2_37906
+jump @POOL2_38333 
+
+:POOL2_37913
+367@ = 0 
+
+:POOL2_37920
+if 
+  6 > 367@ 
+jf @POOL2_37966 
+430@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37920 
+
+:POOL2_37966
+jump @POOL2_38333 
+
+:POOL2_37973
+367@ = 0 
+
+:POOL2_37980
+if 
+  6 > 367@ 
+jf @POOL2_38026 
+436@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_37980 
+
+:POOL2_38026
+jump @POOL2_38333 
+
+:POOL2_38033
+367@ = 0 
+
+:POOL2_38040
+if 
+  6 > 367@ 
+jf @POOL2_38086 
+442@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_38040 
+
+:POOL2_38086
+jump @POOL2_38333 
+
+:POOL2_38093
+367@ = 0 
+
+:POOL2_38100
+if 
+  6 > 367@ 
+jf @POOL2_38146 
+448@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_38100 
+
+:POOL2_38146
+jump @POOL2_38333 
+
+:POOL2_38153
+367@ = 0 
+
+:POOL2_38160
+if 
+  6 > 367@ 
+jf @POOL2_38206 
+454@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_38160 
+
+:POOL2_38206
+jump @POOL2_38333 
+
+:POOL2_38213
+367@ = 0 
+
+:POOL2_38220
+if 
+  6 > 367@ 
+jf @POOL2_38266 
+460@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_38220 
+
+:POOL2_38266
+jump @POOL2_38333 
+
+:POOL2_38273
+367@ = 0 
+
+:POOL2_38280
+if 
+  6 > 367@ 
+jf @POOL2_38326 
+466@(367@,6f) = -1.0 
+367@ += 1 
+jump @POOL2_38280 
+
+:POOL2_38326
+jump @POOL2_38333 
+
+:POOL2_38333
+366@ += 1 
+jump @POOL2_34076 
+
+:POOL2_38347
+478@ = -9999.9 
+479@ = -1 
+480@ = -1 
+366@ = 0 
+if 
+  129@ == 1 
+jf @POOL2_38528 
+03A9: save_newline_to_debug_file 
+05B6: 30 // RAISE_CUE = 
+
+:POOL2_38528
+if 
+  6 > 366@ 
+jf @POOL2_41852 
+if 
+  129@ == 1 
+jf @POOL2_38842 
+03A9: save_newline_to_debug_file 
+05B6: 31 // CUE_X_CORRECTION = 
+03A7: save_int_to_debug_file 366@ 
+03A9: save_newline_to_debug_file 
+05B6: 32 // CUE BALL DATA = 
+03A8: save_float_to_debug_file 382@(366@,6f) 
+
+:POOL2_38842
+if 
+0025:   382@(366@,6f) > 478@ // (float) 
+jf @POOL2_38892 
+0087: 478@ = 382@(366@,6f) // (float) 
+479@ = 1 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_38892
+if 
+  129@ == 1 
+jf @POOL2_39051 
+03A9: save_newline_to_debug_file 
+05B6: 33 // BALL 
+03A8: save_float_to_debug_file 388@(366@,6f) 
+
+:POOL2_39051
+if 
+0025:   388@(366@,6f) > 478@ // (float) 
+jf @POOL2_39101 
+0087: 478@ = 388@(366@,6f) // (float) 
+479@ = 2 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_39101
+if 
+  129@ == 1 
+jf @POOL2_39260 
+03A9: save_newline_to_debug_file 
+05B6: 34 // POCKET 
+03A8: save_float_to_debug_file 394@(366@,6f) 
+
+:POOL2_39260
+if 
+0025:   394@(366@,6f) > 478@ // (float) 
+jf @POOL2_39310 
+0087: 478@ = 394@(366@,6f) // (float) 
+479@ = 3 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_39310
+if 
+  129@ == 1 
+jf @POOL2_39469 
+03A9: save_newline_to_debug_file 
+05B6: 35 //  REQUIRED ANGLE = 
+03A8: save_float_to_debug_file 400@(366@,6f) 
+
+:POOL2_39469
+if 
+0025:   400@(366@,6f) > 478@ // (float) 
+jf @POOL2_39519 
+0087: 478@ = 400@(366@,6f) // (float) 
+479@ = 4 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_39519
+if 
+  129@ == 1 
+jf @POOL2_39678 
+03A9: save_newline_to_debug_file 
+05B6: 36 //  POCKET_PATH_SCORE = 
+03A8: save_float_to_debug_file 406@(366@,6f) 
+
+:POOL2_39678
+if 
+0025:   406@(366@,6f) > 478@ // (float) 
+jf @POOL2_39728 
+0087: 478@ = 406@(366@,6f) // (float) 
+479@ = 5 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_39728
+if 
+  129@ == 1 
+jf @POOL2_39887 
+03A9: save_newline_to_debug_file 
+05B6: 37 //  POCKET_DIST_SCORE = 
+03A8: save_float_to_debug_file 412@(366@,6f) 
+
+:POOL2_39887
+if 
+0025:   412@(366@,6f) > 478@ // (float) 
+jf @POOL2_39937 
+0087: 478@ = 412@(366@,6f) // (float) 
+479@ = 6 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_39937
+if 
+  129@ == 1 
+jf @POOL2_40096 
+03A9: save_newline_to_debug_file 
+05B6: 38 //  POCKET_ANGLE_SCORE = 
+03A8: save_float_to_debug_file 418@(366@,6f) 
+
+:POOL2_40096
+if 
+0025:   418@(366@,6f) > 478@ // (float) 
+jf @POOL2_40146 
+0087: 478@ = 418@(366@,6f) // (float) 
+479@ = 7 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_40146
+if 
+  129@ == 1 
+jf @POOL2_40305 
+03A9: save_newline_to_debug_file 
+05B6: 39 //    (PATH NOT CLEAR FROM CUE BALL TO THIS BALL) 
+03A8: save_float_to_debug_file 424@(366@,6f) 
+
+:POOL2_40305
+if 
+0025:   424@(366@,6f) > 478@ // (float) 
+jf @POOL2_40355 
+0087: 478@ = 424@(366@,6f) // (float) 
+479@ = 8 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_40355
+if 
+  129@ == 1 
+jf @POOL2_40514 
+03A9: save_newline_to_debug_file 
+05B6: 40 //  CUE_PATH_SCORE = 
+03A8: save_float_to_debug_file 430@(366@,6f) 
+
+:POOL2_40514
+if 
+0025:   430@(366@,6f) > 478@ // (float) 
+jf @POOL2_40564 
+0087: 478@ = 430@(366@,6f) // (float) 
+479@ = 9 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_40564
+if 
+  129@ == 1 
+jf @POOL2_40723 
+03A9: save_newline_to_debug_file 
+05B6: 41 //  CUE_DIST_SCORE = 
+03A8: save_float_to_debug_file 436@(366@,6f) 
+
+:POOL2_40723
+if 
+0025:   436@(366@,6f) > 478@ // (float) 
+jf @POOL2_40773 
+0087: 478@ = 436@(366@,6f) // (float) 
+479@ = 10 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_40773
+if 
+  129@ == 1 
+jf @POOL2_40932 
+03A9: save_newline_to_debug_file 
+05B6: 42 // POOL AI POTENTIAL SHOT SCORES
+03A8: save_float_to_debug_file 442@(366@,6f) 
+
+:POOL2_40932
+if 
+0025:   442@(366@,6f) > 478@ // (float) 
+jf @POOL2_40982 
+0087: 478@ = 442@(366@,6f) // (float) 
+479@ = 11 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_40982
+if 
+  129@ == 1 
+jf @POOL2_41141 
+03A9: save_newline_to_debug_file 
+05B6: 43 // POCKET
+03A8: save_float_to_debug_file 448@(366@,6f) 
+
+:POOL2_41141
+if 
+0025:   448@(366@,6f) > 478@ // (float) 
+jf @POOL2_41191 
+0087: 478@ = 448@(366@,6f) // (float) 
+479@ = 12 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_41191
+if 
+  129@ == 1 
+jf @POOL2_41350 
+03A9: save_newline_to_debug_file 
+05B6: 44 // BALL 01 = 
+03A8: save_float_to_debug_file 454@(366@,6f) 
+
+:POOL2_41350
+if 
+0025:   454@(366@,6f) > 478@ // (float) 
+jf @POOL2_41400 
+0087: 478@ = 454@(366@,6f) // (float) 
+479@ = 13 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_41400
+if 
+  129@ == 1 
+jf @POOL2_41559 
+03A9: save_newline_to_debug_file 
+05B6: 45 // BALL 02 = 
+03A8: save_float_to_debug_file 460@(366@,6f) 
+
+:POOL2_41559
+if 
+0025:   460@(366@,6f) > 478@ // (float) 
+jf @POOL2_41609 
+0087: 478@ = 460@(366@,6f) // (float) 
+479@ = 14 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_41609
+if 
+  129@ == 1 
+jf @POOL2_41768 
+03A9: save_newline_to_debug_file 
+05B6: 46 // BALL 03 = 
+03A8: save_float_to_debug_file 466@(366@,6f) 
+
+:POOL2_41768
+if 
+0025:   466@(366@,6f) > 478@ // (float) 
+jf @POOL2_41818 
+0087: 478@ = 466@(366@,6f) // (float) 
+479@ = 15 
+0085: 480@ = 366@ // (int) 
+
+:POOL2_41818
+if 
+  129@ == 1 
+jf @POOL2_41838 
+03A9: save_newline_to_debug_file 
+
+:POOL2_41838
+366@ += 1 
+jump @POOL2_38528 
+
+:POOL2_41852
+if 
+  478@ > 0.0 
+jf @POOL2_42273 
+Object.StorePos(82@(479@,16i), 372@, 373@, 374@)
+Object.StorePos(82@, 378@, 379@, 380@)
+0087: 375@ = 54@(480@,6f) // (float) 
+0063: 375@ -= 372@ // (float) 
+0087: 376@ = 60@(480@,6f) // (float) 
+0063: 376@ -= 373@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 54@(480@,6f) 60@(480@,6f) 
+0073: 375@ /= 42@ // (float) 
+0073: 376@ /= 42@ // (float) 
+0087: 43@ = 52@ // (float) 
+43@ *= -2.0 
+006B: 375@ *= 43@ // (float) 
+006B: 376@ *= 43@ // (float) 
+0087: 369@ = 372@ // (float) 
+005B: 369@ += 375@ // (float) 
+0087: 370@ = 373@ // (float) 
+005B: 370@ += 376@ // (float) 
+0088: $TEMPVAR_FLOAT_1 = 372@ // (float) 
+0067: $TEMPVAR_FLOAT_1 -= 369@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 373@ // (float) 
+0067: $TEMPVAR_FLOAT_2 -= 370@ // (float) 
+0087: 169@ = 369@ // (float) 
+0063: 169@ -= 378@ // (float) 
+0087: 170@ = 370@ // (float) 
+0063: 170@ -= 379@ // (float) 
+05A4: get_angle_between_vectors_origin_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_origin_to 169@ 170@ store_to 365@ 
+0087: 42@ = 365@ // (float) 
+42@ /= 90.0 
+42@ *= 0.25 
+006D: $TEMPVAR_FLOAT_1 *= 42@ // (float) 
+006D: $TEMPVAR_FLOAT_2 *= 42@ // (float) 
+005D: 369@ += $TEMPVAR_FLOAT_1 // (float) 
+005D: 370@ += $TEMPVAR_FLOAT_2 // (float) 
+0509: 42@ = distance_between_XY 378@ 379@ and_XY 369@ 370@ 
+0509: 43@ = distance_between_XY 372@ 373@ and_XY 369@ 370@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 2.0 6.0 
+006B: 371@ *= 42@ // (float) 
+jump @POOL2_46760 
+
+:POOL2_42273
+if 
+  129@ == 1 
+jf @POOL2_42423 
+03A9: save_newline_to_debug_file 
+05B6: 47 // BALL 04 = 
+
+:POOL2_42423
+366@ = 1 
+
+:POOL2_42430
+if 
+  16 > 366@ 
+jf @POOL2_43029 
+wait 0 
+if 
+03CA:   object 82@(366@,16i) exists 
+jf @POOL2_43015 
+if 
+  66@(366@,16i) == 0 
+jf @POOL2_43015 
+if 
+  366@ == 0 
+jf @POOL2_42526 
+368@ = 3 
+jump @POOL2_42597 
+
+:POOL2_42526
+if 
+  8 > 366@ 
+jf @POOL2_42558 
+368@ = 0 
+jump @POOL2_42597 
+
+:POOL2_42558
+if 
+  366@ == 8 
+jf @POOL2_42590 
+368@ = 2 
+jump @POOL2_42597 
+
+:POOL2_42590
+368@ = 1 
+
+:POOL2_42597
+if or
+003B:   368@ == 231@ // (int) 
+  231@ == -1 
+jf @POOL2_43015 
+if and
+  231@ == 0 
+  368@ == 2 
+jf @POOL2_42655 
+jump @POOL2_43015 
+
+:POOL2_42655
+0085: 528@ = 82@ // (int) 
+0085: 529@ = 82@(366@,16i) // (int) 
+gosub @POOL2_49143 
+if 
+   not 530@ == 0 
+jf @POOL2_43015 
+if 
+  530@ == 1 
+jf @POOL2_42741 
+0087: 369@ = 539@ // (float) 
+0087: 370@ = 540@ // (float) 
+jump @POOL2_42946 
+
+:POOL2_42741
+if 
+  530@ == 2 
+jf @POOL2_42782 
+0087: 369@ = 541@ // (float) 
+0087: 370@ = 542@ // (float) 
+jump @POOL2_42946 
+
+:POOL2_42782
+0088: $TEMPVAR_FLOAT_1 = 541@ // (float) 
+0067: $TEMPVAR_FLOAT_1 -= 539@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 542@ // (float) 
+0067: $TEMPVAR_FLOAT_2 -= 540@ // (float) 
+0509: 42@ = distance_between_XY 539@ 540@ and_XY 541@ 542@ 
+0075: $TEMPVAR_FLOAT_1 /= 42@ // (float) 
+0075: $TEMPVAR_FLOAT_2 /= 42@ // (float) 
+0087: 42@ = 52@ // (float) 
+42@ *= 2.0 
+42@ *= 0.8 
+42@ *= 2.0 
+0208: 43@ = random_float_in_ranges 0.0 42@ 
+006D: $TEMPVAR_FLOAT_1 *= 43@ // (float) 
+006D: $TEMPVAR_FLOAT_2 *= 43@ // (float) 
+0087: 369@ = 539@ // (float) 
+005D: 369@ += $TEMPVAR_FLOAT_1 // (float) 
+0087: 370@ = 540@ // (float) 
+005D: 370@ += $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_42946
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 369@ 370@ 
+0208: 43@ = random_float_in_ranges 2.0 5.0 
+0087: 371@ = 42@ // (float) 
+006B: 371@ *= 43@ // (float) 
+366@ = 16 
+
+:POOL2_43015
+366@ += 1 
+jump @POOL2_42430 
+
+:POOL2_43029
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_45057 
+if 
+  129@ == 1 
+jf @POOL2_43210 
+03A9: save_newline_to_debug_file 
+05B6: 48 // BALL 05 = 
+
+:POOL2_43210
+366@ = 1 
+
+:POOL2_43217
+if 
+  16 > 366@ 
+jf @POOL2_45057 
+wait 0 
+if 
+03CA:   object 82@(366@,16i) exists 
+jf @POOL2_45043 
+if 
+  66@(366@,16i) == 0 
+jf @POOL2_45043 
+if 
+  366@ == 0 
+jf @POOL2_43313 
+368@ = 3 
+jump @POOL2_43384 
+
+:POOL2_43313
+if 
+  8 > 366@ 
+jf @POOL2_43345 
+368@ = 0 
+jump @POOL2_43384 
+
+:POOL2_43345
+if 
+  366@ == 8 
+jf @POOL2_43377 
+368@ = 2 
+jump @POOL2_43384 
+
+:POOL2_43377
+368@ = 1 
+
+:POOL2_43384
+if or
+003B:   368@ == 231@ // (int) 
+  231@ == -1 
+jf @POOL2_45043 
+if and
+  231@ == -1 
+  368@ == 2 
+jf @POOL2_43442 
+jump @POOL2_45043 
+
+:POOL2_43442
+Object.StorePos(82@, 372@, 373@, 374@)
+Object.StorePos(82@(366@,16i), 375@, 376@, 377@)
+if 
+  129@ == 1 
+jf @POOL2_43624 
+03A9: save_newline_to_debug_file 
+05B6: 49 // BALL 06 = 
+
+:POOL2_43624
+0087: 378@ = 372@ // (float) 
+005B: 378@ += 375@ // (float) 
+378@ /= 2.0 
+0087: 379@ = 100@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_43856 
+0085: 549@ = 82@ // (int) 
+0085: 550@ = 82@(366@,16i) // (int) 
+0087: 551@ = 378@ // (float) 
+0087: 552@ = 379@ // (float) 
+gosub @POOL2_50002 
+if 
+  553@ == 1 
+jf @POOL2_43856 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 3.0 6.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_43856
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_44243 
+if 
+  129@ == 1 
+jf @POOL2_44037 
+03A9: save_newline_to_debug_file 
+05B6: 50 // BALL 07 = 
+
+:POOL2_44037
+0087: 379@ = 101@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_44243 
+0085: 549@ = 82@ // (int) 
+0085: 550@ = 82@(366@,16i) // (int) 
+0087: 551@ = 378@ // (float) 
+0087: 552@ = 379@ // (float) 
+gosub @POOL2_50002 
+if 
+  553@ == 1 
+jf @POOL2_44243 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 3.0 6.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_44243
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_44656 
+if 
+  129@ == 1 
+jf @POOL2_44424 
+03A9: save_newline_to_debug_file 
+05B6: 51 // BALL 08 = 
+
+:POOL2_44424
+0087: 379@ = 373@ // (float) 
+005B: 379@ += 376@ // (float) 
+379@ /= 2.0 
+0087: 378@ = 98@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_44656 
+0085: 549@ = 82@ // (int) 
+0085: 550@ = 82@(366@,16i) // (int) 
+0087: 551@ = 378@ // (float) 
+0087: 552@ = 379@ // (float) 
+gosub @POOL2_50002 
+if 
+  553@ == 1 
+jf @POOL2_44656 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 3.0 6.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_44656
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_45043 
+if 
+  129@ == 1 
+jf @POOL2_44837 
+03A9: save_newline_to_debug_file 
+05B6: 52 // BALL 09 = 
+
+:POOL2_44837
+0087: 378@ = 99@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_45043 
+0085: 549@ = 82@ // (int) 
+0085: 550@ = 82@(366@,16i) // (int) 
+0087: 551@ = 378@ // (float) 
+0087: 552@ = 379@ // (float) 
+gosub @POOL2_50002 
+if 
+  553@ == 1 
+jf @POOL2_45043 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 3.0 6.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_45043
+366@ += 1 
+jump @POOL2_43217 
+
+:POOL2_45057
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_46529 
+if 
+  129@ == 1 
+jf @POOL2_45238 
+03A9: save_newline_to_debug_file 
+05B6: 53 // BALL 10 = 
+
+:POOL2_45238
+366@ = 1 
+
+:POOL2_45245
+if 
+  16 > 366@ 
+jf @POOL2_46529 
+wait 0 
+if 
+03CA:   object 82@(366@,16i) exists 
+jf @POOL2_46515 
+if 
+  66@(366@,16i) == 0 
+jf @POOL2_46515 
+if 
+  366@ == 0 
+jf @POOL2_45341 
+368@ = 3 
+jump @POOL2_45412 
+
+:POOL2_45341
+if 
+  8 > 366@ 
+jf @POOL2_45373 
+368@ = 0 
+jump @POOL2_45412 
+
+:POOL2_45373
+if 
+  366@ == 8 
+jf @POOL2_45405 
+368@ = 2 
+jump @POOL2_45412 
+
+:POOL2_45405
+368@ = 1 
+
+:POOL2_45412
+if or
+003B:   368@ == 231@ // (int) 
+  231@ == -1 
+jf @POOL2_46515 
+if and
+  231@ == -1 
+  368@ == 2 
+jf @POOL2_45470 
+jump @POOL2_46515 
+
+:POOL2_45470
+Object.StorePos(82@, 372@, 373@, 374@)
+Object.StorePos(82@(366@,16i), 375@, 376@, 377@)
+0087: 378@ = 372@ // (float) 
+005B: 378@ += 375@ // (float) 
+378@ /= 2.0 
+0087: 379@ = 100@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_45745 
+0085: 554@ = 82@ // (int) 
+0087: 555@ = 378@ // (float) 
+0087: 556@ = 379@ // (float) 
+gosub @POOL2_50522 
+if 
+  557@ == 1 
+jf @POOL2_45745 
+0087: 369@ = 378@ // (float) 
+0208: 42@ = random_float_in_ranges -0.05 0.05 
+005B: 369@ += 42@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 5.0 8.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_45745
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_45993 
+0087: 379@ = 101@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_45993 
+0085: 554@ = 82@ // (int) 
+0087: 555@ = 378@ // (float) 
+0087: 556@ = 379@ // (float) 
+gosub @POOL2_50522 
+if 
+  557@ == 1 
+jf @POOL2_45993 
+0087: 369@ = 378@ // (float) 
+0208: 42@ = random_float_in_ranges -0.05 0.05 
+005B: 369@ += 42@ // (float) 
+0087: 370@ = 379@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 5.0 8.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_45993
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_46267 
+0087: 379@ = 373@ // (float) 
+005B: 379@ += 376@ // (float) 
+379@ /= 2.0 
+0087: 378@ = 98@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_46267 
+0085: 554@ = 82@ // (int) 
+0087: 555@ = 378@ // (float) 
+0087: 556@ = 379@ // (float) 
+gosub @POOL2_50522 
+if 
+  557@ == 1 
+jf @POOL2_46267 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0208: 42@ = random_float_in_ranges -0.05 0.05 
+005B: 370@ += 42@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 5.0 8.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_46267
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_46515 
+0087: 378@ = 99@ // (float) 
+0087: 543@ = 378@ // (float) 
+0087: 544@ = 379@ // (float) 
+gosub @POOL2_49746 
+if 
+  545@ == 0 
+jf @POOL2_46515 
+0085: 554@ = 82@ // (int) 
+0087: 555@ = 378@ // (float) 
+0087: 556@ = 379@ // (float) 
+gosub @POOL2_50522 
+if 
+  557@ == 1 
+jf @POOL2_46515 
+0087: 369@ = 378@ // (float) 
+0087: 370@ = 379@ // (float) 
+0208: 42@ = random_float_in_ranges -0.05 0.05 
+005B: 370@ += 42@ // (float) 
+0509: 42@ = distance_between_XY 372@ 373@ and_XY 378@ 379@ 
+0509: 43@ = distance_between_XY 375@ 376@ and_XY 378@ 379@ 
+0087: 371@ = 42@ // (float) 
+005B: 371@ += 43@ // (float) 
+0208: 42@ = random_float_in_ranges 5.0 8.0 
+006B: 371@ *= 42@ // (float) 
+366@ = 16 
+
+:POOL2_46515
+366@ += 1 
+jump @POOL2_45245 
+
+:POOL2_46529
+if and
+  369@ == 99999.9 
+  370@ == 99999.9 
+jf @POOL2_46760 
+if 
+  129@ == 1 
+jf @POOL2_46710 
+03A9: save_newline_to_debug_file 
+05B6: 54 // BALL 11 = 
+
+:POOL2_46710
+0208: 363@ = random_float_in_ranges 0.0 360.0 
+0208: 364@ = random_float_in_ranges 4.0 8.0 
+369@ = 0.0 
+370@ = 0.0 
+
+:POOL2_46760
+if and
+  363@ == 99999.9 
+  364@ == 99999.9 
+jf @POOL2_46923 
+Object.StorePos(82@, 372@, 373@, 374@)
+0087: 375@ = 369@ // (float) 
+0063: 375@ -= 372@ // (float) 
+0087: 376@ = 370@ // (float) 
+0063: 376@ -= 373@ // (float) 
+0604: get_Z_angle_for_point 375@ 376@ store_to 363@ 
+0087: 364@ = 371@ // (float) 
+364@ *= 1.0 
+if 
+  90.0 > 365@ 
+jf @POOL2_46923 
+0087: 42@ = 365@ // (float) 
+42@ /= 90.0 
+42@ *= 2.0 
+005B: 364@ += 42@ // (float) 
+
+:POOL2_46923
+if 
+  0.7 > 364@ 
+jf @POOL2_46954 
+364@ = 0.7 
+
+:POOL2_46954
+if 
+  364@ > 4.0 
+jf @POOL2_46985 
+364@ = 4.0 
+
+:POOL2_46985
+return 
+
+:POOL2_46987
+jump @POOL2_47038 
+481@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+482@ = Object.Create(#WOODENBOX, 0.0, 0.0, 0.0)
+
+:POOL2_47038
+485@ = 1 
+504@ = -1 
+if 
+03CA:   object 481@ exists 
+jf @POOL2_47131 
+Object.StorePos(481@, 487@, 488@, $TEMPVAR_FLOAT_3)
+0087: 491@ = 483@ // (float) 
+0063: 491@ -= 487@ // (float) 
+0087: 492@ = 484@ // (float) 
+0063: 492@ -= 488@ // (float) 
+0509: 497@ = distance_between_XY 487@ 488@ and_XY 483@ 484@ 
+
+:POOL2_47131
+wait 0 
+if or
+  231@ == -1 
+  231@ == 2 
+  231@ == 1 
+jf @POOL2_47220 
+501@ = 1 
+
+:POOL2_47174
+if 
+  16 > 501@ 
+jf @POOL2_47213 
+gosub @POOL2_47315 
+501@ += 1 
+jump @POOL2_47174 
+
+:POOL2_47213
+jump @POOL2_47306 
+
+:POOL2_47220
+503@ = 1 
+
+:POOL2_47227
+if 
+  16 > 503@ 
+jf @POOL2_47306 
+0085: 501@ = 503@ // (int) 
+501@ += 7 
+if 
+  501@ > 15 
+jf @POOL2_47285 
+501@ += -15 
+
+:POOL2_47285
+gosub @POOL2_47315 
+503@ += 1 
+jump @POOL2_47227 
+
+:POOL2_47306
+482@ = 0 
+return 
+
+:POOL2_47315
+if 
+03CA:   object 82@(501@,16i) exists 
+jf @POOL2_48235 
+if 
+  66@(501@,16i) == 0 
+jf @POOL2_48235 
+if 
+803B:   not  82@(501@,16i) == 481@ // (int) 
+jf @POOL2_48235 
+502@ = 0 
+if 
+03CA:   object 482@ exists 
+jf @POOL2_47433 
+if 
+003B:   82@(501@,16i) == 482@ // (int) 
+jf @POOL2_47433 
+502@ = 1 
+
+:POOL2_47433
+if 
+  502@ == 0 
+jf @POOL2_48235 
+Object.StorePos(82@(501@,16i), 489@, 490@, $TEMPVAR_FLOAT_3)
+0087: 493@ = 489@ // (float) 
+0063: 493@ -= 487@ // (float) 
+0087: 494@ = 490@ // (float) 
+0063: 494@ -= 488@ // (float) 
+0509: 498@ = distance_between_XY 487@ 488@ and_XY 489@ 490@ 
+05A4: get_angle_between_vectors_origin_to 491@ 492@ and_origin_to 493@ 494@ store_to 42@ 
+0509: 499@ = distance_between_XY 489@ 490@ and_XY 483@ 484@ 
+if 
+0025:   53@ > 499@ // (float) 
+jf @POOL2_47865 
+if 
+  501@ == 0 
+jf @POOL2_47603 
+486@ = 3 
+jump @POOL2_47674 
+
+:POOL2_47603
+if 
+  8 > 501@ 
+jf @POOL2_47635 
+486@ = 0 
+jump @POOL2_47674 
+
+:POOL2_47635
+if 
+  501@ == 8 
+jf @POOL2_47667 
+486@ = 2 
+jump @POOL2_47674 
+
+:POOL2_47667
+486@ = 1 
+
+:POOL2_47674
+if 
+  129@ == 1 
+jf @POOL2_47829 
+03A9: save_newline_to_debug_file 
+05B6: 55 // BALL 12 = 
+03A7: save_int_to_debug_file 501@ 
+
+:POOL2_47829
+0085: 504@ = 501@ // (int) 
+485@ = 0 
+501@ = 16 
+503@ = 16 
+jump @POOL2_48235 
+
+:POOL2_47865
+if 
+  90.0 >= 42@ 
+jf @POOL2_48235 
+if 
+0025:   497@ > 498@ // (float) 
+jf @POOL2_48235 
+02F6: 500@ = sine 42@ // (float) 
+0087: 42@ = 500@ // (float) 
+006B: 42@ *= 498@ // (float) 
+if 
+0025:   53@ > 42@ // (float) 
+jf @POOL2_48235 
+if 
+  501@ == 0 
+jf @POOL2_47980 
+486@ = 3 
+jump @POOL2_48051 
+
+:POOL2_47980
+if 
+  8 > 501@ 
+jf @POOL2_48012 
+486@ = 0 
+jump @POOL2_48051 
+
+:POOL2_48012
+if 
+  501@ == 8 
+jf @POOL2_48044 
+486@ = 2 
+jump @POOL2_48051 
+
+:POOL2_48044
+486@ = 1 
+
+:POOL2_48051
+if 
+  129@ == 1 
+jf @POOL2_48206 
+03A9: save_newline_to_debug_file 
+05B6: 56 // BALL 13 = 
+03A7: save_int_to_debug_file 501@ 
+
+:POOL2_48206
+0085: 504@ = 501@ // (int) 
+485@ = 0 
+501@ = 16 
+503@ = 16 
+
+:POOL2_48235
+return 
+
+:POOL2_48237
+485@ = 1 
+504@ = -1 
+0087: 491@ = 483@ // (float) 
+0063: 491@ -= 487@ // (float) 
+0087: 492@ = 484@ // (float) 
+0063: 492@ -= 488@ // (float) 
+if or
+0025:   98@ > 483@ // (float) 
+0025:   483@ > 99@ // (float) 
+0025:   100@ > 484@ // (float) 
+0025:   484@ > 101@ // (float) 
+jf @POOL2_48798 
+505@ = -99999.9 
+506@ = -99999.9 
+39@ = 0 
+if and
+05B0:   unknown_calculate 487@ 488@ 483@ and 484@ 98@ 100@ 98@ 101@ store_to 505@ 506@ // IF and SET 
+   not 515@ == 1 
+jf @POOL2_48417 
+39@ = 1 
+jump @POOL2_48602 
+
+:POOL2_48417
+if and
+05B0:   unknown_calculate 487@ 488@ 483@ and 484@ 99@ 100@ 99@ 101@ store_to 505@ 506@ // IF and SET 
+   not 515@ == 2 
+jf @POOL2_48481 
+39@ = 2 
+jump @POOL2_48602 
+
+:POOL2_48481
+if and
+05B0:   unknown_calculate 487@ 488@ 483@ and 484@ 98@ 100@ 99@ 100@ store_to 505@ 506@ // IF and SET 
+   not 515@ == 3 
+jf @POOL2_48545 
+39@ = 3 
+jump @POOL2_48602 
+
+:POOL2_48545
+if and
+05B0:   unknown_calculate 487@ 488@ 483@ and 484@ 98@ 101@ 99@ 101@ store_to 505@ 506@ // IF and SET 
+   not 515@ == 4 
+jf @POOL2_48602 
+39@ = 4 
+
+:POOL2_48602
+0509: 42@ = distance_between_XY 483@ 484@ and_XY 487@ 488@ 
+if 
+  42@ > 0.0 
+jf @POOL2_48656 
+0073: 491@ /= 42@ // (float) 
+0073: 492@ /= 42@ // (float) 
+
+:POOL2_48656
+if or
+  39@ == 1 
+  39@ == 2 
+jf @POOL2_48707 
+0087: 507@ = 491@ // (float) 
+507@ *= -1.0 
+0087: 508@ = 492@ // (float) 
+
+:POOL2_48707
+if or
+  39@ == 3 
+  39@ == 4 
+jf @POOL2_48758 
+0087: 507@ = 491@ // (float) 
+0087: 508@ = 492@ // (float) 
+508@ *= -1.0 
+
+:POOL2_48758
+if 
+   not 39@ == 0 
+jf @POOL2_48784 
+0085: 515@ = 39@ // (int) 
+
+:POOL2_48784
+485@ = 0 
+jump @POOL2_48821 
+
+:POOL2_48798
+0087: 505@ = 483@ // (float) 
+0087: 506@ = 484@ // (float) 
+485@ = 1 
+
+:POOL2_48821
+return 
+
+:POOL2_48823
+if 
+03CA:   object 516@ exists 
+jf @POOL2_48893 
+Object.StorePos(516@, 526@, 527@, $TEMPVAR_FLOAT_3)
+0087: 520@ = 54@(517@,6f) // (float) 
+0063: 520@ -= 526@ // (float) 
+0087: 521@ = 60@(517@,6f) // (float) 
+0063: 521@ -= 527@ // (float) 
+
+:POOL2_48893
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 54@(517@,6f) 60@(517@,6f) 
+0087: 522@ = 520@ // (float) 
+0073: 522@ /= 42@ // (float) 
+0087: 523@ = 521@ // (float) 
+0073: 523@ /= 42@ // (float) 
+522@ *= -1.0 
+523@ *= -1.0 
+0087: 42@ = 52@ // (float) 
+42@ *= 2.0 
+006B: 522@ *= 42@ // (float) 
+006B: 523@ *= 42@ // (float) 
+005B: 526@ += 522@ // (float) 
+005B: 527@ += 523@ // (float) 
+if 
+03CA:   object 82@ exists 
+jf @POOL2_49082 
+Object.StorePos(82@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0087: 524@ = 526@ // (float) 
+0065: 524@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 525@ = 527@ // (float) 
+0065: 525@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_49082
+05A4: get_angle_between_vectors_origin_to 520@ 521@ and_origin_to 524@ 525@ store_to 519@ 
+if 
+  90.0 > 519@ 
+jf @POOL2_49134 
+518@ = 1 
+jump @POOL2_49141 
+
+:POOL2_49134
+518@ = 0 
+
+:POOL2_49141
+return 
+
+:POOL2_49143
+530@ = 0 
+531@ = 0 
+532@ = 0 
+if and
+03CA:   object 528@ exists 
+03CA:   object 529@ exists 
+jf @POOL2_49744 
+Object.StorePos(528@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.StorePos(529@, 537@, 538@, $TEMPVAR_FLOAT_3)
+0087: 533@ = 537@ // (float) 
+0065: 533@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 534@ = 538@ // (float) 
+0065: 534@ -= $TEMPVAR_FLOAT_2 // (float) 
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 537@ 538@ 
+0073: 533@ /= 42@ // (float) 
+0073: 534@ /= 42@ // (float) 
+0087: 535@ = 534@ // (float) 
+0087: 536@ = 533@ // (float) 
+536@ *= -1.0 
+0087: 42@ = 52@ // (float) 
+42@ *= 2.0 
+42@ *= 0.8 
+0087: 43@ = 535@ // (float) 
+006B: 43@ *= 42@ // (float) 
+0087: 539@ = 537@ // (float) 
+005B: 539@ += 43@ // (float) 
+0087: 43@ = 536@ // (float) 
+006B: 43@ *= 42@ // (float) 
+0087: 540@ = 538@ // (float) 
+005B: 540@ += 43@ // (float) 
+0085: 481@ = 528@ // (int) 
+0085: 482@ = 529@ // (int) 
+0087: 483@ = 539@ // (float) 
+0087: 484@ = 540@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_49460 
+531@ = 1 
+
+:POOL2_49460
+0087: 42@ = 52@ // (float) 
+42@ *= 2.0 
+42@ *= -0.8 
+0087: 43@ = 535@ // (float) 
+006B: 43@ *= 42@ // (float) 
+0087: 541@ = 537@ // (float) 
+005B: 541@ += 43@ // (float) 
+0087: 43@ = 536@ // (float) 
+006B: 43@ *= 42@ // (float) 
+0087: 542@ = 538@ // (float) 
+005B: 542@ += 43@ // (float) 
+0085: 481@ = 528@ // (int) 
+0085: 482@ = 529@ // (int) 
+0087: 483@ = 541@ // (float) 
+0087: 484@ = 542@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_49616 
+532@ = 1 
+
+:POOL2_49616
+if and
+  531@ == 0 
+  532@ == 0 
+jf @POOL2_49648 
+530@ = 0 
+
+:POOL2_49648
+if and
+  531@ == 1 
+  532@ == 0 
+jf @POOL2_49680 
+530@ = 1 
+
+:POOL2_49680
+if and
+  531@ == 0 
+  532@ == 1 
+jf @POOL2_49712 
+530@ = 2 
+
+:POOL2_49712
+if and
+  531@ == 1 
+  532@ == 1 
+jf @POOL2_49744 
+530@ = 3 
+
+:POOL2_49744
+return 
+
+:POOL2_49746
+545@ = 0 
+547@ = 2.5 
+006B: 547@ *= 52@ // (float) 
+548@ = 0 
+
+:POOL2_49778
+if 
+  6 > 548@ 
+jf @POOL2_50000 
+0509: 546@ = distance_between_XY 543@ 544@ and_XY 54@(548@,6f) 60@(548@,6f) 
+if 
+0025:   547@ > 546@ // (float) 
+jf @POOL2_49986 
+03A9: save_newline_to_debug_file 
+05B6: 57 // BALL 14 = 
+545@ = 1 
+548@ = 6 
+
+:POOL2_49986
+548@ += 1 
+jump @POOL2_49778 
+
+:POOL2_50000
+return 
+
+:POOL2_50002
+553@ = 0 
+03A9: save_newline_to_debug_file 
+05B6: 58 // BALL 15 = 
+0085: 481@ = 549@ // (int) 
+482@ = 0 
+0087: 483@ = 551@ // (float) 
+0087: 484@ = 552@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_50520 
+05B6: 59 // HIT AND HOPE
+0085: 481@ = 550@ // (int) 
+482@ = 0 
+0087: 483@ = 551@ // (float) 
+0087: 484@ = 552@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_50520 
+05B6: 60 // BOUNCE OFF CUSHION
+553@ = 1 
+
+:POOL2_50520
+return 
+
+:POOL2_50522
+557@ = 0 
+0085: 481@ = 549@ // (int) 
+482@ = 0 
+0087: 483@ = 551@ // (float) 
+0087: 484@ = 552@ // (float) 
+gosub @POOL2_46987 
+if 
+  485@ == 1 
+jf @POOL2_50592 
+557@ = 1 
+
+:POOL2_50592
+return 
+
+:POOL2_50594
+0087: 565@ = 52@ // (float) 
+565@ *= 2.0 
+0087: 562@ = 52@ // (float) 
+562@ *= -1.0 
+0087: 566@ = 565@ // (float) 
+566@ *= -1.0 
+0087: 42@ = 565@ // (float) 
+006B: 42@ *= 565@ // (float) 
+0087: 43@ = 52@ // (float) 
+006B: 43@ *= 52@ // (float) 
+0087: 563@ = 42@ // (float) 
+0063: 563@ -= 43@ // (float) 
+01FB: 563@ = square_root 563@ 
+0087: 564@ = 563@ // (float) 
+564@ *= -1.0 
+567@ = 1 
+
+:POOL2_50729
+if 
+  15 > 567@ 
+jf @POOL2_50772 
+Object.KeepInMemory(82@(567@,16i)) = False
+567@ += 1 
+jump @POOL2_50729 
+
+:POOL2_50772
+Object.PutAt(83@, 558@, 559@, 560@)
+Object.Angle(83@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 83@ with_offset 562@ 564@ 0.0 
+Object.PutAt(91@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(91@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 91@ with_offset 565@ 0.0 0.0 
+Object.PutAt(85@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(85@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 91@ with_offset 562@ 564@ 0.0 
+Object.PutAt(89@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(89@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 89@ with_offset 565@ 0.0 0.0 
+Object.PutAt(90@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(90@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 90@ with_offset 565@ 0.0 0.0 
+Object.PutAt(92@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(92@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 89@ with_offset 562@ 564@ 0.0 
+Object.PutAt(93@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(93@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 93@ with_offset 565@ 0.0 0.0 
+Object.PutAt(84@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(84@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 84@ with_offset 565@ 0.0 0.0 
+Object.PutAt(97@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(97@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 97@ with_offset 565@ 0.0 0.0 
+Object.PutAt(87@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(87@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 93@ with_offset 562@ 564@ 0.0 
+Object.PutAt(88@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(88@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 88@ with_offset 565@ 0.0 0.0 
+Object.PutAt(94@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(94@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 94@ with_offset 565@ 0.0 0.0 
+Object.PutAt(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(95@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 95@ with_offset 565@ 0.0 0.0 
+Object.PutAt(86@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(86@) = 561@
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 86@ with_offset 565@ 0.0 0.0 
+Object.PutAt(96@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle(96@) = 561@
+return 
+
+:POOL2_51474
+602@ = -0.96 
+603@ = 0.49 
+604@ = 0.97 
+605@ = 0.49 
+606@ = 0.97 
+607@ = -0.49 
+608@ = -0.96 
+609@ = -0.49 
+0400: store_coords_to 571@ 572@ 573@ from_object 82@ with_offset 0.0 -5.0 0.0 
+Object.StorePos(82@, 574@, 575@, 576@)
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at 574@ 575@ 576@ 
+0400: store_coords_to 577@ 578@ 579@ from_object 163@ with_offset 602@ 603@ 0.0 
+0400: store_coords_to 580@ 581@ 582@ from_object 163@ with_offset 604@ 605@ 0.0 
+if 
+05B0:   unknown_calculate 571@ 572@ 574@ and 575@ 577@ 578@ 580@ 581@ store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 // IF and SET 
+jf @POOL2_51760 
+0089: 585@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 589@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 593@ = $TEMPVAR_FLOAT_3 // (float) 
+0087: 616@ = 604@ // (float) 
+0063: 616@ -= 602@ // (float) 
+0087: 617@ = 605@ // (float) 
+0063: 617@ -= 603@ // (float) 
+
+:POOL2_51760
+0400: store_coords_to 577@ 578@ 579@ from_object 163@ with_offset 606@ 607@ 0.0 
+if 
+05B0:   unknown_calculate 571@ 572@ 574@ and 575@ 577@ 578@ 580@ 581@ store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 // IF and SET 
+jf @POOL2_51884 
+0089: 585@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 589@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 593@ = $TEMPVAR_FLOAT_3 // (float) 
+0087: 616@ = 606@ // (float) 
+0063: 616@ -= 604@ // (float) 
+0087: 617@ = 607@ // (float) 
+0063: 617@ -= 605@ // (float) 
+
+:POOL2_51884
+0400: store_coords_to 580@ 581@ 582@ from_object 163@ with_offset 608@ 609@ 0.0 
+if 
+05B0:   unknown_calculate 571@ 572@ 574@ and 575@ 577@ 578@ 580@ 581@ store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 // IF and SET 
+jf @POOL2_52008 
+0089: 585@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 589@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 593@ = $TEMPVAR_FLOAT_3 // (float) 
+0087: 616@ = 608@ // (float) 
+0063: 616@ -= 606@ // (float) 
+0087: 617@ = 609@ // (float) 
+0063: 617@ -= 607@ // (float) 
+
+:POOL2_52008
+0400: store_coords_to 577@ 578@ 579@ from_object 163@ with_offset 602@ 603@ 0.0 
+if 
+05B0:   unknown_calculate 571@ 572@ 574@ and 575@ 577@ 578@ 580@ 581@ store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 // IF and SET 
+jf @POOL2_52132 
+0089: 585@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 589@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 593@ = $TEMPVAR_FLOAT_3 // (float) 
+0087: 616@ = 602@ // (float) 
+0063: 616@ -= 608@ // (float) 
+0087: 617@ = 603@ // (float) 
+0063: 617@ -= 609@ // (float) 
+
+:POOL2_52132
+0087: 614@ = 574@ // (float) 
+0063: 614@ -= 571@ // (float) 
+0087: 615@ = 575@ // (float) 
+0063: 615@ -= 572@ // (float) 
+05A4: get_angle_between_vectors_origin_to 614@ 615@ and_origin_to 616@ 617@ store_to 613@ 
+if 
+  613@ > 90.0 
+jf @POOL2_52222 
+613@ += -180.0 
+613@ *= -1.0 
+
+:POOL2_52222
+0087: 169@ = 574@ // (float) 
+0063: 169@ -= 585@ // (float) 
+0087: 170@ = 575@ // (float) 
+0063: 170@ -= 589@ // (float) 
+0087: 171@ = 576@ // (float) 
+0063: 171@ -= 593@ // (float) 
+0604: get_Z_angle_for_point 169@ 170@ store_to 597@ 
+0087: 595@ = 597@ // (float) 
+0087: 596@ = 597@ // (float) 
+0087: 598@ = 597@ // (float) 
+0087: 594@ = 593@ // (float) 
+0087: 591@ = 593@ // (float) 
+0087: 592@ = 593@ // (float) 
+0509: 599@ = distance_between_XY 574@ 575@ and_XY 585@ 589@ 
+0073: 169@ /= 599@ // (float) 
+0073: 170@ /= 599@ // (float) 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 3.0 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 3.0 
+0087: 583@ = 585@ // (float) 
+0065: 583@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 587@ = 589@ // (float) 
+0065: 587@ -= $TEMPVAR_FLOAT_2 // (float) 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 1.0 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 1.0 
+0087: 610@ = 585@ // (float) 
+0065: 610@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 611@ = 589@ // (float) 
+0065: 611@ -= $TEMPVAR_FLOAT_2 // (float) 
+0087: 612@ = 593@ // (float) 
+if 
+  0.25 > 599@ 
+jf @POOL2_52541 
+600@ = 1 
+jump @POOL2_52618 
+
+:POOL2_52541
+if 
+  0.65 > 599@ 
+jf @POOL2_52576 
+600@ = 2 
+jump @POOL2_52618 
+
+:POOL2_52576
+if 
+  1.1 > 599@ 
+jf @POOL2_52611 
+600@ = 3 
+jump @POOL2_52618 
+
+:POOL2_52611
+600@ = 4 
+
+:POOL2_52618
+if 
+  613@ > 70.0 
+jf @POOL2_52671 
+600@ += 1 
+if 
+  600@ > 4 
+jf @POOL2_52671 
+600@ = 4 
+
+:POOL2_52671
+if 
+  600@ == 1 
+jf @POOL2_52757 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 0.615 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 0.615 
+0087: 584@ = 574@ // (float) 
+0065: 584@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 588@ = 575@ // (float) 
+0065: 588@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_52757
+if 
+  600@ == 2 
+jf @POOL2_52843 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 1.0 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 1.0 
+0087: 584@ = 574@ // (float) 
+0065: 584@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 588@ = 575@ // (float) 
+0065: 588@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_52843
+if 
+  600@ == 3 
+jf @POOL2_52929 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 1.6 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 1.6 
+0087: 584@ = 574@ // (float) 
+0065: 584@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 588@ = 575@ // (float) 
+0065: 588@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_52929
+if 
+  600@ == 4 
+jf @POOL2_53015 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 2.1 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 2.1 
+0087: 584@ = 574@ // (float) 
+0065: 584@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 588@ = 575@ // (float) 
+0065: 588@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53015
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY 574@ 575@ and_XY 584@ 588@ 
+0087: 42@ = 599@ // (float) 
+42@ += 0.3 
+if 
+0027:   42@ > $DISTANCE_BETWEEN_POINTS // (float) 
+jf @POOL2_53151 
+0087: 42@ = 599@ // (float) 
+42@ += 0.3 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+006D: $TEMPVAR_FLOAT_1 *= 42@ // (float) 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+006D: $TEMPVAR_FLOAT_2 *= 42@ // (float) 
+0087: 584@ = 574@ // (float) 
+0065: 584@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 588@ = 575@ // (float) 
+0065: 588@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53151
+if 
+  600@ == 1 
+jf @POOL2_53237 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 0.655 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 0.655 
+0087: 586@ = 574@ // (float) 
+0065: 586@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 590@ = 575@ // (float) 
+0065: 590@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53237
+if 
+  600@ == 2 
+jf @POOL2_53323 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 1.0 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 1.0 
+0087: 586@ = 574@ // (float) 
+0065: 586@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 590@ = 575@ // (float) 
+0065: 590@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53323
+if 
+  600@ == 3 
+jf @POOL2_53409 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 1.6 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 1.6 
+0087: 586@ = 574@ // (float) 
+0065: 586@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 590@ = 575@ // (float) 
+0065: 590@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53409
+if 
+  600@ == 4 
+jf @POOL2_53495 
+0088: $TEMPVAR_FLOAT_1 = 169@ // (float) 
+$TEMPVAR_FLOAT_1 *= 2.1 
+0088: $TEMPVAR_FLOAT_2 = 170@ // (float) 
+$TEMPVAR_FLOAT_2 *= 2.1 
+0087: 586@ = 574@ // (float) 
+0065: 586@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 590@ = 575@ // (float) 
+0065: 590@ -= $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_53495
+return 
+
+:POOL2_53497
+038D: draw_texture 3 position 618@ 619@ size 620@ 621@ RGBA 128 128 128 255 
+038D: draw_texture 4 position 622@ 623@ size 624@ 625@ RGBA 128 128 128 255 
+if or
+00E1:   player 0 pressed_key 1 
+00E1:   player 0 pressed_key 0 
+jf @POOL2_54045 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008D: $TEMPVAR_FLOAT_1 = integer $MOVE_AXIS_X to_float 
+008D: $TEMPVAR_FLOAT_2 = integer $MOVE_AXIS_Y to_float 
+$TEMPVAR_FLOAT_1 /= 128.0 
+$TEMPVAR_FLOAT_2 /= 128.0 
+$TEMPVAR_FLOAT_1 *= 5.0 
+$TEMPVAR_FLOAT_2 *= 5.0 
+0087: 42@ = 622@ // (float) 
+005D: 42@ += $TEMPVAR_FLOAT_1 // (float) 
+0087: 44@ = 620@ // (float) 
+44@ /= 2.0 
+0087: 43@ = 618@ // (float) 
+005B: 43@ += 44@ // (float) 
+if 
+0025:   43@ > 42@ // (float) 
+jf @POOL2_53760 
+0087: 43@ = 618@ // (float) 
+0063: 43@ -= 44@ // (float) 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_53760 
+0088: $TEMPVAR_FLOAT_1 = 42@ // (float) 
+
+:POOL2_53760
+0087: 42@ = 623@ // (float) 
+005D: 42@ += $TEMPVAR_FLOAT_2 // (float) 
+0087: 44@ = 621@ // (float) 
+44@ /= 2.0 
+0087: 43@ = 619@ // (float) 
+005B: 43@ += 44@ // (float) 
+if 
+0025:   43@ > 42@ // (float) 
+jf @POOL2_53872 
+0087: 43@ = 619@ // (float) 
+0063: 43@ -= 44@ // (float) 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_53872 
+0088: $TEMPVAR_FLOAT_2 = 42@ // (float) 
+
+:POOL2_53872
+0509: 42@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 618@ 619@ 
+0087: 43@ = 620@ // (float) 
+43@ /= 3.2 
+if 
+0025:   42@ > 43@ // (float) 
+jf @POOL2_54029 
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 618@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 619@ // (float) 
+0073: 169@ /= 42@ // (float) 
+0073: 170@ /= 42@ // (float) 
+006B: 169@ *= 43@ // (float) 
+006B: 170@ *= 43@ // (float) 
+0087: 622@ = 618@ // (float) 
+005B: 622@ += 169@ // (float) 
+0087: 623@ = 619@ // (float) 
+005B: 623@ += 170@ // (float) 
+jump @POOL2_54045 
+
+:POOL2_54029
+0089: 622@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 623@ = $TEMPVAR_FLOAT_2 // (float) 
+
+:POOL2_54045
+return 
+
+:POOL2_54047
+0087: 631@ = 52@ // (float) 
+631@ *= 2.0 
+629@ = 1 
+
+:POOL2_54072
+if 
+  16 > 629@ 
+jf @POOL2_54274 
+if 
+03CA:   object 82@(629@,16i) exists 
+jf @POOL2_54260 
+Object.StorePos(82@(629@,16i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: 630@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 627@ 628@ 
+if 
+0025:   631@ > 630@ // (float) 
+jf @POOL2_54260 
+0087: 632@ = 627@ // (float) 
+0065: 632@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 633@ = 628@ // (float) 
+0065: 633@ -= $TEMPVAR_FLOAT_2 // (float) 
+0073: 632@ /= 630@ // (float) 
+0073: 633@ /= 630@ // (float) 
+006B: 632@ *= 631@ // (float) 
+006B: 633@ *= 631@ // (float) 
+0089: 627@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 627@ += 632@ // (float) 
+0089: 628@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 628@ += 633@ // (float) 
+
+:POOL2_54260
+629@ += 1 
+jump @POOL2_54072 
+
+:POOL2_54274
+0087: 630@ = 98@ // (float) 
+if 
+0025:   630@ > 627@ // (float) 
+jf @POOL2_54309 
+0087: 627@ = 630@ // (float) 
+
+:POOL2_54309
+0087: 630@ = 99@ // (float) 
+if 
+0025:   627@ > 630@ // (float) 
+jf @POOL2_54344 
+0087: 627@ = 630@ // (float) 
+
+:POOL2_54344
+0087: 630@ = 100@ // (float) 
+if 
+0025:   630@ > 628@ // (float) 
+jf @POOL2_54379 
+0087: 628@ = 630@ // (float) 
+
+:POOL2_54379
+0087: 630@ = 101@ // (float) 
+if 
+0025:   628@ > 630@ // (float) 
+jf @POOL2_54414 
+0087: 628@ = 630@ // (float) 
+
+:POOL2_54414
+return 
+
+:POOL2_54416
+0400: store_coords_to $6460 $6461 $6462 from_object 163@ with_offset 0.0 0.0 0.0 
+0400: store_coords_to $6463 $6464 $6465 from_object 163@ with_offset 0.0 -1.0 0.0 
+0086: $6466 = $6460 // (float) 
+0061: $6466 -= $6463 // (float) 
+0086: $6468 = $6461 // (float) 
+0061: $6468 -= $6464 // (float) 
+0509: $6470 = distance_between_XY $6460 $6461 and_XY $6463 $6464 
+0071: $6466 /= $6470 // (float) 
+0071: $6468 /= $6470 // (float) 
+0086: $6467 = $6468 // (float) 
+0086: $6469 = $6466 // (float) 
+$6469 *= -1.0 
+return 
+
+:POOL2_54567
+0937: text_draw_box_cornerA 29.0 220.0 cornerB 641@ 647@ GXT_reference 'BJ_TITL' style 2  // Wager
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+0343: set_text_draw_linewidth 640.0 
+033E: set_draw_text_position 36.0 240.0 GXT 'BJ_01'  // Total Wager
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 0.6253 2.7876 
+045A: draw_text_1number 36.0 260.0 GXT 'DOLLAR' number 155@  // $~1~
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+0343: set_text_draw_linewidth 640.0 
+033E: set_draw_text_position 36.0 290.0 GXT 'BJ_02'  // Min Wager
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 0.6253 2.7876 
+045A: draw_text_1number 36.0 310.0 GXT 'DOLLAR' number $9460  // $~1~
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+0343: set_text_draw_linewidth 640.0 
+033E: set_draw_text_position 36.0 340.0 GXT 'BJ_03'  // Max Wager
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 0.6253 2.7876 
+045A: draw_text_1number 36.0 360.0 GXT 'DOLLAR' number $9461  // $~1~
+return 
+
+:POOL2_54874
+if and
+  274@ == 0 
+  271@ == 0 
+jf @POOL2_54920 
+635@ = 1 
+gosub @POOL2_57079 
+jump @POOL2_56271 
+
+:POOL2_54920
+0937: text_draw_box_cornerA 29.0 220.0 cornerB 637@ 643@ GXT_reference 'SCORE' style 2  // Info
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 240.0 GXT 'PL_01'  // Player 1
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  217@ == 0 
+jf @POOL2_55045 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_12'  // Solids
+
+:POOL2_55045
+if 
+  217@ == 1 
+jf @POOL2_55084 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_13'  // Stripes
+
+:POOL2_55084
+if 
+  217@ == -1 
+jf @POOL2_55123 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_15'  // Open Table
+
+:POOL2_55123
+if 
+  217@ == 2 
+jf @POOL2_55162 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_14'  // Black
+
+:POOL2_55162
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+if 
+  178@ == 1 
+jf @POOL2_55229 
+033E: set_draw_text_position 36.0 290.0 GXT 'PL_02'  // Player 2
+jump @POOL2_55250 
+
+:POOL2_55229
+033E: set_draw_text_position 36.0 290.0 GXT 'PL_03'  // CPU
+
+:POOL2_55250
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  218@ == 0 
+jf @POOL2_55304 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_12'  // Solids
+
+:POOL2_55304
+if 
+  218@ == 1 
+jf @POOL2_55343 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_13'  // Stripes
+
+:POOL2_55343
+if 
+  218@ == -1 
+jf @POOL2_55382 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_15'  // Open Table
+
+:POOL2_55382
+if 
+  218@ == 2 
+jf @POOL2_55421 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_14'  // Black
+
+:POOL2_55421
+if 
+  274@ > 0 
+jf @POOL2_55741 
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_04'  // Foul!
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+0871: init_jump_table 274@ total_jumps 7 default_jump 0 @POOL2_55734 jumps 0 @POOL2_55559 1 @POOL2_55566 2 @POOL2_55594 3 @POOL2_55622 4 @POOL2_55650 5 @POOL2_55678 6 @POOL2_55706 
+
+:POOL2_55559
+jump @POOL2_55734 
+
+:POOL2_55566
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL1'  // Missed all balls
+jump @POOL2_55734 
+
+:POOL2_55594
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL2'  // Hit wrong ball first!
+jump @POOL2_55734 
+
+:POOL2_55622
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL3'  // Pocketed white!
+jump @POOL2_55734 
+
+:POOL2_55650
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL4'  // Pocketed wrong color!
+jump @POOL2_55734 
+
+:POOL2_55678
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL5'  // Pocketed black out of turn!
+jump @POOL2_55734 
+
+:POOL2_55706
+033E: set_draw_text_position 36.0 360.0 GXT 'FOUL6'  // No balls hit the rail!
+jump @POOL2_55734 
+
+:POOL2_55734
+jump @POOL2_56271 
+
+:POOL2_55741
+if 
+  271@ > 0 
+jf @POOL2_56271 
+if 
+  271@ == 1 
+jf @POOL2_55933 
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_05'  // Pocketed Ball!
+39@ = 1 
+
+:POOL2_55826
+if 
+  16 > 39@ 
+jf @POOL2_55926 
+if 
+   not 255@(39@,16i) == 0 
+jf @POOL2_55912 
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+045A: draw_text_1number 36.0 360.0 GXT 'NUM' number 39@  // ~1~
+39@ = 16 
+
+:POOL2_55912
+39@ += 1 
+jump @POOL2_55826 
+
+:POOL2_55926
+jump @POOL2_56271 
+
+:POOL2_55933
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_06'  // Pocketed Balls!
+39@ = 1 
+0085: 40@ = 271@ // (int) 
+42@ = 36.0 
+
+:POOL2_56000
+if 
+  40@ > 0 
+jf @POOL2_56271 
+
+:POOL2_56018
+if 
+  16 > 39@ 
+jf @POOL2_56264 
+if 
+   not 255@(39@,16i) == 0 
+jf @POOL2_56225 
+if 
+  40@ > 1 
+jf @POOL2_56167 
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+0A08: get_gxt_string_1number 'COMMA' number 39@ width_to 41@  // ~1~,
+0093: 43@ = integer 41@ to_float 
+045A: draw_text_1number 42@ 360.0 GXT 'COMMA' number 39@  // ~1~,
+005B: 42@ += 43@ // (float) 
+39@ += 1 
+40@ -= 1 
+jump @POOL2_56218 
+
+:POOL2_56167
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+045A: draw_text_1number 42@ 360.0 GXT 'NUM' number 39@  // ~1~
+40@ = -1 
+39@ = 16 
+
+:POOL2_56218
+jump @POOL2_56232 
+
+:POOL2_56225
+39@ += 1 
+
+:POOL2_56232
+if 
+  39@ >= 16 
+jf @POOL2_56257 
+40@ = -1 
+
+:POOL2_56257
+jump @POOL2_56018 
+
+:POOL2_56264
+jump @POOL2_56000 
+
+:POOL2_56271
+return 
+if or
+0736:   is_keyboard_key_just_pressed 131 
+0736:   is_keyboard_key_just_pressed 87 
+jf @POOL2_56303 
+621@ += 1.0 
+
+:POOL2_56303
+if or
+0736:   is_keyboard_key_just_pressed 130 
+0736:   is_keyboard_key_just_pressed 90 
+jf @POOL2_56333 
+621@ += -1.0 
+
+:POOL2_56333
+if or
+0736:   is_keyboard_key_just_pressed 128 
+0736:   is_keyboard_key_just_pressed 68 
+jf @POOL2_56363 
+620@ += 1.0 
+
+:POOL2_56363
+if or
+0736:   is_keyboard_key_just_pressed 129 
+0736:   is_keyboard_key_just_pressed 65 
+jf @POOL2_56393 
+620@ += -1.0 
+
+:POOL2_56393
+if or
+0736:   is_keyboard_key_just_pressed 145 
+0736:   is_keyboard_key_just_pressed 87 
+jf @POOL2_56423 
+624@ += 1.0 
+
+:POOL2_56423
+if or
+0736:   is_keyboard_key_just_pressed 139 
+0736:   is_keyboard_key_just_pressed 90 
+jf @POOL2_56453 
+624@ += -1.0 
+
+:POOL2_56453
+if or
+0736:   is_keyboard_key_just_pressed 143 
+0736:   is_keyboard_key_just_pressed 68 
+jf @POOL2_56483 
+625@ += 1.0 
+
+:POOL2_56483
+if or
+0736:   is_keyboard_key_just_pressed 141 
+0736:   is_keyboard_key_just_pressed 65 
+jf @POOL2_56513 
+625@ += -1.0 
+
+:POOL2_56513
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @POOL2_57077 
+03A9: save_newline_to_debug_file 
+05B6: 61 //   CUSHION 1 DATA = 
+03A8: save_float_to_debug_file 621@ 
+03A9: save_newline_to_debug_file 
+05B6: 62 //   CUSHION 2 DATA = 
+03A8: save_float_to_debug_file 620@ 
+03A9: save_newline_to_debug_file 
+05B6: 63 //   CUSHION 3 DATA = 
+03A8: save_float_to_debug_file 624@ 
+03A9: save_newline_to_debug_file 
+05B6: 64 //   CUSHION 4 DATA = 
+03A8: save_float_to_debug_file 625@ 
+
+:POOL2_57077
+return 
+
+:POOL2_57079
+if 
+  635@ == 0 
+jf @POOL2_57328 
+39@ = 0 
+if 
+  3000 > 205@ 
+jf @POOL2_57130 
+39@ = 1 
+
+:POOL2_57130
+if 
+  236@ == 1 
+jf @POOL2_57187 
+205@ = 0 
+39@ = 1 
+if 
+  198@ > 1 
+jf @POOL2_57187 
+198@ = 0 
+
+:POOL2_57187
+if 
+  198@ == 0 
+jf @POOL2_57232 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'PL_H3'  // Use movement controls to aim the cue.~N~~k~~CAMERA_CHANGE_VIEW_ALL_SITUATIONS~ to change view. ~N~~k~~PED_SPRINT~ Proceed to shooting.~N~~k~~VEHICLE_ENTER_EXIT~ Hold to quit.
+205@ = 0 
+198@ += 1 
+
+:POOL2_57232
+if 
+  34@ == 5 
+jf @POOL2_57314 
+if 
+  198@ == 1 
+jf @POOL2_57307 
+if 
+  205@ > 3000 
+jf @POOL2_57307 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'PL_H7'  // ~k~~PED_JUMPING~ Display information.
+198@ += 1 
+
+:POOL2_57307
+jump @POOL2_57321 
+
+:POOL2_57314
+39@ = 1 
+
+:POOL2_57321
+jump @POOL2_57342 
+
+:POOL2_57328
+39@ = 1 
+635@ = 0 
+
+:POOL2_57342
+if 
+  39@ == 1 
+jf @POOL2_57861 
+0937: text_draw_box_cornerA 29.0 270.0 cornerB 638@ 644@ GXT_reference 'SCORE' style 2  // Info
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 290.0 GXT 'PL_01'  // Player 1
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  217@ == 0 
+jf @POOL2_57485 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_12'  // Solids
+
+:POOL2_57485
+if 
+  217@ == 1 
+jf @POOL2_57524 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_13'  // Stripes
+
+:POOL2_57524
+if 
+  217@ == -1 
+jf @POOL2_57563 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_15'  // Open Table
+
+:POOL2_57563
+if 
+  217@ == 2 
+jf @POOL2_57602 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_14'  // Black
+
+:POOL2_57602
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+if 
+  178@ == 1 
+jf @POOL2_57669 
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_02'  // Player 2
+jump @POOL2_57690 
+
+:POOL2_57669
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_03'  // CPU
+
+:POOL2_57690
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  218@ == 0 
+jf @POOL2_57744 
+033E: set_draw_text_position 36.0 360.0 GXT 'PL_12'  // Solids
+
+:POOL2_57744
+if 
+  218@ == 1 
+jf @POOL2_57783 
+033E: set_draw_text_position 36.0 360.0 GXT 'PL_13'  // Stripes
+
+:POOL2_57783
+if 
+  218@ == -1 
+jf @POOL2_57822 
+033E: set_draw_text_position 36.0 360.0 GXT 'PL_15'  // Open Table
+
+:POOL2_57822
+if 
+  218@ == 2 
+jf @POOL2_57861 
+033E: set_draw_text_position 36.0 360.0 GXT 'PL_14'  // Black
+
+:POOL2_57861
+return 
+
+:POOL2_57863
+636@ = 0.4753 
+642@ = 2.3176 
+0871: init_jump_table $CURRENT_LANGUAGE total_jumps 4 default_jump 1 @POOL2_58054 jumps 1 @POOL2_57946 2 @POOL2_58000 3 @POOL2_58027 4 @POOL2_57973 -1 @POOL2_58081 -1 @POOL2_58081 -1 @POOL2_58081 
+
+:POOL2_57946
+637@ = 210.6556 
+643@ = 426.4957 
+jump @POOL2_58081 
+
+:POOL2_57973
+637@ = 175.0805 
+643@ = 426.4957 
+jump @POOL2_58081 
+
+:POOL2_58000
+637@ = 190.782 
+643@ = 409.0 
+jump @POOL2_58081 
+
+:POOL2_58027
+637@ = 214.9799 
+643@ = 409.0 
+jump @POOL2_58081 
+
+:POOL2_58054
+637@ = 174.4835 
+643@ = 409.0 
+jump @POOL2_58081 
+
+:POOL2_58081
+0871: init_jump_table $CURRENT_LANGUAGE total_jumps 3 default_jump 1 @POOL2_58225 jumps 2 @POOL2_58171 3 @POOL2_58198 4 @POOL2_58144 -1 @POOL2_58252 -1 @POOL2_58252 -1 @POOL2_58252 -1 @POOL2_58252 
+
+:POOL2_58144
+638@ = 179.098 
+644@ = 396.8582 
+jump @POOL2_58252 
+
+:POOL2_58171
+638@ = 166.0992 
+644@ = 396.8582 
+jump @POOL2_58252 
+
+:POOL2_58198
+638@ = 205.4915 
+644@ = 396.8582 
+jump @POOL2_58252 
+
+:POOL2_58225
+638@ = 157.0 
+644@ = 396.8582 
+jump @POOL2_58252 
+
+:POOL2_58252
+0871: init_jump_table $CURRENT_LANGUAGE total_jumps 1 default_jump 1 @POOL2_58340 jumps 3 @POOL2_58315 -1 @POOL2_58367 -1 @POOL2_58367 -1 @POOL2_58367 -1 @POOL2_58367 -1 @POOL2_58367 -1 @POOL2_58367 
+
+:POOL2_58315
+0087: 639@ = 638@ // (float) 
+645@ = 394.4953 
+jump @POOL2_58367 
+
+:POOL2_58340
+639@ = 168.1938 
+645@ = 394.4953 
+jump @POOL2_58367 
+
+:POOL2_58367
+640@ = 0.4914 
+646@ = 2.3977 
+0871: init_jump_table $CURRENT_LANGUAGE total_jumps 1 default_jump 1 @POOL2_58477 jumps 3 @POOL2_58450 -1 @POOL2_58504 -1 @POOL2_58504 -1 @POOL2_58504 -1 @POOL2_58504 -1 @POOL2_58504 -1 @POOL2_58504 
+
+:POOL2_58450
+641@ = 178.0981 
+647@ = 409.0 
+jump @POOL2_58504 
+
+:POOL2_58477
+641@ = 157.0 
+647@ = 409.0 
+jump @POOL2_58504 
+
+:POOL2_58504
+return 
+if 
+0736:   is_keyboard_key_just_pressed 67 
+jf @POOL2_58571 
+648@ += 1 
+if 
+  648@ > 5 
+jf @POOL2_58553 
+648@ = 0 
+
+:POOL2_58553
+0663: printint "SCREEN_EDIT" 648@ 
+
+:POOL2_58571
+if 
+0736:   is_keyboard_key_just_pressed 131 
+jf @POOL2_58601 
+642@(648@,6f) += -0.1 
+
+:POOL2_58601
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @POOL2_58631 
+642@(648@,6f) += 0.1 
+
+:POOL2_58631
+if 
+0736:   is_keyboard_key_just_pressed 128 
+jf @POOL2_58661 
+636@(648@,6f) += 0.1 
+
+:POOL2_58661
+if 
+0736:   is_keyboard_key_just_pressed 129 
+jf @POOL2_58691 
+636@(648@,6f) += -0.1 
+
+:POOL2_58691
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @POOL2_59432 
+03A9: save_newline_to_debug_file 
+05B6: 65 // SNOOKER - BOUNCE 2
+03A9: save_newline_to_debug_file 
+39@ = 0 
+
+:POOL2_58848
+if 
+  6 > 39@ 
+jf @POOL2_59432 
+05B6: 66 // SNOOKER - LAST RESORT
+03A7: save_int_to_debug_file 39@ 
+05B6: 67 //     BALL OBSTRUCTING PATH (TOO CLOSE TO TARGET DESTINATION) = 
+03A8: save_float_to_debug_file 636@(39@,6f) 
+03A9: save_newline_to_debug_file 
+05B6: 68 //     BALL OBSTRUCTING PATH (OVERLAPPING PATH) = 
+03A7: save_int_to_debug_file 39@ 
+05B6: 69 //     POINT LIES ON POCKET
+03A8: save_float_to_debug_file 642@(39@,6f) 
+03A9: save_newline_to_debug_file 
+39@ += 1 
+jump @POOL2_58848 
+
+:POOL2_59432
+return 
+
+:POOL2_59434
+39@ = 0 
+if 
+  3000 > 205@ 
+jf @POOL2_59467 
+39@ = 1 
+
+:POOL2_59467
+if 
+  198@ == 0 
+jf @POOL2_59512 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'PL_H6'  // Use the movement controls to position the cue ball.~N~~k~~PED_SPRINT~ Continue.~N~~k~~VEHICLE_ENTER_EXIT~ Hold to QUIT.
+205@ = 0 
+198@ += 1 
+
+:POOL2_59512
+if 
+  34@ == 4 
+jf @POOL2_59587 
+if 
+  198@ == 1 
+jf @POOL2_59587 
+if 
+  205@ > 3000 
+jf @POOL2_59587 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'PL_H7'  // ~k~~PED_JUMPING~ Display information.
+198@ += 1 
+
+:POOL2_59587
+if 
+  39@ == 1 
+jf @POOL2_60184 
+0937: text_draw_box_cornerA 29.0 220.0 cornerB 639@ 645@ GXT_reference 'SCORE' style 2  // Info
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 240.0 GXT 'PL_01'  // Player 1
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  217@ == 0 
+jf @POOL2_59730 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_12'  // Solids
+
+:POOL2_59730
+if 
+  217@ == 1 
+jf @POOL2_59769 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_13'  // Stripes
+
+:POOL2_59769
+if 
+  217@ == -1 
+jf @POOL2_59808 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_15'  // Open Table
+
+:POOL2_59808
+if 
+  217@ == 2 
+jf @POOL2_59847 
+033E: set_draw_text_position 36.0 260.0 GXT 'PL_14'  // Black
+
+:POOL2_59847
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+if 
+  178@ == 1 
+jf @POOL2_59914 
+033E: set_draw_text_position 36.0 290.0 GXT 'PL_02'  // Player 2
+jump @POOL2_59935 
+
+:POOL2_59914
+033E: set_draw_text_position 36.0 290.0 GXT 'PL_03'  // CPU
+
+:POOL2_59935
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+if 
+  218@ == 0 
+jf @POOL2_59989 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_12'  // Solids
+
+:POOL2_59989
+if 
+  218@ == 1 
+jf @POOL2_60028 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_13'  // Stripes
+
+:POOL2_60028
+if 
+  218@ == -1 
+jf @POOL2_60067 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_15'  // Open Table
+
+:POOL2_60067
+if 
+  218@ == 2 
+jf @POOL2_60106 
+033E: set_draw_text_position 36.0 310.0 GXT 'PL_14'  // Black
+
+:POOL2_60106
+gosub @POOL2_60481 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position 36.0 340.0 GXT 'PL_16'  // Scratch
+gosub @POOL2_60481 
+033F: set_text_draw_letter_size 636@ 642@ 
+033E: set_draw_text_position 36.0 360.0 GXT 'PL_17'  // Ball in hand
+
+:POOL2_60184
+return 
+033F: set_text_draw_letter_size 0.4487 1.5974 
+0340: set_text_draw_RGBA 128 148 178 255 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.4487 1.5974 
+0340: set_text_draw_RGBA 128 148 178 255 
+03E4: set_text_draw_align_right 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.9 2.4 
+0340: set_text_draw_RGBA 128 148 178 255 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.9 2.4 
+0340: set_text_draw_RGBA 81 25 29 255 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.54 1.44 
+0340: set_text_draw_RGBA 128 148 178 255 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.405 1.08 
+0340: set_text_draw_RGBA 128 148 178 255 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+033F: set_text_draw_letter_size 0.54 1.44 
+0340: set_text_draw_RGBA 81 25 29 255 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 2000.0 
+0348: enable_text_draw_proportional 1 
+return 
+
+:POOL2_60481
+0340: set_text_draw_RGBA 180 180 180 255 
+033F: set_text_draw_letter_size 640@ 646@ 
+03E4: set_text_draw_align_right 0 
+0341: set_text_draw_align_justify 0 
+0342: set_text_draw_centered 0 
+0087: 649@ = 637@ // (float) 
+649@ -= 20.0 
+0343: set_text_draw_linewidth 649@ 
+0348: enable_text_draw_proportional 1 
+0345: enable_text_draw_background 0 
+return 
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @POOL2_60645 
+650@ += -0.0001 
+39@ = 0 
+
+:POOL2_60581
+if 
+  16 > 39@ 
+jf @POOL2_60645 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_60631 
+0908: set_object 82@(39@,16i) turn_mass_to 650@ // float 
+
+:POOL2_60631
+39@ += 1 
+jump @POOL2_60581 
+
+:POOL2_60645
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @POOL2_60725 
+
+:POOL2_60661
+if 
+  16 > 39@ 
+jf @POOL2_60725 
+if 
+03CA:   object 82@(39@,16i) exists 
+jf @POOL2_60711 
+0908: set_object 82@(39@,16i) turn_mass_to 650@ // float 
+
+:POOL2_60711
+39@ += 1 
+jump @POOL2_60661 
+
+:POOL2_60725
+if 
+0736:   is_keyboard_key_just_pressed 145 
+jf @POOL2_60741 
+
+:POOL2_60741
+if 
+0736:   is_keyboard_key_just_pressed 139 
+jf @POOL2_60767 
+203@ += -0.001 
+
+:POOL2_60767
+if 
+0736:   is_keyboard_key_just_pressed 143 
+jf @POOL2_60793 
+204@ += 0.001 
+
+:POOL2_60793
+if 
+0736:   is_keyboard_key_just_pressed 141 
+jf @POOL2_60819 
+204@ += -0.001 
+
+:POOL2_60819
+return 
+
+:POOL2_60821
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @POOL2_60849 
+$11033 = 0 
+
+:POOL2_60849
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:POOL2_60867
+01E3: show_text_1number_styled GXT 'M_PASS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 10000
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:POOL2_60901
+08F6: restore_player_group 
+09D8: NOP 0 
+0A3F: set_unused_flag 0 
+$1904 = 0 
+39@ = 0 
+
+:POOL2_60925
+if 
+  10 > 39@ 
+jf @POOL2_60986 
+if 
+03CA:   object 347@(39@,10i) exists 
+jf @POOL2_60972 
+Object.Destroy(347@(39@,10i))
+
+:POOL2_60972
+39@ += 1 
+jump @POOL2_60925 
+
+:POOL2_60986
+if 
+   not Actor.Dead($9458)
+jf @POOL2_61051 
+0647: AS_actor $9458 clear_look_task 
+Actor.StorePos($9458, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0089: 223@ = $TEMPVAR_FLOAT_3 // (float) 
+0089: 227@ = $TEMPVAR_FLOAT_3 // (float) 
+
+:POOL2_61051
+if 
+   not Actor.Dead($9458)
+jf @POOL2_61095 
+Actor.StorePos($9458, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.PutAt($9458, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 227@)
+
+:POOL2_61095
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_61220 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.PutAt($PLAYER_ACTOR, 221@, 222@, 223@)
+if 
+   not Actor.Dead($9458)
+jf @POOL2_61169 
+Actor.StorePos($9458, 165@, 166@, 167@)
+
+:POOL2_61169
+0087: 169@ = 165@ // (float) 
+0065: 169@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 170@ = 166@ // (float) 
+0065: 170@ -= $TEMPVAR_FLOAT_2 // (float) 
+0604: get_Z_angle_for_point 169@ 170@ store_to $TEMPVAR_ANGLE 
+Actor.Angle($PLAYER_ACTOR) = $TEMPVAR_ANGLE
+
+:POOL2_61220
+Model.Load(#POOLCUE)
+
+:POOL2_61225
+if 
+   not Model.Available(#POOLCUE)
+jf @POOL2_61252 
+wait 0 
+jump @POOL2_61225 
+
+:POOL2_61252
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_61299 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+070B: set_actor $PLAYER_ACTOR onbone_attached_object_operation 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, PoolCue, 9999)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 7 
+
+:POOL2_61299
+if 
+03CA:   object 106@ exists 
+jf @POOL2_61320 
+Object.Destroy(106@)
+
+:POOL2_61320
+if 
+03CA:   object 107@ exists 
+jf @POOL2_61341 
+Object.Destroy(107@)
+
+:POOL2_61341
+if 
+03CA:   object 238@ exists 
+jf @POOL2_61362 
+Object.Destroy(238@)
+
+:POOL2_61362
+if 
+03CA:   object $9459 exists 
+jf @POOL2_61383 
+Object.Destroy($9459)
+
+:POOL2_61383
+Model.Destroy(#POOLCUE)
+Model.Destroy(#K_POOLQ)
+04EF: release_animation "POOL" 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_61428 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:POOL2_61428
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+00BE: text_clear_all 
+03E6: remove_text_box 
+$ONMISSION = 0 
+040D: unload_wav 4 
+0391: release_textures 
+$MISSION_RUNNING_DOG_FAILED = 1 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @POOL2_61547 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0647: AS_actor $PLAYER_ACTOR clear_look_task 
+0615: define_AS_pack_begin 47@ 
+05BA: AS_actor -1 move_mouth 1 ms 
+05B9: AS_actor -1 stay_idle 1 ms 
+0616: define_AS_pack_end 47@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 47@ 
+061B: remove_references_to_AS_pack 47@ 
+
+:POOL2_61547
+mission_cleanup 
+return 
+0454: store_debug_camera_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+03CA:   object 163@ exists 
+jf @POOL2_61600 
+Object.StorePos(163@, 165@, 166@, 167@)
+$TEMPVAR_ANGLE = Object.Angle(163@)
+
+:POOL2_61600
+$TEMPVAR_ANGLE *= -1.0 
+02F7: 42@ = cosine $TEMPVAR_ANGLE // (float) 
+02F6: 43@ = sine $TEMPVAR_ANGLE // (float) 
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 165@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 166@ // (float) 
+0089: 171@ = $TEMPVAR_FLOAT_3 // (float) 
+0063: 171@ -= 167@ // (float) 
+0087: 172@ = 169@ // (float) 
+006B: 172@ *= 42@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 43@ // (float) 
+0063: 172@ -= 44@ // (float) 
+0087: 173@ = 169@ // (float) 
+006B: 173@ *= 43@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 42@ // (float) 
+005B: 173@ += 44@ // (float) 
+03A9: save_newline_to_debug_file 
+05B6: 70 //        BOUNCE_SHOT_PATH_CLEAR DATA = 
+03A8: save_float_to_debug_file 172@ 
+03A8: save_float_to_debug_file 173@ 
+03A8: save_float_to_debug_file 171@ 
+0463: store_debug_camera_target_point_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 165@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 166@ // (float) 
+0089: 171@ = $TEMPVAR_FLOAT_3 // (float) 
+0063: 171@ -= 167@ // (float) 
+0087: 172@ = 169@ // (float) 
+006B: 172@ *= 42@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 43@ // (float) 
+0063: 172@ -= 44@ // (float) 
+0087: 173@ = 169@ // (float) 
+006B: 173@ *= 43@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 42@ // (float) 
+005B: 173@ += 44@ // (float) 
+03A9: save_newline_to_debug_file 
+05B6: 71 // 1ST PATH CLEAR 
+03A8: save_float_to_debug_file 172@ 
+03A8: save_float_to_debug_file 173@ 
+03A8: save_float_to_debug_file 171@ 
+return 
+0454: store_debug_camera_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+056D:   actor 215@ defined 
+jf @POOL2_62254 
+if 
+   not Actor.Dead(215@)
+jf @POOL2_62254 
+Actor.StorePos(215@, 165@, 166@, 167@)
+$TEMPVAR_ANGLE = Actor.Angle(215@)
+
+:POOL2_62254
+$TEMPVAR_ANGLE *= -1.0 
+02F7: 42@ = cosine $TEMPVAR_ANGLE // (float) 
+02F6: 43@ = sine $TEMPVAR_ANGLE // (float) 
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 165@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 166@ // (float) 
+0089: 171@ = $TEMPVAR_FLOAT_3 // (float) 
+0063: 171@ -= 167@ // (float) 
+0087: 172@ = 169@ // (float) 
+006B: 172@ *= 42@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 43@ // (float) 
+0063: 172@ -= 44@ // (float) 
+0087: 173@ = 169@ // (float) 
+006B: 173@ *= 43@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 42@ // (float) 
+005B: 173@ += 44@ // (float) 
+03A9: save_newline_to_debug_file 
+05B6: 72 // 2ND PATH CLEAR 
+03A8: save_float_to_debug_file 172@ 
+03A8: save_float_to_debug_file 173@ 
+03A8: save_float_to_debug_file 171@ 
+0463: store_debug_camera_target_point_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0089: 169@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 169@ -= 165@ // (float) 
+0089: 170@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 170@ -= 166@ // (float) 
+0089: 171@ = $TEMPVAR_FLOAT_3 // (float) 
+0063: 171@ -= 167@ // (float) 
+0087: 172@ = 169@ // (float) 
+006B: 172@ *= 42@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 43@ // (float) 
+0063: 172@ -= 44@ // (float) 
+0087: 173@ = 169@ // (float) 
+006B: 173@ *= 43@ // (float) 
+0087: 44@ = 170@ // (float) 
+006B: 44@ *= 42@ // (float) 
+005B: 173@ += 44@ // (float) 
+03A9: save_newline_to_debug_file 
+05B6: 73 // BALL_SPRITE_HEIGHT = 
+03A8: save_float_to_debug_file 172@ 
+03A8: save_float_to_debug_file 173@ 
+03A8: save_float_to_debug_file 171@ 
+return

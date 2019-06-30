@@ -1,0 +1,677 @@
+:FREIGHT
+thread 'FREIGHT' 
+gosub @FREIGHT_80 
+if 
+wasted_or_busted 
+jf @FREIGHT_38 
+gosub @FREIGHT_2819 
+
+:FREIGHT_38
+gosub @FREIGHT_3178 
+if 
+  $8239 == 1 
+jf @FREIGHT_78 
+create_thread @FRTEXT 
+$8239 = 2 
+
+:FREIGHT_78
+end_thread 
+
+:FREIGHT_80
+Player.ClearWantedLevel($PLAYER_CHAR)
+03C7: set_sensitivity_to_crime 0.0 
+135@ = 999999.0 
+$ONMISSION = 1 
+$161 = 1 
+130@ = 0 
+126@ = 0 
+125@ = 0 
+if 
+  $163 == 0 
+jf @FREIGHT_162 
+$163 = 1 
+
+:FREIGHT_162
+45@ = 1698.826 
+65@ = -1953.75 
+85@ = 12.5469 
+34@ = 150000 
+39@ = 60000 
+46@ = 789.4952 
+66@ = -1343.796 
+86@ = -2.5794 
+35@ = 60000 
+40@ = 140000 
+47@ = -1943.241 
+67@ = 159.585 
+87@ = 24.7186 
+36@ = 140000 
+41@ = 150000 
+48@ = 1463.359 
+68@ = 2632.25 
+88@ = 9.8203 
+37@ = 150000 
+42@ = 105000 
+49@ = 2864.623 
+69@ = 1248.266 
+89@ = 9.8203 
+38@ = 105000 
+43@ = 150000 
+if 
+  $163 == 1 
+jf @FREIGHT_438 
+127@ = 15000 
+
+:FREIGHT_438
+if 
+  $163 == 2 
+jf @FREIGHT_464 
+127@ = 10000 
+
+:FREIGHT_464
+if 
+  $163 == 3 
+jf @FREIGHT_489 
+127@ = 0 
+
+:FREIGHT_489
+129@ = 0 
+
+:FREIGHT_496
+005A: 34@(129@,5i) += 127@ // (int) 
+005A: 39@(129@,5i) += 127@ // (int) 
+129@ += 1 
+  129@ >= 5 
+jf @FREIGHT_496 
+0169: set_fade_color_RGB 0 0 0 
+$ONMISSION = 1 
+if 
+  $8239 == 0 
+jf @FREIGHT_576 
+increment_mission_attempts 
+
+:FREIGHT_576
+054C: use_GXT_table 'FTRAIN' 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_627 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @FREIGHT_627 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+
+:FREIGHT_627
+if 
+  $8239 == 0 
+jf @FREIGHT_671 
+01E3: show_text_1number_styled GXT 'FREI_04' number $163 time 5000 style 4  // Freight Mission Level ~1~
+jump @FREIGHT_687 
+
+:FREIGHT_671
+00BA: show_text_styled GXT 'FREI_X' time 5000 style 4  // Freight Mission
+
+:FREIGHT_687
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_721 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:FREIGHT_721
+0509: 134@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 1698.826 -1953.75 
+if 
+0025:   135@ > 134@ // (float) 
+jf @FREIGHT_776 
+0087: 135@ = 134@ // (float) 
+125@ = 0 
+
+:FREIGHT_776
+0509: 134@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 789.4952 -1343.796 
+if 
+0025:   135@ > 134@ // (float) 
+jf @FREIGHT_831 
+0087: 135@ = 134@ // (float) 
+125@ = 1 
+
+:FREIGHT_831
+0509: 134@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY -1943.241 159.585 
+if 
+0025:   135@ > 134@ // (float) 
+jf @FREIGHT_886 
+0087: 135@ = 134@ // (float) 
+125@ = 2 
+
+:FREIGHT_886
+0509: 134@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 1463.359 2632.25 
+if 
+0025:   135@ > 134@ // (float) 
+jf @FREIGHT_941 
+0087: 135@ = 134@ // (float) 
+125@ = 3 
+
+:FREIGHT_941
+0509: 134@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 2864.623 1248.266 
+if 
+0025:   135@ > 134@ // (float) 
+jf @FREIGHT_996 
+0087: 135@ = 134@ // (float) 
+125@ = 4 
+
+:FREIGHT_996
+Model.Load(#FREIBOX)
+Model.Load(#STREAKC)
+Model.Load(#FREIFLAT)
+Model.Load(#STREAK)
+Model.Load(#FREIGHT)
+
+:FREIGHT_1021
+if or
+   not Model.Available(#FREIBOX)
+   not Model.Available(#STREAKC)
+   not Model.Available(#FREIFLAT)
+   not Model.Available(#STREAK)
+   not Model.Available(#FREIGHT)
+jf @FREIGHT_1068 
+wait 0 
+jump @FREIGHT_1021 
+
+:FREIGHT_1068
+32@ = 0 
+33@ = 0 
+06DB: destroy_all_trains 
+06D7: enable_train_traffic 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_1128 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @FREIGHT_1128 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+
+:FREIGHT_1128
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @FREIGHT_1195 
+if 
+09E3:   train $TEMPVAR_ACTOR_CAR traveling_clockwise 
+jf @FREIGHT_1181 
+125@ += 1 
+133@ = 0 
+jump @FREIGHT_1195 
+
+:FREIGHT_1181
+125@ -= 1 
+133@ = 1 
+
+:FREIGHT_1195
+if 
+  125@ == 5 
+jf @FREIGHT_1220 
+125@ = 0 
+
+:FREIGHT_1220
+if 
+  125@ == -1 
+jf @FREIGHT_1245 
+125@ = 4 
+
+:FREIGHT_1245
+gosub @FREIGHT_3353 
+018A: 105@(125@,20i) = create_checkpoint_at 45@(125@,20f) 65@(125@,20f) 85@(125@,20f) 
+if 
+  133@ == 0 
+jf @FREIGHT_1319 
+008A: $8238 = 34@(125@,5i) // (int) 
+jump @FREIGHT_1331 
+
+:FREIGHT_1319
+008A: $8238 = 39@(125@,5i) // (int) 
+
+:FREIGHT_1331
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_2766 
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @FREIGHT_1373 
+jump @FREIGHT_2258 
+
+:FREIGHT_1373
+if or
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAK)
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #FREIGHT)
+jf @FREIGHT_1442 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+820D:   not car $TEMPVAR_ACTOR_CAR flipped 
+jf @FREIGHT_1435 
+00BE: text_clear_all 
+03E6: remove_text_box 
+jump @FREIGHT_2773 
+
+:FREIGHT_1435
+jump @FREIGHT_1453 
+
+:FREIGHT_1442
+00BE: text_clear_all 
+03E6: remove_text_box 
+jump @FREIGHT_2773 
+
+:FREIGHT_1453
+02E3: 137@ = car $TEMPVAR_ACTOR_CAR speed 
+0090: $8242 = float 137@ to_integer 
+if and
+  33@ > 3000 
+  126@ == 0 
+jf @FREIGHT_1515 
+126@ = 1 
+00BE: text_clear_all 
+03E5: show_text_box 'FREI_03'  // ~s~Deliver the cargo to the stations within the time limit!
+
+:FREIGHT_1515
+if and
+  33@ > 8000 
+  126@ == 1 
+jf @FREIGHT_1603 
+126@ = 2 
+00BE: text_clear_all 
+03E6: remove_text_box 
+if 
+  $8243 == 0 
+jf @FREIGHT_1588 
+03E5: show_text_box 'FREI_12'  // ~s~If you go too fast you will derail!
+jump @FREIGHT_1603 
+
+:FREIGHT_1588
+33@ = 18000 
+126@ = 3 
+
+:FREIGHT_1603
+if and
+  33@ > 12000 
+  126@ == 2 
+jf @FREIGHT_1691 
+126@ = 3 
+00BE: text_clear_all 
+03E6: remove_text_box 
+if 
+  $8243 == 0 
+jf @FREIGHT_1676 
+03E5: show_text_box 'FREI_13'  // ~s~Brake early or you will overshoot the station!
+jump @FREIGHT_1691 
+
+:FREIGHT_1676
+33@ = 18000 
+126@ = 3 
+
+:FREIGHT_1691
+if and
+  33@ > 16000 
+  126@ == 3 
+jf @FREIGHT_2038 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_1747 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:FREIGHT_1747
+136@ = 0.0 
+$8238 = 0 
+0509: 136@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 45@(125@,20f) 65@(125@,20f) 
+0090: $8241 = float 136@ to_integer 
+if 
+  136@ > 3000.0 
+jf @FREIGHT_1835 
+136@ /= 0.021 
+jump @FREIGHT_1845 
+
+:FREIGHT_1835
+136@ /= 0.019 
+
+:FREIGHT_1845
+if 
+  10000.0 > 136@ 
+jf @FREIGHT_1876 
+136@ = 10000.0 
+
+:FREIGHT_1876
+0090: $8238 = float 136@ to_integer 
+if 
+  $163 == 1 
+jf @FREIGHT_1910 
+127@ = 15000 
+
+:FREIGHT_1910
+if 
+  $163 == 2 
+jf @FREIGHT_1935 
+127@ = 0 
+
+:FREIGHT_1935
+if 
+  $163 == 3 
+jf @FREIGHT_1960 
+127@ = 0 
+
+:FREIGHT_1960
+005E: $8238 += 127@ // (int) 
+126@ = 4 
+$8243 = 1 
+03C3: set_timer_to $8238 type 1 GXT 'FREI_14' // global_variable  // Time
+04F7: status_text $8241 type 0 line 1 GXT 'FREI_10' // global_variable  // Distance
+04F7: status_text $8242 type 0 line 2 GXT 'FREI_11' // global_variable  // Speed
+00BE: text_clear_all 
+03E6: remove_text_box 
+
+:FREIGHT_2038
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_2068 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:FREIGHT_2068
+0509: 136@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 45@(125@,20f) 65@(125@,20f) 
+0090: $8241 = float 136@ to_integer 
+if 
+0981:   train $TEMPVAR_ACTOR_CAR wrecked 
+jf @FREIGHT_2124 
+jump @FREIGHT_2819 
+
+:FREIGHT_2124
+if 
+00E1:   player 0 pressed_key 19 
+jf @FREIGHT_2152 
+00BE: text_clear_all 
+03E6: remove_text_box 
+jump @FREIGHT_2773 
+
+:FREIGHT_2152
+if 
+  0 >= $8238 
+jf @FREIGHT_2177 
+jump @FREIGHT_2819 
+
+:FREIGHT_2177
+if 
+0101:   actor $PLAYER_ACTOR in_sphere 45@(125@,20f) 65@(125@,20f) 85@(125@,20f) radius 10.0 10.0 10.0 sphere 1 stopped 
+jf @FREIGHT_2522 
+if or
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAK)
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #FREIGHT)
+jf @FREIGHT_2522 
+
+:FREIGHT_2258
+if 
+075C:   marker 105@(125@,20i) enabled 
+jf @FREIGHT_2287 
+Marker.Disable(105@(125@,20i))
+
+:FREIGHT_2287
+130@ += 1 
+008B: 127@ = $8238 // (int) 
+014F: stop_timer $8238 
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+if 
+  130@ == 5 
+jf @FREIGHT_2342 
+jump @FREIGHT_2905 
+
+:FREIGHT_2342
+if 
+  133@ == 0 
+jf @FREIGHT_2374 
+125@ += 1 
+jump @FREIGHT_2381 
+
+:FREIGHT_2374
+125@ -= 1 
+
+:FREIGHT_2381
+if 
+  125@ == 5 
+jf @FREIGHT_2406 
+125@ = 0 
+
+:FREIGHT_2406
+if 
+  125@ == -1 
+jf @FREIGHT_2431 
+125@ = 4 
+
+:FREIGHT_2431
+if 
+  127@ > 15000 
+jf @FREIGHT_2458 
+127@ = 15000 
+
+:FREIGHT_2458
+0085: 128@ = 127@ // (int) 
+128@ /= 100 
+006E: 128@ *= $163 // (int) 
+01E3: show_text_1number_styled GXT 'FREI_07' number 128@ time 3000 style 1  // CARGO DELIVERED! $~1~
+Player.Money($PLAYER_CHAR) += 128@
+32@ = 0 
+132@ = 1 
+
+:FREIGHT_2522
+if and
+  132@ == 1 
+  32@ > 6000 
+jf @FREIGHT_2759 
+0085: 128@ = 127@ // (int) 
+128@ /= 1000 
+01E3: show_text_1number_styled GXT 'FREI_05' number 128@ time 4000 style 6  // +~1~ Seconds
+$8238 = 0 
+if 
+  133@ == 0 
+jf @FREIGHT_2635 
+008A: $8238 = 34@(125@,5i) // (int) 
+005E: $8238 += 127@ // (int) 
+jump @FREIGHT_2655 
+
+:FREIGHT_2635
+008A: $8238 = 39@(125@,5i) // (int) 
+005E: $8238 += 127@ // (int) 
+
+:FREIGHT_2655
+014F: stop_timer $8238 
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+03C3: set_timer_to $8238 type 1 GXT 'FREI_14' // global_variable  // Time
+04F7: status_text $8241 type 0 line 1 GXT 'FREI_10' // global_variable  // Distance
+04F7: status_text $8242 type 0 line 2 GXT 'FREI_11' // global_variable  // Speed
+018A: 105@(125@,20i) = create_checkpoint_at 45@(125@,20f) 65@(125@,20f) 85@(125@,20f) 
+132@ = 0 
+
+:FREIGHT_2759
+jump @FREIGHT_1331 
+
+:FREIGHT_2766
+jump @FREIGHT_2819 
+
+:FREIGHT_2773
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BE: text_clear_all 
+03E6: remove_text_box 
+00BA: show_text_styled GXT 'FREI_02' time 5000 style 1  // ~r~Freight mission cancelled!
+014F: stop_timer $8238 
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+wait 2000 
+return 
+
+:FREIGHT_2819
+if 
+075C:   marker 105@(125@,20i) enabled 
+jf @FREIGHT_2848 
+Marker.Disable(105@(125@,20i))
+
+:FREIGHT_2848
+014F: stop_timer $8238 
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03E6: remove_text_box 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+00BC: show_text_highpriority GXT 'FREI_06' time 4000 flag 1  // ~r~You missed your delivery!
+return 
+
+:FREIGHT_2905
+if 
+  $163 == 2 
+jf @FREIGHT_3032 
+if 
+  $8239 == 0 
+jf @FREIGHT_2976 
+01E3: show_text_1number_styled GXT 'M_PASS' number 50000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 50000
+0394: play_music 2 
+
+:FREIGHT_2976
+if 
+  $8239 == 2 
+jf @FREIGHT_3025 
+01E3: show_text_1number_styled GXT 'M_PASS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 10000
+0394: play_music 2 
+
+:FREIGHT_3025
+jump @FREIGHT_3051 
+
+:FREIGHT_3032
+01E3: show_text_1number_styled GXT 'FREI_15' number $163 time 5000 style 1  // Level ~1~ Complete
+
+:FREIGHT_3051
+if and
+  $8240 == 0 
+  $163 == 1 
+jf @FREIGHT_3085 
+0595: mission_complete 
+$8240 = 1 
+
+:FREIGHT_3085
+if and
+  $8239 == 0 
+  $163 == 2 
+jf @FREIGHT_3123 
+0595: mission_complete 
+030C: progress_made = 1 
+$8239 = 1 
+
+:FREIGHT_3123
+014F: stop_timer $8238 
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0394: play_music 1 
+if 
+   not $163 == 2 
+jf @FREIGHT_3176 
+$163 += 1 
+
+:FREIGHT_3176
+return 
+
+:FREIGHT_3178
+if 
+075C:   marker 105@(125@,20i) enabled 
+jf @FREIGHT_3207 
+Marker.Disable(105@(125@,20i))
+
+:FREIGHT_3207
+Model.Destroy(#FREIBOX)
+Model.Destroy(#STREAKC)
+Model.Destroy(#FREIFLAT)
+Model.Destroy(#STREAK)
+Model.Destroy(#FREIGHT)
+$ONMISSION = 0 
+$161 = 0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0151: remove_status_text $8241 
+0151: remove_status_text $8242 
+014F: stop_timer $8238 
+Player.ClearWantedLevel($PLAYER_CHAR)
+03C7: set_sensitivity_to_crime 1.0 
+mission_cleanup 
+return 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+return 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+return 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 2000 
+
+:FREIGHT_3327
+if 
+fading 
+jf @FREIGHT_3351 
+wait 0 
+jump @FREIGHT_3327 
+
+:FREIGHT_3351
+return 
+
+:FREIGHT_3353
+0169: set_fade_color_RGB 0 0 0 
+fade 1 2000 
+
+:FREIGHT_3368
+if 
+fading 
+jf @FREIGHT_3392 
+wait 0 
+jump @FREIGHT_3368 
+
+:FREIGHT_3392
+return 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @FREIGHT_3409 
+
+:FREIGHT_3409
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @FREIGHT_3424 
+
+:FREIGHT_3424
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @FREIGHT_3439 
+
+:FREIGHT_3439
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @FREIGHT_3454 
+
+:FREIGHT_3454
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @FREIGHT_3490 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_3490 
+05BE: AS_actor $PLAYER_ACTOR die 
+
+:FREIGHT_3490
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @FREIGHT_3535 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FREIGHT_3535 
+Actor.AddArmour($PLAYER_ACTOR, 100)
+055E: set_player $PLAYER_CHAR max_health += 100 
+
+:FREIGHT_3535
+return

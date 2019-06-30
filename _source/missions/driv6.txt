@@ -1,0 +1,2070 @@
+:DRIV6
+thread 'DRIV6' 
+gosub @DRIV6_94 
+if 
+wasted_or_busted 
+jf @DRIV6_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+gosub @DRIV6_13107 
+
+:DRIV6_85
+gosub @DRIV6_13257 
+end_thread 
+
+:DRIV6_94
+increment_mission_attempts 
+054C: use_GXT_table 'FARLIE5' 
+$ONMISSION = 1 
+wait 0 
+35@ = -1957.67 
+36@ = -2443.7 
+37@ = 30.83 
+38@ = -1571.4 
+39@ = -2742.09 
+40@ = 47.57 
+49@ = 0 
+50@ = 14 
+104@ = 0 
+
+:DRIV6_199
+if 
+001D:   50@ > 104@ // (int) 
+jf @DRIV6_320 
+140@(104@,14i) = 0 
+154@(104@,14i) = 0 
+168@(104@,14i) = 0 
+182@(104@,14i) = 0 
+196@(104@,14i) = 0 
+210@(104@,14i) = 0 
+224@(104@,14i) = 0 
+238@(104@,14i) = 0 
+104@ += 1 
+jump @DRIV6_199 
+
+:DRIV6_320
+137@ = 0 
+138@ = 0 
+139@ = 0 
+$7251 = 0 
+$7252 = 0 
+253@ = 0 
+$7253 = 0 
+$7254 = 0 
+254@ = 0 
+255@ = 0 
+$7255 = 0 
+$7256 = 0 
+98@ = 0 
+252@ = 0 
+256@ = 0 
+257@ = 0 
+260@ = 0 
+261@ = 0 
+131@ = 0 
+132@ = 0 
+134@ = 0 
+136@ = 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:DRIV6_489
+if 
+fading 
+jf @DRIV6_513 
+wait 0 
+jump @DRIV6_489 
+
+:DRIV6_513
+select_interior 1 
+02E4: load_cutscene_data 'FARL_5A' 
+
+:DRIV6_528
+if 
+86B9:   not cutscene_data_loaded 
+jf @DRIV6_552 
+wait 0 
+jump @DRIV6_528 
+
+:DRIV6_552
+02E7: start_cutscene 
+fade 1 1000 
+
+:DRIV6_561
+if 
+82E9:   not cutscene_reached_end 
+jf @DRIV6_585 
+wait 0 
+jump @DRIV6_561 
+
+:DRIV6_585
+fade 0 0 
+
+:DRIV6_591
+if 
+fading 
+jf @DRIV6_615 
+wait 0 
+jump @DRIV6_591 
+
+:DRIV6_615
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+select_interior 0 
+if 
+  136@ == 1 
+jf @DRIV6_774 
+34@ = Car.Create(#RNCHLURE, 0.0, 0.0, -100.0)
+104@ = 0 
+
+:DRIV6_676
+if 
+001D:   50@ > 104@ // (int) 
+jf @DRIV6_774 
+52@(104@,14i) = Car.Create(#SANCHEZ, 94@, 95@, -100.0)
+66@(104@,14i) = Actor.CreateAsDriver(Mission2, #DNB3, 52@(104@,14i))
+80@(104@,14i) = Actor.CreateAsPassenger(Mission2, #DNB2, 52@(104@,14i), 0)
+104@ += 1 
+jump @DRIV6_676 
+
+:DRIV6_774
+Model.Load(#SANCHEZ)
+Model.Load(#DNB3)
+Model.Load(#DNB2)
+Model.Load(#MP5LNG)
+
+:DRIV6_792
+if or
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#DNB3)
+   not Model.Available(#DNB2)
+   not Model.Available(#MP5LNG)
+jf @DRIV6_832 
+wait 0 
+jump @DRIV6_792 
+
+:DRIV6_832
+014C: set_parked_car_generator $5280 cars_to_generate_to 0 
+014C: set_parked_car_generator $5281 cars_to_generate_to 0 
+014C: set_parked_car_generator $5282 cars_to_generate_to 0 
+Actor.PutAt($PLAYER_ACTOR, -2154.2, 645.31, 51.39)
+Actor.Angle($PLAYER_ACTOR) = 270.0
+gosub @DRIV6_4489 
+262@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 262@ type_to 1 
+0169: set_fade_color_RGB 0 0 0 
+wait 500 
+fade 1 1500 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'DRV6_8' time 10000 flag 0  // ~s~Get into the ~b~decoy car.
+
+:DRIV6_952
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DRIV6_978 
+jump @DRIV6_13193 
+
+:DRIV6_978
+if 
+   not 137@ == 1 
+jf @DRIV6_1135 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_1135 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DRIV6_1135 
+Marker.Disable(262@)
+137@ = 1 
+018A: 263@ = create_checkpoint_at -1963.84 -2441.49 30.78 
+00BC: show_text_highpriority GXT 'DRV6_19' time 10000 flag 0  // ~s~Drive out to the ~y~countryside.
+00BB: show_text_lowpriority GXT 'DRV6_17' time 7000 flag 0  // ~s~Do not leave the decoy car.
+if 
+  $5294 == 1 
+jf @DRIV6_1135 
+0950: set_trip_skip -1990.65 -2428.65 30.77 angle 225.0 
+
+:DRIV6_1135
+if and
+  137@ == 1 
+   not 139@ == 1 
+jf @DRIV6_1545 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_1545 
+if and
+   not 138@ == 1 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1990.65 -2428.65 radius 50.0 50.0 
+jf @DRIV6_1239 
+03D5: remove_text 'DRV6_19'  // ~s~Drive out to the ~y~countryside.
+138@ = 1 
+
+:DRIV6_1239
+if and
+   not $5294 == 1 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1963.84 -2441.49 radius 25.0 25.0 
+jf @DRIV6_1291 
+$5294 = 1 
+
+:DRIV6_1291
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -1963.84 -2441.49 30.78 radius 4.0 4.0 2.0 sphere 1 in_car 
+jf @DRIV6_1545 
+Player.CanMove($PLAYER_CHAR) = False
+0951: disable_trip_skip 
+Marker.Disable(263@)
+gosub @DRIV6_4835 
+018A: 264@ = create_checkpoint_at -1867.14 -2442.39 31.24 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -1867.14 -2442.39 31.24 point_to -1178.32 -2638.85 10.8 type 0 radius 4.0 
+03C4: set_status_text $1936 type 1 GXT 'DRV6_18' // global_variable  // Damage
+100@ = 0 
+$1936 = 100 
+Car.Health(34@) = 9000
+00BC: show_text_highpriority GXT 'DRV6_2' time 10000 flag 0  // ~s~Follow the ~r~checkpoints~s~ through the countryside.
+00BB: show_text_lowpriority GXT 'DRV6_17' time 7000 flag 0  // ~s~Do not leave the decoy car.
+00BB: show_text_lowpriority GXT 'DRV6_4' time 10000 flag 0  // ~s~If the doors get too damaged, the bikers will be able to see into the car.
+00BB: show_text_lowpriority GXT 'DRV6_15' time 10000 flag 0  // ~s~Don't let the bikers see into the damaged car for too long or your cover will be blown.
+139@ = 1 
+33@ = 0 
+
+:DRIV6_1545
+if 
+  139@ == 1 
+jf @DRIV6_3814 
+if 
+   Player.WantedLevel($PLAYER_CHAR) > 0
+jf @DRIV6_1586 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:DRIV6_1586
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_3814 
+if and
+   not 261@ == 1 
+  33@ > 2000 
+jf @DRIV6_1728 
+if and
+   not Actor.Dead(80@)
+   not Actor.Dead(81@)
+jf @DRIV6_1728 
+0713: actor 80@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999999.0 8 0 firing_rate 60 
+0713: actor 81@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999999.0 8 0 firing_rate 60 
+261@ = 1 
+
+:DRIV6_1728
+if 
+01F4:   car 34@ flipped 
+jf @DRIV6_1791 
+if 
+  252@ == 1 
+jf @DRIV6_1784 
+Car.SetImmunities(34@, 0, 0, 0, 0, 0)
+252@ = 0 
+
+:DRIV6_1784
+jump @DRIV6_1831 
+
+:DRIV6_1791
+if 
+   not 252@ == 1 
+jf @DRIV6_1831 
+Car.SetImmunities(34@, 0, 1, 1, 1, 1)
+252@ = 1 
+
+:DRIV6_1831
+gosub @DRIV6_7655 
+if 
+   not $7254 == 1 
+jf @DRIV6_1992 
+if 
+   not $7251 == 1 
+jf @DRIV6_1933 
+if 
+01AD:   car 34@ sphere 0 near_point -1181.93 -2642.33 radius 300.0 300.0 
+jf @DRIV6_1926 
+gosub @DRIV6_8926 
+$7251 = 1 
+
+:DRIV6_1926
+jump @DRIV6_1985 
+
+:DRIV6_1933
+if 
+81AD:   not car 34@ sphere 0 near_point -1181.93 -2642.33 radius 300.0 300.0 
+jf @DRIV6_1985 
+gosub @DRIV6_9093 
+$7251 = 0 
+
+:DRIV6_1985
+jump @DRIV6_2017 
+
+:DRIV6_1992
+if 
+  $7251 == 1 
+jf @DRIV6_2017 
+$7251 = 0 
+
+:DRIV6_2017
+if 
+  $7255 == 1 
+jf @DRIV6_2171 
+if 
+   not $7252 == 1 
+jf @DRIV6_2112 
+if 
+01AD:   car 34@ sphere 0 near_point -519.74 -2782.11 radius 214.0 214.0 
+jf @DRIV6_2105 
+gosub @DRIV6_8926 
+$7252 = 1 
+
+:DRIV6_2105
+jump @DRIV6_2164 
+
+:DRIV6_2112
+if 
+81AD:   not car 34@ sphere 0 near_point -519.74 -2782.11 radius 214.0 214.0 
+jf @DRIV6_2164 
+gosub @DRIV6_9093 
+$7252 = 0 
+
+:DRIV6_2164
+jump @DRIV6_2196 
+
+:DRIV6_2171
+if 
+  $7252 == 1 
+jf @DRIV6_2196 
+$7252 = 0 
+
+:DRIV6_2196
+if 
+   not 253@ == 1 
+jf @DRIV6_2348 
+if 
+01AF:   car 34@ sphere 0 in_sphere -1867.14 -2442.39 31.24 radius 6.0 6.0 3.0 
+jf @DRIV6_2348 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+253@ = 1 
+018A: 264@ = create_checkpoint_at -1178.32 -2638.85 10.8 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -1178.32 -2638.85 10.8 point_to -654.95 -2469.35 33.3 type 0 radius 4.0 
+
+:DRIV6_2348
+if and
+  253@ == 1 
+   not $7253 == 1 
+jf @DRIV6_2514 
+if 
+01AF:   car 34@ sphere 0 in_sphere -1178.32 -2638.85 10.8 radius 6.0 6.0 3.0 
+jf @DRIV6_2514 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+$7253 = 1 
+018A: 264@ = create_checkpoint_at -654.95 -2469.35 33.3 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -654.95 -2469.35 33.3 point_to -309.54 -2248.81 29.59 type 0 radius 4.0 
+
+:DRIV6_2514
+if and
+  $7253 == 1 
+   not $7254 == 1 
+jf @DRIV6_2680 
+if 
+01AF:   car 34@ sphere 0 in_sphere -654.95 -2469.35 33.3 radius 6.0 6.0 3.0 
+jf @DRIV6_2680 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+$7254 = 1 
+018A: 264@ = create_checkpoint_at -309.54 -2248.81 29.59 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -309.54 -2248.81 29.59 point_to -165.7 -2421.71 35.1 type 0 radius 4.0 
+
+:DRIV6_2680
+if and
+  $7254 == 1 
+   not 254@ == 1 
+jf @DRIV6_2846 
+if 
+01AF:   car 34@ sphere 0 in_sphere -309.54 -2248.81 29.59 radius 6.0 6.0 3.0 
+jf @DRIV6_2846 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+254@ = 1 
+018A: 264@ = create_checkpoint_at -165.7 -2421.71 35.1 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -165.7 -2421.71 35.1 point_to -191.26 -2822.52 42.09 type 0 radius 4.0 
+
+:DRIV6_2846
+if and
+  254@ == 1 
+   not 255@ == 1 
+jf @DRIV6_3012 
+if 
+01AF:   car 34@ sphere 0 in_sphere -165.7 -2421.71 35.1 radius 6.0 6.0 3.0 
+jf @DRIV6_3012 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+255@ = 1 
+018A: 264@ = create_checkpoint_at -191.26 -2822.52 42.09 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -191.26 -2822.52 42.09 point_to -946.91 -2844.84 67.36 type 0 radius 4.0 
+
+:DRIV6_3012
+if and
+  255@ == 1 
+   not $7255 == 1 
+jf @DRIV6_3172 
+if 
+01AF:   car 34@ sphere 0 in_sphere -191.26 -2822.52 42.09 radius 6.0 6.0 3.0 
+jf @DRIV6_3172 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+$7255 = 1 
+018A: 264@ = create_checkpoint_at -946.91 -2844.84 67.36 
+Marker.SetColor(264@, 0)
+06D5: 41@ = create_racing_checkpoint_at -946.91 -2844.84 67.36 point_to 38@ 39@ 40@ type 0 radius 4.0 
+
+:DRIV6_3172
+if and
+  $7255 == 1 
+   not $7256 == 1 
+jf @DRIV6_3326 
+if 
+01AF:   car 34@ sphere 0 in_sphere -946.91 -2844.84 67.36 radius 6.0 6.0 3.0 
+jf @DRIV6_3326 
+Marker.Disable(264@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_6131 
+$7256 = 1 
+018A: 265@ = create_checkpoint_at 38@ 39@ 40@ 
+Marker.SetColor(265@, 0)
+06D5: 41@ = create_racing_checkpoint_at 38@ 39@ 40@ point_to 0.0 0.0 0.0 type 2 radius 4.0 
+
+:DRIV6_3326
+if 
+  100 > 100@ 
+jf @DRIV6_3397 
+99@ = Car.Health(34@)
+0085: 100@ = 99@ // (int) 
+100@ -= 3000 
+100@ /= 60 
+008A: $1936 = 100@ // (int) 
+100@ *= -1 
+100@ += 100 
+
+:DRIV6_3397
+if 
+  45 >= 100@ 
+jf @DRIV6_3486 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRIV6_3458 
+08A6: set_car 34@ door 2 rotation_to 0.0 
+08A6: set_car 34@ door 3 rotation_to 0.0 
+
+:DRIV6_3458
+095E: set_car 34@ door 2 unlatch 0 angle 0.0 
+095E: set_car 34@ door 3 unlatch 0 angle 0.0 
+
+:DRIV6_3486
+if and
+  100@ > 45 
+  80 >= 100@ 
+jf @DRIV6_3582 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRIV6_3554 
+08A6: set_car 34@ door 2 rotation_to 0.0 
+08A6: set_car 34@ door 3 rotation_to 0.0 
+
+:DRIV6_3554
+095E: set_car 34@ door 2 unlatch 2 angle 0.0 
+095E: set_car 34@ door 3 unlatch 2 angle 0.0 
+
+:DRIV6_3582
+if and
+  100@ > 80 
+  100 > 100@ 
+jf @DRIV6_3635 
+095E: set_car 34@ door 2 unlatch 3 angle -1.0 
+095E: set_car 34@ door 3 unlatch 3 angle -1.0 
+
+:DRIV6_3635
+if 
+  100@ >= 100 
+jf @DRIV6_3681 
+095E: set_car 34@ door 2 unlatch 4 angle -1.0 
+095E: set_car 34@ door 3 unlatch 4 angle -1.0 
+
+:DRIV6_3681
+if and
+  100@ > 80 
+   not 256@ == 1 
+jf @DRIV6_3729 
+00BC: show_text_highpriority GXT 'DRV6_6' time 7000 flag 0  // ~s~The car is almost damaged enough to see into!
+256@ = 1 
+
+:DRIV6_3729
+if and
+  100@ >= 100 
+   not 257@ == 1 
+jf @DRIV6_3789 
+0151: remove_status_text $1936 
+00BC: show_text_highpriority GXT 'DRV6_16' time 5000 flag 0  // ~s~The bikers can see into the car! Keep them away from the doors.
+32@ = 0 
+257@ = 1 
+
+:DRIV6_3789
+if 
+  257@ == 1 
+jf @DRIV6_3814 
+gosub @DRIV6_9364 
+
+:DRIV6_3814
+if 
+   not 137@ == 1 
+jf @DRIV6_3873 
+if 
+   Car.Wrecked(34@)
+jf @DRIV6_3873 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'DRV6_11' time 5000 flag 0  // ~r~The decoy car was destroyed!
+jump @DRIV6_13107 
+
+:DRIV6_3873
+if 
+  137@ == 1 
+jf @DRIV6_4228 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DRIV6_4228 
+if 
+  139@ == 1 
+jf @DRIV6_4203 
+gosub @DRIV6_9973 
+266@ = 0 
+104@ = 0 
+
+:DRIV6_3946
+if and
+001D:   49@ > 104@ // (int) 
+   not 266@ == 1 
+jf @DRIV6_4120 
+if 
+   not Actor.Dead(66@(104@,14i))
+jf @DRIV6_4039 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 66@(104@,14i) radius 20.0 20.0 20.0 sphere 0 
+jf @DRIV6_4039 
+266@ = 1 
+
+:DRIV6_4039
+if 
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_4106 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 80@(104@,14i) radius 20.0 20.0 20.0 sphere 0 
+jf @DRIV6_4106 
+266@ = 1 
+
+:DRIV6_4106
+104@ += 1 
+jump @DRIV6_3946 
+
+:DRIV6_4120
+if 
+  266@ == 1 
+jf @DRIV6_4196 
+135@ = 0 
+gosub @DRIV6_12418 
+132@ = 1 
+
+:DRIV6_4159
+if 
+001D:   133@ > 132@ // (int) 
+jf @DRIV6_4196 
+wait 0 
+gosub @DRIV6_12876 
+jump @DRIV6_4159 
+
+:DRIV6_4196
+gosub @DRIV6_9657 
+
+:DRIV6_4203
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'DRV6_7' time 5000 flag 0  // ~r~You blew your cover!
+jump @DRIV6_13107 
+
+:DRIV6_4228
+if 
+  139@ == 1 
+jf @DRIV6_4482 
+if and
+  257@ == 1 
+  32@ > 10000 
+jf @DRIV6_4391 
+135@ = 0 
+gosub @DRIV6_12418 
+
+:DRIV6_4286
+if 
+  1 > 132@ 
+jf @DRIV6_4322 
+wait 0 
+gosub @DRIV6_12876 
+jump @DRIV6_4286 
+
+:DRIV6_4322
+if 
+001D:   133@ > 132@ // (int) 
+jf @DRIV6_4359 
+wait 0 
+gosub @DRIV6_12876 
+jump @DRIV6_4322 
+
+:DRIV6_4359
+gosub @DRIV6_9657 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'DRV6_7' time 5000 flag 0  // ~r~You blew your cover!
+jump @DRIV6_13107 
+
+:DRIV6_4391
+if 
+  $7256 == 1 
+jf @DRIV6_4482 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 38@ 39@ 40@ radius 6.0 6.0 3.0 sphere 1 in_car 
+jf @DRIV6_4482 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(265@)
+06D6: disable_racing_checkpoint 41@ 
+gosub @DRIV6_10400 
+jump @DRIV6_13193 
+
+:DRIV6_4482
+jump @DRIV6_952 
+
+:DRIV6_4489
+Model.Load(#RNCHLURE)
+
+:DRIV6_4494
+if 
+   not Model.Available(#RNCHLURE)
+jf @DRIV6_4521 
+wait 0 
+jump @DRIV6_4494 
+
+:DRIV6_4521
+0395: clear_area 0 at -2149.95 644.31 52.35 radius 100.0 
+34@ = Car.Create(#RNCHLURE, -2149.95, 644.31, 52.35)
+Car.Angle(34@) = 180.0
+03AB: set_car 34@ strong 1 
+053F: set_car 34@ tires_vulnerability 0 
+Car.Health(34@) = 9000
+0852: set_car 34@ damages_visible 0 
+return 
+
+:DRIV6_4609
+52@ = Car.Create(#SANCHEZ, -2015.66, -2408.82, 30.28)
+Car.Angle(52@) = 229.35
+53@ = Car.Create(#SANCHEZ, -2017.07, -2410.37, 30.3)
+Car.Angle(53@) = 225.81
+104@ = 0 
+
+:DRIV6_4682
+if 
+  2 > 104@ 
+jf @DRIV6_4826 
+66@(104@,14i) = Actor.CreateAsDriver(Mission2, #DNB3, 52@(104@,14i))
+80@(104@,14i) = Actor.CreateAsPassenger(Mission2, #DNB2, 52@(104@,14i), 0)
+Actor.GiveWeaponAndAmmo(80@(104@,14i), MP5, 99999)
+Car.ImmuneToNonPlayer(52@(104@,14i)) = True
+0423: set_car 52@(104@,14i) improved_handling_to 2.0 // (float) 
+08C6: set_actor 66@(104@,14i) stay_on_bike 2 
+08C6: set_actor 80@(104@,14i) stay_on_bike 2 
+49@ += 1 
+104@ += 1 
+jump @DRIV6_4682 
+
+:DRIV6_4826
+98@ += 1 
+return 
+
+:DRIV6_4835
+fade 0 1000 
+
+:DRIV6_4842
+if 
+fading 
+jf @DRIV6_4866 
+wait 0 
+jump @DRIV6_4842 
+
+:DRIV6_4866
+0395: clear_area 0 at 35@ 36@ 37@ radius 300.0 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_4937 
+Car.PutAt(34@, 35@, 36@, 37@)
+Car.Angle(34@) = 241.85
+
+:DRIV6_4937
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 15603 as 1 
+03CF: load_wav 15602 as 2 
+
+:DRIV6_4961
+if and
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @DRIV6_4991 
+wait 0 
+jump @DRIV6_4961 
+
+:DRIV6_4991
+gosub @DRIV6_4609 
+Camera.SetPosition(-1955.92, -2447.69, 30.78, 0.0, 0.0, 0.0)
+Camera.PointAt(-1962.83, -2441.79, 30.44, 2)
+fade 1 1000 
+
+:DRIV6_5056
+if 
+fading 
+jf @DRIV6_5080 
+wait 0 
+jump @DRIV6_5056 
+
+:DRIV6_5080
+259@ = 1 
+0707: start_scene_skip_to @DRIV6_5766 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_5272 
+if and
+   not Actor.Dead(66@)
+   not Car.Wrecked(52@)
+jf @DRIV6_5165 
+05D1: AS_actor 66@ drive_car 52@ to -1977.97 -2435.05 30.3 speed 30.0 2 model #NULL 2 
+
+:DRIV6_5165
+if and
+   not Actor.Dead(67@)
+   not Car.Wrecked(53@)
+jf @DRIV6_5272 
+05D1: AS_actor 67@ drive_car 53@ to -1979.45 -2437.47 30.3 speed 30.0 2 model #NULL 2 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'FAR5_BB' time 5000 flag 1  // ~z~Ah, look like these punks about to make they move.
+
+:DRIV6_5240
+if 
+83D2:   not wav 1 ended 
+jf @DRIV6_5266 
+wait 0 
+jump @DRIV6_5240 
+
+:DRIV6_5266
+040D: unload_wav 1 
+00BE: text_clear_all 
+
+:DRIV6_5272
+33@ = 0 
+
+:DRIV6_5279
+if 
+  2500 > 33@ 
+jf @DRIV6_5309 
+wait 0 
+jump @DRIV6_5279 
+
+:DRIV6_5309
+if 
+   not Car.Wrecked(52@)
+jf @DRIV6_5376 
+Camera.SetPosition(-1989.91, -2435.33, 30.68, 0.0, 0.0, 0.0)
+Camera.PointAt(-1987.22, -2436.07, 30.82, 2)
+
+:DRIV6_5376
+if 
+   not Car.Wrecked(52@)
+jf @DRIV6_5422 
+Car.PutAt(52@, -1985.6, -2435.14, 30.3)
+Car.Angle(52@) = 254.67
+
+:DRIV6_5422
+if 
+   not Car.Wrecked(53@)
+jf @DRIV6_5468 
+Car.PutAt(53@, -1986.37, -2437.8, 30.3)
+Car.Angle(53@) = 250.82
+
+:DRIV6_5468
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'FAR5_BA' time 5000 flag 1  // ~z~Come on boys, take the bait...
+
+:DRIV6_5488
+if 
+83D2:   not wav 2 ended 
+jf @DRIV6_5514 
+wait 0 
+jump @DRIV6_5488 
+
+:DRIV6_5514
+040D: unload_wav 2 
+00BE: text_clear_all 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_5644 
+if and
+   not Actor.Dead(66@)
+   not Actor.Dead(80@)
+   not Car.Wrecked(52@)
+jf @DRIV6_5590 
+04E0: car 52@ abandon_path_radius 250 
+06E1: AS_actor 66@ using_car 52@ target_car 34@ with_order 29 max_speed 10.0 traffic_flag 2 
+
+:DRIV6_5590
+if and
+   not Actor.Dead(67@)
+   not Actor.Dead(81@)
+   not Car.Wrecked(53@)
+jf @DRIV6_5644 
+04E0: car 53@ abandon_path_radius 250 
+06E1: AS_actor 67@ using_car 53@ target_car 34@ with_order 30 max_speed 10.0 traffic_flag 2 
+
+:DRIV6_5644
+if and
+   not 260@ == 1 
+   not Actor.Dead(66@)
+   not Car.Wrecked(52@)
+   not Car.Wrecked(34@)
+jf @DRIV6_5759 
+if 
+   Actor.InCar(66@, 52@)
+jf @DRIV6_5741 
+if 
+0204:   actor 66@ near_car 34@ radius 15.0 15.0 sphere 0 in_car 
+jf @DRIV6_5734 
+260@ = 1 
+
+:DRIV6_5734
+jump @DRIV6_5748 
+
+:DRIV6_5741
+260@ = 1 
+
+:DRIV6_5748
+wait 0 
+jump @DRIV6_5644 
+
+:DRIV6_5759
+259@ = 0 
+
+:DRIV6_5766
+0701: end_scene_skip 
+if 
+  259@ == 1 
+jf @DRIV6_5960 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_5960 
+if and
+   not Actor.Dead(66@)
+   not Actor.Dead(80@)
+   not Car.Wrecked(52@)
+jf @DRIV6_5881 
+04C4: store_coords_to 94@ 95@ 96@ from_actor $PLAYER_ACTOR with_offset -1.0 -14.0 0.0 
+96@ = -100.0 
+Car.PutAt(52@, 94@, 95@, 96@)
+
+:DRIV6_5881
+if and
+   not Actor.Dead(67@)
+   not Actor.Dead(81@)
+   not Car.Wrecked(53@)
+jf @DRIV6_5960 
+04C4: store_coords_to 94@ 95@ 96@ from_actor $PLAYER_ACTOR with_offset 1.0 -14.0 0.0 
+96@ = -100.0 
+Car.PutAt(53@, 94@, 95@, 96@)
+
+:DRIV6_5960
+if 
+   not Car.Wrecked(52@)
+jf @DRIV6_5983 
+04E0: car 52@ abandon_path_radius 20 
+
+:DRIV6_5983
+if 
+   not Car.Wrecked(53@)
+jf @DRIV6_6006 
+04E0: car 53@ abandon_path_radius 20 
+
+:DRIV6_6006
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_6114 
+if and
+   not Actor.Dead(66@)
+   not Actor.Dead(80@)
+   not Car.Wrecked(52@)
+jf @DRIV6_6068 
+06E1: AS_actor 66@ using_car 52@ target_car 34@ with_order 29 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_6068
+if and
+   not Actor.Dead(67@)
+   not Actor.Dead(81@)
+   not Car.Wrecked(53@)
+jf @DRIV6_6114 
+06E1: AS_actor 67@ using_car 53@ target_car 34@ with_order 30 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_6114
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:DRIV6_6131
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_7653 
+51@ = 0 
+104@ = 0 
+
+:DRIV6_6161
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_6290 
+if 
+   not Car.Wrecked(52@(104@,14i))
+jf @DRIV6_6276 
+if 
+0202:   actor $PLAYER_ACTOR near_car 52@(104@,14i) radius 100.0 100.0 sphere 0 
+jf @DRIV6_6249 
+51@ += 1 
+jump @DRIV6_6276 
+
+:DRIV6_6249
+Car.Destroy(52@(104@,14i))
+Actor.DestroyInstantly(66@(104@,14i))
+Actor.DestroyInstantly(80@(104@,14i))
+
+:DRIV6_6276
+104@ += 1 
+jump @DRIV6_6161 
+
+:DRIV6_6290
+if 
+   not 51@ > 2 
+jf @DRIV6_7653 
+0085: 104@ = 98@ // (int) 
+104@ *= 2 
+0085: 105@ = 104@ // (int) 
+105@ += 2 
+106@ = 0 
+
+:DRIV6_6345
+if 
+001D:   105@ > 104@ // (int) 
+jf @DRIV6_7646 
+if and
+  253@ == 1 
+   not $7253 == 1 
+jf @DRIV6_6505 
+if 
+  106@ == 0 
+jf @DRIV6_6447 
+94@ = -1342.94 
+95@ = -2624.45 
+96@ = 19.58 
+97@ = 261.04 
+
+:DRIV6_6447
+if 
+  106@ == 1 
+jf @DRIV6_6505 
+94@ = -1344.02 
+95@ = -2628.07 
+96@ = 19.82 
+97@ = 260.5 
+
+:DRIV6_6505
+if and
+  $7253 == 1 
+   not $7254 == 1 
+jf @DRIV6_6646 
+if 
+  106@ == 0 
+jf @DRIV6_6588 
+94@ = -708.68 
+95@ = -2601.46 
+96@ = 69.83 
+97@ = 338.56 
+
+:DRIV6_6588
+if 
+  106@ == 1 
+jf @DRIV6_6646 
+94@ = -704.89 
+95@ = -2602.92 
+96@ = 69.9 
+97@ = 340.64 
+
+:DRIV6_6646
+if and
+  $7254 == 1 
+   not 254@ == 1 
+jf @DRIV6_6787 
+if 
+  106@ == 0 
+jf @DRIV6_6729 
+94@ = -420.89 
+95@ = -2258.87 
+96@ = 47.37 
+97@ = 278.1 
+
+:DRIV6_6729
+if 
+  106@ == 1 
+jf @DRIV6_6787 
+94@ = -420.64 
+95@ = -2261.39 
+96@ = 47.79 
+97@ = 279.7 
+
+:DRIV6_6787
+if and
+  254@ == 1 
+   not 255@ == 1 
+jf @DRIV6_6928 
+if 
+  106@ == 0 
+jf @DRIV6_6870 
+94@ = -260.22 
+95@ = -2323.12 
+96@ = 30.42 
+97@ = 222.63 
+
+:DRIV6_6870
+if 
+  106@ == 1 
+jf @DRIV6_6928 
+94@ = -262.81 
+95@ = -2326.8 
+96@ = 30.43 
+97@ = 220.93 
+
+:DRIV6_6928
+if and
+  255@ == 1 
+   not $7255 == 1 
+jf @DRIV6_7069 
+if 
+  106@ == 0 
+jf @DRIV6_7011 
+94@ = -179.45 
+95@ = -2708.91 
+96@ = 35.82 
+97@ = 177.36 
+
+:DRIV6_7011
+if 
+  106@ == 1 
+jf @DRIV6_7069 
+94@ = -182.07 
+95@ = -2709.06 
+96@ = 35.77 
+97@ = 176.56 
+
+:DRIV6_7069
+if and
+  $7255 == 1 
+   not $7256 == 1 
+jf @DRIV6_7210 
+if 
+  106@ == 0 
+jf @DRIV6_7152 
+94@ = -846.18 
+95@ = -2809.6 
+96@ = 70.32 
+97@ = 112.41 
+
+:DRIV6_7152
+if 
+  106@ == 1 
+jf @DRIV6_7210 
+94@ = -848.6 
+95@ = -2806.3 
+96@ = 70.29 
+97@ = 111.76 
+
+:DRIV6_7210
+0395: clear_area 1 at 94@ 95@ 96@ radius 5.0 
+52@(104@,14i) = Car.Create(#SANCHEZ, 94@, 95@, 96@)
+66@(104@,14i) = Actor.CreateAsDriver(Mission2, #DNB3, 52@(104@,14i))
+80@(104@,14i) = Actor.CreateAsPassenger(Mission2, #DNB2, 52@(104@,14i), 0)
+Car.Angle(52@(104@,14i)) = 97@
+Car.ImmuneToNonPlayer(52@(104@,14i)) = True
+0423: set_car 52@(104@,14i) improved_handling_to 2.0 // (float) 
+08C6: set_actor 66@(104@,14i) stay_on_bike 2 
+08C6: set_actor 80@(104@,14i) stay_on_bike 2 
+if or
+  $7251 == 1 
+  $7252 == 1 
+jf @DRIV6_7410 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 31 max_speed 30.0 traffic_flag 2 
+jump @DRIV6_7502 
+
+:DRIV6_7410
+if 
+  106@ == 0 
+jf @DRIV6_7456 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 29 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_7456
+if 
+  106@ == 1 
+jf @DRIV6_7502 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 30 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_7502
+Actor.GiveWeaponAndAmmo(80@(104@,14i), MP5, 99999)
+0713: actor 80@(104@,14i) driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999999.0 8 0 firing_rate 60 
+if and
+  $7254 == 1 
+   not 254@ == 1 
+jf @DRIV6_7604 
+Car.SetSpeedInstantly(52@(104@,14i), 30.0)
+jump @DRIV6_7618 
+
+:DRIV6_7604
+Car.SetSpeedInstantly(52@(104@,14i), 70.0)
+
+:DRIV6_7618
+49@ += 1 
+104@ += 1 
+106@ += 1 
+jump @DRIV6_6345 
+
+:DRIV6_7646
+98@ += 1 
+
+:DRIV6_7653
+return 
+
+:DRIV6_7655
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_8924 
+104@ = 0 
+
+:DRIV6_7678
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_8924 
+if 
+   not Car.Wrecked(52@(104@,14i))
+jf @DRIV6_8910 
+if and
+   Actor.Dead(66@(104@,14i))
+   not 168@(104@,14i) == 1 
+jf @DRIV6_7759 
+168@(104@,14i) = 1 
+
+:DRIV6_7759
+if and
+   Actor.Dead(80@(104@,14i))
+   not 182@(104@,14i) == 1 
+jf @DRIV6_7801 
+182@(104@,14i) = 1 
+
+:DRIV6_7801
+if and
+   not Actor.Dead(66@(104@,14i))
+  182@(104@,14i) == 1 
+   not 196@(104@,14i) == 1 
+jf @DRIV6_7893 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 17 max_speed 30.0 traffic_flag 2 
+224@(104@,14i) = 1 
+196@(104@,14i) = 1 
+
+:DRIV6_7893
+if and
+   not Actor.Dead(80@(104@,14i))
+  168@(104@,14i) == 1 
+   not 210@(104@,14i) == 1 
+jf @DRIV6_8055 
+if 
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_8044 
+Car.StorePos(52@(104@,14i), 94@, 95@, 96@)
+0362: remove_actor 80@(104@,14i) from_car_and_place_at 94@ 95@ -10.0 
+036A: put_actor 80@(104@,14i) in_car 52@(104@,14i) 
+06E1: AS_actor 80@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 17 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_8044
+210@(104@,14i) = 1 
+
+:DRIV6_8055
+if and
+   not Actor.Dead(66@(104@,14i))
+  196@(104@,14i) == 1 
+jf @DRIV6_8214 
+if 
+   not Actor.InCar(66@(104@,14i), 52@(104@,14i))
+jf @DRIV6_8181 
+if 
+  224@(104@,14i) == 0 
+jf @DRIV6_8174 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 17 max_speed 30.0 traffic_flag 2 
+224@(104@,14i) = 1 
+
+:DRIV6_8174
+jump @DRIV6_8214 
+
+:DRIV6_8181
+if 
+  224@(104@,14i) == 1 
+jf @DRIV6_8214 
+224@(104@,14i) = 0 
+
+:DRIV6_8214
+if and
+   not Actor.Dead(80@(104@,14i))
+  210@(104@,14i) == 1 
+jf @DRIV6_8373 
+if 
+   not Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_8340 
+if 
+  238@(104@,14i) == 0 
+jf @DRIV6_8333 
+06E1: AS_actor 80@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 17 max_speed 30.0 traffic_flag 2 
+238@(104@,14i) = 1 
+
+:DRIV6_8333
+jump @DRIV6_8373 
+
+:DRIV6_8340
+if 
+  238@(104@,14i) == 1 
+jf @DRIV6_8373 
+238@(104@,14i) = 0 
+
+:DRIV6_8373
+if and
+   not Actor.Dead(66@(104@,14i))
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_8870 
+if and
+   not Actor.InCar(66@(104@,14i), 52@(104@,14i))
+  140@(104@,14i) == 0 
+jf @DRIV6_8470 
+05CB: AS_actor 66@(104@,14i) enter_car 52@(104@,14i) as_driver 10000 ms 
+140@(104@,14i) = 1 
+
+:DRIV6_8470
+if and
+   not Actor.InCar(80@(104@,14i), 52@(104@,14i))
+  154@(104@,14i) == 0 
+jf @DRIV6_8540 
+05CA: AS_actor 80@(104@,14i) enter_car 52@(104@,14i) passenger_seat 0 time 10000 
+154@(104@,14i) = 1 
+
+:DRIV6_8540
+if and
+   Actor.InCar(66@(104@,14i), 52@(104@,14i))
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_8870 
+if or
+  140@(104@,14i) == 1 
+  154@(104@,14i) == 1 
+jf @DRIV6_8870 
+if or
+  $7251 == 1 
+  $7252 == 1 
+jf @DRIV6_8676 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 31 max_speed 30.0 traffic_flag 2 
+jump @DRIV6_8808 
+
+:DRIV6_8676
+0085: 106@ = 104@ // (int) 
+
+:DRIV6_8684
+if 
+  106@ >= 2 
+jf @DRIV6_8716 
+106@ -= 2 
+jump @DRIV6_8684 
+
+:DRIV6_8716
+if 
+  106@ == 0 
+jf @DRIV6_8762 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 29 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_8762
+if 
+  106@ == 1 
+jf @DRIV6_8808 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 30 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_8808
+0713: actor 80@(104@,14i) driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999999.0 8 0 firing_rate 60 
+140@(104@,14i) = 0 
+154@(104@,14i) = 0 
+
+:DRIV6_8870
+if and
+   Actor.Dead(66@(104@,14i))
+   Actor.Dead(80@(104@,14i))
+jf @DRIV6_8910 
+Car.SetDriverBehaviour(52@(104@,14i), Nowhere)
+
+:DRIV6_8910
+104@ += 1 
+jump @DRIV6_7678 
+
+:DRIV6_8924
+return 
+
+:DRIV6_8926
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_9091 
+104@ = 0 
+
+:DRIV6_8949
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_9091 
+if and
+   not Car.Wrecked(52@(104@,14i))
+   not Actor.Dead(66@(104@,14i))
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_9077 
+if and
+   Actor.InCar(66@(104@,14i), 52@(104@,14i))
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_9077 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 31 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_9077
+104@ += 1 
+jump @DRIV6_8949 
+
+:DRIV6_9091
+return 
+
+:DRIV6_9093
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_9362 
+104@ = 0 
+
+:DRIV6_9116
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_9362 
+if and
+   not Car.Wrecked(52@(104@,14i))
+   not Actor.Dead(66@(104@,14i))
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_9348 
+if and
+   Actor.InCar(66@(104@,14i), 52@(104@,14i))
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_9348 
+0085: 106@ = 104@ // (int) 
+
+:DRIV6_9224
+if 
+  106@ >= 2 
+jf @DRIV6_9256 
+106@ -= 2 
+jump @DRIV6_9224 
+
+:DRIV6_9256
+if 
+  106@ == 0 
+jf @DRIV6_9302 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 29 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_9302
+if 
+  106@ == 1 
+jf @DRIV6_9348 
+06E1: AS_actor 66@(104@,14i) using_car 52@(104@,14i) target_car 34@ with_order 30 max_speed 30.0 traffic_flag 2 
+
+:DRIV6_9348
+104@ += 1 
+jump @DRIV6_9116 
+
+:DRIV6_9362
+return 
+
+:DRIV6_9364
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_9655 
+258@ = 1 
+0407: store_coords_to 42@ 43@ 44@ from_car 34@ with_offset -1.0 0.0 0.0 
+0407: store_coords_to 45@ 46@ 47@ from_car 34@ with_offset 1.0 0.0 0.0 
+104@ = 0 
+
+:DRIV6_9452
+if and
+001D:   49@ > 104@ // (int) 
+  258@ == 1 
+jf @DRIV6_9630 
+if 
+   not Car.Wrecked(52@(104@,14i))
+jf @DRIV6_9616 
+046C: 48@ = car 52@(104@,14i) driver 
+if 
+   not 48@ == -1 
+jf @DRIV6_9616 
+if or
+01AF:   car 52@(104@,14i) sphere 0 in_sphere 42@ 43@ 44@ radius 5.0 5.0 5.0 
+01AF:   car 52@(104@,14i) sphere 0 in_sphere 45@ 46@ 47@ radius 5.0 5.0 5.0 
+jf @DRIV6_9616 
+258@ = 0 
+
+:DRIV6_9616
+104@ += 1 
+jump @DRIV6_9452 
+
+:DRIV6_9630
+if 
+  258@ == 1 
+jf @DRIV6_9655 
+32@ = 0 
+
+:DRIV6_9655
+return 
+
+:DRIV6_9657
+104@ = 0 
+
+:DRIV6_9664
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_9971 
+if 
+   not Car.Wrecked(52@(104@,14i))
+jf @DRIV6_9957 
+if 
+   not Actor.Dead(66@(104@,14i))
+jf @DRIV6_9783 
+05D1: AS_actor 66@(104@,14i) drive_car 52@(104@,14i) to -2148.62 1063.98 79.73 speed 20.0 0 model #NULL 2 
+0961: set_actor 66@(104@,14i) keep_tasks_after_cleanup 1 
+jump @DRIV6_9926 
+
+:DRIV6_9783
+if 
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_9926 
+if 
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_9884 
+Car.StorePos(52@(104@,14i), 94@, 95@, 96@)
+0362: remove_actor 80@(104@,14i) from_car_and_place_at 94@ 95@ -10.0 
+036A: put_actor 80@(104@,14i) in_car 52@(104@,14i) 
+
+:DRIV6_9884
+05D1: AS_actor 80@(104@,14i) drive_car 52@(104@,14i) to -2148.62 1063.98 79.73 speed 20.0 0 model #NULL 2 
+
+:DRIV6_9926
+if 
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_9957 
+0961: set_actor 80@(104@,14i) keep_tasks_after_cleanup 1 
+
+:DRIV6_9957
+104@ += 1 
+jump @DRIV6_9664 
+
+:DRIV6_9971
+return 
+
+:DRIV6_9973
+104@ = 0 
+
+:DRIV6_9980
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_10329 
+if 
+   not Car.Wrecked(52@(104@,14i))
+jf @DRIV6_10315 
+if 
+   not Actor.Dead(66@(104@,14i))
+jf @DRIV6_10129 
+05BF: AS_actor 66@(104@,14i) look_at_actor $PLAYER_ACTOR 5000 ms 
+if 
+   Actor.InCar(66@(104@,14i), 52@(104@,14i))
+jf @DRIV6_10111 
+06C7: AS_actor 66@(104@,14i) driver_of_car 52@(104@,14i) perform_action 6 timelimit 2000000 
+jump @DRIV6_10129 
+
+:DRIV6_10111
+05CB: AS_actor 66@(104@,14i) enter_car 52@(104@,14i) as_driver -1 ms 
+
+:DRIV6_10129
+if 
+   not Actor.Dead(80@(104@,14i))
+jf @DRIV6_10315 
+05BF: AS_actor 80@(104@,14i) look_at_actor $PLAYER_ACTOR 5000 ms 
+if 
+  210@(104@,14i) == 1 
+jf @DRIV6_10268 
+if 
+   Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_10243 
+06C7: AS_actor 80@(104@,14i) driver_of_car 52@(104@,14i) perform_action 6 timelimit 2000000 
+jump @DRIV6_10261 
+
+:DRIV6_10243
+05CB: AS_actor 80@(104@,14i) enter_car 52@(104@,14i) as_driver -1 ms 
+
+:DRIV6_10261
+jump @DRIV6_10315 
+
+:DRIV6_10268
+if 
+   not Actor.InCar(80@(104@,14i), 52@(104@,14i))
+jf @DRIV6_10315 
+05CA: AS_actor 80@(104@,14i) enter_car 52@(104@,14i) passenger_seat 0 time -1 
+
+:DRIV6_10315
+104@ += 1 
+jump @DRIV6_9980 
+
+:DRIV6_10329
+return 
+
+:DRIV6_10331
+104@ = 0 
+
+:DRIV6_10338
+if 
+001D:   49@ > 104@ // (int) 
+jf @DRIV6_10398 
+Actor.DestroyInstantly(66@(104@,14i))
+Actor.DestroyInstantly(80@(104@,14i))
+Car.Destroy(52@(104@,14i))
+104@ += 1 
+jump @DRIV6_10338 
+
+:DRIV6_10398
+return 
+
+:DRIV6_10400
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_10423 
+Car.DoorStatus(34@) = 2
+
+:DRIV6_10423
+fade 0 1000 
+
+:DRIV6_10430
+if 
+fading 
+jf @DRIV6_10454 
+wait 0 
+jump @DRIV6_10430 
+
+:DRIV6_10454
+0395: clear_area 0 at 38@ 39@ 40@ radius 100.0 
+gosub @DRIV6_10331 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Model.Load(#CELLPHONE)
+
+:DRIV6_10502
+if 
+   not Model.Available(#CELLPHONE)
+jf @DRIV6_10529 
+wait 0 
+jump @DRIV6_10502 
+
+:DRIV6_10529
+267@ = Object.Init(#CELLPHONE, -1561.4, -2721.1, 47.57)
+0750: set_object 267@ visibility 0 
+070A: AS_actor $PLAYER_ACTOR attach_to_object 267@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 0 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_10671 
+Car.SetToNormalDriver(34@)
+Car.PutAt(34@, 38@, 39@, -100.0)
+Car.Angle(34@) = 55.5
+08A6: set_car 34@ door 2 rotation_to 0.0 
+08A6: set_car 34@ door 3 rotation_to 0.0 
+
+:DRIV6_10671
+04ED: load_animation "CAR_CHAT" 
+03CF: load_wav 23000 as 3 
+
+:DRIV6_10690
+if or
+84EE:   not animation "CAR_CHAT" loaded 
+83D0:   not wav 3 loaded 
+jf @DRIV6_10728 
+wait 0 
+jump @DRIV6_10690 
+
+:DRIV6_10728
+Camera.SetPosition(-1573.6, -2743.74, 49.12, 0.0, 0.0, 0.0)
+Camera.PointAt(-1573.0, -2743.39, 49.05, 2)
+fade 1 1000 
+
+:DRIV6_10786
+if 
+fading 
+jf @DRIV6_10833 
+if 
+03CA:   object 267@ exists 
+jf @DRIV6_10822 
+0750: set_object 267@ visibility 0 
+
+:DRIV6_10822
+wait 0 
+jump @DRIV6_10786 
+
+:DRIV6_10833
+259@ = 1 
+0707: start_scene_skip_to @DRIV6_12316 
+0615: define_AS_pack_begin 101@ 
+0605: actor -1 perform_animation "CARFONE_IN" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "CARFONE_LOOPA_TO_B" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "CARFONE_LOOPB" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 101@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 101@ 
+061B: remove_references_to_AS_pack 101@ 
+03D1: play_wav 3 
+32@ = 0 
+
+:DRIV6_11015
+if 
+  3000 > 32@ 
+jf @DRIV6_11068 
+if 
+03CA:   object 267@ exists 
+jf @DRIV6_11057 
+0750: set_object 267@ visibility 0 
+
+:DRIV6_11057
+wait 0 
+jump @DRIV6_11015 
+
+:DRIV6_11068
+0750: set_object 267@ visibility 1 
+040D: unload_wav 3 
+135@ = 2 
+gosub @DRIV6_12418 
+32@ = 0 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to 102@ // ret 7 if not found 
+if 
+84A4:   not  102@ == 7 // == constant 
+jf @DRIV6_11144 
+0646: unknown_get_actor $PLAYER_ACTOR task_1560_status_store_to 103@ // similar to 062E 
+jump @DRIV6_11151 
+
+:DRIV6_11144
+103@ = 2 
+
+:DRIV6_11151
+if or
+  2 > 103@ 
+  132@ == 0 
+jf @DRIV6_11264 
+wait 0 
+if 
+  32@ > 1000 
+jf @DRIV6_11206 
+gosub @DRIV6_12876 
+
+:DRIV6_11206
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to 102@ // ret 7 if not found 
+if 
+84A4:   not  102@ == 7 // == constant 
+jf @DRIV6_11250 
+0646: unknown_get_actor $PLAYER_ACTOR task_1560_status_store_to 103@ // similar to 062E 
+jump @DRIV6_11257 
+
+:DRIV6_11250
+103@ = 2 
+
+:DRIV6_11257
+jump @DRIV6_11151 
+
+:DRIV6_11264
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_11377 
+0407: store_coords_to 107@ 108@ 109@ from_car 34@ with_offset 0.4 0.51 0.65 
+Camera.SetPosition(107@, 108@, 109@, 0.0, 0.0, 0.0)
+0407: store_coords_to 107@ 108@ 109@ from_car 34@ with_offset -0.13 0.22 0.54 
+Camera.PointAt(107@, 108@, 109@, 2)
+
+:DRIV6_11377
+0605: actor $PLAYER_ACTOR perform_animation "CARFONE_LOOPB" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:DRIV6_11422
+if 
+  1 >= 132@ 
+jf @DRIV6_11458 
+wait 0 
+gosub @DRIV6_12876 
+jump @DRIV6_11422 
+
+:DRIV6_11458
+0615: define_AS_pack_begin 101@ 
+0605: actor -1 perform_animation "CARFONE_LOOPB_TO_A" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "CARFONE_LOOPA" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 101@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 101@ 
+061B: remove_references_to_AS_pack 101@ 
+
+:DRIV6_11574
+if 
+  4 >= 132@ 
+jf @DRIV6_11610 
+wait 0 
+gosub @DRIV6_12876 
+jump @DRIV6_11574 
+
+:DRIV6_11610
+0615: define_AS_pack_begin 101@ 
+0605: actor -1 perform_animation "CARFONE_LOOPA_TO_B" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "CARFONE_LOOPB" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 101@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 101@ 
+061B: remove_references_to_AS_pack 101@ 
+
+:DRIV6_11726
+if 
+  5 >= 132@ 
+jf @DRIV6_11802 
+wait 0 
+gosub @DRIV6_12876 
+if and
+  131@ == 2 
+   not 134@ == 1 
+jf @DRIV6_11795 
+0967: actor $PLAYER_ACTOR move_mouth 4000 ms 
+134@ = 1 
+
+:DRIV6_11795
+jump @DRIV6_11726 
+
+:DRIV6_11802
+268@ = Car.Create(#SANCHEZ, -1565.89, -2748.32, 48.21)
+Car.Angle(268@) = 58.42
+269@ = Actor.CreateAsDriver(Mission2, #DNB3, 268@)
+wait 1000 
+if and
+   not Actor.Dead(269@)
+   not Car.Wrecked(268@)
+jf @DRIV6_11907 
+05D1: AS_actor 269@ drive_car 268@ to -1574.23 -2742.62 48.2 speed 20.0 1 model #NULL 3 
+
+:DRIV6_11907
+Camera.SetPosition(-1570.65, -2748.39, 48.35, 0.0, 0.0, 0.0)
+Camera.PointAt(-1571.99, -2745.26, 48.29, 2)
+if 
+   not Actor.Dead(269@)
+jf @DRIV6_12055 
+062E: get_actor 269@ task 1489 status_store_to 102@ // ret 7 if not found 
+
+:DRIV6_11985
+if 
+84A4:   not  102@ == 7 // == constant 
+jf @DRIV6_12055 
+wait 0 
+if 
+   not Actor.Dead(269@)
+jf @DRIV6_12041 
+062E: get_actor 269@ task 1489 status_store_to 102@ // ret 7 if not found 
+jump @DRIV6_12048 
+
+:DRIV6_12041
+04AF: 102@ = 7 // = constant 
+
+:DRIV6_12048
+jump @DRIV6_11985 
+
+:DRIV6_12055
+if 
+   not Actor.Dead(269@)
+jf @DRIV6_12087 
+05BF: AS_actor 269@ look_at_actor $PLAYER_ACTOR 3000 ms 
+wait 3000 
+
+:DRIV6_12087
+if 
+   not Actor.Dead(269@)
+jf @DRIV6_12125 
+06A9: AS_actor 269@ look_at_point -1572.73 -2747.12 48.2 -2 ms 
+
+:DRIV6_12125
+if 
+001D:   133@ > 132@ // (int) 
+jf @DRIV6_12239 
+wait 0 
+if 
+   not Actor.Dead(269@)
+jf @DRIV6_12218 
+gosub @DRIV6_12876 
+if and
+  131@ == 2 
+   not 134@ == 1 
+jf @DRIV6_12211 
+0967: actor 269@ move_mouth 10000 ms 
+134@ = 1 
+
+:DRIV6_12211
+jump @DRIV6_12232 
+
+:DRIV6_12218
+040D: unload_wav 1 
+00BE: text_clear_all 
+0085: 132@ = 133@ // (int) 
+
+:DRIV6_12232
+jump @DRIV6_12125 
+
+:DRIV6_12239
+if and
+   not Actor.Dead(269@)
+   not Car.Wrecked(268@)
+jf @DRIV6_12304 
+0968: actor 269@ stop_mouth 
+0647: AS_actor 269@ clear_look_task 
+05D1: AS_actor 269@ drive_car 268@ to -1630.35 -2721.17 48.62 speed 20.0 0 model #NULL 2 
+
+:DRIV6_12304
+wait 3000 
+259@ = 0 
+
+:DRIV6_12316
+0701: end_scene_skip 
+if 
+  259@ == 1 
+jf @DRIV6_12336 
+
+:DRIV6_12336
+0687: clear_actor $PLAYER_ACTOR task 
+0968: actor $PLAYER_ACTOR stop_mouth 
+040D: unload_wav 3 
+040D: unload_wav 1 
+00BE: text_clear_all 
+Actor.DestroyInstantly(269@)
+Car.Destroy(268@)
+Object.Destroy(267@)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_12401 
+Car.DoorStatus(34@) = 1
+
+:DRIV6_12401
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:DRIV6_12418
+0871: init_jump_table 135@ total_jumps 3 default_jump 1 @DRIV6_12846 jumps 0 @DRIV6_12481 1 @DRIV6_12539 2 @DRIV6_12597 -1 @DRIV6_12853 -1 @DRIV6_12853 -1 @DRIV6_12853 -1 @DRIV6_12853 
+
+:DRIV6_12481
+05AA: 110@s = 'FAR5_AB' // @s = 'short'  // ~z~This car is a decoy!
+05AA: 112@s = 'FAR5_AA' // @s = 'short'  // ~z~It's decoy, back to Chinatown!
+04AF: 124@ = 15601 // = constant 
+04AF: 125@ = 15600 // = constant 
+133@ = 2 
+jump @DRIV6_12853 
+
+:DRIV6_12539
+05AA: 110@s = 'FAR5_BB' // @s = 'short'  // ~z~Ah, look like these punks about to make they move.
+05AA: 112@s = 'FAR5_BA' // @s = 'short'  // ~z~Come on boys, take the bait...
+04AF: 124@ = 15603 // = constant 
+04AF: 125@ = 15602 // = constant 
+133@ = 2 
+jump @DRIV6_12853 
+
+:DRIV6_12597
+05AA: 110@s = 'MWUZ05A' // @s = 'short'  // ~z~Eh, wassup, man?
+05AA: 112@s = 'MTG02B' // @s = 'short'  // ~z~Mr. Johnson, it's Guppy, are you OK?
+05AA: 114@s = 'MTG02C' // @s = 'short'  // ~z~Yeah, it's nothing, they took the bait like morons!
+05AA: 116@s = 'MTG02D' // @s = 'short'  // ~z~Mr. Ran Fa Li get out alright?
+05AA: 118@s = 'MTG02E' // @s = 'short'  // ~z~Yes, Woozie has taken him to safety, thank you.
+05AA: 120@s = 'MTG02F' // @s = 'short'  // ~z~Cool. I'll see you later, man.
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @DRIV6_12729 
+05AA: 122@s = 'FAR5_AA' // @s = 'short'  // ~z~It's decoy, back to Chinatown!
+jump @DRIV6_12743 
+
+:DRIV6_12729
+05AA: 122@s = 'FAR5_AB' // @s = 'short'  // ~z~This car is a decoy!
+
+:DRIV6_12743
+04AF: 124@ = 30048 // = constant 
+04AF: 125@ = 29409 // = constant 
+04AF: 126@ = 29410 // = constant 
+04AF: 127@ = 29411 // = constant 
+04AF: 128@ = 29412 // = constant 
+04AF: 129@ = 29413 // = constant 
+if 
+  300@ == 0 
+jf @DRIV6_12824 
+04AF: 130@ = 15600 // = constant 
+jump @DRIV6_12832 
+
+:DRIV6_12824
+04AF: 130@ = 15601 // = constant 
+
+:DRIV6_12832
+133@ = 7 
+jump @DRIV6_12853 
+
+:DRIV6_12846
+jump @DRIV6_12853 
+
+:DRIV6_12853
+131@ = 0 
+132@ = 0 
+134@ = 0 
+return 
+
+:DRIV6_12876
+if or
+  131@ == 0 
+  131@ == 1 
+jf @DRIV6_12946 
+if 
+001D:   133@ > 132@ // (int) 
+jf @DRIV6_12946 
+if 
+  33@ > 1000 
+jf @DRIV6_12946 
+gosub @DRIV6_13011 
+
+:DRIV6_12946
+if 
+  131@ == 2 
+jf @DRIV6_13009 
+if 
+03D2:   wav 1 ended 
+jf @DRIV6_13009 
+131@ = 0 
+132@ += 1 
+134@ = 0 
+00BE: text_clear_all 
+33@ = 0 
+
+:DRIV6_13009
+return 
+
+:DRIV6_13011
+if 
+  131@ == 0 
+jf @DRIV6_13047 
+03CF: load_wav 124@(132@,7i) as 1 
+131@ = 1 
+
+:DRIV6_13047
+if 
+  131@ == 1 
+jf @DRIV6_13105 
+if 
+03D0:   wav 1 loaded 
+jf @DRIV6_13105 
+00BC: show_text_highpriority GXT 110@(132@,7s) time 10000 flag 1 
+03D1: play_wav 1 
+131@ = 2 
+
+:DRIV6_13105
+return 
+
+:DRIV6_13107
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DRIV6_13175 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+
+:DRIV6_13175
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DRIV6_13193
+$WUZIMU_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'FAR_5'  // Lure
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 8000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 8000
+0998: add_respect 20 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+return 
+
+:DRIV6_13257
+if 
+   not Car.Wrecked(34@)
+jf @DRIV6_13295 
+Car.SetImmunities(34@, 0, 0, 0, 0, 0)
+0852: set_car 34@ damages_visible 1 
+
+:DRIV6_13295
+Model.Destroy(#RNCHLURE)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#DNB3)
+Model.Destroy(#DNB2)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#CELLPHONE)
+04EF: release_animation "CAR_CHAT" 
+Marker.Disable(262@)
+Marker.Disable(263@)
+Marker.Disable(264@)
+Marker.Disable(265@)
+gosub @DRIV6_9657 
+06D6: disable_racing_checkpoint 41@ 
+0151: remove_status_text $1936 
+061B: remove_references_to_AS_pack 101@ 
+014C: set_parked_car_generator $5280 cars_to_generate_to 101 
+014C: set_parked_car_generator $5281 cars_to_generate_to 101 
+014C: set_parked_car_generator $5282 cars_to_generate_to 101 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+01EB: set_traffic_density_multiplier_to 1.0 
+$ONMISSION = 0 
+mission_cleanup 
+return

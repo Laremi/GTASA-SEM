@@ -1,0 +1,4060 @@
+:SMOKE3
+thread 'SMOKE3' 
+gosub @SMOKE3_94 
+if 
+wasted_or_busted 
+jf @SMOKE3_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+gosub @SMOKE3_25128 
+
+:SMOKE3_85
+gosub @SMOKE3_25269 
+end_thread 
+
+:SMOKE3_94
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'SMOKE3' 
+set_weather 1 
+0395: clear_area 1 at 2077.58 -1695.929 150.0 radius 150.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 2000 
+
+:SMOKE3_161
+if 
+fading 
+jf @SMOKE3_185 
+wait 0 
+jump @SMOKE3_161 
+
+:SMOKE3_185
+Model.Load(#LAE_SMOKECUTSCENE)
+
+:SMOKE3_190
+if 
+   not Model.Available(#LAE_SMOKECUTSCENE)
+jf @SMOKE3_217 
+wait 0 
+jump @SMOKE3_190 
+
+:SMOKE3_217
+131@ = Object.Init(#LAE_SMOKECUTSCENE, 2055.0, -1695.0, 15.0)
+02E4: load_cutscene_data 'SMOKE3A' 
+
+:SMOKE3_251
+if 
+86B9:   not cutscene_data_loaded 
+jf @SMOKE3_275 
+wait 0 
+jump @SMOKE3_251 
+
+:SMOKE3_275
+02E7: start_cutscene 
+fade 1 1000 
+
+:SMOKE3_284
+if 
+82E9:   not cutscene_reached_end 
+jf @SMOKE3_308 
+wait 0 
+jump @SMOKE3_284 
+
+:SMOKE3_308
+fade 0 0 
+
+:SMOKE3_314
+if 
+fading 
+jf @SMOKE3_338 
+wait 0 
+jump @SMOKE3_314 
+
+:SMOKE3_338
+02EA: end_cutscene 
+01B7: release_weather 
+Model.Destroy(#LAE_SMOKECUTSCENE)
+Object.Destroy(131@)
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1500 
+fade 0 1000 
+
+:SMOKE3_385
+if 
+fading 
+jf @SMOKE3_409 
+wait 0 
+jump @SMOKE3_385 
+
+:SMOKE3_409
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+Model.Load(#STREAK)
+Model.Load(#STREAKC)
+Model.Load(#IMMMCRAN)
+Model.Load(#GLENDALE)
+Model.Load(#TAHOMA)
+Model.Load(#TEC9)
+040D: unload_wav 1 
+03CF: load_wav 35400 as 1 
+040D: unload_wav 2 
+03CF: load_wav 35803 as 2 
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+038B: load_requested_models 
+
+:SMOKE3_489
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @SMOKE3_519 
+wait 0 
+jump @SMOKE3_489 
+
+:SMOKE3_519
+if 
+823D:   not special_actor 1 loaded 
+jf @SMOKE3_545 
+wait 0 
+jump @SMOKE3_519 
+
+:SMOKE3_545
+if or
+   not Model.Available(#STREAK)
+   not Model.Available(#STREAKC)
+   not Model.Available(#IMMMCRAN)
+   not Model.Available(#TEC9)
+   not Model.Available(#GLENDALE)
+   not Model.Available(#TAHOMA)
+jf @SMOKE3_597 
+wait 0 
+jump @SMOKE3_545 
+
+:SMOKE3_597
+060A: create_decision_maker_type 0 store_to 74@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 76@ // decision\allowed\m_.ped files 
+0708: reset_decision_maker 76@ event 9 
+060A: create_decision_maker_type 0 store_to 75@ // decision\allowed\m_.ped files 
+0708: reset_decision_maker 75@ event 9 
+0708: reset_decision_maker 75@ event 12 
+0708: reset_decision_maker 75@ event 56 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0395: clear_area 0 at 1682.618 -1957.88 150.0 radius 150.0 
+06D7: enable_train_traffic 0 
+06DB: destroy_all_trains 
+06D8: 40@ = create_train_at 1725.55 -1953.278 12.5 type 11 direction 0 
+06DC: set_train 40@ acc 0.0 
+06DD: set_train 40@ speed 0.0 
+078A: 43@ = get_train 40@ carriage 1 handle 
+078A: 44@ = get_train 40@ carriage 2 handle 
+Car.SetImmunities(40@, 1, 1, 1, 1, 1)
+09CF: set_train 40@ stop_at_stations 0 
+Car.DoorStatus(40@) = 2
+Car.DoorStatus(43@) = 2
+Car.DoorStatus(44@) = 2
+Car.SetImmunities(43@, 1, 1, 1, 1, 1)
+Car.SetImmunities(44@, 1, 1, 1, 1, 1)
+0395: clear_area 1 at 2077.58 -1695.929 150.0 radius 150.0 
+0674: set_car_model #GLENDALE numberplate "_A2TMFK_" 
+78@ = Car.Create(#GLENDALE, 2058.86, -1694.612, 12.297)
+0229: set_car 78@ primary_color_to 98 secondary_color_to 14 
+Car.Angle(78@) = 271.822
+Car.Health(78@) = 1000
+$ACTOR_SMOKE = Actor.CreateAsPassenger(Mission1, #SPECIAL01, 78@, 0)
+09F6: set_actor $ACTOR_SMOKE unjackable_through_driver_seat 0 
+Actor.Health($ACTOR_SMOKE) = 500
+02A9: set_actor $ACTOR_SMOKE immune_to_nonplayer 1 
+0446: set_actor $ACTOR_SMOKE dismemberment_possible 0 
+0568: set_actor $ACTOR_SMOKE untargetable 1 
+060B: set_actor $ACTOR_SMOKE decision_maker_to 74@ 
+039E: set_actor $ACTOR_SMOKE locked 1 while_in_car 
+0526: set_actor $ACTOR_SMOKE stay_in_car_when_jacked 1 
+0828: set_max_fire_generations 1 
+041E: set_radio_station 5 
+036A: put_actor $PLAYER_ACTOR in_car 78@ 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+0A45: set_rail_tracks_friction_to 0.3 
+fade 1 500 
+0A09: set_actor $ACTOR_SMOKE muted 1 // versionB 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+80@ = 0 
+81@ = 0 
+82@ = 0 
+83@ = 0 
+84@ = 0 
+85@ = 0 
+86@ = 0 
+87@ = 0 
+88@ = 0 
+89@ = 0 
+90@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+96@ = 0 
+95@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+97@ = 0 
+107@ = 0 
+105@ = 0 
+106@ = 0 
+108@ = 0 
+109@ = 0 
+110@ = 0 
+111@ = 0 
+112@ = 0 
+114@ = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+if 
+  80@ == 0 
+jf @SMOKE3_1346 
+018A: 118@ = create_checkpoint_at 1783.211 -1933.133 12.597 
+103@ = 1 
+80@ = 1 
+
+:SMOKE3_1346
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SMOKE3_1372 
+jump @SMOKE3_25214 
+
+:SMOKE3_1372
+if 
+  80@ == 1 
+jf @SMOKE3_3167 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_3167 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_3167 
+if 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+jf @SMOKE3_3167 
+if 
+  103@ == 1 
+jf @SMOKE3_1486 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AA' time 5000 flag 1  // ~z~Where to, Smoke?
+103@ = 2 
+
+:SMOKE3_1486
+if 
+  103@ == 2 
+jf @SMOKE3_1541 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_1541 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35401 as 1 
+103@ = 3 
+
+:SMOKE3_1541
+if 
+  103@ == 3 
+jf @SMOKE3_1620 
+if 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+jf @SMOKE3_1620 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_1620 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AB' time 5000 flag 1  // ~z~Unity Station.
+103@ = 4 
+
+:SMOKE3_1620
+if 
+  103@ == 4 
+jf @SMOKE3_1689 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_1689 
+00BE: text_clear_all 
+040D: unload_wav 1 
+00BC: show_text_highpriority GXT 'SMK3_1' time 5000 flag 1  // ~s~Drive to ~y~Unity Station~s~.
+103@ = 5 
+32@ = 0 
+
+:SMOKE3_1689
+if and
+  103@ == 5 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+  32@ > 5000 
+jf @SMOKE3_1768 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_1768 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35402 as 1 
+103@ = 6 
+
+:SMOKE3_1768
+if and
+  103@ == 6 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_1844 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_1844 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AC' time 5000 flag 1  // ~z~You know the parable of the wise sheep Carl?
+103@ = 7 
+
+:SMOKE3_1844
+if and
+  103@ == 7 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_1915 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_1915 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35403 as 1 
+103@ = 8 
+
+:SMOKE3_1915
+if and
+  103@ == 8 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_1991 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_1991 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AD' time 5000 flag 1  // ~z~No. I don't think I do.
+103@ = 9 
+
+:SMOKE3_1991
+if and
+  103@ == 9 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2062 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2062 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35404 as 1 
+103@ = 10 
+
+:SMOKE3_2062
+if and
+  103@ == 10 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2138 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2138 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AE' time 5000 flag 1  // ~z~Well, you should pay attention to what I'm going to say.
+103@ = 11 
+
+:SMOKE3_2138
+if and
+  103@ == 11 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2209 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2209 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35405 as 1 
+103@ = 12 
+
+:SMOKE3_2209
+if and
+  103@ == 12 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2285 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2285 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AF' time 5000 flag 1  // ~z~Okay
+103@ = 13 
+
+:SMOKE3_2285
+if and
+  103@ == 13 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2356 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2356 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35406 as 1 
+103@ = 14 
+
+:SMOKE3_2356
+if and
+  103@ == 14 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2432 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2432 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AG' time 5000 flag 1  // ~z~The wise sheep does what he says, and only eats the greenest grass,
+103@ = 15 
+
+:SMOKE3_2432
+if and
+  103@ == 15 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2503 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2503 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35407 as 1 
+103@ = 16 
+
+:SMOKE3_2503
+if and
+  103@ == 16 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2579 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2579 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AH' time 5000 flag 1  // ~z~while the foolish sheep gets eaten alive by heathens.
+103@ = 17 
+
+:SMOKE3_2579
+if and
+  103@ == 17 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2650 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2650 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35408 as 1 
+103@ = 18 
+
+:SMOKE3_2650
+if and
+  103@ == 18 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2726 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2726 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AJ' time 5000 flag 1  // ~z~What are you talking about?
+103@ = 19 
+
+:SMOKE3_2726
+if and
+  103@ == 19 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2797 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2797 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35409 as 1 
+103@ = 20 
+
+:SMOKE3_2797
+if and
+  103@ == 20 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2873 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_2873 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AK' time 5000 flag 1  // ~z~I'm thinking of going into the ministry in later life.
+103@ = 21 
+
+:SMOKE3_2873
+if and
+  103@ == 21 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_2944 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_2944 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35410 as 1 
+103@ = 22 
+
+:SMOKE3_2944
+if and
+  103@ == 22 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_3020 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_3020 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AL' time 5000 flag 1  // ~z~Just testing shit out.
+103@ = 23 
+
+:SMOKE3_3020
+if and
+  103@ == 23 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_3091 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_3091 
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35411 as 1 
+103@ = 24 
+
+:SMOKE3_3091
+if and
+  103@ == 24 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_3167 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_3167 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_AM' time 2000 flag 1  // ~z~Whatever.
+103@ = 25 
+
+:SMOKE3_3167
+if 
+  94@ == 0 
+jf @SMOKE3_3449 
+if or
+  80@ == 1 
+  80@ == 10 
+jf @SMOKE3_3449 
+if 
+  92@ == 0 
+jf @SMOKE3_3323 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_3323 
+if 
+8448:   not actor $PLAYER_ACTOR in_car 78@ 
+jf @SMOKE3_3323 
+123@ = Marker.CreateAboveCar(78@)
+07E0: set_marker 123@ type_to 1 
+Marker.Disable(118@)
+00BE: text_clear_all 
+040D: unload_wav 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMOX_AD' time 2000 flag 1  // ~z~Come on, playa, get in!
+80@ = 10 
+92@ = 1 
+
+:SMOKE3_3323
+if 
+  92@ == 1 
+jf @SMOKE3_3449 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_3449 
+if 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+jf @SMOKE3_3449 
+Marker.Disable(123@)
+018A: 118@ = create_checkpoint_at 1783.211 -1933.133 12.597 
+if 
+  103@ == 25 
+jf @SMOKE3_3435 
+00BC: show_text_highpriority GXT 'SMK3_1' time 12000 flag 1  // ~s~Drive to ~y~Unity Station~s~.
+
+:SMOKE3_3435
+80@ = 1 
+92@ = 0 
+
+:SMOKE3_3449
+if or
+  80@ == 1 
+  80@ == 10 
+jf @SMOKE3_3513 
+if 
+   Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_3513 
+00BC: show_text_highpriority GXT 'SMK3_21' time 5000 flag 1  // ~r~Big Smoke died!
+jump @SMOKE3_25128 
+
+:SMOKE3_3513
+if 
+  80@ == 1 
+jf @SMOKE3_11764 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_11764 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_4370 
+if 
+  81@ == 0 
+jf @SMOKE3_4370 
+if 
+0448:   actor $ACTOR_SMOKE in_car 78@ 
+jf @SMOKE3_4370 
+if 
+0448:   actor $PLAYER_ACTOR in_car 78@ 
+jf @SMOKE3_4370 
+if 
+01AD:   car 78@ sphere 1 near_point 1783.211 -1933.133 radius 4.2 4.2 
+jf @SMOKE3_4370 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:SMOKE3_3675
+if 
+fading 
+jf @SMOKE3_3699 
+wait 0 
+jump @SMOKE3_3675 
+
+:SMOKE3_3699
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_3745 
+Car.PutAt(78@, 1783.418, -1933.055, 12.3862)
+Car.Angle(78@) = 178.4615
+
+:SMOKE3_3745
+Model.Load(#LSV1)
+Model.Load(#LSV2)
+Model.Load(#LSV3)
+Model.Load(#BALLAS3)
+Model.Load(#MP5LNG)
+Model.Load(#SANCHEZ)
+Model.Load(#TRNTRK8_LAS)
+04ED: load_animation "TRAIN" 
+04ED: load_animation "GANGS" 
+040D: unload_wav 1 
+03CF: load_wav 35412 as 1 
+040D: unload_wav 2 
+03CF: load_wav 35413 as 2 
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+04ED: load_animation "GANGS" 
+04ED: load_animation "TRAIN" 
+038B: load_requested_models 
+
+:SMOKE3_3853
+if or
+84EE:   not animation "GANGS" loaded 
+84EE:   not animation "TRAIN" loaded 
+jf @SMOKE3_3893 
+wait 0 
+jump @SMOKE3_3853 
+
+:SMOKE3_3893
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @SMOKE3_3923 
+wait 0 
+jump @SMOKE3_3893 
+
+:SMOKE3_3923
+if or
+   not Model.Available(#LSV1)
+   not Model.Available(#LSV2)
+   not Model.Available(#LSV3)
+   not Model.Available(#BALLAS3)
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#MP5LNG)
+jf @SMOKE3_3971 
+wait 0 
+jump @SMOKE3_3923 
+
+:SMOKE3_3971
+Camera.SetAtPos(1684.53, -1948.48, 20.66)
+0395: clear_area 0 at 1682.618 -1957.88 150.0 radius 150.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+94@ = 1 
+Marker.Disable(118@)
+0395: clear_area 0 at 1699.31 -1938.799 100.0 radius 100.0 
+52@ = Object.Init(#IMMMCRAN, 2194.438, -1912.756, 11.907)
+Object.Angle(52@) = 0.0
+34@ = Actor.Create(Mission1, #LSV1, 1682.546, -1959.222, 20.99)
+Actor.Angle(34@) = 0.0
+0648: unknown_actor 34@ task_set 500.0 // float 
+Actor.SetImmunities(34@, 1, 1, 1, 1, 1)
+060B: set_actor 34@ decision_maker_to 75@ 
+35@ = Actor.Create(Mission1, #LSV3, 1682.546, -1958.222, 20.99)
+Actor.Angle(35@) = 180.0
+0648: unknown_actor 35@ task_set 500.0 // float 
+Actor.SetImmunities(35@, 1, 1, 1, 1, 1)
+060B: set_actor 35@ decision_maker_to 75@ 
+36@ = Actor.Create(Mission1, #LSV2, 1681.038, -1958.03, 20.99)
+Actor.Angle(36@) = 182.467
+0648: unknown_actor 36@ task_set 500.0 // float 
+Actor.SetImmunities(36@, 1, 1, 1, 1, 1)
+060B: set_actor 36@ decision_maker_to 75@ 
+37@ = Actor.Create(Mission1, #LSV3, 1681.129, -1959.63, 20.99)
+Actor.Angle(37@) = 6.22
+0648: unknown_actor 37@ task_set 500.0 // float 
+Actor.SetImmunities(37@, 1, 1, 1, 1, 1)
+060B: set_actor 37@ decision_maker_to 75@ 
+81@ = 1 
+
+:SMOKE3_4370
+if 
+  81@ == 1 
+jf @SMOKE3_4599 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SMOKE3_4599 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_4599 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_4599 
+0395: clear_area 0 at 1682.618 -1957.88 150.0 radius 150.0 
+Camera.SetPosition(1780.728, -1937.955, 13.443, 0.0, 0.0, 0.0)
+Camera.PointAt(1781.311, -1937.148, 13.3475, 2)
+Camera.SetAtPos(1687.04, -1946.6, 21.79)
+0A0B: set_rendering_origin_at_3D_coord 1735.16 -1945.29 14.44 angle 88.46 
+fade 1 750 
+03D1: play_wav 1 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BA' time 5000 flag 1  // ~z~What we looking for, Smoke?
+32@ = 0 
+81@ = 2 
+
+:SMOKE3_4599
+if 
+  81@ == 2 
+jf @SMOKE3_4822 
+if 
+  32@ > 1000 
+jf @SMOKE3_4822 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_4822 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_4822 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_4822 
+00BE: text_clear_all 
+040D: unload_wav 1 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 35414 as 1 
+03D1: play_wav 2 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BB' time 5000 flag 1  // ~z~Some Vagos cats meeting some San Fierro Rifa, cutting some kind of deal.
+101@ = 0 
+0707: start_scene_skip_to @SMOKE3_9553 
+05CD: AS_actor $ACTOR_SMOKE exit_car 78@ 
+wait 100 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_4784 
+05BF: AS_actor $ACTOR_SMOKE look_at_actor $PLAYER_ACTOR 3500 ms 
+
+:SMOKE3_4784
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_4808 
+05CD: AS_actor $PLAYER_ACTOR exit_car 78@ 
+
+:SMOKE3_4808
+32@ = 0 
+81@ = 3 
+
+:SMOKE3_4822
+if 
+  81@ == 3 
+jf @SMOKE3_5095 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SMOKE3_5095 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_5095 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_5095 
+if 
+   not Actor.Driving($ACTOR_SMOKE)
+jf @SMOKE3_5095 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @SMOKE3_5095 
+Camera.SetPosition(1778.61, -1938.675, 12.9064, 0.0, 0.0, 0.0)
+Camera.PointAt(1779.275, -1937.944, 13.0581, 2)
+Actor.PutAt($PLAYER_ACTOR, 1783.92, -1936.33, 12.6)
+Actor.Angle($PLAYER_ACTOR) = 117.0
+05D3: AS_actor $ACTOR_SMOKE goto_point 1775.3 -1939.23 12.9 mode 4 time -1 ms // versionA 
+0615: define_AS_pack_begin 64@ 
+05BF: AS_actor -1 look_at_actor $ACTOR_SMOKE 10000 ms 
+05D3: AS_actor -1 goto_point 1776.63 -1940.18 13.66 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 64@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 64@ 
+061B: remove_references_to_AS_pack 64@ 
+32@ = 0 
+81@ = 4 
+
+:SMOKE3_5095
+if 
+  81@ == 4 
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_5505 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_5505 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_5505 
+if 
+8449:   not actor $ACTOR_SMOKE in_a_car 
+jf @SMOKE3_5505 
+if 
+8449:   not actor $PLAYER_ACTOR in_a_car 
+jf @SMOKE3_5505 
+if 
+03D2:   wav 2 ended 
+jf @SMOKE3_5505 
+if 
+  32@ > 3000 
+jf @SMOKE3_5505 
+03D1: play_wav 1 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BC' time 5000 flag 1  // ~z~San Fierro?
+Camera.SetPosition(1732.47, -1945.045, 12.9171, 0.0, 0.0, 0.0)
+Camera.PointAt(1731.492, -1945.129, 13.1107, 2)
+Actor.PutAt($ACTOR_SMOKE, 1737.2, -1944.2, 12.6)
+Actor.Angle($ACTOR_SMOKE) = 88.5
+Actor.PutAt($PLAYER_ACTOR, 1737.2, -1945.7, 12.6)
+Actor.Angle($PLAYER_ACTOR) = 88.5
+05D3: AS_actor $ACTOR_SMOKE goto_point 1718.04 -1944.2 13.6 mode 4 time -1 ms // versionA 
+05D3: AS_actor $PLAYER_ACTOR goto_point 1718.04 -1945.7 13.6 mode 4 time -1 ms // versionA 
+040D: unload_wav 2 
+03CF: load_wav 35415 as 2 
+32@ = 0 
+81@ = 5 
+
+:SMOKE3_5505
+if 
+  81@ == 5 
+jf @SMOKE3_5593 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_5593 
+00BE: text_clear_all 
+040D: unload_wav 1 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 35416 as 1 
+03D1: play_wav 2 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BD' time 5000 flag 1  // ~z~I thought Northern Mexicans don't mix with Los Santos eses.
+81@ = 6 
+
+:SMOKE3_5593
+if 
+  81@ == 6 
+jf @SMOKE3_5704 
+if 
+03D2:   wav 2 ended 
+jf @SMOKE3_5704 
+00BE: text_clear_all 
+040D: unload_wav 2 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 35417 as 2 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_5690 
+03D1: play_wav 1 
+0967: actor $ACTOR_SMOKE move_mouth 3000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BE' time 5000 flag 1  // ~z~Shit, you got me.
+
+:SMOKE3_5690
+32@ = 0 
+81@ = 7 
+
+:SMOKE3_5704
+if 
+  81@ == 7 
+jf @SMOKE3_6165 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_6165 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_6165 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_6165 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_6165 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_6165 
+if 
+  32@ > 1500 
+jf @SMOKE3_6165 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_6165 
+Camera.SetPosition(1726.028, -1944.924, 13.9132, 0.0, 0.0, 0.0)
+Camera.PointAt(1725.059, -1945.168, 13.9694, 2)
+0605: actor 35@ perform_animation "HNDSHKAA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor 34@ perform_animation "HNDSHKAA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor 37@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor 36@ perform_animation "PRTIAL_GNGTLKG" IFP "GANGS" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1724.08, -1946.27, 12.5)
+Actor.Angle($PLAYER_ACTOR) = 86.93
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+Actor.PutAt($ACTOR_SMOKE, 1723.93, -1944.52, 12.5)
+Actor.Angle($ACTOR_SMOKE) = 93.27
+03D1: play_wav 2 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BF' time 5000 flag 1  // ~z~That look like them!
+040D: unload_wav 1 
+03CF: load_wav 35418 as 1 
+32@ = 0 
+81@ = 8 
+
+:SMOKE3_6165
+if 
+  81@ == 8 
+jf @SMOKE3_6384 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_6384 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_6384 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_6384 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_6384 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_6384 
+062E: get_actor 34@ task 1541 status_store_to 38@ // ret 7 if not found 
+if or
+04A4:   38@ == 7 // == constant 
+  32@ > 1750 
+jf @SMOKE3_6384 
+05BF: AS_actor 34@ look_at_actor $ACTOR_SMOKE 10000 ms 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_6338 
+05BF: AS_actor 35@ look_at_actor $PLAYER_ACTOR 10000 ms 
+
+:SMOKE3_6338
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_6365 
+05BF: AS_actor 36@ look_at_actor $PLAYER_ACTOR 10000 ms 
+
+:SMOKE3_6365
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+32@ = 0 
+81@ = 9 
+
+:SMOKE3_6384
+if 
+  81@ == 9 
+jf @SMOKE3_6690 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_6690 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_6690 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_6690 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_6690 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_6690 
+if 
+03D2:   wav 2 ended 
+jf @SMOKE3_6690 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_6690 
+if 
+  32@ > 0 
+jf @SMOKE3_6690 
+040D: unload_wav 2 
+03CF: load_wav 35419 as 2 
+Camera.SetPosition(1721.344, -1943.875, 13.8732, 0.0, 0.0, 0.0)
+Camera.PointAt(1722.211, -1944.373, 13.8443, 2)
+05BF: AS_actor $PLAYER_ACTOR look_at_actor $ACTOR_SMOKE 10000 ms 
+03D1: play_wav 1 
+0967: actor $ACTOR_SMOKE move_mouth 3000 ms 
+00BC: show_text_highpriority GXT 'SMO3_BG' time 5000 flag 1  // ~z~Motherfuckers clocked us!
+0605: actor $ACTOR_SMOKE perform_animation "PRTIAL_GNGTLKC" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+33@ = 0 
+81@ = 10 
+
+:SMOKE3_6690
+if 
+  81@ == 10 
+jf @SMOKE3_7370 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_7370 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_7370 
+00BE: text_clear_all 
+54@ = Car.Create(#SANCHEZ, 1778.624, -1939.905, 12.5598)
+Car.Angle(54@) = 176.7993
+Car.Health(54@) = 10000
+053F: set_car 54@ tires_vulnerability 0 
+Car.SetImmunities(54@, 1, 1, 1, 1, 1)
+0229: set_car 54@ primary_color_to 6 secondary_color_to 6 
+114@ = 1 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_6851 
+Car.Health(78@) = 10000
+053F: set_car 78@ tires_vulnerability 0 
+
+:SMOKE3_6851
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_6929 
+0792: disembark_instantly_actor 34@ 
+Actor.PutAt(34@, 1682.254, -1953.64, 20.985)
+Actor.Angle(34@) = 266.36
+05D3: AS_actor 34@ goto_point 1799.49 -1953.73 12.23 mode 6 time 50000 ms // versionA 
+
+:SMOKE3_6929
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_7007 
+0792: disembark_instantly_actor 35@ 
+Actor.PutAt(35@, 1679.256, -1953.635, 20.985)
+Actor.Angle(35@) = 266.36
+05D3: AS_actor 35@ goto_point 1799.49 -1953.73 12.23 mode 6 time 50000 ms // versionA 
+
+:SMOKE3_7007
+wait 250 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_7090 
+0792: disembark_instantly_actor 36@ 
+Actor.PutAt(36@, 1676.74, -1953.59, 20.985)
+Actor.Angle(36@) = 266.36
+05D3: AS_actor 36@ goto_point 1799.49 -1953.73 12.23 mode 6 time 50000 ms // versionA 
+
+:SMOKE3_7090
+wait 250 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_7173 
+0792: disembark_instantly_actor 37@ 
+Actor.PutAt(37@, 1675.3, -1953.67, 20.985)
+Actor.Angle(37@) = 266.389
+05D3: AS_actor 37@ goto_point 1799.49 -1953.73 12.23 mode 6 time 50000 ms // versionA 
+
+:SMOKE3_7173
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_7206 
+06DD: set_train 40@ speed 15.0 
+86@ = 1 
+
+:SMOKE3_7206
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 1703.548 -1951.496 16.9714 position_to 1750.548 -1951.496 16.9714 time 10000 smooth_transition 1 
+0920: point_camera 1702.549 -1951.514 16.9159 transverse_to 1702.549 -1951.514 16.9159 time 10000 smooth_transition 1 
+33@ = 0 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_7363 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+Actor.PutAt($PLAYER_ACTOR, 1715.0, -1946.79, 12.6)
+Actor.PutAt($ACTOR_SMOKE, 1712.36, -1944.47, 12.6)
+
+:SMOKE3_7363
+81@ = 11 
+
+:SMOKE3_7370
+if 
+  81@ > 10 
+jf @SMOKE3_8311 
+if 
+  14 > 81@ 
+jf @SMOKE3_8311 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_8311 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_8311 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_8311 
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_8311 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_8311 
+if 
+   not Car.Wrecked(43@)
+jf @SMOKE3_8311 
+if 
+   not Car.Wrecked(44@)
+jf @SMOKE3_8311 
+0407: store_coords_to 46@ 47@ 48@ from_car 43@ with_offset 0.0 9.84 3.0 
+0407: store_coords_to 49@ 50@ 51@ from_car 44@ with_offset 0.0 9.84 3.0 
+if 
+   not 81@ > 11 
+jf @SMOKE3_7623 
+Actor.StorePos(35@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+Camera.PointAt($TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, 18.0, 2)
+
+:SMOKE3_7623
+if 
+  82@ == 0 
+jf @SMOKE3_7737 
+if 
+00FE:   actor 34@ sphere 0 in_sphere 49@ 50@ 51@ radius 2.0 2.0 2.0 
+jf @SMOKE3_7737 
+0605: actor $PLAYER_ACTOR perform_animation "FUCKU" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_24976 
+82@ = 1 
+
+:SMOKE3_7737
+if 
+  82@ == 1 
+jf @SMOKE3_7819 
+if 
+00FE:   actor 34@ sphere 0 in_sphere 46@ 47@ 48@ radius 2.0 2.0 2.0 
+jf @SMOKE3_7819 
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_24976 
+82@ = 2 
+
+:SMOKE3_7819
+if 
+  83@ == 0 
+jf @SMOKE3_7901 
+if 
+00FE:   actor 35@ sphere 0 in_sphere 49@ 50@ 51@ radius 2.0 2.0 2.0 
+jf @SMOKE3_7901 
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_24976 
+83@ = 1 
+
+:SMOKE3_7901
+if 
+  83@ == 1 
+jf @SMOKE3_7983 
+if 
+00FE:   actor 35@ sphere 0 in_sphere 46@ 47@ 48@ radius 2.0 2.0 2.0 
+jf @SMOKE3_7983 
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_24976 
+83@ = 2 
+
+:SMOKE3_7983
+if 
+  84@ == 0 
+jf @SMOKE3_8065 
+if 
+00FE:   actor 36@ sphere 0 in_sphere 49@ 50@ 51@ radius 2.0 2.0 2.0 
+jf @SMOKE3_8065 
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_24976 
+84@ = 1 
+
+:SMOKE3_8065
+if 
+  84@ == 1 
+jf @SMOKE3_8147 
+if 
+00FE:   actor 36@ sphere 0 in_sphere 46@ 47@ 48@ radius 2.0 2.0 2.0 
+jf @SMOKE3_8147 
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_24976 
+84@ = 2 
+
+:SMOKE3_8147
+if 
+  85@ == 0 
+jf @SMOKE3_8229 
+if 
+00FE:   actor 37@ sphere 0 in_sphere 49@ 50@ 51@ radius 2.0 2.0 2.0 
+jf @SMOKE3_8229 
+0085: 61@ = 37@ // (int) 
+gosub @SMOKE3_24976 
+85@ = 1 
+
+:SMOKE3_8229
+if 
+  85@ == 1 
+jf @SMOKE3_8311 
+if 
+00FE:   actor 37@ sphere 0 in_sphere 46@ 47@ 48@ radius 2.0 2.0 2.0 
+jf @SMOKE3_8311 
+0085: 61@ = 37@ // (int) 
+gosub @SMOKE3_24976 
+85@ = 2 
+
+:SMOKE3_8311
+if 
+  81@ == 11 
+jf @SMOKE3_8445 
+if 
+  33@ > 4200 
+jf @SMOKE3_8445 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_8445 
+05D3: AS_actor $ACTOR_SMOKE goto_point 1765.99 -1944.25 13.75 mode 6 time 100000 ms // versionA 
+05D3: AS_actor $PLAYER_ACTOR goto_point 1771.1 -1946.12 13.75 mode 6 time 100000 ms // versionA 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO3_BH' time 5000 flag 1  // ~z~We got to get those fools!
+81@ = 12 
+
+:SMOKE3_8445
+if 
+  81@ == 12 
+jf @SMOKE3_8491 
+if 
+03D2:   wav 2 ended 
+jf @SMOKE3_8491 
+040D: unload_wav 2 
+00BE: text_clear_all 
+81@ = 13 
+
+:SMOKE3_8491
+if 
+  81@ == 13 
+jf @SMOKE3_8566 
+if 
+  33@ > 8000 
+jf @SMOKE3_8566 
+fade 0 500 
+
+:SMOKE3_8535
+if 
+fading 
+jf @SMOKE3_8559 
+wait 0 
+jump @SMOKE3_8535 
+
+:SMOKE3_8559
+81@ = 14 
+
+:SMOKE3_8566
+if 
+  81@ == 14 
+jf @SMOKE3_9512 
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_9512 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_9512 
+07C7: put_train 40@ at 1880.06 -1953.67 12.44 
+06DD: set_train 40@ speed 10.0 
+Actor.DestroyInstantly(34@)
+Actor.DestroyInstantly(35@)
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+34@ = Actor.Create(Mission1, #LSV1, 1682.618, -1957.88, 20.9453)
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 34@ dismemberment_possible 0 
+35@ = Actor.Create(Mission1, #LSV3, 1682.99, -1947.17, 20.03)
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 35@ dismemberment_possible 0 
+36@ = Actor.Create(Mission1, #LSV3, 1681.618, -1957.88, 20.9453)
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 36@ dismemberment_possible 0 
+37@ = Actor.Create(Mission4, #LSV3, 1682.5, -1945.17, 20.033)
+0085: 61@ = 37@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 37@ dismemberment_possible 0 
+Actor.SetImmunities(34@, 0, 0, 1, 0, 0)
+Actor.SetImmunities(35@, 0, 0, 1, 0, 0)
+Actor.SetImmunities(36@, 0, 0, 1, 0, 0)
+0464: put_actor 34@ into_turret_on_car 40@ at_car_offset 0.0 5.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 35@ into_turret_on_car 40@ at_car_offset 0.0 2.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 36@ into_turret_on_car 40@ at_car_offset 0.0 -3.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 37@ into_turret_on_car 40@ at_car_offset 0.0 -6.1 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+060B: set_actor 34@ decision_maker_to 75@ 
+060B: set_actor 35@ decision_maker_to 75@ 
+060B: set_actor 36@ decision_maker_to 75@ 
+060B: set_actor 37@ decision_maker_to 76@ 
+Actor.WeaponAccuracy(34@) = 10
+Actor.WeaponAccuracy(35@) = 10
+Actor.WeaponAccuracy(36@) = 10
+Actor.WeaponAccuracy(37@) = 10
+07DD: set_actor 34@ attack_rate 20 // previously known as temper_to 
+07DD: set_actor 35@ attack_rate 20 // previously known as temper_to 
+07DD: set_actor 36@ attack_rate 30 // previously known as temper_to 
+07DD: set_actor 37@ attack_rate 20 // previously known as temper_to 
+if 
+  98@ == 0 
+jf @SMOKE3_9177 
+Actor.SetMaxHealth(34@, 500)
+Actor.SetMaxHealth(35@, 500)
+Actor.SetMaxHealth(36@, 500)
+Actor.Health(34@) = 500
+Actor.Health(35@) = 500
+Actor.Health(36@) = 500
+
+:SMOKE3_9177
+if 
+  98@ == 1 
+jf @SMOKE3_9243 
+Actor.SetMaxHealth(34@, 480)
+Actor.SetMaxHealth(35@, 500)
+Actor.SetMaxHealth(36@, 450)
+Actor.Health(34@) = 480
+Actor.Health(35@) = 500
+Actor.Health(36@) = 450
+
+:SMOKE3_9243
+if 
+  98@ == 2 
+jf @SMOKE3_9309 
+Actor.SetMaxHealth(34@, 450)
+Actor.SetMaxHealth(35@, 450)
+Actor.SetMaxHealth(36@, 450)
+Actor.Health(34@) = 450
+Actor.Health(35@) = 450
+Actor.Health(36@) = 450
+
+:SMOKE3_9309
+if 
+  98@ == 3 
+jf @SMOKE3_9375 
+Actor.SetMaxHealth(34@, 350)
+Actor.SetMaxHealth(35@, 350)
+Actor.SetMaxHealth(36@, 350)
+Actor.Health(34@) = 350
+Actor.Health(35@) = 350
+Actor.Health(36@) = 350
+
+:SMOKE3_9375
+if 
+  98@ > 3 
+jf @SMOKE3_9441 
+Actor.SetMaxHealth(34@, 300)
+Actor.SetMaxHealth(35@, 300)
+Actor.SetMaxHealth(36@, 300)
+Actor.Health(34@) = 300
+Actor.Health(35@) = 300
+Actor.Health(36@) = 300
+
+:SMOKE3_9441
+Actor.SetImmunities(37@, 1, 1, 1, 1, 1)
+119@ = Marker.CreateAboveActor(34@)
+120@ = Marker.CreateAboveActor(35@)
+121@ = Marker.CreateAboveActor(36@)
+122@ = Marker.CreateAboveActor(37@)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+32@ = 0 
+81@ = 15 
+
+:SMOKE3_9512
+if 
+  81@ == 15 
+jf @SMOKE3_11764 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_11764 
+101@ = 1 
+
+:SMOKE3_9553
+0701: end_scene_skip 
+if 
+  101@ == 0 
+jf @SMOKE3_10963 
+fade 0 0 
+
+:SMOKE3_9579
+if 
+fading 
+jf @SMOKE3_9603 
+wait 0 
+jump @SMOKE3_9579 
+
+:SMOKE3_9603
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+Actor.DestroyInstantly(34@)
+Actor.DestroyInstantly(35@)
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+06D9: destroy_defined_trains 
+Object.Destroy(52@)
+52@ = Object.Init(#IMMMCRAN, 2194.438, -1912.756, 11.907)
+Object.Angle(52@) = 0.0
+06D8: 40@ = create_train_at 1880.06 -1953.67 12.44 type 11 direction 0 
+09CF: set_train 40@ stop_at_stations 0 
+06DC: set_train 40@ acc 10.0 
+06DD: set_train 40@ speed 10.0 
+078A: 43@ = get_train 40@ carriage 1 handle 
+078A: 44@ = get_train 40@ carriage 2 handle 
+Car.SetImmunities(40@, 1, 1, 1, 1, 1)
+Car.DoorStatus(40@) = 2
+Car.DoorStatus(43@) = 2
+Car.DoorStatus(44@) = 2
+Car.SetImmunities(43@, 1, 1, 1, 1, 1)
+Car.SetImmunities(44@, 1, 1, 1, 1, 1)
+34@ = Actor.Create(Mission1, #LSV1, 1682.618, -1957.88, 20.9453)
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 34@ dismemberment_possible 0 
+35@ = Actor.Create(Mission1, #LSV3, 1682.99, -1947.17, 20.03)
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 35@ dismemberment_possible 0 
+36@ = Actor.Create(Mission1, #LSV3, 1681.618, -1957.88, 20.9453)
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 36@ dismemberment_possible 0 
+37@ = Actor.Create(Mission4, #LSV3, 1682.5, -1945.17, 20.033)
+0085: 61@ = 37@ // (int) 
+gosub @SMOKE3_25033 
+0446: set_actor 37@ dismemberment_possible 0 
+Actor.SetImmunities(34@, 0, 0, 1, 0, 0)
+Actor.SetImmunities(35@, 0, 0, 1, 0, 0)
+Actor.SetImmunities(36@, 0, 0, 1, 0, 0)
+0464: put_actor 34@ into_turret_on_car 40@ at_car_offset 0.0 5.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 35@ into_turret_on_car 40@ at_car_offset 0.0 2.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 36@ into_turret_on_car 40@ at_car_offset 0.0 -3.0 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+0464: put_actor 37@ into_turret_on_car 40@ at_car_offset 0.0 -6.1 3.0 position 0 shooting_angle_limit 360.0 with_weapon 29 
+060B: set_actor 34@ decision_maker_to 75@ 
+060B: set_actor 35@ decision_maker_to 75@ 
+060B: set_actor 36@ decision_maker_to 75@ 
+060B: set_actor 37@ decision_maker_to 76@ 
+Actor.WeaponAccuracy(34@) = 10
+Actor.WeaponAccuracy(35@) = 10
+Actor.WeaponAccuracy(36@) = 10
+Actor.WeaponAccuracy(37@) = 10
+07DD: set_actor 34@ attack_rate 20 // previously known as temper_to 
+07DD: set_actor 35@ attack_rate 20 // previously known as temper_to 
+07DD: set_actor 36@ attack_rate 30 // previously known as temper_to 
+07DD: set_actor 37@ attack_rate 20 // previously known as temper_to 
+if 
+  98@ == 0 
+jf @SMOKE3_10341 
+Actor.SetMaxHealth(34@, 500)
+Actor.SetMaxHealth(35@, 500)
+Actor.SetMaxHealth(36@, 500)
+Actor.Health(34@) = 500
+Actor.Health(35@) = 500
+Actor.Health(36@) = 500
+
+:SMOKE3_10341
+if 
+  98@ == 1 
+jf @SMOKE3_10407 
+Actor.SetMaxHealth(34@, 480)
+Actor.SetMaxHealth(35@, 500)
+Actor.SetMaxHealth(36@, 450)
+Actor.Health(34@) = 480
+Actor.Health(35@) = 500
+Actor.Health(36@) = 450
+
+:SMOKE3_10407
+if 
+  98@ == 2 
+jf @SMOKE3_10473 
+Actor.SetMaxHealth(34@, 450)
+Actor.SetMaxHealth(35@, 450)
+Actor.SetMaxHealth(36@, 450)
+Actor.Health(34@) = 450
+Actor.Health(35@) = 450
+Actor.Health(36@) = 450
+
+:SMOKE3_10473
+if 
+  98@ == 3 
+jf @SMOKE3_10539 
+Actor.SetMaxHealth(34@, 300)
+Actor.SetMaxHealth(35@, 350)
+Actor.SetMaxHealth(36@, 350)
+Actor.Health(34@) = 300
+Actor.Health(35@) = 350
+Actor.Health(36@) = 350
+
+:SMOKE3_10539
+if 
+  98@ > 3 
+jf @SMOKE3_10605 
+Actor.SetMaxHealth(34@, 300)
+Actor.SetMaxHealth(35@, 300)
+Actor.SetMaxHealth(36@, 300)
+Actor.Health(34@) = 300
+Actor.Health(35@) = 300
+Actor.Health(36@) = 300
+
+:SMOKE3_10605
+119@ = Marker.CreateAboveActor(34@)
+120@ = Marker.CreateAboveActor(35@)
+121@ = Marker.CreateAboveActor(36@)
+122@ = Marker.CreateAboveActor(37@)
+if 
+  114@ == 0 
+jf @SMOKE3_10727 
+54@ = Car.Create(#SANCHEZ, 1778.624, -1939.905, 12.5598)
+Car.Angle(54@) = 176.7993
+Car.Health(54@) = 10000
+Car.SetImmunities(54@, 1, 1, 1, 1, 1)
+053F: set_car 54@ tires_vulnerability 0 
+0229: set_car 54@ primary_color_to 6 secondary_color_to 6 
+
+:SMOKE3_10727
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_10758 
+Car.Health(78@) = 10000
+053F: set_car 78@ tires_vulnerability 0 
+
+:SMOKE3_10758
+Actor.SetImmunities(37@, 1, 1, 1, 1, 1)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_10872 
+if 
+   Actor.Driving($ACTOR_SMOKE)
+jf @SMOKE3_10842 
+0362: remove_actor $ACTOR_SMOKE from_car_and_place_at 1772.918 -1941.495 12.567 
+Actor.Angle($ACTOR_SMOKE) = 269.216
+jump @SMOKE3_10872 
+
+:SMOKE3_10842
+Actor.PutAt($ACTOR_SMOKE, 1772.918, -1941.495, 12.567)
+Actor.Angle($ACTOR_SMOKE) = 269.216
+
+:SMOKE3_10872
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SMOKE3_10925 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1774.065 -1943.003 12.558 
+Actor.Angle($PLAYER_ACTOR) = 263.195
+jump @SMOKE3_10955 
+
+:SMOKE3_10925
+Actor.PutAt($PLAYER_ACTOR, 1774.065, -1943.003, 12.558)
+Actor.Angle($PLAYER_ACTOR) = 263.195
+
+:SMOKE3_10955
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+
+:SMOKE3_10963
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_11270 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 1 
+Actor.PutAt($PLAYER_ACTOR, 1774.065, -1943.003, 12.558)
+Actor.Angle($PLAYER_ACTOR) = 263.195
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_11066 
+Actor.PutAt($ACTOR_SMOKE, 1772.918, -1941.495, 12.567)
+Actor.Angle($ACTOR_SMOKE) = 269.216
+
+:SMOKE3_11066
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+06F0: set_group $PLAYER_GROUP distance_limit_to 30.0 
+06AE: create_group_decision_maker_type 0 store_to 77@ // decision\allowed\mission.grp 
+0749: reset_group_decision_maker 77@ event 9 
+0749: reset_group_decision_maker 77@ event 41 
+0749: reset_group_decision_maker 77@ event 36 
+06AD: set_group $PLAYER_GROUP group_decision_maker_to 77@ 
+077A: set_actor $ACTOR_SMOKE acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+060B: set_actor $ACTOR_SMOKE decision_maker_to 74@ 
+0688: AS_actor $ACTOR_SMOKE unknown_toggle_ped_threat_scanner 0 1 0 
+074A: set_group_decision_maker 77@ on_event 36 taskID 1510 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+0709: set_decision_maker 74@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+01EB: set_traffic_density_multiplier_to 0.5 
+03DE: set_pedestrians_density_multiplier_to 0.5 
+
+:SMOKE3_11270
+00BE: text_clear_all 
+if 
+   not Car.Wrecked(54@)
+jf @SMOKE3_11303 
+125@ = Marker.CreateAboveCar(54@)
+07E0: set_marker 125@ type_to 1 
+
+:SMOKE3_11303
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_11341 
+Actor.WeaponAccuracy(37@) = 20
+0085: 61@ = 37@ // (int) 
+gosub @SMOKE3_25074 
+
+:SMOKE3_11341
+01E8: create_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2270.69 -1391.75 20.28 cornerB 2315.81 -1375.58 26.88 
+01E8: create_forbidden_for_cars_cube_cornerA 2257.3 -1491.95 20.63 cornerB 2299.7 -1477.32 26.12 
+01E8: create_forbidden_for_cars_cube_cornerA 2235.25 -1656.59 12.68 cornerB 2176.75 -1629.89 15.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2221.43 -1721.07 10.09 cornerB 2174.01 -172.72 15.73 
+01E8: create_forbidden_for_cars_cube_cornerA 2234.09 -1723.3 14.0 cornerB 2178.22 -1742.47 10.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E8: create_forbidden_for_cars_cube_cornerA 1956.91 -1936.01 10.07 cornerB 1965.61 -1978.99 14.45 
+01E8: create_forbidden_for_cars_cube_cornerA 2181.3 -1892.0 10.0 cornerB 2222.36 -1897.71 15.0 
+00BC: show_text_highpriority GXT 'SMK3_2' time 7000 flag 1  // ~s~Get on the ~b~motorbike ~s~with Big Smoke, chase down the ~r~Vagos gang members ~s~and take them out!
+04EF: release_animation "GANGS" 
+Model.Destroy(#LSV2)
+96@ = 1 
+80@ = 2 
+98@ += 1 
+102@ = 1 
+0709: set_decision_maker 75@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+fade 1 1000 
+Car.RemoveReferences(78@)
+09EF: set_behind_camera_autoposition_mode_for_car_model #SANCHEZ distance 1.0 altitude_multiplier 1.0 angle_X 0.12 
+Model.Destroy(#TRNTRK8_LAS)
+81@ = 14 
+
+:SMOKE3_11764
+if 
+  102@ == 1 
+jf @SMOKE3_11852 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_11852 
+if 
+0449:   actor $ACTOR_SMOKE in_a_car 
+jf @SMOKE3_11852 
+Marker.Disable(125@)
+Actor.GiveWeaponAndAmmo($ACTOR_SMOKE, Tec9, 99999)
+01B9: set_actor $ACTOR_SMOKE armed_weapon_to 32 
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 70
+102@ = 2 
+
+:SMOKE3_11852
+if 
+  81@ == 14 
+jf @SMOKE3_11920 
+if 
+  112@ == 0 
+jf @SMOKE3_11920 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @SMOKE3_11920 
+Marker.Disable(125@)
+09AD: set_vehicle_camera_mode 3 
+112@ = 1 
+
+:SMOKE3_11920
+if 
+  80@ == 2 
+jf @SMOKE3_20714 
+if 
+  2 > 93@ 
+jf @SMOKE3_12179 
+if 
+  93@ == 0 
+jf @SMOKE3_12101 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 2272.57 -1494.89 radius 40.0 40.0 
+jf @SMOKE3_12101 
+56@ = Car.Create(#GLENDALE, 2295.777, -1481.268, 22.91)
+60@ = Actor.CreateAsDriver(CivMale, #LSV1, 56@)
+Car.Angle(56@) = 88.47
+02C2: car 56@ drive_to 2280.45 -1480.961 22.483 
+Car.SetMaxSpeed(56@, 6.5)
+00AE: set_car 56@ traffic_behaviour_to 0 
+93@ = 1 
+
+:SMOKE3_12101
+if 
+  93@ == 1 
+jf @SMOKE3_12179 
+if 
+80EC:   not actor $PLAYER_ACTOR sphere 0 near_point 2280.45 -1480.961 radius 50.0 50.0 
+jf @SMOKE3_12179 
+Car.RemoveReferences(56@)
+Actor.RemoveReferences(60@)
+Model.Destroy(#GLENDALE)
+93@ = 2 
+
+:SMOKE3_12179
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_15617 
+if 
+  96@ == 1 
+jf @SMOKE3_12335 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 40@ radius 50.0 50.0 sphere 0 
+jf @SMOKE3_12335 
+if 
+  97@ == 1 
+jf @SMOKE3_12272 
+06DD: set_train 40@ speed 15.0 
+
+:SMOKE3_12272
+if 
+  97@ > 1 
+jf @SMOKE3_12300 
+06DD: set_train 40@ speed 18.0 
+
+:SMOKE3_12300
+if 
+  97@ == 0 
+jf @SMOKE3_12328 
+06DD: set_train 40@ speed 10.0 
+
+:SMOKE3_12328
+96@ = 2 
+
+:SMOKE3_12335
+if 
+  96@ == 2 
+jf @SMOKE3_12426 
+if 
+0202:   actor $PLAYER_ACTOR near_car 40@ radius 45.0 45.0 sphere 0 
+jf @SMOKE3_12426 
+if 
+  97@ == 0 
+jf @SMOKE3_12409 
+97@ = 1 
+
+:SMOKE3_12409
+06DD: set_train 40@ speed 28.0 
+96@ = 1 
+
+:SMOKE3_12426
+if 
+  96@ == 1 
+jf @SMOKE3_12527 
+if 
+0202:   actor $PLAYER_ACTOR near_car 40@ radius 20.0 20.0 sphere 0 
+jf @SMOKE3_12527 
+if 
+  97@ > 1 
+jf @SMOKE3_12510 
+06DD: set_train 40@ speed 32.5 
+jump @SMOKE3_12520 
+
+:SMOKE3_12510
+06DD: set_train 40@ speed 30.0 
+
+:SMOKE3_12520
+96@ = 3 
+
+:SMOKE3_12527
+if 
+  96@ == 3 
+jf @SMOKE3_12583 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 40@ radius 20.0 20.0 sphere 0 
+jf @SMOKE3_12583 
+96@ = 2 
+
+:SMOKE3_12583
+if 
+  15 > 91@ 
+jf @SMOKE3_13323 
+if 
+  91@ == 0 
+jf @SMOKE3_12800 
+if 
+01AD:   car 40@ sphere 0 near_point 2282.12 -1439.76 radius 20.0 20.0 
+jf @SMOKE3_12800 
+if 
+80EC:   not actor $PLAYER_ACTOR sphere 0 near_point 2289.69 -1034.14 radius 20.0 20.0 
+jf @SMOKE3_12793 
+06D8: 41@ = create_train_at 2289.69 -1034.14 26.29 type 11 direction 1 
+06DC: set_train 41@ acc 30.0 
+06DD: set_train 41@ speed 15.0 
+53@ = Object.Create(#IMY_TRACK_BARRIER, 2151.289, -664.906, 52.1)
+Object.Angle(53@) = 50.36
+97@ = 2 
+91@ = 1 
+jump @SMOKE3_12800 
+
+:SMOKE3_12793
+91@ = 15 
+
+:SMOKE3_12800
+if 
+  91@ == 1 
+jf @SMOKE3_12889 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_12889 
+if 
+01AD:   car 41@ sphere 0 near_point 2288.31 -1408.91 radius 20.0 20.0 
+jf @SMOKE3_12889 
+06DD: set_train 41@ speed 0.0 
+91@ = 2 
+
+:SMOKE3_12889
+if 
+  91@ == 2 
+jf @SMOKE3_12982 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_12982 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 41@ radius 40.0 40.0 sphere 0 
+jf @SMOKE3_12982 
+if 
+82CA:   not car 41@ bounding_sphere_visible 
+jf @SMOKE3_12982 
+07BD: destroy_train 41@ 
+91@ = 3 
+
+:SMOKE3_12982
+if 
+  91@ == 3 
+jf @SMOKE3_13141 
+if 
+01AD:   car 40@ sphere 0 near_point 2176.87 -689.51 radius 20.0 20.0 
+jf @SMOKE3_13141 
+if 
+80EC:   not actor $PLAYER_ACTOR sphere 0 near_point 2283.36 -336.9 radius 30.0 30.0 
+jf @SMOKE3_13134 
+06D8: 41@ = create_train_at 2283.36 -336.9 37.27 type 11 direction 1 
+06DC: set_train 41@ acc 30.0 
+06DD: set_train 41@ speed 15.0 
+91@ = 4 
+jump @SMOKE3_13141 
+
+:SMOKE3_13134
+91@ = 15 
+
+:SMOKE3_13141
+if 
+  91@ == 4 
+jf @SMOKE3_13230 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_13230 
+if 
+01AD:   car 41@ sphere 0 near_point 2052.08 -583.31 radius 20.0 20.0 
+jf @SMOKE3_13230 
+06DD: set_train 41@ speed 0.0 
+91@ = 5 
+
+:SMOKE3_13230
+if 
+  91@ == 5 
+jf @SMOKE3_13323 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_13323 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 41@ radius 40.0 40.0 sphere 0 
+jf @SMOKE3_13323 
+if 
+82CA:   not car 41@ bounding_sphere_visible 
+jf @SMOKE3_13323 
+07BD: destroy_train 41@ 
+91@ = 6 
+
+:SMOKE3_13323
+if 
+  104@ == 0 
+jf @SMOKE3_13640 
+if 
+01AD:   car 40@ sphere 0 near_point 2198.0 -1913.0 radius 12.0 12.0 
+jf @SMOKE3_13640 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_13402 
+05C5: AS_actor 34@ cower -1 ms 
+
+:SMOKE3_13402
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_13425 
+05C5: AS_actor 35@ cower -1 ms 
+
+:SMOKE3_13425
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_13448 
+05C5: AS_actor 36@ cower -1 ms 
+
+:SMOKE3_13448
+57@ = Car.Create(#TAHOMA, 2200.07, -1731.94, 12.28)
+Car.Angle(57@) = 277.116
+58@ = Actor.Create(Mission3, #BALLAS3, 2201.55, -1728.59, 12.43)
+Actor.Angle(58@) = 285.1
+59@ = Actor.Create(Mission3, #BALLAS3, 2202.93, -1728.36, 12.43)
+Actor.Angle(59@) = 393.56
+0605: actor 58@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor 59@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+97@ = 1 
+104@ = 1 
+Model.Destroy(#TAHOMA)
+
+:SMOKE3_13640
+if 
+  104@ == 1 
+jf @SMOKE3_13796 
+if 
+81AD:   not car 40@ sphere 0 near_point 2198.0 -1913.0 radius 12.0 12.0 
+jf @SMOKE3_13796 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_13727 
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_13727
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_13758 
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_13758
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_13789 
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_13789
+104@ = 2 
+
+:SMOKE3_13796
+if 
+  104@ == 2 
+jf @SMOKE3_13928 
+if 
+01AD:   car 40@ sphere 0 near_point 2285.58 -1353.75 radius 20.0 20.0 
+jf @SMOKE3_13928 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_13875 
+05C5: AS_actor 34@ cower -1 ms 
+
+:SMOKE3_13875
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_13898 
+05C5: AS_actor 35@ cower -1 ms 
+
+:SMOKE3_13898
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_13921 
+05C5: AS_actor 36@ cower -1 ms 
+
+:SMOKE3_13921
+104@ = 3 
+
+:SMOKE3_13928
+if 
+  104@ == 3 
+jf @SMOKE3_14137 
+if 
+81AD:   not car 40@ sphere 0 near_point 2285.58 -1353.75 radius 20.0 20.0 
+jf @SMOKE3_14137 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_14015 
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_14015
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_14046 
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_14046
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_14077 
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_14077
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_14098 
+05BE: AS_actor 37@ die 
+
+:SMOKE3_14098
+Object.Destroy(52@)
+Model.Destroy(#IMMMCRAN)
+Car.RemoveReferences(57@)
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+105@ = 1 
+104@ = 4 
+
+:SMOKE3_14137
+if 
+  104@ == 4 
+jf @SMOKE3_14246 
+if 
+01AD:   car 40@ sphere 0 near_point 2121.0 -361.0 radius 18.0 18.0 
+jf @SMOKE3_14246 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_14216 
+05C5: AS_actor 34@ cower -1 ms 
+
+:SMOKE3_14216
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_14239 
+05C5: AS_actor 36@ cower -1 ms 
+
+:SMOKE3_14239
+104@ = 5 
+
+:SMOKE3_14246
+if 
+  104@ == 5 
+jf @SMOKE3_14371 
+if 
+81AD:   not car 40@ sphere 0 near_point 2121.0 -361.0 radius 18.0 18.0 
+jf @SMOKE3_14371 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_14333 
+0085: 61@ = 34@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_14333
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_14364 
+0085: 61@ = 36@ // (int) 
+gosub @SMOKE3_25033 
+
+:SMOKE3_14364
+104@ = 6 
+
+:SMOKE3_14371
+if 
+  104@ == 6 
+jf @SMOKE3_14441 
+if 
+81AD:   not car 40@ sphere 0 near_point 2121.0 -361.0 radius 18.0 18.0 
+jf @SMOKE3_14441 
+97@ = 3 
+104@ = 7 
+
+:SMOKE3_14441
+if 
+  105@ == 1 
+jf @SMOKE3_14528 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_14528 
+if 
+01AD:   car 40@ sphere 0 near_point 2285.53 -1120.59 radius 20.0 20.0 
+jf @SMOKE3_14528 
+060B: set_actor 35@ decision_maker_to 76@ 
+105@ = 2 
+
+:SMOKE3_14528
+if 
+  105@ == 2 
+jf @SMOKE3_14653 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_14653 
+if 
+0202:   actor $PLAYER_ACTOR near_car 40@ radius 30.0 30.0 sphere 0 
+jf @SMOKE3_14653 
+0812: AS_actor 35@ perform_animation "TRAN_STMB" IFP "TRAIN" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+Actor.SetImmunities(35@, 1, 1, 1, 1, 1)
+105@ = 3 
+
+:SMOKE3_14653
+if 
+  105@ == 3 
+jf @SMOKE3_14805 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_14805 
+if 
+   Actor.Animation(35@) == "TRAN_STMB"
+jf @SMOKE3_14805 
+0613: 39@ = actor 35@ animation "TRAN_STMB" time 
+if 
+  39@ == 1.0 
+jf @SMOKE3_14805 
+0812: AS_actor 35@ perform_animation "TRAN_HNG" IFP "TRAIN" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+32@ = 0 
+105@ = 4 
+
+:SMOKE3_14805
+if 
+  105@ == 4 
+jf @SMOKE3_14903 
+if 
+  32@ > 10000 
+jf @SMOKE3_14903 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_14903 
+0812: AS_actor 35@ perform_animation "TRAN_GTUP" IFP "TRAIN" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+105@ = 5 
+
+:SMOKE3_14903
+if 
+  105@ == 5 
+jf @SMOKE3_15058 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_15058 
+if 
+   Actor.Animation(35@) == "TRAN_GTUP"
+jf @SMOKE3_15058 
+0613: 39@ = actor 35@ animation "TRAN_GTUP" time 
+if 
+  39@ == 1.0 
+jf @SMOKE3_15058 
+060B: set_actor 35@ decision_maker_to 75@ 
+0085: 61@ = 35@ // (int) 
+gosub @SMOKE3_25033 
+04EF: release_animation "TRAIN" 
+Actor.SetImmunities(35@, 0, 0, 0, 0, 0)
+105@ = 6 
+
+:SMOKE3_15058
+if 
+  105@ > 0 
+jf @SMOKE3_15126 
+if 
+  6 > 105@ 
+jf @SMOKE3_15126 
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_15126 
+45@ = Car.Angle(40@)
+Actor.Angle(35@) = 45@
+
+:SMOKE3_15126
+if 
+  106@ == 0 
+jf @SMOKE3_15492 
+if 
+03CA:   object 52@ exists 
+jf @SMOKE3_15461 
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_15454 
+if 
+00EC:   actor 37@ sphere 0 near_point 2197.53 -1913.39 radius 3.0 3.0 
+jf @SMOKE3_15454 
+0688: AS_actor 37@ unknown_toggle_ped_threat_scanner 0 0 0 
+0465: remove_actor 37@ from_turret_mode 
+0619: enable_actor 37@ collision_detection 0 
+04F4: put_actor 37@ into_turret_on_object 52@ offset_from_object_origin 2.85 -0.7 5.9 orientation 0 both_side_angle_limit 360.0 lock_weapon 0 
+Actor.Angle(37@) = 0.0
+0812: AS_actor 37@ perform_animation "TRAN_OUCH" IFP "TRAIN" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+90@ = 1 
+106@ = 1 
+Marker.Disable(122@)
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 37@ radius 20.0 20.0 0 
+jf @SMOKE3_15454 
+03CF: load_wav 35436 as 1 
+
+:SMOKE3_15376
+if 
+83D0:   not wav 1 loaded 
+jf @SMOKE3_15402 
+wait 0 
+jump @SMOKE3_15376 
+
+:SMOKE3_15402
+00BC: show_text_highpriority GXT 'SMO3_GC' time 4000 flag 1  // ~z~That's one Vagos asshole gone!
+03D1: play_wav 1 
+
+:SMOKE3_15422
+if 
+83D2:   not wav 1 ended 
+jf @SMOKE3_15448 
+wait 0 
+jump @SMOKE3_15422 
+
+:SMOKE3_15448
+00BE: text_clear_all 
+040D: unload_wav 1 
+
+:SMOKE3_15454
+jump @SMOKE3_15492 
+
+:SMOKE3_15461
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_15492 
+Actor.SetImmunities(37@, 0, 0, 0, 0, 0)
+
+:SMOKE3_15492
+if 
+  106@ == 1 
+jf @SMOKE3_15617 
+if 
+03CA:   object 52@ exists 
+jf @SMOKE3_15558 
+45@ = Object.Angle(52@)
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_15558 
+Actor.Angle(37@) = 45@
+
+:SMOKE3_15558
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_15617 
+if 
+80F2:   not actor $PLAYER_ACTOR near_actor 37@ radius 50.0 50.0 0 
+jf @SMOKE3_15617 
+Actor.DestroyWithFade(37@)
+106@ = 2 
+
+:SMOKE3_15617
+if 
+  87@ == 0 
+jf @SMOKE3_15786 
+if 
+   Actor.Dead(34@)
+jf @SMOKE3_15786 
+87@ = 1 
+116@ += 1 
+if 
+075C:   marker 119@ enabled 
+jf @SMOKE3_15786 
+Marker.Disable(119@)
+if and
+   Actor.Dead(34@)
+   Actor.Dead(35@)
+   Actor.Dead(36@)
+   Actor.Dead(37@)
+  203@ == 0 
+jf @SMOKE3_15786 
+Actor.StoreDeadActorPos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+201@ = Pickup.Create(#KMB_PACKET, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03DC: 202@ = create_marker_above_pickup 201@ 
+203@ = 1 
+205@ = 1 
+jump @SMOKE3_16286 
+
+:SMOKE3_15786
+if 
+  88@ == 0 
+jf @SMOKE3_15955 
+if 
+   Actor.Dead(35@)
+jf @SMOKE3_15955 
+88@ = 1 
+116@ += 1 
+if 
+075C:   marker 120@ enabled 
+jf @SMOKE3_15955 
+Marker.Disable(120@)
+if and
+   Actor.Dead(34@)
+   Actor.Dead(35@)
+   Actor.Dead(36@)
+   Actor.Dead(37@)
+  203@ == 0 
+jf @SMOKE3_15955 
+Actor.StoreDeadActorPos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+201@ = Pickup.Create(#KMB_PACKET, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03DC: 202@ = create_marker_above_pickup 201@ 
+203@ = 1 
+205@ = 1 
+jump @SMOKE3_16286 
+
+:SMOKE3_15955
+if 
+  89@ == 0 
+jf @SMOKE3_16124 
+if 
+   Actor.Dead(36@)
+jf @SMOKE3_16124 
+89@ = 1 
+116@ += 1 
+if 
+075C:   marker 121@ enabled 
+jf @SMOKE3_16124 
+Marker.Disable(121@)
+if and
+   Actor.Dead(34@)
+   Actor.Dead(35@)
+   Actor.Dead(36@)
+   Actor.Dead(37@)
+  203@ == 0 
+jf @SMOKE3_16124 
+Actor.StoreDeadActorPos(36@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+201@ = Pickup.Create(#KMB_PACKET, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03DC: 202@ = create_marker_above_pickup 201@ 
+203@ = 1 
+205@ = 1 
+jump @SMOKE3_16286 
+
+:SMOKE3_16124
+if 
+  90@ == 0 
+jf @SMOKE3_16581 
+if 
+   Actor.Dead(37@)
+jf @SMOKE3_16581 
+90@ = 1 
+116@ += 1 
+if 
+075C:   marker 122@ enabled 
+jf @SMOKE3_16581 
+Marker.Disable(122@)
+if and
+   Actor.Dead(34@)
+   Actor.Dead(35@)
+   Actor.Dead(36@)
+   Actor.Dead(37@)
+  203@ == 0 
+jf @SMOKE3_16581 
+Actor.StoreDeadActorPos(37@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+201@ = Pickup.Create(#KMB_PACKET, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03DC: 202@ = create_marker_above_pickup 201@ 
+203@ = 1 
+205@ = 1 
+
+:SMOKE3_16286
+if 
+  205@ == 1 
+jf @SMOKE3_16581 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_16347 
+03CF: load_wav 35452 as 1 
+jump @SMOKE3_16390 
+
+:SMOKE3_16347
+if 
+  200@ == 1 
+jf @SMOKE3_16381 
+03CF: load_wav 35455 as 1 
+jump @SMOKE3_16390 
+
+:SMOKE3_16381
+03CF: load_wav 35457 as 1 
+
+:SMOKE3_16390
+if 
+83D0:   not wav 1 loaded 
+jf @SMOKE3_16416 
+wait 0 
+jump @SMOKE3_16390 
+
+:SMOKE3_16416
+if 
+  200@ == 0 
+jf @SMOKE3_16461 
+00BC: show_text_highpriority GXT 'SMO3_NA' time 4000 flag 1  // ~z~Damn! That's what we wanted!
+03D1: play_wav 1 
+jump @SMOKE3_16526 
+
+:SMOKE3_16461
+if 
+  200@ == 1 
+jf @SMOKE3_16506 
+00BC: show_text_highpriority GXT 'SMO3_OA' time 4000 flag 1  // ~z~That's what we're after!
+03D1: play_wav 1 
+jump @SMOKE3_16526 
+
+:SMOKE3_16506
+00BC: show_text_highpriority GXT 'SMO3_OC' time 4000 flag 1  // ~z~There's our baby!
+03D1: play_wav 1 
+
+:SMOKE3_16526
+if 
+83D2:   not wav 1 ended 
+jf @SMOKE3_16552 
+wait 0 
+jump @SMOKE3_16526 
+
+:SMOKE3_16552
+00BE: text_clear_all 
+040D: unload_wav 1 
+205@ = 0 
+00BC: show_text_highpriority GXT 'SMK3_23' time 7000 flag 1 
+
+:SMOKE3_16581
+if 
+  108@ == 0 
+jf @SMOKE3_16821 
+if 
+   not Car.Wrecked(57@)
+jf @SMOKE3_16821 
+if 
+051D:   car 57@ damaged_by_car 40@ 
+jf @SMOKE3_16821 
+020B: explode_car 57@ 
+0209: 200@ = random_int_in_ranges 0 2 
+if 
+  200@ == 0 
+jf @SMOKE3_16682 
+03CF: load_wav 35434 as 1 
+jump @SMOKE3_16691 
+
+:SMOKE3_16682
+03CF: load_wav 35435 as 1 
+
+:SMOKE3_16691
+if 
+83D0:   not wav 1 loaded 
+jf @SMOKE3_16717 
+wait 0 
+jump @SMOKE3_16691 
+
+:SMOKE3_16717
+if 
+  200@ == 0 
+jf @SMOKE3_16762 
+00BC: show_text_highpriority GXT 'SMO3_GA' time 4000 flag 1  // ~z~Damn, that boy's gonna be shittin' his kidneys for a week!
+03D1: play_wav 1 
+jump @SMOKE3_16782 
+
+:SMOKE3_16762
+00BC: show_text_highpriority GXT 'SMO3_GB' time 4000 flag 1  // ~z~Man, he ain't gonna be eatin' shit for a while.
+03D1: play_wav 1 
+
+:SMOKE3_16782
+if 
+83D2:   not wav 1 ended 
+jf @SMOKE3_16808 
+wait 0 
+jump @SMOKE3_16782 
+
+:SMOKE3_16808
+00BE: text_clear_all 
+040D: unload_wav 1 
+108@ = 1 
+
+:SMOKE3_16821
+if 
+  108@ == 1 
+jf @SMOKE3_16851 
+Car.RemoveReferences(57@)
+108@ = 2 
+
+:SMOKE3_16851
+if 
+  87@ == 1 
+jf @SMOKE3_17500 
+if 
+  88@ == 1 
+jf @SMOKE3_17500 
+if 
+  89@ == 1 
+jf @SMOKE3_17500 
+if 
+  90@ == 1 
+jf @SMOKE3_17500 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_17096 
+if 
+06EE:   actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+jf @SMOKE3_16965 
+jump @SMOKE3_16988 
+
+:SMOKE3_16965
+115@ = 2 
+00BC: show_text_highpriority GXT 'SMK3_18' time 5000 flag 1  // ~s~You left ~b~Big Smoke ~s~behind go get him!
+
+:SMOKE3_16988
+if 
+  203@ == 1 
+jf @SMOKE3_17500 
+if 
+   Pickup.Picked_up(201@)
+jf @SMOKE3_17500 
+Pickup.Destroy(201@)
+Marker.Disable(202@)
+00BE: text_clear_all 
+204@ = 1 
+018A: 124@ = create_checkpoint_at 2061.68 -1694.71 12.554 
+107@ = 1 
+109@ = 1 
+110@ = 0 
+111@ = 0 
+115@ = 1 
+
+:SMOKE3_17096
+0A45: set_rail_tracks_friction_to -1.0 
+Actor.RemoveReferences(34@)
+Actor.RemoveReferences(35@)
+Actor.RemoveReferences(36@)
+Actor.RemoveReferences(37@)
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#STREAK)
+Model.Destroy(#STREAKC)
+07BE: remove_references_to_train 40@ 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2270.69 -1391.75 20.28 cornerB 2315.81 -1375.58 26.88 
+01E7: remove_forbidden_for_cars_cube_cornerA 2268.75 -1390.8 20.86 cornerB 2330.03 -1375.53 23.1 
+01E7: remove_forbidden_for_cars_cube_cornerA 2257.3 -1491.95 20.63 cornerB 2299.7 -1477.32 26.12 
+01E7: remove_forbidden_for_cars_cube_cornerA 2235.25 -1656.59 12.68 cornerB 2176.75 -1629.89 15.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2221.43 -1721.07 10.09 cornerB 2174.01 -172.72 15.73 
+01E7: remove_forbidden_for_cars_cube_cornerA 2234.09 -1723.3 14.0 cornerB 2178.22 -1742.47 10.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1956.91 -1936.01 10.07 cornerB 1965.61 -1978.99 14.45 
+01E7: remove_forbidden_for_cars_cube_cornerA 2181.3 -1892.0 10.0 cornerB 2222.36 -1897.71 15.0 
+80@ = 3 
+
+:SMOKE3_17500
+if 
+   Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_17539 
+00BC: show_text_highpriority GXT 'SMK3_21' time 5000 flag 1  // ~r~Big Smoke died!
+jump @SMOKE3_25128 
+
+:SMOKE3_17539
+if 
+  80@ == 2 
+jf @SMOKE3_18365 
+if 
+  97@ == 0 
+jf @SMOKE3_17602 
+$TEMPVAR_FLOAT_1 = 320.0 
+$TEMPVAR_FLOAT_2 = 320.0 
+jump @SMOKE3_17622 
+
+:SMOKE3_17602
+$TEMPVAR_FLOAT_1 = 200.0 
+$TEMPVAR_FLOAT_2 = 200.0 
+
+:SMOKE3_17622
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_18365 
+if 
+82CA:   not car 40@ bounding_sphere_visible 
+jf @SMOKE3_18365 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 40@ radius $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 sphere 0 
+jf @SMOKE3_18365 
+if 
+  203@ == 0 
+jf @SMOKE3_18365 
+if or
+   not Actor.Dead(34@)
+   not Actor.Dead(35@)
+   not Actor.Dead(36@)
+   not Actor.Dead(37@)
+jf @SMOKE3_18365 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+077E: get_active_interior_to 79@ 
+if 
+   not 79@ == 0 
+jf @SMOKE3_17900 
+fade 0 250 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_17802 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+
+:SMOKE3_17802
+if 
+fading 
+jf @SMOKE3_17826 
+wait 0 
+jump @SMOKE3_17802 
+
+:SMOKE3_17826
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_17900 
+select_interior 0 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+Actor.StorePos($ACTOR_SMOKE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+Camera.SetAtPos($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+fade 1 250 
+
+:SMOKE3_17900
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_17975 
+109@ = 1 
+0944: manipulate_weapon_camera $ACTOR_SMOKE 
+05DE: AS_actor $ACTOR_SMOKE walk_around_ped_path 
+Actor.StorePos($ACTOR_SMOKE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0395: clear_area 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 100.0 radius 100.0 
+040D: unload_wav 1 
+040D: unload_wav 2 
+
+:SMOKE3_17975
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_18018 
+03CF: load_wav 35449 as 2 
+jump @SMOKE3_18061 
+
+:SMOKE3_18018
+if 
+  200@ == 1 
+jf @SMOKE3_18052 
+03CF: load_wav 35450 as 2 
+jump @SMOKE3_18061 
+
+:SMOKE3_18052
+03CF: load_wav 35451 as 2 
+
+:SMOKE3_18061
+if 
+83D0:   not wav 2 loaded 
+jf @SMOKE3_18087 
+wait 0 
+jump @SMOKE3_18061 
+
+:SMOKE3_18087
+if 
+  200@ == 0 
+jf @SMOKE3_18132 
+00BC: show_text_highpriority GXT 'SMO3_MA' time 4000 flag 1  // ~z~Damn, you lost 'em CJ!
+03D1: play_wav 2 
+jump @SMOKE3_18197 
+
+:SMOKE3_18132
+if 
+  200@ == 1 
+jf @SMOKE3_18177 
+00BC: show_text_highpriority GXT 'SMO3_MB' time 4000 flag 1  // ~z~We screwed up!
+03D1: play_wav 2 
+jump @SMOKE3_18197 
+
+:SMOKE3_18177
+00BC: show_text_highpriority GXT 'SMO3_MC' time 4000 flag 1  // ~z~All we had to do, was follow the damn train, CJ!
+03D1: play_wav 2 
+
+:SMOKE3_18197
+if 
+83D2:   not wav 2 ended 
+jf @SMOKE3_18223 
+wait 0 
+jump @SMOKE3_18197 
+
+:SMOKE3_18223
+00BE: text_clear_all 
+040D: unload_wav 2 
+if 
+   not 79@ == 0 
+jf @SMOKE3_18322 
+fade 0 500 
+
+:SMOKE3_18254
+if 
+fading 
+jf @SMOKE3_18278 
+wait 0 
+jump @SMOKE3_18254 
+
+:SMOKE3_18278
+select_interior 79@ 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Camera.SetAtPos($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+fade 1 250 
+
+:SMOKE3_18322
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Actor.DestroyInstantly($ACTOR_SMOKE)
+00BC: show_text_highpriority GXT 'SMK3_13' time 5000 flag 1  // ~r~You lost them! Next time keep up with the train!
+jump @SMOKE3_25128 
+
+:SMOKE3_18365
+if 
+  80@ == 2 
+jf @SMOKE3_19011 
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_19011 
+if 
+01AD:   car 40@ sphere 0 near_point 2790.52 223.63 radius 15.0 15.0 
+jf @SMOKE3_19011 
+if 
+  203@ == 0 
+jf @SMOKE3_19011 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06DC: set_train 40@ acc 20.0 
+06DD: set_train 40@ speed 20.0 
+Camera.SetPosition(2796.839, 222.9677, 10.7646, 0.0, 0.0, 0.0)
+Camera.OnVehicle(40@, 15, 2)
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @SMOKE3_18598 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+Car.PutAt($TEMPVAR_ACTOR_CAR, 2814.828, 154.135, 17.2)
+Car.Angle($TEMPVAR_ACTOR_CAR) = 9.0
+Car.SetMaxSpeed($TEMPVAR_ACTOR_CAR, 0.0)
+jump @SMOKE3_18628 
+
+:SMOKE3_18598
+Actor.PutAt($PLAYER_ACTOR, 2814.828, 154.135, 17.2)
+Actor.Angle($PLAYER_ACTOR) = 9.0
+
+:SMOKE3_18628
+wait 3000 
+Camera.Restore_WithJumpCut
+wait 0 
+109@ = 1 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_18686 
+0944: manipulate_weapon_camera $ACTOR_SMOKE 
+05DE: AS_actor $ACTOR_SMOKE walk_around_ped_path 
+Actor.StorePos($ACTOR_SMOKE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:SMOKE3_18686
+0395: clear_area 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 100.0 radius 100.0 
+040D: unload_wav 1 
+040D: unload_wav 2 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_18757 
+03CF: load_wav 35449 as 2 
+jump @SMOKE3_18800 
+
+:SMOKE3_18757
+if 
+  200@ == 1 
+jf @SMOKE3_18791 
+03CF: load_wav 35450 as 2 
+jump @SMOKE3_18800 
+
+:SMOKE3_18791
+03CF: load_wav 35451 as 2 
+
+:SMOKE3_18800
+if 
+83D0:   not wav 2 loaded 
+jf @SMOKE3_18826 
+wait 0 
+jump @SMOKE3_18800 
+
+:SMOKE3_18826
+if 
+  200@ == 0 
+jf @SMOKE3_18871 
+00BC: show_text_highpriority GXT 'SMO3_MA' time 4000 flag 1  // ~z~Damn, you lost 'em CJ!
+03D1: play_wav 2 
+jump @SMOKE3_18936 
+
+:SMOKE3_18871
+if 
+  200@ == 1 
+jf @SMOKE3_18916 
+00BC: show_text_highpriority GXT 'SMO3_MB' time 4000 flag 1  // ~z~We screwed up!
+03D1: play_wav 2 
+jump @SMOKE3_18936 
+
+:SMOKE3_18916
+00BC: show_text_highpriority GXT 'SMO3_MC' time 4000 flag 1  // ~z~All we had to do, was follow the damn train, CJ!
+03D1: play_wav 2 
+
+:SMOKE3_18936
+if 
+83D2:   not wav 2 ended 
+jf @SMOKE3_18962 
+wait 0 
+jump @SMOKE3_18936 
+
+:SMOKE3_18962
+00BE: text_clear_all 
+040D: unload_wav 2 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Actor.DestroyInstantly($ACTOR_SMOKE)
+00BC: show_text_highpriority GXT 'SMK3_20' time 10000 flag 1  // ~r~They got away!
+jump @SMOKE3_25128 
+
+:SMOKE3_19011
+if 
+  109@ == 0 
+jf @SMOKE3_20714 
+if 
+06EE:   actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+jf @SMOKE3_20714 
+if 
+0449:   actor $ACTOR_SMOKE in_a_car 
+jf @SMOKE3_20714 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @SMOKE3_20714 
+gosub @SMOKE3_24826 
+if 
+  110@ == 0 
+jf @SMOKE3_19268 
+if 
+  111@ == 0 
+jf @SMOKE3_19268 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_19181 
+04AF: 128@ = 35420 // = constant 
+05AA: 129@s = 'SMO3_CA' // @s = 'short'  // ~z~Follow that train!
+jump @SMOKE3_19254 
+
+:SMOKE3_19181
+if 
+  200@ == 1 
+jf @SMOKE3_19230 
+04AF: 128@ = 35421 // = constant 
+05AA: 129@s = 'SMO3_CB' // @s = 'short'  // ~z~Go after that loco, CJ!
+jump @SMOKE3_19254 
+
+:SMOKE3_19230
+04AF: 128@ = 35422 // = constant 
+05AA: 129@s = 'SMO3_CC' // @s = 'short'  // ~z~Follow the tracks!
+
+:SMOKE3_19254
+gosub @SMOKE3_24784 
+33@ = 0 
+
+:SMOKE3_19268
+if 
+  110@ == 1 
+jf @SMOKE3_19361 
+if 
+  111@ == 0 
+jf @SMOKE3_19361 
+if 
+  33@ > 4000 
+jf @SMOKE3_19361 
+04AF: 128@ = 35429 // = constant 
+05AA: 129@s = 'SMO3_EB' // @s = 'short'  // ~z~Get me close, CJ. I'm about to pop these fools.
+gosub @SMOKE3_24784 
+33@ = 0 
+
+:SMOKE3_19361
+if 
+  110@ == 2 
+jf @SMOKE3_19482 
+if 
+  111@ == 0 
+jf @SMOKE3_19482 
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_19482 
+if 
+0202:   actor $ACTOR_SMOKE near_car 40@ radius 50.0 50.0 sphere 0 
+jf @SMOKE3_19482 
+04AF: 128@ = 35428 // = constant 
+05AA: 129@s = 'SMO3_EA' // @s = 'short'  // ~z~Roll up on them CJ, so I can get a shot!
+117@ = 1 
+gosub @SMOKE3_24784 
+
+:SMOKE3_19482
+if 
+  110@ == 3 
+jf @SMOKE3_19703 
+if 
+  111@ == 0 
+jf @SMOKE3_19703 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_19703 
+if 
+0202:   actor $ACTOR_SMOKE near_car 41@ radius 165.0 165.0 sphere 0 
+jf @SMOKE3_19703 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_19623 
+04AF: 128@ = 35431 // = constant 
+05AA: 129@s = 'SMO3_FA' // @s = 'short'  // ~z~Oh fuck! An on-coming train!
+jump @SMOKE3_19696 
+
+:SMOKE3_19623
+if 
+  200@ == 1 
+jf @SMOKE3_19672 
+04AF: 128@ = 35432 // = constant 
+05AA: 129@s = 'SMO3_FB' // @s = 'short'  // ~z~Train, CJ, train!
+jump @SMOKE3_19696 
+
+:SMOKE3_19672
+04AF: 128@ = 35433 // = constant 
+05AA: 129@s = 'SMO3_FC' // @s = 'short'  // ~z~Look the fuck out, CJ! The train!
+
+:SMOKE3_19696
+gosub @SMOKE3_24784 
+
+:SMOKE3_19703
+if 
+  110@ == 4 
+jf @SMOKE3_19915 
+if 
+  111@ == 0 
+jf @SMOKE3_19915 
+if 
+00EC:   actor $ACTOR_SMOKE sphere 0 near_point 2180.22 -689.43 radius 60.0 60.0 
+jf @SMOKE3_19915 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_19835 
+04AF: 128@ = 35437 // = constant 
+05AA: 129@s = 'SMO3_HA' // @s = 'short'  // ~z~Take the high road on the right, CJ!
+jump @SMOKE3_19908 
+
+:SMOKE3_19835
+if 
+  200@ == 1 
+jf @SMOKE3_19884 
+04AF: 128@ = 35438 // = constant 
+05AA: 129@s = 'SMO3_HB' // @s = 'short'  // ~z~Keep right, take us up to their level!
+jump @SMOKE3_19908 
+
+:SMOKE3_19884
+04AF: 128@ = 35439 // = constant 
+05AA: 129@s = 'SMO3_HC' // @s = 'short'  // ~z~Take the high ground on the right, CJ! On the right!
+
+:SMOKE3_19908
+gosub @SMOKE3_24784 
+
+:SMOKE3_19915
+if 
+  110@ == 5 
+jf @SMOKE3_20150 
+if 
+  111@ == 0 
+jf @SMOKE3_20150 
+if 
+   not Car.Wrecked(41@)
+jf @SMOKE3_20150 
+if 
+0202:   actor $ACTOR_SMOKE near_car 41@ radius 100.0 100.0 sphere 0 
+jf @SMOKE3_20150 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_20056 
+04AF: 128@ = 35440 // = constant 
+05AA: 129@s = 'SMO3_JA' // @s = 'short'  // ~z~CJ, keep us up here.
+jump @SMOKE3_20129 
+
+:SMOKE3_20056
+if 
+  200@ == 1 
+jf @SMOKE3_20105 
+04AF: 128@ = 35441 // = constant 
+05AA: 129@s = 'SMO3_JB' // @s = 'short'  // ~z~Follow it over, CJ!
+jump @SMOKE3_20129 
+
+:SMOKE3_20105
+04AF: 128@ = 35442 // = constant 
+05AA: 129@s = 'SMO3_JC' // @s = 'short'  // ~z~Make the jump, fool! Make the jump!
+
+:SMOKE3_20129
+gosub @SMOKE3_24784 
+33@ = 0 
+0652: 206@ = integer_stat 21 
+
+:SMOKE3_20150
+if 
+  110@ == 6 
+jf @SMOKE3_20319 
+if 
+  111@ == 0 
+jf @SMOKE3_20319 
+if 
+  33@ > 6000 
+jf @SMOKE3_20319 
+04AF: 128@ = 35430 // = constant 
+05AA: 129@s = 'SMO3_EC' // @s = 'short'  // ~z~Move this shit, man I'm gonna ice these fools, man.
+if 
+03CA:   object 53@ exists 
+jf @SMOKE3_20266 
+if 
+82CC:   not object 53@ bounding_sphere_visible 
+jf @SMOKE3_20266 
+Object.Destroy(53@)
+
+:SMOKE3_20266
+Model.Destroy(#IMY_TRACK_BARRIER)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_20312 
+if 
+  3 > 116@ 
+jf @SMOKE3_20312 
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 85
+
+:SMOKE3_20312
+gosub @SMOKE3_24784 
+
+:SMOKE3_20319
+if 
+  110@ == 7 
+jf @SMOKE3_20386 
+if 
+  111@ == 0 
+jf @SMOKE3_20386 
+04AF: 128@ = 35423 // = constant 
+05AA: 129@s = 'SMO3_DA' // @s = 'short'  // ~z~This thing wasn't built to take so much weight!
+gosub @SMOKE3_24784 
+
+:SMOKE3_20386
+if 
+  110@ == 8 
+jf @SMOKE3_20486 
+if 
+  111@ == 0 
+jf @SMOKE3_20486 
+if 
+  206@ > 500 
+jf @SMOKE3_20479 
+04AF: 128@ = 35424 // = constant 
+05AA: 129@s = 'SMO3_DB' // @s = 'short'  // ~z~You're the one packing on the pounds, CJ!
+gosub @SMOKE3_24784 
+jump @SMOKE3_20486 
+
+:SMOKE3_20479
+110@ = 9 
+
+:SMOKE3_20486
+if 
+  110@ == 9 
+jf @SMOKE3_20553 
+if 
+  111@ == 0 
+jf @SMOKE3_20553 
+04AF: 128@ = 35425 // = constant 
+05AA: 129@s = 'SMO3_DC' // @s = 'short'  // ~z~They don't call you BIG Smoke for nothing!
+gosub @SMOKE3_24784 
+
+:SMOKE3_20553
+if 
+  110@ == 10 
+jf @SMOKE3_20620 
+if 
+  111@ == 0 
+jf @SMOKE3_20620 
+04AF: 128@ = 35426 // = constant 
+05AA: 129@s = 'SMO3_DD' // @s = 'short'  // ~z~Shit, I was born big, fool!
+gosub @SMOKE3_24784 
+
+:SMOKE3_20620
+if 
+  110@ == 11 
+jf @SMOKE3_20714 
+if 
+  111@ == 0 
+jf @SMOKE3_20714 
+if 
+  206@ > 500 
+jf @SMOKE3_20714 
+04AF: 128@ = 35427 // = constant 
+05AA: 129@s = 'SMO3_DE' // @s = 'short'  // ~z~You, on the other hand, have a dietary problem!
+gosub @SMOKE3_24784 
+040D: unload_wav 1 
+040D: unload_wav 2 
+
+:SMOKE3_20714
+if 
+  80@ == 3 
+jf @SMOKE3_23432 
+if 
+  115@ == 1 
+jf @SMOKE3_23432 
+if 
+  113@ == 0 
+jf @SMOKE3_20875 
+040D: unload_wav 1 
+Object.RemoveReferences(53@)
+Model.Destroy(#IMY_TRACK_BARRIER)
+113@ = 1 
+0209: 200@ = random_int_in_ranges 0 3 
+if 
+  200@ == 0 
+jf @SMOKE3_20832 
+03CF: load_wav 35458 as 1 
+jump @SMOKE3_20875 
+
+:SMOKE3_20832
+if 
+  200@ == 1 
+jf @SMOKE3_20866 
+03CF: load_wav 35459 as 1 
+jump @SMOKE3_20875 
+
+:SMOKE3_20866
+03CF: load_wav 35460 as 1 
+
+:SMOKE3_20875
+if and
+  113@ == 1 
+  204@ == 1 
+jf @SMOKE3_21024 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_21024 
+if 
+  200@ == 0 
+jf @SMOKE3_20956 
+00BC: show_text_highpriority GXT 'SMO3_PA' time 4000 flag 1  // ~z~Hey, I need to get this back to my crib!
+jump @SMOKE3_21013 
+
+:SMOKE3_20956
+if 
+  200@ == 1 
+jf @SMOKE3_20997 
+00BC: show_text_highpriority GXT 'SMO3_PB' time 4000 flag 1  // ~z~C'mon CJ, let's head back to my spot.
+jump @SMOKE3_21013 
+
+:SMOKE3_20997
+00BC: show_text_highpriority GXT 'SMO3_PC' time 4000 flag 1  // ~z~Hey, let's get outta here before the cops show, man.
+
+:SMOKE3_21013
+03D1: play_wav 1 
+113@ = 2 
+
+:SMOKE3_21024
+if 
+  113@ == 2 
+jf @SMOKE3_21077 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_21077 
+00BE: text_clear_all 
+040D: unload_wav 1 
+113@ = 3 
+33@ = 0 
+
+:SMOKE3_21077
+if 
+  113@ == 3 
+jf @SMOKE3_21144 
+if 
+  33@ > 500 
+jf @SMOKE3_21144 
+00BC: show_text_highpriority GXT 'SMK3_22' time 6000 flag 1  // ~s~Take Big Smoke back to his ~y~house~s~.
+33@ = 0 
+113@ = 4 
+
+:SMOKE3_21144
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_22870 
+if 
+  113@ == 4 
+jf @SMOKE3_22870 
+if 
+06EE:   actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+jf @SMOKE3_22870 
+if 
+0449:   actor $ACTOR_SMOKE in_a_car 
+jf @SMOKE3_22870 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @SMOKE3_22870 
+gosub @SMOKE3_24826 
+if 
+  110@ == 0 
+jf @SMOKE3_21329 
+if 
+  111@ == 0 
+jf @SMOKE3_21329 
+if 
+  33@ > 7000 
+jf @SMOKE3_21329 
+04AF: 128@ = 35477 // = constant 
+05AA: 129@s = 'SMO3_RA' // @s = 'short'  // ~z~Was it always like this?
+gosub @SMOKE3_24784 
+33@ = 0 
+
+:SMOKE3_21329
+if 
+  110@ == 1 
+jf @SMOKE3_21396 
+if 
+  111@ == 0 
+jf @SMOKE3_21396 
+04AF: 128@ = 35478 // = constant 
+05AA: 129@s = 'SMO3_RB' // @s = 'short'  // ~z~Was what always like this?
+gosub @SMOKE3_24784 
+
+:SMOKE3_21396
+if 
+  110@ == 2 
+jf @SMOKE3_21463 
+if 
+  111@ == 0 
+jf @SMOKE3_21463 
+04AF: 128@ = 35479 // = constant 
+05AA: 129@s = 'SMO3_RC' // @s = 'short'  // ~z~Always fucked up around here. Or is it because of the drugs?
+gosub @SMOKE3_24784 
+
+:SMOKE3_21463
+if 
+  110@ == 3 
+jf @SMOKE3_21530 
+if 
+  111@ == 0 
+jf @SMOKE3_21530 
+04AF: 128@ = 35480 // = constant 
+05AA: 129@s = 'SMO3_RD' // @s = 'short'  // ~z~What you think, man?
+gosub @SMOKE3_24784 
+
+:SMOKE3_21530
+if 
+  110@ == 4 
+jf @SMOKE3_21597 
+if 
+  111@ == 0 
+jf @SMOKE3_21597 
+04AF: 128@ = 35481 // = constant 
+05AA: 129@s = 'SMO3_RE' // @s = 'short'  // ~z~I don't know. That's why I'm asking you.
+gosub @SMOKE3_24784 
+
+:SMOKE3_21597
+if 
+  110@ == 5 
+jf @SMOKE3_21664 
+if 
+  111@ == 0 
+jf @SMOKE3_21664 
+04AF: 128@ = 35482 // = constant 
+05AA: 129@s = 'SMO3_RF' // @s = 'short'  // ~z~Yo, eh eh, don't ask a wise man, friend. Ask a fool.
+gosub @SMOKE3_24784 
+
+:SMOKE3_21664
+if 
+  110@ == 6 
+jf @SMOKE3_21731 
+if 
+  111@ == 0 
+jf @SMOKE3_21731 
+04AF: 128@ = 35483 // = constant 
+05AA: 129@s = 'SMO3_RG' // @s = 'short'  // ~z~That's what I was doing.
+gosub @SMOKE3_24784 
+
+:SMOKE3_21731
+if 
+  110@ == 7 
+jf @SMOKE3_21798 
+if 
+  111@ == 0 
+jf @SMOKE3_21798 
+04AF: 128@ = 35484 // = constant 
+05AA: 129@s = 'SMO3_RH' // @s = 'short'  // ~z~Well, if you're going to make this thing personal, I ain't speaking on it no more.
+gosub @SMOKE3_24784 
+
+:SMOKE3_21798
+if 
+  110@ == 8 
+jf @SMOKE3_21865 
+if 
+  111@ == 0 
+jf @SMOKE3_21865 
+04AF: 128@ = 35461 // = constant 
+05AA: 129@s = 'SMO3_QA' // @s = 'short'  // ~z~Why Tenpenny want that package?
+gosub @SMOKE3_24784 
+
+:SMOKE3_21865
+if 
+  110@ == 9 
+jf @SMOKE3_21932 
+if 
+  111@ == 0 
+jf @SMOKE3_21932 
+04AF: 128@ = 35462 // = constant 
+05AA: 129@s = 'SMO3_QB' // @s = 'short'  // ~z~Who-penny?
+gosub @SMOKE3_24784 
+
+:SMOKE3_21932
+if 
+  110@ == 10 
+jf @SMOKE3_21999 
+if 
+  111@ == 0 
+jf @SMOKE3_21999 
+04AF: 128@ = 35463 // = constant 
+05AA: 129@s = 'SMO3_QC' // @s = 'short'  // ~z~Don't bullshit me, Smoke!
+gosub @SMOKE3_24784 
+
+:SMOKE3_21999
+if 
+  110@ == 11 
+jf @SMOKE3_22066 
+if 
+  111@ == 0 
+jf @SMOKE3_22066 
+04AF: 128@ = 35464 // = constant 
+05AA: 129@s = 'SMO3_QD' // @s = 'short'  // ~z~Carl, man, there's something about you man, some kinda
+gosub @SMOKE3_24784 
+
+:SMOKE3_22066
+if 
+  110@ == 12 
+jf @SMOKE3_22133 
+if 
+  111@ == 0 
+jf @SMOKE3_22133 
+04AF: 128@ = 35476 // = constant 
+05AA: 129@s = 'SMO3_QR' // @s = 'short'  // ~z~strange kinda aura, man.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22133
+if 
+  110@ == 13 
+jf @SMOKE3_22200 
+if 
+  111@ == 0 
+jf @SMOKE3_22200 
+04AF: 128@ = 35465 // = constant 
+05AA: 129@s = 'SMO3_QE' // @s = 'short'  // ~z~Smoke, when you gonna stop with this weird bullshit?
+gosub @SMOKE3_24784 
+
+:SMOKE3_22200
+if 
+  110@ == 14 
+jf @SMOKE3_22267 
+if 
+  111@ == 0 
+jf @SMOKE3_22267 
+04AF: 128@ = 35466 // = constant 
+05AA: 129@s = 'SMO3_QF' // @s = 'short'  // ~z~The truth is Carl, we've been lost while you been gone,
+gosub @SMOKE3_24784 
+
+:SMOKE3_22267
+if 
+  110@ == 15 
+jf @SMOKE3_22334 
+if 
+  111@ == 0 
+jf @SMOKE3_22334 
+04AF: 128@ = 35467 // = constant 
+05AA: 129@s = 'SMO3_QG' // @s = 'short'  // ~z~but now we saved again.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22334
+if 
+  110@ == 16 
+jf @SMOKE3_22401 
+if 
+  111@ == 0 
+jf @SMOKE3_22401 
+04AF: 128@ = 35468 // = constant 
+05AA: 129@s = 'SMO3_QH' // @s = 'short'  // ~z~What's in the package, Smoke?
+gosub @SMOKE3_24784 
+
+:SMOKE3_22401
+if 
+  110@ == 17 
+jf @SMOKE3_22468 
+if 
+  111@ == 0 
+jf @SMOKE3_22468 
+04AF: 128@ = 35469 // = constant 
+05AA: 129@s = 'SMO3_QJ' // @s = 'short'  // ~z~The problem is, too many of the chosen ones' get killed before their time, man.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22468
+if 
+  110@ == 18 
+jf @SMOKE3_22535 
+if 
+  111@ == 0 
+jf @SMOKE3_22535 
+04AF: 128@ = 35470 // = constant 
+05AA: 129@s = 'SMO3_QK' // @s = 'short'  // ~z~If the afterlife means peace from your bullshit, I think I'm ready.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22535
+if 
+  110@ == 19 
+jf @SMOKE3_22602 
+if 
+  111@ == 0 
+jf @SMOKE3_22602 
+04AF: 128@ = 35471 // = constant 
+05AA: 129@s = 'SMO3_QL' // @s = 'short'  // ~z~What's in the damn package, Smoke? No more bullshit!
+gosub @SMOKE3_24784 
+
+:SMOKE3_22602
+if 
+  110@ == 20 
+jf @SMOKE3_22669 
+if 
+  111@ == 0 
+jf @SMOKE3_22669 
+04AF: 128@ = 35472 // = constant 
+05AA: 129@s = 'SMO3_QM' // @s = 'short'  // ~z~I dunno, homie.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22669
+if 
+  110@ == 21 
+jf @SMOKE3_22736 
+if 
+  111@ == 0 
+jf @SMOKE3_22736 
+04AF: 128@ = 35473 // = constant 
+05AA: 129@s = 'SMO3_QN' // @s = 'short'  // ~z~I'm just trying to help these officers keep shit off the streets, man.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22736
+if 
+  110@ == 22 
+jf @SMOKE3_22803 
+if 
+  111@ == 0 
+jf @SMOKE3_22803 
+04AF: 128@ = 35474 // = constant 
+05AA: 129@s = 'SMO3_QO' // @s = 'short'  // ~z~I don't trust them.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22803
+if 
+  110@ == 23 
+jf @SMOKE3_22870 
+if 
+  111@ == 0 
+jf @SMOKE3_22870 
+04AF: 128@ = 35475 // = constant 
+05AA: 129@s = 'SMO3_QP' // @s = 'short'  // ~z~Sometimes, trust ain't an option, homie.
+gosub @SMOKE3_24784 
+
+:SMOKE3_22870
+if 
+  107@ == 1 
+jf @SMOKE3_23393 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23393 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 1 near_point 2061.68 -1694.71 radius 4.0 4.0 
+jf @SMOKE3_23393 
+if 
+00EC:   actor $ACTOR_SMOKE sphere 0 near_point 2061.68 -1694.71 radius 4.0 4.0 
+jf @SMOKE3_23393 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+02A3: enable_widescreen 1 
+113@ = 5 
+040D: unload_wav 1 
+040D: unload_wav 2 
+
+:SMOKE3_23013
+if 
+fading 
+jf @SMOKE3_23037 
+wait 0 
+jump @SMOKE3_23013 
+
+:SMOKE3_23037
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23082 
+06C9: remove_actor $ACTOR_SMOKE from_group 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+01B9: set_actor $ACTOR_SMOKE armed_weapon_to 0 
+
+:SMOKE3_23082
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SMOKE3_23135 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2060.325 -1694.805 12.5547 
+Actor.Angle($PLAYER_ACTOR) = 91.3046
+jump @SMOKE3_23165 
+
+:SMOKE3_23135
+Actor.PutAt($PLAYER_ACTOR, 2060.325, -1694.805, 12.5547)
+Actor.Angle($PLAYER_ACTOR) = 91.3046
+
+:SMOKE3_23165
+if 
+   Actor.Driving($ACTOR_SMOKE)
+jf @SMOKE3_23218 
+0362: remove_actor $ACTOR_SMOKE from_car_and_place_at 2057.75 -1694.79 12.554 
+Actor.Angle($ACTOR_SMOKE) = 273.188
+jump @SMOKE3_23248 
+
+:SMOKE3_23218
+Actor.PutAt($ACTOR_SMOKE, 2057.75, -1694.79, 12.554)
+Actor.Angle($ACTOR_SMOKE) = 273.188
+
+:SMOKE3_23248
+0395: clear_area 1 at 2057.75 -1694.79 100.0 radius 100.0 
+if 
+   not Car.Wrecked(54@)
+jf @SMOKE3_23318 
+Car.PutAt(54@, 2060.3, -1697.975, 9.0)
+Car.Angle(54@) = 88.04
+
+:SMOKE3_23318
+04ED: load_animation "GANGS" 
+03CF: load_wav 35485 as 1 
+03CF: load_wav 35486 as 2 
+038B: load_requested_models 
+
+:SMOKE3_23347
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+84EE:   not animation "GANGS" loaded 
+jf @SMOKE3_23386 
+wait 0 
+jump @SMOKE3_23347 
+
+:SMOKE3_23386
+80@ = 4 
+
+:SMOKE3_23393
+if 
+   Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23432 
+00BC: show_text_highpriority GXT 'SMK3_21' time 5000 flag 1  // ~r~Big Smoke died!
+jump @SMOKE3_25128 
+
+:SMOKE3_23432
+if 
+  80@ == 4 
+jf @SMOKE3_24174 
+Camera.SetPosition(2061.814, -1692.773, 13.1148, 0.0, 0.0, 0.0)
+Camera.PointAt(2061.089, -1693.453, 13.2238, 2)
+fade 1 500 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23595 
+0605: actor $ACTOR_SMOKE perform_animation "PRTIAL_GNGTLKC" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+03D1: play_wav 1 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'SMO3_SA' time 4000 flag 1  // ~z~Hey, you better clear out, CJ.
+
+:SMOKE3_23595
+if 
+83D2:   not wav 1 ended 
+jf @SMOKE3_23621 
+wait 0 
+jump @SMOKE3_23595 
+
+:SMOKE3_23621
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 35487 as 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO3_SB' time 4000 flag 1  // ~z~I don't want those C.R.A.S.H.fools trying to pull you into some shit!
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23708 
+0605: actor $ACTOR_SMOKE perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:SMOKE3_23708
+if 
+83D2:   not wav 2 ended 
+jf @SMOKE3_23734 
+wait 0 
+jump @SMOKE3_23708 
+
+:SMOKE3_23734
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_23760 
+0687: clear_actor $ACTOR_SMOKE task 
+0968: actor $ACTOR_SMOKE stop_mouth 
+
+:SMOKE3_23760
+040D: unload_wav 2 
+00BE: text_clear_all 
+03CF: load_wav 35488 as 2 
+Camera.SetPosition(2055.851, -1692.644, 14.0837, 0.0, 0.0, 0.0)
+Camera.PointAt(2056.581, -1693.324, 14.0171, 2)
+
+:SMOKE3_23826
+if 
+83D0:   not wav 1 loaded 
+jf @SMOKE3_23852 
+wait 0 
+jump @SMOKE3_23826 
+
+:SMOKE3_23852
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO3_SC' time 5000 flag 1  // ~z~Alright, homie. You be careful with those cats.
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:SMOKE3_23908
+if 
+83D2:   not wav 1 ended 
+jf @SMOKE3_23934 
+wait 0 
+jump @SMOKE3_23908 
+
+:SMOKE3_23934
+00BE: text_clear_all 
+
+:SMOKE3_23936
+if 
+83D0:   not wav 2 loaded 
+jf @SMOKE3_23962 
+wait 0 
+jump @SMOKE3_23936 
+
+:SMOKE3_23962
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO3_SD' time 5000 flag 1  // ~z~I'm gonna see you later.
+
+:SMOKE3_23982
+if 
+83D2:   not wav 2 ended 
+jf @SMOKE3_24008 
+wait 0 
+jump @SMOKE3_23982 
+
+:SMOKE3_24008
+fade 0 1500 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_24079 
+05D3: AS_actor $ACTOR_SMOKE goto_point 2058.027 -1697.166 13.55 mode 4 time -1 ms // versionA 
+05D3: AS_actor $PLAYER_ACTOR goto_point 2072.723 -1694.359 13.55 mode 4 time -1 ms // versionA 
+
+:SMOKE3_24079
+if 
+fading 
+jf @SMOKE3_24103 
+wait 0 
+jump @SMOKE3_24079 
+
+:SMOKE3_24103
+Actor.DestroyInstantly($ACTOR_SMOKE)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2072.723, -1694.359, 12.54)
+Actor.Angle($PLAYER_ACTOR) = 272.637
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+fade 1 500 
+00BE: text_clear_all 
+jump @SMOKE3_25214 
+
+:SMOKE3_24174
+if or
+  80@ == 2 
+  80@ == 3 
+jf @SMOKE3_24777 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_24777 
+if 
+  95@ == 0 
+jf @SMOKE3_24358 
+if 
+86EE:   not actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+jf @SMOKE3_24358 
+00BC: show_text_highpriority GXT 'SMK3_18' time 5000 flag 1  // ~s~You left ~b~Big Smoke ~s~behind go get him!
+118@ = Marker.CreateAboveActor($ACTOR_SMOKE)
+07E0: set_marker 118@ type_to 1 
+if 
+  80@ == 2 
+jf @SMOKE3_24321 
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+
+:SMOKE3_24321
+if 
+  80@ == 3 
+jf @SMOKE3_24351 
+Marker.Disable(124@)
+107@ = 0 
+
+:SMOKE3_24351
+95@ = 1 
+
+:SMOKE3_24358
+if 
+  95@ == 1 
+jf @SMOKE3_24777 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_SMOKE radius 10.0 10.0 8.0 sphere 0 
+jf @SMOKE3_24777 
+if 
+02CB:   actor $ACTOR_SMOKE bounding_sphere_visible 
+jf @SMOKE3_24777 
+if 
+86EE:   not actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+jf @SMOKE3_24465 
+0631: put_actor $ACTOR_SMOKE in_group $PLAYER_GROUP 
+06F0: set_group $PLAYER_GROUP distance_limit_to 30.0 
+
+:SMOKE3_24465
+Marker.Disable(118@)
+if 
+  80@ == 2 
+jf @SMOKE3_24600 
+if 
+   not Actor.Dead(34@)
+jf @SMOKE3_24512 
+119@ = Marker.CreateAboveActor(34@)
+
+:SMOKE3_24512
+if 
+   not Actor.Dead(35@)
+jf @SMOKE3_24536 
+120@ = Marker.CreateAboveActor(35@)
+
+:SMOKE3_24536
+if 
+   not Actor.Dead(36@)
+jf @SMOKE3_24560 
+121@ = Marker.CreateAboveActor(36@)
+
+:SMOKE3_24560
+if 
+   not Actor.Dead(37@)
+jf @SMOKE3_24584 
+122@ = Marker.CreateAboveActor(37@)
+
+:SMOKE3_24584
+00BC: show_text_highpriority GXT 'SMK3_3' time 5000 flag 1  // ~s~Chase down the ~r~Vagos gang members ~s~and take them out!
+
+:SMOKE3_24600
+if 
+  80@ == 3 
+jf @SMOKE3_24679 
+if 
+  115@ == 1 
+jf @SMOKE3_24679 
+00BC: show_text_highpriority GXT 'SMK3_22' time 5000 flag 1  // ~s~Take Big Smoke back to his ~y~house~s~.
+018A: 124@ = create_checkpoint_at 2061.68 -1694.71 12.554 
+107@ = 1 
+
+:SMOKE3_24679
+if 
+  115@ == 2 
+jf @SMOKE3_24770 
+if 
+  80@ == 3 
+jf @SMOKE3_24770 
+018A: 124@ = create_checkpoint_at 2061.68 -1694.71 12.554 
+107@ = 1 
+109@ = 1 
+110@ = 0 
+111@ = 0 
+115@ = 1 
+
+:SMOKE3_24770
+95@ = 0 
+
+:SMOKE3_24777
+jump @SMOKE3_1346 
+
+:SMOKE3_24784
+if 
+  111@ == 0 
+jf @SMOKE3_24824 
+03CF: load_wav 128@ as 1 
+05AA: 126@s = 129@s // @s = 'short' 
+111@ = 1 
+
+:SMOKE3_24824
+return 
+
+:SMOKE3_24826
+if 
+  111@ == 1 
+jf @SMOKE3_24880 
+if 
+03D0:   wav 1 loaded 
+jf @SMOKE3_24880 
+00BC: show_text_highpriority GXT 126@s time 4000 flag 1 
+03D1: play_wav 1 
+111@ = 2 
+
+:SMOKE3_24880
+if 
+  111@ == 2 
+jf @SMOKE3_24974 
+if 
+03D2:   wav 1 ended 
+jf @SMOKE3_24974 
+110@ += 1 
+040D: unload_wav 1 
+00BE: text_clear_all 
+if 
+  117@ == 1 
+jf @SMOKE3_24967 
+00BC: show_text_highpriority GXT 'SMK3_25' time 6000 flag 1  // ~s~Keep up with the front carriage of the train so Big Smoke can shoot the ~r~Vagos gang members~s~.
+117@ = 2 
+
+:SMOKE3_24967
+111@ = 0 
+
+:SMOKE3_24974
+return 
+
+:SMOKE3_24976
+0615: define_AS_pack_begin 62@ 
+05BC: AS_actor -1 jump 1 
+05D3: AS_actor -1 goto_point 1799.49 -1953.73 12.23 mode 6 time 50000 ms // versionA 
+0616: define_AS_pack_end 62@ 
+0618: assign_actor 61@ to_AS_pack 62@ 
+061B: remove_references_to_AS_pack 62@ 
+return 
+
+:SMOKE3_25033
+0615: define_AS_pack_begin 63@ 
+0638: AS_actor -1 stay_put 1 
+0688: AS_actor -1 unknown_toggle_ped_threat_scanner 1 0 0 
+0616: define_AS_pack_end 63@ 
+0618: assign_actor 61@ to_AS_pack 63@ 
+061B: remove_references_to_AS_pack 63@ 
+return 
+
+:SMOKE3_25074
+0615: define_AS_pack_begin 65@ 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @SMOKE3_25108 
+05E2: AS_actor -1 kill_actor $ACTOR_SMOKE 
+
+:SMOKE3_25108
+0616: define_AS_pack_end 65@ 
+0618: assign_actor 61@ to_AS_pack 65@ 
+061B: remove_references_to_AS_pack 65@ 
+return 
+
+:SMOKE3_25128
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SMOKE3_25196 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+
+:SMOKE3_25196
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:SMOKE3_25214
+$SMOKE_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'SMOKE_3'  // Wrong Side of the Tracks
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 5 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0394: play_music 1 
+0998: add_respect 5 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:SMOKE3_25269
+$ONMISSION = 0 
+Camera.Restore_WithJumpCut
+09AD: set_vehicle_camera_mode 2 
+Object.RemoveReferences(53@)
+Object.RemoveReferences(52@)
+Model.Destroy(#IMY_TRACK_BARRIER)
+0A45: set_rail_tracks_friction_to -1.0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SMOKE3_25331 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+
+:SMOKE3_25331
+if 
+   not Car.Wrecked(54@)
+jf @SMOKE3_25354 
+053F: set_car 54@ tires_vulnerability 1 
+
+:SMOKE3_25354
+06DA: reset_train_directions 
+06D7: enable_train_traffic 1 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+Actor.DestroyWithFade(34@)
+Actor.DestroyWithFade(35@)
+Actor.DestroyWithFade(36@)
+Actor.DestroyWithFade(37@)
+Actor.DestroyWithFade($ACTOR_SMOKE)
+01E7: remove_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2270.69 -1391.75 20.28 cornerB 2315.81 -1375.58 26.88 
+01E7: remove_forbidden_for_cars_cube_cornerA 2268.75 -1390.8 20.86 cornerB 2330.03 -1375.53 23.1 
+01E7: remove_forbidden_for_cars_cube_cornerA 2257.3 -1491.95 20.63 cornerB 2299.7 -1477.32 26.12 
+01E7: remove_forbidden_for_cars_cube_cornerA 2235.25 -1656.59 12.68 cornerB 2176.75 -1629.89 15.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2221.43 -1721.07 10.09 cornerB 2174.01 -172.72 15.73 
+01E7: remove_forbidden_for_cars_cube_cornerA 2234.09 -1723.3 14.0 cornerB 2178.22 -1742.47 10.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2261.14 -1141.45 18.0 cornerB 2308.19 -1156.38 35.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1956.91 -1936.01 10.07 cornerB 1965.61 -1978.99 14.45 
+01E7: remove_forbidden_for_cars_cube_cornerA 2181.3 -1892.0 10.0 cornerB 2222.36 -1897.71 15.0 
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#COLT45)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#STREAK)
+Model.Destroy(#STREAKC)
+Model.Destroy(#IMMMCRAN)
+Model.Destroy(#TAHOMA)
+Model.Destroy(#GLENDALE)
+Model.Destroy(#TEC9)
+Model.Destroy(#TRNTRK8_LAS)
+0296: unload_special_actor 1 
+04EF: release_animation "TRAIN" 
+04EF: release_animation "GANGS" 
+Marker.Disable(118@)
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+if 
+   not Car.Wrecked(40@)
+jf @SMOKE3_25866 
+09CF: set_train 40@ stop_at_stations 1 
+
+:SMOKE3_25866
+09F0: restore_behind_camera_autoposition_mode_for_all_car_models 
+if 
+   not Car.Wrecked(54@)
+jf @SMOKE3_25921 
+Car.Health(54@) = 1000
+053F: set_car 54@ tires_vulnerability 1 
+Car.SetImmunities(54@, 0, 0, 0, 0, 0)
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:SMOKE3_25921
+01B7: release_weather 
+if 
+   not Car.Wrecked(78@)
+jf @SMOKE3_25954 
+Car.Health(78@) = 1000
+053F: set_car 78@ tires_vulnerability 1 
+
+:SMOKE3_25954
+Car.RemoveReferences(54@)
+Car.RemoveReferences(78@)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

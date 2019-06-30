@@ -1,0 +1,2247 @@
+:DRIV2
+thread 'DRIV2' 
+gosub @DRIV2_94 
+if 
+wasted_or_busted 
+jf @DRIV2_85 
+$11033 = 1 
+$11029 = 135.0 
+$11032 = -2570.34 
+$11031 = 1363.52 
+$11030 = 6.64 
+gosub @DRIV2_14067 
+
+:DRIV2_85
+gosub @DRIV2_14217 
+end_thread 
+
+:DRIV2_94
+increment_mission_attempts 
+054C: use_GXT_table 'FARLIE2' 
+$ONMISSION = 1 
+wait 0 
+37@ = 4 
+$1935 = 0 
+119@ = 0 
+
+:DRIV2_139
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_309 
+123@(119@,4i) = 0 
+175@(119@,4i) = 0 
+130@(119@,4i) = 0 
+139@(119@,4i) = 0 
+143@(119@,4i) = 0 
+147@(119@,4i) = 0 
+151@(119@,4i) = 0 
+66@(119@,4i) = 1000 
+70@(119@,4i) = 1000 
+159@(119@,4i) = 0 
+62@(119@,4f) = 20.0 
+115@(119@,4i) = 0 
+119@ += 1 
+jump @DRIV2_139 
+
+:DRIV2_309
+90@ = -2730.14 
+91@ = 84.24 
+92@ = 3.04 
+78@ = -2600.53 
+82@ = 1337.91 
+86@ = 5.6 
+79@ = -2855.52 
+83@ = 719.95 
+87@ = 26.84 
+80@ = -1897.94 
+84@ = -576.43 
+88@ = 22.99 
+81@ = -2811.49 
+85@ = -326.14 
+89@ = 5.72 
+93@ = -1790.65 
+94@ = 1435.4 
+95@ = 6.15 
+122@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+134@ = 0 
+135@ = 1 
+136@ = 2 
+137@ = 3 
+138@ = 4 
+163@ = 0 
+164@ = 1 
+165@ = 2 
+155@ = 0 
+156@ = 0 
+157@ = 0 
+158@ = 0 
+166@ = 0 
+75@ = -2143.27 
+76@ = 918.38 
+77@ = 79.42 
+167@ = 0 
+168@ = 0 
+171@ = 0 
+172@ = 0 
+173@ = 0 
+174@ = 0 
+179@ = 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:DRIV2_702
+if 
+fading 
+jf @DRIV2_726 
+wait 0 
+jump @DRIV2_702 
+
+:DRIV2_726
+select_interior 3 
+02E4: load_cutscene_data 'FARL_2A' 
+
+:DRIV2_741
+if 
+86B9:   not cutscene_data_loaded 
+jf @DRIV2_765 
+wait 0 
+jump @DRIV2_741 
+
+:DRIV2_765
+02E7: start_cutscene 
+fade 1 1000 
+
+:DRIV2_774
+if 
+82E9:   not cutscene_reached_end 
+jf @DRIV2_798 
+wait 0 
+jump @DRIV2_774 
+
+:DRIV2_798
+fade 0 0 
+
+:DRIV2_804
+if 
+fading 
+jf @DRIV2_828 
+wait 0 
+jump @DRIV2_804 
+
+:DRIV2_828
+02EA: end_cutscene 
+023C: load_special_actor 'JIZZY' as 1 // models 290-299 
+04ED: load_animation "GANGS" 
+03CF: load_wav 15028 as 1 
+04ED: load_animation "BIKES" 
+04ED: load_animation "MISC" 
+
+:DRIV2_876
+if or
+83D0:   not wav 1 loaded 
+823D:   not special_actor 1 loaded 
+84EE:   not animation "GANGS" loaded 
+84EE:   not animation "BIKES" loaded 
+84EE:   not animation "MISC" loaded 
+jf @DRIV2_932 
+wait 0 
+jump @DRIV2_876 
+
+:DRIV2_932
+Model.Load(#FCR900)
+Model.Load(#BOXVILLE)
+Model.Load(#KMB_PACKET)
+Model.Load(#BIKDRUG)
+Model.Load(#MICRO_UZI)
+
+:DRIV2_957
+if or
+   not Model.Available(#FCR900)
+   not Model.Available(#BOXVILLE)
+   not Model.Available(#KMB_PACKET)
+   not Model.Available(#BIKDRUG)
+   not Model.Available(#MICRO_UZI)
+jf @DRIV2_1004 
+wait 0 
+jump @DRIV2_957 
+
+:DRIV2_1004
+Player.CanMove($PLAYER_CHAR) = False
+select_interior 0 
+0395: clear_area 1 at -2623.359 1410.786 6.1629 radius 20.0 
+04E4: refresh_game_renderer_at -2623.359 1410.786 
+58@ = Actor.Create(CivMale, #SPECIAL01, -2624.049, 1402.888, 6.1406)
+Actor.Angle(58@) = 248.4552
+Actor.PutAt($PLAYER_ACTOR, -2622.974, 1402.176, 6.1322)
+Actor.Angle($PLAYER_ACTOR) = 86.0103
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2621.697, 1403.492, 7.8087, 0.0, 0.0, 0.0)
+Camera.PointAt(-2622.574, 1403.047, 7.6296, 2)
+fade 1 2000 
+
+:DRIV2_1178
+if 
+fading 
+jf @DRIV2_1202 
+wait 0 
+jump @DRIV2_1178 
+
+:DRIV2_1202
+0615: define_AS_pack_begin 53@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKC" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKB" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKD" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKE" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKG" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKH" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0616: define_AS_pack_end 53@ 
+0618: assign_actor 58@ to_AS_pack 53@ 
+061B: remove_references_to_AS_pack 53@ 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'FAR2_ZC' time 6000 flag 1  // ~z~CJ, get your ass over there and rescue the situation.
+
+:DRIV2_1539
+if 
+83D2:   not wav 1 ended 
+jf @DRIV2_1565 
+wait 0 
+jump @DRIV2_1539 
+
+:DRIV2_1565
+05D3: AS_actor 58@ goto_point -2623.359 1410.786 6.1629 mode 4 time 15000 ms // versionA 
+040D: unload_wav 1 
+00BE: text_clear_all 
+wait 1000 
+if 
+   not Actor.Dead(58@)
+jf @DRIV2_1622 
+Actor.DestroyInstantly(58@)
+
+:DRIV2_1622
+04EF: release_animation "GANGS" 
+0296: unload_special_actor 1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Garage.ChangeType('TBON', 19)
+Actor.Angle($PLAYER_ACTOR) = 224.0
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  179@ == 1 
+jf @DRIV2_1866 
+34@ = Car.Create(#BOXVILLE, 0.0, 0.0, -100.0)
+184@ = Marker.CreateAboveCar(34@)
+119@ = 0 
+
+:DRIV2_1734
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_1866 
+38@(119@,4i) = Object.Create(#KMB_PACKET, 0.0, 0.0, -100.0)
+180@(119@,4i) = Marker.CreateAboveObject(38@(119@,4i))
+54@(119@,4i) = Actor.Create(Dealer, #BIKDRUG, 0.0, 0.0, -100.0)
+58@(119@,4i) = Car.Create(#FCR900, 0.0, 0.0, -100.0)
+119@ += 1 
+jump @DRIV2_1734 
+
+:DRIV2_1866
+01E8: create_forbidden_for_cars_cube_cornerA -2014.82 181.4 -13.0 cornerB -1614.82 581.4 47.0 
+018A: 184@ = create_checkpoint_at -1814.82 381.4 17.09 
+08FB: set_checkpoint 184@ type_to 1 
+00BC: show_text_highpriority GXT 'DRV3_11' time 10000 flag 0  // ~s~Get to the ~b~ambushed van.
+
+:DRIV2_1941
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DRIV2_1967 
+jump @DRIV2_14153 
+
+:DRIV2_1967
+if 
+   not 127@ == 1 
+jf @DRIV2_2998 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_2034 
+36@ = Actor.MissionCar($PLAYER_ACTOR)
+if 
+   not 174@ == 1 
+jf @DRIV2_2034 
+174@ = 1 
+
+:DRIV2_2034
+if and
+   not 122@ == 1 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1814.82 381.4 radius 200.0 200.0 
+jf @DRIV2_2098 
+Marker.Disable(184@)
+gosub @DRIV2_4227 
+122@ = 1 
+
+:DRIV2_2098
+if 
+  122@ == 1 
+jf @DRIV2_2998 
+077E: get_active_interior_to 121@ 
+if 
+  121@ == 0 
+jf @DRIV2_2909 
+119@ = 0 
+
+:DRIV2_2146
+if and
+001D:   37@ > 119@ // (int) 
+   not 128@ == 1 
+jf @DRIV2_2243 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_2229 
+080E: get_actor 54@(119@,4i) ped_event_to 110@ 
+if 
+04A4:   110@ == 49 // == constant 
+jf @DRIV2_2229 
+128@ = 1 
+
+:DRIV2_2229
+119@ += 1 
+jump @DRIV2_2146 
+
+:DRIV2_2243
+if 
+   not 128@ == 1 
+jf @DRIV2_2909 
+if and
+   not 129@ == 1 
+02EE:   projectile_in_cube_cornerA -1824.82 371.4 12.09 cornerB -1804.82 391.4 22.09 
+jf @DRIV2_2325 
+129@ = 1 
+32@ = 0 
+
+:DRIV2_2325
+if 
+  129@ == 1 
+jf @DRIV2_2909 
+119@ = 0 
+
+:DRIV2_2350
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_2883 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_2869 
+Actor.StorePos(54@(119@,4i), $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0089: 186@ = $TEMPVAR_X_COORD // (float) 
+186@ -= 3.0 
+0089: 187@ = $TEMPVAR_X_COORD // (float) 
+187@ += 3.0 
+0089: 188@ = $TEMPVAR_Y_COORD // (float) 
+188@ -= 3.0 
+0089: 189@ = $TEMPVAR_Y_COORD // (float) 
+189@ += 3.0 
+0089: 190@ = $TEMPVAR_Z_COORD // (float) 
+190@ -= 3.0 
+0089: 191@ = $TEMPVAR_Z_COORD // (float) 
+191@ += 3.0 
+if or
+0356:   explosion_type 0 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+0356:   explosion_type 1 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+0356:   explosion_type 2 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+0356:   explosion_type 3 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+0356:   explosion_type 11 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+0356:   explosion_type 12 in_cube_cornerA 186@ 188@ 190@ cornerB 187@ 189@ 191@ 
+jf @DRIV2_2869 
+if 
+   not Actor.Dead(54@)
+jf @DRIV2_2679 
+05BE: AS_actor 54@ die 
+
+:DRIV2_2679
+if 
+   not Actor.Dead(55@)
+jf @DRIV2_2700 
+05BE: AS_actor 55@ die 
+
+:DRIV2_2700
+if 
+   not Actor.Dead(56@)
+jf @DRIV2_2721 
+05BE: AS_actor 56@ die 
+
+:DRIV2_2721
+if 
+   not Actor.Dead(57@)
+jf @DRIV2_2742 
+05BE: AS_actor 57@ die 
+
+:DRIV2_2742
+if 
+   not Car.Wrecked(58@)
+jf @DRIV2_2763 
+020B: explode_car 58@ 
+
+:DRIV2_2763
+if 
+   not Car.Wrecked(59@)
+jf @DRIV2_2784 
+020B: explode_car 59@ 
+
+:DRIV2_2784
+if 
+   not Car.Wrecked(60@)
+jf @DRIV2_2805 
+020B: explode_car 60@ 
+
+:DRIV2_2805
+if 
+   not Car.Wrecked(61@)
+jf @DRIV2_2826 
+020B: explode_car 61@ 
+
+:DRIV2_2826
+Object.Destroy(38@)
+Object.Destroy(39@)
+Object.Destroy(40@)
+Object.Destroy(41@)
+00BC: show_text_highpriority GXT 'DRV3_9' time 5000 flag 0  // ~r~One of the packages was destroyed!
+jump @DRIV2_14067 
+
+:DRIV2_2869
+119@ += 1 
+jump @DRIV2_2350 
+
+:DRIV2_2883
+if 
+  32@ > 2000 
+jf @DRIV2_2909 
+128@ = 1 
+
+:DRIV2_2909
+if or
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -1814.82 381.4 radius 50.0 50.0 
+  128@ == 1 
+jf @DRIV2_2998 
+Marker.Disable(184@)
+gosub @DRIV2_9985 
+127@ = 1 
+32@ = 0 
+0512: show_permanent_text_box 'DRV3_H'  // When you're close to a ~r~package~w~, tap ~k~~VEHICLE_FIREWEAPON_ALT~ to snatch it.
+33@ = 0 
+
+:DRIV2_2998
+if 
+  127@ == 1 
+jf @DRIV2_4220 
+if 
+   not 171@ == 1 
+jf @DRIV2_3062 
+if 
+  33@ > 12000 
+jf @DRIV2_3062 
+03E6: remove_text_box 
+171@ = 1 
+
+:DRIV2_3062
+if 
+   not 173@ == 1 
+jf @DRIV2_3302 
+if or
+047A:   actor $PLAYER_ACTOR driving_bike 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @DRIV2_3295 
+119@ = 0 
+
+:DRIV2_3108
+if and
+001D:   37@ > 119@ // (int) 
+   not 173@ == 1 
+jf @DRIV2_3295 
+if and
+03CA:   object 38@(119@,4i) exists 
+   not 123@(119@,4i) == 1 
+jf @DRIV2_3281 
+if or
+0685:   object 38@(119@,4i) attached 
+0737:   actor -1 lifting_object 38@(119@,4i) 
+jf @DRIV2_3281 
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle 38@(119@,4i) radius 10.0 10.0 sphere 0 
+jf @DRIV2_3281 
+0512: show_permanent_text_box 'DRV3_H'  // When you're close to a ~r~package~w~, tap ~k~~VEHICLE_FIREWEAPON_ALT~ to snatch it.
+173@ = 1 
+if 
+   not 171@ == 1 
+jf @DRIV2_3274 
+171@ = 1 
+
+:DRIV2_3274
+33@ = 0 
+
+:DRIV2_3281
+119@ += 1 
+jump @DRIV2_3108 
+
+:DRIV2_3295
+jump @DRIV2_3348 
+
+:DRIV2_3302
+if 
+   not 172@ == 1 
+jf @DRIV2_3348 
+if 
+  33@ > 12000 
+jf @DRIV2_3348 
+03E6: remove_text_box 
+172@ = 1 
+
+:DRIV2_3348
+gosub @DRIV2_5497 
+gosub @DRIV2_6911 
+gosub @DRIV2_7480 
+gosub @DRIV2_7677 
+gosub @DRIV2_7875 
+if and
+   not 155@ == 1 
+   not 166@ == 1 
+jf @DRIV2_3559 
+if 
+  32@ > 280000 
+jf @DRIV2_3559 
+gosub @DRIV2_8874 
+155@ = 1 
+if or
+003B:   130@ == 138@ // (int) 
+003B:   131@ == 138@ // (int) 
+003B:   132@ == 138@ // (int) 
+003B:   133@ == 138@ // (int) 
+jf @DRIV2_3559 
+0085: 192@ = 37@ // (int) 
+0064: 192@ -= $1935 // (int) 
+if 
+  192@ > 1 
+jf @DRIV2_3543 
+00BC: show_text_highpriority GXT 'DRV3_5' time 10000 flag 0  // ~s~The bikes are heading to their rendezvous. Collect the ~r~packages~s~ before they reach their destination.
+jump @DRIV2_3559 
+
+:DRIV2_3543
+00BC: show_text_highpriority GXT 'DRV3_6' time 10000 flag 0  // ~s~The final bike is heading to the rendezvous point. Collect the ~r~package~s~ before he reaches his destination!
+
+:DRIV2_3559
+gosub @DRIV2_9045 
+gosub @DRIV2_8060 
+gosub @DRIV2_9419 
+gosub @DRIV2_8630 
+119@ = 0 
+
+:DRIV2_3594
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_3788 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_3774 
+062E: get_actor 54@(119@,4i) task -1 status_store_to 111@(119@,4i) // ret 7 if not found 
+if and
+  115@(119@,4i) == 0 
+04A4:   111@(119@,4i) == 7 // == constant 
+jf @DRIV2_3708 
+077A: set_actor 54@(119@,4i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+115@(119@,4i) = 1 
+
+:DRIV2_3708
+if and
+  115@(119@,4i) == 1 
+84A4:   not  111@(119@,4i) == 7 // == constant 
+jf @DRIV2_3774 
+077C: clear_actor 54@(119@,4i) acquaintance 4 to_all_pedtypes // see ped.dat 
+077C: clear_actor 54@(119@,4i) acquaintance 3 to_all_pedtypes // see ped.dat 
+115@(119@,4i) = 0 
+
+:DRIV2_3774
+119@ += 1 
+jump @DRIV2_3594 
+
+:DRIV2_3788
+if and
+003C:   $1935 == 37@ // (int) 
+   not 166@ == 1 
+jf @DRIV2_3899 
+018A: 185@ = create_checkpoint_at 93@ 94@ 95@ 
+00BC: show_text_highpriority GXT 'DRV3_10' time 7000 flag 0  // ~s~Get the packages back to the ~y~Pleasure Domes.
+166@ = 1 
+Object.Destroy($2657)
+$2657 = Object.Create(#PIER69GDR, -1790.45, 1430.12, 8.89656)
+0453: set_object $2657 XYZ_rotation 0.0 90.0 270.0 
+
+:DRIV2_3899
+if 
+  166@ == 1 
+jf @DRIV2_4026 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 93@ 94@ 95@ radius 4.0 4.0 2.0 
+jf @DRIV2_4026 
+gosub @DRIV2_12451 
+Object.Destroy($2657)
+$2657 = Object.Create(#PIER69GDR, -1790.45, 1430.12, 6.17656)
+0453: set_object $2657 XYZ_rotation 0.0 0.0 270.0 
+Object.RemoveFromMissionCleanupList($2657)
+jump @DRIV2_14153 
+
+:DRIV2_4026
+if 
+  155@ == 1 
+jf @DRIV2_4124 
+gosub @DRIV2_9250 
+if 
+  156@ == 1 
+jf @DRIV2_4124 
+gosub @ENTEXT_59 
+if 
+  $38 == 1 
+jf @DRIV2_4101 
+gosub @DRIV2_12915 
+
+:DRIV2_4101
+00BC: show_text_highpriority GXT 'DRV3_7' time 5000 flag 0  // ~r~You didn't collect the packages in time!
+jump @DRIV2_14067 
+
+:DRIV2_4124
+gosub @DRIV2_9797 
+if 
+  157@ == 1 
+jf @DRIV2_4172 
+00BC: show_text_highpriority GXT 'DRV3_8' time 5000 flag 0  // ~r~One of the packages is at the bottom of the sea...
+jump @DRIV2_14067 
+
+:DRIV2_4172
+gosub @DRIV2_9886 
+if 
+  158@ == 1 
+jf @DRIV2_4220 
+00BC: show_text_highpriority GXT 'DRV3_9' time 5000 flag 0  // ~r~One of the packages was destroyed!
+jump @DRIV2_14067 
+
+:DRIV2_4220
+jump @DRIV2_1941 
+
+:DRIV2_4227
+0395: clear_area 1 at -1814.82 381.4 17.09 radius 100.0 
+0506: set_car_model #BOXVILLE next_variation 0 0 // first param is useless 
+34@ = Car.Create(#BOXVILLE, -1814.82, 381.4, 9.96)
+Car.Angle(34@) = 33.27
+0689: set_car 34@ remove_door 4 removed_door_visible 0 
+0657: car 34@ open_door 5 
+Car.SetImmunities(34@, 1, 1, 1, 1, 1)
+184@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 184@ type_to 1 
+58@ = Car.Create(#FCR900, -1814.86, 376.0, 15.68)
+Car.Angle(58@) = 26.65
+59@ = Car.Create(#FCR900, -1817.44, 380.33, 15.68)
+Car.Angle(59@) = 23.76
+60@ = Car.Create(#FCR900, -1818.09, 377.08, 15.68)
+Car.Angle(60@) = 32.17
+61@ = Car.Create(#FCR900, -1816.66, 374.73, 15.68)
+Car.Angle(61@) = 30.21
+119@ = 0 
+
+:DRIV2_4478
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_4544 
+Car.ImmuneToNonPlayer(58@(119@,4i)) = True
+053F: set_car 58@(119@,4i) tires_vulnerability 0 
+Car.LockInCurrentPosition(58@(119@,4i)) = True
+119@ += 1 
+jump @DRIV2_4478 
+
+:DRIV2_4544
+35@ = Car.Create(#FCR900, -1819.01, 386.28, 16.58)
+Car.Angle(35@) = 49.56
+Car.ImmuneToNonPlayer(35@) = True
+053F: set_car 35@ tires_vulnerability 0 
+54@ = Actor.Create(Dealer, #BIKDRUG, -1811.85, 375.88, 15.68)
+Actor.Angle(54@) = 27.32
+55@ = Actor.CreateAsDriver(Dealer, #BIKDRUG, 59@)
+56@ = Actor.CreateAsDriver(Dealer, #BIKDRUG, 60@)
+57@ = Actor.CreateAsDriver(Dealer, #BIKDRUG, 61@)
+07E5: copy_decision_maker -1 to 193@ 
+0709: set_decision_maker 193@ on_event 9 taskID 251 respect 100.0 hate 100.0 like 100.0 dislike 100.0 in_car 1 on_foot 0 // see *.ped files 
+119@ = 0 
+
+:DRIV2_4713
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_4838 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_4824 
+060B: set_actor 54@(119@,4i) decision_maker_to 193@ 
+Actor.GiveWeaponAndAmmo(54@(119@,4i), MicroUzi, 99999)
+08C6: set_actor 54@(119@,4i) stay_on_bike 2 
+02A9: set_actor 54@(119@,4i) immune_to_nonplayer 1 
+077C: clear_actor 54@(119@,4i) acquaintance 4 to_all_pedtypes // see ped.dat 
+077C: clear_actor 54@(119@,4i) acquaintance 3 to_all_pedtypes // see ped.dat 
+
+:DRIV2_4824
+119@ += 1 
+jump @DRIV2_4713 
+
+:DRIV2_4838
+119@ = 0 
+
+:DRIV2_4845
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_5011 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_4958 
+if 
+  119@ == 0 
+jf @DRIV2_4939 
+Actor.SetImmunities(54@(119@,4i), 1, 1, 1, 1, 1)
+0337: set_actor 54@(119@,4i) visibility 0 
+jump @DRIV2_4958 
+
+:DRIV2_4939
+Actor.SetImmunities(54@(119@,4i), 0, 1, 1, 1, 1)
+
+:DRIV2_4958
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_4997 
+Car.SetImmunities(58@(119@,4i), 1, 1, 1, 1, 1)
+
+:DRIV2_4997
+119@ += 1 
+jump @DRIV2_4845 
+
+:DRIV2_5011
+Car.SetImmunities(35@, 1, 1, 1, 1, 1)
+38@ = Object.Create(#KMB_PACKET, -1812.3, 377.57, 9.34)
+119@ = 0 
+
+:DRIV2_5056
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_5323 
+if 
+   not 119@ == 0 
+jf @DRIV2_5185 
+38@(119@,4i) = Object.Create(#KMB_PACKET, 0.0, 0.0, -100.0)
+0681: attach_object 38@(119@,4i) to_car 58@(119@,4i) with_offset 0.0 -0.9 0.5 rotation 0.0 0.0 0.0 
+0085: 159@(119@,4i) = 164@ // (int) 
+jump @DRIV2_5257 
+
+:DRIV2_5185
+if 
+   not Actor.Dead(54@)
+jf @DRIV2_5257 
+070A: AS_actor 54@ attach_to_object 38@ offset 0.0 0.0 0.0 on_bone 5 16 perform_animation "NULL" IFP_file "NULL" time 0 
+0085: 159@ = 165@ // (int) 
+0750: set_object 38@ visibility 0 
+
+:DRIV2_5257
+Object.CollisionDetection(38@(119@,4i)) = True
+Object.ToggleInMovingList(38@(119@,4i)) = True
+Object.SetImmunities(38@(119@,4i), 1, 1, 1, 1, 1)
+Object.Indestructibility(38@(119@,4i)) = False
+119@ += 1 
+jump @DRIV2_5056 
+
+:DRIV2_5323
+return 
+
+:DRIV2_5325
+119@ = 0 
+
+:DRIV2_5332
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_5495 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_5481 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+003B:   130@(119@,4i) == 134@ // (int) 
+jf @DRIV2_5481 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 78@(119@,4f) 82@(119@,4f) 86@(119@,4f) speed 62@(119@,4f) 0 model #NULL 2 
+0085: 130@(119@,4i) = 137@ // (int) 
+
+:DRIV2_5481
+119@ += 1 
+jump @DRIV2_5332 
+
+:DRIV2_5495
+return 
+
+:DRIV2_5497
+119@ = 0 
+
+:DRIV2_5504
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_6871 
+if and
+03CA:   object 38@(119@,4i) exists 
+   not 123@(119@,4i) == 1 
+jf @DRIV2_6857 
+if or
+0685:   object 38@(119@,4i) attached 
+0737:   actor -1 lifting_object 38@(119@,4i) 
+jf @DRIV2_6622 
+if 
+0474:   actor $PLAYER_ACTOR near_object_in_cube 38@(119@,4i) radius 2.0 2.0 2.0 sphere 0 
+jf @DRIV2_6431 
+if or
+047A:   actor $PLAYER_ACTOR driving_bike 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @DRIV2_6431 
+if and
+00E1:   player 0 pressed_key 4 
+   not 167@ == 1 
+jf @DRIV2_6349 
+04C4: store_coords_to 104@ 105@ 108@ from_actor $PLAYER_ACTOR with_offset 0.0 -3.0 0.0 
+04C4: store_coords_to 106@ 107@ 108@ from_actor $PLAYER_ACTOR with_offset 0.0 3.0 0.0 
+if 
+08E3:   object 38@(119@,4i) sphere 0 in_rectangle_ll_corner_at 104@ 105@ lr_corner_at 106@ 107@ radius 3.0 
+jf @DRIV2_6003 
+if 
+047A:   actor $PLAYER_ACTOR driving_bike 
+jf @DRIV2_5834 
+0605: actor $PLAYER_ACTOR perform_animation "BIKES_SNATCH_L" IFP "BIKES" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 220 
+jump @DRIV2_5996 
+
+:DRIV2_5834
+Actor.StorePos($PLAYER_ACTOR, 96@, 97@, 98@)
+Object.StorePos(38@(119@,4i), 42@(119@,4f), 46@(119@,4f), 50@(119@,4f))
+50@(119@,4f) += 0.25 
+if 
+0035:   98@ >= 50@(119@,4f) // (float) 
+jf @DRIV2_5961 
+0605: actor $PLAYER_ACTOR perform_animation "PICKUP_BOX" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 180 
+jump @DRIV2_5996 
+
+:DRIV2_5961
+0605: actor $PLAYER_ACTOR perform_animation "GRAB_L" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 180 
+
+:DRIV2_5996
+jump @DRIV2_6232 
+
+:DRIV2_6003
+if 
+047A:   actor $PLAYER_ACTOR driving_bike 
+jf @DRIV2_6070 
+0605: actor $PLAYER_ACTOR perform_animation "BIKES_SNATCH_R" IFP "BIKES" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 220 
+jump @DRIV2_6232 
+
+:DRIV2_6070
+Actor.StorePos($PLAYER_ACTOR, 96@, 97@, 98@)
+Object.StorePos(38@(119@,4i), 42@(119@,4f), 46@(119@,4f), 50@(119@,4f))
+50@(119@,4f) += 0.25 
+if 
+0035:   98@ >= 50@(119@,4f) // (float) 
+jf @DRIV2_6197 
+0605: actor $PLAYER_ACTOR perform_animation "PICKUP_BOX" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 180 
+jump @DRIV2_6232 
+
+:DRIV2_6197
+0605: actor $PLAYER_ACTOR perform_animation "GRAB_R" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 180 
+
+:DRIV2_6232
+Object.StorePos(38@(119@,4i), 42@(119@,4f), 46@(119@,4f), 50@(119@,4f))
+Object.Destroy(38@(119@,4i))
+Marker.Disable(180@(119@,4i))
+018C: play_sound 65535 at 42@(119@,4f) 46@(119@,4f) 50@(119@,4f) 
+00BC: show_text_highpriority GXT 'DRV3_4' time 5000 flag 0  // ~s~Package collected.
+123@(119@,4i) = 1 
+$1935 += 1 
+jump @DRIV2_6431 
+
+:DRIV2_6349
+if 
+876F:   not text_priority_displayed 
+jf @DRIV2_6391 
+00BC: show_text_highpriority GXT 'DRV3_3' time 1 flag 0  // ~s~Tap ~k~~VEHICLE_FIREWEAPON_ALT~ to snatch the ~r~package.
+168@ = 1 
+jump @DRIV2_6431 
+
+:DRIV2_6391
+if 
+  168@ == 1 
+jf @DRIV2_6431 
+00BC: show_text_highpriority GXT 'DRV3_3' time 1 flag 0  // ~s~Tap ~k~~VEHICLE_FIREWEAPON_ALT~ to snatch the ~r~package.
+168@ = 1 
+
+:DRIV2_6431
+if 
+   not 123@(119@,4i) == 1 
+jf @DRIV2_6615 
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_6615 
+if and
+   Actor.InCar($PLAYER_ACTOR, 58@(119@,4i))
+0685:   object 38@(119@,4i) attached 
+jf @DRIV2_6615 
+Object.StorePos(38@(119@,4i), 42@(119@,4f), 46@(119@,4f), 50@(119@,4f))
+Object.Destroy(38@(119@,4i))
+Marker.Disable(180@(119@,4i))
+018C: play_sound 65535 at 42@(119@,4f) 46@(119@,4f) 50@(119@,4f) 
+00BC: show_text_highpriority GXT 'DRV3_4' time 5000 flag 0  // ~s~Package collected.
+123@(119@,4i) = 1 
+$1935 += 1 
+
+:DRIV2_6615
+jump @DRIV2_6776 
+
+:DRIV2_6622
+if 
+0179:   actor $PLAYER_ACTOR colliding_with_object 38@(119@,4i) 
+jf @DRIV2_6776 
+if or
+047A:   actor $PLAYER_ACTOR driving_bike 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @DRIV2_6776 
+Object.StorePos(38@(119@,4i), 42@(119@,4f), 46@(119@,4f), 50@(119@,4f))
+Object.Destroy(38@(119@,4i))
+Marker.Disable(180@(119@,4i))
+018C: play_sound 65535 at 42@(119@,4f) 46@(119@,4f) 50@(119@,4f) 
+00BC: show_text_highpriority GXT 'DRV3_4' time 5000 flag 0  // ~s~Package collected.
+123@(119@,4i) = 1 
+$1935 += 1 
+
+:DRIV2_6776
+if 
+  123@(119@,4i) == 1 
+jf @DRIV2_6857 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_6857 
+Actor.GiveWeaponAndAmmo(54@(119@,4i), MicroUzi, 99999)
+05E2: AS_actor 54@(119@,4i) kill_actor $PLAYER_ACTOR 
+147@(119@,4i) = 1 
+
+:DRIV2_6857
+119@ += 1 
+jump @DRIV2_5504 
+
+:DRIV2_6871
+if 
+00E1:   player 0 pressed_key 4 
+jf @DRIV2_6902 
+167@ = 1 
+jump @DRIV2_6909 
+
+:DRIV2_6902
+167@ = 0 
+
+:DRIV2_6909
+return 
+
+:DRIV2_6911
+119@ = 0 
+
+:DRIV2_6918
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_7478 
+if and
+   not Car.Wrecked(58@(119@,4i))
+803B:   not  130@(119@,4i) == 134@ // (int) 
+   not 123@(119@,4i) == 1 
+jf @DRIV2_7464 
+66@(119@,4i) = Car.Health(58@(119@,4i))
+if 
+0685:   object 38@(119@,4i) attached 
+jf @DRIV2_7138 
+if 
+0204:   actor $PLAYER_ACTOR near_car 58@(119@,4i) radius 2.0 2.0 sphere 0 in_car 
+jf @DRIV2_7131 
+0085: 74@ = 70@(119@,4i) // (int) 
+0062: 74@ -= 66@(119@,4i) // (int) 
+if 
+  74@ >= 2 
+jf @DRIV2_7131 
+0682: detach_object 38@(119@,4i) 0.0 0.0 0.0 collision_detection 0 
+0085: 159@(119@,4i) = 163@ // (int) 
+
+:DRIV2_7131
+jump @DRIV2_7448 
+
+:DRIV2_7138
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_7448 
+if 
+8737:   not actor 54@(119@,4i) lifting_object -1 
+jf @DRIV2_7448 
+if 
+   not 143@(119@,4i) == 1 
+jf @DRIV2_7263 
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_7256 
+06E2: AS_actor 54@(119@,4i) run_to_object 38@(119@,4i) timelimit -1 stop_within_radius 1.0 
+143@(119@,4i) = 1 
+
+:DRIV2_7256
+jump @DRIV2_7448 
+
+:DRIV2_7263
+062E: get_actor 54@(119@,4i) task 1762 status_store_to 109@ // ret 7 if not found 
+if 
+04A4:   109@ == 7 // == constant 
+jf @DRIV2_7406 
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_7377 
+070A: AS_actor 54@(119@,4i) attach_to_object 38@(119@,4i) offset 0.0 0.0 0.0 on_bone 5 1 perform_animation "NULL" IFP_file "NULL" time 0 
+0085: 159@(119@,4i) = 165@ // (int) 
+
+:DRIV2_7377
+143@(119@,4i) = 0 
+139@(119@,4i) = 0 
+jump @DRIV2_7448 
+
+:DRIV2_7406
+if 
+83CA:   not object 38@(119@,4i) exists 
+jf @DRIV2_7448 
+143@(119@,4i) = 0 
+139@(119@,4i) = 0 
+
+:DRIV2_7448
+0085: 70@(119@,4i) = 66@(119@,4i) // (int) 
+
+:DRIV2_7464
+119@ += 1 
+jump @DRIV2_6918 
+
+:DRIV2_7478
+return 
+
+:DRIV2_7480
+119@ = 0 
+
+:DRIV2_7487
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_7675 
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_7661 
+if and
+8685:   not object 38@(119@,4i) attached 
+8737:   not actor -1 lifting_object 38@(119@,4i) 
+05A3:   object 38@(119@,4i) stopped 
+jf @DRIV2_7617 
+if 
+   not 175@(119@,4i) == 1 
+jf @DRIV2_7610 
+Object.KeepInMemory(38@(119@,4i)) = True
+175@(119@,4i) = 1 
+
+:DRIV2_7610
+jump @DRIV2_7661 
+
+:DRIV2_7617
+if 
+  175@(119@,4i) == 1 
+jf @DRIV2_7661 
+Object.KeepInMemory(38@(119@,4i)) = False
+175@(119@,4i) = 0 
+
+:DRIV2_7661
+119@ += 1 
+jump @DRIV2_7487 
+
+:DRIV2_7675
+return 
+
+:DRIV2_7677
+119@ = 0 
+
+:DRIV2_7684
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_7873 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+   not 147@(119@,4i) == 1 
+jf @DRIV2_7859 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+003B:   130@(119@,4i) == 135@ // (int) 
+80EE:   not actor 54@(119@,4i) sphere 0 near_point 75@ 76@ radius 400.0 400.0 in_car 
+jf @DRIV2_7859 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 75@ 76@ 77@ speed 62@(119@,4f) 0 model #NULL 2 
+0085: 130@(119@,4i) = 136@ // (int) 
+
+:DRIV2_7859
+119@ += 1 
+jump @DRIV2_7684 
+
+:DRIV2_7873
+return 
+
+:DRIV2_7875
+119@ = 0 
+
+:DRIV2_7882
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_8058 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+   not 147@(119@,4i) == 1 
+jf @DRIV2_8044 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+003B:   130@(119@,4i) == 136@ // (int) 
+00EE:   actor 54@(119@,4i) sphere 0 near_point 75@ 76@ radius 200.0 200.0 in_car 
+jf @DRIV2_8044 
+05D2: AS_actor 54@(119@,4i) run_to_and_hijack_car 58@(119@,4i) max_search_radius 62@(119@,4f) traffic_behavior 2 
+0085: 130@(119@,4i) = 135@ // (int) 
+
+:DRIV2_8044
+119@ += 1 
+jump @DRIV2_7882 
+
+:DRIV2_8058
+return 
+
+:DRIV2_8060
+119@ = 0 
+
+:DRIV2_8067
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_8628 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+   not 143@(119@,4i) == 1 
+   not 147@(119@,4i) == 1 
+jf @DRIV2_8614 
+if 
+   not Actor.InCar(54@(119@,4i), 58@(119@,4i))
+jf @DRIV2_8222 
+if 
+  139@(119@,4i) == 0 
+jf @DRIV2_8215 
+05CB: AS_actor 54@(119@,4i) enter_car 58@(119@,4i) as_driver -1 ms 
+139@(119@,4i) = 1 
+
+:DRIV2_8215
+jump @DRIV2_8614 
+
+:DRIV2_8222
+if 
+  139@(119@,4i) == 1 
+jf @DRIV2_8614 
+if 
+003B:   130@(119@,4i) == 135@ // (int) 
+jf @DRIV2_8292 
+05D2: AS_actor 54@(119@,4i) run_to_and_hijack_car 58@(119@,4i) max_search_radius 62@(119@,4f) traffic_behavior 2 
+
+:DRIV2_8292
+if 
+003B:   130@(119@,4i) == 136@ // (int) 
+jf @DRIV2_8353 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 75@ 76@ 77@ speed 62@(119@,4f) 0 model #NULL 2 
+
+:DRIV2_8353
+if 
+003B:   130@(119@,4i) == 137@ // (int) 
+jf @DRIV2_8426 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 78@(119@,4f) 82@(119@,4f) 86@(119@,4f) speed 62@(119@,4f) 0 model #NULL 2 
+
+:DRIV2_8426
+if 
+003B:   130@(119@,4i) == 138@ // (int) 
+jf @DRIV2_8487 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 90@ 91@ 92@ speed 62@(119@,4f) 0 model #NULL 2 
+
+:DRIV2_8487
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_8603 
+if 
+0737:   actor 54@(119@,4i) lifting_object 38@(119@,4i) 
+jf @DRIV2_8603 
+070B: set_actor 54@(119@,4i) onbone_attached_object_operation 0 
+0681: attach_object 38@(119@,4i) to_car 58@(119@,4i) with_offset 0.0 -0.9 0.5 rotation 0.0 0.0 0.0 
+0085: 159@(119@,4i) = 164@ // (int) 
+
+:DRIV2_8603
+139@(119@,4i) = 0 
+
+:DRIV2_8614
+119@ += 1 
+jump @DRIV2_8067 
+
+:DRIV2_8628
+return 
+
+:DRIV2_8630
+119@ = 0 
+
+:DRIV2_8637
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_8872 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+  147@(119@,4i) == 1 
+jf @DRIV2_8858 
+if 
+  151@(119@,4i) == 1 
+jf @DRIV2_8800 
+if 
+80F2:   not actor 54@(119@,4i) near_actor $PLAYER_ACTOR radius 40.0 40.0 0 
+jf @DRIV2_8793 
+06E1: AS_actor 54@(119@,4i) using_car 58@(119@,4i) target_car -1 with_order 2 max_speed 62@(119@,4f) traffic_flag 2 
+151@(119@,4i) = 0 
+
+:DRIV2_8793
+jump @DRIV2_8858 
+
+:DRIV2_8800
+if 
+00F2:   actor 54@(119@,4i) near_actor $PLAYER_ACTOR radius 10.0 10.0 0 
+jf @DRIV2_8858 
+05E2: AS_actor 54@(119@,4i) kill_actor $PLAYER_ACTOR 
+151@(119@,4i) = 1 
+
+:DRIV2_8858
+119@ += 1 
+jump @DRIV2_8637 
+
+:DRIV2_8872
+return 
+
+:DRIV2_8874
+119@ = 0 
+
+:DRIV2_8881
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9043 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_9029 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+803B:   not  130@(119@,4i) == 138@ // (int) 
+   not 147@(119@,4i) == 1 
+jf @DRIV2_9029 
+05D1: AS_actor 54@(119@,4i) drive_car 58@(119@,4i) to 90@ 91@ 92@ speed 62@(119@,4f) 0 model #NULL 2 
+0085: 130@(119@,4i) = 138@ // (int) 
+
+:DRIV2_9029
+119@ += 1 
+jump @DRIV2_8881 
+
+:DRIV2_9043
+return 
+
+:DRIV2_9045
+119@ = 0 
+
+:DRIV2_9052
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9248 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_9234 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+003B:   130@(119@,4i) == 137@ // (int) 
+   not 147@(119@,4i) == 1 
+0100:   actor 54@(119@,4i) in_sphere 78@(119@,4f) 82@(119@,4f) 86@(119@,4f) radius 3.0 3.0 3.0 sphere 0 in_car 
+jf @DRIV2_9234 
+05D2: AS_actor 54@(119@,4i) run_to_and_hijack_car 58@(119@,4i) max_search_radius 62@(119@,4f) traffic_behavior 2 
+0085: 130@(119@,4i) = 135@ // (int) 
+
+:DRIV2_9234
+119@ += 1 
+jump @DRIV2_9052 
+
+:DRIV2_9248
+return 
+
+:DRIV2_9250
+119@ = 0 
+
+:DRIV2_9257
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9417 
+if and
+03CA:   object 38@(119@,4i) exists 
+   not Actor.Dead(54@(119@,4i))
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_9403 
+if and
+0685:   object 38@(119@,4i) attached 
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+jf @DRIV2_9403 
+if 
+04E5:   object 38@(119@,4i) near_point 90@ 91@ radius 20.0 7.0 sphere 0 
+jf @DRIV2_9403 
+156@ = 1 
+0085: 120@ = 119@ // (int) 
+
+:DRIV2_9403
+119@ += 1 
+jump @DRIV2_9257 
+
+:DRIV2_9417
+return 
+
+:DRIV2_9419
+Actor.StorePos($PLAYER_ACTOR, 96@, 97@, 98@)
+119@ = 0 
+
+:DRIV2_9440
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9795 
+if and
+   not Car.Wrecked(58@(119@,4i))
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_9781 
+if and
+   Actor.InCar(54@(119@,4i), 58@(119@,4i))
+   not 147@(119@,4i) == 1 
+jf @DRIV2_9781 
+if and
+003B:   130@(119@,4i) == 138@ // (int) 
+01AD:   car 58@(119@,4i) sphere 0 near_point 90@ 91@ radius 25.0 25.0 
+jf @DRIV2_9597 
+62@(119@,4f) = 15.0 
+jump @DRIV2_9765 
+
+:DRIV2_9597
+Car.StorePos(58@(119@,4i), 100@, 101@, 102@)
+050A: 99@ = distance_between_XYZ 96@ 97@ 98@ and_XYZ 100@ 101@ 102@ 
+if 
+  0.0 > 99@ 
+jf @DRIV2_9669 
+99@ = 0.0 
+
+:DRIV2_9669
+if 
+  50.0 >= 99@ 
+jf @DRIV2_9751 
+0087: 62@(119@,4f) = 99@ // (float) 
+62@(119@,4f) *= 0.4 
+62@(119@,4f) *= -1.0 
+62@(119@,4f) += 40.0 
+jump @DRIV2_9765 
+
+:DRIV2_9751
+62@(119@,4f) = 20.0 
+
+:DRIV2_9765
+Car.SetMaxSpeed(58@(119@,4i), 62@(119@,4f))
+
+:DRIV2_9781
+119@ += 1 
+jump @DRIV2_9440 
+
+:DRIV2_9795
+return 
+
+:DRIV2_9797
+119@ = 0 
+
+:DRIV2_9804
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9884 
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_9870 
+if 
+04E7:   object 38@(119@,4i) in_water 
+jf @DRIV2_9870 
+157@ = 1 
+
+:DRIV2_9870
+119@ += 1 
+jump @DRIV2_9804 
+
+:DRIV2_9884
+return 
+
+:DRIV2_9886
+119@ = 0 
+
+:DRIV2_9893
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_9983 
+if and
+   Car.Wrecked(58@(119@,4i))
+03CA:   object 38@(119@,4i) exists 
+003B:   159@(119@,4i) == 164@ // (int) 
+jf @DRIV2_9969 
+Object.Destroy(38@(119@,4i))
+158@ = 1 
+
+:DRIV2_9969
+119@ += 1 
+jump @DRIV2_9893 
+
+:DRIV2_9983
+return 
+
+:DRIV2_9985
+0395: clear_area 0 at -1814.82 381.4 17.09 radius 100.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_10066 
+Actor.PutAt($PLAYER_ACTOR, -1771.94, 336.35, 8.94)
+Actor.Angle($PLAYER_ACTOR) = 49.66
+
+:DRIV2_10066
+if 
+  174@ == 1 
+jf @DRIV2_10130 
+if 
+   not Car.Wrecked(36@)
+jf @DRIV2_10130 
+Car.PutAt(36@, -1766.6, 330.71, 8.23)
+Car.Angle(36@) = 45.1
+
+:DRIV2_10130
+if 
+   not Actor.Dead(54@)
+jf @DRIV2_10176 
+0337: set_actor 54@ visibility 1 
+if 
+03CA:   object 38@ exists 
+jf @DRIV2_10176 
+0750: set_object 38@ visibility 1 
+
+:DRIV2_10176
+119@ = 0 
+
+:DRIV2_10183
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_10247 
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_10233 
+Car.LockInCurrentPosition(58@(119@,4i)) = False
+
+:DRIV2_10233
+119@ += 1 
+jump @DRIV2_10183 
+
+:DRIV2_10247
+169@ = 1 
+170@ = 0 
+0707: start_scene_skip_to @DRIV2_11581 
+Camera.SetPosition(-1808.39, 374.18, 17.98, 0.0, 0.0, 0.0)
+Camera.PointAt(-1813.41, 376.31, 17.32, 2)
+if and
+   not Actor.Dead(54@)
+   not Car.Wrecked(58@)
+jf @DRIV2_10680 
+05CB: AS_actor 54@ enter_car 58@ as_driver -1 ms 
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 15000 15003 
+03CF: load_wav 200@ as 1 
+
+:DRIV2_10372
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV2_10398 
+wait 0 
+jump @DRIV2_10372 
+
+:DRIV2_10398
+03D1: play_wav 1 
+if 
+  200@ == 15000 
+jf @DRIV2_10444 
+00BC: show_text_highpriority GXT 'FAR2_AA' time 5000 flag 1  // ~z~Dude, hurry the hell up!
+jump @DRIV2_10502 
+
+:DRIV2_10444
+if 
+  200@ == 15001 
+jf @DRIV2_10486 
+00BC: show_text_highpriority GXT 'FAR2_AB' time 5000 flag 1  // ~z~Get a move on, dude!
+jump @DRIV2_10502 
+
+:DRIV2_10486
+00BC: show_text_highpriority GXT 'FAR2_AC' time 5000 flag 1  // ~z~We gotta go buddy, come on!
+
+:DRIV2_10502
+if 
+83D2:   not wav 1 ended 
+jf @DRIV2_10528 
+wait 0 
+jump @DRIV2_10502 
+
+:DRIV2_10528
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 15003 15006 
+03CF: load_wav 200@ as 1 
+
+:DRIV2_10550
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV2_10576 
+wait 0 
+jump @DRIV2_10550 
+
+:DRIV2_10576
+03D1: play_wav 1 
+if 
+  200@ == 15003 
+jf @DRIV2_10622 
+00BC: show_text_highpriority GXT 'FAR2_AD' time 5000 flag 1  // ~z~OK, OK!
+jump @DRIV2_10680 
+
+:DRIV2_10622
+if 
+  200@ == 15004 
+jf @DRIV2_10664 
+00BC: show_text_highpriority GXT 'FAR2_AE' time 5000 flag 1  // ~z~A'right, a'right!
+jump @DRIV2_10680 
+
+:DRIV2_10664
+00BC: show_text_highpriority GXT 'FAR2_AF' time 5000 flag 1  // ~z~I'm almost done!
+
+:DRIV2_10680
+194@ = 0 
+
+:DRIV2_10687
+if and
+   not 194@ == 1 
+   not Actor.Dead(54@)
+jf @DRIV2_10768 
+wait 0 
+if and
+   not Actor.Dead(54@)
+   not Car.Wrecked(58@)
+jf @DRIV2_10761 
+if 
+   Actor.InCar(54@, 58@)
+jf @DRIV2_10761 
+194@ = 1 
+
+:DRIV2_10761
+jump @DRIV2_10687 
+
+:DRIV2_10768
+wait 1000 
+091D: remove_forbidden_for_boats_cube_cornerA -2014.82 181.4 -13.0 cornerB -1614.82 581.4 47.0 
+Camera.SetPosition(-1832.36, 380.48, 18.71, 0.0, 0.0, 0.0)
+if 
+   not Car.Wrecked(58@)
+jf @DRIV2_10955 
+Camera.OnVehicle(58@, 15, 2)
+if and
+   not Actor.Dead(54@)
+03CA:   object 38@ exists 
+jf @DRIV2_10955 
+if 
+0737:   actor 54@ lifting_object 38@ 
+jf @DRIV2_10909 
+070B: set_actor 54@ onbone_attached_object_operation 0 
+
+:DRIV2_10909
+0681: attach_object 38@ to_car 58@ with_offset 0.0 -0.9 0.5 rotation 0.0 0.0 0.0 
+0085: 159@ = 164@ // (int) 
+
+:DRIV2_10955
+if and
+   not Car.Wrecked(59@)
+   not Actor.Dead(55@)
+jf @DRIV2_11008 
+05D1: AS_actor 55@ drive_car 59@ to -1854.74 533.22 33.12 speed 63@ 0 model #NULL 2 
+
+:DRIV2_11008
+wait 150 
+if and
+   not Car.Wrecked(60@)
+   not Actor.Dead(56@)
+jf @DRIV2_11066 
+05D1: AS_actor 56@ drive_car 60@ to -1854.74 533.22 33.12 speed 64@ 0 model #NULL 2 
+
+:DRIV2_11066
+wait 150 
+if and
+   not Car.Wrecked(58@)
+   not Actor.Dead(54@)
+jf @DRIV2_11124 
+05D1: AS_actor 54@ drive_car 58@ to -1854.74 533.22 33.12 speed 62@ 0 model #NULL 2 
+
+:DRIV2_11124
+wait 100 
+if and
+   not Car.Wrecked(61@)
+   not Actor.Dead(57@)
+jf @DRIV2_11181 
+05D1: AS_actor 57@ drive_car 61@ to -1854.74 533.22 33.12 speed 65@ 0 model #NULL 2 
+
+:DRIV2_11181
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 15006 15009 
+03CF: load_wav 200@ as 1 
+
+:DRIV2_11203
+if 
+83D0:   not wav 1 loaded 
+jf @DRIV2_11229 
+wait 0 
+jump @DRIV2_11203 
+
+:DRIV2_11229
+03D1: play_wav 1 
+if 
+  200@ == 15006 
+jf @DRIV2_11275 
+00BC: show_text_highpriority GXT 'FAR2_AG' time 3000 flag 1  // ~z~Let's get out of here!
+jump @DRIV2_11333 
+
+:DRIV2_11275
+if 
+  200@ == 15007 
+jf @DRIV2_11317 
+00BC: show_text_highpriority GXT 'FAR2_AH' time 3000 flag 1  // ~z~Come on let's go!
+jump @DRIV2_11333 
+
+:DRIV2_11317
+00BC: show_text_highpriority GXT 'FAR2_AI' time 3000 flag 1  // ~z~Leave it, we gotta go!
+
+:DRIV2_11333
+wait 7000 
+040D: unload_wav 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_11385 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1820.72 382.73 16.04 
+jump @DRIV2_11405 
+
+:DRIV2_11385
+Actor.PutAt($PLAYER_ACTOR, -1820.72, 382.73, 16.04)
+
+:DRIV2_11405
+Actor.Angle($PLAYER_ACTOR) = 326.45
+if 
+   not Car.Wrecked(35@)
+jf @DRIV2_11441 
+05CB: AS_actor $PLAYER_ACTOR enter_car 35@ as_driver -1 ms 
+
+:DRIV2_11441
+Camera.SetPosition(-1818.1, 380.01, 16.8, 0.0, 0.0, 0.0)
+Camera.OnVehicle(35@, 15, 2)
+33@ = 0 
+
+:DRIV2_11489
+if 
+  4000 > 33@ 
+jf @DRIV2_11567 
+wait 0 
+if and
+  33@ > 0 
+   not 170@ == 1 
+jf @DRIV2_11560 
+00BC: show_text_highpriority GXT 'DRV3_2' time 10000 flag 0  // ~s~Chase down the bikers and collect all the ~r~packages.
+170@ = 1 
+
+:DRIV2_11560
+jump @DRIV2_11489 
+
+:DRIV2_11567
+gosub @DRIV2_5325 
+169@ = 0 
+
+:DRIV2_11581
+0701: end_scene_skip 
+if 
+  169@ == 1 
+jf @DRIV2_12050 
+091D: remove_forbidden_for_boats_cube_cornerA -2014.82 181.4 -13.0 cornerB -1614.82 581.4 47.0 
+if and
+   not Actor.Dead(54@)
+   not Car.Wrecked(58@)
+jf @DRIV2_11785 
+if 
+   not Actor.InCar(54@, 58@)
+jf @DRIV2_11681 
+036A: put_actor 54@ in_car 58@ 
+
+:DRIV2_11681
+if 
+03CA:   object 38@ exists 
+jf @DRIV2_11785 
+if 
+8685:   not object 38@ attached 
+jf @DRIV2_11785 
+if 
+0737:   actor 54@ lifting_object 38@ 
+jf @DRIV2_11739 
+070B: set_actor 54@ onbone_attached_object_operation 0 
+
+:DRIV2_11739
+0681: attach_object 38@ to_car 58@ with_offset 0.0 -0.9 0.5 rotation 0.0 0.0 0.0 
+0085: 159@ = 164@ // (int) 
+
+:DRIV2_11785
+if and
+   not Car.Wrecked(58@)
+   not Actor.Dead(54@)
+jf @DRIV2_11826 
+Car.PutAt(58@, -1894.59, 582.43, 34.56)
+
+:DRIV2_11826
+if and
+   not Car.Wrecked(59@)
+   not Actor.Dead(55@)
+jf @DRIV2_11867 
+Car.PutAt(59@, -1893.56, 574.34, 34.55)
+
+:DRIV2_11867
+if and
+   not Car.Wrecked(60@)
+   not Actor.Dead(56@)
+jf @DRIV2_11908 
+Car.PutAt(60@, -1899.96, 581.25, 34.56)
+
+:DRIV2_11908
+if and
+   not Car.Wrecked(61@)
+   not Actor.Dead(57@)
+jf @DRIV2_11949 
+Car.PutAt(61@, -1898.95, 574.08, 34.56)
+
+:DRIV2_11949
+if 
+   not Car.Wrecked(35@)
+jf @DRIV2_12009 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_12001 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1819.01 386.28 6.58 
+
+:DRIV2_12001
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:DRIV2_12009
+gosub @DRIV2_5325 
+if 
+   not 170@ == 1 
+jf @DRIV2_12050 
+00BC: show_text_highpriority GXT 'DRV3_2' time 10000 flag 0  // ~s~Chase down the bikers and collect all the ~r~packages.
+
+:DRIV2_12050
+119@ = 0 
+
+:DRIV2_12057
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_12137 
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_12123 
+180@(119@,4i) = Marker.CreateAboveObject(38@(119@,4i))
+Marker.SetColor(180@(119@,4i), 0)
+
+:DRIV2_12123
+119@ += 1 
+jump @DRIV2_12057 
+
+:DRIV2_12137
+if 
+   not Car.Wrecked(34@)
+jf @DRIV2_12168 
+Car.SetImmunities(34@, 0, 0, 0, 0, 0)
+
+:DRIV2_12168
+119@ = 0 
+
+:DRIV2_12175
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_12286 
+if 
+   not Actor.Dead(54@(119@,4i))
+jf @DRIV2_12233 
+Actor.SetImmunities(54@(119@,4i), 0, 0, 0, 0, 0)
+
+:DRIV2_12233
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_12272 
+Car.SetImmunities(58@(119@,4i), 0, 0, 0, 0, 0)
+
+:DRIV2_12272
+119@ += 1 
+jump @DRIV2_12175 
+
+:DRIV2_12286
+if 
+   not Car.Wrecked(35@)
+jf @DRIV2_12317 
+Car.SetImmunities(35@, 0, 0, 0, 0, 0)
+
+:DRIV2_12317
+119@ = 0 
+
+:DRIV2_12324
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_12388 
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_12374 
+0587: enable_car 58@(119@,4i) validate_position 0 
+
+:DRIV2_12374
+119@ += 1 
+jump @DRIV2_12324 
+
+:DRIV2_12388
+if 
+   not Car.Wrecked(35@)
+jf @DRIV2_12411 
+0587: enable_car 35@ validate_position 0 
+
+:DRIV2_12411
+if 
+   not Car.Wrecked(34@)
+jf @DRIV2_12434 
+0587: enable_car 34@ validate_position 0 
+
+:DRIV2_12434
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:DRIV2_12451
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:DRIV2_12465
+if 
+fading 
+jf @DRIV2_12489 
+wait 0 
+jump @DRIV2_12465 
+
+:DRIV2_12489
+0395: clear_area 0 at 93@ 94@ 95@ radius 50.0 
+00BE: text_clear_all 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+02A3: enable_widescreen 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_12628 
+35@ = Actor.MissionCar($PLAYER_ACTOR)
+Car.PutAt(35@, 93@, 94@, 95@)
+Car.Angle(35@) = 340.37
+0615: define_AS_pack_begin 195@ 
+05CD: AS_actor -1 exit_car 35@ 
+05D3: AS_actor -1 goto_point -1790.39 1423.33 7.18 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 195@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 195@ 
+061B: remove_references_to_AS_pack 195@ 
+jump @DRIV2_12681 
+
+:DRIV2_12628
+Car.Destroy(35@)
+Actor.PutAt($PLAYER_ACTOR, 93@, 94@, 95@)
+Actor.Angle($PLAYER_ACTOR) = 10.0
+05D3: AS_actor $PLAYER_ACTOR goto_point -1790.39 1423.33 7.18 mode 4 time -1 ms // versionA 
+
+:DRIV2_12681
+fade 1 1000 
+
+:DRIV2_12688
+if 
+fading 
+jf @DRIV2_12712 
+wait 0 
+jump @DRIV2_12688 
+
+:DRIV2_12712
+169@ = 1 
+0707: start_scene_skip_to @DRIV2_12738 
+wait 2000 
+169@ = 0 
+
+:DRIV2_12738
+0701: end_scene_skip 
+if 
+  169@ == 1 
+jf @DRIV2_12758 
+
+:DRIV2_12758
+if 
+   not 169@ == 1 
+jf @DRIV2_12807 
+fade 0 1000 
+
+:DRIV2_12783
+if 
+fading 
+jf @DRIV2_12807 
+wait 0 
+jump @DRIV2_12783 
+
+:DRIV2_12807
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -1790.39, 1423.33, 6.15)
+Actor.Angle($PLAYER_ACTOR) = 194.52
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+if 
+   not 169@ == 1 
+jf @DRIV2_12906 
+fade 1 1000 
+
+:DRIV2_12882
+if 
+fading 
+jf @DRIV2_12906 
+wait 0 
+jump @DRIV2_12882 
+
+:DRIV2_12906
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:DRIV2_12915
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:DRIV2_12929
+if 
+fading 
+jf @DRIV2_12953 
+wait 0 
+jump @DRIV2_12929 
+
+:DRIV2_12953
+Car.RemoveReferences(35@)
+0395: clear_area 0 at 90@ 91@ 92@ radius 100.0 
+119@ = 0 
+
+:DRIV2_12983
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_13121 
+if 
+803B:   not  119@ == 120@ // (int) 
+jf @DRIV2_13107 
+Actor.DestroyInstantly(54@(119@,4i))
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_13089 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 58@(119@,4i))
+jf @DRIV2_13082 
+Car.Destroy(58@(119@,4i))
+
+:DRIV2_13082
+jump @DRIV2_13098 
+
+:DRIV2_13089
+Car.Destroy(58@(119@,4i))
+
+:DRIV2_13098
+Object.Destroy(38@(119@,4i))
+
+:DRIV2_13107
+119@ += 1 
+jump @DRIV2_12983 
+
+:DRIV2_13121
+077E: get_active_interior_to 121@ 
+Actor.StorePos($PLAYER_ACTOR, 96@, 97@, 98@)
+103@ = Actor.Angle($PLAYER_ACTOR)
+092E: get_water_height_at 96@ 97@ ignore_waves 0 store_to 197@ 
+02CE: 196@ = ground_z_at 96@ 97@ 98@ 
+if 
+0025:   197@ > 196@ // (float) 
+jf @DRIV2_13202 
+0087: 196@ = 197@ // (float) 
+
+:DRIV2_13202
+Actor.PutAt($PLAYER_ACTOR, -2762.82, 98.13, -100.0)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_13256 
+35@ = Actor.MissionCar($PLAYER_ACTOR)
+Car.Angle(35@) = 354.04
+
+:DRIV2_13256
+select_interior 0 
+04E4: refresh_game_renderer_at 90@ 91@ 
+Camera.SetAtPos(90@, 91@, 92@)
+03E6: remove_text_box 
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2736.43, 87.02, 4.27, 0.0, 0.0, 0.0)
+Camera.PointAt(-2735.57, 86.18, 4.27, 2)
+Garage.Open('TBON')
+if and
+   not Actor.Dead(54@(120@,4i))
+   not Car.Wrecked(58@(120@,4i))
+jf @DRIV2_13568 
+Car.PutAt(58@(120@,4i), -2720.92, 83.65, 3.69)
+Car.Angle(58@(120@,4i)) = 85.84
+if 
+   not Actor.InCar(54@(120@,4i), 58@(120@,4i))
+jf @DRIV2_13501 
+if 
+   Actor.Driving(54@(120@,4i))
+jf @DRIV2_13485 
+0362: remove_actor 54@(120@,4i) from_car_and_place_at -2720.92 83.65 -6.31 
+
+:DRIV2_13485
+036A: put_actor 54@(120@,4i) in_car 58@(120@,4i) 
+
+:DRIV2_13501
+04E0: car 58@(120@,4i) abandon_path_radius 2 
+05D1: AS_actor 54@(120@,4i) drive_car 58@(120@,4i) to -2730.11 65.22 3.91 speed 10.0 0 model #NULL 2 
+Car.SetSpeedInstantly(58@(120@,4i), 7.0)
+
+:DRIV2_13568
+Car.Destroy(34@)
+fade 1 500 
+
+:DRIV2_13580
+if 
+fading 
+jf @DRIV2_13604 
+wait 0 
+jump @DRIV2_13580 
+
+:DRIV2_13604
+169@ = 1 
+0707: start_scene_skip_to @DRIV2_13799 
+if 
+   not Actor.Dead(54@(120@,4i))
+jf @DRIV2_13656 
+Actor.StorePos(54@(120@,4i), 100@, 101@, 102@)
+
+:DRIV2_13656
+if 
+  101@ > 71.36 
+jf @DRIV2_13743 
+wait 0 
+if 
+   not Actor.Dead(54@(120@,4i))
+jf @DRIV2_13726 
+Actor.StorePos(54@(120@,4i), 100@, 101@, 102@)
+jump @DRIV2_13736 
+
+:DRIV2_13726
+101@ = 71.36 
+
+:DRIV2_13736
+jump @DRIV2_13656 
+
+:DRIV2_13743
+Garage.Close('TBON')
+
+:DRIV2_13754
+if 
+   not Garage.IsClosed('TBON')
+jf @DRIV2_13787 
+wait 0 
+jump @DRIV2_13754 
+
+:DRIV2_13787
+wait 1000 
+169@ = 0 
+
+:DRIV2_13799
+0701: end_scene_skip 
+fade 0 1000 
+
+:DRIV2_13808
+if 
+fading 
+jf @DRIV2_13832 
+wait 0 
+jump @DRIV2_13808 
+
+:DRIV2_13832
+Actor.DestroyInstantly(54@(120@,4i))
+Car.Destroy(58@(120@,4i))
+if 
+  169@ == 1 
+jf @DRIV2_13934 
+if 
+   not Garage.IsClosed('TBON')
+jf @DRIV2_13934 
+Garage.Close('TBON')
+
+:DRIV2_13901
+if 
+   not Garage.IsClosed('TBON')
+jf @DRIV2_13934 
+wait 0 
+jump @DRIV2_13901 
+
+:DRIV2_13934
+select_interior 121@ 
+04E4: refresh_game_renderer_at 96@ 97@ 
+Camera.SetAtPos(96@, 97@, 196@)
+Actor.PutAt($PLAYER_ACTOR, 96@, 97@, 196@)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRIV2_14011 
+35@ = Actor.MissionCar($PLAYER_ACTOR)
+Car.Angle(35@) = 103@
+jump @DRIV2_14019 
+
+:DRIV2_14011
+Actor.Angle($PLAYER_ACTOR) = 103@
+
+:DRIV2_14019
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 1000 
+
+:DRIV2_14041
+if 
+fading 
+jf @DRIV2_14065 
+wait 0 
+jump @DRIV2_14041 
+
+:DRIV2_14065
+return 
+
+:DRIV2_14067
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DRIV2_14135 
+$11033 = 1 
+$11029 = 135.0 
+$11032 = -2570.34 
+$11031 = 1363.52 
+$11030 = 6.64 
+
+:DRIV2_14135
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DRIV2_14153
+$SYNDICATE_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'FAR_2'  // T-Bone Mendez
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 5000
+0998: add_respect 20 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+return 
+
+:DRIV2_14217
+Model.Destroy(#BOXVILLE)
+Model.Destroy(#FCR900)
+Model.Destroy(#KMB_PACKET)
+Model.Destroy(#BIKDRUG)
+Model.Destroy(#MICRO_UZI)
+04EF: release_animation "BIKES" 
+04EF: release_animation "MISC" 
+119@ = 0 
+
+:DRIV2_14266
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_14357 
+Marker.Disable(180@(119@,4i))
+if 
+03CA:   object 38@(119@,4i) exists 
+jf @DRIV2_14343 
+if 
+82CC:   not object 38@(119@,4i) bounding_sphere_visible 
+jf @DRIV2_14343 
+Object.Destroy(38@(119@,4i))
+
+:DRIV2_14343
+119@ += 1 
+jump @DRIV2_14266 
+
+:DRIV2_14357
+Marker.Disable(184@)
+Marker.Disable(185@)
+if 
+   not Car.Wrecked(34@)
+jf @DRIV2_14398 
+Car.SetImmunities(34@, 0, 0, 0, 0, 0)
+
+:DRIV2_14398
+119@ = 0 
+
+:DRIV2_14405
+if 
+001D:   37@ > 119@ // (int) 
+jf @DRIV2_14488 
+if 
+   not Car.Wrecked(58@(119@,4i))
+jf @DRIV2_14474 
+Car.SetImmunities(58@(119@,4i), 0, 0, 0, 0, 0)
+Car.LockInCurrentPosition(58@(119@,4i)) = False
+
+:DRIV2_14474
+119@ += 1 
+jump @DRIV2_14405 
+
+:DRIV2_14488
+if 
+   not Car.Wrecked(35@)
+jf @DRIV2_14519 
+Car.SetImmunities(35@, 0, 0, 0, 0, 0)
+
+:DRIV2_14519
+065C: release_decision_maker 193@ 
+061B: remove_references_to_AS_pack 195@ 
+03E6: remove_text_box 
+091D: remove_forbidden_for_boats_cube_cornerA -2014.82 181.4 -13.0 cornerB -1614.82 581.4 47.0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRIV2_14586 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+
+:DRIV2_14586
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

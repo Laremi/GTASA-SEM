@@ -1,0 +1,3599 @@
+:SCRASH2
+thread 'SCRASH2' 
+$7238 = 0 
+gosub @SCRASH2_54 
+if 
+wasted_or_busted 
+jf @SCRASH2_45 
+gosub @SCRASH2_20967 
+
+:SCRASH2_45
+gosub @SCRASH2_21305 
+end_thread 
+
+:SCRASH2_54
+increment_mission_attempts 
+$ONMISSION = 1 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+34@ = 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+39@ = 0 
+40@ = 0 
+45@ = 0 
+46@ = 0 
+47@ = 0 
+32@ = 0 
+33@ = 0 
+166@ = 0 
+167@ = 0 
+168@ = 0 
+169@ = 0 
+170@ = 0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+149@ = 0 
+153@ = 0 
+155@ = 1 
+161@ = 0 
+164@ = 0 
+165@ = 0 
+if 
+  34@ == -99 
+jf @SCRASH2_606 
+0662: printstring "SHOULD_NEVER_BE_IN_FAKE_ENTITY_CREATION" 
+06D8: 81@ = create_train_at 0.0 0.0 0.0 type 11 direction 0 
+87@ = Car.Create(#TAXI, 0.0, 0.0, 0.0)
+89@ = Car.Create(#SANCHEZ, 0.0, 0.0, 0.0)
+48@ = 0 
+
+:SCRASH2_404
+06D8: 84@(48@,3i) = create_train_at 0.0 0.0 0.0 type 10 direction 0 
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_404 
+78@ = Actor.Create(CivMale, #SPECIAL01, 0.0, 0.0, 0.0)
+79@ = Actor.Create(CivMale, #VBMOCD, 0.0, 0.0, 0.0)
+80@ = Actor.Create(CivMale, #HMYRI, 0.0, 0.0, 0.0)
+032B: 95@ = create_weapon_pickup #SNIPER type 3 ammo 0 at 0.0 0.0 0.0 
+018A: 90@ = create_checkpoint_at 0.0 0.0 0.0 
+91@ = Marker.CreateAboveCar(81@)
+92@ = Marker.CreateAboveActor(78@)
+93@ = Marker.CreateAboveActor(80@)
+03DC: 94@ = create_marker_above_pickup 95@ 
+
+:SCRASH2_606
+054C: use_GXT_table 'SCRASH2' 
+gosub @SCRASH2_20315 
+060A: create_decision_maker_type 0 store_to 96@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 97@ // decision\allowed\m_.ped files 
+gosub @SCRASH2_20492 
+041A: 131@ = actor $PLAYER_ACTOR weapon 34 ammo 
+155@ = 1 
+
+:SCRASH2_662
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SCRASH2_695 
+36@ = 1 
+jump @SCRASH2_1018 
+
+:SCRASH2_695
+gosub @SCRASH2_18836 
+gosub @SCRASH2_19247 
+if or
+  38@ == 1 
+  39@ == 1 
+jf @SCRASH2_741 
+jump @SCRASH2_1018 
+
+:SCRASH2_741
+gosub @SCRASH2_20212 
+gosub @SCRASH2_20246 
+if 
+   Actor.Dead($PLAYER_ACTOR)
+jf @SCRASH2_785 
+37@ = 1 
+jump @SCRASH2_1018 
+
+:SCRASH2_785
+if 
+  34@ == 0 
+jf @SCRASH2_843 
+0662: printstring "STAGE_SHOULD_NEVER_BE_0_IN_MAIN_LOOP" 
+
+:SCRASH2_843
+if 
+  34@ == 1 
+jf @SCRASH2_868 
+gosub @SCRASH2_1166 
+
+:SCRASH2_868
+if 
+  34@ == 2 
+jf @SCRASH2_893 
+gosub @SCRASH2_1287 
+
+:SCRASH2_893
+if 
+  34@ == 3 
+jf @SCRASH2_918 
+gosub @SCRASH2_2140 
+
+:SCRASH2_918
+if 
+  34@ == 4 
+jf @SCRASH2_943 
+gosub @SCRASH2_3033 
+
+:SCRASH2_943
+if 
+  34@ == 5 
+jf @SCRASH2_968 
+gosub @SCRASH2_5856 
+
+:SCRASH2_968
+if 
+  34@ == 6 
+jf @SCRASH2_993 
+gosub @SCRASH2_6908 
+
+:SCRASH2_993
+if 
+  34@ == 7 
+jf @SCRASH2_1018 
+36@ = 1 
+
+:SCRASH2_1018
+if 
+  38@ == 0 
+jf @SCRASH2_1118 
+if 
+  37@ == 0 
+jf @SCRASH2_1102 
+if 
+  36@ == 0 
+jf @SCRASH2_1086 
+jump @SCRASH2_662 
+jump @SCRASH2_1095 
+
+:SCRASH2_1086
+gosub @SCRASH2_21218 
+return 
+
+:SCRASH2_1095
+jump @SCRASH2_1111 
+
+:SCRASH2_1102
+gosub @SCRASH2_20967 
+return 
+
+:SCRASH2_1111
+jump @SCRASH2_1120 
+
+:SCRASH2_1118
+return 
+
+:SCRASH2_1120
+0662: printstring "SHOULD_NEVER_BE_HERE_IN_END_OF_MAIN_LOOP" 
+return 
+
+:SCRASH2_1166
+if 
+  35@ == 0 
+jf @SCRASH2_1214 
+gosub @SCRASH2_10052 
+00BC: show_text_highpriority GXT 'SCR2_21' time 7000 flag 1  // ~s~Tenpenny has hidden a ~g~sniper rifle~s~ in the construction site nearby. Go get it.
+35@ += 1 
+
+:SCRASH2_1214
+if 
+  35@ == 1 
+jf @SCRASH2_1260 
+if 
+   Pickup.Picked_up(95@)
+jf @SCRASH2_1260 
+Marker.Disable(94@)
+35@ = 99 
+
+:SCRASH2_1260
+if 
+  35@ == 99 
+jf @SCRASH2_1285 
+gosub @SCRASH2_20285 
+
+:SCRASH2_1285
+return 
+
+:SCRASH2_1287
+if and
+  35@ > 0 
+   Actor.Dead(78@)
+jf @SCRASH2_1319 
+37@ = 1 
+return 
+
+:SCRASH2_1319
+if and
+  35@ > 1 
+   Car.Wrecked(81@)
+jf @SCRASH2_1351 
+37@ = 1 
+return 
+
+:SCRASH2_1351
+if 
+  35@ == 0 
+jf @SCRASH2_1466 
+gosub @SCRASH2_10188 
+132@ = -1952.791 
+133@ = 136.5608 
+134@ = 25.2734 
+018A: 90@ = create_checkpoint_at 132@ 133@ 134@ 
+018B: set_marker 90@ radar_mode 2 
+00BC: show_text_highpriority GXT 'SCR2_00' time 8000 flag 1  // ~s~The reporter is at ~y~Cranberry Station~s~. Follow him to his meeting place with the Target, then kill them both.
+0085: 103@ = 46@ // (int) 
+103@ += 6000 
+35@ += 1 
+
+:SCRASH2_1466
+if 
+  35@ == 1 
+jf @SCRASH2_1553 
+if 
+001D:   46@ > 103@ // (int) 
+jf @SCRASH2_1553 
+gosub @SCRASH2_10113 
+06DC: set_train 81@ acc 20.0 
+06DD: set_train 81@ speed 20.0 
+00BB: show_text_lowpriority GXT 'SCR2_01' time 10000 flag 1  // ~s~The train is arriving at the ~y~station~s~. You don't have much time before it leaves with the reporter.
+35@ += 1 
+
+:SCRASH2_1553
+if 
+  35@ == 2 
+jf @SCRASH2_1636 
+if 
+01AD:   car 81@ sphere 0 near_point -1944.545 130.8166 radius 5.0 5.0 
+jf @SCRASH2_1636 
+06DC: set_train 81@ acc 4.0 
+06DD: set_train 81@ speed 0.0 
+35@ += 1 
+
+:SCRASH2_1636
+if 
+  35@ == 3 
+jf @SCRASH2_1718 
+if 
+01C1:   car 81@ stopped 
+jf @SCRASH2_1718 
+078A: 82@ = get_train 81@ carriage 1 handle 
+05CA: AS_actor 78@ enter_car 82@ passenger_seat -1 time 500 
+0085: 103@ = 46@ // (int) 
+103@ += 60000 
+35@ += 1 
+
+:SCRASH2_1718
+if 
+  35@ == 4 
+jf @SCRASH2_1939 
+64@ = -1978.101 
+65@ = 78.224 
+67@ = -1922.002 
+68@ = 203.4028 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 64@ 65@ cornerB 67@ 68@ 
+jf @SCRASH2_1878 
+Car.DoorStatus(81@) = 3
+06DD: set_train 81@ speed 40.0 
+Marker.Disable(90@)
+91@ = Marker.CreateAboveCar(81@)
+Actor.DestroyWithFade(78@)
+167@ = 0 
+00BC: show_text_highpriority GXT 'SCR2_02' time 10000 flag 1  // ~s~The reporter has boarded the train and is heading for Market Station in Los Santos. Follow that ~r~train~s~!
+35@ = 99 
+jump @SCRASH2_1939 
+
+:SCRASH2_1878
+if 
+001D:   46@ > 103@ // (int) 
+jf @SCRASH2_1939 
+Car.DoorStatus(81@) = 3
+06DD: set_train 81@ speed 5.0 
+0085: 103@ = 46@ // (int) 
+103@ += 60000 
+35@ += 1 
+
+:SCRASH2_1939
+if 
+  35@ == 5 
+jf @SCRASH2_2113 
+64@ = -1978.101 
+65@ = 78.224 
+67@ = -1922.002 
+68@ = 203.4028 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 64@ 65@ cornerB 67@ 68@ 
+jf @SCRASH2_2080 
+Marker.Disable(90@)
+91@ = Marker.CreateAboveCar(81@)
+00BC: show_text_highpriority GXT 'SCR2_02' time 10000 flag 1  // ~s~The reporter has boarded the train and is heading for Market Station in Los Santos. Follow that ~r~train~s~!
+06DD: set_train 81@ speed 10.0 
+35@ = 99 
+jump @SCRASH2_2113 
+
+:SCRASH2_2080
+if 
+001D:   46@ > 103@ // (int) 
+jf @SCRASH2_2113 
+37@ = 1 
+45@ = 1 
+
+:SCRASH2_2113
+if 
+  35@ == 99 
+jf @SCRASH2_2138 
+gosub @SCRASH2_20285 
+
+:SCRASH2_2138
+return 
+
+:SCRASH2_2140
+if 
+   Car.Wrecked(81@)
+jf @SCRASH2_2165 
+37@ = 1 
+return 
+
+:SCRASH2_2165
+if 
+  35@ == 0 
+jf @SCRASH2_2315 
+119@ = 0 
+120@ = 0 
+121@ = 0 
+122@ = 0 
+138@ = 0 
+139@ = 0 
+140@ = 0 
+132@ = 833.7101 
+133@ = -1383.643 
+134@ = -2.6352 
+48@ = 0 
+
+:SCRASH2_2269
+123@(48@,3i) = -1 
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_2269 
+03C7: set_sensitivity_to_crime 0.3 
+35@ += 1 
+
+:SCRASH2_2315
+if 
+  35@ == 1 
+jf @SCRASH2_2433 
+if 
+01AD:   car 81@ sphere 0 near_point 132@ 133@ radius 5.0 5.0 
+jf @SCRASH2_2433 
+06DC: set_train 81@ acc 16.0 
+06DD: set_train 81@ speed 0.0 
+00BC: show_text_highpriority GXT 'SCR2_03' time 11000 flag 1  // ~s~The ~r~train~s~ is approaching Market Station. The reporter will be preparing to exit.
+0085: 111@ = 46@ // (int) 
+111@ += 10000 
+138@ = 1 
+35@ += 1 
+
+:SCRASH2_2433
+if 
+  35@ == 2 
+jf @SCRASH2_2516 
+if 
+001D:   46@ > 111@ // (int) 
+jf @SCRASH2_2516 
+gosub @SCRASH2_18818 
+00BC: show_text_highpriority GXT 'SCR2_09' time 9000 flag 1  // ~s~If the ~r~reporter~s~ suspects he is being tailed he will abandon the interview, so don't get close enough to spook him.
+0085: 111@ = 46@ // (int) 
+111@ += 8000 
+35@ += 1 
+
+:SCRASH2_2516
+if 
+  35@ == 3 
+jf @SCRASH2_2560 
+if 
+001D:   46@ > 111@ // (int) 
+jf @SCRASH2_2560 
+35@ += 1 
+
+:SCRASH2_2560
+if 
+  35@ == 4 
+jf @SCRASH2_2631 
+if 
+01C1:   car 81@ stopped 
+jf @SCRASH2_2631 
+140@ = 1 
+0085: 103@ = 46@ // (int) 
+103@ += 120000 
+Marker.Disable(91@)
+35@ += 1 
+
+:SCRASH2_2631
+if 
+  35@ == 5 
+jf @SCRASH2_2674 
+if 
+  139@ == 1 
+jf @SCRASH2_2674 
+35@ = 99 
+
+:SCRASH2_2674
+gosub @SCRASH2_10289 
+gosub @SCRASH2_10455 
+gosub @SCRASH2_10614 
+gosub @SCRASH2_10746 
+gosub @SCRASH2_10964 
+gosub @SCRASH2_11039 
+if and
+  139@ == 0 
+  140@ == 1 
+jf @SCRASH2_2767 
+if 
+001D:   46@ > 103@ // (int) 
+jf @SCRASH2_2767 
+139@ = 1 
+
+:SCRASH2_2767
+if and
+  139@ == 0 
+  140@ == 1 
+jf @SCRASH2_2818 
+if 
+  300 > 121@ 
+jf @SCRASH2_2818 
+139@ = 1 
+
+:SCRASH2_2818
+if 
+  161@ == 1 
+jf @SCRASH2_3006 
+if 
+8154:   not actor $PLAYER_ACTOR in_zone 'SF'  // San Fierro
+jf @SCRASH2_3006 
+if 
+   Car.Wrecked(89@)
+jf @SCRASH2_2884 
+161@ = 0 
+
+:SCRASH2_2884
+if 
+  2800 > 121@ 
+jf @SCRASH2_3006 
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+Car.StorePos(89@, 60@, 61@, 62@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  100.0 > 72@ 
+jf @SCRASH2_2989 
+161@ = 0 
+jump @SCRASH2_3006 
+
+:SCRASH2_2989
+161@ = 0 
+Car.RemoveReferences(89@)
+Model.Destroy(#SANCHEZ)
+
+:SCRASH2_3006
+if 
+  35@ == 99 
+jf @SCRASH2_3031 
+gosub @SCRASH2_20285 
+
+:SCRASH2_3031
+return 
+
+:SCRASH2_3033
+if 
+  35@ == 0 
+jf @SCRASH2_3285 
+00BB: show_text_lowpriority GXT 'SCR2_04' time 5000 flag 1  // ~s~The ~r~reporter~s~ has left the train. Pick up his trail and follow him to the Target.
+gosub @SCRASH2_15984 
+gosub @SCRASH2_12266 
+92@ = Marker.CreateAboveActor(78@)
+0085: 103@ = 46@ // (int) 
+103@ += 10000 
+109@ = 0 
+118@ = 0 
+143@ = 0 
+142@ = 0 
+141@ = 0 
+154@ = 0 
+157@ = 0 
+160@ = 0 
+163@ = 0 
+01E8: create_forbidden_for_cars_cube_cornerA 789.595 -1387.97 11.5469 cornerB 807.2843 -1334.546 13.725 
+01E8: create_forbidden_for_cars_cube_cornerA 804.9978 -1414.032 11.3801 cornerB 908.0844 -1386.618 13.5524 
+01E8: create_forbidden_for_cars_cube_cornerA 802.1913 -1335.066 11.1828 cornerB 911.4662 -1313.045 13.7469 
+101@ = 0 
+102@ = 0 
+35@ += 1 
+
+:SCRASH2_3285
+if 
+  167@ == 1 
+jf @SCRASH2_3386 
+if 
+   Actor.Dead(78@)
+jf @SCRASH2_3335 
+37@ = 1 
+45@ = 2 
+return 
+
+:SCRASH2_3335
+if 
+051A:   actor 78@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_3386 
+37@ = 1 
+45@ = 7 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+return 
+
+:SCRASH2_3386
+if 
+  156@ == 1 
+jf @SCRASH2_3439 
+if 
+001D:   46@ > 118@ // (int) 
+jf @SCRASH2_3437 
+37@ = 1 
+45@ = 7 
+
+:SCRASH2_3437
+return 
+
+:SCRASH2_3439
+if 
+  157@ == 1 
+jf @SCRASH2_3492 
+if 
+001D:   46@ > 118@ // (int) 
+jf @SCRASH2_3490 
+37@ = 1 
+45@ = 7 
+
+:SCRASH2_3490
+return 
+
+:SCRASH2_3492
+if and
+  168@ == 1 
+  141@ == 1 
+jf @SCRASH2_3831 
+if 
+   not Car.Wrecked(87@)
+jf @SCRASH2_3774 
+if 
+   Actor.Dead(79@)
+jf @SCRASH2_3556 
+157@ = 1 
+
+:SCRASH2_3556
+if 
+   not Actor.InCar(79@, 87@)
+jf @SCRASH2_3582 
+157@ = 1 
+
+:SCRASH2_3582
+if 
+051C:   car 87@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_3673 
+73@ = 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH2_3665 
+06AC: 70@ = actor $PLAYER_ACTOR movement_speed 
+if 
+  13.0 > 70@ 
+jf @SCRASH2_3665 
+73@ = 0 
+054F: clear_car 87@ damage 
+
+:SCRASH2_3665
+0085: 157@ = 73@ // (int) 
+
+:SCRASH2_3673
+if 
+   Actor.InCar($PLAYER_ACTOR, 87@)
+jf @SCRASH2_3699 
+157@ = 1 
+
+:SCRASH2_3699
+if 
+  157@ == 1 
+jf @SCRASH2_3767 
+if 
+   not Actor.Driving(78@)
+jf @SCRASH2_3749 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+
+:SCRASH2_3749
+0085: 118@ = 46@ // (int) 
+118@ += 1000 
+return 
+
+:SCRASH2_3767
+jump @SCRASH2_3831 
+
+:SCRASH2_3774
+157@ = 1 
+if 
+   not Actor.Driving(78@)
+jf @SCRASH2_3813 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+
+:SCRASH2_3813
+0085: 118@ = 46@ // (int) 
+118@ += 1000 
+return 
+
+:SCRASH2_3831
+if and
+  168@ == 1 
+  141@ == 0 
+jf @SCRASH2_4067 
+if 
+   not Car.Wrecked(87@)
+jf @SCRASH2_4036 
+73@ = 0 
+if 
+   Actor.Dead(79@)
+jf @SCRASH2_3902 
+73@ = 1 
+
+:SCRASH2_3902
+if 
+   not Actor.InCar(79@, 87@)
+jf @SCRASH2_3928 
+73@ = 1 
+
+:SCRASH2_3928
+if 
+051C:   car 87@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_3954 
+73@ = 1 
+
+:SCRASH2_3954
+if 
+   Actor.InCar($PLAYER_ACTOR, 87@)
+jf @SCRASH2_3980 
+73@ = 1 
+
+:SCRASH2_3980
+if 
+  73@ == 1 
+jf @SCRASH2_4029 
+Car.RemoveReferences(87@)
+Actor.RemoveReferences(79@)
+168@ = 0 
+158@ = 0 
+gosub @SCRASH2_12378 
+
+:SCRASH2_4029
+jump @SCRASH2_4067 
+
+:SCRASH2_4036
+Car.RemoveReferences(87@)
+Actor.RemoveReferences(79@)
+168@ = 0 
+158@ = 0 
+gosub @SCRASH2_12378 
+
+:SCRASH2_4067
+if 
+  35@ == 1 
+jf @SCRASH2_4116 
+05D3: AS_actor 78@ goto_point 833.4493 -1374.261 -1.5078 mode 4 time -1 ms // versionA 
+35@ += 1 
+
+:SCRASH2_4116
+if 
+  35@ == 2 
+jf @SCRASH2_4222 
+062E: get_actor 78@ task 1491 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_4222 
+0605: actor 78@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0085: 104@ = 46@ // (int) 
+104@ += 250 
+35@ += 1 
+
+:SCRASH2_4222
+if 
+  35@ == 3 
+jf @SCRASH2_4293 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_4293 
+if 
+   not Actor.Animation(78@) == "ROADCROSS"
+jf @SCRASH2_4293 
+35@ += 1 
+
+:SCRASH2_4293
+if 
+  35@ == 4 
+jf @SCRASH2_4343 
+gosub @SCRASH2_12648 
+if 
+  101@ == 7 
+jf @SCRASH2_4343 
+35@ += 1 
+
+:SCRASH2_4343
+if 
+  35@ == 5 
+jf @SCRASH2_4420 
+0605: actor 78@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0085: 104@ = 46@ // (int) 
+104@ += 250 
+35@ += 1 
+
+:SCRASH2_4420
+if 
+  35@ == 6 
+jf @SCRASH2_4505 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_4505 
+if 
+   not Actor.Animation(78@) == "ROADCROSS"
+jf @SCRASH2_4505 
+101@ = 8 
+102@ = 8 
+35@ += 1 
+
+:SCRASH2_4505
+if 
+  35@ == 7 
+jf @SCRASH2_4642 
+gosub @SCRASH2_12648 
+if 
+  101@ == 10 
+jf @SCRASH2_4642 
+143@ = 1 
+0085: 105@ = 46@ // (int) 
+105@ += 60000 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH2_4612 
+00BC: show_text_highpriority GXT 'SCR2_20' time 10000 flag 1  // ~s~The ~r~reporter~s~ is at the sidewalk looking for a cab. Get ready to follow him.
+jump @SCRASH2_4628 
+
+:SCRASH2_4612
+00BC: show_text_highpriority GXT 'SCR2_06' time 10000 flag 1  // ~s~The ~r~reporter~s~ is on the sidewalk looking for a cab. To follow him you're gonna need some wheels.
+
+:SCRASH2_4628
+163@ = 1 
+35@ += 1 
+
+:SCRASH2_4642
+if 
+  35@ == 8 
+jf @SCRASH2_4775 
+gosub @SCRASH2_12648 
+if 
+  153@ == 0 
+jf @SCRASH2_4775 
+0615: define_AS_pack_begin 56@ 
+05D4: AS_actor -1 rotate_angle 90.0 
+0605: actor -1 perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 78@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+0085: 104@ = 46@ // (int) 
+104@ += 250 
+35@ += 1 
+
+:SCRASH2_4775
+if 
+  35@ == 9 
+jf @SCRASH2_4904 
+gosub @SCRASH2_12648 
+if 
+  153@ == 0 
+jf @SCRASH2_4904 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_4904 
+062E: get_actor 78@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_4904 
+if 
+  141@ == 1 
+jf @SCRASH2_4897 
+35@ += 1 
+jump @SCRASH2_4904 
+
+:SCRASH2_4897
+35@ -= 1 
+
+:SCRASH2_4904
+if 
+  35@ == 10 
+jf @SCRASH2_5047 
+if 
+  158@ == 1 
+jf @SCRASH2_5016 
+0615: define_AS_pack_begin 56@ 
+05D4: AS_actor -1 rotate_angle 180.0 
+0605: actor -1 perform_animation "HIKER_POSE" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 78@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+jump @SCRASH2_5040 
+
+:SCRASH2_5016
+05D3: AS_actor 78@ goto_point 821.7603 -1334.683 12.5391 mode 6 time -2 ms // versionA 
+
+:SCRASH2_5040
+35@ += 1 
+
+:SCRASH2_5047
+if 
+  35@ == 11 
+jf @SCRASH2_5376 
+gosub @SCRASH2_12648 
+if 
+  153@ == 0 
+jf @SCRASH2_5277 
+73@ = 0 
+if and
+  158@ == 1 
+01AF:   car 87@ sphere 0 in_sphere 803.7784 -1342.926 12.5469 radius 7.0 7.0 2.0 
+jf @SCRASH2_5159 
+73@ = 1 
+
+:SCRASH2_5159
+if and
+  158@ == 0 
+01AF:   car 87@ sphere 0 in_sphere 824.4391 -1330.707 12.4174 radius 7.0 7.0 2.0 
+jf @SCRASH2_5221 
+73@ = 1 
+
+:SCRASH2_5221
+if and
+  73@ == 1 
+01C1:   car 87@ stopped 
+jf @SCRASH2_5270 
+05CA: AS_actor 78@ enter_car 87@ passenger_seat 2 time -2 
+154@ = 1 
+35@ += 1 
+
+:SCRASH2_5270
+jump @SCRASH2_5376 
+
+:SCRASH2_5277
+if 
+   Actor.Animation(78@) == "HIKER_POSE"
+jf @SCRASH2_5376 
+if 
+001D:   46@ > 109@ // (int) 
+jf @SCRASH2_5376 
+0605: actor 78@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 100 
+0085: 109@ = 46@ // (int) 
+109@ += 250 
+
+:SCRASH2_5376
+if 
+  35@ == 12 
+jf @SCRASH2_5452 
+062E: get_actor 78@ task 1482 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_5452 
+Car.ToggleTaxiLight(87@) = False
+126@ = 0 
+0085: 88@ = 87@ // (int) 
+35@ = 99 
+
+:SCRASH2_5452
+if 
+  170@ == 0 
+jf @SCRASH2_5500 
+Model.Load(#TAXI)
+038B: load_requested_models 
+if 
+   Model.Available(#TAXI)
+jf @SCRASH2_5500 
+170@ = 1 
+
+:SCRASH2_5500
+if 
+  166@ == 1 
+jf @SCRASH2_5572 
+if 
+001D:   46@ > 103@ // (int) 
+jf @SCRASH2_5572 
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_5563 
+06DD: set_train 81@ speed 30.0 
+
+:SCRASH2_5563
+06DA: reset_train_directions 
+166@ = 0 
+
+:SCRASH2_5572
+if and
+  143@ == 1 
+  142@ == 0 
+jf @SCRASH2_5715 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 812.4495 -1343.488 12.532 radius 80.0 80.0 20.0 
+jf @SCRASH2_5680 
+142@ = 1 
+gosub @SCRASH2_12314 
+gosub @SCRASH2_12378 
+Car.ToggleTaxiLight(87@) = True
+jump @SCRASH2_5715 
+
+:SCRASH2_5680
+if 
+001D:   46@ > 105@ // (int) 
+jf @SCRASH2_5715 
+37@ = 1 
+45@ = 3 
+return 
+
+:SCRASH2_5715
+if and
+  141@ == 0 
+  168@ == 1 
+jf @SCRASH2_5795 
+if 
+01AF:   car 87@ sphere 0 in_sphere 796.9285 -1374.867 12.3949 radius 10.0 10.0 2.0 
+jf @SCRASH2_5795 
+141@ = 1 
+
+:SCRASH2_5795
+gosub @SCRASH2_16007 
+gosub @SCRASH2_16195 
+if 
+  37@ == 1 
+jf @SCRASH2_5829 
+return 
+
+:SCRASH2_5829
+if 
+  35@ == 99 
+jf @SCRASH2_5854 
+gosub @SCRASH2_20285 
+
+:SCRASH2_5854
+return 
+
+:SCRASH2_5856
+if 
+  35@ == 0 
+jf @SCRASH2_6034 
+132@ = 366.4698 
+133@ = -2030.643 
+134@ = 6.6582 
+128@ = 0 
+129@ = 0 
+127@ = 0 
+gosub @SCRASH2_13629 
+073B: unknown_car 87@ flag 0 
+0085: 116@ = 46@ // (int) 
+116@ += 3000 
+152@ = 1 
+149@ = 0 
+150@ = 0 
+159@ = 0 
+160@ = 0 
+072F: enable_car 87@ stuck_check_distance 2.0 time 30000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 20 // extended 03CC 
+00BC: show_text_highpriority GXT 'SCR2_07' time 5000 flag 1  // ~s~The ~r~reporter~s~ has climbed into a cab. Follow him to the Target.
+35@ += 1 
+
+:SCRASH2_6034
+if 
+   Actor.Dead(78@)
+jf @SCRASH2_6066 
+37@ = 1 
+45@ = 2 
+return 
+
+:SCRASH2_6066
+if 
+051A:   actor 78@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_6101 
+37@ = 1 
+45@ = 7 
+return 
+
+:SCRASH2_6101
+if 
+  157@ == 1 
+jf @SCRASH2_6154 
+if 
+001D:   46@ > 118@ // (int) 
+jf @SCRASH2_6152 
+37@ = 1 
+45@ = 7 
+
+:SCRASH2_6152
+return 
+
+:SCRASH2_6154
+if 
+   not Car.Wrecked(87@)
+jf @SCRASH2_6432 
+if 
+   Actor.Dead(79@)
+jf @SCRASH2_6193 
+157@ = 1 
+
+:SCRASH2_6193
+if 
+   not Actor.InCar(79@, 87@)
+jf @SCRASH2_6219 
+157@ = 1 
+
+:SCRASH2_6219
+if 
+051C:   car 87@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_6310 
+73@ = 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH2_6302 
+06AC: 70@ = actor $PLAYER_ACTOR movement_speed 
+if 
+  13.0 > 70@ 
+jf @SCRASH2_6302 
+73@ = 0 
+054F: clear_car 87@ damage 
+
+:SCRASH2_6302
+0085: 157@ = 73@ // (int) 
+
+:SCRASH2_6310
+if 
+   Actor.InCar($PLAYER_ACTOR, 87@)
+jf @SCRASH2_6336 
+157@ = 1 
+
+:SCRASH2_6336
+if 
+  157@ == 1 
+jf @SCRASH2_6425 
+if 
+   Actor.Driving(78@)
+jf @SCRASH2_6391 
+37@ = 1 
+45@ = 7 
+jump @SCRASH2_6423 
+
+:SCRASH2_6391
+0085: 118@ = 46@ // (int) 
+118@ += 1000 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+
+:SCRASH2_6423
+return 
+
+:SCRASH2_6425
+jump @SCRASH2_6473 
+
+:SCRASH2_6432
+157@ = 1 
+0085: 118@ = 46@ // (int) 
+118@ += 1000 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+return 
+
+:SCRASH2_6473
+if 
+  35@ == 1 
+jf @SCRASH2_6570 
+if and
+   not 100@ == 1 
+   not 100@ == 3 
+jf @SCRASH2_6570 
+if 
+00FE:   actor 78@ sphere 0 in_sphere 132@ 133@ 134@ radius 4.0 4.0 4.0 
+jf @SCRASH2_6570 
+0151: remove_status_text $7238 
+35@ = 99 
+
+:SCRASH2_6570
+if 
+  149@ == 0 
+jf @SCRASH2_6657 
+if 
+00FE:   actor 78@ sphere 0 in_sphere 369.3609 -1671.889 31.811 radius 14.0 6.0 4.0 
+jf @SCRASH2_6657 
+149@ = 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+
+:SCRASH2_6657
+if 
+  150@ == 0 
+jf @SCRASH2_6737 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 369.3609 -1671.889 31.811 radius 14.0 4.0 4.0 
+jf @SCRASH2_6730 
+150@ = 1 
+
+:SCRASH2_6730
+jump @SCRASH2_6792 
+
+:SCRASH2_6737
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 370.2572 -1656.79 31.7201 radius 14.0 4.0 4.0 
+jf @SCRASH2_6792 
+150@ = 0 
+
+:SCRASH2_6792
+gosub @SCRASH2_17371 
+if 
+  37@ == 1 
+jf @SCRASH2_6819 
+return 
+
+:SCRASH2_6819
+if and
+  151@ == 0 
+  149@ == 1 
+  150@ == 1 
+jf @SCRASH2_6874 
+151@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_18' time 10000 flag 1  // ~s~The ~r~reporter~s~ is approaching his destination. Keep your distance until he meets the Target.
+
+:SCRASH2_6874
+gosub @SCRASH2_15212 
+if 
+  35@ == 99 
+jf @SCRASH2_6906 
+gosub @SCRASH2_20285 
+
+:SCRASH2_6906
+return 
+
+:SCRASH2_6908
+if 
+   Actor.Dead(78@)
+jf @SCRASH2_6936 
+144@ = 1 
+Marker.Disable(92@)
+
+:SCRASH2_6936
+if 
+  169@ == 1 
+jf @SCRASH2_6982 
+if 
+   Actor.Dead(80@)
+jf @SCRASH2_6982 
+145@ = 1 
+Marker.Disable(93@)
+
+:SCRASH2_6982
+if and
+  144@ == 1 
+  145@ == 1 
+jf @SCRASH2_7014 
+35@ = 99 
+
+:SCRASH2_7014
+if 
+  35@ == 0 
+jf @SCRASH2_7346 
+gosub @SCRASH2_15429 
+93@ = Marker.CreateAboveActor(80@)
+0615: define_AS_pack_begin 56@ 
+05D3: AS_actor -1 goto_point 359.4136 -2036.943 6.836 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 362.2674 -2035.844 6.836 mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 270.0 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 80@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+0615: define_AS_pack_begin 56@ 
+05D3: AS_actor -1 goto_point 363.1874 -2035.844 6.836 mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 90.0 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 78@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+0085: 106@ = 46@ // (int) 
+106@ += 180000 
+146@ = 0 
+147@ = 0 
+98@ = 0 
+99@ = 0 
+107@ = 0 
+148@ = 0 
+00BC: show_text_highpriority GXT 'SCR2_19' time 10000 flag 1  // ~s~The ~r~reporter~s~ is ready to meet the ~r~Target~s~. You have a sniper rifle. Assassinate them both.
+if 
+  $5289 == 0 
+jf @SCRASH2_7318 
+164@ = 0 
+165@ = 0 
+0085: 112@ = 46@ // (int) 
+112@ += 10000 
+$5289 = 1 
+jump @SCRASH2_7339 
+
+:SCRASH2_7318
+164@ = 1 
+165@ = 1 
+112@ = 0 
+
+:SCRASH2_7339
+35@ += 1 
+
+:SCRASH2_7346
+if 
+  35@ == 1 
+jf @SCRASH2_7448 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_7448 
+062E: get_actor 78@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 1 // == constant 
+jf @SCRASH2_7448 
+062E: get_actor 80@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 1 // == constant 
+jf @SCRASH2_7448 
+35@ += 1 
+
+:SCRASH2_7448
+if 
+  35@ == 2 
+jf @SCRASH2_7626 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_7626 
+062E: get_actor 78@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_7626 
+062E: get_actor 80@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_7626 
+07CD: AS_actor 80@ walk_to 362.2674 -2035.844 6.836 stop_with_angle 270.0 within_radius 4.0 
+07CD: AS_actor 78@ walk_to 363.1874 -2035.844 6.836 stop_with_angle 90.0 within_radius 4.0 
+0085: 104@ = 46@ // (int) 
+104@ += 250 
+35@ += 1 
+
+:SCRASH2_7626
+if 
+  35@ == 3 
+jf @SCRASH2_7815 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_7815 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_7815 
+0605: actor 78@ perform_animation "PRTIAL_HNDSHK_BIZ_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor 80@ perform_animation "PRTIAL_HNDSHK_BIZ_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0085: 104@ = 46@ // (int) 
+104@ += 250 
+Actor.RemoveReferences(79@)
+Car.RemoveReferences(87@)
+35@ += 1 
+
+:SCRASH2_7815
+if 
+  35@ == 4 
+jf @SCRASH2_7945 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_7945 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_7945 
+if and
+   not Actor.Animation(78@) == "PRTIAL_HNDSHK_BIZ_01"
+   not Actor.Animation(80@) == "PRTIAL_HNDSHK_BIZ_01"
+jf @SCRASH2_7945 
+35@ += 1 
+
+:SCRASH2_7945
+if 
+  35@ == 5 
+jf @SCRASH2_8054 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8054 
+0605: actor 78@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0209: 50@ = random_int_in_ranges 2000 5000 
+0085: 104@ = 46@ // (int) 
+005A: 104@ += 50@ // (int) 
+35@ += 1 
+
+:SCRASH2_8054
+if 
+  35@ == 6 
+jf @SCRASH2_8124 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8124 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_8124 
+0687: clear_actor 78@ task 
+35@ += 1 
+
+:SCRASH2_8124
+if 
+  35@ == 7 
+jf @SCRASH2_8233 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8233 
+0605: actor 80@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0209: 50@ = random_int_in_ranges 5000 10000 
+0085: 104@ = 46@ // (int) 
+005A: 104@ += 50@ // (int) 
+35@ += 1 
+
+:SCRASH2_8233
+if 
+  35@ == 8 
+jf @SCRASH2_8303 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8303 
+if 
+001D:   46@ > 104@ // (int) 
+jf @SCRASH2_8303 
+0687: clear_actor 80@ task 
+35@ = 5 
+
+:SCRASH2_8303
+if 
+  35@ == 20 
+jf @SCRASH2_8560 
+if 
+   not Actor.Dead(80@)
+jf @SCRASH2_8429 
+0615: define_AS_pack_begin 56@ 
+05D3: AS_actor -1 goto_point 361.2376 -2047.841 6.836 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 354.2802 -2049.696 6.836 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 354.8605 -2057.588 6.836 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 80@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+
+:SCRASH2_8429
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_8537 
+0615: define_AS_pack_begin 56@ 
+05D3: AS_actor -1 goto_point 361.2376 -2047.841 6.836 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 354.2802 -2049.696 6.836 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 354.863 -2060.05 6.836 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 78@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+
+:SCRASH2_8537
+00BC: show_text_highpriority GXT 'SCR2_05' time 10000 flag 1  // ~s~The meeting is over. The ~r~reporter~s~ and ~r~Target~s~ are walking away.
+35@ += 1 
+
+:SCRASH2_8560
+if 
+  35@ == 21 
+jf @SCRASH2_8662 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8662 
+062E: get_actor 78@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 1 // == constant 
+jf @SCRASH2_8662 
+062E: get_actor 80@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 1 // == constant 
+jf @SCRASH2_8662 
+35@ += 1 
+
+:SCRASH2_8662
+if 
+  35@ == 22 
+jf @SCRASH2_8783 
+if and
+   not Actor.Dead(78@)
+   not Actor.Dead(80@)
+jf @SCRASH2_8783 
+062E: get_actor 78@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_8783 
+062E: get_actor 80@ task -1 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_8783 
+37@ = 1 
+45@ = 4 
+Actor.DestroyWithFade(78@)
+Actor.DestroyWithFade(80@)
+return 
+
+:SCRASH2_8783
+if 
+  35@ == 30 
+jf @SCRASH2_8874 
+98@ = 3 
+99@ = 3 
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_8836 
+0687: clear_actor 78@ task 
+
+:SCRASH2_8836
+if 
+   not Actor.Dead(80@)
+jf @SCRASH2_8857 
+0687: clear_actor 80@ task 
+
+:SCRASH2_8857
+Actor.RemoveReferences(79@)
+Car.RemoveReferences(87@)
+35@ += 1 
+
+:SCRASH2_8874
+if 
+  35@ == 31 
+jf @SCRASH2_8906 
+gosub @SCRASH2_15529 
+gosub @SCRASH2_15751 
+
+:SCRASH2_8906
+if 
+  146@ == 0 
+jf @SCRASH2_9435 
+if 
+  144@ == 1 
+jf @SCRASH2_8965 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_10' time 10000 flag 1  // ~s~You've killed the reporter. Kill the ~r~Target~s~ to complete the mission.
+
+:SCRASH2_8965
+if 
+  146@ == 0 
+jf @SCRASH2_9024 
+if 
+  145@ == 1 
+jf @SCRASH2_9024 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_11' time 10000 flag 1  // ~s~The Target is dead. Don't let the ~r~reporter~s~ get away. Kill him too.
+
+:SCRASH2_9024
+if 
+  146@ == 0 
+jf @SCRASH2_9084 
+if 
+051A:   actor 78@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_9084 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_14' time 10000 flag 1  // ~s~You've hit the ~r~reporter~s~. Finish him off and kill the ~r~Target~s~.
+
+:SCRASH2_9084
+if 
+  146@ == 0 
+jf @SCRASH2_9144 
+if 
+051A:   actor 80@ damaged_by_actor $PLAYER_ACTOR 
+jf @SCRASH2_9144 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_15' time 10000 flag 1  // ~s~The Target is wounded. The ~r~reporter~s~ and ~r~Target~s~ both have to die.
+
+:SCRASH2_9144
+if and
+  146@ == 0 
+  148@ == 0 
+jf @SCRASH2_9230 
+if 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA 349.8409 -2088.798 cornerB 409.7505 -1869.887 
+jf @SCRASH2_9230 
+148@ = 1 
+0085: 107@ = 46@ // (int) 
+107@ += 1000 
+
+:SCRASH2_9230
+if and
+  146@ == 0 
+  148@ == 1 
+jf @SCRASH2_9297 
+if 
+001D:   46@ > 107@ // (int) 
+jf @SCRASH2_9297 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_12' time 10000 flag 1  // ~s~The ~r~reporter~s~ and ~r~Target~s~ have heard your gunfire. Kill them both before they escape.
+
+:SCRASH2_9297
+if 
+  146@ == 0 
+jf @SCRASH2_9410 
+Actor.StorePos(80@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 70@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  30.0 > 70@ 
+jf @SCRASH2_9410 
+146@ = 1 
+00BC: show_text_highpriority GXT 'SCR2_13' time 10000 flag 1  // ~s~You've been spotted. Assassinate them ~r~both~s~.
+
+:SCRASH2_9410
+if 
+  146@ == 1 
+jf @SCRASH2_9435 
+35@ = 30 
+
+:SCRASH2_9435
+if and
+  146@ == 0 
+  147@ == 0 
+jf @SCRASH2_9493 
+if 
+001D:   46@ > 106@ // (int) 
+jf @SCRASH2_9493 
+147@ = 1 
+35@ = 20 
+
+:SCRASH2_9493
+if 
+  146@ == 1 
+jf @SCRASH2_9799 
+if 
+  144@ == 0 
+jf @SCRASH2_9655 
+if 
+80A3:   not actor 78@ sphere 0 in_rectangle_cornerA 349.8409 -2088.798 cornerB 409.7505 -1869.887 
+jf @SCRASH2_9655 
+Actor.StorePos(78@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 70@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  70@ > 200.0 
+jf @SCRASH2_9655 
+37@ = 1 
+45@ = 5 
+return 
+
+:SCRASH2_9655
+if 
+  145@ == 0 
+jf @SCRASH2_9799 
+if 
+80A3:   not actor 80@ sphere 0 in_rectangle_cornerA 349.8409 -2088.798 cornerB 409.7505 -1869.887 
+jf @SCRASH2_9799 
+Actor.StorePos(80@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 70@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  70@ > 200.0 
+jf @SCRASH2_9799 
+37@ = 1 
+45@ = 6 
+return 
+
+:SCRASH2_9799
+if 
+  164@ == 0 
+jf @SCRASH2_9870 
+if 
+001D:   46@ > 112@ // (int) 
+jf @SCRASH2_9870 
+0512: show_permanent_text_box 'SNIPER1'  // To use the sniper rifle's scope press ~k~~PED_LOCK_TARGET~. Pressing ~k~~PED_SNIPER_ZOOM_IN~ zooms in and pressing ~k~~PED_SNIPER_ZOOM_OUT~ zooms out.
+164@ = 1 
+0085: 112@ = 46@ // (int) 
+112@ += 15000 
+
+:SCRASH2_9870
+if 
+  164@ == 1 
+jf @SCRASH2_9961 
+if 
+  165@ == 0 
+jf @SCRASH2_9961 
+if 
+001D:   46@ > 112@ // (int) 
+jf @SCRASH2_9961 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'SNIPER2'  // Press ~k~~PED_FIREWEAPON~ to fire.
+165@ = 1 
+0085: 112@ = 46@ // (int) 
+112@ += 10000 
+
+:SCRASH2_9961
+if 
+  165@ == 1 
+jf @SCRASH2_10025 
+if 
+  112@ > 0 
+jf @SCRASH2_10025 
+if 
+001D:   46@ > 112@ // (int) 
+jf @SCRASH2_10025 
+03E6: remove_text_box 
+112@ = 0 
+
+:SCRASH2_10025
+if 
+  35@ == 99 
+jf @SCRASH2_10050 
+gosub @SCRASH2_20285 
+
+:SCRASH2_10050
+return 
+
+:SCRASH2_10052
+57@ = -2063.225 
+58@ = 258.3273 
+59@ = 35.3958 
+032B: 95@ = create_weapon_pickup #SNIPER type 3 ammo 5 at 57@ 58@ 59@ 
+03DC: 94@ = create_marker_above_pickup 95@ 
+return 
+
+:SCRASH2_10113
+57@ = -1937.312 
+58@ = 221.1162 
+59@ = 23.8414 
+0395: clear_area 1 at 57@ 58@ 59@ radius 60.0 
+06D8: 81@ = create_train_at 57@ 58@ 59@ type 11 direction 0 
+166@ = 1 
+return 
+
+:SCRASH2_10188
+57@ = -1939.52 
+58@ = 132.8362 
+59@ = 25.2734 
+63@ = 90.4279 
+0395: clear_area 1 at 57@ 58@ 59@ radius 1.0 
+78@ = Actor.Create(CivMale, #SPECIAL01, 57@, 58@, 59@)
+Actor.Angle(78@) = 63@
+0770: set_actor 78@ target_priority 1 
+167@ = 1 
+return 
+
+:SCRASH2_10289
+if 
+  138@ == 1 
+jf @SCRASH2_10309 
+return 
+
+:SCRASH2_10309
+if 
+   not 41@ == 5 
+jf @SCRASH2_10329 
+return 
+
+:SCRASH2_10329
+Car.StorePos(81@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+0087: 64@ = 57@ // (float) 
+0063: 64@ -= 60@ // (float) 
+0087: 65@ = 58@ // (float) 
+0063: 65@ -= 61@ // (float) 
+0087: 67@ = 64@ // (float) 
+006B: 67@ *= 64@ // (float) 
+0087: 68@ = 65@ // (float) 
+006B: 68@ *= 65@ // (float) 
+0087: 70@ = 67@ // (float) 
+005B: 70@ += 68@ // (float) 
+01FB: 71@ = square_root 70@ 
+0092: 119@ = float 71@ to_integer 
+return 
+
+:SCRASH2_10455
+if 
+  138@ == 1 
+jf @SCRASH2_10482 
+120@ = 0 
+return 
+
+:SCRASH2_10482
+if 
+   not 41@ == 3 
+jf @SCRASH2_10502 
+return 
+
+:SCRASH2_10502
+Car.StorePos(81@, 57@, 58@, 59@)
+0087: 64@ = 57@ // (float) 
+0063: 64@ -= 132@ // (float) 
+0087: 65@ = 58@ // (float) 
+0063: 65@ -= 133@ // (float) 
+0087: 67@ = 64@ // (float) 
+006B: 67@ *= 64@ // (float) 
+0087: 68@ = 65@ // (float) 
+006B: 68@ *= 65@ // (float) 
+0087: 70@ = 67@ // (float) 
+005B: 70@ += 68@ // (float) 
+01FB: 71@ = square_root 70@ 
+0092: 120@ = float 71@ to_integer 
+return 
+
+:SCRASH2_10614
+if 
+   not 41@ == 1 
+jf @SCRASH2_10634 
+return 
+
+:SCRASH2_10634
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+0087: 64@ = 57@ // (float) 
+0063: 64@ -= 132@ // (float) 
+0087: 65@ = 58@ // (float) 
+0063: 65@ -= 133@ // (float) 
+0087: 67@ = 64@ // (float) 
+006B: 67@ *= 64@ // (float) 
+0087: 68@ = 65@ // (float) 
+006B: 68@ *= 65@ // (float) 
+0087: 70@ = 67@ // (float) 
+005B: 70@ += 68@ // (float) 
+01FB: 71@ = square_root 70@ 
+0092: 121@ = float 71@ to_integer 
+return 
+
+:SCRASH2_10746
+if 
+  138@ == 1 
+jf @SCRASH2_10766 
+return 
+
+:SCRASH2_10766
+if 
+   not 41@ == 7 
+jf @SCRASH2_10786 
+return 
+
+:SCRASH2_10786
+70@ = 25.0 
+if 
+002D:   121@ >= 120@ // (int) 
+jf @SCRASH2_10897 
+if 
+  80 > 119@ 
+jf @SCRASH2_10890 
+02E3: 71@ = car 81@ speed 
+71@ += 2.0 
+if 
+  71@ > 25.0 
+jf @SCRASH2_10882 
+71@ = 25.0 
+
+:SCRASH2_10882
+06DC: set_train 81@ acc 71@ 
+
+:SCRASH2_10890
+jump @SCRASH2_10954 
+
+:SCRASH2_10897
+02E3: 71@ = car 81@ speed 
+71@ += 2.0 
+if 
+  71@ > 25.0 
+jf @SCRASH2_10946 
+71@ = 25.0 
+
+:SCRASH2_10946
+06DC: set_train 81@ acc 71@ 
+
+:SCRASH2_10954
+06DD: set_train 81@ speed 70@ 
+return 
+
+:SCRASH2_10964
+if 
+  122@ == 0 
+jf @SCRASH2_11017 
+if 
+  120@ == 0 
+jf @SCRASH2_11007 
+jump @SCRASH2_11015 
+
+:SCRASH2_11007
+0085: 122@ = 120@ // (int) 
+
+:SCRASH2_11015
+return 
+
+:SCRASH2_11017
+if 
+  5 > 120@ 
+jf @SCRASH2_11037 
+return 
+
+:SCRASH2_11037
+return 
+
+:SCRASH2_11039
+73@ = 1 
+48@ = 0 
+
+:SCRASH2_11053
+if 
+   not 123@(48@,3i) == -2 
+jf @SCRASH2_11082 
+73@ = 0 
+
+:SCRASH2_11082
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_11053 
+if 
+  73@ == 1 
+jf @SCRASH2_11123 
+return 
+
+:SCRASH2_11123
+48@ = 0 
+
+:SCRASH2_11130
+if 
+  123@(48@,3i) == -1 
+jf @SCRASH2_11289 
+
+:SCRASH2_11152
+0209: 123@(48@,3i) = random_int_in_ranges 0 5 
+73@ = 0 
+49@ = 0 
+
+:SCRASH2_11179
+if 
+001D:   48@ > 49@ // (int) 
+jf @SCRASH2_11264 
+if 
+  73@ == 0 
+jf @SCRASH2_11250 
+if 
+003B:   123@(48@,3i) == 123@(49@,3i) // (int) 
+jf @SCRASH2_11250 
+73@ = 1 
+
+:SCRASH2_11250
+49@ += 1 
+jump @SCRASH2_11179 
+
+:SCRASH2_11264
+if 
+  73@ == 1 
+jf @SCRASH2_11289 
+jump @SCRASH2_11152 
+
+:SCRASH2_11289
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_11130 
+48@ = 0 
+
+:SCRASH2_11317
+73@ = 0 
+0871: init_jump_table 123@(48@,3i) total_jumps 5 default_jump 0 @SCRASH2_11701 jumps 0 @SCRASH2_11391 1 @SCRASH2_11453 2 @SCRASH2_11515 3 @SCRASH2_11577 4 @SCRASH2_11639 -1 @SCRASH2_11701 -1 @SCRASH2_11701 
+
+:SCRASH2_11391
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1982.442 -598.0178 24.7266 radius 8.0 8.0 2.0 
+jf @SCRASH2_11446 
+73@ = 1 
+
+:SCRASH2_11446
+jump @SCRASH2_11701 
+
+:SCRASH2_11453
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1827.173 -1332.306 12.9453 radius 8.0 8.0 2.0 
+jf @SCRASH2_11508 
+73@ = 1 
+
+:SCRASH2_11508
+jump @SCRASH2_11701 
+
+:SCRASH2_11515
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -946.4463 -1497.618 89.28716 radius 8.0 8.0 2.0 
+jf @SCRASH2_11570 
+73@ = 1 
+
+:SCRASH2_11570
+jump @SCRASH2_11701 
+
+:SCRASH2_11577
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -620.5595 -1144.573 42.0616 radius 8.0 8.0 2.0 
+jf @SCRASH2_11632 
+73@ = 1 
+
+:SCRASH2_11632
+jump @SCRASH2_11701 
+
+:SCRASH2_11639
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 98.3887 -1021.795 21.2188 radius 8.0 8.0 2.0 
+jf @SCRASH2_11694 
+73@ = 1 
+
+:SCRASH2_11694
+jump @SCRASH2_11701 
+
+:SCRASH2_11701
+if 
+  73@ == 1 
+jf @SCRASH2_12243 
+0209: 50@ = random_int_in_ranges 10 14 
+0209: 51@ = random_int_in_ranges 10 20 
+0093: 70@ = integer 51@ to_float 
+0871: init_jump_table 123@(48@,3i) total_jumps 5 default_jump 0 @SCRASH2_12232 jumps 0 @SCRASH2_11812 1 @SCRASH2_11896 2 @SCRASH2_11980 3 @SCRASH2_12064 4 @SCRASH2_12148 -1 @SCRASH2_12232 -1 @SCRASH2_12232 
+
+:SCRASH2_11812
+0395: clear_area 1 at -1875.72 -1267.059 12.9511 radius 100.0 
+06D8: 84@(48@,3i) = create_train_at -1875.72 -1267.059 12.9511 type 50@ direction 1 
+06DC: set_train 84@(48@,3i) acc 70@ 
+06DD: set_train 84@(48@,3i) speed 70@ 
+jump @SCRASH2_12232 
+
+:SCRASH2_11896
+0395: clear_area 1 at -1332.721 -1514.888 22.7265 radius 100.0 
+06D8: 84@(48@,3i) = create_train_at -1332.721 -1514.888 22.7265 type 50@ direction 1 
+06DC: set_train 84@(48@,3i) acc 70@ 
+06DD: set_train 84@(48@,3i) speed 70@ 
+jump @SCRASH2_12232 
+
+:SCRASH2_11980
+0395: clear_area 1 at -673.6719 -1127.875 48.8875 radius 100.0 
+06D8: 84@(48@,3i) = create_train_at -673.6719 -1127.875 48.8875 type 50@ direction 1 
+06DC: set_train 84@(48@,3i) acc 70@ 
+06DD: set_train 84@(48@,3i) speed 70@ 
+jump @SCRASH2_12232 
+
+:SCRASH2_12064
+0395: clear_area 1 at -321.8627 -1191.647 35.5265 radius 100.0 
+06D8: 84@(48@,3i) = create_train_at -321.8627 -1191.647 35.5265 type 50@ direction 1 
+06DC: set_train 84@(48@,3i) acc 70@ 
+06DD: set_train 84@(48@,3i) speed 70@ 
+jump @SCRASH2_12232 
+
+:SCRASH2_12148
+0395: clear_area 1 at 802.302 -1362.661 -2.6302 radius 100.0 
+06D8: 84@(48@,3i) = create_train_at 802.302 -1362.661 -2.6302 type 50@ direction 1 
+06DC: set_train 84@(48@,3i) acc 70@ 
+06DD: set_train 84@(48@,3i) speed 70@ 
+jump @SCRASH2_12232 
+
+:SCRASH2_12232
+123@(48@,3i) = -2 
+
+:SCRASH2_12243
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_11317 
+return 
+
+:SCRASH2_12266
+078A: 83@ = get_train 81@ carriage 2 handle 
+78@ = Actor.CreateAsDriver(CivMale, #SPECIAL01, 83@)
+060B: set_actor 78@ decision_maker_to 96@ 
+05CD: AS_actor 78@ exit_car 83@ 
+167@ = 1 
+return 
+
+:SCRASH2_12314
+158@ = 1 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 685.9716 -1433.523 11.0857 cornerB 965.9512 -1379.386 14.9731 
+jf @SCRASH2_12376 
+158@ = 0 
+
+:SCRASH2_12376
+return 
+
+:SCRASH2_12378
+if 
+  158@ == 1 
+jf @SCRASH2_12443 
+57@ = 850.1132 
+58@ = -1391.708 
+59@ = 12.4161 
+63@ = 101.528 
+jump @SCRASH2_12483 
+
+:SCRASH2_12443
+57@ = 847.1364 
+58@ = -1331.128 
+59@ = 12.5097 
+63@ = 91.6504 
+
+:SCRASH2_12483
+0395: clear_area 1 at 57@ 58@ 59@ radius 10.0 
+87@ = Car.Create(#TAXI, 57@, 58@, 59@)
+Car.Angle(87@) = 63@
+79@ = Actor.CreateAsDriver(CivMale, #VBMOCD, 87@)
+if 
+  158@ == 1 
+jf @SCRASH2_12598 
+05D1: AS_actor 79@ drive_car 87@ to 801.0299 -1337.929 12.3906 speed 12.0 0 model #NULL 4 
+jump @SCRASH2_12639 
+
+:SCRASH2_12598
+05D1: AS_actor 79@ drive_car 87@ to 824.4391 -1330.707 12.4174 speed 12.0 0 model #NULL 4 
+141@ = 1 
+
+:SCRASH2_12639
+168@ = 1 
+return 
+
+:SCRASH2_12648
+if 
+  153@ == 1 
+jf @SCRASH2_12932 
+if 
+  163@ == 1 
+jf @SCRASH2_12702 
+062E: get_actor 78@ task 1492 status_store_to 40@ // ret 7 if not found 
+jump @SCRASH2_12713 
+
+:SCRASH2_12702
+062E: get_actor 78@ task 1471 status_store_to 40@ // ret 7 if not found 
+
+:SCRASH2_12713
+if 
+001D:   46@ > 117@ // (int) 
+jf @SCRASH2_12930 
+if and
+84A4:   not  40@ == 1 // == constant 
+84A4:   not  40@ == 0 // == constant 
+jf @SCRASH2_12930 
+if 
+  163@ == 1 
+jf @SCRASH2_12878 
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+0087: 64@ = 57@ // (float) 
+0087: 65@ = 58@ // (float) 
+Actor.StorePos(78@, 57@, 58@, 59@)
+0087: 67@ = 57@ // (float) 
+0087: 68@ = 58@ // (float) 
+0087: 57@ = 64@ // (float) 
+0063: 57@ -= 67@ // (float) 
+0087: 58@ = 65@ // (float) 
+0063: 58@ -= 68@ // (float) 
+0604: get_Z_angle_for_point 57@ 58@ store_to 63@ 
+
+:SCRASH2_12878
+05BF: AS_actor 78@ look_at_actor $PLAYER_ACTOR -2 ms 
+if 
+  163@ == 1 
+jf @SCRASH2_12930 
+05D4: AS_actor 78@ rotate_angle 63@ 
+0085: 117@ = 46@ // (int) 
+117@ += 250 
+
+:SCRASH2_12930
+return 
+
+:SCRASH2_12932
+0871: init_jump_table 101@ total_jumps 11 default_jump 1 @SCRASH2_13596 jumps 0 @SCRASH2_13060 1 @SCRASH2_13354 2 @SCRASH2_13392 3 @SCRASH2_13195 4 @SCRASH2_13278 5 @SCRASH2_13081 6 @SCRASH2_13119 
+0872: jump_table_jumps 7 @SCRASH2_13468 8 @SCRASH2_13475 9 @SCRASH2_13513 10 @SCRASH2_13589 -1 @SCRASH2_13627 -1 @SCRASH2_13627 -1 @SCRASH2_13627 -1 @SCRASH2_13627 -1 @SCRASH2_13627 
+
+:SCRASH2_13060
+101@ = 5 
+102@ = 5 
+jump @SCRASH2_13627 
+
+:SCRASH2_13081
+05D3: AS_actor 78@ goto_point 828.2594 -1358.995 -1.5078 mode 4 time -2 ms // versionA 
+101@ = 6 
+jump @SCRASH2_13627 
+
+:SCRASH2_13119
+if 
+00FE:   actor 78@ sphere 0 in_sphere 828.2594 -1358.995 -1.5078 radius 1.2 1.2 1.2 
+jf @SCRASH2_13188 
+101@ = 3 
+102@ = 3 
+126@ = 2 
+
+:SCRASH2_13188
+jump @SCRASH2_13627 
+
+:SCRASH2_13195
+0615: define_AS_pack_begin 56@ 
+05D3: AS_actor -1 goto_point 837.388 -1346.233 6.1719 mode 4 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 836.6295 -1342.926 6.1719 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 56@ 
+0618: assign_actor 78@ to_AS_pack 56@ 
+061B: remove_references_to_AS_pack 56@ 
+101@ = 4 
+jump @SCRASH2_13627 
+
+:SCRASH2_13278
+if 
+00FE:   actor 78@ sphere 0 in_sphere 836.6295 -1342.926 6.1719 radius 1.2 1.2 1.2 
+jf @SCRASH2_13347 
+101@ = 1 
+102@ = 1 
+126@ = 3 
+
+:SCRASH2_13347
+jump @SCRASH2_13627 
+
+:SCRASH2_13354
+05D3: AS_actor 78@ goto_point 822.0569 -1342.302 12.519 mode 4 time -2 ms // versionA 
+101@ = 2 
+jump @SCRASH2_13627 
+
+:SCRASH2_13392
+if 
+00FE:   actor 78@ sphere 0 in_sphere 822.0569 -1342.302 12.519 radius 1.2 1.2 1.2 
+jf @SCRASH2_13461 
+101@ = 7 
+102@ = 7 
+126@ = 4 
+
+:SCRASH2_13461
+jump @SCRASH2_13627 
+
+:SCRASH2_13468
+jump @SCRASH2_13627 
+
+:SCRASH2_13475
+05D3: AS_actor 78@ goto_point 803.7784 -1340.535 12.5469 mode 4 time -2 ms // versionA 
+101@ = 9 
+jump @SCRASH2_13627 
+
+:SCRASH2_13513
+if 
+00FE:   actor 78@ sphere 0 in_sphere 803.7784 -1340.535 12.5469 radius 1.2 1.2 1.2 
+jf @SCRASH2_13582 
+101@ = 10 
+102@ = 10 
+126@ = 5 
+
+:SCRASH2_13582
+jump @SCRASH2_13627 
+
+:SCRASH2_13589
+jump @SCRASH2_13627 
+
+:SCRASH2_13596
+0662: printstring "UNKNOWN_STATION_WALK_STATUS" 
+
+:SCRASH2_13627
+return 
+
+:SCRASH2_13629
+73@ = 1 
+74@ = 1 
+if 
+  127@ == 0 
+jf @SCRASH2_13668 
+73@ = 0 
+
+:SCRASH2_13668
+0871: init_jump_table 127@ total_jumps 14 default_jump 1 @SCRASH2_14146 jumps 0 @SCRASH2_13796 1 @SCRASH2_13887 2 @SCRASH2_13901 3 @SCRASH2_13915 4 @SCRASH2_13929 5 @SCRASH2_13943 6 @SCRASH2_13957 
+0872: jump_table_jumps 7 @SCRASH2_13971 8 @SCRASH2_13985 9 @SCRASH2_13999 10 @SCRASH2_14013 11 @SCRASH2_14027 12 @SCRASH2_14041 13 @SCRASH2_14055 -1 @SCRASH2_14179 -1 @SCRASH2_14179 
+
+:SCRASH2_13796
+0209: 50@ = random_int_in_ranges 0 3 
+if 
+  50@ == 0 
+jf @SCRASH2_13830 
+127@ = 1 
+
+:SCRASH2_13830
+if 
+  50@ == 1 
+jf @SCRASH2_13855 
+127@ = 2 
+
+:SCRASH2_13855
+if 
+  50@ == 2 
+jf @SCRASH2_13880 
+127@ = 3 
+
+:SCRASH2_13880
+jump @SCRASH2_14179 
+
+:SCRASH2_13887
+127@ = 4 
+jump @SCRASH2_14179 
+
+:SCRASH2_13901
+127@ = 6 
+jump @SCRASH2_14179 
+
+:SCRASH2_13915
+127@ = 7 
+jump @SCRASH2_14179 
+
+:SCRASH2_13929
+127@ = 9 
+jump @SCRASH2_14179 
+
+:SCRASH2_13943
+127@ = 10 
+jump @SCRASH2_14179 
+
+:SCRASH2_13957
+127@ = 5 
+jump @SCRASH2_14179 
+
+:SCRASH2_13971
+127@ = 12 
+jump @SCRASH2_14179 
+
+:SCRASH2_13985
+127@ = 13 
+jump @SCRASH2_14179 
+
+:SCRASH2_13999
+127@ = 8 
+jump @SCRASH2_14179 
+
+:SCRASH2_14013
+127@ = 13 
+jump @SCRASH2_14179 
+
+:SCRASH2_14027
+127@ = 13 
+jump @SCRASH2_14179 
+
+:SCRASH2_14041
+127@ = 11 
+jump @SCRASH2_14179 
+
+:SCRASH2_14055
+0209: 50@ = random_int_in_ranges 0 3 
+if 
+  50@ == 0 
+jf @SCRASH2_14089 
+127@ = 9 
+
+:SCRASH2_14089
+if 
+  50@ == 1 
+jf @SCRASH2_14114 
+127@ = 5 
+
+:SCRASH2_14114
+if 
+  50@ == 2 
+jf @SCRASH2_14139 
+127@ = 12 
+
+:SCRASH2_14139
+jump @SCRASH2_14179 
+
+:SCRASH2_14146
+0662: printstring "UNKNOWN_CURRENT_TAXI_WAYPOINT" 
+
+:SCRASH2_14179
+if 
+  127@ == 13 
+jf @SCRASH2_14211 
+73@ = 0 
+74@ = 0 
+
+:SCRASH2_14211
+0871: init_jump_table 127@ total_jumps 14 default_jump 0 @SCRASH2_14849 jumps 0 @SCRASH2_14339 1 @SCRASH2_14374 2 @SCRASH2_14411 3 @SCRASH2_14448 4 @SCRASH2_14485 5 @SCRASH2_14522 6 @SCRASH2_14559 
+0872: jump_table_jumps 7 @SCRASH2_14596 8 @SCRASH2_14633 9 @SCRASH2_14670 10 @SCRASH2_14707 11 @SCRASH2_14744 12 @SCRASH2_14781 13 @SCRASH2_14818 -1 @SCRASH2_14849 -1 @SCRASH2_14849 
+
+:SCRASH2_14339
+0662: printstring "TAXI_WAYPOINT_STILL_NONE" 
+jump @SCRASH2_14849 
+
+:SCRASH2_14374
+135@ = 728.2346 
+136@ = -1068.529 
+137@ = 21.3149 
+jump @SCRASH2_14849 
+
+:SCRASH2_14411
+135@ = 885.8015 
+136@ = -1152.047 
+137@ = 22.7156 
+jump @SCRASH2_14849 
+
+:SCRASH2_14448
+135@ = 623.9262 
+136@ = -1356.336 
+137@ = 12.4009 
+jump @SCRASH2_14849 
+
+:SCRASH2_14485
+135@ = 554.1271 
+136@ = -1327.217 
+137@ = 12.3984 
+jump @SCRASH2_14849 
+
+:SCRASH2_14522
+135@ = 552.7402 
+136@ = -1401.848 
+137@ = 14.0907 
+jump @SCRASH2_14849 
+
+:SCRASH2_14559
+135@ = 913.4064 
+136@ = -1381.039 
+137@ = 12.3208 
+jump @SCRASH2_14849 
+
+:SCRASH2_14596
+135@ = 807.6411 
+136@ = -1737.392 
+137@ = 12.3906 
+jump @SCRASH2_14849 
+
+:SCRASH2_14633
+135@ = 318.3799 
+136@ = -1464.926 
+137@ = 33.003 
+jump @SCRASH2_14849 
+
+:SCRASH2_14670
+135@ = 461.6126 
+136@ = -1433.671 
+137@ = 23.2117 
+jump @SCRASH2_14849 
+
+:SCRASH2_14707
+135@ = 484.8509 
+136@ = -1579.22 
+137@ = 20.2086 
+jump @SCRASH2_14849 
+
+:SCRASH2_14744
+135@ = 570.8074 
+136@ = -1580.052 
+137@ = 15.0078 
+jump @SCRASH2_14849 
+
+:SCRASH2_14781
+135@ = 673.4271 
+136@ = -1737.34 
+137@ = 12.4441 
+jump @SCRASH2_14849 
+
+:SCRASH2_14818
+0087: 135@ = 132@ // (float) 
+0087: 136@ = 133@ // (float) 
+0087: 137@ = 134@ // (float) 
+jump @SCRASH2_14849 
+
+:SCRASH2_14849
+if 
+  73@ == 1 
+jf @SCRASH2_14934 
+if 
+  128@ == 0 
+jf @SCRASH2_14899 
+73@ = 0 
+jump @SCRASH2_14934 
+
+:SCRASH2_14899
+0209: 50@ = random_int_in_ranges 0 3 
+if 
+001D:   50@ > 128@ // (int) 
+jf @SCRASH2_14934 
+73@ = 0 
+
+:SCRASH2_14934
+if 
+  73@ == 1 
+jf @SCRASH2_14966 
+128@ = 0 
+jump @SCRASH2_14973 
+
+:SCRASH2_14966
+128@ += 1 
+
+:SCRASH2_14973
+if 
+   not Actor.Dead(79@)
+jf @SCRASH2_15203 
+if 
+  73@ == 1 
+jf @SCRASH2_15041 
+05D1: AS_actor 79@ drive_car -1 to 135@ 136@ 137@ speed 25.0 1 model #NULL 2 
+jump @SCRASH2_15203 
+
+:SCRASH2_15041
+if 
+  127@ == 13 
+jf @SCRASH2_15073 
+50@ = 15 
+jump @SCRASH2_15120 
+
+:SCRASH2_15073
+0085: 50@ = 129@ // (int) 
+50@ *= 3 
+50@ += 18 
+if 
+  50@ > 25 
+jf @SCRASH2_15120 
+50@ = 25 
+
+:SCRASH2_15120
+0093: 70@ = integer 50@ to_float 
+if 
+  2 > 129@ 
+jf @SCRASH2_15178 
+05D1: AS_actor 79@ drive_car -1 to 135@ 136@ 137@ speed 70@ 1 model #NULL 5 
+jump @SCRASH2_15203 
+
+:SCRASH2_15178
+05D1: AS_actor 79@ drive_car -1 to 135@ 136@ 137@ speed 70@ 1 model #NULL 2 
+
+:SCRASH2_15203
+129@ += 1 
+return 
+
+:SCRASH2_15212
+if 
+   Actor.Dead(78@)
+jf @SCRASH2_15230 
+return 
+
+:SCRASH2_15230
+if 
+   not Actor.InCar(78@, 87@)
+jf @SCRASH2_15251 
+return 
+
+:SCRASH2_15251
+if 
+   Car.Wrecked(87@)
+jf @SCRASH2_15269 
+return 
+
+:SCRASH2_15269
+if 
+   not 127@ == 13 
+jf @SCRASH2_15336 
+if 
+01AF:   car 87@ sphere 0 in_sphere 135@ 136@ 137@ radius 18.0 18.0 4.0 
+jf @SCRASH2_15336 
+gosub @SCRASH2_13629 
+
+:SCRASH2_15336
+if 
+  127@ == 13 
+jf @SCRASH2_15427 
+if 
+01AF:   car 87@ sphere 0 in_sphere 370.0204 -1647.647 31.7173 radius 14.0 14.0 4.0 
+jf @SCRASH2_15427 
+if 
+  150@ == 1 
+jf @SCRASH2_15427 
+gosub @SCRASH2_13629 
+
+:SCRASH2_15427
+return 
+
+:SCRASH2_15429
+57@ = 355.618 
+58@ = -2037.007 
+59@ = 6.836 
+63@ = 271.1917 
+0395: clear_area 1 at 57@ 58@ 59@ radius 10.0 
+80@ = Actor.Create(CivMale, #HMYRI, 57@, 58@, 59@)
+Actor.Angle(80@) = 63@
+0770: set_actor 80@ target_priority 1 
+169@ = 1 
+return 
+
+:SCRASH2_15529
+if 
+  144@ == 1 
+jf @SCRASH2_15549 
+return 
+
+:SCRASH2_15549
+0871: init_jump_table 98@ total_jumps 2 default_jump 0 @SCRASH2_15749 jumps 3 @SCRASH2_15612 4 @SCRASH2_15660 -1 @SCRASH2_15749 -1 @SCRASH2_15749 -1 @SCRASH2_15749 -1 @SCRASH2_15749 -1 @SCRASH2_15749 
+
+:SCRASH2_15612
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 4000.0 timelimit 3600000 
+98@ = 4 
+0085: 108@ = 46@ // (int) 
+108@ += 250 
+jump @SCRASH2_15749 
+
+:SCRASH2_15660
+if 
+001D:   46@ > 108@ // (int) 
+jf @SCRASH2_15742 
+062E: get_actor 78@ task 1501 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_15742 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 4000.0 timelimit 3600000 
+0085: 108@ = 46@ // (int) 
+108@ += 250 
+
+:SCRASH2_15742
+jump @SCRASH2_15749 
+
+:SCRASH2_15749
+return 
+
+:SCRASH2_15751
+if 
+  145@ == 1 
+jf @SCRASH2_15771 
+return 
+
+:SCRASH2_15771
+0871: init_jump_table 99@ total_jumps 2 default_jump 0 @SCRASH2_15982 jumps 3 @SCRASH2_15834 4 @SCRASH2_15896 -1 @SCRASH2_15982 -1 @SCRASH2_15982 -1 @SCRASH2_15982 -1 @SCRASH2_15982 -1 @SCRASH2_15982 
+
+:SCRASH2_15834
+Actor.GiveWeaponAndAmmo(80@, Pistol, 99)
+060B: set_actor 80@ decision_maker_to 97@ 
+0634: AS_actor 80@ attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 4000 chance_of_action 34 
+99@ = 4 
+0085: 110@ = 46@ // (int) 
+110@ += 250 
+jump @SCRASH2_15982 
+
+:SCRASH2_15896
+if 
+001D:   46@ > 110@ // (int) 
+jf @SCRASH2_15975 
+062E: get_actor 80@ task 1588 status_store_to 40@ // ret 7 if not found 
+if 
+04A4:   40@ == 7 // == constant 
+jf @SCRASH2_15975 
+0634: AS_actor 80@ attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 4000 chance_of_action 34 
+0085: 110@ = 46@ // (int) 
+110@ += 250 
+
+:SCRASH2_15975
+jump @SCRASH2_15982 
+
+:SCRASH2_15982
+return 
+
+:SCRASH2_15984
+126@ = 0 
+100@ = 0 
+153@ = 0 
+return 
+
+:SCRASH2_16007
+0871: init_jump_table 126@ total_jumps 6 default_jump 1 @SCRASH2_16167 jumps 0 @SCRASH2_16070 1 @SCRASH2_16132 2 @SCRASH2_16139 3 @SCRASH2_16146 4 @SCRASH2_16153 5 @SCRASH2_16160 -1 @SCRASH2_16193 
+
+:SCRASH2_16070
+if 
+00FE:   actor 78@ sphere 0 in_sphere 833.4493 -1374.261 -1.5078 radius 1.2 1.2 1.2 
+jf @SCRASH2_16125 
+126@ = 1 
+
+:SCRASH2_16125
+jump @SCRASH2_16193 
+
+:SCRASH2_16132
+jump @SCRASH2_16193 
+
+:SCRASH2_16139
+jump @SCRASH2_16193 
+
+:SCRASH2_16146
+jump @SCRASH2_16193 
+
+:SCRASH2_16153
+jump @SCRASH2_16193 
+
+:SCRASH2_16160
+jump @SCRASH2_16193 
+
+:SCRASH2_16167
+0662: printstring "UNKNOWN_SUSPICION_AREA" 
+
+:SCRASH2_16193
+return 
+
+:SCRASH2_16195
+if 
+  156@ == 1 
+jf @SCRASH2_16215 
+return 
+
+:SCRASH2_16215
+if 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @SCRASH2_16238 
+156@ = 1 
+
+:SCRASH2_16238
+73@ = 0 
+0871: init_jump_table 126@ total_jumps 6 default_jump 1 @SCRASH2_16754 jumps 0 @SCRASH2_16308 1 @SCRASH2_16315 2 @SCRASH2_16377 3 @SCRASH2_16476 4 @SCRASH2_16575 5 @SCRASH2_16674 -1 @SCRASH2_16780 
+
+:SCRASH2_16308
+jump @SCRASH2_16780 
+
+:SCRASH2_16315
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 783.9064 -1393.156 -2.7078 cornerB 858.4905 -1322.64 -0.3006 
+jf @SCRASH2_16370 
+73@ = 1 
+
+:SCRASH2_16370
+jump @SCRASH2_16780 
+
+:SCRASH2_16377
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 825.3654 -1359.666 -2.7078 cornerB 842.8153 -1338.893 7.3875 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 820.1507 -1365.766 -2.7078 cornerB 831.27 -1354.908 -0.3078 
+jf @SCRASH2_16469 
+73@ = 1 
+
+:SCRASH2_16469
+jump @SCRASH2_16780 
+
+:SCRASH2_16476
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 819.6318 -1344.258 4.9875 cornerB 842.2764 -1338.742 13.7162 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 816.749 -1345.116 8.8156 cornerB 829.4735 -1338.895 13.7281 
+jf @SCRASH2_16568 
+73@ = 1 
+
+:SCRASH2_16568
+jump @SCRASH2_16780 
+
+:SCRASH2_16575
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 787.7994 -1357.323 11.3391 cornerB 827.1069 -1309.406 13.7625 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 816.749 -1345.116 8.8156 cornerB 829.4735 -1338.895 13.7281 
+jf @SCRASH2_16667 
+73@ = 1 
+
+:SCRASH2_16667
+jump @SCRASH2_16780 
+
+:SCRASH2_16674
+if 
+  154@ == 0 
+jf @SCRASH2_16747 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 787.0083 -1376.24 11.3391 cornerB 809.962 -1310.506 13.8144 
+jf @SCRASH2_16747 
+73@ = 1 
+
+:SCRASH2_16747
+jump @SCRASH2_16780 
+
+:SCRASH2_16754
+0662: printstring "UNKNOWN_SUSPICION_AREA" 
+
+:SCRASH2_16780
+if 
+  156@ == 1 
+jf @SCRASH2_16806 
+0085: 156@ = 73@ // (int) 
+
+:SCRASH2_16806
+if 
+  156@ == 1 
+jf @SCRASH2_16856 
+0085: 118@ = 46@ // (int) 
+118@ += 1000 
+05DD: AS_actor 78@ flee_from_actor $PLAYER_ACTOR from_origin_radius 9999.0 timelimit 10000 
+
+:SCRASH2_16856
+if 
+  73@ == 1 
+jf @SCRASH2_17006 
+Actor.StorePos(78@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  100@ == 1 
+jf @SCRASH2_16978 
+if 
+  72@ > 10.0 
+jf @SCRASH2_16971 
+73@ = 0 
+
+:SCRASH2_16971
+jump @SCRASH2_17006 
+
+:SCRASH2_16978
+if 
+  72@ > 8.0 
+jf @SCRASH2_17006 
+73@ = 0 
+
+:SCRASH2_17006
+if 
+  73@ == 1 
+jf @SCRASH2_17217 
+if 
+  100@ == 0 
+jf @SCRASH2_17119 
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+if 
+  160@ == 0 
+jf @SCRASH2_17098 
+00BC: show_text_highpriority GXT 'SCR2_08' time 30000 flag 1  // ~s~Too close! You're spooking the ~r~reporter~s~. Back off before he abandons the interview.
+160@ = 1 
+
+:SCRASH2_17098
+153@ = 1 
+100@ = 1 
+jump @SCRASH2_17210 
+
+:SCRASH2_17119
+if 
+001D:   46@ > 114@ // (int) 
+jf @SCRASH2_17210 
+$7238 += 1 
+if 
+  $7238 > 100 
+jf @SCRASH2_17195 
+$7238 = 100 
+37@ = 1 
+45@ = 7 
+03EB: clear_small_messages_only 
+return 
+jump @SCRASH2_17210 
+
+:SCRASH2_17195
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+
+:SCRASH2_17210
+jump @SCRASH2_17369 
+
+:SCRASH2_17217
+if 
+  100@ == 1 
+jf @SCRASH2_17286 
+03EB: clear_small_messages_only 
+100@ = 0 
+153@ = 0 
+0085: 101@ = 102@ // (int) 
+0647: AS_actor 78@ clear_look_task 
+0085: 114@ = 46@ // (int) 
+114@ += 40 
+jump @SCRASH2_17369 
+
+:SCRASH2_17286
+if 
+  $7238 > 0 
+jf @SCRASH2_17369 
+if and
+  114@ > 0 
+001D:   46@ > 114@ // (int) 
+jf @SCRASH2_17369 
+$7238 -= 1 
+if 
+  0 > $7238 
+jf @SCRASH2_17369 
+$7238 = 0 
+114@ = 0 
+
+:SCRASH2_17369
+return 
+
+:SCRASH2_17371
+if 
+  152@ == 1 
+jf @SCRASH2_17422 
+if 
+001D:   46@ > 116@ // (int) 
+jf @SCRASH2_17422 
+152@ = 0 
+116@ = 0 
+
+:SCRASH2_17422
+162@ = 0 
+if or
+  100@ == 3 
+  100@ == 1 
+jf @SCRASH2_17461 
+162@ = 1 
+
+:SCRASH2_17461
+73@ = 0 
+74@ = 0 
+159@ = 0 
+if and
+  150@ == 1 
+  149@ == 1 
+jf @SCRASH2_17619 
+Actor.StorePos(78@, 57@, 58@, 59@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 372.661 -2088.79 6.836 
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 70@ = distance_between_XYZ 60@ 61@ 62@ and_XYZ 372.661 -2088.79 6.836 
+if 
+0025:   72@ > 70@ // (float) 
+jf @SCRASH2_17619 
+159@ = 1 
+
+:SCRASH2_17619
+if 
+  159@ == 1 
+jf @SCRASH2_17811 
+if 
+   not 100@ == 3 
+jf @SCRASH2_17718 
+if 
+   not 100@ == 1 
+jf @SCRASH2_17688 
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+
+:SCRASH2_17688
+100@ = 3 
+00BC: show_text_highpriority GXT 'SCR2_23' time 30000 flag 1  // ~s~You're spooking the ~r~reporter~s~. Get back behind him before he abandons the interview.
+jump @SCRASH2_17809 
+
+:SCRASH2_17718
+if 
+001D:   46@ > 114@ // (int) 
+jf @SCRASH2_17809 
+$7238 += 1 
+if 
+  $7238 > 100 
+jf @SCRASH2_17794 
+$7238 = 100 
+37@ = 1 
+45@ = 7 
+03EB: clear_small_messages_only 
+return 
+jump @SCRASH2_17809 
+
+:SCRASH2_17794
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+
+:SCRASH2_17809
+return 
+
+:SCRASH2_17811
+if 
+  159@ == 0 
+jf @SCRASH2_17961 
+Actor.StorePos(78@, 57@, 58@, 59@)
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  40.0 >= 72@ 
+jf @SCRASH2_17933 
+if 
+  152@ == 0 
+jf @SCRASH2_17926 
+73@ = 1 
+
+:SCRASH2_17926
+jump @SCRASH2_17961 
+
+:SCRASH2_17933
+if 
+  72@ >= 100.0 
+jf @SCRASH2_17961 
+74@ = 1 
+
+:SCRASH2_17961
+if 
+  159@ == 0 
+jf @SCRASH2_18031 
+if 
+  100@ == 3 
+jf @SCRASH2_18031 
+if and
+  73@ == 0 
+  74@ == 0 
+jf @SCRASH2_18031 
+03EB: clear_small_messages_only 
+100@ = 0 
+
+:SCRASH2_18031
+if 
+  73@ == 1 
+jf @SCRASH2_18290 
+if 
+   not 100@ == 1 
+jf @SCRASH2_18192 
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+if 
+   not 100@ == 3 
+jf @SCRASH2_18148 
+if 
+  160@ == 0 
+jf @SCRASH2_18141 
+00BC: show_text_highpriority GXT 'SCR2_08' time 30000 flag 1  // ~s~Too close! You're spooking the ~r~reporter~s~. Back off before he abandons the interview.
+160@ = 1 
+
+:SCRASH2_18141
+jump @SCRASH2_18171 
+
+:SCRASH2_18148
+00BC: show_text_highpriority GXT 'SCR2_08' time 30000 flag 1  // ~s~Too close! You're spooking the ~r~reporter~s~. Back off before he abandons the interview.
+160@ = 1 
+
+:SCRASH2_18171
+153@ = 1 
+100@ = 1 
+jump @SCRASH2_18283 
+
+:SCRASH2_18192
+if 
+001D:   46@ > 114@ // (int) 
+jf @SCRASH2_18283 
+$7238 += 1 
+if 
+  $7238 > 100 
+jf @SCRASH2_18268 
+$7238 = 100 
+37@ = 1 
+45@ = 7 
+03EB: clear_small_messages_only 
+return 
+jump @SCRASH2_18283 
+
+:SCRASH2_18268
+0085: 114@ = 46@ // (int) 
+114@ += 60 
+
+:SCRASH2_18283
+jump @SCRASH2_18317 
+
+:SCRASH2_18290
+if 
+  100@ == 1 
+jf @SCRASH2_18317 
+03EB: clear_small_messages_only 
+100@ = 0 
+
+:SCRASH2_18317
+if 
+  74@ == 1 
+jf @SCRASH2_18367 
+if and
+  149@ == 1 
+  150@ == 1 
+jf @SCRASH2_18367 
+74@ = 0 
+
+:SCRASH2_18367
+if 
+  74@ == 1 
+jf @SCRASH2_18617 
+if 
+  100@ == 0 
+jf @SCRASH2_18440 
+130@ = 21 
+0085: 113@ = 46@ // (int) 
+113@ += 1000 
+100@ = 2 
+jump @SCRASH2_18610 
+
+:SCRASH2_18440
+if 
+001D:   46@ > 113@ // (int) 
+jf @SCRASH2_18532 
+130@ -= 1 
+if 
+  0 > 130@ 
+jf @SCRASH2_18516 
+130@ = 0 
+37@ = 1 
+45@ = 3 
+03EB: clear_small_messages_only 
+return 
+jump @SCRASH2_18532 
+
+:SCRASH2_18516
+0085: 113@ = 46@ // (int) 
+113@ += 1000 
+
+:SCRASH2_18532
+if and
+  130@ > 10 
+  72@ >= 140.0 
+jf @SCRASH2_18576 
+00BC: show_text_highpriority GXT 'SCR2_16' time 30000 flag 1  // ~s~You're too far away! Get closer before you lose the ~r~reporter~s~.
+
+:SCRASH2_18576
+if 
+  130@ == 10 
+jf @SCRASH2_18610 
+00BC: show_text_highpriority GXT 'SCR2_16' time 30000 flag 1  // ~s~You're too far away! Get closer before you lose the ~r~reporter~s~.
+
+:SCRASH2_18610
+jump @SCRASH2_18653 
+
+:SCRASH2_18617
+if 
+  100@ == 2 
+jf @SCRASH2_18653 
+03D5: remove_text 'SCR2_16'  // ~s~You're too far away! Get closer before you lose the ~r~reporter~s~.
+100@ = 0 
+
+:SCRASH2_18653
+if and
+   not 100@ == 1 
+   not 100@ == 3 
+jf @SCRASH2_18816 
+if 
+  162@ == 1 
+jf @SCRASH2_18718 
+0085: 114@ = 46@ // (int) 
+114@ += 40 
+jump @SCRASH2_18816 
+
+:SCRASH2_18718
+if 
+  $7238 > 0 
+jf @SCRASH2_18816 
+if 
+001D:   46@ > 114@ // (int) 
+jf @SCRASH2_18816 
+$7238 -= 1 
+if 
+  0 > $7238 
+jf @SCRASH2_18801 
+$7238 = 0 
+114@ = 0 
+jump @SCRASH2_18816 
+
+:SCRASH2_18801
+0085: 114@ = 46@ // (int) 
+114@ += 40 
+
+:SCRASH2_18816
+return 
+
+:SCRASH2_18818
+03C4: set_status_text $7238 type 1 GXT 'SCR2_52' // global_variable  // SPOOK-O-METER
+return 
+
+:SCRASH2_18836
+if 
+0736:   is_keyboard_key_just_pressed 32 
+jf @SCRASH2_18885 
+47@ += 1 
+if 
+  47@ > 2 
+jf @SCRASH2_18883 
+47@ = 0 
+
+:SCRASH2_18883
+086A: NOP 
+
+:SCRASH2_18885
+if 
+  47@ == 1 
+jf @SCRASH2_19117 
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_18935 
+02E3: 70@ = car 81@ speed 
+0090: $7245 = float 70@ to_integer 
+
+:SCRASH2_18935
+008A: $7239 = 34@ // (int) 
+008A: $7240 = 35@ // (int) 
+008A: $7241 = 32@ // (int) 
+008A: $7242 = 33@ // (int) 
+008A: $7243 = 46@ // (int) 
+008A: $7244 = 119@ // (int) 
+008A: $7246 = 121@ // (int) 
+065D: NOP $7239 "M_STAGE" 
+065D: NOP $7240 "M_GOALS" 
+065D: NOP $7243 "M_MISSION_TIMER" 
+065D: NOP $7244 "TRAIN_DISTANCE" 
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_19096 
+065D: NOP $7245 "TRAIN_SPEED" 
+
+:SCRASH2_19096
+065D: NOP $7246 "PLAYER_FROM_LS" 
+
+:SCRASH2_19117
+if 
+  47@ == 2 
+jf @SCRASH2_19135 
+
+:SCRASH2_19135
+if 
+0736:   is_keyboard_key_just_pressed 98 
+jf @SCRASH2_19157 
+38@ = 1 
+
+:SCRASH2_19157
+if 
+0736:   is_keyboard_key_just_pressed 80 
+jf @SCRASH2_19245 
+if 
+  39@ == 0 
+jf @SCRASH2_19220 
+39@ = 1 
+0662: printstring "LEVEL_PAUSED" 
+jump @SCRASH2_19245 
+
+:SCRASH2_19220
+39@ = 0 
+0662: printstring "LEVEL_UNPAUSED" 
+
+:SCRASH2_19245
+return 
+
+:SCRASH2_19247
+if 
+8736:   not is_keyboard_key_just_pressed 74 
+jf @SCRASH2_19264 
+return 
+
+:SCRASH2_19264
+if 
+  34@ == 1 
+jf @SCRASH2_19336 
+0395: clear_area 1 at -2063.547 253.2754 34.3043 radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, -2063.547, 253.2754, 34.3043)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+
+:SCRASH2_19336
+if and
+  34@ == 2 
+  4 > 35@ 
+jf @SCRASH2_19587 
+if 
+  166@ == 0 
+jf @SCRASH2_19454 
+0395: clear_area 1 at -1944.025 135.5236 24.7109 radius 100.0 
+06D8: 81@ = create_train_at -1944.025 135.5236 24.7109 type 11 direction 0 
+06DC: set_train 81@ acc 0.0 
+06DD: set_train 81@ speed 0.0 
+166@ = 1 
+
+:SCRASH2_19454
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_19480 
+078A: 82@ = get_train 81@ carriage 1 handle 
+
+:SCRASH2_19480
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_19508 
+05CA: AS_actor 78@ enter_car 82@ passenger_seat -1 time 100 
+
+:SCRASH2_19508
+0395: clear_area 1 at -1989.161 208.5921 26.6797 radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, -1989.161, 208.5921, 26.6797)
+Actor.Angle($PLAYER_ACTOR) = 221.8946
+0085: 103@ = 46@ // (int) 
+103@ += 60000 
+35@ = 4 
+
+:SCRASH2_19587
+if and
+  34@ == 3 
+  4 > 35@ 
+jf @SCRASH2_19734 
+if 
+  35@ == 1 
+jf @SCRASH2_19673 
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_19666 
+07C7: put_train 81@ at 779.9327 -1334.155 -2.534 
+
+:SCRASH2_19666
+jump @SCRASH2_19680 
+
+:SCRASH2_19673
+35@ = 4 
+
+:SCRASH2_19680
+0395: clear_area 1 at 815.0453 -1323.097 12.5036 radius 5.0 
+Actor.PutAt($PLAYER_ACTOR, 815.0453, -1323.097, 12.5036)
+Actor.Angle($PLAYER_ACTOR) = 187.142
+
+:SCRASH2_19734
+if and
+  34@ == 4 
+  11 > 35@ 
+jf @SCRASH2_20031 
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_19805 
+Actor.PutAt(78@, 803.7784, -1342.926, 12.5469)
+Actor.Angle(78@) = 92.3748
+
+:SCRASH2_19805
+if 
+  168@ == 1 
+jf @SCRASH2_19876 
+if 
+   not Car.Wrecked(87@)
+jf @SCRASH2_19869 
+Car.PutAt(87@, 799.7784, -1342.926, 12.5469)
+Car.Angle(87@) = 7.9128
+
+:SCRASH2_19869
+jump @SCRASH2_19953 
+
+:SCRASH2_19876
+0395: clear_area 1 at 799.7784 -1342.926 12.5469 radius 10.0 
+87@ = Car.Create(#TAXI, 799.7784, -1342.926, 12.5469)
+Car.Angle(87@) = 7.9128
+79@ = Actor.CreateAsDriver(CivMale, #VBMOCD, 87@)
+168@ = 1 
+
+:SCRASH2_19953
+if and
+   not Car.Wrecked(81@)
+  166@ == 1 
+jf @SCRASH2_19998 
+06DD: set_train 81@ speed 30.0 
+07BE: remove_references_to_train 81@ 
+166@ = 0 
+
+:SCRASH2_19998
+156@ = 0 
+157@ = 0 
+158@ = 1 
+Marker.Disable(90@)
+35@ = 11 
+
+:SCRASH2_20031
+if 
+  34@ == 5 
+jf @SCRASH2_20210 
+132@ = 366.4698 
+133@ = -2030.643 
+134@ = 6.6582 
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_20149 
+0395: clear_area 1 at 366.4698 -2030.643 6.6582 radius 5.0 
+Actor.PutAt(78@, 366.4698, -2030.643, 6.6582)
+Actor.Angle(78@) = 179.2269
+
+:SCRASH2_20149
+0395: clear_area 1 at 383.3648 -1930.448 6.8301 radius 5.0 
+Actor.PutAt($PLAYER_ACTOR, 383.3648, -1930.448, 6.8301)
+Actor.Angle($PLAYER_ACTOR) = 88.4042
+35@ = 1 
+
+:SCRASH2_20210
+return 
+
+:SCRASH2_20212
+41@ += 1 
+if 
+  41@ > 9 
+jf @SCRASH2_20244 
+41@ = 0 
+
+:SCRASH2_20244
+return 
+
+:SCRASH2_20246
+01BD: 42@ = current_time_in_ms 
+0085: 44@ = 42@ // (int) 
+0062: 44@ -= 43@ // (int) 
+0085: 43@ = 42@ // (int) 
+005A: 46@ += 44@ // (int) 
+return 
+
+:SCRASH2_20285
+34@ += 1 
+35@ = 0 
+32@ = 0 
+33@ = 0 
+return 
+
+:SCRASH2_20315
+Player.CanMove($PLAYER_CHAR) = False
+02E4: load_cutscene_data 'SCRASH2' 
+
+:SCRASH2_20333
+if 
+86B9:   not cutscene_data_loaded 
+jf @SCRASH2_20357 
+wait 0 
+jump @SCRASH2_20333 
+
+:SCRASH2_20357
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:SCRASH2_20402
+if 
+82E9:   not cutscene_reached_end 
+jf @SCRASH2_20426 
+wait 0 
+jump @SCRASH2_20402 
+
+:SCRASH2_20426
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:SCRASH2_20440
+if 
+fading 
+jf @SCRASH2_20464 
+wait 0 
+jump @SCRASH2_20440 
+
+:SCRASH2_20464
+02EA: end_cutscene 
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+return 
+
+:SCRASH2_20492
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @SCRASH2_20519 
+wait 0 
+jump @SCRASH2_20492 
+
+:SCRASH2_20519
+gosub @SCRASH2_20734 
+gosub @SCRASH2_20909 
+0395: clear_area 0 at -1978.85 169.6607 26.6953 radius 3.0 
+89@ = Car.Create(#SANCHEZ, -1978.85, 169.6607, 26.6953)
+Car.Angle(89@) = 90.1127
+161@ = 1 
+0395: clear_area 0 at -2033.339 148.6139 27.8359 radius 0.5 
+Camera.SetAtPos(-2033.339, 148.6139, 27.8359)
+Actor.PutAt($PLAYER_ACTOR, -2033.339, 148.6139, 27.8359)
+Actor.Angle($PLAYER_ACTOR) = 270.0
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+06D7: enable_train_traffic 0 
+09FF: set_restart_closest_to -2026.061 148.828 27.8359 
+0A45: set_rail_tracks_friction_to 0.4 
+wait 1000 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+gosub @SCRASH2_20285 
+return 
+
+:SCRASH2_20734
+Model.Load(#STREAK)
+Model.Load(#STREAKC)
+Model.Load(#FREIGHT)
+Model.Load(#FREIFLAT)
+Model.Load(#SANCHEZ)
+023C: load_special_actor 'MEDIATR' as 1 // models 290-299 
+Model.Load(#VBMOCD)
+Model.Load(#HMYRI)
+Model.Load(#SNIPER)
+Model.Load(#COLT45)
+038B: load_requested_models 
+
+:SCRASH2_20793
+if or
+   not Model.Available(#STREAK)
+   not Model.Available(#STREAKC)
+   not Model.Available(#FREIGHT)
+   not Model.Available(#FREIFLAT)
+   not Model.Available(#SANCHEZ)
+jf @SCRASH2_20840 
+wait 0 
+jump @SCRASH2_20793 
+
+:SCRASH2_20840
+if or
+823D:   not special_actor 1 loaded 
+   not Model.Available(#VBMOCD)
+   not Model.Available(#HMYRI)
+jf @SCRASH2_20875 
+wait 0 
+jump @SCRASH2_20840 
+
+:SCRASH2_20875
+if or
+   not Model.Available(#SNIPER)
+   not Model.Available(#COLT45)
+jf @SCRASH2_20907 
+wait 0 
+jump @SCRASH2_20875 
+
+:SCRASH2_20907
+return 
+
+:SCRASH2_20909
+04ED: load_animation "MISC" 
+04ED: load_animation "GANGS" 
+
+:SCRASH2_20926
+if or
+84EE:   not animation "MISC" loaded 
+84EE:   not animation "GANGS" loaded 
+jf @SCRASH2_20965 
+wait 0 
+jump @SCRASH2_20926 
+
+:SCRASH2_20965
+return 
+
+:SCRASH2_20967
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+03EB: clear_small_messages_only 
+0871: init_jump_table 45@ total_jumps 7 default_jump 0 @SCRASH2_21209 jumps 1 @SCRASH2_21048 2 @SCRASH2_21071 3 @SCRASH2_21094 4 @SCRASH2_21117 5 @SCRASH2_21140 6 @SCRASH2_21163 7 @SCRASH2_21186 
+
+:SCRASH2_21048
+00BC: show_text_highpriority GXT 'SCR2_80' time 5000 flag 1  // ~r~You're too late. The train has gone.
+jump @SCRASH2_21209 
+
+:SCRASH2_21071
+00BC: show_text_highpriority GXT 'SCR2_81' time 5000 flag 1  // ~r~The reporter is dead.
+jump @SCRASH2_21209 
+
+:SCRASH2_21094
+00BC: show_text_highpriority GXT 'SCR2_82' time 5000 flag 1  // ~r~You lost the reporter.
+jump @SCRASH2_21209 
+
+:SCRASH2_21117
+00BC: show_text_highpriority GXT 'SCR2_83' time 5000 flag 1  // ~r~The reporter and Target have gone.
+jump @SCRASH2_21209 
+
+:SCRASH2_21140
+00BC: show_text_highpriority GXT 'SCR2_84' time 5000 flag 1  // ~r~The reporter has escaped.
+jump @SCRASH2_21209 
+
+:SCRASH2_21163
+00BC: show_text_highpriority GXT 'SCR2_85' time 5000 flag 1  // ~r~The Target has escaped.
+jump @SCRASH2_21209 
+
+:SCRASH2_21186
+00BC: show_text_highpriority GXT 'SCR2_86' time 5000 flag 1  // ~r~You spooked the reporter.
+jump @SCRASH2_21209 
+
+:SCRASH2_21209
+155@ = 1 
+return 
+
+:SCRASH2_21218
+03EB: clear_small_messages_only 
+01E3: show_text_1number_styled GXT 'M_PASSD' number 0 time 5000 style 1  // MISSION PASSED!
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'SCRA_2'  // Snail Trail
+030C: progress_made = 1 
+$CRASH_SF_TOTAL_PASSED_MISSIONS += 1 
+Marker.Disable($532)
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$MARKER_TRIADS_SF_GARAGE = Marker.CreateIconAndSphere($ICON_TRIADS, $X_SF_GARAGE, $Y_SF_GARAGE, $Z_SF_GARAGE)
+155@ = 0 
+return 
+
+:SCRASH2_21305
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SCRASH2_21410 
+if 
+  155@ == 1 
+jf @SCRASH2_21410 
+if 
+  131@ == 0 
+jf @SCRASH2_21371 
+0555: remove_weapon 34 from_actor $PLAYER_ACTOR 
+jump @SCRASH2_21410 
+
+:SCRASH2_21371
+041A: 50@ = actor $PLAYER_ACTOR weapon 34 ammo 
+if 
+001D:   50@ > 131@ // (int) 
+jf @SCRASH2_21410 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, SniperRifle, 131@)
+
+:SCRASH2_21410
+if and
+  168@ == 1 
+   not Car.Wrecked(87@)
+jf @SCRASH2_21440 
+Car.ToggleTaxiLight(87@) = False
+
+:SCRASH2_21440
+if 
+   not Actor.Dead(79@)
+jf @SCRASH2_21461 
+0687: clear_actor 79@ task 
+
+:SCRASH2_21461
+if 
+   not Actor.Dead(78@)
+jf @SCRASH2_21482 
+0647: AS_actor 78@ clear_look_task 
+
+:SCRASH2_21482
+Pickup.Destroy(95@)
+Actor.RemoveReferences(78@)
+Car.RemoveReferences(87@)
+Actor.RemoveReferences(79@)
+Actor.RemoveReferences(80@)
+Model.Destroy(#COLT45)
+Model.Destroy(#SNIPER)
+48@ = 0 
+
+:SCRASH2_21524
+07BE: remove_references_to_train 84@(48@,3i) 
+48@ += 1 
+  48@ >= 3 
+jf @SCRASH2_21524 
+if 
+  166@ == 1 
+jf @SCRASH2_21603 
+if 
+   not Car.Wrecked(81@)
+jf @SCRASH2_21603 
+06DD: set_train 81@ speed 30.0 
+07BE: remove_references_to_train 81@ 
+
+:SCRASH2_21603
+Marker.Disable(90@)
+Marker.Disable(91@)
+Marker.Disable(92@)
+Marker.Disable(93@)
+Marker.Disable(94@)
+0151: remove_status_text $7238 
+04EF: release_animation "MISC" 
+04EF: release_animation "GANGS" 
+03E6: remove_text_box 
+Model.Destroy(#STREAK)
+Model.Destroy(#STREAKC)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+Model.Destroy(#TAXI)
+Model.Destroy(#SANCHEZ)
+0296: unload_special_actor 1 
+Model.Destroy(#VBMOCD)
+Model.Destroy(#HMYRI)
+Model.Destroy(#SNIPER)
+Model.Destroy(#COLT45)
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03C7: set_sensitivity_to_crime 1.0 
+06D0: enable_emergency_traffic 1 
+06D7: enable_train_traffic 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+091D: remove_forbidden_for_boats_cube_cornerA 789.595 -1387.97 11.5469 cornerB 807.2843 -1334.546 13.725 
+091D: remove_forbidden_for_boats_cube_cornerA 804.9978 -1414.032 11.3801 cornerB 908.0844 -1386.618 13.5524 
+091D: remove_forbidden_for_boats_cube_cornerA 802.1913 -1335.066 11.1828 cornerB 911.4662 -1313.045 13.7469 
+0A45: set_rail_tracks_friction_to -1.0 
+$ONMISSION = 0 
+mission_cleanup 
+return

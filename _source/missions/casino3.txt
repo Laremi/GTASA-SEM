@@ -1,0 +1,2237 @@
+:CASINO3
+thread 'CASINO3' 
+gosub @CASINO3_94 
+if 
+wasted_or_busted 
+jf @CASINO3_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+gosub @CASINO3_14158 
+
+:CASINO3_85
+gosub @CASINO3_14336 
+end_thread 
+
+:CASINO3_94
+increment_mission_attempts 
+054C: use_GXT_table 'CASINO3' 
+$ONMISSION = 1 
+wait 0 
+select_interior 11 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2016.422 1017.102 radius 10.0 
+Actor.PutAt($PLAYER_ACTOR, 2027.391, 1008.087, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 297.1696
+02E4: load_cutscene_data 'CAS_3' 
+
+:CASINO3_183
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASINO3_207 
+wait 0 
+jump @CASINO3_183 
+
+:CASINO3_207
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASINO3_216
+if 
+82E9:   not cutscene_reached_end 
+jf @CASINO3_240 
+wait 0 
+jump @CASINO3_216 
+
+:CASINO3_240
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CASINO3_253
+if 
+fading 
+jf @CASINO3_277 
+wait 0 
+jump @CASINO3_253 
+
+:CASINO3_277
+02EA: end_cutscene 
+select_interior 0 
+060A: create_decision_maker_type 0 store_to 73@ // decision\allowed\m_.ped files 
+wait 0 
+0169: set_fade_color_RGB 0 0 0 
+Model.Load(#BRAVURA)
+Model.Load(#ADMIRAL)
+Model.Load(#WMYMECH)
+Model.Load(#WMYMECH)
+Model.Load(#BAT)
+Model.Load(#COLT45)
+Model.Load(#SHOTGSPA)
+Model.Load(#MICRO_UZI)
+Model.Load(#VMAFF1)
+Model.Load(#VMAFF2)
+Model.Load(#VMAFF3)
+Model.Load(#VMAFF4)
+Model.Load(#FORKLIFT)
+038B: load_requested_models 
+
+:CASINO3_363
+if or
+   not Model.Available(#COLT45)
+   not Model.Available(#BRAVURA)
+jf @CASINO3_395 
+wait 0 
+jump @CASINO3_363 
+
+:CASINO3_395
+if or
+   not Model.Available(#WMYMECH)
+   not Model.Available(#VMAFF1)
+   not Model.Available(#VMAFF2)
+   not Model.Available(#SHOTGSPA)
+   not Model.Available(#MICRO_UZI)
+jf @CASINO3_439 
+wait 0 
+jump @CASINO3_395 
+
+:CASINO3_439
+if or
+   not Model.Available(#FORKLIFT)
+   not Model.Available(#VMAFF4)
+   not Model.Available(#VMAFF4)
+jf @CASINO3_474 
+wait 0 
+jump @CASINO3_439 
+
+:CASINO3_474
+if or
+   not Model.Available(#WMYMECH)
+   not Model.Available(#BAT)
+   not Model.Available(#ADMIRAL)
+jf @CASINO3_510 
+wait 0 
+jump @CASINO3_474 
+
+:CASINO3_510
+Camera.SetAtPos(2031.168, 1030.918, 9.813)
+51@ = 99 
+186@ = 0 
+187@ = 0 
+36@ = 0 
+53@ = 5 
+54@ = 0 
+55@ = 0 
+117@ = 0 
+142@ = 0 
+143@ = 0 
+56@ = 0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+147@ = 1 
+141@ = 0 
+91@ = 0 
+93@ = 0 
+94@ = 0 
+118@ = 0 
+149@ = 0 
+151@ = 0 
+152@ = 0 
+153@ = 0 
+155@ = 0 
+154@ = 0 
+156@ = 0 
+36@ = 0 
+157@ = 0 
+122@ = 0 
+124@ = 0 
+169@ = 0 
+170@ = 0 
+247@ = 0 
+171@ = 1 
+238@ = 1 
+239@ = 2 
+240@ = 0 
+241@ = 1 
+242@ = 0 
+243@ = 0 
+05AA: 195@s = 'CAS3_AA' // @s = 'short'  // ~z~Hey, who's this character? He looks like a cop to me.
+05AA: 197@s = 'CAS3_AB' // @s = 'short'  // ~z~We better go warn the boss.
+05AA: 199@s = 'CAS3_AC' // @s = 'short'  // ~z~Hey, watch the car, I just got this baby detailed!
+05AA: 201@s = 'CAS3_AD' // @s = 'short'  // ~z~What? He must be a fed! Let's give him a proper Sindacco welcome!
+05AA: 203@s = 'CAS3_BA' // @s = 'short'  // ~z~Hey, what's going on?
+05AA: 205@s = 'CAS3_BB' // @s = 'short'  // ~z~Someone's got a fucking deathwish if they're starting trouble 'round here!
+05AA: 207@s = 'CAS3_BC' // @s = 'short'  // ~z~Get the boys ready! Production line's gotta keep rolling!
+05AA: 209@s = 'CAS3_BD' // @s = 'short'  // ~z~Hey, who's this prick?
+05AA: 211@s = 'CAS3_BE' // @s = 'short'  // ~z~Somebody take care of this joker!
+05AA: 213@s = 'CAS3_CA' // @s = 'short'  // ~z~Hey, Carl, how'd it go?
+05AA: 215@s = 'CAS3_CB' // @s = 'short'  // ~z~Tell Woozie, we'll be getting no more trouble with them.
+05AA: 217@s = 'CAS3_CC' // @s = 'short'  // ~z~counterfeit chips
+04AF: 224@ = 7600 // = constant 
+04AF: 225@ = 7601 // = constant 
+04AF: 226@ = 7602 // = constant 
+04AF: 227@ = 7603 // = constant 
+04AF: 228@ = 7604 // = constant 
+04AF: 229@ = 7605 // = constant 
+04AF: 230@ = 7606 // = constant 
+04AF: 231@ = 7607 // = constant 
+04AF: 232@ = 7608 // = constant 
+04AF: 233@ = 7609 // = constant 
+04AF: 234@ = 7610 // = constant 
+04AF: 235@ = 7611 // = constant 
+050F: get_max_wanted_level_to 34@ 
+if 
+  55@ == -13 
+jf @CASINO3_1124 
+179@ = Car.Create(#ADMIRAL, 1029.856, 2142.858, 9.813)
+
+:CASINO3_1124
+Object.CollisionDetection($2658) = True
+57@ = Car.Create(#BRAVURA, 2014.72, 1035.238, 9.8127)
+Car.Angle(57@) = 1.0755
+0229: set_car 57@ primary_color_to 10 secondary_color_to 2 
+58@ = Car.Create(#ADMIRAL, 1044.271, 2096.714, 9.813)
+Car.SetImmunities(58@, 0, 0, 1, 0, 0)
+Car.Angle(58@) = 27.1148
+0229: set_car 58@ primary_color_to 2 secondary_color_to 1 
+60@ = Car.Create(#FORKLIFT, 1063.887, 2134.724, 9.8203)
+Car.Angle(60@) = 252.0755
+61@ = Car.Create(#FORKLIFT, 1060.146, 2083.986, 9.8203)
+Car.Angle(61@) = 233.609
+76@ = Actor.CreateAsDriver(CivMale, #WMYMECH, 61@)
+Actor.GiveWeaponAndAmmo(76@, MicroUzi, 2000)
+054A: set_actor 76@ can_be_shot_in_a_car 1 
+Model.Destroy(#BRAVURA)
+Model.Destroy(#FORKLIFT)
+71@ = Actor.CreateAsDriver(Mission2, #VMAFF1, 58@)
+Actor.GiveWeaponAndAmmo(71@, Pistol, 2000)
+Actor.Angle(71@) = 56.724
+060B: set_actor 71@ decision_maker_to 73@ 
+054A: set_actor 71@ can_be_shot_in_a_car 0 
+72@ = Actor.CreateAsPassenger(Mission2, #VMAFF2, 58@, 0)
+Actor.GiveWeaponAndAmmo(72@, Pistol, 2000)
+Actor.Angle(72@) = 148.026
+060B: set_actor 72@ decision_maker_to 73@ 
+054A: set_actor 72@ can_be_shot_in_a_car 0 
+81@ = Actor.Create(Mission1, #VMAFF4, 1064.213, 2140.694, 9.8203)
+Actor.GiveWeaponAndAmmo(81@, MicroUzi, 2000)
+Actor.Angle(81@) = 156.0958
+060B: set_actor 81@ decision_maker_to 73@ 
+82@ = Actor.Create(Mission1, #VMAFF2, 1093.068, 2107.34, 9.8203)
+Actor.GiveWeaponAndAmmo(82@, Pistol, 2000)
+Actor.Angle(82@) = 115.2591
+060B: set_actor 82@ decision_maker_to 73@ 
+83@ = Actor.Create(Mission1, #VMAFF1, 1092.082, 2116.792, 14.3504)
+Actor.GiveWeaponAndAmmo(83@, Pistol, 2000)
+Actor.Angle(83@) = 115.409
+060B: set_actor 83@ decision_maker_to 73@ 
+80@ = Actor.Create(Mission1, #VMAFF3, 1083.688, 2121.599, 14.3504)
+Actor.GiveWeaponAndAmmo(80@, CombatShotgun, 2000)
+060B: set_actor 80@ decision_maker_to 73@ 
+Actor.AddArmour(80@, 50)
+Actor.Angle(80@) = 115.6952
+74@ = Actor.Create(Mission1, #WMYMECH, 1056.655, 2108.551, 9.8203)
+Actor.Angle(74@) = 186.9465
+060B: set_actor 74@ decision_maker_to 73@ 
+054A: set_actor 74@ can_be_shot_in_a_car 1 
+75@ = Actor.Create(Mission1, #WMYMECH, 1092.606, 2116.912, 9.8203)
+Actor.Angle(75@) = 116.0465
+060B: set_actor 75@ decision_maker_to 73@ 
+054A: set_actor 75@ can_be_shot_in_a_car 1 
+257@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1074.903, 2139.611, 10.7203)
+Object.SetImmunities(257@, 1, 1, 1, 1, 1)
+266@ = Object.Init(#CJ_CHIP_MAKER, 1074.903, 2139.611, 10.7203)
+Object.CollisionDetection(257@) = True
+0453: set_object 257@ XYZ_rotation 0.0 0.0 180.0 
+0453: set_object 266@ XYZ_rotation 0.0 0.0 180.0 
+258@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1069.485, 2139.611, 10.7203)
+Object.SetImmunities(258@, 1, 1, 1, 1, 1)
+267@ = Object.Init(#CJ_CHIP_MAKER, 1069.485, 2139.611, 10.7203)
+Object.CollisionDetection(258@) = True
+0453: set_object 258@ XYZ_rotation 0.0 0.0 180.0 
+0453: set_object 267@ XYZ_rotation 0.0 0.0 180.0 
+259@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1062.456, 2139.611, 10.7203)
+Object.SetImmunities(259@, 1, 1, 1, 1, 1)
+268@ = Object.Init(#CJ_CHIP_MAKER, 1062.456, 2139.611, 10.7203)
+Object.CollisionDetection(259@) = True
+0453: set_object 259@ XYZ_rotation 0.0 0.0 180.0 
+0453: set_object 268@ XYZ_rotation 0.0 0.0 180.0 
+260@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1081.268, 2123.686, 10.7203)
+Object.SetImmunities(260@, 1, 1, 1, 1, 1)
+269@ = Object.Init(#CJ_CHIP_MAKER, 1081.268, 2123.686, 10.7203)
+0453: set_object 260@ XYZ_rotation 0.0 0.0 90.0 
+0453: set_object 269@ XYZ_rotation 0.0 0.0 90.0 
+Object.CollisionDetection(260@) = True
+261@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1081.236, 2130.681, 10.7203)
+Object.SetImmunities(261@, 1, 1, 1, 1, 1)
+270@ = Object.Init(#CJ_CHIP_MAKER, 1081.236, 2130.681, 10.7203)
+0453: set_object 261@ XYZ_rotation 0.0 0.0 90.0 
+0453: set_object 270@ XYZ_rotation 0.0 0.0 90.0 
+Object.CollisionDetection(261@) = True
+262@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1086.855, 2077.532, 10.7203)
+Object.SetImmunities(262@, 1, 1, 1, 1, 1)
+271@ = Object.Init(#CJ_CHIP_MAKER, 1086.855, 2077.532, 10.7203)
+Object.CollisionDetection(262@) = True
+263@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1091.818, 2121.256, 10.7203)
+Object.SetImmunities(263@, 1, 1, 1, 1, 1)
+272@ = Object.Init(#CJ_CHIP_MAKER, 1091.818, 2121.256, 10.7203)
+0453: set_object 263@ XYZ_rotation 0.0 0.0 180.0 
+0453: set_object 272@ XYZ_rotation 0.0 0.0 180.0 
+Object.CollisionDetection(263@) = True
+264@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1094.163, 2102.352, 10.7203)
+Object.SetImmunities(264@, 1, 1, 1, 1, 1)
+273@ = Object.Init(#CJ_CHIP_MAKER, 1094.163, 2102.352, 10.7203)
+0453: set_object 264@ XYZ_rotation 0.0 0.0 90.0 
+0453: set_object 273@ XYZ_rotation 0.0 0.0 90.0 
+Object.CollisionDetection(264@) = True
+265@ = Object.Init(#CJ_CHIP_MAKER_BITS, 1094.163, 2092.352, 10.7203)
+Object.SetImmunities(265@, 1, 1, 1, 1, 1)
+274@ = Object.Init(#CJ_CHIP_MAKER, 1094.163, 2092.352, 10.7203)
+0453: set_object 265@ XYZ_rotation 0.0 0.0 90.0 
+0453: set_object 274@ XYZ_rotation 0.0 0.0 90.0 
+Object.CollisionDetection(265@) = True
+284@ = 0 
+
+:CASINO3_2683
+if 
+  9 > 284@ 
+jf @CASINO3_2738 
+275@(284@,9i) = 0 
+071F: set_object 257@(284@,9i) health_to 1000 
+284@ += 1 
+jump @CASINO3_2683 
+
+:CASINO3_2738
+106@ = Object.Init(#KMB_CONTAINER_RED, 1023.181, 2106.604, 14.7301)
+0453: set_object 106@ XYZ_rotation 0.0 0.0 0.0 
+107@ = Object.Init(#KMB_CONTAINER_RED, 1077.014, 2070.743, 14.7635)
+0453: set_object 107@ XYZ_rotation 0.0 0.0 0.0 
+139@ = 0.0 
+140@ = 0.0 
+018A: 37@ = create_checkpoint_at 1057.636 2089.694 9.8203 
+Camera.SetAtPos(2031.168, 1030.918, 9.813)
+04E4: refresh_game_renderer_at 2031.168 1030.918 
+09BA: show_entered_zone_name 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+wait 1000 
+fade 1 1000 
+
+:CASINO3_2913
+if 
+fading 
+jf @CASINO3_2937 
+wait 0 
+jump @CASINO3_2913 
+
+:CASINO3_2937
+00BC: show_text_highpriority GXT 'CA3_1' time 10000 flag 1  // ~s~Head towards the ~y~factory unit~s~ on the outskirts of town. You're going to disturb their operation.
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+09BA: show_entered_zone_name 1 
+
+:CASINO3_2968
+wait 0 
+if 
+03CA:   object $2664 exists 
+jf @CASINO3_3008 
+Object.PutAt($2664, 1055.629, 2087.67, 0.299)
+
+:CASINO3_3008
+if 
+   not 240@ == 0 
+jf @CASINO3_3361 
+if 
+  242@ == 0 
+jf @CASINO3_3079 
+if 
+03D0:   wav 239@ loaded 
+jf @CASINO3_3065 
+040D: unload_wav 239@ 
+
+:CASINO3_3065
+242@ = 1 
+243@ = 1 
+
+:CASINO3_3079
+if 
+  242@ == 1 
+jf @CASINO3_3116 
+03CF: load_wav 223@(240@,15i) as 238@ 
+242@ = 2 
+
+:CASINO3_3116
+if 
+  242@ == 2 
+jf @CASINO3_3176 
+if 
+03D0:   wav 238@ loaded 
+jf @CASINO3_3176 
+03D1: play_wav 238@ 
+00BC: show_text_highpriority GXT 193@(240@,15s) time 10000 flag 1 
+242@ = 3 
+
+:CASINO3_3176
+if 
+  242@ == 3 
+jf @CASINO3_3361 
+if 
+03D2:   wav 238@ ended 
+jf @CASINO3_3300 
+03D5: remove_text 193@(240@,15s) 
+if 
+  238@ == 1 
+jf @CASINO3_3258 
+238@ = 2 
+239@ = 1 
+jump @CASINO3_3272 
+
+:CASINO3_3258
+238@ = 1 
+239@ = 2 
+
+:CASINO3_3272
+240@ = 0 
+242@ = 0 
+243@ = 0 
+jump @CASINO3_3361 
+
+:CASINO3_3300
+if 
+83D0:   not wav 239@ loaded 
+jf @CASINO3_3361 
+if 
+  10 > 240@ 
+jf @CASINO3_3361 
+0085: 241@ = 240@ // (int) 
+241@ += 1 
+03CF: load_wav 223@(241@,15i) as 239@ 
+
+:CASINO3_3361
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CASINO3_3383 
+jump @CASINO3_14244 
+
+:CASINO3_3383
+0453: set_object 106@ XYZ_rotation 0.0 0.0 139@ 
+if 
+   not 36@ == 1 
+jf @CASINO3_3429 
+139@ += 0.2 
+
+:CASINO3_3429
+if 
+  36@ == 1 
+jf @CASINO3_3457 
+139@ += 0.4 
+
+:CASINO3_3457
+if 
+  139@ > 359.0 
+jf @CASINO3_3488 
+139@ = 0.0 
+
+:CASINO3_3488
+0453: set_object 107@ XYZ_rotation 0.0 0.0 140@ 
+140@ += 0.25 
+if 
+  140@ > 359.0 
+jf @CASINO3_3547 
+140@ = 0.0 
+
+:CASINO3_3547
+if 
+  36@ == 1 
+jf @CASINO3_3642 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3642 
+
+:CASINO3_3582
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3610 
+wait 0 
+jump @CASINO3_3582 
+
+:CASINO3_3610
+if 
+  150@ > 1 
+jf @CASINO3_3642 
+150@ = 10 
+36@ = 0 
+
+:CASINO3_3642
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @CASINO3_3689 
+Actor.PutAt($PLAYER_ACTOR, 1002.171, 2079.443, 9.8203)
+Camera.SetBehindPlayer
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, CombatShotgun, 2000)
+
+:CASINO3_3689
+if 
+  155@ == 1 
+jf @CASINO3_3766 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3766 
+
+:CASINO3_3724
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3752 
+wait 0 
+jump @CASINO3_3724 
+
+:CASINO3_3752
+153@ = 5 
+155@ = 0 
+
+:CASINO3_3766
+if 
+  156@ == 1 
+jf @CASINO3_3843 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3843 
+
+:CASINO3_3801
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3829 
+wait 0 
+jump @CASINO3_3801 
+
+:CASINO3_3829
+154@ = 5 
+156@ = 0 
+
+:CASINO3_3843
+if 
+  157@ == 1 
+jf @CASINO3_3920 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3920 
+
+:CASINO3_3878
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO3_3906 
+wait 0 
+jump @CASINO3_3878 
+
+:CASINO3_3906
+55@ = 40 
+157@ = 0 
+
+:CASINO3_3920
+if 
+  171@ == 1 
+jf @CASINO3_3985 
+if 
+  $2001 == 1 
+jf @CASINO3_3985 
+0950: set_trip_skip 1009.683 1987.64 9.6796 angle 1.816 
+171@ = 0 
+
+:CASINO3_3985
+if 
+  53@ == 5 
+jf @CASINO3_4157 
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_4100 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 71@ radius 100.0 100.0 0 
+jf @CASINO3_4100 
+0951: disable_trip_skip 
+171@ = 0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CA3_2' time 6000 flag 1  // ~s~Those mobsters have some guards watching the main goods entrance. Try and get into the ~y~factory~s~ unnoticed.
+53@ = 10 
+050F: get_max_wanted_level_to 34@ 
+01F0: set_max_wanted_level_to 0 
+$2001 = 1 
+
+:CASINO3_4100
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1009.683 1987.64 9.6796 radius 25.0 25.0 5.0 
+jf @CASINO3_4157 
+0951: disable_trip_skip 
+171@ = 0 
+
+:CASINO3_4157
+if 
+  53@ == 10 
+jf @CASINO3_4405 
+if 
+05F6:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 1048.428 2093.521 lr_corner_at 1048.822 2081.844 angle 15.0 sphere 0 
+jf @CASINO3_4232 
+55@ = 1 
+53@ = 99 
+
+:CASINO3_4232
+if 
+05F6:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 1055.174 2064.71 lr_corner_at 1054.835 21099.81 angle 15.0 sphere 0 
+jf @CASINO3_4305 
+if 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @CASINO3_4305 
+170@ = 1 
+33@ = 0 
+
+:CASINO3_4305
+if 
+056D:   actor 76@ defined 
+jf @CASINO3_4354 
+if 
+051A:   actor 76@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_4354 
+55@ = 1 
+53@ = 99 
+
+:CASINO3_4354
+if 
+  170@ == 1 
+jf @CASINO3_4405 
+if 
+  33@ > 500 
+jf @CASINO3_4405 
+55@ = 1 
+53@ = 99 
+
+:CASINO3_4405
+if 
+  55@ == 0 
+jf @CASINO3_4776 
+if 
+  0 > 53@ 
+jf @CASINO3_4776 
+if 
+  151@ == 0 
+jf @CASINO3_4532 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_4532 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_4532 
+05D1: AS_actor 76@ drive_car 61@ to 1030.442 2106.319 9.8203 speed 10.0 2 model #NULL 2 
+151@ = 1 
+
+:CASINO3_4532
+if 
+  151@ == 1 
+jf @CASINO3_4671 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_4671 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_4671 
+if 
+01AF:   car 61@ sphere 0 in_sphere 1030.442 2106.319 9.8203 radius 3.0 3.0 3.0 
+jf @CASINO3_4671 
+151@ = 2 
+05D1: AS_actor 76@ drive_car 61@ to 1060.146 2084.986 9.8203 speed 10.0 2 model #NULL 2 
+
+:CASINO3_4671
+if 
+  151@ == 2 
+jf @CASINO3_4776 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_4776 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_4776 
+if 
+01AF:   car 61@ sphere 0 in_sphere 1060.146 2084.986 9.8203 radius 5.0 5.0 3.0 
+jf @CASINO3_4776 
+151@ = 0 
+
+:CASINO3_4776
+if 
+  55@ == 1 
+jf @CASINO3_7018 
+if 
+  149@ == 0 
+jf @CASINO3_5922 
+if 
+  153@ == 0 
+jf @CASINO3_5257 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+fade 0 500 
+
+:CASINO3_4851
+if 
+fading 
+jf @CASINO3_4875 
+wait 0 
+jump @CASINO3_4851 
+
+:CASINO3_4875
+89@ = Actor.Create(Mission1, #VMAFF4, 1083.01, 2099.131, 14.3504)
+Actor.Angle(89@) = 186.4201
+Actor.GiveWeaponAndAmmo(89@, Pistol, 2000)
+060B: set_actor 89@ decision_maker_to 73@ 
+87@ = Actor.Create(Mission1, #VMAFF1, 1084.281, 2097.948, 14.3504)
+Actor.Angle(87@) = 153.4201
+Actor.GiveWeaponAndAmmo(87@, Pistol, 2000)
+060B: set_actor 87@ decision_maker_to 73@ 
+Actor.PutAt($PLAYER_ACTOR, 1050.532, 2087.933, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 282.0
+02A3: enable_widescreen 1 
+Camera.SetPosition(1088.848, 2094.238, 17.2308, 0.0, 0.0, 0.0)
+Camera.PointAt(1087.869, 2094.222, 17.0277, 2)
+fade 1 500 
+
+:CASINO3_5071
+if 
+fading 
+jf @CASINO3_5095 
+wait 0 
+jump @CASINO3_5071 
+
+:CASINO3_5095
+32@ = 0 
+153@ = 1 
+if 
+   not Actor.Dead(89@)
+jf @CASINO3_5153 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1083.361 2093.45 14.3504 
+05D8: AS_assign_scmpath to_actor 89@ flags 4 0 
+
+:CASINO3_5153
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_5197 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1084.752 2093.208 14.3504 
+05D8: AS_assign_scmpath to_actor 87@ flags 4 0 
+
+:CASINO3_5197
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CASINO3_5257 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @CASINO3_5257 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1057.532 2087.933 9.8203 
+05D8: AS_assign_scmpath to_actor $PLAYER_ACTOR flags 4 0 
+
+:CASINO3_5257
+if 
+  153@ == 1 
+jf @CASINO3_5407 
+if 
+  32@ > 1000 
+jf @CASINO3_5301 
+155@ = 1 
+
+:CASINO3_5301
+if 
+  32@ > 3000 
+jf @CASINO3_5407 
+240@ = 8 
+if 
+   not Actor.Dead(89@)
+jf @CASINO3_5356 
+0687: clear_actor 89@ task 
+0639: AS_actor 89@ rotate_to_actor $PLAYER_ACTOR 
+
+:CASINO3_5356
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_5400 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1082.375 2090.25 14.35044 
+05D8: AS_assign_scmpath to_actor 87@ flags 4 0 
+
+:CASINO3_5400
+153@ = 2 
+
+:CASINO3_5407
+if 
+  153@ == 2 
+jf @CASINO3_5612 
+if 
+  32@ > 6000 
+jf @CASINO3_5612 
+240@ = 9 
+if 
+   not Actor.Dead(89@)
+jf @CASINO3_5500 
+0687: clear_actor 89@ task 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1088.526 2112.616 14.3504 
+05D8: AS_assign_scmpath to_actor 89@ flags 6 0 
+
+:CASINO3_5500
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_5566 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_5566 
+05D1: AS_actor 76@ drive_car 61@ to 1076.809 2080.526 9.8203 speed 9.0 2 model #NULL 2 
+
+:CASINO3_5566
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_5598 
+0687: clear_actor 87@ task 
+0635: AS_actor 87@ aim_at_actor $PLAYER_ACTOR 4000 ms 
+
+:CASINO3_5598
+153@ = 3 
+32@ = 0 
+
+:CASINO3_5612
+if 
+  153@ == 3 
+jf @CASINO3_5734 
+if 
+  32@ > 2000 
+jf @CASINO3_5734 
+153@ = 5 
+155@ = 0 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_5734 
+0687: clear_actor 76@ task 
+0615: define_AS_pack_begin 167@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 1088.783 2077.572 9.8203 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 167@ 
+0618: assign_actor 76@ to_AS_pack 167@ 
+061B: remove_references_to_AS_pack 167@ 
+
+:CASINO3_5734
+if 
+  153@ == 5 
+jf @CASINO3_5922 
+02A3: enable_widescreen 0 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_5808 
+if 
+0449:   actor 76@ in_a_car 
+jf @CASINO3_5808 
+0362: remove_actor 76@ from_car_and_place_at 1088.783 2077.572 9.8203 
+
+:CASINO3_5808
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_5854 
+Car.PutAt(61@, 1076.809, 2080.526, 9.8203)
+Car.Angle(61@) = 273.0
+
+:CASINO3_5854
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+0687: clear_actor $PLAYER_ACTOR task 
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_5894 
+Car.SetImmunities(58@, 0, 0, 0, 0, 0)
+
+:CASINO3_5894
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+55@ = 2 
+141@ = 1 
+
+:CASINO3_5922
+if 
+  149@ > 0 
+jf @CASINO3_7018 
+if 
+  154@ == 0 
+jf @CASINO3_6311 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:CASINO3_5979
+if 
+fading 
+jf @CASINO3_6003 
+wait 0 
+jump @CASINO3_5979 
+
+:CASINO3_6003
+Actor.PutAt($PLAYER_ACTOR, 1050.532, 2087.933, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 282.0
+89@ = Actor.Create(Mission1, #VMAFF4, 1086.869, 2078.61, 14.3504)
+Actor.Angle(89@) = 86.4201
+Actor.GiveWeaponAndAmmo(89@, Pistol, 2000)
+060B: set_actor 89@ decision_maker_to 73@ 
+87@ = Actor.Create(Mission1, #VMAFF1, 1086.42, 2077.292, 14.3504)
+Actor.Angle(87@) = 74.4201
+Actor.GiveWeaponAndAmmo(87@, Pistol, 2000)
+060B: set_actor 87@ decision_maker_to 73@ 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(1075.725, 2094.545, 18.0271, 0.0, 0.0, 0.0)
+Camera.PointAt(1074.852, 2094.529, 17.5392, 2)
+fade 1 500 
+
+:CASINO3_6206
+if 
+fading 
+jf @CASINO3_6230 
+wait 0 
+jump @CASINO3_6206 
+
+:CASINO3_6230
+32@ = 0 
+154@ = 1 
+240@ = 7 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CASINO3_6311 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @CASINO3_6311 
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 1057.532 2087.933 9.8203 
+05D8: AS_assign_scmpath to_actor $PLAYER_ACTOR flags 4 0 
+
+:CASINO3_6311
+if 
+  154@ == 1 
+jf @CASINO3_6667 
+if 
+  32@ > 300 
+jf @CASINO3_6627 
+if 
+  169@ == 0 
+jf @CASINO3_6627 
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_6437 
+0687: clear_actor 87@ task 
+06C2: AS_actor 87@ goto 1079.871 2079.303 14.3516 mode 4 turn_radius 0.5 stop_radius 0.5 actor $PLAYER_ACTOR with_offset 0.0 0.0 0.0 
+
+:CASINO3_6437
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_6503 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_6503 
+05D1: AS_actor 76@ drive_car 61@ to 1076.809 2080.526 9.8203 speed 9.0 2 model #NULL 2 
+
+:CASINO3_6503
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_6583 
+0687: clear_actor 71@ task 
+0615: define_AS_pack_begin 168@ 
+05D3: AS_actor -1 goto_point 1064.677 2094.79 13.6896 mode 6 time -1 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 168@ 
+0618: assign_actor 71@ to_AS_pack 168@ 
+061B: remove_references_to_AS_pack 168@ 
+0638: AS_actor 71@ stay_put 1 
+
+:CASINO3_6583
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_6613 
+04EB: AS_actor 72@ crouch 1 
+0638: AS_actor 72@ stay_put 1 
+
+:CASINO3_6613
+156@ = 1 
+169@ = 1 
+
+:CASINO3_6627
+if 
+  32@ > 4000 
+jf @CASINO3_6667 
+240@ = 6 
+154@ = 3 
+32@ = 0 
+
+:CASINO3_6667
+if 
+  154@ == 3 
+jf @CASINO3_6789 
+if 
+  32@ > 3000 
+jf @CASINO3_6789 
+154@ = 5 
+156@ = 0 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_6789 
+0687: clear_actor 76@ task 
+0615: define_AS_pack_begin 167@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 1088.783 2077.572 9.8203 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 167@ 
+0618: assign_actor 76@ to_AS_pack 167@ 
+061B: remove_references_to_AS_pack 167@ 
+
+:CASINO3_6789
+if 
+  154@ == 5 
+jf @CASINO3_7018 
+02A3: enable_widescreen 0 
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_6852 
+0687: clear_actor 87@ task 
+Actor.PutAt(87@, 1079.871, 2079.303, 14.3516)
+
+:CASINO3_6852
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_6904 
+if 
+0449:   actor 76@ in_a_car 
+jf @CASINO3_6904 
+0362: remove_actor 76@ from_car_and_place_at 1088.783 2077.572 9.8203 
+
+:CASINO3_6904
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_6950 
+Car.PutAt(61@, 1076.809, 2080.526, 9.8203)
+Car.Angle(61@) = 273.0
+
+:CASINO3_6950
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+0687: clear_actor $PLAYER_ACTOR task 
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_6990 
+Car.SetImmunities(58@, 0, 0, 0, 0, 0)
+
+:CASINO3_6990
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+55@ = 2 
+141@ = 1 
+
+:CASINO3_7018
+if 
+  55@ == 2 
+jf @CASINO3_7278 
+Marker.Disable(37@)
+284@ = 0 
+
+:CASINO3_7048
+if 
+  9 > 284@ 
+jf @CASINO3_7160 
+275@(284@,9i) = 0 
+40@(284@,11i) = Marker.CreateAboveObject(257@(284@,9i))
+Object.SetImmunities(257@(284@,9i), 0, 0, 0, 0, 0)
+Marker.SetIconSize(40@(284@,11i), 2)
+071F: set_object 257@(284@,9i) health_to 1000 
+035D: set_object 257@(284@,9i) targetable 1 
+284@ += 1 
+jump @CASINO3_7048 
+
+:CASINO3_7160
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CA3_7' time 6000 flag 1  // ~s~Destroy every one of those injection molding ~g~machines~s~ now!
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_7207 
+0687: clear_actor 76@ task 
+05E2: AS_actor 76@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_7207
+if 
+  149@ > 0 
+jf @CASINO3_7239 
+gosub @CASINO3_13460 
+55@ = 4 
+
+:CASINO3_7239
+if 
+  149@ == 0 
+jf @CASINO3_7271 
+gosub @CASINO3_12896 
+55@ = 4 
+
+:CASINO3_7271
+gosub @CASINO3_14103 
+
+:CASINO3_7278
+if 
+  55@ == 8 
+jf @CASINO3_7407 
+00BC: show_text_highpriority GXT 'CA3_23' time 6000 flag 1  // ~s~Great work, the job's done! Get back to ~y~Woozie's casino~s~ in one piece!
+01F0: set_max_wanted_level_to 34@ 
+018A: 39@ = create_checkpoint_at 1918.59 958.3391 9.8203 
+Marker.SetColor(39@, 4)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#WMYMECH)
+Model.Load(#TRIADA)
+Model.Load(#TRIADB)
+Model.Load(#WASHING)
+55@ = 9 
+
+:CASINO3_7372
+if or
+   not Model.Available(#TRIADA)
+   not Model.Available(#WASHING)
+   not Model.Available(#TRIADB)
+jf @CASINO3_7407 
+wait 0 
+jump @CASINO3_7372 
+
+:CASINO3_7407
+if 
+  55@ == 9 
+jf @CASINO3_7751 
+077E: get_active_interior_to 35@ 
+if 
+  35@ == 0 
+jf @CASINO3_7468 
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @CASINO3_7468 
+Player.CanMove($PLAYER_CHAR) = True
+
+:CASINO3_7468
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 1918.59 958.3391 9.8203 radius 4.0 4.0 2.0 
+jf @CASINO3_7751 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASINO3_7653 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   Actor.Stopped($PLAYER_ACTOR)
+jf @CASINO3_7646 
+69@ = Car.Create(#WASHING, 1902.168, 974.9742, 9.8203)
+Car.Angle(69@) = 197.2609
+0229: set_car 69@ primary_color_to 4 secondary_color_to 2 
+if 
+   not Car.Wrecked(69@)
+jf @CASINO3_7639 
+68@ = Actor.CreateAsDriver(Mission3, #TRIADA, 69@)
+67@ = Actor.CreateAsPassenger(Mission3, #TRIADB, 69@, 1)
+
+:CASINO3_7639
+55@ = 15 
+
+:CASINO3_7646
+jump @CASINO3_7751 
+
+:CASINO3_7653
+Player.CanMove($PLAYER_CHAR) = False
+69@ = Car.Create(#WASHING, 1902.168, 974.9742, 9.8203)
+Car.Angle(69@) = 197.2609
+0229: set_car 69@ primary_color_to 4 secondary_color_to 2 
+if 
+   not Car.Wrecked(69@)
+jf @CASINO3_7744 
+68@ = Actor.CreateAsDriver(Mission3, #TRIADA, 69@)
+67@ = Actor.CreateAsPassenger(Mission3, #TRIADB, 69@, 1)
+
+:CASINO3_7744
+55@ = 15 
+
+:CASINO3_7751
+if 
+  55@ == 15 
+jf @CASINO3_8036 
+Car.RemoveReferences(179@)
+Car.RemoveReferences(58@)
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+00BE: text_clear_all 
+0395: clear_area 1 at 1913.682 962.0125 9.8203 radius 20.0 
+0395: clear_area 1 at 1903.468 967.1692 9.8127 radius 20.0 
+02A3: enable_widescreen 1 
+Camera.SetPosition(1922.234, 951.8628, 12.2282, 0.0, 0.0, 0.0)
+Camera.PointAt(1921.714, 952.7101, 12.1171, 2)
+55@ = 17 
+32@ = 0 
+0687: clear_actor $PLAYER_ACTOR task 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASINO3_7990 
+0615: define_AS_pack_begin 166@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 1913.682 962.0125 9.8203 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 166@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 166@ 
+061B: remove_references_to_AS_pack 166@ 
+jump @CASINO3_8036 
+
+:CASINO3_7990
+0615: define_AS_pack_begin 166@ 
+05D3: AS_actor -1 goto_point 1913.682 962.0125 9.8203 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 166@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 166@ 
+061B: remove_references_to_AS_pack 166@ 
+
+:CASINO3_8036
+if 
+  55@ == 17 
+jf @CASINO3_8100 
+if 
+  32@ > 1000 
+jf @CASINO3_8100 
+55@ = 20 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1035 
+
+:CASINO3_8100
+if 
+  55@ == 20 
+jf @CASINO3_8403 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 15.438 speed 0.0 0.0 0.02 collision_check 0 
+jf @CASINO3_8203 
+034E: move_object $2658 to 1903.383 967.62 15.438 speed 0.0 0.0 0.02 collision_check 0 
+
+:CASINO3_8203
+if 
+  32@ > 4000 
+jf @CASINO3_8403 
+55@ = 30 
+if 
+   not Actor.Dead(68@)
+jf @CASINO3_8403 
+if 
+   not Car.Wrecked(69@)
+jf @CASINO3_8403 
+05D1: AS_actor 68@ drive_car 69@ to 1909.04 959.7415 9.8203 speed 7.0 2 model #NULL 2 
+Camera.SetPosition(1914.831, 962.6716, 11.3214, 0.0, 0.0, 0.0)
+Camera.PointAt(1913.837, 962.5726, 11.2813, 2)
+Actor.PutAt($PLAYER_ACTOR, 1913.682, 962.0125, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 100.3
+32@ = 0 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1036 
+
+:CASINO3_8403
+if 
+  55@ == 30 
+jf @CASINO3_8595 
+if 
+   not Car.Wrecked(69@)
+jf @CASINO3_8595 
+if 
+01AD:   car 69@ sphere 0 near_point 1909.04 959.7415 radius 3.0 3.0 
+jf @CASINO3_8542 
+55@ = 35 
+if 
+   not Actor.Dead(67@)
+jf @CASINO3_8508 
+05BF: AS_actor 67@ look_at_actor $PLAYER_ACTOR -1 ms 
+
+:CASINO3_8508
+240@ = 10 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1035 
+32@ = 0 
+
+:CASINO3_8542
+if 
+  32@ > 10000 
+jf @CASINO3_8595 
+55@ = 35 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1035 
+32@ = 0 
+
+:CASINO3_8595
+if 
+  55@ == 35 
+jf @CASINO3_8758 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+jf @CASINO3_8698 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+
+:CASINO3_8698
+if 
+  32@ > 3000 
+jf @CASINO3_8758 
+55@ = 36 
+32@ = 0 
+247@ = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1036 
+
+:CASINO3_8758
+if 
+  247@ > 0 
+jf @CASINO3_8899 
+if 
+  243@ == 0 
+jf @CASINO3_8899 
+0871: init_jump_table 247@ total_jumps 2 default_jump 0 @CASINO3_8899 jumps 1 @CASINO3_8857 2 @CASINO3_8878 -1 @CASINO3_8899 -1 @CASINO3_8899 -1 @CASINO3_8899 -1 @CASINO3_8899 -1 @CASINO3_8899 
+
+:CASINO3_8857
+240@ = 11 
+247@ = 2 
+jump @CASINO3_8899 
+
+:CASINO3_8878
+240@ = 12 
+247@ = 0 
+jump @CASINO3_8899 
+
+:CASINO3_8899
+if 
+  55@ == 36 
+jf @CASINO3_9151 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+jf @CASINO3_9002 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+
+:CASINO3_9002
+if 
+  32@ > 2000 
+jf @CASINO3_9151 
+if 
+  32@ > 4000 
+jf @CASINO3_9151 
+if 
+   not Car.Wrecked(69@)
+jf @CASINO3_9151 
+if 
+   not Actor.Dead(68@)
+jf @CASINO3_9151 
+0687: clear_actor 68@ task 
+55@ = 37 
+05D1: AS_actor 68@ drive_car 69@ to 1915.04 940.7415 9.8203 speed 10.0 2 model #NULL 2 
+32@ = 0 
+if 
+   not Actor.Dead(67@)
+jf @CASINO3_9151 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 67@ -1 ms 
+
+:CASINO3_9151
+if 
+  55@ == 37 
+jf @CASINO3_9280 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+jf @CASINO3_9254 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+
+:CASINO3_9254
+if 
+  32@ > 4000 
+jf @CASINO3_9280 
+55@ = 40 
+
+:CASINO3_9280
+if 
+  55@ == 40 
+jf @CASINO3_9520 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+jf @CASINO3_9383 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.02 collision_check 0 
+
+:CASINO3_9383
+157@ = 0 
+if 
+   not Actor.Dead(67@)
+jf @CASINO3_9416 
+0792: disembark_instantly_actor 67@ 
+Actor.DestroyInstantly(67@)
+
+:CASINO3_9416
+if 
+   not Actor.Dead(68@)
+jf @CASINO3_9442 
+0792: disembark_instantly_actor 68@ 
+Actor.DestroyInstantly(68@)
+
+:CASINO3_9442
+Car.Destroy(69@)
+02A3: enable_widescreen 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+Object.PutAt($2658, 1903.383, 967.82, 11.438)
+Object.Angle($2658) = 0.0
+55@ = 45 
+00BE: text_clear_all 
+jump @CASINO3_14244 
+
+:CASINO3_9520
+if 
+  1 > 55@ 
+jf @CASINO3_10078 
+if 
+05F6:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 1030.105 2095.714 lr_corner_at 1054.818 2098.778 angle 30.0 sphere 0 
+jf @CASINO3_9715 
+if 
+  149@ == 0 
+jf @CASINO3_9648 
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_9648 
+if 
+09ED:   actor 71@ is_within_field_of_view_actor $PLAYER_ACTOR 
+jf @CASINO3_9648 
+149@ = 1 
+150@ = 1 
+
+:CASINO3_9648
+if 
+  149@ == 0 
+jf @CASINO3_9715 
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_9715 
+if 
+09ED:   actor 72@ is_within_field_of_view_actor $PLAYER_ACTOR 
+jf @CASINO3_9715 
+149@ = 1 
+150@ = 1 
+
+:CASINO3_9715
+if 
+  149@ == 0 
+jf @CASINO3_9782 
+if 
+056D:   actor 71@ defined 
+jf @CASINO3_9782 
+if 
+051A:   actor 71@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_9782 
+149@ = 1 
+150@ = 1 
+
+:CASINO3_9782
+if 
+  149@ == 0 
+jf @CASINO3_9849 
+if 
+056D:   actor 72@ defined 
+jf @CASINO3_9849 
+if 
+051A:   actor 72@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_9849 
+149@ = 1 
+150@ = 1 
+
+:CASINO3_9849
+if 
+  149@ == 0 
+jf @CASINO3_9916 
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_9916 
+if 
+051C:   car 58@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_9916 
+149@ = 1 
+150@ = 1 
+
+:CASINO3_9916
+if 
+  149@ == 3 
+jf @CASINO3_9997 
+if 
+056D:   actor 71@ defined 
+jf @CASINO3_9997 
+if 
+051A:   actor 71@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_9997 
+149@ = 4 
+gosub @CASINO3_12738 
+55@ = 1 
+53@ = 99 
+
+:CASINO3_9997
+if 
+  149@ == 3 
+jf @CASINO3_10078 
+if 
+056D:   actor 72@ defined 
+jf @CASINO3_10078 
+if 
+051A:   actor 72@ damaged_by_actor $PLAYER_ACTOR 
+jf @CASINO3_10078 
+149@ = 4 
+gosub @CASINO3_12738 
+55@ = 1 
+53@ = 99 
+
+:CASINO3_10078
+if 
+  150@ == 1 
+jf @CASINO3_10294 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(1039.3, 2100.434, 12.2503, 0.0, 0.0, 0.0)
+Camera.PointAt(1040.13, 2099.906, 12.0705, 2)
+240@ = 1 
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_10207 
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_10207 
+05BF: AS_actor 71@ look_at_actor 72@ -1 ms 
+
+:CASINO3_10207
+240@ = 1 
+33@ = 0 
+150@ = 3 
+if 
+   not Actor.Dead(76@)
+jf @CASINO3_10294 
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_10294 
+05D1: AS_actor 76@ drive_car 61@ to 1076.804 2080.491 9.8203 speed 9.0 2 model #NULL 2 
+
+:CASINO3_10294
+if 
+  150@ == 3 
+jf @CASINO3_10378 
+if 
+  33@ > 1000 
+jf @CASINO3_10338 
+36@ = 1 
+
+:CASINO3_10338
+if 
+  33@ > 3000 
+jf @CASINO3_10378 
+150@ = 5 
+240@ = 2 
+33@ = 0 
+
+:CASINO3_10378
+if 
+  150@ == 5 
+jf @CASINO3_10498 
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_10498 
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_10484 
+0687: clear_actor 71@ task 
+0615: define_AS_pack_begin 137@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 1062.345 2087.318 9.8203 mode 6 time 10000 ms // versionA 
+0616: define_AS_pack_end 137@ 
+0618: assign_actor 71@ to_AS_pack 137@ 
+061B: remove_references_to_AS_pack 137@ 
+
+:CASINO3_10484
+150@ = 6 
+33@ = 0 
+
+:CASINO3_10498
+if 
+  150@ == 6 
+jf @CASINO3_10637 
+if 
+  33@ > 1000 
+jf @CASINO3_10637 
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_10637 
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_10623 
+0687: clear_actor 72@ task 
+0615: define_AS_pack_begin 138@ 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 1056.874 2084.136 9.8203 mode 6 time 10000 ms // versionA 
+0616: define_AS_pack_end 138@ 
+0618: assign_actor 72@ to_AS_pack 138@ 
+061B: remove_references_to_AS_pack 138@ 
+
+:CASINO3_10623
+33@ = 0 
+150@ = 8 
+
+:CASINO3_10637
+if 
+  150@ == 8 
+jf @CASINO3_10681 
+if 
+  33@ > 3700 
+jf @CASINO3_10681 
+150@ = 10 
+
+:CASINO3_10681
+if 
+  150@ == 10 
+jf @CASINO3_10901 
+02A3: enable_widescreen 0 
+36@ = 0 
+Actor.Angle($PLAYER_ACTOR) = 228.0
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_10771 
+0792: disembark_instantly_actor 71@ 
+Actor.PutAt(71@, 1073.558, 2094.412, 13.6896)
+Actor.Angle(71@) = 83.0
+
+:CASINO3_10771
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_10822 
+0792: disembark_instantly_actor 72@ 
+Actor.PutAt(72@, 1066.096, 2098.85, 13.7429)
+Actor.Angle(72@) = 132.0
+
+:CASINO3_10822
+if 
+   not Car.Wrecked(61@)
+jf @CASINO3_10858 
+Car.PutAt(61@, 1076.804, 2080.491, 9.8203)
+
+:CASINO3_10858
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CA3_8' time 6000 flag 1  // ~s~They're expecting visitors now! Get into the ~y~factory~s~ quickly!
+Player.CanMove($PLAYER_CHAR) = True
+150@ = 99 
+149@ = 99 
+
+:CASINO3_10901
+if 
+  141@ == 1 
+jf @CASINO3_11448 
+284@ = 0 
+
+:CASINO3_10926
+if 
+  9 > 284@ 
+jf @CASINO3_11279 
+if 
+  275@(284@,9i) == 0 
+jf @CASINO3_11265 
+071E: get_object 257@(284@,9i) health_to 52@ 
+if 
+08FF:   object 257@(284@,9i) received_damage_type 27 
+jf @CASINO3_11007 
+52@ = 0 
+
+:CASINO3_11007
+if 
+08FF:   object 257@(284@,9i) received_damage_type 25 
+jf @CASINO3_11036 
+52@ = 0 
+
+:CASINO3_11036
+if 
+08FF:   object 257@(284@,9i) received_damage_type 26 
+jf @CASINO3_11065 
+52@ = 0 
+
+:CASINO3_11065
+if 
+  52@ == 0 
+jf @CASINO3_11265 
+Object.StorePos(257@(284@,9i), 125@, 126@, 127@)
+064B: 248@(284@,9i) = create_particle "OVERHEAT_CAR_ELECTRIC" at 125@ 126@ 127@ type 1 
+127@ += 1.0 
+0948: create_explosion_at 125@ 126@ 127@ type 11 camera_shake 1.0 
+0723: break_object 257@(284@,9i) intensity 1 
+Marker.Disable(40@(284@,11i))
+035D: set_object 257@(284@,9i) targetable 0 
+if 
+   not 51@ == 99 
+jf @CASINO3_11230 
+0650: destroy_particle 248@(51@,9i) 
+
+:CASINO3_11230
+064C: make_particle 248@(284@,9i) visible 
+0085: 51@ = 284@ // (int) 
+275@(284@,9i) += 1 
+117@ += 1 
+
+:CASINO3_11265
+284@ += 1 
+jump @CASINO3_10926 
+
+:CASINO3_11279
+if 
+  148@ == 0 
+jf @CASINO3_11416 
+if 
+   not Actor.Dead(81@)
+jf @CASINO3_11416 
+if 
+00FE:   actor 81@ sphere 0 in_sphere 1067.581 2122.251 9.8203 radius 1.5 1.5 3.0 
+jf @CASINO3_11416 
+0687: clear_actor 81@ task 
+0615: define_AS_pack_begin 129@ 
+0638: AS_actor -1 stay_put 1 
+0634: AS_actor -1 attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 5000 chance_of_action 60 
+0616: define_AS_pack_end 129@ 
+0618: assign_actor 81@ to_AS_pack 129@ 
+061B: remove_references_to_AS_pack 129@ 
+148@ = 1 
+
+:CASINO3_11416
+if 
+  117@ == 9 
+jf @CASINO3_11448 
+55@ = 8 
+141@ = 99 
+
+:CASINO3_11448
+if 
+  186@ == 0 
+jf @CASINO3_11893 
+if 
+  117@ == 3 
+jf @CASINO3_11893 
+172@ = Actor.Create(Mission1, #WMYMECH, 1020.017, 2082.9, 17.9296)
+Actor.GiveWeaponAndAmmo(172@, CombatShotgun, 2000)
+Actor.Angle(172@) = 269.9465
+060B: set_actor 172@ decision_maker_to 73@ 
+if 
+   not Actor.Dead(172@)
+jf @CASINO3_11622 
+0687: clear_actor 172@ task 
+0615: define_AS_pack_begin 175@ 
+05D3: AS_actor -1 goto_point 1038.716 2082.798 13.9297 mode 6 time -1 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 175@ 
+0618: assign_actor 172@ to_AS_pack 175@ 
+061B: remove_references_to_AS_pack 175@ 
+
+:CASINO3_11622
+173@ = Actor.Create(Mission1, #WMYMECH, 1020.263, 2097.185, 13.9297)
+Actor.GiveWeaponAndAmmo(173@, Pistol, 2000)
+Actor.Angle(173@) = 274.9465
+060B: set_actor 173@ decision_maker_to 73@ 
+if 
+   not Actor.Dead(173@)
+jf @CASINO3_11748 
+0687: clear_actor 173@ task 
+0615: define_AS_pack_begin 176@ 
+05D3: AS_actor -1 goto_point 1038.426 2098.644 9.8203 mode 6 time -2 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 176@ 
+0618: assign_actor 173@ to_AS_pack 176@ 
+061B: remove_references_to_AS_pack 176@ 
+
+:CASINO3_11748
+174@ = Actor.Create(Mission1, #WMYMECH, 1019.671, 2078.126, 13.9297)
+Actor.GiveWeaponAndAmmo(174@, MicroUzi, 2000)
+Actor.Angle(174@) = 267.9465
+060B: set_actor 174@ decision_maker_to 73@ 
+if 
+   not Actor.Dead(174@)
+jf @CASINO3_11886 
+0687: clear_actor 174@ task 
+0615: define_AS_pack_begin 177@ 
+05D3: AS_actor -1 goto_point 1068.708 2085.24 9.8203 mode 6 time -2 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 177@ 
+0618: assign_actor 174@ to_AS_pack 177@ 
+061B: remove_references_to_AS_pack 177@ 
+
+:CASINO3_11886
+186@ = 1 
+
+:CASINO3_11893
+if 
+  187@ == 0 
+jf @CASINO3_12029 
+if 
+  117@ > 5 
+jf @CASINO3_12029 
+0674: set_car_model #ADMIRAL numberplate "G1RUYHUN" 
+179@ = Car.Create(#ADMIRAL, 1029.856, 2142.858, 9.813)
+Car.Angle(179@) = 205.1437
+0229: set_car 179@ primary_color_to 123 secondary_color_to 10 
+Car.SetImmunities(179@, 1, 1, 1, 1, 1)
+Car.DoorStatus(179@) = 3
+Car.LockInCurrentPosition(179@) = True
+053F: set_car 179@ tires_vulnerability 0 
+187@ = 1 
+
+:CASINO3_12029
+if 
+  187@ == 1 
+jf @CASINO3_12316 
+if 
+  117@ > 5 
+jf @CASINO3_12316 
+if 
+   not Car.Wrecked(179@)
+jf @CASINO3_12316 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 179@ radius 25.0 25.0 sphere 0 
+jf @CASINO3_12316 
+178@ = Actor.CreateAsDriver(Mission2, #VMAFF1, 179@)
+060B: set_actor 178@ decision_maker_to 73@ 
+Actor.GiveWeaponAndAmmo(178@, MicroUzi, 2000)
+180@ = Actor.CreateAsPassenger(Mission2, #VMAFF2, 179@, 1)
+060B: set_actor 180@ decision_maker_to 73@ 
+Actor.GiveWeaponAndAmmo(180@, MicroUzi, 2000)
+0713: actor 180@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 90 
+181@ = Actor.CreateAsPassenger(Mission2, #VMAFF4, 179@, 2)
+060B: set_actor 181@ decision_maker_to 73@ 
+Actor.GiveWeaponAndAmmo(181@, MicroUzi, 2000)
+0713: actor 181@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 90 
+Car.LockInCurrentPosition(179@) = False
+Car.SetAnimation(179@, 9, 5500)
+Car.DoorStatus(179@) = 1
+187@ = 2 
+33@ = 0 
+
+:CASINO3_12316
+if 
+  187@ == 2 
+jf @CASINO3_12469 
+if 
+  33@ > 6500 
+jf @CASINO3_12469 
+if 
+   not Car.Wrecked(179@)
+jf @CASINO3_12469 
+if 
+   not Actor.Dead(178@)
+jf @CASINO3_12469 
+if 
+01C1:   car 179@ stopped 
+jf @CASINO3_12469 
+Car.SetImmunities(179@, 0, 0, 0, 0, 0)
+0687: clear_actor 178@ task 
+0615: define_AS_pack_begin 182@ 
+0633: AS_actor -1 exit_car 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 182@ 
+0618: assign_actor 178@ to_AS_pack 182@ 
+061B: remove_references_to_AS_pack 182@ 
+187@ = 3 
+33@ = 0 
+
+:CASINO3_12469
+if 
+  187@ == 3 
+jf @CASINO3_12600 
+if 
+  33@ > 15000 
+jf @CASINO3_12600 
+if 
+   not Car.Wrecked(179@)
+jf @CASINO3_12600 
+if 
+   not Actor.Dead(181@)
+jf @CASINO3_12600 
+if 
+01C1:   car 179@ stopped 
+jf @CASINO3_12600 
+0687: clear_actor 181@ task 
+0615: define_AS_pack_begin 184@ 
+0633: AS_actor -1 exit_car 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 184@ 
+0618: assign_actor 181@ to_AS_pack 184@ 
+061B: remove_references_to_AS_pack 184@ 
+187@ = 4 
+
+:CASINO3_12600
+if 
+  187@ == 4 
+jf @CASINO3_12731 
+if 
+  33@ > 25000 
+jf @CASINO3_12731 
+if 
+   not Car.Wrecked(179@)
+jf @CASINO3_12731 
+if 
+   not Actor.Dead(180@)
+jf @CASINO3_12731 
+if 
+01C1:   car 179@ stopped 
+jf @CASINO3_12731 
+0687: clear_actor 180@ task 
+0615: define_AS_pack_begin 183@ 
+0633: AS_actor -1 exit_car 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 183@ 
+0618: assign_actor 180@ to_AS_pack 183@ 
+061B: remove_references_to_AS_pack 183@ 
+187@ = 5 
+
+:CASINO3_12731
+jump @CASINO3_2968 
+
+:CASINO3_12738
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_12762 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_12762
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_12786 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_12786
+if 
+   not Actor.Dead(74@)
+jf @CASINO3_12842 
+Actor.PutAt(74@, 1084.126, 2107.637, 14.3504)
+Actor.Angle(74@) = 111.4468
+Actor.GiveWeaponAndAmmo(74@, Pistol, 2000)
+
+:CASINO3_12842
+88@ = Actor.Create(Mission1, #VMAFF1, 1084.71, 2116.736, 14.3504)
+Actor.Angle(88@) = 94.4201
+Actor.GiveWeaponAndAmmo(88@, MicroUzi, 2000)
+060B: set_actor 88@ decision_maker_to 73@ 
+return 
+
+:CASINO3_12896
+if 
+  144@ == 0 
+jf @CASINO3_13458 
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_12971 
+0687: clear_actor 87@ task 
+0615: define_AS_pack_begin 135@ 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 135@ 
+0618: assign_actor 87@ to_AS_pack 135@ 
+061B: remove_references_to_AS_pack 135@ 
+
+:CASINO3_12971
+if 
+   not Actor.Dead(81@)
+jf @CASINO3_13046 
+0615: define_AS_pack_begin 129@ 
+05D3: AS_actor -1 goto_point 1067.581 2122.251 9.8203 mode 6 time -2 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 129@ 
+0618: assign_actor 81@ to_AS_pack 129@ 
+061B: remove_references_to_AS_pack 129@ 
+
+:CASINO3_13046
+if 
+   not Actor.Dead(82@)
+jf @CASINO3_13132 
+0615: define_AS_pack_begin 128@ 
+0637: AS_actor -1 goto 1085.596 2106.83 9.8203 mode 6 turn_radius 100.0 stop_radius 2.0 look_at_actor $PLAYER_ACTOR 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 128@ 
+0618: assign_actor 82@ to_AS_pack 128@ 
+061B: remove_references_to_AS_pack 128@ 
+
+:CASINO3_13132
+if 
+   not Actor.Dead(83@)
+jf @CASINO3_13225 
+0615: define_AS_pack_begin 130@ 
+0637: AS_actor -1 goto 1082.391 2091.13 14.3504 mode 6 turn_radius 100.0 stop_radius 1.0 look_at_actor $PLAYER_ACTOR 
+0638: AS_actor -1 stay_put 1 
+0634: AS_actor -1 attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 3000 chance_of_action 50 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 83@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:CASINO3_13225
+if 
+   not Actor.Dead(89@)
+jf @CASINO3_13261 
+0687: clear_actor 89@ task 
+05E2: AS_actor 89@ kill_actor $PLAYER_ACTOR 
+0638: AS_actor 89@ stay_put 1 
+
+:CASINO3_13261
+if 
+   not Actor.Dead(74@)
+jf @CASINO3_13300 
+0687: clear_actor 74@ task 
+Actor.GiveWeaponAndAmmo(74@, Pistol, 2000)
+05E2: AS_actor 74@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_13300
+if 
+   not Actor.Dead(75@)
+jf @CASINO3_13403 
+0687: clear_actor 75@ task 
+Actor.GiveWeaponAndAmmo(75@, Pistol, 2000)
+Actor.PutAt(75@, 1057.055, 2122.319, 13.6896)
+Actor.Angle(75@) = 279.0
+0615: define_AS_pack_begin 79@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 79@ 
+0618: assign_actor 75@ to_AS_pack 79@ 
+061B: remove_references_to_AS_pack 79@ 
+
+:CASINO3_13403
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_13427 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_13427
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_13451 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_13451
+144@ = 1 
+
+:CASINO3_13458
+return 
+
+:CASINO3_13460
+if 
+  144@ == 0 
+jf @CASINO3_14101 
+if 
+   not Actor.Dead(87@)
+jf @CASINO3_13535 
+0687: clear_actor 87@ task 
+0615: define_AS_pack_begin 135@ 
+085B: AS_actor -1 set_kinda_stay_in_same_place 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 135@ 
+0618: assign_actor 87@ to_AS_pack 135@ 
+061B: remove_references_to_AS_pack 135@ 
+
+:CASINO3_13535
+if 
+   not Actor.Dead(88@)
+jf @CASINO3_13592 
+0687: clear_actor 88@ task 
+0615: define_AS_pack_begin 136@ 
+05BC: AS_actor -1 jump 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 136@ 
+0618: assign_actor 88@ to_AS_pack 136@ 
+061B: remove_references_to_AS_pack 136@ 
+
+:CASINO3_13592
+if 
+   not Actor.Dead(74@)
+jf @CASINO3_13659 
+Actor.GiveWeaponAndAmmo(74@, Pistol, 2000)
+0687: clear_actor 74@ task 
+0615: define_AS_pack_begin 78@ 
+05BC: AS_actor -1 jump 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 78@ 
+0618: assign_actor 74@ to_AS_pack 78@ 
+061B: remove_references_to_AS_pack 78@ 
+
+:CASINO3_13659
+if 
+   not Actor.Dead(75@)
+jf @CASINO3_13762 
+Actor.GiveWeaponAndAmmo(75@, MicroUzi, 2000)
+0687: clear_actor 75@ task 
+Actor.PutAt(75@, 1057.055, 2122.319, 13.6896)
+Actor.Angle(75@) = 279.0
+0615: define_AS_pack_begin 79@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 79@ 
+0618: assign_actor 75@ to_AS_pack 79@ 
+061B: remove_references_to_AS_pack 79@ 
+
+:CASINO3_13762
+if 
+   not Actor.Dead(81@)
+jf @CASINO3_13837 
+0615: define_AS_pack_begin 129@ 
+05D3: AS_actor -1 goto_point 1067.581 2122.251 9.8203 mode 6 time -2 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 129@ 
+0618: assign_actor 81@ to_AS_pack 129@ 
+061B: remove_references_to_AS_pack 129@ 
+
+:CASINO3_13837
+if 
+   not Actor.Dead(82@)
+jf @CASINO3_13917 
+0615: define_AS_pack_begin 128@ 
+0637: AS_actor -1 goto 1085.596 2106.83 9.8203 mode 6 turn_radius 100.0 stop_radius 2.0 look_at_actor $PLAYER_ACTOR 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 128@ 
+0618: assign_actor 82@ to_AS_pack 128@ 
+061B: remove_references_to_AS_pack 128@ 
+
+:CASINO3_13917
+if 
+   not Actor.Dead(83@)
+jf @CASINO3_14010 
+0615: define_AS_pack_begin 130@ 
+0637: AS_actor -1 goto 1082.391 2091.13 14.3504 mode 6 turn_radius 100.0 stop_radius 1.0 look_at_actor $PLAYER_ACTOR 
+0638: AS_actor -1 stay_put 1 
+0634: AS_actor -1 attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 3000 chance_of_action 50 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 83@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:CASINO3_14010
+if 
+   not Actor.Dead(89@)
+jf @CASINO3_14046 
+0687: clear_actor 89@ task 
+0638: AS_actor 89@ stay_put 1 
+05E2: AS_actor 89@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_14046
+if 
+   not Actor.Dead(71@)
+jf @CASINO3_14070 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_14070
+if 
+   not Actor.Dead(72@)
+jf @CASINO3_14094 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+
+:CASINO3_14094
+144@ = 1 
+
+:CASINO3_14101
+return 
+
+:CASINO3_14103
+if 
+   not Actor.Dead(80@)
+jf @CASINO3_14156 
+0615: define_AS_pack_begin 131@ 
+0634: AS_actor -1 attack_using_weapon_actor $PLAYER_ACTOR flags 4 perform_actions_after_time 3000 chance_of_action 50 
+0616: define_AS_pack_end 131@ 
+0618: assign_actor 80@ to_AS_pack 131@ 
+061B: remove_references_to_AS_pack 131@ 
+
+:CASINO3_14156
+return 
+
+:CASINO3_14158
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CASINO3_14226 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+
+:CASINO3_14226
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CASINO3_14244
+$CASINO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'CASINO3'  // You've had your Chips
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+0998: add_respect 20 
+Player.Money($PLAYER_CHAR) += 10000
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Marker.Disable($582)
+$582 = Marker.CreateIconAndSphere($ICON_TRIADS_CASINO, 2026.603, 1007.735, 9.8127)
+return 
+
+:CASINO3_14336
+if 
+   not Car.Wrecked(58@)
+jf @CASINO3_14367 
+Car.SetImmunities(58@, 0, 0, 0, 0, 0)
+
+:CASINO3_14367
+if 
+   not Car.Wrecked(179@)
+jf @CASINO3_14398 
+Car.SetImmunities(179@, 0, 0, 0, 0, 0)
+
+:CASINO3_14398
+if 
+03CA:   object $2658 exists 
+jf @CASINO3_14444 
+Object.PutAt($2658, 1903.383, 967.62, 11.438)
+Object.Angle($2658) = 0.0
+
+:CASINO3_14444
+01F0: set_max_wanted_level_to 34@ 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+03CA:   object $2664 exists 
+jf @CASINO3_14495 
+Object.PutAt($2664, 1055.629, 2087.67, 12.469)
+
+:CASINO3_14495
+Marker.Disable(37@)
+Marker.Disable(39@)
+284@ = 0 
+
+:CASINO3_14512
+if 
+  9 > 284@ 
+jf @CASINO3_14553 
+Marker.Disable(40@(284@,11i))
+284@ += 1 
+jump @CASINO3_14512 
+
+:CASINO3_14553
+if 
+   not 51@ == 99 
+jf @CASINO3_14580 
+0650: destroy_particle 248@(51@,9i) 
+
+:CASINO3_14580
+Model.Destroy(#VMAFF1)
+Model.Destroy(#VMAFF2)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#VMAFF4)
+Model.Destroy(#TRIADA)
+Model.Destroy(#TRIADB)
+Model.Destroy(#WASHING)
+Model.Destroy(#WMYMECH)
+Model.Destroy(#SHOTGSPA)
+Model.Destroy(#COLT45)
+Model.Destroy(#BAT)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#ADMIRAL)
+Model.Destroy(#BRAVURA)
+Model.Destroy(#FORKLIFT)
+031A: remove_all_fires 
+$ONMISSION = 0 
+mission_cleanup 
+return

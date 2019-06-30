@@ -1,0 +1,5196 @@
+:CAT2
+gosub @CAT2_36 
+if 
+wasted_or_busted 
+jf @CAT2_27 
+gosub @CAT2_30185 
+
+:CAT2_27
+gosub @CAT2_30548 
+end_thread 
+
+:CAT2_36
+638@ = 1 
+06AE: create_group_decision_maker_type 0 store_to 37@ // decision\allowed\mission.grp 
+0749: reset_group_decision_maker 37@ event 9 
+0749: reset_group_decision_maker 37@ event 41 
+0749: reset_group_decision_maker 37@ event 31 
+0749: reset_group_decision_maker 37@ event 73 
+0749: reset_group_decision_maker 37@ event 72 
+0749: reset_group_decision_maker 37@ event 36 
+074A: set_group_decision_maker 37@ on_event 36 taskID 1516 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+060A: create_decision_maker_type 0 store_to 38@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 38@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+36@ = 32 
+$ONMISSION = 1 
+Player.WantedLevel($PLAYER_CHAR) = 0
+if 
+  $ONMISSION == 69 
+jf @CAT2_256 
+018D: NOP 82@ 65535 2320.043 -8.5501 27.2047 
+298@ = Actor.Create(Special, #SPECIAL05, 682.8292, -477.8332, 15.3359)
+
+:CAT2_256
+thread 'CAT2' 
+fade 0 800 
+
+:CAT2_274
+if 
+fading 
+jf @CAT2_298 
+wait 0 
+jump @CAT2_274 
+
+:CAT2_298
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+if 
+056D:   actor $ACTOR_CATALINA defined 
+jf @CAT2_333 
+Actor.DestroyInstantly($ACTOR_CATALINA)
+
+:CAT2_333
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+
+:CAT2_346
+if 
+823D:   not special_actor 5 loaded 
+jf @CAT2_385 
+wait 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+jump @CAT2_346 
+
+:CAT2_385
+$ACTOR_CATALINA = Actor.Create(Special, #SPECIAL05, 682.8292, -477.8332, 15.3359)
+0296: unload_special_actor 5 
+Actor.SetWalkStyle($ACTOR_CATALINA, "WOMAN")
+02A9: set_actor $ACTOR_CATALINA immune_to_nonplayer 1 
+0568: set_actor $ACTOR_CATALINA untargetable 1 
+077A: set_actor $ACTOR_CATALINA acquaintance 0 to_actors_pedtype 0 // see ped.dat 
+Actor.Health($ACTOR_CATALINA) = 100
+0446: set_actor $ACTOR_CATALINA dismemberment_possible 0 
+0395: clear_area 1 at 2297.786 -16.8313 26.2964 radius 20.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT2_739 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_636 
+39@ = Actor.CurrentCar($ACTOR_CATALINA)
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @CAT2_583 
+Car.PutAt(39@, 2297.986, -14.0735, 25.3495)
+Car.Angle(39@) = 180.0
+jump @CAT2_629 
+
+:CAT2_583
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_629 
+Actor.PutAt($PLAYER_ACTOR, 2297.786, -15.5166, 26.2964)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+
+:CAT2_629
+jump @CAT2_739 
+
+:CAT2_636
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_739 
+39@ = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @CAT2_709 
+Car.PutAt(39@, 2297.986, -14.0735, 25.3495)
+Car.Angle(39@) = 180.0
+
+:CAT2_709
+Actor.PutAt($PLAYER_ACTOR, 2297.786, -15.5166, 26.2964)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+
+:CAT2_739
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_782 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2297.786 -15.5166 26.2964 
+jump @CAT2_802 
+
+:CAT2_782
+Actor.PutAt($PLAYER_ACTOR, 2297.786, -15.5166, 26.2964)
+
+:CAT2_802
+Actor.Angle($PLAYER_ACTOR) = 162.229
+Model.Load(#CSHER)
+Model.Load(#COLT45)
+Model.Load(#CHROMEGUN)
+07C0: load_path 123 
+07C0: load_path 124 
+Model.Load(#KMB_ATM1)
+Model.Load(#KMB_ATM2)
+Model.Load(#KMB_ATM3)
+Model.Load(#MTSAFE)
+Model.Load(#CR_DOOR_01)
+Model.Load(#CR_DOOR_03)
+
+:CAT2_863
+if or
+   not Model.Available(#CSHER)
+   not Model.Available(#COLT45)
+   not Model.Available(#CHROMEGUN)
+   not Model.Available(#KMB_ATM1)
+   not Model.Available(#KMB_ATM2)
+   not Model.Available(#KMB_ATM3)
+jf @CAT2_915 
+wait 0 
+jump @CAT2_863 
+
+:CAT2_915
+if or
+87C1:   not path 124 available 
+87C1:   not path 123 available 
+   not Model.Available(#MTSAFE)
+   not Model.Available(#CR_DOOR_01)
+   not Model.Available(#CR_DOOR_03)
+jf @CAT2_958 
+wait 0 
+jump @CAT2_915 
+
+:CAT2_958
+054C: use_GXT_table 'CAT' 
+Model.Load(#WMYSGRD)
+Model.Load(#SWMYRI)
+Model.Load(#WFYSTEW)
+04ED: load_animation "ROB_BANK" 
+038B: load_requested_models 
+
+:CAT2_996
+if or
+   not Model.Available(#WMYSGRD)
+   not Model.Available(#SWMYRI)
+   not Model.Available(#WFYSTEW)
+jf @CAT2_1031 
+wait 0 
+jump @CAT2_996 
+
+:CAT2_1031
+if 
+84EE:   not animation "ROB_BANK" loaded 
+jf @CAT2_1065 
+wait 0 
+jump @CAT2_1031 
+
+:CAT2_1065
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @CAT2_1092 
+wait 0 
+jump @CAT2_1065 
+
+:CAT2_1092
+03CF: load_wav 1826 as 3 
+56@ = 0 
+57@ = 85.0 
+58@ = 100.0 
+59@ = 90.0 
+60@ = 95.0 
+0615: define_AS_pack_begin 61@ 
+05C8: AS_actor -1 look_around 
+05C8: AS_actor -1 look_around 
+0616: define_AS_pack_end 61@ 
+07E5: copy_decision_maker -1 to 62@ 
+0708: reset_decision_maker 62@ event 31 
+63@ = Actor.Create(CivFemale, #WFYSTEW, 2318.492, -15.5635, 25.6913)
+Actor.Angle(63@) = 95.2069
+060B: set_actor 63@ decision_maker_to 62@ 
+64@ = Actor.Create(CivFemale, #WFYSTEW, 2318.473, -7.4565, 25.6913)
+Model.Destroy(#WFYSTEW)
+Actor.Angle(64@) = 95.2069
+060B: set_actor 64@ decision_maker_to 62@ 
+65@ = Actor.Create(CivMale, #SWMYRI, 2311.509, -11.1779, 25.6987)
+Actor.Angle(65@) = 176.6813
+060B: set_actor 65@ decision_maker_to 62@ 
+66@ = Actor.Create(CivMale, #WMYSGRD, 2316.618, -12.83, 25.75)
+Model.Destroy(#WMYSGRD)
+Actor.Angle(66@) = 90.0
+060B: set_actor 66@ decision_maker_to 62@ 
+Actor.GiveWeaponAndAmmo(66@, Pistol, 9999)
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+Camera.SetPosition(2299.895, -7.9983, 26.6055, 0.0, 0.0, 0.0)
+Camera.PointAt(2299.998, -8.993, 26.6023, 2)
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 3000 
+113@ = Object.Init(#KMB_ATM2, 2310.367, -17.0, 20.414)
+114@ = Object.Init(#KMB_ATM2, 2313.689, -17.0, 20.414)
+115@ = Object.Init(#KMB_ATM2, 2313.318, -0.1206, 20.414)
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_1751 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_1583 
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at 2300.743 -15.5274 25.4844 
+jump @CAT2_1603 
+
+:CAT2_1583
+Actor.PutAt($ACTOR_CATALINA, 2301.743, -17.1274, 25.4844)
+
+:CAT2_1603
+041A: 71@ = actor $PLAYER_ACTOR weapon 25 ammo 
+if 
+  71@ == 0 
+jf @CAT2_1647 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Shotgun, 48)
+jump @CAT2_1674 
+
+:CAT2_1647
+if 
+  48 > 71@ 
+jf @CAT2_1674 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Shotgun, 48)
+
+:CAT2_1674
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 25 
+Actor.GiveWeaponAndAmmo($ACTOR_CATALINA, Shotgun, 9999)
+Actor.Angle($ACTOR_CATALINA) = 329.4303
+05D3: AS_actor $PLAYER_ACTOR goto_point 2307.802 -17.221 25.7574 mode 4 time 10000 ms // versionA 
+05D3: AS_actor $ACTOR_CATALINA goto_point 2312.426 -15.4762 25.75 mode 4 time 10000 ms // versionA 
+
+:CAT2_1751
+fade 1 500 
+Object.Destroy($2662)
+Object.Destroy($2663)
+560@ = 1 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 3500 
+41@ = 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+68@ = -1 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+
+:CAT2_1838
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CAT2_1860 
+jump @CAT2_30409 
+
+:CAT2_1860
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @CAT2_2049 
+$CATALINA_TOTAL_PASSED_MISSIONS = 2 
+56@ = 9 
+34@ = 1 
+41@ = 462 
+Actor.PutAt($PLAYER_ACTOR, 857.4263, -29.5418, 62.1858)
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_1960 
+Actor.PutAt($ACTOR_CATALINA, 858.4263, -29.5418, 62.1858)
+
+:CAT2_1960
+Model.Load(#BUFFALO)
+
+:CAT2_1965
+if 
+   not Model.Available(#BUFFALO)
+jf @CAT2_1992 
+wait 0 
+jump @CAT2_1965 
+
+:CAT2_1992
+69@ = Car.Create(#BUFFALO, 857.4263, -29.5418, 62.1858)
+036A: put_actor $PLAYER_ACTOR in_car 69@ 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_2049 
+0430: put_actor $ACTOR_CATALINA into_car 69@ passenger_seat 0 
+
+:CAT2_2049
+wait 0 
+if 
+   Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_2094 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'CAT2_A1' time 5000 flag 1  // ~r~You killed Catalina.
+jump @CAT2_30185 
+
+:CAT2_2094
+gosub @CAT2_31411 
+gosub @CAT2_32012 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @CAT2_2136 
+jump @CAT2_30185 
+
+:CAT2_2136
+if 
+   Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_2159 
+jump @CAT2_30185 
+
+:CAT2_2159
+if and
+  9 > 41@ 
+  41@ > -1 
+jf @CAT2_3231 
+if 
+08D0:   should_skip_cutscene 
+jf @CAT2_2243 
+if 
+  68@ == 0 
+jf @CAT2_2236 
+fade 0 500 
+41@ = 0 
+68@ += 1 
+
+:CAT2_2236
+jump @CAT2_2268 
+
+:CAT2_2243
+if 
+  68@ == -1 
+jf @CAT2_2268 
+68@ += 1 
+
+:CAT2_2268
+if 
+  68@ == 1 
+jf @CAT2_3231 
+if 
+   not fading 
+jf @CAT2_3231 
+if and
+  2 > 41@ 
+  55@ == 0 
+jf @CAT2_2675 
+72@ = Object.Init(#KMB_ATM1, 2310.367, -17.0, 26.414)
+Object.Angle(72@) = 180.0
+Object.Indestructibility(72@) = False
+73@ = Object.Init(#KMB_ATM1, 2313.689, -17.0, 26.414)
+Object.Angle(73@) = 180.0
+Object.Indestructibility(73@) = False
+74@ = Object.Init(#KMB_ATM1, 2313.318, -0.1206, 26.414)
+Object.Indestructibility(74@) = False
+75@ = Object.Init(#MTSAFE, 2305.666, -4.7944, 25.65)
+Object.Angle(75@) = 90.0
+Object.Indestructibility(75@) = False
+76@ = Object.Init(#KMB_ATM3, 2310.367, -17.0, 26.414)
+Object.Indestructibility(76@) = False
+Object.Angle(72@) = 180.0
+77@ = Object.Init(#KMB_ATM3, 2313.689, -17.0, 26.414)
+Object.Indestructibility(77@) = False
+Object.Angle(73@) = 180.0
+78@ = Object.Init(#KMB_ATM3, 2313.318, -0.1206, 26.414)
+Object.Indestructibility(78@) = False
+70@ = Object.Init(#CAT2_SAFE_COL, 2305.666, -4.7944, 25.65)
+Object.Angle(70@) = 90.0
+Object.Angle(75@) = 90.0
+Object.Angle(76@) = 180.0
+Object.Angle(77@) = 180.0
+Object.CollisionDetection(72@) = False
+Object.CollisionDetection(73@) = False
+Object.CollisionDetection(74@) = False
+55@ = 1 
+
+:CAT2_2675
+041A: 71@ = actor $PLAYER_ACTOR weapon 25 ammo 
+if 
+  71@ == 0 
+jf @CAT2_2719 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Shotgun, 48)
+jump @CAT2_2746 
+
+:CAT2_2719
+if 
+  48 > 71@ 
+jf @CAT2_2746 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Shotgun, 48)
+
+:CAT2_2746
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 25 
+Actor.GiveWeaponAndAmmo($ACTOR_CATALINA, Shotgun, 9999)
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.PutAt($PLAYER_ACTOR, 2312.578, -7.4347, 25.75)
+Actor.Angle($PLAYER_ACTOR) = 126.7479
+Actor.PutAt($ACTOR_CATALINA, 2306.666, -4.7944, 25.75)
+Actor.Angle($ACTOR_CATALINA) = 90.0
+0687: clear_actor $ACTOR_CATALINA task 
+0792: disembark_instantly_actor $ACTOR_CATALINA 
+0605: actor $ACTOR_CATALINA perform_animation "CAT_SAFE_ROB" IFP "ROB_BANK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 0 time -2 
+075A: set_object 75@ animation "CAT_SAFE_OPEN_O" IFP_file "ROB_BANK" 1000.0 lockF 0 loop 1 // IF AND SET 
+if 
+   not Actor.Dead(66@)
+jf @CAT2_2989 
+0792: disembark_instantly_actor 66@ 
+Actor.PutAt(66@, 2310.546, -7.7439, 25.7422)
+Actor.Angle(66@) = 281.4267
+0639: AS_actor 66@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(66@) = True
+
+:CAT2_2989
+if 
+   not Actor.Dead(63@)
+jf @CAT2_3055 
+0792: disembark_instantly_actor 63@ 
+Actor.PutAt(63@, 2311.597, -9.1847, 25.7422)
+Actor.Angle(63@) = 314.501
+0639: AS_actor 63@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(63@) = True
+
+:CAT2_3055
+if 
+   not Actor.Dead(64@)
+jf @CAT2_3121 
+0792: disembark_instantly_actor 64@ 
+Actor.PutAt(64@, 2310.591, -9.3749, 25.7422)
+Actor.Angle(64@) = 323.1424
+0639: AS_actor 64@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(64@) = True
+
+:CAT2_3121
+if 
+   not Actor.Dead(65@)
+jf @CAT2_3187 
+0792: disembark_instantly_actor 65@ 
+Actor.PutAt(65@, 2309.61, -8.5556, 25.7422)
+Actor.Angle(65@) = 309.2547
+0639: AS_actor 65@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(65@) = True
+
+:CAT2_3187
+fade 1 500 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ -= 555 
+41@ = 9 
+559@ = 5 
+68@ += 1 
+
+:CAT2_3231
+if 
+  41@ == 1 
+jf @CAT2_4115 
+if and
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+  55@ == 0 
+  560@ == 0 
+jf @CAT2_4115 
+560@ = 2 
+03EB: clear_small_messages_only 
+0395: clear_area 1 at 2307.802 -17.221 25.7574 radius 100.0 
+Camera.SetPosition(2308.396, -15.824, 27.666, 0.0, 0.0, 0.0)
+Camera.PointAt(2309.273, -15.36, 27.5448, 2)
+72@ = Object.Init(#KMB_ATM1, 2310.367, -17.0, 26.414)
+Object.Angle(72@) = 180.0
+Object.Indestructibility(72@) = False
+73@ = Object.Init(#KMB_ATM1, 2313.689, -17.0, 26.414)
+Object.Angle(73@) = 180.0
+Object.Indestructibility(73@) = False
+74@ = Object.Init(#KMB_ATM1, 2313.318, -0.1206, 26.414)
+Object.Indestructibility(74@) = False
+75@ = Object.Init(#MTSAFE, 2305.765, -4.7944, 25.75)
+Object.Angle(75@) = 90.0
+70@ = Object.Init(#CAT2_SAFE_COL, 2305.765, -4.7944, 25.75)
+Object.Angle(70@) = 90.0
+Object.Indestructibility(75@) = False
+if 
+83CA:   not object $2660 exists 
+jf @CAT2_3606 
+$2660 = Object.Init(#CR_DOOR_01, 2322.845, 8.304, 25.483)
+Object.RemoveFromMissionCleanupList($2660)
+Object.Indestructibility($2660) = False
+Object.KeepInMemory($2660) = True
+
+:CAT2_3606
+if 
+83CA:   not object $2661 exists 
+jf @CAT2_3673 
+$2661 = Object.Init(#CR_DOOR_01, 2316.233, 0.712, 25.742)
+Object.RemoveFromMissionCleanupList($2661)
+Object.Angle($2661) = 270.0
+Object.KeepInMemory($2661) = True
+Object.Indestructibility($2661) = False
+
+:CAT2_3673
+if 
+83CA:   not object $2662 exists 
+jf @CAT2_3730 
+$2662 = Object.Init(#CR_DOOR_03, 2304.257, -17.744, 25.742)
+Object.RemoveFromMissionCleanupList($2662)
+Object.KeepInMemory($2662) = True
+Object.Indestructibility($2662) = False
+
+:CAT2_3730
+if 
+83CA:   not object $2663 exists 
+jf @CAT2_3797 
+$2663 = Object.Init(#CR_DOOR_03, 2304.257, -14.583, 25.742)
+Object.RemoveFromMissionCleanupList($2663)
+Object.KeepInMemory($2663) = True
+Object.Angle($2663) = 180.0
+Object.Indestructibility($2663) = False
+
+:CAT2_3797
+76@ = Object.Init(#KMB_ATM3, 2310.367, -17.0, 26.414)
+Object.Indestructibility(76@) = False
+Object.Angle(72@) = 180.0
+77@ = Object.Init(#KMB_ATM3, 2313.689, -17.0, 26.414)
+Object.Indestructibility(77@) = False
+Object.Angle(73@) = 180.0
+78@ = Object.Init(#KMB_ATM3, 2313.318, -0.1206, 26.414)
+Object.Indestructibility(78@) = False
+Object.Angle(75@) = 90.0
+Object.Angle(76@) = 180.0
+Object.Angle(77@) = 180.0
+Object.CollisionDetection(72@) = False
+Object.CollisionDetection(73@) = False
+Object.CollisionDetection(74@) = False
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2309.289, -14.3987, 25.75)
+Actor.Angle($PLAYER_ACTOR) = 287.3674
+0792: disembark_instantly_actor $ACTOR_CATALINA 
+Actor.PutAt($ACTOR_CATALINA, 2310.206, -15.8887, 25.7574)
+Actor.Angle($ACTOR_CATALINA) = 287.3674
+05D3: AS_actor $PLAYER_ACTOR goto_point 2315.412 -13.1812 25.75 mode 4 time 10000 ms // versionA 
+05D3: AS_actor $ACTOR_CATALINA goto_point 2316.619 -15.1198 25.75 mode 4 time 10000 ms // versionA 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 3000 
+55@ = 1 
+03C7: set_sensitivity_to_crime 0.2 
+41@ += 1 
+
+:CAT2_4115
+if 
+  41@ == 2 
+jf @CAT2_4469 
+if and
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+  560@ == 0 
+jf @CAT2_4469 
+03EB: clear_small_messages_only 
+Camera.SetPosition(2315.312, -13.8451, 27.6696, 0.0, 0.0, 0.0)
+Camera.PointAt(2315.771, -12.9906, 27.427, 2)
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.PutAt($PLAYER_ACTOR, 2315.412, -12.1812, 25.75)
+Actor.Angle($PLAYER_ACTOR) = 236.5262
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+0687: clear_actor $ACTOR_CATALINA task 
+Actor.PutAt($ACTOR_CATALINA, 2316.619, -15.1198, 25.75)
+Actor.Angle($ACTOR_CATALINA) = 242.0258
+Actor.LockInCurrentPosition($ACTOR_CATALINA) = True
+if 
+   not Actor.Dead(66@)
+jf @CAT2_4439 
+Actor.StorePos(66@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_1 += 2.7 
+041A: 71@ = actor $PLAYER_ACTOR weapon 25 ammo 
+if 
+  71@ == 0 
+jf @CAT2_4380 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Shotgun, 48)
+jump @CAT2_4407 
+
+:CAT2_4380
+if 
+  48 > 71@ 
+jf @CAT2_4407 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Shotgun, 48)
+
+:CAT2_4407
+0667: AS_actor $PLAYER_ACTOR aim_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 10000 ms 
+05C4: AS_actor 66@ hands_up 8000 ms 
+Actor.LockInCurrentPosition(66@) = True
+
+:CAT2_4439
+560@ = 3 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2000 
+41@ += 1 
+
+:CAT2_4469
+if 
+  41@ == 3 
+jf @CAT2_4680 
+if 
+  560@ == 0 
+jf @CAT2_4680 
+if 
+   not Actor.Dead(63@)
+jf @CAT2_4597 
+Actor.StorePos(63@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_1 += 2.7 
+$TEMPVAR_FLOAT_3 += 0.5 
+Actor.GiveWeaponAndAmmo($ACTOR_CATALINA, Shotgun, 9999)
+0667: AS_actor $ACTOR_CATALINA aim_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 10000 ms 
+Actor.LockInCurrentPosition(63@) = True
+05C4: AS_actor 63@ hands_up 8000 ms 
+
+:CAT2_4597
+03EB: clear_small_messages_only 
+Camera.SetPosition(2317.011, -17.3945, 27.4246, 0.0, 0.0, 0.0)
+Camera.PointAt(2317.248, -16.4244, 27.3736, 2)
+560@ = 4 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2500 
+41@ += 1 
+
+:CAT2_4680
+if 
+  41@ == 4 
+jf @CAT2_4749 
+if 
+  1 > 68@ 
+jf @CAT2_4749 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_4749 
+fade 0 500 
+41@ += 1 
+
+:CAT2_4749
+if 
+  41@ == 5 
+jf @CAT2_5253 
+if 
+  1 > 68@ 
+jf @CAT2_5253 
+if 
+   not fading 
+jf @CAT2_5253 
+03EB: clear_small_messages_only 
+Camera.SetPosition(2316.377, -11.0151, 28.6019, 0.0, 0.0, 0.0)
+Camera.PointAt(2315.613, -10.6059, 28.1029, 2)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2312.578, -7.4347, 25.75)
+Actor.Angle($PLAYER_ACTOR) = 126.7479
+0792: disembark_instantly_actor $ACTOR_CATALINA 
+Actor.PutAt($ACTOR_CATALINA, 2308.502, -3.912, 25.7422)
+Actor.Angle($ACTOR_CATALINA) = 81.0
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_4968 
+Actor.LockInCurrentPosition($ACTOR_CATALINA) = False
+05D3: AS_actor $ACTOR_CATALINA goto_point 2306.768 -4.5085 25.7422 mode 4 time -2 ms // versionA 
+
+:CAT2_4968
+if 
+   not Actor.Dead(66@)
+jf @CAT2_5034 
+0687: clear_actor 66@ task 
+Actor.PutAt(66@, 2310.546, -7.7439, 25.7422)
+Actor.Angle(66@) = 281.4267
+0639: AS_actor 66@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(66@) = True
+
+:CAT2_5034
+if 
+   not Actor.Dead(63@)
+jf @CAT2_5100 
+0687: clear_actor 63@ task 
+Actor.PutAt(63@, 2311.597, -9.1847, 25.7422)
+Actor.Angle(63@) = 314.501
+0639: AS_actor 63@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(63@) = True
+
+:CAT2_5100
+if 
+   not Actor.Dead(64@)
+jf @CAT2_5166 
+0687: clear_actor 64@ task 
+Actor.PutAt(64@, 2310.591, -9.3749, 25.7422)
+Actor.Angle(64@) = 323.1424
+0639: AS_actor 64@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(64@) = True
+
+:CAT2_5166
+if 
+   not Actor.Dead(65@)
+jf @CAT2_5232 
+0687: clear_actor 65@ task 
+Actor.PutAt(65@, 2309.61, -8.5556, 25.7422)
+Actor.Angle(65@) = 309.2547
+0639: AS_actor 65@ rotate_to_actor $PLAYER_ACTOR 
+Actor.LockInCurrentPosition(65@) = True
+
+:CAT2_5232
+04ED: load_animation "OTB" 
+fade 1 500 
+41@ += 1 
+
+:CAT2_5253
+if 
+  41@ == 6 
+jf @CAT2_5375 
+if 
+   not fading 
+jf @CAT2_5375 
+088D: set_objects_in_sphere 2312.578 -7.4347 25.75 radius 4.5 with_model #MAN_SAFENEW collision_detection 0 
+088D: set_objects_in_sphere 2312.578 -7.4347 25.75 radius 4.5 with_model #KEV_SAFE collision_detection 0 
+560@ = 5 
+561@ = 3 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 800 
+41@ += 1 
+
+:CAT2_5375
+if 
+  41@ == 7 
+jf @CAT2_5482 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_5482 
+if 
+   not Actor.Dead(63@)
+jf @CAT2_5452 
+Actor.StorePos(63@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 0.7 
+
+:CAT2_5452
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 800 
+41@ += 1 
+80@ = 0 
+
+:CAT2_5482
+if 
+  41@ == 8 
+jf @CAT2_6092 
+if 
+  80@ == 0 
+jf @CAT2_5849 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_5849 
+Camera.SetPosition(2314.602, -4.9551, 28.3779, 0.0, 0.0, 0.0)
+Camera.PointAt(2313.779, -5.363, 27.9827, 2)
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_5792 
+Actor.PutAt($ACTOR_CATALINA, 2306.666, -4.7944, 25.75)
+Actor.Angle($ACTOR_CATALINA) = 90.0
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 0 
+0615: define_AS_pack_begin 84@ 
+0605: actor -1 perform_animation "CAT_SAFE_OPEN" IFP "ROB_BANK" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time -2 
+0605: actor -1 perform_animation "CAT_SAFE_ROB" IFP "ROB_BANK" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time -2 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+075A: set_object 75@ animation "CAT_SAFE_OPEN_O" IFP_file "ROB_BANK" 1000.0 lockF 0 loop 1 // IF AND SET 
+
+:CAT2_5792
+80@ = 1 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+if 
+   not Actor.Dead(63@)
+jf @CAT2_5833 
+0635: AS_actor $PLAYER_ACTOR aim_at_actor 63@ 5500 ms 
+
+:CAT2_5833
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 800 
+
+:CAT2_5849
+if 
+  80@ == 1 
+jf @CAT2_6092 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_6092 
+if 
+   not Actor.Dead(66@)
+jf @CAT2_5910 
+05C4: AS_actor 66@ hands_up 8000 ms 
+
+:CAT2_5910
+if 
+   not Actor.Dead(63@)
+jf @CAT2_5963 
+0615: define_AS_pack_begin 84@ 
+05B9: AS_actor -1 stay_idle 250 ms 
+05C4: AS_actor -1 hands_up 8000 ms 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor 63@ to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+
+:CAT2_5963
+if 
+   not Actor.Dead(64@)
+jf @CAT2_6016 
+0615: define_AS_pack_begin 84@ 
+05B9: AS_actor -1 stay_idle 350 ms 
+05C4: AS_actor -1 hands_up 8000 ms 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor 64@ to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+
+:CAT2_6016
+if 
+   not Actor.Dead(65@)
+jf @CAT2_6069 
+0615: define_AS_pack_begin 84@ 
+05B9: AS_actor -1 stay_idle 850 ms 
+05C4: AS_actor -1 hands_up 8000 ms 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor 65@ to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+
+:CAT2_6069
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2000 
+41@ += 1 
+
+:CAT2_6092
+if 
+  41@ == 9 
+jf @CAT2_6615 
+if and
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+  560@ == 0 
+  559@ == 1 
+jf @CAT2_6615 
+if 
+83CA:   not object $2660 exists 
+jf @CAT2_6200 
+$2660 = Object.Init(#CR_DOOR_01, 2322.845, 8.304, 25.483)
+Object.RemoveFromMissionCleanupList($2660)
+Object.Indestructibility($2660) = False
+Object.KeepInMemory($2660) = True
+
+:CAT2_6200
+if 
+83CA:   not object $2661 exists 
+jf @CAT2_6267 
+$2661 = Object.Init(#CR_DOOR_01, 2316.233, 0.712, 25.742)
+Object.RemoveFromMissionCleanupList($2661)
+Object.Angle($2661) = 270.0
+Object.KeepInMemory($2661) = True
+Object.Indestructibility($2661) = False
+
+:CAT2_6267
+if 
+83CA:   not object $2662 exists 
+jf @CAT2_6324 
+$2662 = Object.Init(#CR_DOOR_03, 2304.257, -17.744, 25.742)
+Object.RemoveFromMissionCleanupList($2662)
+Object.KeepInMemory($2662) = True
+Object.Indestructibility($2662) = False
+
+:CAT2_6324
+if 
+83CA:   not object $2663 exists 
+jf @CAT2_6391 
+$2663 = Object.Init(#CR_DOOR_03, 2304.257, -14.583, 25.742)
+Object.RemoveFromMissionCleanupList($2663)
+Object.KeepInMemory($2663) = True
+Object.Angle($2663) = 180.0
+Object.Indestructibility($2663) = False
+
+:CAT2_6391
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Actor.LockInCurrentPosition($ACTOR_CATALINA) = False
+Player.CanMove($PLAYER_CHAR) = True
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'CAT2_05' time 4000 flag 1  // ~s~Point your gun at the staff to keep them scared and under control.
+00BB: show_text_lowpriority GXT 'CAT2_06' time 8000 flag 1  // ~s~Don't let them put their hands down or they may set off an alarm.
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0792: disembark_instantly_actor $ACTOR_CATALINA 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 0 
+0605: actor $ACTOR_CATALINA perform_animation "CAT_SAFE_ROB" IFP "ROB_BANK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 0 time -2 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2000 
+41@ += 1 
+81@ = 0.0015 
+088D: set_objects_in_sphere 2312.578 -7.4347 25.75 radius 4.5 with_model #MAN_SAFENEW collision_detection 1 
+088D: set_objects_in_sphere 2312.578 -7.4347 25.75 radius 4.5 with_model #KEV_SAFE collision_detection 1 
+
+:CAT2_6615
+if 
+  41@ > 9 
+jf @CAT2_8421 
+81@ += 2.5E-05 
+if 
+   not Actor.Dead(66@)
+jf @CAT2_7045 
+if 
+  41@ > 10 
+jf @CAT2_6728 
+062E: get_actor 66@ task 1506 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_6721 
+Actor.LockInCurrentPosition(66@) = False
+05E2: AS_actor 66@ kill_actor $PLAYER_ACTOR 
+
+:CAT2_6721
+jump @CAT2_7038 
+
+:CAT2_6728
+if and
+0457:   player $PLAYER_CHAR aiming_at_actor 66@ 
+82D8:   not actor $PLAYER_ACTOR current_weapon == 0 
+jf @CAT2_6771 
+0079: 57@ += frame_delta_time * 0.02 // (float) 
+jump @CAT2_6779 
+
+:CAT2_6771
+0081: 57@ -= frame_delta_time * 81@ // (float) 
+
+:CAT2_6779
+if 
+  57@ > 1.0 
+jf @CAT2_6810 
+57@ = 1.0 
+
+:CAT2_6810
+if 
+  0.0 > 57@ 
+jf @CAT2_6873 
+57@ = 0.0 
+if 
+  41@ == 10 
+jf @CAT2_6873 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_6873
+062E: get_actor 66@ task 1541 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_6956 
+0605: actor 66@ perform_animation "SHP_HANDSUP_SCR" IFP "ROB_BANK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+jump @CAT2_7038 
+
+:CAT2_6956
+if 
+   Actor.Animation(66@) == "SHP_HANDSUP_SCR"
+jf @CAT2_7038 
+0612: set_actor 66@ animation "SHP_HANDSUP_SCR" paused 0 
+0614: set_actor 66@ animation "SHP_HANDSUP_SCR" progress_to 57@ // 0.0 to 1.0 
+
+:CAT2_7038
+jump @CAT2_7082 
+
+:CAT2_7045
+if 
+  41@ == 10 
+jf @CAT2_7077 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_7077
+Actor.RemoveReferences(66@)
+
+:CAT2_7082
+if 
+   not Actor.Dead(63@)
+jf @CAT2_7486 
+if 
+  41@ > 10 
+jf @CAT2_7169 
+062E: get_actor 63@ task 1477 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_7162 
+Actor.LockInCurrentPosition(63@) = False
+05C5: AS_actor 63@ cower 1410065407 ms 
+
+:CAT2_7162
+jump @CAT2_7479 
+
+:CAT2_7169
+if and
+0457:   player $PLAYER_CHAR aiming_at_actor 63@ 
+82D8:   not actor $PLAYER_ACTOR current_weapon == 0 
+jf @CAT2_7212 
+0079: 58@ += frame_delta_time * 0.023 // (float) 
+jump @CAT2_7220 
+
+:CAT2_7212
+0081: 58@ -= frame_delta_time * 81@ // (float) 
+
+:CAT2_7220
+if 
+  58@ > 1.0 
+jf @CAT2_7251 
+58@ = 1.0 
+
+:CAT2_7251
+if 
+  0.0 > 58@ 
+jf @CAT2_7314 
+58@ = 0.0 
+if 
+  41@ == 10 
+jf @CAT2_7314 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_7314
+062E: get_actor 63@ task 1541 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_7397 
+0605: actor 63@ perform_animation "SHP_HANDSUP_SCR" IFP "ROB_BANK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+jump @CAT2_7479 
+
+:CAT2_7397
+if 
+   Actor.Animation(63@) == "SHP_HANDSUP_SCR"
+jf @CAT2_7479 
+0612: set_actor 63@ animation "SHP_HANDSUP_SCR" paused 0 
+0614: set_actor 63@ animation "SHP_HANDSUP_SCR" progress_to 58@ // 0.0 to 1.0 
+
+:CAT2_7479
+jump @CAT2_7523 
+
+:CAT2_7486
+if 
+  41@ == 10 
+jf @CAT2_7518 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_7518
+Actor.RemoveReferences(63@)
+
+:CAT2_7523
+if 
+   not Actor.Dead(64@)
+jf @CAT2_7927 
+if 
+  41@ > 10 
+jf @CAT2_7610 
+062E: get_actor 64@ task 1477 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_7603 
+Actor.LockInCurrentPosition(64@) = False
+05C5: AS_actor 64@ cower 1410065407 ms 
+
+:CAT2_7603
+jump @CAT2_7920 
+
+:CAT2_7610
+if and
+0457:   player $PLAYER_CHAR aiming_at_actor 64@ 
+82D8:   not actor $PLAYER_ACTOR current_weapon == 0 
+jf @CAT2_7653 
+0079: 59@ += frame_delta_time * 0.026 // (float) 
+jump @CAT2_7661 
+
+:CAT2_7653
+0081: 59@ -= frame_delta_time * 81@ // (float) 
+
+:CAT2_7661
+if 
+  59@ > 1.0 
+jf @CAT2_7692 
+59@ = 1.0 
+
+:CAT2_7692
+if 
+  0.0 > 59@ 
+jf @CAT2_7755 
+59@ = 0.0 
+if 
+  41@ == 10 
+jf @CAT2_7755 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_7755
+062E: get_actor 64@ task 1541 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_7838 
+0605: actor 64@ perform_animation "SHP_HANDSUP_SCR" IFP "ROB_BANK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+jump @CAT2_7920 
+
+:CAT2_7838
+if 
+   Actor.Animation(64@) == "SHP_HANDSUP_SCR"
+jf @CAT2_7920 
+0612: set_actor 64@ animation "SHP_HANDSUP_SCR" paused 0 
+0614: set_actor 64@ animation "SHP_HANDSUP_SCR" progress_to 59@ // 0.0 to 1.0 
+
+:CAT2_7920
+jump @CAT2_7964 
+
+:CAT2_7927
+if 
+  41@ == 10 
+jf @CAT2_7959 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_7959
+Actor.RemoveReferences(64@)
+
+:CAT2_7964
+if 
+   not Actor.Dead(65@)
+jf @CAT2_8368 
+if 
+  41@ > 10 
+jf @CAT2_8051 
+062E: get_actor 65@ task 1477 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_8044 
+Actor.LockInCurrentPosition(65@) = False
+05C5: AS_actor 65@ cower 1410065407 ms 
+
+:CAT2_8044
+jump @CAT2_8361 
+
+:CAT2_8051
+if and
+0457:   player $PLAYER_CHAR aiming_at_actor 65@ 
+82D8:   not actor $PLAYER_ACTOR current_weapon == 0 
+jf @CAT2_8094 
+0079: 60@ += frame_delta_time * 0.025 // (float) 
+jump @CAT2_8102 
+
+:CAT2_8094
+0081: 60@ -= frame_delta_time * 81@ // (float) 
+
+:CAT2_8102
+if 
+  60@ > 1.0 
+jf @CAT2_8133 
+60@ = 1.0 
+
+:CAT2_8133
+if 
+  0.0 > 60@ 
+jf @CAT2_8196 
+60@ = 0.0 
+if 
+  41@ == 10 
+jf @CAT2_8196 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_8196
+062E: get_actor 65@ task 1541 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_8279 
+0605: actor 65@ perform_animation "SHP_HANDSUP_SCR" IFP "ROB_BANK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+jump @CAT2_8361 
+
+:CAT2_8279
+if 
+   Actor.Animation(65@) == "SHP_HANDSUP_SCR"
+jf @CAT2_8361 
+0612: set_actor 65@ animation "SHP_HANDSUP_SCR" paused 0 
+0614: set_actor 65@ animation "SHP_HANDSUP_SCR" progress_to 60@ // 0.0 to 1.0 
+
+:CAT2_8361
+jump @CAT2_8421 
+
+:CAT2_8368
+if 
+  41@ == 10 
+jf @CAT2_8416 
+gosub @CAT2_30118 
+0085: 83@ = 32@ // (int) 
+83@ += 500 
+41@ = 11 
+
+:CAT2_8416
+Actor.RemoveReferences(65@)
+
+:CAT2_8421
+if 
+  560@ == 9 
+jf @CAT2_8635 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_8635 
+if 
+04EE:   animation "OTB" loaded 
+jf @CAT2_8628 
+062E: get_actor $ACTOR_CATALINA task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_8621 
+0687: clear_actor $ACTOR_CATALINA task 
+0615: define_AS_pack_begin 84@ 
+04EB: AS_actor -1 crouch 0 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0605: actor -1 perform_animation "WTCHRACE_CMON" IFP "OTB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "WTCHRACE_LOSE" IFP "OTB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0616: define_AS_pack_end 84@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 84@ 
+061B: remove_references_to_AS_pack 84@ 
+
+:CAT2_8621
+jump @CAT2_8635 
+
+:CAT2_8628
+04ED: load_animation "OTB" 
+
+:CAT2_8635
+if 
+  41@ == 11 
+jf @CAT2_8722 
+04EF: release_animation "ROB_BANK" 
+if 
+  56@ == 4 
+jf @CAT2_8722 
+if 
+   Actor.Dead(66@)
+jf @CAT2_8722 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2000 
+41@ += 1 
+
+:CAT2_8722
+if and
+  41@ == 12 
+  560@ == 0 
+jf @CAT2_8790 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_8790 
+fade 0 500 
+Model.Load(#COPCARRU)
+Model.Load(#COPBIKE)
+41@ += 1 
+
+:CAT2_8790
+if 
+  41@ == 13 
+jf @CAT2_9720 
+if and
+07C1:   path 116 available 
+07C1:   path 117 available 
+07C1:   path 118 available 
+07C1:   path 119 available 
+04EE:   animation "MISC" loaded 
+jf @CAT2_9689 
+if and
+   not fading 
+   Model.Available(#COPCARRU)
+   Model.Available(#COPBIKE)
+jf @CAT2_9672 
+04EF: release_animation "OTB" 
+04EF: release_animation "SHOP" 
+03EB: clear_small_messages_only 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+041D: set_camera_near_clip 0.1 
+018E: stop_sound 82@ 
+85@ = Car.Create(#COPCARRU, 2302.181, 6.6, 25.4766)
+Car.Angle(85@) = 90.0
+Car.DoorStatus(85@) = 3
+05EB: assign_car 85@ to_path 116 
+06FD: set_car 85@ speed_on_path_to 0.0 
+86@ = Car.Create(#COPBIKE, 2348.658, 5.906, 25.3359)
+Car.Angle(86@) = 359.5453
+05EB: assign_car 86@ to_path 117 
+06FD: set_car 86@ speed_on_path_to 0.0 
+87@ = Actor.CreateAsDriver(CivMale, #CSHER, 86@)
+060B: set_actor 87@ decision_maker_to 62@ 
+88@ = Car.Create(#COPBIKE, 2264.918, 37.519, 25.3359)
+Car.Angle(88@) = 268.8078
+05EB: assign_car 88@ to_path 118 
+06FD: set_car 88@ speed_on_path_to 0.0 
+89@ = Actor.CreateAsDriver(CivMale, #CSHER, 88@)
+060B: set_actor 89@ decision_maker_to 62@ 
+90@ = Car.Create(#COPCARRU, 2278.477, 89.2844, 25.3378)
+Car.Angle(90@) = 269.8063
+05EB: assign_car 90@ to_path 119 
+06FD: set_car 90@ speed_on_path_to 0.0 
+91@ = Actor.CreateAsDriver(CivMale, #CSHER, 90@)
+060B: set_actor 91@ decision_maker_to 62@ 
+0397: enable_car 90@ siren 1 
+92@ = Actor.Create(CivMale, #CSHER, 2328.564, 1.8673, 25.5693)
+Actor.Angle(92@) = 0.0
+0615: define_AS_pack_begin 43@ 
+0605: actor -1 perform_animation "SEAT_IDLE" IFP "PED" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 1 time 5000 
+0605: actor -1 perform_animation "SEAT_TALK_01" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 10000 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 92@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+94@ = Actor.Create(CivMale, #SWMYRI, 2336.679, -8.2464, 25.4766)
+Model.Destroy(#SWMYRI)
+05DC: AS_actor 94@ run_away_from_point 2336.399 -18.3093 25.4766 stop_at_radius 30.0 timelimit 8000 
+93@ = Actor.Create(CivMale, #CSHER, 2328.476, 2.3077, 25.5693)
+060B: set_actor 93@ decision_maker_to 62@ 
+Actor.Angle(93@) = 180.0
+0615: define_AS_pack_begin 43@ 
+0605: actor -1 perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time 9200 
+0605: actor -1 perform_animation "SEAT_TALK_02" IFP "MISC" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 1 time 0 
+0605: actor -1 perform_animation "SEAT_WATCH" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 10000 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 93@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+0085: 42@ = 32@ // (int) 
+42@ += 1000 
+41@ += 1 
+jump @CAT2_9682 
+
+:CAT2_9672
+Model.Load(#COPCARRU)
+Model.Load(#COPBIKE)
+
+:CAT2_9682
+jump @CAT2_9713 
+
+:CAT2_9689
+07C0: load_path 116 
+07C0: load_path 117 
+07C0: load_path 118 
+07C0: load_path 119 
+04ED: load_animation "MISC" 
+
+:CAT2_9713
+jump @CAT2_9876 
+
+:CAT2_9720
+if 
+  41@ == 15 
+jf @CAT2_9851 
+if 
+001D:   32@ > 42@ // (int) 
+jf @CAT2_9851 
+Camera.SetPosition(2327.583, 1.796, 26.5414, 0.0, 0.0, 0.0)
+Camera.PointAt(2328.538, 2.0688, 26.6612, 2)
+0A0B: set_rendering_origin_at_3D_coord 2328.538 2.0688 26.6612 angle 270.0 
+fade 1 500 
+68@ = -1 
+41@ += 1 
+
+:CAT2_9851
+if 
+  41@ == 14 
+jf @CAT2_9876 
+41@ += 1 
+
+:CAT2_9876
+if 
+  25 > 41@ 
+jf @CAT2_10654 
+if or
+  41@ > 15 
+  41@ == -1 
+jf @CAT2_10654 
+if 
+08D0:   should_skip_cutscene 
+jf @CAT2_9978 
+if 
+  68@ == 0 
+jf @CAT2_9971 
+fade 0 500 
+41@ = -1 
+68@ += 1 
+
+:CAT2_9971
+jump @CAT2_10003 
+
+:CAT2_9978
+if 
+  68@ == -1 
+jf @CAT2_10003 
+68@ += 1 
+
+:CAT2_10003
+if 
+  68@ == 1 
+jf @CAT2_10654 
+if 
+   not fading 
+jf @CAT2_10654 
+559@ = 5 
+if 
+   not Actor.Dead(92@)
+jf @CAT2_10158 
+0687: clear_actor 92@ task 
+Actor.GiveWeaponAndAmmo(92@, Shotgun, 9999)
+if 
+   Actor.Driving(92@)
+jf @CAT2_10115 
+0362: remove_actor 92@ from_car_and_place_at 2292.531 -19.1915 25.3437 
+jump @CAT2_10135 
+
+:CAT2_10115
+Actor.PutAt(92@, 2292.531, -19.1915, 25.3437)
+
+:CAT2_10135
+0667: AS_actor 92@ aim_at 2304.137 -16.591 27.276 15000 ms 
+
+:CAT2_10158
+if 
+   not Actor.Dead(93@)
+jf @CAT2_10275 
+0687: clear_actor 93@ task 
+Actor.GiveWeaponAndAmmo(93@, Shotgun, 9999)
+if 
+   Actor.Driving(93@)
+jf @CAT2_10232 
+0362: remove_actor 93@ from_car_and_place_at 2297.022 -19.6483 25.3359 
+jump @CAT2_10252 
+
+:CAT2_10232
+Actor.PutAt(93@, 2297.022, -19.6483, 25.3359)
+
+:CAT2_10252
+0667: AS_actor 93@ aim_at 2304.137 -16.591 27.276 15000 ms 
+
+:CAT2_10275
+if 
+   not Actor.Dead(87@)
+jf @CAT2_10379 
+0687: clear_actor 87@ task 
+Actor.GiveWeaponAndAmmo(87@, Shotgun, 9999)
+if 
+   Actor.Driving(87@)
+jf @CAT2_10349 
+0362: remove_actor 87@ from_car_and_place_at 2303.119 -13.7964 25.4766 
+jump @CAT2_10369 
+
+:CAT2_10349
+Actor.PutAt(87@, 2303.119, -13.7964, 25.4766)
+
+:CAT2_10369
+Actor.Angle(87@) = 119.4845
+
+:CAT2_10379
+if 
+   not Actor.Dead(89@)
+jf @CAT2_10496 
+0687: clear_actor 89@ task 
+Actor.GiveWeaponAndAmmo(89@, Shotgun, 9999)
+if 
+   Actor.Driving(89@)
+jf @CAT2_10453 
+0362: remove_actor 89@ from_car_and_place_at 2297.244 -16.8148 25.3328 
+jump @CAT2_10473 
+
+:CAT2_10453
+Actor.PutAt(89@, 2297.244, -16.8148, 25.3328)
+
+:CAT2_10473
+0667: AS_actor 89@ aim_at 2304.137 -16.591 27.276 15000 ms 
+
+:CAT2_10496
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_10517 
+06C5: release_car 85@ from_path 
+
+:CAT2_10517
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_10538 
+06C5: release_car 86@ from_path 
+
+:CAT2_10538
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_10559 
+06C5: release_car 88@ from_path 
+
+:CAT2_10559
+if 
+   not Car.Wrecked(90@)
+jf @CAT2_10640 
+06C5: release_car 90@ from_path 
+Car.PutAt(90@, 2288.757, -11.9521, 25.4766)
+Car.Angle(90@) = 142.4622
+Car.SetSpeedInstantly(90@, 0.0)
+07DB: set_car 90@ rotation_velocity_XYZ 0.0 0.0 0.0 through_center_of_mass 
+
+:CAT2_10640
+68@ += 1 
+41@ = 25 
+
+:CAT2_10654
+if 
+  41@ == 16 
+jf @CAT2_10728 
+if and
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+  560@ == 0 
+jf @CAT2_10728 
+560@ = 39 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 4000 
+41@ += 1 
+
+:CAT2_10728
+if 
+  41@ == 17 
+jf @CAT2_10836 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_10836 
+if 
+  560@ == 0 
+jf @CAT2_10836 
+0085: 626@ = 92@ // (int) 
+0085: 627@ = 93@ // (int) 
+$7248 = 1 
+560@ = 11 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2800 
+41@ += 1 
+
+:CAT2_10836
+if and
+  41@ == 18 
+  560@ == 0 
+jf @CAT2_10910 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_10910 
+560@ = 12 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 3500 
+41@ += 1 
+
+:CAT2_10910
+if and
+  41@ == 19 
+  560@ == 0 
+jf @CAT2_11193 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_11193 
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_11032 
+if 
+   not Actor.Dead(92@)
+jf @CAT2_11032 
+0687: clear_actor 92@ task 
+Actor.PutAt(92@, 2345.99, 5.6379, 25.3359)
+Actor.Angle(92@) = 276.5795
+05CB: AS_actor 92@ enter_car 85@ as_driver 5000 ms 
+
+:CAT2_11032
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_11112 
+if 
+   not Actor.Dead(93@)
+jf @CAT2_11112 
+0687: clear_actor 93@ task 
+Actor.PutAt(93@, 2349.073, 9.3357, 25.4766)
+Actor.Angle(93@) = 282.9661
+05CA: AS_actor 93@ enter_car 85@ passenger_seat 0 time 5000 
+
+:CAT2_11112
+03EB: clear_small_messages_only 
+Camera.SetPosition(2353.494, 10.2912, 29.0217, 0.0, 0.0, 0.0)
+Camera.PointAt(2352.723, 9.7997, 28.6169, 2)
+Actor.DestroyInstantly(94@)
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 1000 
+41@ += 1 
+
+:CAT2_11193
+if 
+  41@ == 20 
+jf @CAT2_11305 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_11305 
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_11256 
+06FD: set_car 86@ speed_on_path_to 1.0 
+
+:CAT2_11256
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_11282 
+06FD: set_car 88@ speed_on_path_to 1.0 
+
+:CAT2_11282
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2500 
+41@ += 1 
+
+:CAT2_11305
+if 
+  41@ == 21 
+jf @CAT2_11479 
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_11456 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_11449 
+06FD: set_car 85@ speed_on_path_to 1.0 
+0460: set_camera_transverse_delay 0.0 time 5500 
+Camera.SetPosition(2353.054, 12.14, 28.0091, 0.0, 0.0, 0.0)
+Camera.OnVehicle(85@, 15, 1)
+0397: enable_car 85@ siren 1 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 5500 
+41@ = 23 
+
+:CAT2_11449
+jump @CAT2_11479 
+
+:CAT2_11456
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 5500 
+41@ = 23 
+
+:CAT2_11479
+if 
+  41@ == 22 
+jf @CAT2_11622 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_11622 
+Camera.SetPosition(2297.562, 11.3784, 29.2857, 0.0, 0.0, 0.0)
+if 
+   not Car.Wrecked(90@)
+jf @CAT2_11580 
+Camera.OnVehicle(90@, 15, 2)
+jump @CAT2_11599 
+
+:CAT2_11580
+Camera.PointAt(2297.377, 12.3375, 29.071, 2)
+
+:CAT2_11599
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 6500 
+41@ += 1 
+
+:CAT2_11622
+if 
+  41@ == 23 
+jf @CAT2_12535 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_12535 
+560@ = 13 
+561@ = 3 
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_11894 
+if 
+060E:   car 85@ assigned_to_path 
+jf @CAT2_11894 
+05EC: release_car 85@ from_path 
+Car.PutAt(85@, 2297.266, -27.4791, 25.3359)
+Car.Angle(85@) = 23.0
+Car.SetSpeedInstantly(85@, 17.0)
+if 
+   not Actor.Dead(92@)
+jf @CAT2_11894 
+Actor.GiveWeaponAndAmmo(92@, Pistol, 9999)
+0615: define_AS_pack_begin 43@ 
+05D1: AS_actor -1 drive_car 85@ to 2295.612 -23.6996 25.3437 speed 17.0 1 model #NULL 3 
+06C7: AS_actor -1 driver_of_car 85@ perform_action 6 timelimit 1000 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2292.531 -19.1915 25.3437 mode 6 time 10000 ms // versionA 
+0667: AS_actor -1 aim_at 2304.137 -16.591 27.276 5000 ms 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 92@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_11894
+if 
+   not Actor.Dead(93@)
+jf @CAT2_12006 
+Actor.GiveWeaponAndAmmo(93@, Pistol, 9999)
+0615: define_AS_pack_begin 43@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2296.707 -15.3321 25.3279 mode 6 time 10000 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+0667: AS_actor -1 aim_at 2304.137 -16.591 27.276 5000 ms 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 93@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_12006
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_12214 
+if 
+060E:   car 86@ assigned_to_path 
+jf @CAT2_12214 
+05EC: release_car 86@ from_path 
+Car.PutAt(86@, 2305.835, -30.7209, 25.3382)
+Car.Angle(86@) = 33.0
+Car.SetSpeedInstantly(86@, 17.0)
+if 
+   not Actor.Dead(87@)
+jf @CAT2_12214 
+Actor.GiveWeaponAndAmmo(87@, Pistol, 9999)
+0615: define_AS_pack_begin 43@ 
+05D1: AS_actor -1 drive_car 86@ to 2302.19 -21.2635 25.4844 speed 17.0 1 model #NULL 3 
+06C7: AS_actor -1 driver_of_car 86@ perform_action 6 timelimit 1000 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2297.244 -16.8148 25.3328 mode 6 time 10000 ms // versionA 
+05D4: AS_actor -1 rotate_angle 291.4845 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 87@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_12214
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_12435 
+if 
+060E:   car 88@ assigned_to_path 
+jf @CAT2_12435 
+05EC: release_car 88@ from_path 
+Car.PutAt(88@, 2294.491, -2.6373, 25.3359)
+Car.Angle(88@) = 186.0
+Car.SetSpeedInstantly(88@, 17.0)
+if 
+   not Actor.Dead(89@)
+jf @CAT2_12435 
+Actor.GiveWeaponAndAmmo(89@, Pistol, 9999)
+0615: define_AS_pack_begin 43@ 
+05D1: AS_actor -1 drive_car 88@ to 2298.094 -10.0818 25.3285 speed 17.0 1 model #NULL 3 
+06C7: AS_actor -1 driver_of_car 88@ perform_action 6 timelimit 1000 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2303.119 -13.7964 25.4766 mode 6 time 10000 ms // versionA 
+0667: AS_actor -1 aim_at 2304.137 -16.591 27.276 5000 ms 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 89@ to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_12435
+if 
+   not Car.Wrecked(90@)
+jf @CAT2_12461 
+06FD: set_car 90@ speed_on_path_to 1.0 
+
+:CAT2_12461
+Camera.SetPosition(2288.577, -15.1784, 27.8832, 0.0, 0.0, 0.0)
+Camera.PointAt(2289.553, -15.2742, 27.6869, 2)
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 6000 
+41@ += 1 
+
+:CAT2_12535
+if and
+  41@ == 24 
+  560@ == 0 
+jf @CAT2_12598 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_12598 
+fade 0 500 
+Model.Load(#ENFORCER)
+41@ += 1 
+
+:CAT2_12598
+if 
+  41@ == 25 
+jf @CAT2_13093 
+if and
+   not fading 
+   Model.Available(#ENFORCER)
+jf @CAT2_13088 
+01E8: create_forbidden_for_cars_cube_cornerA 2344.518 36.1468 36.0359 cornerB 2269.718 -44.376 23.0569 
+04EF: release_animation "MISC" 
+04ED: load_animation "GANGS" 
+95@ = Car.Create(#ENFORCER, 2302.181, 6.6, 25.4766)
+Car.Angle(95@) = 90.0
+Car.LockInCurrentPosition(95@) = True
+96@ = Car.Create(#ENFORCER, 2337.9, 23.4, 25.4766)
+Car.Angle(96@) = 270.0
+Car.LockInCurrentPosition(96@) = True
+101@ = 0 
+
+:CAT2_12770
+if 
+  3 > 101@ 
+jf @CAT2_12872 
+97@(101@,4i) = 0 
+if 
+03CA:   object 72@(101@,4i) exists 
+jf @CAT2_12858 
+102@(101@,4i) = Marker.CreateAboveObject(72@(101@,4i))
+035D: set_object 76@(101@,4i) targetable 1 
+071F: set_object 76@(101@,4i) health_to 1000 
+
+:CAT2_12858
+101@ += 1 
+jump @CAT2_12770 
+
+:CAT2_12872
+if 
+   not Actor.Dead(94@)
+jf @CAT2_12893 
+Actor.RemoveReferences(94@)
+
+:CAT2_12893
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+if 
+   not Actor.Dead(92@)
+jf @CAT2_12954 
+Actor.DestroyInstantly(92@)
+
+:CAT2_12954
+if 
+   not Actor.Dead(93@)
+jf @CAT2_12975 
+Actor.DestroyInstantly(93@)
+
+:CAT2_12975
+if 
+   not Actor.Dead(87@)
+jf @CAT2_12996 
+Actor.DestroyInstantly(87@)
+
+:CAT2_12996
+if 
+   not Actor.Dead(89@)
+jf @CAT2_13017 
+Actor.DestroyInstantly(89@)
+
+:CAT2_13017
+Car.Destroy(85@)
+Car.Destroy(86@)
+Car.Destroy(88@)
+Car.Destroy(90@)
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+Actor.PutAt($ACTOR_CATALINA, 2312.208, -1.9564, 25.7422)
+Actor.Angle($ACTOR_CATALINA) = 199.0
+41@ += 1 
+jump @CAT2_13093 
+
+:CAT2_13088
+Model.Load(#ENFORCER)
+
+:CAT2_13093
+if 
+  41@ == 26 
+jf @CAT2_13241 
+if and
+   not fading 
+  559@ == 1 
+04EE:   animation "GANGS" loaded 
+jf @CAT2_13241 
+560@ = 16 
+561@ = 3 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_13213 
+0605: actor $ACTOR_CATALINA perform_animation "PRTIAL_GNGTLKB" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+
+:CAT2_13213
+Object.Indestructibility(76@) = False
+Object.Indestructibility(77@) = True
+Object.Indestructibility(78@) = True
+41@ += 1 
+
+:CAT2_13241
+if 
+  41@ == 27 
+jf @CAT2_14339 
+062E: get_actor $ACTOR_CATALINA task 1541 status_store_to 106@ // ret 7 if not found 
+if 
+04A4:   106@ == 7 // == constant 
+jf @CAT2_13317 
+if 
+04EE:   animation "GANGS" loaded 
+jf @CAT2_13317 
+04EF: release_animation "GANGS" 
+
+:CAT2_13317
+101@ = 0 
+
+:CAT2_13324
+if 
+  3 > 101@ 
+jf @CAT2_14153 
+if 
+03CA:   object 72@(101@,4i) exists 
+jf @CAT2_13690 
+if 
+  97@(101@,4i) == 0 
+jf @CAT2_13690 
+071E: get_object 76@(101@,4i) health_to 44@ 
+Object.StorePos(72@(101@,4i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 107@ = $TEMPVAR_FLOAT_1 // (float) 
+107@ -= 1.0 
+0089: 110@ = $TEMPVAR_FLOAT_1 // (float) 
+110@ += 1.0 
+0089: 108@ = $TEMPVAR_FLOAT_2 // (float) 
+108@ -= 1.0 
+0089: 111@ = $TEMPVAR_FLOAT_2 // (float) 
+111@ += 1.0 
+0089: 109@ = $TEMPVAR_FLOAT_3 // (float) 
+109@ -= 1.0 
+0089: 112@ = $TEMPVAR_FLOAT_3 // (float) 
+112@ += 1.0 
+if 
+0356:   explosion_type -1 in_cube_cornerA 107@ 108@ 109@ cornerB 110@ 111@ 112@ 
+jf @CAT2_13573 
+071F: set_object 113@(101@,4i) health_to 0 
+44@ = 0 
+
+:CAT2_13573
+if 
+  500 > 44@ 
+jf @CAT2_13690 
+46@ = Object.Angle(72@(101@,4i))
+0723: break_object 72@(101@,4i) intensity 1 
+Object.PutAt(113@(101@,4i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0750: set_object 113@(101@,4i) visibility 1 
+Object.Angle(113@(101@,4i)) = 46@
+Object.CollisionDetection(113@(101@,4i)) = False
+071F: set_object 113@(101@,4i) health_to 150 
+97@(101@,4i) += 1 
+
+:CAT2_13690
+if 
+03CA:   object 113@(101@,4i) exists 
+jf @CAT2_14068 
+if 
+  97@(101@,4i) == 1 
+jf @CAT2_14068 
+071E: get_object 76@(101@,4i) health_to 44@ 
+if 
+  1 > 44@ 
+jf @CAT2_14068 
+Marker.Disable(102@(101@,4i))
+Object.Destroy(76@(101@,4i))
+if 
+  101@ == 0 
+jf @CAT2_13838 
+76@ = Object.Init(#KMB_ATM3, 2310.367, -17.0, 26.414)
+Object.Indestructibility(76@) = False
+Object.Angle(76@) = 180.0
+
+:CAT2_13838
+if 
+  101@ == 1 
+jf @CAT2_13896 
+77@ = Object.Init(#KMB_ATM3, 2313.689, -17.0, 26.414)
+Object.Indestructibility(77@) = False
+Object.Angle(77@) = 180.0
+
+:CAT2_13896
+if 
+  101@ == 2 
+jf @CAT2_13944 
+78@ = Object.Init(#KMB_ATM3, 2313.318, -0.1206, 26.414)
+Object.Indestructibility(78@) = False
+
+:CAT2_13944
+Object.RemoveReferences(72@(101@,4i))
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 113@(101@,4i) with_offset 0.0 -1.0 0.0 
+035D: set_object 76@(101@,4i) targetable 0 
+0750: set_object 76@(101@,4i) visibility 1 
+0723: break_object 113@(101@,4i) intensity 0 
+02E1: 117@(101@,4i) = create_cash_pickup 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 permanence_flag 1 
+03DC: 102@(101@,4i) = create_marker_above_pickup 117@(101@,4i) 
+97@(101@,4i) += 1 
+
+:CAT2_14068
+if 
+  97@(101@,4i) == 2 
+jf @CAT2_14139 
+if 
+   Pickup.Picked_up(117@(101@,4i))
+jf @CAT2_14139 
+Object.RemoveReferences(113@(101@,4i))
+Marker.Disable(102@(101@,4i))
+97@(101@,4i) += 1 
+
+:CAT2_14139
+101@ += 1 
+jump @CAT2_13324 
+
+:CAT2_14153
+if and
+  97@ == 3 
+  98@ == 3 
+  99@ == 3 
+jf @CAT2_14339 
+Object.Indestructibility($2661) = True
+41@ += 1 
+if 
+   not Actor.Dead(92@)
+jf @CAT2_14224 
+077A: set_actor 92@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:CAT2_14224
+if 
+   not Actor.Dead(93@)
+jf @CAT2_14249 
+077A: set_actor 93@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:CAT2_14249
+if 
+   not Actor.Dead(87@)
+jf @CAT2_14274 
+077A: set_actor 87@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:CAT2_14274
+if 
+   not Actor.Dead(89@)
+jf @CAT2_14299 
+077A: set_actor 89@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:CAT2_14299
+01E7: remove_forbidden_for_cars_cube_cornerA 2344.518 36.1468 36.0359 cornerB 2269.718 -44.376 23.0569 
+060B: set_actor $ACTOR_CATALINA decision_maker_to 38@ 
+
+:CAT2_14339
+if 
+  41@ == 28 
+jf @CAT2_14392 
+Model.Destroy(#KMB_ATM1)
+Model.Destroy(#KMB_ATM2)
+Model.Destroy(#KMB_ATM3)
+Model.Destroy(#MTSAFE)
+Model.Destroy(#CR_DOOR_01)
+Model.Destroy(#CR_DOOR_03)
+41@ = 29 
+
+:CAT2_14392
+if 
+  41@ == 31 
+jf @CAT2_14967 
+if and
+07C1:   path 123 available 
+07C1:   path 124 available 
+jf @CAT2_14959 
+if 
+  344@ == 10 
+jf @CAT2_14952 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT2_14952 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2315.558 70.7181 31.4998 radius 11.4 8.4 6.0 
+jf @CAT2_14952 
+0708: reset_decision_maker 38@ event 36 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+0395: clear_area 1 at 2321.218 69.1035 26.7314 radius 25.0 
+Camera.SetPosition(2324.899, 66.4572, 25.8911, 0.0, 0.0, 0.0)
+Camera.PointAt(2324.192, 67.157, 25.9911, 2)
+Car.Destroy(86@)
+Car.Destroy(88@)
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(89@)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_14685 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2319.793 61.6571 25.4769 
+jump @CAT2_14705 
+
+:CAT2_14685
+Actor.PutAt($PLAYER_ACTOR, 2319.793, 61.6571, 25.4769)
+
+:CAT2_14705
+Actor.Angle($PLAYER_ACTOR) = 5.0
+06C9: remove_actor $ACTOR_CATALINA from_group 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_14763 
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at 2318.242 61.3145 25.4759 
+jump @CAT2_14783 
+
+:CAT2_14763
+Actor.PutAt($ACTOR_CATALINA, 2318.242, 61.3145, 25.4759)
+
+:CAT2_14783
+Actor.Angle($ACTOR_CATALINA) = 350.0
+86@ = Car.Create(#COPBIKE, 2287.156, 61.9821, 25.4766)
+Car.Angle(86@) = 322.7361
+87@ = Actor.CreateAsDriver(CivMale, #CSHER, 86@)
+060B: set_actor 87@ decision_maker_to 62@ 
+05EB: assign_car 86@ to_path 123 
+Car.SetImmunities(86@, 1, 1, 1, 1, 1)
+88@ = Car.Create(#COPBIKE, 2289.629, 58.0551, 25.3359)
+Car.Angle(88@) = 330.5475
+Car.SetImmunities(88@, 1, 1, 1, 1, 1)
+89@ = Actor.CreateAsDriver(CivMale, #CSHER, 88@)
+060B: set_actor 89@ decision_maker_to 62@ 
+05EB: assign_car 88@ to_path 124 
+41@ += 1 
+
+:CAT2_14952
+jump @CAT2_14967 
+
+:CAT2_14959
+07C0: load_path 123 
+07C0: load_path 124 
+
+:CAT2_14967
+if 
+  41@ == 32 
+jf @CAT2_15059 
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_15059 
+if 
+860E:   not car 86@ assigned_to_path 
+jf @CAT2_15059 
+if 
+   not Actor.Dead(87@)
+jf @CAT2_15059 
+0918: set_car 86@ engine_operation 0 
+0633: AS_actor 87@ exit_car 
+Car.LockInCurrentPosition(86@) = True
+41@ += 1 
+
+:CAT2_15059
+if and
+  41@ == 33 
+  560@ == 0 
+jf @CAT2_15165 
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_15165 
+if 
+860E:   not car 88@ assigned_to_path 
+jf @CAT2_15165 
+if 
+   not Actor.Dead(89@)
+jf @CAT2_15165 
+0633: AS_actor 89@ exit_car 
+0918: set_car 88@ engine_operation 0 
+Car.LockInCurrentPosition(88@) = True
+fade 0 500 
+41@ += 1 
+
+:CAT2_15165
+if 
+  41@ == 34 
+jf @CAT2_15250 
+if 
+   not fading 
+jf @CAT2_15250 
+560@ = 29 
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+41@ += 1 
+
+:CAT2_15250
+if 
+  41@ == 35 
+jf @CAT2_15408 
+if 
+   not fading 
+jf @CAT2_15408 
+if 
+   not Actor.Dead(87@)
+jf @CAT2_15322 
+Actor.GiveWeaponAndAmmo(87@, Pistol, 9999)
+05E2: AS_actor 87@ kill_actor $PLAYER_ACTOR 
+02A9: set_actor 87@ immune_to_nonplayer 1 
+
+:CAT2_15322
+if 
+   not Actor.Dead(89@)
+jf @CAT2_15363 
+Actor.GiveWeaponAndAmmo(89@, Shotgun, 9999)
+05E2: AS_actor 89@ kill_actor $PLAYER_ACTOR 
+02A9: set_actor 89@ immune_to_nonplayer 1 
+
+:CAT2_15363
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_15401 
+0668: AS_actor $ACTOR_CATALINA rotate_and_shoot_at 2322.183 71.2342 26.549 -2 ms 
+
+:CAT2_15401
+41@ += 1 
+
+:CAT2_15408
+if and
+  41@ == 36 
+  560@ == 0 
+jf @CAT2_15490 
+if 
+   not fading 
+jf @CAT2_15490 
+if and
+   Actor.Dead(87@)
+   Actor.Dead(89@)
+jf @CAT2_15490 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 750 
+41@ += 1 
+
+:CAT2_15490
+if 
+  41@ == 37 
+jf @CAT2_15541 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_15541 
+fade 0 500 
+41@ += 1 
+
+:CAT2_15541
+if 
+  38 > 41@ 
+jf @CAT2_15559 
+
+:CAT2_15559
+if 
+  41@ == 38 
+jf @CAT2_16307 
+if 
+   not fading 
+jf @CAT2_16307 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+0395: clear_area 1 at 2321.218 69.1035 26.7314 radius 25.0 
+Camera.SetPosition(2325.291, 70.4759, 26.8236, 0.0, 0.0, 0.0)
+Camera.PointAt(2324.353, 70.7834, 26.6641, 2)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_CATALINA 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_15747 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2322.075 69.6739 25.4784 
+jump @CAT2_15767 
+
+:CAT2_15747
+Actor.PutAt($PLAYER_ACTOR, 2322.075, 69.6739, 25.4784)
+
+:CAT2_15767
+Actor.Angle($PLAYER_ACTOR) = 325.1885
+06C9: remove_actor $ACTOR_CATALINA from_group 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_15825 
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at 2321.63 71.6478 25.4724 
+jump @CAT2_15845 
+
+:CAT2_15825
+Actor.PutAt($ACTOR_CATALINA, 2321.63, 71.6478, 25.4724)
+
+:CAT2_15845
+Actor.Angle($ACTOR_CATALINA) = 295.8968
+Car.Destroy(86@)
+Car.Destroy(88@)
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(89@)
+if 
+   not Car.Wrecked(95@)
+jf @CAT2_15896 
+Car.RemoveReferences(95@)
+
+:CAT2_15896
+if 
+   not Car.Wrecked(96@)
+jf @CAT2_15917 
+Car.RemoveReferences(96@)
+
+:CAT2_15917
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_15938 
+Car.RemoveReferences(85@)
+
+:CAT2_15938
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_15959 
+Car.RemoveReferences(86@)
+
+:CAT2_15959
+0395: clear_area 1 at 2320.634 79.9329 27.9897 radius 100.0 
+86@ = Car.Create(#COPBIKE, 2322.863, 73.0477, 26.0378)
+Car.Angle(86@) = 34.6853
+88@ = Car.Create(#COPBIKE, 2323.166, 70.1374, 26.0405)
+Car.Angle(88@) = 345.7562
+0615: define_AS_pack_begin 43@ 
+05BA: AS_actor -1 move_mouth 750 ms 
+05CB: AS_actor -1 enter_car 86@ as_driver -2 ms 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+0615: define_AS_pack_begin 43@ 
+05BA: AS_actor -1 move_mouth 500 ms 
+05CB: AS_actor -1 enter_car 88@ as_driver -2 ms 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+Object.RemoveReferences(113@)
+Object.RemoveReferences(114@)
+Object.RemoveReferences(115@)
+Object.RemoveReferences(72@)
+Object.RemoveReferences(73@)
+Object.RemoveReferences(74@)
+Object.RemoveReferences(75@)
+Object.RemoveReferences(76@)
+Object.RemoveReferences(77@)
+Object.RemoveReferences(78@)
+Object.RemoveReferences(70@)
+Actor.RemoveReferences(63@)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(298@)
+Actor.RemoveReferences(299@)
+Actor.RemoveReferences(300@)
+Actor.RemoveReferences(301@)
+Actor.RemoveReferences(302@)
+Actor.RemoveReferences(303@)
+Actor.RemoveReferences(304@)
+Actor.RemoveReferences(305@)
+Actor.RemoveReferences(306@)
+fade 1 500 
+008B: 42@ = $CURRENT_TIME_IN_MS2 // (int) 
+42@ += 2500 
+41@ += 1 
+560@ = 30 
+561@ = 2 
+0085: 634@ = 32@ // (int) 
+634@ += 400 
+
+:CAT2_16307
+if 
+  41@ == 39 
+jf @CAT2_16421 
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_16407 
+if 
+0448:   actor $ACTOR_CATALINA in_car 86@ 
+jf @CAT2_16400 
+if and
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+  560@ == 0 
+jf @CAT2_16400 
+fade 0 500 
+41@ += 1 
+
+:CAT2_16400
+jump @CAT2_16421 
+
+:CAT2_16407
+fade 0 500 
+41@ += 1 
+
+:CAT2_16421
+if 
+  41@ == 40 
+jf @CAT2_17517 
+if and
+07C1:   path 156 available 
+07C1:   path 157 available 
+07C1:   path 158 available 
+07C1:   path 159 available 
+jf @CAT2_17497 
+if and
+07C1:   path 160 available 
+07C1:   path 161 available 
+jf @CAT2_17480 
+if 
+   not fading 
+jf @CAT2_17473 
+Player.CanMove($PLAYER_CHAR) = True
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+122@ = Car.Create(#COPCARRU, 1307.095, 280.2934, 18.4062)
+123@ = Car.Create(#COPCARRU, 1307.095, 290.2934, 18.4062)
+124@ = Car.Create(#COPCARRU, 1307.095, 300.2934, 18.4062)
+Car.LockInCurrentPosition(122@) = True
+Car.LockInCurrentPosition(123@) = True
+Car.LockInCurrentPosition(124@) = True
+146@ = Car.Create(#COPBIKE, 2346.523, 62.9803, 25.3359)
+147@ = Car.Create(#COPBIKE, 2346.682, 45.9405, 25.3359)
+129@ = Actor.CreateAsDriver(Mission2, #CSHER, 122@)
+130@ = Actor.CreateAsPassenger(Mission2, #CSHER, 122@, 0)
+131@ = Actor.CreateAsDriver(Mission2, #CSHER, 123@)
+132@ = Actor.CreateAsPassenger(Mission2, #CSHER, 123@, 0)
+133@ = Actor.CreateAsDriver(Mission2, #CSHER, 124@)
+134@ = Actor.CreateAsPassenger(Mission2, #CSHER, 124@, 0)
+135@ = Actor.CreateAsDriver(Mission3, #CSHER, 146@)
+136@ = Actor.CreateAsDriver(Mission3, #CSHER, 147@)
+077A: set_actor 135@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 136@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+07E5: copy_decision_maker 65539 to 166@ 
+07E5: copy_decision_maker 65542 to 363@ 
+0708: reset_decision_maker 166@ event 15 
+0708: reset_decision_maker 166@ event 49 
+0708: reset_decision_maker 166@ event 9 
+0708: reset_decision_maker 166@ event 36 
+0708: reset_decision_maker 166@ event 31 
+0708: reset_decision_maker 166@ event 11 
+0708: reset_decision_maker 166@ event 41 
+0709: set_decision_maker 166@ on_event 15 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 100.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 166@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 166@ on_event 9 taskID 1000 respect 0.0 hate 75.0 like 0.0 dislike 75.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 166@ on_event 9 taskID 415 respect 0.0 hate 25.0 like 0.0 dislike 25.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 166@ on_event 31 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 166@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+060B: set_actor 129@ decision_maker_to 363@ 
+060B: set_actor 130@ decision_maker_to 363@ 
+060B: set_actor 131@ decision_maker_to 363@ 
+060B: set_actor 132@ decision_maker_to 363@ 
+060B: set_actor 133@ decision_maker_to 363@ 
+060B: set_actor 134@ decision_maker_to 363@ 
+060B: set_actor 135@ decision_maker_to 363@ 
+060B: set_actor 136@ decision_maker_to 363@ 
+08C6: set_actor 135@ stay_on_bike 2 
+08C6: set_actor 136@ stay_on_bike 2 
+Actor.GiveWeaponAndAmmo(129@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(130@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(131@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(132@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(133@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(134@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(135@, Pistol, 9999)
+Actor.GiveWeaponAndAmmo(136@, Pistol, 9999)
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_17258 
+Actor.GiveWeaponAndAmmo($ACTOR_CATALINA, Shotgun, 9999)
+
+:CAT2_17258
+148@ = 1290.025 
+149@ = 1294.242 
+150@ = 1282.681 
+151@ = 1285.585 
+152@ = 1289.389 
+153@ = 1285.593 
+154@ = 252.8313 
+155@ = 249.3508 
+156@ = 250.9628 
+157@ = 253.8959 
+158@ = 241.5564 
+159@ = 240.6378 
+160@ = 18.4062 
+161@ = 18.4062 
+162@ = 18.4062 
+163@ = 18.4062 
+164@ = 18.4062 
+165@ = 18.4062 
+121@ = 0 
+125@ = 0 
+126@ = 0 
+fade 1 500 
+41@ += 1 
+
+:CAT2_17473
+jump @CAT2_17490 
+
+:CAT2_17480
+07C0: load_path 160 
+07C0: load_path 161 
+
+:CAT2_17490
+jump @CAT2_17517 
+
+:CAT2_17497
+07C0: load_path 156 
+07C0: load_path 157 
+07C0: load_path 158 
+07C0: load_path 159 
+
+:CAT2_17517
+if 
+  41@ == 41 
+jf @CAT2_17571 
+if 
+   not fading 
+jf @CAT2_17571 
+56@ = 8 
+077A: set_actor $ACTOR_CATALINA acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+41@ += 1 
+
+:CAT2_17571
+if 
+  41@ > 9 
+jf @CAT2_17633 
+if 
+  56@ == 0 
+jf @CAT2_17633 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 42@ // (int) 
+jf @CAT2_17633 
+56@ += 1 
+
+:CAT2_17633
+if 
+  56@ == 1 
+jf @CAT2_17687 
+062E: get_actor $ACTOR_CATALINA task 1491 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_17687 
+56@ += 1 
+
+:CAT2_17687
+if 
+  56@ == 2 
+jf @CAT2_17757 
+062E: get_actor $ACTOR_CATALINA task 1492 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_17757 
+008B: 167@ = $CURRENT_TIME_IN_MS2 // (int) 
+167@ += 20000 
+56@ += 1 
+
+:CAT2_17757
+if 
+  56@ == 3 
+jf @CAT2_17867 
+168@ += 15 
+if or
+001E:   $CURRENT_TIME_IN_MS2 > 167@ // (int) 
+  41@ > 10 
+jf @CAT2_17867 
+if 
+  41@ == 10 
+jf @CAT2_17860 
+097A: play_audio_at 2312.094 -9.6433 28.679 event 1155 
+gosub @CAT2_30118 
+41@ = 11 
+
+:CAT2_17860
+56@ += 1 
+
+:CAT2_17867
+if 
+  56@ == 4 
+jf @CAT2_18239 
+if 
+  41@ > 27 
+jf @CAT2_18239 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_18239 
+if and
+  169@ == 0 
+  560@ == 0 
+jf @CAT2_18004 
+560@ = 19 
+561@ = 2 
+372@ = Marker.CreateAboveActor($ACTOR_CATALINA)
+07E0: set_marker 372@ type_to 1 
+05D3: AS_actor $ACTOR_CATALINA goto_point 2315.391 -1.6768 25.75 mode 6 time -2 ms // versionA 
+169@ = 1 
+
+:CAT2_18004
+if 
+  169@ == 1 
+jf @CAT2_18117 
+062E: get_actor $ACTOR_CATALINA task -1 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_18117 
+if 
+8366:   not object $2661 damaged 
+jf @CAT2_18110 
+169@ = 2 
+0668: AS_actor $ACTOR_CATALINA rotate_and_shoot_at 2315.475 1.0941 26.8796 1000 ms 
+170@ += 1 
+jump @CAT2_18117 
+
+:CAT2_18110
+169@ = 2 
+
+:CAT2_18117
+if 
+  169@ == 2 
+jf @CAT2_18239 
+062E: get_actor $ACTOR_CATALINA task 1640 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @CAT2_18239 
+if or
+0366:   object $2661 damaged 
+  170@ > 2 
+jf @CAT2_18232 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2315.51 3.1256 25.4844 mode 6 time -2 
+169@ = 3 
+56@ += 1 
+jump @CAT2_18239 
+
+:CAT2_18232
+169@ = 1 
+
+:CAT2_18239
+if 
+  34@ == 0 
+jf @CAT2_18376 
+if 
+  56@ > 4 
+jf @CAT2_18376 
+if and
+  35@ == 0 
+  560@ == 0 
+jf @CAT2_18323 
+00BB: show_text_lowpriority GXT 'CAT2_19' time 4000 flag 1  // ~s~Follow ~b~Catalina~s~.
+35@ = 1 
+
+:CAT2_18323
+if 
+0366:   object $2661 damaged 
+jf @CAT2_18376 
+34@ = 1 
+560@ = 21 
+0085: 639@ = 32@ // (int) 
+639@ += 2500 
+561@ = 3 
+
+:CAT2_18376
+if 
+  56@ == 5 
+jf @CAT2_20195 
+171@ = 2328.638 
+189@ = 9.9046 
+207@ = 25.4766 
+225@ = 82.0 
+251@ = 1 
+172@ = 2328.63 
+190@ = 12.0793 
+208@ = 26.4366 
+226@ = 102.156 
+252@ = 1 
+173@ = 2323.539 
+191@ = 8.1573 
+209@ = 30.1564 
+227@ = 119.8251 
+253@ = 0 
+174@ = 2313.919 
+192@ = 5.5612 
+210@ = 25.4766 
+228@ = 179.0108 
+254@ = 3 
+175@ = 2319.28 
+193@ = 10.1457 
+211@ = 25.4766 
+229@ = 173.7026 
+255@ = 1 
+176@ = 2322.422 
+194@ = 14.3559 
+212@ = 33.4834 
+230@ = 131.5315 
+256@ = 0 
+177@ = 2322.567 
+195@ = 22.3196 
+213@ = 25.4766 
+231@ = 191.9916 
+257@ = 5 
+178@ = 2317.422 
+196@ = 31.4408 
+214@ = 25.4688 
+232@ = 170.5408 
+258@ = 1 
+179@ = 2323.347 
+197@ = 32.5086 
+215@ = 30.3438 
+233@ = 167.5312 
+259@ = 2 
+180@ = 2314.06 
+198@ = 27.4771 
+216@ = 28.4834 
+234@ = 211.9221 
+260@ = 0 
+181@ = 2314.146 
+199@ = 32.6897 
+217@ = 30.3072 
+235@ = 218.8303 
+261@ = 0 
+182@ = 2324.323 
+200@ = 25.9529 
+218@ = 30.4834 
+236@ = 146.7435 
+262@ = 0 
+183@ = 2315.235 
+201@ = 44.7149 
+219@ = 27.6529 
+237@ = 177.4772 
+263@ = 1 
+184@ = 2322.142 
+202@ = 38.0272 
+220@ = 25.4698 
+238@ = 165.042 
+264@ = 5 
+185@ = 2316.281 
+203@ = 53.245 
+221@ = 25.4745 
+239@ = 211.6924 
+265@ = 3 
+186@ = 2316.977 
+204@ = 60.9693 
+222@ = 26.9906 
+240@ = 217.9312 
+266@ = 0 
+187@ = 2322.69 
+205@ = 57.5449 
+223@ = 31.9884 
+241@ = 174.0596 
+267@ = 0 
+188@ = 2313.39 
+206@ = 51.5349 
+224@ = 29.4834 
+242@ = 196.6579 
+268@ = 0 
+278@ = 0 
+
+:CAT2_19247
+if 
+  9 > 278@ 
+jf @CAT2_20165 
+if 
+  3 > 278@ 
+jf @CAT2_19353 
+0209: 279@ = random_int_in_ranges 0 6 
+
+:CAT2_19292
+if 
+  280@(279@,18i) == 1 
+jf @CAT2_19353 
+279@ += 1 
+if 
+  279@ == 6 
+jf @CAT2_19346 
+279@ = 0 
+
+:CAT2_19346
+jump @CAT2_19292 
+
+:CAT2_19353
+if and
+  278@ > 2 
+  6 > 278@ 
+jf @CAT2_19448 
+0209: 279@ = random_int_in_ranges 6 12 
+
+:CAT2_19387
+if 
+  280@(279@,18i) == 1 
+jf @CAT2_19448 
+279@ += 1 
+if 
+  279@ == 12 
+jf @CAT2_19441 
+279@ = 6 
+
+:CAT2_19441
+jump @CAT2_19387 
+
+:CAT2_19448
+if and
+  278@ > 5 
+  9 > 278@ 
+jf @CAT2_19543 
+0209: 279@ = random_int_in_ranges 12 18 
+
+:CAT2_19482
+if 
+  280@(279@,18i) == 1 
+jf @CAT2_19543 
+279@ += 1 
+if 
+  279@ == 18 
+jf @CAT2_19536 
+279@ = 12 
+
+:CAT2_19536
+jump @CAT2_19482 
+
+:CAT2_19543
+280@(279@,18i) = 1 
+0085: 316@(279@,18i) = 278@ // (int) 
+298@(278@,9i) = Actor.Create(CivMale, #CSHER, 171@(279@,18f), 189@(279@,18f), 207@(279@,18f))
+07DD: set_actor 298@(278@,9i) attack_rate 40 // previously known as temper_to 
+Actor.WeaponAccuracy(298@(278@,9i)) = 60
+0085: 307@(278@,9i) = 251@(279@,18i) // (int) 
+0085: 334@(278@,9i) = 279@ // (int) 
+Actor.Angle(298@(278@,9i)) = 225@(279@,18f)
+0209: 279@ = random_int_in_ranges 0 3 
+if or
+  3 > 279@ 
+  343@ > 0 
+jf @CAT2_19722 
+Actor.GiveWeaponAndAmmo(298@(278@,9i), Pistol, 9999)
+jump @CAT2_19797 
+
+:CAT2_19722
+if 
+  6 > 334@(278@,9i) 
+jf @CAT2_19765 
+Actor.GiveWeaponAndAmmo(298@(278@,9i), Pistol, 9999)
+jump @CAT2_19797 
+
+:CAT2_19765
+Actor.GiveWeaponAndAmmo(298@(278@,9i), Shotgun, 9999)
+07DD: set_actor 298@(278@,9i) attack_rate 10 // previously known as temper_to 
+343@ = 1 
+
+:CAT2_19797
+077A: set_actor 298@(278@,9i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 298@(278@,9i) acquaintance 4 to_actors_pedtype 23 // see ped.dat 
+if 
+  251@(279@,18i) == 0 
+jf @CAT2_19902 
+0615: define_AS_pack_begin 43@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 298@(278@,9i) to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+0350: set_actor 298@(278@,9i) maintain_position_when_attacked 1 
+
+:CAT2_19902
+if 
+  251@(279@,18i) == 1 
+jf @CAT2_19974 
+0615: define_AS_pack_begin 43@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 298@(278@,9i) to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+0350: set_actor 298@(278@,9i) maintain_position_when_attacked 1 
+
+:CAT2_19974
+if 
+  251@(279@,18i) == 2 
+jf @CAT2_20029 
+0615: define_AS_pack_begin 43@ 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 298@(278@,9i) to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_20029
+if 
+  251@(279@,18i) == 3 
+jf @CAT2_20090 
+0615: define_AS_pack_begin 43@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 298@(278@,9i) to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_20090
+if 
+  251@(279@,18i) == 5 
+jf @CAT2_20151 
+0615: define_AS_pack_begin 43@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 43@ 
+0618: assign_actor 298@(278@,9i) to_AS_pack 43@ 
+061B: remove_references_to_AS_pack 43@ 
+
+:CAT2_20151
+278@ += 1 
+jump @CAT2_19247 
+
+:CAT2_20165
+346@ = 99 
+0085: 350@ = 32@ // (int) 
+350@ += 30000 
+56@ = 6 
+
+:CAT2_20195
+if 
+  56@ == 6 
+jf @CAT2_23402 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_23402 
+if 
+   not 346@ == 99 
+jf @CAT2_20387 
+if 
+   Actor.Dead(298@(346@,9i))
+jf @CAT2_20297 
+0085: 278@ = 334@(346@,9i) // (int) 
+280@(278@,18i) = 0 
+346@ = 99 
+
+:CAT2_20297
+if 
+001D:   32@ > 350@ // (int) 
+jf @CAT2_20387 
+if 
+   not 346@ == 99 
+jf @CAT2_20387 
+0085: 350@ = 32@ // (int) 
+350@ += 30000 
+347@ = 1 
+0085: 278@ = 334@(346@,9i) // (int) 
+280@(278@,18i) = 0 
+346@ = 99 
+
+:CAT2_20387
+if 
+  346@ == 99 
+jf @CAT2_22520 
+if and
+  344@ > 0 
+  10 > 344@ 
+jf @CAT2_20518 
+062E: get_actor $ACTOR_CATALINA task -1 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 1 // == constant 
+jf @CAT2_20474 
+0085: 348@ = 32@ // (int) 
+348@ += 8000 
+
+:CAT2_20474
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_20518 
+if 
+001D:   32@ > 348@ // (int) 
+jf @CAT2_20518 
+347@ = 1 
+
+:CAT2_20518
+if 
+  344@ == 0 
+jf @CAT2_20571 
+062E: get_actor $ACTOR_CATALINA task -1 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_20571 
+344@ = 1 
+
+:CAT2_20571
+if 
+  344@ == 1 
+jf @CAT2_20822 
+if 
+  283@ == 1 
+jf @CAT2_20622 
+0085: 346@ = 319@ // (int) 
+jump @CAT2_20759 
+
+:CAT2_20622
+if 
+  282@ == 1 
+jf @CAT2_20655 
+0085: 346@ = 318@ // (int) 
+jump @CAT2_20759 
+
+:CAT2_20655
+if 
+  284@ == 1 
+jf @CAT2_20688 
+0085: 346@ = 320@ // (int) 
+jump @CAT2_20759 
+
+:CAT2_20688
+if 
+  285@ == 1 
+jf @CAT2_20721 
+0085: 346@ = 321@ // (int) 
+jump @CAT2_20759 
+
+:CAT2_20721
+344@ = 2 
+560@ = 24 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2321.74 10.5486 25.4688 mode 6 time -2 
+
+:CAT2_20759
+if 
+  347@ == 1 
+jf @CAT2_20822 
+347@ = 0 
+344@ = 2 
+560@ = 24 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2321.74 10.5486 25.4688 mode 6 time -2 
+
+:CAT2_20822
+if 
+  344@ == 2 
+jf @CAT2_20971 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_20971 
+062E: get_actor $ACTOR_CATALINA task 1525 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_20971 
+if 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 2321.74 10.5486 25.4688 radius 3.0 3.0 3.0 
+jf @CAT2_20947 
+344@ = 3 
+jump @CAT2_20971 
+
+:CAT2_20947
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2321.74 10.5486 25.4688 mode 6 time -2 
+
+:CAT2_20971
+if and
+  344@ == 3 
+  560@ == 0 
+jf @CAT2_21163 
+if 
+  280@ == 1 
+jf @CAT2_21029 
+0085: 346@ = 316@ // (int) 
+jump @CAT2_21100 
+
+:CAT2_21029
+if 
+  281@ == 1 
+jf @CAT2_21062 
+0085: 346@ = 317@ // (int) 
+jump @CAT2_21100 
+
+:CAT2_21062
+344@ = 4 
+560@ = 25 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2318.281 18.5403 25.4766 mode 6 time -2 
+
+:CAT2_21100
+if 
+  347@ == 1 
+jf @CAT2_21163 
+347@ = 0 
+344@ = 4 
+560@ = 25 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2318.281 18.5403 25.4766 mode 6 time -2 
+
+:CAT2_21163
+if 
+  344@ == 4 
+jf @CAT2_21312 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_21312 
+062E: get_actor $ACTOR_CATALINA task 1525 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_21312 
+if 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 2318.281 18.5403 25.4766 radius 3.0 3.0 3.0 
+jf @CAT2_21288 
+344@ = 5 
+jump @CAT2_21312 
+
+:CAT2_21288
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2318.281 18.5403 25.4766 mode 6 time -2 
+
+:CAT2_21312
+if 
+  344@ == 5 
+jf @CAT2_21629 
+if 
+  286@ == 1 
+jf @CAT2_21363 
+0085: 346@ = 322@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21363
+if 
+  287@ == 1 
+jf @CAT2_21396 
+0085: 346@ = 323@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21396
+if 
+  288@ == 1 
+jf @CAT2_21429 
+0085: 346@ = 324@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21429
+if 
+  289@ == 1 
+jf @CAT2_21462 
+0085: 346@ = 325@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21462
+if 
+  290@ == 1 
+jf @CAT2_21495 
+0085: 346@ = 326@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21495
+if 
+  291@ == 1 
+jf @CAT2_21528 
+0085: 346@ = 327@ // (int) 
+jump @CAT2_21566 
+
+:CAT2_21528
+344@ = 6 
+560@ = 26 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.228 34.565 25.468 mode 6 time -2 
+
+:CAT2_21566
+if 
+  347@ == 1 
+jf @CAT2_21629 
+347@ = 0 
+344@ = 6 
+560@ = 26 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.228 34.565 25.468 mode 6 time -2 
+
+:CAT2_21629
+if 
+  344@ == 6 
+jf @CAT2_21778 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_21778 
+062E: get_actor $ACTOR_CATALINA task 1525 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_21778 
+if 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 2319.228 34.565 25.468 radius 3.0 3.0 3.0 
+jf @CAT2_21754 
+344@ = 7 
+jump @CAT2_21778 
+
+:CAT2_21754
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.228 34.565 25.468 mode 6 time -2 
+
+:CAT2_21778
+if and
+  344@ == 7 
+  560@ == 0 
+jf @CAT2_21956 
+if 
+  292@ == 1 
+jf @CAT2_21836 
+0085: 346@ = 328@ // (int) 
+jump @CAT2_21900 
+
+:CAT2_21836
+if 
+  293@ == 1 
+jf @CAT2_21869 
+0085: 346@ = 329@ // (int) 
+jump @CAT2_21900 
+
+:CAT2_21869
+344@ = 8 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2318.622 45.0292 25.4762 mode 6 time -2 
+
+:CAT2_21900
+if 
+  347@ == 1 
+jf @CAT2_21956 
+347@ = 0 
+344@ = 8 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2318.622 45.0292 25.4762 mode 6 time -2 
+
+:CAT2_21956
+if 
+  344@ == 8 
+jf @CAT2_22025 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_22025 
+062E: get_actor $ACTOR_CATALINA task -1 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_22025 
+344@ = 9 
+
+:CAT2_22025
+if and
+  344@ == 9 
+  560@ == 0 
+jf @CAT2_22283 
+if 
+  294@ == 1 
+jf @CAT2_22083 
+0085: 346@ = 330@ // (int) 
+jump @CAT2_22220 
+
+:CAT2_22083
+if 
+  295@ == 1 
+jf @CAT2_22116 
+0085: 346@ = 331@ // (int) 
+jump @CAT2_22220 
+
+:CAT2_22116
+if 
+  296@ == 1 
+jf @CAT2_22149 
+0085: 346@ = 332@ // (int) 
+jump @CAT2_22220 
+
+:CAT2_22149
+if 
+  297@ == 1 
+jf @CAT2_22182 
+0085: 346@ = 333@ // (int) 
+jump @CAT2_22220 
+
+:CAT2_22182
+344@ = 10 
+560@ = 28 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.237 64.4156 25.4766 mode 6 time -2 
+
+:CAT2_22220
+if 
+  347@ == 1 
+jf @CAT2_22283 
+347@ = 0 
+344@ = 10 
+560@ = 28 
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.237 64.4156 25.4766 mode 6 time -2 
+
+:CAT2_22283
+if 
+  344@ == 10 
+jf @CAT2_22438 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_22438 
+062E: get_actor $ACTOR_CATALINA task -1 status_store_to 349@ // ret 7 if not found 
+if 
+04A4:   349@ == 7 // == constant 
+jf @CAT2_22438 
+if 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 2319.237 64.4156 25.4766 radius 4.0 4.0 4.0 
+jf @CAT2_22414 
+56@ = 7 
+41@ = 31 
+jump @CAT2_22438 
+
+:CAT2_22414
+05F5: AS_actor $ACTOR_CATALINA goto_point_using_paths 2319.237 64.4156 25.4766 mode 6 time -2 
+
+:CAT2_22438
+if 
+   not 346@ == 99 
+jf @CAT2_22520 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_22520 
+if 
+   not Actor.Dead(298@(346@,9i))
+jf @CAT2_22520 
+05E2: AS_actor $ACTOR_CATALINA kill_actor 298@(346@,9i) 
+0085: 350@ = 32@ // (int) 
+350@ += 15000 
+
+:CAT2_22520
+278@ = 0 
+
+:CAT2_22527
+if 
+  9 > 278@ 
+jf @CAT2_23402 
+if 
+   not Actor.Dead(298@(278@,9i))
+jf @CAT2_23388 
+if 
+  307@(278@,9i) == 1 
+jf @CAT2_22727 
+if 
+001D:   32@ > 269@(278@,9i) // (int) 
+jf @CAT2_22727 
+062E: get_actor 298@(278@,9i) task 1259 status_store_to 345@ // ret 7 if not found 
+if 
+04A4:   345@ == 7 // == constant 
+jf @CAT2_22727 
+0209: 279@ = random_int_in_ranges 4000 8000 
+0085: 269@(278@,9i) = 32@ // (int) 
+005A: 269@(278@,9i) += 279@ // (int) 
+if 
+0597:   actor 298@(278@,9i) crouching 
+jf @CAT2_22716 
+04EB: AS_actor 298@(278@,9i) crouch 0 
+jump @CAT2_22727 
+
+:CAT2_22716
+04EB: AS_actor 298@(278@,9i) crouch 1 
+
+:CAT2_22727
+if 
+  307@(278@,9i) == 2 
+jf @CAT2_22805 
+if 
+874F:   not actor 298@(278@,9i) ped_event == 36 
+jf @CAT2_22805 
+0638: AS_actor 298@(278@,9i) stay_put 0 
+05E2: AS_actor 298@(278@,9i) kill_actor $PLAYER_ACTOR 
+307@(278@,9i) = 4 
+
+:CAT2_22805
+if 
+  307@(278@,9i) == 3 
+jf @CAT2_23084 
+243@ = Actor.Angle(298@(278@,9i))
+Actor.StorePos(298@(278@,9i), 244@, 245@, 246@)
+02F6: 249@ = sine 243@ // (float) 
+02F7: 250@ = cosine 243@ // (float) 
+0087: 247@ = 249@ // (float) 
+247@ *= -2.5 
+005B: 247@ += 244@ // (float) 
+0087: 248@ = 250@ // (float) 
+248@ *= 2.5 
+005B: 248@ += 245@ // (float) 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_23084 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 247@ 248@ 25.7 radius 5.0 5.0 3.0 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 247@ 248@ 25.7 radius 5.0 5.0 3.0 
+jf @CAT2_23084 
+0638: AS_actor 298@(278@,9i) stay_put 0 
+0812: AS_actor 298@(278@,9i) perform_animation "CROUCH_ROLL_L" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+307@(278@,9i) = 0 
+
+:CAT2_23084
+if 
+  307@(278@,9i) == 5 
+jf @CAT2_23388 
+243@ = Actor.Angle(298@(278@,9i))
+Actor.StorePos(298@(278@,9i), 244@, 245@, 246@)
+02F6: 249@ = sine 243@ // (float) 
+02F7: 250@ = cosine 243@ // (float) 
+0087: 247@ = 249@ // (float) 
+247@ *= -2.5 
+005B: 247@ += 244@ // (float) 
+0087: 248@ = 250@ // (float) 
+248@ *= 2.5 
+005B: 248@ += 245@ // (float) 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_23388 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 247@ 248@ 25.7 radius 5.0 5.0 3.0 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 247@ 248@ 25.7 radius 5.0 5.0 3.0 
+jf @CAT2_23388 
+if 
+  560@ == 0 
+jf @CAT2_23322 
+560@ = 27 
+
+:CAT2_23322
+0638: AS_actor 298@(278@,9i) stay_put 0 
+0812: AS_actor 298@(278@,9i) perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+307@(278@,9i) = 0 
+
+:CAT2_23388
+278@ += 1 
+jump @CAT2_22527 
+
+:CAT2_23402
+if 
+  56@ == 8 
+jf @CAT2_28299 
+if 
+  41@ > 40 
+jf @CAT2_28299 
+if 
+  351@ == 0 
+jf @CAT2_23694 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2130.689 149.1074 0.3268 radius 30.0 30.0 30.0 
+jf @CAT2_23694 
+Model.Load(#COPBIKE)
+Model.Load(#CSHER)
+Model.Load(#COLT45)
+if and
+   Model.Available(#COPBIKE)
+   Model.Available(#CSHER)
+   Model.Available(#COLT45)
+jf @CAT2_23694 
+351@ = 1 
+353@ = Car.Create(#COPBIKE, 2048.156, 195.1577, 15.8884)
+0397: enable_car 353@ siren 1 
+Car.Angle(353@) = 270.0
+354@ = Actor.CreateAsDriver(Mission2, #CSHER, 353@)
+Actor.GiveWeaponAndAmmo(354@, Pistol, 9999)
+0615: define_AS_pack_begin 355@ 
+05D1: AS_actor -1 drive_car 353@ to 2105.236 179.1932 0.5812 speed 15.0 2 model #NULL 0 
+06C7: AS_actor -1 driver_of_car 353@ perform_action 5 timelimit 1000 
+0633: AS_actor -1 exit_car 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 355@ 
+0618: assign_actor 354@ to_AS_pack 355@ 
+061B: remove_references_to_AS_pack 355@ 
+
+:CAT2_23694
+if 
+  126@ == 0 
+jf @CAT2_23843 
+if and
+   not Car.Wrecked(88@)
+   not Car.Wrecked(86@)
+   not Actor.Dead($ACTOR_CATALINA)
+   not Car.Wrecked(146@)
+   not Car.Wrecked(147@)
+jf @CAT2_23843 
+if 
+   Actor.InCar($ACTOR_CATALINA, 86@)
+jf @CAT2_23843 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_23790 
+08C6: set_actor $ACTOR_CATALINA stay_on_bike 2 
+
+:CAT2_23790
+126@ = 1 
+05EB: assign_car 86@ to_path 157 
+05EB: assign_car 146@ to_path 160 
+05EB: assign_car 147@ to_path 161 
+0397: enable_car 146@ siren 1 
+0397: enable_car 147@ siren 1 
+0811: 143@ = actor $PLAYER_ACTOR used_car 
+
+:CAT2_23843
+if 
+  126@ > 0 
+jf @CAT2_24094 
+if 
+   not Car.Wrecked(146@)
+jf @CAT2_23924 
+if 
+060E:   car 146@ assigned_to_path 
+jf @CAT2_23924 
+046C: 356@ = car 146@ driver 
+if 
+  356@ == -1 
+jf @CAT2_23924 
+05EC: release_car 146@ from_path 
+
+:CAT2_23924
+if 
+   not Car.Wrecked(147@)
+jf @CAT2_24094 
+if 
+060E:   car 147@ assigned_to_path 
+jf @CAT2_24094 
+046C: 356@ = car 147@ driver 
+if 
+  356@ == -1 
+jf @CAT2_23994 
+05EC: release_car 147@ from_path 
+jump @CAT2_24094 
+
+:CAT2_23994
+if 
+  358@ == 0 
+jf @CAT2_24094 
+Car.StorePos(147@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  1570.0 > $TEMPVAR_FLOAT_1 
+jf @CAT2_24094 
+if 
+01F3:   car 147@ in_air 
+jf @CAT2_24094 
+if 
+   not Actor.Dead(356@)
+jf @CAT2_24094 
+0622: AS_actor 356@ bail_car 147@ 
+358@ = 1 
+
+:CAT2_24094
+if 
+  126@ == 1 
+jf @CAT2_24867 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Car.Wrecked(86@)
+jf @CAT2_24867 
+if 
+  121@ == 0 
+jf @CAT2_24710 
+Actor.StorePos($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 47@, 48@, 49@)
+0088: $DISTANCE_BETWEEN_POINTS = 47@ // (float) 
+0061: $DISTANCE_BETWEEN_POINTS -= $TEMPVAR_FLOAT_1 // (float) 
+if 
+  0.0 > $DISTANCE_BETWEEN_POINTS 
+jf @CAT2_24226 
+$DISTANCE_BETWEEN_POINTS = 0.0 
+
+:CAT2_24226
+53@ = 2000.0 
+0077: 53@ /= $DISTANCE_BETWEEN_POINTS // (float) 
+53@ /= 100.0 
+if 
+  53@ > 1.5 
+jf @CAT2_24285 
+53@ = 1.5 
+
+:CAT2_24285
+if 
+  0.3 > 53@ 
+jf @CAT2_24316 
+53@ = 0.3 
+
+:CAT2_24316
+if and
+001D:   32@ > 359@ // (int) 
+  37 > 36@ 
+jf @CAT2_24429 
+if and
+  $DISTANCE_BETWEEN_POINTS > 10.0 
+  50.0 > $DISTANCE_BETWEEN_POINTS 
+jf @CAT2_24429 
+if 
+  560@ == 0 
+jf @CAT2_24429 
+0085: 560@ = 36@ // (int) 
+$7248 = 1 
+0085: 359@ = 32@ // (int) 
+359@ += 8000 
+36@ += 1 
+
+:CAT2_24429
+if 
+   not Car.Wrecked(146@)
+jf @CAT2_24471 
+if 
+01F3:   car 146@ in_air 
+jf @CAT2_24471 
+53@ = 1.0 
+
+:CAT2_24471
+if 
+   not Car.Wrecked(147@)
+jf @CAT2_24605 
+if 
+01F3:   car 147@ in_air 
+jf @CAT2_24513 
+53@ = 1.0 
+
+:CAT2_24513
+if 
+   not Actor.Dead(136@)
+jf @CAT2_24605 
+if 
+   not Actor.Driving(136@)
+jf @CAT2_24605 
+if 
+  360@ == 0 
+jf @CAT2_24605 
+Actor.GiveWeaponAndAmmo(136@, Pistol, 9999)
+05E2: AS_actor 136@ kill_actor $PLAYER_ACTOR 
+077A: set_actor 136@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 136@ decision_maker_to 166@ 
+360@ = 1 
+
+:CAT2_24605
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_24647 
+if 
+01F3:   car 86@ in_air 
+jf @CAT2_24647 
+53@ = 1.0 
+
+:CAT2_24647
+06FD: set_car 86@ speed_on_path_to 53@ 
+if 
+   not Car.Wrecked(146@)
+jf @CAT2_24679 
+06FD: set_car 146@ speed_on_path_to 53@ 
+
+:CAT2_24679
+if 
+   not Car.Wrecked(147@)
+jf @CAT2_24703 
+06FD: set_car 147@ speed_on_path_to 53@ 
+
+:CAT2_24703
+jump @CAT2_24772 
+
+:CAT2_24710
+06FD: set_car 86@ speed_on_path_to 1.0 
+if 
+   not Car.Wrecked(146@)
+jf @CAT2_24746 
+06FD: set_car 146@ speed_on_path_to 1.0 
+
+:CAT2_24746
+if 
+   not Car.Wrecked(147@)
+jf @CAT2_24772 
+06FD: set_car 147@ speed_on_path_to 1.0 
+
+:CAT2_24772
+if 
+00A3:   actor $ACTOR_CATALINA sphere 0 in_rectangle_cornerA 1304.957 252.9172 cornerB 1275.84 241.8114 
+jf @CAT2_24867 
+126@ = 2 
+0709: set_decision_maker 38@ on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0085: 127@ = 32@ // (int) 
+127@ += 900 
+
+:CAT2_24867
+if 
+  126@ == 2 
+jf @CAT2_25010 
+if 
+001D:   32@ > 127@ // (int) 
+jf @CAT2_25010 
+if and
+   not Car.Wrecked(86@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_25010 
+0085: 361@ = 32@ // (int) 
+361@ += 1000 
+0615: define_AS_pack_begin 128@ 
+0622: AS_actor -1 bail_car 86@ 
+05D3: AS_actor -1 goto_point 1286.969 247.1966 18.4062 mode 6 time -2 ms // versionA 
+05C4: AS_actor -1 hands_up 40000 ms 
+0616: define_AS_pack_end 128@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 128@ 
+061B: remove_references_to_AS_pack 128@ 
+126@ = 3 
+
+:CAT2_25010
+if 
+  361@ > 0 
+jf @CAT2_25099 
+if 
+001D:   32@ > 361@ // (int) 
+jf @CAT2_25099 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'CAT2_16' time 6000 flag 1  // ~s~Catalina's surrounded by cops. Rescue ~b~her~s~ and get back to the ~y~hideout~s~.
+018A: 40@ = create_checkpoint_at 867.6723 -30.3543 62.1893 
+361@ = 0 
+126@ = 4 
+
+:CAT2_25099
+if 
+  126@ == 4 
+jf @CAT2_25670 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_25670 
+if or
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_CATALINA radius 15.0 15.0 15.0 sphere 0 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA 1389.021 67.2039 cornerB 1232.628 407.097 
+jf @CAT2_25670 
+Actor.RemoveReferences(135@)
+Actor.RemoveReferences(136@)
+Car.RemoveReferences(122@)
+Car.RemoveReferences(123@)
+Car.RemoveReferences(124@)
+if 
+056D:   actor 354@ defined 
+jf @CAT2_25242 
+Actor.RemoveReferences(354@)
+
+:CAT2_25242
+if 
+   not Car.Wrecked(353@)
+jf @CAT2_25289 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 353@)
+jf @CAT2_25282 
+Car.RemoveReferences(353@)
+
+:CAT2_25282
+jump @CAT2_25294 
+
+:CAT2_25289
+Car.RemoveReferences(147@)
+
+:CAT2_25294
+if 
+   not Car.Wrecked(146@)
+jf @CAT2_25341 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 146@)
+jf @CAT2_25334 
+Car.RemoveReferences(146@)
+
+:CAT2_25334
+jump @CAT2_25346 
+
+:CAT2_25341
+Car.RemoveReferences(146@)
+
+:CAT2_25346
+if 
+   not Car.Wrecked(147@)
+jf @CAT2_25393 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 147@)
+jf @CAT2_25386 
+Car.RemoveReferences(147@)
+
+:CAT2_25386
+jump @CAT2_25398 
+
+:CAT2_25393
+Car.RemoveReferences(147@)
+
+:CAT2_25398
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_25445 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 88@)
+jf @CAT2_25438 
+Car.RemoveReferences(88@)
+
+:CAT2_25438
+jump @CAT2_25450 
+
+:CAT2_25445
+Car.RemoveReferences(88@)
+
+:CAT2_25450
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_25497 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 86@)
+jf @CAT2_25490 
+Car.RemoveReferences(86@)
+
+:CAT2_25490
+jump @CAT2_25502 
+
+:CAT2_25497
+Car.RemoveReferences(86@)
+
+:CAT2_25502
+362@ = 0 
+
+:CAT2_25509
+if 
+  8 > 362@ 
+jf @CAT2_25605 
+if 
+   not Actor.Dead(129@(362@,8i))
+jf @CAT2_25591 
+0687: clear_actor 129@(362@,8i) task 
+Actor.RemoveReferences(129@(362@,8i))
+077A: set_actor 129@(362@,8i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 129@(362@,8i) acquaintance 4 to_actors_pedtype 23 // see ped.dat 
+
+:CAT2_25591
+362@ += 1 
+jump @CAT2_25509 
+
+:CAT2_25605
+35@ = 0 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT2_25651 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+06AD: set_group $PLAYER_GROUP group_decision_maker_to 37@ 
+
+:CAT2_25651
+364@ = 1 
+Marker.Disable(372@)
+126@ = 5 
+
+:CAT2_25670
+if 
+  126@ == 5 
+jf @CAT2_27481 
+if 
+  365@ == 0 
+jf @CAT2_25803 
+if 
+001D:   32@ > 144@ // (int) 
+jf @CAT2_25803 
+362@ = 0 
+
+:CAT2_25732
+if 
+  8 > 362@ 
+jf @CAT2_25796 
+if 
+   not Actor.Dead(129@(362@,8i))
+jf @CAT2_25782 
+07BC: set_actor 129@(362@,8i) decision_maker_to 166@ // AS_pack_version 
+
+:CAT2_25782
+362@ += 1 
+jump @CAT2_25732 
+
+:CAT2_25796
+365@ = 1 
+
+:CAT2_25803
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_27481 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_27314 
+if 
+  366@ == 0 
+jf @CAT2_27314 
+366@ = 1 
+562@ = 1 
+$7248 = 1 
+if 
+  $1520 == 0 
+jf @CAT2_26612 
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 0 
+jf @CAT2_26250 
+603@ = 2 
+604@ = 1 
+605@ = 1 
+606@ = 1 
+607@ = 1 
+608@ = 1 
+609@ = 2 
+610@ = 1 
+611@ = 1 
+612@ = 2 
+613@ = 1 
+05AA: 454@s = 'CAT_DF' // @s = 'short'  // ~z~You're fucking psycho!
+05AA: 456@s = 'CAT_DG' // @s = 'short'  // ~z~All you little men are scared of strong women!
+05AA: 458@s = 'CAT_DH' // @s = 'short'  // ~z~If we're passionate you say we're crazy.
+05AA: 460@s = 'CAT_DI' // @s = 'short'  // ~z~If we're upset you say we're hysterical.
+05AA: 462@s = 'CAT_DJ' // @s = 'short'  // ~z~We sleep with men, we're sluts.
+05AA: 464@s = 'CAT_DK' // @s = 'short'  // ~z~If we don't put out we're frigid bitches.
+05AA: 466@s = 'CAT_DL' // @s = 'short'  // ~z~Who you calling little men? You went berserk back there!
+05AA: 468@s = 'CAT_DM' // @s = 'short'  // ~z~That? That was just another day at the office!
+05AA: 470@s = 'CAT_DN' // @s = 'short'  // ~z~You can't stand the heat, go put your tiny balls in the freezer!
+05AA: 472@s = 'CAT_DO' // @s = 'short'  // ~z~Tiny balls? Now just wait a minute...
+05AA: 474@s = 'CAT_DP' // @s = 'short'  // ~z~Enough! Just shut up and drive, I'm counting the fucking money!
+04AF: 534@ = 8631 // = constant 
+04AF: 535@ = 8632 // = constant 
+04AF: 536@ = 8633 // = constant 
+04AF: 537@ = 8634 // = constant 
+04AF: 538@ = 8635 // = constant 
+04AF: 539@ = 8636 // = constant 
+04AF: 540@ = 8637 // = constant 
+04AF: 541@ = 8638 // = constant 
+04AF: 542@ = 8639 // = constant 
+04AF: 543@ = 8640 // = constant 
+04AF: 544@ = 8641 // = constant 
+560@ = 40 
+561@ = 11 
+jump @CAT2_26612 
+
+:CAT2_26250
+603@ = 1 
+604@ = 2 
+605@ = 1 
+606@ = 1 
+607@ = 1 
+608@ = 1 
+609@ = 1 
+610@ = 2 
+611@ = 1 
+612@ = 1 
+613@ = 2 
+614@ = 1 
+05AA: 454@s = 'CAT_DA' // @s = 'short'  // ~z~I have a hideout on Fern Ridge.
+05AA: 456@s = 'CAT_DF' // @s = 'short'  // ~z~You're fucking psycho!
+05AA: 458@s = 'CAT_DG' // @s = 'short'  // ~z~All you little men are scared of strong women!
+05AA: 460@s = 'CAT_DH' // @s = 'short'  // ~z~If we're passionate you say we're crazy.
+05AA: 462@s = 'CAT_DI' // @s = 'short'  // ~z~If we're upset you say we're hysterical.
+05AA: 464@s = 'CAT_DJ' // @s = 'short'  // ~z~We sleep with men, we're sluts.
+05AA: 466@s = 'CAT_DK' // @s = 'short'  // ~z~If we don't put out we're frigid bitches.
+05AA: 468@s = 'CAT_DL' // @s = 'short'  // ~z~Who you calling little men? You went berserk back there!
+05AA: 470@s = 'CAT_DM' // @s = 'short'  // ~z~That? That was just another day at the office!
+05AA: 472@s = 'CAT_DN' // @s = 'short'  // ~z~You can't stand the heat, go put your tiny balls in the freezer!
+05AA: 474@s = 'CAT_DO' // @s = 'short'  // ~z~Tiny balls? Now just wait a minute...
+05AA: 476@s = 'CAT_DP' // @s = 'short'  // ~z~Enough! Just shut up and drive, I'm counting the fucking money!
+04AF: 534@ = 8626 // = constant 
+04AF: 535@ = 8631 // = constant 
+04AF: 536@ = 8632 // = constant 
+04AF: 537@ = 8633 // = constant 
+04AF: 538@ = 8634 // = constant 
+04AF: 539@ = 8635 // = constant 
+04AF: 540@ = 8636 // = constant 
+04AF: 541@ = 8637 // = constant 
+04AF: 542@ = 8638 // = constant 
+04AF: 543@ = 8639 // = constant 
+04AF: 544@ = 8640 // = constant 
+04AF: 545@ = 8641 // = constant 
+560@ = 40 
+561@ = 12 
+
+:CAT2_26612
+if 
+  $1520 == 1 
+jf @CAT2_27050 
+603@ = 1 
+604@ = 2 
+605@ = 1 
+606@ = 2 
+607@ = 2 
+608@ = 1 
+609@ = 2 
+610@ = 1 
+611@ = 2 
+612@ = 1 
+613@ = 1 
+614@ = 1 
+615@ = 1 
+616@ = 2 
+05AA: 454@s = 'CAT_GA' // @s = 'short'  // ~z~Take me home, Carl.
+05AA: 456@s = 'CAT_GB' // @s = 'short'  // ~z~Okay. Look, but we gotta talk about something.
+05AA: 458@s = 'CAT_GC' // @s = 'short'  // ~z~What? What do I have to say to you?
+05AA: 460@s = 'CAT_GD' // @s = 'short'  // ~z~You're a great girl, and all, but you gotta calm down.
+05AA: 462@s = 'CAT_GE' // @s = 'short'  // ~z~I know some cold blooded cats wouldn't act like you.
+05AA: 464@s = 'CAT_GF' // @s = 'short'  // ~z~Oh, you get given a lioness and you want a pussy cat? Wimp!
+05AA: 466@s = 'CAT_GG' // @s = 'short'  // ~z~No, I just want...
+05AA: 468@s = 'CAT_GH' // @s = 'short'  // ~z~You know why I act like this.
+05AA: 470@s = 'CAT_GI' // @s = 'short'  // ~z~No.
+05AA: 472@s = 'CAT_GJ' // @s = 'short'  // ~z~I'm in love, Carl.
+05AA: 474@s = 'CAT_GK' // @s = 'short'  // ~z~A woman's heart is a tempestuous place,
+05AA: 476@s = 'CAT_GL' // @s = 'short'  // ~z~and you will break my heart.
+05AA: 478@s = 'CAT_GM' // @s = 'short'  // ~z~Sometimes I want to kill us both!
+05AA: 480@s = 'CAT_GN' // @s = 'short'  // ~z~Please, don't do that. Just relax a little.
+04AF: 534@ = 8672 // = constant 
+04AF: 535@ = 8673 // = constant 
+04AF: 536@ = 8674 // = constant 
+04AF: 537@ = 8675 // = constant 
+04AF: 538@ = 8676 // = constant 
+04AF: 539@ = 8677 // = constant 
+04AF: 540@ = 8678 // = constant 
+04AF: 541@ = 8679 // = constant 
+04AF: 542@ = 8680 // = constant 
+04AF: 543@ = 8681 // = constant 
+04AF: 544@ = 8682 // = constant 
+04AF: 545@ = 8683 // = constant 
+04AF: 546@ = 8684 // = constant 
+04AF: 547@ = 8685 // = constant 
+560@ = 40 
+561@ = 14 
+
+:CAT2_27050
+if 
+  $1520 == 2 
+jf @CAT2_27314 
+603@ = 1 
+604@ = 2 
+605@ = 1 
+606@ = 2 
+607@ = 1 
+608@ = 2 
+609@ = 1 
+610@ = 1 
+05AA: 454@s = 'CAT_OA' // @s = 'short'  // ~z~Take me home now, big man.
+05AA: 456@s = 'CAT_OB' // @s = 'short'  // ~z~How we do?
+05AA: 458@s = 'CAT_OC' // @s = 'short'  // ~z~Is that all you care about? Money?
+05AA: 460@s = 'CAT_OD' // @s = 'short'  // ~z~No, but I really need the paper--.
+05AA: 462@s = 'CAT_OE' // @s = 'short'  // ~z~You revolt me. You make my skin crawl.
+05AA: 464@s = 'CAT_OF' // @s = 'short'  // ~z~Well I ain't crazy about you, either!
+05AA: 466@s = 'CAT_OG' // @s = 'short'  // ~z~That's just it. How little you know.
+05AA: 468@s = 'CAT_OH' // @s = 'short'  // ~z~Don't talk. Let us enjoy the peace and quiet.
+04AF: 534@ = 8725 // = constant 
+04AF: 535@ = 8726 // = constant 
+04AF: 536@ = 8727 // = constant 
+04AF: 537@ = 8728 // = constant 
+04AF: 538@ = 8729 // = constant 
+04AF: 539@ = 8730 // = constant 
+04AF: 540@ = 8731 // = constant 
+04AF: 541@ = 8732 // = constant 
+560@ = 40 
+561@ = 8 
+
+:CAT2_27314
+if and
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 863.6693 -30.852 62.1615 radius 4.0 4.0 4.0 
+00FE:   actor $ACTOR_CATALINA sphere 0 in_sphere 863.6693 -30.852 62.1615 radius 4.0 4.0 4.0 
+jf @CAT2_27418 
+Marker.Disable(40@)
+Player.CanMove($PLAYER_CHAR) = False
+56@ = 9 
+
+:CAT2_27418
+if 
+  35@ == 0 
+jf @CAT2_27481 
+if 
+876F:   not text_priority_displayed 
+jf @CAT2_27481 
+if 
+  560@ == 0 
+jf @CAT2_27481 
+560@ = 37 
+35@ = 1 
+
+:CAT2_27481
+if 
+  145@ == 2 
+jf @CAT2_27681 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_27681 
+if 
+80FE:   not actor $ACTOR_CATALINA sphere 0 in_sphere 1287.5 249.2 19.22 radius 60.0 60.0 60.0 
+jf @CAT2_27681 
+145@ = 3 
+if 
+   not Car.Wrecked(122@)
+jf @CAT2_27591 
+Car.RemoveReferences(122@)
+
+:CAT2_27591
+if 
+   not Car.Wrecked(123@)
+jf @CAT2_27612 
+Car.RemoveReferences(123@)
+
+:CAT2_27612
+if 
+   not Car.Wrecked(124@)
+jf @CAT2_27633 
+Car.RemoveReferences(124@)
+
+:CAT2_27633
+137@ = 0 
+
+:CAT2_27640
+if 
+  6 > 137@ 
+jf @CAT2_27681 
+Actor.RemoveReferences(129@(137@,8i))
+137@ += 1 
+jump @CAT2_27640 
+
+:CAT2_27681
+if 
+  121@ == 0 
+jf @CAT2_27900 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_27900 
+if 
+00A3:   actor $ACTOR_CATALINA sphere 0 in_rectangle_cornerA 1393.246 233.1637 cornerB 1325.073 190.1405 
+jf @CAT2_27900 
+121@ = 1 
+if and
+   not Car.Wrecked(122@)
+   not Car.Wrecked(123@)
+   not Car.Wrecked(124@)
+jf @CAT2_27900 
+05EB: assign_car 122@ to_path 156 
+05EB: assign_car 123@ to_path 158 
+05EB: assign_car 124@ to_path 159 
+Car.LockInCurrentPosition(122@) = False
+Car.LockInCurrentPosition(123@) = False
+Car.LockInCurrentPosition(124@) = False
+0397: enable_car 122@ siren 1 
+0397: enable_car 123@ siren 1 
+0397: enable_car 124@ siren 1 
+0085: 138@ = 32@ // (int) 
+138@ += 4000 
+0085: 139@ = 32@ // (int) 
+139@ += 4000 
+0085: 140@ = 32@ // (int) 
+140@ += 4000 
+
+:CAT2_27900
+if 
+  121@ == 1 
+jf @CAT2_28299 
+if and
+   not Car.Wrecked(122@)
+   not Car.Wrecked(123@)
+   not Car.Wrecked(124@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_28299 
+137@ = 0 
+
+:CAT2_27956
+if 
+  6 > 137@ 
+jf @CAT2_28299 
+141@ = 0 
+if 
+   not Actor.Dead(129@(137@,8i))
+jf @CAT2_28285 
+if 
+0449:   actor 129@(137@,8i) in_a_car 
+jf @CAT2_28285 
+if 
+  2 > 137@ 
+jf @CAT2_28065 
+if 
+001D:   32@ > 138@ // (int) 
+jf @CAT2_28065 
+141@ = 1 
+
+:CAT2_28065
+if and
+  4 > 137@ 
+  137@ > 1 
+jf @CAT2_28116 
+if 
+001D:   32@ > 139@ // (int) 
+jf @CAT2_28116 
+141@ = 1 
+
+:CAT2_28116
+if 
+  137@ > 3 
+jf @CAT2_28160 
+if 
+001D:   32@ > 140@ // (int) 
+jf @CAT2_28160 
+141@ = 1 
+
+:CAT2_28160
+if 
+  141@ == 1 
+jf @CAT2_28285 
+0615: define_AS_pack_begin 128@ 
+if or
+  137@ == 0 
+  137@ == 3 
+  137@ == 4 
+jf @CAT2_28221 
+04EB: AS_actor -1 crouch 1 
+
+:CAT2_28221
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 148@(137@,6f) 154@(137@,6f) 160@(137@,6f) mode 6 time -2 ms // versionA 
+0635: AS_actor -1 aim_at_actor $ACTOR_CATALINA -2 ms 
+0616: define_AS_pack_end 128@ 
+0618: assign_actor 129@(137@,8i) to_AS_pack 128@ 
+061B: remove_references_to_AS_pack 128@ 
+
+:CAT2_28285
+137@ += 1 
+jump @CAT2_27956 
+
+:CAT2_28299
+if 
+  56@ == 9 
+jf @CAT2_30111 
+if 
+08D0:   should_skip_cutscene 
+jf @CAT2_28344 
+367@ = 3 
+559@ = 5 
+
+:CAT2_28344
+if 
+  367@ == 0 
+jf @CAT2_28404 
+Player.WantedLevel($PLAYER_CHAR) = 0
+559@ = 5 
+555@ = 0 
+556@ = 0 
+$7248 = 1 
+367@ = 1 
+
+:CAT2_28404
+if 
+  367@ == 1 
+jf @CAT2_29800 
+if 
+  560@ == 0 
+jf @CAT2_29800 
+if 
+  559@ == 1 
+jf @CAT2_29800 
+562@ = 0 
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 0 
+jf @CAT2_28911 
+564@ = 1 
+565@ = 1 
+566@ = 1 
+567@ = 2 
+568@ = 2 
+569@ = 1 
+570@ = 1 
+571@ = 1 
+572@ = 2 
+573@ = 2 
+574@ = 2 
+575@ = 2 
+04AF: 495@ = 8642 // = constant 
+04AF: 496@ = 8643 // = constant 
+04AF: 497@ = 8644 // = constant 
+04AF: 498@ = 8645 // = constant 
+04AF: 499@ = 8646 // = constant 
+04AF: 500@ = 8647 // = constant 
+04AF: 501@ = 8648 // = constant 
+04AF: 502@ = 8649 // = constant 
+04AF: 503@ = 8650 // = constant 
+04AF: 504@ = 8651 // = constant 
+04AF: 505@ = 8652 // = constant 
+04AF: 506@ = 8653 // = constant 
+04AF: 507@ = 8654 // = constant 
+04AF: 508@ = 8655 // = constant 
+04AF: 509@ = 8656 // = constant 
+05AA: 376@s = 'CAT_EA' // @s = 'short'  // ~z~That was fun, homeboy.
+05AA: 378@s = 'CAT_EB' // @s = 'short'  // ~z~You wanna play again tomorrow?
+05AA: 380@s = 'CAT_EC' // @s = 'short'  // ~z~Here. This is your cut.
+05AA: 382@s = 'CAT_ED' // @s = 'short'  // ~z~Lady, I gotta take it easy.
+05AA: 384@s = 'CAT_EE' // @s = 'short'  // ~z~Like you said, I got some other shit going on.
+05AA: 386@s = 'CAT_EF' // @s = 'short'  // ~z~Whatever, baby.
+05AA: 388@s = 'CAT_EG' // @s = 'short'  // ~z~If I play too rough, you do whatever makes you feel safe.
+05AA: 390@s = 'CAT_EH' // @s = 'short'  // ~z~Maricon. See you around.
+05AA: 392@s = 'CAT_EI' // @s = 'short'  // ~z~Thanks and everything bitch, but you crazy.
+05AA: 394@s = 'CAT_EJ' // @s = 'short'  // ~z~If you was the last bitch on earth,
+05AA: 396@s = 'CAT_EK' // @s = 'short'  // ~z~I'd start going out with an animal.
+05AA: 398@s = 'CAT_EL' // @s = 'short'  // ~z~You're too fucking loco, senorita.
+05AA: 400@s = 'CAT_EM' // @s = 'short'  // ~z~Whatever else went down,I know I gotts do
+05AA: 402@s = 'CAT_EN' // @s = 'short'  // ~z~anything I can to avoid hanging out with
+05AA: 404@s = 'CAT_EO' // @s = 'short'  // ~z~that crazy bitch.
+560@ = 1 
+561@ = 12 
+
+:CAT2_28911
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 1 
+jf @CAT2_29117 
+564@ = 1 
+565@ = 2 
+566@ = 2 
+567@ = 2 
+568@ = 1 
+569@ = 1 
+04AF: 495@ = 8686 // = constant 
+04AF: 496@ = 8687 // = constant 
+04AF: 497@ = 8688 // = constant 
+04AF: 498@ = 8689 // = constant 
+04AF: 499@ = 8690 // = constant 
+04AF: 500@ = 8691 // = constant 
+05AA: 376@s = 'CAT_HA' // @s = 'short'  // ~z~See you soon, handsome. Next time, we play REALLY rough.
+05AA: 378@s = 'CAT_HB' // @s = 'short'  // ~z~Yeah, that's cool. But we can also play for some real money.
+05AA: 380@s = 'CAT_HC' // @s = 'short'  // ~z~I got some money to... well,
+05AA: 382@s = 'CAT_HD' // @s = 'short'  // ~z~it's a long story, but I need some serious paper, fast.
+05AA: 384@s = 'CAT_HE' // @s = 'short'  // ~z~You come and see me again soon.
+05AA: 386@s = 'CAT_HF' // @s = 'short'  // ~z~We rob a real bank.
+560@ = 1 
+561@ = 6 
+
+:CAT2_29117
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 2 
+jf @CAT2_29236 
+564@ = 1 
+565@ = 1 
+566@ = 1 
+04AF: 495@ = 8714 // = constant 
+04AF: 496@ = 8715 // = constant 
+04AF: 497@ = 8716 // = constant 
+05AA: 376@s = 'CAT_MA' // @s = 'short'  // ~z~Carl, you have much to learn about the female heart.
+05AA: 378@s = 'CAT_MB' // @s = 'short'  // ~z~Come and see me again when you think you understand it.
+05AA: 380@s = 'CAT_MC' // @s = 'short'  // ~z~Goodbye!
+560@ = 1 
+561@ = 3 
+
+:CAT2_29236
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 3 
+jf @CAT2_29442 
+564@ = 1 
+565@ = 2 
+566@ = 1 
+567@ = 1 
+568@ = 1 
+569@ = 1 
+04AF: 495@ = 8733 // = constant 
+04AF: 496@ = 8734 // = constant 
+04AF: 497@ = 8735 // = constant 
+04AF: 498@ = 8736 // = constant 
+04AF: 499@ = 8737 // = constant 
+04AF: 500@ = 8738 // = constant 
+05AA: 376@s = 'CAT_PA' // @s = 'short'  // ~z~There you go.
+05AA: 378@s = 'CAT_PB' // @s = 'short'  // ~z~Thanks
+05AA: 380@s = 'CAT_PC' // @s = 'short'  // ~z~One day, Carl Johnson, you will realize.
+05AA: 382@s = 'CAT_PD' // @s = 'short'  // ~z~She, she truly loved me, and your heart will break in two.
+05AA: 384@s = 'CAT_PE' // @s = 'short'  // ~z~But you are more like the spiny lizard than a man.
+05AA: 386@s = 'CAT_PF' // @s = 'short'  // ~z~Goodbye!
+560@ = 1 
+561@ = 6 
+
+:CAT2_29442
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_29472 
+Actor.StorePos($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:CAT2_29472
+0395: clear_area 1 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 20.0 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetPosition(854.5403, -22.1425, 64.3802, 0.0, 0.0, 0.0)
+Camera.PointAt(855.2749, -22.7951, 64.1942, 2)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_29616 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_29616 
+if 
+   not Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_29616 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+036A: put_actor $ACTOR_CATALINA in_car $TEMPVAR_ACTOR_CAR 
+
+:CAT2_29616
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_29793 
+if 
+   not Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_29720 
+Actor.PutAt($PLAYER_ACTOR, 857.4263, -29.5418, 62.1858)
+Actor.PutAt($ACTOR_CATALINA, 858.4263, -29.5418, 62.1858)
+Actor.Angle($ACTOR_CATALINA) = 161.446
+Actor.Angle($ACTOR_CATALINA) = 340.446
+364@ = 0 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+
+:CAT2_29720
+0615: define_AS_pack_begin 368@ 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_29756 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($ACTOR_CATALINA)
+05CD: AS_actor -1 exit_car $TEMPVAR_ACTOR_CAR 
+
+:CAT2_29756
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 99999 ms 
+0616: define_AS_pack_end 368@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 368@ 
+061B: remove_references_to_AS_pack 368@ 
+
+:CAT2_29793
+367@ = 2 
+
+:CAT2_29800
+if 
+  367@ == 2 
+jf @CAT2_29995 
+if 
+  560@ == 0 
+jf @CAT2_29995 
+if 
+  559@ == 1 
+jf @CAT2_29995 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_29972 
+0615: define_AS_pack_begin 369@ 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT2_29906 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($ACTOR_CATALINA)
+05CD: AS_actor -1 exit_car $TEMPVAR_ACTOR_CAR 
+
+:CAT2_29906
+05D3: AS_actor -1 goto_point 869.0271 -28.2591 62.1893 mode 4 time 20000 ms // versionA 
+05D3: AS_actor -1 goto_point 870.2891 -25.0424 62.9858 mode 4 time 5000 ms // versionA 
+0616: define_AS_pack_end 369@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 369@ 
+061B: remove_references_to_AS_pack 369@ 
+
+:CAT2_29972
+367@ = 3 
+0085: 370@ = 32@ // (int) 
+370@ += 5000 
+
+:CAT2_29995
+if 
+  367@ == 3 
+jf @CAT2_30111 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_30111 
+062E: get_actor $ACTOR_CATALINA task 1560 status_store_to $416 // ret 7 if not found 
+if or
+04A3:   $416 == 7 // == constant 
+001D:   32@ > 370@ // (int) 
+jf @CAT2_30111 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+if 
+056D:   actor $ACTOR_CATALINA defined 
+jf @CAT2_30091 
+Actor.DestroyInstantly($ACTOR_CATALINA)
+
+:CAT2_30091
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+jump @CAT2_30409 
+
+:CAT2_30111
+jump @CAT2_1838 
+
+:CAT2_30118
+Player.SetMinWantedLevel($PLAYER_CHAR, 3)
+097A: play_audio_at 2312.094 -9.6433 28.679 event 1155 
+560@ = 8 
+561@ = 3 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_30183 
+0639: AS_actor $ACTOR_CATALINA rotate_to_actor $PLAYER_ACTOR 
+
+:CAT2_30183
+return 
+
+:CAT2_30185
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+wait 2000 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT2_30407 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2303.903 -18.2879 25.5416 cornerB 2321.147 0.7716 30.8122 
+jf @CAT2_30407 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT2_30407 
+fade 0 800 
+
+:CAT2_30293
+if 
+fading 
+jf @CAT2_30317 
+wait 0 
+jump @CAT2_30293 
+
+:CAT2_30317
+wait 700 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2303.903 -18.2879 25.5416 cornerB 2321.147 0.7716 30.8122 
+jf @CAT2_30400 
+Actor.PutAt($PLAYER_ACTOR, 2300.112, -16.5618, 25.4844)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+
+:CAT2_30400
+fade 1 600 
+
+:CAT2_30407
+return 
+
+:CAT2_30409
+$CATALINA_TOTAL_PASSED_MISSIONS += 1 
+$1520 += 1 
+0629: change_integer_stat 315 to 1 
+168@ += 10000 
+01E3: show_text_1number_styled GXT 'M_PASS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 10000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'CAT_2'  // Small Town Bank
+$MISSION_SMALL_TOWN_BANK_PASSED = 1 
+if 
+  $CATALINA_DIALOG_BETTING_SHOP_PLAYED == 1 
+jf @CAT2_30521 
+$CATALINA_DIALOG_BETTING_SHOP_PLAYED = 2 
+
+:CAT2_30521
+if 
+  $CATALINA_DIALOG_LIQUOR_STORE_PLAYED == 1 
+jf @CAT2_30546 
+$CATALINA_DIALOG_LIQUOR_STORE_PLAYED = 2 
+
+:CAT2_30546
+return 
+
+:CAT2_30548
+040D: unload_wav 3 
+if 
+03CA:   object $2660 exists 
+jf @CAT2_30573 
+Object.Destroy($2660)
+
+:CAT2_30573
+$2660 = Object.Init(#CR_DOOR_01, 2322.845, 8.304, 25.483)
+Object.RemoveFromMissionCleanupList($2660)
+Object.Indestructibility($2660) = False
+Object.KeepInMemory($2660) = True
+if 
+03CA:   object $2661 exists 
+jf @CAT2_30635 
+Object.Destroy($2661)
+
+:CAT2_30635
+$2661 = Object.Init(#CR_DOOR_01, 2316.233, 0.712, 25.742)
+Object.RemoveFromMissionCleanupList($2661)
+Object.Angle($2661) = 270.0
+Object.KeepInMemory($2661) = True
+Object.Indestructibility($2661) = False
+if 
+03CA:   object $2662 exists 
+jf @CAT2_30707 
+Object.Destroy($2662)
+
+:CAT2_30707
+$2662 = Object.Init(#CR_DOOR_03, 2304.257, -17.744, 25.742)
+Object.RemoveFromMissionCleanupList($2662)
+Object.KeepInMemory($2662) = True
+Object.Indestructibility($2662) = False
+if 
+03CA:   object $2663 exists 
+jf @CAT2_30769 
+Object.Destroy($2663)
+
+:CAT2_30769
+$2663 = Object.Init(#CR_DOOR_03, 2304.257, -14.583, 25.742)
+Object.RemoveFromMissionCleanupList($2663)
+Object.KeepInMemory($2663) = True
+Object.Angle($2663) = 180.0
+Object.Indestructibility($2663) = False
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+Model.Destroy(#COPCARRU)
+Model.Destroy(#COPBIKE)
+Model.Destroy(#CSHER)
+Model.Destroy(#COLT45)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#COLT45)
+Model.Destroy(#CSHER)
+Model.Destroy(#COPCARRU)
+Model.Destroy(#WMYSGRD)
+Model.Destroy(#SWMYRI)
+Model.Destroy(#WFYSTEW)
+Model.Destroy(#ENFORCER)
+Model.Destroy(#COPBIKE)
+Model.Destroy(#KMB_ATM1)
+Model.Destroy(#KMB_ATM2)
+Model.Destroy(#KMB_ATM3)
+Model.Destroy(#MTSAFE)
+Model.Destroy(#CR_DOOR_01)
+Model.Destroy(#CR_DOOR_03)
+0873: release_path 156 
+0873: release_path 157 
+0873: release_path 123 
+0873: release_path 124 
+0873: release_path 158 
+0873: release_path 159 
+0873: release_path 160 
+0873: release_path 161 
+0873: release_path 116 
+0873: release_path 117 
+0873: release_path 118 
+0873: release_path 119 
+0873: release_path 123 
+0873: release_path 124 
+0873: release_path 160 
+0873: release_path 161 
+0873: release_path 156 
+0873: release_path 157 
+0873: release_path 158 
+0873: release_path 159 
+04EF: release_animation "SHOP" 
+04EF: release_animation "MISC" 
+04EF: release_animation "OTB" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "ROB_BANK" 
+01E7: remove_forbidden_for_cars_cube_cornerA 2344.518 36.1468 36.0359 cornerB 2269.718 -44.376 23.0569 
+Marker.Disable(372@)
+Marker.Disable(40@)
+Marker.Disable(102@)
+Marker.Disable(103@)
+Marker.Disable(104@)
+Marker.Disable(105@)
+Object.RemoveReferences(76@)
+Object.RemoveReferences(77@)
+Object.RemoveReferences(78@)
+if 
+   not Car.Wrecked(85@)
+jf @CAT2_31159 
+Car.RemoveReferences(85@)
+
+:CAT2_31159
+if 
+   not Car.Wrecked(86@)
+jf @CAT2_31180 
+Car.RemoveReferences(86@)
+
+:CAT2_31180
+if 
+   not Car.Wrecked(88@)
+jf @CAT2_31201 
+Car.RemoveReferences(88@)
+
+:CAT2_31201
+if 
+   not Car.Wrecked(90@)
+jf @CAT2_31222 
+Car.RemoveReferences(90@)
+
+:CAT2_31222
+if 
+   not Actor.Dead(92@)
+jf @CAT2_31250 
+Actor.LockInCurrentPosition(92@) = False
+Actor.RemoveReferences(92@)
+
+:CAT2_31250
+if 
+   not Actor.Dead(93@)
+jf @CAT2_31278 
+Actor.LockInCurrentPosition(93@) = False
+Actor.RemoveReferences(93@)
+
+:CAT2_31278
+if 
+   not Actor.Dead(87@)
+jf @CAT2_31306 
+Actor.LockInCurrentPosition(87@) = False
+Actor.RemoveReferences(87@)
+
+:CAT2_31306
+if 
+   not Actor.Dead(89@)
+jf @CAT2_31334 
+Actor.LockInCurrentPosition(89@) = False
+Actor.RemoveReferences(89@)
+
+:CAT2_31334
+if 
+   not Actor.Dead(91@)
+jf @CAT2_31362 
+Actor.LockInCurrentPosition(91@) = False
+Actor.RemoveReferences(91@)
+
+:CAT2_31362
+if 
+   not Actor.Dead(94@)
+jf @CAT2_31383 
+Actor.RemoveReferences(94@)
+
+:CAT2_31383
+018E: stop_sound 82@ 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+03C7: set_sensitivity_to_crime 1.0 
+mission_cleanup 
+return 
+
+:CAT2_31411
+if 
+  364@ == 1 
+jf @CAT2_32010 
+if 
+  371@ == 1 
+jf @CAT2_31529 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_31529 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT2_31529 
+371@ = 0 
+372@ = Marker.CreateAboveActor($ACTOR_CATALINA)
+07E0: set_marker 372@ type_to 1 
+018B: set_marker 40@ radar_mode 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'CAT2_14' time 4000 flag 1  // ~s~You have left ~b~catalina~s~ behind, go back and get her.
+
+:CAT2_31529
+if 
+  371@ == 0 
+jf @CAT2_31658 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT2_31658 
+if 
+06EE:   actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT2_31596 
+371@ = 1 
+jump @CAT2_31658 
+
+:CAT2_31596
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CATALINA radius 10.0 10.0 0 
+jf @CAT2_31658 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+Marker.Disable(372@)
+018B: set_marker 40@ radar_mode 3 
+371@ = 1 
+
+:CAT2_31658
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_31791 
+if 
+  373@ == 0 
+jf @CAT2_31784 
+0749: reset_group_decision_maker 37@ event 36 
+0749: reset_group_decision_maker 37@ event 9 
+0749: reset_group_decision_maker 37@ event 41 
+0749: reset_group_decision_maker 37@ event 31 
+0749: reset_group_decision_maker 37@ event 73 
+0749: reset_group_decision_maker 37@ event 72 
+074A: set_group_decision_maker 37@ on_event 36 taskID 1516 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+077A: set_actor $ACTOR_CATALINA acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+373@ = 1 
+
+:CAT2_31784
+jump @CAT2_32010 
+
+:CAT2_31791
+if 
+  373@ == 1 
+jf @CAT2_32010 
+0749: reset_group_decision_maker 37@ event 36 
+0749: reset_group_decision_maker 37@ event 9 
+0749: reset_group_decision_maker 37@ event 41 
+0749: reset_group_decision_maker 37@ event 31 
+0749: reset_group_decision_maker 37@ event 73 
+0749: reset_group_decision_maker 37@ event 72 
+0749: reset_group_decision_maker 37@ event 36 
+074A: set_group_decision_maker 37@ on_event 36 taskID 1502 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+074A: set_group_decision_maker 37@ on_event 9 taskID 1502 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+074A: set_group_decision_maker 37@ on_event 31 taskID 1502 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+074A: set_group_decision_maker 37@ on_event 72 taskID 1502 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+077A: set_actor $ACTOR_CATALINA acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+373@ = 0 
+
+:CAT2_32010
+return 
+
+:CAT2_32012
+0871: init_jump_table 559@ total_jumps 6 default_jump 0 @CAT2_34563 jumps 0 @CAT2_32075 1 @CAT2_33294 2 @CAT2_34161 3 @CAT2_34260 4 @CAT2_34336 5 @CAT2_34473 -1 @CAT2_34563 
+
+:CAT2_32075
+05AA: 374@s = 'CAT4_BI' // @s = 'short'  // ~z~Stop your grinning and drop your linen!
+05AA: 376@s = 'CAT4_CA' // @s = 'short'  // ~z~You're on crowd control so don't take any shit!
+04AF: 495@ = 9621 // = constant 
+05AA: 378@s = 'CAT4_CB' // @s = 'short'  // ~z~Yes'm, Miss Catalina, Miss.
+04AF: 496@ = 9622 // = constant 
+05AA: 380@s = 'CAT4_CD' // @s = 'short'  // ~z~Don't even think about doin' anything, motherfucker!
+04AF: 497@ = 9624 // = constant 
+05AA: 382@s = 'CAT4_CE' // @s = 'short'  // ~z~Hand over every last dollar, NOW, BITCH!
+04AF: 498@ = 9625 // = constant 
+05AA: 384@s = 'CAT4_CF' // @s = 'short'  // ~z~I'm going to empty the safe.
+04AF: 499@ = 9626 // = constant 
+05AA: 386@s = 'CAT4_CG' // @s = 'short'  // ~z~Keep these idiots covered!
+04AF: 500@ = 9627 // = constant 
+05AA: 388@s = 'CAT4_CH' // @s = 'short'  // ~z~A'ight, you heard the lady, no heroic shit!
+04AF: 501@ = 9628 // = constant 
+05AA: 390@s = 'CAT4_EA' // @s = 'short'  // ~z~Oh shit!
+04AF: 502@ = 9642 // = constant 
+05AA: 392@s = 'CAT4_EC' // @s = 'short'  // ~z~Shit! I give you one simple job!
+04AF: 503@ = 9644 // = constant 
+05AA: 394@s = 'CAT4_ED' // @s = 'short'  // ~z~Idiota!
+04AF: 504@ = 9645 // = constant 
+05AA: 396@s = 'CAT4_BA' // @s = 'short'  // ~z~Shit, I just bought another donut! Don't criminals have any consideration?
+04AF: 505@ = 9610 // = constant 
+05AA: 398@s = 'CAT4_AB' // @s = 'short'  // ~z~We can collect that bribe later. Might as well go and take a look.
+04AF: 506@ = 9601 // = constant 
+05AA: 400@s = 'CAT4_AC' // @s = 'short'  // ~z~We know you're in there!
+04AF: 507@ = 9602 // = constant 
+05AA: 402@s = 'CAT4_AD' // @s = 'short'  // ~z~The game's up! Come on out!
+04AF: 508@ = 9603 // = constant 
+05AA: 404@s = 'CAT4_AE' // @s = 'short'  // ~z~Come out real peaceable, like!
+04AF: 509@ = 9604 // = constant 
+05AA: 406@s = 'CAT4_FB' // @s = 'short'  // ~z~Smash the ATMs and get as much cash as possible!
+04AF: 510@ = 9647 // = constant 
+05AA: 408@s = 'CAT4_AF' // @s = 'short'  // ~z~Give up, you're surrounded!
+04AF: 511@ = 9605 // = constant 
+05AA: 410@s = 'CAT4_FD' // @s = 'short'  // ~z~Quick, we haven't much time!
+04AF: 512@ = 9649 // = constant 
+05AA: 412@s = 'CAT4_GB' // @s = 'short'  // ~z~Better take the back door!
+04AF: 513@ = 9651 // = constant 
+05AA: 414@s = 'CAT4_HH' // @s = 'short'  // ~z~Follow me!
+04AF: 514@ = 9659 // = constant 
+05AA: 416@s = 'CAT4_HF' // @s = 'short'  // ~z~Cops! Take cover!
+04AF: 515@ = 9657 // = constant 
+05AA: 418@s = 'CAT4_AG' // @s = 'short'  // ~z~Thought you might try the back way!
+04AF: 516@ = 9606 // = constant 
+05AA: 420@s = 'CAT4_AH' // @s = 'short'  // ~z~We were waiting for yer!
+04AF: 517@ = 9607 // = constant 
+05AA: 422@s = 'CAT4_HI' // @s = 'short'  // ~z~Cover me!
+04AF: 518@ = 9660 // = constant 
+05AA: 424@s = 'CAT4_BF' // @s = 'short'  // ~z~Give up, you're surrounded!
+04AF: 519@ = 9615 // = constant 
+05AA: 426@s = 'CAT4_KF' // @s = 'short'  // ~z~Pick it up a little, you retarded asshole!
+04AF: 520@ = 9669 // = constant 
+05AA: 428@s = 'CAT4_HB' // @s = 'short'  // ~z~Look out, Carl!
+04AF: 521@ = 9653 // = constant 
+05AA: 430@s = 'CAT4_HG' // @s = 'short'  // ~z~Keep going!
+04AF: 522@ = 9658 // = constant 
+05AA: 432@s = 'CAT4_AJ' // @s = 'short'  // ~z~You two, FREEZE!
+04AF: 523@ = 9609 // = constant 
+05AA: 434@s = 'CAT4_JA' // @s = 'short'  // ~z~Grab a bike and follow me!
+04AF: 524@ = 9662 // = constant 
+05AA: 436@s = 'CAT4_JB' // @s = 'short'  // ~z~You think you can keep up with a real woman?
+04AF: 525@ = 9663 // = constant 
+05AA: 438@s = 'CAT4_KA' // @s = 'short'  // ~z~What's keeping you?
+04AF: 526@ = 9664 // = constant 
+05AA: 440@s = 'CAT4_KB' // @s = 'short'  // ~z~You slow bastard!
+04AF: 527@ = 9665 // = constant 
+05AA: 442@s = 'CAT4_KC' // @s = 'short'  // ~z~Are you afraid of speed, Carl?
+04AF: 528@ = 9666 // = constant 
+05AA: 444@s = 'CAT4_KD' // @s = 'short'  // ~z~Stop getting lost!
+04AF: 529@ = 9667 // = constant 
+05AA: 446@s = 'CAT4_KE' // @s = 'short'  // ~z~You're too laid back, you lazy slob!
+04AF: 530@ = 9668 // = constant 
+05AA: 448@s = 'CAT3_EC' // @s = 'short'  // ~z~C'mon, Carl, move it!
+04AF: 531@ = 9421 // = constant 
+05AA: 450@s = 'CAT_GJ' // @s = 'short'  // ~z~I'm in love, Carl.
+04AF: 532@ = 8681 // = constant 
+05AA: 452@s = 'CAT4_BK' // @s = 'short'  // ~z~Attention all units - some psychos are robbing the bank at Palomino Creek!
+04AF: 533@ = 9620 // = constant 
+564@ = 1 
+565@ = 2 
+566@ = 2 
+567@ = 1 
+568@ = 1 
+569@ = 1 
+570@ = 2 
+571@ = 2 
+572@ = 1 
+573@ = 1 
+574@ = 3 
+575@ = 4 
+576@ = 3 
+577@ = 4 
+578@ = 3 
+579@ = 1 
+580@ = 0 
+581@ = 1 
+582@ = 1 
+583@ = 1 
+584@ = 5 
+585@ = 5 
+586@ = 1 
+587@ = 1 
+588@ = 6 
+589@ = 1 
+590@ = 1 
+591@ = 1 
+592@ = 6 
+593@ = 1 
+594@ = 1 
+595@ = 0 
+596@ = 0 
+597@ = 0 
+598@ = 0 
+599@ = 0 
+600@ = 1 
+601@ = 1 
+602@ = 0 
+008B: 624@ = $ACTOR_CATALINA // (int) 
+008B: 625@ = $PLAYER_ACTOR // (int) 
+008B: 628@ = $PLAYER_ACTOR // (int) 
+008B: 629@ = $PLAYER_ACTOR // (int) 
+559@ = 1 
+03CF: load_wav 495@ as 1 
+03CF: load_wav 496@ as 2 
+555@ = 1 
+556@ = 2 
+jump @CAT2_34563 
+
+:CAT2_33294
+if 
+   not 560@ == 0 
+jf @CAT2_34154 
+if 
+001D:   32@ > 639@ // (int) 
+jf @CAT2_34154 
+if and
+03D2:   wav 1 ended 
+03D2:   wav 2 ended 
+jf @CAT2_34154 
+if 
+003B:   555@ == 560@ // (int) 
+jf @CAT2_33383 
+557@ = 1 
+jump @CAT2_33446 
+
+:CAT2_33383
+if 
+003B:   556@ == 560@ // (int) 
+jf @CAT2_33416 
+557@ = 2 
+jump @CAT2_33446 
+
+:CAT2_33416
+557@ = 1 
+0085: 555@ = 560@ // (int) 
+040D: unload_wav 1 
+03CF: load_wav 494@(560@,60i) as 1 
+
+:CAT2_33446
+if 
+03D0:   wav 557@ loaded 
+jf @CAT2_34142 
+0085: 631@ = 563@(560@,60i) // (int) 
+0085: 632@ = 623@(631@,7i) // (int) 
+if 
+   not 638@ == 1 
+jf @CAT2_33674 
+635@ = 1 
+637@ = 0 
+
+:CAT2_33518
+if 
+  7 > 635@ 
+jf @CAT2_33674 
+0085: 636@ = 623@(635@,7i) // (int) 
+if 
+   not 636@ == 0 
+jf @CAT2_33660 
+if 
+803B:   not  636@ == 632@ // (int) 
+jf @CAT2_33660 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_33660 
+if 
+   not Actor.Dead(636@)
+jf @CAT2_33660 
+if 
+0104:   actor 632@ near_actor 636@ radius 10.0 10.0 10.0 sphere 0 
+jf @CAT2_33660 
+637@ += 1 
+
+:CAT2_33660
+635@ += 1 
+jump @CAT2_33518 
+
+:CAT2_33674
+if or
+  638@ == 1 
+  637@ > 0 
+  563@(560@,60i) == 0 
+jf @CAT2_34128 
+if 
+   not 563@(560@,60i) == 0 
+jf @CAT2_33860 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_33860 
+if 
+  $7248 == 0 
+jf @CAT2_33774 
+0949: link_wav 557@ to_actor 632@ 
+
+:CAT2_33774
+if 
+894D:   not actor 632@ mutally_active 
+jf @CAT2_33812 
+630@ = 1 
+0967: actor 632@ move_mouth 15000 ms 
+jump @CAT2_33819 
+
+:CAT2_33812
+094E: set_actor 632@ mute_pain_audio 0 
+
+:CAT2_33819
+if 
+   not 632@ == 0 
+jf @CAT2_33860 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_33860 
+0A09: set_actor 632@ muted 1 // versionB 
+
+:CAT2_33860
+if 
+  563@(560@,60i) == 0 
+jf @CAT2_33889 
+630@ = 1 
+
+:CAT2_33889
+if 
+  562@ == 1 
+jf @CAT2_33930 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @CAT2_33930 
+630@ = 0 
+
+:CAT2_33930
+if 
+  630@ == 1 
+jf @CAT2_34121 
+03D1: play_wav 557@ 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 374@(560@,60s) time 10000 flag 1 
+559@ += 1 
+630@ = 0 
+560@ += 1 
+0085: 558@ = 560@ // (int) 
+if 
+   not 494@(560@,60i) == 0 
+jf @CAT2_34121 
+if 
+  557@ == 1 
+jf @CAT2_34083 
+if 
+803B:   not  556@ == 560@ // (int) 
+jf @CAT2_34076 
+03CF: load_wav 494@(560@,60i) as 2 
+0085: 556@ = 560@ // (int) 
+
+:CAT2_34076
+jump @CAT2_34121 
+
+:CAT2_34083
+if 
+803B:   not  555@ == 560@ // (int) 
+jf @CAT2_34121 
+03CF: load_wav 494@(560@,60i) as 1 
+0085: 555@ = 560@ // (int) 
+
+:CAT2_34121
+jump @CAT2_34135 
+
+:CAT2_34128
+559@ = 6 
+
+:CAT2_34135
+jump @CAT2_34154 
+
+:CAT2_34142
+03CF: load_wav 494@(560@,60i) as 557@ 
+
+:CAT2_34154
+jump @CAT2_34563 
+
+:CAT2_34161
+if 
+03D2:   wav 557@ ended 
+jf @CAT2_34214 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34200 
+0A09: set_actor 632@ muted 0 // versionB 
+
+:CAT2_34200
+559@ += 1 
+jump @CAT2_34253 
+
+:CAT2_34214
+if 
+056D:   actor 632@ defined 
+jf @CAT2_34253 
+if 
+   Actor.Dead(632@)
+jf @CAT2_34253 
+559@ += 1 
+
+:CAT2_34253
+jump @CAT2_34563 
+
+:CAT2_34260
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34283 
+0A09: set_actor 632@ muted 0 // versionB 
+
+:CAT2_34283
+040D: unload_wav 557@ 
+554@(557@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34322 
+094F: enable_actor 632@ pain_audio 
+
+:CAT2_34322
+559@ += 1 
+jump @CAT2_34563 
+
+:CAT2_34336
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34359 
+0A09: set_actor 632@ muted 0 // versionB 
+
+:CAT2_34359
+560@ += 1 
+if 
+   not 494@(560@,60i) == 0 
+jf @CAT2_34412 
+03CF: load_wav 494@(560@,60i) as 557@ 
+0085: 554@(557@,3i) = 560@ // (int) 
+
+:CAT2_34412
+561@ -= 1 
+if 
+   not 561@ > 0 
+jf @CAT2_34451 
+560@ = 0 
+jump @CAT2_34459 
+
+:CAT2_34451
+0085: 560@ = 558@ // (int) 
+
+:CAT2_34459
+559@ = 1 
+jump @CAT2_34563 
+
+:CAT2_34473
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34496 
+0A09: set_actor 632@ muted 0 // versionB 
+
+:CAT2_34496
+559@ = 1 
+560@ = 0 
+561@ = 0 
+040D: unload_wav 557@ 
+554@(557@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(632@)
+jf @CAT2_34556 
+094F: enable_actor 632@ pain_audio 
+
+:CAT2_34556
+jump @CAT2_34563 
+
+:CAT2_34563
+return

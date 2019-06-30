@@ -1,0 +1,1122 @@
+:CATALIN
+gosub @CATALIN_36 
+if 
+wasted_or_busted 
+jf @CATALIN_27 
+gosub @CATALIN_7507 
+
+:CATALIN_27
+gosub @CATALIN_7530 
+end_thread 
+
+:CATALIN_36
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'CATALIN' 
+wait 0 
+054C: use_GXT_table 'CAT' 
+52@ = 0 
+53@ = 0 
+54@ = 0 
+008B: 55@ = $PLAYER_ACTOR // (int) 
+08F5: save_player_group 
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 0 
+jf @CATALIN_1203 
+select_interior 1 
+02E4: load_cutscene_data 'CAT_1' 
+
+:CATALIN_135
+if 
+86B9:   not cutscene_data_loaded 
+jf @CATALIN_159 
+wait 0 
+jump @CATALIN_135 
+
+:CATALIN_159
+02E7: start_cutscene 
+fade 1 1000 
+
+:CATALIN_168
+if 
+82E9:   not cutscene_reached_end 
+jf @CATALIN_192 
+wait 0 
+jump @CATALIN_168 
+
+:CATALIN_192
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CATALIN_207
+if 
+fading 
+jf @CATALIN_231 
+wait 0 
+jump @CATALIN_207 
+
+:CATALIN_231
+select_interior 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+
+:CATALIN_248
+if 
+823D:   not special_actor 5 loaded 
+jf @CATALIN_287 
+wait 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+jump @CATALIN_248 
+
+:CATALIN_287
+0395: clear_area 0 at 681.1634 -478.1859 15.3281 radius 0.5 
+Camera.SetAtPos(681.1634, -478.1859, 15.3281)
+Actor.PutAt($PLAYER_ACTOR, 681.1634, -478.1859, 15.3281)
+Actor.Angle($PLAYER_ACTOR) = 177.0008
+Camera.SetBehindPlayer
+$ACTOR_CATALINA = Actor.Create(Special, #SPECIAL05, 682.8292, -477.8332, 15.3359)
+Actor.Angle($ACTOR_CATALINA) = 149.5317
+05AA: 56@s = 'CAT_AA' // @s = 'short'  // ~z~Where's your car?
+05AA: 58@s = 'CAT_AB' // @s = 'short'  // ~z~Where's yours?
+05AA: 60@s = 'CAT_AC' // @s = 'short'  // ~z~Ladies don't drive themselves, that's what men are for!
+05AA: 62@s = 'CAT_AD' // @s = 'short'  // ~z~Oh my goodness! Thanks Cesar. Appreciate this, homie!
+04AF: 96@ = 8600 // = constant 
+04AF: 97@ = 8601 // = constant 
+04AF: 98@ = 8602 // = constant 
+04AF: 99@ = 8603 // = constant 
+008B: 116@ = $ACTOR_CATALINA // (int) 
+0085: 117@ = 55@ // (int) 
+008B: 118@ = $ACTOR_CATALINA // (int) 
+0085: 119@ = 55@ // (int) 
+52@ = 4 
+05AA: 136@s = 'CAT_BA' // @s = 'short'  // ~z~So, what's your name? Where we going?
+05AA: 138@s = 'CAT_BB' // @s = 'short'  // ~z~My name is Catalina and we gonna take this county for every stinking cent!
+05AA: 140@s = 'CAT_BC' // @s = 'short'  // ~z~OK, good plan... I guess.
+05AA: 142@s = 'CAT_BD' // @s = 'short'  // ~z~You're damn straight it's a good plan!
+05AA: 144@s = 'CAT_BE' // @s = 'short'  // ~z~I've cased four soft targets;
+05AA: 146@s = 'CAT_BH' // @s = 'short'  // ~z~a liquor store in Blueberry,
+05AA: 148@s = 'CAT_BG' // @s = 'short'  // ~z~a bank in Palomino Creek,
+05AA: 150@s = 'CAT_BF' // @s = 'short'  // ~z~a gas station in Dillimore,
+05AA: 152@s = 'CAT_BI' // @s = 'short'  // ~z~and a betting shop in Montgomery.
+05AA: 154@s = 'CAT_BJ' // @s = 'short'  // ~z~Hold up. Which one first?
+05AA: 156@s = 'CAT_BK' // @s = 'short'  // ~z~You're the driver, you dumb pig, you choose!
+04AF: 160@ = 8604 // = constant 
+04AF: 161@ = 8605 // = constant 
+04AF: 162@ = 8606 // = constant 
+04AF: 163@ = 8607 // = constant 
+04AF: 164@ = 8608 // = constant 
+04AF: 165@ = 8611 // = constant 
+04AF: 166@ = 8610 // = constant 
+04AF: 167@ = 8609 // = constant 
+04AF: 168@ = 8612 // = constant 
+04AF: 169@ = 8613 // = constant 
+04AF: 170@ = 8614 // = constant 
+0085: 172@ = 55@ // (int) 
+008B: 173@ = $ACTOR_CATALINA // (int) 
+0085: 174@ = 55@ // (int) 
+008B: 175@ = $ACTOR_CATALINA // (int) 
+008B: 176@ = $ACTOR_CATALINA // (int) 
+008B: 177@ = $ACTOR_CATALINA // (int) 
+008B: 178@ = $ACTOR_CATALINA // (int) 
+008B: 179@ = $ACTOR_CATALINA // (int) 
+008B: 180@ = $ACTOR_CATALINA // (int) 
+0085: 181@ = 55@ // (int) 
+008B: 182@ = $ACTOR_CATALINA // (int) 
+53@ = 11 
+05AA: 184@s = 'CAT_CA' // @s = 'short'  // ~z~You're pretty high strung, huh, lady.
+05AA: 186@s = 'CAT_CB' // @s = 'short'  // ~z~Yeah? And what are you?
+05AA: 188@s = 'CAT_CC' // @s = 'short'  // ~z~Some laid back gang banger dude?
+05AA: 190@s = 'CAT_CD' // @s = 'short'  // ~z~I keep myself to myself. That's my style.
+05AA: 192@s = 'CAT_CE' // @s = 'short'  // ~z~Cesar says you got a brother in jail,
+05AA: 194@s = 'CAT_CF' // @s = 'short'  // ~z~another brother dead, a mother just killed,
+05AA: 196@s = 'CAT_CG' // @s = 'short'  // ~z~and you got a bent cop on your case.
+05AA: 198@s = 'CAT_CH' // @s = 'short'  // ~z~I ain't listening to you.
+05AA: 200@s = 'CAT_CI' // @s = 'short'  // ~z~You think that is keeping yourself to yourself, eh amigo?
+05AA: 202@s = 'CAT_CJ' // @s = 'short'  // ~z~Real cool? You just an idiota!
+05AA: 204@s = 'CAT_CK' // @s = 'short'  // ~z~And you're real charming. A proper lady.
+04AF: 208@ = 8615 // = constant 
+04AF: 209@ = 8616 // = constant 
+04AF: 210@ = 8617 // = constant 
+04AF: 211@ = 8618 // = constant 
+04AF: 212@ = 8619 // = constant 
+04AF: 213@ = 8620 // = constant 
+04AF: 214@ = 8621 // = constant 
+04AF: 215@ = 8622 // = constant 
+04AF: 216@ = 8623 // = constant 
+04AF: 217@ = 8624 // = constant 
+04AF: 218@ = 8625 // = constant 
+0085: 220@ = 55@ // (int) 
+008B: 221@ = $ACTOR_CATALINA // (int) 
+008B: 222@ = $ACTOR_CATALINA // (int) 
+0085: 223@ = 55@ // (int) 
+008B: 224@ = $ACTOR_CATALINA // (int) 
+008B: 225@ = $ACTOR_CATALINA // (int) 
+008B: 226@ = $ACTOR_CATALINA // (int) 
+0085: 227@ = 55@ // (int) 
+008B: 228@ = $ACTOR_CATALINA // (int) 
+008B: 229@ = $ACTOR_CATALINA // (int) 
+0085: 230@ = 55@ // (int) 
+54@ = 11 
+jump @CATALIN_3878 
+
+:CATALIN_1203
+set_weather 13 
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 1 
+jf @CATALIN_2211 
+02E4: load_cutscene_data 'CAT_2' 
+
+:CATALIN_1236
+if 
+86B9:   not cutscene_data_loaded 
+jf @CATALIN_1260 
+wait 0 
+jump @CATALIN_1236 
+
+:CATALIN_1260
+0395: clear_area 0 at 868.521 -30.0862 63.1875 radius 5.8 
+02E7: start_cutscene 
+fade 1 1000 
+
+:CATALIN_1293
+if 
+82E9:   not cutscene_reached_end 
+jf @CATALIN_1317 
+wait 0 
+jump @CATALIN_1293 
+
+:CATALIN_1317
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CATALIN_1332
+if 
+fading 
+jf @CATALIN_1356 
+wait 0 
+jump @CATALIN_1332 
+
+:CATALIN_1356
+select_interior 0 
+0629: change_integer_stat 341 to 1 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+
+:CATALIN_1380
+if 
+823D:   not special_actor 5 loaded 
+jf @CATALIN_1419 
+wait 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+jump @CATALIN_1380 
+
+:CATALIN_1419
+0395: clear_area 0 at 868.4825 -29.6753 62.1875 radius 0.5 
+Camera.SetAtPos(868.4825, -29.6753, 62.1875)
+Actor.PutAt($PLAYER_ACTOR, 868.4825, -29.6753, 62.1875)
+Actor.Angle($PLAYER_ACTOR) = 157.9281
+Camera.SetBehindPlayer
+$ACTOR_CATALINA = Actor.Create(Special, #SPECIAL05, 867.7455, -29.0865, 62.1875)
+Actor.Angle($ACTOR_CATALINA) = 225.9654
+05AA: 56@s = 'CAT_FA' // @s = 'short'  // ~z~Hey, what we got left?
+04AF: 96@ = 8657 // = constant 
+0085: 116@ = 55@ // (int) 
+05AA: 58@s = 'CAT_FB' // @s = 'short'  // ~z~Are you stupid? You forget already?
+04AF: 97@ = 8658 // = constant 
+008B: 117@ = $ACTOR_CATALINA // (int) 
+37@ = 2 
+if 
+  $MISSION_TANKER_COMMANDER_PASSED == 0 
+jf @CATALIN_1661 
+05AA: 56@(37@,20s) = 'CAT_FC' // @s = 'short'  // ~z~The gas station in Dillimore.
+04AF: 96@(37@,20i) = 8659 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+37@ += 1 
+
+:CATALIN_1661
+if 
+  $MISSION_SMALL_TOWN_BANK_PASSED == 0 
+jf @CATALIN_1728 
+05AA: 56@(37@,20s) = 'CAT_FD' // @s = 'short'  // ~z~The bank in Palomino Creek.
+04AF: 96@(37@,20i) = 8660 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+37@ += 1 
+
+:CATALIN_1728
+if 
+  $MISSION_LOCAL_LIQUOR_STORE_PASSED == 0 
+jf @CATALIN_1862 
+if 
+  $ALL_CATALINA_MISSIONS_PASSED == 0 
+jf @CATALIN_1813 
+05AA: 56@(37@,20s) = 'CAT_FE' // @s = 'short'  // ~z~The liquor store in Blueberry.
+04AF: 96@(37@,20i) = 8661 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+jump @CATALIN_1855 
+
+:CATALIN_1813
+05AA: 56@(37@,20s) = 'CAT_FG' // @s = 'short'  // ~z~Or the liquor store in Blueberry.
+04AF: 96@(37@,20i) = 8663 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+
+:CATALIN_1855
+37@ += 1 
+
+:CATALIN_1862
+if 
+  $ALL_CATALINA_MISSIONS_PASSED == 0 
+jf @CATALIN_1929 
+05AA: 56@(37@,20s) = 'CAT_FH' // @s = 'short'  // ~z~Or the betting shop in Montgomery.
+04AF: 96@(37@,20i) = 8664 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+37@ += 1 
+
+:CATALIN_1929
+05AA: 56@(37@,20s) = 'CAT_FI' // @s = 'short'  // ~z~OK, well this time we're gonna do it real chill,
+04AF: 96@(37@,20i) = 8665 // = constant 
+0085: 116@(37@,20i) = 55@ // (int) 
+37@ += 1 
+05AA: 56@(37@,20s) = 'CAT_FJ' // @s = 'short'  // ~z~no crazy psycho shit, baby.
+04AF: 96@(37@,20i) = 8666 // = constant 
+0085: 116@(37@,20i) = 55@ // (int) 
+37@ += 1 
+05AA: 56@(37@,20s) = 'CAT_FK' // @s = 'short'  // ~z~Speak for yourself, soft boy.
+04AF: 96@(37@,20i) = 8667 // = constant 
+008B: 116@(37@,20i) = $ACTOR_CATALINA // (int) 
+37@ += 1 
+0085: 52@ = 37@ // (int) 
+05AA: 136@s = 'CAT_FL' // @s = 'short'  // ~z~Today I feel like killing all the men I meet!
+05AA: 138@s = 'CAT_FM' // @s = 'short'  // ~z~Ah baby!
+05AA: 140@s = 'CAT_FN' // @s = 'short'  // ~z~Don't worry, I make an exception for some of the men in my life.
+05AA: 142@s = 'CAT_FO' // @s = 'short'  // ~z~Now drive faster!
+04AF: 160@ = 8668 // = constant 
+04AF: 161@ = 8669 // = constant 
+04AF: 162@ = 8670 // = constant 
+04AF: 163@ = 8671 // = constant 
+008B: 172@ = $ACTOR_CATALINA // (int) 
+0085: 173@ = 55@ // (int) 
+008B: 174@ = $ACTOR_CATALINA // (int) 
+008B: 175@ = $ACTOR_CATALINA // (int) 
+53@ = 4 
+
+:CATALIN_2211
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 2 
+jf @CATALIN_3101 
+02E4: load_cutscene_data 'CAT_3' 
+
+:CATALIN_2240
+if 
+86B9:   not cutscene_data_loaded 
+jf @CATALIN_2264 
+wait 0 
+jump @CATALIN_2240 
+
+:CATALIN_2264
+0395: clear_area 0 at 868.521 -30.0862 63.1875 radius 5.8 
+02E7: start_cutscene 
+fade 1 1000 
+
+:CATALIN_2297
+if 
+82E9:   not cutscene_reached_end 
+jf @CATALIN_2321 
+wait 0 
+jump @CATALIN_2297 
+
+:CATALIN_2321
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CATALIN_2336
+if 
+fading 
+jf @CATALIN_2360 
+wait 0 
+jump @CATALIN_2336 
+
+:CATALIN_2360
+select_interior 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+
+:CATALIN_2377
+if 
+823D:   not special_actor 5 loaded 
+jf @CATALIN_2416 
+wait 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+jump @CATALIN_2377 
+
+:CATALIN_2416
+0395: clear_area 0 at 868.4825 -29.6753 62.1875 radius 0.5 
+Camera.SetAtPos(868.4825, -29.6753, 62.1875)
+Actor.PutAt($PLAYER_ACTOR, 868.4825, -29.6753, 62.1875)
+Actor.Angle($PLAYER_ACTOR) = 157.9281
+Camera.SetBehindPlayer
+$ACTOR_CATALINA = Actor.Create(Special, #SPECIAL05, 867.7455, -29.0865, 62.1875)
+Actor.Angle($ACTOR_CATALINA) = 225.9654
+05AA: 56@s = 'CAT_KA' // @s = 'short'  // ~z~How was it?
+05AA: 58@s = 'CAT_KB' // @s = 'short'  // ~z~Different...
+05AA: 60@s = 'CAT_KC' // @s = 'short'  // ~z~I knew you would like it!
+05AA: 62@s = 'CAT_KD' // @s = 'short'  // ~z~Look, baby, I thought we was going to make some serious paper.
+05AA: 64@s = 'CAT_KE' // @s = 'short'  // ~z~I'm starting to get really bored of you.
+05AA: 66@s = 'CAT_KF' // @s = 'short'  // ~z~I just need the money.
+05AA: 68@s = 'CAT_KG' // @s = 'short'  // ~z~And I'm just a cheap fuck?
+05AA: 70@s = 'CAT_KH' // @s = 'short'  // ~z~A whore you don't even pay?
+05AA: 72@s = 'CAT_KI' // @s = 'short'  // ~z~No, I didn't say that.
+05AA: 74@s = 'CAT_KJ' // @s = 'short'  // ~z~Carl, I say I'm in love with you, and you act like I'm an idiot.
+05AA: 76@s = 'CAT_KK' // @s = 'short'  // ~z~I see the way you look at other women.
+05AA: 78@s = 'CAT_KL' // @s = 'short'  // ~z~I know your kind, Carl. I am serious.
+05AA: 80@s = 'CAT_KM' // @s = 'short'  // ~z~I will kill you if you ever mess around.
+05AA: 82@s = 'CAT_KN' // @s = 'short'  // ~z~I will castrate you first.
+05AA: 84@s = 'CAT_KO' // @s = 'short'  // ~z~Then I will make you eat them.
+05AA: 86@s = 'CAT_KP' // @s = 'short'  // ~z~Enough! I need some fucking money!
+05AA: 88@s = 'CAT_KQ' // @s = 'short'  // ~z~Carl, you are really boring me now.
+05AA: 90@s = 'CAT_KR' // @s = 'short'  // ~z~Please, sweetheart. I got in some real, real deep shit.
+05AA: 92@s = 'CAT_KS' // @s = 'short'  // ~z~Okay. Maybe today we hit it big!
+04AF: 96@ = 8692 // = constant 
+04AF: 97@ = 8693 // = constant 
+04AF: 98@ = 8694 // = constant 
+04AF: 99@ = 8695 // = constant 
+04AF: 100@ = 8696 // = constant 
+04AF: 101@ = 8697 // = constant 
+04AF: 102@ = 8698 // = constant 
+04AF: 103@ = 8699 // = constant 
+04AF: 104@ = 8700 // = constant 
+04AF: 105@ = 8701 // = constant 
+04AF: 106@ = 8702 // = constant 
+04AF: 107@ = 8703 // = constant 
+04AF: 108@ = 8704 // = constant 
+04AF: 109@ = 8705 // = constant 
+04AF: 110@ = 8706 // = constant 
+04AF: 111@ = 8707 // = constant 
+04AF: 112@ = 8708 // = constant 
+04AF: 113@ = 8709 // = constant 
+04AF: 114@ = 8710 // = constant 
+008B: 116@ = $ACTOR_CATALINA // (int) 
+0085: 117@ = 55@ // (int) 
+008B: 118@ = $ACTOR_CATALINA // (int) 
+0085: 119@ = 55@ // (int) 
+008B: 120@ = $ACTOR_CATALINA // (int) 
+0085: 121@ = 55@ // (int) 
+008B: 122@ = $ACTOR_CATALINA // (int) 
+008B: 123@ = $ACTOR_CATALINA // (int) 
+0085: 124@ = 55@ // (int) 
+008B: 125@ = $ACTOR_CATALINA // (int) 
+008B: 126@ = $ACTOR_CATALINA // (int) 
+008B: 127@ = $ACTOR_CATALINA // (int) 
+008B: 128@ = $ACTOR_CATALINA // (int) 
+008B: 129@ = $ACTOR_CATALINA // (int) 
+008B: 130@ = $ACTOR_CATALINA // (int) 
+0085: 131@ = 55@ // (int) 
+008B: 132@ = $ACTOR_CATALINA // (int) 
+0085: 133@ = 55@ // (int) 
+008B: 134@ = $ACTOR_CATALINA // (int) 
+52@ = 19 
+
+:CATALIN_3101
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 3 
+jf @CATALIN_3878 
+02E4: load_cutscene_data 'CAT_4' 
+
+:CATALIN_3130
+if 
+86B9:   not cutscene_data_loaded 
+jf @CATALIN_3154 
+wait 0 
+jump @CATALIN_3130 
+
+:CATALIN_3154
+0395: clear_area 0 at 868.521 -30.0862 63.1875 radius 5.8 
+02E7: start_cutscene 
+fade 1 1000 
+
+:CATALIN_3187
+if 
+82E9:   not cutscene_reached_end 
+jf @CATALIN_3211 
+wait 0 
+jump @CATALIN_3187 
+
+:CATALIN_3211
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CATALIN_3226
+if 
+fading 
+jf @CATALIN_3250 
+wait 0 
+jump @CATALIN_3226 
+
+:CATALIN_3250
+select_interior 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+
+:CATALIN_3267
+if 
+823D:   not special_actor 5 loaded 
+jf @CATALIN_3306 
+wait 0 
+023C: load_special_actor 'CAT' as 5 // models 290-299 
+jump @CATALIN_3267 
+
+:CATALIN_3306
+0395: clear_area 0 at 868.4825 -29.6753 62.1875 radius 0.5 
+Camera.SetAtPos(868.4825, -29.6753, 62.1875)
+Actor.PutAt($PLAYER_ACTOR, 868.4825, -29.6753, 62.1875)
+Actor.Angle($PLAYER_ACTOR) = 157.9281
+Camera.SetBehindPlayer
+$ACTOR_CATALINA = Actor.Create(Special, #SPECIAL05, 867.7455, -29.0865, 62.1875)
+Actor.Angle($ACTOR_CATALINA) = 225.9654
+05AA: 56@s = 'CAT4_LA' // @s = 'short'  // ~z~I feel good today, like a woman reborn!
+05AA: 58@s = 'CAT4_LB' // @s = 'short'  // ~z~Cool, maybe you won't go berserk, huh?
+05AA: 60@s = 'CAT4_LC' // @s = 'short'  // ~z~Oh, I go berserk, but not until I really pissed!
+05AA: 62@s = 'CAT4_LD' // @s = 'short'  // ~z~Oh, well, that's a relief to hear!
+05AA: 64@s = 'CAT4_LE' // @s = 'short'  // ~z~Perhaps this time no cowboy motherfuckers will get in our way!
+05AA: 66@s = 'CAT4_LF' // @s = 'short'  // ~z~Amen to that!
+04AF: 96@ = 9671 // = constant 
+04AF: 97@ = 9672 // = constant 
+04AF: 98@ = 9673 // = constant 
+04AF: 99@ = 9674 // = constant 
+04AF: 100@ = 9675 // = constant 
+04AF: 101@ = 9676 // = constant 
+008B: 116@ = $ACTOR_CATALINA // (int) 
+0085: 117@ = 55@ // (int) 
+008B: 118@ = $ACTOR_CATALINA // (int) 
+0085: 119@ = 55@ // (int) 
+008B: 120@ = $ACTOR_CATALINA // (int) 
+0085: 121@ = 55@ // (int) 
+52@ = 6 
+05AA: 136@s = 'CAT_NA' // @s = 'short'  // ~z~Come on, drive!
+05AA: 138@s = 'CAT_NB' // @s = 'short'  // ~z~What's wrong?
+05AA: 140@s = 'CAT_NC' // @s = 'short'  // ~z~Nothing. I just hate men.
+05AA: 142@s = 'CAT_ND' // @s = 'short'  // ~z~Well give me a break.
+05AA: 144@s = 'CAT_NE' // @s = 'short'  // ~z~Here's your break.
+05AA: 146@s = 'CAT_NF' // @s = 'short'  // ~z~Your break is you're not on my barbecue being eaten.
+05AA: 148@s = 'CAT_NG' // @s = 'short'  // ~z~Well, that's one way of looking at shit, I suppose.
+05AA: 150@s = 'CAT_NH' // @s = 'short'  // ~z~Now, try to be a man this time.
+05AA: 152@s = 'CAT_KT' // @s = 'short'  // ~z~Drive, lover!
+04AF: 160@ = 8717 // = constant 
+04AF: 161@ = 8718 // = constant 
+04AF: 162@ = 8719 // = constant 
+04AF: 163@ = 8720 // = constant 
+04AF: 164@ = 8721 // = constant 
+04AF: 165@ = 8722 // = constant 
+04AF: 166@ = 8723 // = constant 
+04AF: 167@ = 8724 // = constant 
+04AF: 168@ = 8711 // = constant 
+008B: 172@ = $ACTOR_CATALINA // (int) 
+0085: 173@ = 55@ // (int) 
+008B: 174@ = $ACTOR_CATALINA // (int) 
+0085: 175@ = 55@ // (int) 
+008B: 176@ = $ACTOR_CATALINA // (int) 
+008B: 177@ = $ACTOR_CATALINA // (int) 
+0085: 178@ = 55@ // (int) 
+008B: 179@ = $ACTOR_CATALINA // (int) 
+008B: 180@ = $ACTOR_CATALINA // (int) 
+53@ = 9 
+
+:CATALIN_3878
+Actor.SetWalkStyle($ACTOR_CATALINA, "WOMAN")
+02A9: set_actor $ACTOR_CATALINA immune_to_nonplayer 1 
+0568: set_actor $ACTOR_CATALINA untargetable 1 
+077A: set_actor $ACTOR_CATALINA acquaintance 0 to_actors_pedtype 0 // see ped.dat 
+Actor.Health($ACTOR_CATALINA) = 100
+0446: set_actor $ACTOR_CATALINA dismemberment_possible 0 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CATALIN_3972 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+07CB: set_actor $ACTOR_CATALINA supporting_fire 0 
+
+:CATALIN_3972
+01B7: release_weather 
+08F6: restore_player_group 
+fade 1 1000 
+Player.CanMove($PLAYER_CHAR) = True
+
+:CATALIN_3990
+if 
+fading 
+jf @CATALIN_4014 
+wait 0 
+jump @CATALIN_3990 
+
+:CATALIN_4014
+if 
+  $CATALINA_DIALOG_LIQUOR_STORE_PLAYED == 1 
+jf @CATALIN_4039 
+$CATALINA_DIALOG_LIQUOR_STORE_PLAYED = 0 
+
+:CATALIN_4039
+if 
+  $CATALINA_DIALOG_BETTING_SHOP_PLAYED == 1 
+jf @CATALIN_4064 
+$CATALINA_DIALOG_BETTING_SHOP_PLAYED = 0 
+
+:CATALIN_4064
+if and
+  $MISSION_LOCAL_LIQUOR_STORE_PASSED == 1 
+  $CATALINA_DIALOG_LIQUOR_STORE_PLAYED == 0 
+jf @CATALIN_4290 
+05AA: 184@s = 'CAT1_IA' // @s = 'short'  // ~z~I hope you drive better this time around!
+05AA: 186@s = 'CAT1_IB' // @s = 'short'  // ~z~You ever driven a quad? It ain't easy.
+05AA: 188@s = 'CAT1_IC' // @s = 'short'  // ~z~'Specially when you got a screaming bitch on the back, shooting past your ear!
+05AA: 190@s = 'CAT1_IE' // @s = 'short'  // ~z~I like it when you angry at me, Carl.
+05AA: 192@s = 'CAT1_IF' // @s = 'short'  // ~z~I will try to anger you more often.
+05AA: 194@s = 'CAT1_IG' // @s = 'short'  // ~z~Now that I'm looking forward to...
+04AF: 208@ = 8835 // = constant 
+04AF: 209@ = 8836 // = constant 
+04AF: 210@ = 8837 // = constant 
+04AF: 211@ = 8838 // = constant 
+04AF: 212@ = 8839 // = constant 
+04AF: 213@ = 8840 // = constant 
+008B: 220@ = $ACTOR_CATALINA // (int) 
+0085: 221@ = 55@ // (int) 
+0085: 222@ = 55@ // (int) 
+008B: 223@ = $ACTOR_CATALINA // (int) 
+008B: 224@ = $ACTOR_CATALINA // (int) 
+0085: 225@ = 55@ // (int) 
+54@ = 6 
+$CATALINA_DIALOG_LIQUOR_STORE_PLAYED = 1 
+jump @CATALIN_4569 
+
+:CATALIN_4290
+if and
+  $ALL_CATALINA_MISSIONS_PASSED == 1 
+  $CATALINA_DIALOG_BETTING_SHOP_PLAYED == 0 
+jf @CATALIN_4569 
+05AA: 184@s = 'CAT2_HA' // @s = 'short'  // ~z~Carl, you have to be fast and totally ruthless!
+05AA: 186@s = 'CAT2_HB' // @s = 'short'  // ~z~No fucking about like in the betting shop!
+05AA: 188@s = 'CAT2_HC' // @s = 'short'  // ~z~What? If you hadn't started bustin', things would have been sweet!
+05AA: 190@s = 'CAT2_HE' // @s = 'short'  // ~z~They had to die because YOU were slow and stupid,
+05AA: 192@s = 'CAT2_HF' // @s = 'short'  // ~z~like a big fat brat that eats chocolates while his
+05AA: 194@s = 'CAT2_HG' // @s = 'short'  // ~z~father gives nothing to his step daughter but stale bread!
+05AA: 196@s = 'CAT2_HH' // @s = 'short'  // ~z~What? Where'd that come from?
+05AA: 198@s = 'CAT2_HI' // @s = 'short'  // ~z~Enough! I'm not speaking to you any more!
+04AF: 208@ = 9022 // = constant 
+04AF: 209@ = 9023 // = constant 
+04AF: 210@ = 9024 // = constant 
+04AF: 211@ = 9025 // = constant 
+04AF: 212@ = 9026 // = constant 
+04AF: 213@ = 9027 // = constant 
+04AF: 214@ = 9028 // = constant 
+04AF: 215@ = 9029 // = constant 
+008B: 220@ = $ACTOR_CATALINA // (int) 
+008B: 221@ = $ACTOR_CATALINA // (int) 
+0085: 222@ = 55@ // (int) 
+008B: 223@ = $ACTOR_CATALINA // (int) 
+008B: 224@ = $ACTOR_CATALINA // (int) 
+008B: 225@ = $ACTOR_CATALINA // (int) 
+0085: 226@ = 55@ // (int) 
+008B: 227@ = $ACTOR_CATALINA // (int) 
+54@ = 8 
+$CATALINA_DIALOG_BETTING_SHOP_PLAYED = 1 
+
+:CATALIN_4569
+232@ = 0 
+233@ = 0 
+234@ = 0 
+235@ = 1 
+236@ = 0 
+237@ = 1 
+238@ = 0 
+239@ = 0 
+240@ = 0 
+241@ = 0 
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS > 0 
+jf @CATALIN_4821 
+if 
+  $MISSION_LOCAL_LIQUOR_STORE_PASSED == 0 
+jf @CATALIN_4698 
+02A8: 242@ = create_marker 52 at $X_LOCAL_LIQUOR_STORE $Y_LOCAL_LIQUOR_STORE $Z_LOCAL_LIQUOR_STORE 
+238@ = 1 
+
+:CATALIN_4698
+if 
+  $MISSION_SMALL_TOWN_BANK_PASSED == 0 
+jf @CATALIN_4739 
+02A8: 243@ = create_marker 52 at $X_SMALL_TOWN_BANK $Y_SMALL_TOWN_BANK $Z_SMALL_TOWN_BANK 
+239@ = 1 
+
+:CATALIN_4739
+if 
+  $MISSION_TANKER_COMMANDER_PASSED == 0 
+jf @CATALIN_4780 
+02A8: 244@ = create_marker 52 at $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER 
+240@ = 1 
+
+:CATALIN_4780
+if 
+  $ALL_CATALINA_MISSIONS_PASSED == 0 
+jf @CATALIN_4821 
+02A8: 245@ = create_marker 52 at $X_AGAINST_ALL_ODDS $Y_AGAINST_ALL_ODDS $Z_AGAINST_ALL_ODDS 
+241@ = 1 
+
+:CATALIN_4821
+246@ = 0 
+
+:CATALIN_4828
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CATALIN_7185 
+if 
+06EE:   actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CATALIN_6878 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CATALINA radius 20.0 20.0 0 
+jf @CATALIN_5620 
+if 
+  3 > 233@ 
+jf @CATALIN_5620 
+if 
+  52@(233@,3i) == 0 
+jf @CATALIN_4957 
+233@ += 1 
+jump @CATALIN_5620 
+
+:CATALIN_4957
+if 
+  233@ == 1 
+jf @CATALIN_5063 
+if 
+   not Actor.Driving($ACTOR_CATALINA)
+jf @CATALIN_5030 
+if or
+  $CATALINA_TOTAL_PASSED_MISSIONS == 1 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 3 
+jf @CATALIN_5023 
+jump @CATALIN_5620 
+
+:CATALIN_5023
+jump @CATALIN_5063 
+
+:CATALIN_5030
+if 
+  232@ == 0 
+jf @CATALIN_5063 
+008B: 234@ = $CURRENT_TIME_IN_MS2 // (int) 
+234@ -= 10 
+
+:CATALIN_5063
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 234@ // (int) 
+jf @CATALIN_5620 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @CATALIN_5620 
+if 
+  233@ == 0 
+jf @CATALIN_5201 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 56@(232@,20s) // s$ 
+008A: $ACTOR_SPEECH_WAV_FILE = 96@(232@,20i) // (int) 
+create_thread @AUDIOL 116@(232@,20i) 0 1 235@ 232@ 
+if 
+07D6:   116@(232@,20i) == $ACTOR_CATALINA // @ == $ (int) 
+jf @CATALIN_5201 
+05BF: AS_actor $ACTOR_CATALINA look_at_actor 55@ 3000 ms 
+
+:CATALIN_5201
+if 
+  233@ == 1 
+jf @CATALIN_5302 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 136@(232@,12s) // s$ 
+008A: $ACTOR_SPEECH_WAV_FILE = 160@(232@,12i) // (int) 
+create_thread @AUDIOL 172@(232@,12i) 0 1 235@ 232@ 
+if 
+07D6:   172@(232@,12i) == $ACTOR_CATALINA // @ == $ (int) 
+jf @CATALIN_5302 
+05BF: AS_actor $ACTOR_CATALINA look_at_actor 55@ 3000 ms 
+
+:CATALIN_5302
+if 
+  233@ == 2 
+jf @CATALIN_5403 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 184@(232@,12s) // s$ 
+008A: $ACTOR_SPEECH_WAV_FILE = 208@(232@,12i) // (int) 
+create_thread @AUDIOL 220@(232@,12i) 0 1 235@ 232@ 
+if 
+07D6:   220@(232@,12i) == $ACTOR_CATALINA // @ == $ (int) 
+jf @CATALIN_5403 
+05BF: AS_actor $ACTOR_CATALINA look_at_actor 55@ 3000 ms 
+
+:CATALIN_5403
+if 
+  235@ == 1 
+jf @CATALIN_5435 
+235@ = 2 
+jump @CATALIN_5442 
+
+:CATALIN_5435
+235@ = 1 
+
+:CATALIN_5442
+008B: 234@ = $CURRENT_TIME_IN_MS2 // (int) 
+234@ += 500 
+232@ += 1 
+if 
+001D:   52@(233@,3i) > 232@ // (int) 
+jf @CATALIN_5590 
+040D: unload_wav 235@ 
+if 
+  233@ == 0 
+jf @CATALIN_5523 
+03CF: load_wav 96@(232@,20i) as 235@ 
+
+:CATALIN_5523
+if 
+  233@ == 1 
+jf @CATALIN_5553 
+03CF: load_wav 160@(232@,12i) as 235@ 
+
+:CATALIN_5553
+if 
+  233@ == 2 
+jf @CATALIN_5583 
+03CF: load_wav 208@(232@,12i) as 235@ 
+
+:CATALIN_5583
+jump @CATALIN_5620 
+
+:CATALIN_5590
+232@ = 0 
+008B: 234@ = $CURRENT_TIME_IN_MS2 // (int) 
+234@ += 10000 
+233@ += 1 
+
+:CATALIN_5620
+if 
+  $CATALINA_TOTAL_PASSED_MISSIONS == 0 
+jf @CATALIN_5920 
+if 
+  233@ == 1 
+jf @CATALIN_5920 
+if 
+  236@ == 0 
+jf @CATALIN_5722 
+if 
+  232@ > 6 
+jf @CATALIN_5722 
+02A8: 242@ = create_marker 52 at $X_LOCAL_LIQUOR_STORE $Y_LOCAL_LIQUOR_STORE $Z_LOCAL_LIQUOR_STORE 
+238@ = 1 
+236@ += 1 
+
+:CATALIN_5722
+if 
+  236@ == 1 
+jf @CATALIN_5788 
+if 
+  232@ > 7 
+jf @CATALIN_5788 
+02A8: 243@ = create_marker 52 at $X_SMALL_TOWN_BANK $Y_SMALL_TOWN_BANK $Z_SMALL_TOWN_BANK 
+239@ = 1 
+236@ += 1 
+
+:CATALIN_5788
+if 
+  236@ == 2 
+jf @CATALIN_5854 
+if 
+  232@ > 8 
+jf @CATALIN_5854 
+02A8: 244@ = create_marker 52 at $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER 
+240@ = 1 
+236@ += 1 
+
+:CATALIN_5854
+if 
+  236@ == 3 
+jf @CATALIN_5920 
+if 
+  232@ > 9 
+jf @CATALIN_5920 
+02A8: 245@ = create_marker 52 at $X_AGAINST_ALL_ODDS $Y_AGAINST_ALL_ODDS $Z_AGAINST_ALL_ODDS 
+241@ = 1 
+236@ += 1 
+
+:CATALIN_5920
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CATALIN_6307 
+if 
+  $489 == 0 
+jf @CATALIN_6028 
+0395: clear_area 0 at $X_LOCAL_LIQUOR_STORE $Y_LOCAL_LIQUOR_STORE $Z_LOCAL_LIQUOR_STORE radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, $X_LOCAL_LIQUOR_STORE, $Y_LOCAL_LIQUOR_STORE, $Z_LOCAL_LIQUOR_STORE)
+0086: $TEMPVAR_FLOAT_1 = $X_LOCAL_LIQUOR_STORE // (float) 
+$TEMPVAR_FLOAT_1 -= 1.0 
+Actor.PutAt($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $Y_LOCAL_LIQUOR_STORE, $Z_LOCAL_LIQUOR_STORE)
+Camera.SetAtPos($X_LOCAL_LIQUOR_STORE, $Y_LOCAL_LIQUOR_STORE, $Z_LOCAL_LIQUOR_STORE)
+
+:CATALIN_6028
+if 
+  $489 == 1 
+jf @CATALIN_6121 
+0395: clear_area 0 at $X_SMALL_TOWN_BANK $Y_SMALL_TOWN_BANK $Z_SMALL_TOWN_BANK radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, $X_SMALL_TOWN_BANK, $Y_SMALL_TOWN_BANK, $Z_SMALL_TOWN_BANK)
+0086: $TEMPVAR_FLOAT_1 = $X_SMALL_TOWN_BANK // (float) 
+$TEMPVAR_FLOAT_1 -= 1.0 
+Actor.PutAt($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $Y_SMALL_TOWN_BANK, $Z_SMALL_TOWN_BANK)
+Camera.SetAtPos($X_SMALL_TOWN_BANK, $Y_SMALL_TOWN_BANK, $Z_SMALL_TOWN_BANK)
+
+:CATALIN_6121
+if 
+  $489 == 2 
+jf @CATALIN_6214 
+0395: clear_area 0 at $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, $X_TANKER_COMMANDER, $Y_TANKER_COMMANDER, $Z_TANKER_COMMANDER)
+0086: $TEMPVAR_FLOAT_1 = $X_TANKER_COMMANDER // (float) 
+$TEMPVAR_FLOAT_1 -= 1.0 
+Actor.PutAt($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $Y_TANKER_COMMANDER, $Z_TANKER_COMMANDER)
+Camera.SetAtPos($X_TANKER_COMMANDER, $Y_TANKER_COMMANDER, $Z_TANKER_COMMANDER)
+
+:CATALIN_6214
+if 
+  $489 == 3 
+jf @CATALIN_6307 
+0395: clear_area 0 at $X_AGAINST_ALL_ODDS $Y_AGAINST_ALL_ODDS $Z_AGAINST_ALL_ODDS radius 0.5 
+Actor.PutAt($PLAYER_ACTOR, $X_AGAINST_ALL_ODDS, $Y_AGAINST_ALL_ODDS, $Z_AGAINST_ALL_ODDS)
+0086: $TEMPVAR_FLOAT_1 = $X_AGAINST_ALL_ODDS // (float) 
+$TEMPVAR_FLOAT_1 -= 1.0 
+Actor.PutAt($ACTOR_CATALINA, $TEMPVAR_FLOAT_1, $Y_AGAINST_ALL_ODDS, $Z_AGAINST_ALL_ODDS)
+Camera.SetAtPos($X_AGAINST_ALL_ODDS, $Y_AGAINST_ALL_ODDS, $Z_AGAINST_ALL_ODDS)
+
+:CATALIN_6307
+if 
+  $MISSION_LOCAL_LIQUOR_STORE_PASSED == 0 
+jf @CATALIN_6448 
+if 
+  238@ == 1 
+jf @CATALIN_6448 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere $X_LOCAL_LIQUOR_STORE $Y_LOCAL_LIQUOR_STORE $Z_LOCAL_LIQUOR_STORE radius 3.0 3.0 3.0 
+jf @CATALIN_6448 
+Player.CanMove($PLAYER_CHAR) = False
+00BA: show_text_styled GXT 'CAT_1' time 1000 style 2  // Local Liquor Store
+fade 0 500 
+
+:CATALIN_6415
+if 
+fading 
+jf @CATALIN_6439 
+wait 0 
+jump @CATALIN_6415 
+
+:CATALIN_6439
+$CATALINA_SELECTED_MISSION = 0 
+return 
+
+:CATALIN_6448
+if 
+  $MISSION_SMALL_TOWN_BANK_PASSED == 0 
+jf @CATALIN_6589 
+if 
+  239@ == 1 
+jf @CATALIN_6589 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere $X_SMALL_TOWN_BANK $Y_SMALL_TOWN_BANK $Z_SMALL_TOWN_BANK radius 3.0 3.0 3.0 
+jf @CATALIN_6589 
+Player.CanMove($PLAYER_CHAR) = False
+00BA: show_text_styled GXT 'CAT_2' time 1000 style 2  // Small Town Bank
+fade 0 500 
+
+:CATALIN_6556
+if 
+fading 
+jf @CATALIN_6580 
+wait 0 
+jump @CATALIN_6556 
+
+:CATALIN_6580
+$CATALINA_SELECTED_MISSION = 1 
+return 
+
+:CATALIN_6589
+if 
+  $MISSION_TANKER_COMMANDER_PASSED == 0 
+jf @CATALIN_6730 
+if 
+  240@ == 1 
+jf @CATALIN_6730 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER radius 3.0 3.0 3.0 
+jf @CATALIN_6730 
+Player.CanMove($PLAYER_CHAR) = False
+00BA: show_text_styled GXT 'CAT_3' time 1000 style 2  // Tanker Commander
+fade 0 500 
+
+:CATALIN_6697
+if 
+fading 
+jf @CATALIN_6721 
+wait 0 
+jump @CATALIN_6697 
+
+:CATALIN_6721
+$CATALINA_SELECTED_MISSION = 2 
+return 
+
+:CATALIN_6730
+if 
+  $ALL_CATALINA_MISSIONS_PASSED == 0 
+jf @CATALIN_6871 
+if 
+  241@ == 1 
+jf @CATALIN_6871 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere $X_AGAINST_ALL_ODDS $Y_AGAINST_ALL_ODDS $Z_AGAINST_ALL_ODDS radius 3.0 3.0 3.0 
+jf @CATALIN_6871 
+Player.CanMove($PLAYER_CHAR) = False
+00BA: show_text_styled GXT 'CAT_4' time 1000 style 2  // Against All Odds
+fade 0 500 
+
+:CATALIN_6838
+if 
+fading 
+jf @CATALIN_6862 
+wait 0 
+jump @CATALIN_6838 
+
+:CATALIN_6862
+$CATALINA_SELECTED_MISSION = 3 
+return 
+
+:CATALIN_6871
+jump @CATALIN_7178 
+
+:CATALIN_6878
+if 
+  237@ == 1 
+jf @CATALIN_6954 
+00BC: show_text_highpriority GXT 'CATLEFT' time 5000 flag 1  // ~s~You left ~b~Catalina~s~ behind. Go back and pick her up.
+Marker.Disable(242@)
+Marker.Disable(243@)
+Marker.Disable(244@)
+Marker.Disable(245@)
+34@ = Marker.CreateAboveActor($ACTOR_CATALINA)
+07E0: set_marker 34@ type_to 1 
+237@ += 1 
+
+:CATALIN_6954
+if 
+  237@ == 2 
+jf @CATALIN_7178 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_CATALINA radius 10.0 10.0 0 
+jf @CATALIN_7178 
+Marker.Disable(34@)
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CATALIN_7035 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+
+:CATALIN_7035
+if 
+  238@ == 1 
+jf @CATALIN_7069 
+02A8: 242@ = create_marker 52 at $X_LOCAL_LIQUOR_STORE $Y_LOCAL_LIQUOR_STORE $Z_LOCAL_LIQUOR_STORE 
+
+:CATALIN_7069
+if 
+  239@ == 1 
+jf @CATALIN_7103 
+02A8: 243@ = create_marker 52 at $X_SMALL_TOWN_BANK $Y_SMALL_TOWN_BANK $Z_SMALL_TOWN_BANK 
+
+:CATALIN_7103
+if 
+  240@ == 1 
+jf @CATALIN_7137 
+02A8: 244@ = create_marker 52 at $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER 
+
+:CATALIN_7137
+if 
+  241@ == 1 
+jf @CATALIN_7171 
+02A8: 245@ = create_marker 52 at $X_AGAINST_ALL_ODDS $Y_AGAINST_ALL_ODDS $Z_AGAINST_ALL_ODDS 
+
+:CATALIN_7171
+237@ = 1 
+
+:CATALIN_7178
+jump @CATALIN_7208 
+
+:CATALIN_7185
+00BC: show_text_highpriority GXT 'CATDEAD' time 5000 flag 1  // ~r~Catalina is dead!
+jump @CATALIN_7507 
+
+:CATALIN_7208
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 660.0 -585.0 radius 200.0 200.0 
+jf @CATALIN_7455 
+if 
+  246@ == 0 
+jf @CATALIN_7448 
+Model.Load(#PETRO)
+Model.Load(#PETROTR)
+if and
+   Model.Available(#PETRO)
+   Model.Available(#PETROTR)
+jf @CATALIN_7448 
+247@ = Car.Create(#PETRO, 657.49, -585.13, 16.36)
+Car.Angle(247@) = 170.66
+053F: set_car 247@ tires_vulnerability 0 
+Car.SetImmunities(247@, 1, 0, 0, 0, 0)
+0587: enable_car 247@ validate_position 0 
+Car.DoorStatus(247@) = 2
+248@ = Car.Create(#PETROTR, 667.49, -583.13, 16.36)
+Car.Angle(248@) = 184.66
+Car.Health(248@) = 1250
+Car.SetImmunities(248@, 1, 1, 1, 1, 1)
+053F: set_car 248@ tires_vulnerability 0 
+0587: enable_car 248@ validate_position 0 
+Car.DoorStatus(248@) = 2
+246@ = 1 
+
+:CATALIN_7448
+jump @CATALIN_7500 
+
+:CATALIN_7455
+if 
+  246@ == 1 
+jf @CATALIN_7500 
+Car.Destroy(247@)
+Car.Destroy(248@)
+Model.Destroy(#PETRO)
+Model.Destroy(#PETROTR)
+246@ = 0 
+
+:CATALIN_7500
+jump @CATALIN_4828 
+
+:CATALIN_7507
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Actor.DestroyWithFade($ACTOR_CATALINA)
+return 
+
+:CATALIN_7530
+Marker.Disable(34@)
+Marker.Disable(242@)
+Marker.Disable(243@)
+Marker.Disable(244@)
+Marker.Disable(245@)
+0296: unload_special_actor 5 
+Model.Destroy(#PETRO)
+Model.Destroy(#PETROTR)
+$ONMISSION = 0 
+mission_cleanup 
+if 
+  $CATALINA_SELECTED_MISSION > -1 
+jf @CATALIN_7602 
+fade 0 0 
+
+:CATALIN_7602
+return

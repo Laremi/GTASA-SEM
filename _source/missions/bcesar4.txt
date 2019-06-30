@@ -1,0 +1,532 @@
+:BCESAR4
+thread 'BCESAR4' 
+gosub @BCESAR4_47 
+if 
+wasted_or_busted 
+jf @BCESAR4_38 
+gosub @BCESAR4_2683 
+
+:BCESAR4_38
+gosub @BCESAR4_2736 
+end_thread 
+
+:BCESAR4_47
+$ONMISSION = 1 
+
+:BCESAR4_54
+wait 0 
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 0 
+jf @BCESAR4_401 
+054C: use_GXT_table 'BCESAR4' 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR4_168 
+0811: 34@ = actor $PLAYER_ACTOR used_car 
+0763: add_car_reference 34@ // mission only 
+Car.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 1000.0 
+Car.PutAt(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.LockInCurrentPosition(34@) = True
+jump @BCESAR4_175 
+
+:BCESAR4_168
+34@ = -1 
+
+:BCESAR4_175
+0395: clear_area 1 at 1557.162 24.305 22.7313 radius 100.0 
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+02E4: load_cutscene_data 'BCESAR4' 
+
+:BCESAR4_219
+if 
+86B9:   not cutscene_data_loaded 
+jf @BCESAR4_243 
+wait 0 
+jump @BCESAR4_219 
+
+:BCESAR4_243
+02E7: start_cutscene 
+fade 1 1000 
+
+:BCESAR4_252
+if 
+82E9:   not cutscene_reached_end 
+jf @BCESAR4_276 
+wait 0 
+jump @BCESAR4_252 
+
+:BCESAR4_276
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:BCESAR4_289
+if 
+fading 
+jf @BCESAR4_313 
+wait 0 
+jump @BCESAR4_289 
+
+:BCESAR4_313
+02EA: end_cutscene 
+$1847 = 1 
+$MISSION_WUZIMU_STARTED_FLAG = 1 
+if 
+   not 34@ == -1 
+jf @BCESAR4_394 
+if 
+   not Car.Wrecked(34@)
+jf @BCESAR4_394 
+Car.LockInCurrentPosition(34@) = False
+$TEMPVAR_FLOAT_3 -= 1000.0 
+Car.PutAt(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:BCESAR4_394
+jump @BCESAR4_2685 
+
+:BCESAR4_401
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 2 
+jf @BCESAR4_1629 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -782.3699 -147.948 19.5518 cornerB -405.0757 -237.5195 91.1306 
+jf @BCESAR4_1601 
+$ONMISSION = 1 
+fade 0 1000 
+
+:BCESAR4_481
+if 
+fading 
+jf @BCESAR4_505 
+wait 0 
+jump @BCESAR4_481 
+
+:BCESAR4_505
+Model.Load(#STALLION)
+Model.Load(#SABRE)
+Model.Load(#FORTUNE)
+Model.Load(#WMYST)
+Model.Load(#WMYBMX)
+Model.Load(#SPECIAL01)
+04ED: load_animation "KISSING" 
+0395: clear_area 0 at -518.049 -189.3775 79.3468 radius 100.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-535.8186, -198.0116, 80.8647, 0.0, 0.0, 0.0)
+Camera.PointAt(-535.5711, -197.1029, 80.5285, 2)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR4_732 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR4_732 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+if 
+  $TEMPVAR_ACTOR_CAR > 0 
+jf @BCESAR4_732 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @BCESAR4_732 
+0338: set_car $TEMPVAR_ACTOR_CAR visibility 0 
+Car.LockInCurrentPosition($TEMPVAR_ACTOR_CAR) = True
+099A: set_car $TEMPVAR_ACTOR_CAR collision_detection 0 
+0337: set_actor $PLAYER_ACTOR visibility 0 
+
+:BCESAR4_732
+wait 1000 
+
+:BCESAR4_737
+if and
+   not Model.Available(#STALLION)
+   not Model.Available(#SABRE)
+   not Model.Available(#FORTUNE)
+   not Model.Available(#WMYST)
+   not Model.Available(#WMYBMX)
+   not Model.Available(#SPECIAL01)
+jf @BCESAR4_787 
+wait 0 
+jump @BCESAR4_737 
+
+:BCESAR4_787
+if 
+84EE:   not animation "KISSING" loaded 
+jf @BCESAR4_820 
+wait 0 
+jump @BCESAR4_787 
+
+:BCESAR4_820
+35@ = Car.Create(#STALLION, -536.7188, -192.5453, 77.404)
+38@ = Actor.Create(Mission1, #WMYST, -530.4067, -188.8082, 77.3986)
+Car.Angle(35@) = 287.0
+0615: define_AS_pack_begin 41@ 
+0605: actor -1 perform_animation "GIFT_GIVE" IFP "KISSING" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time -2 
+05CB: AS_actor -1 enter_car 35@ as_driver -2 ms 
+05D1: AS_actor -1 drive_car 35@ to -507.5502 -99.2875 61.825 speed 10.0 0 model #NULL 3 
+0616: define_AS_pack_end 41@ 
+0618: assign_actor 38@ to_AS_pack 41@ 
+061B: remove_references_to_AS_pack 41@ 
+36@ = Car.Create(#SABRE, -536.158, -185.2865, 77.398)
+39@ = Actor.Create(Mission1, #WMYBMX, -530.4067, -187.8082, 77.3986)
+Actor.Angle(39@) = 180.0
+Car.Angle(36@) = 243.0
+0615: define_AS_pack_begin 41@ 
+0605: actor -1 perform_animation "GIFT_GET" IFP "KISSING" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time -2 
+05CB: AS_actor -1 enter_car 36@ as_driver -2 ms 
+05D1: AS_actor -1 drive_car 36@ to -507.5502 -99.2875 61.825 speed 10.0 0 model #NULL 3 
+0616: define_AS_pack_end 41@ 
+0618: assign_actor 39@ to_AS_pack 41@ 
+061B: remove_references_to_AS_pack 41@ 
+37@ = Car.Create(#FORTUNE, -524.9425, -184.208, 77.2766)
+40@ = Actor.CreateAsDriver(Mission2, #SPECIAL01, 37@)
+Car.Angle(37@) = 239.0
+0615: define_AS_pack_begin 41@ 
+05B9: AS_actor -1 stay_idle 7000 ms 
+05D1: AS_actor -1 drive_car 37@ to -507.5502 -99.2875 61.825 speed 10.0 0 model #NULL 3 
+0616: define_AS_pack_end 41@ 
+0618: assign_actor 40@ to_AS_pack 41@ 
+061B: remove_references_to_AS_pack 41@ 
+fade 1 800 
+0707: start_scene_skip_to @BCESAR4_1310 
+wait 10000 
+fade 0 1000 
+
+:BCESAR4_1286
+if 
+fading 
+jf @BCESAR4_1310 
+wait 0 
+jump @BCESAR4_1286 
+
+:BCESAR4_1310
+0701: end_scene_skip 
+if 
+   not Car.Wrecked(35@)
+jf @BCESAR4_1333 
+Car.Destroy(35@)
+
+:BCESAR4_1333
+if 
+   not Car.Wrecked(36@)
+jf @BCESAR4_1354 
+Car.Destroy(36@)
+
+:BCESAR4_1354
+if 
+   not Car.Wrecked(37@)
+jf @BCESAR4_1375 
+Car.Destroy(37@)
+
+:BCESAR4_1375
+if 
+   not Actor.Dead(38@)
+jf @BCESAR4_1396 
+Actor.DestroyInstantly(38@)
+
+:BCESAR4_1396
+if 
+   not Actor.Dead(39@)
+jf @BCESAR4_1417 
+Actor.DestroyInstantly(39@)
+
+:BCESAR4_1417
+if 
+   not Actor.Dead(40@)
+jf @BCESAR4_1438 
+Actor.DestroyInstantly(40@)
+
+:BCESAR4_1438
+Model.Destroy(#STALLION)
+Model.Destroy(#SABRE)
+Model.Destroy(#FORTUNE)
+Model.Destroy(#WMYST)
+Model.Destroy(#WMYBMX)
+Model.Destroy(#SPECIAL01)
+04EF: release_animation "KISSING" 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR4_1579 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR4_1579 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+if 
+  $TEMPVAR_ACTOR_CAR > 0 
+jf @BCESAR4_1579 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @BCESAR4_1579 
+0338: set_car $TEMPVAR_ACTOR_CAR visibility 1 
+Car.LockInCurrentPosition($TEMPVAR_ACTOR_CAR) = False
+099A: set_car $TEMPVAR_ACTOR_CAR collision_detection 1 
+0337: set_actor $PLAYER_ACTOR visibility 1 
+
+:BCESAR4_1579
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 800 
+
+:BCESAR4_1601
+$CESAR_TOTAL_PASSED_MISSIONS = -1 
+$ONMISSION = 0 
+34@ = 0 
+jump @BCESAR4_2685 
+
+:BCESAR4_1629
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 4 
+jf @BCESAR4_2019 
+054C: use_GXT_table 'BCESAR4' 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR4_1710 
+0811: 34@ = actor $PLAYER_ACTOR used_car 
+Car.LockInCurrentPosition(34@) = True
+0338: set_car 34@ visibility 0 
+099A: set_car 34@ collision_detection 0 
+jump @BCESAR4_1717 
+
+:BCESAR4_1710
+34@ = -1 
+
+:BCESAR4_1717
+0395: clear_area 1 at -526.7778 -189.0571 76.9917 radius 100.0 
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+02E4: load_cutscene_data 'BCESA4W' 
+
+:BCESAR4_1761
+if 
+86B9:   not cutscene_data_loaded 
+jf @BCESAR4_1785 
+wait 0 
+jump @BCESAR4_1761 
+
+:BCESAR4_1785
+02E7: start_cutscene 
+fade 1 1000 
+
+:BCESAR4_1794
+if 
+82E9:   not cutscene_reached_end 
+jf @BCESAR4_1818 
+wait 0 
+jump @BCESAR4_1794 
+
+:BCESAR4_1818
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:BCESAR4_1831
+if 
+fading 
+jf @BCESAR4_1855 
+wait 0 
+jump @BCESAR4_1831 
+
+:BCESAR4_1855
+02EA: end_cutscene 
+if 
+   not 34@ == -1 
+jf @BCESAR4_1923 
+if 
+   not Car.Wrecked(34@)
+jf @BCESAR4_1916 
+Car.LockInCurrentPosition(34@) = False
+0338: set_car 34@ visibility 1 
+099A: set_car 34@ collision_detection 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:BCESAR4_1916
+jump @BCESAR4_1957 
+
+:BCESAR4_1923
+Actor.PutAt($PLAYER_ACTOR, -503.3945, -186.0599, 76.6103)
+Actor.Angle($PLAYER_ACTOR) = 53.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:BCESAR4_1957
+fade 1 1000 
+Marker.Disable($MARKER_CESAR_MONTGOMERY)
+0318: set_latest_mission_passed 'BCESAR4'  // Wu Zi Mu
+01E3: show_text_1number_styled GXT 'M_PASSD' number 3 time 5000 style 1  // MISSION PASSED!
+$1847 = 0 
+$MISSION_WUZIMU_STARTED_FLAG = 0 
+jump @BCESAR4_2685 
+
+:BCESAR4_2019
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 5 
+jf @BCESAR4_2222 
+054C: use_GXT_table 'BCESAR4' 
+0395: clear_area 1 at -526.7778 -189.0571 76.9917 radius 100.0 
+Actor.PutAt($PLAYER_ACTOR, -495.9034, -196.2218, 77.3986)
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+02E4: load_cutscene_data 'BCESAR5' 
+
+:BCESAR4_2112
+if 
+86B9:   not cutscene_data_loaded 
+jf @BCESAR4_2136 
+wait 0 
+jump @BCESAR4_2112 
+
+:BCESAR4_2136
+02E7: start_cutscene 
+fade 1 1000 
+
+:BCESAR4_2145
+if 
+82E9:   not cutscene_reached_end 
+jf @BCESAR4_2169 
+wait 0 
+jump @BCESAR4_2145 
+
+:BCESAR4_2169
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:BCESAR4_2182
+if 
+fading 
+jf @BCESAR4_2206 
+wait 0 
+jump @BCESAR4_2182 
+
+:BCESAR4_2206
+02EA: end_cutscene 
+$MISSION_WUZIMU_STARTED_FLAG = 1 
+jump @BCESAR4_2685 
+
+:BCESAR4_2222
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 9 
+jf @BCESAR4_2676 
+054C: use_GXT_table 'BCESAR4' 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR4_2332 
+0811: 34@ = actor $PLAYER_ACTOR used_car 
+0763: add_car_reference 34@ // mission only 
+Car.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += 1000.0 
+Car.PutAt(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.LockInCurrentPosition(34@) = True
+jump @BCESAR4_2339 
+
+:BCESAR4_2332
+34@ = -1 
+
+:BCESAR4_2339
+0395: clear_area 1 at 1557.162 24.305 22.7313 radius 100.0 
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+02E4: load_cutscene_data 'BCESA5W' 
+
+:BCESAR4_2383
+if 
+86B9:   not cutscene_data_loaded 
+jf @BCESAR4_2407 
+wait 0 
+jump @BCESAR4_2383 
+
+:BCESAR4_2407
+02E7: start_cutscene 
+fade 1 1000 
+
+:BCESAR4_2416
+if 
+82E9:   not cutscene_reached_end 
+jf @BCESAR4_2440 
+wait 0 
+jump @BCESAR4_2416 
+
+:BCESAR4_2440
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:BCESAR4_2453
+if 
+fading 
+jf @BCESAR4_2477 
+wait 0 
+jump @BCESAR4_2453 
+
+:BCESAR4_2477
+02EA: end_cutscene 
+if 
+   not 34@ == -1 
+jf @BCESAR4_2583 
+if 
+   not Car.Wrecked(34@)
+jf @BCESAR4_2576 
+Car.LockInCurrentPosition(34@) = False
+0338: set_car 34@ visibility 1 
+099A: set_car 34@ collision_detection 1 
+Car.PutAt(34@, 1557.694, 17.4472, 23.1641)
+Car.Angle(34@) = 9.0
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:BCESAR4_2576
+jump @BCESAR4_2617 
+
+:BCESAR4_2583
+Actor.PutAt($PLAYER_ACTOR, 1559.768, 14.4176, 23.1641)
+Actor.Angle($PLAYER_ACTOR) = 10.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:BCESAR4_2617
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 1000 
+Marker.Disable($MARKER_CESAR_MONTGOMERY)
+0318: set_latest_mission_passed 'BCES4_2'  // Farewell, my love...
+01E3: show_text_1number_styled GXT 'M_PASSD' number 3 time 5000 style 1  // MISSION PASSED!
+$MISSION_WUZIMU_STARTED_FLAG = 0 
+jump @BCESAR4_2685 
+
+:BCESAR4_2676
+jump @BCESAR4_54 
+
+:BCESAR4_2683
+return 
+
+:BCESAR4_2685
+if 
+  5 > $CESAR_TOTAL_PASSED_MISSIONS 
+jf @BCESAR4_2734 
+if 
+   not Car.Wrecked(34@)
+jf @BCESAR4_2734 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+Car.LockInCurrentPosition(34@) = False
+
+:BCESAR4_2734
+return 
+
+:BCESAR4_2736
+$CESAR_TOTAL_PASSED_MISSIONS += 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 1 
+jf @BCESAR4_2781 
+fade 0 0 
+
+:BCESAR4_2781
+if 
+  $CESAR_TOTAL_PASSED_MISSIONS == 6 
+jf @BCESAR4_2805 
+fade 0 0 
+
+:BCESAR4_2805
+return

@@ -1,0 +1,3925 @@
+:BSKOOL
+thread 'BSKOOL' 
+gosub @BSKOOL_47 
+if 
+wasted_or_busted 
+jf @BSKOOL_38 
+gosub @BSKOOL_11889 
+
+:BSKOOL_38
+gosub @BSKOOL_11994 
+end_thread 
+
+:BSKOOL_47
+03D5: remove_text 'M_FAIL'  // ~r~MISSION FAILED!
+if 
+  $MISSION_DRIVING_SCHOOL_PASSED == 0 
+jf @BSKOOL_78 
+increment_mission_attempts 
+
+:BSKOOL_78
+$ONMISSION = 1 
+054C: use_GXT_table 'BS' 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+if 
+  $ONMISSION == 0 
+jf @BSKOOL_218 
+38@ = Car.Create(#BF400, $277, $278, $257)
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+$201[20] = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$201[30] = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+56@ = Object.Create(#LANDJUMP2, $277, $278, $257)
+
+:BSKOOL_218
+34@ = 0 
+61@ = 0 
+62@ = 0 
+57@ = 0 
+63@ = 0 
+64@ = 0 
+65@ = 0 
+66@ = 0 
+67@ = 0 
+51@ = 0 
+if 
+  $2162 == 0 
+jf @BSKOOL_313 
+$2162 = 1 
+
+:BSKOOL_313
+$247 = 1 
+$307 = 1130.44 
+$308 = 1341.0 
+$327 = 1173.93 
+$328 = 1351.066 
+$329 = 9.9219 
+Actor.PutAt($PLAYER_ACTOR, 1171.521, 1351.183, 9.9219)
+Model.Load(#BF400)
+Model.Load(#FCR900)
+Model.Load(#PCJ600)
+Model.Load(#TRAFFICCONE)
+Model.Load(#LANDJUMP2)
+Model.Load(#NRG500)
+Model.Load(#SANCHEZ)
+Model.Load(#WMYMECH)
+
+:BSKOOL_429
+if or
+   not Model.Available(#BF400)
+   not Model.Available(#FCR900)
+   not Model.Available(#PCJ600)
+   not Model.Available(#TRAFFICCONE)
+   not Model.Available(#LANDJUMP2)
+jf @BSKOOL_476 
+wait 0 
+jump @BSKOOL_429 
+
+:BSKOOL_476
+if or
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#WMYMECH)
+   not Model.Available(#NRG500)
+jf @BSKOOL_512 
+wait 0 
+jump @BSKOOL_476 
+
+:BSKOOL_512
+0390: load_txd_dictionary 'LD_DRV' 
+038F: load_texture "BRONZE" as 1 // Load dictionary with 0390 first 
+038F: load_texture "SILVER" as 2 // Load dictionary with 0390 first 
+038F: load_texture "GOLD" as 3 // Load dictionary with 0390 first 
+038F: load_texture "RIBB" as 4 // Load dictionary with 0390 first 
+038F: load_texture "TVCORN" as 5 // Load dictionary with 0390 first 
+038F: load_texture "NAWARD" as 6 // Load dictionary with 0390 first 
+038F: load_texture "RIBBW" as 7 // Load dictionary with 0390 first 
+038F: load_texture "BLKDOT" as 8 // Load dictionary with 0390 first 
+038F: load_texture "TVBASE" as 9 // Load dictionary with 0390 first 
+Player.CanMove($PLAYER_CHAR) = True
+0826: enable_hud 0 
+jump @BSKOOL_644 
+
+:BSKOOL_644
+Player.CanMove($PLAYER_CHAR) = False
+03E6: remove_text_box 
+00BE: text_clear_all 
+50@ = Player.WantedLevel($PLAYER_CHAR)
+Player.ClearWantedLevel($PLAYER_CHAR)
+gosub @BSKOOL_16623 
+34@ = 0 
+57@ = 0 
+03F0: enable_text_draw 1 
+64@ = 255 
+63@ = 2 
+if 
+  7 > $2162 
+jf @BSKOOL_734 
+008A: $247 = 37@ // (int) 
+
+:BSKOOL_734
+fade 1 500 
+
+:BSKOOL_741
+if 
+fading 
+jf @BSKOOL_774 
+00BE: text_clear_all 
+gosub @BSKOOL_12674 
+wait 0 
+jump @BSKOOL_741 
+
+:BSKOOL_774
+gosub @BSKOOL_12674 
+0581: enable_radar 0 
+
+:BSKOOL_785
+wait 0 
+gosub @BSKOOL_12674 
+if 
+  51@ == 0 
+jf @BSKOOL_828 
+03CF: load_wav 3800 as 3 
+51@ = 1 
+
+:BSKOOL_828
+if 
+  51@ == 1 
+jf @BSKOOL_868 
+if 
+03D0:   wav 3 loaded 
+jf @BSKOOL_868 
+51@ = 2 
+
+:BSKOOL_868
+if 
+  51@ == 2 
+jf @BSKOOL_897 
+03D1: play_wav 3 
+51@ = 3 
+
+:BSKOOL_897
+if 
+  57@ == 0 
+jf @BSKOOL_1394 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if or
+  -100 > $MOVE_AXIS_X 
+00E1:   player 0 pressed_key 10 
+jf @BSKOOL_1012 
+37@ -= 1 
+$247 -= 1 
+if 
+  $2162 > 1 
+jf @BSKOOL_1012 
+if 
+  4 > 34@ 
+jf @BSKOOL_1012 
+34@ = 3 
+
+:BSKOOL_1012
+if or
+  $MOVE_AXIS_X > 100 
+00E1:   player 0 pressed_key 11 
+jf @BSKOOL_1093 
+37@ += 1 
+$247 += 1 
+if 
+  $2162 > 1 
+jf @BSKOOL_1093 
+if 
+  4 > 34@ 
+jf @BSKOOL_1093 
+34@ = 3 
+
+:BSKOOL_1093
+if 
+  1 > $247 
+jf @BSKOOL_1127 
+0084: $247 = $2162 // (int) 
+008B: 37@ = $2162 // (int) 
+
+:BSKOOL_1127
+if 
+001C:   $247 > $2162 // (int) 
+jf @BSKOOL_1160 
+37@ = 1 
+$247 = 1 
+
+:BSKOOL_1160
+if 
+00E1:   player 0 pressed_key 10 
+jf @BSKOOL_1195 
+wait 0 
+gosub @BSKOOL_12674 
+jump @BSKOOL_1160 
+
+:BSKOOL_1195
+if 
+00E1:   player 0 pressed_key 11 
+jf @BSKOOL_1230 
+wait 0 
+gosub @BSKOOL_12674 
+jump @BSKOOL_1195 
+
+:BSKOOL_1230
+if 
+  -100 > $MOVE_AXIS_X 
+jf @BSKOOL_1282 
+wait 0 
+gosub @BSKOOL_12674 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @BSKOOL_1230 
+
+:BSKOOL_1282
+if 
+  $MOVE_AXIS_X > 100 
+jf @BSKOOL_1334 
+wait 0 
+gosub @BSKOOL_12674 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @BSKOOL_1282 
+
+:BSKOOL_1334
+if 
+00E1:   player 0 pressed_key 16 
+jf @BSKOOL_1394 
+if 
+  4 > 34@ 
+jf @BSKOOL_1376 
+34@ = 3 
+
+:BSKOOL_1376
+040D: unload_wav 3 
+51@ = 0 
+jump @BSKOOL_1639 
+
+:BSKOOL_1394
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @BSKOOL_1416 
+$2162 = 6 
+
+:BSKOOL_1416
+if 
+0735:   is_keyboard_key_pressed 53 
+jf @BSKOOL_1480 
+$2162 = 6 
+$2164 = 100 
+$2165 = 100 
+$2166 = 100 
+$2167 = 100 
+$2168 = 100 
+$2169 = 100 
+
+:BSKOOL_1480
+if and
+  $2164 > 69 
+  $2165 > 69 
+  $2166 > 69 
+  $2167 > 69 
+  $2168 > 69 
+  $2169 > 69 
+jf @BSKOOL_1540 
+$2170 = 1 
+
+:BSKOOL_1540
+if 
+  $MISSION_DRIVING_SCHOOL_PASSED == 0 
+jf @BSKOOL_1590 
+if 
+  $2170 == 1 
+jf @BSKOOL_1590 
+gosub @BSKOOL_20613 
+jump @BSKOOL_11917 
+
+:BSKOOL_1590
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_1625 
+040D: unload_wav 3 
+51@ = 0 
+jump @BSKOOL_11889 
+
+:BSKOOL_1625
+gosub @BSKOOL_15813 
+jump @BSKOOL_785 
+
+:BSKOOL_1639
+fade 0 500 
+
+:BSKOOL_1646
+if 
+fading 
+jf @BSKOOL_1677 
+gosub @BSKOOL_12674 
+wait 0 
+jump @BSKOOL_1646 
+
+:BSKOOL_1677
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_1698 
+05EC: release_car 38@ from_path 
+
+:BSKOOL_1698
+Car.Destroy(38@)
+Actor.DestroyInstantly(49@)
+0395: clear_area 1 at $327 $328 $329 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Car.Destroy(38@)
+gosub @BSKOOL_20952 
+34@ = 5 
+0581: enable_radar 1 
+if 
+  $247 == 1 
+jf @BSKOOL_3452 
+
+:BSKOOL_1776
+gosub @BSKOOL_16586 
+
+:BSKOOL_1783
+$258 = 180.0 
+$253 = 16000 
+35@ = 181 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#BF400, $255, $256, $257)
+Car.Angle(38@) = 180.0
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_1939 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_1896 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_1896
+Camera.SetPosition(1125.66, 1334.4, 22.5, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_1939
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 0.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_A_1' time 5000 flag 4  // ~s~Use the bike to do a burnout donut.~N~Press ~k~~VEHICLE_ACCELERATE~ and ~k~~VEHICLE_BRAKE~ to begin the burnout.
+gosub @BSKOOL_17345 
+
+:BSKOOL_1993
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_2028 
+48@ = 2 
+jump @BSKOOL_3392 
+
+:BSKOOL_2028
+gosub @BSKOOL_17412 
+if 
+  48@ == 1 
+jf @BSKOOL_2060 
+jump @BSKOOL_11889 
+
+:BSKOOL_2060
+if 
+  $249 == 0 
+jf @BSKOOL_2108 
+00BC: show_text_highpriority GXT 'BS_A_1' time 5000 flag 4  // ~s~Use the bike to do a burnout donut.~N~Press ~k~~VEHICLE_ACCELERATE~ and ~k~~VEHICLE_BRAKE~ to begin the burnout.
+gosub @BSKOOL_17488 
+jump @BSKOOL_3445 
+
+:BSKOOL_2108
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_3445 
+gosub @BSKOOL_17646 
+$258 = Car.Angle(38@)
+if 
+  $274 == 0 
+jf @BSKOOL_2213 
+if 
+  $258 > 80.0 
+jf @BSKOOL_2213 
+if 
+  90.0 > $258 
+jf @BSKOOL_2213 
+$274 = 1 
+58@ = 1 
+
+:BSKOOL_2213
+if 
+  58@ == 1 
+jf @BSKOOL_2432 
+if 
+  $274 == 1 
+jf @BSKOOL_2298 
+if 
+  $258 > 350.0 
+jf @BSKOOL_2298 
+if 
+  360.0 > $258 
+jf @BSKOOL_2298 
+$274 = 2 
+
+:BSKOOL_2298
+if 
+  $274 == 2 
+jf @BSKOOL_2365 
+if 
+  $258 > 270.0 
+jf @BSKOOL_2365 
+if 
+  280.0 > $258 
+jf @BSKOOL_2365 
+$274 = 3 
+
+:BSKOOL_2365
+if 
+  $274 == 3 
+jf @BSKOOL_2432 
+if 
+  $258 > 170.0 
+jf @BSKOOL_2432 
+if 
+  180.0 > $258 
+jf @BSKOOL_2432 
+$274 = 4 
+
+:BSKOOL_2432
+if 
+  $274 == 0 
+jf @BSKOOL_2506 
+if 
+  $258 > 270.0 
+jf @BSKOOL_2506 
+if 
+  280.0 > $258 
+jf @BSKOOL_2506 
+58@ = 2 
+$274 = 1 
+
+:BSKOOL_2506
+if 
+  58@ == 2 
+jf @BSKOOL_2725 
+if 
+  $274 == 1 
+jf @BSKOOL_2591 
+if 
+  $258 > 350.0 
+jf @BSKOOL_2591 
+if 
+  360.0 > $258 
+jf @BSKOOL_2591 
+$274 = 2 
+
+:BSKOOL_2591
+if 
+  $274 == 2 
+jf @BSKOOL_2658 
+if 
+  $258 > 80.0 
+jf @BSKOOL_2658 
+if 
+  90.0 > $258 
+jf @BSKOOL_2658 
+$274 = 3 
+
+:BSKOOL_2658
+if 
+  $274 == 3 
+jf @BSKOOL_2725 
+if 
+  $258 > 170.0 
+jf @BSKOOL_2725 
+if 
+  180.0 > $258 
+jf @BSKOOL_2725 
+$274 = 4 
+
+:BSKOOL_2725
+if or
+80E1:   not player 0 pressed_key 16 
+80E1:   not player 0 pressed_key 14 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+  $253 == 0 
+jf @BSKOOL_3445 
+gosub @BSKOOL_17680 
+gosub @BSKOOL_17693 
+if 
+  $274 == 4 
+jf @BSKOOL_2802 
+$266 = 100 
+
+:BSKOOL_2802
+if 
+  $274 == 3 
+jf @BSKOOL_2827 
+$266 = 75 
+
+:BSKOOL_2827
+if 
+  $274 == 2 
+jf @BSKOOL_2852 
+$266 = 50 
+
+:BSKOOL_2852
+if 
+  $274 == 1 
+jf @BSKOOL_2877 
+$266 = 25 
+
+:BSKOOL_2877
+if 
+  $274 == 0 
+jf @BSKOOL_2902 
+$266 = 0 
+
+:BSKOOL_2902
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_2950 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_2950
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2166 // (int) 
+jf @BSKOOL_3170 
+008B: 67@ = $2166 // (int) 
+0084: $2166 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_3070 
+if 
+  $2173 == 0 
+jf @BSKOOL_3070 
+$2173 = 1 
+$2172 = 1 
+$2171 = 1 
+
+:BSKOOL_3070
+if 
+  65@ == 3 
+jf @BSKOOL_3120 
+if 
+  $2172 == 0 
+jf @BSKOOL_3120 
+$2172 = 1 
+$2171 = 1 
+
+:BSKOOL_3120
+if 
+  65@ == 2 
+jf @BSKOOL_3163 
+if 
+  $2171 == 0 
+jf @BSKOOL_3163 
+$2171 = 1 
+
+:BSKOOL_3163
+jump @BSKOOL_3177 
+
+:BSKOOL_3170
+65@ = 0 
+
+:BSKOOL_3177
+if 
+  $2162 == 1 
+jf @BSKOOL_3261 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_3261 
+59@ = 2 
+$2162 = 2 
+48@ = 2 
+37@ += 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+
+:BSKOOL_3261
+32@ = 0 
+
+:BSKOOL_3268
+if 
+  32@ > -1 
+jf @BSKOOL_3392 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_3346 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_3346 
+48@ = 2 
+jump @BSKOOL_3392 
+
+:BSKOOL_3346
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_3385 
+jump @BSKOOL_3392 
+
+:BSKOOL_3385
+jump @BSKOOL_3268 
+
+:BSKOOL_3392
+gosub @BSKOOL_20613 
+gosub @BSKOOL_20952 
+if 
+  48@ == 2 
+jf @BSKOOL_3438 
+jump @BSKOOL_644 
+jump @BSKOOL_3445 
+
+:BSKOOL_3438
+jump @BSKOOL_1776 
+
+:BSKOOL_3445
+jump @BSKOOL_1993 
+
+:BSKOOL_3452
+if 
+  $247 == 2 
+jf @BSKOOL_4877 
+
+:BSKOOL_3470
+gosub @BSKOOL_16586 
+
+:BSKOOL_3477
+$258 = 0.0 
+$253 = 11000 
+35@ = 182 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#PCJ600, $255, $256, $257)
+Car.Angle(38@) = 180.0
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_3633 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_3590 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_3590
+Camera.SetPosition(1130.66, 1264.4, 14.5, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_3633
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car 38@ with_offset -2.0 82.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car 38@ with_offset 2.0 88.0 0.0 
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 0.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_B_1' time 5000 flag 4  // ~s~To do a 180, accelerate to top speed, press ~k~~VEHICLE_HANDBRAKE~ to slide around the cone and then return.
+gosub @BSKOOL_17345 
+
+:BSKOOL_3745
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_3780 
+48@ = 2 
+jump @BSKOOL_4817 
+
+:BSKOOL_3780
+if 
+  $249 == 0 
+jf @BSKOOL_3828 
+00BC: show_text_highpriority GXT 'BS_B_1' time 5000 flag 4  // ~s~To do a 180, accelerate to top speed, press ~k~~VEHICLE_HANDBRAKE~ to slide around the cone and then return.
+gosub @BSKOOL_17488 
+jump @BSKOOL_4870 
+
+:BSKOOL_3828
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_4870 
+gosub @BSKOOL_17646 
+if 
+  $274 == 0 
+jf @BSKOOL_3906 
+if 
+00B0:   car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_3906 
+$274 = 1 
+
+:BSKOOL_3906
+if or
+01C1:   car 38@ stopped 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_4870 
+gosub @BSKOOL_17680 
+gosub @BSKOOL_17693 
+if 
+  $274 == 0 
+jf @BSKOOL_3969 
+$267 = 0 
+
+:BSKOOL_3969
+42@ = Car.Angle(38@)
+0092: 39@ = float 42@ to_integer 
+if 
+  39@ == 0 
+jf @BSKOOL_4017 
+$266 = 100 
+jump @BSKOOL_4302 
+
+:BSKOOL_4017
+if 
+  39@ == 360 
+jf @BSKOOL_4050 
+$266 = 100 
+jump @BSKOOL_4302 
+
+:BSKOOL_4050
+if 
+  39@ > 0 
+jf @BSKOOL_4093 
+if 
+  21 > 39@ 
+jf @BSKOOL_4093 
+$266 = 100 
+
+:BSKOOL_4093
+if 
+  39@ > 179 
+jf @BSKOOL_4172 
+if 
+  340 > 39@ 
+jf @BSKOOL_4172 
+39@ -= 180 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.62 
+008C: $266 = float $276 to_integer 
+jump @BSKOOL_4302 
+
+:BSKOOL_4172
+if 
+  39@ > 339 
+jf @BSKOOL_4217 
+if 
+  360 > 39@ 
+jf @BSKOOL_4217 
+$266 = 100 
+
+:BSKOOL_4217
+if 
+  39@ > 20 
+jf @BSKOOL_4302 
+if 
+  180 > 39@ 
+jf @BSKOOL_4302 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.62 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @BSKOOL_4302 
+
+:BSKOOL_4302
+if 
+  1 > $266 
+jf @BSKOOL_4327 
+$266 = 0 
+
+:BSKOOL_4327
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_4375 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_4375
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2167 // (int) 
+jf @BSKOOL_4595 
+008B: 67@ = $2167 // (int) 
+0084: $2167 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_4495 
+if 
+  $2176 == 0 
+jf @BSKOOL_4495 
+$2176 = 1 
+$2175 = 1 
+$2174 = 1 
+
+:BSKOOL_4495
+if 
+  65@ == 3 
+jf @BSKOOL_4545 
+if 
+  $2175 == 0 
+jf @BSKOOL_4545 
+$2175 = 1 
+$2174 = 1 
+
+:BSKOOL_4545
+if 
+  65@ == 2 
+jf @BSKOOL_4588 
+if 
+  $2174 == 0 
+jf @BSKOOL_4588 
+$2174 = 1 
+
+:BSKOOL_4588
+jump @BSKOOL_4602 
+
+:BSKOOL_4595
+65@ = 0 
+
+:BSKOOL_4602
+if 
+  $2162 == 2 
+jf @BSKOOL_4686 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_4686 
+59@ = 2 
+$2162 = 3 
+48@ = 2 
+37@ += 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+
+:BSKOOL_4686
+32@ = 0 
+
+:BSKOOL_4693
+if 
+  32@ > -1 
+jf @BSKOOL_4817 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_4771 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_4771 
+48@ = 2 
+jump @BSKOOL_4817 
+
+:BSKOOL_4771
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_4810 
+jump @BSKOOL_4817 
+
+:BSKOOL_4810
+jump @BSKOOL_4693 
+
+:BSKOOL_4817
+gosub @BSKOOL_20613 
+gosub @BSKOOL_20952 
+if 
+  48@ == 2 
+jf @BSKOOL_4863 
+jump @BSKOOL_644 
+jump @BSKOOL_4870 
+
+:BSKOOL_4863
+jump @BSKOOL_3470 
+
+:BSKOOL_4870
+jump @BSKOOL_3745 
+
+:BSKOOL_4877
+if 
+  $247 == 3 
+jf @BSKOOL_6645 
+
+:BSKOOL_4895
+gosub @BSKOOL_16586 
+
+:BSKOOL_4902
+$258 = 180.0 
+$253 = 9000 
+35@ = 183 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#FCR900, $255, $256, $257)
+Car.Angle(38@) = 180.0
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_5058 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_5015 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_5015
+Camera.SetPosition(1125.66, 1283.4, 10.5, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_5058
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car 38@ with_offset -3.5 56.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car 38@ with_offset 3.5 84.0 0.0 
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 124.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_C_1' time 5000 flag 4  // ~s~Do a Wheelie along the coned section. Accelerate to top speed, then push ~k~~VEHICLE_STEERDOWN~.
+gosub @BSKOOL_17345 
+
+:BSKOOL_5170
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_5205 
+48@ = 2 
+jump @BSKOOL_6585 
+
+:BSKOOL_5205
+if 
+  $249 == 0 
+jf @BSKOOL_5253 
+00BC: show_text_highpriority GXT 'BS_C_1' time 5000 flag 4  // ~s~Do a Wheelie along the coned section. Accelerate to top speed, then push ~k~~VEHICLE_STEERDOWN~.
+gosub @BSKOOL_17488 
+jump @BSKOOL_6638 
+
+:BSKOOL_5253
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_6638 
+gosub @BSKOOL_17646 
+if 
+  $274 == 0 
+jf @BSKOOL_5331 
+if 
+00B0:   car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_5331 
+$274 = 1 
+
+:BSKOOL_5331
+if 
+  $274 == 1 
+jf @BSKOOL_5472 
+if 
+80B0:   not car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_5449 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if or
+0024:   $TEMPVAR_X_COORD > $309 // (float) 
+0024:   $311 > $TEMPVAR_X_COORD // (float) 
+0024:   $TEMPVAR_Y_COORD > $310 // (float) 
+jf @BSKOOL_5442 
+gosub @BSKOOL_17680 
+jump @BSKOOL_5449 
+
+:BSKOOL_5442
+$274 = 2 
+
+:BSKOOL_5449
+if 
+87F1:   not player $PLAYER_CHAR performing_wheelie 
+jf @BSKOOL_5472 
+gosub @BSKOOL_17680 
+
+:BSKOOL_5472
+42@ = Car.Angle(38@)
+0087: 44@ = 42@ // (float) 
+if 
+   not 44@ == 0.0 
+jf @BSKOOL_5622 
+if and
+  360.0 > 44@ 
+  44@ > 180.0 
+jf @BSKOOL_5550 
+44@ += 0.1 
+
+:BSKOOL_5550
+if 
+  44@ == 360.0 
+jf @BSKOOL_5581 
+  44@ > 0.0 
+
+:BSKOOL_5581
+if and
+  180.0 >= 44@ 
+  44@ > 0.0 
+jf @BSKOOL_5622 
+44@ -= 0.1 
+
+:BSKOOL_5622
+if or
+01C1:   car 38@ stopped 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_6638 
+gosub @BSKOOL_17680 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+if 
+  $274 > 0 
+jf @BSKOOL_5701 
+gosub @BSKOOL_17693 
+jump @BSKOOL_5708 
+
+:BSKOOL_5701
+$267 = 0 
+
+:BSKOOL_5708
+42@ = Car.Angle(38@)
+0092: 39@ = float 42@ to_integer 
+if 
+  $274 > 0 
+jf @BSKOOL_6056 
+if 
+  39@ == 0 
+jf @BSKOOL_5774 
+$266 = 0 
+jump @BSKOOL_6070 
+
+:BSKOOL_5774
+if 
+  39@ == 180 
+jf @BSKOOL_5807 
+$266 = 100 
+jump @BSKOOL_6070 
+
+:BSKOOL_5807
+if 
+  39@ == 360 
+jf @BSKOOL_5840 
+$266 = 0 
+jump @BSKOOL_6070 
+
+:BSKOOL_5840
+if 
+  39@ > 0 
+jf @BSKOOL_5910 
+if 
+  175 > 39@ 
+jf @BSKOOL_5910 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @BSKOOL_6070 
+
+:BSKOOL_5910
+if 
+  39@ > 174 
+jf @BSKOOL_5955 
+if 
+  186 > 39@ 
+jf @BSKOOL_5955 
+$266 = 100 
+
+:BSKOOL_5955
+if 
+  39@ > 185 
+jf @BSKOOL_6049 
+if 
+  360 > 39@ 
+jf @BSKOOL_6049 
+39@ -= 180 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @BSKOOL_6070 
+
+:BSKOOL_6049
+jump @BSKOOL_6070 
+
+:BSKOOL_6056
+$266 = 0 
+jump @BSKOOL_6070 
+
+:BSKOOL_6070
+if 
+  1 > $266 
+jf @BSKOOL_6095 
+$266 = 0 
+
+:BSKOOL_6095
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_6143 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_6143
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2164 // (int) 
+jf @BSKOOL_6363 
+008B: 67@ = $2164 // (int) 
+0084: $2164 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_6263 
+if 
+  $2179 == 0 
+jf @BSKOOL_6263 
+$2179 = 1 
+$2178 = 1 
+$2177 = 1 
+
+:BSKOOL_6263
+if 
+  65@ == 3 
+jf @BSKOOL_6313 
+if 
+  $2178 == 0 
+jf @BSKOOL_6313 
+$2178 = 1 
+$2177 = 1 
+
+:BSKOOL_6313
+if 
+  65@ == 2 
+jf @BSKOOL_6356 
+if 
+  $2177 == 0 
+jf @BSKOOL_6356 
+$2177 = 1 
+
+:BSKOOL_6356
+jump @BSKOOL_6370 
+
+:BSKOOL_6363
+65@ = 0 
+
+:BSKOOL_6370
+if 
+  $2162 == 3 
+jf @BSKOOL_6454 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_6454 
+59@ = 2 
+$2162 = 4 
+48@ = 2 
+37@ += 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+
+:BSKOOL_6454
+32@ = 0 
+
+:BSKOOL_6461
+if 
+  32@ > -1 
+jf @BSKOOL_6585 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_6539 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_6539 
+48@ = 2 
+jump @BSKOOL_6585 
+
+:BSKOOL_6539
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_6578 
+jump @BSKOOL_6585 
+
+:BSKOOL_6578
+jump @BSKOOL_6461 
+
+:BSKOOL_6585
+gosub @BSKOOL_20952 
+gosub @BSKOOL_20613 
+if 
+  48@ == 2 
+jf @BSKOOL_6631 
+jump @BSKOOL_644 
+jump @BSKOOL_6638 
+
+:BSKOOL_6631
+jump @BSKOOL_4895 
+
+:BSKOOL_6638
+jump @BSKOOL_5170 
+
+:BSKOOL_6645
+if 
+  $247 == 5 
+jf @BSKOOL_8421 
+
+:BSKOOL_6663
+gosub @BSKOOL_16586 
+
+:BSKOOL_6670
+$258 = 180.0 
+$253 = 9000 
+35@ = 184 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#FCR900, $255, $256, $257)
+Car.Angle(38@) = 180.0
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_6826 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_6783 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_6783
+Camera.SetPosition(1125.66, 1283.4, 10.5, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_6826
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car 38@ with_offset -3.5 56.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car 38@ with_offset 3.5 84.0 0.0 
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 124.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_D_1' time 5000 flag 4  // ~s~Do a Stoppie along the coned section. Accelerate to top speed, push ~k~~VEHICLE_STEERUP~, then press ~k~~VEHICLE_BRAKE~.
+gosub @BSKOOL_17345 
+
+:BSKOOL_6938
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_6973 
+48@ = 2 
+jump @BSKOOL_8361 
+
+:BSKOOL_6973
+if 
+  $249 == 0 
+jf @BSKOOL_7021 
+00BC: show_text_highpriority GXT 'BS_D_1' time 5000 flag 4  // ~s~Do a Stoppie along the coned section. Accelerate to top speed, push ~k~~VEHICLE_STEERUP~, then press ~k~~VEHICLE_BRAKE~.
+gosub @BSKOOL_17488 
+jump @BSKOOL_8414 
+
+:BSKOOL_7021
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_8414 
+gosub @BSKOOL_17646 
+if 
+  $274 == 0 
+jf @BSKOOL_7099 
+if 
+00B0:   car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_7099 
+$274 = 1 
+
+:BSKOOL_7099
+if 
+  $274 == 1 
+jf @BSKOOL_7240 
+if 
+80B0:   not car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_7217 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if or
+0024:   $TEMPVAR_X_COORD > $309 // (float) 
+0024:   $311 > $TEMPVAR_X_COORD // (float) 
+0024:   $TEMPVAR_Y_COORD > $310 // (float) 
+jf @BSKOOL_7210 
+gosub @BSKOOL_17680 
+jump @BSKOOL_7217 
+
+:BSKOOL_7210
+$274 = 2 
+
+:BSKOOL_7217
+if 
+87F2:   not player $PLAYER_CHAR performing_stoppie 
+jf @BSKOOL_7240 
+gosub @BSKOOL_17680 
+
+:BSKOOL_7240
+42@ = Car.Angle(38@)
+0087: 44@ = 42@ // (float) 
+if 
+   not 44@ == 0.0 
+jf @BSKOOL_7390 
+if and
+  360.0 > 44@ 
+  44@ > 180.0 
+jf @BSKOOL_7318 
+44@ += 0.1 
+
+:BSKOOL_7318
+if 
+  44@ == 360.0 
+jf @BSKOOL_7349 
+  44@ > 0.0 
+
+:BSKOOL_7349
+if and
+  180.0 >= 44@ 
+  44@ > 0.0 
+jf @BSKOOL_7390 
+44@ -= 0.1 
+
+:BSKOOL_7390
+02E3: 43@ = car 38@ speed 
+if or
+01C1:   car 38@ stopped 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_8414 
+gosub @BSKOOL_17680 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+if 
+  $274 > 0 
+jf @BSKOOL_7477 
+gosub @BSKOOL_17693 
+jump @BSKOOL_7484 
+
+:BSKOOL_7477
+$267 = 0 
+
+:BSKOOL_7484
+42@ = Car.Angle(38@)
+0092: 39@ = float 42@ to_integer 
+if 
+  $274 > 0 
+jf @BSKOOL_7832 
+if 
+  39@ == 0 
+jf @BSKOOL_7550 
+$266 = 0 
+jump @BSKOOL_7846 
+
+:BSKOOL_7550
+if 
+  39@ == 180 
+jf @BSKOOL_7583 
+$266 = 100 
+jump @BSKOOL_7846 
+
+:BSKOOL_7583
+if 
+  39@ == 360 
+jf @BSKOOL_7616 
+$266 = 0 
+jump @BSKOOL_7846 
+
+:BSKOOL_7616
+if 
+  39@ > 0 
+jf @BSKOOL_7686 
+if 
+  175 > 39@ 
+jf @BSKOOL_7686 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @BSKOOL_7846 
+
+:BSKOOL_7686
+if 
+  39@ > 174 
+jf @BSKOOL_7731 
+if 
+  186 > 39@ 
+jf @BSKOOL_7731 
+$266 = 100 
+
+:BSKOOL_7731
+if 
+  39@ > 185 
+jf @BSKOOL_7825 
+if 
+  360 > 39@ 
+jf @BSKOOL_7825 
+39@ -= 180 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @BSKOOL_7846 
+
+:BSKOOL_7825
+jump @BSKOOL_7846 
+
+:BSKOOL_7832
+$266 = 0 
+jump @BSKOOL_7846 
+
+:BSKOOL_7846
+if 
+  1 > $266 
+jf @BSKOOL_7871 
+$266 = 0 
+
+:BSKOOL_7871
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_7919 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_7919
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2165 // (int) 
+jf @BSKOOL_8139 
+008B: 67@ = $2165 // (int) 
+0084: $2165 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_8039 
+if 
+  $2185 == 0 
+jf @BSKOOL_8039 
+$2185 = 1 
+$2184 = 1 
+$2183 = 1 
+
+:BSKOOL_8039
+if 
+  65@ == 3 
+jf @BSKOOL_8089 
+if 
+  $2184 == 0 
+jf @BSKOOL_8089 
+$2184 = 1 
+$2183 = 1 
+
+:BSKOOL_8089
+if 
+  65@ == 2 
+jf @BSKOOL_8132 
+if 
+  $2183 == 0 
+jf @BSKOOL_8132 
+$2183 = 1 
+
+:BSKOOL_8132
+jump @BSKOOL_8146 
+
+:BSKOOL_8139
+65@ = 0 
+
+:BSKOOL_8146
+if 
+  $2162 == 5 
+jf @BSKOOL_8230 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_8230 
+59@ = 2 
+$2162 = 6 
+48@ = 2 
+37@ += 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+
+:BSKOOL_8230
+32@ = 0 
+
+:BSKOOL_8237
+if 
+  32@ > -1 
+jf @BSKOOL_8361 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_8315 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_8315 
+48@ = 2 
+jump @BSKOOL_8361 
+
+:BSKOOL_8315
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_8354 
+jump @BSKOOL_8361 
+
+:BSKOOL_8354
+jump @BSKOOL_8237 
+
+:BSKOOL_8361
+gosub @BSKOOL_20952 
+gosub @BSKOOL_20613 
+if 
+  48@ == 2 
+jf @BSKOOL_8407 
+jump @BSKOOL_644 
+jump @BSKOOL_8414 
+
+:BSKOOL_8407
+jump @BSKOOL_6663 
+
+:BSKOOL_8414
+jump @BSKOOL_6938 
+
+:BSKOOL_8421
+if 
+  $247 == 4 
+jf @BSKOOL_10014 
+
+:BSKOOL_8439
+gosub @BSKOOL_16586 
+
+:BSKOOL_8446
+$258 = 180.0 
+$253 = 9000 
+35@ = 185 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#SANCHEZ, $255, $256, $257)
+Car.Angle(38@) = $258
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car 38@ with_offset -2.5 46.0 2.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car 38@ with_offset 2.5 50.0 2.0 
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_8658 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_8615 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_8615
+Camera.SetPosition(1127.66, 1288.4, 12.75, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_8658
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 124.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_E_1' time 5000 flag 4  // ~s~Jump the ramp and stop in the designated area.
+gosub @BSKOOL_17345 
+
+:BSKOOL_8712
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_8747 
+48@ = 2 
+jump @BSKOOL_9954 
+
+:BSKOOL_8747
+if 
+  $249 == 0 
+jf @BSKOOL_8795 
+00BC: show_text_highpriority GXT 'BS_E_1' time 5000 flag 4  // ~s~Jump the ramp and stop in the designated area.
+gosub @BSKOOL_17488 
+jump @BSKOOL_10007 
+
+:BSKOOL_8795
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_10007 
+gosub @BSKOOL_17646 
+if 
+  $274 == 0 
+jf @BSKOOL_8873 
+if 
+00B0:   car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_8873 
+$274 = 1 
+
+:BSKOOL_8873
+if 
+  $274 == 1 
+jf @BSKOOL_8991 
+if 
+80B0:   not car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_8991 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if or
+0024:   $TEMPVAR_X_COORD > $309 // (float) 
+0024:   $311 > $TEMPVAR_X_COORD // (float) 
+0024:   $TEMPVAR_Y_COORD > $310 // (float) 
+jf @BSKOOL_8984 
+gosub @BSKOOL_17680 
+jump @BSKOOL_8991 
+
+:BSKOOL_8984
+$274 = 2 
+
+:BSKOOL_8991
+if or
+01C1:   car 38@ stopped 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_10007 
+gosub @BSKOOL_17680 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+if 
+  $274 > 0 
+jf @BSKOOL_9070 
+gosub @BSKOOL_17693 
+jump @BSKOOL_9077 
+
+:BSKOOL_9070
+$267 = 0 
+
+:BSKOOL_9077
+42@ = Car.Angle(38@)
+0092: 39@ = float 42@ to_integer 
+if 
+  $274 > 0 
+jf @BSKOOL_9425 
+if 
+  39@ == 0 
+jf @BSKOOL_9143 
+$266 = 0 
+jump @BSKOOL_9439 
+
+:BSKOOL_9143
+if 
+  39@ == 180 
+jf @BSKOOL_9176 
+$266 = 100 
+jump @BSKOOL_9439 
+
+:BSKOOL_9176
+if 
+  39@ == 360 
+jf @BSKOOL_9209 
+$266 = 0 
+jump @BSKOOL_9439 
+
+:BSKOOL_9209
+if 
+  39@ > 0 
+jf @BSKOOL_9279 
+if 
+  175 > 39@ 
+jf @BSKOOL_9279 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @BSKOOL_9439 
+
+:BSKOOL_9279
+if 
+  39@ > 174 
+jf @BSKOOL_9324 
+if 
+  186 > 39@ 
+jf @BSKOOL_9324 
+$266 = 100 
+
+:BSKOOL_9324
+if 
+  39@ > 185 
+jf @BSKOOL_9418 
+if 
+  360 > 39@ 
+jf @BSKOOL_9418 
+39@ -= 180 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @BSKOOL_9439 
+
+:BSKOOL_9418
+jump @BSKOOL_9439 
+
+:BSKOOL_9425
+$266 = 0 
+jump @BSKOOL_9439 
+
+:BSKOOL_9439
+if 
+  1 > $266 
+jf @BSKOOL_9464 
+$266 = 0 
+
+:BSKOOL_9464
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_9512 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_9512
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2168 // (int) 
+jf @BSKOOL_9732 
+008B: 67@ = $2168 // (int) 
+0084: $2168 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_9632 
+if 
+  $2182 == 0 
+jf @BSKOOL_9632 
+$2182 = 1 
+$2181 = 1 
+$2180 = 1 
+
+:BSKOOL_9632
+if 
+  65@ == 3 
+jf @BSKOOL_9682 
+if 
+  $2181 == 0 
+jf @BSKOOL_9682 
+$2181 = 1 
+$2180 = 1 
+
+:BSKOOL_9682
+if 
+  65@ == 2 
+jf @BSKOOL_9725 
+if 
+  $2180 == 0 
+jf @BSKOOL_9725 
+$2180 = 1 
+
+:BSKOOL_9725
+jump @BSKOOL_9739 
+
+:BSKOOL_9732
+65@ = 0 
+
+:BSKOOL_9739
+if 
+  $2162 == 4 
+jf @BSKOOL_9823 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_9823 
+59@ = 2 
+$2162 = 5 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+48@ = 2 
+37@ += 1 
+
+:BSKOOL_9823
+32@ = 0 
+
+:BSKOOL_9830
+if 
+  32@ > -1 
+jf @BSKOOL_9954 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_9908 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_9908 
+48@ = 2 
+jump @BSKOOL_9954 
+
+:BSKOOL_9908
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_9947 
+jump @BSKOOL_9954 
+
+:BSKOOL_9947
+jump @BSKOOL_9830 
+
+:BSKOOL_9954
+gosub @BSKOOL_20613 
+gosub @BSKOOL_20952 
+if 
+  48@ == 2 
+jf @BSKOOL_10000 
+jump @BSKOOL_644 
+jump @BSKOOL_10007 
+
+:BSKOOL_10000
+jump @BSKOOL_8439 
+
+:BSKOOL_10007
+jump @BSKOOL_8712 
+
+:BSKOOL_10014
+if 
+  $247 == 6 
+jf @BSKOOL_11889 
+
+:BSKOOL_10032
+gosub @BSKOOL_16586 
+
+:BSKOOL_10039
+$258 = 180.0 
+$253 = 9000 
+35@ = 186 
+gosub @BSKOOL_16623 
+38@ = Car.Create(#NRG500, $255, $256, $257)
+Car.Angle(38@) = $258
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car 38@ with_offset -2.5 46.0 2.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car 38@ with_offset 2.5 52.0 2.0 
+gosub @BSKOOL_21023 
+if 
+  34@ == 0 
+jf @BSKOOL_10251 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_10208 
+49@ = Actor.CreateAsDriver(CivFemale, #WMYMECH, 38@)
+
+:BSKOOL_10208
+Camera.SetPosition(1122.66, 1265.4, 15.75, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 2)
+return 
+
+:BSKOOL_10251
+0407: store_coords_to $305 $306 $257 from_car 38@ with_offset 0.0 114.0 0.0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BS_F_1' time 5000 flag 4  // ~s~Jump the ramp, land in a stoppie and glide into the designated area.
+gosub @BSKOOL_17345 
+
+:BSKOOL_10305
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_10340 
+48@ = 2 
+jump @BSKOOL_11690 
+
+:BSKOOL_10340
+if 
+  $249 == 0 
+jf @BSKOOL_10388 
+00BC: show_text_highpriority GXT 'BS_F_1' time 5000 flag 4  // ~s~Jump the ramp, land in a stoppie and glide into the designated area.
+gosub @BSKOOL_17488 
+jump @BSKOOL_11882 
+
+:BSKOOL_10388
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_11882 
+gosub @BSKOOL_17646 
+if 
+  $274 == 0 
+jf @BSKOOL_10466 
+if 
+00B0:   car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_10466 
+$274 = 1 
+
+:BSKOOL_10466
+if 
+  $274 == 1 
+jf @BSKOOL_10584 
+if 
+80B0:   not car 38@ sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @BSKOOL_10584 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if or
+0024:   $TEMPVAR_X_COORD > $309 // (float) 
+0024:   $311 > $TEMPVAR_X_COORD // (float) 
+0024:   $TEMPVAR_Y_COORD > $310 // (float) 
+jf @BSKOOL_10577 
+gosub @BSKOOL_17680 
+jump @BSKOOL_10584 
+
+:BSKOOL_10577
+$274 = 2 
+
+:BSKOOL_10584
+if 
+  $274 == 2 
+jf @BSKOOL_10630 
+if 
+81F3:   not car 38@ in_air 
+jf @BSKOOL_10630 
+01BD: 70@ = current_time_in_ms 
+$274 = 3 
+
+:BSKOOL_10630
+if 
+  $274 == 3 
+jf @BSKOOL_10716 
+01BD: 69@ = current_time_in_ms 
+0085: 68@ = 69@ // (int) 
+0062: 68@ -= 70@ // (int) 
+if 
+  68@ > 250 
+jf @BSKOOL_10716 
+if or
+87F2:   not player $PLAYER_CHAR performing_stoppie 
+07F1:   player $PLAYER_CHAR performing_wheelie 
+jf @BSKOOL_10716 
+gosub @BSKOOL_17680 
+
+:BSKOOL_10716
+if or
+01C1:   car 38@ stopped 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_11882 
+gosub @BSKOOL_17680 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+if 
+  $274 > 0 
+jf @BSKOOL_10795 
+gosub @BSKOOL_17693 
+jump @BSKOOL_10802 
+
+:BSKOOL_10795
+$267 = 0 
+
+:BSKOOL_10802
+42@ = Car.Angle(38@)
+0092: 39@ = float 42@ to_integer 
+if 
+  $274 > 0 
+jf @BSKOOL_11150 
+if 
+  39@ == 0 
+jf @BSKOOL_10868 
+$266 = 0 
+jump @BSKOOL_11164 
+
+:BSKOOL_10868
+if 
+  39@ == 180 
+jf @BSKOOL_10901 
+$266 = 100 
+jump @BSKOOL_11164 
+
+:BSKOOL_10901
+if 
+  39@ == 360 
+jf @BSKOOL_10934 
+$266 = 0 
+jump @BSKOOL_11164 
+
+:BSKOOL_10934
+if 
+  39@ > 0 
+jf @BSKOOL_11004 
+if 
+  175 > 39@ 
+jf @BSKOOL_11004 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @BSKOOL_11164 
+
+:BSKOOL_11004
+if 
+  39@ > 174 
+jf @BSKOOL_11049 
+if 
+  186 > 39@ 
+jf @BSKOOL_11049 
+$266 = 100 
+
+:BSKOOL_11049
+if 
+  39@ > 185 
+jf @BSKOOL_11143 
+if 
+  360 > 39@ 
+jf @BSKOOL_11143 
+39@ -= 180 
+0091: $276 = integer 39@ to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @BSKOOL_11164 
+
+:BSKOOL_11143
+jump @BSKOOL_11164 
+
+:BSKOOL_11150
+$266 = 0 
+jump @BSKOOL_11164 
+
+:BSKOOL_11164
+if 
+  1 > $266 
+jf @BSKOOL_11189 
+$266 = 0 
+
+:BSKOOL_11189
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @BSKOOL_11237 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_11237
+gosub @BSKOOL_17937 
+gosub @BSKOOL_18315 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $2169 // (int) 
+jf @BSKOOL_11457 
+008B: 67@ = $2169 // (int) 
+0084: $2169 = $CURRENT_FLIGHT_RECORD // (int) 
+59@ = 1 
+gosub @BSKOOL_18779 
+if 
+  65@ == 4 
+jf @BSKOOL_11357 
+if 
+  $2188 == 0 
+jf @BSKOOL_11357 
+$2188 = 1 
+$2187 = 1 
+$2186 = 1 
+
+:BSKOOL_11357
+if 
+  65@ == 3 
+jf @BSKOOL_11407 
+if 
+  $2187 == 0 
+jf @BSKOOL_11407 
+$2187 = 1 
+$2186 = 1 
+
+:BSKOOL_11407
+if 
+  65@ == 2 
+jf @BSKOOL_11450 
+if 
+  $2186 == 0 
+jf @BSKOOL_11450 
+$2186 = 1 
+
+:BSKOOL_11450
+jump @BSKOOL_11464 
+
+:BSKOOL_11457
+65@ = 0 
+
+:BSKOOL_11464
+if 
+  $2170 == 0 
+jf @BSKOOL_11559 
+if 
+  $2162 == 6 
+jf @BSKOOL_11559 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_11559 
+59@ = 2 
+$2170 = 1 
+48@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1185 
+
+:BSKOOL_11559
+32@ = 0 
+
+:BSKOOL_11566
+if 
+  32@ > -1 
+jf @BSKOOL_11690 
+wait 0 
+gosub @BSKOOL_18344 
+if 
+   not 59@ == 2 
+jf @BSKOOL_11644 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BSKOOL_11644 
+48@ = 2 
+jump @BSKOOL_11690 
+
+:BSKOOL_11644
+gosub @BSKOOL_19009 
+gosub @BSKOOL_20530 
+if 
+  $326 == 1 
+jf @BSKOOL_11683 
+jump @BSKOOL_11690 
+
+:BSKOOL_11683
+jump @BSKOOL_11566 
+
+:BSKOOL_11690
+gosub @BSKOOL_20613 
+gosub @BSKOOL_20952 
+if 
+  48@ == 2 
+jf @BSKOOL_11875 
+if 
+  $2170 == 1 
+jf @BSKOOL_11861 
+if 
+  $MISSION_DRIVING_SCHOOL_PASSED == 0 
+jf @BSKOOL_11861 
+fade 0 1000 
+
+:BSKOOL_11765
+if 
+fading 
+jf @BSKOOL_11789 
+wait 0 
+jump @BSKOOL_11765 
+
+:BSKOOL_11789
+Actor.PutAt($PLAYER_ACTOR, 1171.521, 1351.183, 9.9219)
+Actor.Angle($PLAYER_ACTOR) = 11.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 2000 
+
+:BSKOOL_11830
+if 
+fading 
+jf @BSKOOL_11854 
+wait 0 
+jump @BSKOOL_11830 
+
+:BSKOOL_11854
+jump @BSKOOL_11917 
+
+:BSKOOL_11861
+jump @BSKOOL_644 
+jump @BSKOOL_11882 
+
+:BSKOOL_11875
+jump @BSKOOL_10032 
+
+:BSKOOL_11882
+jump @BSKOOL_10305 
+
+:BSKOOL_11889
+040D: unload_wav 3 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1186 
+00BE: text_clear_all 
+return 
+
+:BSKOOL_11917
+fade 1 500 
+if 
+  $MISSION_DRIVING_SCHOOL_PASSED == 0 
+jf @BSKOOL_11965 
+0595: mission_complete 
+030C: progress_made = 1 
+$MISSION_DRIVING_SCHOOL_PASSED = 1 
+0624: add 50.0 to_float_stat 229 
+
+:BSKOOL_11965
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'BS_Z_7' time 5000 style 5  // You have completed the Bike School.~n~~w~Motorbike Skill +
+0394: play_music 2 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:BSKOOL_11994
+014F: stop_timer $253 
+03F0: enable_text_draw 0 
+0826: enable_hud 1 
+0581: enable_radar 1 
+01B7: release_weather 
+Model.Destroy(#TRAFFICCONE)
+Model.Destroy(#LANDJUMP2)
+Model.Destroy(#FCR900)
+Model.Destroy(#BF400)
+Model.Destroy(#PCJ600)
+Model.Destroy(#NRG500)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#WMYMECH)
+if 
+  $PARKED_NRG500_EXISTS == 0 
+jf @BSKOOL_12235 
+if 
+  $2173 == 1 
+jf @BSKOOL_12235 
+if 
+  $2176 == 1 
+jf @BSKOOL_12235 
+if 
+  $2179 == 1 
+jf @BSKOOL_12235 
+if 
+  $2185 == 1 
+jf @BSKOOL_12235 
+if 
+  $2182 == 1 
+jf @BSKOOL_12235 
+if 
+  $2188 == 1 
+jf @BSKOOL_12235 
+$PARKED_NRG500_EXISTS = 1 
+if 
+  $PARKED_FCR900_EXISTS == 0 
+jf @BSKOOL_12210 
+$PARKED_FCR900_EXISTS = 1 
+
+:BSKOOL_12210
+if 
+  $PARKED_FREEWAY_EXISTS == 0 
+jf @BSKOOL_12235 
+$PARKED_FREEWAY_EXISTS = 1 
+
+:BSKOOL_12235
+if 
+  $PARKED_FCR900_EXISTS == 0 
+jf @BSKOOL_12393 
+if 
+  $2172 == 1 
+jf @BSKOOL_12393 
+if 
+  $2175 == 1 
+jf @BSKOOL_12393 
+if 
+  $2178 == 1 
+jf @BSKOOL_12393 
+if 
+  $2184 == 1 
+jf @BSKOOL_12393 
+if 
+  $2181 == 1 
+jf @BSKOOL_12393 
+if 
+  $2187 == 1 
+jf @BSKOOL_12393 
+$PARKED_FCR900_EXISTS = 1 
+if 
+  $PARKED_FREEWAY_EXISTS == 0 
+jf @BSKOOL_12393 
+$PARKED_FREEWAY_EXISTS = 1 
+
+:BSKOOL_12393
+if 
+  $PARKED_FREEWAY_EXISTS == 0 
+jf @BSKOOL_12526 
+if 
+  $2171 == 1 
+jf @BSKOOL_12526 
+if 
+  $2174 == 1 
+jf @BSKOOL_12526 
+if 
+  $2177 == 1 
+jf @BSKOOL_12526 
+if 
+  $2183 == 1 
+jf @BSKOOL_12526 
+if 
+  $2180 == 1 
+jf @BSKOOL_12526 
+if 
+  $2186 == 1 
+jf @BSKOOL_12526 
+$PARKED_FREEWAY_EXISTS = 1 
+
+:BSKOOL_12526
+if 
+  $PARKED_NRG500_EXISTS == 1 
+jf @BSKOOL_12575 
+0A17: set_parked_car_generator $PARKED_NRG500 to_player_owned 1 
+014C: set_parked_car_generator $PARKED_NRG500 cars_to_generate_to 101 
+0624: add 200.0 to_float_stat 229 
+$PARKED_NRG500_EXISTS = 2 
+
+:BSKOOL_12575
+if 
+  $PARKED_FCR900_EXISTS == 1 
+jf @BSKOOL_12624 
+0A17: set_parked_car_generator $PARKED_FCR900 to_player_owned 1 
+014C: set_parked_car_generator $PARKED_FCR900 cars_to_generate_to 101 
+0624: add 100.0 to_float_stat 229 
+$PARKED_FCR900_EXISTS = 2 
+
+:BSKOOL_12624
+if 
+  $PARKED_FREEWAY_EXISTS == 1 
+jf @BSKOOL_12663 
+0A17: set_parked_car_generator $PARKED_FREEWAY to_player_owned 1 
+014C: set_parked_car_generator $PARKED_FREEWAY cars_to_generate_to 101 
+$PARKED_FREEWAY_EXISTS = 2 
+
+:BSKOOL_12663
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:BSKOOL_12674
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 225.0 size 612.0 438.0 RGBA 0 0 0 64@ 
+if 
+  63@ == 1 
+jf @BSKOOL_12796 
+if 
+  255 > 64@ 
+jf @BSKOOL_12789 
+64@ += 5 
+if 
+  64@ > 255 
+jf @BSKOOL_12782 
+64@ = 255 
+
+:BSKOOL_12782
+jump @BSKOOL_12796 
+
+:BSKOOL_12789
+63@ = 2 
+
+:BSKOOL_12796
+if 
+  63@ == 3 
+jf @BSKOOL_12878 
+if 
+  64@ > 0 
+jf @BSKOOL_12871 
+64@ -= 5 
+if 
+  0 > 64@ 
+jf @BSKOOL_12864 
+64@ = 0 
+
+:BSKOOL_12864
+jump @BSKOOL_12878 
+
+:BSKOOL_12871
+63@ = 0 
+
+:BSKOOL_12878
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 0.0 size 640.0 197.0 RGBA 0 0 0 255 
+gosub @BSKOOL_16466 
+0340: set_text_draw_RGBA 190 190 190 255 
+if 
+  $247 == 1 
+jf @BSKOOL_13073 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_A'  // The 360
+if 
+  $2166 > 69 
+jf @BSKOOL_13008 
+008B: 66@ = $2166 // (int) 
+jump @BSKOOL_13066 
+
+:BSKOOL_13008
+008B: 66@ = $2166 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13066
+gosub @BSKOOL_14958 
+
+:BSKOOL_13073
+if 
+  $247 == 2 
+jf @BSKOOL_13210 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_B'  // The 180
+if 
+  $2167 > 69 
+jf @BSKOOL_13145 
+008B: 66@ = $2167 // (int) 
+jump @BSKOOL_13203 
+
+:BSKOOL_13145
+008B: 66@ = $2167 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13203
+gosub @BSKOOL_14958 
+
+:BSKOOL_13210
+if 
+  $247 == 3 
+jf @BSKOOL_13347 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_C'  // The Wheelie
+if 
+  $2164 > 69 
+jf @BSKOOL_13282 
+008B: 66@ = $2164 // (int) 
+jump @BSKOOL_13340 
+
+:BSKOOL_13282
+008B: 66@ = $2164 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13340
+gosub @BSKOOL_14958 
+
+:BSKOOL_13347
+if 
+  $247 == 5 
+jf @BSKOOL_13484 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_D'  // The Stoppie
+if 
+  $2165 > 69 
+jf @BSKOOL_13419 
+008B: 66@ = $2165 // (int) 
+jump @BSKOOL_13477 
+
+:BSKOOL_13419
+008B: 66@ = $2165 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13477
+gosub @BSKOOL_14958 
+
+:BSKOOL_13484
+if 
+  $247 == 4 
+jf @BSKOOL_13621 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_E'  // Jump & Stop
+if 
+  $2168 > 69 
+jf @BSKOOL_13556 
+008B: 66@ = $2168 // (int) 
+jump @BSKOOL_13614 
+
+:BSKOOL_13556
+008B: 66@ = $2168 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13614
+gosub @BSKOOL_14958 
+
+:BSKOOL_13621
+if 
+  $247 == 6 
+jf @BSKOOL_13758 
+033E: set_draw_text_position 322.0 41.0 GXT 'BS_F'  // Jump & Stoppie
+if 
+  $2169 > 69 
+jf @BSKOOL_13693 
+008B: 66@ = $2169 // (int) 
+jump @BSKOOL_13751 
+
+:BSKOOL_13693
+008B: 66@ = $2169 // (int) 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+0340: set_text_draw_RGBA 166 202 240 255 
+033E: set_draw_text_position 320.0 80.0 GXT 'BS_Z_3'  // Get 70% or higher to pass.
+
+:BSKOOL_13751
+gosub @BSKOOL_14958 
+
+:BSKOOL_13758
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 248 211 7 255 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BSKOOL_13836 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'BS_X_4'  // Exit
+jump @BSKOOL_13869 
+
+:BSKOOL_13836
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'BS_X_4'  // Exit
+
+:BSKOOL_13869
+if 
+   not 57@ == 1 
+jf @BSKOOL_14263 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 248 211 7 255 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BSKOOL_13965 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'BS_X_5'  // Start
+jump @BSKOOL_13998 
+
+:BSKOOL_13965
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'BS_X_5'  // Start
+
+:BSKOOL_13998
+if 
+   not $2162 == 1 
+jf @BSKOOL_14127 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 248 211 7 255 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BSKOOL_14094 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+jump @BSKOOL_14127 
+
+:BSKOOL_14094
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+
+:BSKOOL_14127
+if 
+  $2162 == 1 
+jf @BSKOOL_14256 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 173 173 173 125 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BSKOOL_14223 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+jump @BSKOOL_14256 
+
+:BSKOOL_14223
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+
+:BSKOOL_14256
+jump @BSKOOL_14374 
+
+:BSKOOL_14263
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 248 211 7 255 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BSKOOL_14341 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+jump @BSKOOL_14374 
+
+:BSKOOL_14341
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BS_X_3'  // Navigate
+
+:BSKOOL_14374
+gosub @BSKOOL_16288 
+033F: set_text_draw_letter_size 0.32 1.25 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 150.0 360.0 GXT 'BS_X04'  // ~k~~VEHICLE_ENTER_EXIT~
+if 
+   not 57@ == 1 
+jf @BSKOOL_14650 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 255 255 255 255 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 150.0 340.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+if 
+   not $2162 == 1 
+jf @BSKOOL_14572 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 255 255 255 255 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BS_X03'  // ~<~~>~
+
+:BSKOOL_14572
+if 
+  $2162 == 1 
+jf @BSKOOL_14643 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 173 173 173 125 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BS_X03'  // ~<~~>~
+
+:BSKOOL_14643
+jump @BSKOOL_14704 
+
+:BSKOOL_14650
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 255 255 255 255 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BS_X03'  // ~<~~>~
+
+:BSKOOL_14704
+033F: set_text_draw_letter_size 0.52 1.45 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 112.0 size 320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 317.0 size 320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 112.0 size -320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 317.0 size -320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 160.0 435.0 size 320.0 17.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 480.0 435.0 size -320.0 17.0 RGBA 150 150 150 255 
+return 
+
+:BSKOOL_14958
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 430.0 size 640.0 250.0 RGBA 0 0 0 255 
+gosub @BSKOOL_16288 
+03E4: set_text_draw_align_right 0 
+0340: set_text_draw_RGBA 166 202 240 255 
+if 
+  66@ > 69 
+jf @BSKOOL_15070 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+045A: draw_text_1number 320.0 80.0 GXT 'BS_Y_6' number 66@  // ~1~%
+
+:BSKOOL_15070
+if 
+  70 > 66@ 
+jf @BSKOOL_15095 
+65@ = 1 
+
+:BSKOOL_15095
+if 
+  66@ > 69 
+jf @BSKOOL_15138 
+if 
+  85 > 66@ 
+jf @BSKOOL_15138 
+65@ = 2 
+
+:BSKOOL_15138
+if 
+  66@ > 84 
+jf @BSKOOL_15181 
+if 
+  100 > 66@ 
+jf @BSKOOL_15181 
+65@ = 3 
+
+:BSKOOL_15181
+if 
+  66@ == 100 
+jf @BSKOOL_15206 
+65@ = 4 
+
+:BSKOOL_15206
+if 
+  65@ > 1 
+jf @BSKOOL_15311 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+jump @BSKOOL_15391 
+
+:BSKOOL_15311
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+
+:BSKOOL_15391
+03E3: set_texture_to_be_drawn_antialiased 1 
+if 
+  65@ == 1 
+jf @BSKOOL_15499 
+038D: draw_texture 6 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 166 202 240 255 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+033E: set_draw_text_position 320.0 375.0 GXT 'BS_Z_4'  // NO AWARD
+
+:BSKOOL_15499
+if 
+  65@ == 2 
+jf @BSKOOL_15603 
+038D: draw_texture 1 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 166 202 240 255 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+033E: set_draw_text_position 320.0 375.0 GXT 'BS_Y_12'  // BRONZE
+
+:BSKOOL_15603
+if 
+  65@ == 3 
+jf @BSKOOL_15707 
+038D: draw_texture 2 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 166 202 240 255 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+033E: set_draw_text_position 320.0 375.0 GXT 'BS_Y_11'  // SILVER
+
+:BSKOOL_15707
+if 
+  65@ == 4 
+jf @BSKOOL_15811 
+038D: draw_texture 3 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BSKOOL_16288 
+0340: set_text_draw_RGBA 166 202 240 255 
+03E4: set_text_draw_align_right 0 
+0342: set_text_draw_centered 1 
+033E: set_draw_text_position 320.0 375.0 GXT 'BS_Y_10'  // GOLD
+
+:BSKOOL_15811
+return 
+
+:BSKOOL_15813
+if 
+  34@ == 0 
+jf @BSKOOL_15988 
+if 
+  $247 == 1 
+jf @BSKOOL_15856 
+gosub @BSKOOL_1783 
+
+:BSKOOL_15856
+if 
+  $247 == 2 
+jf @BSKOOL_15881 
+gosub @BSKOOL_3477 
+
+:BSKOOL_15881
+if 
+  $247 == 3 
+jf @BSKOOL_15906 
+gosub @BSKOOL_4902 
+
+:BSKOOL_15906
+if 
+  $247 == 5 
+jf @BSKOOL_15931 
+gosub @BSKOOL_6670 
+
+:BSKOOL_15931
+if 
+  $247 == 4 
+jf @BSKOOL_15956 
+gosub @BSKOOL_8446 
+
+:BSKOOL_15956
+if 
+  $247 == 6 
+jf @BSKOOL_15981 
+gosub @BSKOOL_10039 
+
+:BSKOOL_15981
+34@ = 1 
+
+:BSKOOL_15988
+if 
+  34@ == 1 
+jf @BSKOOL_16072 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_16072 
+if 
+87C1:   not path 35@ available 
+jf @BSKOOL_16050 
+07C0: load_path 35@ 
+jump @BSKOOL_16072 
+
+:BSKOOL_16050
+05EB: assign_car 38@ to_path 35@ 
+63@ = 3 
+34@ = 2 
+
+:BSKOOL_16072
+if 
+  34@ == 2 
+jf @BSKOOL_16157 
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_16143 
+if 
+860E:   not car 38@ assigned_to_path 
+jf @BSKOOL_16136 
+63@ = 1 
+34@ = 4 
+
+:BSKOOL_16136
+jump @BSKOOL_16157 
+
+:BSKOOL_16143
+63@ = 1 
+34@ = 4 
+
+:BSKOOL_16157
+if 
+  34@ == 3 
+jf @BSKOOL_16189 
+63@ = 1 
+34@ = 4 
+
+:BSKOOL_16189
+if 
+  34@ == 4 
+jf @BSKOOL_16286 
+if 
+  63@ == 2 
+jf @BSKOOL_16286 
+05EC: release_car 38@ from_path 
+Car.Destroy(38@)
+Actor.DestroyInstantly(49@)
+0395: clear_area 1 at $327 $328 $329 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Car.Destroy(38@)
+gosub @BSKOOL_20952 
+34@ = 0 
+
+:BSKOOL_16286
+return 
+
+:BSKOOL_16288
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:BSKOOL_16350
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.8 2.6 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+return 
+
+:BSKOOL_16466
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.2 4.0 
+060D: draw_text_shadow 3 rgba 0 0 0 255 
+0349: set_text_draw_font 3 
+return 
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.0 3.8 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:BSKOOL_16586
+fade 0 500 
+
+:BSKOOL_16593
+if 
+fading 
+jf @BSKOOL_16617 
+wait 0 
+jump @BSKOOL_16593 
+
+:BSKOOL_16617
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+return 
+
+:BSKOOL_16623
+$309 = 0.0 
+$310 = 0.0 
+$311 = 0.0 
+$312 = 0.0 
+$313 = 0.0 
+$314 = 0.0 
+$315 = 0.0 
+$316 = 0.0 
+$317 = 0.0 
+$318 = 0.0 
+$319 = 0.0 
+$320 = 0.0 
+$321 = 0.0 
+$322 = 0.0 
+$323 = 0.0 
+$324 = 0.0 
+$12 = 0 
+$277 = 0.0 
+$278 = 0.0 
+$282 = 0.0 
+$283 = 0.0 
+$284 = 0.0 
+$285 = 10.0 
+$249 = 0 
+$280 = 0.0 
+$281 = 0.0 
+$330 = 0.0 
+$331 = 0.0 
+$332 = 0.0 
+$333 = 0 
+$261 = 0 
+$262 = 0 
+$303 = 0.0 
+$304 = 0.0 
+$305 = 0.0 
+$306 = 0.0 
+$326 = 0 
+$266 = 0 
+43@ = 0.0 
+42@ = 0.0 
+44@ = 0.0 
+39@ = 0 
+40@ = 0 
+48@ = 0 
+$254 = 0 
+$286 = 0 
+$287 = 0 
+$289 = 0 
+$290 = 0 
+$292 = 0 
+$293 = 0 
+$295 = 0 
+$296 = 0 
+$298 = 0 
+$299 = 0 
+$288 = 0 
+$291 = 0 
+$294 = 0 
+$297 = 0 
+$300 = 0 
+$301 = 0 
+$302 = 0 
+$CURRENT_FLIGHT_RECORD = 0 
+$269 = 0 
+0086: $255 = $307 // (float) 
+0086: $256 = $308 // (float) 
+02CE: $257 = ground_z_at $255 $256 50.0 
+$268 = 0 
+$259 = 0.0 
+$267 = 0 
+$270 = 0 
+41@ = 0 
+$264 = 0 
+$265 = 0 
+$272 = 0 
+$273 = 0 
+$276 = 0.0 
+$274 = 0 
+$275 = 0 
+$279 = 0.0 
+45@ = 0.0 
+46@ = 0 
+47@ = 0 
+59@ = 0 
+58@ = 0 
+return 
+
+:BSKOOL_17345
+036A: put_actor $PLAYER_ACTOR in_car 38@ 
+Car.DoorStatus(38@) = 4
+wait 0 
+0581: enable_radar 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+fade 1 500 
+
+:BSKOOL_17379
+if 
+fading 
+jf @BSKOOL_17403 
+wait 0 
+jump @BSKOOL_17379 
+
+:BSKOOL_17403
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:BSKOOL_17412
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_17479 
+if 
+  $249 == 1 
+jf @BSKOOL_17472 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_17472 
+48@ = 1 
+
+:BSKOOL_17472
+jump @BSKOOL_17486 
+
+:BSKOOL_17479
+48@ = 1 
+
+:BSKOOL_17486
+return 
+
+:BSKOOL_17488
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_17531 
+if 
+   Actor.InCar($PLAYER_ACTOR, 38@)
+jf @BSKOOL_17531 
+02E3: 43@ = car 38@ speed 
+
+:BSKOOL_17531
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BSKOOL_17644 
+if 
+  43@ > 0.1 
+jf @BSKOOL_17644 
+00BE: text_clear_all 
+if or
+  $247 == 1 
+  $247 == 2 
+  $247 == 3 
+  $247 == 5 
+  $247 == 4 
+  $247 == 6 
+jf @BSKOOL_17637 
+014E: start_timer_at $253 count_in_direction 1 // global_variable 
+
+:BSKOOL_17637
+$249 = 1 
+
+:BSKOOL_17644
+return 
+
+:BSKOOL_17646
+if 
+  $253 == 0 
+jf @BSKOOL_17678 
+Player.CanMove($PLAYER_CHAR) = False
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+
+:BSKOOL_17678
+return 
+
+:BSKOOL_17680
+Player.CanMove($PLAYER_CHAR) = False
+0396: pause_timer 1 
+return 
+
+:BSKOOL_17693
+Car.StorePos(38@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 0.5 
+jf @BSKOOL_17830 
+if 
+  10.0 > $259 
+jf @BSKOOL_17816 
+$259 -= 0.5 
+$259 *= 10.42 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @BSKOOL_17823 
+
+:BSKOOL_17816
+$267 = 0 
+
+:BSKOOL_17823
+jump @BSKOOL_17837 
+
+:BSKOOL_17830
+$267 = 100 
+
+:BSKOOL_17837
+0058: $CURRENT_FLIGHT_RECORD += $267 // (int) 
+return 
+40@ = Car.Health(38@)
+$268 = 1000 
+0066: $268 -= 40@ // (int) 
+if 
+  $247 == 16 
+jf @BSKOOL_17903 
+$268 /= 10 
+jump @BSKOOL_17910 
+
+:BSKOOL_17903
+$268 /= 2 
+
+:BSKOOL_17910
+if 
+  $268 > 100 
+jf @BSKOOL_17935 
+$268 = 100 
+
+:BSKOOL_17935
+return 
+
+:BSKOOL_17937
+$272 = 0 
+$200 = 0 
+if 
+  $247 == 1 
+jf @BSKOOL_18028 
+
+:BSKOOL_17969
+if 
+  15 > $200 
+jf @BSKOOL_18028 
+if 
+0366:   object $201($200,46i) damaged 
+jf @BSKOOL_18014 
+$272 += 10 
+
+:BSKOOL_18014
+$200 += 1 
+jump @BSKOOL_17969 
+
+:BSKOOL_18028
+if 
+  $247 == 2 
+jf @BSKOOL_18105 
+
+:BSKOOL_18046
+if 
+  25 > $200 
+jf @BSKOOL_18105 
+if 
+0366:   object $201($200,46i) damaged 
+jf @BSKOOL_18091 
+$272 += 10 
+
+:BSKOOL_18091
+$200 += 1 
+jump @BSKOOL_18046 
+
+:BSKOOL_18105
+if or
+  $247 == 3 
+  $247 == 5 
+jf @BSKOOL_18189 
+
+:BSKOOL_18130
+if 
+  30 > $200 
+jf @BSKOOL_18189 
+if 
+0366:   object $201($200,46i) damaged 
+jf @BSKOOL_18175 
+$272 += 10 
+
+:BSKOOL_18175
+$200 += 1 
+jump @BSKOOL_18130 
+
+:BSKOOL_18189
+if or
+  $247 == 4 
+  $247 == 6 
+jf @BSKOOL_18273 
+
+:BSKOOL_18214
+if 
+  14 > $200 
+jf @BSKOOL_18273 
+if 
+0366:   object $201($200,46i) damaged 
+jf @BSKOOL_18259 
+$272 += 10 
+
+:BSKOOL_18259
+$200 += 1 
+jump @BSKOOL_18214 
+
+:BSKOOL_18273
+$272 *= 2 
+if 
+  $272 > 90 
+jf @BSKOOL_18305 
+$272 = 100 
+
+:BSKOOL_18305
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+return 
+
+:BSKOOL_18315
+if 
+  1 > $CURRENT_FLIGHT_RECORD 
+jf @BSKOOL_18340 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:BSKOOL_18340
+00BE: text_clear_all 
+return 
+
+:BSKOOL_18344
+if 
+   not Car.Wrecked(38@)
+jf @BSKOOL_18777 
+if 
+  $333 == 0 
+jf @BSKOOL_18469 
+0407: store_coords_to $330 $331 $332 from_car 38@ with_offset 10.0 0.0 5.0 
+$332 = 15.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+$333 = 1 
+
+:BSKOOL_18469
+if 
+  32@ > 3000 
+jf @BSKOOL_18616 
+if 
+  6000 > 32@ 
+jf @BSKOOL_18616 
+if 
+  $333 == 1 
+jf @BSKOOL_18616 
+0407: store_coords_to $330 $331 $332 from_car 38@ with_offset 0.0 10.0 5.0 
+$332 = 15.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+$333 = 2 
+
+:BSKOOL_18616
+if 
+  32@ > 6000 
+jf @BSKOOL_18744 
+if 
+  $333 == 2 
+jf @BSKOOL_18744 
+0407: store_coords_to $330 $331 $332 from_car 38@ with_offset -10.0 0.0 5.0 
+$332 = 15.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+Camera.OnVehicle(38@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+$333 = 3 
+
+:BSKOOL_18744
+if 
+  32@ > 9000 
+jf @BSKOOL_18777 
+$333 = 1 
+32@ = 0 
+
+:BSKOOL_18777
+return 
+
+:BSKOOL_18779
+65@ = 0 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @BSKOOL_18868 
+if 
+  85 > $CURRENT_FLIGHT_RECORD 
+jf @BSKOOL_18868 
+if and
+  67@ > 69 
+  85 > 67@ 
+jf @BSKOOL_18861 
+65@ = 0 
+jump @BSKOOL_18868 
+
+:BSKOOL_18861
+65@ = 2 
+
+:BSKOOL_18868
+if 
+  $CURRENT_FLIGHT_RECORD > 84 
+jf @BSKOOL_18950 
+if 
+  100 > $CURRENT_FLIGHT_RECORD 
+jf @BSKOOL_18950 
+if and
+  67@ > 84 
+  100 > 67@ 
+jf @BSKOOL_18943 
+65@ = 0 
+jump @BSKOOL_18950 
+
+:BSKOOL_18943
+65@ = 3 
+
+:BSKOOL_18950
+if 
+  $CURRENT_FLIGHT_RECORD == 100 
+jf @BSKOOL_19007 
+if 
+  67@ == 100 
+jf @BSKOOL_19000 
+65@ = 0 
+jump @BSKOOL_19007 
+
+:BSKOOL_19000
+65@ = 4 
+
+:BSKOOL_19007
+return 
+
+:BSKOOL_19009
+0826: enable_hud 0 
+0581: enable_radar 0 
+00BE: text_clear_all 
+014F: stop_timer $253 
+if 
+  2 > 65@ 
+jf @BSKOOL_19082 
+0937: text_draw_box_cornerA 160.0 220.0 cornerB 490.0 400.0 GXT_reference 'BS_Z_8' style 3  // Results
+jump @BSKOOL_19115 
+
+:BSKOOL_19082
+0937: text_draw_box_cornerA 160.0 200.0 cornerB 490.0 400.0 GXT_reference 'DUMMY' style 3 
+
+:BSKOOL_19115
+gosub @BSKOOL_16350 
+0904: get_interface 3 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 255.0 GXT 'BS_Y_1'  // Final Heading:
+gosub @BSKOOL_16350 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 475.0 255.0 GXT 'BS_Y_6' number $266  // ~1~%
+gosub @BSKOOL_16350 
+0904: get_interface 3 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 275.0 GXT 'BS_Y_2'  // Final Position:
+gosub @BSKOOL_16350 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 475.0 275.0 GXT 'BS_Y_6' number $267  // ~1~%
+gosub @BSKOOL_16350 
+0904: get_interface 3 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 295.0 GXT 'BS_Y_3'  // Penalty Damage:
+gosub @BSKOOL_16350 
+03E4: set_text_draw_align_right 1 
+0904: get_interface 0 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+045A: draw_text_1number 475.0 295.0 GXT 'BS_Y_6' number $272  // ~1~%
+gosub @BSKOOL_16350 
+0904: get_interface 3 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 315.0 GXT 'BS_Y_5'  // Overall Score:
+gosub @BSKOOL_16350 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 475.0 315.0 GXT 'BS_Y_6' number $CURRENT_FLIGHT_RECORD  // ~1~%
+if or
+  59@ == 1 
+  59@ == 2 
+jf @BSKOOL_19919 
+if 
+  65@ > 0 
+jf @BSKOOL_19919 
+038D: draw_texture 4 position 250.0 200.0 size -60.0 60.0 RGBA 180 180 180 255 
+038D: draw_texture 4 position 392.0 200.0 size 60.0 60.0 RGBA 180 180 180 255 
+if 
+  65@ == 2 
+jf @BSKOOL_19728 
+038D: draw_texture 1 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BSKOOL_19728
+if 
+  65@ == 3 
+jf @BSKOOL_19782 
+038D: draw_texture 2 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BSKOOL_19782
+if 
+  65@ == 4 
+jf @BSKOOL_19836 
+038D: draw_texture 3 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BSKOOL_19836
+gosub @BSKOOL_16466 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+033F: set_text_draw_letter_size 1.0 3.4 
+0904: get_interface 6 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 323.0 65.0 GXT 'BS_Y_9'  // NEW CERTIFICATE AWARDED!
+
+:BSKOOL_19919
+if or
+  59@ == 1 
+  59@ == 2 
+jf @BSKOOL_20011 
+gosub @BSKOOL_16466 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+033F: set_text_draw_letter_size 1.0 3.4 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 323.0 110.0 GXT 'BS_Y_8'  // NEW HIGH SCORE!
+
+:BSKOOL_20011
+if 
+   not 59@ == 2 
+jf @BSKOOL_20316 
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 4 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 330.0 345.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 345.0 GXT 'BS_Z_5'  // Continue
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 4 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 330.0 365.0 GXT 'BS_X04'  // ~k~~VEHICLE_ENTER_EXIT~
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 365.0 GXT 'BS_Z_6'  // Exit
+jump @BSKOOL_20528 
+
+:BSKOOL_20316
+if 
+   not $2162 == 6 
+jf @BSKOOL_20388 
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 170.0 345.0 GXT 'BS_Z_9'  // NEW TEST AVAILABLE!
+
+:BSKOOL_20388
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 4 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 330.0 365.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+gosub @BSKOOL_16350 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 52@ 53@ 54@ 55@ 
+0340: set_text_draw_RGBA 52@ 53@ 54@ 55@ 
+033E: set_draw_text_position 170.0 365.0 GXT 'BS_Z_5'  // Continue
+
+:BSKOOL_20528
+return 
+
+:BSKOOL_20530
+if 
+00E1:   player 0 pressed_key 16 
+jf @BSKOOL_20586 
+if 
+  $12 == 1 
+jf @BSKOOL_20579 
+$12 = 0 
+$326 = 1 
+
+:BSKOOL_20579
+jump @BSKOOL_20611 
+
+:BSKOOL_20586
+if 
+  $12 == 0 
+jf @BSKOOL_20611 
+$12 = 1 
+
+:BSKOOL_20611
+return 
+
+:BSKOOL_20613
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1186 
+fade 0 500 
+
+:BSKOOL_20640
+if 
+fading 
+jf @BSKOOL_20709 
+if 
+  $MISSION_DRIVING_SCHOOL_PASSED == 0 
+jf @BSKOOL_20696 
+if 
+  $2170 == 1 
+jf @BSKOOL_20696 
+gosub @BSKOOL_12674 
+
+:BSKOOL_20696
+00BE: text_clear_all 
+wait 0 
+jump @BSKOOL_20640 
+
+:BSKOOL_20709
+00BE: text_clear_all 
+03D6: remove_styled_text 'BS_Y_8'  // NEW HIGH SCORE!
+03D6: remove_styled_text 'BS_Y_9'  // NEW CERTIFICATE AWARDED!
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+  48@ == 2 
+jf @BSKOOL_20835 
+00BE: text_clear_all 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BSKOOL_20808 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1171.521 1351.183 9.9219 
+jump @BSKOOL_20828 
+
+:BSKOOL_20808
+Actor.PutAt($PLAYER_ACTOR, 1171.521, 1351.183, 9.9219)
+
+:BSKOOL_20828
+jump @BSKOOL_20898 
+
+:BSKOOL_20835
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BSKOOL_20878 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1171.521 1351.183 9.9219 
+jump @BSKOOL_20898 
+
+:BSKOOL_20878
+Actor.PutAt($PLAYER_ACTOR, 1171.521, 1351.183, 9.9219)
+
+:BSKOOL_20898
+Actor.Angle($PLAYER_ACTOR) = 5.0
+Car.Destroy(38@)
+0395: clear_area 1 at 1171.521 1351.183 9.9219 radius 2.0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+014F: stop_timer $253 
+0396: pause_timer 0 
+return 
+
+:BSKOOL_20952
+$200 = 0 
+
+:BSKOOL_20959
+if 
+  46 > $200 
+jf @BSKOOL_21000 
+Object.Destroy($201($200,46i))
+$200 += 1 
+jump @BSKOOL_20959 
+
+:BSKOOL_21000
+if 
+03CA:   object 56@ exists 
+jf @BSKOOL_21021 
+Object.Destroy(56@)
+
+:BSKOOL_21021
+return 
+
+:BSKOOL_21023
+$200 = 0 
+if 
+  $247 == 1 
+jf @BSKOOL_21107 
+
+:BSKOOL_21048
+if 
+  15 > $200 
+jf @BSKOOL_21107 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 500.0)
+$200 += 1 
+jump @BSKOOL_21048 
+
+:BSKOOL_21107
+if 
+  $247 == 2 
+jf @BSKOOL_21184 
+
+:BSKOOL_21125
+if 
+  25 > $200 
+jf @BSKOOL_21184 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 500.0)
+$200 += 1 
+jump @BSKOOL_21125 
+
+:BSKOOL_21184
+if or
+  $247 == 3 
+  $247 == 5 
+jf @BSKOOL_21268 
+
+:BSKOOL_21209
+if 
+  30 > $200 
+jf @BSKOOL_21268 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 500.0)
+$200 += 1 
+jump @BSKOOL_21209 
+
+:BSKOOL_21268
+if or
+  $247 == 4 
+  $247 == 6 
+jf @BSKOOL_21382 
+
+:BSKOOL_21293
+if 
+  14 > $200 
+jf @BSKOOL_21352 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 500.0)
+$200 += 1 
+jump @BSKOOL_21293 
+
+:BSKOOL_21352
+56@ = Object.Init(#LANDJUMP2, 0.0, 0.0, 500.0)
+Object.CollisionDetection(56@) = True
+
+:BSKOOL_21382
+if 
+  $247 == 1 
+jf @BSKOOL_22060 
+$285 = 6.0 
+$279 = 0.0 
+0407: store_coords_to $280 $281 $284 from_car 38@ with_offset 0.0 1.0 -0.2 
+
+:BSKOOL_21449
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 0.0 
+jf @BSKOOL_21532 
+Object.PutAt($201[0], $282, $283, $284)
+
+:BSKOOL_21532
+if 
+  $279 == 24.0 
+jf @BSKOOL_21567 
+Object.PutAt($201[1], $282, $283, $284)
+
+:BSKOOL_21567
+if 
+  $279 == 48.0 
+jf @BSKOOL_21602 
+Object.PutAt($201[2], $282, $283, $284)
+
+:BSKOOL_21602
+if 
+  $279 == 72.0 
+jf @BSKOOL_21637 
+Object.PutAt($201[3], $282, $283, $284)
+
+:BSKOOL_21637
+if 
+  $279 == 96.0 
+jf @BSKOOL_21672 
+Object.PutAt($201[4], $282, $283, $284)
+
+:BSKOOL_21672
+if 
+  $279 == 120.0 
+jf @BSKOOL_21707 
+Object.PutAt($201[5], $282, $283, $284)
+
+:BSKOOL_21707
+if 
+  $279 == 144.0 
+jf @BSKOOL_21742 
+Object.PutAt($201[6], $282, $283, $284)
+
+:BSKOOL_21742
+if 
+  $279 == 168.0 
+jf @BSKOOL_21777 
+Object.PutAt($201[7], $282, $283, $284)
+
+:BSKOOL_21777
+if 
+  $279 == 192.0 
+jf @BSKOOL_21812 
+Object.PutAt($201[8], $282, $283, $284)
+
+:BSKOOL_21812
+if 
+  $279 == 216.0 
+jf @BSKOOL_21847 
+Object.PutAt($201[9], $282, $283, $284)
+
+:BSKOOL_21847
+if 
+  $279 == 240.0 
+jf @BSKOOL_21882 
+Object.PutAt($201[10], $282, $283, $284)
+
+:BSKOOL_21882
+if 
+  $279 == 264.0 
+jf @BSKOOL_21917 
+Object.PutAt($201[11], $282, $283, $284)
+
+:BSKOOL_21917
+if 
+  $279 == 288.0 
+jf @BSKOOL_21952 
+Object.PutAt($201[12], $282, $283, $284)
+
+:BSKOOL_21952
+if 
+  $279 == 312.0 
+jf @BSKOOL_21987 
+Object.PutAt($201[13], $282, $283, $284)
+
+:BSKOOL_21987
+if 
+  $279 == 336.0 
+jf @BSKOOL_22022 
+Object.PutAt($201[14], $282, $283, $284)
+
+:BSKOOL_22022
+$279 += 24.0 
+if 
+  360.0 > $279 
+jf @BSKOOL_22060 
+jump @BSKOOL_21449 
+
+:BSKOOL_22060
+if 
+  $247 == 2 
+jf @BSKOOL_22802 
+$285 = 6.0 
+$279 = 90.0 
+0407: store_coords_to $280 $281 $284 from_car 38@ with_offset 0.0 86.0 -0.2 
+
+:BSKOOL_22127
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 120.0 
+jf @BSKOOL_22210 
+Object.PutAt($201[0], $282, $283, $284)
+
+:BSKOOL_22210
+if 
+  $279 == 150.0 
+jf @BSKOOL_22245 
+Object.PutAt($201[1], $282, $283, $284)
+
+:BSKOOL_22245
+if 
+  $279 == 180.0 
+jf @BSKOOL_22280 
+Object.PutAt($201[2], $282, $283, $284)
+
+:BSKOOL_22280
+if 
+  $279 == 210.0 
+jf @BSKOOL_22315 
+Object.PutAt($201[3], $282, $283, $284)
+
+:BSKOOL_22315
+if 
+  $279 == 240.0 
+jf @BSKOOL_22350 
+Object.PutAt($201[4], $282, $283, $284)
+
+:BSKOOL_22350
+$279 += 30.0 
+if 
+  271.0 > $279 
+jf @BSKOOL_22388 
+jump @BSKOOL_22127 
+
+:BSKOOL_22388
+035C: place_object $201[7] relative_to_car 38@ with_offset -7.0 74.0 -0.2 
+035C: place_object $201[8] relative_to_car 38@ with_offset 7.0 74.0 -0.2 
+035C: place_object $201[9] relative_to_car 38@ with_offset -7.0 78.0 -0.2 
+035C: place_object $201[10] relative_to_car 38@ with_offset 7.0 78.0 -0.2 
+035C: place_object $201[11] relative_to_car 38@ with_offset -7.0 82.0 -0.2 
+035C: place_object $201[12] relative_to_car 38@ with_offset 7.0 82.0 -0.2 
+035C: place_object $201[13] relative_to_car 38@ with_offset -7.0 86.0 -0.2 
+035C: place_object $201[14] relative_to_car 38@ with_offset 7.0 86.0 -0.2 
+035C: place_object $201[15] relative_to_car 38@ with_offset 0.0 82.0 -0.2 
+035C: place_object $201[16] relative_to_car 38@ with_offset -3.0 4.0 -0.2 
+035C: place_object $201[17] relative_to_car 38@ with_offset 3.0 4.0 -0.2 
+035C: place_object $201[18] relative_to_car 38@ with_offset -3.0 0.0 -0.2 
+035C: place_object $201[19] relative_to_car 38@ with_offset 3.0 0.0 -0.2 
+035C: place_object $201[20] relative_to_car 38@ with_offset -3.0 -4.0 -0.2 
+035C: place_object $201[21] relative_to_car 38@ with_offset 3.0 -4.0 -0.2 
+035C: place_object $201[22] relative_to_car 38@ with_offset 0.0 -4.0 -0.2 
+035C: place_object $201[23] relative_to_car 38@ with_offset 0.0 74.0 -0.2 
+035C: place_object $201[24] relative_to_car 38@ with_offset 0.0 78.0 -0.2 
+
+:BSKOOL_22802
+if or
+  $247 == 3 
+  $247 == 5 
+jf @BSKOOL_23517 
+035C: place_object $201[0] relative_to_car 38@ with_offset -3.0 4.0 -0.2 
+035C: place_object $201[1] relative_to_car 38@ with_offset 3.0 4.0 -0.2 
+035C: place_object $201[2] relative_to_car 38@ with_offset -3.0 0.0 -0.2 
+035C: place_object $201[3] relative_to_car 38@ with_offset 3.0 0.0 -0.2 
+035C: place_object $201[4] relative_to_car 38@ with_offset -3.0 -4.0 -0.2 
+035C: place_object $201[5] relative_to_car 38@ with_offset 3.0 -4.0 -0.2 
+035C: place_object $201[6] relative_to_car 38@ with_offset 0.0 -4.0 -0.2 
+035C: place_object $201[7] relative_to_car 38@ with_offset -3.5 56.0 -0.2 
+035C: place_object $201[8] relative_to_car 38@ with_offset 3.5 56.0 -0.2 
+035C: place_object $201[9] relative_to_car 38@ with_offset -3.5 60.0 -0.2 
+035C: place_object $201[10] relative_to_car 38@ with_offset 3.5 60.0 -0.2 
+035C: place_object $201[11] relative_to_car 38@ with_offset -3.5 64.0 -0.2 
+035C: place_object $201[12] relative_to_car 38@ with_offset 3.5 64.0 -0.2 
+035C: place_object $201[13] relative_to_car 38@ with_offset -3.5 68.0 -0.2 
+035C: place_object $201[14] relative_to_car 38@ with_offset 3.5 68.0 -0.2 
+035C: place_object $201[15] relative_to_car 38@ with_offset -3.5 72.0 -0.2 
+035C: place_object $201[16] relative_to_car 38@ with_offset 3.5 72.0 -0.2 
+035C: place_object $201[17] relative_to_car 38@ with_offset -3.5 76.0 -0.2 
+035C: place_object $201[18] relative_to_car 38@ with_offset 3.5 76.0 -0.2 
+035C: place_object $201[19] relative_to_car 38@ with_offset -3.5 80.0 -0.2 
+035C: place_object $201[20] relative_to_car 38@ with_offset 3.5 80.0 -0.2 
+035C: place_object $201[21] relative_to_car 38@ with_offset -3.5 84.0 -0.2 
+035C: place_object $201[22] relative_to_car 38@ with_offset 3.5 84.0 -0.2 
+035C: place_object $201[23] relative_to_car 38@ with_offset -3.0 120.0 -0.2 
+035C: place_object $201[24] relative_to_car 38@ with_offset 3.0 120.0 -0.2 
+035C: place_object $201[25] relative_to_car 38@ with_offset -3.0 124.0 -0.2 
+035C: place_object $201[26] relative_to_car 38@ with_offset 3.0 124.0 -0.2 
+035C: place_object $201[27] relative_to_car 38@ with_offset -3.0 128.0 -0.2 
+035C: place_object $201[28] relative_to_car 38@ with_offset 3.0 128.0 -0.2 
+035C: place_object $201[29] relative_to_car 38@ with_offset 0.0 128.0 -0.2 
+
+:BSKOOL_23517
+if or
+  $247 == 4 
+  $247 == 6 
+jf @BSKOOL_24084 
+035C: place_object $201[0] relative_to_car 38@ with_offset -3.0 4.0 -0.2 
+035C: place_object $201[1] relative_to_car 38@ with_offset 3.0 4.0 -0.2 
+035C: place_object $201[2] relative_to_car 38@ with_offset -3.0 0.0 -0.2 
+035C: place_object $201[3] relative_to_car 38@ with_offset 3.0 0.0 -0.2 
+035C: place_object $201[4] relative_to_car 38@ with_offset -3.0 -4.0 -0.2 
+035C: place_object $201[5] relative_to_car 38@ with_offset 3.0 -4.0 -0.2 
+035C: place_object $201[6] relative_to_car 38@ with_offset 0.0 -4.0 -0.2 
+035C: place_object 56@ relative_to_car 38@ with_offset 0.0 48.0 -0.2 
+if 
+  $247 == 4 
+jf @BSKOOL_23905 
+035C: place_object $201[7] relative_to_car 38@ with_offset -3.0 120.0 -0.2 
+035C: place_object $201[8] relative_to_car 38@ with_offset 3.0 120.0 -0.2 
+035C: place_object $201[9] relative_to_car 38@ with_offset -3.0 124.0 -0.2 
+035C: place_object $201[10] relative_to_car 38@ with_offset 3.0 124.0 -0.2 
+035C: place_object $201[11] relative_to_car 38@ with_offset -3.0 128.0 -0.2 
+035C: place_object $201[12] relative_to_car 38@ with_offset 3.0 128.0 -0.2 
+035C: place_object $201[13] relative_to_car 38@ with_offset 0.0 128.0 -0.2 
+
+:BSKOOL_23905
+if 
+  $247 == 6 
+jf @BSKOOL_24084 
+035C: place_object $201[7] relative_to_car 38@ with_offset -3.0 110.0 -0.2 
+035C: place_object $201[8] relative_to_car 38@ with_offset 3.0 110.0 -0.2 
+035C: place_object $201[9] relative_to_car 38@ with_offset -3.0 114.0 -0.2 
+035C: place_object $201[10] relative_to_car 38@ with_offset 3.0 114.0 -0.2 
+035C: place_object $201[11] relative_to_car 38@ with_offset -3.0 118.0 -0.2 
+035C: place_object $201[12] relative_to_car 38@ with_offset 3.0 118.0 -0.2 
+035C: place_object $201[13] relative_to_car 38@ with_offset 0.0 118.0 -0.2 
+
+:BSKOOL_24084
+return

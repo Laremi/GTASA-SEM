@@ -1,0 +1,1451 @@
+:INTRO
+thread 'INTRO' 
+gosub @INTRO_47 
+if 
+wasted_or_busted 
+jf @INTRO_38 
+gosub @INTRO_10020 
+
+:INTRO_38
+gosub @INTRO_10022 
+end_thread 
+
+:INTRO_47
+$ONMISSION = 1 
+09BA: show_entered_zone_name 0 
+if 
+  $ONMISSION == 0 
+jf @INTRO_129 
+149@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+148@ = Car.Create(#COPCARLA, 0.0, 0.0, 0.0)
+0662: printstring "AA" 
+
+:INTRO_129
+create_thread @A_CONT 
+054C: use_GXT_table 'INTRO1' 
+03F0: enable_text_draw 1 
+wait 0 
+03E0: draw_text_behind_textures 0 
+0349: set_text_draw_font 1 
+179@ = 0 
+178@ = 0 
+05AA: 182@s = 'LOAD_01' // @s = 'short'  // Francis INTL. Airport,
+
+:INTRO_192
+if 
+  200 > 179@ 
+jf @INTRO_229 
+wait 0 
+gosub @INTRO_10308 
+jump @INTRO_192 
+
+:INTRO_229
+178@ = 2 
+32@ = 0 
+
+:INTRO_243
+if 
+  1000 > 32@ 
+jf @INTRO_280 
+wait 0 
+gosub @INTRO_10308 
+jump @INTRO_243 
+
+:INTRO_280
+select_interior 14 
+02E4: load_cutscene_data 'PROLOG1' 
+
+:INTRO_295
+if 
+86B9:   not cutscene_data_loaded 
+jf @INTRO_326 
+wait 0 
+gosub @INTRO_10308 
+jump @INTRO_295 
+
+:INTRO_326
+178@ = 1 
+
+:INTRO_333
+if 
+  179@ > 0 
+jf @INTRO_369 
+wait 0 
+gosub @INTRO_10308 
+jump @INTRO_333 
+
+:INTRO_369
+178@ = 0 
+181@ = 1 
+05AA: 182@s = 'LOAD_02' // @s = 'short'  // Los Santos International Airport.
+180@ = 0 
+02E7: start_cutscene 
+fade 0 0 
+
+:INTRO_412
+if 
+fading 
+jf @INTRO_436 
+wait 0 
+jump @INTRO_412 
+
+:INTRO_436
+fade 1 1000 
+32@ = 0 
+
+:INTRO_450
+if 
+82E9:   not cutscene_reached_end 
+jf @INTRO_710 
+wait 0 
+if 
+  32@ > 6800 
+jf @INTRO_703 
+0871: init_jump_table 180@ total_jumps 3 default_jump 0 @INTRO_703 jumps 0 @INTRO_549 1 @INTRO_603 2 @INTRO_657 -1 @INTRO_703 -1 @INTRO_703 -1 @INTRO_703 -1 @INTRO_703 
+
+:INTRO_549
+if 
+  200 > 179@ 
+jf @INTRO_589 
+gosub @INTRO_10308 
+jump @INTRO_703 
+jump @INTRO_603 
+
+:INTRO_589
+178@ = 2 
+180@ += 1 
+
+:INTRO_603
+if 
+  10000 > 32@ 
+jf @INTRO_643 
+gosub @INTRO_10308 
+jump @INTRO_703 
+jump @INTRO_657 
+
+:INTRO_643
+178@ = 1 
+180@ += 1 
+
+:INTRO_657
+if 
+  179@ > 0 
+jf @INTRO_696 
+gosub @INTRO_10308 
+jump @INTRO_703 
+jump @INTRO_703 
+
+:INTRO_696
+180@ += 1 
+
+:INTRO_703
+jump @INTRO_450 
+
+:INTRO_710
+fade 0 0 
+
+:INTRO_716
+if 
+fading 
+jf @INTRO_740 
+wait 0 
+jump @INTRO_716 
+
+:INTRO_740
+02EA: end_cutscene 
+if 
+056A:   cutscene_skipped 
+jf @INTRO_773 
+select_interior 0 
+$5353 = 1 
+jump @INTRO_6707 
+
+:INTRO_773
+00C0: set_current_time_hours_to 6 minutes_to 30 
+set_weather 14 
+select_interior 0 
+02E4: load_cutscene_data 'PROLOG3' 
+
+:INTRO_798
+if 
+86B9:   not cutscene_data_loaded 
+jf @INTRO_822 
+wait 0 
+jump @INTRO_798 
+
+:INTRO_822
+Model.Load(#GWFORUM1_LAE)
+
+:INTRO_826
+if 
+   not Model.Available(#GWFORUM1_LAE)
+jf @INTRO_852 
+wait 0 
+jump @INTRO_826 
+
+:INTRO_852
+0A0B: set_rendering_origin_at_3D_coord 2493.362 -1734.295 12.3828 angle 258.7583 
+0395: clear_area 1 at 2482.582 -1729.642 12.3906 radius 500.0 
+02E7: start_cutscene 
+fade 1 1000 
+
+:INTRO_907
+if 
+82E9:   not cutscene_reached_end 
+jf @INTRO_937 
+wait 0 
+00C0: set_current_time_hours_to 6 minutes_to 30 
+jump @INTRO_907 
+
+:INTRO_937
+fade 0 0 
+
+:INTRO_943
+if 
+fading 
+jf @INTRO_967 
+wait 0 
+jump @INTRO_943 
+
+:INTRO_967
+02EA: end_cutscene 
+Model.Destroy(#GWFORUM1_LAE)
+if 
+056A:   cutscene_skipped 
+jf @INTRO_1000 
+$5353 = 1 
+jump @INTRO_6707 
+
+:INTRO_1000
+Model.Load(#COPCARLA)
+Model.Load(#FREIGHT)
+Model.Load(#FREIFLAT)
+Model.Load(#BMX)
+Model.Load(#GANGSHOPS4_LAE2)
+Model.Load(#CE_HILLSEAST06)
+Model.Load(#CUNTEGROUND23)
+Model.Load(#HILLSEAST05_LAE)
+023C: load_special_actor 'TENPEN' as 1 // models 290-299 
+023C: load_special_actor 'PULASKI' as 2 // models 290-299 
+023C: load_special_actor 'HERN' as 3 // models 290-299 
+07C0: load_path 706 
+07C0: load_path 707 
+
+:INTRO_1085
+if or
+   not Model.Available(#COPCARLA)
+   not Model.Available(#FREIGHT)
+   not Model.Available(#FREIFLAT)
+   not Model.Available(#BMX)
+87C1:   not path 706 available 
+87C1:   not path 707 available 
+jf @INTRO_1137 
+wait 0 
+jump @INTRO_1085 
+
+:INTRO_1137
+if or
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+823D:   not special_actor 3 loaded 
+jf @INTRO_1171 
+wait 0 
+jump @INTRO_1137 
+
+:INTRO_1171
+if or
+   not Model.Available(#GANGSHOPS4_LAE2)
+   not Model.Available(#CE_HILLSEAST06)
+   not Model.Available(#CUNTEGROUND23)
+   not Model.Available(#HILLSEAST05_LAE)
+jf @INTRO_1209 
+wait 0 
+jump @INTRO_1171 
+
+:INTRO_1209
+04E4: refresh_game_renderer_at 2431.609 -1254.061 
+Camera.SetAtPos(2358.656, -1246.348, 28.7884)
+0952: load_soundtrack 10 
+38@ = 0 
+
+:INTRO_1249
+if 
+   not 38@ == 2 
+jf @INTRO_1283 
+wait 0 
+0953: get_soundtrack_status_to 38@ 
+jump @INTRO_1249 
+
+:INTRO_1283
+if 
+09C8:   menu_subtitles_switched_on 
+jf @INTRO_2113 
+93@ = 0 
+05AA: 95@s = 'PRO@24' // @s = 'short'  // ~z~How you been, Carl? How's your wonderful family?
+43@ = 3050 
+68@ = 0 
+05AA: 97@s = 'PRO@25' // @s = 'short'  // ~z~I'm here to bury my Moms. You know that.
+44@ = 2530 
+69@ = 3150 
+05AA: 99@s = 'PRO@26' // @s = 'short'  // ~z~Yeah, I guess I do.
+45@ = 1600 
+70@ = 6000 
+05AA: 101@s = 'PRO@49' // @s = 'short'  // ~z~So what else you got shakin' Carl?
+46@ = 1530 
+71@ = 9190 
+05AA: 103@s = 'PRO@27' // @s = 'short'  // ~z~Nothing. I live in Liberty City now. I'm clean. Legit.
+47@ = 5510 
+72@ = 10810 
+05AA: 105@s = 'PRO@28' // @s = 'short'  // ~z~No, you ain't never been clean, Carl.
+48@ = 2560 
+73@ = 16600 
+05AA: 107@s = 'PRO@29' // @s = 'short'  // ~z~Well, what've we got here?
+49@ = 1350 
+74@ = 21000 
+05AA: 109@s = 'PRO@30' // @s = 'short'  // ~z~This is a weapon, Officer Pulaski, that was used to gun down
+50@ = 3760 
+75@ = 23500 
+05AA: 111@s = 'PRO@30B' // @s = 'short'  // ~z~a police officer not ten minutes ago.
+51@ = 2450 
+0085: 76@ = 75@ // (int) 
+005A: 76@ += 50@ // (int) 
+05AA: 113@s = 'PRO@31' // @s = 'short'  // ~z~Officer Pendelbury. A fine man, I might add.
+52@ = 3620 
+77@ = 30700 
+05AA: 115@s = 'PRO@33' // @s = 'short'  // ~z~You work fast, nigga.
+53@ = 1440 
+78@ = 35000 
+05AA: 117@s = 'PRO@32' // @s = 'short'  // ~z~You know I just got off the plane!
+54@ = 1739 
+79@ = 36750 
+05AA: 119@s = 'PRO@34' // @s = 'short'  // ~z~It's a good thing we found you and retrieved the murder weapon.
+55@ = 2450 
+0085: 80@ = 79@ // (int) 
+005A: 80@ += 54@ // (int) 
+05AA: 121@s = 'PRO@35' // @s = 'short'  // ~z~That ain't my gun.
+56@ = 971 
+0085: 81@ = 80@ // (int) 
+005A: 81@ += 55@ // (int) 
+05AA: 123@s = 'PRO@36' // @s = 'short'  // ~z~Don't bullshit me, Carl.
+57@ = 1320 
+0085: 82@ = 81@ // (int) 
+005A: 82@ += 56@ // (int) 
+05AA: 125@s = 'PRO@37' // @s = 'short'  // ~z~Yeah, don't bullshit him, Carl.
+58@ = 1342 
+0085: 83@ = 82@ // (int) 
+005A: 83@ += 57@ // (int) 
+05AA: 127@s = 'PRO@38' // @s = 'short'  // ~z~What the fuck you want from me this time?
+59@ = 1747 
+0085: 84@ = 83@ // (int) 
+005A: 84@ += 58@ // (int) 
+05AA: 129@s = 'PRO@40' // @s = 'short'  // ~z~When we want you, we'll find you.
+60@ = 2355 
+85@ = 46700 
+05AA: 131@s = 'PRO@41' // @s = 'short'  // ~z~In the meantime, try not to gun down any more officers of the law.
+61@ = 4400 
+86@ = 49500 
+05AA: 133@s = 'PRO@43' // @s = 'short'  // ~z~You can't leave me here - it's BALLAS country.
+62@ = 3111 
+87@ = 55900 
+05AA: 135@s = 'PRO@44' // @s = 'short'  // ~z~I thought you said you was innocent, Carl? That you don't bang?
+63@ = 3400 
+88@ = 59500 
+05AA: 137@s = 'PRO@45' // @s = 'short'  // ~z~This is car 58... WHAT?!
+64@ = 1180 
+0085: 89@ = 88@ // (int) 
+005A: 89@ += 63@ // (int) 
+05AA: 139@s = 'PRO@47' // @s = 'short'  // ~z~See you around like a doughnut, Carl...
+65@ = 1700 
+0085: 90@ = 89@ // (int) 
+005A: 90@ += 64@ // (int) 
+05AA: 141@s = 'PRO@46' // @s = 'short'  // ~z~Officer Pendelbury's down? We'll be right over.
+66@ = 2500 
+0085: 91@ = 90@ // (int) 
+005A: 91@ += 65@ // (int) 
+jump @INTRO_2120 
+
+:INTRO_2113
+93@ = 25 
+
+:INTRO_2120
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+06D7: enable_train_traffic 0 
+37@ = 0 
+35@ = Car.Create(#COPCARLA, 2431.609, -1254.061, 22.8303)
+Car.Angle(35@) = 89.5453
+067F: set_car 35@ lights 2 
+0430: put_actor $PLAYER_ACTOR into_car 35@ passenger_seat 2 
+41@ = Actor.CreateAsDriver(Mission1, #SPECIAL02, 35@)
+40@ = Actor.CreateAsPassenger(Mission1, #SPECIAL01, 35@, 0)
+42@ = Actor.CreateAsPassenger(Mission1, #SPECIAL03, 35@, 1)
+Camera.SetPosition(2358.656, -1246.348, 28.7884, 0.0, 0.0, 0.0)
+Camera.PointAt(2359.521, -1246.843, 28.7047, 2)
+00C0: set_current_time_hours_to 6 minutes_to 30 
+set_weather 14 
+022B: create_forbidden_for_peds_cube_cornerA 2380.682 -1274.528 22.0 cornerB 2375.945 -1239.356 26.0 
+022B: create_forbidden_for_peds_cube_cornerA 2358.383 -1372.666 22.0 cornerB 2382.969 -1379.457 25.0 
+022B: create_forbidden_for_peds_cube_cornerA 2151.603 -1380.375 22.0 cornerB 2184.704 -1374.71 26.0 
+022B: create_forbidden_for_peds_cube_cornerA 2180.731 -1286.328 22.0 cornerB 2153.527 -1315.797 26.0 
+32@ = 0 
+
+:INTRO_2434
+if 
+  500 > 32@ 
+jf @INTRO_2464 
+wait 0 
+jump @INTRO_2434 
+
+:INTRO_2464
+fade 1 500 
+02A3: enable_widescreen 1 
+if 
+   not Car.Wrecked(35@)
+jf @INTRO_2517 
+if 
+860E:   not car 35@ assigned_to_path 
+jf @INTRO_2517 
+05EB: assign_car 35@ to_path 706 
+0954: start_playing_loaded_soundtrack 
+
+:INTRO_2517
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @INTRO_2540 
+Player.CanMove($PLAYER_CHAR) = False
+
+:INTRO_2540
+06D8: 36@ = create_train_at 2285.152 -1257.5 23.0 type 13 direction 1 
+06DC: set_train 36@ acc 0.0 
+06DD: set_train 36@ speed 0.0 
+$TEMPVAR_FLOAT_1 = 2373.105 
+$TEMPVAR_FLOAT_2 = -1281.969 
+$TEMPVAR_FLOAT_3 = 22.833 
+$TEMPVAR_ANGLE = 0.0 
+152@ = 2478.559 
+153@ = -1258.541 
+154@ = 27.5958 
+gosub @INTRO_5867 
+32@ = 0 
+33@ = 0 
+$5353 = 2 
+
+:INTRO_2682
+wait 0 
+00C0: set_current_time_hours_to 6 minutes_to 30 
+if 
+   not Car.Wrecked(35@)
+jf @INTRO_5860 
+0871: init_jump_table 37@ total_jumps 6 default_jump 0 @INTRO_3228 jumps 0 @INTRO_2771 1 @INTRO_2805 2 @INTRO_2874 3 @INTRO_2911 4 @INTRO_3030 5 @INTRO_3078 -1 @INTRO_3228 
+
+:INTRO_2771
+if 
+fading 
+jf @INTRO_2791 
+jump @INTRO_3228 
+
+:INTRO_2791
+0707: start_scene_skip_to @INTRO_3132 
+37@ += 1 
+
+:INTRO_2805
+if 
+  10000 > 32@ 
+jf @INTRO_2831 
+jump @INTRO_3228 
+
+:INTRO_2831
+if 
+   not Car.Wrecked(36@)
+jf @INTRO_2867 
+06DC: set_train 36@ acc 9.0 
+06DD: set_train 36@ speed 9.0 
+
+:INTRO_2867
+37@ += 1 
+
+:INTRO_2874
+if 
+060E:   car 35@ assigned_to_path 
+jf @INTRO_2897 
+jump @INTRO_3228 
+
+:INTRO_2897
+32@ = 0 
+37@ += 1 
+
+:INTRO_2911
+if 
+  13000 > 32@ 
+jf @INTRO_2937 
+jump @INTRO_3228 
+
+:INTRO_2937
+32@ = 0 
+05EB: assign_car 35@ to_path 707 
+099A: set_car 35@ collision_detection 0 
+0395: clear_area 1 at 2246.508 -1263.087 22.9531 radius 500.0 
+$60 = Car.Create(#BMX, 2246.508, -1263.087, 22.9531)
+Car.Angle($60) = 285.0
+145@ = 1 
+37@ += 1 
+
+:INTRO_3030
+if 
+  26800 > 32@ 
+jf @INTRO_3056 
+jump @INTRO_3228 
+
+:INTRO_3056
+0622: AS_actor $PLAYER_ACTOR bail_car 35@ 
+37@ += 1 
+jump @INTRO_3228 
+
+:INTRO_3078
+if 
+060E:   car 35@ assigned_to_path 
+jf @INTRO_3101 
+jump @INTRO_3228 
+
+:INTRO_3101
+05D3: AS_actor $PLAYER_ACTOR goto_point 2239.33 -1261.941 22.9375 mode 4 time -2 ms // versionA 
+$5353 = 0 
+
+:INTRO_3132
+0701: end_scene_skip 
+if 
+  $5353 == 2 
+jf @INTRO_3159 
+jump @INTRO_6707 
+
+:INTRO_3159
+0955: end_playing_loaded_soundtrack 
+06D9: destroy_defined_trains 
+06D7: enable_train_traffic 1 
+Model.Destroy(#COPCARLA)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Car.Destroy(35@)
+$5353 = 3 
+jump @INTRO_5968 
+
+:INTRO_3228
+0871: init_jump_table 39@ total_jumps 16 default_jump 0 @INTRO_5047 jumps 0 @INTRO_3356 1 @INTRO_3473 2 @INTRO_3590 3 @INTRO_3707 4 @INTRO_3809 5 @INTRO_3895 6 @INTRO_4012 
+0872: jump_table_jumps 7 @INTRO_4100 8 @INTRO_4219 9 @INTRO_4307 10 @INTRO_4426 11 @INTRO_4545 12 @INTRO_4633 13 @INTRO_4752 14 @INTRO_4840 15 @INTRO_4928 
+
+:INTRO_3356
+if 
+  1500 > 33@ 
+jf @INTRO_3382 
+jump @INTRO_5047 
+
+:INTRO_3382
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2358.656 -1246.348 28.7884 position_to 2358.656 -1246.348 28.7884 time 7000 smooth_transition 1 
+0920: point_camera 2359.521 -1246.843 28.7047 transverse_to 2359.276 -1247.129 28.7047 time 7000 smooth_transition 1 
+39@ += 1 
+
+:INTRO_3473
+if 
+  5500 > 33@ 
+jf @INTRO_3499 
+jump @INTRO_5047 
+
+:INTRO_3499
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2362.03 -1288.5 23.8624 position_to 2362.03 -1288.5 23.8624 time 5500 smooth_transition 1 
+0920: point_camera 2362.592 -1287.676 23.9326 transverse_to 2362.047 -1289.497 23.932 time 5500 smooth_transition 1 
+39@ += 1 
+
+:INTRO_3590
+if 
+  9500 > 33@ 
+jf @INTRO_3616 
+jump @INTRO_5047 
+
+:INTRO_3616
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2377.163 -1308.247 23.6193 position_to 2380.673 -1390.425 24.0771 time 6800 smooth_transition 0 
+0920: point_camera 2376.469 -1307.534 23.7249 transverse_to 2379.811 -1389.922 24.1388 time 6800 smooth_transition 0 
+39@ += 1 
+
+:INTRO_3707
+if 
+  16200 > 33@ 
+jf @INTRO_3733 
+jump @INTRO_5047 
+
+:INTRO_3733
+Model.Destroy(#GANGSHOPS4_LAE2)
+Model.Destroy(#CE_HILLSEAST06)
+Model.Destroy(#CUNTEGROUND23)
+Model.Destroy(#HILLSEAST05_LAE)
+Camera.SetPosition(2316.988, -1378.123, 23.3054, 0.0, 0.0, 0.0)
+Camera.PointAt(2317.908, -1378.489, 23.4404, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_3809
+if 
+  20500 > 33@ 
+jf @INTRO_3835 
+jump @INTRO_5047 
+
+:INTRO_3835
+Camera.SetPosition(2271.75, -1396.443, 36.7292, 0.0, 0.0, 0.0)
+Camera.PointAt(2272.475, -1395.894, 36.3149, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_3895
+if 
+  32300 > 33@ 
+jf @INTRO_3921 
+jump @INTRO_5047 
+
+:INTRO_3921
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2305.536 -1384.754 23.2002 position_to 2303.521 -1384.387 23.0641 time 5700 smooth_transition 0 
+0920: point_camera 2304.708 -1384.193 23.1803 transverse_to 2302.728 -1383.861 23.3722 time 5700 smooth_transition 0 
+39@ += 1 
+
+:INTRO_4012
+if 
+  37589 > 33@ 
+jf @INTRO_4040 
+jump @INTRO_5047 
+
+:INTRO_4040
+Camera.SetPosition(2265.254, -1388.591, 23.4001, 0.0, 0.0, 0.0)
+Camera.PointAt(2266.164, -1388.202, 23.4001, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_4100
+if 
+  38500 > 33@ 
+jf @INTRO_4128 
+jump @INTRO_5047 
+
+:INTRO_4128
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2265.254 -1388.591 23.4001 position_to 2246.91 -1388.591 23.4001 time 7500 smooth_transition 1 
+0920: point_camera 2266.164 -1388.202 23.4001 transverse_to 2245.935 -1388.424 23.4001 time 7500 smooth_transition 1 
+39@ += 1 
+
+:INTRO_4219
+if 
+  46000 > 33@ 
+jf @INTRO_4247 
+jump @INTRO_5047 
+
+:INTRO_4247
+Camera.SetPosition(2163.084, -1387.757, 23.8438, 0.0, 0.0, 0.0)
+Camera.PointAt(2163.946, -1387.268, 23.9785, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_4307
+if 
+  48000 > 33@ 
+jf @INTRO_4335 
+jump @INTRO_5047 
+
+:INTRO_4335
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2163.084 -1387.757 23.8438 position_to 2163.084 -1387.757 23.8438 time 5000 smooth_transition 1 
+0920: point_camera 2163.946 -1387.268 23.9785 transverse_to 2163.423 -1386.826 23.9785 time 5000 smooth_transition 1 
+39@ += 1 
+
+:INTRO_4426
+if 
+  53000 > 33@ 
+jf @INTRO_4454 
+jump @INTRO_5047 
+
+:INTRO_4454
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2156.551 -1292.082 39.2814 position_to 2156.974 -1288.564 36.9331 time 4000 smooth_transition 1 
+0920: point_camera 2157.025 -1292.67 38.6264 transverse_to 2157.626 -1289.084 36.382 time 4000 smooth_transition 1 
+39@ += 1 
+
+:INTRO_4545
+if 
+  57000 > 33@ 
+jf @INTRO_4573 
+jump @INTRO_5047 
+
+:INTRO_4573
+Camera.SetPosition(2176.373, -1252.759, 23.4951, 0.0, 0.0, 0.0)
+Camera.PointAt(2176.118, -1253.725, 23.5115, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_4633
+if 
+  59200 > 33@ 
+jf @INTRO_4661 
+jump @INTRO_5047 
+
+:INTRO_4661
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2176.373 -1252.759 23.4951 position_to 2176.373 -1252.759 23.4951 time 2500 smooth_transition 1 
+0920: point_camera 2176.118 -1253.725 23.5115 transverse_to 2177.079 -1253.467 23.5115 time 2500 smooth_transition 1 
+39@ += 1 
+
+:INTRO_4752
+if 
+  61400 > 33@ 
+jf @INTRO_4780 
+jump @INTRO_5047 
+
+:INTRO_4780
+Camera.SetPosition(2212.582, -1262.756, 25.8688, 0.0, 0.0, 0.0)
+Camera.PointAt(2211.681, -1262.393, 25.633, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_4840
+if 
+  63000 > 33@ 
+jf @INTRO_4868 
+jump @INTRO_5047 
+
+:INTRO_4868
+Camera.SetPosition(2210.418, -1263.121, 23.1607, 0.0, 0.0, 0.0)
+Camera.PointAt(2211.399, -1262.981, 23.2985, 2)
+0925: restore_camera_to_user_defined 
+39@ += 1 
+
+:INTRO_4928
+if 
+  64000 > 33@ 
+jf @INTRO_4956 
+jump @INTRO_5047 
+
+:INTRO_4956
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2210.418 -1263.121 23.1607 position_to 2217.615 -1262.761 24.45 time 6500 smooth_transition 1 
+0920: point_camera 2211.399 -1262.981 23.2985 transverse_to 2218.606 -1262.886 24.4112 time 6500 smooth_transition 1 
+39@ += 1 
+
+:INTRO_5047
+if 
+  24 > 93@ 
+jf @INTRO_5241 
+0871: init_jump_table 94@ total_jumps 2 default_jump 0 @INTRO_5241 jumps 0 @INTRO_5163 1 @INTRO_5128 -1 @INTRO_5241 -1 @INTRO_5241 -1 @INTRO_5241 -1 @INTRO_5241 -1 @INTRO_5241 
+
+:INTRO_5128
+if 
+001D:   146@ > 33@ // (int) 
+jf @INTRO_5154 
+jump @INTRO_5241 
+
+:INTRO_5154
+00BE: text_clear_all 
+94@ -= 1 
+
+:INTRO_5163
+if 
+001D:   68@(93@,25i) > 33@ // (int) 
+jf @INTRO_5193 
+jump @INTRO_5241 
+
+:INTRO_5193
+00BC: show_text_highpriority GXT 95@(93@,25s) time 12000 flag 1 
+0085: 146@ = 33@ // (int) 
+005A: 146@ += 43@(93@,25i) // (int) 
+93@ += 1 
+94@ += 1 
+
+:INTRO_5241
+0871: init_jump_table 147@ total_jumps 5 default_jump 0 @INTRO_5860 jumps 0 @INTRO_5304 1 @INTRO_5414 2 @INTRO_5524 3 @INTRO_5636 4 @INTRO_5748 -1 @INTRO_5860 -1 @INTRO_5860 
+
+:INTRO_5304
+if 
+  8500 > 33@ 
+jf @INTRO_5330 
+jump @INTRO_5860 
+
+:INTRO_5330
+$TEMPVAR_FLOAT_1 = 2345.452 
+$TEMPVAR_FLOAT_2 = -1303.926 
+$TEMPVAR_FLOAT_3 = 22.9955 
+$TEMPVAR_ANGLE = 270.0 
+152@ = 2368.437 
+153@ = -1202.752 
+154@ = 26.4297 
+gosub @INTRO_5867 
+147@ += 1 
+
+:INTRO_5414
+if 
+  15000 > 33@ 
+jf @INTRO_5440 
+jump @INTRO_5860 
+
+:INTRO_5440
+$TEMPVAR_FLOAT_1 = 2346.383 
+$TEMPVAR_FLOAT_2 = -1420.555 
+$TEMPVAR_FLOAT_3 = 22.8281 
+$TEMPVAR_ANGLE = 0.0 
+152@ = 2387.488 
+153@ = -1409.537 
+154@ = 22.8359 
+gosub @INTRO_5867 
+147@ += 1 
+
+:INTRO_5524
+if 
+  40000 > 33@ 
+jf @INTRO_5552 
+jump @INTRO_5860 
+
+:INTRO_5552
+$TEMPVAR_FLOAT_1 = 2215.088 
+$TEMPVAR_FLOAT_2 = -1417.086 
+$TEMPVAR_FLOAT_3 = 22.8281 
+$TEMPVAR_ANGLE = 0.0 
+152@ = 2255.444 
+153@ = -1302.8 
+154@ = 22.8402 
+gosub @INTRO_5867 
+147@ += 1 
+
+:INTRO_5636
+if 
+  48000 > 33@ 
+jf @INTRO_5664 
+jump @INTRO_5860 
+
+:INTRO_5664
+$TEMPVAR_FLOAT_1 = 2165.042 
+$TEMPVAR_FLOAT_2 = -1353.055 
+$TEMPVAR_FLOAT_3 = 22.8281 
+$TEMPVAR_ANGLE = 180.0 
+152@ = 2130.579 
+153@ = -1381.478 
+154@ = 22.8281 
+gosub @INTRO_5867 
+147@ += 1 
+
+:INTRO_5748
+if 
+  52000 > 33@ 
+jf @INTRO_5776 
+jump @INTRO_5860 
+
+:INTRO_5776
+$TEMPVAR_FLOAT_1 = 2201.352 
+$TEMPVAR_FLOAT_2 = -1298.165 
+$TEMPVAR_FLOAT_3 = 22.8303 
+$TEMPVAR_ANGLE = 90.0 
+152@ = 2121.089 
+153@ = -1298.57 
+154@ = 22.817 
+gosub @INTRO_5867 
+147@ += 1 
+
+:INTRO_5860
+jump @INTRO_2682 
+
+:INTRO_5867
+09B2: get_random_available_car_unk 1 model_to 150@ class_to 151@ 
+if 
+   not 150@ == -1 
+jf @INTRO_5966 
+Actor.RemoveReferences(149@)
+Car.RemoveReferences(148@)
+148@ = Car.Create(150@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.Angle(148@) = $TEMPVAR_ANGLE
+0560: create_random_actor_in_car 148@ handle_as 149@ 
+05D1: AS_actor 149@ drive_car 148@ to 152@ 153@ 154@ speed 15.0 0 model #NULL 0 
+
+:INTRO_5966
+return 
+
+:INTRO_5968
+155@ = 0 
+156@ = 0 
+05AA: 164@s = 'VO_AA' // @s = 'short'  // ~z~Ah shit, here we go again.
+04AF: 157@ = 43200 // = constant 
+05AA: 166@s = 'VO_AB' // @s = 'short'  // ~z~Worst place in the world.
+04AF: 158@ = 43201 // = constant 
+05AA: 168@s = 'VO_AC' // @s = 'short'  // ~z~Rollin Heights Balla country.
+04AF: 159@ = 43202 // = constant 
+05AA: 170@s = 'VO_AD' // @s = 'short'  // ~z~I ain't represented Grove Street in five years,
+04AF: 160@ = 43203 // = constant 
+05AA: 172@s = 'VO_AE' // @s = 'short'  // ~z~but the Ballas won't give a shit.
+04AF: 161@ = 43204 // = constant 
+05AA: 174@s = 'VO_AF' // @s = 'short'  // ~z~Grove Street - Home.
+04AF: 162@ = 43205 // = constant 
+05AA: 176@s = 'VO_AG' // @s = 'short'  // ~z~At least it was before I fucked everything up.
+04AF: 163@ = 43206 // = constant 
+Camera.Restore_WithJumpCut
+0925: restore_camera_to_user_defined 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 2217.615 -1262.761 24.45 position_to 2238.641 -1261.329 24.6289 time 13500 smooth_transition 0 
+0920: point_camera 2218.606 -1262.886 24.4112 transverse_to 2239.602 -1261.589 24.54 time 13500 smooth_transition 0 
+099C: jiggle_camera type 1 timelimit 20000.0 intensity 3.0 
+39@ = 0 
+32@ = 0 
+0707: start_scene_skip_to @INTRO_6658 
+
+:INTRO_6273
+wait 0 
+0871: init_jump_table 155@ total_jumps 2 default_jump 0 @INTRO_6469 jumps 0 @INTRO_6340 1 @INTRO_6429 -1 @INTRO_6469 -1 @INTRO_6469 -1 @INTRO_6469 -1 @INTRO_6469 -1 @INTRO_6469 
+
+:INTRO_6340
+if 
+  5 > 156@ 
+jf @INTRO_6415 
+008A: $1276 = 157@(156@,7i) // (int) 
+05A9: s$1281 = 164@(156@,7s) // s$ 
+create_thread @A_ALAP 1 100 
+156@ += 1 
+155@ += 1 
+jump @INTRO_6429 
+
+:INTRO_6415
+155@ = -1 
+jump @INTRO_6469 
+
+:INTRO_6429
+if 
+  $1285($1288,2i) == -3 
+jf @INTRO_6469 
+155@ -= 1 
+$1285($1288,2i) = -4 
+
+:INTRO_6469
+0871: init_jump_table 39@ total_jumps 2 default_jump 0 @INTRO_6700 jumps 0 @INTRO_6532 1 @INTRO_6632 -1 @INTRO_6700 -1 @INTRO_6700 -1 @INTRO_6700 -1 @INTRO_6700 -1 @INTRO_6700 
+
+:INTRO_6532
+if 
+  32@ > 13500 
+jf @INTRO_6625 
+Camera.SetPosition(2238.641, -1261.329, 24.6289, 0.0, 0.0, 0.0)
+Camera.PointAt(2239.602, -1261.589, 24.54, 2)
+0925: restore_camera_to_user_defined 
+099C: jiggle_camera type 1 timelimit 2500.0 intensity 3.0 
+39@ += 1 
+
+:INTRO_6625
+jump @INTRO_6700 
+
+:INTRO_6632
+if 
+  32@ > 16000 
+jf @INTRO_6700 
+$5353 = 0 
+
+:INTRO_6658
+0701: end_scene_skip 
+if 
+  $5353 == 0 
+jf @INTRO_6693 
+0925: restore_camera_to_user_defined 
+Camera.Restore
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+
+:INTRO_6693
+jump @INTRO_6707 
+
+:INTRO_6700
+jump @INTRO_6273 
+
+:INTRO_6707
+0871: init_jump_table $5353 total_jumps 4 default_jump 0 @INTRO_7240 jumps 0 @INTRO_6770 1 @INTRO_6787 2 @INTRO_6787 3 @INTRO_6787 -1 @INTRO_7240 -1 @INTRO_7240 -1 @INTRO_7240 
+
+:INTRO_6770
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+jump @INTRO_7240 
+
+:INTRO_6787
+fade 0 0 
+
+:INTRO_6793
+if 
+fading 
+jf @INTRO_6817 
+wait 0 
+jump @INTRO_6793 
+
+:INTRO_6817
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00C0: set_current_time_hours_to 6 minutes_to 30 
+set_weather 14 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0A0B: set_rendering_origin_at_3D_coord 2239.367 -1261.939 22.9375 angle 272.5814 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @INTRO_6907 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2239.367 -1261.939 22.9375 
+jump @INTRO_6927 
+
+:INTRO_6907
+Actor.PutAt($PLAYER_ACTOR, 2239.367, -1261.939, 22.9375)
+
+:INTRO_6927
+Actor.Angle($PLAYER_ACTOR) = 272.5814
+if 
+  $5353 == 2 
+jf @INTRO_7031 
+0955: end_playing_loaded_soundtrack 
+06D9: destroy_defined_trains 
+06D7: enable_train_traffic 1 
+Model.Destroy(#COPCARLA)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Car.Destroy(35@)
+Model.Destroy(#GANGSHOPS4_LAE2)
+Model.Destroy(#CE_HILLSEAST06)
+Model.Destroy(#CUNTEGROUND23)
+Model.Destroy(#HILLSEAST05_LAE)
+0687: clear_actor $PLAYER_ACTOR task 
+
+:INTRO_7031
+if 
+  145@ == 0 
+jf @INTRO_7145 
+Model.Load(#BMX)
+
+:INTRO_7054
+if 
+   not Model.Available(#BMX)
+jf @INTRO_7081 
+wait 0 
+jump @INTRO_7054 
+
+:INTRO_7081
+0395: clear_area 1 at 2246.508 -1263.087 22.9531 radius 500.0 
+$60 = Car.Create(#BMX, 2246.508, -1263.087, 22.9531)
+Car.Angle($60) = 285.0
+145@ = 1 
+
+:INTRO_7145
+Camera.Restore_WithJumpCut
+0925: restore_camera_to_user_defined 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+32@ = 0 
+
+:INTRO_7162
+if 
+  500 > 32@ 
+jf @INTRO_7192 
+wait 0 
+jump @INTRO_7162 
+
+:INTRO_7192
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+fade 1 1500 
+
+:INTRO_7209
+if 
+fading 
+jf @INTRO_7233 
+wait 0 
+jump @INTRO_7209 
+
+:INTRO_7233
+jump @INTRO_7240 
+
+:INTRO_7240
+if 
+fading 
+jf @INTRO_7264 
+wait 0 
+jump @INTRO_7240 
+
+:INTRO_7264
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+create_thread @A_TERM 
+09BA: show_entered_zone_name 1 
+091E: create_forbidden_for_boats_cube_cornerA 2380.682 -1274.528 22.0 cornerB 2375.945 -1239.356 26.0 
+091E: create_forbidden_for_boats_cube_cornerA 2358.383 -1372.666 22.0 cornerB 2382.969 -1379.457 25.0 
+091E: create_forbidden_for_boats_cube_cornerA 2151.603 -1380.375 22.0 cornerB 2184.704 -1374.71 26.0 
+091E: create_forbidden_for_boats_cube_cornerA 2180.731 -1286.328 22.0 cornerB 2153.527 -1315.797 26.0 
+01B7: release_weather 
+03F0: enable_text_draw 0 
+0629: change_integer_stat 181 to 0 
+Player.CanMove($PLAYER_CHAR) = True
+041D: set_camera_near_clip 0.1 
+select_interior 0 
+076C: set_zone 'GAN1' gang 1 density_to 10 
+076C: set_zone 'GAN2' gang 1 density_to 10 
+0776: create_objects_in_object_group "BARRIERS1" 
+0776: create_objects_in_object_group "BARRIERS2" 
+01E8: create_forbidden_for_cars_cube_cornerA -2696.464 1239.866 40.7599 cornerB -2665.359 2190.96 70.8125 
+01E8: create_forbidden_for_cars_cube_cornerA -2740.694 2233.618 40.8431 cornerB -2720.91 2338.224 80.4822 
+01E8: create_forbidden_for_cars_cube_cornerA -2695.584 1237.981 40.7328 cornerB -2664.417 1454.767 60.8126 
+01E8: create_forbidden_for_cars_cube_cornerA -2670.173 1203.331 50.4297 cornerB -2662.66 1237.707 60.5781 
+01E8: create_forbidden_for_cars_cube_cornerA -995.0013 -416.2032 30.4207 cornerB -940.5399 -251.8564 40.6762 
+01E8: create_forbidden_for_cars_cube_cornerA -205.8387 250.7443 7.2472 cornerB -131.0039 481.8496 15.9152 
+01E8: create_forbidden_for_cars_cube_cornerA -100.7515 -927.8298 18.0 cornerB -68.3752 -891.9871 14.0 
+01E8: create_forbidden_for_cars_cube_cornerA 609.7595 327.3437 15.8783 cornerB 429.8884 616.0168 20.289 
+01E8: create_forbidden_for_cars_cube_cornerA 317.1688 707.7672 7.0 cornerB 437.5726 709.0657 20.5578 
+01E8: create_forbidden_for_cars_cube_cornerA 391.1194 640.015 7.0 cornerB 402.2627 664.798 18.5098 
+01E8: create_forbidden_for_cars_cube_cornerA 289.2904 636.3991 7.8675 cornerB 409.4943 702.3849 20.0345 
+01E8: create_forbidden_for_cars_cube_cornerA 300.3153 718.7909 7.7846 cornerB 316.7906 781.0926 14.0795 
+01E8: create_forbidden_for_cars_cube_cornerA 254.9982 837.029 10.1731 cornerB 270.7453 929.2404 30.2553 
+01E8: create_forbidden_for_cars_cube_cornerA 210.7811 939.2068 10.9062 cornerB 249.4799 959.1111 30.2141 
+01E8: create_forbidden_for_cars_cube_cornerA 230.4545 946.0961 20.6674 cornerB 255.9772 969.2755 30.4776 
+01E8: create_forbidden_for_cars_cube_cornerA 249.4279 899.7975 10.5871 cornerB 268.6826 933.5995 30.3975 
+01E8: create_forbidden_for_cars_cube_cornerA 312.1081 694.1089 6.0 cornerB 324.0811 733.0005 10.0 
+01E8: create_forbidden_for_cars_cube_cornerA 324.4526 804.9198 9.6186 cornerB 332.8747 814.356 14.3925 
+01E8: create_forbidden_for_cars_cube_cornerA 1690.819 376.5103 28.1103 cornerB 1730.223 445.2955 30.8414 
+01E8: create_forbidden_for_cars_cube_cornerA 1643.536 227.3723 27.4457 cornerB 1673.062 295.5788 30.0815 
+01E8: create_forbidden_for_cars_cube_cornerA 1673.765 388.1013 40.2331 cornerB 1815.862 804.9291 10.0 
+01E8: create_forbidden_for_cars_cube_cornerA 1705.156 308.3448 20.0 cornerB 1710.948 316.4094 23.5612 
+01E8: create_forbidden_for_cars_cube_cornerA -12.7067 -1522.455 1.0 cornerB 80.8463 -1517.111 5.0 
+01E8: create_forbidden_for_cars_cube_cornerA -16.3392 -1532.882 0.0394 cornerB 69.3401 -1523.771 5.922 
+01E8: create_forbidden_for_cars_cube_cornerA 618.7253 -1189.606 18.0 cornerB 623.5441 -1161.981 22.0 
+01E8: create_forbidden_for_cars_cube_cornerA -33.4208 -1341.84 9.0 cornerB 35.3764 -1303.948 13.0 
+01E8: create_forbidden_for_cars_cube_cornerA -41.2393 -1385.87 8.0 cornerB -3.5883 -1368.856 10.5 
+01E8: create_forbidden_for_cars_cube_cornerA -1690.705 539.6102 30.3278 cornerB -1100.567 1140.569 50.735 
+01E8: create_forbidden_for_cars_cube_cornerA -1799.541 379.7155 16.0 cornerB -1780.199 392.2779 18.0 
+01E8: create_forbidden_for_cars_cube_cornerA -1092.429 1286.505 30.0 cornerB -1077.038 1319.495 35.0 
+01E8: create_forbidden_for_cars_cube_cornerA -1860.133 314.7891 38.0 cornerB -1638.563 557.4354 40.0 
+01E8: create_forbidden_for_cars_cube_cornerA -1737.333 455.9431 30.3573 cornerB -1710.363 500.6261 40.4891 
+01E8: create_forbidden_for_cars_cube_cornerA -1689.229 513.0995 30.2597 cornerB -1679.124 524.8383 40.25 
+01E8: create_forbidden_for_cars_cube_cornerA -1742.906 500.7302 30.4679 cornerB -1650.312 551.8201 40.7455 
+00BE: text_clear_all 
+02A8: $439 = create_marker $ICON_CJ at $X_JOHNSON_HOUSE $Y_JOHNSON_HOUSE $Z_JOHNSON_HOUSE 
+07FB: set_interior 'CARLS' access 0  // The Johnson House
+07FB: set_interior 'AMMUN1' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN2' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN3' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN4' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN5' access 0  // Ammu-Nation
+07FB: set_interior 'BARBERS' access 0  // Barber
+07FB: set_interior 'BARBER2' access 0  // Barber
+07FB: set_interior 'BARBER3' access 0  // Barber
+07FB: set_interior 'FDPIZA' access 0  // Pizza Stack
+07FB: set_interior 'FDCHICK' access 0  // Cluckin' Bell
+07FB: set_interior 'FDBURG' access 0  // Burger Shot
+07FB: set_interior 'TATTOO' access 0  // Tattoo Parlor
+07FB: set_interior 'CSCHP' access 0  // Binco
+07FB: set_interior 'CSSPRT' access 0  // Pro-Laps
+07FB: set_interior 'LACS1' access 0  // Sub Urban
+07FB: set_interior 'CLOTHGP' access 0  // Zip
+07FB: set_interior 'CSDESGN' access 0  // Victim
+07FB: set_interior 'CSEXL' access 0  // Didier Sachs
+07FB: set_interior 'GYM1' access 0  // Ganton Gym
+07FB: set_interior 'GYM2' access 0  // Cobra Marital Arts
+07FB: set_interior 'GYM3' access 0  // Below the Belt Gym
+07FB: set_interior 'PDOMES' access 0  // The Pleasure Domes
+07FB: set_interior 'PDOMES2' access 0  // The Pleasure Domes
+07FB: set_interior 'MADDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'GANG' access 0  // Vagos Gang House
+07FB: set_interior 'RCPLAY' access 0  // Zero's RC Shop
+07FB: set_interior 'PAPER' access 0  // Planning Department
+07FB: set_interior 'ABATOIR' access 0  // Sindacco Abattoir
+07FB: set_interior 'LACRAK' access 0  // Crack Den
+07FB: set_interior 'BURHOUS' access 0  // Colonel Fuhrberger's
+07FB: set_interior 'MOTEL1' access 0  // Jefferson Motel
+Garage.Deactivate('BODLAWN')
+Garage.Deactivate('MODLAST')
+Garage.Deactivate('MDSSFSE')
+Garage.Deactivate('MDS1SFS')
+Garage.Deactivate('VECMOD')
+Garage.Deactivate('DHANGAR')
+00BE: text_clear_all 
+Actor.Health($PLAYER_ACTOR) = 100
+Player.Money($PLAYER_CHAR) += 350
+Player.InfiniteRun($PLAYER_CHAR) = False
+048F: actor $PLAYER_ACTOR remove_weapons 
+$INTRO_TOTAL_PASSED_MISSIONS = 0 
+$SWEET_TOTAL_PASSED_MISSIONS = 0 
+$CRASH_LS_TOTAL_PASSED_MISSIONS = 0 
+$SMOKE_TOTAL_PASSED_MISSIONS = 0 
+$OG_LOC_TOTAL_PASSED_MISSIONS = 0 
+$RYDER_TOTAL_PASSED_MISSIONS = 0 
+$MISSION_LOWRIDER_PASSED = 0 
+$LS_FINAL_TOTAL_PASSED_MISSIONS = 0 
+$HELP_DRIVEBY_SHOWN = 0 
+$HELP_BICYCLE_2_SHOWN = 0 
+$120 = 0 
+$HELP_CAMERA_AND_RADIO_SHOWN = 0 
+$HELP_FOLLOW_ICON_SHOWN = 0 
+32@ = 0 
+
+:INTRO_9231
+if 
+   not 32@ > 1000 
+jf @INTRO_9395 
+wait 0 
+gosub @INTRO_10170 
+if 
+   not Car.Wrecked($60)
+jf @INTRO_9332 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2246.508 -1263.087 22.9531 radius 30.0 30.0 3.0 
+jf @INTRO_9332 
+jump @INTRO_10018 
+
+:INTRO_9332
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @INTRO_9388 
+03D5: remove_text 'INTRO2E'  // ~s~Get on the ~b~bike~s~.
+03D5: remove_text 'HELP21'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+03D5: remove_text 'HELP26'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+jump @INTRO_10018 
+
+:INTRO_9388
+jump @INTRO_9231 
+
+:INTRO_9395
+fade 1 1500 
+
+:INTRO_9402
+if 
+fading 
+jf @INTRO_9564 
+wait 0 
+00BE: text_clear_all 
+03E6: remove_text_box 
+gosub @INTRO_10170 
+if 
+   not Car.Wrecked($60)
+jf @INTRO_9501 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2246.508 -1263.087 22.9531 radius 30.0 30.0 3.0 
+jf @INTRO_9501 
+jump @INTRO_10018 
+
+:INTRO_9501
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @INTRO_9557 
+03D5: remove_text 'INTRO2E'  // ~s~Get on the ~b~bike~s~.
+03D5: remove_text 'HELP21'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+03D5: remove_text 'HELP26'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+jump @INTRO_10018 
+
+:INTRO_9557
+jump @INTRO_9402 
+
+:INTRO_9564
+03E5: show_text_box 'HELPMO'  // Use ~k~~GO_FORWARD~, ~k~~GO_BACK~, ~k~~GO_LEFT~ and ~k~~GO_RIGHT~ to move Carl.
+if 
+   not Car.Wrecked($60)
+jf @INTRO_9613 
+$61 = Marker.CreateAboveCar($60)
+07E0: set_marker $61 type_to 1 
+018B: set_marker $61 radar_mode 1 
+
+:INTRO_9613
+32@ = 0 
+
+:INTRO_9620
+if 
+   not 32@ > 5000 
+jf @INTRO_9789 
+wait 0 
+gosub @INTRO_10170 
+if 
+   not Car.Wrecked($60)
+jf @INTRO_9721 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2246.508 -1263.087 22.9531 radius 30.0 30.0 3.0 
+jf @INTRO_9721 
+jump @INTRO_10018 
+
+:INTRO_9721
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @INTRO_9782 
+Marker.Disable($61)
+03D5: remove_text 'INTRO2E'  // ~s~Get on the ~b~bike~s~.
+03D5: remove_text 'HELP21'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+03D5: remove_text 'HELP26'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+jump @INTRO_10018 
+
+:INTRO_9782
+jump @INTRO_9620 
+
+:INTRO_9789
+00BC: show_text_highpriority GXT 'INTROB' time 4000 flag 1  // ~s~Get on the bike.
+32@ = 0 
+
+:INTRO_9812
+if 
+   not 32@ > 5000 
+jf @INTRO_9849 
+wait 0 
+gosub @INTRO_10170 
+jump @INTRO_9812 
+
+:INTRO_9849
+if 
+   not Actor.InCar($PLAYER_ACTOR, $60)
+jf @INTRO_10018 
+wait 0 
+gosub @INTRO_10170 
+if 
+   not Car.Wrecked($60)
+jf @INTRO_9950 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2246.508 -1263.087 22.9531 radius 30.0 30.0 3.0 
+jf @INTRO_9950 
+jump @INTRO_10018 
+
+:INTRO_9950
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @INTRO_10011 
+Marker.Disable($61)
+03D5: remove_text 'INTRO2E'  // ~s~Get on the ~b~bike~s~.
+03D5: remove_text 'HELP21'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+03D5: remove_text 'HELP26'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+jump @INTRO_10018 
+
+:INTRO_10011
+jump @INTRO_9849 
+
+:INTRO_10018
+return 
+
+:INTRO_10020
+return 
+
+:INTRO_10022
+create_thread @A_TERM 
+Model.Destroy(#COPCARLA)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+create_thread @INT 
+create_thread @MOB_LA1 
+end_thread_named 'MOB_RAN' 
+create_thread @MOB_RAN 
+end_thread_named 'INTROST' 
+create_thread @INTROST 
+Marker.Disable($439)
+$439 = Marker.CreateIconAndSphere($ICON_CJ, $X_JOHNSON_HOUSE, $Y_JOHNSON_HOUSE, $Z_JOHNSON_HOUSE)
+Model.Destroy(#BMX)
+if 
+   not Car.Wrecked($60)
+jf @INTRO_10152 
+Car.RemoveReferences($60)
+Marker.Disable($61)
+
+:INTRO_10152
+$ONMISSION = 0 
+$MISSION_INTRO_PASSED = 1 
+mission_cleanup 
+return 
+
+:INTRO_10170
+if 
+   not Car.Wrecked($60)
+jf @INTRO_10306 
+if 
+  34@ == 0 
+jf @INTRO_10306 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2246.508 -1263.087 22.9531 radius 2.0 2.0 2.0 
+jf @INTRO_10306 
+if 
+  $13 == 2 
+jf @INTRO_10288 
+03E5: show_text_box 'HELP26'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+jump @INTRO_10299 
+
+:INTRO_10288
+03E5: show_text_box 'HELP21'  // Press ~k~~VEHICLE_ENTER_EXIT~ to jump on the bike.
+
+:INTRO_10299
+34@ = 1 
+
+:INTRO_10306
+return 
+
+:INTRO_10308
+0871: init_jump_table 178@ total_jumps 3 default_jump 0 @INTRO_10706 jumps 0 @INTRO_10371 1 @INTRO_10378 2 @INTRO_10403 -1 @INTRO_10706 -1 @INTRO_10706 -1 @INTRO_10706 -1 @INTRO_10706 
+
+:INTRO_10371
+179@ += 10 
+
+:INTRO_10378
+if 
+  178@ == 1 
+jf @INTRO_10403 
+179@ -= 10 
+
+:INTRO_10403
+if 
+  181@ == 0 
+jf @INTRO_10641 
+033F: set_text_draw_letter_size 0.8 1.8 
+0340: set_text_draw_RGBA 255 255 255 179@ 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 600.0 
+060D: draw_text_shadow 0 rgba 0 0 0 255 
+033E: set_draw_text_position 320.0 180.0 GXT 'LOAD_01'  // Francis INTL. Airport,
+033F: set_text_draw_letter_size 0.8 1.8 
+0340: set_text_draw_RGBA 255 255 255 179@ 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 600.0 
+060D: draw_text_shadow 0 rgba 0 0 0 255 
+033E: set_draw_text_position 320.0 200.0 GXT 'LOAD_03'  // Liberty City,
+033F: set_text_draw_letter_size 0.8 1.8 
+0340: set_text_draw_RGBA 255 255 255 179@ 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 600.0 
+060D: draw_text_shadow 0 rgba 0 0 0 255 
+033E: set_draw_text_position 320.0 220.0 GXT 'LOAD_04'  // 1992.
+jump @INTRO_10706 
+
+:INTRO_10641
+033F: set_text_draw_letter_size 0.6 1.6 
+0340: set_text_draw_RGBA 255 255 255 179@ 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 600.0 
+060D: draw_text_shadow 1 rgba 0 0 0 179@ 
+033E: set_draw_text_position 320.0 200.0 GXT 182@s 
+
+:INTRO_10706
+return

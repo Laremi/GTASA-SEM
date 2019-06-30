@@ -1,0 +1,3213 @@
+:RYDER3
+thread 'RYDER3' 
+gosub @RYDER3_94 
+if 
+wasted_or_busted 
+jf @RYDER3_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @RYDER3_18373 
+
+:RYDER3_85
+gosub @RYDER3_18621 
+end_thread 
+
+:RYDER3_94
+increment_mission_attempts 
+$ONMISSION = 1 
+09DD: unknown_player_group 1 
+89@ = 0 
+$6870 = 0 
+95@ = 2 
+102@ = 0 
+054C: use_GXT_table 'RYDER3' 
+060A: create_decision_maker_type 2 store_to 72@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 105@ // decision\allowed\m_.ped files 
+01EB: set_traffic_density_multiplier_to 0.5 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:RYDER3_182
+if 
+fading 
+jf @RYDER3_206 
+wait 0 
+jump @RYDER3_182 
+
+:RYDER3_206
+select_interior 2 
+02E4: load_cutscene_data 'RYDER3A' 
+
+:RYDER3_221
+if 
+86B9:   not cutscene_data_loaded 
+jf @RYDER3_245 
+wait 0 
+jump @RYDER3_221 
+
+:RYDER3_245
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:RYDER3_262
+if 
+82E9:   not cutscene_reached_end 
+jf @RYDER3_286 
+wait 0 
+jump @RYDER3_262 
+
+:RYDER3_286
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:RYDER3_300
+if 
+fading 
+jf @RYDER3_324 
+wait 0 
+jump @RYDER3_300 
+
+:RYDER3_324
+02EA: end_cutscene 
+00BE: text_clear_all 
+02A3: enable_widescreen 0 
+select_interior 0 
+014C: set_parked_car_generator $2764 cars_to_generate_to 0 
+Model.Load(#PICADOR)
+Model.Load(#MICRO_UZI)
+Model.Load(#COLT45)
+Model.Load(#CR_GUNCRATE)
+Model.Load(#CR_AMMOBOX)
+Model.Load(#FAM1)
+04ED: load_animation "BOX" 
+04ED: load_animation "RYDER" 
+04ED: load_animation "SWAT" 
+Model.Load(#LSV1)
+Model.Load(#LSV2)
+Model.Load(#LSV3)
+Model.Load(#FREIGHT)
+Model.Load(#FREIFLAT)
+Model.Load(#TAHOMA)
+Model.Load(#FAM1)
+Model.Load(#FAM2)
+023C: load_special_actor 'RYDER2' as 1 // models 290-299 
+03CF: load_wav 34003 as 1 
+03CF: load_wav 34004 as 2 
+038B: load_requested_models 
+
+:RYDER3_464
+if or
+   not Model.Available(#PICADOR)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#COLT45)
+   not Model.Available(#CR_GUNCRATE)
+   not Model.Available(#CR_AMMOBOX)
+jf @RYDER3_511 
+wait 0 
+jump @RYDER3_464 
+
+:RYDER3_511
+if or
+   not Model.Available(#FAM1)
+823D:   not special_actor 1 loaded 
+84EE:   not animation "BOX" loaded 
+84EE:   not animation "RYDER" loaded 
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @RYDER3_565 
+wait 0 
+jump @RYDER3_511 
+
+:RYDER3_565
+if or
+   not Model.Available(#LSV1)
+   not Model.Available(#LSV2)
+   not Model.Available(#LSV3)
+   not Model.Available(#FREIGHT)
+   not Model.Available(#FREIFLAT)
+jf @RYDER3_609 
+wait 0 
+jump @RYDER3_565 
+
+:RYDER3_609
+if or
+   not Model.Available(#TAHOMA)
+   not Model.Available(#FAM1)
+   not Model.Available(#FAM2)
+84EE:   not animation "SWAT" loaded 
+jf @RYDER3_652 
+wait 0 
+jump @RYDER3_609 
+
+:RYDER3_652
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_2132 
+gosub @RYDER3_19319 
+Player.CanMove($PLAYER_CHAR) = False
+0615: define_AS_pack_begin 51@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 2000 
+0638: AS_actor -1 stay_put 0 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_OUT_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 51@ loop 1 
+0616: define_AS_pack_end 51@ 
+0615: define_AS_pack_begin 52@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 2000 
+0638: AS_actor -1 stay_put 0 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_OUT_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 52@ loop 1 
+0616: define_AS_pack_end 52@ 
+0615: define_AS_pack_begin 76@ 
+0605: actor -1 perform_animation "COWER" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0616: define_AS_pack_end 76@ 
+0615: define_AS_pack_begin 75@ 
+0605: actor -1 perform_animation "RYD_BECKON_01" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05B9: AS_actor -1 stay_idle 20000 ms 
+0643: set_AS_pack 75@ loop 1 
+0616: define_AS_pack_end 75@ 
+0615: define_AS_pack_begin 40@ 
+0638: AS_actor -1 stay_put 0 
+0603: AS_actor -1 goto_point_any_means 2290.584 -1142.411 25.7144 mode 6 use_car -1 
+0603: AS_actor -1 goto_point_any_means 2288.539 -1133.753 25.7076 mode 6 use_car -1 
+05D4: AS_actor -1 rotate_angle 253.83 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 40@ 
+0615: define_AS_pack_begin 66@ 
+0603: AS_actor -1 goto_point_any_means 2289.092 -1117.049 25.9062 mode 6 use_car -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 66@ 
+0615: define_AS_pack_begin 67@ 
+0603: AS_actor -1 goto_point_any_means 2285.11 -1117.117 25.9062 mode 6 use_car -1 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 67@ 
+0395: clear_area 1 at 2477.135 -1683.116 12.3782 radius 10.0 
+0395: clear_area 1 at 2469.224 -1672.496 12.484 radius 10.0 
+0395: clear_area 0 at 2472.783 -1685.696 12.5153 radius 0.5 
+Camera.SetAtPos(2472.783, -1685.696, 12.5153)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_1519 
+Actor.PutAt($PLAYER_ACTOR, 2472.783, -1685.696, 12.5153)
+Actor.Angle($PLAYER_ACTOR) = 336.6331
+Camera.SetBehindPlayer
+
+:RYDER3_1519
+0506: set_car_model #PICADOR next_variation 4 4 // first param is useless 
+0674: set_car_model #PICADOR numberplate "_SHERM__" 
+108@ = Car.Create(#PICADOR, 2476.035, -1678.379, 12.3457)
+053F: set_car 108@ tires_vulnerability 0 
+Car.Angle(108@) = 43.9007
+Car.Health(108@) = 2000
+99@ = Marker.CreateAboveCar(108@)
+07E0: set_marker 99@ type_to 1 
+Car.ImmuneToNonPlayer(108@) = True
+0229: set_car 108@ primary_color_to 84 secondary_color_to 84 
+Car.SetMaxSpeed(108@, 5.0)
+018B: set_marker 99@ radar_mode 0 
+04E0: car 108@ abandon_path_radius 250 
+$ACTOR_RYDER = Actor.CreateAsPassenger(Mission2, #SPECIAL01, 108@, 0)
+09F6: set_actor $ACTOR_RYDER unjackable_through_driver_seat 0 
+0296: unload_special_actor 1 
+Actor.Angle($ACTOR_RYDER) = 121.9883
+0638: AS_actor $ACTOR_RYDER stay_put 1 
+Actor.Health($ACTOR_RYDER) = 800
+Actor.SetMaxHealth($ACTOR_RYDER, 800)
+0446: set_actor $ACTOR_RYDER dismemberment_possible 0 
+0568: set_actor $ACTOR_RYDER untargetable 1 
+Actor.GiveWeaponAndAmmo($ACTOR_RYDER, MicroUzi, 9999)
+039E: set_actor $ACTOR_RYDER locked 1 while_in_car 
+Actor.SetWalkStyle($ACTOR_RYDER, "GANG1")
+077A: set_actor $ACTOR_RYDER acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor $ACTOR_RYDER decision_maker_to 72@ 
+0746: set_acquaintance 1 of_actors_pedtype 24 to_actors_pedtype 24 
+0746: set_acquaintance 1 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 1 of_actors_pedtype 25 to_actors_pedtype 25 
+109@ = 0 
+
+:RYDER3_1797
+if 
+  10 > 109@ 
+jf @RYDER3_1840 
+110@(109@,10i) = -1 
+109@ += 1 
+jump @RYDER3_1797 
+
+:RYDER3_1840
+109@ = 0 
+$6871 = 0 
+$6872 = 10 
+122@ = 0 
+123@ = -1 
+124@ = 5 
+if 
+  $ONMISSION == 0 
+jf @RYDER3_1921 
+110@(109@,10i) = Object.Init(#GUNBOX, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:RYDER3_1921
+89@ = 0 
+01E8: create_forbidden_for_cars_cube_cornerA 2284.0 -1151.0 10.0 cornerB 2288.0 -1147.0 30.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2287.321 -1132.571 10.0 cornerB 2360.839 -1177.134 40.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2311.676 -1375.397 10.0 cornerB 2292.365 -1303.102 40.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2268.695 -1138.541 10.0 cornerB 2282.362 -1159.604 40.0 
+01E8: create_forbidden_for_cars_cube_cornerA 2307.537 -1162.624 10.0 cornerB 2266.351 -1136.99 40.0 
+06D7: enable_train_traffic 0 
+08EA: enable_gangs_spawn 0 
+125@ = 0 
+126@ = 0 
+127@ = -151 
+32@ = 0 
+03C7: set_sensitivity_to_crime 0.0 
+
+:RYDER3_2132
+128@ = Object.Init(#TMP_BIN, 2295.391, -1129.812, 26.4)
+Object.Angle(128@) = 187.2863
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_2192 
+05CB: AS_actor $PLAYER_ACTOR enter_car 108@ as_driver 5000 ms 
+
+:RYDER3_2192
+Camera.SetPosition(2473.642, -1674.005, 13.6679, 0.0, 0.0, 0.0)
+Camera.PointAt(2473.832, -1674.969, 13.4843, 2)
+gosub @RYDER3_19412 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_AD' time 6000 flag 1  // ~z~You drive, CJ - seeing as you 'Mister Driver' and all.
+
+:RYDER3_2270
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_2296 
+wait 0 
+jump @RYDER3_2270 
+
+:RYDER3_2296
+040D: unload_wav 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'RYD3_AE' time 6000 flag 1  // ~z~Aw, not your shit again.
+
+:RYDER3_2320
+if 
+83D2:   not wav 2 ended 
+jf @RYDER3_2346 
+wait 0 
+jump @RYDER3_2320 
+
+:RYDER3_2346
+gosub @RYDER3_19347 
+00BC: show_text_highpriority GXT 'RYD3_Z' time 5000 flag 1  // ~s~Drive Ryder's Truck ~s~to the ~y~ammo train~s~.
+
+:RYDER3_2369
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_18366 
+wait 0 
+gosub @RYDER3_19445 
+gosub @RYDER3_20515 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @RYDER3_2425 
+jump @RYDER3_18520 
+
+:RYDER3_2425
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2290.65 -1148.723 25.7508 radius 275.0 275.0 200.0 
+jf @RYDER3_2487 
+01EB: set_traffic_density_multiplier_to 0.0 
+jump @RYDER3_2512 
+
+:RYDER3_2487
+if 
+  10 > 89@ 
+jf @RYDER3_2512 
+01EB: set_traffic_density_multiplier_to 1.0 
+
+:RYDER3_2512
+if 
+  102@ == 0 
+jf @RYDER3_3559 
+if and
+   Model.Available(#FREIGHT)
+   Model.Available(#FREIFLAT)
+jf @RYDER3_3559 
+06D8: 129@ = create_train_at 2278.177 -1144.882 27.5107 type 10 direction 1 
+Car.DoorStatus(129@) = 2
+06DC: set_train 129@ acc 0.0 
+06DD: set_train 129@ speed 0.0 
+Car.LockInCurrentPosition(129@) = True
+06DE: 163@ = get_train 129@ last_carriage_handle 
+74@ = Object.Create(#AMMOTRN_OBJ, 2278.177, -1144.882, 27.5107)
+0681: attach_object 74@ to_car 163@ with_offset 0.0 0.0 0.0 rotation 0.0 0.0 0.0 
+91@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 91@ to_car 163@ with_offset 0.5 -5.5 -0.8 rotation 0.0 0.0 145.0 
+92@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 92@ to_car 163@ with_offset 0.5 6.0 -0.8 rotation 0.0 0.0 60.0 
+93@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 93@ to_car 163@ with_offset -0.5 8.0 -0.8 rotation 0.0 0.0 130.0 
+61@ = Object.Create(#CR_GUNCRATE, 2287.744, -1131.75, 25.7431)
+Object.Angle(61@) = 85.7739
+62@ = Object.Create(#CR_GUNCRATE, 2287.358, -1131.091, 25.7449)
+Object.Angle(62@) = 209.4727
+63@ = Object.Create(#CR_GUNCRATE, 2287.664, -1127.056, 25.8118)
+Object.Angle(63@) = 97.4572
+64@ = Object.Create(#CR_GUNCRATE, 2287.431, -1125.586, 25.8256)
+Object.Angle(64@) = 176.9109
+102@ = 1 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 25 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 25 to_actors_pedtype 24 
+142@ = Actor.Create(CivMale, #FAM2, 2291.969, -1131.63, 25.7468)
+Actor.Angle(142@) = 188.6236
+0812: AS_actor 142@ perform_animation "KO_SHOT_FRONT" IFP "PED" framedelta 2.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0619: enable_actor 142@ collision_detection 0 
+0568: set_actor 142@ untargetable 1 
+060B: set_actor 142@ decision_maker_to 105@ 
+143@ = Actor.Create(CivMale, #LSV1, 2290.66, -1146.023, 25.7507)
+Actor.Angle(143@) = 180.7254
+0812: AS_actor 143@ perform_animation "KO_SHOT_FRONT" IFP "PED" framedelta 2.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0619: enable_actor 143@ collision_detection 0 
+0568: set_actor 143@ untargetable 1 
+060B: set_actor 143@ decision_maker_to 105@ 
+130@ = Actor.Create(Mission2, #LSV1, 2295.683, -1128.682, 25.8647)
+Actor.Angle(130@) = 175.3117
+0638: AS_actor 130@ stay_put 1 
+0770: set_actor 130@ target_priority 1 
+131@ = Actor.Create(Mission2, #LSV2, 2289.14, -1131.133, 25.7539)
+Actor.Angle(131@) = 190.007
+0638: AS_actor 131@ stay_put 1 
+0770: set_actor 131@ target_priority 1 
+132@ = Actor.Create(Mission2, #LSV2, 2293.741, -1130.342, 25.8004)
+Actor.Angle(132@) = 178.0093
+04EB: AS_actor 132@ crouch 1 
+0638: AS_actor 132@ stay_put 1 
+0770: set_actor 132@ target_priority 1 
+133@ = Actor.Create(Mission2, #LSV3, 2285.522, -1135.369, 28.0)
+Actor.Angle(133@) = 202.6963
+02A9: set_actor 133@ immune_to_nonplayer 1 
+0638: AS_actor 133@ stay_put 1 
+0770: set_actor 133@ target_priority 1 
+144@ = Actor.Create(Mission1, #FAM1, 2296.282, -1158.184, 25.6529)
+Actor.Angle(144@) = 9.002
+04EB: AS_actor 144@ crouch 1 
+0638: AS_actor 144@ stay_put 1 
+145@ = Actor.Create(Mission1, #FAM2, 2287.524, -1150.041, 25.7574)
+Actor.Angle(145@) = 347.622
+0638: AS_actor 145@ stay_put 1 
+04EB: AS_actor 145@ crouch 1 
+146@ = Actor.Create(Mission1, #FAM1, 2301.257, -1157.372, 25.597)
+Actor.Angle(146@) = 9.002
+0638: AS_actor 146@ stay_put 1 
+
+:RYDER3_3559
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_3676 
+if and
+   Actor.InCar($PLAYER_ACTOR, 108@)
+  89@ == 0 
+jf @RYDER3_3676 
+33@ = 0 
+041E: set_radio_station 5 
+06D7: enable_train_traffic 0 
+122@ = 4 
+89@ += 1 
+018B: set_marker 99@ radar_mode 0 
+018A: 34@ = create_checkpoint_at 2278.177 -1144.882 27.5107 
+08FB: set_checkpoint 34@ type_to 0 
+101@ = 1 
+
+:RYDER3_3676
+if or
+  89@ == 1 
+  89@ == 2 
+jf @RYDER3_4129 
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_4129 
+if 
+   Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_3803 
+if 
+   not 101@ == 1 
+jf @RYDER3_3796 
+018B: set_marker 99@ radar_mode 0 
+018B: set_marker 34@ radar_mode 3 
+00BC: show_text_highpriority GXT 'RYD3_Z' time 5000 flag 1  // ~s~Drive Ryder's Truck ~s~to the ~y~ammo train~s~.
+101@ = 1 
+
+:RYDER3_3796
+jump @RYDER3_4129 
+
+:RYDER3_3803
+if 
+  101@ == 1 
+jf @RYDER3_4074 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_3844 
+0A09: set_actor $ACTOR_RYDER muted 0 // versionB 
+
+:RYDER3_3844
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_3867 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:RYDER3_3867
+018B: set_marker 34@ radar_mode 0 
+018B: set_marker 99@ radar_mode 3 
+0209: $6870 = random_int_in_ranges 0 3 
+0871: init_jump_table $6870 total_jumps 3 default_jump 0 @RYDER3_4067 jumps 0 @RYDER3_3953 1 @RYDER3_3991 2 @RYDER3_4029 -1 @RYDER3_4067 -1 @RYDER3_4067 -1 @RYDER3_4067 -1 @RYDER3_4067 
+
+:RYDER3_3953
+05AA: 106@s = 'RYD3_NA' // @s = 'short'  // ~z~Say, CJ, don't you run out on me!
+04AF: 96@ = 34062 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_4067 
+
+:RYDER3_3991
+05AA: 106@s = 'RYD3_NB' // @s = 'short'  // ~z~You getting that busta itch again, huh?
+04AF: 96@ = 34063 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_4067 
+
+:RYDER3_4029
+05AA: 106@s = 'RYD3_NC' // @s = 'short'  // ~z~Don't you bail out on me, CJ!
+04AF: 96@ = 34064 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_4067 
+
+:RYDER3_4067
+101@ = 2 
+
+:RYDER3_4074
+if and
+  95@ == 2 
+  101@ == 2 
+jf @RYDER3_4122 
+00BC: show_text_highpriority GXT 'RYD3_Q' time 4000 flag 1  // Get back into ~b~Ryder's truck~s~!
+101@ = 0 
+
+:RYDER3_4122
+87@ = 1 
+
+:RYDER3_4129
+if 
+  89@ == 1 
+jf @RYDER3_5413 
+if 
+  87@ == 0 
+jf @RYDER3_4837 
+if and
+  95@ == 2 
+  85@ == 0 
+jf @RYDER3_4287 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_4213 
+0A09: set_actor $ACTOR_RYDER muted 1 // versionB 
+
+:RYDER3_4213
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_4236 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:RYDER3_4236
+if 
+876F:   not text_priority_displayed 
+jf @RYDER3_4287 
+05AA: 106@s = 'RYD3_BA' // @s = 'short'  // ~z~Don't give me a hard time about my driving. I ain't got the energy for it, man.
+04AF: 96@ = 34005 // = constant 
+gosub @RYDER3_20495 
+85@ = 1 
+
+:RYDER3_4287
+if and
+  95@ == 2 
+  85@ == 1 
+jf @RYDER3_4350 
+05AA: 106@s = 'RYD3_BB' // @s = 'short'  // ~z~Well don't go roll the damn car over and blow us all up in flames then.
+04AF: 96@ = 34006 // = constant 
+gosub @RYDER3_20495 
+85@ = 2 
+
+:RYDER3_4350
+if and
+  95@ == 2 
+  85@ == 2 
+jf @RYDER3_4413 
+05AA: 106@s = 'RYD3_BC' // @s = 'short'  // ~z~Aw, I ain't risin' to your shit, man.
+04AF: 96@ = 34007 // = constant 
+gosub @RYDER3_20495 
+85@ = 3 
+
+:RYDER3_4413
+if and
+  95@ == 2 
+  85@ == 3 
+jf @RYDER3_4476 
+05AA: 106@s = 'RYD3_BD' // @s = 'short'  // ~z~Good! Means you'll concentrate on the road, then!
+04AF: 96@ = 34008 // = constant 
+gosub @RYDER3_20495 
+85@ = 4 
+
+:RYDER3_4476
+if and
+  95@ == 2 
+  85@ == 4 
+jf @RYDER3_4539 
+05AA: 106@s = 'RYD3_BE' // @s = 'short'  // ~z~You love to give a homie a hard time.
+04AF: 96@ = 34009 // = constant 
+gosub @RYDER3_20495 
+85@ = 5 
+
+:RYDER3_4539
+if and
+  95@ == 2 
+  85@ == 5 
+jf @RYDER3_4602 
+05AA: 106@s = 'RYD3_BF' // @s = 'short'  // ~z~I'm like your motherfucking drill sergeant - hut one two!
+04AF: 96@ = 34010 // = constant 
+gosub @RYDER3_20495 
+85@ = 6 
+
+:RYDER3_4602
+if and
+  95@ == 2 
+  85@ == 6 
+jf @RYDER3_4665 
+05AA: 106@s = 'RYD3_BG' // @s = 'short'  // ~z~Just trying to keep my soldiers alive, nigga!
+04AF: 96@ = 34011 // = constant 
+gosub @RYDER3_20495 
+85@ = 7 
+
+:RYDER3_4665
+if and
+  95@ == 2 
+  85@ == 7 
+jf @RYDER3_4728 
+05AA: 106@s = 'RYD3_BH' // @s = 'short'  // ~z~By nagging them to death?
+04AF: 96@ = 34012 // = constant 
+gosub @RYDER3_20495 
+85@ = 8 
+
+:RYDER3_4728
+if and
+  95@ == 2 
+  85@ == 8 
+jf @RYDER3_4837 
+05AA: 106@s = 'RYD3_BJ' // @s = 'short'  // ~z~Watch the road, motherfucker! The road!
+04AF: 96@ = 34013 // = constant 
+gosub @RYDER3_20495 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_4807 
+0489: set_actor $ACTOR_RYDER muted 0 
+
+:RYDER3_4807
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_4830 
+0489: set_actor $PLAYER_ACTOR muted 0 
+
+:RYDER3_4830
+85@ = 9 
+
+:RYDER3_4837
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2290.65 -1148.723 25.7508 radius 200.0 200.0 200.0 
+  102@ == 1 
+jf @RYDER3_5344 
+36@ = 0 
+
+:RYDER3_4899
+if 
+   not Actor.Dead(130@(36@,6i))
+jf @RYDER3_5062 
+0638: AS_actor 130@(36@,6i) stay_put 1 
+136@(36@,6i) = Marker.CreateAboveActor(130@(36@,6i))
+if or
+  36@ == 3 
+  36@ == 0 
+jf @RYDER3_5003 
+081A: set_actor 130@(36@,6i) weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(130@(36@,6i), Pistol, 9999)
+jump @RYDER3_5028 
+
+:RYDER3_5003
+Actor.GiveWeaponAndAmmo(130@(36@,6i), MicroUzi, 9999)
+01B9: set_actor 130@(36@,6i) armed_weapon_to 28 
+
+:RYDER3_5028
+07DD: set_actor 130@(36@,6i) attack_rate 50 // previously known as temper_to 
+Actor.WeaponAccuracy(130@(36@,6i)) = 50
+060B: set_actor 130@(36@,6i) decision_maker_to 72@ 
+
+:RYDER3_5062
+36@ += 1 
+if 
+  36@ >= 4 
+jf @RYDER3_4899 
+36@ = 0 
+
+:RYDER3_5094
+if 
+   not Actor.Dead(144@(36@,4i))
+jf @RYDER3_5316 
+0568: set_actor 144@(36@,4i) untargetable 1 
+0638: AS_actor 144@(36@,4i) stay_put 1 
+if 
+  36@ == 1 
+jf @RYDER3_5185 
+Actor.Health(144@(36@,4i)) = 200
+Actor.SetMaxHealth(144@(36@,4i), 200)
+jump @RYDER3_5207 
+
+:RYDER3_5185
+Actor.Health(144@(36@,4i)) = 50
+Actor.SetMaxHealth(144@(36@,4i), 50)
+
+:RYDER3_5207
+if 
+  36@ == 1 
+jf @RYDER3_5257 
+081A: set_actor 144@(36@,4i) weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(144@(36@,4i), Pistol, 9999)
+jump @RYDER3_5282 
+
+:RYDER3_5257
+Actor.GiveWeaponAndAmmo(144@(36@,4i), MicroUzi, 9999)
+01B9: set_actor 144@(36@,4i) armed_weapon_to 28 
+
+:RYDER3_5282
+07DD: set_actor 144@(36@,4i) attack_rate 70 // previously known as temper_to 
+Actor.WeaponAccuracy(144@(36@,4i)) = 70
+060B: set_actor 144@(36@,4i) decision_maker_to 72@ 
+
+:RYDER3_5316
+36@ += 1 
+  36@ >= 3 
+jf @RYDER3_5094 
+102@ = 2 
+
+:RYDER3_5344
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2290.65 -1148.723 25.7508 radius 100.0 100.0 200.0 
+jf @RYDER3_5413 
+89@ += 1 
+33@ = 0 
+85@ = 0 
+
+:RYDER3_5413
+if 
+  89@ == 2 
+jf @RYDER3_6967 
+36@ = 0 
+
+:RYDER3_5438
+if and
+   Actor.Dead(130@(36@,6i))
+   not 130@(36@,6i) == 0 
+jf @RYDER3_5518 
+if 
+075C:   marker 136@(36@,6i) enabled 
+jf @RYDER3_5518 
+Marker.Disable(136@(36@,6i))
+136@(36@,6i) = 0 
+Actor.RemoveReferences(130@(36@,6i))
+
+:RYDER3_5518
+36@ += 1 
+  36@ >= 4 
+jf @RYDER3_5438 
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_5593 
+if 
+   Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_5586 
+jump @RYDER3_5593 
+
+:RYDER3_5586
+88@ = 1 
+
+:RYDER3_5593
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2290.65 -1148.723 25.7508 radius 100.0 100.0 100.0 
+  86@ == 0 
+jf @RYDER3_6189 
+if 
+   not Actor.Dead(145@)
+jf @RYDER3_5825 
+0615: define_AS_pack_begin 149@ 
+0638: AS_actor -1 stay_put 0 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 2291.724 -1138.648 25.6745 mode 6 time -2 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(130@)
+jf @RYDER3_5733 
+05E2: AS_actor -1 kill_actor 130@ 
+
+:RYDER3_5733
+if 
+   not Actor.Dead(131@)
+jf @RYDER3_5756 
+05E2: AS_actor -1 kill_actor 131@ 
+
+:RYDER3_5756
+if 
+   not Actor.Dead(132@)
+jf @RYDER3_5779 
+05E2: AS_actor -1 kill_actor 132@ 
+
+:RYDER3_5779
+if 
+   not Actor.Dead(133@)
+jf @RYDER3_5802 
+05E2: AS_actor -1 kill_actor 133@ 
+
+:RYDER3_5802
+0616: define_AS_pack_end 149@ 
+0792: disembark_instantly_actor 145@ 
+0618: assign_actor 145@ to_AS_pack 149@ 
+061B: remove_references_to_AS_pack 149@ 
+
+:RYDER3_5825
+if 
+   not Actor.Dead(144@)
+jf @RYDER3_6002 
+0615: define_AS_pack_begin 149@ 
+0638: AS_actor -1 stay_put 0 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 2297.533 -1137.578 25.8778 mode 6 time -2 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(130@)
+jf @RYDER3_5910 
+05E2: AS_actor -1 kill_actor 130@ 
+
+:RYDER3_5910
+if 
+   not Actor.Dead(131@)
+jf @RYDER3_5933 
+05E2: AS_actor -1 kill_actor 131@ 
+
+:RYDER3_5933
+if 
+   not Actor.Dead(132@)
+jf @RYDER3_5956 
+05E2: AS_actor -1 kill_actor 132@ 
+
+:RYDER3_5956
+if 
+   not Actor.Dead(133@)
+jf @RYDER3_5979 
+05E2: AS_actor -1 kill_actor 133@ 
+
+:RYDER3_5979
+0616: define_AS_pack_end 149@ 
+0792: disembark_instantly_actor 144@ 
+0618: assign_actor 144@ to_AS_pack 149@ 
+061B: remove_references_to_AS_pack 149@ 
+
+:RYDER3_6002
+if 
+   not Actor.Dead(146@)
+jf @RYDER3_6175 
+0615: define_AS_pack_begin 149@ 
+0638: AS_actor -1 stay_put 0 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 2290.118 -1141.78 25.7024 mode 6 time -2 ms // versionA 
+05D6: clear_scmpath 
+if 
+   not Actor.Dead(130@)
+jf @RYDER3_6083 
+05E2: AS_actor -1 kill_actor 130@ 
+
+:RYDER3_6083
+if 
+   not Actor.Dead(131@)
+jf @RYDER3_6106 
+05E2: AS_actor -1 kill_actor 131@ 
+
+:RYDER3_6106
+if 
+   not Actor.Dead(132@)
+jf @RYDER3_6129 
+05E2: AS_actor -1 kill_actor 132@ 
+
+:RYDER3_6129
+if 
+   not Actor.Dead(133@)
+jf @RYDER3_6152 
+05E2: AS_actor -1 kill_actor 133@ 
+
+:RYDER3_6152
+0616: define_AS_pack_end 149@ 
+0792: disembark_instantly_actor 146@ 
+0618: assign_actor 146@ to_AS_pack 149@ 
+061B: remove_references_to_AS_pack 149@ 
+
+:RYDER3_6175
+86@ = 1 
+33@ = 0 
+
+:RYDER3_6189
+if and
+  88@ == 0 
+  86@ == 1 
+jf @RYDER3_6403 
+if and
+  95@ == 2 
+  85@ == 0 
+jf @RYDER3_6277 
+05AA: 106@s = 'RYD3_CA' // @s = 'short'  // ~z~Yeah, here we go!
+04AF: 96@ = 34014 // = constant 
+gosub @RYDER3_20495 
+85@ = 1 
+
+:RYDER3_6277
+if and
+  95@ == 2 
+  85@ == 1 
+jf @RYDER3_6340 
+05AA: 106@s = 'RYD3_CB' // @s = 'short'  // ~z~That's our train alright.
+04AF: 96@ = 34015 // = constant 
+gosub @RYDER3_20495 
+85@ = 2 
+
+:RYDER3_6340
+if and
+  95@ == 2 
+  85@ == 2 
+jf @RYDER3_6403 
+05AA: 106@s = 'RYD3_CC' // @s = 'short'  // ~z~Shit, looks like some Northside Vagos got it first!
+04AF: 96@ = 34016 // = constant 
+gosub @RYDER3_20495 
+85@ = 3 
+
+:RYDER3_6403
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_6568 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_6511 
+00BC: show_text_highpriority GXT 'RYD3_Q' time 5000 flag 1  // Get back into ~b~Ryder's truck~s~!
+if 
+  39@ == 0 
+jf @RYDER3_6504 
+Marker.Disable(34@)
+34@ = Marker.CreateAboveCar(108@)
+07E0: set_marker 34@ type_to 1 
+39@ = 1 
+
+:RYDER3_6504
+jump @RYDER3_6568 
+
+:RYDER3_6511
+if 
+  39@ == 1 
+jf @RYDER3_6568 
+Marker.Disable(34@)
+018A: 34@ = create_checkpoint_at 2278.177 -1144.882 27.5107 
+08FB: set_checkpoint 34@ type_to 0 
+39@ = 0 
+
+:RYDER3_6568
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(108@)
+jf @RYDER3_6967 
+if 
+01B0:   car 108@ sphere 0 in_sphere 2289.591 -1135.625 25.6863 radius 40.0 40.0 40.0 stopped 
+jf @RYDER3_6967 
+Marker.Disable(34@)
+if 
+075C:   marker 99@ enabled 
+jf @RYDER3_6665 
+018B: set_marker 99@ radar_mode 0 
+
+:RYDER3_6665
+if or
+   not Actor.Dead(130@)
+   not Actor.Dead(131@)
+   not Actor.Dead(132@)
+   not Actor.Dead(133@)
+  85@ == 3 
+jf @RYDER3_6741 
+05AA: 106@s = 'RYD3_CD' // @s = 'short'  // ~z~Man, I'm gonna bust on them fools!
+04AF: 96@ = 34017 // = constant 
+gosub @RYDER3_20495 
+85@ = 0 
+
+:RYDER3_6741
+32@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_6960 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_6960 
+if 
+   Actor.InCar($ACTOR_RYDER, 108@)
+jf @RYDER3_6960 
+0615: define_AS_pack_begin 148@ 
+05CD: AS_actor -1 exit_car 108@ 
+04EB: AS_actor -1 crouch 1 
+0603: AS_actor -1 goto_point_any_means 2295.104 -1148.028 25.7612 mode 6 use_car -1 
+0688: AS_actor -1 unknown_toggle_ped_threat_scanner 1 1 1 
+if 
+   not Actor.Dead(130@)
+jf @RYDER3_6873 
+05E2: AS_actor -1 kill_actor 130@ 
+
+:RYDER3_6873
+if 
+   not Actor.Dead(131@)
+jf @RYDER3_6896 
+05E2: AS_actor -1 kill_actor 131@ 
+
+:RYDER3_6896
+if 
+   not Actor.Dead(132@)
+jf @RYDER3_6919 
+05E2: AS_actor -1 kill_actor 132@ 
+
+:RYDER3_6919
+if 
+   not Actor.Dead(133@)
+jf @RYDER3_6942 
+05E2: AS_actor -1 kill_actor 133@ 
+
+:RYDER3_6942
+0616: define_AS_pack_end 148@ 
+0687: clear_actor $ACTOR_RYDER task 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 148@ 
+
+:RYDER3_6960
+89@ += 1 
+
+:RYDER3_6967
+if and
+  89@ == 3 
+  32@ > 4000 
+jf @RYDER3_7070 
+if 
+   not Actor.Dead(131@)
+jf @RYDER3_7016 
+0638: AS_actor 131@ stay_put 0 
+
+:RYDER3_7016
+if or
+   not Actor.Dead(130@)
+   not Actor.Dead(131@)
+   not Actor.Dead(132@)
+   not Actor.Dead(133@)
+jf @RYDER3_7063 
+00BC: show_text_highpriority GXT 'RYD3_M' time 5000 flag 1  // ~s~Shoot the ~r~Vagos ~s~robbing the train!
+
+:RYDER3_7063
+89@ += 1 
+
+:RYDER3_7070
+if 
+  89@ == 4 
+jf @RYDER3_7316 
+36@ = 0 
+
+:RYDER3_7095
+if and
+   Actor.Dead(130@(36@,6i))
+   not 130@(36@,6i) == 0 
+jf @RYDER3_7175 
+if 
+075C:   marker 136@(36@,6i) enabled 
+jf @RYDER3_7175 
+Marker.Disable(136@(36@,6i))
+136@(36@,6i) = 0 
+Actor.RemoveReferences(130@(36@,6i))
+
+:RYDER3_7175
+36@ += 1 
+  36@ >= 4 
+jf @RYDER3_7095 
+if and
+   Actor.Dead(130@)
+   Actor.Dead(131@)
+   Actor.Dead(132@)
+   Actor.Dead(133@)
+jf @RYDER3_7259 
+if 
+  84@ == 0 
+jf @RYDER3_7259 
+32@ = 0 
+84@ = 1 
+
+:RYDER3_7259
+if and
+  84@ == 1 
+  32@ > 2000 
+jf @RYDER3_7316 
+89@ += 1 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_7316 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 40@ 
+
+:RYDER3_7316
+if 
+  89@ == 5 
+jf @RYDER3_7348 
+32@ = 0 
+89@ += 1 
+
+:RYDER3_7348
+if 
+  89@ == 6 
+jf @RYDER3_8412 
+gosub @RYDER3_19379 
+Model.Load(#TAHOMA)
+Model.Load(#MICRO_UZI)
+Model.Load(#BALLAS1)
+Model.Load(#BALLAS3)
+Model.Load(#COLT45)
+
+:RYDER3_7396
+if or
+   not Model.Available(#TAHOMA)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#BALLAS1)
+   not Model.Available(#BALLAS3)
+   not Model.Available(#COLT45)
+jf @RYDER3_7441 
+wait 0 
+jump @RYDER3_7396 
+
+:RYDER3_7441
+150@ = Car.Create(#TAHOMA, 2340.055, -1151.432, 25.9546)
+Car.Angle(150@) = 92.6857
+Car.DriveTo(150@, 2313.414, -1150.093, 25.7997)
+00AE: set_car 150@ traffic_behaviour_to 3 
+Car.SetMaxSpeed(150@, 25.0)
+151@ = Actor.CreateAsDriver(Mission3, #BALLAS1, 150@)
+Actor.Angle(151@) = 227.7265
+152@ = Actor.CreateAsPassenger(Mission3, #BALLAS3, 150@, 0)
+Actor.Angle(152@) = 301.1901
+153@ = Actor.CreateAsPassenger(Mission3, #BALLAS1, 150@, 1)
+Actor.Angle(153@) = 82.8733
+02A9: set_actor 153@ immune_to_nonplayer 1 
+154@ = Actor.CreateAsPassenger(Mission3, #BALLAS3, 150@, 2)
+Actor.Angle(154@) = 82.8733
+02A9: set_actor 154@ immune_to_nonplayer 1 
+36@ = 0 
+
+:RYDER3_7626
+155@(36@,4i) = Marker.CreateAboveActor(151@(36@,4i))
+if 
+  36@ == 3 
+jf @RYDER3_7692 
+081A: set_actor 151@(36@,4i) weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(151@(36@,4i), Pistol, 9999)
+jump @RYDER3_7717 
+
+:RYDER3_7692
+Actor.GiveWeaponAndAmmo(151@(36@,4i), MicroUzi, 9999)
+01B9: set_actor 151@(36@,4i) armed_weapon_to 28 
+
+:RYDER3_7717
+Actor.Health(151@(36@,4i)) = 200
+Actor.SetMaxHealth(151@(36@,4i), 200)
+07DD: set_actor 151@(36@,4i) attack_rate 40 // previously known as temper_to 
+Actor.WeaponAccuracy(151@(36@,4i)) = 40
+060B: set_actor 151@(36@,4i) decision_maker_to 72@ 
+0770: set_actor 151@(36@,4i) target_priority 1 
+36@ += 1 
+  36@ >= 4 
+jf @RYDER3_7626 
+gosub @RYDER3_19319 
+0A0B: set_rendering_origin_at_3D_coord 2287.296 -1140.38 25.6779 angle 252.6459 
+Camera.SetPosition(2283.144, -1135.652, 28.6919, 0.0, 0.0, 0.0)
+if 
+   not Car.Wrecked(150@)
+jf @RYDER3_7893 
+Camera.OnVehicle(150@, 15, 2)
+
+:RYDER3_7893
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_7945 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @RYDER3_7945 
+06BA: AS_actor $PLAYER_ACTOR turn_to_and_look_at 2313.414 -1150.093 25.7997 
+
+:RYDER3_7945
+36@ = 0 
+
+:RYDER3_7952
+if 
+   not Actor.Dead(144@(36@,4i))
+jf @RYDER3_8027 
+if 
+   not Actor.Driving(144@(36@,4i))
+jf @RYDER3_8027 
+06BA: AS_actor 144@(36@,4i) turn_to_and_look_at 2313.414 -1150.093 25.7997 
+0638: AS_actor 144@(36@,4i) stay_put 1 
+
+:RYDER3_8027
+36@ += 1 
+  36@ >= 3 
+jf @RYDER3_7952 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_8248 
+0615: define_AS_pack_begin 159@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 2295.693 -1142.469 25.8392 mode 6 time -2 ms // versionA 
+06BA: AS_actor -1 turn_to_and_look_at 2313.414 -1150.093 25.7997 
+if 
+   not Actor.Dead(151@)
+jf @RYDER3_8140 
+05E2: AS_actor -1 kill_actor 151@ 
+
+:RYDER3_8140
+if 
+   not Actor.Dead(152@)
+jf @RYDER3_8163 
+05E2: AS_actor -1 kill_actor 152@ 
+
+:RYDER3_8163
+if 
+   not Actor.Dead(153@)
+jf @RYDER3_8186 
+05E2: AS_actor -1 kill_actor 153@ 
+
+:RYDER3_8186
+if 
+   not Actor.Dead(154@)
+jf @RYDER3_8209 
+05E2: AS_actor -1 kill_actor 154@ 
+
+:RYDER3_8209
+0616: define_AS_pack_end 159@ 
+if 
+   not Actor.Driving($ACTOR_RYDER)
+jf @RYDER3_8243 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 159@ 
+
+:RYDER3_8243
+061B: remove_references_to_AS_pack 159@ 
+
+:RYDER3_8248
+gosub @RYDER3_19412 
+00BC: show_text_highpriority GXT 'RYD3_2' time 3000 flag 1  // ~s~Protect the train from the ~r~Ballas~s~!
+wait 1000 
+33@ = 0 
+
+:RYDER3_8283
+if 
+  3000 > 33@ 
+jf @RYDER3_8337 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @RYDER3_8330 
+jump @RYDER3_8337 
+
+:RYDER3_8330
+jump @RYDER3_8283 
+
+:RYDER3_8337
+gosub @RYDER3_19347 
+00BC: show_text_highpriority GXT 'RYD3_DA' time 3000 flag 1  // ~z~Aw, what's this? We got Ballas trying to crash the party?
+05AA: 106@s = 'RYD3_DA' // @s = 'short'  // ~z~Aw, what's this? We got Ballas trying to crash the party?
+04AF: 96@ = 34018 // = constant 
+gosub @RYDER3_20495 
+85@ = 0 
+33@ = 0 
+89@ += 1 
+
+:RYDER3_8412
+if 
+  89@ == 7 
+jf @RYDER3_8496 
+if 
+   not Car.Wrecked(150@)
+jf @RYDER3_8496 
+if 
+01AE:   car 150@ sphere 0 near_point 2304.182 -1142.619 radius 15.0 15.0 stopped 
+jf @RYDER3_8496 
+068B: set_car 150@ all_disembark 
+89@ += 1 
+
+:RYDER3_8496
+if 
+  89@ == 8 
+jf @RYDER3_9238 
+36@ = 0 
+
+:RYDER3_8521
+if and
+   Actor.Dead(151@(36@,4i))
+   not 151@(36@,4i) == 0 
+jf @RYDER3_8601 
+if 
+075C:   marker 155@(36@,4i) enabled 
+jf @RYDER3_8601 
+Marker.Disable(155@(36@,4i))
+155@(36@,4i) = 0 
+Actor.RemoveReferences(151@(36@,4i))
+
+:RYDER3_8601
+36@ += 1 
+  36@ >= 4 
+jf @RYDER3_8521 
+if and
+  33@ > 3000 
+  85@ == 0 
+jf @RYDER3_8846 
+05AA: 106@s = 'RYD3_DB' // @s = 'short'  // ~z~Looks like Tenpennny told every gang in South Central!
+04AF: 96@ = 34019 // = constant 
+gosub @RYDER3_20495 
+if 
+   not Actor.Dead(151@)
+jf @RYDER3_8719 
+0603: AS_actor 151@ goto_point_any_means 2299.284 -1133.929 27.3281 mode 6 use_car -1 
+
+:RYDER3_8719
+if 
+   not Actor.Dead(152@)
+jf @RYDER3_8759 
+0603: AS_actor 152@ goto_point_any_means 2291.226 -1140.169 25.6912 mode 6 use_car -1 
+
+:RYDER3_8759
+if 
+   not Actor.Dead(153@)
+jf @RYDER3_8799 
+0603: AS_actor 153@ goto_point_any_means 2298.09 -1144.036 25.919 mode 6 use_car -1 
+
+:RYDER3_8799
+if 
+   not Actor.Dead(154@)
+jf @RYDER3_8839 
+0603: AS_actor 154@ goto_point_any_means 2291.842 -1129.22 25.7756 mode 6 use_car -1 
+
+:RYDER3_8839
+85@ = 1 
+
+:RYDER3_8846
+if and
+  95@ == 2 
+  85@ == 1 
+jf @RYDER3_8909 
+05AA: 106@s = 'RYD3_DC' // @s = 'short'  // ~z~Man, we gonna smoke those Balla assholes!
+04AF: 96@ = 34020 // = constant 
+gosub @RYDER3_20495 
+85@ = 2 
+
+:RYDER3_8909
+if and
+   Actor.Dead(151@)
+   Actor.Dead(152@)
+   Actor.Dead(153@)
+   Actor.Dead(154@)
+jf @RYDER3_9238 
+89@ += 1 
+018A: 68@ = create_checkpoint_at 2287.147 -1121.702 25.8903 
+08FB: set_checkpoint 68@ type_to 0 
+05AA: 106@s = 'RYD3_EA' // @s = 'short'  // ~z~Go check out the train, CJ.
+04AF: 96@ = 34021 // = constant 
+gosub @RYDER3_20495 
+85@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_9231 
+0615: define_AS_pack_begin 161@ 
+05D4: AS_actor -1 rotate_angle 77.6187 
+0605: actor -1 perform_animation "IDLE_ARMED" IFP "PED" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05B9: AS_actor -1 stay_idle 2000 ms 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+0605: actor -1 perform_animation "RYD_BECKON_01" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 161@ loop 1 
+0616: define_AS_pack_end 161@ 
+0615: define_AS_pack_begin 160@ 
+05D3: AS_actor -1 goto_point 2294.854 -1143.85 25.814 mode 6 time -2 ms // versionA 
+05D3: AS_actor -1 goto_point 2290.716 -1122.997 25.8774 mode 6 time -2 ms // versionA 
+0618: assign_actor -1 to_AS_pack 161@ 
+0616: define_AS_pack_end 160@ 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 160@ 
+061B: remove_references_to_AS_pack 161@ 
+061B: remove_references_to_AS_pack 160@ 
+
+:RYDER3_9231
+33@ = 0 
+
+:RYDER3_9238
+if 
+  89@ == 9 
+jf @RYDER3_10787 
+if and
+  33@ > 4000 
+  85@ == 0 
+jf @RYDER3_9305 
+00BC: show_text_highpriority GXT 'RYD3_1' time 4000 flag 1  // ~s~Climb onto the back of the ~y~train~s~.
+85@ = 1 
+
+:RYDER3_9305
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere 2287.147 -1121.702 25.8903 radius 1.2 1.2 3.0 on_foot 
+jf @RYDER3_10787 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_9376 
+Player.CanMove($PLAYER_CHAR) = False
+
+:RYDER3_9376
+if 
+075C:   marker 68@ enabled 
+jf @RYDER3_9397 
+Marker.Disable(68@)
+
+:RYDER3_9397
+gosub @RYDER3_19319 
+Actor.DestroyInstantly(133@)
+0960: enable_player $PLAYER_CHAR stats_box 0 
+Camera.SetPosition(2288.881, -1117.758, 28.0044, 0.0, 0.0, 0.0)
+Camera.PointAt(2288.3, -1118.549, 27.8136, 2)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_9542 
+Actor.PutAt($PLAYER_ACTOR, 2287.147, -1121.702, 25.8903)
+Actor.Angle($PLAYER_ACTOR) = 91.8747
+078F: AS_actor $PLAYER_ACTOR climb 1 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+
+:RYDER3_9542
+wait 1000 
+gosub @RYDER3_19379 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_9648 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+8449:   not actor $PLAYER_ACTOR in_a_car 
+jf @RYDER3_9618 
+Actor.PutAt($PLAYER_ACTOR, 2284.766, -1121.5, 27.386)
+jump @RYDER3_9638 
+
+:RYDER3_9618
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2284.766 -1121.5 27.386 
+
+:RYDER3_9638
+Actor.Angle($PLAYER_ACTOR) = 220.0
+
+:RYDER3_9648
+07C0: load_path 486 
+07C0: load_path 490 
+
+:RYDER3_9658
+if or
+87C1:   not path 486 available 
+87C1:   not path 490 available 
+jf @RYDER3_9690 
+wait 0 
+jump @RYDER3_9658 
+
+:RYDER3_9690
+0395: clear_area 1 at 2284.732 -1121.916 27.0 radius 50.0 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_9857 
+162@ = Actor.Create(Mission1, #FAM1, 2294.554, -1156.382, 25.6646)
+Actor.Angle(162@) = 9.002
+if 
+   not Actor.Dead(162@)
+jf @RYDER3_9807 
+if 
+   not Actor.InCar(162@, 108@)
+jf @RYDER3_9807 
+036A: put_actor 162@ in_car 108@ 
+
+:RYDER3_9807
+if 
+   Actor.Dead(162@)
+jf @RYDER3_9852 
+162@ = Actor.CreateAsDriver(Mission2, #FAM1, 108@)
+0568: set_actor 162@ untargetable 1 
+Actor.GiveWeaponAndAmmo(162@, MicroUzi, 9999)
+
+:RYDER3_9852
+0508: car 108@ close_all_doors 
+
+:RYDER3_9857
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead(162@)
+jf @RYDER3_9909 
+70@ = Marker.CreateAboveCar(108@)
+07E0: set_marker 70@ type_to 1 
+Car.Health(108@) = 5000
+Actor.Health(162@) = 500
+
+:RYDER3_9909
+Actor.DestroyInstantly($ACTOR_RYDER)
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_9944 
+Car.StorePos(108@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:RYDER3_9944
+$ACTOR_RYDER = Actor.Create(Mission1, #SPECIAL01, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.Health($ACTOR_RYDER) = 500
+077C: clear_actor $ACTOR_RYDER acquaintance 4 to_all_pedtypes // see ped.dat 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_10026 
+0464: put_actor $ACTOR_RYDER into_turret_on_car 108@ at_car_offset 0.0 -0.85 0.65 position 1 shooting_angle_limit 360.0 with_weapon 28 
+
+:RYDER3_10026
+Actor.SetImmunities($ACTOR_RYDER, 1, 1, 0, 1, 1)
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 0 0 0 
+if 
+   not Actor.Dead(162@)
+jf @RYDER3_10087 
+0688: AS_actor 162@ unknown_toggle_ped_threat_scanner 0 0 0 
+060B: set_actor 162@ decision_maker_to 105@ 
+
+:RYDER3_10087
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_10116 
+05EB: assign_car 108@ to_path 486 
+05ED: freeze_car 108@ while_on_path 
+
+:RYDER3_10116
+wait 800 
+if 
+   not Car.Wrecked(129@)
+jf @RYDER3_10152 
+Car.LockInCurrentPosition(129@) = False
+05EB: assign_car 129@ to_path 490 
+
+:RYDER3_10152
+Object.Destroy(61@)
+Object.Destroy(62@)
+Object.Destroy(63@)
+Object.Destroy(64@)
+36@ = 0 
+
+:RYDER3_10179
+Actor.DestroyInstantly(144@(36@,4i))
+36@ += 1 
+  36@ >= 3 
+jf @RYDER3_10179 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0A0B: set_rendering_origin_at_3D_coord 2288.516 -1136.404 28.5557 angle 149.2199 
+Camera.SetPosition(2288.516, -1136.404, 28.5557, 0.0, 0.0, 0.0)
+Camera.PointAt(2288.295, -1137.368, 28.41, 2)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_10347 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2284.766, -1121.5, 27.386)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+
+:RYDER3_10347
+wait 200 
+if and
+   not Car.Wrecked(108@)
+060E:   car 108@ assigned_to_path 
+jf @RYDER3_10378 
+05EE: unfreeze_car 108@ while_on_path 
+
+:RYDER3_10378
+gosub @RYDER3_19412 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+040D: unload_wav 1 
+03CF: load_wav 34022 as 1 
+
+:RYDER3_10412
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_10438 
+wait 0 
+jump @RYDER3_10412 
+
+:RYDER3_10438
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_FA' time 2000 flag 1  // ~z~Damn, what is that?
+wait 2000 
+040D: unload_wav 1 
+03CF: load_wav 34023 as 1 
+
+:RYDER3_10476
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_10502 
+wait 0 
+jump @RYDER3_10476 
+
+:RYDER3_10502
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_FB' time 4000 flag 1  // ~z~Chill out, fool, we're gonna be right behind you!
+wait 4000 
+if 
+   not Car.Wrecked(129@)
+jf @RYDER3_10620 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 225.0 rotation_speed 225.0 
+06DE: 163@ = get_train 129@ last_carriage_handle 
+0464: put_actor $PLAYER_ACTOR into_turret_on_car 163@ at_car_offset 0.0 -8.0 0.9 position 0 shooting_angle_limit 360.0 with_weapon 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+
+:RYDER3_10620
+gosub @RYDER3_19347 
+01EB: set_traffic_density_multiplier_to 0.0 
+09A3: show_siterocket_on_bumper_camera 1 
+05AA: 106@s = 'RYD3_GA' // @s = 'short'  // ~z~Throw me some boxes, CJ!
+04AF: 96@ = 34024 // = constant 
+gosub @RYDER3_20495 
+33@ = 0 
+85@ = 0 
+$6873 = 90000 
+03C3: set_timer_to $6873 type 1 GXT 'RYD3_3' // global_variable  // Time
+$6874 = 0 
+122@ = 0 
+04F7: status_text $6874 type 1 line 1 GXT 'RYD3_E' // global_variable  // Power
+04F7: status_text $6872 type 0 line 2 GXT 'RYD3_F' // global_variable  // Crates
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_10780 
+0687: clear_actor $ACTOR_RYDER task 
+
+:RYDER3_10780
+89@ += 1 
+
+:RYDER3_10787
+if 
+  89@ == 10 
+jf @RYDER3_14125 
+if and
+  33@ > 5000 
+  85@ == 0 
+jf @RYDER3_10849 
+0512: show_permanent_text_box 'RYD3_D'  // Press ~k~~PED_FIREWEAPON~ to power up your throw, then release ~k~~PED_FIREWEAPON~ to throw.
+85@ = 1 
+
+:RYDER3_10849
+if 
+  32@ > 8000 
+jf @RYDER3_11115 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_11108 
+0687: clear_actor $ACTOR_RYDER task 
+0209: $6870 = random_int_in_ranges 0 3 
+0871: init_jump_table $6870 total_jumps 3 default_jump 0 @RYDER3_11108 jumps 0 @RYDER3_10961 1 @RYDER3_11010 2 @RYDER3_11059 -1 @RYDER3_11108 -1 @RYDER3_11108 -1 @RYDER3_11108 -1 @RYDER3_11108 
+
+:RYDER3_10961
+0605: actor $ACTOR_RYDER perform_animation "RYD_BECKON_01" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @RYDER3_11108 
+
+:RYDER3_11010
+0605: actor $ACTOR_RYDER perform_animation "RYD_BECKON_02" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @RYDER3_11108 
+
+:RYDER3_11059
+0605: actor $ACTOR_RYDER perform_animation "RYD_BECKON_03" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @RYDER3_11108 
+
+:RYDER3_11108
+32@ = 0 
+
+:RYDER3_11115
+if 
+   not Car.Wrecked(163@)
+jf @RYDER3_14062 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_11210 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($ACTOR_RYDER, 44@, 45@, 46@)
+0067: $TEMPVAR_FLOAT_1 -= 44@ // (float) 
+0067: $TEMPVAR_FLOAT_2 -= 45@ // (float) 
+0604: get_Z_angle_for_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 store_to $TEMPVAR_ANGLE 
+Actor.Angle($ACTOR_RYDER) = $TEMPVAR_ANGLE
+
+:RYDER3_11210
+if 
+   not $6871 == 10 
+jf @RYDER3_11675 
+if or
+00E1:   player 0 pressed_key 17 
+00E1:   player 0 pressed_key 4 
+jf @RYDER3_11330 
+005E: $6874 += 124@ // (int) 
+if 
+  $6874 > 100 
+jf @RYDER3_11284 
+$6874 = 100 
+
+:RYDER3_11284
+if 
+  0 > $6874 
+jf @RYDER3_11316 
+$6874 = 0 
+124@ = 50 
+
+:RYDER3_11316
+164@ += 1 
+jump @RYDER3_11675 
+
+:RYDER3_11330
+if 
+  164@ > 0 
+jf @RYDER3_11675 
+if 
+  $6874 > 20 
+jf @RYDER3_11661 
+008F: 165@ = integer $6874 to_float 
+165@ /= 2.0 
+068D: get_camera_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+068E: get_camera_target_point_to 44@ 45@ 46@ 
+if 
+03CA:   object 110@(109@,10i) exists 
+jf @RYDER3_11435 
+Object.Destroy(110@(109@,10i))
+
+:RYDER3_11435
+110@(109@,10i) = Object.Init(127@, 44@, 45@, 46@)
+04D9: object 110@(109@,10i) set_scripted_collision_check 1 
+0085: 166@(109@,10i) = 127@ // (int) 
+0065: 44@ -= $TEMPVAR_FLOAT_1 // (float) 
+0065: 45@ -= $TEMPVAR_FLOAT_2 // (float) 
+0065: 46@ -= $TEMPVAR_FLOAT_3 // (float) 
+006B: 44@ *= 165@ // (float) 
+006B: 45@ *= 165@ // (float) 
+006B: 46@ *= 165@ // (float) 
+Object.ToggleInMovingList(110@(109@,10i)) = True
+Object.CollisionDetection(110@(109@,10i)) = True
+06A2: get_car 163@ velocity_in_direction_XYZ $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0089: 47@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 47@ += 44@ // (float) 
+0089: 48@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 48@ += 45@ // (float) 
+0089: 49@ = $TEMPVAR_FLOAT_3 // (float) 
+005B: 49@ += 46@ // (float) 
+Object.Throw(110@(109@,10i), 47@, 48@, 49@)
+109@ += 1 
+if 
+  109@ == 10 
+jf @RYDER3_11661 
+109@ = 0 
+
+:RYDER3_11661
+164@ = 0 
+$6874 = 0 
+
+:RYDER3_11675
+176@ = 0 
+
+:RYDER3_11682
+if 
+  10 > 176@ 
+jf @RYDER3_14062 
+if and
+03CA:   object 110@(176@,10i) exists 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_14048 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor $ACTOR_RYDER with_offset 0.0 1.0 0.5 
+if 
+04E6:   object 110@(176@,10i) near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 1.0 1.0 1.0 flag 0 
+jf @RYDER3_12804 
+if and
+  122@ == 0 
+   not Actor.Dead($ACTOR_RYDER)
+   not $6871 == 10 
+jf @RYDER3_12797 
+Object.CollisionDetection(110@(176@,10i)) = False
+070A: AS_actor $ACTOR_RYDER attach_to_object 110@(176@,10i) offset 0.0 0.3 0.0 on_bone 6 16 perform_animation "CATCH_BOX" IFP_file "BOX" time 0 
+32@ = 0 
+0209: $6870 = random_int_in_ranges 0 2 
+0871: init_jump_table $6871 total_jumps 6 default_jump 0 @RYDER3_12647 jumps 1 @RYDER3_11969 3 @RYDER3_12063 5 @RYDER3_12157 7 @RYDER3_12251 8 @RYDER3_12345 9 @RYDER3_12439 -1 @RYDER3_12647 
+
+:RYDER3_11969
+if 
+  $6870 == 0 
+jf @RYDER3_12025 
+05AA: 106@s = 'RYD3_HA' // @s = 'short'  // ~z~Damn! Not so hard!
+04AF: 96@ = 34027 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12056 
+
+:RYDER3_12025
+05AA: 106@s = 'RYD3_HB' // @s = 'short'  // ~z~I got it!
+04AF: 96@ = 34028 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12056
+jump @RYDER3_12647 
+
+:RYDER3_12063
+if 
+  $6870 == 0 
+jf @RYDER3_12119 
+05AA: 106@s = 'RYD3_HC' // @s = 'short'  // ~z~Nice throw, fool!
+04AF: 96@ = 34029 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12150 
+
+:RYDER3_12119
+05AA: 106@s = 'RYD3_HD' // @s = 'short'  // ~z~Keep 'em coming!
+04AF: 96@ = 34030 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12150
+jump @RYDER3_12647 
+
+:RYDER3_12157
+if 
+  $6870 == 0 
+jf @RYDER3_12213 
+05AA: 106@s = 'RYD3_HE' // @s = 'short'  // ~z~Shit! I nearly dropped that one!
+04AF: 96@ = 34031 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12244 
+
+:RYDER3_12213
+05AA: 106@s = 'RYD3_HF' // @s = 'short'  // ~z~Bull's eye!
+04AF: 96@ = 34032 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12244
+jump @RYDER3_12647 
+
+:RYDER3_12251
+if 
+  $6870 == 0 
+jf @RYDER3_12307 
+05AA: 106@s = 'RYD3_HG' // @s = 'short'  // ~z~You trying to kill me?
+04AF: 96@ = 34033 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12338 
+
+:RYDER3_12307
+05AA: 106@s = 'RYD3_HH' // @s = 'short'  // ~z~Oh, yeah!
+04AF: 96@ = 34034 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12338
+jump @RYDER3_12647 
+
+:RYDER3_12345
+if 
+  $6870 == 0 
+jf @RYDER3_12401 
+05AA: 106@s = 'RYD3_HJ' // @s = 'short'  // ~z~Can't stop me!
+04AF: 96@ = 34035 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12432 
+
+:RYDER3_12401
+05AA: 106@s = 'RYD3_HK' // @s = 'short'  // ~z~And another one!
+04AF: 96@ = 34036 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12432
+jump @RYDER3_12647 
+
+:RYDER3_12439
+0209: 98@ = random_int_in_ranges 0 4 
+if 
+  98@ == 0 
+jf @RYDER3_12504 
+05AA: 106@s = 'RYD3_HM' // @s = 'short'  // ~z~OK, CJ! That's all I can carry!
+04AF: 96@ = 34038 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12647 
+
+:RYDER3_12504
+if 
+  98@ == 1 
+jf @RYDER3_12560 
+05AA: 106@s = 'RYD3_OA' // @s = 'short'  // ~z~We got enough, homie. Jump!
+04AF: 96@ = 34065 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12647 
+
+:RYDER3_12560
+if 
+  98@ == 2 
+jf @RYDER3_12616 
+05AA: 106@s = 'RYD3_OB' // @s = 'short'  // ~z~A'ight, CJ - jump off the train!
+04AF: 96@ = 34066 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_12647 
+
+:RYDER3_12616
+05AA: 106@s = 'RYD3_OC' // @s = 'short'  // ~z~We good, man! Motherfucker, jump!
+04AF: 96@ = 34067 // = constant 
+gosub @RYDER3_20495 
+
+:RYDER3_12647
+0085: 123@ = 176@ // (int) 
+$6871 += 1 
+if 
+  $6872 > 0 
+jf @RYDER3_12687 
+$6872 -= 1 
+
+:RYDER3_12687
+if 
+  $6871 == 5 
+jf @RYDER3_12761 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_12729 
+Actor.Health($ACTOR_RYDER) = 5000
+
+:RYDER3_12729
+if 
+   not Actor.Dead(162@)
+jf @RYDER3_12753 
+Actor.Health(162@) = 5000
+
+:RYDER3_12753
+127@ = -135 
+
+:RYDER3_12761
+if 
+  $6871 == 10 
+jf @RYDER3_12790 
+09A3: show_siterocket_on_bumper_camera 0 
+01EB: set_traffic_density_multiplier_to 1.0 
+
+:RYDER3_12790
+122@ += 1 
+
+:RYDER3_12797
+jump @RYDER3_13380 
+
+:RYDER3_12804
+if and
+  166@(176@,10i) == -135 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_13380 
+if 
+031D:   actor $ACTOR_RYDER hit_by_weapon 51 
+jf @RYDER3_13155 
+0209: $6870 = random_int_in_ranges 0 6 
+0871: init_jump_table $6870 total_jumps 6 default_jump 0 @RYDER3_13150 jumps 0 @RYDER3_12922 1 @RYDER3_12960 2 @RYDER3_12998 3 @RYDER3_13036 4 @RYDER3_13074 5 @RYDER3_13112 -1 @RYDER3_13150 
+
+:RYDER3_12922
+05AA: 106@s = 'RYD3_JA' // @s = 'short'  // ~z~Watch what the fuck you're doing!
+04AF: 96@ = 34040 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_12960
+05AA: 106@s = 'RYD3_JB' // @s = 'short'  // ~z~CJ! Man, I swear, man, you're trying to kill me!
+04AF: 96@ = 34041 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_12998
+05AA: 106@s = 'RYD3_JC' // @s = 'short'  // ~z~Careful with these damn guns!
+04AF: 96@ = 34042 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_13036
+05AA: 106@s = 'RYD3_JD' // @s = 'short'  // ~z~Hey, EASY, CJ, EASY!
+04AF: 96@ = 34043 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_13074
+05AA: 106@s = 'RYD3_JE' // @s = 'short'  // ~z~Man, you toss like a girl!
+04AF: 96@ = 34044 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_13112
+05AA: 106@s = 'RYD3_JF' // @s = 'short'  // ~z~Carl, do you understand the concept I'm throwing at you?
+04AF: 96@ = 34045 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_13150 
+
+:RYDER3_13150
+0467: clear_actor $ACTOR_RYDER last_weapon_damage 
+
+:RYDER3_13155
+if 
+04DA:   has_object 110@(176@,10i) collided 
+jf @RYDER3_13373 
+126@ += 1 
+if 
+  126@ > 4 
+jf @RYDER3_13366 
+if and
+   not Actor.Dead($ACTOR_RYDER)
+   not Actor.Dead(162@)
+jf @RYDER3_13366 
+if 
+8179:   not actor $ACTOR_RYDER colliding_with_object 110@(176@,10i) 
+jf @RYDER3_13366 
+if 
+8179:   not actor 162@ colliding_with_object 110@(176@,10i) 
+jf @RYDER3_13366 
+Object.StorePos(110@(176@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0723: break_object 110@(176@,10i) intensity 1 
+097B: play_audio_at_object 110@(176@,10i) event 1159 
+064B: 100@ = create_particle "EXPLOSION_SMALL" at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 type 1 
+064F: remove_references_to_particle 100@ 
+Object.RemoveReferences(110@(176@,10i))
+110@(176@,10i) = 0 
+
+:RYDER3_13366
+jump @RYDER3_13380 
+
+:RYDER3_13373
+126@ = 0 
+
+:RYDER3_13380
+if 
+03CA:   object 110@(176@,10i) exists 
+jf @RYDER3_13455 
+if 
+8471:   not actor $PLAYER_ACTOR near_object_in_rectangle 110@(176@,10i) radius 100.0 100.0 sphere 0 
+jf @RYDER3_13455 
+Object.RemoveReferences(110@(176@,10i))
+110@(176@,10i) = 0 
+
+:RYDER3_13455
+if 
+  122@ == 1 
+jf @RYDER3_14048 
+if and
+   not Actor.Dead($ACTOR_RYDER)
+   not Actor.Dead(162@)
+jf @RYDER3_13505 
+062E: get_actor $ACTOR_RYDER task 1802 status_store_to $416 // ret 7 if not found 
+
+:RYDER3_13505
+if 
+04A3:   $416 == 7 // == constant 
+jf @RYDER3_14048 
+if 
+  123@ > -1 
+jf @RYDER3_14041 
+0871: init_jump_table 82@ total_jumps 5 default_jump 0 @RYDER3_13958 jumps 0 @RYDER3_13604 2 @RYDER3_13679 4 @RYDER3_13754 6 @RYDER3_13822 8 @RYDER3_13890 -1 @RYDER3_13958 -1 @RYDER3_13958 
+
+:RYDER3_13604
+79@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 79@ to_car 108@ with_offset 0.4 -2.1 -0.1 rotation 0.0 0.0 15.0 
+Object.CollisionDetection(79@) = False
+jump @RYDER3_13958 
+
+:RYDER3_13679
+77@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 77@ to_car 108@ with_offset -0.5 -2.1 -0.1 rotation 0.0 0.0 30.0 
+Object.CollisionDetection(77@) = False
+jump @RYDER3_13958 
+
+:RYDER3_13754
+78@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 78@ to_car 108@ with_offset 0.4 -2.1 0.3 rotation 0.0 30.0 0.0 
+jump @RYDER3_13958 
+
+:RYDER3_13822
+80@ = Object.Create(#CR_AMMOBOX, 2278.177, -1144.882, 27.5107)
+0681: attach_object 80@ to_car 108@ with_offset -0.6 -2.1 0.3 rotation 0.0 0.0 15.0 
+jump @RYDER3_13958 
+
+:RYDER3_13890
+81@ = Object.Create(#CR_AMMOBOX, 2278.177, -1144.882, 27.5107)
+0681: attach_object 81@ to_car 108@ with_offset -0.1 -2.1 0.3 rotation 0.0 0.0 15.0 
+jump @RYDER3_13958 
+
+:RYDER3_13958
+82@ += 1 
+if 
+  82@ >= 10 
+jf @RYDER3_14012 
+0151: remove_status_text $6872 
+0151: remove_status_text $6874 
+014F: stop_timer $6873 
+89@ += 1 
+jump @RYDER3_14041 
+
+:RYDER3_14012
+if 
+03CA:   object 110@(123@,10i) exists 
+jf @RYDER3_14041 
+Object.Destroy(110@(123@,10i))
+
+:RYDER3_14041
+122@ = 0 
+
+:RYDER3_14048
+176@ += 1 
+jump @RYDER3_11682 
+
+:RYDER3_14062
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_14125 
+if 
+  10 > $6873 
+jf @RYDER3_14125 
+0151: remove_status_text $6872 
+0151: remove_status_text $6874 
+014F: stop_timer $6873 
+125@ = 1 
+89@ += 1 
+
+:RYDER3_14125
+if and
+  89@ == 11 
+  95@ == 2 
+jf @RYDER3_14937 
+gosub @RYDER3_19379 
+01EB: set_traffic_density_multiplier_to 1.0 
+03E6: remove_text_box 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_14187 
+05EC: release_car 108@ from_path 
+
+:RYDER3_14187
+if 
+   not Car.Wrecked(163@)
+jf @RYDER3_14394 
+Car.StorePos(163@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+02CE: 177@ = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 163@ with_offset -2.0 -1.0 -1.0 
+0407: store_coords_to 44@ 45@ 46@ from_car 163@ with_offset 0.0 -4.0 -1.0 
+0407: store_coords_to 47@ 48@ 49@ from_car 163@ with_offset 0.0 10.0 -0.5 
+0407: store_coords_to 179@ 180@ 181@ from_car 163@ with_offset 0.0 -50.0 0.0 
+$TEMPVAR_ANGLE = Car.Angle(163@)
+178@ = Car.Angle(163@)
+$TEMPVAR_ANGLE -= 50.0 
+if 
+   not Car.Wrecked(129@)
+jf @RYDER3_14394 
+05EC: release_car 129@ from_path 
+
+:RYDER3_14394
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_14444 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+04EF: release_animation "BOX" 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+
+:RYDER3_14444
+06D9: destroy_defined_trains 
+Object.Destroy(74@)
+Object.Destroy(91@)
+Object.Destroy(92@)
+Object.Destroy(93@)
+0960: enable_player $PLAYER_CHAR stats_box 1 
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_14551 
+Car.LockInCurrentPosition(108@) = False
+Car.PutAt(108@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, 177@)
+Car.Angle(108@) = $TEMPVAR_ANGLE
+Actor.PutAt($PLAYER_ACTOR, 44@, 45@, 177@)
+03A2: set_car 108@ action 0 
+Car.DoorStatus(108@) = 1
+
+:RYDER3_14551
+gosub @RYDER3_19319 
+Camera.SetPosition(47@, 48@, 49@, 0.0, 0.0, 0.0)
+0A0B: set_rendering_origin_at_3D_coord 47@ 48@ 49@ angle 178@ 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_14672 
+Camera.OnVehicle(108@, 15, 2)
+Actor.DestroyInstantly(162@)
+162@ = Actor.CreateAsPassenger(Mission2, #FAM1, 108@, 0)
+Actor.Health(162@) = 800
+Actor.SetMaxHealth(162@, 800)
+0446: set_actor 162@ dismemberment_possible 0 
+0568: set_actor 162@ untargetable 1 
+
+:RYDER3_14672
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_14725 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+0464: put_actor $ACTOR_RYDER into_turret_on_car 108@ at_car_offset 0.0 -1.3 0.8 position 2 shooting_angle_limit 15.0 with_weapon 28 
+
+:RYDER3_14725
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(108@)
+jf @RYDER3_14757 
+05CB: AS_actor $PLAYER_ACTOR enter_car 108@ as_driver 4000 ms 
+
+:RYDER3_14757
+gosub @RYDER3_19412 
+if 
+  125@ == 1 
+jf @RYDER3_14848 
+040D: unload_wav 1 
+03CF: load_wav 34046 as 1 
+
+:RYDER3_14795
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_14821 
+wait 0 
+jump @RYDER3_14795 
+
+:RYDER3_14821
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_JG' time 2000 flag 1  // ~z~You as bad as tossing as you is driving!
+jump @RYDER3_14907 
+
+:RYDER3_14848
+040D: unload_wav 1 
+03CF: load_wav 34039 as 1 
+
+:RYDER3_14861
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_14887 
+wait 0 
+jump @RYDER3_14861 
+
+:RYDER3_14887
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_HN' time 2000 flag 1  // ~z~Hop in the car and stamp out, fool!
+
+:RYDER3_14907
+wait 4000 
+gosub @RYDER3_19347 
+09A3: show_siterocket_on_bumper_camera 0 
+32@ = 0 
+89@ = 35 
+
+:RYDER3_14937
+if 
+  89@ == 12 
+jf @RYDER3_15001 
+if 
+  125@ == 1 
+jf @RYDER3_14994 
+89@ = 35 
+69@ = 1 
+jump @RYDER3_15001 
+
+:RYDER3_14994
+89@ = 35 
+
+:RYDER3_15001
+if 
+  89@ == 35 
+jf @RYDER3_15429 
+if 
+075C:   marker 70@ enabled 
+jf @RYDER3_15040 
+Marker.Disable(70@)
+
+:RYDER3_15040
+if 
+  125@ == 1 
+jf @RYDER3_15254 
+gosub @RYDER3_19379 
+if 
+   not Car.Wrecked(129@)
+jf @RYDER3_15086 
+Car.Destroy(129@)
+
+:RYDER3_15086
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_15107 
+Actor.DestroyInstantly($ACTOR_RYDER)
+
+:RYDER3_15107
+if 
+   not Actor.Dead(162@)
+jf @RYDER3_15128 
+Actor.DestroyInstantly(162@)
+
+:RYDER3_15128
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_15176 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_15176 
+036A: put_actor $PLAYER_ACTOR in_car 108@ 
+
+:RYDER3_15176
+176@ = 0 
+
+:RYDER3_15183
+if 
+  10 > 176@ 
+jf @RYDER3_15224 
+Object.Destroy(110@(176@,10i))
+176@ += 1 
+jump @RYDER3_15183 
+
+:RYDER3_15224
+gosub @RYDER3_19412 
+00BC: show_text_highpriority GXT 'RYD3_T' time 4000 flag 1  // ~r~You did not get enough boxes.
+jump @RYDER3_18373 
+
+:RYDER3_15254
+if and
+   not Actor.Dead($ACTOR_RYDER)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_15310 
+077A: set_actor $ACTOR_RYDER acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+0638: AS_actor $ACTOR_RYDER stay_put 1 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 1 1 1 
+060B: set_actor $ACTOR_RYDER decision_maker_to 72@ 
+
+:RYDER3_15310
+05AA: 106@s = 'RYD3_KA' // @s = 'short'  // ~z~Man, we got one-time on our tail!
+04AF: 96@ = 34047 // = constant 
+gosub @RYDER3_20495 
+33@ = 0 
+85@ = 0 
+Marker.Disable(34@)
+018A: 34@ = create_checkpoint_at 2067.463 -1831.67 12.5527 
+08FB: set_checkpoint 34@ type_to 0 
+03C7: set_sensitivity_to_crime 1.0 
+Player.WantedLevel($PLAYER_CHAR) = 3
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+89@ += 1 
+32@ = 0 
+
+:RYDER3_15429
+if and
+  89@ == 36 
+  32@ > 4000 
+jf @RYDER3_15508 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_15478 
+04EB: AS_actor $ACTOR_RYDER crouch 1 
+
+:RYDER3_15478
+00BC: show_text_highpriority GXT 'RYD3_13' time 7000 flag 1  // ~s~Use the nearby ~y~pay 'n' spray~s~ to lose the cops.
+89@ += 1 
+39@ = 0 
+
+:RYDER3_15508
+if 
+  89@ == 37 
+jf @RYDER3_18281 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_15782 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_15629 
+00BC: show_text_highpriority GXT 'RYD3_Q' time 5000 flag 1  // Get back into ~b~Ryder's truck~s~!
+if 
+  39@ == 0 
+jf @RYDER3_15622 
+Marker.Disable(34@)
+34@ = Marker.CreateAboveCar(108@)
+07E0: set_marker 34@ type_to 1 
+39@ = 1 
+
+:RYDER3_15622
+jump @RYDER3_15731 
+
+:RYDER3_15629
+if 
+  39@ == 1 
+jf @RYDER3_15731 
+Marker.Disable(34@)
+if 
+  103@ == 1 
+jf @RYDER3_15697 
+018A: 34@ = create_checkpoint_at 2446.887 -1661.962 12.3047 
+jump @RYDER3_15717 
+
+:RYDER3_15697
+018A: 34@ = create_checkpoint_at 2067.463 -1831.67 12.5527 
+
+:RYDER3_15717
+08FB: set_checkpoint 34@ type_to 0 
+39@ = 0 
+
+:RYDER3_15731
+if and
+01F4:   car 108@ flipped 
+  97@ == 0 
+jf @RYDER3_15782 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_15775 
+05BE: AS_actor $ACTOR_RYDER die 
+
+:RYDER3_15775
+97@ = 1 
+
+:RYDER3_15782
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_16272 
+if and
+02E0:   actor $ACTOR_RYDER firing_weapon 
+  33@ > 10000 
+876F:   not text_priority_displayed 
+jf @RYDER3_16272 
+33@ = 0 
+0209: $6870 = random_int_in_ranges 0 8 
+0871: init_jump_table $6870 total_jumps 8 default_jump 0 @RYDER3_16272 jumps 0 @RYDER3_15968 1 @RYDER3_16006 2 @RYDER3_16044 3 @RYDER3_16082 4 @RYDER3_16120 5 @RYDER3_16158 6 @RYDER3_16196 
+0872: jump_table_jumps 7 @RYDER3_16234 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 -1 @RYDER3_16272 
+
+:RYDER3_15968
+05AA: 106@s = 'RYD3_LA' // @s = 'short'  // ~z~Take this, you punk one-time!
+04AF: 96@ = 34049 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16006
+05AA: 106@s = 'RYD3_LB' // @s = 'short'  // ~z~You're dealing with a kung fu master!
+04AF: 96@ = 34050 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16044
+05AA: 106@s = 'RYD3_LC' // @s = 'short'  // ~z~Ninja style!
+04AF: 96@ = 34051 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16082
+05AA: 106@s = 'RYD3_LD' // @s = 'short'  // ~z~You ain't never gonna catch this gangsta, fool!
+04AF: 96@ = 34052 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16120
+05AA: 106@s = 'RYD3_LE' // @s = 'short'  // ~z~You can't stop me - I'm a genius, fool!
+04AF: 96@ = 34053 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16158
+05AA: 106@s = 'RYD3_LF' // @s = 'short'  // ~z~I'm getting tired of this, fuck off!
+04AF: 96@ = 34054 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16196
+05AA: 106@s = 'RYD3_LG' // @s = 'short'  // ~z~Y'all ain't got nothing better to do?
+04AF: 96@ = 34055 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16234
+05AA: 106@s = 'RYD3_LH' // @s = 'short'  // ~z~One-times can't stop me - I'm incredible!
+04AF: 96@ = 34056 // = constant 
+gosub @RYDER3_20495 
+jump @RYDER3_16272 
+
+:RYDER3_16272
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($PLAYER_ACTOR)
+  39@ == 0 
+jf @RYDER3_18281 
+if and
+   not Actor.Dead($ACTOR_RYDER)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_16634 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 0
+jf @RYDER3_16500 
+if and
+  103@ == 0 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_16493 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+077C: clear_actor $ACTOR_RYDER acquaintance 4 to_all_pedtypes // see ped.dat 
+060B: set_actor $ACTOR_RYDER decision_maker_to 105@ 
+0638: AS_actor $ACTOR_RYDER stay_put 1 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 0 0 0 
+04EB: AS_actor $ACTOR_RYDER crouch 1 
+if 
+075C:   marker 34@ enabled 
+jf @RYDER3_16428 
+Marker.Disable(34@)
+
+:RYDER3_16428
+05AA: 106@s = 'RYD3_KB' // @s = 'short'  // ~z~Head back to Grove Street, fool!
+04AF: 96@ = 34048 // = constant 
+gosub @RYDER3_20495 
+32@ = 0 
+018A: 34@ = create_checkpoint_at 2451.38 -1661.609 12.3047 
+103@ = 1 
+
+:RYDER3_16493
+jump @RYDER3_16634 
+
+:RYDER3_16500
+if and
+  103@ == 1 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_16634 
+if 
+075C:   marker 34@ enabled 
+jf @RYDER3_16544 
+Marker.Disable(34@)
+
+:RYDER3_16544
+0792: disembark_instantly_actor $ACTOR_RYDER 
+077A: set_actor $ACTOR_RYDER acquaintance 4 to_actors_pedtype 6 // see ped.dat 
+0638: AS_actor $ACTOR_RYDER stay_put 1 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 1 1 1 
+060B: set_actor $ACTOR_RYDER decision_maker_to 72@ 
+04EB: AS_actor $ACTOR_RYDER crouch 1 
+00BC: show_text_highpriority GXT 'RYD3_I' time 7000 flag 1  // ~s~You need to lose the cops! Use the nearby pay 'n' spray.
+018A: 34@ = create_checkpoint_at 2067.463 -1831.67 12.5527 
+103@ = 0 
+
+:RYDER3_16634
+if and
+   not Player.WantedLevel($PLAYER_CHAR) > 0
+  32@ > 4000 
+  104@ == 0 
+jf @RYDER3_16690 
+00BC: show_text_highpriority GXT 'RYD3101' time 7000 flag 1  // ~s~Take the crates back to ~y~Grove street~s~.
+104@ = 1 
+
+:RYDER3_16690
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 0
+jf @RYDER3_18281 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 2446.887 -1661.962 12.3047 radius 4.0 4.0 4.0 
+   Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_18281 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0395: clear_area 1 at 2483.618 -1666.092 12.3594 radius 50.0 
+gosub @RYDER3_19379 
+if and
+   not Actor.Dead($ACTOR_RYDER)
+   not Car.Wrecked(108@)
+jf @RYDER3_16858 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+0464: put_actor $ACTOR_RYDER into_turret_on_car 108@ at_car_offset 0.0 -1.3 0.8 position 0 shooting_angle_limit 15.0 with_weapon 28 
+
+:RYDER3_16858
+Marker.Disable(34@)
+07C0: load_path 104 
+04ED: load_animation "GANGS" 
+
+:RYDER3_16876
+if or
+87C1:   not path 104 available 
+84EE:   not animation "GANGS" loaded 
+jf @RYDER3_16911 
+wait 0 
+jump @RYDER3_16876 
+
+:RYDER3_16911
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(108@)
+jf @RYDER3_16978 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 108@)
+jf @RYDER3_16961 
+0430: put_actor $PLAYER_ACTOR into_car 108@ passenger_seat 0 
+
+:RYDER3_16961
+05EB: assign_car 108@ to_path 104 
+0706: advance_car 108@ further_along_path 1.0 
+
+:RYDER3_16978
+gosub @RYDER3_19319 
+Camera.SetPosition(2444.796, -1650.005, 24.6868, 0.0, 0.0, 0.0)
+Camera.PointAt(2445.629, -1650.483, 24.4081, 2)
+Actor.DestroyInstantly(162@)
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_17068 
+0688: AS_actor $ACTOR_RYDER unknown_toggle_ped_threat_scanner 0 0 0 
+
+:RYDER3_17068
+gosub @RYDER3_19412 
+040D: unload_wav 1 
+03CF: load_wav 34057 as 1 
+
+:RYDER3_17088
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_17114 
+wait 0 
+jump @RYDER3_17088 
+
+:RYDER3_17114
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_MA' time 8000 flag 1  // ~z~Damn, homie, your stuff was tight!
+33@ = 0 
+
+:RYDER3_17141
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_17167 
+wait 0 
+jump @RYDER3_17141 
+
+:RYDER3_17167
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 34058 as 1 
+
+:RYDER3_17182
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_17208 
+wait 0 
+jump @RYDER3_17182 
+
+:RYDER3_17208
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_MB' time 8000 flag 1  // ~z~You too, homie!
+33@ = 0 
+
+:RYDER3_17235
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_17261 
+wait 0 
+jump @RYDER3_17235 
+
+:RYDER3_17261
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 34059 as 1 
+
+:RYDER3_17276
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_17302 
+wait 0 
+jump @RYDER3_17276 
+
+:RYDER3_17302
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_MC' time 8000 flag 1  // ~z~LB's coming over to stash the shit.
+33@ = 0 
+
+:RYDER3_17329
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_17355 
+wait 0 
+jump @RYDER3_17329 
+
+:RYDER3_17355
+00BE: text_clear_all 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_17414 
+Camera.SetPosition(2472.576, -1675.462, 14.0837, 0.0, 0.0, 0.0)
+Camera.OnVehicle(108@, 15, 2)
+
+:RYDER3_17414
+wait 5000 
+if 
+  69@ == 0 
+jf @RYDER3_18281 
+if and
+   not Car.Wrecked(108@)
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_17540 
+0687: clear_actor $ACTOR_RYDER task 
+04EB: AS_actor $ACTOR_RYDER crouch 0 
+05EC: release_car 108@ from_path 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 108@ with_offset 0.0 10.0 0.0 
+05D3: AS_actor $PLAYER_ACTOR goto_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 mode 4 time -2 ms // versionA 
+05D3: AS_actor $ACTOR_RYDER goto_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 mode 4 time -2 ms // versionA 
+
+:RYDER3_17540
+040D: unload_wav 1 
+03CF: load_wav 34060 as 1 
+
+:RYDER3_17553
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_17579 
+wait 0 
+jump @RYDER3_17553 
+
+:RYDER3_17579
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_MD' time 8000 flag 1  // ~z~Okay, later then.
+33@ = 0 
+
+:RYDER3_17606
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_17632 
+wait 0 
+jump @RYDER3_17606 
+
+:RYDER3_17632
+00BE: text_clear_all 
+wait 1500 
+if 
+04EE:   animation "GANGS" loaded 
+jf @RYDER3_18260 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_17782 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @RYDER3_17718 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2471.343 -1684.306 12.5159 
+jump @RYDER3_17738 
+
+:RYDER3_17718
+Actor.PutAt($PLAYER_ACTOR, 2471.343, -1684.306, 12.5159)
+
+:RYDER3_17738
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.Angle($PLAYER_ACTOR) = 238.6571
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor $PLAYER_ACTOR with_offset 0.0 1.0 -1.0 
+
+:RYDER3_17782
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_18096 
+if 
+   Actor.Driving($ACTOR_RYDER)
+jf @RYDER3_17840 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+0362: remove_actor $ACTOR_RYDER from_car_and_place_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @RYDER3_17854 
+
+:RYDER3_17840
+Actor.PutAt($ACTOR_RYDER, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:RYDER3_17854
+50@ = 238.6571 
+50@ -= 180.0 
+0792: disembark_instantly_actor $ACTOR_RYDER 
+Actor.Angle($ACTOR_RYDER) = 50@
+0615: define_AS_pack_begin 35@ 
+0804: AS_actor -1 walk_to 2471.343 -1684.306 12.5159 angle 238.6571 radius 0.4 animation "PRTIAL_HNDSHK_01" IFP_file "GANGS" 4.0 LA 0 LX 0 LY 0 LF 0 LT -1 
+05BF: AS_actor -1 look_at_actor $ACTOR_RYDER 3000 ms 
+0616: define_AS_pack_end 35@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 35@ 
+061B: remove_references_to_AS_pack 35@ 
+0615: define_AS_pack_begin 35@ 
+0804: AS_actor -1 walk_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 angle 50@ radius 0.4 animation "PRTIAL_HNDSHK_01" IFP_file "GANGS" 4.0 LA 0 LX 0 LY 0 LF 0 LT -1 
+05D3: AS_actor -1 goto_point 2465.728 -1687.025 12.5184 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 35@ 
+0618: assign_actor $ACTOR_RYDER to_AS_pack 35@ 
+061B: remove_references_to_AS_pack 35@ 
+
+:RYDER3_18096
+Camera.SetPosition(2472.521, -1683.47, 14.0526, 0.0, 0.0, 0.0)
+Camera.PointAt(2472.001, -1684.324, 14.0313, 2)
+040D: unload_wav 1 
+03CF: load_wav 34061 as 1 
+
+:RYDER3_18160
+if 
+83D0:   not wav 1 loaded 
+jf @RYDER3_18186 
+wait 0 
+jump @RYDER3_18160 
+
+:RYDER3_18186
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'RYD3_ME' time 8000 flag 1  // ~z~For life, CJ, for life - you heard?
+33@ = 0 
+
+:RYDER3_18213
+if 
+83D2:   not wav 1 ended 
+jf @RYDER3_18239 
+wait 0 
+jump @RYDER3_18213 
+
+:RYDER3_18239
+00BE: text_clear_all 
+wait 1000 
+gosub @RYDER3_19379 
+jump @RYDER3_18269 
+
+:RYDER3_18260
+04ED: load_animation "GANGS" 
+
+:RYDER3_18269
+Actor.DestroyInstantly($ACTOR_RYDER)
+jump @RYDER3_18520 
+
+:RYDER3_18281
+if 
+   Car.Wrecked(108@)
+jf @RYDER3_18320 
+00BC: show_text_highpriority GXT 'RYD3_14' time 5000 flag 1  // ~r~Ryder's truck has been destroyed!
+jump @RYDER3_18373 
+
+:RYDER3_18320
+if 
+   Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_18359 
+00BC: show_text_highpriority GXT 'RYD3_B' time 5000 flag 1  // ~r~Ryder is dead!
+jump @RYDER3_18373 
+
+:RYDER3_18359
+jump @RYDER3_2369 
+
+:RYDER3_18366
+jump @RYDER3_18373 
+
+:RYDER3_18373
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @RYDER3_18441 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:RYDER3_18441
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_18464 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:RYDER3_18464
+03C7: set_sensitivity_to_crime 1.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_18502 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+
+:RYDER3_18502
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:RYDER3_18520
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_18543 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:RYDER3_18543
+gosub @RYDER3_19347 
+03C7: set_sensitivity_to_crime 1.0 
+Camera.SetBehindPlayer
+gosub @RYDER3_19412 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 7 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 7 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+$RYDER_TOTAL_PASSED_MISSIONS += 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'RYDER_3'  // Catalyst
+return 
+
+:RYDER3_18621
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_18644 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:RYDER3_18644
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_18665 
+Actor.DestroyWithFade($ACTOR_RYDER)
+
+:RYDER3_18665
+09A3: show_siterocket_on_bumper_camera 0 
+03C7: set_sensitivity_to_crime 1.0 
+0960: enable_player $PLAYER_CHAR stats_box 1 
+0873: release_path 490 
+0873: release_path 486 
+0873: release_path 104 
+if 
+   not Actor.Dead(142@)
+jf @RYDER3_18718 
+Actor.DestroyInstantly(142@)
+
+:RYDER3_18718
+if 
+   not Actor.Dead(143@)
+jf @RYDER3_18739 
+Actor.DestroyInstantly(143@)
+
+:RYDER3_18739
+36@ = 0 
+
+:RYDER3_18746
+if 
+075C:   marker 155@(36@,4i) enabled 
+jf @RYDER3_18775 
+Marker.Disable(155@(36@,4i))
+
+:RYDER3_18775
+if 
+075C:   marker 136@(36@,6i) enabled 
+jf @RYDER3_18804 
+Marker.Disable(136@(36@,6i))
+
+:RYDER3_18804
+36@ += 1 
+  36@ >= 4 
+jf @RYDER3_18746 
+if 
+075C:   marker 70@ enabled 
+jf @RYDER3_18846 
+Marker.Disable(70@)
+
+:RYDER3_18846
+if 
+075C:   marker 34@ enabled 
+jf @RYDER3_18867 
+Marker.Disable(34@)
+
+:RYDER3_18867
+if 
+075C:   marker 68@ enabled 
+jf @RYDER3_18888 
+Marker.Disable(68@)
+
+:RYDER3_18888
+if 
+075C:   marker 99@ enabled 
+jf @RYDER3_18909 
+Marker.Disable(99@)
+
+:RYDER3_18909
+Object.Destroy(61@)
+Object.Destroy(62@)
+Object.Destroy(63@)
+Object.Destroy(64@)
+Object.Destroy(91@)
+Object.Destroy(92@)
+Object.Destroy(93@)
+Object.Destroy(81@)
+Object.Destroy(77@)
+Object.Destroy(78@)
+Object.Destroy(79@)
+Object.Destroy(80@)
+08EA: enable_gangs_spawn 1 
+0151: remove_status_text $6872 
+0151: remove_status_text $6874 
+014F: stop_timer $6873 
+0465: remove_actor $ACTOR_RYDER from_turret_mode 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+06D7: enable_train_traffic 1 
+Model.Destroy(#PICADOR)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+Model.Destroy(#CR_GUNCRATE)
+Model.Destroy(#CR_AMMOBOX)
+Model.Destroy(#FAM1)
+Model.Destroy(#FAM2)
+Model.Destroy(#LSV1)
+Model.Destroy(#LSV2)
+Model.Destroy(#LSV3)
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+Model.Destroy(#TAHOMA)
+Model.Destroy(#BALLAS1)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#SANCHEZ)
+04EF: release_animation "BOX" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "RYDER" 
+04EF: release_animation "SWAT" 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+0296: unload_special_actor 1 
+091D: remove_forbidden_for_boats_cube_cornerA 2284.0 -1151.0 10.0 cornerB 2288.0 -1147.0 30.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2287.321 -1132.571 10.0 cornerB 2360.839 -1177.134 40.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2311.676 -1375.397 10.0 cornerB 2292.365 -1303.102 40.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2268.695 -1138.541 10.0 cornerB 2282.362 -1159.604 40.0 
+091D: remove_forbidden_for_boats_cube_cornerA 2307.537 -1162.624 10.0 cornerB 2266.351 -1136.99 40.0 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+Player.ClearWantedLevel($PLAYER_CHAR)
+03C7: set_sensitivity_to_crime 1.0 
+mission_cleanup 
+return 
+
+:RYDER3_19319
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+00BE: text_clear_all 
+03E6: remove_text_box 
+return 
+
+:RYDER3_19347
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+02A3: enable_widescreen 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03E6: remove_text_box 
+00BE: text_clear_all 
+return 
+
+:RYDER3_19379
+fade 0 500 
+
+:RYDER3_19386
+if 
+fading 
+jf @RYDER3_19410 
+wait 0 
+jump @RYDER3_19386 
+
+:RYDER3_19410
+return 
+
+:RYDER3_19412
+fade 1 500 
+
+:RYDER3_19419
+if 
+fading 
+jf @RYDER3_19443 
+wait 0 
+jump @RYDER3_19419 
+
+:RYDER3_19443
+return 
+
+:RYDER3_19445
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @RYDER3_19561 
+Model.Load(#PICADOR)
+
+:RYDER3_19465
+if 
+   not Model.Available(#PICADOR)
+jf @RYDER3_19492 
+wait 0 
+jump @RYDER3_19465 
+
+:RYDER3_19492
+182@ = Car.Create(#PICADOR, 2298.39, -1149.012, 25.7656)
+Car.Angle(182@) = 45.766
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_19549 
+036A: put_actor $PLAYER_ACTOR in_car 182@ 
+
+:RYDER3_19549
+Model.Destroy(#PICADOR)
+89@ = 50 
+
+:RYDER3_19561
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @RYDER3_19649 
+07C0: load_path 486 
+07C0: load_path 490 
+
+:RYDER3_19586
+if or
+87C1:   not path 486 available 
+87C1:   not path 490 available 
+jf @RYDER3_19618 
+wait 0 
+jump @RYDER3_19586 
+
+:RYDER3_19618
+if 
+   not Car.Wrecked(129@)
+jf @RYDER3_19649 
+Car.LockInCurrentPosition(129@) = False
+05EB: assign_car 129@ to_path 490 
+
+:RYDER3_19649
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @RYDER3_19814 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+Model.Load(#FREIGHT)
+Model.Load(#FREIFLAT)
+Model.Load(#TAHOMA)
+07C0: load_path 106 
+
+:RYDER3_19697
+if 
+87C1:   not path 106 available 
+jf @RYDER3_19723 
+wait 0 
+jump @RYDER3_19697 
+
+:RYDER3_19723
+if or
+   not Model.Available(#FREIGHT)
+   not Model.Available(#FREIFLAT)
+   not Model.Available(#TAHOMA)
+jf @RYDER3_19760 
+wait 0 
+jump @RYDER3_19723 
+
+:RYDER3_19760
+06D8: 183@ = create_train_at 2278.177 -1144.882 27.5107 type 10 direction 1 
+Model.Destroy(#FREIGHT)
+Model.Destroy(#FREIFLAT)
+06DC: set_train 183@ acc 0.0 
+06DD: set_train 183@ speed 0.0 
+
+:RYDER3_19814
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @RYDER3_19887 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @RYDER3_19887 
+0605: actor $ACTOR_RYDER perform_animation "RYD_BECKON_01" IFP "RYDER" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:RYDER3_19887
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @RYDER3_19909 
+$6871 = 9 
+
+:RYDER3_19909
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @RYDER3_20072 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @RYDER3_20072 
+04ED: load_animation "CARRY" 
+
+:RYDER3_19949
+if 
+84EE:   not animation "CARRY" loaded 
+jf @RYDER3_19980 
+wait 0 
+jump @RYDER3_19949 
+
+:RYDER3_19980
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+110@ = Object.Init(127@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.CollisionDetection(110@) = False
+070A: AS_actor $PLAYER_ACTOR attach_to_object 110@ offset 0.0 0.3 0.0 on_bone 6 16 perform_animation "CATCH_BOX" IFP_file "BOX" time 0 
+04EF: release_animation "CARRY" 
+
+:RYDER3_20072
+if 
+0736:   is_keyboard_key_just_pressed 80 
+jf @RYDER3_20143 
+07C0: load_path 486 
+
+:RYDER3_20092
+if 
+87C1:   not path 486 available 
+jf @RYDER3_20119 
+wait 0 
+jump @RYDER3_20092 
+
+:RYDER3_20119
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_20143 
+05EB: assign_car 108@ to_path 486 
+
+:RYDER3_20143
+if 
+0736:   is_keyboard_key_just_pressed 73 
+jf @RYDER3_20493 
+if 
+   not Car.Wrecked(108@)
+jf @RYDER3_20493 
+79@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 79@ to_car 108@ with_offset 0.4 -2.1 -0.1 rotation 0.0 0.0 15.0 
+Object.CollisionDetection(79@) = False
+77@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 77@ to_car 108@ with_offset -0.5 -2.1 -0.1 rotation 0.0 0.0 30.0 
+Object.CollisionDetection(77@) = False
+78@ = Object.Create(#CR_GUNCRATE, 2278.177, -1144.882, 27.5107)
+0681: attach_object 78@ to_car 108@ with_offset 0.4 -2.1 0.3 rotation 0.0 30.0 0.0 
+80@ = Object.Create(#CR_AMMOBOX, 2278.177, -1144.882, 27.5107)
+0681: attach_object 80@ to_car 108@ with_offset -0.6 -2.1 0.3 rotation 0.0 0.0 15.0 
+81@ = Object.Create(#CR_AMMOBOX, 2278.177, -1144.882, 27.5107)
+0681: attach_object 81@ to_car 108@ with_offset -0.1 -2.1 0.3 rotation 0.0 0.0 15.0 
+
+:RYDER3_20493
+return 
+
+:RYDER3_20495
+040D: unload_wav 1 
+03CF: load_wav 96@ as 1 
+95@ = 0 
+return 
+
+:RYDER3_20515
+if and
+03D0:   wav 1 loaded 
+  95@ == 0 
+jf @RYDER3_20558 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 106@s time 10000 flag 1 
+95@ = 1 
+
+:RYDER3_20558
+if and
+03D2:   wav 1 ended 
+  95@ == 1 
+jf @RYDER3_20596 
+040D: unload_wav 1 
+03D5: remove_text 106@s 
+95@ = 2 
+
+:RYDER3_20596
+return

@@ -1,0 +1,3539 @@
+:DESERT9
+thread 'DESERT9' 
+gosub @DESERT9_56 
+
+:DESERT9_18
+if 
+wasted_or_busted 
+jf @DESERT9_45 
+$11033 = 0 
+gosub @DESERT9_21911 
+
+:DESERT9_45
+gosub @DESERT9_22019 
+
+:DESERT9_52
+mission_cleanup 
+end_thread 
+
+:DESERT9_56
+increment_mission_attempts 
+054C: use_GXT_table 'DSERT9' 
+03C7: set_sensitivity_to_crime 0.0 
+08F4: set_max_group_members 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+$ONMISSION = 1 
+07FB: set_interior 'DESHOUS' access 0  // Abandoned AC tower
+150@ = 100.0 
+if 
+  150@ == 0.0 
+jf @DESERT9_379 
+91@ = Object.Create(#BARREL1, 0.0, 0.0, 0.0)
+225@ = Object.Create(#BARREL1, 0.0, 0.0, 0.0)
+56@ = Object.Create(#KB_BARREL, 0.0, 0.0, 0.0)
+35@ = Car.Create(#PCJ600, 426.6481, 2535.713, 15.5538)
+Car.Angle(35@) = 107.0
+018A: 152@ = create_checkpoint_at 74@ 75@ 76@ 
+$PICKUP_PARACHUTE = Pickup.Create(#GUN_PARA, 3, 1797.602, -1308.881, 133.8128)
+153@ = Marker.CreateAboveCar(35@)
+49@ = Object.Create(#CR_GUNCRATE, 365.0146, 2500.676, 15.492)
+50@ = Object.Create(#CR_CRATESTACK, 365.9573, 2502.763, 15.4921)
+51@ = Object.Create(#CR_CRATESTACK, 365.5524, 2503.46, 15.492)
+52@ = Object.Create(#CR_CRATESTACK, 364.5623, 2503.406, 15.4921)
+
+:DESERT9_379
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DESERT9_405 
+jump @DESERT9_21934 
+
+:DESERT9_405
+if 
+0735:   is_keyboard_key_pressed 68 
+jf @DESERT9_475 
+
+:DESERT9_420
+if 
+   not Model.Available(#GUN_PARA)
+jf @DESERT9_452 
+Model.Load(#GUN_PARA)
+wait 0 
+jump @DESERT9_420 
+
+:DESERT9_452
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Parachute, 1)
+68@ = 0 
+71@ = 0 
+
+:DESERT9_475
+0871: init_jump_table 68@ total_jumps 12 default_jump 0 @DESERT9_771 jumps 0 @DESERT9_603 2 @DESERT9_659 3 @DESERT9_673 4 @DESERT9_687 5 @DESERT9_701 6 @DESERT9_715 7 @DESERT9_729 
+0872: jump_table_jumps 8 @DESERT9_743 9 @DESERT9_757 20 @DESERT9_617 21 @DESERT9_631 22 @DESERT9_645 -1 @DESERT9_771 -1 @DESERT9_771 -1 @DESERT9_771 -1 @DESERT9_771 
+
+:DESERT9_603
+gosub @DESERT9_871 
+jump @DESERT9_771 
+
+:DESERT9_617
+gosub @DESERT9_896 
+jump @DESERT9_771 
+
+:DESERT9_631
+gosub @DESERT9_4357 
+jump @DESERT9_771 
+
+:DESERT9_645
+gosub @DESERT9_4526 
+jump @DESERT9_771 
+
+:DESERT9_659
+gosub @DESERT9_6291 
+jump @DESERT9_771 
+
+:DESERT9_673
+gosub @DESERT9_7451 
+jump @DESERT9_771 
+
+:DESERT9_687
+gosub @DESERT9_11105 
+jump @DESERT9_771 
+
+:DESERT9_701
+gosub @DESERT9_12976 
+jump @DESERT9_771 
+
+:DESERT9_715
+gosub @DESERT9_13203 
+jump @DESERT9_771 
+
+:DESERT9_729
+gosub @DESERT9_13257 
+jump @DESERT9_771 
+
+:DESERT9_743
+gosub @DESERT9_13819 
+jump @DESERT9_771 
+
+:DESERT9_757
+gosub @DESERT9_14326 
+jump @DESERT9_771 
+
+:DESERT9_771
+gosub @DESERT9_21758 
+gosub @DESERT9_799 
+gosub @DESERT9_20527 
+jump @DESERT9_379 
+
+:DESERT9_799
+0871: init_jump_table 68@ total_jumps 1 default_jump 0 @DESERT9_869 jumps 2 @DESERT9_862 -1 @DESERT9_869 -1 @DESERT9_869 -1 @DESERT9_869 -1 @DESERT9_869 -1 @DESERT9_869 -1 @DESERT9_869 
+
+:DESERT9_862
+jump @DESERT9_869 
+
+:DESERT9_869
+return 
+
+:DESERT9_871
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 1 of_actors_pedtype 25 to_actors_pedtype 0 
+68@ = 20 
+return 
+
+:DESERT9_896
+0169: set_fade_color_RGB 0 0 0 
+if 
+  71@ == 0 
+jf @DESERT9_943 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+fade 0 1000 
+71@ = 1 
+
+:DESERT9_943
+if 
+  71@ == 1 
+jf @DESERT9_1117 
+if 
+   not fading 
+jf @DESERT9_1117 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+03BA: clear_cars_from_cube_cornerA -120.5297 2593.665 69.1939 cornerB 502.5016 2365.418 -1.2447 
+042B: clear_peds_from_cube_cornerA -120.5297 2593.665 69.1939 cornerB 502.5016 2365.418 -1.2447 
+0972: put_actor $PLAYER_ACTOR at 222.7755 2508.972 15.5214 no_offset 
+Model.Load(#ANDROM)
+Model.Load(#BOBCAT)
+Model.Load(#WMOMIB)
+Model.Load(#MICRO_UZI)
+Model.Load(#BMYMIB)
+07C0: load_path 450 
+07C0: load_path 168 
+07C0: load_path 452 
+07C0: load_path 453 
+038B: load_requested_models 
+71@ = 1 
+
+:DESERT9_1117
+if 
+  71@ == 1 
+jf @DESERT9_1614 
+if and
+   Model.Available(#ANDROM)
+   Model.Available(#BOBCAT)
+   Model.Available(#WMOMIB)
+   Model.Available(#MICRO_UZI)
+   Model.Available(#BMYMIB)
+jf @DESERT9_1614 
+if and
+07C1:   path 450 available 
+07C1:   path 168 available 
+07C1:   path 452 available 
+07C1:   path 453 available 
+jf @DESERT9_1614 
+34@ = Car.Create(#ANDROM, 339.9034, 2499.805, 15.4884)
+36@ = Car.Create(#BOBCAT, -22.1321, 2504.942, 15.2566)
+37@ = Car.Create(#BOBCAT, -15.9009, 2507.28, 15.2543)
+38@ = Car.Create(#BOBCAT, -17.3227, 2501.011, 15.252)
+0229: set_car 36@ primary_color_to 0 secondary_color_to 0 
+0229: set_car 37@ primary_color_to 0 secondary_color_to 0 
+0229: set_car 38@ primary_color_to 0 secondary_color_to 0 
+Car.Angle(36@) = 270.0
+Car.Angle(37@) = 270.0
+Car.Angle(38@) = 270.0
+40@ = Actor.CreateAsDriver(Mission2, #BMYMIB, 36@)
+41@ = Actor.CreateAsDriver(Mission2, #WMOMIB, 37@)
+42@ = Actor.CreateAsDriver(Mission2, #WMOMIB, 38@)
+43@ = Actor.CreateAsPassenger(Mission2, #WMOMIB, 36@, 0)
+44@ = Actor.CreateAsPassenger(Mission2, #BMYMIB, 37@, 0)
+45@ = Actor.Create(Mission1, #WMOMIB, -28.1475, 2492.807, 15.2513)
+46@ = Actor.Create(Mission1, #BMYMIB, -28.1475, 2493.807, 15.2513)
+47@ = Actor.Create(Mission1, #BMYMIB, -28.1475, 2494.807, 15.2513)
+0464: put_actor 45@ into_turret_on_car 36@ at_car_offset 0.5 -1.0 0.4 position 0 shooting_angle_limit 10.0 with_weapon 28 
+0464: put_actor 46@ into_turret_on_car 37@ at_car_offset -0.5 -1.0 0.4 position 0 shooting_angle_limit 10.0 with_weapon 28 
+0464: put_actor 47@ into_turret_on_car 37@ at_car_offset 0.5 -1.0 0.4 position 0 shooting_angle_limit 10.0 with_weapon 28 
+0085: 86@ = 32@ // (int) 
+86@ += 1500 
+71@ = 2 
+
+:DESERT9_1614
+if 
+  71@ == 2 
+jf @DESERT9_1921 
+if 
+001D:   86@ > 32@ // (int) 
+jf @DESERT9_1921 
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+   not Car.Wrecked(34@)
+jf @DESERT9_1921 
+if and
+07C1:   path 450 available 
+07C1:   path 168 available 
+07C1:   path 452 available 
+07C1:   path 453 available 
+jf @DESERT9_1901 
+05EB: assign_car 36@ to_path 450 
+05EB: assign_car 37@ to_path 453 
+05EB: assign_car 38@ to_path 452 
+05EB: assign_car 34@ to_path 168 
+0918: set_car 34@ engine_operation 1 
+06FD: set_car 36@ speed_on_path_to 0.8 
+06FD: set_car 37@ speed_on_path_to 0.9 
+06FD: set_car 38@ speed_on_path_to 0.8 
+Camera.SetPosition(-123.0824, 2533.057, 21.679, 0.0, 0.0, 0.0)
+0A0B: set_rendering_origin_at_3D_coord -123.0824 2533.057 21.679 angle 100.0 
+04E4: refresh_game_renderer_at -123.0824 2533.057 
+fade 1 600 
+0085: 86@ = 32@ // (int) 
+86@ += 5000 
+0085: 155@ = 32@ // (int) 
+155@ += 1000 
+71@ = 3 
+jump @DESERT9_1921 
+
+:DESERT9_1901
+07C0: load_path 450 
+07C0: load_path 168 
+07C0: load_path 452 
+07C0: load_path 453 
+
+:DESERT9_1921
+if 
+  71@ == 3 
+jf @DESERT9_2234 
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+   not Car.Wrecked(34@)
+jf @DESERT9_2234 
+148@ = 0.0 
+149@ = 0.0 
+150@ = 0.0 
+Car.StorePos(36@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+005D: 148@ += $TEMPVAR_FLOAT_1 // (float) 
+005D: 149@ += $TEMPVAR_FLOAT_2 // (float) 
+005D: 150@ += $TEMPVAR_FLOAT_3 // (float) 
+Car.StorePos(37@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+005D: 148@ += $TEMPVAR_FLOAT_1 // (float) 
+005D: 149@ += $TEMPVAR_FLOAT_2 // (float) 
+005D: 150@ += $TEMPVAR_FLOAT_3 // (float) 
+Car.StorePos(38@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+005D: 148@ += $TEMPVAR_FLOAT_1 // (float) 
+005D: 149@ += $TEMPVAR_FLOAT_2 // (float) 
+005D: 150@ += $TEMPVAR_FLOAT_3 // (float) 
+148@ /= 3.0 
+149@ /= 3.0 
+150@ /= 3.0 
+Camera.PointAt(148@, 149@, 150@, 2)
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_2183 
+71@ = 4 
+
+:DESERT9_2183
+if 
+   not 155@ == 0 
+jf @DESERT9_2234 
+if 
+001D:   32@ > 155@ // (int) 
+jf @DESERT9_2234 
+626@ = 1 
+155@ = 0 
+
+:DESERT9_2234
+if 
+  71@ == 4 
+jf @DESERT9_2707 
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+jf @DESERT9_2541 
+if and
+   not Actor.Dead(40@)
+   not Actor.Dead(41@)
+   not Actor.Dead(42@)
+jf @DESERT9_2541 
+05EC: release_car 36@ from_path 
+05EC: release_car 37@ from_path 
+05EC: release_car 38@ from_path 
+Car.PutAt(36@, 90.1321, 2504.942, 15.4766)
+Car.PutAt(37@, 83.9009, 2510.28, 15.4766)
+Car.PutAt(38@, 85.3227, 2497.011, 15.4766)
+05D1: AS_actor 40@ drive_car 36@ to 400.2219 2504.942 15.4766 speed 12.0 2 model #NULL 3 
+05D1: AS_actor 41@ drive_car 37@ to 400.2219 2510.28 15.4766 speed 12.0 2 model #NULL 3 
+05D1: AS_actor 42@ drive_car 38@ to 400.2219 2497.011 15.4766 speed 12.0 2 model #NULL 3 
+Car.Angle(36@) = 270.0
+Car.Angle(37@) = 270.0
+Car.Angle(38@) = 270.0
+Car.SetSpeedInstantly(36@, 12.0)
+Car.SetSpeedInstantly(37@, 12.0)
+Car.SetSpeedInstantly(38@, 12.0)
+
+:DESERT9_2541
+06FD: set_car 34@ speed_on_path_to 0.7 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+0615: define_AS_pack_begin 66@ 
+0605: actor -1 perform_animation "FLEE_LKAROUND_01" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 66@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 66@ 
+061B: remove_references_to_AS_pack 66@ 
+626@ = 2 
+Camera.SetPosition(224.1743, 2508.426, 16.7184, 0.0, 0.0, 0.0)
+Camera.PointAt(223.194, 2508.535, 16.8827, 2)
+71@ = 5 
+0085: 86@ = 32@ // (int) 
+86@ += 1700 
+
+:DESERT9_2707
+if 
+  71@ == 5 
+jf @DESERT9_3201 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_3201 
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+jf @DESERT9_3018 
+if and
+   not Actor.Dead(40@)
+   not Actor.Dead(41@)
+   not Actor.Dead(42@)
+jf @DESERT9_3018 
+Car.PutAt(36@, 90.1321, 2504.942, 15.4766)
+Car.PutAt(37@, 83.9009, 2510.28, 15.4766)
+Car.PutAt(38@, 85.3227, 2497.011, 15.4766)
+05D1: AS_actor 40@ drive_car 36@ to 400.2219 2504.942 15.4766 speed 30.0 2 model #NULL 3 
+05D1: AS_actor 41@ drive_car 37@ to 400.2219 2510.28 15.4766 speed 30.0 2 model #NULL 3 
+05D1: AS_actor 42@ drive_car 38@ to 400.2219 2497.011 15.4766 speed 30.0 2 model #NULL 3 
+Car.Angle(36@) = 270.0
+Car.Angle(37@) = 270.0
+Car.Angle(38@) = 270.0
+Car.SetSpeedInstantly(36@, 30.0)
+Car.SetSpeedInstantly(37@, 30.0)
+Car.SetSpeedInstantly(38@, 30.0)
+
+:DESERT9_3018
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_3039 
+05EC: release_car 34@ from_path 
+
+:DESERT9_3039
+Camera.SetPosition(125.3001, 2504.329, 15.5565, 0.0, 0.0, 0.0)
+Camera.PointAt(124.312, 2504.361, 15.7067, 2)
+0085: 86@ = 32@ // (int) 
+86@ += 2700 
+71@ = 6 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_3141 
+0918: set_car 34@ engine_operation 1 
+0825: set_helicopter 34@ instant_rotor_start 
+
+:DESERT9_3141
+Actor.PutAt($PLAYER_ACTOR, 412.6561, 2530.908, 15.617)
+Actor.Angle($PLAYER_ACTOR) = 136.0
+74@ = 25.6646 
+75@ = 2504.646 
+76@ = 29.1834 
+
+:DESERT9_3201
+if 
+  71@ == 6 
+jf @DESERT9_3492 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_3333 
+0085: 115@ = 32@ // (int) 
+0062: 115@ -= 86@ // (int) 
+115@ += 2700 
+0093: 156@ = integer 115@ to_float 
+156@ /= 20.0 
+0088: $TEMPVAR_FLOAT_1 = 74@ // (float) 
+005F: $TEMPVAR_FLOAT_1 += 156@ // (float) 
+156@ /= 14.0 
+0088: $TEMPVAR_FLOAT_3 = 76@ // (float) 
+0067: $TEMPVAR_FLOAT_3 -= 156@ // (float) 
+088C: put_car 34@ at $TEMPVAR_FLOAT_1 75@ $TEMPVAR_FLOAT_3 // versionB 
+
+:DESERT9_3333
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_3492 
+Actor.PutAt($PLAYER_ACTOR, 403.0466, 2522.19, 15.4843)
+05D3: AS_actor $PLAYER_ACTOR goto_point 415.1068 2528.624 15.5375 mode 6 time -2 ms // versionA 
+0A0B: set_rendering_origin_at_3D_coord 404.7372 2524.857 15.5671 angle 300.0 
+Camera.SetPosition(404.7372, 2524.857, 15.5671, 0.0, 0.0, 0.0)
+Camera.PointAt(405.6275, 2525.301, 15.6661, 2)
+0085: 86@ = 32@ // (int) 
+86@ += 2500 
+71@ = 8 
+
+:DESERT9_3492
+if 
+  71@ == 7 
+jf @DESERT9_3888 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_3888 
+71@ = 8 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_3888 
+Car.PutAt(34@, 380.6384, 2503.927, 15.4884)
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+jf @DESERT9_3786 
+if and
+   not Actor.Dead(40@)
+   not Actor.Dead(41@)
+   not Actor.Dead(42@)
+jf @DESERT9_3786 
+Car.PutAt(36@, 331.2219, 2504.942, 15.4766)
+Car.PutAt(37@, 338.2219, 2507.942, 15.4766)
+Car.PutAt(38@, 325.2219, 2501.942, 15.4766)
+05D1: AS_actor 40@ drive_car 36@ to 430.2219 2504.942 15.4766 speed 13.0 2 model #NULL 3 
+05D1: AS_actor 41@ drive_car 37@ to 430.2219 2507.28 15.4766 speed 13.0 2 model #NULL 3 
+05D1: AS_actor 42@ drive_car 38@ to 430.2219 2501.011 15.4766 speed 13.0 2 model #NULL 3 
+
+:DESERT9_3786
+Car.Angle(34@) = 270.0
+Car.SetSpeedInstantly(34@, 7.0)
+0825: set_helicopter 34@ instant_rotor_start 
+Camera.SetPosition(413.1315, 2533.297, 15.8551, 0.0, 0.0, 0.0)
+Camera.PointAt(412.508, 2532.519, 15.9255, 2)
+81@ = 0.0 
+0085: 86@ = 32@ // (int) 
+86@ += 4000 
+
+:DESERT9_3888
+if 
+  71@ == 8 
+jf @DESERT9_3960 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_3960 
+fade 0 800 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_3960 
+05EC: release_car 34@ from_path 
+71@ = 9 
+
+:DESERT9_3960
+if 
+  71@ == 9 
+jf @DESERT9_4245 
+if 
+   not fading 
+jf @DESERT9_4245 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_4012 
+05EC: release_car 34@ from_path 
+
+:DESERT9_4012
+if and
+   not Car.Wrecked(36@)
+   not Car.Wrecked(37@)
+   not Car.Wrecked(38@)
+jf @DESERT9_4053 
+05EC: release_car 36@ from_path 
+05EC: release_car 37@ from_path 
+05EC: release_car 38@ from_path 
+
+:DESERT9_4053
+Model.Destroy(#ANDROM)
+Model.Destroy(#BOBCAT)
+Model.Destroy(#WMOMIB)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#BMYMIB)
+0873: release_path 450 
+0873: release_path 168 
+0873: release_path 452 
+0873: release_path 453 
+Car.Destroy(36@)
+Car.Destroy(37@)
+Car.Destroy(38@)
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_4199 
+Car.PutAt(34@, 394.6384, 2497.927, 15.4884)
+Car.Angle(34@) = 90.0
+
+:DESERT9_4199
+71@ = 0 
+if 
+  157@ > 0 
+jf @DESERT9_4238 
+68@ = 22 
+jump @DESERT9_4245 
+
+:DESERT9_4238
+68@ = 21 
+
+:DESERT9_4245
+if 
+08D0:   should_skip_cutscene 
+jf @DESERT9_4303 
+if 
+   not fading 
+jf @DESERT9_4303 
+if 
+  157@ == 0 
+jf @DESERT9_4303 
+fade 0 600 
+157@ = 1 
+
+:DESERT9_4303
+if 
+  157@ == 1 
+jf @DESERT9_4355 
+if 
+   not fading 
+jf @DESERT9_4355 
+629@ = 5 
+157@ = 2 
+71@ = 9 
+
+:DESERT9_4355
+return 
+
+:DESERT9_4357
+02E4: load_cutscene_data 'DESERT9' 
+
+:DESERT9_4368
+if 
+86B9:   not cutscene_data_loaded 
+jf @DESERT9_4392 
+wait 0 
+jump @DESERT9_4368 
+
+:DESERT9_4392
+02E7: start_cutscene 
+fade 1 1000 
+
+:DESERT9_4401
+if 
+82E9:   not cutscene_reached_end 
+jf @DESERT9_4425 
+wait 0 
+jump @DESERT9_4401 
+
+:DESERT9_4425
+if 
+08D0:   should_skip_cutscene 
+jf @DESERT9_4463 
+if 
+  157@ == 0 
+jf @DESERT9_4463 
+157@ = 2 
+
+:DESERT9_4463
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+fade 0 0 
+
+:DESERT9_4480
+if 
+fading 
+jf @DESERT9_4504 
+wait 0 
+jump @DESERT9_4480 
+
+:DESERT9_4504
+02EA: end_cutscene 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+68@ = 22 
+return 
+
+:DESERT9_4526
+if 
+  71@ == 0 
+jf @DESERT9_4633 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Model.Load(#ANDROM)
+Model.Load(#BOBCAT)
+Model.Load(#WMOMIB)
+Model.Load(#MICRO_UZI)
+Model.Load(#BMYMIB)
+Model.Load(#PCJ600)
+Model.Load(#SATCHEL)
+Model.Load(#BOMB)
+04ED: load_animation "AIRPORT" 
+04ED: load_animation "CARRY" 
+07C0: load_path 149 
+07C0: load_path 135 
+07C0: load_path 134 
+71@ = 1 
+
+:DESERT9_4633
+if 
+  71@ == 1 
+jf @DESERT9_4750 
+if and
+   Model.Available(#BOBCAT)
+   Model.Available(#WMOMIB)
+   Model.Available(#MICRO_UZI)
+   Model.Available(#BMYMIB)
+   Model.Available(#PCJ600)
+07C1:   path 134 available 
+jf @DESERT9_4750 
+if and
+   Model.Available(#SATCHEL)
+   Model.Available(#BOMB)
+04EE:   animation "AIRPORT" loaded 
+04EE:   animation "CARRY" loaded 
+07C1:   path 149 available 
+07C1:   path 135 available 
+jf @DESERT9_4750 
+71@ = 2 
+
+:DESERT9_4750
+if 
+  71@ == 2 
+jf @DESERT9_5561 
+36@ = Car.Create(#BOBCAT, 366.764, 2512.655, 15.5677)
+37@ = Car.Create(#BOBCAT, 367.134, 2490.174, 15.4884)
+38@ = Car.Create(#BOBCAT, 357.6567, 2509.594, 15.5221)
+0229: set_car 36@ primary_color_to 0 secondary_color_to 0 
+0229: set_car 37@ primary_color_to 0 secondary_color_to 0 
+0229: set_car 38@ primary_color_to 0 secondary_color_to 0 
+40@ = Actor.Create(Mission1, #BMYMIB, 359.7588, 2511.474, 15.5501)
+41@ = Actor.Create(Mission1, #WMOMIB, 369.7111, 2505.838, 15.4921)
+42@ = Actor.Create(Mission1, #WMOMIB, 363.5374, 2497.674, 15.4921)
+43@ = Actor.CreateAsPassenger(Mission2, #WMOMIB, 36@, 0)
+44@ = Actor.CreateAsPassenger(Mission2, #BMYMIB, 37@, 0)
+45@ = Actor.Create(Mission1, #WMOMIB, 363.6662, 2500.094, 15.4921)
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_5020 
+Car.Angle(34@) = 90.0
+
+:DESERT9_5020
+08A4: set_car 34@ extra_parts_angle_to 1.0 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 9999)
+Actor.GiveWeaponAndAmmo(41@, MicroUzi, 9999)
+Actor.GiveWeaponAndAmmo(42@, MicroUzi, 9999)
+0657: car 36@ open_door 2 
+0657: car 36@ open_door 3 
+49@ = Object.Create(#CR_GUNCRATE, 365.0146, 2500.676, 15.492)
+50@ = Object.Create(#CR_CRATESTACK, 365.9573, 2502.763, 15.4921)
+51@ = Object.Create(#CR_CRATESTACK, 365.5524, 2503.46, 15.492)
+52@ = Object.Create(#CR_CRATESTACK, 364.5623, 2503.406, 15.4921)
+Object.Angle(50@) = 245.0
+0395: clear_area 0 at 435.2751 2527.523 15.871 radius 10.0 
+35@ = Car.Create(#PCJ600, 435.2751, 2527.523, 15.871)
+Car.Angle(35@) = 90.0
+053F: set_car 35@ tires_vulnerability 0 
+Actor.Angle(40@) = 340.9066
+Actor.Angle(41@) = 309.4871
+Actor.Angle(42@) = 175.4073
+0605: actor 40@ perform_animation "IDLE_ARMED" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor 41@ perform_animation "IDLE_ARMED" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor 42@ perform_animation "IDLE_ARMED" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 0 
+Actor.PutAt($PLAYER_ACTOR, 412.6561, 2530.908, 15.617)
+Actor.Angle($PLAYER_ACTOR) = 136.0
+Model.Destroy(#PCJ600)
+Model.Destroy(#BOBCAT)
+Model.Destroy(#WMOMIB)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_5470 
+05EB: assign_car 34@ to_path 149 
+06FD: set_car 34@ speed_on_path_to 0.0 
+
+:DESERT9_5470
+Camera.SetPosition(350.8692, 2488.932, 17.5906, 0.0, 0.0, 0.0)
+Camera.PointAt(351.4443, 2489.747, 17.52, 2)
+Camera.SetAtPos(367.134, 2490.174, 15.4884)
+71@ = 3 
+0085: 86@ = 32@ // (int) 
+86@ += 1000 
+
+:DESERT9_5561
+if 
+  71@ == 3 
+jf @DESERT9_5752 
+if 
+001D:   86@ > 32@ // (int) 
+jf @DESERT9_5752 
+if and
+   not Actor.Dead(45@)
+03CA:   object 52@ exists 
+jf @DESERT9_5672 
+0615: define_AS_pack_begin 66@ 
+07C9: AS_actor -1 walk_to_object 52@ then_lift_and_hold_in_hands 
+05D3: AS_actor -1 goto_point 360.2195 2500.023 15.4921 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 66@ 
+0618: assign_actor 45@ to_AS_pack 66@ 
+061B: remove_references_to_AS_pack 66@ 
+
+:DESERT9_5672
+fade 1 1000 
+if 
+  157@ == 0 
+jf @DESERT9_5720 
+0085: 86@ = 32@ // (int) 
+86@ += 4000 
+jump @DESERT9_5727 
+
+:DESERT9_5720
+86@ = 0 
+
+:DESERT9_5727
+71@ = 4 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_3' time 4000 flag 1  // ~s~Toreno needs you to plant a bomb in the plane. Stealth is out of the question so you'll need to move fast.
+
+:DESERT9_5752
+if 
+  71@ == 4 
+jf @DESERT9_5961 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_5961 
+02A3: enable_widescreen 1 
+Camera.SetPosition(438.18, 2526.193, 17.1554, 0.0, 0.0, 0.0)
+Camera.PointAt(437.2076, 2526.339, 16.9735, 2)
+Actor.PutAt($PLAYER_ACTOR, 426.895, 2529.478, 15.6483)
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_5890 
+05CB: AS_actor $PLAYER_ACTOR enter_car 35@ as_driver -2 ms 
+
+:DESERT9_5890
+00BB: show_text_lowpriority GXT 'DES9_4' time 3000 flag 1  // ~s~Use this bike to get up the plane's ramp and plant the bomb inside.
+if 
+  157@ == 0 
+jf @DESERT9_5947 
+0085: 86@ = 32@ // (int) 
+86@ += 3000 
+jump @DESERT9_5954 
+
+:DESERT9_5947
+86@ = 0 
+
+:DESERT9_5954
+71@ = 5 
+
+:DESERT9_5961
+if 
+  71@ == 5 
+jf @DESERT9_6216 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_6216 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_44' time 4000 flag 1  // ~s~Drive the bike up the plane's ramp before it takes off.
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_6061 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DESERT9_6061 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:DESERT9_6061
+56@ = Object.Create(#KB_BARREL, 0.0, 0.0, 0.0)
+Object.CollisionDetection(56@) = False
+0750: set_object 56@ visibility 0 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_6152 
+0681: attach_object 56@ to_car 34@ with_offset 0.0 -15.223 -1.489 rotation 0.0 0.0 0.0 
+
+:DESERT9_6152
+041A: 158@ = actor $PLAYER_ACTOR weapon 39 ammo 
+if 
+  158@ == 0 
+jf @DESERT9_6189 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, SachetCharges, 1)
+
+:DESERT9_6189
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0085: 86@ = 32@ // (int) 
+86@ += 3000 
+71@ = 6 
+
+:DESERT9_6216
+if 
+  71@ == 6 
+jf @DESERT9_6289 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_6289 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_A4' time 4000 flag 1  // ~s~Go! Get up the plane's ~y~ramp~s~ now!
+68@ = 2 
+
+:DESERT9_6289
+return 
+
+:DESERT9_6291
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+  73@ > 0 
+jf @DESERT9_6414 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_6414 
+Car.StorePos(34@, 74@, 75@, 76@)
+Marker.Disable(152@)
+018A: 152@ = create_checkpoint_at 74@ 75@ 76@ 
+018B: set_marker 152@ radar_mode 2 
+if 
+  -83.0 > 74@ 
+jf @DESERT9_6414 
+68@ = 8 
+71@ = 0 
+
+:DESERT9_6414
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_6694 
+Car.StorePos(35@, 148@, 149@, 150@)
+154@ = 2499.7 
+0063: 154@ -= 149@ // (float) 
+0097: make 154@ absolute_float 
+154@ /= 10.0 
+if 
+  154@ > 2.0 
+jf @DESERT9_6508 
+154@ = 2.0 
+
+:DESERT9_6508
+if 
+  0.2 > 154@ 
+jf @DESERT9_6539 
+154@ = 0.2 
+
+:DESERT9_6539
+088B: set_car 35@ form_drag_multiplier_to 154@ 
+154@ -= 2.0 
+0097: make 154@ absolute_float 
+154@ *= 50.0 
+0087: 159@ = 74@ // (float) 
+0063: 159@ -= 148@ // (float) 
+0097: make 159@ absolute_float 
+0087: 160@ = 159@ // (float) 
+160@ /= 100.0 
+if 
+  160@ > 1.0 
+jf @DESERT9_6642 
+160@ = 1.0 
+
+:DESERT9_6642
+159@ = 1.0 
+0063: 159@ -= 160@ // (float) 
+006B: 159@ *= 154@ // (float) 
+0092: 88@ = float 159@ to_integer 
+Camera.Shake(88@)
+88@ -= 256 
+0095: make 88@ absolute_integer 
+
+:DESERT9_6694
+if 
+  73@ == 0 
+jf @DESERT9_6799 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_6799 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 412.6561 2530.908 15.617 radius 5.0 5.0 5.0 
+jf @DESERT9_6799 
+0085: 72@ = 32@ // (int) 
+72@ += 8000 
+73@ = 2 
+
+:DESERT9_6799
+if 
+  73@ == 2 
+jf @DESERT9_7017 
+if or
+   Actor.Driving($PLAYER_ACTOR)
+001D:   32@ > 72@ // (int) 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 354.8564 2500.152 18.3701 radius 50.0 50.0 50.0 
+jf @DESERT9_7017 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_7017 
+0085: 72@ = 32@ // (int) 
+72@ += 1350 
+73@ = 3 
+if 
+   not Actor.Dead(40@)
+jf @DESERT9_6941 
+05E2: AS_actor 40@ kill_actor $PLAYER_ACTOR 
+
+:DESERT9_6941
+if 
+   not Actor.Dead(41@)
+jf @DESERT9_6972 
+04EB: AS_actor 41@ crouch 1 
+05E2: AS_actor 41@ kill_actor $PLAYER_ACTOR 
+
+:DESERT9_6972
+if 
+   not Actor.Dead(42@)
+jf @DESERT9_6996 
+05E2: AS_actor 42@ kill_actor $PLAYER_ACTOR 
+
+:DESERT9_6996
+if 
+   not Actor.Dead(45@)
+jf @DESERT9_7017 
+0792: disembark_instantly_actor 45@ 
+
+:DESERT9_7017
+if 
+  73@ == 3 
+jf @DESERT9_7071 
+if 
+001D:   32@ > 72@ // (int) 
+jf @DESERT9_7071 
+06FD: set_car 34@ speed_on_path_to 1.0 
+73@ = 4 
+
+:DESERT9_7071
+if 
+  73@ == 4 
+jf @DESERT9_7449 
+Object.StorePos(56@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 148@, 149@, 150@)
+0509: 146@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 148@ 149@ 
+162@ = 200.0 
+0073: 162@ /= 146@ // (float) 
+if 
+  162@ > 1.0 
+jf @DESERT9_7183 
+162@ = 1.0 
+
+:DESERT9_7183
+if 
+  0.3 > 162@ 
+jf @DESERT9_7214 
+162@ = 0.3 
+
+:DESERT9_7214
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_7238 
+06FD: set_car 34@ speed_on_path_to 162@ 
+
+:DESERT9_7238
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 15.0 15.0 5.0 
+jf @DESERT9_7319 
+if 
+  2 > 163@ 
+jf @DESERT9_7312 
+gosub @DESERT9_16202 
+163@ = 1 
+
+:DESERT9_7312
+jump @DESERT9_7344 
+
+:DESERT9_7319
+if 
+  163@ == 1 
+jf @DESERT9_7344 
+163@ = 2 
+
+:DESERT9_7344
+if 
+0474:   actor $PLAYER_ACTOR near_object_in_cube 56@ radius 4.0 1.0 1.0 sphere 0 
+jf @DESERT9_7449 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_7449 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @DESERT9_7449 
+08C6: set_actor $PLAYER_ACTOR stay_on_bike 1 
+Marker.Disable(152@)
+Player.CanMove($PLAYER_CHAR) = False
+71@ = 20 
+68@ = 3 
+041E: set_radio_station 11 
+
+:DESERT9_7449
+return 
+
+:DESERT9_7451
+439@ = 1 
+if 
+08D0:   should_skip_cutscene 
+jf @DESERT9_7549 
+if 
+  11 > 71@ 
+jf @DESERT9_7503 
+86@ = 0 
+71@ = 11 
+
+:DESERT9_7503
+if and
+  71@ > 19 
+  23 > 71@ 
+jf @DESERT9_7549 
+86@ = 0 
+71@ = 24 
+65@ = 1 
+
+:DESERT9_7549
+if 
+  71@ == 20 
+jf @DESERT9_7698 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_7698 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+060E:   car 34@ assigned_to_path 
+jf @DESERT9_7615 
+05EC: release_car 34@ from_path 
+
+:DESERT9_7615
+05EB: assign_car 34@ to_path 135 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_7653 
+Car.LockInCurrentPosition(35@) = True
+0338: set_car 35@ visibility 0 
+
+:DESERT9_7653
+0337: set_actor $PLAYER_ACTOR visibility 0 
+Car.Destroy(36@)
+Car.Destroy(37@)
+Car.Destroy(38@)
+Model.Destroy(#BOBCAT)
+04ED: load_animation "AIRPORT" 
+71@ = 21 
+
+:DESERT9_7698
+if 
+  71@ == 21 
+jf @DESERT9_7823 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 66.4737 2494.118 17.9816 position_to -43.8545 2492.902 19.8651 time 5500 smooth_transition 1 
+0920: point_camera 67.4593 2494.287 17.9942 transverse_to -44.3218 2493.184 20.7031 time 5500 smooth_transition 1 
+71@ = 22 
+0085: 86@ = 32@ // (int) 
+86@ += 4500 
+
+:DESERT9_7823
+if 
+  71@ == 22 
+jf @DESERT9_7874 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_7874 
+fade 0 1000 
+71@ = 23 
+
+:DESERT9_7874
+if 
+  71@ == 23 
+jf @DESERT9_7912 
+if 
+   not fading 
+jf @DESERT9_7912 
+71@ = 0 
+
+:DESERT9_7912
+if 
+  71@ == 24 
+jf @DESERT9_7944 
+fade 0 1000 
+71@ = 25 
+
+:DESERT9_7944
+if 
+  71@ == 25 
+jf @DESERT9_7989 
+if 
+   not fading 
+jf @DESERT9_7989 
+71@ = 0 
+65@ = 1 
+
+:DESERT9_7989
+if 
+  71@ == 0 
+jf @DESERT9_8588 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_8037 
+Car.LockInCurrentPosition(35@) = False
+0338: set_car 35@ visibility 1 
+
+:DESERT9_8037
+select_interior 9 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_8064 
+0860: link_actor $PLAYER_ACTOR to_interior 9 
+
+:DESERT9_8064
+Actor.DestroyInstantly(44@)
+44@ = Actor.Create(Mission3, #WMOMIB, 316.0887, 983.9927, 1958.138)
+Actor.Angle(44@) = 90.0
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_8127 
+0860: link_actor 44@ to_interior 9 
+
+:DESERT9_8127
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_8173 
+Actor.PutAt(44@, 317.081, 979.907, 1960.108)
+Actor.Angle(44@) = 90.0
+
+:DESERT9_8173
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_8196 
+0840: link_car 35@ to_interior 9 
+
+:DESERT9_8196
+0581: enable_radar 0 
+85@ = Object.Create(#D9_RUNWAY, 305.191, 1030.752, 1938.134)
+07C0: load_path 150 
+07C0: load_path 152 
+
+:DESERT9_8233
+if or
+87C1:   not path 150 available 
+87C1:   not path 152 available 
+jf @DESERT9_8265 
+wait 0 
+jump @DESERT9_8233 
+
+:DESERT9_8265
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_8381 
+Car.PutAt(35@, 331.8417, 1038.314, 1956.177)
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DESERT9_8325 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:DESERT9_8325
+00BE: text_clear_all 
+0860: link_actor $PLAYER_ACTOR to_interior 9 
+0337: set_actor $PLAYER_ACTOR visibility 1 
+05EB: assign_car 35@ to_path 150 
+06C5: release_car 35@ from_path 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 35@)
+jf @DESERT9_8381 
+036A: put_actor $PLAYER_ACTOR in_car 35@ 
+
+:DESERT9_8381
+Camera.SetAtPos(331.8417, 1038.314, 1956.177)
+04E4: refresh_game_renderer_at 331.8417 1038.314 
+wait 800 
+0925: restore_camera_to_user_defined 
+Camera.SetPosition(320.1115, 1035.373, 1948.154, 0.0, 0.0, 0.0)
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+0085: 168@ = 32@ // (int) 
+wait 500 
+0085: 86@ = 32@ // (int) 
+86@ += 2200 
+Model.Load(#GUN_PARA)
+
+:DESERT9_8492
+if 
+   not Model.Available(#GUN_PARA)
+jf @DESERT9_8519 
+wait 0 
+jump @DESERT9_8492 
+
+:DESERT9_8519
+fade 1 600 
+00BB: show_text_lowpriority GXT 'DES9_A5' time 4000 flag 1  // ~S~You're trapped on the plane.
+if 
+  65@ == 1 
+jf @DESERT9_8581 
+71@ = 11 
+86@ = 0 
+jump @DESERT9_8588 
+
+:DESERT9_8581
+71@ = 1 
+
+:DESERT9_8588
+if and
+  71@ > 0 
+  20 > 71@ 
+jf @DESERT9_8620 
+gosub @DESERT9_17116 
+
+:DESERT9_8620
+if 
+  435@ == 0 
+jf @DESERT9_8664 
+if 
+001D:   32@ > 168@ // (int) 
+jf @DESERT9_8664 
+435@ = 1 
+
+:DESERT9_8664
+if 
+03CA:   object 85@ exists 
+jf @DESERT9_8704 
+Object.StorePos(85@, 164@, 165@, 166@)
+165@ += 0.05 
+
+:DESERT9_8704
+if 
+  71@ == 1 
+jf @DESERT9_8769 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_8769 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+71@ = 2 
+0085: 86@ = 32@ // (int) 
+86@ += 300 
+
+:DESERT9_8769
+if 
+  71@ == 2 
+jf @DESERT9_8901 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_8901 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_8827 
+Car.Destroy(34@)
+
+:DESERT9_8827
+Camera.SetPosition(317.7203, 1027.3, 1949.071, 0.0, 0.0, 0.0)
+Camera.PointAt(316.9413, 1026.675, 1949.027, 2)
+0085: 86@ = 32@ // (int) 
+86@ += 1000 
+71@ = 3 
+
+:DESERT9_8901
+if 
+  71@ == 3 
+jf @DESERT9_9050 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_9050 
+Object.Destroy(85@)
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 317.7203 1027.3 1949.071 position_to 317.7203 1027.3 1949.071 time 1000 smooth_transition 1 
+0920: point_camera 316.9413 1026.675 1949.027 transverse_to 317.3408 1026.377 1949.13 time 1000 smooth_transition 1 
+71@ = 4 
+0085: 86@ = 32@ // (int) 
+86@ += 1500 
+
+:DESERT9_9050
+if 
+  71@ == 4 
+jf @DESERT9_9409 
+0085: 169@ = 86@ // (int) 
+0062: 169@ -= 32@ // (int) 
+0093: 170@ = integer 169@ to_float 
+170@ /= 2000.0 
+170@ -= 1.0 
+0097: make 170@ absolute_float 
+Object.StorePos(96@, 292@, 312@, 332@)
+if 
+  312@ > 1020.214 
+jf @DESERT9_9301 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_9176 
+05EB: assign_car 35@ to_path 152 
+
+:DESERT9_9176
+0673: AS_actor $PLAYER_ACTOR dive_to_offset 1.0 0.0 time_on_ground 1000 ms 
+71@ = 6 
+0085: 86@ = 32@ // (int) 
+86@ += 2000 
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera 317.7203 1027.3 1949.071 position_to 317.7203 1027.3 1949.071 time 2000 smooth_transition 1 
+0920: point_camera 317.3408 1026.377 1949.13 transverse_to 317.1811 1027.991 1948.589 time 2000 smooth_transition 1 
+
+:DESERT9_9301
+0087: 148@ = 292@ // (float) 
+148@ -= 317.5107 
+0087: 149@ = 312@ // (float) 
+149@ -= 1024.815 
+0087: 150@ = 332@ // (float) 
+150@ -= 1949.35 
+006B: 148@ *= 170@ // (float) 
+006B: 149@ *= 170@ // (float) 
+006B: 150@ *= 170@ // (float) 
+148@ += 317.5107 
+149@ += 1024.815 
+150@ += 1949.35 
+
+:DESERT9_9409
+if 
+  71@ == 5 
+jf @DESERT9_9441 
+Object.StorePos(96@, 292@, 312@, 332@)
+
+:DESERT9_9441
+if 
+  71@ == 6 
+jf @DESERT9_9501 
+Object.StorePos(96@, 292@, 312@, 332@)
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_9501 
+71@ = 11 
+00BE: text_clear_all 
+
+:DESERT9_9501
+if 
+  71@ == 7 
+jf @DESERT9_9674 
+0925: restore_camera_to_user_defined 
+Camera.SetPosition(316.0625, 988.6853, 1957.741, 0.0, 0.0, 0.0)
+Camera.PointAt(316.0338, 987.7417, 1958.07, 2)
+71@ = 8 
+0085: 86@ = 32@ // (int) 
+86@ += 2000 
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_9674 
+Actor.PutAt(44@, 315.7535, 983.4348, 1958.265)
+Actor.Angle(44@) = 0.0
+0605: actor 44@ perform_animation "FUCKU" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 3000 
+
+:DESERT9_9674
+if 
+  71@ == 8 
+jf @DESERT9_9898 
+if 
+   Model.Available(#GUN_PARA)
+jf @DESERT9_9893 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_9886 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_45' time 4000 flag 1  // ~s~Use a satchel charge to destroy the plane.
+Camera.SetPosition(317.5727, 1024.791, 1949.854, 0.0, 0.0, 0.0)
+Camera.PointAt(317.4102, 1023.809, 1949.95, 2)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 317.9964, 1023.477, 1949.032)
+Actor.Angle($PLAYER_ACTOR) = 121.0
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_9863 
+Actor.GiveWeaponAndAmmo(44@, Parachute, 1)
+0A27: set_actor 44@ death_pickups_persist 1 
+
+:DESERT9_9863
+71@ = 9 
+0085: 86@ = 32@ // (int) 
+86@ += 4000 
+
+:DESERT9_9886
+jump @DESERT9_9898 
+
+:DESERT9_9893
+Model.Load(#GUN_PARA)
+
+:DESERT9_9898
+if 
+  71@ == 9 
+jf @DESERT9_10160 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_10160 
+Camera.SetPosition(318.8293, 975.9706, 1960.759, 0.0, 0.0, 0.0)
+Camera.PointAt(318.3584, 976.8294, 1960.557, 2)
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_10121 
+Actor.PutAt(44@, 317.4929, 981.1245, 1958.806)
+Actor.Angle(44@) = 90.0
+
+:DESERT9_10032
+if 
+84EE:   not animation "AIRPORT" loaded 
+jf @DESERT9_10076 
+04ED: load_animation "AIRPORT" 
+wait 0 
+jump @DESERT9_10032 
+
+:DESERT9_10076
+0605: actor 44@ perform_animation "THRW_BARL_THRW" IFP "AIRPORT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:DESERT9_10121
+00BB: show_text_lowpriority GXT 'DES9_46' time 4000 flag 1  // ~s~Jump out the plane with this guard's parachute after detonating the bomb.
+71@ = 10 
+0085: 86@ = 32@ // (int) 
+86@ += 1100 
+
+:DESERT9_10160
+if 
+  71@ == 10 
+jf @DESERT9_10227 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_10227 
+435@ = 2 
+71@ = 11 
+0085: 86@ = 32@ // (int) 
+86@ += 2900 
+
+:DESERT9_10227
+if 
+  71@ == 11 
+jf @DESERT9_11103 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_11103 
+Model.Load(#GUN_PARA)
+
+:DESERT9_10269
+if 
+   not Model.Available(#GUN_PARA)
+jf @DESERT9_10296 
+wait 0 
+jump @DESERT9_10269 
+
+:DESERT9_10296
+0925: restore_camera_to_user_defined 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DESERT9_10346 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 318.1163 1024.791 1948.729 
+jump @DESERT9_10366 
+
+:DESERT9_10346
+Actor.PutAt($PLAYER_ACTOR, 318.1163, 1024.791, 1948.729)
+
+:DESERT9_10366
+Actor.Angle($PLAYER_ACTOR) = 121.0
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_10423 
+if 
+060E:   car 35@ assigned_to_path 
+jf @DESERT9_10413 
+05EC: release_car 35@ from_path 
+
+:DESERT9_10413
+Car.Destroy(35@)
+Model.Destroy(#PCJ600)
+
+:DESERT9_10423
+Actor.Angle($PLAYER_ACTOR) = 225.0
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_10469 
+Actor.PutAt(44@, 317.4565, 980.5405, 1958.935)
+
+:DESERT9_10469
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_10506 
+if 
+060E:   car 35@ assigned_to_path 
+jf @DESERT9_10506 
+05EC: release_car 35@ from_path 
+
+:DESERT9_10506
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Object.Destroy(85@)
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_10547 
+Car.Destroy(34@)
+
+:DESERT9_10547
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DESERT9_10570 
+Player.SprintMode($PLAYER_CHAR) = True
+
+:DESERT9_10570
+064B: 174@ = create_particle "CLOUDFAST" at 315.2994 1028.151 1936.464 type 1 
+064C: make_particle 174@ visible 
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+40@ = Actor.Create(Mission3, #WMOMIB, 313.4011, 1012.37, 1951.588)
+41@ = Actor.Create(Mission3, #BMYMIB, 312.5008, 1004.962, 1953.297)
+42@ = Actor.Create(Mission3, #WMOMIB, 318.7976, 988.7245, 1957.044)
+43@ = Actor.Create(Mission3, #BMYMIB, 313.1324, 991.6313, 1956.374)
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_10758 
+Car.LockInCurrentPosition(35@) = False
+0338: set_car 35@ visibility 1 
+
+:DESERT9_10758
+0337: set_actor $PLAYER_ACTOR visibility 1 
+07DD: set_actor 40@ attack_rate 100 // previously known as temper_to 
+07DD: set_actor 41@ attack_rate 100 // previously known as temper_to 
+07DD: set_actor 42@ attack_rate 100 // previously known as temper_to 
+07DD: set_actor 43@ attack_rate 100 // previously known as temper_to 
+081A: set_actor 40@ weapon_skill_to 2 
+081A: set_actor 41@ weapon_skill_to 2 
+081A: set_actor 42@ weapon_skill_to 2 
+081A: set_actor 43@ weapon_skill_to 2 
+081A: set_actor 44@ weapon_skill_to 2 
+Actor.Angle(40@) = 288.4161
+Actor.Angle(41@) = 298.9878
+Actor.Angle(42@) = 85.3329
+Actor.Angle(43@) = 308.2083
+if 
+   not Actor.Dead(40@)
+jf @DESERT9_10891 
+0860: link_actor 40@ to_interior 9 
+
+:DESERT9_10891
+if 
+   not Actor.Dead(41@)
+jf @DESERT9_10914 
+0860: link_actor 41@ to_interior 9 
+
+:DESERT9_10914
+if 
+   not Actor.Dead(42@)
+jf @DESERT9_10937 
+0860: link_actor 42@ to_interior 9 
+
+:DESERT9_10937
+if 
+   not Actor.Dead(43@)
+jf @DESERT9_10960 
+0860: link_actor 43@ to_interior 9 
+
+:DESERT9_10960
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_11037 
+Actor.PutAt(44@, 317.881, 979.907, 1960.108)
+if 
+   not Actor.HasWeapon(44@, 46)
+jf @DESERT9_11037 
+Actor.GiveWeaponAndAmmo(44@, Parachute, 1)
+0A27: set_actor 44@ death_pickups_persist 1 
+07DD: set_actor 44@ attack_rate 100 // previously known as temper_to 
+
+:DESERT9_11037
+68@ = 4 
+178@ = 0 
+439@ = 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_11089 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 1, 1, 0, 0)
+
+:DESERT9_11089
+171@ = 1 
+$1511 = 1 
+
+:DESERT9_11103
+return 
+
+:DESERT9_11105
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+0735:   is_keyboard_key_pressed 49 
+jf @DESERT9_11158 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_11158 
+05E9: NOP 35@ 152 
+
+:DESERT9_11158
+if 
+0735:   is_keyboard_key_pressed 50 
+jf @DESERT9_11210 
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_11210 
+if 
+06AA:   NOP_false 35@ 
+jf @DESERT9_11210 
+0752: NOP 35@ 
+
+:DESERT9_11210
+if 
+  178@ == 0 
+jf @DESERT9_11502 
+if or
+0A3A:   player $PLAYER_CHAR last_model_shot #CARGO_TEST 
+0A3A:   player $PLAYER_CHAR last_model_shot #CARGO_STUFF 
+0A3A:   player $PLAYER_CHAR last_model_shot #CARGO_STORE 
+jf @DESERT9_11287 
+0A3B: clear_player $PLAYER_CHAR last_model_shot 
+020C: create_explosion_with_radius 7 at 316.0 1000.0 1954.6 
+
+:DESERT9_11287
+if 
+0356:   explosion_type -1 in_cube_cornerA 325.0714 967.935 1971.838 cornerB 310.7184 1047.574 1939.683 
+jf @DESERT9_11502 
+178@ = 1 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_11370 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+
+:DESERT9_11370
+159@ = 972.5745 
+88@ = 0 
+
+:DESERT9_11387
+if 
+  1050.574 >= 159@ 
+jf @DESERT9_11502 
+0087: 160@ = 159@ // (float) 
+160@ -= 5.0 
+if 
+0356:   explosion_type -1 in_cube_cornerA 325.0714 159@ 1971.838 cornerB 310.7184 160@ 1939.683 
+jf @DESERT9_11478 
+462@(88@,15i) = 1 
+
+:DESERT9_11478
+88@ += 1 
+159@ += 5.0 
+jump @DESERT9_11387 
+
+:DESERT9_11502
+if 
+  178@ == 1 
+jf @DESERT9_11527 
+gosub @DESERT9_20002 
+
+:DESERT9_11527
+if 
+  173@ == 0 
+jf @DESERT9_11584 
+if 
+   Actor.Dead(44@)
+jf @DESERT9_11584 
+00BB: show_text_lowpriority GXT 'DES9_27' time 4000 flag 1  // ~s~Pick up the parachute.
+173@ = 1 
+
+:DESERT9_11584
+if 
+  173@ == 1 
+jf @DESERT9_11709 
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 46)
+jf @DESERT9_11709 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 46 
+00BE: text_clear_all 
+if 
+  178@ == 0 
+jf @DESERT9_11686 
+00BB: show_text_lowpriority GXT 'DES9_A1' time 4000 flag 1  // ~s~You have the parachute.
+00BB: show_text_lowpriority GXT 'DES9_A2' time 4000 flag 1  // ~s~Place a satchel charge on the plane then get out the back.
+jump @DESERT9_11702 
+
+:DESERT9_11686
+00BB: show_text_lowpriority GXT 'DES9_26' time 4000 flag 1  // ~s~You have the parachute, now get the hell out of there!
+
+:DESERT9_11702
+173@ = 2 
+
+:DESERT9_11709
+if 
+  180@ == 0 
+jf @DESERT9_11788 
+if 
+  1942.27 > $TEMPVAR_Z_COORD 
+jf @DESERT9_11788 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_11779 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+
+:DESERT9_11779
+180@ = 1 
+09D9: detonate_all_satchel_charges 
+
+:DESERT9_11788
+if 
+  173@ == 2 
+jf @DESERT9_11981 
+if 
+  1940.27 > $TEMPVAR_Z_COORD 
+jf @DESERT9_11981 
+if 
+  178@ == 1 
+jf @DESERT9_11901 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_11894 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 46 
+0650: destroy_particle 174@ 
+68@ = 9 
+71@ = 0 
+$1902 = 1 
+
+:DESERT9_11894
+jump @DESERT9_11981 
+
+:DESERT9_11901
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DESERT9_11929 
+$11033 = 0 
+
+:DESERT9_11929
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_39' time 4000 flag 1  // ~r~You were supposed to destroy the plane!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+gosub @DESERT9_22019 
+select_interior 0 
+jump @DESERT9_52 
+
+:DESERT9_11981
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_12201 
+Actor.StorePos(44@, 148@, 149@, 150@)
+if and
+  1940.0 > 150@ 
+8818:   not actor $PLAYER_ACTOR in_air 
+jf @DESERT9_12201 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_29' time 5000 flag 1  // ~r~The guard with the parachute fell out the plane!
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Pickup.Destroy($PICKUP_PARACHUTE)
+wait 1000 
+fade 0 1000 
+
+:DESERT9_12088
+if 
+fading 
+jf @DESERT9_12112 
+wait 0 
+jump @DESERT9_12088 
+
+:DESERT9_12112
+select_interior 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 408.6996, 2538.272, 15.6057)
+Actor.Angle($PLAYER_ACTOR) = 139.0
+gosub @DESERT9_22019 
+wait 1500 
+fade 1 1000 
+
+:DESERT9_12170
+if 
+fading 
+jf @DESERT9_12194 
+wait 0 
+jump @DESERT9_12170 
+
+:DESERT9_12194
+jump @DESERT9_52 
+
+:DESERT9_12201
+if and
+  1938.0 > $TEMPVAR_Z_COORD 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_12931 
+00BE: text_clear_all 
+if 
+  2 > 173@ 
+jf @DESERT9_12931 
+fade 0 1000 
+
+:DESERT9_12254
+if 
+fading 
+jf @DESERT9_12278 
+wait 0 
+jump @DESERT9_12254 
+
+:DESERT9_12278
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Camera.SetAtPos(125.1739, 1074.067, 12.0)
+Model.Load(#ADMIRAL)
+Model.Load(#WFYRI)
+04ED: load_animation "PARACHUTE" 
+
+:DESERT9_12328
+if or
+   not Model.Available(#ADMIRAL)
+   not Model.Available(#WFYRI)
+84EE:   not animation "PARACHUTE" loaded 
+jf @DESERT9_12372 
+wait 0 
+jump @DESERT9_12328 
+
+:DESERT9_12372
+Camera.SetPosition(125.1739, 1074.067, 12.8138, 0.0, 0.0, 0.0)
+Camera.PointAt(124.591, 1073.27, 12.9688, 2)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 122.3556, 1069.892, 99.6832)
+181@ = Car.Create(#ADMIRAL, 119.3556, 1069.892, 13.665)
+182@ = Actor.CreateAsPassenger(CivMale, #WFYRI, 181@, 0)
+Model.Destroy(#WFYRI)
+Model.Destroy(#ADMIRAL)
+Model.Destroy(#SATCHEL)
+Model.Destroy(#BOMB)
+Car.Angle(181@) = 180.0
+Actor.PutAt($PLAYER_ACTOR, 119.3, 1070.47, 189.3266)
+083C: set_actor $PLAYER_ACTOR velocity_in_direction_XYZ 0.0 0.0 0.0 
+fade 1 1000 
+
+:DESERT9_12572
+if 
+fading 
+jf @DESERT9_12596 
+wait 0 
+jump @DESERT9_12572 
+
+:DESERT9_12596
+Actor.PutAt($PLAYER_ACTOR, 119.3, 1070.47, 80.3266)
+083C: set_actor $PLAYER_ACTOR velocity_in_direction_XYZ 0.0 0.0 0.0 
+
+:DESERT9_12636
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_12918 
+0819: 184@ = actor $PLAYER_ACTOR distance_from_ground 
+if and
+  4.8 > 184@ 
+  183@ == 0 
+jf @DESERT9_12907 
+183@ = 1 
+0829: actor $PLAYER_ACTOR perform_animation "FALL_SKYDIVE_DIE" IFP_file "PARACHUTE" 1000.0 time 0 and_dies 
+if 
+   not Car.Wrecked(181@)
+jf @DESERT9_12907 
+0689: set_car 181@ remove_door 2 removed_door_visible 1 
+0689: set_car 181@ remove_door 4 removed_door_visible 1 
+0689: set_car 181@ remove_door 3 removed_door_visible 1 
+04FE: deflate_tire 0 on_car 181@ 
+04FE: deflate_tire 2 on_car 181@ 
+04FE: deflate_tire 1 on_car 181@ 
+0730: car 181@ damage_door 4 
+0730: car 181@ damage_door 0 
+0730: car 181@ damage_door 6 
+0730: car 181@ damage_door 6 
+07D5: set_car 181@ velocity_in_direction_XYZ 0.0 0.0 -0.15 rotation_velocitiesXY 0.0 0.0 unk 0.0 
+if 
+   not Actor.Dead(182@)
+jf @DESERT9_12907 
+0687: clear_actor 182@ task 
+05CF: AS_actor 182@ exit_car 181@ in_direction 119.3556 1069.892 13.665 
+
+:DESERT9_12907
+wait 0 
+jump @DESERT9_12636 
+
+:DESERT9_12918
+04EF: release_animation "PARACHUTE" 
+
+:DESERT9_12931
+if 
+  $TEMPVAR_Y_COORD > 1033.0 
+jf @DESERT9_12963 
+Camera.Shake(40)
+jump @DESERT9_12967 
+
+:DESERT9_12963
+Camera.Shake(10)
+
+:DESERT9_12967
+gosub @DESERT9_17116 
+return 
+
+:DESERT9_12976
+02A3: enable_widescreen 1 
+$1511 = 1 
+
+:DESERT9_12987
+if 
+  185@ == 0 
+jf @DESERT9_13136 
+select_interior 0 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_13030 
+Car.Destroy(34@)
+
+:DESERT9_13030
+34@ = Car.Create(#ANDROM, 316.212, 1003.495, 1957.529)
+05EB: assign_car 34@ to_path 134 
+Car.Angle(34@) = 180.0
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 2.0 -2.0 rotation 0.0 0.0 0.0 tilt 0.0 switchstyle 2 
+0085: 86@ = 32@ // (int) 
+86@ += 4000 
+185@ = 1 
+
+:DESERT9_13136
+if 
+  185@ == 1 
+jf @DESERT9_13190 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_13190 
+$1511 = 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+return 
+
+:DESERT9_13190
+wait 0 
+jump @DESERT9_12987 
+return 
+
+:DESERT9_13203
+select_interior 0 
+
+:DESERT9_13207
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DESERT9_13233 
+jump @DESERT9_21934 
+
+:DESERT9_13233
+if 
+0735:   is_keyboard_key_pressed 84 
+jf @DESERT9_13248 
+
+:DESERT9_13248
+jump @DESERT9_13207 
+return 
+
+:DESERT9_13257
+if 
+  71@ == 0 
+jf @DESERT9_13339 
+186@ = Car.Create(#ANDROM, 339.9034, 2499.805, 15.4884)
+05EB: assign_car 186@ to_path 134 
+06FD: set_car 186@ speed_on_path_to 1.0 
+0085: 86@ = 32@ // (int) 
+86@ += 1000 
+71@ = 1 
+
+:DESERT9_13339
+if 
+  71@ == 1 
+jf @DESERT9_13563 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_13563 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_42' time 5000 flag 1  // ~r~You were blown up in the plane.
+0337: set_actor $PLAYER_ACTOR visibility 0 
+select_interior 0 
+34@ = Car.Create(#ANDROM, 339.9034, 2499.805, 15.4884)
+Car.SetImmunities(34@, 1, 1, 1, 1, 1)
+05EB: assign_car 34@ to_path 134 
+Car.Health(34@) = 350
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_13522 
+06FD: set_car 186@ speed_on_path_to 0.5 
+067A: put_camera_on_car 186@ with_offset 15.0 15.0 10.0 point_to_car 34@ tilt 15.0 switchstyle 2 
+0338: set_car 186@ visibility 0 
+
+:DESERT9_13522
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+203@ = 1 
+71@ = 3 
+0085: 86@ = 32@ // (int) 
+86@ += 5000 
+
+:DESERT9_13563
+if 
+  203@ == 1 
+jf @DESERT9_13706 
+if 
+001D:   32@ > 204@ // (int) 
+jf @DESERT9_13706 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_13706 
+Car.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  6 > 206@ 
+jf @DESERT9_13668 
+020C: create_explosion_with_radius 7 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @DESERT9_13681 
+
+:DESERT9_13668
+0565: create_soundless_explosion_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 type 7 
+
+:DESERT9_13681
+206@ += 1 
+0209: 204@ = random_int_in_ranges 100 250 
+005A: 204@ += 32@ // (int) 
+
+:DESERT9_13706
+if 
+  71@ == 3 
+jf @DESERT9_13773 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_13773 
+71@ = 4 
+fade 0 1000 
+0085: 86@ = 32@ // (int) 
+86@ += 1000 
+
+:DESERT9_13773
+if 
+  71@ == 4 
+jf @DESERT9_13817 
+if 
+   not fading 
+jf @DESERT9_13817 
+0970: teleport_in_override_restart // 016Eh 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+jump @DESERT9_18 
+
+:DESERT9_13817
+return 
+
+:DESERT9_13819
+if 
+  71@ == 0 
+jf @DESERT9_14233 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_14233 
+Camera.SetPosition(-158.5012, 2492.161, 31.0353, 0.0, 0.0, 0.0)
+Camera.PointAt(-157.5606, 2492.445, 31.2209, 2)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+06FD: set_car 34@ speed_on_path_to 1.0 
+if 
+   not Car.Wrecked(36@)
+jf @DESERT9_13965 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 36@)
+jf @DESERT9_13965 
+Car.Destroy(36@)
+
+:DESERT9_13965
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_13986 
+Car.Destroy(186@)
+
+:DESERT9_13986
+if 
+   not Car.Wrecked(37@)
+jf @DESERT9_14026 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @DESERT9_14026 
+Car.Destroy(37@)
+
+:DESERT9_14026
+if 
+   not Car.Wrecked(38@)
+jf @DESERT9_14066 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @DESERT9_14066 
+Car.Destroy(38@)
+
+:DESERT9_14066
+414@ = 0 
+
+:DESERT9_14073
+if 
+  8 > 414@ 
+jf @DESERT9_14114 
+Actor.DestroyInstantly(40@(414@,8i))
+414@ += 1 
+jump @DESERT9_14073 
+
+:DESERT9_14114
+414@ = 0 
+
+:DESERT9_14121
+if 
+  15 > 414@ 
+jf @DESERT9_14162 
+Object.Destroy(225@(414@,15i))
+414@ += 1 
+jump @DESERT9_14121 
+
+:DESERT9_14162
+414@ = 0 
+
+:DESERT9_14169
+if 
+  5 > 414@ 
+jf @DESERT9_14210 
+Object.Destroy(49@(414@,6i))
+414@ += 1 
+jump @DESERT9_14169 
+
+:DESERT9_14210
+71@ = 1 
+0085: 86@ = 32@ // (int) 
+86@ += 3000 
+
+:DESERT9_14233
+if 
+  71@ == 1 
+jf @DESERT9_14324 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_14324 
+00BB: show_text_lowpriority GXT 'DES9_32' time 4000 flag 1  // ~r~You failed to get on the plane.
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+jump @DESERT9_18 
+
+:DESERT9_14324
+return 
+
+:DESERT9_14326
+008A: $7508 = 32@ // (int) 
+0060: $7508 -= $7509 // (int) 
+if 
+  71@ == 0 
+jf @DESERT9_14706 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_14391 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+
+:DESERT9_14391
+008A: $7509 = 32@ // (int) 
+008A: $7508 = 32@ // (int) 
+0060: $7508 -= $7509 // (int) 
+083D: get_actor $PLAYER_ACTOR velocity_in_direction_XYZ $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+186@ = Car.Create(#ANDROM, 339.9034, 2499.805, 15.4884)
+05EB: assign_car 186@ to_path 134 
+06FD: set_car 186@ speed_on_path_to 0.5 
+Actor.PutAt($PLAYER_ACTOR, 177.9967, 1099.621, 1977.491)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+083C: set_actor $PLAYER_ACTOR velocity_in_direction_XYZ $TEMPVAR_FLOAT_1 -30.0 $TEMPVAR_FLOAT_3 
+0338: set_car 186@ visibility 1 
+08A4: set_car 186@ extra_parts_angle_to 1.0 
+select_interior 0 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 46 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+0085: 86@ = 32@ // (int) 
+86@ += 5300 
+197@ = 175.5399 
+198@ = 1097.84 
+199@ = 1978.912 
+200@ = 185.4931 
+201@ = 1028.03 
+202@ = 1763.16 
+190@ = 175.0676 
+191@ = 1097.025 
+192@ = 1979.246 
+193@ = 185.4931 
+194@ = 1028.03 
+195@ = 1763.16 
+71@ = 999 
+203@ = 1 
+
+:DESERT9_14706
+if 
+  203@ == 1 
+jf @DESERT9_14849 
+if 
+001D:   32@ > 204@ // (int) 
+jf @DESERT9_14849 
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_14849 
+Car.StorePos(186@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+  6 > 206@ 
+jf @DESERT9_14811 
+020C: create_explosion_with_radius 7 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+jump @DESERT9_14824 
+
+:DESERT9_14811
+0565: create_soundless_explosion_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 type 7 
+
+:DESERT9_14824
+206@ += 1 
+0209: 204@ = random_int_in_ranges 100 250 
+005A: 204@ += 32@ // (int) 
+
+:DESERT9_14849
+if 
+   not 69@ == 1 
+jf @DESERT9_14918 
+if 
+  205@ == 0 
+jf @DESERT9_14918 
+if 
+  $7508 > 4070 
+jf @DESERT9_14918 
+gosub @DESERT9_21934 
+205@ = 1 
+
+:DESERT9_14918
+if 
+  $7508 > 8070 
+jf @DESERT9_14959 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+jump @DESERT9_18 
+
+:DESERT9_14959
+if 
+  71@ == 999 
+jf @DESERT9_15236 
+008F: 196@ = integer $7508 to_float 
+196@ /= 8070.0 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0089: 187@ = $TEMPVAR_FLOAT_1 // (float) 
+0087: 189@ = 196@ // (float) 
+189@ *= 7.5 
+005D: 189@ += $TEMPVAR_FLOAT_3 // (float) 
+189@ -= 2.5 
+0089: 188@ = $TEMPVAR_FLOAT_2 // (float) 
+188@ -= 5.0 
+0087: 187@ = 200@ // (float) 
+0063: 187@ -= 197@ // (float) 
+0087: 188@ = 201@ // (float) 
+0063: 188@ -= 198@ // (float) 
+0087: 189@ = 202@ // (float) 
+0063: 189@ -= 199@ // (float) 
+008F: 196@ = integer $7508 to_float 
+196@ /= 8070.0 
+006B: 187@ *= 196@ // (float) 
+006B: 188@ *= 196@ // (float) 
+006B: 189@ *= 196@ // (float) 
+005B: 187@ += 197@ // (float) 
+005B: 188@ += 198@ // (float) 
+005B: 189@ += 199@ // (float) 
+067C: put_camera_on_actor $PLAYER_ACTOR offset 0.0 5.0 1.5 rotation 0.0 -5.0 -1.5 tilt 0.0 switchstyle 2 
+71@ = 1020 
+
+:DESERT9_15236
+if 
+  71@ == 1020 
+jf @DESERT9_15265 
+Actor.Angle($PLAYER_ACTOR) = 180.0
+
+:DESERT9_15265
+  71@ == 40 
+jf @DESERT9_15294 
+0085: 88@ = 32@ // (int) 
+71@ = 41 
+
+:DESERT9_15294
+if 
+   not 69@ == 1 
+jf @DESERT9_15401 
+if 
+  71@ == 41 
+jf @DESERT9_15401 
+008A: $7510 = 32@ // (int) 
+0066: $7510 -= 88@ // (int) 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_15401 
+71@ = 42 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+gosub @DESERT9_21934 
+jump @DESERT9_18 
+
+:DESERT9_15401
+if 
+  71@ == 1 
+jf @DESERT9_15636 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_15636 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_42' time 5000 flag 1  // ~r~You were blown up in the plane.
+0337: set_actor $PLAYER_ACTOR visibility 0 
+select_interior 0 
+34@ = Car.Create(#ANDROM, 339.9034, 2499.805, 15.4884)
+Car.SetImmunities(34@, 1, 1, 1, 1, 1)
+05EB: assign_car 34@ to_path 134 
+Car.Health(34@) = 350
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_15584 
+06FD: set_car 186@ speed_on_path_to 0.5 
+067A: put_camera_on_car 186@ with_offset 15.0 15.0 10.0 point_to_car 34@ tilt 15.0 switchstyle 2 
+0338: set_car 186@ visibility 0 
+
+:DESERT9_15584
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+020C: create_explosion_with_radius 7 at 179.0872 1127.109 1959.805 
+71@ = 10 
+0085: 86@ = 32@ // (int) 
+86@ += 80 
+
+:DESERT9_15636
+if 
+  71@ == 10 
+jf @DESERT9_15695 
+020C: create_explosion_with_radius 7 at 178.0018 1120.319 1963.485 
+0085: 86@ = 32@ // (int) 
+86@ += 80 
+71@ = 11 
+
+:DESERT9_15695
+if 
+  71@ == 11 
+jf @DESERT9_15754 
+020C: create_explosion_with_radius 7 at 177.9817 1114.131 1967.356 
+0085: 86@ = 32@ // (int) 
+86@ += 80 
+71@ = 12 
+
+:DESERT9_15754
+if 
+  71@ == 12 
+jf @DESERT9_15814 
+020C: create_explosion_with_radius 7 at 179.386 1109.919 1972.504 
+0085: 86@ = 32@ // (int) 
+86@ += 3760 
+71@ = 3 
+
+:DESERT9_15814
+if 
+  71@ == 2 
+jf @DESERT9_15832 
+
+:DESERT9_15832
+if 
+  71@ == 3 
+jf @DESERT9_15892 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_15892 
+71@ = 4 
+0085: 86@ = 32@ // (int) 
+86@ += 6000 
+
+:DESERT9_15892
+if 
+  71@ == 4 
+jf @DESERT9_15938 
+if 
+001D:   32@ > 86@ // (int) 
+jf @DESERT9_15938 
+0970: teleport_in_override_restart // 016Eh 
+jump @DESERT9_18 
+
+:DESERT9_15938
+return 
+Camera.SetPosition(-189.0987, 2493.957, 66.7341, 0.0, 0.0, 0.0)
+Camera.PointAt(-188.1982, 2494.105, 66.3252, 2)
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_16018 
+
+:DESERT9_16018
+0085: 57@ = 32@ // (int) 
+57@ += 4000 
+
+:DESERT9_16034
+wait 0 
+if 
+  58@ == 0 
+jf @DESERT9_16105 
+if 
+001D:   32@ > 57@ // (int) 
+jf @DESERT9_16105 
+fade 0 1000 
+0085: 57@ = 32@ // (int) 
+57@ += 1000 
+58@ = 1 
+
+:DESERT9_16105
+if 
+  58@ == 1 
+jf @DESERT9_16193 
+if 
+001D:   32@ > 57@ // (int) 
+jf @DESERT9_16193 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 0 
+00BB: show_text_lowpriority GXT 'DES9_32' time 5000 flag 1  // ~r~You failed to get on the plane.
+gosub @DESERT9_21911 
+jump @DESERT9_18 
+
+:DESERT9_16193
+jump @DESERT9_16034 
+return 
+
+:DESERT9_16202
+if 
+  207@ == 0 
+jf @DESERT9_16588 
+208@ = 2000 
+209@ = 2300 
+210@ = 2600 
+211@ = 4000 
+212@ = 4300 
+213@ = 4600 
+214@ = 6000 
+215@ = 6300 
+216@ = 6600 
+217@ = 8000 
+218@ = 8300 
+219@ = 8600 
+220@ = 10000 
+221@ = 10300 
+222@ = 10600 
+240@ = 1 
+241@ = 1 
+242@ = 1 
+243@ = 1 
+244@ = 1 
+245@ = 1 
+246@ = 1 
+247@ = 1 
+248@ = 0 
+249@ = 1 
+250@ = 1 
+251@ = 1 
+252@ = 1 
+253@ = 1 
+254@ = 1 
+255@ = 0 
+
+:DESERT9_16452
+if 
+  15 > 255@ 
+jf @DESERT9_16581 
+0209: 223@ = random_int_in_ranges -500 500 
+005A: 208@(255@,15i) += 32@ // (int) 
+005A: 208@(255@,15i) += 223@ // (int) 
+255@ += 1 
+005A: 208@(255@,15i) += 32@ // (int) 
+005A: 208@(255@,15i) += 223@ // (int) 
+255@ += 1 
+005A: 208@(255@,15i) += 32@ // (int) 
+005A: 208@(255@,15i) += 223@ // (int) 
+255@ += 1 
+jump @DESERT9_16452 
+
+:DESERT9_16581
+207@ = 1 
+
+:DESERT9_16588
+if 
+  207@ == 1 
+jf @DESERT9_17114 
+if 
+  15 > 224@ 
+jf @DESERT9_17114 
+if 
+001D:   32@ > 208@(224@,15i) // (int) 
+jf @DESERT9_17114 
+277@ = 0 
+
+:DESERT9_16654
+if 
+  15 > 277@ 
+jf @DESERT9_16772 
+if 
+03CA:   object 225@(277@,15i) exists 
+jf @DESERT9_16758 
+if 
+82CC:   not object 225@(277@,15i) bounding_sphere_visible 
+jf @DESERT9_16758 
+Object.StorePos(225@(277@,15i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+0024:   $TEMPVAR_FLOAT_1 > $TEMPVAR_X_COORD // (float) 
+jf @DESERT9_16758 
+Object.Destroy(225@(277@,15i))
+
+:DESERT9_16758
+277@ += 1 
+jump @DESERT9_16654 
+
+:DESERT9_16772
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_16796 
+02E3: 259@ = car 34@ speed 
+
+:DESERT9_16796
+0087: 257@ = 74@ // (float) 
+257@ += 18.538 
+258@ = 15.61 
+0087: 260@ = 259@ // (float) 
+260@ -= 18.0 
+260@ *= -1.0 
+if 
+  240@(224@,15i) == 1 
+jf @DESERT9_17030 
+0208: 261@ = random_float_in_ranges -10.0 10.0 
+225@(224@,15i) = Object.Create(#KB_BARREL, 257@, 75@, 258@)
+Object.Angle(225@(224@,15i)) = 90.0
+Object.ToggleInMovingList(225@(224@,15i)) = False
+Object.ToggleInMovingList(225@(224@,15i)) = True
+Object.Throw(225@(224@,15i), 260@, 261@, 0.0)
+0453: set_object 225@(224@,15i) XYZ_rotation 0.0 0.0 0.0 
+0087: 151@ = 260@ // (float) 
+151@ *= 2.0 
+05A1: set_object 225@(224@,15i) rotation_velocity_about_an_axis 0.0 151@ 0.0 through_center_of_body 
+
+:DESERT9_17030
+if 
+  240@(224@,15i) == 2 
+jf @DESERT9_17107 
+256@ = Car.Create(#BOBCAT, 257@, 75@, 258@)
+Car.Angle(256@) = 270.0
+Car.SetSpeedInstantly(256@, 260@)
+07DB: set_car 256@ rotation_velocity_XYZ 0.0 23.0 0.0 through_center_of_mass 
+
+:DESERT9_17107
+224@ += 1 
+
+:DESERT9_17114
+return 
+
+:DESERT9_17116
+if 
+  111@ == 0 
+jf @DESERT9_17582 
+111@ = 1 
+0085: 112@ = 32@ // (int) 
+112@ += 1000 
+278@ = 316.465 
+282@ = 981.694 
+286@ = 1958.96 
+279@ = 315.248 
+283@ = 981.694 
+287@ = 1958.96 
+280@ = 316.465 
+284@ = 981.909 
+288@ = 1959.92 
+281@ = 315.248 
+285@ = 981.909 
+289@ = 1959.92 
+290@ = -0.996 
+291@ = 0.232 
+352@ = 3 
+353@ = 4 
+354@ = 4 
+355@ = 5 
+356@ = 6 
+357@ = 1 
+358@ = 3 
+359@ = 3 
+360@ = 4 
+361@ = 5 
+362@ = 2 
+363@ = 2 
+364@ = 6 
+365@ = 6 
+366@ = 7 
+367@ = 6 
+368@ = 6 
+369@ = 7 
+370@ = 7 
+371@ = 8 
+372@ = 0 
+373@ = 0 
+374@ = 300 
+375@ = 0 
+376@ = 0 
+377@ = 0 
+378@ = 0 
+379@ = 0 
+380@ = 0 
+381@ = 0 
+382@ = 0 
+383@ = 0 
+384@ = 300 
+385@ = 0 
+386@ = 300 
+387@ = 0 
+388@ = 300 
+389@ = 0 
+390@ = 300 
+391@ = 0 
+
+:DESERT9_17582
+if 
+  111@ == 1 
+jf @DESERT9_17902 
+393@ = 0 
+392@ = 0 
+
+:DESERT9_17614
+if 
+  4 > 392@ 
+jf @DESERT9_17895 
+440@ = 0.0 
+
+:DESERT9_17642
+if 
+  5.0 > 440@ 
+jf @DESERT9_17881 
+0087: 292@(393@,20f) = 278@(392@,4f) // (float) 
+0087: 312@(393@,20f) = 440@ // (float) 
+006B: 312@(393@,20f) *= 290@ // (float) 
+005B: 312@(393@,20f) += 282@(392@,4f) // (float) 
+0087: 332@(393@,20f) = 440@ // (float) 
+006B: 332@(393@,20f) *= 291@ // (float) 
+005B: 332@(393@,20f) += 286@(392@,4f) // (float) 
+91@(393@,20i) = Object.Create(#KB_BARREL, 292@(393@,20f), 312@(393@,20f), 332@(393@,20f))
+0085: 114@ = 32@ // (int) 
+0453: set_object 91@(393@,20i) XYZ_rotation 0.0 13.0 90.0 
+Object.ToggleInMovingList(91@(393@,20i)) = False
+Object.ToggleInMovingList(91@(393@,20i)) = True
+Object.KeepInMemory(91@(393@,20i)) = True
+393@ += 1 
+440@ += 1.0 
+jump @DESERT9_17642 
+
+:DESERT9_17881
+392@ += 1 
+jump @DESERT9_17614 
+
+:DESERT9_17895
+111@ = 2 
+
+:DESERT9_17902
+if 
+  111@ == 2 
+jf @DESERT9_20000 
+414@ = 0 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+  439@ == 0 
+jf @DESERT9_18012 
+if 
+  990.0 >= $TEMPVAR_Y_COORD 
+jf @DESERT9_18012 
+439@ = 1 
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_18012 
+077A: set_actor 44@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:DESERT9_18012
+if 
+  60@ == 0 
+jf @DESERT9_18083 
+if 
+  1021.0 > $TEMPVAR_Y_COORD 
+jf @DESERT9_18083 
+if 
+   not Actor.Dead(40@)
+jf @DESERT9_18083 
+077A: set_actor 40@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+60@ = 1 
+
+:DESERT9_18083
+if 
+  61@ == 0 
+jf @DESERT9_18154 
+if 
+  1011.0 > $TEMPVAR_Y_COORD 
+jf @DESERT9_18154 
+if 
+   not Actor.Dead(41@)
+jf @DESERT9_18154 
+077A: set_actor 41@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+61@ = 1 
+
+:DESERT9_18154
+if 
+  62@ == 0 
+jf @DESERT9_18225 
+if 
+  1000.0 > $TEMPVAR_Y_COORD 
+jf @DESERT9_18225 
+if 
+   not Actor.Dead(42@)
+jf @DESERT9_18225 
+077A: set_actor 42@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+62@ = 1 
+
+:DESERT9_18225
+if 
+  63@ == 0 
+jf @DESERT9_18296 
+if 
+  1000.0 > $TEMPVAR_Y_COORD 
+jf @DESERT9_18296 
+if 
+   not Actor.Dead(43@)
+jf @DESERT9_18296 
+077A: set_actor 43@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+63@ = 1 
+
+:DESERT9_18296
+if 
+  439@ == 0 
+jf @DESERT9_18494 
+if or
+  1021.0 > $TEMPVAR_Y_COORD 
+  435@ == 1 
+jf @DESERT9_18494 
+if 
+001D:   32@ > 436@ // (int) 
+jf @DESERT9_18494 
+0085: 436@ = 32@ // (int) 
+436@ += 6500 
+0085: 437@ = 32@ // (int) 
+435@ += 1 
+if 
+   not Actor.Dead(44@)
+jf @DESERT9_18494 
+if 
+04EE:   animation "AIRPORT" loaded 
+jf @DESERT9_18483 
+0605: actor 44@ perform_animation "THRW_BARL_THRW" IFP "AIRPORT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 3000 
+jump @DESERT9_18494 
+
+:DESERT9_18483
+04ED: load_animation "AIRPORT" 
+
+:DESERT9_18494
+if 
+  20 > 414@ 
+jf @DESERT9_20000 
+if 
+002D:   435@ >= 352@(414@,20i) // (int) 
+jf @DESERT9_19986 
+if 
+  415@(414@,20i) == 0 
+jf @DESERT9_18656 
+0085: 438@ = 437@ // (int) 
+005A: 438@ += 372@(414@,20i) // (int) 
+if 
+001D:   32@ > 438@ // (int) 
+jf @DESERT9_18656 
+415@(414@,20i) = 1 
+if 
+  414@ == 5 
+jf @DESERT9_18656 
+Object.PutAt(96@, 315.1264, 986.6496, 1957.926)
+415@(414@,20i) = 6 
+
+:DESERT9_18656
+if 
+  415@(414@,20i) == 1 
+jf @DESERT9_18736 
+if 
+  10 > 414@ 
+jf @DESERT9_18714 
+415@(414@,20i) = 2 
+jump @DESERT9_18725 
+
+:DESERT9_18714
+415@(414@,20i) = 3 
+
+:DESERT9_18725
+Object.CollisionDetection(91@(414@,20i)) = False
+
+:DESERT9_18736
+if 
+  415@(414@,20i) == 2 
+jf @DESERT9_18823 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 981.691 1959.418 speed 0.0 0.183 0.0412 collision_check 0 
+jf @DESERT9_18823 
+415@(414@,20i) = 4 
+
+:DESERT9_18823
+if 
+  415@(414@,20i) == 3 
+jf @DESERT9_18910 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 981.909 1960.339 speed 0.0 0.183 0.0412 collision_check 0 
+jf @DESERT9_18910 
+415@(414@,20i) = 5 
+
+:DESERT9_18910
+if 
+  415@(414@,20i) == 4 
+jf @DESERT9_18997 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 984.242 1958.532 speed 0.0 0.287 0.1 collision_check 0 
+jf @DESERT9_18997 
+415@(414@,20i) = 5 
+
+:DESERT9_18997
+if 
+  415@(414@,20i) == 5 
+jf @DESERT9_19084 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 984.242 1958.532 speed 0.0 0.21 0.162 collision_check 0 
+jf @DESERT9_19084 
+415@(414@,20i) = 6 
+
+:DESERT9_19084
+if 
+  415@(414@,20i) == 6 
+jf @DESERT9_19171 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 1027.961 1948.424 speed 0.0 0.244 0.0564 collision_check 0 
+jf @DESERT9_19171 
+415@(414@,20i) = 7 
+
+:DESERT9_19171
+if 
+  415@(414@,20i) == 7 
+jf @DESERT9_19258 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 1039.494 1942.693 speed 0.0 0.432 0.2145 collision_check 0 
+jf @DESERT9_19258 
+415@(414@,20i) = 8 
+
+:DESERT9_19258
+if 
+  415@(414@,20i) == 8 
+jf @DESERT9_19345 
+if 
+034E: move_object 91@(414@,20i) to 292@(414@,20f) 1086.909 1908.631 speed 0.0 0.882 0.6645 collision_check 0 
+jf @DESERT9_19345 
+415@(414@,20i) = 9 
+
+:DESERT9_19345
+if 
+  415@(414@,20i) == 9 
+jf @DESERT9_19389 
+0750: set_object 91@(414@,20i) visibility 0 
+415@(414@,20i) = 10 
+
+:DESERT9_19389
+if 
+001D:   32@ > 113@ // (int) 
+jf @DESERT9_19623 
+if and
+   not 2 > 415@(414@,20i) 
+   not 415@(414@,20i) >= 8 
+jf @DESERT9_19623 
+Object.StorePos(91@(414@,20i), 292@(414@,20f), 144@, 145@)
+0089: 148@ = $TEMPVAR_X_COORD // (float) 
+0063: 148@ -= 292@(414@,20f) // (float) 
+0089: 149@ = $TEMPVAR_Y_COORD // (float) 
+0063: 149@ -= 144@ // (float) 
+0089: 150@ = $TEMPVAR_Z_COORD // (float) 
+0063: 150@ -= 145@ // (float) 
+0097: make 148@ absolute_float 
+if 
+  0.6 > 148@ 
+jf @DESERT9_19623 
+if and
+  0.5 > 149@ 
+  149@ > 0.0 
+jf @DESERT9_19623 
+if 
+  0.6 > 150@ 
+jf @DESERT9_19623 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05BB: AS_actor $PLAYER_ACTOR fall_down 0 time_on_ground 0 
+0085: 113@ = 32@ // (int) 
+113@ += 1500 
+
+:DESERT9_19623
+444@ = 0 
+
+:DESERT9_19630
+if 
+  4 > 444@ 
+jf @DESERT9_19907 
+if 
+   not Actor.Dead(40@(444@,8i))
+jf @DESERT9_19893 
+if and
+   not 2 > 415@(414@,20i) 
+   not 415@(414@,20i) >= 8 
+jf @DESERT9_19893 
+Actor.StorePos(40@(444@,8i), 441@, 442@, 443@)
+Object.StorePos(91@(414@,20i), 292@(414@,20f), 144@, 145@)
+0087: 148@ = 441@ // (float) 
+0063: 148@ -= 292@(414@,20f) // (float) 
+0087: 149@ = 442@ // (float) 
+0063: 149@ -= 144@ // (float) 
+0087: 150@ = 443@ // (float) 
+0063: 150@ -= 145@ // (float) 
+0097: make 148@ absolute_float 
+if 
+  0.6 > 148@ 
+jf @DESERT9_19893 
+if and
+  0.5 > 149@ 
+  149@ > 0.0 
+jf @DESERT9_19893 
+if 
+  0.6 > 150@ 
+jf @DESERT9_19893 
+0792: disembark_instantly_actor 40@(444@,8i) 
+05BB: AS_actor 40@(444@,8i) fall_down 0 time_on_ground 0 
+
+:DESERT9_19893
+444@ += 1 
+jump @DESERT9_19630 
+
+:DESERT9_19907
+116@(414@,20f) += 20.0 
+0453: set_object 91@(414@,20i) XYZ_rotation 0.0 116@(414@,20f) 90.0 
+if 
+  116@(414@,20f) == 360.0 
+jf @DESERT9_19986 
+116@(414@,20f) = 0.0 
+
+:DESERT9_19986
+414@ += 1 
+jump @DESERT9_18494 
+
+:DESERT9_20000
+return 
+
+:DESERT9_20002
+88@ = 0 
+
+:DESERT9_20009
+if 
+  15 > 88@ 
+jf @DESERT9_20466 
+if 
+  462@(88@,15i) == 1 
+jf @DESERT9_20083 
+0085: 447@(88@,15i) = 32@ // (int) 
+447@(88@,15i) += 120 
+462@(88@,15i) = 2 
+
+:DESERT9_20083
+if 
+  462@(88@,15i) == 2 
+jf @DESERT9_20452 
+if 
+001D:   32@ > 447@(88@,15i) // (int) 
+jf @DESERT9_20452 
+462@(88@,15i) = 3 
+0085: 89@ = 88@ // (int) 
+89@ -= 1 
+0085: 90@ = 88@ // (int) 
+90@ += 1 
+if 
+  0 > 89@ 
+jf @DESERT9_20194 
+89@ = 0 
+
+:DESERT9_20194
+if 
+  90@ > 14 
+jf @DESERT9_20219 
+90@ = 14 
+
+:DESERT9_20219
+if 
+  462@(89@,15i) == 0 
+jf @DESERT9_20252 
+462@(89@,15i) = 1 
+
+:DESERT9_20252
+if 
+  462@(90@,15i) == 0 
+jf @DESERT9_20285 
+462@(90@,15i) = 1 
+
+:DESERT9_20285
+0093: 161@ = integer 88@ to_float 
+160@ = 5.0 
+006B: 160@ *= 161@ // (float) 
+159@ = 967.5745 
+005B: 159@ += 160@ // (float) 
+0087: 160@ = 159@ // (float) 
+160@ += 5.0 
+if and
+0027:   160@ > $TEMPVAR_Y_COORD // (float) 
+0026:   $TEMPVAR_Y_COORD > 159@ // (float) 
+jf @DESERT9_20399 
+if 
+  $FREEFALL_STAGE == 0 
+jf @DESERT9_20399 
+69@ = 1 
+
+:DESERT9_20399
+159@ += 2.25 
+0087: 160@ = 161@ // (float) 
+160@ *= -1.19 
+160@ += 1962.38 
+020C: create_explosion_with_radius 7 at 315.8258 159@ 160@ 
+
+:DESERT9_20452
+88@ += 1 
+jump @DESERT9_20009 
+
+:DESERT9_20466
+if 
+  69@ == 1 
+jf @DESERT9_20525 
+05BB: AS_actor $PLAYER_ACTOR fall_down 0 time_on_ground 0 
+68@ = 7 
+71@ = 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'DES9_42' time 4000 flag 1  // ~r~You were blown up in the plane.
+
+:DESERT9_20525
+return 
+
+:DESERT9_20527
+if 
+   not 477@ == 0 
+jf @DESERT9_20727 
+if 
+  478@ == 0 
+jf @DESERT9_20605 
+478@ = 1 
+0085: 479@ = 32@ // (int) 
+480@ = 0 
+0085: 682@ = 479@ // (int) 
+005A: 682@ += 481@(480@,10i) // (int) 
+
+:DESERT9_20605
+if 
+  478@ == 1 
+jf @DESERT9_20727 
+if 
+001D:   32@ > 682@ // (int) 
+jf @DESERT9_20727 
+0085: 626@ = 491@(480@,10i) // (int) 
+480@ += 1 
+501@ -= 1 
+if 
+  501@ == 0 
+jf @DESERT9_20707 
+477@ = 0 
+478@ = 0 
+jump @DESERT9_20727 
+
+:DESERT9_20707
+0085: 682@ = 479@ // (int) 
+005A: 682@ += 481@(480@,10i) // (int) 
+
+:DESERT9_20727
+0871: init_jump_table 629@ total_jumps 6 default_jump 0 @DESERT9_21756 jumps 0 @DESERT9_20790 1 @DESERT9_20898 2 @DESERT9_21427 3 @DESERT9_21503 4 @DESERT9_21561 5 @DESERT9_21675 -1 @DESERT9_21756 
+
+:DESERT9_20790
+05AA: 504@s = 'DES9_BA' // @s = 'short'  // ~z~Ah, what's Toreno up to now?
+05AA: 506@s = 'DES9_BB' // @s = 'short'  // ~z~I'm feeling a little exposed here!
+04AF: 583@ = 13802 // = constant 
+04AF: 584@ = 13803 // = constant 
+632@ = 0 
+633@ = 0 
+008B: 672@ = $PLAYER_ACTOR // (int) 
+629@ = 1 
+03CF: load_wav 583@ as 1 
+03CF: load_wav 584@ as 2 
+623@ = 1 
+624@ = 2 
+jump @DESERT9_21756 
+
+:DESERT9_20898
+if 
+   not 626@ == 0 
+jf @DESERT9_21420 
+if 
+001D:   32@ > 630@ // (int) 
+jf @DESERT9_21420 
+if and
+03D2:   wav 1 ended 
+03D2:   wav 2 ended 
+jf @DESERT9_21420 
+if 
+003B:   623@ == 626@ // (int) 
+jf @DESERT9_20987 
+625@ = 1 
+jump @DESERT9_21050 
+
+:DESERT9_20987
+if 
+003B:   624@ == 626@ // (int) 
+jf @DESERT9_21020 
+625@ = 2 
+jump @DESERT9_21050 
+
+:DESERT9_21020
+625@ = 1 
+0085: 623@ = 626@ // (int) 
+040D: unload_wav 1 
+03CF: load_wav 582@(626@,40i) as 1 
+
+:DESERT9_21050
+if 
+03D0:   wav 625@ loaded 
+jf @DESERT9_21408 
+if 
+   not 631@(626@,40i) == 0 
+jf @DESERT9_21181 
+0085: 679@ = 631@(626@,40i) // (int) 
+0085: 680@ = 671@(679@,7i) // (int) 
+if 
+   not Actor.Dead(680@)
+jf @DESERT9_21181 
+0949: link_wav 625@ to_actor 680@ 
+if 
+894D:   not actor 680@ mutally_active 
+jf @DESERT9_21174 
+678@ = 1 
+0967: actor 680@ move_mouth 15000 ms 
+jump @DESERT9_21181 
+
+:DESERT9_21174
+094E: set_actor 680@ mute_pain_audio 0 
+
+:DESERT9_21181
+if 
+  631@(626@,40i) == 0 
+jf @DESERT9_21210 
+678@ = 1 
+
+:DESERT9_21210
+if 
+  678@ == 1 
+jf @DESERT9_21401 
+03D1: play_wav 625@ 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 502@(626@,40s) time 10000 flag 1 
+629@ += 1 
+678@ = 0 
+626@ += 1 
+0085: 627@ = 626@ // (int) 
+if 
+   not 582@(626@,40i) == 0 
+jf @DESERT9_21401 
+if 
+  625@ == 1 
+jf @DESERT9_21363 
+if 
+803B:   not  624@ == 626@ // (int) 
+jf @DESERT9_21356 
+03CF: load_wav 582@(626@,40i) as 2 
+0085: 624@ = 626@ // (int) 
+
+:DESERT9_21356
+jump @DESERT9_21401 
+
+:DESERT9_21363
+if 
+803B:   not  623@ == 626@ // (int) 
+jf @DESERT9_21401 
+03CF: load_wav 582@(626@,40i) as 1 
+0085: 623@ = 626@ // (int) 
+
+:DESERT9_21401
+jump @DESERT9_21420 
+
+:DESERT9_21408
+03CF: load_wav 582@(626@,40i) as 625@ 
+
+:DESERT9_21420
+jump @DESERT9_21756 
+
+:DESERT9_21427
+if 
+03D2:   wav 625@ ended 
+jf @DESERT9_21457 
+629@ += 1 
+jump @DESERT9_21496 
+
+:DESERT9_21457
+if 
+056D:   actor 680@ defined 
+jf @DESERT9_21496 
+if 
+   Actor.Dead(680@)
+jf @DESERT9_21496 
+629@ += 1 
+
+:DESERT9_21496
+jump @DESERT9_21756 
+
+:DESERT9_21503
+040D: unload_wav 625@ 
+622@(625@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(680@)
+jf @DESERT9_21547 
+0968: actor 680@ stop_mouth 
+094F: enable_actor 680@ pain_audio 
+
+:DESERT9_21547
+629@ += 1 
+jump @DESERT9_21756 
+
+:DESERT9_21561
+626@ += 1 
+if 
+   not 582@(626@,40i) == 0 
+jf @DESERT9_21614 
+03CF: load_wav 582@(626@,40i) as 625@ 
+0085: 622@(625@,3i) = 626@ // (int) 
+
+:DESERT9_21614
+628@ -= 1 
+if 
+   not 628@ > 0 
+jf @DESERT9_21653 
+626@ = 0 
+jump @DESERT9_21661 
+
+:DESERT9_21653
+0085: 626@ = 627@ // (int) 
+
+:DESERT9_21661
+629@ = 1 
+jump @DESERT9_21756 
+
+:DESERT9_21675
+629@ = 1 
+626@ = 0 
+628@ = 0 
+477@ = 0 
+501@ = 0 
+040D: unload_wav 625@ 
+622@(625@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(680@)
+jf @DESERT9_21749 
+094F: enable_actor 680@ pain_audio 
+
+:DESERT9_21749
+jump @DESERT9_21756 
+
+:DESERT9_21756
+return 
+
+:DESERT9_21758
+if 
+  171@ == 1 
+jf @DESERT9_21909 
+if 
+  684@ == 0 
+jf @DESERT9_21833 
+0085: 683@ = 32@ // (int) 
+683@ += 5000 
+00BB: show_text_lowpriority GXT 'DES9_A9' time 4000 flag 1  // ~s~The plane is packed with explosives! Be careful firing weapons onboard.
+684@ = 1 
+
+:DESERT9_21833
+if 
+  684@ == 1 
+jf @DESERT9_21909 
+if 
+001D:   32@ > 683@ // (int) 
+jf @DESERT9_21909 
+0085: 683@ = 32@ // (int) 
+683@ += 4500 
+00BB: show_text_lowpriority GXT 'DES9_A6' time 4500 flag 1  // ~s~You'll need a parachute to get off the plane. One of the crew members will have one.
+684@ = 2 
+
+:DESERT9_21909
+return 
+
+:DESERT9_21911
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Pickup.Destroy($PICKUP_PARACHUTE)
+return 
+
+:DESERT9_21934
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 40)
+jf @DESERT9_21959 
+0555: remove_weapon 40 from_actor $PLAYER_ACTOR 
+
+:DESERT9_21959
+$TORENO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'DESERT9'  // Stowaway
+01E3: show_text_1number_styled GXT 'M_PASS' number 20000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 20000
+030C: progress_made = 1 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:DESERT9_22019
+$1902 = 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_22057 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+
+:DESERT9_22057
+0881: set_player $PLAYER_CHAR able_to_shoot_weapons 1 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_22098 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+select_interior 0 
+0337: set_actor $PLAYER_ACTOR visibility 1 
+
+:DESERT9_22098
+0925: restore_camera_to_user_defined 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT9_22145 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Player.SprintMode($PLAYER_CHAR) = False
+
+:DESERT9_22145
+07FB: set_interior 'DESHOUS' access 1  // Abandoned AC tower
+Model.Destroy(#ADMIRAL)
+Model.Destroy(#WFYRI)
+Model.Destroy(#PCJ600)
+Model.Destroy(#ANDROM)
+Model.Destroy(#BOBCAT)
+Model.Destroy(#WMOMIB)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+Model.Destroy(#BMYMIB)
+Model.Destroy(#BOMB)
+Model.Destroy(#SATCHEL)
+Model.Destroy(#GUN_PARA)
+04EF: release_animation "AIRPORT" 
+04EF: release_animation "CARRY" 
+Model.Destroy(#KNIFECUR)
+0873: release_path 150 
+0873: release_path 152 
+0873: release_path 149 
+0873: release_path 167 
+0873: release_path 168 
+0296: unload_special_actor 1 
+0873: release_path 149 
+414@ = 0 
+
+:DESERT9_22283
+if 
+  8 > 414@ 
+jf @DESERT9_22344 
+if 
+   not Actor.Dead(40@(414@,8i))
+jf @DESERT9_22330 
+Actor.DestroyInstantly(40@(414@,8i))
+
+:DESERT9_22330
+414@ += 1 
+jump @DESERT9_22283 
+
+:DESERT9_22344
+414@ = 0 
+
+:DESERT9_22351
+if 
+  15 > 414@ 
+jf @DESERT9_22392 
+Object.Destroy(225@(414@,15i))
+414@ += 1 
+jump @DESERT9_22351 
+
+:DESERT9_22392
+031A: remove_all_fires 
+if 
+   not Car.Wrecked(36@)
+jf @DESERT9_22434 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 36@)
+jf @DESERT9_22434 
+Car.Destroy(36@)
+
+:DESERT9_22434
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_22455 
+Car.Destroy(186@)
+
+:DESERT9_22455
+if 
+   not Car.Wrecked(37@)
+jf @DESERT9_22495 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @DESERT9_22495 
+Car.Destroy(37@)
+
+:DESERT9_22495
+if 
+   not Car.Wrecked(38@)
+jf @DESERT9_22535 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 38@)
+jf @DESERT9_22535 
+Car.Destroy(38@)
+
+:DESERT9_22535
+if 
+   not Car.Wrecked(34@)
+jf @DESERT9_22556 
+Car.Destroy(34@)
+
+:DESERT9_22556
+if 
+   not Car.Wrecked(35@)
+jf @DESERT9_22610 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 35@)
+jf @DESERT9_22610 
+0840: link_car 35@ to_interior 0 
+0338: set_car 35@ visibility 1 
+Car.RemoveReferences(35@)
+
+:DESERT9_22610
+if 
+   not 68@ == 9 
+jf @DESERT9_22656 
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_22649 
+Car.Destroy(186@)
+
+:DESERT9_22649
+jump @DESERT9_22677 
+
+:DESERT9_22656
+if 
+   not Car.Wrecked(186@)
+jf @DESERT9_22677 
+Car.RemoveReferences(186@)
+
+:DESERT9_22677
+0650: destroy_particle 174@ 
+Marker.Disable(152@)
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DESERT9_22710 
+Player.SprintMode($PLAYER_CHAR) = False
+
+:DESERT9_22710
+08C6: set_actor $PLAYER_ACTOR stay_on_bike 0 
+Marker.Disable(152@)
+Marker.Disable(153@)
+0581: enable_radar 1 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$1511 = 0 
+return 
+return

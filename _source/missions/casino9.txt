@@ -1,0 +1,2068 @@
+:CASINO9
+thread 'CASINO9' 
+gosub @CASINO9_94 
+if 
+wasted_or_busted 
+jf @CASINO9_85 
+$11033 = 1 
+$11029 = 0.0 
+$11032 = 2158.42 
+$11031 = 1681.77 
+$11030 = 10.28 
+gosub @CASINO9_12252 
+
+:CASINO9_85
+gosub @CASINO9_12624 
+end_thread 
+
+:CASINO9_94
+increment_mission_attempts 
+$ONMISSION = 1 
+054C: use_GXT_table 'CASINO9' 
+Actor.PutAt($PLAYER_ACTOR, 2175.412, 1681.548, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2233.5 1712.8 radius 10.0 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+$PLAYER_IN_INTERIOR = 1 
+select_interior 2 
+02E4: load_cutscene_data 'CAS_9A1' 
+
+:CASINO9_197
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASINO9_221 
+wait 0 
+jump @CASINO9_197 
+
+:CASINO9_221
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASINO9_230
+if 
+82E9:   not cutscene_reached_end 
+jf @CASINO9_254 
+wait 0 
+jump @CASINO9_230 
+
+:CASINO9_254
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CASINO9_269
+if 
+fading 
+jf @CASINO9_293 
+wait 0 
+jump @CASINO9_269 
+
+:CASINO9_293
+if 
+856A:   not cutscene_skipped 
+jf @CASINO9_413 
+02E4: load_cutscene_data 'CAS_9A2' 
+
+:CASINO9_317
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASINO9_341 
+wait 0 
+jump @CASINO9_317 
+
+:CASINO9_341
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASINO9_350
+if 
+82E9:   not cutscene_reached_end 
+jf @CASINO9_374 
+wait 0 
+jump @CASINO9_350 
+
+:CASINO9_374
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CASINO9_389
+if 
+fading 
+jf @CASINO9_413 
+wait 0 
+jump @CASINO9_389 
+
+:CASINO9_413
+select_interior 0 
+08F4: set_max_group_members 99 
+create_thread @A_CONT 
+Camera.SetAtPos(2175.412, 1681.548, 9.8203)
+Model.Load(#DODO)
+Model.Load(#FCR900)
+
+:CASINO9_456
+if or
+   not Model.Available(#DODO)
+   not Model.Available(#FCR900)
+jf @CASINO9_488 
+wait 0 
+jump @CASINO9_456 
+
+:CASINO9_488
+set_weather 10 
+68@ = 0 
+if 
+  68@ == 1 
+jf @CASINO9_548 
+34@ = Car.Create(#DODO, 0.0, 0.0, 0.0)
+35@ = Marker.CreateAboveCar(34@)
+
+:CASINO9_548
+36@ = 0 
+Camera.SetBehindPlayer
+0923: enable_air_traffic 0 
+37@ = Car.Create(#FCR900, 2163.249, 1679.976, 9.8125)
+Car.Angle(37@) = 350.0
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+09FF: set_restart_closest_to 1581.374 1768.996 9.8203 
+fade 1 500 
+00BC: show_text_highpriority GXT 'CAS9_08' time 8500 flag 1  // ~s~Get to the ~y~airport~s~.
+018A: 43@ = create_checkpoint_at 1707.828 1606.639 9.055 
+50@ = 0 
+36@ = 0 
+39@ = 0 
+47@ = 0 
+53@ = 1465.0 
+54@ = 5200.0 
+55@ = 200.0 
+59@ = 1465.0 
+60@ = 5220.0 
+61@ = 215.0 
+
+:CASINO9_757
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CASINO9_783 
+jump @CASINO9_12555 
+
+:CASINO9_783
+if 
+  47@ == 0 
+jf @CASINO9_922 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 1707.828 1606.639 radius 4.0 4.0 
+jf @CASINO9_915 
+Marker.Disable(43@)
+34@ = Car.Create(#DODO, 1279.625, 1361.605, 9.8203)
+Car.Angle(34@) = 270.0
+35@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 35@ type_to 1 
+00BC: show_text_highpriority GXT 'CAS9_09' time 6000 flag 1  // ~s~Steal the ~b~plane~s~ in the hangar.
+47@ += 1 
+
+:CASINO9_915
+jump @CASINO9_1786 
+
+:CASINO9_922
+if 
+   not Car.Wrecked(34@)
+jf @CASINO9_1758 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @CASINO9_1699 
+if 
+075C:   marker 35@ enabled 
+jf @CASINO9_1035 
+Marker.Disable(35@)
+018A: 43@ = create_checkpoint_at 53@ 54@ 55@ 
+00BE: text_clear_all 
+if 
+  36@ == 0 
+jf @CASINO9_1035 
+00BC: show_text_highpriority GXT 'CAS9_50' time 8000 flag 1  // ~s~The hitmen's flight is due to land soon, intercept the ~y~plane~s~ before it gets to Las Venturas.
+36@ += 1 
+
+:CASINO9_1035
+Car.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 53@ 54@ 
+0871: init_jump_table 39@ total_jumps 4 default_jump 0 @CASINO9_1692 jumps 0 @CASINO9_1129 1 @CASINO9_1183 2 @CASINO9_1307 3 @CASINO9_1424 -1 @CASINO9_1692 -1 @CASINO9_1692 -1 @CASINO9_1692 
+
+:CASINO9_1129
+if 
+  $DISTANCE_BETWEEN_POINTS > 4400.0 
+jf @CASINO9_1157 
+jump @CASINO9_1692 
+
+:CASINO9_1157
+Model.Load(#SHAMAL)
+Model.Load(#WMYPLT)
+Model.Destroy(#FCR900)
+Car.RemoveReferences(37@)
+39@ += 1 
+
+:CASINO9_1183
+if or
+  $DISTANCE_BETWEEN_POINTS > 600.0 
+   not Model.Available(#SHAMAL)
+   not Model.Available(#WMYPLT)
+jf @CASINO9_1220 
+jump @CASINO9_1692 
+
+:CASINO9_1220
+Marker.Disable(43@)
+38@ = Car.Create(#SHAMAL, 53@, 54@, 55@)
+Car.Angle(38@) = 180.0
+08E6: set_plane 38@ landing_gear 1 
+Car.LockInCurrentPosition(38@) = True
+40@ = Actor.CreateAsDriver(Mission2, #WMYPLT, 38@)
+43@ = Marker.CreateAboveCar(38@)
+018B: set_marker 43@ radar_mode 2 
+Marker.SetColor(43@, 4)
+39@ += 1 
+
+:CASINO9_1307
+if 
+  $DISTANCE_BETWEEN_POINTS > 300.0 
+jf @CASINO9_1335 
+jump @CASINO9_1692 
+
+:CASINO9_1335
+0087: 60@ = 54@ // (float) 
+60@ += 20.0 
+0088: $TEMPVAR_FLOAT_2 = 60@ // (float) 
+$TEMPVAR_FLOAT_2 -= 1.0 
+06D5: 48@ = create_racing_checkpoint_at 59@ 60@ 61@ point_to 59@ $TEMPVAR_FLOAT_2 61@ type 3 radius 3.0 
+00BC: show_text_highpriority GXT 'CAS9_51' time 8000 flag 1  // ~s~Get behind the ~y~plane~s~ and fly into the ~r~corona~s~.
+39@ += 1 
+
+:CASINO9_1424
+if 
+   not Car.Wrecked(38@)
+jf @CASINO9_1685 
+007F: 54@ -= frame_delta_time * 0.75 // (float) 
+088C: put_car 38@ at 53@ 54@ 55@ // versionB 
+0087: 60@ = 54@ // (float) 
+60@ += 20.0 
+07F3: move_racing_checkpoint 48@ to 59@ 60@ 61@ 
+0088: $TEMPVAR_FLOAT_3 = 61@ // (float) 
+$TEMPVAR_FLOAT_3 -= 3.0 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 59@ 60@ $TEMPVAR_FLOAT_3 radius 4.0 4.0 4.0 sphere 0 in_car 
+jf @CASINO9_1609 
+$TEMPVAR_ANGLE = Car.Angle(34@)
+if and
+  240.0 > $TEMPVAR_ANGLE 
+  $TEMPVAR_ANGLE > 120.0 
+jf @CASINO9_1602 
+jump @CASINO9_1793 
+
+:CASINO9_1602
+jump @CASINO9_1616 
+
+:CASINO9_1609
+32@ = 0 
+
+:CASINO9_1616
+if 
+  3000.0 >= 54@ 
+jf @CASINO9_1685 
+070F: plane 38@ fly_direction 180.0 altitude_between 200.0 and 200.0 
+50@ = 1 
+05AA: 51@s = 'CAS9_52' // @s = 'short'  // ~r~The hitmen's plane reached Las Venturas.
+jump @CASINO9_12252 
+
+:CASINO9_1685
+jump @CASINO9_1692 
+
+:CASINO9_1692
+jump @CASINO9_1751 
+
+:CASINO9_1699
+if 
+875C:   not marker 35@ enabled 
+jf @CASINO9_1751 
+00BC: show_text_highpriority GXT 'CAS9_04' time 8000 flag 1  // ~s~Get back in the ~b~plane~s~ you need to catch the hitmen.
+35@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 35@ type_to 1 
+Marker.Disable(43@)
+
+:CASINO9_1751
+jump @CASINO9_1786 
+
+:CASINO9_1758
+50@ = 1 
+05AA: 51@s = 'CAS9_F1' // @s = 'short'  // ~r~You destroyed the plane.
+jump @CASINO9_12252 
+
+:CASINO9_1786
+jump @CASINO9_757 
+
+:CASINO9_1793
+fade 0 0 
+
+:CASINO9_1799
+if 
+fading 
+jf @CASINO9_1823 
+wait 0 
+jump @CASINO9_1799 
+
+:CASINO9_1823
+09BA: show_entered_zone_name 0 
+72@ = 1 
+03CF: load_wav 16200 as 3 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   not Car.Wrecked(38@)
+jf @CASINO9_1881 
+Car.Angle(38@) = 0.0
+08E6: set_plane 38@ landing_gear 1 
+
+:CASINO9_1881
+if 
+   not Car.Wrecked(34@)
+jf @CASINO9_2007 
+0087: 56@ = 53@ // (float) 
+0087: 57@ = 54@ // (float) 
+57@ -= 25.0 
+0087: 58@ = 55@ // (float) 
+58@ += 20.0 
+Car.PutAt(34@, 56@, 57@, 58@)
+Car.Angle(34@) = 0.0
+Car.LockInCurrentPosition(34@) = True
+Car.Health(34@) = 4000
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @CASINO9_2007 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:CASINO9_2007
+06D6: disable_racing_checkpoint 48@ 
+04ED: load_animation "MISC" 
+
+:CASINO9_2020
+if 
+84EE:   not animation "MISC" loaded 
+jf @CASINO9_2050 
+wait 0 
+jump @CASINO9_2020 
+
+:CASINO9_2050
+62@ = -3.0 
+63@ = -4.0 
+64@ = 0.0 
+65@ = -1.0 
+66@ = 0.0 
+67@ = 0.0 
+if 
+   not Car.Wrecked(34@)
+jf @CASINO9_2156 
+0679: put_camera_on_car 34@ with_offset 62@ 63@ 64@ rotation 65@ 66@ 67@ tilt 2.0 switchstyle 2 
+
+:CASINO9_2156
+71@ = 0 
+fade 1 400 
+02A3: enable_widescreen 1 
+32@ = 0 
+33@ = 0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+01F0: set_max_wanted_level_to 0 
+0707: start_scene_skip_to @CASINO9_3017 
+
+:CASINO9_2204
+wait 0 
+if and
+   not Car.Wrecked(38@)
+   not Car.Wrecked(34@)
+jf @CASINO9_3888 
+Camera.Shake(20)
+0079: 57@ += frame_delta_time * 1.0 // (float) 
+Car.PutAt(34@, 56@, 57@, 58@)
+0079: 54@ += frame_delta_time * 1.0 // (float) 
+Car.PutAt(38@, 53@, 54@, 55@)
+0871: init_jump_table 71@ total_jumps 6 default_jump 0 @CASINO9_3888 jumps 0 @CASINO9_2344 1 @CASINO9_2670 2 @CASINO9_2750 3 @CASINO9_2804 4 @CASINO9_2905 5 @CASINO9_3582 -1 @CASINO9_3888 
+
+:CASINO9_2344
+if 
+  1000 > 33@ 
+jf @CASINO9_2370 
+jump @CASINO9_3888 
+
+:CASINO9_2370
+0464: put_actor $PLAYER_ACTOR into_turret_on_car 34@ at_car_offset 0.0 0.0 0.0 position 0 shooting_angle_limit 0.0 with_weapon 0 
+0605: actor $PLAYER_ACTOR perform_animation "PLANE_EXIT" IFP "MISC" framedelta 1000.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+75@ = 741 
+90@ = 0.0 
+76@ = 794 
+91@ = 0.33 
+77@ = 847 
+92@ = 0.71 
+78@ = 953 
+93@ = 1.0 
+79@ = 1006 
+94@ = 0.87 
+80@ = 1059 
+95@ = 0.83 
+81@ = 1165 
+96@ = 0.81 
+82@ = 2118 
+97@ = 0.81 
+83@ = 2277 
+98@ = 0.78 
+84@ = 3336 
+99@ = 0.78 
+85@ = 4000 
+100@ = 0.78 
+88@ = 0 
+101@ = 0.0 
+0085: 89@ = 34@ // (int) 
+71@ += 1 
+
+:CASINO9_2670
+if 
+  1000 > 33@ 
+jf @CASINO9_2696 
+jump @CASINO9_3888 
+
+:CASINO9_2696
+if 
+  1500 > 33@ 
+jf @CASINO9_2736 
+gosub @CASINO9_3895 
+jump @CASINO9_3888 
+jump @CASINO9_2750 
+
+:CASINO9_2736
+32@ = 0 
+71@ += 1 
+
+:CASINO9_2750
+gosub @CASINO9_3895 
+if 
+03D0:   wav 3 loaded 
+jf @CASINO9_2797 
+0A16: link_wav 3 to_car 34@ 
+03D1: play_wav 3 
+71@ += 1 
+jump @CASINO9_2804 
+
+:CASINO9_2797
+jump @CASINO9_3888 
+
+:CASINO9_2804
+if 
+  5000 > 33@ 
+jf @CASINO9_2898 
+if 
+  -1.4 > 63@ 
+jf @CASINO9_2884 
+0079: 63@ += frame_delta_time * 0.1 // (float) 
+0679: put_camera_on_car 34@ with_offset 62@ 63@ 64@ rotation 65@ 66@ 67@ tilt 2.0 switchstyle 2 
+
+:CASINO9_2884
+gosub @CASINO9_3895 
+jump @CASINO9_3888 
+
+:CASINO9_2898
+71@ += 1 
+
+:CASINO9_2905
+if 
+  62@ > -7.0 
+jf @CASINO9_2976 
+007F: 62@ -= frame_delta_time * 0.1 // (float) 
+007F: 64@ -= frame_delta_time * 0.045 // (float) 
+0679: put_camera_on_car 34@ with_offset 62@ 63@ 64@ rotation 65@ 66@ 67@ tilt 2.0 switchstyle 2 
+
+:CASINO9_2976
+0613: 74@ = actor $PLAYER_ACTOR animation "PLANE_EXIT" time 
+if 
+  74@ > 0.95 
+jf @CASINO9_3568 
+
+:CASINO9_3017
+0701: end_scene_skip 
+fade 0 0 
+
+:CASINO9_3025
+if 
+fading 
+jf @CASINO9_3049 
+wait 0 
+jump @CASINO9_3025 
+
+:CASINO9_3049
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+
+:CASINO9_3066
+if 
+   Actor.Animation($PLAYER_ACTOR) == "PLANE_EXIT"
+jf @CASINO9_3105 
+wait 0 
+jump @CASINO9_3066 
+
+:CASINO9_3105
+if 
+   not Car.Wrecked(38@)
+jf @CASINO9_3153 
+0464: put_actor $PLAYER_ACTOR into_turret_on_car 38@ at_car_offset 0.0 0.0 0.0 position 0 shooting_angle_limit 360.0 with_weapon 0 
+
+:CASINO9_3153
+wait 0 
+fade 1 50 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PLANE_HIJACK" IFP "MISC" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+75@ = 3229 
+90@ = 0.0 
+76@ = 3282 
+91@ = 0.04 
+77@ = 3335 
+92@ = 0.09 
+78@ = 3388 
+93@ = 0.14 
+79@ = 3440 
+94@ = 0.19 
+80@ = 3493 
+95@ = 0.22 
+81@ = 5028 
+96@ = 0.22 
+82@ = 5081 
+97@ = 0.15 
+83@ = 5134 
+98@ = 0.08 
+84@ = 5187 
+99@ = 0.01 
+85@ = 5240 
+100@ = 0.0 
+88@ = 0 
+101@ = 0.0 
+0085: 89@ = 38@ // (int) 
+62@ = -3.0 
+63@ = 6.0 
+64@ = -0.5 
+65@ = -2.0 
+66@ = -8.0 
+67@ = 1.0 
+099C: jiggle_camera type 1 timelimit 20000.0 intensity 3.0 
+32@ = 0 
+33@ = 0 
+if 
+   not Car.Wrecked(34@)
+jf @CASINO9_3537 
+Car.LockInCurrentPosition(34@) = False
+
+:CASINO9_3537
+73@ = 0.0 
+0707: start_scene_skip_to @CASINO9_3700 
+71@ = 5 
+jump @CASINO9_3582 
+
+:CASINO9_3568
+gosub @CASINO9_3895 
+jump @CASINO9_3888 
+
+:CASINO9_3582
+if 
+  7000 > 33@ 
+jf @CASINO9_3700 
+if 
+   not Car.Wrecked(34@)
+jf @CASINO9_3679 
+007F: 73@ -= frame_delta_time * 3.0 // (float) 
+007F: 56@ -= frame_delta_time * 0.3 // (float) 
+0079: 57@ += frame_delta_time * 0.3 // (float) 
+007F: 58@ -= frame_delta_time * 0.3 // (float) 
+Car.PutAt(34@, 56@, 57@, 58@)
+0731: set_car 34@ y_angle_to 73@ 
+
+:CASINO9_3679
+gosub @CASINO9_3895 
+gosub @CASINO9_4269 
+jump @CASINO9_3888 
+
+:CASINO9_3700
+0701: end_scene_skip 
+fade 0 0 
+
+:CASINO9_3708
+if 
+fading 
+jf @CASINO9_3732 
+wait 0 
+jump @CASINO9_3708 
+
+:CASINO9_3732
+0925: restore_camera_to_user_defined 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+
+:CASINO9_3751
+if 
+   Actor.Animation($PLAYER_ACTOR) == "PLANE_HIJACK"
+jf @CASINO9_3792 
+wait 0 
+jump @CASINO9_3751 
+
+:CASINO9_3792
+Actor.RemoveReferences(40@)
+Car.RemoveReferences(34@)
+Car.RemoveReferences(38@)
+Model.Destroy(#WMYPLT)
+Model.Destroy(#DODO)
+Model.Destroy(#SHAMAL)
+04EF: release_animation "MISC" 
+select_interior 1 
+Actor.PutAt($PLAYER_ACTOR, 1.6127, 34.7411, 1199.0)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+jump @CASINO9_4422 
+
+:CASINO9_3888
+jump @CASINO9_2204 
+
+:CASINO9_3895
+if 
+  11 > 88@ 
+jf @CASINO9_4241 
+if 
+001D:   75@(88@,11i) > 32@ // (int) 
+jf @CASINO9_4118 
+005B: 102@ += 101@ // (float) 
+if 
+  0.0 > 102@ 
+jf @CASINO9_3982 
+102@ = 0.0 
+jump @CASINO9_4013 
+
+:CASINO9_3982
+if 
+  102@ > 1.0 
+jf @CASINO9_4013 
+102@ = 1.0 
+
+:CASINO9_4013
+if 
+  101@ >= 0.0 
+jf @CASINO9_4076 
+if 
+0025:   102@ > 90@(88@,11f) // (float) 
+jf @CASINO9_4069 
+0087: 102@ = 90@(88@,11f) // (float) 
+
+:CASINO9_4069
+jump @CASINO9_4111 
+
+:CASINO9_4076
+if 
+0025:   90@(88@,11f) > 102@ // (float) 
+jf @CASINO9_4111 
+0087: 102@ = 90@(88@,11f) // (float) 
+
+:CASINO9_4111
+jump @CASINO9_4241 
+
+:CASINO9_4118
+0093: 103@ = integer 75@(88@,11i) to_float 
+0087: 105@ = 90@(88@,11f) // (float) 
+88@ += 1 
+if 
+  88@ > 10 
+jf @CASINO9_4169 
+return 
+
+:CASINO9_4169
+0093: 104@ = integer 75@(88@,11i) to_float 
+0087: 106@ = 90@(88@,11f) // (float) 
+0063: 104@ -= 103@ // (float) 
+0063: 106@ -= 105@ // (float) 
+0073: 106@ /= 104@ // (float) 
+0087: 101@ = 106@ // (float) 
+006B: 101@ *= 104@ // (float) 
+005B: 102@ += 101@ // (float) 
+
+:CASINO9_4241
+if 
+   not Car.Wrecked(89@)
+jf @CASINO9_4267 
+08A6: set_car 89@ door 2 rotation_to 102@ 
+
+:CASINO9_4267
+return 
+
+:CASINO9_4269
+if 
+   not Car.Wrecked(38@)
+jf @CASINO9_4420 
+if 
+  107@ == 0 
+jf @CASINO9_4420 
+if 
+  -4.0 >= 62@ 
+jf @CASINO9_4340 
+107@ = 1 
+return 
+jump @CASINO9_4390 
+
+:CASINO9_4340
+0079: 62@ += frame_delta_time * -0.02 // (float) 
+0079: 63@ += frame_delta_time * 0.02 // (float) 
+0079: 64@ += frame_delta_time * -0.01 // (float) 
+0079: 66@ += frame_delta_time * 0.23 // (float) 
+0079: 67@ += frame_delta_time * -0.02 // (float) 
+
+:CASINO9_4390
+0679: put_camera_on_car 38@ with_offset 62@ 63@ 64@ rotation 65@ 66@ 67@ tilt 0.0 switchstyle 2 
+
+:CASINO9_4420
+return 
+
+:CASINO9_4422
+72@ = 0 
+Model.Load(#VMAFF1)
+Model.Load(#VMAFF2)
+Model.Load(#VMAFF3)
+Model.Load(#VMAFF4)
+Model.Load(#COLT45)
+Model.Load(#JET_BAGGAGE_DOOR)
+Model.Load(#CARDBOARDBOX2)
+Model.Load(#JET_INTERIOR)
+
+:CASINO9_4465
+if or
+   not Model.Available(#VMAFF1)
+   not Model.Available(#VMAFF2)
+   not Model.Available(#VMAFF3)
+   not Model.Available(#VMAFF4)
+   not Model.Available(#COLT45)
+   not Model.Available(#JET_BAGGAGE_DOOR)
+jf @CASINO9_4513 
+wait 0 
+jump @CASINO9_4465 
+
+:CASINO9_4513
+if or
+   not Model.Available(#CARDBOARDBOX2)
+   not Model.Available(#JET_INTERIOR)
+jf @CASINO9_4545 
+wait 0 
+jump @CASINO9_4513 
+
+:CASINO9_4545
+060A: create_decision_maker_type 0 store_to 49@ // decision\allowed\m_.ped files 
+0A0B: set_rendering_origin_at_3D_coord 2.3947 32.9835 1198.594 angle 155.9863 
+165@ = 2.9 
+166@ = 32.4 
+167@ = 1198.75 
+163@ = 0 
+164@ = Object.Create(#CARDBOARDBOX2, 165@, 166@, 167@)
+0566: link_object 164@ to_interior 1 
+Object.ToggleInMovingList(164@) = False
+Object.CollisionDetection(164@) = False
+0750: set_object 164@ visibility 0 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object 164@ offset_from_object_origin 0.0 0.0 0.5 orientation 2 both_side_angle_limit 85.0 lock_weapon 22 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 30.0 rotation_speed 30.0 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+0581: enable_radar 0 
+108@ = Actor.Create(Mission1, #VMAFF1, 2.9739, 28.7207, 1198.594)
+0860: link_actor 108@ to_interior 1 
+Actor.Angle(108@) = 0.0
+Actor.Health(108@) = 150
+Actor.GiveWeaponAndAmmo(108@, Pistol, 3000)
+01B9: set_actor 108@ armed_weapon_to 22 
+060B: set_actor 108@ decision_maker_to 49@ 
+0568: set_actor 108@ untargetable 1 
+0638: AS_actor 108@ stay_put 1 
+06B0: AS_actor 108@ sit_down 80000 ms 
+087E: set_actor 108@ weapon_droppable 0 
+07DD: set_actor 108@ attack_rate 90 // previously known as temper_to 
+Actor.WeaponAccuracy(108@) = 0
+132@ = 2 
+146@ = 197.6 
+150@ = 214.0 
+154@ = 1199.851 
+158@ = 1200.366 
+109@ = Actor.Create(Mission1, #VMAFF2, 0.5102, 27.6804, 1198.594)
+0860: link_actor 109@ to_interior 1 
+Actor.Angle(109@) = 0.0
+Actor.Health(109@) = 150
+Actor.GiveWeaponAndAmmo(109@, Pistol, 3000)
+01B9: set_actor 109@ armed_weapon_to 22 
+060B: set_actor 109@ decision_maker_to 49@ 
+0568: set_actor 109@ untargetable 1 
+0638: AS_actor 109@ stay_put 1 
+06B0: AS_actor 109@ sit_down 80000 ms 
+087E: set_actor 109@ weapon_droppable 0 
+07DD: set_actor 109@ attack_rate 90 // previously known as temper_to 
+Actor.WeaponAccuracy(109@) = 0
+133@ = 3 
+147@ = 158.7 
+151@ = 170.2 
+155@ = 1199.972 
+159@ = 1200.34 
+110@ = Actor.Create(Mission1, #VMAFF3, 2.8831, 26.4404, 1198.601)
+0860: link_actor 110@ to_interior 1 
+Actor.Angle(110@) = 0.0
+Actor.Health(110@) = 150
+Actor.GiveWeaponAndAmmo(110@, Pistol, 3000)
+01B9: set_actor 110@ armed_weapon_to 22 
+060B: set_actor 110@ decision_maker_to 49@ 
+0568: set_actor 110@ untargetable 1 
+0638: AS_actor 110@ stay_put 1 
+06B0: AS_actor 110@ sit_down 80000 ms 
+087E: set_actor 110@ weapon_droppable 0 
+07DD: set_actor 110@ attack_rate 90 // previously known as temper_to 
+Actor.WeaponAccuracy(110@) = 0
+134@ = 0 
+148@ = 189.4 
+152@ = 196.9 
+156@ = 200.1145 
+160@ = 200.3232 
+111@ = Actor.Create(Mission1, #VMAFF4, 0.5068, 25.3824, 1198.601)
+0860: link_actor 111@ to_interior 1 
+Actor.Angle(111@) = 0.0
+Actor.Health(111@) = 150
+Actor.GiveWeaponAndAmmo(111@, Pistol, 3000)
+01B9: set_actor 111@ armed_weapon_to 22 
+060B: set_actor 111@ decision_maker_to 49@ 
+0568: set_actor 111@ untargetable 1 
+0638: AS_actor 111@ stay_put 1 
+06B0: AS_actor 111@ sit_down 80000 ms 
+087E: set_actor 111@ weapon_droppable 0 
+07DD: set_actor 111@ attack_rate 90 // previously known as temper_to 
+Actor.WeaponAccuracy(111@) = 0
+135@ = 1 
+149@ = 167.51 
+153@ = 174.11 
+157@ = 1200.148 
+161@ = 1200.328 
+05AA: 208@s = 'CAS9_AA' // @s = 'short'  // ~z~Hey, what's going on!
+04AF: 184@ = 8400 // = constant 
+0085: 188@ = 108@ // (int) 
+05AA: 210@s = 'CAS9_AB' // @s = 'short'  // ~z~Shit, how the fuck did HE get in here?
+04AF: 185@ = 8401 // = constant 
+0085: 189@ = 109@ // (int) 
+05AA: 212@s = 'CAS9_AC' // @s = 'short'  // ~z~Who cares?
+04AF: 186@ = 8402 // = constant 
+0085: 190@ = 110@ // (int) 
+05AA: 214@s = 'CAS9_AD' // @s = 'short'  // ~z~Waste him!
+04AF: 187@ = 8403 // = constant 
+0085: 191@ = 110@ // (int) 
+05AA: 216@s = 'CAS9_BA' // @s = 'short'  // ~z~You picked the wrong plane to hijack!
+04AF: 192@ = 8404 // = constant 
+05AA: 218@s = 'CAS9_BB' // @s = 'short'  // ~z~I'm gonna give you the full trolley service, asshole!
+04AF: 193@ = 8405 // = constant 
+05AA: 220@s = 'CAS9_BC' // @s = 'short'  // ~z~We're gonna dump your body over the desert!
+04AF: 194@ = 8406 // = constant 
+05AA: 222@s = 'CAS9_BD' // @s = 'short'  // ~z~Who is this nut job, anyway?
+04AF: 195@ = 8407 // = constant 
+05AA: 224@s = 'CAS9_CA' // @s = 'short'  // ~z~Come out, you chicken shit asshole!
+04AF: 196@ = 8408 // = constant 
+05AA: 226@s = 'CAS9_CB' // @s = 'short'  // ~z~Heh yeah - yeah, what's the matter, you lost your nerve?
+04AF: 197@ = 8409 // = constant 
+05AA: 228@s = 'CAS9_CC' // @s = 'short'  // ~z~Ah, the 'ickle boy is hiding, ain't dat cute?
+04AF: 198@ = 8410 // = constant 
+05AA: 230@s = 'CAS9_CD' // @s = 'short'  // ~z~Hey, come out and play, asshole!
+04AF: 199@ = 8411 // = constant 
+0881: set_player $PLAYER_CHAR able_to_shoot_weapons 0 
+082A: set_player $PLAYER_CHAR able_to_use_crouch_button 0 
+162@ = 0 
+112@ = 0 
+113@ = 0 
+114@ = 0 
+115@ = 0 
+138@ = 4 
+139@ = -1 
+137@ = -1 
+168@ = Object.Init(#JET_BAGGAGE_DOOR, 0.752, 25.518, 1201.15)
+169@ = Object.Init(#JET_BAGGAGE_DOOR, 0.752, 28.024, 1201.15)
+170@ = Object.Init(#JET_BAGGAGE_DOOR, 0.752, 30.403, 1201.15)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 1 
+32@ = 0 
+
+:CASINO9_5831
+if 
+  500 > 32@ 
+jf @CASINO9_5861 
+wait 0 
+jump @CASINO9_5831 
+
+:CASINO9_5861
+fade 1 500 
+if 
+0A4B:   controls_set_to_joystick 
+jf @CASINO9_5899 
+0512: show_permanent_text_box 'CAS9_H2'  // Use ~k~~PED_CYCLE_WEAPON_LEFT~ and ~k~~PED_CYCLE_WEAPON_RIGHT~ to take cover.
+jump @CASINO9_5910 
+
+:CASINO9_5899
+0512: show_permanent_text_box 'CAS9_H4'  // Move left and right to take cover.
+
+:CASINO9_5910
+if 
+fading 
+jf @CASINO9_5934 
+wait 0 
+jump @CASINO9_5910 
+
+:CASINO9_5934
+32@ = 0 
+
+:CASINO9_5941
+if 
+  2000 > 32@ 
+jf @CASINO9_5971 
+wait 0 
+jump @CASINO9_5941 
+
+:CASINO9_5971
+0881: set_player $PLAYER_CHAR able_to_shoot_weapons 1 
+02A3: enable_widescreen 0 
+178@ = 0 
+01BD: 172@ = current_time_in_ms 
+
+:CASINO9_5994
+wait 0 
+01BD: 171@ = current_time_in_ms 
+0085: 173@ = 171@ // (int) 
+0062: 173@ -= 172@ // (int) 
+0085: 172@ = 171@ // (int) 
+005A: 120@ += 173@ // (int) 
+005A: 121@ += 173@ // (int) 
+005A: 122@ += 173@ // (int) 
+005A: 123@ += 173@ // (int) 
+005A: 178@ += 173@ // (int) 
+gosub @CASINO9_9160 
+gosub @CASINO9_10142 
+if 
+  175@ == 0 
+jf @CASINO9_6362 
+if or
+  162@ == 0 
+00E1:   player 0 pressed_key 17 
+00E1:   player 0 pressed_key 4 
+jf @CASINO9_6355 
+if and
+   not Actor.Dead(108@)
+   not Actor.Dead(109@)
+   not Actor.Dead(110@)
+   not Actor.Dead(111@)
+jf @CASINO9_6355 
+0687: clear_actor 108@ task 
+0637: AS_actor 108@ goto 3.0228 29.7474 1198.594 mode 6 turn_radius 20.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+112@ = -1 
+0687: clear_actor 109@ task 
+0637: AS_actor 109@ goto 0.739 28.6978 1198.594 mode 6 turn_radius 20.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+113@ = -1 
+0687: clear_actor 110@ task 
+0637: AS_actor 110@ goto 2.9224 27.2966 1198.601 mode 6 turn_radius 20.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+114@ = -1 
+0687: clear_actor 111@ task 
+0637: AS_actor 111@ goto 0.5596 26.2475 1198.601 mode 6 turn_radius 20.0 stop_radius 0.5 look_at_actor $PLAYER_ACTOR 
+115@ = -1 
+175@ = 1 
+
+:CASINO9_6355
+jump @CASINO9_7468 
+
+:CASINO9_6362
+if 
+   not 181@ == 2 
+jf @CASINO9_6387 
+gosub @CASINO9_10374 
+
+:CASINO9_6387
+if 
+   not 138@ == 0 
+jf @CASINO9_7461 
+0209: 174@ = random_int_in_ranges 0 24 
+0871: init_jump_table 174@ total_jumps 24 default_jump 0 @CASINO9_7447 jumps 0 @CASINO9_6607 1 @CASINO9_6642 2 @CASINO9_6677 3 @CASINO9_6712 4 @CASINO9_6747 5 @CASINO9_6782 6 @CASINO9_6817 
+0872: jump_table_jumps 7 @CASINO9_6852 8 @CASINO9_6887 9 @CASINO9_6922 10 @CASINO9_6957 11 @CASINO9_6992 12 @CASINO9_7027 13 @CASINO9_7062 14 @CASINO9_7097 15 @CASINO9_7132 
+0872: jump_table_jumps 16 @CASINO9_7167 17 @CASINO9_7202 18 @CASINO9_7237 19 @CASINO9_7272 20 @CASINO9_7307 21 @CASINO9_7342 22 @CASINO9_7377 23 @CASINO9_7412 -1 @CASINO9_7447 
+
+:CASINO9_6607
+141@ = 0 
+142@ = 1 
+143@ = 2 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_6642
+141@ = 0 
+142@ = 1 
+143@ = 3 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_6677
+141@ = 0 
+142@ = 2 
+143@ = 1 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_6712
+141@ = 0 
+142@ = 2 
+143@ = 3 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_6747
+141@ = 0 
+142@ = 3 
+143@ = 1 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_6782
+141@ = 0 
+142@ = 3 
+143@ = 2 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_6817
+141@ = 1 
+142@ = 0 
+143@ = 2 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_6852
+141@ = 1 
+142@ = 0 
+143@ = 3 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_6887
+141@ = 1 
+142@ = 2 
+143@ = 0 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_6922
+141@ = 1 
+142@ = 2 
+143@ = 3 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_6957
+141@ = 1 
+142@ = 3 
+143@ = 0 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_6992
+141@ = 1 
+142@ = 3 
+143@ = 2 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_7027
+141@ = 2 
+142@ = 0 
+143@ = 1 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_7062
+141@ = 2 
+142@ = 0 
+143@ = 3 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_7097
+141@ = 2 
+142@ = 1 
+143@ = 0 
+144@ = 3 
+jump @CASINO9_7447 
+
+:CASINO9_7132
+141@ = 2 
+142@ = 1 
+143@ = 3 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_7167
+141@ = 2 
+142@ = 3 
+143@ = 0 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_7202
+141@ = 2 
+142@ = 3 
+143@ = 1 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_7237
+141@ = 3 
+142@ = 0 
+143@ = 1 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_7272
+141@ = 3 
+142@ = 0 
+143@ = 2 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_7307
+141@ = 3 
+142@ = 1 
+143@ = 0 
+144@ = 2 
+jump @CASINO9_7447 
+
+:CASINO9_7342
+141@ = 3 
+142@ = 1 
+143@ = 2 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_7377
+141@ = 3 
+142@ = 2 
+143@ = 0 
+144@ = 1 
+jump @CASINO9_7447 
+
+:CASINO9_7412
+141@ = 3 
+142@ = 2 
+143@ = 1 
+144@ = 0 
+jump @CASINO9_7447 
+
+:CASINO9_7447
+gosub @CASINO9_7475 
+jump @CASINO9_7468 
+
+:CASINO9_7461
+jump @CASINO9_10589 
+
+:CASINO9_7468
+jump @CASINO9_5994 
+
+:CASINO9_7475
+41@ = 0 
+
+:CASINO9_7482
+if 
+  4 > 41@ 
+jf @CASINO9_9158 
+0085: 145@ = 141@(41@,4i) // (int) 
+if 
+   not Actor.Dead(108@(145@,4i))
+jf @CASINO9_9070 
+0871: init_jump_table 112@(145@,4i) total_jumps 6 default_jump 0 @CASINO9_9063 jumps -1 @CASINO9_7599 0 @CASINO9_7676 1 @CASINO9_8054 2 @CASINO9_8644 3 @CASINO9_8940 4 @CASINO9_9011 -1 @CASINO9_9063 
+
+:CASINO9_7599
+062E: get_actor 108@(145@,4i) task 1591 status_store_to 46@ // ret 7 if not found 
+if 
+04A4:   46@ == 7 // == constant 
+jf @CASINO9_7676 
+Actor.LockInCurrentPosition(108@(145@,4i)) = True
+04EB: AS_actor 108@(145@,4i) crouch 1 
+Actor.WeaponAccuracy(108@(145@,4i)) = 65
+112@(145@,4i) = 0 
+
+:CASINO9_7676
+if 
+  137@ == -1 
+jf @CASINO9_8047 
+062E: get_actor 108@(145@,4i) task 1259 status_store_to 46@ // ret 7 if not found 
+if 
+04A4:   46@ == 7 // == constant 
+jf @CASINO9_7852 
+0085: 42@ = 132@(145@,4i) // (int) 
+if 
+803B:   not  139@ == 42@ // (int) 
+jf @CASINO9_7773 
+0085: 137@ = 145@ // (int) 
+jump @CASINO9_7852 
+
+:CASINO9_7773
+if 
+  138@ == 1 
+jf @CASINO9_7806 
+0085: 137@ = 145@ // (int) 
+jump @CASINO9_7852 
+
+:CASINO9_7806
+if 
+  138@ == 2 
+jf @CASINO9_7852 
+if 
+   not Actor.Dead(108@(42@,4i))
+jf @CASINO9_7852 
+0085: 137@ = 145@ // (int) 
+
+:CASINO9_7852
+if 
+003B:   137@ == 145@ // (int) 
+jf @CASINO9_8047 
+112@(145@,4i) = 4 
+116@(145@,4i) = 0 
+120@(145@,4i) = 0 
+140@ = Actor.Health(108@(145@,4i))
+0085: 124@(145@,4i) = 140@ // (int) 
+124@(145@,4i) *= 15 
+if 
+  2000 > 124@(145@,4i) 
+jf @CASINO9_7981 
+124@(145@,4i) = 2000 
+jump @CASINO9_8016 
+
+:CASINO9_7981
+if 
+  124@(145@,4i) > 5000 
+jf @CASINO9_8016 
+124@(145@,4i) = 5000 
+
+:CASINO9_8016
+0687: clear_actor 108@(145@,4i) task 
+04EB: AS_actor 108@(145@,4i) crouch 0 
+0856: set_actor 108@(145@,4i) enable_crouch 0 
+
+:CASINO9_8047
+jump @CASINO9_9063 
+
+:CASINO9_8054
+if 
+003B:   137@ == 145@ // (int) 
+jf @CASINO9_8637 
+if 
+   not 138@ == 1 
+jf @CASINO9_8296 
+if 
+002D:   120@(145@,4i) >= 124@(145@,4i) // (int) 
+jf @CASINO9_8166 
+112@(145@,4i) = 2 
+120@(145@,4i) = 0 
+124@(145@,4i) = 500 
+jump @CASINO9_9063 
+jump @CASINO9_8296 
+
+:CASINO9_8166
+$TEMPVAR_ANGLE = Actor.Angle($PLAYER_ACTOR)
+if and
+0036:   $TEMPVAR_ANGLE >= 146@(145@,4f) // (float) 
+0037:   150@(145@,4f) >= $TEMPVAR_ANGLE // (float) 
+jf @CASINO9_8296 
+068E: get_camera_target_point_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if and
+0036:   $TEMPVAR_FLOAT_3 >= 154@(145@,4f) // (float) 
+0037:   158@(145@,4f) >= $TEMPVAR_FLOAT_3 // (float) 
+jf @CASINO9_8296 
+112@(145@,4i) = 2 
+120@(145@,4i) = 0 
+124@(145@,4i) = 700 
+jump @CASINO9_9063 
+
+:CASINO9_8296
+if 
+  162@ == 0 
+jf @CASINO9_8472 
+if 
+   not 116@(145@,4i) == 1 
+jf @CASINO9_8368 
+116@(145@,4i) = 1 
+0687: clear_actor 108@(145@,4i) task 
+05E2: AS_actor 108@(145@,4i) kill_actor $PLAYER_ACTOR 
+
+:CASINO9_8368
+if and
+  183@ == 1 
+  200@(145@,4i) == 0 
+jf @CASINO9_8465 
+008A: $1276 = 192@(145@,4i) // (int) 
+05A9: s$1281 = 216@(145@,4s) // s$ 
+create_thread @A_ALAP 2 100 108@(145@,4i) 
+183@ = 0 
+33@ = 0 
+200@(145@,4i) += 1 
+
+:CASINO9_8465
+jump @CASINO9_8637 
+
+:CASINO9_8472
+if and
+  183@ == 2 
+  204@(145@,4i) == 0 
+jf @CASINO9_8569 
+008A: $1276 = 196@(145@,4i) // (int) 
+05A9: s$1281 = 224@(145@,4s) // s$ 
+create_thread @A_ALAP 2 100 108@(145@,4i) 
+183@ = 0 
+33@ = 0 
+204@(145@,4i) += 1 
+
+:CASINO9_8569
+if 
+   not 116@(145@,4i) == 2 
+jf @CASINO9_8637 
+116@(145@,4i) = 2 
+0687: clear_actor 108@(145@,4i) task 
+0668: AS_actor 108@(145@,4i) rotate_and_shoot_at 1.8121 37.2617 1200.396 -1 ms 
+
+:CASINO9_8637
+jump @CASINO9_9063 
+
+:CASINO9_8644
+if 
+002D:   120@(145@,4i) >= 124@(145@,4i) // (int) 
+jf @CASINO9_8786 
+112@(145@,4i) = 0 
+0687: clear_actor 108@(145@,4i) task 
+0856: set_actor 108@(145@,4i) enable_crouch 1 
+062E: get_actor 108@(145@,4i) task 1259 status_store_to 46@ // ret 7 if not found 
+if 
+04A4:   46@ == 7 // == constant 
+jf @CASINO9_8753 
+04EB: AS_actor 108@(145@,4i) crouch 1 
+jump @CASINO9_8764 
+
+:CASINO9_8753
+112@(145@,4i) = 3 
+
+:CASINO9_8764
+0085: 139@ = 145@ // (int) 
+137@ = -1 
+jump @CASINO9_8933 
+
+:CASINO9_8786
+if 
+  162@ == 0 
+jf @CASINO9_8865 
+if 
+   not 116@(145@,4i) == 1 
+jf @CASINO9_8858 
+116@(145@,4i) = 1 
+0687: clear_actor 108@(145@,4i) task 
+05E2: AS_actor 108@(145@,4i) kill_actor $PLAYER_ACTOR 
+
+:CASINO9_8858
+jump @CASINO9_8933 
+
+:CASINO9_8865
+if 
+   not 116@(145@,4i) == 2 
+jf @CASINO9_8933 
+116@(145@,4i) = 2 
+0687: clear_actor 108@(145@,4i) task 
+0668: AS_actor 108@(145@,4i) rotate_and_shoot_at 1.8121 37.2617 1200.396 -1 ms 
+
+:CASINO9_8933
+jump @CASINO9_9063 
+
+:CASINO9_8940
+062E: get_actor 108@(145@,4i) task 1259 status_store_to 46@ // ret 7 if not found 
+if 
+04A4:   46@ == 7 // == constant 
+jf @CASINO9_9004 
+0687: clear_actor 108@(145@,4i) task 
+04EB: AS_actor 108@(145@,4i) crouch 1 
+112@(145@,4i) = 0 
+
+:CASINO9_9004
+jump @CASINO9_9063 
+
+:CASINO9_9011
+if 
+  120@(145@,4i) >= 200 
+jf @CASINO9_9056 
+120@(145@,4i) = 0 
+112@(145@,4i) = 1 
+
+:CASINO9_9056
+jump @CASINO9_9063 
+
+:CASINO9_9063
+jump @CASINO9_9144 
+
+:CASINO9_9070
+if 
+   not 112@(145@,4i) == -2 
+jf @CASINO9_9144 
+112@(145@,4i) = -2 
+138@ -= 1 
+if 
+003B:   137@ == 145@ // (int) 
+jf @CASINO9_9144 
+0085: 139@ = 145@ // (int) 
+137@ = -1 
+
+:CASINO9_9144
+41@ += 1 
+jump @CASINO9_7482 
+
+:CASINO9_9158
+return 
+
+:CASINO9_9160
+Object.StorePos(164@, 165@, 166@, 167@)
+if or
+  165@ > 2.6 
+  0.2 > 165@ 
+jf @CASINO9_9295 
+if 
+  162@ == 0 
+jf @CASINO9_9244 
+162@ = 1 
+33@ = 0 
+jump @CASINO9_9288 
+
+:CASINO9_9244
+if 
+  33@ > 9000 
+jf @CASINO9_9288 
+if 
+  181@ == 2 
+jf @CASINO9_9288 
+183@ = 2 
+
+:CASINO9_9288
+jump @CASINO9_9378 
+
+:CASINO9_9295
+if 
+  162@ == 1 
+jf @CASINO9_9334 
+162@ = 0 
+33@ = 0 
+jump @CASINO9_9378 
+
+:CASINO9_9334
+if 
+  33@ > 9000 
+jf @CASINO9_9378 
+if 
+  181@ == 2 
+jf @CASINO9_9378 
+183@ = 1 
+
+:CASINO9_9378
+if or
+00E1:   player 0 pressed_key 2 
+00E1:   player 0 pressed_key 3 
+jf @CASINO9_9415 
+180@ = 1 
+jump @CASINO9_9422 
+
+:CASINO9_9415
+180@ = 0 
+
+:CASINO9_9422
+if 
+0A4B:   controls_set_to_joystick 
+jf @CASINO9_9847 
+if and
+80E1:   not player 0 pressed_key 5 
+80E1:   not player 0 pressed_key 7 
+jf @CASINO9_9541 
+034E: move_object 164@ to 1.7 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+   not 165@ == 1.7 
+  180@ == 0 
+jf @CASINO9_9534 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 90.0 rotation_speed 9.0 
+
+:CASINO9_9534
+jump @CASINO9_9840 
+
+:CASINO9_9541
+if and
+00E1:   player 0 pressed_key 5 
+00E1:   player 0 pressed_key 7 
+jf @CASINO9_9647 
+034E: move_object 164@ to 1.7 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+   not 165@ == 1.7 
+  180@ == 0 
+jf @CASINO9_9640 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 90.0 rotation_speed 9.0 
+
+:CASINO9_9640
+jump @CASINO9_9840 
+
+:CASINO9_9647
+if 
+00E1:   player 0 pressed_key 5 
+jf @CASINO9_9747 
+034E: move_object 164@ to 2.9 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+  2.9 > 165@ 
+  180@ == 0 
+jf @CASINO9_9740 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 30.0 rotation_speed 9.0 
+
+:CASINO9_9740
+jump @CASINO9_9840 
+
+:CASINO9_9747
+if 
+00E1:   player 0 pressed_key 7 
+jf @CASINO9_9840 
+034E: move_object 164@ to 0.5 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+  165@ > 0.5 
+  180@ == 0 
+jf @CASINO9_9840 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 150.0 rotation_speed 9.0 
+
+:CASINO9_9840
+jump @CASINO9_10140 
+
+:CASINO9_9847
+if 
+80E1:   not player 0 pressed_key 0 
+jf @CASINO9_9947 
+034E: move_object 164@ to 1.7 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+   not 165@ == 1.7 
+  180@ == 0 
+jf @CASINO9_9940 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 90.0 rotation_speed 9.0 
+
+:CASINO9_9940
+jump @CASINO9_10140 
+
+:CASINO9_9947
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if 
+  0 > $MOVE_AXIS_X 
+jf @CASINO9_10064 
+034E: move_object 164@ to 2.9 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+  2.9 > 165@ 
+  180@ == 0 
+jf @CASINO9_10057 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 30.0 rotation_speed 9.0 
+
+:CASINO9_10057
+jump @CASINO9_10140 
+
+:CASINO9_10064
+034E: move_object 164@ to 0.5 166@ 167@ speed 0.09 0.0 0.0 collision_check 0 
+if and
+  165@ > 0.5 
+  180@ == 0 
+jf @CASINO9_10140 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 150.0 rotation_speed 9.0 
+
+:CASINO9_10140
+return 
+
+:CASINO9_10142
+0871: init_jump_table 179@ total_jumps 3 default_jump 0 @CASINO9_10372 jumps 0 @CASINO9_10205 1 @CASINO9_10247 2 @CASINO9_10330 -1 @CASINO9_10372 -1 @CASINO9_10372 -1 @CASINO9_10372 -1 @CASINO9_10372 
+
+:CASINO9_10205
+if 
+  178@ >= 6000 
+jf @CASINO9_10240 
+03E6: remove_text_box 
+179@ += 1 
+178@ = 0 
+
+:CASINO9_10240
+jump @CASINO9_10372 
+
+:CASINO9_10247
+if 
+  162@ == 0 
+jf @CASINO9_10316 
+if 
+  178@ > 20000 
+jf @CASINO9_10309 
+0512: show_permanent_text_box 'CAS9_H2'  // Use ~k~~PED_CYCLE_WEAPON_LEFT~ and ~k~~PED_CYCLE_WEAPON_RIGHT~ to take cover.
+179@ += 1 
+178@ = 0 
+
+:CASINO9_10309
+jump @CASINO9_10323 
+
+:CASINO9_10316
+178@ = 0 
+
+:CASINO9_10323
+jump @CASINO9_10372 
+
+:CASINO9_10330
+if 
+  178@ > 6000 
+jf @CASINO9_10365 
+03E6: remove_text_box 
+179@ -= 1 
+178@ = 0 
+
+:CASINO9_10365
+jump @CASINO9_10372 
+
+:CASINO9_10372
+return 
+
+:CASINO9_10374
+0871: init_jump_table 181@ total_jumps 2 default_jump 0 @CASINO9_10587 jumps 0 @CASINO9_10437 1 @CASINO9_10540 -1 @CASINO9_10587 -1 @CASINO9_10587 -1 @CASINO9_10587 -1 @CASINO9_10587 -1 @CASINO9_10587 
+
+:CASINO9_10437
+if 
+  4 > 182@ 
+jf @CASINO9_10519 
+008A: $1276 = 184@(182@,4i) // (int) 
+05A9: s$1281 = 208@(182@,4s) // s$ 
+create_thread @A_ALAP 2 100 188@(182@,4i) 
+182@ += 1 
+181@ += 1 
+jump @CASINO9_10540 
+
+:CASINO9_10519
+33@ = 0 
+181@ = 2 
+jump @CASINO9_10587 
+
+:CASINO9_10540
+if 
+  $1285($1288,2i) == -3 
+jf @CASINO9_10580 
+181@ -= 1 
+$1285($1288,2i) = -4 
+
+:CASINO9_10580
+jump @CASINO9_10587 
+
+:CASINO9_10587
+return 
+
+:CASINO9_10589
+if 
+   not 0 > $1285[0] 
+jf @CASINO9_10614 
+$1285[0] = -2 
+
+:CASINO9_10614
+if 
+   not 0 > $1285[0] 
+jf @CASINO9_10639 
+$1285[1] = -2 
+
+:CASINO9_10639
+00BE: text_clear_all 
+03E6: remove_text_box 
+Model.Load(#WMYPLT)
+
+:CASINO9_10647
+if 
+   not Model.Available(#WMYPLT)
+jf @CASINO9_10673 
+wait 0 
+jump @CASINO9_10647 
+
+:CASINO9_10673
+32@ = 0 
+
+:CASINO9_10680
+if 
+  1000 > 32@ 
+jf @CASINO9_10710 
+wait 0 
+jump @CASINO9_10680 
+
+:CASINO9_10710
+fade 0 500 
+
+:CASINO9_10717
+if 
+fading 
+jf @CASINO9_10741 
+wait 0 
+jump @CASINO9_10717 
+
+:CASINO9_10741
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Camera.SetPosition(2.7271, 24.965, 1201.535, 0.0, 0.0, 0.0)
+Camera.PointAt(2.422, 25.7162, 1200.95, 2)
+Actor.PutAt($PLAYER_ACTOR, 1.8227, 31.0635, 1198.609)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Object.PutAt(164@, 1.7, 26.8, 1198.75)
+0615: define_AS_pack_begin 44@ 
+04EB: AS_actor -1 crouch 1 
+05BA: AS_actor -1 move_mouth 1000 ms 
+05D3: AS_actor -1 goto_point 1.7221 26.7679 1198.602 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 44@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 44@ 
+061B: remove_references_to_AS_pack 44@ 
+fade 1 500 
+32@ = 0 
+
+:CASINO9_10938
+if 
+  3000 > 32@ 
+jf @CASINO9_10968 
+wait 0 
+jump @CASINO9_10938 
+
+:CASINO9_10968
+40@ = Actor.Create(Mission1, #WMYPLT, 1.881, 34.9202, 1198.602)
+Actor.Angle(40@) = 180.0
+Actor.GiveWeaponAndAmmo(40@, Pistol, 3000)
+01B9: set_actor 40@ armed_weapon_to 22 
+087E: set_actor 40@ weapon_droppable 0 
+07DD: set_actor 40@ attack_rate 70 // previously known as temper_to 
+Actor.WeaponAccuracy(40@) = 65
+060B: set_actor 40@ decision_maker_to 49@ 
+0568: set_actor 40@ untargetable 1 
+0638: AS_actor 40@ stay_put 1 
+0603: AS_actor 40@ goto_point_any_means 1.7462 32.3896 1198.602 mode 4 use_car -1 
+32@ = 0 
+
+:CASINO9_11093
+if 
+  3000 > 32@ 
+jf @CASINO9_11123 
+wait 0 
+jump @CASINO9_11093 
+
+:CASINO9_11123
+fade 0 500 
+
+:CASINO9_11130
+if 
+fading 
+jf @CASINO9_11154 
+wait 0 
+jump @CASINO9_11130 
+
+:CASINO9_11154
+Camera.Restore
+04EB: AS_actor $PLAYER_ACTOR crouch 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object 164@ offset_from_object_origin 0.0 0.0 0.5 orientation 0 both_side_angle_limit 85.0 lock_weapon 22 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 270.0 rotation_speed 270.0 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+fade 1 0 
+232@ = 0 
+04AE: $1276 = 8412 // = constant 
+05A9: s$1281 = 'CAS9_DA' // s$  // ~z~I ain't going down without a fight!
+create_thread @A_ALAP 2 100 40@ 
+if 
+   not Actor.Dead(40@)
+jf @CASINO9_11307 
+05E2: AS_actor 40@ kill_actor $PLAYER_ACTOR 
+
+:CASINO9_11307
+wait 0 
+if 
+   Actor.Dead(40@)
+jf @CASINO9_11334 
+jump @CASINO9_11341 
+
+:CASINO9_11334
+jump @CASINO9_11307 
+
+:CASINO9_11341
+Model.Load(#SHAMAL)
+
+:CASINO9_11346
+if 
+   not Model.Available(#SHAMAL)
+jf @CASINO9_11373 
+wait 0 
+jump @CASINO9_11346 
+
+:CASINO9_11373
+32@ = 0 
+
+:CASINO9_11380
+if 
+  1000 > 32@ 
+jf @CASINO9_11410 
+wait 0 
+jump @CASINO9_11380 
+
+:CASINO9_11410
+fade 0 500 
+
+:CASINO9_11417
+if 
+fading 
+jf @CASINO9_11441 
+wait 0 
+jump @CASINO9_11417 
+
+:CASINO9_11441
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0581: enable_radar 1 
+Camera.SetPosition(3.0968, 36.596, 1200.369, 0.0, 0.0, 0.0)
+Camera.PointAt(2.4708, 35.9141, 1199.991, 2)
+Actor.PutAt($PLAYER_ACTOR, 1.7462, 32.3896, 1198.602)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+0615: define_AS_pack_begin 44@ 
+05BA: AS_actor -1 move_mouth 550 ms 
+0603: AS_actor -1 goto_point_any_means 1.7037 34.9246 1198.602 mode 4 use_car -1 
+0616: define_AS_pack_end 44@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 44@ 
+061B: remove_references_to_AS_pack 44@ 
+fade 1 500 
+32@ = 0 
+
+:CASINO9_11616
+if 
+  2500 > 32@ 
+jf @CASINO9_11646 
+wait 0 
+jump @CASINO9_11616 
+
+:CASINO9_11646
+fade 0 500 
+
+:CASINO9_11653
+if 
+fading 
+jf @CASINO9_11677 
+wait 0 
+jump @CASINO9_11653 
+
+:CASINO9_11677
+Actor.RemoveReferences(108@)
+Actor.RemoveReferences(109@)
+Actor.RemoveReferences(110@)
+Actor.RemoveReferences(111@)
+Actor.RemoveReferences(40@)
+Model.Destroy(#VMAFF1)
+Model.Destroy(#VMAFF2)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#VMAFF4)
+Model.Destroy(#WMYPLT)
+Model.Destroy(#JET_INTERIOR)
+Object.Destroy(164@)
+Object.Destroy(168@)
+Object.Destroy(169@)
+Object.Destroy(170@)
+Model.Destroy(#JET_BAGGAGE_DOOR)
+Model.Destroy(#CARDBOARDBOX2)
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Camera.SetAtPos(1405.0, 6000.0, 210.0)
+04E4: refresh_game_renderer_at 1405.0 6000.0 
+38@ = Car.Create(#SHAMAL, 1405.0, 6000.0, 210.0)
+Car.Angle(38@) = 210.0
+0840: link_car 38@ to_interior 0 
+036A: put_actor $PLAYER_ACTOR in_car 38@ 
+Car.SetSpeedInstantly(38@, 45.0)
+08E6: set_plane 38@ landing_gear 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+09BA: show_entered_zone_name 1 
+fade 1 100 
+018A: 43@ = create_checkpoint_at 1476.219 1463.623 9.8203 
+233@ = 1 
+234@ = 1 
+01F0: set_max_wanted_level_to 6 
+00BC: show_text_highpriority GXT 'CAS9_41' time 8000 flag 1  // ~s~Fly the plane back to the ~y~airport~s~.
+
+:CASINO9_11941
+wait 0 
+if 
+   not Car.Wrecked(38@)
+jf @CASINO9_12217 
+if 
+   Actor.InCar($PLAYER_ACTOR, 38@)
+jf @CASINO9_12055 
+if 
+  233@ == 0 
+jf @CASINO9_12048 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CAS9_41' time 8000 flag 1  // ~s~Fly the plane back to the ~y~airport~s~.
+Marker.Disable(43@)
+018A: 43@ = create_checkpoint_at 1476.219 1463.623 9.8203 
+233@ = 1 
+
+:CASINO9_12048
+jump @CASINO9_12118 
+
+:CASINO9_12055
+if 
+  233@ == 1 
+jf @CASINO9_12118 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'IN_VEH' time 8000 flag 1  // ~s~Hey! Get back in the ~b~vehicle~s~!
+Marker.Disable(43@)
+43@ = Marker.CreateAboveCar(38@)
+07E0: set_marker 43@ type_to 1 
+233@ = 0 
+
+:CASINO9_12118
+if and
+01AC:   car 38@ sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 stopped 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1636.319 1144.478 7.0 cornerB 1261.411 1780.672 14.0 
+jf @CASINO9_12210 
+jump @CASINO9_12555 
+
+:CASINO9_12210
+jump @CASINO9_12245 
+
+:CASINO9_12217
+50@ = 1 
+05AA: 51@s = 'CAS9_F1' // @s = 'short'  // ~r~You destroyed the plane.
+jump @CASINO9_12252 
+
+:CASINO9_12245
+jump @CASINO9_11941 
+
+:CASINO9_12252
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+  50@ == 1 
+jf @CASINO9_12308 
+00BC: show_text_highpriority GXT 51@s time 6000 flag 1 
+
+:CASINO9_12308
+236@ = 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASINO9_12369 
+235@ = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+02BF:   car 235@ sunk 
+jf @CASINO9_12362 
+236@ = 1 
+
+:CASINO9_12362
+jump @CASINO9_12445 
+
+:CASINO9_12369
+if 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @CASINO9_12445 
+if 
+04AD:   actor $PLAYER_ACTOR in_water 
+jf @CASINO9_12415 
+236@ = 1 
+jump @CASINO9_12445 
+
+:CASINO9_12415
+if and
+0818:   actor $PLAYER_ACTOR in_air 
+  0 >= $FREEFALL_STAGE 
+jf @CASINO9_12445 
+236@ = 1 
+
+:CASINO9_12445
+if 
+  236@ == 1 
+jf @CASINO9_12485 
+09AF: set_trip_skip_after_mission 2097.009 1728.284 9.8203 angle 169.1748 
+
+:CASINO9_12485
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CASINO9_12553 
+$11033 = 1 
+$11029 = 0.0 
+$11032 = 2158.42 
+$11031 = 1681.77 
+$11030 = 10.28 
+
+:CASINO9_12553
+return 
+
+:CASINO9_12555
+$CASINO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'CASINO9'  // Freefall
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 15000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 15000
+0998: add_respect 30 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+Marker.Disable($582)
+return 
+
+:CASINO9_12624
+if 
+  72@ == 1 
+jf @CASINO9_12649 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Camera.Restore_WithJumpCut
+
+:CASINO9_12649
+09BA: show_entered_zone_name 1 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CASINO9_12680 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+08F4: set_max_group_members 99 
+
+:CASINO9_12680
+create_thread @A_TERM 
+04EF: release_animation "MISC" 
+Model.Destroy(#VMAFF1)
+Model.Destroy(#VMAFF2)
+Model.Destroy(#VMAFF3)
+Model.Destroy(#VMAFF4)
+Model.Destroy(#WMYPLT)
+Model.Destroy(#FCR900)
+Model.Destroy(#DODO)
+Model.Destroy(#SHAMAL)
+Model.Destroy(#COLT45)
+Model.Destroy(#JET_BAGGAGE_DOOR)
+Model.Destroy(#CARDBOARDBOX2)
+Model.Destroy(#JET_INTERIOR)
+Actor.RemoveReferences(108@)
+Actor.RemoveReferences(109@)
+Actor.RemoveReferences(110@)
+Actor.RemoveReferences(111@)
+Actor.RemoveReferences(40@)
+Car.RemoveReferences(34@)
+Car.RemoveReferences(38@)
+Object.RemoveReferences(168@)
+Object.RemoveReferences(169@)
+Object.RemoveReferences(170@)
+Object.RemoveReferences(164@)
+01F0: set_max_wanted_level_to 6 
+0923: enable_air_traffic 1 
+Marker.Disable(35@)
+Marker.Disable(43@)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

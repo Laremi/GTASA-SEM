@@ -1,0 +1,2560 @@
+:SHTR
+gosub @SHTR_67 
+if 
+wasted_or_busted 
+jf @SHTR_27 
+gosub @SHTR_6767 
+
+:SHTR_27
+fade 1 500 
+
+:SHTR_34
+if 
+fading 
+jf @SHTR_58 
+wait 0 
+jump @SHTR_34 
+
+:SHTR_58
+gosub @SHTR_6787 
+end_thread 
+
+:SHTR_67
+$ONMISSION = 1 
+if 
+  $2202 == 0 
+jf @SHTR_94 
+increment_mission_attempts 
+
+:SHTR_94
+thread 'SHTR' 
+wait 0 
+09F5: disable_player_mutal_activities 1 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0395: clear_area 0 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 50.0 
+043C: disable_sounds_after_fadeout 0 
+054C: use_GXT_table 'SHTR' 
+03CF: load_wav 1806 as 4 
+
+:SHTR_167
+if 
+83D0:   not wav 4 loaded 
+jf @SHTR_193 
+wait 0 
+jump @SHTR_167 
+
+:SHTR_193
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+Player.CanMove($PLAYER_CHAR) = False
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0395: clear_area 1 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 25.0 
+03F0: enable_text_draw 1 
+0390: load_txd_dictionary 'LD_SHTR' 
+038F: load_texture "SPLSH" as 1 // Load dictionary with 0390 first 
+038F: load_texture "BSTARS" as 2 // Load dictionary with 0390 first 
+038F: load_texture "FSTAR" as 3 // Load dictionary with 0390 first 
+038F: load_texture "HI_A" as 4 // Load dictionary with 0390 first 
+038F: load_texture "HI_B" as 5 // Load dictionary with 0390 first 
+038F: load_texture "HI_C" as 6 // Load dictionary with 0390 first 
+038F: load_texture "UN_A" as 7 // Load dictionary with 0390 first 
+038F: load_texture "UN_B" as 8 // Load dictionary with 0390 first 
+038F: load_texture "UN_C" as 9 // Load dictionary with 0390 first 
+038F: load_texture "SHIP" as 10 // Load dictionary with 0390 first 
+038F: load_texture "FIRE" as 11 // Load dictionary with 0390 first 
+038F: load_texture "UFO" as 12 // Load dictionary with 0390 first 
+038F: load_texture "KAMI" as 13 // Load dictionary with 0390 first 
+038F: load_texture "NMEF" as 14 // Load dictionary with 0390 first 
+038F: load_texture "EX1" as 15 // Load dictionary with 0390 first 
+038F: load_texture "EX2" as 16 // Load dictionary with 0390 first 
+038F: load_texture "EX3" as 17 // Load dictionary with 0390 first 
+038F: load_texture "EX4" as 18 // Load dictionary with 0390 first 
+038F: load_texture "CBARL" as 19 // Load dictionary with 0390 first 
+038F: load_texture "CBARM" as 20 // Load dictionary with 0390 first 
+038F: load_texture "CBARR" as 21 // Load dictionary with 0390 first 
+038F: load_texture "HBARL" as 22 // Load dictionary with 0390 first 
+038F: load_texture "HBARM" as 23 // Load dictionary with 0390 first 
+038F: load_texture "HBARR" as 24 // Load dictionary with 0390 first 
+038F: load_texture "TVCORN" as 25 // Load dictionary with 0390 first 
+038F: load_texture "TVL" as 26 // Load dictionary with 0390 first 
+038F: load_texture "TVR" as 27 // Load dictionary with 0390 first 
+038F: load_texture "PA" as 28 // Load dictionary with 0390 first 
+038F: load_texture "PM2" as 29 // Load dictionary with 0390 first 
+038F: load_texture "PM3" as 30 // Load dictionary with 0390 first 
+038F: load_texture "PS1" as 31 // Load dictionary with 0390 first 
+038F: load_texture "PS2" as 32 // Load dictionary with 0390 first 
+038F: load_texture "PS3" as 33 // Load dictionary with 0390 first 
+
+:SHTR_582
+gosub @SHTR_17446 
+gosub @SHTR_15794 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+038D: draw_texture 25 position 160.0 112.0 size 320.0 224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 480.0 112.0 size -320.0 224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 480.0 336.0 size -320.0 -224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 160.0 336.0 size 320.0 -224.0 RGBA 150 150 150 255 
+33@ = 0 
+
+:SHTR_761
+wait 0 
+0086: $5588 = $5592 // (float) 
+$5593 = 2 
+$5589 = 1.0 
+gosub @SHTR_6986 
+$5590 = 1.0 
+gosub @SHTR_7229 
+0086: $5592 = $5588 // (float) 
+fade 1 0 
+0494: get_joystick 0 direction_offset_to $5569 $5570 $5571 $5572 
+
+:SHTR_844
+if 
+  $5652 == 1 
+jf @SHTR_899 
+if and
+80E1:   not player 0 pressed_key 8 
+80E1:   not player 0 pressed_key 9 
+  $5570 == 0 
+jf @SHTR_899 
+$5652 = 0 
+
+:SHTR_899
+if 
+  $5648 == 1 
+jf @SHTR_1135 
+038D: draw_texture 1 position 320.0 164.0 size 386.0 192.0 RGBA 150 150 150 255 
+038D: draw_texture 4 position 320.0 312.0 size 64.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 8 position 320.0 344.0 size 128.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 9 position 320.0 376.0 size 64.0 32.0 RGBA 150 150 150 255 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_1135 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1062 
+01BD: $5582 = current_time_in_ms 
+01BD: $5992 = current_time_in_ms 
+$5648 = 0 
+
+:SHTR_1135
+if 
+  $5648 == 2 
+jf @SHTR_1353 
+038D: draw_texture 1 position 320.0 164.0 size 386.0 192.0 RGBA 150 150 150 255 
+038D: draw_texture 7 position 320.0 312.0 size 64.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 5 position 320.0 344.0 size 128.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 9 position 320.0 376.0 size 64.0 32.0 RGBA 150 150 150 255 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_1353 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+01BD: $5992 = current_time_in_ms 
+$6156 = 4 
+$5648 = 4 
+
+:SHTR_1353
+if 
+  $5648 == 3 
+jf @SHTR_1565 
+038D: draw_texture 1 position 320.0 164.0 size 386.0 192.0 RGBA 150 150 150 255 
+038D: draw_texture 7 position 320.0 312.0 size 64.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 8 position 320.0 344.0 size 128.0 32.0 RGBA 150 150 150 255 
+038D: draw_texture 6 position 320.0 376.0 size 64.0 32.0 RGBA 150 150 150 255 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_1565 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1066 
+fade 0 0 
+jump @SHTR_27 
+
+:SHTR_1565
+if 
+  $5652 == 0 
+jf @SHTR_2027 
+if 
+  $5648 == 1 
+jf @SHTR_1731 
+if or
+00E1:   player 0 pressed_key 8 
+  -64 > $5570 
+jf @SHTR_1666 
+$5648 = 3 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_1666
+if or
+00E1:   player 0 pressed_key 9 
+  $5570 > 64 
+jf @SHTR_1731 
+$5648 = 2 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_1731
+if 
+  $5648 == 2 
+jf @SHTR_1879 
+if or
+00E1:   player 0 pressed_key 8 
+  -64 > $5570 
+jf @SHTR_1814 
+$5648 = 1 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_1814
+if or
+00E1:   player 0 pressed_key 9 
+  $5570 > 64 
+jf @SHTR_1879 
+$5648 = 3 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_1879
+if 
+  $5648 == 3 
+jf @SHTR_2027 
+if or
+00E1:   player 0 pressed_key 8 
+  -64 > $5570 
+jf @SHTR_1962 
+$5648 = 2 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_1962
+if or
+00E1:   player 0 pressed_key 9 
+  $5570 > 64 
+jf @SHTR_2027 
+$5648 = 1 
+$5652 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+jump @SHTR_844 
+
+:SHTR_2027
+if 
+  $5648 == 0 
+jf @SHTR_5956 
+0494: get_joystick 0 direction_offset_to $5569 $5570 $5571 $5572 
+if 
+  $5580 == 0 
+jf @SHTR_2150 
+01BD: $5594 = current_time_in_ms 
+if 
+  $5649 > 0 
+jf @SHTR_2150 
+$5649 -= 1 
+$5653 = 2.0 
+$5654 = 4.0 
+$5581 = 5 
+$5580 = 2 
+$5960 = 0 
+
+:SHTR_2150
+if 
+  $5580 == 1 
+jf @SHTR_2200 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_2200
+if or
+  $5580 == 1 
+  $5580 == 3 
+jf @SHTR_2287 
+0084: $5573 = $5569 // (int) 
+$5573 /= 20 
+008D: $5574 = integer $5573 to_float 
+007A: $5575 += frame_delta_time * $5574 // (float) 
+0084: $5573 = $5570 // (int) 
+$5573 /= 20 
+008D: $5574 = integer $5573 to_float 
+007A: $5576 += frame_delta_time * $5574 // (float) 
+
+:SHTR_2287
+if or
+  $5580 == 1 
+  $5580 == 3 
+jf @SHTR_2420 
+if 
+00E1:   player 0 pressed_key 8 
+jf @SHTR_2339 
+007E: $5576 -= frame_delta_time * 6.0 // (float) 
+
+:SHTR_2339
+if 
+00E1:   player 0 pressed_key 9 
+jf @SHTR_2366 
+0078: $5576 += frame_delta_time * 6.0 // (float) 
+
+:SHTR_2366
+if 
+00E1:   player 0 pressed_key 10 
+jf @SHTR_2393 
+007E: $5575 -= frame_delta_time * 6.0 // (float) 
+
+:SHTR_2393
+if 
+00E1:   player 0 pressed_key 11 
+jf @SHTR_2420 
+0078: $5575 += frame_delta_time * 6.0 // (float) 
+
+:SHTR_2420
+if 
+  80.0 > $5575 
+jf @SHTR_2451 
+$5575 = 80.0 
+
+:SHTR_2451
+if 
+  $5575 > 560.0 
+jf @SHTR_2482 
+$5575 = 560.0 
+
+:SHTR_2482
+if 
+  80.0 > $5576 
+jf @SHTR_2513 
+$5576 = 80.0 
+
+:SHTR_2513
+if 
+  $5576 > 368.0 
+jf @SHTR_2544 
+$5576 = 368.0 
+
+:SHTR_2544
+if 
+  $5579 == 1 
+jf @SHTR_2683 
+01BD: $5583 = current_time_in_ms 
+0084: $5584 = $5583 // (int) 
+0060: $5584 -= $5582 // (int) 
+if 
+  $5957 == 0 
+jf @SHTR_2651 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @SHTR_2644 
+if 
+001C:   $5584 > $5956 // (int) 
+jf @SHTR_2644 
+$5579 = 0 
+
+:SHTR_2644
+jump @SHTR_2683 
+
+:SHTR_2651
+if or
+80E1:   not player 0 pressed_key 16 
+001C:   $5584 > $5956 // (int) 
+jf @SHTR_2683 
+$5579 = 0 
+
+:SHTR_2683
+if 
+  7 > $5581 
+jf @SHTR_2708 
+$5581 = 7 
+
+:SHTR_2708
+$5581 -= 7 
+if or
+  $5580 == 1 
+  $5580 == 3 
+jf @SHTR_3210 
+if 
+  1000 > $5581 
+jf @SHTR_3210 
+if 
+  $5579 == 0 
+jf @SHTR_3210 
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_3210 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1059 
+02F7: $5856 = cosine $5854 // (float) 
+0086: $5857 = $5591 // (float) 
+0069: $5857 *= $5856 // (float) 
+02F6: $5855 = sine $5854 // (float) 
+0086: $5858 = $5591 // (float) 
+0069: $5858 *= $5855 // (float) 
+if 
+  $5659($5658,16i) == 0 
+jf @SHTR_2949 
+0086: $5707($5658,16f) = $5575 // (float) 
+0086: $5691($5658,16f) = $5576 // (float) 
+0086: $5675($5658,16f) = $5707($5658,16f) // (float) 
+$5675($5658,16f) += 16.0 
+$5659($5658,16i) = 1 
+
+:SHTR_2949
+if or
+  $5958 == 1 
+  $5958 == 2 
+jf @SHTR_3061 
+if 
+  $5725($5658,16i) == 0 
+jf @SHTR_3061 
+0086: $5773($5658,16f) = $5575 // (float) 
+0086: $5757($5658,16f) = $5576 // (float) 
+0086: $5741($5658,16f) = $5773($5658,16f) // (float) 
+$5741($5658,16f) += 16.0 
+$5725($5658,16i) = 1 
+
+:SHTR_3061
+if 
+  $5958 == 2 
+jf @SHTR_3166 
+if 
+  $5789($5658,16i) == 0 
+jf @SHTR_3166 
+0086: $5837($5658,16f) = $5575 // (float) 
+0086: $5821($5658,16f) = $5576 // (float) 
+0086: $5805($5658,16f) = $5837($5658,16f) // (float) 
+$5805($5658,16f) += 16.0 
+$5789($5658,16i) = 1 
+
+:SHTR_3166
+01BD: $5582 = current_time_in_ms 
+$5658 += 1 
+$5579 = 1 
+if 
+  $5658 == 16 
+jf @SHTR_3210 
+$5658 = 0 
+
+:SHTR_3210
+gosub @SHTR_9211 
+gosub @SHTR_10139 
+if 
+  $5951 == 0 
+jf @SHTR_4076 
+038D: draw_texture $5952 position $5954 $5955 size 32.0 32.0 RGBA 150 150 150 255 
+if 
+  $5953 == 0 
+jf @SHTR_3360 
+if and
+  368.0 > $5955 
+  $5954 > 80.0 
+jf @SHTR_3351 
+$5954 += -1.0 
+$5955 += 1.0 
+jump @SHTR_3360 
+
+:SHTR_3351
+0209: $5953 = random_int_in_ranges 0 4 
+
+:SHTR_3360
+if 
+  $5953 == 1 
+jf @SHTR_3445 
+if and
+  $5954 > 80.0 
+  $5955 > 80.0 
+jf @SHTR_3436 
+$5954 += -1.0 
+$5955 += -1.0 
+jump @SHTR_3445 
+
+:SHTR_3436
+0209: $5953 = random_int_in_ranges 0 4 
+
+:SHTR_3445
+if 
+  $5953 == 2 
+jf @SHTR_3530 
+if and
+  $5955 > 80.0 
+  560.0 > $5954 
+jf @SHTR_3521 
+$5954 += 1.0 
+$5955 += -1.0 
+jump @SHTR_3530 
+
+:SHTR_3521
+0209: $5953 = random_int_in_ranges 0 4 
+
+:SHTR_3530
+if 
+  $5953 == 3 
+jf @SHTR_3615 
+if and
+  560.0 > $5954 
+  368.0 > $5955 
+jf @SHTR_3606 
+$5954 += 1.0 
+$5955 += 1.0 
+jump @SHTR_3615 
+
+:SHTR_3606
+0209: $5953 = random_int_in_ranges 0 4 
+
+:SHTR_3615
+if 
+05A5:   is_area_center $5575 $5576 scale 32.0 32.0 overlaping_area_center $5954 $5955 scale 32.0 32.0 
+jf @SHTR_4076 
+if 
+  6.5 > $5654 
+jf @SHTR_3701 
+$5653 += 0.5 
+$5654 += 0.5 
+
+:SHTR_3701
+$5954 = 0.0 
+$5955 = 0.0 
+$5953 = 0 
+if 
+  $5952 == 28 
+jf @SHTR_3780 
+$5957 = 1 
+$5951 = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_3780
+if 
+  $5952 == 33 
+jf @SHTR_3839 
+$5956 = 50 
+$5952 = 28 
+$5951 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_3839
+if 
+  $5952 == 30 
+jf @SHTR_3898 
+$5958 = 2 
+$5952 = 33 
+$5951 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_3898
+if 
+  $5952 == 32 
+jf @SHTR_3957 
+$5956 = 100 
+$5952 = 30 
+$5951 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_3957
+if 
+  $5952 == 29 
+jf @SHTR_4016 
+$5958 = 1 
+$5952 = 32 
+$5951 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_4016
+if 
+  $5952 == 31 
+jf @SHTR_4076 
+$5956 = 150 
+$5952 = 29 
+$5951 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_4076
+if 
+  $5655 == 0 
+jf @SHTR_4190 
+if 
+  33@ > 500 
+jf @SHTR_4190 
+if 
+  $5860[0] == 0 
+jf @SHTR_4190 
+$5859 = 0 
+if 
+  60.0 > $5949 
+jf @SHTR_4169 
+$5949 += 5.0 
+
+:SHTR_4169
+gosub @SHTR_8027 
+33@ = 0 
+$5655 += 1 
+
+:SHTR_4190
+if and
+  $5655 > 0 
+  8 > $5655 
+jf @SHTR_4230 
+0084: $5859 = $5655 // (int) 
+gosub @SHTR_7472 
+
+:SHTR_4230
+if 
+  $5655 == 8 
+jf @SHTR_4347 
+if and
+  $5860[0] == 0 
+  $5860[1] == 0 
+  $5860[2] == 0 
+  $5860[3] == 0 
+jf @SHTR_4347 
+if and
+  $5860[4] == 0 
+  $5860[5] == 0 
+  $5860[6] == 0 
+  $5860[7] == 0 
+jf @SHTR_4347 
+$5950 = 0 
+$5876 = 0 
+$5655 = 0 
+
+:SHTR_4347
+gosub @SHTR_8789 
+gosub @SHTR_7564 
+gosub @SHTR_9636 
+if 
+  $5580 == 2 
+jf @SHTR_5128 
+if 
+  $5960 == 2 
+jf @SHTR_4773 
+01BD: $5595 = current_time_in_ms 
+0084: $5596 = $5595 // (int) 
+0060: $5596 -= $5594 // (int) 
+if and
+  $5596 >= 0 
+  100 > $5596 
+jf @SHTR_4482 
+038D: draw_texture 15 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4482
+if and
+  $5596 >= 100 
+  200 > $5596 
+jf @SHTR_4540 
+038D: draw_texture 16 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4540
+if and
+  $5596 >= 200 
+  300 > $5596 
+jf @SHTR_4599 
+038D: draw_texture 17 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4599
+if and
+  $5596 >= 300 
+  400 > $5596 
+jf @SHTR_4658 
+038D: draw_texture 18 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4658
+if 
+  $5596 > 499 
+jf @SHTR_4766 
+$5575 = 80.0 
+$5576 = 224.0 
+$5580 = 3 
+$5960 = 0 
+$5950 = 0 
+$5951 = 1 
+$5952 = 31 
+$5956 = 250 
+$5957 = 0 
+$5958 = 0 
+$5953 = 0 
+01BD: $5594 = current_time_in_ms 
+
+:SHTR_4766
+jump @SHTR_5128 
+
+:SHTR_4773
+01BD: $5595 = current_time_in_ms 
+0084: $5596 = $5595 // (int) 
+0060: $5596 -= $5594 // (int) 
+if and
+  $5596 >= 0 
+  100 > $5596 
+jf @SHTR_4851 
+038D: draw_texture 15 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4851
+if and
+  $5596 >= 100 
+  200 > $5596 
+jf @SHTR_4909 
+038D: draw_texture 16 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4909
+if and
+  $5596 >= 200 
+  300 > $5596 
+jf @SHTR_4968 
+038D: draw_texture 17 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_4968
+if and
+  $5596 >= 300 
+  400 > $5596 
+jf @SHTR_5027 
+038D: draw_texture 18 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_5027
+if 
+  $5596 > 499 
+jf @SHTR_5128 
+01BD: $5594 = current_time_in_ms 
+$5575 = 80.0 
+$5576 = 224.0 
+$5950 = 0 
+$5951 = 1 
+$5952 = 31 
+$5956 = 250 
+$5957 = 0 
+$5958 = 0 
+$5953 = 0 
+$5580 = 3 
+
+:SHTR_5128
+if 
+  $5580 == 3 
+jf @SHTR_5781 
+01BD: $5595 = current_time_in_ms 
+0084: $5596 = $5595 // (int) 
+0060: $5596 -= $5594 // (int) 
+if and
+  $5596 >= 0 
+  100 > $5596 
+jf @SHTR_5224 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5224
+if and
+  $5596 >= 200 
+  300 > $5596 
+jf @SHTR_5283 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5283
+if and
+  $5596 >= 400 
+  500 > $5596 
+jf @SHTR_5342 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5342
+if and
+  $5596 >= 600 
+  700 > $5596 
+jf @SHTR_5401 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5401
+if and
+  $5596 >= 800 
+  900 > $5596 
+jf @SHTR_5460 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5460
+if and
+  $5596 >= 1000 
+  1100 > $5596 
+jf @SHTR_5519 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5519
+if and
+  $5596 >= 1200 
+  1300 > $5596 
+jf @SHTR_5578 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5578
+if and
+  $5596 >= 1400 
+  1500 > $5596 
+jf @SHTR_5637 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5637
+if and
+  $5596 >= 1600 
+  1700 > $5596 
+jf @SHTR_5696 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5696
+if and
+  $5596 >= 1800 
+  1900 > $5596 
+jf @SHTR_5755 
+038D: draw_texture 10 position $5575 $5576 size 32.0 32.0 RGBA 150 150 150 150 
+
+:SHTR_5755
+if 
+  $5596 >= 2000 
+jf @SHTR_5781 
+$5580 = 1 
+
+:SHTR_5781
+if 
+001C:   $5650 > $5651 // (int) 
+jf @SHTR_5815 
+0084: $5651 = $5650 // (int) 
+$5568 = 1 
+
+:SHTR_5815
+gosub @SHTR_6947 
+033F: set_text_draw_letter_size 0.6 1.2 
+03E4: set_text_draw_align_right 1 
+045A: draw_text_1number 560.0 48.0 GXT 'SHTR_2B' number $5649  // LIVES ~1~
+gosub @SHTR_6947 
+0342: set_text_draw_centered 0 
+0341: set_text_draw_align_justify 1 
+033F: set_text_draw_letter_size 0.6 1.2 
+045A: draw_text_1number 80.0 48.0 GXT 'SHTR_2D' number $5650  // 1UP ~1~
+gosub @SHTR_6947 
+033F: set_text_draw_letter_size 0.6 1.2 
+045A: draw_text_1number 320.0 48.0 GXT 'SHTR_2C' number $5651  // HI-SCORE ~1~
+
+:SHTR_5956
+if 
+  $5648 == 0 
+jf @SHTR_6064 
+if 
+  $5580 == 0 
+jf @SHTR_6064 
+if 
+  $5649 == 0 
+jf @SHTR_6064 
+$5648 = 4 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1063 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1067 
+$6156 = 0 
+
+:SHTR_6064
+if 
+  $5648 == 4 
+jf @SHTR_6372 
+if 
+  $6156 == 0 
+jf @SHTR_6152 
+gosub @SHTR_6947 
+033F: set_text_draw_letter_size 2.0 4.0 
+033E: set_draw_text_position 320.0 196.0 GXT 'SHTR_3B'  // GAME OVER!
+01BD: $5594 = current_time_in_ms 
+$6156 = 1 
+
+:SHTR_6152
+if 
+  $6156 == 1 
+jf @SHTR_6257 
+gosub @SHTR_6947 
+033F: set_text_draw_letter_size 2.0 4.0 
+033E: set_draw_text_position 320.0 196.0 GXT 'SHTR_3B'  // GAME OVER!
+01BD: $5595 = current_time_in_ms 
+0084: $5596 = $5595 // (int) 
+0060: $5596 -= $5594 // (int) 
+if 
+  $5596 > 5000 
+jf @SHTR_6257 
+$6156 = 2 
+
+:SHTR_6257
+if 
+  $6156 == 2 
+jf @SHTR_6315 
+if 
+001C:   $2062[9] > $5650 // (int) 
+jf @SHTR_6308 
+$6156 = 4 
+jump @SHTR_6315 
+
+:SHTR_6308
+gosub @SHTR_11097 
+
+:SHTR_6315
+if 
+  $6156 == 3 
+jf @SHTR_6347 
+gosub @SHTR_11414 
+gosub @SHTR_12477 
+
+:SHTR_6347
+if 
+  $6156 == 4 
+jf @SHTR_6372 
+gosub @SHTR_12477 
+
+:SHTR_6372
+if 
+  $5648 == 4 
+jf @SHTR_6441 
+if and
+00E1:   player 0 pressed_key 15 
+   not $6156 == 1 
+jf @SHTR_6441 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1066 
+jump @SHTR_582 
+
+:SHTR_6441
+038D: draw_texture 25 position 160.0 112.0 size 320.0 224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 480.0 112.0 size -320.0 224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 480.0 336.0 size -320.0 -224.0 RGBA 150 150 150 255 
+038D: draw_texture 25 position 160.0 336.0 size 320.0 -224.0 RGBA 150 150 150 255 
+if 
+  $5648 == 0 
+jf @SHTR_6603 
+
+:SHTR_6603
+if 
+  $5648 == 4 
+jf @SHTR_6760 
+if 
+  $6156 == 4 
+jf @SHTR_6760 
+01BD: $5991 = current_time_in_ms 
+0084: $5990 = $5991 // (int) 
+0060: $5990 -= $5992 // (int) 
+if 
+  10000 > $5990 
+jf @SHTR_6760 
+0937: text_draw_box_cornerA 35.0 15.0 cornerB 200.0 45.0 GXT_reference 'DUMMY' style 0 
+0342: set_text_draw_centered 0 
+0343: set_text_draw_linewidth 230.0 
+0349: set_text_draw_font 1 
+033F: set_text_draw_letter_size 0.5 1.8 
+033E: set_draw_text_position 40.0 20.0 GXT 'SH_BCK'  // ~w~~k~~VEHICLE_ENTER_EXIT~ Back
+
+:SHTR_6760
+jump @SHTR_761 
+
+:SHTR_6767
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+return 
+
+:SHTR_6787
+03D5: remove_text 'BUSY'  // You look a bit busy, why don't you come back later.
+0391: release_textures 
+040D: unload_wav 4 
+09F5: disable_player_mutal_activities 0 
+043C: disable_sounds_after_fadeout 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1063 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @SHTR_6936 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $X_PERSHING_SQUARE_LS $Y_PERSHING_SQUARE_LS $Z_PERSHING_SQUARE_LS radius 2.0 2.0 2.0 on_foot 
+jf @SHTR_6922 
+0086: $TEMPVAR_FLOAT_2 = $Y_PERSHING_SQUARE_LS // (float) 
+$TEMPVAR_FLOAT_2 += 2.0 
+Actor.PutAt($PLAYER_ACTOR, $X_PERSHING_SQUARE_LS, $TEMPVAR_FLOAT_2, $Z_PERSHING_SQUARE_LS)
+
+:SHTR_6922
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Player.CanMove($PLAYER_CHAR) = True
+
+:SHTR_6936
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:SHTR_6947
+0340: set_text_draw_RGBA 255 255 255 255 
+033F: set_text_draw_letter_size 1.0 2.0 
+0342: set_text_draw_centered 1 
+0343: set_text_draw_linewidth 640.0 
+return 
+
+:SHTR_6986
+0086: $5587 = $5588 // (float) 
+$5587 -= 256.0 
+038D: draw_texture $5593 position $5587 336.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+038D: draw_texture $5593 position $5587 336.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+$5587 += 256.0 
+038D: draw_texture $5593 position $5587 336.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+$5587 += 512.0 
+038D: draw_texture $5593 position $5587 336.0 size 256.0 256.0 RGBA 150 150 150 255 
+0080: $5588 -= frame_delta_time * $5589 // (float) 
+if 
+  0.0 > $5588 
+jf @SHTR_7227 
+$5588 += 256.0 
+
+:SHTR_7227
+return 
+
+:SHTR_7229
+0086: $5587 = $5588 // (float) 
+$5587 -= 256.0 
+038D: draw_texture $5593 position $5587 112.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+038D: draw_texture $5593 position $5587 112.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+$5587 += 256.0 
+038D: draw_texture $5593 position $5587 112.0 size 256.0 256.0 RGBA 150 150 150 255 
+0086: $5587 = $5588 // (float) 
+$5587 += 512.0 
+038D: draw_texture $5593 position $5587 112.0 size 256.0 256.0 RGBA 150 150 150 255 
+0080: $5588 -= frame_delta_time * $5590 // (float) 
+if 
+  0.0 > $5588 
+jf @SHTR_7470 
+$5588 += 256.0 
+
+:SHTR_7470
+return 
+
+:SHTR_7472
+if 
+001F:   33@ > $5656 // (int) 
+jf @SHTR_7562 
+if 
+  $5860($5859,16i) == 0 
+jf @SHTR_7562 
+0086: $5877($5859,16f) = $5909 // (float) 
+0086: $5925($5859,16f) = $5925[0] // (float) 
+$5860($5859,16i) = 1 
+33@ = 0 
+$5655 += 1 
+
+:SHTR_7562
+return 
+
+:SHTR_7564
+$5859 = 0 
+
+:SHTR_7571
+if 
+  8 > $5859 
+jf @SHTR_8025 
+if 
+  $5860($5859,16i) == 2 
+jf @SHTR_8011 
+01BD: $5613($5859,16i) = current_time_in_ms 
+0084: $5629($5859,16i) = $5613($5859,16i) // (int) 
+0060: $5629($5859,16i) -= $5597($5859,16i) // (int) 
+if and
+  $5629($5859,16i) >= 0 
+  100 > $5629($5859,16i) 
+jf @SHTR_7725 
+038D: draw_texture 15 position $5877($5859,16f) $5893($5859,16f) size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_7725
+if and
+  $5629($5859,16i) >= 100 
+  200 > $5629($5859,16i) 
+jf @SHTR_7799 
+038D: draw_texture 16 position $5877($5859,16f) $5893($5859,16f) size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_7799
+if and
+  $5629($5859,16i) >= 200 
+  300 > $5629($5859,16i) 
+jf @SHTR_7874 
+038D: draw_texture 17 position $5877($5859,16f) $5893($5859,16f) size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_7874
+if and
+  $5629($5859,16i) >= 300 
+  400 > $5629($5859,16i) 
+jf @SHTR_7949 
+038D: draw_texture 18 position $5877($5859,16f) $5893($5859,16f) size 32.0 32.0 RGBA 150 150 150 255 
+
+:SHTR_7949
+if 
+  $5629($5859,16i) > 499 
+jf @SHTR_8011 
+$5877($5859,16f) = 0.0 
+$5893($5859,16f) = 0.0 
+$5860($5859,16i) = 0 
+
+:SHTR_8011
+$5859 += 1 
+jump @SHTR_7571 
+
+:SHTR_8025
+return 
+
+:SHTR_8027
+if 
+  $5860[0] == 0 
+jf @SHTR_8787 
+if 
+  $5876 == 0 
+jf @SHTR_8787 
+0208: $5909 = random_float_in_ranges 640.0 720.0 
+0086: $5877[0] = $5909 // (float) 
+0208: $5942 = random_float_in_ranges 240.0 640.0 
+0208: $5946 = random_float_in_ranges 80.0 368.0 
+0086: $5947 = $5946 // (float) 
+0061: $5947 -= $5949 // (float) 
+if 
+  80.0 > $5947 
+jf @SHTR_8161 
+0059: $5946 += $5949 // (float) 
+
+:SHTR_8161
+0086: $5948 = $5946 // (float) 
+0059: $5948 += $5949 // (float) 
+if 
+  80.0 > $5948 
+jf @SHTR_8206 
+0061: $5946 -= $5949 // (float) 
+
+:SHTR_8206
+0208: $5925[0] = random_float_in_ranges $5653 $5654 
+if and
+  $5925[0] >= 1.0 
+  1.5 > $5925[0] 
+jf @SHTR_8256 
+$5656 = 500 
+
+:SHTR_8256
+if and
+  $5925[0] >= 1.5 
+  2.0 > $5925[0] 
+jf @SHTR_8295 
+$5656 = 475 
+
+:SHTR_8295
+if and
+  $5925[0] >= 2.0 
+  2.5 > $5925[0] 
+jf @SHTR_8334 
+$5656 = 450 
+
+:SHTR_8334
+if and
+  $5925[0] >= 2.5 
+  3.0 > $5925[0] 
+jf @SHTR_8373 
+$5656 = 425 
+
+:SHTR_8373
+if and
+  $5925[0] >= 3.0 
+  3.5 > $5925[0] 
+jf @SHTR_8412 
+$5656 = 400 
+
+:SHTR_8412
+if and
+  $5925[0] >= 3.5 
+  4.0 > $5925[0] 
+jf @SHTR_8451 
+$5656 = 375 
+
+:SHTR_8451
+if and
+  $5925[0] >= 4.0 
+  4.5 > $5925[0] 
+jf @SHTR_8490 
+$5656 = 350 
+
+:SHTR_8490
+if and
+  $5925[0] >= 4.5 
+  5.0 > $5925[0] 
+jf @SHTR_8529 
+$5656 = 325 
+
+:SHTR_8529
+if and
+  $5925[0] >= 5.0 
+  5.5 > $5925[0] 
+jf @SHTR_8568 
+$5656 = 300 
+
+:SHTR_8568
+if and
+  $5925[0] >= 5.5 
+  6.0 > $5925[0] 
+jf @SHTR_8607 
+$5656 = 275 
+
+:SHTR_8607
+if and
+  $5925[0] >= 6.0 
+  6.5 > $5925[0] 
+jf @SHTR_8646 
+$5656 = 250 
+
+:SHTR_8646
+if and
+  $5925[0] >= 6.5 
+  7.0 > $5925[0] 
+jf @SHTR_8685 
+$5656 = 225 
+
+:SHTR_8685
+if and
+  $5925[0] >= 7.0 
+  7.5 > $5925[0] 
+jf @SHTR_8724 
+$5656 = 200 
+
+:SHTR_8724
+if and
+  $5925[0] >= 7.5 
+  8.0 >= $5925[0] 
+jf @SHTR_8763 
+$5656 = 175 
+
+:SHTR_8763
+0209: $5959 = random_int_in_ranges 100 1500 
+$5860[0] = 1 
+$5876 = 1 
+
+:SHTR_8787
+return 
+
+:SHTR_8789
+$5859 = 0 
+
+:SHTR_8796
+if 
+  8 > $5859 
+jf @SHTR_9209 
+if 
+  $5860($5859,16i) == 1 
+jf @SHTR_9195 
+038D: draw_texture 12 position $5877($5859,16f) $5893($5859,16f) size 32.0 32.0 RGBA 150 150 150 255 
+0080: $5877($5859,16f) -= frame_delta_time * $5925($5859,16f) // (float) 
+0086: $5941 = $5877($5859,16f) // (float) 
+0071: $5941 /= $5942 // (float) 
+0086: $5943 = $5941 // (float) 
+$5943 *= 360.0 
+02F6: $5944 = sine $5943 // (float) 
+0086: $5945 = $5944 // (float) 
+0069: $5945 *= $5949 // (float) 
+0086: $5893($5859,16f) = $5945 // (float) 
+0059: $5893($5859,16f) += $5946 // (float) 
+if 
+  0.0 > $5877($5859,16f) 
+jf @SHTR_9195 
+$5877($5859,16f) = 0.0 
+$5893($5859,16f) = 0.0 
+if 
+  $5650 > 24 
+jf @SHTR_9184 
+if 
+003A:   $5650 == $5651 // (int) 
+jf @SHTR_9177 
+if and
+001C:   $5650 > $2062[0] // (int) 
+001C:   $5650 > $2062[1] // (int) 
+001C:   $5650 > $2062[2] // (int) 
+001C:   $5650 > $2062[3] // (int) 
+001C:   $5650 > $2062[4] // (int) 
+jf @SHTR_9177 
+if and
+001C:   $5650 > $2062[5] // (int) 
+001C:   $5650 > $2062[6] // (int) 
+001C:   $5650 > $2062[7] // (int) 
+001C:   $5650 > $2062[8] // (int) 
+001C:   $5650 > $2062[9] // (int) 
+jf @SHTR_9177 
+$5651 -= 25 
+
+:SHTR_9177
+$5650 -= 25 
+
+:SHTR_9184
+$5860($5859,16i) = 0 
+
+:SHTR_9195
+$5859 += 1 
+jump @SHTR_8796 
+
+:SHTR_9209
+return 
+
+:SHTR_9211
+$5657 = 1 
+
+:SHTR_9218
+if 
+  16 > $5657 
+jf @SHTR_9634 
+if 
+  $5659($5657,16i) == 1 
+jf @SHTR_9356 
+038D: draw_texture 11 position $5675($5657,16f) $5691($5657,16f) size $5853 $5853 RGBA 150 150 150 255 
+007A: $5675($5657,16f) += frame_delta_time * $5591 // (float) 
+if 
+  $5675($5657,16f) > 639.0 
+jf @SHTR_9356 
+$5691($5657,16f) = 0.0 
+$5659($5657,16i) = 0 
+
+:SHTR_9356
+if 
+  $5725($5657,16i) == 1 
+jf @SHTR_9488 
+038D: draw_texture 11 position $5741($5657,16f) $5757($5657,16f) size $5853 $5853 RGBA 150 150 150 255 
+007A: $5741($5657,16f) += frame_delta_time * $5857 // (float) 
+0080: $5757($5657,16f) -= frame_delta_time * $5858 // (float) 
+if 
+  $5741($5657,16f) > 639.0 
+jf @SHTR_9488 
+$5757($5657,16f) = 0.0 
+$5725($5657,16i) = 0 
+
+:SHTR_9488
+if 
+  $5789($5657,16i) == 1 
+jf @SHTR_9620 
+038D: draw_texture 11 position $5805($5657,16f) $5821($5657,16f) size $5853 $5853 RGBA 150 150 150 255 
+007A: $5805($5657,16f) += frame_delta_time * $5857 // (float) 
+007A: $5821($5657,16f) += frame_delta_time * $5858 // (float) 
+if 
+  $5805($5657,16f) > 639.0 
+jf @SHTR_9620 
+$5821($5657,16f) = 0.0 
+$5789($5657,16i) = 0 
+
+:SHTR_9620
+$5657 += 1 
+jump @SHTR_9218 
+
+:SHTR_9634
+return 
+
+:SHTR_9636
+$5859 = 0 
+
+:SHTR_9643
+if 
+  8 > $5859 
+jf @SHTR_10137 
+if 
+  $5877($5859,16f) > 320.0 
+jf @SHTR_9840 
+if 
+  $5989 == 0 
+jf @SHTR_9840 
+if 
+  $5860($5859,16i) == 1 
+jf @SHTR_9840 
+if 
+  $5981($5859,8i) == 0 
+jf @SHTR_9840 
+0086: $5965($5859,8f) = $5877($5859,16f) // (float) 
+0086: $5973($5859,8f) = $5893($5859,16f) // (float) 
+$5981($5859,8i) = 1 
+$5989 += 1 
+0086: $5964 = $5925($5859,16f) // (float) 
+$5964 *= 1.5 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1060 
+
+:SHTR_9840
+if 
+  $5989 == 1 
+jf @SHTR_10123 
+if 
+  $5981($5859,8i) == 1 
+jf @SHTR_10123 
+if 
+  $5580 == 1 
+jf @SHTR_10004 
+if 
+05A5:   is_area_center $5575 $5576 scale 32.0 32.0 overlaping_area_center $5965($5859,8f) $5973($5859,8f) scale 8.0 8.0 
+jf @SHTR_10004 
+$5981($5859,8i) = 0 
+$5965($5859,8f) = 0.0 
+$5973($5859,8f) = 0.0 
+$5989 = 0 
+$5580 = 0 
+
+:SHTR_10004
+038D: draw_texture 14 position $5965($5859,8f) $5973($5859,8f) size $5853 $5853 RGBA 150 150 150 255 
+0080: $5965($5859,8f) -= frame_delta_time * $5964 // (float) 
+if 
+  0.0 > $5965($5859,8f) 
+jf @SHTR_10123 
+$5981($5859,8i) = 0 
+$5965($5859,8f) = 0.0 
+$5973($5859,8f) = 0.0 
+$5989 = 0 
+
+:SHTR_10123
+$5859 += 1 
+jump @SHTR_9643 
+
+:SHTR_10137
+return 
+
+:SHTR_10139
+$5859 = 0 
+
+:SHTR_10146
+if 
+  8 > $5859 
+jf @SHTR_11095 
+if 
+  $5860($5859,16i) == 1 
+jf @SHTR_10945 
+$5657 = 1 
+
+:SHTR_10193
+if 
+  16 > $5657 
+jf @SHTR_10945 
+if 
+05A5:   is_area_center $5675($5657,16f) $5691($5657,16f) scale $5723 $5724 overlaping_area_center $5877($5859,16f) $5893($5859,16f) scale $5585 $5586 
+jf @SHTR_10451 
+$5650 += 100 
+$5860($5859,16i) = 2 
+$5659($5657,16i) = 0 
+$5675($5657,16f) = 0.0 
+$5691($5657,16f) = 0.0 
+01BD: $5597($5859,16i) = current_time_in_ms 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1061 
+$5950 += 1 
+if 
+  $5951 == 1 
+jf @SHTR_10451 
+if 
+  $5950 == 8 
+jf @SHTR_10431 
+0086: $5954 = $5877($5859,16f) // (float) 
+0086: $5955 = $5893($5859,16f) // (float) 
+$5951 = 0 
+jump @SHTR_10451 
+
+:SHTR_10431
+$5954 = 0.0 
+$5955 = 0.0 
+
+:SHTR_10451
+if 
+05A5:   is_area_center $5741($5657,16f) $5757($5657,16f) scale $5723 $5724 overlaping_area_center $5877($5859,16f) $5893($5859,16f) scale $5585 $5586 
+jf @SHTR_10691 
+$5650 += 100 
+$5860($5859,16i) = 2 
+$5725($5657,16i) = 0 
+$5741($5657,16f) = 0.0 
+$5757($5657,16f) = 0.0 
+01BD: $5597($5859,16i) = current_time_in_ms 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1061 
+$5950 += 1 
+if 
+  $5951 == 1 
+jf @SHTR_10691 
+if 
+  $5950 == 8 
+jf @SHTR_10671 
+0086: $5954 = $5877($5859,16f) // (float) 
+0086: $5955 = $5893($5859,16f) // (float) 
+$5951 = 0 
+jump @SHTR_10691 
+
+:SHTR_10671
+$5954 = 0.0 
+$5955 = 0.0 
+
+:SHTR_10691
+if 
+05A5:   is_area_center $5805($5657,16f) $5821($5657,16f) scale $5723 $5724 overlaping_area_center $5877($5859,16f) $5893($5859,16f) scale $5585 $5586 
+jf @SHTR_10931 
+$5650 += 100 
+$5860($5859,16i) = 2 
+$5789($5657,16i) = 0 
+$5805($5657,16f) = 0.0 
+$5821($5657,16f) = 0.0 
+01BD: $5597($5859,16i) = current_time_in_ms 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1061 
+$5950 += 1 
+if 
+  $5951 == 1 
+jf @SHTR_10931 
+if 
+  $5950 == 8 
+jf @SHTR_10911 
+0086: $5954 = $5877($5859,16f) // (float) 
+0086: $5955 = $5893($5859,16f) // (float) 
+$5951 = 0 
+jump @SHTR_10931 
+
+:SHTR_10911
+$5954 = 0.0 
+$5955 = 0.0 
+
+:SHTR_10931
+$5657 += 1 
+jump @SHTR_10193 
+
+:SHTR_10945
+if 
+  $5860($5859,16i) == 1 
+jf @SHTR_11081 
+if 
+  $5580 == 1 
+jf @SHTR_11081 
+if 
+05A5:   is_area_center $5575 $5576 scale 32.0 32.0 overlaping_area_center $5877($5859,16f) $5893($5859,16f) scale $5585 $5586 
+jf @SHTR_11081 
+$5860($5859,16i) = 2 
+01BD: $5597($5859,16i) = current_time_in_ms 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1061 
+$5580 = 0 
+
+:SHTR_11081
+$5859 += 1 
+jump @SHTR_10146 
+
+:SHTR_11095
+return 
+
+:SHTR_11097
+$6151 = 9 
+$6152 = 0 
+$6153 = 1 
+
+:SHTR_11118
+if and
+  $6151 >= 0 
+  $6153 == 1 
+jf @SHTR_11215 
+if 
+001C:   $5650 > $2062($6151,10i) // (int) 
+jf @SHTR_11201 
+$6151 -= 1 
+$6152 = 1 
+$6156 = 3 
+$6069 = 1 
+jump @SHTR_11208 
+
+:SHTR_11201
+$6153 = 0 
+
+:SHTR_11208
+jump @SHTR_11118 
+
+:SHTR_11215
+if 
+  $6152 == 1 
+jf @SHTR_11412 
+$6151 += 1 
+$6154 = 9 
+$6155 = 8 
+
+:SHTR_11254
+if 
+002C:   $6155 >= $6151 // (int) 
+jf @SHTR_11374 
+05A9: $2002($6154,10s) = $2002($6155,10s) // s$ 
+05A9: $2022($6154,10s) = $2022($6155,10s) // s$ 
+05A9: $2042($6154,10s) = $2042($6155,10s) // s$ 
+0084: $2072($6154,10i) = $2072($6155,10i) // (int) 
+0084: $2062($6154,10i) = $2062($6155,10i) // (int) 
+$6154 -= 1 
+$6155 -= 1 
+jump @SHTR_11254 
+
+:SHTR_11374
+0084: $2062($6151,10i) = $5650 // (int) 
+0084: $2072($6151,10i) = $6157 // (int) 
+$6158 = 0 
+$6067 = 10 
+
+:SHTR_11412
+return 
+
+:SHTR_11414
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if and
+80E1:   not player 0 pressed_key 8 
+80E1:   not player 0 pressed_key 9 
+80E1:   not player 0 pressed_key 10 
+80E1:   not player 0 pressed_key 11 
+80E1:   not player 0 pressed_key 16 
+jf @SHTR_11503 
+if and
+  $MOVE_AXIS_Y == 0 
+  $MOVE_AXIS_X == 0 
+jf @SHTR_11503 
+$6068 = 0 
+
+:SHTR_11503
+if 
+  $6158 == 0 
+jf @SHTR_11843 
+05A9: $2002($6151,10s) = $SHTR_CHARACTERS($6067,37s) // s$ 
+05A9: $2022($6151,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2042($6151,10s) = s$SHTR_CHARACTERS[10] // s$ 
+if 
+  $6068 == 0 
+jf @SHTR_11843 
+if or
+00E1:   player 0 pressed_key 8 
+00E1:   player 0 pressed_key 11 
+  $MOVE_AXIS_X > 100 
+  -100 > $MOVE_AXIS_Y 
+jf @SHTR_11682 
+if 
+  36 > $6067 
+jf @SHTR_11648 
+$6067 += 1 
+jump @SHTR_11655 
+
+:SHTR_11648
+$6067 = 0 
+
+:SHTR_11655
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_11682
+if or
+00E1:   player 0 pressed_key 9 
+00E1:   player 0 pressed_key 10 
+  -100 > $MOVE_AXIS_X 
+  $MOVE_AXIS_Y > 100 
+jf @SHTR_11785 
+if 
+  $6067 > 0 
+jf @SHTR_11751 
+$6067 -= 1 
+jump @SHTR_11758 
+
+:SHTR_11751
+$6067 = 36 
+
+:SHTR_11758
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_11785
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_11843 
+$6067 = 10 
+$6158 = 1 
+$6068 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_11843
+if 
+  $6158 == 1 
+jf @SHTR_12159 
+05A9: $2022($6151,10s) = $SHTR_CHARACTERS($6067,37s) // s$ 
+if 
+  $6068 == 0 
+jf @SHTR_12159 
+if or
+00E1:   player 0 pressed_key 8 
+00E1:   player 0 pressed_key 11 
+  $MOVE_AXIS_X > 100 
+  -100 > $MOVE_AXIS_Y 
+jf @SHTR_11998 
+if 
+  36 > $6067 
+jf @SHTR_11964 
+$6067 += 1 
+jump @SHTR_11971 
+
+:SHTR_11964
+$6067 = 0 
+
+:SHTR_11971
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_11998
+if or
+00E1:   player 0 pressed_key 9 
+00E1:   player 0 pressed_key 10 
+  -100 > $MOVE_AXIS_X 
+  $MOVE_AXIS_Y > 100 
+jf @SHTR_12101 
+if 
+  $6067 > 0 
+jf @SHTR_12067 
+$6067 -= 1 
+jump @SHTR_12074 
+
+:SHTR_12067
+$6067 = 36 
+
+:SHTR_12074
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_12101
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_12159 
+$6067 = 10 
+$6158 = 2 
+$6068 = 1 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_12159
+if 
+  $6158 == 2 
+jf @SHTR_12475 
+05A9: $2042($6151,10s) = $SHTR_CHARACTERS($6067,37s) // s$ 
+if 
+  $6068 == 0 
+jf @SHTR_12475 
+if or
+00E1:   player 0 pressed_key 8 
+00E1:   player 0 pressed_key 11 
+  $MOVE_AXIS_X > 100 
+  -100 > $MOVE_AXIS_Y 
+jf @SHTR_12314 
+if 
+  36 > $6067 
+jf @SHTR_12280 
+$6067 += 1 
+jump @SHTR_12287 
+
+:SHTR_12280
+$6067 = 0 
+
+:SHTR_12287
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_12314
+if or
+00E1:   player 0 pressed_key 9 
+00E1:   player 0 pressed_key 10 
+  -100 > $MOVE_AXIS_X 
+  $MOVE_AXIS_Y > 100 
+jf @SHTR_12417 
+if 
+  $6067 > 0 
+jf @SHTR_12383 
+$6067 -= 1 
+jump @SHTR_12390 
+
+:SHTR_12383
+$6067 = 36 
+
+:SHTR_12390
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1064 
+$6068 = 1 
+
+:SHTR_12417
+if 
+00E1:   player 0 pressed_key 16 
+jf @SHTR_12475 
+$6158 = 3 
+$6068 = 1 
+$6156 = 4 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1065 
+
+:SHTR_12475
+return 
+
+:SHTR_12477
+$6070 = 0 
+
+:SHTR_12484
+if 
+  10 > $6070 
+jf @SHTR_12649 
+gosub @SHTR_6947 
+033E: set_draw_text_position $6071($6070,10f) $6111($6070,10f) GXT $2002($6070,10s) 
+gosub @SHTR_6947 
+033E: set_draw_text_position $6081($6070,10f) $6121($6070,10f) GXT $2022($6070,10s) 
+gosub @SHTR_6947 
+033E: set_draw_text_position $6091($6070,10f) $6131($6070,10f) GXT $2042($6070,10s) 
+gosub @SHTR_6947 
+03E4: set_text_draw_align_right 1 
+045A: draw_text_1number $6101($6070,10f) $6141($6070,10f) GXT 'SHTR_LV' number $2062($6070,10i)  // ~1~
+$6070 += 1 
+jump @SHTR_12484 
+
+:SHTR_12649
+gosub @SHTR_6947 
+033E: set_draw_text_position 320.0 64.0 GXT 'SHTR_2F'  // HI-SCORE
+if and
+  $5649 == 0 
+  $6069 == 1 
+jf @SHTR_13084 
+if 
+  $6158 == 0 
+jf @SHTR_12769 
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 0 255 0 255 
+033E: set_draw_text_position $6071($6151,10f) $6111($6151,10f) GXT $2002($6151,10s) 
+jump @SHTR_12811 
+
+:SHTR_12769
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 255 0 0 255 
+033E: set_draw_text_position $6071($6151,10f) $6111($6151,10f) GXT $2002($6151,10s) 
+
+:SHTR_12811
+if 
+  $6158 == 1 
+jf @SHTR_12878 
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 0 255 0 255 
+033E: set_draw_text_position $6081($6151,10f) $6121($6151,10f) GXT $2022($6151,10s) 
+jump @SHTR_12920 
+
+:SHTR_12878
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 255 0 0 255 
+033E: set_draw_text_position $6081($6151,10f) $6121($6151,10f) GXT $2022($6151,10s) 
+
+:SHTR_12920
+if 
+  $6158 == 2 
+jf @SHTR_12987 
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 0 255 0 255 
+033E: set_draw_text_position $6091($6151,10f) $6131($6151,10f) GXT $2042($6151,10s) 
+jump @SHTR_13029 
+
+:SHTR_12987
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 255 0 0 255 
+033E: set_draw_text_position $6091($6151,10f) $6131($6151,10f) GXT $2042($6151,10s) 
+
+:SHTR_13029
+gosub @SHTR_6947 
+0340: set_text_draw_RGBA 255 0 0 255 
+03E4: set_text_draw_align_right 1 
+045A: draw_text_1number $6101($6151,10f) $6141($6151,10f) GXT 'SHTR_LV' number $2062($6151,10i)  // ~1~
+
+:SHTR_13084
+return 
+
+:SHTR_13086
+0209: $6161 = random_int_in_ranges 1 30 
+if 
+  $6161 == 1 
+jf @SHTR_13188 
+if 
+  $6163 == 0 
+jf @SHTR_13181 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[23] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[15] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[36] // s$ 
+$6163 = 1 
+jump @SHTR_13188 
+
+:SHTR_13181
+jump @SHTR_13086 
+
+:SHTR_13188
+if 
+  $6161 == 2 
+jf @SHTR_13281 
+if 
+  $6164 == 0 
+jf @SHTR_13274 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[18] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[22] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[34] // s$ 
+$6164 = 1 
+jump @SHTR_13281 
+
+:SHTR_13274
+jump @SHTR_13086 
+
+:SHTR_13281
+if 
+  $6161 == 3 
+jf @SHTR_13374 
+if 
+  $6165 == 0 
+jf @SHTR_13367 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[18] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[21] // s$ 
+$6165 = 1 
+jump @SHTR_13374 
+
+:SHTR_13367
+jump @SHTR_13086 
+
+:SHTR_13374
+if 
+  $6161 == 4 
+jf @SHTR_13467 
+if 
+  $6166 == 0 
+jf @SHTR_13460 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[12] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[20] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[27] // s$ 
+$6166 = 1 
+jump @SHTR_13467 
+
+:SHTR_13460
+jump @SHTR_13086 
+
+:SHTR_13467
+if 
+  $6161 == 5 
+jf @SHTR_13560 
+if 
+  $6167 == 0 
+jf @SHTR_13553 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[11] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[25] // s$ 
+$6167 = 1 
+jump @SHTR_13560 
+
+:SHTR_13553
+jump @SHTR_13086 
+
+:SHTR_13560
+if 
+  $6161 == 6 
+jf @SHTR_13653 
+if 
+  $6168 == 0 
+jf @SHTR_13646 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[31] // s$ 
+$6168 = 1 
+jump @SHTR_13653 
+
+:SHTR_13646
+jump @SHTR_13086 
+
+:SHTR_13653
+if 
+  $6161 == 7 
+jf @SHTR_13746 
+if 
+  $6169 == 0 
+jf @SHTR_13739 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[24] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+$6169 = 1 
+jump @SHTR_13746 
+
+:SHTR_13739
+jump @SHTR_13086 
+
+:SHTR_13746
+if 
+  $6161 == 8 
+jf @SHTR_13839 
+if 
+  $6170 == 0 
+jf @SHTR_13832 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[28] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[19] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[21] // s$ 
+$6170 = 1 
+jump @SHTR_13839 
+
+:SHTR_13832
+jump @SHTR_13086 
+
+:SHTR_13839
+if 
+  $6161 == 9 
+jf @SHTR_13932 
+if 
+  $6171 == 0 
+jf @SHTR_13925 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[28] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[29] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[14] // s$ 
+$6171 = 1 
+jump @SHTR_13932 
+
+:SHTR_13925
+jump @SHTR_13086 
+
+:SHTR_13932
+if 
+  $6161 == 10 
+jf @SHTR_14025 
+if 
+  $6172 == 0 
+jf @SHTR_14018 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[19] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[30] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+$6172 = 1 
+jump @SHTR_14025 
+
+:SHTR_14018
+jump @SHTR_13086 
+
+:SHTR_14025
+if 
+  $6161 == 11 
+jf @SHTR_14118 
+if 
+  $6173 == 0 
+jf @SHTR_14111 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[20] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[22] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[11] // s$ 
+$6173 = 1 
+jump @SHTR_14118 
+
+:SHTR_14111
+jump @SHTR_13086 
+
+:SHTR_14118
+if 
+  $6161 == 12 
+jf @SHTR_14211 
+if 
+  $6174 == 0 
+jf @SHTR_14204 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[16] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[28] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+$6174 = 1 
+jump @SHTR_14211 
+
+:SHTR_14204
+jump @SHTR_13086 
+
+:SHTR_14211
+if 
+  $6161 == 13 
+jf @SHTR_14304 
+if 
+  $6175 == 0 
+jf @SHTR_14297 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[28] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+$6175 = 1 
+jump @SHTR_14304 
+
+:SHTR_14297
+jump @SHTR_13086 
+
+:SHTR_14304
+if 
+  $6161 == 14 
+jf @SHTR_14397 
+if 
+  $6176 == 0 
+jf @SHTR_14390 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[34] // s$ 
+$6176 = 1 
+jump @SHTR_14397 
+
+:SHTR_14390
+jump @SHTR_13086 
+
+:SHTR_14397
+if 
+  $6161 == 15 
+jf @SHTR_14490 
+if 
+  $6177 == 0 
+jf @SHTR_14483 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[16] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[35] // s$ 
+$6177 = 1 
+jump @SHTR_14490 
+
+:SHTR_14483
+jump @SHTR_13086 
+
+:SHTR_14490
+if 
+  $6161 == 16 
+jf @SHTR_14583 
+if 
+  $6178 == 0 
+jf @SHTR_14576 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[35] // s$ 
+$6178 = 1 
+jump @SHTR_14583 
+
+:SHTR_14576
+jump @SHTR_13086 
+
+:SHTR_14583
+if 
+  $6161 == 17 
+jf @SHTR_14676 
+if 
+  $6179 == 0 
+jf @SHTR_14669 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[20] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[18] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[23] // s$ 
+$6179 = 1 
+jump @SHTR_14676 
+
+:SHTR_14669
+jump @SHTR_13086 
+
+:SHTR_14676
+if 
+  $6161 == 18 
+jf @SHTR_14769 
+if 
+  $6180 == 0 
+jf @SHTR_14762 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[11] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[14] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+$6180 = 1 
+jump @SHTR_14769 
+
+:SHTR_14762
+jump @SHTR_13086 
+
+:SHTR_14769
+if 
+  $6161 == 19 
+jf @SHTR_14862 
+if 
+  $6181 == 0 
+jf @SHTR_14855 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[11] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[33] // s$ 
+$6181 = 1 
+jump @SHTR_14862 
+
+:SHTR_14855
+jump @SHTR_13086 
+
+:SHTR_14862
+if 
+  $6161 == 20 
+jf @SHTR_14955 
+if 
+  $6182 == 0 
+jf @SHTR_14948 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[21] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[24] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[30] // s$ 
+$6182 = 1 
+jump @SHTR_14955 
+
+:SHTR_14948
+jump @SHTR_13086 
+
+:SHTR_14955
+if 
+  $6161 == 21 
+jf @SHTR_15048 
+if 
+  $6183 == 0 
+jf @SHTR_15041 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[19] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[23] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[24] // s$ 
+$6183 = 1 
+jump @SHTR_15048 
+
+:SHTR_15041
+jump @SHTR_13086 
+
+:SHTR_15048
+if 
+  $6161 == 22 
+jf @SHTR_15141 
+if 
+  $6184 == 0 
+jf @SHTR_15134 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[22] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[34] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[29] // s$ 
+$6184 = 1 
+jump @SHTR_15141 
+
+:SHTR_15134
+jump @SHTR_13086 
+
+:SHTR_15141
+if 
+  $6161 == 23 
+jf @SHTR_15234 
+if 
+  $6185 == 0 
+jf @SHTR_15227 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[13] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[14] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[15] // s$ 
+$6185 = 1 
+jump @SHTR_15234 
+
+:SHTR_15227
+jump @SHTR_13086 
+
+:SHTR_15234
+if 
+  $6161 == 24 
+jf @SHTR_15327 
+if 
+  $6186 == 0 
+jf @SHTR_15320 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[20] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[17] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[35] // s$ 
+$6186 = 1 
+jump @SHTR_15327 
+
+:SHTR_15320
+jump @SHTR_13086 
+
+:SHTR_15327
+if 
+  $6161 == 25 
+jf @SHTR_15420 
+if 
+  $6187 == 0 
+jf @SHTR_15413 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[22] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[14] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[24] // s$ 
+$6187 = 1 
+jump @SHTR_15420 
+
+:SHTR_15413
+jump @SHTR_13086 
+
+:SHTR_15420
+if 
+  $6161 == 26 
+jf @SHTR_15513 
+if 
+  $6188 == 0 
+jf @SHTR_15506 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[16] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[15] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+$6188 = 1 
+jump @SHTR_15513 
+
+:SHTR_15506
+jump @SHTR_13086 
+
+:SHTR_15513
+if 
+  $6161 == 27 
+jf @SHTR_15606 
+if 
+  $6189 == 0 
+jf @SHTR_15599 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[27] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[22] // s$ 
+$6189 = 1 
+jump @SHTR_15606 
+
+:SHTR_15599
+jump @SHTR_13086 
+
+:SHTR_15606
+if 
+  $6161 == 28 
+jf @SHTR_15699 
+if 
+  $6190 == 0 
+jf @SHTR_15692 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[10] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[36] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[32] // s$ 
+$6190 = 1 
+jump @SHTR_15699 
+
+:SHTR_15692
+jump @SHTR_13086 
+
+:SHTR_15699
+if 
+  $6161 == 29 
+jf @SHTR_15792 
+if 
+  $6191 == 0 
+jf @SHTR_15785 
+05A9: $2002($6160,10s) = s$SHTR_CHARACTERS[27] // s$ 
+05A9: $2022($6160,10s) = s$SHTR_CHARACTERS[18] // s$ 
+05A9: $2042($6160,10s) = s$SHTR_CHARACTERS[12] // s$ 
+$6191 = 1 
+jump @SHTR_15792 
+
+:SHTR_15785
+jump @SHTR_13086 
+
+:SHTR_15792
+return 
+
+:SHTR_15794
+05A9: s$SHTR_CHARACTERS[0] = 'SHTR_0' // s$  // 0
+05A9: s$SHTR_CHARACTERS[1] = 'SHTR_1' // s$  // 1
+05A9: s$SHTR_CHARACTERS[2] = 'SHTR_2' // s$  // 2
+05A9: s$SHTR_CHARACTERS[3] = 'SHTR_3' // s$  // 3
+05A9: s$SHTR_CHARACTERS[4] = 'SHTR_4' // s$  // 4
+05A9: s$SHTR_CHARACTERS[5] = 'SHTR_5' // s$  // 5
+05A9: s$SHTR_CHARACTERS[6] = 'SHTR_6' // s$  // 6
+05A9: s$SHTR_CHARACTERS[7] = 'SHTR_7' // s$  // 7
+05A9: s$SHTR_CHARACTERS[8] = 'SHTR_8' // s$  // 8
+05A9: s$SHTR_CHARACTERS[9] = 'SHTR_9' // s$  // 9
+05A9: s$SHTR_CHARACTERS[10] = 'SHTR_A' // s$  // A
+05A9: s$SHTR_CHARACTERS[11] = 'SHTR_B' // s$  // B
+05A9: s$SHTR_CHARACTERS[12] = 'SHTR_C' // s$  // C
+05A9: s$SHTR_CHARACTERS[13] = 'SHTR_D' // s$  // D
+05A9: s$SHTR_CHARACTERS[14] = 'SHTR_E' // s$  // E
+05A9: s$SHTR_CHARACTERS[15] = 'SHTR_F' // s$  // F
+05A9: s$SHTR_CHARACTERS[16] = 'SHTR_G' // s$  // G
+05A9: s$SHTR_CHARACTERS[17] = 'SHTR_H' // s$  // H
+05A9: s$SHTR_CHARACTERS[18] = 'SHTR_I' // s$  // I
+05A9: s$SHTR_CHARACTERS[19] = 'SHTR_J' // s$  // J
+05A9: s$SHTR_CHARACTERS[20] = 'SHTR_K' // s$  // K
+05A9: s$SHTR_CHARACTERS[21] = 'SHTR_L' // s$  // L
+05A9: s$SHTR_CHARACTERS[22] = 'SHTR_M' // s$  // M
+05A9: s$SHTR_CHARACTERS[23] = 'SHTR_N' // s$  // N
+05A9: s$SHTR_CHARACTERS[24] = 'SHTR_O' // s$  // O
+05A9: s$SHTR_CHARACTERS[25] = 'SHTR_P' // s$  // P
+05A9: s$SHTR_CHARACTERS[26] = 'SHTR_Q' // s$  // Q
+05A9: s$SHTR_CHARACTERS[27] = 'SHTR_R' // s$  // R
+05A9: s$SHTR_CHARACTERS[28] = 'SHTR_S' // s$  // S
+05A9: s$SHTR_CHARACTERS[29] = 'SHTR_T' // s$  // T
+05A9: s$SHTR_CHARACTERS[30] = 'SHTR_U' // s$  // U
+05A9: s$SHTR_CHARACTERS[31] = 'SHTR_V' // s$  // V
+05A9: s$SHTR_CHARACTERS[32] = 'SHTR_W' // s$  // W
+05A9: s$SHTR_CHARACTERS[33] = 'SHTR_X' // s$  // X
+05A9: s$SHTR_CHARACTERS[34] = 'SHTR_Y' // s$  // Y
+05A9: s$SHTR_CHARACTERS[35] = 'SHTR_Z' // s$  // Z
+05A9: s$SHTR_CHARACTERS[36] = 'SHTR_PE' // s$  // .
+$6071[0] = 176.0 
+$6111[0] = 96.0 
+$6081[0] = 224.0 
+$6121[0] = 96.0 
+$6091[0] = 272.0 
+$6131[0] = 96.0 
+$6101[0] = 464.0 
+$6141[0] = 96.0 
+$6071[1] = 176.0 
+$6111[1] = 128.0 
+$6081[1] = 224.0 
+$6121[1] = 128.0 
+$6091[1] = 272.0 
+$6131[1] = 128.0 
+$6101[1] = 464.0 
+$6141[1] = 128.0 
+$6071[2] = 176.0 
+$6111[2] = 160.0 
+$6081[2] = 224.0 
+$6121[2] = 160.0 
+$6091[2] = 272.0 
+$6131[2] = 160.0 
+$6101[2] = 464.0 
+$6141[2] = 160.0 
+$6071[3] = 176.0 
+$6111[3] = 192.0 
+$6081[3] = 224.0 
+$6121[3] = 192.0 
+$6091[3] = 272.0 
+$6131[3] = 192.0 
+$6101[3] = 464.0 
+$6141[3] = 192.0 
+$6071[4] = 176.0 
+$6111[4] = 224.0 
+$6081[4] = 224.0 
+$6121[4] = 224.0 
+$6091[4] = 272.0 
+$6131[4] = 224.0 
+$6101[4] = 464.0 
+$6141[4] = 224.0 
+$6071[5] = 176.0 
+$6111[5] = 256.0 
+$6081[5] = 224.0 
+$6121[5] = 256.0 
+$6091[5] = 272.0 
+$6131[5] = 256.0 
+$6101[5] = 464.0 
+$6141[5] = 256.0 
+$6071[6] = 176.0 
+$6111[6] = 288.0 
+$6081[6] = 224.0 
+$6121[6] = 288.0 
+$6091[6] = 272.0 
+$6131[6] = 288.0 
+$6101[6] = 464.0 
+$6141[6] = 288.0 
+$6071[7] = 176.0 
+$6111[7] = 320.0 
+$6081[7] = 224.0 
+$6121[7] = 320.0 
+$6091[7] = 272.0 
+$6131[7] = 320.0 
+$6101[7] = 464.0 
+$6141[7] = 320.0 
+$6071[8] = 176.0 
+$6111[8] = 352.0 
+$6081[8] = 224.0 
+$6121[8] = 352.0 
+$6091[8] = 272.0 
+$6131[8] = 352.0 
+$6101[8] = 464.0 
+$6141[8] = 352.0 
+$6071[9] = 176.0 
+$6111[9] = 384.0 
+$6081[9] = 224.0 
+$6121[9] = 384.0 
+$6091[9] = 272.0 
+$6131[9] = 384.0 
+$6101[9] = 464.0 
+$6141[9] = 384.0 
+if 
+  $6159 == 0 
+jf @SHTR_17436 
+05A9: s$2002[0] = s$SHTR_CHARACTERS[12] // s$ 
+05A9: s$2022[0] = s$SHTR_CHARACTERS[36] // s$ 
+05A9: s$2042[0] = s$SHTR_CHARACTERS[36] // s$ 
+$2072[0] = 10 
+$2062[0] = 1000 
+$6160 = 1 
+gosub @SHTR_13086 
+$2072[1] = 9 
+$2062[1] = 900 
+$6160 = 2 
+gosub @SHTR_13086 
+$2072[2] = 8 
+$2062[2] = 800 
+$6160 = 3 
+gosub @SHTR_13086 
+$2072[3] = 7 
+$2062[3] = 700 
+$6160 = 4 
+gosub @SHTR_13086 
+$2072[4] = 6 
+$2062[4] = 600 
+$6160 = 5 
+gosub @SHTR_13086 
+$2072[5] = 5 
+$2062[5] = 500 
+$6160 = 6 
+gosub @SHTR_13086 
+$2072[6] = 4 
+$2062[6] = 400 
+$6160 = 7 
+gosub @SHTR_13086 
+$2072[7] = 3 
+$2062[7] = 300 
+$6160 = 8 
+gosub @SHTR_13086 
+$2072[8] = 2 
+$2062[8] = 200 
+$6160 = 9 
+gosub @SHTR_13086 
+$2072[9] = 1 
+$2062[9] = 100 
+$6159 = 1 
+
+:SHTR_17436
+0084: $5651 = $2062[0] // (int) 
+return 
+
+:SHTR_17446
+$5579 = 1 
+$5580 = 1 
+$5648 = 1 
+$5650 = 0 
+$5649 = 2 
+$5652 = 0 
+$5591 = 15.0 
+$5575 = 80.0 
+$5576 = 224.0 
+$5853 = 8.0 
+$5854 = 10.0 
+$5653 = 1.0 
+$5654 = 3.0 
+$5960 = 0 
+$5963 = 7.0 
+$5989 = 0 
+$5950 = 0 
+$5951 = 1 
+$5952 = 31 
+$5956 = 250 
+$5957 = 0 
+$5958 = 0 
+$5953 = 0 
+$6158 = 0 
+$6069 = 0 
+$5877[0] = 660.0 
+$5877[1] = 660.0 
+$5877[2] = 660.0 
+$5877[3] = 660.0 
+$5581 = 0 
+$5594 = 0 
+$5595 = 0 
+$5596 = 0 
+$5645 = 0 
+$5646 = 0 
+$5647 = 0 
+$5657 = 1 
+$5659[1] = 0 
+$5659[2] = 0 
+$5659[3] = 0 
+$5659[4] = 0 
+$5659[5] = 0 
+$5659[6] = 0 
+$5659[7] = 0 
+$5659[8] = 0 
+$5725[1] = 0 
+$5725[2] = 0 
+$5725[3] = 0 
+$5725[4] = 0 
+$5725[5] = 0 
+$5725[6] = 0 
+$5725[7] = 0 
+$5725[8] = 0 
+$5789[1] = 0 
+$5789[2] = 0 
+$5789[3] = 0 
+$5789[4] = 0 
+$5789[5] = 0 
+$5789[6] = 0 
+$5789[7] = 0 
+$5789[8] = 0 
+$5860[0] = 0 
+$5860[1] = 0 
+$5860[2] = 0 
+$5860[3] = 0 
+$5860[4] = 0 
+$5860[5] = 0 
+$5860[6] = 0 
+$5860[7] = 0 
+$5981[0] = 0 
+$5981[1] = 0 
+$5981[2] = 0 
+$5981[3] = 0 
+$5981[4] = 0 
+$5981[5] = 0 
+$5981[6] = 0 
+$5981[7] = 0 
+$5655 = 0 
+$5876 = 0 
+$5585 = 32.0 
+$5586 = 32.0 
+$5723 = 8.0 
+$5724 = 8.0 
+$5577 = 32.0 
+$5578 = 32.0 
+$5949 = 0.0 
+return

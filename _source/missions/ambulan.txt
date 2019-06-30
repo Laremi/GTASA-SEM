@@ -1,0 +1,2788 @@
+:AMBULAN
+gosub @AMBULAN_16 
+gosub @AMBULAN_14713 
+end_thread 
+
+:AMBULAN_16
+$ONMISSION = 1 
+$ONMISSION_PARAMEDIC = 1 
+thread 'AMBULAN' 
+if 
+  $1487 == 0 
+jf @AMBULAN_61 
+increment_mission_attempts 
+
+:AMBULAN_61
+wait 0 
+08F4: set_max_group_members 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @AMBULAN_221 
+213@ = Actor.MissionCar($PLAYER_ACTOR)
+if 
+8431:   not car 213@ passenger_seat_free 0 
+jf @AMBULAN_134 
+0432: 81@ = get_actor_handle_from_car 213@ passenger_seat 0 
+0622: AS_actor 81@ bail_car 213@ 
+Actor.RemoveReferences(81@)
+
+:AMBULAN_134
+if 
+8431:   not car 213@ passenger_seat_free 1 
+jf @AMBULAN_175 
+0432: 81@ = get_actor_handle_from_car 213@ passenger_seat 1 
+0622: AS_actor 81@ bail_car 213@ 
+Actor.RemoveReferences(81@)
+
+:AMBULAN_175
+if 
+8431:   not car 213@ passenger_seat_free 2 
+jf @AMBULAN_216 
+0432: 81@ = get_actor_handle_from_car 213@ passenger_seat 2 
+0622: AS_actor 81@ bail_car 213@ 
+Actor.RemoveReferences(81@)
+
+:AMBULAN_216
+Car.RemoveReferences(213@)
+
+:AMBULAN_221
+060A: create_decision_maker_type 0 store_to 235@ // decision\allowed\m_.ped files 
+054C: use_GXT_table 'AMBULAE' 
+08F8: display_stat_update_box 0 
+$8210 = 20000 
+34@ = 0 
+39@ = 0 
+40@ = 0 
+41@ = 0 
+42@ = 0 
+43@ = 0 
+36@ = 0 
+83@ = 0 
+86@ = 0 
+89@ = 0 
+92@ = 0 
+95@ = 0 
+58@ = 0 
+61@ = 0 
+64@ = 0 
+67@ = 0 
+70@ = 0 
+73@ = 0 
+76@ = 0 
+46@ = 0 
+189@ = 10.0 
+48@ = 0 
+49@ = 0 
+44@ = 0 
+45@ = 0 
+51@ = 0 
+52@ = 0 
+53@ = 0 
+50@ = 0 
+55@ = 0 
+79@ = 0 
+176@ = 0.0 
+177@ = 0.0 
+178@ = 0.0 
+99@ = 0 
+if and
+  $PARAMEDIC_MISSION_LEVEL >= 6 
+  $1487 == 0 
+jf @AMBULAN_547 
+$PARAMEDIC_MISSION_LEVEL = 6 
+jump @AMBULAN_554 
+
+:AMBULAN_547
+$PARAMEDIC_MISSION_LEVEL = 1 
+
+:AMBULAN_554
+008B: 37@ = $PARAMEDIC_MISSION_LEVEL // (int) 
+
+:AMBULAN_562
+if 
+  16 > 99@ 
+jf @AMBULAN_698 
+300@(99@,16i) = 0 
+316@(99@,16f) = 0.0 
+332@(99@,16f) = 0.0 
+348@(99@,16f) = 0.0 
+364@(99@,16i) = 0 
+if 
+  10 > 99@ 
+jf @AMBULAN_684 
+214@(99@,10i) = 0 
+224@(99@,10i) = 0 
+
+:AMBULAN_684
+99@ += 1 
+jump @AMBULAN_562 
+
+:AMBULAN_698
+99@ = 0 
+96@ = 0 
+97@ = 0 
+234@ = 0 
+$8212 = 0 
+238@ = 0.0 
+
+:AMBULAN_743
+if 
+  10 > 99@ 
+jf @AMBULAN_876 
+if 
+07E8:   acquaintance 4 of_actors_type 99@ to_actors_type 0 set 
+jf @AMBULAN_815 
+224@(99@,10i) = 1 
+234@ += 1 
+0747: clear_acquaintance 4 of_actors_pedtype 99@ to_actors_pedtype 0 // see ped.dat 
+jump @AMBULAN_862 
+
+:AMBULAN_815
+if 
+07E8:   acquaintance 3 of_actors_type 99@ to_actors_type 0 set 
+jf @AMBULAN_862 
+214@(99@,10i) = 1 
+234@ += 1 
+0747: clear_acquaintance 3 of_actors_pedtype 99@ to_actors_pedtype 0 // see ped.dat 
+
+:AMBULAN_862
+99@ += 1 
+jump @AMBULAN_743 
+
+:AMBULAN_876
+99@ = 0 
+00BC: show_text_highpriority GXT 'ATUTOR2' time 5000 flag 1  // ~s~Drive the ~b~patients~s~ to ~y~Hospital~s~ CAREFULLY. Each bump reduces their chances of survival.
+03C7: set_sensitivity_to_crime 0.5 
+Actor.StorePos($PLAYER_ACTOR, 201@, 202@, 203@)
+212@ = 9999999.0 
+0652: $STAT_UNLOCKED_CITIES_NUMBER = integer_stat 181 
+if 
+  2 > $STAT_UNLOCKED_CITIES_NUMBER 
+jf @AMBULAN_1510 
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 0 
+jf @AMBULAN_1170 
+050A: 204@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 2004.96 -1442.96 12.56 
+if 
+0025:   212@ > 204@ // (float) 
+jf @AMBULAN_1037 
+0087: 212@ = 204@ // (float) 
+213@ = 1 
+
+:AMBULAN_1037
+050A: 205@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1180.85 -1325.57 12.58 
+if 
+0025:   212@ > 205@ // (float) 
+jf @AMBULAN_1100 
+0087: 212@ = 205@ // (float) 
+213@ = 2 
+
+:AMBULAN_1100
+050A: 208@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1244.437 331.2261 18.5547 
+if 
+0025:   212@ > 208@ // (float) 
+jf @AMBULAN_1163 
+0087: 212@ = 208@ // (float) 
+213@ = 5 
+
+:AMBULAN_1163
+jump @AMBULAN_1503 
+
+:AMBULAN_1170
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 1 
+jf @AMBULAN_1503 
+050A: 204@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 2004.96 -1442.96 12.56 
+if 
+0025:   212@ > 204@ // (float) 
+jf @AMBULAN_1251 
+0087: 212@ = 204@ // (float) 
+213@ = 1 
+
+:AMBULAN_1251
+050A: 205@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1180.85 -1325.57 12.58 
+if 
+0025:   212@ > 205@ // (float) 
+jf @AMBULAN_1314 
+0087: 212@ = 205@ // (float) 
+213@ = 2 
+
+:AMBULAN_1314
+050A: 208@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1244.437 331.2261 18.5547 
+if 
+0025:   212@ > 208@ // (float) 
+jf @AMBULAN_1377 
+0087: 212@ = 208@ // (float) 
+213@ = 5 
+
+:AMBULAN_1377
+050A: 209@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -2198.693 -2290.105 29.625 
+if 
+0025:   212@ > 209@ // (float) 
+jf @AMBULAN_1440 
+0087: 212@ = 209@ // (float) 
+213@ = 6 
+
+:AMBULAN_1440
+050A: 210@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -2670.285 616.4364 13.4531 
+if 
+0025:   212@ > 210@ // (float) 
+jf @AMBULAN_1503 
+0087: 212@ = 210@ // (float) 
+213@ = 7 
+
+:AMBULAN_1503
+jump @AMBULAN_2014 
+
+:AMBULAN_1510
+050A: 204@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 2004.96 -1442.96 12.56 
+if 
+0025:   212@ > 204@ // (float) 
+jf @AMBULAN_1573 
+0087: 212@ = 204@ // (float) 
+213@ = 1 
+
+:AMBULAN_1573
+050A: 205@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1180.85 -1325.57 12.58 
+if 
+0025:   212@ > 205@ // (float) 
+jf @AMBULAN_1636 
+0087: 212@ = 205@ // (float) 
+213@ = 2 
+
+:AMBULAN_1636
+050A: 206@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -316.3832 1056.045 18.7344 
+if 
+0025:   212@ > 206@ // (float) 
+jf @AMBULAN_1699 
+0087: 212@ = 206@ // (float) 
+213@ = 3 
+
+:AMBULAN_1699
+050A: 207@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -1514.823 2527.119 54.7443 
+if 
+0025:   212@ > 207@ // (float) 
+jf @AMBULAN_1762 
+0087: 212@ = 207@ // (float) 
+213@ = 4 
+
+:AMBULAN_1762
+050A: 208@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1244.437 331.2261 18.5547 
+if 
+0025:   212@ > 208@ // (float) 
+jf @AMBULAN_1825 
+0087: 212@ = 208@ // (float) 
+213@ = 5 
+
+:AMBULAN_1825
+050A: 209@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -2198.693 -2290.105 29.625 
+if 
+0025:   212@ > 209@ // (float) 
+jf @AMBULAN_1888 
+0087: 212@ = 209@ // (float) 
+213@ = 6 
+
+:AMBULAN_1888
+050A: 210@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ -2670.285 616.4364 13.4531 
+if 
+0025:   212@ > 210@ // (float) 
+jf @AMBULAN_1951 
+0087: 212@ = 210@ // (float) 
+213@ = 7 
+
+:AMBULAN_1951
+050A: 211@ = distance_between_XYZ 201@ 202@ 203@ and_XYZ 1578.446 1770.682 9.8358 
+if 
+0025:   212@ > 211@ // (float) 
+jf @AMBULAN_2014 
+0087: 212@ = 211@ // (float) 
+213@ = 8 
+
+:AMBULAN_2014
+0871: init_jump_table 213@ total_jumps 8 default_jump 1 @AMBULAN_2998 jumps 1 @AMBULAN_2142 2 @AMBULAN_2249 3 @AMBULAN_2356 4 @AMBULAN_2463 5 @AMBULAN_2570 6 @AMBULAN_2677 7 @AMBULAN_2784 
+0872: jump_table_jumps 8 @AMBULAN_2891 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 -1 @AMBULAN_3105 
+
+:AMBULAN_2142
+167@ = 2004.96 
+168@ = -1442.96 
+169@ = 12.56 
+173@ = 2026.0 
+174@ = -1423.0 
+175@ = 17.0 
+197@ = 1200.0 
+198@ = 2930.0 
+199@ = -2213.0 
+200@ = -1012.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2249
+167@ = 1180.85 
+168@ = -1325.57 
+169@ = 12.58 
+173@ = 1172.0 
+174@ = -1324.0 
+175@ = 15.0 
+197@ = 450.0 
+198@ = 1800.0 
+199@ = -1900.0 
+200@ = -870.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2356
+167@ = -316.3832 
+168@ = 1056.045 
+169@ = 18.7344 
+173@ = -316.0 
+174@ = 1050.0 
+175@ = 20.0 
+197@ = -860.0 
+198@ = 185.0 
+199@ = 749.0 
+200@ = 1616.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2463
+167@ = -1514.006 
+168@ = 2532.013 
+169@ = 54.7443 
+173@ = -1515.0 
+174@ = 2520.0 
+175@ = 56.0 
+197@ = -1684.0 
+198@ = -702.0 
+199@ = 1465.0 
+200@ = 2749.9 
+jump @AMBULAN_3105 
+
+:AMBULAN_2570
+167@ = 1225.0 
+168@ = 302.0 
+169@ = 20.0 
+173@ = 1227.0 
+174@ = 289.5 
+175@ = 22.64 
+197@ = 100.0 
+198@ = 2604.0 
+199@ = -720.0 
+200@ = 465.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2677
+167@ = -2198.693 
+168@ = -2290.105 
+169@ = 29.625 
+173@ = -2204.728 
+174@ = -2296.302 
+175@ = 29.6181 
+197@ = -2598.0 
+198@ = -1500.0 
+199@ = -2700.0 
+200@ = -1700.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2784
+167@ = -2670.285 
+168@ = 616.4364 
+169@ = 13.4531 
+173@ = -2677.0 
+174@ = 632.0 
+175@ = 14.0 
+197@ = -2820.0 
+198@ = -1784.0 
+199@ = 29.0 
+200@ = 1180.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2891
+167@ = 1578.446 
+168@ = 1770.682 
+169@ = 9.8358 
+173@ = 1582.0 
+174@ = 1765.0 
+175@ = 11.0 
+197@ = 1000.0 
+198@ = 2600.0 
+199@ = 772.0 
+200@ = 2400.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_2998
+167@ = 2004.96 
+168@ = -1442.96 
+169@ = 12.56 
+173@ = 2026.0 
+174@ = -1423.0 
+175@ = 17.0 
+197@ = 1200.0 
+198@ = 2930.0 
+199@ = -2213.0 
+200@ = -1012.0 
+jump @AMBULAN_3105 
+
+:AMBULAN_3105
+03C3: set_timer_to $8210 type 1 GXT 'AMBTIME' // global_variable  // TIME LEFT
+04F7: status_text $8212 type 0 line 2 GXT 'AMBSEAT' // global_variable  // SEATS FREE
+04F7: status_text $PARAMEDIC_MISSION_LEVEL type 0 line 1 GXT 'ALEV' // global_variable  // LEVEL
+if 
+  $ONMISSION == 0 
+jf @AMBULAN_3196 
+Marker.Disable(47@)
+02A8: 47@ = create_marker 22 at 167@ 168@ 169@ 
+
+:AMBULAN_3196
+014F: stop_timer $8210 
+
+:AMBULAN_3201
+if 
+001D:   37@ > 36@ // (int) 
+jf @AMBULAN_3402 
+gosub @AMBULAN_8860 
+0087: 316@(36@,16f) = 176@ // (float) 
+0087: 332@(36@,16f) = 177@ // (float) 
+0087: 348@(36@,16f) = 178@ // (float) 
+if 
+  79@ == 1 
+jf @AMBULAN_3288 
+jump @AMBULAN_14713 
+
+:AMBULAN_3288
+gosub @AMBULAN_12175 
+0085: 364@(36@,16i) = 35@ // (int) 
+if 
+  364@(36@,16i) > 45000 
+jf @AMBULAN_3353 
+364@(36@,16i) = 45000 
+jump @AMBULAN_3388 
+
+:AMBULAN_3353
+if 
+  15000 > 364@(36@,16i) 
+jf @AMBULAN_3388 
+364@(36@,16i) = 15000 
+
+:AMBULAN_3388
+36@ += 1 
+jump @AMBULAN_3201 
+
+:AMBULAN_3402
+gosub @AMBULAN_3794 
+if 
+  37@ > 3 
+jf @AMBULAN_3441 
+45@ = 1 
+jump @AMBULAN_3448 
+
+:AMBULAN_3441
+45@ = 0 
+
+:AMBULAN_3448
+51@ = 0 
+if 
+  2 > 37@ 
+jf @AMBULAN_3584 
+0085: 48@ = 35@ // (int) 
+0072: 48@ /= 37@ // (int) 
+48@ /= 2 
+0085: 38@ = 37@ // (int) 
+38@ += 1 
+006A: 48@ *= 38@ // (int) 
+005E: $8210 += 48@ // (int) 
+0074: $8210 /= 37@ // (int) 
+0085: 48@ = 35@ // (int) 
+48@ /= 3 
+if 
+  48@ > 15000 
+jf @AMBULAN_3577 
+48@ = 15000 
+
+:AMBULAN_3577
+jump @AMBULAN_3661 
+
+:AMBULAN_3584
+008B: 48@ = $8210 // (int) 
+0072: 48@ /= 37@ // (int) 
+48@ /= 2 
+0085: 38@ = 37@ // (int) 
+38@ += 1 
+006A: 48@ *= 38@ // (int) 
+005E: $8210 += 48@ // (int) 
+0074: $8210 /= 37@ // (int) 
+008B: 48@ = $8210 // (int) 
+48@ /= 3 
+
+:AMBULAN_3661
+if 
+  60000 > $8210 
+jf @AMBULAN_3692 
+$8210 = 60000 
+
+:AMBULAN_3692
+if 
+  25000 > 48@ 
+jf @AMBULAN_3726 
+48@ = 25000 
+jump @AMBULAN_3757 
+
+:AMBULAN_3726
+if 
+  48@ > 60000 
+jf @AMBULAN_3757 
+48@ = 60000 
+
+:AMBULAN_3757
+03C3: set_timer_to $8210 type 1 GXT 'AMBTIME' // global_variable  // TIME LEFT
+239@ = 0 
+240@ = 0 
+jump @AMBULAN_12328 
+
+:AMBULAN_3794
+if 
+  37@ > 0 
+jf @AMBULAN_3921 
+0376: 81@ = create_random_actor_at 316@ 332@ 348@ 
+0575: set_actor 81@ keep_position 1 
+0588: disable_actor 81@ validate_position 0 
+83@ = 1 
+060B: set_actor 81@ decision_maker_to 235@ 
+0332: set_actor 81@ bleeding 1 
+02A9: set_actor 81@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(81@) = 188@
+82@ = Marker.CreateAboveActor(81@)
+07E0: set_marker 82@ type_to 1 
+Marker.SetIconSize(82@, 2)
+300@ = 1 
+
+:AMBULAN_3921
+if 
+  37@ > 1 
+jf @AMBULAN_4048 
+0376: 84@ = create_random_actor_at 317@ 333@ 349@ 
+86@ = 1 
+060B: set_actor 84@ decision_maker_to 235@ 
+0332: set_actor 84@ bleeding 1 
+02A9: set_actor 84@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(84@) = 188@
+85@ = Marker.CreateAboveActor(84@)
+07E0: set_marker 85@ type_to 1 
+Marker.SetIconSize(85@, 2)
+0575: set_actor 84@ keep_position 1 
+0588: disable_actor 84@ validate_position 0 
+301@ = 1 
+
+:AMBULAN_4048
+if 
+  37@ > 2 
+jf @AMBULAN_4175 
+0376: 87@ = create_random_actor_at 318@ 334@ 350@ 
+89@ = 1 
+060B: set_actor 87@ decision_maker_to 235@ 
+0332: set_actor 87@ bleeding 1 
+02A9: set_actor 87@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(87@) = 188@
+88@ = Marker.CreateAboveActor(87@)
+07E0: set_marker 88@ type_to 1 
+Marker.SetIconSize(88@, 2)
+0575: set_actor 87@ keep_position 1 
+0588: disable_actor 87@ validate_position 0 
+302@ = 1 
+
+:AMBULAN_4175
+if 
+  37@ > 3 
+jf @AMBULAN_4302 
+0376: 90@ = create_random_actor_at 319@ 335@ 351@ 
+92@ = 1 
+060B: set_actor 90@ decision_maker_to 235@ 
+0332: set_actor 90@ bleeding 1 
+02A9: set_actor 90@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(90@) = 188@
+91@ = Marker.CreateAboveActor(90@)
+07E0: set_marker 91@ type_to 1 
+Marker.SetIconSize(91@, 2)
+0575: set_actor 90@ keep_position 1 
+0588: disable_actor 90@ validate_position 0 
+303@ = 1 
+
+:AMBULAN_4302
+if 
+  37@ > 4 
+jf @AMBULAN_4429 
+0376: 93@ = create_random_actor_at 320@ 336@ 352@ 
+95@ = 1 
+060B: set_actor 93@ decision_maker_to 235@ 
+0332: set_actor 93@ bleeding 1 
+02A9: set_actor 93@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(93@) = 188@
+94@ = Marker.CreateAboveActor(93@)
+07E0: set_marker 94@ type_to 1 
+Marker.SetIconSize(94@, 2)
+0575: set_actor 93@ keep_position 1 
+0588: disable_actor 93@ validate_position 0 
+304@ = 1 
+
+:AMBULAN_4429
+if 
+  37@ > 5 
+jf @AMBULAN_4556 
+0376: 56@ = create_random_actor_at 321@ 337@ 353@ 
+58@ = 1 
+060B: set_actor 56@ decision_maker_to 235@ 
+0332: set_actor 56@ bleeding 1 
+02A9: set_actor 56@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(56@) = 188@
+57@ = Marker.CreateAboveActor(56@)
+07E0: set_marker 57@ type_to 1 
+Marker.SetIconSize(57@, 2)
+0575: set_actor 56@ keep_position 1 
+0588: disable_actor 56@ validate_position 0 
+305@ = 1 
+
+:AMBULAN_4556
+if 
+  37@ > 6 
+jf @AMBULAN_4683 
+0376: 59@ = create_random_actor_at 322@ 338@ 354@ 
+61@ = 1 
+060B: set_actor 59@ decision_maker_to 235@ 
+0332: set_actor 59@ bleeding 1 
+02A9: set_actor 59@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(59@) = 188@
+60@ = Marker.CreateAboveActor(59@)
+07E0: set_marker 60@ type_to 1 
+Marker.SetIconSize(60@, 2)
+0575: set_actor 59@ keep_position 1 
+0588: disable_actor 59@ validate_position 0 
+306@ = 1 
+
+:AMBULAN_4683
+if 
+  37@ > 7 
+jf @AMBULAN_4810 
+0376: 62@ = create_random_actor_at 323@ 339@ 355@ 
+64@ = 1 
+060B: set_actor 62@ decision_maker_to 235@ 
+0332: set_actor 62@ bleeding 1 
+02A9: set_actor 62@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(62@) = 188@
+63@ = Marker.CreateAboveActor(62@)
+07E0: set_marker 63@ type_to 1 
+Marker.SetIconSize(63@, 2)
+0575: set_actor 62@ keep_position 1 
+0588: disable_actor 62@ validate_position 0 
+307@ = 1 
+
+:AMBULAN_4810
+if 
+  37@ > 8 
+jf @AMBULAN_4937 
+0376: 65@ = create_random_actor_at 324@ 340@ 356@ 
+67@ = 1 
+060B: set_actor 65@ decision_maker_to 235@ 
+0332: set_actor 65@ bleeding 1 
+02A9: set_actor 65@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(65@) = 188@
+66@ = Marker.CreateAboveActor(65@)
+07E0: set_marker 66@ type_to 1 
+Marker.SetIconSize(66@, 2)
+0575: set_actor 65@ keep_position 1 
+0588: disable_actor 65@ validate_position 0 
+308@ = 1 
+
+:AMBULAN_4937
+if 
+  37@ > 9 
+jf @AMBULAN_5064 
+0376: 68@ = create_random_actor_at 325@ 341@ 357@ 
+70@ = 1 
+060B: set_actor 68@ decision_maker_to 235@ 
+0332: set_actor 68@ bleeding 1 
+02A9: set_actor 68@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(68@) = 188@
+69@ = Marker.CreateAboveActor(68@)
+07E0: set_marker 69@ type_to 1 
+Marker.SetIconSize(69@, 2)
+0575: set_actor 68@ keep_position 1 
+0588: disable_actor 68@ validate_position 0 
+309@ = 1 
+
+:AMBULAN_5064
+if 
+  37@ > 10 
+jf @AMBULAN_5191 
+0376: 71@ = create_random_actor_at 326@ 342@ 358@ 
+73@ = 1 
+060B: set_actor 71@ decision_maker_to 235@ 
+0332: set_actor 71@ bleeding 1 
+02A9: set_actor 71@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(71@) = 188@
+72@ = Marker.CreateAboveActor(71@)
+07E0: set_marker 72@ type_to 1 
+Marker.SetIconSize(72@, 2)
+0575: set_actor 71@ keep_position 1 
+0588: disable_actor 71@ validate_position 0 
+310@ = 1 
+
+:AMBULAN_5191
+if 
+  37@ > 11 
+jf @AMBULAN_5318 
+0376: 74@ = create_random_actor_at 327@ 343@ 359@ 
+76@ = 1 
+060B: set_actor 74@ decision_maker_to 235@ 
+0332: set_actor 74@ bleeding 1 
+02A9: set_actor 74@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(74@) = 188@
+75@ = Marker.CreateAboveActor(74@)
+07E0: set_marker 75@ type_to 1 
+Marker.SetIconSize(75@, 2)
+0575: set_actor 74@ keep_position 1 
+0588: disable_actor 74@ validate_position 0 
+311@ = 1 
+
+:AMBULAN_5318
+if 
+  37@ > 12 
+jf @AMBULAN_5445 
+0376: 100@ = create_random_actor_at 328@ 344@ 360@ 
+102@ = 1 
+060B: set_actor 100@ decision_maker_to 235@ 
+0332: set_actor 100@ bleeding 1 
+02A9: set_actor 100@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(100@) = 188@
+101@ = Marker.CreateAboveActor(100@)
+07E0: set_marker 101@ type_to 1 
+Marker.SetIconSize(101@, 2)
+0575: set_actor 100@ keep_position 1 
+0588: disable_actor 100@ validate_position 0 
+312@ = 1 
+
+:AMBULAN_5445
+if 
+  37@ > 13 
+jf @AMBULAN_5572 
+0376: 103@ = create_random_actor_at 329@ 345@ 361@ 
+105@ = 1 
+060B: set_actor 103@ decision_maker_to 235@ 
+0332: set_actor 103@ bleeding 1 
+02A9: set_actor 103@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(103@) = 188@
+104@ = Marker.CreateAboveActor(103@)
+07E0: set_marker 104@ type_to 1 
+Marker.SetIconSize(104@, 2)
+0575: set_actor 103@ keep_position 1 
+0588: disable_actor 103@ validate_position 0 
+313@ = 1 
+
+:AMBULAN_5572
+if 
+  37@ > 14 
+jf @AMBULAN_5699 
+0376: 106@ = create_random_actor_at 330@ 346@ 362@ 
+108@ = 1 
+060B: set_actor 106@ decision_maker_to 235@ 
+0332: set_actor 106@ bleeding 1 
+02A9: set_actor 106@ immune_to_nonplayer 1 
+0208: 188@ = random_float_in_ranges 0.0 359.9 
+Actor.Angle(106@) = 188@
+107@ = Marker.CreateAboveActor(106@)
+07E0: set_marker 107@ type_to 1 
+Marker.SetIconSize(107@, 2)
+0575: set_actor 106@ keep_position 1 
+0588: disable_actor 106@ validate_position 0 
+314@ = 1 
+
+:AMBULAN_5699
+return 
+
+:AMBULAN_5701
+0871: init_jump_table 239@ total_jumps 15 default_jump 1 @AMBULAN_8844 jumps 0 @AMBULAN_5829 1 @AMBULAN_6030 2 @AMBULAN_6231 3 @AMBULAN_6432 4 @AMBULAN_6633 5 @AMBULAN_6834 6 @AMBULAN_7035 
+0872: jump_table_jumps 7 @AMBULAN_7236 8 @AMBULAN_7437 9 @AMBULAN_7638 10 @AMBULAN_7839 11 @AMBULAN_8040 12 @AMBULAN_8241 13 @AMBULAN_8442 14 @AMBULAN_8643 -1 @AMBULAN_8858 
+
+:AMBULAN_5829
+if 
+  37@ > 0 
+jf @AMBULAN_6016 
+if 
+  3 > 83@ 
+jf @AMBULAN_6016 
+if 
+   not Actor.Dead(81@)
+jf @AMBULAN_6016 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 81@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_5977 
+if 
+  300@ == 1 
+jf @AMBULAN_5970 
+0575: set_actor 81@ keep_position 0 
+0588: disable_actor 81@ validate_position 1 
+Actor.PutAt(81@, 316@, 332@, 348@)
+300@ = 0 
+
+:AMBULAN_5970
+jump @AMBULAN_6016 
+
+:AMBULAN_5977
+if 
+  300@ == 0 
+jf @AMBULAN_6016 
+0575: set_actor 81@ keep_position 1 
+0588: disable_actor 81@ validate_position 0 
+300@ = 1 
+
+:AMBULAN_6016
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_6030
+if 
+  37@ > 1 
+jf @AMBULAN_6217 
+if 
+  3 > 86@ 
+jf @AMBULAN_6217 
+if 
+   not Actor.Dead(84@)
+jf @AMBULAN_6217 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 84@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_6178 
+if 
+  301@ == 1 
+jf @AMBULAN_6171 
+0575: set_actor 84@ keep_position 0 
+0588: disable_actor 84@ validate_position 1 
+Actor.PutAt(84@, 317@, 333@, 349@)
+301@ = 0 
+
+:AMBULAN_6171
+jump @AMBULAN_6217 
+
+:AMBULAN_6178
+if 
+  301@ == 0 
+jf @AMBULAN_6217 
+0575: set_actor 84@ keep_position 1 
+0588: disable_actor 84@ validate_position 0 
+301@ = 1 
+
+:AMBULAN_6217
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_6231
+if 
+  37@ > 2 
+jf @AMBULAN_6418 
+if 
+  3 > 89@ 
+jf @AMBULAN_6418 
+if 
+   not Actor.Dead(87@)
+jf @AMBULAN_6418 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 87@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_6379 
+if 
+  302@ == 1 
+jf @AMBULAN_6372 
+0575: set_actor 87@ keep_position 0 
+0588: disable_actor 87@ validate_position 1 
+Actor.PutAt(87@, 318@, 334@, 350@)
+302@ = 0 
+
+:AMBULAN_6372
+jump @AMBULAN_6418 
+
+:AMBULAN_6379
+if 
+  302@ == 0 
+jf @AMBULAN_6418 
+0575: set_actor 87@ keep_position 1 
+0588: disable_actor 87@ validate_position 0 
+302@ = 1 
+
+:AMBULAN_6418
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_6432
+if 
+  37@ > 3 
+jf @AMBULAN_6619 
+if 
+  3 > 92@ 
+jf @AMBULAN_6619 
+if 
+   not Actor.Dead(90@)
+jf @AMBULAN_6619 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 90@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_6580 
+if 
+  303@ == 1 
+jf @AMBULAN_6573 
+0575: set_actor 90@ keep_position 0 
+0588: disable_actor 90@ validate_position 1 
+Actor.PutAt(90@, 319@, 335@, 351@)
+303@ = 0 
+
+:AMBULAN_6573
+jump @AMBULAN_6619 
+
+:AMBULAN_6580
+if 
+  303@ == 0 
+jf @AMBULAN_6619 
+0575: set_actor 90@ keep_position 1 
+0588: disable_actor 90@ validate_position 0 
+303@ = 1 
+
+:AMBULAN_6619
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_6633
+if 
+  37@ > 4 
+jf @AMBULAN_6820 
+if 
+  3 > 95@ 
+jf @AMBULAN_6820 
+if 
+   not Actor.Dead(93@)
+jf @AMBULAN_6820 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 93@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_6781 
+if 
+  304@ == 1 
+jf @AMBULAN_6774 
+0575: set_actor 93@ keep_position 0 
+0588: disable_actor 93@ validate_position 1 
+Actor.PutAt(93@, 320@, 336@, 352@)
+304@ = 0 
+
+:AMBULAN_6774
+jump @AMBULAN_6820 
+
+:AMBULAN_6781
+if 
+  304@ == 0 
+jf @AMBULAN_6820 
+0575: set_actor 93@ keep_position 1 
+0588: disable_actor 93@ validate_position 0 
+304@ = 1 
+
+:AMBULAN_6820
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_6834
+if 
+  37@ > 5 
+jf @AMBULAN_7021 
+if 
+  3 > 58@ 
+jf @AMBULAN_7021 
+if 
+   not Actor.Dead(56@)
+jf @AMBULAN_7021 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 56@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_6982 
+if 
+  305@ == 1 
+jf @AMBULAN_6975 
+0575: set_actor 56@ keep_position 0 
+0588: disable_actor 56@ validate_position 1 
+Actor.PutAt(56@, 321@, 337@, 353@)
+305@ = 0 
+
+:AMBULAN_6975
+jump @AMBULAN_7021 
+
+:AMBULAN_6982
+if 
+  305@ == 0 
+jf @AMBULAN_7021 
+0575: set_actor 56@ keep_position 1 
+0588: disable_actor 56@ validate_position 0 
+305@ = 1 
+
+:AMBULAN_7021
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_7035
+if 
+  37@ > 6 
+jf @AMBULAN_7222 
+if 
+  3 > 61@ 
+jf @AMBULAN_7222 
+if 
+   not Actor.Dead(59@)
+jf @AMBULAN_7222 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 59@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_7183 
+if 
+  306@ == 1 
+jf @AMBULAN_7176 
+0575: set_actor 59@ keep_position 0 
+0588: disable_actor 59@ validate_position 1 
+Actor.PutAt(59@, 322@, 338@, 354@)
+306@ = 0 
+
+:AMBULAN_7176
+jump @AMBULAN_7222 
+
+:AMBULAN_7183
+if 
+  306@ == 0 
+jf @AMBULAN_7222 
+0575: set_actor 59@ keep_position 1 
+0588: disable_actor 59@ validate_position 0 
+306@ = 1 
+
+:AMBULAN_7222
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_7236
+if 
+  37@ > 7 
+jf @AMBULAN_7423 
+if 
+  3 > 64@ 
+jf @AMBULAN_7423 
+if 
+   not Actor.Dead(62@)
+jf @AMBULAN_7423 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 62@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_7384 
+if 
+  307@ == 1 
+jf @AMBULAN_7377 
+0575: set_actor 62@ keep_position 0 
+0588: disable_actor 62@ validate_position 1 
+Actor.PutAt(62@, 323@, 339@, 355@)
+307@ = 0 
+
+:AMBULAN_7377
+jump @AMBULAN_7423 
+
+:AMBULAN_7384
+if 
+  307@ == 0 
+jf @AMBULAN_7423 
+0575: set_actor 62@ keep_position 1 
+0588: disable_actor 62@ validate_position 0 
+307@ = 1 
+
+:AMBULAN_7423
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_7437
+if 
+  37@ > 8 
+jf @AMBULAN_7624 
+if 
+  3 > 67@ 
+jf @AMBULAN_7624 
+if 
+   not Actor.Dead(65@)
+jf @AMBULAN_7624 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 65@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_7585 
+if 
+  308@ == 1 
+jf @AMBULAN_7578 
+0575: set_actor 65@ keep_position 0 
+0588: disable_actor 65@ validate_position 1 
+Actor.PutAt(65@, 324@, 340@, 356@)
+308@ = 0 
+
+:AMBULAN_7578
+jump @AMBULAN_7624 
+
+:AMBULAN_7585
+if 
+  308@ == 0 
+jf @AMBULAN_7624 
+0575: set_actor 65@ keep_position 1 
+0588: disable_actor 65@ validate_position 0 
+308@ = 1 
+
+:AMBULAN_7624
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_7638
+if 
+  37@ > 9 
+jf @AMBULAN_7825 
+if 
+  3 > 70@ 
+jf @AMBULAN_7825 
+if 
+   not Actor.Dead(68@)
+jf @AMBULAN_7825 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 68@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_7786 
+if 
+  309@ == 1 
+jf @AMBULAN_7779 
+0575: set_actor 68@ keep_position 0 
+0588: disable_actor 68@ validate_position 1 
+Actor.PutAt(68@, 325@, 341@, 357@)
+309@ = 0 
+
+:AMBULAN_7779
+jump @AMBULAN_7825 
+
+:AMBULAN_7786
+if 
+  309@ == 0 
+jf @AMBULAN_7825 
+0575: set_actor 68@ keep_position 1 
+0588: disable_actor 68@ validate_position 0 
+309@ = 1 
+
+:AMBULAN_7825
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_7839
+if 
+  37@ > 10 
+jf @AMBULAN_8026 
+if 
+  3 > 73@ 
+jf @AMBULAN_8026 
+if 
+   not Actor.Dead(71@)
+jf @AMBULAN_8026 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 71@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_7987 
+if 
+  310@ == 1 
+jf @AMBULAN_7980 
+0575: set_actor 71@ keep_position 0 
+0588: disable_actor 71@ validate_position 1 
+Actor.PutAt(71@, 326@, 342@, 358@)
+310@ = 0 
+
+:AMBULAN_7980
+jump @AMBULAN_8026 
+
+:AMBULAN_7987
+if 
+  310@ == 0 
+jf @AMBULAN_8026 
+0575: set_actor 71@ keep_position 1 
+0588: disable_actor 71@ validate_position 0 
+310@ = 1 
+
+:AMBULAN_8026
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_8040
+if 
+  37@ > 11 
+jf @AMBULAN_8227 
+if 
+  3 > 76@ 
+jf @AMBULAN_8227 
+if 
+   not Actor.Dead(74@)
+jf @AMBULAN_8227 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 74@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_8188 
+if 
+  311@ == 1 
+jf @AMBULAN_8181 
+0575: set_actor 74@ keep_position 0 
+0588: disable_actor 74@ validate_position 1 
+Actor.PutAt(74@, 327@, 343@, 359@)
+311@ = 0 
+
+:AMBULAN_8181
+jump @AMBULAN_8227 
+
+:AMBULAN_8188
+if 
+  311@ == 0 
+jf @AMBULAN_8227 
+0575: set_actor 74@ keep_position 1 
+0588: disable_actor 74@ validate_position 0 
+311@ = 1 
+
+:AMBULAN_8227
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_8241
+if 
+  37@ > 12 
+jf @AMBULAN_8428 
+if 
+  3 > 102@ 
+jf @AMBULAN_8428 
+if 
+   not Actor.Dead(100@)
+jf @AMBULAN_8428 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 100@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_8389 
+if 
+  312@ == 1 
+jf @AMBULAN_8382 
+0575: set_actor 100@ keep_position 0 
+0588: disable_actor 100@ validate_position 1 
+Actor.PutAt(100@, 328@, 344@, 360@)
+312@ = 0 
+
+:AMBULAN_8382
+jump @AMBULAN_8428 
+
+:AMBULAN_8389
+if 
+  312@ == 0 
+jf @AMBULAN_8428 
+0575: set_actor 100@ keep_position 1 
+0588: disable_actor 100@ validate_position 0 
+312@ = 1 
+
+:AMBULAN_8428
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_8442
+if 
+  37@ > 13 
+jf @AMBULAN_8629 
+if 
+  3 > 105@ 
+jf @AMBULAN_8629 
+if 
+   not Actor.Dead(103@)
+jf @AMBULAN_8629 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 103@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_8590 
+if 
+  313@ == 1 
+jf @AMBULAN_8583 
+0575: set_actor 103@ keep_position 0 
+0588: disable_actor 103@ validate_position 1 
+Actor.PutAt(103@, 329@, 345@, 361@)
+313@ = 0 
+
+:AMBULAN_8583
+jump @AMBULAN_8629 
+
+:AMBULAN_8590
+if 
+  313@ == 0 
+jf @AMBULAN_8629 
+0575: set_actor 103@ keep_position 1 
+0588: disable_actor 103@ validate_position 0 
+313@ = 1 
+
+:AMBULAN_8629
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_8643
+if 
+  37@ > 14 
+jf @AMBULAN_8830 
+if 
+  3 > 108@ 
+jf @AMBULAN_8830 
+if 
+   not Actor.Dead(106@)
+jf @AMBULAN_8830 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 106@ radius 50.0 50.0 20.0 0 in_car 
+jf @AMBULAN_8791 
+if 
+  314@ == 1 
+jf @AMBULAN_8784 
+0575: set_actor 106@ keep_position 0 
+0588: disable_actor 106@ validate_position 1 
+Actor.PutAt(106@, 330@, 346@, 362@)
+314@ = 0 
+
+:AMBULAN_8784
+jump @AMBULAN_8830 
+
+:AMBULAN_8791
+if 
+  314@ == 0 
+jf @AMBULAN_8830 
+0575: set_actor 106@ keep_position 1 
+0588: disable_actor 106@ validate_position 0 
+314@ = 1 
+
+:AMBULAN_8830
+239@ += 1 
+jump @AMBULAN_8858 
+
+:AMBULAN_8844
+239@ = 0 
+jump @AMBULAN_8858 
+
+:AMBULAN_8858
+return 
+
+:AMBULAN_8860
+wait 0 
+Actor.StorePos($PLAYER_ACTOR, 170@, 171@, 172@)
+0087: 190@ = 167@ // (float) 
+0087: 193@ = 167@ // (float) 
+0087: 191@ = 168@ // (float) 
+0087: 194@ = 168@ // (float) 
+0087: 192@ = 169@ // (float) 
+0087: 195@ = 169@ // (float) 
+07EF: get_town_number_from_point 170@ 171@ 172@ store_to 96@ 
+008F: 237@ = integer $PARAMEDIC_MISSION_LEVEL to_float 
+237@ *= 60.0 
+005B: 237@ += 238@ // (float) 
+if 
+  96@ == 0 
+jf @AMBULAN_9001 
+238@ += 15.0 
+jump @AMBULAN_9011 
+
+:AMBULAN_9001
+238@ += 1.0 
+
+:AMBULAN_9011
+if 
+  100.0 > 237@ 
+jf @AMBULAN_9042 
+237@ = 100.0 
+
+:AMBULAN_9042
+if 
+  238@ > 10000.0 
+jf @AMBULAN_9108 
+if 
+  $PARAMEDIC_MISSION_LEVEL == 1 
+jf @AMBULAN_9108 
+03D5: remove_text 'ALEVEL'  // Paramedic Mission Level ~1~
+00BC: show_text_highpriority GXT 'A_CANC' time 3000 flag 1  // ~r~Paramedic mission cancelled!
+
+:AMBULAN_9108
+0063: 190@ -= 237@ // (float) 
+005B: 193@ += 237@ // (float) 
+0063: 191@ -= 237@ // (float) 
+005B: 194@ += 237@ // (float) 
+if 
+  10 > $PARAMEDIC_MISSION_LEVEL 
+jf @AMBULAN_9273 
+if 
+0025:   197@ > 190@ // (float) 
+jf @AMBULAN_9185 
+0087: 190@ = 197@ // (float) 
+
+:AMBULAN_9185
+if 
+0025:   193@ > 198@ // (float) 
+jf @AMBULAN_9212 
+0087: 193@ = 198@ // (float) 
+
+:AMBULAN_9212
+if 
+0025:   199@ > 191@ // (float) 
+jf @AMBULAN_9239 
+0087: 191@ = 199@ // (float) 
+
+:AMBULAN_9239
+if 
+0025:   166@ > 200@ // (float) 
+jf @AMBULAN_9266 
+0087: 194@ = 200@ // (float) 
+
+:AMBULAN_9266
+jump @AMBULAN_9305 
+
+:AMBULAN_9273
+0087: 190@ = 197@ // (float) 
+0087: 193@ = 198@ // (float) 
+0087: 191@ = 199@ // (float) 
+0087: 194@ = 200@ // (float) 
+
+:AMBULAN_9305
+0208: 165@ = random_float_in_ranges 190@ 193@ 
+0208: 166@ = random_float_in_ranges 191@ 194@ 
+0293: $13 = get_controller_mode 
+if 
+00E1:   player 0 pressed_key 19 
+jf @AMBULAN_9356 
+53@ = 1 
+
+:AMBULAN_9356
+if 
+  53@ == 1 
+jf @AMBULAN_9457 
+if 
+   not $13 == 3 
+jf @AMBULAN_9452 
+if 
+80E1:   not player 0 pressed_key 19 
+jf @AMBULAN_9445 
+03D5: remove_text 'ALEVEL'  // Paramedic Mission Level ~1~
+00BC: show_text_highpriority GXT 'A_CANC' time 3000 flag 1  // ~r~Paramedic mission cancelled!
+79@ = 1 
+return 
+
+:AMBULAN_9445
+jump @AMBULAN_9457 
+
+:AMBULAN_9452
+0293: $13 = get_controller_mode 
+
+:AMBULAN_9457
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @AMBULAN_9528 
+if 
+   not Actor.DrivingVehicleType($PLAYER_ACTOR, #AMBULAN)
+jf @AMBULAN_9528 
+03D5: remove_text 'ALEVEL'  // Paramedic Mission Level ~1~
+00BC: show_text_highpriority GXT 'A_CANC' time 3000 flag 1  // ~r~Paramedic mission cancelled!
+79@ = 1 
+return 
+
+:AMBULAN_9528
+02C0: store_to 176@ 177@ 178@ ped_path_coords_closest_to 165@ 166@ 169@ 
+if 
+0025:   197@ > 176@ // (float) 
+jf @AMBULAN_9581 
+jump @AMBULAN_8860 
+jump @AMBULAN_9673 
+
+:AMBULAN_9581
+if 
+0025:   176@ > 198@ // (float) 
+jf @AMBULAN_9614 
+jump @AMBULAN_8860 
+jump @AMBULAN_9673 
+
+:AMBULAN_9614
+if 
+0025:   199@ > 177@ // (float) 
+jf @AMBULAN_9647 
+jump @AMBULAN_8860 
+jump @AMBULAN_9673 
+
+:AMBULAN_9647
+if 
+0025:   177@ > 200@ // (float) 
+jf @AMBULAN_9673 
+jump @AMBULAN_8860 
+
+:AMBULAN_9673
+if 
+  6.0 > 178@ 
+jf @AMBULAN_9701 
+jump @AMBULAN_8860 
+
+:AMBULAN_9701
+050A: 185@ = distance_between_XYZ 170@ 171@ 172@ and_XYZ 176@ 177@ 178@ 
+if 
+  50.0 > 185@ 
+jf @AMBULAN_9752 
+jump @AMBULAN_8860 
+
+:AMBULAN_9752
+050A: 186@ = distance_between_XYZ 167@ 168@ 169@ and_XYZ 176@ 177@ 178@ 
+if 
+  30.0 > 186@ 
+jf @AMBULAN_9803 
+jump @AMBULAN_8860 
+
+:AMBULAN_9803
+0652: $STAT_UNLOCKED_CITIES_NUMBER = integer_stat 181 
+if 
+  2 > $STAT_UNLOCKED_CITIES_NUMBER 
+jf @AMBULAN_10265 
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 0 
+jf @AMBULAN_10079 
+if and
+  78.4427 > 176@ 
+  -699.519 > 177@ 
+jf @AMBULAN_9889 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_9889
+if and
+  -252.6557 > 176@ 
+  -285.766 > 177@ 
+jf @AMBULAN_9931 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_9931
+if 
+  -948.3447 > 176@ 
+jf @AMBULAN_9963 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_9963
+if and
+  176@ > 1473.448 
+  177@ > 403.7353 
+jf @AMBULAN_10005 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10005
+if 
+  177@ > 578.6325 
+jf @AMBULAN_10037 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10037
+if and
+  837.5551 > 176@ 
+  177@ > 347.4097 
+jf @AMBULAN_10079 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10079
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 1 
+jf @AMBULAN_10265 
+if and
+  176@ > 1473.448 
+  177@ > 403.7353 
+jf @AMBULAN_10139 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10139
+if and
+  177@ > 578.6325 
+  176@ > -1528.498 
+jf @AMBULAN_10181 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10181
+if and
+  837.5551 > 176@ 
+  176@ > -1528.498 
+  177@ > 347.4097 
+jf @AMBULAN_10233 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10233
+if 
+  177@ > 1380.0 
+jf @AMBULAN_10265 
+wait 0 
+jump @AMBULAN_8860 
+
+:AMBULAN_10265
+if 
+  37@ > 0 
+jf @AMBULAN_10334 
+050A: 212@ = distance_between_XYZ 316@ 332@ 348@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10334 
+jump @AMBULAN_8860 
+
+:AMBULAN_10334
+if 
+  37@ > 1 
+jf @AMBULAN_10403 
+050A: 212@ = distance_between_XYZ 316@ 332@ 348@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10403 
+jump @AMBULAN_8860 
+
+:AMBULAN_10403
+if 
+  37@ > 2 
+jf @AMBULAN_10472 
+050A: 212@ = distance_between_XYZ 317@ 333@ 349@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10472 
+jump @AMBULAN_8860 
+
+:AMBULAN_10472
+if 
+  37@ > 3 
+jf @AMBULAN_10541 
+050A: 212@ = distance_between_XYZ 318@ 334@ 350@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10541 
+jump @AMBULAN_8860 
+
+:AMBULAN_10541
+if 
+  37@ > 4 
+jf @AMBULAN_10610 
+050A: 212@ = distance_between_XYZ 319@ 335@ 351@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10610 
+jump @AMBULAN_8860 
+
+:AMBULAN_10610
+if 
+  37@ > 5 
+jf @AMBULAN_10679 
+050A: 212@ = distance_between_XYZ 320@ 336@ 352@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10679 
+jump @AMBULAN_8860 
+
+:AMBULAN_10679
+if 
+  37@ > 6 
+jf @AMBULAN_10748 
+050A: 212@ = distance_between_XYZ 321@ 337@ 353@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10748 
+jump @AMBULAN_8860 
+
+:AMBULAN_10748
+if 
+  37@ > 7 
+jf @AMBULAN_10817 
+050A: 212@ = distance_between_XYZ 322@ 338@ 354@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10817 
+jump @AMBULAN_8860 
+
+:AMBULAN_10817
+if 
+  37@ > 8 
+jf @AMBULAN_10886 
+050A: 212@ = distance_between_XYZ 323@ 339@ 355@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10886 
+jump @AMBULAN_8860 
+
+:AMBULAN_10886
+if 
+  37@ > 9 
+jf @AMBULAN_10955 
+050A: 212@ = distance_between_XYZ 324@ 340@ 356@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_10955 
+jump @AMBULAN_8860 
+
+:AMBULAN_10955
+if 
+  37@ > 10 
+jf @AMBULAN_11024 
+050A: 212@ = distance_between_XYZ 325@ 341@ 357@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_11024 
+jump @AMBULAN_8860 
+
+:AMBULAN_11024
+if 
+  37@ > 11 
+jf @AMBULAN_11093 
+050A: 212@ = distance_between_XYZ 326@ 342@ 358@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_11093 
+jump @AMBULAN_8860 
+
+:AMBULAN_11093
+if 
+  37@ > 12 
+jf @AMBULAN_11162 
+050A: 212@ = distance_between_XYZ 327@ 343@ 359@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_11162 
+jump @AMBULAN_8860 
+
+:AMBULAN_11162
+if 
+  37@ > 13 
+jf @AMBULAN_11231 
+050A: 212@ = distance_between_XYZ 328@ 344@ 360@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_11231 
+jump @AMBULAN_8860 
+
+:AMBULAN_11231
+if 
+  37@ > 14 
+jf @AMBULAN_11300 
+050A: 212@ = distance_between_XYZ 329@ 345@ 361@ and_XYZ 176@ 177@ 178@ 
+if 
+  25.0 > 212@ 
+jf @AMBULAN_11300 
+jump @AMBULAN_8860 
+
+:AMBULAN_11300
+if 
+038A:   any_car_in_cube_cornerA 176@ 177@ 177@ cornerB 25.0 25.0 10.0 
+jf @AMBULAN_11344 
+jump @AMBULAN_8860 
+
+:AMBULAN_11344
+if 
+  1186.0 > 176@ 
+jf @AMBULAN_11435 
+if 
+  176@ > 1047.0 
+jf @AMBULAN_11435 
+if 
+  -1406.0 > 177@ 
+jf @AMBULAN_11435 
+if 
+  177@ > -1567.0 
+jf @AMBULAN_11435 
+jump @AMBULAN_8860 
+
+:AMBULAN_11435
+if 
+  1444.0 > 176@ 
+jf @AMBULAN_11526 
+if 
+  176@ > 1339.0 
+jf @AMBULAN_11526 
+if 
+  -1450.0 > 177@ 
+jf @AMBULAN_11526 
+if 
+  177@ > -1504.0 
+jf @AMBULAN_11526 
+jump @AMBULAN_8860 
+
+:AMBULAN_11526
+if 
+  2041.979 > 176@ 
+jf @AMBULAN_11617 
+if 
+  176@ > 1999.387 
+jf @AMBULAN_11617 
+if 
+  -1408.708 > 177@ 
+jf @AMBULAN_11617 
+if 
+  177@ > -1445.462 
+jf @AMBULAN_11617 
+jump @AMBULAN_8860 
+
+:AMBULAN_11617
+if 
+  1202.0 > 176@ 
+jf @AMBULAN_11708 
+if 
+  176@ > 1162.0 
+jf @AMBULAN_11708 
+if 
+  -1238.0 > 177@ 
+jf @AMBULAN_11708 
+if 
+  177@ > -1250.0 
+jf @AMBULAN_11708 
+jump @AMBULAN_8860 
+
+:AMBULAN_11708
+if 
+  1176.0 > 176@ 
+jf @AMBULAN_11799 
+if 
+  176@ > 1158.0 
+jf @AMBULAN_11799 
+if 
+  1364.0 > 177@ 
+jf @AMBULAN_11799 
+if 
+  177@ > 1345.0 
+jf @AMBULAN_11799 
+jump @AMBULAN_8860 
+
+:AMBULAN_11799
+if 
+  -2307.0 > 176@ 
+jf @AMBULAN_11890 
+if 
+  176@ > -2333.0 
+jf @AMBULAN_11890 
+if 
+  1100.0 > 177@ 
+jf @AMBULAN_11890 
+if 
+  177@ > 1036.0 
+jf @AMBULAN_11890 
+jump @AMBULAN_8860 
+
+:AMBULAN_11890
+if 
+  2009.0 > 176@ 
+jf @AMBULAN_11981 
+if 
+  176@ > 1989.0 
+jf @AMBULAN_11981 
+if 
+  1571.0 > 177@ 
+jf @AMBULAN_11981 
+if 
+  177@ > 1513.0 
+jf @AMBULAN_11981 
+jump @AMBULAN_8860 
+
+:AMBULAN_11981
+if 
+  2632.818 > 176@ 
+jf @AMBULAN_12072 
+if 
+  176@ > 2546.463 
+jf @AMBULAN_12072 
+if 
+  -1129.673 > 177@ 
+jf @AMBULAN_12072 
+if 
+  177@ > -1144.012 
+jf @AMBULAN_12072 
+jump @AMBULAN_8860 
+
+:AMBULAN_12072
+if 
+  -222.5044 > 176@ 
+jf @AMBULAN_12163 
+if 
+  176@ > -229.096 
+jf @AMBULAN_12163 
+if 
+  1412.086 > 177@ 
+jf @AMBULAN_12163 
+if 
+  177@ > 1393.817 
+jf @AMBULAN_12163 
+jump @AMBULAN_8860 
+
+:AMBULAN_12163
+238@ = 0.0 
+return 
+
+:AMBULAN_12175
+if 
+  2 > 37@ 
+jf @AMBULAN_12284 
+if 
+0025:   185@ > 186@ // (float) 
+jf @AMBULAN_12235 
+0087: 187@ = 185@ // (float) 
+0073: 187@ /= 189@ // (float) 
+jump @AMBULAN_12251 
+
+:AMBULAN_12235
+0087: 187@ = 186@ // (float) 
+0073: 187@ /= 189@ // (float) 
+
+:AMBULAN_12251
+187@ *= 1000.0 
+0092: 35@ = float 187@ to_integer 
+005E: $8210 += 35@ // (int) 
+jump @AMBULAN_12326 
+
+:AMBULAN_12284
+0087: 187@ = 186@ // (float) 
+0073: 187@ /= 189@ // (float) 
+187@ *= 1000.0 
+0092: 35@ = float 187@ to_integer 
+005E: $8210 += 35@ // (int) 
+
+:AMBULAN_12326
+return 
+
+:AMBULAN_12328
+wait 0 
+if 
+  $8210 == 0 
+jf @AMBULAN_12380 
+00BC: show_text_highpriority GXT 'A_FAIL2' time 3000 flag 1  // ~r~Your lack of urgency has been fatal to the patient!
+79@ = 1 
+jump @AMBULAN_14713 
+
+:AMBULAN_12380
+0293: $13 = get_controller_mode 
+if 
+00E1:   player 0 pressed_key 19 
+jf @AMBULAN_12409 
+53@ = 1 
+
+:AMBULAN_12409
+if 
+  53@ == 1 
+jf @AMBULAN_12467 
+if 
+80E1:   not player 0 pressed_key 19 
+jf @AMBULAN_12467 
+00BC: show_text_highpriority GXT 'A_CANC' time 3000 flag 1  // ~r~Paramedic mission cancelled!
+jump @AMBULAN_14713 
+
+:AMBULAN_12467
+if 
+   not Actor.DrivingVehicleType($PLAYER_ACTOR, #AMBULAN)
+jf @AMBULAN_12516 
+00BC: show_text_highpriority GXT 'A_CANC' time 3000 flag 1  // ~r~Paramedic mission cancelled!
+jump @AMBULAN_14713 
+jump @AMBULAN_12572 
+
+:AMBULAN_12516
+34@ = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+   not Car.Wrecked(34@)
+jf @AMBULAN_12572 
+01E9: 43@ = car 34@ num_passengers 
+01EA: 42@ = car 34@ max_passengers 
+008A: $8212 = 42@ // (int) 
+0066: $8212 -= 43@ // (int) 
+
+:AMBULAN_12572
+if and
+  37@ > 6 
+  45@ == 2 
+  51@ == 0 
+jf @AMBULAN_12618 
+45@ = 1 
+51@ += 1 
+
+:AMBULAN_12618
+if and
+  37@ > 9 
+  45@ == 2 
+  51@ == 1 
+jf @AMBULAN_12664 
+45@ = 1 
+51@ += 1 
+
+:AMBULAN_12664
+if and
+  37@ > 12 
+  45@ == 2 
+  51@ == 2 
+jf @AMBULAN_12710 
+45@ = 1 
+51@ += 1 
+
+:AMBULAN_12710
+gosub @AMBULAN_5701 
+if 
+  52@ == 1 
+jf @AMBULAN_12766 
+0103:   actor $PLAYER_ACTOR in_sphere 167@ 168@ 169@ radius 6.0 6.0 2.0 sphere 1 stopped_in_car 
+
+:AMBULAN_12766
+0871: init_jump_table 240@ total_jumps 15 default_jump 1 @AMBULAN_14334 jumps 0 @AMBULAN_12894 1 @AMBULAN_12990 2 @AMBULAN_13086 3 @AMBULAN_13182 4 @AMBULAN_13278 5 @AMBULAN_13374 6 @AMBULAN_13470 
+0872: jump_table_jumps 7 @AMBULAN_13566 8 @AMBULAN_13662 9 @AMBULAN_13758 10 @AMBULAN_13854 11 @AMBULAN_13950 12 @AMBULAN_14046 13 @AMBULAN_14142 14 @AMBULAN_14238 -1 @AMBULAN_14348 
+
+:AMBULAN_12894
+if 
+  83@ > 0 
+jf @AMBULAN_12976 
+0085: 77@ = 81@ // (int) 
+0085: 80@ = 83@ // (int) 
+0085: 78@ = 82@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_12968 
+jump @AMBULAN_14713 
+
+:AMBULAN_12968
+0085: 83@ = 80@ // (int) 
+
+:AMBULAN_12976
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_12990
+if 
+  86@ > 0 
+jf @AMBULAN_13072 
+0085: 77@ = 84@ // (int) 
+0085: 80@ = 86@ // (int) 
+0085: 78@ = 85@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13064 
+jump @AMBULAN_14713 
+
+:AMBULAN_13064
+0085: 86@ = 80@ // (int) 
+
+:AMBULAN_13072
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13086
+if 
+  89@ > 0 
+jf @AMBULAN_13168 
+0085: 77@ = 87@ // (int) 
+0085: 80@ = 89@ // (int) 
+0085: 78@ = 88@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13160 
+jump @AMBULAN_14713 
+
+:AMBULAN_13160
+0085: 89@ = 80@ // (int) 
+
+:AMBULAN_13168
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13182
+if 
+  92@ > 0 
+jf @AMBULAN_13264 
+0085: 77@ = 90@ // (int) 
+0085: 80@ = 92@ // (int) 
+0085: 78@ = 91@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13256 
+jump @AMBULAN_14713 
+
+:AMBULAN_13256
+0085: 92@ = 80@ // (int) 
+
+:AMBULAN_13264
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13278
+if 
+  95@ > 0 
+jf @AMBULAN_13360 
+0085: 77@ = 93@ // (int) 
+0085: 80@ = 95@ // (int) 
+0085: 78@ = 94@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13352 
+jump @AMBULAN_14713 
+
+:AMBULAN_13352
+0085: 95@ = 80@ // (int) 
+
+:AMBULAN_13360
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13374
+if 
+  58@ > 0 
+jf @AMBULAN_13456 
+0085: 77@ = 56@ // (int) 
+0085: 80@ = 58@ // (int) 
+0085: 78@ = 57@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13448 
+jump @AMBULAN_14713 
+
+:AMBULAN_13448
+0085: 58@ = 80@ // (int) 
+
+:AMBULAN_13456
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13470
+if 
+  61@ > 0 
+jf @AMBULAN_13552 
+0085: 77@ = 59@ // (int) 
+0085: 80@ = 61@ // (int) 
+0085: 78@ = 60@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13544 
+jump @AMBULAN_14713 
+
+:AMBULAN_13544
+0085: 61@ = 80@ // (int) 
+
+:AMBULAN_13552
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13566
+if 
+  64@ > 0 
+jf @AMBULAN_13648 
+0085: 77@ = 62@ // (int) 
+0085: 80@ = 64@ // (int) 
+0085: 78@ = 63@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13640 
+jump @AMBULAN_14713 
+
+:AMBULAN_13640
+0085: 64@ = 80@ // (int) 
+
+:AMBULAN_13648
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13662
+if 
+  67@ > 0 
+jf @AMBULAN_13744 
+0085: 77@ = 65@ // (int) 
+0085: 80@ = 67@ // (int) 
+0085: 78@ = 66@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13736 
+jump @AMBULAN_14713 
+
+:AMBULAN_13736
+0085: 67@ = 80@ // (int) 
+
+:AMBULAN_13744
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13758
+if 
+  70@ > 0 
+jf @AMBULAN_13840 
+0085: 77@ = 68@ // (int) 
+0085: 80@ = 70@ // (int) 
+0085: 78@ = 69@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13832 
+jump @AMBULAN_14713 
+
+:AMBULAN_13832
+0085: 70@ = 80@ // (int) 
+
+:AMBULAN_13840
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13854
+if 
+  73@ > 0 
+jf @AMBULAN_13936 
+0085: 77@ = 71@ // (int) 
+0085: 80@ = 73@ // (int) 
+0085: 78@ = 72@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_13928 
+jump @AMBULAN_14713 
+
+:AMBULAN_13928
+0085: 73@ = 80@ // (int) 
+
+:AMBULAN_13936
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_13950
+if 
+  76@ > 0 
+jf @AMBULAN_14032 
+0085: 77@ = 74@ // (int) 
+0085: 80@ = 76@ // (int) 
+0085: 78@ = 75@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_14024 
+jump @AMBULAN_14713 
+
+:AMBULAN_14024
+0085: 76@ = 80@ // (int) 
+
+:AMBULAN_14032
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_14046
+if 
+  102@ > 0 
+jf @AMBULAN_14128 
+0085: 77@ = 100@ // (int) 
+0085: 80@ = 102@ // (int) 
+0085: 78@ = 101@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_14120 
+jump @AMBULAN_14713 
+
+:AMBULAN_14120
+0085: 102@ = 80@ // (int) 
+
+:AMBULAN_14128
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_14142
+if 
+  105@ > 0 
+jf @AMBULAN_14224 
+0085: 77@ = 103@ // (int) 
+0085: 80@ = 105@ // (int) 
+0085: 78@ = 104@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_14216 
+jump @AMBULAN_14713 
+
+:AMBULAN_14216
+0085: 105@ = 80@ // (int) 
+
+:AMBULAN_14224
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_14238
+if 
+  108@ > 0 
+jf @AMBULAN_14320 
+0085: 77@ = 106@ // (int) 
+0085: 80@ = 108@ // (int) 
+0085: 78@ = 107@ // (int) 
+gosub @AMBULAN_15696 
+if 
+  79@ == 1 
+jf @AMBULAN_14312 
+jump @AMBULAN_14713 
+
+:AMBULAN_14312
+0085: 108@ = 80@ // (int) 
+
+:AMBULAN_14320
+240@ += 1 
+jump @AMBULAN_14348 
+
+:AMBULAN_14334
+240@ = 0 
+jump @AMBULAN_14348 
+
+:AMBULAN_14348
+if 
+003B:   46@ == 37@ // (int) 
+jf @AMBULAN_14706 
+008B: 44@ = $PARAMEDIC_MISSION_LEVEL // (int) 
+006E: 44@ *= $PARAMEDIC_MISSION_LEVEL // (int) 
+44@ *= 50 
+09EE: set_status_text_stay_on_screen 1 
+01E3: show_text_1number_styled GXT 'REWARD' number 44@ time 6000 style 6  // REWARD $~1~
+005E: $412 += 46@ // (int) 
+005A: 55@ += 46@ // (int) 
+37@ += 1 
+46@ = 0 
+36@ = 0 
+Player.Money($PLAYER_CHAR) += 44@
+if 
+  $PARAMEDIC_MISSION_LEVEL == 5 
+jf @AMBULAN_14487 
+03E5: show_text_box 'A_CHECK' 
+
+:AMBULAN_14487
+52@ = 0 
+Marker.Disable(47@)
+Marker.Disable(82@)
+Marker.Disable(85@)
+Marker.Disable(88@)
+Marker.Disable(91@)
+Marker.Disable(94@)
+Marker.Disable(57@)
+Marker.Disable(60@)
+Marker.Disable(63@)
+Marker.Disable(66@)
+Marker.Disable(69@)
+Marker.Disable(72@)
+Marker.Disable(75@)
+Marker.Disable(101@)
+Marker.Disable(104@)
+Marker.Disable(107@)
+0627: update_integer_stat 158 to $PARAMEDIC_MISSION_LEVEL 
+$PARAMEDIC_MISSION_LEVEL += 1 
+if 
+  $PARAMEDIC_MISSION_LEVEL == 13 
+jf @AMBULAN_14699 
+09EE: set_status_text_stay_on_screen 1 
+01E3: show_text_1number_styled GXT 'A_COMP1' number 5000 time 5000 style 1  // Paramedic missions complete: $~1~
+Player.Money($PLAYER_CHAR) += 5000
+0394: play_music 2 
+if 
+  $1487 == 0 
+jf @AMBULAN_14697 
+030C: progress_made = 1 
+0653: 196@ = float_stat 24 
+196@ *= 1.5 
+0A1F: increase_float_stat 24 by 196@ 
+0595: mission_complete 
+$1487 = 1 
+
+:AMBULAN_14697
+return 
+
+:AMBULAN_14699
+jump @AMBULAN_3196 
+
+:AMBULAN_14706
+jump @AMBULAN_12328 
+
+:AMBULAN_14713
+014F: stop_timer $8210 
+0151: remove_status_text $PARAMEDIC_MISSION_LEVEL 
+0151: remove_status_text $8212 
+03D5: remove_text 'ALEVEL'  // Paramedic Mission Level ~1~
+if 
+   not $PARAMEDIC_MISSION_LEVEL == 13 
+jf @AMBULAN_14792 
+00BA: show_text_styled GXT 'A_FAIL1' time 5000 style 5  // Paramedic mission ended
+01E3: show_text_1number_styled GXT 'A_SAVES' number 55@ time 6000 style 6  // PEOPLE SAVED: ~1~
+
+:AMBULAN_14792
+if 
+   not $PARAMEDIC_MISSION_LEVEL == 13 
+jf @AMBULAN_15305 
+if 
+   not Actor.Dead(81@)
+jf @AMBULAN_14843 
+02A9: set_actor 81@ immune_to_nonplayer 0 
+0321: AS_actor 81@ die_headshotted 
+Actor.DestroyWithFade(81@)
+
+:AMBULAN_14843
+if 
+   not Actor.Dead(84@)
+jf @AMBULAN_14876 
+02A9: set_actor 84@ immune_to_nonplayer 0 
+0321: AS_actor 84@ die_headshotted 
+Actor.DestroyWithFade(84@)
+
+:AMBULAN_14876
+if 
+   not Actor.Dead(87@)
+jf @AMBULAN_14909 
+02A9: set_actor 87@ immune_to_nonplayer 0 
+0321: AS_actor 87@ die_headshotted 
+Actor.DestroyWithFade(87@)
+
+:AMBULAN_14909
+if 
+   not Actor.Dead(90@)
+jf @AMBULAN_14942 
+02A9: set_actor 90@ immune_to_nonplayer 0 
+0321: AS_actor 90@ die_headshotted 
+Actor.DestroyWithFade(90@)
+
+:AMBULAN_14942
+if 
+   not Actor.Dead(93@)
+jf @AMBULAN_14975 
+02A9: set_actor 93@ immune_to_nonplayer 0 
+0321: AS_actor 93@ die_headshotted 
+Actor.DestroyWithFade(93@)
+
+:AMBULAN_14975
+if 
+   not Actor.Dead(56@)
+jf @AMBULAN_15008 
+02A9: set_actor 56@ immune_to_nonplayer 0 
+0321: AS_actor 56@ die_headshotted 
+Actor.DestroyWithFade(56@)
+
+:AMBULAN_15008
+if 
+   not Actor.Dead(59@)
+jf @AMBULAN_15041 
+02A9: set_actor 59@ immune_to_nonplayer 0 
+0321: AS_actor 59@ die_headshotted 
+Actor.DestroyWithFade(59@)
+
+:AMBULAN_15041
+if 
+   not Actor.Dead(62@)
+jf @AMBULAN_15074 
+02A9: set_actor 62@ immune_to_nonplayer 0 
+0321: AS_actor 62@ die_headshotted 
+Actor.DestroyWithFade(62@)
+
+:AMBULAN_15074
+if 
+   not Actor.Dead(65@)
+jf @AMBULAN_15107 
+02A9: set_actor 65@ immune_to_nonplayer 0 
+0321: AS_actor 65@ die_headshotted 
+Actor.DestroyWithFade(65@)
+
+:AMBULAN_15107
+if 
+   not Actor.Dead(68@)
+jf @AMBULAN_15140 
+02A9: set_actor 68@ immune_to_nonplayer 0 
+0321: AS_actor 68@ die_headshotted 
+Actor.DestroyWithFade(68@)
+
+:AMBULAN_15140
+if 
+   not Actor.Dead(71@)
+jf @AMBULAN_15173 
+02A9: set_actor 71@ immune_to_nonplayer 0 
+0321: AS_actor 71@ die_headshotted 
+Actor.DestroyWithFade(71@)
+
+:AMBULAN_15173
+if 
+   not Actor.Dead(74@)
+jf @AMBULAN_15206 
+02A9: set_actor 74@ immune_to_nonplayer 0 
+0321: AS_actor 74@ die_headshotted 
+Actor.DestroyWithFade(74@)
+
+:AMBULAN_15206
+if 
+   not Actor.Dead(100@)
+jf @AMBULAN_15239 
+02A9: set_actor 100@ immune_to_nonplayer 0 
+0321: AS_actor 100@ die_headshotted 
+Actor.DestroyWithFade(100@)
+
+:AMBULAN_15239
+if 
+   not Actor.Dead(103@)
+jf @AMBULAN_15272 
+02A9: set_actor 103@ immune_to_nonplayer 0 
+0321: AS_actor 103@ die_headshotted 
+Actor.DestroyWithFade(103@)
+
+:AMBULAN_15272
+if 
+   not Actor.Dead(106@)
+jf @AMBULAN_15305 
+02A9: set_actor 106@ immune_to_nonplayer 0 
+0321: AS_actor 106@ die_headshotted 
+Actor.DestroyWithFade(106@)
+
+:AMBULAN_15305
+Actor.RemoveReferences(81@)
+Actor.RemoveReferences(84@)
+Actor.RemoveReferences(87@)
+Actor.RemoveReferences(90@)
+Actor.RemoveReferences(93@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(59@)
+Actor.RemoveReferences(62@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(74@)
+Actor.RemoveReferences(100@)
+Actor.RemoveReferences(103@)
+Actor.RemoveReferences(106@)
+52@ = 0 
+Marker.Disable(47@)
+Marker.Disable(82@)
+Marker.Disable(85@)
+Marker.Disable(88@)
+Marker.Disable(91@)
+Marker.Disable(94@)
+Marker.Disable(57@)
+Marker.Disable(60@)
+Marker.Disable(63@)
+Marker.Disable(66@)
+Marker.Disable(69@)
+Marker.Disable(72@)
+Marker.Disable(75@)
+Marker.Disable(101@)
+Marker.Disable(104@)
+Marker.Disable(107@)
+065C: release_decision_maker 235@ 
+03C7: set_sensitivity_to_crime 1.0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+99@ = 0 
+
+:AMBULAN_15491
+if 
+  10 > 99@ 
+jf @AMBULAN_15621 
+if 
+  224@(99@,10i) == 1 
+jf @AMBULAN_15558 
+0746: set_acquaintance 4 of_actors_pedtype 99@ to_actors_pedtype 0 
+234@ -= 1 
+224@(99@,10i) = 0 
+
+:AMBULAN_15558
+if 
+  214@(99@,10i) == 1 
+jf @AMBULAN_15607 
+0746: set_acquaintance 3 of_actors_pedtype 99@ to_actors_pedtype 0 
+234@ -= 1 
+214@(99@,10i) = 0 
+
+:AMBULAN_15607
+99@ += 1 
+jump @AMBULAN_15491 
+
+:AMBULAN_15621
+$ONMISSION = 0 
+$ONMISSION_PARAMEDIC = 0 
+mission_cleanup 
+if 
+  $1487 == 1 
+jf @AMBULAN_15694 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'A_COMP3'  // ~s~Your maximum health has been increased!
+wait 9000 
+03E6: remove_text_box 
+$1487 = 2 
+08F8: display_stat_update_box 0 
+create_thread @BACKON 
+
+:AMBULAN_15694
+return 
+
+:AMBULAN_15696
+if 
+   Actor.Dead(77@)
+jf @AMBULAN_15737 
+00BC: show_text_highpriority GXT 'A_FAIL3' time 3000 flag 1  // ~r~The patient is dead!!
+79@ = 1 
+return 
+
+:AMBULAN_15737
+if 
+  $8210 == 0 
+jf @AMBULAN_15790 
+0321: AS_actor 77@ die_headshotted 
+Actor.DestroyWithFade(77@)
+00BC: show_text_highpriority GXT 'A_FAIL2' time 3000 flag 1  // ~r~Your lack of urgency has been fatal to the patient!
+79@ = 1 
+return 
+
+:AMBULAN_15790
+if 
+  80@ == 3 
+jf @AMBULAN_15958 
+Actor.StorePos(77@, 179@, 180@, 181@)
+40@ = Car.Health(34@)
+if 
+001D:   39@ > 40@ // (int) 
+jf @AMBULAN_15958 
+0085: 41@ = 39@ // (int) 
+0062: 41@ -= 40@ // (int) 
+41@ *= 50 
+008B: 35@ = $8210 // (int) 
+0062: 35@ -= 41@ // (int) 
+if 
+  35@ > 10 
+jf @AMBULAN_15914 
+0066: $8210 -= 41@ // (int) 
+
+:AMBULAN_15914
+0947: actor 77@ speak_from_audio_table 344 store_spoken_phrase_id_to 236@ 
+if 
+  0 > $8210 
+jf @AMBULAN_15950 
+$8210 = 0 
+
+:AMBULAN_15950
+0085: 39@ = 40@ // (int) 
+
+:AMBULAN_15958
+if 
+  80@ == 1 
+jf @AMBULAN_16243 
+if 
+0106:   actor $PLAYER_ACTOR near_actor 77@ radius 10.0 10.0 2.0 0 in_car 
+jf @AMBULAN_16243 
+01E9: 43@ = car 34@ num_passengers 
+01EA: 42@ = car 34@ max_passengers 
+if 
+003B:   43@ == 42@ // (int) 
+jf @AMBULAN_16095 
+if 
+  50@ == 0 
+jf @AMBULAN_16081 
+00BC: show_text_highpriority GXT 'A_FULL' time 5000 flag 1  // ~s~Ambulance full!!
+
+:AMBULAN_16081
+50@ = 1 
+jump @AMBULAN_16102 
+
+:AMBULAN_16095
+50@ = 0 
+
+:AMBULAN_16102
+39@ = Car.Health(34@)
+if 
+  50@ == 0 
+jf @AMBULAN_16220 
+if 
+  97@ == 0 
+jf @AMBULAN_16172 
+05CA: AS_actor 77@ enter_car 34@ passenger_seat -1 time -2 
+97@ = 1 
+jump @AMBULAN_16213 
+
+:AMBULAN_16172
+062E: get_actor 77@ task 1482 status_store_to 98@ // ret 7 if not found 
+if 
+04A4:   98@ == 7 // == constant 
+jf @AMBULAN_16213 
+05CA: AS_actor 77@ enter_car 34@ passenger_seat -1 time -2 
+
+:AMBULAN_16213
+jump @AMBULAN_16236 
+
+:AMBULAN_16220
+00BC: show_text_highpriority GXT 'A_FULL' time 5000 flag 1  // ~s~Ambulance full!!
+
+:AMBULAN_16236
+80@ = 2 
+
+:AMBULAN_16243
+if 
+  80@ == 2 
+jf @AMBULAN_16322 
+if 
+80F4:   not actor $PLAYER_ACTOR near_actor 77@ radius 20.0 20.0 0 in_car 
+jf @AMBULAN_16299 
+80@ = 1 
+
+:AMBULAN_16299
+if 
+8449:   not actor 77@ in_a_car 
+jf @AMBULAN_16322 
+80@ = 1 
+
+:AMBULAN_16322
+if 
+  80@ == 2 
+jf @AMBULAN_16472 
+if 
+0449:   actor 77@ in_a_car 
+jf @AMBULAN_16472 
+97@ = 0 
+Marker.Disable(78@)
+if 
+  52@ == 0 
+jf @AMBULAN_16414 
+Marker.Disable(47@)
+02A8: 47@ = create_marker 22 at 167@ 168@ 169@ 
+52@ = 1 
+
+:AMBULAN_16414
+0085: 49@ = 364@(240@,16i) // (int) 
+49@ /= 1000 
+01E3: show_text_1number_styled GXT 'A_PICK' number 49@ time 5000 style 6 
+005E: $8210 += 364@(240@,16i) // (int) 
+80@ = 3 
+
+:AMBULAN_16472
+if 
+  80@ == 3 
+jf @AMBULAN_16557 
+if 
+0103:   actor $PLAYER_ACTOR in_sphere 167@ 168@ 169@ radius 6.0 6.0 2.0 sphere 0 stopped_in_car 
+jf @AMBULAN_16557 
+05D3: AS_actor 77@ goto_point 173@ 174@ 175@ mode 6 time -1 ms // versionA 
+80@ = 4 
+
+:AMBULAN_16557
+if 
+  80@ == 4 
+jf @AMBULAN_16772 
+if 
+8449:   not actor 77@ in_a_car 
+jf @AMBULAN_16772 
+05D3: AS_actor 77@ goto_point 173@ 174@ 175@ mode 6 time -1 ms // versionA 
+09EE: set_status_text_stay_on_screen 1 
+if 
+  45@ == 1 
+jf @AMBULAN_16712 
+0085: 49@ = 48@ // (int) 
+49@ /= 1000 
+01E3: show_text_1number_styled GXT 'A_PASS' number 49@ time 5000 style 6  // Rescued!
+34@ = Actor.CurrentCar($PLAYER_ACTOR)
+54@ = Car.Health(34@)
+54@ += 110 
+Car.Health(34@) = 54@
+005E: $8210 += 48@ // (int) 
+45@ += 1 
+
+:AMBULAN_16712
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1058 
+46@ += 1 
+0623: add 1 to_integer_stat 151 
+80@ = 0 
+0332: set_actor 77@ bleeding 0 
+0961: set_actor 77@ keep_tasks_after_cleanup 1 
+Actor.RemoveReferences(77@)
+
+:AMBULAN_16772
+return

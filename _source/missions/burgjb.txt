@@ -1,0 +1,1628 @@
+:BURGJB
+thread 'BURGJB' 
+gosub @BURGJB_54 
+if 
+wasted_or_busted 
+jf @BURGJB_45 
+$11033 = 0 
+gosub @BURGJB_8346 
+
+:BURGJB_45
+gosub @BURGJB_8528 
+end_thread 
+
+:BURGJB_54
+if 
+  $MISSION_BURGLARY_PASSED == 0 
+jf @BURGJB_74 
+increment_mission_attempts 
+
+:BURGJB_74
+$ONMISSION = 1 
+wait 0 
+0169: set_fade_color_RGB 0 0 0 
+054C: use_GXT_table 'BURGLAR' 
+09E6: set_burglary_houses_accessible 1 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+95@ = 0 
+96@ = 0 
+97@ = 0 
+101@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+103@ = 0 
+102@ = 0 
+107@ = 0 
+108@ = 0 
+109@ = 0 
+110@ = 0 
+112@ = 0 
+47@ = 0 
+$BUGRLARY_CASH = 0 
+90@ = 0 
+89@ = 0 
+106@ = 0 
+$BURGLARY_ESCAPE_TIME_SEC = 10 
+$BURGLARY_TIME_LEFT = 300000 
+91@ = 0 
+105@ = 0 
+41@ = 0.0 
+$BURGLARY_NOISE_F = 0.0 
+42@ = 9999999.0 
+43@ = 9999999.0 
+54@ = 2741.0 
+57@ = -2006.807 
+60@ = 14.0 
+05A9: s$BURGLARY_GARAGES[0] = 'BURG_LK' // s$ 
+76@ = 2741.241 
+79@ = -2011.274 
+82@ = 13.5869 
+55@ = -2102.54 
+58@ = -15.5931 
+61@ = 34.3203 
+05A9: s$BURGLARY_GARAGES[1] = 'BRGSFSE' // s$ 
+77@ = -2109.32 
+80@ = -15.7967 
+83@ = 34.3203 
+56@ = 2609.248 
+59@ = 1439.346 
+62@ = 9.8203 
+05A9: s$BURGLARY_GARAGES[2] = 'VGELOCK' // s$ 
+78@ = 2609.012 
+81@ = 1445.936 
+84@ = 9.8203 
+34@ = 0 
+48@ = 0 
+$BURGLARY_DETECTED_FLAG = 0 
+111@ = 0 
+$BURGLARY_NOISE_I = 0 
+$CARMOD_DISABLED_FLAG = 1 
+38@ = Player.Money($PLAYER_CHAR)
+39@ = Player.Money($PLAYER_CHAR)
+if 
+  48@ == 99 
+jf @BURGJB_694 
+49@ = Object.Create(#BRIEFCASE, 0.0, 0.0, 0.0)
+018A: 51@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 53@ = create_checkpoint_at 0.0 0.0 0.0 
+
+:BURGJB_694
+if 
+8500:   not player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_827 
+0A2D: hide_styled_text_while_fading 0 // works with 00BA 
+fade 0 1000 
+
+:BURGJB_734
+if 
+fading 
+jf @BURGJB_758 
+wait 0 
+jump @BURGJB_734 
+
+:BURGJB_758
+Player.SetClothes($PLAYER_CHAR, "BALACLAVA", "BALACLAVA", Special)
+Player.Build($PLAYER_CHAR)
+fade 1 1000 
+
+:BURGJB_799
+if 
+fading 
+jf @BURGJB_823 
+wait 0 
+jump @BURGJB_799 
+
+:BURGJB_823
+0A2D: hide_styled_text_while_fading 1 // works with 00BA 
+
+:BURGJB_827
+00BF: $TIME_HOURS = current_time_hours, $TIME_MINS = current_time_minutes 
+if 
+  $TIME_HOURS >= 20 
+jf @BURGJB_916 
+008B: 88@ = $TIME_HOURS // (int) 
+88@ *= 60 
+005C: 88@ += $TIME_MINS // (int) 
+36@ = 1440 
+0062: 36@ -= 88@ // (int) 
+36@ += 360 
+36@ *= 1000 
+008A: $BURGLARY_DAYLIGHT = 36@ // (int) 
+
+:BURGJB_916
+if 
+  6 > $TIME_HOURS 
+jf @BURGJB_989 
+008B: 88@ = $TIME_HOURS // (int) 
+88@ *= 60 
+005C: 88@ += $TIME_MINS // (int) 
+36@ = 360 
+0062: 36@ -= 88@ // (int) 
+36@ *= 1000 
+008A: $BURGLARY_DAYLIGHT = 36@ // (int) 
+
+:BURGJB_989
+03C3: set_timer_to $BURGLARY_DAYLIGHT type 1 GXT 'BURG52' // global_variable  // DAYLIGHT
+04F7: status_text $BUGRLARY_CASH type 0 line 1 GXT 'BURG51' // global_variable  // CASH
+wait 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BURGJB_1058 
+50@ = Actor.MissionCar($PLAYER_ACTOR)
+0294: set_car 50@ sprayable 0 
+
+:BURGJB_1058
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 32 
+jf @BURGJB_1087 
+$BURGLARY_DAYLIGHT = 10000000 
+
+:BURGJB_1087
+if 
+0735:   is_keyboard_key_pressed 49 
+jf @BURGJB_1132 
+Actor.PutAt($PLAYER_ACTOR, 2741.928, -1993.231, 12.3669)
+Actor.Angle($PLAYER_ACTOR) = 173.5173
+
+:BURGJB_1132
+if 
+0735:   is_keyboard_key_pressed 50 
+jf @BURGJB_1167 
+Actor.PutAt($PLAYER_ACTOR, 2639.0, 2039.911, 9.8052)
+
+:BURGJB_1167
+if 
+0735:   is_keyboard_key_pressed 99 
+jf @BURGJB_1190 
+$BURGLARY_DAYLIGHT = 5000 
+
+:BURGJB_1190
+if 
+0735:   is_keyboard_key_pressed 48 
+jf @BURGJB_1213 
+$BURGLARY_TIME_LEFT = 5000 
+
+:BURGJB_1213
+if 
+0735:   is_keyboard_key_pressed 53 
+jf @BURGJB_1236 
+$1790 = 11000 
+
+:BURGJB_1236
+if 
+0735:   is_keyboard_key_pressed 54 
+jf @BURGJB_1258 
+48@ = 3 
+
+:BURGJB_1258
+if 
+  110@ == 0 
+jf @BURGJB_2167 
+if 
+  $BURGLARY_DAYLIGHT == 0 
+jf @BURGJB_1984 
+00BE: text_clear_all 
+09E6: set_burglary_houses_accessible 0 
+if 
+  92@ == 1 
+jf @BURGJB_1584 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:BURGJB_1332
+if 
+fading 
+jf @BURGJB_1356 
+wait 0 
+jump @BURGJB_1332 
+
+:BURGJB_1356
+03E6: remove_text_box 
+select_interior 0 
+04E4: refresh_game_renderer_at 69@ 70@ 
+Camera.SetAtPos(69@, 70@, 71@)
+0972: put_actor $PLAYER_ACTOR at 69@ 70@ 71@ no_offset 
+0489: set_actor $PLAYER_ACTOR muted 0 
+72@ += 180.0 
+Actor.Angle($PLAYER_ACTOR) = 72@
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 73@ 74@ radius 5.0 
+Camera.SetAtPos(69@, 70@, 71@)
+if 
+  48@ == 0 
+jf @BURGJB_1510 
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_1510 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:BURGJB_1510
+92@ = 0 
+93@ = 0 
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @BURGJB_1539 
+Camera.Restore_WithJumpCut
+
+:BURGJB_1539
+fade 1 1000 
+
+:BURGJB_1546
+if 
+fading 
+jf @BURGJB_1570 
+wait 0 
+jump @BURGJB_1546 
+
+:BURGJB_1570
+Player.CanMove($PLAYER_CHAR) = True
+jump @BURGJB_1747 
+
+:BURGJB_1584
+if 
+  48@ == 0 
+jf @BURGJB_1747 
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_1747 
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @BURGJB_1654 
+Player.CanMove($PLAYER_CHAR) = False
+
+:BURGJB_1654
+fade 0 1000 
+
+:BURGJB_1661
+if 
+fading 
+jf @BURGJB_1685 
+wait 0 
+jump @BURGJB_1661 
+
+:BURGJB_1685
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @BURGJB_1716 
+Camera.Restore_WithJumpCut
+
+:BURGJB_1716
+fade 1 1000 
+
+:BURGJB_1723
+if 
+fading 
+jf @BURGJB_1747 
+wait 0 
+jump @BURGJB_1723 
+
+:BURGJB_1747
+014F: stop_timer $BURGLARY_DAYLIGHT 
+if 
+  48@ > 0 
+jf @BURGJB_1930 
+03C3: set_timer_to $BURGLARY_TIME_LEFT type 1 GXT 'BURG3' // global_variable  // TIME
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG2' time 5000 flag 1  // ~s~It's daylight! Not the time for home invasions! Go and offload what you've already stolen within the time limit!
+if 
+  93@ == 1 
+jf @BURGJB_1852 
+00BB: show_text_lowpriority GXT 'BURG26' time 5000 flag 1  // ~s~Go and offload the goods at the ~y~lockup~s~.
+102@ = 2 
+jump @BURGJB_1923 
+
+:BURGJB_1852
+if 
+  94@ == 1 
+jf @BURGJB_1900 
+00BB: show_text_lowpriority GXT 'BURG27' time 5000 flag 1  // ~s~Put the goods in the ~b~truck~s~.
+102@ = 1 
+jump @BURGJB_1923 
+
+:BURGJB_1900
+00BB: show_text_lowpriority GXT 'BURG1' time 5000 flag 1  // ~s~Get in the ~b~truck~s~ then go and offload the goods at the garage.
+102@ = 3 
+
+:BURGJB_1923
+jump @BURGJB_1970 
+
+:BURGJB_1930
+$BURGLARY_TIME_LEFT = 0 
+Object.Destroy(49@)
+Object.RemoveReferences(49@)
+00BB: show_text_lowpriority GXT 'BURG53' time 5000 flag 1  // ~r~You are out of time, come back another night and finish the job
+jump @BURGJB_8346 
+
+:BURGJB_1970
+110@ = 1 
+jump @BURGJB_2160 
+
+:BURGJB_1984
+00BF: $TIME_HOURS = current_time_hours, $TIME_MINS = current_time_minutes 
+if 
+  $TIME_HOURS >= 20 
+jf @BURGJB_2080 
+008B: 88@ = $TIME_HOURS // (int) 
+88@ *= 60 
+005C: 88@ += $TIME_MINS // (int) 
+36@ = 1440 
+0062: 36@ -= 88@ // (int) 
+36@ += 360 
+36@ += 1 
+36@ *= 1000 
+008A: $BURGLARY_DAYLIGHT = 36@ // (int) 
+
+:BURGJB_2080
+if 
+  6 > $TIME_HOURS 
+jf @BURGJB_2160 
+008B: 88@ = $TIME_HOURS // (int) 
+88@ *= 60 
+005C: 88@ += $TIME_MINS // (int) 
+36@ = 360 
+0062: 36@ -= 88@ // (int) 
+36@ += 1 
+36@ *= 1000 
+008A: $BURGLARY_DAYLIGHT = 36@ // (int) 
+
+:BURGJB_2160
+jump @BURGJB_2365 
+
+:BURGJB_2167
+if 
+  $BURGLARY_TIME_LEFT == 0 
+jf @BURGJB_2365 
+00BE: text_clear_all 
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @BURGJB_2210 
+Player.CanMove($PLAYER_CHAR) = False
+
+:BURGJB_2210
+fade 0 1000 
+
+:BURGJB_2217
+if 
+fading 
+jf @BURGJB_2241 
+wait 0 
+jump @BURGJB_2217 
+
+:BURGJB_2241
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_2286 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:BURGJB_2286
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @BURGJB_2301 
+Camera.Restore_WithJumpCut
+
+:BURGJB_2301
+fade 1 1000 
+
+:BURGJB_2308
+if 
+fading 
+jf @BURGJB_2332 
+wait 0 
+jump @BURGJB_2308 
+
+:BURGJB_2332
+00BB: show_text_lowpriority GXT 'BURG53' time 5000 flag 1  // ~r~You are out of time, come back another night and finish the job
+Object.Destroy(49@)
+Object.RemoveReferences(49@)
+jump @BURGJB_8346 
+
+:BURGJB_2365
+if 
+  95@ == 0 
+jf @BURGJB_7846 
+gosub @BURGJB_7967 
+077E: get_active_interior_to 37@ 
+if 
+  37@ == 0 
+jf @BURGJB_2465 
+if 
+8500:   not player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_2465 
+00BB: show_text_lowpriority GXT 'BURG62' time 5000 flag 1  // ~r~You no longer have the ski mask.
+jump @BURGJB_8346 
+
+:BURGJB_2465
+if 
+  93@ == 1 
+jf @BURGJB_2708 
+if and
+   Player.WantedLevel($PLAYER_CHAR) > 0
+  48@ > 0 
+jf @BURGJB_2558 
+if 
+   not 102@ == 5 
+jf @BURGJB_2551 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG50' time 5000 flag 1  // ~s~You have to lose the heat before you can offload the goods.
+102@ = 5 
+
+:BURGJB_2551
+jump @BURGJB_2701 
+
+:BURGJB_2558
+if 
+   not 102@ == 2 
+jf @BURGJB_2701 
+00BE: text_clear_all 
+if 
+  48@ > 0 
+jf @BURGJB_2660 
+if 
+  110@ == 0 
+jf @BURGJB_2637 
+00BB: show_text_lowpriority GXT 'BURG4' time 5000 flag 1  // ~s~Go and offload the goods at the ~y~lockup~s~, or find a house to break into.
+jump @BURGJB_2653 
+
+:BURGJB_2637
+00BB: show_text_lowpriority GXT 'BURG26' time 5000 flag 1  // ~s~Go and offload the goods at the ~y~lockup~s~.
+
+:BURGJB_2653
+jump @BURGJB_2694 
+
+:BURGJB_2660
+if 
+  110@ == 0 
+jf @BURGJB_2694 
+00BB: show_text_lowpriority GXT 'BURG29' time 5000 flag 1  // ~s~Go and find a house to break into.
+
+:BURGJB_2694
+102@ = 2 
+
+:BURGJB_2701
+jump @BURGJB_3098 
+
+:BURGJB_2708
+if 
+  110@ == 0 
+jf @BURGJB_2971 
+if 
+  94@ == 1 
+jf @BURGJB_2812 
+if 
+   not 102@ == 1 
+jf @BURGJB_2805 
+if 
+  92@ == 0 
+jf @BURGJB_2805 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG27' time 5000 flag 1  // ~s~Put the goods in the ~b~truck~s~.
+102@ = 1 
+
+:BURGJB_2805
+jump @BURGJB_2964 
+
+:BURGJB_2812
+if 
+  92@ == 1 
+jf @BURGJB_2880 
+if 
+   not 102@ == 4 
+jf @BURGJB_2873 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG30' time 5000 flag 1  // ~s~Find something worth stealing.
+102@ = 4 
+
+:BURGJB_2873
+jump @BURGJB_2964 
+
+:BURGJB_2880
+if 
+   not 102@ == 3 
+jf @BURGJB_2964 
+00BE: text_clear_all 
+if 
+  48@ == 0 
+jf @BURGJB_2941 
+00BB: show_text_lowpriority GXT 'BURG29' time 5000 flag 1  // ~s~Go and find a house to break into.
+jump @BURGJB_2957 
+
+:BURGJB_2941
+00BB: show_text_lowpriority GXT 'BURG31' time 5000 flag 1  // ~s~Go and find a house to break into, or get in the ~b~truck~s~ and go offload what you've already stashed.
+
+:BURGJB_2957
+102@ = 3 
+
+:BURGJB_2964
+jump @BURGJB_3098 
+
+:BURGJB_2971
+if 
+  94@ == 1 
+jf @BURGJB_3057 
+if 
+   not 102@ == 1 
+jf @BURGJB_3050 
+if 
+  92@ == 0 
+jf @BURGJB_3050 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG27' time 5000 flag 1  // ~s~Put the goods in the ~b~truck~s~.
+102@ = 1 
+
+:BURGJB_3050
+jump @BURGJB_3098 
+
+:BURGJB_3057
+if 
+   not 102@ == 3 
+jf @BURGJB_3098 
+00BB: show_text_lowpriority GXT 'BURG1' time 5000 flag 1  // ~s~Get in the ~b~truck~s~ then go and offload the goods at the garage.
+102@ = 3 
+
+:BURGJB_3098
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_7695 
+if 
+  92@ == 0 
+jf @BURGJB_3410 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 50@)
+jf @BURGJB_3242 
+93@ = 0 
+if 
+  99@ == 1 
+jf @BURGJB_3188 
+Marker.Disable(51@)
+99@ = 0 
+
+:BURGJB_3188
+if 
+  97@ == 0 
+jf @BURGJB_3235 
+52@ = Marker.CreateAboveCar(50@)
+018B: set_marker 52@ radar_mode 2 
+07E0: set_marker 52@ type_to 1 
+97@ = 1 
+
+:BURGJB_3235
+jump @BURGJB_3410 
+
+:BURGJB_3242
+93@ = 1 
+if 
+  97@ == 1 
+jf @BURGJB_3286 
+108@ = 0 
+Marker.Disable(52@)
+97@ = 0 
+
+:BURGJB_3286
+if 
+  48@ > 0 
+jf @BURGJB_3410 
+if 
+   Player.WantedLevel($PLAYER_CHAR) > 0
+jf @BURGJB_3359 
+if 
+  99@ == 1 
+jf @BURGJB_3352 
+Marker.Disable(51@)
+99@ = 0 
+
+:BURGJB_3352
+jump @BURGJB_3410 
+
+:BURGJB_3359
+if 
+  99@ == 0 
+jf @BURGJB_3410 
+018A: 51@ = create_checkpoint_at 54@(35@,3f) 57@(35@,3f) 60@(35@,3f) 
+99@ = 1 
+
+:BURGJB_3410
+if 
+  108@ == 0 
+jf @BURGJB_3862 
+0652: $STAT_UNLOCKED_CITIES_NUMBER = integer_stat 181 
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 0 
+jf @BURGJB_3468 
+35@ = 0 
+jump @BURGJB_3844 
+
+:BURGJB_3468
+if 
+  $STAT_UNLOCKED_CITIES_NUMBER == 1 
+jf @BURGJB_3640 
+Actor.StorePos($PLAYER_ACTOR, 63@, 64@, 65@)
+07EF: get_town_number_from_point 63@ 64@ 65@ store_to 35@ 
+if 
+  35@ > 0 
+jf @BURGJB_3546 
+35@ -= 1 
+jump @BURGJB_3633 
+
+:BURGJB_3546
+050A: 42@ = distance_between_XYZ 63@ 64@ 65@ and_XYZ 54@ 57@ 60@ 
+35@ = 0 
+0087: 43@ = 42@ // (float) 
+050A: 42@ = distance_between_XYZ 63@ 64@ 65@ and_XYZ 55@ 58@ 61@ 
+if 
+0025:   43@ > 42@ // (float) 
+jf @BURGJB_3633 
+35@ = 1 
+
+:BURGJB_3633
+jump @BURGJB_3844 
+
+:BURGJB_3640
+Actor.StorePos($PLAYER_ACTOR, 63@, 64@, 65@)
+07EF: get_town_number_from_point 63@ 64@ 65@ store_to 35@ 
+if 
+  35@ > 0 
+jf @BURGJB_3700 
+35@ -= 1 
+jump @BURGJB_3844 
+
+:BURGJB_3700
+050A: 42@ = distance_between_XYZ 63@ 64@ 65@ and_XYZ 54@ 57@ 60@ 
+35@ = 0 
+0087: 43@ = 42@ // (float) 
+050A: 42@ = distance_between_XYZ 63@ 64@ 65@ and_XYZ 55@ 58@ 61@ 
+if 
+0025:   43@ > 42@ // (float) 
+jf @BURGJB_3795 
+35@ = 1 
+0087: 43@ = 42@ // (float) 
+
+:BURGJB_3795
+050A: 42@ = distance_between_XYZ 63@ 64@ 65@ and_XYZ 56@ 59@ 62@ 
+if 
+0025:   43@ > 42@ // (float) 
+jf @BURGJB_3844 
+35@ = 2 
+
+:BURGJB_3844
+Garage.ChangeType($BURGLARY_GARAGES(35@,3s), 19)
+108@ = 1 
+
+:BURGJB_3862
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_5309 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 54@(35@,3f) 57@(35@,3f) 60@(35@,3f) radius 20.0 20.0 4.0 
+01AF:   car 50@ sphere 0 in_sphere 54@(35@,3f) 57@(35@,3f) 60@(35@,3f) radius 20.0 20.0 4.0 
+jf @BURGJB_5280 
+if 
+   not Garage.IsOpen($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_4004 
+Garage.Open($BURGLARY_GARAGES(35@,3s))
+
+:BURGJB_4004
+if 
+  108@ == 1 
+jf @BURGJB_5273 
+if 
+  93@ == 1 
+jf @BURGJB_5273 
+if 
+  48@ > 0 
+jf @BURGJB_5273 
+if 
+   Player.WantedLevel($PLAYER_CHAR) > 0
+jf @BURGJB_4131 
+if 
+  99@ == 1 
+jf @BURGJB_4124 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG50' time 5000 flag 1  // ~s~You have to lose the heat before you can offload the goods.
+Marker.Disable(51@)
+99@ = 0 
+
+:BURGJB_4124
+jump @BURGJB_5273 
+
+:BURGJB_4131
+if 
+  99@ == 0 
+jf @BURGJB_4207 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG26' time 5000 flag 1  // ~s~Go and offload the goods at the ~y~lockup~s~.
+018A: 51@ = create_checkpoint_at 54@(35@,3f) 57@(35@,3f) 60@(35@,3f) 
+99@ = 1 
+jump @BURGJB_5273 
+
+:BURGJB_4207
+00BB: show_text_lowpriority GXT 'BURG40' time 1000 flag 1  // ~s~Park the truck in the ~y~lockup~s~.
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 76@(35@,3f) 79@(35@,3f) 82@(35@,3f) radius 2.9 3.2 5.0 sphere 1 in_car 
+jf @BURGJB_5273 
+Player.CanMove($PLAYER_CHAR) = False
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+00BE: text_clear_all 
+0395: clear_area 1 at 76@(35@,3f) 79@(35@,3f) 82@(35@,3f) radius 10.0 
+if 
+  110@ == 1 
+jf @BURGJB_4356 
+014F: stop_timer $BURGLARY_TIME_LEFT 
+$BURGLARY_TIME_LEFT = 999999 
+
+:BURGJB_4356
+if 
+   not Garage.IsClosed($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_4385 
+Garage.Close($BURGLARY_GARAGES(35@,3s))
+
+:BURGJB_4385
+104@ = 0 
+
+:BURGJB_4392
+if 
+  104@ == 0 
+jf @BURGJB_4448 
+wait 0 
+if 
+   Garage.IsClosed($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_4441 
+104@ = 1 
+
+:BURGJB_4441
+jump @BURGJB_4392 
+
+:BURGJB_4448
+Marker.Disable(51@)
+0085: 34@ = 48@ // (int) 
+34@ *= 20 
+006A: 34@ *= 48@ // (int) 
+005E: $1791 += 48@ // (int) 
+005E: $1790 += 34@ // (int) 
+008F: 45@ = integer $1790 to_float 
+0093: 46@ = integer 34@ to_float 
+005A: 47@ += 48@ // (int) 
+005E: $BUGRLARY_CASH += 34@ // (int) 
+0628: update_float_stat_to 46@ stat_id 40 
+0624: add 46@ to_float_stat 41 
+0623: add 48@ to_integer_stat 194 
+if 
+  110@ == 1 
+jf @BURGJB_4714 
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @BURGJB_4587 
+Player.CanMove($PLAYER_CHAR) = False
+
+:BURGJB_4587
+fade 0 1000 
+
+:BURGJB_4594
+if 
+fading 
+jf @BURGJB_4618 
+wait 0 
+jump @BURGJB_4594 
+
+:BURGJB_4618
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_4663 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:BURGJB_4663
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @BURGJB_4676 
+
+:BURGJB_4676
+fade 1 1000 
+
+:BURGJB_4683
+if 
+fading 
+jf @BURGJB_4707 
+wait 0 
+jump @BURGJB_4683 
+
+:BURGJB_4707
+jump @BURGJB_4883 
+
+:BURGJB_4714
+if and
+  $1790 >= 10000 
+  $MISSION_BURGLARY_PASSED == 0 
+jf @BURGJB_4883 
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @BURGJB_4763 
+Player.CanMove($PLAYER_CHAR) = False
+
+:BURGJB_4763
+fade 0 1000 
+
+:BURGJB_4770
+if 
+fading 
+jf @BURGJB_4794 
+wait 0 
+jump @BURGJB_4770 
+
+:BURGJB_4794
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_4839 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:BURGJB_4839
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @BURGJB_4852 
+
+:BURGJB_4852
+fade 1 1000 
+
+:BURGJB_4859
+if 
+fading 
+jf @BURGJB_4883 
+wait 0 
+jump @BURGJB_4859 
+
+:BURGJB_4883
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1058 
+if 
+  2 > 48@ 
+jf @BURGJB_4950 
+036D: show_text_2numbers_styled GXT 'BURG39' numbers 48@ 34@ time 5000 style 6  // ~s~This load: ~1~ item $~1~
+jump @BURGJB_4972 
+
+:BURGJB_4950
+036D: show_text_2numbers_styled GXT 'BURG36' numbers 48@ 34@ time 5000 style 6  // ~s~This load: ~1~ items $~1~
+
+:BURGJB_4972
+Player.Money($PLAYER_CHAR) += 34@
+32@ = 0 
+
+:BURGJB_4987
+if or
+076F:   text_priority_displayed 
+  4000 > 32@ 
+jf @BURGJB_5019 
+wait 0 
+jump @BURGJB_4987 
+
+:BURGJB_5019
+if 
+   not Garage.IsOpen($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_5048 
+Garage.Open($BURGLARY_GARAGES(35@,3s))
+
+:BURGJB_5048
+104@ = 0 
+
+:BURGJB_5055
+if 
+  104@ == 0 
+jf @BURGJB_5111 
+wait 0 
+if 
+   Garage.IsOpen($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_5104 
+104@ = 1 
+
+:BURGJB_5104
+jump @BURGJB_5055 
+
+:BURGJB_5111
+if and
+  $1790 >= 10000 
+  $MISSION_BURGLARY_PASSED == 0 
+jf @BURGJB_5165 
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+jump @BURGJB_8458 
+jump @BURGJB_5227 
+
+:BURGJB_5165
+if 
+  110@ == 0 
+jf @BURGJB_5199 
+00BB: show_text_lowpriority GXT 'BURG29' time 5000 flag 1  // ~s~Go and find a house to break into.
+
+:BURGJB_5199
+99@ = 0 
+34@ = 0 
+48@ = 0 
+105@ = 0 
+
+:BURGJB_5227
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+if 
+  110@ == 1 
+jf @BURGJB_5273 
+jump @BURGJB_8346 
+$BURGLARY_TIME_LEFT = 0 
+
+:BURGJB_5273
+jump @BURGJB_5309 
+
+:BURGJB_5280
+if 
+   not Garage.IsClosed($BURGLARY_GARAGES(35@,3s))
+jf @BURGJB_5309 
+Garage.Close($BURGLARY_GARAGES(35@,3s))
+
+:BURGJB_5309
+if 
+  93@ == 0 
+jf @BURGJB_5744 
+if 
+0867:   unknown_in_burglary_interior 0 
+jf @BURGJB_5484 
+if 
+  107@ == 0 
+jf @BURGJB_5470 
+094C: get_actor $PLAYER_ACTOR currently_used_EnEx_3D_coord_to 69@ 70@ 71@ number_to 72@ 
+Actor.StorePos($PLAYER_ACTOR, 73@, 74@, 75@)
+if 
+03CA:   object 49@ exists 
+jf @BURGJB_5439 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_5439 
+077E: get_active_interior_to 37@ 
+0566: link_object 49@ to_interior 37@ 
+
+:BURGJB_5439
+Marker.Disable(52@)
+0489: set_actor $PLAYER_ACTOR muted 1 
+075B: zoom_radar 90 
+39@ = Player.Money($PLAYER_CHAR)
+107@ = 1 
+
+:BURGJB_5470
+92@ = 1 
+jump @BURGJB_5744 
+
+:BURGJB_5484
+if 
+  107@ == 1 
+jf @BURGJB_5737 
+0489: set_actor $PLAYER_ACTOR muted 0 
+if 
+03CA:   object 49@ exists 
+jf @BURGJB_5557 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_5557 
+077E: get_active_interior_to 37@ 
+0566: link_object 49@ to_interior 37@ 
+
+:BURGJB_5557
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_5588 
+52@ = Marker.CreateAboveCar(50@)
+07E0: set_marker 52@ type_to 1 
+
+:BURGJB_5588
+075B: zoom_radar 0 
+107@ = 0 
+if 
+  94@ == 1 
+jf @BURGJB_5737 
+112@ = 1 
+if 
+0045:   85@ == 69@ // (float) 
+jf @BURGJB_5688 
+if 
+0045:   86@ == 70@ // (float) 
+jf @BURGJB_5688 
+if 
+0045:   87@ == 71@ // (float) 
+jf @BURGJB_5688 
+112@ = 0 
+
+:BURGJB_5688
+if 
+  112@ == 1 
+jf @BURGJB_5737 
+0087: 85@ = 69@ // (float) 
+0087: 86@ = 70@ // (float) 
+0087: 87@ = 71@ // (float) 
+0623: add 1 to_integer_stat 191 
+
+:BURGJB_5737
+92@ = 0 
+
+:BURGJB_5744
+if 
+  93@ == 0 
+jf @BURGJB_6520 
+if 
+  92@ == 0 
+jf @BURGJB_6520 
+if 
+  94@ == 0 
+jf @BURGJB_6022 
+Actor.StorePos($PLAYER_ACTOR, 63@, 64@, 65@)
+0866: get_object_in_sphere 63@ 64@ 65@ radius 5.0 handle_as 49@ 
+if 
+   not 49@ == -1 
+jf @BURGJB_6015 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_5909 
+if 
+  100@ == 1 
+jf @BURGJB_5895 
+03E6: remove_text_box 
+100@ = 0 
+
+:BURGJB_5895
+94@ = 1 
+jump @BURGJB_6015 
+
+:BURGJB_5909
+if 
+0475:   actor $PLAYER_ACTOR near_object_in_cube 49@ radius 1.7 1.7 2.0 sphere 0 on_foot 
+jf @BURGJB_5988 
+if 
+  100@ == 0 
+jf @BURGJB_5981 
+0512: show_permanent_text_box 'BURG23'  // Press ~k~~VEHICLE_ENTER_EXIT~ to pick up item
+100@ = 1 
+
+:BURGJB_5981
+jump @BURGJB_6015 
+
+:BURGJB_5988
+if 
+  100@ == 1 
+jf @BURGJB_6015 
+03E6: remove_text_box 
+100@ = 0 
+
+:BURGJB_6015
+jump @BURGJB_6078 
+
+:BURGJB_6022
+if 
+03CA:   object 49@ exists 
+jf @BURGJB_6071 
+if 
+8737:   not actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_6064 
+94@ = 0 
+
+:BURGJB_6064
+jump @BURGJB_6078 
+
+:BURGJB_6071
+94@ = 0 
+
+:BURGJB_6078
+if or
+  $BURGLARY_DETECTED_FLAG == 1 
+  98@ == 1 
+jf @BURGJB_6136 
+$BURGLARY_DETECTED_FLAG = 0 
+98@ = 0 
+0151: remove_status_text $BURGLARY_ESCAPE_TIME_SEC 
+$BURGLARY_ESCAPE_TIME_SEC = 10 
+109@ = 0 
+
+:BURGJB_6136
+if 
+  101@ == 1 
+jf @BURGJB_6193 
+0151: remove_status_text $BURGLARY_NOISE_I 
+$BURGLARY_NOISE_F = 0.0 
+41@ = 0.0 
+$BURGLARY_NOISE_I = 0 
+101@ = 0 
+
+:BURGJB_6193
+if 
+  94@ == 1 
+jf @BURGJB_6520 
+0407: store_coords_to 66@ 67@ 68@ from_car 50@ with_offset 0.0 -6.0 0.0 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 66@ 67@ 68@ radius 3.5 3.5 2.0 on_foot 
+jf @BURGJB_6493 
+if 
+  100@ == 0 
+jf @BURGJB_6318 
+0512: show_permanent_text_box 'BURG24'  // Press ~k~~VEHICLE_ENTER_EXIT~ to put item in truck
+100@ = 1 
+
+:BURGJB_6318
+if 
+00E1:   player 0 pressed_key 15 
+jf @BURGJB_6486 
+03E6: remove_text_box 
+48@ += 1 
+33@ = 0 
+104@ = 0 
+if 
+03CA:   object 49@ exists 
+jf @BURGJB_6479 
+
+:BURGJB_6374
+if 
+  104@ == 0 
+jf @BURGJB_6442 
+if or
+8737:   not actor $PLAYER_ACTOR lifting_object 49@ 
+   Actor.Dead($PLAYER_ACTOR)
+  33@ > 5000 
+jf @BURGJB_6431 
+104@ = 1 
+
+:BURGJB_6431
+wait 0 
+jump @BURGJB_6374 
+
+:BURGJB_6442
+Object.Destroy(49@)
+Object.RemoveReferences(49@)
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1058 
+94@ = 0 
+
+:BURGJB_6479
+100@ = 0 
+
+:BURGJB_6486
+jump @BURGJB_6520 
+
+:BURGJB_6493
+if 
+  100@ == 1 
+jf @BURGJB_6520 
+03E6: remove_text_box 
+100@ = 0 
+
+:BURGJB_6520
+if 
+  92@ == 1 
+jf @BURGJB_7688 
+if and
+  98@ == 0 
+  $BURGLARY_DETECTED_FLAG == 0 
+jf @BURGJB_6993 
+if 
+  101@ == 0 
+jf @BURGJB_6645 
+0926: 111@ = external_script_status 23 (BURG_BRAINS) 
+if 
+  111@ > 0 
+jf @BURGJB_6638 
+04F7: status_text $BURGLARY_NOISE_I type 1 line 2 GXT 'BURG25' // global_variable  // Noise
+0489: set_actor $PLAYER_ACTOR muted 1 
+101@ = 1 
+
+:BURGJB_6638
+jump @BURGJB_6986 
+
+:BURGJB_6645
+0926: 111@ = external_script_status 23 (BURG_BRAINS) 
+if 
+   not 111@ == 0 
+jf @BURGJB_6940 
+Actor.StorePos($PLAYER_ACTOR, 63@, 64@, 65@)
+0855: get_actor -1 noise_level_at 63@ 64@ 65@ store_to $BURGLARY_NOISE_F 
+$BURGLARY_NOISE_F *= 1.6 
+if 
+  $BURGLARY_NOISE_F > 20.0 
+jf @BURGJB_6749 
+$BURGLARY_NOISE_F -= 20.0 
+005D: 41@ += $BURGLARY_NOISE_F // (float) 
+
+:BURGJB_6749
+41@ *= 0.99 
+0090: $BURGLARY_NOISE_I = float 41@ to_integer 
+if 
+  $BURGLARY_NOISE_I >= 100 
+jf @BURGJB_6829 
+$BURGLARY_NOISE_I = 100 
+if 
+  106@ == 0 
+jf @BURGJB_6822 
+01BD: 89@ = current_time_in_ms 
+106@ = 1 
+
+:BURGJB_6822
+jump @BURGJB_6861 
+
+:BURGJB_6829
+if 
+  0 > $BURGLARY_NOISE_I 
+jf @BURGJB_6854 
+$BURGLARY_NOISE_I = 0 
+
+:BURGJB_6854
+106@ = 0 
+
+:BURGJB_6861
+if 
+  106@ == 1 
+jf @BURGJB_6933 
+01BD: 90@ = current_time_in_ms 
+0085: 91@ = 90@ // (int) 
+0062: 91@ -= 89@ // (int) 
+if 
+  91@ > 200 
+jf @BURGJB_6933 
+98@ = 1 
+105@ += 1 
+
+:BURGJB_6933
+jump @BURGJB_6986 
+
+:BURGJB_6940
+0151: remove_status_text $BURGLARY_NOISE_I 
+$BURGLARY_NOISE_F = 0.0 
+41@ = 0.0 
+$BURGLARY_NOISE_I = 0 
+101@ = 0 
+0489: set_actor $PLAYER_ACTOR muted 0 
+
+:BURGJB_6986
+jump @BURGJB_7350 
+
+:BURGJB_6993
+if 
+  101@ == 1 
+jf @BURGJB_7105 
+0151: remove_status_text $BURGLARY_NOISE_I 
+$BURGLARY_ESCAPE_TIME_SEC = 10 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG55' time 5000 flag 1  // ~s~You have been detected!
+04F7: status_text $BURGLARY_ESCAPE_TIME_SEC type 0 line 2 GXT 'BURG61' // global_variable  // COPS
+01BD: 89@ = current_time_in_ms 
+$BURGLARY_NOISE_F = 0.0 
+41@ = 0.0 
+$BURGLARY_NOISE_I = 0 
+101@ = 0 
+jump @BURGJB_7350 
+
+:BURGJB_7105
+if 
+  109@ == 0 
+jf @BURGJB_7350 
+01BD: 90@ = current_time_in_ms 
+0085: 91@ = 90@ // (int) 
+0062: 91@ -= 89@ // (int) 
+91@ /= 1000 
+$BURGLARY_ESCAPE_TIME_SEC = 10 
+0066: $BURGLARY_ESCAPE_TIME_SEC -= 91@ // (int) 
+if or
+  0 > $BURGLARY_ESCAPE_TIME_SEC 
+  $BURGLARY_ESCAPE_TIME_SEC == 0 
+jf @BURGJB_7261 
+$BURGLARY_ESCAPE_TIME_SEC = 0 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 4
+jf @BURGJB_7224 
+Player.SetMinWantedLevel($PLAYER_CHAR, 3)
+
+:BURGJB_7224
+109@ = 1 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG60' time 5000 flag 1  // ~s~The cops are on the way!
+0151: remove_status_text $BURGLARY_ESCAPE_TIME_SEC 
+jump @BURGJB_7350 
+
+:BURGJB_7261
+03D5: remove_text 'BURG58'  // ~s~You have ~1~ seconds to get out of the house!
+03D5: remove_text 'BURG59'  // ~s~You have ~1~ second to get out of the house!
+09C1: add_next_text_to_brief_history 0 
+if 
+  $BURGLARY_ESCAPE_TIME_SEC > 1 
+jf @BURGJB_7331 
+01E4: show_text_1number_lowpriority GXT 'BURG58' number $BURGLARY_ESCAPE_TIME_SEC time 1000 flag 1  // ~s~You have ~1~ seconds to get out of the house!
+jump @BURGJB_7350 
+
+:BURGJB_7331
+01E4: show_text_1number_lowpriority GXT 'BURG59' number $BURGLARY_ESCAPE_TIME_SEC time 1000 flag 1  // ~s~You have ~1~ second to get out of the house!
+
+:BURGJB_7350
+if 
+  94@ == 0 
+jf @BURGJB_7610 
+Actor.StorePos($PLAYER_ACTOR, 63@, 64@, 65@)
+0866: get_object_in_sphere 63@ 64@ 65@ radius 5.0 handle_as 49@ 
+if 
+   not 49@ == -1 
+jf @BURGJB_7603 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_7497 
+if 
+  100@ == 1 
+jf @BURGJB_7483 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG57' time 5000 flag 1  // ~s~Take the item back to the truck.
+03E6: remove_text_box 
+100@ = 0 
+
+:BURGJB_7483
+94@ = 1 
+jump @BURGJB_7603 
+
+:BURGJB_7497
+if 
+0475:   actor $PLAYER_ACTOR near_object_in_cube 49@ radius 1.7 1.7 2.0 sphere 0 on_foot 
+jf @BURGJB_7576 
+if 
+  100@ == 0 
+jf @BURGJB_7569 
+0512: show_permanent_text_box 'BURG23'  // Press ~k~~VEHICLE_ENTER_EXIT~ to pick up item
+100@ = 1 
+
+:BURGJB_7569
+jump @BURGJB_7603 
+
+:BURGJB_7576
+if 
+  100@ == 1 
+jf @BURGJB_7603 
+03E6: remove_text_box 
+100@ = 0 
+
+:BURGJB_7603
+jump @BURGJB_7688 
+
+:BURGJB_7610
+if 
+03CA:   object 49@ exists 
+jf @BURGJB_7688 
+if 
+8737:   not actor $PLAYER_ACTOR lifting_object 49@ 
+jf @BURGJB_7688 
+if 
+  94@ == 1 
+jf @BURGJB_7681 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'BURG30' time 5000 flag 1  // ~s~Find something worth stealing.
+
+:BURGJB_7681
+94@ = 0 
+
+:BURGJB_7688
+jump @BURGJB_7839 
+
+:BURGJB_7695
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_7825 
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @BURGJB_7747 
+Player.CanMove($PLAYER_CHAR) = False
+
+:BURGJB_7747
+fade 0 1000 
+
+:BURGJB_7754
+if 
+fading 
+jf @BURGJB_7778 
+wait 0 
+jump @BURGJB_7754 
+
+:BURGJB_7778
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+fade 1 1000 
+
+:BURGJB_7801
+if 
+fading 
+jf @BURGJB_7825 
+wait 0 
+jump @BURGJB_7801 
+
+:BURGJB_7825
+jump @BURGJB_8346 
+95@ = 1 
+
+:BURGJB_7839
+jump @BURGJB_7960 
+
+:BURGJB_7846
+if 
+0500:   player $PLAYER_CHAR skin == "BALACLAVA" on_bodypart 17 
+jf @BURGJB_7953 
+fade 0 1000 
+
+:BURGJB_7882
+if 
+fading 
+jf @BURGJB_7906 
+wait 0 
+jump @BURGJB_7882 
+
+:BURGJB_7906
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+fade 1 1000 
+
+:BURGJB_7929
+if 
+fading 
+jf @BURGJB_7953 
+wait 0 
+jump @BURGJB_7929 
+
+:BURGJB_7953
+jump @BURGJB_8346 
+
+:BURGJB_7960
+jump @BURGJB_1058 
+
+:BURGJB_7967
+0293: $13 = get_controller_mode 
+if 
+   not $13 == 3 
+jf @BURGJB_8056 
+if 
+00E1:   player 0 pressed_key 19 
+jf @BURGJB_8049 
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_8049 
+if 
+   Actor.InCar($PLAYER_ACTOR, 50@)
+jf @BURGJB_8049 
+96@ = 1 
+
+:BURGJB_8049
+jump @BURGJB_8115 
+
+:BURGJB_8056
+if 
+00E1:   player 0 pressed_key 14 
+jf @BURGJB_8115 
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_8115 
+if 
+   Actor.InCar($PLAYER_ACTOR, 50@)
+jf @BURGJB_8115 
+96@ = 1 
+
+:BURGJB_8115
+if 
+  96@ == 1 
+jf @BURGJB_8344 
+if 
+   not $13 == 3 
+jf @BURGJB_8251 
+if 
+80E1:   not player 0 pressed_key 19 
+jf @BURGJB_8244 
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_8244 
+if 
+   Actor.InCar($PLAYER_ACTOR, 50@)
+jf @BURGJB_8235 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BURG41' time 5000 flag 1  // ~r~Burglary mission cancelled!
+95@ = 1 
+jump @BURGJB_8242 
+
+:BURGJB_8235
+96@ = 0 
+
+:BURGJB_8242
+return 
+
+:BURGJB_8244
+jump @BURGJB_8344 
+
+:BURGJB_8251
+if 
+80E1:   not player 0 pressed_key 14 
+jf @BURGJB_8344 
+if 
+   not Car.Wrecked(50@)
+jf @BURGJB_8344 
+if 
+   Actor.InCar($PLAYER_ACTOR, 50@)
+jf @BURGJB_8335 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BURG41' time 5000 flag 1  // ~r~Burglary mission cancelled!
+95@ = 1 
+jump @BURGJB_8342 
+
+:BURGJB_8335
+96@ = 0 
+
+:BURGJB_8342
+return 
+
+:BURGJB_8344
+return 
+
+:BURGJB_8346
+if 
+  47@ > 1 
+jf @BURGJB_8393 
+036D: show_text_2numbers_styled GXT 'B_FAIL1' numbers 47@ $BUGRLARY_CASH time 5000 style 5  // Burglary mission ended.
+jump @BURGJB_8456 
+
+:BURGJB_8393
+if 
+  47@ > 0 
+jf @BURGJB_8440 
+036D: show_text_2numbers_styled GXT 'B_FAIL2' numbers 47@ $BUGRLARY_CASH time 5000 style 5 
+jump @BURGJB_8456 
+
+:BURGJB_8440
+00BA: show_text_styled GXT 'B_FAIL3' time 5000 style 5 
+
+:BURGJB_8456
+return 
+
+:BURGJB_8458
+if 
+  $MISSION_BURGLARY_PASSED == 0 
+jf @BURGJB_8526 
+Player.InfiniteRun($PLAYER_CHAR) = True
+01E3: show_text_1number_styled GXT 'BURG54' number 3000 time 5000 style 1  // Burglary missions complete: $~1~
+Player.Money($PLAYER_CHAR) += 3000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 2 
+$MISSION_BURGLARY_PASSED = 1 
+
+:BURGJB_8526
+return 
+
+:BURGJB_8528
+$CARMOD_DISABLED_FLAG = 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BURGJB_8558 
+0489: set_actor $PLAYER_ACTOR muted 0 
+
+:BURGJB_8558
+0A2D: hide_styled_text_while_fading 1 // works with 00BA 
+09E6: set_burglary_houses_accessible 0 
+Garage.ChangeType(s$BURGLARY_GARAGES[0], 43)
+Garage.ChangeType(s$BURGLARY_GARAGES[1], 43)
+Garage.ChangeType(s$BURGLARY_GARAGES[2], 43)
+Car.RemoveReferences(50@)
+Marker.Disable(52@)
+Marker.Disable(51@)
+0151: remove_status_text $BURGLARY_NOISE_I 
+014F: stop_timer $BURGLARY_DAYLIGHT 
+014F: stop_timer $BURGLARY_TIME_LEFT 
+0151: remove_status_text $BUGRLARY_CASH 
+0151: remove_status_text $BURGLARY_ESCAPE_TIME_SEC 
+$ONMISSION_BURGLARY = 0 
+$ONMISSION = 0 
+if 
+  $MISSION_BURGLARY_PASSED == 1 
+jf @BURGJB_8686 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'BURG63' 
+wait 9000 
+03E6: remove_text_box 
+$MISSION_BURGLARY_PASSED = 2 
+
+:BURGJB_8686
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

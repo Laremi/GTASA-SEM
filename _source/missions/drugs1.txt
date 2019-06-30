@@ -1,0 +1,8611 @@
+:DRUGS1
+thread 'DRUGS1' 
+gosub @DRUGS1_94 
+if 
+wasted_or_busted 
+jf @DRUGS1_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+gosub @DRUGS1_54349 
+
+:DRUGS1_85
+gosub @DRUGS1_54495 
+end_thread 
+
+:DRUGS1_94
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'SMOKE4' 
+0395: clear_area 1 at 2060.0 -1694.0 50.0 radius 50.0 
+set_weather 1 
+Model.Load(#LAE_SMOKECUTSCENE)
+
+:DRUGS1_151
+if 
+   not Model.Available(#LAE_SMOKECUTSCENE)
+jf @DRUGS1_178 
+wait 0 
+jump @DRUGS1_151 
+
+:DRUGS1_178
+290@ = Object.Init(#LAE_SMOKECUTSCENE, 2055.0, -1695.0, 15.0)
+02E4: load_cutscene_data 'SMOKE4A' 
+
+:DRUGS1_212
+if 
+86B9:   not cutscene_data_loaded 
+jf @DRUGS1_236 
+wait 0 
+jump @DRUGS1_212 
+
+:DRUGS1_236
+02E7: start_cutscene 
+fade 1 1000 
+
+:DRUGS1_245
+if 
+82E9:   not cutscene_reached_end 
+jf @DRUGS1_269 
+wait 0 
+jump @DRUGS1_245 
+
+:DRUGS1_269
+fade 0 0 
+
+:DRUGS1_275
+if 
+fading 
+jf @DRUGS1_299 
+wait 0 
+jump @DRUGS1_275 
+
+:DRUGS1_299
+02EA: end_cutscene 
+Model.Destroy(#LAE_SMOKECUTSCENE)
+Object.Destroy(290@)
+0169: set_fade_color_RGB 0 0 0 
+wait 500 
+Model.Load(#GLENDALE)
+Model.Load(#WFYRI)
+Model.Load(#WFYST)
+Model.Load(#MAFFA)
+Model.Load(#MAFFB)
+023C: load_special_actor 'SMOKE' as 1 // models 290-299 
+03CF: load_wav 35802 as 2 
+038B: load_requested_models 
+
+:DRUGS1_369
+if or
+   not Model.Available(#GLENDALE)
+   not Model.Available(#MAFFA)
+   not Model.Available(#MAFFB)
+   not Model.Available(#WFYRI)
+   not Model.Available(#WFYST)
+jf @DRUGS1_412 
+wait 0 
+jump @DRUGS1_369 
+
+:DRUGS1_412
+if or
+823D:   not special_actor 1 loaded 
+83D0:   not wav 2 loaded 
+jf @DRUGS1_442 
+wait 0 
+jump @DRUGS1_412 
+
+:DRUGS1_442
+07FB: set_interior 'ATRIUME' access 1  // Atrium
+07FB: set_interior 'ATRIUMX' access 1  // Attrium
+90@ = 0 
+$6898 = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+95@ = 0 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+108@ = 0 
+109@ = 0 
+110@ = 0 
+111@ = 0 
+112@ = 0 
+113@ = 0 
+114@ = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+119@ = 0 
+120@ = 0 
+121@ = 0 
+122@ = 0 
+123@ = 0 
+124@ = 0 
+125@ = 0 
+126@ = 0 
+282@ = 0 
+283@ = 0 
+127@ = 0 
+128@ = 0 
+129@ = 0 
+242@ = 0 
+243@ = 0 
+244@ = 0 
+245@ = 0 
+246@ = 0 
+247@ = 0 
+248@ = 0 
+249@ = 0 
+250@ = 0 
+251@ = 0 
+252@ = 0 
+253@ = 0 
+254@ = 0 
+255@ = 0 
+256@ = 0 
+257@ = 0 
+258@ = 0 
+259@ = 0 
+260@ = 0 
+261@ = 0 
+262@ = 0 
+263@ = 0 
+264@ = 0 
+265@ = 0 
+266@ = 0 
+267@ = 0 
+268@ = 0 
+269@ = 0 
+270@ = 0 
+271@ = 0 
+272@ = 0 
+273@ = 0 
+274@ = 0 
+275@ = 0 
+276@ = 0 
+277@ = 0 
+278@ = 0 
+279@ = 0 
+280@ = 0 
+281@ = 0 
+284@ = 0 
+285@ = 0 
+286@ = 0 
+287@ = 0 
+060A: create_decision_maker_type 0 store_to 35@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 36@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 36@ on_event 49 taskID 311 respect 0.0 hate 100.0 like 100.0 dislike 100.0 in_car 0 on_foot 1 // see *.ped files 
+0395: clear_area 1 at 2077.58 -1695.929 150.0 radius 150.0 
+0674: set_car_model #GLENDALE numberplate "_A2TMFK_" 
+34@ = Car.Create(#GLENDALE, 2058.86, -1694.612, 12.297)
+041E: set_radio_station 5 
+0229: set_car 34@ primary_color_to 98 secondary_color_to 14 
+Car.Angle(34@) = 271.822
+Car.Health(34@) = 1000
+$ACTOR_SMOKE = Actor.CreateAsPassenger(Mission1, #SPECIAL01, 34@, 0)
+09F6: set_actor $ACTOR_SMOKE unjackable_through_driver_seat 0 
+09B5: set_actor $ACTOR_SMOKE signal_after_kill 0 
+Actor.Health($ACTOR_SMOKE) = 500
+0446: set_actor $ACTOR_SMOKE dismemberment_possible 0 
+0568: set_actor $ACTOR_SMOKE untargetable 1 
+060B: set_actor $ACTOR_SMOKE decision_maker_to 35@ 
+039E: set_actor $ACTOR_SMOKE locked 1 while_in_car 
+0526: set_actor $ACTOR_SMOKE stay_in_car_when_jacked 1 
+0828: set_max_fire_generations 1 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+03C7: set_sensitivity_to_crime 0.0 
+06D0: enable_emergency_traffic 0 
+fade 1 1500 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+0489: set_actor $PLAYER_ACTOR muted 1 
+01E8: create_forbidden_for_cars_cube_cornerA 1694.12 -1604.33 5.0 cornerB 1805.94 -1593.12 15.0 
+00BC: show_text_highpriority GXT 'DGS1_1' time 6000 flag 1  // ~s~Take Big Smoke ~s~to ~y~Downtown~s~.
+33@ = 0 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+0A09: set_actor $ACTOR_SMOKE muted 1 // versionB 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:DRUGS1_1421
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DRUGS1_1447 
+jump @DRUGS1_54435 
+
+:DRUGS1_1447
+if 
+   not 280@ > 7 
+jf @DRUGS1_1504 
+if 
+   Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_1504 
+00BC: show_text_highpriority GXT 'DGS1_60' time 7000 flag 1  // ~r~Smoke died!
+jump @DRUGS1_54349 
+
+:DRUGS1_1504
+if 
+  123@ == 0 
+jf @DRUGS1_9483 
+if 
+  90@ == 11 
+jf @DRUGS1_1640 
+if 
+  6 > $6898 
+jf @DRUGS1_1640 
+if 
+80A3:   not actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 1744.2 -1686.68 cornerB 1698.34 -1616.4 
+jf @DRUGS1_1640 
+if 
+82CB:   not actor $ACTOR_SMOKE bounding_sphere_visible 
+jf @DRUGS1_1640 
+0321: AS_actor $ACTOR_SMOKE die_headshotted 
+00BC: show_text_highpriority GXT 'DGS1_3' time 7000 flag 1  // ~r~You left Smoke alone and he died! Next time stick a bit closer!
+jump @DRUGS1_54349 
+
+:DRUGS1_1640
+if 
+  90@ == 0 
+jf @DRUGS1_1771 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_1771 
+if 
+   not Car.Wrecked(34@)
+jf @DRUGS1_1771 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRUGS1_1771 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRUGS1_1771 
+018A: 88@ = create_checkpoint_at 1722.568 -1597.92 12.405 
+00BC: show_text_highpriority GXT 'DGS1_1' time 10000 flag 1  // ~s~Take Big Smoke ~s~to ~y~Downtown~s~.
+90@ = 1 
+
+:DRUGS1_1771
+if 
+  92@ == 0 
+jf @DRUGS1_2059 
+if or
+  90@ == 1 
+  90@ == 100 
+jf @DRUGS1_2059 
+if 
+  91@ == 0 
+jf @DRUGS1_1927 
+if 
+   not Car.Wrecked(34@)
+jf @DRUGS1_1927 
+if 
+8448:   not actor $PLAYER_ACTOR in_car 34@ 
+jf @DRUGS1_1927 
+87@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 87@ type_to 1 
+Marker.Disable(88@)
+90@ = 100 
+040D: unload_wav 1 
+00BE: text_clear_all 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMOX_AC' time 2000 flag 1  // ~z~Get in the car!
+91@ = 1 
+
+:DRUGS1_1927
+if 
+  91@ == 1 
+jf @DRUGS1_2059 
+if 
+   not Car.Wrecked(34@)
+jf @DRUGS1_2059 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRUGS1_2059 
+Marker.Disable(87@)
+018A: 88@ = create_checkpoint_at 1722.568 -1597.92 12.405 
+00BE: text_clear_all 
+040D: unload_wav 2 
+if 
+  282@ > 12 
+jf @DRUGS1_2045 
+00BC: show_text_highpriority GXT 'DGS1_1' time 5000 flag 1  // ~s~Take Big Smoke ~s~to ~y~Downtown~s~.
+
+:DRUGS1_2045
+90@ = 1 
+91@ = 0 
+
+:DRUGS1_2059
+if 
+  90@ == 1 
+jf @DRUGS1_3041 
+gosub @DRUGS1_53966 
+if 
+  282@ == 0 
+jf @DRUGS1_2170 
+if 
+  283@ == 0 
+jf @DRUGS1_2170 
+if 
+  33@ > 6500 
+jf @DRUGS1_2170 
+04AF: 239@ = 35600 // = constant 
+05AA: 240@s = 'SMO4_AA' // @s = 'short'  // ~z~This better not be another cop errand, man.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2170
+if 
+  282@ == 1 
+jf @DRUGS1_2237 
+if 
+  283@ == 0 
+jf @DRUGS1_2237 
+04AF: 239@ = 35601 // = constant 
+05AA: 240@s = 'SMO4_AB' // @s = 'short'  // ~z~Nah, man, this is strictly for the homies.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2237
+if 
+  282@ == 2 
+jf @DRUGS1_2304 
+if 
+  283@ == 0 
+jf @DRUGS1_2304 
+04AF: 239@ = 35602 // = constant 
+05AA: 240@s = 'SMO4_AC' // @s = 'short'  // ~z~I gotta be honest with you, CJ. We could be gettin' into some heavy shit, baby.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2304
+if 
+  282@ == 3 
+jf @DRUGS1_2371 
+if 
+  283@ == 0 
+jf @DRUGS1_2371 
+04AF: 239@ = 35603 // = constant 
+05AA: 240@s = 'SMO4_AD' // @s = 'short'  // ~z~What you into, Smoke?
+gosub @DRUGS1_53924 
+
+:DRUGS1_2371
+if 
+  282@ == 4 
+jf @DRUGS1_2438 
+if 
+  283@ == 0 
+jf @DRUGS1_2438 
+04AF: 239@ = 35604 // = constant 
+05AA: 240@s = 'SMO4_AE' // @s = 'short'  // ~z~Lot a shit 'bout to go down, Carl.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2438
+if 
+  282@ == 5 
+jf @DRUGS1_2505 
+if 
+  283@ == 0 
+jf @DRUGS1_2505 
+04AF: 239@ = 35605 // = constant 
+05AA: 240@s = 'SMO4_AF' // @s = 'short'  // ~z~Families coming back, Ballas pushing base,
+gosub @DRUGS1_53924 
+
+:DRUGS1_2505
+if 
+  282@ == 6 
+jf @DRUGS1_2572 
+if 
+  283@ == 0 
+jf @DRUGS1_2572 
+04AF: 239@ = 35606 // = constant 
+05AA: 240@s = 'SMO4_AG' // @s = 'short'  // ~z~Russian cats with nothin' to lose about to bust some ass.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2572
+if 
+  282@ == 7 
+jf @DRUGS1_2639 
+if 
+  283@ == 0 
+jf @DRUGS1_2639 
+04AF: 239@ = 35607 // = constant 
+05AA: 240@s = 'SMO4_AH' // @s = 'short'  // ~z~Russians?
+gosub @DRUGS1_53924 
+
+:DRUGS1_2639
+if 
+  282@ == 8 
+jf @DRUGS1_2706 
+if 
+  283@ == 0 
+jf @DRUGS1_2706 
+04AF: 239@ = 35608 // = constant 
+05AA: 240@s = 'SMO4_AJ' // @s = 'short'  // ~z~Yeah, yeah, you go figure.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2706
+if 
+  282@ == 9 
+jf @DRUGS1_2773 
+if 
+  283@ == 0 
+jf @DRUGS1_2773 
+04AF: 239@ = 35609 // = constant 
+05AA: 240@s = 'SMO4_AK' // @s = 'short'  // ~z~Now all my life I been told to fear the Ruskies, but I ain't never even met one.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2773
+if 
+  282@ == 10 
+jf @DRUGS1_2840 
+if 
+  283@ == 0 
+jf @DRUGS1_2840 
+04AF: 239@ = 35610 // = constant 
+05AA: 240@s = 'SMO4_AL' // @s = 'short'  // ~z~Then the wall comes down and we're all supposed to be friends.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2840
+if 
+  282@ == 11 
+jf @DRUGS1_2907 
+if 
+  283@ == 0 
+jf @DRUGS1_2907 
+04AF: 239@ = 35611 // = constant 
+05AA: 240@s = 'SMO4_AM' // @s = 'short'  // ~z~Five minutes later, my cousin gets laid out by some Ruskie fresh off the boat.
+gosub @DRUGS1_53924 
+
+:DRUGS1_2907
+if 
+  282@ == 12 
+jf @DRUGS1_2974 
+if 
+  283@ == 0 
+jf @DRUGS1_2974 
+04AF: 239@ = 35612 // = constant 
+05AA: 240@s = 'SMO4_AN' // @s = 'short'  // ~z~For real?
+gosub @DRUGS1_53924 
+
+:DRUGS1_2974
+if 
+  282@ == 13 
+jf @DRUGS1_3041 
+if 
+  283@ == 0 
+jf @DRUGS1_3041 
+04AF: 239@ = 35613 // = constant 
+05AA: 240@s = 'SMO4_AO' // @s = 'short'  // ~z~For real!
+gosub @DRUGS1_53924 
+
+:DRUGS1_3041
+if 
+  90@ == 1 
+jf @DRUGS1_5210 
+if 
+   not Car.Wrecked(34@)
+jf @DRUGS1_5210 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_5210 
+if 
+0448:   actor $ACTOR_SMOKE in_car 34@ 
+jf @DRUGS1_5210 
+if 
+0448:   actor $PLAYER_ACTOR in_car 34@ 
+jf @DRUGS1_5210 
+if 
+01AF:   car 34@ sphere 1 in_sphere 1722.568 -1597.92 12.45 radius 4.0 4.0 5.0 
+jf @DRUGS1_5210 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+08E7: disable_entrance_markers 1 
+01F0: set_max_wanted_level_to 0 
+122@ = 0 
+0395: clear_area 1 at 1722.568 -1597.92 300.0 radius 300.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+Camera.SetPosition(1711.449, -1576.924, 30.3531, 0.0, 0.0, 0.0)
+Camera.PointAt(1711.628, -1577.821, 29.9486, 2)
+0633: AS_actor $ACTOR_SMOKE exit_car 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+fade 0 2000 
+
+:DRUGS1_3309
+if 
+fading 
+jf @DRUGS1_3333 
+wait 0 
+jump @DRUGS1_3309 
+
+:DRUGS1_3333
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Model.Load(#MICRO_UZI)
+Model.Load(#COLT45)
+Model.Load(#MP5LNG)
+04ED: load_animation "JST_BUISNESS" 
+040D: unload_wav 1 
+03CF: load_wav 35614 as 1 
+040D: unload_wav 2 
+03CF: load_wav 35615 as 2 
+038B: load_requested_models 
+
+:DRUGS1_3399
+if or
+   not Model.Available(#COLT45)
+   not Model.Available(#MP5LNG)
+84EE:   not animation "JST_BUISNESS" loaded 
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @DRUGS1_3455 
+wait 0 
+jump @DRUGS1_3399 
+
+:DRUGS1_3455
+if 
+   not Model.Available(#MP5LNG)
+jf @DRUGS1_3482 
+wait 0 
+jump @DRUGS1_3455 
+
+:DRUGS1_3482
+37@ = Actor.Create(Mission1, #WFYST, 1718.282, -1633.178, 19.2035)
+0489: set_actor 37@ muted 1 
+Actor.Angle(37@) = 59.5412
+0812: AS_actor 37@ perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+060B: set_actor 37@ decision_maker_to 35@ 
+0489: set_actor 37@ muted 1 
+38@ = Actor.Create(Mission1, #WFYST, 1717.72, -1633.952, 19.2029)
+Actor.Angle(38@) = 313.3566
+0489: set_actor 38@ muted 1 
+0812: AS_actor 38@ perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+060B: set_actor 38@ decision_maker_to 35@ 
+0489: set_actor 38@ muted 1 
+39@ = Actor.Create(Mission1, #WFYST, 1712.811, -1629.454, 19.201)
+Actor.Angle(39@) = 48.5227
+0489: set_actor 39@ muted 1 
+0812: AS_actor 39@ perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+060B: set_actor 39@ decision_maker_to 35@ 
+0489: set_actor 39@ muted 1 
+40@ = Actor.Create(Mission1, #WFYST, 1712.146, -1630.165, 19.2003)
+Actor.Angle(40@) = 322.1413
+0489: set_actor 40@ muted 1 
+0812: AS_actor 40@ perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+060B: set_actor 40@ decision_maker_to 35@ 
+0489: set_actor 40@ muted 1 
+41@ = Actor.Create(Mission1, #WFYST, 1732.528, -1627.45, 19.2044)
+Actor.Angle(41@) = 275.6598
+0489: set_actor 41@ muted 1 
+0812: AS_actor 41@ perform_animation "SEAT_IDLE" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+060B: set_actor 41@ decision_maker_to 35@ 
+0489: set_actor 41@ muted 1 
+42@ = Actor.Create(Mission1, #MAFFA, 1729.973, -1649.115, 19.274)
+Actor.Angle(42@) = 11.051
+060B: set_actor 42@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(42@, MP5, 9999)
+0860: link_actor 42@ to_interior 18 
+Actor.Health(42@) = 35
+214@ = Marker.CreateAboveActor(42@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+0961: set_actor 42@ keep_tasks_after_cleanup 1 
+43@ = Actor.Create(Mission1, #MAFFB, 1729.971, -1657.139, 19.278)
+Actor.Angle(43@) = 21.106
+Actor.Health(43@) = 10
+060B: set_actor 43@ decision_maker_to 35@ 
+081A: set_actor 43@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(43@, Pistol, 9999)
+Actor.WeaponAccuracy(43@) = 60
+0860: link_actor 43@ to_interior 18 
+215@ = Marker.CreateAboveActor(43@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+0961: set_actor 43@ keep_tasks_after_cleanup 1 
+07DD: set_actor 43@ attack_rate 50 // previously known as temper_to 
+44@ = Actor.Create(Mission1, #MAFFB, 1722.311, -1658.636, 19.108)
+Actor.Angle(44@) = 352.526
+060B: set_actor 44@ decision_maker_to 36@ 
+081A: set_actor 44@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(44@, Pistol, 9999)
+0860: link_actor 44@ to_interior 18 
+216@ = Marker.CreateAboveActor(44@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+0961: set_actor 44@ keep_tasks_after_cleanup 1 
+45@ = Actor.Create(Mission1, #MAFFA, 1712.399, -1657.463, 19.26)
+Actor.Health(45@) = 150
+Actor.Angle(45@) = 323.108
+060B: set_actor 45@ decision_maker_to 36@ 
+081A: set_actor 45@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(45@, Pistol, 9999)
+0860: link_actor 45@ to_interior 18 
+Actor.WeaponAccuracy(45@) = 50
+217@ = Marker.CreateAboveActor(45@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+0961: set_actor 45@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(45@, 150)
+Actor.Health(45@) = 150
+07DD: set_actor 45@ attack_rate 50 // previously known as temper_to 
+46@ = Actor.Create(Mission1, #MAFFA, 1712.763, -1664.816, 19.273)
+Actor.Angle(46@) = 329.331
+060B: set_actor 46@ decision_maker_to 36@ 
+Actor.GiveWeaponAndAmmo(46@, MP5, 9999)
+Actor.WeaponAccuracy(46@) = 50
+Actor.SetMaxHealth(46@, 150)
+Actor.Health(46@) = 150
+0860: link_actor 46@ to_interior 18 
+218@ = Marker.CreateAboveActor(46@)
+018B: set_marker 218@ radar_mode 2 
+Marker.SetIconSize(218@, 2)
+0961: set_actor 46@ keep_tasks_after_cleanup 1 
+47@ = Actor.Create(Mission1, #MAFFA, 1718.711, -1655.182, 19.108)
+Actor.Angle(47@) = 327.782
+060B: set_actor 47@ decision_maker_to 35@ 
+081A: set_actor 47@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(47@, Pistol, 9999)
+0860: link_actor 47@ to_interior 18 
+Actor.WeaponAccuracy(47@) = 60
+219@ = Marker.CreateAboveActor(47@)
+018B: set_marker 219@ radar_mode 2 
+Marker.SetIconSize(219@, 2)
+0961: set_actor 47@ keep_tasks_after_cleanup 1 
+48@ = Actor.Create(Mission1, #MAFFB, 1701.8, -1650.28, 19.26)
+Actor.Angle(48@) = 265.623
+060B: set_actor 48@ decision_maker_to 35@ 
+081A: set_actor 48@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(48@, Pistol, 9999)
+Actor.SetMaxHealth(48@, 150)
+Actor.Health(48@) = 150
+0860: link_actor 48@ to_interior 18 
+220@ = Marker.CreateAboveActor(48@)
+018B: set_marker 220@ radar_mode 2 
+Marker.SetIconSize(220@, 2)
+0961: set_actor 48@ keep_tasks_after_cleanup 1 
+07DD: set_actor 48@ attack_rate 50 // previously known as temper_to 
+51@ = Actor.Create(Mission1, #MAFFB, 1719.6, -1671.764, 22.741)
+Actor.Health(51@) = 5
+Actor.Angle(51@) = 11.45
+060B: set_actor 51@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(51@, MP5, 9999)
+0856: set_actor 51@ enable_crouch 0 
+0860: link_actor 51@ to_interior 18 
+223@ = Marker.CreateAboveActor(51@)
+018B: set_marker 223@ radar_mode 2 
+Marker.SetIconSize(223@, 2)
+0961: set_actor 51@ keep_tasks_after_cleanup 1 
+52@ = Actor.Create(Mission1, #MAFFB, 1701.897, -1668.039, 19.23)
+Actor.Angle(52@) = 276.178
+060B: set_actor 52@ decision_maker_to 35@ 
+081A: set_actor 52@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(52@, Pistol, 9999)
+0860: link_actor 52@ to_interior 18 
+Actor.WeaponAccuracy(52@) = 60
+224@ = Marker.CreateAboveActor(52@)
+018B: set_marker 224@ radar_mode 2 
+Marker.SetIconSize(224@, 2)
+0961: set_actor 52@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(52@, 150)
+Actor.Health(52@) = 150
+53@ = Actor.Create(Mission1, #MAFFA, 1725.037, -1672.69, 22.735)
+Actor.Angle(53@) = 127.283
+060B: set_actor 53@ decision_maker_to 35@ 
+081A: set_actor 53@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(53@, Pistol, 9999)
+Actor.WeaponAccuracy(53@) = 60
+0860: link_actor 53@ to_interior 18 
+225@ = Marker.CreateAboveActor(53@)
+018B: set_marker 225@ radar_mode 2 
+Marker.SetIconSize(225@, 2)
+0961: set_actor 53@ keep_tasks_after_cleanup 1 
+07DD: set_actor 53@ attack_rate 50 // previously known as temper_to 
+54@ = Actor.Create(Mission1, #MAFFA, 1733.358, -1664.599, 22.747)
+Actor.Angle(54@) = 141.981
+060B: set_actor 54@ decision_maker_to 35@ 
+081A: set_actor 54@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(54@, Pistol, 9999)
+Actor.WeaponAccuracy(54@) = 50
+0860: link_actor 54@ to_interior 18 
+226@ = Marker.CreateAboveActor(54@)
+018B: set_marker 226@ radar_mode 2 
+Marker.SetIconSize(226@, 2)
+0961: set_actor 54@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(54@, 150)
+Actor.Health(54@) = 150
+0A0B: set_rendering_origin_at_3D_coord 1726.993 -1628.007 20.2 angle 8.98 
+0A0B: set_rendering_origin_at_3D_coord 1726.993 -1628.007 20.2 angle 169.7 
+90@ = 2 
+
+:DRUGS1_5210
+if 
+  90@ == 2 
+jf @DRUGS1_5474 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_5474 
+if 
+   not Actor.Driving($ACTOR_SMOKE)
+jf @DRUGS1_5474 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DRUGS1_5474 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+Actor.PutAt($PLAYER_ACTOR, 1726.04, -1632.521, 19.18)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Actor.PutAt($ACTOR_SMOKE, 1726.815, -1633.001, 19.18)
+Actor.Angle($ACTOR_SMOKE) = 180.0
+63@ = Actor.Create(Mission1, #WFYRI, 1727.757, -1632.918, 19.18)
+Actor.Angle(63@) = 270.0
+060B: set_actor 63@ decision_maker_to 35@ 
+0489: set_actor 63@ muted 1 
+33@ = 0 
+Camera.SetPosition(1728.489, -1633.539, 20.16, 0.0, 0.0, 0.0)
+Camera.PointAt(1726.404, -1632.053, 20.279, 2)
+32@ = 0 
+99@ = 1 
+90@ = 8 
+
+:DRUGS1_5474
+if 
+  90@ == 8 
+jf @DRUGS1_6963 
+if 
+  99@ == 1 
+jf @DRUGS1_5545 
+if 
+  32@ > 1000 
+jf @DRUGS1_5545 
+00BE: text_clear_all 
+fade 1 500 
+99@ = 2 
+
+:DRUGS1_5545
+if 
+  99@ == 2 
+jf @DRUGS1_5783 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_5783 
+if 
+   not Actor.Dead(63@)
+jf @DRUGS1_5783 
+0619: enable_actor 63@ collision_detection 0 
+0619: enable_actor $ACTOR_SMOKE collision_detection 0 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PLAYER_01" IFP "JST_BUISNESS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor $ACTOR_SMOKE perform_animation "SMOKE_01" IFP "JST_BUISNESS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor 63@ perform_animation "GIRL_01" IFP "JST_BUISNESS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+33@ = 0 
+93@ = 0 
+0707: start_scene_skip_to @DRUGS1_7033 
+99@ = 3 
+
+:DRUGS1_5783
+if 
+  99@ == 3 
+jf @DRUGS1_5922 
+if 
+  33@ > 2066 
+jf @DRUGS1_5922 
+Camera.SetPosition(1726.35, -1630.824, 20.7289, 0.0, 0.0, 0.0)
+Camera.PointAt(1726.411, -1631.822, 20.7195, 2)
+03D1: play_wav 1 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_5899 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+
+:DRUGS1_5899
+00BC: show_text_highpriority GXT 'SMO4_BA' time 5000 flag 1  // ~z~Look Carl, before I walk in there I just need to know you down with this shit, man.
+99@ = 4 
+
+:DRUGS1_5922
+if 
+  99@ == 4 
+jf @DRUGS1_6096 
+if 
+  33@ > 4999 
+jf @DRUGS1_6096 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_6096 
+Camera.SetPosition(1726.37, -1633.38, 20.6705, 0.0, 0.0, 0.0)
+Camera.PointAt(1726.416, -1632.381, 20.6667, 2)
+00BE: text_clear_all 
+03D1: play_wav 2 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_6052 
+0968: actor $ACTOR_SMOKE stop_mouth 
+
+:DRUGS1_6052
+00BC: show_text_highpriority GXT 'SMO4_BB' time 5000 flag 1  // ~z~Look, Smoke, we go way back. We Groves, man!
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+040D: unload_wav 1 
+03CF: load_wav 35616 as 1 
+99@ = 5 
+
+:DRUGS1_6096
+if 
+  99@ == 5 
+jf @DRUGS1_6213 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_6213 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_6213 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03D1: play_wav 1 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_6177 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+
+:DRUGS1_6177
+00BC: show_text_highpriority GXT 'SMO4_BC' time 5000 flag 1  // ~z~That's what I'm talking about, that's my dog!
+040D: unload_wav 2 
+03CF: load_wav 35617 as 2 
+99@ = 6 
+
+:DRUGS1_6213
+if 
+  99@ == 6 
+jf @DRUGS1_6297 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_6297 
+if 
+03D0:   wav 2 loaded 
+jf @DRUGS1_6297 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO4_BD' time 5000 flag 1  // ~z~Hey look , if you hear shit start to pop off, come in there blasting, a'ight?
+03CF: load_wav 35618 as 1 
+99@ = 7 
+
+:DRUGS1_6297
+if 
+  99@ == 7 
+jf @DRUGS1_6541 
+if 
+  33@ > 9999 
+jf @DRUGS1_6541 
+if 
+   not Actor.Dead(63@)
+jf @DRUGS1_6541 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_6541 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_6541 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_6401 
+0968: actor $ACTOR_SMOKE stop_mouth 
+
+:DRUGS1_6401
+0792: disembark_instantly_actor 63@ 
+Actor.PutAt(63@, 1732.785, -1633.043, 19.2)
+Actor.Angle(63@) = 0.0
+0812: AS_actor 63@ perform_animation "GIRL_02" IFP "JST_BUISNESS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_BE' time 3000 flag 1  // ~z~I'm down, dog.
+041D: set_camera_near_clip 0.09 
+0967: actor $PLAYER_ACTOR move_mouth 2000 ms 
+040D: unload_wav 2 
+03CF: load_wav 35619 as 2 
+129@ = 1 
+99@ = 8 
+
+:DRUGS1_6541
+if 
+  129@ == 1 
+jf @DRUGS1_6586 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_6586 
+0968: actor $PLAYER_ACTOR stop_mouth 
+129@ = 2 
+
+:DRUGS1_6586
+if 
+  99@ == 8 
+jf @DRUGS1_6751 
+if 
+  33@ > 18500 
+jf @DRUGS1_6751 
+if 
+03D0:   wav 2 loaded 
+jf @DRUGS1_6751 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_6751 
+Camera.SetPosition(1725.094, -1632.446, 20.7074, 0.0, 0.0, 0.0)
+Camera.PointAt(1726.091, -1632.391, 20.6711, 2)
+041D: set_camera_near_clip 0.1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO4_BF' time 3000 flag 1  // ~z~Hey, baby, want company?
+040D: unload_wav 1 
+03CF: load_wav 35621 as 1 
+99@ = 9 
+
+:DRUGS1_6751
+if 
+  99@ == 9 
+jf @DRUGS1_6831 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_6831 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_6831 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_BH' time 5000 flag 1  // ~z~CJ, GET IN HERE!
+99@ = 10 
+
+:DRUGS1_6831
+if 
+  99@ == 10 
+jf @DRUGS1_6963 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_6963 
+00BE: text_clear_all 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_6963 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "PLAYER_01"
+jf @DRUGS1_6963 
+0613: 62@ = actor $PLAYER_ACTOR animation "PLAYER_01" time 
+if 
+  62@ == 1.0 
+jf @DRUGS1_6963 
+90@ = 10 
+99@ = 11 
+
+:DRUGS1_6963
+if 
+  90@ == 10 
+jf @DRUGS1_9483 
+if 
+  32@ > 2000 
+jf @DRUGS1_9483 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9483 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+93@ = 1 
+
+:DRUGS1_7033
+0701: end_scene_skip 
+fade 0 1000 
+
+:DRUGS1_7042
+if 
+fading 
+jf @DRUGS1_7066 
+wait 0 
+jump @DRUGS1_7042 
+
+:DRUGS1_7066
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+select_interior 18 
+Camera.SetAtPos(1722.81, -1658.54, 20.19)
+if 
+  93@ == 0 
+jf @DRUGS1_8432 
+00BE: text_clear_all 
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(51@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Model.Destroy(#WFYRI)
+Model.Destroy(#WFYST)
+Car.Destroy(34@)
+Model.Destroy(#GLENDALE)
+42@ = Actor.Create(Mission1, #MAFFA, 1729.973, -1649.115, 19.274)
+Actor.Angle(42@) = 11.051
+060B: set_actor 42@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(42@, MP5, 9999)
+0860: link_actor 42@ to_interior 18 
+Actor.Health(42@) = 35
+214@ = Marker.CreateAboveActor(42@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+0961: set_actor 42@ keep_tasks_after_cleanup 1 
+43@ = Actor.Create(Mission1, #MAFFB, 1729.971, -1657.139, 19.278)
+Actor.Health(43@) = 10
+Actor.Angle(43@) = 21.106
+060B: set_actor 43@ decision_maker_to 35@ 
+081A: set_actor 43@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(43@, Pistol, 9999)
+Actor.WeaponAccuracy(43@) = 60
+0860: link_actor 43@ to_interior 18 
+215@ = Marker.CreateAboveActor(43@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+07DD: set_actor 43@ attack_rate 50 // previously known as temper_to 
+0961: set_actor 43@ keep_tasks_after_cleanup 1 
+44@ = Actor.Create(Mission1, #MAFFB, 1722.311, -1658.636, 19.108)
+Actor.Angle(44@) = 352.526
+060B: set_actor 44@ decision_maker_to 36@ 
+081A: set_actor 44@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(44@, Pistol, 9999)
+0860: link_actor 44@ to_interior 18 
+216@ = Marker.CreateAboveActor(44@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+0961: set_actor 44@ keep_tasks_after_cleanup 1 
+45@ = Actor.Create(Mission1, #MAFFA, 1712.399, -1657.463, 19.26)
+Actor.Health(45@) = 150
+Actor.Angle(45@) = 323.108
+060B: set_actor 45@ decision_maker_to 36@ 
+081A: set_actor 45@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(45@, Pistol, 9999)
+0860: link_actor 45@ to_interior 18 
+217@ = Marker.CreateAboveActor(45@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+Actor.WeaponAccuracy(45@) = 60
+0961: set_actor 45@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(45@, 150)
+Actor.Health(45@) = 150
+07DD: set_actor 45@ attack_rate 50 // previously known as temper_to 
+46@ = Actor.Create(Mission1, #MAFFA, 1712.763, -1664.816, 19.273)
+Actor.Angle(46@) = 329.331
+060B: set_actor 46@ decision_maker_to 36@ 
+Actor.GiveWeaponAndAmmo(46@, MP5, 9999)
+Actor.WeaponAccuracy(46@) = 70
+Actor.SetMaxHealth(46@, 150)
+Actor.Health(46@) = 150
+0860: link_actor 46@ to_interior 18 
+218@ = Marker.CreateAboveActor(46@)
+018B: set_marker 218@ radar_mode 2 
+Marker.SetIconSize(218@, 2)
+0961: set_actor 46@ keep_tasks_after_cleanup 1 
+47@ = Actor.Create(Mission1, #MAFFA, 1718.711, -1655.182, 19.108)
+Actor.Angle(47@) = 327.782
+060B: set_actor 47@ decision_maker_to 35@ 
+081A: set_actor 47@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(47@, Pistol, 9999)
+0860: link_actor 47@ to_interior 18 
+219@ = Marker.CreateAboveActor(47@)
+018B: set_marker 219@ radar_mode 2 
+Marker.SetIconSize(219@, 2)
+Actor.WeaponAccuracy(47@) = 60
+0961: set_actor 47@ keep_tasks_after_cleanup 1 
+48@ = Actor.Create(Mission1, #MAFFB, 1701.8, -1650.28, 19.26)
+Actor.Angle(48@) = 265.623
+060B: set_actor 48@ decision_maker_to 35@ 
+081A: set_actor 48@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(48@, Pistol, 9999)
+Actor.SetMaxHealth(48@, 150)
+Actor.Health(48@) = 150
+0860: link_actor 48@ to_interior 18 
+220@ = Marker.CreateAboveActor(48@)
+018B: set_marker 220@ radar_mode 2 
+Marker.SetIconSize(220@, 2)
+0961: set_actor 48@ keep_tasks_after_cleanup 1 
+07DD: set_actor 48@ attack_rate 60 // previously known as temper_to 
+51@ = Actor.Create(Mission1, #MAFFB, 1719.6, -1671.764, 22.741)
+Actor.Health(51@) = 5
+Actor.Angle(51@) = 11.45
+060B: set_actor 51@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(51@, MP5, 9999)
+0856: set_actor 51@ enable_crouch 0 
+0860: link_actor 51@ to_interior 18 
+223@ = Marker.CreateAboveActor(51@)
+018B: set_marker 223@ radar_mode 2 
+Marker.SetIconSize(223@, 2)
+0961: set_actor 51@ keep_tasks_after_cleanup 1 
+52@ = Actor.Create(Mission1, #MAFFB, 1701.897, -1668.039, 19.23)
+Actor.Angle(52@) = 276.178
+060B: set_actor 52@ decision_maker_to 35@ 
+081A: set_actor 52@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(52@, Pistol, 9999)
+0860: link_actor 52@ to_interior 18 
+Actor.WeaponAccuracy(52@) = 60
+224@ = Marker.CreateAboveActor(52@)
+018B: set_marker 224@ radar_mode 2 
+Marker.SetIconSize(224@, 2)
+0961: set_actor 52@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(52@, 150)
+Actor.Health(52@) = 150
+53@ = Actor.Create(Mission1, #MAFFA, 1725.037, -1672.69, 22.735)
+Actor.Angle(53@) = 127.283
+060B: set_actor 53@ decision_maker_to 35@ 
+081A: set_actor 53@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(53@, Pistol, 9999)
+Actor.WeaponAccuracy(53@) = 60
+0860: link_actor 53@ to_interior 18 
+225@ = Marker.CreateAboveActor(53@)
+018B: set_marker 225@ radar_mode 2 
+Marker.SetIconSize(225@, 2)
+0961: set_actor 53@ keep_tasks_after_cleanup 1 
+07DD: set_actor 53@ attack_rate 50 // previously known as temper_to 
+54@ = Actor.Create(Mission1, #MAFFA, 1733.358, -1664.599, 22.747)
+Actor.Angle(54@) = 141.981
+060B: set_actor 54@ decision_maker_to 35@ 
+081A: set_actor 54@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(54@, Pistol, 9999)
+Actor.WeaponAccuracy(54@) = 65
+0860: link_actor 54@ to_interior 18 
+226@ = Marker.CreateAboveActor(54@)
+018B: set_marker 226@ radar_mode 2 
+Marker.SetIconSize(226@, 2)
+0961: set_actor 54@ keep_tasks_after_cleanup 1 
+Actor.SetMaxHealth(54@, 150)
+Actor.Health(54@) = 150
+
+:DRUGS1_8432
+if 
+  $6898 == 0 
+jf @DRUGS1_8699 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_8699 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+0619: enable_actor $ACTOR_SMOKE collision_detection 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+0968: actor $ACTOR_SMOKE stop_mouth 
+0968: actor $PLAYER_ACTOR stop_mouth 
+Actor.PutAt($ACTOR_SMOKE, 1727.884, -1641.127, 19.2323)
+Actor.Angle($ACTOR_SMOKE) = 182.5173
+08AD: link_actor $ACTOR_SMOKE to_enex_marker_at 1727.009 -1635.826 radius 1.0 
+89@ = Marker.CreateAboveActor($ACTOR_SMOKE)
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 100
+0860: link_actor $ACTOR_SMOKE to_interior 18 
+07E0: set_marker 89@ type_to 1 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 1727.009 -1635.826 radius 1.0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Camera.SetAtPos(1727.884, -1641.127, 19.2323)
+Actor.GiveWeaponAndAmmo($ACTOR_SMOKE, MicroUzi, 99999)
+Actor.SetMaxHealth($ACTOR_SMOKE, 500)
+Actor.Health($ACTOR_SMOKE) = 500
+$6897 = Actor.Health($ACTOR_SMOKE)
+07DD: set_actor $ACTOR_SMOKE attack_rate 55 // previously known as temper_to 
+$6897 /= 5 
+03C4: set_status_text $6897 type 1 GXT 'DGS1_58' // global_variable  // Smoke
+04EB: AS_actor $ACTOR_SMOKE crouch 1 
+$6898 = 1 
+
+:DRUGS1_8699
+040D: unload_wav 1 
+02A3: enable_widescreen 1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1725.933, -1638.374, 19.2232)
+Actor.Angle($PLAYER_ACTOR) = 174.7897
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_8859 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_8816 
+03CF: load_wav 35622 as 1 
+jump @DRUGS1_8859 
+
+:DRUGS1_8816
+if 
+  5@ == 1 
+jf @DRUGS1_8850 
+03CF: load_wav 35623 as 1 
+jump @DRUGS1_8859 
+
+:DRUGS1_8850
+03CF: load_wav 35624 as 1 
+
+:DRUGS1_8859
+if 
+83D0:   not wav 1 loaded 
+jf @DRUGS1_8885 
+wait 0 
+jump @DRUGS1_8859 
+
+:DRUGS1_8885
+fade 1 250 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_9009 
+03D1: play_wav 1 
+if 
+  5@ == 0 
+jf @DRUGS1_8952 
+00BC: show_text_highpriority GXT 'SMO4_BJ' time 2500 flag 1  // ~z~That's my dog!
+jump @DRUGS1_9009 
+
+:DRUGS1_8952
+if 
+  5@ == 1 
+jf @DRUGS1_8993 
+00BC: show_text_highpriority GXT 'SMO4_BK' time 2500 flag 1  // ~z~What took you so long?
+jump @DRUGS1_9009 
+
+:DRUGS1_8993
+00BC: show_text_highpriority GXT 'SMO4_BL' time 2500 flag 1  // ~z~CJ, get in here - oh there you are!
+
+:DRUGS1_9009
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_9064 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9064 
+0085: 79@ = 42@ // (int) 
+008B: 80@ = $ACTOR_SMOKE // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_9064
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_9119 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9119 
+0085: 79@ = 44@ // (int) 
+008B: 80@ = $ACTOR_SMOKE // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_9119
+Camera.SetPosition(1726.528, -1637.829, 21.257, 0.0, 0.0, 0.0)
+Camera.PointAt(1726.477, -1638.779, 20.9496, 2)
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+05D3: AS_actor $PLAYER_ACTOR goto_point 1724.626 -1640.693 20.2245 mode 4 time -1 ms // versionA 
+32@ = 0 
+
+:DRUGS1_9208
+if or
+80EF:   not actor $PLAYER_ACTOR sphere 0 near_point 1724.626 -1640.693 radius 1.5 1.5 stopped 
+   not 32@ > 1500 
+jf @DRUGS1_9265 
+wait 0 
+jump @DRUGS1_9208 
+
+:DRUGS1_9265
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_9282 
+00BE: text_clear_all 
+
+:DRUGS1_9282
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 120)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.Angle($PLAYER_ACTOR) = 180.0
+02A3: enable_widescreen 0 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+04EF: release_animation "JST_BUISNESS" 
+Marker.Disable(88@)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(40@)
+Model.Destroy(#WFYST)
+Model.Destroy(#WFYRI)
+Actor.DestroyInstantly(63@)
+Car.Destroy(34@)
+Model.Destroy(#GLENDALE)
+Player.CanMove($PLAYER_CHAR) = True
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9430 
+Actor.SetImmunities($ACTOR_SMOKE, 0, 0, 0, 0, 0)
+
+:DRUGS1_9430
+040D: unload_wav 1 
+123@ = 1 
+282@ = 0 
+283@ = 0 
+125@ = 1 
+90@ = 11 
+32@ = 0 
+128@ = 2 
+
+:DRUGS1_9483
+if 
+  90@ == 11 
+jf @DRUGS1_16682 
+if 
+  128@ == 2 
+jf @DRUGS1_16682 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9550 
+$6897 = Actor.Health($ACTOR_SMOKE)
+$6897 /= 5 
+
+:DRUGS1_9550
+if 
+  126@ == 0 
+jf @DRUGS1_14350 
+if 
+  $6898 == 1 
+jf @DRUGS1_10043 
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_9625 
+0085: 79@ = 43@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_9625
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_9664 
+0085: 79@ = 45@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_9664
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_9719 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_9719 
+0085: 79@ = 46@ // (int) 
+008B: 80@ = $ACTOR_SMOKE // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_9719
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_9758 
+0085: 79@ = 47@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_9758
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_9797 
+0085: 79@ = 51@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_9797
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_9896 
+0085: 79@ = 53@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1728.416 
+82@ = -1669.709 
+83@ = 22.84935 
+84@ = 1721.637 
+85@ = -1662.946 
+86@ = 20.27 
+gosub @DRUGS1_54130 
+
+:DRUGS1_9896
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_10029 
+122@ = 1 
+0615: define_AS_pack_begin 69@ 
+04EB: AS_actor -1 crouch 1 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_9959 
+05E2: AS_actor -1 kill_actor 42@ 
+
+:DRUGS1_9959
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_9982 
+05E2: AS_actor -1 kill_actor 43@ 
+
+:DRUGS1_9982
+0638: AS_actor -1 stay_put 0 
+05D3: AS_actor -1 goto_point 1727.717 -1658.271 20.277 mode 6 time -1 ms // versionA 
+0616: define_AS_pack_end 69@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 69@ 
+061B: remove_references_to_AS_pack 69@ 
+
+:DRUGS1_10029
+32@ = 0 
+$6898 = 2 
+
+:DRUGS1_10043
+if 
+  $6898 == 2 
+jf @DRUGS1_10254 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_10254 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_10254 
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 50
+0615: define_AS_pack_begin 70@ 
+122@ = 2 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_10154 
+05E2: AS_actor -1 kill_actor 44@ 
+
+:DRUGS1_10154
+if 
+   not Actor.Dead(52@)
+jf @DRUGS1_10177 
+05E2: AS_actor -1 kill_actor 52@ 
+
+:DRUGS1_10177
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_10200 
+05E2: AS_actor -1 kill_actor 53@ 
+
+:DRUGS1_10200
+0638: AS_actor -1 stay_put 0 
+05F5: AS_actor -1 goto_point_using_paths 1719.854 -1666.667 20.271 mode 6 time -1 
+0616: define_AS_pack_end 70@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 70@ 
+061B: remove_references_to_AS_pack 70@ 
+$6898 = 3 
+
+:DRUGS1_10254
+if 
+  $6898 == 3 
+jf @DRUGS1_10458 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_10458 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_10458 
+122@ = 3 
+0615: define_AS_pack_begin 71@ 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_10358 
+05E2: AS_actor -1 kill_actor 46@ 
+
+:DRUGS1_10358
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_10381 
+05E2: AS_actor -1 kill_actor 47@ 
+
+:DRUGS1_10381
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_10404 
+05E2: AS_actor -1 kill_actor 48@ 
+
+:DRUGS1_10404
+0638: AS_actor -1 stay_put 0 
+05F5: AS_actor -1 goto_point_using_paths 1713.96 -1668.24 19.27 mode 6 time -1 
+0616: define_AS_pack_end 71@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 71@ 
+061B: remove_references_to_AS_pack 71@ 
+$6898 = 4 
+
+:DRUGS1_10458
+if 
+  $6898 == 4 
+jf @DRUGS1_10639 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_10639 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_10639 
+122@ = 4 
+0615: define_AS_pack_begin 72@ 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_10568 
+05E2: AS_actor -1 kill_actor 45@ 
+
+:DRUGS1_10568
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_10591 
+05E2: AS_actor -1 kill_actor 51@ 
+
+:DRUGS1_10591
+if 
+   not Actor.Dead(54@)
+jf @DRUGS1_10614 
+05E2: AS_actor -1 kill_actor 54@ 
+
+:DRUGS1_10614
+0616: define_AS_pack_end 72@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 72@ 
+061B: remove_references_to_AS_pack 72@ 
+$6898 = 5 
+
+:DRUGS1_10639
+if 
+  $6898 == 5 
+jf @DRUGS1_10774 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_10774 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_10774 
+122@ = 5 
+0615: define_AS_pack_begin 73@ 
+0638: AS_actor -1 stay_put 0 
+05F5: AS_actor -1 goto_point_using_paths 1704.45 -1667.71 19.68 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+0616: define_AS_pack_end 73@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 73@ 
+061B: remove_references_to_AS_pack 73@ 
+$6898 = 6 
+
+:DRUGS1_10774
+if 
+  94@ == 0 
+jf @DRUGS1_10849 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_10849 
+if 
+051A:   actor 44@ damaged_by_actor $PLAYER_ACTOR 
+jf @DRUGS1_10849 
+0638: AS_actor 44@ stay_put 0 
+05E2: AS_actor 44@ kill_actor $PLAYER_ACTOR 
+94@ = 1 
+
+:DRUGS1_10849
+if 
+  95@ == 0 
+jf @DRUGS1_10964 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1727.0 -1637.0 20.0 radius 3.0 3.0 5.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1700.19 -1667.58 20.0 radius 6.5 6.5 5.0 
+jf @DRUGS1_10964 
+Actor.DestroyWithFade(41@)
+95@ = 1 
+
+:DRUGS1_10964
+if 
+  96@ == 0 
+jf @DRUGS1_11242 
+if 
+056D:   actor 48@ defined 
+jf @DRUGS1_11242 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1707.16 -1643.73 17.0 cornerB 1735.9 -1653.46 22.0 
+051A:   actor 48@ damaged_by_actor $PLAYER_ACTOR 
+   Actor.Dead(44@)
+jf @DRUGS1_11242 
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_11136 
+0085: 79@ = 48@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1725.069 
+82@ = -1649.467 
+83@ = 19.27 
+03FE: set_actor 48@ money 250 
+gosub @DRUGS1_54218 
+
+:DRUGS1_11136
+if 
+   not Actor.Dead(52@)
+jf @DRUGS1_11235 
+0085: 79@ = 52@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1717.0 
+82@ = -1667.75 
+83@ = 20.27 
+84@ = 1715.609 
+85@ = -1657.258 
+86@ = 20.271 
+gosub @DRUGS1_54130 
+
+:DRUGS1_11235
+96@ = 1 
+
+:DRUGS1_11242
+if 
+  98@ == 0 
+jf @DRUGS1_11443 
+if 
+056D:   actor 54@ defined 
+jf @DRUGS1_11443 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1738.42 -1651.07 17.0 cornerB 1698.7 -1659.61 22.0 
+051A:   actor 54@ damaged_by_actor $PLAYER_ACTOR 
+   Actor.Dead(45@)
+jf @DRUGS1_11443 
+if 
+   not Actor.Dead(54@)
+jf @DRUGS1_11436 
+0085: 79@ = 54@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1729.928 
+82@ = -1667.75 
+83@ = 22.85 
+84@ = 1725.52 
+85@ = -1663.737 
+86@ = 20.5 
+gosub @DRUGS1_54130 
+
+:DRUGS1_11436
+98@ = 1 
+
+:DRUGS1_11443
+if 
+  7 > $6898 
+jf @DRUGS1_12099 
+if 
+  102@ == 0 
+jf @DRUGS1_11519 
+if 
+   Actor.Dead(42@)
+jf @DRUGS1_11519 
+Actor.RemoveReferences(42@)
+Marker.Disable(214@)
+124@ += 1 
+102@ = 1 
+
+:DRUGS1_11519
+if 
+  103@ == 0 
+jf @DRUGS1_11577 
+if 
+   Actor.Dead(43@)
+jf @DRUGS1_11577 
+Actor.RemoveReferences(43@)
+Marker.Disable(215@)
+124@ += 1 
+103@ = 1 
+
+:DRUGS1_11577
+if 
+  104@ == 0 
+jf @DRUGS1_11635 
+if 
+   Actor.Dead(44@)
+jf @DRUGS1_11635 
+Actor.RemoveReferences(44@)
+Marker.Disable(216@)
+124@ += 1 
+104@ = 1 
+
+:DRUGS1_11635
+if 
+  105@ == 0 
+jf @DRUGS1_11693 
+if 
+   Actor.Dead(45@)
+jf @DRUGS1_11693 
+Actor.RemoveReferences(45@)
+Marker.Disable(217@)
+124@ += 1 
+105@ = 1 
+
+:DRUGS1_11693
+if 
+  106@ == 0 
+jf @DRUGS1_11751 
+if 
+   Actor.Dead(46@)
+jf @DRUGS1_11751 
+Actor.RemoveReferences(46@)
+Marker.Disable(218@)
+124@ += 1 
+106@ = 1 
+
+:DRUGS1_11751
+if 
+  107@ == 0 
+jf @DRUGS1_11809 
+if 
+   Actor.Dead(47@)
+jf @DRUGS1_11809 
+Actor.RemoveReferences(47@)
+Marker.Disable(219@)
+124@ += 1 
+107@ = 1 
+
+:DRUGS1_11809
+if 
+  108@ == 0 
+jf @DRUGS1_11867 
+if 
+   Actor.Dead(48@)
+jf @DRUGS1_11867 
+Actor.RemoveReferences(48@)
+Marker.Disable(220@)
+124@ += 1 
+108@ = 1 
+
+:DRUGS1_11867
+if 
+  111@ == 0 
+jf @DRUGS1_11925 
+if 
+   Actor.Dead(51@)
+jf @DRUGS1_11925 
+Actor.RemoveReferences(51@)
+Marker.Disable(223@)
+124@ += 1 
+111@ = 1 
+
+:DRUGS1_11925
+if 
+  112@ == 0 
+jf @DRUGS1_11983 
+if 
+   Actor.Dead(52@)
+jf @DRUGS1_11983 
+Actor.RemoveReferences(52@)
+Marker.Disable(224@)
+124@ += 1 
+112@ = 1 
+
+:DRUGS1_11983
+if 
+  113@ == 0 
+jf @DRUGS1_12041 
+if 
+   Actor.Dead(53@)
+jf @DRUGS1_12041 
+Actor.RemoveReferences(53@)
+Marker.Disable(225@)
+124@ += 1 
+113@ = 1 
+
+:DRUGS1_12041
+if 
+  114@ == 0 
+jf @DRUGS1_12099 
+if 
+   Actor.Dead(54@)
+jf @DRUGS1_12099 
+Actor.RemoveReferences(54@)
+Marker.Disable(226@)
+124@ += 1 
+114@ = 1 
+
+:DRUGS1_12099
+if 
+  90@ == 11 
+jf @DRUGS1_13130 
+if 
+  126@ == 0 
+jf @DRUGS1_13130 
+gosub @DRUGS1_53966 
+if 
+  282@ == 0 
+jf @DRUGS1_12209 
+if 
+  283@ == 0 
+jf @DRUGS1_12209 
+04AF: 239@ = 35627 // = constant 
+05AA: 240@s = 'SMO4_BO' // @s = 'short'  // ~z~Use some cover, they're blasting like fools in this motherfucker!
+gosub @DRUGS1_53924 
+
+:DRUGS1_12209
+if 
+  282@ == 1 
+jf @DRUGS1_12383 
+if 
+  283@ == 0 
+jf @DRUGS1_12383 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_12303 
+04AF: 239@ = 35654 // = constant 
+05AA: 240@s = 'SMO4_EK' // @s = 'short'  // ~z~Ice those fools, CJ!
+jump @DRUGS1_12376 
+
+:DRUGS1_12303
+if 
+  5@ == 1 
+jf @DRUGS1_12352 
+04AF: 239@ = 35655 // = constant 
+05AA: 240@s = 'SMO4_EL' // @s = 'short'  // ~z~Pop they fuckin' brains out, CJ!
+jump @DRUGS1_12376 
+
+:DRUGS1_12352
+04AF: 239@ = 35656 // = constant 
+05AA: 240@s = 'SMO4_EM' // @s = 'short'  // ~z~Fill them fools up with holes, baby!
+
+:DRUGS1_12376
+gosub @DRUGS1_53924 
+
+:DRUGS1_12383
+if 
+  282@ == 2 
+jf @DRUGS1_12557 
+if 
+  283@ == 0 
+jf @DRUGS1_12557 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_12477 
+04AF: 239@ = 35631 // = constant 
+05AA: 240@s = 'SMO4_CA' // @s = 'short'  // ~z~Kill that shahkto bastard!
+jump @DRUGS1_12550 
+
+:DRUGS1_12477
+if 
+  5@ == 1 
+jf @DRUGS1_12526 
+04AF: 239@ = 35632 // = constant 
+05AA: 240@s = 'SMO4_CB' // @s = 'short'  // ~z~Kill the Americans!
+jump @DRUGS1_12550 
+
+:DRUGS1_12526
+04AF: 239@ = 35633 // = constant 
+05AA: 240@s = 'SMO4_CC' // @s = 'short'  // ~z~Kill the Amerikos!
+
+:DRUGS1_12550
+gosub @DRUGS1_53924 
+
+:DRUGS1_12557
+if 
+  282@ == 3 
+jf @DRUGS1_12624 
+if 
+  283@ == 0 
+jf @DRUGS1_12624 
+04AF: 239@ = 35626 // = constant 
+05AA: 240@s = 'SMO4_BN' // @s = 'short'  // ~z~Watch yourself, CJ, I think they's pissed!
+gosub @DRUGS1_53924 
+
+:DRUGS1_12624
+if 
+  282@ == 4 
+jf @DRUGS1_12798 
+if 
+  283@ == 0 
+jf @DRUGS1_12798 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_12718 
+04AF: 239@ = 35628 // = constant 
+05AA: 240@s = 'SMO4_BP' // @s = 'short'  // ~z~CJ, take the right and cover my ass!
+jump @DRUGS1_12791 
+
+:DRUGS1_12718
+if 
+  5@ == 1 
+jf @DRUGS1_12767 
+04AF: 239@ = 35629 // = constant 
+05AA: 240@s = 'SMO4_BQ' // @s = 'short'  // ~z~Stick to my right, CJ, I'm gunnin' for that bastard.
+jump @DRUGS1_12791 
+
+:DRUGS1_12767
+04AF: 239@ = 35630 // = constant 
+05AA: 240@s = 'SMO4_BR' // @s = 'short'  // ~z~Cover my right, CJ, blast them motherfucking fools!
+
+:DRUGS1_12791
+gosub @DRUGS1_53924 
+
+:DRUGS1_12798
+if 
+  282@ == 5 
+jf @DRUGS1_12865 
+if 
+  283@ == 0 
+jf @DRUGS1_12865 
+04AF: 239@ = 35651 // = constant 
+05AA: 240@s = 'SMO4_EG' // @s = 'short'  // ~z~Keep it up, baby!
+gosub @DRUGS1_53924 
+
+:DRUGS1_12865
+if 
+  282@ == 6 
+jf @DRUGS1_12932 
+if 
+  283@ == 0 
+jf @DRUGS1_12932 
+04AF: 239@ = 35653 // = constant 
+05AA: 240@s = 'SMO4_EJ' // @s = 'short'  // ~z~That's my dog, makin' y'all pay!
+gosub @DRUGS1_53924 
+
+:DRUGS1_12932
+if 
+  127@ == 0 
+jf @DRUGS1_12996 
+if or
+  $6898 == 6 
+  124@ == 11 
+jf @DRUGS1_12996 
+283@ = 0 
+282@ = 12 
+127@ = 1 
+
+:DRUGS1_12996
+if 
+  282@ == 12 
+jf @DRUGS1_13063 
+if 
+  283@ == 0 
+jf @DRUGS1_13063 
+04AF: 239@ = 35643 // = constant 
+05AA: 240@s = 'SMO4_DH' // @s = 'short'  // ~z~OK, we showed those fools!
+gosub @DRUGS1_53924 
+
+:DRUGS1_13063
+if 
+  282@ == 13 
+jf @DRUGS1_13130 
+if 
+  283@ == 0 
+jf @DRUGS1_13130 
+04AF: 239@ = 35644 // = constant 
+05AA: 240@s = 'SMO4_DJ' // @s = 'short'  // ~z~Stick with me CJ, we outta here, baby!
+gosub @DRUGS1_53924 
+
+:DRUGS1_13130
+if 
+  125@ == 1 
+jf @DRUGS1_13173 
+03E5: show_text_box 'DGS1_63'  // Shooting whilst you are crouching improves your accuracy.
+33@ = 0 
+125@ = 2 
+
+:DRUGS1_13173
+if 
+  125@ == 2 
+jf @DRUGS1_13235 
+if 
+  33@ > 10000 
+jf @DRUGS1_13235 
+03E5: show_text_box 'DGS1_2'  // If enemies are using cover it may be better to use manual aiming whilst shooting.
+33@ = 0 
+125@ = 3 
+
+:DRUGS1_13235
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14350 
+if 
+00FF:   actor $ACTOR_SMOKE sphere 0 in_sphere 1704.45 -1667.71 19.68 radius 6.0 6.0 4.0 on_foot 
+jf @DRUGS1_14350 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 1700.49 -1667.87 19.46 radius 8.5 8.5 4.0 on_foot 
+jf @DRUGS1_14350 
+if or
+  $6898 == 6 
+  124@ == 11 
+jf @DRUGS1_14350 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+fade 0 500 
+
+:DRUGS1_13394
+if 
+fading 
+jf @DRUGS1_13418 
+wait 0 
+jump @DRUGS1_13394 
+
+:DRUGS1_13418
+Player.CanMove($PLAYER_CHAR) = False
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_13529 
+select_interior 0 
+0860: link_actor $ACTOR_SMOKE to_interior 0 
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Actor.PutAt($ACTOR_SMOKE, 1696.229, -1669.133, 19.23)
+Actor.Angle($ACTOR_SMOKE) = 86.7366
+Actor.PutAt($PLAYER_ACTOR, 1696.339, -1666.897, 19.2)
+Actor.Angle($PLAYER_ACTOR) = 85.4
+
+:DRUGS1_13529
+49@ = Actor.Create(Mission1, #MAFFB, 1682.685, -1671.516, 19.24)
+Actor.Angle(49@) = 289.407
+060B: set_actor 49@ decision_maker_to 35@ 
+081A: set_actor 49@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(49@, Pistol, 9999)
+Actor.WeaponAccuracy(49@) = 50
+Actor.Health(49@) = 150
+214@ = Marker.CreateAboveActor(49@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+0961: set_actor 49@ keep_tasks_after_cleanup 1 
+55@ = Actor.Create(Mission1, #MAFFA, 1676.529, -1676.516, 20.47)
+Actor.Angle(55@) = 299.59
+060B: set_actor 55@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(55@, MP5, 9999)
+Actor.WeaponAccuracy(55@) = 30
+Actor.Health(55@) = 150
+0856: set_actor 55@ enable_crouch 0 
+215@ = Marker.CreateAboveActor(55@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+0961: set_actor 55@ keep_tasks_after_cleanup 1 
+56@ = Actor.Create(Mission1, #MAFFA, 1645.896, -1667.693, 20.472)
+Actor.Angle(56@) = 270.18
+060B: set_actor 56@ decision_maker_to 35@ 
+081A: set_actor 56@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(56@, Pistol, 9999)
+Actor.WeaponAccuracy(56@) = 60
+Actor.Health(56@) = 150
+216@ = Marker.CreateAboveActor(56@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+0961: set_actor 56@ keep_tasks_after_cleanup 1 
+57@ = Actor.Create(Mission1, #MAFFA, 1663.022, -1685.541, 20.469)
+Actor.Angle(57@) = 301.304
+060B: set_actor 57@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(57@, MP5, 9999)
+Actor.WeaponAccuracy(57@) = 50
+Actor.Health(57@) = 125
+217@ = Marker.CreateAboveActor(57@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+0961: set_actor 57@ keep_tasks_after_cleanup 1 
+58@ = Actor.Create(Mission1, #MAFFA, 1663.079, -1676.61, 20.468)
+Actor.Angle(58@) = 268.5
+060B: set_actor 58@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(58@, MP5, 9999)
+Actor.WeaponAccuracy(58@) = 60
+Actor.SetMaxHealth(58@, 125)
+Actor.Health(58@) = 125
+0856: set_actor 58@ enable_crouch 0 
+218@ = Marker.CreateAboveActor(58@)
+018B: set_marker 218@ radar_mode 2 
+Marker.SetIconSize(218@, 2)
+0961: set_actor 58@ keep_tasks_after_cleanup 1 
+59@ = Actor.Create(Mission1, #MAFFA, 1662.793, -1670.124, 20.463)
+Actor.Angle(59@) = 268.5
+060B: set_actor 59@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(59@, MP5, 9999)
+02A9: set_actor 59@ immune_to_nonplayer 1 
+Actor.WeaponAccuracy(59@) = 60
+Actor.SetMaxHealth(59@, 150)
+Actor.Health(59@) = 150
+219@ = Marker.CreateAboveActor(59@)
+018B: set_marker 219@ radar_mode 2 
+Marker.SetIconSize(219@, 2)
+0961: set_actor 59@ keep_tasks_after_cleanup 1 
+50@ = Actor.Create(Mission1, #MAFFA, 1698.51, -1678.459, 19.233)
+Actor.Angle(50@) = 99.699
+060B: set_actor 50@ decision_maker_to 35@ 
+081A: set_actor 50@ weapon_skill_to 2 
+Actor.GiveWeaponAndAmmo(50@, Pistol, 9999)
+Actor.WeaponAccuracy(50@) = 30
+Actor.Health(50@) = 150
+220@ = Marker.CreateAboveActor(50@)
+018B: set_marker 220@ radar_mode 2 
+Marker.SetIconSize(220@, 2)
+0961: set_actor 50@ keep_tasks_after_cleanup 1 
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+wait 500 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14299 
+Actor.SetImmunities($ACTOR_SMOKE, 0, 0, 0, 0, 0)
+
+:DRUGS1_14299
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 750 
+124@ = 0 
+$6898 = 6 
+282@ = 0 
+283@ = 0 
+126@ = 1 
+
+:DRUGS1_14350
+if 
+  126@ == 1 
+jf @DRUGS1_16682 
+if 
+  $6898 == 6 
+jf @DRUGS1_14543 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14543 
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 80
+0615: define_AS_pack_begin 74@ 
+04EB: AS_actor -1 crouch 1 
+05D3: AS_actor -1 goto_point 1690.24 -1669.363 21.46 mode 6 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_14472 
+05E2: AS_actor -1 kill_actor 49@ 
+
+:DRUGS1_14472
+if 
+   not Actor.Dead(55@)
+jf @DRUGS1_14495 
+05E2: AS_actor -1 kill_actor 55@ 
+
+:DRUGS1_14495
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_14518 
+05E2: AS_actor -1 kill_actor 56@ 
+
+:DRUGS1_14518
+0616: define_AS_pack_end 74@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 74@ 
+061B: remove_references_to_AS_pack 74@ 
+$6898 = 7 
+
+:DRUGS1_14543
+if 
+  $6898 == 7 
+jf @DRUGS1_14741 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14741 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_14741 
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 60
+0615: define_AS_pack_begin 75@ 
+05F5: AS_actor -1 goto_point_using_paths 1669.82 -1671.917 21.43 mode 6 time -1 
+0638: AS_actor -1 stay_put 1 
+if 
+   not Actor.Dead(58@)
+jf @DRUGS1_14670 
+05E2: AS_actor -1 kill_actor 58@ 
+
+:DRUGS1_14670
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_14693 
+05E2: AS_actor -1 kill_actor 56@ 
+
+:DRUGS1_14693
+if 
+   not Actor.Dead(59@)
+jf @DRUGS1_14716 
+05E2: AS_actor -1 kill_actor 59@ 
+
+:DRUGS1_14716
+0616: define_AS_pack_end 75@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 75@ 
+061B: remove_references_to_AS_pack 75@ 
+$6898 = 8 
+
+:DRUGS1_14741
+if 
+  $6898 == 8 
+jf @DRUGS1_14886 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14886 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if 
+04A4:   77@ == 7 // == constant 
+jf @DRUGS1_14886 
+0615: define_AS_pack_begin 76@ 
+04EB: AS_actor -1 crouch 1 
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_14838 
+05E2: AS_actor -1 kill_actor 50@ 
+
+:DRUGS1_14838
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_14861 
+05E2: AS_actor -1 kill_actor 57@ 
+
+:DRUGS1_14861
+0616: define_AS_pack_end 76@ 
+0618: assign_actor $ACTOR_SMOKE to_AS_pack 76@ 
+061B: remove_references_to_AS_pack 76@ 
+$6898 = 9 
+
+:DRUGS1_14886
+if 
+  $6898 == 9 
+jf @DRUGS1_14977 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_14977 
+062E: get_actor $ACTOR_SMOKE task 1560 status_store_to 77@ // ret 7 if not found 
+if or
+04A4:   77@ == 7 // == constant 
+  124@ == 7 
+jf @DRUGS1_14977 
+33@ = 0 
+284@ = 1 
+90@ = 12 
+
+:DRUGS1_14977
+if 
+  124@ == 7 
+jf @DRUGS1_15016 
+33@ = 0 
+284@ = 1 
+90@ = 12 
+
+:DRUGS1_15016
+if 
+  100@ == 0 
+jf @DRUGS1_15300 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_15300 
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_15105 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_15105 
+0085: 79@ = 49@ // (int) 
+008B: 80@ = $ACTOR_SMOKE // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_15105
+if 
+   not Actor.Dead(55@)
+jf @DRUGS1_15144 
+0085: 79@ = 55@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_15144
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_15199 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_15199 
+0085: 79@ = 57@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_15199
+if 
+   not Actor.Dead(58@)
+jf @DRUGS1_15238 
+0085: 79@ = 58@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_15238
+if 
+   not Actor.Dead(59@)
+jf @DRUGS1_15293 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_15293 
+0085: 79@ = 59@ // (int) 
+008B: 80@ = $ACTOR_SMOKE // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_15293
+100@ = 1 
+
+:DRUGS1_15300
+if 
+  101@ == 0 
+jf @DRUGS1_15479 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_15479 
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_15403 
+0085: 79@ = 50@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1669.863 
+82@ = -1679.125 
+83@ = 20.47 
+gosub @DRUGS1_54075 
+
+:DRUGS1_15403
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_15472 
+0085: 79@ = 56@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+81@ = 1675.149 
+82@ = -1667.818 
+83@ = 20.47 
+gosub @DRUGS1_54075 
+
+:DRUGS1_15472
+101@ = 1 
+
+:DRUGS1_15479
+if 
+  282@ == 0 
+jf @DRUGS1_15653 
+if 
+  283@ == 0 
+jf @DRUGS1_15653 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_15573 
+04AF: 239@ = 35645 // = constant 
+05AA: 240@s = 'SMO4_EA' // @s = 'short'  // ~z~Stay close, CJ!
+jump @DRUGS1_15646 
+
+:DRUGS1_15573
+if 
+  5@ == 1 
+jf @DRUGS1_15622 
+04AF: 239@ = 35646 // = constant 
+05AA: 240@s = 'SMO4_EB' // @s = 'short'  // ~z~Stick real close, Carl!
+jump @DRUGS1_15646 
+
+:DRUGS1_15622
+04AF: 239@ = 35647 // = constant 
+05AA: 240@s = 'SMO4_EC' // @s = 'short'  // ~z~CJ, stay with me, homie!
+
+:DRUGS1_15646
+gosub @DRUGS1_53924 
+
+:DRUGS1_15653
+if 
+  282@ == 1 
+jf @DRUGS1_15720 
+if 
+  283@ == 0 
+jf @DRUGS1_15720 
+04AF: 239@ = 35625 // = constant 
+05AA: 240@s = 'SMO4_BM' // @s = 'short'  // ~z~Keep your head down, the air is thick as shit in here.
+gosub @DRUGS1_53924 
+
+:DRUGS1_15720
+if 
+  282@ == 2 
+jf @DRUGS1_15894 
+if 
+  283@ == 0 
+jf @DRUGS1_15894 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_15814 
+04AF: 239@ = 35642 // = constant 
+05AA: 240@s = 'SMO4_DG' // @s = 'short'  // ~z~Smoke, you and your friend are dead men!
+jump @DRUGS1_15887 
+
+:DRUGS1_15814
+if 
+  5@ == 1 
+jf @DRUGS1_15863 
+04AF: 239@ = 35641 // = constant 
+05AA: 240@s = 'SMO4_DF' // @s = 'short'  // ~z~You should not have come here, Big Smoke!
+jump @DRUGS1_15887 
+
+:DRUGS1_15863
+04AF: 239@ = 35640 // = constant 
+05AA: 240@s = 'SMO4_DE' // @s = 'short'  // ~z~Big Smoke, you made big mistake, huh!
+
+:DRUGS1_15887
+gosub @DRUGS1_53924 
+
+:DRUGS1_15894
+if 
+  282@ == 3 
+jf @DRUGS1_15961 
+if 
+  283@ == 0 
+jf @DRUGS1_15961 
+04AF: 239@ = 35620 // = constant 
+05AA: 240@s = 'SMO4_BG' // @s = 'short'  // ~z~Motherfuckers!
+gosub @DRUGS1_53924 
+
+:DRUGS1_15961
+if 
+  282@ == 4 
+jf @DRUGS1_16135 
+if 
+  283@ == 0 
+jf @DRUGS1_16135 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_16055 
+04AF: 239@ = 35648 // = constant 
+05AA: 240@s = 'SMO4_ED' // @s = 'short'  // ~z~Back me up!
+jump @DRUGS1_16128 
+
+:DRUGS1_16055
+if 
+  5@ == 1 
+jf @DRUGS1_16104 
+04AF: 239@ = 35649 // = constant 
+05AA: 240@s = 'SMO4_EE' // @s = 'short'  // ~z~Keep up, baby!
+jump @DRUGS1_16128 
+
+:DRUGS1_16104
+04AF: 239@ = 35651 // = constant 
+05AA: 240@s = 'SMO4_EG' // @s = 'short'  // ~z~Keep it up, baby!
+
+:DRUGS1_16128
+gosub @DRUGS1_53924 
+
+:DRUGS1_16135
+if 
+  282@ == 5 
+jf @DRUGS1_16202 
+if 
+  283@ == 0 
+jf @DRUGS1_16202 
+04AF: 239@ = 35650 // = constant 
+05AA: 240@s = 'SMO4_EF' // @s = 'short'  // ~z~That's my homie, CJ!
+gosub @DRUGS1_53924 
+
+:DRUGS1_16202
+if 
+  282@ == 6 
+jf @DRUGS1_16269 
+if 
+  283@ == 0 
+jf @DRUGS1_16269 
+04AF: 239@ = 35652 // = constant 
+05AA: 240@s = 'SMO4_EH' // @s = 'short'  // ~z~Ha, ha ha ha, homie, you ice cold, baby!
+gosub @DRUGS1_53924 
+
+:DRUGS1_16269
+gosub @DRUGS1_53966 
+if 
+  109@ == 0 
+jf @DRUGS1_16334 
+if 
+   Actor.Dead(49@)
+jf @DRUGS1_16334 
+Actor.RemoveReferences(49@)
+Marker.Disable(214@)
+124@ += 1 
+109@ = 1 
+
+:DRUGS1_16334
+if 
+  115@ == 0 
+jf @DRUGS1_16392 
+if 
+   Actor.Dead(55@)
+jf @DRUGS1_16392 
+Actor.RemoveReferences(55@)
+Marker.Disable(215@)
+124@ += 1 
+115@ = 1 
+
+:DRUGS1_16392
+if 
+  116@ == 0 
+jf @DRUGS1_16450 
+if 
+   Actor.Dead(56@)
+jf @DRUGS1_16450 
+Actor.RemoveReferences(56@)
+Marker.Disable(216@)
+124@ += 1 
+116@ = 1 
+
+:DRUGS1_16450
+if 
+  117@ == 0 
+jf @DRUGS1_16508 
+if 
+   Actor.Dead(57@)
+jf @DRUGS1_16508 
+Actor.RemoveReferences(57@)
+Marker.Disable(217@)
+124@ += 1 
+117@ = 1 
+
+:DRUGS1_16508
+if 
+  118@ == 0 
+jf @DRUGS1_16566 
+if 
+   Actor.Dead(58@)
+jf @DRUGS1_16566 
+Actor.RemoveReferences(58@)
+Marker.Disable(218@)
+124@ += 1 
+118@ = 1 
+
+:DRUGS1_16566
+if 
+  119@ == 0 
+jf @DRUGS1_16624 
+if 
+   Actor.Dead(59@)
+jf @DRUGS1_16624 
+Actor.RemoveReferences(59@)
+Marker.Disable(219@)
+124@ += 1 
+119@ = 1 
+
+:DRUGS1_16624
+if 
+  110@ == 0 
+jf @DRUGS1_16682 
+if 
+   Actor.Dead(50@)
+jf @DRUGS1_16682 
+Actor.RemoveReferences(50@)
+Marker.Disable(220@)
+124@ += 1 
+110@ = 1 
+
+:DRUGS1_16682
+if 
+  284@ == 1 
+jf @DRUGS1_16726 
+if 
+  33@ > 2000 
+jf @DRUGS1_16726 
+284@ = 2 
+
+:DRUGS1_16726
+if 
+  284@ == 2 
+jf @DRUGS1_18365 
+if 
+  90@ == 12 
+jf @DRUGS1_17335 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_17335 
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+0395: clear_area 0 at 1672.32 -1697.259 200.0 radius 200.0 
+Camera.SetPosition(1672.32, -1697.259, 20.6216, 0.0, 0.0, 0.0)
+Camera.PointAt(1672.069, -1696.5, 21.2228, 2)
+0151: remove_status_text $6897 
+Marker.Disable(89@)
+0792: disembark_instantly_actor $ACTOR_SMOKE 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($ACTOR_SMOKE, 1668.756, -1689.291, 20.869)
+Actor.Angle($ACTOR_SMOKE) = 203.5
+Actor.PutAt($PLAYER_ACTOR, 1667.26, -1683.5, 20.869)
+Actor.Angle($PLAYER_ACTOR) = 203.5
+Model.Destroy(#MP5LNG)
+Model.Destroy(#COLT45)
+Model.Destroy(#MAFFB)
+040D: unload_wav 2 
+0209: 5@ = random_int_in_ranges 0 4 
+if 
+  5@ == 0 
+jf @DRUGS1_17014 
+03CF: load_wav 35657 as 2 
+jump @DRUGS1_17091 
+
+:DRUGS1_17014
+if 
+  5@ == 1 
+jf @DRUGS1_17048 
+03CF: load_wav 35658 as 2 
+jump @DRUGS1_17091 
+
+:DRUGS1_17048
+if 
+  5@ == 2 
+jf @DRUGS1_17082 
+03CF: load_wav 35659 as 2 
+jump @DRUGS1_17091 
+
+:DRUGS1_17082
+03CF: load_wav 35660 as 2 
+
+:DRUGS1_17091
+07C0: load_path 250 
+07C0: load_path 251 
+07C0: load_path 252 
+Model.Load(#BF400)
+wait 100 
+038B: load_requested_models 
+
+:DRUGS1_17117
+if or
+87C1:   not path 250 available 
+87C1:   not path 251 available 
+87C1:   not path 252 available 
+   not Model.Available(#BF400)
+jf @DRUGS1_17159 
+wait 0 
+jump @DRUGS1_17117 
+
+:DRUGS1_17159
+if 
+83D0:   not wav 2 loaded 
+jf @DRUGS1_17185 
+wait 0 
+jump @DRUGS1_17159 
+
+:DRUGS1_17185
+Actor.DestroyInstantly(63@)
+0395: clear_area 0 at 1668.67 -1694.68 19.97 radius 200.0 
+0674: set_car_model #BF400 numberplate "_IMY_AK_" 
+161@ = Car.Create(#BF400, 1671.791, -1695.106, 19.48)
+Car.Angle(161@) = 117.5347
+Car.SetImmunities(161@, 0, 1, 1, 1, 1)
+0460: set_camera_transverse_delay 0.0 time 3000 
+053F: set_car 161@ tires_vulnerability 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 99999)
+Car.Health(161@) = 2000
+053F: set_car 161@ tires_vulnerability 0 
+32@ = 0 
+90@ = 13 
+
+:DRUGS1_17335
+if 
+  90@ == 13 
+jf @DRUGS1_17450 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_17450 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_17450 
+Camera.SetPosition(1672.32, -1697.259, 20.6216, 0.0, 0.0, 0.0)
+Camera.PointAt(1672.069, -1696.5, 20.6212, 1)
+32@ = 0 
+90@ = 14 
+
+:DRUGS1_17450
+if 
+  90@ == 14 
+jf @DRUGS1_17704 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_17704 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_17704 
+if 
+  32@ > 900 
+jf @DRUGS1_17704 
+05CB: AS_actor $ACTOR_SMOKE enter_car 161@ as_driver 5000 ms 
+05CA: AS_actor $PLAYER_ACTOR enter_car 161@ passenger_seat 0 time 5000 
+040D: unload_wav 1 
+03D1: play_wav 2 
+if 
+  5@ == 0 
+jf @DRUGS1_17592 
+00BC: show_text_highpriority GXT 'SMO4_EN' time 5000 flag 1  // ~z~Get on the back, CJ!
+jump @DRUGS1_17690 
+
+:DRUGS1_17592
+if 
+  5@ == 1 
+jf @DRUGS1_17633 
+00BC: show_text_highpriority GXT 'SMO4_EO' time 5000 flag 1  // ~z~Time to return the favor baby, get on!
+jump @DRUGS1_17690 
+
+:DRUGS1_17633
+if 
+  5@ == 2 
+jf @DRUGS1_17674 
+00BC: show_text_highpriority GXT 'SMO4_EP' time 5000 flag 1  // ~z~I'll got it this time, get on the back!
+jump @DRUGS1_17690 
+
+:DRUGS1_17674
+00BC: show_text_highpriority GXT 'SMO4_EQ' time 5000 flag 1  // ~z~You're rear gunner this time, CJ!
+
+:DRUGS1_17690
+127@ = 2 
+90@ = 15 
+
+:DRUGS1_17704
+if 
+  90@ == 15 
+jf @DRUGS1_17913 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_17913 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_17913 
+if 
+0448:   actor $ACTOR_SMOKE in_car 161@ 
+jf @DRUGS1_17913 
+Camera.SetPosition(1672.983, -1692.091, 19.8891, 0.0, 0.0, 0.0)
+Camera.PointAt(1672.57, -1692.998, 19.9589, 2)
+Camera.OnVehicle(161@, 15, 2)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 1674.371, -1695.097, 19.814)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+05CA: AS_actor $PLAYER_ACTOR enter_car 161@ passenger_seat 0 time 5000 
+05BF: AS_actor $ACTOR_SMOKE look_at_actor $PLAYER_ACTOR 2000 ms 
+08C6: set_actor $PLAYER_ACTOR stay_on_bike 1 
+08C6: set_actor $ACTOR_SMOKE stay_on_bike 1 
+90@ = 16 
+
+:DRUGS1_17913
+if 
+  90@ == 16 
+jf @DRUGS1_18013 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_18013 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_18013 
+if 
+0448:   actor $PLAYER_ACTOR in_car 161@ 
+jf @DRUGS1_18013 
+041E: set_radio_station 6 
+0647: AS_actor $ACTOR_SMOKE clear_look_task 
+05EB: assign_car 161@ to_path 250 
+32@ = 0 
+90@ = 17 
+
+:DRUGS1_18013
+if 
+  90@ == 17 
+jf @DRUGS1_18206 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_18206 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_18206 
+if 
+0448:   actor $PLAYER_ACTOR in_car 161@ 
+jf @DRUGS1_18206 
+if 
+  32@ > 1600 
+jf @DRUGS1_18206 
+Camera.SetPosition(1623.331, -1705.448, 19.7991, 0.0, 0.0, 0.0)
+Camera.PointAt(1624.331, -1705.475, 19.7991, 2)
+05EC: release_car 161@ from_path 
+wait 0 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_18185 
+05EB: assign_car 161@ to_path 251 
+
+:DRUGS1_18185
+32@ = 0 
+284@ = 3 
+90@ = 18 
+
+:DRUGS1_18206
+if 
+  127@ == 2 
+jf @DRUGS1_18365 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_18365 
+if 
+  5@ == 0 
+jf @DRUGS1_18275 
+03D5: remove_text 'SMO4_EN'  // ~z~Get on the back, CJ!
+jump @DRUGS1_18358 
+
+:DRUGS1_18275
+if 
+  5@ == 1 
+jf @DRUGS1_18311 
+03D5: remove_text 'SMO4_EO'  // ~z~Time to return the favor baby, get on!
+jump @DRUGS1_18358 
+
+:DRUGS1_18311
+if 
+  5@ == 2 
+jf @DRUGS1_18347 
+03D5: remove_text 'SMO4_EP'  // ~z~I'll got it this time, get on the back!
+jump @DRUGS1_18358 
+
+:DRUGS1_18347
+03D5: remove_text 'SMO4_EQ'  // ~z~You're rear gunner this time, CJ!
+
+:DRUGS1_18358
+127@ = 3 
+
+:DRUGS1_18365
+if or
+  243@ == 0 
+  243@ == 1 
+  243@ == 2 
+  243@ == 3 
+jf @DRUGS1_18587 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_18587 
+if 
+   not 280@ > 3 
+jf @DRUGS1_18587 
+$6899 = Car.Health(161@)
+$6899 -= 1000 
+if 
+  0 >= $6899 
+jf @DRUGS1_18580 
+$6899 = 0 
+Car.SetImmunities(161@, 0, 0, 0, 0, 0)
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_18545 
+Actor.SetImmunities($ACTOR_SMOKE, 0, 0, 0, 0, 0)
+05BE: AS_actor $ACTOR_SMOKE die 
+
+:DRUGS1_18545
+020B: explode_car 161@ 
+00BC: show_text_highpriority GXT 'DGS1_60' time 7000 flag 1  // ~r~Smoke died!
+jump @DRUGS1_54349 
+jump @DRUGS1_18587 
+
+:DRUGS1_18580
+$6899 /= 10 
+
+:DRUGS1_18587
+if 
+  243@ == 0 
+jf @DRUGS1_24719 
+if 
+  90@ == 18 
+jf @DRUGS1_19926 
+if 
+  32@ > 700 
+jf @DRUGS1_19926 
+$TEMPVAR_FLOAT_3 = 19.7991 
+07C0: load_path 253 
+07C0: load_path 254 
+07C0: load_path 255 
+07C0: load_path 256 
+07C0: load_path 257 
+Model.Load(#SULTAN)
+Model.Load(#KMB_SKIP)
+Model.Load(#NEBULA)
+Model.Load(#COACH)
+Model.Load(#PACKER)
+040D: unload_wav 1 
+03CF: load_wav 35663 as 1 
+038B: load_requested_models 
+
+:DRUGS1_18717
+if or
+87C1:   not path 253 available 
+87C1:   not path 254 available 
+87C1:   not path 255 available 
+87C1:   not path 256 available 
+87C1:   not path 257 available 
+jf @DRUGS1_18764 
+wait 0 
+jump @DRUGS1_18717 
+
+:DRUGS1_18764
+if or
+   not Model.Available(#SULTAN)
+   not Model.Available(#KMB_SKIP)
+   not Model.Available(#NEBULA)
+   not Model.Available(#COACH)
+   not Model.Available(#PACKER)
+83D0:   not wav 1 loaded 
+jf @DRUGS1_18815 
+wait 0 
+jump @DRUGS1_18764 
+
+:DRUGS1_18815
+162@ = Object.Create(#KMB_SKIP, 1563.603, -1437.107, 12.347)
+Object.Angle(162@) = 90.4568
+Object.KeepInMemory(162@) = True
+163@ = Car.Create(#COACH, 1552.209, -1437.3, 12.3828)
+Car.Angle(163@) = 90.2081
+Car.LockInCurrentPosition(163@) = True
+164@ = Car.Create(#COACH, 1539.759, -1437.34, 12.3906)
+Car.Angle(164@) = 90.2081
+Car.LockInCurrentPosition(164@) = True
+165@ = Car.Create(#NEBULA, 1680.473, -1589.874, 13.23)
+Car.Angle(165@) = 87.883
+0229: set_car 165@ primary_color_to 3 secondary_color_to 3 
+177@ = Actor.CreateAsDriver(Mission2, #MALE01, 165@)
+060B: set_actor 177@ decision_maker_to 35@ 
+166@ = Car.Create(#NEBULA, 1594.553, -1595.039, 13.243)
+Car.Angle(166@) = 271.189
+0229: set_car 166@ primary_color_to 8 secondary_color_to 8 
+178@ = Actor.CreateAsDriver(Mission2, #MALE01, 166@)
+060B: set_actor 178@ decision_maker_to 35@ 
+167@ = Car.Create(#NEBULA, 1655.527, -1550.667, 13.226)
+Car.Angle(167@) = 180.735
+0229: set_car 167@ primary_color_to 51 secondary_color_to 51 
+179@ = Actor.CreateAsDriver(Mission2, #MALE01, 167@)
+060B: set_actor 179@ decision_maker_to 35@ 
+168@ = Car.Create(#NEBULA, 1655.391, -1463.511, 13.22)
+Car.Angle(168@) = 180.735
+0229: set_car 168@ primary_color_to 4 secondary_color_to 4 
+01EC: make_car 168@ very_heavy 1 
+180@ = Actor.CreateAsDriver(Mission2, #MALE01, 168@)
+060B: set_actor 180@ decision_maker_to 35@ 
+169@ = Car.Create(#NEBULA, 1660.788, -1563.222, 13.23)
+Car.Angle(169@) = 358.832
+0229: set_car 169@ primary_color_to 73 secondary_color_to 73 
+181@ = Actor.CreateAsDriver(Mission2, #MALE01, 169@)
+060B: set_actor 181@ decision_maker_to 35@ 
+170@ = Car.Create(#NEBULA, 1660.594, -1522.353, 13.225)
+Car.Angle(170@) = 358.832
+0229: set_car 170@ primary_color_to 99 secondary_color_to 99 
+182@ = Actor.CreateAsDriver(Mission2, #MALE01, 170@)
+060B: set_actor 182@ decision_maker_to 35@ 
+171@ = Car.Create(#NEBULA, 1693.236, -1589.973, 13.224)
+Car.Angle(171@) = 91.298
+0229: set_car 171@ primary_color_to 2 secondary_color_to 2 
+01EC: make_car 171@ very_heavy 1 
+183@ = Actor.CreateAsDriver(Mission2, #MALE01, 171@)
+060B: set_actor 183@ decision_maker_to 35@ 
+188@ = Car.Create(#PACKER, 1590.891, -1590.689, 13.09)
+09C4: set_car 188@ gas_tank_explosion_enabled 0 
+Car.Angle(188@) = 273.516
+Car.Health(188@) = 3000
+Car.ImmuneToNonPlayer(188@) = True
+42@ = Actor.CreateAsDriver(Mission2, #MAFFA, 188@)
+060B: set_actor 42@ decision_maker_to 35@ 
+054A: set_actor 42@ can_be_shot_in_a_car 0 
+209@ = Marker.CreateAboveCar(188@)
+018B: set_marker 209@ radar_mode 2 
+Marker.SetIconSize(209@, 2)
+Car.SetImmunities(188@, 0, 1, 1, 1, 1)
+275@ = 1 
+32@ = 0 
+
+:DRUGS1_19516
+if 
+  $TEMPVAR_FLOAT_3 > 13.8442 
+jf @DRUGS1_19919 
+wait 0 
+007E: $TEMPVAR_FLOAT_3 -= frame_delta_time * 0.02 // (float) 
+Camera.SetPosition(1623.331, -1705.448, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+Camera.PointAt(1624.331, -1705.475, $TEMPVAR_FLOAT_3, 2)
+if 
+  271@ == 0 
+jf @DRUGS1_19912 
+if 
+  32@ > 1000 
+jf @DRUGS1_19912 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_19912 
+if 
+860E:   not car 161@ assigned_to_path 
+jf @DRUGS1_19912 
+189@ = Car.Create(#BF400, 1665.25, -1716.98, 12.75)
+09C4: set_car 189@ gas_tank_explosion_enabled 0 
+Car.Angle(189@) = 84.0
+Car.Health(189@) = 800
+43@ = Actor.CreateAsDriver(Mission2, #MAFFA, 189@)
+060B: set_actor 43@ decision_maker_to 35@ 
+Actor.Health(43@) = 10
+02A9: set_actor 43@ immune_to_nonplayer 1 
+44@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 189@, 0)
+Actor.GiveWeaponAndAmmo(44@, MicroUzi, 99999)
+060B: set_actor 44@ decision_maker_to 35@ 
+Actor.Health(44@) = 10
+02A9: set_actor 44@ immune_to_nonplayer 1 
+214@ = Marker.CreateAboveCar(189@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+247@ = 1 
+260@ = 1 
+wait 0 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_19871 
+05EB: assign_car 161@ to_path 252 
+06FD: set_car 161@ speed_on_path_to 0.9 
+
+:DRUGS1_19871
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_19905 
+05EB: assign_car 189@ to_path 256 
+06FD: set_car 189@ speed_on_path_to 0.9 
+
+:DRUGS1_19905
+271@ = 1 
+
+:DRUGS1_19912
+jump @DRUGS1_19516 
+
+:DRUGS1_19919
+90@ = 19 
+
+:DRUGS1_19926
+if 
+  90@ == 19 
+jf @DRUGS1_20328 
+if 
+  32@ > 8500 
+jf @DRUGS1_20328 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_20328 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_20328 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 99999)
+0713: actor $PLAYER_ACTOR driveby_actor -1 car -1 point 0.0 0.0 0.0 radius 300.0 8 1 firing_rate 100 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 95.5 rotation_speed 200.0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+03C4: set_status_text $6899 type 1 GXT 'DGS1_59' // global_variable  // Bike
+288@ += 1 
+if 
+  288@ > 1 
+jf @DRUGS1_20127 
+289@ = 30 
+jump @DRUGS1_20134 
+
+:DRUGS1_20127
+289@ = 92 
+
+:DRUGS1_20134
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_20199 
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 99999)
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_20199
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_20251 
+0713: actor 44@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+
+:DRUGS1_20251
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+03E5: show_text_box 'DGS1_64'  // To look around on the bike use the camera movement controls. To fire press ~k~~PED_FIREWEAPON~.
+282@ = 0 
+283@ = 0 
+33@ = 0 
+122@ = 200 
+90@ = 20 
+
+:DRUGS1_20328
+if 
+  122@ == 200 
+jf @DRUGS1_20368 
+if 
+08FE:   text_box_displayed 
+jf @DRUGS1_20368 
+122@ = 201 
+
+:DRUGS1_20368
+if 
+  122@ == 201 
+jf @DRUGS1_20419 
+if 
+88FE:   not text_box_displayed 
+jf @DRUGS1_20419 
+03E5: show_text_box 'DGS1_65'  // You can also use ~k~~VEHICLE_FIREWEAPON_ALT~ to fire.
+122@ = 202 
+
+:DRUGS1_20419
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_24719 
+if 
+  242@ == 0 
+jf @DRUGS1_20711 
+if 
+01AD:   car 161@ sphere 0 near_point 1620.59 -1612.14 radius 7.0 7.0 
+jf @DRUGS1_20711 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_20554 
+Car.DriveTo(165@, 1571.424, -1590.02, 13.23)
+Car.SetMaxSpeed(165@, 13.5)
+Car.SetSpeedInstantly(165@, 13.5)
+00AE: set_car 165@ traffic_behaviour_to 4 
+
+:DRUGS1_20554
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_20617 
+Car.DriveTo(166@, 1681.473, -1595.059, 13.22)
+Car.SetMaxSpeed(166@, 13.5)
+Car.SetSpeedInstantly(166@, 4.5)
+00AE: set_car 166@ traffic_behaviour_to 4 
+
+:DRUGS1_20617
+if 
+   not Car.Wrecked(171@)
+jf @DRUGS1_20670 
+Car.DriveTo(171@, 1582.411, -1590.115, 13.228)
+Car.SetMaxSpeed(171@, 9.0)
+00AE: set_car 171@ traffic_behaviour_to 4 
+
+:DRUGS1_20670
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_20704 
+05EB: assign_car 188@ to_path 255 
+06FD: set_car 188@ speed_on_path_to 0.9 
+
+:DRUGS1_20704
+242@ = 1 
+
+:DRUGS1_20711
+if 
+  242@ == 1 
+jf @DRUGS1_21016 
+if 
+01AD:   car 161@ sphere 0 near_point 1654.1 -1589.48 radius 10.0 10.0 
+jf @DRUGS1_21016 
+if 
+   not Car.Wrecked(167@)
+jf @DRUGS1_20820 
+Car.DriveTo(167@, 1655.839, -1576.842, 13.226)
+Car.SetMaxSpeed(167@, 9.0)
+00AE: set_car 167@ traffic_behaviour_to 4 
+
+:DRUGS1_20820
+if 
+   not Car.Wrecked(168@)
+jf @DRUGS1_20883 
+Car.DriveTo(168@, 1655.593, -1559.511, 13.227)
+Car.SetMaxSpeed(168@, 9.0)
+Car.SetSpeedInstantly(168@, 9.0)
+00AE: set_car 168@ traffic_behaviour_to 4 
+
+:DRUGS1_20883
+if 
+   not Car.Wrecked(169@)
+jf @DRUGS1_20946 
+Car.DriveTo(169@, 1702.0, -1444.0, 13.0)
+Car.SetMaxSpeed(169@, 9.0)
+Car.SetSpeedInstantly(169@, 10.8)
+00AE: set_car 169@ traffic_behaviour_to 4 
+
+:DRUGS1_20946
+if 
+   not Car.Wrecked(170@)
+jf @DRUGS1_21009 
+Car.DriveTo(170@, 1702.0, -1444.0, 13.0)
+Car.SetMaxSpeed(170@, 9.0)
+Car.SetSpeedInstantly(170@, 9.0)
+00AE: set_car 170@ traffic_behaviour_to 4 
+
+:DRUGS1_21009
+242@ = 2 
+
+:DRUGS1_21016
+if 
+  242@ == 2 
+jf @DRUGS1_21383 
+if 
+01AD:   car 161@ sphere 0 near_point 1657.56 -1537.29 radius 10.0 10.0 
+jf @DRUGS1_21383 
+194@ = Car.Create(#BF400, 1702.127, -1496.87, 12.95)
+09C4: set_car 194@ gas_tank_explosion_enabled 0 
+Car.Angle(194@) = 26.5
+Car.Health(194@) = 800
+49@ = Actor.CreateAsDriver(Mission2, #MAFFA, 194@)
+060B: set_actor 49@ decision_maker_to 35@ 
+02A9: set_actor 49@ immune_to_nonplayer 1 
+Actor.Health(49@) = 10
+50@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 194@, 0)
+Actor.GiveWeaponAndAmmo(50@, MicroUzi, 99999)
+02A9: set_actor 50@ immune_to_nonplayer 1 
+060B: set_actor 50@ decision_maker_to 35@ 
+Actor.Health(50@) = 10
+215@ = Marker.CreateAboveCar(194@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+248@ = 1 
+261@ = 1 
+172@ = Car.Create(#NEBULA, 1622.005, -1443.498, 13.229)
+Car.Angle(172@) = 266.928
+0229: set_car 172@ primary_color_to 115 secondary_color_to 115 
+01EC: make_car 172@ very_heavy 1 
+184@ = Actor.CreateAsDriver(Mission2, #MALE01, 172@)
+060B: set_actor 184@ decision_maker_to 35@ 
+173@ = Car.Create(#NEBULA, 1536.288, -1443.049, 13.224)
+Car.Angle(173@) = 269.939
+0229: set_car 173@ primary_color_to 122 secondary_color_to 122 
+01EC: make_car 173@ very_heavy 1 
+185@ = Actor.CreateAsDriver(Mission2, #MALE01, 173@)
+060B: set_actor 185@ decision_maker_to 35@ 
+242@ = 3 
+
+:DRUGS1_21383
+if 
+  242@ == 3 
+jf @DRUGS1_21736 
+if 
+01AD:   car 161@ sphere 0 near_point 1657.94 -1468.93 radius 15.0 15.0 
+jf @DRUGS1_21736 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_21463 
+05EB: assign_car 194@ to_path 257 
+
+:DRUGS1_21463
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_21546 
+if 
+  3 > 288@ 
+jf @DRUGS1_21546 
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 99999)
+0713: actor 49@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_21546
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_21598 
+0713: actor 50@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+
+:DRUGS1_21598
+Car.Destroy(165@)
+Car.Destroy(166@)
+Car.Destroy(171@)
+if 
+   not Car.Wrecked(172@)
+jf @DRUGS1_21666 
+Car.DriveTo(172@, 1720.037, -1444.137, 13.222)
+Car.SetMaxSpeed(172@, 9.0)
+00AE: set_car 172@ traffic_behaviour_to 4 
+
+:DRUGS1_21666
+if 
+   not Car.Wrecked(173@)
+jf @DRUGS1_21729 
+Car.DriveTo(173@, 1654.817, -1492.993, 13.22)
+Car.SetMaxSpeed(173@, 13.5)
+Car.SetSpeedInstantly(173@, 20.0)
+00AE: set_car 173@ traffic_behaviour_to 4 
+
+:DRUGS1_21729
+242@ = 4 
+
+:DRUGS1_21736
+if 
+  242@ == 4 
+jf @DRUGS1_21799 
+if 
+01AD:   car 161@ sphere 0 near_point 1631.77 -1441.31 radius 12.0 12.0 
+jf @DRUGS1_21799 
+242@ = 5 
+
+:DRUGS1_21799
+if 
+  242@ == 5 
+jf @DRUGS1_21961 
+if 
+01AD:   car 161@ sphere 0 near_point 1545.68 -1437.35 radius 10.0 10.0 
+jf @DRUGS1_21961 
+175@ = Car.Create(#NEBULA, 1394.751, -1427.224, 13.24)
+Car.Angle(175@) = 184.525
+0229: set_car 175@ primary_color_to 99 secondary_color_to 99 
+Car.DriveTo(175@, 1441.028, -1443.271, 13.234)
+Car.SetMaxSpeed(175@, 13.5)
+00AE: set_car 175@ traffic_behaviour_to 4 
+181@ = Actor.CreateAsDriver(Mission2, #MALE01, 175@)
+060B: set_actor 181@ decision_maker_to 35@ 
+242@ = 6 
+
+:DRUGS1_21961
+if 
+  242@ == 6 
+jf @DRUGS1_22797 
+if 
+01AD:   car 161@ sphere 0 near_point 1508.7 -1440.86 radius 10.0 10.0 
+jf @DRUGS1_22797 
+Car.Destroy(172@)
+Car.Destroy(167@)
+Car.Destroy(168@)
+176@ = Car.Create(#COACH, 1457.689, -1371.728, 13.235)
+Car.Angle(176@) = 177.712
+05EB: assign_car 176@ to_path 253 
+06FD: set_car 176@ speed_on_path_to 0.9 
+190@ = Car.Create(#SULTAN, 1374.507, -1394.312, 13.272)
+Car.Health(190@) = 400
+Car.Angle(190@) = 193.922
+52@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 190@, 0)
+Actor.GiveWeaponAndAmmo(52@, MicroUzi, 99999)
+060B: set_actor 52@ decision_maker_to 35@ 
+0713: actor 52@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 70 
+230@ = Marker.CreateAboveCar(190@)
+018B: set_marker 230@ radar_mode 2 
+Marker.SetIconSize(230@, 2)
+191@ = Car.Create(#SULTAN, 1374.577, -1401.141, 13.102)
+Car.Angle(191@) = 349.825
+0229: set_car 191@ primary_color_to 0 secondary_color_to 0 
+Car.Health(191@) = 500
+192@ = Car.Create(#SULTAN, 1374.362, -1407.883, 13.239)
+Car.Angle(192@) = 194.852
+Car.Health(192@) = 500
+228@ = Marker.CreateAboveCar(192@)
+018B: set_marker 228@ radar_mode 2 
+Marker.SetIconSize(228@, 2)
+193@ = Car.Create(#SULTAN, 1401.058, -1430.891, 12.3905)
+Car.Angle(193@) = 10.385
+Car.Health(193@) = 500
+229@ = Marker.CreateAboveCar(193@)
+018B: set_marker 229@ radar_mode 2 
+Marker.SetIconSize(229@, 2)
+0657: car 193@ open_door 2 
+0657: car 193@ open_door 3 
+53@ = Actor.Create(Mission1, #MAFFA, 1399.464, -1431.604, 12.3905)
+060B: set_actor 53@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 99999)
+Actor.Health(53@) = 100
+0085: 79@ = 53@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+235@ = Marker.CreateAboveActor(53@)
+018B: set_marker 235@ radar_mode 2 
+Marker.SetIconSize(235@, 2)
+61@ = Actor.Create(Mission1, #MAFFA, 1401.466, -1427.389, 12.3905)
+060B: set_actor 61@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(61@, MicroUzi, 99999)
+Actor.Health(61@) = 100
+0085: 79@ = 61@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+236@ = Marker.CreateAboveActor(61@)
+018B: set_marker 236@ radar_mode 2 
+Marker.SetIconSize(236@, 2)
+54@ = Actor.Create(Mission1, #MAFFA, 1374.992, -1397.639, 12.438)
+060B: set_actor 54@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(54@, MicroUzi, 99999)
+Actor.Health(54@) = 100
+0085: 79@ = 54@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+226@ = Marker.CreateAboveActor(54@)
+018B: set_marker 226@ radar_mode 2 
+Marker.SetIconSize(226@, 2)
+55@ = Actor.Create(Mission1, #MAFFA, 1374.543, -1404.678, 12.425)
+060B: set_actor 55@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(55@, MicroUzi, 99999)
+Actor.Health(55@) = 100
+0085: 79@ = 55@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+227@ = Marker.CreateAboveActor(55@)
+018B: set_marker 227@ radar_mode 2 
+Marker.SetIconSize(227@, 2)
+242@ = 7 
+
+:DRUGS1_22797
+if 
+  242@ == 7 
+jf @DRUGS1_23095 
+if 
+860E:   not car 161@ assigned_to_path 
+jf @DRUGS1_23095 
+if 
+01AD:   car 161@ sphere 0 near_point 1395.844 -1408.105 radius 5.0 5.0 
+jf @DRUGS1_23095 
+Car.LockInCurrentPosition(161@) = True
+Marker.Disable(209@)
+05EC: release_car 189@ from_path 
+Marker.Disable(214@)
+05EC: release_car 194@ from_path 
+Marker.Disable(215@)
+Actor.RemoveReferences(177@)
+Actor.RemoveReferences(178@)
+Actor.RemoveReferences(179@)
+Actor.RemoveReferences(180@)
+Actor.RemoveReferences(181@)
+Actor.RemoveReferences(182@)
+Actor.RemoveReferences(183@)
+Actor.RemoveReferences(184@)
+Actor.RemoveReferences(185@)
+Car.RemoveReferences(165@)
+Car.RemoveReferences(166@)
+Car.RemoveReferences(167@)
+Car.RemoveReferences(168@)
+Car.RemoveReferences(171@)
+Car.RemoveReferences(172@)
+Car.RemoveReferences(175@)
+Car.RemoveReferences(176@)
+Car.Destroy(169@)
+Car.Destroy(170@)
+Car.Destroy(173@)
+Model.Destroy(#COACH)
+Model.Destroy(#KMB_SKIP)
+Model.Destroy(#NEBULA)
+Object.Destroy(162@)
+Car.Destroy(163@)
+Car.Destroy(164@)
+Car.RemoveReferences(176@)
+Car.Destroy(194@)
+Actor.DestroyInstantly(49@)
+Actor.DestroyInstantly(50@)
+Car.Destroy(189@)
+Car.Destroy(188@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Car.RemoveReferences(175@)
+32@ = 0 
+242@ = 8 
+
+:DRUGS1_23095
+if 
+  242@ > 7 
+jf @DRUGS1_23202 
+if 
+  244@ == 0 
+jf @DRUGS1_23202 
+if 
+80C2:   not sphere_onscreen 1400.41 -1447.12 12.3 radius 10.0 
+jf @DRUGS1_23202 
+0395: clear_area 0 at 1400.41 -1447.12 12.3 radius 50.0 
+244@ = 1 
+  9 > 242@ 
+
+:DRUGS1_23202
+if 
+  242@ == 8 
+jf @DRUGS1_23282 
+07C0: load_path 258 
+07C0: load_path 259 
+07C0: load_path 260 
+07C0: load_path 261 
+07C0: load_path 262 
+07C0: load_path 263 
+07C0: load_path 264 
+07C0: load_path 265 
+07C0: load_path 266 
+07C0: load_path 267 
+07C0: load_path 268 
+242@ = 9 
+
+:DRUGS1_23282
+if 
+  242@ == 9 
+jf @DRUGS1_23509 
+if 
+  32@ > 10000 
+jf @DRUGS1_23509 
+if 
+07C1:   path 258 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 259 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 260 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 261 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 262 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 263 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 264 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 265 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 266 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 267 available 
+jf @DRUGS1_23509 
+if 
+07C1:   path 268 available 
+jf @DRUGS1_23509 
+243@ = 1 
+242@ = 10 
+
+:DRUGS1_23509
+if 
+  275@ == 1 
+jf @DRUGS1_23555 
+if 
+   Car.Wrecked(188@)
+jf @DRUGS1_23555 
+05EC: release_car 188@ from_path 
+275@ = 2 
+
+:DRUGS1_23555
+if 
+  247@ == 1 
+jf @DRUGS1_23803 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_23803 
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_23612 
+jump @DRUGS1_23803 
+
+:DRUGS1_23612
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_23761 
+if 
+   Actor.InCar(44@, 189@)
+jf @DRUGS1_23754 
+046C: 205@ = car 189@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_23754 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 44@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 44@ in_car 189@ 
+0713: actor 44@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+247@ = 2 
+
+:DRUGS1_23754
+jump @DRUGS1_23803 
+
+:DRUGS1_23761
+Car.SetSpeedInstantly(189@, 18.0)
+05EC: release_car 189@ from_path 
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+247@ = 2 
+
+:DRUGS1_23803
+if 
+  247@ == 2 
+jf @DRUGS1_23895 
+if 
+   Actor.Dead(44@)
+jf @DRUGS1_23895 
+05EC: release_car 189@ from_path 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_23888 
+Car.SetSpeedInstantly(189@, 18.0)
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_23888
+247@ = 3 
+
+:DRUGS1_23895
+if 
+  260@ == 1 
+jf @DRUGS1_23982 
+if 
+   Actor.Dead(43@)
+jf @DRUGS1_23982 
+if or
+   Actor.Dead(44@)
+   Car.Wrecked(189@)
+jf @DRUGS1_23982 
+05EC: release_car 189@ from_path 
+Marker.Disable(214@)
+Car.RemoveReferences(189@)
+Actor.RemoveReferences(43@)
+Actor.RemoveReferences(44@)
+260@ = 2 
+
+:DRUGS1_23982
+if 
+  248@ == 1 
+jf @DRUGS1_24230 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_24230 
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_24039 
+jump @DRUGS1_24230 
+
+:DRUGS1_24039
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_24188 
+if 
+   Actor.InCar(50@, 194@)
+jf @DRUGS1_24181 
+046C: 205@ = car 194@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_24181 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 50@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 50@ in_car 194@ 
+0713: actor 50@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+248@ = 2 
+
+:DRUGS1_24181
+jump @DRUGS1_24230 
+
+:DRUGS1_24188
+Car.SetSpeedInstantly(194@, 15.0)
+05EC: release_car 194@ from_path 
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+248@ = 2 
+
+:DRUGS1_24230
+if 
+  248@ == 2 
+jf @DRUGS1_24322 
+if 
+   Actor.Dead(50@)
+jf @DRUGS1_24322 
+05EC: release_car 194@ from_path 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_24315 
+Car.SetSpeedInstantly(194@, 15.0)
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_24315
+248@ = 3 
+
+:DRUGS1_24322
+if 
+  261@ == 1 
+jf @DRUGS1_24409 
+if 
+   Actor.Dead(49@)
+jf @DRUGS1_24409 
+if or
+   Actor.Dead(50@)
+   Car.Wrecked(194@)
+jf @DRUGS1_24409 
+05EC: release_car 194@ from_path 
+Marker.Disable(215@)
+Car.RemoveReferences(194@)
+Actor.RemoveReferences(49@)
+Actor.RemoveReferences(50@)
+261@ = 2 
+
+:DRUGS1_24409
+if 
+   Actor.Dead(54@)
+jf @DRUGS1_24446 
+if 
+075C:   marker 226@ enabled 
+jf @DRUGS1_24446 
+Marker.Disable(226@)
+
+:DRUGS1_24446
+if 
+   Actor.Dead(55@)
+jf @DRUGS1_24483 
+if 
+075C:   marker 227@ enabled 
+jf @DRUGS1_24483 
+Marker.Disable(227@)
+
+:DRUGS1_24483
+if 
+   Car.Wrecked(190@)
+jf @DRUGS1_24520 
+if 
+075C:   marker 230@ enabled 
+jf @DRUGS1_24520 
+Marker.Disable(230@)
+
+:DRUGS1_24520
+if 
+   Car.Wrecked(192@)
+jf @DRUGS1_24557 
+if 
+075C:   marker 228@ enabled 
+jf @DRUGS1_24557 
+Marker.Disable(228@)
+
+:DRUGS1_24557
+if 
+  286@ == 0 
+jf @DRUGS1_24638 
+if 
+   not Car.Wrecked(169@)
+jf @DRUGS1_24638 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_24638 
+if 
+051D:   car 169@ damaged_by_car 188@ 
+jf @DRUGS1_24638 
+020B: explode_car 169@ 
+286@ = 1 
+
+:DRUGS1_24638
+if 
+  287@ == 0 
+jf @DRUGS1_24719 
+if 
+   not Car.Wrecked(170@)
+jf @DRUGS1_24719 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_24719 
+if 
+051D:   car 170@ damaged_by_car 188@ 
+jf @DRUGS1_24719 
+020B: explode_car 170@ 
+287@ = 1 
+
+:DRUGS1_24719
+if or
+  90@ == 20 
+  243@ == 1 
+jf @DRUGS1_26882 
+if 
+  3 > 245@ 
+jf @DRUGS1_26882 
+if 
+  282@ == 0 
+jf @DRUGS1_24829 
+if 
+  283@ == 0 
+jf @DRUGS1_24829 
+04AF: 239@ = 35664 // = constant 
+05AA: 240@s = 'SMO4_FB' // @s = 'short'  // ~z~They after us on a bike, Smoke!
+gosub @DRUGS1_53924 
+
+:DRUGS1_24829
+if 
+  282@ == 1 
+jf @DRUGS1_24896 
+if 
+  283@ == 0 
+jf @DRUGS1_24896 
+04AF: 239@ = 35662 // = constant 
+05AA: 240@s = 'SMO4_ES' // @s = 'short'  // ~z~Waste any motherfucker that follows us!
+gosub @DRUGS1_53924 
+
+:DRUGS1_24896
+if 
+  285@ == 0 
+jf @DRUGS1_24959 
+if 
+01AD:   car 161@ sphere 0 near_point 1659.49 -1580.97 radius 50.0 50.0 
+jf @DRUGS1_24959 
+285@ = 1 
+
+:DRUGS1_24959
+if 
+  282@ == 2 
+jf @DRUGS1_25044 
+if 
+  283@ == 0 
+jf @DRUGS1_25044 
+if 
+  285@ == 1 
+jf @DRUGS1_25044 
+04AF: 239@ = 35666 // = constant 
+05AA: 240@s = 'SMO4_FD' // @s = 'short'  // ~z~Shit, man, they coming fo' us in a truck!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25044
+if 
+  282@ == 3 
+jf @DRUGS1_25111 
+if 
+  283@ == 0 
+jf @DRUGS1_25111 
+04AF: 239@ = 35667 // = constant 
+05AA: 240@s = 'SMO4_FE' // @s = 'short'  // ~z~Don't tell me about it, take it off the road! Pop it!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25111
+if 
+  282@ == 4 
+jf @DRUGS1_25178 
+if 
+  283@ == 0 
+jf @DRUGS1_25178 
+04AF: 239@ = 35668 // = constant 
+05AA: 240@s = 'SMO4_FF' // @s = 'short'  // ~z~Damn, look at all this traffic - GET OUTTA THE WAY!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25178
+if 
+  282@ == 5 
+jf @DRUGS1_25303 
+if 
+  283@ == 0 
+jf @DRUGS1_25303 
+0209: 5@ = random_int_in_ranges 0 2 
+if 
+  5@ == 0 
+jf @DRUGS1_25272 
+04AF: 239@ = 35669 // = constant 
+05AA: 240@s = 'SMO4_FG' // @s = 'short'  // ~z~I'm coming through!
+jump @DRUGS1_25296 
+
+:DRUGS1_25272
+04AF: 239@ = 35670 // = constant 
+05AA: 240@s = 'SMO4_FH' // @s = 'short'  // ~z~Hey, don't just sit on your horn! Get out the goddamn way!
+
+:DRUGS1_25296
+gosub @DRUGS1_53924 
+
+:DRUGS1_25303
+if 
+  285@ == 1 
+jf @DRUGS1_25366 
+if 
+01AD:   car 161@ sphere 0 near_point 1638.05 -1440.64 radius 60.0 60.0 
+jf @DRUGS1_25366 
+285@ = 2 
+
+:DRUGS1_25366
+if 
+  282@ == 6 
+jf @DRUGS1_25509 
+if 
+  283@ == 0 
+jf @DRUGS1_25509 
+if 
+  285@ == 2 
+jf @DRUGS1_25509 
+0209: 5@ = random_int_in_ranges 0 2 
+if 
+  5@ == 0 
+jf @DRUGS1_25478 
+04AF: 239@ = 35665 // = constant 
+05AA: 240@s = 'SMO4_FC' // @s = 'short'  // ~z~We got bikes on our six - smash it Smoke!
+jump @DRUGS1_25502 
+
+:DRUGS1_25478
+04AF: 239@ = 35663 // = constant 
+05AA: 240@s = 'SMO4_FA' // @s = 'short'  // ~z~Hey man, we got bikes all on us!
+
+:DRUGS1_25502
+gosub @DRUGS1_53924 
+
+:DRUGS1_25509
+if 
+  285@ == 2 
+jf @DRUGS1_25572 
+if 
+01AD:   car 161@ sphere 0 near_point 1579.33 -1438.05 radius 55.0 55.0 
+jf @DRUGS1_25572 
+285@ = 3 
+
+:DRUGS1_25572
+if 
+  282@ == 7 
+jf @DRUGS1_25657 
+if 
+  283@ == 0 
+jf @DRUGS1_25657 
+if 
+  285@ == 3 
+jf @DRUGS1_25657 
+04AF: 239@ = 35671 // = constant 
+05AA: 240@s = 'SMO4_FJ' // @s = 'short'  // ~z~Hold on tight, baby!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25657
+if 
+  282@ == 8 
+jf @DRUGS1_25724 
+if 
+  283@ == 0 
+jf @DRUGS1_25724 
+04AF: 239@ = 35672 // = constant 
+05AA: 240@s = 'SMO4_FK' // @s = 'short'  // ~z~Ah Smoke,! Nooooooo!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25724
+if 
+  285@ == 3 
+jf @DRUGS1_25824 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_25810 
+if 
+01AD:   car 161@ sphere 0 near_point 1432.61 -1438.66 radius 12.0 12.0 
+jf @DRUGS1_25803 
+285@ = 4 
+
+:DRUGS1_25803
+jump @DRUGS1_25824 
+
+:DRUGS1_25810
+285@ = 4 
+282@ = 12 
+
+:DRUGS1_25824
+if 
+  282@ == 9 
+jf @DRUGS1_25909 
+if 
+  283@ == 0 
+jf @DRUGS1_25909 
+if 
+  285@ == 4 
+jf @DRUGS1_25909 
+04AF: 239@ = 35673 // = constant 
+05AA: 240@s = 'SMO4_FL' // @s = 'short'  // ~z~Ah, they hit a bus!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25909
+if 
+  282@ == 10 
+jf @DRUGS1_25976 
+if 
+  283@ == 0 
+jf @DRUGS1_25976 
+04AF: 239@ = 35674 // = constant 
+05AA: 240@s = 'SMO4_FM' // @s = 'short'  // ~z~Ha,ha ha, I'll never dis public transportation again!
+gosub @DRUGS1_53924 
+
+:DRUGS1_25976
+if 
+  285@ == 4 
+jf @DRUGS1_26039 
+if 
+01AD:   car 161@ sphere 0 near_point 1406.73 -1393.15 radius 10.0 10.0 
+jf @DRUGS1_26039 
+285@ = 5 
+
+:DRUGS1_26039
+if 
+  282@ == 11 
+jf @DRUGS1_26124 
+if 
+  283@ == 0 
+jf @DRUGS1_26124 
+if 
+  285@ == 5 
+jf @DRUGS1_26124 
+04AF: 239@ = 35675 // = constant 
+05AA: 240@s = 'SMO4_GA' // @s = 'short'  // ~z~Damn, road-blocked!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26124
+if 
+  282@ == 12 
+jf @DRUGS1_26191 
+if 
+  283@ == 0 
+jf @DRUGS1_26191 
+04AF: 239@ = 35676 // = constant 
+05AA: 240@s = 'SMO4_GB' // @s = 'short'  // ~z~Ah Smoke, these cats is organized. It's something you ain't tellin' me man!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26191
+if 
+  282@ == 13 
+jf @DRUGS1_26258 
+if 
+  283@ == 0 
+jf @DRUGS1_26258 
+04AF: 239@ = 35677 // = constant 
+05AA: 240@s = 'SMO4_GD' // @s = 'short'  // ~z~Look, Carl, all I know is they're real pissed with us right now!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26258
+if 
+  282@ == 14 
+jf @DRUGS1_26325 
+if 
+  283@ == 0 
+jf @DRUGS1_26325 
+04AF: 239@ = 35678 // = constant 
+05AA: 240@s = 'SMO4_GE' // @s = 'short'  // ~z~Hold on though, I got a idea.
+gosub @DRUGS1_53924 
+
+:DRUGS1_26325
+if 
+  282@ == 15 
+jf @DRUGS1_26392 
+if 
+  283@ == 0 
+jf @DRUGS1_26392 
+04AF: 239@ = 35679 // = constant 
+05AA: 240@s = 'SMO4_GF' // @s = 'short'  // ~z~Smoke, what you thinking? Flood control's a dead end, man!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26392
+if 
+  282@ == 16 
+jf @DRUGS1_26459 
+if 
+  283@ == 0 
+jf @DRUGS1_26459 
+04AF: 239@ = 35680 // = constant 
+05AA: 240@s = 'SMO4_GG' // @s = 'short'  // ~z~To hell with that, we had to lose those cars, don't worry about that.
+gosub @DRUGS1_53924 
+
+:DRUGS1_26459
+if 
+  282@ == 17 
+jf @DRUGS1_26526 
+if 
+  283@ == 0 
+jf @DRUGS1_26526 
+04AF: 239@ = 35681 // = constant 
+05AA: 240@s = 'SMO4_GH' // @s = 'short'  // ~z~I know a way out, up past Grove Street.
+gosub @DRUGS1_53924 
+
+:DRUGS1_26526
+if 
+  282@ == 18 
+jf @DRUGS1_26593 
+if 
+  283@ == 0 
+jf @DRUGS1_26593 
+04AF: 239@ = 35682 // = constant 
+05AA: 240@s = 'SMO4_GJ' // @s = 'short'  // ~z~The old sewer tunnel? Oh man....
+gosub @DRUGS1_53924 
+
+:DRUGS1_26593
+if 
+  282@ == 19 
+jf @DRUGS1_26660 
+if 
+  283@ == 0 
+jf @DRUGS1_26660 
+04AF: 239@ = 35661 // = constant 
+05AA: 240@s = 'SMO4_ER' // @s = 'short'  // ~z~Watch our backs!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26660
+if 
+  285@ == 5 
+jf @DRUGS1_26723 
+if 
+01AD:   car 161@ sphere 0 near_point 1362.39 -1590.12 radius 15.0 15.0 
+jf @DRUGS1_26723 
+285@ = 6 
+
+:DRUGS1_26723
+if 
+  282@ == 20 
+jf @DRUGS1_26808 
+if 
+  283@ == 0 
+jf @DRUGS1_26808 
+if 
+  285@ == 6 
+jf @DRUGS1_26808 
+04AF: 239@ = 35683 // = constant 
+05AA: 240@s = 'SMO4_GK' // @s = 'short'  // ~z~Smoke, it's more bikes!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26808
+if 
+  282@ == 21 
+jf @DRUGS1_26875 
+if 
+  283@ == 0 
+jf @DRUGS1_26875 
+04AF: 239@ = 35701 // = constant 
+05AA: 240@s = 'SMO4_HO' // @s = 'short'  // ~z~Here comes another!
+gosub @DRUGS1_53924 
+
+:DRUGS1_26875
+gosub @DRUGS1_53966 
+
+:DRUGS1_26882
+if 
+  243@ == 1 
+jf @DRUGS1_33982 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_33982 
+if 
+  245@ == 0 
+jf @DRUGS1_28218 
+189@ = Car.Create(#BF400, 1446.923, -1429.569, 12.1)
+09C4: set_car 189@ gas_tank_explosion_enabled 0 
+Car.Angle(189@) = 174.719
+42@ = Actor.CreateAsDriver(Mission2, #MAFFA, 189@)
+060B: set_actor 42@ decision_maker_to 35@ 
+Actor.Health(42@) = 10
+02A9: set_actor 42@ immune_to_nonplayer 1 
+43@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 189@, 0)
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 99999)
+Actor.Health(43@) = 10
+02A9: set_actor 43@ immune_to_nonplayer 1 
+060B: set_actor 43@ decision_maker_to 35@ 
+214@ = Marker.CreateAboveCar(189@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+247@ = 1 
+260@ = 1 
+194@ = Car.Create(#BF400, 1377.421, -1571.321, 12.1)
+09C4: set_car 194@ gas_tank_explosion_enabled 0 
+Car.Angle(194@) = 166.577
+44@ = Actor.CreateAsDriver(Mission2, #MAFFA, 194@)
+060B: set_actor 44@ decision_maker_to 35@ 
+Actor.Health(44@) = 10
+02A9: set_actor 44@ immune_to_nonplayer 1 
+45@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 194@, 0)
+Actor.GiveWeaponAndAmmo(45@, MicroUzi, 99999)
+Actor.Health(45@) = 10
+02A9: set_actor 45@ immune_to_nonplayer 1 
+060B: set_actor 45@ decision_maker_to 35@ 
+215@ = Marker.CreateAboveCar(194@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+248@ = 1 
+261@ = 1 
+195@ = Car.Create(#BF400, 1361.086, -1665.478, 12.62)
+09C4: set_car 195@ gas_tank_explosion_enabled 0 
+Car.Angle(195@) = 187.657
+46@ = Actor.CreateAsDriver(Mission2, #MAFFA, 195@)
+060B: set_actor 46@ decision_maker_to 35@ 
+Actor.Health(46@) = 50
+47@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 195@, 0)
+Actor.GiveWeaponAndAmmo(47@, MicroUzi, 99999)
+060B: set_actor 47@ decision_maker_to 35@ 
+Actor.Health(47@) = 10
+216@ = Marker.CreateAboveCar(195@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+249@ = 1 
+262@ = 1 
+196@ = Car.Create(#BF400, 1365.219, -1420.908, 12.104)
+09C4: set_car 196@ gas_tank_explosion_enabled 0 
+Car.Angle(196@) = 353.946
+56@ = Actor.CreateAsDriver(Mission2, #MAFFA, 196@)
+060B: set_actor 56@ decision_maker_to 35@ 
+Actor.Health(56@) = 10
+02A9: set_actor 56@ immune_to_nonplayer 1 
+57@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 196@, 0)
+Actor.GiveWeaponAndAmmo(57@, MicroUzi, 99999)
+Actor.Health(57@) = 10
+02A9: set_actor 57@ immune_to_nonplayer 1 
+060B: set_actor 57@ decision_maker_to 35@ 
+217@ = Marker.CreateAboveCar(196@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+250@ = 1 
+263@ = 1 
+165@ = Car.Create(#SULTAN, 1374.372, -1665.108, 12.91)
+09C4: set_car 165@ gas_tank_explosion_enabled 0 
+Car.Angle(165@) = 176.22
+48@ = Actor.CreateAsDriver(Mission2, #MAFFA, 165@)
+060B: set_actor 48@ decision_maker_to 35@ 
+49@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 165@, 0)
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 99999)
+Actor.Health(49@) = 10
+060B: set_actor 49@ decision_maker_to 35@ 
+210@ = Marker.CreateAboveCar(165@)
+018B: set_marker 210@ radar_mode 2 
+Marker.SetIconSize(210@, 2)
+265@ = 1 
+255@ = 1 
+166@ = Car.Create(#SULTAN, 1373.704, -1633.619, 12.935)
+09C4: set_car 166@ gas_tank_explosion_enabled 0 
+Car.Angle(166@) = 176.22
+50@ = Actor.CreateAsDriver(Mission2, #MAFFA, 166@)
+060B: set_actor 50@ decision_maker_to 35@ 
+51@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 166@, 0)
+Actor.GiveWeaponAndAmmo(51@, MicroUzi, 99999)
+060B: set_actor 51@ decision_maker_to 35@ 
+Actor.Health(51@) = 10
+211@ = Marker.CreateAboveCar(166@)
+018B: set_marker 211@ radar_mode 2 
+Marker.SetIconSize(211@, 2)
+266@ = 1 
+256@ = 1 
+wait 0 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_27861 
+Car.LockInCurrentPosition(161@) = False
+05EB: assign_car 161@ to_path 258 
+
+:DRUGS1_27861
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_28036 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_28036 
+05EB: assign_car 189@ to_path 259 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_27984 
+if 
+  2 > 288@ 
+jf @DRUGS1_27984 
+Actor.GiveWeaponAndAmmo(42@, MicroUzi, 99999)
+0713: actor 42@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_27984
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_28036 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+
+:DRUGS1_28036
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_28211 
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_28076 
+05EB: assign_car 196@ to_path 264 
+
+:DRUGS1_28076
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_28159 
+if 
+  3 > 288@ 
+jf @DRUGS1_28159 
+Actor.GiveWeaponAndAmmo(56@, MicroUzi, 99999)
+0713: actor 56@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_28159
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_28211 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_28211
+245@ = 1 
+
+:DRUGS1_28218
+if 
+  245@ == 1 
+jf @DRUGS1_28525 
+if 
+01AD:   car 161@ sphere 0 near_point 1374.62 -1549.64 radius 10.0 10.0 
+jf @DRUGS1_28525 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_28433 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_28381 
+05EB: assign_car 194@ to_path 260 
+if 
+  2 > 288@ 
+jf @DRUGS1_28381 
+Actor.GiveWeaponAndAmmo(44@, MicroUzi, 99999)
+0713: actor 44@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_28381
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_28433 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+
+:DRUGS1_28433
+Car.Destroy(176@)
+Car.Destroy(190@)
+Car.Destroy(191@)
+Car.Destroy(192@)
+Car.Destroy(193@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+Actor.DestroyInstantly(61@)
+Marker.Disable(235@)
+Marker.Disable(226@)
+Marker.Disable(227@)
+Marker.Disable(236@)
+Marker.Disable(230@)
+Marker.Disable(228@)
+Marker.Disable(229@)
+245@ = 2 
+
+:DRUGS1_28525
+if 
+  245@ == 2 
+jf @DRUGS1_28864 
+if 
+01AD:   car 161@ sphere 0 near_point 1361.086 -1665.478 radius 10.0 10.0 
+jf @DRUGS1_28864 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_28621 
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_28621 
+05EB: assign_car 195@ to_path 261 
+
+:DRUGS1_28621
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_28673 
+0713: actor 47@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+
+:DRUGS1_28673
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_28713 
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_28713 
+05EB: assign_car 165@ to_path 262 
+
+:DRUGS1_28713
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_28765 
+0713: actor 49@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 10 
+
+:DRUGS1_28765
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_28805 
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_28805 
+05EB: assign_car 166@ to_path 263 
+
+:DRUGS1_28805
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_28857 
+0713: actor 51@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 10 
+
+:DRUGS1_28857
+245@ = 3 
+
+:DRUGS1_28864
+if 
+  245@ == 3 
+jf @DRUGS1_29854 
+if 
+01AD:   car 161@ sphere 1 near_point 1530.0 -1742.0 radius 10.0 10.0 
+jf @DRUGS1_29854 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_28962 
+Car.SetImmunities(161@, 1, 1, 1, 1, 1)
+
+:DRUGS1_28962
+$Z_CAMERA = 0.2 
+204@ = 0.0 
+0679: put_camera_on_car 161@ with_offset 0.0 -2.0 $Z_CAMERA rotation 0.0 0.0 204@ tilt 0.0 switchstyle 2 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0430: put_actor $PLAYER_ACTOR into_car 161@ passenger_seat 0 
+05EC: release_car 189@ from_path 
+Car.Destroy(189@)
+Marker.Disable(214@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+05EC: release_car 194@ from_path 
+Car.Destroy(194@)
+Marker.Disable(215@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+05EC: release_car 195@ from_path 
+Car.Destroy(195@)
+Marker.Disable(216@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+05EC: release_car 196@ from_path 
+Car.Destroy(196@)
+Marker.Disable(217@)
+Actor.DestroyInstantly(56@)
+Actor.DestroyInstantly(57@)
+05EC: release_car 165@ from_path 
+Car.Destroy(165@)
+Marker.Disable(210@)
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(49@)
+05EC: release_car 166@ from_path 
+Car.Destroy(166@)
+Marker.Disable(211@)
+Actor.DestroyInstantly(50@)
+Actor.DestroyInstantly(51@)
+189@ = Car.Create(#BF400, 1505.103, -1733.09, 3.05)
+09C4: set_car 189@ gas_tank_explosion_enabled 0 
+Car.Angle(189@) = 258.539
+42@ = Actor.CreateAsDriver(Mission2, #MAFFA, 189@)
+060B: set_actor 42@ decision_maker_to 35@ 
+Actor.Health(42@) = 10
+43@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 189@, 0)
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 99999)
+Actor.Health(43@) = 10
+060B: set_actor 43@ decision_maker_to 35@ 
+194@ = Car.Create(#BF400, 1487.213, -1734.792, 3.25)
+09C4: set_car 194@ gas_tank_explosion_enabled 0 
+Car.Angle(194@) = 250.829
+44@ = Actor.CreateAsDriver(Mission2, #MAFFA, 194@)
+060B: set_actor 44@ decision_maker_to 35@ 
+Actor.Health(44@) = 10
+45@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 194@, 0)
+Actor.GiveWeaponAndAmmo(45@, MicroUzi, 99999)
+Actor.Health(45@) = 20
+060B: set_actor 45@ decision_maker_to 35@ 
+165@ = Car.Create(#SULTAN, 1496.864, -1731.303, 6.3)
+09C4: set_car 165@ gas_tank_explosion_enabled 0 
+Car.Angle(165@) = 255.305
+48@ = Actor.CreateAsDriver(Mission2, #MAFFA, 165@)
+060B: set_actor 48@ decision_maker_to 35@ 
+49@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 165@, 0)
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 99999)
+060B: set_actor 49@ decision_maker_to 35@ 
+Actor.Health(49@) = 10
+188@ = Car.Create(#PACKER, 1550.873, -1737.122, 14.1055)
+09C4: set_car 188@ gas_tank_explosion_enabled 0 
+Car.Angle(188@) = 245.14
+197@ = Actor.CreateAsDriver(Mission2, #MAFFA, 188@)
+054A: set_actor 197@ can_be_shot_in_a_car 0 
+Car.SetImmunities(188@, 1, 1, 1, 1, 1)
+Actor.SetImmunities(197@, 1, 1, 1, 1, 1)
+060B: set_actor 197@ decision_maker_to 35@ 
+198@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 188@, 0)
+Actor.GiveWeaponAndAmmo(198@, MicroUzi, 99999)
+060B: set_actor 198@ decision_maker_to 35@ 
+208@ = Car.Create(#SULTAN, 1550.873, -1737.122, -14.1055)
+09C4: set_car 208@ gas_tank_explosion_enabled 0 
+Car.Angle(208@) = 256.415
+Car.SetImmunities(208@, 1, 1, 1, 1, 1)
+0683: attach_car 208@ to_car 188@ with_offset 0.0 -4.6 0.65 rotation 15.0 0.0 0.0 
+269@ = 0 
+207@ = Car.Create(#SULTAN, 1550.873, -1737.122, 14.1055)
+09C4: set_car 207@ gas_tank_explosion_enabled 0 
+Car.Angle(207@) = 256.415
+Car.SetImmunities(207@, 1, 1, 1, 1, 1)
+0683: attach_car 207@ to_car 188@ with_offset 0.0 1.15 2.4 rotation 15.0 0.0 0.0 
+270@ = 0 
+32@ = 0 
+246@ = 1 
+245@ = 4 
+
+:DRUGS1_29854
+if 
+  246@ == 1 
+jf @DRUGS1_30013 
+if 
+01AD:   car 161@ sphere 1 near_point 1550.52 -1749.19 radius 10.0 10.0 
+jf @DRUGS1_30013 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_29934 
+05EB: assign_car 188@ to_path 265 
+
+:DRUGS1_29934
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_29958 
+05EB: assign_car 189@ to_path 266 
+
+:DRUGS1_29958
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_29982 
+05EB: assign_car 165@ to_path 267 
+
+:DRUGS1_29982
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_30006 
+05EB: assign_car 194@ to_path 268 
+
+:DRUGS1_30006
+246@ = 2 
+
+:DRUGS1_30013
+if 
+  245@ == 4 
+jf @DRUGS1_30143 
+if 
+  32@ > 250 
+jf @DRUGS1_30143 
+if 
+  0.8 > $Z_CAMERA 
+jf @DRUGS1_30136 
+0078: $Z_CAMERA += frame_delta_time * 0.008 // (float) 
+0079: 204@ += frame_delta_time * 0.008 // (float) 
+0679: put_camera_on_car 161@ with_offset 0.0 -2.0 $Z_CAMERA rotation 0.0 0.0 204@ tilt 0.0 switchstyle 2 
+jump @DRUGS1_30143 
+
+:DRUGS1_30136
+245@ = 5 
+
+:DRUGS1_30143
+if 
+  245@ == 5 
+jf @DRUGS1_30266 
+if 
+  32@ > 2500 
+jf @DRUGS1_30266 
+Camera.SetPosition(1605.591, -1766.793, 3.3342, 0.0, 0.0, 0.0)
+Camera.PointAt(1604.774, -1766.255, 3.5404, 2)
+015D: set_gamespeed 0.9 
+32@ = 0 
+33@ = 0 
+276@ = 1 
+245@ = 6 
+
+:DRUGS1_30266
+if 
+  245@ == 6 
+jf @DRUGS1_30320 
+if 
+  32@ > 800 
+jf @DRUGS1_30320 
+$TEMPVAR_FLOAT_3 = 0.3 
+245@ = 7 
+
+:DRUGS1_30320
+if 
+  245@ == 7 
+jf @DRUGS1_30424 
+if 
+  0.6 > $TEMPVAR_FLOAT_3 
+jf @DRUGS1_30381 
+$TEMPVAR_FLOAT_3 += 0.001 
+015D: set_gamespeed $TEMPVAR_FLOAT_3 
+jump @DRUGS1_30424 
+
+:DRUGS1_30381
+if or
+  32@ > 2500 
+  $TEMPVAR_FLOAT_3 > 0.6 
+jf @DRUGS1_30424 
+245@ = 7 
+015D: set_gamespeed 0.5 
+
+:DRUGS1_30424
+if 
+  245@ == 7 
+jf @DRUGS1_30504 
+if 
+  32@ > 2000 
+jf @DRUGS1_30504 
+Camera.PointAt(1605.782, -1765.834, 3.5404, 1)
+$TEMPVAR_FLOAT_3 = 0.5 
+32@ = 0 
+245@ = 8 
+
+:DRUGS1_30504
+if 
+  245@ == 8 
+jf @DRUGS1_30615 
+if 
+  1.0 > $TEMPVAR_FLOAT_3 
+jf @DRUGS1_30565 
+$TEMPVAR_FLOAT_3 += 0.01 
+015D: set_gamespeed $TEMPVAR_FLOAT_3 
+jump @DRUGS1_30615 
+
+:DRUGS1_30565
+if or
+  32@ > 1000 
+  $TEMPVAR_FLOAT_3 > 0.9 
+jf @DRUGS1_30615 
+245@ = 9 
+32@ = 0 
+015D: set_gamespeed 1.0 
+
+:DRUGS1_30615
+if 
+  245@ == 9 
+jf @DRUGS1_30666 
+if 
+  32@ > 2800 
+jf @DRUGS1_30666 
+243@ = 2 
+245@ = 10 
+
+:DRUGS1_30666
+if 
+  276@ == 1 
+jf @DRUGS1_30778 
+if 
+  33@ > 1242 
+jf @DRUGS1_30778 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 60 
+08EB: create_sparks_at 1580.75 -1749.51 12.92 velocity_direction 0.0 0.0 1.0 density 100 
+276@ = 2 
+
+:DRUGS1_30778
+if 
+  276@ == 2 
+jf @DRUGS1_30890 
+if 
+  33@ > 1400 
+jf @DRUGS1_30890 
+08EB: create_sparks_at 1580.74 -1752.68 12.87 velocity_direction 0.0 0.0 1.0 density 100 
+08EB: create_sparks_at 1580.85 -1749.75 12.91 velocity_direction 0.0 0.0 1.0 density 60 
+276@ = 3 
+
+:DRUGS1_30890
+if 
+  276@ == 3 
+jf @DRUGS1_31002 
+if 
+  33@ > 1500 
+jf @DRUGS1_31002 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 100 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 80 
+276@ = 4 
+
+:DRUGS1_31002
+if 
+  276@ == 4 
+jf @DRUGS1_31114 
+if 
+  33@ > 1600 
+jf @DRUGS1_31114 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 100 
+08EB: create_sparks_at 1580.75 -1749.51 12.92 velocity_direction 0.0 0.0 1.0 density 60 
+276@ = 5 
+
+:DRUGS1_31114
+if 
+  276@ == 5 
+jf @DRUGS1_31226 
+if 
+  33@ > 1700 
+jf @DRUGS1_31226 
+08EB: create_sparks_at 1580.74 -1752.68 12.87 velocity_direction 0.0 0.0 1.0 density 80 
+08EB: create_sparks_at 1580.85 -1749.75 12.91 velocity_direction 0.0 0.0 1.0 density 100 
+276@ = 6 
+
+:DRUGS1_31226
+if 
+  276@ == 6 
+jf @DRUGS1_31338 
+if 
+  33@ > 1800 
+jf @DRUGS1_31338 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 60 
+08EB: create_sparks_at 1580.85 -1752.32 12.91 velocity_direction 0.0 0.0 1.0 density 80 
+276@ = 7 
+
+:DRUGS1_31338
+if 
+  276@ == 7 
+jf @DRUGS1_31416 
+if 
+  33@ > 2404 
+jf @DRUGS1_31416 
+08EB: create_sparks_at 1599.28 -1757.56 3.11 velocity_direction 0.0 0.0 1.0 density 60 
+276@ = 8 
+
+:DRUGS1_31416
+if 
+  276@ == 8 
+jf @DRUGS1_31528 
+if 
+  33@ > 3418 
+jf @DRUGS1_31528 
+08EB: create_sparks_at 1599.76 1757.96 3.14 velocity_direction 0.0 0.0 1.0 density 100 
+08EB: create_sparks_at 1601.69 -1758.73 3.18 velocity_direction 0.0 0.0 1.0 density 60 
+276@ = 9 
+
+:DRUGS1_31528
+if 
+  276@ == 9 
+jf @DRUGS1_31606 
+if 
+  33@ > 3598 
+jf @DRUGS1_31606 
+08EB: create_sparks_at 1605.46 -1763.14 3.18 velocity_direction 0.0 0.0 1.0 density 100 
+276@ = 10 
+
+:DRUGS1_31606
+if 
+  276@ == 10 
+jf @DRUGS1_31684 
+if 
+  33@ > 3600 
+jf @DRUGS1_31684 
+08EB: create_sparks_at 1605.46 -1763.14 3.18 velocity_direction 0.0 0.0 1.0 density 80 
+276@ = 11 
+
+:DRUGS1_31684
+if 
+  4 > 245@ 
+jf @DRUGS1_33982 
+if 
+  247@ == 1 
+jf @DRUGS1_31950 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_31950 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_31759 
+jump @DRUGS1_31950 
+
+:DRUGS1_31759
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_31908 
+if 
+   Actor.InCar(43@, 189@)
+jf @DRUGS1_31901 
+046C: 205@ = car 189@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_31901 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 43@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 43@ in_car 189@ 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+247@ = 2 
+
+:DRUGS1_31901
+jump @DRUGS1_31950 
+
+:DRUGS1_31908
+Car.SetSpeedInstantly(189@, 18.0)
+05EC: release_car 189@ from_path 
+07DB: set_car 189@ rotation_velocity_XYZ 1.5 3.3999 4.1003 through_center_of_mass 
+247@ = 2 
+
+:DRUGS1_31950
+if 
+  247@ == 2 
+jf @DRUGS1_32042 
+if 
+   Actor.Dead(43@)
+jf @DRUGS1_32042 
+05EC: release_car 189@ from_path 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_32035 
+Car.SetSpeedInstantly(189@, 18.0)
+07DB: set_car 189@ rotation_velocity_XYZ 1.5 3.3999 4.1003 through_center_of_mass 
+
+:DRUGS1_32035
+247@ = 3 
+
+:DRUGS1_32042
+if 
+  260@ == 1 
+jf @DRUGS1_32129 
+if 
+   Actor.Dead(42@)
+jf @DRUGS1_32129 
+if or
+   Actor.Dead(43@)
+   Car.Wrecked(189@)
+jf @DRUGS1_32129 
+05EC: release_car 189@ from_path 
+Marker.Disable(214@)
+Car.RemoveReferences(189@)
+Actor.RemoveReferences(42@)
+Actor.RemoveReferences(43@)
+260@ = 2 
+
+:DRUGS1_32129
+if 
+  248@ == 1 
+jf @DRUGS1_32377 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_32377 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_32186 
+jump @DRUGS1_32377 
+
+:DRUGS1_32186
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_32335 
+if 
+   Actor.InCar(45@, 194@)
+jf @DRUGS1_32328 
+046C: 205@ = car 194@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_32328 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 45@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 45@ in_car 194@ 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+248@ = 2 
+
+:DRUGS1_32328
+jump @DRUGS1_32377 
+
+:DRUGS1_32335
+Car.SetSpeedInstantly(194@, 15.0)
+05EC: release_car 194@ from_path 
+07DB: set_car 194@ rotation_velocity_XYZ 5.5 3.3999 5.1003 through_center_of_mass 
+248@ = 2 
+
+:DRUGS1_32377
+if 
+  248@ == 2 
+jf @DRUGS1_32469 
+if 
+   Actor.Dead(45@)
+jf @DRUGS1_32469 
+05EC: release_car 194@ from_path 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_32462 
+Car.SetSpeedInstantly(194@, 15.0)
+07DB: set_car 194@ rotation_velocity_XYZ 5.5 3.3999 5.1003 through_center_of_mass 
+
+:DRUGS1_32462
+248@ = 3 
+
+:DRUGS1_32469
+if 
+  261@ == 1 
+jf @DRUGS1_32556 
+if 
+   Actor.Dead(44@)
+jf @DRUGS1_32556 
+if or
+   Actor.Dead(45@)
+   Car.Wrecked(194@)
+jf @DRUGS1_32556 
+05EC: release_car 194@ from_path 
+Marker.Disable(215@)
+Car.RemoveReferences(194@)
+Actor.RemoveReferences(44@)
+Actor.RemoveReferences(45@)
+261@ = 2 
+
+:DRUGS1_32556
+if 
+  249@ == 1 
+jf @DRUGS1_32805 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_32805 
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_32613 
+jump @DRUGS1_32805 
+
+:DRUGS1_32613
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_32763 
+if 
+   Actor.InCar(47@, 195@)
+jf @DRUGS1_32756 
+046C: 205@ = car 195@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_32756 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 47@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 47@ in_car 195@ 
+0713: actor 47@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+249@ = 2 
+
+:DRUGS1_32756
+jump @DRUGS1_32805 
+
+:DRUGS1_32763
+Car.SetSpeedInstantly(195@, 15.0)
+05EC: release_car 195@ from_path 
+07DB: set_car 195@ rotation_velocity_XYZ 1.5 4.3999 5.1003 through_center_of_mass 
+249@ = 2 
+
+:DRUGS1_32805
+if 
+  249@ == 2 
+jf @DRUGS1_32897 
+if 
+   Actor.Dead(47@)
+jf @DRUGS1_32897 
+05EC: release_car 195@ from_path 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_32890 
+Car.SetSpeedInstantly(195@, 15.0)
+07DB: set_car 195@ rotation_velocity_XYZ 1.5 4.3999 5.1003 through_center_of_mass 
+
+:DRUGS1_32890
+249@ = 3 
+
+:DRUGS1_32897
+if 
+  262@ == 1 
+jf @DRUGS1_32984 
+if 
+   Actor.Dead(46@)
+jf @DRUGS1_32984 
+if or
+   Actor.Dead(47@)
+   Car.Wrecked(195@)
+jf @DRUGS1_32984 
+05EC: release_car 195@ from_path 
+Marker.Disable(216@)
+Car.RemoveReferences(195@)
+Actor.RemoveReferences(46@)
+Actor.RemoveReferences(47@)
+262@ = 2 
+
+:DRUGS1_32984
+if 
+  250@ == 1 
+jf @DRUGS1_33233 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_33233 
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_33041 
+jump @DRUGS1_33233 
+
+:DRUGS1_33041
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_33191 
+if 
+   Actor.InCar(57@, 196@)
+jf @DRUGS1_33184 
+046C: 205@ = car 196@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_33184 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 57@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 57@ in_car 196@ 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+250@ = 2 
+
+:DRUGS1_33184
+jump @DRUGS1_33233 
+
+:DRUGS1_33191
+Car.SetSpeedInstantly(196@, 15.0)
+05EC: release_car 196@ from_path 
+07DB: set_car 196@ rotation_velocity_XYZ 2.5 3.3999 3.1003 through_center_of_mass 
+250@ = 2 
+
+:DRUGS1_33233
+if 
+  250@ == 2 
+jf @DRUGS1_33325 
+if 
+   Actor.Dead(57@)
+jf @DRUGS1_33325 
+05EC: release_car 196@ from_path 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_33318 
+Car.SetSpeedInstantly(196@, 15.0)
+07DB: set_car 196@ rotation_velocity_XYZ 2.5 3.3999 3.1003 through_center_of_mass 
+
+:DRUGS1_33318
+250@ = 3 
+
+:DRUGS1_33325
+if 
+  263@ == 1 
+jf @DRUGS1_33412 
+if 
+   Actor.Dead(56@)
+jf @DRUGS1_33412 
+if or
+   Actor.Dead(57@)
+   Car.Wrecked(196@)
+jf @DRUGS1_33412 
+05EC: release_car 196@ from_path 
+Marker.Disable(217@)
+Car.RemoveReferences(196@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(57@)
+263@ = 2 
+
+:DRUGS1_33412
+if 
+  265@ == 1 
+jf @DRUGS1_33564 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_33564 
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_33469 
+jump @DRUGS1_33564 
+
+:DRUGS1_33469
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_33552 
+if 
+   Actor.InCar(49@, 165@)
+jf @DRUGS1_33545 
+046C: 205@ = car 165@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_33545 
+0676: AS_actor 49@ in_car 165@ move_from_passengerseat_to_driverseat 
+265@ = 2 
+
+:DRUGS1_33545
+jump @DRUGS1_33564 
+
+:DRUGS1_33552
+05EC: release_car 165@ from_path 
+265@ = 2 
+
+:DRUGS1_33564
+if 
+  265@ == 2 
+jf @DRUGS1_33610 
+if 
+   Actor.Dead(49@)
+jf @DRUGS1_33610 
+05EC: release_car 165@ from_path 
+265@ = 3 
+
+:DRUGS1_33610
+if 
+  255@ == 1 
+jf @DRUGS1_33697 
+if 
+   Actor.Dead(48@)
+jf @DRUGS1_33697 
+if or
+   Actor.Dead(49@)
+   Car.Wrecked(165@)
+jf @DRUGS1_33697 
+05EC: release_car 165@ from_path 
+Marker.Disable(210@)
+Car.RemoveReferences(165@)
+Actor.RemoveReferences(48@)
+Actor.RemoveReferences(49@)
+255@ = 2 
+
+:DRUGS1_33697
+if 
+  266@ == 1 
+jf @DRUGS1_33849 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_33849 
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_33754 
+jump @DRUGS1_33849 
+
+:DRUGS1_33754
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_33837 
+if 
+   Actor.InCar(51@, 166@)
+jf @DRUGS1_33830 
+046C: 205@ = car 166@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_33830 
+0676: AS_actor 51@ in_car 166@ move_from_passengerseat_to_driverseat 
+266@ = 2 
+
+:DRUGS1_33830
+jump @DRUGS1_33849 
+
+:DRUGS1_33837
+05EC: release_car 166@ from_path 
+266@ = 2 
+
+:DRUGS1_33849
+if 
+  266@ == 2 
+jf @DRUGS1_33895 
+if 
+   Actor.Dead(51@)
+jf @DRUGS1_33895 
+05EC: release_car 166@ from_path 
+266@ = 3 
+
+:DRUGS1_33895
+if 
+  256@ == 1 
+jf @DRUGS1_33982 
+if 
+   Actor.Dead(50@)
+jf @DRUGS1_33982 
+if or
+   Actor.Dead(51@)
+   Car.Wrecked(166@)
+jf @DRUGS1_33982 
+05EC: release_car 166@ from_path 
+Car.RemoveReferences(166@)
+Actor.RemoveReferences(50@)
+Actor.RemoveReferences(51@)
+Marker.Disable(211@)
+256@ = 2 
+
+:DRUGS1_33982
+if 
+  243@ == 2 
+jf @DRUGS1_44196 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_44196 
+if 
+  272@ == 0 
+jf @DRUGS1_35956 
+fade 0 0 
+05EC: release_car 189@ from_path 
+Car.Destroy(189@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+05EC: release_car 194@ from_path 
+Car.Destroy(194@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+05EC: release_car 165@ from_path 
+Car.Destroy(165@)
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(49@)
+Car.Destroy(208@)
+Car.Destroy(207@)
+05EC: release_car 188@ from_path 
+Car.Destroy(188@)
+Actor.DestroyInstantly(197@)
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_34146 
+05EC: release_car 161@ from_path 
+
+:DRUGS1_34146
+07C0: load_path 269 
+07C0: load_path 270 
+07C0: load_path 271 
+07C0: load_path 272 
+07C0: load_path 273 
+07C0: load_path 274 
+07C0: load_path 275 
+07C0: load_path 276 
+07C0: load_path 277 
+07C0: load_path 278 
+07C0: load_path 279 
+07C0: load_path 280 
+07C0: load_path 281 
+038B: load_requested_models 
+
+:DRUGS1_34213
+if or
+87C1:   not path 273 available 
+87C1:   not path 274 available 
+87C1:   not path 275 available 
+87C1:   not path 276 available 
+87C1:   not path 277 available 
+jf @DRUGS1_34260 
+wait 0 
+jump @DRUGS1_34213 
+
+:DRUGS1_34260
+if or
+87C1:   not path 278 available 
+87C1:   not path 279 available 
+87C1:   not path 280 available 
+87C1:   not path 281 available 
+jf @DRUGS1_34302 
+wait 0 
+jump @DRUGS1_34260 
+
+:DRUGS1_34302
+if or
+87C1:   not path 269 available 
+87C1:   not path 270 available 
+87C1:   not path 271 available 
+87C1:   not path 272 available 
+jf @DRUGS1_34344 
+wait 0 
+jump @DRUGS1_34302 
+
+:DRUGS1_34344
+188@ = Car.Create(#PACKER, 1601.914, -1755.917, 4.6)
+09C4: set_car 188@ gas_tank_explosion_enabled 0 
+Car.Angle(188@) = 256.415
+197@ = Actor.CreateAsDriver(Mission2, #MAFFA, 188@)
+054A: set_actor 197@ can_be_shot_in_a_car 0 
+Car.SetImmunities(188@, 1, 1, 1, 1, 1)
+Actor.SetImmunities(197@, 1, 1, 1, 1, 1)
+060B: set_actor 197@ decision_maker_to 35@ 
+02A9: set_actor 197@ immune_to_nonplayer 1 
+209@ = Marker.CreateAboveCar(188@)
+018B: set_marker 209@ radar_mode 2 
+Marker.SetIconSize(209@, 2)
+208@ = Car.Create(#SULTAN, 1550.873, -1737.122, -14.1055)
+09C4: set_car 208@ gas_tank_explosion_enabled 0 
+Car.Angle(208@) = 256.415
+Car.SetImmunities(208@, 1, 1, 1, 1, 1)
+0683: attach_car 208@ to_car 188@ with_offset 0.0 -4.6 0.65 rotation 15.0 0.0 0.0 
+273@ = 1 
+207@ = Car.Create(#SULTAN, 1550.873, -1737.122, 14.1055)
+09C4: set_car 207@ gas_tank_explosion_enabled 0 
+Car.Angle(207@) = 256.415
+Car.SetImmunities(207@, 1, 1, 1, 1, 1)
+0683: attach_car 207@ to_car 188@ with_offset 0.0 1.15 2.4 rotation 15.0 0.0 0.0 
+274@ = 1 
+189@ = Car.Create(#BF400, 1505.103, -1733.09, 3.05)
+09C4: set_car 189@ gas_tank_explosion_enabled 0 
+Car.Angle(189@) = 258.539
+Car.SetImmunities(189@, 0, 1, 1, 1, 0)
+42@ = Actor.CreateAsDriver(Mission2, #MAFFA, 189@)
+Actor.Health(42@) = 10
+02A9: set_actor 42@ immune_to_nonplayer 10 
+060B: set_actor 42@ decision_maker_to 35@ 
+02A9: set_actor 42@ immune_to_nonplayer 1 
+43@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 189@, 0)
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 99999)
+Actor.Health(43@) = 10
+02A9: set_actor 43@ immune_to_nonplayer 10 
+060B: set_actor 43@ decision_maker_to 35@ 
+02A9: set_actor 43@ immune_to_nonplayer 1 
+247@ = 1 
+260@ = 1 
+214@ = Marker.CreateAboveCar(189@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+194@ = Car.Create(#BF400, 1487.213, -1734.792, 3.25)
+09C4: set_car 194@ gas_tank_explosion_enabled 0 
+Car.Angle(194@) = 258.716
+Car.SetImmunities(194@, 0, 1, 1, 1, 0)
+44@ = Actor.CreateAsDriver(Mission2, #MAFFA, 194@)
+060B: set_actor 44@ decision_maker_to 35@ 
+02A9: set_actor 44@ immune_to_nonplayer 1 
+Actor.Health(44@) = 20
+45@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 194@, 0)
+Actor.GiveWeaponAndAmmo(45@, MicroUzi, 99999)
+060B: set_actor 45@ decision_maker_to 35@ 
+02A9: set_actor 45@ immune_to_nonplayer 1 
+Actor.Health(45@) = 30
+248@ = 1 
+261@ = 1 
+215@ = Marker.CreateAboveCar(194@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+165@ = Car.Create(#SULTAN, 1496.864, -1731.303, 6.3)
+09C4: set_car 165@ gas_tank_explosion_enabled 0 
+Car.Angle(165@) = 257.724
+46@ = Actor.CreateAsDriver(Mission2, #MAFFA, 165@)
+060B: set_actor 46@ decision_maker_to 35@ 
+054A: set_actor 46@ can_be_shot_in_a_car 0 
+02A9: set_actor 46@ immune_to_nonplayer 1 
+47@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 165@, 0)
+Actor.GiveWeaponAndAmmo(47@, MicroUzi, 99999)
+02A9: set_actor 47@ immune_to_nonplayer 1 
+060B: set_actor 47@ decision_maker_to 35@ 
+Actor.Health(47@) = 10
+265@ = 1 
+255@ = 1 
+210@ = Marker.CreateAboveCar(165@)
+018B: set_marker 210@ radar_mode 2 
+Marker.SetIconSize(210@, 2)
+Car.Health(165@) = 1000
+wait 0 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_35224 
+05EB: assign_car 188@ to_path 269 
+
+:DRUGS1_35224
+if 
+   not Car.Wrecked(208@)
+jf @DRUGS1_35248 
+05EB: assign_car 208@ to_path 270 
+
+:DRUGS1_35248
+if 
+   not Car.Wrecked(207@)
+jf @DRUGS1_35272 
+05EB: assign_car 207@ to_path 271 
+
+:DRUGS1_35272
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_35296 
+05EB: assign_car 161@ to_path 272 
+
+:DRUGS1_35296
+if 
+   not Car.Wrecked(208@)
+jf @DRUGS1_35334 
+0684: detach_car 208@ 20.0 180.0 0.0 collision_detection 0 
+
+:DRUGS1_35334
+if 
+   not Car.Wrecked(207@)
+jf @DRUGS1_35372 
+0684: detach_car 207@ 20.0 180.0 0.0 collision_detection 0 
+
+:DRUGS1_35372
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_35396 
+05EB: assign_car 189@ to_path 273 
+
+:DRUGS1_35396
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_35420 
+05EB: assign_car 194@ to_path 274 
+
+:DRUGS1_35420
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_35444 
+05EB: assign_car 165@ to_path 275 
+
+:DRUGS1_35444
+0713: actor $PLAYER_ACTOR driveby_actor -1 car -1 point 0.0 0.0 0.0 radius 300.0 8 1 firing_rate 100 
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 346.2 rotation_speed 359.0 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_35538 
+Car.SetImmunities(161@, 0, 1, 1, 1, 1)
+
+:DRUGS1_35538
+fade 1 250 
+040D: unload_wav 1 
+040D: unload_wav 2 
+285@ = 0 
+282@ = 0 
+283@ = 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_35620 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+
+:DRUGS1_35620
+33@ = 0 
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_35679 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_35679
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_35762 
+if 
+  3 > 288@ 
+jf @DRUGS1_35762 
+Actor.GiveWeaponAndAmmo(42@, MicroUzi, 99999)
+0713: actor 42@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_35762
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_35845 
+if 
+  2 > 288@ 
+jf @DRUGS1_35845 
+Actor.GiveWeaponAndAmmo(44@, MicroUzi, 99999)
+0713: actor 44@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_35845
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_35897 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_35897
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_35949 
+0713: actor 47@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_35949
+272@ = 1 
+
+:DRUGS1_35956
+if 
+  272@ == 1 
+jf @DRUGS1_36501 
+if 
+01AD:   car 161@ sphere 0 near_point 1905.28 -1831.57 radius 12.0 12.0 
+jf @DRUGS1_36501 
+166@ = Car.Create(#SULTAN, 2002.102, -1890.368, 8.108)
+09C4: set_car 166@ gas_tank_explosion_enabled 0 
+Car.Angle(166@) = 44.1
+05EB: assign_car 166@ to_path 276 
+48@ = Actor.CreateAsDriver(Mission2, #MAFFA, 166@)
+060B: set_actor 48@ decision_maker_to 35@ 
+054A: set_actor 48@ can_be_shot_in_a_car 0 
+02A9: set_actor 48@ immune_to_nonplayer 1 
+49@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 166@, 0)
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 99999)
+02A9: set_actor 49@ immune_to_nonplayer 1 
+060B: set_actor 49@ decision_maker_to 35@ 
+Actor.Health(49@) = 10
+266@ = 1 
+256@ = 1 
+211@ = Marker.CreateAboveCar(166@)
+018B: set_marker 211@ radar_mode 2 
+Marker.SetIconSize(211@, 2)
+Car.Health(166@) = 1100
+Car.SetImmunities(166@, 0, 1, 0, 0, 0)
+167@ = Car.Create(#SULTAN, 2008.843, -1897.323, 8.1)
+09C4: set_car 167@ gas_tank_explosion_enabled 0 
+Car.Angle(167@) = 44.1
+05EB: assign_car 167@ to_path 277 
+Car.SetImmunities(167@, 0, 1, 1, 1, 0)
+Car.ImmuneToNonPlayer(167@) = True
+50@ = Actor.CreateAsDriver(Mission2, #MAFFA, 167@)
+060B: set_actor 50@ decision_maker_to 35@ 
+02A9: set_actor 50@ immune_to_nonplayer 1 
+51@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 167@, 0)
+Actor.GiveWeaponAndAmmo(51@, MicroUzi, 99999)
+02A9: set_actor 51@ immune_to_nonplayer 1 
+060B: set_actor 51@ decision_maker_to 35@ 
+Actor.Health(51@) = 10
+267@ = 1 
+257@ = 1 
+212@ = Marker.CreateAboveCar(167@)
+018B: set_marker 212@ radar_mode 2 
+Marker.SetIconSize(212@, 2)
+Car.Health(167@) = 700
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_36442 
+0713: actor 49@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 250.0 8 1 firing_rate 10 
+
+:DRUGS1_36442
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_36494 
+0713: actor 51@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 250.0 8 1 firing_rate 10 
+
+:DRUGS1_36494
+272@ = 2 
+
+:DRUGS1_36501
+if 
+  272@ == 2 
+jf @DRUGS1_37210 
+if 
+01AD:   car 161@ sphere 0 near_point 2101.55 -1850.81 radius 12.0 12.0 
+jf @DRUGS1_37210 
+196@ = Car.Create(#BF400, 2093.446, -1836.207, 12.72)
+09C4: set_car 196@ gas_tank_explosion_enabled 0 
+Car.Angle(196@) = 267.18
+Car.SetImmunities(196@, 0, 1, 1, 1, 0)
+52@ = Actor.CreateAsDriver(Mission2, #MAFFA, 196@)
+Actor.Health(52@) = 50
+060B: set_actor 52@ decision_maker_to 35@ 
+02A9: set_actor 52@ immune_to_nonplayer 1 
+53@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 196@, 0)
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 99999)
+060B: set_actor 53@ decision_maker_to 35@ 
+02A9: set_actor 53@ immune_to_nonplayer 1 
+Actor.Health(53@) = 10
+250@ = 1 
+263@ = 1 
+217@ = Marker.CreateAboveCar(196@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+05EB: assign_car 196@ to_path 279 
+195@ = Car.Create(#BF400, 2018.735, -1900.925, 8.108)
+09C4: set_car 195@ gas_tank_explosion_enabled 0 
+Car.Angle(195@) = 258.716
+Car.SetImmunities(195@, 0, 1, 1, 1, 0)
+54@ = Actor.CreateAsDriver(Mission2, #MAFFA, 195@)
+060B: set_actor 54@ decision_maker_to 35@ 
+02A9: set_actor 54@ immune_to_nonplayer 1 
+55@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 195@, 0)
+Actor.GiveWeaponAndAmmo(55@, MicroUzi, 99999)
+060B: set_actor 55@ decision_maker_to 35@ 
+02A9: set_actor 55@ immune_to_nonplayer 1 
+Actor.Health(54@) = 10
+02A9: set_actor 54@ immune_to_nonplayer 10 
+Actor.Health(55@) = 30
+02A9: set_actor 55@ immune_to_nonplayer 10 
+249@ = 1 
+262@ = 1 
+216@ = Marker.CreateAboveCar(195@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+05EB: assign_car 195@ to_path 278 
+if 
+   not Actor.Dead(52@)
+jf @DRUGS1_37016 
+if 
+  4 > 288@ 
+jf @DRUGS1_37016 
+Actor.GiveWeaponAndAmmo(52@, MicroUzi, 99999)
+0713: actor 52@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_37016
+if 
+   not Actor.Dead(54@)
+jf @DRUGS1_37099 
+if 
+  4 > 288@ 
+jf @DRUGS1_37099 
+Actor.GiveWeaponAndAmmo(54@, MicroUzi, 99999)
+0713: actor 54@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_37099
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_37151 
+0713: actor 53@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 250.0 8 1 firing_rate 100 
+
+:DRUGS1_37151
+if 
+   not Actor.Dead(55@)
+jf @DRUGS1_37203 
+0713: actor 55@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 250.0 8 1 firing_rate 100 
+
+:DRUGS1_37203
+272@ = 3 
+
+:DRUGS1_37210
+if 
+  272@ == 3 
+jf @DRUGS1_37641 
+if 
+01AD:   car 161@ sphere 0 near_point 2425.93 -1874.76 radius 10.0 10.0 
+jf @DRUGS1_37641 
+Car.Destroy(208@)
+Car.Destroy(207@)
+Car.Destroy(189@)
+Car.Destroy(194@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+Car.Destroy(165@)
+Car.Destroy(166@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(49@)
+206@ = Car.Create(#BF400, 2417.1, -1876.578, 12.92)
+09C4: set_car 206@ gas_tank_explosion_enabled 0 
+Car.Angle(206@) = 271.4
+05EB: assign_car 206@ to_path 280 
+Car.SetImmunities(206@, 0, 1, 1, 1, 0)
+56@ = Actor.CreateAsDriver(Mission2, #MAFFA, 206@)
+060B: set_actor 56@ decision_maker_to 35@ 
+02A9: set_actor 56@ immune_to_nonplayer 1 
+57@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 206@, 0)
+Actor.GiveWeaponAndAmmo(57@, MicroUzi, 99999)
+060B: set_actor 57@ decision_maker_to 35@ 
+02A9: set_actor 57@ immune_to_nonplayer 1 
+Actor.Health(56@) = 10
+Actor.Health(57@) = 10
+251@ = 1 
+264@ = 1 
+218@ = Marker.CreateAboveCar(206@)
+018B: set_marker 218@ radar_mode 2 
+Marker.SetIconSize(218@, 2)
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_37569 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_37569
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_37634 
+Actor.GiveWeaponAndAmmo(56@, MicroUzi, 99999)
+0713: actor 56@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 289@ 
+
+:DRUGS1_37634
+272@ = 4 
+
+:DRUGS1_37641
+if 
+  272@ == 4 
+jf @DRUGS1_37924 
+if 
+01AD:   car 161@ sphere 0 near_point 2499.36 -1871.699 radius 10.0 10.0 
+jf @DRUGS1_37924 
+168@ = Car.Create(#SULTAN, 2529.256, -1892.9, 13.24)
+09C4: set_car 168@ gas_tank_explosion_enabled 0 
+Car.Angle(168@) = 269.177
+05EB: assign_car 168@ to_path 281 
+Car.Health(168@) = 600
+58@ = Actor.CreateAsDriver(Mission2, #MAFFA, 168@)
+060B: set_actor 58@ decision_maker_to 35@ 
+02A9: set_actor 58@ immune_to_nonplayer 1 
+59@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 168@, 0)
+Actor.GiveWeaponAndAmmo(59@, MicroUzi, 99999)
+02A9: set_actor 59@ immune_to_nonplayer 1 
+060B: set_actor 59@ decision_maker_to 35@ 
+268@ = 1 
+258@ = 1 
+213@ = Marker.CreateAboveCar(168@)
+018B: set_marker 213@ radar_mode 2 
+Marker.SetIconSize(213@, 2)
+Car.Health(168@) = 800
+if 
+   not Actor.Dead(59@)
+jf @DRUGS1_37917 
+0713: actor 59@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 90 
+
+:DRUGS1_37917
+272@ = 5 
+
+:DRUGS1_37924
+if 
+  272@ == 5 
+jf @DRUGS1_37988 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_37988 
+if 
+86AA:   not NOP_false 188@ 
+jf @DRUGS1_37988 
+Car.LockInCurrentPosition(188@) = True
+272@ = 6 
+
+:DRUGS1_37988
+if 
+  272@ == 6 
+jf @DRUGS1_38056 
+if 
+  279@ == 0 
+jf @DRUGS1_38056 
+if 
+  243@ == 2 
+jf @DRUGS1_38056 
+279@ = 1 
+277@ = 1 
+
+:DRUGS1_38056
+if 
+  273@ == 1 
+jf @DRUGS1_38210 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_38210 
+if 
+   not Car.Wrecked(208@)
+jf @DRUGS1_38210 
+if 
+  33@ > 26250 
+jf @DRUGS1_38210 
+if or
+   not 265@ == 3 
+   not 255@ == 2 
+jf @DRUGS1_38210 
+Car.SetImmunities(208@, 0, 0, 0, 0, 0)
+05EC: release_car 208@ from_path 
+Car.Health(208@) = 200
+07DB: set_car 208@ rotation_velocity_XYZ 1.5 -2.3999 4.1003 through_center_of_mass 
+020B: explode_car 208@ 
+273@ = 2 
+
+:DRUGS1_38210
+if 
+  273@ == 2 
+jf @DRUGS1_38275 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_38275 
+if 
+  33@ > 26900 
+jf @DRUGS1_38275 
+020B: explode_car 165@ 
+273@ = 3 
+
+:DRUGS1_38275
+if 
+  274@ == 1 
+jf @DRUGS1_38376 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_38376 
+if 
+   not Car.Wrecked(207@)
+jf @DRUGS1_38376 
+if 
+  33@ > 35647 
+jf @DRUGS1_38376 
+Car.SetImmunities(207@, 0, 0, 0, 0, 0)
+Car.Health(207@) = 500
+274@ = 2 
+
+:DRUGS1_38376
+if 
+  274@ == 2 
+jf @DRUGS1_38443 
+if 
+  33@ > 35800 
+jf @DRUGS1_38443 
+if 
+   not Car.Wrecked(207@)
+jf @DRUGS1_38443 
+020B: explode_car 207@ 
+274@ = 3 
+
+:DRUGS1_38443
+if 
+  274@ == 3 
+jf @DRUGS1_38510 
+if 
+  33@ > 36500 
+jf @DRUGS1_38510 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_38510 
+020B: explode_car 166@ 
+274@ = 4 
+
+:DRUGS1_38510
+if 
+  247@ == 1 
+jf @DRUGS1_38758 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_38758 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_38567 
+jump @DRUGS1_38758 
+
+:DRUGS1_38567
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_38716 
+if 
+   Actor.InCar(43@, 189@)
+jf @DRUGS1_38709 
+046C: 205@ = car 189@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_38709 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 43@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 43@ in_car 189@ 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+247@ = 2 
+
+:DRUGS1_38709
+jump @DRUGS1_38758 
+
+:DRUGS1_38716
+Car.SetSpeedInstantly(189@, 18.0)
+05EC: release_car 189@ from_path 
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+247@ = 2 
+
+:DRUGS1_38758
+if 
+  247@ == 2 
+jf @DRUGS1_38850 
+if 
+   Actor.Dead(43@)
+jf @DRUGS1_38850 
+05EC: release_car 189@ from_path 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_38843 
+Car.SetSpeedInstantly(189@, 18.0)
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_38843
+247@ = 3 
+
+:DRUGS1_38850
+if 
+  260@ == 1 
+jf @DRUGS1_38937 
+if 
+   Actor.Dead(42@)
+jf @DRUGS1_38937 
+if or
+   Actor.Dead(43@)
+   Car.Wrecked(189@)
+jf @DRUGS1_38937 
+05EC: release_car 189@ from_path 
+Marker.Disable(214@)
+Car.RemoveReferences(189@)
+Actor.RemoveReferences(42@)
+Actor.RemoveReferences(43@)
+260@ = 2 
+
+:DRUGS1_38937
+if 
+  248@ == 1 
+jf @DRUGS1_39185 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_39185 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_38994 
+jump @DRUGS1_39185 
+
+:DRUGS1_38994
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_39143 
+if 
+   Actor.InCar(45@, 194@)
+jf @DRUGS1_39136 
+046C: 205@ = car 194@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_39136 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 45@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 45@ in_car 194@ 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+248@ = 2 
+
+:DRUGS1_39136
+jump @DRUGS1_39185 
+
+:DRUGS1_39143
+Car.SetSpeedInstantly(194@, 18.0)
+05EC: release_car 194@ from_path 
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+248@ = 2 
+
+:DRUGS1_39185
+if 
+  248@ == 2 
+jf @DRUGS1_39277 
+if 
+   Actor.Dead(45@)
+jf @DRUGS1_39277 
+05EC: release_car 194@ from_path 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_39270 
+Car.SetSpeedInstantly(194@, 18.0)
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_39270
+248@ = 3 
+
+:DRUGS1_39277
+if 
+  261@ == 1 
+jf @DRUGS1_39364 
+if 
+   Actor.Dead(44@)
+jf @DRUGS1_39364 
+if or
+   Actor.Dead(45@)
+   Car.Wrecked(194@)
+jf @DRUGS1_39364 
+05EC: release_car 194@ from_path 
+Marker.Disable(215@)
+Car.RemoveReferences(194@)
+Actor.RemoveReferences(44@)
+Actor.RemoveReferences(45@)
+261@ = 2 
+
+:DRUGS1_39364
+if 
+  265@ == 1 
+jf @DRUGS1_39516 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_39516 
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_39421 
+jump @DRUGS1_39516 
+
+:DRUGS1_39421
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_39504 
+if 
+   Actor.InCar(47@, 165@)
+jf @DRUGS1_39497 
+046C: 205@ = car 165@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_39497 
+0676: AS_actor 47@ in_car 165@ move_from_passengerseat_to_driverseat 
+265@ = 2 
+
+:DRUGS1_39497
+jump @DRUGS1_39516 
+
+:DRUGS1_39504
+05EC: release_car 165@ from_path 
+265@ = 2 
+
+:DRUGS1_39516
+if 
+  265@ == 2 
+jf @DRUGS1_39583 
+if 
+   Actor.Dead(47@)
+jf @DRUGS1_39583 
+05EC: release_car 165@ from_path 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_39576 
+Car.SetToNormalDriver(165@)
+
+:DRUGS1_39576
+265@ = 3 
+
+:DRUGS1_39583
+if 
+  255@ == 1 
+jf @DRUGS1_39691 
+if 
+   Actor.Dead(46@)
+jf @DRUGS1_39691 
+if or
+   Actor.Dead(47@)
+   Car.Wrecked(165@)
+jf @DRUGS1_39691 
+05EC: release_car 165@ from_path 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_39664 
+Car.SetToNormalDriver(165@)
+
+:DRUGS1_39664
+Marker.Disable(210@)
+Car.RemoveReferences(165@)
+Actor.RemoveReferences(46@)
+Actor.RemoveReferences(47@)
+255@ = 2 
+
+:DRUGS1_39691
+if 
+  266@ == 1 
+jf @DRUGS1_39843 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_39843 
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_39748 
+jump @DRUGS1_39843 
+
+:DRUGS1_39748
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_39831 
+if 
+   Actor.InCar(49@, 166@)
+jf @DRUGS1_39824 
+046C: 205@ = car 166@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_39824 
+0676: AS_actor 49@ in_car 166@ move_from_passengerseat_to_driverseat 
+266@ = 2 
+
+:DRUGS1_39824
+jump @DRUGS1_39843 
+
+:DRUGS1_39831
+05EC: release_car 166@ from_path 
+266@ = 2 
+
+:DRUGS1_39843
+if 
+  266@ == 2 
+jf @DRUGS1_39910 
+if 
+   Actor.Dead(49@)
+jf @DRUGS1_39910 
+05EC: release_car 166@ from_path 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_39903 
+Car.SetToNormalDriver(166@)
+
+:DRUGS1_39903
+266@ = 3 
+
+:DRUGS1_39910
+if 
+  256@ == 1 
+jf @DRUGS1_40018 
+if 
+   Actor.Dead(48@)
+jf @DRUGS1_40018 
+if or
+   Actor.Dead(49@)
+   Car.Wrecked(166@)
+jf @DRUGS1_40018 
+05EC: release_car 166@ from_path 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_39991 
+Car.SetToNormalDriver(166@)
+
+:DRUGS1_39991
+Marker.Disable(211@)
+Car.RemoveReferences(166@)
+Actor.RemoveReferences(48@)
+Actor.RemoveReferences(49@)
+256@ = 2 
+
+:DRUGS1_40018
+if 
+  267@ == 1 
+jf @DRUGS1_40170 
+if 
+   not Car.Wrecked(167@)
+jf @DRUGS1_40170 
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_40075 
+jump @DRUGS1_40170 
+
+:DRUGS1_40075
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_40158 
+if 
+   Actor.InCar(51@, 167@)
+jf @DRUGS1_40151 
+046C: 205@ = car 167@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_40151 
+0676: AS_actor 51@ in_car 167@ move_from_passengerseat_to_driverseat 
+267@ = 2 
+
+:DRUGS1_40151
+jump @DRUGS1_40170 
+
+:DRUGS1_40158
+05EC: release_car 167@ from_path 
+267@ = 2 
+
+:DRUGS1_40170
+if 
+  267@ == 2 
+jf @DRUGS1_40237 
+if 
+   Actor.Dead(51@)
+jf @DRUGS1_40237 
+05EC: release_car 167@ from_path 
+if 
+   not Car.Wrecked(167@)
+jf @DRUGS1_40230 
+Car.SetToNormalDriver(167@)
+
+:DRUGS1_40230
+267@ = 3 
+
+:DRUGS1_40237
+if 
+  257@ == 1 
+jf @DRUGS1_40345 
+if 
+   Actor.Dead(50@)
+jf @DRUGS1_40345 
+if or
+   Actor.Dead(51@)
+   Car.Wrecked(167@)
+jf @DRUGS1_40345 
+05EC: release_car 167@ from_path 
+Marker.Disable(212@)
+if 
+   not Car.Wrecked(167@)
+jf @DRUGS1_40323 
+Car.SetToNormalDriver(167@)
+
+:DRUGS1_40323
+Car.RemoveReferences(167@)
+Actor.RemoveReferences(50@)
+Actor.RemoveReferences(51@)
+257@ = 2 
+
+:DRUGS1_40345
+if 
+  250@ == 1 
+jf @DRUGS1_40593 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_40593 
+if 
+   not Actor.Dead(52@)
+jf @DRUGS1_40402 
+jump @DRUGS1_40593 
+
+:DRUGS1_40402
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_40551 
+if 
+   Actor.InCar(53@, 196@)
+jf @DRUGS1_40544 
+046C: 205@ = car 196@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_40544 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 53@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 53@ in_car 196@ 
+0713: actor 53@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+250@ = 2 
+
+:DRUGS1_40544
+jump @DRUGS1_40593 
+
+:DRUGS1_40551
+Car.SetSpeedInstantly(196@, 18.0)
+05EC: release_car 196@ from_path 
+07DB: set_car 196@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+250@ = 2 
+
+:DRUGS1_40593
+if 
+  250@ == 2 
+jf @DRUGS1_40685 
+if 
+   Actor.Dead(53@)
+jf @DRUGS1_40685 
+05EC: release_car 196@ from_path 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_40678 
+Car.SetSpeedInstantly(196@, 18.0)
+07DB: set_car 196@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_40678
+250@ = 3 
+
+:DRUGS1_40685
+if 
+  263@ == 1 
+jf @DRUGS1_40772 
+if 
+   Actor.Dead(52@)
+jf @DRUGS1_40772 
+if or
+   Actor.Dead(53@)
+   Car.Wrecked(196@)
+jf @DRUGS1_40772 
+05EC: release_car 196@ from_path 
+Marker.Disable(217@)
+Car.RemoveReferences(196@)
+Actor.RemoveReferences(52@)
+Actor.RemoveReferences(53@)
+263@ = 2 
+
+:DRUGS1_40772
+if 
+  249@ == 1 
+jf @DRUGS1_41020 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_41020 
+if 
+   not Actor.Dead(54@)
+jf @DRUGS1_40829 
+jump @DRUGS1_41020 
+
+:DRUGS1_40829
+if 
+   not Actor.Dead(55@)
+jf @DRUGS1_40978 
+if 
+   Actor.InCar(55@, 195@)
+jf @DRUGS1_40971 
+046C: 205@ = car 195@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_40971 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 55@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 55@ in_car 195@ 
+0713: actor 55@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+249@ = 2 
+
+:DRUGS1_40971
+jump @DRUGS1_41020 
+
+:DRUGS1_40978
+Car.SetSpeedInstantly(195@, 18.0)
+05EC: release_car 195@ from_path 
+07DB: set_car 195@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+249@ = 2 
+
+:DRUGS1_41020
+if 
+  249@ == 2 
+jf @DRUGS1_41112 
+if 
+   Actor.Dead(55@)
+jf @DRUGS1_41112 
+05EC: release_car 195@ from_path 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_41105 
+Car.SetSpeedInstantly(195@, 18.0)
+07DB: set_car 195@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_41105
+249@ = 3 
+
+:DRUGS1_41112
+if 
+  262@ == 1 
+jf @DRUGS1_41199 
+if 
+   Actor.Dead(54@)
+jf @DRUGS1_41199 
+if or
+   Actor.Dead(55@)
+   Car.Wrecked(195@)
+jf @DRUGS1_41199 
+05EC: release_car 195@ from_path 
+Marker.Disable(216@)
+Car.RemoveReferences(195@)
+Actor.RemoveReferences(54@)
+Actor.RemoveReferences(55@)
+262@ = 2 
+
+:DRUGS1_41199
+if 
+  251@ == 1 
+jf @DRUGS1_41447 
+if 
+   not Car.Wrecked(206@)
+jf @DRUGS1_41447 
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_41256 
+jump @DRUGS1_41447 
+
+:DRUGS1_41256
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_41405 
+if 
+   Actor.InCar(57@, 206@)
+jf @DRUGS1_41398 
+046C: 205@ = car 206@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_41398 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 57@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 57@ in_car 206@ 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+251@ = 2 
+
+:DRUGS1_41398
+jump @DRUGS1_41447 
+
+:DRUGS1_41405
+Car.SetSpeedInstantly(206@, 18.0)
+05EC: release_car 206@ from_path 
+07DB: set_car 206@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+251@ = 2 
+
+:DRUGS1_41447
+if 
+  251@ == 2 
+jf @DRUGS1_41539 
+if 
+   Actor.Dead(57@)
+jf @DRUGS1_41539 
+05EC: release_car 206@ from_path 
+if 
+   not Car.Wrecked(206@)
+jf @DRUGS1_41532 
+Car.SetSpeedInstantly(206@, 18.0)
+07DB: set_car 206@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_41532
+251@ = 3 
+
+:DRUGS1_41539
+if 
+  264@ == 1 
+jf @DRUGS1_41626 
+if 
+   Actor.Dead(56@)
+jf @DRUGS1_41626 
+if or
+   Actor.Dead(57@)
+   Car.Wrecked(206@)
+jf @DRUGS1_41626 
+05EC: release_car 206@ from_path 
+Marker.Disable(218@)
+Car.RemoveReferences(206@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(57@)
+264@ = 2 
+
+:DRUGS1_41626
+if 
+  268@ == 1 
+jf @DRUGS1_41778 
+if 
+   not Car.Wrecked(168@)
+jf @DRUGS1_41778 
+if 
+   not Actor.Dead(58@)
+jf @DRUGS1_41683 
+jump @DRUGS1_41778 
+
+:DRUGS1_41683
+if 
+   not Actor.Dead(59@)
+jf @DRUGS1_41766 
+if 
+   Actor.InCar(59@, 168@)
+jf @DRUGS1_41759 
+046C: 205@ = car 168@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_41759 
+0676: AS_actor 59@ in_car 168@ move_from_passengerseat_to_driverseat 
+268@ = 2 
+
+:DRUGS1_41759
+jump @DRUGS1_41778 
+
+:DRUGS1_41766
+05EC: release_car 168@ from_path 
+268@ = 2 
+
+:DRUGS1_41778
+if 
+  268@ == 2 
+jf @DRUGS1_41845 
+if 
+   Actor.Dead(59@)
+jf @DRUGS1_41845 
+05EC: release_car 168@ from_path 
+if 
+   not Car.Wrecked(168@)
+jf @DRUGS1_41838 
+Car.SetToNormalDriver(168@)
+
+:DRUGS1_41838
+268@ = 3 
+
+:DRUGS1_41845
+if 
+  258@ == 1 
+jf @DRUGS1_41953 
+if 
+   Actor.Dead(58@)
+jf @DRUGS1_41953 
+if or
+   Actor.Dead(59@)
+   Car.Wrecked(168@)
+jf @DRUGS1_41953 
+05EC: release_car 168@ from_path 
+if 
+   not Car.Wrecked(168@)
+jf @DRUGS1_41926 
+Car.SetToNormalDriver(168@)
+
+:DRUGS1_41926
+Marker.Disable(213@)
+Car.RemoveReferences(168@)
+Actor.RemoveReferences(58@)
+Actor.RemoveReferences(59@)
+258@ = 2 
+
+:DRUGS1_41953
+if 
+  272@ > 0 
+jf @DRUGS1_44196 
+if 
+  282@ == 0 
+jf @DRUGS1_42038 
+if 
+  283@ == 0 
+jf @DRUGS1_42038 
+04AF: 239@ = 35689 // = constant 
+05AA: 240@s = 'SMO4_HA' // @s = 'short'  // ~z~Oh shit, now the truck's found us again!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42038
+if 
+  282@ == 1 
+jf @DRUGS1_42105 
+if 
+  283@ == 0 
+jf @DRUGS1_42105 
+04AF: 239@ = 35690 // = constant 
+05AA: 240@s = 'SMO4_HB' // @s = 'short'  // ~z~Man, stop being so negative!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42105
+if 
+  282@ == 2 
+jf @DRUGS1_42172 
+if 
+  283@ == 0 
+jf @DRUGS1_42172 
+04AF: 239@ = 35691 // = constant 
+05AA: 240@s = 'SMO4_HC' // @s = 'short'  // ~z~Focus on the good news!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42172
+if 
+  282@ == 3 
+jf @DRUGS1_42239 
+if 
+  283@ == 0 
+jf @DRUGS1_42239 
+04AF: 239@ = 35692 // = constant 
+05AA: 240@s = 'SMO4_HD' // @s = 'short'  // ~z~Such as?
+gosub @DRUGS1_53924 
+
+:DRUGS1_42239
+if 
+  282@ == 4 
+jf @DRUGS1_42306 
+if 
+  283@ == 0 
+jf @DRUGS1_42306 
+04AF: 239@ = 35693 // = constant 
+05AA: 240@s = 'SMO4_HE' // @s = 'short'  // ~z~We ain't dead, and your trigger finger still works, fool!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42306
+if 
+  282@ == 5 
+jf @DRUGS1_42373 
+if 
+  283@ == 0 
+jf @DRUGS1_42373 
+04AF: 239@ = 35694 // = constant 
+05AA: 240@s = 'SMO4_HF' // @s = 'short'  // ~z~I think the gearbox is screwed up on this thing! I can't get no speed!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42373
+if 
+  282@ == 6 
+jf @DRUGS1_42440 
+if 
+  283@ == 0 
+jf @DRUGS1_42440 
+04AF: 239@ = 35695 // = constant 
+05AA: 240@s = 'SMO4_HH' // @s = 'short'  // ~z~Yeah, who negative now, bitch?
+gosub @DRUGS1_53924 
+
+:DRUGS1_42440
+if 
+  282@ == 7 
+jf @DRUGS1_42507 
+if 
+  283@ == 0 
+jf @DRUGS1_42507 
+04AF: 239@ = 35696 // = constant 
+05AA: 240@s = 'SMO4_HJ' // @s = 'short'  // ~z~Point taken, I'll keep my mouth shut from now on.
+gosub @DRUGS1_53924 
+
+:DRUGS1_42507
+if 
+  282@ == 8 
+jf @DRUGS1_42574 
+if 
+  283@ == 0 
+jf @DRUGS1_42574 
+04AF: 239@ = 35697 // = constant 
+05AA: 240@s = 'SMO4_HK' // @s = 'short'  // ~z~What they up to, Carl?
+gosub @DRUGS1_53924 
+
+:DRUGS1_42574
+if 
+  285@ == 0 
+jf @DRUGS1_42637 
+if 
+01AD:   car 161@ sphere 0 near_point 2047.59 -1850.32 radius 12.0 12.0 
+jf @DRUGS1_42637 
+285@ = 1 
+
+:DRUGS1_42637
+if 
+  282@ == 9 
+jf @DRUGS1_42704 
+if 
+  283@ == 0 
+jf @DRUGS1_42704 
+04AF: 239@ = 35698 // = constant 
+05AA: 240@s = 'SMO4_HL' // @s = 'short'  // ~z~Don't ask me, I'm just a tourist!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42704
+if 
+  282@ == 10 
+jf @DRUGS1_42771 
+if 
+  283@ == 0 
+jf @DRUGS1_42771 
+04AF: 239@ = 35699 // = constant 
+05AA: 240@s = 'SMO4_HM' // @s = 'short'  // ~z~They's up to something...
+gosub @DRUGS1_53924 
+
+:DRUGS1_42771
+if 
+  282@ == 11 
+jf @DRUGS1_42856 
+if 
+  283@ == 0 
+jf @DRUGS1_42856 
+if 
+  285@ == 1 
+jf @DRUGS1_42856 
+04AF: 239@ = 35700 // = constant 
+05AA: 240@s = 'SMO4_HN' // @s = 'short'  // ~z~OH SHIT!
+gosub @DRUGS1_53924 
+
+:DRUGS1_42856
+if 
+  285@ == 1 
+jf @DRUGS1_42919 
+if 
+01AD:   car 161@ sphere 0 near_point 2121.17 -1853.67 radius 12.0 12.0 
+jf @DRUGS1_42919 
+285@ = 2 
+
+:DRUGS1_42919
+if 
+  282@ == 12 
+jf @DRUGS1_43062 
+if 
+  283@ == 0 
+jf @DRUGS1_43062 
+if 
+  285@ == 2 
+jf @DRUGS1_43062 
+0209: 5@ = random_int_in_ranges 0 2 
+if 
+  5@ == 0 
+jf @DRUGS1_43031 
+04AF: 239@ = 35685 // = constant 
+05AA: 240@s = 'SMO4_GM' // @s = 'short'  // ~z~Oh man, the cars found a ramp!
+jump @DRUGS1_43055 
+
+:DRUGS1_43031
+04AF: 239@ = 35687 // = constant 
+05AA: 240@s = 'SMO4_GO' // @s = 'short'  // ~z~Smoke, there's more cars comin' in on the left!
+
+:DRUGS1_43055
+gosub @DRUGS1_53924 
+
+:DRUGS1_43062
+if 
+  282@ == 13 
+jf @DRUGS1_43129 
+if 
+  283@ == 0 
+jf @DRUGS1_43129 
+04AF: 239@ = 35688 // = constant 
+05AA: 240@s = 'SMO4_GP' // @s = 'short'  // ~z~Don't tell me about it, shoot!
+gosub @DRUGS1_53924 
+
+:DRUGS1_43129
+if 
+  285@ == 2 
+jf @DRUGS1_43192 
+if 
+01AD:   car 161@ sphere 0 near_point 2216.75 -1854.73 radius 12.0 12.0 
+jf @DRUGS1_43192 
+285@ = 3 
+
+:DRUGS1_43192
+if 
+  282@ == 14 
+jf @DRUGS1_43277 
+if 
+  283@ == 0 
+jf @DRUGS1_43277 
+if 
+  285@ == 3 
+jf @DRUGS1_43277 
+04AF: 239@ = 35702 // = constant 
+05AA: 240@s = 'SMO4_HP' // @s = 'short'  // ~z~Hold on!
+gosub @DRUGS1_53924 
+
+:DRUGS1_43277
+if 
+  282@ == 15 
+jf @DRUGS1_43451 
+if 
+  283@ == 0 
+jf @DRUGS1_43451 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_43371 
+04AF: 239@ = 35703 // = constant 
+05AA: 240@s = 'SMO4_HQ' // @s = 'short'  // ~z~Take the high road!
+jump @DRUGS1_43444 
+
+:DRUGS1_43371
+if 
+  5@ == 1 
+jf @DRUGS1_43420 
+04AF: 239@ = 35704 // = constant 
+05AA: 240@s = 'SMO4_HR' // @s = 'short'  // ~z~Hit that ramp on the right!
+jump @DRUGS1_43444 
+
+:DRUGS1_43420
+04AF: 239@ = 35705 // = constant 
+05AA: 240@s = 'SMO4_HS' // @s = 'short'  // ~z~Get us up that ramp!
+
+:DRUGS1_43444
+gosub @DRUGS1_53924 
+
+:DRUGS1_43451
+if 
+  282@ == 16 
+jf @DRUGS1_43625 
+if 
+  283@ == 0 
+jf @DRUGS1_43625 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_43545 
+04AF: 239@ = 35706 // = constant 
+05AA: 240@s = 'SMO4_HT' // @s = 'short'  // ~z~I'm on it, baby!
+jump @DRUGS1_43618 
+
+:DRUGS1_43545
+if 
+  5@ == 1 
+jf @DRUGS1_43594 
+04AF: 239@ = 35707 // = constant 
+05AA: 240@s = 'SMO4_HU' // @s = 'short'  // ~z~I got you, I got you, baby!
+jump @DRUGS1_43618 
+
+:DRUGS1_43594
+04AF: 239@ = 35708 // = constant 
+05AA: 240@s = 'SMO4_HV' // @s = 'short'  // ~z~Yes Sir!
+
+:DRUGS1_43618
+gosub @DRUGS1_53924 
+
+:DRUGS1_43625
+if 
+  285@ == 3 
+jf @DRUGS1_43688 
+if 
+01AD:   car 161@ sphere 0 near_point 2435.94 -1874.57 radius 12.0 12.0 
+jf @DRUGS1_43688 
+285@ = 4 
+
+:DRUGS1_43688
+if 
+  282@ == 17 
+jf @DRUGS1_43773 
+if 
+  283@ == 0 
+jf @DRUGS1_43773 
+if 
+  285@ == 4 
+jf @DRUGS1_43773 
+04AF: 239@ = 35684 // = constant 
+05AA: 240@s = 'SMO4_GL' // @s = 'short'  // ~z~We still got bikes on us, man!
+gosub @DRUGS1_53924 
+
+:DRUGS1_43773
+if 
+  282@ == 18 
+jf @DRUGS1_43840 
+if 
+  283@ == 0 
+jf @DRUGS1_43840 
+04AF: 239@ = 35686 // = constant 
+05AA: 240@s = 'SMO4_GN' // @s = 'short'  // ~z~Man, quit bitchin' and shoot as many of them assholes as you can!
+gosub @DRUGS1_53924 
+
+:DRUGS1_43840
+if 
+  285@ == 4 
+jf @DRUGS1_43903 
+if 
+01AD:   car 161@ sphere 0 near_point 2539.11 -1865.31 radius 12.0 12.0 
+jf @DRUGS1_43903 
+285@ = 5 
+
+:DRUGS1_43903
+if 
+  282@ == 19 
+jf @DRUGS1_43988 
+if 
+  283@ == 0 
+jf @DRUGS1_43988 
+if 
+  285@ == 4 
+jf @DRUGS1_43988 
+04AF: 239@ = 35709 // = constant 
+05AA: 240@s = 'SMO4_JA' // @s = 'short'  // ~z~Fools totaled their truck!
+gosub @DRUGS1_53924 
+
+:DRUGS1_43988
+if 
+  282@ == 20 
+jf @DRUGS1_44055 
+if 
+  283@ == 0 
+jf @DRUGS1_44055 
+04AF: 239@ = 35710 // = constant 
+05AA: 240@s = 'SMO4_JB' // @s = 'short'  // ~z~Go around 'em, man!
+gosub @DRUGS1_53924 
+
+:DRUGS1_44055
+if 
+  282@ == 21 
+jf @DRUGS1_44122 
+if 
+  283@ == 0 
+jf @DRUGS1_44122 
+04AF: 239@ = 35711 // = constant 
+05AA: 240@s = 'SMO4_JC' // @s = 'short'  // ~z~Screw that, we're taking the scenic route!
+gosub @DRUGS1_53924 
+
+:DRUGS1_44122
+if 
+  282@ == 22 
+jf @DRUGS1_44189 
+if 
+  283@ == 0 
+jf @DRUGS1_44189 
+04AF: 239@ = 35712 // = constant 
+05AA: 240@s = 'SMO4_JD' // @s = 'short'  // ~z~Houston, we have ignition!
+gosub @DRUGS1_53924 
+
+:DRUGS1_44189
+gosub @DRUGS1_53966 
+
+:DRUGS1_44196
+if 
+  279@ == 1 
+jf @DRUGS1_46225 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_46225 
+if 
+  277@ == 1 
+jf @DRUGS1_45174 
+if 
+01AD:   car 161@ sphere 0 near_point 2565.98 -1747.12 radius 12.0 12.0 
+jf @DRUGS1_45174 
+03D5: remove_text 'SMO4_JD'  // ~z~Houston, we have ignition!
+wait 1000 
+fade 0 0 
+07C0: load_path 282 
+07C0: load_path 283 
+07C0: load_path 284 
+07C0: load_path 285 
+07C0: load_path 286 
+Model.Load(#STORM_DRAIN_COVER)
+Model.Load(#BARREL4)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Car.SetImmunities(161@, 1, 1, 1, 1, 1)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_44400 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+
+:DRUGS1_44400
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_44438 
+0657: car 188@ open_door 2 
+
+:DRUGS1_44438
+130@ = 2569.144 
+131@ = -1676.185 
+132@ = 2.915 
+133@ = 2569.512 
+134@ = -1677.112 
+135@ = 2.8487 
+Camera.SetPosition(2578.406, -1668.328, 1.3204, 0.0, 0.0, 0.0)
+Camera.PointAt(2577.852, -1669.157, 1.4051, 2)
+05EC: release_car 189@ from_path 
+Car.Destroy(189@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+05EC: release_car 194@ from_path 
+Car.Destroy(194@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+05EC: release_car 165@ from_path 
+Car.Destroy(165@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+05EC: release_car 166@ from_path 
+Car.Destroy(166@)
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(49@)
+05EC: release_car 167@ from_path 
+Car.Destroy(167@)
+Actor.DestroyInstantly(50@)
+Actor.DestroyInstantly(51@)
+05EC: release_car 196@ from_path 
+Car.Destroy(196@)
+Actor.DestroyInstantly(52@)
+Actor.DestroyInstantly(53@)
+05EC: release_car 195@ from_path 
+Car.Destroy(195@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+05EC: release_car 206@ from_path 
+Car.Destroy(206@)
+Actor.DestroyInstantly(56@)
+Actor.DestroyInstantly(57@)
+05EC: release_car 168@ from_path 
+Car.Destroy(168@)
+Actor.DestroyInstantly(58@)
+Actor.DestroyInstantly(59@)
+165@ = Car.Create(#SULTAN, 2575.871, -1676.557, 0.7246)
+Car.Angle(165@) = 85.0235
+Car.SetImmunities(165@, 1, 0, 0, 0, 0)
+166@ = Car.Create(#SULTAN, 2567.348, -1675.912, 0.7398)
+Car.Angle(166@) = 263.7667
+Car.SetImmunities(166@, 1, 0, 0, 0, 0)
+37@ = Actor.Create(Mission1, #MAFFA, 2578.022, -1674.761, 0.7667)
+Actor.Angle(37@) = 162.2371
+060B: set_actor 37@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(37@, MicroUzi, 9999)
+0668: AS_actor 37@ rotate_and_shoot_at 2574.87 -1686.48 2.02 3000 ms 
+38@ = Actor.Create(Mission1, #MAFFA, 2574.336, -1674.478, 0.7734)
+Actor.Angle(38@) = 162.2371
+060B: set_actor 38@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(38@, MicroUzi, 9999)
+0668: AS_actor 38@ rotate_and_shoot_at 2572.21 -1686.56 3.13 3000 ms 
+04EB: AS_actor 38@ crouch 1 
+39@ = Actor.Create(Mission1, #MAFFA, 2569.295, -1674.4, 0.7752)
+Actor.Angle(39@) = 170.9985
+060B: set_actor 39@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(39@, MicroUzi, 9999)
+0668: AS_actor 39@ rotate_and_shoot_at 2566.95 -1686.14 2.5 3000 ms 
+40@ = Actor.Create(Mission1, #MAFFA, 2565.314, -1673.921, 0.7864)
+Actor.Angle(40@) = 170.9985
+060B: set_actor 40@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 9999)
+04EB: AS_actor 40@ crouch 1 
+0668: AS_actor 40@ rotate_and_shoot_at 2564.35 -1786.51 2.18 3000 ms 
+if 
+060E:   car 161@ assigned_to_path 
+jf @DRUGS1_45160 
+05EC: release_car 161@ from_path 
+
+:DRUGS1_45160
+243@ = 3 
+277@ = 2 
+
+:DRUGS1_45174
+if 
+  277@ == 2 
+jf @DRUGS1_45311 
+if 
+07C1:   path 282 available 
+jf @DRUGS1_45311 
+if 
+07C1:   path 283 available 
+jf @DRUGS1_45311 
+if 
+07C1:   path 284 available 
+jf @DRUGS1_45311 
+if 
+07C1:   path 285 available 
+jf @DRUGS1_45311 
+if 
+07C1:   path 286 available 
+jf @DRUGS1_45311 
+if 
+   Model.Available(#STORM_DRAIN_COVER)
+jf @DRUGS1_45311 
+if 
+   Model.Available(#BARREL4)
+jf @DRUGS1_45311 
+277@ = 3 
+
+:DRUGS1_45311
+0871: init_jump_table 277@ total_jumps 3 default_jump 0 @DRUGS1_45636 jumps 3 @DRUGS1_45374 7 @DRUGS1_45469 8 @DRUGS1_45525 -1 @DRUGS1_45636 -1 @DRUGS1_45636 -1 @DRUGS1_45636 -1 @DRUGS1_45636 
+
+:DRUGS1_45374
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_45462 
+32@ = 0 
+05EB: assign_car 161@ to_path 282 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_45429 
+Car.Health(188@) = 300
+
+:DRUGS1_45429
+$TEMPVAR_FLOAT_3 = 1.0 
+277@ = 7 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_45462 
+
+:DRUGS1_45462
+jump @DRUGS1_45636 
+
+:DRUGS1_45469
+277@ = 8 
+fade 1 250 
+32@ = 0 
+33@ = 0 
+151@ = 0 
+159@ = 0 
+160@ = 0 
+jump @DRUGS1_45636 
+
+:DRUGS1_45525
+gosub @DRUGS1_52820 
+gosub @DRUGS1_53074 
+gosub @DRUGS1_53549 
+if 
+  32@ > 1800 
+jf @DRUGS1_45629 
+if 
+  278@ == 0 
+jf @DRUGS1_45590 
+278@ = 1 
+
+:DRUGS1_45590
+Camera.SetPosition(130@, 131@, 132@, 0.0, 0.0, 0.0)
+Camera.PointAt(133@, 134@, 135@, 2)
+
+:DRUGS1_45629
+jump @DRUGS1_45636 
+
+:DRUGS1_45636
+if 
+  278@ == 1 
+jf @DRUGS1_45817 
+if 
+   not Actor.Dead(37@)
+jf @DRUGS1_45693 
+0085: 79@ = 37@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_45693
+if 
+   not Actor.Dead(38@)
+jf @DRUGS1_45732 
+0085: 79@ = 38@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_45732
+if 
+   not Actor.Dead(39@)
+jf @DRUGS1_45771 
+0085: 79@ = 39@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_45771
+if 
+   not Actor.Dead(40@)
+jf @DRUGS1_45810 
+0085: 79@ = 40@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_45810
+278@ = 2 
+
+:DRUGS1_45817
+if 
+  278@ == 2 
+jf @DRUGS1_45861 
+if 
+  33@ > 3400 
+jf @DRUGS1_45861 
+278@ = 3 
+
+:DRUGS1_45861
+if 
+  278@ == 3 
+jf @DRUGS1_45971 
+if 
+  33@ > 3480 
+jf @DRUGS1_45971 
+if 
+   not Car.Wrecked(188@)
+jf @DRUGS1_45971 
+Car.LockInCurrentPosition(188@) = False
+020B: explode_car 188@ 
+020C: create_explosion_with_radius 0 at 2570.228 -1684.949 2.2595 
+020C: create_explosion_with_radius 1 at 2570.228 -1684.949 2.2595 
+278@ = 4 
+
+:DRUGS1_45971
+if 
+  278@ == 4 
+jf @DRUGS1_46055 
+if 
+  33@ > 3550 
+jf @DRUGS1_46055 
+if 
+   not Car.Wrecked(165@)
+jf @DRUGS1_46048 
+020B: explode_car 165@ 
+020C: create_explosion_with_radius 1 at 2575.269 -1677.076 1.0414 
+
+:DRUGS1_46048
+278@ = 5 
+
+:DRUGS1_46055
+if 
+  278@ == 5 
+jf @DRUGS1_46139 
+if 
+   not Car.Wrecked(166@)
+jf @DRUGS1_46139 
+if 
+  33@ > 3625 
+jf @DRUGS1_46139 
+020B: explode_car 166@ 
+020C: create_explosion_with_radius 2 at 2568.749 -1676.139 1.209 
+278@ = 6 
+
+:DRUGS1_46139
+if 
+  277@ > 7 
+jf @DRUGS1_46225 
+if 
+  33@ > 4599 
+jf @DRUGS1_46225 
+0713: actor $PLAYER_ACTOR driveby_actor -1 car -1 point 0.0 0.0 0.0 radius 300.0 8 1 firing_rate 100 
+279@ = 2 
+277@ = 10 
+
+:DRUGS1_46225
+if 
+  279@ == 2 
+jf @DRUGS1_52813 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_52813 
+if 
+  280@ == 0 
+jf @DRUGS1_47820 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+0858: set_player $PLAYER_CHAR scan_horizon_to_angle 263.0 rotation_speed 350.0 
+Camera.Restore_WithJumpCut
+Car.SetImmunities(161@, 0, 1, 1, 1, 1)
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_46351 
+Actor.SetImmunities($ACTOR_SMOKE, 1, 1, 1, 1, 1)
+
+:DRUGS1_46351
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+152@ = Object.Init(#STORM_DRAIN_COVER, 2631.852, -1482.75, 18.109)
+281@ = 1 
+282@ = 0 
+283@ = 0 
+285@ = 0 
+040D: unload_wav 1 
+03CF: load_wav 35713 as 1 
+071F: set_object 152@ health_to 150 
+153@ = Object.Create(#BARREL4, 2786.521, -1416.051, 15.31)
+154@ = Object.Create(#BARREL4, 2787.548, -1418.323, 15.31)
+155@ = Object.Create(#BARREL4, 2824.324, -1418.704, 15.31)
+156@ = Object.Create(#BARREL4, 2822.16, -1419.988, 15.31)
+157@ = Object.Create(#BARREL4, 2823.05, -1418.747, 15.3)
+Model.Destroy(#PACKER)
+168@ = Car.Create(#SULTAN, 2601.689, -1600.107, 3.1106)
+Car.Angle(168@) = 61.4469
+258@ = 1 
+169@ = Car.Create(#SULTAN, 2595.717, -1558.29, 8.4514)
+Car.Angle(169@) = 287.8971
+259@ = 1 
+48@ = Actor.Create(Mission1, #MAFFA, 2601.441, -1597.461, 3.2207)
+Actor.Angle(48@) = 135.3988
+Actor.Health(48@) = 20
+060B: set_actor 48@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(48@, MicroUzi, 3000)
+231@ = Marker.CreateAboveActor(48@)
+018B: set_marker 231@ radar_mode 2 
+Marker.SetIconSize(231@, 2)
+49@ = Actor.Create(Mission1, #MAFFA, 2596.765, -1559.589, 8.277)
+Actor.Angle(49@) = 201.1592
+Actor.Health(49@) = 20
+060B: set_actor 49@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(49@, MicroUzi, 3000)
+232@ = Marker.CreateAboveActor(49@)
+018B: set_marker 232@ radar_mode 2 
+Marker.SetIconSize(232@, 2)
+50@ = Actor.Create(Mission1, #MAFFA, 2596.941, -1555.855, 8.9717)
+Actor.Angle(50@) = 201.1592
+Actor.Health(50@) = 20
+060B: set_actor 50@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(50@, MicroUzi, 3000)
+233@ = Marker.CreateAboveActor(50@)
+018B: set_marker 233@ radar_mode 2 
+Marker.SetIconSize(233@, 2)
+51@ = Actor.Create(Mission1, #MAFFA, 2624.819, -1494.002, 15.4086)
+Actor.Angle(51@) = 145.1087
+Actor.Health(51@) = 10
+060B: set_actor 51@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(51@, MicroUzi, 3000)
+234@ = Marker.CreateAboveActor(51@)
+018B: set_marker 234@ radar_mode 2 
+Marker.SetIconSize(234@, 2)
+53@ = Actor.Create(Mission1, #MAFFA, 2625.413, -1496.587, 15.3563)
+Actor.Angle(53@) = 153.8693
+Actor.Health(53@) = 10
+060B: set_actor 53@ decision_maker_to 35@ 
+Actor.GiveWeaponAndAmmo(53@, MicroUzi, 3000)
+235@ = Marker.CreateAboveActor(53@)
+018B: set_marker 235@ radar_mode 2 
+Marker.SetIconSize(235@, 2)
+189@ = Car.Create(#BF400, 2539.344, -1712.77, 12.4719)
+Car.Angle(189@) = 287.1995
+42@ = Actor.CreateAsDriver(Mission2, #MAFFA, 189@)
+060B: set_actor 42@ decision_maker_to 35@ 
+43@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 189@, 0)
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 9999)
+060B: set_actor 43@ decision_maker_to 35@ 
+214@ = Marker.CreateAboveCar(189@)
+018B: set_marker 214@ radar_mode 2 
+Marker.SetIconSize(214@, 2)
+Actor.Health(42@) = 10
+02A9: set_actor 42@ immune_to_nonplayer 10 
+Actor.Health(43@) = 10
+02A9: set_actor 43@ immune_to_nonplayer 10 
+247@ = 1 
+260@ = 1 
+194@ = Car.Create(#BF400, 2533.568, -1714.569, 12.4874)
+09C4: set_car 194@ gas_tank_explosion_enabled 0 
+Car.Angle(194@) = 287.5564
+44@ = Actor.CreateAsDriver(Mission2, #MAFFA, 194@)
+060B: set_actor 44@ decision_maker_to 35@ 
+45@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 194@, 0)
+Actor.GiveWeaponAndAmmo(45@, MicroUzi, 9999)
+060B: set_actor 45@ decision_maker_to 35@ 
+215@ = Marker.CreateAboveCar(194@)
+018B: set_marker 215@ radar_mode 2 
+Marker.SetIconSize(215@, 2)
+Actor.Health(44@) = 50
+Actor.Health(45@) = 50
+248@ = 1 
+261@ = 1 
+195@ = Car.Create(#BF400, 2529.683, -1715.803, 12.4991)
+09C4: set_car 195@ gas_tank_explosion_enabled 0 
+Car.Angle(195@) = 287.7722
+46@ = Actor.CreateAsDriver(Mission2, #MAFFA, 195@)
+060B: set_actor 46@ decision_maker_to 35@ 
+47@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 195@, 0)
+Actor.GiveWeaponAndAmmo(47@, MicroUzi, 9999)
+060B: set_actor 47@ decision_maker_to 35@ 
+216@ = Marker.CreateAboveCar(195@)
+018B: set_marker 216@ radar_mode 2 
+Marker.SetIconSize(216@, 2)
+Actor.Health(46@) = 30
+02A9: set_actor 46@ immune_to_nonplayer 10 
+Actor.Health(47@) = 30
+02A9: set_actor 47@ immune_to_nonplayer 10 
+249@ = 1 
+262@ = 1 
+196@ = Car.Create(#BF400, 2524.542, -1717.461, 12.5175)
+09C4: set_car 196@ gas_tank_explosion_enabled 0 
+Car.Angle(196@) = 287.8176
+56@ = Actor.CreateAsDriver(Mission2, #MAFFA, 196@)
+060B: set_actor 56@ decision_maker_to 35@ 
+57@ = Actor.CreateAsPassenger(Mission2, #MAFFA, 196@, 0)
+Actor.GiveWeaponAndAmmo(57@, MicroUzi, 9999)
+060B: set_actor 57@ decision_maker_to 35@ 
+217@ = Marker.CreateAboveCar(196@)
+018B: set_marker 217@ radar_mode 2 
+Marker.SetIconSize(217@, 2)
+250@ = 1 
+263@ = 1 
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_47657 
+0085: 79@ = 48@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_47657
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_47696 
+0085: 79@ = 49@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_47696
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_47735 
+0085: 79@ = 50@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54267 
+
+:DRUGS1_47735
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_47774 
+0085: 79@ = 51@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_47774
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_47813 
+0085: 79@ = 53@ // (int) 
+008B: 80@ = $PLAYER_ACTOR // (int) 
+gosub @DRUGS1_54311 
+
+:DRUGS1_47813
+280@ = 1 
+
+:DRUGS1_47820
+if 
+  280@ == 1 
+jf @DRUGS1_48228 
+if 
+01AD:   car 161@ sphere 0 near_point 2580.74 -1621.47 radius 15.0 15.0 
+jf @DRUGS1_48228 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_47900 
+05EB: assign_car 189@ to_path 283 
+
+:DRUGS1_47900
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_47924 
+05EB: assign_car 194@ to_path 284 
+
+:DRUGS1_47924
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_47948 
+05EB: assign_car 195@ to_path 285 
+
+:DRUGS1_47948
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_47972 
+05EB: assign_car 196@ to_path 286 
+
+:DRUGS1_47972
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_48024 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 200.0 8 1 firing_rate 90 
+
+:DRUGS1_48024
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_48077 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 200.0 8 1 firing_rate 289@ 
+
+:DRUGS1_48077
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_48129 
+0713: actor 47@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 200.0 8 1 firing_rate 90 
+
+:DRUGS1_48129
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_48181 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 200.0 8 1 firing_rate 90 
+
+:DRUGS1_48181
+Car.RemoveReferences(165@)
+Car.RemoveReferences(188@)
+Actor.RemoveReferences(197@)
+Car.RemoveReferences(166@)
+Actor.RemoveReferences(37@)
+Actor.RemoveReferences(38@)
+Actor.RemoveReferences(39@)
+Actor.RemoveReferences(40@)
+280@ = 2 
+
+:DRUGS1_48228
+if 
+  280@ == 2 
+jf @DRUGS1_48363 
+if 
+01AD:   car 161@ sphere 0 near_point 2676.96 -1432.1 radius 12.0 12.0 
+jf @DRUGS1_48363 
+5@ = 0 
+Actor.DestroyInstantly(48@)
+Actor.DestroyInstantly(49@)
+Actor.DestroyInstantly(50@)
+Car.Destroy(168@)
+Car.Destroy(169@)
+Car.Destroy(188@)
+Actor.RemoveReferences(51@)
+Actor.RemoveReferences(53@)
+Marker.Disable(231@)
+Marker.Disable(232@)
+Marker.Disable(233@)
+Marker.Disable(234@)
+Marker.Disable(235@)
+280@ = 3 
+
+:DRUGS1_48363
+if 
+  280@ == 3 
+jf @DRUGS1_48737 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_48737 
+if 
+01AD:   car 161@ sphere 0 near_point 2825.37 -1538.43 radius 7.0 7.0 
+jf @DRUGS1_48737 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetPosition(2823.755, -1537.138, 10.0736, 0.0, 0.0, 0.0)
+Camera.PointAt(2823.25, -1537.966, 10.3176, 2)
+040D: unload_wav 1 
+00BE: text_clear_all 
+03CF: load_wav 35727 as 1 
+040D: unload_wav 2 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_48559 
+03CF: load_wav 35724 as 2 
+jump @DRUGS1_48602 
+
+:DRUGS1_48559
+if 
+  5@ == 1 
+jf @DRUGS1_48593 
+03CF: load_wav 35725 as 2 
+jump @DRUGS1_48602 
+
+:DRUGS1_48593
+03CF: load_wav 35726 as 2 
+
+:DRUGS1_48602
+if 
+83D0:   not wav 2 loaded 
+jf @DRUGS1_48628 
+wait 0 
+jump @DRUGS1_48602 
+
+:DRUGS1_48628
+03D1: play_wav 2 
+if 
+  5@ == 0 
+jf @DRUGS1_48673 
+00BC: show_text_highpriority GXT 'SMO4_JQ' time 5000 flag 1  // ~z~Finally!
+jump @DRUGS1_48730 
+
+:DRUGS1_48673
+if 
+  5@ == 1 
+jf @DRUGS1_48714 
+00BC: show_text_highpriority GXT 'SMO4_JR' time 5000 flag 1  // ~z~We're clean!
+jump @DRUGS1_48730 
+
+:DRUGS1_48714
+00BC: show_text_highpriority GXT 'SMO4_JS' time 5000 flag 1  // ~z~We lost 'em, Smoke!
+
+:DRUGS1_48730
+280@ = 4 
+
+:DRUGS1_48737
+if 
+  280@ == 4 
+jf @DRUGS1_48995 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_48995 
+if 
+01AE:   car 161@ sphere 0 near_point 2825.37 -1538.43 radius 5.0 5.0 stopped 
+jf @DRUGS1_48995 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_48995 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_48995 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_48995 
+00BE: text_clear_all 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_KA' time 5000 flag 1  // ~z~Man, we better split up.
+040D: unload_wav 2 
+03CF: load_wav 35728 as 2 
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Car.Destroy(189@)
+Marker.Disable(214@)
+Actor.DestroyInstantly(45@)
+Actor.DestroyInstantly(46@)
+Car.Destroy(194@)
+Marker.Disable(215@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(48@)
+Car.Destroy(195@)
+Marker.Disable(216@)
+Actor.DestroyInstantly(56@)
+Actor.DestroyInstantly(57@)
+Car.Destroy(196@)
+Marker.Disable(217@)
+05BF: AS_actor $ACTOR_SMOKE look_at_actor $PLAYER_ACTOR 10000 ms 
+32@ = 0 
+280@ = 5 
+
+:DRUGS1_48995
+if 
+  280@ == 5 
+jf @DRUGS1_49090 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_49090 
+if 
+03D0:   wav 2 loaded 
+jf @DRUGS1_49090 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO4_KB' time 5000 flag 1  // ~z~I hear you.
+040D: unload_wav 1 
+03CF: load_wav 35729 as 1 
+32@ = 0 
+280@ = 6 
+
+:DRUGS1_49090
+if 
+  280@ == 6 
+jf @DRUGS1_49248 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_49248 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_49248 
+00BE: text_clear_all 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49164 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+
+:DRUGS1_49164
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_KC' time 5000 flag 1  // ~z~I'll take it another block and dump it.
+040D: unload_wav 2 
+03CF: load_wav 35730 as 2 
+08C6: set_actor $PLAYER_ACTOR stay_on_bike 0 
+0555: remove_weapon 28 from_actor $PLAYER_ACTOR 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 80)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DRUGS1_49241 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+
+:DRUGS1_49241
+280@ = 7 
+
+:DRUGS1_49248
+if 
+  280@ == 7 
+jf @DRUGS1_49327 
+if 
+8449:   not actor $PLAYER_ACTOR in_a_car 
+jf @DRUGS1_49327 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49327 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor $ACTOR_SMOKE 15000 ms 
+05BF: AS_actor $ACTOR_SMOKE look_at_actor $PLAYER_ACTOR 15000 ms 
+280@ = 8 
+
+:DRUGS1_49327
+if 
+  280@ == 8 
+jf @DRUGS1_49468 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_49468 
+if 
+03D0:   wav 2 loaded 
+jf @DRUGS1_49468 
+00BE: text_clear_all 
+Camera.SetPosition(2819.666, -1542.108, 10.2063, 0.0, 0.0, 0.0)
+Camera.PointAt(2820.401, -1541.444, 10.3396, 2)
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO4_KD' time 5000 flag 1  // ~z~Man, that was some crazy shit back there!
+040D: unload_wav 1 
+03CF: load_wav 35731 as 1 
+280@ = 9 
+
+:DRUGS1_49468
+if 
+  280@ == 9 
+jf @DRUGS1_49587 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_49587 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_49587 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49537 
+0968: actor $ACTOR_SMOKE stop_mouth 
+
+:DRUGS1_49537
+00BE: text_clear_all 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_KE' time 5000 flag 1  // ~z~Yeah, for sure.
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+040D: unload_wav 2 
+03CF: load_wav 35732 as 2 
+280@ = 10 
+
+:DRUGS1_49587
+if 
+  280@ == 10 
+jf @DRUGS1_49684 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_49684 
+if 
+03D0:   wav 2 loaded 
+jf @DRUGS1_49684 
+00BE: text_clear_all 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'SMO4_KF' time 5000 flag 1  // ~z~Listen we can't hang around here - I'll see you later, homie.
+040D: unload_wav 1 
+03CF: load_wav 35733 as 1 
+32@ = 0 
+280@ = 11 
+
+:DRUGS1_49684
+if 
+  280@ == 11 
+jf @DRUGS1_49888 
+if 
+   not Car.Wrecked(161@)
+jf @DRUGS1_49888 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49888 
+if 
+  32@ > 3000 
+jf @DRUGS1_49888 
+if 
+03D2:   wav 2 ended 
+jf @DRUGS1_49888 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_49888 
+0968: actor $PLAYER_ACTOR stop_mouth 
+04E0: car 161@ abandon_path_radius 200 
+05D1: AS_actor $ACTOR_SMOKE drive_car 161@ to 2804.5 -1538.95 10.38 speed 6.0 0 model #NULL 3 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'SMO4_KG' time 2500 flag 1  // ~z~Much love, baby!
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49874 
+0967: actor $ACTOR_SMOKE move_mouth 10000 ms 
+
+:DRUGS1_49874
+32@ = 0 
+280@ = 12 
+
+:DRUGS1_49888
+if 
+  280@ == 12 
+jf @DRUGS1_50007 
+if 
+  32@ > 2000 
+jf @DRUGS1_50007 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_50007 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_49961 
+0968: actor $ACTOR_SMOKE stop_mouth 
+
+:DRUGS1_49961
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Car.Destroy(161@)
+Actor.DestroyInstantly($ACTOR_SMOKE)
+0151: remove_status_text $6899 
+00BE: text_clear_all 
+jump @DRUGS1_54435 
+280@ = 13 
+
+:DRUGS1_50007
+if 
+  281@ == 1 
+jf @DRUGS1_50134 
+if 
+07F0:   in_sphere 2631.852 -1482.75 18.109 radius 10.0 damaged_object_with_model #STORM_DRAIN_COVER 
+jf @DRUGS1_50134 
+if 
+08FF:   object 152@ received_damage_type 28 
+jf @DRUGS1_50095 
+00BE: text_clear_all 
+281@ = 2 
+jump @DRUGS1_50134 
+
+:DRUGS1_50095
+$6899 = Car.Health(161@)
+$6899 -= 100 
+Car.Health(161@) = $6899
+$6899 /= 10 
+00BE: text_clear_all 
+281@ = 3 
+
+:DRUGS1_50134
+if 
+  280@ > 0 
+jf @DRUGS1_50975 
+if 
+  4 > 280@ 
+jf @DRUGS1_50975 
+if 
+  282@ == 0 
+jf @DRUGS1_50237 
+if 
+  283@ == 0 
+jf @DRUGS1_50237 
+04AF: 239@ = 35713 // = constant 
+05AA: 240@s = 'SMO4_JE' // @s = 'short'  // ~z~Fry, motherfuckers!
+gosub @DRUGS1_53924 
+
+:DRUGS1_50237
+if 
+  282@ == 1 
+jf @DRUGS1_50304 
+if 
+  283@ == 0 
+jf @DRUGS1_50304 
+04AF: 239@ = 35714 // = constant 
+05AA: 240@s = 'SMO4_JF' // @s = 'short'  // ~z~That's the old sewer up ahead!
+gosub @DRUGS1_53924 
+
+:DRUGS1_50304
+if 
+  282@ == 2 
+jf @DRUGS1_50371 
+if 
+  283@ == 0 
+jf @DRUGS1_50371 
+04AF: 239@ = 35715 // = constant 
+05AA: 240@s = 'SMO4_JG' // @s = 'short'  // ~z~Shoot out the gate!
+gosub @DRUGS1_53924 
+
+:DRUGS1_50371
+if 
+  282@ == 3 
+jf @DRUGS1_50512 
+if 
+  283@ == 0 
+jf @DRUGS1_50512 
+if 
+  281@ == 2 
+jf @DRUGS1_50463 
+04AF: 239@ = 35716 // = constant 
+05AA: 240@s = 'SMO4_JH' // @s = 'short'  // ~z~Nice one, CJ, here we go!
+gosub @DRUGS1_53924 
+jump @DRUGS1_50512 
+
+:DRUGS1_50463
+if 
+  281@ == 3 
+jf @DRUGS1_50512 
+04AF: 239@ = 35717 // = constant 
+05AA: 240@s = 'SMO4_JJ' // @s = 'short'  // ~z~The gate, Carl, the GATE!
+gosub @DRUGS1_53924 
+
+:DRUGS1_50512
+if 
+  285@ == 0 
+jf @DRUGS1_50575 
+if 
+01AD:   car 161@ sphere 0 near_point 2647.31 -1457.67 radius 10.0 10.0 
+jf @DRUGS1_50575 
+285@ = 1 
+
+:DRUGS1_50575
+if 
+  282@ == 4 
+jf @DRUGS1_50660 
+if 
+  283@ == 0 
+jf @DRUGS1_50660 
+if 
+  285@ == 1 
+jf @DRUGS1_50660 
+04AF: 239@ = 35718 // = constant 
+05AA: 240@s = 'SMO4_JK' // @s = 'short'  // ~z~Man, I used to hate this tunnel when we was kids.
+gosub @DRUGS1_53924 
+
+:DRUGS1_50660
+if 
+  282@ == 5 
+jf @DRUGS1_50727 
+if 
+  283@ == 0 
+jf @DRUGS1_50727 
+04AF: 239@ = 35719 // = constant 
+05AA: 240@s = 'SMO4_JL' // @s = 'short'  // ~z~Hey, we can reminisce later, we still got company!
+gosub @DRUGS1_53924 
+
+:DRUGS1_50727
+if 
+  282@ == 6 
+jf @DRUGS1_50901 
+if 
+  283@ == 0 
+jf @DRUGS1_50901 
+0209: 5@ = random_int_in_ranges 0 3 
+if 
+  5@ == 0 
+jf @DRUGS1_50821 
+04AF: 239@ = 35720 // = constant 
+05AA: 240@s = 'SMO4_JM' // @s = 'short'  // ~z~It's getting' kinda tight!
+jump @DRUGS1_50894 
+
+:DRUGS1_50821
+if 
+  5@ == 1 
+jf @DRUGS1_50870 
+04AF: 239@ = 35721 // = constant 
+05AA: 240@s = 'SMO4_JN' // @s = 'short'  // ~z~Damn this is tight!
+jump @DRUGS1_50894 
+
+:DRUGS1_50870
+04AF: 239@ = 35722 // = constant 
+05AA: 240@s = 'SMO4_JO' // @s = 'short'  // ~z~They still on to us.
+
+:DRUGS1_50894
+gosub @DRUGS1_53924 
+
+:DRUGS1_50901
+if 
+  282@ == 7 
+jf @DRUGS1_50968 
+if 
+  283@ == 0 
+jf @DRUGS1_50968 
+04AF: 239@ = 35723 // = constant 
+05AA: 240@s = 'SMO4_JP' // @s = 'short'  // ~z~Don't these guys ever give up?
+gosub @DRUGS1_53924 
+
+:DRUGS1_50968
+gosub @DRUGS1_53966 
+
+:DRUGS1_50975
+if 
+  258@ == 1 
+jf @DRUGS1_51040 
+if 
+   not Car.Wrecked(168@)
+jf @DRUGS1_51040 
+if 
+051C:   car 168@ damaged_by_actor $PLAYER_ACTOR 
+jf @DRUGS1_51040 
+020B: explode_car 168@ 
+258@ = 2 
+
+:DRUGS1_51040
+if 
+  259@ == 1 
+jf @DRUGS1_51105 
+if 
+   not Car.Wrecked(169@)
+jf @DRUGS1_51105 
+if 
+051C:   car 169@ damaged_by_actor $PLAYER_ACTOR 
+jf @DRUGS1_51105 
+020B: explode_car 169@ 
+259@ = 2 
+
+:DRUGS1_51105
+if 
+  247@ == 1 
+jf @DRUGS1_51353 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_51353 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_51162 
+jump @DRUGS1_51353 
+
+:DRUGS1_51162
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_51311 
+if 
+   Actor.InCar(43@, 189@)
+jf @DRUGS1_51304 
+046C: 205@ = car 189@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_51304 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 43@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 43@ in_car 189@ 
+0713: actor 43@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+247@ = 2 
+
+:DRUGS1_51304
+jump @DRUGS1_51353 
+
+:DRUGS1_51311
+Car.SetSpeedInstantly(189@, 18.0)
+05EC: release_car 189@ from_path 
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+247@ = 2 
+
+:DRUGS1_51353
+if 
+  247@ == 2 
+jf @DRUGS1_51445 
+if 
+   Actor.Dead(43@)
+jf @DRUGS1_51445 
+05EC: release_car 189@ from_path 
+if 
+   not Car.Wrecked(189@)
+jf @DRUGS1_51438 
+Car.SetSpeedInstantly(189@, 18.0)
+07DB: set_car 189@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_51438
+247@ = 3 
+
+:DRUGS1_51445
+if 
+  260@ == 1 
+jf @DRUGS1_51532 
+if 
+   Actor.Dead(42@)
+jf @DRUGS1_51532 
+if or
+   Actor.Dead(43@)
+   Car.Wrecked(189@)
+jf @DRUGS1_51532 
+05EC: release_car 189@ from_path 
+Marker.Disable(214@)
+Car.RemoveReferences(189@)
+Actor.RemoveReferences(42@)
+Actor.RemoveReferences(43@)
+260@ = 2 
+
+:DRUGS1_51532
+if 
+  248@ == 1 
+jf @DRUGS1_51780 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_51780 
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_51589 
+jump @DRUGS1_51780 
+
+:DRUGS1_51589
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_51738 
+if 
+   Actor.InCar(45@, 194@)
+jf @DRUGS1_51731 
+046C: 205@ = car 194@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_51731 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 45@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 45@ in_car 194@ 
+0713: actor 45@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+248@ = 2 
+
+:DRUGS1_51731
+jump @DRUGS1_51780 
+
+:DRUGS1_51738
+Car.SetSpeedInstantly(194@, 18.0)
+05EC: release_car 194@ from_path 
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+248@ = 2 
+
+:DRUGS1_51780
+if 
+  248@ == 2 
+jf @DRUGS1_51872 
+if 
+   Actor.Dead(45@)
+jf @DRUGS1_51872 
+05EC: release_car 194@ from_path 
+if 
+   not Car.Wrecked(194@)
+jf @DRUGS1_51865 
+Car.SetSpeedInstantly(194@, 18.0)
+07DB: set_car 194@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_51865
+248@ = 3 
+
+:DRUGS1_51872
+if 
+  261@ == 1 
+jf @DRUGS1_51959 
+if 
+   Actor.Dead(44@)
+jf @DRUGS1_51959 
+if or
+   Actor.Dead(45@)
+   Car.Wrecked(194@)
+jf @DRUGS1_51959 
+05EC: release_car 194@ from_path 
+Marker.Disable(215@)
+Car.RemoveReferences(194@)
+Actor.RemoveReferences(44@)
+Actor.RemoveReferences(45@)
+261@ = 2 
+
+:DRUGS1_51959
+if 
+  249@ == 1 
+jf @DRUGS1_52207 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_52207 
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_52016 
+jump @DRUGS1_52207 
+
+:DRUGS1_52016
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_52165 
+if 
+   Actor.InCar(47@, 195@)
+jf @DRUGS1_52158 
+046C: 205@ = car 195@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_52158 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 47@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 47@ in_car 195@ 
+0713: actor 47@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+249@ = 2 
+
+:DRUGS1_52158
+jump @DRUGS1_52207 
+
+:DRUGS1_52165
+Car.SetSpeedInstantly(195@, 18.0)
+05EC: release_car 195@ from_path 
+07DB: set_car 195@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+249@ = 2 
+
+:DRUGS1_52207
+if 
+  249@ == 2 
+jf @DRUGS1_52299 
+if 
+   Actor.Dead(47@)
+jf @DRUGS1_52299 
+05EC: release_car 195@ from_path 
+if 
+   not Car.Wrecked(195@)
+jf @DRUGS1_52292 
+Car.SetSpeedInstantly(195@, 18.0)
+07DB: set_car 195@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_52292
+249@ = 3 
+
+:DRUGS1_52299
+if 
+  262@ == 1 
+jf @DRUGS1_52386 
+if 
+   Actor.Dead(46@)
+jf @DRUGS1_52386 
+if or
+   Actor.Dead(47@)
+   Car.Wrecked(195@)
+jf @DRUGS1_52386 
+05EC: release_car 195@ from_path 
+Marker.Disable(216@)
+Car.RemoveReferences(195@)
+Actor.RemoveReferences(46@)
+Actor.RemoveReferences(47@)
+262@ = 2 
+
+:DRUGS1_52386
+if 
+  250@ == 1 
+jf @DRUGS1_52634 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_52634 
+if 
+   not Actor.Dead(56@)
+jf @DRUGS1_52443 
+jump @DRUGS1_52634 
+
+:DRUGS1_52443
+if 
+   not Actor.Dead(57@)
+jf @DRUGS1_52592 
+if 
+   Actor.InCar(57@, 196@)
+jf @DRUGS1_52585 
+046C: 205@ = car 196@ driver 
+if 
+  205@ == -1 
+jf @DRUGS1_52585 
+Car.StorePos(161@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0362: remove_actor 57@ from_car_and_place_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD -10.0 
+036A: put_actor 57@ in_car 196@ 
+0713: actor 57@ driveby_actor -1 car 161@ point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+250@ = 2 
+
+:DRUGS1_52585
+jump @DRUGS1_52634 
+
+:DRUGS1_52592
+Car.SetSpeedInstantly(196@, 18.0)
+05EC: release_car 196@ from_path 
+07DB: set_car 196@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+250@ = 2 
+
+:DRUGS1_52634
+if 
+  250@ == 2 
+jf @DRUGS1_52726 
+if 
+   Actor.Dead(57@)
+jf @DRUGS1_52726 
+05EC: release_car 196@ from_path 
+if 
+   not Car.Wrecked(196@)
+jf @DRUGS1_52719 
+Car.SetSpeedInstantly(196@, 18.0)
+07DB: set_car 196@ rotation_velocity_XYZ 3.5 7.3999 8.1003 through_center_of_mass 
+
+:DRUGS1_52719
+250@ = 3 
+
+:DRUGS1_52726
+if 
+  263@ == 1 
+jf @DRUGS1_52813 
+if 
+   Actor.Dead(56@)
+jf @DRUGS1_52813 
+if or
+   Actor.Dead(57@)
+   Car.Wrecked(196@)
+jf @DRUGS1_52813 
+05EC: release_car 196@ from_path 
+Marker.Disable(217@)
+Car.RemoveReferences(196@)
+Actor.RemoveReferences(56@)
+Actor.RemoveReferences(57@)
+263@ = 2 
+
+:DRUGS1_52813
+jump @DRUGS1_1421 
+
+:DRUGS1_52820
+0871: init_jump_table 151@ total_jumps 3 default_jump 0 @DRUGS1_53072 jumps 0 @DRUGS1_52883 1 @DRUGS1_52914 2 @DRUGS1_52993 -1 @DRUGS1_53072 -1 @DRUGS1_53072 -1 @DRUGS1_53072 -1 @DRUGS1_53072 
+
+:DRUGS1_52883
+015D: set_gamespeed 0.8 
+158@ = 0.8 
+151@ += 1 
+jump @DRUGS1_53072 
+
+:DRUGS1_52914
+if 
+  33@ > 3200 
+jf @DRUGS1_52986 
+007F: 158@ -= frame_delta_time * 0.05 // (float) 
+if 
+  0.3 > 158@ 
+jf @DRUGS1_52981 
+158@ = 0.3 
+151@ += 1 
+
+:DRUGS1_52981
+015D: set_gamespeed 158@ 
+
+:DRUGS1_52986
+jump @DRUGS1_53072 
+
+:DRUGS1_52993
+if 
+  33@ > 4000 
+jf @DRUGS1_53065 
+0079: 158@ += frame_delta_time * 0.05 // (float) 
+if 
+  158@ > 1.0 
+jf @DRUGS1_53060 
+158@ = 1.0 
+151@ += 1 
+
+:DRUGS1_53060
+015D: set_gamespeed 158@ 
+
+:DRUGS1_53065
+jump @DRUGS1_53072 
+
+:DRUGS1_53072
+return 
+
+:DRUGS1_53074
+0871: init_jump_table 159@ total_jumps 3 default_jump 0 @DRUGS1_53547 jumps 0 @DRUGS1_53137 1 @DRUGS1_53307 2 @DRUGS1_53432 -1 @DRUGS1_53547 -1 @DRUGS1_53547 -1 @DRUGS1_53547 -1 @DRUGS1_53547 
+
+:DRUGS1_53137
+Car.StorePos(161@, 133@, 134@, 135@)
+0407: store_coords_to 130@ 131@ 132@ from_car 161@ with_offset 1.0 -2.5 0.0 
+130@ = 2563.28 
+131@ = -1737.328 
+132@ = 1.1412 
+133@ = 2562.65 
+134@ = -1734.725 
+135@ = 1.1991 
+136@ = 0.001 
+137@ = 3E-12 
+139@ = 0.03 
+140@ = 0.1 
+148@ = 0.47 
+141@ = 0.003 
+159@ += 1 
+
+:DRUGS1_53307
+if 
+  2900 > 33@ 
+jf @DRUGS1_53415 
+007B: 139@ += frame_delta_time * 136@ // (float) 
+007B: 137@ += frame_delta_time * 137@ // (float) 
+007B: 140@ += frame_delta_time * 137@ // (float) 
+if 
+0025:   140@ > 148@ // (float) 
+jf @DRUGS1_53377 
+0087: 140@ = 148@ // (float) 
+
+:DRUGS1_53377
+007B: 130@ += frame_delta_time * 139@ // (float) 
+007B: 131@ += frame_delta_time * 140@ // (float) 
+007B: 132@ += frame_delta_time * 141@ // (float) 
+jump @DRUGS1_53547 
+jump @DRUGS1_53432 
+
+:DRUGS1_53415
+136@ = -0.01 
+159@ += 1 
+
+:DRUGS1_53432
+if 
+  4000 > 33@ 
+jf @DRUGS1_53540 
+007B: 139@ += frame_delta_time * 136@ // (float) 
+007B: 137@ += frame_delta_time * 137@ // (float) 
+007B: 140@ += frame_delta_time * 137@ // (float) 
+if 
+0025:   140@ > 148@ // (float) 
+jf @DRUGS1_53502 
+0087: 140@ = 148@ // (float) 
+
+:DRUGS1_53502
+007B: 130@ += frame_delta_time * 139@ // (float) 
+007B: 131@ += frame_delta_time * 140@ // (float) 
+007B: 132@ += frame_delta_time * 141@ // (float) 
+jump @DRUGS1_53547 
+jump @DRUGS1_53547 
+
+:DRUGS1_53540
+159@ += 1 
+
+:DRUGS1_53547
+return 
+
+:DRUGS1_53549
+0871: init_jump_table 160@ total_jumps 3 default_jump 0 @DRUGS1_53922 jumps 0 @DRUGS1_53612 1 @DRUGS1_53689 2 @DRUGS1_53788 -1 @DRUGS1_53922 -1 @DRUGS1_53922 -1 @DRUGS1_53922 -1 @DRUGS1_53922 
+
+:DRUGS1_53612
+143@ = 0.007 
+144@ = 0.012 
+145@ = 0.045 
+146@ = 0.06 
+149@ = 0.32 
+147@ = 0.005 
+150@ = 0.1 
+160@ += 1 
+
+:DRUGS1_53689
+if 
+  2800 > 33@ 
+jf @DRUGS1_53781 
+007B: 146@ += frame_delta_time * 143@ // (float) 
+if 
+0025:   146@ > 149@ // (float) 
+jf @DRUGS1_53743 
+0087: 146@ = 149@ // (float) 
+
+:DRUGS1_53743
+007B: 133@ += frame_delta_time * 145@ // (float) 
+007B: 134@ += frame_delta_time * 146@ // (float) 
+007B: 135@ += frame_delta_time * 147@ // (float) 
+jump @DRUGS1_53922 
+jump @DRUGS1_53788 
+
+:DRUGS1_53781
+160@ += 1 
+
+:DRUGS1_53788
+if 
+  3600 > 33@ 
+jf @DRUGS1_53908 
+007B: 146@ += frame_delta_time * 143@ // (float) 
+if 
+0025:   146@ > 149@ // (float) 
+jf @DRUGS1_53842 
+0087: 146@ = 149@ // (float) 
+
+:DRUGS1_53842
+007B: 147@ += frame_delta_time * 144@ // (float) 
+if 
+0025:   147@ > 150@ // (float) 
+jf @DRUGS1_53877 
+0087: 147@ = 150@ // (float) 
+
+:DRUGS1_53877
+007B: 133@ += frame_delta_time * 145@ // (float) 
+007B: 134@ += frame_delta_time * 146@ // (float) 
+007B: 135@ += frame_delta_time * 147@ // (float) 
+jump @DRUGS1_53915 
+
+:DRUGS1_53908
+160@ += 1 
+
+:DRUGS1_53915
+jump @DRUGS1_53922 
+
+:DRUGS1_53922
+return 
+
+:DRUGS1_53924
+if 
+  283@ == 0 
+jf @DRUGS1_53964 
+03CF: load_wav 239@ as 1 
+05AA: 237@s = 240@s // @s = 'short' 
+283@ = 1 
+
+:DRUGS1_53964
+return 
+
+:DRUGS1_53966
+if 
+  283@ == 1 
+jf @DRUGS1_54020 
+if 
+03D0:   wav 1 loaded 
+jf @DRUGS1_54020 
+00BC: show_text_highpriority GXT 237@s time 4000 flag 1 
+03D1: play_wav 1 
+283@ = 2 
+
+:DRUGS1_54020
+if 
+  283@ == 2 
+jf @DRUGS1_54073 
+if 
+03D2:   wav 1 ended 
+jf @DRUGS1_54073 
+282@ += 1 
+040D: unload_wav 1 
+00BE: text_clear_all 
+283@ = 0 
+
+:DRUGS1_54073
+return 
+
+:DRUGS1_54075
+0615: define_AS_pack_begin 78@ 
+05D3: AS_actor -1 goto_point 81@ 82@ 83@ mode 6 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor 80@ 
+0616: define_AS_pack_end 78@ 
+0618: assign_actor 79@ to_AS_pack 78@ 
+061B: remove_references_to_AS_pack 78@ 
+return 
+
+:DRUGS1_54130
+0615: define_AS_pack_begin 65@ 
+0637: AS_actor -1 goto 81@ 82@ 83@ mode 6 turn_radius 0.5 stop_radius 1.0 look_at_actor $PLAYER_ACTOR 
+0637: AS_actor -1 goto 84@ 85@ 86@ mode 6 turn_radius 0.5 stop_radius 1.0 look_at_actor $PLAYER_ACTOR 
+05E2: AS_actor -1 kill_actor 80@ 
+0616: define_AS_pack_end 65@ 
+0618: assign_actor 79@ to_AS_pack 65@ 
+061B: remove_references_to_AS_pack 65@ 
+return 
+
+:DRUGS1_54218
+0615: define_AS_pack_begin 66@ 
+05D3: AS_actor -1 goto_point 81@ 82@ 83@ mode 6 time -1 ms // versionA 
+05E2: AS_actor -1 kill_actor 80@ 
+0616: define_AS_pack_end 66@ 
+0618: assign_actor 79@ to_AS_pack 66@ 
+061B: remove_references_to_AS_pack 66@ 
+return 
+
+:DRUGS1_54267
+0615: define_AS_pack_begin 67@ 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor 80@ 
+0616: define_AS_pack_end 67@ 
+0618: assign_actor 79@ to_AS_pack 67@ 
+061B: remove_references_to_AS_pack 67@ 
+return 
+
+:DRUGS1_54311
+0615: define_AS_pack_begin 68@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor 80@ 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 79@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+return 
+
+:DRUGS1_54349
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DRUGS1_54417 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2078.38 
+$11031 = -1696.63 
+$11030 = 13.39 
+
+:DRUGS1_54417
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DRUGS1_54435
+$SMOKE_TOTAL_PASSED_MISSIONS += 1 
+Marker.Disable($434)
+0318: set_latest_mission_passed 'SMOKE_4'  // Just Business
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 10 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0394: play_music 1 
+0998: add_respect 10 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:DRUGS1_54495
+$ONMISSION = 0 
+01E7: remove_forbidden_for_cars_cube_cornerA 1694.12 -1604.33 5.0 cornerB 1805.94 -1593.12 15.0 
+Actor.DestroyWithFade($ACTOR_SMOKE)
+0296: unload_special_actor 1 
+08E7: disable_entrance_markers 0 
+Marker.Disable(87@)
+Marker.Disable(88@)
+Marker.Disable(89@)
+Marker.Disable(209@)
+Marker.Disable(210@)
+Marker.Disable(211@)
+Marker.Disable(212@)
+Marker.Disable(213@)
+Marker.Disable(214@)
+Marker.Disable(215@)
+Marker.Disable(216@)
+Marker.Disable(217@)
+Marker.Disable(218@)
+Marker.Disable(219@)
+Marker.Disable(220@)
+Marker.Disable(229@)
+Marker.Disable(223@)
+Marker.Disable(224@)
+Marker.Disable(225@)
+Marker.Disable(226@)
+Marker.Disable(227@)
+Marker.Disable(228@)
+Marker.Disable(229@)
+Marker.Disable(230@)
+Marker.Disable(231@)
+Marker.Disable(232@)
+Marker.Disable(233@)
+Marker.Disable(234@)
+Marker.Disable(235@)
+Marker.Disable(226@)
+Marker.Disable(227@)
+Marker.Disable(236@)
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+08F4: set_max_group_members 99 
+Model.Destroy(#GLENDALE)
+Model.Destroy(#WFYRI)
+Model.Destroy(#WFYST)
+Model.Destroy(#MAFFA)
+Model.Destroy(#MAFFB)
+Model.Destroy(#BF400)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#COLT45)
+Model.Destroy(#MP5LNG)
+04EF: release_animation "JST_BUISNESS" 
+Model.Destroy(#SULTAN)
+Model.Destroy(#KMB_SKIP)
+Model.Destroy(#NEBULA)
+Model.Destroy(#COACH)
+Model.Destroy(#PACKER)
+Model.Destroy(#STORM_DRAIN_COVER)
+Model.Destroy(#BARREL4)
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+03C7: set_sensitivity_to_crime 1.0 
+01F0: set_max_wanted_level_to 4 
+0151: remove_status_text $6897 
+0151: remove_status_text $6899 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRUGS1_54889 
+0489: set_actor $PLAYER_ACTOR muted 0 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+08C6: set_actor $PLAYER_ACTOR stay_on_bike 0 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:DRUGS1_54889
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @DRUGS1_54912 
+08C6: set_actor $ACTOR_SMOKE stay_on_bike 0 
+
+:DRUGS1_54912
+01B7: release_weather 
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+06D0: enable_emergency_traffic 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DRUGS1_55297 
+if 
+   not Actor.Dead(42@)
+jf @DRUGS1_54985 
+05E2: AS_actor 42@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_54985
+if 
+   not Actor.Dead(43@)
+jf @DRUGS1_55009 
+05E2: AS_actor 43@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55009
+if 
+   not Actor.Dead(44@)
+jf @DRUGS1_55033 
+05E2: AS_actor 44@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55033
+if 
+   not Actor.Dead(45@)
+jf @DRUGS1_55057 
+05E2: AS_actor 45@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55057
+if 
+   not Actor.Dead(46@)
+jf @DRUGS1_55081 
+05E2: AS_actor 46@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55081
+if 
+   not Actor.Dead(47@)
+jf @DRUGS1_55105 
+05E2: AS_actor 47@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55105
+if 
+   not Actor.Dead(48@)
+jf @DRUGS1_55129 
+05E2: AS_actor 48@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55129
+if 
+   not Actor.Dead(49@)
+jf @DRUGS1_55153 
+05E2: AS_actor 49@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55153
+if 
+   not Actor.Dead(50@)
+jf @DRUGS1_55177 
+05E2: AS_actor 50@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55177
+if 
+   not Actor.Dead(51@)
+jf @DRUGS1_55201 
+05E2: AS_actor 51@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55201
+if 
+   not Actor.Dead(52@)
+jf @DRUGS1_55225 
+05E2: AS_actor 52@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55225
+if 
+   not Actor.Dead(53@)
+jf @DRUGS1_55249 
+05E2: AS_actor 53@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55249
+if 
+   not Actor.Dead(54@)
+jf @DRUGS1_55273 
+05E2: AS_actor 54@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55273
+if 
+   not Actor.Dead(55@)
+jf @DRUGS1_55297 
+05E2: AS_actor 55@ kill_actor $PLAYER_ACTOR 
+
+:DRUGS1_55297
+return

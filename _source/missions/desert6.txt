@@ -1,0 +1,1858 @@
+:DESERT6
+thread 'DESERT6' 
+gosub @DESERT6_54 
+if 
+wasted_or_busted 
+jf @DESERT6_45 
+$11033 = 0 
+gosub @DESERT6_10314 
+
+:DESERT6_45
+gosub @DESERT6_10554 
+end_thread 
+
+:DESERT6_54
+increment_mission_attempts 
+$ONMISSION = 1 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+34@ = 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+39@ = 0 
+40@ = 0 
+45@ = 0 
+46@ = 0 
+47@ = 0 
+32@ = 0 
+33@ = 0 
+78@ = 1 
+79@ = 0 
+80@ = 0 
+81@ = 0 
+82@ = -1 
+83@ = 0 
+84@ = 0 
+86@ = 0 
+85@ = 0 
+48@ = 0 
+
+:DESERT6_238
+87@(48@,3i) = 0 
+48@ += 1 
+  48@ >= 3 
+jf @DESERT6_238 
+48@ = 0 
+
+:DESERT6_277
+184@(48@,2i) = 0 
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_277 
+167@ = 0 
+168@ = 0 
+169@ = 0 
+170@ = 0 
+171@ = 0 
+179@ = 0 
+180@ = 0 
+181@ = 0 
+182@ = 0 
+183@ = 0 
+if 
+  34@ == -99 
+jf @DESERT6_701 
+0662: printstring "SHOULD_NEVER_BE_IN_FAKE_ENTITY_CREATION" 
+125@ = Car.Create(#RUSTLER, 0.0, 0.0, 0.0)
+48@ = 0 
+
+:DESERT6_470
+126@(48@,2i) = Car.Create(#HYDRA, 0.0, 0.0, 0.0)
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_470 
+48@ = 0 
+
+:DESERT6_525
+123@(48@,2i) = Actor.Create(CivMale, #HMORI, 0.0, 0.0, 0.0)
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_525 
+48@ = 0 
+
+:DESERT6_581
+128@(48@,4i) = Object.Create(#AMMO_CAPSULE, 0.0, 0.0, 0.0)
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_581 
+133@ = Marker.CreateAboveCar(125@)
+018A: 132@ = create_checkpoint_at 0.0 0.0 0.0 
+48@ = 0 
+
+:DESERT6_664
+134@(48@,2i) = Marker.CreateAboveCar(126@(48@,2i))
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_664 
+
+:DESERT6_701
+054C: use_GXT_table 'DSERT6' 
+gosub @DESERT6_9732 
+060A: create_decision_maker_type 0 store_to 136@ // decision\allowed\m_.ped files 
+gosub @DESERT6_9946 
+
+:DESERT6_733
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DESERT6_766 
+36@ = 1 
+jump @DESERT6_1021 
+
+:DESERT6_766
+gosub @DESERT6_9064 
+gosub @DESERT6_9417 
+if or
+  38@ == 1 
+  39@ == 1 
+jf @DESERT6_812 
+jump @DESERT6_1021 
+
+:DESERT6_812
+gosub @DESERT6_9629 
+gosub @DESERT6_9663 
+if 
+   Actor.Dead($PLAYER_ACTOR)
+jf @DESERT6_856 
+37@ = 1 
+jump @DESERT6_1021 
+
+:DESERT6_856
+if 
+  34@ == 0 
+jf @DESERT6_914 
+0662: printstring "STAGE_SHOULD_NEVER_BE_0_IN_MAIN_LOOP" 
+
+:DESERT6_914
+if 
+  34@ == 1 
+jf @DESERT6_939 
+gosub @DESERT6_1169 
+
+:DESERT6_939
+if 
+  34@ == 2 
+jf @DESERT6_964 
+gosub @DESERT6_1343 
+
+:DESERT6_964
+if 
+  34@ == 3 
+jf @DESERT6_989 
+gosub @DESERT6_2975 
+
+:DESERT6_989
+if 
+  34@ == 4 
+jf @DESERT6_1014 
+36@ = 1 
+
+:DESERT6_1014
+gosub @DESERT6_6822 
+
+:DESERT6_1021
+if 
+  38@ == 0 
+jf @DESERT6_1121 
+if 
+  37@ == 0 
+jf @DESERT6_1105 
+if 
+  36@ == 0 
+jf @DESERT6_1089 
+jump @DESERT6_733 
+jump @DESERT6_1098 
+
+:DESERT6_1089
+gosub @DESERT6_10494 
+return 
+
+:DESERT6_1098
+jump @DESERT6_1114 
+
+:DESERT6_1105
+gosub @DESERT6_10314 
+return 
+
+:DESERT6_1114
+jump @DESERT6_1123 
+
+:DESERT6_1121
+return 
+
+:DESERT6_1123
+0662: printstring "SHOULD_NEVER_BE_HERE_IN_END_OF_MAIN_LOOP" 
+return 
+
+:DESERT6_1169
+if 
+  35@ == 0 
+jf @DESERT6_1235 
+00BC: show_text_highpriority GXT 'DES6_00' time 7000 flag 1  // ~s~The ~b~plane~s~ is all loaded up and ready to go.
+gosub @DESERT6_6265 
+81@ = 1 
+gosub @DESERT6_7640 
+041E: set_radio_station 11 
+35@ += 1 
+
+:DESERT6_1235
+if 
+   Car.Wrecked(125@)
+jf @DESERT6_1267 
+37@ = 1 
+45@ = 1 
+return 
+
+:DESERT6_1267
+if 
+  35@ == 1 
+jf @DESERT6_1316 
+if 
+   Actor.InCar($PLAYER_ACTOR, 125@)
+jf @DESERT6_1316 
+Marker.Disable(133@)
+35@ = 99 
+
+:DESERT6_1316
+if 
+  35@ == 99 
+jf @DESERT6_1341 
+gosub @DESERT6_9702 
+
+:DESERT6_1341
+return 
+
+:DESERT6_1343
+if 
+  35@ == 0 
+jf @DESERT6_1627 
+181@ = 0 
+0085: 137@ = 46@ // (int) 
+137@ += 2000 
+159@ = -2135.59 
+160@ = -2488.454 
+161@ = 55.895 
+018A: 132@ = create_checkpoint_at 159@ 160@ 161@ 
+0087: 70@ = 160@ // (float) 
+70@ += 1.0 
+06D5: 152@ = create_racing_checkpoint_at 159@ 160@ 161@ point_to 159@ 70@ 161@ type 3 radius 25.0 
+$7497 = 0 
+138@ = 0 
+163@ = 0 
+165@ = 0 
+166@ = 0 
+172@ = 0 
+$7499 = 10 
+$7499 *= 60000 
+03C3: set_timer_to $7499 type 1 GXT 'DES6_51' // global_variable  // Timer
+0819: 162@ = actor $PLAYER_ACTOR distance_from_ground 
+48@ = 0 
+
+:DESERT6_1566
+177@(48@,2i) = 0 
+150@(48@,2i) = 0 
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_1566 
+03CF: load_wav 30600 as 3 
+0A24: enable_military_zones_wanted_level 1 
+35@ += 1 
+
+:DESERT6_1627
+if 
+   Car.Wrecked(125@)
+jf @DESERT6_1716 
+48@ = 0 
+
+:DESERT6_1650
+if 
+03CA:   object 128@(48@,4i) exists 
+jf @DESERT6_1679 
+Object.Destroy(128@(48@,4i))
+
+:DESERT6_1679
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_1650 
+37@ = 1 
+45@ = 1 
+return 
+
+:DESERT6_1716
+gosub @DESERT6_4838 
+if 
+  37@ == 1 
+jf @DESERT6_1743 
+return 
+
+:DESERT6_1743
+if 
+  $7499 == 0 
+jf @DESERT6_1777 
+37@ = 1 
+45@ = 3 
+return 
+
+:DESERT6_1777
+if 
+  35@ == 1 
+jf @DESERT6_1874 
+if 
+001D:   46@ > 137@ // (int) 
+jf @DESERT6_1874 
+0819: 70@ = actor $PLAYER_ACTOR distance_from_ground 
+0063: 70@ -= 162@ // (float) 
+if 
+  70@ > 2.0 
+jf @DESERT6_1874 
+03C4: set_status_text $7497 type 1 GXT 'DES6_50' // global_variable  // Visibility
+35@ += 1 
+
+:DESERT6_1874
+if 
+  35@ == 2 
+jf @DESERT6_2068 
+0087: 57@ = 159@ // (float) 
+57@ -= 25.0 
+0087: 58@ = 160@ // (float) 
+58@ -= 2.0 
+0087: 59@ = 161@ // (float) 
+59@ -= 25.0 
+0087: 60@ = 159@ // (float) 
+60@ += 25.0 
+0087: 61@ = 160@ // (float) 
+61@ += 2.0 
+0087: 62@ = 161@ // (float) 
+62@ += 25.0 
+if and
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 57@ 58@ 59@ cornerB 60@ 61@ 62@ 
+   Actor.InCar($PLAYER_ACTOR, 125@)
+jf @DESERT6_2068 
+Marker.Disable(132@)
+06D6: disable_racing_checkpoint 152@ 
+gosub @DESERT6_6568 
+35@ = 99 
+
+:DESERT6_2068
+gosub @DESERT6_4195 
+gosub @DESERT6_5180 
+if 
+  165@ == 1 
+jf @DESERT6_2126 
+if 
+001D:   46@ > 140@ // (int) 
+jf @DESERT6_2126 
+166@ = 1 
+
+:DESERT6_2126
+if 
+  166@ == 1 
+jf @DESERT6_2182 
+gosub @DESERT6_5607 
+50@ = 30 
+50@ *= 1000 
+0085: 140@ = 46@ // (int) 
+005A: 140@ += 50@ // (int) 
+
+:DESERT6_2182
+gosub @DESERT6_6038 
+if 
+  168@ == 0 
+jf @DESERT6_2338 
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 159@ 160@ 161@ 
+if 
+  500.0 > 72@ 
+jf @DESERT6_2338 
+if 
+00C2:   sphere_onscreen 159@ 160@ 161@ radius 5.0 
+jf @DESERT6_2338 
+00BC: show_text_highpriority GXT 'DES6_09' time 7000 flag 1  // ~s~Fly into the ~y~corona~s~ to trigger the drop.
+168@ = 1 
+169@ = 1 
+0085: 144@ = 46@ // (int) 
+144@ += 7000 
+
+:DESERT6_2338
+if 
+  169@ == 1 
+jf @DESERT6_2382 
+if 
+001D:   46@ > 144@ // (int) 
+jf @DESERT6_2382 
+169@ = 0 
+
+:DESERT6_2382
+if 
+88B7:   not test 85@ bit 2 
+jf @DESERT6_2478 
+if and
+08B7:   test 85@ bit 1 
+  80@ == 0 
+jf @DESERT6_2446 
+81@ = 2 
+gosub @DESERT6_7640 
+jump @DESERT6_2478 
+
+:DESERT6_2446
+if and
+  80@ == 1 
+  $7497 >= 40 
+jf @DESERT6_2478 
+gosub @DESERT6_7864 
+
+:DESERT6_2478
+if and
+  163@ == 1 
+  165@ == 0 
+  169@ == 0 
+jf @DESERT6_2556 
+if and
+88B7:   not test 85@ bit 2 
+  80@ == 2 
+  79@ == 1 
+  $7497 >= 40 
+jf @DESERT6_2556 
+gosub @DESERT6_7795 
+
+:DESERT6_2556
+if and
+88B7:   not test 85@ bit 3 
+08B7:   test 85@ bit 2 
+  80@ == 0 
+jf @DESERT6_2602 
+81@ = 3 
+gosub @DESERT6_7640 
+
+:DESERT6_2602
+if and
+  165@ == 1 
+88B7:   not test 85@ bit 3 
+  80@ == 3 
+  79@ == 1 
+jf @DESERT6_2648 
+gosub @DESERT6_7795 
+
+:DESERT6_2648
+if 
+  167@ == 0 
+jf @DESERT6_2714 
+if and
+08B7:   test 85@ bit 3 
+   not 79@ == 2 
+jf @DESERT6_2714 
+00BC: show_text_highpriority GXT 'DES6_06' time 7000 flag 1  // ~s~Remain under the radar for a short time and they will lose you and give up the chase.
+167@ = 1 
+
+:DESERT6_2714
+if 
+  180@ == 0 
+jf @DESERT6_2827 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -67.0004 1646.886 cornerB 423.298 2132.188 
+jf @DESERT6_2827 
+if or
+   Actor.DrivingPlane($PLAYER_ACTOR)
+04A9:   actor $PLAYER_ACTOR driving_heli 
+jf @DESERT6_2827 
+if 
+876F:   not text_priority_displayed 
+jf @DESERT6_2827 
+00BC: show_text_highpriority GXT 'AREA51' time 7000 flag 1  // ~r~DANGER!~s~ Restricted air space!
+180@ = 1 
+
+:DESERT6_2827
+if 
+  181@ == 0 
+jf @DESERT6_2894 
+if 
+001D:   46@ > 137@ // (int) 
+jf @DESERT6_2894 
+gosub @DESERT6_7795 
+0085: 137@ = 46@ // (int) 
+137@ += 5000 
+181@ = 1 
+
+:DESERT6_2894
+if 
+  183@ == 0 
+jf @DESERT6_2948 
+if 
+08B7:   test 85@ bit 1 
+jf @DESERT6_2948 
+03E5: show_text_box 'DES6_12'  // ~s~Keep an eye on your 'visibility bar' to stay under the radar.
+183@ = 1 
+
+:DESERT6_2948
+if 
+  35@ == 99 
+jf @DESERT6_2973 
+gosub @DESERT6_9702 
+
+:DESERT6_2973
+return 
+
+:DESERT6_2975
+if 
+  35@ == 0 
+jf @DESERT6_3208 
+00BC: show_text_highpriority GXT 'DES6_10' time 5000 flag 1  // ~s~Return to the ~y~airfield~s~ and land.
+0085: 137@ = 46@ // (int) 
+137@ += 5000 
+153@ = -76.4228 
+154@ = 2478.64 
+155@ = 14.2844 
+156@ = 433.6483 
+157@ = 2525.658 
+158@ = 18.6279 
+0087: 159@ = 156@ // (float) 
+0063: 159@ -= 153@ // (float) 
+159@ /= 2.0 
+005B: 159@ += 153@ // (float) 
+0087: 160@ = 157@ // (float) 
+0063: 160@ -= 154@ // (float) 
+160@ /= 2.0 
+005B: 160@ += 154@ // (float) 
+0087: 161@ = 158@ // (float) 
+0063: 161@ -= 155@ // (float) 
+161@ /= 2.0 
+005B: 161@ += 155@ // (float) 
+018A: 132@ = create_checkpoint_at 159@ 160@ 161@ 
+35@ += 1 
+
+:DESERT6_3208
+if 
+   Car.Wrecked(125@)
+jf @DESERT6_3240 
+37@ = 1 
+45@ = 1 
+return 
+
+:DESERT6_3240
+gosub @DESERT6_4838 
+if 
+  37@ == 1 
+jf @DESERT6_3267 
+return 
+
+:DESERT6_3267
+if 
+  $7499 == 0 
+jf @DESERT6_3301 
+37@ = 1 
+45@ = 3 
+return 
+
+:DESERT6_3301
+if 
+  35@ == 1 
+jf @DESERT6_3444 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 159@ 160@ 161@ radius 10.0 10.0 10.0 
+if and
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 153@ 154@ 155@ cornerB 156@ 157@ 158@ 
+   Actor.InCar($PLAYER_ACTOR, 125@)
+01C1:   car 125@ stopped 
+81F3:   not car 125@ in_air 
+jf @DESERT6_3444 
+Marker.Disable(132@)
+gosub @DESERT6_7795 
+Player.CanMove($PLAYER_CHAR) = False
+165@ = 0 
+141@ = 0 
+35@ += 1 
+
+:DESERT6_3444
+if 
+  35@ == 2 
+jf @DESERT6_3494 
+if 
+08B7:   test 85@ bit 4 
+jf @DESERT6_3494 
+Player.CanMove($PLAYER_CHAR) = True
+35@ = 99 
+
+:DESERT6_3494
+gosub @DESERT6_4195 
+gosub @DESERT6_5180 
+if 
+  165@ == 1 
+jf @DESERT6_3552 
+if 
+001D:   46@ > 140@ // (int) 
+jf @DESERT6_3552 
+166@ = 1 
+
+:DESERT6_3552
+if 
+  166@ == 1 
+jf @DESERT6_3608 
+gosub @DESERT6_5607 
+50@ = 30 
+50@ *= 1000 
+0085: 140@ = 46@ // (int) 
+005A: 140@ += 50@ // (int) 
+
+:DESERT6_3608
+gosub @DESERT6_6038 
+if 
+  170@ == 0 
+jf @DESERT6_3737 
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+050A: 72@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 159@ 160@ 161@ 
+if 
+  500.0 > 72@ 
+jf @DESERT6_3737 
+00BC: show_text_highpriority GXT 'DES6_11' time 7000 flag 1  // ~s~Bring the plane to a stop anywhere on the ~y~landing strip~s~.
+170@ = 1 
+171@ = 1 
+0085: 145@ = 46@ // (int) 
+145@ += 7000 
+
+:DESERT6_3737
+if 
+  171@ == 1 
+jf @DESERT6_3815 
+if 
+001D:   46@ > 145@ // (int) 
+jf @DESERT6_3799 
+171@ = 0 
+03D5: remove_text 'DES6_11'  // ~s~Bring the plane to a stop anywhere on the ~y~landing strip~s~.
+jump @DESERT6_3815 
+
+:DESERT6_3799
+00BC: show_text_highpriority GXT 'DES6_11' time 7000 flag 1  // ~s~Bring the plane to a stop anywhere on the ~y~landing strip~s~.
+
+:DESERT6_3815
+if 
+  172@ == 0 
+jf @DESERT6_3840 
+gosub @DESERT6_6628 
+
+:DESERT6_3840
+if and
+  170@ == 1 
+   not 80@ == 4 
+88B7:   not test 85@ bit 4 
+jf @DESERT6_3970 
+0871: init_jump_table 79@ total_jumps 2 default_jump 0 @DESERT6_3970 jumps 0 @DESERT6_3935 1 @DESERT6_3956 -1 @DESERT6_3970 -1 @DESERT6_3970 -1 @DESERT6_3970 -1 @DESERT6_3970 -1 @DESERT6_3970 
+
+:DESERT6_3935
+81@ = 4 
+gosub @DESERT6_7640 
+jump @DESERT6_3970 
+
+:DESERT6_3956
+gosub @DESERT6_7864 
+jump @DESERT6_3970 
+
+:DESERT6_3970
+if 
+  180@ == 0 
+jf @DESERT6_4083 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -67.0004 1646.886 cornerB 423.298 2132.188 
+jf @DESERT6_4083 
+if or
+   Actor.DrivingPlane($PLAYER_ACTOR)
+04A9:   actor $PLAYER_ACTOR driving_heli 
+jf @DESERT6_4083 
+if 
+876F:   not text_priority_displayed 
+jf @DESERT6_4083 
+00BC: show_text_highpriority GXT 'AREA51' time 7000 flag 1  // ~r~DANGER!~s~ Restricted air space!
+180@ = 1 
+
+:DESERT6_4083
+if 
+  35@ == 99 
+jf @DESERT6_4108 
+gosub @DESERT6_9702 
+
+:DESERT6_4108
+return 
+
+:DESERT6_4110
+57@ = 323.5454 
+58@ = 2540.254 
+59@ = 15.8085 
+63@ = 180.0 
+0395: clear_area 1 at 57@ 58@ 59@ radius 15.0 
+125@ = Car.Create(#RUSTLER, 57@, 58@, 59@)
+Car.Angle(125@) = 63@
+return 
+
+:DESERT6_4195
+Car.StorePos(125@, 57@, 58@, 59@)
+02CE: 70@ = ground_z_at 57@ 58@ 59@ 
+092E: get_water_height_at 57@ 58@ ignore_waves 0 store_to 71@ 
+if 
+0025:   71@ > 70@ // (float) 
+jf @DESERT6_4263 
+0087: 70@ = 71@ // (float) 
+
+:DESERT6_4263
+0087: 71@ = 59@ // (float) 
+0063: 71@ -= 70@ // (float) 
+if 
+  71@ > 40.0 
+jf @DESERT6_4588 
+if 
+  163@ == 1 
+jf @DESERT6_4534 
+if 
+001D:   46@ > 138@ // (int) 
+jf @DESERT6_4461 
+$7497 += 1 
+if 
+  $7497 > 100 
+jf @DESERT6_4369 
+$7497 = 100 
+
+:DESERT6_4369
+if and
+  $7497 == 100 
+  165@ == 0 
+jf @DESERT6_4446 
+165@ = 1 
+166@ = 0 
+182@ = 0 
+50@ = 3 
+50@ *= 1000 
+0085: 140@ = 46@ // (int) 
+005A: 140@ += 50@ // (int) 
+
+:DESERT6_4446
+0085: 138@ = 46@ // (int) 
+138@ += 80 
+
+:DESERT6_4461
+if and
+  165@ == 0 
+  169@ == 0 
+  179@ == 0 
+jf @DESERT6_4527 
+if 
+   not 79@ == 2 
+jf @DESERT6_4527 
+00BC: show_text_highpriority GXT 'DES6_07' time 1000 flag 1  // ~s~Above radar limit!
+
+:DESERT6_4527
+jump @DESERT6_4581 
+
+:DESERT6_4534
+if 
+  71@ > 41.0 
+jf @DESERT6_4581 
+163@ = 1 
+0085: 138@ = 46@ // (int) 
+138@ += 80 
+03D1: play_wav 3 
+
+:DESERT6_4581
+jump @DESERT6_4836 
+
+:DESERT6_4588
+if 
+  163@ == 1 
+jf @DESERT6_4745 
+163@ = 0 
+if 
+  $7497 > 0 
+jf @DESERT6_4653 
+0085: 138@ = 46@ // (int) 
+138@ += 40 
+jump @DESERT6_4660 
+
+:DESERT6_4653
+138@ = 0 
+
+:DESERT6_4660
+if 
+  165@ == 1 
+jf @DESERT6_4709 
+50@ = 10 
+50@ *= 1000 
+0085: 141@ = 46@ // (int) 
+005A: 141@ += 50@ // (int) 
+
+:DESERT6_4709
+165@ = 0 
+140@ = 0 
+03D5: remove_text 'DES6_07'  // ~s~Above radar limit!
+040D: unload_wav 3 
+jump @DESERT6_4836 
+
+:DESERT6_4745
+if 
+  $7497 > 0 
+jf @DESERT6_4836 
+if 
+001D:   46@ > 138@ // (int) 
+jf @DESERT6_4836 
+$7497 -= 1 
+if 
+  $7497 == 0 
+jf @DESERT6_4821 
+138@ = 0 
+jump @DESERT6_4836 
+
+:DESERT6_4821
+0085: 138@ = 46@ // (int) 
+138@ += 40 
+
+:DESERT6_4836
+return 
+
+:DESERT6_4838
+if 
+   not Actor.InCar($PLAYER_ACTOR, 125@)
+jf @DESERT6_5118 
+if 
+  164@ == 1 
+jf @DESERT6_5034 
+if 
+001D:   46@ > 139@ // (int) 
+jf @DESERT6_5027 
+if 
+  $7498 == 0 
+jf @DESERT6_4935 
+37@ = 1 
+45@ = 2 
+return 
+jump @DESERT6_5027 
+
+:DESERT6_4935
+$7498 -= 1 
+0085: 139@ = 46@ // (int) 
+139@ += 1000 
+03EB: clear_small_messages_only 
+09C1: add_next_text_to_brief_history 0 
+if 
+  $7498 == 1 
+jf @DESERT6_5008 
+01E5: show_text_1number_highpriority GXT 'DES6_04' number $7498 time 1500 flag 1  // ~s~You have ~1~ second to get back in the ~b~plane~s~.
+jump @DESERT6_5027 
+
+:DESERT6_5008
+01E5: show_text_1number_highpriority GXT 'DES6_03' number $7498 time 1500 flag 1  // ~s~You have ~1~ seconds to get back in the ~b~plane~s~.
+
+:DESERT6_5027
+jump @DESERT6_5111 
+
+:DESERT6_5034
+$7498 = 30 
+0085: 139@ = 46@ // (int) 
+139@ += 1000 
+09C1: add_next_text_to_brief_history 0 
+01E5: show_text_1number_highpriority GXT 'DES6_03' number $7498 time 1500 flag 1  // ~s~You have ~1~ seconds to get back in the ~b~plane~s~.
+Marker.Disable(132@)
+133@ = Marker.CreateAboveCar(125@)
+07E0: set_marker 133@ type_to 1 
+040D: unload_wav 3 
+164@ = 1 
+
+:DESERT6_5111
+jump @DESERT6_5178 
+
+:DESERT6_5118
+if 
+  164@ == 1 
+jf @DESERT6_5178 
+164@ = 0 
+Marker.Disable(133@)
+018A: 132@ = create_checkpoint_at 159@ 160@ 161@ 
+139@ = 0 
+$7498 = 0 
+03EB: clear_small_messages_only 
+
+:DESERT6_5178
+return 
+
+:DESERT6_5180
+179@ = 0 
+48@ = 0 
+
+:DESERT6_5194
+73@ = 0 
+if 
+  184@(48@,2i) == 1 
+jf @DESERT6_5584 
+179@ = 1 
+if or
+   Car.Wrecked(126@(48@,2i))
+   Actor.Dead(123@(48@,2i))
+jf @DESERT6_5266 
+73@ = 1 
+
+:DESERT6_5266
+if 
+  73@ == 0 
+jf @DESERT6_5311 
+if 
+02BF:   car 126@(48@,2i) sunk 
+jf @DESERT6_5311 
+73@ = 1 
+
+:DESERT6_5311
+if 
+  73@ == 0 
+jf @DESERT6_5492 
+if 
+  177@(48@,2i) == 1 
+jf @DESERT6_5437 
+if 
+01F3:   car 126@(48@,2i) in_air 
+jf @DESERT6_5400 
+177@(48@,2i) = 0 
+150@(48@,2i) = 0 
+jump @DESERT6_5430 
+
+:DESERT6_5400
+if 
+001D:   46@ > 150@(48@,2i) // (int) 
+jf @DESERT6_5430 
+73@ = 1 
+
+:DESERT6_5430
+jump @DESERT6_5492 
+
+:DESERT6_5437
+if 
+81F3:   not car 126@(48@,2i) in_air 
+jf @DESERT6_5492 
+177@(48@,2i) = 1 
+0085: 150@(48@,2i) = 46@ // (int) 
+150@(48@,2i) += 5000 
+
+:DESERT6_5492
+if 
+  73@ == 1 
+jf @DESERT6_5584 
+Car.RemoveReferences(126@(48@,2i))
+Actor.RemoveReferences(123@(48@,2i))
+Marker.Disable(134@(48@,2i))
+184@(48@,2i) = 0 
+if 
+  165@ == 1 
+jf @DESERT6_5582 
+0085: 140@ = 46@ // (int) 
+140@ += 2000 
+
+:DESERT6_5582
+return 
+
+:DESERT6_5584
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_5194 
+return 
+
+:DESERT6_5607
+Actor.StorePos($PLAYER_ACTOR, 57@, 58@, 59@)
+48@ = 0 
+
+:DESERT6_5628
+if 
+  184@(48@,2i) == 0 
+jf @DESERT6_6015 
+0209: 50@ = random_int_in_ranges 150 200 
+0093: 70@ = integer 50@ to_float 
+0209: 51@ = random_int_in_ranges 0 2 
+if 
+  51@ == 0 
+jf @DESERT6_5711 
+005B: 57@ += 70@ // (float) 
+jump @DESERT6_5719 
+
+:DESERT6_5711
+0063: 57@ -= 70@ // (float) 
+
+:DESERT6_5719
+0209: 50@ = random_int_in_ranges 150 200 
+0093: 70@ = integer 50@ to_float 
+0209: 51@ = random_int_in_ranges 0 2 
+if 
+  51@ == 0 
+jf @DESERT6_5780 
+005B: 58@ += 70@ // (float) 
+jump @DESERT6_5788 
+
+:DESERT6_5780
+0063: 58@ -= 70@ // (float) 
+
+:DESERT6_5788
+02CE: 70@ = ground_z_at 57@ 58@ 59@ 
+092E: get_water_height_at 57@ 58@ ignore_waves 0 store_to 71@ 
+if 
+0025:   71@ > 70@ // (float) 
+jf @DESERT6_5842 
+0087: 70@ = 71@ // (float) 
+
+:DESERT6_5842
+0087: 59@ = 70@ // (float) 
+59@ += 200.0 
+126@(48@,2i) = Car.Create(#HYDRA, 57@, 58@, 59@)
+0745: set_hydra 126@(48@,2i) thrust_to_horizontal 
+070E: hydra 126@(48@,2i) attack_player_car $PLAYER_CHAR radius 10.0 
+134@(48@,2i) = Marker.CreateAboveCar(126@(48@,2i))
+018B: set_marker 134@(48@,2i) radar_mode 2 
+123@(48@,2i) = Actor.CreateAsDriver(CivMale, #HMORI, 126@(48@,2i))
+060B: set_actor 123@(48@,2i) decision_maker_to 136@ 
+177@(48@,2i) = 0 
+150@(48@,2i) = 0 
+184@(48@,2i) = 1 
+166@ = 0 
+182@ = 1 
+return 
+
+:DESERT6_6015
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_5628 
+return 
+
+:DESERT6_6038
+if 
+  165@ == 1 
+jf @DESERT6_6058 
+return 
+
+:DESERT6_6058
+if 
+001D:   141@ > 46@ // (int) 
+jf @DESERT6_6079 
+return 
+
+:DESERT6_6079
+if 
+  182@ == 0 
+jf @DESERT6_6099 
+return 
+
+:DESERT6_6099
+Actor.StorePos($PLAYER_ACTOR, 60@, 61@, 62@)
+48@ = 0 
+
+:DESERT6_6120
+if 
+  184@(48@,2i) == 1 
+jf @DESERT6_6242 
+Car.StorePos(126@(48@,2i), 57@, 58@, 59@)
+050A: 70@ = distance_between_XYZ 57@ 58@ 59@ and_XYZ 60@ 61@ 62@ 
+if 
+  70@ > 250.0 
+jf @DESERT6_6242 
+Actor.DestroyWithFade(123@(48@,2i))
+Car.Destroy(126@(48@,2i))
+Marker.Disable(134@(48@,2i))
+184@(48@,2i) = 0 
+
+:DESERT6_6242
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_6120 
+return 
+
+:DESERT6_6265
+if 
+   Car.Wrecked(125@)
+jf @DESERT6_6283 
+return 
+
+:DESERT6_6283
+128@ = Object.Create(#AMMO_CAPSULE, 370.5, 2498.75, 25.5)
+129@ = Object.Create(#AMMO_CAPSULE, 371.25, 2498.35, 25.3)
+130@ = Object.Create(#AMMO_CAPSULE, 371.25, 2499.15, 25.7)
+131@ = Object.Create(#AMMO_CAPSULE, 372.0, 2498.35, 25.4)
+0681: attach_object 128@ to_car 125@ with_offset -0.75 0.3 -1.05 rotation 88.0 0.0 0.0 
+0681: attach_object 129@ to_car 125@ with_offset -0.25 0.3 -1.1 rotation 88.0 0.0 0.0 
+0681: attach_object 130@ to_car 125@ with_offset 0.25 0.3 -1.1 rotation 88.0 0.0 0.0 
+0681: attach_object 131@ to_car 125@ with_offset 0.75 0.3 -1.05 rotation 88.0 0.0 0.0 
+48@ = 0 
+
+:DESERT6_6534
+Object.CollisionDetection(128@(48@,4i)) = False
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_6534 
+return 
+
+:DESERT6_6568
+172@ = 0 
+48@ = 0 
+
+:DESERT6_6582
+0085: 146@(48@,4i) = 46@ // (int) 
+173@(48@,4i) = 0 
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_6582 
+return 
+
+:DESERT6_6628
+48@ = 0 
+
+:DESERT6_6635
+if 
+  173@(48@,4i) == 0 
+jf @DESERT6_6740 
+if 
+001D:   46@ > 146@(48@,4i) // (int) 
+jf @DESERT6_6740 
+0682: detach_object 128@(48@,4i) 0.0 0.0 0.0 collision_detection 1 
+Object.ToggleInMovingList(128@(48@,4i)) = True
+097B: play_audio_at_object 128@(48@,4i) event 1009 
+173@(48@,4i) = 1 
+
+:DESERT6_6740
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_6635 
+48@ = 0 
+
+:DESERT6_6768
+if 
+  173@(48@,4i) == 0 
+jf @DESERT6_6792 
+return 
+
+:DESERT6_6792
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_6768 
+172@ = 1 
+return 
+
+:DESERT6_6822
+0871: init_jump_table 79@ total_jumps 5 default_jump 1 @DESERT6_6906 jumps 0 @DESERT6_6885 1 @DESERT6_6885 2 @DESERT6_6892 3 @DESERT6_6885 4 @DESERT6_6885 -1 @DESERT6_6942 -1 @DESERT6_6942 
+
+:DESERT6_6885
+jump @DESERT6_6942 
+
+:DESERT6_6892
+gosub @DESERT6_7082 
+jump @DESERT6_6942 
+
+:DESERT6_6906
+0662: printstring "UNKNOWN_CONVERSATION_STATUS_ID" 
+return 
+
+:DESERT6_6942
+return 
+
+:DESERT6_6944
+if 
+003B:   84@ == 83@ // (int) 
+jf @DESERT6_6965 
+return 
+
+:DESERT6_6965
+50@ = 1 
+87@(50@,3i) = 1 
+03CF: load_wav 90@(84@,11i) as 50@ 
+84@ += 1 
+if 
+003B:   84@ == 83@ // (int) 
+jf @DESERT6_7023 
+return 
+
+:DESERT6_7023
+50@ += 1 
+if 
+  50@ > 2 
+jf @DESERT6_7050 
+return 
+
+:DESERT6_7050
+87@(50@,3i) = 1 
+03CF: load_wav 90@(84@,11i) as 50@ 
+84@ += 1 
+return 
+
+:DESERT6_7082
+gosub @DESERT6_8054 
+if 
+  79@ == 3 
+jf @DESERT6_7116 
+gosub @DESERT6_7332 
+return 
+
+:DESERT6_7116
+0871: init_jump_table 87@(78@,3i) total_jumps 4 default_jump 1 @DESERT6_7299 jumps 0 @DESERT6_7183 1 @DESERT6_7192 2 @DESERT6_7228 3 @DESERT6_7267 -1 @DESERT6_7330 -1 @DESERT6_7330 -1 @DESERT6_7330 
+
+:DESERT6_7183
+return 
+jump @DESERT6_7330 
+
+:DESERT6_7192
+if 
+83D0:   not wav 78@ loaded 
+jf @DESERT6_7210 
+return 
+
+:DESERT6_7210
+87@(78@,3i) = 2 
+jump @DESERT6_7330 
+
+:DESERT6_7228
+03D1: play_wav 78@ 
+00BC: show_text_highpriority GXT 101@(82@,11s) time 10000 flag 1 
+87@(78@,3i) = 3 
+return 
+jump @DESERT6_7330 
+
+:DESERT6_7267
+if 
+83D2:   not wav 78@ ended 
+jf @DESERT6_7285 
+return 
+
+:DESERT6_7285
+gosub @DESERT6_7385 
+jump @DESERT6_7330 
+
+:DESERT6_7299
+0662: printstring "UNKNOWN_AUDIO_SLOT_STATUS" 
+return 
+
+:DESERT6_7330
+return 
+
+:DESERT6_7332
+50@ = 1 
+
+:DESERT6_7339
+if 
+  2 >= 50@ 
+jf @DESERT6_7376 
+040D: unload_wav 50@ 
+50@ += 1 
+jump @DESERT6_7339 
+
+:DESERT6_7376
+gosub @DESERT6_7514 
+return 
+
+:DESERT6_7385
+87@(78@,3i) = 0 
+82@ += 1 
+if 
+003B:   82@ == 83@ // (int) 
+jf @DESERT6_7431 
+gosub @DESERT6_7514 
+return 
+
+:DESERT6_7431
+if 
+001D:   83@ > 84@ // (int) 
+jf @DESERT6_7480 
+87@(78@,3i) = 1 
+03CF: load_wav 90@(84@,11i) as 78@ 
+84@ += 1 
+
+:DESERT6_7480
+78@ += 1 
+if 
+  78@ > 2 
+jf @DESERT6_7512 
+78@ = 1 
+
+:DESERT6_7512
+return 
+
+:DESERT6_7514
+08BF: set 85@ bit 80@ 
+80@ = 0 
+79@ = 0 
+81@ = 0 
+78@ = 1 
+82@ = 0 
+83@ = 0 
+84@ = 0 
+50@ = 1 
+
+:DESERT6_7578
+if 
+  2 > 50@ 
+jf @DESERT6_7621 
+87@(50@,3i) = 0 
+50@ += 1 
+jump @DESERT6_7578 
+
+:DESERT6_7621
+03EB: clear_small_messages_only 
+0085: 86@ = 46@ // (int) 
+86@ += 120 
+return 
+
+:DESERT6_7640
+if 
+   not 79@ == 0 
+jf @DESERT6_7665 
+gosub @DESERT6_7864 
+
+:DESERT6_7665
+if 
+001D:   86@ > 46@ // (int) 
+jf @DESERT6_7686 
+return 
+
+:DESERT6_7686
+86@ = 0 
+0085: 80@ = 81@ // (int) 
+81@ = 0 
+78@ = 1 
+82@ = 0 
+83@ = 0 
+84@ = 0 
+50@ = 1 
+
+:DESERT6_7743
+if 
+  2 > 50@ 
+jf @DESERT6_7786 
+87@(50@,3i) = 0 
+50@ += 1 
+jump @DESERT6_7743 
+
+:DESERT6_7786
+gosub @DESERT6_7893 
+return 
+
+:DESERT6_7795
+if 
+   not 79@ == 1 
+jf @DESERT6_7855 
+0662: printstring "A_CONVERSATION_HAS_NOT_BEEN_PREPARED" 
+return 
+
+:DESERT6_7855
+79@ = 2 
+return 
+
+:DESERT6_7864
+if 
+  79@ == 0 
+jf @DESERT6_7884 
+return 
+
+:DESERT6_7884
+gosub @DESERT6_7332 
+return 
+
+:DESERT6_7893
+0871: init_jump_table 80@ total_jumps 4 default_jump 1 @DESERT6_8012 jumps 1 @DESERT6_7956 2 @DESERT6_7970 3 @DESERT6_7984 4 @DESERT6_7998 -1 @DESERT6_8038 -1 @DESERT6_8038 -1 @DESERT6_8038 
+
+:DESERT6_7956
+gosub @DESERT6_8134 
+jump @DESERT6_8038 
+
+:DESERT6_7970
+gosub @DESERT6_8607 
+jump @DESERT6_8038 
+
+:DESERT6_7984
+gosub @DESERT6_8804 
+jump @DESERT6_8038 
+
+:DESERT6_7998
+gosub @DESERT6_9018 
+jump @DESERT6_8038 
+
+:DESERT6_8012
+0662: printstring "UNKNOWN_CONVERSATION" 
+return 
+
+:DESERT6_8038
+gosub @DESERT6_6944 
+79@ = 1 
+return 
+
+:DESERT6_8054
+if 
+   Actor.Dead($PLAYER_ACTOR)
+jf @DESERT6_8079 
+79@ = 3 
+return 
+
+:DESERT6_8079
+if 
+   Car.Wrecked(125@)
+jf @DESERT6_8104 
+79@ = 3 
+return 
+
+:DESERT6_8104
+if 
+   not Actor.InCar($PLAYER_ACTOR, 125@)
+jf @DESERT6_8132 
+79@ = 3 
+return 
+
+:DESERT6_8132
+return 
+
+:DESERT6_8134
+50@ = 0 
+04AF: 90@(50@,11i) = 13400 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AA' // @s = 'short'  // ~z~Hey Carl.
+50@ += 1 
+04AF: 90@(50@,11i) = 13401 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AB' // @s = 'short'  // ~z~You gotta stay nice and low on your approach or you'll pop up on the radar.
+50@ += 1 
+04AF: 90@(50@,11i) = 13402 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AD' // @s = 'short'  // ~z~Use the canyon as cover.
+50@ += 1 
+04AF: 90@(50@,11i) = 13403 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AE' // @s = 'short'  // ~z~You sure this thing's safe, I can see daylight through the floor?
+50@ += 1 
+04AF: 90@(50@,11i) = 13404 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AF' // @s = 'short'  // ~z~Hey, in that thing you look like an enthusiast.
+50@ += 1 
+04AF: 90@(50@,11i) = 13405 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AG' // @s = 'short'  // ~z~The US Air Force is less likely to shoot you down.
+50@ += 1 
+04AF: 90@(50@,11i) = 13406 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AH' // @s = 'short'  // ~z~Cool. What's the problem then?
+50@ += 1 
+04AF: 90@(50@,11i) = 13407 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AJ' // @s = 'short'  // ~z~I said less likely.
+50@ += 1 
+04AF: 90@(50@,11i) = 13408 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AK' // @s = 'short'  // ~z~If you did as many amphetamines as these guys do, you'd be lucky not to shoot anything that moves.
+50@ += 1 
+04AF: 90@(50@,11i) = 13409 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AM' // @s = 'short'  // ~z~Aw, shit.
+50@ += 1 
+04AF: 90@(50@,11i) = 13410 // = constant 
+05AA: 101@(50@,11s) = 'DES6_AN' // @s = 'short'  // ~z~Hey, just stay low and you'll be fine.
+50@ += 1 
+if 
+  50@ > 11 
+jf @DESERT6_8597 
+0662: printstring "TOO_MANY_CONVERSATION_LINES" 
+
+:DESERT6_8597
+0085: 83@ = 50@ // (int) 
+return 
+
+:DESERT6_8607
+0209: 50@ = random_int_in_ranges 0 4 
+0871: init_jump_table 50@ total_jumps 4 default_jump 0 @DESERT6_8795 jumps 0 @DESERT6_8679 1 @DESERT6_8708 2 @DESERT6_8737 3 @DESERT6_8766 -1 @DESERT6_8795 -1 @DESERT6_8795 -1 @DESERT6_8795 
+
+:DESERT6_8679
+04AF: 90@ = 13411 // = constant 
+05AA: 101@s = 'DES6_BA' // @s = 'short'  // ~z~You're flying too high!
+jump @DESERT6_8795 
+
+:DESERT6_8708
+04AF: 90@ = 13412 // = constant 
+05AA: 101@s = 'DES6_BB' // @s = 'short'  // ~z~Get below the radar!
+jump @DESERT6_8795 
+
+:DESERT6_8737
+04AF: 90@ = 13413 // = constant 
+05AA: 101@s = 'DES6_BC' // @s = 'short'  // ~z~Stay low, Carl!
+jump @DESERT6_8795 
+
+:DESERT6_8766
+04AF: 90@ = 13414 // = constant 
+05AA: 101@s = 'DES6_BD' // @s = 'short'  // ~z~Nap of the Earth, Carl, nap of the Earth!
+jump @DESERT6_8795 
+
+:DESERT6_8795
+83@ = 1 
+return 
+
+:DESERT6_8804
+50@ = 0 
+04AF: 90@(50@,11i) = 13415 // = constant 
+05AA: 101@(50@,11s) = 'DES6_CA' // @s = 'short'  // ~z~Shit, you've been spotted!
+50@ += 1 
+04AF: 90@(50@,11i) = 13416 // = constant 
+05AA: 101@(50@,11s) = 'DES6_CB' // @s = 'short'  // ~z~What that mean?
+50@ += 1 
+04AF: 90@(50@,11i) = 13417 // = constant 
+05AA: 101@(50@,11s) = 'DES6_CC' // @s = 'short'  // ~z~it means they'll send something in the area to go check you out!
+50@ += 1 
+04AF: 90@(50@,11i) = 13418 // = constant 
+05AA: 101@(50@,11s) = 'DES6_CD' // @s = 'short'  // ~z~Watch your six!
+50@ += 1 
+if 
+  50@ > 11 
+jf @DESERT6_9008 
+0662: printstring "TOO_MANY_CONVERSATION_LINES" 
+
+:DESERT6_9008
+0085: 83@ = 50@ // (int) 
+return 
+
+:DESERT6_9018
+50@ = 0 
+04AF: 90@(50@,11i) = 13419 // = constant 
+05AA: 101@(50@,11s) = 'DES6_DA' // @s = 'short'  // ~z~Nice going Carl, really, you did good kid
+83@ = 1 
+return 
+
+:DESERT6_9064
+if 
+0736:   is_keyboard_key_just_pressed 32 
+jf @DESERT6_9113 
+47@ += 1 
+if 
+  47@ > 2 
+jf @DESERT6_9111 
+47@ = 0 
+
+:DESERT6_9111
+086A: NOP 
+
+:DESERT6_9113
+if 
+  47@ == 1 
+jf @DESERT6_9287 
+008A: $7500 = 34@ // (int) 
+008A: $7501 = 35@ // (int) 
+008A: $7502 = 46@ // (int) 
+008A: $7503 = 80@ // (int) 
+008A: $7504 = 85@ // (int) 
+$7505 = 0 
+$7506 = 0 
+$7507 = 0 
+065D: NOP $7500 "M_STAGE" 
+065D: NOP $7501 "M_GOALS" 
+065D: NOP $7502 "M_MISSION_TIMER" 
+065D: NOP $7503 "CONVERSATION" 
+065D: NOP $7504 "CONVERSATIONSPLAYED" 
+
+:DESERT6_9287
+if 
+  47@ == 2 
+jf @DESERT6_9305 
+
+:DESERT6_9305
+if 
+0736:   is_keyboard_key_just_pressed 98 
+jf @DESERT6_9327 
+38@ = 1 
+
+:DESERT6_9327
+if 
+0736:   is_keyboard_key_just_pressed 80 
+jf @DESERT6_9415 
+if 
+  39@ == 0 
+jf @DESERT6_9390 
+39@ = 1 
+0662: printstring "LEVEL_PAUSED" 
+jump @DESERT6_9415 
+
+:DESERT6_9390
+39@ = 0 
+0662: printstring "LEVEL_UNPAUSED" 
+
+:DESERT6_9415
+return 
+
+:DESERT6_9417
+if 
+8736:   not is_keyboard_key_just_pressed 74 
+jf @DESERT6_9434 
+return 
+
+:DESERT6_9434
+if 
+  34@ == 2 
+jf @DESERT6_9555 
+if 
+  2 > 35@ 
+jf @DESERT6_9538 
+0395: clear_area 1 at -2246.706 -2539.1 30.7512 radius 25.0 
+Actor.PutAt($PLAYER_ACTOR, -2246.706, -2539.1, 30.7512)
+Actor.Angle($PLAYER_ACTOR) = 144.5365
+35@ = 2 
+jump @DESERT6_9555 
+
+:DESERT6_9538
+Marker.Disable(132@)
+06D6: disable_racing_checkpoint 152@ 
+35@ = 99 
+
+:DESERT6_9555
+if 
+  34@ == 3 
+jf @DESERT6_9627 
+0395: clear_area 1 at 384.4035 2449.35 15.4921 radius 25.0 
+Actor.PutAt($PLAYER_ACTOR, 384.4035, 2449.35, 15.4921)
+Actor.Angle($PLAYER_ACTOR) = 7.1386
+
+:DESERT6_9627
+return 
+
+:DESERT6_9629
+41@ += 1 
+if 
+  41@ > 9 
+jf @DESERT6_9661 
+41@ = 0 
+
+:DESERT6_9661
+return 
+
+:DESERT6_9663
+01BD: 42@ = current_time_in_ms 
+0085: 44@ = 42@ // (int) 
+0062: 44@ -= 43@ // (int) 
+0085: 43@ = 42@ // (int) 
+005A: 46@ += 44@ // (int) 
+return 
+
+:DESERT6_9702
+34@ += 1 
+35@ = 0 
+32@ = 0 
+33@ = 0 
+return 
+
+:DESERT6_9732
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT6_9755 
+Player.CanMove($PLAYER_CHAR) = False
+
+:DESERT6_9755
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:DESERT6_9770
+if 
+fading 
+jf @DESERT6_9794 
+wait 0 
+jump @DESERT6_9770 
+
+:DESERT6_9794
+0395: clear_area 1 at 335.0 2529.0 16.0 radius 20.0 
+02E4: load_cutscene_data 'DESERT6' 
+
+:DESERT6_9829
+if 
+86B9:   not cutscene_data_loaded 
+jf @DESERT6_9853 
+wait 0 
+jump @DESERT6_9829 
+
+:DESERT6_9853
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+01B5: force_weather 17 
+
+:DESERT6_9874
+if 
+82E9:   not cutscene_reached_end 
+jf @DESERT6_9898 
+wait 0 
+jump @DESERT6_9874 
+
+:DESERT6_9898
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:DESERT6_9912
+if 
+fading 
+jf @DESERT6_9936 
+wait 0 
+jump @DESERT6_9912 
+
+:DESERT6_9936
+02EA: end_cutscene 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+return 
+
+:DESERT6_9946
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @DESERT6_9973 
+wait 0 
+jump @DESERT6_9946 
+
+:DESERT6_9973
+014C: set_parked_car_generator $PARKED_RUSTLER cars_to_generate_to 0 
+014C: set_parked_car_generator $PARKED_STUNT cars_to_generate_to 0 
+014C: set_parked_car_generator $PARKED_HUNTER cars_to_generate_to 0 
+0395: clear_area 0 at 368.1973 2519.421 15.5961 radius 300.0 
+gosub @DESERT6_10204 
+gosub @DESERT6_10312 
+gosub @DESERT6_4110 
+133@ = Marker.CreateAboveCar(125@)
+07E0: set_marker 133@ type_to 1 
+0395: clear_area 0 at 331.9908 2533.767 15.8044 radius 0.5 
+Camera.SetAtPos(331.9908, 2533.767, 15.8044)
+Actor.PutAt($PLAYER_ACTOR, 331.9908, 2533.767, 15.8044)
+Actor.Angle($PLAYER_ACTOR) = 48.4743
+Camera.SetBehindPlayer
+set_weather 17 
+0923: enable_air_traffic 0 
+wait 500 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DESERT6_10178 
+Player.CanMove($PLAYER_CHAR) = True
+
+:DESERT6_10178
+09FF: set_restart_closest_to 322.8019 2530.124 15.8089 
+gosub @DESERT6_9702 
+return 
+
+:DESERT6_10204
+Model.Load(#RUSTLER)
+Model.Load(#HYDRA)
+Model.Load(#HMORI)
+Model.Load(#AMMO_CAPSULE)
+038B: load_requested_models 
+
+:DESERT6_10225
+if or
+   not Model.Available(#RUSTLER)
+   not Model.Available(#HYDRA)
+jf @DESERT6_10257 
+wait 0 
+jump @DESERT6_10225 
+
+:DESERT6_10257
+if 
+   not Model.Available(#HMORI)
+jf @DESERT6_10283 
+wait 0 
+jump @DESERT6_10257 
+
+:DESERT6_10283
+if 
+   not Model.Available(#AMMO_CAPSULE)
+jf @DESERT6_10310 
+wait 0 
+jump @DESERT6_10283 
+
+:DESERT6_10310
+return 
+
+:DESERT6_10312
+return 
+
+:DESERT6_10314
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DESERT6_10342 
+$11033 = 0 
+
+:DESERT6_10342
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+03EB: clear_small_messages_only 
+0871: init_jump_table 45@ total_jumps 3 default_jump 0 @DESERT6_10492 jumps 1 @DESERT6_10423 2 @DESERT6_10446 3 @DESERT6_10469 -1 @DESERT6_10492 -1 @DESERT6_10492 -1 @DESERT6_10492 -1 @DESERT6_10492 
+
+:DESERT6_10423
+00BC: show_text_highpriority GXT 'DES6_99' time 5000 flag 1  // ~r~The aircraft has been destroyed.
+jump @DESERT6_10492 
+
+:DESERT6_10446
+00BC: show_text_highpriority GXT 'DES6_98' time 5000 flag 1  // ~r~Not in aircraft.
+jump @DESERT6_10492 
+
+:DESERT6_10469
+00BC: show_text_highpriority GXT 'DES6_97' time 5000 flag 1  // ~r~Out of time.
+jump @DESERT6_10492 
+
+:DESERT6_10492
+return 
+
+:DESERT6_10494
+01E3: show_text_1number_styled GXT 'M_PASS' number 15000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 15000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'DESERT6'  // N.O.E.
+030C: progress_made = 1 
+$TORENO_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:DESERT6_10554
+Car.RemoveReferences(125@)
+48@ = 0 
+
+:DESERT6_10566
+Car.RemoveReferences(126@(48@,2i))
+Actor.RemoveReferences(123@(48@,2i))
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_10566 
+48@ = 0 
+
+:DESERT6_10612
+Object.Destroy(128@(48@,4i))
+48@ += 1 
+  48@ >= 4 
+jf @DESERT6_10612 
+Marker.Disable(133@)
+Marker.Disable(132@)
+48@ = 0 
+
+:DESERT6_10659
+Marker.Disable(134@(48@,2i))
+48@ += 1 
+  48@ >= 2 
+jf @DESERT6_10659 
+0151: remove_status_text $7497 
+014F: stop_timer $7499 
+06D6: disable_racing_checkpoint 152@ 
+040D: unload_wav 3 
+Model.Destroy(#RUSTLER)
+Model.Destroy(#HYDRA)
+Model.Destroy(#HMORI)
+Model.Destroy(#AMMO_CAPSULE)
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03C7: set_sensitivity_to_crime 1.0 
+0923: enable_air_traffic 1 
+01B7: release_weather 
+0A24: enable_military_zones_wanted_level 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+  $PARKED_RUSTLER_EXISTS == 1 
+jf @DESERT6_10788 
+014C: set_parked_car_generator $PARKED_RUSTLER cars_to_generate_to 101 
+
+:DESERT6_10788
+if 
+  $PARKED_STUNT_EXISTS == 1 
+jf @DESERT6_10813 
+014C: set_parked_car_generator $PARKED_STUNT cars_to_generate_to 101 
+
+:DESERT6_10813
+if 
+  $PARKED_HUNTER_EXISTS == 1 
+jf @DESERT6_10838 
+014C: set_parked_car_generator $PARKED_HUNTER cars_to_generate_to 101 
+
+:DESERT6_10838
+$ONMISSION = 0 
+mission_cleanup 
+return

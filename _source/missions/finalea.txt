@@ -1,0 +1,4911 @@
+:FINALEA
+gosub @FINALEA_83 
+if 
+wasted_or_busted 
+jf @FINALEA_74 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @FINALEA_32817 
+
+:FINALEA_74
+gosub @FINALEA_32997 
+end_thread 
+
+:FINALEA_83
+$ONMISSION = 1 
+increment_mission_attempts 
+thread 'FINALEA' 
+wait 0 
+054C: use_GXT_table 'RIOT4' 
+select_interior 1 
+02E4: load_cutscene_data 'RIOT_4A' 
+
+:FINALEA_133
+if 
+86B9:   not cutscene_data_loaded 
+jf @FINALEA_157 
+wait 0 
+jump @FINALEA_133 
+
+:FINALEA_157
+02E7: start_cutscene 
+fade 1 1000 
+
+:FINALEA_166
+if 
+82E9:   not cutscene_reached_end 
+jf @FINALEA_190 
+wait 0 
+jump @FINALEA_166 
+
+:FINALEA_190
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:FINALEA_205
+if 
+fading 
+jf @FINALEA_229 
+wait 0 
+jump @FINALEA_205 
+
+:FINALEA_229
+select_interior 0 
+Model.Load(#SWATVAN)
+Model.Load(#COPCARLA)
+Model.Load(#SWAT)
+Model.Load(#BALLAS1)
+Model.Load(#GREENWOO)
+Model.Load(#TAHOMA)
+Model.Load(#MAJESTIC)
+023C: load_special_actor 'SWEET' as 1 // models 290-299 
+0777: delete_objects_in_object_group "CARTER" 
+0776: create_objects_in_object_group "CARTER" 
+038B: load_requested_models 
+
+:FINALEA_302
+if or
+   not Model.Available(#MAJESTIC)
+   not Model.Available(#TAHOMA)
+   not Model.Available(#GREENWOO)
+823D:   not special_actor 1 loaded 
+jf @FINALEA_343 
+wait 0 
+jump @FINALEA_302 
+
+:FINALEA_343
+if or
+   not Model.Available(#SWATVAN)
+   not Model.Available(#COPCARLA)
+   not Model.Available(#SWAT)
+   not Model.Available(#BALLAS1)
+jf @FINALEA_384 
+wait 0 
+jump @FINALEA_343 
+
+:FINALEA_384
+Actor.PutAt($PLAYER_ACTOR, 2514.745, -1673.838, 12.8)
+Actor.Angle($PLAYER_ACTOR) = 60.891
+060A: create_decision_maker_type 0 store_to 47@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 49@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 3 store_to 48@ // decision\allowed\m_.ped files 
+01F0: set_max_wanted_level_to 0 
+06D0: enable_emergency_traffic 0 
+Object.Destroy($2721)
+$2721 = Object.Init(#IMY_SHASH_WALL, 2522.008, -1272.93, 35.609)
+071F: set_object $2721 health_to 100 
+Object.Indestructibility($2721) = False
+Object.KeepInMemory($2721) = True
+Object.Indestructibility($2721) = True
+0674: set_car_model #GREENWOO numberplate "GROVE4L_" 
+$SWEET_CAR = Car.Create(#GREENWOO, 2507.823, -1671.88, 12.1678)
+Car.Angle($SWEET_CAR) = 347.15
+Car.ImmuneToNonPlayer($SWEET_CAR) = True
+128@ = Marker.CreateAboveCar($SWEET_CAR)
+07E0: set_marker 128@ type_to 1 
+0229: set_car $SWEET_CAR primary_color_to 59 secondary_color_to 34 
+Car.Health($SWEET_CAR) = 2000
+053F: set_car $SWEET_CAR tires_vulnerability 0 
+0852: set_car $SWEET_CAR damages_visible 0 
+$ACTOR_SWEET = Actor.Create(Special, #SPECIAL01, 2511.169, -1672.747, 12.493)
+09F6: set_actor $ACTOR_SWEET unjackable_through_driver_seat 0 
+Actor.Angle($ACTOR_SWEET) = 68.365
+0568: set_actor $ACTOR_SWEET untargetable 1 
+02A9: set_actor $ACTOR_SWEET immune_to_nonplayer 1 
+05CA: AS_actor $ACTOR_SWEET enter_car $SWEET_CAR passenger_seat 0 time 5000 
+039E: set_actor $ACTOR_SWEET locked 1 while_in_car 
+0526: set_actor $ACTOR_SWEET stay_in_car_when_jacked 1 
+060B: set_actor $ACTOR_SWEET decision_maker_to 47@ 
+0568: set_actor $ACTOR_SWEET untargetable 1 
+0446: set_actor $ACTOR_SWEET dismemberment_possible 0 
+064B: 102@ = create_particle "WALLBUST" at 2521.86 -1272.66 35.04 type 1 
+00C0: set_current_time_hours_to 21 minutes_to 30 
+0828: set_max_fire_generations 0 
+02A3: enable_widescreen 0 
+Camera.SetAtPos(2511.75, -1672.15, 14.0)
+fade 1 1000 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'RM4_1' time 7000 flag 1  // ~s~Get in the car with ~b~Sweet~s~.
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+41@ = 2505.215 
+41@ -= 2508.17 
+42@ = -1261.351 
+42@ -= -1267.878 
+43@ = 43.8341 
+43@ -= 48.0744 
+44@ = 2506.003 
+44@ -= 2508.351 
+45@ = -1261.802 
+45@ -= -1268.857 
+46@ = 43.4146 
+46@ -= 47.9824 
+35@ = 2508.17 
+36@ = -1267.878 
+37@ = 48.0744 
+38@ = 2508.351 
+39@ = -1268.857 
+40@ = 47.9824 
+34@ = 160.0 
+0073: 41@ /= 34@ // (float) 
+0073: 42@ /= 34@ // (float) 
+0073: 43@ /= 34@ // (float) 
+0073: 44@ /= 34@ // (float) 
+0073: 45@ /= 34@ // (float) 
+0073: 46@ /= 34@ // (float) 
+146@ = 0 
+147@ = 0 
+148@ = 0 
+149@ = 0 
+150@ = 0 
+151@ = 0 
+152@ = 0 
+153@ = 0 
+154@ = 0 
+155@ = 0 
+156@ = 0 
+157@ = 0 
+158@ = 0 
+159@ = 0 
+160@ = 0 
+161@ = 0 
+162@ = 0 
+163@ = 0 
+164@ = 0 
+165@ = 0 
+166@ = 0 
+167@ = 0 
+168@ = 0 
+169@ = 0 
+170@ = 0 
+171@ = 0 
+172@ = 0 
+173@ = 0 
+174@ = 0 
+175@ = 0 
+176@ = 0 
+177@ = 0 
+178@ = 0 
+179@ = 0 
+180@ = 0 
+181@ = 0 
+182@ = 0 
+183@ = 0 
+184@ = 0 
+185@ = 0 
+186@ = 0 
+187@ = 0 
+188@ = 0 
+189@ = 0 
+190@ = 0 
+191@ = 0 
+192@ = 0 
+193@ = 0 
+194@ = 0 
+195@ = 0 
+196@ = 0 
+197@ = 0 
+198@ = 0 
+199@ = 0 
+200@ = 0 
+201@ = 0 
+04C0: create_roadblock_in_area_cornerA 2336.63 -1548.68 23.99 cornerB 2347.01 -1548.37 23.68 type 1 
+04C0: create_roadblock_in_area_cornerA 2506.76 -1432.29 28.13 cornerB 2516.63 -1430.51 27.82 type 1 
+04C0: create_roadblock_in_area_cornerA 2462.0 -1449.0 24.0 cornerB 2463.0 -1439.0 24.0 type 1 
+
+:FINALEA_1540
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @FINALEA_1566 
+jump @FINALEA_32966 
+
+:FINALEA_1566
+if 
+  147@ == 0 
+jf @FINALEA_7545 
+if 
+  146@ == 0 
+jf @FINALEA_1708 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_1708 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @FINALEA_1708 
+if 
+   Actor.InCar($PLAYER_ACTOR, $SWEET_CAR)
+jf @FINALEA_1708 
+Marker.Disable(128@)
+018A: 128@ = create_checkpoint_at 2507.82 -1309.226 33.6726 
+00BC: show_text_highpriority GXT 'RM4_2' time 5000 flag 1  // ~s~Drive to ~y~Big Smoke's Crack Fortress~s~.
+33@ = 0 
+146@ = 1 
+
+:FINALEA_1708
+if 
+  146@ == 1 
+jf @FINALEA_2627 
+gosub @FINALEA_31803 
+if 
+  193@ == 0 
+jf @FINALEA_1819 
+if 
+  194@ == 0 
+jf @FINALEA_1819 
+if 
+  33@ > 5500 
+jf @FINALEA_1819 
+04AF: 125@ = 33200 // = constant 
+05AA: 126@s = 'ROT4_AA' // @s = 'short'  // ~z~You sure he in East Los Santos?
+gosub @FINALEA_31761 
+
+:FINALEA_1819
+if 
+  193@ == 1 
+jf @FINALEA_1886 
+if 
+  194@ == 0 
+jf @FINALEA_1886 
+04AF: 125@ = 33201 // = constant 
+05AA: 126@s = 'ROT4_AB' // @s = 'short'  // ~z~Yeah, right on the edge of Los Flores - some old apartments and a warehouse.
+gosub @FINALEA_31761 
+
+:FINALEA_1886
+if 
+  193@ == 2 
+jf @FINALEA_1960 
+if 
+  194@ == 0 
+jf @FINALEA_1960 
+04AF: 125@ = 33202 // = constant 
+05AA: 126@s = 'ROT4_AC' // @s = 'short'  // ~z~He as good as dead, then!
+gosub @FINALEA_31761 
+33@ = 0 
+
+:FINALEA_1960
+if 
+  193@ == 3 
+jf @FINALEA_2046 
+if 
+  194@ == 0 
+jf @FINALEA_2046 
+if 
+  33@ > 3000 
+jf @FINALEA_2046 
+04AF: 125@ = 33203 // = constant 
+05AA: 126@s = 'ROT4_BA' // @s = 'short'  // ~z~I can't believe you bought that same bucket ass car, man!
+gosub @FINALEA_31761 
+
+:FINALEA_2046
+if 
+  193@ == 4 
+jf @FINALEA_2120 
+if 
+  194@ == 0 
+jf @FINALEA_2120 
+04AF: 125@ = 33204 // = constant 
+05AA: 126@s = 'ROT4_BB' // @s = 'short'  // ~z~Hey, if it ain't broke, don't fix it.
+gosub @FINALEA_31761 
+32@ = 0 
+
+:FINALEA_2120
+if 
+  193@ == 5 
+jf @FINALEA_2206 
+if 
+  194@ == 0 
+jf @FINALEA_2206 
+if 
+  33@ > 12000 
+jf @FINALEA_2206 
+04AF: 125@ = 33205 // = constant 
+05AA: 126@s = 'ROT4_BC' // @s = 'short'  // ~z~So this is it, huh?
+gosub @FINALEA_31761 
+
+:FINALEA_2206
+if 
+  193@ == 6 
+jf @FINALEA_2292 
+if 
+  194@ == 0 
+jf @FINALEA_2292 
+if 
+  33@ > 12000 
+jf @FINALEA_2292 
+04AF: 125@ = 33206 // = constant 
+05AA: 126@s = 'ROT4_BD' // @s = 'short'  // ~z~Yeah.
+gosub @FINALEA_31761 
+
+:FINALEA_2292
+if 
+  193@ == 7 
+jf @FINALEA_2359 
+if 
+  194@ == 0 
+jf @FINALEA_2359 
+04AF: 125@ = 33207 // = constant 
+05AA: 126@s = 'ROT4_BE' // @s = 'short'  // ~z~Johnson boys sorting shit out.
+gosub @FINALEA_31761 
+
+:FINALEA_2359
+if 
+  193@ == 8 
+jf @FINALEA_2426 
+if 
+  194@ == 0 
+jf @FINALEA_2426 
+04AF: 125@ = 33208 // = constant 
+05AA: 126@s = 'ROT4_BF' // @s = 'short'  // ~z~Yeah.
+gosub @FINALEA_31761 
+
+:FINALEA_2426
+if 
+  193@ == 9 
+jf @FINALEA_2493 
+if 
+  194@ == 0 
+jf @FINALEA_2493 
+04AF: 125@ = 33209 // = constant 
+05AA: 126@s = 'ROT4_BG' // @s = 'short'  // ~z~Nervous?
+gosub @FINALEA_31761 
+
+:FINALEA_2493
+if 
+  193@ == 10 
+jf @FINALEA_2560 
+if 
+  194@ == 0 
+jf @FINALEA_2560 
+04AF: 125@ = 33210 // = constant 
+05AA: 126@s = 'ROT4_BH' // @s = 'short'  // ~z~Yeah.
+gosub @FINALEA_31761 
+
+:FINALEA_2560
+if 
+  193@ == 11 
+jf @FINALEA_2627 
+if 
+  194@ == 0 
+jf @FINALEA_2627 
+04AF: 125@ = 33211 // = constant 
+05AA: 126@s = 'ROT4_BJ' // @s = 'short'  // ~z~Me too, me too.
+gosub @FINALEA_31761 
+
+:FINALEA_2627
+if 
+  146@ == 1 
+jf @FINALEA_5185 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @FINALEA_5185 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_5185 
+if 
+01AF:   car $SWEET_CAR sphere 1 in_sphere 2507.82 -1309.226 33.85 radius 4.0 4.0 4.0 
+jf @FINALEA_5185 
+if 
+0448:   actor $ACTOR_SWEET in_car $SWEET_CAR 
+jf @FINALEA_5185 
+if 
+0448:   actor $PLAYER_ACTOR in_car $SWEET_CAR 
+jf @FINALEA_5185 
+Player.CanMove($PLAYER_CHAR) = False
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+Marker.Disable(128@)
+04C1: remove_references_to_roadblocks 
+Actor.SetImmunities($ACTOR_SWEET, 1, 1, 1, 1, 1)
+Car.SetImmunities($SWEET_CAR, 1, 1, 1, 1, 1)
+03CF: load_wav 14600 as 3 
+0209: 300@ = random_int_in_ranges 0 3 
+if 
+  300@ == 0 
+jf @FINALEA_2880 
+03CF: load_wav 33212 as 2 
+jump @FINALEA_2923 
+
+:FINALEA_2880
+if 
+  300@ == 1 
+jf @FINALEA_2914 
+03CF: load_wav 33213 as 2 
+jump @FINALEA_2923 
+
+:FINALEA_2914
+03CF: load_wav 33214 as 2 
+
+:FINALEA_2923
+038B: load_requested_models 
+0169: set_fade_color_RGB 0 0 0 
+00BE: text_clear_all 
+040D: unload_wav 1 
+fade 0 500 
+
+:FINALEA_2946
+if 
+fading 
+jf @FINALEA_2970 
+wait 0 
+jump @FINALEA_2946 
+
+:FINALEA_2970
+if or
+83D0:   not wav 3 loaded 
+83D0:   not wav 2 loaded 
+jf @FINALEA_3000 
+wait 0 
+jump @FINALEA_2970 
+
+:FINALEA_3000
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_3053 
+Car.PutAt($SWEET_CAR, 2536.709, -1278.253, 52.57)
+Car.Angle($SWEET_CAR) = 359.954
+Car.DoorStatus($SWEET_CAR) = 2
+
+:FINALEA_3053
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at 2536.709 -1278.253 100.0 radius 100.0 
+02E4: load_cutscene_data 'RIOT_4B' 
+
+:FINALEA_3102
+if 
+86B9:   not cutscene_data_loaded 
+jf @FINALEA_3126 
+wait 0 
+jump @FINALEA_3102 
+
+:FINALEA_3126
+0395: clear_area 1 at 2536.709 -1278.253 100.0 radius 100.0 
+02E7: start_cutscene 
+fade 1 1000 
+
+:FINALEA_3159
+if 
+82E9:   not cutscene_reached_end 
+jf @FINALEA_3183 
+wait 0 
+jump @FINALEA_3159 
+
+:FINALEA_3183
+02EA: end_cutscene 
+fade 0 0 
+
+:FINALEA_3191
+if 
+fading 
+jf @FINALEA_3215 
+wait 0 
+jump @FINALEA_3191 
+
+:FINALEA_3215
+Player.CanMove($PLAYER_CHAR) = False
+0395: clear_area 0 at 2372.01 -1306.609 300.0 radius 300.0 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_3299 
+Car.PutAt($SWEET_CAR, 2507.82, -1309.226, 33.2726)
+Car.Angle($SWEET_CAR) = 1.7082
+Car.DoorStatus($SWEET_CAR) = 2
+
+:FINALEA_3299
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @FINALEA_3342 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2509.781 -1308.965 34.7125 
+jump @FINALEA_3362 
+
+:FINALEA_3342
+Actor.PutAt($PLAYER_ACTOR, 2509.781, -1308.965, 34.7125)
+
+:FINALEA_3362
+Actor.Angle($PLAYER_ACTOR) = 352.414
+0395: clear_area 0 at 2372.01 -1306.609 300.0 radius 300.0 
+wait 2000 
+Camera.SetPosition(35@, 36@, 37@, 0.0, 0.0, 0.0)
+Camera.PointAt(38@, 39@, 40@, 2)
+Model.Load(#BMX)
+Model.Load(#MP5LNG)
+Model.Load(#AK47)
+Model.Load(#BFYPRO)
+04ED: load_animation "CRACK" 
+01E8: create_forbidden_for_cars_cube_cornerA 2356.4 -1233.16 30.6 cornerB 2382.19 -1329.65 21.49 
+022B: create_forbidden_for_peds_cube_cornerA 2356.4 -1233.16 30.6 cornerB 2382.19 -1329.65 21.49 
+01E8: create_forbidden_for_cars_cube_cornerA 2522.74 -1260.01 30.28 cornerB 2499.0 -1322.01 31.76 
+022B: create_forbidden_for_peds_cube_cornerA 2522.74 -1260.01 30.28 cornerB 2499.0 -1322.01 31.76 
+01E8: create_forbidden_for_cars_cube_cornerA 2431.9 -1268.06 30.6 cornerB 2474.9 -1240.38 20.84 
+022B: create_forbidden_for_peds_cube_cornerA 2431.9 -1268.06 30.6 cornerB 2474.9 -1240.38 20.84 
+0395: clear_area 1 at 2356.4 -1233.16 300.0 radius 300.0 
+038B: load_requested_models 
+
+:FINALEA_3686
+if or
+   not Model.Available(#BMX)
+   not Model.Available(#MP5LNG)
+   not Model.Available(#AK47)
+84EE:   not animation "CRACK" loaded 
+   not Model.Available(#BFYPRO)
+jf @FINALEA_3736 
+wait 0 
+jump @FINALEA_3686 
+
+:FINALEA_3736
+062F: 50@ = create_group_type 2 
+062F: 51@ = create_group_type 2 
+062F: 52@ = create_group_type 2 
+54@ = Car.Create(#COPCARLA, 2373.803, -1314.172, 22.8398)
+Car.Angle(54@) = 292.1921
+Car.ImmuneToNonPlayer(54@) = True
+Car.Health(54@) = 500
+55@ = Car.Create(#COPCARLA, 2368.04, -1315.706, 22.8459)
+Car.Angle(55@) = 96.2549
+Car.ImmuneToNonPlayer(55@) = True
+Car.DoorStatus(55@) = 1
+57@ = Car.Create(#SWATVAN, 2374.36, -1323.792, 22.8389)
+Car.Angle(57@) = 3.7561
+Car.Health(57@) = 3000
+01EC: make_car 57@ very_heavy 1 
+Car.SetImmunities(57@, 1, 1, 0, 0, 0)
+Car.ImmuneToNonPlayer(57@) = True
+Car.DoorStatus(57@) = 1
+053F: set_car 57@ tires_vulnerability 0 
+58@ = Car.Create(#TAHOMA, 2365.612, -1294.829, 22.8433)
+Car.Angle(58@) = 97.3729
+Car.Health(58@) = 500
+Car.ImmuneToNonPlayer(58@) = True
+59@ = Car.Create(#MAJESTIC, 2372.431, -1295.272, 22.8418)
+Car.Angle(59@) = 75.2267
+Car.ImmuneToNonPlayer(59@) = True
+63@ = Car.Create(#BMX, 2507.201, -1300.841, 33.6726)
+Car.Angle(63@) = 1.6501
+64@ = Actor.Create(Mission2, #SWAT, 2366.342, -1317.377, 22.8438)
+Actor.Angle(64@) = 3.9226
+060B: set_actor 64@ decision_maker_to 49@ 
+077A: set_actor 64@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 64@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor 64@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(64@, MP5, 99999)
+0638: AS_actor 64@ stay_put 1 
+0630: put_actor 64@ in_group 50@ as_leader 
+65@ = Actor.Create(Mission2, #SWAT, 2375.848, -1315.325, 22.8368)
+Actor.Angle(65@) = 4.8178
+060B: set_actor 65@ decision_maker_to 49@ 
+077A: set_actor 65@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+077A: set_actor 65@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 65@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(65@, MP5, 99999)
+0638: AS_actor 65@ stay_put 1 
+0631: put_actor 65@ in_group 50@ 
+66@ = Actor.Create(Mission2, #SWAT, 2371.676, -1316.806, 22.8429)
+Actor.Angle(66@) = 0.5529
+060B: set_actor 66@ decision_maker_to 49@ 
+077A: set_actor 66@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+077A: set_actor 66@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 66@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(66@, MP5, 99999)
+0638: AS_actor 66@ stay_put 1 
+0631: put_actor 66@ in_group 50@ 
+67@ = Actor.Create(Mission2, #SWAT, 22370.36, -1319.492, 22.8515)
+Actor.Angle(67@) = 177.5538
+060B: set_actor 67@ decision_maker_to 49@ 
+077A: set_actor 67@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+077A: set_actor 67@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 67@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(67@, MP5, 99999)
+0638: AS_actor 67@ stay_put 1 
+0631: put_actor 67@ in_group 50@ 
+68@ = Actor.Create(Mission2, #SWAT, 2376.44, -1321.625, 22.9844)
+Actor.Angle(68@) = 177.5538
+Actor.GiveWeaponAndAmmo(68@, MP5, 99999)
+060B: set_actor 68@ decision_maker_to 49@ 
+077A: set_actor 68@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 68@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+02A9: set_actor 68@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(68@, MP5, 99999)
+0638: AS_actor 68@ stay_put 1 
+0631: put_actor 68@ in_group 50@ 
+71@ = Actor.Create(Mission1, #BALLAS1, 2364.432, -1294.012, 22.9882)
+Actor.Angle(71@) = 177.5538
+060B: set_actor 71@ decision_maker_to 49@ 
+077A: set_actor 71@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 71@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+02A9: set_actor 71@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(71@, AK47, 99999)
+0638: AS_actor 71@ stay_put 1 
+0630: put_actor 71@ in_group 51@ as_leader 
+72@ = Actor.Create(Mission1, #BALLAS1, 2369.527, -1292.228, 22.8515)
+Actor.Angle(72@) = 177.5538
+060B: set_actor 72@ decision_maker_to 49@ 
+077A: set_actor 72@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+077A: set_actor 72@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 72@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(72@, MP5, 99999)
+0638: AS_actor 72@ stay_put 1 
+0631: put_actor 72@ in_group 51@ 
+73@ = Actor.Create(Mission1, #BALLAS1, 2371.168, -1293.37, 22.8436)
+Actor.Angle(73@) = 177.5538
+060B: set_actor 73@ decision_maker_to 49@ 
+077A: set_actor 73@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+077A: set_actor 73@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+02A9: set_actor 73@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(73@, AK47, 99999)
+0638: AS_actor 73@ stay_put 1 
+0631: put_actor 73@ in_group 51@ 
+74@ = Actor.Create(Mission1, #BALLAS1, 2374.987, -1294.079, 22.838)
+Actor.Angle(74@) = 177.5538
+060B: set_actor 74@ decision_maker_to 49@ 
+077A: set_actor 74@ acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+077A: set_actor 74@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 74@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(74@, MP5, 99999)
+0638: AS_actor 74@ stay_put 1 
+0631: put_actor 74@ in_group 51@ 
+75@ = Actor.Create(Mission1, #BALLAS1, 2521.51, -1270.258, 33.9206)
+Actor.Angle(75@) = 100.2518
+060B: set_actor 75@ decision_maker_to 49@ 
+077A: set_actor 75@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 75@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(75@, MP5, 99999)
+0638: AS_actor 75@ stay_put 1 
+0630: put_actor 75@ in_group 52@ as_leader 
+76@ = Actor.Create(Mission1, #BALLAS1, 2521.72, -1274.981, 33.8748)
+Actor.Angle(76@) = 98.0309
+060B: set_actor 76@ decision_maker_to 49@ 
+077A: set_actor 76@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+02A9: set_actor 76@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(76@, MP5, 99999)
+0638: AS_actor 76@ stay_put 1 
+0631: put_actor 76@ in_group 52@ 
+146@ = 2 
+02A3: enable_widescreen 1 
+fade 1 1000 
+
+:FINALEA_5108
+if 
+fading 
+jf @FINALEA_5132 
+wait 0 
+jump @FINALEA_5108 
+
+:FINALEA_5132
+00BC: show_text_highpriority GXT 'RM4_4' time 5000 flag 1  // ~s~Security is tight in the Crack Fortress. There is only one way in but the door is locked down because of the riots.
+00BB: show_text_lowpriority GXT 'RM4_14' time 5000 flag 1  // ~s~The only way past that reinforced entrance is to knock it down.
+32@ = 0 
+151@ = 0 
+0707: start_scene_skip_to @FINALEA_5617 
+
+:FINALEA_5185
+if 
+  146@ == 2 
+jf @FINALEA_5326 
+005B: 35@ += 41@ // (float) 
+005B: 36@ += 42@ // (float) 
+005B: 37@ += 43@ // (float) 
+Camera.SetPosition(35@, 36@, 37@, 0.0, 0.0, 0.0)
+005B: 38@ += 44@ // (float) 
+005B: 39@ += 45@ // (float) 
+005B: 40@ += 46@ // (float) 
+Camera.PointAt(38@, 39@, 40@, 2)
+if or
+  2505.215 >= 35@ 
+  32@ > 8999 
+jf @FINALEA_5326 
+146@ = 3 
+
+:FINALEA_5326
+if 
+  146@ == 3 
+jf @FINALEA_5370 
+if 
+  32@ > 8999 
+jf @FINALEA_5370 
+146@ = 4 
+
+:FINALEA_5370
+if 
+  146@ == 4 
+jf @FINALEA_5471 
+Camera.SetPosition(2370.902, -1328.814, 23.0473, 0.0, 0.0, 0.0)
+Camera.PointAt(2371.46, -1328.005, 23.2292, 2)
+32@ = 0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'RM4_5' time 8000 flag 1  // ~s~A heavy vehicle like the SWAT Tank will be able to smash down the entrance easily.
+146@ = 5 
+
+:FINALEA_5471
+if 
+  146@ == 5 
+jf @FINALEA_5573 
+if 
+  32@ > 3999 
+jf @FINALEA_5573 
+Camera.SetPosition(2372.949, -1326.914, 24.7902, 0.0, 0.0, 0.0)
+Camera.PointAt(2372.874, -1325.92, 24.701, 2)
+32@ = 0 
+146@ = 6 
+
+:FINALEA_5573
+if 
+  146@ == 6 
+jf @FINALEA_5897 
+if 
+  32@ > 3999 
+jf @FINALEA_5897 
+151@ = 1 
+
+:FINALEA_5617
+0701: end_scene_skip 
+if 
+  151@ == 0 
+jf @FINALEA_5709 
+fade 0 500 
+
+:FINALEA_5644
+if 
+fading 
+jf @FINALEA_5668 
+wait 0 
+jump @FINALEA_5644 
+
+:FINALEA_5668
+00BE: text_clear_all 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+fade 1 500 
+
+:FINALEA_5685
+if 
+fading 
+jf @FINALEA_5709 
+wait 0 
+jump @FINALEA_5685 
+
+:FINALEA_5709
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_5763 
+129@ = Marker.CreateAboveCar(57@)
+07E0: set_marker 129@ type_to 1 
+00BC: show_text_highpriority GXT 'RM4_6' time 7000 flag 1  // ~s~Go get the ~b~SWAT Tank~s~.
+152@ = 1 
+
+:FINALEA_5763
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_5786 
+Car.LockInCurrentPosition($SWEET_CAR) = True
+
+:FINALEA_5786
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+04C0: create_roadblock_in_area_cornerA 2456.468 -1262.2 23.87 cornerB 2455.625 -1250.55 23.89 type 1 
+04C0: create_roadblock_in_area_cornerA 2375.778 -1358.43 23.878 cornerB 2365.675 -1358.34 24.036 type 1 
+03DE: set_pedestrians_density_multiplier_to 0.5 
+146@ = 7 
+
+:FINALEA_5897
+if 
+  146@ == 7 
+jf @FINALEA_6704 
+if 
+  154@ == 0 
+jf @FINALEA_6005 
+if 
+   not Actor.Dead(68@)
+jf @FINALEA_6005 
+if 
+0364:   actor 68@ spotted_actor $PLAYER_ACTOR 
+jf @FINALEA_6005 
+0085: 109@ = 68@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 68@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+154@ = 1 
+
+:FINALEA_6005
+if 
+  153@ == 0 
+jf @FINALEA_6397 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_6397 
+if 
+   Actor.InCar($PLAYER_ACTOR, 57@)
+jf @FINALEA_6397 
+if 
+   not Actor.Dead(64@)
+jf @FINALEA_6104 
+0085: 109@ = 64@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 64@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+
+:FINALEA_6104
+if 
+   not Actor.Dead(65@)
+jf @FINALEA_6150 
+0085: 109@ = 65@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 65@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+
+:FINALEA_6150
+if 
+   not Actor.Dead(66@)
+jf @FINALEA_6196 
+0085: 109@ = 66@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 66@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+
+:FINALEA_6196
+if 
+   not Actor.Dead(67@)
+jf @FINALEA_6242 
+0085: 109@ = 67@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 67@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+
+:FINALEA_6242
+if 
+   not Actor.Dead(68@)
+jf @FINALEA_6288 
+0085: 109@ = 68@ // (int) 
+008B: 114@ = $PLAYER_ACTOR // (int) 
+02A9: set_actor 68@ immune_to_nonplayer 0 
+gosub @FINALEA_32005 
+
+:FINALEA_6288
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_6311 
+02A9: set_actor 71@ immune_to_nonplayer 0 
+
+:FINALEA_6311
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_6334 
+02A9: set_actor 72@ immune_to_nonplayer 0 
+
+:FINALEA_6334
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_6357 
+02A9: set_actor 73@ immune_to_nonplayer 0 
+
+:FINALEA_6357
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_6380 
+02A9: set_actor 74@ immune_to_nonplayer 0 
+
+:FINALEA_6380
+Model.Destroy(#BMX)
+Car.RemoveReferences(63@)
+153@ = 1 
+
+:FINALEA_6397
+if 
+  153@ == 1 
+jf @FINALEA_6586 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_6586 
+if 
+00EE:   actor $PLAYER_ACTOR sphere 0 near_point 2521.91 -1273.05 radius 30.0 30.0 in_car 
+jf @FINALEA_6586 
+if 
+   Actor.InCar($PLAYER_ACTOR, 57@)
+jf @FINALEA_6586 
+00BC: show_text_highpriority GXT 'RM4_15' time 5000 flag 1  // ~s~Smash through the ~y~wall ~s~to gain entry!
+Model.Destroy(#COPCARLA)
+Model.Destroy(#SWAT)
+Actor.RemoveReferences(64@)
+Actor.RemoveReferences(65@)
+Actor.RemoveReferences(66@)
+Actor.RemoveReferences(67@)
+Actor.RemoveReferences(68@)
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+Actor.RemoveReferences(73@)
+Actor.RemoveReferences(74@)
+Car.RemoveReferences(54@)
+Car.RemoveReferences(55@)
+Car.RemoveReferences(58@)
+Car.RemoveReferences(59@)
+153@ = 2 
+
+:FINALEA_6586
+if 
+07F0:   in_sphere 2522.008 -1272.93 35.609 radius 30.0 damaged_object_with_model #IMY_SHASH_WALL 
+jf @FINALEA_6704 
+064F: remove_references_to_particle 102@ 
+03D1: play_wav 3 
+Actor.DestroyInstantly(64@)
+Actor.DestroyInstantly(65@)
+Actor.DestroyInstantly(66@)
+Actor.DestroyInstantly(67@)
+Actor.DestroyInstantly(68@)
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(72@)
+Actor.DestroyInstantly(73@)
+Actor.DestroyInstantly(74@)
+Car.Destroy(54@)
+Car.Destroy(58@)
+Car.Destroy(59@)
+Marker.Disable(129@)
+00BE: text_clear_all 
+147@ = 1 
+
+:FINALEA_6704
+if 
+  152@ == 1 
+jf @FINALEA_6805 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_6805 
+if 
+0448:   actor $PLAYER_ACTOR in_car 57@ 
+jf @FINALEA_6805 
+Marker.Disable(129@)
+00BC: show_text_highpriority GXT 'RM4_8' time 5000 flag 1  // ~s~Use the SWAT Tank to ram right through the entrance of ~y~Big Smoke's Crack Fortress~s~.
+018A: 130@ = create_checkpoint_at 2522.79 -1272.85 34.19 
+152@ = 2 
+
+:FINALEA_6805
+if 
+  152@ == 2 
+jf @FINALEA_6901 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_6901 
+if 
+8448:   not actor $PLAYER_ACTOR in_car 57@ 
+jf @FINALEA_6901 
+Marker.Disable(130@)
+129@ = Marker.CreateAboveCar(57@)
+07E0: set_marker 129@ type_to 1 
+00BC: show_text_highpriority GXT 'RM4_9' time 5000 flag 1  // You need to ram that wall right through, get back in the ~b~SWAT Tank~s~!
+152@ = 1 
+
+:FINALEA_6901
+if or
+  152@ == 1 
+  152@ == 2 
+jf @FINALEA_6965 
+if 
+   Car.Wrecked(57@)
+jf @FINALEA_6965 
+00BC: show_text_highpriority GXT 'RM4_10' time 7000 flag 1  // ~r~The SWAT Tank has been destroyed! How are you going to get into Big Smoke's Crack Fortress now?
+jump @FINALEA_32817 
+
+:FINALEA_6965
+if 
+  148@ == 0 
+jf @FINALEA_7163 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_7163 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 2507.82 -1309.226 radius 3.5 3.5 
+jf @FINALEA_7163 
+if 
+00E1:   player 0 pressed_key 15 
+jf @FINALEA_7163 
+03D1: play_wav 2 
+if 
+  300@ == 0 
+jf @FINALEA_7099 
+00BC: show_text_highpriority GXT 'ROT4_CA' time 2000 flag 1  // ~z~Yo, CJ, you lost your nerve?
+jump @FINALEA_7156 
+
+:FINALEA_7099
+if 
+  300@ == 1 
+jf @FINALEA_7140 
+00BC: show_text_highpriority GXT 'ROT4_CB' time 2000 flag 1  // ~z~What's the problem, CJ, you backing out?
+jump @FINALEA_7156 
+
+:FINALEA_7140
+00BC: show_text_highpriority GXT 'ROT4_CC' time 2000 flag 1  // ~z~Don't back down now, CJ, get in there and face Smoke!
+
+:FINALEA_7156
+148@ = 1 
+
+:FINALEA_7163
+if 
+  148@ == 1 
+jf @FINALEA_7247 
+if 
+03D2:   wav 2 ended 
+jf @FINALEA_7247 
+if or
+80EC:   not actor $PLAYER_ACTOR sphere 0 near_point 2507.82 -1309.226 radius 3.5 3.5 
+80E1:   not player 0 pressed_key 15 
+jf @FINALEA_7247 
+148@ = 0 
+
+:FINALEA_7247
+if or
+  146@ == 1 
+  146@ == 100 
+jf @FINALEA_7467 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_7467 
+if 
+  149@ == 1 
+jf @FINALEA_7375 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $SWEET_CAR)
+jf @FINALEA_7375 
+Marker.Disable(128@)
+128@ = Marker.CreateAboveCar($SWEET_CAR)
+07E0: set_marker 128@ type_to 1 
+00BC: show_text_highpriority GXT 'RM4_7' time 5000 flag 1  // ~s~Get back in the ~b~car~s~!
+146@ = 100 
+149@ = 0 
+
+:FINALEA_7375
+if 
+  149@ == 0 
+jf @FINALEA_7467 
+if 
+   Actor.InCar($PLAYER_ACTOR, $SWEET_CAR)
+jf @FINALEA_7467 
+Marker.Disable(128@)
+018A: 128@ = create_checkpoint_at 2507.82 -1309.226 33.6726 
+00BC: show_text_highpriority GXT 'RM4_2' time 5000 flag 1  // ~s~Drive to ~y~Big Smoke's Crack Fortress~s~.
+146@ = 1 
+149@ = 1 
+
+:FINALEA_7467
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @FINALEA_7506 
+00BC: show_text_highpriority GXT 'RM4_11' time 5000 flag 1  // ~r~Sweet died!
+jump @FINALEA_32817 
+
+:FINALEA_7506
+if 
+   Car.Wrecked($SWEET_CAR)
+jf @FINALEA_7545 
+00BC: show_text_highpriority GXT 'RM4_12' time 5000 flag 1  // ~r~You wrecked the car!
+jump @FINALEA_32817 
+
+:FINALEA_7545
+if 
+  147@ == 1 
+jf @FINALEA_8896 
+if 
+  155@ == 0 
+jf @FINALEA_8467 
+Marker.Disable(130@)
+0632: release_group 50@ 
+0632: release_group 51@ 
+71@ = Actor.Create(Mission1, #BALLAS1, 2528.252, -1273.761, 33.9609)
+Actor.Angle(71@) = 91.4211
+060B: set_actor 71@ decision_maker_to 49@ 
+0638: AS_actor 71@ stay_put 1 
+Actor.GiveWeaponAndAmmo(71@, AK47, 99999)
+077A: set_actor 71@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(71@) = 20
+060F: set_actor 71@ melee_accuracy_to 50.0 
+72@ = Actor.Create(Mission1, #BALLAS1, 2530.771, -1271.391, 33.9602)
+Actor.Angle(72@) = 91.5182
+060B: set_actor 72@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(72@, AK47, 99999)
+0638: AS_actor 72@ stay_put 1 
+077A: set_actor 72@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(72@) = 20
+060F: set_actor 72@ melee_accuracy_to 50.0 
+73@ = Actor.Create(Mission1, #BALLAS1, 2532.08, -1272.28, 33.9602)
+Actor.Angle(73@) = 177.5538
+060B: set_actor 73@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(73@, AK47, 99999)
+0638: AS_actor 73@ stay_put 1 
+077A: set_actor 73@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(73@) = 20
+060F: set_actor 73@ melee_accuracy_to 50.0 
+74@ = Actor.Create(Mission1, #BALLAS1, 2539.969, -1279.563, 33.9609)
+Actor.Angle(74@) = 25.3324
+060B: set_actor 74@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(74@, MP5, 99999)
+0638: AS_actor 74@ stay_put 1 
+077A: set_actor 74@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(74@) = 20
+060F: set_actor 74@ melee_accuracy_to 50.0 
+77@ = Actor.Create(Mission1, #BALLAS1, 2533.279, -1295.555, 33.9609)
+Actor.Angle(77@) = 327.5814
+060B: set_actor 77@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(77@, MP5, 99999)
+0638: AS_actor 77@ stay_put 1 
+077A: set_actor 77@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(77@) = 20
+060F: set_actor 77@ melee_accuracy_to 50.0 
+78@ = Actor.Create(Mission1, #BALLAS1, 2529.178, -1304.472, 33.9609)
+Actor.Angle(78@) = 351.5292
+060B: set_actor 78@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(78@, MP5, 99999)
+0638: AS_actor 78@ stay_put 1 
+077A: set_actor 78@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+Actor.Health(78@) = 20
+79@ = Actor.Create(Mission1, #BFYPRO, 2538.0, -1307.0, 34.0)
+Actor.Angle(79@) = 35.0
+Actor.Health(79@) = 3
+0605: actor 79@ perform_animation "CRCKIDLE4" IFP "CRACK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+80@ = Actor.Create(Mission1, #MALE01, 2540.04, -1307.37, 33.9609)
+Actor.Angle(80@) = 92.5436
+Actor.Health(80@) = 3
+0605: actor 80@ perform_animation "CRCKIDLE3" IFP "CRACK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+81@ = Actor.Create(Mission1, #BFYPRO, 2533.552, -1308.284, 33.9609)
+Actor.Angle(81@) = 67.9508
+Actor.Health(81@) = 3
+0605: actor 81@ perform_animation "CRCKIDLE2" IFP "CRACK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+82@ = Actor.Create(Mission1, #MALE01, 2534.682, -1287.199, 33.9609)
+Actor.Angle(82@) = 104.5
+Actor.Health(82@) = 3
+0605: actor 82@ perform_animation "CRCKIDLE4" IFP "CRACK" framedelta 1000.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+00BC: show_text_highpriority GXT 'RM4_13' time 5000 flag 1  // ~s~There is an entrance into the ~y~first floor ~s~towards the back of this area.
+018A: 130@ = create_checkpoint_at 2542.1 -1303.99 34.03 
+155@ = 1 
+
+:FINALEA_8467
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @FINALEA_8506 
+00BC: show_text_highpriority GXT 'RM4_11' time 5000 flag 1  // ~r~Sweet died!
+jump @FINALEA_32817 
+
+:FINALEA_8506
+if 
+  155@ == 1 
+jf @FINALEA_8896 
+077E: get_active_interior_to 53@ 
+if 
+  197@ == 0 
+jf @FINALEA_8605 
+if 
+   not Actor.Dead(79@)
+jf @FINALEA_8605 
+if 
+0A1B:   actor 79@ colliding_with_actor $PLAYER_ACTOR 
+jf @FINALEA_8605 
+05DB: AS_actor 79@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit 30000 
+197@ = 1 
+
+:FINALEA_8605
+if 
+  198@ == 0 
+jf @FINALEA_8681 
+if 
+   not Actor.Dead(80@)
+jf @FINALEA_8681 
+if 
+0A1B:   actor 80@ colliding_with_actor $PLAYER_ACTOR 
+jf @FINALEA_8681 
+05DB: AS_actor 80@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit 30000 
+198@ = 1 
+
+:FINALEA_8681
+if 
+  199@ == 0 
+jf @FINALEA_8757 
+if 
+   not Actor.Dead(81@)
+jf @FINALEA_8757 
+if 
+0A1B:   actor 81@ colliding_with_actor $PLAYER_ACTOR 
+jf @FINALEA_8757 
+05DB: AS_actor 81@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit 30000 
+199@ = 1 
+
+:FINALEA_8757
+if 
+  200@ == 0 
+jf @FINALEA_8833 
+if 
+   not Actor.Dead(82@)
+jf @FINALEA_8833 
+if 
+0A1B:   actor 82@ colliding_with_actor $PLAYER_ACTOR 
+jf @FINALEA_8833 
+05DB: AS_actor 82@ flee_from_actor $PLAYER_ACTOR from_origin_radius 100.0 timelimit 30000 
+200@ = 1 
+
+:FINALEA_8833
+if 
+  53@ == 2 
+jf @FINALEA_8896 
+fade 0 1000 
+
+:FINALEA_8858
+if 
+fading 
+jf @FINALEA_8882 
+wait 0 
+jump @FINALEA_8858 
+
+:FINALEA_8882
+147@ = 2 
+156@ = 1 
+
+:FINALEA_8896
+if 
+  147@ == 2 
+jf @FINALEA_17499 
+if 
+  156@ == 1 
+jf @FINALEA_11128 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+fade 0 1000 
+04C1: remove_references_to_roadblocks 
+
+:FINALEA_8952
+if 
+fading 
+jf @FINALEA_8976 
+wait 0 
+jump @FINALEA_8952 
+
+:FINALEA_8976
+04E3: unknown_set_player $PLAYER_CHAR flag 7 time 360000 
+040D: unload_wav 2 
+Marker.Disable(130@)
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(72@)
+Actor.DestroyInstantly(73@)
+Actor.DestroyInstantly(74@)
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(78@)
+Actor.DestroyInstantly(79@)
+Actor.DestroyInstantly(80@)
+Actor.DestroyInstantly(81@)
+Actor.DestroyInstantly(82@)
+Car.Destroy(57@)
+Actor.DestroyInstantly($ACTOR_SWEET)
+04EF: release_animation "CRACK" 
+0296: unload_special_actor 1 
+Model.Destroy(#BFYPRO)
+Model.Destroy(#GREENWOO)
+Model.Destroy(#TAHOMA)
+Model.Destroy(#MAJESTIC)
+Actor.PutAt($PLAYER_ACTOR, 2543.26, -1303.844, 1024.074)
+Actor.Angle($PLAYER_ACTOR) = 175.5166
+Camera.SetPosition(2544.616, -1302.899, 1024.407, 0.0, 0.0, 0.0)
+Camera.PointAt(2544.193, -1303.702, 1024.828, 2)
+0860: link_actor $PLAYER_ACTOR to_interior 2 
+018A: 130@ = create_checkpoint_at 2579.85 -1305.76 1037.07 
+08DC: create_interior_marker 130@ at 2540.83 -1304.05 radius 1.0 
+0395: clear_area 1 at 2578.0 -1306.0 200.0 radius 200.0 
+fade 1 1000 
+00BA: show_text_styled GXT 'RM4_17' time 1000 style 2  // Floor 1: Security Area
+
+:FINALEA_9264
+if 
+fading 
+jf @FINALEA_9288 
+wait 0 
+jump @FINALEA_9264 
+
+:FINALEA_9288
+133@ = Pickup.Create(#BODYARMOUR, 3, 2527.783, -1288.816, 1031.43)
+137@ = Pickup.Create(#HEALTH, 3, 2575.094, -1286.042, 1037.781)
+032B: 143@ = create_weapon_pickup #SHOTGSPA type 3 ammo 20 at 2568.502 -1282.345 1037.781 
+Model.Load(#BALLAS2)
+Model.Load(#LSV1)
+Model.Load(#SWAT)
+Model.Load(#SWATVAN)
+04ED: load_animation "SWAT" 
+Model.Load(#IMCOMPMOVEDR1_LAS)
+07C0: load_path 287 
+038B: load_requested_models 
+Camera.SetAtPos(2541.81, -1311.32, 1028.22)
+85@ = Actor.Create(Mission1, #BALLAS2, 2543.244, -1318.538, 1030.427)
+Actor.Angle(85@) = 3.2815
+060B: set_actor 85@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(85@, MP5, 99999)
+0605: actor 85@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0860: link_actor 85@ to_interior 2 
+Actor.Health(85@) = 200
+Actor.SetMaxHealth(85@, 200)
+173@ = 0 
+86@ = Actor.Create(Mission1, #BALLAS1, 2536.071, -1321.471, 1030.43)
+Actor.Angle(86@) = 263.8364
+060B: set_actor 86@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(86@, MP5, 99999)
+0860: link_actor 86@ to_interior 2 
+Actor.Health(86@) = 200
+Actor.SetMaxHealth(86@, 200)
+174@ = 0 
+87@ = Actor.Create(Mission1, #LSV1, 2524.736, -1298.328, 1030.427)
+Actor.Angle(87@) = 175.4097
+060B: set_actor 87@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(87@, MP5, 99999)
+0860: link_actor 87@ to_interior 2 
+Actor.WeaponAccuracy(87@) = 80
+Actor.Health(87@) = 200
+Actor.SetMaxHealth(87@, 200)
+175@ = 0 
+88@ = Actor.Create(Mission1, #BALLAS2, 2527.814, -1289.816, 1030.427)
+Actor.Angle(88@) = 178.5987
+060B: set_actor 88@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(88@, AK47, 99999)
+0860: link_actor 88@ to_interior 2 
+Actor.WeaponAccuracy(87@) = 80
+07DD: set_actor 87@ attack_rate 70 // previously known as temper_to 
+Actor.Health(88@) = 200
+Actor.SetMaxHealth(88@, 200)
+176@ = 0 
+wait 3000 
+71@ = Actor.Create(Mission1, #BALLAS2, 2531.064, -1304.332, 1030.43)
+Actor.Angle(71@) = 264.767
+060B: set_actor 71@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(71@, MP5, 99999)
+0860: link_actor 71@ to_interior 2 
+Actor.WeaponAccuracy(71@) = 80
+Actor.Health(71@) = 200
+Actor.SetMaxHealth(71@, 200)
+159@ = 0 
+73@ = Actor.Create(Mission1, #LSV1, 2566.673, -1297.709, 1036.78)
+Actor.Angle(73@) = 85.3469
+060B: set_actor 73@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(73@, AK47, 99999)
+0860: link_actor 73@ to_interior 2 
+Actor.WeaponAccuracy(73@) = 80
+07DD: set_actor 73@ attack_rate 60 // previously known as temper_to 
+161@ = 0 
+74@ = Actor.Create(Mission1, #BALLAS2, 2566.726, -1287.224, 1036.781)
+Actor.Angle(74@) = 96.3687
+060B: set_actor 74@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(74@, AK47, 99999)
+0860: link_actor 74@ to_interior 2 
+Actor.Health(74@) = 200
+Actor.SetMaxHealth(74@, 200)
+Actor.WeaponAccuracy(74@) = 80
+162@ = 0 
+75@ = Actor.Create(Mission1, #BALLAS1, 2540.859, -1287.161, 1030.419)
+Actor.Angle(75@) = 90.0
+060B: set_actor 75@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(75@, MP5, 99999)
+0860: link_actor 75@ to_interior 2 
+Actor.Health(75@) = 200
+Actor.SetMaxHealth(75@, 200)
+Actor.WeaponAccuracy(75@) = 80
+07DD: set_actor 75@ attack_rate 60 // previously known as temper_to 
+163@ = 0 
+76@ = Actor.Create(Mission1, #LSV1, 2556.854, -1287.161, 1030.419)
+Actor.Angle(76@) = 90.0
+060B: set_actor 76@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(76@, AK47, 99999)
+0860: link_actor 76@ to_interior 2 
+Actor.Health(76@) = 200
+Actor.SetMaxHealth(76@, 200)
+164@ = 0 
+77@ = Actor.Create(Mission1, #BALLAS1, 2556.854, -1300.628, 1030.419)
+Actor.Angle(77@) = 90.0
+060B: set_actor 77@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(77@, MP5, 99999)
+0860: link_actor 77@ to_interior 2 
+Actor.Health(77@) = 200
+Actor.SetMaxHealth(77@, 200)
+165@ = 0 
+78@ = Actor.Create(Mission1, #BALLAS2, 2539.805, -1298.607, 1030.43)
+Actor.Angle(78@) = 64.7154
+060B: set_actor 78@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(78@, AK47, 99999)
+0860: link_actor 78@ to_interior 2 
+Actor.Health(78@) = 200
+07DD: set_actor 78@ attack_rate 70 // previously known as temper_to 
+Actor.SetMaxHealth(78@, 200)
+166@ = 0 
+80@ = Actor.Create(Mission1, #BALLAS2, 2552.798, -1300.992, 1030.43)
+Actor.Angle(80@) = 87.5663
+060B: set_actor 80@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(80@, AK47, 99999)
+0860: link_actor 80@ to_interior 2 
+Actor.Health(80@) = 200
+Actor.SetMaxHealth(80@, 200)
+Actor.WeaponAccuracy(80@) = 80
+07DD: set_actor 80@ attack_rate 60 // previously known as temper_to 
+168@ = 0 
+81@ = Actor.Create(Mission1, #BALLAS1, 2563.234, -1294.066, 1030.43)
+Actor.Angle(81@) = 93.219
+060B: set_actor 81@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(81@, MP5, 99999)
+0860: link_actor 81@ to_interior 2 
+Actor.Health(81@) = 200
+Actor.SetMaxHealth(81@, 200)
+169@ = 0 
+82@ = Actor.Create(Mission1, #BALLAS2, 2550.992, -1290.274, 1030.43)
+Actor.Angle(82@) = 103.6499
+060B: set_actor 82@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(82@, AK47, 99999)
+0860: link_actor 82@ to_interior 2 
+Actor.Health(82@) = 200
+07DD: set_actor 82@ attack_rate 60 // previously known as temper_to 
+Actor.SetMaxHealth(82@, 200)
+170@ = 0 
+83@ = Actor.Create(Mission1, #LSV1, 2556.191, -1281.446, 1036.781)
+Actor.Angle(83@) = 183.4208
+060B: set_actor 83@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(83@, MP5, 99999)
+0860: link_actor 83@ to_interior 2 
+171@ = 0 
+57@ = Car.Create(#SWATVAN, 2561.818, -1275.167, 1031.019)
+Car.LockInCurrentPosition(57@) = True
+Car.Angle(57@) = 178.9
+0840: link_car 57@ to_interior 2 
+64@ = Actor.CreateAsDriver(Mission3, #SWAT, 57@)
+060B: set_actor 64@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(64@, MP5, 9999)
+0860: link_actor 64@ to_interior 2 
+07DD: set_actor 64@ attack_rate 80 // previously known as temper_to 
+Actor.Health(64@) = 200
+Actor.SetMaxHealth(64@, 200)
+Actor.WeaponAccuracy(64@) = 80
+65@ = Actor.CreateAsPassenger(Mission3, #SWAT, 57@, 0)
+060B: set_actor 65@ decision_maker_to 47@ 
+Actor.Health(65@) = 200
+Actor.SetMaxHealth(65@, 200)
+Actor.GiveWeaponAndAmmo(65@, MP5, 9999)
+077A: set_actor 65@ acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+077A: set_actor 65@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0860: link_actor 65@ to_interior 2 
+153@ = 0 
+179@ = 0 
+152@ = 0 
+100@ = Object.Init(#IMCOMPMOVEDR1_LAS, 2565.814, -1303.566, 1033.173)
+Object.Angle(100@) = 90.0
+101@ = Object.Init(#CJ_WIN_POP2, 2561.811, -1279.639, 1032.128)
+Object.KeepInMemory(101@) = True
+064B: 102@ = create_particle "WALLBUST" at 2562.0 -1282.0 1031.0 type 1 
+08E7: disable_entrance_markers 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'RM4_16' time 7000 flag 1  // ~s~Smoke is on the Fourth floor in his ~y~Penthouse Suite~s~. You will have to work your way through three floors to get there.
+156@ = 2 
+
+:FINALEA_11128
+if 
+  156@ == 2 
+jf @FINALEA_11348 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2543.38 -1310.38 1028.26 radius 5.0 5.0 5.0 
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+jf @FINALEA_11348 
+if 
+  173@ == 0 
+jf @FINALEA_11285 
+if 
+   not Actor.Dead(85@)
+jf @FINALEA_11285 
+0085: 109@ = 85@ // (int) 
+111@ = 2527.579 
+112@ = -1318.762 
+113@ = 1030.43 
+gosub @FINALEA_31912 
+173@ = 1 
+
+:FINALEA_11285
+if 
+  176@ == 0 
+jf @FINALEA_11341 
+if 
+   not Actor.Dead(88@)
+jf @FINALEA_11341 
+0085: 109@ = 88@ // (int) 
+gosub @FINALEA_32005 
+176@ = 1 
+
+:FINALEA_11341
+156@ = 3 
+
+:FINALEA_11348
+if 
+  156@ == 3 
+jf @FINALEA_11596 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2540.95 -1314.42 1028.79 cornerB 2529.24 -1333.21 1035.04 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2534.44 -1318.92 1031.17 radius 5.5 5.5 4.0 
+jf @FINALEA_11514 
+if 
+  174@ == 0 
+jf @FINALEA_11507 
+if 
+   not Actor.Dead(86@)
+jf @FINALEA_11507 
+0085: 109@ = 86@ // (int) 
+gosub @FINALEA_32198 
+174@ = 1 
+
+:FINALEA_11507
+156@ = 4 
+
+:FINALEA_11514
+if 
+  174@ == 0 
+jf @FINALEA_11596 
+if 
+   not Actor.Dead(86@)
+jf @FINALEA_11596 
+if 
+051A:   actor 86@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEA_11596 
+0085: 109@ = 86@ // (int) 
+gosub @FINALEA_32198 
+174@ = 1 
+156@ = 4 
+
+:FINALEA_11596
+if 
+  156@ == 4 
+jf @FINALEA_11730 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2527.18 -1304.24 1027.0 radius 6.0 6.0 5.0 
+   Actor.Dead(88@)
+jf @FINALEA_11730 
+if 
+  175@ == 0 
+jf @FINALEA_11723 
+if 
+   not Actor.Dead(87@)
+jf @FINALEA_11723 
+0085: 109@ = 87@ // (int) 
+gosub @FINALEA_32198 
+175@ = 1 
+
+:FINALEA_11723
+156@ = 5 
+
+:FINALEA_11730
+if 
+  156@ == 5 
+jf @FINALEA_12513 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2529.33 -1308.3 1027.55 cornerB 2537.78 -1272.14 1035.76 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA 2522.87 -1299.61 cornerB 2529.85 -1287.66 
+jf @FINALEA_12513 
+if 
+  163@ == 0 
+jf @FINALEA_11927 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_11927 
+0085: 109@ = 75@ // (int) 
+111@ = 2540.859 
+112@ = -1287.161 
+113@ = 1030.419 
+117@ = 1500 
+121@ = 90.0 
+gosub @FINALEA_32281 
+163@ = 1 
+
+:FINALEA_11927
+if 
+  164@ == 0 
+jf @FINALEA_12031 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_12031 
+0085: 109@ = 76@ // (int) 
+111@ = 2556.854 
+112@ = -1287.161 
+113@ = 1030.419 
+117@ = 2000 
+121@ = 90.0 
+gosub @FINALEA_32281 
+164@ = 1 
+
+:FINALEA_12031
+if 
+  165@ == 0 
+jf @FINALEA_12135 
+if 
+   not Actor.Dead(77@)
+jf @FINALEA_12135 
+0085: 109@ = 77@ // (int) 
+111@ = 2556.854 
+112@ = -1300.628 
+113@ = 1030.419 
+117@ = 1200 
+121@ = 90.0 
+gosub @FINALEA_32522 
+165@ = 1 
+
+:FINALEA_12135
+if 
+  161@ == 0 
+jf @FINALEA_12191 
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_12191 
+0085: 109@ = 73@ // (int) 
+gosub @FINALEA_32005 
+161@ = 1 
+
+:FINALEA_12191
+if 
+  162@ == 0 
+jf @FINALEA_12247 
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_12247 
+0085: 109@ = 74@ // (int) 
+gosub @FINALEA_32005 
+162@ = 1 
+
+:FINALEA_12247
+if 
+  171@ == 0 
+jf @FINALEA_12303 
+if 
+   not Actor.Dead(83@)
+jf @FINALEA_12303 
+0085: 109@ = 83@ // (int) 
+gosub @FINALEA_32005 
+171@ = 1 
+
+:FINALEA_12303
+if 
+  166@ == 0 
+jf @FINALEA_12359 
+if 
+   not Actor.Dead(78@)
+jf @FINALEA_12359 
+0085: 109@ = 78@ // (int) 
+gosub @FINALEA_31961 
+166@ = 1 
+
+:FINALEA_12359
+if 
+  168@ == 0 
+jf @FINALEA_12408 
+if 
+   not Actor.Dead(80@)
+jf @FINALEA_12408 
+05E2: AS_actor 80@ kill_actor $PLAYER_ACTOR 
+168@ = 1 
+
+:FINALEA_12408
+if 
+  169@ == 0 
+jf @FINALEA_12457 
+if 
+   not Actor.Dead(81@)
+jf @FINALEA_12457 
+05E2: AS_actor 81@ kill_actor $PLAYER_ACTOR 
+169@ = 1 
+
+:FINALEA_12457
+if 
+  170@ == 0 
+jf @FINALEA_12506 
+if 
+   not Actor.Dead(82@)
+jf @FINALEA_12506 
+05E2: AS_actor 82@ kill_actor $PLAYER_ACTOR 
+170@ = 1 
+
+:FINALEA_12506
+156@ = 6 
+
+:FINALEA_12513
+if 
+  156@ == 6 
+jf @FINALEA_12692 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2529.88 -1307.89 1027.0 cornerB 2538.32 -1277.63 1032.54 
+jf @FINALEA_12692 
+Actor.RemoveReferences(85@)
+Actor.RemoveReferences(86@)
+Actor.RemoveReferences(87@)
+Actor.RemoveReferences(88@)
+if 
+  159@ == 0 
+jf @FINALEA_12685 
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_12685 
+0085: 109@ = 71@ // (int) 
+111@ = 2560.055 
+112@ = -1304.916 
+113@ = 1030.43 
+gosub @FINALEA_31912 
+159@ = 1 
+
+:FINALEA_12685
+156@ = 7 
+
+:FINALEA_12692
+if 
+  156@ == 7 
+jf @FINALEA_12765 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2546.43 -1277.49 1027.0 cornerB 2568.06 -1310.79 1032.54 
+jf @FINALEA_12765 
+156@ = 8 
+
+:FINALEA_12765
+if or
+  156@ == 8 
+  180@ > 6 
+jf @FINALEA_12853 
+if 
+  152@ == 0 
+jf @FINALEA_12853 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_12853 
+Car.LockInCurrentPosition(57@) = False
+05EB: assign_car 57@ to_path 287 
+33@ = 0 
+152@ = 1 
+
+:FINALEA_12853
+if 
+  152@ == 1 
+jf @FINALEA_12961 
+if or
+0716:   object_model #CJ_WIN_POP2 in_object_group_at 2561.811 -1279.639 1032.128 radius 10.0 destroyed 1 1 
+  33@ > 250 
+jf @FINALEA_12961 
+064F: remove_references_to_particle 102@ 
+03D7: set_wav 3 location 2557.88 -1288.65 1031.91 
+03D1: play_wav 3 
+0723: break_object 101@ intensity 1 
+152@ = 2 
+
+:FINALEA_12961
+if 
+  152@ == 2 
+jf @FINALEA_13066 
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_13066 
+if 
+860E:   not car 57@ assigned_to_path 
+jf @FINALEA_13066 
+if 
+   not Actor.Dead(64@)
+jf @FINALEA_13035 
+05E2: AS_actor 64@ kill_actor $PLAYER_ACTOR 
+
+:FINALEA_13035
+if 
+   not Actor.Dead(65@)
+jf @FINALEA_13059 
+05E2: AS_actor 65@ kill_actor $PLAYER_ACTOR 
+
+:FINALEA_13059
+152@ = 3 
+
+:FINALEA_13066
+if 
+  163@ == 1 
+jf @FINALEA_13194 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_13194 
+if or
+051A:   actor 75@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 75@ near_actor $PLAYER_ACTOR radius 4.0 4.0 3.0 sphere 0 
+jf @FINALEA_13194 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_13182 
+05E2: AS_actor 75@ kill_actor $PLAYER_ACTOR 
+163@ = 2 
+jump @FINALEA_13194 
+
+:FINALEA_13182
+Actor.RemoveReferences(75@)
+163@ = 2 
+
+:FINALEA_13194
+if 
+  164@ == 1 
+jf @FINALEA_13322 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_13322 
+if or
+051A:   actor 76@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 76@ near_actor $PLAYER_ACTOR radius 4.0 4.0 3.0 sphere 0 
+jf @FINALEA_13322 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_13310 
+05E2: AS_actor 76@ kill_actor $PLAYER_ACTOR 
+164@ = 2 
+jump @FINALEA_13322 
+
+:FINALEA_13310
+Actor.RemoveReferences(76@)
+164@ = 2 
+
+:FINALEA_13322
+if 
+  165@ == 1 
+jf @FINALEA_13450 
+if 
+   not Actor.Dead(77@)
+jf @FINALEA_13450 
+if or
+051A:   actor 77@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 77@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEA_13450 
+if 
+   not Actor.Dead(77@)
+jf @FINALEA_13438 
+05E2: AS_actor 77@ kill_actor $PLAYER_ACTOR 
+165@ = 2 
+jump @FINALEA_13450 
+
+:FINALEA_13438
+Actor.RemoveReferences(77@)
+165@ = 2 
+
+:FINALEA_13450
+if 
+  159@ == 1 
+jf @FINALEA_13503 
+if 
+   Actor.Dead(71@)
+jf @FINALEA_13503 
+Actor.RemoveReferences(71@)
+180@ += 1 
+159@ = 2 
+
+:FINALEA_13503
+if 
+  161@ == 1 
+jf @FINALEA_13556 
+if 
+   Actor.Dead(73@)
+jf @FINALEA_13556 
+Actor.RemoveReferences(73@)
+180@ += 1 
+161@ = 2 
+
+:FINALEA_13556
+if 
+  162@ == 1 
+jf @FINALEA_13609 
+if 
+   Actor.Dead(74@)
+jf @FINALEA_13609 
+Actor.RemoveReferences(74@)
+180@ += 1 
+162@ = 2 
+
+:FINALEA_13609
+if or
+  163@ == 1 
+  163@ == 2 
+jf @FINALEA_13669 
+if 
+   Actor.Dead(75@)
+jf @FINALEA_13669 
+Actor.RemoveReferences(75@)
+180@ += 1 
+163@ = 3 
+
+:FINALEA_13669
+if or
+  164@ == 1 
+  164@ == 2 
+jf @FINALEA_13729 
+if 
+   Actor.Dead(76@)
+jf @FINALEA_13729 
+Actor.RemoveReferences(76@)
+180@ += 1 
+164@ = 3 
+
+:FINALEA_13729
+if or
+  165@ == 1 
+  165@ == 2 
+jf @FINALEA_13789 
+if 
+   Actor.Dead(77@)
+jf @FINALEA_13789 
+Actor.RemoveReferences(77@)
+180@ += 1 
+165@ = 3 
+
+:FINALEA_13789
+if 
+  166@ == 1 
+jf @FINALEA_13842 
+if 
+   Actor.Dead(78@)
+jf @FINALEA_13842 
+Actor.RemoveReferences(78@)
+180@ += 1 
+166@ = 2 
+
+:FINALEA_13842
+if 
+  168@ == 1 
+jf @FINALEA_13895 
+if 
+   Actor.Dead(80@)
+jf @FINALEA_13895 
+Actor.RemoveReferences(80@)
+180@ += 1 
+168@ = 2 
+
+:FINALEA_13895
+if 
+  169@ == 1 
+jf @FINALEA_13948 
+if 
+   Actor.Dead(81@)
+jf @FINALEA_13948 
+Actor.RemoveReferences(81@)
+180@ += 1 
+169@ = 2 
+
+:FINALEA_13948
+if 
+  170@ == 1 
+jf @FINALEA_14001 
+if 
+   Actor.Dead(82@)
+jf @FINALEA_14001 
+Actor.RemoveReferences(82@)
+180@ += 1 
+170@ = 2 
+
+:FINALEA_14001
+if 
+  171@ == 1 
+jf @FINALEA_14054 
+if 
+   Actor.Dead(83@)
+jf @FINALEA_14054 
+Actor.RemoveReferences(83@)
+180@ += 1 
+171@ = 2 
+
+:FINALEA_14054
+if 
+  153@ == 0 
+jf @FINALEA_14107 
+if 
+   Actor.Dead(64@)
+jf @FINALEA_14107 
+Actor.RemoveReferences(64@)
+180@ += 1 
+153@ = 1 
+
+:FINALEA_14107
+if 
+  179@ == 0 
+jf @FINALEA_14160 
+if 
+   Actor.Dead(65@)
+jf @FINALEA_14160 
+Actor.RemoveReferences(65@)
+180@ += 1 
+179@ = 1 
+
+:FINALEA_14160
+if 
+  180@ > 8 
+jf @FINALEA_15106 
+if 
+  156@ == 8 
+jf @FINALEA_15106 
+if 
+  181@ == 0 
+jf @FINALEA_15106 
+if 
+03CA:   object 100@ exists 
+jf @FINALEA_15106 
+if 
+  182@ == 0 
+jf @FINALEA_14726 
+85@ = Actor.Create(Mission1, #BALLAS2, 2571.635, -1302.189, 1030.427)
+Actor.Angle(85@) = 84.9134
+060B: set_actor 85@ decision_maker_to 49@ 
+Actor.GiveWeaponAndAmmo(85@, MP5, 99999)
+0605: actor 85@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0860: link_actor 85@ to_interior 2 
+Actor.WeaponAccuracy(85@) = 80
+Actor.Health(85@) = 150
+Actor.SetMaxHealth(85@, 150)
+173@ = 0 
+86@ = Actor.Create(Mission1, #BALLAS1, 2570.398, -1299.233, 1030.427)
+Actor.Angle(86@) = 119.2958
+060B: set_actor 86@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(86@, MP5, 99999)
+0860: link_actor 86@ to_interior 2 
+Actor.Health(86@) = 200
+Actor.SetMaxHealth(86@, 200)
+174@ = 0 
+87@ = Actor.Create(Mission1, #LSV1, 2566.899, -1290.144, 1030.43)
+Actor.Angle(87@) = 180.0082
+060B: set_actor 87@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(87@, MP5, 99999)
+0860: link_actor 87@ to_interior 2 
+Actor.Health(87@) = 200
+Actor.SetMaxHealth(87@, 200)
+175@ = 0 
+88@ = Actor.Create(Mission1, #BALLAS2, 2570.637, -1286.841, 1030.43)
+Actor.Angle(88@) = 182.7895
+060B: set_actor 88@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(88@, MP5, 99999)
+0860: link_actor 88@ to_interior 2 
+Actor.Health(88@) = 200
+Actor.SetMaxHealth(88@, 200)
+176@ = 0 
+84@ = Actor.Create(Mission1, #BALLAS2, 2569.728, -1284.528, 1030.43)
+Actor.Angle(84@) = 168.4302
+060B: set_actor 84@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(84@, MP5, 99999)
+0860: link_actor 84@ to_interior 2 
+Actor.Health(84@) = 200
+Actor.SetMaxHealth(84@, 200)
+172@ = 0 
+182@ = 1 
+097B: play_audio_at_object 100@ event 1035 
+
+:FINALEA_14726
+if 
+034E: move_object 100@ to 2565.814 -1303.566 1035.362 speed 0.0 0.0 0.15 collision_check 0 
+jf @FINALEA_15106 
+097B: play_audio_at_object 100@ event 1036 
+156@ = 9 
+if 
+  173@ == 0 
+jf @FINALEA_14875 
+if 
+   not Actor.Dead(85@)
+jf @FINALEA_14875 
+0085: 109@ = 85@ // (int) 
+111@ = 2564.186 
+112@ = -1301.676 
+113@ = 1030.43 
+gosub @FINALEA_31912 
+173@ = 1 
+
+:FINALEA_14875
+if 
+  174@ == 0 
+jf @FINALEA_14931 
+if 
+   not Actor.Dead(86@)
+jf @FINALEA_14931 
+0085: 109@ = 86@ // (int) 
+gosub @FINALEA_31961 
+174@ = 1 
+
+:FINALEA_14931
+if 
+  172@ == 0 
+jf @FINALEA_14987 
+if 
+   not Actor.Dead(84@)
+jf @FINALEA_14987 
+0085: 109@ = 84@ // (int) 
+gosub @FINALEA_31961 
+172@ = 1 
+
+:FINALEA_14987
+if 
+  175@ == 0 
+jf @FINALEA_15043 
+if 
+   not Actor.Dead(87@)
+jf @FINALEA_15043 
+0085: 109@ = 87@ // (int) 
+gosub @FINALEA_31961 
+175@ = 1 
+
+:FINALEA_15043
+if 
+  176@ == 0 
+jf @FINALEA_15099 
+if 
+   not Actor.Dead(88@)
+jf @FINALEA_15099 
+0085: 109@ = 88@ // (int) 
+gosub @FINALEA_31961 
+176@ = 1 
+
+:FINALEA_15099
+181@ = 1 
+
+:FINALEA_15106
+if 
+  156@ == 9 
+jf @FINALEA_15295 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2566.14 -1307.43 1027.0 cornerB 2580.06 -1279.36 1034.16 
+jf @FINALEA_15295 
+if 
+  172@ == 1 
+jf @FINALEA_15288 
+if 
+   not Actor.Dead(84@)
+jf @FINALEA_15288 
+0085: 109@ = 84@ // (int) 
+111@ = 2575.565 
+112@ = -1284.965 
+113@ = 1030.427 
+118@ = 2575.513 
+119@ = -1303.242 
+120@ = 1036.781 
+gosub @FINALEA_32043 
+172@ = 2 
+
+:FINALEA_15288
+156@ = 10 
+
+:FINALEA_15295
+if 
+  156@ == 10 
+jf @FINALEA_15682 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2577.98 -1307.44 1034.5 cornerB 2583.49 -1298.94 1039.3 
+jf @FINALEA_15682 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(130@)
+040D: unload_wav 3 
+Actor.PutAt($PLAYER_ACTOR, 2575.036, -1305.741, 1036.781)
+Actor.Angle($PLAYER_ACTOR) = 273.5172
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(78@)
+Actor.DestroyInstantly(80@)
+Actor.DestroyInstantly(81@)
+Actor.DestroyInstantly(82@)
+Actor.DestroyInstantly(83@)
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(73@)
+Actor.DestroyInstantly(74@)
+Actor.DestroyInstantly(75@)
+Actor.DestroyInstantly(76@)
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(78@)
+Actor.DestroyInstantly(80@)
+Actor.DestroyInstantly(81@)
+Actor.DestroyInstantly(82@)
+Actor.DestroyInstantly(83@)
+Actor.DestroyInstantly(64@)
+Actor.DestroyInstantly(65@)
+Car.Destroy(57@)
+Actor.DestroyInstantly(84@)
+Actor.DestroyInstantly(85@)
+Actor.DestroyInstantly(86@)
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(88@)
+Object.Destroy(100@)
+Model.Destroy(#SWAT)
+Model.Destroy(#SWATVAN)
+Model.Destroy(#AK47)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#BALLAS1)
+Model.Destroy(#BALLAS2)
+Model.Destroy(#LSV1)
+Model.Destroy(#IMCOMPMOVEDR1_LAS)
+Camera.SetPosition(2579.686, -1310.002, 1037.224, 0.0, 0.0, 0.0)
+Camera.PointAt(2579.736, -1309.022, 1037.418, 2)
+00BA: show_text_styled GXT 'RM4_18' time 1000 style 2  // Floor 2: Drug Lab
+wait 1000 
+05D3: AS_actor $PLAYER_ACTOR goto_point 2580.091 -1305.649 1036.773 mode 4 time 4000 ms // versionA 
+156@ = 11 
+
+:FINALEA_15682
+if 
+  156@ == 11 
+jf @FINALEA_17499 
+if 
+00F0:   actor $PLAYER_ACTOR 0 near_point 2580.091 -1305.649 radius 3.0 3.0 stopped_on_foot 
+jf @FINALEA_17499 
+018A: 130@ = create_checkpoint_at 2521.52 -1301.89 1047.37 
+08DC: create_interior_marker 130@ at 2540.83 -1304.05 radius 1.0 
+Model.Load(#BMYCG)
+Model.Load(#HMYCM)
+Model.Load(#SFR1)
+Model.Load(#M4)
+Model.Load(#COLT45)
+Model.Load(#BARREL4)
+038B: load_requested_models 
+
+:FINALEA_15810
+if or
+   not Model.Available(#BMYCG)
+   not Model.Available(#HMYCM)
+   not Model.Available(#SFR1)
+   not Model.Available(#M4)
+jf @FINALEA_15852 
+wait 0 
+jump @FINALEA_15810 
+
+:FINALEA_15852
+if or
+   not Model.Available(#COLT45)
+   not Model.Available(#BARREL4)
+jf @FINALEA_15884 
+wait 0 
+jump @FINALEA_15852 
+
+:FINALEA_15884
+134@ = Pickup.Create(#BODYARMOUR, 3, 2580.953, -1285.117, 1044.173)
+138@ = Pickup.Create(#HEALTH, 3, 2528.456, -1282.385, 1048.337)
+96@ = Object.Create(#BARREL4, 2560.308, -1290.702, 1043.133)
+0875: set_object 96@ immune_to_nonplayer 1 
+035D: set_object 96@ targetable 1 
+97@ = Object.Create(#BARREL4, 2540.467, -1306.681, 1047.297)
+0875: set_object 97@ immune_to_nonplayer 1 
+035D: set_object 97@ targetable 1 
+98@ = Object.Create(#BARREL4, 2545.491, -1296.284, 1043.13)
+0875: set_object 98@ immune_to_nonplayer 1 
+035D: set_object 98@ targetable 1 
+99@ = Object.Create(#BARREL4, 2538.171, -1289.806, 1043.133)
+0875: set_object 99@ immune_to_nonplayer 1 
+035D: set_object 99@ targetable 1 
+71@ = Actor.Create(Mission1, #SFR1, 2580.809, -1285.65, 1043.133)
+Actor.Angle(71@) = 178.4956
+060B: set_actor 71@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(71@, M4, 99999)
+0860: link_actor 71@ to_interior 2 
+Actor.Health(71@) = 150
+Actor.SetMaxHealth(71@, 150)
+159@ = 0 
+72@ = Actor.Create(Mission1, #SFR1, 2574.736, -1295.861, 1043.133)
+Actor.Angle(72@) = 183.0452
+060B: set_actor 72@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(72@, Pistol, 99999)
+081A: set_actor 72@ weapon_skill_to 2 
+077A: set_actor 72@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0860: link_actor 72@ to_interior 2 
+060F: set_actor 72@ melee_accuracy_to 10.0 
+Actor.WeaponAccuracy(72@) = 60
+160@ = 0 
+73@ = Actor.Create(Mission1, #HMYCM, 2561.648, -1300.648, 1043.17)
+Actor.Angle(73@) = 270.0
+060B: set_actor 73@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(73@, M4, 99999)
+0860: link_actor 73@ to_interior 2 
+Actor.SetImmunities(73@, 0, 0, 1, 0, 0)
+Actor.Health(73@) = 200
+Actor.SetMaxHealth(73@, 200)
+161@ = 0 
+74@ = Actor.Create(Mission1, #BMYCG, 2545.648, -1300.648, 1043.17)
+Actor.Angle(74@) = 270.0
+060B: set_actor 74@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(74@, M4, 99999)
+0860: link_actor 74@ to_interior 2 
+Actor.SetImmunities(74@, 0, 0, 1, 0, 0)
+Actor.Health(74@) = 200
+Actor.SetMaxHealth(74@, 200)
+07DD: set_actor 74@ attack_rate 70 // previously known as temper_to 
+162@ = 0 
+75@ = Actor.Create(Mission1, #HMYCM, 2538.348, -1287.148, 1043.133)
+Actor.Angle(75@) = 270.0
+060B: set_actor 75@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(75@, M4, 99999)
+Actor.SetImmunities(75@, 0, 0, 1, 0, 0)
+0860: link_actor 75@ to_interior 2 
+Actor.Health(75@) = 200
+Actor.SetMaxHealth(75@, 200)
+163@ = 0 
+76@ = Actor.Create(Mission1, #BMYCG, 2553.648, -1287.148, 1043.133)
+Actor.Angle(76@) = 270.0
+060B: set_actor 76@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(76@, M4, 99999)
+0860: link_actor 76@ to_interior 2 
+Actor.Health(76@) = 200
+Actor.SetMaxHealth(76@, 200)
+07DD: set_actor 76@ attack_rate 60 // previously known as temper_to 
+164@ = 0 
+wait 250 
+77@ = Actor.Create(Mission1, #HMYCM, 2552.748, -1304.36, 1043.133)
+Actor.Angle(77@) = 87.8604
+060B: set_actor 77@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(77@, Pistol, 99999)
+081A: set_actor 77@ weapon_skill_to 2 
+0860: link_actor 77@ to_interior 2 
+Actor.Health(77@) = 200
+Actor.SetMaxHealth(77@, 200)
+07DD: set_actor 77@ attack_rate 80 // previously known as temper_to 
+165@ = 0 
+79@ = Actor.Create(Mission1, #HMYCM, 2555.851, -1296.115, 1043.13)
+Actor.Angle(79@) = 348.0356
+060B: set_actor 79@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(79@, Pistol, 99999)
+081A: set_actor 79@ weapon_skill_to 2 
+0860: link_actor 79@ to_interior 2 
+Actor.SetImmunities(79@, 0, 0, 1, 0, 0)
+Actor.Health(79@) = 200
+Actor.SetMaxHealth(79@, 200)
+Actor.WeaponAccuracy(79@) = 80
+167@ = 0 
+80@ = Actor.Create(Mission1, #BMYCG, 2542.606, -1296.096, 1043.133)
+Actor.Angle(80@) = 353.9691
+060B: set_actor 80@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(80@, M4, 99999)
+0860: link_actor 80@ to_interior 2 
+Actor.Health(80@) = 200
+Actor.SetMaxHealth(80@, 200)
+168@ = 0 
+81@ = Actor.Create(Mission1, #HMYCM, 2552.924, -1290.878, 1043.133)
+Actor.Angle(81@) = 187.0611
+060B: set_actor 81@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(81@, M4, 99999)
+0860: link_actor 81@ to_interior 2 
+Actor.Health(81@) = 200
+Actor.SetMaxHealth(81@, 200)
+Actor.WeaponAccuracy(81@) = 70
+169@ = 0 
+83@ = Actor.Create(Mission1, #BMYCG, 2550.059, -1281.248, 1043.133)
+Actor.Angle(83@) = 230.8361
+060B: set_actor 83@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(83@, M4, 99999)
+0860: link_actor 83@ to_interior 2 
+Actor.Health(83@) = 200
+Actor.SetMaxHealth(83@, 200)
+07DD: set_actor 83@ attack_rate 80 // previously known as temper_to 
+171@ = 0 
+wait 250 
+84@ = Actor.Create(Mission1, #BMYCG, 2531.906, -1283.062, 1047.297)
+Actor.Angle(84@) = 233.2448
+060B: set_actor 84@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(84@, M4, 99999)
+0860: link_actor 84@ to_interior 2 
+Actor.Health(84@) = 200
+Actor.SetMaxHealth(84@, 200)
+Actor.WeaponAccuracy(84@) = 50
+172@ = 0 
+85@ = Actor.Create(Mission1, #BMYCG, 2548.977, -1282.426, 1047.297)
+Actor.Angle(85@) = 234.0824
+060B: set_actor 85@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(85@, Pistol, 99999)
+081A: set_actor 85@ weapon_skill_to 2 
+0860: link_actor 85@ to_interior 2 
+Actor.Health(85@) = 200
+Actor.SetMaxHealth(85@, 200)
+173@ = 0 
+86@ = Actor.Create(Mission1, #BMYCG, 2530.035, -1293.182, 1047.36)
+Actor.Angle(86@) = 268.475
+060B: set_actor 86@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(86@, M4, 99999)
+Actor.Health(86@) = 200
+Actor.SetMaxHealth(86@, 200)
+0860: link_actor 86@ to_interior 2 
+Actor.WeaponAccuracy(86@) = 80
+174@ = 0 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'RM4_23' time 7000 flag 1  // ~s~Make your way to ~y~Floor 3~s~.
+147@ = 3 
+157@ = 1 
+156@ = 12 
+
+:FINALEA_17499
+if 
+  147@ == 3 
+jf @FINALEA_22180 
+if 
+  157@ == 1 
+jf @FINALEA_17646 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2576.3 -1299.12 1039.71 cornerB 2584.46 -1281.22 1046.6 
+jf @FINALEA_17646 
+if 
+  159@ == 0 
+jf @FINALEA_17639 
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_17639 
+0085: 109@ = 71@ // (int) 
+gosub @FINALEA_32005 
+159@ = 1 
+
+:FINALEA_17639
+157@ = 2 
+
+:FINALEA_17646
+if 
+  160@ == 0 
+jf @FINALEA_17722 
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_17722 
+if or
+0364:   actor 72@ spotted_actor $PLAYER_ACTOR 
+051A:   actor 72@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEA_17722 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+160@ = 1 
+
+:FINALEA_17722
+if 
+  157@ == 2 
+jf @FINALEA_18673 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2571.502 -1311.993 1041.858 cornerB 2560.806 -1276.365 1046.727 
+jf @FINALEA_18673 
+if 
+  159@ == 0 
+jf @FINALEA_17823 
+Actor.RemoveReferences(71@)
+Actor.RemoveReferences(72@)
+159@ = 1 
+
+:FINALEA_17823
+if 
+  161@ == 0 
+jf @FINALEA_17927 
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_17927 
+0085: 109@ = 73@ // (int) 
+111@ = 2561.648 
+112@ = -1300.648 
+113@ = 1043.17 
+117@ = 3000 
+121@ = 270.0 
+gosub @FINALEA_32281 
+161@ = 1 
+
+:FINALEA_17927
+if 
+  162@ == 0 
+jf @FINALEA_18031 
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_18031 
+0085: 109@ = 74@ // (int) 
+111@ = 2545.648 
+112@ = -1300.648 
+113@ = 1043.17 
+117@ = 1200 
+121@ = 270.0 
+gosub @FINALEA_32281 
+162@ = 1 
+
+:FINALEA_18031
+if 
+  163@ == 0 
+jf @FINALEA_18135 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_18135 
+0085: 109@ = 75@ // (int) 
+111@ = 2538.348 
+112@ = -1287.148 
+113@ = 1043.133 
+117@ = 1500 
+121@ = 270.0 
+gosub @FINALEA_32522 
+163@ = 1 
+
+:FINALEA_18135
+if 
+  164@ == 0 
+jf @FINALEA_18239 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_18239 
+0085: 109@ = 76@ // (int) 
+111@ = 2553.648 
+112@ = -1287.148 
+113@ = 1043.133 
+117@ = 2000 
+121@ = 270.0 
+gosub @FINALEA_32522 
+164@ = 1 
+
+:FINALEA_18239
+if 
+  165@ == 0 
+jf @FINALEA_18288 
+if 
+   not Actor.Dead(77@)
+jf @FINALEA_18288 
+05E2: AS_actor 77@ kill_actor $PLAYER_ACTOR 
+165@ = 1 
+
+:FINALEA_18288
+if 
+  167@ == 0 
+jf @FINALEA_18337 
+if 
+   not Actor.Dead(79@)
+jf @FINALEA_18337 
+05E2: AS_actor 79@ kill_actor $PLAYER_ACTOR 
+167@ = 1 
+
+:FINALEA_18337
+if 
+  168@ == 0 
+jf @FINALEA_18393 
+if 
+   not Actor.Dead(80@)
+jf @FINALEA_18393 
+0085: 109@ = 80@ // (int) 
+gosub @FINALEA_31961 
+168@ = 1 
+
+:FINALEA_18393
+if 
+  169@ == 0 
+jf @FINALEA_18449 
+if 
+   not Actor.Dead(81@)
+jf @FINALEA_18449 
+0085: 109@ = 81@ // (int) 
+gosub @FINALEA_31961 
+168@ = 1 
+
+:FINALEA_18449
+if 
+  171@ == 0 
+jf @FINALEA_18498 
+if 
+   not Actor.Dead(83@)
+jf @FINALEA_18498 
+05E2: AS_actor 83@ kill_actor $PLAYER_ACTOR 
+171@ = 1 
+
+:FINALEA_18498
+if 
+  172@ == 0 
+jf @FINALEA_18554 
+if 
+   not Actor.Dead(84@)
+jf @FINALEA_18554 
+0085: 109@ = 84@ // (int) 
+gosub @FINALEA_31961 
+172@ = 1 
+
+:FINALEA_18554
+if 
+  173@ == 0 
+jf @FINALEA_18610 
+if 
+   not Actor.Dead(85@)
+jf @FINALEA_18610 
+0085: 109@ = 85@ // (int) 
+gosub @FINALEA_32005 
+173@ = 1 
+
+:FINALEA_18610
+if 
+  174@ == 0 
+jf @FINALEA_18666 
+if 
+   not Actor.Dead(86@)
+jf @FINALEA_18666 
+0085: 109@ = 86@ // (int) 
+gosub @FINALEA_32005 
+174@ = 1 
+
+:FINALEA_18666
+157@ = 3 
+
+:FINALEA_18673
+if 
+  157@ == 3 
+jf @FINALEA_21063 
+if 
+  161@ == 1 
+jf @FINALEA_18819 
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_18819 
+if 
+051A:   actor 73@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEA_18819 
+if or
+   not Actor.Dead(73@)
+0104:   actor 73@ near_actor $PLAYER_ACTOR radius 4.0 4.0 3.0 sphere 0 
+jf @FINALEA_18807 
+05E2: AS_actor 73@ kill_actor $PLAYER_ACTOR 
+161@ = 2 
+jump @FINALEA_18819 
+
+:FINALEA_18807
+Actor.RemoveReferences(73@)
+161@ = 2 
+
+:FINALEA_18819
+if 
+  162@ == 1 
+jf @FINALEA_18947 
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_18947 
+if or
+051A:   actor 74@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 74@ near_actor $PLAYER_ACTOR radius 4.0 4.0 3.0 sphere 0 
+jf @FINALEA_18947 
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_18935 
+05E2: AS_actor 74@ kill_actor $PLAYER_ACTOR 
+162@ = 2 
+jump @FINALEA_18947 
+
+:FINALEA_18935
+Actor.RemoveReferences(74@)
+162@ = 2 
+
+:FINALEA_18947
+if 
+  163@ == 1 
+jf @FINALEA_19075 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_19075 
+if or
+051A:   actor 75@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 75@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEA_19075 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_19063 
+05E2: AS_actor 75@ kill_actor $PLAYER_ACTOR 
+163@ = 2 
+jump @FINALEA_19075 
+
+:FINALEA_19063
+Actor.RemoveReferences(75@)
+163@ = 2 
+
+:FINALEA_19075
+if 
+  164@ == 1 
+jf @FINALEA_19198 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_19198 
+if or
+051A:   actor 76@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 76@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEA_19198 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_19191 
+05E2: AS_actor 76@ kill_actor $PLAYER_ACTOR 
+164@ = 2 
+jump @FINALEA_19198 
+
+:FINALEA_19191
+164@ = 2 
+
+:FINALEA_19198
+if or
+  161@ == 1 
+  161@ == 2 
+jf @FINALEA_19258 
+if 
+   Actor.Dead(73@)
+jf @FINALEA_19258 
+Actor.RemoveReferences(73@)
+183@ += 1 
+161@ = 3 
+
+:FINALEA_19258
+if or
+  162@ == 1 
+  162@ == 2 
+jf @FINALEA_19318 
+if 
+   Actor.Dead(74@)
+jf @FINALEA_19318 
+Actor.RemoveReferences(74@)
+183@ += 1 
+162@ = 3 
+
+:FINALEA_19318
+if or
+  163@ == 1 
+  163@ == 2 
+jf @FINALEA_19378 
+if 
+   Actor.Dead(75@)
+jf @FINALEA_19378 
+Actor.RemoveReferences(75@)
+183@ += 1 
+163@ = 3 
+
+:FINALEA_19378
+if or
+  164@ == 1 
+  164@ == 2 
+jf @FINALEA_19438 
+if 
+   Actor.Dead(76@)
+jf @FINALEA_19438 
+Actor.RemoveReferences(76@)
+183@ += 1 
+164@ = 3 
+
+:FINALEA_19438
+if 
+  165@ == 1 
+jf @FINALEA_19491 
+if 
+   Actor.Dead(77@)
+jf @FINALEA_19491 
+Actor.RemoveReferences(77@)
+183@ += 1 
+165@ = 2 
+
+:FINALEA_19491
+if 
+  168@ == 1 
+jf @FINALEA_19544 
+if 
+   Actor.Dead(80@)
+jf @FINALEA_19544 
+Actor.RemoveReferences(80@)
+183@ += 1 
+168@ = 2 
+
+:FINALEA_19544
+if 
+  169@ == 1 
+jf @FINALEA_19597 
+if 
+   Actor.Dead(81@)
+jf @FINALEA_19597 
+Actor.RemoveReferences(81@)
+183@ += 1 
+169@ = 2 
+
+:FINALEA_19597
+if 
+  171@ == 1 
+jf @FINALEA_19650 
+if 
+   Actor.Dead(83@)
+jf @FINALEA_19650 
+Actor.RemoveReferences(83@)
+183@ += 1 
+171@ = 2 
+
+:FINALEA_19650
+if 
+  172@ == 1 
+jf @FINALEA_19703 
+if 
+   Actor.Dead(84@)
+jf @FINALEA_19703 
+Actor.RemoveReferences(84@)
+183@ += 1 
+172@ = 2 
+
+:FINALEA_19703
+if 
+  173@ == 1 
+jf @FINALEA_19756 
+if 
+   Actor.Dead(85@)
+jf @FINALEA_19756 
+Actor.RemoveReferences(85@)
+183@ += 1 
+173@ = 2 
+
+:FINALEA_19756
+if 
+  174@ == 1 
+jf @FINALEA_19809 
+if 
+   Actor.Dead(86@)
+jf @FINALEA_19809 
+Actor.RemoveReferences(86@)
+183@ += 1 
+174@ = 2 
+
+:FINALEA_19809
+if 
+  184@ == 0 
+jf @FINALEA_20190 
+if 
+  183@ > 5 
+jf @FINALEA_20190 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2551.12 -1276.34 1046.55 cornerB 2543.07 -1287.63 1050.46 
+jf @FINALEA_20190 
+87@ = Actor.Create(Mission1, #SFR1, 2573.448, -1301.981, 1043.133)
+Actor.Angle(87@) = 87.1597
+060B: set_actor 87@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(87@, M4, 99999)
+0860: link_actor 87@ to_interior 2 
+Actor.Health(87@) = 200
+Actor.SetMaxHealth(87@, 200)
+0085: 109@ = 87@ // (int) 
+111@ = 2566.288 
+112@ = -1301.637 
+113@ = 1043.133 
+118@ = 2565.74 
+119@ = -1297.09 
+120@ = 1043.133 
+gosub @FINALEA_32043 
+175@ = 1 
+88@ = Actor.Create(Mission1, #SFR1, 2575.308, -1301.908, 1043.133)
+Actor.Angle(88@) = 91.2377
+060B: set_actor 88@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(88@, M4, 99999)
+0860: link_actor 88@ to_interior 2 
+Actor.Health(88@) = 200
+Actor.SetMaxHealth(88@, 200)
+0085: 109@ = 88@ // (int) 
+111@ = 2566.984 
+112@ = -1302.09 
+113@ = 1043.133 
+gosub @FINALEA_31912 
+176@ = 1 
+184@ = 1 
+
+:FINALEA_20190
+if 
+  185@ == 0 
+jf @FINALEA_20523 
+if 
+  183@ > 8 
+jf @FINALEA_20523 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2566.09 -1301.26 1046.91 cornerB 2554.56 -1309.06 1050.0 
+jf @FINALEA_20523 
+89@ = Actor.Create(Mission1, #SFR1, 2527.271, -1305.648, 1047.297)
+Actor.Angle(89@) = 269.5592
+060B: set_actor 89@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(89@, Pistol, 99999)
+081A: set_actor 89@ weapon_skill_to 2 
+0860: link_actor 89@ to_interior 2 
+0085: 109@ = 89@ // (int) 
+111@ = 2542.317 
+112@ = -1305.674 
+113@ = 1047.297 
+gosub @FINALEA_31912 
+177@ = 1 
+90@ = Actor.Create(Mission1, #SFR1, 2523.7, -1305.878, 1047.297)
+Actor.Angle(90@) = 273.1955
+060B: set_actor 90@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(90@, Pistol, 99999)
+081A: set_actor 90@ weapon_skill_to 2 
+0860: link_actor 90@ to_interior 2 
+0085: 109@ = 90@ // (int) 
+111@ = 2534.567 
+112@ = -1305.547 
+113@ = 1047.297 
+gosub @FINALEA_31912 
+178@ = 1 
+185@ = 1 
+
+:FINALEA_20523
+if 
+  175@ == 1 
+jf @FINALEA_20576 
+if 
+   Actor.Dead(87@)
+jf @FINALEA_20576 
+Actor.RemoveReferences(87@)
+183@ += 1 
+175@ = 2 
+
+:FINALEA_20576
+if 
+  176@ == 1 
+jf @FINALEA_20629 
+if 
+   Actor.Dead(88@)
+jf @FINALEA_20629 
+Actor.RemoveReferences(88@)
+183@ += 1 
+176@ = 2 
+
+:FINALEA_20629
+if 
+  177@ == 1 
+jf @FINALEA_20682 
+if 
+   Actor.Dead(89@)
+jf @FINALEA_20682 
+Actor.RemoveReferences(89@)
+183@ += 1 
+177@ = 2 
+
+:FINALEA_20682
+if 
+  178@ == 1 
+jf @FINALEA_20735 
+if 
+   Actor.Dead(90@)
+jf @FINALEA_20735 
+Actor.RemoveReferences(90@)
+183@ += 1 
+178@ = 2 
+
+:FINALEA_20735
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2522.35 -1309.65 1045.6 cornerB 2513.5 -1295.97 1050.32 
+jf @FINALEA_21063 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.PutAt($PLAYER_ACTOR, 2525.079, -1301.891, 1047.297)
+Actor.Angle($PLAYER_ACTOR) = 89.7295
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(72@)
+Actor.DestroyInstantly(73@)
+Actor.DestroyInstantly(74@)
+Actor.DestroyInstantly(75@)
+Actor.DestroyInstantly(76@)
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(80@)
+Actor.DestroyInstantly(81@)
+Actor.DestroyInstantly(83@)
+Actor.DestroyInstantly(84@)
+Actor.DestroyInstantly(85@)
+Actor.DestroyInstantly(86@)
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(88@)
+Actor.DestroyInstantly(89@)
+Actor.DestroyInstantly(90@)
+Object.Destroy(96@)
+Object.Destroy(97@)
+Object.Destroy(98@)
+Object.Destroy(99@)
+Model.Destroy(#BMYCG)
+Model.Destroy(#HMYCM)
+Model.Destroy(#SFR1)
+Model.Destroy(#M4)
+Model.Destroy(#COLT45)
+Model.Destroy(#BARREL4)
+Camera.SetPosition(2520.282, -1306.363, 1047.599, 0.0, 0.0, 0.0)
+Camera.PointAt(2520.3, -1305.388, 1047.823, 2)
+00BA: show_text_styled GXT 'RM4_19' time 1000 style 2  // Floor 3: Ballas Lounge
+wait 1000 
+05D3: AS_actor $PLAYER_ACTOR goto_point 2520.025 -1301.845 1047.289 mode 4 time 5000 ms // versionA 
+157@ = 4 
+
+:FINALEA_21063
+if 
+  157@ == 4 
+jf @FINALEA_22180 
+if 
+00F0:   actor $PLAYER_ACTOR 0 near_point 2520.025 -1301.845 radius 3.0 3.0 stopped_on_foot 
+jf @FINALEA_22180 
+Model.Load(#BALLAS3)
+Model.Load(#MAFFA)
+Model.Load(#LSV2)
+Model.Load(#MICRO_UZI)
+Model.Load(#CHROMEGUN)
+Model.Load(#BFYRI)
+04ED: load_animation "STRIP" 
+Model.Load(#SBFYSTR)
+038B: load_requested_models 
+
+:FINALEA_21161
+if or
+   not Model.Available(#BALLAS3)
+   not Model.Available(#MAFFA)
+   not Model.Available(#LSV2)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#CHROMEGUN)
+jf @FINALEA_21205 
+wait 0 
+jump @FINALEA_21161 
+
+:FINALEA_21205
+if or
+   not Model.Available(#BFYRI)
+84EE:   not animation "STRIP" loaded 
+   not Model.Available(#SBFYSTR)
+jf @FINALEA_21245 
+wait 0 
+jump @FINALEA_21205 
+
+:FINALEA_21245
+135@ = Pickup.Create(#BODYARMOUR, 3, 2520.4, -1281.287, 1054.681)
+wait 250 
+89@ = Actor.Create(Mission1, #BALLAS3, 2520.891, -1281.763, 1053.681)
+Actor.Angle(89@) = 180.628
+060B: set_actor 89@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(89@, MicroUzi, 99999)
+081A: set_actor 89@ weapon_skill_to 2 
+0860: link_actor 89@ to_interior 2 
+177@ = 0 
+71@ = Actor.Create(Mission1, #LSV2, 2529.813, -1285.063, 1053.641)
+Actor.Angle(71@) = 182.0171
+060B: set_actor 71@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(71@, MicroUzi, 99999)
+0860: link_actor 71@ to_interior 2 
+Actor.WeaponAccuracy(71@) = 50
+159@ = 0 
+72@ = Actor.Create(Mission1, #BALLAS3, 2529.92, -1286.83, 1053.641)
+Actor.Angle(72@) = 358.5364
+060B: set_actor 72@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(72@, MicroUzi, 99999)
+081A: set_actor 72@ weapon_skill_to 2 
+0860: link_actor 72@ to_interior 2 
+Actor.WeaponAccuracy(72@) = 50
+160@ = 0 
+0677: AS_actor 72@ chat_with_actor 71@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 71@ chat_with_actor 72@ lead_speaker_flag 0 unknown_flag 1 
+91@ = Actor.Create(Mission1, #BFYRI, 2537.15, -1288.125, 1053.641)
+Actor.Angle(91@) = 280.1631
+060B: set_actor 91@ decision_maker_to 47@ 
+Actor.Health(91@) = 1
+73@ = Actor.Create(Mission1, #MAFFA, 2540.364, -1287.553, 1053.647)
+Actor.Angle(73@) = 89.793
+060B: set_actor 73@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(73@, MicroUzi, 99999)
+081A: set_actor 73@ weapon_skill_to 2 
+0860: link_actor 73@ to_interior 2 
+Actor.WeaponAccuracy(73@) = 30
+Actor.Health(73@) = 200
+Actor.SetMaxHealth(73@, 200)
+161@ = 0 
+74@ = Actor.Create(Mission1, #LSV2, 2537.074, -1287.274, 1053.681)
+Actor.Angle(74@) = 265.803
+060B: set_actor 74@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(74@, Shotgun, 99999)
+0860: link_actor 74@ to_interior 2 
+Actor.SetImmunities(74@, 0, 0, 1, 0, 0)
+Actor.Health(74@) = 150
+Actor.SetMaxHealth(74@, 150)
+162@ = 0 
+75@ = Actor.Create(Mission1, #BALLAS3, 2542.226, -1294.381, 1053.641)
+Actor.Angle(75@) = 89.8814
+060B: set_actor 75@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(75@, MicroUzi, 99999)
+081A: set_actor 75@ weapon_skill_to 2 
+0860: link_actor 75@ to_interior 2 
+06B0: AS_actor 75@ sit_down 400000 ms 
+Actor.WeaponAccuracy(75@) = 30
+Actor.Health(75@) = 200
+Actor.SetMaxHealth(75@, 200)
+163@ = 0 
+wait 250 
+77@ = Actor.Create(Mission1, #LSV2, 2539.476, -1303.431, 1053.641)
+Actor.Angle(77@) = 10.5492
+060B: set_actor 77@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(77@, MicroUzi, 99999)
+081A: set_actor 77@ weapon_skill_to 2 
+0860: link_actor 77@ to_interior 2 
+Actor.Health(77@) = 150
+Actor.SetMaxHealth(77@, 150)
+165@ = 0 
+78@ = Actor.Create(Mission1, #MAFFA, 2533.962, -1306.916, 1053.641)
+Actor.Angle(78@) = 338.7091
+060B: set_actor 78@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(78@, MicroUzi, 99999)
+081A: set_actor 78@ weapon_skill_to 2 
+0860: link_actor 78@ to_interior 2 
+Actor.Health(78@) = 200
+Actor.SetMaxHealth(78@, 200)
+166@ = 0 
+Marker.Disable(130@)
+018A: 130@ = create_checkpoint_at 2579.0 -1284.0 1054.686 
+08DC: create_interior_marker 130@ at 2540.83 -1304.05 radius 1.0 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'RM4_21' time 5000 flag 1  // ~s~Make your way to ~y~Floor 4~s~.
+147@ = 4 
+158@ = 1 
+157@ = 5 
+
+:FINALEA_22180
+if 
+  147@ == 4 
+jf @FINALEA_27884 
+if 
+  158@ == 1 
+jf @FINALEA_22327 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2520.23 -1293.09 1051.49 radius 6.0 6.0 5.0 
+jf @FINALEA_22327 
+if 
+  177@ == 0 
+jf @FINALEA_22320 
+if 
+   not Actor.Dead(89@)
+jf @FINALEA_22320 
+0085: 109@ = 89@ // (int) 
+gosub @FINALEA_32005 
+177@ = 1 
+
+:FINALEA_22320
+158@ = 2 
+
+:FINALEA_22327
+if 
+  158@ == 2 
+jf @FINALEA_22546 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2522.32 -1293.64 1052.5 cornerB 2532.41 -1273.44 1055.89 
+jf @FINALEA_22463 
+32@ = 0 
+if 
+  160@ == 0 
+jf @FINALEA_22449 
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_22449 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+160@ = 1 
+
+:FINALEA_22449
+158@ = 3 
+jump @FINALEA_22546 
+
+:FINALEA_22463
+if or
+051A:   actor 71@ damaged_by_actor $PLAYER_ACTOR 
+051A:   actor 72@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEA_22546 
+if 
+  160@ == 0 
+jf @FINALEA_22539 
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_22539 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+160@ = 1 
+
+:FINALEA_22539
+158@ = 3 
+
+:FINALEA_22546
+if 
+  158@ == 3 
+jf @FINALEA_22639 
+if 
+  32@ > 250 
+jf @FINALEA_22639 
+if 
+  159@ == 0 
+jf @FINALEA_22632 
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_22632 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+159@ = 1 
+
+:FINALEA_22632
+158@ = 4 
+
+:FINALEA_22639
+if 
+  158@ == 4 
+jf @FINALEA_23076 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2530.68 -1306.62 1052.16 cornerB 2542.05 -1275.19 1057.08 
+jf @FINALEA_23076 
+if 
+   not Actor.Dead(91@)
+jf @FINALEA_22766 
+0085: 109@ = 91@ // (int) 
+111@ = 2537.736 
+112@ = -1306.448 
+113@ = 1053.641 
+gosub @FINALEA_32763 
+
+:FINALEA_22766
+if 
+  161@ == 0 
+jf @FINALEA_22859 
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_22859 
+04EB: AS_actor 73@ crouch -1 
+0085: 109@ = 73@ // (int) 
+111@ = 2540.37 
+112@ = -1280.79 
+113@ = 1053.647 
+gosub @FINALEA_31912 
+161@ = 1 
+
+:FINALEA_22859
+if 
+  162@ == 0 
+jf @FINALEA_22908 
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_22908 
+05E2: AS_actor 74@ kill_actor $PLAYER_ACTOR 
+162@ = 1 
+
+:FINALEA_22908
+if 
+  163@ == 0 
+jf @FINALEA_22957 
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_22957 
+05E2: AS_actor 75@ kill_actor $PLAYER_ACTOR 
+163@ = 1 
+
+:FINALEA_22957
+if 
+  165@ == 0 
+jf @FINALEA_23013 
+if 
+   not Actor.Dead(77@)
+jf @FINALEA_23013 
+0085: 109@ = 77@ // (int) 
+gosub @FINALEA_31961 
+165@ = 1 
+
+:FINALEA_23013
+if 
+  166@ == 0 
+jf @FINALEA_23069 
+if 
+   not Actor.Dead(78@)
+jf @FINALEA_23069 
+0085: 109@ = 78@ // (int) 
+gosub @FINALEA_32005 
+166@ = 1 
+
+:FINALEA_23069
+158@ = 5 
+
+:FINALEA_23076
+if 
+  158@ == 5 
+jf @FINALEA_23791 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2537.78 -1298.62 1055.1 radius 5.0 5.0 5.0 
+jf @FINALEA_23791 
+76@ = Actor.Create(Mission1, #MAFFA, 2545.193, -1302.545, 1053.647)
+Actor.Angle(76@) = 359.6221
+060B: set_actor 76@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(76@, MicroUzi, 99999)
+081A: set_actor 76@ weapon_skill_to 2 
+0860: link_actor 76@ to_interior 2 
+Actor.Health(76@) = 150
+Actor.SetMaxHealth(76@, 150)
+04EB: AS_actor 76@ crouch -1 
+164@ = 0 
+79@ = Actor.Create(Mission1, #BALLAS3, 2548.808, -1288.945, 1053.641)
+Actor.Angle(79@) = 168.1978
+060B: set_actor 79@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(79@, MicroUzi, 99999)
+081A: set_actor 79@ weapon_skill_to 2 
+Actor.WeaponAccuracy(79@) = 50
+0860: link_actor 79@ to_interior 2 
+Actor.Health(79@) = 150
+Actor.SetMaxHealth(79@, 150)
+167@ = 0 
+81@ = Actor.Create(Mission1, #LSV2, 2548.211, -1293.491, 1053.641)
+Actor.Angle(81@) = 177.248
+060B: set_actor 81@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(81@, MicroUzi, 99999)
+081A: set_actor 81@ weapon_skill_to 2 
+0860: link_actor 81@ to_interior 2 
+Actor.Health(81@) = 150
+Actor.SetMaxHealth(81@, 150)
+Actor.WeaponAccuracy(81@) = 30
+169@ = 0 
+82@ = Actor.Create(Mission1, #BALLAS3, 2548.473, -1295.834, 1053.647)
+Actor.Angle(82@) = 6.5626
+060B: set_actor 82@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(82@, Shotgun, 99999)
+Actor.WeaponAccuracy(82@) = 30
+0860: link_actor 82@ to_interior 2 
+Actor.Health(82@) = 150
+Actor.SetMaxHealth(82@, 150)
+170@ = 0 
+88@ = Actor.Create(Mission1, #BALLAS3, 2568.735, -1294.134, 1053.681)
+Actor.Angle(88@) = 270.3791
+060B: set_actor 88@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(88@, MicroUzi, 99999)
+081A: set_actor 88@ weapon_skill_to 2 
+0860: link_actor 88@ to_interior 2 
+02A9: set_actor 88@ immune_to_nonplayer 1 
+Actor.Health(88@) = 150
+Actor.SetMaxHealth(88@, 150)
+176@ = 0 
+80@ = Actor.Create(Mission1, #BALLAS3, 2571.7, -1294.298, 1053.68)
+Actor.Angle(80@) = 90.0
+060B: set_actor 80@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(80@, Shotgun, 99999)
+0860: link_actor 80@ to_interior 2 
+168@ = 0 
+83@ = Actor.Create(Mission1, #MAFFA, 2571.802, -1289.591, 1053.641)
+Actor.Angle(83@) = 90.3346
+060B: set_actor 83@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(83@, Shotgun, 99999)
+Actor.WeaponAccuracy(83@) = 50
+0860: link_actor 83@ to_interior 2 
+Actor.Health(83@) = 150
+Actor.SetMaxHealth(83@, 150)
+171@ = 0 
+158@ = 6 
+
+:FINALEA_23791
+if 
+  158@ == 6 
+jf @FINALEA_24524 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2543.87 -1308.98 1050.78 cornerB 2553.03 -1276.55 1059.5 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2543.88 -1304.9 1053.81 radius 3.0 3.0 3.0 
+jf @FINALEA_24524 
+Actor.DestroyInstantly(89@)
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(72@)
+if 
+  164@ == 0 
+jf @FINALEA_24002 
+if 
+   not Actor.Dead(76@)
+jf @FINALEA_24002 
+04EB: AS_actor 76@ crouch -1 
+0085: 109@ = 76@ // (int) 
+111@ = 2545.238 
+112@ = -1291.791 
+113@ = 1053.641 
+gosub @FINALEA_31912 
+164@ = 1 
+
+:FINALEA_24002
+if 
+  167@ == 0 
+jf @FINALEA_24058 
+if 
+   not Actor.Dead(79@)
+jf @FINALEA_24058 
+0085: 109@ = 79@ // (int) 
+gosub @FINALEA_32005 
+167@ = 1 
+
+:FINALEA_24058
+if 
+  169@ == 0 
+jf @FINALEA_24144 
+if 
+   not Actor.Dead(81@)
+jf @FINALEA_24144 
+0085: 109@ = 81@ // (int) 
+111@ = 2553.877 
+112@ = -1292.144 
+113@ = 1053.647 
+gosub @FINALEA_31912 
+169@ = 1 
+
+:FINALEA_24144
+if 
+  170@ == 0 
+jf @FINALEA_24260 
+if 
+   not Actor.Dead(82@)
+jf @FINALEA_24260 
+0085: 109@ = 82@ // (int) 
+111@ = 2553.217 
+112@ = -1296.902 
+113@ = 1053.647 
+118@ = 2557.171 
+119@ = -1296.618 
+120@ = 1053.641 
+gosub @FINALEA_32043 
+170@ = 1 
+
+:FINALEA_24260
+if 
+  176@ == 0 
+jf @FINALEA_24309 
+if 
+   not Actor.Dead(88@)
+jf @FINALEA_24309 
+05E2: AS_actor 88@ kill_actor $PLAYER_ACTOR 
+176@ = 1 
+
+:FINALEA_24309
+if 
+  168@ == 0 
+jf @FINALEA_24413 
+if 
+   not Actor.Dead(80@)
+jf @FINALEA_24413 
+0085: 109@ = 80@ // (int) 
+111@ = 2571.7 
+112@ = -1294.298 
+113@ = 1053.68 
+117@ = 1200 
+121@ = 90.0 
+gosub @FINALEA_32281 
+168@ = 1 
+
+:FINALEA_24413
+if 
+  171@ == 0 
+jf @FINALEA_24517 
+if 
+   not Actor.Dead(83@)
+jf @FINALEA_24517 
+0085: 109@ = 83@ // (int) 
+111@ = 2571.802 
+112@ = -1289.591 
+113@ = 1053.641 
+117@ = 2000 
+121@ = 90.0 
+gosub @FINALEA_32281 
+171@ = 1 
+
+:FINALEA_24517
+158@ = 7 
+
+:FINALEA_24524
+if 
+  158@ == 7 
+jf @FINALEA_24997 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2544.0 -1298.31 1051.84 cornerB 2577.11 -1278.61 1057.06 
+jf @FINALEA_24997 
+Actor.DestroyInstantly(91@)
+Actor.DestroyInstantly(74@)
+Actor.DestroyInstantly(75@)
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(78@)
+84@ = Actor.Create(Mission1, #MAFFA, 2561.144, -1302.854, 1053.641)
+Actor.Angle(84@) = 357.9032
+060B: set_actor 84@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(84@, MicroUzi, 99999)
+081A: set_actor 84@ weapon_skill_to 2 
+0860: link_actor 84@ to_interior 2 
+Actor.Health(84@) = 200
+Actor.SetMaxHealth(84@, 200)
+Actor.WeaponAccuracy(84@) = 40
+172@ = 0 
+if 
+  172@ == 0 
+jf @FINALEA_24806 
+if 
+   not Actor.Dead(84@)
+jf @FINALEA_24806 
+04EB: AS_actor 84@ crouch -1 
+0085: 109@ = 84@ // (int) 
+111@ = 2561.076 
+112@ = -1295.253 
+113@ = 1053.647 
+gosub @FINALEA_31912 
+172@ = 1 
+
+:FINALEA_24806
+85@ = Actor.Create(Mission1, #MAFFA, 2561.128, -1284.657, 1053.641)
+Actor.Angle(85@) = 180.8092
+060B: set_actor 85@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(85@, MicroUzi, 99999)
+081A: set_actor 85@ weapon_skill_to 2 
+0860: link_actor 85@ to_interior 2 
+Actor.WeaponAccuracy(85@) = 40
+Actor.Health(85@) = 150
+Actor.SetMaxHealth(85@, 150)
+173@ = 0 
+if 
+  173@ == 0 
+jf @FINALEA_24990 
+if 
+   not Actor.Dead(85@)
+jf @FINALEA_24990 
+0085: 109@ = 85@ // (int) 
+111@ = 2561.241 
+112@ = -1292.802 
+113@ = 1053.647 
+gosub @FINALEA_31912 
+173@ = 1 
+
+:FINALEA_24990
+158@ = 8 
+
+:FINALEA_24997
+if 
+  187@ == 0 
+jf @FINALEA_25264 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2556.98 -1298.58 1052.0 cornerB 2569.69 -1035.12 1056.21 
+jf @FINALEA_25264 
+139@ = Pickup.Create(#HEALTH, 3, 2552.298, -1306.06, 1054.681)
+87@ = Actor.Create(Mission1, #MAFFA, 2566.716, -1305.75, 1053.681)
+Actor.Angle(87@) = 4.514
+060B: set_actor 87@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(87@, MicroUzi, 99999)
+Actor.WeaponAccuracy(87@) = 70
+0860: link_actor 87@ to_interior 2 
+175@ = 1 
+05E2: AS_actor 87@ kill_actor $PLAYER_ACTOR 
+92@ = Actor.Create(Mission1, #SBFYSTR, 2557.072, -1302.799, 1053.875)
+Actor.Angle(92@) = 53.1978
+060B: set_actor 92@ decision_maker_to 47@ 
+Actor.Health(92@) = 5
+0605: actor 92@ perform_animation "STRIP_E" IFP "STRIP" framedelta 8.0 loop 1 lockX 1 lockY 1 lockF 0 time -1 
+187@ = 1 
+
+:FINALEA_25264
+if 
+  186@ == 0 
+jf @FINALEA_25530 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2558.94 -1290.24 1052.74 cornerB 2568.72 -1283.56 1057.43 
+jf @FINALEA_25530 
+136@ = Pickup.Create(#BODYARMOUR, 3, 2552.475, -1280.687, 1054.686)
+86@ = Actor.Create(Mission1, #MAFFA, 2567.987, -1281.41, 1053.687)
+Actor.Angle(86@) = 178.685
+060B: set_actor 86@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(86@, MicroUzi, 99999)
+Actor.WeaponAccuracy(86@) = 30
+0860: link_actor 86@ to_interior 2 
+174@ = 1 
+05E2: AS_actor 86@ kill_actor $PLAYER_ACTOR 
+93@ = Actor.Create(Mission1, #SBFYSTR, 2557.817, -1285.218, 1053.876)
+Actor.Angle(93@) = 288.0473
+060B: set_actor 93@ decision_maker_to 47@ 
+Actor.Health(93@) = 5
+0605: actor 93@ perform_animation "STRIP_A" IFP "STRIP" framedelta 8.0 loop 1 lockX 1 lockY 1 lockF 0 time -1 
+186@ = 1 
+
+:FINALEA_25530
+if 
+  168@ == 1 
+jf @FINALEA_25658 
+if 
+   not Actor.Dead(80@)
+jf @FINALEA_25658 
+if 
+051A:   actor 80@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEA_25658 
+if or
+   not Actor.Dead(80@)
+0104:   actor 80@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEA_25646 
+05E2: AS_actor 80@ kill_actor $PLAYER_ACTOR 
+168@ = 2 
+jump @FINALEA_25658 
+
+:FINALEA_25646
+Actor.RemoveReferences(80@)
+168@ = 2 
+
+:FINALEA_25658
+if 
+  171@ == 1 
+jf @FINALEA_25786 
+if 
+   not Actor.Dead(83@)
+jf @FINALEA_25786 
+if or
+051A:   actor 83@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 83@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEA_25786 
+if 
+   not Actor.Dead(83@)
+jf @FINALEA_25774 
+05E2: AS_actor 83@ kill_actor $PLAYER_ACTOR 
+171@ = 2 
+jump @FINALEA_25786 
+
+:FINALEA_25774
+Actor.RemoveReferences(83@)
+171@ = 2 
+
+:FINALEA_25786
+if 
+  159@ == 1 
+jf @FINALEA_25839 
+if 
+   Actor.Dead(71@)
+jf @FINALEA_25839 
+Actor.RemoveReferences(71@)
+180@ += 1 
+159@ = 2 
+
+:FINALEA_25839
+if 
+  161@ == 1 
+jf @FINALEA_25892 
+if 
+   Actor.Dead(73@)
+jf @FINALEA_25892 
+Actor.RemoveReferences(73@)
+180@ += 1 
+161@ = 2 
+
+:FINALEA_25892
+if 
+  162@ == 1 
+jf @FINALEA_25945 
+if 
+   Actor.Dead(74@)
+jf @FINALEA_25945 
+Actor.RemoveReferences(74@)
+180@ += 1 
+162@ = 2 
+
+:FINALEA_25945
+if 
+  163@ == 1 
+jf @FINALEA_25998 
+if 
+   Actor.Dead(75@)
+jf @FINALEA_25998 
+Actor.RemoveReferences(75@)
+180@ += 1 
+163@ = 2 
+
+:FINALEA_25998
+if 
+  164@ == 1 
+jf @FINALEA_26051 
+if 
+   Actor.Dead(76@)
+jf @FINALEA_26051 
+Actor.RemoveReferences(76@)
+180@ += 1 
+164@ = 2 
+
+:FINALEA_26051
+if 
+  165@ == 1 
+jf @FINALEA_26104 
+if 
+   Actor.Dead(77@)
+jf @FINALEA_26104 
+Actor.RemoveReferences(77@)
+180@ += 1 
+165@ = 3 
+
+:FINALEA_26104
+if 
+  166@ == 1 
+jf @FINALEA_26157 
+if 
+   Actor.Dead(78@)
+jf @FINALEA_26157 
+Actor.RemoveReferences(78@)
+180@ += 1 
+166@ = 2 
+
+:FINALEA_26157
+if or
+  168@ == 1 
+  168@ == 2 
+jf @FINALEA_26217 
+if 
+   Actor.Dead(80@)
+jf @FINALEA_26217 
+Actor.RemoveReferences(80@)
+180@ += 1 
+168@ = 3 
+
+:FINALEA_26217
+if 
+  169@ == 1 
+jf @FINALEA_26270 
+if 
+   Actor.Dead(81@)
+jf @FINALEA_26270 
+Actor.RemoveReferences(81@)
+180@ += 1 
+169@ = 2 
+
+:FINALEA_26270
+if 
+  170@ == 1 
+jf @FINALEA_26323 
+if 
+   Actor.Dead(82@)
+jf @FINALEA_26323 
+Actor.RemoveReferences(82@)
+180@ += 1 
+170@ = 2 
+
+:FINALEA_26323
+if or
+  171@ == 1 
+  171@ == 2 
+jf @FINALEA_26383 
+if 
+   Actor.Dead(83@)
+jf @FINALEA_26383 
+Actor.RemoveReferences(83@)
+180@ += 1 
+171@ = 3 
+
+:FINALEA_26383
+if 
+  172@ == 1 
+jf @FINALEA_26436 
+if 
+   Actor.Dead(84@)
+jf @FINALEA_26436 
+Actor.RemoveReferences(84@)
+183@ += 1 
+172@ = 2 
+
+:FINALEA_26436
+if 
+  173@ == 1 
+jf @FINALEA_26489 
+if 
+   Actor.Dead(85@)
+jf @FINALEA_26489 
+Actor.RemoveReferences(85@)
+183@ += 1 
+173@ = 2 
+
+:FINALEA_26489
+if 
+  174@ == 1 
+jf @FINALEA_26542 
+if 
+   Actor.Dead(86@)
+jf @FINALEA_26542 
+Actor.RemoveReferences(86@)
+183@ += 1 
+174@ = 2 
+
+:FINALEA_26542
+if 
+  175@ == 1 
+jf @FINALEA_26595 
+if 
+   Actor.Dead(87@)
+jf @FINALEA_26595 
+Actor.RemoveReferences(87@)
+183@ += 1 
+175@ = 2 
+
+:FINALEA_26595
+if 
+  176@ == 1 
+jf @FINALEA_26648 
+if 
+   Actor.Dead(88@)
+jf @FINALEA_26648 
+Actor.RemoveReferences(88@)
+183@ += 1 
+176@ = 2 
+
+:FINALEA_26648
+if 
+  177@ == 1 
+jf @FINALEA_26701 
+if 
+   Actor.Dead(89@)
+jf @FINALEA_26701 
+Actor.RemoveReferences(89@)
+183@ += 1 
+177@ = 2 
+
+:FINALEA_26701
+if 
+  158@ == 8 
+jf @FINALEA_26872 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2577.43 -1281.21 1050.83 cornerB 2584.7 -1291.47 1055.35 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2579.82 -1284.91 1054.12 radius 3.0 3.0 3.0 
+jf @FINALEA_26872 
+00BC: show_text_highpriority GXT 'RM4_24' time 5000 flag 1  // ~s~Go get ~y~Big Smoke~s~.
+Marker.Disable(130@)
+018A: 130@ = create_checkpoint_at 2550.74 -1285.02 1060.62 
+08DC: create_interior_marker 130@ at 2540.83 -1304.05 radius 1.0 
+158@ = 9 
+
+:FINALEA_26872
+if 
+  158@ == 9 
+jf @FINALEA_27884 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2577.46 -1306.59 1058.27 cornerB 2571.97 -1275.1 1063.08 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2575.4 -1300.35 1061.016 radius 3.0 3.0 3.0 
+jf @FINALEA_27884 
+Marker.Disable(130@)
+Actor.DestroyInstantly(92@)
+Actor.DestroyInstantly(93@)
+Actor.DestroyInstantly(71@)
+Actor.DestroyInstantly(72@)
+Actor.DestroyInstantly(73@)
+Actor.DestroyInstantly(74@)
+Actor.DestroyInstantly(75@)
+Actor.DestroyInstantly(76@)
+Actor.DestroyInstantly(77@)
+Actor.DestroyInstantly(78@)
+Actor.DestroyInstantly(79@)
+Actor.DestroyInstantly(80@)
+Actor.DestroyInstantly(81@)
+Actor.DestroyInstantly(82@)
+Actor.DestroyInstantly(83@)
+Actor.DestroyInstantly(84@)
+Actor.DestroyInstantly(85@)
+Actor.DestroyInstantly(86@)
+Actor.DestroyInstantly(87@)
+Actor.DestroyInstantly(88@)
+Actor.DestroyInstantly(89@)
+Actor.DestroyInstantly(90@)
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:FINALEA_27112
+if 
+fading 
+jf @FINALEA_27136 
+wait 0 
+jump @FINALEA_27112 
+
+:FINALEA_27136
+select_interior 2 
+02E4: load_cutscene_data 'RIOT_4C' 
+
+:FINALEA_27151
+if 
+86B9:   not cutscene_data_loaded 
+jf @FINALEA_27175 
+wait 0 
+jump @FINALEA_27151 
+
+:FINALEA_27175
+02E7: start_cutscene 
+fade 1 1000 
+
+:FINALEA_27184
+if 
+82E9:   not cutscene_reached_end 
+jf @FINALEA_27208 
+wait 0 
+jump @FINALEA_27184 
+
+:FINALEA_27208
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:FINALEA_27223
+if 
+fading 
+jf @FINALEA_27247 
+wait 0 
+jump @FINALEA_27223 
+
+:FINALEA_27247
+0296: unload_special_actor 3 
+0296: unload_special_actor 4 
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#BFYRI)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#MAFFA)
+Model.Destroy(#SBFYSTR)
+Model.Load(#LSV2)
+Model.Load(#BALLAS1)
+Model.Load(#SFR1)
+Model.Load(#AK47)
+Model.Load(#IRGOGGLES)
+023C: load_special_actor 'SMOKEV' as 2 // models 290-299 
+038B: load_requested_models 
+
+:FINALEA_27315
+if 
+823D:   not special_actor 2 loaded 
+jf @FINALEA_27341 
+wait 0 
+jump @FINALEA_27315 
+
+:FINALEA_27341
+if or
+   not Model.Available(#LSV2)
+   not Model.Available(#BALLAS1)
+   not Model.Available(#SFR1)
+   not Model.Available(#AK47)
+   not Model.Available(#IRGOGGLES)
+jf @FINALEA_27386 
+wait 0 
+jump @FINALEA_27341 
+
+:FINALEA_27386
+$ACTOR_SMOKE = Actor.Create(Special, #SPECIAL02, 2549.918, -1284.457, 1060.016)
+Actor.Angle($ACTOR_SMOKE) = 250.566
+060B: set_actor $ACTOR_SMOKE decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo($ACTOR_SMOKE, AK47, 999999)
+Actor.WeaponAccuracy($ACTOR_SMOKE) = 70
+093B: set_actor $ACTOR_SMOKE upper_body_damage_anims_only 1 
+Actor.Health($ACTOR_SMOKE) = 10000
+Actor.SetMaxHealth($ACTOR_SMOKE, 2000)
+0446: set_actor $ACTOR_SMOKE dismemberment_possible 0 
+02A9: set_actor $ACTOR_SMOKE immune_to_nonplayer 1 
+131@ = Marker.CreateAboveActor($ACTOR_SMOKE)
+08AD: link_actor $ACTOR_SMOKE to_enex_marker_at 2540.83 -1304.05 radius 1.0 
+0648: unknown_actor $ACTOR_SMOKE task_set 2.0 // float 
+0860: link_actor $ACTOR_SMOKE to_interior 2 
+03C4: set_status_text $8000 type 1 GXT 'RM4_39' // global_variable  // Smoke's Health
+0946: set_actor $ACTOR_SMOKE actions_uninterupted_by_weapon_fire 1 
+Actor.PutAt($PLAYER_ACTOR, 2564.447, -1292.822, 1060.016)
+Actor.Angle($PLAYER_ACTOR) = 58.5
+Pickup.Destroy(133@)
+Pickup.Destroy(134@)
+Pickup.Destroy(135@)
+Pickup.Destroy(136@)
+Pickup.Destroy(137@)
+Pickup.Destroy(138@)
+Pickup.Destroy(139@)
+137@ = Pickup.Create(#HEALTH, 3, 2582.848, -1282.741, 1065.391)
+138@ = Pickup.Create(#HEALTH, 3, 2578.784, -1282.572, 1065.4)
+032B: 142@ = create_weapon_pickup #IRGOGGLES type 3 ammo 1 at 2575.03 -1281.598 1061.02 
+133@ = Pickup.Create(#BODYARMOUR, 3, 2549.429, -1291.612, 1061.024)
+032B: 140@ = create_weapon_pickup #M4 type 2 ammo 60 at 2549.632 -1294.612 1061.024 
+032B: 141@ = create_weapon_pickup #CHROMEGUN type 2 ammo 60 at 2552.09 -1294.106 1061.024 
+Camera.SetAtPos(2552.31, -1286.25, 1061.04)
+00C0: set_current_time_hours_to 22 minutes_to 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+fade 1 500 
+
+:FINALEA_27807
+if 
+fading 
+jf @FINALEA_27831 
+wait 0 
+jump @FINALEA_27807 
+
+:FINALEA_27831
+Player.CanMove($PLAYER_CHAR) = True
+193@ = 0 
+194@ = 0 
+195@ = 1 
+03E5: show_text_box 'RM4_28'  // Smoke is wearing a bulletproof vest. To maximize the damage you inflict on him aim at other parts of his body.
+158@ = 10 
+147@ = 5 
+
+:FINALEA_27884
+if 
+  147@ == 5 
+jf @FINALEA_31754 
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @FINALEA_31521 
+if 
+  188@ == 0 
+jf @FINALEA_28238 
+05E2: AS_actor $ACTOR_SMOKE kill_actor $PLAYER_ACTOR 
+145@ = 0 
+75@ = Actor.Create(Mission1, #SFR1, 2554.729, -1281.952, 1060.024)
+Actor.Angle(75@) = 180.771
+060B: set_actor 75@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(75@, MicroUzi, 99999)
+081A: set_actor 75@ weapon_skill_to 2 
+04EB: AS_actor 75@ crouch -1 
+Actor.Health(75@) = 200
+Actor.SetMaxHealth(75@, 200)
+0085: 109@ = 75@ // (int) 
+111@ = 2554.46 
+112@ = -1284.412 
+113@ = 1061.024 
+gosub @FINALEA_31912 
+163@ = 1 
+74@ = Actor.Create(Mission1, #BALLAS1, 2551.236, -1292.18, 1060.02)
+Actor.Angle(74@) = 6.0
+060B: set_actor 74@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(74@, MicroUzi, 99999)
+081A: set_actor 74@ weapon_skill_to 2 
+Actor.Health(74@) = 200
+Actor.SetMaxHealth(74@, 200)
+0085: 109@ = 74@ // (int) 
+111@ = 2551.259 
+112@ = -1288.081 
+113@ = 1061.02 
+gosub @FINALEA_31912 
+162@ = 1 
+32@ = 0 
+33@ = 0 
+188@ = 1 
+
+:FINALEA_28238
+if 
+  188@ == 1 
+jf @FINALEA_28765 
+if 
+  33@ > 6000 
+jf @FINALEA_28765 
+if 
+  159@ == 0 
+jf @FINALEA_28425 
+if 
+80C2:   not sphere_onscreen 2551.2 -1291.727 1060.02 radius 5.0 
+jf @FINALEA_28425 
+71@ = Actor.Create(Mission1, #BALLAS1, 2551.2, -1291.727, 1060.02)
+Actor.Angle(71@) = 0.0
+060B: set_actor 71@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(71@, MicroUzi, 99999)
+081A: set_actor 71@ weapon_skill_to 2 
+05E2: AS_actor 71@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(71@) = 30
+Actor.Health(71@) = 200
+Actor.SetMaxHealth(71@, 200)
+159@ = 1 
+
+:FINALEA_28425
+if 
+  160@ == 0 
+jf @FINALEA_28568 
+if 
+80C2:   not sphere_onscreen 2579.04 -1284.275 1064.4 radius 5.0 
+jf @FINALEA_28568 
+72@ = Actor.Create(Mission1, #LSV2, 2579.04, -1284.275, 1064.4)
+Actor.Angle(72@) = 0.0
+060B: set_actor 72@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(72@, MicroUzi, 99999)
+081A: set_actor 72@ weapon_skill_to 2 
+05E2: AS_actor 72@ kill_actor $PLAYER_ACTOR 
+Actor.Health(72@) = 150
+Actor.SetMaxHealth(72@, 150)
+160@ = 1 
+
+:FINALEA_28568
+if 
+  161@ == 0 
+jf @FINALEA_28719 
+if 
+80C2:   not sphere_onscreen 2576.94 -1300.388 1060.016 radius 1.0 
+jf @FINALEA_28719 
+73@ = Actor.Create(Mission1, #SFR1, 2576.94, -1300.388, 1060.016)
+Actor.Angle(73@) = 0.0
+060B: set_actor 73@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(73@, MicroUzi, 99999)
+081A: set_actor 73@ weapon_skill_to 2 
+05E2: AS_actor 73@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(73@) = 30
+Actor.Health(73@) = 200
+Actor.SetMaxHealth(73@, 200)
+161@ = 1 
+
+:FINALEA_28719
+if or
+  159@ == 1 
+  160@ == 1 
+  161@ == 1 
+jf @FINALEA_28765 
+33@ = 0 
+188@ = 2 
+
+:FINALEA_28765
+if 
+  188@ == 2 
+jf @FINALEA_29034 
+if 
+  159@ == 1 
+jf @FINALEA_28836 
+if 
+   Actor.Dead(71@)
+jf @FINALEA_28836 
+Actor.RemoveReferences(71@)
+188@ = 1 
+159@ = 0 
+
+:FINALEA_28836
+if 
+  160@ == 1 
+jf @FINALEA_28889 
+if 
+   Actor.Dead(72@)
+jf @FINALEA_28889 
+Actor.RemoveReferences(72@)
+188@ = 1 
+160@ = 0 
+
+:FINALEA_28889
+if 
+  161@ == 1 
+jf @FINALEA_28942 
+if 
+   Actor.Dead(73@)
+jf @FINALEA_28942 
+Actor.RemoveReferences(73@)
+188@ = 1 
+161@ = 0 
+
+:FINALEA_28942
+if 
+  162@ == 1 
+jf @FINALEA_28988 
+if 
+   Actor.Dead(74@)
+jf @FINALEA_28988 
+Actor.RemoveReferences(74@)
+162@ = 0 
+
+:FINALEA_28988
+if 
+  163@ == 1 
+jf @FINALEA_29034 
+if 
+   Actor.Dead(75@)
+jf @FINALEA_29034 
+Actor.RemoveReferences(75@)
+163@ = 0 
+
+:FINALEA_29034
+if 
+  145@ == 0 
+jf @FINALEA_29088 
+062E: get_actor $ACTOR_SMOKE task 1506 status_store_to 144@ // ret 7 if not found 
+if 
+04A4:   144@ == 7 // == constant 
+jf @FINALEA_29088 
+145@ = 1 
+
+:FINALEA_29088
+if 
+  189@ == 0 
+jf @FINALEA_29165 
+if 
+  190@ == 0 
+jf @FINALEA_29165 
+if 
+  32@ > 1000 
+jf @FINALEA_29165 
+32@ = 10000 
+190@ = 1 
+189@ = 1 
+
+:FINALEA_29165
+if 
+  189@ == 1 
+jf @FINALEA_29372 
+if 
+  190@ == 1 
+jf @FINALEA_29372 
+if 
+  32@ > 5999 
+jf @FINALEA_29321 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2564.242 -1282.221 1064.41 radius 3.5 3.5 3.0 
+jf @FINALEA_29307 
+05F5: AS_actor $ACTOR_SMOKE goto_point_using_paths 2564.242 -1282.221 1064.41 mode 6 time 20000 
+190@ = 2 
+jump @FINALEA_29314 
+
+:FINALEA_29307
+189@ = 3 
+
+:FINALEA_29314
+jump @FINALEA_29372 
+
+:FINALEA_29321
+if 
+0104:   actor $ACTOR_SMOKE near_actor $PLAYER_ACTOR radius 3.0 3.0 1.5 sphere 0 
+jf @FINALEA_29372 
+189@ = 2 
+32@ = 10000 
+
+:FINALEA_29372
+if 
+  189@ == 1 
+jf @FINALEA_29492 
+if 
+00FE:   actor $ACTOR_SMOKE sphere 0 in_sphere 2564.242 -1282.221 1064.41 radius 3.5 3.5 3.0 
+jf @FINALEA_29492 
+if 
+  145@ == 1 
+jf @FINALEA_29471 
+05E2: AS_actor $ACTOR_SMOKE kill_actor $PLAYER_ACTOR 
+145@ = 0 
+
+:FINALEA_29471
+32@ = 0 
+190@ = 1 
+189@ = 2 
+
+:FINALEA_29492
+if 
+  189@ == 2 
+jf @FINALEA_29699 
+if 
+  190@ == 1 
+jf @FINALEA_29699 
+if 
+  32@ > 4999 
+jf @FINALEA_29648 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2575.35 -1295.873 1061.85 radius 5.5 5.5 3.5 
+jf @FINALEA_29634 
+05F5: AS_actor $ACTOR_SMOKE goto_point_using_paths 2575.35 -1295.873 1061.85 mode 6 time 20000 
+190@ = 2 
+jump @FINALEA_29641 
+
+:FINALEA_29634
+189@ = 4 
+
+:FINALEA_29641
+jump @FINALEA_29699 
+
+:FINALEA_29648
+if 
+0104:   actor $ACTOR_SMOKE near_actor $PLAYER_ACTOR radius 3.0 3.0 1.5 sphere 0 
+jf @FINALEA_29699 
+189@ = 4 
+32@ = 10000 
+
+:FINALEA_29699
+if 
+  189@ == 2 
+jf @FINALEA_29819 
+if 
+00FE:   actor $ACTOR_SMOKE sphere 0 in_sphere 2575.35 -1295.873 1061.85 radius 3.5 3.5 3.0 
+jf @FINALEA_29819 
+if 
+  145@ == 1 
+jf @FINALEA_29798 
+05E2: AS_actor $ACTOR_SMOKE kill_actor $PLAYER_ACTOR 
+145@ = 0 
+
+:FINALEA_29798
+32@ = 0 
+190@ = 1 
+189@ = 3 
+
+:FINALEA_29819
+if 
+  189@ == 3 
+jf @FINALEA_30028 
+if 
+  190@ == 1 
+jf @FINALEA_30028 
+if 
+  32@ > 4999 
+jf @FINALEA_29977 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2558.181 -1303.748 1061.024 radius 6.0 6.0 3.5 
+jf @FINALEA_29963 
+05F5: AS_actor $ACTOR_SMOKE goto_point_using_paths 2558.181 -1303.748 1061.024 mode 6 time 200000 
+190@ = 2 
+jump @FINALEA_29970 
+
+:FINALEA_29963
+189@ = 1 
+
+:FINALEA_29970
+jump @FINALEA_30028 
+
+:FINALEA_29977
+if 
+0104:   actor $ACTOR_SMOKE near_actor $PLAYER_ACTOR radius 3.0 3.0 1.5 sphere 0 
+jf @FINALEA_30028 
+189@ = 1 
+32@ = 10000 
+
+:FINALEA_30028
+if 
+  189@ == 3 
+jf @FINALEA_30148 
+if 
+00FE:   actor $ACTOR_SMOKE sphere 0 in_sphere 2558.181 -1303.748 1061.024 radius 3.5 3.5 3.0 
+jf @FINALEA_30148 
+if 
+  145@ == 1 
+jf @FINALEA_30127 
+05E2: AS_actor $ACTOR_SMOKE kill_actor $PLAYER_ACTOR 
+145@ = 0 
+
+:FINALEA_30127
+32@ = 0 
+190@ = 1 
+189@ = 4 
+
+:FINALEA_30148
+if 
+  189@ == 4 
+jf @FINALEA_30355 
+if 
+  190@ == 1 
+jf @FINALEA_30355 
+if 
+  32@ > 5999 
+jf @FINALEA_30304 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2553.233 -1282.609 1061.024 radius 4.0 4.0 3.5 
+jf @FINALEA_30290 
+05F5: AS_actor $ACTOR_SMOKE goto_point_using_paths 2553.233 -1282.609 1061.024 mode 6 time 20000 
+190@ = 2 
+jump @FINALEA_30297 
+
+:FINALEA_30290
+189@ = 2 
+
+:FINALEA_30297
+jump @FINALEA_30355 
+
+:FINALEA_30304
+if 
+0104:   actor $ACTOR_SMOKE near_actor $PLAYER_ACTOR radius 3.0 3.0 1.5 sphere 0 
+jf @FINALEA_30355 
+189@ = 2 
+32@ = 10000 
+
+:FINALEA_30355
+if 
+  189@ == 4 
+jf @FINALEA_30475 
+if 
+00FE:   actor $ACTOR_SMOKE sphere 0 in_sphere 2553.233 -1282.609 1061.024 radius 4.0 4.0 3.0 
+jf @FINALEA_30475 
+if 
+  145@ == 1 
+jf @FINALEA_30454 
+05E2: AS_actor $ACTOR_SMOKE kill_actor $PLAYER_ACTOR 
+145@ = 0 
+
+:FINALEA_30454
+32@ = 0 
+190@ = 1 
+189@ = 1 
+
+:FINALEA_30475
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @FINALEA_30596 
+$8000 = Actor.Health($ACTOR_SMOKE)
+$8000 -= 8000 
+$8000 /= 20 
+if 
+  0 >= $8000 
+jf @FINALEA_30539 
+$8000 = 0 
+
+:FINALEA_30539
+if 
+  191@ == 0 
+jf @FINALEA_30596 
+if 
+  80 > $8000 
+jf @FINALEA_30596 
+196@ = 1 
+0924: enable_screen_darkness 1 with_value 200 
+191@ = 1 
+
+:FINALEA_30596
+if 
+   not Actor.Dead($ACTOR_SMOKE)
+jf @FINALEA_30884 
+94@ = Actor.Health($ACTOR_SMOKE)
+if 
+  8000 >= 94@ 
+jf @FINALEA_30884 
+$8000 = 0 
+05BE: AS_actor $ACTOR_SMOKE die 
+0924: enable_screen_darkness 0 with_value -1 
+08B2: enable_thermal_vision 0 
+0151: remove_status_text $8000 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0395: clear_area 1 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 100.0 radius 100.0 
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_30728 
+05BE: AS_actor 71@ die 
+
+:FINALEA_30728
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_30749 
+05BE: AS_actor 72@ die 
+
+:FINALEA_30749
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_30770 
+05BE: AS_actor 73@ die 
+
+:FINALEA_30770
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_30791 
+05BE: AS_actor 74@ die 
+
+:FINALEA_30791
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_30812 
+05BE: AS_actor 75@ die 
+
+:FINALEA_30812
+32@ = 0 
+33@ = 0 
+040D: unload_wav 1 
+00BE: text_clear_all 
+195@ = 2 
+fade 0 2500 
+
+:FINALEA_30846
+if 
+fading 
+jf @FINALEA_30870 
+wait 0 
+jump @FINALEA_30846 
+
+:FINALEA_30870
+jump @FINALEA_32966 
+32@ = 0 
+
+:FINALEA_30884
+if 
+  191@ == 1 
+jf @FINALEA_31069 
+if 
+  192@ == 0 
+jf @FINALEA_31012 
+if 
+   Pickup.Picked_up(142@)
+jf @FINALEA_30961 
+03E5: show_text_box 'RM4_36'  // ~s~Use the thermal vision to spot ~r~Smoke ~s~and his goons more easily.
+192@ = 3 
+jump @FINALEA_31012 
+
+:FINALEA_30961
+03DC: 132@ = create_marker_above_pickup 142@ 
+08DC: create_interior_marker 132@ at 2540.83 -1304.05 radius 1.0 
+00BC: show_text_highpriority GXT 'RM4_31' time 7000 flag 1  // ~s~Smoke has switched the lights off go get the ~g~thermal goggles ~s~by the lower window.
+192@ = 1 
+
+:FINALEA_31012
+if 
+  192@ == 1 
+jf @FINALEA_31069 
+if 
+   Pickup.Picked_up(142@)
+jf @FINALEA_31069 
+Marker.Disable(132@)
+03E5: show_text_box 'RM4_36'  // ~s~Use the thermal vision to spot ~r~Smoke ~s~and his goons more easily.
+192@ = 2 
+
+:FINALEA_31069
+if 
+  195@ == 1 
+jf @FINALEA_31514 
+gosub @FINALEA_31803 
+if 
+  193@ == 0 
+jf @FINALEA_31161 
+if 
+  194@ == 0 
+jf @FINALEA_31161 
+04AF: 125@ = 33298 // = constant 
+05AA: 126@s = 'ROT4_UA' // @s = 'short'  // ~z~You wearing body armor, Smoke?
+gosub @FINALEA_31761 
+
+:FINALEA_31161
+if 
+  193@ == 1 
+jf @FINALEA_31228 
+if 
+  194@ == 0 
+jf @FINALEA_31228 
+04AF: 125@ = 33299 // = constant 
+05AA: 126@s = 'ROT4_UB' // @s = 'short'  // ~z~Man, I'm disappointed in you - I thought you was gangsta!
+gosub @FINALEA_31761 
+
+:FINALEA_31228
+if 
+  193@ == 2 
+jf @FINALEA_31295 
+if 
+  194@ == 0 
+jf @FINALEA_31295 
+04AF: 125@ = 33300 // = constant 
+05AA: 126@s = 'ROT4_UC' // @s = 'short'  // ~z~Hey, I'm a motherfucking celebrity.
+gosub @FINALEA_31761 
+
+:FINALEA_31295
+if 
+  193@ == 3 
+jf @FINALEA_31362 
+if 
+  194@ == 0 
+jf @FINALEA_31362 
+04AF: 125@ = 33301 // = constant 
+05AA: 126@s = 'ROT4_UD' // @s = 'short'  // ~z~All kinds of crazy cats out there want a piece of me!
+gosub @FINALEA_31761 
+
+:FINALEA_31362
+if 
+  193@ == 4 
+jf @FINALEA_31429 
+if 
+  194@ == 0 
+jf @FINALEA_31429 
+04AF: 125@ = 33303 // = constant 
+05AA: 126@s = 'ROT4_ZB' // @s = 'short'  // ~z~Somebody save the Smoke!
+gosub @FINALEA_31761 
+
+:FINALEA_31429
+if 
+  196@ == 1 
+jf @FINALEA_31514 
+if 
+  193@ == 5 
+jf @FINALEA_31514 
+if 
+  194@ == 0 
+jf @FINALEA_31514 
+04AF: 125@ = 33302 // = constant 
+05AA: 126@s = 'RM4_31' // @s = 'short'  // ~s~Smoke has switched the lights off go get the ~g~thermal goggles ~s~by the lower window.
+gosub @FINALEA_31761 
+
+:FINALEA_31514
+jump @FINALEA_31754 
+
+:FINALEA_31521
+$8000 = 0 
+0924: enable_screen_darkness 0 with_value -1 
+08B2: enable_thermal_vision 0 
+0151: remove_status_text $8000 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0395: clear_area 1 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 100.0 radius 100.0 
+if 
+   not Actor.Dead(71@)
+jf @FINALEA_31605 
+05BE: AS_actor 71@ die 
+
+:FINALEA_31605
+if 
+   not Actor.Dead(72@)
+jf @FINALEA_31626 
+05BE: AS_actor 72@ die 
+
+:FINALEA_31626
+if 
+   not Actor.Dead(73@)
+jf @FINALEA_31647 
+05BE: AS_actor 73@ die 
+
+:FINALEA_31647
+if 
+   not Actor.Dead(74@)
+jf @FINALEA_31668 
+05BE: AS_actor 74@ die 
+
+:FINALEA_31668
+if 
+   not Actor.Dead(75@)
+jf @FINALEA_31689 
+05BE: AS_actor 75@ die 
+
+:FINALEA_31689
+32@ = 0 
+33@ = 0 
+040D: unload_wav 1 
+00BE: text_clear_all 
+195@ = 2 
+fade 0 2500 
+
+:FINALEA_31723
+if 
+fading 
+jf @FINALEA_31747 
+wait 0 
+jump @FINALEA_31723 
+
+:FINALEA_31747
+jump @FINALEA_32966 
+
+:FINALEA_31754
+jump @FINALEA_1540 
+
+:FINALEA_31761
+if 
+  194@ == 0 
+jf @FINALEA_31801 
+03CF: load_wav 125@ as 1 
+05AA: 123@s = 126@s // @s = 'short' 
+194@ = 1 
+
+:FINALEA_31801
+return 
+
+:FINALEA_31803
+if 
+  194@ == 1 
+jf @FINALEA_31857 
+if 
+03D0:   wav 1 loaded 
+jf @FINALEA_31857 
+00BC: show_text_highpriority GXT 123@s time 4000 flag 1 
+03D1: play_wav 1 
+194@ = 2 
+
+:FINALEA_31857
+if 
+  194@ == 2 
+jf @FINALEA_31910 
+if 
+03D2:   wav 1 ended 
+jf @FINALEA_31910 
+193@ += 1 
+040D: unload_wav 1 
+00BE: text_clear_all 
+194@ = 0 
+
+:FINALEA_31910
+return 
+
+:FINALEA_31912
+0615: define_AS_pack_begin 103@ 
+05D3: AS_actor -1 goto_point 111@ 112@ 113@ mode 6 time -1 ms // versionA 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 103@ 
+0618: assign_actor 109@ to_AS_pack 103@ 
+061B: remove_references_to_AS_pack 103@ 
+return 
+
+:FINALEA_31961
+0615: define_AS_pack_begin 104@ 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 104@ 
+0618: assign_actor 109@ to_AS_pack 104@ 
+061B: remove_references_to_AS_pack 104@ 
+return 
+
+:FINALEA_32005
+0615: define_AS_pack_begin 105@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 105@ 
+0618: assign_actor 109@ to_AS_pack 105@ 
+061B: remove_references_to_AS_pack 105@ 
+return 
+
+:FINALEA_32043
+0615: define_AS_pack_begin 116@ 
+05D3: AS_actor -1 goto_point 111@ 112@ 113@ mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 118@ 119@ 120@ mode 6 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 116@ 
+0618: assign_actor 109@ to_AS_pack 116@ 
+061B: remove_references_to_AS_pack 116@ 
+return 
+0615: define_AS_pack_begin 106@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 106@ 
+0618: assign_actor 109@ to_AS_pack 106@ 
+061B: remove_references_to_AS_pack 106@ 
+return 
+
+:FINALEA_32198
+0615: define_AS_pack_begin 107@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_L" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 107@ 
+0618: assign_actor 109@ to_AS_pack 107@ 
+061B: remove_references_to_AS_pack 107@ 
+return 
+
+:FINALEA_32281
+0615: define_AS_pack_begin 108@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 117@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 111@ 112@ 113@ angle 121@ radius -1.0 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 108@ loop 1 
+0616: define_AS_pack_end 108@ 
+0618: assign_actor 109@ to_AS_pack 108@ 
+061B: remove_references_to_AS_pack 108@ 
+return 
+
+:FINALEA_32522
+0615: define_AS_pack_begin 110@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 117@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 111@ 112@ 113@ angle 121@ radius -1.0 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 110@ loop 1 
+0616: define_AS_pack_end 110@ 
+0618: assign_actor 109@ to_AS_pack 110@ 
+061B: remove_references_to_AS_pack 110@ 
+return 
+
+:FINALEA_32763
+0615: define_AS_pack_begin 122@ 
+05D3: AS_actor -1 goto_point 111@ 112@ 113@ mode 7 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05C5: AS_actor -1 cower -1 ms 
+0616: define_AS_pack_end 122@ 
+0618: assign_actor 109@ to_AS_pack 122@ 
+061B: remove_references_to_AS_pack 122@ 
+return 
+
+:FINALEA_32817
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @FINALEA_32885 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:FINALEA_32885
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+0778: recreate_objects_in_object_group "CARTER" 
+Object.Destroy($2721)
+$2721 = Object.Init(#IMY_SHASH_WALL, 2522.008, -1272.93, 35.609)
+Object.RemoveFromMissionCleanupList($2721)
+071F: set_object $2721 health_to 100 
+Object.Indestructibility($2721) = False
+Object.KeepInMemory($2721) = True
+return 
+
+:FINALEA_32966
+201@ = 1 
+$RIOT_TOTAL_PASSED_MISSIONS += 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0776: create_objects_in_object_group "CARTER" 
+return 
+
+:FINALEA_32997
+04C1: remove_references_to_roadblocks 
+08E7: disable_entrance_markers 0 
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_33026 
+09B0: set_car $SWEET_CAR accessible_for_player_using_controller 1 
+
+:FINALEA_33026
+Marker.Disable(128@)
+Marker.Disable(129@)
+Marker.Disable(130@)
+Marker.Disable(131@)
+Marker.Disable(132@)
+Pickup.Destroy(133@)
+Pickup.Destroy(134@)
+Pickup.Destroy(135@)
+Pickup.Destroy(136@)
+Pickup.Destroy(137@)
+Pickup.Destroy(138@)
+Pickup.Destroy(139@)
+Pickup.Destroy(140@)
+Pickup.Destroy(141@)
+Pickup.Destroy(142@)
+Pickup.Destroy(143@)
+0151: remove_status_text $8000 
+0650: destroy_particle 102@ 
+Object.Destroy(96@)
+Object.Destroy(97@)
+Object.Destroy(98@)
+Object.Destroy(99@)
+Object.Destroy(100@)
+Object.Destroy(101@)
+Model.Destroy(#SWATVAN)
+Model.Destroy(#COPCARLA)
+Model.Destroy(#BALLAS1)
+Model.Destroy(#GREENWOO)
+0296: unload_special_actor 1 
+Model.Destroy(#BMX)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#AK47)
+Model.Destroy(#BFYPRO)
+04EF: release_animation "CRACK" 
+Model.Destroy(#BALLAS2)
+Model.Destroy(#LSV1)
+Model.Destroy(#SWAT)
+04EF: release_animation "SWAT" 
+Model.Destroy(#IMCOMPMOVEDR1_LAS)
+0873: release_path 287 
+Model.Destroy(#BMYCG)
+Model.Destroy(#HMYCM)
+Model.Destroy(#SFR1)
+Model.Destroy(#M4)
+Model.Destroy(#COLT45)
+Model.Destroy(#BARREL4)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#MAFFA)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#BFYRI)
+04EF: release_animation "STRIP" 
+Model.Destroy(#SBFYSTR)
+Model.Destroy(#LSV2)
+Model.Destroy(#IRGOGGLES)
+0296: unload_special_actor 2 
+06D0: enable_emergency_traffic 1 
+03C7: set_sensitivity_to_crime 1.0 
+01F0: set_max_wanted_level_to 6 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2356.4 -1233.16 30.6 cornerB 2382.19 -1329.65 21.49 
+022A: remove_forbidden_for_peds_cube_cornerA 2356.4 -1233.16 30.6 cornerB 2382.19 -1329.65 21.49 
+01E7: remove_forbidden_for_cars_cube_cornerA 2522.74 -1260.01 30.28 cornerB 2499.0 -1322.01 31.76 
+022A: remove_forbidden_for_peds_cube_cornerA 2522.74 -1260.01 30.28 cornerB 2499.0 -1322.01 31.76 
+01E7: remove_forbidden_for_cars_cube_cornerA 2431.9 -1268.06 30.6 cornerB 2474.9 -1240.38 20.84 
+022A: remove_forbidden_for_peds_cube_cornerA 2431.9 -1268.06 30.6 cornerB 2474.9 -1240.38 20.84 
+031A: remove_all_fires 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @FINALEA_33558 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+
+:FINALEA_33558
+if 
+   not Car.Wrecked(57@)
+jf @FINALEA_33596 
+Car.ImmuneToNonPlayer(57@) = False
+Car.SetImmunities(57@, 0, 0, 0, 0, 0)
+
+:FINALEA_33596
+if 
+   not Car.Wrecked($SWEET_CAR)
+jf @FINALEA_33627 
+Car.SetImmunities($SWEET_CAR, 0, 0, 0, 0, 0)
+
+:FINALEA_33627
+$ONMISSION = 0 
+mission_cleanup 
+if 
+  201@ == 1 
+jf @FINALEA_33660 
+fade 0 0 
+
+:FINALEA_33660
+return

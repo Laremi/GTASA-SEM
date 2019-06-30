@@ -1,0 +1,3769 @@
+:MAF4
+thread 'MAF4' 
+gosub @MAF4_54 
+if 
+wasted_or_busted 
+jf @MAF4_45 
+$11033 = 0 
+gosub @MAF4_30434 
+
+:MAF4_45
+gosub @MAF4_30786 
+end_thread 
+
+:MAF4_54
+wait 0 
+054C: use_GXT_table 'DSERT8' 
+set_weather 18 
+0652: 34@ = integer_stat 21 
+if 
+  34@ > 600 
+jf @MAF4_324 
+02E4: load_cutscene_data 'D8_ALT' 
+
+:MAF4_110
+if 
+86B9:   not cutscene_data_loaded 
+jf @MAF4_134 
+wait 0 
+jump @MAF4_110 
+
+:MAF4_134
+0395: clear_area 0 at 405.2136 2525.9 16.4918 radius 7.5 
+02E7: start_cutscene 
+fade 1 1000 
+
+:MAF4_167
+if 
+82E9:   not cutscene_reached_end 
+jf @MAF4_191 
+wait 0 
+jump @MAF4_167 
+
+:MAF4_191
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MAF4_204
+if 
+fading 
+jf @MAF4_228 
+wait 0 
+jump @MAF4_204 
+
+:MAF4_228
+02EA: end_cutscene 
+0395: clear_area 0 at 419.4488 2529.914 15.6219 radius 0.5 
+Camera.SetAtPos(419.4488, 2529.914, 15.6219)
+Actor.PutAt($PLAYER_ACTOR, 419.4488, 2529.914, 15.6219)
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Camera.SetBehindPlayer
+fade 1 1500 
+Player.CanMove($PLAYER_CHAR) = True
+jump @MAF4_30786 
+
+:MAF4_324
+increment_mission_attempts 
+0395: clear_area 0 at $X_OLD_AIRPORT $Y_OLD_AIRPORT $Z_OLD_AIRPORT radius 100.0 
+02E4: load_cutscene_data 'DESERT8' 
+
+:MAF4_355
+if 
+86B9:   not cutscene_data_loaded 
+jf @MAF4_379 
+wait 0 
+jump @MAF4_355 
+
+:MAF4_379
+02E7: start_cutscene 
+fade 1 1000 
+
+:MAF4_388
+if 
+82E9:   not cutscene_reached_end 
+jf @MAF4_412 
+wait 0 
+jump @MAF4_388 
+
+:MAF4_412
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MAF4_427
+if 
+fading 
+jf @MAF4_451 
+wait 0 
+jump @MAF4_427 
+
+:MAF4_451
+49@ = 108.51 
+56@ = 1917.268 
+63@ = 17.63 
+70@ = 135.323 
+77@ = 1917.776 
+84@ = 18.71 
+50@ = 180.018 
+57@ = 1904.214 
+64@ = 17.255 
+71@ = 243.707 
+78@ = 1903.543 
+85@ = 18.639 
+51@ = 239.0798 
+58@ = 1904.087 
+65@ = 16.899 
+72@ = 188.371 
+79@ = 1905.376 
+86@ = 16.825 
+52@ = 166.119 
+59@ = 1857.384 
+66@ = 16.764 
+73@ = 276.669 
+80@ = 1856.339 
+87@ = 16.671 
+53@ = 191.28 
+60@ = 1822.46 
+67@ = 16.83 
+74@ = 252.37 
+81@ = 1821.89 
+88@ = 17.04 
+54@ = 138.07 
+61@ = 1823.01 
+68@ = 16.88 
+75@ = 105.1 
+82@ = 1867.21 
+89@ = 16.97 
+55@ = 192.9 
+62@ = 1809.56 
+69@ = 16.8 
+76@ = 144.2 
+83@ = 1812.52 
+90@ = 16.78 
+163@ = 0 
+164@ = 0 
+165@ = 0 
+166@ = 0 
+
+:MAF4_899
+if 
+  7 > 165@ 
+jf @MAF4_942 
+167@(165@,7i) = 0 
+165@ += 1 
+jump @MAF4_899 
+
+:MAF4_942
+174@ = 0 
+175@ = 0 
+163@ = 0 
+164@ = 0 
+165@ = 0 
+166@ = 0 
+174@ = 0 
+175@ = 0 
+176@ = 0 
+177@ = 0 
+178@ = 0 
+179@ = 0 
+180@ = 0 
+181@ = 0 
+182@ = 0 
+183@ = 0 
+184@ = 0 
+185@ = 0 
+186@ = 0 
+187@ = 0 
+188@ = 0 
+189@ = 0 
+190@ = 0 
+191@ = 0 
+192@ = 0 
+193@ = 0 
+194@ = 0 
+195@ = 0 
+196@ = 0 
+197@ = 0 
+199@ = 0 
+200@ = 0 
+201@ = 0 
+202@ = 0 
+198@ = 0 
+203@ = 0 
+204@ = 0 
+03C7: set_sensitivity_to_crime 0.0 
+0169: set_fade_color_RGB 0 0 0 
+wait 500 
+Model.Load(#ARMY)
+Model.Load(#M4)
+Model.Load(#A51_SPOTBULB)
+Model.Load(#A51_SPOTHOUSING)
+Model.Load(#A51_SPOTBASE)
+Model.Load(#CAMPER)
+023C: load_special_actor 'TRUTH' as 1 // models 290-299 
+07C0: load_path 340 
+07C0: load_path 341 
+Model.Load(#KNIFECUR)
+Model.Load(#SILENCED)
+Model.Load(#SNIPER)
+Model.Load(#IRGOGGLES)
+03CF: load_wav 1809 as 3 
+03CF: load_wav 41418 as 2 
+03CF: load_wav 13642 as 1 
+038B: load_requested_models 
+
+:MAF4_1319
+if or
+   not Model.Available(#ARMY)
+   not Model.Available(#M4)
+   not Model.Available(#A51_SPOTBULB)
+   not Model.Available(#A51_SPOTHOUSING)
+   not Model.Available(#A51_SPOTBASE)
+   not Model.Available(#CAMPER)
+jf @MAF4_1371 
+wait 0 
+jump @MAF4_1319 
+
+:MAF4_1371
+if or
+823D:   not special_actor 1 loaded 
+87C1:   not path 340 available 
+87C1:   not path 341 available 
+   not Model.Available(#KNIFECUR)
+   not Model.Available(#SILENCED)
+   not Model.Available(#SNIPER)
+jf @MAF4_1422 
+wait 0 
+jump @MAF4_1371 
+
+:MAF4_1422
+if or
+83D0:   not wav 3 loaded 
+83D0:   not wav 2 loaded 
+   not Model.Available(#IRGOGGLES)
+83D0:   not wav 1 loaded 
+jf @MAF4_1461 
+wait 0 
+jump @MAF4_1422 
+
+:MAF4_1461
+0A24: enable_military_zones_wanted_level 1 
+0A0B: set_rendering_origin_at_3D_coord 49.8744 1900.289 17.7833 angle 99.0 
+060A: create_decision_maker_type 4 store_to 160@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 159@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 3 store_to 161@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 162@ // decision\allowed\m_.ped files 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+0746: set_acquaintance 0 of_actors_pedtype 26 to_actors_pedtype 24 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 26 
+107@ = Car.Create(#CAMPER, 22.4045, 1881.61, 16.6484)
+Car.Angle(107@) = 306.3276
+0229: set_car 107@ primary_color_to 1 secondary_color_to 1 
+06ED: set_car 107@ paintjob 0 
+106@ = Actor.CreateAsPassenger(Mission1, #SPECIAL01, 107@, 0)
+060B: set_actor 106@ decision_maker_to 159@ 
+036A: put_actor $PLAYER_ACTOR in_car 107@ 
+Camera.SetPosition(49.8744, 1900.289, 17.7833, 0.0, 0.0, 0.0)
+Camera.PointAt(48.9571, 1899.896, 17.8444, 2)
+Actor.PutAt($PLAYER_ACTOR, 36.09, 1921.04, 18.93)
+Actor.Angle($PLAYER_ACTOR) = 268.5112
+Camera.SetAtPos(106.9, -1923.21, 18.35)
+0395: clear_area 1 at 82.775 1917.325 17.733 radius 150.0 
+01EB: set_traffic_density_multiplier_to 0.1 
+03DE: set_pedestrians_density_multiplier_to 0.1 
+075B: zoom_radar 75 
+09D7: set_player $PLAYER_CHAR force_interior_lighting 1 
+00C0: set_current_time_hours_to 23 minutes_to 30 
+32@ = 0 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+0489: set_actor $PLAYER_ACTOR muted 1 
+fade 1 1000 
+146@ = Pickup.Create(#BODYARMOUR, 3, 108.48, 1919.29, 18.56)
+147@ = Pickup.Create(#HEALTH, 3, 228.91, 1858.65, 14.8)
+148@ = Pickup.Create(#BODYARMOUR, 3, 247.016, 1859.22, 14.08)
+149@ = Pickup.Create(#HEALTH, 3, 273.61, 1816.32, 1.02)
+150@ = Pickup.Create(#BODYARMOUR, 3, 255.36, 1802.007, 7.47)
+151@ = Pickup.Create(#BODYARMOUR, 3, 292.46, 1817.89, 1.015)
+09A6: enable_interior_radar_blips 1 
+Object.Destroy($OBJECT_M_A51_VENTCOVERB)
+0395: clear_area 0 at 22.4045 1881.61 400.0 radius 400.0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:MAF4_1996
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @MAF4_2022 
+jump @MAF4_30532 
+
+:MAF4_2022
+if 
+  5 > 164@ 
+jf @MAF4_13441 
+if 
+  164@ == 0 
+jf @MAF4_2116 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2116 
+if 
+   not Actor.Dead(106@)
+jf @MAF4_2116 
+05EB: assign_car 107@ to_path 340 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 106@ 10000 ms 
+164@ = 1 
+
+:MAF4_2116
+if 
+  164@ == 1 
+jf @MAF4_2217 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2217 
+if 
+   not Actor.Dead(106@)
+jf @MAF4_2217 
+if 
+860E:   not car 107@ assigned_to_path 
+jf @MAF4_2217 
+176@ = 0 
+177@ = 0 
+0707: start_scene_skip_to @MAF4_8236 
+32@ = 0 
+164@ = 2 
+
+:MAF4_2217
+if 
+  164@ == 2 
+jf @MAF4_2442 
+if 
+  32@ > 1000 
+jf @MAF4_2442 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2442 
+if 
+   not Actor.Dead(106@)
+jf @MAF4_2442 
+if 
+0448:   actor $PLAYER_ACTOR in_car 107@ 
+jf @MAF4_2442 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DES8_LA' time 3000 flag 1  // ~z~Hey, Truth, do we have a plan here?
+
+:MAF4_2325
+if 
+83D2:   not wav 1 ended 
+jf @MAF4_2351 
+wait 0 
+jump @MAF4_2325 
+
+:MAF4_2351
+03CF: load_wav 13643 as 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'DES8_LB' time 2500 flag 1  // ~z~Go, go, go!
+
+:MAF4_2378
+if 
+83D2:   not wav 2 ended 
+jf @MAF4_2404 
+wait 0 
+jump @MAF4_2378 
+
+:MAF4_2404
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2428 
+05CD: AS_actor $PLAYER_ACTOR exit_car 107@ 
+
+:MAF4_2428
+32@ = 0 
+164@ = 3 
+
+:MAF4_2442
+if 
+  164@ == 3 
+jf @MAF4_2684 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2684 
+if 
+   not Actor.Dead(106@)
+jf @MAF4_2684 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 107@)
+jf @MAF4_2684 
+if 
+03D2:   wav 2 ended 
+jf @MAF4_2684 
+if 
+03D0:   wav 1 loaded 
+jf @MAF4_2684 
+if 
+   Actor.InCar(106@, 107@)
+jf @MAF4_2568 
+0676: AS_actor 106@ in_car 107@ move_from_passengerseat_to_driverseat 
+
+:MAF4_2568
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2595 
+05C0: AS_actor $PLAYER_ACTOR look_at_car 107@ 5000 ms 
+
+:MAF4_2595
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DES8_LC' time 2000 flag 1  // ~z~HEY! Hold up, dude!
+
+:MAF4_2615
+if 
+83D2:   not wav 1 ended 
+jf @MAF4_2641 
+wait 0 
+jump @MAF4_2615 
+
+:MAF4_2641
+wait 350 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_2670 
+05EB: assign_car 107@ to_path 341 
+
+:MAF4_2670
+32@ = 0 
+164@ = 4 
+
+:MAF4_2684
+if 
+  164@ == 4 
+jf @MAF4_13441 
+if 
+  32@ > 4000 
+jf @MAF4_13441 
+06B1: 35@ = create_searchlight_at 161.513 1932.982 35.391 radius 0.5 target 49@ 56@ 63@ radius 12.5 
+42@ = Object.Init(#A51_SPOTBULB, 103.946, 1901.047, 36.246)
+92@ = Object.Init(#A51_SPOTHOUSING, 103.946, 1901.047, 36.246)
+93@ = Object.Init(#A51_SPOTBASE, 103.946, 1901.047, 36.246)
+06CA: attach_searchlight 35@ to_tower 93@ to_housing 92@ to_bulb 42@ with_offset 0.0 1.181 0.768 
+071F: set_object 42@ health_to 5000 
+0875: set_object 42@ immune_to_nonplayer 1 
+066D: 136@ = attach_particle "SHOOTLIGHT" to_object 42@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 36@ = create_searchlight_at 233.067 1934.892 33.139 radius 0.5 target 50@ 57@ 64@ radius 10.5 
+43@ = Object.Init(#A51_SPOTBULB, 161.962, 1933.043, 36.246)
+94@ = Object.Init(#A51_SPOTHOUSING, 161.962, 1933.043, 36.246)
+95@ = Object.Init(#A51_SPOTBASE, 161.962, 1933.043, 36.246)
+06CA: attach_searchlight 36@ to_tower 95@ to_housing 94@ to_bulb 43@ with_offset 0.0 1.181 0.768 
+071F: set_object 43@ health_to 5000 
+0875: set_object 43@ immune_to_nonplayer 1 
+066D: 137@ = attach_particle "SHOOTLIGHT" to_object 43@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 37@ = create_searchlight_at 266.713 1894.979 34.139 radius 0.5 target 51@ 58@ 65@ radius 10.5 
+44@ = Object.Init(#A51_SPOTBULB, 233.486, 1934.789, 36.246)
+96@ = Object.Init(#A51_SPOTHOUSING, 233.486, 1934.789, 36.246)
+97@ = Object.Init(#A51_SPOTBASE, 233.486, 1934.789, 36.246)
+06CA: attach_searchlight 37@ to_tower 97@ to_housing 96@ to_bulb 44@ with_offset 0.0 1.181 0.768 
+071F: set_object 44@ health_to 5000 
+0875: set_object 44@ immune_to_nonplayer 1 
+066D: 138@ = attach_particle "SHOOTLIGHT" to_object 44@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 38@ = create_searchlight_at 261.97 1808.07 34.05 radius 0.5 target 52@ 59@ 66@ radius 10.5 
+45@ = Object.Init(#A51_SPOTBULB, 267.116, 1895.241, 36.246)
+98@ = Object.Init(#A51_SPOTHOUSING, 267.116, 1895.241, 36.246)
+99@ = Object.Init(#A51_SPOTBASE, 267.116, 1895.241, 36.246)
+06CA: attach_searchlight 38@ to_tower 99@ to_housing 98@ to_bulb 45@ with_offset 0.0 1.181 0.768 
+071F: set_object 45@ health_to 5000 
+0875: set_object 45@ immune_to_nonplayer 1 
+066D: 139@ = attach_particle "SHOOTLIGHT" to_object 45@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 39@ = create_searchlight_at 164.228 1837.892 34.05 radius 0.5 target 53@ 60@ 67@ radius 10.5 
+46@ = Object.Init(#A51_SPOTBULB, 262.145, 1807.62, 36.246)
+100@ = Object.Init(#A51_SPOTHOUSING, 262.145, 1807.62, 36.246)
+101@ = Object.Init(#A51_SPOTBASE, 262.145, 1807.62, 36.246)
+06CA: attach_searchlight 39@ to_tower 101@ to_housing 100@ to_bulb 46@ with_offset 0.0 1.181 0.768 
+071F: set_object 46@ health_to 5000 
+0875: set_object 46@ immune_to_nonplayer 1 
+066D: 140@ = attach_particle "SHOOTLIGHT" to_object 46@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 40@ = create_searchlight_at 103.887 1901.057 35.723 radius 0.5 target 54@ 61@ 68@ radius 10.5 
+47@ = Object.Init(#A51_SPOTBULB, 166.003, 1849.937, 36.246)
+102@ = Object.Init(#A51_SPOTHOUSING, 166.003, 1849.937, 36.246)
+103@ = Object.Init(#A51_SPOTBASE, 166.003, 1849.937, 36.246)
+06CA: attach_searchlight 40@ to_tower 103@ to_housing 102@ to_bulb 47@ with_offset 0.0 1.181 0.768 
+071F: set_object 47@ health_to 5000 
+0875: set_object 47@ immune_to_nonplayer 1 
+066D: 141@ = attach_particle "SHOOTLIGHT" to_object 47@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 41@ = create_searchlight_at 261.97 1808.07 36.05 radius 0.5 target 55@ 62@ 69@ radius 10.5 
+48@ = Object.Init(#A51_SPOTBULB, 113.439, 1814.405, 36.246)
+104@ = Object.Init(#A51_SPOTHOUSING, 113.439, 1814.405, 36.246)
+105@ = Object.Init(#A51_SPOTBASE, 113.439, 1814.405, 36.246)
+06CA: attach_searchlight 41@ to_tower 105@ to_housing 104@ to_bulb 48@ with_offset 0.0 1.181 0.768 
+071F: set_object 48@ health_to 5000 
+0875: set_object 48@ immune_to_nonplayer 1 
+066D: 142@ = attach_particle "SHOOTLIGHT" to_object 48@ with_offset 0.0 1.181 0.768 type 1 
+gosub @MAF4_30201 
+178@ = 1 
+109@ = Actor.Create(Mission1, #ARMY, 112.39, 1931.193, 17.77)
+060B: set_actor 109@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(109@, M4, 9999)
+0648: unknown_actor 109@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 114.51 1914.793 18.8 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 112.39 1931.193 18.77 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 109@ to_animation_path_with_walk_mode 4 route_mode 3 
+205@ = Marker.CreateAboveActor(109@)
+07BF: set_marker 205@ tracking_blip 1 
+018B: set_marker 205@ radar_mode 2 
+074E: unknown_set_actor_threat_scanner_flags 109@ radius 20.0 peds_to_scan 1 
+110@ = Actor.Create(Mission1, #ARMY, 125.135, 1916.59, 17.9)
+060B: set_actor 110@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(110@, M4, 99999)
+0648: unknown_actor 110@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 124.716 1890.25 18.33 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 159.0 1887.9 19.5 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 161.32 1914.42 18.6 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 125.135 1916.59 18.9 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 110@ to_animation_path_with_walk_mode 4 route_mode 3 
+206@ = Marker.CreateAboveActor(110@)
+07BF: set_marker 206@ tracking_blip 1 
+018B: set_marker 206@ radar_mode 2 
+Actor.WeaponAccuracy(110@) = 85
+074E: unknown_set_actor_threat_scanner_flags 110@ radius 30.0 peds_to_scan 1 
+111@ = Actor.Create(Mission1, #ARMY, 131.37, 1821.139, 16.6)
+060B: set_actor 111@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(111@, M4, 99999)
+0648: unknown_actor 111@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 130.62 1855.297 17.73 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 102.09 1858.6 17.7 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 102.94 1839.78 17.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 131.37 1821.139 17.6 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 111@ to_animation_path_with_walk_mode 4 route_mode 3 
+207@ = Marker.CreateAboveActor(111@)
+07BF: set_marker 207@ tracking_blip 1 
+018B: set_marker 207@ radar_mode 2 
+Actor.WeaponAccuracy(111@) = 80
+074E: unknown_set_actor_threat_scanner_flags 111@ radius 30.0 peds_to_scan 1 
+112@ = Actor.Create(Mission1, #ARMY, 163.458, 1824.58, 17.64)
+Actor.Angle(112@) = 180.123
+060B: set_actor 112@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(112@, M4, 99999)
+0648: unknown_actor 112@ task_set 200.0 // float 
+208@ = Marker.CreateAboveActor(112@)
+07BF: set_marker 208@ tracking_blip 1 
+018B: set_marker 208@ radar_mode 2 
+Actor.WeaponAccuracy(112@) = 85
+074E: unknown_set_actor_threat_scanner_flags 112@ radius 30.0 peds_to_scan 1 
+113@ = Actor.Create(Mission1, #ARMY, 189.91, 1916.399, 16.64)
+060B: set_actor 113@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(113@, M4, 9999)
+0648: unknown_actor 113@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 168.0187 1916.279 18.37 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 189.91 1916.399 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 113@ to_animation_path_with_walk_mode 4 route_mode 3 
+209@ = Marker.CreateAboveActor(113@)
+07BF: set_marker 209@ tracking_blip 1 
+018B: set_marker 209@ radar_mode 2 
+Actor.WeaponAccuracy(113@) = 85
+074E: unknown_set_actor_threat_scanner_flags 113@ radius 30.0 peds_to_scan 1 
+114@ = Actor.Create(Mission1, #ARMY, 191.535, 1809.588, 16.641)
+060B: set_actor 114@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(114@, M4, 9999)
+0648: unknown_actor 114@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 131.24 1811.194 17.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 191.535 1809.588 17.641 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 114@ to_animation_path_with_walk_mode 4 route_mode 3 
+210@ = Marker.CreateAboveActor(114@)
+07BF: set_marker 210@ tracking_blip 1 
+018B: set_marker 210@ radar_mode 2 
+Actor.WeaponAccuracy(114@) = 85
+074E: unknown_set_actor_threat_scanner_flags 114@ radius 30.0 peds_to_scan 1 
+115@ = Actor.Create(Mission1, #ARMY, 195.36, 1872.92, 16.64)
+060B: set_actor 115@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(115@, M4, 9999)
+0648: unknown_actor 115@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 231.095 1872.9 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 195.36 1872.92 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 115@ to_animation_path_with_walk_mode 4 route_mode 3 
+211@ = Marker.CreateAboveActor(115@)
+07BF: set_marker 211@ tracking_blip 1 
+018B: set_marker 211@ radar_mode 2 
+Actor.WeaponAccuracy(115@) = 85
+074E: unknown_set_actor_threat_scanner_flags 115@ radius 20.0 peds_to_scan 1 
+116@ = Actor.Create(Mission1, #ARMY, 108.673, 1886.18, 17.04)
+060B: set_actor 116@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(116@, M4, 99999)
+0648: unknown_actor 116@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 107.065 1865.8 17.78 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 126.78 1864.25 17.8 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 127.842 1885.04 18.027 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 108.673 1886.18 18.04 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 116@ to_animation_path_with_walk_mode 4 route_mode 3 
+212@ = Marker.CreateAboveActor(116@)
+07BF: set_marker 212@ tracking_blip 1 
+018B: set_marker 212@ radar_mode 2 
+Actor.WeaponAccuracy(116@) = 85
+074E: unknown_set_actor_threat_scanner_flags 116@ radius 30.0 peds_to_scan 1 
+117@ = Actor.Create(Mission1, #ARMY, 173.671, 1886.841, 19.9)
+060B: set_actor 117@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(117@, M4, 9999)
+0648: unknown_actor 117@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 174.25 1866.51 20.7 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 173.671 1886.841 20.9 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 117@ to_animation_path_with_walk_mode 4 route_mode 3 
+213@ = Marker.CreateAboveActor(117@)
+07BF: set_marker 213@ tracking_blip 1 
+018B: set_marker 213@ radar_mode 2 
+Actor.WeaponAccuracy(117@) = 85
+074E: unknown_set_actor_threat_scanner_flags 117@ radius 30.0 peds_to_scan 1 
+118@ = Actor.Create(Mission1, #ARMY, 249.99, 1874.78, 19.6)
+060B: set_actor 118@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(118@, M4, 9999)
+0648: unknown_actor 118@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 250.99 1906.56 20.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 249.99 1874.78 20.6 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 118@ to_animation_path_with_walk_mode 4 route_mode 3 
+214@ = Marker.CreateAboveActor(118@)
+07BF: set_marker 214@ tracking_blip 1 
+018B: set_marker 214@ radar_mode 2 
+Actor.WeaponAccuracy(118@) = 85
+074E: unknown_set_actor_threat_scanner_flags 118@ radius 30.0 peds_to_scan 1 
+119@ = Actor.Create(Mission1, #ARMY, 224.26, 1916.79, 16.64)
+060B: set_actor 119@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(119@, M4, 99999)
+0648: unknown_actor 119@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 204.475 1915.9 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 204.628 1904.521 17.64 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 221.645 1905.13 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 224.26 1916.79 17.64 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 119@ to_animation_path_with_walk_mode 4 route_mode 3 
+215@ = Marker.CreateAboveActor(119@)
+07BF: set_marker 215@ tracking_blip 1 
+018B: set_marker 215@ radar_mode 2 
+Actor.WeaponAccuracy(119@) = 85
+074E: unknown_set_actor_threat_scanner_flags 119@ radius 30.0 peds_to_scan 1 
+120@ = Actor.Create(Mission1, #ARMY, 209.07, 1833.63, 16.64)
+Actor.Angle(120@) = 346.579
+060B: set_actor 120@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(120@, M4, 99999)
+0648: unknown_actor 120@ task_set 200.0 // float 
+216@ = Marker.CreateAboveActor(120@)
+07BF: set_marker 216@ tracking_blip 1 
+018B: set_marker 216@ radar_mode 2 
+Actor.WeaponAccuracy(120@) = 85
+074E: unknown_set_actor_threat_scanner_flags 120@ radius 30.0 peds_to_scan 1 
+121@ = Actor.Create(Mission1, #ARMY, 268.027, 1862.269, 17.64)
+060B: set_actor 121@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(121@, M4, 9999)
+0648: unknown_actor 121@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 266.9 1822.3 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 268.027 1862.269 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 121@ to_animation_path_with_walk_mode 4 route_mode 3 
+217@ = Marker.CreateAboveActor(121@)
+07BF: set_marker 217@ tracking_blip 1 
+018B: set_marker 217@ radar_mode 2 
+Actor.WeaponAccuracy(121@) = 85
+074E: unknown_set_actor_threat_scanner_flags 121@ radius 30.0 peds_to_scan 1 
+122@ = Actor.Create(Mission1, #ARMY, 221.16, 1858.28, 20.63)
+060B: set_actor 122@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(122@, M4, 9999)
+Actor.WeaponAccuracy(122@) = 90
+0648: unknown_actor 122@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 198.711 1857.64 19.633 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 221.16 1858.28 20.63 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 122@ to_animation_path_with_walk_mode 4 route_mode 3 
+218@ = Marker.CreateAboveActor(122@)
+07BF: set_marker 218@ tracking_blip 1 
+018B: set_marker 218@ radar_mode 2 
+Actor.WeaponAccuracy(122@) = 90
+074E: unknown_set_actor_threat_scanner_flags 122@ radius 30.0 peds_to_scan 1 
+123@ = Actor.Create(Mission1, #ARMY, 218.45, 1820.78, 16.64)
+060B: set_actor 123@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(123@, M4, 9999)
+Actor.WeaponAccuracy(123@) = 90
+0648: unknown_actor 123@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 250.31 1821.924 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 218.45 1820.78 17.64 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 123@ to_animation_path_with_walk_mode 4 route_mode 3 
+219@ = Marker.CreateAboveActor(123@)
+07BF: set_marker 219@ tracking_blip 1 
+018B: set_marker 219@ radar_mode 2 
+Actor.WeaponAccuracy(123@) = 80
+074E: unknown_set_actor_threat_scanner_flags 123@ radius 30.0 peds_to_scan 1 
+fade 0 100 
+
+:MAF4_6742
+if 
+fading 
+jf @MAF4_6766 
+wait 0 
+jump @MAF4_6742 
+
+:MAF4_6766
+Camera.SetPosition(312.659, 1806.521, 26.272, 0.0, 0.0, 0.0)
+Camera.PointAt(311.7959, 1807.022, 26.2183, 2)
+0A0B: set_rendering_origin_at_3D_coord 312.659 1806.521 26.272 angle 60.2 
+fade 1 100 
+00BC: show_text_highpriority GXT 'DST8_1' time 7000 flag 1  // ~s~The Truth wants you to gain entry to the Area 69 research lab and bring back to him the Black Project that is being developed inside.
+Actor.PutAt($PLAYER_ACTOR, 69.91, 1916.007, 16.648)
+Actor.Angle($PLAYER_ACTOR) = 273.363
+32@ = 0 
+
+:MAF4_6898
+if 
+  7000 > 32@ 
+jf @MAF4_6928 
+wait 0 
+jump @MAF4_6898 
+
+:MAF4_6928
+00BC: show_text_highpriority GXT 'DST8_18' time 8000 flag 1  // ~s~The easiest way into the Area 69 bunker complex is through the blast doors. To open these go to the ~y~control tower~s~.
+Camera.SetPosition(232.5476, 1911.022, 34.7955, 0.0, 0.0, 0.0)
+Camera.PointAt(231.9904, 1910.261, 34.4617, 2)
+32@ = 0 
+
+:MAF4_7002
+if 
+  4000 > 32@ 
+jf @MAF4_7032 
+wait 0 
+jump @MAF4_7002 
+
+:MAF4_7032
+Camera.SetPosition(183.9385, 1801.77, 29.0751, 0.0, 0.0, 0.0)
+Camera.PointAt(184.8011, 1802.215, 28.8356, 2)
+32@ = 0 
+
+:MAF4_7090
+if 
+  4000 > 32@ 
+jf @MAF4_7120 
+wait 0 
+jump @MAF4_7090 
+
+:MAF4_7120
+Camera.SetPosition(120.4534, 1943.522, 29.8174, 0.0, 0.0, 0.0)
+Camera.PointAt(120.5729, 1942.533, 29.7278, 2)
+00BC: show_text_highpriority GXT 'DST8_19' time 4000 flag 1  // ~s~There are searchlights sweeping the area. Observe their routine and plan your route around them.
+00BB: show_text_lowpriority GXT 'DST8_47' time 4000 flag 1  // ~s~If you stay in a searchlight for too long or shoot more than 2 out you will be spotted.
+00BB: show_text_lowpriority GXT 'DST8_48' time 4000 flag 1  // ~s~The blast doors will go on lockdown, and an alternative route inside will then have to be found.
+32@ = 0 
+
+:MAF4_7226
+if 
+  12000 > 32@ 
+jf @MAF4_7256 
+wait 0 
+jump @MAF4_7226 
+
+:MAF4_7256
+124@ = Actor.Create(Mission3, #ARMY, 103.9055, 1900.534, 24.4985)
+060B: set_actor 124@ decision_maker_to 159@ 
+Actor.Angle(124@) = 6.0802
+Actor.GiveWeaponAndAmmo(124@, M4, 9999)
+0638: AS_actor 124@ stay_put 1 
+Actor.Health(124@) = 10
+220@ = Marker.CreateAboveActor(124@)
+07BF: set_marker 220@ tracking_blip 1 
+018B: set_marker 220@ radar_mode 2 
+060B: set_actor 124@ decision_maker_to 162@ 
+125@ = Actor.Create(Mission3, #ARMY, 113.3839, 1814.261, 24.4985)
+060B: set_actor 125@ decision_maker_to 159@ 
+Actor.Angle(125@) = 5.0273
+Actor.GiveWeaponAndAmmo(125@, M4, 9999)
+0638: AS_actor 125@ stay_put 1 
+Actor.Health(125@) = 10
+221@ = Marker.CreateAboveActor(125@)
+07BF: set_marker 221@ tracking_blip 1 
+018B: set_marker 221@ radar_mode 2 
+060B: set_actor 125@ decision_maker_to 162@ 
+126@ = Actor.Create(Mission3, #ARMY, 165.6023, 1850.07, 24.4985)
+060B: set_actor 126@ decision_maker_to 159@ 
+Actor.Angle(126@) = 5.0273
+Actor.GiveWeaponAndAmmo(126@, M4, 9999)
+0638: AS_actor 126@ stay_put 1 
+Actor.Health(126@) = 10
+222@ = Marker.CreateAboveActor(126@)
+07BF: set_marker 222@ tracking_blip 1 
+018B: set_marker 222@ radar_mode 2 
+060B: set_actor 126@ decision_maker_to 162@ 
+127@ = Actor.Create(Mission3, #ARMY, 261.8728, 1807.938, 24.4985)
+060B: set_actor 127@ decision_maker_to 159@ 
+Actor.Angle(127@) = 5.0273
+Actor.GiveWeaponAndAmmo(127@, M4, 9999)
+0638: AS_actor 127@ stay_put 1 
+Actor.Health(127@) = 10
+223@ = Marker.CreateAboveActor(127@)
+07BF: set_marker 223@ tracking_blip 1 
+018B: set_marker 223@ radar_mode 2 
+060B: set_actor 127@ decision_maker_to 162@ 
+128@ = Actor.Create(Mission3, #ARMY, 267.1389, 1895.485, 24.4985)
+060B: set_actor 128@ decision_maker_to 159@ 
+Actor.Angle(128@) = 119.7683
+Actor.GiveWeaponAndAmmo(128@, M4, 9999)
+0638: AS_actor 128@ stay_put 1 
+Actor.Health(128@) = 10
+224@ = Marker.CreateAboveActor(128@)
+07BF: set_marker 224@ tracking_blip 1 
+018B: set_marker 224@ radar_mode 2 
+060B: set_actor 128@ decision_maker_to 162@ 
+129@ = Actor.Create(Mission3, #ARMY, 161.9575, 1933.342, 24.4985)
+060B: set_actor 129@ decision_maker_to 159@ 
+Actor.Angle(129@) = 119.7683
+Actor.GiveWeaponAndAmmo(129@, M4, 9999)
+0638: AS_actor 129@ stay_put 1 
+Actor.Health(129@) = 10
+225@ = Marker.CreateAboveActor(129@)
+07BF: set_marker 225@ tracking_blip 1 
+018B: set_marker 225@ radar_mode 2 
+060B: set_actor 129@ decision_maker_to 162@ 
+130@ = Actor.Create(Mission3, #ARMY, 233.6724, 1934.622, 24.4985)
+060B: set_actor 130@ decision_maker_to 159@ 
+Actor.Angle(130@) = 119.7683
+Actor.GiveWeaponAndAmmo(130@, M4, 9999)
+0638: AS_actor 130@ stay_put 1 
+Actor.Health(130@) = 10
+226@ = Marker.CreateAboveActor(130@)
+07BF: set_marker 226@ tracking_blip 1 
+018B: set_marker 226@ radar_mode 2 
+060B: set_actor 130@ decision_maker_to 162@ 
+Camera.SetPosition(113.0058, 1934.089, 18.245, 0.0, 0.0, 0.0)
+Camera.PointAt(113.0995, 1933.112, 18.4334, 2)
+00BC: show_text_highpriority GXT 'DST8_21' time 5000 flag 1  // ~s~There are also several military personnel patrolling the area. Use the thermal goggles that The Truth gave you to help you see them in the dark.
+32@ = 0 
+
+:MAF4_8009
+if 
+  5000 > 32@ 
+jf @MAF4_8039 
+wait 0 
+jump @MAF4_8009 
+
+:MAF4_8039
+Camera.SetPosition(112.0028, 1893.846, 19.5192, 0.0, 0.0, 0.0)
+Camera.PointAt(111.2033, 1894.447, 19.5192, 2)
+0925: restore_camera_to_user_defined 
+0930: lock_camera_position 1 
+0936: set_camera 112.0028 1893.846 19.5192 position_to 112.0028 1893.846 35.5192 time 6000 smooth_transition 1 
+00BC: show_text_highpriority GXT 'DST8_22' time 6500 flag 1  // You can use stealth to avoid patrols or climb to the top of a control tower and use your sniper rifle to take them out.
+32@ = 0 
+
+:MAF4_8156
+if 
+  6500 > 32@ 
+jf @MAF4_8186 
+wait 0 
+jump @MAF4_8156 
+
+:MAF4_8186
+177@ = 1 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Knife, 1)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Silenced, 70)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, ThermalGoggles, 1)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, SniperRifle, 35)
+176@ = 1 
+
+:MAF4_8236
+0701: end_scene_skip 
+if 
+  176@ == 0 
+jf @MAF4_13283 
+fade 0 250 
+00BE: text_clear_all 
+
+:MAF4_8265
+if 
+fading 
+jf @MAF4_8289 
+wait 0 
+jump @MAF4_8265 
+
+:MAF4_8289
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_8326 
+if 
+060E:   car 107@ assigned_to_path 
+jf @MAF4_8326 
+05EC: release_car 107@ from_path 
+
+:MAF4_8326
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MAF4_8372 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 69.91 1916.007 16.648 
+Actor.Angle($PLAYER_ACTOR) = 273.363
+
+:MAF4_8372
+Actor.PutAt($PLAYER_ACTOR, 69.91, 1916.007, 16.648)
+Actor.Angle($PLAYER_ACTOR) = 273.363
+Actor.DestroyInstantly(106@)
+Car.Destroy(107@)
+0296: unload_special_actor 1 
+Model.Destroy(#CAMPER)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BE: text_clear_all 
+if 
+  177@ == 0 
+jf @MAF4_8492 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Knife, 1)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Silenced, 70)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, ThermalGoggles, 1)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, SniperRifle, 35)
+
+:MAF4_8492
+if 
+  178@ == 0 
+jf @MAF4_9840 
+06B1: 35@ = create_searchlight_at 161.513 1932.982 35.391 radius 0.5 target 49@ 56@ 63@ radius 12.5 
+42@ = Object.Init(#A51_SPOTBULB, 103.946, 1901.047, 36.246)
+92@ = Object.Init(#A51_SPOTHOUSING, 103.946, 1901.047, 36.246)
+93@ = Object.Init(#A51_SPOTBASE, 103.946, 1901.047, 36.246)
+06CA: attach_searchlight 35@ to_tower 93@ to_housing 92@ to_bulb 42@ with_offset 0.0 1.181 0.768 
+071F: set_object 42@ health_to 5000 
+0875: set_object 42@ immune_to_nonplayer 1 
+066D: 136@ = attach_particle "SHOOTLIGHT" to_object 42@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 36@ = create_searchlight_at 233.067 1934.892 33.139 radius 0.5 target 50@ 57@ 64@ radius 10.5 
+43@ = Object.Init(#A51_SPOTBULB, 161.962, 1933.043, 36.246)
+94@ = Object.Init(#A51_SPOTHOUSING, 161.962, 1933.043, 36.246)
+95@ = Object.Init(#A51_SPOTBASE, 161.962, 1933.043, 36.246)
+06CA: attach_searchlight 36@ to_tower 95@ to_housing 94@ to_bulb 43@ with_offset 0.0 1.181 0.768 
+071F: set_object 43@ health_to 5000 
+0875: set_object 43@ immune_to_nonplayer 1 
+066D: 137@ = attach_particle "SHOOTLIGHT" to_object 43@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 37@ = create_searchlight_at 266.713 1894.979 34.139 radius 0.5 target 51@ 58@ 65@ radius 10.5 
+44@ = Object.Init(#A51_SPOTBULB, 233.486, 1934.789, 36.246)
+96@ = Object.Init(#A51_SPOTHOUSING, 233.486, 1934.789, 36.246)
+97@ = Object.Init(#A51_SPOTBASE, 233.486, 1934.789, 36.246)
+06CA: attach_searchlight 37@ to_tower 97@ to_housing 96@ to_bulb 44@ with_offset 0.0 1.181 0.768 
+071F: set_object 44@ health_to 5000 
+0875: set_object 44@ immune_to_nonplayer 1 
+066D: 138@ = attach_particle "SHOOTLIGHT" to_object 44@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 38@ = create_searchlight_at 261.97 1808.07 34.05 radius 0.5 target 52@ 59@ 66@ radius 10.5 
+45@ = Object.Init(#A51_SPOTBULB, 267.116, 1895.241, 36.246)
+98@ = Object.Init(#A51_SPOTHOUSING, 267.116, 1895.241, 36.246)
+99@ = Object.Init(#A51_SPOTBASE, 267.116, 1895.241, 36.246)
+06CA: attach_searchlight 38@ to_tower 99@ to_housing 98@ to_bulb 45@ with_offset 0.0 1.181 0.768 
+071F: set_object 45@ health_to 5000 
+0875: set_object 45@ immune_to_nonplayer 1 
+066D: 139@ = attach_particle "SHOOTLIGHT" to_object 45@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 39@ = create_searchlight_at 164.228 1837.892 34.05 radius 0.5 target 53@ 60@ 67@ radius 10.5 
+46@ = Object.Init(#A51_SPOTBULB, 262.145, 1807.62, 36.246)
+100@ = Object.Init(#A51_SPOTHOUSING, 262.145, 1807.62, 36.246)
+101@ = Object.Init(#A51_SPOTBASE, 262.145, 1807.62, 36.246)
+06CA: attach_searchlight 39@ to_tower 101@ to_housing 100@ to_bulb 46@ with_offset 0.0 1.181 0.768 
+071F: set_object 46@ health_to 5000 
+0875: set_object 46@ immune_to_nonplayer 1 
+066D: 140@ = attach_particle "SHOOTLIGHT" to_object 46@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 40@ = create_searchlight_at 103.887 1901.057 35.723 radius 0.5 target 54@ 61@ 68@ radius 10.5 
+47@ = Object.Init(#A51_SPOTBULB, 166.003, 1849.937, 36.246)
+102@ = Object.Init(#A51_SPOTHOUSING, 166.003, 1849.937, 36.246)
+103@ = Object.Init(#A51_SPOTBASE, 166.003, 1849.937, 36.246)
+06CA: attach_searchlight 40@ to_tower 103@ to_housing 102@ to_bulb 47@ with_offset 0.0 1.181 0.768 
+071F: set_object 47@ health_to 5000 
+0875: set_object 47@ immune_to_nonplayer 1 
+066D: 141@ = attach_particle "SHOOTLIGHT" to_object 47@ with_offset 0.0 1.181 0.768 type 1 
+06B1: 41@ = create_searchlight_at 261.97 1808.07 36.05 radius 0.5 target 55@ 62@ 69@ radius 10.5 
+48@ = Object.Init(#A51_SPOTBULB, 113.439, 1814.405, 36.246)
+104@ = Object.Init(#A51_SPOTHOUSING, 113.439, 1814.405, 36.246)
+105@ = Object.Init(#A51_SPOTBASE, 113.439, 1814.405, 36.246)
+06CA: attach_searchlight 41@ to_tower 105@ to_housing 104@ to_bulb 48@ with_offset 0.0 1.181 0.768 
+071F: set_object 48@ health_to 5000 
+0875: set_object 48@ immune_to_nonplayer 1 
+066D: 142@ = attach_particle "SHOOTLIGHT" to_object 48@ with_offset 0.0 1.181 0.768 type 1 
+gosub @MAF4_30201 
+
+:MAF4_9840
+165@ = 0 
+
+:MAF4_9847
+if 
+  22 > 165@ 
+jf @MAF4_9897 
+Actor.DestroyInstantly(109@(165@,22i))
+Marker.Disable(205@(165@,22i))
+165@ += 1 
+jump @MAF4_9847 
+
+:MAF4_9897
+109@ = Actor.Create(Mission1, #ARMY, 112.39, 1931.193, 17.77)
+060B: set_actor 109@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(109@, M4, 9999)
+0648: unknown_actor 109@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 114.51 1914.793 18.8 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 112.39 1931.193 18.77 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 109@ to_animation_path_with_walk_mode 4 route_mode 3 
+205@ = Marker.CreateAboveActor(109@)
+07BF: set_marker 205@ tracking_blip 1 
+018B: set_marker 205@ radar_mode 2 
+074E: unknown_set_actor_threat_scanner_flags 109@ radius 20.0 peds_to_scan 1 
+110@ = Actor.Create(Mission1, #ARMY, 125.135, 1916.59, 17.9)
+060B: set_actor 110@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(110@, M4, 99999)
+0648: unknown_actor 110@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 124.716 1890.25 18.33 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 159.0 1887.9 19.5 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 161.32 1914.42 18.6 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 125.135 1916.59 18.9 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 110@ to_animation_path_with_walk_mode 4 route_mode 3 
+206@ = Marker.CreateAboveActor(110@)
+07BF: set_marker 206@ tracking_blip 1 
+018B: set_marker 206@ radar_mode 2 
+Actor.WeaponAccuracy(110@) = 80
+074E: unknown_set_actor_threat_scanner_flags 110@ radius 30.0 peds_to_scan 1 
+111@ = Actor.Create(Mission1, #ARMY, 131.37, 1821.139, 16.6)
+060B: set_actor 111@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(111@, M4, 99999)
+0648: unknown_actor 111@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 130.62 1855.297 17.73 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 102.09 1858.6 17.7 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 102.94 1839.78 17.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 131.37 1821.139 17.6 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 111@ to_animation_path_with_walk_mode 4 route_mode 3 
+207@ = Marker.CreateAboveActor(111@)
+07BF: set_marker 207@ tracking_blip 1 
+018B: set_marker 207@ radar_mode 2 
+Actor.WeaponAccuracy(111@) = 80
+074E: unknown_set_actor_threat_scanner_flags 111@ radius 30.0 peds_to_scan 1 
+112@ = Actor.Create(Mission1, #ARMY, 163.458, 1824.58, 17.64)
+Actor.Angle(112@) = 180.123
+060B: set_actor 112@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(112@, M4, 99999)
+0648: unknown_actor 112@ task_set 200.0 // float 
+208@ = Marker.CreateAboveActor(112@)
+07BF: set_marker 208@ tracking_blip 1 
+018B: set_marker 208@ radar_mode 2 
+Actor.WeaponAccuracy(112@) = 85
+074E: unknown_set_actor_threat_scanner_flags 112@ radius 30.0 peds_to_scan 1 
+113@ = Actor.Create(Mission1, #ARMY, 189.91, 1916.399, 16.64)
+060B: set_actor 113@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(113@, M4, 9999)
+0648: unknown_actor 113@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 168.0187 1916.279 18.37 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 189.91 1916.399 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 113@ to_animation_path_with_walk_mode 4 route_mode 3 
+209@ = Marker.CreateAboveActor(113@)
+07BF: set_marker 209@ tracking_blip 1 
+018B: set_marker 209@ radar_mode 2 
+Actor.WeaponAccuracy(113@) = 85
+074E: unknown_set_actor_threat_scanner_flags 113@ radius 30.0 peds_to_scan 1 
+114@ = Actor.Create(Mission1, #ARMY, 191.535, 1809.588, 16.641)
+060B: set_actor 114@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(114@, M4, 9999)
+0648: unknown_actor 114@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 131.24 1811.194 17.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 191.535 1809.588 17.641 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 114@ to_animation_path_with_walk_mode 4 route_mode 3 
+210@ = Marker.CreateAboveActor(114@)
+07BF: set_marker 210@ tracking_blip 1 
+018B: set_marker 210@ radar_mode 2 
+Actor.WeaponAccuracy(114@) = 85
+074E: unknown_set_actor_threat_scanner_flags 114@ radius 30.0 peds_to_scan 1 
+115@ = Actor.Create(Mission1, #ARMY, 195.36, 1872.92, 16.64)
+060B: set_actor 115@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(115@, M4, 9999)
+0648: unknown_actor 115@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 231.095 1872.9 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 195.36 1872.92 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 115@ to_animation_path_with_walk_mode 4 route_mode 3 
+211@ = Marker.CreateAboveActor(115@)
+07BF: set_marker 211@ tracking_blip 1 
+018B: set_marker 211@ radar_mode 2 
+Actor.WeaponAccuracy(115@) = 85
+074E: unknown_set_actor_threat_scanner_flags 115@ radius 20.0 peds_to_scan 1 
+116@ = Actor.Create(Mission1, #ARMY, 108.673, 1886.18, 17.04)
+060B: set_actor 116@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(116@, M4, 99999)
+0648: unknown_actor 116@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 107.065 1865.8 17.78 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 126.78 1864.25 17.8 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 127.842 1885.04 18.027 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 108.673 1886.18 18.04 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 116@ to_animation_path_with_walk_mode 4 route_mode 3 
+212@ = Marker.CreateAboveActor(116@)
+07BF: set_marker 212@ tracking_blip 1 
+018B: set_marker 212@ radar_mode 2 
+Actor.WeaponAccuracy(116@) = 85
+074E: unknown_set_actor_threat_scanner_flags 116@ radius 30.0 peds_to_scan 1 
+117@ = Actor.Create(Mission1, #ARMY, 173.671, 1886.841, 19.9)
+060B: set_actor 117@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(117@, M4, 9999)
+0648: unknown_actor 117@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 174.25 1866.51 20.7 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 173.671 1886.841 20.9 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 117@ to_animation_path_with_walk_mode 4 route_mode 3 
+213@ = Marker.CreateAboveActor(117@)
+07BF: set_marker 213@ tracking_blip 1 
+018B: set_marker 213@ radar_mode 2 
+Actor.WeaponAccuracy(117@) = 85
+074E: unknown_set_actor_threat_scanner_flags 117@ radius 30.0 peds_to_scan 1 
+118@ = Actor.Create(Mission1, #ARMY, 249.99, 1874.78, 19.6)
+060B: set_actor 118@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(118@, M4, 9999)
+0648: unknown_actor 118@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 250.99 1906.56 20.6 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 249.99 1874.78 20.6 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 118@ to_animation_path_with_walk_mode 4 route_mode 3 
+214@ = Marker.CreateAboveActor(118@)
+07BF: set_marker 214@ tracking_blip 1 
+018B: set_marker 214@ radar_mode 2 
+Actor.WeaponAccuracy(118@) = 85
+074E: unknown_set_actor_threat_scanner_flags 118@ radius 30.0 peds_to_scan 1 
+119@ = Actor.Create(Mission1, #ARMY, 224.26, 1916.79, 16.64)
+060B: set_actor 119@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(119@, M4, 99999)
+0648: unknown_actor 119@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 204.475 1915.9 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 204.628 1904.521 17.64 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 221.645 1905.13 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 224.26 1916.79 17.64 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 119@ to_animation_path_with_walk_mode 4 route_mode 3 
+215@ = Marker.CreateAboveActor(119@)
+07BF: set_marker 215@ tracking_blip 1 
+018B: set_marker 215@ radar_mode 2 
+Actor.WeaponAccuracy(119@) = 85
+074E: unknown_set_actor_threat_scanner_flags 119@ radius 30.0 peds_to_scan 1 
+120@ = Actor.Create(Mission1, #ARMY, 209.07, 1833.63, 16.64)
+Actor.Angle(120@) = 346.579
+060B: set_actor 120@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(120@, M4, 99999)
+0648: unknown_actor 120@ task_set 200.0 // float 
+216@ = Marker.CreateAboveActor(120@)
+07BF: set_marker 216@ tracking_blip 1 
+018B: set_marker 216@ radar_mode 2 
+Actor.WeaponAccuracy(120@) = 85
+074E: unknown_set_actor_threat_scanner_flags 120@ radius 30.0 peds_to_scan 1 
+121@ = Actor.Create(Mission1, #ARMY, 268.027, 1862.269, 17.64)
+060B: set_actor 121@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(121@, M4, 9999)
+0648: unknown_actor 121@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 266.9 1822.3 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 268.027 1862.269 17.64 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 121@ to_animation_path_with_walk_mode 4 route_mode 3 
+217@ = Marker.CreateAboveActor(121@)
+07BF: set_marker 217@ tracking_blip 1 
+018B: set_marker 217@ radar_mode 2 
+Actor.WeaponAccuracy(121@) = 85
+074E: unknown_set_actor_threat_scanner_flags 121@ radius 30.0 peds_to_scan 1 
+122@ = Actor.Create(Mission1, #ARMY, 221.16, 1858.28, 20.63)
+060B: set_actor 122@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(122@, M4, 9999)
+Actor.WeaponAccuracy(122@) = 90
+0648: unknown_actor 122@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 198.711 1857.64 19.633 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 221.16 1858.28 20.63 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 122@ to_animation_path_with_walk_mode 4 route_mode 3 
+218@ = Marker.CreateAboveActor(122@)
+07BF: set_marker 218@ tracking_blip 1 
+018B: set_marker 218@ radar_mode 2 
+Actor.WeaponAccuracy(122@) = 90
+074E: unknown_set_actor_threat_scanner_flags 122@ radius 30.0 peds_to_scan 1 
+123@ = Actor.Create(Mission1, #ARMY, 218.45, 1820.78, 16.64)
+060B: set_actor 123@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(123@, M4, 9999)
+Actor.WeaponAccuracy(123@) = 90
+0648: unknown_actor 123@ task_set 200.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 250.31 1821.924 17.64 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 218.45 1820.78 17.64 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 123@ to_animation_path_with_walk_mode 4 route_mode 3 
+219@ = Marker.CreateAboveActor(123@)
+07BF: set_marker 219@ tracking_blip 1 
+018B: set_marker 219@ radar_mode 2 
+Actor.WeaponAccuracy(123@) = 80
+074E: unknown_set_actor_threat_scanner_flags 123@ radius 30.0 peds_to_scan 1 
+124@ = Actor.Create(Mission3, #ARMY, 103.9055, 1900.534, 24.4985)
+060B: set_actor 124@ decision_maker_to 159@ 
+Actor.Angle(124@) = 6.0802
+Actor.GiveWeaponAndAmmo(124@, M4, 9999)
+0638: AS_actor 124@ stay_put 1 
+Actor.Health(124@) = 10
+220@ = Marker.CreateAboveActor(124@)
+07BF: set_marker 220@ tracking_blip 1 
+018B: set_marker 220@ radar_mode 2 
+060B: set_actor 124@ decision_maker_to 162@ 
+125@ = Actor.Create(Mission3, #ARMY, 113.3839, 1814.261, 24.4985)
+060B: set_actor 125@ decision_maker_to 159@ 
+Actor.Angle(125@) = 5.0273
+Actor.GiveWeaponAndAmmo(125@, M4, 9999)
+0638: AS_actor 125@ stay_put 1 
+Actor.Health(125@) = 10
+221@ = Marker.CreateAboveActor(125@)
+07BF: set_marker 221@ tracking_blip 1 
+018B: set_marker 221@ radar_mode 2 
+060B: set_actor 125@ decision_maker_to 162@ 
+126@ = Actor.Create(Mission3, #ARMY, 165.6023, 1850.07, 24.4985)
+060B: set_actor 126@ decision_maker_to 159@ 
+Actor.Angle(126@) = 5.0273
+Actor.GiveWeaponAndAmmo(126@, M4, 9999)
+0638: AS_actor 126@ stay_put 1 
+Actor.Health(126@) = 10
+222@ = Marker.CreateAboveActor(126@)
+07BF: set_marker 222@ tracking_blip 1 
+018B: set_marker 222@ radar_mode 2 
+060B: set_actor 126@ decision_maker_to 162@ 
+127@ = Actor.Create(Mission3, #ARMY, 261.8728, 1807.938, 24.4985)
+060B: set_actor 127@ decision_maker_to 159@ 
+Actor.Angle(127@) = 5.0273
+Actor.GiveWeaponAndAmmo(127@, M4, 9999)
+0638: AS_actor 127@ stay_put 1 
+Actor.Health(127@) = 10
+223@ = Marker.CreateAboveActor(127@)
+07BF: set_marker 223@ tracking_blip 1 
+018B: set_marker 223@ radar_mode 2 
+060B: set_actor 127@ decision_maker_to 162@ 
+128@ = Actor.Create(Mission3, #ARMY, 267.1389, 1895.485, 24.4985)
+060B: set_actor 128@ decision_maker_to 159@ 
+Actor.Angle(128@) = 119.7683
+Actor.GiveWeaponAndAmmo(128@, M4, 9999)
+0638: AS_actor 128@ stay_put 1 
+Actor.Health(128@) = 10
+224@ = Marker.CreateAboveActor(128@)
+07BF: set_marker 224@ tracking_blip 1 
+018B: set_marker 224@ radar_mode 2 
+060B: set_actor 128@ decision_maker_to 162@ 
+129@ = Actor.Create(Mission3, #ARMY, 161.9575, 1933.342, 24.4985)
+060B: set_actor 129@ decision_maker_to 159@ 
+Actor.Angle(129@) = 119.7683
+Actor.GiveWeaponAndAmmo(129@, M4, 9999)
+0638: AS_actor 129@ stay_put 1 
+Actor.Health(129@) = 10
+225@ = Marker.CreateAboveActor(129@)
+07BF: set_marker 225@ tracking_blip 1 
+018B: set_marker 225@ radar_mode 2 
+060B: set_actor 129@ decision_maker_to 162@ 
+130@ = Actor.Create(Mission3, #ARMY, 233.6724, 1934.622, 24.4985)
+060B: set_actor 130@ decision_maker_to 159@ 
+Actor.Angle(130@) = 119.7683
+Actor.GiveWeaponAndAmmo(130@, M4, 9999)
+0638: AS_actor 130@ stay_put 1 
+Actor.Health(130@) = 10
+226@ = Marker.CreateAboveActor(130@)
+07BF: set_marker 226@ tracking_blip 1 
+018B: set_marker 226@ radar_mode 2 
+060B: set_actor 130@ decision_maker_to 162@ 
+0A0B: set_rendering_origin_at_3D_coord 69.91 1916.007 16.648 angle 273.4 
+fade 1 250 
+
+:MAF4_13283
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+00C0: set_current_time_hours_to 21 minutes_to 30 
+00BE: text_clear_all 
+0925: restore_camera_to_user_defined 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BE: text_clear_all 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_13352 
+if 
+060E:   car 107@ assigned_to_path 
+jf @MAF4_13352 
+05EC: release_car 107@ from_path 
+
+:MAF4_13352
+Actor.DestroyInstantly(106@)
+Car.Destroy(107@)
+0296: unload_special_actor 1 
+Model.Destroy(#CAMPER)
+018A: 227@ = create_checkpoint_at 211.604 1811.091 20.8 
+00BC: show_text_highpriority GXT 'DST8_38' time 5000 flag 1  // ~s~You must gain entry to the research labs before sunrise at 0530 hours.
+00BB: show_text_lowpriority GXT 'DST8_7' time 5000 flag 1  // ~s~Open the blast doors by activating the switch in the ~y~control tower~s~.
+040D: unload_wav 2 
+03CF: load_wav 13600 as 2 
+164@ = 5 
+
+:MAF4_13441
+if 
+  164@ == 5 
+jf @MAF4_19592 
+if 
+  192@ == 0 
+jf @MAF4_13513 
+if 
+02D8:   actor $PLAYER_ACTOR current_weapon == 45 
+jf @MAF4_13513 
+03E5: show_text_box 'DST8_37'  // When goggles are selected, press ~k~~PED_FIREWEAPON~ to toggle thermal vision on and off.
+192@ = 1 
+
+:MAF4_13513
+if 
+  195@ == 0 
+jf @MAF4_13706 
+00BF: 134@ = current_time_hours, 135@ = current_time_minutes 
+if 
+  134@ == 5 
+jf @MAF4_13706 
+if 
+  135@ > 29 
+jf @MAF4_13706 
+fade 0 500 
+193@ = 1 
+
+:MAF4_13589
+if 
+fading 
+jf @MAF4_13613 
+wait 0 
+jump @MAF4_13589 
+
+:MAF4_13613
+Actor.PutAt($PLAYER_ACTOR, 296.348, 2474.277, 15.477)
+Actor.Angle($PLAYER_ACTOR) = 359.722
+Camera.SetBehindPlayer
+fade 1 500 
+00BC: show_text_highpriority GXT 'DST8_41' time 5000 flag 1  // ~r~You had to break into the Area 69 research lab while undercover of night. Next time be quicker!
+
+:MAF4_13668
+if 
+fading 
+jf @MAF4_13692 
+wait 0 
+jump @MAF4_13668 
+
+:MAF4_13692
+jump @MAF4_30434 
+195@ = 1 
+
+:MAF4_13706
+if 
+  193@ == 0 
+jf @MAF4_14035 
+if 
+  194@ == 0 
+jf @MAF4_13803 
+if 
+80A3:   not actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 52.5 1952.11 cornerB 295.92 1775.93 
+jf @MAF4_13803 
+00BC: show_text_highpriority GXT 'DST8_39' time 5000 flag 1  // ~s~You are venturing too far away from Area 69. If you go any further the mission will be failed!
+194@ = 1 
+
+:MAF4_13803
+if 
+  194@ == 1 
+jf @MAF4_14035 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 52.5 1952.11 cornerB 295.92 1775.93 
+jf @MAF4_13873 
+194@ = 0 
+jump @MAF4_14035 
+
+:MAF4_13873
+if 
+80A3:   not actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 36.9 1961.82 cornerB 319.56 1760.29 
+jf @MAF4_14035 
+fade 0 500 
+
+:MAF4_13918
+if 
+fading 
+jf @MAF4_13942 
+wait 0 
+jump @MAF4_13918 
+
+:MAF4_13942
+Actor.PutAt($PLAYER_ACTOR, 296.348, 2474.277, 15.477)
+Actor.Angle($PLAYER_ACTOR) = 359.722
+Camera.SetBehindPlayer
+fade 1 500 
+00BC: show_text_highpriority GXT 'DST8_40' time 5000 flag 1  // ~r~You are too far away from Area 69!
+
+:MAF4_13997
+if 
+fading 
+jf @MAF4_14021 
+wait 0 
+jump @MAF4_13997 
+
+:MAF4_14021
+jump @MAF4_30434 
+194@ = 2 
+
+:MAF4_14035
+if 
+  3 > 175@ 
+jf @MAF4_14878 
+if 
+  2 > 175@ 
+jf @MAF4_14871 
+if 
+  182@ == 0 
+jf @MAF4_14144 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere 211.604 1811.091 20.8 radius 3.0 3.0 3.0 sphere 1 stopped_on_foot 
+jf @MAF4_14144 
+182@ = 1 
+
+:MAF4_14144
+if 
+  182@ == 1 
+jf @MAF4_14871 
+if 
+  179@ == 0 
+jf @MAF4_14255 
+Marker.Disable(227@)
+018A: 227@ = create_checkpoint_at 214.0 1872.0 12.14 
+00BC: show_text_highpriority GXT 'DST8_8' time 5000 flag 1  // ~s~The ~y~blast doors ~s~have been opened, you have limited amount of time to get through them before they shut again!
+33@ = 0 
+097A: play_audio_at 213.85 1874.68 14.12 event 1007 
+179@ = 1 
+
+:MAF4_14255
+if 
+  179@ == 1 
+jf @MAF4_14419 
+if 
+  180@ == 0 
+jf @MAF4_14346 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORR to 219.941 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_14346 
+180@ = 1 
+
+:MAF4_14346
+if 
+  181@ == 0 
+jf @MAF4_14419 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORL to 207.842 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_14419 
+181@ = 1 
+
+:MAF4_14419
+if 
+  179@ == 1 
+jf @MAF4_14500 
+if 
+  180@ == 1 
+jf @MAF4_14500 
+if 
+  181@ == 1 
+jf @MAF4_14500 
+097A: play_audio_at 213.85 1874.68 14.12 event 1008 
+179@ = 2 
+
+:MAF4_14500
+if 
+  179@ == 2 
+jf @MAF4_14564 
+if 
+  33@ > 30000 
+jf @MAF4_14564 
+097A: play_audio_at 213.85 1874.68 14.12 event 1007 
+179@ = 3 
+
+:MAF4_14564
+if 
+  179@ == 3 
+jf @MAF4_14728 
+if 
+  180@ == 1 
+jf @MAF4_14655 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORR to 215.941 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_14655 
+180@ = 0 
+
+:MAF4_14655
+if 
+  181@ == 1 
+jf @MAF4_14728 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORL to 211.842 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_14728 
+181@ = 0 
+
+:MAF4_14728
+if 
+  179@ == 3 
+jf @MAF4_14871 
+if 
+  180@ == 0 
+jf @MAF4_14871 
+if 
+  181@ == 0 
+jf @MAF4_14871 
+097A: play_audio_at 213.85 1874.68 14.12 event 1008 
+Marker.Disable(227@)
+018A: 227@ = create_checkpoint_at 211.604 1811.091 20.8 
+00BC: show_text_highpriority GXT 'DST8_9' time 5000 flag 1  // ~s~The blast doors have shut make your way back to the ~y~control tower ~s~to open them again.
+179@ = 0 
+180@ = 0 
+180@ = 0 
+182@ = 0 
+
+:MAF4_14871
+jump @MAF4_15024 
+
+:MAF4_14878
+if 
+  180@ == 5 
+jf @MAF4_14951 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORR to 215.941 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_14951 
+180@ = 6 
+
+:MAF4_14951
+if 
+  181@ == 5 
+jf @MAF4_15024 
+if 
+034E: move_object $OBJECT_M_A51_BLASTDOORL to 211.842 1874.571 13.903 speed 0.1 0.0 0.0 collision_check 0 
+jf @MAF4_15024 
+181@ = 6 
+
+:MAF4_15024
+if 
+  191@ == 0 
+jf @MAF4_15167 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 254.37 1850.1 21.7 cornerB 207.08 1873.36 10.0 
+jf @MAF4_15167 
+165@ = 0 
+
+:MAF4_15097
+if 
+  7 > 165@ 
+jf @MAF4_15160 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_15146 
+0A02: set_searchlight 35@(165@,7i) lights_through_obstacles 0 
+
+:MAF4_15146
+165@ += 1 
+jump @MAF4_15097 
+
+:MAF4_15160
+191@ = 1 
+
+:MAF4_15167
+if 
+  191@ == 1 
+jf @MAF4_15310 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 254.37 1850.1 21.7 cornerB 207.08 1873.36 10.0 
+jf @MAF4_15310 
+165@ = 0 
+
+:MAF4_15240
+if 
+  7 > 165@ 
+jf @MAF4_15303 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_15289 
+0A02: set_searchlight 35@(165@,7i) lights_through_obstacles 1 
+
+:MAF4_15289
+165@ += 1 
+jump @MAF4_15240 
+
+:MAF4_15303
+191@ = 0 
+
+:MAF4_15310
+165@ = 0 
+
+:MAF4_15317
+if 
+  7 > 165@ 
+jf @MAF4_15478 
+if 
+  167@(165@,7i) == 0 
+jf @MAF4_15464 
+if 
+03CA:   object 42@(165@,7i) exists 
+jf @MAF4_15464 
+071E: get_object 42@(165@,7i) health_to 91@ 
+if 
+  5000 > 91@ 
+jf @MAF4_15464 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_15464 
+06B2: destroy_searchlight 35@(165@,7i) 
+064F: remove_references_to_particle 136@(165@,7i) 
+174@ += 1 
+167@(165@,7i) = 1 
+
+:MAF4_15464
+165@ += 1 
+jump @MAF4_15317 
+
+:MAF4_15478
+if 
+  175@ == 0 
+jf @MAF4_15620 
+165@ = 0 
+
+:MAF4_15503
+if and
+  7 > 165@ 
+  175@ == 0 
+jf @MAF4_15620 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_15606 
+if 
+06B7:   searchlight 35@(165@,7i) spotted_actor $PLAYER_ACTOR 
+jf @MAF4_15606 
+198@ = 1 
+199@ = 0 
+gosub @MAF4_30318 
+32@ = 0 
+175@ = 1 
+
+:MAF4_15606
+165@ += 1 
+jump @MAF4_15503 
+
+:MAF4_15620
+if 
+  175@ == 1 
+jf @MAF4_15792 
+if 
+  32@ > 10000 
+jf @MAF4_15792 
+165@ = 0 
+175@ = 0 
+
+:MAF4_15671
+if 
+  7 > 165@ 
+jf @MAF4_15753 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_15739 
+if 
+06B7:   searchlight 35@(165@,7i) spotted_actor $PLAYER_ACTOR 
+jf @MAF4_15739 
+175@ = 2 
+
+:MAF4_15739
+165@ += 1 
+jump @MAF4_15671 
+
+:MAF4_15753
+if 
+  175@ == 0 
+jf @MAF4_15792 
+198@ = 2 
+201@ = 0 
+gosub @MAF4_30201 
+
+:MAF4_15792
+if and
+  174@ > 2 
+  2 > 175@ 
+jf @MAF4_15824 
+175@ = 2 
+
+:MAF4_15824
+if 
+  175@ == 2 
+jf @MAF4_15987 
+Marker.Disable(227@)
+198@ = 3 
+196@ = 0 
+018A: 227@ = create_checkpoint_at 246.0 1862.64 19.89 
+165@ = 15 
+
+:MAF4_15888
+if 
+  22 > 165@ 
+jf @MAF4_15959 
+if 
+   not Actor.Dead(109@(165@,22i))
+jf @MAF4_15945 
+0085: 153@ = 109@(165@,22i) // (int) 
+gosub @MAF4_30396 
+
+:MAF4_15945
+165@ += 1 
+jump @MAF4_15888 
+
+:MAF4_15959
+gosub @MAF4_30318 
+180@ = 5 
+181@ = 5 
+175@ = 3 
+
+:MAF4_15987
+165@ = 0 
+
+:MAF4_15994
+if 
+  22 > 165@ 
+jf @MAF4_16084 
+if 
+   Actor.Dead(109@(165@,22i))
+jf @MAF4_16070 
+if 
+075C:   marker 205@(165@,22i) enabled 
+jf @MAF4_16070 
+Marker.Disable(205@(165@,22i))
+Actor.RemoveReferences(109@(165@,22i))
+
+:MAF4_16070
+165@ += 1 
+jump @MAF4_15994 
+
+:MAF4_16084
+if 
+  175@ == 3 
+jf @MAF4_16183 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 246.0 1862.64 radius 5.0 5.0 
+jf @MAF4_16183 
+03E5: show_text_box 'DST8_10'  // Damage the ~y~vent grate ~w~and drop into it to gain entry.
+Marker.Disable(227@)
+018A: 227@ = create_checkpoint_at 224.99 1859.18 12.31 
+175@ = 4 
+
+:MAF4_16183
+gosub @MAF4_30053 
+if 
+  198@ == 1 
+jf @MAF4_16455 
+if 
+  199@ == 0 
+jf @MAF4_16455 
+if 
+  197@ == 0 
+jf @MAF4_16455 
+if 
+  200@ > 1 
+jf @MAF4_16347 
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @MAF4_16318 
+04AF: 156@ = 13604 // = constant 
+05AA: 157@s = 'DES8_BD' // @s = 'short'  // ~z~Code Blue! Searchlights set to tracking mode!
+jump @MAF4_16340 
+
+:MAF4_16318
+04AF: 156@ = 13603 // = constant 
+05AA: 157@s = 'DES8_BC' // @s = 'short'  // ~z~This installation is at Condition Blue! Switching searchlights to tracking mode!
+
+:MAF4_16340
+gosub @MAF4_30011 
+
+:MAF4_16347
+if 
+  200@ == 1 
+jf @MAF4_16401 
+04AF: 156@ = 13602 // = constant 
+05AA: 157@s = 'DES8_BB' // @s = 'short'  // ~z~Code Blue! Set the Searchlight perimeter to tracking mode!
+gosub @MAF4_30011 
+200@ += 1 
+
+:MAF4_16401
+if 
+  200@ == 0 
+jf @MAF4_16455 
+04AF: 156@ = 13601 // = constant 
+05AA: 157@s = 'DES8_BA' // @s = 'short'  // ~z~Possible intruder sighted. Condition Blue! Set searchlights to tracking mode!
+gosub @MAF4_30011 
+200@ += 1 
+
+:MAF4_16455
+if 
+  198@ == 2 
+jf @MAF4_16720 
+if 
+  201@ == 0 
+jf @MAF4_16720 
+if 
+  197@ == 0 
+jf @MAF4_16720 
+if 
+  202@ > 1 
+jf @MAF4_16612 
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @MAF4_16583 
+04AF: 156@ = 13607 // = constant 
+05AA: 157@s = 'DES8_CC' // @s = 'short'  // ~z~Perimeter is secure. Standing down from Code Blue!
+jump @MAF4_16605 
+
+:MAF4_16583
+04AF: 156@ = 13608 // = constant 
+05AA: 157@s = 'DES8_CD' // @s = 'short'  // ~z~No perimeter breach confirmed. Stand down from Blue Alert!
+
+:MAF4_16605
+gosub @MAF4_30011 
+
+:MAF4_16612
+if 
+  202@ == 1 
+jf @MAF4_16666 
+04AF: 156@ = 13606 // = constant 
+05AA: 157@s = 'DES8_CB' // @s = 'short'  // ~z~No further sign of intrusion. Stand down, repeat, stand down!
+gosub @MAF4_30011 
+202@ += 1 
+
+:MAF4_16666
+if 
+  202@ == 0 
+jf @MAF4_16720 
+04AF: 156@ = 13605 // = constant 
+05AA: 157@s = 'DES8_CA' // @s = 'short'  // ~z~Sighting unconfirmed. Stand down from Condition Blue!
+gosub @MAF4_30011 
+202@ += 1 
+
+:MAF4_16720
+if 
+  198@ == 3 
+jf @MAF4_17330 
+if 
+  196@ == 0 
+jf @MAF4_16953 
+if 
+  197@ == 0 
+jf @MAF4_16953 
+0209: 300@ = random_int_in_ranges 0 4 
+if 
+  300@ == 0 
+jf @MAF4_16830 
+04AF: 156@ = 13611 // = constant 
+05AA: 157@s = 'DES8_DC' // @s = 'short'  // ~z~This is a code red! All personnel adopt intruder protocols!
+jump @MAF4_16946 
+
+:MAF4_16830
+if 
+  300@ == 1 
+jf @MAF4_16877 
+04AF: 156@ = 13610 // = constant 
+05AA: 157@s = 'DES8_DB' // @s = 'short'  // ~z~Code Red! Repeat Code Red! Intruder alert!
+jump @MAF4_16946 
+
+:MAF4_16877
+if 
+  300@ == 2 
+jf @MAF4_16924 
+04AF: 156@ = 13609 // = constant 
+05AA: 157@s = 'DES8_DA' // @s = 'short'  // ~z~Code Red! Sighting confirmed! All personnel shoot to kill!
+jump @MAF4_16946 
+
+:MAF4_16924
+04AF: 156@ = 13612 // = constant 
+05AA: 157@s = 'DES8_DD' // @s = 'short'  // ~z~Intruder alert! Condition Red! Repeat: Condition Red!
+
+:MAF4_16946
+gosub @MAF4_30011 
+
+:MAF4_16953
+if 
+  196@ == 1 
+jf @MAF4_17074 
+if 
+  197@ == 0 
+jf @MAF4_17074 
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @MAF4_17045 
+04AF: 156@ = 13617 // = constant 
+05AA: 157@s = 'DES8_EE' // @s = 'short'  // ~z~All towers are cleared to use lethal force, repeat, lethal force!
+jump @MAF4_17067 
+
+:MAF4_17045
+04AF: 156@ = 13618 // = constant 
+05AA: 157@s = 'DES8_EF' // @s = 'short'  // ~z~All towers shoot on sight, repeat, shoot on sight!
+
+:MAF4_17067
+gosub @MAF4_30011 
+
+:MAF4_17074
+if 
+  196@ == 2 
+jf @MAF4_17289 
+if 
+  197@ == 0 
+jf @MAF4_17289 
+0209: 300@ = random_int_in_ranges 0 4 
+if 
+  300@ == 0 
+jf @MAF4_17166 
+04AF: 156@ = 13616 // = constant 
+05AA: 157@s = 'DES8_ED' // @s = 'short'  // ~z~Lock down protocols initiated! Blast doors and security tower isolated!
+jump @MAF4_17282 
+
+:MAF4_17166
+if 
+  300@ == 1 
+jf @MAF4_17213 
+04AF: 156@ = 13615 // = constant 
+05AA: 157@s = 'DES8_EC' // @s = 'short'  // ~z~Secure blast doors and control tower!
+jump @MAF4_17282 
+
+:MAF4_17213
+if 
+  300@ == 2 
+jf @MAF4_17260 
+04AF: 156@ = 13614 // = constant 
+05AA: 157@s = 'DES8_EB' // @s = 'short'  // ~z~This facility is in Lock Down!
+jump @MAF4_17282 
+
+:MAF4_17260
+04AF: 156@ = 13613 // = constant 
+05AA: 157@s = 'DES8_EA' // @s = 'short'  // ~z~Set blast doors and control tower to Lock Down!
+
+:MAF4_17282
+gosub @MAF4_30011 
+
+:MAF4_17289
+if 
+  196@ == 3 
+jf @MAF4_17330 
+00BC: show_text_highpriority GXT 'DST8_14' time 7000 flag 1  // ~s~The control tower has been disabled you must now find another way in. There is a ~y~vent~s~ that goes into the Area 69 interior.
+196@ = 4 
+
+:MAF4_17330
+if 
+  183@ == 0 
+jf @MAF4_19592 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 207.917 1874.33 10.0 cornerB 2224.917 1868.78 14.6 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 224.99 1859.18 12.31 radius 8.0 8.0 2.0 on_foot 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 201.99 1874.7 12.3 cornerB 225.47 1851.43 14.31 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 226.38 1872.33 12.93 radius 4.0 4.0 3.5 on_foot 
+jf @MAF4_19592 
+fade 0 250 
+040D: unload_wav 1 
+00BE: text_clear_all 
+
+:MAF4_17520
+if 
+fading 
+jf @MAF4_17544 
+wait 0 
+jump @MAF4_17520 
+
+:MAF4_17544
+Object.Destroy($OBJECT_M_A51_VENTCOVERB)
+$OBJECT_M_A51_VENTCOVERB = Object.Create(#A51_VENTCOVERB, 245.968, 1862.843, 19.49)
+0453: set_object $OBJECT_M_A51_VENTCOVERB XYZ_rotation 0.0 0.0 -140.998 
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_VENTCOVERB)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Model.Destroy(#A51_SPOTBULB)
+Model.Destroy(#A51_SPOTHOUSING)
+Model.Destroy(#A51_SPOTBASE)
+Model.Destroy(#CAMPER)
+0296: unload_special_actor 1 
+0873: release_path 340 
+0873: release_path 341 
+Model.Destroy(#KNIFECUR)
+Model.Destroy(#SILENCED)
+Model.Load(#TUG)
+Model.Load(#WMOSCI)
+Model.Load(#SANCHEZ)
+038B: load_requested_models 
+
+:MAF4_17667
+if or
+   not Model.Available(#TUG)
+   not Model.Available(#WMOSCI)
+   not Model.Available(#SANCHEZ)
+jf @MAF4_17703 
+wait 0 
+jump @MAF4_17667 
+
+:MAF4_17703
+00BE: text_clear_all 
+165@ = 0 
+
+:MAF4_17712
+if 
+  7 > 165@ 
+jf @MAF4_17762 
+06B2: destroy_searchlight 35@(165@,7i) 
+Object.Destroy(42@(165@,7i))
+165@ += 1 
+jump @MAF4_17712 
+
+:MAF4_17762
+Object.Destroy(92@)
+Object.Destroy(93@)
+Object.Destroy(94@)
+Object.Destroy(95@)
+Object.Destroy(96@)
+Object.Destroy(97@)
+Object.Destroy(98@)
+Object.Destroy(99@)
+Object.Destroy(100@)
+Object.Destroy(101@)
+Object.Destroy(102@)
+Object.Destroy(103@)
+Object.Destroy(104@)
+Object.Destroy(105@)
+165@ = 0 
+
+:MAF4_17839
+if 
+  22 > 165@ 
+jf @MAF4_17889 
+Actor.DestroyInstantly(109@(165@,22i))
+Marker.Disable(205@(165@,22i))
+165@ += 1 
+jump @MAF4_17839 
+
+:MAF4_17889
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point 225.0 1859.0 radius 5.0 5.0 
+jf @MAF4_17964 
+Actor.PutAt($PLAYER_ACTOR, 224.44, 1859.34, 12.14)
+Actor.Angle($PLAYER_ACTOR) = 6.82
+jump @MAF4_17994 
+
+:MAF4_17964
+Actor.PutAt($PLAYER_ACTOR, 214.14, 1872.388, 12.14)
+Actor.Angle($PLAYER_ACTOR) = 267.68
+
+:MAF4_17994
+Object.Destroy($OBJECT_M_A51_BLASTDOORR)
+Object.Destroy($OBJECT_M_A51_BLASTDOORL)
+$OBJECT_M_A51_BLASTDOORR = Object.Init(#A51_BLASTDOORR, 215.941, 1874.571, 13.903)
+Object.Angle($OBJECT_M_A51_BLASTDOORR) = 0.0
+$OBJECT_M_A51_BLASTDOORL = Object.Init(#A51_BLASTDOORL, 211.842, 1874.571, 13.903)
+Object.Angle($OBJECT_M_A51_BLASTDOORL) = 0.0
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_BLASTDOORR)
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_BLASTDOORL)
+Marker.Disable(227@)
+110@ = Actor.Create(Mission1, #ARMY, 248.128, 1860.732, 8.76)
+Actor.Angle(110@) = 266.82
+060B: set_actor 110@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(110@, M4, 99999)
+0648: unknown_actor 110@ task_set 5.0 // float 
+206@ = Marker.CreateAboveActor(110@)
+018B: set_marker 206@ radar_mode 2 
+0605: actor 110@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+07BF: set_marker 206@ tracking_blip 1 
+111@ = Actor.Create(Mission1, #ARMY, 245.1791, 1879.571, 10.4609)
+Actor.Angle(111@) = 266.1505
+060B: set_actor 111@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(111@, M4, 99999)
+0648: unknown_actor 111@ task_set 5.0 // float 
+Actor.WeaponAccuracy(111@) = 80
+207@ = Marker.CreateAboveActor(111@)
+018B: set_marker 207@ radar_mode 2 
+0605: actor 111@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+07BF: set_marker 207@ tracking_blip 1 
+112@ = Actor.Create(Mission1, #ARMY, 245.1999, 1863.952, 7.5618)
+Actor.Angle(112@) = 175.5655
+060B: set_actor 112@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(112@, M4, 99999)
+0648: unknown_actor 112@ task_set 5.0 // float 
+208@ = Marker.CreateAboveActor(112@)
+018B: set_marker 208@ radar_mode 2 
+07BF: set_marker 208@ tracking_blip 1 
+113@ = Actor.Create(Mission1, #ARMY, 261.9116, 1870.728, 7.7578)
+060B: set_actor 113@ decision_maker_to 160@ 
+Actor.Angle(113@) = 186.0656
+Actor.GiveWeaponAndAmmo(113@, M4, 9999)
+0648: unknown_actor 113@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 261.6897 1860.464 7.765 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 256.1913 1859.627 7.765 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 256.0048 1870.207 7.79 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 261.9116 1870.728 7.7578 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 113@ to_animation_path_with_walk_mode 4 route_mode 3 
+209@ = Marker.CreateAboveActor(113@)
+018B: set_marker 209@ radar_mode 2 
+07BF: set_marker 209@ tracking_blip 1 
+132@ = Car.Create(#TUG, 241.0877, 1843.951, 7.7578)
+Car.Angle(132@) = 268.7216
+114@ = Actor.Create(Mission1, #ARMY, 243.0288, 1846.451, 7.765)
+060B: set_actor 114@ decision_maker_to 160@ 
+Actor.Health(114@) = 10
+Actor.Angle(114@) = 270.7867
+Actor.GiveWeaponAndAmmo(114@, M4, 9999)
+0648: unknown_actor 114@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 255.3062 1846.276 7.7734 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 243.0288 1846.451 7.765 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 114@ to_animation_path_with_walk_mode 4 route_mode 3 
+210@ = Marker.CreateAboveActor(114@)
+018B: set_marker 210@ radar_mode 2 
+07BF: set_marker 210@ tracking_blip 1 
+018A: 228@ = create_checkpoint_at 267.015 1862.51 7.76 
+07BF: set_marker 228@ tracking_blip 1 
+09EB: remove_player_goggles $PLAYER_CHAR use_anim 0 
+Camera.SetAtPos(248.83, 1827.63, 7.46)
+0A0B: set_rendering_origin_at_3D_coord 282.28 1814.04 7.54 angle 326.0 
+fade 1 500 
+075B: zoom_radar 100 
+131@ = Actor.Create(Mission1, #ARMY, 248.925, 1832.315, 6.55)
+Actor.Angle(131@) = 1.5
+Actor.GiveWeaponAndAmmo(131@, M4, 9999)
+0605: actor 131@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 1000 
+0707: start_scene_skip_to @MAF4_19492 
+Camera.SetPosition(278.6251, 1812.837, 4.8301, 0.0, 0.0, 0.0)
+Camera.PointAt(279.2745, 1813.558, 5.0711, 2)
+00BC: show_text_highpriority GXT 'DST8_42' time 5000 flag 1  // ~s~Make your way through Area 69 to the research lab which will give you access to the black project.
+32@ = 0 
+
+:MAF4_19100
+if 
+  5000 > 32@ 
+jf @MAF4_19130 
+wait 0 
+jump @MAF4_19100 
+
+:MAF4_19130
+0A0B: set_rendering_origin_at_3D_coord 255.93 1838.05 7.73 angle 142.0 
+Camera.SetPosition(252.5037, 1836.242, 8.5554, 0.0, 0.0, 0.0)
+Camera.PointAt(252.0391, 1835.363, 8.4453, 2)
+00BC: show_text_highpriority GXT 'DST8_43' time 8000 flag 1  // ~s~There are several military personnel on patrol throughout the installation.
+32@ = 0 
+
+:MAF4_19226
+if 
+  4000 > 32@ 
+jf @MAF4_19256 
+wait 0 
+jump @MAF4_19226 
+
+:MAF4_19256
+Camera.SetAtPos(249.6, 1869.03, 11.0)
+Camera.SetPosition(262.0718, 1869.727, 13.162, 0.0, 0.0, 0.0)
+Camera.PointAt(261.4835, 1868.996, 12.8154, 2)
+32@ = 0 
+
+:MAF4_19331
+if 
+  4000 > 32@ 
+jf @MAF4_19361 
+wait 0 
+jump @MAF4_19331 
+
+:MAF4_19361
+0A0B: set_rendering_origin_at_3D_coord 223.75 1822.57 7.51 angle 68.0 
+Camera.SetPosition(217.0121, 1822.658, 6.4205, 0.0, 0.0, 0.0)
+Camera.PointAt(216.015, 1822.672, 6.4959, 2)
+Actor.DestroyInstantly(131@)
+00BC: show_text_highpriority GXT 'DST8_44' time 5000 flag 1  // ~s~The control room will allow you to deactivate some of Area 69's exterior defenses, which will aid your escape.
+32@ = 0 
+
+:MAF4_19462
+if 
+  5000 > 32@ 
+jf @MAF4_19492 
+wait 0 
+jump @MAF4_19462 
+
+:MAF4_19492
+0701: end_scene_skip 
+Actor.DestroyInstantly(131@)
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'DST8_45' time 5000 flag 1  // ~s~Go and find the ~g~'black project'~s~.
+097A: play_audio_at 0.0 0.0 0.0 event 1005 
+33@ = 0 
+203@ = 1 
+196@ = 0 
+197@ = 0 
+164@ = 6 
+183@ = 1 
+
+:MAF4_19592
+if 
+  183@ == 1 
+jf @MAF4_27117 
+if 
+  203@ == 1 
+jf @MAF4_19654 
+if 
+  33@ > 5000 
+jf @MAF4_19654 
+203@ = 2 
+
+:MAF4_19654
+if 
+  203@ == 2 
+jf @MAF4_21184 
+gosub @MAF4_30053 
+if 
+  3 > 184@ 
+jf @MAF4_21017 
+if 
+  196@ == 0 
+jf @MAF4_19762 
+if 
+  197@ == 0 
+jf @MAF4_19762 
+04AF: 156@ = 13620 // = constant 
+05AA: 157@s = 'DES8_FB' // @s = 'short'  // ~z~Installation personnel please be aware we are at Condition Red. This is not a drill!
+gosub @MAF4_30011 
+
+:MAF4_19762
+if 
+  196@ == 1 
+jf @MAF4_19834 
+if 
+  197@ == 0 
+jf @MAF4_19834 
+04AF: 156@ = 13621 // = constant 
+05AA: 157@s = 'DES8_FC' // @s = 'short'  // ~z~This facility has been breached, all security personnel head to the research labs now!
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_19834
+if 
+  33@ > 10000 
+jf @MAF4_19925 
+if 
+  196@ == 2 
+jf @MAF4_19925 
+if 
+  197@ == 0 
+jf @MAF4_19925 
+04AF: 156@ = 13625 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_19925
+if 
+  33@ > 7500 
+jf @MAF4_20016 
+if 
+  196@ == 3 
+jf @MAF4_20016 
+if 
+  197@ == 0 
+jf @MAF4_20016 
+04AF: 156@ = 13626 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20016
+if 
+  33@ > 5500 
+jf @MAF4_20107 
+if 
+  196@ == 4 
+jf @MAF4_20107 
+if 
+  197@ == 0 
+jf @MAF4_20107 
+04AF: 156@ = 13631 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20107
+if 
+  33@ > 8000 
+jf @MAF4_20198 
+if 
+  196@ == 5 
+jf @MAF4_20198 
+if 
+  197@ == 0 
+jf @MAF4_20198 
+04AF: 156@ = 13622 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20198
+if 
+  33@ > 12000 
+jf @MAF4_20289 
+if 
+  196@ == 6 
+jf @MAF4_20289 
+if 
+  197@ == 0 
+jf @MAF4_20289 
+04AF: 156@ = 13632 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20289
+if 
+  33@ > 12500 
+jf @MAF4_20380 
+if 
+  196@ == 7 
+jf @MAF4_20380 
+if 
+  197@ == 0 
+jf @MAF4_20380 
+04AF: 156@ = 13628 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20380
+if 
+  33@ > 12000 
+jf @MAF4_20471 
+if 
+  196@ == 8 
+jf @MAF4_20471 
+if 
+  197@ == 0 
+jf @MAF4_20471 
+04AF: 156@ = 13624 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20471
+if 
+  33@ > 25000 
+jf @MAF4_20562 
+if 
+  196@ == 9 
+jf @MAF4_20562 
+if 
+  197@ == 0 
+jf @MAF4_20562 
+04AF: 156@ = 13633 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20562
+if 
+  33@ > 15000 
+jf @MAF4_20653 
+if 
+  196@ == 10 
+jf @MAF4_20653 
+if 
+  197@ == 0 
+jf @MAF4_20653 
+04AF: 156@ = 13634 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20653
+if 
+  33@ > 20000 
+jf @MAF4_20744 
+if 
+  196@ == 11 
+jf @MAF4_20744 
+if 
+  197@ == 0 
+jf @MAF4_20744 
+04AF: 156@ = 13627 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20744
+if 
+  33@ > 15000 
+jf @MAF4_20835 
+if 
+  196@ == 12 
+jf @MAF4_20835 
+if 
+  197@ == 0 
+jf @MAF4_20835 
+04AF: 156@ = 13635 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20835
+if 
+  33@ > 10000 
+jf @MAF4_20926 
+if 
+  196@ == 13 
+jf @MAF4_20926 
+if 
+  197@ == 0 
+jf @MAF4_20926 
+04AF: 156@ = 13623 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_20926
+if 
+  33@ > 12000 
+jf @MAF4_21017 
+if 
+  196@ == 14 
+jf @MAF4_21017 
+if 
+  197@ == 0 
+jf @MAF4_21017 
+04AF: 156@ = 13629 // = constant 
+05AA: 157@s = 'DUMMY' // @s = 'short' 
+gosub @MAF4_30011 
+33@ = 0 
+
+:MAF4_21017
+if 
+  187@ == 2 
+jf @MAF4_21184 
+if 
+  196@ == 0 
+jf @MAF4_21119 
+if 
+  33@ > 2000 
+jf @MAF4_21119 
+if 
+  197@ == 0 
+jf @MAF4_21119 
+04AF: 156@ = 13636 // = constant 
+05AA: 157@s = 'DST8_34' // @s = 'short'  // ~s~The ~g~Black Project ~s~is located at the bottom of the launch bay.
+gosub @MAF4_30011 
+
+:MAF4_21119
+if 
+  196@ == 1 
+jf @MAF4_21184 
+if 
+  197@ == 0 
+jf @MAF4_21184 
+04AF: 156@ = 13637 // = constant 
+05AA: 157@s = 'DES8_HB' // @s = 'short'  // ~z~Intruder has penetrated the project! All military personnel to the launch bay IMMEDIATELY!
+gosub @MAF4_30011 
+
+:MAF4_21184
+if 
+  184@ == 0 
+jf @MAF4_22346 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 266.53 1849.53 8.0 cornerB 237.01 1837.55 10.52 
+jf @MAF4_22346 
+115@ = Actor.Create(Mission1, #ARMY, 248.5208, 1806.681, 6.5619)
+060B: set_actor 115@ decision_maker_to 160@ 
+Actor.Angle(115@) = 359.2584
+Actor.GiveWeaponAndAmmo(115@, M4, 9999)
+0648: unknown_actor 115@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 248.8298 1835.772 6.5471 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 248.5208 1809.681 6.5619 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 115@ to_animation_path_with_walk_mode 4 route_mode 3 
+211@ = Marker.CreateAboveActor(115@)
+018B: set_marker 211@ radar_mode 2 
+Actor.WeaponAccuracy(115@) = 80
+07BF: set_marker 211@ tracking_blip 1 
+116@ = Actor.Create(Mission1, #ARMY, 254.1943, 1835.365, 3.7175)
+Actor.Angle(116@) = 271.2598
+060B: set_actor 116@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(116@, M4, 99999)
+0648: unknown_actor 116@ task_set 5.0 // float 
+212@ = Marker.CreateAboveActor(116@)
+018B: set_marker 212@ radar_mode 2 
+0605: actor 116@ perform_animation "ROADCROSS" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 6000 
+07BF: set_marker 212@ tracking_blip 1 
+Actor.WeaponAccuracy(116@) = 80
+117@ = Actor.Create(Mission1, #ARMY, 249.41, 1825.84, 4.7)
+060B: set_actor 117@ decision_maker_to 160@ 
+Actor.Angle(117@) = 180.5658
+Actor.GiveWeaponAndAmmo(117@, M4, 9999)
+0648: unknown_actor 117@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 249.63 1816.64 4.71 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 249.41 1825.84 4.7 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 117@ to_animation_path_with_walk_mode 4 route_mode 3 
+213@ = Marker.CreateAboveActor(117@)
+018B: set_marker 213@ radar_mode 2 
+07BF: set_marker 213@ tracking_blip 1 
+118@ = Actor.Create(Mission1, #ARMY, 236.5669, 1813.103, 6.4213)
+060B: set_actor 118@ decision_maker_to 160@ 
+Actor.Angle(118@) = 167.7513
+Actor.GiveWeaponAndAmmo(118@, M4, 9999)
+0648: unknown_actor 118@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 236.0416 1803.518 6.4219 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 243.165 1803.049 6.4219 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 236.0416 1803.518 6.4219 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 236.5669 1813.103 6.4213 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 118@ to_animation_path_with_walk_mode 4 route_mode 3 
+214@ = Marker.CreateAboveActor(118@)
+018B: set_marker 214@ radar_mode 2 
+07BF: set_marker 214@ tracking_blip 1 
+120@ = Actor.Create(Mission1, #ARMY, 284.416, 1816.59, 3.8)
+060B: set_actor 120@ decision_maker_to 160@ 
+Actor.Angle(120@) = 83.92
+Actor.GiveWeaponAndAmmo(120@, M4, 9999)
+0648: unknown_actor 120@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 265.829 1816.31 4.7 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 284.416 1816.59 4.72 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 120@ to_animation_path_with_walk_mode 4 route_mode 3 
+216@ = Marker.CreateAboveActor(120@)
+018B: set_marker 216@ radar_mode 2 
+07BF: set_marker 216@ tracking_blip 1 
+121@ = Actor.Create(Mission1, #WMOSCI, 245.3671, 1830.29, 6.5547)
+Actor.Angle(121@) = 178.5107
+060B: set_actor 121@ decision_maker_to 161@ 
+Actor.Health(121@) = 10
+0605: actor 121@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+122@ = Actor.Create(Mission1, #WMOSCI, 213.3669, 1825.511, 5.4141)
+Actor.Angle(122@) = 67.6565
+060B: set_actor 122@ decision_maker_to 161@ 
+Actor.Health(122@) = 10
+0605: actor 122@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+123@ = Actor.Create(Mission1, #WMOSCI, 214.1768, 1818.739, 5.4216)
+Actor.Angle(123@) = 113.5239
+060B: set_actor 123@ decision_maker_to 161@ 
+Actor.Health(123@) = 10
+0605: actor 123@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+184@ = 1 
+
+:MAF4_22346
+if 
+  184@ == 1 
+jf @MAF4_23231 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 301.6813 1821.801 7.1396 cornerB 272.5243 1826.948 10.3607 
+jf @MAF4_23231 
+124@ = Actor.Create(Mission1, #ARMY, 280.7216, 1840.162, 6.7266)
+060B: set_actor 124@ decision_maker_to 160@ 
+Actor.Angle(124@) = 262.0249
+Actor.GiveWeaponAndAmmo(124@, M4, 9999)
+0648: unknown_actor 124@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 292.8436 1839.781 6.7266 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 280.7216 1840.162 6.7266 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 124@ to_animation_path_with_walk_mode 4 route_mode 3 
+220@ = Marker.CreateAboveActor(124@)
+018B: set_marker 220@ radar_mode 2 
+Actor.WeaponAccuracy(124@) = 80
+07BF: set_marker 220@ tracking_blip 1 
+125@ = Actor.Create(Mission1, #ARMY, 301.3004, 1839.902, 6.7266)
+060B: set_actor 125@ decision_maker_to 160@ 
+Actor.Angle(125@) = 91.0904
+Actor.GiveWeaponAndAmmo(125@, M4, 9999)
+0648: unknown_actor 125@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 328.527 1839.673 6.8281 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 301.3004 1839.902 6.7266 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 125@ to_animation_path_with_walk_mode 4 route_mode 3 
+221@ = Marker.CreateAboveActor(125@)
+Actor.WeaponAccuracy(125@) = 80
+018B: set_marker 221@ radar_mode 2 
+07BF: set_marker 221@ tracking_blip 1 
+126@ = Actor.Create(Mission1, #ARMY, 329.3857, 1855.295, 6.8357)
+060B: set_actor 126@ decision_maker_to 160@ 
+Actor.Angle(126@) = 272.6715
+Actor.GiveWeaponAndAmmo(126@, M4, 9999)
+0648: unknown_actor 126@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 317.411 1855.274 6.7341 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 329.3857 1855.295 6.8357 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 126@ to_animation_path_with_walk_mode 4 route_mode 3 
+222@ = Marker.CreateAboveActor(126@)
+018B: set_marker 222@ radar_mode 2 
+Actor.WeaponAccuracy(126@) = 80
+07BF: set_marker 222@ tracking_blip 1 
+127@ = Actor.Create(Mission1, #ARMY, 298.3582, 1856.054, 6.8281)
+060B: set_actor 127@ decision_maker_to 160@ 
+Actor.Angle(127@) = 167.8933
+Actor.GiveWeaponAndAmmo(127@, M4, 9999)
+0648: unknown_actor 127@ task_set 5.0 // float 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 297.3482 1868.002 7.7578 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 298.3582 1856.054 6.8281 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 127@ to_animation_path_with_walk_mode 4 route_mode 3 
+223@ = Marker.CreateAboveActor(127@)
+018B: set_marker 223@ radar_mode 2 
+Actor.WeaponAccuracy(127@) = 80
+07BF: set_marker 223@ tracking_blip 1 
+128@ = Actor.Create(Mission1, #ARMY, 313.7065, 1845.551, 6.7341)
+Actor.Angle(128@) = 2.8719
+060B: set_actor 128@ decision_maker_to 160@ 
+Actor.GiveWeaponAndAmmo(128@, M4, 99999)
+0648: unknown_actor 128@ task_set 5.0 // float 
+224@ = Marker.CreateAboveActor(128@)
+018B: set_marker 224@ radar_mode 2 
+Actor.WeaponAccuracy(128@) = 80
+07BF: set_marker 224@ tracking_blip 1 
+143@ = Object.Init(#A51_LABDOOR, 268.66, 1864.059, 7.5)
+Object.RemoveFromMissionCleanupList(143@)
+Object.SetImmunities(143@, 1, 1, 1, 1, 1)
+184@ = 2 
+
+:MAF4_23231
+if 
+  185@ == 0 
+jf @MAF4_23359 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere 212.93 1822.82 5.41 radius 1.0 1.0 3.0 sphere 1 stopped_on_foot 
+jf @MAF4_23359 
+32@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+Actor.Angle($PLAYER_ACTOR) = 92.24
+0605: actor $PLAYER_ACTOR perform_animation "ATM" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 500 
+185@ = 1 
+
+:MAF4_23359
+if 
+  185@ == 1 
+jf @MAF4_23435 
+if 
+  32@ > 500 
+jf @MAF4_23435 
+0687: clear_actor $PLAYER_ACTOR task 
+00BC: show_text_highpriority GXT 'DES8_21' time 4000 flag 1  // SAM site disabled
+07A8: enable_area69_sam 0 
+Player.CanMove($PLAYER_CHAR) = True
+185@ = 2 
+
+:MAF4_23435
+165@ = 0 
+
+:MAF4_23442
+if 
+  22 > 165@ 
+jf @MAF4_23532 
+if 
+   Actor.Dead(109@(165@,22i))
+jf @MAF4_23518 
+if 
+075C:   marker 205@(165@,22i) enabled 
+jf @MAF4_23518 
+Marker.Disable(205@(165@,22i))
+Actor.RemoveReferences(109@(165@,22i))
+
+:MAF4_23518
+165@ += 1 
+jump @MAF4_23442 
+
+:MAF4_23532
+if 
+  184@ == 2 
+jf @MAF4_23715 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 287.0 1870.0 9.0 radius 6.0 6.0 6.0 
+jf @MAF4_23715 
+00BC: show_text_highpriority GXT 'DST8_46' time 5000 flag 1  // ~s~The ~y~door~s~ to the launch bay where the black project is being stored is locked. Find a keycard to access it.
+133@ = Actor.Create(Mission1, #WMOSCI, 276.57, 1854.53, 7.75)
+Actor.Angle(133@) = 175.15
+060B: set_actor 133@ decision_maker_to 159@ 
+Actor.Health(133@) = 10
+0638: AS_actor 133@ stay_put 1 
+0605: actor 133@ perform_animation "ATM" IFP "PED" framedelta 8.0 loop 1 lockX 0 lockY 0 lockF 0 time 1000 
+186@ = 1 
+184@ = 3 
+
+:MAF4_23715
+if 
+  186@ == 1 
+jf @MAF4_24005 
+if 
+   not Actor.Dead(133@)
+jf @MAF4_23950 
+if or
+051A:   actor 133@ damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 133@ 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA 282.25 1852.36 cornerB 264.28 1863.69 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 282.25 1852.36 cornerB 264.28 1863.69 
+jf @MAF4_23943 
+05C4: AS_actor 133@ hands_up 20000 ms 
+if 
+03D0:   wav 2 loaded 
+jf @MAF4_23880 
+0949: link_wav 2 to_actor 133@ 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'DES8_AA' time 2000 flag 1  // ~z~Please, no more violence! Take my pass card and go!
+
+:MAF4_23880
+145@ = Pickup.Create(#KEYCARD, 3, 276.57, 1854.53, 8.75)
+060B: set_actor 133@ decision_maker_to 161@ 
+03DC: 229@ = create_marker_above_pickup 145@ 
+00BB: show_text_lowpriority GXT 'DST8_25' time 5000 flag 1  // ~s~Collect the ~g~keycard ~S~and open the ~y~door ~s~to the Black Project.
+186@ = 2 
+
+:MAF4_23943
+jump @MAF4_24005 
+
+:MAF4_23950
+145@ = Pickup.Create(#KEYCARD, 3, 276.57, 1854.53, 8.75)
+03DC: 229@ = create_marker_above_pickup 145@ 
+00BC: show_text_highpriority GXT 'DST8_25' time 5000 flag 1  // ~s~Collect the ~g~keycard ~S~and open the ~y~door ~s~to the Black Project.
+186@ = 2 
+
+:MAF4_24005
+if 
+  186@ == 2 
+jf @MAF4_24107 
+if 
+   Actor.Dead(133@)
+jf @MAF4_24079 
+if 
+  204@ == 0 
+jf @MAF4_24079 
+040D: unload_wav 2 
+03D5: remove_text 'DST8_25'  // ~s~Collect the ~g~keycard ~S~and open the ~y~door ~s~to the Black Project.
+204@ = 1 
+
+:MAF4_24079
+if 
+   Pickup.Picked_up(145@)
+jf @MAF4_24107 
+Marker.Disable(229@)
+186@ = 3 
+
+:MAF4_24107
+if 
+  184@ == 3 
+jf @MAF4_24276 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere 267.015 1862.51 7.76 radius 1.0 1.0 5.0 sphere 1 stopped_on_foot 
+jf @MAF4_24276 
+if 
+  186@ == 3 
+jf @MAF4_24260 
+Actor.Angle($PLAYER_ACTOR) = 6.3
+32@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+0605: actor $PLAYER_ACTOR perform_animation "ATM" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 500 
+184@ = 4 
+jump @MAF4_24276 
+
+:MAF4_24260
+00BC: show_text_highpriority GXT 'DST8_24' time 5000 flag 1  // ~s~You need to get a keycard to open this door.
+
+:MAF4_24276
+if 
+  184@ == 4 
+jf @MAF4_25510 
+if 
+03CA:   object 143@ exists 
+jf @MAF4_25510 
+if 
+  32@ > 500 
+jf @MAF4_25510 
+187@ = 1 
+if 
+03CA:   object 143@ exists 
+jf @MAF4_24360 
+097B: play_audio_at_object 143@ event 1035 
+
+:MAF4_24360
+Actor.DestroyInstantly(115@)
+Actor.DestroyInstantly(118@)
+Actor.DestroyInstantly(121@)
+Actor.DestroyInstantly(122@)
+Actor.DestroyInstantly(123@)
+Actor.DestroyInstantly(110@)
+Actor.DestroyInstantly(111@)
+Actor.DestroyInstantly(112@)
+Actor.DestroyInstantly(113@)
+Actor.DestroyInstantly(114@)
+0687: clear_actor $PLAYER_ACTOR task 
+Player.CanMove($PLAYER_CHAR) = True
+115@ = Actor.Create(Mission1, #ARMY, 261.5664, 1891.85, 7.4446)
+060B: set_actor 115@ decision_maker_to 159@ 
+Actor.Angle(115@) = 212.7731
+Actor.GiveWeaponAndAmmo(115@, M4, 9999)
+0638: AS_actor 115@ stay_put 1 
+Actor.Health(115@) = 150
+Actor.WeaponAccuracy(115@) = 80
+211@ = Marker.CreateAboveActor(115@)
+018B: set_marker 211@ radar_mode 2 
+07BF: set_marker 211@ tracking_blip 1 
+0085: 153@ = 115@ // (int) 
+gosub @MAF4_30396 
+118@ = Actor.Create(Mission1, #ARMY, 268.4905, 1890.074, 4.875)
+060B: set_actor 118@ decision_maker_to 159@ 
+Actor.Angle(118@) = 176.3921
+Actor.GiveWeaponAndAmmo(118@, M4, 9999)
+0638: AS_actor 118@ stay_put 1 
+Actor.Health(118@) = 150
+Actor.WeaponAccuracy(118@) = 30
+214@ = Marker.CreateAboveActor(118@)
+018B: set_marker 214@ radar_mode 2 
+07BF: set_marker 214@ tracking_blip 1 
+0085: 153@ = 118@ // (int) 
+gosub @MAF4_30396 
+122@ = Actor.Create(Mission1, #ARMY, 274.3991, 1880.725, -1.3518)
+060B: set_actor 122@ decision_maker_to 159@ 
+Actor.Angle(122@) = 65.8577
+Actor.GiveWeaponAndAmmo(122@, M4, 9999)
+0638: AS_actor 122@ stay_put 1 
+Actor.Health(122@) = 150
+Actor.WeaponAccuracy(122@) = 80
+218@ = Marker.CreateAboveActor(122@)
+018B: set_marker 218@ radar_mode 2 
+07BF: set_marker 218@ tracking_blip 1 
+0085: 153@ = 122@ // (int) 
+gosub @MAF4_30396 
+123@ = Actor.Create(Mission1, #ARMY, 268.9641, 1878.019, -4.5078)
+060B: set_actor 123@ decision_maker_to 159@ 
+Actor.Angle(123@) = 352.3847
+Actor.GiveWeaponAndAmmo(123@, M4, 9999)
+0638: AS_actor 123@ stay_put 1 
+Actor.Health(123@) = 150
+Actor.WeaponAccuracy(123@) = 40
+219@ = Marker.CreateAboveActor(123@)
+018B: set_marker 219@ radar_mode 2 
+07BF: set_marker 219@ tracking_blip 1 
+0085: 153@ = 123@ // (int) 
+gosub @MAF4_30396 
+110@ = Actor.Create(Mission1, #ARMY, 262.9983, 1883.624, -9.2031)
+060B: set_actor 110@ decision_maker_to 159@ 
+Actor.Angle(110@) = 259.5976
+Actor.GiveWeaponAndAmmo(110@, M4, 9999)
+0638: AS_actor 110@ stay_put 1 
+Actor.Health(110@) = 100
+Actor.WeaponAccuracy(110@) = 80
+206@ = Marker.CreateAboveActor(110@)
+018B: set_marker 206@ radar_mode 2 
+07BF: set_marker 206@ tracking_blip 1 
+0085: 153@ = 110@ // (int) 
+gosub @MAF4_30396 
+111@ = Actor.Create(Mission1, #ARMY, 268.0892, 1889.709, -13.8984)
+060B: set_actor 111@ decision_maker_to 159@ 
+Actor.Angle(111@) = 197.1955
+Actor.GiveWeaponAndAmmo(111@, M4, 9999)
+0638: AS_actor 111@ stay_put 1 
+Actor.Health(111@) = 150
+Actor.WeaponAccuracy(111@) = 25
+207@ = Marker.CreateAboveActor(111@)
+018B: set_marker 207@ radar_mode 2 
+07BF: set_marker 207@ tracking_blip 1 
+0085: 153@ = 111@ // (int) 
+gosub @MAF4_30396 
+112@ = Actor.Create(Mission1, #ARMY, 274.8945, 1884.525, -18.5859)
+060B: set_actor 112@ decision_maker_to 159@ 
+Actor.Angle(112@) = 117.7696
+Actor.GiveWeaponAndAmmo(112@, M4, 9999)
+0638: AS_actor 112@ stay_put 1 
+Actor.Health(112@) = 120
+Actor.WeaponAccuracy(112@) = 80
+208@ = Marker.CreateAboveActor(112@)
+018B: set_marker 208@ radar_mode 2 
+07BF: set_marker 208@ tracking_blip 1 
+0085: 153@ = 112@ // (int) 
+gosub @MAF4_30396 
+113@ = Actor.Create(Mission1, #ARMY, 270.4637, 1878.031, -22.7266)
+060B: set_actor 113@ decision_maker_to 159@ 
+Actor.Angle(113@) = 117.7696
+Actor.GiveWeaponAndAmmo(113@, M4, 9999)
+0638: AS_actor 113@ stay_put 1 
+Actor.Health(113@) = 150
+Actor.WeaponAccuracy(113@) = 85
+209@ = Marker.CreateAboveActor(113@)
+018B: set_marker 209@ radar_mode 2 
+07BF: set_marker 209@ tracking_blip 1 
+0085: 153@ = 113@ // (int) 
+gosub @MAF4_30396 
+114@ = Actor.Create(Mission1, #ARMY, 262.6877, 1883.484, -27.9766)
+060B: set_actor 114@ decision_maker_to 159@ 
+Actor.Angle(114@) = 117.7696
+Actor.GiveWeaponAndAmmo(114@, M4, 9999)
+0638: AS_actor 114@ stay_put 1 
+Actor.Health(114@) = 150
+Actor.WeaponAccuracy(114@) = 80
+210@ = Marker.CreateAboveActor(114@)
+018B: set_marker 210@ radar_mode 2 
+07BF: set_marker 210@ tracking_blip 1 
+0085: 153@ = 114@ // (int) 
+gosub @MAF4_30396 
+Car.RemoveReferences(132@)
+Model.Destroy(#TUG)
+032B: 144@ = create_weapon_pickup #JETPACK type 3 ammo 0 at 268.7 1884.1 -30.085 
+Marker.Disable(228@)
+03DC: 228@ = create_marker_above_pickup 144@ 
+07BF: set_marker 228@ tracking_blip 1 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'DST8_34' time 5000 flag 1  // ~s~The ~g~Black Project ~s~is located at the bottom of the launch bay.
+184@ = 5 
+
+:MAF4_25510
+if 
+  187@ == 1 
+jf @MAF4_25628 
+if 
+03CA:   object 143@ exists 
+jf @MAF4_25628 
+if 
+034E: move_object 143@ to 268.66 1864.059 12.2 speed 0.0 0.0 0.08 collision_check 0 
+jf @MAF4_25628 
+097B: play_audio_at_object 143@ event 1036 
+196@ = 0 
+197@ = 0 
+33@ = 0 
+187@ = 2 
+
+:MAF4_25628
+if 
+  184@ == 5 
+jf @MAF4_26539 
+if 
+   Pickup.Picked_up(144@)
+jf @MAF4_26539 
+Marker.Disable(228@)
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+00C0: set_current_time_hours_to 9 minutes_to 0 
+Actor.PutAt($PLAYER_ACTOR, 268.591, 1884.469, -31.0869)
+Actor.Angle($PLAYER_ACTOR) = 180.99
+07A7: put_jetpack_on_actor $PLAYER_ACTOR 
+Camera.SetPosition(268.5177, 1886.297, -29.5611, 0.0, 0.0, 0.0)
+Camera.PointAt(268.5393, 1885.316, -29.7523, 2)
+0460: set_camera_transverse_delay 0.0 time 3000 
+Model.Load(#MICRO_UZI)
+Model.Load(#CAMPER)
+023C: load_special_actor 'TRUTH' as 1 // models 290-299 
+00BC: show_text_highpriority GXT 'DST8_26' time 7000 flag 1  // ~s~You've found what The Truth wanted. You must escape by using the Jet pack to fly out of the ~y~launch bay ~s~directly above you.
+
+:MAF4_25819
+if or
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#CAMPER)
+823D:   not special_actor 1 loaded 
+jf @MAF4_25855 
+wait 0 
+jump @MAF4_25819 
+
+:MAF4_25855
+Car.Destroy(132@)
+Model.Destroy(#TUG)
+165@ = 0 
+
+:MAF4_25872
+if 
+  22 > 165@ 
+jf @MAF4_25922 
+Actor.DestroyInstantly(109@(165@,22i))
+Marker.Disable(205@(165@,22i))
+165@ += 1 
+jump @MAF4_25872 
+
+:MAF4_25922
+112@ = Actor.Create(Mission1, #ARMY, 139.9523, 1929.079, 18.2062)
+060B: set_actor 112@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(112@, M4, 9999)
+0638: AS_actor 112@ stay_put 1 
+Actor.Health(112@) = 50
+Actor.WeaponAccuracy(112@) = 30
+113@ = Actor.Create(Mission1, #ARMY, 127.6658, 1885.153, 17.0346)
+060B: set_actor 113@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(113@, M4, 9999)
+0638: AS_actor 113@ stay_put 1 
+Actor.Health(113@) = 50
+Actor.WeaponAccuracy(113@) = 30
+114@ = Actor.Create(Mission1, #ARMY, 114.7912, 1830.386, 16.6406)
+060B: set_actor 114@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(114@, M4, 9999)
+0638: AS_actor 114@ stay_put 1 
+Actor.Health(114@) = 50
+Actor.WeaponAccuracy(114@) = 40
+115@ = Actor.Create(Mission1, #ARMY, 205.6079, 1860.557, 19.6406)
+060B: set_actor 115@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(115@, M4, 9999)
+0638: AS_actor 115@ stay_put 1 
+Actor.Health(115@) = 50
+Actor.WeaponAccuracy(115@) = 30
+116@ = Actor.Create(Mission1, #ARMY, 245.2025, 1881.998, 19.1052)
+060B: set_actor 116@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(116@, M4, 9999)
+0638: AS_actor 116@ stay_put 1 
+Actor.Health(116@) = 50
+Actor.WeaponAccuracy(116@) = 40
+117@ = Actor.Create(Mission1, #ARMY, 262.8257, 1807.669, 24.4985)
+060B: set_actor 117@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(117@, M4, 9999)
+0638: AS_actor 117@ stay_put 1 
+Actor.Health(117@) = 50
+Actor.WeaponAccuracy(117@) = 30
+118@ = Actor.Create(Mission1, #ARMY, 279.2588, 1863.757, 16.6406)
+060B: set_actor 118@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(118@, M4, 9999)
+0638: AS_actor 118@ stay_put 1 
+Actor.Health(118@) = 50
+Actor.WeaponAccuracy(118@) = 30
+119@ = Actor.Create(Mission1, #ARMY, 279.2344, 1901.905, 16.6406)
+060B: set_actor 119@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(119@, M4, 9999)
+0638: AS_actor 119@ stay_put 1 
+Actor.Health(119@) = 50
+Actor.WeaponAccuracy(119@) = 40
+120@ = Actor.Create(Mission1, #ARMY, 254.6844, 1907.714, 19.4742)
+060B: set_actor 120@ decision_maker_to 159@ 
+Actor.GiveWeaponAndAmmo(120@, M4, 9999)
+0638: AS_actor 120@ stay_put 1 
+Actor.Health(120@) = 50
+Actor.WeaponAccuracy(120@) = 30
+Object.Destroy(143@)
+143@ = Object.Init(#A51_LABDOOR, 268.66, 1864.059, 7.5)
+32@ = 0 
+184@ = 6 
+
+:MAF4_26539
+if 
+  189@ == 1 
+jf @MAF4_26628 
+if 
+03CA:   object $2670 exists 
+jf @MAF4_26628 
+if 
+034E: move_object $2670 to 276.14 1884.06 15.924 speed 0.05 0.0 0.0 collision_check 0 
+jf @MAF4_26628 
+189@ = 2 
+
+:MAF4_26628
+if 
+  184@ == 6 
+jf @MAF4_26705 
+if 
+  32@ > 1000 
+jf @MAF4_26705 
+Camera.PointAt(268.5247, 1886.084, -28.5841, 1)
+189@ = 1 
+32@ = 0 
+184@ = 7 
+
+:MAF4_26705
+if 
+  184@ == 7 
+jf @MAF4_27117 
+if 
+  32@ > 4000 
+jf @MAF4_27117 
+set_weather 18 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 200)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Object.PutAt($2670, 276.14, 1884.06, 15.924)
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+00BE: text_clear_all 
+Marker.Disable(228@)
+075B: zoom_radar 0 
+018A: 228@ = create_checkpoint_at 268.9 1884.33 19.91 
+109@ = Actor.Create(Mission1, #ARMY, 271.62, 1878.08, -2.32)
+060B: set_actor 109@ decision_maker_to 159@ 
+Actor.Angle(109@) = 212.7731
+Actor.GiveWeaponAndAmmo(109@, M4, 9999)
+0638: AS_actor 109@ stay_put 1 
+Actor.Health(109@) = 50
+Actor.WeaponAccuracy(109@) = 30
+0085: 153@ = 109@ // (int) 
+gosub @MAF4_30396 
+110@ = Actor.Create(Mission1, #ARMY, 266.112, 1876.84, 7.44)
+060B: set_actor 110@ decision_maker_to 159@ 
+Actor.Angle(110@) = 328.04
+Actor.GiveWeaponAndAmmo(110@, M4, 9999)
+0638: AS_actor 110@ stay_put 1 
+Actor.Health(110@) = 50
+Actor.WeaponAccuracy(110@) = 30
+0085: 153@ = 110@ // (int) 
+gosub @MAF4_30396 
+111@ = Actor.Create(Mission1, #ARMY, 274.432, 1888.28, 3.21)
+060B: set_actor 111@ decision_maker_to 159@ 
+Actor.Angle(111@) = 328.0
+Actor.GiveWeaponAndAmmo(111@, M4, 9999)
+0638: AS_actor 111@ stay_put 1 
+Actor.Health(111@) = 50
+Actor.WeaponAccuracy(111@) = 30
+0085: 153@ = 111@ // (int) 
+gosub @MAF4_30396 
+183@ = 2 
+188@ = 1 
+184@ = 8 
+
+:MAF4_27117
+if 
+  183@ == 2 
+jf @MAF4_30004 
+if 
+  187@ == 3 
+jf @MAF4_27467 
+gosub @MAF4_30053 
+if 
+  196@ == 0 
+jf @MAF4_27225 
+if 
+  197@ == 0 
+jf @MAF4_27225 
+04AF: 156@ = 13638 // = constant 
+05AA: 157@s = 'DST8_35' // @s = 'short'  // ~s~Deliver the jetpack to a ~y~drop off point ~s~deep in the canyons.
+gosub @MAF4_30011 
+
+:MAF4_27225
+if 
+  196@ == 1 
+jf @MAF4_27346 
+if 
+  197@ == 0 
+jf @MAF4_27346 
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @MAF4_27317 
+04AF: 156@ = 13639 // = constant 
+05AA: 157@s = 'DES8_JB' // @s = 'short'  // ~z~Take him out! That's a $60,000,000 project!
+jump @MAF4_27339 
+
+:MAF4_27317
+04AF: 156@ = 13638 // = constant 
+05AA: 157@s = 'DES8_JA' // @s = 'short'  // ~z~Intruder is stealing the jet pack! All military personnel outside and fire at will!
+
+:MAF4_27339
+gosub @MAF4_30011 
+
+:MAF4_27346
+if 
+  196@ == 2 
+jf @MAF4_27467 
+if 
+  197@ == 0 
+jf @MAF4_27467 
+0209: 300@ = random_int_in_ranges 0 2 
+if 
+  300@ == 0 
+jf @MAF4_27438 
+04AF: 156@ = 13640 // = constant 
+05AA: 157@s = 'DES8_JC' // @s = 'short'  // ~z~Get the General Mills on the line!
+jump @MAF4_27460 
+
+:MAF4_27438
+04AF: 156@ = 13641 // = constant 
+05AA: 157@s = 'DES8_KA' // @s = 'short'  // ~z~Call Syracuse! I want anything they've got airborne after that bastard!
+
+:MAF4_27460
+gosub @MAF4_30011 
+
+:MAF4_27467
+if 
+  8 > 188@ 
+jf @MAF4_27889 
+if 
+  188@ == 1 
+jf @MAF4_27528 
+03E5: show_text_box 'DST8_27'  // Press ~k~~PED_SPRINT~ to increase thrust - this will make you ascend.
+33@ = 0 
+188@ = 2 
+
+:MAF4_27528
+if 
+  188@ == 2 
+jf @MAF4_27590 
+if 
+  33@ > 6000 
+jf @MAF4_27590 
+03E5: show_text_box 'DST8_28'  // To move in a direction with the jet pack use the movement controls while in the air.
+33@ = 0 
+188@ = 3 
+
+:MAF4_27590
+if 
+  188@ == 3 
+jf @MAF4_27652 
+if 
+  33@ > 6000 
+jf @MAF4_27652 
+03E5: show_text_box 'DST8_29'  // To descend quickly press ~k~~PED_JUMPING~.
+33@ = 0 
+188@ = 4 
+
+:MAF4_27652
+if 
+  188@ == 4 
+jf @MAF4_27714 
+if 
+  33@ > 6000 
+jf @MAF4_27714 
+03E5: show_text_box 'DST8_30'  // To strafe right while in the jetpack press ~k~~GO_RIGHT~.
+33@ = 0 
+188@ = 5 
+
+:MAF4_27714
+if 
+  188@ == 5 
+jf @MAF4_27776 
+if 
+  33@ > 6000 
+jf @MAF4_27776 
+03E5: show_text_box 'DST8_31'  // To strafe left while in the jetpack press ~k~~GO_LEFT~.
+33@ = 0 
+188@ = 6 
+
+:MAF4_27776
+if 
+  188@ == 6 
+jf @MAF4_27838 
+if 
+  33@ > 6000 
+jf @MAF4_27838 
+03E5: show_text_box 'DST8_33'  // You can fire a single-handed weapon as normal while piloting the jetpack.
+33@ = 0 
+188@ = 7 
+
+:MAF4_27838
+if 
+  188@ == 7 
+jf @MAF4_27889 
+if 
+  33@ > 6000 
+jf @MAF4_27889 
+33@ = 0 
+188@ = 8 
+
+:MAF4_27889
+if 
+  184@ == 8 
+jf @MAF4_28844 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 268.73 1883.96 17.85 radius 30.0 30.0 10.0 
+jf @MAF4_28844 
+097A: play_audio_at 0.0 0.0 0.0 event 1006 
+187@ = 3 
+196@ = 0 
+197@ = 0 
+097A: play_audio_at 268.73 1883.96 17.85 event 1005 
+42@ = Object.Init(#A51_SPOTBULB, 103.946, 1901.047, 36.246)
+92@ = Object.Init(#A51_SPOTHOUSING, 103.946, 1901.047, 36.246)
+93@ = Object.Init(#A51_SPOTBASE, 103.946, 1901.047, 36.246)
+071F: set_object 42@ health_to 5000 
+0875: set_object 42@ immune_to_nonplayer 1 
+43@ = Object.Init(#A51_SPOTBULB, 161.962, 1933.043, 36.246)
+94@ = Object.Init(#A51_SPOTHOUSING, 161.962, 1933.043, 36.246)
+95@ = Object.Init(#A51_SPOTBASE, 161.962, 1933.043, 36.246)
+071F: set_object 43@ health_to 5000 
+0875: set_object 43@ immune_to_nonplayer 1 
+44@ = Object.Init(#A51_SPOTBULB, 233.486, 1934.789, 36.246)
+96@ = Object.Init(#A51_SPOTHOUSING, 233.486, 1934.789, 36.246)
+97@ = Object.Init(#A51_SPOTBASE, 233.486, 1934.789, 36.246)
+071F: set_object 44@ health_to 5000 
+0875: set_object 44@ immune_to_nonplayer 1 
+45@ = Object.Init(#A51_SPOTBULB, 267.116, 1895.241, 36.246)
+98@ = Object.Init(#A51_SPOTHOUSING, 267.116, 1895.241, 36.246)
+99@ = Object.Init(#A51_SPOTBASE, 267.116, 1895.241, 36.246)
+071F: set_object 45@ health_to 5000 
+0875: set_object 45@ immune_to_nonplayer 1 
+46@ = Object.Init(#A51_SPOTBULB, 262.145, 1807.62, 36.246)
+100@ = Object.Init(#A51_SPOTHOUSING, 262.145, 1807.62, 36.246)
+101@ = Object.Init(#A51_SPOTBASE, 262.145, 1807.62, 36.246)
+071F: set_object 46@ health_to 5000 
+0875: set_object 46@ immune_to_nonplayer 1 
+47@ = Object.Init(#A51_SPOTBULB, 166.003, 1849.937, 36.246)
+102@ = Object.Init(#A51_SPOTHOUSING, 166.003, 1849.937, 36.246)
+103@ = Object.Init(#A51_SPOTBASE, 166.003, 1849.937, 36.246)
+071F: set_object 47@ health_to 5000 
+0875: set_object 47@ immune_to_nonplayer 1 
+48@ = Object.Init(#A51_SPOTBULB, 113.439, 1814.405, 36.246)
+104@ = Object.Init(#A51_SPOTHOUSING, 113.439, 1814.405, 36.246)
+105@ = Object.Init(#A51_SPOTBASE, 113.439, 1814.405, 36.246)
+071F: set_object 48@ health_to 5000 
+0875: set_object 48@ immune_to_nonplayer 1 
+165@ = 0 
+
+:MAF4_28611
+if 
+  22 > 165@ 
+jf @MAF4_28675 
+if 
+   not Actor.Dead(109@(165@,22i))
+jf @MAF4_28661 
+05E2: AS_actor 109@(165@,22i) kill_actor $PLAYER_ACTOR 
+
+:MAF4_28661
+165@ += 1 
+jump @MAF4_28611 
+
+:MAF4_28675
+Marker.Disable(228@)
+018A: 228@ = create_checkpoint_at -794.8 2425.184 156.124 
+00BC: show_text_highpriority GXT 'DST8_35' time 7000 flag 1  // ~s~Deliver the jetpack to a ~y~drop off point ~s~deep in the canyons.
+107@ = Car.Create(#CAMPER, -783.169, 2430.03, 156.23)
+0574: set_car 107@ keep_position 1 
+Car.Angle(107@) = 171.04
+0229: set_car 107@ primary_color_to 1 secondary_color_to 1 
+06ED: set_car 107@ paintjob 0 
+106@ = Actor.CreateAsDriver(Mission1, #SPECIAL01, 107@)
+060B: set_actor 106@ decision_maker_to 159@ 
+Car.SetImmunities(107@, 1, 1, 1, 1, 1)
+Actor.SetImmunities(106@, 1, 1, 1, 1, 1)
+09B0: set_car 107@ accessible_for_player_using_controller 0 
+190@ = 1 
+184@ = 9 
+
+:MAF4_28844
+if 
+  184@ == 9 
+jf @MAF4_28965 
+if 
+80EC:   not actor $PLAYER_ACTOR sphere 0 near_point 276.14 1884.06 radius 100.0 100.0 
+jf @MAF4_28965 
+165@ = 0 
+
+:MAF4_28907
+if 
+  22 > 165@ 
+jf @MAF4_28958 
+Actor.RemoveReferences(109@(165@,22i))
+Model.Destroy(#ARMY)
+Model.Destroy(#M4)
+165@ += 1 
+jump @MAF4_28907 
+
+:MAF4_28958
+184@ = 10 
+
+:MAF4_28965
+if 
+  190@ == 1 
+jf @MAF4_29113 
+if 
+   not Actor.Dead(106@)
+jf @MAF4_29113 
+if 
+00F2:   actor 106@ near_actor $PLAYER_ACTOR radius 200.0 200.0 0 
+jf @MAF4_29113 
+097A: play_audio_at 268.73 1883.96 17.85 event 1006 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_29073 
+0574: set_car 107@ keep_position 0 
+
+:MAF4_29073
+108@ = Car.Create(#SANCHEZ, -776.66, 2426.41, 156.11)
+Car.Angle(108@) = 175.776
+190@ = 2 
+
+:MAF4_29113
+if 
+  190@ == 2 
+jf @MAF4_29341 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -791.14 2425.33 156.2 radius 3.0 3.0 3.0 
+jf @MAF4_29341 
+0395: clear_area 1 at -810.94 2360.42 150.81 radius 200.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+fade 0 500 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 41431 as 1 
+03CF: load_wav 13644 as 2 
+
+:MAF4_29245
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @MAF4_29275 
+wait 0 
+jump @MAF4_29245 
+
+:MAF4_29275
+if 
+fading 
+jf @MAF4_29299 
+wait 0 
+jump @MAF4_29275 
+
+:MAF4_29299
+Actor.PutAt($PLAYER_ACTOR, -791.178, 2425.34, 156.16)
+Actor.Angle($PLAYER_ACTOR) = 256.615
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+190@ = 3 
+
+:MAF4_29341
+if 
+  190@ == 3 
+jf @MAF4_29887 
+Camera.SetPosition(-785.0004, 2435.679, 157.5931, 0.0, 0.0, 0.0)
+Camera.PointAt(-784.9536, 2434.682, 157.5342, 2)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+fade 1 250 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DES8_MA' time 2000 flag 1  // ~z~Carl, dude, man!
+
+:MAF4_29444
+if 
+83D2:   not wav 1 ended 
+jf @MAF4_29470 
+wait 0 
+jump @MAF4_29444 
+
+:MAF4_29470
+00BE: text_clear_all 
+040D: unload_wav 1 
+03CF: load_wav 41432 as 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'DES8_MB' time 3000 flag 1  // ~z~Hey, here you go. You better stash it somewhere fast!
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:MAF4_29541
+if 
+83D2:   not wav 2 ended 
+jf @MAF4_29567 
+wait 0 
+jump @MAF4_29541 
+
+:MAF4_29567
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+040D: unload_wav 2 
+03CF: load_wav 13645 as 2 
+
+:MAF4_29583
+if 
+83D0:   not wav 1 loaded 
+jf @MAF4_29609 
+wait 0 
+jump @MAF4_29583 
+
+:MAF4_29609
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DES8_MC' time 3000 flag 1  // ~z~Far out, have a nice trip, dude!
+
+:MAF4_29629
+if 
+83D2:   not wav 1 ended 
+jf @MAF4_29655 
+wait 0 
+jump @MAF4_29629 
+
+:MAF4_29655
+040D: unload_wav 1 
+03CF: load_wav 13646 as 1 
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_29716 
+Car.DriveTo(107@, -810.94, 2360.42, 150.81)
+32@ = 0 
+190@ = 4 
+
+:MAF4_29716
+if 
+   not Car.Wrecked(107@)
+jf @MAF4_29743 
+05C0: AS_actor $PLAYER_ACTOR look_at_car 107@ 5000 ms 
+
+:MAF4_29743
+if 
+83D0:   not wav 2 loaded 
+jf @MAF4_29769 
+wait 0 
+jump @MAF4_29743 
+
+:MAF4_29769
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'DES8_MD' time 2000 flag 1  // ~z~Hey, wait a...
+
+:MAF4_29789
+if 
+83D2:   not wav 2 ended 
+jf @MAF4_29815 
+wait 0 
+jump @MAF4_29789 
+
+:MAF4_29815
+if 
+83D0:   not wav 1 loaded 
+jf @MAF4_29841 
+wait 0 
+jump @MAF4_29815 
+
+:MAF4_29841
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DES8_ME' time 2000 flag 1  // ~z~Ahh, was it too much to ask to get a lift into town?
+
+:MAF4_29861
+if 
+83D2:   not wav 1 ended 
+jf @MAF4_29887 
+wait 0 
+jump @MAF4_29861 
+
+:MAF4_29887
+if 
+  190@ == 4 
+jf @MAF4_30004 
+if 
+  32@ > 2000 
+jf @MAF4_30004 
+fade 0 500 
+
+:MAF4_29931
+if 
+fading 
+jf @MAF4_29955 
+wait 0 
+jump @MAF4_29931 
+
+:MAF4_29955
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Car.Destroy(107@)
+Actor.DestroyInstantly(106@)
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+fade 1 500 
+jump @MAF4_30532 
+190@ = 5 
+
+:MAF4_30004
+jump @MAF4_1996 
+
+:MAF4_30011
+if 
+  197@ == 0 
+jf @MAF4_30051 
+03CF: load_wav 156@ as 1 
+05AA: 154@s = 157@s // @s = 'short' 
+197@ = 1 
+
+:MAF4_30051
+return 
+
+:MAF4_30053
+if 
+  197@ == 1 
+jf @MAF4_30132 
+if 
+03D0:   wav 1 loaded 
+jf @MAF4_30132 
+if 
+85AE:   not  154@s == 'DUMMY' // @s == 'short' 
+jf @MAF4_30121 
+00BC: show_text_highpriority GXT 154@s time 4000 flag 1 
+
+:MAF4_30121
+03D1: play_wav 1 
+197@ = 2 
+
+:MAF4_30132
+if 
+  197@ == 2 
+jf @MAF4_30199 
+if 
+03D2:   wav 1 ended 
+jf @MAF4_30199 
+196@ += 1 
+199@ += 1 
+201@ += 1 
+040D: unload_wav 1 
+00BE: text_clear_all 
+197@ = 0 
+
+:MAF4_30199
+return 
+
+:MAF4_30201
+165@ = 0 
+
+:MAF4_30208
+if 
+  7 > 165@ 
+jf @MAF4_30316 
+if 
+06B3:   searchlight 35@(165@,7i) active 
+jf @MAF4_30302 
+06B4: set_searchlight 35@(165@,7i) path_between 49@(165@,7f) 56@(165@,7f) 63@(165@,7f) and 70@(165@,7f) 77@(165@,7f) 84@(165@,7f) speed 0.3 
+
+:MAF4_30302
+165@ += 1 
+jump @MAF4_30208 
+
+:MAF4_30316
+return 
+
+:MAF4_30318
+166@ = 0 
+
+:MAF4_30325
+if 
+  7 > 166@ 
+jf @MAF4_30394 
+if 
+06B3:   searchlight 35@(166@,7i) active 
+jf @MAF4_30380 
+06B6: set_searchlight 35@(166@,7i) follow_actor $PLAYER_ACTOR speed 0.125 
+
+:MAF4_30380
+166@ += 1 
+jump @MAF4_30325 
+
+:MAF4_30394
+return 
+
+:MAF4_30396
+0615: define_AS_pack_begin 152@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 152@ 
+0618: assign_actor 153@ to_AS_pack 152@ 
+061B: remove_references_to_AS_pack 152@ 
+return 
+
+:MAF4_30434
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @MAF4_30462 
+$11033 = 0 
+
+:MAF4_30462
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+Object.Destroy($OBJECT_M_A51_VENTCOVERB)
+$OBJECT_M_A51_VENTCOVERB = Object.Create(#A51_VENTCOVERB, 245.968, 1862.843, 19.49)
+0453: set_object $OBJECT_M_A51_VENTCOVERB XYZ_rotation 0.0 0.0 -140.998 
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_VENTCOVERB)
+return 
+
+:MAF4_30532
+$TORENO_TOTAL_PASSED_MISSIONS += 1 
+0629: change_integer_stat 332 to 1 
+032B: $3242 = create_weapon_pickup #SHOTGSPA type 15 ammo 30 at 297.8289 1846.622 6.7266 
+032B: $3243 = create_weapon_pickup #JETPACK type 15 ammo 0 at 268.7 1884.1 -30.085 
+$3343 = Pickup.Create(#BODYARMOUR, 15, 266.2813, 1816.398, 1.594)
+032B: $3249 = create_weapon_pickup #IRGOGGLES type 15 ammo 1 at 212.8813 1811.005 21.4187 
+032B: $3250 = create_weapon_pickup #IRGOGGLES type 15 ammo 1 at 1270.52 -795.5929 1084.254 
+032B: $3251 = create_weapon_pickup #IRGOGGLES type 15 ammo 1 at -350.499 1608.437 75.642 
+032B: $3252 = create_weapon_pickup #IRGOGGLES type 15 ammo 1 at -2224.68 129.1278 1035.62 
+Marker.Disable($581)
+0318: set_latest_mission_passed 'DESERT8'  // Black Project
+0394: play_music 1 
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSD' number 1 time 5000 style 1  // MISSION PASSED!
+Player.ClearWantedLevel($PLAYER_CHAR)
+Marker.Disable($581)
+return 
+
+:MAF4_30786
+$ONMISSION = 0 
+Model.Destroy(#ARMY)
+Model.Destroy(#M4)
+Model.Destroy(#A51_SPOTBULB)
+Model.Destroy(#A51_SPOTHOUSING)
+Model.Destroy(#A51_SPOTBASE)
+Model.Destroy(#CAMPER)
+Model.Destroy(#KNIFECUR)
+Model.Destroy(#SILENCED)
+Model.Destroy(#TUG)
+Model.Destroy(#WMOSCI)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#SNIPER)
+Model.Destroy(#IRGOGGLES)
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+075B: zoom_radar 0 
+01B7: release_weather 
+09D7: set_player $PLAYER_CHAR force_interior_lighting 0 
+0A24: enable_military_zones_wanted_level 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MAF4_30923 
+0489: set_actor $PLAYER_ACTOR muted 0 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+
+:MAF4_30923
+Actor.RemoveReferences(106@)
+0296: unload_special_actor 1 
+Object.Destroy(143@)
+Pickup.Destroy(144@)
+Pickup.Destroy(145@)
+Pickup.Destroy(146@)
+Pickup.Destroy(147@)
+Pickup.Destroy(148@)
+Pickup.Destroy(149@)
+Pickup.Destroy(150@)
+Pickup.Destroy(151@)
+09A6: enable_interior_radar_blips 0 
+if 
+03CA:   object $2670 exists 
+jf @MAF4_31017 
+Object.PutAt($2670, 268.664, 1884.06, 15.925)
+
+:MAF4_31017
+Object.Destroy($OBJECT_M_A51_BLASTDOORR)
+Object.Destroy($OBJECT_M_A51_BLASTDOORL)
+$OBJECT_M_A51_BLASTDOORR = Object.Init(#A51_BLASTDOORR, 215.941, 1874.571, 13.903)
+Object.Angle($OBJECT_M_A51_BLASTDOORR) = 0.0
+$OBJECT_M_A51_BLASTDOORL = Object.Init(#A51_BLASTDOORL, 211.842, 1874.571, 13.903)
+Object.Angle($OBJECT_M_A51_BLASTDOORL) = 0.0
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_BLASTDOORR)
+Object.RemoveFromMissionCleanupList($OBJECT_M_A51_BLASTDOORL)
+165@ = 0 
+
+:MAF4_31108
+if 
+  22 > 165@ 
+jf @MAF4_31149 
+Marker.Disable(205@(165@,22i))
+165@ += 1 
+jump @MAF4_31108 
+
+:MAF4_31149
+Marker.Disable(227@)
+Marker.Disable(228@)
+Marker.Disable(229@)
+165@ = 0 
+
+:MAF4_31171
+if 
+  7 > 165@ 
+jf @MAF4_31221 
+06B2: destroy_searchlight 35@(165@,7i) 
+Object.Destroy(42@(165@,7i))
+165@ += 1 
+jump @MAF4_31171 
+
+:MAF4_31221
+Object.Destroy(92@)
+Object.Destroy(93@)
+Object.Destroy(94@)
+Object.Destroy(95@)
+Object.Destroy(96@)
+Object.Destroy(97@)
+Object.Destroy(98@)
+Object.Destroy(99@)
+Object.Destroy(100@)
+Object.Destroy(101@)
+Object.Destroy(102@)
+Object.Destroy(103@)
+Object.Destroy(104@)
+Object.Destroy(105@)
+01B7: release_weather 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+07A8: enable_area69_sam 1 
+03C7: set_sensitivity_to_crime 1.0 
+01B7: release_weather 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

@@ -1,0 +1,2354 @@
+:BCRASH1
+thread 'BCRASH1' 
+gosub @BCRASH1_935 
+if 
+wasted_or_busted 
+jf @BCRASH1_45 
+$11033 = 0 
+gosub @BCRASH1_13615 
+
+:BCRASH1_45
+gosub @BCRASH1_13812 
+end_thread 
+
+:BCRASH1_54
+023C: load_special_actor 'CARVER' as 1 // models 290-299 
+Model.Load(#FBI)
+Model.Load(#WASHING)
+Model.Load(#SANCHEZ)
+Model.Load(#MICRO_UZI)
+Model.Load(#CAMERA)
+038B: load_requested_models 
+
+:BCRASH1_94
+if or
+823D:   not special_actor 1 loaded 
+   not Model.Available(#FBI)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#WASHING)
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#CAMERA)
+jf @BCRASH1_145 
+wait 0 
+jump @BCRASH1_94 
+
+:BCRASH1_145
+return 
+032B: 270@ = create_weapon_pickup #CAMERA type 3 ammo 24 at -2044.1 -2523.86 31.11 
+03DC: 271@ = create_marker_above_pickup 270@ 
+
+:BCRASH1_182
+287@ = -2814.84 
+288@ = -1522.0 
+289@ = 139.33 
+284@ = Actor.Create(CivMale, #SPECIAL01, 287@, 288@, 289@)
+054A: set_actor 284@ can_be_shot_in_a_car 0 
+060A: create_decision_maker_type 0 store_to 286@ // decision\allowed\m_.ped files 
+060B: set_actor 284@ decision_maker_to 286@ 
+return 
+
+:BCRASH1_255
+0296: unload_special_actor 1 
+return 
+
+:BCRASH1_261
+302@ = -2800.11 
+307@ = -1521.49 
+312@ = 137.37 
+317@ = 305.1252 
+303@ = -2799.34 
+308@ = -1524.66 
+313@ = 137.38 
+318@ = 356.2755 
+304@ = -2789.047 
+309@ = -1533.317 
+314@ = 138.4778 
+319@ = 317.5168 
+305@ = -2801.7 
+310@ = -1515.16 
+315@ = 137.33 
+320@ = 270.3571 
+060A: create_decision_maker_type 0 store_to 300@ // decision\allowed\m_.ped files 
+291@ = Actor.Create(Mission1, #FBI, 81@, 87@, 93@)
+Actor.Angle(291@) = 317@
+Actor.GiveWeaponAndAmmo(291@, MicroUzi, 30000)
+077A: set_actor 291@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0961: set_actor 291@ keep_tasks_after_cleanup 1 
+060B: set_actor 291@ decision_maker_to 300@ 
+292@ = Actor.Create(Mission1, #FBI, 82@, 88@, 94@)
+Actor.Angle(292@) = 318@
+Actor.GiveWeaponAndAmmo(292@, MicroUzi, 30000)
+077A: set_actor 292@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0961: set_actor 292@ keep_tasks_after_cleanup 1 
+060B: set_actor 292@ decision_maker_to 300@ 
+293@ = Actor.Create(Mission1, #FBI, 80@, 86@, 92@)
+Actor.Angle(293@) = 319@
+Actor.GiveWeaponAndAmmo(293@, MicroUzi, 30000)
+077A: set_actor 293@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0961: set_actor 293@ keep_tasks_after_cleanup 1 
+060B: set_actor 293@ decision_maker_to 300@ 
+294@ = Actor.Create(Mission1, #FBI, 79@, 85@, 91@)
+Actor.Angle(294@) = 320@
+Actor.GiveWeaponAndAmmo(294@, MicroUzi, 30000)
+077A: set_actor 294@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0961: set_actor 294@ keep_tasks_after_cleanup 1 
+060B: set_actor 294@ decision_maker_to 300@ 
+077A: set_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+return 
+
+:BCRASH1_683
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#FBI)
+return 
+
+:BCRASH1_695
+324@ = -2815.16 
+325@ = -1512.03 
+326@ = 138.08 
+327@ = 272.57 
+0674: set_car_model #WASHING numberplate "_ASSMAN_" 
+322@ = Car.Create(#WASHING, 324@, 325@, 326@)
+0587: enable_car 322@ validate_position 0 
+Car.Angle(322@) = 327@
+Car.DoorStatus(322@) = 3
+053F: set_car 322@ tires_vulnerability 0 
+return 
+
+:BCRASH1_798
+Model.Destroy(#WASHING)
+return 
+return 
+
+:BCRASH1_807
+Model.Load(#SANCHEZ)
+
+:BCRASH1_812
+if 
+   not Model.Available(#SANCHEZ)
+jf @BCRASH1_839 
+wait 0 
+jump @BCRASH1_812 
+
+:BCRASH1_839
+330@ = -2803.156 
+331@ = -1519.46 
+332@ = 138.2818 
+333@ = 189.4269 
+328@ = Car.Create(#SANCHEZ, 330@, 331@, 332@)
+0587: enable_car 328@ validate_position 0 
+Car.Angle(328@) = 333@
+Car.SetImmunities(328@, 1, 1, 1, 1, 1)
+return 
+Model.Destroy(#SANCHEZ)
+return 
+
+:BCRASH1_935
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'BCRASH1' 
+107@ = -2815.382 
+147@ = -1511.204 
+187@ = 139.1089 
+108@ = -2766.912 
+148@ = -1599.013 
+188@ = 141.1248 
+109@ = -2778.611 
+149@ = -1698.438 
+189@ = 141.3879 
+110@ = -2770.779 
+150@ = -1798.475 
+190@ = 141.5863 
+111@ = -2705.242 
+151@ = -1874.129 
+191@ = 137.9205 
+112@ = -2651.399 
+152@ = -1958.48 
+192@ = 127.1876 
+113@ = -2624.508 
+153@ = -2055.077 
+193@ = 129.1295 
+114@ = -2525.173 
+154@ = -2071.438 
+194@ = 126.7572 
+115@ = -2426.958 
+155@ = -2090.192 
+195@ = 122.5222 
+116@ = -2393.0 
+156@ = -2096.0 
+196@ = 118.0 
+117@ = -2326.898 
+157@ = -2098.732 
+197@ = 114.4895 
+118@ = -2257.158 
+158@ = -2073.11 
+198@ = 119.2503 
+119@ = -2215.638 
+159@ = -2044.962 
+199@ = 118.7853 
+120@ = -2143.491 
+160@ = -1955.622 
+200@ = 117.0468 
+121@ = -2123.148 
+161@ = -1897.05 
+201@ = 113.449 
+122@ = -2137.857 
+162@ = -1994.849 
+202@ = 96.0566 
+123@ = -2165.01 
+163@ = -2044.654 
+203@ = 90.2613 
+124@ = -2266.458 
+164@ = -2142.735 
+204@ = 55.9682 
+125@ = -2345.696 
+165@ = -2199.511 
+205@ = 33.1272 
+126@ = -2245.354 
+166@ = -2201.11 
+206@ = 35.0159 
+127@ = -2164.646 
+167@ = -2143.817 
+207@ = 51.5793 
+128@ = -2094.473 
+168@ = -2072.822 
+208@ = 63.6193 
+129@ = -2063.865 
+169@ = -1977.4 
+209@ = 57.6244 
+130@ = -2014.453 
+170@ = -1890.356 
+210@ = 45.5302 
+131@ = -1949.741 
+171@ = -1814.233 
+211@ = 33.7562 
+132@ = -1872.931 
+172@ = -1750.007 
+212@ = 29.084 
+133@ = -1783.883 
+173@ = -1701.444 
+213@ = 29.5583 
+134@ = -1697.56 
+174@ = -1651.167 
+214@ = 36.0764 
+135@ = -1604.938 
+175@ = -1613.388 
+215@ = 36.1148 
+136@ = -1587.864 
+176@ = -1514.849 
+216@ = 37.5464 
+137@ = -1685.724 
+177@ = -1494.043 
+217@ = 34.7867 
+138@ = -1777.044 
+178@ = -1452.41 
+218@ = 34.6646 
+139@ = -1862.846 
+179@ = -1400.225 
+219@ = 38.3508 
+140@ = -1947.106 
+180@ = -1346.296 
+220@ = 40.5623 
+141@ = -2005.107 
+181@ = -1264.516 
+221@ = 36.3458 
+142@ = -2055.837 
+182@ = -1177.761 
+222@ = 32.1425 
+143@ = -2106.079 
+183@ = -1091.077 
+223@ = 29.978 
+144@ = -2168.372 
+184@ = -1012.418 
+224@ = 33.7818 
+145@ = -2210.523 
+185@ = -974.889 
+225@ = 38.5044 
+77@ = -2797.75 
+83@ = -1531.63 
+89@ = 138.5 
+78@ = -2803.09 
+84@ = -1503.01 
+90@ = 138.83 
+79@ = -2804.69 
+85@ = -1506.7 
+91@ = 137.83 
+80@ = -2818.89 
+86@ = -1505.72 
+92@ = 139.34 
+81@ = -2826.68 
+87@ = -1522.23 
+93@ = 138.78 
+82@ = -2822.9 
+88@ = -1536.94 
+94@ = 138.86 
+70@ = -2814.84 
+71@ = -1522.0 
+72@ = 139.33 
+95@ = -2777.05 
+96@ = -1568.29 
+97@ = 140.04 
+98@ = -2346.7 
+101@ = -2240.18 
+104@ = 17.29 
+99@ = -2103.0 
+102@ = -1885.0 
+105@ = 109.0 
+100@ = -2602.0 
+103@ = -2084.0 
+106@ = 131.0 
+236@ = -2767.98 
+246@ = -1597.9 
+256@ = 141.46 
+237@ = -2787.39 
+247@ = -1568.11 
+257@ = 147.27 
+238@ = -2796.35 
+248@ = -1537.58 
+258@ = 143.82 
+239@ = -2800.19 
+249@ = -1505.59 
+259@ = 143.89 
+240@ = -2801.43 
+250@ = -1541.87 
+260@ = 140.29 
+321@ = 30.0 
+$6965 = -1 
+34@ = 0 
+51@ = 1 
+278@ = 1 
+279@ = 3 
+36@ = 0 
+$6967 = 0 
+53@ = 0 
+54@ = 1 
+56@ = 0 
+37@ = 0 
+57@ = 0 
+59@ = 1 
+$6966 = 0 
+55@ = 0 
+$6968 = 0 
+$6969 = 1 
+$6970 = 38 
+45@ = 0 
+46@ = 0 
+47@ = 0 
+48@ = 0 
+49@ = 0 
+40@ = 0 
+41@ = 0 
+42@ = 0 
+43@ = 0 
+44@ = 0 
+0615: define_AS_pack_begin 278@ 
+05D3: AS_actor -1 goto_point 81@ 87@ 93@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 82@ 88@ 94@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 77@ 83@ 89@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 78@ 84@ 90@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 79@ 85@ 91@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 80@ 86@ 92@ mode 4 time -1 ms // versionA 
+0643: set_AS_pack 278@ loop 1 
+0616: define_AS_pack_end 278@ 
+0615: define_AS_pack_begin 279@ 
+05D3: AS_actor -1 goto_point 82@ 88@ 94@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 81@ 87@ 93@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 80@ 86@ 92@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 79@ 85@ 91@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 78@ 84@ 90@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 77@ 83@ 89@ mode 4 time -1 ms // versionA 
+0643: set_AS_pack 279@ loop 1 
+0616: define_AS_pack_end 279@ 
+0615: define_AS_pack_begin 280@ 
+05D3: AS_actor -1 goto_point 80@ 86@ 92@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 81@ 87@ 93@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 82@ 88@ 94@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 77@ 83@ 89@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 78@ 84@ 90@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 79@ 85@ 91@ mode 4 time -1 ms // versionA 
+0643: set_AS_pack 280@ loop 1 
+0616: define_AS_pack_end 280@ 
+0615: define_AS_pack_begin 281@ 
+05D3: AS_actor -1 goto_point 79@ 85@ 91@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 78@ 84@ 90@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 77@ 83@ 89@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 82@ 88@ 94@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 81@ 87@ 93@ mode 4 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 80@ 86@ 92@ mode 4 time -1 ms // versionA 
+0643: set_AS_pack 281@ loop 1 
+0616: define_AS_pack_end 281@ 
+273@ = Object.Init(#ROADWORKBARRIER1, -2450.083, -2079.953, 125.711)
+0453: set_object 273@ XYZ_rotation 9.209 7.675 -43.371 
+274@ = Object.Init(#ROADWORKBARRIER1, -2449.15, -2078.21, 125.917)
+0453: set_object 274@ XYZ_rotation 4.992 7.247 -15.069 
+275@ = Object.Init(#ROADWORKBARRIER1, -2447.868, -2076.578, 125.975)
+0453: set_object 275@ XYZ_rotation -1.869 8.724 -44.611 
+gosub @BCRASH1_54 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Camera, 30000)
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Actor.Angle($PLAYER_ACTOR) = 54.0
+Camera.SetPosition(-2041.009, -2527.207, 33.9116, 0.0, 0.0, 0.0)
+Camera.PointAt(-2041.785, -2526.602, 34.0884, 2)
+fade 1 300 
+
+:BCRASH1_3523
+if 
+fading 
+jf @BCRASH1_3547 
+wait 0 
+jump @BCRASH1_3523 
+
+:BCRASH1_3547
+wait 3000 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'BCR1_03' time 5000 flag 1  // ~s~Kill the ~y~witness~s~! ~s~Bring back proof.
+018A: 65@ = create_checkpoint_at 98@ 101@ 104@ 
+
+:BCRASH1_3597
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @BCRASH1_3623 
+jump @BCRASH1_13741 
+
+:BCRASH1_3623
+if 
+0735:   is_keyboard_key_pressed 49 
+jf @BCRASH1_3645 
+$2208 = 1 
+
+:BCRASH1_3645
+if 
+  $ACTIVE_INTERIOR == 0 
+jf @BCRASH1_3859 
+if 
+  55@ == 3 
+jf @BCRASH1_3712 
+if 
+88FE:   not text_box_displayed 
+jf @BCRASH1_3712 
+03E5: show_text_box 'BCR1_23'  // You can view your Gallery photos in your GTA San Andreas User Files directory.
+55@ = 4 
+
+:BCRASH1_3712
+if 
+  55@ == 2 
+jf @BCRASH1_3761 
+if 
+88FE:   not text_box_displayed 
+jf @BCRASH1_3761 
+03E5: show_text_box 'FEG_HOW'  // To take a photo with a camera press ~k~~PED_FIREWEAPON~.
+55@ = 3 
+
+:BCRASH1_3761
+if 
+  55@ == 1 
+jf @BCRASH1_3810 
+if 
+88FE:   not text_box_displayed 
+jf @BCRASH1_3810 
+03E5: show_text_box 'BCR1_21'  // When using the camera, press ~k~~PED_SNIPER_ZOOM_IN~ to zoom in, or press ~k~~PED_SNIPER_ZOOM_OUT~ to zoom out.
+55@ = 2 
+
+:BCRASH1_3810
+if 
+  55@ == 0 
+jf @BCRASH1_3859 
+if 
+876F:   not text_priority_displayed 
+jf @BCRASH1_3859 
+03E5: show_text_box 'BCR1_22'  // Hold ~k~~PED_LOCK_TARGET~ to look through the camera viewfinder.
+55@ = 1 
+
+:BCRASH1_3859
+if 
+  4 > $6965 
+jf @BCRASH1_3967 
+if 
+  35@ == 0 
+jf @BCRASH1_3926 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_3926 
+272@ = Actor.MissionCar($PLAYER_ACTOR)
+35@ = 1 
+
+:BCRASH1_3926
+if 
+  35@ == 1 
+jf @BCRASH1_3967 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_3967 
+35@ = 0 
+
+:BCRASH1_3967
+if 
+  $6965 == -1 
+jf @BCRASH1_4155 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_4155 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 98@ 101@ 104@ radius 4.0 4.0 4.0 
+jf @BCRASH1_4155 
+Marker.Disable(65@)
+95@ = -2774.981 
+96@ = -1591.26 
+97@ = 140.388 
+018A: 64@ = create_checkpoint_at 95@ 96@ 97@ 
+00BC: show_text_highpriority GXT 'BCR1_18' time 5000 flag 1  // ~s~Make your way up the ~y~mountain~s~ to find that snitch!
+if 
+  $2208 == 1 
+jf @BCRASH1_4148 
+0950: set_trip_skip -2767.883 -1634.114 140.3939 angle 0.0569 
+
+:BCRASH1_4148
+$6965 = 0 
+
+:BCRASH1_4155
+if 
+  $6965 == 0 
+jf @BCRASH1_4312 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_4312 
+if 
+  53@ == 0 
+jf @BCRASH1_4312 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 95@ 96@ 97@ radius 150.0 150.0 150.0 
+jf @BCRASH1_4312 
+Marker.Disable(64@)
+95@ = -2774.981 
+96@ = -1591.26 
+97@ = 140.388 
+018A: 64@ = create_checkpoint_at 95@ 96@ 97@ 
+$6967 = 0 
+53@ = 1 
+
+:BCRASH1_4312
+if 
+  $6965 == 0 
+jf @BCRASH1_5503 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_5503 
+if 
+  $6967 > 1 
+jf @BCRASH1_4440 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @BCRASH1_4388 
+38@ = 0 
+
+:BCRASH1_4388
+if 
+  38@ == 0 
+jf @BCRASH1_4440 
+if 
+00E1:   player 0 pressed_key 16 
+jf @BCRASH1_4440 
+00BE: text_clear_all 
+266@ -= 1000 
+$6967 = 6 
+
+:BCRASH1_4440
+if 
+  $6967 == 0 
+jf @BCRASH1_4630 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 95@ 96@ 97@ radius 100.0 100.0 100.0 
+jf @BCRASH1_4630 
+38@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 300 
+
+:BCRASH1_4521
+if 
+fading 
+jf @BCRASH1_4545 
+wait 0 
+jump @BCRASH1_4521 
+
+:BCRASH1_4545
+gosub @BCRASH1_182 
+gosub @BCRASH1_261 
+gosub @BCRASH1_695 
+gosub @BCRASH1_807 
+01BD: 266@ = current_time_in_ms 
+if 
+  $2208 == 1 
+jf @BCRASH1_4598 
+0951: disable_trip_skip 
+
+:BCRASH1_4598
+if 
+  $2208 == 0 
+jf @BCRASH1_4623 
+$2208 = 1 
+
+:BCRASH1_4623
+$6967 = 1 
+
+:BCRASH1_4630
+if 
+  $6967 == 1 
+jf @BCRASH1_4940 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 250 
+jf @BCRASH1_4940 
+Camera.SetAtPos(70@, 71@, 72@)
+Camera.SetPosition(-2795.86, -1536.975, 139.3093, 0.0, 0.0, 0.0)
+Camera.PointAt(-2796.553, -1536.282, 139.5107, 2)
+0395: clear_area 1 at 70@ 71@ 72@ radius 75.0 
+02A3: enable_widescreen 1 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 300 
+
+:BCRASH1_4787
+if 
+fading 
+jf @BCRASH1_4811 
+wait 0 
+jump @BCRASH1_4787 
+
+:BCRASH1_4811
+00BC: show_text_highpriority GXT 'BCR1_04' time 3000 flag 1  // ~s~He's inside, smoke him out!
+Marker.Disable(64@)
+if 
+   not Actor.Dead(291@)
+jf @BCRASH1_4856 
+0618: assign_actor 291@ to_AS_pack 278@ 
+
+:BCRASH1_4856
+if 
+   not Actor.Dead(292@)
+jf @BCRASH1_4880 
+0618: assign_actor 292@ to_AS_pack 279@ 
+
+:BCRASH1_4880
+if 
+   not Actor.Dead(293@)
+jf @BCRASH1_4904 
+0618: assign_actor 293@ to_AS_pack 280@ 
+
+:BCRASH1_4904
+if 
+   not Actor.Dead(294@)
+jf @BCRASH1_4928 
+0618: assign_actor 294@ to_AS_pack 281@ 
+
+:BCRASH1_4928
+01BD: 266@ = current_time_in_ms 
+$6967 = 2 
+
+:BCRASH1_4940
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_5503 
+if 
+  $6967 == 2 
+jf @BCRASH1_5042 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 3000 
+jf @BCRASH1_5042 
+00BC: show_text_highpriority GXT 'BCR1_19' time 3000 flag 1  // ~s~Watch out for the feds!
+01BD: 266@ = current_time_in_ms 
+$6967 = 3 
+
+:BCRASH1_5042
+if 
+  $6967 == 3 
+jf @BCRASH1_5179 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 3000 
+jf @BCRASH1_5179 
+00BC: show_text_highpriority GXT 'BCR1_20' time 4000 flag 1  // ~s~Remember, you need a photo of him in one piece!
+Camera.SetPosition(-2793.092, -1510.473, 139.2297, 0.0, 0.0, 0.0)
+Camera.PointAt(-2793.947, -1510.945, 139.4455, 2)
+01BD: 266@ = current_time_in_ms 
+$6967 = 4 
+
+:BCRASH1_5179
+if 
+  $6967 == 4 
+jf @BCRASH1_5249 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 2000 
+jf @BCRASH1_5249 
+01BD: 266@ = current_time_in_ms 
+$6967 = 5 
+
+:BCRASH1_5249
+if 
+  $6967 == 5 
+jf @BCRASH1_5319 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 1500 
+jf @BCRASH1_5319 
+01BD: 266@ = current_time_in_ms 
+$6967 = 6 
+
+:BCRASH1_5319
+if 
+  $6967 == 6 
+jf @BCRASH1_5503 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 500 
+jf @BCRASH1_5503 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+if and
+   not Actor.Dead(284@)
+   not Car.Wrecked(322@)
+jf @BCRASH1_5503 
+285@ = Marker.CreateAboveActor(284@)
+$6965 = 1 
+$6967 = 7 
+0615: define_AS_pack_begin 282@ 
+05F5: AS_actor -1 goto_point_using_paths -2822.47 -1518.595 139.7656 mode 4 time -2 
+05F5: AS_actor -1 goto_point_using_paths -2822.97 -1514.244 138.2893 mode 4 time -2 
+05CB: AS_actor -1 enter_car 322@ as_driver -727379969 ms 
+0616: define_AS_pack_end 282@ 
+
+:BCRASH1_5503
+if 
+  $6965 == 1 
+jf @BCRASH1_8262 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @BCRASH1_5921 
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_5694 
+if 
+   not Actor.Dead(291@)
+jf @BCRASH1_5577 
+05E2: AS_actor 291@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_5577
+if 
+   not Actor.Dead(292@)
+jf @BCRASH1_5601 
+05E2: AS_actor 292@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_5601
+if 
+   not Actor.Dead(293@)
+jf @BCRASH1_5625 
+05E2: AS_actor 293@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_5625
+if 
+   not Actor.Dead(294@)
+jf @BCRASH1_5649 
+05E2: AS_actor 294@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_5649
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_5694 
+Car.SetImmunities(322@, 0, 0, 0, 0, 0)
+Car.DoorStatus(322@) = 1
+Car.LockInCurrentPosition(322@) = False
+
+:BCRASH1_5694
+if or
+   Actor.Dead(291@)
+   Actor.Dead(292@)
+   Actor.Dead(293@)
+   Actor.Dead(294@)
+jf @BCRASH1_5921 
+if 
+  46@ == 0 
+jf @BCRASH1_5774 
+if 
+   not Actor.Dead(291@)
+jf @BCRASH1_5774 
+05E2: AS_actor 291@ kill_actor $PLAYER_ACTOR 
+46@ = 1 
+
+:BCRASH1_5774
+if 
+  47@ == 0 
+jf @BCRASH1_5823 
+if 
+   not Actor.Dead(292@)
+jf @BCRASH1_5823 
+05E2: AS_actor 292@ kill_actor $PLAYER_ACTOR 
+47@ = 1 
+
+:BCRASH1_5823
+if 
+  48@ == 0 
+jf @BCRASH1_5872 
+if 
+   not Actor.Dead(293@)
+jf @BCRASH1_5872 
+05E2: AS_actor 293@ kill_actor $PLAYER_ACTOR 
+48@ = 1 
+
+:BCRASH1_5872
+if 
+  49@ == 0 
+jf @BCRASH1_5921 
+if 
+   not Actor.Dead(294@)
+jf @BCRASH1_5921 
+05E2: AS_actor 294@ kill_actor $PLAYER_ACTOR 
+49@ = 1 
+
+:BCRASH1_5921
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_8262 
+if 
+   not Actor.Dead(291@)
+jf @BCRASH1_6447 
+50@ = 1 
+gosub @BCRASH1_13993 
+0087: 302@ = 73@ // (float) 
+0087: 307@ = 74@ // (float) 
+0087: 312@ = 75@ // (float) 
+if 
+  41@ == 0 
+jf @BCRASH1_6161 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 302@ 307@ 312@ radius 30.0 30.0 30.0 sphere 0 in_car 
+jf @BCRASH1_6161 
+if 
+   not Car.Wrecked(272@)
+jf @BCRASH1_6161 
+0672: AS_actor 291@ attack_car 272@ 
+41@ = 1 
+46@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6161 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6161 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6161 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6161
+if 
+  46@ == 0 
+jf @BCRASH1_6447 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 302@ 307@ 312@ radius 5.0 5.0 5.0 on_foot 
+jf @BCRASH1_6315 
+05E2: AS_actor 291@ kill_actor $PLAYER_ACTOR 
+46@ = 1 
+41@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6315 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6315 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6315 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6315
+if 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA -2774.03 -1572.78 cornerB -2837.13 -1468.24 
+jf @BCRASH1_6447 
+05E2: AS_actor 291@ kill_actor $PLAYER_ACTOR 
+46@ = 1 
+41@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6447 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6447 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6447 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6447
+if 
+   not Actor.Dead(292@)
+jf @BCRASH1_6957 
+50@ = 2 
+gosub @BCRASH1_13993 
+0087: 303@ = 73@ // (float) 
+0087: 308@ = 74@ // (float) 
+0087: 313@ = 75@ // (float) 
+if 
+  42@ == 0 
+jf @BCRASH1_6671 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 303@ 308@ 313@ radius 30.0 30.0 30.0 sphere 0 in_car 
+jf @BCRASH1_6671 
+if 
+   not Car.Wrecked(272@)
+jf @BCRASH1_6671 
+0672: AS_actor 292@ attack_car 272@ 
+42@ = 1 
+47@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6671 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6671 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6671 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6671
+if 
+  47@ == 0 
+jf @BCRASH1_6957 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 303@ 308@ 313@ radius 5.0 5.0 5.0 on_foot 
+jf @BCRASH1_6825 
+05E2: AS_actor 292@ kill_actor $PLAYER_ACTOR 
+47@ = 1 
+42@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6825 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6825 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6825 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6825
+if 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA -2774.03 -1572.78 cornerB -2837.13 -1468.24 
+jf @BCRASH1_6957 
+05E2: AS_actor 292@ kill_actor $PLAYER_ACTOR 
+47@ = 1 
+42@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_6957 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_6957 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_6957 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_6957
+if 
+   not Actor.Dead(293@)
+jf @BCRASH1_7467 
+50@ = 3 
+gosub @BCRASH1_13993 
+0087: 304@ = 73@ // (float) 
+0087: 309@ = 74@ // (float) 
+0087: 314@ = 75@ // (float) 
+if 
+  43@ == 0 
+jf @BCRASH1_7181 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 304@ 309@ 314@ radius 30.0 30.0 30.0 sphere 0 in_car 
+jf @BCRASH1_7181 
+if 
+   not Car.Wrecked(272@)
+jf @BCRASH1_7181 
+0672: AS_actor 293@ attack_car 272@ 
+43@ = 1 
+48@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7181 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7181 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7181 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7181
+if 
+  48@ == 0 
+jf @BCRASH1_7467 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 304@ 309@ 314@ radius 5.0 5.0 5.0 on_foot 
+jf @BCRASH1_7335 
+05E2: AS_actor 293@ kill_actor $PLAYER_ACTOR 
+48@ = 1 
+43@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7335 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7335 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7335 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7335
+if 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA -2774.03 -1572.78 cornerB -2837.13 -1468.24 
+jf @BCRASH1_7467 
+05E2: AS_actor 293@ kill_actor $PLAYER_ACTOR 
+48@ = 1 
+43@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7467 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7467 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7467 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7467
+if 
+   not Actor.Dead(294@)
+jf @BCRASH1_7977 
+50@ = 4 
+gosub @BCRASH1_13993 
+0087: 305@ = 73@ // (float) 
+0087: 310@ = 74@ // (float) 
+0087: 315@ = 75@ // (float) 
+if 
+  44@ == 0 
+jf @BCRASH1_7691 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 305@ 310@ 315@ radius 30.0 30.0 30.0 sphere 0 in_car 
+jf @BCRASH1_7691 
+if 
+   not Car.Wrecked(272@)
+jf @BCRASH1_7691 
+0672: AS_actor 294@ attack_car 272@ 
+44@ = 1 
+49@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7691 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7691 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7691 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7691
+if 
+  49@ == 0 
+jf @BCRASH1_7977 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 305@ 310@ 315@ radius 5.0 5.0 5.0 on_foot 
+jf @BCRASH1_7845 
+05E2: AS_actor 294@ kill_actor $PLAYER_ACTOR 
+49@ = 1 
+44@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7845 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7845 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7845 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7845
+if 
+02D6:   actor $PLAYER_ACTOR fires_weapon 0 in_rectangle_cornerA -2774.03 -1572.78 cornerB -2837.13 -1468.24 
+jf @BCRASH1_7977 
+05E2: AS_actor 294@ kill_actor $PLAYER_ACTOR 
+49@ = 1 
+44@ = 0 
+if 
+  56@ == 0 
+jf @BCRASH1_7977 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_7977 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_7977 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+
+:BCRASH1_7977
+if 
+  56@ == 1 
+jf @BCRASH1_8060 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_8060 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_8060 
+if 
+0448:   actor 284@ in_car 322@ 
+jf @BCRASH1_8060 
+$6967 = 0 
+$6965 = 3 
+
+:BCRASH1_8060
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_8217 
+if 
+   not Actor.Dead(291@)
+jf @BCRASH1_8100 
+05E2: AS_actor 291@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_8100
+if 
+   not Actor.Dead(292@)
+jf @BCRASH1_8124 
+05E2: AS_actor 292@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_8124
+if 
+   not Actor.Dead(293@)
+jf @BCRASH1_8148 
+05E2: AS_actor 293@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_8148
+if 
+   not Actor.Dead(294@)
+jf @BCRASH1_8172 
+05E2: AS_actor 294@ kill_actor $PLAYER_ACTOR 
+
+:BCRASH1_8172
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_8217 
+Car.SetImmunities(322@, 0, 0, 0, 0, 0)
+Car.DoorStatus(322@) = 1
+Car.LockInCurrentPosition(322@) = False
+
+:BCRASH1_8217
+if and
+   Actor.Dead(291@)
+   Actor.Dead(292@)
+   Actor.Dead(293@)
+   Actor.Dead(294@)
+jf @BCRASH1_8262 
+$6967 = 0 
+$6965 = 2 
+
+:BCRASH1_8262
+if 
+  $6965 == 2 
+jf @BCRASH1_8417 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_8417 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_8394 
+if 
+  56@ == 0 
+jf @BCRASH1_8373 
+gosub @BCRASH1_14227 
+0618: assign_actor 284@ to_AS_pack 282@ 
+56@ = 1 
+$6967 = 0 
+$6965 = 3 
+jump @BCRASH1_8387 
+
+:BCRASH1_8373
+$6967 = 0 
+$6965 = 3 
+
+:BCRASH1_8387
+jump @BCRASH1_8417 
+
+:BCRASH1_8394
+00BC: show_text_highpriority GXT 'BCR1_10' time 5000 flag 1  // ~s~Photograph the ~r~body~s~.
+$6965 = 7 
+
+:BCRASH1_8417
+if 
+  $6965 == 3 
+jf @BCRASH1_9450 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_9428 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_9383 
+if 
+   Actor.InCar(284@, 322@)
+jf @BCRASH1_9297 
+if 
+  $6967 > 2 
+jf @BCRASH1_8511 
+$6967 = 0 
+
+:BCRASH1_8511
+if 
+060E:   car 322@ assigned_to_path 
+jf @BCRASH1_8710 
+0407: store_coords_to 233@ 234@ 235@ from_car 322@ with_offset 0.0 4.0 0.0 
+0087: 227@ = 233@ // (float) 
+227@ -= 1.5 
+0087: 228@ = 234@ // (float) 
+228@ -= 1.5 
+0087: 229@ = 235@ // (float) 
+229@ -= 1.5 
+0087: 230@ = 233@ // (float) 
+230@ += 1.5 
+0087: 231@ = 234@ // (float) 
+231@ += 1.5 
+0087: 232@ = 235@ // (float) 
+232@ += 1.5 
+if 
+0339:   anything_in_cube_cornerA 227@ 228@ 229@ cornerB 230@ 231@ 232@ solid 0 car 0 actor 1 object 0 particle 0 
+jf @BCRASH1_8710 
+05EC: release_car 322@ from_path 
+
+:BCRASH1_8710
+if 
+060E:   car 322@ assigned_to_path 
+jf @BCRASH1_8794 
+if 
+0100:   actor 284@ in_sphere 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) radius 20.0 20.0 20.0 sphere 0 in_car 
+jf @BCRASH1_8794 
+$6968 += 1 
+$6969 += 1 
+
+:BCRASH1_8794
+if 
+  $6967 == 0 
+jf @BCRASH1_9120 
+Car.Health(322@) = 1000
+Car.SetMaxSpeed(322@, 40.0)
+00AE: set_car 322@ traffic_behaviour_to 3 
+Car.ImmuneToNonPlayer(322@) = True
+Car.SetImmunities(322@, 0, 0, 0, 0, 0)
+07C0: load_path 170 
+
+:BCRASH1_8864
+if 
+87C1:   not path 170 available 
+jf @BCRASH1_8891 
+wait 0 
+jump @BCRASH1_8864 
+
+:BCRASH1_8891
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead(284@)
+jf @BCRASH1_8977 
+if 
+0448:   actor 284@ in_car 322@ 
+jf @BCRASH1_8977 
+Car.LockInCurrentPosition(322@) = False
+05EB: assign_car 322@ to_path 170 
+06FD: set_car 322@ speed_on_path_to 0.65 
+072F: enable_car 322@ stuck_check_distance 1.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 1 // extended 03CC 
+
+:BCRASH1_8977
+00BC: show_text_highpriority GXT 'BCR1_07' time 4000 flag 1  // ~s~The ~r~snitch ~s~is getting away!
+if 
+   not Car.Wrecked(328@)
+jf @BCRASH1_9046 
+if and
+847A:   not actor $PLAYER_ACTOR driving_bike 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_9046 
+00BB: show_text_lowpriority GXT 'BCR1_14' time 4000 flag 1  // ~s~Get a vehicle!
+
+:BCRASH1_9046
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2795.252, -1505.949, 138.8073, 0.0, 0.0, 0.0)
+Camera.PointAt(-2796.0, -1506.586, 138.9953, 2)
+01BD: 266@ = current_time_in_ms 
+$6967 = 1 
+
+:BCRASH1_9120
+if 
+  $6967 == 1 
+jf @BCRASH1_9297 
+if 
+02CB:   actor $PLAYER_ACTOR bounding_sphere_visible 
+jf @BCRASH1_9245 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_9215 
+272@ = Actor.CurrentCar($PLAYER_ACTOR)
+Car.PutAt(272@, -2789.672, -1491.142, 137.1726)
+Car.Angle(272@) = 227.9636
+jump @BCRASH1_9245 
+
+:BCRASH1_9215
+Actor.PutAt($PLAYER_ACTOR, -2789.672, -1491.142, 137.1726)
+Actor.Angle($PLAYER_ACTOR) = 227.9636
+
+:BCRASH1_9245
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 4000 
+jf @BCRASH1_9297 
+01BD: 266@ = current_time_in_ms 
+$6967 = 2 
+
+:BCRASH1_9297
+if 
+  $6967 == 2 
+jf @BCRASH1_9376 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 1 
+jf @BCRASH1_9376 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+$6965 = 4 
+
+:BCRASH1_9376
+jump @BCRASH1_9421 
+
+:BCRASH1_9383
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'BCR1_10' time 5000 flag 1  // ~s~Photograph the ~r~body~s~.
+$6965 = 7 
+
+:BCRASH1_9421
+jump @BCRASH1_9450 
+
+:BCRASH1_9428
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+$6965 = 4 
+
+:BCRASH1_9450
+if 
+  $6965 == 4 
+jf @BCRASH1_11078 
+if 
+   Car.Wrecked(322@)
+jf @BCRASH1_9558 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_9558 
+if 
+844B:   not actor 284@ on_foot 
+jf @BCRASH1_9551 
+Actor.DestroyInstantly(284@)
+00BC: show_text_highpriority GXT 'BCR1_09' time 5000 flag 1  // ~r~He can't be identified!
+jump @BCRASH1_13615 
+jump @BCRASH1_9558 
+
+:BCRASH1_9551
+$6965 = 7 
+
+:BCRASH1_9558
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_11078 
+if and
+   not Actor.Dead(284@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_11078 
+if 
+0448:   actor 284@ in_car 322@ 
+jf @BCRASH1_11041 
+if 
+060E:   car 322@ assigned_to_path 
+jf @BCRASH1_9698 
+if 
+0100:   actor 284@ in_sphere 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) radius 15.0 15.0 15.0 sphere 0 in_car 
+jf @BCRASH1_9698 
+$6968 += 1 
+$6969 += 1 
+
+:BCRASH1_9698
+if 
+860E:   not car 322@ assigned_to_path 
+jf @BCRASH1_10238 
+if 
+  34@ == 0 
+jf @BCRASH1_9777 
+05D1: AS_actor 284@ drive_car 322@ to 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) speed 321@ 3 model #NULL 2 
+34@ = 1 
+
+:BCRASH1_9777
+if or
+0495:   car 322@ burning 
+01F4:   car 322@ flipped 
+jf @BCRASH1_9850 
+Car.SetMaxSpeed(322@, 0.0)
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_9843 
+077A: set_actor 284@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 284@ decision_maker_to 65540 
+
+:BCRASH1_9843
+$6965 = 5 
+
+:BCRASH1_9850
+if 
+  34@ == 1 
+jf @BCRASH1_10145 
+if 
+001C:   $6970 > $6968 // (int) 
+jf @BCRASH1_10059 
+gosub @BCRASH1_14013 
+if 
+0100:   actor 284@ in_sphere 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) radius 5.0 5.0 5.0 sphere 0 in_car 
+jf @BCRASH1_10052 
+if and
+  $6968 > 7 
+  19 > $6968 
+jf @BCRASH1_9990 
+321@ = 20.0 
+jump @BCRASH1_10000 
+
+:BCRASH1_9990
+321@ = 30.0 
+
+:BCRASH1_10000
+$6968 += 1 
+$6969 += 1 
+05D1: AS_actor 284@ drive_car 322@ to 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) speed 321@ 3 model #NULL 2 
+
+:BCRASH1_10052
+jump @BCRASH1_10145 
+
+:BCRASH1_10059
+if 
+0100:   actor 284@ in_sphere 107@($6968,40f) 147@($6968,40f) 187@($6968,40f) radius 8.0 8.0 8.0 sphere 0 in_car 
+jf @BCRASH1_10145 
+05D2: AS_actor 284@ run_to_and_hijack_car 322@ max_search_radius 50.0 traffic_behavior 2 
+Car.SetMaxSpeed(322@, 50.0)
+34@ = 2 
+
+:BCRASH1_10145
+if 
+  34@ == 2 
+jf @BCRASH1_10238 
+if 
+82CB:   not actor 284@ bounding_sphere_visible 
+jf @BCRASH1_10238 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 284@ radius 100.0 100.0 100.0 sphere 0 
+jf @BCRASH1_10238 
+00BC: show_text_highpriority GXT 'BCR1_12' time 6000 flag 1  // ~r~You let him get away!
+jump @BCRASH1_13615 
+
+:BCRASH1_10238
+if 
+  57@ == 0 
+jf @BCRASH1_10397 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 6000 
+jf @BCRASH1_10397 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_10397 
+if 
+060E:   car 322@ assigned_to_path 
+jf @BCRASH1_10397 
+if 
+0205:   actor $PLAYER_ACTOR near_car 322@ radius 30.0 30.0 30.0 flag 0 
+jf @BCRASH1_10397 
+06FD: set_car 322@ speed_on_path_to 0.8 
+00BC: show_text_highpriority GXT 'BCR1_15' time 6000 flag 1  // ~s~Take ~r~him ~s~out!
+57@ = 1 
+
+:BCRASH1_10397
+if 
+060E:   car 322@ assigned_to_path 
+jf @BCRASH1_10666 
+0407: store_coords_to 233@ 234@ 235@ from_car 322@ with_offset 0.0 4.0 0.0 
+0087: 227@ = 233@ // (float) 
+227@ -= 1.5 
+0087: 228@ = 234@ // (float) 
+228@ -= 1.5 
+0087: 229@ = 235@ // (float) 
+229@ -= 1.5 
+0087: 230@ = 233@ // (float) 
+230@ += 1.5 
+0087: 231@ = 234@ // (float) 
+231@ += 1.5 
+0087: 232@ = 235@ // (float) 
+232@ += 1.5 
+if 
+0339:   anything_in_cube_cornerA 227@ 228@ 229@ cornerB 230@ 231@ 232@ solid 0 car 1 actor 0 object 0 particle 0 
+jf @BCRASH1_10596 
+05EC: release_car 322@ from_path 
+
+:BCRASH1_10596
+if 
+0495:   car 322@ burning 
+jf @BCRASH1_10634 
+05EC: release_car 322@ from_path 
+Car.SetMaxSpeed(322@, 0.0)
+$6965 = 5 
+
+:BCRASH1_10634
+269@ = Car.Health(322@)
+if 
+  900 > 269@ 
+jf @BCRASH1_10666 
+05EC: release_car 322@ from_path 
+
+:BCRASH1_10666
+if 
+  51@ == 1 
+jf @BCRASH1_10765 
+Actor.StorePos($PLAYER_ACTOR, 67@, 68@, 69@)
+Actor.StorePos(284@, 287@, 288@, 289@)
+if 
+86BD:   not no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_10765 
+01BD: 266@ = current_time_in_ms 
+51@ = 0 
+
+:BCRASH1_10765
+if 
+  51@ == 0 
+jf @BCRASH1_11041 
+Actor.StorePos($PLAYER_ACTOR, 67@, 68@, 69@)
+Actor.StorePos(284@, 287@, 288@, 289@)
+if 
+86BD:   not no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_10993 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if and
+  268@ > 1000 
+  6000 > 268@ 
+jf @BCRASH1_10915 
+00BC: show_text_highpriority GXT 'BCR1_07' time 100 flag 1  // ~s~The ~r~snitch ~s~is getting away!
+
+:BCRASH1_10915
+if 
+  268@ > 30000 
+jf @BCRASH1_10993 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 284@ radius 25.0 25.0 25.0 sphere 0 
+jf @BCRASH1_10993 
+00BC: show_text_highpriority GXT 'BCR1_12' time 5000 flag 1  // ~r~You let him get away!
+jump @BCRASH1_13615 
+
+:BCRASH1_10993
+if 
+06BD:   no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_11041 
+51@ = 1 
+
+:BCRASH1_11041
+if 
+02BF:   car 322@ sunk 
+jf @BCRASH1_11078 
+if 
+06FC:   car 322@ stuck_check_enabled 
+jf @BCRASH1_11078 
+03CD: disable_car 322@ stuck_check 
+
+:BCRASH1_11078
+if 
+  $6965 == 5 
+jf @BCRASH1_11362 
+if 
+   Car.Wrecked(322@)
+jf @BCRASH1_11186 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_11186 
+if 
+844B:   not actor 284@ on_foot 
+jf @BCRASH1_11179 
+Actor.DestroyInstantly(284@)
+00BC: show_text_highpriority GXT 'BCR1_09' time 5000 flag 1  // ~r~He can't be identified!
+jump @BCRASH1_13615 
+jump @BCRASH1_11186 
+
+:BCRASH1_11179
+$6965 = 6 
+
+:BCRASH1_11186
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_11298 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_11291 
+if 
+01C1:   car 322@ stopped 
+jf @BCRASH1_11291 
+if 
+0448:   actor 284@ in_car 322@ 
+jf @BCRASH1_11291 
+Car.StorePos(322@, 324@, 325@, 326@)
+05CF: AS_actor 284@ exit_car 322@ in_direction 324@ 325@ 326@ 
+$6965 = 6 
+
+:BCRASH1_11291
+jump @BCRASH1_11362 
+
+:BCRASH1_11298
+if and
+   not Actor.Dead(284@)
+   not Car.Wrecked(322@)
+jf @BCRASH1_11362 
+if 
+0448:   actor 284@ in_car 322@ 
+jf @BCRASH1_11362 
+05CF: AS_actor 284@ exit_car 322@ in_direction 324@ 325@ 326@ 
+$6965 = 6 
+
+:BCRASH1_11362
+if and
+  $6965 > 0 
+  7 > $6965 
+jf @BCRASH1_11699 
+if 
+056D:   actor 284@ defined 
+jf @BCRASH1_11699 
+if 
+09A8:   actor 284@ headshoted 
+jf @BCRASH1_11465 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_11442 
+Car.DoorStatus(322@) = 1
+
+:BCRASH1_11442
+00BC: show_text_highpriority GXT 'BCR1_09' time 5000 flag 1  // ~r~He can't be identified!
+jump @BCRASH1_13615 
+
+:BCRASH1_11465
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_11511 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_11504 
+Car.DoorStatus(322@) = 1
+
+:BCRASH1_11504
+$6965 = 7 
+
+:BCRASH1_11511
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_11543 
+if 
+04C5:   actor 284@ photographed 
+jf @BCRASH1_11543 
+
+:BCRASH1_11543
+if 
+  56@ == 1 
+jf @BCRASH1_11699 
+if 
+   not 37@ == 2 
+jf @BCRASH1_11699 
+if 
+   Car.Wrecked(322@)
+jf @BCRASH1_11699 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_11699 
+0615: define_AS_pack_begin 283@ 
+05F5: AS_actor -1 goto_point_using_paths -2822.47 -1518.595 139.7656 mode 4 time -2 
+05F5: AS_actor -1 goto_point_using_paths -2822.97 -1514.244 138.2893 mode 6 time -2 
+05DB: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 1000.0 timelimit 5000000 
+0616: define_AS_pack_end 283@ 
+0618: assign_actor 284@ to_AS_pack 283@ 
+37@ = 2 
+
+:BCRASH1_11699
+if 
+  $6965 == 6 
+jf @BCRASH1_11804 
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_11804 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_11804 
+if 
+8448:   not actor 284@ in_car 322@ 
+jf @BCRASH1_11804 
+Marker.Disable(285@)
+285@ = Marker.CreateAboveActor(284@)
+00BC: show_text_highpriority GXT 'BCR1_08' time 5000 flag 1  // ~s~The ~r~snitch ~s~is getting away on foot!
+$6965 = 7 
+
+:BCRASH1_11804
+if 
+  $6965 > 3 
+jf @BCRASH1_11879 
+if 
+  52@ == 0 
+jf @BCRASH1_11879 
+if 
+856D:   not actor 284@ defined 
+jf @BCRASH1_11879 
+00BC: show_text_highpriority GXT 'BCR1_09' time 5000 flag 1  // ~r~He can't be identified!
+jump @BCRASH1_13615 
+
+:BCRASH1_11879
+if 
+  $6965 == 7 
+jf @BCRASH1_12642 
+if 
+056D:   actor 284@ defined 
+jf @BCRASH1_11952 
+if 
+09A8:   actor 284@ headshoted 
+jf @BCRASH1_11952 
+00BC: show_text_highpriority GXT 'BCR1_09' time 5000 flag 1  // ~r~He can't be identified!
+jump @BCRASH1_13615 
+
+:BCRASH1_11952
+if 
+  52@ == 0 
+jf @BCRASH1_12581 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_12505 
+if 
+  37@ == 0 
+jf @BCRASH1_12109 
+Actor.StorePos(284@, 287@, 288@, 289@)
+if 
+   not Car.Wrecked(322@)
+jf @BCRASH1_12052 
+062E: get_actor 284@ task 1487 status_store_to 36@ // ret 7 if not found 
+jump @BCRASH1_12059 
+
+:BCRASH1_12052
+04AF: 36@ = 7 // = constant 
+
+:BCRASH1_12059
+if 
+04A4:   36@ == 7 // == constant 
+jf @BCRASH1_12109 
+05DB: AS_actor 284@ flee_from_actor $PLAYER_ACTOR from_origin_radius 50.0 timelimit 100000000 
+37@ = 1 
+36@ = 5 
+
+:BCRASH1_12109
+if 
+  37@ == 1 
+jf @BCRASH1_12174 
+062E: get_actor 284@ task 1499 status_store_to 36@ // ret 7 if not found 
+if 
+04A4:   36@ == 7 // == constant 
+jf @BCRASH1_12174 
+05DB: AS_actor 284@ flee_from_actor $PLAYER_ACTOR from_origin_radius 50.0 timelimit 100000000 
+
+:BCRASH1_12174
+if 
+  51@ == 1 
+jf @BCRASH1_12273 
+Actor.StorePos($PLAYER_ACTOR, 67@, 68@, 69@)
+Actor.StorePos(284@, 287@, 288@, 289@)
+if 
+86BD:   not no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_12273 
+01BD: 266@ = current_time_in_ms 
+51@ = 0 
+
+:BCRASH1_12273
+if 
+  51@ == 0 
+jf @BCRASH1_12505 
+Actor.StorePos($PLAYER_ACTOR, 67@, 68@, 69@)
+Actor.StorePos(284@, 287@, 288@, 289@)
+if 
+86BD:   not no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_12457 
+01BD: 267@ = current_time_in_ms 
+0085: 268@ = 267@ // (int) 
+0062: 268@ -= 266@ // (int) 
+if 
+  268@ > 1000 
+jf @BCRASH1_12415 
+00BC: show_text_highpriority GXT 'BCR1_07' time 100 flag 1  // ~s~The ~r~snitch ~s~is getting away!
+
+:BCRASH1_12415
+if 
+  268@ > 15000 
+jf @BCRASH1_12457 
+00BC: show_text_highpriority GXT 'BCR1_12' time 5000 flag 1  // ~r~You let him get away!
+jump @BCRASH1_13615 
+
+:BCRASH1_12457
+if 
+06BD:   no_obstacles_between 67@ 68@ 69@ and 287@ 288@ 289@ solid 1 car 0 actor 0 object 0 particle 0 
+jf @BCRASH1_12505 
+51@ = 1 
+
+:BCRASH1_12505
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_12581 
+if 
+056D:   actor 284@ defined 
+jf @BCRASH1_12581 
+if 
+04C5:   actor 284@ photographed 
+jf @BCRASH1_12581 
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_12581 
+Marker.Disable(285@)
+52@ = 1 
+
+:BCRASH1_12581
+if 
+  52@ == 1 
+jf @BCRASH1_12642 
+018A: 66@ = create_checkpoint_at -2044.1 -2523.86 31.11 
+00BC: show_text_highpriority GXT 'BCR1_17' time 5000 flag 1  // ~s~Take the camera to the ~y~drop~s~.
+$6965 = 8 
+
+:BCRASH1_12642
+if 
+  $6965 == 8 
+jf @BCRASH1_12740 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_12740 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere -2044.1 -2523.86 31.11 radius 1.2 1.2 2.0 on_foot 
+jf @BCRASH1_12740 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Camera, 0)
+jump @BCRASH1_13741 
+
+:BCRASH1_12740
+if 
+  $6965 == 7 
+jf @BCRASH1_13405 
+if 
+  52@ == 0 
+jf @BCRASH1_13296 
+041A: 276@ = actor $PLAYER_ACTOR weapon 43 ammo 
+if 
+  276@ > 0 
+jf @BCRASH1_13156 
+if 
+  59@ == 2 
+jf @BCRASH1_12842 
+0888: create_marker_above_actor 284@ handle_as 285@ // versionB 
+Marker.Disable(271@)
+59@ = 1 
+
+:BCRASH1_12842
+if 
+  59@ == 1 
+jf @BCRASH1_13149 
+if 
+04AD:   actor 284@ in_water 
+jf @BCRASH1_12883 
+$6966 = 1 
+
+:BCRASH1_12883
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   Actor.Dead(284@)
+jf @BCRASH1_13149 
+00BC: show_text_highpriority GXT 'BCR1_10' time 100 flag 1  // ~s~Photograph the ~r~body~s~.
+if 
+056D:   actor 284@ defined 
+jf @BCRASH1_13149 
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_13149 
+if 
+  58@ == 0 
+jf @BCRASH1_13018 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 287@ 288@ 289@ radius 5.0 5.0 5.0 
+jf @BCRASH1_13018 
+58@ = 1 
+
+:BCRASH1_13018
+if 
+  58@ == 1 
+jf @BCRASH1_13149 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 287@ 288@ 289@ radius 100.0 100.0 30.0 
+jf @BCRASH1_13149 
+if 
+  $6966 == 1 
+jf @BCRASH1_13126 
+00BC: show_text_highpriority GXT 'BCR1_16' time 5000 flag 1  // ~r~The buzzards got him!
+jump @BCRASH1_13615 
+jump @BCRASH1_13149 
+
+:BCRASH1_13126
+00BC: show_text_highpriority GXT 'BCR1_16' time 5000 flag 1  // ~r~The buzzards got him!
+jump @BCRASH1_13615 
+
+:BCRASH1_13149
+jump @BCRASH1_13296 
+
+:BCRASH1_13156
+if 
+   Actor.Dead(284@)
+jf @BCRASH1_13296 
+if 
+  59@ == 1 
+jf @BCRASH1_13215 
+if 
+  276@ == 0 
+jf @BCRASH1_13215 
+59@ = 0 
+
+:BCRASH1_13215
+if 
+  59@ == 0 
+jf @BCRASH1_13296 
+00BC: show_text_highpriority GXT 'BCR1_11' time 5000 flag 1  // ~s~You need a ~g~camera, ~s~go and pick one up.
+Marker.Disable(285@)
+032B: 270@ = create_weapon_pickup #CAMERA type 3 ammo 24 at -2044.1 -2523.86 31.11 
+03DC: 271@ = create_marker_above_pickup 270@ 
+59@ = 2 
+
+:BCRASH1_13296
+if and
+  37@ == 0 
+   not $6965 == 4 
+   not $6965 == 5 
+jf @BCRASH1_13405 
+if and
+   not Actor.Dead(284@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_13405 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 284@ radius 10.0 10.0 0 
+jf @BCRASH1_13405 
+05DB: AS_actor 284@ flee_from_actor $PLAYER_ACTOR from_origin_radius 50.0 timelimit 100000000 
+37@ = 1 
+
+:BCRASH1_13405
+if 
+  $6965 > 3 
+jf @BCRASH1_13587 
+if 
+  54@ == 1 
+jf @BCRASH1_13587 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(328@)
+   not Actor.Dead(284@)
+jf @BCRASH1_13587 
+if or
+   Actor.InCar($PLAYER_ACTOR, 328@)
+8202:   not actor $PLAYER_ACTOR near_car 328@ radius 50.0 50.0 sphere 0 
+jf @BCRASH1_13529 
+00BB: show_text_lowpriority GXT 'BCR1_13' time 5000 flag 1  // ~s~Chase ~r~him ~s~down and kill him!
+54@ = 0 
+
+:BCRASH1_13529
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCRASH1_13587 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 328@)
+jf @BCRASH1_13587 
+00BB: show_text_lowpriority GXT 'BCR1_13' time 5000 flag 1  // ~s~Chase ~r~him ~s~down and kill him!
+54@ = 0 
+
+:BCRASH1_13587
+jump @BCRASH1_3597 
+wait 1500 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+jump @BCRASH1_13741 
+
+:BCRASH1_13615
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @BCRASH1_13643 
+$11033 = 0 
+
+:BCRASH1_13643
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCRASH1_13718 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_13718 
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 43)
+jf @BCRASH1_13718 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Camera, 0)
+
+:BCRASH1_13718
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_13739 
+Actor.DestroyInstantly(284@)
+
+:BCRASH1_13739
+return 
+
+:BCRASH1_13741
+0318: set_latest_mission_passed 'BCRASH1'  // Badlands
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSD' number 0 time 5000 style 1  // MISSION PASSED!
+Player.ClearWantedLevel($PLAYER_CHAR)
+0629: change_integer_stat 319 to 1 
+0394: play_music 1 
+$MISSION_BADLANDS_PASSED += 1 
+Marker.Disable($484)
+$RECALL_TIME = 15000 
+return 
+
+:BCRASH1_13812
+gosub @BCRASH1_255 
+gosub @BCRASH1_683 
+gosub @BCRASH1_798 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCRASH1_13892 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCRASH1_13892 
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 43)
+jf @BCRASH1_13892 
+Actor.SetWeaponAmmo($PLAYER_ACTOR, Camera, 36)
+
+:BCRASH1_13892
+if 
+   not Car.Wrecked(328@)
+jf @BCRASH1_13923 
+Car.SetImmunities(328@, 0, 0, 0, 0, 0)
+
+:BCRASH1_13923
+077B: clear_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+Model.Destroy(#CAMERA)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#SANCHEZ)
+Marker.Disable(285@)
+Marker.Disable(64@)
+Marker.Disable(65@)
+Marker.Disable(66@)
+Marker.Disable(271@)
+Pickup.Destroy(270@)
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return 
+
+:BCRASH1_13993
+Actor.StorePos(290@(50@,5i), 73@, 74@, 75@)
+return 
+
+:BCRASH1_14013
+62@ = -1 
+60@ = 1E07 
+63@ = 38 
+
+:BCRASH1_14037
+if 
+  38 > 63@ 
+jf @BCRASH1_14225 
+if 
+   not Actor.Dead(284@)
+jf @BCRASH1_14211 
+0509: 61@ = distance_between_XY 287@ 288@ and_XY 107@($6968,40f) 147@($6968,40f) 
+if 
+0025:   60@ > 61@ // (float) 
+jf @BCRASH1_14211 
+0087: 60@ = 61@ // (float) 
+0085: 62@ = 63@ // (int) 
+if 
+0025:   187@($6968,40f) > 187@(62@,40f) // (float) 
+jf @BCRASH1_14211 
+0087: 61@ = 187@($6968,40f) // (float) 
+0063: 61@ -= 187@(62@,40f) // (float) 
+if 
+  61@ > 3.0 
+jf @BCRASH1_14211 
+008A: $6968 = 62@ // (int) 
+
+:BCRASH1_14211
+63@ += 1 
+jump @BCRASH1_14037 
+
+:BCRASH1_14225
+return 
+
+:BCRASH1_14227
+040D: unload_wav 1 
+0209: 380@ = random_int_in_ranges 10807 10809 
+03CF: load_wav 380@ as 1 
+
+:BCRASH1_14249
+if 
+83D0:   not wav 1 loaded 
+jf @BCRASH1_14275 
+wait 0 
+jump @BCRASH1_14249 
+
+:BCRASH1_14275
+03D1: play_wav 1 
+if 
+  380@ == 10807 
+jf @BCRASH1_14321 
+00BC: show_text_highpriority GXT 'CRA2_CH' time 5000 flag 1 
+jump @BCRASH1_14337 
+
+:BCRASH1_14321
+00BC: show_text_highpriority GXT 'CRA2_CI' time 5000 flag 1 
+
+:BCRASH1_14337
+if 
+83D2:   not wav 1 ended 
+jf @BCRASH1_14363 
+wait 0 
+jump @BCRASH1_14337 
+
+:BCRASH1_14363
+00BE: text_clear_all 
+040D: unload_wav 1 
+return 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:BCRASH1_14385
+if 
+fading 
+jf @BCRASH1_14409 
+wait 0 
+jump @BCRASH1_14385 
+
+:BCRASH1_14409
+Model.Load(#COPCARLA)
+023C: load_special_actor 'TENPEN' as 1 // models 290-299 
+023C: load_special_actor 'PULASKI' as 2 // models 290-299 
+023C: load_special_actor 'HERN' as 3 // models 290-299 
+04ED: load_animation "GHETTO_DB" 
+04ED: load_animation "POLICE" 
+
+:BCRASH1_14476
+if or
+   not Model.Available(#COPCARLA)
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+823D:   not special_actor 3 loaded 
+84EE:   not animation "GHETTO_DB" loaded 
+84EE:   not animation "POLICE" loaded 
+jf @BCRASH1_14538 
+wait 0 
+jump @BCRASH1_14476 
+
+:BCRASH1_14538
+35@ = Car.Create(#COPCARLA, -2011.5, -2502.74, 34.06)
+Car.Angle(35@) = 90.0
+41@ = Actor.CreateAsDriver(Mission1, #SPECIAL02, 35@)
+40@ = Actor.CreateAsPassenger(Mission1, #SPECIAL01, 35@, 0)
+42@ = Actor.CreateAsPassenger(Mission1, #SPECIAL03, 35@, 1)
+0605: actor 41@ perform_animation "GDB_CAR_PLY" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor 40@ perform_animation "GDB_CAR_SMO" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor 42@ perform_animation "GDB_CAR_RYD" IFP "GHETTO_DB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+02A3: enable_widescreen 1 
+0679: put_camera_on_car 35@ with_offset -0.337 1.566 0.657 rotation 0.0 0.0 0.0 tilt 0.0 switchstyle 2 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+
+:BCRASH1_14807
+if 
+fading 
+jf @BCRASH1_14831 
+wait 0 
+jump @BCRASH1_14807 
+
+:BCRASH1_14831
+03CF: load_wav 10824 as 1 
+03CF: load_wav 10827 as 2 
+gosub @BCRASH1_15455 
+03D1: play_wav 1 
+0967: actor 41@ move_mouth 1500 ms 
+00BC: show_text_highpriority GXT 'CRA2_DJ' time 4000 flag 1 
+gosub @BCRASH1_15487 
+0968: actor 41@ stop_mouth 
+03D5: remove_text 'CRA2_DJ' 
+03D1: play_wav 2 
+0967: actor 41@ move_mouth 2500 ms 
+00BC: show_text_highpriority GXT 'CRA2_DM' time 4000 flag 1 
+gosub @BCRASH1_15519 
+0968: actor 41@ stop_mouth 
+03D5: remove_text 'CRA2_DM' 
+03CF: load_wav 10828 as 1 
+03CF: load_wav 10829 as 2 
+gosub @BCRASH1_15455 
+03D1: play_wav 1 
+0967: actor 41@ move_mouth 1000 ms 
+00BC: show_text_highpriority GXT 'CRA2_DN' time 4000 flag 1 
+gosub @BCRASH1_15487 
+0968: actor 41@ stop_mouth 
+03D5: remove_text 'CRA2_DN' 
+03D1: play_wav 2 
+0967: actor 41@ move_mouth 2500 ms 
+00BC: show_text_highpriority GXT 'CRA2_DO' time 4000 flag 1 
+gosub @BCRASH1_15519 
+0968: actor 41@ stop_mouth 
+03D5: remove_text 'CRA2_DO' 
+0633: AS_actor 41@ exit_car 
+wait 2000 
+Camera.SetPosition(-2020.099, -2501.367, 34.4637, 0.0, 0.0, 0.0)
+Camera.PointAt(-2019.289, -2501.941, 35.3532, 2)
+Actor.PutAt($PLAYER_ACTOR, -2013.761, -2504.42, 34.13)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+0812: AS_actor $PLAYER_ACTOR perform_animation "CRM_DRGBST_01" IFP "POLICE" framedelta 1.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+Actor.PutAt(41@, -2013.775, -2504.722, 34.06)
+0812: AS_actor 41@ perform_animation "PLC_DRGBST_01" IFP "POLICE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 0 time 25000 // versionB 
+wait 2000 
+Camera.SetPosition(-2020.099, -2501.367, 35.4727, 0.0, 0.0, 0.0)
+Camera.PointAt(-2019.289, -2501.941, 35.3532, 2)
+wait 10000 
+fade 0 500 
+
+:BCRASH1_15343
+if 
+fading 
+jf @BCRASH1_15367 
+wait 0 
+jump @BCRASH1_15343 
+
+:BCRASH1_15367
+040D: unload_wav 1 
+040D: unload_wav 2 
+Model.Destroy(#COPCARLA)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+04EF: release_animation "GHETTO_DB" 
+02A3: enable_widescreen 0 
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+fade 1 500 
+
+:BCRASH1_15422
+if 
+fading 
+jf @BCRASH1_15446 
+wait 0 
+jump @BCRASH1_15422 
+
+:BCRASH1_15446
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:BCRASH1_15455
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @BCRASH1_15485 
+wait 0 
+jump @BCRASH1_15455 
+
+:BCRASH1_15485
+return 
+
+:BCRASH1_15487
+if 
+83D2:   not wav 1 ended 
+jf @BCRASH1_15513 
+wait 0 
+jump @BCRASH1_15487 
+
+:BCRASH1_15513
+040D: unload_wav 1 
+return 
+
+:BCRASH1_15519
+if 
+83D2:   not wav 2 ended 
+jf @BCRASH1_15545 
+wait 0 
+jump @BCRASH1_15519 
+
+:BCRASH1_15545
+040D: unload_wav 2 
+return

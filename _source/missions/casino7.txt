@@ -1,0 +1,99 @@
+:CASINO7
+thread 'CASINO7' 
+gosub @CASINO7_94 
+if 
+wasted_or_busted 
+jf @CASINO7_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+gosub @CASINO7_348 
+
+:CASINO7_85
+gosub @CASINO7_509 
+end_thread 
+
+:CASINO7_94
+054C: use_GXT_table 'CASINO7' 
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+select_interior 11 
+02E4: load_cutscene_data 'CAS_7B' 
+
+:CASINO7_133
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASINO7_157 
+wait 0 
+jump @CASINO7_133 
+
+:CASINO7_157
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASINO7_166
+if 
+82E9:   not cutscene_reached_end 
+jf @CASINO7_190 
+wait 0 
+jump @CASINO7_166 
+
+:CASINO7_190
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:CASINO7_203
+if 
+fading 
+jf @CASINO7_227 
+wait 0 
+jump @CASINO7_203 
+
+:CASINO7_227
+02EA: end_cutscene 
+select_interior 0 
+0169: set_fade_color_RGB 0 0 0 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2016.422 1017.102 radius 10.0 
+04E4: refresh_game_renderer_at 2025.8 1007.87 
+0A0B: set_rendering_origin_at_3D_coord 2025.8 1007.87 9.81 angle 279.83 
+Actor.PutAt($PLAYER_ACTOR, 2025.8, 1007.87, 9.81)
+Actor.Angle($PLAYER_ACTOR) = 279.83
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 2000 
+jump @CASINO7_434 
+
+:CASINO7_348
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CASINO7_416 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+
+:CASINO7_416
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CASINO7_434
+Marker.Disable($582)
+$CASINO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'CASINO7'  // Fish in a Barrel
+0629: change_integer_stat 306 to 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+030C: progress_made = 1 
+$6993[2] = 15000 
+04A6: $6993[1] = create_asset_money_pickup_at 2508.359 -1676.538 12.579 money $6993[2] $6993[2] 
+return 
+
+:CASINO7_509
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

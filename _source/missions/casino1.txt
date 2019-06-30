@@ -1,0 +1,3330 @@
+:CASINO1
+thread 'CASINO1' 
+gosub @CASINO1_531 
+if 
+wasted_or_busted 
+jf @CASINO1_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+gosub @CASINO1_20148 
+
+:CASINO1_85
+gosub @CASINO1_20298 
+end_thread 
+
+:CASINO1_94
+Camera.SetAtPos(326@, 327@, 328@)
+023C: load_special_actor 'SINDACO' as 1 // models 290-299 
+Model.Load(#FELTZER)
+04ED: load_animation "CAR" 
+038B: load_requested_models 
+
+:CASINO1_132
+if or
+   not Model.Available(#FELTZER)
+823D:   not special_actor 1 loaded 
+84EE:   not animation "CAR" loaded 
+jf @CASINO1_170 
+wait 0 
+jump @CASINO1_132 
+
+:CASINO1_170
+return 
+
+:CASINO1_172
+326@ = 1903.857 
+327@ = 974.1888 
+328@ = 9.8127 
+329@ = 177.4801 
+041E: set_radio_station 1 
+322@ = Car.Create(#FELTZER, 326@, 327@, 328@)
+Car.Angle(322@) = 329@
+053F: set_car 322@ tires_vulnerability 0 
+324@ = Actor.Create(Special, #SPECIAL01, 0.0, 0.0, 0.0)
+0464: put_actor 324@ into_turret_on_car 322@ at_car_offset 0.0 1.266 0.391 position 0 shooting_angle_limit 0.0 with_weapon 0 
+Actor.Health(324@) = 300
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+060A: create_decision_maker_type 0 store_to 320@ // decision\allowed\m_.ped files 
+060B: set_actor 324@ decision_maker_to 320@ 
+0708: reset_decision_maker 320@ event 12 
+0708: reset_decision_maker 320@ event 13 
+0708: reset_decision_maker 320@ event 56 
+Car.Health(322@) = 1000
+return 
+323@ = Marker.CreateAboveCar(322@)
+018A: 50@ = create_checkpoint_at 79@ 80@ 81@ 
+
+:CASINO1_419
+Model.Destroy(#FELTZER)
+return 
+
+:CASINO1_426
+Model.Load(#TRIADB)
+
+:CASINO1_430
+if 
+   not Model.Available(#TRIADB)
+jf @CASINO1_456 
+wait 0 
+jump @CASINO1_430 
+
+:CASINO1_456
+337@ = 1911.024 
+338@ = 956.8084 
+339@ = 9.8203 
+340@ = 95.5462 
+334@ = Actor.Create(CivMale, #TRIADB, 337@, 338@, 339@)
+Actor.Angle(334@) = 340@
+return 
+
+:CASINO1_524
+Actor.DestroyInstantly(334@)
+return 
+
+:CASINO1_531
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+34@ = -1 
+35@ = 0 
+36@ = 0 
+98@ = 0 
+$7529 = 0 
+47@ = 0 
+48@ = 0 
+39@ = 0 
+40@ = 0 
+41@ = 0 
+42@ = 0 
+43@ = 0 
+44@ = 0 
+45@ = 0 
+95@ = 0 
+38@ = 0 
+49@ = 0 
+$7528 = 0 
+58@ = 0 
+59@ = 0 
+57@ = 0 
+335@ = 1 
+70@ = 0.1 
+79@ = 1904.75 
+80@ = 960.74 
+81@ = 9.36 
+310@ = 1427.4 
+312@ = 2666.4 
+316@ = 13.01 
+305@ = 1 
+306@ = 2 
+307@ = 0 
+308@ = 1 
+309@ = 0 
+05AA: 104@s = 'CAS1_AA' // @s = 'short'  // ~z~You, you you your fu--, your crazy! You're a dead man! You're a dead man!
+05AA: 106@s = 'CAS1_AB' // @s = 'short'  // ~z~You're ain't in no position to make no threats.
+05AA: 108@s = 'CAS1_AC' // @s = 'short'  // ~z~Who are you?
+05AA: 110@s = 'CAS1_AD' // @s = 'short'  // ~z~Fuck you man, you know who I man!
+05AA: 112@s = 'CAS1_AE' // @s = 'short'  // ~z~Have it your way.
+05AA: 114@s = 'CAS1_BA' // @s = 'short'  // ~z~You are messing with the wrong people!
+05AA: 116@s = 'CAS1_BB' // @s = 'short'  // ~z~You are so dead, do you hear me? DEAD! D-E-A-D pal!
+05AA: 118@s = 'CAS1_BC' // @s = 'short'  // ~z~You've signed your own death warrant! Ha ha ha!
+05AA: 120@s = 'CAS1_BD' // @s = 'short'  // ~z~You think this is scaring me, huh?
+05AA: 122@s = 'CAS1_BE' // @s = 'short'  // ~z~Takes a little more than a drive to get me chirpin' pal!
+05AA: 124@s = 'CAS1_CA' // @s = 'short'  // ~z~Hey, l-look, uh, w-we can come to some arrangement, okay?
+05AA: 126@s = 'CAS1_CB' // @s = 'short'  // ~z~OK, I can see you're serious!
+05AA: 128@s = 'CAS1_CC' // @s = 'short'  // ~z~Hey look pal, this ain't funny anymore.
+05AA: 130@s = 'CAS1_CD' // @s = 'short'  // ~z~Hey! Stop this insanity RIGHT NOW!
+05AA: 132@s = 'CAS1_CE' // @s = 'short'  // ~z~Oh my God, you're nuts!
+05AA: 134@s = 'CAS1_DA' // @s = 'short'  // ~z~Aargh! Oh, I don't wanna die, c'mon I don't wanna die!
+05AA: 136@s = 'CAS1_DB' // @s = 'short'  // ~z~FUCK YOU! FUCK YOU-HOO-hooooo!
+05AA: 138@s = 'CAS1_DC' // @s = 'short'  // ~z~Oh my God, I just shit myself!
+05AA: 140@s = 'CAS1_DD' // @s = 'short'  // ~z~Oh Mother Mary, I've had enough, oh God...
+05AA: 142@s = 'CAS1_DE' // @s = 'short'  // ~z~Alright, alright! You made your point, please no more! NO MORE!
+05AA: 144@s = 'CAS1_EA' // @s = 'short'  // ~z~Oh man, this is too faaaaast!
+05AA: 146@s = 'CAS1_EB' // @s = 'short'  // ~z~Oh! Slow down, slow down for Godsakes!
+05AA: 148@s = 'CAS1_EC' // @s = 'short'  // ~z~Oh, this is too fast! TOO FAAAAAAST!
+05AA: 150@s = 'CAS1_ED' // @s = 'short'  // ~z~Whoooooooa! Holy fuck!
+05AA: 152@s = 'CAS1_EE' // @s = 'short'  // ~z~Whoooa, geez no!
+05AA: 154@s = 'CAS1_EF' // @s = 'short'  // ~z~Oh Christ! Ooooooooh!
+05AA: 156@s = 'CAS1_EG' // @s = 'short'  // ~z~Oh my God, oh-my-God!
+05AA: 158@s = 'CAS1_EH' // @s = 'short'  // ~z~Hey, whatcha doing?
+05AA: 160@s = 'CAS1_EI' // @s = 'short'  // ~z~Hey, you think you're smart, but you're not, you're not!
+05AA: 162@s = 'CAS1_EJ' // @s = 'short'  // ~z~Ha, this shit don't scare me asshole!
+05AA: 164@s = 'CAS1_EK' // @s = 'short'  // ~z~Whadaya doin' now?
+05AA: 166@s = 'CAS1_EL' // @s = 'short'  // ~z~Somebody, anybody, HELP!
+05AA: 168@s = 'CAS1_EM' // @s = 'short'  // ~z~Hey, watch the pedestrians, pal!
+05AA: 170@s = 'CAS1_EN' // @s = 'short'  // ~z~Jesus Christ that was close!
+05AA: 172@s = 'CAS1_EO' // @s = 'short'  // ~z~What are you trying to fuck both of us?
+05AA: 174@s = 'CAS1_EP' // @s = 'short'  // ~z~Mother Mary, that was lucky!
+05AA: 176@s = 'CAS1_EQ' // @s = 'short'  // ~z~You're gonna kill us both! Oh God, I'm still alive!
+05AA: 178@s = 'CAS1_FC' // @s = 'short' 
+05AA: 180@s = 'CAS1_ES' // @s = 'short'  // ~z~Thank you! Thank God! Thank God!
+05AA: 182@s = 'CAS1_ET' // @s = 'short'  // ~z~Jesus! JESUS!
+05AA: 184@s = 'CAS1_EU' // @s = 'short'  // ~z~What are you TRYING to hit things?! You're crazy!
+05AA: 186@s = 'CAS1_EV' // @s = 'short'  // ~z~Oh...jesus....fuck you...
+05AA: 188@s = 'CAS1_EW' // @s = 'short'  // ~z~Aarrgghh!
+05AA: 190@s = 'CAS1_EX' // @s = 'short'  // ~z~Oh mama, come for me! Ohhhh.
+05AA: 192@s = 'CAS1_EY' // @s = 'short'  // ~z~Holy fuck! My legs! They're on fire!
+05AA: 194@s = 'CAS1_EZ' // @s = 'short'  // ~z~Shit! My balls! My balls!
+05AA: 196@s = 'CAS1_FA' // @s = 'short'  // ~z~Oh mama! I'm on fire!
+05AA: 198@s = 'CAS1_FB' // @s = 'short'  // ~z~FIRE! FIRE!
+05AA: 200@s = 'CAS1_GA' // @s = 'short'  // ~z~The family will make you pay for this!
+05AA: 202@s = 'CAS1_GB' // @s = 'short'  // ~z~Which family?
+05AA: 204@s = 'CAS1_GC' // @s = 'short'  // ~z~The Sindacco Family, ya idiot!
+05AA: 206@s = 'CAS1_GD' // @s = 'short'  // ~z~That's all I wanted to hear!
+05AA: 208@s = 'CAS1_GE' // @s = 'short'  // ~z~What the-? Oh shit...
+05AA: 210@s = 'CAS1_HA' // @s = 'short'  // ~z~Oh God, thank God...
+05AA: 212@s = 'CAS1_HB' // @s = 'short'  // ~z~Though I walk through the shadow of the valley of death...
+05AA: 214@s = 'CAS1_HC' // @s = 'short'  // ~z~Mummy... mummy...
+05AA: 216@s = 'CAS1_HD' // @s = 'short'  // ~z~(whimpering)
+05AA: 218@s = 'CAS1_HE' // @s = 'short'  // ~z~I've lead such a sinful life, I'm sorry, so sorry...
+05AA: 220@s = 'CAS1_JA' // @s = 'short'  // ~z~CJ, ha, I think he messed himself.
+05AA: 222@s = 'CAS1_JB' // @s = 'short'  // ~z~I guess he willing to talk now!
+05AA: 224@s = 'CAS1B00' // @s = 'short'  // ~z~Hey, hey, who the fuck - who are you? Untie me, huh?
+05AA: 226@s = 'CAS1B01' // @s = 'short'  // ~z~I've been here for fucking ages, I can't feel my hands no more!
+05AA: 228@s = 'CAS1B02' // @s = 'short'  // ~z~You know what? I thing we're gonna take a little drive.
+05AA: 230@s = 'CAS1B03' // @s = 'short'  // ~z~What are you, fucking stupid? I'm not joking here - untie me, motherfucker.
+05AA: 232@s = 'CAS1B04' // @s = 'short'  // ~z~No, I think I'm gonna leave you right where you are.
+05AA: 234@s = 'CAS1B05' // @s = 'short'  // ~z~You got any idea in that pea brain head of yours who the fuck I am?
+05AA: 236@s = 'CAS1B06' // @s = 'short'  // ~z~No, but I think I'm going to find out.
+04AF: 238@ = 7007 // = constant 
+04AF: 239@ = 7008 // = constant 
+04AF: 240@ = 7009 // = constant 
+04AF: 241@ = 7010 // = constant 
+04AF: 242@ = 7011 // = constant 
+04AF: 243@ = 7012 // = constant 
+04AF: 244@ = 7013 // = constant 
+04AF: 245@ = 7014 // = constant 
+04AF: 246@ = 7015 // = constant 
+04AF: 247@ = 7016 // = constant 
+04AF: 248@ = 7017 // = constant 
+04AF: 249@ = 7018 // = constant 
+04AF: 250@ = 7019 // = constant 
+04AF: 251@ = 7020 // = constant 
+04AF: 252@ = 7021 // = constant 
+04AF: 253@ = 7022 // = constant 
+04AF: 254@ = 7023 // = constant 
+04AF: 255@ = 7024 // = constant 
+04AF: 256@ = 7025 // = constant 
+04AF: 257@ = 7026 // = constant 
+04AF: 258@ = 7027 // = constant 
+04AF: 259@ = 7028 // = constant 
+04AF: 260@ = 7029 // = constant 
+04AF: 261@ = 7030 // = constant 
+04AF: 262@ = 7031 // = constant 
+04AF: 263@ = 7032 // = constant 
+04AF: 264@ = 7033 // = constant 
+04AF: 265@ = 7034 // = constant 
+04AF: 266@ = 7035 // = constant 
+04AF: 267@ = 7036 // = constant 
+04AF: 268@ = 7037 // = constant 
+04AF: 269@ = 7038 // = constant 
+04AF: 270@ = 7039 // = constant 
+04AF: 271@ = 7040 // = constant 
+04AF: 272@ = 7041 // = constant 
+04AF: 273@ = 7042 // = constant 
+04AF: 274@ = 7043 // = constant 
+04AF: 275@ = 7054 // = constant 
+04AF: 276@ = 7044 // = constant 
+04AF: 277@ = 7045 // = constant 
+04AF: 278@ = 7046 // = constant 
+04AF: 279@ = 7047 // = constant 
+04AF: 280@ = 7048 // = constant 
+04AF: 281@ = 7049 // = constant 
+04AF: 282@ = 7050 // = constant 
+04AF: 283@ = 7051 // = constant 
+04AF: 284@ = 7052 // = constant 
+04AF: 285@ = 7053 // = constant 
+04AF: 286@ = 7055 // = constant 
+04AF: 287@ = 7056 // = constant 
+04AF: 288@ = 7057 // = constant 
+04AF: 289@ = 7058 // = constant 
+04AF: 290@ = 7059 // = constant 
+04AF: 291@ = 7060 // = constant 
+04AF: 292@ = 7061 // = constant 
+04AF: 293@ = 7062 // = constant 
+04AF: 294@ = 7063 // = constant 
+04AF: 295@ = 7064 // = constant 
+04AF: 296@ = 7065 // = constant 
+04AF: 297@ = 7066 // = constant 
+04AF: 298@ = 7000 // = constant 
+04AF: 299@ = 7001 // = constant 
+04AF: 300@ = 7002 // = constant 
+04AF: 301@ = 7003 // = constant 
+04AF: 302@ = 7004 // = constant 
+04AF: 303@ = 7005 // = constant 
+04AF: 304@ = 7006 // = constant 
+054C: use_GXT_table 'CASINO1' 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+fade 0 500 
+
+:CASINO1_2302
+if 
+fading 
+jf @CASINO1_2326 
+wait 0 
+jump @CASINO1_2302 
+
+:CASINO1_2326
+select_interior 11 
+02E4: load_cutscene_data 'CAS_1A' 
+
+:CASINO1_2341
+if 
+86B9:   not cutscene_data_loaded 
+jf @CASINO1_2365 
+wait 0 
+jump @CASINO1_2341 
+
+:CASINO1_2365
+02E7: start_cutscene 
+fade 1 1000 
+
+:CASINO1_2374
+if 
+82E9:   not cutscene_reached_end 
+jf @CASINO1_2398 
+wait 0 
+jump @CASINO1_2374 
+
+:CASINO1_2398
+fade 0 0 
+
+:CASINO1_2404
+if 
+fading 
+jf @CASINO1_2428 
+wait 0 
+jump @CASINO1_2404 
+
+:CASINO1_2428
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+Player.WantedLevel($PLAYER_CHAR) = 0
+select_interior 0 
+08AD: link_actor $PLAYER_ACTOR to_enex_marker_at 2016.422 1017.102 radius 10.0 
+0822: enable_camera_bumper_view 0 
+Camera.SetPosition(1908.156, 977.3071, 10.2294, 0.0, 0.0, 0.0)
+Camera.PointAt(1907.488, 976.5921, 10.4377, 2)
+0395: clear_area 1 at 1903.27 955.95 9.8203 radius 30.0 
+Actor.PutAt($PLAYER_ACTOR, 1909.826, 977.4828, 9.8127)
+Actor.Angle($PLAYER_ACTOR) = 136.9741
+Model.Load(#TRDCSGRGDOOR_LVS)
+038B: load_requested_models 
+
+:CASINO1_2583
+if 
+   not Model.Available(#TRDCSGRGDOOR_LVS)
+jf @CASINO1_2609 
+wait 0 
+jump @CASINO1_2583 
+
+:CASINO1_2609
+gosub @CASINO1_94 
+gosub @CASINO1_172 
+0A0B: set_rendering_origin_at_3D_coord 1908.156 977.3071 10.2294 angle 136.9741 
+02A3: enable_widescreen 1 
+wait 150 
+fade 1 1500 
+
+:CASINO1_2661
+if 
+fading 
+jf @CASINO1_2685 
+wait 0 
+jump @CASINO1_2661 
+
+:CASINO1_2685
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_2714 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 324@ 100000 ms 
+
+:CASINO1_2714
+wait 0 
+if 
+   not 307@ == 0 
+jf @CASINO1_3261 
+if 
+  309@ == 0 
+jf @CASINO1_2782 
+if 
+03D0:   wav 306@ loaded 
+jf @CASINO1_2775 
+040D: unload_wav 306@ 
+
+:CASINO1_2775
+309@ = 1 
+
+:CASINO1_2782
+if 
+  309@ == 1 
+jf @CASINO1_2819 
+03CF: load_wav 237@(307@,67i) as 305@ 
+309@ = 2 
+
+:CASINO1_2819
+if 
+  309@ == 2 
+jf @CASINO1_2984 
+if 
+03D0:   wav 305@ loaded 
+jf @CASINO1_2984 
+if or
+  307@ == 61 
+  307@ == 62 
+  307@ == 64 
+jf @CASINO1_2909 
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_2909 
+0967: actor 324@ move_mouth 10000 ms 
+
+:CASINO1_2909
+if or
+  307@ == 63 
+  307@ == 65 
+jf @CASINO1_2958 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CASINO1_2958 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+
+:CASINO1_2958
+03D1: play_wav 305@ 
+00BC: show_text_highpriority GXT 102@(307@,67s) time 10000 flag 1 
+309@ = 3 
+
+:CASINO1_2984
+if 
+  309@ == 3 
+jf @CASINO1_3261 
+if 
+03D2:   wav 305@ ended 
+jf @CASINO1_3200 
+03D5: remove_text 102@(307@,67s) 
+if or
+  307@ == 61 
+  307@ == 62 
+  307@ == 64 
+jf @CASINO1_3080 
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_3080 
+0968: actor 324@ stop_mouth 
+
+:CASINO1_3080
+if or
+  307@ == 63 
+  307@ == 65 
+jf @CASINO1_3126 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CASINO1_3126 
+0968: actor $PLAYER_ACTOR stop_mouth 
+
+:CASINO1_3126
+if 
+  305@ == 1 
+jf @CASINO1_3165 
+305@ = 2 
+306@ = 1 
+jump @CASINO1_3179 
+
+:CASINO1_3165
+305@ = 1 
+306@ = 2 
+
+:CASINO1_3179
+307@ = 0 
+309@ = 0 
+jump @CASINO1_3261 
+
+:CASINO1_3200
+if 
+83D0:   not wav 306@ loaded 
+jf @CASINO1_3261 
+if 
+  67 > 307@ 
+jf @CASINO1_3261 
+0085: 308@ = 307@ // (int) 
+308@ += 1 
+03CF: load_wav 237@(308@,67i) as 306@ 
+
+:CASINO1_3261
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_3386 
+if 
+   Actor.Animation(324@) == "TYD2CAR_LOW"
+jf @CASINO1_3386 
+0613: 96@ = actor 324@ animation "TYD2CAR_LOW" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_3386 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_3386
+if 
+  35@ > 0 
+jf @CASINO1_3428 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CASINO1_3428 
+35@ = 10 
+
+:CASINO1_3428
+if 
+  35@ == 0 
+jf @CASINO1_3485 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_3485 
+307@ = 61 
+35@ = 1 
+
+:CASINO1_3485
+if 
+  35@ == 1 
+jf @CASINO1_3566 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_3566 
+307@ = 62 
+05D3: AS_actor $PLAYER_ACTOR goto_point 1905.45 973.9371 9.8127 mode 4 time -2 ms // versionA 
+35@ = 2 
+
+:CASINO1_3566
+if 
+  35@ == 2 
+jf @CASINO1_3695 
+062E: get_actor $PLAYER_ACTOR task 1491 status_store_to 97@ // ret 7 if not found 
+if 
+04A4:   97@ == 7 // == constant 
+jf @CASINO1_3695 
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_3695 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 324@ 
+Camera.SetPosition(1903.005, 974.7813, 11.1887, 0.0, 0.0, 0.0)
+Camera.PointAt(1903.732, 974.0975, 11.2553, 2)
+35@ = 3 
+
+:CASINO1_3695
+if 
+  35@ == 3 
+jf @CASINO1_3752 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_3752 
+307@ = 63 
+35@ = 4 
+
+:CASINO1_3752
+if or
+  35@ == 4 
+  35@ == 5 
+jf @CASINO1_3814 
+034E: move_object $2658 to 1903.383 967.62 15.438 speed 0.0 0.0 0.1 collision_check 0 
+
+:CASINO1_3814
+if 
+  35@ == 10 
+jf @CASINO1_3869 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.05 collision_check 0 
+
+:CASINO1_3869
+if 
+  35@ == 4 
+jf @CASINO1_3926 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_3926 
+307@ = 64 
+35@ = 5 
+
+:CASINO1_3926
+if 
+  35@ == 5 
+jf @CASINO1_3977 
+if 
+   not Car.Wrecked(322@)
+jf @CASINO1_3977 
+05CB: AS_actor $PLAYER_ACTOR enter_car 322@ as_driver -2 ms 
+35@ = 6 
+
+:CASINO1_3977
+if 
+  35@ == 6 
+jf @CASINO1_4151 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_4151 
+307@ = 65 
+062E: get_actor $PLAYER_ACTOR task 1483 status_store_to 97@ // ret 7 if not found 
+if 
+04A4:   97@ == 7 // == constant 
+jf @CASINO1_4151 
+Camera.SetPosition(1906.528, 970.1409, 10.433, 0.0, 0.0, 0.0)
+Camera.PointAt(1905.822, 970.8365, 10.5694, 2)
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.1 collision_check 0 
+35@ = 7 
+
+:CASINO1_4151
+if 
+  35@ == 7 
+jf @CASINO1_4208 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_4208 
+307@ = 66 
+35@ = 8 
+
+:CASINO1_4208
+if 
+  35@ == 8 
+jf @CASINO1_4315 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_4315 
+307@ = 67 
+if 
+   not Car.Wrecked(322@)
+jf @CASINO1_4315 
+05D1: AS_actor $PLAYER_ACTOR drive_car 322@ to 1903.27 955.95 9.8203 speed 10.0 1 model #NULL 2 
+35@ = 9 
+
+:CASINO1_4315
+if 
+  35@ == 9 
+jf @CASINO1_4369 
+062E: get_actor $PLAYER_ACTOR task 1489 status_store_to 97@ // ret 7 if not found 
+if 
+04A4:   97@ == 7 // == constant 
+jf @CASINO1_4369 
+35@ = 10 
+
+:CASINO1_4369
+if 
+   not 35@ == 10 
+jf @CASINO1_4394 
+jump @CASINO1_2714 
+
+:CASINO1_4394
+if 
+   not Car.Wrecked(322@)
+jf @CASINO1_4507 
+Object.PutAt($2658, 1903.383, 967.82, 11.438)
+Car.PutAt(322@, 1903.27, 955.95, 9.8203)
+Car.Angle(322@) = 180.7793
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_4499 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1903.27 955.95 9.8203 
+
+:CASINO1_4499
+036A: put_actor $PLAYER_ACTOR in_car 322@ 
+
+:CASINO1_4507
+Model.Destroy(#TRDCSGRGDOOR_LVS)
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0647: AS_actor $PLAYER_ACTOR clear_look_task 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+35@ = 0 
+
+:CASINO1_4538
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CASINO1_4564 
+jump @CASINO1_20234 
+
+:CASINO1_4564
+if 
+0735:   is_keyboard_key_pressed 32 
+jf @CASINO1_4586 
+$7528 = 100 
+
+:CASINO1_4586
+if 
+   not 307@ == 0 
+jf @CASINO1_4925 
+if 
+  309@ == 0 
+jf @CASINO1_4650 
+if 
+03D0:   wav 306@ loaded 
+jf @CASINO1_4643 
+040D: unload_wav 306@ 
+
+:CASINO1_4643
+309@ = 1 
+
+:CASINO1_4650
+if 
+  309@ == 1 
+jf @CASINO1_4687 
+03CF: load_wav 237@(307@,67i) as 305@ 
+309@ = 2 
+
+:CASINO1_4687
+if 
+  309@ == 2 
+jf @CASINO1_4747 
+if 
+03D0:   wav 305@ loaded 
+jf @CASINO1_4747 
+03D1: play_wav 305@ 
+00BC: show_text_highpriority GXT 102@(307@,67s) time 10000 flag 1 
+309@ = 3 
+
+:CASINO1_4747
+if 
+  309@ == 3 
+jf @CASINO1_4925 
+if 
+03D2:   wav 305@ ended 
+jf @CASINO1_4864 
+03D5: remove_text 102@(307@,67s) 
+if 
+  305@ == 1 
+jf @CASINO1_4829 
+305@ = 2 
+306@ = 1 
+jump @CASINO1_4843 
+
+:CASINO1_4829
+305@ = 1 
+306@ = 2 
+
+:CASINO1_4843
+307@ = 0 
+309@ = 0 
+jump @CASINO1_4925 
+
+:CASINO1_4864
+if 
+83D0:   not wav 306@ loaded 
+jf @CASINO1_4925 
+if 
+  67 > 307@ 
+jf @CASINO1_4925 
+0085: 308@ = 307@ // (int) 
+308@ += 1 
+03CF: load_wav 237@(308@,67i) as 306@ 
+
+:CASINO1_4925
+if or
+0154:   actor $PLAYER_ACTOR in_zone 'PINT'  // Pilson Intersection
+0154:   actor $PLAYER_ACTOR in_zone 'BINT'  // Blackfield Intersection
+0154:   actor $PLAYER_ACTOR in_zone 'JTN'  // Julius Thruway North
+0154:   actor $PLAYER_ACTOR in_zone 'JTS'  // Julius Thruway South
+0154:   actor $PLAYER_ACTOR in_zone 'JTW'  // Julius Thruway West
+0154:   actor $PLAYER_ACTOR in_zone 'JTE'  // Julius Thruway East
+jf @CASINO1_5118 
+if and
+  98@ == 0 
+  38@ == 0 
+jf @CASINO1_5075 
+00BB: show_text_lowpriority GXT 'CAS1_10' time 5000 flag 1  // ~s~Keep off the freeway!
+Player.SetMinWantedLevel($PLAYER_CHAR, 3)
+38@ = 1 
+
+:CASINO1_5075
+if 
+  38@ == 1 
+jf @CASINO1_5118 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 2
+jf @CASINO1_5118 
+38@ = 0 
+
+:CASINO1_5118
+if 
+  34@ == -1 
+jf @CASINO1_5807 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.05 collision_check 0 
+if 
+  $2200 == 0 
+jf @CASINO1_5780 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(322@)
+jf @CASINO1_5773 
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_5773 
+if 
+  $7529 == 0 
+jf @CASINO1_5338 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5293 
+307@ = 1 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5293
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_5338 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5338
+if 
+  $7529 == 1 
+jf @CASINO1_5445 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5400 
+307@ = 2 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5400
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_5445 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5445
+if 
+  $7529 == 2 
+jf @CASINO1_5552 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5507 
+307@ = 3 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5507
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_5552 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5552
+if 
+  $7529 == 3 
+jf @CASINO1_5659 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5614 
+307@ = 4 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5614
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_5659 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5659
+if 
+  $7529 == 4 
+jf @CASINO1_5773 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5728 
+307@ = 5 
+$7529 += 1 
+34@ = 0 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5728
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_5773 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_5773
+jump @CASINO1_5807 
+
+:CASINO1_5780
+Object.PutAt($2658, 1903.383, 967.82, 11.438)
+34@ = 0 
+
+:CASINO1_5807
+if 
+  34@ == 0 
+jf @CASINO1_5945 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(322@)
+jf @CASINO1_5945 
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_5945 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_5945 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'CAS1_11' time 5000 flag 1  // ~s~Scare him, but remember head-on collisions will kill him.
+00BB: show_text_lowpriority GXT 'CAS1_12' time 5000 flag 1  // ~s~And stay off the highway, you don't need any police attention.
+98@ = 2 
+34@ = 2 
+36@ = 1 
+
+:CASINO1_5945
+if 
+  5 > 34@ 
+jf @CASINO1_6266 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(322@)
+jf @CASINO1_6266 
+if 
+  36@ == 0 
+jf @CASINO1_6127 
+if 
+0448:   actor $PLAYER_ACTOR in_car 322@ 
+jf @CASINO1_6127 
+00BE: text_clear_all 
+0822: enable_camera_bumper_view 0 
+01BD: 101@ = current_time_in_ms 
+Marker.Disable(323@)
+Marker.Disable(50@)
+if and
+  34@ > 0 
+  4 > 34@ 
+jf @CASINO1_6088 
+0151: remove_status_text $7528 
+03C4: set_status_text $7528 type 1 GXT 'CAS1_05' // global_variable  // Scare-O-Meter
+
+:CASINO1_6088
+if 
+  34@ == 4 
+jf @CASINO1_6120 
+018A: 50@ = create_checkpoint_at 79@ 80@ 81@ 
+
+:CASINO1_6120
+36@ = 1 
+
+:CASINO1_6127
+if 
+  36@ == 1 
+jf @CASINO1_6266 
+if 
+8448:   not actor $PLAYER_ACTOR in_car 322@ 
+jf @CASINO1_6266 
+00BE: text_clear_all 
+0822: enable_camera_bumper_view 1 
+Marker.Disable(323@)
+323@ = Marker.CreateAboveCar(322@)
+07E0: set_marker 323@ type_to 1 
+if and
+  34@ > 0 
+  4 > 34@ 
+jf @CASINO1_6220 
+0151: remove_status_text $7528 
+
+:CASINO1_6220
+if 
+  34@ == 4 
+jf @CASINO1_6243 
+Marker.Disable(50@)
+
+:CASINO1_6243
+00BC: show_text_highpriority GXT 'CAS1_01' time 7500 flag 2  // ~s~Get back in the ~b~car~s~.
+36@ = 0 
+
+:CASINO1_6266
+if 
+  34@ == 2 
+jf @CASINO1_6479 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(324@)
+jf @CASINO1_6479 
+03C4: set_status_text $7528 type 1 GXT 'CAS1_05' // global_variable  // Scare-O-Meter
+0209: 37@ = random_int_in_ranges 0 4 
+if 
+  37@ == 0 
+jf @CASINO1_6366 
+03E5: show_text_box 'CAS1_06'  // High speeds are sure to scare him.
+34@ = 3 
+
+:CASINO1_6366
+if 
+  37@ == 1 
+jf @CASINO1_6402 
+03E5: show_text_box 'CAS1_07'  // Try some hand-brake turns.
+34@ = 3 
+
+:CASINO1_6402
+if 
+  37@ == 2 
+jf @CASINO1_6438 
+03E5: show_text_box 'CAS1_08'  // Insane stunts will get him shook up.
+34@ = 3 
+
+:CASINO1_6438
+if 
+  37@ == 3 
+jf @CASINO1_6474 
+03E5: show_text_box 'CAS1_09'  // Driving on the wrong side of the road will unsettle him.
+34@ = 3 
+
+:CASINO1_6474
+01BD: 74@ = current_time_in_ms 
+
+:CASINO1_6479
+if 
+  34@ == 3 
+jf @CASINO1_15818 
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(324@)
+jf @CASINO1_15818 
+if 
+  335@ == 0 
+jf @CASINO1_6635 
+if 
+   not Actor.Dead(334@)
+jf @CASINO1_6635 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 1910.75 960.74 10.86 radius 15.0 15.0 15.0 
+jf @CASINO1_6635 
+if 
+82CB:   not actor 334@ bounding_sphere_visible 
+jf @CASINO1_6635 
+gosub @CASINO1_524 
+335@ = 1 
+
+:CASINO1_6635
+if 
+09BB:   car 322@ has_visible_damage_on_component 0 
+jf @CASINO1_6686 
+05BE: AS_actor 324@ die 
+0465: remove_actor 324@ from_turret_mode 
+00BC: show_text_highpriority GXT 'CAS1_04' time 5000 flag 1  // ~r~You killed him!
+jump @CASINO1_20148 
+
+:CASINO1_6686
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_15818 
+if 
+  8 > 49@ 
+jf @CASINO1_6915 
+01BD: 73@ = current_time_in_ms 
+0085: 72@ = 73@ // (int) 
+0062: 72@ -= 74@ // (int) 
+if 
+  72@ > 30000 
+jf @CASINO1_6915 
+0209: 37@ = random_int_in_ranges 0 4 
+if 
+  37@ == 0 
+jf @CASINO1_6806 
+03E5: show_text_box 'CAS1_06'  // High speeds are sure to scare him.
+01BD: 74@ = current_time_in_ms 
+
+:CASINO1_6806
+if 
+  37@ == 1 
+jf @CASINO1_6840 
+03E5: show_text_box 'CAS1_07'  // Try some hand-brake turns.
+01BD: 74@ = current_time_in_ms 
+
+:CASINO1_6840
+if 
+  37@ == 2 
+jf @CASINO1_6874 
+03E5: show_text_box 'CAS1_08'  // Insane stunts will get him shook up.
+01BD: 74@ = current_time_in_ms 
+
+:CASINO1_6874
+if 
+  37@ == 3 
+jf @CASINO1_6908 
+03E5: show_text_box 'CAS1_09'  // Driving on the wrong side of the road will unsettle him.
+01BD: 74@ = current_time_in_ms 
+
+:CASINO1_6908
+49@ += 1 
+
+:CASINO1_6915
+if 
+  $7528 > 100 
+jf @CASINO1_6978 
+$7528 = 100 
+$7529 = 0 
+0151: remove_status_text $7528 
+018A: 50@ = create_checkpoint_at 79@ 80@ 81@ 
+01BD: 62@ = current_time_in_ms 
+34@ = 4 
+
+:CASINO1_6978
+if and
+  39@ == 0 
+  41@ == 0 
+  40@ == 0 
+jf @CASINO1_7073 
+if 
+  71@ > 15.0 
+jf @CASINO1_7073 
+if 
+00E1:   player 0 pressed_key 6 
+jf @CASINO1_7073 
+331@ = Car.Angle(322@)
+333@ = 0.0 
+39@ = 1 
+
+:CASINO1_7073
+if 
+  39@ == 1 
+jf @CASINO1_7307 
+if 
+00E1:   player 0 pressed_key 6 
+jf @CASINO1_7148 
+332@ = Car.Angle(322@)
+0087: 330@ = 332@ // (float) 
+0063: 330@ -= 331@ // (float) 
+005B: 333@ += 330@ // (float) 
+331@ = Car.Angle(322@)
+
+:CASINO1_7148
+if 
+80E1:   not player 0 pressed_key 6 
+jf @CASINO1_7307 
+if 
+  0.0 > 333@ 
+jf @CASINO1_7196 
+333@ += 360.0 
+
+:CASINO1_7196
+if 
+  333@ > 0.0 
+jf @CASINO1_7300 
+if and
+  333@ > 14.0 
+  210.0 > 333@ 
+jf @CASINO1_7262 
+$7528 += 7 
+jump @CASINO1_7300 
+
+:CASINO1_7262
+if and
+  333@ > 90.0 
+  270.0 > 333@ 
+jf @CASINO1_7300 
+$7528 += 3 
+
+:CASINO1_7300
+39@ = 0 
+
+:CASINO1_7307
+if and
+  40@ == 0 
+  39@ == 0 
+  41@ == 0 
+jf @CASINO1_7367 
+if 
+01F3:   car 322@ in_air 
+jf @CASINO1_7367 
+01BD: 53@ = current_time_in_ms 
+40@ = 1 
+
+:CASINO1_7367
+if 
+  40@ == 1 
+jf @CASINO1_7445 
+if 
+81F3:   not car 322@ in_air 
+jf @CASINO1_7445 
+01BD: 52@ = current_time_in_ms 
+0085: 51@ = 52@ // (int) 
+0062: 51@ -= 53@ // (int) 
+51@ /= 250 
+005E: $7528 += 51@ // (int) 
+40@ = 0 
+
+:CASINO1_7445
+if and
+  41@ == 0 
+  39@ == 0 
+  40@ == 0 
+  20 > 59@ 
+jf @CASINO1_7595 
+if 
+  1.0 > 71@ 
+jf @CASINO1_7595 
+if and
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @CASINO1_7595 
+01BD: 52@ = current_time_in_ms 
+0085: 51@ = 52@ // (int) 
+0062: 51@ -= 53@ // (int) 
+if 
+  51@ > 3000 
+jf @CASINO1_7595 
+69@ = 0.0 
+70@ = 0.15 
+41@ = 1 
+
+:CASINO1_7595
+if 
+  41@ == 1 
+jf @CASINO1_7805 
+0494: get_joystick 0 direction_offset_to 91@ 92@ 93@ 94@ 
+if 
+80E1:   not player 0 pressed_key 14 
+jf @CASINO1_7653 
+41@ = 0 
+
+:CASINO1_7653
+if 
+80E1:   not player 0 pressed_key 16 
+jf @CASINO1_7677 
+41@ = 0 
+
+:CASINO1_7677
+if and
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @CASINO1_7805 
+if 
+803B:   not  91@ == 95@ // (int) 
+jf @CASINO1_7805 
+if and
+  69@ >= 0.0 
+  70@ >= 0.0 
+jf @CASINO1_7805 
+01BD: 53@ = current_time_in_ms 
+005B: 69@ += 70@ // (float) 
+70@ -= 0.025 
+0092: 54@ = float 69@ to_integer 
+005E: $7528 += 54@ // (int) 
+005A: 59@ += 54@ // (int) 
+0085: 95@ = 91@ // (int) 
+
+:CASINO1_7805
+02E3: 71@ = car 322@ speed 
+if 
+  42@ == 0 
+jf @CASINO1_7882 
+if 
+  71@ > 30.0 
+jf @CASINO1_7882 
+if 
+  40 > 58@ 
+jf @CASINO1_7882 
+01BD: 65@ = current_time_in_ms 
+42@ = 1 
+
+:CASINO1_7882
+if 
+  42@ == 1 
+jf @CASINO1_7987 
+01BD: 64@ = current_time_in_ms 
+0085: 63@ = 64@ // (int) 
+0062: 63@ -= 65@ // (int) 
+if 
+  63@ > 600 
+jf @CASINO1_7959 
+01BD: 65@ = current_time_in_ms 
+58@ += 1 
+$7528 += 1 
+
+:CASINO1_7959
+if 
+  30.0 > 71@ 
+jf @CASINO1_7987 
+42@ = 0 
+
+:CASINO1_7987
+if 
+  43@ == 0 
+jf @CASINO1_8053 
+if 
+  $HJ_STUNT_BONUS_MULT > 0 
+jf @CASINO1_8053 
+008B: 55@ = $HJ_STUNT_BONUS // (int) 
+55@ /= 5 
+005E: $7528 += 55@ // (int) 
+43@ = 1 
+
+:CASINO1_8053
+if 
+  43@ == 1 
+jf @CASINO1_8096 
+if 
+  $HJ_STUNT_BONUS_MULT == 0 
+jf @CASINO1_8096 
+43@ = 0 
+
+:CASINO1_8096
+if and
+  44@ == 0 
+  46@ == 0 
+jf @CASINO1_8810 
+if 
+  71@ > 15.0 
+jf @CASINO1_8796 
+0494: get_joystick 0 direction_offset_to 91@ 92@ 93@ 94@ 
+if 
+   not 91@ == 0 
+jf @CASINO1_8775 
+56@ += 1 
+if 
+  56@ > 20 
+jf @CASINO1_8768 
+if or
+  91@ > 96 
+  -96 > 91@ 
+jf @CASINO1_8768 
+if 
+  45@ == 0 
+jf @CASINO1_8768 
+if 
+  20 > 57@ 
+jf @CASINO1_8276 
+$7528 += 1 
+57@ += 1 
+
+:CASINO1_8276
+if 
+  91@ > 0 
+jf @CASINO1_8522 
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNL"
+jf @CASINO1_8437 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNL" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_8430 
+0812: AS_actor 324@ perform_animation "TYD2CAR_TURNR" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 1 
+56@ = 0 
+45@ = 1 
+
+:CASINO1_8430
+jump @CASINO1_8522 
+
+:CASINO1_8437
+if 
+   not Actor.Animation(324@) == "TYD2CAR_TURNR"
+jf @CASINO1_8522 
+0812: AS_actor 324@ perform_animation "TYD2CAR_TURNR" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+56@ = 0 
+45@ = 1 
+
+:CASINO1_8522
+if 
+  0 > 91@ 
+jf @CASINO1_8768 
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNR"
+jf @CASINO1_8683 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNR" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_8676 
+0812: AS_actor 324@ perform_animation "TYD2CAR_TURNL" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 1 
+56@ = 0 
+45@ = 1 
+
+:CASINO1_8676
+jump @CASINO1_8768 
+
+:CASINO1_8683
+if 
+   not Actor.Animation(324@) == "TYD2CAR_TURNL"
+jf @CASINO1_8768 
+0812: AS_actor 324@ perform_animation "TYD2CAR_TURNL" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+56@ = 0 
+45@ = 1 
+
+:CASINO1_8768
+jump @CASINO1_8789 
+
+:CASINO1_8775
+45@ = 0 
+56@ = 0 
+
+:CASINO1_8789
+jump @CASINO1_8810 
+
+:CASINO1_8796
+45@ = 0 
+56@ = 0 
+
+:CASINO1_8810
+if 
+  46@ == 0 
+jf @CASINO1_8896 
+if 
+  71@ > 15.0 
+jf @CASINO1_8896 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @CASINO1_8896 
+if or
+00E1:   player 0 pressed_key 14 
+00E1:   player 0 pressed_key 6 
+jf @CASINO1_8896 
+46@ = 1 
+
+:CASINO1_8896
+if 
+  46@ == 1 
+jf @CASINO1_9030 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @CASINO1_9030 
+if or
+00E1:   player 0 pressed_key 14 
+00E1:   player 0 pressed_key 6 
+jf @CASINO1_9030 
+78@ += 1 
+if 
+  78@ > 12 
+jf @CASINO1_9030 
+0812: AS_actor 324@ perform_animation "TYD2CAR_BUMP" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+01BD: 77@ = current_time_in_ms 
+46@ = 2 
+
+:CASINO1_9030
+if 
+  46@ == 2 
+jf @CASINO1_9182 
+01BD: 76@ = current_time_in_ms 
+0085: 75@ = 76@ // (int) 
+0062: 75@ -= 77@ // (int) 
+if 
+  75@ > 1000 
+jf @CASINO1_9182 
+if 
+   Actor.Animation(324@) == "TYD2CAR_BUMP"
+jf @CASINO1_9182 
+0613: 96@ = actor 324@ animation "TYD2CAR_BUMP" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_9182 
+$7528 += 1 
+78@ = 0 
+46@ = 0 
+
+:CASINO1_9182
+if 
+  71@ > 30.0 
+jf @CASINO1_9537 
+0407: store_coords_to 88@ 89@ 90@ from_car 322@ with_offset 0.0 4.0 0.0 
+0087: 82@ = 88@ // (float) 
+82@ -= 0.1 
+0087: 83@ = 89@ // (float) 
+83@ -= 0.1 
+0087: 84@ = 90@ // (float) 
+84@ -= 0.1 
+0087: 85@ = 88@ // (float) 
+85@ += 0.1 
+0087: 86@ = 89@ // (float) 
+86@ += 0.1 
+0087: 87@ = 90@ // (float) 
+87@ += 0.1 
+if 
+  48@ == 0 
+jf @CASINO1_9411 
+if 
+0339:   anything_in_cube_cornerA 82@ 83@ 84@ cornerB 85@ 86@ 87@ solid 0 car 1 actor 0 object 0 particle 0 
+jf @CASINO1_9411 
+01BD: 68@ = current_time_in_ms 
+48@ = 1 
+
+:CASINO1_9411
+if 
+  48@ == 1 
+jf @CASINO1_9537 
+01BD: 67@ = current_time_in_ms 
+0085: 66@ = 67@ // (int) 
+0062: 66@ -= 68@ // (int) 
+if 
+  66@ > 50 
+jf @CASINO1_9537 
+if 
+0339:   anything_in_cube_cornerA 82@ 83@ 84@ cornerB 85@ 86@ 87@ solid 0 car 1 actor 0 object 0 particle 0 
+jf @CASINO1_9530 
+$7528 += 1 
+48@ = 0 
+jump @CASINO1_9537 
+
+:CASINO1_9530
+48@ = 0 
+
+:CASINO1_9537
+if or
+  40@ == 1 
+  39@ == 1 
+  41@ == 1 
+  45@ == 1 
+jf @CASINO1_9713 
+if 
+  98@ == 0 
+jf @CASINO1_9713 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_9713 
+0209: $7529 = random_int_in_ranges 0 6 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_9713 
+if 
+  6 > $7529 
+jf @CASINO1_9706 
+$7529 += 1 
+jump @CASINO1_9713 
+
+:CASINO1_9706
+$7529 -= 1 
+
+:CASINO1_9713
+if 
+  98@ == 1 
+jf @CASINO1_14461 
+if 
+  $7529 == 0 
+jf @CASINO1_9841 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_9781 
+307@ = 27 
+
+:CASINO1_9781
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_9841 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_9841
+if 
+  $7529 == 1 
+jf @CASINO1_9951 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_9891 
+307@ = 28 
+
+:CASINO1_9891
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_9951 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_9951
+if 
+  $7529 == 2 
+jf @CASINO1_10061 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10001 
+307@ = 29 
+
+:CASINO1_10001
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10061 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10061
+if 
+  $7529 == 3 
+jf @CASINO1_10171 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10111 
+307@ = 30 
+
+:CASINO1_10111
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10171 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10171
+if 
+  $7529 == 4 
+jf @CASINO1_10281 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10221 
+307@ = 31 
+
+:CASINO1_10221
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10281 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10281
+if 
+  $7529 == 5 
+jf @CASINO1_10391 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10331 
+307@ = 32 
+
+:CASINO1_10331
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10391 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10391
+if 
+  $7529 == 6 
+jf @CASINO1_10501 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10441 
+307@ = 33 
+
+:CASINO1_10441
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10501 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10501
+if 
+  $7529 == 7 
+jf @CASINO1_10611 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10551 
+307@ = 21 
+
+:CASINO1_10551
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10611 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10611
+if 
+  $7529 == 8 
+jf @CASINO1_10721 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10661 
+307@ = 22 
+
+:CASINO1_10661
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10721 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10721
+if 
+  $7529 == 9 
+jf @CASINO1_10831 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10771 
+307@ = 23 
+
+:CASINO1_10771
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10831 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10831
+if 
+  $7529 == 10 
+jf @CASINO1_10941 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10881 
+307@ = 45 
+
+:CASINO1_10881
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_10941 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_10941
+if 
+  $7529 == 11 
+jf @CASINO1_11051 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_10991 
+307@ = 46 
+
+:CASINO1_10991
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11051 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11051
+if 
+  $7529 == 12 
+jf @CASINO1_11161 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11101 
+307@ = 47 
+
+:CASINO1_11101
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11161 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11161
+if 
+  $7529 == 13 
+jf @CASINO1_11271 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11211 
+307@ = 48 
+
+:CASINO1_11211
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11271 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11271
+if 
+  $7529 == 14 
+jf @CASINO1_11381 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11321 
+307@ = 24 
+
+:CASINO1_11321
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11381 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11381
+if 
+  $7529 == 15 
+jf @CASINO1_11491 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11431 
+307@ = 25 
+
+:CASINO1_11431
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11491 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11491
+if 
+  $7529 == 16 
+jf @CASINO1_11601 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11541 
+307@ = 26 
+
+:CASINO1_11541
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11601 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11601
+if 
+  $7529 == 17 
+jf @CASINO1_11711 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11651 
+307@ = 34 
+
+:CASINO1_11651
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11711 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11711
+if 
+  $7529 == 18 
+jf @CASINO1_11821 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11761 
+307@ = 35 
+
+:CASINO1_11761
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11821 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11821
+if 
+  $7529 == 19 
+jf @CASINO1_11931 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11871 
+307@ = 36 
+
+:CASINO1_11871
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_11931 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_11931
+if 
+  $7529 == 20 
+jf @CASINO1_12041 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_11981 
+307@ = 37 
+
+:CASINO1_11981
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12041 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12041
+if 
+  $7529 == 21 
+jf @CASINO1_12151 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12091 
+307@ = 38 
+
+:CASINO1_12091
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12151 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12151
+if 
+  $7529 == 22 
+jf @CASINO1_12261 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12201 
+307@ = 39 
+
+:CASINO1_12201
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12261 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12261
+if 
+  $7529 == 23 
+jf @CASINO1_12371 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12311 
+307@ = 40 
+
+:CASINO1_12311
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12371 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12371
+if 
+  $7529 == 24 
+jf @CASINO1_12481 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12421 
+307@ = 41 
+
+:CASINO1_12421
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12481 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12481
+if 
+  $7529 == 25 
+jf @CASINO1_12591 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12531 
+307@ = 42 
+
+:CASINO1_12531
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12591 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12591
+if 
+  $7529 == 26 
+jf @CASINO1_12701 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12641 
+307@ = 43 
+
+:CASINO1_12641
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12701 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12701
+if 
+  $7529 == 27 
+jf @CASINO1_12811 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12751 
+307@ = 44 
+
+:CASINO1_12751
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12811 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12811
+if 
+  $7529 == 28 
+jf @CASINO1_12921 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12861 
+307@ = 6 
+
+:CASINO1_12861
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_12921 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_12921
+if 
+  $7529 == 29 
+jf @CASINO1_13031 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_12971 
+307@ = 7 
+
+:CASINO1_12971
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13031 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13031
+if 
+  $7529 == 30 
+jf @CASINO1_13141 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13081 
+307@ = 8 
+
+:CASINO1_13081
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13141 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13141
+if 
+  $7529 == 31 
+jf @CASINO1_13251 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13191 
+307@ = 9 
+
+:CASINO1_13191
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13251 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13251
+if 
+  $7529 == 32 
+jf @CASINO1_13361 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13301 
+307@ = 10 
+
+:CASINO1_13301
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13361 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13361
+if 
+  $7529 == 33 
+jf @CASINO1_13471 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13411 
+307@ = 11 
+
+:CASINO1_13411
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13471 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13471
+if 
+  $7529 == 34 
+jf @CASINO1_13581 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13521 
+307@ = 12 
+
+:CASINO1_13521
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13581 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13581
+if 
+  $7529 == 35 
+jf @CASINO1_13691 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13631 
+307@ = 13 
+
+:CASINO1_13631
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13691 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13691
+if 
+  $7529 == 36 
+jf @CASINO1_13801 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13741 
+307@ = 14 
+
+:CASINO1_13741
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13801 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13801
+if 
+  $7529 == 37 
+jf @CASINO1_13911 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13851 
+307@ = 15 
+
+:CASINO1_13851
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_13911 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_13911
+if 
+  $7529 == 38 
+jf @CASINO1_14021 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_13961 
+307@ = 16 
+
+:CASINO1_13961
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14021 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_14021
+if 
+  $7529 == 39 
+jf @CASINO1_14131 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_14071 
+307@ = 17 
+
+:CASINO1_14071
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14131 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_14131
+if 
+  $7529 == 40 
+jf @CASINO1_14241 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_14181 
+307@ = 18 
+
+:CASINO1_14181
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14241 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_14241
+if 
+  $7529 == 41 
+jf @CASINO1_14351 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_14291 
+307@ = 19 
+
+:CASINO1_14291
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14351 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_14351
+if 
+  $7529 == 42 
+jf @CASINO1_14461 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_14401 
+307@ = 20 
+
+:CASINO1_14401
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14461 
+0084: $7530 = $7529 // (int) 
+01BD: 101@ = current_time_in_ms 
+98@ = 2 
+
+:CASINO1_14461
+if 
+  98@ == 2 
+jf @CASINO1_14526 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_14526 
+98@ = 0 
+
+:CASINO1_14526
+if 
+  98@ == 0 
+jf @CASINO1_14950 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 10000 
+jf @CASINO1_14950 
+if and
+  $7528 >= 0 
+  34 > $7528 
+jf @CASINO1_14706 
+0209: $7529 = random_int_in_ranges 28 32 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_14706 
+if 
+  32 > $7529 
+jf @CASINO1_14681 
+$7529 += 1 
+jump @CASINO1_14706 
+
+:CASINO1_14681
+if 
+  $7529 > 28 
+jf @CASINO1_14706 
+$7529 -= 1 
+
+:CASINO1_14706
+if and
+  $7528 > 33 
+  67 > $7528 
+jf @CASINO1_14828 
+0209: $7529 = random_int_in_ranges 33 37 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_14828 
+if 
+  37 > $7529 
+jf @CASINO1_14803 
+$7529 += 1 
+jump @CASINO1_14828 
+
+:CASINO1_14803
+if 
+  $7529 > 33 
+jf @CASINO1_14828 
+$7529 -= 1 
+
+:CASINO1_14828
+if and
+  $7528 > 66 
+  100 > $7528 
+jf @CASINO1_14950 
+0209: $7529 = random_int_in_ranges 38 42 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_14950 
+if 
+  42 > $7529 
+jf @CASINO1_14925 
+$7529 += 1 
+jump @CASINO1_14950 
+
+:CASINO1_14925
+if 
+  $7529 > 38 
+jf @CASINO1_14950 
+$7529 -= 1 
+
+:CASINO1_14950
+if 
+  42@ == 1 
+jf @CASINO1_15123 
+if 
+  98@ == 0 
+jf @CASINO1_15123 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_15123 
+0209: $7529 = random_int_in_ranges 7 9 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_15123 
+if 
+  9 > $7529 
+jf @CASINO1_15098 
+$7529 += 1 
+jump @CASINO1_15123 
+
+:CASINO1_15098
+if 
+  $7529 > 7 
+jf @CASINO1_15123 
+$7529 -= 1 
+
+:CASINO1_15123
+if 
+  43@ == 1 
+jf @CASINO1_15296 
+if 
+  98@ == 0 
+jf @CASINO1_15296 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_15296 
+0209: $7529 = random_int_in_ranges 14 16 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_15296 
+if 
+  16 > $7529 
+jf @CASINO1_15271 
+$7529 += 1 
+jump @CASINO1_15296 
+
+:CASINO1_15271
+if 
+  $7529 > 14 
+jf @CASINO1_15296 
+$7529 -= 1 
+
+:CASINO1_15296
+if or
+  46@ == 2 
+  48@ == 1 
+jf @CASINO1_15476 
+if 
+  98@ == 0 
+jf @CASINO1_15476 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_15476 
+0209: $7529 = random_int_in_ranges 17 24 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_15476 
+if 
+  24 > $7529 
+jf @CASINO1_15451 
+$7529 += 1 
+jump @CASINO1_15476 
+
+:CASINO1_15451
+if 
+  $7529 > 17 
+jf @CASINO1_15476 
+$7529 -= 1 
+
+:CASINO1_15476
+if 
+0495:   car 322@ burning 
+jf @CASINO1_15647 
+if 
+  98@ == 0 
+jf @CASINO1_15647 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_15647 
+0209: $7529 = random_int_in_ranges 10 13 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_15647 
+if 
+  13 > $7529 
+jf @CASINO1_15622 
+$7529 += 1 
+jump @CASINO1_15647 
+
+:CASINO1_15622
+if 
+  $7529 > 10 
+jf @CASINO1_15647 
+$7529 -= 1 
+
+:CASINO1_15647
+if 
+01F4:   car 322@ flipped 
+jf @CASINO1_15818 
+if 
+  98@ == 0 
+jf @CASINO1_15818 
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 5000 
+jf @CASINO1_15818 
+0209: $7529 = random_int_in_ranges 25 27 
+01BD: 101@ = current_time_in_ms 
+98@ = 1 
+if 
+003A:   $7529 == $7530 // (int) 
+jf @CASINO1_15818 
+if 
+  27 > $7529 
+jf @CASINO1_15793 
+$7529 += 1 
+jump @CASINO1_15818 
+
+:CASINO1_15793
+if 
+  $7529 > 25 
+jf @CASINO1_15818 
+$7529 -= 1 
+
+:CASINO1_15818
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_17823 
+if and
+  $7528 >= 0 
+  34 > $7528 
+jf @CASINO1_16460 
+if and
+  45@ == 0 
+  46@ == 0 
+jf @CASINO1_16460 
+if 
+   Actor.Animation(324@) == "TYD2CAR_LOW"
+jf @CASINO1_16007 
+0613: 96@ = actor 324@ animation "TYD2CAR_LOW" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16000 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 1 
+
+:CASINO1_16000
+jump @CASINO1_16460 
+
+:CASINO1_16007
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNR"
+jf @CASINO1_16120 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNR" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16120 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16120
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNL"
+jf @CASINO1_16233 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNL" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16233 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16233
+if 
+   Actor.Animation(324@) == "TYD2CAR_BUMP"
+jf @CASINO1_16344 
+0613: 96@ = actor 324@ animation "TYD2CAR_BUMP" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16344 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16344
+if 
+   Actor.Animation(324@) == "TYD2CAR_MED"
+jf @CASINO1_16460 
+0613: 96@ = actor 324@ animation "TYD2CAR_MED" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16460 
+0812: AS_actor 324@ perform_animation "TYD2CAR_LOW" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 2 
+
+:CASINO1_16460
+if and
+  $7528 > 33 
+  67 > $7528 
+jf @CASINO1_17190 
+if and
+  45@ == 0 
+  46@ == 0 
+jf @CASINO1_17190 
+if 
+   Actor.Animation(324@) == "TYD2CAR_MED"
+jf @CASINO1_16633 
+0613: 96@ = actor 324@ animation "TYD2CAR_MED" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16626 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 2 
+
+:CASINO1_16626
+jump @CASINO1_17190 
+
+:CASINO1_16633
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNR"
+jf @CASINO1_16746 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNR" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16746 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16746
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNL"
+jf @CASINO1_16859 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNL" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16859 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16859
+if 
+   Actor.Animation(324@) == "TYD2CAR_BUMP"
+jf @CASINO1_16970 
+0613: 96@ = actor 324@ animation "TYD2CAR_BUMP" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_16970 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_16970
+if 
+   Actor.Animation(324@) == "TYD2CAR_HIGH"
+jf @CASINO1_17081 
+0613: 96@ = actor 324@ animation "TYD2CAR_HIGH" time 
+if 
+  96@ > 1.0 
+jf @CASINO1_17081 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_17081
+if 
+   Actor.Animation(324@) == "TYD2CAR_LOW"
+jf @CASINO1_17190 
+0613: 96@ = actor 324@ animation "TYD2CAR_LOW" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17190 
+0812: AS_actor 324@ perform_animation "TYD2CAR_MED" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_17190
+if and
+  $7528 > 66 
+  100 > $7528 
+jf @CASINO1_17823 
+if and
+  45@ == 0 
+  46@ == 0 
+jf @CASINO1_17823 
+if 
+   Actor.Animation(324@) == "TYD2CAR_HIGH"
+jf @CASINO1_17366 
+0613: 96@ = actor 324@ animation "TYD2CAR_HIGH" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17359 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 3 
+
+:CASINO1_17359
+jump @CASINO1_17823 
+
+:CASINO1_17366
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNR"
+jf @CASINO1_17480 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNR" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17480 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_17480
+if 
+   Actor.Animation(324@) == "TYD2CAR_TURNL"
+jf @CASINO1_17594 
+0613: 96@ = actor 324@ animation "TYD2CAR_TURNL" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17594 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_17594
+if 
+   Actor.Animation(324@) == "TYD2CAR_BUMP"
+jf @CASINO1_17706 
+0613: 96@ = actor 324@ animation "TYD2CAR_BUMP" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17706 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+
+:CASINO1_17706
+if 
+   Actor.Animation(324@) == "TYD2CAR_MED"
+jf @CASINO1_17823 
+0613: 96@ = actor 324@ animation "TYD2CAR_MED" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_17823 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 2 
+
+:CASINO1_17823
+if 
+  34@ > 3 
+jf @CASINO1_18042 
+if 
+  47@ == 0 
+jf @CASINO1_17905 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+47@ = 1 
+
+:CASINO1_17905
+if 
+  47@ == 1 
+jf @CASINO1_18042 
+if 
+   Actor.Animation(324@) == "TYD2CAR_HIGH"
+jf @CASINO1_18042 
+0613: 96@ = actor 324@ animation "TYD2CAR_HIGH" time 
+if 
+  96@ == 1.0 
+jf @CASINO1_18042 
+0812: AS_actor 324@ perform_animation "TYD2CAR_HIGH" IFP "CAR" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+$7527 = 2 
+
+:CASINO1_18042
+if 
+  34@ == 4 
+jf @CASINO1_19024 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(322@)
+jf @CASINO1_19024 
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_18701 
+if 
+  $7529 == 0 
+jf @CASINO1_18207 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18162 
+307@ = 49 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18162
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_18207 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18207
+if 
+  $7529 == 1 
+jf @CASINO1_18314 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18269 
+307@ = 50 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18269
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_18314 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18314
+if 
+  $7529 == 2 
+jf @CASINO1_18421 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18376 
+307@ = 51 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18376
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_18421 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18421
+if 
+  $7529 == 3 
+jf @CASINO1_18528 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18483 
+307@ = 52 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18483
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_18528 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18528
+if 
+  $7529 == 4 
+jf @CASINO1_18635 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18590 
+307@ = 53 
+$7529 += 1 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18590
+01BD: 99@ = current_time_in_ms 
+0085: 100@ = 99@ // (int) 
+0062: 100@ -= 101@ // (int) 
+if 
+  100@ > 500 
+jf @CASINO1_18635 
+01BD: 101@ = current_time_in_ms 
+
+:CASINO1_18635
+if 
+  $7529 == 5 
+jf @CASINO1_18701 
+if and
+  309@ == 0 
+  307@ == 0 
+jf @CASINO1_18701 
+00BB: show_text_lowpriority GXT 'CAS1_03' time 7000 flag 1  // ~s~Take him back to the ~y~casino~s~.
+$7529 += 1 
+
+:CASINO1_18701
+if 
+   Actor.InCar($PLAYER_ACTOR, 322@)
+jf @CASINO1_19024 
+if 
+  335@ == 1 
+jf @CASINO1_18793 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1910.75 960.74 10.86 radius 100.0 100.0 100.0 
+jf @CASINO1_18793 
+335@ = 2 
+
+:CASINO1_18793
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 79@ 80@ 81@ radius 4.0 4.0 4.0 
+jf @CASINO1_19024 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CASINO1_19024 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+if and
+   not Actor.Dead(324@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CASINO1_19024 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 7065 as 1 
+03CF: load_wav 7066 as 2 
+
+:CASINO1_18924
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CASINO1_18954 
+wait 0 
+jump @CASINO1_18924 
+
+:CASINO1_18954
+fade 0 300 
+
+:CASINO1_18961
+if 
+fading 
+jf @CASINO1_18985 
+wait 0 
+jump @CASINO1_18961 
+
+:CASINO1_18985
+0395: clear_area 1 at 79@ 80@ 81@ radius 35.0 
+gosub @CASINO1_426 
+34@ = 5 
+35@ = 0 
+
+:CASINO1_19024
+if 
+  34@ == 5 
+jf @CASINO1_19991 
+if and
+  35@ > 0 
+  3 > 35@ 
+jf @CASINO1_19104 
+034E: move_object $2658 to 1903.383 967.62 15.438 speed 0.0 0.0 0.1 collision_check 0 
+
+:CASINO1_19104
+if 
+  35@ == 0 
+jf @CASINO1_19440 
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead(334@)
+jf @CASINO1_19440 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(1907.11, 953.0226, 10.9148, 0.0, 0.0, 0.0)
+Camera.PointAt(1906.713, 953.9378, 10.9839, 2)
+07C0: load_path 179 
+
+:CASINO1_19210
+if 
+87C1:   not path 179 available 
+jf @CASINO1_19237 
+wait 0 
+jump @CASINO1_19210 
+
+:CASINO1_19237
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead(334@)
+jf @CASINO1_19440 
+05EB: assign_car 322@ to_path 179 
+05ED: freeze_car 322@ while_on_path 
+fade 1 300 
+
+:CASINO1_19278
+if 
+fading 
+jf @CASINO1_19302 
+wait 0 
+jump @CASINO1_19278 
+
+:CASINO1_19302
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead(334@)
+jf @CASINO1_19440 
+05CD: AS_actor $PLAYER_ACTOR exit_car 322@ 
+05CB: AS_actor 334@ enter_car 322@ as_driver -1 ms 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAS1_JA' time 5000 flag 1  // ~z~CJ, ha, I think he messed himself.
+
+:CASINO1_19361
+if 
+83D2:   not wav 1 ended 
+jf @CASINO1_19387 
+wait 0 
+jump @CASINO1_19361 
+
+:CASINO1_19387
+35@ = 1 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAS1_JB' time 5000 flag 1  // ~z~I guess he willing to talk now!
+
+:CASINO1_19414
+if 
+83D2:   not wav 2 ended 
+jf @CASINO1_19440 
+wait 0 
+jump @CASINO1_19414 
+
+:CASINO1_19440
+if 
+  35@ == 1 
+jf @CASINO1_19755 
+if 
+834E:   not move_object $2658 to 1903.383 967.62 15.438 speed 0.0 0.0 0.05 collision_check 0 
+jf @CASINO1_19506 
+
+:CASINO1_19506
+if and
+   not Car.Wrecked(322@)
+   not Actor.Dead(334@)
+jf @CASINO1_19755 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CASINO1_19590 
+062E: get_actor $PLAYER_ACTOR task 1593 status_store_to 97@ // ret 7 if not found 
+if 
+04A4:   97@ == 7 // == constant 
+jf @CASINO1_19590 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 334@ 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor 334@ -2 ms 
+
+:CASINO1_19590
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+   Actor.InCar(334@, 322@)
+jf @CASINO1_19716 
+0647: AS_actor $PLAYER_ACTOR clear_look_task 
+05D3: AS_actor $PLAYER_ACTOR goto_point 1900.727 951.1921 9.8203 mode 4 time -2 ms // versionA 
+Camera.SetPosition(1901.262, 961.8007, 11.2363, 0.0, 0.0, 0.0)
+Camera.PointAt(1901.62, 960.8673, 11.2165, 2)
+05EE: unfreeze_car 322@ while_on_path 
+35@ = 2 
+jump @CASINO1_19755 
+
+:CASINO1_19716
+062E: get_actor 334@ task 1483 status_store_to 336@ // ret 7 if not found 
+if 
+04A4:   336@ == 7 // == constant 
+jf @CASINO1_19755 
+05CB: AS_actor 334@ enter_car 322@ as_driver -1 ms 
+
+:CASINO1_19755
+if 
+  35@ == 2 
+jf @CASINO1_19817 
+if 
+   not Car.Wrecked(322@)
+jf @CASINO1_19817 
+if 
+860E:   not car 322@ assigned_to_path 
+jf @CASINO1_19817 
+01BD: 53@ = current_time_in_ms 
+35@ = 3 
+
+:CASINO1_19817
+if 
+  35@ == 3 
+jf @CASINO1_19919 
+034E: move_object $2658 to 1903.383 967.62 11.438 speed 0.0 0.0 0.2 collision_check 0 
+01BD: 52@ = current_time_in_ms 
+0085: 51@ = 52@ // (int) 
+0062: 51@ -= 53@ // (int) 
+if 
+  51@ > 1250 
+jf @CASINO1_19919 
+35@ = 4 
+
+:CASINO1_19919
+if 
+  35@ == 4 
+jf @CASINO1_19991 
+Object.PutAt($2658, 1903.383, 967.82, 11.438)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+35@ = 5 
+jump @CASINO1_20234 
+
+:CASINO1_19991
+if 
+  34@ > -2 
+jf @CASINO1_20141 
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_20084 
+325@ = Actor.Health(324@)
+if 
+  325@ == 0 
+jf @CASINO1_20084 
+05BE: AS_actor 324@ die 
+0465: remove_actor 324@ from_turret_mode 
+00BC: show_text_highpriority GXT 'CAS1_04' time 5000 flag 1  // ~r~You killed him!
+jump @CASINO1_20148 
+
+:CASINO1_20084
+if 
+02BF:   car 322@ sunk 
+jf @CASINO1_20141 
+$7527 = 999 
+05BE: AS_actor 324@ die 
+0465: remove_actor 324@ from_turret_mode 
+00BC: show_text_highpriority GXT 'CAS1_04' time 5000 flag 1  // ~r~You killed him!
+jump @CASINO1_20148 
+
+:CASINO1_20141
+jump @CASINO1_4538 
+
+:CASINO1_20148
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CASINO1_20216 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2041.41 
+$11031 = 1018.28 
+$11030 = 10.26 
+
+:CASINO1_20216
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CASINO1_20234
+$CASINO_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'CASINO1'  // Fender Ketchup
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 5000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 5000
+0998: add_respect 10 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:CASINO1_20298
+gosub @CASINO1_419 
+if 
+   not Actor.Dead(324@)
+jf @CASINO1_20329 
+06A5: AS_actor 324@ jump_forward stay_on_ground 10000 ms and_stands_back 
+
+:CASINO1_20329
+Object.PutAt($2658, 1903.383, 967.62, 11.438)
+Marker.Disable(323@)
+Marker.Disable(50@)
+if 
+  34@ == 5 
+jf @CASINO1_20392 
+Actor.DestroyInstantly(334@)
+Actor.DestroyInstantly(324@)
+Car.Destroy(322@)
+
+:CASINO1_20392
+Model.Destroy(#FELTZER)
+Model.Destroy(#TRIADB)
+0296: unload_special_actor 1 
+04EF: release_animation "CAR" 
+065C: release_decision_maker 320@ 
+0822: enable_camera_bumper_view 1 
+0151: remove_status_text $7528 
+if 
+  $2200 == 0 
+jf @CASINO1_20451 
+$2200 = 1 
+
+:CASINO1_20451
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

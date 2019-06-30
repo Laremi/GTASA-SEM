@@ -1,0 +1,1504 @@
+:MUSIC2
+thread 'MUSIC2' 
+gosub @MUSIC2_94 
+if 
+wasted_or_busted 
+jf @MUSIC2_85 
+$11033 = 1 
+$11029 = 270.0 
+$11032 = 776.99 
+$11031 = -1589.67 
+$11030 = 13.38 
+gosub @MUSIC2_10816 
+
+:MUSIC2_85
+gosub @MUSIC2_10957 
+end_thread 
+
+:MUSIC2_94
+$ONMISSION = 1 
+increment_mission_attempts 
+054C: use_GXT_table 'STRAP2' 
+0169: set_fade_color_RGB 0 0 0 
+select_interior 10 
+fade 0 2000 
+
+:MUSIC2_133
+if 
+fading 
+jf @MUSIC2_157 
+wait 0 
+jump @MUSIC2_133 
+
+:MUSIC2_157
+02E4: load_cutscene_data 'STRAP2A' 
+
+:MUSIC2_168
+if 
+86B9:   not cutscene_data_loaded 
+jf @MUSIC2_192 
+wait 0 
+jump @MUSIC2_168 
+
+:MUSIC2_192
+02E7: start_cutscene 
+fade 1 1000 
+
+:MUSIC2_201
+if 
+82E9:   not cutscene_reached_end 
+jf @MUSIC2_225 
+wait 0 
+jump @MUSIC2_201 
+
+:MUSIC2_225
+02EA: end_cutscene 
+fade 0 0 
+
+:MUSIC2_233
+if 
+fading 
+jf @MUSIC2_257 
+wait 0 
+jump @MUSIC2_233 
+
+:MUSIC2_257
+select_interior 0 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Model.Load(#HUNTLEY)
+Model.Load(#STAFFORD)
+Model.Load(#KMB_RHYMESBOOK)
+Model.Load(#CJ_JUICE_CAN)
+Model.Load(#SILENCED)
+Model.Load(#MTBIKE)
+
+:MUSIC2_304
+if or
+   not Model.Available(#HUNTLEY)
+   not Model.Available(#STAFFORD)
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @MUSIC2_344 
+wait 0 
+jump @MUSIC2_304 
+
+:MUSIC2_344
+if or
+   not Model.Available(#KMB_RHYMESBOOK)
+   not Model.Available(#CJ_JUICE_CAN)
+   not Model.Available(#SILENCED)
+   not Model.Available(#MTBIKE)
+jf @MUSIC2_386 
+wait 0 
+jump @MUSIC2_344 
+
+:MUSIC2_386
+018A: 61@ = create_checkpoint_at 1239.032 -741.106 94.76 
+Actor.PutAt($PLAYER_ACTOR, 790.0, -1626.0, 12.5)
+Camera.SetAtPos(790.0, -1626.0, 12.5)
+Camera.SetBehindPlayer
+Actor.Angle($PLAYER_ACTOR) = 356.0
+060A: create_decision_maker_type 4 store_to 45@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 46@ // decision\allowed\m_.ped files 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 0 of_actors_pedtype 24 to_actors_pedtype 24 
+07FB: set_interior 'MDDOGS' access 1  // Madd Dogg's Crib
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+fade 1 1500 
+70@ = 0 
+71@ = 0 
+72@ = 0 
+73@ = 0 
+74@ = 0 
+75@ = 0 
+76@ = 0 
+77@ = 0 
+78@ = 0 
+79@ = 0 
+80@ = 0 
+81@ = 0 
+82@ = 0 
+83@ = 0 
+84@ = 0 
+85@ = 0 
+86@ = 0 
+87@ = 0 
+88@ = 0 
+89@ = 0 
+90@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+95@ = 0 
+96@ = 0 
+97@ = 0 
+00BC: show_text_highpriority GXT 'STP2_1' time 10000 flag 1  // ~s~Go to ~y~Madd Dogg's mansion~s~.
+if 
+  $6902 > 0 
+jf @MUSIC2_768 
+0950: set_trip_skip 1242.659 -748.503 94.33 angle 191.586 
+
+:MUSIC2_768
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @MUSIC2_794 
+jump @MUSIC2_10902 
+
+:MUSIC2_794
+if 
+  70@ == 0 
+jf @MUSIC2_996 
+if 
+05F6:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 1222.799 -735.563 lr_corner_at 1348.407 -759.322 angle -100.0 sphere 0 
+jf @MUSIC2_996 
+if 
+  $6902 == 0 
+jf @MUSIC2_880 
+$6902 = 1 
+
+:MUSIC2_880
+0951: disable_trip_skip 
+Marker.Disable(61@)
+018A: 61@ = create_checkpoint_at 1298.66 -795.58 83.84 
+00BC: show_text_highpriority GXT 'STP2_2' time 5000 flag 1  // ~s~The ~y~main door ~s~is around the back of the mansion.
+35@ = Car.Create(#HUNTLEY, 1243.154, -805.76, 83.188)
+Car.Angle(35@) = 1.533
+36@ = Car.Create(#STAFFORD, 1255.024, -804.587, 83.934)
+Car.Angle(36@) = 182.9
+70@ = 1 
+
+:MUSIC2_996
+if 
+  70@ == 1 
+jf @MUSIC2_1847 
+09E8: 34@ = actor $PLAYER_ACTOR active_interior 
+if 
+  34@ == 5 
+jf @MUSIC2_1847 
+03C7: set_sensitivity_to_crime 0.0 
+02A3: enable_widescreen 1 
+Camera.SetPosition(1256.623, -801.0125, 1084.091, 0.0, 0.0, 0.0)
+Camera.PointAt(1255.93, -801.7316, 1084.044, 2)
+Actor.PutAt($PLAYER_ACTOR, 1299.352, -792.6416, 1083.008)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+0395: clear_area 0 at 1299.352 -792.6416 200.0 radius 200.0 
+04ED: load_animation "CRIB" 
+04ED: load_animation "VENDING" 
+Model.Load(#KNIFECUR)
+Model.Load(#WBDYG1)
+Model.Load(#MICRO_UZI)
+03CF: load_wav 23600 as 3 
+038B: load_requested_models 
+Camera.SetAtPos(1256.623, -801.0125, 1084.091)
+
+:MUSIC2_1215
+if or
+84EE:   not animation "CRIB" loaded 
+84EE:   not animation "VENDING" loaded 
+   not Model.Available(#KNIFECUR)
+   not Model.Available(#WBDYG1)
+83D0:   not wav 3 loaded 
+jf @MUSIC2_1269 
+wait 0 
+jump @MUSIC2_1215 
+
+:MUSIC2_1269
+Player.CanMove($PLAYER_CHAR) = False
+075B: zoom_radar 100 
+Marker.Disable(61@)
+37@ = Actor.Create(Mission1, #WBDYG1, 1301.98, -785.31, 1083.05)
+08AD: link_actor 37@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0648: unknown_actor 37@ task_set 2.0 // float 
+Actor.Angle(37@) = 358.83
+060B: set_actor 37@ decision_maker_to 45@ 
+62@ = Marker.CreateAboveActor(37@)
+018B: set_marker 62@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(37@, MicroUzi, 9999)
+Actor.WeaponAccuracy(37@) = 90
+087E: set_actor 37@ weapon_droppable 0 
+0860: link_actor 37@ to_interior 5 
+00BC: show_text_highpriority GXT 'STP2_3' time 7000 flag 1  // ~s~The ~g~rhyme book ~s~is in Madd Dogg's recording studio.
+wait 2000 
+0707: start_scene_skip_to @MUSIC2_1716 
+wait 1000 
+38@ = Actor.Create(Mission1, #WBDYG1, 1249.063, -769.8262, 1083.023)
+08AD: link_actor 38@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 38@ to_interior 5 
+Actor.Angle(38@) = 270.552
+0648: unknown_actor 38@ task_set 5.0 // float 
+060B: set_actor 38@ decision_maker_to 45@ 
+wait 3500 
+if 
+   not Actor.Dead(38@)
+jf @MUSIC2_1560 
+05D3: AS_actor 38@ goto_point 1262.056 -769.9772 1083.988 mode 4 time -1 ms // versionA 
+
+:MUSIC2_1560
+wait 500 
+Camera.SetPosition(1260.744, -769.5749, 1085.258, 0.0, 0.0, 0.0)
+Camera.PointAt(1259.781, -769.5841, 1084.988, 2)
+00BC: show_text_highpriority GXT 'STP2_39' time 7000 flag 1  // ~r~Madd Dogg's personal security ~s~are patrolling the mansion. Do not use any guns on your way to the rhyme book - you will alert them. Use stealth to steal the rhyme book.
+wait 7000 
+041D: set_camera_near_clip 0.1 
+Camera.SetPosition(1299.504, -793.3958, 1084.693, 0.0, 0.0, 0.0)
+Camera.PointAt(1299.589, -792.3994, 1084.684, 2)
+00BC: show_text_highpriority GXT 'STP2_5' time 7000 flag 1  // ~s~The first ~r~guard ~s~cannot see you. This means you can sneak up behind him with a melee weapon and perform a ~h~stealth kill~s~.
+wait 7000 
+
+:MUSIC2_1716
+0701: end_scene_skip 
+Actor.DestroyInstantly(38@)
+59@ = Pickup.Create(#KMB_RHYMESBOOK, 3, 1256.871, -801.048, 1084.063)
+03DC: 61@ = create_marker_above_pickup 59@ 
+08DC: create_interior_marker 61@ at 1298.78 -798.2 radius 1.0 
+08E7: disable_entrance_markers 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Knife, 1)
+0992: set_player $PLAYER_CHAR weapons_scrollable 0 
+Car.Destroy(35@)
+Model.Destroy(#HUNTLEY)
+Model.Destroy(#STAFFORD)
+Car.Destroy(36@)
+00BE: text_clear_all 
+32@ = 0 
+70@ = 2 
+
+:MUSIC2_1847
+if 
+  85@ == 0 
+jf @MUSIC2_6921 
+if 
+  70@ == 2 
+jf @MUSIC2_6921 
+if 
+  71@ == 0 
+jf @MUSIC2_1937 
+03E5: show_text_box 'STP2_7'  // ~s~The patrolling ~r~guards ~s~are shown on the radar by the red blips which point in the direction the security guards are facing.
+03E7: flash_hud_component 8 
+32@ = 0 
+33@ = 0 
+71@ = 1 
+
+:MUSIC2_1937
+if 
+  79@ == 0 
+jf @MUSIC2_1985 
+if 
+  33@ > 5000 
+jf @MUSIC2_1985 
+03E7: flash_hud_component -1 
+79@ = 1 
+
+:MUSIC2_1985
+if 
+   not Actor.Dead(37@)
+jf @MUSIC2_2316 
+if 
+  71@ == 1 
+jf @MUSIC2_2067 
+if 
+  32@ > 5000 
+jf @MUSIC2_2067 
+03E5: show_text_box 'STP2_9'  // If you crouch while you move you will make less noise. Crouch and then target the ~r~guard.
+03E7: flash_hud_component -1 
+32@ = 0 
+71@ = 2 
+
+:MUSIC2_2067
+if 
+  71@ == 2 
+jf @MUSIC2_2154 
+if 
+   not Actor.Dead(37@)
+jf @MUSIC2_2154 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 37@ radius 5.0 5.0 0 
+  32@ > 9500 
+jf @MUSIC2_2154 
+32@ = 0 
+71@ = 3 
+
+:MUSIC2_2154
+if 
+  71@ == 3 
+jf @MUSIC2_2243 
+if or
+  32@ > 10000 
+   Actor.Animation($PLAYER_ACTOR) == "KILL_PARTIAL"
+0457:   player $PLAYER_CHAR aiming_at_actor 37@ 
+jf @MUSIC2_2243 
+03E5: show_text_box 'STP2_10'  // Perform the stealth kill by moving slowly towards the guard while holding ~k~~PED_LOCK_TARGET~ and then pressing ~k~~PED_FIREWEAPON~ when your arm is raised.
+32@ = 0 
+71@ = 4 
+
+:MUSIC2_2243
+if 
+  71@ == 4 
+jf @MUSIC2_2316 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "KILL_PARTIAL"
+jf @MUSIC2_2316 
+03E5: show_text_box 'STP2_11'  // Press ~k~~PED_FIREWEAPON~ to perform the stealth kill.
+32@ = 0 
+71@ = 5 
+
+:MUSIC2_2316
+if 
+  72@ == 0 
+jf @MUSIC2_3051 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1290.907 -781.423 1083.59 radius 4.3 4.3 6.0 
+jf @MUSIC2_3051 
+if 
+0597:   actor $PLAYER_ACTOR crouching 
+jf @MUSIC2_2405 
+96@ = 1 
+
+:MUSIC2_2405
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+041D: set_camera_near_clip 0.1 
+0395: clear_area 0 at 1290.907 -781.423 100.0 radius 100.0 
+38@ = Actor.Create(Mission1, #WBDYG1, 1290.667, -778.9339, 1083.012)
+08AD: link_actor 38@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 38@ to_interior 5 
+Actor.Angle(38@) = 350.151
+0648: unknown_actor 38@ task_set 5.0 // float 
+060B: set_actor 38@ decision_maker_to 45@ 
+63@ = Marker.CreateAboveActor(38@)
+018B: set_marker 63@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(38@, MicroUzi, 9999)
+Actor.WeaponAccuracy(38@) = 90
+087E: set_actor 38@ weapon_droppable 0 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 1289.988 -766.581 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1270.314 -766.564 1084.063 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 1270.074 -782.155 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1290.246 -782.463 1084.056 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 38@ to_animation_path_with_walk_mode 4 route_mode 3 
+Actor.PutAt($PLAYER_ACTOR, 1297.599, -781.234, 1083.048)
+Actor.Angle($PLAYER_ACTOR) = 89.58
+Camera.SetPosition(1291.055, -784.506, 1084.514, 0.0, 0.0, 0.0)
+Camera.PointAt(1290.55, -783.6482, 1084.417, 2)
+if 
+   not Actor.Dead(37@)
+jf @MUSIC2_2925 
+Actor.DestroyInstantly(37@)
+37@ = Actor.Create(Mission1, #WBDYG1, 1304.189, -785.871, 1084.048)
+08AD: link_actor 37@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 37@ to_interior 5 
+0648: unknown_actor 37@ task_set 2.0 // float 
+Actor.Angle(37@) = 311.2134
+060B: set_actor 37@ decision_maker_to 45@ 
+62@ = Marker.CreateAboveActor(37@)
+018B: set_marker 62@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(37@, MicroUzi, 9999)
+Actor.WeaponAccuracy(37@) = 90
+087E: set_actor 37@ weapon_droppable 0 
+
+:MUSIC2_2925
+00BC: show_text_highpriority GXT 'STP2_13' time 6000 flag 1  // ~s~A ~r~guard ~s~is patrolling the swimming pool area. Observing his route will allow you to work out how to get past him undetected.
+wait 2000 
+0707: start_scene_skip_to @MUSIC2_2958 
+wait 4000 
+
+:MUSIC2_2958
+0701: end_scene_skip 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  96@ == 1 
+jf @MUSIC2_2996 
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+
+:MUSIC2_2996
+96@ = 0 
+02A3: enable_widescreen 0 
+00BC: show_text_highpriority GXT 'STP2_14' time 5000 flag 1  // ~s~There are lots of shadows in this area to hide in. Hiding in shadows makes it difficult for a ~r~guard ~s~to spot you.
+32@ = 0 
+33@ = 0 
+72@ = 1 
+71@ = 6 
+
+:MUSIC2_3051
+if 
+  71@ == 6 
+jf @MUSIC2_3095 
+if 
+  32@ > 5000 
+jf @MUSIC2_3095 
+71@ = 7 
+
+:MUSIC2_3095
+if 
+  73@ == 0 
+jf @MUSIC2_4103 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1260.104 -769.51 1083.06 radius 5.0 5.0 6.0 
+jf @MUSIC2_4103 
+if 
+0597:   actor $PLAYER_ACTOR crouching 
+jf @MUSIC2_3184 
+96@ = 1 
+
+:MUSIC2_3184
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+00BE: text_clear_all 
+0395: clear_area 0 at 1260.104 -769.51 100.0 radius 100.0 
+39@ = Actor.Create(Mission1, #WBDYG1, 1249.598, -780.06, 1083.063)
+08AD: link_actor 39@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 39@ to_interior 5 
+Actor.WeaponAccuracy(39@) = 90
+Actor.Angle(39@) = 355.188
+0648: unknown_actor 39@ task_set 5.0 // float 
+060B: set_actor 39@ decision_maker_to 45@ 
+05D3: AS_actor 39@ goto_point 1250.092 -769.277 1083.064 mode 4 time -1 ms // versionA 
+Camera.SetPosition(1249.856, -766.8402, 1084.777, 0.0, 0.0, 0.0)
+Camera.PointAt(1249.814, -767.8293, 1084.636, 2)
+Actor.PutAt($PLAYER_ACTOR, 1266.494, -769.705, 1083.06)
+Actor.Angle($PLAYER_ACTOR) = 92.259
+if 
+   not Actor.Dead(38@)
+jf @MUSIC2_3684 
+Actor.DestroyInstantly(38@)
+38@ = Actor.Create(Mission1, #WBDYG1, 1290.667, -778.9339, 1083.012)
+08AD: link_actor 38@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(38@) = 350.151
+0648: unknown_actor 38@ task_set 2.0 // float 
+060B: set_actor 38@ decision_maker_to 45@ 
+63@ = Marker.CreateAboveActor(38@)
+018B: set_marker 63@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(38@, MicroUzi, 9999)
+Actor.WeaponAccuracy(38@) = 90
+087E: set_actor 38@ weapon_droppable 0 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 1289.988 -766.581 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1270.314 -766.564 1084.063 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 1270.074 -782.155 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1290.246 -782.463 1084.056 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 38@ to_animation_path_with_walk_mode 4 route_mode 3 
+
+:MUSIC2_3684
+00BC: show_text_highpriority GXT 'STP2_15' time 3000 flag 1  // ~s~A ~r~guard ~s~is coming.
+wait 2000 
+0707: start_scene_skip_to @MUSIC2_3859 
+wait 1000 
+00BC: show_text_highpriority GXT 'STP2_16' time 4000 flag 1  // ~s~Find a suitable place to hide before he spots you. Look for an area with shadows.
+Camera.SetPosition(1267.405, -769.6973, 1084.667, 0.0, 0.0, 0.0)
+Camera.PointAt(1266.412, -769.6685, 1084.551, 2)
+if 
+   not Actor.Dead(39@)
+jf @MUSIC2_3830 
+Actor.PutAt(39@, 1249.598, -780.06, 1083.063)
+Actor.Angle(39@) = 355.188
+
+:MUSIC2_3830
+wait 2000 
+Camera.PointAt(1266.912, -770.5618, 1084.569, 1)
+wait 2000 
+
+:MUSIC2_3859
+0701: end_scene_skip 
+Actor.DestroyInstantly(39@)
+39@ = Actor.Create(Mission1, #WBDYG1, 1249.634, -781.405, 1083.5)
+08AD: link_actor 39@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 39@ to_interior 5 
+Actor.Angle(39@) = 357.273
+64@ = Marker.CreateAboveActor(39@)
+018B: set_marker 64@ radar_mode 2 
+0648: unknown_actor 39@ task_set 5.0 // float 
+060B: set_actor 39@ decision_maker_to 45@ 
+0615: define_AS_pack_begin 58@ 
+05F5: AS_actor -1 goto_point_using_paths 1267.96 -769.792 1084.06 mode 4 time -2 
+0643: set_AS_pack 58@ loop 1 
+0616: define_AS_pack_end 58@ 
+0618: assign_actor 39@ to_AS_pack 58@ 
+061B: remove_references_to_AS_pack 58@ 
+Actor.GiveWeaponAndAmmo(39@, MicroUzi, 50)
+Actor.WeaponAccuracy(39@) = 90
+087E: set_actor 39@ weapon_droppable 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  96@ == 1 
+jf @MUSIC2_4076 
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+
+:MUSIC2_4076
+96@ = 0 
+00BE: text_clear_all 
+03E5: show_text_box 'STP2_41'  // If the white blip on the radar that represents your position turns blue it indicates that you are in the shadows and are hidden from patrolling guards.
+73@ = 1 
+
+:MUSIC2_4103
+if 
+  74@ == 0 
+jf @MUSIC2_6379 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1249.466 -789.487 1083.063 radius 7.5 7.5 6.0 
+jf @MUSIC2_6379 
+if 
+03D0:   wav 3 loaded 
+jf @MUSIC2_4207 
+03D7: set_wav 3 location 1276.31 -793.92 1084.12 
+03D1: play_wav 3 
+
+:MUSIC2_4207
+if 
+0597:   actor $PLAYER_ACTOR crouching 
+jf @MUSIC2_4230 
+96@ = 1 
+
+:MUSIC2_4230
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 0 at 1249.466 -789.487 100.0 radius 100.0 
+Actor.PutAt($PLAYER_ACTOR, 1249.825, -780.682, 1083.06)
+Actor.Angle($PLAYER_ACTOR) = 180.659
+00BE: text_clear_all 
+40@ = Actor.Create(Mission1, #WBDYG1, 1258.271, -793.395, 1083.289)
+08AD: link_actor 40@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+0860: link_actor 40@ to_interior 5 
+Actor.Angle(40@) = 354.328
+65@ = Marker.CreateAboveActor(40@)
+018B: set_marker 65@ radar_mode 2 
+0648: unknown_actor 40@ task_set 5.0 // float 
+060B: set_actor 40@ decision_maker_to 45@ 
+087E: set_actor 40@ weapon_droppable 0 
+47@ = Object.Init(#CJ_JUICE_CAN, 1258.25, -792.64, 1084.16)
+07E4: get_model #CJ_JUICE_CAN dimensions_cornerA_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 dimensions_cornerB_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_FLOAT_2 /= 2.0 
+$TEMPVAR_FLOAT_2 += 0.027 
+41@ = Actor.Create(Mission1, #WBDYG1, 1276.795, -792.368, 1083.055)
+08AD: link_actor 41@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.WeaponAccuracy(41@) = 100
+0860: link_actor 41@ to_interior 5 
+Actor.Angle(41@) = 180.0
+060B: set_actor 41@ decision_maker_to 45@ 
+if 
+   not Actor.Dead(40@)
+jf @MUSIC2_4683 
+0615: define_AS_pack_begin 49@ 
+070A: AS_actor -1 attach_to_object 47@ offset 0.062 $TEMPVAR_FLOAT_2 0.0 on_bone 5 16 perform_animation "VEND_USE_PT2" IFP_file "VENDING" time 0 
+070A: AS_actor -1 attach_to_object 47@ offset 0.062 $TEMPVAR_FLOAT_2 0.0 on_bone 5 16 perform_animation "VEND_DRINK2_P" IFP_file "VENDING" time 0 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 40@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:MUSIC2_4683
+Camera.SetPosition(1251.82, -788.354, 1084.502, 0.0, 0.0, 0.0)
+Camera.PointAt(1252.463, -789.1154, 1084.42, 2)
+00BC: show_text_highpriority GXT 'STP2_19' time 5000 flag 1  // ~s~If you walk straight past the ~r~guard ~s~here he will see you. Try crouching and walking past the bar to remain out of his line of sight.
+if 
+   not Actor.Dead(38@)
+jf @MUSIC2_5017 
+Actor.DestroyInstantly(38@)
+38@ = Actor.Create(Mission1, #WBDYG1, 1290.667, -778.9339, 1083.012)
+08AD: link_actor 38@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(38@) = 350.151
+0648: unknown_actor 38@ task_set 2.0 // float 
+060B: set_actor 38@ decision_maker_to 45@ 
+63@ = Marker.CreateAboveActor(38@)
+018B: set_marker 63@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(38@, MicroUzi, 9999)
+Actor.WeaponAccuracy(38@) = 100
+087E: set_actor 38@ weapon_droppable 0 
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 1289.988 -766.581 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1270.314 -766.564 1084.063 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 1270.074 -782.155 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1290.246 -782.463 1084.056 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 38@ to_animation_path_with_walk_mode 4 route_mode 3 
+
+:MUSIC2_5017
+if 
+   not Actor.Dead(39@)
+jf @MUSIC2_5148 
+Actor.DestroyInstantly(39@)
+39@ = Actor.Create(Mission1, #WBDYG1, 1267.96, -769.792, 1084.06)
+08AD: link_actor 39@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(39@) = 0.141
+64@ = Marker.CreateAboveActor(39@)
+018B: set_marker 64@ radar_mode 2 
+0648: unknown_actor 39@ task_set 5.0 // float 
+060B: set_actor 39@ decision_maker_to 45@ 
+Actor.GiveWeaponAndAmmo(39@, MicroUzi, 50)
+Actor.WeaponAccuracy(39@) = 100
+087E: set_actor 39@ weapon_droppable 0 
+
+:MUSIC2_5148
+wait 1750 
+0707: start_scene_skip_to @MUSIC2_5850 
+wait 2000 
+if 
+   not Actor.Dead(41@)
+jf @MUSIC2_5233 
+0605: actor 41@ perform_animation "PED_CONSOLE_LOOP" IFP "CRIB" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0967: actor 41@ move_mouth 10000 ms 
+
+:MUSIC2_5233
+wait 500 
+Camera.SetPosition(1274.983, -790.5506, 1084.063, 0.0, 0.0, 0.0)
+Camera.PointAt(1275.575, -791.356, 1084.035, 2)
+040D: unload_wav 1 
+040D: unload_wav 2 
+0209: 100@ = random_int_in_ranges 0 2 
+if 
+  100@ == 0 
+jf @MUSIC2_5338 
+03CF: load_wav 21800 as 1 
+jump @MUSIC2_5345 
+
+:MUSIC2_5338
+03CF: load_wav 21803 as 1 
+
+:MUSIC2_5345
+0209: 101@ = random_int_in_ranges 0 3 
+if 
+  101@ == 0 
+jf @MUSIC2_5386 
+03CF: load_wav 21801 as 2 
+jump @MUSIC2_5425 
+
+:MUSIC2_5386
+if 
+  101@ == 1 
+jf @MUSIC2_5418 
+03CF: load_wav 21802 as 2 
+jump @MUSIC2_5425 
+
+:MUSIC2_5418
+03CF: load_wav 21804 as 2 
+
+:MUSIC2_5425
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @MUSIC2_5455 
+wait 0 
+jump @MUSIC2_5425 
+
+:MUSIC2_5455
+if 
+  100@ == 0 
+jf @MUSIC2_5496 
+00BC: show_text_highpriority GXT 'LOC2_AA' time 4000 flag 1  // ~z~Oh man, this sucks!
+jump @MUSIC2_5512 
+
+:MUSIC2_5496
+00BC: show_text_highpriority GXT 'LOC2_BA' time 4000 flag 1  // ~z~This sucks. I mean, how could Refractions mess up so bad?
+
+:MUSIC2_5512
+03D1: play_wav 1 
+
+:MUSIC2_5516
+if 
+83D2:   not wav 1 ended 
+jf @MUSIC2_5542 
+wait 0 
+jump @MUSIC2_5516 
+
+:MUSIC2_5542
+040D: unload_wav 1 
+Camera.SetPosition(1276.301, -794.5306, 1084.231, 0.0, 0.0, 0.0)
+Camera.PointAt(1276.292, -793.5345, 1084.143, 2)
+if 
+  101@ == 0 
+jf @MUSIC2_5638 
+00BC: show_text_highpriority GXT 'LOC2_AB' time 4000 flag 1  // ~z~Yeah, look how this Tanner guy runs!
+jump @MUSIC2_5695 
+
+:MUSIC2_5638
+if 
+  101@ == 1 
+jf @MUSIC2_5679 
+00BC: show_text_highpriority GXT 'LOC2_AC' time 4000 flag 1  // ~z~He moves like his bowels have let go...
+jump @MUSIC2_5695 
+
+:MUSIC2_5679
+00BC: show_text_highpriority GXT 'LOC2_BB' time 4000 flag 1  // ~z~Tanner, you suck ass!
+
+:MUSIC2_5695
+03D1: play_wav 2 
+if 
+   not Actor.Dead(41@)
+jf @MUSIC2_5824 
+0615: define_AS_pack_begin 50@ 
+0605: actor -1 perform_animation "PED_CONSOLE_LOOSE" IFP "CRIB" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PED_CONSOLE_WIN" IFP "CRIB" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 50@ 
+0618: assign_actor 41@ to_AS_pack 50@ 
+061B: remove_references_to_AS_pack 50@ 
+
+:MUSIC2_5824
+if 
+83D2:   not wav 2 ended 
+jf @MUSIC2_5850 
+wait 0 
+jump @MUSIC2_5824 
+
+:MUSIC2_5850
+0701: end_scene_skip 
+040D: unload_wav 2 
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+40@ = Actor.Create(Mission1, #WBDYG1, 1258.271, -793.395, 1083.289)
+08AD: link_actor 40@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(40@) = 354.328
+0605: actor 40@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+65@ = Marker.CreateAboveActor(40@)
+018B: set_marker 65@ radar_mode 2 
+060B: set_actor 40@ decision_maker_to 45@ 
+087E: set_actor 40@ weapon_droppable 0 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 5000)
+Actor.WeaponAccuracy(40@) = 100
+074E: unknown_set_actor_threat_scanner_flags 40@ radius 5.0 peds_to_scan 1 
+41@ = Actor.Create(Mission1, #WBDYG1, 1276.795, -792.368, 1083.055)
+08AD: link_actor 41@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(41@) = 180.0
+060B: set_actor 41@ decision_maker_to 45@ 
+087E: set_actor 41@ weapon_droppable 0 
+Actor.GiveWeaponAndAmmo(41@, MicroUzi, 5000)
+66@ = Marker.CreateAboveActor(41@)
+018B: set_marker 66@ radar_mode 2 
+Actor.WeaponAccuracy(41@) = 100
+074E: unknown_set_actor_threat_scanner_flags 41@ radius 5.0 peds_to_scan 1 
+43@ = Actor.Create(Mission1, #WBDYG1, 1262.533, -805.139, 1083.056)
+08AD: link_actor 43@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(43@) = 359.265
+060B: set_actor 43@ decision_maker_to 45@ 
+68@ = Marker.CreateAboveActor(43@)
+018B: set_marker 68@ radar_mode 2 
+087E: set_actor 43@ weapon_droppable 0 
+Actor.GiveWeaponAndAmmo(43@, MicroUzi, 5555)
+Actor.WeaponAccuracy(43@) = 100
+if 
+   not Actor.Dead(41@)
+jf @MUSIC2_6283 
+0605: actor 41@ perform_animation "PED_CONSOLE_LOOP" IFP "CRIB" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:MUSIC2_6283
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  96@ == 1 
+jf @MUSIC2_6333 
+04EB: AS_actor $PLAYER_ACTOR crouch 1 
+
+:MUSIC2_6333
+96@ = 0 
+32@ = 0 
+33@ = 0 
+71@ = 9 
+03E5: show_text_box 'STP2_36'  // To stay hidden you have to stay crouched and walk past the bar.
+74@ = 1 
+
+:MUSIC2_6379
+if 
+  74@ == 1 
+jf @MUSIC2_6571 
+06AC: $TEMPVAR_FLOAT_1 = actor $PLAYER_ACTOR movement_speed 
+if 
+   not Actor.Dead(40@)
+jf @MUSIC2_6571 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 1246.77 -785.08 1083.26 cornerB 1255.87 -797.69 1090.0 
+  $TEMPVAR_FLOAT_1 > 0.0 
+jf @MUSIC2_6571 
+Actor.Angle(40@) = 168.503
+0615: define_AS_pack_begin 51@ 
+05D3: AS_actor -1 goto_point 1256.29 -795.6 1084.289 mode 4 time -1 ms // versionA 
+0605: actor -1 perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 51@ 
+0618: assign_actor 40@ to_AS_pack 51@ 
+061B: remove_references_to_AS_pack 51@ 
+74@ = 2 
+
+:MUSIC2_6571
+if 
+   Pickup.Picked_up(59@)
+jf @MUSIC2_6699 
+Marker.Disable(61@)
+018A: 61@ = create_checkpoint_at 1298.74 -797.46 1083.4 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MUSIC2_6635 
+0992: set_player $PLAYER_CHAR weapons_scrollable 1 
+
+:MUSIC2_6635
+08DC: create_interior_marker 61@ at 1298.78 -798.2 radius 1.0 
+00BC: show_text_highpriority GXT 'STP2_40' time 7000 flag 1  // ~y~Exit ~s~the mansion and get the rhyme book back to OG loc. It's safe to use your weapons now, although it may be less risky if you use stealth to get past any ~r~guards ~s~on patrol.
+32@ = 0 
+33@ = 0 
+70@ = 3 
+85@ = 1 
+
+:MUSIC2_6699
+if 
+   Actor.Dead(37@)
+jf @MUSIC2_6736 
+if 
+075C:   marker 62@ enabled 
+jf @MUSIC2_6736 
+Marker.Disable(62@)
+
+:MUSIC2_6736
+if 
+   Actor.Dead(38@)
+jf @MUSIC2_6773 
+if 
+075C:   marker 63@ enabled 
+jf @MUSIC2_6773 
+Marker.Disable(63@)
+
+:MUSIC2_6773
+if 
+   Actor.Dead(39@)
+jf @MUSIC2_6810 
+if 
+075C:   marker 64@ enabled 
+jf @MUSIC2_6810 
+Marker.Disable(64@)
+
+:MUSIC2_6810
+if 
+   Actor.Dead(40@)
+jf @MUSIC2_6847 
+if 
+075C:   marker 65@ enabled 
+jf @MUSIC2_6847 
+Marker.Disable(65@)
+
+:MUSIC2_6847
+if 
+   Actor.Dead(41@)
+jf @MUSIC2_6884 
+if 
+075C:   marker 66@ enabled 
+jf @MUSIC2_6884 
+Marker.Disable(66@)
+
+:MUSIC2_6884
+if 
+   Actor.Dead(43@)
+jf @MUSIC2_6921 
+if 
+075C:   marker 68@ enabled 
+jf @MUSIC2_6921 
+Marker.Disable(68@)
+
+:MUSIC2_6921
+if 
+  70@ == 3 
+jf @MUSIC2_9010 
+if 
+  85@ == 1 
+jf @MUSIC2_8322 
+08E7: disable_entrance_markers 0 
+032B: 60@ = create_weapon_pickup #SILENCED type 3 ammo 30 at 1237.418 -808.5872 1084.09 
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+37@ = Actor.Create(Mission1, #WBDYG1, 1243.53, -812.19, 1083.04)
+08AD: link_actor 37@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(37@) = 270.948
+060B: set_actor 37@ decision_maker_to 45@ 
+62@ = Marker.CreateAboveActor(37@)
+018B: set_marker 62@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(37@, Silenced, 99999)
+0648: unknown_actor 37@ task_set 2.0 // float 
+05F5: AS_actor 37@ goto_point_using_paths 1270.694 -802.518 1084.05 mode 4 time -2 
+074E: unknown_set_actor_threat_scanner_flags 37@ radius 10.0 peds_to_scan 1 
+Actor.WeaponAccuracy(37@) = 100
+38@ = Actor.Create(Mission1, #WBDYG1, 1280.02, -789.01, 1083.05)
+08AD: link_actor 38@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(38@) = 91.837
+060B: set_actor 38@ decision_maker_to 45@ 
+63@ = Marker.CreateAboveActor(38@)
+018B: set_marker 63@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(38@, Silenced, 99999)
+074E: unknown_set_actor_threat_scanner_flags 38@ radius 5.0 peds_to_scan 1 
+Actor.WeaponAccuracy(38@) = 100
+42@ = Actor.Create(Mission1, #WBDYG1, 1249.768, -780.616, 1084.063)
+08AD: link_actor 42@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(42@) = 3.43
+67@ = Marker.CreateAboveActor(42@)
+018B: set_marker 67@ radar_mode 2 
+060B: set_actor 42@ decision_maker_to 45@ 
+Actor.GiveWeaponAndAmmo(42@, Silenced, 99999)
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 1249.799 -769.679 1084.063 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 1267.62 -769.651 1084.06 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1249.799 -769.679 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1249.768 -780.616 1084.063 animation "NONE" IFP_file "NONE" 
+0817: assign_actor 42@ to_animation_path_with_walk_mode 4 route_mode 3 
+074E: unknown_set_actor_threat_scanner_flags 42@ radius 15.0 peds_to_scan 2 
+if 
+   not Actor.Dead(41@)
+jf @MUSIC2_7658 
+Actor.DestroyInstantly(41@)
+41@ = Actor.Create(Mission1, #WBDYG1, 1276.795, -792.368, 1083.055)
+08AD: link_actor 41@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(41@) = 180.0
+060B: set_actor 41@ decision_maker_to 46@ 
+Actor.GiveWeaponAndAmmo(41@, Silenced, 99999)
+66@ = Marker.CreateAboveActor(41@)
+018B: set_marker 66@ radar_mode 2 
+0605: actor 41@ perform_animation "PED_CONSOLE_LOOP" IFP "CRIB" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+074E: unknown_set_actor_threat_scanner_flags 41@ radius 20.0 peds_to_scan 1 
+jump @MUSIC2_7774 
+
+:MUSIC2_7658
+Actor.DestroyWithFade(41@)
+41@ = Actor.Create(Mission1, #WBDYG1, 1270.616, -792.298, 1084.047)
+08AD: link_actor 41@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(41@) = 186.126
+060B: set_actor 41@ decision_maker_to 46@ 
+Actor.GiveWeaponAndAmmo(41@, Silenced, 99999)
+66@ = Marker.CreateAboveActor(41@)
+018B: set_marker 66@ radar_mode 2 
+06B0: AS_actor 41@ sit_down 400000 ms 
+074E: unknown_set_actor_threat_scanner_flags 41@ radius 20.0 peds_to_scan 1 
+
+:MUSIC2_7774
+if 
+   not Actor.Dead(40@)
+jf @MUSIC2_7933 
+Actor.DestroyInstantly(40@)
+40@ = Actor.Create(Mission1, #WBDYG1, 1256.492, -795.662, 1084.282)
+08AD: link_actor 40@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(40@) = 186.842
+0605: actor 40@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+65@ = Marker.CreateAboveActor(40@)
+018B: set_marker 65@ radar_mode 2 
+060B: set_actor 40@ decision_maker_to 46@ 
+Actor.GiveWeaponAndAmmo(40@, Silenced, 99999)
+074E: unknown_set_actor_threat_scanner_flags 40@ radius 10.0 peds_to_scan 1 
+jump @MUSIC2_8069 
+
+:MUSIC2_7933
+Actor.DestroyWithFade(40@)
+40@ = Actor.Create(Mission1, #WBDYG1, 1252.99, -795.461, 1083.282)
+08AD: link_actor 40@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(40@) = 186.842
+0605: actor 40@ perform_animation "ATM" IFP "PED" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+65@ = Marker.CreateAboveActor(40@)
+018B: set_marker 65@ radar_mode 2 
+060B: set_actor 40@ decision_maker_to 46@ 
+Actor.GiveWeaponAndAmmo(40@, Silenced, 99999)
+074E: unknown_set_actor_threat_scanner_flags 40@ radius 10.0 peds_to_scan 1 
+
+:MUSIC2_8069
+44@ = Actor.Create(Mission1, #WBDYG1, 1290.667, -778.9339, 1083.012)
+08AD: link_actor 44@ to_enex_marker_at 1298.78 -798.2 radius 1.0 
+Actor.Angle(44@) = 350.151
+0648: unknown_actor 44@ task_set 5.0 // float 
+060B: set_actor 44@ decision_maker_to 46@ 
+69@ = Marker.CreateAboveActor(44@)
+018B: set_marker 69@ radar_mode 2 
+Actor.GiveWeaponAndAmmo(44@, Silenced, 5000)
+Actor.WeaponAccuracy(44@) = 100
+0754: define_new_animation_path 
+0755: add_animation_path_3D_coord 1289.988 -766.581 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1270.314 -766.564 1084.063 animation "ROADCROSS" IFP_file "PED" 
+0755: add_animation_path_3D_coord 1270.074 -782.155 1084.063 animation "NONE" IFP_file "NONE" 
+0755: add_animation_path_3D_coord 1290.246 -782.463 1084.056 animation "ROADCROSS" IFP_file "PED" 
+0817: assign_actor 44@ to_animation_path_with_walk_mode 4 route_mode 3 
+78@ = 0 
+85@ = 2 
+
+:MUSIC2_8322
+if 
+  94@ == 0 
+jf @MUSIC2_8443 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1282.61 -787.389 1084.063 radius 6.0 6.0 6.0 
+jf @MUSIC2_8443 
+if 
+   not Actor.Dead(40@)
+jf @MUSIC2_8412 
+060B: set_actor 40@ decision_maker_to 45@ 
+
+:MUSIC2_8412
+if 
+   not Actor.Dead(41@)
+jf @MUSIC2_8436 
+060B: set_actor 41@ decision_maker_to 45@ 
+
+:MUSIC2_8436
+94@ = 1 
+
+:MUSIC2_8443
+if 
+  78@ == 0 
+jf @MUSIC2_8540 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 1249.61 -772.86 1083.46 radius 7.0 7.0 5.0 on_foot 
+jf @MUSIC2_8540 
+if 
+   not Actor.Dead(44@)
+jf @MUSIC2_8540 
+060B: set_actor 44@ decision_maker_to 45@ 
+78@ = 1 
+
+:MUSIC2_8540
+if 
+  85@ > 0 
+jf @MUSIC2_8613 
+if 
+  71@ == 9 
+jf @MUSIC2_8613 
+if 
+  32@ > 8500 
+jf @MUSIC2_8613 
+03E5: show_text_box 'STP2_33'  // The ~r~guards ~w~are using silenced guns. If you manage to obtain one it will allow you to fire a gun without being heard by nearby guards.
+71@ = 10 
+
+:MUSIC2_8613
+09E8: 34@ = actor $PLAYER_ACTOR active_interior 
+if 
+  34@ == 0 
+jf @MUSIC2_8714 
+Marker.Disable(61@)
+
+:MUSIC2_8644
+if 
+   not fading 
+jf @MUSIC2_8668 
+wait 0 
+jump @MUSIC2_8644 
+
+:MUSIC2_8668
+Actor.PutAt($PLAYER_ACTOR, 1299.664, -800.546, 83.148)
+Actor.Angle($PLAYER_ACTOR) = 271.284
+Camera.SetBehindPlayer
+85@ = 2 
+70@ = 4 
+
+:MUSIC2_8714
+if 
+   Actor.Dead(37@)
+jf @MUSIC2_8751 
+if 
+075C:   marker 62@ enabled 
+jf @MUSIC2_8751 
+Marker.Disable(62@)
+
+:MUSIC2_8751
+if 
+   Actor.Dead(38@)
+jf @MUSIC2_8788 
+if 
+075C:   marker 63@ enabled 
+jf @MUSIC2_8788 
+Marker.Disable(63@)
+
+:MUSIC2_8788
+if 
+   Actor.Dead(39@)
+jf @MUSIC2_8825 
+if 
+075C:   marker 64@ enabled 
+jf @MUSIC2_8825 
+Marker.Disable(64@)
+
+:MUSIC2_8825
+if 
+   Actor.Dead(40@)
+jf @MUSIC2_8862 
+if 
+075C:   marker 65@ enabled 
+jf @MUSIC2_8862 
+Marker.Disable(65@)
+
+:MUSIC2_8862
+if 
+   Actor.Dead(41@)
+jf @MUSIC2_8899 
+if 
+075C:   marker 66@ enabled 
+jf @MUSIC2_8899 
+Marker.Disable(66@)
+
+:MUSIC2_8899
+if 
+   Actor.Dead(42@)
+jf @MUSIC2_8936 
+if 
+075C:   marker 67@ enabled 
+jf @MUSIC2_8936 
+Marker.Disable(67@)
+
+:MUSIC2_8936
+if 
+   Actor.Dead(43@)
+jf @MUSIC2_8973 
+if 
+075C:   marker 68@ enabled 
+jf @MUSIC2_8973 
+Marker.Disable(68@)
+
+:MUSIC2_8973
+if 
+   Actor.Dead(44@)
+jf @MUSIC2_9010 
+if 
+075C:   marker 69@ enabled 
+jf @MUSIC2_9010 
+Marker.Disable(69@)
+
+:MUSIC2_9010
+if 
+  85@ == 2 
+jf @MUSIC2_9295 
+if 
+  70@ == 4 
+jf @MUSIC2_9295 
+018A: 61@ = create_checkpoint_at 790.0 -1631.0 12.43 
+040D: unload_wav 3 
+53@ = Car.Create(#MTBIKE, 1306.718, -797.24, 83.66)
+Car.Angle(53@) = 206.253
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+Marker.Disable(65@)
+Marker.Disable(66@)
+Marker.Disable(67@)
+Marker.Disable(68@)
+Model.Destroy(#WBDYG1)
+Model.Destroy(#HUNTLEY)
+Model.Destroy(#STAFFORD)
+Model.Destroy(#KMB_RHYMESBOOK)
+Model.Destroy(#CJ_JUICE_CAN)
+Model.Destroy(#SILENCED)
+04EF: release_animation "CRIB" 
+04EF: release_animation "VENDING" 
+Model.Destroy(#KNIFECUR)
+075B: zoom_radar 0 
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+Marker.Disable(65@)
+Marker.Disable(66@)
+Marker.Disable(67@)
+Marker.Disable(68@)
+00BC: show_text_highpriority GXT 'STP2_30' time 7000 flag 1  // ~s~You need to take the rhyme book back to OG Loc. He is at ~y~Burger Shot~s~.
+70@ = 5 
+32@ = 0 
+
+:MUSIC2_9295
+if 
+  97@ == 0 
+jf @MUSIC2_9355 
+if 
+   not Car.Wrecked(53@)
+jf @MUSIC2_9355 
+if 
+0448:   actor $PLAYER_ACTOR in_car 53@ 
+jf @MUSIC2_9355 
+97@ = 1 
+
+:MUSIC2_9355
+if 
+  70@ == 5 
+jf @MUSIC2_9889 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 788.05 -1630.31 12.42 radius 2.0 2.0 5.0 
+jf @MUSIC2_9889 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+fade 0 1000 
+
+:MUSIC2_9439
+if 
+fading 
+jf @MUSIC2_9463 
+wait 0 
+jump @MUSIC2_9439 
+
+:MUSIC2_9463
+0395: clear_area 1 at -1095.488 -1630.609 50.0 radius 50.0 
+Car.RemoveReferences(53@)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MUSIC2_9583 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+Car.PutAt($TEMPVAR_ACTOR_CAR, 784.686, -1613.7, 12.22)
+Car.Angle($TEMPVAR_ACTOR_CAR) = 353.08
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 785.75 -1632.84 12.43 
+Actor.Angle($PLAYER_ACTOR) = 316.0
+jump @MUSIC2_9613 
+
+:MUSIC2_9583
+Actor.PutAt($PLAYER_ACTOR, 785.75, -1632.84, 12.43)
+Actor.Angle($PLAYER_ACTOR) = 316.0
+
+:MUSIC2_9613
+04ED: load_animation "GANGS" 
+023C: load_special_actor 'OGBURG' as 1 // models 290-299 
+040D: unload_wav 1 
+03CF: load_wav 21805 as 1 
+040D: unload_wav 2 
+03CF: load_wav 21806 as 2 
+038B: load_requested_models 
+
+:MUSIC2_9659
+if or
+84EE:   not animation "GANGS" loaded 
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @MUSIC2_9698 
+wait 0 
+jump @MUSIC2_9659 
+
+:MUSIC2_9698
+52@ = Actor.Create(Special, #SPECIAL01, 792.72, -1626.6, 12.43)
+Actor.Angle(52@) = 114.71
+060B: set_actor 52@ decision_maker_to 46@ 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+0489: set_actor 52@ muted 1 
+0489: set_actor $PLAYER_ACTOR muted 1 
+fade 1 2000 
+95@ = 1 
+Camera.SetPosition(785.7997, -1635.43, 13.4579, 0.0, 0.0, 0.0)
+Camera.PointAt(786.2913, -1634.565, 13.3583, 2)
+05D3: AS_actor $PLAYER_ACTOR goto_point 788.98 -1629.61 12.59 mode 4 time -1 ms // versionA 
+05D3: AS_actor 52@ goto_point 788.98 -1629.61 12.59 mode 4 time -1 ms // versionA 
+32@ = 0 
+70@ = 6 
+
+:MUSIC2_9889
+if 
+  70@ == 6 
+jf @MUSIC2_10144 
+if 
+  32@ > 2440 
+jf @MUSIC2_10144 
+if 
+   not Actor.Dead(52@)
+jf @MUSIC2_10144 
+Camera.SetPosition(788.2733, -1628.832, 13.9503, 0.0, 0.0, 0.0)
+Camera.PointAt(788.473, -1629.811, 13.9214, 2)
+Actor.PutAt($PLAYER_ACTOR, 787.973, -1630.274, 12.42)
+Actor.Angle($PLAYER_ACTOR) = 310.378
+Actor.PutAt(52@, 788.7348, -1629.626, 12.42)
+Actor.Angle(52@) = 130.378
+0792: disembark_instantly_actor 52@ 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0605: actor 52@ perform_animation "HNDSHKBA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor $PLAYER_ACTOR perform_animation "HNDSHKBA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+70@ = 7 
+
+:MUSIC2_10144
+if 
+  70@ > 4 
+jf @MUSIC2_10809 
+if 
+   not Actor.Dead(52@)
+jf @MUSIC2_10809 
+if 
+  95@ == 1 
+jf @MUSIC2_10231 
+03D1: play_wav 1 
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+00BC: show_text_highpriority GXT 'LOC2_CA' time 5000 flag 1  // ~z~Hey Loc, I got what you wanted.
+95@ = 2 
+
+:MUSIC2_10231
+if 
+  95@ == 2 
+jf @MUSIC2_10289 
+if 
+03D2:   wav 1 ended 
+jf @MUSIC2_10289 
+00BE: text_clear_all 
+040D: unload_wav 1 
+0968: actor $PLAYER_ACTOR stop_mouth 
+03CF: load_wav 21807 as 1 
+95@ = 3 
+
+:MUSIC2_10289
+if 
+  95@ == 3 
+jf @MUSIC2_10342 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'LOC2_CB' time 5000 flag 1  // ~z~Holmes, you ice cold, dude!
+0967: actor 52@ move_mouth 10000 ms 
+95@ = 4 
+
+:MUSIC2_10342
+if 
+  95@ == 4 
+jf @MUSIC2_10400 
+if 
+03D2:   wav 2 ended 
+jf @MUSIC2_10400 
+00BE: text_clear_all 
+040D: unload_wav 2 
+0968: actor 52@ stop_mouth 
+03CF: load_wav 21808 as 2 
+95@ = 5 
+
+:MUSIC2_10400
+if 
+  95@ == 5 
+jf @MUSIC2_10468 
+if 
+03D0:   wav 1 loaded 
+jf @MUSIC2_10468 
+00BC: show_text_highpriority GXT 'LOC2_CC' time 5000 flag 1  // ~z~Hey, I'll catch you later.
+0967: actor $PLAYER_ACTOR move_mouth 10000 ms 
+03D1: play_wav 1 
+95@ = 6 
+
+:MUSIC2_10468
+if 
+  95@ == 6 
+jf @MUSIC2_10515 
+if 
+03D2:   wav 1 ended 
+jf @MUSIC2_10515 
+00BE: text_clear_all 
+0968: actor $PLAYER_ACTOR stop_mouth 
+95@ = 7 
+
+:MUSIC2_10515
+if 
+  95@ == 7 
+jf @MUSIC2_10673 
+Camera.SetPosition(773.2047, -1633.066, 17.7324, 0.0, 0.0, 0.0)
+Camera.PointAt(774.1813, -1632.908, 17.5877, 2)
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'LOC2_DC' time 5000 flag 1  // ~z~Peace, homie!
+0967: actor 52@ move_mouth 4000 ms 
+05D3: AS_actor $PLAYER_ACTOR goto_point 806.1331 -1630.219 12.3906 mode 4 time 60000 ms // versionA 
+05D3: AS_actor 52@ goto_point 793.8177 -1625.155 12.3828 mode 4 time 60000 ms // versionA 
+95@ = 8 
+
+:MUSIC2_10673
+if 
+  95@ == 8 
+jf @MUSIC2_10809 
+if 
+03D2:   wav 2 ended 
+jf @MUSIC2_10809 
+fade 0 1000 
+00BE: text_clear_all 
+040D: unload_wav 2 
+
+:MUSIC2_10719
+if 
+fading 
+jf @MUSIC2_10743 
+wait 0 
+jump @MUSIC2_10719 
+
+:MUSIC2_10743
+Actor.PutAt($PLAYER_ACTOR, 808.299, -1630.424, 12.42)
+Actor.Angle($PLAYER_ACTOR) = 254.602
+fade 1 1000 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+jump @MUSIC2_10902 
+95@ = 9 
+
+:MUSIC2_10809
+jump @MUSIC2_768 
+
+:MUSIC2_10816
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @MUSIC2_10884 
+$11033 = 1 
+$11029 = 270.0 
+$11032 = 776.99 
+$11031 = -1589.67 
+$11030 = 13.38 
+
+:MUSIC2_10884
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:MUSIC2_10902
+0318: set_latest_mission_passed 'STRAP_2'  // Madd Dogg's Rhymes
+01E3: show_text_1number_styled GXT 'M_PASSR' number 4 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 4 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+030C: progress_made = 1 
+$OG_LOC_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:MUSIC2_10957
+08F4: set_max_group_members 99 
+Actor.DestroyWithFade(52@)
+Pickup.Destroy(60@)
+07FB: set_interior 'MADDOGS' access 0  // Madd Dogg's Crib
+07FB: set_interior 'MDDOGS' access 0  // Madd Dogg's Crib
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MUSIC2_11027 
+0992: set_player $PLAYER_CHAR weapons_scrollable 1 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+
+:MUSIC2_11027
+03C7: set_sensitivity_to_crime 1.0 
+075B: zoom_radar 0 
+0489: set_actor $PLAYER_ACTOR muted 0 
+Marker.Disable(61@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+Marker.Disable(65@)
+Marker.Disable(66@)
+Marker.Disable(67@)
+Marker.Disable(68@)
+Pickup.Destroy(59@)
+0296: unload_special_actor 1 
+04EF: release_animation "GANGS" 
+Model.Destroy(#MTBIKE)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#WBDYG1)
+Model.Destroy(#HUNTLEY)
+Model.Destroy(#STAFFORD)
+Model.Destroy(#KMB_RHYMESBOOK)
+Model.Destroy(#CJ_JUICE_CAN)
+Model.Destroy(#SILENCED)
+04EF: release_animation "CRIB" 
+04EF: release_animation "VENDING" 
+Model.Destroy(#KNIFECUR)
+$ONMISSION = 0 
+08E7: disable_entrance_markers 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

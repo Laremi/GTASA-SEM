@@ -1,0 +1,2402 @@
+:FINALEB
+gosub @FINALEB_83 
+if 
+wasted_or_busted 
+jf @FINALEB_74 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @FINALEB_18477 
+
+:FINALEB_74
+gosub @FINALEB_18686 
+end_thread 
+
+:FINALEB_83
+$ONMISSION = 1 
+thread 'FINALEB' 
+wait 0 
+054C: use_GXT_table 'RIOT4' 
+060A: create_decision_maker_type 0 store_to 97@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 98@ // decision\allowed\m_.ped files 
+01F0: set_max_wanted_level_to 0 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+0169: set_fade_color_RGB 0 0 0 
+select_interior 2 
+02E4: load_cutscene_data 'RIOT_4D' 
+
+:FINALEB_168
+if 
+86B9:   not cutscene_data_loaded 
+jf @FINALEB_192 
+wait 0 
+jump @FINALEB_168 
+
+:FINALEB_192
+02E7: start_cutscene 
+fade 1 1000 
+
+:FINALEB_201
+if 
+82E9:   not cutscene_reached_end 
+jf @FINALEB_225 
+wait 0 
+jump @FINALEB_201 
+
+:FINALEB_225
+02EA: end_cutscene 
+fade 0 0 
+
+:FINALEB_233
+if 
+fading 
+jf @FINALEB_257 
+wait 0 
+jump @FINALEB_233 
+
+:FINALEB_257
+Model.Load(#BALLAS1)
+Model.Load(#BALLAS3)
+Model.Load(#LSV2)
+Model.Load(#NVGOGGLES)
+Model.Load(#SHOTGSPA)
+Model.Load(#CHROMEGUN)
+Model.Load(#MICRO_UZI)
+Model.Load(#M4)
+04ED: load_animation "SWAT" 
+Model.Load(#FIRE_EX)
+023C: load_special_actor 'SMOKEV' as 1 // models 290-299 
+023C: load_special_actor 'TENPEN' as 2 // models 290-299 
+03CF: load_wav 33304 as 1 
+038B: load_requested_models 
+
+:FINALEB_344
+if or
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+83D0:   not wav 1 loaded 
+jf @FINALEB_378 
+wait 0 
+jump @FINALEB_344 
+
+:FINALEB_378
+if or
+   not Model.Available(#BALLAS1)
+   not Model.Available(#BALLAS3)
+   not Model.Available(#LSV2)
+   not Model.Available(#NVGOGGLES)
+jf @FINALEB_417 
+wait 0 
+jump @FINALEB_378 
+
+:FINALEB_417
+if or
+   not Model.Available(#SHOTGSPA)
+   not Model.Available(#CHROMEGUN)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#M4)
+84EE:   not animation "SWAT" loaded 
+   not Model.Available(#FIRE_EX)
+jf @FINALEB_472 
+wait 0 
+jump @FINALEB_417 
+
+:FINALEB_472
+132@ = 0 
+133@ = 0 
+134@ = 0 
+135@ = 0 
+136@ = 0 
+137@ = 0 
+138@ = 0 
+139@ = 0 
+140@ = 0 
+141@ = 0 
+142@ = 0 
+143@ = 0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+147@ = 0 
+148@ = 0 
+149@ = 0 
+150@ = 0 
+151@ = 0 
+152@ = 0 
+153@ = 0 
+154@ = 0 
+155@ = 0 
+$8007 = 420000 
+156@ = 0 
+171@ = 0 
+172@ = 0 
+173@ = 0 
+174@ = 0 
+175@ = 0 
+176@ = 0 
+177@ = 0 
+178@ = 0 
+179@ = 0 
+180@ = 0 
+181@ = 0 
+182@ = 0 
+183@ = 0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0828: set_max_fire_generations 0 
+03C7: set_sensitivity_to_crime 0.0 
+06D0: enable_emergency_traffic 0 
+
+:FINALEB_777
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @FINALEB_803 
+jump @FINALEB_18665 
+
+:FINALEB_803
+if 
+  9 > 132@ 
+jf @FINALEB_1056 
+if 
+  154@ == 0 
+jf @FINALEB_1007 
+if 
+  0 >= $8007 
+jf @FINALEB_1007 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+020C: create_explosion_with_radius 0 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD 
+$TEMPVAR_X_COORD += 0.0 
+$TEMPVAR_Y_COORD -= 0.5 
+$TEMPVAR_Z_COORD += 0.7 
+020C: create_explosion_with_radius 2 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD 
+$TEMPVAR_X_COORD -= 1.0 
+$TEMPVAR_Y_COORD += 2.0 
+020C: create_explosion_with_radius 4 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD 
+$TEMPVAR_X_COORD += 1.5 
+$TEMPVAR_Y_COORD += 2.0 
+020C: create_explosion_with_radius 0 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD 
+33@ = 0 
+154@ = 1 
+
+:FINALEB_1007
+if 
+  154@ == 1 
+jf @FINALEB_1056 
+if 
+  33@ > 3000 
+jf @FINALEB_1056 
+05BE: AS_actor $PLAYER_ACTOR die 
+154@ = 2 
+
+:FINALEB_1056
+if 
+  132@ == 0 
+jf @FINALEB_1446 
+if 
+  152@ == 0 
+jf @FINALEB_1446 
+$ACTOR_SMOKE = Actor.Create(Special, #SPECIAL01, 2553.2, -1284.857, 1060.024)
+Actor.Angle($ACTOR_SMOKE) = 90.0
+0860: link_actor $ACTOR_SMOKE to_interior 2 
+05BE: AS_actor $ACTOR_SMOKE die 
+124@ = Pickup.Create(#BODYARMOUR, 3, 2552.31, -1286.274, 1061.024)
+032B: 131@ = create_weapon_pickup #SHOTGSPA type 3 ammo 60 at 2552.36 -1283.15 1061.02 
+Actor.PutAt($PLAYER_ACTOR, 2553.734, -1285.256, 1060.024)
+Actor.Angle($PLAYER_ACTOR) = 79.954
+0860: link_actor $PLAYER_ACTOR to_interior 2 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(2550.604, -1294.586, 1044.802, 0.0, 0.0, 0.0)
+Camera.PointAt(2551.601, -1294.649, 1044.762, 2)
+49@ = Actor.Create(Special, #SPECIAL02, 2556.988, -1297.499, 1043.13)
+Actor.Angle(49@) = 27.2743
+060B: set_actor 49@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(49@, CombatShotgun, 99999)
+Camera.SetAtPos(2552.29, -1294.24, 1044.84)
+0395: clear_area 0 at 2552.38 -1294.06 1044.84 radius 100.0 
+Camera.SetAtPos(2552.29, -1294.24, 1044.84)
+00C0: set_current_time_hours_to 0 minutes_to 0 
+fade 1 500 
+
+:FINALEB_1415
+if 
+fading 
+jf @FINALEB_1439 
+wait 0 
+jump @FINALEB_1415 
+
+:FINALEB_1439
+152@ = 1 
+
+:FINALEB_1446
+if 
+  152@ == 1 
+jf @FINALEB_2266 
+if 
+   not Actor.Dead(49@)
+jf @FINALEB_2266 
+0668: AS_actor 49@ rotate_and_shoot_at 2552.29 -1294.24 1044.84 1000 ms 
+if 
+03D0:   wav 1 loaded 
+jf @FINALEB_1538 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'ROT4_ZC' time 3500 flag 1  // ~z~Carl, you motherfucking piece of shit gang-banging cocksucker!
+
+:FINALEB_1538
+wait 500 
+02CF: 61@ = create_fire_at 2552.38 -1294.06 1044.84 propagation 0 size 1 
+0707: start_scene_skip_to @FINALEB_2284 
+wait 200 
+02CF: 62@ = create_fire_at 2553.33 -1293.89 1044.87 propagation 0 size 2 
+wait 300 
+if 
+   not Actor.Dead(49@)
+jf @FINALEB_1648 
+05D3: AS_actor 49@ goto_point 25566.84 -1297.272 1043.17 mode 4 time -1 ms // versionA 
+
+:FINALEB_1648
+wait 2500 
+Camera.SetPosition(2565.816, -1296.732, 1044.402, 0.0, 0.0, 0.0)
+Camera.PointAt(2564.824, -1296.613, 1044.444, 2)
+00BC: show_text_highpriority GXT 'RM4_38' time 10000 flag 1  // ~s~Tenpenny has caused an explosion, the lighting in the building is off and the whole place is beginning to burn down. You need to get out of here quick!
+wait 3250 
+0948: create_explosion_at 2553.19 -1293.58 1044.29 type 4 camera_shake 0.4 
+wait 200 
+0948: create_explosion_at 2558.53 -1293.88 1044.58 type 0 camera_shake 0.3 
+wait 500 
+0948: create_explosion_at 2552.78 -1293.24 1045.32 type 0 camera_shake 0.4 
+0924: enable_screen_darkness 0 with_value 175 
+wait 100 
+0948: create_explosion_at 2557.6 -1294.57 1043.49 type 2 camera_shake 0.5 
+wait 500 
+0948: create_explosion_at 2555.86 -1293.27 1043.91 type 2 camera_shake 0.6 
+wait 50 
+0948: create_explosion_at 2558.73 -1293.4 1044.36 type 4 camera_shake 0.6 
+wait 50 
+00C0: set_current_time_hours_to 0 minutes_to 0 
+08FD: enable_heat_visuals 1 
+0924: enable_screen_darkness 1 with_value 100 
+02CF: 77@ = create_fire_at 2567.77 -1294.03 1045.5 propagation 0 size 3 
+02CF: 68@ = create_fire_at 2541.687 -1289.68 1043.0 propagation 1 size 1 
+02CF: 83@ = create_fire_at 2559.45 -1303.65 1044.0 propagation 0 size 2 
+02CF: 85@ = create_fire_at 2564.72 -1296.06 1042.91 propagation 0 size 2 
+02CF: 75@ = create_fire_at 2570.115 -1301.434 1043.8 propagation 0 size 2 
+wait 250 
+0924: enable_screen_darkness 0 with_value 120 
+02CF: 81@ = create_fire_at 2559.37 -1284.76 1044.1 propagation 0 size 2 
+wait 500 
+0924: enable_screen_darkness 1 with_value 140 
+02CF: 70@ = create_fire_at 2538.751 -1291.7 1044.17 propagation 0 size 2 
+02CF: 73@ = create_fire_at 2541.56 -1292.35 1044.1 propagation 0 size 3 
+02CF: 88@ = create_fire_at 2551.47 -1297.2 1044.17 propagation 0 size 2 
+02CF: 89@ = create_fire_at 2551.425 -1298.4 1044.1 propagation 0 size 2 
+wait 400 
+0924: enable_screen_darkness 0 with_value 150 
+wait 500 
+02CF: 94@ = create_fire_at 2551.33 -1295.311 1043.8 propagation 0 size 3 
+02CF: 91@ = create_fire_at 2541.36 -1300.36 1044.1 propagation 0 size 2 
+0924: enable_screen_darkness 1 with_value 180 
+wait 3000 
+152@ = 2 
+
+:FINALEB_2266
+if 
+  152@ == 2 
+jf @FINALEB_2644 
+
+:FINALEB_2284
+0701: end_scene_skip 
+03D5: remove_text 'ROT4_ZC'  // ~z~Carl, you motherfucking piece of shit gang-banging cocksucker!
+040D: unload_wav 1 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Actor.DestroyInstantly(49@)
+08FD: enable_heat_visuals 0 
+0924: enable_screen_darkness 1 with_value 200 
+00C0: set_current_time_hours_to 0 minutes_to 0 
+04E3: unknown_set_player $PLAYER_CHAR flag 7 time 360000 
+031A: remove_all_fires 
+125@ = Pickup.Create(#HEALTH, 3, 2524.0, -1283.0, 1048.337)
+120@ = Pickup.Create(#BODYARMOUR, 3, 2527.783, -1288.816, 1031.43)
+121@ = Pickup.Create(#BODYARMOUR, 3, 2580.953, -1285.117, 1044.173)
+122@ = Pickup.Create(#BODYARMOUR, 3, 2520.4, -1281.287, 1054.681)
+126@ = Pickup.Create(#HEALTH, 3, 2552.298, -1306.06, 1054.681)
+127@ = Pickup.Create(#HEALTH, 3, 2570.839, -1285.818, 1037.821)
+123@ = Pickup.Create(#BODYARMOUR, 3, 2552.475, -1280.687, 1054.686)
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, NightvisionGoggles, 1)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 44 
+Model.Destroy(#NVGOGGLES)
+00BC: show_text_highpriority GXT 'RM4_33' time 10000 flag 1  // ~s~Use the night vision goggles you have just picked up from Big Smoke to help you see in the dark and ~y~escape ~s~the building as quick as possible.
+03C3: set_timer_to $8007 type 1 GXT 'RM4_34' // global_variable  // Time
+0890: enable_sound_when_timer $8007 reach 32 seconds // global_variable 
+018A: 118@ = create_checkpoint_at 2577.82 -1284.6 1053.99 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+32@ = 0 
+132@ = 1 
+152@ = 3 
+
+:FINALEB_2644
+if 
+  3 > 132@ 
+jf @FINALEB_2719 
+if 
+  155@ == 0 
+jf @FINALEB_2719 
+if 
+  32@ > 7000 
+jf @FINALEB_2719 
+00BE: text_clear_all 
+03E5: show_text_box 'RM4_32'  // To use the night vision goggles select them from your inventory and press ~k~~PED_FIREWEAPON~.
+155@ = 1 
+
+:FINALEB_2719
+if 
+  4 > 132@ 
+jf @FINALEB_2794 
+if 
+  155@ == 2 
+jf @FINALEB_2794 
+if 
+  32@ > 8000 
+jf @FINALEB_2794 
+00BE: text_clear_all 
+03E5: show_text_box 'RM4_40'  // Night vision can brighten up fires, so you may have to switch between night vision and normal vision to help you see fires more clearly.
+155@ = 3 
+
+:FINALEB_2794
+if 
+  132@ == 1 
+jf @FINALEB_3778 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2578.21 -1284.87 1053.95 radius 5.0 5.0 5.0 
+jf @FINALEB_3778 
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2521.89 -1301.98 1047.54 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+00BE: text_clear_all 
+34@ = Actor.Create(Mission1, #LSV2, 2574.5, -1296.029, 1054.687)
+Actor.Angle(34@) = 4.7018
+060B: set_actor 34@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(34@, MicroUzi, 99999)
+081A: set_actor 34@ weapon_skill_to 2 
+0860: link_actor 34@ to_interior 2 
+Actor.WeaponAccuracy(34@) = 20
+Actor.Health(34@) = 150
+Actor.SetMaxHealth(34@, 150)
+137@ = 1 
+05E2: AS_actor 34@ kill_actor $PLAYER_ACTOR 
+35@ = Actor.Create(Mission1, #BALLAS3, 2553.764, -1294.536, 1053.647)
+Actor.Angle(35@) = 266.9614
+060B: set_actor 35@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(35@, Shotgun, 99999)
+0860: link_actor 35@ to_interior 2 
+138@ = 0 
+if 
+  138@ == 0 
+jf @FINALEB_3185 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_3185 
+0085: 104@ = 35@ // (int) 
+106@ = 2553.764 
+107@ = -1294.536 
+108@ = 1053.647 
+112@ = 2700 
+116@ = 270.0 
+gosub @FINALEB_17995 
+138@ = 1 
+
+:FINALEB_3185
+36@ = Actor.Create(Mission1, #BALLAS1, 2575.266, -1296.4, 1054.687)
+Actor.Angle(36@) = 89.298
+060B: set_actor 36@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(36@, MicroUzi, 99999)
+081A: set_actor 36@ weapon_skill_to 2 
+Actor.Health(36@) = 150
+Actor.SetMaxHealth(36@, 150)
+0860: link_actor 36@ to_interior 2 
+if 
+  139@ == 0 
+jf @FINALEB_3355 
+if 
+   not Actor.Dead(36@)
+jf @FINALEB_3355 
+0085: 104@ = 36@ // (int) 
+106@ = 2556.31 
+107@ = -1297.219 
+108@ = 1053.641 
+gosub @FINALEB_17703 
+139@ = 1 
+
+:FINALEB_3355
+37@ = Actor.Create(Mission1, #BALLAS3, 2547.426, -1306.462, 1054.681)
+Actor.Angle(37@) = 359.0
+060B: set_actor 37@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(37@, MicroUzi, 99999)
+081A: set_actor 37@ weapon_skill_to 2 
+0860: link_actor 37@ to_interior 2 
+140@ = 0 
+if 
+  140@ == 0 
+jf @FINALEB_3486 
+if 
+   not Actor.Dead(37@)
+jf @FINALEB_3486 
+0085: 104@ = 37@ // (int) 
+gosub @FINALEB_17758 
+140@ = 1 
+
+:FINALEB_3486
+38@ = Actor.Create(Mission1, #LSV2, 2534.045, -1304.856, 1053.641)
+Actor.Angle(38@) = 273.9959
+060B: set_actor 38@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(38@, MicroUzi, 99999)
+081A: set_actor 38@ weapon_skill_to 2 
+0860: link_actor 38@ to_interior 2 
+Actor.Health(38@) = 150
+Actor.SetMaxHealth(38@, 150)
+141@ = 0 
+if 
+  141@ == 0 
+jf @FINALEB_3633 
+if 
+   not Actor.Dead(38@)
+jf @FINALEB_3633 
+0085: 104@ = 38@ // (int) 
+gosub @FINALEB_17758 
+141@ = 1 
+
+:FINALEB_3633
+39@ = Actor.Create(Mission1, #BALLAS1, 2540.192, -1287.667, 1053.647)
+Actor.Angle(39@) = 165.9748
+060B: set_actor 39@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(39@, MicroUzi, 99999)
+081A: set_actor 39@ weapon_skill_to 2 
+0860: link_actor 39@ to_interior 2 
+0856: set_actor 39@ enable_crouch 0 
+142@ = 0 
+if 
+  142@ == 0 
+jf @FINALEB_3771 
+if 
+   not Actor.Dead(39@)
+jf @FINALEB_3771 
+0085: 104@ = 39@ // (int) 
+gosub @FINALEB_17802 
+142@ = 1 
+
+:FINALEB_3771
+132@ = 2 
+
+:FINALEB_3778
+if 
+  132@ == 2 
+jf @FINALEB_4643 
+if 
+  137@ == 1 
+jf @FINALEB_3842 
+if 
+   Actor.Dead(34@)
+jf @FINALEB_3842 
+Actor.RemoveReferences(34@)
+137@ = 2 
+
+:FINALEB_3842
+if 
+  138@ == 1 
+jf @FINALEB_3970 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_3970 
+if or
+051A:   actor 35@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 35@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEB_3970 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_3958 
+05E2: AS_actor 35@ kill_actor $PLAYER_ACTOR 
+138@ = 2 
+jump @FINALEB_3970 
+
+:FINALEB_3958
+Actor.RemoveReferences(35@)
+138@ = 2 
+
+:FINALEB_3970
+if or
+  138@ == 1 
+  138@ == 2 
+jf @FINALEB_4023 
+if 
+   Actor.Dead(35@)
+jf @FINALEB_4023 
+Actor.RemoveReferences(35@)
+138@ = 3 
+
+:FINALEB_4023
+if 
+  139@ == 1 
+jf @FINALEB_4069 
+if 
+   Actor.Dead(36@)
+jf @FINALEB_4069 
+Actor.RemoveReferences(36@)
+139@ = 2 
+
+:FINALEB_4069
+if 
+  140@ == 1 
+jf @FINALEB_4115 
+if 
+   Actor.Dead(37@)
+jf @FINALEB_4115 
+Actor.RemoveReferences(37@)
+140@ = 2 
+
+:FINALEB_4115
+if 
+  141@ == 1 
+jf @FINALEB_4161 
+if 
+   Actor.Dead(38@)
+jf @FINALEB_4161 
+Actor.RemoveReferences(38@)
+141@ = 2 
+
+:FINALEB_4161
+if 
+  142@ == 1 
+jf @FINALEB_4207 
+if 
+   Actor.Dead(39@)
+jf @FINALEB_4207 
+Actor.RemoveReferences(39@)
+142@ = 2 
+
+:FINALEB_4207
+if 
+  143@ == 0 
+jf @FINALEB_4356 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2543.46 -1304.9 1054.68 radius 5.0 5.0 5.0 
+jf @FINALEB_4356 
+40@ = Actor.Create(Mission1, #BALLAS1, 2532.4, -1286.7, 1053.68)
+Actor.Angle(40@) = 230.835
+060B: set_actor 40@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(40@, MicroUzi, 99999)
+081A: set_actor 40@ weapon_skill_to 2 
+0860: link_actor 40@ to_interior 2 
+05E2: AS_actor 40@ kill_actor $PLAYER_ACTOR 
+143@ = 1 
+
+:FINALEB_4356
+if 
+  143@ == 1 
+jf @FINALEB_4402 
+if 
+   Actor.Dead(40@)
+jf @FINALEB_4402 
+Actor.RemoveReferences(40@)
+143@ = 2 
+
+:FINALEB_4402
+if 
+  144@ == 0 
+jf @FINALEB_4597 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2519.93 -1285.547 1054.673 radius 5.0 5.0 5.0 
+jf @FINALEB_4597 
+41@ = Actor.Create(Mission1, #BALLAS1, 2519.93, -1285.54, 1054.673)
+Actor.Angle(41@) = 200.537
+060B: set_actor 41@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(41@, MicroUzi, 99999)
+0860: link_actor 41@ to_interior 2 
+Actor.Health(41@) = 150
+Actor.SetMaxHealth(41@, 150)
+0085: 104@ = 41@ // (int) 
+106@ = 2520.05 
+107@ = -1301.518 
+108@ = 1048.33 
+gosub @FINALEB_17703 
+144@ = 1 
+
+:FINALEB_4597
+if 
+  144@ == 1 
+jf @FINALEB_4643 
+if 
+   Actor.Dead(41@)
+jf @FINALEB_4643 
+Actor.RemoveReferences(41@)
+144@ = 2 
+
+:FINALEB_4643
+if 
+  132@ == 2 
+jf @FINALEB_7394 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2521.9 -1301.86 1047.5 radius 6.0 6.0 3.0 
+jf @FINALEB_7394 
+00BC: show_text_highpriority GXT 'RM4_35' time 7000 flag 1  // ~s~This floor is on fire use a ~g~fire extinguisher ~s~to help you get out!
+32@ = 0 
+155@ = 2 
+Actor.DestroyInstantly(34@)
+Actor.DestroyInstantly(35@)
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2572.08 -1301.88 1043.32 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+08FD: enable_heat_visuals 1 
+Actor.DestroyInstantly($ACTOR_SMOKE)
+0296: unload_special_actor 2 
+0669: 51@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 0.0 0.0 2.2 type 1 
+0669: 52@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 0.0 2.0 2.0 type 1 
+0669: 53@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 0.0 -2.0 2.0 type 1 
+0669: 54@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 1.0 5.0 1.7 type 1 
+0669: 55@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset -1.0 8.0 2.0 type 1 
+0669: 56@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 2.0 0.0 1.7 type 1 
+0669: 57@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset -2.0 0.0 1.7 type 1 
+0669: 58@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset -2.0 2.0 1.7 type 1 
+0669: 59@ = attach_particle "TEARGAS" to_actor $PLAYER_ACTOR with_offset 2.0 2.0 1.7 type 1 
+60@ = 0 
+
+:FINALEB_5140
+if 
+  9 > 60@ 
+jf @FINALEB_5181 
+064C: make_particle 51@(60@,9i) visible 
+60@ += 1 
+jump @FINALEB_5140 
+
+:FINALEB_5181
+02CF: 61@ = create_fire_at 2529.62 -1306.62 1048.0 propagation 0 size 2 
+02CF: 62@ = create_fire_at 2529.497 -1304.791 1048.0 propagation 0 size 2 
+02CF: 63@ = create_fire_at 2530.12 -1296.96 1047.8 propagation 0 size 3 
+02CF: 64@ = create_fire_at 2529.49 -1287.93 1048.0 propagation 0 size 3 
+02CF: 64@ = create_fire_at 2543.98 -1305.709 1047.445 propagation 0 size 3 
+02CF: 65@ = create_fire_at 2544.54 -1304.47 1047.55 propagation 0 size 3 
+02CF: 90@ = create_fire_at 2543.94 -1306.83 1047.62 propagation 0 size 3 
+02CF: 66@ = create_fire_at 2545.139 -1281.497 1047.5 propagation 0 size 2 
+02CF: 77@ = create_fire_at 2567.77 -1294.03 1047.5 propagation 0 size 3 
+02CF: 78@ = create_fire_at 2570.2 -1294.4 1047.5 propagation 0 size 3 
+02CF: 75@ = create_fire_at 2568.72 -1294.32 1047.5 propagation 0 size 2 
+02CF: 67@ = create_fire_at 2540.247 -1288.566 1044.0 propagation 0 size 3 
+02CF: 68@ = create_fire_at 2541.687 -1289.68 1044.0 propagation 1 size 1 
+02CF: 69@ = create_fire_at 2540.214 -1290.218 1044.0 propagation 0 size 2 
+02CF: 70@ = create_fire_at 2538.751 -1291.7 1044.17 propagation 0 size 2 
+02CF: 71@ = create_fire_at 2537.339 -1286.56 1044.1 propagation 1 size 3 
+02CF: 73@ = create_fire_at 2541.56 -1292.35 1044.1 propagation 0 size 3 
+02CF: 80@ = create_fire_at 2570.77 -1303.14 1043.35 propagation 0 size 2 
+02CF: 81@ = create_fire_at 2559.37 -1284.76 1044.1 propagation 0 size 2 
+02CF: 82@ = create_fire_at 2551.4 -1301.3 1044.0 propagation 0 size 2 
+02CF: 83@ = create_fire_at 2570.52 -1301.42 1043.47 propagation 0 size 2 
+02CF: 84@ = create_fire_at 2550.94 -1301.81 1044.0 propagation 0 size 3 
+02CF: 85@ = create_fire_at 2537.69 -1301.34 1044.0 propagation 0 size 2 
+02CF: 86@ = create_fire_at 2536.42 -1302.01 1044.0 propagation 0 size 2 
+02CF: 87@ = create_fire_at 2536.82 -1290.5 1044.0 propagation 0 size 2 
+02CF: 88@ = create_fire_at 2551.47 -1297.2 1044.17 propagation 0 size 2 
+02CF: 89@ = create_fire_at 2570.54 -1301.22 1043.36 propagation 0 size 3 
+02CF: 94@ = create_fire_at 2551.33 -1295.311 1043.8 propagation 0 size 3 
+02CF: 91@ = create_fire_at 2541.36 -1300.36 1044.1 propagation 0 size 2 
+02CF: 92@ = create_fire_at 2545.328 -1300.739 1044.1 propagation 0 size 2 
+02CF: 93@ = create_fire_at 2548.77 -1300.375 1044.04 propagation 0 size 3 
+02CF: 76@ = create_fire_at 2544.16 -1306.56 1043.8 propagation 0 size 2 
+02CF: 72@ = create_fire_at 2570.43 -1302.43 1043.4 propagation 0 size 1 
+02CF: 74@ = create_fire_at 2549.05 -1287.54 1043.8 propagation 0 size 3 
+02CF: 95@ = create_fire_at 2570.482 -1302.438 1043.8 propagation 0 size 2 
+02CF: 96@ = create_fire_at 2565.705 -1298.03 1043.7 propagation 0 size 3 
+02CF: 79@ = create_fire_at 2565.528 -1289.17 1043.7 propagation 0 size 3 
+032B: 129@ = create_weapon_pickup #FIRE_EX type 3 ammo 99999 at 2529.829 -1303.027 1048.337 
+03DC: 119@ = create_marker_above_pickup 129@ 
+08DC: create_interior_marker 119@ at 2540.83 -1304.05 radius 1.0 
+032B: 130@ = create_weapon_pickup #FIRE_EX type 3 ammo 99999 at 2567.948 -1292.879 1044.173 
+42@ = Actor.Create(Mission1, #BALLAS3, 2528.539, -1289.935, 1048.336)
+Actor.Angle(42@) = 359.0
+Actor.Health(42@) = 10
+060B: set_actor 42@ decision_maker_to 98@ 
+Actor.GiveWeaponAndAmmo(42@, FireExtinguisher, 99999)
+07DD: set_actor 42@ attack_rate 20 // previously known as temper_to 
+0860: link_actor 42@ to_interior 2 
+Actor.Health(42@) = 5
+Actor.SetMaxHealth(42@, 5)
+Actor.WeaponAccuracy(42@) = 20
+145@ = 1 
+0668: AS_actor 42@ rotate_and_shoot_at 2529.49 -1287.93 1048.0 650000 ms 
+43@ = Actor.Create(Mission1, #LSV2, 2538.274, -1293.322, 1043.133)
+Actor.Angle(43@) = 351.1779
+Actor.Health(43@) = 5
+060B: set_actor 43@ decision_maker_to 98@ 
+Actor.GiveWeaponAndAmmo(43@, FireExtinguisher, 99999)
+07DD: set_actor 43@ attack_rate 20 // previously known as temper_to 
+0860: link_actor 43@ to_interior 2 
+Actor.WeaponAccuracy(43@) = 20
+146@ = 1 
+0668: AS_actor 43@ rotate_and_shoot_at 2538.569 -1291.48 1043.604 650000 ms 
+44@ = Actor.Create(Mission1, #BALLAS1, 2539.534, -1297.778, 1043.13)
+Actor.Angle(44@) = 43.6277
+060B: set_actor 44@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(44@, M4, 99999)
+0860: link_actor 44@ to_interior 2 
+Actor.WeaponAccuracy(44@) = 20
+147@ = 0 
+if 
+  147@ == 0 
+jf @FINALEB_6530 
+if 
+   not Actor.Dead(44@)
+jf @FINALEB_6530 
+0085: 104@ = 44@ // (int) 
+gosub @FINALEB_17802 
+147@ = 1 
+
+:FINALEB_6530
+45@ = Actor.Create(Mission1, #BALLAS1, 2548.245, -1294.142, 1043.13)
+Actor.Angle(45@) = 105.3104
+060B: set_actor 45@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(45@, M4, 99999)
+0860: link_actor 45@ to_interior 2 
+Actor.Health(45@) = 150
+Actor.SetMaxHealth(45@, 150)
+148@ = 0 
+if 
+  148@ == 0 
+jf @FINALEB_6670 
+if 
+   not Actor.Dead(45@)
+jf @FINALEB_6670 
+0085: 104@ = 45@ // (int) 
+gosub @FINALEB_17758 
+148@ = 1 
+
+:FINALEB_6670
+46@ = Actor.Create(Mission1, #BALLAS3, 2558.452, -1289.522, 1043.133)
+Actor.Angle(46@) = 91.8235
+060B: set_actor 46@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(46@, M4, 99999)
+0860: link_actor 46@ to_interior 2 
+Actor.WeaponAccuracy(46@) = 20
+149@ = 0 
+if 
+  149@ == 0 
+jf @FINALEB_6801 
+if 
+   not Actor.Dead(46@)
+jf @FINALEB_6801 
+0085: 104@ = 46@ // (int) 
+gosub @FINALEB_17802 
+149@ = 1 
+
+:FINALEB_6801
+47@ = Actor.Create(Mission1, #BALLAS1, 2565.722, -1293.133, 1044.07)
+Actor.Angle(47@) = 85.0916
+060B: set_actor 47@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(47@, M4, 99999)
+0860: link_actor 47@ to_interior 2 
+Actor.Health(47@) = 150
+Actor.SetMaxHealth(47@, 150)
+150@ = 0 
+if 
+  150@ == 0 
+jf @FINALEB_6941 
+if 
+   not Actor.Dead(47@)
+jf @FINALEB_6941 
+0085: 104@ = 47@ // (int) 
+gosub @FINALEB_17758 
+150@ = 1 
+
+:FINALEB_6941
+48@ = Actor.Create(Mission1, #BALLAS3, 2557.144, -1297.805, 1043.13)
+Actor.Angle(48@) = 65.8333
+060B: set_actor 48@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(48@, M4, 99999)
+0860: link_actor 48@ to_interior 2 
+151@ = 0 
+if 
+  151@ == 0 
+jf @FINALEB_7065 
+if 
+   not Actor.Dead(48@)
+jf @FINALEB_7065 
+0085: 104@ = 48@ // (int) 
+gosub @FINALEB_17802 
+151@ = 1 
+
+:FINALEB_7065
+if 
+  145@ == 1 
+jf @FINALEB_7111 
+if 
+   Actor.Dead(42@)
+jf @FINALEB_7111 
+Actor.RemoveReferences(42@)
+145@ = 2 
+
+:FINALEB_7111
+if 
+  146@ == 1 
+jf @FINALEB_7157 
+if 
+   Actor.Dead(43@)
+jf @FINALEB_7157 
+Actor.RemoveReferences(43@)
+146@ = 2 
+
+:FINALEB_7157
+if 
+  147@ == 1 
+jf @FINALEB_7203 
+if 
+   Actor.Dead(44@)
+jf @FINALEB_7203 
+Actor.RemoveReferences(44@)
+147@ = 2 
+
+:FINALEB_7203
+if 
+  148@ == 1 
+jf @FINALEB_7249 
+if 
+   Actor.Dead(45@)
+jf @FINALEB_7249 
+Actor.RemoveReferences(45@)
+148@ = 2 
+
+:FINALEB_7249
+if 
+  149@ == 1 
+jf @FINALEB_7295 
+if 
+   Actor.Dead(46@)
+jf @FINALEB_7295 
+Actor.RemoveReferences(46@)
+149@ = 2 
+
+:FINALEB_7295
+if 
+  150@ == 1 
+jf @FINALEB_7341 
+if 
+   Actor.Dead(47@)
+jf @FINALEB_7341 
+Actor.RemoveReferences(47@)
+150@ = 2 
+
+:FINALEB_7341
+if 
+  151@ == 1 
+jf @FINALEB_7387 
+if 
+   Actor.Dead(48@)
+jf @FINALEB_7387 
+Actor.RemoveReferences(48@)
+151@ = 2 
+
+:FINALEB_7387
+132@ = 3 
+
+:FINALEB_7394
+if 
+  132@ == 3 
+jf @FINALEB_9001 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2571.39 -1308.59 1041.4 cornerB 2584.08 -1272.85 1047.02 
+jf @FINALEB_9001 
+Model.Destroy(#CHROMEGUN)
+Marker.Disable(119@)
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2565.56 -1301.7 1030.97 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+Marker.Disable(119@)
+031A: remove_all_fires 
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Model.Destroy(#FIRE_EX)
+02CF: 61@ = create_fire_at 2575.774 -1283.055 1042.133 propagation 0 size 3 
+02CF: 62@ = create_fire_at 2581.744 -1297.517 1039.02 propagation 0 size 1 
+02CF: 63@ = create_fire_at 2570.414 -1300.047 1036.781 propagation 0 size 3 
+02CF: 64@ = create_fire_at 2568.78 -1299.987 1036.781 propagation 0 size 3 
+02CF: 65@ = create_fire_at 2577.247 -1294.814 1034.048 propagation 0 size 1 
+02CF: 66@ = create_fire_at 2566.833 -1282.489 1030.43 propagation 0 size 3 
+02CF: 67@ = create_fire_at 2567.984 -1284.974 1030.43 propagation 0 size 2 
+02CF: 68@ = create_fire_at 2572.402 -1304.581 1030.43 propagation 0 size 2 
+02CF: 69@ = create_fire_at 2570.79 -1305.299 1030.43 propagation 0 size 1 
+02CF: 70@ = create_fire_at 2556.55 -1301.88 1029.82 propagation 0 size 3 
+02CF: 71@ = create_fire_at 2556.83 -1303.91 1029.42 propagation 0 size 2 
+02CF: 72@ = create_fire_at 2556.01 -1305.31 1029.82 propagation 0 size 3 
+02CF: 73@ = create_fire_at 2553.16 -1297.94 1029.42 propagation 0 size 2 
+02CF: 74@ = create_fire_at 2552.43 -1297.31 1029.82 propagation 0 size 2 
+02CF: 75@ = create_fire_at 2552.15 -1294.97 1029.42 propagation 0 size 3 
+02CF: 76@ = create_fire_at 2547.77 -1285.41 1029.82 propagation 0 size 3 
+02CF: 77@ = create_fire_at 2547.4 -1284.33 1029.42 propagation 0 size 1 
+02CF: 78@ = create_fire_at 2547.77 -1282.32 1029.82 propagation 0 size 3 
+02CF: 79@ = create_fire_at 2545.93 -1292.47 1029.42 propagation 0 size 3 
+02CF: 80@ = create_fire_at 2545.48 -1290.81 1029.82 propagation 0 size 1 
+02CF: 81@ = create_fire_at 2544.11 -1292.71 1029.42 propagation 0 size 2 
+02CF: 82@ = create_fire_at 2539.75 -1299.17 1029.82 propagation 0 size 1 
+02CF: 83@ = create_fire_at 2539.25 -1297.76 1029.42 propagation 0 size 2 
+02CF: 84@ = create_fire_at 2540.58 -1280.24 1036.78 propagation 0 size 2 
+02CF: 85@ = create_fire_at 2540.4 -1281.22 1036.78 propagation 0 size 1 
+02CF: 86@ = create_fire_at 2529.85 -1294.27 1036.8 propagation 0 size 2 
+02CF: 87@ = create_fire_at 2545.85 -1307.04 1036.78 propagation 0 size 2 
+02CF: 88@ = create_fire_at 2547.47 -1306.59 1036.78 propagation 0 size 1 
+34@ = Actor.Create(Mission1, #BALLAS1, 2579.905, -1291.163, 1043.125)
+Actor.Angle(34@) = 177.191
+060B: set_actor 34@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(34@, M4, 99999)
+0860: link_actor 34@ to_interior 2 
+137@ = 0 
+35@ = Actor.Create(Mission1, #BALLAS3, 2567.413, -1305.324, 1036.781)
+Actor.Angle(35@) = 268.0134
+060B: set_actor 35@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(35@, MicroUzi, 99999)
+081A: set_actor 35@ weapon_skill_to 2 
+0860: link_actor 35@ to_interior 2 
+Actor.Health(35@) = 150
+Actor.SetMaxHealth(35@, 150)
+138@ = 0 
+36@ = Actor.Create(Mission1, #LSV2, 2572.115, -1301.504, 1036.781)
+Actor.Angle(36@) = 61.2775
+060B: set_actor 36@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(36@, FireExtinguisher, 99999)
+07DD: set_actor 36@ attack_rate 20 // previously known as temper_to 
+0860: link_actor 36@ to_interior 2 
+Actor.Health(36@) = 5
+0668: AS_actor 36@ rotate_and_shoot_at 2570.207 -1300.238 1037.059 650000 ms 
+139@ = 0 
+37@ = Actor.Create(Mission1, #BALLAS1, 2575.007, -1284.838, 1030.427)
+Actor.Angle(37@) = 170.5391
+060B: set_actor 37@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(37@, MicroUzi, 99999)
+081A: set_actor 37@ weapon_skill_to 2 
+0860: link_actor 37@ to_interior 2 
+140@ = 0 
+if 
+  140@ == 0 
+jf @FINALEB_8606 
+if 
+   not Actor.Dead(37@)
+jf @FINALEB_8606 
+0085: 104@ = 37@ // (int) 
+gosub @FINALEB_17802 
+140@ = 1 
+
+:FINALEB_8606
+38@ = Actor.Create(Mission1, #BALLAS3, 2568.075, -1293.628, 1030.43)
+Actor.Angle(38@) = 356.7112
+060B: set_actor 38@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(38@, M4, 99999)
+0860: link_actor 38@ to_interior 2 
+Actor.Health(38@) = 150
+Actor.SetMaxHealth(38@, 150)
+141@ = 0 
+if 
+  141@ == 0 
+jf @FINALEB_8746 
+if 
+   not Actor.Dead(38@)
+jf @FINALEB_8746 
+0085: 104@ = 38@ // (int) 
+gosub @FINALEB_17758 
+141@ = 1 
+
+:FINALEB_8746
+39@ = Actor.Create(Mission1, #LSV2, 2570.626, -1297.5, 1030.427)
+Actor.Angle(39@) = 3.5755
+060B: set_actor 39@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(39@, M4, 99999)
+0860: link_actor 39@ to_interior 2 
+142@ = 0 
+if 
+  142@ == 0 
+jf @FINALEB_8870 
+if 
+   not Actor.Dead(39@)
+jf @FINALEB_8870 
+0085: 104@ = 39@ // (int) 
+gosub @FINALEB_17758 
+142@ = 1 
+
+:FINALEB_8870
+40@ = Actor.Create(Mission1, #BALLAS1, 2570.947, -1301.719, 1030.43)
+Actor.Angle(40@) = 359.8018
+060B: set_actor 40@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(40@, M4, 99999)
+0860: link_actor 40@ to_interior 2 
+143@ = 0 
+if 
+  143@ == 0 
+jf @FINALEB_8994 
+if 
+   not Actor.Dead(40@)
+jf @FINALEB_8994 
+0085: 104@ = 40@ // (int) 
+gosub @FINALEB_17758 
+143@ = 1 
+
+:FINALEB_8994
+132@ = 4 
+
+:FINALEB_9001
+if 
+  132@ == 4 
+jf @FINALEB_10841 
+if 
+  137@ == 0 
+jf @FINALEB_9161 
+if 
+   not Actor.Dead(34@)
+jf @FINALEB_9161 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2577.6 -1289.91 1043.77 radius 5.0 5.0 3.0 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEB_9161 
+0085: 104@ = 34@ // (int) 
+106@ = 2579.905 
+107@ = -1304.985 
+108@ = 1036.773 
+gosub @FINALEB_17703 
+137@ = 1 
+
+:FINALEB_9161
+if 
+  138@ == 0 
+jf @FINALEB_9266 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_9266 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2577.88 -1309.87 1036.2 cornerB 2563.87 -1289.87 1042.68 
+051A:   actor 35@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEB_9266 
+05E2: AS_actor 35@ kill_actor $PLAYER_ACTOR 
+138@ = 1 
+
+:FINALEB_9266
+if 
+  143@ == 1 
+jf @FINALEB_9438 
+if 
+   not Actor.Dead(40@)
+jf @FINALEB_9438 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2573.3 -1281.03 1028.8 cornerB 2563.7 -1300.61 1034.0 
+051A:   actor 40@ damaged_by_actor $PLAYER_ACTOR 
+jf @FINALEB_9438 
+0085: 104@ = 40@ // (int) 
+106@ = 2570.947 
+107@ = -1301.719 
+108@ = 1030.43 
+113@ = 2558.722 
+114@ = -1301.829 
+115@ = 1030.43 
+gosub @FINALEB_17840 
+143@ = 2 
+
+:FINALEB_9438
+if 
+  137@ == 1 
+jf @FINALEB_9484 
+if 
+   Actor.Dead(34@)
+jf @FINALEB_9484 
+Actor.RemoveReferences(34@)
+137@ = 2 
+
+:FINALEB_9484
+if 
+  138@ == 1 
+jf @FINALEB_9530 
+if 
+   Actor.Dead(35@)
+jf @FINALEB_9530 
+Actor.RemoveReferences(35@)
+138@ = 2 
+
+:FINALEB_9530
+if 
+  139@ == 1 
+jf @FINALEB_9576 
+if 
+   Actor.Dead(36@)
+jf @FINALEB_9576 
+Actor.RemoveReferences(36@)
+139@ = 2 
+
+:FINALEB_9576
+if 
+  140@ == 1 
+jf @FINALEB_9622 
+if 
+   Actor.Dead(37@)
+jf @FINALEB_9622 
+Actor.RemoveReferences(37@)
+140@ = 2 
+
+:FINALEB_9622
+if 
+  141@ == 1 
+jf @FINALEB_9668 
+if 
+   Actor.Dead(38@)
+jf @FINALEB_9668 
+Actor.RemoveReferences(38@)
+141@ = 2 
+
+:FINALEB_9668
+if 
+  142@ == 1 
+jf @FINALEB_9714 
+if 
+   Actor.Dead(39@)
+jf @FINALEB_9714 
+Actor.RemoveReferences(39@)
+142@ = 2 
+
+:FINALEB_9714
+if or
+  143@ == 1 
+  143@ == 1 
+jf @FINALEB_9767 
+if 
+   Actor.Dead(40@)
+jf @FINALEB_9767 
+Actor.RemoveReferences(40@)
+143@ = 2 
+
+:FINALEB_9767
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2565.94 -1301.96 1030.77 radius 8.0 8.0 3.0 
+jf @FINALEB_10841 
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2528.78 -1293.94 1030.86 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(48@)
+43@ = Actor.Create(Mission1, #BALLAS1, 2549.162, -1291.369, 1030.467)
+Actor.Angle(43@) = 275.0
+060B: set_actor 43@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(43@, M4, 99999)
+0860: link_actor 43@ to_interior 2 
+Actor.Health(43@) = 150
+Actor.SetMaxHealth(43@, 150)
+146@ = 0 
+if 
+  146@ == 0 
+jf @FINALEB_10035 
+if 
+   not Actor.Dead(43@)
+jf @FINALEB_10035 
+0085: 104@ = 43@ // (int) 
+gosub @FINALEB_17758 
+146@ = 1 
+
+:FINALEB_10035
+44@ = Actor.Create(Mission1, #BALLAS3, 2534.88, -1292.009, 1031.469)
+Actor.Angle(44@) = 275.0
+060B: set_actor 44@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(44@, MicroUzi, 99999)
+081A: set_actor 44@ weapon_skill_to 2 
+0860: link_actor 44@ to_interior 2 
+147@ = 0 
+if 
+  147@ == 0 
+jf @FINALEB_10166 
+if 
+   not Actor.Dead(44@)
+jf @FINALEB_10166 
+0085: 104@ = 44@ // (int) 
+gosub @FINALEB_17802 
+147@ = 1 
+
+:FINALEB_10166
+45@ = Actor.Create(Mission1, #BALLAS3, 2554.033, -1287.08, 1030.43)
+Actor.Angle(45@) = 270.0
+060B: set_actor 45@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(45@, M4, 99999)
+0860: link_actor 45@ to_interior 2 
+148@ = 0 
+if 
+  148@ == 0 
+jf @FINALEB_10338 
+if 
+   not Actor.Dead(45@)
+jf @FINALEB_10338 
+0085: 104@ = 45@ // (int) 
+106@ = 2554.033 
+107@ = -1287.08 
+108@ = 1030.43 
+112@ = 1200 
+116@ = 270.0 
+gosub @FINALEB_18236 
+148@ = 1 
+
+:FINALEB_10338
+46@ = Actor.Create(Mission1, #BALLAS3, 2546.007, -1287.15, 1030.427)
+Actor.Angle(46@) = 270.0
+060B: set_actor 46@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(46@, M4, 99999)
+0860: link_actor 46@ to_interior 2 
+149@ = 0 
+if 
+  149@ == 0 
+jf @FINALEB_10510 
+if 
+   not Actor.Dead(46@)
+jf @FINALEB_10510 
+0085: 104@ = 46@ // (int) 
+106@ = 2546.007 
+107@ = -1287.15 
+108@ = 1030.427 
+112@ = 2000 
+116@ = 270.0 
+gosub @FINALEB_18236 
+149@ = 1 
+
+:FINALEB_10510
+47@ = Actor.Create(Mission1, #LSV2, 2530.397, -1291.381, 1036.781)
+Actor.Angle(47@) = 278.2231
+060B: set_actor 47@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(47@, M4, 99999)
+0860: link_actor 47@ to_interior 2 
+150@ = 0 
+if 
+  150@ == 0 
+jf @FINALEB_10634 
+if 
+   not Actor.Dead(47@)
+jf @FINALEB_10634 
+0085: 104@ = 47@ // (int) 
+gosub @FINALEB_17802 
+150@ = 1 
+
+:FINALEB_10634
+48@ = Actor.Create(Mission1, #BALLAS1, 2540.443, -1306.621, 1036.781)
+Actor.Angle(48@) = 328.6817
+060B: set_actor 48@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(48@, M4, 99999)
+0860: link_actor 48@ to_interior 2 
+151@ = 0 
+if 
+  151@ == 0 
+jf @FINALEB_10758 
+if 
+   not Actor.Dead(48@)
+jf @FINALEB_10758 
+0085: 104@ = 48@ // (int) 
+gosub @FINALEB_17802 
+151@ = 1 
+
+:FINALEB_10758
+42@ = Actor.Create(Mission1, #LSV2, 2535.111, -1304.992, 1030.43)
+Actor.Angle(42@) = 328.6817
+060B: set_actor 42@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(42@, M4, 99999)
+0860: link_actor 42@ to_interior 2 
+05E2: AS_actor 42@ kill_actor $PLAYER_ACTOR 
+145@ = 0 
+132@ = 5 
+
+:FINALEB_10841
+if 
+  132@ == 5 
+jf @FINALEB_12489 
+if 
+  146@ == 1 
+jf @FINALEB_10972 
+if 
+   not Actor.Dead(43@)
+jf @FINALEB_10972 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2553.85 -1308.35 1028.6 cornerB 2540.27 -1275.04 1033.2 
+051A:   actor 43@ damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 43@ 
+jf @FINALEB_10972 
+05E2: AS_actor 43@ kill_actor $PLAYER_ACTOR 
+146@ = 2 
+
+:FINALEB_10972
+if 
+  147@ == 1 
+jf @FINALEB_11085 
+if 
+   not Actor.Dead(44@)
+jf @FINALEB_11085 
+if or
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2542.24 -1308.67 1028.09 cornerB 2527.86 -1276.9 1033.19 
+051A:   actor 44@ damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 44@ 
+jf @FINALEB_11085 
+05E2: AS_actor 44@ kill_actor $PLAYER_ACTOR 
+147@ = 2 
+
+:FINALEB_11085
+if or
+  146@ == 1 
+  145@ == 2 
+jf @FINALEB_11138 
+if 
+   Actor.Dead(43@)
+jf @FINALEB_11138 
+Actor.RemoveReferences(43@)
+146@ = 3 
+
+:FINALEB_11138
+if or
+  147@ == 1 
+  145@ == 2 
+jf @FINALEB_11191 
+if 
+   Actor.Dead(44@)
+jf @FINALEB_11191 
+Actor.RemoveReferences(44@)
+147@ = 3 
+
+:FINALEB_11191
+if 
+  148@ == 1 
+jf @FINALEB_11319 
+if 
+   not Actor.Dead(45@)
+jf @FINALEB_11319 
+if or
+051A:   actor 45@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 45@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEB_11319 
+if 
+   not Actor.Dead(45@)
+jf @FINALEB_11307 
+05E2: AS_actor 45@ kill_actor $PLAYER_ACTOR 
+148@ = 2 
+jump @FINALEB_11319 
+
+:FINALEB_11307
+Actor.RemoveReferences(45@)
+148@ = 2 
+
+:FINALEB_11319
+if or
+  148@ == 1 
+  148@ == 2 
+jf @FINALEB_11372 
+if 
+   Actor.Dead(45@)
+jf @FINALEB_11372 
+Actor.RemoveReferences(45@)
+148@ = 3 
+
+:FINALEB_11372
+if 
+  149@ == 1 
+jf @FINALEB_11500 
+if 
+   not Actor.Dead(46@)
+jf @FINALEB_11500 
+if or
+051A:   actor 46@ damaged_by_actor $PLAYER_ACTOR 
+0104:   actor 46@ near_actor $PLAYER_ACTOR radius 5.0 5.0 3.0 sphere 0 
+jf @FINALEB_11500 
+if 
+   not Actor.Dead(46@)
+jf @FINALEB_11488 
+05E2: AS_actor 46@ kill_actor $PLAYER_ACTOR 
+149@ = 2 
+jump @FINALEB_11500 
+
+:FINALEB_11488
+Actor.RemoveReferences(46@)
+149@ = 2 
+
+:FINALEB_11500
+if or
+  149@ == 1 
+  149@ == 2 
+jf @FINALEB_11553 
+if 
+   Actor.Dead(46@)
+jf @FINALEB_11553 
+Actor.RemoveReferences(46@)
+149@ = 3 
+
+:FINALEB_11553
+if 
+  150@ == 1 
+jf @FINALEB_11599 
+if 
+   Actor.Dead(47@)
+jf @FINALEB_11599 
+Actor.RemoveReferences(47@)
+150@ = 2 
+
+:FINALEB_11599
+if 
+  151@ == 1 
+jf @FINALEB_11645 
+if 
+   Actor.Dead(48@)
+jf @FINALEB_11645 
+Actor.RemoveReferences(48@)
+151@ = 2 
+
+:FINALEB_11645
+if 
+  145@ == 1 
+jf @FINALEB_11691 
+if 
+   Actor.Dead(42@)
+jf @FINALEB_11691 
+Actor.RemoveReferences(42@)
+145@ = 2 
+
+:FINALEB_11691
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2528.53 -1293.96 1030.86 radius 8.0 8.0 4.0 
+jf @FINALEB_12489 
+Actor.DestroyInstantly(34@)
+Actor.DestroyInstantly(35@)
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(40@)
+02D1: remove_fire 61@ 
+02D1: remove_fire 62@ 
+02D1: remove_fire 63@ 
+02D1: remove_fire 64@ 
+02D1: remove_fire 65@ 
+02D1: remove_fire 66@ 
+02D1: remove_fire 67@ 
+02D1: remove_fire 68@ 
+02D1: remove_fire 69@ 
+02D1: remove_fire 70@ 
+02D1: remove_fire 71@ 
+02D1: remove_fire 72@ 
+02D1: remove_fire 73@ 
+02D1: remove_fire 74@ 
+02D1: remove_fire 76@ 
+02D1: remove_fire 78@ 
+02D1: remove_fire 82@ 
+02D1: remove_fire 84@ 
+02D1: remove_fire 85@ 
+02D1: remove_fire 86@ 
+02CF: 61@ = create_fire_at 2523.92 -1299.21 1030.78 propagation 0 size 3 
+02CF: 62@ = create_fire_at 2523.66 -1297.4 1030.8 propagation 0 size 1 
+02CF: 63@ = create_fire_at 2528.97 -1304.32 1030.77 propagation 0 size 2 
+02CF: 64@ = create_fire_at 2525.5 -1321.59 1030.75 propagation 0 size 2 
+02CF: 66@ = create_fire_at 2541.0 -1311.02 1028.09 propagation 0 size 2 
+Pickup.Destroy(130@)
+032B: 130@ = create_weapon_pickup #FIRE_EX type 3 ammo 99999 at 2534.036 -1321.212 1031.469 
+02CF: 67@ = create_fire_at 2540.69 -1320.01 1030.68 propagation 0 size 3 
+02CF: 68@ = create_fire_at 2540.2 -1316.76 1030.64 propagation 0 size 3 
+02CF: 69@ = create_fire_at 2540.61 -1317.43 1030.62 propagation 0 size 3 
+02CF: 70@ = create_fire_at 2540.35 -1318.39 1030.59 propagation 0 size 3 
+02CF: 71@ = create_fire_at 2540.5 -1319.58 1030.61 propagation 0 size 3 
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2540.92 -1304.14 1024.39 
+08DC: create_interior_marker 118@ at 2540.83 -1304.05 radius 1.0 
+34@ = Actor.Create(Mission1, #BALLAS1, 2527.368, -1319.587, 1030.43)
+Actor.Angle(34@) = 1.4222
+060B: set_actor 34@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(34@, MicroUzi, 99999)
+081A: set_actor 34@ weapon_skill_to 2 
+0860: link_actor 34@ to_interior 2 
+Actor.WeaponAccuracy(34@) = 30
+137@ = 0 
+35@ = Actor.Create(Mission1, #BALLAS3, 2528.284, -1314.865, 1030.43)
+Actor.Angle(35@) = 3.4628
+060B: set_actor 35@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(35@, MicroUzi, 99999)
+081A: set_actor 35@ weapon_skill_to 2 
+0860: link_actor 35@ to_interior 2 
+138@ = 0 
+if 
+  138@ == 0 
+jf @FINALEB_12407 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_12407 
+0085: 104@ = 35@ // (int) 
+gosub @FINALEB_17758 
+138@ = 1 
+
+:FINALEB_12407
+36@ = Actor.Create(Mission1, #LSV2, 2524.055, -1309.533, 1030.43)
+Actor.Angle(36@) = 7.001
+060B: set_actor 36@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(36@, MicroUzi, 99999)
+0860: link_actor 36@ to_interior 2 
+Actor.WeaponAccuracy(36@) = 30
+139@ = 0 
+132@ = 6 
+
+:FINALEB_12489
+if 
+  132@ == 6 
+jf @FINALEB_12899 
+if 
+  137@ == 0 
+jf @FINALEB_12620 
+if 
+   not Actor.Dead(34@)
+jf @FINALEB_12620 
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2527.07 -1293.72 1029.5 radius 3.0 3.0 3.5 
+051A:   actor 34@ damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 34@ 
+jf @FINALEB_12620 
+05E2: AS_actor 34@ kill_actor $PLAYER_ACTOR 
+137@ = 1 
+
+:FINALEB_12620
+if 
+  139@ == 0 
+jf @FINALEB_12728 
+if 
+   not Actor.Dead(36@)
+jf @FINALEB_12728 
+if or
+0104:   actor $PLAYER_ACTOR near_actor 36@ radius 7.0 7.0 3.5 sphere 0 
+051A:   actor 36@ damaged_by_actor $PLAYER_ACTOR 
+0457:   player $PLAYER_CHAR aiming_at_actor 36@ 
+jf @FINALEB_12728 
+0085: 104@ = 36@ // (int) 
+gosub @FINALEB_17912 
+139@ = 1 
+
+:FINALEB_12728
+if 
+  137@ == 1 
+jf @FINALEB_12774 
+if 
+   Actor.Dead(34@)
+jf @FINALEB_12774 
+Actor.RemoveReferences(34@)
+137@ = 2 
+
+:FINALEB_12774
+if 
+  138@ == 1 
+jf @FINALEB_12820 
+if 
+   Actor.Dead(35@)
+jf @FINALEB_12820 
+Actor.RemoveReferences(35@)
+138@ = 2 
+
+:FINALEB_12820
+if 
+  139@ == 1 
+jf @FINALEB_12866 
+if 
+   Actor.Dead(36@)
+jf @FINALEB_12866 
+Actor.RemoveReferences(36@)
+139@ = 2 
+
+:FINALEB_12866
+09E8: 50@ = actor $PLAYER_ACTOR active_interior 
+if 
+  50@ == 0 
+jf @FINALEB_12899 
+132@ = 7 
+
+:FINALEB_12899
+if 
+  132@ == 7 
+jf @FINALEB_14064 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+0395: clear_area 0 at 2506.218 -1293.093 200.0 radius 200.0 
+04ED: load_animation "DAM_JUMP" 
+04ED: load_animation "FINALE" 
+038B: load_requested_models 
+
+:FINALEB_12979
+if or
+84EE:   not animation "DAM_JUMP" loaded 
+84EE:   not animation "FINALE" loaded 
+jf @FINALEB_13023 
+wait 0 
+jump @FINALEB_12979 
+
+:FINALEB_13023
+Marker.Disable(118@)
+018A: 118@ = create_checkpoint_at 2522.82 -1272.52 34.151 
+Actor.PutAt($PLAYER_ACTOR, 2538.657, -1304.358, 34.0)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#SHOTGSPA)
+04EF: release_animation "SWAT" 
+Model.Destroy(#BALLAS1)
+Model.Destroy(#LSV2)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#M4)
+Model.Destroy(#FIRE_EX)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(40@)
+Actor.DestroyInstantly(41@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+Actor.DestroyInstantly(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(48@)
+Pickup.Destroy(129@)
+Pickup.Destroy(130@)
+Pickup.Destroy(125@)
+Pickup.Destroy(120@)
+Pickup.Destroy(121@)
+Pickup.Destroy(122@)
+Pickup.Destroy(126@)
+Pickup.Destroy(123@)
+Actor.RemoveReferences(34@)
+Actor.RemoveReferences(35@)
+Actor.RemoveReferences(36@)
+34@ = Actor.Create(Mission1, #LSV2, 2543.2, -1277.645, 33.9609)
+Actor.Angle(34@) = 7.001
+060B: set_actor 34@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(34@, MicroUzi, 99999)
+081A: set_actor 34@ weapon_skill_to 2 
+05E2: AS_actor 34@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(34@) = 10
+137@ = 1 
+35@ = Actor.Create(Mission1, #BALLAS1, 2536.916, -1283.446, 33.9609)
+Actor.Angle(35@) = 7.001
+060B: set_actor 35@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(35@, M4, 99999)
+Actor.WeaponAccuracy(35@) = 10
+138@ = 0 
+if 
+  138@ == 0 
+jf @FINALEB_13440 
+if 
+   not Actor.Dead(35@)
+jf @FINALEB_13440 
+0085: 104@ = 35@ // (int) 
+gosub @FINALEB_17802 
+138@ = 1 
+
+:FINALEB_13440
+36@ = Actor.Create(Mission1, #BALLAS1, 2531.656, -1287.27, 33.9602)
+Actor.Angle(36@) = 7.001
+060B: set_actor 36@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(36@, MicroUzi, 99999)
+081A: set_actor 36@ weapon_skill_to 2 
+Actor.WeaponAccuracy(36@) = 10
+139@ = 0 
+if 
+  139@ == 0 
+jf @FINALEB_13571 
+if 
+   not Actor.Dead(36@)
+jf @FINALEB_13571 
+0085: 104@ = 36@ // (int) 
+gosub @FINALEB_17758 
+139@ = 1 
+
+:FINALEB_13571
+37@ = Actor.Create(Mission1, #LSV2, 2539.569, -1268.471, 33.9609)
+Actor.Angle(37@) = 2.21
+060B: set_actor 37@ decision_maker_to 97@ 
+Actor.GiveWeaponAndAmmo(37@, M4, 99999)
+05E2: AS_actor 37@ kill_actor $PLAYER_ACTOR 
+Actor.WeaponAccuracy(37@) = 20
+140@ = 1 
+031A: remove_all_fires 
+02CF: 79@ = create_fire_at 2538.45 -1281.4 34.34 propagation 0 size 3 
+02CF: 61@ = create_fire_at 2527.64 -1312.0 33.9 propagation 0 size 2 
+02CF: 62@ = create_fire_at 2527.58 -1303.3 34.4 propagation 0 size 1 
+02CF: 63@ = create_fire_at 2532.52 -1306.39 33.9 propagation 0 size 2 
+02CF: 64@ = create_fire_at 2528.08 -1284.9 34.3 propagation 0 size 2 
+02CF: 65@ = create_fire_at 2544.03 -1269.3 34.2 propagation 0 size 1 
+02CF: 66@ = create_fire_at 2536.26 -1302.49 34.0 propagation 0 size 2 
+02CF: 67@ = create_fire_at 2532.58 -1291.07 34.0 propagation 0 size 1 
+02CF: 71@ = create_fire_at 2528.64 -1269.64 34.0 propagation 0 size 1 
+02CF: 72@ = create_fire_at 2534.57 -1284.5 34.04 propagation 0 size 1 
+02CF: 70@ = create_fire_at 2531.99 -1268.71 34.0 propagation 0 size 2 
+02CF: 69@ = create_fire_at 2530.987 -1269.858 33.8 propagation 0 size 3 
+02CF: 74@ = create_fire_at 2532.39 -1270.4 34.0 propagation 0 size 3 
+02CF: 75@ = create_fire_at 2531.165 -1271.961 34.0 propagation 0 size 2 
+02CF: 76@ = create_fire_at 2532.529 -1272.169 34.0 propagation 0 size 1 
+02CF: 77@ = create_fire_at 2532.395 -1273.24 34.0 propagation 0 size 2 
+02CF: 78@ = create_fire_at 2531.94 -1274.46 33.8 propagation 0 size 3 
+132@ = 8 
+
+:FINALEB_14064
+if 
+  132@ == 8 
+jf @FINALEB_14378 
+if 
+  137@ == 1 
+jf @FINALEB_14128 
+if 
+   Actor.Dead(34@)
+jf @FINALEB_14128 
+Actor.RemoveReferences(34@)
+137@ = 2 
+
+:FINALEB_14128
+if 
+  138@ == 1 
+jf @FINALEB_14174 
+if 
+   Actor.Dead(35@)
+jf @FINALEB_14174 
+Actor.RemoveReferences(35@)
+138@ = 2 
+
+:FINALEB_14174
+if 
+  139@ == 1 
+jf @FINALEB_14220 
+if 
+   Actor.Dead(36@)
+jf @FINALEB_14220 
+Actor.RemoveReferences(36@)
+139@ = 2 
+
+:FINALEB_14220
+if 
+  140@ == 1 
+jf @FINALEB_14266 
+if 
+   Actor.Dead(37@)
+jf @FINALEB_14266 
+Actor.RemoveReferences(37@)
+140@ = 2 
+
+:FINALEB_14266
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2545.59 -1278.26 31.36 cornerB 2516.65 -1259.84 37.0 
+jf @FINALEB_14378 
+031A: remove_all_fires 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+60@ = 0 
+
+:FINALEB_14330
+if 
+  9 > 60@ 
+jf @FINALEB_14371 
+0650: destroy_particle 51@(60@,9i) 
+60@ += 1 
+jump @FINALEB_14330 
+
+:FINALEB_14371
+132@ = 9 
+
+:FINALEB_14378
+if 
+  132@ == 9 
+jf @FINALEB_15007 
+Marker.Disable(118@)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+0924: enable_screen_darkness 0 with_value -1 
+08B1: enable_night_vision 0 
+09EB: remove_player_goggles $PLAYER_CHAR use_anim 0 
+02CF: 61@ = create_fire_at 2532.62 -1272.65 34.31 propagation 0 size 1 
+02CF: 62@ = create_fire_at 2532.88 -1272.75 34.12 propagation 0 size 2 
+02CF: 64@ = create_fire_at 2527.9 -1272.5 34.8 propagation 0 size 2 
+02CF: 65@ = create_fire_at 2533.743 -1272.434 34.0 propagation 0 size 3 
+02CF: 66@ = create_fire_at 2533.743 -1272.434 34.0 propagation 0 size 2 
+02CF: 70@ = create_fire_at 2531.99 -1268.71 34.0 propagation 0 size 2 
+02CF: 69@ = create_fire_at 2530.987 -1269.858 33.8 propagation 0 size 3 
+02CF: 74@ = create_fire_at 2532.39 -1270.4 34.0 propagation 0 size 1 
+02CF: 75@ = create_fire_at 2531.165 -1271.961 34.0 propagation 0 size 2 
+02CF: 76@ = create_fire_at 2532.529 -1272.169 34.0 propagation 0 size 1 
+02CF: 77@ = create_fire_at 2532.395 -1273.24 34.0 propagation 0 size 3 
+02CF: 73@ = create_fire_at 2531.94 -1274.46 33.8 propagation 0 size 1 
+02CF: 63@ = create_fire_at 2532.433 -1275.658 34.0 propagation 0 size 3 
+0828: set_max_fire_generations 3 
+$8001 = 2526.988 
+$8002 = -1272.577 
+$8003 = 34.8419 
+$8004 = 2527.988 
+$8005 = -1272.556 
+$8006 = 34.8799 
+Actor.DestroyInstantly(34@)
+Actor.DestroyInstantly(35@)
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.PutAt($PLAYER_ACTOR, 2538.45, -1281.4, 34.34)
+Actor.Angle($PLAYER_ACTOR) = 270.0
+Camera.SetPosition($8001, $8002, $8003, 0.0, 0.0, 0.0)
+Camera.PointAt($8004, $8005, $8006, 2)
+wait 2000 
+Actor.PutAt($PLAYER_ACTOR, 2533.743, -1272.434, 34.0)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+wait 500 
+0812: AS_actor $PLAYER_ACTOR perform_animation "JUMP_ROLL" IFP "DAM_JUMP" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+00C0: set_current_time_hours_to 17 minutes_to 0 
+32@ = 0 
+015D: set_gamespeed 0.3 
+132@ = 10 
+
+:FINALEB_15007
+if 
+  132@ == 10 
+jf @FINALEB_16222 
+Camera.SetPosition($8001, $8002, $8003, 0.0, 0.0, 0.0)
+Camera.PointAt($8004, $8005, $8006, 2)
+if 
+  2512.28 >= $8001 
+jf @FINALEB_15106 
+32@ = 0 
+153@ = 12 
+132@ = 11 
+
+:FINALEB_15106
+if 
+  32@ > 500 
+jf @FINALEB_15135 
+007E: $8001 -= frame_delta_time * 0.18 // (float) 
+
+:FINALEB_15135
+if 
+  32@ > 0 
+jf @FINALEB_15202 
+if 
+  153@ == 0 
+jf @FINALEB_15202 
+0948: create_explosion_at 2538.4 -1278.4 34.04 type 4 camera_shake 0.2 
+153@ = 1 
+
+:FINALEB_15202
+if 
+  32@ > 100 
+jf @FINALEB_15245 
+if 
+  153@ == 1 
+jf @FINALEB_15245 
+153@ = 2 
+
+:FINALEB_15245
+if 
+  32@ > 250 
+jf @FINALEB_15323 
+if 
+  153@ == 2 
+jf @FINALEB_15323 
+0948: create_explosion_at 2540.24 -1270.59 34.07 type 0 camera_shake 0.2 
+02D1: remove_fire 64@ 
+02D1: remove_fire 61@ 
+153@ = 3 
+
+:FINALEB_15323
+if 
+  32@ > 500 
+jf @FINALEB_15391 
+if 
+  153@ == 3 
+jf @FINALEB_15391 
+0948: create_explosion_at 2535.66 -1276.3 34.34 type 2 camera_shake 0.2 
+153@ = 4 
+
+:FINALEB_15391
+if 
+  32@ > 850 
+jf @FINALEB_15464 
+if 
+  153@ == 4 
+jf @FINALEB_15464 
+0948: create_explosion_at 2531.74 -1270.35 34.39 type 1 camera_shake 0.2 
+02D1: remove_fire 64@ 
+153@ = 5 
+
+:FINALEB_15464
+if 
+  32@ > 1100 
+jf @FINALEB_15515 
+if 
+  153@ == 5 
+jf @FINALEB_15515 
+015D: set_gamespeed 0.35 
+153@ = 6 
+
+:FINALEB_15515
+if 
+  32@ > 1298 
+jf @FINALEB_15595 
+if 
+  153@ == 6 
+jf @FINALEB_15595 
+015D: set_gamespeed 0.39 
+0948: create_explosion_at 2527.72 -1272.82 34.26 type 0 camera_shake 0.2 
+02D1: remove_fire 65@ 
+153@ = 7 
+
+:FINALEB_15595
+if 
+  32@ > 1400 
+jf @FINALEB_15670 
+if 
+  153@ == 7 
+jf @FINALEB_15670 
+015D: set_gamespeed 0.42 
+0948: create_explosion_at 2529.54 -1270.12 34.31 type 2 camera_shake 0.22 
+153@ = 8 
+
+:FINALEB_15670
+if 
+  32@ > 1500 
+jf @FINALEB_15750 
+if 
+  153@ == 8 
+jf @FINALEB_15750 
+015D: set_gamespeed 0.44 
+0948: create_explosion_at 2524.15 -1272.31 34.42 type 4 camera_shake 0.25 
+02D1: remove_fire 70@ 
+153@ = 9 
+
+:FINALEB_15750
+if 
+  32@ > 1600 
+jf @FINALEB_15870 
+if 
+  153@ == 9 
+jf @FINALEB_15870 
+015D: set_gamespeed 0.5 
+0948: create_explosion_at 2522.33 -1270.19 34.19 type 1 camera_shake 0.3 
+02D1: remove_fire 61@ 
+02D1: remove_fire 62@ 
+02D1: remove_fire 65@ 
+02D1: remove_fire 70@ 
+02D1: remove_fire 69@ 
+02D1: remove_fire 75@ 
+02D1: remove_fire 76@ 
+02D1: remove_fire 73@ 
+02D1: remove_fire 63@ 
+153@ = 10 
+
+:FINALEB_15870
+if 
+  32@ > 1700 
+jf @FINALEB_16154 
+if 
+  153@ == 10 
+jf @FINALEB_16154 
+0948: create_explosion_at 2524.14 -1270.04 34.19 type 2 camera_shake 0.25 
+02CF: 61@ = create_fire_at 2523.17 -1269.18 34.04 propagation 0 size 3 
+02CF: 62@ = create_fire_at 2522.47 -1271.46 34.15 propagation 0 size 2 
+02CF: 65@ = create_fire_at 2523.68 -1272.35 34.19 propagation 0 size 3 
+02CF: 70@ = create_fire_at 2523.18 -1273.32 34.06 propagation 0 size 2 
+02CF: 69@ = create_fire_at 2522.8 -1274.45 34.05 propagation 0 size 3 
+02CF: 75@ = create_fire_at 2522.42 -1276.4 34.05 propagation 0 size 2 
+02CF: 76@ = create_fire_at 2520.32 -1273.41 34.0 propagation 0 size 1 
+02CF: 73@ = create_fire_at 2521.32 -1273.41 34.0 propagation 0 size 1 
+02CF: 63@ = create_fire_at 2520.93 -1269.28 34.0 propagation 0 size 2 
+153@ = 11 
+
+:FINALEB_16154
+if 
+  32@ > 1916 
+jf @FINALEB_16222 
+if 
+  153@ == 11 
+jf @FINALEB_16222 
+0948: create_explosion_at 2522.01 -1274.06 34.2 type 4 camera_shake 0.2 
+153@ = 12 
+
+:FINALEB_16222
+if 
+  132@ == 11 
+jf @FINALEB_17696 
+if 
+  61.0 > $8003 
+jf @FINALEB_16291 
+0078: $8003 += frame_delta_time * 0.1 // (float) 
+007E: $8001 -= frame_delta_time * 0.02 // (float) 
+0078: $8006 += frame_delta_time * 0.008 // (float) 
+
+:FINALEB_16291
+Camera.SetPosition($8001, $8002, $8003, 0.0, 0.0, 0.0)
+Camera.PointAt($8004, $8005, $8006, 2)
+if 
+  153@ == 12 
+jf @FINALEB_16398 
+if 
+  32@ > 1400 
+jf @FINALEB_16398 
+0948: create_explosion_at 2521.46 -1268.02 39.8 type 0 camera_shake 0.2 
+153@ = 13 
+
+:FINALEB_16398
+if 
+  153@ == 13 
+jf @FINALEB_16466 
+if 
+  32@ > 1670 
+jf @FINALEB_16466 
+0948: create_explosion_at 2521.48 -1270.67 40.32 type 4 camera_shake 0.25 
+153@ = 14 
+
+:FINALEB_16466
+if 
+  153@ == 14 
+jf @FINALEB_16626 
+if 
+  32@ > 1800 
+jf @FINALEB_16626 
+0948: create_explosion_at 2521.32 -1275.86 40.47 type 2 camera_shake 0.2 
+02D1: remove_fire 64@ 
+02D1: remove_fire 66@ 
+02D1: remove_fire 74@ 
+02D1: remove_fire 69@ 
+02CF: 64@ = create_fire_at 2521.46 -1268.02 39.8 propagation 1 size 2 
+02CF: 66@ = create_fire_at 22521.48 -1270.67 40.32 propagation 1 size 2 
+02CF: 74@ = create_fire_at 2521.32 -1275.86 40.47 propagation 1 size 1 
+153@ = 15 
+
+:FINALEB_16626
+if 
+  153@ == 15 
+jf @FINALEB_16718 
+if 
+  32@ > 1950 
+jf @FINALEB_16718 
+0948: create_explosion_at 2521.42 -1273.18 39.83 type 2 camera_shake 0.2 
+0948: create_explosion_at 2525.43 -1280.65 40.28 type 4 camera_shake 0.2 
+153@ = 16 
+
+:FINALEB_16718
+if 
+  153@ == 16 
+jf @FINALEB_16835 
+if 
+  32@ > 2200 
+jf @FINALEB_16835 
+0948: create_explosion_at 2521.27 -1270.64 43.25 type 2 camera_shake 0.2 
+02D1: remove_fire 77@ 
+02D1: remove_fire 63@ 
+02D1: remove_fire 79@ 
+02D1: remove_fire 78@ 
+02D1: remove_fire 70@ 
+02CF: 69@ = create_fire_at 2525.43 -1280.65 40.28 propagation 1 size 2 
+153@ = 17 
+
+:FINALEB_16835
+if 
+  153@ == 17 
+jf @FINALEB_16951 
+if 
+  32@ > 2568 
+jf @FINALEB_16951 
+0948: create_explosion_at 2521.15 -1267.91 43.37 type 2 camera_shake 0.2 
+0948: create_explosion_at 2525.89 -1281.0 43.79 type 4 camera_shake 0.2 
+02CF: 70@ = create_fire_at 2525.89 -1281.0 43.79 propagation 3 size 3 
+153@ = 18 
+
+:FINALEB_16951
+if 
+  153@ == 18 
+jf @FINALEB_17091 
+if 
+  32@ > 3241 
+jf @FINALEB_17091 
+0948: create_explosion_at 2520.86 -1273.39 43.2 type 0 camera_shake 0.2 
+02CF: 77@ = create_fire_at 2521.27 -1270.64 43.25 propagation 1 size 3 
+02CF: 63@ = create_fire_at 2521.15 -1267.91 43.37 propagation 2 size 2 
+02CF: 79@ = create_fire_at 2521.34 -1275.7 43.26 propagation 3 size 1 
+153@ = 19 
+
+:FINALEB_17091
+if 
+  153@ == 19 
+jf @FINALEB_17159 
+if 
+  32@ > 3485 
+jf @FINALEB_17159 
+0948: create_explosion_at 2521.34 -1275.7 43.26 type 4 camera_shake 0.2 
+153@ = 20 
+
+:FINALEB_17159
+if 
+  153@ == 20 
+jf @FINALEB_17227 
+if 
+  32@ > 3708 
+jf @FINALEB_17227 
+0948: create_explosion_at 2521.15 -1275.61 47.83 type 2 camera_shake 0.2 
+153@ = 21 
+
+:FINALEB_17227
+if 
+  153@ == 21 
+jf @FINALEB_17324 
+if 
+  32@ > 4246 
+jf @FINALEB_17324 
+0948: create_explosion_at 2521.04 -1272.97 47.91 type 0 camera_shake 0.2 
+02D1: remove_fire 75@ 
+02CF: 62@ = create_fire_at 2525.88 -1279.99 48.43 propagation 3 size 2 
+153@ = 22 
+
+:FINALEB_17324
+if 
+  153@ == 22 
+jf @FINALEB_17426 
+if 
+  32@ > 4708 
+jf @FINALEB_17426 
+0948: create_explosion_at 2521.24 -1267.9 48.15 type 4 camera_shake 0.2 
+02D1: remove_fire 61@ 
+02D1: remove_fire 62@ 
+0948: create_explosion_at 2525.88 -1279.99 48.43 type 2 camera_shake 0.2 
+153@ = 23 
+
+:FINALEB_17426
+if 
+  153@ == 23 
+jf @FINALEB_17566 
+if 
+  32@ > 5000 
+jf @FINALEB_17566 
+0948: create_explosion_at 2521.37 -1270.86 48.35 type 0 camera_shake 0.2 
+02CF: 78@ = create_fire_at 2521.15 -1275.61 47.83 propagation 3 size 1 
+02CF: 61@ = create_fire_at 2521.04 -1272.97 47.91 propagation 2 size 2 
+02CF: 62@ = create_fire_at 2521.24 -1267.9 48.15 propagation 3 size 2 
+153@ = 24 
+
+:FINALEB_17566
+if 
+  153@ == 24 
+jf @FINALEB_17696 
+if 
+  32@ > 3000 
+jf @FINALEB_17696 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+014F: stop_timer $8007 
+04EF: release_animation "DAM_JUMP" 
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#M4)
+Model.Destroy(#FIRE_EX)
+08FD: enable_heat_visuals 0 
+fade 0 1000 
+
+:FINALEB_17651
+if 
+fading 
+jf @FINALEB_17675 
+wait 0 
+jump @FINALEB_17651 
+
+:FINALEB_17675
+jump @FINALEB_18665 
+132@ = 11 
+153@ = 25 
+
+:FINALEB_17696
+jump @FINALEB_777 
+
+:FINALEB_17703
+0615: define_AS_pack_begin 99@ 
+05D3: AS_actor -1 goto_point 106@ 107@ 108@ mode 6 time -1 ms // versionA 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 99@ 
+0618: assign_actor 104@ to_AS_pack 99@ 
+061B: remove_references_to_AS_pack 99@ 
+return 
+
+:FINALEB_17758
+0615: define_AS_pack_begin 100@ 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 100@ 
+0618: assign_actor 104@ to_AS_pack 100@ 
+061B: remove_references_to_AS_pack 100@ 
+return 
+
+:FINALEB_17802
+0615: define_AS_pack_begin 101@ 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 101@ 
+0618: assign_actor 104@ to_AS_pack 101@ 
+061B: remove_references_to_AS_pack 101@ 
+return 
+
+:FINALEB_17840
+0615: define_AS_pack_begin 111@ 
+05D3: AS_actor -1 goto_point 106@ 107@ 108@ mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 113@ 114@ 115@ mode 6 time -1 ms // versionA 
+0638: AS_actor -1 stay_put 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 111@ 
+0618: assign_actor 104@ to_AS_pack 111@ 
+061B: remove_references_to_AS_pack 111@ 
+return 
+
+:FINALEB_17912
+0615: define_AS_pack_begin 102@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_R" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0638: AS_actor -1 stay_put 1 
+04EB: AS_actor -1 crouch 1 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 102@ 
+0618: assign_actor 104@ to_AS_pack 102@ 
+061B: remove_references_to_AS_pack 102@ 
+return 
+
+:FINALEB_17995
+0615: define_AS_pack_begin 103@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_R" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 112@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 106@ 107@ 108@ angle 116@ radius -1.0 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_R_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 103@ loop 1 
+0616: define_AS_pack_end 103@ 
+0618: assign_actor 104@ to_AS_pack 103@ 
+061B: remove_references_to_AS_pack 103@ 
+return 
+
+:FINALEB_18236
+0615: define_AS_pack_begin 105@ 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "SWT_WLLSHOOT_IN_L" IFP "SWAT" framedelta 8.0 loopA 0 lockX 1 lockY 1 lockF 0 time -1 // versionB 
+0638: AS_actor -1 stay_put 1 
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 112@ 
+0638: AS_actor -1 stay_put 0 
+0804: AS_actor -1 walk_to 106@ 107@ 108@ angle 116@ radius -1.0 animation "SWT_WLLSHOOT_OUT_R" IFP_file "SWAT" 8.0 LA 0 LX 1 LY 1 LF 0 LT -1 
+0812: AS_actor -1 perform_animation "SWT_WLLPK_L_BACK" IFP "SWAT" framedelta 8.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0643: set_AS_pack 105@ loop 1 
+0616: define_AS_pack_end 105@ 
+0618: assign_actor 104@ to_AS_pack 105@ 
+061B: remove_references_to_AS_pack 105@ 
+return 
+
+:FINALEB_18477
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @FINALEB_18545 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:FINALEB_18545
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+  182@ == 1 
+jf @FINALEB_18595 
+00BC: show_text_highpriority GXT 'RM4_46' time 5000 flag 1  // ~r~You wrecked your car!
+
+:FINALEB_18595
+if 
+  179@ == 7 
+jf @FINALEB_18629 
+00BC: show_text_highpriority GXT 'RM4_45' time 7000 flag 1  // ~r~Sweet died! You are supposed to catch him, next time get your car underneath Sweet when he begins to lose grip!
+
+:FINALEB_18629
+if 
+  183@ == 1 
+jf @FINALEB_18663 
+00BC: show_text_highpriority GXT 'RM4_50' time 5000 flag 1  // ~r~You lost Sweet! Next time stay closer!
+
+:FINALEB_18663
+return 
+
+:FINALEB_18665
+156@ = 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+$RIOT_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:FINALEB_18686
+08FD: enable_heat_visuals 0 
+0924: enable_screen_darkness 0 with_value -1 
+031A: remove_all_fires 
+03C7: set_sensitivity_to_crime 1.0 
+01F0: set_max_wanted_level_to 6 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+014F: stop_timer $8007 
+Model.Destroy(#BALLAS1)
+Model.Destroy(#BALLAS3)
+Model.Destroy(#LSV2)
+Model.Destroy(#NVGOGGLES)
+Model.Destroy(#CHROMEGUN)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#M4)
+Model.Destroy(#FIRE_EX)
+Actor.DestroyWithFade($ACTOR_SMOKE)
+Actor.DestroyWithFade(49@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+04EF: release_animation "SWAT" 
+04EF: release_animation "DAM_JUMP" 
+Model.Destroy(#FIRELA)
+Model.Destroy(#LAPD1)
+Model.Destroy(#GREENWOO)
+Model.Destroy(#FELTZER)
+Model.Destroy(#LSV2)
+Model.Destroy(#BALLAS1)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#MOLOTOV)
+Model.Destroy(#LA_FUCKCAR1)
+Model.Destroy(#LA_FUCKCAR2)
+04EF: release_animation "FINALE" 
+04EF: release_animation "FINALE2" 
+Marker.Disable(118@)
+Marker.Disable(119@)
+Pickup.Destroy(120@)
+Pickup.Destroy(121@)
+Pickup.Destroy(122@)
+Pickup.Destroy(123@)
+Pickup.Destroy(124@)
+Pickup.Destroy(125@)
+Pickup.Destroy(126@)
+Pickup.Destroy(127@)
+Pickup.Destroy(129@)
+Pickup.Destroy(130@)
+Pickup.Destroy(131@)
+06D0: enable_emergency_traffic 1 
+03C7: set_sensitivity_to_crime 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+60@ = 0 
+
+:FINALEB_18969
+if 
+  9 > 60@ 
+jf @FINALEB_19010 
+0650: destroy_particle 51@(60@,9i) 
+60@ += 1 
+jump @FINALEB_18969 
+
+:FINALEB_19010
+$ONMISSION = 0 
+mission_cleanup 
+if 
+  156@ == 1 
+jf @FINALEB_19043 
+fade 0 0 
+
+:FINALEB_19043
+return

@@ -1,0 +1,2233 @@
+:MANSON5
+thread 'MANSON5' 
+gosub @MANSON5_94 
+if 
+wasted_or_busted 
+jf @MANSON5_85 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+gosub @MANSON5_13181 
+
+:MANSON5_85
+gosub @MANSON5_13295 
+end_thread 
+
+:MANSON5_94
+increment_mission_attempts 
+$ONMISSION = 1 
+054C: use_GXT_table 'MAN_5' 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+08F4: set_max_group_members 0 
+select_interior 5 
+02E4: load_cutscene_data 'BHILL5A' 
+
+:MANSON5_140
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSON5_164 
+wait 0 
+jump @MANSON5_140 
+
+:MANSON5_164
+02E7: start_cutscene 
+fade 1 1000 
+
+:MANSON5_173
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSON5_197 
+wait 0 
+jump @MANSON5_173 
+
+:MANSON5_197
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MANSON5_212
+if 
+fading 
+jf @MANSON5_236 
+wait 0 
+jump @MANSON5_212 
+
+:MANSON5_236
+select_interior 0 
+08F4: set_max_group_members 99 
+create_thread @A_CONT 
+set_weather 0 
+060A: create_decision_maker_type 0 store_to 52@ // decision\allowed\m_.ped files 
+023C: load_special_actor 'MADDOGG' as 1 // models 290-299 
+Model.Load(#BFINJECT)
+
+:MANSON5_281
+if or
+823D:   not special_actor 1 loaded 
+   not Model.Available(#BFINJECT)
+jf @MANSON5_312 
+wait 0 
+jump @MANSON5_281 
+
+:MANSON5_312
+0395: clear_area 1 at 1252.471 -805.5187 83.1484 radius 400.0 
+Camera.SetAtPos(1252.471, -805.5187, 83.1484)
+04E4: refresh_game_renderer_at 1252.471 -805.5187 
+Actor.PutAt($PLAYER_ACTOR, 1252.471, -805.5187, 83.1484)
+Actor.Angle($PLAYER_ACTOR) = 144.1434
+07AF: 51@ = player $PLAYER_CHAR group 
+07B3: set_group 51@ give_command 0 
+34@ = Actor.Create(Special, #SPECIAL01, 1254.311, -810.8859, 83.1484)
+Actor.Angle(34@) = 60.7435
+087F: set_actor 34@ never_leave_group 1 
+0631: put_actor 34@ in_group 51@ 
+04D8: set_actor 34@ drowns_in_water 1 
+060B: set_actor 34@ decision_maker_to 52@ 
+0568: set_actor 34@ untargetable 1 
+039E: set_actor 34@ locked 1 while_in_car 
+37@ = Marker.CreateAboveActor(34@)
+07E0: set_marker 37@ type_to 1 
+018B: set_marker 37@ radar_mode 2 
+0674: set_car_model #BFINJECT numberplate "LA5H_L3Y" 
+0771: set_model_numplate #BFINJECT town_texture 2 
+45@ = Car.Create(#BFINJECT, 1248.907, -804.3519, 83.1484)
+Car.Angle(45@) = 180.0
+0229: set_car 45@ primary_color_to 0 secondary_color_to 3 
+018A: 50@ = create_checkpoint_at -12.2064 -1117.876 7.0705 
+118@ = 0 
+119@ = 0 
+05AA: 168@s = 'MAN5_AA' // @s = 'short'  // ~z~Let's drop in on OG Loc,
+04AF: 120@ = 24400 // = constant 
+008B: 144@ = $PLAYER_ACTOR // (int) 
+05AA: 170@s = 'MAN5_AB' // @s = 'short'  // ~z~See if we can't interrupt that video shoot and recoup some royalties!
+04AF: 121@ = 24401 // = constant 
+008B: 145@ = $PLAYER_ACTOR // (int) 
+05AA: 172@s = 'MAN5_AC' // @s = 'short'  // ~z~And my rhyme book!
+04AF: 122@ = 24402 // = constant 
+0085: 146@ = 34@ // (int) 
+05AA: 174@s = 'MAN5_BA' // @s = 'short'  // ~z~We're flying in style, baby! You got all the makings of a great manager, Carl!
+04AF: 123@ = 24403 // = constant 
+0085: 147@ = 34@ // (int) 
+05AA: 176@s = 'MAN5_BB' // @s = 'short'  // ~z~Save it until we're spending Loc's royalties!
+04AF: 124@ = 24404 // = constant 
+008B: 148@ = $PLAYER_ACTOR // (int) 
+05AA: 178@s = 'MAN5_BC' // @s = 'short'  // ~z~I mean, tell me how a fake, buster phony like suck-ass Loc can make it in the rap game, CJ?
+04AF: 125@ = 24405 // = constant 
+0085: 149@ = 34@ // (int) 
+05AA: 180@s = 'MAN5_BD' // @s = 'short'  // ~z~Music business is changin', Dogg.
+04AF: 126@ = 24406 // = constant 
+008B: 150@ = $PLAYER_ACTOR // (int) 
+05AA: 182@s = 'MAN5_BE' // @s = 'short'  // ~z~It's all about dance routines and showmanship now.
+04AF: 127@ = 24407 // = constant 
+008B: 151@ = $PLAYER_ACTOR // (int) 
+05AA: 184@s = 'MAN5_BF' // @s = 'short'  // ~z~Any fake-ass idiot can get a record deal these days.
+04AF: 128@ = 24408 // = constant 
+008B: 152@ = $PLAYER_ACTOR // (int) 
+05AA: 186@s = 'MAN5_BG' // @s = 'short'  // ~z~So what am I supposed to do?
+04AF: 129@ = 24409 // = constant 
+0085: 153@ = 34@ // (int) 
+05AA: 188@s = 'MAN5_BH' // @s = 'short'  // ~z~Dogg, you got heart.
+04AF: 130@ = 24410 // = constant 
+008B: 154@ = $PLAYER_ACTOR // (int) 
+05AA: 190@s = 'MAN5_BJ' // @s = 'short'  // ~z~You got natural style.
+04AF: 131@ = 24411 // = constant 
+008B: 155@ = $PLAYER_ACTOR // (int) 
+05AA: 192@s = 'MAN5_BK' // @s = 'short'  // ~z~You got ice cold gangstas running through your veins!
+04AF: 132@ = 24412 // = constant 
+008B: 156@ = $PLAYER_ACTOR // (int) 
+05AA: 194@s = 'MAN5_BL' // @s = 'short'  // ~z~Anybody can get a record deal,
+04AF: 133@ = 24413 // = constant 
+008B: 157@ = $PLAYER_ACTOR // (int) 
+05AA: 196@s = 'MAN5_BM' // @s = 'short'  // ~z~but only the genuine article can shake down the house!
+04AF: 134@ = 24414 // = constant 
+008B: 158@ = $PLAYER_ACTOR // (int) 
+05AA: 198@s = 'MAN5_BN' // @s = 'short'  // ~z~CJ, my man, you're a natural manager!
+04AF: 135@ = 24415 // = constant 
+0085: 159@ = 34@ // (int) 
+05AA: 200@s = 'MAN5_CA' // @s = 'short'  // ~z~He's being interviewed, huh?
+04AF: 136@ = 24417 // = constant 
+008B: 160@ = $PLAYER_ACTOR // (int) 
+0209: 10@ = random_int_in_ranges 0 2 
+if 
+  10@ == 0 
+jf @MANSON5_1183 
+05AA: 202@s = 'MAN5_CB' // @s = 'short'  // ~z~OK, let's smash this party up!
+04AF: 137@ = 24418 // = constant 
+008B: 161@ = $PLAYER_ACTOR // (int) 
+jump @MANSON5_1213 
+
+:MANSON5_1183
+05AA: 202@s = 'MAN5_BO' // @s = 'short'  // ~z~Let's go hit those life-or-death busters.
+04AF: 137@ = 24416 // = constant 
+0085: 161@ = 34@ // (int) 
+
+:MANSON5_1213
+05AA: 204@s = 'MAN5_DA' // @s = 'short'  // ~z~You fucking phonies! Sum' bitch!
+04AF: 138@ = 24419 // = constant 
+0085: 162@ = 34@ // (int) 
+05AA: 206@s = 'MAN5_DB' // @s = 'short'  // ~z~Gimme my rhyme book!
+04AF: 139@ = 24420 // = constant 
+0085: 163@ = 34@ // (int) 
+05AA: 208@s = 'MAN5_DC' // @s = 'short'  // ~z~Gimme back my chain!
+04AF: 140@ = 24421 // = constant 
+0085: 164@ = 34@ // (int) 
+05AA: 210@s = 'MAN5_DD' // @s = 'short'  // ~z~Gimme back my hoes!
+04AF: 141@ = 24422 // = constant 
+0085: 165@ = 34@ // (int) 
+05AA: 212@s = 'MAN5_EA' // @s = 'short'  // ~z~He bustin' out!
+04AF: 142@ = 24423 // = constant 
+008B: 166@ = $PLAYER_ACTOR // (int) 
+05AA: 214@s = 'MAN5_EB' // @s = 'short'  // ~z~Come on, Dogg, let's get him!
+04AF: 143@ = 24424 // = constant 
+008B: 167@ = $PLAYER_ACTOR // (int) 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+fade 1 0 
+68@ = 0 
+47@ = 0 
+69@ = 0 
+54@ = 0 
+33@ = 0 
+00BC: show_text_highpriority GXT 'MAN5_G0' time 7500 flag 1  // ~s~Take ~b~Madd Dogg~s~ to the ~y~video shoot~s~.
+
+:MANSON5_1461
+wait 0 
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_2077 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @MANSON5_1510 
+jump @MANSON5_12981 
+jump @MANSON5_1588 
+
+:MANSON5_1510
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @MANSON5_1588 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_1588 
+0811: 67@ = actor $PLAYER_ACTOR used_car 
+if 
+   Actor.InCar(34@, 67@)
+jf @MANSON5_1588 
+Car.PutAt(67@, -127.1875, -1260.738, 2.0469)
+
+:MANSON5_1588
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -12.2064 -1117.876 radius 60.0 60.0 
+jf @MANSON5_1962 
+Actor.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY -12.2064 -1117.876 and_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 
+if 
+  75.0 > $DISTANCE_BETWEEN_POINTS 
+jf @MANSON5_1923 
+040D: unload_wav 1 
+Car.RemoveReferences(45@)
+Model.Destroy(#BFINJECT)
+Model.Destroy(#QUAD)
+fade 0 0 
+
+:MANSON5_1707
+if 
+fading 
+jf @MANSON5_1731 
+wait 0 
+jump @MANSON5_1707 
+
+:MANSON5_1731
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_1785 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -13.4832 -1139.642 7.0664 
+jump @MANSON5_1805 
+
+:MANSON5_1785
+Actor.PutAt($PLAYER_ACTOR, -13.4832, -1139.642, 7.0664)
+
+:MANSON5_1805
+Actor.Angle($PLAYER_ACTOR) = 347.9809
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_1909 
+06C9: remove_actor 34@ from_group 
+if 
+   Actor.Driving(34@)
+jf @MANSON5_1879 
+0362: remove_actor 34@ from_car_and_place_at -11.4883 -1140.971 6.8764 
+jump @MANSON5_1899 
+
+:MANSON5_1879
+Actor.PutAt(34@, -11.4883, -1140.971, 6.8764)
+
+:MANSON5_1899
+Actor.Angle(34@) = 359.6364
+
+:MANSON5_1909
+jump @MANSON5_3486 
+jump @MANSON5_1955 
+
+:MANSON5_1923
+if 
+  2 > 68@ 
+jf @MANSON5_1948 
+68@ = 2 
+
+:MANSON5_1948
+gosub @MANSON5_2333 
+
+:MANSON5_1955
+jump @MANSON5_2016 
+
+:MANSON5_1962
+gosub @MANSON5_2112 
+gosub @MANSON5_2333 
+gosub @MANSON5_2604 
+gosub @MANSON5_2723 
+if 
+  33@ > 8000 
+jf @MANSON5_2016 
+gosub @MANSON5_11785 
+
+:MANSON5_2016
+077E: get_active_interior_to 65@ 
+if 
+   not 65@ == 0 
+jf @MANSON5_2070 
+00BE: text_clear_all 
+Actor.LockInCurrentPosition(34@) = True
+Marker.Disable(50@)
+Marker.Disable(37@)
+06C9: remove_actor 34@ from_group 
+jump @MANSON5_3327 
+
+:MANSON5_2070
+jump @MANSON5_2105 
+
+:MANSON5_2077
+62@ = 1 
+05AA: 63@s = 'MAN5_F0' // @s = 'short'  // ~r~Madd Dogg was killed.
+jump @MANSON5_13181 
+
+:MANSON5_2105
+jump @MANSON5_1461 
+
+:MANSON5_2112
+0871: init_jump_table 66@ total_jumps 2 default_jump 0 @MANSON5_2331 jumps 0 @MANSON5_2175 1 @MANSON5_2277 -1 @MANSON5_2331 -1 @MANSON5_2331 -1 @MANSON5_2331 -1 @MANSON5_2331 -1 @MANSON5_2331 
+
+:MANSON5_2175
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_2270 
+0811: 67@ = actor $PLAYER_ACTOR used_car 
+if 
+   Actor.InCar(34@, 67@)
+jf @MANSON5_2270 
+if 
+  $7954 == 1 
+jf @MANSON5_2258 
+0950: set_trip_skip -126.6673 -1260.804 2.0469 angle 280.0 
+
+:MANSON5_2258
+Marker.Disable(37@)
+66@ += 1 
+
+:MANSON5_2270
+jump @MANSON5_2331 
+
+:MANSON5_2277
+if 
+   not Actor.Driving(34@)
+jf @MANSON5_2324 
+0951: disable_trip_skip 
+37@ = Marker.CreateAboveActor(34@)
+07E0: set_marker 37@ type_to 1 
+018B: set_marker 37@ radar_mode 2 
+66@ -= 1 
+
+:MANSON5_2324
+jump @MANSON5_2331 
+
+:MANSON5_2331
+return 
+
+:MANSON5_2333
+0871: init_jump_table 68@ total_jumps 4 default_jump 0 @MANSON5_2602 jumps 0 @MANSON5_2396 1 @MANSON5_2499 2 @MANSON5_2532 3 @MANSON5_2569 -1 @MANSON5_2602 -1 @MANSON5_2602 -1 @MANSON5_2602 
+
+:MANSON5_2396
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+Actor.StorePos(34@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 
+if 
+  $DISTANCE_BETWEEN_POINTS > 75.0 
+jf @MANSON5_2492 
+00BC: show_text_highpriority GXT 'MAN5_G1' time 8000 flag 1  // ~s~Don't leave ~b~Madd Dogg~s~ behind you need to take him to the ~y~video shoot~s~.
+32@ = 0 
+68@ += 1 
+
+:MANSON5_2492
+jump @MANSON5_2602 
+
+:MANSON5_2499
+if 
+  32@ > 20000 
+jf @MANSON5_2525 
+68@ -= 1 
+
+:MANSON5_2525
+jump @MANSON5_2602 
+
+:MANSON5_2532
+00BC: show_text_highpriority GXT 'MAN5_G2' time 8000 flag 1  // ~s~You need to bring ~b~Madd Dogg~s~ to the ~y~video shoot~s~.
+32@ = 0 
+68@ += 1 
+jump @MANSON5_2602 
+
+:MANSON5_2569
+if 
+  32@ > 20000 
+jf @MANSON5_2595 
+68@ = 0 
+
+:MANSON5_2595
+jump @MANSON5_2602 
+
+:MANSON5_2602
+return 
+
+:MANSON5_2604
+if 
+  47@ == 0 
+jf @MANSON5_2721 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+   not Car.Wrecked(45@)
+jf @MANSON5_2721 
+Car.StorePos(45@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 
+if 
+  $DISTANCE_BETWEEN_POINTS > 150.0 
+jf @MANSON5_2721 
+Car.RemoveReferences(45@)
+Model.Destroy(#BFINJECT)
+47@ += 1 
+
+:MANSON5_2721
+return 
+
+:MANSON5_2723
+0871: init_jump_table 69@ total_jumps 3 default_jump 0 @MANSON5_3325 jumps 0 @MANSON5_2786 1 @MANSON5_2866 2 @MANSON5_2917 -1 @MANSON5_3325 -1 @MANSON5_3325 -1 @MANSON5_3325 -1 @MANSON5_3325 
+
+:MANSON5_2786
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -12.2064 -1117.876 radius 250.0 250.0 
+jf @MANSON5_2859 
+023C: load_special_actor 'OGLOC' as 2 // models 290-299 
+Model.Load(#SBFYRI)
+Model.Load(#NEWSVAN)
+Model.Load(#VORTEX)
+69@ += 1 
+
+:MANSON5_2859
+jump @MANSON5_3325 
+
+:MANSON5_2866
+if or
+823D:   not special_actor 2 loaded 
+   not Model.Available(#SBFYRI)
+   not Model.Available(#NEWSVAN)
+   not Model.Available(#VORTEX)
+jf @MANSON5_2910 
+jump @MANSON5_3325 
+jump @MANSON5_2917 
+
+:MANSON5_2910
+69@ += 1 
+
+:MANSON5_2917
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -12.2064 -1117.876 radius 150.0 150.0 
+jf @MANSON5_3318 
+35@ = Actor.Create(Special, #SPECIAL02, -6.499, -1109.111, 6.5441)
+Actor.Angle(35@) = 333.1959
+Actor.LockInCurrentPosition(35@) = True
+Actor.SetImmunities(35@, 1, 1, 1, 1, 1)
+060B: set_actor 35@ decision_maker_to 52@ 
+0568: set_actor 35@ untargetable 1 
+039E: set_actor 35@ locked 1 while_in_car 
+73@ = Actor.Create(Mission1, #SBFYRI, -7.174, -1108.2, 6.4475)
+Actor.Angle(73@) = 210.4687
+Actor.LockInCurrentPosition(73@) = True
+Actor.SetImmunities(73@, 1, 1, 1, 1, 1)
+74@ = Car.Create(#NEWSVAN, -12.3019, -1108.927, 6.837)
+Car.Angle(74@) = 153.1079
+Car.LockInCurrentPosition(74@) = True
+Car.SetImmunities(74@, 1, 1, 1, 1, 1)
+39@ = Car.Create(#VORTEX, -7.4398, -1116.85, 7.0583)
+Car.Angle(39@) = 278.5895
+Car.LockInCurrentPosition(39@) = True
+Car.SetImmunities(39@, 1, 1, 1, 1, 1)
+40@ = Car.Create(#VORTEX, -4.862, -1120.453, 7.0799)
+Car.Angle(40@) = 266.0038
+Car.LockInCurrentPosition(40@) = True
+Car.SetImmunities(40@, 1, 1, 1, 1, 1)
+41@ = Car.Create(#VORTEX, -7.0309, -1111.909, 6.726)
+Car.Angle(41@) = 269.4002
+Car.LockInCurrentPosition(41@) = True
+Car.SetImmunities(41@, 1, 1, 1, 1, 1)
+69@ += 1 
+
+:MANSON5_3318
+jump @MANSON5_3325 
+
+:MANSON5_3325
+return 
+
+:MANSON5_3327
+wait 0 
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_3451 
+09E8: 65@ = actor $PLAYER_ACTOR active_interior 
+if 
+  65@ == 0 
+jf @MANSON5_3444 
+Actor.LockInCurrentPosition(34@) = False
+087F: set_actor 34@ never_leave_group 1 
+0631: put_actor 34@ in_group 51@ 
+37@ = Marker.CreateAboveActor(34@)
+07E0: set_marker 37@ type_to 1 
+018B: set_marker 37@ radar_mode 2 
+018A: 50@ = create_checkpoint_at -12.2064 -1117.876 7.0705 
+jump @MANSON5_1461 
+
+:MANSON5_3444
+jump @MANSON5_3479 
+
+:MANSON5_3451
+62@ = 1 
+05AA: 63@s = 'MAN5_F0' // @s = 'short'  // ~r~Madd Dogg was killed.
+jump @MANSON5_13181 
+
+:MANSON5_3479
+jump @MANSON5_3327 
+
+:MANSON5_3486
+if 
+  3 > 69@ 
+jf @MANSON5_3522 
+wait 0 
+gosub @MANSON5_2723 
+jump @MANSON5_3486 
+
+:MANSON5_3522
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+Car.Destroy(45@)
+Model.Load(#MARQUIS)
+Model.Load(#REEFER)
+Model.Load(#WATERJUMPX2)
+07C0: load_path 700 
+07C0: load_path 701 
+
+:MANSON5_3562
+if or
+   not Model.Available(#MARQUIS)
+   not Model.Available(#REEFER)
+   not Model.Available(#WATERJUMPX2)
+87C1:   not path 700 available 
+87C1:   not path 701 available 
+jf @MANSON5_3609 
+wait 0 
+jump @MANSON5_3562 
+
+:MANSON5_3609
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_3632 
+Actor.LockInCurrentPosition(35@) = False
+
+:MANSON5_3632
+if 
+   not Actor.Dead(73@)
+jf @MANSON5_3655 
+Actor.LockInCurrentPosition(73@) = False
+
+:MANSON5_3655
+if 
+   not Car.Wrecked(74@)
+jf @MANSON5_3678 
+Car.LockInCurrentPosition(74@) = False
+
+:MANSON5_3678
+if 
+   not Car.Wrecked(39@)
+jf @MANSON5_3701 
+Car.LockInCurrentPosition(39@) = False
+
+:MANSON5_3701
+if 
+   not Car.Wrecked(40@)
+jf @MANSON5_3724 
+Car.LockInCurrentPosition(40@) = False
+
+:MANSON5_3724
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_3747 
+Car.LockInCurrentPosition(41@) = False
+
+:MANSON5_3747
+if 
+  $7954 == 0 
+jf @MANSON5_3772 
+$7954 += 1 
+
+:MANSON5_3772
+Camera.SetPosition(-5.0753, -1108.265, 7.9567, 0.0, 0.0, 0.0)
+Camera.PointAt(-6.004, -1108.63, 7.8925, 2)
+53@ = 0 
+0395: clear_area 1 at -12.3019 -1108.927 6.837 radius 500.0 
+0951: disable_trip_skip 
+118@ = 6 
+119@ = 18 
+fade 1 0 
+0707: start_scene_skip_to @MANSON5_4718 
+32@ = 0 
+
+:MANSON5_3890
+if 
+  2000 > 32@ 
+jf @MANSON5_3927 
+wait 0 
+gosub @MANSON5_11785 
+jump @MANSON5_3890 
+
+:MANSON5_3927
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0920: point_camera -6.004 -1108.63 7.8925 transverse_to -5.5642 -1108.835 7.8925 time 2000 smooth_transition 1 
+if and
+   not Actor.Dead(35@)
+   not Actor.Dead(34@)
+   not Actor.Dead(73@)
+jf @MANSON5_4012 
+0639: AS_actor 35@ rotate_to_actor 34@ 
+0639: AS_actor 73@ rotate_to_actor 34@ 
+
+:MANSON5_4012
+32@ = 0 
+
+:MANSON5_4019
+if 
+  1800 > 32@ 
+jf @MANSON5_4056 
+wait 0 
+gosub @MANSON5_11785 
+jump @MANSON5_4019 
+
+:MANSON5_4056
+if 
+   not Car.Wrecked(39@)
+jf @MANSON5_4127 
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -8.0333 -1118.52 7.0531 mode 6 time -2 ms // versionA 
+05CB: AS_actor -1 enter_car 39@ as_driver -2 ms 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:MANSON5_4127
+if and
+   not Actor.Dead(34@)
+   not Car.Wrecked(40@)
+jf @MANSON5_4203 
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -4.9313 -1122.054 7.0188 mode 6 time -2 ms // versionA 
+05CB: AS_actor -1 enter_car 40@ as_driver -2 ms 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 34@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:MANSON5_4203
+32@ = 0 
+
+:MANSON5_4210
+if 
+  250 > 32@ 
+jf @MANSON5_4247 
+wait 0 
+gosub @MANSON5_11785 
+jump @MANSON5_4210 
+
+:MANSON5_4247
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(41@)
+jf @MANSON5_4278 
+05CB: AS_actor 35@ enter_car 41@ as_driver -2 ms 
+
+:MANSON5_4278
+48@ = 0 
+
+:MANSON5_4285
+if 
+  48@ == 0 
+jf @MANSON5_4378 
+wait 0 
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(41@)
+jf @MANSON5_4364 
+if 
+   Actor.InCar(35@, 41@)
+jf @MANSON5_4364 
+48@ = 1 
+Car.SetSpeedInstantly(41@, 8.0)
+
+:MANSON5_4364
+gosub @MANSON5_11785 
+jump @MANSON5_4285 
+
+:MANSON5_4378
+068D: get_camera_position_to 55@ 56@ 57@ 
+068E: get_camera_target_point_to 58@ 59@ 60@ 
+0925: restore_camera_to_user_defined 
+Camera.SetPosition(55@, 56@, 57@, 0.0, 0.0, 0.0)
+Camera.PointAt(58@, 59@, 60@, 2)
+32@ = 0 
+33@ = 0 
+48@ = 0 
+
+:MANSON5_4462
+if 
+  4500 > 32@ 
+jf @MANSON5_4667 
+wait 0 
+55@ += 0.0085 
+56@ -= 0.05 
+58@ += 0.0085 
+59@ -= 0.05 
+Camera.SetPosition(55@, 56@, 57@, 0.0, 0.0, 0.0)
+Camera.PointAt(58@, 59@, 60@, 2)
+if and
+  33@ > 800 
+  48@ == 0 
+jf @MANSON5_4653 
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_4653 
+Car.SetSpeedInstantly(41@, 0.0)
+Car.PutAt(41@, -15.191, -1107.97, 7.0385)
+Car.Angle(41@) = 345.91
+48@ += 1 
+
+:MANSON5_4653
+gosub @MANSON5_11785 
+jump @MANSON5_4462 
+
+:MANSON5_4667
+32@ = 0 
+
+:MANSON5_4674
+if 
+  1800 > 32@ 
+jf @MANSON5_4711 
+wait 0 
+gosub @MANSON5_11785 
+jump @MANSON5_4674 
+
+:MANSON5_4711
+53@ = 1 
+
+:MANSON5_4718
+0701: end_scene_skip 
+040D: unload_wav 1 
+040D: unload_wav 2 
+05AA: 168@s = 'MAN5_FA' // @s = 'short'  // ~z~Stay away from me!
+04AF: 120@ = 24425 // = constant 
+05AA: 170@s = 'MAN5_FB' // @s = 'short'  // ~z~I thought we were friends!
+04AF: 121@ = 24426 // = constant 
+05AA: 172@s = 'MAN5_FC' // @s = 'short'  // ~z~You're yesterday's news!
+04AF: 122@ = 24427 // = constant 
+05AA: 174@s = 'MAN5_FD' // @s = 'short'  // ~z~Kids want Loc! LOC!
+04AF: 123@ = 24428 // = constant 
+05AA: 176@s = 'MAN5_FE' // @s = 'short'  // ~z~Madd Dogg ain't nothing!
+04AF: 124@ = 24429 // = constant 
+05AA: 178@s = 'MAN5_FF' // @s = 'short'  // ~z~Madd Dogg, you a drunk ass busta!
+04AF: 125@ = 24430 // = constant 
+05AA: 180@s = 'MAN5_FG' // @s = 'short'  // ~z~The kids, they don't want you no more!
+04AF: 126@ = 24431 // = constant 
+05AA: 182@s = 'MAN5_FH' // @s = 'short'  // ~z~You're washed up, both of you!
+04AF: 127@ = 24432 // = constant 
+05AA: 184@s = 'MAN5_FJ' // @s = 'short'  // ~z~Smoke's gonna deal with you pussies!
+04AF: 128@ = 24433 // = constant 
+118@ = 8 
+119@ = 0 
+if 
+  53@ == 0 
+jf @MANSON5_5131 
+fade 0 0 
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(41@)
+jf @MANSON5_5017 
+if 
+   not Actor.InCar(35@, 41@)
+jf @MANSON5_5017 
+0687: clear_actor 35@ task 
+036A: put_actor 35@ in_car 41@ 
+
+:MANSON5_5017
+if and
+   not Actor.Dead(34@)
+   not Car.Wrecked(40@)
+jf @MANSON5_5070 
+if 
+   not Actor.InCar(34@, 40@)
+jf @MANSON5_5070 
+0687: clear_actor 34@ task 
+036A: put_actor 34@ in_car 40@ 
+
+:MANSON5_5070
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(39@)
+jf @MANSON5_5123 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 39@)
+jf @MANSON5_5123 
+0687: clear_actor $PLAYER_ACTOR task 
+036A: put_actor $PLAYER_ACTOR in_car 39@ 
+
+:MANSON5_5123
+0925: restore_camera_to_user_defined 
+fade 1 0 
+
+:MANSON5_5131
+00BC: show_text_highpriority GXT 'MAN5_G4' time 8000 flag 1  // ~r~OG Loc's~s~ making a run for it, don't let him get away.
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+if 
+   not Actor.Dead(73@)
+jf @MANSON5_5205 
+Actor.LockInCurrentPosition(73@) = False
+Actor.SetImmunities(73@, 0, 0, 0, 0, 0)
+Actor.RemoveReferences(73@)
+
+:MANSON5_5205
+if 
+   not Car.Wrecked(74@)
+jf @MANSON5_5248 
+Car.LockInCurrentPosition(74@) = False
+Car.SetImmunities(74@, 0, 0, 0, 0, 0)
+Car.RemoveReferences(74@)
+
+:MANSON5_5248
+Model.Destroy(#SBFYRI)
+Model.Destroy(#NEWSVAN)
+if and
+   not Car.Wrecked(41@)
+   not Car.Wrecked(40@)
+jf @MANSON5_5360 
+Car.SetImmunities(41@, 0, 0, 0, 1, 0)
+Car.SetImmunities(40@, 0, 0, 0, 1, 0)
+0971: sync_water 
+05EB: assign_car 41@ to_path 700 
+05EB: assign_car 40@ to_path 701 
+Marker.Disable(50@)
+Marker.Disable(37@)
+38@ = Marker.CreateAboveCar(41@)
+37@ = Marker.CreateAboveCar(40@)
+07E0: set_marker 37@ type_to 1 
+
+:MANSON5_5360
+if and
+   not Actor.Dead(35@)
+   not Actor.Dead(34@)
+   not Car.Wrecked(39@)
+jf @MANSON5_5431 
+Actor.SetImmunities(35@, 0, 0, 0, 1, 0)
+Actor.SetImmunities(34@, 0, 0, 0, 1, 0)
+Car.SetImmunities(39@, 0, 0, 0, 0, 0)
+
+:MANSON5_5431
+75@ = Car.Create(#MARQUIS, 64.6248, -1577.02, 1.0)
+Car.Angle(75@) = 120.3362
+0323: enable_boat 75@ anchor 1 
+76@ = Car.Create(#MARQUIS, 33.6099, -1568.462, 1.0)
+Car.Angle(76@) = 284.2679
+0323: enable_boat 76@ anchor 1 
+77@ = Car.Create(#REEFER, 44.502, -1623.984, 1.0)
+Car.Angle(77@) = 75.0
+0323: enable_boat 77@ anchor 1 
+78@ = Car.Create(#MARQUIS, 27.4441, -1654.804, 1.0)
+Car.Angle(78@) = 60.0
+0323: enable_boat 78@ anchor 1 
+79@ = Car.Create(#MARQUIS, 65.1404, -1664.87, 1.0)
+Car.Angle(79@) = 95.0
+0323: enable_boat 79@ anchor 1 
+80@ = Car.Create(#REEFER, 53.4007, -1694.956, 1.0)
+Car.Angle(80@) = 231.9938
+0323: enable_boat 80@ anchor 1 
+81@ = Car.Create(#REEFER, 33.4799, -1697.462, 1.0)
+Car.Angle(81@) = 106.8489
+0323: enable_boat 81@ anchor 1 
+82@ = Car.Create(#MARQUIS, 57.1376, -1767.301, 1.0)
+Car.Angle(82@) = 286.5185
+0323: enable_boat 82@ anchor 1 
+83@ = Object.Init(#WATERJUMPX2, 137.9184, -1895.06, 0.9)
+Object.Angle(83@) = 235.0
+95@ = 0 
+97@ = 0 
+32@ = 0 
+
+:MANSON5_5805
+wait 0 
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_6053 
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_6018 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+gosub @MANSON5_9068 
+gosub @MANSON5_9474 
+Actor.StorePos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+if 
+  $DISTANCE_BETWEEN_POINTS >= 240.0 
+jf @MANSON5_5949 
+62@ = 1 
+05AA: 63@s = 'MAN5_F2' // @s = 'short'  // ~r~You lost OG Loc.
+jump @MANSON5_13181 
+
+:MANSON5_5949
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 820.3243 -1918.42 11.8624 cornerB 852.5646 -1894.725 13.0 
+jf @MANSON5_6004 
+jump @MANSON5_6088 
+
+:MANSON5_6004
+gosub @MANSON5_11785 
+jump @MANSON5_6046 
+
+:MANSON5_6018
+62@ = 1 
+05AA: 63@s = 'MAN5_F3' // @s = 'short'  // ~r~You killed OG Loc.
+jump @MANSON5_13181 
+
+:MANSON5_6046
+jump @MANSON5_6081 
+
+:MANSON5_6053
+62@ = 1 
+05AA: 63@s = 'MAN5_F0' // @s = 'short'  // ~r~Madd Dogg was killed.
+jump @MANSON5_13181 
+
+:MANSON5_6081
+jump @MANSON5_5805 
+
+:MANSON5_6088
+fade 0 0 
+041E: set_radio_station 11 
+03DE: set_pedestrians_density_multiplier_to 0.3 
+if 
+   not Car.Wrecked(39@)
+jf @MANSON5_6169 
+Car.Health(39@) = 2000
+Car.SetSpeedInstantly(39@, 0.0)
+Car.PutAt(39@, 824.9831, -1843.146, 11.6654)
+Car.Angle(39@) = 192.0245
+
+:MANSON5_6169
+if 
+   not Car.Wrecked(40@)
+jf @MANSON5_6251 
+if 
+060E:   car 40@ assigned_to_path 
+jf @MANSON5_6206 
+05EC: release_car 40@ from_path 
+
+:MANSON5_6206
+Car.SetSpeedInstantly(40@, 0.0)
+Car.PutAt(40@, 846.0862, -1842.421, 11.6367)
+Car.Angle(40@) = 170.999
+Marker.Disable(37@)
+
+:MANSON5_6251
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_6333 
+if 
+060E:   car 41@ assigned_to_path 
+jf @MANSON5_6288 
+05EC: release_car 41@ from_path 
+
+:MANSON5_6288
+Car.SetSpeedInstantly(41@, 0.0)
+Car.PutAt(41@, 832.5709, -2045.707, 11.8672)
+Car.Angle(41@) = 180.0
+Marker.Disable(38@)
+
+:MANSON5_6333
+Actor.RemoveReferences(73@)
+48@ = 0 
+
+:MANSON5_6345
+if 
+  8 > 48@ 
+jf @MANSON5_6386 
+Car.RemoveReferences(75@(48@,8i))
+48@ += 1 
+jump @MANSON5_6345 
+
+:MANSON5_6386
+Object.RemoveReferences(83@)
+Model.Destroy(#MARQUIS)
+Model.Destroy(#REEFER)
+Model.Destroy(#WATERJUMPX2)
+0873: release_path 700 
+0873: release_path 701 
+Model.Load(#KART)
+07C0: load_path 702 
+07C0: load_path 703 
+07C0: load_path 704 
+07C0: load_path 705 
+
+:MANSON5_6441
+if or
+   not Model.Available(#KART)
+87C1:   not path 702 available 
+87C1:   not path 703 available 
+87C1:   not path 704 available 
+87C1:   not path 705 available 
+jf @MANSON5_6488 
+wait 0 
+jump @MANSON5_6441 
+
+:MANSON5_6488
+42@ = Car.Create(#KART, 832.4061, -2046.025, 11.8672)
+Car.Angle(42@) = 343.6256
+43@ = Car.Create(#KART, 835.5082, -2047.978, 11.8672)
+Car.Angle(43@) = 0.0
+44@ = Car.Create(#KART, 839.2866, -2050.322, 11.8672)
+Car.Angle(44@) = 21.8433
+Car.LockInCurrentPosition(44@) = True
+103@ = 15.0 
+104@ = 10.0 
+102@ = 15.0 
+105@ = 835.5082 
+106@ = -2047.978 
+107@ = 11.8672 
+gosub @MANSON5_10566 
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_6701 
+if 
+860E:   not car 41@ assigned_to_path 
+jf @MANSON5_6701 
+05EB: assign_car 41@ to_path 702 
+
+:MANSON5_6701
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+fade 1 0 
+32@ = 0 
+
+:MANSON5_6725
+if 
+  1000 > 32@ 
+jf @MANSON5_6762 
+wait 0 
+gosub @MANSON5_10566 
+jump @MANSON5_6725 
+
+:MANSON5_6762
+53@ = 0 
+0707: start_scene_skip_to @MANSON5_7451 
+32@ = 0 
+
+:MANSON5_6783
+if 
+  3400 > 32@ 
+jf @MANSON5_6820 
+wait 0 
+gosub @MANSON5_10566 
+jump @MANSON5_6783 
+
+:MANSON5_6820
+if 
+   not Car.Wrecked(39@)
+jf @MANSON5_6866 
+Car.PutAt(39@, 827.2987, -2036.851, 11.8672)
+Car.Angle(39@) = 176.431
+
+:MANSON5_6866
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_6909 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 828.7999 -2036.757 11.8672 
+jump @MANSON5_6929 
+
+:MANSON5_6909
+Actor.PutAt($PLAYER_ACTOR, 828.7999, -2036.757, 11.8672)
+
+:MANSON5_6929
+Actor.Angle($PLAYER_ACTOR) = 129.8786
+if 
+   not Car.Wrecked(40@)
+jf @MANSON5_6985 
+Car.PutAt(40@, 846.0646, -2039.737, 11.8672)
+Car.Angle(40@) = 162.7406
+
+:MANSON5_6985
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_7074 
+if 
+   Actor.Driving(34@)
+jf @MANSON5_7044 
+0362: remove_actor 34@ from_car_and_place_at 844.8756 -2038.455 11.8672 
+jump @MANSON5_7064 
+
+:MANSON5_7044
+Actor.PutAt(34@, 844.8756, -2038.455, 11.8672)
+
+:MANSON5_7064
+Actor.Angle(34@) = 132.7607
+
+:MANSON5_7074
+48@ = 0 
+
+:MANSON5_7081
+if 
+  48@ == 0 
+jf @MANSON5_7156 
+wait 0 
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_7142 
+if 
+860E:   not car 41@ assigned_to_path 
+jf @MANSON5_7142 
+48@ = 1 
+
+:MANSON5_7142
+gosub @MANSON5_10566 
+jump @MANSON5_7081 
+
+:MANSON5_7156
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(44@)
+jf @MANSON5_7213 
+0615: define_AS_pack_begin 49@ 
+0633: AS_actor -1 exit_car 
+05CB: AS_actor -1 enter_car 44@ as_driver -2 ms 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 35@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:MANSON5_7213
+48@ = 0 
+
+:MANSON5_7220
+if 
+  48@ == 0 
+jf @MANSON5_7303 
+wait 0 
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(44@)
+jf @MANSON5_7289 
+if 
+   Actor.InCar(35@, 44@)
+jf @MANSON5_7289 
+48@ = 1 
+
+:MANSON5_7289
+gosub @MANSON5_10566 
+jump @MANSON5_7220 
+
+:MANSON5_7303
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_7343 
+if 
+860E:   not car 44@ assigned_to_path 
+jf @MANSON5_7343 
+05EB: assign_car 44@ to_path 703 
+
+:MANSON5_7343
+if 
+   not Car.Wrecked(42@)
+jf @MANSON5_7369 
+05CB: AS_actor $PLAYER_ACTOR enter_car 42@ as_driver -2 ms 
+
+:MANSON5_7369
+if and
+   not Actor.Dead(34@)
+   not Car.Wrecked(43@)
+jf @MANSON5_7400 
+05CB: AS_actor 34@ enter_car 43@ as_driver -2 ms 
+
+:MANSON5_7400
+32@ = 0 
+
+:MANSON5_7407
+if 
+  4500 > 32@ 
+jf @MANSON5_7444 
+wait 0 
+gosub @MANSON5_10566 
+jump @MANSON5_7407 
+
+:MANSON5_7444
+53@ = 1 
+
+:MANSON5_7451
+0701: end_scene_skip 
+if 
+  53@ == 0 
+jf @MANSON5_7477 
+fade 0 0 
+
+:MANSON5_7477
+if 
+   not Car.Wrecked(42@)
+jf @MANSON5_7556 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 42@)
+jf @MANSON5_7556 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_7548 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 0.0 0.0 0.0 
+
+:MANSON5_7548
+036A: put_actor $PLAYER_ACTOR in_car 42@ 
+
+:MANSON5_7556
+if 
+   not Car.Wrecked(39@)
+jf @MANSON5_7602 
+Car.PutAt(39@, 827.2987, -2036.851, 11.8672)
+Car.Angle(39@) = 176.431
+
+:MANSON5_7602
+if and
+   not Actor.Dead(34@)
+   not Car.Wrecked(43@)
+jf @MANSON5_7686 
+if 
+   not Actor.InCar(34@, 43@)
+jf @MANSON5_7686 
+if 
+   Actor.Driving(34@)
+jf @MANSON5_7678 
+0362: remove_actor 34@ from_car_and_place_at 0.0 0.0 0.0 
+
+:MANSON5_7678
+036A: put_actor 34@ in_car 43@ 
+
+:MANSON5_7686
+if 
+   not Car.Wrecked(40@)
+jf @MANSON5_7732 
+Car.PutAt(40@, 846.0646, -2039.737, 11.8672)
+Car.Angle(40@) = 162.7406
+
+:MANSON5_7732
+if and
+   not Actor.Dead(35@)
+   not Car.Wrecked(44@)
+jf @MANSON5_7823 
+Car.LockInCurrentPosition(44@) = False
+if 
+   not Actor.InCar(35@, 44@)
+jf @MANSON5_7823 
+if 
+   Actor.Driving(35@)
+jf @MANSON5_7815 
+0362: remove_actor 35@ from_car_and_place_at 0.0 0.0 0.0 
+
+:MANSON5_7815
+036A: put_actor 35@ in_car 44@ 
+
+:MANSON5_7823
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_7860 
+if 
+060E:   car 41@ assigned_to_path 
+jf @MANSON5_7860 
+06C5: release_car 41@ from_path 
+
+:MANSON5_7860
+95@ = 0 
+97@ = 0 
+94@ = 0.0 
+112@ = 0 
+117@ = 0 
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_7951 
+if 
+060E:   car 44@ assigned_to_path 
+jf @MANSON5_7935 
+05EC: release_car 44@ from_path 
+
+:MANSON5_7935
+05EB: assign_car 44@ to_path 704 
+38@ = Marker.CreateAboveCar(44@)
+
+:MANSON5_7951
+if 
+   not Car.Wrecked(43@)
+jf @MANSON5_8006 
+if 
+860E:   not car 43@ assigned_to_path 
+jf @MANSON5_7991 
+05EB: assign_car 43@ to_path 705 
+
+:MANSON5_7991
+37@ = Marker.CreateAboveCar(43@)
+07E0: set_marker 37@ type_to 1 
+
+:MANSON5_8006
+118@ = 10 
+119@ = 4 
+fade 1 0 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'MAN5_G5' time 8000 flag 1  // ~s~Chase after ~r~OG Loc~s~ don't lose him.
+32@ = 0 
+
+:MANSON5_8064
+wait 0 
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_8319 
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_8284 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+gosub @MANSON5_9817 
+gosub @MANSON5_10223 
+gosub @MANSON5_10788 
+gosub @MANSON5_11521 
+if 
+  54@ == 1 
+jf @MANSON5_8174 
+jump @MANSON5_8354 
+jump @MANSON5_8270 
+
+:MANSON5_8174
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_8270 
+Actor.StorePos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+if 
+  $DISTANCE_BETWEEN_POINTS >= 130.0 
+jf @MANSON5_8270 
+62@ = 1 
+05AA: 63@s = 'MAN5_F2' // @s = 'short'  // ~r~You lost OG Loc.
+jump @MANSON5_13181 
+
+:MANSON5_8270
+gosub @MANSON5_11785 
+jump @MANSON5_8312 
+
+:MANSON5_8284
+62@ = 1 
+05AA: 63@s = 'MAN5_F3' // @s = 'short'  // ~r~You killed OG Loc.
+jump @MANSON5_13181 
+
+:MANSON5_8312
+jump @MANSON5_8347 
+
+:MANSON5_8319
+62@ = 1 
+05AA: 63@s = 'MAN5_F0' // @s = 'short'  // ~r~Madd Dogg was killed.
+jump @MANSON5_13181 
+
+:MANSON5_8347
+jump @MANSON5_8064 
+
+:MANSON5_8354
+fade 0 0 
+041E: set_radio_station 11 
+Marker.Disable(37@)
+Marker.Disable(38@)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_8408 
+0811: 84@ = actor $PLAYER_ACTOR used_car 
+Car.SetSpeedInstantly(84@, 0.0)
+
+:MANSON5_8408
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_8434 
+Actor.RemoveReferences(34@)
+Model.Destroy(#VBMYCR)
+
+:MANSON5_8434
+if 
+   not Car.Wrecked(43@)
+jf @MANSON5_8476 
+if 
+060E:   car 43@ assigned_to_path 
+jf @MANSON5_8471 
+05EC: release_car 43@ from_path 
+
+:MANSON5_8471
+Car.RemoveReferences(43@)
+
+:MANSON5_8476
+Camera.SetPosition(1045.371, -1221.84, 18.9362, 0.0, 0.0, 0.0)
+Camera.PointAt(1046.241, -1221.447, 18.6378, 2)
+03BA: clear_cars_from_cube_cornerA 1071.504 -1195.558 18.6451 cornerB 1044.942 -1242.477 14.9051 
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_8606 
+if 
+060E:   car 44@ assigned_to_path 
+jf @MANSON5_8606 
+05EE: unfreeze_car 44@ while_on_path 
+06FD: set_car 44@ speed_on_path_to 1.0 
+
+:MANSON5_8606
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+fade 1 500 
+
+:MANSON5_8624
+if 
+fading 
+jf @MANSON5_8648 
+wait 0 
+jump @MANSON5_8624 
+
+:MANSON5_8648
+0707: start_scene_skip_to @MANSON5_8744 
+48@ = 0 
+
+:MANSON5_8662
+if 
+  48@ == 0 
+jf @MANSON5_8744 
+wait 0 
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_8730 
+if 
+860E:   not car 44@ assigned_to_path 
+jf @MANSON5_8723 
+48@ = 1 
+
+:MANSON5_8723
+jump @MANSON5_8737 
+
+:MANSON5_8730
+48@ = 1 
+
+:MANSON5_8737
+jump @MANSON5_8662 
+
+:MANSON5_8744
+0701: end_scene_skip 
+fade 0 0 
+
+:MANSON5_8752
+if 
+fading 
+jf @MANSON5_8776 
+wait 0 
+jump @MANSON5_8752 
+
+:MANSON5_8776
+select_interior 3 
+Player.MakeSafe($PLAYER_CHAR)
+03AF: enable_streaming 0 
+02E4: load_cutscene_data 'BHILL5B' 
+
+:MANSON5_8800
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSON5_8824 
+wait 0 
+jump @MANSON5_8800 
+
+:MANSON5_8824
+02E7: start_cutscene 
+fade 1 1000 
+
+:MANSON5_8833
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSON5_8857 
+wait 0 
+jump @MANSON5_8833 
+
+:MANSON5_8857
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MANSON5_8872
+if 
+fading 
+jf @MANSON5_8896 
+wait 0 
+jump @MANSON5_8872 
+
+:MANSON5_8896
+select_interior 0 
+Camera.SetAtPos(1180.732, -1159.114, 22.8578)
+04E4: refresh_game_renderer_at 1180.732 -1159.114 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSON5_8972 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1180.732 -1159.114 22.8578 
+jump @MANSON5_8992 
+
+:MANSON5_8972
+0972: put_actor $PLAYER_ACTOR at 1180.732 -1159.114 22.8578 no_offset 
+
+:MANSON5_8992
+Actor.Angle($PLAYER_ACTOR) = 25.4307
+32@ = 0 
+
+:MANSON5_9009
+if 
+  400 > 32@ 
+jf @MANSON5_9039 
+wait 0 
+jump @MANSON5_9009 
+
+:MANSON5_9039
+fade 1 500 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+jump @MANSON5_12981 
+
+:MANSON5_9068
+if and
+   not Car.Wrecked(40@)
+   not Actor.Dead(34@)
+jf @MANSON5_9472 
+if 
+  95@ == 0 
+jf @MANSON5_9472 
+if 
+060E:   car 40@ assigned_to_path 
+jf @MANSON5_9455 
+if 
+00F4:   actor 34@ near_actor $PLAYER_ACTOR radius 6.0 6.0 0 in_car 
+jf @MANSON5_9171 
+96@ -= 0.2 
+jump @MANSON5_9371 
+
+:MANSON5_9171
+0407: store_coords_to 85@ 86@ $TEMPVAR_FLOAT_3 from_car 40@ with_offset 0.0 4.0 0.0 
+0407: store_coords_to 87@ 88@ $TEMPVAR_FLOAT_3 from_car 40@ with_offset 2.0 2.0 0.0 
+0407: store_coords_to 89@ 90@ $TEMPVAR_FLOAT_3 from_car 40@ with_offset -2.0 2.0 0.0 
+0509: 91@ = distance_between_XY 85@ 86@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+91@ *= 2.0 
+0509: 92@ = distance_between_XY 87@ 88@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0509: 93@ = distance_between_XY 89@ 90@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0087: 61@ = 91@ // (float) 
+0063: 61@ -= 92@ // (float) 
+0063: 61@ -= 93@ // (float) 
+61@ /= 300.0 
+61@ *= -1.0 
+005B: 96@ += 61@ // (float) 
+
+:MANSON5_9371
+if 
+  96@ > 1.0 
+jf @MANSON5_9409 
+96@ = 1.0 
+jump @MANSON5_9440 
+
+:MANSON5_9409
+if 
+  0.0 > 96@ 
+jf @MANSON5_9440 
+96@ = 0.0 
+
+:MANSON5_9440
+06FD: set_car 40@ speed_on_path_to 96@ 
+jump @MANSON5_9472 
+
+:MANSON5_9455
+Car.SetSpeedInstantly(40@, 0.0)
+95@ = -1 
+
+:MANSON5_9472
+return 
+
+:MANSON5_9474
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_9815 
+if 
+  97@ == 0 
+jf @MANSON5_9815 
+if 
+060E:   car 41@ assigned_to_path 
+jf @MANSON5_9798 
+0407: store_coords_to 85@ 86@ $TEMPVAR_FLOAT_3 from_car 41@ with_offset 0.0 -18.0 0.0 
+0407: store_coords_to 87@ 88@ $TEMPVAR_FLOAT_3 from_car 41@ with_offset 2.0 -11.0 0.0 
+0407: store_coords_to 89@ 90@ $TEMPVAR_FLOAT_3 from_car 41@ with_offset -2.0 -11.0 0.0 
+0509: 91@ = distance_between_XY 85@ 86@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+91@ *= 2.0 
+0509: 92@ = distance_between_XY 87@ 88@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0509: 93@ = distance_between_XY 89@ 90@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0087: 61@ = 91@ // (float) 
+0063: 61@ -= 92@ // (float) 
+0063: 61@ -= 93@ // (float) 
+61@ /= 300.0 
+005B: 98@ += 61@ // (float) 
+if 
+  98@ > 1.4 
+jf @MANSON5_9752 
+98@ = 1.4 
+jump @MANSON5_9783 
+
+:MANSON5_9752
+if 
+  0.9 > 98@ 
+jf @MANSON5_9783 
+98@ = 0.9 
+
+:MANSON5_9783
+06FD: set_car 41@ speed_on_path_to 98@ 
+jump @MANSON5_9815 
+
+:MANSON5_9798
+Car.SetSpeedInstantly(41@, 0.0)
+97@ = -1 
+
+:MANSON5_9815
+return 
+
+:MANSON5_9817
+if and
+   not Car.Wrecked(43@)
+   not Actor.Dead(34@)
+jf @MANSON5_10221 
+if 
+  95@ == 0 
+jf @MANSON5_10221 
+if 
+060E:   car 43@ assigned_to_path 
+jf @MANSON5_10204 
+if 
+00F4:   actor 34@ near_actor $PLAYER_ACTOR radius 6.0 6.0 0 in_car 
+jf @MANSON5_9920 
+96@ -= 0.2 
+jump @MANSON5_10120 
+
+:MANSON5_9920
+0407: store_coords_to 85@ 86@ $TEMPVAR_FLOAT_3 from_car 43@ with_offset 0.0 4.0 0.0 
+0407: store_coords_to 87@ 88@ $TEMPVAR_FLOAT_3 from_car 43@ with_offset 2.0 2.0 0.0 
+0407: store_coords_to 89@ 90@ $TEMPVAR_FLOAT_3 from_car 43@ with_offset -2.0 2.0 0.0 
+0509: 91@ = distance_between_XY 85@ 86@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+91@ *= 2.0 
+0509: 92@ = distance_between_XY 87@ 88@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0509: 93@ = distance_between_XY 89@ 90@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0087: 61@ = 91@ // (float) 
+0063: 61@ -= 92@ // (float) 
+0063: 61@ -= 93@ // (float) 
+61@ /= 150.0 
+61@ *= -1.0 
+005B: 96@ += 61@ // (float) 
+
+:MANSON5_10120
+if 
+  96@ > 1.05 
+jf @MANSON5_10158 
+96@ = 1.05 
+jump @MANSON5_10189 
+
+:MANSON5_10158
+if 
+  0.0 > 96@ 
+jf @MANSON5_10189 
+96@ = 0.0 
+
+:MANSON5_10189
+06FD: set_car 43@ speed_on_path_to 96@ 
+jump @MANSON5_10221 
+
+:MANSON5_10204
+Car.SetSpeedInstantly(43@, 0.0)
+95@ = -1 
+
+:MANSON5_10221
+return 
+
+:MANSON5_10223
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_10564 
+if 
+  97@ == 0 
+jf @MANSON5_10564 
+if 
+060E:   car 44@ assigned_to_path 
+jf @MANSON5_10547 
+0407: store_coords_to 85@ 86@ $TEMPVAR_FLOAT_3 from_car 44@ with_offset 0.0 -18.0 0.0 
+0407: store_coords_to 87@ 88@ $TEMPVAR_FLOAT_3 from_car 44@ with_offset 2.0 -11.0 0.0 
+0407: store_coords_to 89@ 90@ $TEMPVAR_FLOAT_3 from_car 44@ with_offset -2.0 -11.0 0.0 
+0509: 91@ = distance_between_XY 85@ 86@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+91@ *= 2.0 
+0509: 92@ = distance_between_XY 87@ 88@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0509: 93@ = distance_between_XY 89@ 90@ and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+0087: 61@ = 91@ // (float) 
+0063: 61@ -= 92@ // (float) 
+0063: 61@ -= 93@ // (float) 
+61@ /= 300.0 
+005B: 98@ += 61@ // (float) 
+if 
+  98@ > 1.2 
+jf @MANSON5_10501 
+98@ = 1.2 
+jump @MANSON5_10532 
+
+:MANSON5_10501
+if 
+  0.6 > 98@ 
+jf @MANSON5_10532 
+98@ = 0.6 
+
+:MANSON5_10532
+06FD: set_car 44@ speed_on_path_to 98@ 
+jump @MANSON5_10564 
+
+:MANSON5_10547
+Car.SetSpeedInstantly(44@, 0.0)
+44@ = -1 
+
+:MANSON5_10564
+return 
+
+:MANSON5_10566
+0871: init_jump_table 99@ total_jumps 1 default_jump 0 @MANSON5_10667 jumps 0 @MANSON5_10629 -1 @MANSON5_10667 -1 @MANSON5_10667 -1 @MANSON5_10667 -1 @MANSON5_10667 -1 @MANSON5_10667 -1 @MANSON5_10667 
+
+:MANSON5_10629
+if 
+  255.0 > 103@ 
+jf @MANSON5_10660 
+103@ += 0.35 
+
+:MANSON5_10660
+jump @MANSON5_10667 
+
+:MANSON5_10667
+02F7: 110@ = cosine 103@ // (float) 
+02F6: 111@ = sine 103@ // (float) 
+0087: 108@ = 104@ // (float) 
+006B: 108@ *= 110@ // (float) 
+0087: 109@ = 104@ // (float) 
+006B: 109@ *= 111@ // (float) 
+0087: 100@ = 105@ // (float) 
+005B: 100@ += 108@ // (float) 
+0087: 101@ = 106@ // (float) 
+005B: 101@ += 109@ // (float) 
+Camera.SetPosition(100@, 101@, 102@, 0.0, 0.0, 0.0)
+Camera.PointAt(105@, 106@, 107@, 2)
+return 
+
+:MANSON5_10788
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_11519 
+0871: init_jump_table 112@ total_jumps 5 default_jump 0 @MANSON5_11519 jumps 0 @MANSON5_10867 1 @MANSON5_10971 2 @MANSON5_11311 3 @MANSON5_11373 4 @MANSON5_11437 -1 @MANSON5_11519 -1 @MANSON5_11519 
+
+:MANSON5_10867
+if 
+00EE:   actor 35@ sphere 0 near_point 748.4916 -1812.361 radius 2.0 2.0 in_car 
+jf @MANSON5_10964 
+if 
+86BD:   not no_obstacles_between $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD and 748.4916 -1812.361 12.0297 solid 1 car 0 actor 0 object 0 particle 0 
+jf @MANSON5_10952 
+
+:MANSON5_10952
+Model.Load(#HOTDOG)
+112@ += 1 
+
+:MANSON5_10964
+jump @MANSON5_11519 
+
+:MANSON5_10971
+if 
+00EE:   actor 35@ sphere 0 near_point 662.4983 -1791.844 radius 2.0 2.0 in_car 
+jf @MANSON5_11304 
+if 
+   Model.Available(#HOTDOG)
+jf @MANSON5_11105 
+if 
+86BD:   not no_obstacles_between $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD and 532.9616 -1768.656 4.698 solid 1 car 0 actor 0 object 0 particle 0 
+jf @MANSON5_11105 
+114@ = Car.Create(#HOTDOG, 532.9616, -1768.656, 4.698)
+Car.Angle(114@) = 270.0
+
+:MANSON5_11105
+01E8: create_forbidden_for_cars_cube_cornerA 226.1833 -1631.007 40.0 cornerB 546.4532 -1423.991 12.0 
+01E8: create_forbidden_for_cars_cube_cornerA 510.3661 -1431.656 10.0 cornerB 645.8312 -1387.312 20.0 
+01E8: create_forbidden_for_cars_cube_cornerA 646.6142 -1389.016 10.0 cornerB 620.9656 -1310.468 20.0 
+01E8: create_forbidden_for_cars_cube_cornerA 620.9656 -1310.468 10.0 cornerB 947.811 -1335.012 20.0 
+01E8: create_forbidden_for_cars_cube_cornerA 948.2631 -1335.406 10.0 cornerB 934.2357 -1229.938 20.0 
+01E8: create_forbidden_for_cars_cube_cornerA 804.0421 -1329.191 10.0 cornerB 789.3583 -1159.008 24.0 
+112@ += 1 
+
+:MANSON5_11304
+jump @MANSON5_11519 
+
+:MANSON5_11311
+if 
+00EE:   actor 35@ sphere 0 near_point 394.1295 -1801.128 radius 2.0 2.0 in_car 
+jf @MANSON5_11366 
+Model.Destroy(#HOTDOG)
+Car.RemoveReferences(114@)
+112@ += 1 
+
+:MANSON5_11366
+jump @MANSON5_11519 
+
+:MANSON5_11373
+if 
+00EE:   actor 35@ sphere 0 near_point 1030.758 -1223.58 radius 2.0 2.0 in_car 
+jf @MANSON5_11430 
+05ED: freeze_car 44@ while_on_path 
+112@ += 1 
+jump @MANSON5_11437 
+
+:MANSON5_11430
+jump @MANSON5_11519 
+
+:MANSON5_11437
+if 
+   not Actor.Dead(35@)
+jf @MANSON5_11512 
+Actor.StorePos(35@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD 
+if 
+  40.0 >= $DISTANCE_BETWEEN_POINTS 
+jf @MANSON5_11512 
+54@ = 1 
+
+:MANSON5_11512
+jump @MANSON5_11519 
+
+:MANSON5_11519
+return 
+
+:MANSON5_11521
+0871: init_jump_table 117@ total_jumps 2 default_jump 0 @MANSON5_11783 jumps 0 @MANSON5_11584 1 @MANSON5_11645 -1 @MANSON5_11783 -1 @MANSON5_11783 -1 @MANSON5_11783 -1 @MANSON5_11783 -1 @MANSON5_11783 
+
+:MANSON5_11584
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY 1064.547 -1218.083 
+if 
+  250.0 > $DISTANCE_BETWEEN_POINTS 
+jf @MANSON5_11638 
+Model.Load(#BURRITO)
+117@ += 1 
+
+:MANSON5_11638
+jump @MANSON5_11783 
+
+:MANSON5_11645
+if 
+   Model.Available(#BURRITO)
+jf @MANSON5_11776 
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY 1064.547 -1218.083 
+if 
+  80.0 > $DISTANCE_BETWEEN_POINTS 
+jf @MANSON5_11776 
+115@ = Car.Create(#BURRITO, 1064.547, -1218.083, 15.928)
+Car.Angle(115@) = 191.9481
+116@ = Car.Create(#BURRITO, 1050.6, -1222.692, 15.8704)
+Car.Angle(116@) = 111.6362
+117@ += 1 
+
+:MANSON5_11776
+jump @MANSON5_11783 
+
+:MANSON5_11783
+return 
+
+:MANSON5_11785
+0871: init_jump_table 118@ total_jumps 12 default_jump 0 @MANSON5_12979 jumps 0 @MANSON5_11913 1 @MANSON5_12009 2 @MANSON5_12056 3 @MANSON5_12308 4 @MANSON5_12355 5 @MANSON5_12430 6 @MANSON5_12477 
+0872: jump_table_jumps 7 @MANSON5_12552 8 @MANSON5_12599 9 @MANSON5_12742 10 @MANSON5_12789 11 @MANSON5_12932 -1 @MANSON5_12979 -1 @MANSON5_12979 -1 @MANSON5_12979 -1 @MANSON5_12979 
+
+:MANSON5_11913
+if 
+  3 > 119@ 
+jf @MANSON5_11995 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 144@(119@,24i) 
+119@ += 1 
+118@ += 1 
+jump @MANSON5_12009 
+
+:MANSON5_11995
+118@ = 2 
+jump @MANSON5_12979 
+
+:MANSON5_12009
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12049 
+118@ = 0 
+$1285($1288,2i) = -4 
+
+:MANSON5_12049
+jump @MANSON5_12979 
+
+:MANSON5_12056
+if 
+  69@ == 3 
+jf @MANSON5_12133 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point -12.2064 -1117.876 radius 120.0 120.0 
+jf @MANSON5_12133 
+118@ += 2 
+119@ = 16 
+jump @MANSON5_12979 
+
+:MANSON5_12133
+if 
+  66@ == 1 
+jf @MANSON5_12233 
+if 
+  16 > 119@ 
+jf @MANSON5_12226 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 144@(119@,24i) 
+119@ += 1 
+118@ += 1 
+
+:MANSON5_12226
+jump @MANSON5_12308 
+
+:MANSON5_12233
+if 
+   not 119@ == 3 
+jf @MANSON5_12301 
+if 
+   not 0 > $1285[0] 
+jf @MANSON5_12276 
+$1285[0] = -2 
+
+:MANSON5_12276
+if 
+   not 0 > $1285[0] 
+jf @MANSON5_12301 
+$1285[1] = -2 
+
+:MANSON5_12301
+jump @MANSON5_12979 
+
+:MANSON5_12308
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12348 
+118@ = 2 
+$1285($1288,2i) = -4 
+
+:MANSON5_12348
+jump @MANSON5_12979 
+
+:MANSON5_12355
+if 
+  18 > 119@ 
+jf @MANSON5_12430 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 144@(119@,24i) 
+119@ += 1 
+118@ += 1 
+
+:MANSON5_12430
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12470 
+118@ = 4 
+$1285($1288,2i) = -4 
+
+:MANSON5_12470
+jump @MANSON5_12979 
+
+:MANSON5_12477
+if 
+  24 > 119@ 
+jf @MANSON5_12552 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 144@(119@,24i) 
+119@ += 1 
+118@ += 1 
+
+:MANSON5_12552
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12592 
+118@ = 6 
+$1285($1288,2i) = -4 
+
+:MANSON5_12592
+jump @MANSON5_12979 
+
+:MANSON5_12599
+if 
+  4 > 119@ 
+jf @MANSON5_12742 
+if 
+  32@ > 8000 
+jf @MANSON5_12742 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 35@ radius 60.0 60.0 0 
+jf @MANSON5_12734 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 35@ 
+119@ += 1 
+118@ += 1 
+32@ = 0 
+jump @MANSON5_12742 
+
+:MANSON5_12734
+32@ = 7000 
+
+:MANSON5_12742
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12782 
+118@ = 8 
+$1285($1288,2i) = -4 
+
+:MANSON5_12782
+jump @MANSON5_12979 
+
+:MANSON5_12789
+if 
+  9 > 119@ 
+jf @MANSON5_12932 
+if 
+  32@ > 8000 
+jf @MANSON5_12932 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 35@ radius 50.0 50.0 0 
+jf @MANSON5_12924 
+008A: $1276 = 120@(119@,24i) // (int) 
+05A9: s$1281 = 168@(119@,24s) // s$ 
+create_thread @A_ALAP 2 100 35@ 
+119@ += 1 
+118@ += 1 
+32@ = 0 
+jump @MANSON5_12932 
+
+:MANSON5_12924
+32@ = 7000 
+
+:MANSON5_12932
+if 
+  $1285($1288,2i) == -3 
+jf @MANSON5_12972 
+118@ = 10 
+$1285($1288,2i) = -4 
+
+:MANSON5_12972
+jump @MANSON5_12979 
+
+:MANSON5_12979
+return 
+
+:MANSON5_12981
+$MANSION_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'MAN_5'  // Cut Throat Business
+030C: progress_made = 1 
+014C: set_parked_car_generator $5248 cars_to_generate_to 101 
+014C: set_parked_car_generator $5249 cars_to_generate_to 101 
+014C: set_parked_car_generator $5250 cars_to_generate_to 101 
+014C: set_parked_car_generator $5251 cars_to_generate_to 101 
+014C: set_parked_car_generator $5252 cars_to_generate_to 101 
+014C: set_parked_car_generator $5253 cars_to_generate_to 101 
+014C: set_parked_car_generator $5254 cars_to_generate_to 101 
+014C: set_parked_car_generator $5255 cars_to_generate_to 101 
+014C: set_parked_car_generator $5256 cars_to_generate_to 101 
+014C: set_parked_car_generator $5257 cars_to_generate_to 101 
+014C: set_parked_car_generator $5258 cars_to_generate_to 101 
+014C: set_parked_car_generator $5259 cars_to_generate_to 101 
+014C: set_parked_car_generator $5260 cars_to_generate_to 101 
+014C: set_parked_car_generator $5261 cars_to_generate_to 101 
+014C: set_parked_car_generator $5262 cars_to_generate_to 101 
+014C: set_parked_car_generator $5263 cars_to_generate_to 101 
+014C: set_parked_car_generator $5264 cars_to_generate_to 101 
+014C: set_parked_car_generator $5266 cars_to_generate_to 101 
+014C: set_parked_car_generator $5267 cars_to_generate_to 101 
+014C: set_parked_car_generator $5268 cars_to_generate_to 101 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 4 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 50 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+Marker.Disable($622)
+return 
+
+:MANSON5_13181
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @MANSON5_13249 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+
+:MANSON5_13249
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+  62@ == 1 
+jf @MANSON5_13293 
+00BC: show_text_highpriority GXT 63@s time 5000 flag 1 
+
+:MANSON5_13293
+return 
+
+:MANSON5_13295
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @MANSON5_13322 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 1 
+08F4: set_max_group_members 99 
+
+:MANSON5_13322
+create_thread @A_TERM 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+091D: remove_forbidden_for_boats_cube_cornerA 226.1833 -1631.007 40.0 cornerB 546.4532 -1423.991 12.0 
+091D: remove_forbidden_for_boats_cube_cornerA 510.3661 -1431.656 10.0 cornerB 645.8312 -1387.312 20.0 
+091D: remove_forbidden_for_boats_cube_cornerA 646.6142 -1389.016 10.0 cornerB 620.9656 -1310.468 20.0 
+091D: remove_forbidden_for_boats_cube_cornerA 620.9656 -1310.468 10.0 cornerB 947.811 -1335.012 20.0 
+091D: remove_forbidden_for_boats_cube_cornerA 948.2631 -1335.406 10.0 cornerB 934.2357 -1229.938 20.0 
+091D: remove_forbidden_for_boats_cube_cornerA 804.0421 -1329.191 10.0 cornerB 789.3583 -1159.008 24.0 
+Marker.Disable(50@)
+Marker.Disable(37@)
+Marker.Disable(38@)
+if 
+   not Actor.Dead(34@)
+jf @MANSON5_13565 
+06C9: remove_actor 34@ from_group 
+
+:MANSON5_13565
+Actor.DestroyWithFade(34@)
+Actor.DestroyWithFade(35@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+Actor.RemoveReferences(73@)
+if 
+   not Actor.Dead(73@)
+jf @MANSON5_13626 
+Actor.LockInCurrentPosition(73@) = False
+Actor.SetImmunities(73@, 0, 0, 0, 0, 0)
+
+:MANSON5_13626
+Car.RemoveReferences(74@)
+if 
+   not Car.Wrecked(74@)
+jf @MANSON5_13669 
+Car.LockInCurrentPosition(74@) = False
+Car.SetImmunities(74@, 0, 0, 0, 0, 0)
+
+:MANSON5_13669
+Car.RemoveReferences(39@)
+if 
+   not Car.Wrecked(40@)
+jf @MANSON5_13711 
+if 
+060E:   car 40@ assigned_to_path 
+jf @MANSON5_13711 
+05EC: release_car 40@ from_path 
+
+:MANSON5_13711
+Car.RemoveReferences(40@)
+if 
+   not Car.Wrecked(41@)
+jf @MANSON5_13753 
+if 
+060E:   car 41@ assigned_to_path 
+jf @MANSON5_13753 
+05EC: release_car 41@ from_path 
+
+:MANSON5_13753
+Car.RemoveReferences(41@)
+Car.RemoveReferences(42@)
+if 
+   not Car.Wrecked(43@)
+jf @MANSON5_13800 
+if 
+060E:   car 43@ assigned_to_path 
+jf @MANSON5_13800 
+05EC: release_car 43@ from_path 
+
+:MANSON5_13800
+Car.RemoveReferences(43@)
+if 
+   not Car.Wrecked(44@)
+jf @MANSON5_13842 
+if 
+060E:   car 44@ assigned_to_path 
+jf @MANSON5_13842 
+05EC: release_car 44@ from_path 
+
+:MANSON5_13842
+Car.RemoveReferences(44@)
+Car.RemoveReferences(45@)
+Car.RemoveReferences(114@)
+Car.RemoveReferences(115@)
+Car.RemoveReferences(116@)
+48@ = 0 
+
+:MANSON5_13874
+if 
+  8 > 48@ 
+jf @MANSON5_13915 
+Car.RemoveReferences(75@(48@,8i))
+48@ += 1 
+jump @MANSON5_13874 
+
+:MANSON5_13915
+Object.RemoveReferences(83@)
+Model.Destroy(#SBFYRI)
+Model.Destroy(#BFINJECT)
+Model.Destroy(#VORTEX)
+Model.Destroy(#KART)
+Model.Destroy(#NEWSVAN)
+Model.Destroy(#MARQUIS)
+Model.Destroy(#REEFER)
+Model.Destroy(#HOTDOG)
+Model.Destroy(#BURRITO)
+Model.Destroy(#WATERJUMPX2)
+$ONMISSION = 0 
+mission_cleanup 
+return

@@ -1,0 +1,3889 @@
+:GARAG1
+thread 'GARAG1' 
+gosub @GARAG1_94 
+if 
+wasted_or_busted 
+jf @GARAG1_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @GARAG1_24701 
+
+:GARAG1_85
+gosub @GARAG1_24787 
+end_thread 
+
+:GARAG1_94
+$ONMISSION = 1 
+set_weather 5 
+increment_mission_attempts 
+054C: use_GXT_table 'GARAGE1' 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:GARAG1_132
+if 
+fading 
+jf @GARAG1_156 
+wait 0 
+jump @GARAG1_132 
+
+:GARAG1_156
+select_interior 1 
+02E4: load_cutscene_data 'GARAG1B' 
+
+:GARAG1_171
+if 
+86B9:   not cutscene_data_loaded 
+jf @GARAG1_195 
+wait 0 
+jump @GARAG1_171 
+
+:GARAG1_195
+02E7: start_cutscene 
+fade 1 1000 
+wait 1000 
+
+:GARAG1_209
+if 
+82E9:   not cutscene_reached_end 
+jf @GARAG1_233 
+wait 0 
+jump @GARAG1_209 
+
+:GARAG1_233
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:GARAG1_248
+if 
+fading 
+jf @GARAG1_272 
+wait 0 
+jump @GARAG1_248 
+
+:GARAG1_272
+select_interior 0 
+023C: load_special_actor 'JETHRO' as 3 // models 290-299 
+
+:GARAG1_289
+if 
+823D:   not special_actor 3 loaded 
+jf @GARAG1_315 
+wait 0 
+jump @GARAG1_289 
+
+:GARAG1_315
+060A: create_decision_maker_type 0 store_to 135@ // decision\allowed\m_.ped files 
+0708: reset_decision_maker 135@ event 12 
+0708: reset_decision_maker 135@ event 13 
+0708: reset_decision_maker 135@ event 56 
+08F4: set_max_group_members 3 
+09DD: unknown_player_group 3 
+54@ = -1669.0 
+59@ = 439.773 
+64@ = 6.219 
+43@ = 80.0 
+55@ = -2230.168 
+60@ = 544.7148 
+65@ = 34.2219 
+56@ = -2248.1 
+61@ = 132.8547 
+66@ = 35.3302 
+57@ = -2052.1 
+62@ = -147.8547 
+67@ = 28.3302 
+58@ = -2059.553 
+63@ = -22.1661 
+68@ = 34.305 
+45@ = -2584.0 
+46@ = 585.0 
+47@ = 14.0 
+48@ = -1624.41 
+49@ = 725.25 
+50@ = 14.11 
+69@ = -2042.03 
+70@ = 178.11 
+71@ = 28.15 
+101@ = 1 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+105@ = 0 
+106@ = 0 
+114@ = 0 
+120@ = 0 
+121@ = 0 
+113@ = 0 
+109@ = 0 
+110@ = 0 
+112@ = 0 
+108@ = 0 
+111@ = 0 
+$7013 = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+72@ = -1674.21 
+77@ = 438.5 
+82@ = 6.2 
+73@ = -2237.0 
+78@ = 542.0782 
+83@ = 33.901 
+74@ = -2243.1 
+79@ = 128.8547 
+84@ = 34.3302 
+75@ = -2052.1 
+80@ = -147.8547 
+85@ = 28.3302 
+119@ = 0 
+348@ = 0 
+134@ = 0 
+349@ = 0 
+if 
+  349@ == 1 
+jf @GARAG1_994 
+242@ = Actor.Create(CivMale, #NULL, 0.0, 0.0, 0.0)
+93@ = Actor.Create(CivMale, #SPECIAL02, -2031.252, 164.0169, 27.8429)
+94@ = Actor.Create(CivMale, #SPECIAL03, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+
+:GARAG1_994
+05A9: s$7014[0] = 'GAR1_AA' // s$  // ~z~C'mon, man, there's these two guys I know - used to work on marine engines,
+05A9: s$7014[1] = 'GAR1_AB' // s$  // ~z~'til the mob bought their business over in Vice.
+05A9: s$7014[2] = 'GAR1_AC' // s$  // ~z~Now they try and make ends meet by taking any old job.
+05A9: s$7014[3] = 'GAR1_AD' // s$  // ~z~They're a little bit dulled by their habit,
+05A9: s$7014[4] = 'GAR1_AE' // s$  // ~z~but the smoke don't get in the way of their skills with an engine.
+05A9: s$7014[5] = 'GAR1_AF' // s$  // ~z~We'll pick up Jethro first.
+05A9: s$7014[6] = 'GAR1_AG' // s$  // ~z~Last I heard, he was working at a garage over Easter Basin way.
+05A9: s$7014[7] = 'GAR1_AH' // s$  // ~z~Last I heard, he was working at a garage over East Esplanade way.
+05A9: s$7014[8] = 'GAR1_AJ' // s$  // ~z~Last I heard, he was working at a garage over North Esplanade way.
+05A9: s$7014[9] = 'GAR1_BA' // s$  // ~z~Hey man, how'd you meet these dudes anyway?
+05A9: s$7014[10] = 'GAR1_BB' // s$  // ~z~I met them at the '89 Fierro Love-in, apparently.
+05A9: s$7014[11] = 'GAR1_BC' // s$  // ~z~Apparently?
+05A9: s$7014[12] = 'GAR1_BD' // s$  // ~z~You know how it is, man,
+05A9: s$7014[13] = 'GAR1_BE' // s$  // ~z~a field of tents, crazy-assed music,
+05A9: s$7014[14] = 'GAR1_BF' // s$  // ~z~a quart of mescaline vodka, polar bears...
+05A9: s$7014[15] = 'GAR1_BG' // s$  // ~z~Polar bears?
+05A9: s$7014[16] = 'GAR1_BH' // s$  // ~z~Yeah. Go figure. But they were funny guys, man - great sense of humor.
+05A9: s$7014[17] = 'GAR1_CA' // s$  // ~z~This here's Vietnamese gang territory.
+05A9: s$7014[18] = 'GAR1_CB' // s$  // ~z~Da Nang Boys, Shining Razors, Butterfly Children.
+05A9: s$7014[19] = 'GAR1_CC' // s$  // ~z~Watch yourself, dude. These cats are real serious.
+05A9: s$7014[20] = 'GAR1_DA' // s$  // ~z~Hey, Jethro!
+05A9: s$7014[21] = 'GAR1_DF' // s$  // ~z~Hop in, man. I've landed you a real job.
+05A9: s$7014[22] = 'GAR1_DB' // s$  // ~z~Hey there Truth dude!
+05A9: s$7014[23] = 'GAR1_DC' // s$  // ~z~Oh man, do I owe you?
+05A9: s$7014[24] = 'GAR1_DD' // s$  // ~z~Coz I swear I paid for that weed, dude!
+05A9: s$7014[25] = 'GAR1_DE' // s$  // ~z~No, man, we're good, I think.
+05A9: s$7014[26] = 'GAR1_EA' // s$  // ~z~Jethro, Carl. Carl, Jethro.
+05A9: s$7014[27] = 'GAR1_EB' // s$  // ~z~Wassup man.
+05A9: s$7014[28] = 'GAR1_EC' // s$  // ~z~Can we swing by the hospital, it's over in Santa Flora district, west of here.
+05A9: s$7014[29] = 'GAR1_ED' // s$  // ~z~Yeah, you sick?
+05A9: s$7014[30] = 'GAR1_EE' // s$  // ~z~No. The government is, but that's a long story.
+05A9: s$7014[31] = 'GAR1_FA' // s$  // ~z~So y'know, like what's the deal, dudes?
+05A9: s$7014[32] = 'GAR1_FB' // s$  // ~z~I'm opening a garage in Doherty by the waste ground.
+05A9: s$7014[33] = 'GAR1_FC' // s$  // ~z~You know, car mods, lowriders, all that shit.
+05A9: s$7014[34] = 'GAR1_FD' // s$  // ~z~You down?
+05A9: s$7014[35] = 'GAR1_FE' // s$  // ~z~Do polar bears shit in the woods?
+05A9: s$7014[36] = 'GAR1_FF' // s$  // ~z~No, but they've been known to shit in the liquor tent, if I remember it right.
+05A9: s$7014[37] = 'GAR1_FG' // s$  // ~z~Yeah, that was, like, so far gone, man.
+05A9: s$7014[38] = 'GAR1_GA' // s$  // ~z~What we here for, anyway?
+05A9: s$7014[39] = 'GAR1_GB' // s$  // ~z~Nothin'.
+05A9: s$7014[40] = 'GAR1_GC' // s$  // ~z~Ooh, don't look.
+05A9: s$7014[41] = 'GAR1_GD' // s$  // ~z~Cover your faces.
+05A9: s$7014[42] = 'GAR1_GE' // s$  // ~z~Think about a yellow rubber duck.
+05A9: s$7014[43] = 'GAR1_GF' // s$  // ~z~You tripping again.
+05A9: s$7014[44] = 'GAR1_GG' // s$  // ~z~Sshhh!
+05A9: s$7014[45] = 'GAR1_GH' // s$  // ~z~OK, I've seen enough.
+05A9: s$7014[46] = 'GAR1_GI' // s$  // ~z~Let's go see if we can find Dwaine.
+05A9: s$7014[47] = 'GAR1_GJ' // s$  // ~z~He's working a hotdog van at the tram terminal in King's.
+05A9: s$7014[48] = 'GAR1_HA' // s$  // ~z~C'mon, dude, what's all that about?
+05A9: s$7014[49] = 'GAR1_HB' // s$  // ~z~You don't want to know.
+05A9: s$7014[50] = 'GAR1_HC' // s$  // ~z~Why?
+05A9: s$7014[51] = 'GAR1_HD' // s$  // ~z~Do you know what a sub-dermal neurophone is?
+05A9: s$7014[52] = 'GAR1_HE' // s$  // ~z~A what?
+05A9: s$7014[53] = 'GAR1_HF' // s$  // ~z~Exactly.
+05A9: s$7014[54] = 'GAR1_HG' // s$  // ~z~Sometimes it's best to stay in the dark, kid.
+05A9: s$7014[55] = 'GAR1_JA' // s$  // ~z~Dude, Dwaine, man, how's the hot dog business?
+05A9: s$7014[56] = 'GAR1_JB' // s$  // ~z~It's totally shit. Why, what's happenin'?
+05A9: s$7014[57] = 'GAR1_JC' // s$  // ~z~Uh, my friend Carl here is opening a chop shop.
+05A9: s$7014[58] = 'GAR1_JD' // s$  // ~z~Jethro's in, how about you?
+05A9: s$7014[59] = 'GAR1_JE' // s$  // ~z~Ah yeah, cool man.
+05A9: s$7014[60] = 'GAR1_JF' // s$  // ~z~Uh I've got like some shit to take care of first though.
+05A9: s$7014[61] = 'GAR1_JG' // s$  // ~z~So uh you tell me where you guys are going to be at and I'll meet you dudes there.
+05A9: s$7014[62] = 'GAR1_JH' // s$  // ~z~The garage is on the waste grounds in Doherty.
+05A9: s$7014[63] = 'GAR1_JJ' // s$  // ~z~I'll see y'all later.
+05A9: s$7014[64] = 'GAR1_KA' // s$  // ~z~OK, next stop the cop station downtown.
+05A9: s$7014[65] = 'GAR1_KB' // s$  // ~z~What? You out your mind! Why?
+05A9: s$7014[66] = 'GAR1_KC' // s$  // ~z~If I told you, the likelihood is you'd get a probe up your ass within a month.
+05A9: s$7014[67] = 'GAR1_KD' // s$  // ~z~Like, listen to the man, dude, he's real serious about that shit.
+05A9: s$7014[68] = 'GAR1_KE' // s$  // ~z~Wuh? OK, but you're starting to freak me out with all that space shit, man.
+05A9: s$7014[69] = 'GAR1_LA' // s$  // ~z~OK, you know the drill.
+05A9: s$7014[70] = 'GAR1_LB' // s$  // ~z~Don't look interested in anything.
+05A9: s$7014[71] = 'GAR1_LC' // s$  // ~z~Picture a pink golfball in your mind.
+05A9: s$7014[72] = 'GAR1_LD' // s$  // ~z~OK, we're good to go.
+05A9: s$7014[73] = 'GAR1_MA' // s$  // ~z~Where to next, Spacehead?
+05A9: s$7014[74] = 'GAR1_MB' // s$  // ~z~There's an electronics guy I've had dealings with,
+05A9: s$7014[75] = 'GAR1_MC' // s$  // ~z~goes by the name of ZERO.
+05A9: s$7014[76] = 'GAR1_MD' // s$  // ~z~He could fix a supercomputer with a paperclip.
+05A9: s$7014[77] = 'GAR1_ME' // s$  // ~z~He's got his own shop,
+05A9: s$7014[78] = 'GAR1_MF' // s$  // ~z~but he's always ready to help fellow travelers along the path.
+05A9: s$7014[79] = 'GAR1_MG' // s$  // ~z~Let's go introduce you to him
+05A9: s$7014[80] = 'GAR1_NA' // s$  // ~z~Look, what's goin' on, Truth?
+05A9: s$7014[81] = 'GAR1_NB' // s$  // ~z~Who was them dudes?
+05A9: s$7014[82] = 'GAR1_NC' // s$  // ~z~Don't go there, man.
+05A9: s$7014[83] = 'GAR1_ND' // s$  // ~z~Listen to Jethro.
+05A9: s$7014[84] = 'GAR1_NE' // s$  // ~z~Now, what if I told you we never went to the moon,
+05A9: s$7014[85] = 'GAR1_NF' // s$  // ~z~JFK lives in Scotland with Janis Joplin,
+05A9: s$7014[86] = 'GAR1_NG' // s$  // ~z~and the only reason we've been in a cold war for the last forty-five years,
+05A9: s$7014[87] = 'GAR1_NH' // s$  // ~z~was because snake-headed aliens run the oil business?
+05A9: s$7014[88] = 'GAR1_NJ' // s$  // ~z~I think you popped another microdot.
+05A9: s$7014[89] = 'GAR1_NK' // s$  // ~z~Good. Keep it that way.
+05A9: s$7014[91] = 'GAR1_OA' // s$  // ~z~Blow the horn.
+05A9: s$7014[92] = 'GAR1_OB' // s$  // ~z~Leave me alone Berkley!
+05A9: s$7014[93] = 'GAR1_OC' // s$  // ~z~This is stalking!
+05A9: s$7014[94] = 'GAR1_OD' // s$  // ~z~Oh, hey, Truth.
+05A9: s$7014[95] = 'GAR1_OE' // s$  // ~z~Get in, I'll fill you in as we drive.
+05A9: s$7014[96] = 'GAR1_OF' // s$  // ~z~Home, James!
+05A9: s$7014[97] = 'GAR1_PA' // s$  // ~z~Carl, Zero, Zero, Carl.
+05A9: s$7014[98] = 'GAR1_PB' // s$  // ~z~Sup.
+05A9: s$7014[99] = 'GAR1_PC' // s$  // ~z~Carl here is opening a garage around the corner.
+05A9: s$7014[100] = 'GAR1_PD' // s$  // ~z~I told him you're the man to speak to when it comes to electronics.
+05A9: s$7014[101] = 'GAR1_PE' // s$  // ~z~Actually, I'm the ONLY man to speak to.
+05A9: s$7014[102] = 'GAR1_PJ' // s$  // ~z~Grade A, tip-top genius, that's me.
+05A9: s$7014[103] = 'GAR1_PF' // s$  // ~z~You should drop by the shop sometime, see some of my shit, bro.
+05A9: s$7014[104] = 'GAR1_PG' // s$  // ~z~I'll do that.
+05A9: s$7014[105] = 'GAR1_PH' // s$  // ~z~OK, we here.
+04AF: 136@ = 16400 // = constant 
+04AF: 137@ = 16401 // = constant 
+04AF: 138@ = 16402 // = constant 
+04AF: 139@ = 16403 // = constant 
+04AF: 140@ = 16404 // = constant 
+04AF: 141@ = 16405 // = constant 
+04AF: 142@ = 16406 // = constant 
+04AF: 143@ = 16407 // = constant 
+04AF: 144@ = 16408 // = constant 
+04AF: 145@ = 16409 // = constant 
+04AF: 146@ = 16410 // = constant 
+04AF: 147@ = 16411 // = constant 
+04AF: 148@ = 16412 // = constant 
+04AF: 149@ = 16413 // = constant 
+04AF: 150@ = 16414 // = constant 
+04AF: 151@ = 16415 // = constant 
+04AF: 152@ = 16416 // = constant 
+04AF: 153@ = 16417 // = constant 
+04AF: 154@ = 16418 // = constant 
+04AF: 155@ = 16419 // = constant 
+04AF: 156@ = 16420 // = constant 
+04AF: 157@ = 16425 // = constant 
+04AF: 158@ = 16421 // = constant 
+04AF: 159@ = 16422 // = constant 
+04AF: 160@ = 16423 // = constant 
+04AF: 161@ = 16424 // = constant 
+04AF: 162@ = 16426 // = constant 
+04AF: 163@ = 16427 // = constant 
+04AF: 164@ = 16428 // = constant 
+04AF: 165@ = 16429 // = constant 
+04AF: 166@ = 16430 // = constant 
+04AF: 167@ = 16431 // = constant 
+04AF: 168@ = 16432 // = constant 
+04AF: 169@ = 16433 // = constant 
+04AF: 170@ = 16434 // = constant 
+04AF: 171@ = 16435 // = constant 
+04AF: 172@ = 16436 // = constant 
+04AF: 173@ = 16437 // = constant 
+04AF: 174@ = 16438 // = constant 
+04AF: 175@ = 16439 // = constant 
+04AF: 176@ = 16440 // = constant 
+04AF: 177@ = 16441 // = constant 
+04AF: 178@ = 16442 // = constant 
+04AF: 179@ = 16443 // = constant 
+04AF: 180@ = 16444 // = constant 
+04AF: 181@ = 16445 // = constant 
+04AF: 182@ = 16446 // = constant 
+04AF: 183@ = 16447 // = constant 
+04AF: 184@ = 16448 // = constant 
+04AF: 185@ = 16449 // = constant 
+04AF: 186@ = 16450 // = constant 
+04AF: 187@ = 16451 // = constant 
+04AF: 188@ = 16452 // = constant 
+04AF: 189@ = 16453 // = constant 
+04AF: 190@ = 16454 // = constant 
+04AF: 191@ = 16455 // = constant 
+04AF: 192@ = 16456 // = constant 
+04AF: 193@ = 16457 // = constant 
+04AF: 194@ = 16458 // = constant 
+04AF: 195@ = 16459 // = constant 
+04AF: 196@ = 16460 // = constant 
+04AF: 197@ = 16461 // = constant 
+04AF: 198@ = 16462 // = constant 
+04AF: 199@ = 16463 // = constant 
+04AF: 200@ = 16464 // = constant 
+04AF: 201@ = 16465 // = constant 
+04AF: 202@ = 16466 // = constant 
+04AF: 203@ = 16467 // = constant 
+04AF: 204@ = 16468 // = constant 
+04AF: 205@ = 16469 // = constant 
+04AF: 206@ = 16470 // = constant 
+04AF: 207@ = 16471 // = constant 
+04AF: 208@ = 16472 // = constant 
+04AF: 209@ = 16473 // = constant 
+04AF: 210@ = 16474 // = constant 
+04AF: 211@ = 16475 // = constant 
+04AF: 212@ = 16476 // = constant 
+04AF: 213@ = 16477 // = constant 
+04AF: 214@ = 16478 // = constant 
+04AF: 215@ = 16479 // = constant 
+04AF: 216@ = 16480 // = constant 
+04AF: 217@ = 16481 // = constant 
+04AF: 218@ = 16482 // = constant 
+04AF: 219@ = 16483 // = constant 
+04AF: 220@ = 16484 // = constant 
+04AF: 221@ = 16485 // = constant 
+04AF: 222@ = 16486 // = constant 
+04AF: 223@ = 16487 // = constant 
+04AF: 224@ = 16488 // = constant 
+04AF: 225@ = 16489 // = constant 
+04AF: 227@ = 16490 // = constant 
+04AF: 228@ = 16491 // = constant 
+04AF: 229@ = 16492 // = constant 
+04AF: 230@ = 16493 // = constant 
+04AF: 231@ = 16494 // = constant 
+04AF: 232@ = 16495 // = constant 
+04AF: 233@ = 16496 // = constant 
+04AF: 234@ = 16497 // = constant 
+04AF: 235@ = 16498 // = constant 
+04AF: 236@ = 16499 // = constant 
+04AF: 237@ = 16500 // = constant 
+04AF: 238@ = 16504 // = constant 
+04AF: 239@ = 16501 // = constant 
+04AF: 240@ = 16502 // = constant 
+04AF: 241@ = 16503 // = constant 
+32@ = 0 
+0395: clear_area 1 at -2028.773 154.0429 27.2416 radius 10000.0 
+08E7: disable_entrance_markers 1 
+Model.Load(#EMPEROR)
+
+:GARAG1_3344
+if 
+   not Model.Available(#EMPEROR)
+jf @GARAG1_3371 
+wait 0 
+jump @GARAG1_3344 
+
+:GARAG1_3371
+34@ = Car.Create(#EMPEROR, -2030.628, 170.7956, 27.8359)
+Car.Health(34@) = 3000
+Actor.PutAt($PLAYER_ACTOR, -2031.0, 162.0, 27.83)
+Car.Angle(34@) = 270.0
+023C: load_special_actor 'TRUTH' as 2 // models 290-299 
+
+:GARAG1_3445
+if 
+823D:   not special_actor 2 loaded 
+jf @GARAG1_3471 
+wait 0 
+jump @GARAG1_3445 
+
+:GARAG1_3471
+93@ = Actor.Create(CivMale, #SPECIAL02, -2031.252, 164.0169, 27.8429)
+0568: set_actor 93@ untargetable 1 
+09F6: set_actor 93@ unjackable_through_driver_seat 0 
+077A: set_actor 93@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 93@ decision_maker_to 135@ 
+Actor.Angle(93@) = 180.0
+Actor.SetImmunities(93@, 0, 0, 0, 1, 0)
+Actor.Health(93@) = 200
+0446: set_actor 93@ dismemberment_possible 0 
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.SetBehindPlayer
+
+:GARAG1_3579
+wait 0 
+if 
+  101@ == 1 
+jf @GARAG1_3608 
+gosub @GARAG1_3790 
+
+:GARAG1_3608
+if 
+  102@ == 1 
+jf @GARAG1_3633 
+gosub @GARAG1_9821 
+
+:GARAG1_3633
+if 
+  103@ == 1 
+jf @GARAG1_3658 
+gosub @GARAG1_15224 
+
+:GARAG1_3658
+if 
+  105@ == 1 
+jf @GARAG1_3683 
+gosub @GARAG1_7728 
+
+:GARAG1_3683
+if 
+  106@ == 1 
+jf @GARAG1_3708 
+gosub @GARAG1_13481 
+
+:GARAG1_3708
+if 
+  107@ == 1 
+jf @GARAG1_3733 
+gosub @GARAG1_17264 
+
+:GARAG1_3733
+if 
+  109@ == 1 
+jf @GARAG1_3758 
+jump @GARAG1_24635 
+
+:GARAG1_3758
+if 
+  110@ == 1 
+jf @GARAG1_3783 
+jump @GARAG1_24701 
+
+:GARAG1_3783
+jump @GARAG1_3579 
+
+:GARAG1_3790
+0085: 242@ = 93@ // (int) 
+0085: 243@ = 93@ // (int) 
+0085: 244@ = 93@ // (int) 
+0085: 245@ = 93@ // (int) 
+0085: 246@ = 93@ // (int) 
+0085: 247@ = 93@ // (int) 
+0085: 248@ = 93@ // (int) 
+008B: 251@ = $PLAYER_ACTOR // (int) 
+0085: 252@ = 93@ // (int) 
+008B: 253@ = $PLAYER_ACTOR // (int) 
+0085: 254@ = 93@ // (int) 
+0085: 255@ = 93@ // (int) 
+0085: 256@ = 93@ // (int) 
+008B: 257@ = $PLAYER_ACTOR // (int) 
+0085: 258@ = 93@ // (int) 
+0085: 259@ = 93@ // (int) 
+0085: 260@ = 93@ // (int) 
+0085: 261@ = 93@ // (int) 
+04ED: load_animation "GANGS" 
+
+:GARAG1_3943
+if 
+84EE:   not animation "GANGS" loaded 
+jf @GARAG1_3974 
+wait 0 
+jump @GARAG1_3943 
+
+:GARAG1_3974
+Camera.SetPosition(-2021.483, 159.1135, 30.588, 0.0, 0.0, 0.0)
+Camera.PointAt(-2022.153, 159.8494, 30.4897, 2)
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera -2019.916 157.5772 33.449 position_to -2019.951 157.5985 31.8268 time 4500 smooth_transition 1 
+0920: point_camera -2020.77 158.0734 33.2929 transverse_to -2020.787 158.0842 31.5706 time 4500 smooth_transition 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at -2031.77 161.21 29.42 radius 1000.0 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+fade 1 1000 
+02A3: enable_widescreen 1 
+
+:GARAG1_4165
+if 
+fading 
+jf @GARAG1_4189 
+wait 0 
+jump @GARAG1_4165 
+
+:GARAG1_4189
+114@ = 0 
+32@ = 0 
+33@ = 0 
+
+:GARAG1_4210
+if 
+   not 114@ == 10 
+jf @GARAG1_4776 
+wait 0 
+if 
+  114@ == 0 
+jf @GARAG1_4264 
+0707: start_scene_skip_to @GARAG1_4776 
+gosub @GARAG1_24298 
+
+:GARAG1_4264
+if 
+  114@ == 1 
+jf @GARAG1_4545 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_4531 
+0615: define_AS_pack_begin 130@ 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKH" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKD" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKH" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PRTIAL_GNGTLKD" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 93@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_4531
+gosub @GARAG1_24298 
+32@ = 0 
+
+:GARAG1_4545
+if and
+  114@ >= 2 
+  3 >= 114@ 
+jf @GARAG1_4577 
+gosub @GARAG1_24298 
+
+:GARAG1_4577
+if 
+  114@ == 4 
+jf @GARAG1_4655 
+0925: restore_camera_to_user_defined 
+Camera.SetPosition(-2030.073, 161.3698, 28.8915, 0.0, 0.0, 0.0)
+Camera.PointAt(-2030.593, 162.2026, 29.0817, 2)
+gosub @GARAG1_24298 
+
+:GARAG1_4655
+if or
+  114@ >= 5 
+  6 >= 114@ 
+jf @GARAG1_4687 
+gosub @GARAG1_24298 
+
+:GARAG1_4687
+if 
+  114@ == 7 
+jf @GARAG1_4719 
+gosub @GARAG1_24298 
+114@ = 10 
+
+:GARAG1_4719
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_4743 
+114@ = 10 
+040D: unload_wav 1 
+
+:GARAG1_4743
+if 
+  33@ > 23500 
+jf @GARAG1_4769 
+114@ = 10 
+
+:GARAG1_4769
+jump @GARAG1_4210 
+
+:GARAG1_4776
+0701: end_scene_skip 
+040D: unload_wav 1 
+Player.CanMove($PLAYER_CHAR) = True
+0925: restore_camera_to_user_defined 
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_4822 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_4822
+041E: set_radio_station 2 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+348@ = 9 
+349@ = 0 
+114@ = 0 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_4919 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_4919 
+05CA: AS_actor 93@ enter_car 34@ passenger_seat 0 time -2 
+039E: set_actor 93@ locked 1 while_in_car 
+0526: set_actor 93@ stay_in_car_when_jacked 1 
+
+:GARAG1_4919
+04EF: release_animation "GANGS" 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_5381 
+127@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 127@ type_to 1 
+00BC: show_text_highpriority GXT 'GAR1_22' time 5000 flag 1  // ~s~Get inside the ~b~car~s~.
+
+:GARAG1_4975
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_5339 
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @GARAG1_5071 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+109@ = 1 
+110@ = 0 
+return 
+
+:GARAG1_5071
+if 
+   Car.Wrecked(34@)
+jf @GARAG1_5161 
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+109@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_5161
+if 
+   Actor.Dead(93@)
+jf @GARAG1_5251 
+00BC: show_text_highpriority GXT 'GAR1_17' time 5000 flag 1  // ~r~Truth's dead!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+105@ = 0 
+106@ = 0 
+107@ = 0 
+109@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_5251
+if 
+0495:   car 34@ burning 
+jf @GARAG1_5332 
+020B: explode_car 34@ 
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_5332
+jump @GARAG1_4975 
+
+:GARAG1_5339
+Marker.Disable(127@)
+018A: 122@(134@,5i) = create_checkpoint_at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) 
+jump @GARAG1_5413 
+
+:GARAG1_5381
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_5413
+Model.Load(#TOWTRUCK)
+04ED: load_animation "CAR" 
+
+:GARAG1_5425
+if or
+   not Model.Available(#TOWTRUCK)
+84EE:   not animation "CAR" loaded 
+jf @GARAG1_5459 
+wait 0 
+jump @GARAG1_5425 
+
+:GARAG1_5459
+94@(134@,4i) = Actor.Create(CivMale, #SPECIAL03, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+0568: set_actor 94@(134@,4i) untargetable 1 
+Actor.Angle(94@(134@,4i)) = 120.0
+Actor.SetImmunities(94@(134@,4i), 0, 0, 0, 1, 0)
+36@ = Car.Create(#TOWTRUCK, -1676.0, 440.0, 6.7)
+Car.Angle(36@) = 229.0
+077A: set_actor 94@(134@,4i) acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 94@(134@,4i) decision_maker_to 135@ 
+Car.Destroy(36@)
+Actor.DestroyInstantly(94@(134@,4i))
+gosub @GARAG1_18560 
+if 
+  110@ == 1 
+jf @GARAG1_5637 
+return 
+
+:GARAG1_5637
+32@ = 0 
+04ED: load_animation "CAR_CHAT" 
+
+:GARAG1_5656
+if 
+84EE:   not animation "CAR_CHAT" loaded 
+jf @GARAG1_5690 
+wait 0 
+jump @GARAG1_5656 
+
+:GARAG1_5690
+0085: 262@ = 93@ // (int) 
+0085: 263@ = 93@ // (int) 
+0085: 264@ = 94@ // (int) 
+0085: 265@ = 94@ // (int) 
+0085: 266@ = 93@ // (int) 
+0085: 267@ = 93@ // (int) 
+0085: 268@ = 93@ // (int) 
+008B: 269@ = $PLAYER_ACTOR // (int) 
+0085: 270@ = 93@ // (int) 
+0085: 271@ = 93@ // (int) 
+0085: 272@ = 93@ // (int) 
+0085: 273@ = 94@ // (int) 
+008B: 274@ = $PLAYER_ACTOR // (int) 
+008B: 275@ = $PLAYER_ACTOR // (int) 
+008B: 276@ = $PLAYER_ACTOR // (int) 
+0085: 277@ = 94@ // (int) 
+0085: 278@ = 93@ // (int) 
+0085: 279@ = 94@ // (int) 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at -2031.77 161.21 29.42 radius 1000.0 
+040D: unload_wav 1 
+114@ = 0 
+32@ = 0 
+33@ = 0 
+0395: clear_area 1 at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 1000.0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_5987 
+if 
+8431:   not car 34@ passenger_seat_free 2 
+jf @GARAG1_5987 
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 2 
+Actor.DestroyInstantly(100@)
+
+:GARAG1_5987
+if 
+   not 114@ == 20 
+jf @GARAG1_7322 
+wait 0 
+if 
+  114@ == 0 
+jf @GARAG1_6264 
+0707: start_scene_skip_to @GARAG1_7322 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_6232 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_6209 
+Camera.SetPosition(-1674.263, 438.2627, 11.0956, 0.0, 0.0, 0.0)
+Camera.PointAt(-1674.246, 438.3686, 10.1014, 2)
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_6144 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_6144
+Car.PutAt(34@, 54@(134@,5f), 59@(134@,5f), 64@(134@,5f))
+Car.Angle(34@) = 43@
+Car.SetMaxSpeed(34@, 0.0)
+348@ = 20 
+gosub @GARAG1_24529 
+jump @GARAG1_6225 
+
+:GARAG1_6209
+101@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_6225
+jump @GARAG1_6264 
+
+:GARAG1_6232
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_6264
+if 
+  114@ == 1 
+jf @GARAG1_6562 
+if 
+  32@ > 2000 
+jf @GARAG1_6562 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_6562 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_6562 
+Camera.SetPosition(-1672.658, 431.5702, 7.2947, 0.0, 0.0, 0.0)
+Camera.PointAt(-1672.72, 432.5628, 7.3989, 2)
+0615: define_AS_pack_begin 130@ 
+0605: actor -1 perform_animation "FIXN_CAR_OUT" IFP "CAR" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+05D3: AS_actor -1 goto_point -1668.853 442.619 6.219 mode 6 time -1 ms // versionA 
+05D4: AS_actor -1 rotate_angle 193.0 
+05CA: AS_actor -1 enter_car 34@ passenger_seat 2 time -1 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 94@(134@,4i) to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+114@ = 2 
+03CF: load_wav 1825 as 3 
+
+:GARAG1_6517
+if 
+83D0:   not wav 3 loaded 
+jf @GARAG1_6543 
+wait 0 
+jump @GARAG1_6517 
+
+:GARAG1_6543
+09F1: play_audio_at_actor 94@(134@,4i) event 1151 
+32@ = 0 
+
+:GARAG1_6562
+if 
+  114@ == 2 
+jf @GARAG1_6745 
+if 
+  32@ > 2000 
+jf @GARAG1_6745 
+Camera.SetPosition(-1665.522, 443.0056, 7.5433, 0.0, 0.0, 0.0)
+Camera.PointAt(-1666.462, 442.6743, 7.4596, 2)
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_6686 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_6686 
+
+:GARAG1_6686
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_6731 
+Actor.Angle(94@(134@,4i)) = 228.0
+0619: enable_actor 94@(134@,4i) collision_detection 1 
+
+:GARAG1_6731
+gosub @GARAG1_24529 
+32@ = 0 
+
+:GARAG1_6745
+if 
+  114@ == 3 
+jf @GARAG1_6770 
+gosub @GARAG1_24529 
+
+:GARAG1_6770
+if 
+  114@ == 4 
+jf @GARAG1_6795 
+gosub @GARAG1_24529 
+
+:GARAG1_6795
+if 
+  114@ == 5 
+jf @GARAG1_6898 
+if 
+  32@ > 1500 
+jf @GARAG1_6898 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_6891 
+0605: actor 93@ perform_animation "CAR_SC4_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_6891
+gosub @GARAG1_24529 
+
+:GARAG1_6898
+if 
+  114@ == 6 
+jf @GARAG1_7032 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_6983 
+Camera.SetPosition(-1670.605, 442.2138, 7.3642, 0.0, 0.0, 0.0)
+Camera.PointAt(-1669.891, 441.5237, 7.2424, 2)
+
+:GARAG1_6983
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+gosub @GARAG1_24529 
+
+:GARAG1_7032
+if 
+  114@ == 7 
+jf @GARAG1_7057 
+gosub @GARAG1_24529 
+
+:GARAG1_7057
+if 
+  114@ == 8 
+jf @GARAG1_7082 
+gosub @GARAG1_24529 
+
+:GARAG1_7082
+if 
+  114@ == 9 
+jf @GARAG1_7177 
+if 
+  32@ > 1500 
+jf @GARAG1_7177 
+Camera.SetPosition(-1648.684, 411.5628, 18.7936, 0.0, 0.0, 0.0)
+Camera.PointAt(-1649.09, 412.4462, 18.5605, 2)
+gosub @GARAG1_24529 
+
+:GARAG1_7177
+if 
+  114@ == 10 
+jf @GARAG1_7221 
+if 
+  32@ > 1500 
+jf @GARAG1_7221 
+gosub @GARAG1_24529 
+
+:GARAG1_7221
+if 
+  114@ == 11 
+jf @GARAG1_7265 
+if 
+  32@ > 1500 
+jf @GARAG1_7265 
+gosub @GARAG1_24529 
+
+:GARAG1_7265
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_7289 
+114@ = 20 
+040D: unload_wav 1 
+
+:GARAG1_7289
+if 
+  33@ > 21500 
+jf @GARAG1_7315 
+114@ = 20 
+
+:GARAG1_7315
+jump @GARAG1_5987 
+
+:GARAG1_7322
+0701: end_scene_skip 
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_7351 
+return 
+
+:GARAG1_7351
+04EF: release_animation "CAR" 
+Model.Destroy(#TOWTRUCK)
+if 
+   not Car.Wrecked(36@)
+jf @GARAG1_7386 
+Car.LockInCurrentPosition(36@) = False
+
+:GARAG1_7386
+Car.RemoveReferences(36@)
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+04EF: release_animation "CAR_CHAT" 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_7439 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_7439
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+00BE: text_clear_all 
+114@ = 0 
+348@ = 31 
+349@ = 0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_7705 
+03A2: set_car 34@ action 0 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_7594 
+if 
+   not Actor.InCar(93@, 34@)
+jf @GARAG1_7594 
+if 
+0431:   car 34@ passenger_seat_free 0 
+jf @GARAG1_7569 
+0430: put_actor 93@ into_car 34@ passenger_seat 0 
+jump @GARAG1_7594 
+
+:GARAG1_7569
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 0 
+Actor.DestroyInstantly(100@)
+0430: put_actor 93@ into_car 34@ passenger_seat 0 
+
+:GARAG1_7594
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_7705 
+if 
+   not Actor.InCar(94@(134@,4i), 34@)
+jf @GARAG1_7705 
+if 
+0431:   car 34@ passenger_seat_free 2 
+jf @GARAG1_7676 
+0430: put_actor 94@(134@,4i) into_car 34@ passenger_seat 2 
+jump @GARAG1_7705 
+
+:GARAG1_7676
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 2 
+Actor.DestroyInstantly(100@)
+0430: put_actor 94@(134@,4i) into_car 34@ passenger_seat 2 
+
+:GARAG1_7705
+134@ = 1 
+101@ = 0 
+105@ = 1 
+return 
+
+:GARAG1_7728
+Model.Load(#PONY)
+Model.Load(#WMOMIB)
+
+:GARAG1_7738
+if or
+   not Model.Available(#PONY)
+   not Model.Available(#WMOMIB)
+jf @GARAG1_7770 
+wait 0 
+jump @GARAG1_7738 
+
+:GARAG1_7770
+38@ = Car.Create(#PONY, -2607.11, 623.91, 14.66)
+0229: set_car 38@ primary_color_to 0 secondary_color_to 0 
+Model.Destroy(#PONY)
+Model.Destroy(#WMOMIB)
+Car.Angle(38@) = 277.0
+Car.Destroy(38@)
+018A: 128@ = create_checkpoint_at 45@ 46@ 47@ 
+gosub @GARAG1_18560 
+if 
+  110@ == 1 
+jf @GARAG1_7868 
+return 
+
+:GARAG1_7868
+008B: 280@ = $PLAYER_ACTOR // (int) 
+0085: 281@ = 93@ // (int) 
+0085: 282@ = 93@ // (int) 
+0085: 283@ = 93@ // (int) 
+0085: 284@ = 93@ // (int) 
+008B: 285@ = $PLAYER_ACTOR // (int) 
+0085: 286@ = 93@ // (int) 
+0085: 287@ = 93@ // (int) 
+0085: 288@ = 93@ // (int) 
+0085: 289@ = 93@ // (int) 
+008B: 290@ = $PLAYER_ACTOR // (int) 
+0085: 291@ = 93@ // (int) 
+008B: 292@ = $PLAYER_ACTOR // (int) 
+0085: 293@ = 93@ // (int) 
+008B: 294@ = $PLAYER_ACTOR // (int) 
+0085: 295@ = 93@ // (int) 
+0085: 296@ = 93@ // (int) 
+Marker.Disable(128@)
+Model.Load(#PONY)
+Model.Load(#WMOMIB)
+
+:GARAG1_8019
+if or
+   not Model.Available(#PONY)
+   not Model.Available(#WMOMIB)
+jf @GARAG1_8051 
+wait 0 
+jump @GARAG1_8019 
+
+:GARAG1_8051
+04ED: load_animation "CAR_CHAT" 
+
+:GARAG1_8063
+if 
+84EE:   not animation "CAR_CHAT" loaded 
+jf @GARAG1_8097 
+wait 0 
+jump @GARAG1_8063 
+
+:GARAG1_8097
+38@ = Car.Create(#PONY, -2607.11, 623.91, 14.66)
+0229: set_car 38@ primary_color_to 0 secondary_color_to 0 
+Model.Destroy(#PONY)
+Car.DoorStatus(38@) = 2
+Car.Angle(38@) = 180.0
+Car.LockInCurrentPosition(38@) = True
+348@ = 38 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+114@ = 0 
+32@ = 0 
+33@ = 0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_8471 
+Car.PutAt(34@, 45@, 46@, 47@)
+40@ = Car.Angle(34@)
+if and
+  40@ > 0.0 
+  180.0 > 40@ 
+jf @GARAG1_8301 
+Car.Angle(34@) = 90.0
+jump @GARAG1_8311 
+
+:GARAG1_8301
+Car.Angle(34@) = 270.0
+
+:GARAG1_8311
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_8338 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_8338
+Camera.SetPosition(-2581.94, 580.42, 17.8189, 0.0, 0.0, 0.0)
+Camera.PointAt(-2582.491, 581.153, 18.2173, 2)
+0407: store_coords_to 87@ 88@ 89@ from_car 34@ with_offset 0.8 2.2 0.8 
+0407: store_coords_to 90@ 91@ 92@ from_car 34@ with_offset 0.0 -1.5 0.5 
+0395: clear_area 1 at -2607.11 623.91 14.66 radius 1000.0 
+
+:GARAG1_8471
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_8530 
+0605: actor 93@ perform_animation "CAR_SC3_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_8530
+gosub @GARAG1_24529 
+0395: clear_area 1 at 45@ 46@ 47@ radius 1000.0 
+114@ = 0 
+
+:GARAG1_8562
+if 
+   not 114@ == 10 
+jf @GARAG1_9706 
+wait 0 
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_8611 
+return 
+
+:GARAG1_8611
+if 
+  114@ == 0 
+jf @GARAG1_8854 
+if 
+  32@ > 1500 
+jf @GARAG1_8854 
+0707: start_scene_skip_to @GARAG1_9706 
+if 
+   not Actor.Dead(94@)
+jf @GARAG1_8714 
+0605: actor 94@ perform_animation "CAR_SC3_BR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_8714
+0925: restore_camera_to_user_defined 
+092F: lock_camera_target_point 1 
+0930: lock_camera_position 1 
+0936: set_camera -2581.94 580.42 17.8189 position_to -2583.32 581.73 15.39 time 5000 smooth_transition 1 
+0920: point_camera -2582.491 581.153 18.2173 transverse_to -2607.11 623.91 14.66 time 5000 smooth_transition 1 
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+gosub @GARAG1_24529 
+32@ = 0 
+
+:GARAG1_8854
+if 
+  114@ == 1 
+jf @GARAG1_8932 
+if 
+  32@ > 1500 
+jf @GARAG1_8932 
+gosub @GARAG1_24529 
+if 
+   not Car.Wrecked(38@)
+jf @GARAG1_8932 
+99@ = Actor.CreateAsDriver(CivMale, #WMOMIB, 38@)
+Model.Destroy(#WMOMIB)
+
+:GARAG1_8932
+if 
+  114@ == 2 
+jf @GARAG1_9029 
+if 
+  32@ > 1500 
+jf @GARAG1_9029 
+gosub @GARAG1_24529 
+0925: restore_camera_to_user_defined 
+Camera.SetPosition(-2583.32, 581.73, 15.39, 0.0, 0.0, 0.0)
+Camera.PointAt(-2607.11, 623.91, 14.66, 2)
+
+:GARAG1_9029
+if 
+  114@ == 3 
+jf @GARAG1_9073 
+if 
+  32@ > 1500 
+jf @GARAG1_9073 
+gosub @GARAG1_24529 
+
+:GARAG1_9073
+if 
+  114@ == 4 
+jf @GARAG1_9209 
+if 
+  32@ > 1500 
+jf @GARAG1_9209 
+if 
+   not Car.Wrecked(38@)
+jf @GARAG1_9202 
+Car.LockInCurrentPosition(38@) = False
+if 
+   not Actor.Dead(99@)
+jf @GARAG1_9202 
+if 
+   Actor.InCar(99@, 38@)
+jf @GARAG1_9202 
+05D1: AS_actor 99@ drive_car 38@ to -2607.95 528.47 13.98 speed 25.0 2 model #NULL 2 
+
+:GARAG1_9202
+gosub @GARAG1_24529 
+
+:GARAG1_9209
+if 
+  114@ == 5 
+jf @GARAG1_9311 
+if 
+  32@ > 1500 
+jf @GARAG1_9311 
+gosub @GARAG1_24529 
+Camera.SetPosition(-2614.461, 573.477, 16.9766, 0.0, 0.0, 0.0)
+Camera.PointAt(-2613.8, 574.224, 16.911, 2)
+32@ = 0 
+
+:GARAG1_9311
+if 
+  114@ == 6 
+jf @GARAG1_9554 
+if 
+  32@ > 2500 
+jf @GARAG1_9554 
+gosub @GARAG1_24529 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_9414 
+0605: actor 93@ perform_animation "CAR_SC3_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_9414
+if 
+   not Actor.Dead(94@)
+jf @GARAG1_9473 
+0605: actor 94@ perform_animation "CAR_SC3_BR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_9473
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+Camera.SetPosition(87@, 88@, 89@, 0.0, 0.0, 0.0)
+Camera.PointAt(90@, 91@, 92@, 2)
+
+:GARAG1_9554
+if 
+  114@ == 7 
+jf @GARAG1_9598 
+if 
+  32@ > 1500 
+jf @GARAG1_9598 
+gosub @GARAG1_24529 
+
+:GARAG1_9598
+if 
+  114@ == 8 
+jf @GARAG1_9649 
+if 
+  32@ > 1500 
+jf @GARAG1_9649 
+gosub @GARAG1_24529 
+114@ = 10 
+
+:GARAG1_9649
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_9673 
+114@ = 10 
+040D: unload_wav 1 
+
+:GARAG1_9673
+if 
+  33@ > 20500 
+jf @GARAG1_9699 
+114@ = 10 
+
+:GARAG1_9699
+jump @GARAG1_8562 
+
+:GARAG1_9706
+0701: end_scene_skip 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+0925: restore_camera_to_user_defined 
+04EF: release_animation "CAR_CHAT" 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_9760 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_9760
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+114@ = 0 
+348@ = 48 
+349@ = 0 
+Actor.DestroyInstantly(99@)
+Car.Destroy(38@)
+105@ = 0 
+102@ = 1 
+return 
+
+:GARAG1_9821
+Model.Load(#HOTDOG)
+
+:GARAG1_9826
+if 
+   not Model.Available(#HOTDOG)
+jf @GARAG1_9853 
+wait 0 
+jump @GARAG1_9826 
+
+:GARAG1_9853
+04ED: load_animation "SMOKING" 
+
+:GARAG1_9864
+if 
+84EE:   not animation "SMOKING" loaded 
+jf @GARAG1_9897 
+wait 0 
+jump @GARAG1_9864 
+
+:GARAG1_9897
+023C: load_special_actor 'DWAYNE' as 4 // models 290-299 
+
+:GARAG1_9910
+if 
+823D:   not special_actor 4 loaded 
+jf @GARAG1_9936 
+wait 0 
+jump @GARAG1_9910 
+
+:GARAG1_9936
+Model.Load(#CIGAR)
+
+:GARAG1_9940
+if 
+   not Model.Available(#CIGAR)
+jf @GARAG1_9966 
+wait 0 
+jump @GARAG1_9940 
+
+:GARAG1_9966
+018A: 122@(134@,5i) = create_checkpoint_at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) 
+if 
+  110@ == 14 
+jf @GARAG1_10119 
+94@(134@,4i) = Actor.Create(CivMale, #SPECIAL04, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+35@ = Car.Create(#HOTDOG, -2238.888, 541.5267, 34.375)
+42@ = Object.Create(#CIGAR, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+Car.Destroy(35@)
+Actor.DestroyInstantly(94@(134@,4i))
+Object.Destroy(42@)
+
+:GARAG1_10119
+gosub @GARAG1_18560 
+if 
+  110@ == 1 
+jf @GARAG1_10146 
+return 
+
+:GARAG1_10146
+if 
+03CA:   object 42@ exists 
+jf @GARAG1_10167 
+Object.Destroy(42@)
+
+:GARAG1_10167
+04ED: load_animation "CAR_CHAT" 
+
+:GARAG1_10179
+if 
+84EE:   not animation "CAR_CHAT" loaded 
+jf @GARAG1_10213 
+wait 0 
+jump @GARAG1_10179 
+
+:GARAG1_10213
+0085: 297@ = 93@ // (int) 
+0085: 298@ = 95@ // (int) 
+0085: 299@ = 93@ // (int) 
+0085: 300@ = 93@ // (int) 
+0085: 301@ = 95@ // (int) 
+0085: 302@ = 95@ // (int) 
+0085: 303@ = 95@ // (int) 
+008B: 304@ = $PLAYER_ACTOR // (int) 
+0085: 305@ = 95@ // (int) 
+0085: 306@ = 93@ // (int) 
+008B: 307@ = $PLAYER_ACTOR // (int) 
+0085: 308@ = 93@ // (int) 
+0085: 309@ = 94@ // (int) 
+008B: 310@ = $PLAYER_ACTOR // (int) 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_10485 
+if 
+83CA:   not object 42@ exists 
+jf @GARAG1_10485 
+42@ = Object.Create(#CIGAR, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+070A: AS_actor 94@(134@,4i) attach_to_object 42@ offset 0.04 0.1 0.05 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 0 
+0669: 350@ = attach_particle "EXHALE" to_actor 94@(134@,4i) with_offset 0.05 0.12 0.0 type 1 
+0883: attach_particle 350@ to_actor 94@(134@,4i) mode 5 
+
+:GARAG1_10485
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_10954 
+40@ = Car.Angle(34@)
+Car.PutAt(34@, 55@, 60@, 65@)
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_10550 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_10550
+Camera.SetPosition(-2235.815, 541.4094, 35.7451, 0.0, 0.0, 0.0)
+Camera.PointAt(-2236.521, 542.1174, 35.7312, 2)
+0395: clear_area 1 at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 1000.0 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_10695 
+0812: AS_actor 94@(134@,4i) perform_animation "M_SMK_OUT" IFP "SMOKING" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:GARAG1_10695
+if and
+  40@ > 90.0 
+  270.0 > 40@ 
+jf @GARAG1_10843 
+Car.Angle(34@) = 180.0
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_10794 
+0605: actor 93@ perform_animation "CAR_SC4_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:GARAG1_10794
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC4_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @GARAG1_10954 
+
+:GARAG1_10843
+Car.Angle(34@) = 0.0
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_10912 
+0605: actor 93@ perform_animation "CAR_SC3_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_10912
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC2_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GARAG1_10954
+348@ = 55 
+gosub @GARAG1_24529 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+114@ = 0 
+32@ = 0 
+33@ = 0 
+
+:GARAG1_11018
+if 
+   not 114@ == 20 
+jf @GARAG1_13105 
+wait 0 
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_11067 
+return 
+
+:GARAG1_11067
+if 
+  114@ == 0 
+jf @GARAG1_11469 
+0707: start_scene_skip_to @GARAG1_13105 
+if 
+  32@ > 2000 
+jf @GARAG1_11469 
+064C: make_particle 350@ visible 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_11148 
+0967: actor 94@(134@,4i) move_mouth 4000 ms 
+
+:GARAG1_11148
+gosub @GARAG1_24529 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_11230 
+0812: AS_actor 94@(134@,4i) perform_animation "M_SMK_OUT" IFP "SMOKING" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+Actor.LockInCurrentPosition(94@(134@,4i)) = False
+
+:GARAG1_11230
+if and
+  40@ > 90.0 
+  270.0 > 40@ 
+jf @GARAG1_11368 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_11319 
+0605: actor 93@ perform_animation "CAR_SC4_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:GARAG1_11319
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC4_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @GARAG1_11469 
+
+:GARAG1_11368
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_11427 
+0605: actor 93@ perform_animation "CAR_SC3_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_11427
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC2_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GARAG1_11469
+if 
+  114@ == 1 
+jf @GARAG1_11855 
+if 
+  32@ > 2000 
+jf @GARAG1_11855 
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_11823 
+Car.DoorStatus(35@) = 1
+if 
+   not Actor.Dead(95@)
+jf @GARAG1_11727 
+05D3: AS_actor 95@ goto_point -2232.07 545.04 34.39 mode 4 time -1 ms // versionA 
+04EF: release_animation "SMOKING" 
+if and
+  40@ > 90.0 
+  270.0 > 40@ 
+jf @GARAG1_11669 
+Camera.SetPosition(-2233.689, 541.4159, 35.2249, 0.0, 0.0, 0.0)
+Camera.PointAt(-2233.139, 542.2441, 35.1142, 2)
+jump @GARAG1_11720 
+
+:GARAG1_11669
+Camera.SetPosition(-2228.62, 540.7846, 35.5936, 0.0, 0.0, 0.0)
+Camera.PointAt(-2229.199, 541.5954, 35.5075, 2)
+
+:GARAG1_11720
+jump @GARAG1_11759 
+
+:GARAG1_11727
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+102@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_11759
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_11800 
+Car.LockInCurrentPosition(35@) = False
+gosub @GARAG1_24529 
+jump @GARAG1_11816 
+
+:GARAG1_11800
+102@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_11816
+jump @GARAG1_11855 
+
+:GARAG1_11823
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+102@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_11855
+if 
+  32@ > 1500 
+jf @GARAG1_12111 
+if 
+  114@ == 2 
+jf @GARAG1_12111 
+gosub @GARAG1_24529 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_12111 
+Actor.Angle(94@(134@,4i)) = 270.0
+0615: define_AS_pack_begin 130@ 
+05D3: AS_actor -1 goto_point -2232.07 545.04 34.39 mode 4 time -1 ms // versionA 
+0605: actor -1 perform_animation "CAR_TALKM_IN" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "CAR_TALKM_LOOP" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0605: actor -1 perform_animation "CAR_TALKM_OUT" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 95@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_12111
+if 
+  114@ == 3 
+jf @GARAG1_12136 
+gosub @GARAG1_24529 
+
+:GARAG1_12136
+if 
+  114@ == 4 
+jf @GARAG1_12161 
+gosub @GARAG1_24529 
+
+:GARAG1_12161
+if 
+  114@ == 5 
+jf @GARAG1_12186 
+gosub @GARAG1_24529 
+
+:GARAG1_12186
+if 
+  114@ == 6 
+jf @GARAG1_12305 
+gosub @GARAG1_24529 
+32@ = 0 
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_12305 
+if 
+   not Actor.Dead(95@)
+jf @GARAG1_12305 
+0615: define_AS_pack_begin 130@ 
+05D3: AS_actor -1 goto_point -2241.66 547.19 34.49 mode 6 time -1 ms // versionA 
+05CB: AS_actor -1 enter_car 35@ as_driver -1 ms 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 95@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_12305
+if 
+  114@ == 7 
+jf @GARAG1_12541 
+gosub @GARAG1_24529 
+Camera.SetPosition(-2229.154, 533.4247, 41.4992, 0.0, 0.0, 0.0)
+Camera.PointAt(-2229.659, 534.123, 40.9914, 2)
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_12541 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_12541 
+036A: put_actor 94@(134@,4i) in_car 35@ 
+if 
+   Actor.InCar(94@(134@,4i), 35@)
+jf @GARAG1_12541 
+0615: define_AS_pack_begin 130@ 
+05D1: AS_actor -1 drive_car 35@ to -2240.43 557.96 34.0 speed 10.0 2 model #NULL 3 
+05D1: AS_actor -1 drive_car 35@ to -2185.43 567.96 34.0 speed 50.0 2 model #NULL 3 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 95@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_12541
+if 
+  32@ > 4000 
+jf @GARAG1_12787 
+if 
+  114@ == 8 
+jf @GARAG1_12787 
+gosub @GARAG1_24529 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_12711 
+Camera.SetPosition(-2235.01, 538.8505, 34.3478, 0.0, 0.0, 0.0)
+Camera.PointAt(-2234.183, 539.4094, 34.3942, 2)
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_12711 
+0605: actor 93@ perform_animation "CAR_SC3_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_12711
+064E: stop_particle 350@ 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_12745 
+Actor.DestroyInstantly(94@(134@,4i))
+
+:GARAG1_12745
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_12766 
+Car.Destroy(35@)
+
+:GARAG1_12766
+if 
+03CA:   object 42@ exists 
+jf @GARAG1_12787 
+Object.Destroy(42@)
+
+:GARAG1_12787
+if 
+  32@ > 1500 
+jf @GARAG1_12831 
+if 
+  114@ == 9 
+jf @GARAG1_12831 
+gosub @GARAG1_24529 
+
+:GARAG1_12831
+if 
+  32@ > 1500 
+jf @GARAG1_12875 
+if 
+  114@ == 10 
+jf @GARAG1_12875 
+gosub @GARAG1_24529 
+
+:GARAG1_12875
+if 
+  32@ > 1500 
+jf @GARAG1_12919 
+if 
+  114@ == 11 
+jf @GARAG1_12919 
+gosub @GARAG1_24529 
+
+:GARAG1_12919
+if 
+  32@ > 1500 
+jf @GARAG1_12970 
+if 
+  114@ == 12 
+jf @GARAG1_12970 
+gosub @GARAG1_24529 
+114@ = 20 
+
+:GARAG1_12970
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_13070 
+114@ = 20 
+064E: stop_particle 350@ 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_13024 
+Actor.DestroyInstantly(94@(134@,4i))
+
+:GARAG1_13024
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_13045 
+Car.Destroy(35@)
+
+:GARAG1_13045
+if 
+03CA:   object 42@ exists 
+jf @GARAG1_13066 
+Object.Destroy(42@)
+
+:GARAG1_13066
+040D: unload_wav 1 
+
+:GARAG1_13070
+if 
+  33@ > 40000 
+jf @GARAG1_13098 
+114@ = 20 
+
+:GARAG1_13098
+jump @GARAG1_11018 
+
+:GARAG1_13105
+0701: end_scene_skip 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+04EF: release_animation "CAR_CHAT" 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_13155 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_13155
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+114@ = 0 
+349@ = 0 
+00BE: text_clear_all 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_13374 
+03A2: set_car 34@ action 0 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_13303 
+if 
+   not Actor.InCar(93@, 34@)
+jf @GARAG1_13303 
+if 
+0431:   car 34@ passenger_seat_free 0 
+jf @GARAG1_13278 
+0430: put_actor 93@ into_car 34@ passenger_seat 0 
+jump @GARAG1_13303 
+
+:GARAG1_13278
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 0 
+Actor.DestroyInstantly(100@)
+0430: put_actor 93@ into_car 34@ passenger_seat 0 
+
+:GARAG1_13303
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_13374 
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_13374 
+if 
+   not Actor.InCar(94@(134@,4i), 35@)
+jf @GARAG1_13374 
+036A: put_actor 94@(134@,4i) in_car 35@ 
+
+:GARAG1_13374
+Model.Destroy(#HOTDOG)
+Model.Destroy(#CIGAR)
+0296: unload_special_actor 4 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_13416 
+Actor.DestroyInstantly(94@(134@,4i))
+
+:GARAG1_13416
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_13437 
+Car.Destroy(35@)
+
+:GARAG1_13437
+if 
+03CA:   object 42@ exists 
+jf @GARAG1_13458 
+Object.Destroy(42@)
+
+:GARAG1_13458
+134@ = 2 
+102@ = 0 
+106@ = 1 
+return 
+
+:GARAG1_13481
+018A: 129@ = create_checkpoint_at 48@ 49@ 50@ 
+gosub @GARAG1_18560 
+if 
+  110@ == 1 
+jf @GARAG1_13522 
+return 
+
+:GARAG1_13522
+Model.Load(#PONY)
+Model.Load(#WMOMIB)
+04ED: load_animation "CAR_CHAT" 
+
+:GARAG1_13544
+if or
+   not Model.Available(#PONY)
+   not Model.Available(#WMOMIB)
+84EE:   not animation "CAR_CHAT" loaded 
+jf @GARAG1_13588 
+wait 0 
+jump @GARAG1_13544 
+
+:GARAG1_13588
+38@ = Car.Create(#PONY, -1659.92, 751.31, 17.29)
+0229: set_car 38@ primary_color_to 0 secondary_color_to 0 
+Car.DoorStatus(38@) = 2
+Car.Angle(38@) = 180.0
+Car.LockInCurrentPosition(38@) = True
+if 
+   not Car.Wrecked(38@)
+jf @GARAG1_13690 
+99@ = Actor.CreateAsDriver(CivMale, #WMOMIB, 38@)
+Car.LockInCurrentPosition(38@) = False
+Car.SetMaxSpeed(38@, 30.0)
+
+:GARAG1_13690
+0085: 311@ = 93@ // (int) 
+0085: 312@ = 93@ // (int) 
+0085: 313@ = 93@ // (int) 
+0085: 314@ = 93@ // (int) 
+008B: 315@ = $PLAYER_ACTOR // (int) 
+0085: 316@ = 93@ // (int) 
+0085: 317@ = 93@ // (int) 
+0085: 318@ = 93@ // (int) 
+0085: 319@ = 93@ // (int) 
+0085: 320@ = 93@ // (int) 
+0085: 321@ = 93@ // (int) 
+008B: 322@ = $PLAYER_ACTOR // (int) 
+008B: 323@ = $PLAYER_ACTOR // (int) 
+0085: 324@ = 94@ // (int) 
+0085: 325@ = 93@ // (int) 
+0085: 326@ = 93@ // (int) 
+0085: 327@ = 93@ // (int) 
+0085: 328@ = 93@ // (int) 
+0085: 329@ = 93@ // (int) 
+008B: 330@ = $PLAYER_ACTOR // (int) 
+0085: 331@ = 93@ // (int) 
+0085: 333@ = 93@ // (int) 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_14145 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_13938 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_13938
+40@ = Car.Angle(34@)
+Car.PutAt(34@, -1626.167, 725.0057, 13.4609)
+if and
+  40@ > 0.0 
+  180.0 > 40@ 
+jf @GARAG1_14014 
+Car.Angle(34@) = 90.0
+jump @GARAG1_14024 
+
+:GARAG1_14014
+Car.Angle(34@) = 270.0
+
+:GARAG1_14024
+0407: store_coords_to 87@ 88@ 89@ from_car 34@ with_offset 1.0 1.5 0.8 
+0407: store_coords_to 90@ 91@ 92@ from_car 34@ with_offset 0.0 -1.5 0.5 
+Camera.SetPosition(87@, 88@, 89@, 0.0, 0.0, 0.0)
+Camera.PointAt(90@, 91@, 92@, 2)
+0395: clear_area 1 at -1659.92 751.31 17.29 radius 1000.0 
+
+:GARAG1_14145
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_14204 
+0605: actor 93@ perform_animation "CAR_SC1_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_14204
+114@ = 0 
+348@ = 69 
+32@ = 0 
+33@ = 0 
+
+:GARAG1_14232
+if 
+   not 114@ == 20 
+jf @GARAG1_15063 
+wait 0 
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_14281 
+return 
+
+:GARAG1_14281
+if 
+  114@ == 0 
+jf @GARAG1_14356 
+0707: start_scene_skip_to @GARAG1_15063 
+if 
+  32@ > 1500 
+jf @GARAG1_14356 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_14349 
+0967: actor 93@ move_mouth 29000 ms 
+
+:GARAG1_14349
+gosub @GARAG1_24529 
+
+:GARAG1_14356
+if 
+  114@ == 1 
+jf @GARAG1_14543 
+if 
+  32@ > 2000 
+jf @GARAG1_14543 
+gosub @GARAG1_24529 
+if 
+   not Car.Wrecked(38@)
+jf @GARAG1_14485 
+if 
+   not Actor.Dead(99@)
+jf @GARAG1_14485 
+if 
+   Actor.InCar(99@, 38@)
+jf @GARAG1_14485 
+05D1: AS_actor 99@ drive_car 38@ to -1716.03 732.96 24.9 speed 15.0 0 model #NULL 2 
+
+:GARAG1_14485
+Camera.SetPosition(-1671.547, 729.851, 18.6107, 0.0, 0.0, 0.0)
+Camera.PointAt(-1670.621, 730.2037, 18.7409, 2)
+32@ = 0 
+
+:GARAG1_14543
+if 
+  114@ == 2 
+jf @GARAG1_14587 
+if 
+  32@ > 2000 
+jf @GARAG1_14587 
+gosub @GARAG1_24529 
+
+:GARAG1_14587
+if 
+  114@ == 3 
+jf @GARAG1_14815 
+if 
+  32@ > 6000 
+jf @GARAG1_14815 
+Camera.SetPosition(-1624.639, 723.3417, 14.5936, 0.0, 0.0, 0.0)
+Camera.PointAt(-1625.473, 723.8466, 14.8151, 2)
+0605: actor $PLAYER_ACTOR perform_animation "CAR_SC1_FL" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0967: actor $PLAYER_ACTOR move_mouth 3000 ms 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_14784 
+0605: actor 93@ perform_animation "CAR_SC1_FR" IFP "CAR_CHAT" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time 9000 
+
+:GARAG1_14784
+gosub @GARAG1_24529 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_14815 
+0967: actor 93@ move_mouth 20000 ms 
+
+:GARAG1_14815
+if and
+  114@ >= 4 
+  7 >= 114@ 
+jf @GARAG1_14847 
+gosub @GARAG1_24529 
+
+:GARAG1_14847
+if 
+  114@ == 8 
+jf @GARAG1_14949 
+if 
+  32@ > 2000 
+jf @GARAG1_14949 
+Camera.SetPosition(-1628.8, 727.3613, 14.7421, 0.0, 0.0, 0.0)
+Camera.PointAt(-1627.844, 727.0695, 14.7728, 2)
+gosub @GARAG1_24529 
+32@ = 0 
+
+:GARAG1_14949
+if and
+  114@ >= 9 
+  11 >= 114@ 
+jf @GARAG1_14981 
+gosub @GARAG1_24529 
+
+:GARAG1_14981
+if 
+  114@ >= 12 
+jf @GARAG1_15006 
+114@ = 20 
+
+:GARAG1_15006
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_15030 
+114@ = 20 
+040D: unload_wav 1 
+
+:GARAG1_15030
+if 
+  33@ > 29000 
+jf @GARAG1_15056 
+114@ = 20 
+
+:GARAG1_15056
+jump @GARAG1_14232 
+
+:GARAG1_15063
+0701: end_scene_skip 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_15086 
+0968: actor 93@ stop_mouth 
+
+:GARAG1_15086
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_15122 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_15122
+04EF: release_animation "CAR_CHAT" 
+Model.Destroy(#PONY)
+Model.Destroy(#WMOMIB)
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+114@ = 0 
+348@ = 80 
+349@ = 0 
+00BE: text_clear_all 
+Marker.Disable(129@)
+Actor.DestroyInstantly(99@)
+Car.Destroy(38@)
+106@ = 0 
+103@ = 1 
+04EF: release_animation "CAR_CHAT" 
+return 
+
+:GARAG1_15224
+018A: 122@(134@,5i) = create_checkpoint_at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) 
+04ED: load_animation "CRIB" 
+Model.Load(#RCGOBLIN)
+
+:GARAG1_15267
+if or
+84EE:   not animation "CRIB" loaded 
+   not Model.Available(#RCGOBLIN)
+jf @GARAG1_15302 
+wait 0 
+jump @GARAG1_15267 
+
+:GARAG1_15302
+41@ = Object.Create(#PARKBENCH1, -2242.6, 136.91, 34.65)
+Object.Destroy(41@)
+37@ = Car.Create(#RCGOBLIN, -2250.33, 139.91, 44.66)
+Car.Destroy(37@)
+023C: load_special_actor 'ZERO' as 1 // models 290-299 
+
+:GARAG1_15371
+if 
+823D:   not special_actor 1 loaded 
+jf @GARAG1_15397 
+wait 0 
+jump @GARAG1_15371 
+
+:GARAG1_15397
+Model.Load(#BOMB)
+Model.Load(#SATCHEL)
+
+:GARAG1_15407
+if or
+   not Model.Available(#BOMB)
+   not Model.Available(#SATCHEL)
+jf @GARAG1_15439 
+wait 0 
+jump @GARAG1_15407 
+
+:GARAG1_15439
+96@ = Actor.Create(CivMale, #SPECIAL01, 74@, 79@, 84@)
+02A9: set_actor 96@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(96@, SachetCharges, 10)
+0568: set_actor 96@ untargetable 1 
+Actor.GiveWeaponAndAmmo(96@, Detonator, 1)
+077A: set_actor 96@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 96@ decision_maker_to 135@ 
+01B9: set_actor 96@ armed_weapon_to 40 
+Actor.DestroyInstantly(96@)
+gosub @GARAG1_18560 
+04ED: load_animation "CAR_CHAT" 
+
+:GARAG1_15538
+if 
+84EE:   not animation "CAR_CHAT" loaded 
+jf @GARAG1_15572 
+wait 0 
+jump @GARAG1_15538 
+
+:GARAG1_15572
+if 
+  110@ == 1 
+jf @GARAG1_15592 
+return 
+
+:GARAG1_15592
+0085: 334@ = 96@ // (int) 
+0085: 335@ = 96@ // (int) 
+0085: 336@ = 96@ // (int) 
+0085: 337@ = 93@ // (int) 
+0085: 338@ = 93@ // (int) 
+0085: 339@ = 93@ // (int) 
+008B: 340@ = $PLAYER_ACTOR // (int) 
+0085: 341@ = 93@ // (int) 
+0085: 342@ = 93@ // (int) 
+0085: 343@ = 96@ // (int) 
+0085: 344@ = 96@ // (int) 
+0085: 345@ = 96@ // (int) 
+008B: 346@ = $PLAYER_ACTOR // (int) 
+008B: 347@ = $PLAYER_ACTOR // (int) 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+06D7: enable_train_traffic 0 
+if 
+   not Car.Wrecked(37@)
+jf @GARAG1_15813 
+Car.PutAt(37@, -2244.56, 127.11, 40.0)
+0743: heli 37@ fly_to -2244.48 129.14 34.56 altitude 0.0 0.0 
+Car.SetMaxSpeed(37@, 21.0)
+
+:GARAG1_15813
+Camera.SetPosition(-2250.306, 140.9439, 41.7533, 0.0, 0.0, 0.0)
+Camera.PointAt(-2249.804, 140.343, 41.1311, 2)
+0395: clear_area 1 at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 1000.0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_16036 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_15937 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_15937
+40@ = Car.Angle(34@)
+if and
+  40@ > 90.0 
+  270.0 > 40@ 
+jf @GARAG1_15993 
+Car.Angle(34@) = 180.0
+jump @GARAG1_16003 
+
+:GARAG1_15993
+Car.Angle(34@) = 0.0
+
+:GARAG1_16003
+if 
+8431:   not car 34@ passenger_seat_free 1 
+jf @GARAG1_16036 
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 1 
+Actor.DestroyInstantly(100@)
+
+:GARAG1_16036
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_16082 
+Actor.Health(96@) = 200
+0446: set_actor 96@ dismemberment_possible 0 
+Actor.SetImmunities(96@, 1, 1, 1, 1, 1)
+
+:GARAG1_16082
+348@ = 92 
+114@ = 0 
+32@ = 0 
+33@ = 0 
+
+:GARAG1_16110
+if 
+   not 114@ == 10 
+jf @GARAG1_16890 
+wait 0 
+if 
+  114@ == 0 
+jf @GARAG1_16183 
+if 
+  32@ > 1500 
+jf @GARAG1_16183 
+0707: start_scene_skip_to @GARAG1_16890 
+gosub @GARAG1_24529 
+
+:GARAG1_16183
+if 
+  114@ == 1 
+jf @GARAG1_16278 
+if 
+  32@ > 2000 
+jf @GARAG1_16278 
+gosub @GARAG1_24529 
+Camera.SetPosition(-2244.449, 135.8613, 34.9713, 0.0, 0.0, 0.0)
+Camera.PointAt(-2244.844, 134.9551, 35.1198, 2)
+
+:GARAG1_16278
+if 
+  114@ == 2 
+jf @GARAG1_16636 
+if 
+  32@ > 3000 
+jf @GARAG1_16636 
+gosub @GARAG1_24529 
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_16636 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_16553 
+if 
+   not Actor.Driving(96@)
+jf @GARAG1_16377 
+0619: enable_actor 96@ collision_detection 1 
+
+:GARAG1_16377
+Actor.PutAt(96@, -2245.34, 134.11, 34.5)
+if and
+  40@ > 90.0 
+  270.0 > 40@ 
+jf @GARAG1_16479 
+0615: define_AS_pack_begin 130@ 
+05D4: AS_actor -1 rotate_angle 93.0 
+05CA: AS_actor -1 enter_car 34@ passenger_seat 1 time 6000 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 96@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+jump @GARAG1_16546 
+
+:GARAG1_16479
+0615: define_AS_pack_begin 130@ 
+05D4: AS_actor -1 rotate_angle 93.0 
+05D3: AS_actor -1 goto_point -2252.853 138.619 34.219 mode 6 time -1 ms // versionA 
+05CA: AS_actor -1 enter_car 34@ passenger_seat 1 time 6000 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 96@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_16546
+jump @GARAG1_16585 
+
+:GARAG1_16553
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+103@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_16585
+Camera.SetPosition(-2251.421, 130.1502, 35.5076, 0.0, 0.0, 0.0)
+Camera.PointAt(-2250.745, 130.8858, 35.4549, 2)
+
+:GARAG1_16636
+if 
+  114@ == 3 
+jf @GARAG1_16731 
+if 
+  32@ > 3000 
+jf @GARAG1_16731 
+Camera.SetPosition(-2253.451, 139.6341, 38.4909, 0.0, 0.0, 0.0)
+Camera.PointAt(-2252.702, 139.074, 38.1371, 2)
+gosub @GARAG1_24529 
+
+:GARAG1_16731
+if 
+  114@ == 4 
+jf @GARAG1_16789 
+if 
+  32@ > 3000 
+jf @GARAG1_16789 
+gosub @GARAG1_24529 
+114@ = 5 
+32@ = 0 
+
+:GARAG1_16789
+if 
+  114@ == 5 
+jf @GARAG1_16833 
+if 
+  32@ > 2000 
+jf @GARAG1_16833 
+114@ = 10 
+
+:GARAG1_16833
+if 
+08D0:   should_skip_cutscene 
+jf @GARAG1_16857 
+114@ = 10 
+040D: unload_wav 1 
+
+:GARAG1_16857
+if 
+  33@ > 13500 
+jf @GARAG1_16883 
+114@ = 10 
+
+:GARAG1_16883
+jump @GARAG1_16110 
+
+:GARAG1_16890
+0701: end_scene_skip 
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_17043 
+01B9: set_actor 96@ armed_weapon_to 0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_17028 
+if 
+   not Actor.InCar(96@, 34@)
+jf @GARAG1_17028 
+if 
+0431:   car 34@ passenger_seat_free 1 
+jf @GARAG1_16985 
+0430: put_actor 96@ into_car 34@ passenger_seat 1 
+jump @GARAG1_17014 
+
+:GARAG1_16985
+0432: 100@ = get_actor_handle_from_car 34@ passenger_seat 1 
+Actor.DestroyInstantly(100@)
+0430: put_actor 94@(134@,4i) into_car 34@ passenger_seat 1 
+
+:GARAG1_17014
+01B9: set_actor 96@ armed_weapon_to 0 
+02A9: set_actor 96@ immune_to_nonplayer 0 
+
+:GARAG1_17028
+Actor.SetImmunities(96@, 0, 0, 0, 0, 0)
+
+:GARAG1_17043
+if 
+   not Car.Wrecked(37@)
+jf @GARAG1_17119 
+Car.PutAt(37@, -2242.34, 128.0, 34.2)
+Car.SetImmunities(37@, 0, 0, 0, 0, 0)
+Car.SetMaxSpeed(37@, 0.0)
+Car.Health(37@) = 400
+Car.LockInCurrentPosition(37@) = True
+
+:GARAG1_17119
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_17155 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:GARAG1_17155
+06D7: enable_train_traffic 1 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+348@ = 97 
+114@ = 0 
+349@ = 0 
+00BE: text_clear_all 
+Object.RemoveReferences(41@)
+Model.Destroy(#BOMB)
+Model.Destroy(#SATCHEL)
+04EF: release_animation "CRIB" 
+Car.RemoveReferences(37@)
+04EF: release_animation "CAR_CHAT" 
+134@ = 3 
+103@ = 0 
+107@ = 1 
+Model.Destroy(#RCGOBLIN)
+return 
+
+:GARAG1_17264
+018A: 122@(134@,5i) = create_checkpoint_at 69@ 70@ 71@ 
+Model.Load(#HOTDOG)
+
+:GARAG1_17287
+if 
+   not Model.Available(#HOTDOG)
+jf @GARAG1_17314 
+wait 0 
+jump @GARAG1_17287 
+
+:GARAG1_17314
+gosub @GARAG1_18560 
+if 
+  110@ == 1 
+jf @GARAG1_17341 
+return 
+
+:GARAG1_17341
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+32@ = 0 
+Camera.SetPosition(-2040.63, 180.9374, 29.2617, 0.0, 0.0, 0.0)
+Camera.PointAt(-2039.8, 180.3834, 29.3231, 2)
+0395: clear_area 1 at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 1000.0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_17565 
+Car.PutAt(34@, -2033.932, 178.5836, 27.6359)
+Car.Angle(34@) = 86.5989
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_17531 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_17531
+05D1: AS_actor $PLAYER_ACTOR drive_car 34@ to -2039.97 179.98 28.08 speed 20.0 2 model #CSPLAY 3 
+
+:GARAG1_17565
+03CF: load_wav 16503 as 1 
+
+:GARAG1_17572
+if 
+83D0:   not wav 1 loaded 
+jf @GARAG1_17598 
+wait 0 
+jump @GARAG1_17572 
+
+:GARAG1_17598
+00BC: show_text_highpriority GXT 'GAR1_PH' time 10000 flag 1  // ~z~OK, we here.
+03D1: play_wav 1 
+
+:GARAG1_17618
+if 
+83D2:   not wav 1 ended 
+jf @GARAG1_17644 
+wait 0 
+jump @GARAG1_17618 
+
+:GARAG1_17644
+03D5: remove_text 'GAR1_PH'  // ~z~OK, we here.
+114@ = 0 
+
+:GARAG1_17662
+if 
+  4000 > 32@ 
+jf @GARAG1_18149 
+wait 0 
+if 
+  114@ == 0 
+jf @GARAG1_18063 
+if 
+  32@ > 1000 
+jf @GARAG1_18063 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_17830 
+if 
+   not Actor.Dead(94@)
+jf @GARAG1_17830 
+04C4: store_coords_to 51@ 52@ 53@ from_actor 94@ with_offset 1.0 5.0 0.0 
+0615: define_AS_pack_begin 130@ 
+05CD: AS_actor -1 exit_car 34@ 
+05D3: AS_actor -1 goto_point 51@ 52@ 53@ mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 94@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_17830
+wait 1000 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_17943 
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_17943 
+04C4: store_coords_to 51@ 52@ 53@ from_actor 96@ with_offset -5.0 0.0 0.0 
+0615: define_AS_pack_begin 130@ 
+05CD: AS_actor -1 exit_car 34@ 
+05D3: AS_actor -1 goto_point 51@ 52@ 53@ mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 96@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_17943
+wait 500 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_18056 
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_18056 
+04C4: store_coords_to 51@ 52@ 53@ from_actor 93@ with_offset 1.0 5.0 0.0 
+0615: define_AS_pack_begin 130@ 
+05CD: AS_actor -1 exit_car 34@ 
+05D3: AS_actor -1 goto_point 51@ 52@ 53@ mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end 130@ 
+0618: assign_actor 93@ to_AS_pack 130@ 
+061B: remove_references_to_AS_pack 130@ 
+
+:GARAG1_18056
+114@ = 1 
+
+:GARAG1_18063
+if 
+  114@ == 1 
+jf @GARAG1_18122 
+if 
+  32@ > 2500 
+jf @GARAG1_18122 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+114@ = 2 
+
+:GARAG1_18122
+if 
+  110@ == 1 
+jf @GARAG1_18142 
+return 
+
+:GARAG1_18142
+jump @GARAG1_17662 
+
+:GARAG1_18149
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @GARAG1_18185 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2028.0 177.0 28.2 
+
+:GARAG1_18185
+04EF: release_animation "SMOKING" 
+04EF: release_animation "PARK" 
+04EF: release_animation "CAR" 
+04EF: release_animation "CRIB" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "CAR_CHAT" 
+Model.Destroy(#BOMB)
+Model.Destroy(#SATCHEL)
+Model.Destroy(#EMPEROR)
+Model.Destroy(#HOTDOG)
+Model.Destroy(#PONY)
+Model.Destroy(#WMOMIB)
+Model.Destroy(#RCGOBLIN)
+Model.Destroy(#TOWTRUCK)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+
+:GARAG1_18292
+if 
+fading 
+jf @GARAG1_18316 
+wait 0 
+jump @GARAG1_18292 
+
+:GARAG1_18316
+Actor.PutAt($PLAYER_ACTOR, -2028.0, 177.0, 28.2)
+Actor.Angle($PLAYER_ACTOR) = 267.0
+Actor.DestroyInstantly(93@)
+Actor.DestroyInstantly(94@)
+Actor.DestroyInstantly(95@)
+Actor.DestroyInstantly(96@)
+Actor.DestroyInstantly(97@)
+Actor.DestroyInstantly(99@)
+Car.Destroy(35@)
+Car.Destroy(34@)
+02E4: load_cutscene_data 'GARAG1C' 
+select_interior 1 
+
+:GARAG1_18401
+if 
+86B9:   not cutscene_data_loaded 
+jf @GARAG1_18425 
+wait 0 
+jump @GARAG1_18401 
+
+:GARAG1_18425
+wait 1500 
+02E7: start_cutscene 
+fade 1 1000 
+
+:GARAG1_18439
+if 
+82E9:   not cutscene_reached_end 
+jf @GARAG1_18463 
+wait 0 
+jump @GARAG1_18439 
+
+:GARAG1_18463
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:GARAG1_18478
+if 
+fading 
+jf @GARAG1_18502 
+wait 0 
+jump @GARAG1_18478 
+
+:GARAG1_18502
+select_interior 0 
+fade 1 1000 
+
+:GARAG1_18513
+if 
+fading 
+jf @GARAG1_18537 
+wait 0 
+jump @GARAG1_18513 
+
+:GARAG1_18537
+349@ = 0 
+107@ = 0 
+109@ = 1 
+return 
+
+:GARAG1_18560
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_22139 
+
+:GARAG1_18576
+if 
+   not 119@ == 1 
+jf @GARAG1_22132 
+wait 0 
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_18625 
+return 
+
+:GARAG1_18625
+if 
+  101@ == 1 
+jf @GARAG1_19063 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 200.0 200.0 200.0 
+jf @GARAG1_18988 
+if 
+  120@ == 0 
+jf @GARAG1_18981 
+94@(134@,4i) = Actor.Create(CivMale, #SPECIAL03, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+0568: set_actor 94@(134@,4i) untargetable 1 
+0619: enable_actor 94@(134@,4i) collision_detection 0 
+Actor.Angle(94@(134@,4i)) = 228.0
+Actor.SetImmunities(94@(134@,4i), 0, 0, 0, 1, 0)
+09F6: set_actor 94@(134@,4i) unjackable_through_driver_seat 0 
+077A: set_actor 94@(134@,4i) acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 94@(134@,4i) decision_maker_to 135@ 
+0568: set_actor 94@(134@,4i) untargetable 1 
+36@ = Car.Create(#TOWTRUCK, -1676.0, 440.0, 6.7)
+Car.DoorStatus(36@) = 2
+0918: set_car 36@ engine_operation 1 
+0919: enable_car 36@ parking_lights 1 
+Car.Angle(36@) = 313.0
+Car.Health(36@) = 500
+Car.LockInCurrentPosition(36@) = True
+0689: set_car 36@ remove_door 0 removed_door_visible 0 
+0812: AS_actor 94@(134@,4i) perform_animation "FIXN_CAR_LOOP" IFP "CAR" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+120@ = 1 
+
+:GARAG1_18981
+jump @GARAG1_19063 
+
+:GARAG1_18988
+if 
+  120@ == 1 
+jf @GARAG1_19063 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_19035 
+Actor.DestroyInstantly(94@(134@,4i))
+
+:GARAG1_19035
+if 
+   not Car.Wrecked(36@)
+jf @GARAG1_19056 
+Car.Destroy(36@)
+
+:GARAG1_19056
+120@ = 0 
+
+:GARAG1_19063
+if 
+  102@ == 1 
+jf @GARAG1_19553 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 200.0 200.0 200.0 
+jf @GARAG1_19457 
+if 
+  120@ == 0 
+jf @GARAG1_19450 
+35@ = Car.Create(#HOTDOG, -2238.888, 541.5267, 34.375)
+Car.DoorStatus(35@) = 2
+0918: set_car 35@ engine_operation 1 
+0919: enable_car 35@ parking_lights 1 
+Car.Angle(35@) = 0.0
+Car.LockInCurrentPosition(35@) = True
+94@(134@,4i) = Actor.Create(CivMale, #SPECIAL04, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+0568: set_actor 94@(134@,4i) untargetable 1 
+Actor.Angle(94@(134@,4i)) = 270.0
+42@ = Object.Create(#CIGAR, 72@(134@,5f), 77@(134@,5f), 82@(134@,5f))
+070A: AS_actor 94@(134@,4i) attach_to_object 42@ offset 0.04 0.1 0.05 on_bone 5 16 perform_animation "NULL" IFP_file "NULL" time 0 
+Actor.LockInCurrentPosition(94@(134@,4i)) = True
+077A: set_actor 94@(134@,4i) acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 94@(134@,4i) decision_maker_to 135@ 
+09F6: set_actor 94@(134@,4i) unjackable_through_driver_seat 0 
+0605: actor 94@(134@,4i) perform_animation "M_SMKLEAN_LOOP" IFP "SMOKING" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time 0 
+120@ = 1 
+
+:GARAG1_19450
+jump @GARAG1_19553 
+
+:GARAG1_19457
+if 
+  120@ == 1 
+jf @GARAG1_19553 
+if 
+   not Actor.Dead(94@(134@,4i))
+jf @GARAG1_19504 
+Actor.DestroyInstantly(94@(134@,4i))
+
+:GARAG1_19504
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_19525 
+Car.Destroy(35@)
+
+:GARAG1_19525
+if 
+03CA:   object 42@ exists 
+jf @GARAG1_19546 
+Object.Destroy(42@)
+
+:GARAG1_19546
+120@ = 0 
+
+:GARAG1_19553
+if 
+  103@ == 1 
+jf @GARAG1_20042 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 200.0 200.0 200.0 
+jf @GARAG1_19954 
+if 
+  120@ == 0 
+jf @GARAG1_19947 
+41@ = Object.Create(#PARKBENCH1, -2244.55, 133.91, 34.4)
+Object.Angle(41@) = 0.0
+Object.KeepInMemory(41@) = True
+96@ = Actor.Create(CivMale, #SPECIAL01, -2244.7, 133.91, 33.82)
+09F6: set_actor 96@ unjackable_through_driver_seat 0 
+0568: set_actor 96@ untargetable 1 
+0812: AS_actor 96@ perform_animation "CRIB_CONSOLE_LOOP" IFP "CRIB" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0619: enable_actor 96@ collision_detection 0 
+077A: set_actor 96@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 96@ decision_maker_to 135@ 
+Actor.Angle(96@) = 280.0
+02A9: set_actor 96@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(96@, SachetCharges, 10)
+0568: set_actor 96@ untargetable 1 
+Actor.GiveWeaponAndAmmo(96@, Detonator, 1)
+077A: set_actor 96@ acquaintance 1 to_actors_pedtype 0 // see ped.dat 
+060B: set_actor 96@ decision_maker_to 135@ 
+01B9: set_actor 96@ armed_weapon_to 40 
+37@ = Car.Create(#RCGOBLIN, -2250.33, 139.91, 44.66)
+Car.SetImmunities(37@, 1, 1, 1, 1, 1)
+Car.SetMaxSpeed(37@, 30.0)
+0825: set_helicopter 37@ instant_rotor_start 
+04A2: set_heli 37@ fly_to -2258.7 132.54 37.72 altitude_between 5.0 and 35.0 
+120@ = 1 
+
+:GARAG1_19947
+jump @GARAG1_20042 
+
+:GARAG1_19954
+if 
+  120@ == 1 
+jf @GARAG1_20042 
+if 
+03CA:   object 41@ exists 
+jf @GARAG1_19993 
+Object.Destroy(41@)
+
+:GARAG1_19993
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_20014 
+Actor.DestroyInstantly(96@)
+
+:GARAG1_20014
+if 
+   not Car.Wrecked(37@)
+jf @GARAG1_20035 
+Car.Destroy(37@)
+
+:GARAG1_20035
+120@ = 0 
+
+:GARAG1_20042
+if 
+  107@ == 1 
+jf @GARAG1_20220 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 69@ 70@ 71@ radius 300.0 300.0 300.0 
+jf @GARAG1_20174 
+if 
+  120@ == 0 
+jf @GARAG1_20167 
+35@ = Car.Create(#HOTDOG, -2026.0, 169.0, 28.2)
+Car.DoorStatus(35@) = 2
+Car.Angle(35@) = 120.0
+120@ = 1 
+
+:GARAG1_20167
+jump @GARAG1_20220 
+
+:GARAG1_20174
+if 
+  120@ == 1 
+jf @GARAG1_20220 
+if 
+   not Car.Wrecked(35@)
+jf @GARAG1_20213 
+Car.Destroy(35@)
+
+:GARAG1_20213
+120@ = 0 
+
+:GARAG1_20220
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_22065 
+if or
+  101@ == 1 
+  102@ == 1 
+  103@ == 1 
+jf @GARAG1_20719 
+if 
+01B0:   car 34@ sphere 1 in_sphere 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 4.0 4.0 4.0 stopped 
+jf @GARAG1_20719 
+if 
+01B0:   car 34@ sphere 0 in_sphere 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) radius 2.5 2.5 2.5 stopped 
+jf @GARAG1_20710 
+if 
+  118@ == 0 
+jf @GARAG1_20412 
+040D: unload_wav 1 
+03CF: load_wav 16490 as 1 
+118@ = 1 
+
+:GARAG1_20412
+if 
+  118@ == 1 
+jf @GARAG1_20472 
+if 
+03D0:   wav 1 loaded 
+jf @GARAG1_20472 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GAR1_OA' time 3000 flag 1  // ~z~Blow the horn.
+118@ = 2 
+
+:GARAG1_20472
+if 
+  118@ == 2 
+jf @GARAG1_20527 
+if 
+03D2:   wav 1 ended 
+jf @GARAG1_20527 
+040D: unload_wav 1 
+03D5: remove_text 'GAR1_OA'  // ~z~Blow the horn.
+118@ = 3 
+
+:GARAG1_20527
+if 
+   Player.PressingHorn($PLAYER_CHAR)
+jf @GARAG1_20703 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @GARAG1_20703 
+039E: set_actor $PLAYER_ACTOR locked 1 while_in_car 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_20589 
+Car.DoorStatus(34@) = 4
+
+:GARAG1_20589
+wait 500 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+040D: unload_wav 1 
+03E6: remove_text_box 
+wait 1000 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_20673 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_20673 
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+
+:GARAG1_20673
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_20696 
+Car.DoorStatus(34@) = 1
+
+:GARAG1_20696
+119@ = 1 
+
+:GARAG1_20703
+jump @GARAG1_20719 
+
+:GARAG1_20710
+03E6: remove_text_box 
+118@ = 0 
+
+:GARAG1_20719
+if 
+  105@ == 1 
+jf @GARAG1_20816 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 45@ 46@ 47@ radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @GARAG1_20816 
+119@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:GARAG1_20816
+if 
+  106@ == 1 
+jf @GARAG1_20913 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 48@ 49@ 50@ radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @GARAG1_20913 
+119@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:GARAG1_20913
+if 
+  107@ == 1 
+jf @GARAG1_21107 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_21107 
+if 
+  113@ == 0 
+jf @GARAG1_21107 
+40@ = Car.Angle(34@)
+if 
+01AF:   car 34@ sphere 1 in_sphere -2034.59 180.23 28.43 radius 4.0 4.0 4.0 
+jf @GARAG1_21107 
+if and
+  40@ > 0.0 
+  180.0 > 40@ 
+jf @GARAG1_21107 
+Garage.Open('HBGDSFS')
+113@ = 1 
+Player.CanMove($PLAYER_CHAR) = False
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+119@ = 1 
+
+:GARAG1_21107
+if 
+  101@ == 1 
+jf @GARAG1_21257 
+if 
+  115@ == 0 
+jf @GARAG1_21257 
+if and
+  114@ >= 0 
+  7 >= 114@ 
+jf @GARAG1_21175 
+gosub @GARAG1_24298 
+
+:GARAG1_21175
+if 
+0154:   actor $PLAYER_ACTOR in_zone 'EASB'  // Easter Basin
+jf @GARAG1_21225 
+if 
+  114@ == 8 
+jf @GARAG1_21225 
+gosub @GARAG1_24298 
+
+:GARAG1_21225
+if or
+  114@ == 9 
+  114@ == 10 
+jf @GARAG1_21257 
+gosub @GARAG1_24298 
+
+:GARAG1_21257
+if 
+  105@ == 1 
+jf @GARAG1_21307 
+if and
+  114@ >= 0 
+  6 >= 114@ 
+jf @GARAG1_21307 
+gosub @GARAG1_24298 
+
+:GARAG1_21307
+if 
+  102@ == 1 
+jf @GARAG1_21357 
+if and
+  114@ >= 0 
+  6 >= 114@ 
+jf @GARAG1_21357 
+gosub @GARAG1_24298 
+
+:GARAG1_21357
+if 
+  103@ == 1 
+jf @GARAG1_21407 
+if and
+  114@ >= 0 
+  9 >= 114@ 
+jf @GARAG1_21407 
+gosub @GARAG1_24298 
+
+:GARAG1_21407
+if 
+  107@ == 1 
+jf @GARAG1_21457 
+if and
+  114@ >= 0 
+  7 >= 114@ 
+jf @GARAG1_21457 
+gosub @GARAG1_24298 
+
+:GARAG1_21457
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_22058 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_22058 
+Marker.Disable(122@(134@,5i))
+Marker.Disable(128@)
+Marker.Disable(129@)
+127@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 127@ type_to 1 
+040D: unload_wav 1 
+03CF: load_wav 41406 as 1 
+
+:GARAG1_21539
+if 
+83D0:   not wav 1 loaded 
+jf @GARAG1_21565 
+wait 0 
+jump @GARAG1_21539 
+
+:GARAG1_21565
+00BC: show_text_highpriority GXT 'TRUX_AG' time 10000 flag 1 
+03D1: play_wav 1 
+
+:GARAG1_21585
+if 
+83D2:   not wav 1 ended 
+jf @GARAG1_21611 
+wait 0 
+jump @GARAG1_21585 
+
+:GARAG1_21611
+03D5: remove_text 'TRUX_AG' 
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_21884 
+
+:GARAG1_21638
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @GARAG1_21884 
+wait 0 
+if 
+  112@ == 0 
+jf @GARAG1_21686 
+112@ = 1 
+
+:GARAG1_21686
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_21709 
+jump @GARAG1_21769 
+
+:GARAG1_21709
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_21769
+if 
+0495:   car 34@ burning 
+jf @GARAG1_21850 
+020B: explode_car 34@ 
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_21850
+gosub @GARAG1_22233 
+if 
+  110@ == 1 
+jf @GARAG1_21877 
+return 
+
+:GARAG1_21877
+jump @GARAG1_21638 
+
+:GARAG1_21884
+112@ = 0 
+Marker.Disable(127@)
+if or
+  101@ == 1 
+  102@ == 1 
+  103@ == 1 
+jf @GARAG1_21958 
+018A: 122@(134@,5i) = create_checkpoint_at 54@(134@,5f) 59@(134@,5f) 64@(134@,5f) 
+
+:GARAG1_21958
+if 
+  105@ == 1 
+jf @GARAG1_21990 
+018A: 128@ = create_checkpoint_at 45@ 46@ 47@ 
+
+:GARAG1_21990
+if 
+  106@ == 1 
+jf @GARAG1_22022 
+018A: 129@ = create_checkpoint_at 48@ 49@ 50@ 
+
+:GARAG1_22022
+if 
+  107@ == 1 
+jf @GARAG1_22058 
+018A: 122@(134@,5i) = create_checkpoint_at 69@ 70@ 71@ 
+
+:GARAG1_22058
+jump @GARAG1_22125 
+
+:GARAG1_22065
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_22125
+jump @GARAG1_18576 
+
+:GARAG1_22132
+jump @GARAG1_22192 
+
+:GARAG1_22139
+00BC: show_text_highpriority GXT 'GAR1_07' time 5000 flag 1  // ~r~The car's destroyed!
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+110@ = 1 
+return 
+
+:GARAG1_22192
+119@ = 0 
+Marker.Disable(122@(134@,5i))
+118@ = 0 
+120@ = 0 
+114@ = 0 
+03E6: remove_text_box 
+return 
+
+:GARAG1_22233
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_23055 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 34@ radius 300.0 300.0 300.0 flag 0 
+jf @GARAG1_22350 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_18' time 5000 flag 1  // ~r~You abandoned the car!
+
+:GARAG1_22350
+if 
+   not Actor.Dead(93@)
+jf @GARAG1_22573 
+if 
+   not Actor.InCar(93@, 34@)
+jf @GARAG1_22548 
+if 
+  115@ == 0 
+jf @GARAG1_22422 
+05CA: AS_actor 93@ enter_car 34@ passenger_seat 0 time -1 
+115@ = 1 
+
+:GARAG1_22422
+if 
+  115@ == 1 
+jf @GARAG1_22541 
+if 
+8105:   not actor 93@ near_actor $PLAYER_ACTOR radius 150.0 150.0 150.0 sphere 0 on_foot 
+jf @GARAG1_22541 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_19' time 5000 flag 1  // ~r~You abandoned The Truth!
+
+:GARAG1_22541
+jump @GARAG1_22573 
+
+:GARAG1_22548
+if 
+  115@ == 1 
+jf @GARAG1_22573 
+115@ = 0 
+
+:GARAG1_22573
+if 
+   not 101@ == 1 
+jf @GARAG1_22814 
+if 
+   not Actor.Dead(94@)
+jf @GARAG1_22814 
+if 
+   not Actor.InCar(94@, 34@)
+jf @GARAG1_22789 
+if 
+  117@ == 0 
+jf @GARAG1_22663 
+05CA: AS_actor 94@ enter_car 34@ passenger_seat 2 time -1 
+117@ = 1 
+
+:GARAG1_22663
+if 
+  117@ == 1 
+jf @GARAG1_22782 
+if 
+8105:   not actor 94@ near_actor $PLAYER_ACTOR radius 300.0 300.0 300.0 sphere 0 on_foot 
+jf @GARAG1_22782 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_20' time 5000 flag 1  // ~r~You abandoned Jethro!
+
+:GARAG1_22782
+jump @GARAG1_22814 
+
+:GARAG1_22789
+if 
+  117@ == 1 
+jf @GARAG1_22814 
+117@ = 0 
+
+:GARAG1_22814
+if 
+   not 102@ == 1 
+jf @GARAG1_23055 
+if 
+   not Actor.Dead(95@)
+jf @GARAG1_23055 
+if 
+   not Actor.InCar(95@, 34@)
+jf @GARAG1_23030 
+if 
+  116@ == 0 
+jf @GARAG1_22904 
+05CA: AS_actor 95@ enter_car 34@ passenger_seat 0 time -1 
+116@ = 1 
+
+:GARAG1_22904
+if 
+   not 116@ == 1 
+jf @GARAG1_23023 
+if 
+8105:   not actor 95@ near_actor $PLAYER_ACTOR radius 300.0 300.0 300.0 sphere 0 on_foot 
+jf @GARAG1_23023 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_21' time 5000 flag 1  // ~r~You abandoned Dwayne!
+
+:GARAG1_23023
+jump @GARAG1_23055 
+
+:GARAG1_23030
+if 
+  116@ == 1 
+jf @GARAG1_23055 
+116@ = 0 
+
+:GARAG1_23055
+if 
+   Actor.Dead(93@)
+jf @GARAG1_23138 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_17' time 5000 flag 1  // ~r~Truth's dead!
+return 
+
+:GARAG1_23138
+if 
+  101@ == 1 
+jf @GARAG1_23340 
+if 
+  120@ == 1 
+jf @GARAG1_23340 
+if 
+   Car.Wrecked(36@)
+jf @GARAG1_23257 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_23257
+if 
+   Actor.Dead(94@)
+jf @GARAG1_23340 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_23340
+if 
+  102@ == 1 
+jf @GARAG1_23625 
+if 
+   Actor.Dead(94@)
+jf @GARAG1_23441 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_23441
+if 
+  120@ == 1 
+jf @GARAG1_23625 
+if 
+   Actor.Dead(95@)
+jf @GARAG1_23542 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_15' time 5000 flag 1  // ~r~Dwayne's dead!
+return 
+
+:GARAG1_23542
+if 
+   Car.Wrecked(35@)
+jf @GARAG1_23625 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_15' time 5000 flag 1  // ~r~Dwayne's dead!
+return 
+
+:GARAG1_23625
+if 
+  103@ == 1 
+jf @GARAG1_24004 
+if 
+   Actor.Dead(94@)
+jf @GARAG1_23726 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_23726
+if 
+  120@ == 1 
+jf @GARAG1_24004 
+if 
+   Actor.Dead(96@)
+jf @GARAG1_23827 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_16' time 5000 flag 1  // ~r~Zero's dead!
+return 
+
+:GARAG1_23827
+if 
+   not Actor.Dead(96@)
+jf @GARAG1_24004 
+if 
+051A:   actor 96@ damaged_by_actor $PLAYER_ACTOR 
+jf @GARAG1_23917 
+if 
+   not Actor.Driving(96@)
+jf @GARAG1_23885 
+0619: enable_actor 96@ collision_detection 1 
+
+:GARAG1_23885
+Actor.Health(96@) = 0
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_16' time 5000 flag 1  // ~r~Zero's dead!
+return 
+
+:GARAG1_23917
+if 
+03CA:   object 41@ exists 
+jf @GARAG1_24004 
+if 
+0366:   object 41@ damaged 
+jf @GARAG1_24004 
+if 
+   not Actor.Driving(96@)
+jf @GARAG1_23972 
+0619: enable_actor 96@ collision_detection 1 
+
+:GARAG1_23972
+Actor.Health(96@) = 0
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_16' time 5000 flag 1  // ~r~Zero's dead!
+return 
+
+:GARAG1_24004
+if 
+  107@ == 1 
+jf @GARAG1_24188 
+if 
+   Actor.Dead(94@)
+jf @GARAG1_24105 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_24105
+if 
+   Actor.Dead(96@)
+jf @GARAG1_24188 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_16' time 5000 flag 1  // ~r~Zero's dead!
+return 
+
+:GARAG1_24188
+if or
+  105@ == 1 
+  106@ == 1 
+jf @GARAG1_24296 
+if 
+   Actor.Dead(94@)
+jf @GARAG1_24296 
+107@ = 0 
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+110@ = 1 
+00BC: show_text_highpriority GXT 'GAR1_14' time 5000 flag 1  // ~r~Jethro's dead!
+return 
+
+:GARAG1_24296
+return 
+
+:GARAG1_24298
+if 
+  349@ == 0 
+jf @GARAG1_24338 
+040D: unload_wav 1 
+03CF: load_wav 136@(348@,106i) as 1 
+349@ = 1 
+
+:GARAG1_24338
+if 
+  349@ == 1 
+jf @GARAG1_24428 
+if 
+03D0:   wav 1 loaded 
+jf @GARAG1_24428 
+if 
+   not Actor.Dead(242@(348@,106i))
+jf @GARAG1_24403 
+0967: actor 242@(348@,106i) move_mouth 10000 ms 
+
+:GARAG1_24403
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT $7014(348@,106s) time 10000 flag 1 
+349@ = 2 
+
+:GARAG1_24428
+if 
+  349@ == 2 
+jf @GARAG1_24527 
+if 
+03D2:   wav 1 ended 
+jf @GARAG1_24527 
+if 
+   not Actor.Dead(242@(348@,106i))
+jf @GARAG1_24490 
+0968: actor 242@(348@,106i) stop_mouth 
+
+:GARAG1_24490
+32@ = 0 
+349@ = 0 
+03D5: remove_text $7014(348@,106s) 
+348@ += 1 
+114@ += 1 
+
+:GARAG1_24527
+return 
+
+:GARAG1_24529
+03CF: load_wav 136@(348@,106i) as 1 
+
+:GARAG1_24540
+if 
+83D0:   not wav 1 loaded 
+jf @GARAG1_24566 
+wait 0 
+jump @GARAG1_24540 
+
+:GARAG1_24566
+00BC: show_text_highpriority GXT $7014(348@,106s) time 10000 flag 1 
+03D1: play_wav 1 
+
+:GARAG1_24584
+if 
+83D2:   not wav 1 ended 
+jf @GARAG1_24610 
+wait 0 
+jump @GARAG1_24584 
+
+:GARAG1_24610
+03D5: remove_text $7014(348@,106s) 
+348@ += 1 
+114@ += 1 
+return 
+
+:GARAG1_24635
+01E3: show_text_1number_styled GXT 'M_PASSD' number 0 time 5000 style 1  // MISSION PASSED!
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+0318: set_latest_mission_passed 'GAR_1'  // Wear Flowers in your Hair
+030C: progress_made = 1 
+0629: change_integer_stat 321 to 1 
+create_thread @SCRASH 
+$GARAGE_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:GARAG1_24701
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @GARAG1_24769 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:GARAG1_24769
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:GARAG1_24787
+0925: restore_camera_to_user_defined 
+08E7: disable_entrance_markers 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GARAG1_24816 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:GARAG1_24816
+06D7: enable_train_traffic 1 
+03E6: remove_text_box 
+134@ = 0 
+
+:GARAG1_24829
+if 
+  5 > 134@ 
+jf @GARAG1_24870 
+Marker.Disable(122@(134@,5i))
+134@ += 1 
+jump @GARAG1_24829 
+
+:GARAG1_24870
+04EF: release_animation "PARK" 
+04EF: release_animation "CAR" 
+04EF: release_animation "CRIB" 
+04EF: release_animation "GANGS" 
+04EF: release_animation "CAR_CHAT" 
+04EF: release_animation "SMOKING" 
+Marker.Disable(127@)
+Marker.Disable(128@)
+Marker.Disable(129@)
+if 
+   not Car.Wrecked(34@)
+jf @GARAG1_24964 
+Car.Health(34@) = 600
+
+:GARAG1_24964
+Car.RemoveReferences(34@)
+Car.RemoveReferences(35@)
+Car.RemoveReferences(36@)
+Car.RemoveReferences(35@)
+Car.Destroy(37@)
+Actor.DestroyWithFade(93@)
+Actor.DestroyWithFade(94@)
+Actor.DestroyWithFade(95@)
+Actor.DestroyWithFade(96@)
+Actor.DestroyWithFade(97@)
+Actor.DestroyWithFade(99@)
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Object.Destroy(41@)
+Model.Destroy(#BOMB)
+Model.Destroy(#SATCHEL)
+Model.Destroy(#EMPEROR)
+Model.Destroy(#HOTDOG)
+Model.Destroy(#PONY)
+Model.Destroy(#WMOMIB)
+Model.Destroy(#RCGOBLIN)
+Model.Destroy(#TOWTRUCK)
+Model.Destroy(#HOTDOG)
+Model.Destroy(#CIGAR)
+Object.Destroy(42@)
+08F4: set_max_group_members 99 
+01B7: release_weather 
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+0296: unload_special_actor 3 
+0296: unload_special_actor 4 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+   Garage.IsOpen('HBGDSFS')
+jf @GARAG1_25152 
+Garage.Close('HBGDSFS')
+
+:GARAG1_25152
+101@ = 0 
+102@ = 0 
+103@ = 0 
+104@ = 0 
+107@ = 0 
+105@ = 0 
+106@ = 0 
+114@ = 0 
+120@ = 0 
+121@ = 0 
+113@ = 0 
+109@ = 0 
+110@ = 0 
+112@ = 0 
+108@ = 0 
+111@ = 0 
+$7013 = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+064E: stop_particle 350@ 
+$ONMISSION = 0 
+mission_cleanup 
+return

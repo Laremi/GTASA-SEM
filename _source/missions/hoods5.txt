@@ -1,0 +1,2438 @@
+:HOODS5
+thread 'HOODS5' 
+gosub @HOODS5_298 
+if 
+wasted_or_busted 
+jf @HOODS5_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @HOODS5_15354 
+
+:HOODS5_85
+gosub @HOODS5_15495 
+end_thread 
+if 
+  127@ == 99 
+jf @HOODS5_298 
+032B: 50@ = create_weapon_pickup #COLT45 type 3 ammo 20 at 2444.895 -1981.524 13.933 
+02A8: 49@ = create_marker 6 at 2444.895 -1981.524 13.933 
+02A8: 48@ = create_marker 6 at 2444.895 -1981.524 13.933 
+75@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+43@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+37@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+71@ = Marker.CreateAboveActor(75@)
+72@ = Marker.CreateAboveActor(75@)
+201@ = Marker.CreateAboveActor(75@)
+202@ = Marker.CreateAboveActor(75@)
+03DC: 167@ = create_marker_above_pickup 50@ 
+
+:HOODS5_298
+increment_mission_attempts 
+$ONMISSION = 1 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+154@ = 14 
+155@ = 15 
+156@ = 16 
+157@ = 17 
+158@ = 18 
+161@ = 21 
+148@ = 0 
+077A: set_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+
+:HOODS5_372
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @HOODS5_398 
+jump @HOODS5_15440 
+
+:HOODS5_398
+if 
+0735:   is_keyboard_key_pressed 68 
+jf @HOODS5_501 
+Actor.PutAt($PLAYER_ACTOR, 2769.492, -1967.329, 12.3834)
+36@ = 0 
+
+:HOODS5_440
+if 
+  6 > 36@ 
+jf @HOODS5_501 
+if 
+   not Actor.Dead(37@(36@,6i))
+jf @HOODS5_487 
+05BE: AS_actor 37@(36@,6i) die 
+
+:HOODS5_487
+36@ += 1 
+jump @HOODS5_440 
+
+:HOODS5_501
+if 
+0735:   is_keyboard_key_pressed 70 
+jf @HOODS5_523 
+127@ = 7 
+
+:HOODS5_523
+0871: init_jump_table 127@ total_jumps 9 default_jump 0 @HOODS5_784 jumps 0 @HOODS5_651 1 @HOODS5_672 2 @HOODS5_686 3 @HOODS5_700 4 @HOODS5_714 5 @HOODS5_728 6 @HOODS5_742 
+0872: jump_table_jumps 7 @HOODS5_756 8 @HOODS5_770 -1 @HOODS5_784 -1 @HOODS5_784 -1 @HOODS5_784 -1 @HOODS5_784 -1 @HOODS5_784 -1 @HOODS5_784 -1 @HOODS5_784 
+
+:HOODS5_651
+gosub @HOODS5_957 
+127@ = 1 
+jump @HOODS5_784 
+
+:HOODS5_672
+gosub @HOODS5_1376 
+jump @HOODS5_784 
+
+:HOODS5_686
+gosub @HOODS5_3559 
+jump @HOODS5_784 
+
+:HOODS5_700
+gosub @HOODS5_4744 
+jump @HOODS5_784 
+
+:HOODS5_714
+gosub @HOODS5_5243 
+jump @HOODS5_784 
+
+:HOODS5_728
+gosub @HOODS5_5573 
+jump @HOODS5_784 
+
+:HOODS5_742
+gosub @HOODS5_8046 
+jump @HOODS5_784 
+
+:HOODS5_756
+gosub @HOODS5_9325 
+jump @HOODS5_784 
+
+:HOODS5_770
+jump @HOODS5_15440 
+jump @HOODS5_784 
+
+:HOODS5_784
+gosub @HOODS5_839 
+gosub @HOODS5_939 
+gosub @HOODS5_12869 
+if 
+  126@ == 1 
+jf @HOODS5_830 
+jump @HOODS5_15354 
+
+:HOODS5_830
+jump @HOODS5_372 
+return 
+
+:HOODS5_839
+if 
+  125@ == 1 
+jf @HOODS5_937 
+if 
+   Actor.Dead(75@)
+jf @HOODS5_898 
+126@ = 1 
+00BC: show_text_highpriority GXT 'SW5_L' time 5000 flag 1  // ~r~Sweet died!
+return 
+
+:HOODS5_898
+if 
+   Actor.Dead(43@)
+jf @HOODS5_937 
+126@ = 1 
+00BC: show_text_highpriority GXT 'SW5_M' time 5000 flag 1  // ~r~Sweet's girlfriend died!
+
+:HOODS5_937
+return 
+
+:HOODS5_939
+if 
+   Pickup.Picked_up($PICKUP_EMMETS_COLT45)
+jf @HOODS5_955 
+
+:HOODS5_955
+return 
+
+:HOODS5_957
+0395: clear_area 1 at $138 $139 $140 radius 5.0 
+014C: set_parked_car_generator $2765 cars_to_generate_to 0 
+Model.Load(#CELLPHONE)
+Model.Load(#BFYRI)
+Model.Load(#TEC9)
+Model.Load(#SENTINEL)
+Model.Load(#COLT45)
+Model.Load(#GREENWOO)
+023C: load_special_actor 'SWEET' as 1 // models 290-299 
+023C: load_special_actor 'SEV1' as 3 // models 290-299 
+023C: load_special_actor 'SEV2' as 4 // models 290-299 
+023C: load_special_actor 'SEV3' as 5 // models 290-299 
+038B: load_requested_models 
+
+:HOODS5_1065
+if or
+   not Model.Available(#CELLPHONE)
+   not Model.Available(#BFYRI)
+   not Model.Available(#TEC9)
+   not Model.Available(#COLT45)
+   not Model.Available(#SENTINEL)
+jf @HOODS5_1111 
+wait 0 
+jump @HOODS5_1065 
+
+:HOODS5_1111
+if or
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 3 loaded 
+823D:   not special_actor 4 loaded 
+823D:   not special_actor 5 loaded 
+   not Model.Available(#GREENWOO)
+jf @HOODS5_1154 
+wait 0 
+jump @HOODS5_1111 
+
+:HOODS5_1154
+04ED: load_animation "SWEET" 
+04ED: load_animation "GANGS" 
+
+:HOODS5_1172
+if or
+84EE:   not animation "SWEET" loaded 
+84EE:   not animation "GANGS" loaded 
+jf @HOODS5_1212 
+wait 0 
+jump @HOODS5_1172 
+
+:HOODS5_1212
+07C0: load_path 153 
+07C0: load_path 154 
+
+:HOODS5_1222
+if or
+87C1:   not path 153 available 
+87C1:   not path 154 available 
+jf @HOODS5_1254 
+wait 0 
+jump @HOODS5_1222 
+
+:HOODS5_1254
+060A: create_decision_maker_type 0 store_to 99@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 100@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 47@ // decision\allowed\m_.ped files 
+0746: set_acquaintance 4 of_actors_pedtype 26 to_actors_pedtype 24 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 26 
+0708: reset_decision_maker 47@ event 12 
+0708: reset_decision_maker 47@ event 9 
+0708: reset_decision_maker 47@ event 31 
+$6675 = 0 
+$6676 = 0 
+$6677 = 0 
+$6678 = 0 
+$6679 = 0 
+$6680 = 0 
+198@ = 99999.0 
+199@ = 99999.0 
+return 
+
+:HOODS5_1376
+if 
+  148@ > 1 
+jf @HOODS5_1453 
+if 
+  166@ == 0 
+jf @HOODS5_1453 
+if 
+08D0:   should_skip_cutscene 
+jf @HOODS5_1453 
+148@ = 7 
+147@ = 1 
+355@ = 5 
+35@ = 0 
+
+:HOODS5_1453
+if 
+  148@ == 0 
+jf @HOODS5_1791 
+054C: use_GXT_table 'SWEET5' 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+select_interior 1 
+02E4: load_cutscene_data 'SWEET5A' 
+
+:HOODS5_1511
+if 
+86B9:   not cutscene_data_loaded 
+jf @HOODS5_1535 
+wait 0 
+jump @HOODS5_1511 
+
+:HOODS5_1535
+02E7: start_cutscene 
+fade 1 1000 
+
+:HOODS5_1544
+if 
+82E9:   not cutscene_reached_end 
+jf @HOODS5_1568 
+wait 0 
+jump @HOODS5_1544 
+
+:HOODS5_1568
+fade 0 0 
+
+:HOODS5_1574
+if 
+fading 
+jf @HOODS5_1598 
+wait 0 
+jump @HOODS5_1574 
+
+:HOODS5_1598
+02EA: end_cutscene 
+select_interior 0 
+018A: 48@ = create_checkpoint_at 2775.793 -1942.909 15.6576 
+08FB: set_checkpoint 48@ type_to 2 
+04E4: refresh_game_renderer_at 2770.116 -1915.896 
+Actor.PutAt($PLAYER_ACTOR, 2770.116, -1915.896, 11.651)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Camera.SetAtPos(2770.116, -1915.896, 11.651)
+Camera.SetPosition(2770.897, -1915.951, 12.6746, 0.0, 0.0, 0.0)
+Camera.PointAt(2770.337, -1916.334, 13.4091, 2)
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+fade 1 1500 
+352@ = 29 
+148@ = 1 
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+
+:HOODS5_1791
+if 
+  148@ == 1 
+jf @HOODS5_1872 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_1872 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+0085: 35@ = 32@ // (int) 
+35@ += 2200 
+355@ = 3 
+148@ = 20 
+
+:HOODS5_1872
+if 
+  148@ == 20 
+jf @HOODS5_2074 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_2074 
+if 
+  352@ == 0 
+jf @HOODS5_2074 
+75@ = Actor.Create(Mission3, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+105@ = Car.Create(#GREENWOO, 2745.545, -1942.74, 12.5394)
+Car.Angle(105@) = 90.0
+Actor.Angle(75@) = 0.0
+43@ = Actor.Create(Mission3, #BFYRI, 2751.282, -1948.867, 16.3125)
+Actor.Angle(43@) = 0.0
+060B: set_actor 43@ decision_maker_to 99@ 
+0085: 399@ = 75@ // (int) 
+0085: 400@ = 43@ // (int) 
+352@ = 1 
+354@ = 7 
+148@ = 2 
+
+:HOODS5_2074
+if 
+  148@ == 2 
+jf @HOODS5_2483 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_2483 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_2162 
+0615: define_AS_pack_begin 68@ 
+04EB: AS_actor -1 crouch 1 
+0729: AS_actor -1 hold_cellphone 1 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 75@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+
+:HOODS5_2162
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_2245 
+0615: define_AS_pack_begin 68@ 
+05B9: AS_actor -1 stay_idle 500 ms 
+0605: actor -1 perform_animation "DUCK_COWER" IFP "PED" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time 16000 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 43@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+
+:HOODS5_2245
+37@ = Actor.Create(Mission2, #SPECIAL03, 2751.515, -1973.178, 16.3051)
+Actor.WeaponAccuracy(37@) = 40
+060B: set_actor 37@ decision_maker_to 99@ 
+Actor.GiveWeaponAndAmmo(37@, Pistol, 99999)
+04EB: AS_actor 37@ crouch 1 
+0615: define_AS_pack_begin 68@ 
+05B9: AS_actor -1 stay_idle 2500 ms 
+05D3: AS_actor -1 goto_point 2751.791 -1964.08 16.3125 mode 4 time -2 ms // versionA 
+05B9: AS_actor -1 stay_idle 3500 ms 
+05D3: AS_actor -1 goto_point 2751.791 -1954.08 16.3125 mode 4 time -2 ms // versionA 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 37@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+38@ = Actor.Create(Mission2, #SPECIAL03, 2753.197, -1973.946, 16.3051)
+Actor.WeaponAccuracy(38@) = 40
+Actor.GiveWeaponAndAmmo(38@, Pistol, 99999)
+04EB: AS_actor 38@ crouch 1 
+0668: AS_actor 38@ rotate_and_shoot_at 2753.15 -1949.642 16.5866 -2 ms 
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+148@ = 3 
+
+:HOODS5_2483
+if 
+  148@ == 3 
+jf @HOODS5_2630 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_2630 
+if 
+  352@ == 3 
+jf @HOODS5_2630 
+if 
+  20@ == 0 
+jf @HOODS5_2607 
+Camera.SetPosition(2753.784, -1947.466, 16.489, 0.0, 0.0, 0.0)
+Camera.PointAt(2753.255, -1948.292, 16.6835, 2)
+
+:HOODS5_2607
+0085: 35@ = 32@ // (int) 
+35@ += 4000 
+148@ = 4 
+
+:HOODS5_2630
+if 
+  148@ == 4 
+jf @HOODS5_2690 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_2690 
+0085: 35@ = 32@ // (int) 
+35@ += 4000 
+148@ = 5 
+
+:HOODS5_2690
+if 
+  148@ == 5 
+jf @HOODS5_2823 
+if 
+  352@ == 7 
+jf @HOODS5_2823 
+Camera.SetPosition(2770.897, -1915.951, 12.6746, 0.0, 0.0, 0.0)
+Camera.PointAt(2770.337, -1916.334, 13.4091, 2)
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_2800 
+Actor.WeaponAccuracy(75@) = 100
+
+:HOODS5_2800
+0085: 35@ = 32@ // (int) 
+35@ += 4500 
+148@ = 21 
+
+:HOODS5_2823
+if 
+  148@ == 21 
+jf @HOODS5_2897 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_2897 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+148@ = 6 
+0085: 35@ = 32@ // (int) 
+35@ += 1000 
+
+:HOODS5_2897
+if 
+  148@ == 6 
+jf @HOODS5_3150 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_3150 
+Camera.SetPosition(2756.252, -1949.02, 17.513, 0.0, 0.0, 0.0)
+Camera.PointAt(2755.402, -1949.518, 17.3404, 2)
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_3127 
+0792: disembark_instantly_actor 75@ 
+04EB: AS_actor 75@ crouch 1 
+Actor.GiveWeaponAndAmmo(75@, Pistol, 500)
+01B9: set_actor 75@ armed_weapon_to 22 
+Actor.Angle(75@) = 180.0
+0615: define_AS_pack_begin 68@ 
+0605: actor -1 perform_animation "CROUCH_ROLL_L" IFP "PED" framedelta 8.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+if 
+   not Actor.Dead(37@)
+jf @HOODS5_3109 
+074D: AS_actor -1 turns_to_and_look_at_actor 37@ timelimit -2 
+
+:HOODS5_3109
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 75@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+
+:HOODS5_3127
+0085: 35@ = 32@ // (int) 
+35@ += 2500 
+148@ = 7 
+
+:HOODS5_3150
+if 
+  148@ == 7 
+jf @HOODS5_3210 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_3210 
+00BE: text_clear_all 
+166@ = 1 
+fade 0 1000 
+148@ = 8 
+
+:HOODS5_3210
+if 
+  148@ == 8 
+jf @HOODS5_3384 
+if 
+   not fading 
+jf @HOODS5_3384 
+04E4: refresh_game_renderer_at 2518.789 -1677.22 
+Actor.PutAt($PLAYER_ACTOR, 2518.448, -1677.224, 13.4109)
+Actor.Angle($PLAYER_ACTOR) = 90.691
+Camera.SetAtPos(2510.284, -1674.066, 14.5338)
+0085: 35@ = 32@ // (int) 
+35@ += 300 
+148@ = 9 
+$6681 = 100 
+0209: 170@ = random_int_in_ranges 2500 6000 
+005A: 170@ += 32@ // (int) 
+03C4: set_status_text $6681 type 1 GXT 'SW5_A3' // global_variable  // SWEET
+0209: 170@ = random_int_in_ranges 2500 6000 
+005A: 170@ += 32@ // (int) 
+
+:HOODS5_3384
+if 
+  148@ == 9 
+jf @HOODS5_3557 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_3557 
+fade 1 1500 
+Actor.DestroyInstantly(75@)
+Actor.DestroyInstantly(37@)
+Actor.DestroyInstantly(38@)
+Actor.DestroyInstantly(43@)
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+062E: get_actor $PLAYER_ACTOR task 1833 status_store_to 34@ // ret 7 if not found 
+00BB: show_text_lowpriority GXT 'SW5_A2' time 6000 flag 1  // ~S~Get over to Sweet before the Seville Boulevard set finish him off.
+00BB: show_text_lowpriority GXT 'SW5_17' time 6000 flag 1  // ~s~Get over to ~g~Emmet's~s~ if you need a piece.
+$193 = 0 
+Player.CanMove($PLAYER_CHAR) = True
+08F6: restore_player_group 
+02A3: enable_widescreen 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03C7: set_sensitivity_to_crime 0.2 
+147@ = 1 
+127@ = 2 
+
+:HOODS5_3557
+return 
+
+:HOODS5_3559
+if 
+001D:   32@ > 170@ // (int) 
+jf @HOODS5_3662 
+0209: 170@ = random_int_in_ranges 2500 6000 
+005A: 170@ += 32@ // (int) 
+0209: 171@ = random_int_in_ranges 2 4 
+0066: $6681 -= 171@ // (int) 
+if 
+  0 >= $6681 
+jf @HOODS5_3662 
+$6681 = 0 
+00BC: show_text_highpriority GXT 'SW5_L' time 5000 flag 1  // ~r~Sweet died!
+125@ = 1 
+
+:HOODS5_3662
+if 
+  97@ == 0 
+jf @HOODS5_4425 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2775.793 -1942.909 15.6576 radius 100.0 100.0 50.0 
+jf @HOODS5_4425 
+08EA: enable_gangs_spawn 0 
+97@ = 1 
+00BB: show_text_lowpriority GXT 'SW5_J' time 4000 flag 1  // ~s~The Seville Boulevard Families have Sweet surrounded in his girl's flat. Take those ~r~Seville boys~s~ out!
+106@ = 2761.516 
+112@ = -1972.028 
+118@ = 12.5459 
+04AF: 140@ = 292 // = constant 
+107@ = 2761.599 
+113@ = -1955.673 
+119@ = 12.5469 
+04AF: 141@ = 293 // = constant 
+108@ = 2768.451 
+114@ = -1972.605 
+120@ = 12.3837 
+04AF: 142@ = 294 // = constant 
+109@ = 2761.551 
+115@ = -1980.099 
+121@ = 12.5478 
+04AF: 143@ = 292 // = constant 
+110@ = 2752.159 
+116@ = -1979.574 
+122@ = 14.0469 
+04AF: 144@ = 293 // = constant 
+111@ = 2768.451 
+117@ = -1972.605 
+123@ = 12.3837 
+04AF: 145@ = 294 // = constant 
+0674: set_car_model #GREENWOO numberplate "GROVE4L_" 
+172@ = Car.Create(#GREENWOO, 2766.923, -1974.348, 12.3783)
+0229: set_car 172@ primary_color_to 59 secondary_color_to 34 
+Car.Angle(172@) = 4.0
+36@ = 0 
+
+:HOODS5_4047
+if 
+  5 > 36@ 
+jf @HOODS5_4241 
+37@(36@,6i) = Actor.Create(Mission1, 140@(36@,6i), 106@(36@,6f), 112@(36@,6f), 118@(36@,6f))
+Actor.WeaponAccuracy(37@(36@,6i)) = 65
+if or
+  36@ == 0 
+  36@ == 3 
+jf @HOODS5_4163 
+Actor.GiveWeaponAndAmmo(37@(36@,6i), Tec9, 99999)
+jump @HOODS5_4179 
+
+:HOODS5_4163
+Actor.GiveWeaponAndAmmo(37@(36@,6i), Pistol, 99999)
+
+:HOODS5_4179
+04EB: AS_actor 37@(36@,6i) crouch 1 
+0668: AS_actor 37@(36@,6i) rotate_and_shoot_at 2750.957 -1968.016 17.9291 -2 ms 
+0816: set_actor 37@(36@,6i) dont_chase_victim 1 
+36@ += 1 
+jump @HOODS5_4047 
+
+:HOODS5_4241
+51@ = Marker.CreateAboveActor(37@)
+52@ = Marker.CreateAboveActor(38@)
+53@ = Marker.CreateAboveActor(39@)
+54@ = Marker.CreateAboveActor(40@)
+55@ = Marker.CreateAboveActor(41@)
+Marker.Disable(48@)
+060B: set_actor 37@ decision_maker_to 47@ 
+060B: set_actor 38@ decision_maker_to 47@ 
+060B: set_actor 39@ decision_maker_to 47@ 
+060B: set_actor 40@ decision_maker_to 47@ 
+060B: set_actor 41@ decision_maker_to 47@ 
+0770: set_actor 37@ target_priority 1 
+0770: set_actor 38@ target_priority 1 
+0770: set_actor 39@ target_priority 1 
+0770: set_actor 40@ target_priority 1 
+0770: set_actor 41@ target_priority 1 
+01E8: create_forbidden_for_cars_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+022B: create_forbidden_for_peds_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+
+:HOODS5_4425
+if 
+  97@ == 1 
+jf @HOODS5_4742 
+gosub @HOODS5_11596 
+if 
+  146@ == 0 
+jf @HOODS5_4550 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA 2782.693 -1921.125 11.7984 cornerB 2746.098 -1993.905 16.9599 
+jf @HOODS5_4550 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_4550 
+146@ = 1 
+03E5: show_text_box 'SW5_19'  // Use low walls and objects for cover. Press ~k~~PED_DUCK~ to crouch.
+
+:HOODS5_4550
+36@ = 0 
+57@ = 0 
+
+:HOODS5_4564
+if 
+  5 > 36@ 
+jf @HOODS5_4663 
+if 
+   Actor.Dead(37@(36@,6i))
+jf @HOODS5_4625 
+Marker.Disable(51@(36@,6i))
+57@ += 1 
+jump @HOODS5_4649 
+
+:HOODS5_4625
+Actor.WeaponAccuracy(37@(36@,6i)) = 173@
+07DD: set_actor 37@(36@,6i) attack_rate 173@ // previously known as temper_to 
+
+:HOODS5_4649
+36@ += 1 
+jump @HOODS5_4564 
+
+:HOODS5_4663
+0085: 173@ = 57@ // (int) 
+173@ *= 6 
+173@ += 60 
+if 
+  57@ == 5 
+jf @HOODS5_4742 
+148@ = 0 
+130@ = 0 
+131@ = 0 
+128@ = 0 
+127@ = 3 
+08F4: set_max_group_members 0 
+
+:HOODS5_4742
+return 
+
+:HOODS5_4744
+if 
+  148@ == 0 
+jf @HOODS5_4785 
+0085: 35@ = 32@ // (int) 
+35@ += 1500 
+148@ = 1 
+
+:HOODS5_4785
+if 
+  148@ == 1 
+jf @HOODS5_4857 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_4857 
+352@ = 29 
+0151: remove_status_text $6681 
+0085: 35@ = 32@ // (int) 
+35@ += 2500 
+148@ = 2 
+
+:HOODS5_4857
+if 
+  148@ == 2 
+jf @HOODS5_4924 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_4924 
+352@ = 29 
+0085: 35@ = 32@ // (int) 
+35@ += 2500 
+148@ = 3 
+
+:HOODS5_4924
+if 
+  148@ == 3 
+jf @HOODS5_5026 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_5026 
+if and
+8818:   not actor $PLAYER_ACTOR in_air 
+89DE:   not actor $PLAYER_ACTOR entering_car 
+jf @HOODS5_5026 
+174@ = 1 
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+0085: 35@ = 32@ // (int) 
+35@ += 2500 
+148@ = 4 
+
+:HOODS5_5026
+if 
+  148@ == 4 
+jf @HOODS5_5084 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_5084 
+148@ = 5 
+352@ = 8 
+354@ = 2 
+
+:HOODS5_5084
+if 
+  148@ == 5 
+jf @HOODS5_5241 
+if 
+  352@ == 0 
+jf @HOODS5_5241 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+018A: 48@ = create_checkpoint_at 2764.272 -1979.494 12.5394 
+091D: remove_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+091E: create_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+00BB: show_text_lowpriority GXT 'SW5_14' time 5000 flag 1  // ~s~Fetch a four door car to ~y~pick up~s~ Sweet and his girl.
+127@ = 4 
+
+:HOODS5_5241
+return 
+
+:HOODS5_5243
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 2764.272 -1979.494 12.5394 radius 4.0 4.0 4.0 
+jf @HOODS5_5571 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_5571 
+59@ = Actor.MissionCar($PLAYER_ACTOR)
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_5571 
+01EA: 60@ = car 59@ max_passengers 
+if 
+  2 > 60@ 
+jf @HOODS5_5405 
+if 
+  61@ == 0 
+jf @HOODS5_5398 
+00BC: show_text_highpriority GXT 'SW5_G' time 5000 flag 1  // ~s~Get a four door car.
+61@ = 1 
+
+:HOODS5_5398
+jump @HOODS5_5571 
+
+:HOODS5_5405
+08EC: 104@ = car 59@ class 
+102@ = Car.Model(59@)
+if or
+04A4:   104@ == 0 // == constant 
+04A4:   104@ == 1 // == constant 
+04A4:   104@ == 2 // == constant 
+04A4:   104@ == 3 // == constant 
+04A4:   102@ == 596 // == constant 
+04A4:   102@ == 420 // == constant 
+jf @HOODS5_5555 
+Player.CanMove($PLAYER_CHAR) = False
+06C7: AS_actor $PLAYER_ACTOR driver_of_car 59@ perform_action 6 timelimit 2000000 
+fade 0 800 
+
+:HOODS5_5505
+if 
+fading 
+jf @HOODS5_5529 
+wait 0 
+jump @HOODS5_5505 
+
+:HOODS5_5529
+127@ = 5 
+148@ = 0 
+Marker.Disable(48@)
+jump @HOODS5_5571 
+
+:HOODS5_5555
+00BC: show_text_highpriority GXT 'SW5_16' time 1000 flag 1  // Sweet needs a getaway car, not one of these!
+
+:HOODS5_5571
+return 
+
+:HOODS5_5573
+if 
+  130@ == 0 
+jf @HOODS5_5622 
+130@ = 1 
+if 
+00E1:   player 0 pressed_key 16 
+jf @HOODS5_5622 
+131@ = 1 
+
+:HOODS5_5622
+if 
+00E1:   player 0 pressed_key 16 
+jf @HOODS5_5738 
+if 
+  131@ == 0 
+jf @HOODS5_5731 
+if and
+   not Actor.Dead(75@)
+   not Actor.Dead(43@)
+jf @HOODS5_5731 
+if and
+   not 148@ == 0 
+   not 148@ == 5 
+jf @HOODS5_5731 
+148@ = 4 
+35@ = 0 
+131@ = 1 
+355@ = 5 
+
+:HOODS5_5731
+jump @HOODS5_5763 
+
+:HOODS5_5738
+if 
+  131@ == 1 
+jf @HOODS5_5763 
+131@ = 0 
+
+:HOODS5_5763
+if 
+  148@ == 5 
+jf @HOODS5_5830 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_5830 
+fade 1 800 
+0085: 35@ = 32@ // (int) 
+35@ += 3000 
+148@ = 1 
+
+:HOODS5_5830
+if 
+  148@ == 0 
+jf @HOODS5_6733 
+00BE: text_clear_all 
+03BA: clear_cars_from_cube_cornerA 2746.504 -2001.61 10.775 cornerB 2789.562 -1927.154 21.633 
+01E8: create_forbidden_for_cars_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+022B: create_forbidden_for_peds_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0708: reset_decision_maker 47@ event 36 
+0709: set_decision_maker 47@ on_event 36 taskID 1022 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 0 // see *.ped files 
+75@ = Actor.Create(Mission3, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+43@ = Actor.Create(Mission3, #BFYRI, 2751.282, -1948.867, 16.3125)
+0085: 399@ = 75@ // (int) 
+0085: 400@ = 43@ // (int) 
+0446: set_actor 75@ dismemberment_possible 0 
+0446: set_actor 43@ dismemberment_possible 0 
+02A9: set_actor 75@ immune_to_nonplayer 0 
+02A9: set_actor 43@ immune_to_nonplayer 0 
+62@ = Car.Create(#SENTINEL, 2766.665, -1901.943, 10.005)
+63@ = Car.Create(#SENTINEL, 2772.638, -1903.127, 10.1479)
+Car.Angle(62@) = 180.0
+Car.Angle(63@) = 180.0
+073B: unknown_car 62@ flag 1 
+073B: unknown_car 63@ flag 1 
+05EB: assign_car 62@ to_path 153 
+05EB: assign_car 63@ to_path 154 
+65@ = Actor.CreateAsDriver(Mission2, #SPECIAL03, 63@)
+64@ = Actor.CreateAsDriver(Mission2, #SPECIAL05, 62@)
+060B: set_actor 64@ decision_maker_to 47@ 
+060B: set_actor 65@ decision_maker_to 47@ 
+Actor.GiveWeaponAndAmmo(64@, Pistol, 99999)
+Actor.GiveWeaponAndAmmo(65@, Pistol, 99999)
+06FD: set_car 62@ speed_on_path_to 0.0 
+06FD: set_car 63@ speed_on_path_to 0.0 
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_6385 
+Car.PutAt(59@, 2763.96, -1978.898, 12.5394)
+Car.Angle(59@) = 0.0
+if 
+8431:   not car 59@ passenger_seat_free 0 
+jf @HOODS5_6352 
+0432: 175@ = get_actor_handle_from_car 59@ passenger_seat 0 
+Actor.DestroyInstantly(175@)
+
+:HOODS5_6352
+if 
+8431:   not car 59@ passenger_seat_free 1 
+jf @HOODS5_6385 
+0432: 175@ = get_actor_handle_from_car 59@ passenger_seat 1 
+Actor.DestroyInstantly(175@)
+
+:HOODS5_6385
+040D: unload_wav 1 
+0209: 10@ = random_int_in_ranges 0 2 
+if 
+  10@ == 0 
+jf @HOODS5_6432 
+03CF: load_wav 38200 as 1 
+jump @HOODS5_6441 
+
+:HOODS5_6432
+03CF: load_wav 38201 as 1 
+
+:HOODS5_6441
+if 
+83D0:   not wav 1 loaded 
+jf @HOODS5_6467 
+wait 0 
+jump @HOODS5_6441 
+
+:HOODS5_6467
+Camera.SetPosition(2756.231, -1949.667, 18.0543, 0.0, 0.0, 0.0)
+Camera.PointAt(2755.751, -1950.535, 17.9303, 2)
+05D6: clear_scmpath 
+05D7: add_point_to_scmpath 2752.402 -1974.076 16.3125 
+Actor.PutAt(43@, 2752.312, -1952.896, 16.3051)
+Actor.Angle(43@) = 180.0
+05D8: AS_assign_scmpath to_actor 43@ flags 6 0 
+Actor.PutAt(75@, 2752.395, -1950.699, 16.3125)
+Actor.Angle(75@) = 180.0
+0615: define_AS_pack_begin 68@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05D8: AS_assign_scmpath to_actor -1 flags 6 0 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 75@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+0085: 35@ = 32@ // (int) 
+35@ += 500 
+148@ = 5 
+wait 500 
+03D1: play_wav 1 
+if 
+  10@ == 0 
+jf @HOODS5_6717 
+00BC: show_text_highpriority GXT 'SWE5_AA' time 2000 flag 1  // ~z~Cover my girl, CJ!
+jump @HOODS5_6733 
+
+:HOODS5_6717
+00BC: show_text_highpriority GXT 'SWE5_AB' time 2000 flag 1  // ~z~Keep their heads down, my girl's coming out!
+
+:HOODS5_6733
+if 
+  148@ == 1 
+jf @HOODS5_7011 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_7011 
+Camera.SetPosition(2764.601, -1986.696, 15.021, 0.0, 0.0, 0.0)
+Camera.PointAt(2764.32, -1985.751, 14.8511, 2)
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_6955 
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_6896 
+Actor.PutAt(43@, 2760.358, -1979.501, 12.5394)
+Actor.Angle(43@) = 330.0
+05CA: AS_actor 43@ enter_car 59@ passenger_seat 1 time 5000 
+
+:HOODS5_6896
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_6955 
+Actor.PutAt(75@, 2767.224, -1981.524, 12.381)
+Actor.Angle(75@) = 0.0
+05CA: AS_actor 75@ enter_car 59@ passenger_seat 0 time 5000 
+
+:HOODS5_6955
+if 
+   not Car.Wrecked(63@)
+jf @HOODS5_6988 
+06FD: set_car 63@ speed_on_path_to 1.0 
+66@ = 1 
+
+:HOODS5_6988
+0085: 35@ = 32@ // (int) 
+35@ += 500 
+148@ = 2 
+
+:HOODS5_7011
+if 
+  148@ == 2 
+jf @HOODS5_7104 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_7104 
+if 
+   not Car.Wrecked(62@)
+jf @HOODS5_7081 
+06FD: set_car 62@ speed_on_path_to 1.0 
+66@ = 1 
+
+:HOODS5_7081
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+148@ = 3 
+
+:HOODS5_7104
+if 
+  148@ == 3 
+jf @HOODS5_7171 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_7171 
+352@ = 12 
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+148@ = 4 
+
+:HOODS5_7171
+if 
+  148@ == 4 
+jf @HOODS5_8044 
+if 
+  176@ == 0 
+jf @HOODS5_7281 
+if 
+   not Car.Wrecked(62@)
+jf @HOODS5_7281 
+if 
+860E:   not car 62@ assigned_to_path 
+jf @HOODS5_7281 
+Car.SetDriverBehaviour(62@, 5)
+Car.SetMaxSpeed(62@, 60.0)
+Car.Health(62@) = 2500
+088B: set_car 62@ form_drag_multiplier_to 0.1 
+176@ = 1 
+
+:HOODS5_7281
+if 
+  177@ == 0 
+jf @HOODS5_7373 
+if 
+   not Car.Wrecked(63@)
+jf @HOODS5_7373 
+if 
+860E:   not car 63@ assigned_to_path 
+jf @HOODS5_7373 
+Car.SetDriverBehaviour(63@, 5)
+Car.SetMaxSpeed(63@, 60.0)
+Car.Health(63@) = 2500
+088B: set_car 63@ form_drag_multiplier_to 0.1 
+177@ = 1 
+
+:HOODS5_7373
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_8044 
+if 
+  352@ == 0 
+jf @HOODS5_8044 
+66@ = 1 
+091D: remove_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+091E: create_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_7515 
+0811: 59@ = actor $PLAYER_ACTOR used_car 
+088B: set_car 59@ form_drag_multiplier_to 5.0 
+
+:HOODS5_7515
+if 
+  131@ == 1 
+jf @HOODS5_7607 
+if 
+   not Car.Wrecked(62@)
+jf @HOODS5_7570 
+if 
+060E:   car 62@ assigned_to_path 
+jf @HOODS5_7570 
+06C5: release_car 62@ from_path 
+
+:HOODS5_7570
+if 
+   not Car.Wrecked(63@)
+jf @HOODS5_7607 
+if 
+060E:   car 63@ assigned_to_path 
+jf @HOODS5_7607 
+06C5: release_car 63@ from_path 
+
+:HOODS5_7607
+if and
+   not Car.Wrecked(62@)
+   not Car.Wrecked(63@)
+jf @HOODS5_7698 
+Car.SetDriverBehaviour(62@, 5)
+Car.SetDriverBehaviour(63@, 3)
+Car.SetMaxSpeed(62@, 60.0)
+Car.SetMaxSpeed(63@, 60.0)
+Car.Health(62@) = 2500
+Car.Health(63@) = 2500
+088B: set_car 62@ form_drag_multiplier_to 0.1 
+088B: set_car 63@ form_drag_multiplier_to 0.1 
+
+:HOODS5_7698
+018A: 73@ = create_checkpoint_at 2509.062 -1672.527 12.386 
+07E0: set_marker 73@ type_to 1 
+if and
+   not Actor.Dead(75@)
+   not Car.Wrecked(59@)
+   not Actor.Dead(43@)
+jf @HOODS5_7859 
+0631: put_actor 75@ in_group $PLAYER_GROUP 
+0631: put_actor 43@ in_group $PLAYER_GROUP 
+07CB: set_actor 75@ supporting_fire 0 
+07CB: set_actor 43@ supporting_fire 0 
+Actor.GiveWeaponAndAmmo(75@, Pistol, 9999)
+if 
+   not Actor.InCar(75@, 59@)
+jf @HOODS5_7825 
+0792: disembark_instantly_actor 75@ 
+0430: put_actor 75@ into_car 59@ passenger_seat 0 
+
+:HOODS5_7825
+if 
+   not Actor.InCar(43@, 59@)
+jf @HOODS5_7859 
+0792: disembark_instantly_actor 43@ 
+0430: put_actor 43@ into_car 59@ passenger_seat 1 
+
+:HOODS5_7859
+if and
+   not Car.Wrecked(63@)
+   not Actor.Dead(65@)
+jf @HOODS5_7927 
+0615: define_AS_pack_begin 68@ 
+06C7: AS_actor -1 driver_of_car 63@ perform_action 1 timelimit 1500 
+06C7: AS_actor -1 driver_of_car 63@ perform_action 14 timelimit 1000 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 65@ to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+
+:HOODS5_7927
+if and
+   not Car.Wrecked(62@)
+   not Actor.Dead(64@)
+jf @HOODS5_7961 
+06C7: AS_actor 64@ driver_of_car 62@ perform_action 1 timelimit 1500 
+
+:HOODS5_7961
+040D: unload_wav 1 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'SW5_I' time 5000 flag 1  // ~s~Get back to your ~y~hood~s~.
+127@ = 6 
+125@ = 1 
+0085: 153@ = 32@ // (int) 
+153@ += 3000 
+164@ = 0 
+08F6: restore_player_group 
+
+:HOODS5_8044
+return 
+
+:HOODS5_8046
+if 
+  152@ == 0 
+jf @HOODS5_8138 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_8138 
+if 
+  352@ == 0 
+jf @HOODS5_8138 
+if 
+001D:   32@ > 153@ // (int) 
+jf @HOODS5_8138 
+352@ = 13 
+354@ = 10 
+152@ = 1 
+
+:HOODS5_8138
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_8353 
+if 
+86EE:   not actor 75@ in_group $PLAYER_GROUP 
+jf @HOODS5_8353 
+if 
+  69@ == 0 
+jf @HOODS5_8250 
+69@ = 1 
+00BC: show_text_highpriority GXT 'SW5_T' time 5000 flag 1  // ~s~You left ~b~Sweet~s~ behind! Go back and get him.
+if 
+875C:   not marker 71@ enabled 
+jf @HOODS5_8245 
+71@ = Marker.CreateAboveActor(75@)
+07E0: set_marker 71@ type_to 1 
+
+:HOODS5_8245
+Marker.Disable(73@)
+
+:HOODS5_8250
+if and
+00F2:   actor $PLAYER_ACTOR near_actor 75@ radius 6.0 6.0 0 
+  69@ == 1 
+jf @HOODS5_8353 
+69@ = 0 
+0631: put_actor 75@ in_group $PLAYER_GROUP 
+07CB: set_actor 75@ supporting_fire 0 
+Marker.Disable(71@)
+if 
+  70@ == 0 
+jf @HOODS5_8353 
+018A: 73@ = create_checkpoint_at 2509.062 -1672.527 12.386 
+
+:HOODS5_8353
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_8575 
+if 
+86EE:   not actor 43@ in_group $PLAYER_GROUP 
+jf @HOODS5_8575 
+if 
+  70@ == 0 
+jf @HOODS5_8465 
+70@ = 1 
+00BC: show_text_highpriority GXT 'SW5_U' time 5000 flag 1  // ~s~You left ~b~Sweet's girlfriend~s~ behind! Go back and get her.
+if 
+875C:   not marker 72@ enabled 
+jf @HOODS5_8460 
+72@ = Marker.CreateAboveActor(43@)
+07E0: set_marker 72@ type_to 1 
+
+:HOODS5_8460
+Marker.Disable(73@)
+
+:HOODS5_8465
+if and
+00F2:   actor $PLAYER_ACTOR near_actor 43@ radius 6.0 6.0 0 
+  70@ == 1 
+jf @HOODS5_8575 
+70@ = 0 
+0631: put_actor 43@ in_group $PLAYER_GROUP 
+07CB: set_actor 43@ supporting_fire 0 
+Marker.Disable(72@)
+if 
+  69@ == 0 
+jf @HOODS5_8575 
+018A: 73@ = create_checkpoint_at 2509.062 -1672.527 12.386 
+07E0: set_marker 73@ type_to 1 
+
+:HOODS5_8575
+if 
+  66@ == 1 
+jf @HOODS5_8695 
+if and
+   not Car.Wrecked(63@)
+   not Actor.Dead(65@)
+jf @HOODS5_8695 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 65@ radius 50.0 50.0 20.0 sphere 0 
+jf @HOODS5_8695 
+Actor.StorePos($PLAYER_ACTOR, 85@, 86@, 87@)
+91@ = Actor.Angle($PLAYER_ACTOR)
+66@ = 2 
+0085: 67@ = 32@ // (int) 
+67@ += 800 
+
+:HOODS5_8695
+if and
+  66@ == 2 
+  103@ == 0 
+jf @HOODS5_8925 
+if 
+001D:   32@ > 67@ // (int) 
+jf @HOODS5_8925 
+04D3: get_nearest_car_path_coords_from $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD type 2 store_to 88@ 89@ 90@ 
+if 
+80C2:   not sphere_onscreen 85@ 86@ 87@ radius 8.0 
+jf @HOODS5_8925 
+if 
+8101:   not actor $PLAYER_ACTOR in_sphere 88@ 89@ 90@ radius 10.0 10.0 10.0 sphere 0 stopped 
+jf @HOODS5_8925 
+if and
+   not Car.Wrecked(63@)
+   not Actor.Dead(65@)
+jf @HOODS5_8925 
+if 
+81F4:   not car 63@ flipped 
+jf @HOODS5_8925 
+if 
+   Actor.InCar(65@, 63@)
+jf @HOODS5_8925 
+Car.PutAt(63@, 85@, 86@, 87@)
+Car.Angle(63@) = 91@
+Car.SetSpeedInstantly(63@, 25.0)
+66@ = 1 
+
+:HOODS5_8925
+if and
+   not Actor.Dead(75@)
+   not Actor.Dead(43@)
+jf @HOODS5_9323 
+if 
+  103@ == 0 
+jf @HOODS5_9105 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2509.062 -1672.527 12.386 radius 63.0 63.0 60.0 
+jf @HOODS5_9105 
+103@ = 1 
+if 
+   not Car.Wrecked(62@)
+jf @HOODS5_9062 
+Car.SetDriverBehaviour(62@, FollowRoad)
+Car.SetMaxSpeed(62@, 20.0)
+Car.RemoveReferences(62@)
+Actor.RemoveReferences(64@)
+
+:HOODS5_9062
+if 
+   not Car.Wrecked(63@)
+jf @HOODS5_9105 
+Car.SetDriverBehaviour(63@, FollowRoad)
+Car.SetMaxSpeed(63@, 20.0)
+Car.RemoveReferences(63@)
+Actor.RemoveReferences(65@)
+
+:HOODS5_9105
+if and
+  70@ == 0 
+  69@ == 0 
+jf @HOODS5_9323 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 2509.062 -1672.527 12.386 radius 4.0 4.0 4.0 
+jf @HOODS5_9323 
+if and
+00FE:   actor 75@ sphere 0 in_sphere 2509.062 -1672.527 12.386 radius 8.0 8.0 4.0 
+00FE:   actor 43@ sphere 0 in_sphere 2509.062 -1672.527 12.386 radius 8.0 8.0 4.0 
+jf @HOODS5_9323 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_9309 
+Player.CanMove($PLAYER_CHAR) = False
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:HOODS5_9309
+127@ = 7 
+148@ = 0 
+
+:HOODS5_9323
+return 
+
+:HOODS5_9325
+if 
+  148@ == 0 
+jf @HOODS5_9373 
+125@ = 0 
+0085: 35@ = 32@ // (int) 
+35@ += 600 
+148@ = 12 
+
+:HOODS5_9373
+if 
+  148@ == 12 
+jf @HOODS5_10036 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10036 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_9442 
+0811: 59@ = actor $PLAYER_ACTOR used_car 
+129@ = Car.Model(59@)
+
+:HOODS5_9442
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_9473 
+Actor.SetImmunities(75@, 1, 1, 1, 1, 1)
+
+:HOODS5_9473
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_9504 
+Actor.SetImmunities(43@, 1, 1, 1, 1, 1)
+
+:HOODS5_9504
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+03BA: clear_cars_from_cube_cornerA 2472.102 -1646.181 19.6421 cornerB 2517.383 -1691.232 9.4098 
+042B: clear_peds_from_cube_cornerA 2472.102 -1646.181 19.6421 cornerB 2517.383 -1691.232 9.4098 
+if 
+   not Car.Wrecked(62@)
+jf @HOODS5_9633 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 62@)
+jf @HOODS5_9633 
+Car.Destroy(62@)
+
+:HOODS5_9633
+if 
+   not Car.Wrecked(63@)
+jf @HOODS5_9673 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 63@)
+jf @HOODS5_9673 
+Car.Destroy(63@)
+
+:HOODS5_9673
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_9740 
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_9740 
+0633: AS_actor $PLAYER_ACTOR exit_car 
+Car.PutAt(59@, 2507.709, -1672.192, 13.458)
+Car.Angle(59@) = 340.0
+
+:HOODS5_9740
+Camera.SetPosition(2514.24, -1679.268, 14.5054, 0.0, 0.0, 0.0)
+Camera.PointAt(2513.649, -1678.482, 14.3221, 2)
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_9887 
+0811: $TEMPVAR_ACTOR_CAR = actor 43@ used_car 
+if 
+  $TEMPVAR_ACTOR_CAR == -1 
+jf @HOODS5_9887 
+Actor.PutAt(43@, 2509.821, -1675.815, 12.5469)
+Actor.Angle(43@) = 337.0
+05D3: AS_actor 43@ goto_point 2512.229 -1672.784 12.4531 mode 4 time -2 ms // versionA 
+
+:HOODS5_9887
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_9983 
+0811: $TEMPVAR_ACTOR_CAR = actor 75@ used_car 
+if 
+  $TEMPVAR_ACTOR_CAR == -1 
+jf @HOODS5_9983 
+Actor.PutAt(75@, 2508.821, -1675.815, 12.5469)
+Actor.Angle(75@) = 337.0
+05D3: AS_actor 75@ goto_point 2511.229 -1672.784 12.4531 mode 4 time -2 ms // versionA 
+
+:HOODS5_9983
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_10029 
+0085: 35@ = 32@ // (int) 
+35@ += 300 
+148@ = 10 
+jump @HOODS5_10036 
+
+:HOODS5_10029
+148@ = 2 
+
+:HOODS5_10036
+if 
+  148@ == 10 
+jf @HOODS5_10143 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10143 
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_10143 
+0811: $TEMPVAR_ACTOR_CAR = actor 43@ used_car 
+if 
+   not $TEMPVAR_ACTOR_CAR == -1 
+jf @HOODS5_10120 
+0633: AS_actor 43@ exit_car 
+
+:HOODS5_10120
+0085: 35@ = 32@ // (int) 
+35@ += 400 
+148@ = 11 
+
+:HOODS5_10143
+if 
+  148@ == 11 
+jf @HOODS5_10250 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10250 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_10250 
+0811: $TEMPVAR_ACTOR_CAR = actor 75@ used_car 
+if 
+   not $TEMPVAR_ACTOR_CAR == -1 
+jf @HOODS5_10227 
+0633: AS_actor 75@ exit_car 
+
+:HOODS5_10227
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+148@ = 1 
+
+:HOODS5_10250
+if 
+  148@ == 1 
+jf @HOODS5_10294 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10294 
+148@ = 2 
+
+:HOODS5_10294
+if 
+  148@ == 2 
+jf @HOODS5_10773 
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_10335 
+0338: set_car 59@ visibility 0 
+
+:HOODS5_10335
+Camera.SetPosition(2509.713, -1671.558, 13.5033, 0.0, 0.0, 0.0)
+Camera.PointAt(2510.19, -1672.389, 13.8387, 2)
+0972: put_actor $PLAYER_ACTOR at 2509.892 -1672.469 13.5032 no_offset 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+if and
+   not Actor.Dead(75@)
+   not Actor.Dead(43@)
+jf @HOODS5_10647 
+Actor.DestroyInstantly(75@)
+75@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+01B9: set_actor 75@ armed_weapon_to 0 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+06C9: remove_actor 75@ from_group 
+06C9: remove_actor 43@ from_group 
+0792: disembark_instantly_actor 75@ 
+0792: disembark_instantly_actor 43@ 
+0972: put_actor 75@ at 2510.792 -1672.469 13.5032 no_offset 
+0972: put_actor 43@ at 2510.792 -1673.469 13.5032 no_offset 
+Actor.Angle(75@) = 90.0
+Actor.Angle(43@) = 90.0
+0812: AS_actor 75@ perform_animation "SWEET_ASS_SLAP" IFP "SWEET" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+0812: AS_actor 43@ perform_animation "HO_ASS_SLAPPED" IFP "SWEET" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+
+:HOODS5_10647
+0085: 399@ = 75@ // (int) 
+$7248 = 1 
+203@ = 23 
+227@ = 5 
+207@ = 100 
+208@ = 1900 
+209@ = 4200 
+210@ = 6000 
+211@ = 8000 
+217@ = 23 
+218@ = 24 
+219@ = 25 
+220@ = 26 
+221@ = 27 
+0085: 35@ = 32@ // (int) 
+35@ += 1700 
+148@ = 3 
+
+:HOODS5_10773
+if 
+  148@ == 3 
+jf @HOODS5_10892 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10892 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_10869 
+0812: AS_actor 75@ perform_animation "PRTIAL_GNGTLKA" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+
+:HOODS5_10869
+148@ = 4 
+0085: 35@ = 32@ // (int) 
+35@ += 300 
+
+:HOODS5_10892
+if 
+  148@ == 4 
+jf @HOODS5_10993 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_10993 
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_10970 
+05F5: AS_actor 43@ goto_point_using_paths 2516.686 -1675.86 13.1227 mode 4 time 5500 
+
+:HOODS5_10970
+148@ = 5 
+0085: 35@ = 32@ // (int) 
+35@ += 2000 
+
+:HOODS5_10993
+if 
+  148@ == 5 
+jf @HOODS5_11148 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_11148 
+0605: actor $PLAYER_ACTOR perform_animation "HNDSHKFA" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -2 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_11125 
+0812: AS_actor 75@ perform_animation "HNDSHKFA_SWT" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 3400 // versionB 
+
+:HOODS5_11125
+148@ = 7 
+0085: 35@ = 32@ // (int) 
+35@ += 4000 
+
+:HOODS5_11148
+if 
+  148@ == 7 
+jf @HOODS5_11336 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_11336 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_11313 
+0812: AS_actor 75@ perform_animation "SWEET_HNDSHLDR_01" IFP "SWEET" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PLYR_HNDSHLDR_01" IFP "SWEET" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_11313 
+Actor.DestroyInstantly(43@)
+
+:HOODS5_11313
+148@ = 8 
+0085: 35@ = 32@ // (int) 
+35@ += 3500 
+
+:HOODS5_11336
+if 
+  148@ == 8 
+jf @HOODS5_11444 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_11444 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_11421 
+Actor.LockInCurrentPosition(75@) = False
+05F5: AS_actor 75@ goto_point_using_paths 2516.686 -1675.86 13.1227 mode 4 time 5500 
+
+:HOODS5_11421
+148@ = 9 
+0085: 35@ = 32@ // (int) 
+35@ += 1500 
+
+:HOODS5_11444
+if 
+  148@ == 9 
+jf @HOODS5_11594 
+if 
+001D:   32@ > 35@ // (int) 
+jf @HOODS5_11594 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_11502 
+Actor.DestroyInstantly(75@)
+
+:HOODS5_11502
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_11523 
+Actor.DestroyInstantly(43@)
+
+:HOODS5_11523
+if 
+   not Car.Wrecked(59@)
+jf @HOODS5_11546 
+0338: set_car 59@ visibility 1 
+
+:HOODS5_11546
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+Player.CanMove($PLAYER_CHAR) = True
+Actor.Angle($PLAYER_ACTOR) = 90.0
+02A3: enable_widescreen 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+08F6: restore_player_group 
+127@ = 8 
+
+:HOODS5_11594
+return 
+
+:HOODS5_11596
+if 
+001D:   32@ > 179@ // (int) 
+jf @HOODS5_12867 
+0085: 179@ = 32@ // (int) 
+179@ += 50 
+180@ += 1 
+if 
+  180@ == 5 
+jf @HOODS5_11662 
+180@ = 0 
+
+:HOODS5_11662
+if 
+   not Actor.Dead(37@(180@,6i))
+jf @HOODS5_12754 
+if 
+  96@ == 0 
+jf @HOODS5_11730 
+if 
+051A:   actor 37@(180@,6i) damaged_by_actor $PLAYER_ACTOR 
+jf @HOODS5_11730 
+96@ = 1 
+
+:HOODS5_11730
+Actor.StorePos(37@(180@,6i), 82@, 83@, 84@)
+Actor.StorePos($PLAYER_ACTOR, 85@, 86@, 87@)
+0509: 200@ = distance_between_XY 85@ 86@ and_XY 82@ 83@ 
+if 
+803B:   not  193@ == 180@ // (int) 
+jf @HOODS5_11856 
+if 
+0025:   198@ > 200@ // (float) 
+jf @HOODS5_11849 
+0085: 194@ = 193@ // (int) 
+0087: 199@ = 198@ // (float) 
+0087: 198@ = 200@ // (float) 
+0085: 193@ = 180@ // (int) 
+
+:HOODS5_11849
+jump @HOODS5_11864 
+
+:HOODS5_11856
+0087: 198@ = 200@ // (float) 
+
+:HOODS5_11864
+if 
+803B:   not  194@ == 180@ // (int) 
+jf @HOODS5_11944 
+if 
+803B:   not  193@ == 180@ // (int) 
+jf @HOODS5_11937 
+if 
+0025:   199@ > 200@ // (float) 
+jf @HOODS5_11937 
+0085: 194@ = 180@ // (int) 
+0087: 199@ = 200@ // (float) 
+
+:HOODS5_11937
+jump @HOODS5_11952 
+
+:HOODS5_11944
+0087: 199@ = 200@ // (float) 
+
+:HOODS5_11952
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HOODS5_12218 
+0811: 59@ = actor $PLAYER_ACTOR used_car 
+02E3: 188@ = car 59@ speed 
+if 
+  188@ > 5.0 
+jf @HOODS5_12218 
+0208: 197@ = random_float_in_ranges -0.2 0.2 
+0087: 196@ = 188@ // (float) 
+196@ *= 1.6 
+005B: 196@ += 197@ // (float) 
+if 
+0025:   196@ > 200@ // (float) 
+jf @HOODS5_12218 
+0087: 196@ = 87@ // (float) 
+0063: 196@ -= 84@ // (float) 
+0097: make 196@ absolute_float 
+if 
+  1.0 > 196@ 
+jf @HOODS5_12218 
+0087: 195@ = 82@ // (float) 
+0063: 195@ -= 85@ // (float) 
+0087: 196@ = 83@ // (float) 
+0063: 196@ -= 86@ // (float) 
+0604: get_Z_angle_for_point 195@ 196@ store_to 190@ 
+189@ = Car.Angle(59@)
+0087: 195@ = 190@ // (float) 
+0063: 195@ -= 189@ // (float) 
+0097: make 195@ absolute_float 
+if 
+  5.0 > 195@ 
+jf @HOODS5_12218 
+96@ = 1 
+181@(180@,6i) = 4 
+
+:HOODS5_12218
+if 
+  181@(180@,6i) == 4 
+jf @HOODS5_12306 
+062E: get_actor 37@(180@,6i) task 1651 status_store_to 34@ // ret 7 if not found 
+if 
+04A4:   34@ == 7 // == constant 
+jf @HOODS5_12306 
+0673: AS_actor 37@(180@,6i) dive_to_offset 1.0 0.0 time_on_ground 500 ms 
+181@(180@,6i) = 5 
+
+:HOODS5_12306
+if 
+  181@(180@,6i) == 5 
+jf @HOODS5_12372 
+062E: get_actor 37@(180@,6i) task 1651 status_store_to 34@ // ret 7 if not found 
+if 
+04A4:   34@ == 7 // == constant 
+jf @HOODS5_12372 
+181@(180@,6i) = 0 
+
+:HOODS5_12372
+if 
+  181@(180@,6i) == 0 
+jf @HOODS5_12450 
+if 
+  96@ == 1 
+jf @HOODS5_12450 
+if or
+003B:   180@ == 193@ // (int) 
+003B:   180@ == 194@ // (int) 
+jf @HOODS5_12450 
+181@(180@,6i) = 1 
+
+:HOODS5_12450
+if 
+  181@(180@,6i) == 1 
+jf @HOODS5_12747 
+062E: get_actor 37@(180@,6i) task 1869 status_store_to 34@ // ret 7 if not found 
+if 
+04A4:   34@ == 7 // == constant 
+jf @HOODS5_12598 
+062E: get_actor 37@(180@,6i) task 1506 status_store_to 34@ // ret 7 if not found 
+if 
+04A4:   34@ == 7 // == constant 
+jf @HOODS5_12598 
+0209: 187@ = random_int_in_ranges 0 2 
+if 
+  187@ == 0 
+jf @HOODS5_12586 
+074D: AS_actor 37@(180@,6i) turns_to_and_look_at_actor $PLAYER_ACTOR timelimit -2 
+jump @HOODS5_12598 
+
+:HOODS5_12586
+05E2: AS_actor 37@(180@,6i) kill_actor $PLAYER_ACTOR 
+
+:HOODS5_12598
+if and
+803B:   not  180@ == 193@ // (int) 
+803B:   not  180@ == 194@ // (int) 
+jf @HOODS5_12747 
+062E: get_actor 37@(180@,6i) task 1560 status_store_to 34@ // ret 7 if not found 
+if 
+04A4:   34@ == 7 // == constant 
+jf @HOODS5_12747 
+0615: define_AS_pack_begin 68@ 
+05F5: AS_actor -1 goto_point_using_paths 106@(180@,6f) 112@(180@,6f) 118@(180@,6f) mode 6 time 6000 
+0668: AS_actor -1 rotate_and_shoot_at 2750.957 -1968.016 17.9291 -2 ms 
+0616: define_AS_pack_end 68@ 
+0618: assign_actor 37@(180@,6i) to_AS_pack 68@ 
+061B: remove_references_to_AS_pack 68@ 
+181@(180@,6i) = 0 
+
+:HOODS5_12747
+jump @HOODS5_12867 
+
+:HOODS5_12754
+if 
+  96@ == 0 
+jf @HOODS5_12779 
+96@ = 1 
+
+:HOODS5_12779
+if 
+003B:   180@ == 193@ // (int) 
+jf @HOODS5_12831 
+0085: 193@ = 194@ // (int) 
+0087: 198@ = 199@ // (float) 
+194@ = 0 
+199@ = 99999.0 
+
+:HOODS5_12831
+if 
+003B:   180@ == 194@ // (int) 
+jf @HOODS5_12867 
+194@ = 0 
+199@ = 99999.0 
+
+:HOODS5_12867
+return 
+
+:HOODS5_12869
+if 
+   not 203@ == 0 
+jf @HOODS5_13069 
+if 
+  204@ == 0 
+jf @HOODS5_12947 
+204@ = 1 
+0085: 205@ = 32@ // (int) 
+206@ = 0 
+0085: 408@ = 205@ // (int) 
+005A: 408@ += 207@(206@,10i) // (int) 
+
+:HOODS5_12947
+if 
+  204@ == 1 
+jf @HOODS5_13069 
+if 
+001D:   32@ > 408@ // (int) 
+jf @HOODS5_13069 
+0085: 352@ = 217@(206@,10i) // (int) 
+206@ += 1 
+227@ -= 1 
+if 
+  227@ == 0 
+jf @HOODS5_13049 
+203@ = 0 
+204@ = 0 
+jump @HOODS5_13069 
+
+:HOODS5_13049
+0085: 408@ = 205@ // (int) 
+005A: 408@ += 207@(206@,10i) // (int) 
+
+:HOODS5_13069
+0871: init_jump_table 355@ total_jumps 6 default_jump 0 @HOODS5_15352 jumps 0 @HOODS5_13132 1 @HOODS5_14494 2 @HOODS5_15023 3 @HOODS5_15099 4 @HOODS5_15157 5 @HOODS5_15271 -1 @HOODS5_15352 
+
+:HOODS5_13132
+0209: 20@ = random_int_in_ranges 0 2 
+if 
+  20@ == 0 
+jf @HOODS5_13320 
+05AA: 230@s = 'MSWE13A' // @s = 'short'  // ~z~Eh.
+04AF: 309@ = 29137 // = constant 
+05AA: 232@s = 'MSWE13B' // @s = 'short'  // ~z~Carl! No time to chit chat!
+04AF: 310@ = 29138 // = constant 
+05AA: 234@s = 'MSWE13C' // @s = 'short'  // ~z~Been seeing a Seville Families bia.
+04AF: 311@ = 29139 // = constant 
+05AA: 236@s = 'MSWE13D' // @s = 'short'  // ~z~Word got out on the street and the boys don't like it.
+04AF: 312@ = 29140 // = constant 
+05AA: 238@s = 'MSWE13E' // @s = 'short'  // ~z~I'm pinned down in the Seville hood, and we need a ride out of here, pronto!
+04AF: 313@ = 29141 // = constant 
+05AA: 240@s = 'MSWE13F' // @s = 'short'  // ~z~Oh for sure man. Hang in there!
+04AF: 314@ = 29142 // = constant 
+05AA: 242@s = 'MSWE01N' // @s = 'short'  // ~z~We'll be taking cover inside!
+04AF: 315@ = 29012 // = constant 
+jump @HOODS5_13474 
+
+:HOODS5_13320
+05AA: 230@s = 'MSWE01A' // @s = 'short'  // ~z~Hey Sweet, I was just looking for you man, wassup?
+04AF: 309@ = 29000 // = constant 
+05AA: 232@s = 'MSWE01B' // @s = 'short'  // ~z~I been with some girl and now I'm stuck.
+04AF: 310@ = 29001 // = constant 
+05AA: 234@s = 'MSWE01E' // @s = 'short'  // ~z~She's Seville Boulevard Familes,
+04AF: 311@ = 29004 // = constant 
+05AA: 236@s = 'MSWE01F' // @s = 'short'  // ~z~And we ain't cool no more..
+04AF: 312@ = 29005 // = constant 
+05AA: 238@s = 'MSWE01G' // @s = 'short'  // ~z~They all over the streets outside her house and I ain't heated!
+04AF: 313@ = 29006 // = constant 
+05AA: 240@s = 'MSWE01K' // @s = 'short'  // ~z~Be ready to run when I holla, alright?
+04AF: 314@ = 29009 // = constant 
+05AA: 242@s = 'MSWE01L' // @s = 'short'  // ~z~That's my nigga! I'll be ready!
+04AF: 315@ = 29010 // = constant 
+
+:HOODS5_13474
+05AA: 244@s = 'SWE5_FA' // @s = 'short'  // ~z~That's my brother!
+04AF: 316@ = 38226 // = constant 
+05AA: 246@s = 'SWE5_FB' // @s = 'short'  // ~z~Get a car and we'll meet you out front!
+04AF: 317@ = 38227 // = constant 
+05AA: 248@s = 'SWE5_GH' // @s = 'short'  // ~z~This wasn't the 'good time' I was thinking about, Sweet!
+04AF: 318@ = 38235 // = constant 
+05AA: 250@s = 'SWE5_CA' // @s = 'short'  // ~z~We got Seville on our tail, CJ!
+04AF: 319@ = 38216 // = constant 
+05AA: 252@s = 'SWE5_CC' // @s = 'short'  // ~z~Seville Families on our case, nigga!
+04AF: 320@ = 38218 // = constant 
+if 
+  20@ == 0 
+jf @HOODS5_13859 
+05AA: 254@s = 'SWE5_GA' // @s = 'short'  // ~z~Don't worry, girl, I don't drive as bad as CJ!
+04AF: 321@ = 38228 // = constant 
+05AA: 256@s = 'SWE5_GH' // @s = 'short'  // ~z~This wasn't the 'good time' I was thinking about, Sweet!
+04AF: 322@ = 38235 // = constant 
+05AA: 258@s = 'SWE5_GB' // @s = 'short'  // ~z~She's got a sister, CJ, you want her number?
+04AF: 323@ = 38229 // = constant 
+05AA: 260@s = 'SWE5_GC' // @s = 'short'  // ~z~Man, Seville Families gone too far this time!
+04AF: 324@ = 38230 // = constant 
+05AA: 262@s = 'SWE5_GJ' // @s = 'short'  // ~z~You better make this up to me, Sweet!
+04AF: 325@ = 38236 // = constant 
+05AA: 264@s = 'SWE5_GD' // @s = 'short'  // ~z~Seville trying to start a war or something!
+04AF: 326@ = 38231 // = constant 
+05AA: 266@s = 'SWE5_GE' // @s = 'short'  // ~z~Yo' dick getting us both in trouble again, Sweet!
+04AF: 327@ = 38232 // = constant 
+05AA: 268@s = 'SWE5_GF' // @s = 'short'  // ~z~Shit is crazy, bro! We gotta bring the Families back together!
+04AF: 328@ = 38233 // = constant 
+05AA: 270@s = 'SWE5_GG' // @s = 'short'  // ~z~Green blasting on green ain't no way to run the Families!
+04AF: 329@ = 38234 // = constant 
+05AA: 272@s = 'SWE5_GL' // @s = 'short'  // ~z~Sweet, we gotta go back for my stuff!
+04AF: 330@ = 38238 // = constant 
+jump @HOODS5_14099 
+
+:HOODS5_13859
+05AA: 254@s = 'SWE5_BA' // @s = 'short'  // ~z~Where we goin' then?
+04AF: 321@ = 38206 // = constant 
+05AA: 256@s = 'SWE5_BB' // @s = 'short'  // ~z~She should hang out at our place, until those Seville fools calm down.
+04AF: 322@ = 38207 // = constant 
+05AA: 258@s = 'SWE5_BC' // @s = 'short'  // ~z~Just want to make things clear, though, we ain't no item or nothing like that - nothing like that, baby.
+04AF: 323@ = 38208 // = constant 
+05AA: 260@s = 'SWE5_BD' // @s = 'short'  // ~z~And what was last night, huh?
+04AF: 324@ = 38209 // = constant 
+05AA: 262@s = 'SWE5_BE' // @s = 'short'  // ~z~And what's with all the, "Girl, you're somethin' special!"
+04AF: 325@ = 38210 // = constant 
+05AA: 264@s = 'SWE5_BF' // @s = 'short'  // ~z~And, "C'mon, girl, you know I love you!"
+04AF: 326@ = 38211 // = constant 
+05AA: 266@s = 'SWE5_BG' // @s = 'short'  // ~z~Well I do, just don't think there's no wedding bells around the corner, that's all.
+04AF: 327@ = 38212 // = constant 
+05AA: 268@s = 'SWE5_BH' // @s = 'short'  // ~z~We will talk about this in private, Sweet Johnson!
+04AF: 328@ = 38213 // = constant 
+05AA: 270@s = 'SWE5_BI' // @s = 'short'  // ~z~You in trouble now, Sweet.
+04AF: 329@ = 38214 // = constant 
+05AA: 272@s = 'SWE5_BJ' // @s = 'short'  // ~z~Eyes on the road, motherfucker!
+04AF: 330@ = 38215 // = constant 
+
+:HOODS5_14099
+05AA: 274@s = 'SWE5_EA' // @s = 'short'  // ~z~I'll see you inside, baby.
+04AF: 331@ = 38221 // = constant 
+05AA: 276@s = 'SWE5_EB' // @s = 'short'  // ~z~Man, this set tripping is killing the Families.
+04AF: 332@ = 38222 // = constant 
+05AA: 278@s = 'SWE5_EC' // @s = 'short'  // ~z~You did good back there!
+04AF: 333@ = 38223 // = constant 
+05AA: 280@s = 'SWE5_ED' // @s = 'short'  // ~z~Hey, I'm a Johnson boy!
+04AF: 334@ = 38224 // = constant 
+05AA: 282@s = 'SWE5_EE' // @s = 'short'  // ~z~Hey, I got unfinished business. Big love.
+04AF: 335@ = 38225 // = constant 
+05AA: 286@s = 'MOBRING' // @s = 'short'  // ~z~(Phone ringing)
+04AF: 337@ = 23000 // = constant 
+358@ = 1 
+359@ = 0 
+360@ = 0 
+361@ = 0 
+362@ = 0 
+363@ = 1 
+364@ = 0 
+365@ = 0 
+366@ = 0 
+367@ = 3 
+368@ = 0 
+369@ = 0 
+370@ = 2 
+371@ = 2 
+372@ = 2 
+373@ = 1 
+374@ = 1 
+375@ = 1 
+376@ = 3 
+377@ = 3 
+378@ = 2 
+379@ = 3 
+380@ = 2 
+381@ = 2 
+382@ = 2 
+383@ = 1 
+384@ = 2 
+385@ = 2 
+386@ = 0 
+008B: 398@ = $PLAYER_ACTOR // (int) 
+355@ = 1 
+03CF: load_wav 309@ as 1 
+03CF: load_wav 310@ as 2 
+349@ = 1 
+350@ = 2 
+jump @HOODS5_15352 
+
+:HOODS5_14494
+if 
+   not 352@ == 0 
+jf @HOODS5_15016 
+if 
+001D:   32@ > 356@ // (int) 
+jf @HOODS5_15016 
+if and
+03D2:   wav 1 ended 
+03D2:   wav 2 ended 
+jf @HOODS5_15016 
+if 
+003B:   349@ == 352@ // (int) 
+jf @HOODS5_14583 
+351@ = 1 
+jump @HOODS5_14646 
+
+:HOODS5_14583
+if 
+003B:   350@ == 352@ // (int) 
+jf @HOODS5_14616 
+351@ = 2 
+jump @HOODS5_14646 
+
+:HOODS5_14616
+351@ = 1 
+0085: 349@ = 352@ // (int) 
+040D: unload_wav 1 
+03CF: load_wav 308@(352@,40i) as 1 
+
+:HOODS5_14646
+if 
+03D0:   wav 351@ loaded 
+jf @HOODS5_15004 
+if 
+   not 357@(352@,40i) == 0 
+jf @HOODS5_14777 
+0085: 405@ = 357@(352@,40i) // (int) 
+0085: 406@ = 397@(405@,7i) // (int) 
+if 
+   not Actor.Dead(406@)
+jf @HOODS5_14777 
+0949: link_wav 351@ to_actor 406@ 
+if 
+894D:   not actor 406@ mutally_active 
+jf @HOODS5_14770 
+404@ = 1 
+0967: actor 406@ move_mouth 15000 ms 
+jump @HOODS5_14777 
+
+:HOODS5_14770
+094E: set_actor 406@ mute_pain_audio 0 
+
+:HOODS5_14777
+if 
+  357@(352@,40i) == 0 
+jf @HOODS5_14806 
+404@ = 1 
+
+:HOODS5_14806
+if 
+  404@ == 1 
+jf @HOODS5_14997 
+03D1: play_wav 351@ 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 228@(352@,40s) time 10000 flag 1 
+355@ += 1 
+404@ = 0 
+352@ += 1 
+0085: 353@ = 352@ // (int) 
+if 
+   not 308@(352@,40i) == 0 
+jf @HOODS5_14997 
+if 
+  351@ == 1 
+jf @HOODS5_14959 
+if 
+803B:   not  350@ == 352@ // (int) 
+jf @HOODS5_14952 
+03CF: load_wav 308@(352@,40i) as 2 
+0085: 350@ = 352@ // (int) 
+
+:HOODS5_14952
+jump @HOODS5_14997 
+
+:HOODS5_14959
+if 
+803B:   not  349@ == 352@ // (int) 
+jf @HOODS5_14997 
+03CF: load_wav 308@(352@,40i) as 1 
+0085: 349@ = 352@ // (int) 
+
+:HOODS5_14997
+jump @HOODS5_15016 
+
+:HOODS5_15004
+03CF: load_wav 308@(352@,40i) as 351@ 
+
+:HOODS5_15016
+jump @HOODS5_15352 
+
+:HOODS5_15023
+if 
+03D2:   wav 351@ ended 
+jf @HOODS5_15053 
+355@ += 1 
+jump @HOODS5_15092 
+
+:HOODS5_15053
+if 
+056D:   actor 406@ defined 
+jf @HOODS5_15092 
+if 
+   Actor.Dead(406@)
+jf @HOODS5_15092 
+355@ += 1 
+
+:HOODS5_15092
+jump @HOODS5_15352 
+
+:HOODS5_15099
+040D: unload_wav 351@ 
+348@(351@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(406@)
+jf @HOODS5_15143 
+0968: actor 406@ stop_mouth 
+094F: enable_actor 406@ pain_audio 
+
+:HOODS5_15143
+355@ += 1 
+jump @HOODS5_15352 
+
+:HOODS5_15157
+352@ += 1 
+if 
+   not 308@(352@,40i) == 0 
+jf @HOODS5_15210 
+03CF: load_wav 308@(352@,40i) as 351@ 
+0085: 348@(351@,3i) = 352@ // (int) 
+
+:HOODS5_15210
+354@ -= 1 
+if 
+   not 354@ > 0 
+jf @HOODS5_15249 
+352@ = 0 
+jump @HOODS5_15257 
+
+:HOODS5_15249
+0085: 352@ = 353@ // (int) 
+
+:HOODS5_15257
+355@ = 1 
+jump @HOODS5_15352 
+
+:HOODS5_15271
+355@ = 1 
+352@ = 0 
+354@ = 0 
+203@ = 0 
+227@ = 0 
+040D: unload_wav 351@ 
+348@(351@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(406@)
+jf @HOODS5_15345 
+094F: enable_actor 406@ pain_audio 
+
+:HOODS5_15345
+jump @HOODS5_15352 
+
+:HOODS5_15352
+return 
+
+:HOODS5_15354
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @HOODS5_15422 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:HOODS5_15422
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:HOODS5_15440
+$SWEET_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'SWEET_5'  // Sweet's Girl
+030C: progress_made = 1 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+01E3: show_text_1number_styled GXT 'M_PASSR' number 7 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 7 
+return 
+
+:HOODS5_15495
+$ONMISSION = 0 
+014C: set_parked_car_generator $2765 cars_to_generate_to 101 
+08F4: set_max_group_members 99 
+if 
+056D:   actor 75@ defined 
+jf @HOODS5_15579 
+if 
+   not Actor.Dead(75@)
+jf @HOODS5_15579 
+Actor.SetImmunities(75@, 0, 0, 0, 0, 0)
+02A9: set_actor 75@ immune_to_nonplayer 0 
+0568: set_actor 75@ untargetable 0 
+Actor.RemoveReferences(75@)
+
+:HOODS5_15579
+if 
+056D:   actor 43@ defined 
+jf @HOODS5_15645 
+if 
+   not Actor.Dead(43@)
+jf @HOODS5_15645 
+Actor.SetImmunities(43@, 0, 0, 0, 0, 0)
+02A9: set_actor 43@ immune_to_nonplayer 0 
+0568: set_actor 43@ untargetable 0 
+Actor.RemoveReferences(43@)
+
+:HOODS5_15645
+36@ = 0 
+
+:HOODS5_15652
+if 
+  5 > 36@ 
+jf @HOODS5_15693 
+Actor.RemoveReferences(37@(36@,6i))
+36@ += 1 
+jump @HOODS5_15652 
+
+:HOODS5_15693
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @HOODS5_15723 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+
+:HOODS5_15723
+04EF: release_animation "SWEET" 
+04EF: release_animation "GANGS" 
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#TEC9)
+Model.Destroy(#SENTINEL)
+Model.Destroy(#COLT45)
+Model.Destroy(#GREENWOO)
+0296: unload_special_actor 1 
+Model.Destroy(#BFYRI)
+0296: unload_special_actor 3 
+0296: unload_special_actor 4 
+0296: unload_special_actor 5 
+0873: release_path 153 
+0873: release_path 154 
+091D: remove_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+091E: create_forbidden_for_boats_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+091D: remove_forbidden_for_boats_cube_cornerA 2463.375 -1702.694 17.9193 cornerB 2508.735 -1644.574 10.5835 
+if 
+   not Car.Wrecked(105@)
+jf @HOODS5_15913 
+Car.RemoveReferences(105@)
+
+:HOODS5_15913
+0151: remove_status_text $6681 
+077B: clear_actor $PLAYER_ACTOR acquaintance 4 to_actors_pedtype 24 // see ped.dat 
+Marker.Disable(51@)
+Marker.Disable(52@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+Marker.Disable(55@)
+Marker.Disable(48@)
+Marker.Disable(73@)
+Marker.Disable(49@)
+Marker.Disable(71@)
+Marker.Disable(72@)
+03C7: set_sensitivity_to_crime 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+06D0: enable_emergency_traffic 1 
+065C: release_decision_maker 47@ 
+065C: release_decision_maker 99@ 
+08EA: enable_gangs_spawn 1 
+0A20: disable_player $PLAYER_CHAR group_control_back 0 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return

@@ -1,0 +1,1094 @@
+:CRASH4
+thread 'CRASH4' 
+gosub @CRASH4_47 
+if 
+wasted_or_busted 
+jf @CRASH4_38 
+gosub @CRASH4_6195 
+
+:CRASH4_38
+gosub @CRASH4_6794 
+end_thread 
+
+:CRASH4_47
+$ONMISSION = 1 
+$2576 = 1 
+49@ = 0 
+50@ = 0 
+46@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+42@ = 0 
+42@ = 0 
+44@ = 0 
+56@ = 0.0 
+57@ = 0.0 
+59@ = 0 
+58@ = 0 
+61@ = 0 
+62@ = 0 
+63@ = 0 
+64@ = 0 
+65@ = 0 
+66@ = 0 
+67@ = 0 
+68@ = 0 
+70@ = 0 
+$2575 = 0 
+71@ = 0 
+72@ = 0 
+73@ = 0 
+74@ = 0 
+increment_mission_attempts 
+wait 0 
+0A0E: disable_text_with_style 1 
+wait 1000 
+054C: use_GXT_table 'CRASH2' 
+076C: set_zone 'GLN1' gang 0 density_to 40 
+076C: set_zone 'GLN1' gang 1 density_to 0 
+076D: get_zone 'GLN1' gang 2 density_to 71@ 
+076D: get_zone 'GLN1' gang 7 density_to 72@ 
+076C: set_zone 'GLN1' gang 2 density_to 0 
+076C: set_zone 'GLN1' gang 7 density_to 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+060A: create_decision_maker_type 2 store_to 43@ // decision\allowed\m_.ped files 
+Model.Load(#BALLAS1)
+Model.Load(#BALLAS2)
+Model.Load(#TEC9)
+04ED: load_animation "GANGS" 
+04ED: load_animation "SMOKING" 
+Model.Load(#CIGAR)
+Model.Load(#FAM2)
+Model.Load(#FAM3)
+038B: load_requested_models 
+
+:CRASH4_442
+if or
+   not Model.Available(#BALLAS2)
+   not Model.Available(#TEC9)
+   not Model.Available(#BALLAS1)
+84EE:   not animation "GANGS" loaded 
+jf @CRASH4_486 
+wait 0 
+jump @CRASH4_442 
+
+:CRASH4_486
+if or
+84EE:   not animation "SMOKING" loaded 
+   not Model.Available(#CIGAR)
+   not Model.Available(#FAM2)
+   not Model.Available(#FAM3)
+023C: load_special_actor 'WEASEL' as 1 // models 290-299 
+jf @CRASH4_544 
+wait 0 
+jump @CRASH4_486 
+
+:CRASH4_544
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0395: clear_area 1 at 1363.689 -1280.441 12.5469 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 1363.689, -1280.441, 12.5469)
+Camera.SetAtPos(1363.689, -1280.441, 12.5469)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+08F5: save_player_group 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+0395: clear_area 1 at 1350.177 -1264.921 14.7166 radius 1.0 
+Camera.SetPosition(1350.177, -1264.921, 14.7166, 0.0, 0.0, 0.0)
+Camera.PointAt(1350.987, -1265.499, 14.8167, 2)
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1500 
+
+:CRASH4_743
+if 
+fading 
+jf @CRASH4_767 
+wait 0 
+jump @CRASH4_743 
+
+:CRASH4_767
+00BC: show_text_highpriority GXT 'AMUHLP' time 10000 flag 1  // ~s~This is Ammu-Nation, you can buy weapons and ammunition here.
+0707: start_scene_skip_to @CRASH4_827 
+32@ = 0 
+
+:CRASH4_797
+if 
+  5000 > 32@ 
+jf @CRASH4_827 
+wait 0 
+jump @CRASH4_797 
+
+:CRASH4_827
+0701: end_scene_skip 
+03D5: remove_text 'AMUHLP'  // ~s~This is Ammu-Nation, you can buy weapons and ammunition here.
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_855
+if 
+fading 
+jf @CRASH4_879 
+wait 0 
+jump @CRASH4_855 
+
+:CRASH4_879
+Model.Load(#LAEJEFFERSALPHA)
+Model.Load(#LAELODPARK02)
+Model.Load(#LAEMACPARK02)
+
+:CRASH4_892
+if or
+   not Model.Available(#LAEJEFFERSALPHA)
+   not Model.Available(#LAELODPARK02)
+   not Model.Available(#LAEMACPARK02)
+jf @CRASH4_927 
+wait 0 
+jump @CRASH4_892 
+
+:CRASH4_927
+038B: load_requested_models 
+02A3: enable_widescreen 1 
+if 
+  $2413 == 1 
+jf @CRASH4_958 
+0707: start_scene_skip_to @CRASH4_2113 
+
+:CRASH4_958
+Actor.PutAt($PLAYER_ACTOR, 1859.931, -1137.139, 22.946)
+0A0B: set_rendering_origin_at_3D_coord 1859.931 -1137.139 22.946 angle 89.9 
+if 
+  62@ == 0 
+jf @CRASH4_1352 
+0395: clear_area 1 at 1924.632 -1126.623 24.135 radius 30.0 
+53@ = Actor.Create(Mission1, #BALLAS3, 1924.632, -1126.623, 24.135)
+02A9: set_actor 53@ immune_to_nonplayer 1 
+Actor.Angle(53@) = 180.0
+60@ = Object.Create(#CIGAR, 1924.632, -1126.623, 24.135)
+070A: AS_actor 53@ attach_to_object 60@ offset 0.04 0.1 -0.02 on_bone 5 16 perform_animation "NULL" IFP_file "NULL" time -1 
+0812: AS_actor 53@ perform_animation "M_SMKLEAN_LOOP" IFP "SMOKING" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+54@ = Actor.Create(Mission1, #BALLAS1, 1921.157, -1127.438, 24.048)
+02A9: set_actor 54@ immune_to_nonplayer 1 
+Actor.Angle(54@) = 270.0
+0812: AS_actor 54@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+55@ = Actor.Create(Mission1, #BALLAS2, 1922.157, -1127.438, 24.048)
+02A9: set_actor 55@ immune_to_nonplayer 1 
+Actor.Angle(55@) = 90.0
+0812: AS_actor 55@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+62@ = 1 
+
+:CRASH4_1352
+Camera.SetPosition(1858.909, -1136.102, 26.7903, 0.0, 0.0, 0.0)
+Camera.PointAt(1859.867, -1136.38, 26.725, 2)
+03DE: set_pedestrians_density_multiplier_to 0.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 2000 
+
+:CRASH4_1425
+if 
+fading 
+jf @CRASH4_1449 
+wait 0 
+jump @CRASH4_1425 
+
+:CRASH4_1449
+00BC: show_text_highpriority GXT 'CM2_10' time 20000 flag 1  // ~s~This is Glen Park, which is Ballas territory.
+32@ = 0 
+
+:CRASH4_1472
+if 
+  10000 > 32@ 
+jf @CRASH4_1502 
+wait 0 
+jump @CRASH4_1472 
+
+:CRASH4_1502
+03D5: remove_text 'CM2_10'  // ~s~This is Glen Park, which is Ballas territory.
+Camera.SetPosition(1916.77, -1130.479, 26.9978, 0.0, 0.0, 0.0)
+Camera.PointAt(1917.738, -1130.27, 26.8593, 2)
+00BC: show_text_highpriority GXT 'CM2_11' time 20000 flag 1  // ~s~You must take out the enemy gang to gain this territory as your own.
+32@ = 0 
+
+:CRASH4_1587
+if 
+  10000 > 32@ 
+jf @CRASH4_1787 
+wait 0 
+if 
+  49@ == 0 
+jf @CRASH4_1780 
+if 
+  32@ > 7000 
+jf @CRASH4_1780 
+if 
+   not Actor.Dead(54@)
+jf @CRASH4_1780 
+if 
+   not Actor.Dead(55@)
+jf @CRASH4_1780 
+0812: AS_actor 54@ perform_animation "HNDSHKCA" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+56@ = 0.0 
+0812: AS_actor 55@ perform_animation "HNDSHKCB" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+57@ = 0.0 
+49@ = 1 
+
+:CRASH4_1780
+jump @CRASH4_1587 
+
+:CRASH4_1787
+03D5: remove_text 'CM2_11'  // ~s~You must take out the enemy gang to gain this territory as your own.
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_1813
+if 
+fading 
+jf @CRASH4_1837 
+wait 0 
+jump @CRASH4_1813 
+
+:CRASH4_1837
+Model.Destroy(#LAEJEFFERSALPHA)
+Model.Destroy(#LAELODPARK02)
+Model.Destroy(#LAEMACPARK02)
+03D5: remove_text 'CM2_2' 
+04E4: refresh_game_renderer_at 1363.689 -1280.441 
+0395: clear_area 1 at 1363.689 -1280.441 12.5469 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 1363.689, -1280.441, 12.5469)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+0A0B: set_rendering_origin_at_3D_coord 1363.689 -1280.441 12.5469 angle 90.0 
+04EF: release_animation "GANGS" 
+04EF: release_animation "SMOKING" 
+if 
+  62@ == 1 
+jf @CRASH4_2007 
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+Object.Destroy(60@)
+
+:CRASH4_2007
+Model.Destroy(#CIGAR)
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1500 
+
+:CRASH4_2043
+if 
+fading 
+jf @CRASH4_2067 
+wait 0 
+jump @CRASH4_2043 
+
+:CRASH4_2067
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+if 
+  $2413 == 1 
+jf @CRASH4_2414 
+44@ = 1 
+
+:CRASH4_2113
+0701: end_scene_skip 
+if 
+  44@ == 0 
+jf @CRASH4_2414 
+00BE: text_clear_all 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_2150
+if 
+fading 
+jf @CRASH4_2174 
+wait 0 
+jump @CRASH4_2150 
+
+:CRASH4_2174
+03DE: set_pedestrians_density_multiplier_to 1.0 
+04E4: refresh_game_renderer_at 1363.689 -1280.441 
+0395: clear_area 1 at 1363.689 -1280.441 12.5469 radius 1.0 
+Actor.PutAt($PLAYER_ACTOR, 1363.689, -1280.441, 12.5469)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+0A0B: set_rendering_origin_at_3D_coord 1363.689 -1280.441 12.5469 angle 90.0 
+04EF: release_animation "GANGS" 
+04EF: release_animation "SMOKING" 
+Model.Destroy(#LAEJEFFERSALPHA)
+Model.Destroy(#LAELODPARK02)
+Model.Destroy(#LAEMACPARK02)
+if 
+  62@ == 1 
+jf @CRASH4_2340 
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+Object.Destroy(60@)
+
+:CRASH4_2340
+Model.Destroy(#CIGAR)
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+08F6: restore_player_group 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1500 
+
+:CRASH4_2374
+if 
+fading 
+jf @CRASH4_2398 
+wait 0 
+jump @CRASH4_2374 
+
+:CRASH4_2398
+Camera.SetBehindPlayer
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+
+:CRASH4_2414
+$2413 = 1 
+02A8: 52@ = create_marker 6 at 1362.895 -1281.008 12.586 
+07FB: set_interior 'AMMUN1' access 1  // Ammu-Nation
+076C: set_zone 'GLN1' gang 0 density_to 40 
+076C: set_zone 'GLN1' gang 1 density_to 0 
+0983: unknown_disable_gang_wars 1 
+08AC: hide_gang_zones_on_map 1 
+08B3: set_gang_zone 'GLN1' as_only_one_available_for_gangwars 
+03C7: set_sensitivity_to_crime 0.5 
+08A3: update_respect_while_on_mission 1 
+0879: enable_gang_wars 1 
+$2577 = 1 
+00BC: show_text_highpriority GXT 'CM2_3' time 8000 flag 1  // ~s~Go to ~y~Glen Park, Ballas territory~s~ and take it over, if you need a gun go into ~b~Ammu-Nation~s~.
+02A8: 45@ = create_marker 62 at 1932.351 -1189.647 19.063 
+
+:CRASH4_2565
+if 
+   not Player.InZone($PLAYER_CHAR, 'GLN1')
+jf @CRASH4_2817 
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CRASH4_2616 
+jump @CRASH4_6351 
+
+:CRASH4_2616
+if 
+  67@ == 0 
+jf @CRASH4_2723 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2444.895 -1981.524 13.933 radius 880.0 880.0 100.0 
+jf @CRASH4_2723 
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @CRASH4_2723 
+03E5: show_text_box 'CM2_18'  // Ballas territory is marked in purple on the radar.
+33@ = 0 
+67@ = 1 
+
+:CRASH4_2723
+if 
+  67@ == 1 
+jf @CRASH4_2794 
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @CRASH4_2794 
+if 
+  33@ > 5000 
+jf @CRASH4_2794 
+03E5: show_text_box 'CM2_19'  // The radar icon indicates the territory to attack, it will stay on the radar until you own the territory.
+67@ = 2 
+
+:CRASH4_2794
+076D: get_zone 'GLN1' gang 0 density_to 47@ 
+jump @CRASH4_2565 
+
+:CRASH4_2817
+Marker.Disable(52@)
+00BC: show_text_highpriority GXT 'CM2_5' time 8000 flag 1  // ~s~Attack enemy gang members while on foot.
+32@ = 0 
+
+:CRASH4_2845
+if 
+887A:   not gang_war_in_progress 
+jf @CRASH4_3109 
+wait 0 
+if 
+   not Player.InZone($PLAYER_CHAR, 'GLN1')
+jf @CRASH4_2935 
+if 
+  46@ == 0 
+jf @CRASH4_2928 
+00BC: show_text_highpriority GXT 'CM2_6' time 8000 flag 1  // ~s~Get back to ~y~Glen Park~s~!
+46@ = 1 
+
+:CRASH4_2928
+jump @CRASH4_2987 
+
+:CRASH4_2935
+if 
+  46@ == 1 
+jf @CRASH4_2987 
+03D5: remove_text 'CM2_6'  // ~s~Get back to ~y~Glen Park~s~!
+00BC: show_text_highpriority GXT 'CM2_5' time 8000 flag 1  // ~s~Attack enemy gang members while on foot.
+46@ = 0 
+
+:CRASH4_2987
+if 
+  73@ == 0 
+jf @CRASH4_3049 
+if 
+  32@ >= 60000 
+jf @CRASH4_3049 
+00BC: show_text_highpriority GXT 'CM2_5' time 8000 flag 1  // ~s~Attack enemy gang members while on foot.
+73@ = 1 
+
+:CRASH4_3049
+if 
+  73@ == 1 
+jf @CRASH4_3102 
+if 
+  32@ >= 70000 
+jf @CRASH4_3102 
+32@ = 0 
+73@ = 0 
+
+:CRASH4_3102
+jump @CRASH4_2845 
+
+:CRASH4_3109
+03D5: remove_text 'CM2_5'  // ~s~Attack enemy gang members while on foot.
+32@ = 0 
+
+:CRASH4_3127
+if 
+   not 47@ == 0 
+jf @CRASH4_3469 
+wait 0 
+076D: get_zone 'GLN1' gang 0 density_to 47@ 
+076D: get_zone 'GLN1' gang 1 density_to 74@ 
+if 
+   not Player.InZone($PLAYER_CHAR, 'GLN1')
+jf @CRASH4_3340 
+if 
+  46@ == 0 
+jf @CRASH4_3247 
+00BC: show_text_highpriority GXT 'CM2_6' time 8000 flag 1  // ~s~Get back to ~y~Glen Park~s~!
+46@ = 1 
+
+:CRASH4_3247
+if 
+887A:   not gang_war_in_progress 
+jf @CRASH4_3326 
+if 
+  74@ == 0 
+jf @CRASH4_3319 
+if 
+  66@ == 0 
+jf @CRASH4_3319 
+00BC: show_text_highpriority GXT 'CM2_17' time 8000 flag 1  // ~s~The enemy have retaken the territory!
+66@ = 1 
+
+:CRASH4_3319
+jump @CRASH4_3333 
+
+:CRASH4_3326
+66@ = 0 
+
+:CRASH4_3333
+jump @CRASH4_3462 
+
+:CRASH4_3340
+if 
+  46@ == 1 
+jf @CRASH4_3376 
+03D5: remove_text 'CM2_6'  // ~s~Get back to ~y~Glen Park~s~!
+46@ = 0 
+
+:CRASH4_3376
+if 
+887A:   not gang_war_in_progress 
+jf @CRASH4_3455 
+if 
+  74@ == 0 
+jf @CRASH4_3448 
+if 
+  65@ == 0 
+jf @CRASH4_3448 
+00BC: show_text_highpriority GXT 'CM2_16' time 8000 flag 1  // ~s~Attack enemy gang members to start the territory take over!
+65@ = 1 
+
+:CRASH4_3448
+jump @CRASH4_3462 
+
+:CRASH4_3455
+65@ = 0 
+
+:CRASH4_3462
+jump @CRASH4_3127 
+
+:CRASH4_3469
+Marker.Disable(45@)
+03D5: remove_text 'CM2_16'  // ~s~Attack enemy gang members to start the territory take over!
+03D5: remove_text 'CM2_17'  // ~s~The enemy have retaken the territory!
+03D5: remove_text 'CM2_6'  // ~s~Get back to ~y~Glen Park~s~!
+03D5: remove_text 'CM2_5'  // ~s~Attack enemy gang members while on foot.
+076C: set_zone 'GLN1' gang 0 density_to 0 
+08A3: update_respect_while_on_mission 0 
+wait 5000 
+0983: unknown_disable_gang_wars 0 
+gosub @ENTEXT_59 
+
+:CRASH4_3553
+if 
+   not $38 == 1 
+jf @CRASH4_3589 
+wait 0 
+gosub @ENTEXT_59 
+jump @CRASH4_3553 
+
+:CRASH4_3589
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+01F7: set_player $PLAYER_CHAR ignored_by_cops 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_3627
+if 
+fading 
+jf @CRASH4_3651 
+wait 0 
+jump @CRASH4_3627 
+
+:CRASH4_3651
+03DE: set_pedestrians_density_multiplier_to 0.0 
+08F5: save_player_group 
+02A3: enable_widescreen 1 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @CRASH4_3758 
+0395: clear_area 1 at 1859.931 -1137.139 22.946 radius 2.0 
+Actor.PutAt($PLAYER_ACTOR, 1859.931, -1137.139, 22.946)
+Actor.Angle($PLAYER_ACTOR) = 284.0
+Camera.SetAtPos(1859.931, -1137.139, 22.946)
+jump @CRASH4_3864 
+
+:CRASH4_3758
+75@ = Actor.MissionCar($PLAYER_ACTOR)
+0395: clear_area 1 at 1859.931 -1137.139 22.946 radius 2.0 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 1859.931 -1137.139 22.946 
+
+:CRASH4_3810
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CRASH4_3837 
+wait 0 
+jump @CRASH4_3810 
+
+:CRASH4_3837
+Actor.Angle($PLAYER_ACTOR) = 284.0
+Camera.SetAtPos(1859.931, -1137.139, 22.946)
+
+:CRASH4_3864
+Camera.SetPosition(1859.828, -1136.18, 33.7679, 0.0, 0.0, 0.0)
+Camera.PointAt(1860.751, -1136.463, 33.508, 2)
+if 
+  63@ == 0 
+jf @CRASH4_4094 
+53@ = Actor.Create(Mission1, #FAM2, 1910.336, -1154.475, 22.699)
+Actor.Angle(53@) = 131.345
+02A9: set_actor 53@ immune_to_nonplayer 1 
+0812: AS_actor 53@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+54@ = Actor.Create(Mission1, #FAM3, 1907.99, -1157.554, 22.932)
+Actor.Angle(54@) = 318.746
+02A9: set_actor 54@ immune_to_nonplayer 1 
+0812: AS_actor 54@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+63@ = 1 
+
+:CRASH4_4094
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:CRASH4_4109
+if 
+fading 
+jf @CRASH4_4133 
+wait 0 
+jump @CRASH4_4109 
+
+:CRASH4_4133
+if 
+  $2414 == 1 
+jf @CRASH4_4158 
+0707: start_scene_skip_to @CRASH4_4688 
+
+:CRASH4_4158
+00BC: show_text_highpriority GXT 'CM2_12' time 20000 flag 1  // ~s~The territory is now owned by the Grove street families and is marked green on the radar.
+32@ = 0 
+
+:CRASH4_4181
+if 
+  10000 > 32@ 
+jf @CRASH4_4211 
+wait 0 
+jump @CRASH4_4181 
+
+:CRASH4_4211
+03D5: remove_text 'CM2_12'  // ~s~The territory is now owned by the Grove street families and is marked green on the radar.
+Camera.SetPosition(1891.889, -1163.394, 25.5792, 0.0, 0.0, 0.0)
+Camera.PointAt(1892.865, -1163.187, 25.5167, 2)
+00BC: show_text_highpriority GXT 'CM2_13' time 20000 flag 1  // ~s~Your gang members can now be found in this territory.
+32@ = 0 
+
+:CRASH4_4296
+if 
+  10000 > 32@ 
+jf @CRASH4_4326 
+wait 0 
+jump @CRASH4_4296 
+
+:CRASH4_4326
+03D5: remove_text 'CM2_13'  // ~s~Your gang members can now be found in this territory.
+00BC: show_text_highpriority GXT 'CM2_14' time 20000 flag 1  // ~s~Your territory will come under constant attack from enemy gangs and you must defend it.
+32@ = 0 
+
+:CRASH4_4360
+if 
+  10000 > 32@ 
+jf @CRASH4_4390 
+wait 0 
+jump @CRASH4_4360 
+
+:CRASH4_4390
+03D5: remove_text 'CM2_14'  // ~s~Your territory will come under constant attack from enemy gangs and you must defend it.
+Camera.SetPosition(1859.828, -1136.18, 33.7679, 0.0, 0.0, 0.0)
+Camera.PointAt(1860.751, -1136.463, 33.508, 2)
+00BC: show_text_highpriority GXT 'CM2_15' time 20000 flag 1  // ~s~When an attack takes place the territory will flash red and an icon will be placed on the radar.
+32@ = 0 
+
+:CRASH4_4475
+if 
+  10000 > 32@ 
+jf @CRASH4_4505 
+wait 0 
+jump @CRASH4_4475 
+
+:CRASH4_4505
+03D5: remove_text 'CM2_15'  // ~s~When an attack takes place the territory will flash red and an icon will be placed on the radar.
+00BC: show_text_highpriority GXT 'CM2_20' time 20000 flag 1  // You will gain respect and money for taking over territory, the money will appear in Grove Street.
+32@ = 0 
+
+:CRASH4_4539
+if 
+  10000 > 32@ 
+jf @CRASH4_4569 
+wait 0 
+jump @CRASH4_4539 
+
+:CRASH4_4569
+03D5: remove_text 'CM2_20'  // You will gain respect and money for taking over territory, the money will appear in Grove Street.
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_4595
+if 
+fading 
+jf @CRASH4_4619 
+wait 0 
+jump @CRASH4_4595 
+
+:CRASH4_4619
+00BE: text_clear_all 
+if 
+  63@ == 1 
+jf @CRASH4_4649 
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+
+:CRASH4_4649
+03DE: set_pedestrians_density_multiplier_to 1.0 
+if 
+  $2414 == 1 
+jf @CRASH4_4784 
+61@ = 1 
+$2414 = 1 
+
+:CRASH4_4688
+0701: end_scene_skip 
+if 
+  61@ == 0 
+jf @CRASH4_4784 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_4723
+if 
+fading 
+jf @CRASH4_4747 
+wait 0 
+jump @CRASH4_4723 
+
+:CRASH4_4747
+00BE: text_clear_all 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+if 
+  63@ == 1 
+jf @CRASH4_4784 
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+
+:CRASH4_4784
+$2414 = 1 
+Camera.SetPosition(1914.107, -1130.994, 27.8685, 0.0, 0.0, 0.0)
+Camera.PointAt(1914.841, -1130.332, 27.7162, 2)
+if 
+  $1794 == 0 
+jf @CRASH4_4874 
+03CF: load_wav 10830 as 1 
+jump @CRASH4_4931 
+
+:CRASH4_4874
+if 
+  $1794 == 1 
+jf @CRASH4_4906 
+03CF: load_wav 10831 as 1 
+jump @CRASH4_4931 
+
+:CRASH4_4906
+if 
+  $1794 == 2 
+jf @CRASH4_4931 
+03CF: load_wav 10832 as 1 
+
+:CRASH4_4931
+if 
+83D0:   not wav 1 loaded 
+jf @CRASH4_4957 
+wait 0 
+jump @CRASH4_4931 
+
+:CRASH4_4957
+0395: clear_area 0 at 1922.439 -1118.043 25.125 radius 10.0 
+34@ = Actor.Create(Mission2, #SPECIAL01, 1922.439, -1118.043, 25.125)
+Actor.Angle(34@) = 180.0
+02A9: set_actor 34@ immune_to_nonplayer 1 
+Actor.GiveWeaponAndAmmo(34@, Tec9, 30000)
+Actor.SetImmunities(34@, 1, 1, 1, 1, 1)
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_5110 
+05D3: AS_actor 34@ goto_point 1922.328 -1127.938 24.078 mode 6 time -1 ms // versionA 
+jump @CRASH4_5117 
+
+:CRASH4_5110
+38@ = 1 
+
+:CRASH4_5117
+if 
+fading 
+jf @CRASH4_5141 
+wait 0 
+jump @CRASH4_5117 
+
+:CRASH4_5141
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_5329 
+0A09: set_actor 34@ muted 1 // versionB 
+if 
+  $1794 == 0 
+jf @CRASH4_5219 
+00BC: show_text_highpriority GXT 'CRA2_ZA' time 10000 flag 1  // ~z~Tenpenny set me up!
+03D1: play_wav 1 
+0967: actor 34@ move_mouth 999999 ms 
+jump @CRASH4_5322 
+
+:CRASH4_5219
+if 
+  $1794 == 1 
+jf @CRASH4_5274 
+00BC: show_text_highpriority GXT 'CRA2_ZB' time 10000 flag 1  // ~z~Busta C.R.A.S.H. set me up!
+03D1: play_wav 1 
+0967: actor 34@ move_mouth 999999 ms 
+jump @CRASH4_5322 
+
+:CRASH4_5274
+if 
+  $1794 == 2 
+jf @CRASH4_5322 
+00BC: show_text_highpriority GXT 'CRA2_ZC' time 10000 flag 1  // ~z~Tenpenny sold me out!
+03D1: play_wav 1 
+0967: actor 34@ move_mouth 999999 ms 
+
+:CRASH4_5322
+jump @CRASH4_5369 
+
+:CRASH4_5329
+03D5: remove_text 'CRA2_ZA'  // ~z~Tenpenny set me up!
+03D5: remove_text 'CRA2_ZB'  // ~z~Busta C.R.A.S.H. set me up!
+03D5: remove_text 'CRA2_ZC'  // ~z~Tenpenny sold me out!
+38@ = 1 
+
+:CRASH4_5369
+0707: start_scene_skip_to @CRASH4_5763 
+32@ = 0 
+
+:CRASH4_5383
+if 
+  2000 > 32@ 
+jf @CRASH4_5561 
+wait 0 
+if 
+  38@ == 0 
+jf @CRASH4_5554 
+if 
+   Actor.Dead(34@)
+jf @CRASH4_5506 
+if 
+83D2:   not wav 1 ended 
+jf @CRASH4_5459 
+040D: unload_wav 1 
+
+:CRASH4_5459
+03D5: remove_text 'CRA2_ZA'  // ~z~Tenpenny set me up!
+03D5: remove_text 'CRA2_ZB'  // ~z~Busta C.R.A.S.H. set me up!
+03D5: remove_text 'CRA2_ZC'  // ~z~Tenpenny sold me out!
+38@ = 1 
+jump @CRASH4_5554 
+
+:CRASH4_5506
+if 
+03D2:   wav 1 ended 
+jf @CRASH4_5554 
+03D5: remove_text 'CRA2_ZA'  // ~z~Tenpenny set me up!
+03D5: remove_text 'CRA2_ZB'  // ~z~Busta C.R.A.S.H. set me up!
+03D5: remove_text 'CRA2_ZC'  // ~z~Tenpenny sold me out!
+
+:CRASH4_5554
+jump @CRASH4_5383 
+
+:CRASH4_5561
+if 
+03D2:   wav 1 ended 
+jf @CRASH4_5609 
+03D5: remove_text 'CRA2_ZA'  // ~z~Tenpenny set me up!
+03D5: remove_text 'CRA2_ZB'  // ~z~Busta C.R.A.S.H. set me up!
+03D5: remove_text 'CRA2_ZC'  // ~z~Tenpenny sold me out!
+
+:CRASH4_5609
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_5644 
+0968: actor 34@ stop_mouth 
+0A09: set_actor 34@ muted 0 // versionB 
+jump @CRASH4_5651 
+
+:CRASH4_5644
+38@ = 1 
+
+:CRASH4_5651
+08F6: restore_player_group 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_5744 
+060B: set_actor 34@ decision_maker_to 43@ 
+35@ = Marker.CreateAboveActor(34@)
+05E2: AS_actor 34@ kill_actor $PLAYER_ACTOR 
+Actor.SetImmunities(34@, 0, 0, 0, 0, 0)
+jump @CRASH4_5756 
+
+:CRASH4_5744
+Marker.Disable(35@)
+38@ = 1 
+
+:CRASH4_5756
+64@ = 1 
+
+:CRASH4_5763
+0701: end_scene_skip 
+if 
+  64@ == 0 
+jf @CRASH4_6054 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:CRASH4_5798
+if 
+fading 
+jf @CRASH4_5822 
+wait 0 
+jump @CRASH4_5798 
+
+:CRASH4_5822
+08F6: restore_player_group 
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_5913 
+0395: clear_area 0 at 1922.903 -1128.477 24.092 radius 2.0 
+Actor.PutAt(34@, 1922.903, -1128.477, 24.092)
+Actor.Angle(34@) = 180.0
+0968: actor 34@ stop_mouth 
+0A09: set_actor 34@ muted 0 // versionB 
+jump @CRASH4_5920 
+
+:CRASH4_5913
+38@ = 1 
+
+:CRASH4_5920
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:CRASH4_5943
+if 
+fading 
+jf @CRASH4_5967 
+wait 0 
+jump @CRASH4_5943 
+
+:CRASH4_5967
+Player.CanMove($PLAYER_CHAR) = True
+01F7: set_player $PLAYER_CHAR ignored_by_cops 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+if 
+   not Actor.Dead(34@)
+jf @CRASH4_6042 
+35@ = Marker.CreateAboveActor(34@)
+05E2: AS_actor 34@ kill_actor $PLAYER_ACTOR 
+Actor.SetImmunities(34@, 0, 0, 0, 0, 0)
+jump @CRASH4_6054 
+
+:CRASH4_6042
+Marker.Disable(35@)
+38@ = 1 
+
+:CRASH4_6054
+$1794 += 1 
+if 
+  $1794 > 2 
+jf @CRASH4_6086 
+$1794 = 0 
+
+:CRASH4_6086
+00BC: show_text_highpriority GXT 'CM2_8' time 8000 flag 1  // ~s~You have flushed the ~r~grass~w~ out, kill him!
+
+:CRASH4_6102
+if 
+   not 38@ == 1 
+jf @CRASH4_6188 
+wait 0 
+if 
+  38@ == 0 
+jf @CRASH4_6181 
+if 
+   Actor.Dead(34@)
+jf @CRASH4_6181 
+03D5: remove_text 'CM2_7' 
+Marker.Disable(35@)
+38@ = 1 
+
+:CRASH4_6181
+jump @CRASH4_6102 
+
+:CRASH4_6188
+jump @CRASH4_6351 
+
+:CRASH4_6195
+076C: set_zone 'GLN1' gang 0 density_to 40 
+076C: set_zone 'GLN1' gang 1 density_to 0 
+076C: set_zone 'GLN1' gang 2 density_to 71@ 
+076C: set_zone 'GLN1' gang 7 density_to 72@ 
+07FB: set_interior 'AMMUN1' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN2' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN3' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN4' access 0  // Ammu-Nation
+07FB: set_interior 'AMMUN5' access 0  // Ammu-Nation
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+0879: enable_gang_wars 0 
+$2577 = 0 
+return 
+
+:CRASH4_6351
+$SWEET_TOTAL_PASSED_MISSIONS += 1 
+0318: set_latest_mission_passed 'RIOT_3'  // All-Terrain Take Down
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 40 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 40 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+Marker.Disable($MARKER_SWEET_HOUSE)
+$MARKER_SWEET_HOUSE = Marker.CreateIconAndSphere($ICON_SWEET, $X_SWEET_HOUSE, $Y_SWEET_HOUSE, $Z_SWEET_HOUSE)
+04A6: $GS_GANG_MONEY_PICKUP = create_asset_money_pickup_at 2502.1 -1686.38 13.0 money 10000 $GS_GANG_CASH 
+create_thread @TCASH 
+07FB: set_interior 'AMMUN1' access 1  // Ammu-Nation
+07FB: set_interior 'AMMUN2' access 1  // Ammu-Nation
+07FB: set_interior 'AMMUN3' access 1  // Ammu-Nation
+07FB: set_interior 'AMMUN4' access 1  // Ammu-Nation
+07FB: set_interior 'AMMUN5' access 1  // Ammu-Nation
+if 
+  $AMMU_ICONS_SHOWN == 0 
+jf @CRASH4_6792 
+$413 = Marker.CreateIconWithoutSphere(6, 1372.9, -1278.8, 12.5)
+$2578 = Marker.CreateIconWithoutSphere(6, 2400.5, -1978.4, 13.5)
+$2579 = Marker.CreateIconWithoutSphere(6, -2626.6, 209.4, 4.9)
+$2580 = Marker.CreateIconWithoutSphere(6, 2535.9, 2083.5, 10.8)
+$2581 = Marker.CreateIconWithoutSphere(6, 2156.5, 943.2, 10.8)
+$2582 = Marker.CreateIconWithoutSphere(6, 779.7, 1874.3, 4.9)
+$2583 = Marker.CreateIconWithoutSphere(6, -2092.7, -2463.8, 30.6)
+$2584 = Marker.CreateIconWithoutSphere(6, 240.0, -178.2, 2.0)
+$2585 = Marker.CreateIconWithoutSphere(6, -1509.4, 2611.8, 58.5)
+$2586 = Marker.CreateIconWithoutSphere(6, -315.67, 829.87, 13.43)
+$2587 = Marker.CreateIconWithoutSphere(6, 2332.9, 63.6, 31.0)
+$AMMU_ICONS_SHOWN = 1 
+
+:CRASH4_6792
+return 
+
+:CRASH4_6794
+Model.Destroy(#LAEJEFFERSALPHA)
+Model.Destroy(#LAELODPARK02)
+Model.Destroy(#LAEMACPARK02)
+03DE: set_pedestrians_density_multiplier_to 1.0 
+0983: unknown_disable_gang_wars 0 
+$ONMISSION = 0 
+$2576 = 0 
+Marker.Disable(45@)
+Marker.Disable(35@)
+Marker.Disable(52@)
+08A3: update_respect_while_on_mission 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+Model.Destroy(#BALLAS1)
+Model.Destroy(#BALLAS2)
+Model.Destroy(#TEC9)
+Model.Destroy(#FAM2)
+Model.Destroy(#FAM3)
+04EF: release_animation "GANGS" 
+04EF: release_animation "SMOKING" 
+Object.Destroy(60@)
+Model.Destroy(#CIGAR)
+Actor.DestroyInstantly(53@)
+Actor.DestroyInstantly(54@)
+Actor.DestroyInstantly(55@)
+065C: release_decision_maker 43@ 
+mission_cleanup 
+return

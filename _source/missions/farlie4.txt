@@ -1,0 +1,1509 @@
+:FARLIE4
+thread 'FARLIE4' 
+gosub @FARLIE4_94 
+if 
+wasted_or_busted 
+jf @FARLIE4_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+gosub @FARLIE4_7909 
+
+:FARLIE4_85
+gosub @FARLIE4_8478 
+end_thread 
+
+:FARLIE4_94
+054C: use_GXT_table 'FARLIE4' 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:FARLIE4_120
+if 
+fading 
+jf @FARLIE4_144 
+wait 0 
+jump @FARLIE4_120 
+
+:FARLIE4_144
+select_interior 1 
+02E4: load_cutscene_data 'FARL_4A' 
+
+:FARLIE4_159
+if 
+86B9:   not cutscene_data_loaded 
+jf @FARLIE4_183 
+wait 0 
+jump @FARLIE4_159 
+
+:FARLIE4_183
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:FARLIE4_200
+if 
+82E9:   not cutscene_reached_end 
+jf @FARLIE4_224 
+wait 0 
+jump @FARLIE4_200 
+
+:FARLIE4_224
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:FARLIE4_238
+if 
+fading 
+jf @FARLIE4_262 
+wait 0 
+jump @FARLIE4_238 
+
+:FARLIE4_262
+02EA: end_cutscene 
+select_interior 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_333 
+Camera.SetAtPos(-2154.998, 645.5436, 51.3516)
+Actor.PutAt($PLAYER_ACTOR, -2154.998, 645.5436, 51.3516)
+Actor.Angle($PLAYER_ACTOR) = 271.113
+Camera.SetBehindPlayer
+
+:FARLIE4_333
+02A3: enable_widescreen 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+increment_mission_attempts 
+$ONMISSION = 1 
+01E8: create_forbidden_for_cars_cube_cornerA -1478.294 -65.4014 0.0 cornerB -1395.423 2.7054 10.0 
+0746: set_acquaintance 4 of_actors_pedtype 24 to_actors_pedtype 0 
+0746: set_acquaintance 1 of_actors_pedtype 24 to_actors_pedtype 24 
+060A: create_decision_maker_type 2 store_to 46@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 0 store_to 146@ // decision\allowed\m_.ped files 
+0709: set_decision_maker 146@ on_event 17 taskID 704 respect 0.0 hate 0.0 like 100.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker 46@ on_event 17 taskID 704 respect 0.0 hate 0.0 like 100.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+018A: 37@ = create_checkpoint_at -2165.628 654.652 51.3706 
+018B: set_marker 37@ radar_mode 0 
+018A: 41@ = create_checkpoint_at -1409.9 -303.4 4.5 
+Garage.ChangeType('FDORSFE', 19)
+Model.Load(#MICRO_UZI)
+
+:FARLIE4_556
+if 
+   not Model.Available(#MICRO_UZI)
+jf @FARLIE4_583 
+wait 0 
+jump @FARLIE4_556 
+
+:FARLIE4_583
+if and
+   not Actor.HasWeapon($PLAYER_ACTOR, 28)
+   not Actor.HasWeapon($PLAYER_ACTOR, 29)
+jf @FARLIE4_625 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MicroUzi, 150)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 28 
+
+:FARLIE4_625
+32@ = 0 
+140@ = 2 
+00BC: show_text_highpriority GXT 'F4_T0' time 9000 flag 1  // ~s~Pick up the car from the airport ~y~car park~s~.
+
+:FARLIE4_655
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_922 
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @FARLIE4_697 
+jump @FARLIE4_8139 
+
+:FARLIE4_697
+gosub @FARLIE4_8846 
+gosub @FARLIE4_9679 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1409.9 -303.4 4.5 radius 4.0 4.0 4.0 
+jf @FARLIE4_915 
+Model.Load(#SABRE)
+Model.Load(#MANANA)
+
+:FARLIE4_769
+if or
+   not Model.Available(#SABRE)
+   not Model.Available(#MANANA)
+jf @FARLIE4_801 
+wait 0 
+jump @FARLIE4_769 
+
+:FARLIE4_801
+141@ = 1 
+Marker.Disable(41@)
+34@ = Car.Create(#SABRE, -1425.512, -21.2813, 5.0078)
+Car.Angle(34@) = 88.7848
+Car.LockInCurrentPosition(34@) = True
+35@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 35@ type_to 1 
+053F: set_car 34@ tires_vulnerability 0 
+Car.Health(34@) = 3000
+0229: set_car 34@ primary_color_to 3 secondary_color_to 3 
+00BC: show_text_highpriority GXT 'F4_T7' time 4000 flag 1  // ~s~Get the ~b~car~s~!
+jump @FARLIE4_929 
+
+:FARLIE4_915
+jump @FARLIE4_655 
+
+:FARLIE4_922
+jump @FARLIE4_7909 
+
+:FARLIE4_929
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(34@)
+jf @FARLIE4_1086 
+wait 0 
+gosub @FARLIE4_8846 
+gosub @FARLIE4_9679 
+if and
+   Actor.Driving($PLAYER_ACTOR)
+   not Car.Wrecked(34@)
+jf @FARLIE4_1016 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @FARLIE4_1016 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+
+:FARLIE4_1016
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_1079 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @FARLIE4_1079 
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 37@ radar_mode 3 
+Car.LockInCurrentPosition(34@) = False
+jump @FARLIE4_1093 
+
+:FARLIE4_1079
+jump @FARLIE4_929 
+
+:FARLIE4_1086
+jump @FARLIE4_7909 
+
+:FARLIE4_1093
+Player.CanMove($PLAYER_CHAR) = False
+Model.Load(#DNB1)
+Model.Load(#DNB2)
+Model.Load(#FCR900)
+Model.Load(#MICRO_UZI)
+Model.Load(#MULE)
+Model.Load(#CELLPHONE)
+Model.Load(#SABRE)
+Model.Load(#SADLER)
+
+:FARLIE4_1138
+if or
+   not Model.Available(#DNB1)
+   not Model.Available(#DNB2)
+   not Model.Available(#FCR900)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#MULE)
+   not Model.Available(#CELLPHONE)
+jf @FARLIE4_1188 
+wait 0 
+jump @FARLIE4_1138 
+
+:FARLIE4_1188
+040D: unload_wav 3 
+03CF: load_wav 28000 as 3 
+
+:FARLIE4_1199
+if or
+83D0:   not wav 3 loaded 
+   not Model.Available(#SABRE)
+   not Model.Available(#SADLER)
+jf @FARLIE4_1235 
+wait 0 
+jump @FARLIE4_1199 
+
+:FARLIE4_1235
+01EB: set_traffic_density_multiplier_to 0.0 
+
+:FARLIE4_1242
+gosub @FARLIE4_8412 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @FARLIE4_1353 
+if 
+01AF:   car $TEMPVAR_ACTOR_CAR sphere 0 in_sphere -1429.618 -21.2788 5.0078 radius 10.0 10.0 10.0 
+jf @FARLIE4_1348 
+0763: add_car_reference $TEMPVAR_ACTOR_CAR // mission only 
+Car.PutAt($TEMPVAR_ACTOR_CAR, -1425.615, -16.4956, 5.0078)
+Car.Angle($TEMPVAR_ACTOR_CAR) = 271.5388
+
+:FARLIE4_1348
+wait 500 
+
+:FARLIE4_1353
+0395: clear_area 1 at -1412.56 -138.0878 5.0 radius 200.0 
+gosub @FARLIE4_8378 
+Camera.SetPosition(-1430.361, -18.6971, 6.191, 0.0, 0.0, 0.0)
+Camera.PointAt(-1429.655, -19.4032, 6.1376, 2)
+49@ = Car.Create(#MULE, -1414.173, -50.4918, 5.0)
+Car.Angle(49@) = 0.0
+59@ = Actor.CreateAsDriver(Mission2, #DNB1, 49@)
+Actor.GiveWeaponAndAmmo(59@, MicroUzi, 30000)
+01B9: set_actor 59@ armed_weapon_to 28 
+if and
+   not Car.Wrecked(49@)
+   not Actor.Dead(59@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_1588 
+0615: define_AS_pack_begin 142@ 
+05D1: AS_actor -1 drive_car 49@ to -1414.428 -32.5711 5.0069 speed 15.0 2 model #NULL 2 
+05CD: AS_actor -1 exit_car 49@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 142@ 
+0618: assign_actor 59@ to_AS_pack 142@ 
+
+:FARLIE4_1588
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_1612 
+43@ = Car.Health(34@)
+
+:FARLIE4_1612
+008A: $7250 = 43@ // (int) 
+$7250 /= 30 
+03C4: set_status_text $7250 type 1 GXT 'F4_D' // global_variable  // Damage
+Garage.Open('FDORSFE')
+gosub @FARLIE4_8445 
+00BC: show_text_highpriority GXT 'F4_T5' time 5000 flag 1  // It's an ambush, the Da Nang Boys are covering the exits!
+33@ = 0 
+
+:FARLIE4_1684
+if 
+  2000 > 33@ 
+jf @FARLIE4_1738 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @FARLIE4_1731 
+jump @FARLIE4_1818 
+
+:FARLIE4_1731
+jump @FARLIE4_1684 
+
+:FARLIE4_1738
+if 
+03D0:   wav 3 loaded 
+jf @FARLIE4_1757 
+03D1: play_wav 3 
+
+:FARLIE4_1757
+33@ = 0 
+
+:FARLIE4_1764
+if 
+  2000 > 33@ 
+jf @FARLIE4_1818 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @FARLIE4_1811 
+jump @FARLIE4_1818 
+
+:FARLIE4_1811
+jump @FARLIE4_1764 
+
+:FARLIE4_1818
+gosub @FARLIE4_8393 
+00BC: show_text_highpriority GXT 'F4_T8' time 4000 flag 1  // ~s~Take the car back to the ~y~garage~s~.
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_1864 
+Car.LockInCurrentPosition(34@) = False
+
+:FARLIE4_1864
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(34@)
+jf @FARLIE4_7902 
+wait 0 
+gosub @FARLIE4_8846 
+gosub @FARLIE4_9679 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_1943 
+if 
+0A15:   is_car_affected_by_cheats 34@ 
+jf @FARLIE4_1943 
+Car.Health(34@) = 3000
+
+:FARLIE4_1943
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_2102 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @FARLIE4_2024 
+if 
+  40@ == 0 
+jf @FARLIE4_2017 
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 37@ radar_mode 3 
+40@ = 1 
+
+:FARLIE4_2017
+jump @FARLIE4_2079 
+
+:FARLIE4_2024
+if 
+  40@ == 1 
+jf @FARLIE4_2079 
+018B: set_marker 35@ radar_mode 3 
+018B: set_marker 37@ radar_mode 0 
+00BC: show_text_highpriority GXT 'F4_T4' time 4000 flag 1  // ~s~Get back in the ~b~car~s~!
+40@ = 0 
+
+:FARLIE4_2079
+43@ = Car.Health(34@)
+008A: $7250 = 43@ // (int) 
+$7250 /= 30 
+
+:FARLIE4_2102
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1467.032 -133.7941 5.0078 radius 60.0 60.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1347.11 -49.7249 5.0078 radius 20.0 20.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1421.344 -238.9247 5.0 radius 20.0 20.0 10.0 
+jf @FARLIE4_2426 
+if 
+  79@ == 0 
+jf @FARLIE4_2426 
+0395: clear_area 1 at -1474.466 -162.8309 5.0234 radius 10.0 
+51@ = Car.Create(#MULE, -1474.466, -162.8309, 5.0234)
+Car.Angle(51@) = 272.5542
+61@ = Actor.CreateAsDriver(Mission2, #DNB1, 51@)
+Actor.GiveWeaponAndAmmo(61@, MicroUzi, 30000)
+01B9: set_actor 61@ armed_weapon_to 28 
+if and
+   not Car.Wrecked(51@)
+   not Actor.Dead(61@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_2419 
+0615: define_AS_pack_begin 144@ 
+05D1: AS_actor -1 drive_car 51@ to -1464.862 -162.4026 5.0226 speed 25.0 2 model #NULL 2 
+05CD: AS_actor -1 exit_car 51@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 144@ 
+0618: assign_actor 61@ to_AS_pack 144@ 
+
+:FARLIE4_2419
+79@ = 1 
+
+:FARLIE4_2426
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1423.849 -135.7411 5.0078 radius 20.0 20.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1347.11 -49.7249 5.0078 radius 20.0 20.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1421.344 -238.9247 5.0 radius 20.0 20.0 10.0 
+jf @FARLIE4_2750 
+if 
+  80@ == 0 
+jf @FARLIE4_2750 
+0395: clear_area 1 at -1387.268 -126.9234 5.0078 radius 10.0 
+50@ = Car.Create(#MULE, -1387.268, -126.9234, 5.0078)
+Car.Angle(50@) = 180.2388
+60@ = Actor.CreateAsDriver(Mission2, #DNB1, 50@)
+Actor.GiveWeaponAndAmmo(60@, MicroUzi, 30000)
+01B9: set_actor 60@ armed_weapon_to 28 
+if and
+   not Car.Wrecked(50@)
+   not Actor.Dead(60@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_2743 
+0615: define_AS_pack_begin 143@ 
+05D1: AS_actor -1 drive_car 50@ to -1387.225 -135.6199 5.0078 speed 25.0 2 model #NULL 2 
+05CD: AS_actor -1 exit_car 50@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 143@ 
+0618: assign_actor 60@ to_AS_pack 143@ 
+
+:FARLIE4_2743
+80@ = 1 
+
+:FARLIE4_2750
+if or
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1427.269 -238.5722 5.0234 radius 20.0 20.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1347.11 -49.7249 5.0078 radius 20.0 20.0 10.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1421.344 -238.9247 5.0 radius 20.0 20.0 10.0 
+jf @FARLIE4_3069 
+if 
+  89@ == 0 
+jf @FARLIE4_3069 
+0395: clear_area 1 at -1387.792 -230.1776 5.0078 radius 10.0 
+52@ = Car.Create(#MULE, -1387.792, -230.1776, 5.0078)
+Car.Angle(52@) = 179.5878
+62@ = Actor.CreateAsDriver(Mission2, #DNB1, 52@)
+Actor.GiveWeaponAndAmmo(62@, MicroUzi, 30000)
+01B9: set_actor 62@ armed_weapon_to 28 
+if and
+   not Car.Wrecked(52@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_3062 
+0615: define_AS_pack_begin 145@ 
+05D1: AS_actor -1 drive_car 52@ to -1387.862 -240.3811 5.0078 speed 25.0 2 model #NULL 2 
+05CD: AS_actor -1 exit_car 52@ 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+0616: define_AS_pack_end 145@ 
+0618: assign_actor 62@ to_AS_pack 145@ 
+
+:FARLIE4_3062
+89@ = 1 
+
+:FARLIE4_3069
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1399.686 -184.757 5.3047 radius 5.0 5.0 10.0 
+  81@ == 0 
+jf @FARLIE4_3204 
+44@ = Actor.Create(Mission1, #DNB2, -1404.049, -234.7071, 5.3047)
+Actor.Angle(44@) = 353.8535
+Actor.GiveWeaponAndAmmo(44@, MicroUzi, 30000)
+01B9: set_actor 44@ armed_weapon_to 28 
+Actor.WeaponAccuracy(44@) = 80
+060B: set_actor 44@ decision_maker_to 46@ 
+06E3: AS_actor 44@ roll_sideways 1 
+81@ = 1 
+
+:FARLIE4_3204
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1400.184 -205.7361 5.3047 radius 5.0 5.0 10.0 
+  82@ == 0 
+jf @FARLIE4_3339 
+45@ = Actor.Create(Mission1, #DNB1, -1394.235, -234.735, 5.3047)
+Actor.Angle(45@) = 1.5813
+Actor.GiveWeaponAndAmmo(45@, MicroUzi, 30000)
+01B9: set_actor 45@ armed_weapon_to 28 
+Actor.WeaponAccuracy(45@) = 80
+060B: set_actor 45@ decision_maker_to 46@ 
+06E3: AS_actor 45@ roll_sideways 0 
+82@ = 1 
+
+:FARLIE4_3339
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1407.187 -239.4782 5.3047 radius 20.0 20.0 10.0 
+  83@ == 0 
+jf @FARLIE4_3880 
+69@ = Actor.Create(Mission1, #DNB2, -1407.076, -358.3559, 8.3099)
+Actor.Angle(69@) = 9.5994
+70@ = Actor.Create(Mission1, #DNB1, -1476.887, -291.53, 8.7087)
+Actor.Angle(70@) = 258.9856
+36@ = 0 
+
+:FARLIE4_3469
+Actor.GiveWeaponAndAmmo(69@(36@,10i), MicroUzi, 30000)
+01B9: set_actor 69@(36@,10i) armed_weapon_to 28 
+Actor.WeaponAccuracy(69@(36@,10i)) = 80
+060B: set_actor 69@(36@,10i) decision_maker_to 46@ 
+0638: AS_actor 69@(36@,10i) stay_put 1 
+05E2: AS_actor 69@(36@,10i) kill_actor $PLAYER_ACTOR 
+04EB: AS_actor 69@(36@,10i) crouch 1 
+36@ += 1 
+  36@ >= 2 
+jf @FARLIE4_3469 
+52@ = Car.Create(#MULE, -1478.896, -470.3535, 10.9926)
+Car.Angle(52@) = 11.1921
+99@ = Actor.Create(Mission1, #DNB2, -1478.188, -476.1086, 11.1411)
+Actor.Angle(99@) = 277.8792
+100@ = Actor.Create(Mission1, #DNB2, -1479.535, -466.4356, 11.0)
+Actor.Angle(100@) = 263.3237
+53@ = Car.Create(#MULE, -1586.022, -359.7679, 10.9926)
+Car.Angle(53@) = 248.7342
+101@ = Actor.Create(Mission1, #DNB2, -1582.225, -362.0264, 11.0)
+Actor.Angle(101@) = 356.2877
+102@ = Actor.Create(Mission1, #DNB2, -1590.694, -357.4667, 11.1411)
+Actor.Angle(102@) = 323.3828
+36@ = 0 
+
+:FARLIE4_3781
+Actor.GiveWeaponAndAmmo(99@(36@,10i), MicroUzi, 30000)
+01B9: set_actor 99@(36@,10i) armed_weapon_to 28 
+Actor.WeaponAccuracy(99@(36@,10i)) = 80
+060B: set_actor 99@(36@,10i) decision_maker_to 46@ 
+0638: AS_actor 99@(36@,10i) stay_put 1 
+05E2: AS_actor 99@(36@,10i) kill_actor $PLAYER_ACTOR 
+36@ += 1 
+  36@ >= 4 
+jf @FARLIE4_3781 
+83@ = 1 
+
+:FARLIE4_3880
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1570.888 -455.6748 5.0 radius 25.0 25.0 10.0 
+  84@ == 0 
+jf @FARLIE4_4057 
+01EB: set_traffic_density_multiplier_to 1.0 
+Actor.DestroyInstantly(44@)
+Actor.DestroyInstantly(45@)
+36@ = 0 
+
+:FARLIE4_3959
+Actor.DestroyInstantly(59@(36@,10i))
+if 
+   not Car.Wrecked(49@(36@,10i))
+jf @FARLIE4_4020 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 49@(36@,10i))
+jf @FARLIE4_4020 
+Car.Destroy(49@(36@,10i))
+
+:FARLIE4_4020
+Actor.DestroyInstantly(69@(36@,10i))
+36@ += 1 
+  36@ >= 3 
+jf @FARLIE4_3959 
+84@ = 1 
+
+:FARLIE4_4057
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2258.519 124.3485 34.3125 radius 150.0 150.0 10.0 
+  85@ == 0 
+jf @FARLIE4_4367 
+0395: clear_area 1 at -2258.519 124.3485 34.3125 radius 10.0 
+109@ = Car.Create(#FCR900, -2258.519, 124.3485, 34.3125)
+129@ = Marker.CreateAboveCar(109@)
+00AE: set_car 109@ traffic_behaviour_to 2 
+Car.Angle(109@) = 179.5562
+119@ = Actor.CreateAsDriver(Mission2, #DNB1, 109@)
+120@ = Actor.CreateAsPassenger(Mission2, #DNB2, 109@, 0)
+08C6: set_actor 119@ stay_on_bike 0 
+08C6: set_actor 120@ stay_on_bike 0 
+Actor.GiveWeaponAndAmmo(119@, MicroUzi, 30000)
+01B9: set_actor 119@ armed_weapon_to 28 
+Actor.WeaponAccuracy(119@) = 30
+Actor.GiveWeaponAndAmmo(120@, MicroUzi, 30000)
+01B9: set_actor 120@ armed_weapon_to 28 
+Actor.WeaponAccuracy(120@) = 30
+060B: set_actor 119@ decision_maker_to 46@ 
+060B: set_actor 120@ decision_maker_to 46@ 
+0713: actor 120@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_4360 
+06E1: AS_actor 119@ using_car 109@ target_car 34@ with_order 29 max_speed 100.0 traffic_flag 2 
+
+:FARLIE4_4360
+85@ = 1 
+
+:FARLIE4_4367
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1817.805 -552.1889 15.0039 radius 150.0 150.0 10.0 
+  86@ == 0 
+jf @FARLIE4_4706 
+0395: clear_area 1 at -1817.805 -552.1889 15.0039 radius 10.0 
+110@ = Car.Create(#FCR900, -1817.805, -552.1889, 15.0039)
+130@ = Marker.CreateAboveCar(110@)
+Car.Angle(110@) = 174.0251
+00AE: set_car 110@ traffic_behaviour_to 2 
+121@ = Actor.CreateAsDriver(Mission2, #DNB1, 110@)
+122@ = Actor.CreateAsPassenger(Mission2, #DNB2, 110@, 0)
+08C6: set_actor 121@ stay_on_bike 0 
+08C6: set_actor 122@ stay_on_bike 0 
+Actor.GiveWeaponAndAmmo(121@, MicroUzi, 30000)
+01B9: set_actor 121@ armed_weapon_to 28 
+Actor.WeaponAccuracy(121@) = 30
+Actor.GiveWeaponAndAmmo(122@, MicroUzi, 30000)
+01B9: set_actor 122@ armed_weapon_to 28 
+Actor.WeaponAccuracy(122@) = 30
+0713: actor 122@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 122@ decision_maker_to 46@ 
+060B: set_actor 121@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_4699 
+0615: define_AS_pack_begin 38@ 
+05B9: AS_actor -1 stay_idle 5000 ms 
+06E1: AS_actor -1 using_car 110@ target_car 34@ with_order 30 max_speed 100.0 traffic_flag 2 
+0616: define_AS_pack_end 38@ 
+0618: assign_actor 121@ to_AS_pack 38@ 
+061B: remove_references_to_AS_pack 38@ 
+
+:FARLIE4_4699
+86@ = 1 
+
+:FARLIE4_4706
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1818.385 -621.8912 15.312 radius 150.0 150.0 10.0 
+  87@ == 0 
+jf @FARLIE4_5045 
+0395: clear_area 1 at -1818.385 -621.8912 15.312 radius 10.0 
+111@ = Car.Create(#FCR900, -1818.385, -621.8912, 15.312)
+131@ = Marker.CreateAboveCar(111@)
+Car.Angle(111@) = 1.701
+00AE: set_car 111@ traffic_behaviour_to 2 
+123@ = Actor.CreateAsDriver(Mission2, #DNB1, 111@)
+124@ = Actor.CreateAsPassenger(Mission2, #DNB2, 111@, 0)
+08C6: set_actor 123@ stay_on_bike 0 
+08C6: set_actor 124@ stay_on_bike 0 
+Actor.GiveWeaponAndAmmo(123@, MicroUzi, 30000)
+01B9: set_actor 123@ armed_weapon_to 28 
+Actor.WeaponAccuracy(123@) = 30
+Actor.GiveWeaponAndAmmo(124@, MicroUzi, 30000)
+01B9: set_actor 124@ armed_weapon_to 28 
+Actor.WeaponAccuracy(124@) = 30
+0713: actor 124@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 124@ decision_maker_to 46@ 
+060B: set_actor 123@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_5038 
+0615: define_AS_pack_begin 38@ 
+05B9: AS_actor -1 stay_idle 5000 ms 
+06E1: AS_actor -1 using_car 111@ target_car 34@ with_order 29 max_speed 100.0 traffic_flag 2 
+0616: define_AS_pack_end 38@ 
+0618: assign_actor 123@ to_AS_pack 38@ 
+061B: remove_references_to_AS_pack 38@ 
+
+:FARLIE4_5038
+87@ = 1 
+
+:FARLIE4_5045
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2211.62 580.9911 34.1691 radius 300.0 300.0 10.0 
+  157@ == 0 
+jf @FARLIE4_5348 
+0395: clear_area 1 at -2211.62 580.9911 34.1691 radius 10.0 
+162@ = Car.Create(#MANANA, -2211.62, 580.9911, 34.1691)
+167@ = Marker.CreateAboveCar(162@)
+Car.Angle(162@) = 176.7102
+00AE: set_car 162@ traffic_behaviour_to 2 
+147@ = Actor.CreateAsDriver(Mission2, #DNB1, 162@)
+148@ = Actor.CreateAsPassenger(Mission2, #DNB2, 162@, 0)
+08C6: set_actor 148@ stay_on_bike 2 
+Actor.GiveWeaponAndAmmo(147@, MicroUzi, 30000)
+01B9: set_actor 147@ armed_weapon_to 28 
+Actor.WeaponAccuracy(147@) = 30
+Actor.GiveWeaponAndAmmo(148@, MicroUzi, 30000)
+01B9: set_actor 148@ armed_weapon_to 28 
+Actor.WeaponAccuracy(148@) = 30
+0713: actor 148@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 148@ decision_maker_to 46@ 
+060B: set_actor 147@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_5341 
+06E1: AS_actor 147@ using_car 162@ target_car 34@ with_order 30 max_speed 100.0 traffic_flag 2 
+
+:FARLIE4_5341
+157@ = 1 
+
+:FARLIE4_5348
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1850.127 1096.324 44.2969 radius 300.0 300.0 10.0 
+  158@ == 0 
+jf @FARLIE4_5644 
+0395: clear_area 1 at -1850.127 1096.324 44.2969 radius 10.0 
+163@ = Car.Create(#SABRE, -1850.127, 1096.324, 44.2969)
+168@ = Marker.CreateAboveCar(163@)
+Car.Angle(163@) = 81.5282
+00AE: set_car 163@ traffic_behaviour_to 2 
+149@ = Actor.CreateAsDriver(Mission2, #DNB1, 163@)
+150@ = Actor.CreateAsPassenger(Mission2, #DNB2, 163@, 0)
+Actor.GiveWeaponAndAmmo(149@, MicroUzi, 30000)
+01B9: set_actor 149@ armed_weapon_to 28 
+Actor.WeaponAccuracy(149@) = 30
+Actor.GiveWeaponAndAmmo(150@, MicroUzi, 30000)
+01B9: set_actor 150@ armed_weapon_to 28 
+Actor.WeaponAccuracy(150@) = 30
+0713: actor 150@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 150@ decision_maker_to 46@ 
+060B: set_actor 149@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_5637 
+06E1: AS_actor 149@ using_car 163@ target_car 34@ with_order 29 max_speed 100.0 traffic_flag 2 
+
+:FARLIE4_5637
+158@ = 1 
+
+:FARLIE4_5644
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1740.369 1404.461 6.1875 radius 300.0 300.0 10.0 
+  159@ == 0 
+jf @FARLIE4_5940 
+0395: clear_area 1 at -1740.369 1404.461 6.1875 radius 10.0 
+164@ = Car.Create(#SADLER, -1740.369, 1404.461, 6.1875)
+169@ = Marker.CreateAboveCar(164@)
+Car.Angle(164@) = 172.1585
+00AE: set_car 164@ traffic_behaviour_to 2 
+151@ = Actor.CreateAsDriver(Mission2, #DNB1, 164@)
+152@ = Actor.CreateAsPassenger(Mission2, #DNB2, 164@, 0)
+Actor.GiveWeaponAndAmmo(151@, MicroUzi, 30000)
+01B9: set_actor 151@ armed_weapon_to 28 
+Actor.WeaponAccuracy(151@) = 30
+Actor.GiveWeaponAndAmmo(152@, MicroUzi, 30000)
+01B9: set_actor 152@ armed_weapon_to 28 
+Actor.WeaponAccuracy(152@) = 30
+0713: actor 152@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 152@ decision_maker_to 46@ 
+060B: set_actor 151@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_5933 
+06E1: AS_actor 151@ using_car 164@ target_car 34@ with_order 30 max_speed 100.0 traffic_flag 2 
+
+:FARLIE4_5933
+159@ = 1 
+
+:FARLIE4_5940
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1892.652 745.0367 44.2969 radius 300.0 300.0 10.0 
+  160@ == 0 
+jf @FARLIE4_6243 
+0395: clear_area 1 at -1892.652 745.0367 44.2969 radius 10.0 
+165@ = Car.Create(#SABRE, -1892.652, 745.0367, 44.2969)
+170@ = Marker.CreateAboveCar(165@)
+Car.Angle(165@) = 167.9494
+00AE: set_car 165@ traffic_behaviour_to 2 
+Car.SetDriverBehaviour(165@, 5)
+153@ = Actor.CreateAsDriver(Mission2, #DNB1, 165@)
+154@ = Actor.CreateAsPassenger(Mission2, #DNB2, 165@, 0)
+Actor.GiveWeaponAndAmmo(153@, MicroUzi, 30000)
+01B9: set_actor 153@ armed_weapon_to 28 
+Actor.WeaponAccuracy(153@) = 30
+Actor.GiveWeaponAndAmmo(154@, MicroUzi, 30000)
+01B9: set_actor 154@ armed_weapon_to 28 
+Actor.WeaponAccuracy(154@) = 30
+0713: actor 153@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 999.0 8 0 firing_rate 50 
+060B: set_actor 154@ decision_maker_to 46@ 
+060B: set_actor 153@ decision_maker_to 46@ 
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_6236 
+06E1: AS_actor 154@ using_car 165@ target_car 34@ with_order 29 max_speed 100.0 traffic_flag 2 
+
+:FARLIE4_6236
+160@ = 1 
+
+:FARLIE4_6243
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2154.206 576.4759 34.1719 radius 150.0 150.0 10.0 
+  88@ == 0 
+jf @FARLIE4_6435 
+0395: clear_area 1 at -1818.385 -621.8912 15.312 radius 10.0 
+183@ = Actor.Create(Mission1, #DNB1, -2154.206, 576.4759, 34.1719)
+182@ = Car.Create(#FCR900, -2154.382, 577.5017, 34.1719)
+Car.Angle(182@) = 114.1029
+Actor.Angle(183@) = 211.0992
+Actor.GiveWeaponAndAmmo(183@, MicroUzi, 30000)
+01B9: set_actor 183@ armed_weapon_to 28 
+Actor.WeaponAccuracy(183@) = 90
+060B: set_actor 183@ decision_maker_to 46@ 
+0638: AS_actor 183@ stay_put 1 
+88@ = 1 
+
+:FARLIE4_6435
+if and
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2245.675 303.3215 34.3203 radius 150.0 150.0 10.0 
+  88@ == 0 
+jf @FARLIE4_6627 
+0395: clear_area 1 at -2245.675 303.3215 34.3203 radius 10.0 
+185@ = Actor.Create(Mission1, #DNB1, -2245.675, 303.3215, 34.3203)
+184@ = Car.Create(#FCR900, -2244.782, 304.8253, 34.3203)
+Car.Angle(184@) = 191.9683
+Actor.Angle(185@) = 165.1429
+Actor.GiveWeaponAndAmmo(185@, MicroUzi, 30000)
+01B9: set_actor 185@ armed_weapon_to 28 
+Actor.WeaponAccuracy(185@) = 90
+060B: set_actor 185@ decision_maker_to 46@ 
+0638: AS_actor 185@ stay_put 1 
+88@ = 1 
+
+:FARLIE4_6627
+if 
+   not Actor.Dead(119@)
+jf @FARLIE4_6692 
+if 
+   not Actor.Driving(119@)
+jf @FARLIE4_6685 
+05BE: AS_actor 119@ die 
+if 
+075C:   marker 129@ enabled 
+jf @FARLIE4_6685 
+Marker.Disable(129@)
+
+:FARLIE4_6685
+jump @FARLIE4_6713 
+
+:FARLIE4_6692
+if 
+075C:   marker 129@ enabled 
+jf @FARLIE4_6713 
+Marker.Disable(129@)
+
+:FARLIE4_6713
+if 
+   not Actor.Dead(121@)
+jf @FARLIE4_6773 
+if 
+   not Actor.Driving(121@)
+jf @FARLIE4_6766 
+if 
+075C:   marker 130@ enabled 
+jf @FARLIE4_6766 
+Marker.Disable(130@)
+
+:FARLIE4_6766
+jump @FARLIE4_6794 
+
+:FARLIE4_6773
+if 
+075C:   marker 130@ enabled 
+jf @FARLIE4_6794 
+Marker.Disable(130@)
+
+:FARLIE4_6794
+if 
+   not Actor.Dead(123@)
+jf @FARLIE4_6854 
+if 
+   not Actor.Driving(123@)
+jf @FARLIE4_6847 
+if 
+075C:   marker 131@ enabled 
+jf @FARLIE4_6847 
+Marker.Disable(131@)
+
+:FARLIE4_6847
+jump @FARLIE4_6875 
+
+:FARLIE4_6854
+if 
+075C:   marker 131@ enabled 
+jf @FARLIE4_6875 
+Marker.Disable(131@)
+
+:FARLIE4_6875
+if 
+   not Actor.Dead(147@)
+jf @FARLIE4_6935 
+if 
+   not Actor.Driving(147@)
+jf @FARLIE4_6928 
+if 
+075C:   marker 167@ enabled 
+jf @FARLIE4_6928 
+Marker.Disable(167@)
+
+:FARLIE4_6928
+jump @FARLIE4_6956 
+
+:FARLIE4_6935
+if 
+075C:   marker 167@ enabled 
+jf @FARLIE4_6956 
+Marker.Disable(167@)
+
+:FARLIE4_6956
+if 
+   not Actor.Dead(149@)
+jf @FARLIE4_7016 
+if 
+   not Actor.Driving(149@)
+jf @FARLIE4_7009 
+if 
+075C:   marker 168@ enabled 
+jf @FARLIE4_7009 
+Marker.Disable(168@)
+
+:FARLIE4_7009
+jump @FARLIE4_7037 
+
+:FARLIE4_7016
+if 
+075C:   marker 168@ enabled 
+jf @FARLIE4_7037 
+Marker.Disable(168@)
+
+:FARLIE4_7037
+if 
+   not Actor.Dead(151@)
+jf @FARLIE4_7097 
+if 
+   not Actor.Driving(151@)
+jf @FARLIE4_7090 
+if 
+075C:   marker 169@ enabled 
+jf @FARLIE4_7090 
+Marker.Disable(169@)
+
+:FARLIE4_7090
+jump @FARLIE4_7118 
+
+:FARLIE4_7097
+if 
+075C:   marker 169@ enabled 
+jf @FARLIE4_7118 
+Marker.Disable(169@)
+
+:FARLIE4_7118
+if 
+   not Actor.Dead(153@)
+jf @FARLIE4_7178 
+if 
+   not Actor.Driving(153@)
+jf @FARLIE4_7171 
+if 
+075C:   marker 170@ enabled 
+jf @FARLIE4_7171 
+Marker.Disable(170@)
+
+:FARLIE4_7171
+jump @FARLIE4_7199 
+
+:FARLIE4_7178
+if 
+075C:   marker 170@ enabled 
+jf @FARLIE4_7199 
+Marker.Disable(170@)
+
+:FARLIE4_7199
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_7565 
+36@ = 0 
+
+:FARLIE4_7222
+if 
+   not Actor.Dead(119@(36@,10i))
+jf @FARLIE4_7284 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 119@(36@,10i) radius 10.0 10.0 0 
+jf @FARLIE4_7284 
+gosub @FARLIE4_9078 
+
+:FARLIE4_7284
+if 
+   not Actor.Dead(99@(36@,10i))
+jf @FARLIE4_7346 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 99@(36@,10i) radius 10.0 10.0 0 
+jf @FARLIE4_7346 
+gosub @FARLIE4_9078 
+
+:FARLIE4_7346
+36@ += 1 
+  36@ >= 4 
+jf @FARLIE4_7222 
+36@ = 0 
+
+:FARLIE4_7374
+if 
+   not Actor.Dead(69@(36@,10i))
+jf @FARLIE4_7436 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 69@(36@,10i) radius 10.0 10.0 0 
+jf @FARLIE4_7436 
+gosub @FARLIE4_9078 
+
+:FARLIE4_7436
+36@ += 1 
+  36@ >= 2 
+jf @FARLIE4_7374 
+if 
+   not Actor.Dead(44@)
+jf @FARLIE4_7511 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 44@ radius 10.0 10.0 0 
+jf @FARLIE4_7511 
+gosub @FARLIE4_9078 
+
+:FARLIE4_7511
+if 
+   not Actor.Dead(45@)
+jf @FARLIE4_7565 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 45@ radius 10.0 10.0 0 
+jf @FARLIE4_7565 
+gosub @FARLIE4_9078 
+
+:FARLIE4_7565
+if 
+   not Car.Wrecked(34@)
+jf @FARLIE4_7895 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @FARLIE4_7895 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -2165.628 654.652 51.3706 radius 4.0 4.0 4.0 
+jf @FARLIE4_7895 
+Player.CanMove($PLAYER_CHAR) = False
+gosub @FARLIE4_8412 
+if 
+   not Car.Wrecked(109@)
+jf @FARLIE4_7683 
+Car.Destroy(109@)
+
+:FARLIE4_7683
+if 
+   not Car.Wrecked(110@)
+jf @FARLIE4_7704 
+Car.Destroy(110@)
+
+:FARLIE4_7704
+if 
+   not Car.Wrecked(111@)
+jf @FARLIE4_7725 
+Car.Destroy(111@)
+
+:FARLIE4_7725
+if 
+   not Car.Wrecked(162@)
+jf @FARLIE4_7746 
+Car.Destroy(162@)
+
+:FARLIE4_7746
+if 
+   not Car.Wrecked(163@)
+jf @FARLIE4_7767 
+Car.Destroy(163@)
+
+:FARLIE4_7767
+if 
+   not Car.Wrecked(164@)
+jf @FARLIE4_7788 
+Car.Destroy(164@)
+
+:FARLIE4_7788
+if 
+   not Car.Wrecked(165@)
+jf @FARLIE4_7809 
+Car.Destroy(165@)
+
+:FARLIE4_7809
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_7855 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -2154.18 655.416 51.351 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+
+:FARLIE4_7855
+0151: remove_status_text $7250 
+Car.Destroy(34@)
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+wait 2000 
+gosub @FARLIE4_8445 
+jump @FARLIE4_8139 
+
+:FARLIE4_7895
+jump @FARLIE4_1864 
+
+:FARLIE4_7902
+jump @FARLIE4_7909 
+
+:FARLIE4_7909
+if 
+075C:   marker 37@ enabled 
+jf @FARLIE4_7930 
+Marker.Disable(37@)
+
+:FARLIE4_7930
+if 
+075C:   marker 35@ enabled 
+jf @FARLIE4_7951 
+Marker.Disable(35@)
+
+:FARLIE4_7951
+if 
+075C:   marker 129@ enabled 
+jf @FARLIE4_7972 
+Marker.Disable(129@)
+
+:FARLIE4_7972
+if 
+075C:   marker 130@ enabled 
+jf @FARLIE4_7993 
+Marker.Disable(130@)
+
+:FARLIE4_7993
+if 
+075C:   marker 131@ enabled 
+jf @FARLIE4_8014 
+Marker.Disable(131@)
+
+:FARLIE4_8014
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @FARLIE4_8082 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2147.79 
+$11031 = 655.95 
+$11030 = 51.86 
+
+:FARLIE4_8082
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if and
+   Car.Wrecked(34@)
+  141@ == 1 
+jf @FARLIE4_8137 
+00BC: show_text_highpriority GXT 'F4_F' time 4000 flag 1  // ~r~The car has been destroyed!
+
+:FARLIE4_8137
+return 
+
+:FARLIE4_8139
+$WUZIMU_TOTAL_PASSED_MISSIONS += 1 
+if 
+075C:   marker 37@ enabled 
+jf @FARLIE4_8167 
+Marker.Disable(37@)
+
+:FARLIE4_8167
+if 
+075C:   marker 35@ enabled 
+jf @FARLIE4_8188 
+Marker.Disable(35@)
+
+:FARLIE4_8188
+0318: set_latest_mission_passed 'FAR_4'  // Ran Fa Li
+030C: progress_made = 1 
+0394: play_music 1 
+01E3: show_text_1number_styled GXT 'M_PASSS' number 6000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 6000
+0998: add_respect 15 
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+075C:   marker 129@ enabled 
+jf @FARLIE4_8264 
+Marker.Disable(129@)
+
+:FARLIE4_8264
+if 
+075C:   marker 130@ enabled 
+jf @FARLIE4_8285 
+Marker.Disable(130@)
+
+:FARLIE4_8285
+if 
+075C:   marker 131@ enabled 
+jf @FARLIE4_8306 
+Marker.Disable(131@)
+
+:FARLIE4_8306
+if 
+   not Car.Wrecked(109@)
+jf @FARLIE4_8327 
+Car.Destroy(109@)
+
+:FARLIE4_8327
+if 
+   not Car.Wrecked(110@)
+jf @FARLIE4_8348 
+Car.Destroy(110@)
+
+:FARLIE4_8348
+if 
+   not Car.Wrecked(111@)
+jf @FARLIE4_8369 
+Car.Destroy(111@)
+
+:FARLIE4_8369
+gosub @FARLIE4_8445 
+return 
+
+:FARLIE4_8378
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+return 
+
+:FARLIE4_8393
+00BE: text_clear_all 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+return 
+
+:FARLIE4_8412
+fade 0 500 
+
+:FARLIE4_8419
+if 
+fading 
+jf @FARLIE4_8443 
+wait 0 
+jump @FARLIE4_8419 
+
+:FARLIE4_8443
+return 
+
+:FARLIE4_8445
+fade 1 500 
+
+:FARLIE4_8452
+if 
+fading 
+jf @FARLIE4_8476 
+wait 0 
+jump @FARLIE4_8452 
+
+:FARLIE4_8476
+return 
+
+:FARLIE4_8478
+$ONMISSION = 0 
+0151: remove_status_text $7250 
+091D: remove_forbidden_for_boats_cube_cornerA -1478.294 -65.4014 0.0 cornerB -1395.423 2.7054 10.0 
+Model.Destroy(#DNB1)
+Model.Destroy(#DNB2)
+Model.Destroy(#FCR900)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#MULE)
+Model.Destroy(#SABRE)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#MANANA)
+Model.Destroy(#SADLER)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+075C:   marker 37@ enabled 
+jf @FARLIE4_8591 
+Marker.Disable(37@)
+
+:FARLIE4_8591
+if 
+075C:   marker 35@ enabled 
+jf @FARLIE4_8612 
+Marker.Disable(35@)
+
+:FARLIE4_8612
+if 
+075C:   marker 41@ enabled 
+jf @FARLIE4_8633 
+Marker.Disable(41@)
+
+:FARLIE4_8633
+if 
+075C:   marker 129@ enabled 
+jf @FARLIE4_8654 
+Marker.Disable(129@)
+
+:FARLIE4_8654
+if 
+075C:   marker 130@ enabled 
+jf @FARLIE4_8675 
+Marker.Disable(130@)
+
+:FARLIE4_8675
+if 
+075C:   marker 131@ enabled 
+jf @FARLIE4_8696 
+Marker.Disable(131@)
+
+:FARLIE4_8696
+if 
+075C:   marker 167@ enabled 
+jf @FARLIE4_8717 
+Marker.Disable(167@)
+
+:FARLIE4_8717
+if 
+075C:   marker 168@ enabled 
+jf @FARLIE4_8738 
+Marker.Disable(168@)
+
+:FARLIE4_8738
+if 
+075C:   marker 169@ enabled 
+jf @FARLIE4_8759 
+Marker.Disable(169@)
+
+:FARLIE4_8759
+if 
+075C:   marker 170@ enabled 
+jf @FARLIE4_8780 
+Marker.Disable(170@)
+
+:FARLIE4_8780
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_8842 
+if 
+   Garage.IsOpen('FDORSFE')
+jf @FARLIE4_8842 
+Garage.Close('FDORSFE')
+Garage.ChangeType('FDORSFE', 1)
+
+:FARLIE4_8842
+mission_cleanup 
+return 
+
+:FARLIE4_8846
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @FARLIE4_8907 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_8907 
+Actor.PutAt($PLAYER_ACTOR, -1403.283, -395.7443, 11.0)
+Actor.Angle($PLAYER_ACTOR) = 343.9661
+
+:FARLIE4_8907
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @FARLIE4_8951 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @FARLIE4_8951 
+186@ = Actor.MissionCar($PLAYER_ACTOR)
+04E1: open_and_freeze_car_trunk 186@ 
+
+:FARLIE4_8951
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @FARLIE4_8973 
+jump @FARLIE4_1093 
+
+:FARLIE4_8973
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @FARLIE4_9009 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_9009 
+05BE: AS_actor $PLAYER_ACTOR die 
+
+:FARLIE4_9009
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @FARLIE4_9054 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @FARLIE4_9054 
+Actor.AddArmour($PLAYER_ACTOR, 100)
+055E: set_player $PLAYER_CHAR max_health += 100 
+
+:FARLIE4_9054
+if 
+0736:   is_keyboard_key_just_pressed 90 
+jf @FARLIE4_9076 
+jump @FARLIE4_1242 
+
+:FARLIE4_9076
+return 
+
+:FARLIE4_9078
+if 
+  33@ > 15000 
+jf @FARLIE4_9657 
+if 
+876F:   not text_priority_displayed 
+jf @FARLIE4_9657 
+0871: init_jump_table $7249 total_jumps 9 default_jump 0 @FARLIE4_9625 jumps 0 @FARLIE4_9238 1 @FARLIE4_9281 2 @FARLIE4_9324 3 @FARLIE4_9367 4 @FARLIE4_9410 5 @FARLIE4_9453 6 @FARLIE4_9496 
+0872: jump_table_jumps 7 @FARLIE4_9539 8 @FARLIE4_9582 -1 @FARLIE4_9625 -1 @FARLIE4_9625 -1 @FARLIE4_9625 -1 @FARLIE4_9625 -1 @FARLIE4_9625 -1 @FARLIE4_9625 -1 @FARLIE4_9625 
+
+:FARLIE4_9238
+05AA: 177@s = 'FAR4_AA' // @s = 'short'  // ~z~You won't get far!
+04AF: 139@ = 15400 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9281
+05AA: 177@s = 'FAR4_AB' // @s = 'short'  // ~z~Stop that car!
+04AF: 139@ = 15401 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9324
+05AA: 177@s = 'FAR4_AC' // @s = 'short'  // ~z~He's getting away!
+04AF: 139@ = 15402 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9367
+05AA: 177@s = 'FAR4_AD' // @s = 'short'  // ~z~Stop that car at all costs!
+04AF: 139@ = 15403 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9410
+05AA: 177@s = 'FAR4_AE' // @s = 'short'  // ~z~Get after him!
+04AF: 139@ = 15404 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9453
+05AA: 177@s = 'FAR4_AF' // @s = 'short'  // ~z~Don't just stand there, get that car!
+04AF: 139@ = 15405 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9496
+05AA: 177@s = 'FAR4_AG' // @s = 'short'  // ~z~Give up the car and we'll spare you!
+04AF: 139@ = 15406 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9539
+05AA: 177@s = 'FAR4_AH' // @s = 'short'  // ~z~That's our property!
+04AF: 139@ = 15407 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9582
+05AA: 177@s = 'FAR4_AJ' // @s = 'short'  // ~z~After him, no quarter!
+04AF: 139@ = 15408 // = constant 
+gosub @FARLIE4_9659 
+33@ = 0 
+jump @FARLIE4_9625 
+
+:FARLIE4_9625
+$7249 += 1 
+if 
+  $7249 == 9 
+jf @FARLIE4_9657 
+$7249 = 0 
+
+:FARLIE4_9657
+return 
+
+:FARLIE4_9659
+040D: unload_wav 1 
+03CF: load_wav 139@ as 1 
+140@ = 0 
+return 
+
+:FARLIE4_9679
+if and
+03D0:   wav 1 loaded 
+  140@ == 0 
+jf @FARLIE4_9722 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 177@s time 10000 flag 1 
+140@ = 1 
+
+:FARLIE4_9722
+if and
+03D2:   wav 1 ended 
+  140@ == 1 
+jf @FARLIE4_9760 
+040D: unload_wav 1 
+03D5: remove_text 177@s 
+140@ = 2 
+
+:FARLIE4_9760
+return

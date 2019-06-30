@@ -1,0 +1,2276 @@
+:DOC2
+thread 'DOC2' 
+gosub @DOC2_47 
+if 
+wasted_or_busted 
+jf @DOC2_38 
+gosub @DOC2_13050 
+
+:DOC2_38
+gosub @DOC2_13761 
+end_thread 
+
+:DOC2_47
+131@ = 0 
+$7799 = 40 
+$7800 = 0 
+$7796 = 0 
+$7797 = 0 
+$7798 = 0 
+060A: create_decision_maker_type 3 store_to 99@ // decision\allowed\m_.ped files 
+0169: set_fade_color_RGB 0 0 0 
+increment_mission_attempts 
+$ONMISSION = 1 
+054C: use_GXT_table 'DOC2' 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DOC2_137
+if 
+fading 
+jf @DOC2_161 
+wait 0 
+jump @DOC2_137 
+
+:DOC2_161
+02E4: load_cutscene_data 'DOC_2' 
+
+:DOC2_172
+if 
+86B9:   not cutscene_data_loaded 
+jf @DOC2_196 
+wait 0 
+jump @DOC2_172 
+
+:DOC2_196
+0395: clear_area 1 at 2159.899 1443.042 9.8203 radius 40.0 
+02E7: start_cutscene 
+fade 1 1000 
+
+:DOC2_229
+if 
+82E9:   not cutscene_reached_end 
+jf @DOC2_253 
+wait 0 
+jump @DOC2_229 
+
+:DOC2_253
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:DOC2_274
+if 
+fading 
+jf @DOC2_298 
+wait 0 
+jump @DOC2_274 
+
+:DOC2_298
+02EA: end_cutscene 
+Model.Load(#VBMYELV)
+Model.Load(#VWFYPRO)
+Model.Load(#VWMOTR1)
+Model.Load(#WMOPREA)
+Model.Load(#CELLPHONE)
+Model.Load(#HECK1)
+Model.Load(#HECK2)
+04ED: load_animation "ON_LOOKERS" 
+023C: load_special_actor 'MADDOGG' as 1 // models 290-299 
+
+:DOC2_359
+if or
+   not Model.Available(#VBMYELV)
+   not Model.Available(#VWFYPRO)
+   not Model.Available(#VWMOTR1)
+jf @DOC2_394 
+wait 0 
+jump @DOC2_359 
+
+:DOC2_394
+if or
+   not Model.Available(#WMOPREA)
+   not Model.Available(#CELLPHONE)
+   not Model.Available(#HECK1)
+jf @DOC2_430 
+wait 0 
+jump @DOC2_394 
+
+:DOC2_430
+if or
+   not Model.Available(#HECK2)
+84EE:   not animation "ON_LOOKERS" loaded 
+823D:   not special_actor 1 loaded 
+jf @DOC2_475 
+wait 0 
+jump @DOC2_430 
+
+:DOC2_475
+01E8: create_forbidden_for_cars_cube_cornerA 2090.981 1388.51 8.8203 cornerB 2234.686 1517.077 10.8203 
+022B: create_forbidden_for_peds_cube_cornerA 2090.981 1388.51 8.8203 cornerB 2234.686 1517.077 10.8203 
+105@ = 2163.638 
+106@ = 1443.663 
+107@ = 9.8203 
+01EB: set_traffic_density_multiplier_to 0.0 
+0395: clear_area 1 at 2161.34 1442.504 9.8203 radius 20.0 
+0395: clear_area 1 at 2107.19 1409.153 9.8203 radius 10.0 
+95@ = Actor.Create(CivMale, #SPECIAL01, 2162.62, 1451.475, 23.1719)
+Actor.SetWalkStyle(95@, "DRUNKMAN")
+Actor.Angle(95@) = 180.0
+Actor.Health(95@) = 1
+0615: define_AS_pack_begin 73@ 
+05D3: AS_actor -1 goto_point 2154.192 1437.948 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+0605: actor -1 perform_animation "LKAROUND_IN" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKAROUND_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKAROUND_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKAROUND_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKAROUND_OUT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 73@ loop 1 
+0616: define_AS_pack_end 73@ 
+0615: define_AS_pack_begin 74@ 
+05D3: AS_actor -1 goto_point 2164.596 1435.169 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+0605: actor -1 perform_animation "POINTUP_IN" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_SHOUT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 74@ loop 1 
+0616: define_AS_pack_end 74@ 
+0615: define_AS_pack_begin 75@ 
+05D3: AS_actor -1 goto_point 2160.696 1435.38 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+05B9: AS_actor -1 stay_idle 100 ms 
+0605: actor -1 perform_animation "POINTUP_IN" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_SHOUT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "POINTUP_OUT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 75@ loop 1 
+0616: define_AS_pack_end 75@ 
+0615: define_AS_pack_begin 76@ 
+05D3: AS_actor -1 goto_point 2169.263 1435.927 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_02" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_01" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 76@ loop 1 
+0616: define_AS_pack_end 76@ 
+0615: define_AS_pack_begin 77@ 
+05D3: AS_actor -1 goto_point 2155.42 1436.42 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+05B9: AS_actor -1 stay_idle 500 ms 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_01" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_01" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 77@ loop 1 
+0616: define_AS_pack_end 77@ 
+0615: define_AS_pack_begin 78@ 
+05D3: AS_actor -1 goto_point 2168.29 1436.191 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_02" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_01" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 78@ loop 1 
+0616: define_AS_pack_end 78@ 
+0615: define_AS_pack_begin 79@ 
+05D3: AS_actor -1 goto_point 2159.253 1435.312 9.8203 mode 4 time 8000 ms // versionA 
+0639: AS_actor -1 rotate_to_actor 95@ 
+05B9: AS_actor -1 stay_idle 500 ms 
+0605: actor -1 perform_animation "LKUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKUP_POINT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKUP_POINT" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "LKUP_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 79@ loop 1 
+0616: define_AS_pack_end 79@ 
+0615: define_AS_pack_begin 96@ 
+05D3: AS_actor -1 goto_point 2165.651 1452.0 23.1721 mode 4 time 8000 ms // versionA 
+05D3: AS_actor -1 goto_point 2160.56 1452.0 23.1719 mode 4 time 8000 ms // versionA 
+0643: set_AS_pack 96@ loop 1 
+0616: define_AS_pack_end 96@ 
+0615: define_AS_pack_begin 97@ 
+05BC: AS_actor -1 jump 0 
+0616: define_AS_pack_end 97@ 
+0615: define_AS_pack_begin 98@ 
+05C5: AS_actor -1 cower -1 ms 
+0643: set_AS_pack 98@ loop 1 
+0616: define_AS_pack_end 98@ 
+0615: define_AS_pack_begin 116@ 
+0605: actor -1 perform_animation "LKAROUND_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 116@ loop 1 
+0616: define_AS_pack_end 116@ 
+0615: define_AS_pack_begin 110@ 
+0605: actor -1 perform_animation "WAVE_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 110@ 
+0615: define_AS_pack_begin 111@ 
+0605: actor -1 perform_animation "SHOUT_LOOP" IFP "ON_LOOKERS" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 111@ 
+100@ = Object.Init(#SMASH_BOX_STAY, 2156.719, 1482.352, 19.1794)
+101@ = Object.Init(#SMASH_BOX_BRK, 2156.719, 1482.352, 19.1794)
+$7796 = 100 
+0568: set_actor 95@ untargetable 1 
+018A: 92@ = create_checkpoint_at 105@ 106@ 107@ 
+018A: 93@ = create_checkpoint_at 1878.546 2240.82 9.813 
+018B: set_marker 92@ radar_mode 0 
+018B: set_marker 93@ radar_mode 0 
+0209: $7797 = random_int_in_ranges 0 5 
+0871: init_jump_table $7797 total_jumps 5 default_jump 0 @DOC2_3091 jumps 0 @DOC2_3016 1 @DOC2_3031 2 @DOC2_3046 3 @DOC2_3061 4 @DOC2_3076 -1 @DOC2_3091 -1 @DOC2_3091 
+
+:DOC2_3016
+$7797 = 16000 
+jump @DOC2_3091 
+
+:DOC2_3031
+$7797 = 18000 
+jump @DOC2_3091 
+
+:DOC2_3046
+$7797 = 20000 
+jump @DOC2_3091 
+
+:DOC2_3061
+$7797 = 22000 
+jump @DOC2_3091 
+
+:DOC2_3076
+$7797 = 24000 
+jump @DOC2_3091 
+
+:DOC2_3091
+0615: define_AS_pack_begin 88@ 
+0639: AS_actor -1 rotate_to_actor 95@ 
+05C8: AS_actor -1 look_around 
+05C9: AS_actor -1 on_guard 4000 ms 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0643: set_AS_pack 88@ loop 1 
+0616: define_AS_pack_end 88@ 
+39@ = 0 
+$7798 = 0 
+43@ = Actor.Create(CivMale, #VWMOTR1, 2154.192, 1437.948, 9.8203)
+Actor.Angle(43@) = 341.9008
+060B: set_actor 43@ decision_maker_to 99@ 
+0618: assign_actor 43@ to_AS_pack 73@ 
+44@ = Actor.Create(CivMale, #VBMYELV, 2164.596, 1435.169, 9.8203)
+Actor.Angle(44@) = 8.2163
+060B: set_actor 44@ decision_maker_to 99@ 
+0618: assign_actor 44@ to_AS_pack 74@ 
+45@ = Actor.Create(CivMale, #HECK2, 2160.696, 1435.38, 9.8203)
+Actor.Angle(45@) = 8.2163
+060B: set_actor 45@ decision_maker_to 99@ 
+0618: assign_actor 45@ to_AS_pack 75@ 
+46@ = Actor.Create(CivMale, #VWMOTR1, 2169.263, 1435.927, 9.8203)
+Actor.Angle(46@) = 8.2163
+060B: set_actor 46@ decision_maker_to 99@ 
+0618: assign_actor 46@ to_AS_pack 76@ 
+47@ = Actor.Create(CivMale, #VWFYPRO, 2155.42, 1436.42, 9.8203)
+Actor.Angle(47@) = 8.2163
+060B: set_actor 47@ decision_maker_to 99@ 
+0618: assign_actor 47@ to_AS_pack 77@ 
+48@ = Actor.Create(CivMale, #WMOPREA, 2168.29, 1436.191, 9.8203)
+Actor.Angle(48@) = 8.2163
+060B: set_actor 48@ decision_maker_to 99@ 
+0618: assign_actor 48@ to_AS_pack 78@ 
+49@ = Actor.Create(CivMale, #HECK1, 2159.253, 1435.312, 9.8203)
+Actor.Angle(49@) = 2.018
+060B: set_actor 49@ decision_maker_to 99@ 
+0618: assign_actor 49@ to_AS_pack 79@ 
+Model.Load(#WALTON)
+Model.Load(#WMYMECH)
+Model.Load(#SMASHBOXPILE)
+
+:DOC2_3515
+if or
+   not Model.Available(#WALTON)
+   not Model.Available(#WMYMECH)
+   not Model.Available(#SMASHBOXPILE)
+jf @DOC2_3551 
+wait 0 
+jump @DOC2_3515 
+
+:DOC2_3551
+102@ = Object.Create(#SMASHBOXPILE, 2112.753, 1403.973, 10.1484)
+Object.Angle(102@) = 86.7997
+Model.Destroy(#SMASHBOXPILE)
+0506: set_car_model #WALTON next_variation 4 4 // first param is useless 
+34@ = Car.Create(#WALTON, 2107.19, 1409.153, 9.8203)
+Model.Destroy(#WALTON)
+Car.Angle(34@) = 180.0
+0229: set_car 34@ primary_color_to 1 secondary_color_to 1 
+35@ = Marker.CreateAboveCar(34@)
+07E0: set_marker 35@ type_to 1 
+018B: set_marker 35@ radar_mode 3 
+109@ = 0.0 
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_3765 
+0681: attach_object 100@ to_car 34@ with_offset -0.3 -1.0 109@ rotation 0.0 0.0 0.0 
+0681: attach_object 101@ to_car 34@ with_offset -0.3 -1.0 109@ rotation 0.0 0.0 0.0 
+
+:DOC2_3765
+114@ = Actor.Create(CivMale, #WMYMECH, 2109.793, 1407.857, 9.8203)
+Model.Destroy(#WMYMECH)
+Actor.Angle(114@) = 180.0
+0729: AS_actor 114@ hold_cellphone 1 
+gosub @DOC2_14010 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_3868 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, 2162.498, 1434.396, 9.8203)
+Actor.Angle($PLAYER_ACTOR) = 358.0
+
+:DOC2_3868
+if 
+   not Actor.Dead(95@)
+jf @DOC2_3897 
+0792: disembark_instantly_actor 95@ 
+0618: assign_actor 95@ to_AS_pack 116@ 
+
+:DOC2_3897
+0395: clear_area 1 at 2162.705 1430.309 9.8203 radius 10.0 
+Camera.SetPosition(2162.541, 1423.84, 9.9728, 0.0, 0.0, 0.0)
+Camera.PointAt(2162.558, 1424.803, 10.2424, 2)
+0169: set_fade_color_RGB 0 0 0 
+fade 1 0 
+130@ = 2 
+135@ = 2 
+wait 1000 
+00BC: show_text_highpriority GXT 'DOC2_X' time 5000 flag 1  // ~s~Find a way to save Madd Dogg before he jumps!
+33@ = 0 
+
+:DOC2_4028
+if 
+  2000 > 33@ 
+jf @DOC2_4082 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_4075 
+jump @DOC2_4174 
+
+:DOC2_4075
+jump @DOC2_4028 
+
+:DOC2_4082
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_4113 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05D4: AS_actor $PLAYER_ACTOR rotate_angle 172.0 
+
+:DOC2_4113
+33@ = 0 
+
+:DOC2_4120
+if 
+  2000 > 33@ 
+jf @DOC2_4174 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_4167 
+jump @DOC2_4174 
+
+:DOC2_4167
+jump @DOC2_4120 
+
+:DOC2_4174
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_4205 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.Angle($PLAYER_ACTOR) = 172.0
+
+:DOC2_4205
+00BE: text_clear_all 
+gosub @DOC2_14025 
+Camera.SetBehindPlayer
+00BC: show_text_highpriority GXT 'DOC2_01' time 7000 flag 1  // ~s~Use the ~b~pickup truck~s~ around the corner to rescue Madd Dogg!
+
+:DOC2_4232
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(34@)
+   not Actor.Dead(95@)
+jf @DOC2_13036 
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @DOC2_4284 
+jump @DOC2_13237 
+
+:DOC2_4284
+131@ += 1 
+gosub @DOC2_14110 
+gosub @DOC2_14912 
+if 
+  4 > 91@ 
+jf @DOC2_5048 
+if and
+  131@ > 200 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 2154.192 1437.948 9.8203 radius 20.0 20.0 20.0 
+876F:   not text_priority_displayed 
+jf @DOC2_5048 
+
+:DOC2_4381
+0209: $7798 = random_int_in_ranges 0 9 
+if and
+003C:   $7798 == 132@ // (int) 
+  3 > 133@ 
+jf @DOC2_4430 
+jump @DOC2_4381 
+133@ += 1 
+
+:DOC2_4430
+008B: 132@ = $7798 // (int) 
+133@ = 0 
+if 
+   not Actor.Dead(43@)
+jf @DOC2_4689 
+if and
+00FE:   actor 43@ sphere 0 in_sphere 2154.192 1437.948 9.8203 radius 2.0 2.0 2.0 
+876F:   not text_priority_displayed 
+  126@ == 0 
+jf @DOC2_4689 
+0871: init_jump_table $7798 total_jumps 3 default_jump 0 @DOC2_4689 jumps 0 @DOC2_4581 1 @DOC2_4617 2 @DOC2_4653 -1 @DOC2_4689 -1 @DOC2_4689 -1 @DOC2_4689 -1 @DOC2_4689 
+
+:DOC2_4581
+05AA: 127@s = 'DC2_AA' // @s = 'short'  // ~z~Can I get your sneakers?
+04AF: 129@ = 12400 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_4689 
+
+:DOC2_4617
+05AA: 127@s = 'DC2_AB' // @s = 'short'  // ~z~You won't be needing those fancy clothes.
+04AF: 129@ = 12401 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_4689 
+
+:DOC2_4653
+05AA: 127@s = 'DC2_AC' // @s = 'short'  // ~z~Don't take your clothes with y'!
+04AF: 129@ = 12402 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_4689 
+
+:DOC2_4689
+if 
+   not Actor.Dead(44@)
+jf @DOC2_5041 
+if and
+00FE:   actor 44@ sphere 0 in_sphere 2164.596 1435.169 9.8203 radius 2.0 2.0 2.0 
+876F:   not text_priority_displayed 
+  126@ == 0 
+jf @DOC2_5041 
+0871: init_jump_table $7798 total_jumps 6 default_jump 0 @DOC2_5041 jumps 3 @DOC2_4825 4 @DOC2_4861 5 @DOC2_4897 6 @DOC2_4933 7 @DOC2_4969 8 @DOC2_5005 -1 @DOC2_5041 
+
+:DOC2_4825
+05AA: 127@s = 'DC2_AD' // @s = 'short'  // ~z~A little more action!
+04AF: 129@ = 12403 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_4861
+05AA: 127@s = 'DC2_AE' // @s = 'short'  // ~z~The show must go on!
+04AF: 129@ = 12404 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_4897
+05AA: 127@s = 'DC2_AF' // @s = 'short'  // ~z~He's gonna be pavement pizza!
+04AF: 129@ = 12405 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_4933
+05AA: 127@s = 'DC2_AJ' // @s = 'short'  // ~z~Jump! Look what dying did for my career!
+04AF: 129@ = 12409 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_4969
+05AA: 127@s = 'DC2_AK' // @s = 'short'  // ~z~JUMP! You fool!
+04AF: 129@ = 12410 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_5005
+05AA: 127@s = 'DC2_AL' // @s = 'short'  // ~z~Jump! It'll save your career!
+04AF: 129@ = 12411 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5041 
+
+:DOC2_5041
+131@ = 0 
+
+:DOC2_5048
+if and
+   not Car.Wrecked(34@)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(95@)
+jf @DOC2_6979 
+39@ = 0 
+
+:DOC2_5081
+if 
+   not Actor.Dead(43@(39@,15i))
+jf @DOC2_5276 
+if and
+051A:   actor 43@(39@,15i) damaged_by_actor $PLAYER_ACTOR 
+  58@(39@,15i) == 0 
+jf @DOC2_5184 
+0687: clear_actor 43@(39@,15i) task 
+05D3: AS_actor 43@(39@,15i) goto_point 2082.005 1415.909 9.8047 mode 7 time 20000 ms // versionA 
+58@(39@,15i) = 1 
+
+:DOC2_5184
+if and
+00FE:   actor 43@(39@,15i) sphere 0 in_sphere 2082.381 1416.636 9.8047 radius 10.0 10.0 10.0 
+   not 58@(39@,15i) == 3 
+jf @DOC2_5276 
+0687: clear_actor 43@(39@,15i) task 
+05DE: AS_actor 43@(39@,15i) walk_around_ped_path 
+58@(39@,15i) = 3 
+
+:DOC2_5276
+39@ += 1 
+  39@ >= 7 
+jf @DOC2_5081 
+if or
+  91@ == 1 
+  91@ == 0 
+jf @DOC2_5752 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DOC2_5592 
+if and
+   not Actor.Dead(114@)
+  113@ == 0 
+jf @DOC2_5564 
+0792: disembark_instantly_actor 114@ 
+05E2: AS_actor 114@ kill_actor $PLAYER_ACTOR 
+0209: $7798 = random_int_in_ranges 0 2 
+0871: init_jump_table $7798 total_jumps 3 default_jump 0 @DOC2_5557 jumps 0 @DOC2_5449 1 @DOC2_5485 2 @DOC2_5521 -1 @DOC2_5557 -1 @DOC2_5557 -1 @DOC2_5557 -1 @DOC2_5557 
+
+:DOC2_5449
+05AA: 127@s = 'DOGG_GA' // @s = 'short'  // ~z~Hey, that's my truck!
+04AF: 129@ = 14039 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5557 
+
+:DOC2_5485
+05AA: 127@s = 'DOGG_GB' // @s = 'short'  // ~z~What the fuck you doing?
+04AF: 129@ = 14040 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5557 
+
+:DOC2_5521
+05AA: 127@s = 'DOGG_GC' // @s = 'short'  // ~z~Hey! HEY!
+04AF: 129@ = 14041 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_5557 
+
+:DOC2_5557
+113@ = 1 
+
+:DOC2_5564
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 92@ radar_mode 3 
+91@ = 1 
+jump @DOC2_5613 
+
+:DOC2_5592
+018B: set_marker 35@ radar_mode 3 
+018B: set_marker 92@ radar_mode 0 
+91@ = 0 
+
+:DOC2_5613
+if 
+  91@ == 1 
+jf @DOC2_5752 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 105@ 106@ 107@ radius 4.0 4.0 4.0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_5752 
+Player.CanMove($PLAYER_CHAR) = False
+91@ = 2 
+108@ = Actor.Angle($PLAYER_ACTOR)
+if and
+  108@ > 45.0 
+  145.0 > 108@ 
+jf @DOC2_5745 
+125@ = 0 
+jump @DOC2_5752 
+
+:DOC2_5745
+125@ = 1 
+
+:DOC2_5752
+if 
+  91@ == 2 
+jf @DOC2_6979 
+gosub @DOC2_14010 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_5834 
+0792: disembark_instantly_actor 95@ 
+0605: actor 95@ perform_animation "IDLE_CHAT" IFP "PED" framedelta 1.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:DOC2_5834
+Camera.SetPosition(2162.62, 1450.208, 25.1198, 0.0, 0.0, 0.0)
+Camera.PointAt(2162.62, 1451.192, 24.9414, 2)
+0209: $7798 = random_int_in_ranges 0 3 
+0871: init_jump_table $7798 total_jumps 3 default_jump 0 @DOC2_6221 jumps 0 @DOC2_5957 1 @DOC2_6045 2 @DOC2_6133 -1 @DOC2_6221 -1 @DOC2_6221 -1 @DOC2_6221 -1 @DOC2_6221 
+
+:DOC2_5957
+040D: unload_wav 1 
+03CF: load_wav 14000 as 1 
+
+:DOC2_5968
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_5994 
+wait 0 
+jump @DOC2_5968 
+
+:DOC2_5994
+if 
+   not Actor.Dead(95@)
+jf @DOC2_6018 
+0967: actor 95@ move_mouth 2000 ms 
+
+:DOC2_6018
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_AA' time 3000 flag 1  // ~z~Stay back!
+jump @DOC2_6221 
+
+:DOC2_6045
+040D: unload_wav 1 
+03CF: load_wav 14002 as 1 
+
+:DOC2_6056
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_6082 
+wait 0 
+jump @DOC2_6056 
+
+:DOC2_6082
+if 
+   not Actor.Dead(95@)
+jf @DOC2_6106 
+0967: actor 95@ move_mouth 2000 ms 
+
+:DOC2_6106
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_AC' time 3000 flag 1  // ~z~I warn y'all, I'll jump!
+jump @DOC2_6221 
+
+:DOC2_6133
+040D: unload_wav 1 
+03CF: load_wav 14006 as 1 
+
+:DOC2_6144
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_6170 
+wait 0 
+jump @DOC2_6144 
+
+:DOC2_6170
+if 
+   not Actor.Dead(95@)
+jf @DOC2_6194 
+0967: actor 95@ move_mouth 2000 ms 
+
+:DOC2_6194
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_AG' time 3000 flag 1  // ~z~Brandy, Goddamn it, get the brandy!
+jump @DOC2_6221 
+
+:DOC2_6221
+if 
+   not Actor.Dead(114@)
+jf @DOC2_6242 
+Actor.DestroyWithFade(114@)
+
+:DOC2_6242
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#WMYMECH)
+wait 1000 
+33@ = 0 
+
+:DOC2_6263
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_6320 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_6313 
+134@ = 1 
+jump @DOC2_6751 
+
+:DOC2_6313
+jump @DOC2_6263 
+
+:DOC2_6320
+if 
+   not Actor.Dead(95@)
+jf @DOC2_6341 
+0968: actor 95@ stop_mouth 
+
+:DOC2_6341
+33@ = 0 
+
+:DOC2_6348
+if 
+  2000 > 33@ 
+jf @DOC2_6409 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_6402 
+134@ = 1 
+jump @DOC2_6751 
+
+:DOC2_6402
+jump @DOC2_6348 
+
+:DOC2_6409
+0460: set_camera_transverse_delay 0.0 time 2000 
+Camera.SetPosition(2162.62, 1450.208, 25.1198, 0.0, 0.0, 0.0)
+Camera.PointAt(2162.62, 1450.499, 24.1631, 1)
+33@ = 0 
+
+:DOC2_6477
+if 
+  2000 > 33@ 
+jf @DOC2_6538 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_6531 
+134@ = 1 
+jump @DOC2_6751 
+
+:DOC2_6531
+jump @DOC2_6477 
+
+:DOC2_6538
+0460: set_camera_transverse_delay 0.0 time 2000 
+Camera.SetPosition(2162.62, 1445.077, 13.6736, 0.0, 0.0, 0.0)
+Camera.PointAt(2162.62, 1445.815, 14.7476, 1)
+33@ = 0 
+
+:DOC2_6606
+if 
+  1000 > 33@ 
+jf @DOC2_6667 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_6660 
+134@ = 1 
+jump @DOC2_6751 
+
+:DOC2_6660
+jump @DOC2_6606 
+
+:DOC2_6667
+00BC: show_text_highpriority GXT 'DOC2_05' time 3000 flag 1  // ~s~Catch ~b~Madd Dogg ~s~when he jumps.
+33@ = 0 
+
+:DOC2_6690
+if 
+  3000 > 33@ 
+jf @DOC2_6751 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_6744 
+134@ = 1 
+jump @DOC2_6751 
+
+:DOC2_6744
+jump @DOC2_6690 
+
+:DOC2_6751
+if 
+  134@ == 1 
+jf @DOC2_6785 
+00BC: show_text_highpriority GXT 'DOC2_05' time 3000 flag 1  // ~s~Catch ~b~Madd Dogg ~s~when he jumps.
+
+:DOC2_6785
+00BE: text_clear_all 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_6811 
+0618: assign_actor 95@ to_AS_pack 96@ 
+
+:DOC2_6811
+if 
+  125@ == 0 
+jf @DOC2_6882 
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_6875 
+Car.PutAt(34@, 2163.888, 1444.0, 9.8203)
+Car.Angle(34@) = 90.0
+
+:DOC2_6875
+jump @DOC2_6928 
+
+:DOC2_6882
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_6928 
+Car.PutAt(34@, 2163.888, 1444.0, 9.8203)
+Car.Angle(34@) = 270.0
+
+:DOC2_6928
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+if 
+075C:   marker 92@ enabled 
+jf @DOC2_6958 
+08FB: set_checkpoint 92@ type_to 1 
+
+:DOC2_6958
+gosub @DOC2_14025 
+91@ = 3 
+32@ = 0 
+
+:DOC2_6979
+if and
+   not Car.Wrecked(34@)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(95@)
+jf @DOC2_12984 
+if 
+  91@ == 3 
+jf @DOC2_9062 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 2149.407 1431.497 9.8203 radius 100.0 100.0 100.0 
+jf @DOC2_7094 
+00BC: show_text_highpriority GXT 'DOC2_10' time 4000 flag 1  // ~r~You let Madd Dogg die.
+jump @DOC2_13050 
+
+:DOC2_7094
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DOC2_7159 
+if 
+  89@ == 0 
+jf @DOC2_7152 
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 92@ radar_mode 3 
+89@ = 1 
+
+:DOC2_7152
+jump @DOC2_7214 
+
+:DOC2_7159
+if 
+  89@ == 1 
+jf @DOC2_7214 
+00BC: show_text_highpriority GXT 'DOC2_19' time 4000 flag 1  // ~s~Get back in the ~b~truck~s~!
+018B: set_marker 35@ radar_mode 3 
+018B: set_marker 92@ radar_mode 0 
+89@ = 0 
+
+:DOC2_7214
+if and
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 105@ 106@ 107@ radius 12.0 12.0 12.0 
+  112@ == 1 
+jf @DOC2_7279 
+33@ = 0 
+Camera.Restore_WithJumpCut
+112@ = 2 
+
+:DOC2_7279
+if and
+  33@ > 1000 
+  112@ == 2 
+jf @DOC2_7328 
+00BC: show_text_highpriority GXT 'DOC2_11' time 4000 flag 1  // ~s~Go back and rescue ~b~Madd Dogg~s~!
+112@ = 0 
+
+:DOC2_7328
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 105@ 106@ 107@ radius 12.0 12.0 12.0 
+jf @DOC2_9062 
+112@ = 1 
+if 
+  40000 > 32@ 
+jf @DOC2_7449 
+Camera.SetPosition(2163.702, 1435.87, 37.0031, 0.0, 0.0, 0.0)
+Camera.PointAt(2163.699, 1436.447, 36.1861, 2)
+
+:DOC2_7449
+if and
+  32@ > 10000 
+  11000 > 32@ 
+jf @DOC2_7765 
+if 
+  126@ == 0 
+jf @DOC2_7765 
+0209: $7798 = random_int_in_ranges 0 3 
+0871: init_jump_table $7798 total_jumps 3 default_jump 0 @DOC2_7758 jumps 0 @DOC2_7566 1 @DOC2_7630 2 @DOC2_7694 -1 @DOC2_7758 -1 @DOC2_7758 -1 @DOC2_7758 -1 @DOC2_7758 
+
+:DOC2_7566
+040D: unload_wav 1 
+03CF: load_wav 14010 as 1 
+
+:DOC2_7577
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_7603 
+wait 0 
+jump @DOC2_7577 
+
+:DOC2_7603
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_BA' time 4000 flag 1  // ~z~This is it! This is the end! I'm out!
+jump @DOC2_7758 
+
+:DOC2_7630
+040D: unload_wav 1 
+03CF: load_wav 14011 as 1 
+
+:DOC2_7641
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_7667 
+wait 0 
+jump @DOC2_7641 
+
+:DOC2_7667
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_BB' time 4000 flag 1  // ~z~It's time, I'm going to do it!
+jump @DOC2_7758 
+
+:DOC2_7694
+040D: unload_wav 1 
+03CF: load_wav 14012 as 1 
+
+:DOC2_7705
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_7731 
+wait 0 
+jump @DOC2_7705 
+
+:DOC2_7731
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_BC' time 4000 flag 1  // ~z~Goodbye cruel world!
+jump @DOC2_7758 
+
+:DOC2_7758
+126@ = 1 
+
+:DOC2_7765
+if 
+001F:   32@ > $7797 // (int) 
+jf @DOC2_9062 
+Player.CanMove($PLAYER_CHAR) = True
+if 
+   not Actor.Dead(95@)
+jf @DOC2_7822 
+0792: disembark_instantly_actor 95@ 
+Actor.Angle(95@) = 177.7059
+
+:DOC2_7822
+015D: set_gamespeed 0.4 
+Camera.SetPosition(2163.22, 1454.533, 35.0248, 0.0, 0.0, 0.0)
+Camera.PointAt(2163.227, 1454.063, 34.1425, 2)
+wait 500 
+Object.CollisionDetection(100@) = False
+Object.CollisionDetection(101@) = False
+if 
+   not Actor.Dead(95@)
+jf @DOC2_7923 
+0618: assign_actor 95@ to_AS_pack 97@ 
+
+:DOC2_7923
+33@ = 0 
+91@ = 4 
+040D: unload_wav 3 
+03CF: load_wav 23400 as 3 
+
+:DOC2_7948
+if 
+   not 33@ > 2000 
+jf @DOC2_8562 
+wait 0 
+if and
+  33@ > 500 
+  103@ == 0 
+jf @DOC2_8025 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_8018 
+0687: clear_actor 95@ task 
+
+:DOC2_8018
+103@ = 1 
+
+:DOC2_8025
+if 
+   not Actor.Dead(95@)
+jf @DOC2_8121 
+Actor.StorePos(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  12.0 > $TEMPVAR_FLOAT_3 
+  32@ > 10 
+jf @DOC2_8121 
+32@ = 0 
+09B8: create_blood_gush_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 with_offset 0.0 0.0 2.0 density 40 on_actor 95@ 
+
+:DOC2_8121
+if 
+  33@ > 1000 
+jf @DOC2_8205 
+gosub @DOC2_14010 
+Camera.SetPosition(2172.002, 1441.702, 10.2111, 0.0, 0.0, 0.0)
+Camera.PointAt(2171.076, 1442.003, 10.4368, 2)
+Player.CanMove($PLAYER_CHAR) = False
+
+:DOC2_8205
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_8555 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_8555 
+if 
+   not 91@ == 5 
+jf @DOC2_8555 
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset 0.0 -1.5 0.5 
+if 
+00FE:   actor 95@ sphere 0 in_sphere 40@ 41@ 42@ radius 1.3 1.3 1.0 
+jf @DOC2_8555 
+if 
+03D0:   wav 3 loaded 
+jf @DOC2_8345 
+03D1: play_wav 3 
+
+:DOC2_8345
+109@ = -0.1 
+0723: break_object 101@ intensity 1 
+0619: enable_actor 95@ collision_detection 0 
+Actor.Health(95@) = 100
+0792: disembark_instantly_actor 95@ 
+0812: AS_actor 95@ perform_animation "KO_SHOT_FRONT" IFP "PED" framedelta 2.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0464: put_actor 95@ into_turret_on_car 34@ at_car_offset 0.0 -2.0 1.0 position 0 shooting_angle_limit 0.0 with_weapon 0 
+91@ = 5 
+if and
+   not Actor.Dead(95@)
+   not Car.Wrecked(34@)
+jf @DOC2_8555 
+064B: 90@ = create_particle "EXPLOSION_BARREL" at 40@ 41@ 42@ type 1 
+064F: remove_references_to_particle 90@ 
+015B: shake_player_controller 0 time 500 intensity 200 
+01EB: set_traffic_density_multiplier_to 2.0 
+Actor.Health(95@) = 100
+0826: enable_hud 1 
+gosub @DOC2_13320 
+
+:DOC2_8555
+jump @DOC2_7948 
+
+:DOC2_8562
+32@ = 0 
+if 
+03D2:   wav 3 ended 
+jf @DOC2_8588 
+040D: unload_wav 3 
+
+:DOC2_8588
+015D: set_gamespeed 1.0 
+gosub @DOC2_14025 
+if and
+   not Actor.Dead(95@)
+   not Car.Wrecked(34@)
+jf @DOC2_8660 
+0465: remove_actor 95@ from_turret_mode 
+0464: put_actor 95@ into_turret_on_car 34@ at_car_offset 0.0 -2.5 1.0 position 0 shooting_angle_limit 0.0 with_weapon 0 
+
+:DOC2_8660
+if 
+  91@ == 4 
+jf @DOC2_8751 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_8744 
+Actor.StorePos(95@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+09B8: create_blood_gush_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 with_offset 0.0 0.0 10.0 density 100 on_actor 95@ 
+05BE: AS_actor 95@ die 
+
+:DOC2_8744
+jump @DOC2_9062 
+
+:DOC2_8751
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_8797 
+01EB: set_traffic_density_multiplier_to 2.0 
+36@ = Car.Health(34@)
+Car.SetImmunities(34@, 1, 0, 0, 0, 1)
+
+:DOC2_8797
+0085: 37@ = 36@ // (int) 
+03C4: set_status_text $7799 type 1 GXT 'DOC2_07' // global_variable  // Madd Dogg
+018B: set_marker 93@ radar_mode 3 
+018B: set_marker 92@ radar_mode 0 
+39@ = 0 
+
+:DOC2_8842
+if 
+   not Actor.Dead(43@(39@,15i))
+jf @DOC2_8999 
+0792: disembark_instantly_actor 43@(39@,15i) 
+0209: $7798 = random_int_in_ranges 0 2 
+if 
+  $7798 == 0 
+jf @DOC2_8952 
+0209: $7798 = random_int_in_ranges 10 200 
+wait $7798 
+if 
+   not Actor.Dead(43@(39@,15i))
+jf @DOC2_8945 
+0618: assign_actor 43@(39@,15i) to_AS_pack 110@ 
+
+:DOC2_8945
+jump @DOC2_8999 
+
+:DOC2_8952
+0209: $7798 = random_int_in_ranges 10 200 
+wait $7798 
+if 
+   not Actor.Dead(43@(39@,15i))
+jf @DOC2_8999 
+0618: assign_actor 43@(39@,15i) to_AS_pack 111@ 
+
+:DOC2_8999
+39@ += 1 
+  39@ >= 7 
+jf @DOC2_8842 
+04EF: release_animation "ON_LOOKERS" 
+wait 1000 
+00BC: show_text_highpriority GXT 'DOC2_06' time 5000 flag 1  // ~s~Drive Madd Dogg to ~y~hospital ~s~CAREFULLY. Each bump reduces his chance of survival.
+32@ = 0 
+
+:DOC2_9062
+if and
+   not Car.Wrecked(34@)
+   not Actor.Dead(95@)
+jf @DOC2_12984 
+if 
+  91@ == 5 
+jf @DOC2_12984 
+if 
+  32@ > 5000 
+jf @DOC2_9486 
+if and
+  130@ == 2 
+  124@ == 0 
+jf @DOC2_9181 
+05AA: 127@s = 'DOGG_CA' // @s = 'short'  // ~z~Time to take your sorry ass to rehab you drunken idiot.
+04AF: 129@ = 14013 // = constant 
+gosub @DOC2_14892 
+124@ = 1 
+
+:DOC2_9181
+if and
+  130@ == 2 
+  124@ == 1 
+jf @DOC2_9242 
+05AA: 127@s = 'DOGG_CB' // @s = 'short'  // ~z~Am I still the top rapper, dude?
+04AF: 129@ = 14014 // = constant 
+gosub @DOC2_14892 
+124@ = 2 
+
+:DOC2_9242
+if and
+  130@ == 2 
+  124@ == 2 
+jf @DOC2_9303 
+05AA: 127@s = 'DOGG_CC' // @s = 'short'  // ~z~Best there ever was.
+04AF: 129@ = 14015 // = constant 
+gosub @DOC2_14892 
+124@ = 3 
+
+:DOC2_9303
+if and
+  130@ == 2 
+  124@ == 3 
+jf @DOC2_9364 
+05AA: 127@s = 'DOGG_CD' // @s = 'short'  // ~z~Second to nobody else, homeboy.
+04AF: 129@ = 14016 // = constant 
+gosub @DOC2_14892 
+124@ = 4 
+
+:DOC2_9364
+if and
+  130@ == 2 
+  124@ == 4 
+jf @DOC2_9425 
+05AA: 127@s = 'DOGG_CE' // @s = 'short'  // ~z~And the name's Carl.
+04AF: 129@ = 14017 // = constant 
+gosub @DOC2_14892 
+124@ = 5 
+
+:DOC2_9425
+if and
+  130@ == 2 
+  124@ == 5 
+jf @DOC2_9486 
+05AA: 127@s = 'DOGG_CF' // @s = 'short'  // ~z~Thanks, Carl...
+04AF: 129@ = 14018 // = constant 
+gosub @DOC2_14892 
+124@ = 6 
+
+:DOC2_9486
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(34@)
+jf @DOC2_9622 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DOC2_9581 
+if 
+  117@ == 0 
+jf @DOC2_9574 
+124@ = 6 
+00BC: show_text_highpriority GXT 'DOC2_19' time 4000 flag 1  // ~s~Get back in the ~b~truck~s~!
+117@ = 1 
+
+:DOC2_9574
+jump @DOC2_9622 
+
+:DOC2_9581
+if 
+  117@ == 1 
+jf @DOC2_9622 
+00BC: show_text_highpriority GXT 'DOC2_20' time 4000 flag 1  // ~s~Drive Madd Dogg to the ~y~Hospital~s~!
+117@ = 0 
+
+:DOC2_9622
+0085: 37@ = 36@ // (int) 
+36@ = Car.Health(34@)
+if and
+   not Actor.Dead(95@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_9704 
+if 
+051A:   actor 95@ damaged_by_actor $PLAYER_ACTOR 
+jf @DOC2_9704 
+if 
+003B:   36@ == 37@ // (int) 
+jf @DOC2_9704 
+36@ -= 50 
+
+:DOC2_9704
+if 
+001D:   37@ > 36@ // (int) 
+jf @DOC2_10839 
+0085: 38@ = 37@ // (int) 
+0062: 38@ -= 36@ // (int) 
+0066: $7799 -= 38@ // (int) 
+if 
+  0 > $7799 
+jf @DOC2_10026 
+$7799 = 0 
+00BE: text_clear_all 
+0209: $7798 = random_int_in_ranges 0 3 
+0871: init_jump_table $7798 total_jumps 3 default_jump 0 @DOC2_9954 jumps 0 @DOC2_9846 1 @DOC2_9882 2 @DOC2_9918 -1 @DOC2_9954 -1 @DOC2_9954 -1 @DOC2_9954 -1 @DOC2_9954 
+
+:DOC2_9846
+05AA: 127@s = 'DOGG_EA' // @s = 'short'  // ~z~It's the end! Oh, you non-driving asshole... Uurruuggh...
+04AF: 129@ = 14029 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_9954 
+
+:DOC2_9882
+05AA: 127@s = 'DOGG_EB' // @s = 'short'  // ~z~Uuaaghh, you tried, man... Ooh, ugh... but it wasn't good enough ... I'm out.
+04AF: 129@ = 14030 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_9954 
+
+:DOC2_9918
+05AA: 127@s = 'DOGG_EC' // @s = 'short'  // ~z~Momma, 's'at you? Uugh!
+04AF: 129@ = 14031 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_9954 
+
+:DOC2_9954
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_9984 
+91@ = 6 
+jump @DOC2_9996 
+
+:DOC2_9984
+Actor.DestroyWithFade(95@)
+jump @DOC2_13050 
+
+:DOC2_9996
+if 
+   not Actor.Dead(95@)
+jf @DOC2_10019 
+0332: set_actor 95@ bleeding 0 
+
+:DOC2_10019
+33@ = 0 
+
+:DOC2_10026
+if and
+  94@ == 0 
+   not 91@ == 6 
+jf @DOC2_10839 
+00BE: text_clear_all 
+124@ = 4 
+94@ = 1 
+33@ = 0 
+0332: set_actor 95@ bleeding 1 
+if or
+  137@ == 0 
+  137@ == 1 
+jf @DOC2_10122 
+0209: $7798 = random_int_in_ranges 0 3 
+jump @DOC2_10131 
+
+:DOC2_10122
+0209: $7798 = random_int_in_ranges 0 2 
+
+:DOC2_10131
+0871: init_jump_table 137@ total_jumps 4 default_jump 0 @DOC2_10800 jumps 0 @DOC2_10194 1 @DOC2_10342 2 @DOC2_10490 3 @DOC2_10645 -1 @DOC2_10800 -1 @DOC2_10800 -1 @DOC2_10800 
+
+:DOC2_10194
+if 
+  $7798 == 0 
+jf @DOC2_10241 
+05AA: 127@s = 'DOGG_DC' // @s = 'short'  // ~z~Momma, is that you?
+04AF: 129@ = 14021 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10241
+if 
+  $7798 == 1 
+jf @DOC2_10288 
+05AA: 127@s = 'DOGG_DD' // @s = 'short'  // ~z~Brandy! I need more brandy...
+04AF: 129@ = 14022 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10288
+if 
+  $7798 == 2 
+jf @DOC2_10335 
+05AA: 127@s = 'DOGG_DI' // @s = 'short'  // ~z~OG Loc, you're a dead man. Dead, man!
+04AF: 129@ = 14027 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10335
+jump @DOC2_10800 
+
+:DOC2_10342
+if 
+  $7798 == 0 
+jf @DOC2_10389 
+05AA: 127@s = 'DOGG_DJ' // @s = 'short'  // ~z~Where're all my bitches..? My bitches!
+04AF: 129@ = 14028 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10389
+if 
+  $7798 == 1 
+jf @DOC2_10436 
+05AA: 127@s = 'DOGG_DE' // @s = 'short'  // ~z~I'm a ghetto superstar!
+04AF: 129@ = 14023 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10436
+if 
+  $7798 == 2 
+jf @DOC2_10483 
+05AA: 127@s = 'DOGG_DF' // @s = 'short'  // ~z~Loc! LOC! I'm gonna kill you!
+04AF: 129@ = 14024 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10483
+jump @DOC2_10800 
+
+:DOC2_10490
+if 
+  $7798 == 0 
+jf @DOC2_10537 
+05AA: 127@s = 'DOGG_DG' // @s = 'short'  // ~z~Wha-? Where am I? Why's it so dark?
+04AF: 129@ = 14025 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10537
+if 
+  $7798 == 1 
+jf @DOC2_10638 
+if 
+  124@ == 6 
+jf @DOC2_10609 
+05AA: 127@s = 'DOGG_DH' // @s = 'short'  // ~z~I'm cold, Carl - damn, man, I'm cold!
+04AF: 129@ = 14026 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_10638 
+
+:DOC2_10609
+05AA: 127@s = 'DOGG_DG' // @s = 'short'  // ~z~Wha-? Where am I? Why's it so dark?
+04AF: 129@ = 14025 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10638
+jump @DOC2_10800 
+
+:DOC2_10645
+if 
+  $7798 == 0 
+jf @DOC2_10692 
+05AA: 127@s = 'DOGG_DA' // @s = 'short'  // ~z~Oh, man, I'm gonna die!
+04AF: 129@ = 14019 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10692
+if 
+  $7798 == 1 
+jf @DOC2_10793 
+if 
+  124@ == 6 
+jf @DOC2_10764 
+05AA: 127@s = 'DOGG_DB' // @s = 'short'  // ~z~I'm slipping away, Carl!
+04AF: 129@ = 14020 // = constant 
+gosub @DOC2_14892 
+jump @DOC2_10793 
+
+:DOC2_10764
+05AA: 127@s = 'DOGG_DA' // @s = 'short'  // ~z~Oh, man, I'm gonna die!
+04AF: 129@ = 14019 // = constant 
+gosub @DOC2_14892 
+
+:DOC2_10793
+jump @DOC2_10800 
+
+:DOC2_10800
+137@ += 1 
+if 
+  137@ == 4 
+jf @DOC2_10832 
+137@ = 0 
+
+:DOC2_10832
+124@ = 6 
+
+:DOC2_10839
+if and
+  94@ == 1 
+  33@ > 4000 
+jf @DOC2_10879 
+0332: set_actor 95@ bleeding 0 
+94@ = 0 
+
+:DOC2_10879
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DOC2_10919 
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 93@ radar_mode 3 
+jump @DOC2_10933 
+
+:DOC2_10919
+018B: set_marker 35@ radar_mode 3 
+018B: set_marker 93@ radar_mode 0 
+
+:DOC2_10933
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_12984 
+if 
+   Actor.InCar($PLAYER_ACTOR, 34@)
+jf @DOC2_12984 
+if and
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 1878.546 2240.82 9.813 radius 4.0 4.0 4.0 
+   not Car.Wrecked(34@)
+jf @DOC2_12984 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   not Actor.Dead(95@)
+jf @DOC2_12951 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+gosub @DOC2_14010 
+108@ = Actor.Angle($PLAYER_ACTOR)
+if and
+  108@ > 0.0 
+  180.0 > 108@ 
+jf @DOC2_11111 
+115@ = 0 
+jump @DOC2_11118 
+
+:DOC2_11111
+115@ = 1 
+
+:DOC2_11118
+0395: clear_area 1 at 1878.546 2240.82 9.813 radius 10.0 
+0465: remove_actor 95@ from_turret_mode 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_11193 
+Actor.PutAt(95@, 1876.335, 2236.9, 10.125)
+Actor.Angle(95@) = 242.5344
+
+:DOC2_11193
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_11274 
+Car.PutAt(34@, 1878.546, 2240.82, 9.813)
+if 
+  115@ == 0 
+jf @DOC2_11264 
+Car.Angle(34@) = 90.0
+jump @DOC2_11274 
+
+:DOC2_11264
+Car.Angle(34@) = 270.0
+
+:DOC2_11274
+Camera.SetPosition(1854.521, 2272.75, 11.9889, 0.0, 0.0, 0.0)
+Camera.PointAt(1854.83, 2271.8, 11.9363, 2)
+wait 1000 
+33@ = 0 
+
+:DOC2_11337
+if 
+  2000 > 33@ 
+jf @DOC2_11391 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_11384 
+jump @DOC2_12817 
+
+:DOC2_11384
+jump @DOC2_11337 
+
+:DOC2_11391
+if 
+   not Actor.Dead(95@)
+jf @DOC2_11460 
+0615: define_AS_pack_begin 139@ 
+0603: AS_actor -1 goto_point_any_means 1878.493 2235.108 10.125 mode 6 use_car -1 
+0639: AS_actor -1 rotate_to_actor 95@ 
+05B9: AS_actor -1 stay_idle 2000 ms 
+04EB: AS_actor -1 crouch 1 
+0616: define_AS_pack_end 139@ 
+
+:DOC2_11460
+120@ = Actor.Create(CivMale, #LVEMT1, 1875.337, 2235.227, 10.125)
+Actor.Angle(120@) = 329.5542
+04EB: AS_actor 120@ crouch 1 
+121@ = Actor.Create(CivMale, #LVEMT1, 1886.007, 2235.067, 10.125)
+Actor.Angle(121@) = 84.1029
+0618: assign_actor 121@ to_AS_pack 139@ 
+Camera.SetPosition(1872.495, 2243.844, 14.0672, 0.0, 0.0, 0.0)
+Camera.PointAt(1873.321, 2243.282, 14.1094, 2)
+wait 100 
+040D: unload_wav 1 
+03CF: load_wav 14032 as 1 
+
+:DOC2_11611
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_11637 
+wait 0 
+jump @DOC2_11611 
+
+:DOC2_11637
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FA' time 3000 flag 1  // ~z~Hey, get yourself straightened out,
+0460: set_camera_transverse_delay 0.0 time 6000 
+Camera.SetPosition(1872.495, 2243.844, 14.0672, 0.0, 0.0, 0.0)
+Camera.PointAt(1872.971, 2243.143, 13.5352, 1)
+33@ = 0 
+
+:DOC2_11725
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_11775 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_11768 
+jump @DOC2_12817 
+
+:DOC2_11768
+jump @DOC2_11725 
+
+:DOC2_11775
+040D: unload_wav 1 
+03CF: load_wav 14033 as 1 
+
+:DOC2_11786
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_11812 
+wait 0 
+jump @DOC2_11786 
+
+:DOC2_11812
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FB' time 3000 flag 1  // ~z~then we can get you back in the studio.
+33@ = 0 
+
+:DOC2_11839
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_11889 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_11882 
+jump @DOC2_12817 
+
+:DOC2_11882
+jump @DOC2_11839 
+
+:DOC2_11889
+33@ = 0 
+
+:DOC2_11896
+if 
+  1000 > 33@ 
+jf @DOC2_11950 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_11943 
+jump @DOC2_12817 
+
+:DOC2_11943
+jump @DOC2_11896 
+
+:DOC2_11950
+040D: unload_wav 1 
+03CF: load_wav 14034 as 1 
+
+:DOC2_11961
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_11987 
+wait 0 
+jump @DOC2_11961 
+
+:DOC2_11987
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FC' time 3000 flag 1  // ~z~Carl.
+33@ = 0 
+
+:DOC2_12014
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_12064 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12057 
+jump @DOC2_12817 
+
+:DOC2_12057
+jump @DOC2_12014 
+
+:DOC2_12064
+040D: unload_wav 1 
+03CF: load_wav 14035 as 1 
+
+:DOC2_12075
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_12101 
+wait 0 
+jump @DOC2_12075 
+
+:DOC2_12101
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FD' time 3000 flag 1  // ~z~What?
+33@ = 0 
+
+:DOC2_12128
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_12178 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12171 
+jump @DOC2_12817 
+
+:DOC2_12171
+jump @DOC2_12128 
+
+:DOC2_12178
+33@ = 0 
+
+:DOC2_12185
+if 
+  1000 > 33@ 
+jf @DOC2_12239 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12232 
+jump @DOC2_12817 
+
+:DOC2_12232
+jump @DOC2_12185 
+
+:DOC2_12239
+040D: unload_wav 1 
+03CF: load_wav 14036 as 1 
+
+:DOC2_12250
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_12276 
+wait 0 
+jump @DOC2_12250 
+
+:DOC2_12276
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FE' time 3000 flag 1  // ~z~When I get clean I'm gonna need a new manager.
+33@ = 0 
+
+:DOC2_12303
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_12353 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12346 
+jump @DOC2_12817 
+
+:DOC2_12346
+jump @DOC2_12303 
+
+:DOC2_12353
+040D: unload_wav 1 
+03CF: load_wav 14037 as 1 
+
+:DOC2_12364
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_12390 
+wait 0 
+jump @DOC2_12364 
+
+:DOC2_12390
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FF' time 2000 flag 1  // ~z~Thought I might look you up.
+33@ = 0 
+
+:DOC2_12417
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_12467 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12460 
+jump @DOC2_12817 
+
+:DOC2_12460
+jump @DOC2_12417 
+
+:DOC2_12467
+33@ = 0 
+
+:DOC2_12474
+if 
+  1000 > 33@ 
+jf @DOC2_12528 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12521 
+jump @DOC2_12817 
+
+:DOC2_12521
+jump @DOC2_12474 
+
+:DOC2_12528
+if and
+   not Car.Wrecked(34@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_12642 
+if 
+  115@ == 0 
+jf @DOC2_12608 
+05D1: AS_actor $PLAYER_ACTOR drive_car 34@ to 1853.302 2239.55 9.8203 speed 10.0 2 model #NULL 2 
+jump @DOC2_12642 
+
+:DOC2_12608
+05D1: AS_actor $PLAYER_ACTOR drive_car 34@ to 1902.168 2238.136 9.8203 speed 10.0 2 model #NULL 2 
+
+:DOC2_12642
+040D: unload_wav 1 
+03CF: load_wav 14038 as 1 
+
+:DOC2_12653
+if 
+83D0:   not wav 1 loaded 
+jf @DOC2_12679 
+wait 0 
+jump @DOC2_12653 
+
+:DOC2_12679
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'DOGG_FG' time 3000 flag 1  // ~z~You do that, homie.
+33@ = 0 
+
+:DOC2_12706
+if 
+83D2:   not wav 1 ended 
+jf @DOC2_12756 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12749 
+jump @DOC2_12817 
+
+:DOC2_12749
+jump @DOC2_12706 
+
+:DOC2_12756
+33@ = 0 
+
+:DOC2_12763
+if 
+  1000 > 33@ 
+jf @DOC2_12817 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DOC2_12810 
+jump @DOC2_12817 
+
+:DOC2_12810
+jump @DOC2_12763 
+
+:DOC2_12817
+gosub @DOC2_13675 
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_12932 
+03A2: set_car 34@ action 0 
+if 
+  115@ == 1 
+jf @DOC2_12902 
+Car.PutAt(34@, 1913.238, 2240.401, 9.8203)
+Car.Angle(34@) = 270.0
+jump @DOC2_12932 
+
+:DOC2_12902
+Car.PutAt(34@, 1867.3, 2260.574, 9.8203)
+Car.Angle(34@) = 0.0
+
+:DOC2_12932
+0151: remove_status_text $7796 
+gosub @DOC2_14025 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+
+:DOC2_12951
+Actor.DestroyInstantly(95@)
+if 
+075C:   marker 93@ enabled 
+jf @DOC2_12977 
+Marker.Disable(93@)
+
+:DOC2_12977
+jump @DOC2_13237 
+
+:DOC2_12984
+if and
+  91@ == 6 
+  33@ > 3000 
+jf @DOC2_13029 
+0332: set_actor 95@ bleeding 0 
+Actor.DestroyWithFade(95@)
+jump @DOC2_13050 
+
+:DOC2_13029
+jump @DOC2_4232 
+
+:DOC2_13036
+gosub @DOC2_14025 
+jump @DOC2_13050 
+
+:DOC2_13050
+if 
+  104@ == 0 
+jf @DOC2_13235 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+if 
+  91@ == 5 
+jf @DOC2_13107 
+0151: remove_status_text $7799 
+
+:DOC2_13107
+if 
+   Car.Wrecked(34@)
+jf @DOC2_13196 
+if 
+  5 > 91@ 
+jf @DOC2_13164 
+00BC: show_text_highpriority GXT 'DOC2_09' time 4000 flag 1  // ~r~You won't be able to catch Madd Dogg now.
+jump @DOC2_13180 
+
+:DOC2_13164
+00BC: show_text_highpriority GXT 'DOC2_10' time 4000 flag 1  // ~r~You let Madd Dogg die.
+
+:DOC2_13180
+if 
+   not Actor.Dead(95@)
+jf @DOC2_13196 
+
+:DOC2_13196
+if or
+   Actor.Dead(95@)
+  $7799 == 0 
+jf @DOC2_13235 
+00BC: show_text_highpriority GXT 'DOC2_10' time 4000 flag 1  // ~r~You let Madd Dogg die.
+
+:DOC2_13235
+return 
+
+:DOC2_13237
+104@ = 1 
+if 
+075C:   marker $584 enabled 
+jf @DOC2_13265 
+Marker.Disable($584)
+
+:DOC2_13265
+$599 += 1 
+0318: set_latest_mission_passed 'DOC_2'  // Madd Dogg
+030C: progress_made = 1 
+0394: play_music 1 
+01E3: show_text_1number_styled GXT 'M_PASSR' number 10 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 10 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:DOC2_13320
+Model.Load(#LVEMT1)
+Model.Load(#AMBULAN)
+
+:DOC2_13330
+if or
+   not Model.Available(#LVEMT1)
+   not Model.Available(#AMBULAN)
+jf @DOC2_13362 
+wait 0 
+jump @DOC2_13330 
+
+:DOC2_13362
+118@ = Actor.Create(CivMale, #LVEMT1, 1853.996, 2264.554, 9.9245)
+Actor.Angle(118@) = 261.1915
+119@ = Actor.Create(CivMale, #LVEMT1, 1855.156, 2264.286, 9.8885)
+Actor.Angle(119@) = 62.9217
+122@ = Car.Create(#AMBULAN, 1889.046, 2256.128, 9.8203)
+Car.Angle(122@) = 359.5048
+123@ = Car.Create(#AMBULAN, 1896.493, 2256.069, 9.8203)
+Car.Angle(123@) = 2.7445
+0615: define_AS_pack_begin 142@ 
+0603: AS_actor -1 goto_point_any_means 1853.996 2264.554 9.9245 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 242.922 
+if 
+   not Actor.Dead(119@)
+jf @DOC2_13586 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+
+:DOC2_13586
+0643: set_AS_pack 142@ loop 1 
+0616: define_AS_pack_end 142@ 
+0618: assign_actor 118@ to_AS_pack 142@ 
+061B: remove_references_to_AS_pack 142@ 
+0615: define_AS_pack_begin 142@ 
+0603: AS_actor -1 goto_point_any_means 1855.156 2264.286 9.8885 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 62.9217 
+0643: set_AS_pack 142@ loop 1 
+0616: define_AS_pack_end 142@ 
+0618: assign_actor 119@ to_AS_pack 142@ 
+Model.Destroy(#AMBULAN)
+return 
+
+:DOC2_13675
+if 
+   not Actor.Dead(118@)
+jf @DOC2_13696 
+Actor.DestroyWithFade(118@)
+
+:DOC2_13696
+if 
+   not Actor.Dead(119@)
+jf @DOC2_13717 
+Actor.DestroyWithFade(119@)
+
+:DOC2_13717
+if 
+   not Actor.Dead(120@)
+jf @DOC2_13738 
+Actor.DestroyWithFade(120@)
+
+:DOC2_13738
+if 
+   not Actor.Dead(121@)
+jf @DOC2_13759 
+Actor.DestroyWithFade(121@)
+
+:DOC2_13759
+return 
+
+:DOC2_13761
+$ONMISSION = 0 
+if 
+   not Actor.Dead(95@)
+jf @DOC2_13789 
+Actor.DestroyWithFade(95@)
+
+:DOC2_13789
+if 
+075C:   marker 92@ enabled 
+jf @DOC2_13810 
+Marker.Disable(92@)
+
+:DOC2_13810
+if 
+075C:   marker 93@ enabled 
+jf @DOC2_13831 
+Marker.Disable(93@)
+
+:DOC2_13831
+if 
+075C:   marker 35@ enabled 
+jf @DOC2_13852 
+Marker.Disable(35@)
+
+:DOC2_13852
+0151: remove_status_text $7799 
+0650: destroy_particle 90@ 
+091D: remove_forbidden_for_boats_cube_cornerA 2090.981 1388.51 8.8203 cornerB 2234.686 1517.077 10.8203 
+091E: create_forbidden_for_boats_cube_cornerA 2090.981 1388.51 8.8203 cornerB 2234.686 1517.077 10.8203 
+Model.Destroy(#WALTON)
+Model.Destroy(#WMYCON)
+Model.Destroy(#VBMYELV)
+Model.Destroy(#VWFYPRO)
+Model.Destroy(#VWMOTR1)
+Model.Destroy(#LVEMT1)
+Model.Destroy(#AMBULAN)
+Model.Destroy(#HECK1)
+Model.Destroy(#HECK2)
+Model.Destroy(#WMOPREA)
+Model.Destroy(#WMYMECH)
+Model.Destroy(#CELLPHONE)
+0296: unload_special_actor 1 
+04EF: release_animation "ON_LOOKERS" 
+01B7: release_weather 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+return 
+
+:DOC2_14010
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+return 
+
+:DOC2_14025
+00BE: text_clear_all 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+return 
+fade 0 500 
+
+:DOC2_14051
+if 
+fading 
+jf @DOC2_14075 
+wait 0 
+jump @DOC2_14051 
+
+:DOC2_14075
+return 
+fade 1 500 
+
+:DOC2_14084
+if 
+fading 
+jf @DOC2_14108 
+wait 0 
+jump @DOC2_14084 
+
+:DOC2_14108
+return 
+
+:DOC2_14110
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @DOC2_14180 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14180 
+0605: actor $PLAYER_ACTOR perform_animation "KO_SHOT_FACE" IFP "PED" framedelta 2.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:DOC2_14180
+if 
+0736:   is_keyboard_key_just_pressed 67 
+jf @DOC2_14251 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14251 
+0605: actor $PLAYER_ACTOR perform_animation "KO_SHOT_FRONT" IFP "PED" framedelta 2.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:DOC2_14251
+if 
+0736:   is_keyboard_key_just_pressed 69 
+jf @DOC2_14321 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14321 
+0605: actor $PLAYER_ACTOR perform_animation "KO_SHOT_STOM" IFP "PED" framedelta 2.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:DOC2_14321
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @DOC2_14406 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14406 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DOC2_14406 
+143@ = Actor.MissionCar($PLAYER_ACTOR)
+Car.PutAt(143@, 1893.958, 2240.108, 9.8203)
+Car.Angle(143@) = 77.6686
+
+:DOC2_14406
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @DOC2_14436 
+065D: NOP $7797 "DOC2_RND" 
+
+:DOC2_14436
+if 
+0736:   is_keyboard_key_just_pressed 66 
+jf @DOC2_14535 
+if 
+   not Car.Wrecked(34@)
+jf @DOC2_14496 
+0407: store_coords_to 40@ 41@ 42@ from_car 34@ with_offset 0.0 -1.5 0.5 
+
+:DOC2_14496
+064B: 90@ = create_particle "EXPLOSION_BARREL" at 40@ 41@ 42@ type 1 
+064C: make_particle 90@ visible 
+
+:DOC2_14535
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @DOC2_14571 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14571 
+05BE: AS_actor $PLAYER_ACTOR die 
+
+:DOC2_14571
+if 
+0736:   is_keyboard_key_just_pressed 81 
+jf @DOC2_14647 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14647 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+09B8: create_blood_gush_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 with_offset 0.0 0.0 2.0 density 40 on_actor $PLAYER_ACTOR 
+
+:DOC2_14647
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @DOC2_14692 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DOC2_14692 
+Actor.AddArmour($PLAYER_ACTOR, 100)
+055E: set_player $PLAYER_CHAR max_health += 100 
+
+:DOC2_14692
+if 
+0736:   is_keyboard_key_just_pressed 80 
+jf @DOC2_14856 
+if and
+   not Actor.Dead(95@)
+   not Car.Wrecked(34@)
+   not 91@ == 5 
+jf @DOC2_14856 
+0723: break_object 101@ intensity 1 
+0792: disembark_instantly_actor 95@ 
+0812: AS_actor 95@ perform_animation "KO_SHOT_FRONT" IFP "PED" framedelta 2.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0464: put_actor 95@ into_turret_on_car 34@ at_car_offset 0.0 -2.5 1.0 position 0 shooting_angle_limit 0.0 with_weapon 0 
+91@ = 5 
+03C4: set_status_text $7796 type 1 GXT 'DOC2_07' // global_variable  // Madd Dogg
+018B: set_marker 93@ radar_mode 3 
+018B: set_marker 92@ radar_mode 0 
+
+:DOC2_14856
+if 
+0736:   is_keyboard_key_just_pressed 90 
+jf @DOC2_14875 
+set_weather 16 
+
+:DOC2_14875
+if 
+0736:   is_keyboard_key_just_pressed 85 
+jf @DOC2_14890 
+
+:DOC2_14890
+return 
+
+:DOC2_14892
+040D: unload_wav 1 
+03CF: load_wav 129@ as 1 
+130@ = 0 
+return 
+
+:DOC2_14912
+if and
+03D0:   wav 1 loaded 
+  130@ == 0 
+jf @DOC2_14955 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 127@s time 10000 flag 1 
+130@ = 1 
+
+:DOC2_14955
+if and
+03D2:   wav 1 ended 
+  130@ == 1 
+jf @DOC2_14993 
+040D: unload_wav 1 
+03D5: remove_text 127@s 
+130@ = 2 
+
+:DOC2_14993
+return

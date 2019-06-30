@@ -1,0 +1,3234 @@
+:CAT3
+thread 'CAT3' 
+gosub @CAT3_1488 
+if 
+wasted_or_busted 
+jf @CAT3_45 
+$11033 = 0 
+gosub @CAT3_17478 
+
+:CAT3_45
+gosub @CAT3_17708 
+end_thread 
+
+:CAT3_54
+Model.Load(#BMYPOL2)
+Model.Load(#WMOST)
+Model.Load(#PETRO)
+Model.Load(#PETROTR)
+Model.Load(#SABRE)
+038B: load_requested_models 
+
+:CAT3_79
+if or
+   not Model.Available(#BMYPOL2)
+   not Model.Available(#WMOST)
+   not Model.Available(#PETRO)
+   not Model.Available(#PETROTR)
+   not Model.Available(#SABRE)
+jf @CAT3_124 
+wait 0 
+jump @CAT3_79 
+
+:CAT3_124
+return 
+
+:CAT3_126
+04ED: load_animation "MISC" 
+Model.Load(#MICRO_UZI)
+Model.Load(#CHROMEGUN)
+03CF: load_wav 32600 as 3 
+023C: load_special_actor 'CAT' as 1 // models 290-299 
+038B: load_requested_models 
+
+:CAT3_166
+if or
+84EE:   not animation "MISC" loaded 
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#CHROMEGUN)
+83D0:   not wav 3 loaded 
+823D:   not special_actor 1 loaded 
+jf @CAT3_214 
+wait 0 
+jump @CAT3_166 
+
+:CAT3_214
+if 
+856D:   not actor $ACTOR_CATALINA defined 
+jf @CAT3_268 
+$ACTOR_CATALINA = Actor.Create(CivFemale, #SPECIAL01, 53@, 54@, 55@)
+Actor.SetWalkStyle($ACTOR_CATALINA, "WOMAN")
+jump @CAT3_304 
+
+:CAT3_268
+Actor.DestroyInstantly($ACTOR_CATALINA)
+$ACTOR_CATALINA = Actor.Create(CivFemale, #SPECIAL01, 53@, 54@, 55@)
+Actor.SetWalkStyle($ACTOR_CATALINA, "WOMAN")
+
+:CAT3_304
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_330 
+Actor.GiveWeaponAndAmmo($ACTOR_CATALINA, Shotgun, 30000)
+
+:CAT3_330
+return 
+309@ = Marker.CreateAboveActor($ACTOR_CATALINA)
+018A: 41@ = create_checkpoint_at 50@ 51@ 52@ 
+Model.Destroy(#DESERT_EAGLE)
+return 
+
+:CAT3_361
+313@ = 664.21 
+315@ = -569.54 
+317@ = 15.37 
+319@ = 165.23 
+0395: clear_area 1 at 313@ 315@ 317@ radius 3.0 
+310@ = Actor.Create(CivMale, #BMYPOL2, 313@, 315@, 317@)
+Actor.GiveWeaponAndAmmo(310@, MicroUzi, 30000)
+Actor.Angle(310@) = 319@
+Actor.Health(310@) = 2000
+054A: set_actor 310@ can_be_shot_in_a_car 0 
+Actor.SetImmunities(310@, 0, 1, 1, 0, 1)
+314@ = 664.9634 
+316@ = -566.7849 
+318@ = 15.3359 
+320@ = 139.1057 
+0395: clear_area 1 at 314@ 316@ 318@ radius 3.0 
+311@ = Actor.Create(CivMale, #WMOST, 314@, 316@, 318@)
+Actor.Angle(311@) = 320@
+Actor.Health(311@) = 2000
+054A: set_actor 311@ can_be_shot_in_a_car 0 
+Actor.SetImmunities(311@, 0, 1, 1, 0, 1)
+return 
+
+:CAT3_601
+023C: load_special_actor 'MRWHT' as 2 // models 290-299 
+
+:CAT3_614
+if 
+823D:   not special_actor 2 loaded 
+jf @CAT3_640 
+wait 0 
+jump @CAT3_614 
+
+:CAT3_640
+323@ = -78.4672 
+324@ = -1134.739 
+325@ = 0.0733 
+326@ = 326.2953 
+0395: clear_area 1 at 323@ 324@ 325@ radius 3.0 
+322@ = Actor.Create(CivMale, #SPECIAL02, 323@, 324@, 325@)
+Actor.Angle(322@) = 326@
+return 
+244@ = Actor.Create(CivMale, #SPECIAL02, 323@, 324@, 325@)
+
+:CAT3_746
+329@ = 657.49 
+330@ = -585.13 
+331@ = 16.36 
+332@ = 170.66 
+0395: clear_area 1 at 329@ 330@ 331@ radius 15.0 
+327@ = Car.Create(#PETRO, 329@, 330@, 331@)
+Car.Angle(327@) = 332@
+053F: set_car 327@ tires_vulnerability 0 
+0732: random_car_generator_disable_model #PETRO 
+0732: random_car_generator_disable_model #LINERUN 
+Car.SetImmunities(327@, 1, 0, 0, 0, 0)
+0587: enable_car 327@ validate_position 0 
+return 
+308@ = Car.Create(#LINERUN, 329@, 330@, 331@)
+
+:CAT3_887
+336@ = 667.49 
+337@ = -583.13 
+338@ = 16.36 
+339@ = 184.66 
+0395: clear_area 1 at 336@ 337@ 338@ radius 15.0 
+334@ = Car.Create(#PETROTR, 336@, 337@, 338@)
+Car.Angle(334@) = 339@
+Car.Health(334@) = 1250
+Car.SetImmunities(334@, 1, 1, 1, 1, 1)
+053F: set_car 334@ tires_vulnerability 0 
+0587: enable_car 334@ validate_position 0 
+return 
+335@ = Marker.CreateAboveCar(334@)
+
+:CAT3_1017
+342@ = 667.54 
+343@ = -545.97 
+344@ = 15.09 
+345@ = 96.19 
+0395: clear_area 1 at 342@ 343@ 344@ radius 3.0 
+340@ = Car.Create(#SABRE, 342@, 343@, 344@)
+Car.Angle(340@) = 345@
+Car.SetMaxSpeed(340@, 50.0)
+Car.SetImmunities(340@, 1, 1, 1, 1, 1)
+Car.DoorStatus(340@) = 2
+053F: set_car 340@ tires_vulnerability 0 
+0587: enable_car 340@ validate_position 0 
+Car.LockInCurrentPosition(340@) = True
+return 
+
+:CAT3_1155
+Model.Load(#SADLER)
+
+:CAT3_1160
+if 
+   not Model.Available(#SADLER)
+jf @CAT3_1187 
+wait 0 
+jump @CAT3_1160 
+
+:CAT3_1187
+348@ = -87.9239 
+349@ = -1160.597 
+350@ = 1.1091 
+351@ = 170.4884 
+0395: clear_area 1 at 348@ 349@ 350@ radius 3.0 
+346@ = Car.Create(#SADLER, 348@, 349@, 350@)
+Car.Angle(346@) = 351@
+Car.SetImmunities(346@, 1, 1, 1, 1, 1)
+return 
+
+:CAT3_1287
+Model.Load(#SANCHEZ)
+07C0: load_path 189 
+
+:CAT3_1297
+if or
+   not Model.Available(#SANCHEZ)
+87C1:   not path 189 available 
+jf @CAT3_1329 
+wait 0 
+jump @CAT3_1297 
+
+:CAT3_1329
+353@ = -88.1347 
+354@ = -1127.397 
+355@ = 0.0847 
+356@ = 348.4666 
+0395: clear_area 1 at 353@ 354@ 355@ radius 3.0 
+352@ = Car.Create(#SANCHEZ, 353@, 354@, 355@)
+Car.Angle(352@) = 356@
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_1486 
+036A: put_actor $ACTOR_CATALINA in_car 352@ 
+05BF: AS_actor $ACTOR_CATALINA look_at_actor $PLAYER_ACTOR -1 ms 
+Actor.PutAt($PLAYER_ACTOR, -86.3344, -1127.316, 0.0781)
+Actor.Angle($PLAYER_ACTOR) = 6.874
+05BF: AS_actor $PLAYER_ACTOR look_at_actor $ACTOR_CATALINA -1 ms 
+
+:CAT3_1486
+return 
+
+:CAT3_1488
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'CAT' 
+34@ = 5000 
+35@ = 0 
+36@ = 1 
+37@ = 0 
+38@ = 0 
+39@ = 0 
+307@ = 1500 
+40@ = 0 
+301@ = 0 
+305@ = 1 
+303@ = 1 
+304@ = 2 
+302@ = 0 
+05AA: 134@s = 'CAT3_AA' // @s = 'short'  // ~z~Hand over the takings, or I blow your fucking balls off!
+05AA: 136@s = 'CAT3_AB' // @s = 'short'  // ~z~This here's bulletproof glass!
+05AA: 138@s = 'CAT3_AC' // @s = 'short'  // ~z~So you can just fuck off, bitch, before I call the sheriff!
+05AA: 140@s = 'CAT3_AD' // @s = 'short'  // ~z~What are you doing, son, just give her the cash!
+05AA: 142@s = 'CAT3_AE' // @s = 'short'  // ~z~Suit yourself, maricon.
+05AA: 144@s = 'CAT3_AF' // @s = 'short'  // ~z~Change of plan, Carl, we're taking the tanker!
+05AA: 146@s = 'CAT3_AG' // @s = 'short'  // ~z~Hey! What you doing?
+05AA: 148@s = 'CAT3_BA' // @s = 'short'  // ~z~Move it, you lazy bastard, get that tanker hooked up!
+05AA: 150@s = 'CAT3_BB' // @s = 'short'  // ~z~I'm on it, I got it!
+05AA: 152@s = 'CAT3_BC' // @s = 'short'  // ~z~You won't get away with this!
+05AA: 154@s = 'CAT3_BD' // @s = 'short'  // ~z~Shut your spotty little mouth!
+05AA: 156@s = 'CAT3_CA' // @s = 'short'  // ~z~Drive! I know a guy who'll pay for this rig and its cargo!
+05AA: 158@s = 'CAT3_CB' // @s = 'short'  // ~z~I ain't losing another crappy job because of some crazy bitch!
+05AA: 160@s = 'CAT3_CC' // @s = 'short'  // ~z~C'mon, Derek, we're going to stop those bastards!
+05AA: 162@s = 'CAT3_CD' // @s = 'short'  // ~z~Do I have to?
+05AA: 164@s = 'CAT3_DA' // @s = 'short'  // ~z~Follow me!
+05AA: 166@s = 'CAT3_DB' // @s = 'short'  // ~z~Oh no you don't, bitch!
+05AA: 168@s = 'CAT3_DC' // @s = 'short'  // ~z~C'mon, Derek, we're going to be local heroes!
+05AA: 170@s = 'CAT3_DD' // @s = 'short'  // ~z~I'd be happier staying here and stacking shelves!
+05AA: 172@s = 'CAT3_EA' // @s = 'short'  // ~z~Follow me!
+05AA: 174@s = 'CAT3_EB' // @s = 'short'  // ~z~What is keeping you?
+05AA: 176@s = 'CAT3_EC' // @s = 'short'  // ~z~C'mon, Carl, move it!
+05AA: 178@s = 'CAT3_ED' // @s = 'short'  // ~z~Not far now!
+05AA: 180@s = 'CAT3_EE' // @s = 'short'  // ~z~This way!
+05AA: 182@s = 'CAT3_EF' // @s = 'short'  // ~z~Where have you been?
+05AA: 184@s = 'CAT3_EG' // @s = 'short'  // ~z~I thought you said you could drive!
+05AA: 186@s = 'CAT3_FA' // @s = 'short'  // ~z~Keep her steady so I can get a good shot!
+05AA: 188@s = 'CAT3_FB' // @s = 'short'  // ~z~Pull alongside!
+05AA: 190@s = 'CAT3_FC' // @s = 'short'  // ~z~Keep up with them!
+05AA: 192@s = 'CAT3_FD' // @s = 'short'  // ~z~Get ahead of them!
+05AA: 194@s = 'CAT3_FE' // @s = 'short'  // ~z~Block their route!
+05AA: 196@s = 'CAT3_FF' // @s = 'short'  // ~z~Steady... steady...
+05AA: 198@s = 'CAT3_GA' // @s = 'short'  // ~z~It ain't worth it!
+05AA: 200@s = 'CAT3_GB' // @s = 'short'  // ~z~I'm scared!
+05AA: 202@s = 'CAT3_GC' // @s = 'short'  // ~z~This ain't my fight!
+05AA: 204@s = 'CAT3_GD' // @s = 'short'  // ~z~We'll get ourselves killed!
+05AA: 206@s = 'CAT3_GE' // @s = 'short'  // ~z~I don't wanna do this!
+05AA: 208@s = 'CAT3_GF' // @s = 'short'  // ~z~Oh my God, I'm gonna die!
+05AA: 210@s = 'CAT3_GG' // @s = 'short'  // ~z~That rig will crush us!
+05AA: 212@s = 'CAT3_HA' // @s = 'short'  // ~z~Pull up in that depot up ahead!
+05AA: 214@s = 'CAT3_HB' // @s = 'short'  // ~z~That's the place, up ahead!
+05AA: 216@s = 'CAT3_HC' // @s = 'short'  // ~z~Yeehaa, that's the place, go, Carl, go!
+05AA: 218@s = 'CAT3_JA' // @s = 'short'  // ~z~Hello, Mr. Whittaker!
+05AA: 220@s = 'CAT3_JB' // @s = 'short'  // ~z~Catalina! What have you brought me today?
+05AA: 222@s = 'CAT3_JC' // @s = 'short'  // ~z~A rig and tanker, full to the brim with premium gas!
+05AA: 224@s = 'CAT3_JD' // @s = 'short'  // ~z~Never seen it, never saw you, never gave you this wad of cash!
+05AA: 226@s = 'CAT3_JE' // @s = 'short'  // ~z~Nice not doing business!
+05AA: 228@s = 'CAT3_JF' // @s = 'short'  // ~z~Likewise. Now get out of here, before the cops come snooping.
+05AA: 230@s = 'CAT3_JG' // @s = 'short'  // ~z~You ever get hold of another rig, just drop it in,
+05AA: 232@s = 'CAT3_JH' // @s = 'short'  // ~z~I'll always give a good price!
+05AA: 234@s = 'CAT3_JJ' // @s = 'short'  // ~z~You ever want to run some freight for me just drop in.
+05AA: 236@s = 'CAT3_JK' // @s = 'short'  // ~z~I've always got shit to move.
+05AA: 238@s = 'CATX_UJ' // @s = 'short'  // ~z~I don't love you no more!
+05AA: 240@s = 'CATX_UK' // @s = 'short'  // ~z~I cannot love a stupid man!
+05AA: 242@s = 'CAT_PF' // @s = 'short'  // ~z~Goodbye!
+04AF: 246@ = 9400 // = constant 
+04AF: 247@ = 9401 // = constant 
+04AF: 248@ = 9402 // = constant 
+04AF: 249@ = 9403 // = constant 
+04AF: 250@ = 9404 // = constant 
+04AF: 251@ = 9405 // = constant 
+04AF: 252@ = 9406 // = constant 
+04AF: 253@ = 9407 // = constant 
+04AF: 254@ = 9408 // = constant 
+04AF: 255@ = 9409 // = constant 
+04AF: 256@ = 9410 // = constant 
+04AF: 257@ = 9411 // = constant 
+04AF: 258@ = 9412 // = constant 
+04AF: 259@ = 9413 // = constant 
+04AF: 260@ = 9414 // = constant 
+04AF: 261@ = 9415 // = constant 
+04AF: 262@ = 9416 // = constant 
+04AF: 263@ = 9417 // = constant 
+04AF: 264@ = 9418 // = constant 
+04AF: 265@ = 9419 // = constant 
+04AF: 266@ = 9420 // = constant 
+04AF: 267@ = 9421 // = constant 
+04AF: 268@ = 9422 // = constant 
+04AF: 269@ = 9423 // = constant 
+04AF: 270@ = 9424 // = constant 
+04AF: 271@ = 9425 // = constant 
+04AF: 272@ = 9426 // = constant 
+04AF: 273@ = 9427 // = constant 
+04AF: 274@ = 9428 // = constant 
+04AF: 275@ = 9429 // = constant 
+04AF: 276@ = 9430 // = constant 
+04AF: 277@ = 9431 // = constant 
+04AF: 278@ = 9432 // = constant 
+04AF: 279@ = 9433 // = constant 
+04AF: 280@ = 9434 // = constant 
+04AF: 281@ = 9435 // = constant 
+04AF: 282@ = 9436 // = constant 
+04AF: 283@ = 9437 // = constant 
+04AF: 284@ = 9438 // = constant 
+04AF: 285@ = 9439 // = constant 
+04AF: 286@ = 9440 // = constant 
+04AF: 287@ = 9441 // = constant 
+04AF: 288@ = 9442 // = constant 
+04AF: 289@ = 9443 // = constant 
+04AF: 290@ = 9444 // = constant 
+04AF: 291@ = 9445 // = constant 
+04AF: 292@ = 9446 // = constant 
+04AF: 293@ = 9447 // = constant 
+04AF: 294@ = 9448 // = constant 
+04AF: 295@ = 9449 // = constant 
+04AF: 296@ = 9450 // = constant 
+04AF: 297@ = 9451 // = constant 
+04AF: 298@ = 9897 // = constant 
+04AF: 299@ = 9898 // = constant 
+04AF: 300@ = 8738 // = constant 
+0209: 360@ = random_int_in_ranges 0 2 
+50@ = -43.7625 
+51@ = -1141.805 
+52@ = 0.0781 
+53@ = 660.3846 
+54@ = -571.9213 
+55@ = 15.3465 
+65@ = 659.5142 
+75@ = -571.65 
+85@ = 17.0104 
+95@ = 660.4576 
+105@ = -571.3304 
+115@ = 16.9229 
+66@ = 661.7569 
+76@ = -570.6351 
+86@ = 17.1184 
+96@ = 662.4741 
+106@ = -569.9394 
+116@ = 17.0783 
+67@ = 658.7903 
+77@ = -568.8011 
+87@ = 17.1657 
+97@ = 659.5721 
+107@ = -569.3959 
+117@ = 16.9783 
+68@ = 659.4771 
+78@ = -568.5789 
+88@ = 17.0879 
+98@ = 660.1776 
+108@ = -569.2756 
+118@ = 16.9335 
+69@ = 655.2368 
+79@ = -601.8433 
+89@ = 16.4703 
+99@ = 654.2847 
+109@ = -601.6681 
+119@ = 16.2199 
+70@ = -73.4246 
+80@ = -1132.716 
+90@ = 1.4933 
+100@ = -74.3653 
+110@ = -1133.049 
+120@ = 1.5579 
+71@ = -80.0272 
+81@ = -1133.954 
+91@ = 1.2517 
+101@ = -79.0308 
+111@ = -1133.956 
+121@ = 1.3367 
+72@ = -76.5131 
+82@ = -1135.434 
+92@ = 1.6855 
+102@ = -75.8151 
+112@ = -1134.719 
+122@ = 1.711 
+321@ = 35.0 
+gosub @CAT3_126 
+gosub @CAT3_54 
+gosub @CAT3_361 
+gosub @CAT3_746 
+gosub @CAT3_887 
+gosub @CAT3_1017 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+0A0B: set_rendering_origin_at_3D_coord 53@ 54@ 55@ angle 295.0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT3_3491 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 659.6722 -569.272 15.3465 
+jump @CAT3_3511 
+
+:CAT3_3491
+Actor.PutAt($PLAYER_ACTOR, 659.6722, -569.272, 15.3465)
+
+:CAT3_3511
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+jf @CAT3_3704 
+if 
+   Actor.Driving($ACTOR_CATALINA)
+jf @CAT3_3569 
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at 53@ 54@ 55@ 
+jump @CAT3_3583 
+
+:CAT3_3569
+Actor.PutAt($ACTOR_CATALINA, 53@, 54@, 55@)
+
+:CAT3_3583
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 310@ 
+0639: AS_actor 310@ rotate_to_actor $ACTOR_CATALINA 
+Actor.Angle($PLAYER_ACTOR) = 177.1965
+06AB: set_actor 310@ all_weapons_hidden 1 
+Camera.SetPosition(65@, 75@, 85@, 0.0, 0.0, 0.0)
+Camera.PointAt(95@, 105@, 115@, 2)
+01BD: 44@ = current_time_in_ms 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+37@ = 1 
+0635: AS_actor $ACTOR_CATALINA aim_at_actor 310@ 20000 ms 
+0638: AS_actor $ACTOR_CATALINA stay_put 1 
+0638: AS_actor 310@ stay_put 1 
+301@ = 1 
+
+:CAT3_3704
+0169: set_fade_color_RGB 0 0 0 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+fade 1 500 
+01EB: set_traffic_density_multiplier_to 0.5 
+
+:CAT3_3741
+wait 0 
+if 
+   not 301@ == 0 
+jf @CAT3_4186 
+if 
+  302@ == 0 
+jf @CAT3_3809 
+if 
+03D0:   wav 304@ loaded 
+jf @CAT3_3802 
+040D: unload_wav 304@ 
+
+:CAT3_3802
+302@ = 1 
+
+:CAT3_3809
+if 
+  302@ == 1 
+jf @CAT3_3853 
+03CF: load_wav 245@(301@,56i) as 303@ 
+gosub @CAT3_17906 
+302@ = 2 
+
+:CAT3_3853
+if 
+  302@ == 2 
+jf @CAT3_3962 
+if 
+03D0:   wav 303@ loaded 
+jf @CAT3_3962 
+if 
+   not 244@ == 0 
+jf @CAT3_3936 
+if 
+   not Actor.Dead(244@)
+jf @CAT3_3936 
+0967: actor 244@ move_mouth 10000 ms 
+0A09: set_actor 244@ muted 1 // versionB 
+
+:CAT3_3936
+03D1: play_wav 303@ 
+00BC: show_text_highpriority GXT 132@(301@,56s) time 10000 flag 1 
+302@ = 3 
+
+:CAT3_3962
+if 
+  302@ == 3 
+jf @CAT3_4186 
+if 
+03D2:   wav 303@ ended 
+jf @CAT3_4125 
+03D5: remove_text 132@(301@,56s) 
+if 
+   not 244@ == 0 
+jf @CAT3_4051 
+if 
+   not Actor.Dead(244@)
+jf @CAT3_4051 
+0968: actor 244@ stop_mouth 
+0A09: set_actor 244@ muted 0 // versionB 
+
+:CAT3_4051
+if 
+  303@ == 1 
+jf @CAT3_4090 
+303@ = 2 
+304@ = 1 
+jump @CAT3_4104 
+
+:CAT3_4090
+303@ = 1 
+304@ = 2 
+
+:CAT3_4104
+301@ = 0 
+302@ = 0 
+jump @CAT3_4186 
+
+:CAT3_4125
+if 
+83D0:   not wav 304@ loaded 
+jf @CAT3_4186 
+if 
+  60 > 301@ 
+jf @CAT3_4186 
+0085: 305@ = 301@ // (int) 
+305@ += 1 
+03CF: load_wav 245@(305@,56i) as 304@ 
+
+:CAT3_4186
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CAT3_4208 
+jump @CAT3_17524 
+
+:CAT3_4208
+if 
+  35@ == 0 
+jf @CAT3_5744 
+if 
+  6 > 37@ 
+jf @CAT3_4276 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CAT3_4276 
+44@ -= 10000 
+37@ = 7 
+
+:CAT3_4276
+if 
+  37@ == 1 
+jf @CAT3_4450 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_4450 
+if 
+  302@ == 0 
+jf @CAT3_4450 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+jf @CAT3_4450 
+0615: define_AS_pack_begin 45@ 
+05F5: AS_actor -1 goto_point_using_paths 662.828 -570.1751 15.3359 mode 4 time -2 
+05BF: AS_actor -1 look_at_actor $ACTOR_CATALINA 30000 ms 
+0639: AS_actor -1 rotate_to_actor $ACTOR_CATALINA 
+0616: define_AS_pack_end 45@ 
+0618: assign_actor 310@ to_AS_pack 45@ 
+01BD: 44@ = current_time_in_ms 
+301@ = 2 
+37@ = 2 
+
+:CAT3_4450
+if 
+  37@ == 2 
+jf @CAT3_4718 
+if 
+   not Actor.Dead(310@)
+jf @CAT3_4581 
+if 
+   not Actor.Animation(310@) == "BNG_WNDW_02"
+jf @CAT3_4581 
+062E: get_actor 310@ task 1560 status_store_to 312@ // ret 7 if not found 
+if 
+04A4:   312@ == 7 // == constant 
+jf @CAT3_4581 
+0605: actor 310@ perform_animation "BNG_WNDW_02" IFP "MISC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:CAT3_4581
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_4718 
+if 
+  302@ == 0 
+jf @CAT3_4718 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+jf @CAT3_4718 
+Camera.SetPosition(66@, 76@, 86@, 0.0, 0.0, 0.0)
+Camera.PointAt(96@, 106@, 116@, 2)
+01BD: 44@ = current_time_in_ms 
+301@ = 3 
+37@ = 3 
+
+:CAT3_4718
+if 
+  37@ == 3 
+jf @CAT3_4844 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_4844 
+if 
+  302@ == 0 
+jf @CAT3_4844 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+   not Actor.Dead(311@)
+jf @CAT3_4844 
+05C2: AS_actor 311@ show_the_finger 
+01BD: 44@ = current_time_in_ms 
+301@ = 4 
+37@ = 4 
+
+:CAT3_4844
+if 
+  37@ == 4 
+jf @CAT3_4994 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_4994 
+if 
+  302@ == 0 
+jf @CAT3_4994 
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_4994 
+Camera.SetPosition(67@, 77@, 87@, 0.0, 0.0, 0.0)
+Camera.PointAt(97@, 107@, 117@, 2)
+01BD: 44@ = current_time_in_ms 
+301@ = 5 
+37@ = 5 
+
+:CAT3_4994
+if 
+  37@ == 5 
+jf @CAT3_5221 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_5221 
+if 
+  302@ == 0 
+jf @CAT3_5221 
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT3_5221 
+Camera.OnVehicle(327@, 15, 2)
+01BD: 44@ = current_time_in_ms 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor $ACTOR_CATALINA 8000 ms 
+0615: define_AS_pack_begin 46@ 
+05BF: AS_actor -1 look_at_actor $PLAYER_ACTOR 1000 ms 
+05D3: AS_actor -1 goto_point 657.7125 -576.2346 15.3359 mode 6 time -1 ms // versionA 
+05D3: AS_actor -1 goto_point 654.6555 -585.0117 15.3359 mode 6 time -1 ms // versionA 
+05CA: AS_actor -1 enter_car 327@ passenger_seat 0 time 30000 
+0616: define_AS_pack_end 46@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 46@ 
+301@ = 6 
+37@ = 6 
+
+:CAT3_5221
+if 
+  37@ == 6 
+jf @CAT3_5400 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_5400 
+if 
+  302@ == 0 
+jf @CAT3_5400 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+jf @CAT3_5400 
+Camera.SetPosition(68@, 78@, 88@, 0.0, 0.0, 0.0)
+Camera.PointAt(98@, 108@, 118@, 2)
+05F5: AS_actor $PLAYER_ACTOR goto_point_using_paths 659.8791 -573.4293 15.3465 mode 4 time -2 
+301@ = 7 
+01BD: 44@ = current_time_in_ms 
+37@ = 7 
+
+:CAT3_5400
+if 
+  37@ == 7 
+jf @CAT3_5744 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2500 
+jf @CAT3_5744 
+if 
+  302@ == 0 
+jf @CAT3_5744 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(310@)
+   not Car.Wrecked(327@)
+jf @CAT3_5744 
+fade 0 500 
+
+:CAT3_5509
+if 
+fading 
+jf @CAT3_5533 
+wait 0 
+jump @CAT3_5509 
+
+:CAT3_5533
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_5635 
+328@ = Marker.CreateAboveCar(327@)
+07E0: set_marker 328@ type_to 1 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_5612 
+if 
+   not Actor.InCar($ACTOR_CATALINA, 327@)
+jf @CAT3_5612 
+05CA: AS_actor $ACTOR_CATALINA enter_car 327@ passenger_seat 0 time 30000 
+
+:CAT3_5612
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_5635 
+Car.LockInCurrentPosition(334@) = True
+
+:CAT3_5635
+04EF: release_animation "MISC" 
+0395: clear_area 1 at $X_TANKER_COMMANDER $Y_TANKER_COMMANDER $Z_TANKER_COMMANDER radius 200.0 
+Actor.Angle($PLAYER_ACTOR) = 332@
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+fade 1 500 
+fade 1 500 
+
+:CAT3_5713
+if 
+fading 
+jf @CAT3_5737 
+wait 0 
+jump @CAT3_5713 
+
+:CAT3_5737
+35@ = 1 
+
+:CAT3_5744
+if 
+  35@ == 1 
+jf @CAT3_5892 
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(334@)
+jf @CAT3_5892 
+00BC: show_text_highpriority GXT 'CAT3_02' time 5000 flag 1  // ~s~Get into the ~b~cab~s~!
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_5892 
+Marker.Disable(328@)
+03E5: show_text_box 'CAT3_03'  // Position the cab in front of the trailer.
+04ED: load_animation "CAR_CHAT" 
+
+:CAT3_5851
+if 
+84EE:   not animation "CAR_CHAT" loaded 
+jf @CAT3_5885 
+wait 0 
+jump @CAT3_5851 
+
+:CAT3_5885
+35@ = 2 
+
+:CAT3_5892
+if 
+  35@ == 2 
+jf @CAT3_6720 
+if and
+   not Car.Wrecked(327@)
+   not Car.Wrecked(334@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_6720 
+if 
+0207:   actor $PLAYER_ACTOR near_car 334@ radius 15.0 15.0 15.0 flag 0 in_car 
+jf @CAT3_6013 
+if 
+  38@ == 0 
+jf @CAT3_6013 
+03E5: show_text_box 'CAT3_12'  // Look behind by pressing ~k~~VEHICLE_LOOKLEFT~ and ~k~~VEHICLE_LOOKRIGHT~ together, or use the camera movement controls to maneuver the camera for a better view.
+01BD: 44@ = current_time_in_ms 
+38@ = 1 
+
+:CAT3_6013
+if 
+  38@ == 1 
+jf @CAT3_6089 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 8000 
+jf @CAT3_6089 
+03E5: show_text_box 'CAT3_13'  // To attach to a trailer, slowly back the cab into the front of the trailer.
+38@ = 2 
+
+:CAT3_6089
+if 
+  39@ == 0 
+jf @CAT3_6172 
+if 
+07AB:   car 334@ has_attached_trailer 327@ 
+jf @CAT3_6172 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_6149 
+Car.LockInCurrentPosition(334@) = False
+
+:CAT3_6149
+03D1: play_wav 3 
+01BD: 44@ = current_time_in_ms 
+Marker.Disable(335@)
+03E6: remove_text_box 
+39@ = 1 
+
+:CAT3_6172
+if 
+  39@ == 1 
+jf @CAT3_6720 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 1500 
+jf @CAT3_6720 
+00BE: text_clear_all 
+Car.DoorStatus(327@) = 4
+fade 0 150 
+
+:CAT3_6246
+if 
+fading 
+jf @CAT3_6270 
+wait 0 
+jump @CAT3_6246 
+
+:CAT3_6270
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+00BE: text_clear_all 
+if 
+03D2:   wav 3 ended 
+jf @CAT3_6302 
+040D: unload_wav 3 
+
+:CAT3_6302
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_6325 
+Car.DoorStatus(327@) = 1
+
+:CAT3_6325
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Car.Wrecked(327@)
+jf @CAT3_6472 
+if 
+   not Actor.InCar($ACTOR_CATALINA, 327@)
+jf @CAT3_6432 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+Marker.Disable(309@)
+Marker.Disable(41@)
+018A: 41@ = create_checkpoint_at 50@ 51@ 52@ 
+0151: remove_status_text $6988 
+03C4: set_status_text $6988 type 1 GXT 'CAT3_11' // global_variable  // HEALTH
+0430: put_actor $ACTOR_CATALINA into_car 327@ passenger_seat 0 
+jump @CAT3_6472 
+
+:CAT3_6432
+Marker.Disable(41@)
+018A: 41@ = create_checkpoint_at 50@ 51@ 52@ 
+0151: remove_status_text $6988 
+03C4: set_status_text $6988 type 1 GXT 'CAT3_11' // global_variable  // HEALTH
+
+:CAT3_6472
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_6503 
+Car.SetImmunities(334@, 0, 0, 0, 0, 0)
+
+:CAT3_6503
+07C0: load_path 188 
+
+:CAT3_6508
+if 
+87C1:   not path 188 available 
+jf @CAT3_6535 
+wait 0 
+jump @CAT3_6508 
+
+:CAT3_6535
+if and
+   not Car.Wrecked(340@)
+   not Actor.Dead(310@)
+   not Actor.Dead(311@)
+   not Actor.Dead($ACTOR_CATALINA)
+   not Car.Wrecked(327@)
+jf @CAT3_6720 
+Car.LockInCurrentPosition(340@) = False
+0395: clear_area 1 at 658.6589 -567.5756 15.3465 radius 25.0 
+Car.PutAt(340@, 658.6589, -567.5756, 15.3465)
+Car.Angle(340@) = 180.0
+036A: put_actor 311@ in_car 340@ 
+0430: put_actor 310@ into_car 340@ passenger_seat 0 
+Camera.SetPosition(651.9285, -575.1257, 16.2766, 0.0, 0.0, 0.0)
+Camera.PointAt(652.3163, -576.027, 16.4698, 2)
+01BD: 44@ = current_time_in_ms 
+37@ = 1 
+35@ = 3 
+
+:CAT3_6720
+if 
+  35@ == 3 
+jf @CAT3_8043 
+if and
+   not Actor.Dead(310@)
+   not Actor.Dead(311@)
+   not Car.Wrecked(340@)
+   not Car.Wrecked(327@)
+jf @CAT3_8043 
+if 
+  4 > 37@ 
+jf @CAT3_6859 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 1000 
+jf @CAT3_6859 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CAT3_6859 
+44@ -= 5000 
+37@ = 4 
+
+:CAT3_6859
+if 
+  37@ == 1 
+jf @CAT3_7024 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_7024 
+fade 1 150 
+
+:CAT3_6900
+if 
+fading 
+jf @CAT3_6924 
+wait 0 
+jump @CAT3_6900 
+
+:CAT3_6924
+gosub @CAT3_19281 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_6955 
+05EB: assign_car 340@ to_path 188 
+
+:CAT3_6955
+if 
+  302@ == 0 
+jf @CAT3_7012 
+if 
+  360@ == 0 
+jf @CAT3_7005 
+301@ = 13 
+jump @CAT3_7012 
+
+:CAT3_7005
+301@ = 17 
+
+:CAT3_7012
+01BD: 44@ = current_time_in_ms 
+37@ = 2 
+
+:CAT3_7024
+if 
+  37@ == 2 
+jf @CAT3_7568 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_7257 
+if 
+060E:   car 340@ assigned_to_path 
+jf @CAT3_7257 
+0407: store_coords_to 62@ 63@ 64@ from_car 340@ with_offset 0.0 5.5 0.0 
+0087: 56@ = 62@ // (float) 
+56@ -= 0.25 
+0087: 57@ = 63@ // (float) 
+57@ -= 0.25 
+0087: 58@ = 64@ // (float) 
+58@ -= 0.25 
+0087: 59@ = 62@ // (float) 
+59@ += 0.25 
+0087: 60@ = 63@ // (float) 
+60@ += 0.25 
+0087: 61@ = 64@ // (float) 
+61@ += 0.25 
+if 
+0339:   anything_in_cube_cornerA 56@ 57@ 58@ cornerB 59@ 60@ 61@ solid 0 car 1 actor 0 object 0 particle 0 
+jf @CAT3_7257 
+05EC: release_car 340@ from_path 
+
+:CAT3_7257
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if and
+  360@ == 0 
+  42@ > 2000 
+jf @CAT3_7311 
+jump @CAT3_7337 
+
+:CAT3_7311
+if and
+  360@ == 1 
+  42@ > 3000 
+jf @CAT3_7568 
+
+:CAT3_7337
+if 
+  302@ == 0 
+jf @CAT3_7568 
+if 
+   not Actor.Dead(310@)
+jf @CAT3_7413 
+0605: actor 310@ perform_animation "CAR_SC3_BR" IFP "CAR_CHAT" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:CAT3_7413
+0407: store_coords_to 69@ 79@ 89@ from_car 340@ with_offset 0.9 1.0 0.5 
+0407: store_coords_to 99@ 109@ 119@ from_car 340@ with_offset 0.15 0.0 0.3 
+Camera.SetPosition(69@, 79@, 89@, 0.0, 0.0, 0.0)
+Camera.PointAt(99@, 109@, 119@, 2)
+041D: set_camera_near_clip 0.1 
+if 
+  360@ == 0 
+jf @CAT3_7549 
+301@ = 14 
+jump @CAT3_7556 
+
+:CAT3_7549
+301@ = 18 
+
+:CAT3_7556
+01BD: 44@ = current_time_in_ms 
+37@ = 3 
+
+:CAT3_7568
+if 
+  37@ == 3 
+jf @CAT3_7778 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if and
+  360@ == 0 
+  42@ > 2000 
+jf @CAT3_7640 
+jump @CAT3_7666 
+
+:CAT3_7640
+if and
+  360@ == 1 
+  42@ > 2000 
+jf @CAT3_7778 
+
+:CAT3_7666
+if 
+  302@ == 0 
+jf @CAT3_7778 
+if 
+  360@ == 0 
+jf @CAT3_7716 
+301@ = 15 
+jump @CAT3_7723 
+
+:CAT3_7716
+301@ = 19 
+
+:CAT3_7723
+0605: actor 311@ perform_animation "CAR_SC4_BL" IFP "CAR_CHAT" framedelta 2.0 loop 1 lockX 0 lockY 0 lockF 0 time 3500 
+01BD: 44@ = current_time_in_ms 
+37@ = 4 
+
+:CAT3_7778
+if 
+  37@ == 4 
+jf @CAT3_8043 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_8043 
+00BE: text_clear_all 
+fade 1 150 
+
+:CAT3_7851
+if 
+fading 
+jf @CAT3_7875 
+wait 0 
+jump @CAT3_7851 
+
+:CAT3_7875
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+if and
+   not Car.Wrecked(340@)
+   not Actor.Dead(310@)
+jf @CAT3_8043 
+if 
+   Actor.InCar(310@, 340@)
+jf @CAT3_8043 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_7951 
+Car.LockInCurrentPosition(334@) = False
+
+:CAT3_7951
+Car.SetImmunities(340@, 0, 0, 0, 0, 0)
+04EF: release_animation "CAR_CHAT" 
+072F: enable_car 340@ stuck_check_distance 1.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 2 // extended 03CC 
+128@ = 4 
+01BD: 131@ = current_time_in_ms 
+if 
+  302@ == 0 
+jf @CAT3_8036 
+301@ = 12 
+
+:CAT3_8036
+35@ = 4 
+
+:CAT3_8043
+if 
+  35@ == 4 
+jf @CAT3_12602 
+if and
+   not Car.Wrecked(327@)
+   not Car.Wrecked(334@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_12602 
+if 
+  302@ == 0 
+jf @CAT3_8164 
+if 
+  301@ == 0 
+jf @CAT3_8164 
+if 
+  37@ == 4 
+jf @CAT3_8164 
+00BB: show_text_lowpriority GXT 'CAT3_05' time 5000 flag 1  // ~s~Drive the rig out to Catalina's ~y~buyer~s~. Be careful not to disconnect the trailer.
+37@ = -4 
+
+:CAT3_8164
+$6988 = Car.Health(334@)
+if 
+  $6988 > 250 
+jf @CAT3_8220 
+$6988 -= 250 
+$6988 /= 100 
+$6988 *= 10 
+jump @CAT3_8225 
+
+:CAT3_8220
+0151: remove_status_text $6988 
+
+:CAT3_8225
+if 
+  36@ == 1 
+jf @CAT3_10449 
+if and
+   not Car.Wrecked(340@)
+   not Actor.Dead(310@)
+   not Actor.Dead(311@)
+jf @CAT3_10442 
+if 
+  128@ == 0 
+jf @CAT3_8384 
+0209: 125@ = random_int_in_ranges 0 6 
+01BD: 131@ = current_time_in_ms 
+128@ = 1 
+if 
+003B:   125@ == 126@ // (int) 
+jf @CAT3_8384 
+if 
+  5 > 125@ 
+jf @CAT3_8359 
+125@ += 1 
+jump @CAT3_8384 
+
+:CAT3_8359
+if 
+  125@ > 0 
+jf @CAT3_8384 
+125@ -= 1 
+
+:CAT3_8384
+if 
+  128@ == 1 
+jf @CAT3_9789 
+if 
+  125@ == 0 
+jf @CAT3_8634 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_8634 
+301@ = 27 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_8571 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_8614 
+
+:CAT3_8571
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_8614
+0085: 126@ = 125@ // (int) 
+01BD: 131@ = current_time_in_ms 
+128@ = 2 
+
+:CAT3_8634
+if 
+  125@ == 1 
+jf @CAT3_8866 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_8866 
+301@ = 28 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_8803 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_8846 
+
+:CAT3_8803
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_8846
+0085: 126@ = 125@ // (int) 
+01BD: 131@ = current_time_in_ms 
+128@ = 2 
+
+:CAT3_8866
+if 
+  125@ == 2 
+jf @CAT3_9098 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_9098 
+301@ = 29 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_9035 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_9078 
+
+:CAT3_9035
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_9078
+0085: 126@ = 125@ // (int) 
+01BD: 131@ = current_time_in_ms 
+128@ = 2 
+
+:CAT3_9098
+if 
+  125@ == 3 
+jf @CAT3_9330 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_9330 
+301@ = 30 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_9267 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_9310 
+
+:CAT3_9267
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_9310
+0085: 126@ = 125@ // (int) 
+01BD: 131@ = current_time_in_ms 
+128@ = 2 
+
+:CAT3_9330
+if 
+  125@ == 4 
+jf @CAT3_9557 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_9557 
+301@ = 31 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_9499 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_9542 
+
+:CAT3_9499
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_9542
+0085: 126@ = 125@ // (int) 
+128@ = 2 
+
+:CAT3_9557
+if 
+  125@ == 5 
+jf @CAT3_9789 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_9789 
+301@ = 32 
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_9726 
+Actor.WeaponAccuracy(310@) = 20
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 -5.0 0.0 radius 30.0 8 1 firing_rate 50 
+01B9: set_actor 310@ armed_weapon_to 28 
+0713: actor $ACTOR_CATALINA driveby_actor 310@ car -1 point 0.0 0.0 0.0 radius 30.0 1 1 firing_rate 90 
+01B9: set_actor $ACTOR_CATALINA armed_weapon_to 25 
+jump @CAT3_9769 
+
+:CAT3_9726
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 15 
+
+:CAT3_9769
+0085: 126@ = 125@ // (int) 
+01BD: 131@ = current_time_in_ms 
+128@ = 2 
+
+:CAT3_9789
+if 
+  128@ == 2 
+jf @CAT3_9904 
+0209: 125@ = random_int_in_ranges 6 13 
+01BD: 131@ = current_time_in_ms 
+128@ = 3 
+if 
+003B:   125@ == 127@ // (int) 
+jf @CAT3_9904 
+if 
+  12 > 125@ 
+jf @CAT3_9879 
+125@ += 1 
+jump @CAT3_9904 
+
+:CAT3_9879
+if 
+  125@ > 6 
+jf @CAT3_9904 
+125@ -= 1 
+
+:CAT3_9904
+if 
+  128@ == 3 
+jf @CAT3_10377 
+if 
+  125@ == 6 
+jf @CAT3_9987 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_9987 
+301@ = 33 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_9987
+if 
+  125@ == 7 
+jf @CAT3_10052 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10052 
+301@ = 34 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10052
+if 
+  125@ == 8 
+jf @CAT3_10117 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10117 
+301@ = 35 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10117
+if 
+  125@ == 9 
+jf @CAT3_10182 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10182 
+301@ = 36 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10182
+if 
+  125@ == 10 
+jf @CAT3_10247 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10247 
+301@ = 37 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10247
+if 
+  125@ == 11 
+jf @CAT3_10312 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10312 
+301@ = 38 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10312
+if 
+  125@ == 12 
+jf @CAT3_10377 
+if and
+  302@ == 0 
+  301@ == 0 
+jf @CAT3_10377 
+301@ = 39 
+128@ = 4 
+0085: 127@ = 125@ // (int) 
+
+:CAT3_10377
+if 
+  128@ == 4 
+jf @CAT3_10442 
+01BD: 130@ = current_time_in_ms 
+0085: 129@ = 130@ // (int) 
+0062: 129@ -= 131@ // (int) 
+if 
+  129@ > 12000 
+jf @CAT3_10442 
+128@ = 5 
+
+:CAT3_10442
+jump @CAT3_10542 
+
+:CAT3_10449
+if and
+   not Car.Wrecked(340@)
+   not Actor.Dead(310@)
+jf @CAT3_10542 
+062E: get_actor 310@ task 1811 status_store_to 312@ // ret 7 if not found 
+if 
+04A4:   312@ == 7 // == constant 
+jf @CAT3_10542 
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 60 
+
+:CAT3_10542
+if 
+   Car.Wrecked(340@)
+jf @CAT3_10632 
+if 
+   not Actor.Dead(310@)
+jf @CAT3_10595 
+if 
+82CB:   not actor 310@ bounding_sphere_visible 
+jf @CAT3_10595 
+Actor.DestroyWithFade(310@)
+
+:CAT3_10595
+if 
+   not Actor.Dead(311@)
+jf @CAT3_10632 
+if 
+82CB:   not actor 311@ bounding_sphere_visible 
+jf @CAT3_10632 
+Actor.DestroyWithFade(311@)
+
+:CAT3_10632
+if and
+   not Actor.Dead(310@)
+   not Car.Wrecked(340@)
+jf @CAT3_10971 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 310@ radius 15.0 15.0 15.0 sphere 0 
+jf @CAT3_10727 
+if 
+  60.0 > 321@ 
+jf @CAT3_10720 
+321@ += 0.2 
+
+:CAT3_10720
+jump @CAT3_10758 
+
+:CAT3_10727
+if 
+  321@ > 40.0 
+jf @CAT3_10758 
+321@ -= 0.1 
+
+:CAT3_10758
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 50@ 51@ 52@ radius 120.0 120.0 120.0 
+jf @CAT3_10971 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 310@ radius 100.0 100.0 100.0 sphere 0 
+jf @CAT3_10946 
+0407: store_coords_to 62@ 63@ 64@ from_car 334@ with_offset 0.0 -40.0 0.0 
+06F8: get_nearest_route_for 62@ 63@ 64@ in_direction 1 store_to 342@ 343@ 344@ Z_angle_to 345@ 
+if 
+80C2:   not sphere_onscreen 342@ 343@ 344@ radius 15.0 
+jf @CAT3_10939 
+Car.PutAt(340@, 342@, 343@, 344@)
+Car.Angle(340@) = 345@
+
+:CAT3_10939
+jump @CAT3_10971 
+
+:CAT3_10946
+if 
+  128@ == 5 
+jf @CAT3_10971 
+128@ = 0 
+
+:CAT3_10971
+306@ = Car.Health(334@)
+if 
+  40@ == 0 
+jf @CAT3_11527 
+if 
+   not Actor.Dead(310@)
+jf @CAT3_11527 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 50@ 51@ 52@ radius 120.0 120.0 120.0 
+jf @CAT3_11157 
+if 
+   not Actor.Dead(311@)
+jf @CAT3_11150 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_11150 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_11150 
+062E: get_actor 311@ task 1761 status_store_to 47@ // ret 7 if not found 
+if 
+04A4:   47@ == 7 // == constant 
+jf @CAT3_11150 
+06E1: AS_actor 311@ using_car 340@ target_car 327@ with_order 17 max_speed 321@ traffic_flag 2 
+
+:CAT3_11150
+jump @CAT3_11235 
+
+:CAT3_11157
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_11235 
+if 
+   not Actor.Dead(311@)
+jf @CAT3_11235 
+06C7: AS_actor 311@ driver_of_car 340@ perform_action 6 timelimit 2000 
+01BD: 44@ = current_time_in_ms 
+if 
+06FC:   car 340@ stuck_check_enabled 
+jf @CAT3_11228 
+03CD: disable_car 340@ stuck_check 
+
+:CAT3_11228
+40@ = 1 
+
+:CAT3_11235
+if 
+0104:   actor $PLAYER_ACTOR near_actor 310@ radius 30.0 30.0 30.0 sphere 0 
+jf @CAT3_11527 
+if 
+   not Actor.Dead(311@)
+jf @CAT3_11527 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_11527 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_11527 
+0209: $6989 = random_int_in_ranges 0 4 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ == 5000 
+jf @CAT3_11527 
+if 
+  $6989 == 0 
+jf @CAT3_11404 
+06E1: AS_actor 311@ using_car 340@ target_car 327@ with_order 29 max_speed 321@ traffic_flag 2 
+01BD: 44@ = current_time_in_ms 
+
+:CAT3_11404
+if 
+  $6989 == 1 
+jf @CAT3_11445 
+06E1: AS_actor 311@ using_car 340@ target_car 327@ with_order 30 max_speed 321@ traffic_flag 2 
+01BD: 44@ = current_time_in_ms 
+
+:CAT3_11445
+if 
+  $6989 == 2 
+jf @CAT3_11486 
+06E1: AS_actor 311@ using_car 340@ target_car 327@ with_order 31 max_speed 321@ traffic_flag 2 
+01BD: 44@ = current_time_in_ms 
+
+:CAT3_11486
+if 
+  $6989 == 3 
+jf @CAT3_11527 
+06E1: AS_actor 311@ using_car 340@ target_car 327@ with_order 32 max_speed 321@ traffic_flag 2 
+01BD: 44@ = current_time_in_ms 
+
+:CAT3_11527
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead(310@)
+jf @CAT3_11656 
+02E3: 333@ = car 327@ speed 
+if 
+  3.0 > 333@ 
+jf @CAT3_11656 
+062E: get_actor 310@ task 1811 status_store_to 47@ // ret 7 if not found 
+if 
+04A4:   47@ == 7 // == constant 
+jf @CAT3_11656 
+Actor.WeaponAccuracy(310@) = 40
+0713: actor 310@ driveby_actor $ACTOR_CATALINA car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 100 
+01B9: set_actor 310@ armed_weapon_to 28 
+
+:CAT3_11656
+if 
+87AB:   not car 334@ has_attached_trailer 327@ 
+jf @CAT3_11999 
+if 
+   Actor.InCar($ACTOR_CATALINA, 327@)
+jf @CAT3_11976 
+if 
+81F4:   not car 327@ flipped 
+jf @CAT3_11937 
+fade 0 50 
+
+:CAT3_11716
+if 
+fading 
+jf @CAT3_11740 
+wait 0 
+jump @CAT3_11716 
+
+:CAT3_11740
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_11930 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Car.SetAnimation(327@, 6, 2000)
+0407: store_coords_to 73@ 83@ 93@ from_car 327@ with_offset 2.5 4.0 0.0 
+0407: store_coords_to 103@ 113@ 123@ from_car 327@ with_offset 2.2 3.0 0.0 
+Camera.SetPosition(73@, 83@, 93@, 0.0, 0.0, 0.0)
+Camera.PointAt(103@, 113@, 123@, 2)
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_11911 
+if 
+82CA:   not car 340@ bounding_sphere_visible 
+jf @CAT3_11911 
+Car.Destroy(340@)
+
+:CAT3_11911
+01BD: 44@ = current_time_in_ms 
+37@ = 0 
+jump @CAT3_16336 
+
+:CAT3_11930
+jump @CAT3_11969 
+
+:CAT3_11937
+fade 1 300 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CAT3_08' time 5000 flag 1  // ~r~The tanker disconnected!
+jump @CAT3_17478 
+
+:CAT3_11969
+jump @CAT3_11999 
+
+:CAT3_11976
+00BC: show_text_highpriority GXT 'CAT3_08' time 5000 flag 1  // ~r~The tanker disconnected!
+jump @CAT3_17478 
+
+:CAT3_11999
+if and
+   Actor.InCar($ACTOR_CATALINA, 327@)
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_12602 
+if 
+  11@ == 0 
+jf @CAT3_12245 
+if 
+01AF:   car 327@ sphere 0 in_sphere 50@ 51@ 52@ radius 100.0 100.0 100.0 
+jf @CAT3_12602 
+0209: 10@ = random_int_in_ranges 9439 9442 
+040D: unload_wav 1 
+03CF: load_wav 10@ as 1 
+
+:CAT3_12108
+if 
+83D0:   not wav 1 loaded 
+jf @CAT3_12134 
+wait 0 
+jump @CAT3_12108 
+
+:CAT3_12134
+03D1: play_wav 1 
+11@ = 1 
+if 
+  10@ == 9439 
+jf @CAT3_12187 
+00BC: show_text_highpriority GXT 'CAT3_HA' time 2000 flag 1  // ~z~Pull up in that depot up ahead!
+jump @CAT3_12245 
+
+:CAT3_12187
+if 
+  10@ == 9440 
+jf @CAT3_12229 
+00BC: show_text_highpriority GXT 'CAT3_HB' time 2000 flag 1  // ~z~That's the place, up ahead!
+jump @CAT3_12245 
+
+:CAT3_12229
+00BC: show_text_highpriority GXT 'CAT3_HC' time 3000 flag 1  // ~z~Yeehaa, that's the place, go, Carl, go!
+
+:CAT3_12245
+if or
+01AF:   car 327@ sphere 1 in_sphere 50@ 51@ 52@ radius 5.0 5.0 5.0 
+01AF:   car 334@ sphere 0 in_sphere 50@ 51@ 52@ radius 5.0 5.0 5.0 
+jf @CAT3_12602 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:CAT3_12332
+if 
+fading 
+jf @CAT3_12356 
+wait 0 
+jump @CAT3_12332 
+
+:CAT3_12356
+gosub @CAT3_1155 
+Camera.SetAtPos(-76.1314, -1131.417, 0.0782)
+02A3: enable_widescreen 1 
+Marker.Disable(41@)
+00BE: text_clear_all 
+07C0: load_path 199 
+
+:CAT3_12396
+if 
+87C1:   not path 199 available 
+jf @CAT3_12423 
+wait 0 
+jump @CAT3_12396 
+
+:CAT3_12423
+Camera.SetPosition(-81.2678, -1141.735, 3.899, 0.0, 0.0, 0.0)
+Camera.PointAt(-81.7168, -1140.842, 3.8854, 2)
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(327@)
+jf @CAT3_12574 
+Car.LockInCurrentPosition(327@) = True
+Car.DoorStatus(327@) = 3
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at -71.5991 -1134.952 0.0781 
+Actor.Angle($ACTOR_CATALINA) = 63.1513
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -74.2582 -1130.526 0.0781 
+Actor.Angle($PLAYER_ACTOR) = 135.9294
+
+:CAT3_12574
+gosub @CAT3_601 
+00BE: text_clear_all 
+01BD: 44@ = current_time_in_ms 
+37@ = -4 
+35@ = 5 
+
+:CAT3_12602
+if 
+0735:   is_keyboard_key_pressed 32 
+jf @CAT3_12903 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 500 
+
+:CAT3_12631
+if 
+fading 
+jf @CAT3_12655 
+wait 0 
+jump @CAT3_12631 
+
+:CAT3_12655
+gosub @CAT3_1155 
+Camera.SetAtPos(-76.1314, -1131.417, 0.0782)
+02A3: enable_widescreen 1 
+Marker.Disable(41@)
+00BE: text_clear_all 
+07C0: load_path 199 
+
+:CAT3_12695
+if 
+87C1:   not path 199 available 
+jf @CAT3_12722 
+wait 0 
+jump @CAT3_12695 
+
+:CAT3_12722
+Camera.SetPosition(-81.2678, -1141.735, 3.899, 0.0, 0.0, 0.0)
+Camera.PointAt(-81.7168, -1140.842, 3.8854, 2)
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(327@)
+jf @CAT3_12873 
+Car.PutAt(327@, 50@, 51@, 52@)
+0362: remove_actor $ACTOR_CATALINA from_car_and_place_at -71.5991 -1134.952 0.0781 
+Actor.Angle($ACTOR_CATALINA) = 63.1513
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -74.2582 -1130.526 0.0781 
+Actor.Angle($PLAYER_ACTOR) = 135.9294
+
+:CAT3_12873
+gosub @CAT3_601 
+03E6: remove_text_box 
+00BE: text_clear_all 
+01BD: 44@ = current_time_in_ms 
+37@ = -4 
+35@ = 5 
+
+:CAT3_12903
+if 
+  35@ == 5 
+jf @CAT3_15620 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(322@)
+   not Car.Wrecked(327@)
+jf @CAT3_15620 
+if 
+06EE:   actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_12971 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+
+:CAT3_12971
+if 
+  37@ == -4 
+jf @CAT3_13085 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_13078 
+Car.SetImmunities(340@, 0, 0, 0, 0, 0)
+05EB: assign_car 340@ to_path 199 
+01BD: 44@ = current_time_in_ms 
+fade 1 250 
+
+:CAT3_13040
+if 
+fading 
+jf @CAT3_13064 
+wait 0 
+jump @CAT3_13040 
+
+:CAT3_13064
+37@ = -3 
+jump @CAT3_13085 
+
+:CAT3_13078
+37@ = -1 
+
+:CAT3_13085
+if 
+  37@ == -3 
+jf @CAT3_13224 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_13224 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_13224 
+Camera.SetPosition(-107.3115, -1128.808, 2.6543, 0.0, 0.0, 0.0)
+Camera.PointAt(-106.788, -1129.652, 2.7731, 2)
+Car.Health(340@) = 5
+37@ = -21 
+
+:CAT3_13224
+if 
+  37@ == -21 
+jf @CAT3_13361 
+if 
+   not Car.Wrecked(340@)
+jf @CAT3_13361 
+if 
+860E:   not car 340@ assigned_to_path 
+jf @CAT3_13361 
+Camera.SetPosition(-108.8537, -1168.342, 3.0287, 0.0, 0.0, 0.0)
+Camera.PointAt(-108.0611, -1167.736, 3.0908, 2)
+020C: create_explosion_with_radius 4 at -92.24 -1161.46 2.5 
+070C: explode_car_without_radius_damage 340@ 
+01BD: 44@ = current_time_in_ms 
+37@ = -22 
+
+:CAT3_13361
+if 
+  37@ == -22 
+jf @CAT3_13441 
+if 
+  42@ > 1000 
+jf @CAT3_13441 
+if 
+   not Car.Wrecked(346@)
+jf @CAT3_13441 
+Car.SetImmunities(346@, 0, 0, 0, 0, 0)
+070C: explode_car_without_radius_damage 346@ 
+37@ = -2 
+
+:CAT3_13441
+if 
+  37@ == -2 
+jf @CAT3_13537 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 3000 
+jf @CAT3_13537 
+fade 0 500 
+
+:CAT3_13506
+if 
+fading 
+jf @CAT3_13530 
+wait 0 
+jump @CAT3_13506 
+
+:CAT3_13530
+37@ = -1 
+
+:CAT3_13537
+if 
+  37@ == -1 
+jf @CAT3_13696 
+Camera.SetPosition(70@, 80@, 90@, 0.0, 0.0, 0.0)
+Camera.PointAt(100@, 110@, 120@, 2)
+if and
+   not Actor.Dead(310@)
+   not Actor.Dead(311@)
+   not Car.Wrecked(340@)
+jf @CAT3_13635 
+Actor.DestroyInstantly(310@)
+Actor.DestroyInstantly(311@)
+Car.Destroy(340@)
+
+:CAT3_13635
+0A0B: set_rendering_origin_at_3D_coord 70@ 80@ 90@ angle 100.0 
+00BE: text_clear_all 
+01BD: 44@ = current_time_in_ms 
+fade 1 500 
+
+:CAT3_13665
+if 
+fading 
+jf @CAT3_13689 
+wait 0 
+jump @CAT3_13665 
+
+:CAT3_13689
+37@ = 0 
+
+:CAT3_13696
+if 
+  37@ == 0 
+jf @CAT3_13869 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 300 
+jf @CAT3_13869 
+if 
+  302@ == 0 
+jf @CAT3_13869 
+if and
+   not Actor.Dead($ACTOR_CATALINA)
+   not Actor.Dead(322@)
+jf @CAT3_13869 
+0615: define_AS_pack_begin 48@ 
+0639: AS_actor -1 rotate_to_actor 322@ 
+05D3: AS_actor -1 goto_point -74.8954 -1133.779 0.0781 mode 4 time -1 ms // versionA 
+05BF: AS_actor -1 look_at_actor 322@ -2 ms 
+0616: define_AS_pack_end 48@ 
+0618: assign_actor $ACTOR_CATALINA to_AS_pack 48@ 
+301@ = 43 
+01BD: 44@ = current_time_in_ms 
+37@ = 1 
+
+:CAT3_13869
+if 
+  37@ == 1 
+jf @CAT3_14115 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14115 
+if 
+  302@ == 0 
+jf @CAT3_14115 
+fade 0 50 
+
+:CAT3_13951
+if 
+fading 
+jf @CAT3_13975 
+wait 0 
+jump @CAT3_13951 
+
+:CAT3_13975
+if and
+   not Actor.Dead(322@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_14011 
+05BF: AS_actor 322@ look_at_actor $ACTOR_CATALINA -2 ms 
+05C8: AS_actor 322@ look_around 
+
+:CAT3_14011
+301@ = 44 
+01BD: 44@ = current_time_in_ms 
+0A0B: set_rendering_origin_at_3D_coord 71@ 81@ 91@ angle 270.0 
+Camera.SetPosition(71@, 81@, 91@, 0.0, 0.0, 0.0)
+Camera.PointAt(101@, 111@, 121@, 2)
+fade 1 50 
+
+:CAT3_14084
+if 
+fading 
+jf @CAT3_14108 
+wait 0 
+jump @CAT3_14084 
+
+:CAT3_14108
+37@ = 2 
+
+:CAT3_14115
+if 
+  37@ == 2 
+jf @CAT3_14313 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14313 
+if 
+  302@ == 0 
+jf @CAT3_14313 
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead(322@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_14313 
+0647: AS_actor 322@ clear_look_task 
+06BA: AS_actor $ACTOR_CATALINA turn_to_and_look_at 50@ 51@ 52@ 
+06BA: AS_actor 322@ turn_to_and_look_at 50@ 51@ 52@ 
+05C0: AS_actor $ACTOR_CATALINA look_at_car 327@ -2 ms 
+05C0: AS_actor 322@ look_at_car 327@ -2 ms 
+05D3: AS_actor 322@ goto_point -75.1023 -1134.871 0.0781 mode 4 time -1 ms // versionA 
+301@ = 45 
+01BD: 44@ = current_time_in_ms 
+37@ = 3 
+
+:CAT3_14313
+if 
+  37@ == 3 
+jf @CAT3_14504 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14504 
+if 
+  302@ == 0 
+jf @CAT3_14504 
+if 
+   not Actor.Dead(322@)
+jf @CAT3_14485 
+Camera.SetPosition(72@, 82@, 92@, 0.0, 0.0, 0.0)
+Camera.PointAt(102@, 112@, 122@, 2)
+0639: AS_actor 322@ rotate_to_actor $ACTOR_CATALINA 
+05BF: AS_actor 322@ look_at_actor $ACTOR_CATALINA -2 ms 
+05C8: AS_actor 322@ look_around 
+0639: AS_actor $ACTOR_CATALINA rotate_to_actor 322@ 
+05BF: AS_actor $ACTOR_CATALINA look_at_actor 322@ -2 ms 
+
+:CAT3_14485
+301@ = 46 
+01BD: 44@ = current_time_in_ms 
+37@ = 4 
+
+:CAT3_14504
+if 
+  37@ == 4 
+jf @CAT3_14599 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14599 
+if 
+  302@ == 0 
+jf @CAT3_14599 
+301@ = 47 
+01BD: 44@ = current_time_in_ms 
+37@ = 5 
+
+:CAT3_14599
+if 
+  37@ == 5 
+jf @CAT3_14739 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14739 
+if 
+  302@ == 0 
+jf @CAT3_14739 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_14739 
+0647: AS_actor $ACTOR_CATALINA clear_look_task 
+05D3: AS_actor $ACTOR_CATALINA goto_point -83.1314 -1129.417 0.0782 mode 4 time -1 ms // versionA 
+301@ = 48 
+01BD: 44@ = current_time_in_ms 
+37@ = 6 
+
+:CAT3_14739
+if 
+  37@ == 6 
+jf @CAT3_14891 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14891 
+if 
+  302@ == 0 
+jf @CAT3_14891 
+if 
+   not Actor.Dead(322@)
+jf @CAT3_14891 
+0647: AS_actor 322@ clear_look_task 
+0639: AS_actor 322@ rotate_to_actor $PLAYER_ACTOR 
+wait 100 
+05D3: AS_actor $PLAYER_ACTOR goto_point -84.1314 -1128.417 0.0782 mode 4 time -1 ms // versionA 
+301@ = 51 
+01BD: 44@ = current_time_in_ms 
+37@ = 7 
+
+:CAT3_14891
+if 
+  37@ == 7 
+jf @CAT3_14986 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 2000 
+jf @CAT3_14986 
+if 
+  302@ == 0 
+jf @CAT3_14986 
+301@ = 52 
+01BD: 44@ = current_time_in_ms 
+37@ = 8 
+
+:CAT3_14986
+if 
+  37@ == 8 
+jf @CAT3_15189 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 3000 
+jf @CAT3_15189 
+fade 0 100 
+
+:CAT3_15050
+if 
+fading 
+jf @CAT3_15074 
+wait 0 
+jump @CAT3_15050 
+
+:CAT3_15074
+01BD: 44@ = current_time_in_ms 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_15119 
+if 
+06EE:   actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_15119 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+
+:CAT3_15119
+gosub @CAT3_1287 
+0687: clear_actor $PLAYER_ACTOR task 
+Camera.SetPosition(-86.1477, -1130.445, 0.9157, 0.0, 0.0, 0.0)
+Camera.PointAt(-86.5058, -1129.52, 1.0417, 2)
+37@ = 9 
+
+:CAT3_15189
+if 
+  37@ == 9 
+jf @CAT3_15269 
+fade 1 100 
+
+:CAT3_15213
+if 
+fading 
+jf @CAT3_15237 
+wait 0 
+jump @CAT3_15213 
+
+:CAT3_15237
+if 
+  302@ == 0 
+jf @CAT3_15269 
+301@ = 55 
+37@ = 10 
+
+:CAT3_15269
+if 
+  37@ == 10 
+jf @CAT3_15362 
+if 
+  301@ == 0 
+jf @CAT3_15362 
+if and
+   not Car.Wrecked(352@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_15362 
+if 
+860E:   not car 352@ assigned_to_path 
+jf @CAT3_15362 
+0647: AS_actor $ACTOR_CATALINA clear_look_task 
+05EB: assign_car 352@ to_path 189 
+37@ = 11 
+
+:CAT3_15362
+if 
+  37@ == 11 
+jf @CAT3_15475 
+if 
+   not Car.Wrecked(352@)
+jf @CAT3_15475 
+if 
+860E:   not car 352@ assigned_to_path 
+jf @CAT3_15475 
+fade 0 500 
+
+:CAT3_15419
+if 
+fading 
+jf @CAT3_15443 
+wait 0 
+jump @CAT3_15419 
+
+:CAT3_15443
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.DestroyInstantly($ACTOR_CATALINA)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+jump @CAT3_17524 
+
+:CAT3_15475
+if 
+  37@ > 0 
+jf @CAT3_15620 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CAT3_15620 
+fade 0 500 
+
+:CAT3_15517
+if 
+fading 
+jf @CAT3_15541 
+wait 0 
+jump @CAT3_15517 
+
+:CAT3_15541
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_15588 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_15588 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+
+:CAT3_15588
+0687: clear_actor $PLAYER_ACTOR task 
+Actor.DestroyInstantly($ACTOR_CATALINA)
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+jump @CAT3_17524 
+
+:CAT3_15620
+if and
+  35@ > 0 
+  5 > 35@ 
+jf @CAT3_15652 
+gosub @CAT3_18642 
+
+:CAT3_15652
+if and
+  35@ > 1 
+  5 > 35@ 
+jf @CAT3_16165 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked(327@)
+jf @CAT3_16165 
+if 
+  36@ == 0 
+jf @CAT3_15953 
+if 
+  49@ == 1 
+jf @CAT3_15953 
+if and
+   not 35@ == 1 
+   not 35@ == 3 
+jf @CAT3_15774 
+00BC: show_text_highpriority GXT 'CAT3_10' time 100 flag 1  // ~s~Get back in the ~b~cab~s~!
+
+:CAT3_15774
+if 
+   Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_15953 
+if and
+   not 35@ == 1 
+   not 35@ == 3 
+jf @CAT3_15820 
+00BE: text_clear_all 
+
+:CAT3_15820
+Marker.Disable(328@)
+if 
+  35@ == 2 
+jf @CAT3_15874 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_15874 
+335@ = Marker.CreateAboveCar(334@)
+07E0: set_marker 335@ type_to 1 
+
+:CAT3_15874
+if or
+  35@ == 3 
+  35@ == 4 
+jf @CAT3_15946 
+Marker.Disable(41@)
+018A: 41@ = create_checkpoint_at 50@ 51@ 52@ 
+07E0: set_marker 41@ type_to 1 
+0151: remove_status_text $6988 
+03C4: set_status_text $6988 type 1 GXT 'CAT3_11' // global_variable  // HEALTH
+
+:CAT3_15946
+36@ = 1 
+
+:CAT3_15953
+if 
+  36@ == 1 
+jf @CAT3_16165 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 327@)
+jf @CAT3_16165 
+if 
+  49@ == 1 
+jf @CAT3_16023 
+328@ = Marker.CreateAboveCar(327@)
+07E0: set_marker 328@ type_to 1 
+
+:CAT3_16023
+if 
+  35@ == 2 
+jf @CAT3_16046 
+Marker.Disable(335@)
+
+:CAT3_16046
+if or
+  35@ == 3 
+  35@ == 4 
+jf @CAT3_16081 
+Marker.Disable(41@)
+0151: remove_status_text $6988 
+
+:CAT3_16081
+if 
+  35@ == 4 
+jf @CAT3_16158 
+if 
+   not Actor.Dead(310@)
+jf @CAT3_16158 
+Actor.WeaponAccuracy(310@) = 50
+0713: actor 310@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 150.0 8 1 firing_rate 60 
+
+:CAT3_16158
+36@ = 0 
+
+:CAT3_16165
+if or
+   Actor.Dead($ACTOR_CATALINA)
+04AD:   actor $ACTOR_CATALINA in_water 
+jf @CAT3_16211 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CAT3_06' time 10000 flag 1  // ~r~Catalina didn't make it.
+jump @CAT3_17478 
+
+:CAT3_16211
+if 
+  5 > 35@ 
+jf @CAT3_16270 
+if 
+   Car.Wrecked(334@)
+jf @CAT3_16270 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CAT3_07' time 5000 flag 1  // ~r~The tanker was destroyed!
+jump @CAT3_17478 
+
+:CAT3_16270
+if 
+  5 > 35@ 
+jf @CAT3_16329 
+if 
+   Car.Wrecked(327@)
+jf @CAT3_16329 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'CAT3_09' time 5000 flag 1  // ~r~The cab was destroyed!
+jump @CAT3_17478 
+
+:CAT3_16329
+jump @CAT3_3741 
+
+:CAT3_16336
+wait 0 
+if 
+   not 301@ == 0 
+jf @CAT3_16767 
+if 
+  302@ == 0 
+jf @CAT3_16404 
+if 
+03D0:   wav 304@ loaded 
+jf @CAT3_16397 
+040D: unload_wav 304@ 
+
+:CAT3_16397
+302@ = 1 
+
+:CAT3_16404
+if 
+  302@ == 1 
+jf @CAT3_16448 
+03CF: load_wav 245@(301@,56i) as 303@ 
+gosub @CAT3_17906 
+302@ = 2 
+
+:CAT3_16448
+if 
+  302@ == 2 
+jf @CAT3_16550 
+if 
+03D0:   wav 303@ loaded 
+jf @CAT3_16550 
+if 
+   not 244@ == 0 
+jf @CAT3_16524 
+if 
+   not Actor.Dead(244@)
+jf @CAT3_16524 
+0967: actor 244@ move_mouth 10000 ms 
+
+:CAT3_16524
+03D1: play_wav 303@ 
+00BC: show_text_highpriority GXT 132@(301@,56s) time 10000 flag 1 
+302@ = 3 
+
+:CAT3_16550
+if 
+  302@ == 3 
+jf @CAT3_16767 
+if 
+03D2:   wav 303@ ended 
+jf @CAT3_16706 
+03D5: remove_text 132@(301@,56s) 
+if 
+   not 244@ == 0 
+jf @CAT3_16632 
+if 
+   not Actor.Dead(244@)
+jf @CAT3_16632 
+0968: actor 244@ stop_mouth 
+
+:CAT3_16632
+if 
+  303@ == 1 
+jf @CAT3_16671 
+303@ = 2 
+304@ = 1 
+jump @CAT3_16685 
+
+:CAT3_16671
+303@ = 1 
+304@ = 2 
+
+:CAT3_16685
+301@ = 0 
+302@ = 0 
+jump @CAT3_16767 
+
+:CAT3_16706
+if 
+83D0:   not wav 304@ loaded 
+jf @CAT3_16767 
+if 
+  54 > 301@ 
+jf @CAT3_16767 
+0085: 305@ = 301@ // (int) 
+305@ += 1 
+03CF: load_wav 245@(305@,56i) as 304@ 
+
+:CAT3_16767
+if 
+  37@ == 0 
+jf @CAT3_16902 
+fade 1 50 
+
+:CAT3_16791
+if 
+fading 
+jf @CAT3_16815 
+wait 0 
+jump @CAT3_16791 
+
+:CAT3_16815
+301@ = 53 
+01BD: 44@ = current_time_in_ms 
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_16902 
+0679: put_camera_on_car 327@ with_offset 1.0 8.0 1.5 rotation 0.0 0.0 1.0 tilt 0.0 switchstyle 2 
+0151: remove_status_text $6988 
+37@ = 1 
+
+:CAT3_16902
+if 
+  37@ == 1 
+jf @CAT3_17097 
+if and
+   not Car.Wrecked(327@)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_17097 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 1000 
+jf @CAT3_17097 
+if 
+  302@ == 0 
+jf @CAT3_17097 
+301@ = 54 
+0679: put_camera_on_car 327@ with_offset 1.0 8.0 1.5 rotation 0.0 0.0 1.0 tilt 0.0 switchstyle 2 
+0407: store_coords_to 73@ 83@ 93@ from_car 327@ with_offset 4.5 10.0 0.0 
+05CD: AS_actor $ACTOR_CATALINA exit_car 327@ 
+01BD: 44@ = current_time_in_ms 
+37@ = 2 
+
+:CAT3_17097
+if 
+  37@ == 2 
+jf @CAT3_17344 
+if 
+  302@ == 0 
+jf @CAT3_17344 
+01BD: 43@ = current_time_in_ms 
+0085: 42@ = 43@ // (int) 
+0062: 42@ -= 44@ // (int) 
+if 
+  42@ > 1000 
+jf @CAT3_17344 
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_17344 
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_17344 
+if 
+   not Actor.InCar($ACTOR_CATALINA, 327@)
+jf @CAT3_17344 
+05D3: AS_actor $ACTOR_CATALINA goto_point 73@ 83@ 93@ mode 4 time -1 ms // versionA 
+if 
+  302@ == 0 
+jf @CAT3_17344 
+fade 0 50 
+
+:CAT3_17266
+if 
+fading 
+jf @CAT3_17290 
+wait 0 
+jump @CAT3_17266 
+
+:CAT3_17290
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_17344 
+if 
+06EE:   actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_17344 
+06C9: remove_actor $ACTOR_CATALINA from_group 
+Actor.DestroyInstantly($ACTOR_CATALINA)
+00BE: text_clear_all 
+37@ = 3 
+
+:CAT3_17344
+if 
+  3 > 37@ 
+jf @CAT3_17385 
+if 
+02BF:   car 327@ sunk 
+jf @CAT3_17385 
+37@ = 3 
+
+:CAT3_17385
+if 
+  37@ == 3 
+jf @CAT3_17471 
+02A3: enable_widescreen 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+fade 1 50 
+
+:CAT3_17417
+if 
+fading 
+jf @CAT3_17441 
+wait 0 
+jump @CAT3_17417 
+
+:CAT3_17441
+00BC: show_text_highpriority GXT 'CAT3_08' time 5000 flag 1  // ~r~The tanker disconnected!
+Player.CanMove($PLAYER_CHAR) = True
+jump @CAT3_17478 
+
+:CAT3_17471
+jump @CAT3_16336 
+
+:CAT3_17478
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CAT3_17506 
+$11033 = 0 
+
+:CAT3_17506
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CAT3_17524
+$CATALINA_TOTAL_PASSED_MISSIONS += 1 
+if and
+   not Car.Wrecked(327@)
+   not Car.Wrecked(334@)
+jf @CAT3_17569 
+Car.LockInCurrentPosition(327@) = False
+Car.Destroy(327@)
+Car.Destroy(334@)
+
+:CAT3_17569
+create_thread @TRUCKS 
+if 
+  $CATALINA_DIALOG_BETTING_SHOP_PLAYED == 1 
+jf @CAT3_17602 
+$CATALINA_DIALOG_BETTING_SHOP_PLAYED = 2 
+
+:CAT3_17602
+if 
+  $CATALINA_DIALOG_LIQUOR_STORE_PLAYED == 1 
+jf @CAT3_17627 
+$CATALINA_DIALOG_LIQUOR_STORE_PLAYED = 2 
+
+:CAT3_17627
+Marker.Disable($MARKER_TRUCKING_MISSION)
+0570: $MARKER_TRUCKING_MISSION = create_asset_radar_marker_with_icon 51 at $2373 $2374 $2375 
+0394: play_music 1 
+0318: set_latest_mission_passed 'CAT_3'  // Tanker Commander
+030C: progress_made = 1 
+01E3: show_text_1number_styled GXT 'M_PASS' number 34@ time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 34@
+Player.ClearWantedLevel($PLAYER_CHAR)
+$MISSION_TANKER_COMMANDER_PASSED = 1 
+return 
+
+:CAT3_17708
+Marker.Disable(328@)
+Marker.Disable(335@)
+Marker.Disable(341@)
+Marker.Disable(41@)
+Marker.Disable(309@)
+0151: remove_status_text $6988 
+040D: unload_wav 3 
+Actor.DestroyInstantly(322@)
+Car.Destroy(352@)
+Model.Destroy(#WMOST)
+Model.Destroy(#BMYPOL2)
+Model.Destroy(#PETRO)
+Model.Destroy(#PETROTR)
+Model.Destroy(#SABRE)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#CHROMEGUN)
+0296: unload_special_actor 2 
+Model.Destroy(#SADLER)
+Model.Destroy(#SANCHEZ)
+if 
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_17820 
+Actor.DestroyWithFade($ACTOR_CATALINA)
+
+:CAT3_17820
+0296: unload_special_actor 1 
+04EF: release_animation "CAR_CHAT" 
+04EF: release_animation "MISC" 
+0873: release_path 188 
+0873: release_path 189 
+0873: release_path 199 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+fade 1 500 
+
+:CAT3_17878
+if 
+fading 
+jf @CAT3_17902 
+wait 0 
+jump @CAT3_17878 
+
+:CAT3_17902
+mission_cleanup 
+return 
+
+:CAT3_17906
+if or
+  301@ == 1 
+  301@ == 5 
+  301@ == 6 
+  301@ == 8 
+  301@ == 11 
+  301@ == 12 
+jf @CAT3_17967 
+008B: 244@ = $ACTOR_CATALINA // (int) 
+
+:CAT3_17967
+if or
+  301@ == 16 
+  301@ == 20 
+  301@ == 21 
+  301@ == 22 
+  301@ == 23 
+  301@ == 24 
+jf @CAT3_18028 
+008B: 244@ = $ACTOR_CATALINA // (int) 
+
+:CAT3_18028
+if or
+  301@ == 25 
+  301@ == 26 
+  301@ == 40 
+  301@ == 41 
+  301@ == 42 
+  301@ == 43 
+jf @CAT3_18089 
+008B: 244@ = $ACTOR_CATALINA // (int) 
+
+:CAT3_18089
+if or
+  301@ == 45 
+  301@ == 47 
+jf @CAT3_18122 
+008B: 244@ = $ACTOR_CATALINA // (int) 
+
+:CAT3_18122
+if or
+  301@ == 2 
+  301@ == 3 
+  301@ == 7 
+  301@ == 10 
+  301@ == 13 
+  301@ == 14 
+jf @CAT3_18183 
+0085: 244@ = 310@ // (int) 
+
+:CAT3_18183
+if or
+  301@ == 17 
+  301@ == 18 
+jf @CAT3_18216 
+0085: 244@ = 310@ // (int) 
+
+:CAT3_18216
+if or
+  301@ == 27 
+  301@ == 28 
+  301@ == 29 
+  301@ == 30 
+jf @CAT3_18262 
+244@ = 0 
+
+:CAT3_18262
+if or
+  301@ == 31 
+  301@ == 32 
+  301@ == 15 
+jf @CAT3_18301 
+244@ = 0 
+
+:CAT3_18301
+if or
+  301@ == 4 
+  301@ == 19 
+jf @CAT3_18334 
+0085: 244@ = 311@ // (int) 
+
+:CAT3_18334
+if or
+  301@ == 33 
+  301@ == 34 
+  301@ == 35 
+jf @CAT3_18373 
+244@ = 0 
+
+:CAT3_18373
+if or
+  301@ == 36 
+  301@ == 37 
+  301@ == 38 
+  301@ == 39 
+jf @CAT3_18419 
+244@ = 0 
+
+:CAT3_18419
+if or
+  301@ == 44 
+  301@ == 46 
+  301@ == 48 
+  301@ == 49 
+  301@ == 50 
+  301@ == 51 
+jf @CAT3_18480 
+0085: 244@ = 322@ // (int) 
+
+:CAT3_18480
+if 
+  301@ == 52 
+jf @CAT3_18506 
+0085: 244@ = 322@ // (int) 
+
+:CAT3_18506
+if 
+  301@ == 9 
+jf @CAT3_18532 
+008B: 244@ = $PLAYER_ACTOR // (int) 
+
+:CAT3_18532
+return 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CAT3_18640 
+if 
+  36@ == 0 
+jf @CAT3_18599 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @CAT3_18599 
+308@ = Actor.MissionCar($PLAYER_ACTOR)
+36@ = 1 
+
+:CAT3_18599
+if 
+  36@ == 1 
+jf @CAT3_18640 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @CAT3_18640 
+36@ = 0 
+
+:CAT3_18640
+return 
+
+:CAT3_18642
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead($ACTOR_CATALINA)
+jf @CAT3_19279 
+if 
+  49@ == 0 
+jf @CAT3_19082 
+if and
+  35@ > 1 
+  5 > 35@ 
+jf @CAT3_19082 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_19082 
+if 
+0104:   actor $PLAYER_ACTOR near_actor $ACTOR_CATALINA radius 8.0 8.0 8.0 sphere 0 
+jf @CAT3_19082 
+if 
+  35@ == 2 
+jf @CAT3_18887 
+if 
+  36@ == 1 
+jf @CAT3_18833 
+if 
+   not Car.Wrecked(334@)
+jf @CAT3_18833 
+Marker.Disable(335@)
+335@ = Marker.CreateAboveCar(334@)
+07E0: set_marker 335@ type_to 1 
+
+:CAT3_18833
+if 
+  36@ == 0 
+jf @CAT3_18887 
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_18887 
+Marker.Disable(328@)
+328@ = Marker.CreateAboveCar(327@)
+07E0: set_marker 328@ type_to 1 
+
+:CAT3_18887
+if 
+  35@ == 4 
+jf @CAT3_19031 
+if 
+  36@ == 1 
+jf @CAT3_18970 
+128@ = 4 
+Marker.Disable(41@)
+018A: 41@ = create_checkpoint_at 50@ 51@ 52@ 
+0151: remove_status_text $6988 
+03C4: set_status_text $6988 type 1 GXT 'CAT3_11' // global_variable  // HEALTH
+
+:CAT3_18970
+if 
+  36@ == 0 
+jf @CAT3_19031 
+if 
+   not Car.Wrecked(327@)
+jf @CAT3_19031 
+128@ = 4 
+Marker.Disable(328@)
+328@ = Marker.CreateAboveCar(327@)
+07E0: set_marker 328@ type_to 1 
+
+:CAT3_19031
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+Marker.Disable(309@)
+if and
+   not 35@ == 1 
+   not 35@ == 3 
+jf @CAT3_19075 
+00BE: text_clear_all 
+
+:CAT3_19075
+49@ = 1 
+
+:CAT3_19082
+if 
+  49@ == 1 
+jf @CAT3_19279 
+if 
+86EE:   not actor $ACTOR_CATALINA in_group $PLAYER_GROUP 
+jf @CAT3_19279 
+if 
+  35@ == 2 
+jf @CAT3_19165 
+Marker.Disable(335@)
+if 
+  36@ == 0 
+jf @CAT3_19165 
+Marker.Disable(328@)
+
+:CAT3_19165
+if 
+  35@ == 4 
+jf @CAT3_19223 
+0151: remove_status_text $6988 
+Marker.Disable(41@)
+128@ = 10 
+if 
+  36@ == 0 
+jf @CAT3_19223 
+Marker.Disable(328@)
+
+:CAT3_19223
+309@ = Marker.CreateAboveActor($ACTOR_CATALINA)
+07E0: set_marker 309@ type_to 1 
+if 
+   not 35@ == 3 
+jf @CAT3_19272 
+00BC: show_text_highpriority GXT 'CAT3_01' time 5000 flag 1  // ~s~Go and pick up ~b~Catalina~s~.
+
+:CAT3_19272
+49@ = 0 
+
+:CAT3_19279
+return 
+
+:CAT3_19281
+03CF: load_wav 9407 as 1 
+03CF: load_wav 9408 as 2 
+
+:CAT3_19295
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CAT3_19325 
+wait 0 
+jump @CAT3_19295 
+
+:CAT3_19325
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAT3_BA' time 5000 flag 1  // ~z~Move it, you lazy bastard, get that tanker hooked up!
+
+:CAT3_19345
+if 
+83D2:   not wav 1 ended 
+jf @CAT3_19371 
+wait 0 
+jump @CAT3_19345 
+
+:CAT3_19371
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAT3_BB' time 5000 flag 1  // ~z~I'm on it, I got it!
+
+:CAT3_19391
+if 
+83D2:   not wav 2 ended 
+jf @CAT3_19417 
+wait 0 
+jump @CAT3_19391 
+
+:CAT3_19417
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 9409 as 1 
+03CF: load_wav 9410 as 2 
+
+:CAT3_19439
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @CAT3_19469 
+wait 0 
+jump @CAT3_19439 
+
+:CAT3_19469
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'CAT3_BC' time 5000 flag 1  // ~z~You won't get away with this!
+
+:CAT3_19489
+if 
+83D2:   not wav 1 ended 
+jf @CAT3_19515 
+wait 0 
+jump @CAT3_19489 
+
+:CAT3_19515
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'CAT3_BD' time 5000 flag 1  // ~z~Shut your spotty little mouth!
+
+:CAT3_19535
+if 
+83D2:   not wav 2 ended 
+jf @CAT3_19561 
+wait 0 
+jump @CAT3_19535 
+
+:CAT3_19561
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+return

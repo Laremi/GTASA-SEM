@@ -1,0 +1,3355 @@
+:DECON
+thread 'DECON' 
+gosub @DECON_47 
+if 
+wasted_or_busted 
+jf @DECON_38 
+gosub @DECON_20872 
+
+:DECON_38
+gosub @DECON_21215 
+end_thread 
+
+:DECON_47
+increment_mission_attempts 
+$ONMISSION = 1 
+34@ = 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+63@ = 0 
+64@ = 0 
+65@ = 0 
+66@ = 0 
+32@ = 0 
+33@ = 0 
+
+:DECON_133
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @DECON_159 
+36@ = 1 
+
+:DECON_159
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @DECON_181 
+37@ = 1 
+
+:DECON_181
+39@ += 1 
+if 
+  39@ > 9 
+jf @DECON_213 
+39@ = 0 
+
+:DECON_213
+01BD: 40@ = current_time_in_ms 
+0085: 42@ = 40@ // (int) 
+0062: 42@ -= 41@ // (int) 
+0085: 41@ = 40@ // (int) 
+005A: 65@ += 42@ // (int) 
+005A: 66@ += 42@ // (int) 
+005A: 172@ += 42@ // (int) 
+005A: 173@ += 42@ // (int) 
+if 
+  69@ == 1 
+jf @DECON_299 
+jump @DECON_460 
+
+:DECON_299
+gosub @DECON_562 
+0871: init_jump_table 34@ total_jumps 6 default_jump 0 @DECON_453 jumps 0 @DECON_369 1 @DECON_383 2 @DECON_397 3 @DECON_411 4 @DECON_425 5 @DECON_439 -1 @DECON_453 
+
+:DECON_369
+gosub @DECON_1610 
+jump @DECON_453 
+
+:DECON_383
+gosub @DECON_2071 
+jump @DECON_453 
+
+:DECON_397
+gosub @DECON_5648 
+jump @DECON_453 
+
+:DECON_411
+gosub @DECON_6774 
+jump @DECON_453 
+
+:DECON_425
+gosub @DECON_9694 
+jump @DECON_453 
+
+:DECON_439
+gosub @DECON_12349 
+jump @DECON_453 
+
+:DECON_453
+gosub @DECON_13616 
+
+:DECON_460
+if 
+  38@ == 0 
+jf @DECON_560 
+if 
+  37@ == 0 
+jf @DECON_544 
+if 
+  36@ == 0 
+jf @DECON_528 
+jump @DECON_133 
+jump @DECON_537 
+
+:DECON_528
+gosub @DECON_21080 
+return 
+
+:DECON_537
+jump @DECON_553 
+
+:DECON_544
+gosub @DECON_20872 
+return 
+
+:DECON_553
+jump @DECON_562 
+
+:DECON_560
+return 
+
+:DECON_562
+if 
+0736:   is_keyboard_key_just_pressed 88 
+jf @DECON_653 
+if 
+  67@ == 0 
+jf @DECON_627 
+67@ = 1 
+0662: printstring "LEVEL_DEBUG_ON" 
+jump @DECON_653 
+
+:DECON_627
+67@ = 0 
+0662: printstring "LEVEL_DEBUG_OFF" 
+
+:DECON_653
+if 
+  67@ == 1 
+jf @DECON_1608 
+if 
+0736:   is_keyboard_key_just_pressed 32 
+jf @DECON_720 
+68@ += 1 
+if 
+  68@ > 4 
+jf @DECON_718 
+68@ = 0 
+
+:DECON_718
+086A: NOP 
+
+:DECON_720
+if 
+  68@ == 1 
+jf @DECON_939 
+43@ = 0 
+
+:DECON_745
+if 
+  6 > 43@ 
+jf @DECON_813 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_799 
+071E: get_object $2671(43@,6i) health_to $7226(43@,8i) 
+
+:DECON_799
+43@ += 1 
+jump @DECON_745 
+
+:DECON_813
+065D: NOP $7226[0] "CABIN_0_HEALTH" 
+065D: NOP $7226[1] "CABIN_1_HEALTH" 
+065D: NOP $7226[2] "CABIN_2_HEALTH" 
+065D: NOP $7226[3] "CABIN_3_HEALTH" 
+065D: NOP $7226[4] "CABIN_4_HEALTH" 
+065D: NOP $7226[5] "CABIN_5_HEALTH" 
+
+:DECON_939
+if 
+  68@ == 2 
+jf @DECON_1149 
+008A: $7226[0] = 34@ // (int) 
+008A: $7226[1] = 35@ // (int) 
+008A: $7226[2] = 63@ // (int) 
+008A: $7226[3] = 65@ // (int) 
+008A: $7226[4] = 64@ // (int) 
+008A: $7226[5] = 66@ // (int) 
+008A: $7226[6] = 32@ // (int) 
+008A: $7226[7] = 33@ // (int) 
+065D: NOP $7226[0] "M_STAGE" 
+065D: NOP $7226[1] "M_GOALS" 
+065D: NOP $7226[2] "DIALOGUE_FLAG" 
+065D: NOP $7226[3] "DIALOGUE_TIMER" 
+065D: NOP $7226[4] "HELP_FLAG" 
+065D: NOP $7226[5] "HELP_TIMER" 
+065D: NOP $7226[6] "TIMERA" 
+065D: NOP $7226[7] "TIMERB" 
+
+:DECON_1149
+if 
+  68@ == 3 
+jf @DECON_1447 
+008A: $7226[0] = 159@ // (int) 
+008A: $7226[1] = 153@ // (int) 
+008A: $7226[2] = 160@ // (int) 
+008A: $7226[3] = 154@ // (int) 
+008A: $7226[4] = 161@ // (int) 
+008A: $7226[5] = 155@ // (int) 
+008A: $7226[6] = 162@ // (int) 
+008A: $7226[7] = 156@ // (int) 
+065D: NOP $7226[0] "CABIN_THIS_HEALTH[0]" 
+065D: NOP $7226[1] "CABIN_LAST_HEALTH[0]" 
+065D: NOP $7226[2] "CABIN_THIS_HEALTH[1]" 
+065D: NOP $7226[3] "CABIN_LAST_HEALTH[1]" 
+065D: NOP $7226[4] "CABIN_THIS_HEALTH[2]" 
+065D: NOP $7226[5] "CABIN_LAST_HEALTH[2]" 
+065D: NOP $7226[6] "CABIN_THIS_HEALTH[3]" 
+065D: NOP $7226[7] "CABIN_LAST_HEALTH[3]" 
+
+:DECON_1447
+if 
+  68@ == 4 
+jf @DECON_1498 
+0084: $7226[0] = $FLAG_PLAYER_IN_CRANE // (int) 
+065D: NOP $7226[0] "PLAYER_IS_IN_CRANE" 
+
+:DECON_1498
+if 
+0736:   is_keyboard_key_just_pressed 98 
+jf @DECON_1520 
+38@ = 1 
+
+:DECON_1520
+if 
+0736:   is_keyboard_key_just_pressed 80 
+jf @DECON_1608 
+if 
+  69@ == 0 
+jf @DECON_1583 
+69@ = 1 
+0662: printstring "LEVEL_PAUSED" 
+jump @DECON_1608 
+
+:DECON_1583
+69@ = 0 
+0662: printstring "LEVEL_UNPAUSED" 
+
+:DECON_1608
+return 
+
+:DECON_1610
+if 
+  35@ == -1 
+jf @DECON_1806 
+91@ = Car.Create(#PONY, 0.0, 0.0, 0.0)
+90@ = Car.Create(#PONY, 0.0, 0.0, 0.0)
+104@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+185@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+116@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+018A: 126@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 127@ = create_checkpoint_at 0.0 0.0 0.0 
+018A: 124@ = create_checkpoint_at 0.0 0.0 0.0 
+
+:DECON_1806
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:DECON_1828
+if 
+fading 
+jf @DECON_1852 
+wait 0 
+jump @DECON_1828 
+
+:DECON_1852
+128@ = 0 
+129@ = 0 
+130@ = 0 
+131@ = 0 
+132@ = 0 
+133@ = 0 
+140@ = 0 
+141@ = 0 
+142@ = 0 
+143@ = 0 
+144@ = 0 
+145@ = 0 
+146@ = 0 
+147@ = 0 
+148@ = 0 
+149@ = 0 
+150@ = 0 
+151@ = 0 
+152@ = 0 
+134@ = 0 
+135@ = 0 
+136@ = 0 
+137@ = 0 
+138@ = 0 
+139@ = 0 
+165@ = 0 
+166@ = 0 
+167@ = 0 
+168@ = 0 
+169@ = 0 
+gosub @DECON_20814 
+return 
+
+:DECON_2071
+03E6: remove_text_box 
+if 
+  35@ == 0 
+jf @DECON_2255 
+054C: use_GXT_table 'GARAGE2' 
+02E4: load_cutscene_data 'GARAG3A' 
+
+:DECON_2113
+if 
+86B9:   not cutscene_data_loaded 
+jf @DECON_2137 
+wait 0 
+jump @DECON_2113 
+
+:DECON_2137
+select_interior 1 
+0860: link_actor $PLAYER_ACTOR to_interior 1 
+Camera.SetAtPos(-2031.0, 149.0, 29.0)
+02E7: start_cutscene 
+fade 1 1000 
+
+:DECON_2174
+if 
+82E9:   not cutscene_reached_end 
+jf @DECON_2198 
+wait 0 
+jump @DECON_2174 
+
+:DECON_2198
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:DECON_2213
+if 
+fading 
+jf @DECON_2237 
+wait 0 
+jump @DECON_2213 
+
+:DECON_2237
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+select_interior 0 
+35@ += 1 
+
+:DECON_2255
+if 
+  35@ == 1 
+jf @DECON_4359 
+Model.Load(#PORTALOO)
+Model.Load(#PORTAKABIN)
+Model.Load(#BARREL4)
+Model.Load(#DOZER)
+Model.Load(#CEMENT)
+Model.Load(#DUMPER)
+Model.Load(#BOBCAT)
+Model.Load(#WMYCON)
+Model.Load(#SHOVEL)
+Model.Load(#COLT45)
+Model.Load(#WMYCONB)
+038B: load_requested_models 
+
+:DECON_2328
+if or
+   not Model.Available(#PORTALOO)
+   not Model.Available(#PORTAKABIN)
+   not Model.Available(#BARREL4)
+   not Model.Available(#DOZER)
+   not Model.Available(#CEMENT)
+   not Model.Available(#WMYCONB)
+jf @DECON_2379 
+wait 0 
+jump @DECON_2328 
+
+:DECON_2379
+if or
+   not Model.Available(#DUMPER)
+   not Model.Available(#BOBCAT)
+   not Model.Available(#WMYCON)
+   not Model.Available(#SHOVEL)
+   not Model.Available(#COLT45)
+jf @DECON_2425 
+wait 0 
+jump @DECON_2379 
+
+:DECON_2425
+03B6: replace_model_at -2049.171 250.3193 34.477 radius 20.0 from #HUBHOLE1_SFSE to #HUBHOLE2_SFSE 
+43@ = 0 
+
+:DECON_2460
+if 
+  6 > 43@ 
+jf @DECON_2605 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_2507 
+Object.Destroy($2671(43@,6i))
+
+:DECON_2507
+$2671(43@,6i) = Object.Create(#PORTAKABIN, $2677(43@,6f), $2683(43@,6f), $2689(43@,6f))
+Object.Angle($2671(43@,6i)) = $2695(43@,6f)
+Object.ToggleInMovingList($2671(43@,6i)) = False
+Object.RemoveFromMissionCleanupList($2671(43@,6i))
+118@(43@,6i) = Marker.CreateAboveObject($2671(43@,6i))
+43@ += 1 
+jump @DECON_2460 
+
+:DECON_2605
+70@ = Object.Init(#PORTALOO, -2087.861, 178.2922, 35.3947)
+Object.Angle(70@) = 3.3302
+71@ = Object.Init(#PORTALOO, -2114.903, 156.9329, 35.4667)
+Object.Angle(71@) = 271.6719
+72@ = Object.Init(#PORTALOO, -2116.425, 157.4618, 35.7225)
+Object.Angle(72@) = 269.1095
+73@ = Object.Init(#PORTALOO, -2054.474, 222.6438, 35.8767)
+Object.Angle(73@) = 0.0
+Object.KeepInMemory(73@) = True
+74@ = Object.Init(#PORTALOO, -2069.262, 285.8519, 35.8543)
+Object.Angle(74@) = 51.0305
+75@ = Object.Init(#PORTALOO, -2134.873, 293.1065, 35.4117)
+Object.Angle(75@) = 175.9489
+76@ = Object.Init(#BARREL4, -2109.397, 157.8976, 34.4311)
+77@ = Object.Init(#BARREL4, -2108.493, 157.8779, 34.4523)
+78@ = Object.Init(#BARREL4, -2091.683, 172.1051, 34.443)
+79@ = Object.Init(#BARREL4, -2128.95, 303.401, 33.888)
+80@ = Object.Init(#BARREL4, -2129.923, 303.447, 33.8842)
+43@ = 0 
+
+:DECON_2932
+if 
+  5 > 43@ 
+jf @DECON_2975 
+035D: set_object 76@(43@,5i) targetable 1 
+43@ += 1 
+jump @DECON_2932 
+
+:DECON_2975
+if 
+03CA:   object $2724 exists 
+jf @DECON_3001 
+0797: set_crane_magnet $2724 magnet_lane_length_to 0.3 // float 
+
+:DECON_3001
+if 
+03CA:   object $2723 exists 
+jf @DECON_3122 
+Object.Angle($2723) = 78.0
+if 
+03CA:   object $2726 exists 
+jf @DECON_3053 
+Object.Angle($2726) = 78.0
+
+:DECON_3053
+if 
+03CA:   object $2724 exists 
+jf @DECON_3122 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2723 with_offset 0.0 15.0 3.453 
+0815: put_object $2724 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_keep_rotation 
+Object.Angle($2724) = 78.0
+
+:DECON_3122
+83@ = Car.Create(#DOZER, -2098.726, 278.5271, 34.8743)
+Car.Angle(83@) = 15.4537
+Car.Health(83@) = 5000
+053F: set_car 83@ tires_vulnerability 0 
+84@ = Car.Create(#DOZER, -2088.802, 188.5362, 34.0469)
+Car.Angle(84@) = 182.8425
+Car.Health(84@) = 5000
+053F: set_car 84@ tires_vulnerability 0 
+07C0: load_path 551 
+
+:DECON_3223
+if 
+87C1:   not path 551 available 
+jf @DECON_3250 
+wait 0 
+jump @DECON_3223 
+
+:DECON_3250
+if 
+   not Car.Wrecked(83@)
+jf @DECON_3274 
+085E: assign_car 83@ to_looped_path 551 
+
+:DECON_3274
+85@ = Car.Create(#CEMENT, -2112.603, 193.7894, 33.6684)
+Car.Angle(85@) = 276.2221
+86@ = Car.Create(#BOBCAT, -2102.461, 160.2542, 34.8444)
+Car.Angle(86@) = 66.4396
+87@ = Car.Create(#BOBCAT, -2121.669, 302.741, 34.459)
+Car.Angle(87@) = 160.6221
+0085: 91@ = 83@ // (int) 
+0085: 92@ = 84@ // (int) 
+0085: 93@ = 85@ // (int) 
+0085: 95@ = 86@ // (int) 
+0085: 96@ = 87@ // (int) 
+43@ = 0 
+
+:DECON_3420
+if 
+  6 > 43@ 
+jf @DECON_3483 
+if 
+   not Car.Wrecked(91@(43@,7i))
+jf @DECON_3469 
+04E0: car 91@(43@,7i) abandon_path_radius 50 
+
+:DECON_3469
+43@ += 1 
+jump @DECON_3420 
+
+:DECON_3483
+060A: create_decision_maker_type 2 store_to 174@ // decision\allowed\m_.ped files 
+98@ = Actor.Create(Mission1, #WMYCON, -2098.758, 168.5889, 34.0869)
+99@ = Actor.Create(Mission1, #WMYCON, -2099.974, 169.3999, 34.0947)
+100@ = Actor.Create(Mission1, #WMYCON, -2090.955, 265.4674, 34.6686)
+101@ = Actor.Create(Mission1, #WMYCON, -2089.761, 264.5739, 34.6557)
+102@ = Actor.Create(Mission1, #WMYCON, -2085.753, 269.4974, 34.5456)
+103@ = Actor.Create(Mission1, #WMYCON, -2125.748, 303.8916, 33.5532)
+Actor.Angle(98@) = 47.9799
+Actor.Angle(99@) = 229.2811
+Actor.Angle(100@) = 229.2811
+Actor.Angle(101@) = 51.1609
+Actor.Angle(102@) = 177.1601
+Actor.Angle(103@) = 177.1601
+Actor.GiveWeaponAndAmmo(102@, Shovel, 9999)
+Actor.GiveWeaponAndAmmo(103@, Shovel, 9999)
+43@ = 0 
+
+:DECON_3721
+if 
+  6 > 43@ 
+jf @DECON_3803 
+060B: set_actor 98@(43@,6i) decision_maker_to 174@ 
+02A9: set_actor 98@(43@,6i) immune_to_nonplayer 1 
+Actor.Health(98@(43@,6i)) = 50
+0085: 104@(43@,10i) = 98@(43@,6i) // (int) 
+43@ += 1 
+jump @DECON_3721 
+
+:DECON_3803
+0677: AS_actor 98@ chat_with_actor 99@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 99@ chat_with_actor 98@ lead_speaker_flag 0 unknown_flag 1 
+0677: AS_actor 100@ chat_with_actor 101@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 101@ chat_with_actor 100@ lead_speaker_flag 0 unknown_flag 1 
+if 
+   not Car.Wrecked(83@)
+jf @DECON_3909 
+115@ = Actor.CreateAsDriver(Mission2, #WMYCON, 83@)
+060B: set_actor 115@ decision_maker_to 174@ 
+02A9: set_actor 115@ immune_to_nonplayer 1 
+Actor.Health(115@) = 50
+0085: 110@ = 115@ // (int) 
+
+:DECON_3909
+117@ = Actor.Create(Mission1, #WMYCONB, -2089.709, 266.1128, 34.6455)
+Actor.Angle(117@) = 170.2217
+Actor.Health(117@) = 40
+060A: create_decision_maker_type 0 store_to 175@ // decision\allowed\m_.ped files 
+060B: set_actor 117@ decision_maker_to 175@ 
+0085: 111@ = 117@ // (int) 
+0395: clear_area 1 at -2036.18 179.2597 27.8359 radius 5.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+Camera.SetPosition(-2010.461, 171.3564, 41.8495, 0.0, 0.0, 0.0)
+Camera.PointAt(-2011.302, 171.8702, 41.6786, 2)
+Actor.PutAt($PLAYER_ACTOR, -2030.987, 148.5787, 27.8359)
+Actor.Angle($PLAYER_ACTOR) = 359.4339
+50@ = -2011.302 
+50@ += 2010.461 
+51@ = 171.8702 
+51@ -= 171.3564 
+52@ = 41.6786 
+52@ -= 41.8495 
+50@ *= 10.0 
+51@ *= 10.0 
+52@ *= 10.0 
+$TEMPVAR_FLOAT_1 = -2010.461 
+005F: $TEMPVAR_FLOAT_1 += 50@ // (float) 
+$TEMPVAR_FLOAT_2 = 171.3564 
+005F: $TEMPVAR_FLOAT_2 += 51@ // (float) 
+$TEMPVAR_FLOAT_3 = 41.8495 
+005F: $TEMPVAR_FLOAT_3 += 52@ // (float) 
+0604: get_Z_angle_for_point 50@ 51@ store_to $TEMPVAR_ANGLE 
+0A0B: set_rendering_origin_at_3D_coord $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 angle $TEMPVAR_ANGLE 
+038B: load_requested_models 
+fade 1 1000 
+
+:DECON_4305
+if 
+fading 
+jf @DECON_4329 
+wait 0 
+jump @DECON_4305 
+
+:DECON_4329
+00BC: show_text_highpriority GXT 'GAR2_01' time 5000 flag 1  // ~s~Scare off the construction firm.
+32@ = 0 
+35@ += 1 
+
+:DECON_4359
+if 
+  35@ == 2 
+jf @DECON_4846 
+if 
+  32@ > 5000 
+jf @DECON_4846 
+Camera.SetPosition(-2076.394, 263.7876, 35.7185, 0.0, 0.0, 0.0)
+Camera.PointAt(-2077.287, 264.2365, 35.6941, 2)
+50@ = -2077.287 
+50@ += 2076.394 
+51@ = 264.2365 
+51@ -= 263.7876 
+52@ = 35.6941 
+52@ -= 35.7185 
+50@ *= 10.0 
+51@ *= 10.0 
+52@ *= 10.0 
+$TEMPVAR_FLOAT_1 = -2076.394 
+005F: $TEMPVAR_FLOAT_1 += 50@ // (float) 
+$TEMPVAR_FLOAT_2 = 263.7876 
+005F: $TEMPVAR_FLOAT_2 += 51@ // (float) 
+$TEMPVAR_FLOAT_3 = 35.7185 
+005F: $TEMPVAR_FLOAT_3 += 52@ // (float) 
+0604: get_Z_angle_for_point 50@ 51@ store_to $TEMPVAR_ANGLE 
+0A0B: set_rendering_origin_at_3D_coord $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 angle $TEMPVAR_ANGLE 
+038B: load_requested_models 
+if 
+   not Actor.Dead(102@)
+jf @DECON_4724 
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -2099.162 171.1465 34.0869 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+05D3: AS_actor -1 goto_point -2090.801 263.5923 34.7131 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 102@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:DECON_4724
+if 
+   not Actor.Dead(117@)
+jf @DECON_4816 
+0615: define_AS_pack_begin 49@ 
+05C8: AS_actor -1 look_around 
+05C9: AS_actor -1 on_guard 5000 ms 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 117@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:DECON_4816
+00BC: show_text_highpriority GXT 'GAR2_02' time 5000 flag 1  // ~s~Destroy all the ~g~portables~s~ and kill the foreman.
+32@ = 0 
+35@ += 1 
+
+:DECON_4846
+if 
+  35@ == 3 
+jf @DECON_5243 
+if 
+  32@ > 5500 
+jf @DECON_5243 
+fade 0 150 
+
+:DECON_4890
+if 
+fading 
+jf @DECON_4914 
+wait 0 
+jump @DECON_4890 
+
+:DECON_4914
+if 
+   not Actor.Dead(102@)
+jf @DECON_4960 
+Actor.PutAt(102@, -2098.833, 191.043, 34.2113)
+Actor.Angle(102@) = 150.0
+
+:DECON_4960
+Camera.SetPosition(-2084.993, 195.2235, 39.2186, 0.0, 0.0, 0.0)
+Camera.PointAt(-2085.466, 194.3752, 38.9801, 2)
+50@ = -2085.466 
+50@ += 2084.993 
+51@ = 194.3752 
+51@ -= 195.2235 
+52@ = 38.9801 
+52@ -= 39.2186 
+50@ *= 10.0 
+51@ *= 10.0 
+52@ *= 10.0 
+$TEMPVAR_FLOAT_1 = -2084.993 
+005F: $TEMPVAR_FLOAT_1 += 50@ // (float) 
+$TEMPVAR_FLOAT_2 = 195.2235 
+005F: $TEMPVAR_FLOAT_2 += 51@ // (float) 
+$TEMPVAR_FLOAT_3 = 39.2186 
+005F: $TEMPVAR_FLOAT_3 += 52@ // (float) 
+0604: get_Z_angle_for_point 50@ 51@ store_to $TEMPVAR_ANGLE 
+0A0B: set_rendering_origin_at_3D_coord $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 angle $TEMPVAR_ANGLE 
+038B: load_requested_models 
+fade 1 150 
+
+:DECON_5189
+if 
+fading 
+jf @DECON_5213 
+wait 0 
+jump @DECON_5189 
+
+:DECON_5213
+00BB: show_text_lowpriority GXT 'GAR2_05' time 5000 flag 1  // ~s~Construction machinery will help destroy ~g~portables~s~.
+35@ += 1 
+32@ = 0 
+
+:DECON_5243
+if 
+  35@ == 4 
+jf @DECON_5287 
+if 
+  32@ > 5000 
+jf @DECON_5287 
+35@ = 99 
+
+:DECON_5287
+if 
+  35@ > 0 
+jf @DECON_5329 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DECON_5329 
+35@ = 99 
+
+:DECON_5329
+if 
+  35@ == 99 
+jf @DECON_5646 
+if 
+   not Actor.Dead(102@)
+jf @DECON_5478 
+Actor.PutAt(102@, -2092.252, 252.5526, 34.4575)
+0687: clear_actor 102@ task 
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -2099.162 171.1465 34.0869 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+05D3: AS_actor -1 goto_point -2090.801 263.5923 34.7131 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 102@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:DECON_5478
+if 
+   not Actor.Dead(117@)
+jf @DECON_5570 
+0615: define_AS_pack_begin 49@ 
+05C8: AS_actor -1 look_around 
+05C9: AS_actor -1 on_guard 5000 ms 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 117@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+
+:DECON_5570
+if 
+03CA:   object $2671[3] exists 
+jf @DECON_5616 
+Object.PutAt($2671[3], -2077.04, 280.395, 35.817)
+Object.Angle($2671[3]) = 0.0
+
+:DECON_5616
+00BE: text_clear_all 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 0 
+gosub @DECON_20814 
+
+:DECON_5646
+return 
+
+:DECON_5648
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DECON_5723 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -2053.226 139.1389 cornerB -2135.449 309.5472 
+jf @DECON_5716 
+03C7: set_sensitivity_to_crime 0.0 
+jump @DECON_5723 
+
+:DECON_5716
+03C7: set_sensitivity_to_crime 1.0 
+
+:DECON_5723
+if 
+  35@ == 0 
+jf @DECON_5846 
+if 
+  32@ > 0 
+jf @DECON_5846 
+00BC: show_text_highpriority GXT 'GAR2_19' time 10000 flag 1  // ~s~Destroy all the ~g~portables~s~. You will need a bulldozer.
+35@ += 1 
+33@ = 30000 
+63@ = 0 
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03CF: load_wav 12601 as 3 
+
+:DECON_5820
+if 
+83D0:   not wav 3 loaded 
+jf @DECON_5846 
+wait 0 
+jump @DECON_5820 
+
+:DECON_5846
+if 
+  35@ == 1 
+jf @DECON_6164 
+if 
+  33@ > 30000 
+jf @DECON_6132 
+if 
+03CA:   object 73@ exists 
+jf @DECON_6132 
+if 
+0179:   actor $PLAYER_ACTOR colliding_with_object 73@ 
+jf @DECON_6132 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @DECON_6132 
+0871: init_jump_table 63@ total_jumps 2 default_jump 0 @DECON_6093 jumps 0 @DECON_5999 1 @DECON_6046 -1 @DECON_6093 -1 @DECON_6093 -1 @DECON_6093 -1 @DECON_6093 -1 @DECON_6093 
+
+:DECON_5999
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AK' // s$  // ~z~Shouldn't have had that goddam curry!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16609 // = constant 
+create_thread @AUDIOL -1 0 0 1 0 
+jump @DECON_6093 
+
+:DECON_6046
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AF' // s$  // ~z~Oh God the stench!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16605 // = constant 
+create_thread @AUDIOL -1 0 0 1 0 
+jump @DECON_6093 
+
+:DECON_6093
+63@ += 1 
+if 
+  63@ > 1 
+jf @DECON_6125 
+63@ = 0 
+
+:DECON_6125
+33@ = 0 
+
+:DECON_6132
+if 
+  140@ == 6 
+jf @DECON_6164 
+32@ = 0 
+35@ += 1 
+
+:DECON_6164
+if 
+  35@ == 2 
+jf @DECON_6208 
+if 
+  32@ > 1000 
+jf @DECON_6208 
+35@ = 99 
+
+:DECON_6208
+if and
+  141@ == 1 
+  0 >= $7234 
+  6 > 140@ 
+jf @DECON_6328 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 1
+jf @DECON_6265 
+Player.WantedLevel($PLAYER_CHAR) = 2
+
+:DECON_6265
+085A: spawn_emergency_vehicle_model #COPCARSF on_street_nearest_to -2039.255 232.481 33.9528 
+085A: spawn_emergency_vehicle_model #COPCARSF on_street_nearest_to -2038.185 254.2709 34.0893 
+37@ = 1 
+00BC: show_text_highpriority GXT 'GAR2_40' time 5000 flag 1  // ~r~You took too long. The cops are on to you!
+
+:DECON_6328
+if 
+  35@ == 99 
+jf @DECON_6362 
+040D: unload_wav 3 
+014F: stop_timer $7234 
+gosub @DECON_20814 
+
+:DECON_6362
+43@ = 0 
+
+:DECON_6369
+if 
+  6 > 43@ 
+jf @DECON_6667 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_6653 
+if 
+0366:   object $2671(43@,6i) damaged 
+jf @DECON_6653 
+if 
+  128@(43@,6i) == 0 
+jf @DECON_6653 
+Marker.Disable(118@(43@,6i))
+140@ += 1 
+128@(43@,6i) = 1 
+if 
+  140@ == 1 
+jf @DECON_6510 
+00BC: show_text_highpriority GXT 'GAR2_29' time 7000 flag 1  // ~s~There are 5 ~g~portables~s~ left to destroy.
+
+:DECON_6510
+if 
+  140@ == 2 
+jf @DECON_6544 
+00BC: show_text_highpriority GXT 'GAR2_30' time 7000 flag 1  // ~s~There are 4 ~g~portables~s~ left to destroy.
+
+:DECON_6544
+if 
+  140@ == 3 
+jf @DECON_6578 
+00BC: show_text_highpriority GXT 'GAR2_31' time 7000 flag 1  // ~s~There are 3 ~g~portables~s~ left to destroy.
+
+:DECON_6578
+if 
+  140@ == 4 
+jf @DECON_6612 
+00BC: show_text_highpriority GXT 'GAR2_32' time 7000 flag 1  // ~s~There are 2 ~g~portables~s~ left to destroy.
+
+:DECON_6612
+if 
+  140@ == 5 
+jf @DECON_6646 
+00BC: show_text_highpriority GXT 'GAR2_33' time 7000 flag 1  // ~s~There is 1 ~g~portable~s~ left to destroy.
+
+:DECON_6646
+32@ = 0 
+
+:DECON_6653
+43@ += 1 
+jump @DECON_6369 
+
+:DECON_6667
+if 
+0736:   is_keyboard_key_just_pressed 97 
+jf @DECON_6772 
+43@ = 0 
+
+:DECON_6689
+if 
+  6 > 43@ 
+jf @DECON_6772 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_6758 
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_6758 
+0723: break_object $2671(43@,6i) intensity 0 
+
+:DECON_6758
+43@ += 1 
+jump @DECON_6689 
+
+:DECON_6772
+return 
+
+:DECON_6774
+03E6: remove_text_box 
+if 
+  35@ == 0 
+jf @DECON_8063 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 500 
+
+:DECON_6818
+if 
+fading 
+jf @DECON_6842 
+wait 0 
+jump @DECON_6818 
+
+:DECON_6842
+02A3: enable_widescreen 1 
+077E: get_active_interior_to 62@ 
+select_interior 0 
+if 
+   not $FLAG_PLAYER_IN_CRANE == 1 
+jf @DECON_6958 
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2066.839 209.6444 28.403 cornerB -2040.101 262.7024 34.9146 
+jf @DECON_6951 
+Actor.PutAt($PLAYER_ACTOR, -2090.044, 209.4996, 33.9509)
+Actor.Angle($PLAYER_ACTOR) = 250.813
+
+:DECON_6951
+jump @DECON_6965 
+
+:DECON_6958
+$10494 = 1 
+
+:DECON_6965
+03CF: load_wav 12605 as 3 
+
+:DECON_6972
+if 
+83D0:   not wav 3 loaded 
+jf @DECON_6998 
+wait 0 
+jump @DECON_6972 
+
+:DECON_6998
+0395: clear_area 1 at -2054.474 222.6438 35.8767 radius 3.0 
+43@ = 0 
+
+:DECON_7029
+if 
+  10 > 43@ 
+jf @DECON_7178 
+if 
+056D:   actor 104@(43@,10i) defined 
+jf @DECON_7164 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_7155 
+if 
+00FE:   actor 104@(43@,10i) sphere 0 in_sphere -2054.474 222.6438 35.8767 radius 5.0 5.0 3.0 
+jf @DECON_7148 
+Actor.DestroyInstantly(104@(43@,10i))
+
+:DECON_7148
+jump @DECON_7164 
+
+:DECON_7155
+Actor.DestroyInstantly(104@(43@,10i))
+
+:DECON_7164
+43@ += 1 
+jump @DECON_7029 
+
+:DECON_7178
+43@ = 0 
+
+:DECON_7185
+if 
+  7 > 43@ 
+jf @DECON_7339 
+if 
+056E:   car 91@(43@,7i) defined 
+jf @DECON_7325 
+if 
+   not Car.Wrecked(91@(43@,7i))
+jf @DECON_7316 
+if 
+01AF:   car 91@(43@,7i) sphere 91@(43@,7i) in_sphere -2054.474 222.6438 35.8767 radius 6.0 6.0 3.0 
+jf @DECON_7309 
+Car.Destroy(91@(43@,7i))
+
+:DECON_7309
+jump @DECON_7325 
+
+:DECON_7316
+Car.Destroy(91@(43@,7i))
+
+:DECON_7325
+43@ += 1 
+jump @DECON_7185 
+
+:DECON_7339
+43@ = 0 
+
+:DECON_7346
+if 
+  6 > 43@ 
+jf @DECON_7464 
+if 
+03CA:   object 70@(43@,6i) exists 
+jf @DECON_7450 
+if 
+04E6:   object 70@(43@,6i) near_point -2054.474 222.6438 35.8767 radius 3.0 3.0 3.0 flag 70@(43@,6i) 
+jf @DECON_7450 
+Object.Destroy(70@(43@,6i))
+
+:DECON_7450
+43@ += 1 
+jump @DECON_7346 
+
+:DECON_7464
+43@ = 0 
+
+:DECON_7471
+if 
+  5 > 43@ 
+jf @DECON_7589 
+if 
+03CA:   object 76@(43@,5i) exists 
+jf @DECON_7575 
+if 
+04E6:   object 76@(43@,5i) near_point -2054.474 222.6438 35.8767 radius 3.0 3.0 3.0 flag 76@(43@,5i) 
+jf @DECON_7575 
+Object.Destroy(76@(43@,5i))
+
+:DECON_7575
+43@ += 1 
+jump @DECON_7471 
+
+:DECON_7589
+if 
+03CA:   object $2724 exists 
+jf @DECON_7615 
+0797: set_crane_magnet $2724 magnet_lane_length_to 0.5 // float 
+
+:DECON_7615
+if 
+03CA:   object 73@ exists 
+jf @DECON_7636 
+Object.Destroy(73@)
+
+:DECON_7636
+73@ = Object.Init(#PORTALOO, -2054.474, 222.6438, 35.8767)
+Object.Angle(73@) = 0.0
+Object.CollisionDetection(73@) = False
+Camera.SetPosition(-2058.05, 218.8743, 35.7489, 0.0, 0.0, 0.0)
+Camera.PointAt(-2057.423, 219.653, 35.7245, 2)
+if 
+03CA:   object $2671[2] exists 
+jf @DECON_7748 
+Object.Destroy($2671[2])
+
+:DECON_7748
+$2671[2] = Object.Create(#PORTAKABIN, $2677[2], $2683[2], $2689[2])
+Object.Angle($2671[2]) = $2695[2]
+Object.ToggleInMovingList($2671[2]) = False
+Object.RemoveFromMissionCleanupList($2671[2])
+114@ = Actor.Create(CivMale, #WMYCONB, -2054.474, 222.6438, 34.8767)
+Actor.Angle(114@) = 90.0
+89@ = Car.Create(#CEMENT, -2037.176, 269.7917, 34.9191)
+Car.Angle(89@) = 179.5245
+0085: 97@ = 89@ // (int) 
+43@ = 0 
+
+:DECON_7867
+if 
+  10 > 43@ 
+jf @DECON_8025 
+if 
+056D:   actor 104@(43@,10i) defined 
+jf @DECON_8011 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_8011 
+if 
+   not Actor.Driving(104@(43@,10i))
+jf @DECON_7985 
+Actor.LockInCurrentPosition(104@(43@,10i)) = True
+0619: enable_actor 104@(43@,10i) collision_detection 0 
+0337: set_actor 104@(43@,10i) visibility 0 
+jump @DECON_8011 
+
+:DECON_7985
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar(104@(43@,10i))
+Car.LockInCurrentPosition($TEMPVAR_ACTOR_CAR) = True
+0338: set_car $TEMPVAR_ACTOR_CAR visibility 0 
+
+:DECON_8011
+43@ += 1 
+jump @DECON_7867 
+
+:DECON_8025
+fade 1 500 
+
+:DECON_8032
+if 
+fading 
+jf @DECON_8056 
+wait 0 
+jump @DECON_8032 
+
+:DECON_8056
+35@ += 1 
+
+:DECON_8063
+if 
+  35@ > 0 
+jf @DECON_8105 
+if 
+00E1:   player 0 pressed_key 16 
+jf @DECON_8105 
+35@ = 99 
+
+:DECON_8105
+if 
+  35@ == 1 
+jf @DECON_8164 
+if 
+03CA:   object 73@ exists 
+jf @DECON_8150 
+097C: attach_wav 3 to_object 73@ 
+03D1: play_wav 3 
+
+:DECON_8150
+32@ = 0 
+35@ += 1 
+
+:DECON_8164
+if 
+  35@ == 2 
+jf @DECON_8231 
+if 
+  32@ > 3000 
+jf @DECON_8231 
+if 
+03CA:   object $2671[2] exists 
+jf @DECON_8231 
+0723: break_object $2671[2] intensity 0 
+35@ += 1 
+
+:DECON_8231
+if 
+  35@ == 3 
+jf @DECON_8462 
+if 
+  32@ > 4000 
+jf @DECON_8462 
+if 
+   not Actor.Dead(114@)
+jf @DECON_8462 
+Camera.SetPosition(-2051.721, 225.4406, 36.5865, 0.0, 0.0, 0.0)
+Camera.PointAt(-2052.561, 224.9327, 36.3922, 2)
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -2057.137 223.541 34.582 mode 4 time 5000 ms // versionA 
+if 
+03CA:   object $2671[2] exists 
+jf @DECON_8389 
+0655: AS_actor -1 look_at_object $2671[2] 100 ms 
+
+:DECON_8389
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 114@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AA' // s$  // ~z~What's all that damned clatter?
+04AE: $ACTOR_SPEECH_WAV_FILE = 16600 // = constant 
+create_thread @AUDIOL 114@ 0 1 1 0 
+35@ += 1 
+32@ = 0 
+
+:DECON_8462
+if 
+  35@ == 4 
+jf @DECON_8513 
+if and
+  32@ > 3000 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @DECON_8513 
+35@ += 1 
+
+:DECON_8513
+if 
+  35@ == 5 
+jf @DECON_8694 
+if 
+   not Actor.Dead(114@)
+jf @DECON_8694 
+062E: get_actor 114@ task 1560 status_store_to 43@ // ret 7 if not found 
+if 
+04A4:   43@ == 7 // == constant 
+jf @DECON_8694 
+Actor.PutAt(114@, -2057.137, 223.541, 34.582)
+Actor.Angle(114@) = 97.4598
+Camera.SetPosition(-2056.056, 222.2135, 36.2036, 0.0, 0.0, 0.0)
+Camera.PointAt(-2056.939, 222.6817, 36.1606, 2)
+06A9: AS_actor 114@ look_at_point -2069.0 229.0 36.0 2000 ms 
+32@ = 0 
+35@ += 1 
+
+:DECON_8694
+if 
+  35@ == 6 
+jf @DECON_8796 
+if 
+  32@ > 2000 
+jf @DECON_8796 
+32@ = 0 
+Camera.SetPosition(-2051.721, 225.4406, 36.5865, 0.0, 0.0, 0.0)
+Camera.PointAt(-2052.561, 224.9327, 36.3922, 2)
+35@ += 1 
+
+:DECON_8796
+if 
+  35@ == 7 
+jf @DECON_8910 
+if 
+   not Actor.Dead(114@)
+jf @DECON_8910 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AB' // s$  // ~z~Holy crap! I didn't see nothing!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16601 // = constant 
+create_thread @AUDIOL 114@ 0 1 1 0 
+05D3: AS_actor 114@ goto_point -2054.474 222.6438 35.8767 mode 6 time 5000 ms // versionA 
+32@ = 0 
+35@ += 1 
+
+:DECON_8910
+if 
+  35@ == 8 
+jf @DECON_8954 
+if 
+  32@ > 1500 
+jf @DECON_8954 
+35@ += 1 
+
+:DECON_8954
+if 
+  35@ == 9 
+jf @DECON_9036 
+if 
+   not Actor.Dead(114@)
+jf @DECON_9036 
+062E: get_actor 114@ task 1491 status_store_to 43@ // ret 7 if not found 
+if 
+04A4:   43@ == 7 // == constant 
+jf @DECON_9036 
+Actor.DestroyInstantly(114@)
+32@ = 0 
+35@ += 1 
+
+:DECON_9036
+if 
+  35@ == 10 
+jf @DECON_9149 
+if 
+  32@ > 2000 
+jf @DECON_9149 
+00BE: text_clear_all 
+Camera.SetPosition(-2037.439, 244.0506, 43.8289, 0.0, 0.0, 0.0)
+Camera.PointAt(-2038.147, 244.4092, 43.2209, 2)
+00BB: show_text_lowpriority GXT 'GAR2_11' time 5000 flag 1  // ~s~Push the ~r~mobile toilet~s~ into the ditch.
+35@ += 1 
+
+:DECON_9149
+if 
+  35@ == 11 
+jf @DECON_9193 
+if 
+  32@ > 5000 
+jf @DECON_9193 
+35@ += 1 
+
+:DECON_9193
+if 
+  35@ == 12 
+jf @DECON_9294 
+00BE: text_clear_all 
+Camera.SetPosition(-2031.781, 262.1947, 36.3181, 0.0, 0.0, 0.0)
+Camera.PointAt(-2032.476, 262.9132, 36.3398, 2)
+00BB: show_text_lowpriority GXT 'GAR2_12' time 5000 flag 1  // ~s~Then bury him under concrete.
+32@ = 0 
+35@ += 1 
+
+:DECON_9294
+if 
+  35@ == 13 
+jf @DECON_9338 
+if 
+  32@ > 5000 
+jf @DECON_9338 
+35@ = 99 
+
+:DECON_9338
+if 
+  35@ == 99 
+jf @DECON_9692 
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+03CA:   object 73@ exists 
+jf @DECON_9395 
+Object.CollisionDetection(73@) = True
+
+:DECON_9395
+00BE: text_clear_all 
+if 
+  $FLAG_PLAYER_IN_CRANE == 0 
+jf @DECON_9429 
+Player.CanMove($PLAYER_CHAR) = True
+jump @DECON_9436 
+
+:DECON_9429
+$10494 = 0 
+
+:DECON_9436
+select_interior 62@ 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+if 
+03CA:   object $2671[2] exists 
+jf @DECON_9470 
+Object.Destroy($2671[2])
+
+:DECON_9470
+if 
+056D:   actor 114@ defined 
+jf @DECON_9491 
+Actor.DestroyInstantly(114@)
+
+:DECON_9491
+43@ = 0 
+
+:DECON_9498
+if 
+  10 > 43@ 
+jf @DECON_9656 
+if 
+056D:   actor 104@(43@,10i) defined 
+jf @DECON_9642 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_9642 
+if 
+   not Actor.Driving(104@(43@,10i))
+jf @DECON_9616 
+Actor.LockInCurrentPosition(104@(43@,10i)) = False
+0619: enable_actor 104@(43@,10i) collision_detection 1 
+0337: set_actor 104@(43@,10i) visibility 1 
+jump @DECON_9642 
+
+:DECON_9616
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar(104@(43@,10i))
+Car.LockInCurrentPosition($TEMPVAR_ACTOR_CAR) = False
+0338: set_car $TEMPVAR_ACTOR_CAR visibility 1 
+
+:DECON_9642
+43@ += 1 
+jump @DECON_9498 
+
+:DECON_9656
+if 
+  $FLAG_PLAYER_IN_CRANE == 1 
+jf @DECON_9681 
+$1911 = 1 
+
+:DECON_9681
+040D: unload_wav 3 
+gosub @DECON_20814 
+
+:DECON_9692
+return 
+
+:DECON_9694
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DECON_9769 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -2053.226 139.1389 cornerB -2135.449 309.5472 
+jf @DECON_9762 
+03C7: set_sensitivity_to_crime 0.0 
+jump @DECON_9769 
+
+:DECON_9762
+03C7: set_sensitivity_to_crime 1.0 
+
+:DECON_9769
+if 
+  35@ == 0 
+jf @DECON_9913 
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+03CA:   object 73@ exists 
+jf @DECON_9834 
+125@ = Marker.CreateAboveObject(73@)
+Marker.SetColor(125@, 0)
+
+:DECON_9834
+018A: 124@ = create_checkpoint_at -2048.644 250.1341 35.54 
+00BB: show_text_lowpriority GXT 'GAR2_10' time 7000 flag 1  // ~s~Bury the ~r~foreman~s~ and his toilet.
+32@ = 0 
+63@ = 0 
+65@ = 4000 
+173@ = 0 
+168@ = -1 
+35@ += 1 
+
+:DECON_9913
+if 
+  35@ == 1 
+jf @DECON_10844 
+if 
+  65@ > 5000 
+jf @DECON_10513 
+if 
+876F:   not text_priority_displayed 
+jf @DECON_10513 
+if 
+03CA:   object 73@ exists 
+jf @DECON_10513 
+05A8: get_object 73@ speed_to 46@ 
+if or
+  46@ > 2.0 
+0179:   actor $PLAYER_ACTOR colliding_with_object 73@ 
+jf @DECON_10513 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @DECON_10513 
+0871: init_jump_table 63@ total_jumps 10 default_jump 0 @DECON_10452 jumps 0 @DECON_10162 1 @DECON_10191 2 @DECON_10220 3 @DECON_10249 4 @DECON_10278 5 @DECON_10307 6 @DECON_10336 
+0872: jump_table_jumps 7 @DECON_10365 8 @DECON_10394 9 @DECON_10423 -1 @DECON_10452 -1 @DECON_10452 -1 @DECON_10452 -1 @DECON_10452 -1 @DECON_10452 -1 @DECON_10452 
+
+:DECON_10162
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AC' // s$  // ~z~Oh God, no!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16602 // = constant 
+jump @DECON_10452 
+
+:DECON_10191
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AD' // s$  // ~z~Oh god! Argh, I'm gonna barf!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16603 // = constant 
+jump @DECON_10452 
+
+:DECON_10220
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AE' // s$  // ~z~Oh, my suit, it's ruined!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16604 // = constant 
+jump @DECON_10452 
+
+:DECON_10249
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AF' // s$  // ~z~Oh God the stench!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16605 // = constant 
+jump @DECON_10452 
+
+:DECON_10278
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AG' // s$  // ~z~Please, somebody help!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16606 // = constant 
+jump @DECON_10452 
+
+:DECON_10307
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AH' // s$  // ~z~I'm gonna throw - huurrgghh!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16607 // = constant 
+jump @DECON_10452 
+
+:DECON_10336
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AJ' // s$  // ~z~Oh, my own shit!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16608 // = constant 
+jump @DECON_10452 
+
+:DECON_10365
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AK' // s$  // ~z~Shouldn't have had that goddam curry!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16609 // = constant 
+jump @DECON_10452 
+
+:DECON_10394
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AL' // s$  // ~z~Oh God, is that corn?
+04AE: $ACTOR_SPEECH_WAV_FILE = 16610 // = constant 
+jump @DECON_10452 
+
+:DECON_10423
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_AM' // s$  // ~z~Urgh, it's all in my mouth!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16611 // = constant 
+jump @DECON_10452 
+
+:DECON_10452
+create_thread @AUDIOL -1 0 0 1 0 
+63@ += 1 
+if 
+  63@ > 7 
+jf @DECON_10502 
+63@ = 0 
+
+:DECON_10502
+65@ = 0 
+wait 1 
+
+:DECON_10513
+if and
+  173@ > 150000 
+  151000 > 173@ 
+jf @DECON_10579 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'GAR2_34' time 7000 flag 1  // ~s~Hurry up! The cops will be here soon!
+173@ = 151001 
+65@ = 0 
+
+:DECON_10579
+if 
+  173@ > 200000 
+jf @DECON_10688 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 1
+jf @DECON_10625 
+Player.WantedLevel($PLAYER_CHAR) = 2
+
+:DECON_10625
+085A: spawn_emergency_vehicle_model #COPCARSF on_street_nearest_to -2039.255 232.481 33.9528 
+085A: spawn_emergency_vehicle_model #COPCARSF on_street_nearest_to -2038.185 254.2709 34.0893 
+37@ = 1 
+00BC: show_text_highpriority GXT 'GAR2_35' time 5000 flag 1  // ~r~You took too long to bury the foreman.
+
+:DECON_10688
+if 
+03CA:   object 73@ exists 
+jf @DECON_10837 
+if 
+04E6:   object 73@ near_point -2048.886 250.6607 32.5177 radius 2.898 5.05 2.0 flag 0 
+jf @DECON_10837 
+if and
+876F:   not text_priority_displayed 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @DECON_10837 
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'GAR2_36' time 7000 flag 1  // ~s~Get in a ~b~cement truck~s~.
+Marker.Disable(124@)
+Marker.Disable(125@)
+35@ += 1 
+32@ = 0 
+33@ = 0 
+
+:DECON_10837
+gosub @DECON_11797 
+
+:DECON_10844
+if and
+  35@ > 1 
+  4 > 35@ 
+jf @DECON_11121 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DECON_11082 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+   Car.Id($TEMPVAR_ACTOR_CAR) == #CEMENT
+jf @DECON_11043 
+if 
+   not 168@ == 1 
+jf @DECON_11036 
+00BC: show_text_highpriority GXT 'GAR2_37' time 7000 flag 1  // ~s~Back into position in front of the ~y~hole~s~.
+if 
+075C:   marker 126@ enabled 
+jf @DECON_10967 
+Marker.Disable(126@)
+
+:DECON_10967
+if 
+075C:   marker 127@ enabled 
+jf @DECON_10988 
+Marker.Disable(127@)
+
+:DECON_10988
+if 
+075C:   marker 124@ enabled 
+jf @DECON_11009 
+Marker.Disable(124@)
+
+:DECON_11009
+018A: 124@ = create_checkpoint_at -2049.707 240.5694 34.762 
+168@ = 1 
+
+:DECON_11036
+jump @DECON_11075 
+
+:DECON_11043
+if 
+   not 168@ == 0 
+jf @DECON_11075 
+gosub @DECON_11648 
+168@ = 0 
+
+:DECON_11075
+jump @DECON_11114 
+
+:DECON_11082
+if 
+   not 168@ == 0 
+jf @DECON_11114 
+gosub @DECON_11648 
+168@ = 0 
+
+:DECON_11114
+gosub @DECON_11797 
+
+:DECON_11121
+if 
+  35@ == 2 
+jf @DECON_11267 
+32@ = 0 
+33@ = 0 
+35@ += 1 
+if 
+  165@ == 0 
+jf @DECON_11267 
+if 
+03CA:   object 73@ exists 
+jf @DECON_11267 
+if 
+82CC:   not object 73@ bounding_sphere_visible 
+jf @DECON_11267 
+Object.PutAt(73@, -2048.957, 250.2059, 32.6542)
+Object.Angle(73@) = 158.56
+0453: set_object 73@ XYZ_rotation -170.1394 -88.8094 -21.44 
+165@ = 1 
+
+:DECON_11267
+if 
+  35@ == 3 
+jf @DECON_11621 
+if 
+  165@ == 0 
+jf @DECON_11392 
+if 
+03CA:   object 73@ exists 
+jf @DECON_11392 
+if 
+82CC:   not object 73@ bounding_sphere_visible 
+jf @DECON_11392 
+Object.PutAt(73@, -2048.957, 250.2059, 32.6542)
+Object.Angle(73@) = 158.56
+0453: set_object 73@ XYZ_rotation -170.1394 -88.8094 -21.44 
+165@ = 1 
+
+:DECON_11392
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -2049.707 240.5694 34.762 radius 3.0 3.0 3.0 
+jf @DECON_11621 
+if 
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #CEMENT)
+jf @DECON_11572 
+if 
+01C1:   car 90@ stopped 
+jf @DECON_11565 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_11565 
+$TEMPVAR_ANGLE = Car.Angle(90@)
+if and
+  190.0 > $TEMPVAR_ANGLE 
+  $TEMPVAR_ANGLE > 170.0 
+jf @DECON_11549 
+Marker.Disable(124@)
+35@ = 99 
+jump @DECON_11565 
+
+:DECON_11549
+00BC: show_text_highpriority GXT 'GAR2_14' time 1000 flag 1  // ~s~Straighten up and back the cement truck towards the hole.
+
+:DECON_11565
+jump @DECON_11614 
+
+:DECON_11572
+if 
+  32@ > 30000 
+jf @DECON_11614 
+00BC: show_text_highpriority GXT 'GAR2_20' time 7000 flag 1  // ~s~You need a cement truck!
+32@ = 0 
+
+:DECON_11614
+jump @DECON_11621 
+
+:DECON_11621
+if 
+  35@ == 99 
+jf @DECON_11646 
+gosub @DECON_20814 
+
+:DECON_11646
+return 
+
+:DECON_11648
+if 
+075C:   marker 124@ enabled 
+jf @DECON_11669 
+Marker.Disable(124@)
+
+:DECON_11669
+if 
+   not Car.Wrecked(85@)
+jf @DECON_11732 
+if 
+875C:   not marker 126@ enabled 
+jf @DECON_11732 
+126@ = Marker.CreateAboveCar(85@)
+07E0: set_marker 126@ type_to 1 
+00BC: show_text_highpriority GXT 'GAR2_36' time 7000 flag 1  // ~s~Get in a ~b~cement truck~s~.
+
+:DECON_11732
+if 
+   not Car.Wrecked(89@)
+jf @DECON_11795 
+if 
+875C:   not marker 127@ enabled 
+jf @DECON_11795 
+127@ = Marker.CreateAboveCar(89@)
+07E0: set_marker 127@ type_to 1 
+00BC: show_text_highpriority GXT 'GAR2_36' time 7000 flag 1  // ~s~Get in a ~b~cement truck~s~.
+
+:DECON_11795
+return 
+
+:DECON_11797
+if 
+056E:   car 85@ defined 
+jf @DECON_11927 
+if 
+   not Car.Wrecked(85@)
+jf @DECON_11910 
+if 
+01AF:   car 85@ sphere 0 in_sphere -2049.199 250.3882 32.9084 radius 2.454 5.042 2.3 
+jf @DECON_11903 
+if 
+82CA:   not car 85@ bounding_sphere_visible 
+jf @DECON_11903 
+Car.Destroy(85@)
+Marker.Disable(126@)
+
+:DECON_11903
+jump @DECON_11920 
+
+:DECON_11910
+Car.RemoveReferences(85@)
+Marker.Disable(126@)
+
+:DECON_11920
+jump @DECON_12072 
+
+:DECON_11927
+if 
+80C2:   not sphere_onscreen -2112.603 193.7894 33.6684 radius 5.0 
+jf @DECON_12072 
+if 
+838A:   not any_car_in_cube_cornerA -2112.603 193.7894 33.6684 cornerB 3.0 3.0 3.0 
+jf @DECON_12072 
+85@ = Car.Create(#CEMENT, -2112.603, 193.7894, 33.6684)
+Car.Angle(85@) = 276.2221
+if 
+075C:   marker 126@ enabled 
+jf @DECON_12057 
+Marker.Disable(126@)
+
+:DECON_12057
+126@ = Marker.CreateAboveCar(85@)
+07E0: set_marker 126@ type_to 1 
+
+:DECON_12072
+if 
+056E:   car 89@ defined 
+jf @DECON_12202 
+if 
+   not Car.Wrecked(89@)
+jf @DECON_12185 
+if 
+01AF:   car 89@ sphere 0 in_sphere -2049.199 250.3882 32.9084 radius 2.454 5.042 2.3 
+jf @DECON_12178 
+if 
+82CA:   not car 89@ bounding_sphere_visible 
+jf @DECON_12178 
+Car.Destroy(89@)
+Marker.Disable(127@)
+
+:DECON_12178
+jump @DECON_12195 
+
+:DECON_12185
+Car.RemoveReferences(89@)
+Marker.Disable(127@)
+
+:DECON_12195
+jump @DECON_12347 
+
+:DECON_12202
+if 
+80C2:   not sphere_onscreen -2037.176 269.7917 34.9191 radius 5.0 
+jf @DECON_12347 
+if 
+838A:   not any_car_in_cube_cornerA -2037.176 269.7917 34.9191 cornerB 3.0 3.0 3.0 
+jf @DECON_12347 
+89@ = Car.Create(#CEMENT, -2037.176, 269.7917, 34.9191)
+Car.Angle(89@) = 179.5245
+if 
+075C:   marker 127@ enabled 
+jf @DECON_12332 
+Marker.Disable(127@)
+
+:DECON_12332
+127@ = Marker.CreateAboveCar(89@)
+07E0: set_marker 127@ type_to 1 
+
+:DECON_12347
+return 
+
+:DECON_12349
+if 
+  35@ == 0 
+jf @DECON_13158 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 250 
+
+:DECON_12383
+if 
+fading 
+jf @DECON_12407 
+wait 0 
+jump @DECON_12383 
+
+:DECON_12407
+03CF: load_wav 12600 as 3 
+
+:DECON_12414
+if 
+83D0:   not wav 3 loaded 
+jf @DECON_12440 
+wait 0 
+jump @DECON_12414 
+
+:DECON_12440
+if 
+03CA:   object 73@ exists 
+jf @DECON_12522 
+if 
+82CC:   not object 73@ bounding_sphere_visible 
+jf @DECON_12522 
+Object.PutAt(73@, -2048.957, 250.2059, 32.6542)
+Object.Angle(73@) = 158.56
+0453: set_object 73@ XYZ_rotation -170.1394 -88.8094 -21.44 
+
+:DECON_12522
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2046.33, 255.5639, 35.1158, 0.0, 0.0, 0.0)
+Camera.PointAt(-2046.688, 254.6398, 34.9808, 2)
+43@ = 0 
+
+:DECON_12584
+if 
+  10 > 43@ 
+jf @DECON_12656 
+if 
+056D:   actor 104@(43@,10i) defined 
+jf @DECON_12642 
+Actor.DestroyInstantly(104@(43@,10i))
+104@(43@,10i) = 0 
+
+:DECON_12642
+43@ += 1 
+jump @DECON_12584 
+
+:DECON_12656
+Actor.PutAt($PLAYER_ACTOR, -2049.734, 241.7195, 70.7037)
+Actor.Angle($PLAYER_ACTOR) = 176.835
+43@ = 0 
+
+:DECON_12693
+if 
+  7 > 43@ 
+jf @DECON_12806 
+if 
+   not Car.Wrecked(91@(43@,7i))
+jf @DECON_12792 
+if 
+01AF:   car 91@(43@,7i) sphere 0 in_sphere -2049.734 241.7195 34.7037 radius 7.0 7.0 5.0 
+jf @DECON_12792 
+Car.Destroy(91@(43@,7i))
+
+:DECON_12792
+43@ += 1 
+jump @DECON_12693 
+
+:DECON_12806
+43@ = 0 
+
+:DECON_12813
+if 
+  7 > 43@ 
+jf @DECON_12942 
+if 
+   not Car.Wrecked(91@(43@,7i))
+jf @DECON_12919 
+if 
+01AF:   car 91@(43@,7i) sphere 0 in_sphere -2048.886 250.6607 32.5177 radius 2.898 5.05 2.0 
+jf @DECON_12912 
+Car.Destroy(91@(43@,7i))
+
+:DECON_12912
+jump @DECON_12928 
+
+:DECON_12919
+Car.Destroy(91@(43@,7i))
+
+:DECON_12928
+43@ += 1 
+jump @DECON_12813 
+
+:DECON_12942
+0395: clear_area 1 at -2049.734 241.7195 34.7037 radius 10.0 
+Actor.PutAt($PLAYER_ACTOR, -2049.734, 241.7195, 34.7037)
+Actor.Angle($PLAYER_ACTOR) = 176.835
+if 
+   not Car.Wrecked(90@)
+jf @DECON_13108 
+07C6: set_car 90@ axis_angle_relation_to -0.0448 0.0178 1.003 -0.0611 
+81@ = Object.Init(#HUBHOLE3_SFSE, -2049.171, 250.3193, 30.8784)
+066C: 179@ = attach_particle "CEMENT" to_car 90@ with_offset 0.0 -4.4 0.0 rotation 0.0 -1.0 0.0 type 1 
+
+:DECON_13108
+wait 500 
+fade 1 250 
+
+:DECON_13120
+if 
+fading 
+jf @DECON_13144 
+wait 0 
+jump @DECON_13120 
+
+:DECON_13144
+32@ = 0 
+35@ += 1 
+
+:DECON_13158
+if 
+  35@ == 1 
+jf @DECON_13259 
+46@ = 0.0 
+
+:DECON_13186
+if 
+  1.0 > 46@ 
+jf @DECON_13252 
+wait 0 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_13235 
+08A4: set_car 90@ extra_parts_angle_to 46@ 
+
+:DECON_13235
+0079: 46@ += frame_delta_time * 0.01 // (float) 
+jump @DECON_13186 
+
+:DECON_13252
+35@ += 1 
+
+:DECON_13259
+if 
+  35@ == 2 
+jf @DECON_13377 
+if 
+  32@ > 2000 
+jf @DECON_13377 
+064C: make_particle 179@ visible 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_13363 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 90@ with_offset 0.0 -4.4 0.0 
+03D7: set_wav 3 location $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+03D1: play_wav 3 
+
+:DECON_13363
+32@ = 0 
+35@ += 1 
+
+:DECON_13377
+if 
+  35@ == 3 
+jf @DECON_13421 
+if 
+  32@ > 1000 
+jf @DECON_13421 
+35@ += 1 
+
+:DECON_13421
+if 
+  35@ == 4 
+jf @DECON_13510 
+if 
+034E: move_object 81@ to -2049.171 250.3193 34.177 speed 0.01 0.01 0.009 collision_check 0 
+jf @DECON_13510 
+32@ = 0 
+040D: unload_wav 3 
+064E: stop_particle 179@ 
+35@ += 1 
+
+:DECON_13510
+if 
+  35@ == 5 
+jf @DECON_13554 
+if 
+  32@ > 2000 
+jf @DECON_13554 
+35@ = 99 
+
+:DECON_13554
+if 
+  35@ == 99 
+jf @DECON_13614 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_13588 
+
+:DECON_13588
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+040D: unload_wav 3 
+36@ = 1 
+
+:DECON_13614
+return 
+
+:DECON_13616
+if and
+  39@ == 1 
+  141@ == 0 
+jf @DECON_14213 
+43@ = 0 
+
+:DECON_13648
+if 
+  6 > 43@ 
+jf @DECON_13739 
+if 
+056D:   actor 98@(43@,6i) defined 
+jf @DECON_13725 
+if or
+051A:   actor 98@(43@,6i) damaged_by_actor $PLAYER_ACTOR 
+   Actor.Dead(98@(43@,6i))
+jf @DECON_13725 
+141@ = 1 
+
+:DECON_13725
+43@ += 1 
+jump @DECON_13648 
+
+:DECON_13739
+if 
+056D:   actor 117@ defined 
+jf @DECON_13786 
+if or
+051A:   actor 117@ damaged_by_actor $PLAYER_ACTOR 
+   Actor.Dead(117@)
+jf @DECON_13786 
+141@ = 1 
+
+:DECON_13786
+if 
+056D:   actor 115@ defined 
+jf @DECON_13833 
+if or
+051A:   actor 115@ damaged_by_actor $PLAYER_ACTOR 
+   Actor.Dead(115@)
+jf @DECON_13833 
+141@ = 1 
+
+:DECON_13833
+43@ = 0 
+
+:DECON_13840
+if 
+  6 > 43@ 
+jf @DECON_13930 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_13916 
+071E: get_object $2671(43@,6i) health_to 44@ 
+if 
+  900 > 44@ 
+jf @DECON_13916 
+141@ = 1 
+
+:DECON_13916
+43@ += 1 
+jump @DECON_13840 
+
+:DECON_13930
+43@ = 0 
+
+:DECON_13937
+if 
+  7 > 43@ 
+jf @DECON_14069 
+if 
+056E:   car 91@(43@,7i) defined 
+jf @DECON_14055 
+if 
+   not Car.Wrecked(91@(43@,7i))
+jf @DECON_14055 
+if 
+   Actor.InCar($PLAYER_ACTOR, 91@(43@,7i))
+jf @DECON_14025 
+141@ = 1 
+
+:DECON_14025
+if 
+051C:   car 91@(43@,7i) damaged_by_actor $PLAYER_ACTOR 
+jf @DECON_14055 
+141@ = 1 
+
+:DECON_14055
+43@ += 1 
+jump @DECON_13937 
+
+:DECON_14069
+if 
+  141@ == 1 
+jf @DECON_14155 
+43@ = 0 
+
+:DECON_14094
+if 
+  10 > 43@ 
+jf @DECON_14155 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_14141 
+0687: clear_actor 104@(43@,10i) task 
+
+:DECON_14141
+43@ += 1 
+jump @DECON_14094 
+
+:DECON_14155
+if 
+  141@ == 1 
+jf @DECON_14206 
+$7234 = 180000 
+014E: start_timer_at $7234 count_in_direction 1 // global_variable 
+00BB: show_text_lowpriority GXT 'GAR2_41' time 7000 flag 1  // ~s~Destroy all the ~g~portables~s~ before the cops arrive!
+
+:DECON_14206
+jump @DECON_14307 
+
+:DECON_14213
+if 
+  169@ == 0 
+jf @DECON_14307 
+if and
+88FE:   not text_box_displayed 
+876F:   not text_priority_displayed 
+jf @DECON_14307 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14307 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+   Car.Id($TEMPVAR_ACTOR_CAR) == #DOZER
+jf @DECON_14307 
+03E5: show_text_box 'GAR2_42'  // Be careful to avoid explosive barrels!
+169@ += 1 
+
+:DECON_14307
+if and
+  167@ == 0 
+  2 >= 34@ 
+jf @DECON_14389 
+if and
+   Car.Wrecked(83@)
+   Car.Wrecked(84@)
+jf @DECON_14389 
+if 
+876F:   not text_priority_displayed 
+jf @DECON_14389 
+00BC: show_text_highpriority GXT 'GAR2_39' time 7000 flag 1  // ~s~Other heavy vehicles can destroy the ~g~portables~s~.
+167@ += 1 
+
+:DECON_14389
+if 
+  141@ == 1 
+jf @DECON_16010 
+if 
+   not Actor.Dead(117@)
+jf @DECON_14521 
+062E: get_actor 117@ task 1560 status_store_to 43@ // ret 7 if not found 
+if 
+04A4:   43@ == 7 // == constant 
+jf @DECON_14521 
+0615: define_AS_pack_begin 49@ 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 20.0 
+05DD: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 300.0 timelimit 60000 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 117@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+Actor.RemoveReferences(117@)
+111@ = 0 
+
+:DECON_14521
+0615: define_AS_pack_begin 176@ 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14566 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 5.0 
+jump @DECON_14583 
+
+:DECON_14566
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 15.0 
+
+:DECON_14583
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14641 
+0605: actor -1 perform_animation "FIGHTIDLE" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+jump @DECON_14641 
+
+:DECON_14641
+0616: define_AS_pack_end 176@ 
+0615: define_AS_pack_begin 177@ 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14691 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 7.5 
+jump @DECON_14708 
+
+:DECON_14691
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 10.0 
+
+:DECON_14708
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14766 
+0605: actor -1 perform_animation "FIGHTIDLE" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+jump @DECON_14766 
+
+:DECON_14766
+0616: define_AS_pack_end 177@ 
+0615: define_AS_pack_begin 178@ 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_14816 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 10.0 
+jump @DECON_14833 
+
+:DECON_14816
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 60000 stop_within_radius 20.0 
+
+:DECON_14833
+05DB: AS_actor -1 flee_from_actor $PLAYER_ACTOR from_origin_radius 20.0 timelimit 3000 
+0616: define_AS_pack_end 178@ 
+43@ = 0 
+
+:DECON_14860
+if 
+  2 > 43@ 
+jf @DECON_14917 
+180@(43@,2i) = -1 
+182@(43@,2f) = 9999.0 
+43@ += 1 
+jump @DECON_14860 
+
+:DECON_14917
+43@ = 0 
+
+:DECON_14924
+if 
+  10 > 43@ 
+jf @DECON_15168 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_15154 
+Actor.StorePos(104@(43@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 56@, 57@, 58@)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 56@ 57@ 
+if 
+0027:   182@ > $DISTANCE_BETWEEN_POINTS // (float) 
+jf @DECON_15069 
+0087: 183@ = 182@ // (float) 
+0089: 182@ = $DISTANCE_BETWEEN_POINTS // (float) 
+0085: 181@ = 180@ // (int) 
+0085: 180@ = 43@ // (int) 
+jump @DECON_15104 
+
+:DECON_15069
+if 
+0027:   183@ > $DISTANCE_BETWEEN_POINTS // (float) 
+jf @DECON_15104 
+0089: 183@ = $DISTANCE_BETWEEN_POINTS // (float) 
+0085: 181@ = 43@ // (int) 
+
+:DECON_15104
+if and
+  $DISTANCE_BETWEEN_POINTS > 500.0 
+82CB:   not actor 104@(43@,10i) bounding_sphere_visible 
+jf @DECON_15154 
+Actor.DestroyInstantly(104@(43@,10i))
+104@(43@,10i) = 0 
+
+:DECON_15154
+43@ += 1 
+jump @DECON_14924 
+
+:DECON_15168
+43@ = 0 
+
+:DECON_15175
+if 
+  10 > 43@ 
+jf @DECON_15995 
+if 
+   not Actor.Dead(104@(43@,10i))
+jf @DECON_15981 
+if 
+   not Actor.Driving(104@(43@,10i))
+jf @DECON_15715 
+if 
+02D8:   actor 104@(43@,10i) current_weapon == 22 
+jf @DECON_15316 
+062E: get_actor 104@(43@,10i) task 1506 status_store_to 44@ // ret 7 if not found 
+if 
+04A4:   44@ == 7 // == constant 
+jf @DECON_15309 
+0687: clear_actor 104@(43@,10i) task 
+05E2: AS_actor 104@(43@,10i) kill_actor $PLAYER_ACTOR 
+
+:DECON_15309
+jump @DECON_15708 
+
+:DECON_15316
+if or
+003B:   43@ == 180@ // (int) 
+003B:   43@ == 181@ // (int) 
+jf @DECON_15404 
+062E: get_actor 104@(43@,10i) task 1506 status_store_to 44@ // ret 7 if not found 
+if 
+04A4:   44@ == 7 // == constant 
+jf @DECON_15397 
+0687: clear_actor 104@(43@,10i) task 
+05E2: AS_actor 104@(43@,10i) kill_actor $PLAYER_ACTOR 
+
+:DECON_15397
+jump @DECON_15708 
+
+:DECON_15404
+062E: get_actor 104@(43@,10i) task 1560 status_store_to 44@ // ret 7 if not found 
+if 
+04A4:   44@ == 7 // == constant 
+jf @DECON_15566 
+0209: 44@ = random_int_in_ranges 0 9 
+if 
+  4 > 44@ 
+jf @DECON_15492 
+0687: clear_actor 104@(43@,10i) task 
+0618: assign_actor 104@(43@,10i) to_AS_pack 176@ 
+jump @DECON_15559 
+
+:DECON_15492
+if 
+  8 > 44@ 
+jf @DECON_15538 
+0687: clear_actor 104@(43@,10i) task 
+0618: assign_actor 104@(43@,10i) to_AS_pack 177@ 
+jump @DECON_15559 
+
+:DECON_15538
+0687: clear_actor 104@(43@,10i) task 
+0618: assign_actor 104@(43@,10i) to_AS_pack 178@ 
+
+:DECON_15559
+jump @DECON_15708 
+
+:DECON_15566
+if or
+   Actor.Animation(104@(43@,10i)) == "PANIC_POINT"
+   Actor.Animation(104@(43@,10i)) == "PANIC_SHOUT"
+jf @DECON_15708 
+Actor.StorePos(104@(43@,10i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 56@, 57@, 58@)
+0087: 50@ = 56@ // (float) 
+0065: 50@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 51@ = 57@ // (float) 
+0065: 51@ -= $TEMPVAR_FLOAT_2 // (float) 
+0604: get_Z_angle_for_point 50@ 51@ store_to $TEMPVAR_ANGLE 
+Actor.Angle(104@(43@,10i)) = $TEMPVAR_ANGLE
+
+:DECON_15708
+jump @DECON_15981 
+
+:DECON_15715
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar(104@(43@,10i))
+04E0: car $TEMPVAR_ACTOR_CAR abandon_path_radius 255 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @DECON_15772 
+if 
+060E:   car $TEMPVAR_ACTOR_CAR assigned_to_path 
+jf @DECON_15772 
+05EC: release_car $TEMPVAR_ACTOR_CAR from_path 
+
+:DECON_15772
+062E: get_actor 104@(43@,10i) task 1560 status_store_to 44@ // ret 7 if not found 
+if 
+04A4:   44@ == 7 // == constant 
+jf @DECON_15882 
+0615: define_AS_pack_begin 49@ 
+06E1: AS_actor -1 using_car $TEMPVAR_ACTOR_CAR target_car -1 with_order 3 max_speed 40.0 traffic_flag 3 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 104@(43@,10i) to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+if 
+   not 184@ == 0 
+jf @DECON_15875 
+184@ = 0 
+
+:DECON_15875
+jump @DECON_15981 
+
+:DECON_15882
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @DECON_15981 
+if 
+0547:   actor $PLAYER_ACTOR colliding_with_car $TEMPVAR_ACTOR_CAR 
+jf @DECON_15981 
+if 
+  184@ == 0 
+jf @DECON_15981 
+0615: define_AS_pack_begin 49@ 
+06C7: AS_actor -1 driver_of_car $TEMPVAR_ACTOR_CAR perform_action 3 timelimit 2500 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 104@(43@,10i) to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+184@ = 1 
+
+:DECON_15981
+43@ += 1 
+jump @DECON_15175 
+
+:DECON_15995
+061B: remove_references_to_AS_pack 176@ 
+061B: remove_references_to_AS_pack 177@ 
+061B: remove_references_to_AS_pack 178@ 
+
+:DECON_16010
+if 
+  141@ == 0 
+jf @DECON_16754 
+if 
+   not Actor.Dead(102@)
+jf @DECON_16754 
+if 
+  146@ == 0 
+jf @DECON_16173 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2074.264 222.39 34.7395 radius 30.0 30.0 4.0 
+jf @DECON_16173 
+0687: clear_actor 102@ task 
+0615: define_AS_pack_begin 49@ 
+05D9: AS_actor -1 run_to_actor $PLAYER_ACTOR timelimit 50000 stop_within_radius 3.0 
+0639: AS_actor -1 rotate_to_actor $PLAYER_ACTOR 
+05C8: AS_actor -1 look_around 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 102@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+146@ += 1 
+
+:DECON_16173
+if 
+  146@ == 1 
+jf @DECON_16610 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2074.264 222.39 34.7395 radius 30.0 30.0 4.0 
+jf @DECON_16513 
+if 
+876F:   not text_priority_displayed 
+jf @DECON_16506 
+if 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+jf @DECON_16506 
+if 
+0105:   actor 102@ near_actor $PLAYER_ACTOR radius 3.0 3.0 2.0 sphere 0 on_foot 
+jf @DECON_16499 
+0209: 43@ = random_int_in_ranges 0 3 
+if 
+  43@ == 0 
+jf @DECON_16374 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_BA' // s$  // ~z~Hey, where's your hard hat?
+04AE: $ACTOR_SPEECH_WAV_FILE = 16612 // = constant 
+create_thread @AUDIOL 102@ 1 0 1 0 
+
+:DECON_16374
+if 
+  43@ == 1 
+jf @DECON_16433 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_BB' // s$  // ~z~Are you supposed to be here?
+04AE: $ACTOR_SPEECH_WAV_FILE = 16613 // = constant 
+create_thread @AUDIOL 102@ 1 0 1 0 
+
+:DECON_16433
+if 
+  43@ == 2 
+jf @DECON_16492 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'GAR2_BC' // s$  // ~z~Hey, this site is dangerous!
+04AE: $ACTOR_SPEECH_WAV_FILE = 16614 // = constant 
+create_thread @AUDIOL 102@ 1 0 1 0 
+
+:DECON_16492
+146@ += 1 
+
+:DECON_16499
+33@ = 0 
+
+:DECON_16506
+jump @DECON_16610 
+
+:DECON_16513
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -2099.162 171.1465 34.0869 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+05D3: AS_actor -1 goto_point -2090.801 263.5923 34.7131 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 102@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+146@ = 0 
+
+:DECON_16610
+if 
+  146@ == 2 
+jf @DECON_16754 
+062E: get_actor 102@ task 1560 status_store_to 43@ // ret 7 if not found 
+if 
+04A4:   43@ == 7 // == constant 
+jf @DECON_16754 
+0615: define_AS_pack_begin 49@ 
+05D3: AS_actor -1 goto_point -2099.162 171.1465 34.0869 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+05D3: AS_actor -1 goto_point -2090.801 263.5923 34.7131 mode 4 time 60000 ms // versionA 
+05C8: AS_actor -1 look_around 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 102@ to_AS_pack 49@ 
+061B: remove_references_to_AS_pack 49@ 
+146@ += 1 
+
+:DECON_16754
+if 
+   not Actor.Dead(115@)
+jf @DECON_16833 
+if 
+   not Car.Wrecked(83@)
+jf @DECON_16826 
+if 
+060E:   car 83@ assigned_to_path 
+jf @DECON_16826 
+if 
+   not Actor.InCar(115@, 83@)
+jf @DECON_16826 
+05EC: release_car 83@ from_path 
+
+:DECON_16826
+jump @DECON_16870 
+
+:DECON_16833
+if 
+   not Car.Wrecked(83@)
+jf @DECON_16870 
+if 
+060E:   car 83@ assigned_to_path 
+jf @DECON_16870 
+05EC: release_car 83@ from_path 
+
+:DECON_16870
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DECON_16958 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_16943 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_16936 
+90@ = 0 
+90@ = Actor.MissionCar($PLAYER_ACTOR)
+
+:DECON_16936
+jump @DECON_16958 
+
+:DECON_16943
+90@ = 0 
+90@ = Actor.MissionCar($PLAYER_ACTOR)
+
+:DECON_16958
+43@ = 0 
+
+:DECON_16965
+if 
+  6 > 43@ 
+jf @DECON_18421 
+if 
+  67@ == 1 
+jf @DECON_17151 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_17151 
+if or
+08FF:   object $2671(43@,6i) received_damage_type 51 
+08FF:   object $2671(43@,6i) received_damage_type 35 
+08FF:   object $2671(43@,6i) received_damage_type 16 
+08FF:   object $2671(43@,6i) received_damage_type 20 
+08FF:   object $2671(43@,6i) received_damage_type 39 
+jf @DECON_17111 
+0662: printstring "DAMAGED_BY_EXPLOSION" 
+
+:DECON_17111
+if 
+08FF:   object $2671(43@,6i) received_damage_type 57 
+jf @DECON_17151 
+0662: printstring "DAMAGED_BY_ANY" 
+
+:DECON_17151
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_17340 
+if or
+08FF:   object $2671(43@,6i) received_damage_type 51 
+08FF:   object $2671(43@,6i) received_damage_type 35 
+08FF:   object $2671(43@,6i) received_damage_type 16 
+08FF:   object $2671(43@,6i) received_damage_type 20 
+08FF:   object $2671(43@,6i) received_damage_type 39 
+jf @DECON_17340 
+0900: clear_object $2671(43@,6i) last_weapon_damage 
+071E: get_object $2671(43@,6i) health_to 44@ 
+44@ += -500 
+if 
+  1 > 44@ 
+jf @DECON_17328 
+071F: set_object $2671(43@,6i) health_to 0 
+097C: attach_wav 3 to_object $2671(43@,6i) 
+03D1: play_wav 3 
+0723: break_object $2671(43@,6i) intensity 0 
+jump @DECON_17340 
+
+:DECON_17328
+071F: set_object $2671(43@,6i) health_to 44@ 
+
+:DECON_17340
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_17539 
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_17539 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_17539 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_17539 
+if 
+0897:   car 90@ collided_with_object $2671(43@,6i) 
+jf @DECON_17539 
+if 
+  171@ > 65000.0 
+jf @DECON_17539 
+071F: set_object $2671(43@,6i) health_to 0 
+097C: attach_wav 3 to_object $2671(43@,6i) 
+03D1: play_wav 3 
+0723: break_object $2671(43@,6i) intensity 0 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_17539 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_17539 
+Car.SetSpeedInstantly(90@, 170@)
+
+:DECON_17539
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_18180 
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_18180 
+071E: get_object $2671(43@,6i) health_to 159@(43@,6i) 
+if 
+001D:   153@(43@,6i) > 159@(43@,6i) // (int) 
+jf @DECON_18164 
+if 
+  159@(43@,6i) > 0 
+jf @DECON_18164 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_18018 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_18018 
+if 
+0897:   car 90@ collided_with_object $2671(43@,6i) 
+jf @DECON_18018 
+if 
+  170@ > 5.0 
+jf @DECON_18002 
+if 
+   not Car.Id(90@) == #DOZER
+jf @DECON_17827 
+0085: 44@ = 153@(43@,6i) // (int) 
+0062: 44@ -= 159@(43@,6i) // (int) 
+0093: 46@ = integer 44@ to_float 
+46@ *= 0.5 
+0092: 44@ = float 46@ to_integer 
+005A: 159@(43@,6i) += 44@ // (int) 
+071F: set_object $2671(43@,6i) health_to 159@(43@,6i) 
+jump @DECON_17995 
+
+:DECON_17827
+0085: 44@ = 153@(43@,6i) // (int) 
+0062: 44@ -= 159@(43@,6i) // (int) 
+44@ *= -30 
+005A: 159@(43@,6i) += 44@ // (int) 
+if 
+  0 > 159@(43@,6i) 
+jf @DECON_17903 
+159@(43@,6i) = 0 
+
+:DECON_17903
+if 
+  166@ == 0 
+jf @DECON_17979 
+if 
+  159@(43@,6i) > 10 
+jf @DECON_17979 
+if 
+876F:   not text_priority_displayed 
+jf @DECON_17979 
+00BC: show_text_highpriority GXT 'GAR2_38' time 5000 flag 1  // ~s~Keep ramming it!
+166@ = 1 
+
+:DECON_17979
+071F: set_object $2671(43@,6i) health_to 159@(43@,6i) 
+
+:DECON_17995
+jump @DECON_18018 
+
+:DECON_18002
+071F: set_object $2671(43@,6i) health_to 153@(43@,6i) 
+
+:DECON_18018
+if 
+  $FLAG_PLAYER_IN_CRANE == 1 
+jf @DECON_18073 
+071F: set_object $2671(43@,6i) health_to 0 
+097C: attach_wav 3 to_object $2671(43@,6i) 
+03D1: play_wav 3 
+0723: break_object $2671(43@,6i) intensity 0 
+
+:DECON_18073
+if 
+  159@(43@,6i) == 0 
+jf @DECON_18164 
+097C: attach_wav 3 to_object $2671(43@,6i) 
+03D1: play_wav 3 
+0723: break_object $2671(43@,6i) intensity 0 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_18164 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_18164 
+Car.SetSpeedInstantly(90@, 170@)
+
+:DECON_18164
+0085: 153@(43@,6i) = 159@(43@,6i) // (int) 
+
+:DECON_18180
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_18407 
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_18407 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_18407 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_18407 
+if 
+   Car.Id(90@) == #DOZER
+jf @DECON_18407 
+if 
+0897:   car 90@ collided_with_object $2671(43@,6i) 
+jf @DECON_18407 
+071E: get_object $2671(43@,6i) health_to 44@ 
+if 
+  10 > 44@ 
+jf @DECON_18407 
+071F: set_object $2671(43@,6i) health_to 0 
+097C: attach_wav 3 to_object $2671(43@,6i) 
+03D1: play_wav 3 
+0723: break_object $2671(43@,6i) intensity 0 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_18407 
+if 
+   Actor.InCar($PLAYER_ACTOR, 90@)
+jf @DECON_18407 
+Car.SetSpeedInstantly(90@, 170@)
+
+:DECON_18407
+43@ += 1 
+jump @DECON_16965 
+
+:DECON_18421
+43@ = 0 
+
+:DECON_18428
+if 
+  6 > 43@ 
+jf @DECON_19164 
+if 
+  152@ > 0 
+jf @DECON_19000 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_19000 
+071E: get_object $2671(43@,6i) health_to 44@ 
+if 
+  995 > 44@ 
+jf @DECON_19000 
+if 
+  44@ > 500 
+jf @DECON_18708 
+if 
+  134@(43@,6i) == 0 
+jf @DECON_18701 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2671(43@,6i) with_offset 3.252 -2.1084 0.0 
+gosub @DECON_20693 
+if 
+  190@ == 0 
+jf @DECON_18701 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_ANGLE = Object.Angle($2671(43@,6i))
+$TEMPVAR_ANGLE += 180.0 
+116@ = Actor.Create(Mission1, #WMYCON, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.Angle(116@) = $TEMPVAR_ANGLE
+Actor.Health(116@) = 50
+134@(43@,6i) += 1 
+43@ = 6 
+
+:DECON_18701
+jump @DECON_19000 
+
+:DECON_18708
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_18735 
+jump @DECON_19000 
+
+:DECON_18735
+if 
+   not 134@(43@,6i) == 99 
+jf @DECON_19000 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2671(43@,6i) with_offset 0.0 0.0 0.0 
+$TEMPVAR_ANGLE = Object.Angle($2671(43@,6i))
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_ANGLE += 180.0 
+116@ = Actor.Create(Mission1, #WMYCON, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.Angle(116@) = $TEMPVAR_ANGLE
+Actor.Health(116@) = 50
+134@(43@,6i) = 99 
+43@ = 6 
+Actor.StorePos($PLAYER_ACTOR, 56@, 57@, 58@)
+0089: 50@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 50@ -= 56@ // (float) 
+0089: 51@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 51@ -= 57@ // (float) 
+0209: 44@ = random_int_in_ranges 0 2 
+if 
+   not 44@ == 0 
+jf @DECON_18960 
+51@ *= -1.0 
+
+:DECON_18960
+0087: 53@ = 51@ // (float) 
+0087: 54@ = 50@ // (float) 
+54@ *= -1.0 
+0673: AS_actor 116@ dive_to_offset 53@ 54@ time_on_ground 1000 ms 
+
+:DECON_19000
+if 
+056D:   actor 116@ defined 
+jf @DECON_19143 
+if 
+   not Actor.Dead(116@)
+jf @DECON_19143 
+if 
+  140@ > 0 
+jf @DECON_19099 
+if 
+  2 > 140@ 
+jf @DECON_19087 
+Actor.GiveWeaponAndAmmo(116@, Shovel, 99999)
+jump @DECON_19099 
+
+:DECON_19087
+Actor.GiveWeaponAndAmmo(116@, Pistol, 99999)
+
+:DECON_19099
+07DD: set_actor 116@ attack_rate 30 // previously known as temper_to 
+Actor.WeaponAccuracy(116@) = 30
+060B: set_actor 116@ decision_maker_to 174@ 
+0085: 185@ = 116@ // (int) 
+gosub @DECON_19928 
+172@ = 0 
+
+:DECON_19143
+116@ = 0 
+43@ += 1 
+jump @DECON_18428 
+
+:DECON_19164
+if 
+  141@ == 1 
+jf @DECON_19687 
+if 
+  4 >= 152@ 
+jf @DECON_19207 
+172@ = 0 
+
+:DECON_19207
+if 
+  172@ > 20000 
+jf @DECON_19687 
+if 
+  152@ > 4 
+jf @DECON_19687 
+47@ = 200.0 
+44@ = -1 
+43@ = 0 
+
+:DECON_19268
+if 
+  6 > 43@ 
+jf @DECON_19424 
+if 
+03CA:   object $2671(43@,6i) exists 
+jf @DECON_19410 
+if 
+8366:   not object $2671(43@,6i) damaged 
+jf @DECON_19410 
+Object.StorePos($2671(43@,6i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.StorePos($PLAYER_ACTOR, 56@, 57@, 58@)
+0509: 46@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 56@ 57@ 
+if 
+0025:   47@ > 46@ // (float) 
+jf @DECON_19410 
+0087: 47@ = 46@ // (float) 
+0085: 44@ = 43@ // (int) 
+
+:DECON_19410
+43@ += 1 
+jump @DECON_19268 
+
+:DECON_19424
+if 
+   not 44@ == -1 
+jf @DECON_19687 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2671(44@,6i) with_offset 3.252 -2.1084 0.0 
+gosub @DECON_20693 
+if 
+  190@ == 0 
+jf @DECON_19687 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_ANGLE = Object.Angle($2671(44@,6i))
+$TEMPVAR_ANGLE += 180.0 
+116@ = Actor.Create(Mission1, #WMYCON, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Actor.Angle(116@) = $TEMPVAR_ANGLE
+Actor.Health(116@) = 50
+if 
+  140@ > 2 
+jf @DECON_19636 
+if 
+  5 > 140@ 
+jf @DECON_19624 
+Actor.GiveWeaponAndAmmo(116@, Shovel, 99999)
+jump @DECON_19636 
+
+:DECON_19624
+Actor.GiveWeaponAndAmmo(116@, Pistol, 99999)
+
+:DECON_19636
+07DD: set_actor 116@ attack_rate 30 // previously known as temper_to 
+Actor.WeaponAccuracy(116@) = 30
+060B: set_actor 116@ decision_maker_to 174@ 
+0085: 185@ = 116@ // (int) 
+116@ = 0 
+172@ = 0 
+gosub @DECON_19928 
+
+:DECON_19687
+43@ = 0 
+
+:DECON_19694
+if 
+  10 > 43@ 
+jf @DECON_19797 
+if 
+056D:   actor 104@(43@,10i) defined 
+jf @DECON_19783 
+if 
+   Actor.Dead(104@(43@,10i))
+jf @DECON_19783 
+Actor.RemoveReferences(104@(43@,10i))
+104@(43@,10i) = 0 
+142@(43@,10i) = 0 
+
+:DECON_19783
+43@ += 1 
+jump @DECON_19694 
+
+:DECON_19797
+gosub @DECON_20028 
+if 
+   not Car.Wrecked(90@)
+jf @DECON_19852 
+02E3: 170@ = car 90@ speed 
+06A3: get_car 90@ mass_to 46@ 
+0087: 171@ = 170@ // (float) 
+006B: 171@ *= 46@ // (float) 
+
+:DECON_19852
+if 
+075C:   marker 126@ enabled 
+jf @DECON_19889 
+if 
+   Car.Wrecked(85@)
+jf @DECON_19889 
+Marker.Disable(126@)
+
+:DECON_19889
+if 
+075C:   marker 127@ enabled 
+jf @DECON_19926 
+if 
+   Car.Wrecked(89@)
+jf @DECON_19926 
+Marker.Disable(127@)
+
+:DECON_19926
+return 
+
+:DECON_19928
+186@ = 0 
+
+:DECON_19935
+if 
+  4 > 186@ 
+jf @DECON_20019 
+if 
+  104@(186@,10i) == 0 
+jf @DECON_20005 
+0085: 104@(186@,10i) = 185@ // (int) 
+142@(186@,10i) = 0 
+186@ = 6 
+
+:DECON_20005
+186@ += 1 
+jump @DECON_19935 
+
+:DECON_20019
+gosub @DECON_20028 
+return 
+
+:DECON_20028
+152@ = 4 
+187@ = 0 
+
+:DECON_20042
+if 
+  4 > 187@ 
+jf @DECON_20101 
+if 
+056D:   actor 104@(187@,10i) defined 
+jf @DECON_20087 
+152@ -= 1 
+
+:DECON_20087
+187@ += 1 
+jump @DECON_20042 
+
+:DECON_20101
+return 
+03A9: save_newline_to_debug_file 
+05B6: 95 // AVAILABLE PEDS
+03A9: save_newline_to_debug_file 
+188@ = 0 
+
+:DECON_20244
+if 
+  10 > 188@ 
+jf @DECON_20552 
+03A9: save_newline_to_debug_file 
+05B6: 96 // MISSION PED 
+03A7: save_int_to_debug_file 188@ 
+05B6: 97 //  = 
+03A7: save_int_to_debug_file 104@(188@,10i) 
+188@ += 1 
+jump @DECON_20244 
+
+:DECON_20552
+03A9: save_newline_to_debug_file 
+05B6: 98 // AVAILABLE_MISSION_PEDS = 
+03A7: save_int_to_debug_file 152@ 
+03A9: save_newline_to_debug_file 
+return 
+
+:DECON_20693
+190@ = 0 
+189@ = 0 
+
+:DECON_20707
+if 
+  10 > 189@ 
+jf @DECON_20812 
+if 
+   not Actor.Dead(104@(189@,10i))
+jf @DECON_20798 
+if 
+00FF:   actor 104@(189@,10i) sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 1.5 1.5 3.0 on_foot 
+jf @DECON_20798 
+190@ = 1 
+
+:DECON_20798
+189@ += 1 
+jump @DECON_20707 
+
+:DECON_20812
+return 
+
+:DECON_20814
+34@ += 1 
+35@ = 0 
+63@ = 0 
+64@ = 0 
+65@ = 0 
+66@ = 0 
+32@ = 0 
+33@ = 0 
+return 
+
+:DECON_20872
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DECON_20966 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -2049.199 250.3882 32.9084 radius 2.454 5.042 2.3 
+jf @DECON_20966 
+Actor.PutAt($PLAYER_ACTOR, -2045.189, 241.7544, 34.9462)
+Actor.Angle($PLAYER_ACTOR) = 186.3532
+
+:DECON_20966
+03B6: replace_model_at -2049.171 250.3193 34.477 radius 20.0 from #HUBHOLE2_SFSE to #HUBHOLE1_SFSE 
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @DECON_21062 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:DECON_21062
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:DECON_21080
+if 
+03CA:   object 81@ exists 
+jf @DECON_21101 
+Object.Destroy(81@)
+
+:DECON_21101
+03B6: replace_model_at -2049.171 250.3193 34.477 radius 20.0 from #HUBHOLE2_SFSE to #HUBHOLE4_SFSE 
+0318: set_latest_mission_passed 'GAR_2'  // Deconstruction
+create_thread @SYND 
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$MARKER_TRIADS_SF_GARAGE = Marker.CreateIconAndSphere($ICON_CESAR, $X_SF_GARAGE, $Y_SF_GARAGE, $Z_SF_GARAGE)
+030C: progress_made = 1 
+0629: change_integer_stat 324 to 1 
+00BA: show_text_styled GXT 'M_PASSD' time 5000 style 1  // MISSION PASSED!
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+$GARAGE_TOTAL_PASSED_MISSIONS += 1 
+return 
+
+:DECON_21215
+create_thread @CLEANAU 
+040D: unload_wav 1 
+040D: unload_wav 2 
+040D: unload_wav 3 
+$10494 = 0 
+Model.Destroy(#PORTALOO)
+Model.Destroy(#PORTAKABIN)
+Model.Destroy(#BARREL4)
+Model.Destroy(#DOZER)
+Model.Destroy(#CEMENT)
+Model.Destroy(#DUMPER)
+Model.Destroy(#BOBCAT)
+Model.Destroy(#WMYCONB)
+Model.Destroy(#WMYCON)
+Model.Destroy(#SHOVEL)
+Model.Destroy(#COLT45)
+Marker.Disable(118@)
+Marker.Disable(119@)
+Marker.Disable(120@)
+Marker.Disable(121@)
+Marker.Disable(122@)
+Marker.Disable(123@)
+Marker.Disable(124@)
+Marker.Disable(125@)
+Marker.Disable(126@)
+Marker.Disable(127@)
+014F: stop_timer $7234 
+03C7: set_sensitivity_to_crime 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return

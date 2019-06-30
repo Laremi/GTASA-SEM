@@ -1,0 +1,1068 @@
+:RIOT1
+thread 'RIOT1' 
+gosub @RIOT1_94 
+if 
+wasted_or_busted 
+jf @RIOT1_85 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+gosub @RIOT1_3033 
+
+:RIOT1_85
+gosub @RIOT1_3204 
+end_thread 
+
+:RIOT1_94
+increment_mission_attempts 
+$ONMISSION = 1 
+054C: use_GXT_table 'RIOT1' 
+00BE: text_clear_all 
+wait 0 
+35@ = 0 
+36@ = 0 
+37@ = 0 
+38@ = 0 
+39@ = 0 
+40@ = 0 
+41@ = 0 
+42@ = 0 
+43@ = 0 
+89@ = 0 
+90@ = 0 
+91@ = 0 
+92@ = 0 
+93@ = 0 
+94@ = 0 
+95@ = 0 
+08F5: save_player_group 
+select_interior 5 
+02E4: load_cutscene_data 'RIOT_1A' 
+
+:RIOT1_249
+if 
+86B9:   not cutscene_data_loaded 
+jf @RIOT1_273 
+wait 0 
+jump @RIOT1_249 
+
+:RIOT1_273
+02E7: start_cutscene 
+fade 1 1000 
+
+:RIOT1_282
+if 
+82E9:   not cutscene_reached_end 
+jf @RIOT1_306 
+wait 0 
+jump @RIOT1_282 
+
+:RIOT1_306
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:RIOT1_319
+if 
+fading 
+jf @RIOT1_343 
+wait 0 
+jump @RIOT1_319 
+
+:RIOT1_343
+02EA: end_cutscene 
+if 
+856A:   not cutscene_skipped 
+jf @RIOT1_465 
+02E4: load_cutscene_data 'RIOT_1B' 
+
+:RIOT1_369
+if 
+86B9:   not cutscene_data_loaded 
+jf @RIOT1_393 
+wait 0 
+jump @RIOT1_369 
+
+:RIOT1_393
+02E7: start_cutscene 
+fade 1 1000 
+
+:RIOT1_402
+if 
+82E9:   not cutscene_reached_end 
+jf @RIOT1_426 
+wait 0 
+jump @RIOT1_402 
+
+:RIOT1_426
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:RIOT1_439
+if 
+fading 
+jf @RIOT1_463 
+wait 0 
+jump @RIOT1_439 
+
+:RIOT1_463
+02EA: end_cutscene 
+
+:RIOT1_465
+select_interior 0 
+08F6: restore_player_group 
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+06C8: enable_riot 1 
+0629: change_integer_stat 309 to 1 
+Model.Load(#GREENWOO)
+Model.Load(#SAVANNA)
+Model.Load(#CAMPER)
+023C: load_special_actor 'SWEET' as 1 // models 290-299 
+038B: load_requested_models 
+07E5: copy_decision_maker 65542 to $7998 
+Camera.SetAtPos(1254.68, -789.39, 91.03)
+0395: clear_area 1 at 1242.9 -805.4 82.9 radius 20.0 
+0674: set_car_model #CAMPER numberplate "OUTTHERE" 
+$7997 = Car.Create(#CAMPER, 1242.9, -805.4, 82.9)
+Car.Angle($7997) = 0.0
+0229: set_car $7997 primary_color_to 1 secondary_color_to 1 
+06ED: set_car $7997 paintjob 0 
+0294: set_car $7997 sprayable 0 
+0395: clear_area 1 at 1249.1 -804.9 82.9 radius 5.0 
+0674: set_car_model #SAVANNA numberplate "_VLA4L__" 
+$7996 = Car.Create(#SAVANNA, 1249.1, -804.9, 82.9)
+Car.Angle($7996) = 177.7
+0229: set_car $7996 primary_color_to 3 secondary_color_to 3 
+014C: set_parked_car_generator $2765 cars_to_generate_to 0 
+0395: clear_area 1 at 1254.3 -806.6 82.9 radius 5.0 
+0674: set_car_model #GREENWOO numberplate "GROVE4L_" 
+$7995 = Car.Create(#GREENWOO, 1254.3, -806.6, 82.9)
+0229: set_car $7995 primary_color_to 59 secondary_color_to 34 
+Car.Angle($7995) = 177.7
+0395: clear_area 1 at 1258.2 -814.4 83.1 radius 60.0 
+Actor.PutAt($PLAYER_ACTOR, 1258.2, -814.4, 83.1)
+Actor.Angle($PLAYER_ACTOR) = 40.0
+0395: clear_area 1 at 1257.6 -816.6 83.1 radius 5.0 
+$ACTOR_SWEET = Actor.Create(Mission2, #SPECIAL01, 1257.6, -816.6, 83.1)
+Actor.Angle($ACTOR_SWEET) = 39.9
+09F6: set_actor $ACTOR_SWEET unjackable_through_driver_seat 0 
+0568: set_actor $ACTOR_SWEET untargetable 1 
+039E: set_actor $ACTOR_SWEET locked 1 while_in_car 
+060B: set_actor $ACTOR_SWEET decision_maker_to $7998 
+02A9: set_actor $ACTOR_SWEET immune_to_nonplayer 1 
+0615: define_AS_pack_begin $7999 
+05D3: AS_actor -1 goto_point 1252.4 -810.3 83.1 mode 4 time -1 ms // versionA 
+07A1: set_walk_speed 4 
+05CA: AS_actor -1 enter_car $7995 passenger_seat 0 time -1 
+0616: define_AS_pack_end $7999 
+0618: assign_actor $ACTOR_SWEET to_AS_pack $7999 
+061B: remove_references_to_AS_pack $7999 
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Camera.SetPosition(1257.8, -815.0, 84.7, 0.0, 0.0, 0.0)
+Camera.PointAt(1246.3, -802.5, 82.7, 2)
+09F5: disable_player_mutal_activities 1 
+09D2: set_cops_chase_criminals 0 
+
+:RIOT1_1102
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @RIOT1_1128 
+jump @RIOT1_3119 
+
+:RIOT1_1128
+gosub @RIOT1_3289 
+if 
+  38@ == 1 
+jf @RIOT1_1160 
+jump @RIOT1_3033 
+
+:RIOT1_1160
+if 
+  35@ == 0 
+jf @RIOT1_1798 
+if 
+  36@ == 0 
+jf @RIOT1_1393 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+40@ = 0 
+07A1: set_walk_speed 4 
+05CB: AS_actor $PLAYER_ACTOR enter_car $7995 as_driver -1 ms 
+0615: define_AS_pack_begin $7999 
+05D3: AS_actor -1 goto_point 1252.4 -810.3 83.1 mode 4 time -1 ms // versionA 
+07A1: set_walk_speed 4 
+05CA: AS_actor -1 enter_car $7995 passenger_seat 0 time -1 
+0616: define_AS_pack_end $7999 
+0618: assign_actor $ACTOR_SWEET to_AS_pack $7999 
+061B: remove_references_to_AS_pack $7999 
+fade 1 500 
+
+:RIOT1_1295
+if 
+fading 
+jf @RIOT1_1319 
+wait 0 
+jump @RIOT1_1295 
+
+:RIOT1_1319
+gosub @RIOT1_3289 
+if 
+  38@ == 1 
+jf @RIOT1_1351 
+jump @RIOT1_3033 
+
+:RIOT1_1351
+40@ = 1 
+41@ = 0 
+gosub @RIOT1_4487 
+36@ = 1 
+37@ = 1 
+0707: start_scene_skip_to @RIOT1_1474 
+
+:RIOT1_1393
+if 
+  36@ == 1 
+jf @RIOT1_1798 
+if 
+  40@ == 0 
+jf @RIOT1_1798 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_1798 
+if 
+   Actor.InCar($ACTOR_SWEET, $7995)
+jf @RIOT1_1798 
+37@ = 0 
+
+:RIOT1_1474
+0701: end_scene_skip 
+gosub @RIOT1_3289 
+if 
+  38@ == 1 
+jf @RIOT1_1508 
+jump @RIOT1_3033 
+
+:RIOT1_1508
+if 
+  37@ == 1 
+jf @RIOT1_1634 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+40@ = 0 
+fade 0 500 
+
+:RIOT1_1550
+if 
+fading 
+jf @RIOT1_1574 
+wait 0 
+jump @RIOT1_1550 
+
+:RIOT1_1574
+gosub @RIOT1_3289 
+if 
+  38@ == 1 
+jf @RIOT1_1606 
+jump @RIOT1_3033 
+
+:RIOT1_1606
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+036A: put_actor $PLAYER_ACTOR in_car $7995 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0430: put_actor $ACTOR_SWEET into_car $7995 passenger_seat 0 
+
+:RIOT1_1634
+39@ = 1 
+09F5: disable_player_mutal_activities 0 
+018A: 34@ = create_checkpoint_at 2505.4 -1670.6 12.1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'R1_01' time 7000 flag 1  // Drive back to ~y~Grove Street~s~.
+33@ = 0 
+if 
+  37@ == 1 
+jf @RIOT1_1791 
+fade 1 500 
+
+:RIOT1_1735
+if 
+fading 
+jf @RIOT1_1759 
+wait 0 
+jump @RIOT1_1735 
+
+:RIOT1_1759
+gosub @RIOT1_3289 
+if 
+  38@ == 1 
+jf @RIOT1_1791 
+jump @RIOT1_3033 
+
+:RIOT1_1791
+35@ = 1 
+
+:RIOT1_1798
+if 
+  35@ == 1 
+jf @RIOT1_2654 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @RIOT1_1880 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_1880 
+Car.PutAt($7995, 2495.7, -1666.3, 12.1)
+Car.Angle($7995) = 254.2
+
+:RIOT1_1880
+if 
+  42@ == 0 
+jf @RIOT1_1977 
+if 
+  40@ == 0 
+jf @RIOT1_1977 
+if 
+  33@ > 10000 
+jf @RIOT1_1977 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 1 // versionB 
+40@ = 2 
+41@ = 0 
+gosub @RIOT1_4487 
+42@ = 1 
+
+:RIOT1_1977
+if 
+  42@ == 1 
+jf @RIOT1_2060 
+if 
+  40@ == 0 
+jf @RIOT1_2060 
+if 
+  33@ > 7000 
+jf @RIOT1_2060 
+40@ = 3 
+41@ = 0 
+gosub @RIOT1_4487 
+42@ = 2 
+
+:RIOT1_2060
+if 
+  42@ == 2 
+jf @RIOT1_2210 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_2210 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 2955.5 -1240.1 cornerB 1192.2 -1855.3 
+jf @RIOT1_2210 
+if 
+  40@ == 0 
+jf @RIOT1_2210 
+if 
+  33@ > 7000 
+jf @RIOT1_2210 
+Car.RemoveReferences($7997)
+Car.RemoveReferences($7996)
+40@ = 4 
+41@ = 0 
+gosub @RIOT1_4487 
+42@ = 3 
+
+:RIOT1_2210
+if 
+  42@ == 3 
+jf @RIOT1_2350 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_2350 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 2955.5 -1240.1 cornerB 1192.2 -1855.3 
+jf @RIOT1_2350 
+if 
+  40@ == 0 
+jf @RIOT1_2350 
+if 
+  33@ > 7000 
+jf @RIOT1_2350 
+40@ = 5 
+41@ = 0 
+gosub @RIOT1_4487 
+42@ = 4 
+
+:RIOT1_2350
+if 
+  42@ == 4 
+jf @RIOT1_2490 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_2490 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA 2955.5 -1240.1 cornerB 1192.2 -1855.3 
+jf @RIOT1_2490 
+if 
+  40@ == 0 
+jf @RIOT1_2490 
+if 
+  33@ > 7000 
+jf @RIOT1_2490 
+40@ = 6 
+41@ = 0 
+gosub @RIOT1_4487 
+42@ = 5 
+
+:RIOT1_2490
+if 
+  42@ == 5 
+jf @RIOT1_2547 
+if 
+  40@ == 0 
+jf @RIOT1_2547 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+0A09: set_actor $ACTOR_SWEET muted 0 // versionB 
+42@ = 6 
+
+:RIOT1_2547
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_2654 
+if 
+   Actor.InCar($ACTOR_SWEET, $7995)
+jf @RIOT1_2654 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 2505.4 -1670.6 12.1 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @RIOT1_2654 
+Player.CanMove($PLAYER_CHAR) = False
+36@ = 0 
+35@ = 2 
+
+:RIOT1_2654
+if 
+  35@ == 2 
+jf @RIOT1_2994 
+if 
+  36@ == 0 
+jf @RIOT1_2757 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+40@ = 0 
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+09F5: disable_player_mutal_activities 1 
+40@ = 7 
+41@ = 0 
+gosub @RIOT1_4487 
+36@ = 1 
+36@ = 1 
+
+:RIOT1_2757
+if 
+  36@ == 1 
+jf @RIOT1_2857 
+if 
+  40@ == 0 
+jf @RIOT1_2857 
+0615: define_AS_pack_begin $7999 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point 2518.9 -1678.2 13.5 mode 4 time -1 ms // versionA 
+0616: define_AS_pack_end $7999 
+0618: assign_actor $ACTOR_SWEET to_AS_pack $7999 
+061B: remove_references_to_AS_pack $7999 
+32@ = 0 
+36@ = 2 
+
+:RIOT1_2857
+if 
+  36@ == 2 
+jf @RIOT1_2994 
+if 
+  32@ > 4000 
+jf @RIOT1_2994 
+fade 0 500 
+
+:RIOT1_2901
+if 
+fading 
+jf @RIOT1_2925 
+wait 0 
+jump @RIOT1_2901 
+
+:RIOT1_2925
+Actor.DestroyInstantly($ACTOR_SWEET)
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+09F5: disable_player_mutal_activities 0 
+fade 1 500 
+
+:RIOT1_2963
+if 
+fading 
+jf @RIOT1_2987 
+wait 0 
+jump @RIOT1_2963 
+
+:RIOT1_2987
+jump @RIOT1_3119 
+
+:RIOT1_2994
+if 
+  35@ > 0 
+jf @RIOT1_3019 
+gosub @RIOT1_3373 
+
+:RIOT1_3019
+gosub @RIOT1_3519 
+jump @RIOT1_1102 
+
+:RIOT1_3033
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @RIOT1_3101 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+
+:RIOT1_3101
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:RIOT1_3119
+$RIOT_TOTAL_PASSED_MISSIONS += 1 
+0629: change_integer_stat 335 to 1 
+0318: set_latest_mission_passed 'RIOT_1'  // Riot
+01E3: show_text_1number_styled GXT 'M_PASSD' number 0 time 5000 style 1  // MISSION PASSED!
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Marker.Disable($622)
+Marker.Disable($MARKER_SWEET_HOUSE)
+$MARKER_SWEET_HOUSE = Marker.CreateIconAndSphere($ICON_SWEET, $X_SWEET_HOUSE, $Y_SWEET_HOUSE, $Z_SWEET_HOUSE)
+030C: progress_made = 1 
+return 
+
+:RIOT1_3204
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @RIOT1_3222 
+Camera.Restore_WithJumpCut
+
+:RIOT1_3222
+09F5: disable_player_mutal_activities 0 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+Model.Destroy(#GREENWOO)
+Model.Destroy(#SAVANNA)
+Model.Destroy(#CAMPER)
+Actor.DestroyWithFade($ACTOR_SWEET)
+014C: set_parked_car_generator $2765 cars_to_generate_to 101 
+0296: unload_special_actor 1 
+Marker.Disable(34@)
+09D2: set_cops_chase_criminals 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:RIOT1_3289
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @RIOT1_3330 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R1_02' time 7000 flag 1  // ~r~Sweet has been killed!
+38@ = 1 
+
+:RIOT1_3330
+if 
+   Car.Wrecked($7995)
+jf @RIOT1_3371 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'R1_04' time 7000 flag 1  // ~r~Sweet's car has been destroyed!
+38@ = 1 
+
+:RIOT1_3371
+return 
+
+:RIOT1_3373
+if 
+  39@ == 0 
+jf @RIOT1_3453 
+if 
+   Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_3453 
+03D5: remove_text 'R1_03'  // Get back in ~b~Sweet's car~s~.
+Marker.Disable(34@)
+018A: 34@ = create_checkpoint_at 2505.4 -1670.6 12.1 
+39@ = 1 
+
+:RIOT1_3453
+if 
+  39@ == 1 
+jf @RIOT1_3517 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_3517 
+Marker.Disable(34@)
+34@ = Marker.CreateAboveCar($7995)
+07E0: set_marker 34@ type_to 1 
+39@ = 0 
+
+:RIOT1_3517
+return 
+
+:RIOT1_3519
+if 
+  35@ == 1 
+jf @RIOT1_4406 
+if 
+0448:   actor $PLAYER_ACTOR in_car $7995 
+jf @RIOT1_3717 
+if or
+  40@ == 2 
+  40@ == 3 
+  40@ == 4 
+  40@ == 5 
+  40@ == 6 
+jf @RIOT1_3717 
+if 
+001D:   89@ > 41@ // (int) 
+jf @RIOT1_3703 
+gosub @RIOT1_5979 
+gosub @RIOT1_6086 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @RIOT1_3665 
+gosub @RIOT1_6240 
+jump @RIOT1_3696 
+
+:RIOT1_3665
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 44@(41@,15s) 
+90@ = 0 
+91@ = 0 
+
+:RIOT1_3696
+jump @RIOT1_3717 
+
+:RIOT1_3703
+33@ = 0 
+40@ = 0 
+
+:RIOT1_3717
+if 
+   not Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_3853 
+if 
+  11 > 40@ 
+jf @RIOT1_3853 
+if 
+001D:   89@ > 41@ // (int) 
+jf @RIOT1_3780 
+41@ += 1 
+
+:RIOT1_3780
+040D: unload_wav 1 
+040D: unload_wav 2 
+00BE: text_clear_all 
+03D5: remove_text 44@(41@,15s) 
+0085: 94@ = 40@ // (int) 
+0085: 95@ = 41@ // (int) 
+40@ = 11 
+0209: 41@ = random_int_in_ranges 0 4 
+0085: 43@ = 41@ // (int) 
+43@ += 1 
+gosub @RIOT1_4487 
+
+:RIOT1_3853
+if 
+  40@ == 11 
+jf @RIOT1_4178 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_4126 
+if 
+001D:   89@ > 41@ // (int) 
+jf @RIOT1_4103 
+gosub @RIOT1_5979 
+gosub @RIOT1_6086 
+if 
+  36@ == 0 
+jf @RIOT1_4007 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+jf @RIOT1_3976 
+gosub @RIOT1_6240 
+jump @RIOT1_4007 
+
+:RIOT1_3976
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 44@(41@,15s) 
+90@ = 0 
+91@ = 0 
+
+:RIOT1_4007
+if 
+  36@ == 1 
+jf @RIOT1_4096 
+if or
+   not Actor.Dead($ACTOR_SMOKE)
+   not Actor.Dead($ACTOR_SWEET)
+   not Actor.Dead($ACTOR_OG_LOC)
+jf @RIOT1_4065 
+gosub @RIOT1_6240 
+jump @RIOT1_4096 
+
+:RIOT1_4065
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 44@(41@,15s) 
+90@ = 0 
+91@ = 0 
+
+:RIOT1_4096
+jump @RIOT1_4126 
+
+:RIOT1_4103
+00BC: show_text_highpriority GXT 'R1_03' time 11000 flag 1  // Get back in ~b~Sweet's car~s~.
+40@ = 12 
+
+:RIOT1_4126
+if 
+0448:   actor $PLAYER_ACTOR in_car $7995 
+jf @RIOT1_4178 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 44@(41@,15s) 
+40@ = 13 
+41@ = 0 
+00BE: text_clear_all 
+
+:RIOT1_4178
+if 
+  40@ == 12 
+jf @RIOT1_4231 
+if 
+0448:   actor $PLAYER_ACTOR in_car $7995 
+jf @RIOT1_4231 
+40@ = 13 
+41@ = 0 
+00BE: text_clear_all 
+
+:RIOT1_4231
+if 
+  40@ == 13 
+jf @RIOT1_4406 
+if 
+0448:   actor $PLAYER_ACTOR in_car $7995 
+jf @RIOT1_4332 
+33@ = 0 
+0085: 40@ = 94@ // (int) 
+0085: 41@ = 95@ // (int) 
+gosub @RIOT1_4487 
+if 
+  94@ == 0 
+jf @RIOT1_4332 
+00BC: show_text_highpriority GXT 'R1_01' time 7000 flag 1  // Drive back to ~y~Grove Street~s~.
+
+:RIOT1_4332
+if 
+   not Actor.InCar($PLAYER_ACTOR, $7995)
+jf @RIOT1_4406 
+040D: unload_wav 1 
+040D: unload_wav 2 
+03D5: remove_text 44@(41@,15s) 
+40@ = 11 
+0209: 41@ = random_int_in_ranges 0 4 
+0085: 43@ = 41@ // (int) 
+43@ += 1 
+gosub @RIOT1_4487 
+
+:RIOT1_4406
+if or
+  40@ == 1 
+  40@ == 7 
+jf @RIOT1_4485 
+if 
+001D:   89@ > 41@ // (int) 
+jf @RIOT1_4478 
+gosub @RIOT1_5979 
+gosub @RIOT1_6086 
+gosub @RIOT1_6240 
+jump @RIOT1_4485 
+
+:RIOT1_4478
+40@ = 0 
+
+:RIOT1_4485
+return 
+
+:RIOT1_4487
+if 
+  40@ == 1 
+jf @RIOT1_4560 
+05AA: 44@s = 'ROT1_AA' // @s = 'short'  // ~z~Shit's real fucked up, man.
+05AA: 46@s = 'ROT1_AB' // @s = 'short'  // ~z~Yeah, but we gonna handle this ourselves.
+04AF: 74@ = 32800 // = constant 
+04AF: 75@ = 32801 // = constant 
+89@ = 2 
+
+:RIOT1_4560
+if 
+  40@ == 2 
+jf @RIOT1_4705 
+05AA: 44@s = 'ROT1_BA' // @s = 'short'  // ~z~There ain't no justice, man.
+05AA: 46@s = 'ROT1_BB' // @s = 'short'  // ~z~How does scum like Tenpennny stay on the streets?
+05AA: 48@s = 'ROT1_BC' // @s = 'short'  // ~z~Man, I dunno, just the way shit stacked I guess.
+05AA: 50@s = 'ROT1_BD' // @s = 'short'  // ~z~Man, this is fucked up. We should take that bastard down ourselves.
+05AA: 52@s = 'ROT1_BE' // @s = 'short'  // ~z~And we will Sweet.
+04AF: 74@ = 32802 // = constant 
+04AF: 75@ = 32803 // = constant 
+04AF: 76@ = 32804 // = constant 
+04AF: 77@ = 32805 // = constant 
+04AF: 78@ = 32806 // = constant 
+89@ = 5 
+
+:RIOT1_4705
+if 
+  40@ == 3 
+jf @RIOT1_5042 
+05AA: 44@s = 'ROT1_EA' // @s = 'short'  // ~z~So who's the weird Brit?
+05AA: 46@s = 'ROT1_EB' // @s = 'short'  // ~z~What? Oh, Maccer!
+05AA: 48@s = 'ROT1_EC' // @s = 'short'  // ~z~He got a little problem he can't control.
+05AA: 50@s = 'ROT1_ED' // @s = 'short'  // ~z~What kind of problem?
+05AA: 52@s = 'ROT1_EE' // @s = 'short'  // ~z~He can't, you know, giving himself a little bit.
+05AA: 54@s = 'ROT1_EF' // @s = 'short'  // ~z~What, you mean he likes to consult Professor Hans Jerkov?
+05AA: 56@s = 'ROT1_EG' // @s = 'short'  // ~z~Yeah, regularly.
+05AA: 58@s = 'ROT1_EH' // @s = 'short'  // ~z~Spank the monkey?
+05AA: 60@s = 'ROT1_EJ' // @s = 'short'  // ~z~Yeah!
+05AA: 62@s = 'ROT1_EK' // @s = 'short'  // ~z~Take Palm-ela out?
+05AA: 64@s = 'ROT1_EL' // @s = 'short'  // ~z~Quit it!
+05AA: 66@s = 'ROT1_EM' // @s = 'short'  // ~z~Burp the worm?
+05AA: 68@s = 'ROT1_EN' // @s = 'short'  // ~z~Enough, man!
+04AF: 74@ = 32810 // = constant 
+04AF: 75@ = 32811 // = constant 
+04AF: 76@ = 32812 // = constant 
+04AF: 77@ = 32813 // = constant 
+04AF: 78@ = 32814 // = constant 
+04AF: 79@ = 32815 // = constant 
+04AF: 80@ = 32816 // = constant 
+04AF: 81@ = 32817 // = constant 
+04AF: 82@ = 32818 // = constant 
+04AF: 83@ = 32819 // = constant 
+04AF: 84@ = 32820 // = constant 
+04AF: 85@ = 32821 // = constant 
+04AF: 86@ = 32822 // = constant 
+89@ = 13 
+
+:RIOT1_5042
+if 
+  40@ == 4 
+jf @RIOT1_5139 
+05AA: 44@s = 'ROT1_DA' // @s = 'short'  // ~z~Shit, look at this place, even old ladies robbing shit!
+05AA: 46@s = 'ROT1_DB' // @s = 'short'  // ~z~I guess it's better than staying home and watching the shopping channel.
+05AA: 48@s = 'ROT1_DC' // @s = 'short'  // ~z~Yeah, go out there and get yourself a bargain!
+04AF: 74@ = 32807 // = constant 
+04AF: 75@ = 32808 // = constant 
+04AF: 76@ = 32809 // = constant 
+89@ = 3 
+
+:RIOT1_5139
+if 
+  40@ == 5 
+jf @RIOT1_5356 
+05AA: 44@s = 'ROT1_FA' // @s = 'short'  // ~z~Shit, man, people real mad!
+05AA: 46@s = 'ROT1_FB' // @s = 'short'  // ~z~Tenpenny's responsible for ALL of this!
+05AA: 48@s = 'ROT1_FC' // @s = 'short'  // ~z~As if the ghetto ain't wrecked enough!
+05AA: 50@s = 'ROT1_FD' // @s = 'short'  // ~z~Come tomorrow, most the Centrals gonna have new TVs.
+05AA: 52@s = 'ROT1_FE' // @s = 'short'  // ~z~Look at them, like angry kids or some shit!
+05AA: 54@s = 'ROT1_FF' // @s = 'short'  // ~z~They just tearing up their own neighborhoods!
+05AA: 56@s = 'ROT1_FG' // @s = 'short'  // ~z~Nothing good is gonna come of this.
+05AA: 58@s = 'ROT1_FH' // @s = 'short'  // ~z~Man, the ghetto's tearing itself apart!
+04AF: 74@ = 32823 // = constant 
+04AF: 75@ = 32824 // = constant 
+04AF: 76@ = 32825 // = constant 
+04AF: 77@ = 32826 // = constant 
+04AF: 78@ = 32827 // = constant 
+04AF: 79@ = 32828 // = constant 
+04AF: 80@ = 32829 // = constant 
+04AF: 81@ = 32830 // = constant 
+89@ = 8 
+
+:RIOT1_5356
+if 
+  40@ == 6 
+jf @RIOT1_5657 
+0209: 200@ = random_int_in_ranges 0 4 
+if 
+  200@ == 0 
+jf @RIOT1_5456 
+05AA: 44@s = 'ROT1_GL' // @s = 'short'  // ~z~Everything's burning.
+05AA: 46@s = 'ROT1_GA' // @s = 'short'  // ~z~Put your foot down!
+04AF: 74@ = 32840 // = constant 
+04AF: 75@ = 32831 // = constant 
+jump @RIOT1_5650 
+
+:RIOT1_5456
+if 
+  200@ == 1 
+jf @RIOT1_5529 
+05AA: 44@s = 'ROT1_GM' // @s = 'short'  // ~z~Can't see shit through this smoke!
+05AA: 46@s = 'ROT1_GB' // @s = 'short'  // ~z~They coming after us!
+04AF: 74@ = 32841 // = constant 
+04AF: 75@ = 32832 // = constant 
+jump @RIOT1_5650 
+
+:RIOT1_5529
+if 
+  200@ == 2 
+jf @RIOT1_5602 
+05AA: 44@s = 'ROT1_GJ' // @s = 'short'  // ~z~Stay away from the National Guard!
+05AA: 46@s = 'ROT1_GC' // @s = 'short'  // ~z~Ain't this Ballas turf?
+04AF: 74@ = 32838 // = constant 
+04AF: 75@ = 32833 // = constant 
+jump @RIOT1_5650 
+
+:RIOT1_5602
+05AA: 44@s = 'ROT1_GK' // @s = 'short'  // ~z~Stay away from those soldiers, CJ!
+05AA: 46@s = 'ROT1_GD' // @s = 'short'  // ~z~Ain't this Vagos country?
+04AF: 74@ = 32839 // = constant 
+04AF: 75@ = 32834 // = constant 
+
+:RIOT1_5650
+89@ = 2 
+
+:RIOT1_5657
+if 
+  40@ == 7 
+jf @RIOT1_5826 
+05AA: 44@s = 'ROT1_HA' // @s = 'short'  // ~z~Shit don't look too bad...
+05AA: 46@s = 'ROT1_HB' // @s = 'short'  // ~z~It only takes one fool to spread this shit to the Grove.
+05AA: 48@s = 'ROT1_HC' // @s = 'short'  // ~z~I'm gonna gather up some homies, and get the hood locked down.
+05AA: 50@s = 'ROT1_HD' // @s = 'short'  // ~z~You need anything, give me a call.
+05AA: 52@s = 'ROT1_HE' // @s = 'short'  // ~z~I'm gonna check out the city and see what I can see.
+05AA: 54@s = 'ROT1_HF' // @s = 'short'  // ~z~You be careful out there, CJ.
+04AF: 74@ = 32842 // = constant 
+04AF: 75@ = 32843 // = constant 
+04AF: 76@ = 32844 // = constant 
+04AF: 77@ = 32845 // = constant 
+04AF: 78@ = 32846 // = constant 
+04AF: 79@ = 32847 // = constant 
+89@ = 6 
+
+:RIOT1_5826
+if 
+  40@ == 11 
+jf @RIOT1_5948 
+05AA: 44@s = 'SWE1_BG' // @s = 'short'  // ~z~CJ, GET IN!
+05AA: 46@s = 'SWE1_BK' // @s = 'short'  // ~z~CJ, c'mon man, hop in.
+05AA: 48@s = 'SWE1_BL' // @s = 'short'  // ~z~C'mon, let's roll, let's step on it.
+05AA: 50@s = 'SWE1_BM' // @s = 'short'  // ~z~Get in, nigga!
+04AF: 74@ = 37429 // = constant 
+04AF: 75@ = 37432 // = constant 
+04AF: 76@ = 37433 // = constant 
+04AF: 77@ = 37434 // = constant 
+0085: 89@ = 43@ // (int) 
+
+:RIOT1_5948
+0085: 92@ = 41@ // (int) 
+90@ = 0 
+91@ = 0 
+93@ = 1 
+return 
+
+:RIOT1_5979
+if 
+001D:   89@ > 92@ // (int) 
+jf @RIOT1_6084 
+if 
+  90@ == 0 
+jf @RIOT1_6041 
+03CF: load_wav 74@(92@,15i) as 1 
+92@ += 1 
+90@ = 1 
+
+:RIOT1_6041
+if 
+  91@ == 0 
+jf @RIOT1_6084 
+03CF: load_wav 74@(92@,15i) as 2 
+92@ += 1 
+91@ = 1 
+
+:RIOT1_6084
+return 
+
+:RIOT1_6086
+if 
+  93@ == 1 
+jf @RIOT1_6162 
+if 
+  90@ == 1 
+jf @RIOT1_6162 
+if 
+03D0:   wav 1 loaded 
+jf @RIOT1_6162 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 44@(41@,15s) time 4500 flag 1 
+90@ = 2 
+
+:RIOT1_6162
+if 
+  93@ == 2 
+jf @RIOT1_6238 
+if 
+  91@ == 1 
+jf @RIOT1_6238 
+if 
+03D0:   wav 2 loaded 
+jf @RIOT1_6238 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 44@(41@,15s) time 4500 flag 1 
+91@ = 2 
+
+:RIOT1_6238
+return 
+
+:RIOT1_6240
+if 
+  90@ == 2 
+jf @RIOT1_6303 
+if 
+03D2:   wav 1 ended 
+jf @RIOT1_6303 
+03D5: remove_text 44@(41@,15s) 
+41@ += 1 
+93@ = 2 
+90@ = 0 
+
+:RIOT1_6303
+if 
+  91@ == 2 
+jf @RIOT1_6366 
+if 
+03D2:   wav 2 ended 
+jf @RIOT1_6366 
+03D5: remove_text 44@(41@,15s) 
+41@ += 1 
+93@ = 1 
+91@ = 0 
+
+:RIOT1_6366
+return

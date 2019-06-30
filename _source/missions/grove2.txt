@@ -1,0 +1,1048 @@
+:GROVE2
+thread 'GROVE2' 
+gosub @GROVE2_94 
+if 
+wasted_or_busted 
+jf @GROVE2_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+gosub @GROVE2_3426 
+
+:GROVE2_85
+gosub @GROVE2_3581 
+end_thread 
+
+:GROVE2_94
+09DD: unknown_player_group 1 
+054C: use_GXT_table 'GROVE2' 
+0169: set_fade_color_RGB 0 0 0 
+increment_mission_attempts 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:GROVE2_134
+if 
+fading 
+jf @GROVE2_158 
+wait 0 
+jump @GROVE2_134 
+
+:GROVE2_158
+set_weather 1 
+select_interior 1 
+02E4: load_cutscene_data 'GROVE2' 
+
+:GROVE2_177
+if 
+86B9:   not cutscene_data_loaded 
+jf @GROVE2_201 
+wait 0 
+jump @GROVE2_177 
+
+:GROVE2_201
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:GROVE2_218
+if 
+82E9:   not cutscene_reached_end 
+jf @GROVE2_242 
+wait 0 
+jump @GROVE2_218 
+
+:GROVE2_242
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:GROVE2_256
+if 
+fading 
+jf @GROVE2_280 
+wait 0 
+jump @GROVE2_256 
+
+:GROVE2_280
+02EA: end_cutscene 
+01B7: release_weather 
+023C: load_special_actor 'SWEET' as 1 // models 290-299 
+Model.Load(#AK47)
+Model.Load(#GREENWOO)
+038B: load_requested_models 
+
+:GROVE2_309
+if or
+823D:   not special_actor 1 loaded 
+   not Model.Available(#AK47)
+   not Model.Available(#GREENWOO)
+jf @GROVE2_345 
+wait 0 
+jump @GROVE2_309 
+
+:GROVE2_345
+select_interior 0 
+02A3: enable_widescreen 0 
+$7990 = 0 
+$7991 = 0 
+47@ = 2 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_399 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:GROVE2_399
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+076C: set_zone 'ANGPI' gang 9 density_to 0  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 0  // Fort Carson
+0879: enable_gang_wars 1 
+08A3: update_respect_while_on_mission 1 
+Camera.SetAtPos(2497.324, -1684.744, 12.44)
+Actor.PutAt($PLAYER_ACTOR, 2497.324, -1684.744, 12.44)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+$ACTOR_SWEET = Actor.Create(Mission1, #SPECIAL01, 2496.633, -1684.573, 12.435)
+0674: set_car_model #GREENWOO numberplate "GROVE4L_" 
+39@ = Car.Create(#GREENWOO, 2507.699, -1671.716, 12.3823)
+0229: set_car 39@ primary_color_to 59 secondary_color_to 34 
+Car.Angle(39@) = 355.4549
+Actor.Angle($ACTOR_SWEET) = 0.0
+Actor.SetWalkStyle($ACTOR_SWEET, "GANG2")
+Actor.GiveWeaponAndAmmo($ACTOR_SWEET, AK47, 30000)
+0568: set_actor $ACTOR_SWEET untargetable 1 
+0446: set_actor $ACTOR_SWEET dismemberment_possible 0 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+Actor.WeaponAccuracy($ACTOR_SWEET) = 90
+Actor.Health($ACTOR_SWEET) = 1000
+Actor.SetMaxHealth($ACTOR_SWEET, 1000)
+077A: set_actor $ACTOR_SWEET acquaintance 4 to_actors_pedtype 25 // see ped.dat 
+$7990 = Actor.Health($ACTOR_SWEET)
+$7990 /= 10 
+03C4: set_status_text $7990 type 1 GXT 'GR2_01' // global_variable  // SWEET
+34@ = Marker.CreateAboveActor($ACTOR_SWEET)
+07E0: set_marker 34@ type_to 1 
+018A: 36@ = create_checkpoint_at 2002.815 -1613.084 12.3828 
+018A: 55@ = create_checkpoint_at 2507.184 -1672.906 12.3824 
+018B: set_marker 34@ radar_mode 0 
+018B: set_marker 55@ radar_mode 0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 2.0 
+32@ = 0 
+076C: set_zone 'IWD3A' gang 1 density_to 0 
+076C: set_zone 'IWD3A' gang 0 density_to 100 
+076C: set_zone 'IWD3B' gang 1 density_to 0 
+076C: set_zone 'IWD3B' gang 0 density_to 100 
+076C: set_zone 'IWD1' gang 1 density_to 0 
+076C: set_zone 'IWD1' gang 0 density_to 100 
+076C: set_zone 'IWD4' gang 1 density_to 0 
+076C: set_zone 'IWD4' gang 0 density_to 100 
+090C: highlight_inactive_gang_zone 'IWD3A' as_available_for_gangwars 
+090C: highlight_inactive_gang_zone 'IWD3B' as_available_for_gangwars 
+090C: highlight_inactive_gang_zone 'IWD1' as_available_for_gangwars 
+090C: highlight_inactive_gang_zone 'IWD4' as_available_for_gangwars 
+09B7: set_zone 'IWD3A' disable_footcops 1 
+09B7: set_zone 'IWD3B' disable_footcops 1 
+09B7: set_zone 'IWD1' disable_footcops 1 
+09B7: set_zone 'IWD4' disable_footcops 1 
+
+:GROVE2_1019
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_3217 
+wait 0 
+gosub @GROVE2_3979 
+gosub @GROVE2_5786 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @GROVE2_1075 
+jump @GROVE2_3512 
+
+:GROVE2_1075
+if and
+   not Car.Wrecked(39@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_1144 
+if 
+   Actor.InCar($PLAYER_ACTOR, 39@)
+jf @GROVE2_1144 
+if 
+  57@ == 0 
+jf @GROVE2_1144 
+041E: set_radio_station 3 
+57@ = 1 
+
+:GROVE2_1144
+if and
+  32@ > 4000 
+  58@ == 1 
+jf @GROVE2_1393 
+0209: $7992 = random_int_in_ranges 0 4 
+0871: init_jump_table $7992 total_jumps 4 default_jump 0 @GROVE2_1386 jumps 0 @GROVE2_1242 1 @GROVE2_1278 2 @GROVE2_1314 3 @GROVE2_1350 -1 @GROVE2_1386 -1 @GROVE2_1386 -1 @GROVE2_1386 
+
+:GROVE2_1242
+05AA: 59@s = 'GRO2_DA' // @s = 'short'  // ~z~Yeah! We showed them fools!
+04AF: 46@ = 17611 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1386 
+
+:GROVE2_1278
+05AA: 59@s = 'GRO2_DB' // @s = 'short'  // ~z~Grove Street Families is back!
+04AF: 46@ = 17612 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1386 
+
+:GROVE2_1314
+05AA: 59@s = 'GRO2_DC' // @s = 'short'  // ~z~Grove Street, busters!
+04AF: 46@ = 17613 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1386 
+
+:GROVE2_1350
+05AA: 59@s = 'GRO2_DD' // @s = 'short'  // ~z~Grove 4 L-I-F-E, nigga!
+04AF: 46@ = 17614 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1386 
+
+:GROVE2_1386
+58@ = 2 
+
+:GROVE2_1393
+if and
+  47@ == 2 
+  58@ == 2 
+jf @GROVE2_1569 
+0209: $7992 = random_int_in_ranges 0 2 
+0871: init_jump_table $7992 total_jumps 2 default_jump 0 @GROVE2_1562 jumps 0 @GROVE2_1490 1 @GROVE2_1526 -1 @GROVE2_1562 -1 @GROVE2_1562 -1 @GROVE2_1562 -1 @GROVE2_1562 -1 @GROVE2_1562 
+
+:GROVE2_1490
+05AA: 59@s = 'GRO2_EA' // @s = 'short'  // ~z~We gotta take another neighborhood back!
+04AF: 46@ = 17615 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1562 
+
+:GROVE2_1526
+05AA: 59@s = 'GRO2_EB' // @s = 'short'  // ~z~Let's go hoo-ride on these Ballas!
+04AF: 46@ = 17616 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_1562 
+
+:GROVE2_1562
+58@ = 3 
+
+:GROVE2_1569
+if and
+  47@ == 2 
+  58@ == 3 
+jf @GROVE2_1617 
+00BC: show_text_highpriority GXT 'GR2_10' time 7000 flag 1  // ~s~Take over another Idlewood hood.
+58@ = 4 
+
+:GROVE2_1617
+if 
+  54@ == 0 
+jf @GROVE2_2793 
+076D: get_zone 'IWD3A' gang 0 density_to 40@ 
+076D: get_zone 'IWD3B' gang 0 density_to 41@ 
+076D: get_zone 'IWD1' gang 0 density_to 43@ 
+076D: get_zone 'IWD4' gang 0 density_to 44@ 
+if 
+  38@ == 0 
+jf @GROVE2_1753 
+05AA: 59@s = 'GRO2_AA' // @s = 'short'  // ~z~So, you got a plan?
+04AF: 46@ = 17600 // = constant 
+gosub @GROVE2_5766 
+38@ = 1 
+
+:GROVE2_1753
+if and
+  47@ == 2 
+  38@ == 1 
+jf @GROVE2_1814 
+05AA: 59@s = 'GRO2_AB' // @s = 'short'  // ~z~Yeah I've got a plan.
+04AF: 46@ = 17601 // = constant 
+gosub @GROVE2_5766 
+38@ = 2 
+
+:GROVE2_1814
+if and
+  47@ == 2 
+  38@ == 2 
+jf @GROVE2_1875 
+05AA: 59@s = 'GRO2_AC' // @s = 'short'  // ~z~We're gonna roll into Ballas' hood, and take it back for the Grove!
+04AF: 46@ = 17602 // = constant 
+gosub @GROVE2_5766 
+38@ = 3 
+
+:GROVE2_1875
+if and
+  47@ == 2 
+  38@ == 3 
+jf @GROVE2_1936 
+05AA: 59@s = 'GRO2_AD' // @s = 'short'  // ~z~OK, let's get those motherfuckers!
+04AF: 46@ = 17603 // = constant 
+gosub @GROVE2_5766 
+38@ = 4 
+
+:GROVE2_1936
+if and
+  47@ == 2 
+  38@ == 4 
+jf @GROVE2_1997 
+05AA: 59@s = 'GRO2_BA' // @s = 'short'  // ~z~You wanna get some homies together or just me and you roll?
+04AF: 46@ = 17604 // = constant 
+gosub @GROVE2_5766 
+38@ = 5 
+
+:GROVE2_1997
+if 
+  $10997 == 0 
+jf @GROVE2_2083 
+if and
+  47@ == 2 
+  38@ == 5 
+jf @GROVE2_2144 
+05AA: 59@s = 'GRO2_BC' // @s = 'short'  // ~z~Nah, let's do this Johnson style, you and me.
+04AF: 46@ = 17606 // = constant 
+gosub @GROVE2_5766 
+38@ = 6 
+jump @GROVE2_2144 
+
+:GROVE2_2083
+if and
+  47@ == 2 
+  38@ == 5 
+jf @GROVE2_2144 
+05AA: 59@s = 'GRO2_BB' // @s = 'short'  // ~z~Hell yeah, good idea, I'll gather some OGs up.
+04AF: 46@ = 17605 // = constant 
+gosub @GROVE2_5766 
+38@ = 6 
+
+:GROVE2_2144
+if and
+  47@ == 2 
+  38@ == 6 
+jf @GROVE2_2192 
+00BC: show_text_highpriority GXT 'GR2_09' time 7000 flag 1  // ~s~Go and take back ~y~Idlewood~s~!
+38@ = 7 
+
+:GROVE2_2192
+if 
+  56@ == 1 
+jf @GROVE2_2433 
+0209: $7992 = random_int_in_ranges 0 4 
+0871: init_jump_table $7992 total_jumps 4 default_jump 0 @GROVE2_2426 jumps 0 @GROVE2_2282 1 @GROVE2_2318 2 @GROVE2_2354 3 @GROVE2_2390 -1 @GROVE2_2426 -1 @GROVE2_2426 -1 @GROVE2_2426 
+
+:GROVE2_2282
+05AA: 59@s = 'GRO2_CA' // @s = 'short'  // ~z~Let's take this hood back for the Grove!
+04AF: 46@ = 17607 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_2426 
+
+:GROVE2_2318
+05AA: 59@s = 'GRO2_CB' // @s = 'short'  // ~z~Time to put in some work, CJ!
+04AF: 46@ = 17608 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_2426 
+
+:GROVE2_2354
+05AA: 59@s = 'GRO2_CC' // @s = 'short'  // ~z~Let's hit these fools!
+04AF: 46@ = 17609 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_2426 
+
+:GROVE2_2390
+05AA: 59@s = 'GRO2_CE' // @s = 'short'  // ~z~Hit 'em hard, CJ!
+04AF: 46@ = 17610 // = constant 
+gosub @GROVE2_5766 
+jump @GROVE2_2426 
+
+:GROVE2_2426
+56@ = 2 
+
+:GROVE2_2433
+if and
+  47@ == 2 
+  56@ == 2 
+jf @GROVE2_2481 
+00BC: show_text_highpriority GXT 'GR2_05' time 4000 flag 1  // ~s~Shoot some Ballas to start a war!
+56@ = 3 
+
+:GROVE2_2481
+if or
+   Player.InZone($PLAYER_CHAR, 'IWD3A')
+   Player.InZone($PLAYER_CHAR, 'IWD3B')
+   Player.InZone($PLAYER_CHAR, 'IWD1')
+   Player.InZone($PLAYER_CHAR, 'IWD4')
+jf @GROVE2_2612 
+if 
+  37@ == 0 
+jf @GROVE2_2598 
+37@ = 1 
+if 
+  56@ == 0 
+jf @GROVE2_2598 
+56@ = 1 
+
+:GROVE2_2598
+018B: set_marker 36@ radar_mode 0 
+jump @GROVE2_2637 
+
+:GROVE2_2612
+if 
+  35@ == 1 
+jf @GROVE2_2637 
+018B: set_marker 36@ radar_mode 3 
+
+:GROVE2_2637
+if and
+  40@ == 0 
+  48@ == 0 
+jf @GROVE2_2676 
+gosub @GROVE2_3224 
+48@ = 1 
+
+:GROVE2_2676
+if and
+  41@ == 0 
+  49@ == 0 
+jf @GROVE2_2715 
+gosub @GROVE2_3224 
+49@ = 1 
+
+:GROVE2_2715
+if and
+  43@ == 0 
+  50@ == 0 
+jf @GROVE2_2754 
+gosub @GROVE2_3224 
+50@ = 1 
+
+:GROVE2_2754
+if and
+  44@ == 0 
+  51@ == 0 
+jf @GROVE2_2793 
+gosub @GROVE2_3224 
+51@ = 1 
+
+:GROVE2_2793
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_3066 
+$7990 = Actor.Health($ACTOR_SWEET)
+$7990 /= 10 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor $ACTOR_SWEET radius 30.0 30.0 0 
+jf @GROVE2_2968 
+if 
+  35@ == 0 
+jf @GROVE2_2961 
+if 
+86EE:   not actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+jf @GROVE2_2904 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+
+:GROVE2_2904
+018B: set_marker 34@ radar_mode 0 
+if 
+  54@ == 0 
+jf @GROVE2_2929 
+
+:GROVE2_2929
+if 
+  54@ == 1 
+jf @GROVE2_2947 
+
+:GROVE2_2947
+$7991 = 0 
+35@ = 1 
+
+:GROVE2_2961
+jump @GROVE2_3059 
+
+:GROVE2_2968
+if 
+  35@ == 1 
+jf @GROVE2_3059 
+00BC: show_text_highpriority GXT 'GR2_02' time 4000 flag 1  // ~s~You have left Sweet behind go get him.
+018B: set_marker 34@ radar_mode 3 
+if 
+  54@ == 0 
+jf @GROVE2_3027 
+
+:GROVE2_3027
+if 
+  54@ == 1 
+jf @GROVE2_3045 
+
+:GROVE2_3045
+$7991 = 1 
+35@ = 0 
+
+:GROVE2_3059
+jump @GROVE2_3089 
+
+:GROVE2_3066
+00BC: show_text_highpriority GXT 'GR2_03' time 4000 flag 1  // ~r~Sweet's dead!
+jump @GROVE2_3426 
+
+:GROVE2_3089
+if 
+  54@ == 1 
+jf @GROVE2_3210 
+if and
+  53@ == 1 
+  47@ == 2 
+jf @GROVE2_3155 
+00BC: show_text_highpriority GXT 'GR2_11' time 7000 flag 1  // ~s~Take Sweet back to ~y~Grove Street~s~.
+53@ = 2 
+
+:GROVE2_3155
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 2507.184 -1672.906 12.3824 radius 4.0 4.0 4.0 
+jf @GROVE2_3210 
+jump @GROVE2_4174 
+
+:GROVE2_3210
+jump @GROVE2_1019 
+
+:GROVE2_3217
+jump @GROVE2_3426 
+
+:GROVE2_3224
+52@ += 1 
+if 
+  58@ == 0 
+jf @GROVE2_3263 
+32@ = 0 
+58@ = 1 
+
+:GROVE2_3263
+if 
+  52@ == 2 
+jf @GROVE2_3424 
+05AA: 59@s = 'GRO2_FA' // @s = 'short'  // ~z~We did it, CJ! let's bail back to Grove Street.
+04AF: 46@ = 17617 // = constant 
+gosub @GROVE2_5766 
+54@ = 1 
+018B: set_marker 55@ radar_mode 3 
+018B: set_marker 36@ radar_mode 0 
+0395: clear_area 1 at 2507.184 -1672.906 12.3824 radius 10.0 
+if 
+   not Car.Wrecked(39@)
+jf @GROVE2_3424 
+if 
+01AF:   car 39@ sphere 0 in_sphere 2507.184 -1672.906 12.3824 radius 4.0 4.0 4.0 
+jf @GROVE2_3424 
+Car.Destroy(39@)
+
+:GROVE2_3424
+return 
+
+:GROVE2_3426
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @GROVE2_3494 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = 2470.93 
+$11031 = -1669.11 
+$11030 = 13.31 
+
+:GROVE2_3494
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:GROVE2_3512
+Marker.Disable($623)
+$GROVE_TOTAL_PASSED_MISSIONS += 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'GROVE_2'  // Grove 4 Life
+01E3: show_text_1number_styled GXT 'M_PASSS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~~n~~w~RESPECT +
+Player.Money($PLAYER_CHAR) += 10000
+0998: add_respect 40 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+return 
+
+:GROVE2_3581
+09B7: set_zone 'IWD3A' disable_footcops 0 
+09B7: set_zone 'IWD3B' disable_footcops 0 
+09B7: set_zone 'IWD1' disable_footcops 0 
+09B7: set_zone 'IWD4' disable_footcops 0 
+090D: highlight_all_inactive_gang_zones_as_available_for_gangwars 
+076C: set_zone 'ANGPI' gang 9 density_to 0  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 0  // Fort Carson
+08A3: update_respect_while_on_mission 0 
+0879: enable_gang_wars 1 
+$ONMISSION = 0 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_3701 
+Actor.DestroyWithFade($ACTOR_SWEET)
+
+:GROVE2_3701
+if 
+075C:   marker 34@ enabled 
+jf @GROVE2_3722 
+Marker.Disable(34@)
+
+:GROVE2_3722
+if 
+075C:   marker 36@ enabled 
+jf @GROVE2_3743 
+Marker.Disable(36@)
+
+:GROVE2_3743
+if 
+075C:   marker 55@ enabled 
+jf @GROVE2_3764 
+Marker.Disable(55@)
+
+:GROVE2_3764
+0151: remove_status_text $7990 
+0296: unload_special_actor 1 
+Model.Destroy(#AK47)
+Model.Destroy(#GREENWOO)
+04EF: release_animation "GANGS" 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+mission_cleanup 
+return 
+
+:GROVE2_3815
+00BE: text_clear_all 
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+return 
+
+:GROVE2_3830
+00BE: text_clear_all 
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+return 
+
+:GROVE2_3849
+fade 0 500 
+
+:GROVE2_3856
+if 
+fading 
+jf @GROVE2_3880 
+wait 0 
+jump @GROVE2_3856 
+
+:GROVE2_3880
+return 
+
+:GROVE2_3882
+fade 1 500 
+
+:GROVE2_3889
+if 
+fading 
+jf @GROVE2_3913 
+wait 0 
+jump @GROVE2_3889 
+
+:GROVE2_3913
+return 
+fade 0 500 
+
+:GROVE2_3922
+if 
+fading 
+jf @GROVE2_3946 
+wait 0 
+jump @GROVE2_3922 
+
+:GROVE2_3946
+fade 1 500 
+
+:GROVE2_3953
+if 
+fading 
+jf @GROVE2_3977 
+wait 0 
+jump @GROVE2_3953 
+
+:GROVE2_3977
+return 
+
+:GROVE2_3979
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @GROVE2_4001 
+41@ = 0 
+
+:GROVE2_4001
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @GROVE2_4023 
+40@ = 0 
+
+:GROVE2_4023
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @GROVE2_4045 
+jump @GROVE2_4174 
+
+:GROVE2_4045
+if 
+0736:   is_keyboard_key_just_pressed 71 
+jf @GROVE2_4135 
+Actor.PutAt($PLAYER_ACTOR, 2487.644, -1668.204, 12.3438)
+Actor.Angle($PLAYER_ACTOR) = 265.0722
+52@ = 2 
+54@ = 1 
+018B: set_marker 55@ radar_mode 3 
+0395: clear_area 1 at 2507.184 -1672.906 12.3824 radius 10.0 
+
+:GROVE2_4135
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @GROVE2_4157 
+gosub @GROVE2_3224 
+
+:GROVE2_4157
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @GROVE2_4172 
+
+:GROVE2_4172
+return 
+
+:GROVE2_4174
+gosub @GROVE2_3849 
+gosub @GROVE2_3815 
+00BE: text_clear_all 
+04ED: load_animation "GANGS" 
+
+:GROVE2_4199
+if 
+84EE:   not animation "GANGS" loaded 
+jf @GROVE2_4230 
+wait 0 
+jump @GROVE2_4199 
+
+:GROVE2_4230
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_4528 
+06C9: remove_actor $ACTOR_SWEET from_group 
+0395: clear_area 1 at 2512.761 -1672.52 12.5034 radius 50.0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @GROVE2_4353 
+Actor.PutAt($PLAYER_ACTOR, 2496.552, -1682.439, 12.3542)
+Actor.Angle($PLAYER_ACTOR) = 270.6489
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2512.761 -1672.52 12.5034 
+jump @GROVE2_4373 
+
+:GROVE2_4353
+Actor.PutAt($PLAYER_ACTOR, 2512.761, -1672.52, 12.5034)
+
+:GROVE2_4373
+if 
+   not Car.Wrecked(39@)
+jf @GROVE2_4394 
+Car.Destroy(39@)
+
+:GROVE2_4394
+Actor.Angle($PLAYER_ACTOR) = 240.2609
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor $ACTOR_SWEET 
+if 
+   Actor.Driving($ACTOR_SWEET)
+jf @GROVE2_4455 
+0362: remove_actor $ACTOR_SWEET from_car_and_place_at 2514.788 -1673.938 12.6861 
+jump @GROVE2_4475 
+
+:GROVE2_4455
+Actor.PutAt($ACTOR_SWEET, 2514.788, -1673.938, 12.6861)
+
+:GROVE2_4475
+Actor.Angle($ACTOR_SWEET) = 73.5014
+0639: AS_actor $ACTOR_SWEET rotate_to_actor $PLAYER_ACTOR 
+0688: AS_actor $ACTOR_SWEET unknown_toggle_ped_threat_scanner 0 0 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+01B9: set_actor $ACTOR_SWEET armed_weapon_to 0 
+
+:GROVE2_4528
+03DE: set_pedestrians_density_multiplier_to 0.0 
+Camera.SetPosition(2509.798, -1672.175, 13.4192, 0.0, 0.0, 0.0)
+Camera.PointAt(2510.752, -1672.457, 13.5178, 2)
+00BE: text_clear_all 
+gosub @GROVE2_3882 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_4661 
+0605: actor $PLAYER_ACTOR perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+
+:GROVE2_4661
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_4727 
+0605: actor $ACTOR_SWEET perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+
+:GROVE2_4727
+040D: unload_wav 1 
+03CF: load_wav 17618 as 1 
+
+:GROVE2_4738
+if 
+83D0:   not wav 1 loaded 
+jf @GROVE2_4764 
+wait 0 
+jump @GROVE2_4738 
+
+:GROVE2_4764
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GRO2_GA' time 4000 flag 1  // ~z~You helped Grove Street Families hammer those Ballas.
+33@ = 0 
+
+:GROVE2_4791
+if 
+83D2:   not wav 1 ended 
+jf @GROVE2_4841 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_4834 
+jump @GROVE2_5676 
+
+:GROVE2_4834
+jump @GROVE2_4791 
+
+:GROVE2_4841
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_4900 
+0605: actor $ACTOR_SWEET perform_animation "PRTIAL_GNGTLKC" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GROVE2_4900
+040D: unload_wav 1 
+03CF: load_wav 17619 as 1 
+
+:GROVE2_4911
+if 
+83D0:   not wav 1 loaded 
+jf @GROVE2_4937 
+wait 0 
+jump @GROVE2_4911 
+
+:GROVE2_4937
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GRO2_GB' time 4000 flag 1  // ~z~Johnson boys rolled right over them!
+33@ = 0 
+
+:GROVE2_4964
+if 
+83D2:   not wav 1 ended 
+jf @GROVE2_5014 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_5007 
+jump @GROVE2_5676 
+
+:GROVE2_5007
+jump @GROVE2_4964 
+
+:GROVE2_5014
+040D: unload_wav 1 
+03CF: load_wav 17620 as 1 
+
+:GROVE2_5025
+if 
+83D0:   not wav 1 loaded 
+jf @GROVE2_5051 
+wait 0 
+jump @GROVE2_5025 
+
+:GROVE2_5051
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GRO2_GC' time 4000 flag 1  // ~z~OK, dog, I'm going to get some sleep, I'm beat.
+33@ = 0 
+
+:GROVE2_5078
+if 
+83D2:   not wav 1 ended 
+jf @GROVE2_5128 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_5121 
+jump @GROVE2_5676 
+
+:GROVE2_5121
+jump @GROVE2_5078 
+
+:GROVE2_5128
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_5173 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0603: AS_actor $ACTOR_SWEET goto_point_any_means 2513.683 -1672.876 12.5412 mode 4 use_car -1 
+
+:GROVE2_5173
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_5205 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+05BF: AS_actor $PLAYER_ACTOR look_at_actor $ACTOR_SWEET 10000 ms 
+
+:GROVE2_5205
+040D: unload_wav 1 
+03CF: load_wav 17621 as 1 
+
+:GROVE2_5216
+if 
+83D0:   not wav 1 loaded 
+jf @GROVE2_5242 
+wait 0 
+jump @GROVE2_5216 
+
+:GROVE2_5242
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GRO2_GD' time 4000 flag 1  // ~z~Here, I took this from one of those Ballas fools.
+33@ = 0 
+
+:GROVE2_5269
+if 
+83D2:   not wav 1 ended 
+jf @GROVE2_5319 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_5312 
+jump @GROVE2_5676 
+
+:GROVE2_5312
+jump @GROVE2_5269 
+
+:GROVE2_5319
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_5384 
+0605: actor $ACTOR_SWEET perform_animation "PRTIAL_HNDSHK_BIZ_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GROVE2_5384
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_5449 
+0605: actor $PLAYER_ACTOR perform_animation "PRTIAL_HNDSHK_BIZ_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GROVE2_5449
+040D: unload_wav 1 
+03CF: load_wav 17622 as 1 
+
+:GROVE2_5460
+if 
+83D0:   not wav 1 loaded 
+jf @GROVE2_5486 
+wait 0 
+jump @GROVE2_5460 
+
+:GROVE2_5486
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GRO2_GE' time 4000 flag 1  // ~z~Probably drug money - here's your half.
+33@ = 0 
+
+:GROVE2_5513
+if 
+83D2:   not wav 1 ended 
+jf @GROVE2_5563 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_5556 
+jump @GROVE2_5676 
+
+:GROVE2_5556
+jump @GROVE2_5513 
+
+:GROVE2_5563
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @GROVE2_5608 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0603: AS_actor $ACTOR_SWEET goto_point_any_means 2516.264 -1675.254 12.9287 mode 4 use_car -1 
+
+:GROVE2_5608
+33@ = 0 
+
+:GROVE2_5615
+if 
+  2000 > 33@ 
+jf @GROVE2_5669 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GROVE2_5662 
+jump @GROVE2_5676 
+
+:GROVE2_5662
+jump @GROVE2_5615 
+
+:GROVE2_5669
+gosub @GROVE2_3849 
+
+:GROVE2_5676
+04EF: release_animation "GANGS" 
+Actor.DestroyInstantly($ACTOR_SWEET)
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GROVE2_5736 
+Actor.PutAt($PLAYER_ACTOR, 2512.407, -1672.111, 12.4895)
+Actor.Angle($PLAYER_ACTOR) = 78.5658
+
+:GROVE2_5736
+gosub @GROVE2_3830 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+Camera.SetBehindPlayer
+gosub @GROVE2_3882 
+jump @GROVE2_3512 
+
+:GROVE2_5766
+040D: unload_wav 1 
+03CF: load_wav 46@ as 1 
+47@ = 0 
+return 
+
+:GROVE2_5786
+if and
+03D0:   wav 1 loaded 
+  47@ == 0 
+jf @GROVE2_5829 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 59@s time 10000 flag 1 
+47@ = 1 
+
+:GROVE2_5829
+if and
+03D2:   wav 1 ended 
+  47@ == 1 
+jf @GROVE2_5867 
+040D: unload_wav 1 
+03D5: remove_text 59@s 
+47@ = 2 
+
+:GROVE2_5867
+return

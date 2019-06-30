@@ -1,0 +1,1521 @@
+:MANSIO3
+thread 'MANSIO3' 
+gosub @MANSIO3_94 
+if 
+wasted_or_busted 
+jf @MANSIO3_85 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+gosub @MANSIO3_6934 
+
+:MANSIO3_85
+gosub @MANSIO3_7258 
+end_thread 
+
+:MANSIO3_94
+054C: use_GXT_table 'MAN_3' 
+0A20: disable_player $PLAYER_CHAR group_control_back 1 
+08A3: update_respect_while_on_mission 1 
+0169: set_fade_color_RGB 0 0 0 
+increment_mission_attempts 
+$ONMISSION = 1 
+82@ = 2 
+wait 0 
+023C: load_special_actor 'SWEET' as 1 // models 290-299 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:MANSIO3_172
+if 
+fading 
+jf @MANSIO3_196 
+wait 0 
+jump @MANSIO3_172 
+
+:MANSIO3_196
+set_weather 1 
+select_interior 5 
+02E4: load_cutscene_data 'BHILL3A' 
+
+:MANSIO3_215
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSIO3_239 
+wait 0 
+jump @MANSIO3_215 
+
+:MANSIO3_239
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:MANSIO3_256
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSIO3_280 
+wait 0 
+jump @MANSIO3_256 
+
+:MANSIO3_280
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+
+:MANSIO3_294
+if 
+fading 
+jf @MANSIO3_318 
+wait 0 
+jump @MANSIO3_294 
+
+:MANSIO3_318
+02EA: end_cutscene 
+select_interior 0 
+01B7: release_weather 
+Model.Load(#VINCENT)
+Model.Load(#BMYDRUG)
+Model.Load(#FAM2)
+Model.Load(#AK47)
+Model.Load(#HMYDRUG)
+04ED: load_animation "GANGS" 
+04ED: load_animation "CRACK" 
+07C0: load_path 488 
+08A9: load_external_script 19 (DEALER) 
+038B: load_requested_models 
+
+:MANSIO3_377
+if or
+   not Model.Available(#VINCENT)
+823D:   not special_actor 1 loaded 
+   not Model.Available(#FAM2)
+jf @MANSIO3_412 
+wait 0 
+jump @MANSIO3_377 
+
+:MANSIO3_412
+if or
+84EE:   not animation "GANGS" loaded 
+84EE:   not animation "CRACK" loaded 
+   not Model.Available(#BMYDRUG)
+jf @MANSIO3_456 
+wait 0 
+jump @MANSIO3_412 
+
+:MANSIO3_456
+if or
+88AB:   not external_script 19 (DEALER) loaded 
+87C1:   not path 488 available 
+   not Model.Available(#AK47)
+   not Model.Available(#HMYDRUG)
+jf @MANSIO3_496 
+wait 0 
+jump @MANSIO3_456 
+
+:MANSIO3_496
+04E4: refresh_game_renderer_at 1251.541 -808.7633 
+076C: set_zone 'GAN1' gang 1 density_to 0 
+076C: set_zone 'GAN1' gang 0 density_to 40 
+08A3: update_respect_while_on_mission 0 
+52@ = Actor.Create(CivMale, #BMYDRUG, 2488.617, -1671.536, -10.0)
+0913: run_external_script 19 (DEALER) 52@  
+018A: 56@ = create_checkpoint_at 2514.461 -1674.104 12.6425 
+018A: 57@ = create_checkpoint_at 1521.252 -1673.336 12.5607 
+018B: set_marker 56@ radar_mode 0 
+018B: set_marker 57@ radar_mode 3 
+0395: clear_area 1 at 1245.049 -811.1318 83.1477 radius 10.0 
+60@ = Car.Create(#VINCENT, 1245.049, -811.1318, 83.1477)
+0229: set_car 60@ primary_color_to 0 secondary_color_to 0 
+Car.Angle(60@) = 181.4888
+0423: set_car 60@ improved_handling_to 2.0 // (float) 
+Actor.PutAt($PLAYER_ACTOR, 1251.541, -808.7633, 83.1484)
+Actor.Angle($PLAYER_ACTOR) = 109.0044
+018A: 79@ = create_checkpoint_at 2485.527 -1668.528 12.3438 
+018B: set_marker 79@ radar_mode 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0A0B: set_rendering_origin_at_3D_coord 1251.541 -808.7633 83.1484 angle 109.0044 
+gosub @MANSIO3_7680 
+00BC: show_text_highpriority GXT 'MAN3_01' time 7000 flag 1  // ~s~Pick up Sweet from the ~y~Precinct~s~.
+
+:MANSIO3_810
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_5680 
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @MANSIO3_852 
+jump @MANSIO3_7020 
+
+:MANSIO3_852
+gosub @MANSIO3_7713 
+gosub @MANSIO3_8168 
+if 
+  64@ == 0 
+jf @MANSIO3_1870 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_924 
+61@ = Actor.MissionCar($PLAYER_ACTOR)
+01EA: 62@ = car 61@ max_passengers 
+01E9: 84@ = car 61@ num_passengers 
+
+:MANSIO3_924
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 1521.194 -1671.913 12.5625 radius 3.0 3.0 3.0 
+jf @MANSIO3_1870 
+if 
+  62@ == 0 
+jf @MANSIO3_1006 
+00BC: show_text_highpriority GXT 'MAN3_19' time 3000 flag 1  // ~s~Get a bigger vehicle!
+
+:MANSIO3_1006
+if 
+003B:   84@ == 62@ // (int) 
+jf @MANSIO3_1090 
+if or
+04A9:   actor $PLAYER_ACTOR driving_heli 
+   Actor.DrivingPlane($PLAYER_ACTOR)
+04C8:   actor $PLAYER_ACTOR driving_flying_vehicle 
+jf @MANSIO3_1074 
+00BC: show_text_highpriority GXT 'MAN3_69' time 3000 flag 1  // The vehicle is too full, there's no room for Sweet!
+jump @MANSIO3_1090 
+
+:MANSIO3_1074
+00BC: show_text_highpriority GXT 'MAN3_34' time 3000 flag 1  // The car is too full, there's no room for Sweet!
+
+:MANSIO3_1090
+if and
+  62@ > 0 
+803B:   not  84@ == 62@ // (int) 
+jf @MANSIO3_1870 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_1854 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_1178 
+$TEMPVAR_ACTOR_CAR = Actor.MissionCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:MANSIO3_1178
+Player.CanMove($PLAYER_CHAR) = False
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:MANSIO3_1200
+if 
+fading 
+jf @MANSIO3_1224 
+wait 0 
+jump @MANSIO3_1200 
+
+:MANSIO3_1224
+Player.MakeSafe($PLAYER_CHAR)
+if 
+   not Car.Wrecked(60@)
+jf @MANSIO3_1298 
+if 
+01AF:   car 60@ sphere 0 in_sphere 1542.73 -1675.697 12.5551 radius 15.0 15.0 15.0 
+jf @MANSIO3_1298 
+Car.Destroy(60@)
+
+:MANSIO3_1298
+0395: clear_area 1 at 1542.73 -1675.697 12.5551 radius 60.0 
+02E4: load_cutscene_data 'BHILL3B' 
+
+:MANSIO3_1333
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSIO3_1357 
+wait 0 
+jump @MANSIO3_1333 
+
+:MANSIO3_1357
+02E7: start_cutscene 
+fade 1 1000 
+
+:MANSIO3_1366
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSIO3_1390 
+wait 0 
+jump @MANSIO3_1366 
+
+:MANSIO3_1390
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MANSIO3_1405
+if 
+fading 
+jf @MANSIO3_1429 
+wait 0 
+jump @MANSIO3_1405 
+
+:MANSIO3_1429
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_1481 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @MANSIO3_1481 
+Car.PutAt($TEMPVAR_ACTOR_CAR, 1521.194, -1671.913, 12.5625)
+
+:MANSIO3_1481
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @MANSIO3_1565 
+09DD: unknown_player_group 1 
+$ACTOR_SWEET = Actor.CreateAsPassenger(Mission3, #SPECIAL01, $TEMPVAR_ACTOR_CAR, 0)
+Actor.Health($ACTOR_SWEET) = 700
+Actor.SetMaxHealth($ACTOR_SWEET, 700)
+Actor.SetWalkStyle($ACTOR_SWEET, "GANG2")
+0568: set_actor $ACTOR_SWEET untargetable 1 
+0446: set_actor $ACTOR_SWEET dismemberment_possible 0 
+Actor.WeaponAccuracy($ACTOR_SWEET) = 90
+
+:MANSIO3_1565
+if and
+   not Actor.Dead($ACTOR_SWEET)
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_1640 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $TEMPVAR_ACTOR_CAR)
+jf @MANSIO3_1618 
+036A: put_actor $PLAYER_ACTOR in_car $TEMPVAR_ACTOR_CAR 
+
+:MANSIO3_1618
+58@ = Marker.CreateAboveActor($ACTOR_SWEET)
+07E0: set_marker 58@ type_to 1 
+018B: set_marker 58@ radar_mode 0 
+
+:MANSIO3_1640
+33@ = 0 
+018B: set_marker 56@ radar_mode 3 
+018B: set_marker 57@ radar_mode 0 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_1689 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+
+:MANSIO3_1689
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+72@ = Actor.Angle($PLAYER_ACTOR)
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @MANSIO3_1826 
+if and
+  72@ > 90.0 
+  270.0 > 72@ 
+jf @MANSIO3_1794 
+0A0B: set_rendering_origin_at_3D_coord 1521.194 -1671.913 12.5625 angle 180.0 
+Car.Angle($TEMPVAR_ACTOR_CAR) = 180.0
+jump @MANSIO3_1826 
+
+:MANSIO3_1794
+0A0B: set_rendering_origin_at_3D_coord 1521.194 -1671.913 12.5625 angle 0.0 
+Car.Angle($TEMPVAR_ACTOR_CAR) = 0.0
+
+:MANSIO3_1826
+gosub @MANSIO3_7680 
+59@ = 1 
+64@ = 1 
+jump @MANSIO3_1870 
+
+:MANSIO3_1854
+00BC: show_text_highpriority GXT 'MAN3_08' time 4000 flag 1  // You need a vehicle to pick-up Sweet.
+
+:MANSIO3_1870
+if 
+   not 59@ == 0 
+jf @MANSIO3_2273 
+if and
+  33@ > 1000 
+  59@ == 1 
+jf @MANSIO3_1996 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @MANSIO3_1937 
+0A09: set_actor $ACTOR_RYDER muted 1 // versionB 
+
+:MANSIO3_1937
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_1960 
+0A09: set_actor $PLAYER_ACTOR muted 1 // versionB 
+
+:MANSIO3_1960
+05AA: 86@s = 'MAN3_AA' // @s = 'short'  // ~z~You gotta understand, shit's all fucked up now, dude.
+04AF: 83@ = 24200 // = constant 
+gosub @MANSIO3_8148 
+59@ = 2 
+
+:MANSIO3_1996
+if and
+  82@ == 2 
+  59@ == 2 
+jf @MANSIO3_2057 
+05AA: 86@s = 'MAN3_AB' // @s = 'short'  // ~z~Yeah.
+04AF: 83@ = 24201 // = constant 
+gosub @MANSIO3_8148 
+59@ = 3 
+
+:MANSIO3_2057
+if and
+  82@ == 2 
+  59@ == 3 
+jf @MANSIO3_2118 
+05AA: 86@s = 'MAN3_AC' // @s = 'short'  // ~z~What you want, it ain't round here no more.
+04AF: 83@ = 24202 // = constant 
+gosub @MANSIO3_8148 
+59@ = 4 
+
+:MANSIO3_2118
+if and
+  82@ == 2 
+  59@ == 4 
+jf @MANSIO3_2179 
+05AA: 86@s = 'MAN3_AD' // @s = 'short'  // ~z~Just take me to moma's house.
+04AF: 83@ = 24203 // = constant 
+gosub @MANSIO3_8148 
+59@ = 5 
+
+:MANSIO3_2179
+if and
+  82@ == 2 
+  59@ == 5 
+jf @MANSIO3_2273 
+00BC: show_text_highpriority GXT 'MAN3_05' time 7000 flag 1  // ~s~Drive Sweet to ~y~Grove Street~s~.
+59@ = 0 
+if 
+   not Actor.Dead($ACTOR_RYDER)
+jf @MANSIO3_2250 
+0A09: set_actor $ACTOR_RYDER muted 0 // versionB 
+
+:MANSIO3_2250
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_2273 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:MANSIO3_2273
+if or
+  64@ == 1 
+  64@ == 2 
+jf @MANSIO3_3894 
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_2337 
+00BC: show_text_highpriority GXT 'MAN3_11' time 4000 flag 1  // ~r~Sweet has been killed.
+jump @MANSIO3_6934 
+
+:MANSIO3_2337
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_2367 
+Actor.StorePos($ACTOR_SWEET, 53@, 54@, 55@)
+
+:MANSIO3_2367
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 53@ 54@ 55@ radius 30.0 30.0 30.0 
+jf @MANSIO3_2468 
+018B: set_marker 58@ radar_mode 0 
+018B: set_marker 56@ radar_mode 3 
+if 
+86EE:   not actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+jf @MANSIO3_2454 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+
+:MANSIO3_2454
+64@ = 1 
+jump @MANSIO3_2529 
+
+:MANSIO3_2468
+00BC: show_text_highpriority GXT 'MAN3_03' time 4000 flag 1  // ~s~You lost ~b~Sweet~s~, go back and get him.
+018B: set_marker 58@ radar_mode 3 
+018B: set_marker 56@ radar_mode 0 
+if 
+06EE:   actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+jf @MANSIO3_2522 
+06C9: remove_actor $ACTOR_SWEET from_group 
+
+:MANSIO3_2522
+64@ = 2 
+
+:MANSIO3_2529
+if 
+  64@ == 1 
+jf @MANSIO3_3894 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere 2514.461 -1674.104 12.6425 radius 4.0 4.0 4.0 
+jf @MANSIO3_3894 
+Player.CanMove($PLAYER_CHAR) = False
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_2641 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $TEMPVAR_ACTOR_CAR perform_action 6 timelimit 2000000 
+
+:MANSIO3_2641
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:MANSIO3_2656
+if 
+fading 
+jf @MANSIO3_2680 
+wait 0 
+jump @MANSIO3_2656 
+
+:MANSIO3_2680
+Player.MakeSafe($PLAYER_CHAR)
+if 
+   not Car.Wrecked(60@)
+jf @MANSIO3_2803 
+if 
+01AF:   car 60@ sphere 0 in_sphere 2492.889 -1666.564 12.3438 radius 15.0 15.0 15.0 
+jf @MANSIO3_2803 
+0395: clear_area 1 at 2482.994 -1653.609 12.461 radius 10.0 
+Car.PutAt(60@, 2482.994, -1653.609, 12.461)
+Car.Angle(60@) = 273.1021
+
+:MANSIO3_2803
+0395: clear_area 1 at 2492.889 -1666.564 12.3438 radius 60.0 
+02E4: load_cutscene_data 'BHILL3C' 
+
+:MANSIO3_2838
+if 
+86B9:   not cutscene_data_loaded 
+jf @MANSIO3_2862 
+wait 0 
+jump @MANSIO3_2838 
+
+:MANSIO3_2862
+02E7: start_cutscene 
+fade 1 1000 
+
+:MANSIO3_2871
+if 
+82E9:   not cutscene_reached_end 
+jf @MANSIO3_2895 
+wait 0 
+jump @MANSIO3_2871 
+
+:MANSIO3_2895
+02EA: end_cutscene 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 0 
+
+:MANSIO3_2910
+if 
+fading 
+jf @MANSIO3_2934 
+wait 0 
+jump @MANSIO3_2910 
+
+:MANSIO3_2934
+0615: define_AS_pack_begin 88@ 
+0605: actor -1 perform_animation "IDLE_CHAT" IFP "PED" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 88@ loop 1 
+0616: define_AS_pack_end 88@ 
+0615: define_AS_pack_begin 89@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0643: set_AS_pack 89@ loop 1 
+0616: define_AS_pack_end 89@ 
+018B: set_marker 56@ radar_mode 0 
+64@ = 3 
+40@ = Actor.Create(CivMale, #BMYDRUG, 2429.19, -1677.537, 12.7231)
+Actor.Angle(40@) = 306.1672
+0618: assign_actor 40@ to_AS_pack 88@ 
+34@ = Marker.CreateAboveActor(40@)
+47@ = Actor.Create(CivMale, #FAM2, 2430.586, -1677.074, 12.7135)
+Actor.Angle(47@) = 80.528
+0618: assign_actor 47@ to_AS_pack 89@ 
+48@ = Actor.Create(CivMale, #FAM2, 2513.364, -1649.865, 13.5588)
+Actor.Angle(48@) = 140.4164
+0605: actor 48@ perform_animation "CRCKIDLE1" IFP "CRACK" framedelta 1.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+gosub @MANSIO3_7615 
+0A0B: set_rendering_origin_at_3D_coord 2424.184 -1679.58 12.7653 angle 322.7617 
+Camera.SetPosition(2427.227, -1681.12, 13.891, 0.0, 0.0, 0.0)
+Camera.PointAt(2427.808, -1680.306, 13.8707, 2)
+00BC: show_text_highpriority GXT 'MAN3_20' time 5000 flag 1  // Kill any crack dealers in your hood to keep your gang healthy.
+gosub @MANSIO3_7680 
+wait 1000 
+33@ = 0 
+
+:MANSIO3_3310
+if 
+  4000 > 33@ 
+jf @MANSIO3_3371 
+wait 0 
+if and
+00E1:   player 0 pressed_key 16 
+  $7951 == 1 
+jf @MANSIO3_3364 
+jump @MANSIO3_3506 
+
+:MANSIO3_3364
+jump @MANSIO3_3310 
+
+:MANSIO3_3371
+Camera.SetPosition(2507.984, -1652.199, 15.6974, 0.0, 0.0, 0.0)
+Camera.PointAt(2508.892, -1651.913, 15.3924, 2)
+00BC: show_text_highpriority GXT 'MAN3_21' time 5000 flag 1  // If a gang member is high on crack you won't be able to use him.
+33@ = 0 
+
+:MANSIO3_3445
+if 
+  5000 > 33@ 
+jf @MANSIO3_3506 
+wait 0 
+if and
+00E1:   player 0 pressed_key 16 
+  $7951 == 1 
+jf @MANSIO3_3499 
+jump @MANSIO3_3506 
+
+:MANSIO3_3499
+jump @MANSIO3_3445 
+
+:MANSIO3_3506
+$7951 = 1 
+85@ = 1 
+08A3: update_respect_while_on_mission 1 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_3615 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_3583 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2506.059 -1671.968 12.379 
+jump @MANSIO3_3603 
+
+:MANSIO3_3583
+Actor.PutAt($PLAYER_ACTOR, 2506.059, -1671.968, 12.379)
+
+:MANSIO3_3603
+Camera.SetBehindPlayer
+Actor.Angle($PLAYER_ACTOR) = 62.4295
+
+:MANSIO3_3615
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_3721 
+if 
+   Actor.Driving($ACTOR_SWEET)
+jf @MANSIO3_3674 
+0362: remove_actor $ACTOR_SWEET from_car_and_place_at 2506.567 -1670.212 12.3822 
+jump @MANSIO3_3694 
+
+:MANSIO3_3674
+Actor.PutAt($ACTOR_SWEET, 2506.567, -1670.212, 12.3822)
+
+:MANSIO3_3694
+Actor.GiveWeaponAndAmmo($ACTOR_SWEET, AK47, 300)
+01B9: set_actor $ACTOR_SWEET armed_weapon_to 30 
+Actor.Angle($ACTOR_SWEET) = 113.0677
+
+:MANSIO3_3721
+if 
+86EE:   not actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+jf @MANSIO3_3752 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+
+:MANSIO3_3752
+076C: set_zone 'GAN1' gang 1 density_to 0 
+076C: set_zone 'GAN1' gang 0 density_to 40 
+076C: set_zone 'GAN2' gang 1 density_to 0 
+076C: set_zone 'GAN2' gang 0 density_to 40 
+Actor.DestroyInstantly(47@)
+59@ = 0 
+gosub @MANSIO3_7628 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_3871 
+Actor.Health($ACTOR_SWEET) = 700
+Actor.SetMaxHealth($ACTOR_SWEET, 700)
+$7953 = Actor.Health($ACTOR_SWEET)
+
+:MANSIO3_3871
+$7953 /= 7 
+03C4: set_status_text $7953 type 1 GXT 'MAN3_32' // global_variable  // Sweet
+
+:MANSIO3_3894
+if 
+  64@ == 3 
+jf @MANSIO3_4198 
+00BC: show_text_highpriority GXT 'MAN3_22' time 7000 flag 1  // ~s~Take back the hood from the Ballas and clean out the ~r~Dealers~s~!
+41@ = Actor.Create(Dealer, #HMYDRUG, 2482.087, -1696.119, 12.5267)
+Actor.Angle(41@) = 0.095
+35@ = Marker.CreateAboveActor(41@)
+42@ = Actor.Create(Dealer, #BMYDRUG, 2451.681, -1644.083, 12.457)
+Actor.Angle(42@) = 186.2393
+36@ = Marker.CreateAboveActor(42@)
+43@ = Actor.Create(Dealer, #HMYDRUG, 2415.79, -1631.143, 12.5114)
+Actor.Angle(43@) = 287.5167
+37@ = Marker.CreateAboveActor(43@)
+44@ = Actor.Create(Dealer, #BMYDRUG, 2364.361, -1666.775, 12.5469)
+Actor.Angle(44@) = 343.1245
+38@ = Marker.CreateAboveActor(44@)
+45@ = Actor.Create(Dealer, #BMYDRUG, 2370.333, -1637.42, 12.477)
+Actor.Angle(45@) = 140.6299
+39@ = Marker.CreateAboveActor(45@)
+0913: run_external_script 19 (DEALER) 40@  
+0913: run_external_script 19 (DEALER) 41@  
+0913: run_external_script 19 (DEALER) 42@  
+0913: run_external_script 19 (DEALER) 43@  
+0913: run_external_script 19 (DEALER) 44@  
+0913: run_external_script 19 (DEALER) 45@  
+Actor.DestroyInstantly(52@)
+64@ = 4 
+
+:MANSIO3_4198
+if 
+  64@ == 4 
+jf @MANSIO3_5673 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_4247 
+$7953 = Actor.Health($ACTOR_SWEET)
+$7953 /= 7 
+
+:MANSIO3_4247
+076D: get_zone 'GAN1' gang 0 density_to 75@ 
+if 
+  75@ == 0 
+jf @MANSIO3_4558 
+if 
+  74@ == 0 
+jf @MANSIO3_4558 
+74@ = 1 
+if 
+  73@ == 0 
+jf @MANSIO3_4551 
+gosub @MANSIO3_7615 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_4397 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:MANSIO3_4397
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_4463 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0812: AS_actor $ACTOR_SWEET perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:MANSIO3_4463
+00BC: show_text_highpriority GXT 'MAN3_33' time 4000 flag 1  // The Hood is yours!
+wait 4000 
+076C: set_zone 'GAN1' gang 1 density_to 40 
+076C: set_zone 'GAN1' gang 0 density_to 0 
+0746: set_acquaintance 1 of_actors_pedtype 8 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 8 to_actors_pedtype 7 
+gosub @MANSIO3_7628 
+33@ = 0 
+jump @MANSIO3_4558 
+
+:MANSIO3_4551
+jump @MANSIO3_5687 
+
+:MANSIO3_4558
+if and
+  74@ == 1 
+  33@ > 4000 
+  81@ == 0 
+jf @MANSIO3_4614 
+00BC: show_text_highpriority GXT 'MAN3_29' time 10000 flag 1  // ~s~Now kill the ~r~Dealers~s~!
+81@ = 1 
+
+:MANSIO3_4614
+if and
+   Player.InZone($PLAYER_CHAR, 'GAN1')
+  74@ == 0 
+  85@ == 1 
+jf @MANSIO3_4746 
+if and
+  78@ == 0 
+887A:   not gang_war_in_progress 
+jf @MANSIO3_4739 
+076C: set_zone 'ANGPI' gang 9 density_to 0  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 0  // Fort Carson
+08A3: update_respect_while_on_mission 1 
+0879: enable_gang_wars 1 
+if 
+075C:   marker 79@ enabled 
+jf @MANSIO3_4732 
+Marker.Disable(79@)
+
+:MANSIO3_4732
+78@ = 1 
+
+:MANSIO3_4739
+$7952 = 1 
+
+:MANSIO3_4746
+if and
+   not Player.InZone($PLAYER_CHAR, 'GAN1')
+  74@ == 0 
+  85@ == 1 
+jf @MANSIO3_4909 
+if and
+  78@ == 1 
+887A:   not gang_war_in_progress 
+jf @MANSIO3_4902 
+08A3: update_respect_while_on_mission 0 
+0879: enable_gang_wars 0 
+076C: set_zone 'ANGPI' gang 9 density_to 40  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 40  // Fort Carson
+00BC: show_text_highpriority GXT 'MAN3_31' time 6000 flag 1  // ~s~Go back and take the hood at ~y~Grove Street~s~.
+if 
+875C:   not marker 79@ enabled 
+jf @MANSIO3_4895 
+018A: 79@ = create_checkpoint_at 2485.527 -1668.528 12.3438 
+
+:MANSIO3_4895
+78@ = 0 
+
+:MANSIO3_4902
+$7952 = 0 
+
+:MANSIO3_4909
+if 
+   Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_4948 
+00BC: show_text_highpriority GXT 'MAN3_11' time 4000 flag 1  // ~r~Sweet has been killed.
+jump @MANSIO3_6934 
+
+:MANSIO3_4948
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_4978 
+Actor.StorePos($ACTOR_SWEET, 53@, 54@, 55@)
+
+:MANSIO3_4978
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 53@ 54@ 55@ radius 35.0 35.0 35.0 
+jf @MANSIO3_5129 
+if 
+  70@ == 1 
+jf @MANSIO3_5122 
+018B: set_marker 58@ radar_mode 0 
+018B: set_marker 34@ radar_mode 3 
+018B: set_marker 35@ radar_mode 3 
+018B: set_marker 36@ radar_mode 3 
+018B: set_marker 37@ radar_mode 3 
+018B: set_marker 38@ radar_mode 3 
+018B: set_marker 39@ radar_mode 3 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_5115 
+09DD: unknown_player_group 1 
+0631: put_actor $ACTOR_SWEET in_group $PLAYER_GROUP 
+
+:MANSIO3_5115
+70@ = 0 
+
+:MANSIO3_5122
+jump @MANSIO3_5240 
+
+:MANSIO3_5129
+if 
+  70@ == 0 
+jf @MANSIO3_5240 
+00BC: show_text_highpriority GXT 'MAN3_03' time 10000 flag 1  // ~s~You lost ~b~Sweet~s~, go back and get him.
+018B: set_marker 58@ radar_mode 3 
+018B: set_marker 34@ radar_mode 0 
+018B: set_marker 35@ radar_mode 0 
+018B: set_marker 36@ radar_mode 0 
+018B: set_marker 37@ radar_mode 0 
+018B: set_marker 38@ radar_mode 0 
+018B: set_marker 39@ radar_mode 0 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_5233 
+06C9: remove_actor $ACTOR_SWEET from_group 
+
+:MANSIO3_5233
+70@ = 1 
+
+:MANSIO3_5240
+if and
+   Actor.Dead(40@)
+075C:   marker 34@ enabled 
+jf @MANSIO3_5284 
+Marker.Disable(34@)
+0209: 10@ = random_int_in_ranges 24209 24211 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5284
+if and
+   Actor.Dead(41@)
+075C:   marker 35@ enabled 
+jf @MANSIO3_5328 
+Marker.Disable(35@)
+0209: 10@ = random_int_in_ranges 24211 24213 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5328
+if and
+   Actor.Dead(42@)
+075C:   marker 36@ enabled 
+jf @MANSIO3_5372 
+Marker.Disable(36@)
+0209: 10@ = random_int_in_ranges 24214 24216 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5372
+if and
+   Actor.Dead(43@)
+075C:   marker 37@ enabled 
+jf @MANSIO3_5416 
+Marker.Disable(37@)
+0209: 10@ = random_int_in_ranges 24216 24218 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5416
+if and
+   Actor.Dead(44@)
+075C:   marker 38@ enabled 
+jf @MANSIO3_5460 
+Marker.Disable(38@)
+0209: 10@ = random_int_in_ranges 24218 24220 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5460
+if and
+   Actor.Dead(45@)
+075C:   marker 39@ enabled 
+jf @MANSIO3_5501 
+Marker.Disable(39@)
+10@ = 24213 
+gosub @MANSIO3_8251 
+
+:MANSIO3_5501
+if and
+  77@ == 1 
+  32@ > 4000 
+jf @MANSIO3_5545 
+03E5: show_text_box 'MAN3_30'  // ~s~Shoot some Ballas to start a gang war!
+77@ = 2 
+
+:MANSIO3_5545
+if and
+   Actor.Dead(40@)
+   Actor.Dead(41@)
+   Actor.Dead(42@)
+   Actor.Dead(43@)
+   Actor.Dead(44@)
+   Actor.Dead(45@)
+jf @MANSIO3_5673 
+if 
+  73@ == 0 
+jf @MANSIO3_5673 
+73@ = 1 
+if 
+  74@ == 0 
+jf @MANSIO3_5666 
+00BC: show_text_highpriority GXT 'MAN3_28' time 10000 flag 1  // ~s~Now take back the hood!
+32@ = 0 
+77@ = 1 
+jump @MANSIO3_5673 
+
+:MANSIO3_5666
+jump @MANSIO3_5687 
+
+:MANSIO3_5673
+jump @MANSIO3_810 
+
+:MANSIO3_5680
+jump @MANSIO3_6934 
+
+:MANSIO3_5687
+gosub @MANSIO3_7647 
+gosub @MANSIO3_7615 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_5935 
+06C9: remove_actor $ACTOR_SWEET from_group 
+0395: clear_area 1 at 2512.761 -1672.52 12.5034 radius 20.0 
+Car.Destroy(60@)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @MANSIO3_5819 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 2512.761 -1672.52 12.5034 
+0362: remove_actor $ACTOR_SWEET from_car_and_place_at 2514.788 -1673.938 12.6861 
+jump @MANSIO3_5859 
+
+:MANSIO3_5819
+Actor.PutAt($PLAYER_ACTOR, 2512.761, -1672.52, 12.5034)
+Actor.PutAt($ACTOR_SWEET, 2514.788, -1673.938, 12.6861)
+
+:MANSIO3_5859
+Car.Destroy(60@)
+Actor.Angle($PLAYER_ACTOR) = 240.2609
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor $ACTOR_SWEET 
+Actor.Angle($ACTOR_SWEET) = 73.5014
+0639: AS_actor $ACTOR_SWEET rotate_to_actor $PLAYER_ACTOR 
+0688: AS_actor $ACTOR_SWEET unknown_toggle_ped_threat_scanner 0 0 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+01B9: set_actor $ACTOR_SWEET armed_weapon_to 0 
+
+:MANSIO3_5935
+Camera.SetAtPos(2512.761, -1672.52, 12.5034)
+0A0B: set_rendering_origin_at_3D_coord 2512.761 -1672.52 12.5034 angle 240.2609 
+Camera.SetPosition(2509.798, -1672.175, 13.4192, 0.0, 0.0, 0.0)
+Camera.PointAt(2510.752, -1672.457, 13.5178, 2)
+gosub @MANSIO3_7680 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_6098 
+0605: actor $PLAYER_ACTOR perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+
+:MANSIO3_6098
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_6164 
+0605: actor $ACTOR_SWEET perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+wait 500 
+
+:MANSIO3_6164
+040D: unload_wav 1 
+03CF: load_wav 24204 as 1 
+
+:MANSIO3_6175
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_6201 
+wait 0 
+jump @MANSIO3_6175 
+
+:MANSIO3_6201
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'MAN3_BA' time 4000 flag 1  // ~z~Alright, let's get out of here. Go see Kendl.
+33@ = 0 
+
+:MANSIO3_6228
+if 
+  4000 > 33@ 
+jf @MANSIO3_6282 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @MANSIO3_6275 
+jump @MANSIO3_6913 
+
+:MANSIO3_6275
+jump @MANSIO3_6228 
+
+:MANSIO3_6282
+040D: unload_wav 1 
+03CF: load_wav 24205 as 1 
+
+:MANSIO3_6293
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_6319 
+wait 0 
+jump @MANSIO3_6293 
+
+:MANSIO3_6319
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'MAN3_BB' time 3000 flag 1  // ~z~Kendl can come see me right here, at her home.
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_6396 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0605: actor $ACTOR_SWEET perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:MANSIO3_6396
+33@ = 0 
+
+:MANSIO3_6403
+if 
+  3000 > 33@ 
+jf @MANSIO3_6457 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @MANSIO3_6450 
+jump @MANSIO3_6913 
+
+:MANSIO3_6450
+jump @MANSIO3_6403 
+
+:MANSIO3_6457
+040D: unload_wav 1 
+03CF: load_wav 24206 as 1 
+
+:MANSIO3_6468
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_6494 
+wait 0 
+jump @MANSIO3_6468 
+
+:MANSIO3_6494
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'MAN3_BC' time 3000 flag 1  // ~z~But it ain't nothing here no more.
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_6571 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0605: actor $PLAYER_ACTOR perform_animation "IDLE_CHAT" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:MANSIO3_6571
+33@ = 0 
+
+:MANSIO3_6578
+if 
+  3000 > 33@ 
+jf @MANSIO3_6632 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @MANSIO3_6625 
+jump @MANSIO3_6913 
+
+:MANSIO3_6625
+jump @MANSIO3_6578 
+
+:MANSIO3_6632
+040D: unload_wav 1 
+03CF: load_wav 24207 as 1 
+
+:MANSIO3_6643
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_6669 
+wait 0 
+jump @MANSIO3_6643 
+
+:MANSIO3_6669
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'MAN3_BD' time 3000 flag 1  // ~z~Rome wasn't built in a day, niggah!
+33@ = 0 
+
+:MANSIO3_6696
+if 
+  3000 > 33@ 
+jf @MANSIO3_6750 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @MANSIO3_6743 
+jump @MANSIO3_6913 
+
+:MANSIO3_6743
+jump @MANSIO3_6696 
+
+:MANSIO3_6750
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_6795 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0603: AS_actor $PLAYER_ACTOR goto_point_any_means 2507.793 -1668.927 12.3879 mode 4 use_car -1 
+
+:MANSIO3_6795
+040D: unload_wav 1 
+03CF: load_wav 24208 as 1 
+
+:MANSIO3_6806
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_6832 
+wait 0 
+jump @MANSIO3_6806 
+
+:MANSIO3_6832
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'MAN3_BE' time 2000 flag 1  // ~z~My brother can be a real pain in the ass!
+33@ = 0 
+
+:MANSIO3_6859
+if 
+  2000 > 33@ 
+jf @MANSIO3_6913 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @MANSIO3_6906 
+jump @MANSIO3_6913 
+
+:MANSIO3_6906
+jump @MANSIO3_6859 
+
+:MANSIO3_6913
+gosub @MANSIO3_7628 
+Camera.SetBehindPlayer
+Actor.DestroyInstantly($ACTOR_SWEET)
+jump @MANSIO3_7020 
+
+:MANSIO3_6934
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @MANSIO3_7002 
+$11033 = 1 
+$11029 = 300.0 
+$11032 = 1236.48 
+$11031 = -739.71 
+$11030 = 95.9 
+
+:MANSIO3_7002
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:MANSIO3_7020
+076C: set_zone 'ANGPI' gang 9 density_to 0  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 0  // Fort Carson
+08A3: update_respect_while_on_mission 1 
+0879: enable_gang_wars 1 
+076C: set_zone 'GAN1' gang 1 density_to 40 
+076C: set_zone 'GAN2' gang 1 density_to 40 
+076C: set_zone 'GAN1' gang 0 density_to 0 
+076C: set_zone 'GAN2' gang 0 density_to 0 
+create_thread @GROVE 
+Marker.Disable($623)
+$623 = Marker.CreateIconAndSphere($ICON_SWEET_2, $X_JOHNSON_HOUSE, $Y_JOHNSON_HOUSE, $Z_JOHNSON_HOUSE)
+$MANSION_TOTAL_PASSED_MISSIONS += 1 
+030C: progress_made = 1 
+0318: set_latest_mission_passed 'MAN_3'  // Home Coming
+01E3: show_text_1number_styled GXT 'M_PASSR' number 40 time 5000 style 1  // MISSION PASSED!~n~~w~RESPECT +
+0998: add_respect 40 
+04A6: $GS_GANG_MONEY_PICKUP = create_asset_money_pickup_at 2502.1 -1686.38 13.0 money 10000 $GS_GANG_CASH 
+create_thread @TCASH 
+$GS_MONEY_PICKUP_EXISTS = 0 
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0629: change_integer_stat 334 to 1 
+65@ = 1 
+return 
+
+:MANSIO3_7258
+if 
+  65@ == 0 
+jf @MANSIO3_7374 
+08A3: update_respect_while_on_mission 0 
+0879: enable_gang_wars 0 
+076C: set_zone 'ANGPI' gang 9 density_to 40  // Angel Pine
+076C: set_zone 'CARSO' gang 9 density_to 40  // Fort Carson
+076C: set_zone 'GAN1' gang 1 density_to 0 
+076C: set_zone 'GAN2' gang 1 density_to 0 
+076C: set_zone 'GAN1' gang 0 density_to 40 
+076C: set_zone 'GAN2' gang 0 density_to 40 
+
+:MANSIO3_7374
+0151: remove_status_text $7953 
+0746: set_acquaintance 1 of_actors_pedtype 8 to_actors_pedtype 0 
+0746: set_acquaintance 4 of_actors_pedtype 8 to_actors_pedtype 7 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+Model.Destroy(#VINCENT)
+Model.Destroy(#COACH)
+Model.Destroy(#BMYDRUG)
+Model.Destroy(#FAM2)
+Model.Destroy(#AK47)
+Model.Destroy(#HMYDRUG)
+090F: end_external_script 19 (DEALER) 
+0296: unload_special_actor 1 
+04EF: release_animation "GANGS" 
+04EF: release_animation "CRACK" 
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_7481 
+Actor.DestroyWithFade($ACTOR_SWEET)
+
+:MANSIO3_7481
+if 
+075C:   marker 79@ enabled 
+jf @MANSIO3_7502 
+Marker.Disable(79@)
+
+:MANSIO3_7502
+if 
+075C:   marker 34@ enabled 
+jf @MANSIO3_7523 
+Marker.Disable(34@)
+
+:MANSIO3_7523
+if 
+075C:   marker 35@ enabled 
+jf @MANSIO3_7544 
+Marker.Disable(35@)
+
+:MANSIO3_7544
+if 
+075C:   marker 57@ enabled 
+jf @MANSIO3_7565 
+Marker.Disable(57@)
+
+:MANSIO3_7565
+if 
+075C:   marker 56@ enabled 
+jf @MANSIO3_7586 
+Marker.Disable(56@)
+
+:MANSIO3_7586
+if 
+075C:   marker 58@ enabled 
+jf @MANSIO3_7607 
+Marker.Disable(58@)
+
+:MANSIO3_7607
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+mission_cleanup 
+return 
+
+:MANSIO3_7615
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+return 
+
+:MANSIO3_7628
+00BE: text_clear_all 
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+return 
+
+:MANSIO3_7647
+fade 0 500 
+
+:MANSIO3_7654
+if 
+fading 
+jf @MANSIO3_7678 
+wait 0 
+jump @MANSIO3_7654 
+
+:MANSIO3_7678
+return 
+
+:MANSIO3_7680
+fade 1 500 
+
+:MANSIO3_7687
+if 
+fading 
+jf @MANSIO3_7711 
+wait 0 
+jump @MANSIO3_7687 
+
+:MANSIO3_7711
+return 
+
+:MANSIO3_7713
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @MANSIO3_7776 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_7776 
+Actor.PutAt($PLAYER_ACTOR, 1522.09, -1662.082, 12.5469)
+Actor.Angle($PLAYER_ACTOR) = 175.5419
+Camera.SetBehindPlayer
+
+:MANSIO3_7776
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @MANSIO3_7791 
+
+:MANSIO3_7791
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @MANSIO3_7854 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_7854 
+Actor.PutAt($PLAYER_ACTOR, 2503.688, -1671.453, 12.3707)
+Actor.Angle($PLAYER_ACTOR) = 255.1807
+Camera.SetBehindPlayer
+
+:MANSIO3_7854
+if 
+0736:   is_keyboard_key_just_pressed 75 
+jf @MANSIO3_8036 
+gosub @MANSIO3_7615 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @MANSIO3_7942 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:MANSIO3_7942
+if 
+   not Actor.Dead($ACTOR_SWEET)
+jf @MANSIO3_8008 
+0792: disembark_instantly_actor $ACTOR_SWEET 
+0812: AS_actor $ACTOR_SWEET perform_animation "PRTIAL_HNDSHK_01" IFP "GANGS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:MANSIO3_8008
+00BC: show_text_highpriority GXT 'MAN3_33' time 4000 flag 1  // The Hood is yours!
+wait 4000 
+gosub @MANSIO3_7628 
+
+:MANSIO3_8036
+if 
+0736:   is_keyboard_key_just_pressed 72 
+jf @MANSIO3_8058 
+jump @MANSIO3_5687 
+
+:MANSIO3_8058
+if 
+0736:   is_keyboard_key_just_pressed 90 
+jf @MANSIO3_8131 
+if 
+   not Car.Wrecked(61@)
+jf @MANSIO3_8131 
+46@ = Actor.CreateAsPassenger(CivMale, #FAM2, 61@, 0)
+47@ = Actor.CreateAsPassenger(CivMale, #FAM2, 61@, 1)
+48@ = Actor.CreateAsPassenger(CivMale, #FAM2, 61@, 2)
+
+:MANSIO3_8131
+if 
+0736:   is_keyboard_key_just_pressed 77 
+jf @MANSIO3_8146 
+
+:MANSIO3_8146
+return 
+
+:MANSIO3_8148
+040D: unload_wav 1 
+03CF: load_wav 83@ as 1 
+82@ = 0 
+return 
+
+:MANSIO3_8168
+if and
+03D0:   wav 1 loaded 
+  82@ == 0 
+jf @MANSIO3_8211 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 86@s time 10000 flag 1 
+82@ = 1 
+
+:MANSIO3_8211
+if and
+03D2:   wav 1 ended 
+  82@ == 1 
+jf @MANSIO3_8249 
+040D: unload_wav 1 
+03D5: remove_text 86@s 
+82@ = 2 
+
+:MANSIO3_8249
+return 
+
+:MANSIO3_8251
+040D: unload_wav 1 
+03CF: load_wav 10@ as 1 
+
+:MANSIO3_8262
+if 
+83D0:   not wav 1 loaded 
+jf @MANSIO3_8288 
+wait 0 
+jump @MANSIO3_8262 
+
+:MANSIO3_8288
+03D1: play_wav 1 
+if 
+  10@ == 24209 
+jf @MANSIO3_8334 
+00BC: show_text_highpriority GXT 'MAN3_CA' time 3000 flag 1  // ~z~Punk ass yay whores!
+jump @MANSIO3_8728 
+
+:MANSIO3_8334
+if 
+  10@ == 24210 
+jf @MANSIO3_8376 
+00BC: show_text_highpriority GXT 'MAN3_CB' time 3000 flag 1  // ~z~Base pushing ass pussies!
+jump @MANSIO3_8728 
+
+:MANSIO3_8376
+if 
+  10@ == 24211 
+jf @MANSIO3_8418 
+00BC: show_text_highpriority GXT 'MAN3_CC' time 3000 flag 1  // ~z~Punk crack bitches!
+jump @MANSIO3_8728 
+
+:MANSIO3_8418
+if 
+  10@ == 24212 
+jf @MANSIO3_8460 
+00BC: show_text_highpriority GXT 'MAN3_CD' time 3000 flag 1  // ~z~Crack-a-lack-a ass!
+jump @MANSIO3_8728 
+
+:MANSIO3_8460
+if 
+  10@ == 24213 
+jf @MANSIO3_8502 
+00BC: show_text_highpriority GXT 'MAN3_CE' time 3000 flag 1  // ~z~Get outta this neighborhood!
+jump @MANSIO3_8728 
+
+:MANSIO3_8502
+if 
+  10@ == 24214 
+jf @MANSIO3_8544 
+00BC: show_text_highpriority GXT 'MAN3_CF' time 3000 flag 1  // ~z~I'll kill all you motherfuckers!
+jump @MANSIO3_8728 
+
+:MANSIO3_8544
+if 
+  10@ == 24215 
+jf @MANSIO3_8586 
+00BC: show_text_highpriority GXT 'MAN3_CG' time 3000 flag 1  // ~z~Y'all going down, motherfuckers!
+jump @MANSIO3_8728 
+
+:MANSIO3_8586
+if 
+  10@ == 24216 
+jf @MANSIO3_8628 
+00BC: show_text_highpriority GXT 'MAN3_CH' time 3000 flag 1  // ~z~This was my mom's house!
+jump @MANSIO3_8728 
+
+:MANSIO3_8628
+if 
+  10@ == 24217 
+jf @MANSIO3_8670 
+00BC: show_text_highpriority GXT 'MAN3_CI' time 3000 flag 1  // ~z~Strawberries!
+jump @MANSIO3_8728 
+
+:MANSIO3_8670
+if 
+  10@ == 24218 
+jf @MANSIO3_8712 
+00BC: show_text_highpriority GXT 'MAN3_CJ' time 3000 flag 1  // ~z~Motherfuckers!
+jump @MANSIO3_8728 
+
+:MANSIO3_8712
+00BC: show_text_highpriority GXT 'MAN3_CK' time 3000 flag 1  // ~z~Crack hos!
+
+:MANSIO3_8728
+if 
+83D2:   not wav 1 ended 
+jf @MANSIO3_8754 
+wait 0 
+jump @MANSIO3_8728 
+
+:MANSIO3_8754
+040D: unload_wav 1 
+return

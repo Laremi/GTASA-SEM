@@ -1,0 +1,954 @@
+:CESAR1
+thread 'CESAR1' 
+gosub @CESAR1_1222 
+if 
+wasted_or_busted 
+jf @CESAR1_85 
+$11033 = 1 
+$11029 = 90.0 
+$11032 = 1805.89 
+$11031 = -2109.54 
+$11030 = 13.38 
+gosub @CESAR1_5234 
+
+:CESAR1_85
+gosub @CESAR1_5329 
+end_thread 
+
+:CESAR1_94
+Model.Load(#VLA1)
+Model.Load(#REMINGTN)
+Model.Load(#TAHOMA)
+Model.Load(#VOODOO)
+Model.Load(#SAVANNA)
+Model.Load(#BLADE)
+038B: load_requested_models 
+
+:CESAR1_125
+if or
+   not Model.Available(#VLA1)
+   not Model.Available(#REMINGTN)
+   not Model.Available(#TAHOMA)
+   not Model.Available(#VOODOO)
+   not Model.Available(#SAVANNA)
+   not Model.Available(#BLADE)
+jf @CESAR1_176 
+wait 0 
+jump @CESAR1_125 
+
+:CESAR1_176
+023C: load_special_actor 'CESAR' as 1 // models 290-299 
+023C: load_special_actor 'KENDL' as 2 // models 290-299 
+038B: load_requested_models 
+
+:CESAR1_204
+if or
+823D:   not special_actor 1 loaded 
+823D:   not special_actor 2 loaded 
+jf @CESAR1_234 
+wait 0 
+jump @CESAR1_204 
+
+:CESAR1_234
+return 
+116@ = Marker.CreateAboveCar($2197)
+return 
+018A: 42@ = create_checkpoint_at $X_CESAR_HOUSE $Y_CESAR_HOUSE $Z_CESAR_HOUSE 
+
+:CESAR1_260
+07C0: load_path 172 
+
+:CESAR1_265
+if 
+87C1:   not path 172 available 
+jf @CESAR1_292 
+wait 0 
+jump @CESAR1_265 
+
+:CESAR1_292
+128@ = 1793.687 
+129@ = -2138.686 
+130@ = 12.5547 
+131@ = 0.1899 
+0395: clear_area 1 at 128@ 129@ 130@ radius 20.5 
+0674: set_car_model #SAVANNA numberplate "_VLA4L__" 
+125@ = Car.Create(#SAVANNA, 128@, 129@, 130@)
+0587: enable_car 125@ validate_position 0 
+0732: random_car_generator_disable_model #SAVANNA 
+0229: set_car 125@ primary_color_to 3 secondary_color_to 3 
+123@ = Actor.CreateAsDriver(CivMale, #SPECIAL01, 125@)
+127@ = Actor.CreateAsPassenger(CivFemale, #SPECIAL02, 125@, 0)
+Car.Angle(125@) = 131@
+Car.SetMaxSpeed(125@, 35.0)
+00AE: set_car 125@ traffic_behaviour_to 3 
+01EC: make_car 125@ very_heavy 1 
+Car.DoorStatus(125@) = 3
+Car.SetImmunities(125@, 1, 1, 1, 1, 1)
+053F: set_car 125@ tires_vulnerability 0 
+Actor.SetImmunities(123@, 1, 1, 1, 1, 1)
+Actor.SetImmunities(127@, 1, 1, 1, 1, 1)
+054A: set_actor 123@ can_be_shot_in_a_car 0 
+054A: set_actor 127@ can_be_shot_in_a_car 0 
+return 
+126@ = Marker.CreateAboveCar(125@)
+
+:CESAR1_546
+142@ = 1492.304 
+146@ = -1869.023 
+150@ = 12.3828 
+154@ = 90.0 
+0395: clear_area 1 at 142@ 146@ 150@ radius 2.5 
+138@ = Car.Create(#TAHOMA, 142@, 146@, 150@)
+0587: enable_car 138@ validate_position 0 
+0229: set_car 138@ primary_color_to 6 secondary_color_to 0 
+Car.Angle(138@) = 154@
+134@ = Actor.CreateAsDriver(Gang8, #VLA1, 138@)
+Actor.SetImmunities(134@, 1, 1, 1, 1, 1)
+Car.SetMaxSpeed(138@, 35.0)
+00AE: set_car 138@ traffic_behaviour_to 3 
+Car.DoorStatus(138@) = 3
+Car.SetImmunities(138@, 1, 1, 1, 0, 1)
+053F: set_car 138@ tires_vulnerability 0 
+143@ = 1492.304 
+147@ = -1875.023 
+151@ = 12.3828 
+155@ = 90.0 
+0395: clear_area 1 at 143@ 147@ 151@ radius 2.5 
+139@ = Car.Create(#REMINGTN, 143@, 147@, 151@)
+0587: enable_car 139@ validate_position 0 
+0732: random_car_generator_disable_model #REMINGTN 
+0229: set_car 139@ primary_color_to 8 secondary_color_to 0 
+Car.Angle(139@) = 155@
+135@ = Actor.CreateAsDriver(Gang8, #VLA1, 139@)
+Actor.SetImmunities(135@, 1, 1, 1, 1, 1)
+Car.SetMaxSpeed(139@, 35.0)
+00AE: set_car 139@ traffic_behaviour_to 3 
+Car.DoorStatus(139@) = 3
+Car.SetImmunities(139@, 1, 1, 1, 1, 1)
+053F: set_car 139@ tires_vulnerability 0 
+144@ = 1504.304 
+148@ = -1869.023 
+152@ = 12.3828 
+156@ = 90.0 
+0395: clear_area 1 at 144@ 148@ 152@ radius 2.5 
+140@ = Car.Create(#VOODOO, 144@, 148@, 152@)
+0587: enable_car 140@ validate_position 0 
+0732: random_car_generator_disable_model #VOODOO 
+0229: set_car 140@ primary_color_to 2 secondary_color_to 1 
+Car.Angle(140@) = 156@
+136@ = Actor.CreateAsDriver(Gang8, #VLA1, 140@)
+Actor.SetImmunities(136@, 1, 1, 1, 1, 1)
+Car.SetMaxSpeed(140@, 35.0)
+00AE: set_car 140@ traffic_behaviour_to 3 
+Car.DoorStatus(140@) = 3
+Car.SetImmunities(140@, 1, 1, 1, 1, 1)
+053F: set_car 140@ tires_vulnerability 0 
+145@ = 1504.304 
+149@ = -1875.023 
+153@ = 12.3828 
+157@ = 90.0 
+0395: clear_area 1 at 145@ 149@ 153@ radius 2.5 
+141@ = Car.Create(#BLADE, 145@, 149@, 153@)
+0587: enable_car 141@ validate_position 0 
+Car.Angle(141@) = 157@
+137@ = Actor.CreateAsDriver(Gang8, #VLA1, 141@)
+Car.SetMaxSpeed(141@, 35.0)
+00AE: set_car 141@ traffic_behaviour_to 3 
+Car.DoorStatus(141@) = 3
+Car.SetImmunities(141@, 1, 1, 1, 1, 1)
+053F: set_car 141@ tires_vulnerability 0 
+return 
+
+:CESAR1_1222
+increment_mission_attempts 
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'CESAR1' 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+34@ = 0 
+35@ = 0 
+36@ = -1 
+$2336 = 0 
+39@ = 2 
+38@ = 0 
+111@ = 0 
+115@ = 1 
+113@ = 1 
+114@ = 2 
+112@ = 0 
+40@ = 0 
+41@ = 4 
+50@ = 1820.44 
+51@ = -2117.32 
+52@ = 13.09 
+56@ = 1518.304 
+57@ = -1875.023 
+58@ = 12.3828 
+53@ = 1518.304 
+54@ = -1869.023 
+55@ = 12.3828 
+05AA: 61@s = 'CES1_AA' // @s = 'short'  // ~z~Hey, keep up, holmes!
+05AA: 63@s = 'CES1_AB' // @s = 'short'  // ~z~Not far now, eh!
+05AA: 65@s = 'CES1_AC' // @s = 'short'  // ~z~C'mon, Carl, follow us!
+05AA: 67@s = 'CES1_AD' // @s = 'short'  // ~z~You're almost there, Carl!
+05AA: 69@s = 'CES1_BA' // @s = 'short'  // ~z~You gonna have to drive better than that, CJ!
+05AA: 71@s = 'CES1_BB' // @s = 'short'  // ~z~Hey, CJ, you wrecking your car, eh!
+05AA: 73@s = 'CES1_BC' // @s = 'short'  // ~z~C'mon, Carl, you've gotta be kidding me right? - pick it up!
+05AA: 75@s = 'CES1_BD' // @s = 'short'  // ~z~Oh, Carl, I thought you said you could drive!
+05AA: 77@s = 'CES1_CA' // @s = 'short'  // ~z~Carl! What are you doing?
+05AA: 79@s = 'CES1_CB' // @s = 'short'  // ~z~Watch out, Carl!
+05AA: 81@s = 'CES1_CC' // @s = 'short'  // ~z~Carl, you idiot!
+05AA: 83@s = 'CES1_CD' // @s = 'short'  // ~z~Hey, Carl, don't play dirty!
+05AA: 85@s = 'CES1_CE' // @s = 'short'  // ~z~Hey, watch out, Carl!
+05AA: 87@s = 'CES1_CF' // @s = 'short'  // ~z~You trying to kill your sister?
+05AA: 89@s = 'CES1_DA' // @s = 'short'  // ~z~Let's see what you got, homeboy. Let's do this!
+05AA: 91@s = 'CES1_DB' // @s = 'short' 
+04AF: 95@ = 10000 // = constant 
+04AF: 96@ = 10001 // = constant 
+04AF: 97@ = 10002 // = constant 
+04AF: 98@ = 10003 // = constant 
+04AF: 99@ = 10004 // = constant 
+04AF: 100@ = 10005 // = constant 
+04AF: 101@ = 10006 // = constant 
+04AF: 102@ = 10007 // = constant 
+04AF: 103@ = 10008 // = constant 
+04AF: 104@ = 10009 // = constant 
+04AF: 105@ = 10010 // = constant 
+04AF: 106@ = 10011 // = constant 
+04AF: 107@ = 10012 // = constant 
+04AF: 108@ = 10013 // = constant 
+04AF: 109@ = 10014 // = constant 
+04AF: 110@ = 10015 // = constant 
+01EB: set_traffic_density_multiplier_to 0.0 
+$2197 = Actor.MissionCar($PLAYER_ACTOR)
+Car.PutAt($2197, $X_CESAR_HOUSE, $Y_CESAR_HOUSE, $Z_CESAR_HOUSE)
+Car.Angle($2197) = 270.0
+0395: clear_area 1 at 1796.0 -2118.0 14.0 radius 25.0 
+02E4: load_cutscene_data 'CESAR1A' 
+
+:CESAR1_1860
+if 
+86B9:   not cutscene_data_loaded 
+jf @CESAR1_1884 
+wait 0 
+jump @CESAR1_1860 
+
+:CESAR1_1884
+02E7: start_cutscene 
+fade 1 1000 
+
+:CESAR1_1893
+if 
+82E9:   not cutscene_reached_end 
+jf @CESAR1_1917 
+wait 0 
+jump @CESAR1_1893 
+
+:CESAR1_1917
+fade 0 0 
+
+:CESAR1_1923
+if 
+fading 
+jf @CESAR1_1947 
+wait 0 
+jump @CESAR1_1923 
+
+:CESAR1_1947
+02EA: end_cutscene 
+0395: clear_area 1 at 1796.0 -2118.0 14.0 radius 15.0 
+01EB: set_traffic_density_multiplier_to 0.5 
+gosub @CESAR1_94 
+0169: set_fade_color_RGB 0 0 0 
+01BD: 46@ = current_time_in_ms 
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = False
+
+:CESAR1_2009
+wait 0 
+if 
+   not 111@ == 0 
+jf @CESAR1_2352 
+if 
+  112@ == 0 
+jf @CESAR1_2077 
+if 
+03D0:   wav 114@ loaded 
+jf @CESAR1_2070 
+040D: unload_wav 114@ 
+
+:CESAR1_2070
+112@ = 1 
+
+:CESAR1_2077
+if 
+  112@ == 1 
+jf @CESAR1_2114 
+03CF: load_wav 94@(111@,17i) as 113@ 
+112@ = 2 
+
+:CESAR1_2114
+if 
+  112@ == 2 
+jf @CESAR1_2174 
+if 
+03D0:   wav 113@ loaded 
+jf @CESAR1_2174 
+03D1: play_wav 113@ 
+00BC: show_text_highpriority GXT 59@(111@,17s) time 10000 flag 1 
+112@ = 3 
+
+:CESAR1_2174
+if 
+  112@ == 3 
+jf @CESAR1_2352 
+if 
+03D2:   wav 113@ ended 
+jf @CESAR1_2291 
+03D5: remove_text 59@(111@,17s) 
+if 
+  113@ == 1 
+jf @CESAR1_2256 
+113@ = 2 
+114@ = 1 
+jump @CESAR1_2270 
+
+:CESAR1_2256
+113@ = 1 
+114@ = 2 
+
+:CESAR1_2270
+111@ = 0 
+112@ = 0 
+jump @CESAR1_2352 
+
+:CESAR1_2291
+if 
+83D0:   not wav 114@ loaded 
+jf @CESAR1_2352 
+if 
+  60 > 111@ 
+jf @CESAR1_2352 
+0085: 115@ = 111@ // (int) 
+115@ += 1 
+03CF: load_wav 94@(115@,17i) as 114@ 
+
+:CESAR1_2352
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CESAR1_2381 
+$MISSION_LOWRIDER_PASSED += 1 
+jump @CESAR1_5320 
+
+:CESAR1_2381
+if 
+  34@ > 0 
+jf @CESAR1_2406 
+gosub @CESAR1_5456 
+
+:CESAR1_2406
+if and
+  34@ > 0 
+  666 > 34@ 
+jf @CESAR1_2471 
+if 
+   Car.Wrecked(125@)
+jf @CESAR1_2471 
+00BC: show_text_highpriority GXT 'CES1_09' time 7000 flag 1  // ~r~You destroyed Cesar's car!
+jump @CESAR1_5234 
+
+:CESAR1_2471
+if 
+  34@ == 0 
+jf @CESAR1_3477 
+if 
+  36@ == -1 
+jf @CESAR1_2582 
+if and
+   not Car.Wrecked($2197)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CESAR1_2582 
+036A: put_actor $PLAYER_ACTOR in_car $2197 
+00BE: text_clear_all 
+01BD: 43@ = current_time_in_ms 
+gosub @CESAR1_260 
+02A3: enable_widescreen 1 
+fade 1 500 
+fade 1 500 
+fade 1 500 
+36@ = 0 
+
+:CESAR1_2582
+if 
+  36@ == 0 
+jf @CESAR1_2837 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked($2197)
+jf @CESAR1_2837 
+if 
+   Actor.InCar($PLAYER_ACTOR, $2197)
+jf @CESAR1_2837 
+if and
+   not Actor.Dead(123@)
+   not Car.Wrecked(125@)
+jf @CESAR1_2837 
+01BD: 44@ = current_time_in_ms 
+0085: 45@ = 44@ // (int) 
+0062: 45@ -= 43@ // (int) 
+if and
+   not Actor.Dead(123@)
+   not Actor.Dead(127@)
+jf @CESAR1_2837 
+Actor.SetImmunities(123@, 1, 1, 1, 1, 1)
+Actor.SetImmunities(127@, 1, 1, 1, 1, 1)
+054A: set_actor 123@ can_be_shot_in_a_car 0 
+054A: set_actor 127@ can_be_shot_in_a_car 0 
+if 
+   not Car.Wrecked(125@)
+jf @CESAR1_2771 
+05EB: assign_car 125@ to_path 172 
+
+:CESAR1_2771
+Camera.SetPosition(1786.331, -2120.066, 12.8592, 0.0, 0.0, 0.0)
+Camera.PointAt(1787.309, -2120.129, 13.0548, 2)
+117@ = Car.Health($2197)
+36@ = 1 
+
+:CESAR1_2837
+if and
+   not Actor.Dead(123@)
+   not Car.Wrecked(125@)
+jf @CESAR1_3477 
+if 
+  36@ == 1 
+jf @CESAR1_3158 
+if 
+0100:   actor 123@ in_sphere 1802.126 -2110.103 12.3902 radius 4.0 4.0 4.0 sphere 0 in_car 
+jf @CESAR1_3158 
+Camera.SetPosition(1825.202, -2100.55, 18.3156, 0.0, 0.0, 0.0)
+Camera.PointAt(1824.693, -2101.373, 18.0676, 2)
+36@ = 2 
+040D: unload_wav 1 
+0209: 200@ = random_int_in_ranges 0 2 
+if 
+  200@ == 0 
+jf @CESAR1_3027 
+03CF: load_wav 10015 as 1 
+jump @CESAR1_3034 
+
+:CESAR1_3027
+03CF: load_wav 10014 as 1 
+
+:CESAR1_3034
+if 
+83D0:   not wav 1 loaded 
+jf @CESAR1_3060 
+wait 0 
+jump @CESAR1_3034 
+
+:CESAR1_3060
+03D1: play_wav 1 
+if 
+  200@ == 0 
+jf @CESAR1_3105 
+00BC: show_text_highpriority GXT 'CES1_DB' time 5000 flag 1 
+jump @CESAR1_3121 
+
+:CESAR1_3105
+00BC: show_text_highpriority GXT 'CES1_DA' time 5000 flag 1  // ~z~Let's see what you got, homeboy. Let's do this!
+
+:CESAR1_3121
+if 
+83D2:   not wav 1 ended 
+jf @CESAR1_3147 
+wait 0 
+jump @CESAR1_3121 
+
+:CESAR1_3147
+040D: unload_wav 1 
+wait 1000 
+00BE: text_clear_all 
+
+:CESAR1_3158
+if 
+  36@ == 2 
+jf @CESAR1_3445 
+if 
+   not Car.Wrecked(125@)
+jf @CESAR1_3445 
+if 
+   Actor.InCar(123@, 125@)
+jf @CESAR1_3445 
+if 
+0100:   actor 123@ in_sphere 50@ 51@ 52@ radius 25.0 25.0 25.0 sphere 0 in_car 
+jf @CESAR1_3445 
+if 
+860E:   not car 125@ assigned_to_path 
+jf @CESAR1_3445 
+0615: define_AS_pack_begin 49@ 
+05D1: AS_actor -1 drive_car 125@ to 1533.008 -1877.243 12.3828 speed 20.0 1 model #NULL 2 
+05D1: AS_actor -1 drive_car 125@ to 53@ 54@ 55@ speed 12.0 1 model #NULL 2 
+0616: define_AS_pack_end 49@ 
+0618: assign_actor 123@ to_AS_pack 49@ 
+072F: enable_car 125@ stuck_check_distance 1.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 2 // extended 03CC 
+Marker.Disable(126@)
+126@ = Marker.CreateAboveCar(125@)
+07E0: set_marker 126@ type_to 1 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+35@ = 1 
+00BC: show_text_highpriority GXT 'CES1_04' time 5000 flag 2  // ~s~Follow ~b~Cesar ~s~to the race start.
+39@ = 2 
+01BD: 46@ = current_time_in_ms 
+36@ = 3 
+
+:CESAR1_3445
+if 
+  36@ == 3 
+jf @CESAR1_3477 
+gosub @CESAR1_546 
+34@ = 1 
+
+:CESAR1_3477
+if 
+  34@ == 1 
+jf @CESAR1_5201 
+if 
+  36@ == 3 
+jf @CESAR1_3617 
+01BD: 46@ = current_time_in_ms 
+if 
+   not Actor.Dead(134@)
+jf @CESAR1_3541 
+054A: set_actor 134@ can_be_shot_in_a_car 0 
+
+:CESAR1_3541
+if 
+   not Actor.Dead(135@)
+jf @CESAR1_3564 
+054A: set_actor 135@ can_be_shot_in_a_car 0 
+
+:CESAR1_3564
+if 
+   not Actor.Dead(136@)
+jf @CESAR1_3587 
+054A: set_actor 136@ can_be_shot_in_a_car 0 
+
+:CESAR1_3587
+if 
+   not Actor.Dead(137@)
+jf @CESAR1_3610 
+054A: set_actor 137@ can_be_shot_in_a_car 0 
+
+:CESAR1_3610
+36@ = 4 
+
+:CESAR1_3617
+if 
+  36@ == 4 
+jf @CESAR1_5053 
+if 
+   not Car.Wrecked($2197)
+jf @CESAR1_5053 
+if and
+   not Actor.Dead(123@)
+   not Car.Wrecked(125@)
+jf @CESAR1_4160 
+062E: get_actor 123@ task 1489 status_store_to 37@ // ret 7 if not found 
+if 
+04A4:   37@ == 7 // == constant 
+jf @CESAR1_3722 
+if 
+06FC:   car 125@ stuck_check_enabled 
+jf @CESAR1_3722 
+03CD: disable_car 125@ stuck_check 
+
+:CESAR1_3722
+if 
+8100:   not actor 123@ in_sphere 53@ 54@ 55@ radius 20.0 20.0 20.0 sphere 0 in_car 
+jf @CESAR1_3904 
+Car.StorePos($2197, 119@, 120@, 121@)
+Car.StorePos(125@, 128@, 129@, 130@)
+0509: 132@ = distance_between_XY 119@ 120@ and_XY 128@ 129@ 
+133@ = 1000.0 
+0073: 133@ /= 132@ // (float) 
+if 
+  133@ > 30.0 
+jf @CESAR1_3858 
+133@ = 30.0 
+
+:CESAR1_3858
+if 
+  12.0 > 133@ 
+jf @CESAR1_3889 
+133@ = 12.0 
+
+:CESAR1_3889
+Car.SetMaxSpeed(125@, 133@)
+jump @CESAR1_3914 
+
+:CESAR1_3904
+Car.SetMaxSpeed(125@, 12.0)
+
+:CESAR1_3914
+if 
+  38@ == 0 
+jf @CESAR1_4023 
+if 
+0100:   actor 123@ in_sphere 53@ 54@ 55@ radius 10.0 10.0 10.0 sphere 0 in_car 
+jf @CESAR1_4023 
+Marker.Disable(126@)
+018A: 124@ = create_checkpoint_at 56@ 57@ 58@ 
+39@ = 5 
+38@ = 1 
+00BC: show_text_highpriority GXT 'CES1_05' time 10000 flag 1  // ~s~Drive onto the ~y~starting grid~s~.
+
+:CESAR1_4023
+if 
+0104:   actor $PLAYER_ACTOR near_actor 123@ radius 15.0 15.0 15.0 sphere 0 
+jf @CESAR1_4160 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 123@ radius 10.0 10.0 10.0 sphere 0 
+jf @CESAR1_4160 
+if 
+  39@ == 0 
+jf @CESAR1_4160 
+if 
+  4 > 40@ 
+jf @CESAR1_4160 
+01BD: 46@ = current_time_in_ms 
+39@ = 1 
+00BE: text_clear_all 
+008A: $6961 = 40@ // (int) 
+40@ += 1 
+
+:CESAR1_4160
+118@ = Car.Health($2197)
+if 
+001D:   117@ > 118@ // (int) 
+jf @CESAR1_4330 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 123@ radius 15.0 15.0 15.0 sphere 0 
+jf @CESAR1_4330 
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 123@ radius 10.0 10.0 10.0 sphere 0 
+jf @CESAR1_4330 
+if 
+  39@ == 0 
+jf @CESAR1_4330 
+if 
+  8 > 41@ 
+jf @CESAR1_4330 
+0085: 117@ = 118@ // (int) 
+01BD: 46@ = current_time_in_ms 
+39@ = 1 
+008A: $6961 = 41@ // (int) 
+41@ += 1 
+
+:CESAR1_4330
+if 
+  39@ == 1 
+jf @CESAR1_4929 
+if 
+  $6961 == 0 
+jf @CESAR1_4410 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4410 
+111@ = 1 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4410
+if 
+  $6961 == 1 
+jf @CESAR1_4472 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4472 
+111@ = 2 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4472
+if 
+  $6961 == 2 
+jf @CESAR1_4534 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4534 
+111@ = 3 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4534
+if 
+  $6961 == 3 
+jf @CESAR1_4596 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4596 
+111@ = 4 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4596
+if 
+  $6961 == 4 
+jf @CESAR1_4658 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4658 
+111@ = 5 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4658
+if 
+  $6961 == 5 
+jf @CESAR1_4720 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4720 
+111@ = 6 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4720
+if 
+  $6961 == 6 
+jf @CESAR1_4782 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4782 
+111@ = 7 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4782
+if 
+  $6961 == 7 
+jf @CESAR1_4844 
+if and
+  112@ == 0 
+  111@ == 0 
+jf @CESAR1_4844 
+111@ = 8 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4844
+if 
+  $6961 == 8 
+jf @CESAR1_4929 
+00BC: show_text_highpriority GXT 'CES1_04' time 100 flag 1  // ~s~Follow ~b~Cesar ~s~to the race start.
+01BD: 47@ = current_time_in_ms 
+0085: 48@ = 47@ // (int) 
+0062: 48@ -= 46@ // (int) 
+if 
+  48@ > 5000 
+jf @CESAR1_4929 
+01BD: 46@ = current_time_in_ms 
+39@ = 2 
+
+:CESAR1_4929
+if 
+  39@ == 2 
+jf @CESAR1_5053 
+01BD: 47@ = current_time_in_ms 
+0085: 48@ = 47@ // (int) 
+0062: 48@ -= 46@ // (int) 
+if 
+  48@ > 6000 
+jf @CESAR1_5053 
+if and
+   not Car.Wrecked(138@)
+   not Car.Wrecked(139@)
+   not Car.Wrecked(140@)
+   not Car.Wrecked(141@)
+jf @CESAR1_5046 
+Car.LockInCurrentPosition(138@) = True
+Car.LockInCurrentPosition(139@) = True
+Car.LockInCurrentPosition(140@) = True
+Car.LockInCurrentPosition(141@) = True
+
+:CESAR1_5046
+39@ = 0 
+
+:CESAR1_5053
+if and
+   not Car.Wrecked(125@)
+   not Actor.Dead(123@)
+jf @CESAR1_5201 
+if and
+   not Car.Wrecked($2197)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @CESAR1_5201 
+if 
+   Actor.InCar($PLAYER_ACTOR, $2197)
+jf @CESAR1_5201 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere 56@ 57@ 58@ radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @CESAR1_5201 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:CESAR1_5170
+if 
+fading 
+jf @CESAR1_5194 
+wait 0 
+jump @CESAR1_5170 
+
+:CESAR1_5194
+jump @CESAR1_5320 
+
+:CESAR1_5201
+if 
+  34@ == 666 
+jf @CESAR1_5227 
+jump @CESAR1_5234 
+
+:CESAR1_5227
+jump @CESAR1_2009 
+
+:CESAR1_5234
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @CESAR1_5302 
+$11033 = 1 
+$11029 = 90.0 
+$11032 = 1805.89 
+$11031 = -2109.54 
+$11030 = 13.38 
+
+:CESAR1_5302
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:CESAR1_5320
+$2336 = 1 
+return 
+
+:CESAR1_5329
+Marker.Disable(116@)
+Marker.Disable(126@)
+Marker.Disable(124@)
+Marker.Disable(42@)
+Model.Destroy(#VLA1)
+Model.Destroy(#SAVANNA)
+Model.Destroy(#VLA1)
+Model.Destroy(#TAHOMA)
+Model.Destroy(#VOODOO)
+Model.Destroy(#REMINGTN)
+Model.Destroy(#BLADE)
+Car.Destroy(125@)
+Car.Destroy(138@)
+Car.Destroy(139@)
+Car.Destroy(140@)
+Car.Destroy(141@)
+0296: unload_special_actor 1 
+0296: unload_special_actor 2 
+$ONMISSION = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+mission_cleanup 
+if 
+   not 34@ == 666 
+jf @CESAR1_5454 
+fade 0 0 
+
+:CESAR1_5454
+return 
+
+:CESAR1_5456
+if 
+   Car.Wrecked($2197)
+jf @CESAR1_5496 
+00BC: show_text_highpriority GXT 'CES1_08' time 5000 flag 1  // ~r~You destroyed the car!
+34@ = 666 
+
+:CESAR1_5496
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Car.Wrecked($2197)
+jf @CESAR1_5868 
+if 
+  35@ == 1 
+jf @CESAR1_5652 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $2197)
+jf @CESAR1_5652 
+if 
+  34@ == 1 
+jf @CESAR1_5652 
+if 
+  38@ == 0 
+jf @CESAR1_5595 
+Marker.Disable(126@)
+
+:CESAR1_5595
+if 
+  38@ == 1 
+jf @CESAR1_5618 
+Marker.Disable(124@)
+
+:CESAR1_5618
+39@ = 10 
+Marker.Disable(116@)
+116@ = Marker.CreateAboveCar($2197)
+07E0: set_marker 116@ type_to 1 
+35@ = 0 
+
+:CESAR1_5652
+if 
+  35@ == 0 
+jf @CESAR1_5868 
+if 
+  34@ == 1 
+jf @CESAR1_5703 
+00BC: show_text_highpriority GXT 'CES1_06' time 100 flag 1  // ~s~Get back in ~b~the car~s~.
+
+:CESAR1_5703
+if 
+   Actor.InCar($PLAYER_ACTOR, $2197)
+jf @CESAR1_5868 
+00BE: text_clear_all 
+if 
+  34@ == 1 
+jf @CESAR1_5868 
+if 
+  38@ == 0 
+jf @CESAR1_5796 
+if 
+   not Car.Wrecked(125@)
+jf @CESAR1_5796 
+Marker.Disable(126@)
+126@ = Marker.CreateAboveCar(125@)
+07E0: set_marker 126@ type_to 1 
+
+:CESAR1_5796
+if 
+  38@ == 1 
+jf @CESAR1_5849 
+Marker.Disable(124@)
+018A: 124@ = create_checkpoint_at 56@ 57@ 58@ 
+00BC: show_text_highpriority GXT 'CES1_05' time 10000 flag 1  // ~s~Drive onto the ~y~starting grid~s~.
+
+:CESAR1_5849
+Marker.Disable(116@)
+39@ = 0 
+35@ = 1 
+
+:CESAR1_5868
+return

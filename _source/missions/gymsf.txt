@@ -1,0 +1,959 @@
+:GYMSF
+thread 'GYMSF' 
+fade 0 0 
+gosub @GYMSF_63 
+0169: set_fade_color_RGB 0 0 0 
+if 
+wasted_or_busted 
+jf @GYMSF_52 
+gosub @GYMSF_5328 
+
+:GYMSF_52
+gosub @GYMSF_5368 
+end_thread 
+increment_mission_attempts 
+
+:GYMSF_63
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_86 
+07CB: set_actor $PLAYER_ACTOR supporting_fire 0 
+
+:GYMSF_86
+$ONMISSION_GYMFIGHT = 1 
+63@ = 2 
+$ONMISSION = 1 
+0623: add 1 to_integer_stat 198 
+054C: use_GXT_table 'GYM' 
+Model.Load(#WMYJG)
+Model.Load(#OMYKARA)
+Model.Load(#WMYLG)
+Model.Load(#OMOKUNG)
+Model.Load(#WMYKARA)
+
+:GYMSF_147
+if or
+   not Model.Available(#WMYJG)
+   not Model.Available(#OMYKARA)
+   not Model.Available(#WMYLG)
+   not Model.Available(#OMOKUNG)
+   not Model.Available(#WMYKARA)
+jf @GYMSF_191 
+wait 0 
+jump @GYMSF_147 
+
+:GYMSF_191
+04ED: load_animation "PARK" 
+04ED: load_animation "FIGHT_C" 
+04ED: load_animation "GYMNASIUM" 
+
+:GYMSF_223
+if or
+84EE:   not animation "PARK" loaded 
+84EE:   not animation "FIGHT_C" loaded 
+84EE:   not animation "GYMNASIUM" loaded 
+jf @GYMSF_277 
+wait 0 
+jump @GYMSF_223 
+
+:GYMSF_277
+040D: unload_wav 4 
+03CF: load_wav 1820 as 4 
+
+:GYMSF_288
+if 
+83D0:   not wav 4 loaded 
+jf @GYMSF_314 
+wait 0 
+jump @GYMSF_288 
+
+:GYMSF_314
+060A: create_decision_maker_type 0 store_to 40@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 1 store_to 57@ // decision\allowed\m_.ped files 
+060A: create_decision_maker_type 2 store_to 41@ // decision\allowed\m_.ped files 
+0615: define_AS_pack_begin 52@ 
+0603: AS_actor -1 goto_point_any_means 768.064 -41.5728 999.6865 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 358.0992 
+05C9: AS_actor -1 on_guard -2 ms 
+0616: define_AS_pack_end 52@ 
+0615: define_AS_pack_begin 53@ 
+0603: AS_actor -1 goto_point_any_means 770.3961 -23.0853 999.5938 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 87.3049 
+0605: actor -1 perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 53@ 
+0615: define_AS_pack_begin 54@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0603: AS_actor -1 goto_point_any_means 766.3062 -23.0554 999.5938 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 272.4196 
+0605: actor -1 perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0616: define_AS_pack_end 54@ 
+0615: define_AS_pack_begin 42@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0603: AS_actor -1 goto_point_any_means 769.8199 -36.4933 999.6865 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 88.548 
+0605: actor -1 perform_animation "FIGHTC_IDLE" IFP "FIGHT_C" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 42@ loop 1 
+0616: define_AS_pack_end 42@ 
+0615: define_AS_pack_begin 43@ 
+0603: AS_actor -1 goto_point_any_means 767.057 -37.0465 999.6865 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 270.0 
+0605: actor -1 perform_animation "FIGHTC_IDLE" IFP "FIGHT_C" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 43@ loop 1 
+0616: define_AS_pack_end 43@ 
+0615: define_AS_pack_begin 48@ 
+0603: AS_actor -1 goto_point_any_means 768.064 -41.5728 999.6865 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 358.0992 
+05C9: AS_actor -1 on_guard -2 ms 
+0643: set_AS_pack 48@ loop 1 
+0616: define_AS_pack_end 48@ 
+38@ = Actor.Create(CivMale, #OMOKUNG, 768.064, -41.5728, 999.6865)
+Actor.Angle(38@) = 358.0992
+0618: assign_actor 38@ to_AS_pack 48@ 
+060B: set_actor 38@ decision_maker_to 57@ 
+07FE: set_actor 38@ fighting_style_to 6 moves 6 
+0615: define_AS_pack_begin 49@ 
+0603: AS_actor -1 goto_point_any_means 770.3961 -23.0853 999.5938 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 87.3049 
+0605: actor -1 perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 49@ loop 1 
+0616: define_AS_pack_end 49@ 
+35@ = Actor.Create(CivMale, #WMYJG, 770.3961, -23.0853, 999.5938)
+Actor.Angle(35@) = 87.3049
+0618: assign_actor 35@ to_AS_pack 49@ 
+060B: set_actor 35@ decision_maker_to 41@ 
+07FE: set_actor 35@ fighting_style_to 6 moves 6 
+0615: define_AS_pack_begin 50@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+0603: AS_actor -1 goto_point_any_means 766.3062 -23.0554 999.5938 mode 4 use_car -1 
+05D4: AS_actor -1 rotate_angle 272.4196 
+0605: actor -1 perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 0 time -1 
+0643: set_AS_pack 50@ loop 1 
+0616: define_AS_pack_end 50@ 
+34@ = Actor.Create(CivMale, #WMYLG, 766.3062, -23.0554, 999.5938)
+Actor.Angle(34@) = 272.4196
+0618: assign_actor 34@ to_AS_pack 50@ 
+060B: set_actor 34@ decision_maker_to 41@ 
+07FE: set_actor 34@ fighting_style_to 6 moves 6 
+36@ = Actor.Create(CivMale, #OMYKARA, 769.8199, -36.4933, 999.6865)
+Actor.Angle(36@) = 95.1885
+0618: assign_actor 36@ to_AS_pack 42@ 
+060B: set_actor 36@ decision_maker_to 41@ 
+07FE: set_actor 36@ fighting_style_to 6 moves 6 
+37@ = Actor.Create(CivMale, #WMYKARA, 766.1017, -37.3952, 999.6865)
+Actor.Angle(37@) = 271.1251
+0618: assign_actor 37@ to_AS_pack 43@ 
+060B: set_actor 37@ decision_maker_to 41@ 
+07FE: set_actor 37@ fighting_style_to 6 moves 6 
+gosub @GYMSF_5567 
+if or
+001C:   $CURRENT_MONTH_DAY > $GYM_MONTH_DAY_WHEN_LIMIT_REACHED // (int) 
+001C:   $CURRENT_MONTH > $GYM_MONTH_WHEN_LIMIT_REACHED // (int) 
+jf @GYMSF_1318 
+$GYM_DAY_LIMIT = 0.0 
+
+:GYMSF_1318
+wait 0 
+gosub @GYMSF_5620 
+if 
+  51@ == 0 
+jf @GYMSF_1422 
+if 
+   not Actor.Dead(37@)
+jf @GYMSF_1422 
+if 
+   Actor.Animation(37@) == "FIGHTC_SPAR"
+jf @GYMSF_1422 
+0614: set_actor 37@ animation "FIGHTC_SPAR" progress_to 0.45 // 0.0 to 1.0 
+51@ = 1 
+
+:GYMSF_1422
+09E8: $ACTIVE_INTERIOR = actor $PLAYER_ACTOR active_interior 
+if 
+  $ACTIVE_INTERIOR == 0 
+jf @GYMSF_1455 
+jump @GYMSF_5328 
+
+:GYMSF_1455
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 769.7938 -42.1122 999.6865 radius 2.5 2.5 4.0 
+jf @GYMSF_1510 
+47@ = 0 
+
+:GYMSF_1510
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_5321 
+if and
+  47@ == 0 
+00FE:   actor 38@ sphere 0 in_sphere 768.064 -41.5728 999.6865 radius 1.0 1.0 1.2 
+jf @GYMSF_5321 
+if 
+0101:   actor $PLAYER_ACTOR in_sphere 769.7938 -42.1122 999.6865 radius 0.6 0.6 1.0 sphere 1 stopped 
+jf @GYMSF_1629 
+
+:GYMSF_1629
+if and
+0101:   actor $PLAYER_ACTOR in_sphere 769.7938 -42.1122 999.6865 radius 1.2 1.2 1.2 sphere 0 stopped 
+   not Actor.Dead(38@)
+jf @GYMSF_5321 
+if and
+   not Actor.Dead(38@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_1731 
+Player.CanMove($PLAYER_CHAR) = False
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0639: AS_actor 38@ rotate_to_actor $PLAYER_ACTOR 
+0639: AS_actor $PLAYER_ACTOR rotate_to_actor 38@ 
+
+:GYMSF_1731
+if 
+  $8155 == 0 
+jf @GYMSF_1806 
+040D: unload_wav 1 
+03CF: load_wav 21200 as 1 
+
+:GYMSF_1760
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_1786 
+wait 0 
+jump @GYMSF_1760 
+
+:GYMSF_1786
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'KUNG_1' time 3000 flag 1  // ~z~So, you wish to become a warrior!
+
+:GYMSF_1806
+if 
+  $8155 == 1 
+jf @GYMSF_1881 
+040D: unload_wav 1 
+03CF: load_wav 21203 as 1 
+
+:GYMSF_1835
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_1861 
+wait 0 
+jump @GYMSF_1835 
+
+:GYMSF_1861
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'KUNG_4' time 3000 flag 1  // ~z~Would you like to spar with your master?
+
+:GYMSF_1881
+0512: show_permanent_text_box 'GYM1_73'  // Press ~k~~CONVERSATION_NO~ to answer 'NO' or press ~k~~CONVERSATION_YES~ to answer 'YES'.
+
+:GYMSF_1892
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_2216 
+wait 0 
+if 
+00E1:   player 0 pressed_key 11 
+jf @GYMSF_2081 
+0653: 59@ = float_stat 23 
+if 
+  59@ > 349.0 
+jf @GYMSF_1980 
+44@ = 1 
+03E6: remove_text_box 
+jump @GYMSF_2218 
+jump @GYMSF_2081 
+
+:GYMSF_1980
+44@ = 0 
+47@ = 1 
+03E6: remove_text_box 
+040D: unload_wav 1 
+03CF: load_wav 21202 as 1 
+
+:GYMSF_2007
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_2033 
+wait 0 
+jump @GYMSF_2007 
+
+:GYMSF_2033
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'KUNG_3' time 3000 flag 1  // ~z~You are weak, like a wilted weed! Condition your body!
+Player.CanMove($PLAYER_CHAR) = True
+32@ = 0 
+55@ = 1 
+jump @GYMSF_1318 
+
+:GYMSF_2081
+if 
+00E1:   player 0 pressed_key 10 
+jf @GYMSF_2209 
+44@ = 0 
+47@ = 1 
+03E6: remove_text_box 
+040D: unload_wav 1 
+03CF: load_wav 21201 as 1 
+
+:GYMSF_2125
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_2151 
+wait 0 
+jump @GYMSF_2125 
+
+:GYMSF_2151
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'KUNG_2' time 3000 flag 1  // ~z~The warrior's path will bring you back...
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_2195 
+0618: assign_actor 38@ to_AS_pack 48@ 
+
+:GYMSF_2195
+Player.CanMove($PLAYER_CHAR) = True
+jump @GYMSF_1318 
+
+:GYMSF_2209
+jump @GYMSF_1892 
+
+:GYMSF_2216
+03E6: remove_text_box 
+
+:GYMSF_2218
+03E6: remove_text_box 
+00BE: text_clear_all 
+0992: set_player $PLAYER_CHAR weapons_scrollable 0 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+if 
+  44@ == 1 
+jf @GYMSF_5321 
+gosub @GYMSF_5511 
+Actor.DestroyInstantly(36@)
+Actor.DestroyInstantly(37@)
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_2333 
+08C7: put_actor 38@ at 771.4357 -36.9728 999.6865 dont_warp_gang 
+Actor.Angle(38@) = 88.1801
+Actor.Health(38@) = 1000
+Actor.SetMaxHealth(38@, 1000)
+
+:GYMSF_2333
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_2379 
+08C7: put_actor $PLAYER_ACTOR at 764.6453 -37.1052 999.6865 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 273.9816
+
+:GYMSF_2379
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_2427 
+060B: set_actor 38@ decision_maker_to 41@ 
+05E2: AS_actor 38@ kill_actor $PLAYER_ACTOR 
+07FE: set_actor 38@ fighting_style_to 6 moves 6 
+07DD: set_actor 38@ attack_rate 100 // previously known as temper_to 
+
+:GYMSF_2427
+Camera.SetBehindPlayer
+Player.CanMove($PLAYER_CHAR) = True
+if 
+  $8155 == 0 
+jf @GYMSF_2465 
+0512: show_permanent_text_box 'GYM1106'  // Defeat your opponent to learn new moves. If you leave the ring you lose!
+
+:GYMSF_2465
+if 
+  $8155 == 1 
+jf @GYMSF_2494 
+0512: show_permanent_text_box 'GYM1_84'  // Run and press ~k~~VEHICLE_ENTER_EXIT~!
+
+:GYMSF_2494
+gosub @GYMSF_5567 
+58@ = 0 
+if and
+03D0:   wav 4 loaded 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_2536 
+09F1: play_audio_at_actor $PLAYER_ACTOR event 1115 
+
+:GYMSF_2536
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_3285 
+wait 0 
+if 
+  $8155 == 1 
+jf @GYMSF_2840 
+if 
+  56@ == 0 
+jf @GYMSF_2619 
+32@ = 0 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_94'  // Whilst running, lock on to a target with ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~
+56@ = 1 
+
+:GYMSF_2619
+if 
+840C:   not is_german_game 
+jf @GYMSF_2745 
+if and
+  32@ > 6000 
+  56@ == 1 
+jf @GYMSF_2685 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_95'  // Lock on to a downed opponent using ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~
+32@ = 0 
+56@ = 2 
+
+:GYMSF_2685
+if and
+  32@ > 6000 
+  56@ == 2 
+jf @GYMSF_2738 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_96'  // Lock on to a target by pressing ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~ repeatedly.
+32@ = 0 
+56@ = 3 
+
+:GYMSF_2738
+jump @GYMSF_2798 
+
+:GYMSF_2745
+if and
+  32@ > 6000 
+  56@ == 1 
+jf @GYMSF_2798 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_96'  // Lock on to a target by pressing ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~ repeatedly.
+32@ = 0 
+56@ = 3 
+
+:GYMSF_2798
+if and
+  32@ > 6000 
+  56@ == 3 
+jf @GYMSF_2840 
+03E6: remove_text_box 
+32@ = 0 
+56@ = 0 
+
+:GYMSF_2840
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_2911 
+if 
+80FE:   not actor 38@ sphere 0 in_sphere 768.4611 -36.6685 999.6865 radius 6.0 6.0 6.0 
+jf @GYMSF_2911 
+jump @GYMSF_3285 
+
+:GYMSF_2911
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere 768.4611 -36.6685 999.6865 radius 6.0 6.0 6.0 
+jf @GYMSF_3255 
+gosub @GYMSF_5511 
+Actor.DestroyInstantly(38@)
+38@ = Actor.Create(CivMale, #OMOKUNG, 768.064, -41.5728, 999.6865)
+Actor.Angle(38@) = 358.0992
+0618: assign_actor 38@ to_AS_pack 48@ 
+060B: set_actor 38@ decision_maker_to 41@ 
+07FE: set_actor 38@ fighting_style_to 6 moves 6 
+36@ = Actor.Create(CivMale, #OMYKARA, 769.8199, -36.4933, 999.6865)
+Actor.Angle(36@) = 95.1885
+0618: assign_actor 36@ to_AS_pack 42@ 
+060B: set_actor 36@ decision_maker_to 41@ 
+07FE: set_actor 36@ fighting_style_to 6 moves 6 
+37@ = Actor.Create(CivMale, #WMYKARA, 766.1017, -37.3952, 999.6865)
+Actor.Angle(37@) = 271.1251
+0618: assign_actor 37@ to_AS_pack 43@ 
+060B: set_actor 37@ decision_maker_to 41@ 
+07FE: set_actor 37@ fighting_style_to 6 moves 6 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_3203 
+08C7: put_actor $PLAYER_ACTOR at 762.756 -37.2153 999.6865 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 90.0
+Player.CanMove($PLAYER_CHAR) = True
+
+:GYMSF_3203
+00BE: text_clear_all 
+03E6: remove_text_box 
+gosub @GYMSF_5567 
+if 
+  $8155 == 0 
+jf @GYMSF_3248 
+00BC: show_text_highpriority GXT 'GYM1_92' time 5000 flag 1  // ~r~You left the ring and forfeited.
+
+:GYMSF_3248
+jump @GYMSF_1318 
+
+:GYMSF_3255
+if 
+   Actor.Dead(38@)
+jf @GYMSF_3278 
+jump @GYMSF_3285 
+
+:GYMSF_3278
+jump @GYMSF_2536 
+
+:GYMSF_3285
+03E6: remove_text_box 
+if 
+  $8155 == 1 
+jf @GYMSF_3319 
+gosub @GYMSF_5511 
+jump @GYMSF_4956 
+
+:GYMSF_3319
+gosub @GYMSF_5511 
+Actor.DestroyInstantly(38@)
+0395: clear_area 1 at 768.1746 -36.6986 999.6865 radius 5.0 
+38@ = Actor.Create(CivMale, #OMOKUNG, 768.064, -41.5728, 999.6865)
+Actor.Angle(38@) = 358.0992
+060B: set_actor 38@ decision_maker_to 40@ 
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_3443 
+08C7: put_actor 38@ at 771.4357 -36.9728 999.6865 dont_warp_gang 
+Actor.Angle(38@) = 88.1801
+
+:GYMSF_3443
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_3494 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+08C7: put_actor $PLAYER_ACTOR at 764.6453 -37.1052 999.6865 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 273.9816
+
+:GYMSF_3494
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_3520 
+060B: set_actor 38@ decision_maker_to 65542 
+
+:GYMSF_3520
+gosub @GYMSF_5467 
+Camera.SetPosition(762.8773, -35.4754, 1001.545, 0.0, 0.0, 0.0)
+Camera.PointAt(763.8198, -35.703, 1001.3, 2)
+gosub @GYMSF_5567 
+00BC: show_text_highpriority GXT 'KUNG_5' time 4000 flag 1  // ~z~Absorb with the eyes, young student, and you will learn!
+040D: unload_wav 1 
+03CF: load_wav 21204 as 1 
+
+:GYMSF_3612
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_3655 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_3648 
+
+:GYMSF_3648
+jump @GYMSF_3612 
+
+:GYMSF_3655
+03D1: play_wav 1 
+wait 1000 
+32@ = 0 
+
+:GYMSF_3671
+if 
+  2000 > 32@ 
+jf @GYMSF_3718 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_3711 
+
+:GYMSF_3711
+jump @GYMSF_3671 
+
+:GYMSF_3718
+Camera.SetPosition(767.428, -39.4061, 1000.416, 0.0, 0.0, 0.0)
+Camera.PointAt(768.1919, -38.7609, 1000.4, 2)
+00BC: show_text_highpriority GXT 'GYM1_97' time 2000 flag 1  // Running Attack
+32@ = 0 
+
+:GYMSF_3792
+if 
+  2000 > 32@ 
+jf @GYMSF_3839 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_3832 
+
+:GYMSF_3832
+jump @GYMSF_3792 
+
+:GYMSF_3839
+040D: unload_wav 1 
+03CF: load_wav 21205 as 1 
+
+:GYMSF_3850
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_3893 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_3886 
+
+:GYMSF_3886
+jump @GYMSF_3850 
+
+:GYMSF_3893
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GYM1_94' time 4000 flag 1  // Whilst running, lock on to a target with ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~
+32@ = 0 
+
+:GYMSF_3920
+if 
+  4000 > 32@ 
+jf @GYMSF_3967 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_3960 
+
+:GYMSF_3960
+jump @GYMSF_3920 
+
+:GYMSF_3967
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_4022 
+0605: actor 38@ perform_animation "FIGHTC_M" IFP "FIGHT_C" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+
+:GYMSF_4022
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_4070 
+0605: actor $PLAYER_ACTOR perform_animation "FUCKU" IFP "PED" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+
+:GYMSF_4070
+32@ = 0 
+
+:GYMSF_4077
+if 
+  3000 > 32@ 
+jf @GYMSF_4124 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4117 
+
+:GYMSF_4117
+jump @GYMSF_4077 
+
+:GYMSF_4124
+if 
+840C:   not is_german_game 
+jf @GYMSF_4543 
+Camera.SetPosition(768.0062, -35.1731, 1000.276, 0.0, 0.0, 0.0)
+Camera.PointAt(768.757, -35.8325, 1000.314, 2)
+00BC: show_text_highpriority GXT 'GYM1_98' time 2000 flag 1  // Ground Attack
+32@ = 0 
+
+:GYMSF_4211
+if 
+  2000 > 32@ 
+jf @GYMSF_4258 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4251 
+
+:GYMSF_4251
+jump @GYMSF_4211 
+
+:GYMSF_4258
+040D: unload_wav 1 
+03CF: load_wav 21206 as 1 
+
+:GYMSF_4269
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_4312 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4305 
+
+:GYMSF_4305
+jump @GYMSF_4269 
+
+:GYMSF_4312
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GYM1_95' time 4000 flag 1  // Lock on to a downed opponent using ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~
+32@ = 0 
+
+:GYMSF_4339
+if 
+  4000 > 32@ 
+jf @GYMSF_4386 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4379 
+
+:GYMSF_4379
+jump @GYMSF_4339 
+
+:GYMSF_4386
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_4441 
+0605: actor 38@ perform_animation "FIGHTC_G" IFP "FIGHT_C" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+
+:GYMSF_4441
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_4489 
+0605: actor $PLAYER_ACTOR perform_animation "FUCKU" IFP "PED" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+
+:GYMSF_4489
+32@ = 0 
+
+:GYMSF_4496
+if 
+  3000 > 32@ 
+jf @GYMSF_4543 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4536 
+
+:GYMSF_4536
+jump @GYMSF_4496 
+
+:GYMSF_4543
+Camera.SetPosition(772.6448, -38.011, 1000.478, 0.0, 0.0, 0.0)
+Camera.PointAt(771.679, -37.7522, 1000.485, 2)
+00BC: show_text_highpriority GXT 'GYM1_99' time 2000 flag 1  // Combo Attack
+32@ = 0 
+
+:GYMSF_4617
+if 
+  2000 > 32@ 
+jf @GYMSF_4664 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4657 
+
+:GYMSF_4657
+jump @GYMSF_4617 
+
+:GYMSF_4664
+040D: unload_wav 1 
+03CF: load_wav 21207 as 1 
+
+:GYMSF_4675
+if 
+83D0:   not wav 1 loaded 
+jf @GYMSF_4718 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4711 
+
+:GYMSF_4711
+jump @GYMSF_4675 
+
+:GYMSF_4718
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'GYM1_96' time 4000 flag 1  // Lock on to a target by pressing ~k~~PED_LOCK_TARGET~ then press ~k~~VEHICLE_ENTER_EXIT~ repeatedly.
+32@ = 0 
+
+:GYMSF_4745
+if 
+  4000 > 32@ 
+jf @GYMSF_4792 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4785 
+
+:GYMSF_4785
+jump @GYMSF_4745 
+
+:GYMSF_4792
+if 
+   not Actor.Dead(38@)
+jf @GYMSF_4854 
+Actor.LockInCurrentPosition(38@) = True
+0605: actor 38@ perform_animation "FIGHTC_3" IFP "FIGHT_C" framedelta 4.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+
+:GYMSF_4854
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_4902 
+0605: actor $PLAYER_ACTOR perform_animation "FUCKU" IFP "PED" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMSF_4902
+32@ = 0 
+
+:GYMSF_4909
+if 
+  2000 > 32@ 
+jf @GYMSF_4956 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_4949 
+
+:GYMSF_4949
+jump @GYMSF_4909 
+
+:GYMSF_4956
+gosub @GYMSF_5511 
+Actor.DestroyInstantly(38@)
+38@ = Actor.Create(CivMale, #OMOKUNG, 768.064, -41.5728, 999.6865)
+Actor.Angle(38@) = 358.0992
+0618: assign_actor 38@ to_AS_pack 48@ 
+060B: set_actor 38@ decision_maker_to 41@ 
+07FE: set_actor 38@ fighting_style_to 6 moves 6 
+36@ = Actor.Create(CivMale, #OMYKARA, 769.8199, -36.4933, 999.6865)
+Actor.Angle(36@) = 95.1885
+0618: assign_actor 36@ to_AS_pack 42@ 
+060B: set_actor 36@ decision_maker_to 41@ 
+07FE: set_actor 36@ fighting_style_to 6 moves 6 
+37@ = Actor.Create(CivMale, #WMYKARA, 766.1017, -37.3952, 999.6865)
+Actor.Angle(37@) = 271.1251
+0618: assign_actor 37@ to_AS_pack 43@ 
+060B: set_actor 37@ decision_maker_to 41@ 
+07FE: set_actor 37@ fighting_style_to 6 moves 6 
+gosub @GYMSF_5487 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_5214 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+08C7: put_actor $PLAYER_ACTOR at 765.9402 -41.602 999.6865 dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 265.007
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+
+:GYMSF_5214
+gosub @GYMSF_5567 
+if 
+  $8154 == 0 
+jf @GYMSF_5250 
+030C: progress_made = 1 
+$8154 = 1 
+
+:GYMSF_5250
+if 
+  $8155 == 0 
+jf @GYMSF_5284 
+00BC: show_text_highpriority GXT 'GYM1_93' time 3000 flag 1  // New moves learned!
+
+:GYMSF_5284
+07FE: set_actor $PLAYER_ACTOR fighting_style_to 6 moves 6 
+0992: set_player $PLAYER_CHAR weapons_scrollable 1 
+$8155 = 1 
+$8156 = 0 
+$8157 = 0 
+
+:GYMSF_5321
+jump @GYMSF_1318 
+
+:GYMSF_5328
+return 
+01E3: show_text_1number_styled GXT 'M_PASS' number 30000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 30000
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+return 
+
+:GYMSF_5368
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMSF_5391 
+07CB: set_actor $PLAYER_ACTOR supporting_fire 1 
+
+:GYMSF_5391
+Model.Destroy(#WMYJG)
+Model.Destroy(#OMYKARA)
+Model.Destroy(#WMYLG)
+Model.Destroy(#OMOKUNG)
+Model.Destroy(#WMYKARA)
+04EF: release_animation "GYMNASIUM" 
+04EF: release_animation "PARK" 
+04EF: release_animation "FIGHT_C" 
+040D: unload_wav 4 
+$ONMISSION_GYMFIGHT = 0 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:GYMSF_5467
+02A3: enable_widescreen 1 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+return 
+
+:GYMSF_5487
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+return 
+
+:GYMSF_5511
+fade 0 500 
+
+:GYMSF_5518
+if 
+fading 
+jf @GYMSF_5565 
+wait 0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMSF_5558 
+fade 0 1 
+
+:GYMSF_5558
+jump @GYMSF_5518 
+
+:GYMSF_5565
+return 
+
+:GYMSF_5567
+fade 1 500 
+
+:GYMSF_5574
+if 
+fading 
+jf @GYMSF_5598 
+wait 0 
+jump @GYMSF_5574 
+
+:GYMSF_5598
+return 
+040D: unload_wav 1 
+03CF: load_wav 62@ as 1 
+63@ = 0 
+return 
+
+:GYMSF_5620
+if and
+03D0:   wav 1 loaded 
+  63@ == 0 
+jf @GYMSF_5663 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 60@s time 10000 flag 1 
+63@ = 1 
+
+:GYMSF_5663
+if and
+03D2:   wav 1 ended 
+  63@ == 1 
+jf @GYMSF_5701 
+040D: unload_wav 1 
+03D5: remove_text 60@s 
+63@ = 2 
+
+:GYMSF_5701
+return

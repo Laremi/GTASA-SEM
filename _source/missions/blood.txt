@@ -1,0 +1,2661 @@
+:BLOOD
+thread 'BLOOD' 
+gosub @BLOOD_54 
+if 
+wasted_or_busted 
+jf @BLOOD_45 
+$11033 = 0 
+gosub @BLOOD_12901 
+
+:BLOOD_45
+gosub @BLOOD_13038 
+end_thread 
+
+:BLOOD_54
+$ONMISSION = 1 
+if 
+  $MISSION_BLOODRING_PASSED == 0 
+jf @BLOOD_81 
+increment_mission_attempts 
+
+:BLOOD_81
+054C: use_GXT_table 'BLOOD' 
+if 
+  $ONMISSION == 0 
+jf @BLOOD_209 
+018A: 90@ = create_checkpoint_at 158@ 159@ 160@ 
+87@ = Object.Create(#BB_PICKUP, 170@, 171@, 172@)
+84@ = Car.Create(#BLOODRA, 154@, 155@, 156@)
+85@ = Car.Create(#BLOODRA, 154@, 155@, 156@)
+86@ = Car.Create(#BLOODRA, 154@, 155@, 156@)
+95@ = Car.Create(#BLOODRA, 154@, 155@, 156@)
+
+:BLOOD_209
+0169: set_fade_color_RGB 0 0 0 
+00BE: text_clear_all 
+0A0E: disable_text_with_style 1 
+wait 0 
+91@ = 0 
+92@ = 0 
+if 
+  $MISSION_BLOODRING_PASSED == 0 
+jf @BLOOD_276 
+$8249 = 60 
+$8248 = 60000 
+
+:BLOOD_276
+93@ = 0 
+94@ = 0 
+95@ = 0 
+$8247 = 30000 
+96@ = 0 
+97@ = 0 
+98@ = 0 
+99@ = 0 
+100@ = 0 
+101@ = 0 
+102@ = -1 
+154@ = -1280.9 
+155@ = 994.8 
+156@ = 1037.0 
+157@ = 90.0 
+158@ = 0.0 
+159@ = 0.0 
+160@ = 0.0 
+161@ = 0.0 
+162@ = 0.0 
+163@ = 0.0 
+164@ = 0.0 
+165@ = 0.0 
+166@ = 0.0 
+167@ = 0.0 
+168@ = 0.0 
+169@ = 0.0 
+170@ = 0.0 
+171@ = 0.0 
+172@ = 0.0 
+173@ = 0.0 
+174@ = 0.0 
+175@ = 0.0 
+176@ = 0.0 
+177@ = 0.0 
+178@ = 0.0 
+179@ = 0.0 
+180@ = 0.0 
+181@ = 0.0 
+182@ = 0.0 
+183@ = 0.0 
+184@ = 0.0 
+103@ = 0 
+111@ = 0 
+104@ = 0 
+105@ = 0 
+112@ = 0 
+113@ = 0 
+114@ = 0 
+115@ = 0 
+116@ = 0 
+117@ = 0 
+118@ = 0 
+119@ = 0 
+120@ = 0 
+121@ = 0 
+122@ = 0 
+123@ = 0 
+124@ = 0 
+125@ = 0 
+126@ = 0 
+127@ = 0 
+106@ = 0.0 
+04AF: 131@ = 36200 // = constant 
+04AF: 132@ = 36201 // = constant 
+04AF: 133@ = 36202 // = constant 
+04AF: 134@ = 36203 // = constant 
+04AF: 135@ = 36204 // = constant 
+04AF: 136@ = 36205 // = constant 
+04AF: 137@ = 36200 // = constant 
+04AF: 138@ = 36201 // = constant 
+04AF: 139@ = 36202 // = constant 
+04AF: 140@ = 36203 // = constant 
+04AF: 141@ = 36204 // = constant 
+04AF: 142@ = 36205 // = constant 
+04AF: 143@ = 36200 // = constant 
+04AF: 144@ = 36201 // = constant 
+04AF: 145@ = 36202 // = constant 
+04AF: 146@ = 36203 // = constant 
+04AF: 147@ = 36204 // = constant 
+04AF: 148@ = 36205 // = constant 
+04AF: 149@ = 36200 // = constant 
+107@ = 0 
+108@ = 0 
+wait 0 
+fade 0 500 
+
+:BLOOD_1029
+if 
+fading 
+jf @BLOOD_1053 
+wait 0 
+jump @BLOOD_1029 
+
+:BLOOD_1053
+Model.Load(#BLOODRA)
+Model.Load(#MP5LNG)
+Model.Load(#BB_PICKUP)
+03CF: load_wav 1827 as 4 
+
+:BLOOD_1075
+if 
+83D0:   not wav 4 loaded 
+jf @BLOOD_1101 
+wait 0 
+jump @BLOOD_1075 
+
+:BLOOD_1101
+038B: load_requested_models 
+016E: override_next_restart at -2126.3 -440.6 34.5 angle 82.7 
+0A37: disable_vehicle_lights 1 
+Player.CanMove($PLAYER_CHAR) = False
+07E5: copy_decision_maker 65542 to 185@ 
+09AC: disable_map_icons 1 
+0414: set_player $PLAYER_CHAR free_treatment_once 1 
+03AD: NOP 0 // set_rubbish 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+04E2: NOP $PLAYER_CHAR 1 
+Actor.PutAt($PLAYER_ACTOR, -1398.461, 995.641, 1024.462)
+select_interior 15 
+0860: link_actor $PLAYER_ACTOR to_interior 15 
+04F9: set_sky_color 2 fade 0 
+04E4: refresh_game_renderer_at 154@ 155@ 
+Camera.SetAtPos(154@, 155@, 156@)
+0395: clear_area 1 at -1280.9 994.8 1037.0 radius 300.0 
+0A0B: set_rendering_origin_at_3D_coord -1280.8 994.7 1036.0 angle 90.0 
+041A: 103@ = actor $PLAYER_ACTOR weapon 29 ammo 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, MP5, 30000)
+04AF: 108@ = 504 // = constant 
+gosub @BLOOD_15360 
+34@ = Car.Create(#BLOODRA, 154@, 155@, 156@)
+0587: enable_car 34@ validate_position 1 
+0840: link_car 34@ to_interior 15 
+Car.Angle(34@) = 157@
+Car.DoorStatus(34@) = 4
+036A: put_actor $PLAYER_ACTOR in_car 34@ 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 29 
+03AB: set_car 34@ strong 1 
+03ED: set_car 34@ disable_flipped_explosion_when_empty 1 
+053F: set_car 34@ tires_vulnerability 0 
+Car.Health(34@) = 1249
+0561: 83@ = create_passenger_in_car 34@ seat 0 
+0860: link_actor 83@ to_interior 15 
+060B: set_actor 83@ decision_maker_to 185@ 
+Actor.GiveWeaponAndAmmo(83@, MP5, 30000)
+Actor.SetImmunities(83@, 1, 0, 0, 0, 0)
+
+:BLOOD_1459
+if 
+  16 > 93@ 
+jf @BLOOD_1918 
+wait 0 
+gosub @BLOOD_13157 
+09B2: get_random_available_car_unk 1 model_to 104@ class_to 105@ 
+if 
+  104@ >= 0 
+jf @BLOOD_1552 
+0085: 108@ = 104@ // (int) 
+gosub @BLOOD_15360 
+35@(93@,16i) = Car.Create(#BLOODRA, 154@, 155@, 156@)
+
+:BLOOD_1552
+if 
+  104@ == -1 
+jf @BLOOD_1606 
+04AF: 108@ = 439 // = constant 
+gosub @BLOOD_15360 
+35@(93@,16i) = Car.Create(#BLOODRA, 154@, 155@, 156@)
+
+:BLOOD_1606
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_1904 
+Car.Angle(35@(93@,16i)) = 157@
+0587: enable_car 35@(93@,16i) validate_position 1 
+04E0: car 35@(93@,16i) abandon_path_radius 255 
+053F: set_car 35@(93@,16i) tires_vulnerability 0 
+0560: create_random_actor_in_car 35@(93@,16i) handle_as 51@(93@,16i) 
+0860: link_actor 51@(93@,16i) to_interior 15 
+060B: set_actor 51@(93@,16i) decision_maker_to 185@ 
+Actor.SetImmunities(51@(93@,16i), 1, 0, 0, 0, 0)
+01EA: 101@ = car 35@(93@,16i) max_passengers 
+if 
+  101@ > 0 
+jf @BLOOD_1823 
+0561: 67@(93@,16i) = create_passenger_in_car 35@(93@,16i) seat 0 
+060B: set_actor 67@(93@,16i) decision_maker_to 185@ 
+Actor.SetImmunities(67@(93@,16i), 1, 0, 0, 0, 0)
+Actor.GiveWeaponAndAmmo(67@(93@,16i), MP5, 30000)
+
+:BLOOD_1823
+if 
+047A:   actor 51@(93@,16i) driving_bike 
+jf @BLOOD_1865 
+08C6: set_actor 51@(93@,16i) stay_on_bike 1 
+08C6: set_actor 67@(93@,16i) stay_on_bike 1 
+
+:BLOOD_1865
+03CC: enable_car 35@(93@,16i) stuck_check_distance_to 1.0 time_to 3000 
+03ED: set_car 35@(93@,16i) disable_flipped_explosion_when_empty 1 
+0840: link_car 35@(93@,16i) to_interior 15 
+
+:BLOOD_1904
+93@ += 1 
+jump @BLOOD_1459 
+
+:BLOOD_1918
+02A3: enable_widescreen 1 
+Camera.SetPosition(-1273.2, 992.4, 1038.5, 0.0, 0.0, 0.0)
+Camera.PointAt(-1307.9, 995.3, 1034.2, 2)
+06D5: 89@ = create_racing_checkpoint_at -1432.6 1016.1 1024.1 point_to 0.0 0.0 0.0 type 2 radius 6.0 
+0169: set_fade_color_RGB 0 0 0 
+wait 500 
+fade 1 1500 
+
+:BLOOD_2035
+if 
+fading 
+jf @BLOOD_2059 
+wait 0 
+jump @BLOOD_2035 
+
+:BLOOD_2059
+0707: start_scene_skip_to @BLOOD_2785 
+00BC: show_text_highpriority GXT 'BLOD_10' time 5000 flag 1  // ~s~The overall time starts at 30 seconds and counts down.
+32@ = 0 
+
+:BLOOD_2089
+if 
+  5000 > 32@ 
+jf @BLOOD_2119 
+wait 0 
+jump @BLOOD_2089 
+
+:BLOOD_2119
+Camera.SetPosition(-1441.9, 1054.6, 1040.5, 0.0, 0.0, 0.0)
+Camera.PointAt(-1432.0, 1012.6, 1034.7, 2)
+00BC: show_text_highpriority GXT 'BLOD_01' time 5000 flag 1  // ~s~Drive through the checkpoints to increase your overall time.
+32@ = 0 
+
+:BLOOD_2193
+if 
+  5000 > 32@ 
+jf @BLOOD_2223 
+wait 0 
+jump @BLOOD_2193 
+
+:BLOOD_2223
+Camera.SetPosition(-1464.6, 943.6, 1036.1, 0.0, 0.0, 0.0)
+Camera.PointAt(-1436.1, 923.4, 1040.2, 2)
+if 
+  $MISSION_BLOODRING_PASSED == 0 
+jf @BLOOD_2315 
+00BC: show_text_highpriority GXT 'BLOD_11' time 5000 flag 1  // ~s~The current Target Time to win the Blood Ring is 1 min.
+jump @BLOOD_2334 
+
+:BLOOD_2315
+01E5: show_text_1number_highpriority GXT 'BLOD_12' number $1940 time 5000 flag 1  // ~s~The current Target Time to win the Blood Ring is ~1~ mins.
+
+:BLOOD_2334
+32@ = 0 
+
+:BLOOD_2341
+if 
+  5000 > 32@ 
+jf @BLOOD_2371 
+wait 0 
+jump @BLOOD_2341 
+
+:BLOOD_2371
+Camera.SetPosition(-1492.7, 1029.5, 1038.4, 0.0, 0.0, 0.0)
+Camera.PointAt(-1539.1, 1032.3, 1038.9, 2)
+00BC: show_text_highpriority GXT 'BLOD_03' time 5000 flag 1  // ~s~Get your overall time above the Target Time to win!
+32@ = 0 
+
+:BLOOD_2445
+if 
+  5000 > 32@ 
+jf @BLOOD_2475 
+wait 0 
+jump @BLOOD_2445 
+
+:BLOOD_2475
+Camera.SetPosition(-1314.1, 1040.6, 1038.7, 0.0, 0.0, 0.0)
+Camera.PointAt(-1373.1, 1047.2, 1034.5, 2)
+00BC: show_text_highpriority GXT 'BLOD_02' time 5000 flag 1  // ~s~You will lose if your overall time reaches zero.
+32@ = 0 
+
+:BLOOD_2549
+if 
+  5000 > 32@ 
+jf @BLOOD_2579 
+wait 0 
+jump @BLOOD_2549 
+
+:BLOOD_2579
+87@ = Object.Create(#BB_PICKUP, -1345.2, 978.7, 1024.9)
+0566: link_object 87@ to_interior 15 
+Camera.SetPosition(-1342.1, 975.2, 1026.6, 0.0, 0.0, 0.0)
+Camera.PointAt(-1345.2, 979.7, 1026.4, 2)
+00BC: show_text_highpriority GXT 'SPANNER' time 5000 flag 1  // Drive over pickups to repair your car!
+32@ = 0 
+
+:BLOOD_2683
+if 
+  5000 > 32@ 
+jf @BLOOD_2785 
+wait 0 
+if 
+03CA:   object 87@ exists 
+jf @BLOOD_2778 
+if 
+  358.0 > 106@ 
+jf @BLOOD_2768 
+106@ += 3.0 
+Object.Angle(87@) = 106@
+jump @BLOOD_2778 
+
+:BLOOD_2768
+106@ = 0.0 
+
+:BLOOD_2778
+jump @BLOOD_2683 
+
+:BLOOD_2785
+0701: end_scene_skip 
+fade 0 500 
+
+:BLOOD_2794
+if 
+fading 
+jf @BLOOD_2890 
+wait 0 
+if 
+03CA:   object 87@ exists 
+jf @BLOOD_2883 
+if 
+  358.0 > 106@ 
+jf @BLOOD_2873 
+106@ += 3.0 
+Object.Angle(87@) = 106@
+jump @BLOOD_2883 
+
+:BLOOD_2873
+106@ = 0.0 
+
+:BLOOD_2883
+jump @BLOOD_2794 
+
+:BLOOD_2890
+06D6: disable_racing_checkpoint 89@ 
+158@ = -1432.6 
+159@ = 1016.1 
+160@ = 1024.1 
+06D5: 89@ = create_racing_checkpoint_at 158@ 159@ 160@ point_to 0.0 0.0 0.0 type 2 radius 6.0 
+018A: 90@ = create_checkpoint_at 158@ 159@ 160@ 
+Object.Destroy(87@)
+gosub @BLOOD_14266 
+00BE: text_clear_all 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+02A3: enable_widescreen 0 
+fade 1 500 
+
+:BLOOD_3004
+if 
+fading 
+jf @BLOOD_3028 
+wait 0 
+jump @BLOOD_3004 
+
+:BLOOD_3028
+00BA: show_text_styled GXT 'RACE2' time 1100 style 4  // ~s~3
+097A: play_audio_at 0.0 0.0 0.0 event 1056 
+wait 1000 
+00BA: show_text_styled GXT 'RACE3' time 1100 style 4  // ~s~2
+097A: play_audio_at 0.0 0.0 0.0 event 1056 
+wait 1000 
+00BA: show_text_styled GXT 'RACE4' time 1100 style 4  // ~s~1
+097A: play_audio_at 0.0 0.0 0.0 event 1056 
+wait 1000 
+00BA: show_text_styled GXT 'RACE5' time 800 style 4  // ~s~GO!
+097A: play_audio_at 0.0 0.0 0.0 event 1164 
+097A: play_audio_at 0.0 0.0 0.0 event 1057 
+wait 800 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = True
+03C3: set_timer_to $8247 type 1 GXT 'RACES' // global_variable 
+93@ = 0 
+
+:BLOOD_3244
+if 
+  16 > 93@ 
+jf @BLOOD_3369 
+wait 0 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_3355 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_3355 
+Car.SetSpeedInstantly(35@(93@,16i), 10.0)
+Car.SetMaxSpeed(35@(93@,16i), 100.0)
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 9 timelimit 5000 
+
+:BLOOD_3355
+93@ += 1 
+jump @BLOOD_3244 
+
+:BLOOD_3369
+wait 0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @BLOOD_3400 
+jump @BLOOD_12919 
+
+:BLOOD_3400
+if 
+  91@ == 0 
+jf @BLOOD_12157 
+if 
+   not Car.Wrecked(34@)
+jf @BLOOD_12157 
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1530.0 995.0 cornerB -1384.0 923.0 
+jf @BLOOD_3609 
+if 
+  97@ == 0 
+jf @BLOOD_3602 
+if 
+   not Actor.Dead(52@)
+jf @BLOOD_3511 
+0687: clear_actor 52@ task 
+
+:BLOOD_3511
+if 
+   not Actor.Dead(53@)
+jf @BLOOD_3532 
+0687: clear_actor 53@ task 
+
+:BLOOD_3532
+if 
+   not Actor.Dead(67@)
+jf @BLOOD_3553 
+0687: clear_actor 67@ task 
+
+:BLOOD_3553
+if 
+   not Actor.Dead(68@)
+jf @BLOOD_3574 
+0687: clear_actor 68@ task 
+
+:BLOOD_3574
+if 
+   not Actor.Dead(69@)
+jf @BLOOD_3595 
+0687: clear_actor 69@ task 
+
+:BLOOD_3595
+97@ = 1 
+
+:BLOOD_3602
+jump @BLOOD_3739 
+
+:BLOOD_3609
+if 
+  97@ == 1 
+jf @BLOOD_3739 
+if 
+   not Actor.Dead(52@)
+jf @BLOOD_3648 
+0687: clear_actor 52@ task 
+
+:BLOOD_3648
+if 
+   not Actor.Dead(53@)
+jf @BLOOD_3669 
+0687: clear_actor 53@ task 
+
+:BLOOD_3669
+if 
+   not Actor.Dead(67@)
+jf @BLOOD_3690 
+0687: clear_actor 67@ task 
+
+:BLOOD_3690
+if 
+   not Actor.Dead(68@)
+jf @BLOOD_3711 
+0687: clear_actor 68@ task 
+
+:BLOOD_3711
+if 
+   not Actor.Dead(69@)
+jf @BLOOD_3732 
+0687: clear_actor 69@ task 
+
+:BLOOD_3732
+97@ = 0 
+
+:BLOOD_3739
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1530.0 995.0 cornerB -1384.0 1076.0 
+jf @BLOOD_3914 
+if 
+  98@ == 0 
+jf @BLOOD_3907 
+if 
+   not Actor.Dead(55@)
+jf @BLOOD_3816 
+0687: clear_actor 55@ task 
+
+:BLOOD_3816
+if 
+   not Actor.Dead(56@)
+jf @BLOOD_3837 
+0687: clear_actor 56@ task 
+
+:BLOOD_3837
+if 
+   not Actor.Dead(70@)
+jf @BLOOD_3858 
+0687: clear_actor 70@ task 
+
+:BLOOD_3858
+if 
+   not Actor.Dead(71@)
+jf @BLOOD_3879 
+0687: clear_actor 71@ task 
+
+:BLOOD_3879
+if 
+   not Actor.Dead(72@)
+jf @BLOOD_3900 
+0687: clear_actor 72@ task 
+
+:BLOOD_3900
+98@ = 1 
+
+:BLOOD_3907
+jump @BLOOD_4044 
+
+:BLOOD_3914
+if 
+  98@ == 1 
+jf @BLOOD_4044 
+if 
+   not Actor.Dead(55@)
+jf @BLOOD_3953 
+0687: clear_actor 55@ task 
+
+:BLOOD_3953
+if 
+   not Actor.Dead(56@)
+jf @BLOOD_3974 
+0687: clear_actor 56@ task 
+
+:BLOOD_3974
+if 
+   not Actor.Dead(70@)
+jf @BLOOD_3995 
+0687: clear_actor 70@ task 
+
+:BLOOD_3995
+if 
+   not Actor.Dead(71@)
+jf @BLOOD_4016 
+0687: clear_actor 71@ task 
+
+:BLOOD_4016
+if 
+   not Actor.Dead(72@)
+jf @BLOOD_4037 
+0687: clear_actor 72@ task 
+
+:BLOOD_4037
+98@ = 0 
+
+:BLOOD_4044
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1265.0 995.0 cornerB -1384.0 923.0 
+jf @BLOOD_4219 
+if 
+  99@ == 0 
+jf @BLOOD_4212 
+if 
+   not Actor.Dead(58@)
+jf @BLOOD_4121 
+0687: clear_actor 58@ task 
+
+:BLOOD_4121
+if 
+   not Actor.Dead(59@)
+jf @BLOOD_4142 
+0687: clear_actor 59@ task 
+
+:BLOOD_4142
+if 
+   not Actor.Dead(73@)
+jf @BLOOD_4163 
+0687: clear_actor 73@ task 
+
+:BLOOD_4163
+if 
+   not Actor.Dead(74@)
+jf @BLOOD_4184 
+0687: clear_actor 74@ task 
+
+:BLOOD_4184
+if 
+   not Actor.Dead(75@)
+jf @BLOOD_4205 
+0687: clear_actor 75@ task 
+
+:BLOOD_4205
+99@ = 1 
+
+:BLOOD_4212
+jump @BLOOD_4349 
+
+:BLOOD_4219
+if 
+  99@ == 1 
+jf @BLOOD_4349 
+if 
+   not Actor.Dead(58@)
+jf @BLOOD_4258 
+0687: clear_actor 58@ task 
+
+:BLOOD_4258
+if 
+   not Actor.Dead(59@)
+jf @BLOOD_4279 
+0687: clear_actor 59@ task 
+
+:BLOOD_4279
+if 
+   not Actor.Dead(73@)
+jf @BLOOD_4300 
+0687: clear_actor 73@ task 
+
+:BLOOD_4300
+if 
+   not Actor.Dead(74@)
+jf @BLOOD_4321 
+0687: clear_actor 74@ task 
+
+:BLOOD_4321
+if 
+   not Actor.Dead(75@)
+jf @BLOOD_4342 
+0687: clear_actor 75@ task 
+
+:BLOOD_4342
+99@ = 0 
+
+:BLOOD_4349
+if 
+00A3:   actor $PLAYER_ACTOR sphere 0 in_rectangle_cornerA -1265.0 995.0 cornerB -1384.0 1076.0 
+jf @BLOOD_4524 
+if 
+  100@ == 0 
+jf @BLOOD_4517 
+if 
+   not Actor.Dead(61@)
+jf @BLOOD_4426 
+0687: clear_actor 61@ task 
+
+:BLOOD_4426
+if 
+   not Actor.Dead(62@)
+jf @BLOOD_4447 
+0687: clear_actor 62@ task 
+
+:BLOOD_4447
+if 
+   not Actor.Dead(76@)
+jf @BLOOD_4468 
+0687: clear_actor 76@ task 
+
+:BLOOD_4468
+if 
+   not Actor.Dead(77@)
+jf @BLOOD_4489 
+0687: clear_actor 77@ task 
+
+:BLOOD_4489
+if 
+   not Actor.Dead(78@)
+jf @BLOOD_4510 
+0687: clear_actor 78@ task 
+
+:BLOOD_4510
+100@ = 1 
+
+:BLOOD_4517
+jump @BLOOD_4654 
+
+:BLOOD_4524
+if 
+  100@ == 1 
+jf @BLOOD_4654 
+if 
+   not Actor.Dead(61@)
+jf @BLOOD_4563 
+0687: clear_actor 61@ task 
+
+:BLOOD_4563
+if 
+   not Actor.Dead(62@)
+jf @BLOOD_4584 
+0687: clear_actor 62@ task 
+
+:BLOOD_4584
+if 
+   not Actor.Dead(76@)
+jf @BLOOD_4605 
+0687: clear_actor 76@ task 
+
+:BLOOD_4605
+if 
+   not Actor.Dead(77@)
+jf @BLOOD_4626 
+0687: clear_actor 77@ task 
+
+:BLOOD_4626
+if 
+   not Actor.Dead(78@)
+jf @BLOOD_4647 
+0687: clear_actor 78@ task 
+
+:BLOOD_4647
+100@ = 0 
+
+:BLOOD_4654
+if 
+  16 > 93@ 
+jf @BLOOD_11278 
+if 
+  93@ == 0 
+jf @BLOOD_5414 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_5414 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_5133 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_5077 
+if 
+  97@ == 0 
+jf @BLOOD_4958 
+062E: get_actor 51@(93@,16i) task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_4958 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_4958 
+0208: 173@ = random_float_in_ranges -1530.0 -1384.0 
+0208: 174@ = random_float_in_ranges 995.0 923.0 
+02CE: 175@ = ground_z_at 173@ 174@ 1078.7 
+if 
+  1034.1 > 175@ 
+jf @BLOOD_4958 
+if 
+  175@ > 1022.8 
+jf @BLOOD_4958 
+05D1: AS_actor 51@(93@,16i) drive_car 35@(93@,16i) to 173@ 174@ 175@ speed 100.0 2 model #NULL 3 
+
+:BLOOD_4958
+if 
+  97@ == 1 
+jf @BLOOD_5070 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5070 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5070 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_5070
+jump @BLOOD_5133 
+
+:BLOOD_5077
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5133 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_5133
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_5414 
+if 
+  97@ == 0 
+jf @BLOOD_5323 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5323 
+if 
+   not Car.Wrecked(36@)
+jf @BLOOD_5267 
+0713: actor 67@(93@,16i) driveby_actor -1 car 36@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+jump @BLOOD_5323 
+
+:BLOOD_5267
+if 
+   not Car.Wrecked(37@)
+jf @BLOOD_5323 
+0713: actor 67@(93@,16i) driveby_actor -1 car 37@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+
+:BLOOD_5323
+if 
+  97@ == 1 
+jf @BLOOD_5414 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5414 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_5414
+if or
+  93@ == 1 
+  93@ == 2 
+jf @BLOOD_6020 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_6020 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_5802 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_5746 
+if 
+  97@ == 0 
+jf @BLOOD_5627 
+if 
+   not Car.Wrecked(35@)
+jf @BLOOD_5627 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5627 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5627 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 35@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_5627
+if 
+  97@ == 1 
+jf @BLOOD_5739 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5739 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5739 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_5739
+jump @BLOOD_5802 
+
+:BLOOD_5746
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5802 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_5802
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_6020 
+if 
+  97@ == 0 
+jf @BLOOD_5929 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_5929 
+if 
+   not Car.Wrecked(35@)
+jf @BLOOD_5929 
+0713: actor 67@(93@,16i) driveby_actor -1 car 35@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_5929
+if 
+  97@ == 1 
+jf @BLOOD_6020 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6020 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_6020
+if 
+  93@ == 3 
+jf @BLOOD_6762 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_6762 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_6481 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_6425 
+if 
+  98@ == 0 
+jf @BLOOD_6306 
+062E: get_actor 51@(93@,16i) task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6306 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6306 
+0208: 176@ = random_float_in_ranges -1530.0 -1384.0 
+0208: 177@ = random_float_in_ranges 995.0 1056.0 
+02CE: 178@ = ground_z_at 176@ 177@ 1078.7 
+if 
+  1034.1 > 178@ 
+jf @BLOOD_6306 
+if 
+  178@ > 1022.8 
+jf @BLOOD_6306 
+05D1: AS_actor 51@(93@,16i) drive_car 35@(93@,16i) to 176@ 177@ 178@ speed 100.0 2 model #NULL 3 
+
+:BLOOD_6306
+if 
+  98@ == 1 
+jf @BLOOD_6418 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6418 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6418 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_6418
+jump @BLOOD_6481 
+
+:BLOOD_6425
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6481 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_6481
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_6762 
+if 
+  98@ == 0 
+jf @BLOOD_6671 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6671 
+if 
+   not Car.Wrecked(39@)
+jf @BLOOD_6615 
+0713: actor 67@(93@,16i) driveby_actor -1 car 39@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+jump @BLOOD_6671 
+
+:BLOOD_6615
+if 
+   not Car.Wrecked(40@)
+jf @BLOOD_6671 
+0713: actor 67@(93@,16i) driveby_actor -1 car 40@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+
+:BLOOD_6671
+if 
+  98@ == 1 
+jf @BLOOD_6762 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6762 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_6762
+if or
+  93@ == 4 
+  93@ == 5 
+jf @BLOOD_7368 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_7368 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_7150 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_7094 
+if 
+  98@ == 0 
+jf @BLOOD_6975 
+if 
+   not Car.Wrecked(38@)
+jf @BLOOD_6975 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6975 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_6975 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 38@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_6975
+if 
+  98@ == 1 
+jf @BLOOD_7087 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7087 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7087 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_7087
+jump @BLOOD_7150 
+
+:BLOOD_7094
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7150 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_7150
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_7368 
+if 
+  98@ == 0 
+jf @BLOOD_7277 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7277 
+if 
+   not Car.Wrecked(38@)
+jf @BLOOD_7277 
+0713: actor 67@(93@,16i) driveby_actor -1 car 38@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_7277
+if 
+  98@ == 1 
+jf @BLOOD_7368 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7368 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_7368
+if 
+  93@ == 6 
+jf @BLOOD_8110 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_8110 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_7829 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_7773 
+if 
+  99@ == 0 
+jf @BLOOD_7654 
+062E: get_actor 51@(93@,16i) task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7654 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7654 
+0208: 179@ = random_float_in_ranges -1265.0 -1384.0 
+0208: 180@ = random_float_in_ranges 995.0 923.0 
+02CE: 181@ = ground_z_at 179@ 180@ 1078.7 
+if 
+  1034.1 > 181@ 
+jf @BLOOD_7654 
+if 
+  181@ > 1022.8 
+jf @BLOOD_7654 
+05D1: AS_actor 51@(93@,16i) drive_car 35@(93@,16i) to 179@ 180@ 181@ speed 100.0 2 model #NULL 3 
+
+:BLOOD_7654
+if 
+  99@ == 1 
+jf @BLOOD_7766 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7766 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7766 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_7766
+jump @BLOOD_7829 
+
+:BLOOD_7773
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_7829 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_7829
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_8110 
+if 
+  99@ == 0 
+jf @BLOOD_8019 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8019 
+if 
+   not Car.Wrecked(42@)
+jf @BLOOD_7963 
+0713: actor 67@(93@,16i) driveby_actor -1 car 42@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+jump @BLOOD_8019 
+
+:BLOOD_7963
+if 
+   not Car.Wrecked(43@)
+jf @BLOOD_8019 
+0713: actor 67@(93@,16i) driveby_actor -1 car 43@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+
+:BLOOD_8019
+if 
+  99@ == 1 
+jf @BLOOD_8110 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8110 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_8110
+if or
+  93@ == 7 
+  93@ == 8 
+jf @BLOOD_8716 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_8716 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_8498 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_8442 
+if 
+  99@ == 0 
+jf @BLOOD_8323 
+if 
+   not Car.Wrecked(41@)
+jf @BLOOD_8323 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8323 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8323 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 41@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_8323
+if 
+  99@ == 1 
+jf @BLOOD_8435 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8435 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8435 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_8435
+jump @BLOOD_8498 
+
+:BLOOD_8442
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8498 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_8498
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_8716 
+if 
+  99@ == 0 
+jf @BLOOD_8625 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8625 
+if 
+   not Car.Wrecked(41@)
+jf @BLOOD_8625 
+0713: actor 67@(93@,16i) driveby_actor -1 car 41@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_8625
+if 
+  99@ == 1 
+jf @BLOOD_8716 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_8716 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_8716
+if 
+  93@ == 9 
+jf @BLOOD_9458 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_9458 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_9177 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_9121 
+if 
+  100@ == 0 
+jf @BLOOD_9002 
+062E: get_actor 51@(93@,16i) task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9002 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9002 
+0208: 182@ = random_float_in_ranges -1265.0 -1384.0 
+0208: 183@ = random_float_in_ranges 995.0 1056.0 
+02CE: 184@ = ground_z_at 182@ 183@ 1078.7 
+if 
+  1034.1 > 184@ 
+jf @BLOOD_9002 
+if 
+  184@ > 1022.8 
+jf @BLOOD_9002 
+05D1: AS_actor 51@(93@,16i) drive_car 35@(93@,16i) to 182@ 183@ 184@ speed 100.0 2 model #NULL 3 
+
+:BLOOD_9002
+if 
+  100@ == 1 
+jf @BLOOD_9114 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9114 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9114 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_9114
+jump @BLOOD_9177 
+
+:BLOOD_9121
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9177 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_9177
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_9458 
+if 
+  100@ == 0 
+jf @BLOOD_9367 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9367 
+if 
+   not Car.Wrecked(45@)
+jf @BLOOD_9311 
+0713: actor 67@(93@,16i) driveby_actor -1 car 45@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+jump @BLOOD_9367 
+
+:BLOOD_9311
+if 
+   not Car.Wrecked(46@)
+jf @BLOOD_9367 
+0713: actor 67@(93@,16i) driveby_actor -1 car 46@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 50 
+
+:BLOOD_9367
+if 
+  100@ == 1 
+jf @BLOOD_9458 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9458 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_9458
+if or
+  93@ == 10 
+  93@ == 11 
+jf @BLOOD_10064 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_10064 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_9846 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_9790 
+if 
+  100@ == 0 
+jf @BLOOD_9671 
+if 
+   not Car.Wrecked(44@)
+jf @BLOOD_9671 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9671 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9671 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 44@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_9671
+if 
+  100@ == 1 
+jf @BLOOD_9783 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9783 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9783 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_9783
+jump @BLOOD_9846 
+
+:BLOOD_9790
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9846 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_9846
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_10064 
+if 
+  100@ == 0 
+jf @BLOOD_9973 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_9973 
+if 
+   not Car.Wrecked(44@)
+jf @BLOOD_9973 
+0713: actor 67@(93@,16i) driveby_actor -1 car 44@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_9973
+if 
+  100@ == 1 
+jf @BLOOD_10064 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10064 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 25 
+
+:BLOOD_10064
+if or
+  93@ == 12 
+  93@ == 13 
+jf @BLOOD_10399 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_10399 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_10306 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_10250 
+062E: get_actor 51@(93@,16i) task 1761 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10243 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10243 
+06E1: AS_actor 51@(93@,16i) using_car 35@(93@,16i) target_car 34@ with_order 17 max_speed 100.0 traffic_flag 3 
+
+:BLOOD_10243
+jump @BLOOD_10306 
+
+:BLOOD_10250
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10306 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_10306
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_10399 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10399 
+0713: actor 67@(93@,16i) driveby_actor -1 car 34@ point 0.0 0.0 0.0 radius 50.0 8 0 firing_rate 40 
+
+:BLOOD_10399
+if or
+  93@ == 14 
+  93@ == 15 
+jf @BLOOD_10896 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_10896 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_10649 
+if 
+8495:   not car 35@(93@,16i) burning 
+jf @BLOOD_10593 
+062E: get_actor 51@(93@,16i) task 1489 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10586 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10586 
+05D1: AS_actor 51@(93@,16i) drive_car 35@(93@,16i) to 158@ 159@ 160@ speed 100.0 2 model #NULL 3 
+
+:BLOOD_10586
+jump @BLOOD_10649 
+
+:BLOOD_10593
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10649 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 6 timelimit 2000000 
+
+:BLOOD_10649
+if 
+   not Actor.Dead(67@(93@,16i))
+jf @BLOOD_10896 
+062E: get_actor 67@(93@,16i) task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_10896 
+0085: 88@ = 35@(93@,16i) // (int) 
+if 
+  93@ == 14 
+jf @BLOOD_10805 
+gosub @BLOOD_16592 
+0085: 84@ = 95@ // (int) 
+if 
+   not 84@ == -1 
+jf @BLOOD_10805 
+0713: actor 67@(93@,16i) driveby_actor -1 car 84@ point 0.0 0.0 0.0 radius 30.0 8 0 firing_rate 50 
+
+:BLOOD_10805
+if 
+  93@ == 15 
+jf @BLOOD_10896 
+gosub @BLOOD_16592 
+0085: 85@ = 95@ // (int) 
+if 
+   not 85@ == -1 
+jf @BLOOD_10896 
+0713: actor 67@(93@,16i) driveby_actor -1 car 85@ point 0.0 0.0 0.0 radius 30.0 8 0 firing_rate 50 
+
+:BLOOD_10896
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_11005 
+if 
+   not Actor.Dead(83@)
+jf @BLOOD_11005 
+if or
+051C:   car 35@(93@,16i) damaged_by_actor 83@ 
+051C:   car 35@(93@,16i) damaged_by_actor $PLAYER_ACTOR 
+jf @BLOOD_10985 
+112@(93@,16i) = 1 
+jump @BLOOD_10996 
+
+:BLOOD_10985
+112@(93@,16i) = 0 
+
+:BLOOD_10996
+054F: clear_car 35@(93@,16i) damage 
+
+:BLOOD_11005
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_11217 
+if 
+   not Actor.Dead(51@(93@,16i))
+jf @BLOOD_11210 
+if 
+01F4:   car 35@(93@,16i) flipped 
+jf @BLOOD_11136 
+if 
+8202:   not actor $PLAYER_ACTOR near_car 35@(93@,16i) radius 7.0 7.0 sphere 0 
+jf @BLOOD_11136 
+Car.StorePos(35@(93@,16i), 167@, 168@, 169@)
+Car.PutAt(35@(93@,16i), 167@, 168@, 169@)
+
+:BLOOD_11136
+if 
+03CE:   car 35@(93@,16i) stuck 
+jf @BLOOD_11210 
+062E: get_actor 51@(93@,16i) task 1735 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_11210 
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 3 timelimit 3000 
+
+:BLOOD_11210
+jump @BLOOD_11264 
+
+:BLOOD_11217
+if 
+  112@(93@,16i) == 1 
+jf @BLOOD_11246 
+111@ += 1 
+
+:BLOOD_11246
+112@(93@,16i) = 0 
+gosub @BLOOD_14418 
+
+:BLOOD_11264
+93@ += 1 
+jump @BLOOD_11285 
+
+:BLOOD_11278
+93@ = 0 
+
+:BLOOD_11285
+if 
+   not Car.Wrecked(47@)
+jf @BLOOD_11350 
+if 
+01AF:   car 47@ sphere 0 in_sphere 158@ 159@ 160@ radius 7.0 7.0 7.0 
+jf @BLOOD_11350 
+gosub @BLOOD_14087 
+
+:BLOOD_11350
+if 
+   not Car.Wrecked(48@)
+jf @BLOOD_11415 
+if 
+01AF:   car 48@ sphere 0 in_sphere 158@ 159@ 160@ radius 7.0 7.0 7.0 
+jf @BLOOD_11415 
+gosub @BLOOD_14087 
+
+:BLOOD_11415
+if 
+   not Car.Wrecked(49@)
+jf @BLOOD_11480 
+if 
+01AF:   car 49@ sphere 0 in_sphere 158@ 159@ 160@ radius 7.0 7.0 7.0 
+jf @BLOOD_11480 
+gosub @BLOOD_14087 
+
+:BLOOD_11480
+if 
+   not Car.Wrecked(50@)
+jf @BLOOD_11545 
+if 
+01AF:   car 50@ sphere 0 in_sphere 158@ 159@ 160@ radius 7.0 7.0 7.0 
+jf @BLOOD_11545 
+gosub @BLOOD_14087 
+
+:BLOOD_11545
+if 
+03CA:   object 87@ exists 
+jf @BLOOD_11733 
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle 87@ radius 5.0 5.0 sphere 0 
+jf @BLOOD_11670 
+Object.Destroy(87@)
+96@ = Car.Health(34@)
+if 
+  999 > 96@ 
+jf @BLOOD_11647 
+96@ += 500 
+Car.Health(34@) = 96@
+jump @BLOOD_11663 
+
+:BLOOD_11647
+96@ = 1500 
+Car.Health(34@) = 96@
+
+:BLOOD_11663
+jump @BLOOD_11726 
+
+:BLOOD_11670
+if 
+  358.0 > 106@ 
+jf @BLOOD_11716 
+106@ += 3.0 
+Object.Angle(87@) = 106@
+jump @BLOOD_11726 
+
+:BLOOD_11716
+106@ = 0.0 
+
+:BLOOD_11726
+jump @BLOOD_11740 
+
+:BLOOD_11733
+gosub @BLOOD_14266 
+
+:BLOOD_11740
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 158@ 159@ 160@ radius 7.0 7.0 7.0 
+jf @BLOOD_11901 
+if 
+  $8247 > 0 
+jf @BLOOD_11901 
+96@ = Car.Health(34@)
+if 
+  1199 > 96@ 
+jf @BLOOD_11850 
+96@ += 300 
+Car.Health(34@) = 96@
+jump @BLOOD_11866 
+
+:BLOOD_11850
+96@ = 1500 
+Car.Health(34@) = 96@
+
+:BLOOD_11866
+$8247 += 15000 
+018C: play_sound 1058 at 0.0 0.0 0.0 
+gosub @BLOOD_14087 
+
+:BLOOD_11901
+if 
+01F4:   car 34@ flipped 
+jf @BLOOD_11977 
+if 
+01C1:   car 34@ stopped 
+jf @BLOOD_11977 
+Car.StorePos(34@, 167@, 168@, 169@)
+157@ = Car.Angle(34@)
+Car.PutAt(34@, 167@, 168@, 169@)
+Car.Angle(34@) = 157@
+
+:BLOOD_11977
+if 
+   not Actor.Dead(83@)
+jf @BLOOD_12099 
+062E: get_actor 83@ task 1811 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @BLOOD_12099 
+0085: 88@ = 34@ // (int) 
+gosub @BLOOD_16592 
+0085: 86@ = 95@ // (int) 
+if 
+   not 86@ == -1 
+jf @BLOOD_12099 
+0713: actor 83@ driveby_actor -1 car 86@ point 0.0 0.0 0.0 radius 30.0 8 0 firing_rate 100 
+
+:BLOOD_12099
+gosub @BLOOD_17320 
+if 
+001C:   $8247 > $8248 // (int) 
+jf @BLOOD_12132 
+91@ = 1 
+
+:BLOOD_12132
+if 
+  0 >= $8247 
+jf @BLOOD_12157 
+91@ = 2 
+
+:BLOOD_12157
+if 
+  91@ == 1 
+jf @BLOOD_12560 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0394: play_music 2 
+93@ = 0 
+
+:BLOOD_12197
+if 
+  16 > 93@ 
+jf @BLOOD_12264 
+wait 0 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_12250 
+Car.LockInCurrentPosition(35@(93@,16i)) = True
+
+:BLOOD_12250
+93@ += 1 
+jump @BLOOD_12197 
+
+:BLOOD_12264
+gosub @BLOOD_16866 
+008B: 109@ = $1940 // (int) 
+109@ *= 60 
+0623: add 109@ to_integer_stat 179 
+0623: add 111@ to_integer_stat 178 
+$1940 += 1 
+$8248 += 60000 
+32@ = 0 
+
+:BLOOD_12326
+if 
+  5000 > 32@ 
+jf @BLOOD_12356 
+wait 0 
+jump @BLOOD_12326 
+
+:BLOOD_12356
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:BLOOD_12371
+if 
+fading 
+jf @BLOOD_12395 
+wait 0 
+jump @BLOOD_12371 
+
+:BLOOD_12395
+02A3: enable_widescreen 0 
+08DA: remove_panel 110@ 
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+04E4: refresh_game_renderer_at -2126.3 -440.6 
+0A0B: set_rendering_origin_at_3D_coord -2119.0 -440.7 34.5 angle 82.6 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2126.3, -440.6, 34.5)
+Actor.Angle($PLAYER_ACTOR) = 82.7
+014F: stop_timer $8247 
+Marker.Disable(90@)
+06D6: disable_racing_checkpoint 89@ 
+09AC: disable_map_icons 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+
+:BLOOD_12522
+if 
+fading 
+jf @BLOOD_12546 
+wait 0 
+jump @BLOOD_12522 
+
+:BLOOD_12546
+Player.CanMove($PLAYER_CHAR) = True
+jump @BLOOD_12919 
+
+:BLOOD_12560
+if 
+  91@ == 2 
+jf @BLOOD_12894 
+Player.CanMove($PLAYER_CHAR) = False
+93@ = 0 
+
+:BLOOD_12592
+if 
+  16 > 93@ 
+jf @BLOOD_12659 
+wait 0 
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_12645 
+Car.LockInCurrentPosition(35@(93@,16i)) = True
+
+:BLOOD_12645
+93@ += 1 
+jump @BLOOD_12592 
+
+:BLOOD_12659
+0169: set_fade_color_RGB 0 0 0 
+fade 0 1000 
+
+:BLOOD_12674
+if 
+fading 
+jf @BLOOD_12698 
+wait 0 
+jump @BLOOD_12674 
+
+:BLOOD_12698
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+00BC: show_text_highpriority GXT 'BLOD_05' time 5000 flag 1  // ~r~You ran out of time!
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+04E4: refresh_game_renderer_at -2126.3 -440.6 
+0A0B: set_rendering_origin_at_3D_coord -2119.0 -440.7 34.5 angle 82.6 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2126.3, -440.6, 34.5)
+Actor.Angle($PLAYER_ACTOR) = 82.7
+014F: stop_timer $8247 
+Marker.Disable(90@)
+06D6: disable_racing_checkpoint 89@ 
+09AC: disable_map_icons 0 
+01F6: cancel_override_restart 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0169: set_fade_color_RGB 0 0 0 
+fade 1 500 
+
+:BLOOD_12856
+if 
+fading 
+jf @BLOOD_12880 
+wait 0 
+jump @BLOOD_12856 
+
+:BLOOD_12880
+Player.CanMove($PLAYER_CHAR) = True
+jump @BLOOD_12901 
+
+:BLOOD_12894
+jump @BLOOD_3369 
+
+:BLOOD_12901
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+return 
+
+:BLOOD_12919
+01F6: cancel_override_restart 
+0414: set_player $PLAYER_CHAR free_treatment_once 0 
+00BE: text_clear_all 
+Player.ClearWantedLevel($PLAYER_CHAR)
+if 
+  $MISSION_BLOODRING_PASSED == 0 
+jf @BLOOD_13036 
+0595: mission_complete 
+030C: progress_made = 1 
+0394: play_music 2 
+01E3: show_text_1number_styled GXT 'M_PASS' number 10000 time 5000 style 1  // MISSION PASSED!~n~~w~$~1~
+Player.Money($PLAYER_CHAR) += 10000
+$MISSION_BLOODRING_PASSED = 1 
+if and
+  $MISSION_BLOODRING_PASSED == 1 
+  $704 == 1 
+jf @BLOOD_13036 
+014C: set_parked_car_generator $5188 cars_to_generate_to 101 
+$MISSION_BLOODRING_PASSED = 2 
+
+:BLOOD_13036
+return 
+
+:BLOOD_13038
+if 
+0844:   string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @BLOOD_13056 
+Camera.Restore_WithJumpCut
+
+:BLOOD_13056
+04FA: reset_sky_colors_with_fade 0 
+Marker.Disable(90@)
+014F: stop_timer $8247 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BLOOD_13093 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:BLOOD_13093
+09F5: disable_player_mutal_activities 0 
+03F0: enable_text_draw 0 
+Model.Destroy(#BLOODRA)
+Model.Destroy(#MP5LNG)
+Model.Destroy(#BB_PICKUP)
+Actor.SetWeaponAmmo($PLAYER_ACTOR, MP5, 103@)
+06D6: disable_racing_checkpoint 89@ 
+0734: reset_random_car_generator_models 
+0A37: disable_vehicle_lights 0 
+09AC: disable_map_icons 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:BLOOD_13157
+if 
+  93@ == 0 
+jf @BLOOD_13215 
+154@ = -1285.77 
+155@ = 1014.54 
+156@ = 1036.5 
+157@ = 104.4 
+
+:BLOOD_13215
+if 
+  93@ == 1 
+jf @BLOOD_13273 
+154@ = -1299.5 
+155@ = 1030.74 
+156@ = 1036.8 
+157@ = 132.6 
+
+:BLOOD_13273
+if 
+  93@ == 2 
+jf @BLOOD_13331 
+154@ = -1319.3 
+155@ = 1042.82 
+156@ = 1037.1 
+157@ = 135.4 
+
+:BLOOD_13331
+if 
+  93@ == 3 
+jf @BLOOD_13389 
+154@ = -1349.33 
+155@ = 1054.47 
+156@ = 1037.3 
+157@ = 155.4 
+
+:BLOOD_13389
+if 
+  93@ == 4 
+jf @BLOOD_13447 
+154@ = -1384.33 
+155@ = 1058.55 
+156@ = 1037.5 
+157@ = 173.2 
+
+:BLOOD_13447
+if 
+  93@ == 5 
+jf @BLOOD_13505 
+154@ = -1296.7 
+155@ = 960.2 
+156@ = 1035.6 
+157@ = 60.5 
+
+:BLOOD_13505
+if 
+  93@ == 6 
+jf @BLOOD_13563 
+154@ = -1418.77 
+155@ = 1057.54 
+156@ = 1037.5 
+157@ = 180.4 
+
+:BLOOD_13563
+if 
+  93@ == 7 
+jf @BLOOD_13621 
+154@ = -1460.3 
+155@ = 1050.3 
+156@ = 1037.5 
+157@ = 203.9 
+
+:BLOOD_13621
+if 
+  93@ == 8 
+jf @BLOOD_13679 
+154@ = -1499.77 
+155@ = 1029.54 
+156@ = 1037.2 
+157@ = 242.4 
+
+:BLOOD_13679
+if 
+  93@ == 9 
+jf @BLOOD_13737 
+154@ = -1513.77 
+155@ = 986.54 
+156@ = 1036.5 
+157@ = 271.4 
+
+:BLOOD_13737
+if 
+  93@ == 10 
+jf @BLOOD_13795 
+154@ = -1496.77 
+155@ = 959.54 
+156@ = 1036.0 
+157@ = 293.4 
+
+:BLOOD_13795
+if 
+  93@ == 11 
+jf @BLOOD_13853 
+154@ = -1461.84 
+155@ = 938.32 
+156@ = 1035.3 
+157@ = 345.6 
+
+:BLOOD_13853
+if 
+  93@ == 12 
+jf @BLOOD_13911 
+154@ = -1424.36 
+155@ = 931.29 
+156@ = 1035.2 
+157@ = 0.0 
+
+:BLOOD_13911
+if 
+  93@ == 13 
+jf @BLOOD_13969 
+154@ = -1363.77 
+155@ = 932.44 
+156@ = 1035.3 
+157@ = 17.85 
+
+:BLOOD_13969
+if 
+  93@ == 14 
+jf @BLOOD_14027 
+154@ = -1332.77 
+155@ = 940.3 
+156@ = 1037.0 
+157@ = 39.98 
+
+:BLOOD_14027
+if 
+  93@ == 15 
+jf @BLOOD_14085 
+154@ = -1443.29 
+155@ = 933.86 
+156@ = 1035.3 
+157@ = 351.4 
+
+:BLOOD_14085
+return 
+
+:BLOOD_14087
+0208: 158@ = random_float_in_ranges -1290.0 -1508.0 
+0208: 159@ = random_float_in_ranges 939.0 1052.0 
+02CE: 160@ = ground_z_at 158@ 159@ 1056.7 
+if 
+  160@ > 1034.1 
+jf @BLOOD_14161 
+jump @BLOOD_14087 
+
+:BLOOD_14161
+if 
+  1022.8 > 160@ 
+jf @BLOOD_14189 
+jump @BLOOD_14087 
+
+:BLOOD_14189
+Marker.Disable(90@)
+018A: 90@ = create_checkpoint_at 158@ 159@ 160@ 
+if 
+   not Actor.Dead(65@)
+jf @BLOOD_14229 
+0687: clear_actor 65@ task 
+
+:BLOOD_14229
+if 
+   not Actor.Dead(66@)
+jf @BLOOD_14250 
+0687: clear_actor 66@ task 
+
+:BLOOD_14250
+07F3: move_racing_checkpoint 89@ to 158@ 159@ 160@ 
+return 
+
+:BLOOD_14266
+0208: 170@ = random_float_in_ranges -1290.0 -1508.0 
+0208: 171@ = random_float_in_ranges 939.0 1052.0 
+02CE: 172@ = ground_z_at 170@ 171@ 1056.7 
+if 
+  172@ > 1034.1 
+jf @BLOOD_14340 
+jump @BLOOD_14266 
+
+:BLOOD_14340
+if 
+  1022.8 > 172@ 
+jf @BLOOD_14368 
+jump @BLOOD_14266 
+
+:BLOOD_14368
+172@ += 0.5 
+87@ = Object.Create(#BB_PICKUP, 170@, 171@, 172@)
+0566: link_object 87@ to_interior 15 
+Object.CollisionDetection(87@) = False
+Object.ToggleInMovingList(87@) = False
+return 
+
+:BLOOD_14418
+gosub @BLOOD_14889 
+if 
+   not 102@ == -1 
+jf @BLOOD_14887 
+03CD: disable_car 35@(93@,16i) stuck_check 
+Car.RemoveReferences(35@(93@,16i))
+Actor.RemoveReferences(51@(93@,16i))
+Actor.RemoveReferences(67@(93@,16i))
+09B2: get_random_available_car_unk 1 model_to 104@ class_to 105@ 
+if 
+  104@ >= 0 
+jf @BLOOD_14555 
+0085: 108@ = 104@ // (int) 
+gosub @BLOOD_15360 
+35@(93@,16i) = Car.Create(#BLOODRA, 154@, 155@, 156@)
+Car.Angle(35@(93@,16i)) = 157@
+
+:BLOOD_14555
+if 
+   not Car.Wrecked(35@(93@,16i))
+jf @BLOOD_14887 
+0587: enable_car 35@(93@,16i) validate_position 1 
+04E0: car 35@(93@,16i) abandon_path_radius 255 
+053F: set_car 35@(93@,16i) tires_vulnerability 0 
+0560: create_random_actor_in_car 35@(93@,16i) handle_as 51@(93@,16i) 
+0860: link_actor 51@(93@,16i) to_interior 15 
+060B: set_actor 51@(93@,16i) decision_maker_to 185@ 
+Actor.SetImmunities(51@(93@,16i), 1, 0, 0, 0, 0)
+0588: disable_actor 51@(93@,16i) validate_position 1 
+01EA: 101@ = car 35@(93@,16i) max_passengers 
+if 
+  101@ > 0 
+jf @BLOOD_14771 
+0561: 67@(93@,16i) = create_passenger_in_car 35@(93@,16i) seat 0 
+060B: set_actor 67@(93@,16i) decision_maker_to 185@ 
+Actor.SetImmunities(67@(93@,16i), 1, 0, 0, 0, 0)
+Actor.GiveWeaponAndAmmo(67@(93@,16i), MP5, 30000)
+
+:BLOOD_14771
+if 
+047A:   actor 51@(93@,16i) driving_bike 
+jf @BLOOD_14813 
+08C6: set_actor 51@(93@,16i) stay_on_bike 1 
+08C6: set_actor 67@(93@,16i) stay_on_bike 1 
+
+:BLOOD_14813
+03CC: enable_car 35@(93@,16i) stuck_check_distance_to 1.0 time_to 3000 
+03ED: set_car 35@(93@,16i) disable_flipped_explosion_when_empty 1 
+0840: link_car 35@(93@,16i) to_interior 15 
+Car.SetSpeedInstantly(35@(93@,16i), 25.0)
+06C7: AS_actor 51@(93@,16i) driver_of_car 35@(93@,16i) perform_action 9 timelimit 3000 
+
+:BLOOD_14887
+return 
+
+:BLOOD_14889
+0209: 102@ = random_int_in_ranges 1 4 
+if 
+  102@ == 1 
+jf @BLOOD_15013 
+if 
+838A:   not any_car_in_cube_cornerA -1461.84 938.32 1035.0 cornerB 5.0 5.0 5.0 
+jf @BLOOD_15006 
+154@ = -1461.84 
+155@ = 938.32 
+156@ = 1035.0 
+157@ = 345.6 
+jump @BLOOD_15013 
+
+:BLOOD_15006
+102@ = 2 
+
+:BLOOD_15013
+if 
+  102@ == 2 
+jf @BLOOD_15128 
+if 
+838A:   not any_car_in_cube_cornerA -1424.36 933.86 1035.0 cornerB 5.0 5.0 5.0 
+jf @BLOOD_15121 
+154@ = -1424.36 
+155@ = 933.86 
+156@ = 1035.0 
+157@ = 0.0 
+jump @BLOOD_15128 
+
+:BLOOD_15121
+102@ = 3 
+
+:BLOOD_15128
+if 
+  102@ == 3 
+jf @BLOOD_15243 
+if 
+838A:   not any_car_in_cube_cornerA -1443.29 931.29 1035.0 cornerB 5.0 5.0 5.0 
+jf @BLOOD_15236 
+154@ = -1443.29 
+155@ = 931.29 
+156@ = 1035.0 
+157@ = 351.4 
+jump @BLOOD_15243 
+
+:BLOOD_15236
+102@ = 1 
+
+:BLOOD_15243
+if 
+  102@ == 1 
+jf @BLOOD_15358 
+if 
+838A:   not any_car_in_cube_cornerA -1461.84 938.32 1035.0 cornerB 5.0 5.0 5.0 
+jf @BLOOD_15351 
+154@ = -1461.84 
+155@ = 938.32 
+156@ = 1035.0 
+157@ = 345.6 
+jump @BLOOD_15358 
+
+:BLOOD_15351
+102@ = -1 
+
+:BLOOD_15358
+return 
+
+:BLOOD_15360
+0209: 107@ = random_int_in_ranges 0 37 
+if 
+  107@ == 0 
+jf @BLOOD_15402 
+0674: set_car_model 108@ numberplate "GOT_M00_" 
+
+:BLOOD_15402
+if 
+  107@ == 1 
+jf @BLOOD_15435 
+0674: set_car_model 108@ numberplate "M00TV_4U" 
+
+:BLOOD_15435
+if 
+  107@ == 2 
+jf @BLOOD_15468 
+0674: set_car_model 108@ numberplate "MATHEW_2" 
+
+:BLOOD_15468
+if 
+  107@ == 3 
+jf @BLOOD_15501 
+0674: set_car_model 108@ numberplate "D4_DEW0R" 
+
+:BLOOD_15501
+if 
+  107@ == 4 
+jf @BLOOD_15534 
+0674: set_car_model 108@ numberplate "D0DE_777" 
+
+:BLOOD_15534
+if 
+  107@ == 5 
+jf @BLOOD_15567 
+0674: set_car_model 108@ numberplate "DAM0_666" 
+
+:BLOOD_15567
+if 
+  107@ == 6 
+jf @BLOOD_15600 
+0674: set_car_model 108@ numberplate "C0NEY_88" 
+
+:BLOOD_15600
+if 
+  107@ == 7 
+jf @BLOOD_15633 
+0674: set_car_model 108@ numberplate "PRE4CHER" 
+
+:BLOOD_15633
+if 
+  107@ == 8 
+jf @BLOOD_15666 
+0674: set_car_model 108@ numberplate "DBP_4NDY" 
+
+:BLOOD_15666
+if 
+  107@ == 9 
+jf @BLOOD_15699 
+0674: set_car_model 108@ numberplate "EV1L_SLY" 
+
+:BLOOD_15699
+if 
+  107@ == 10 
+jf @BLOOD_15732 
+0674: set_car_model 108@ numberplate "N1_R4V3N" 
+
+:BLOOD_15732
+if 
+  107@ == 11 
+jf @BLOOD_15765 
+0674: set_car_model 108@ numberplate "D1VX_Z00" 
+
+:BLOOD_15765
+if 
+  107@ == 12 
+jf @BLOOD_15798 
+0674: set_car_model 108@ numberplate "MR_B3NN_" 
+
+:BLOOD_15798
+if 
+  107@ == 13 
+jf @BLOOD_15831 
+0674: set_car_model 108@ numberplate "R3D_R4SP" 
+
+:BLOOD_15831
+if 
+  107@ == 14 
+jf @BLOOD_15864 
+0674: set_car_model 108@ numberplate "LA_B0MBA" 
+
+:BLOOD_15864
+if 
+  107@ == 15 
+jf @BLOOD_15897 
+0674: set_car_model 108@ numberplate "L3337_0G" 
+
+:BLOOD_15897
+if 
+  107@ == 16 
+jf @BLOOD_15930 
+0674: set_car_model 108@ numberplate "BUDD4H_X" 
+
+:BLOOD_15930
+if 
+  107@ == 17 
+jf @BLOOD_15963 
+0674: set_car_model 108@ numberplate "T3H_BUCK" 
+
+:BLOOD_15963
+if 
+  107@ == 18 
+jf @BLOOD_15996 
+0674: set_car_model 108@ numberplate "CHUNKY_1" 
+
+:BLOOD_15996
+if 
+  107@ == 19 
+jf @BLOOD_16029 
+0674: set_car_model 108@ numberplate "EV1L_BNZ" 
+
+:BLOOD_16029
+if 
+  107@ == 20 
+jf @BLOOD_16062 
+0674: set_car_model 108@ numberplate "S4ND_M4N" 
+
+:BLOOD_16062
+if 
+  107@ == 21 
+jf @BLOOD_16095 
+0674: set_car_model 108@ numberplate "RKK_DBP1" 
+
+:BLOOD_16095
+if 
+  107@ == 22 
+jf @BLOOD_16128 
+0674: set_car_model 108@ numberplate "RE1_K0KU" 
+
+:BLOOD_16128
+if 
+  107@ == 23 
+jf @BLOOD_16161 
+0674: set_car_model 108@ numberplate "S3XY_JUD" 
+
+:BLOOD_16161
+if 
+  107@ == 24 
+jf @BLOOD_16194 
+0674: set_car_model 108@ numberplate "SUNRA_93" 
+
+:BLOOD_16194
+if 
+  107@ == 25 
+jf @BLOOD_16227 
+0674: set_car_model 108@ numberplate "UG_FUX69" 
+
+:BLOOD_16227
+if 
+  107@ == 26 
+jf @BLOOD_16260 
+0674: set_car_model 108@ numberplate "LI0N_CUM" 
+
+:BLOOD_16260
+if 
+  107@ == 27 
+jf @BLOOD_16293 
+0674: set_car_model 108@ numberplate "RKK_PWND" 
+
+:BLOOD_16293
+if 
+  107@ == 28 
+jf @BLOOD_16326 
+0674: set_car_model 108@ numberplate "HAZE_B0B" 
+
+:BLOOD_16326
+if 
+  107@ == 29 
+jf @BLOOD_16359 
+0674: set_car_model 108@ numberplate "T3H_FLUF" 
+
+:BLOOD_16359
+if 
+  107@ == 30 
+jf @BLOOD_16392 
+0674: set_car_model 108@ numberplate "BM_4NDY_" 
+
+:BLOOD_16392
+if 
+  107@ == 31 
+jf @BLOOD_16425 
+0674: set_car_model 108@ numberplate "BM_D34N_" 
+
+:BLOOD_16425
+if 
+  107@ == 32 
+jf @BLOOD_16458 
+0674: set_car_model 108@ numberplate "BM_L4C3Y" 
+
+:BLOOD_16458
+if 
+  107@ == 33 
+jf @BLOOD_16491 
+0674: set_car_model 108@ numberplate "BM_D3V__" 
+
+:BLOOD_16491
+if 
+  107@ == 34 
+jf @BLOOD_16524 
+0674: set_car_model 108@ numberplate "NU_SK00L" 
+
+:BLOOD_16524
+if 
+  107@ == 35 
+jf @BLOOD_16557 
+0674: set_car_model 108@ numberplate "G4L_AVET" 
+
+:BLOOD_16557
+if 
+  107@ == 36 
+jf @BLOOD_16590 
+0674: set_car_model 108@ numberplate "M0J0_J0J" 
+
+:BLOOD_16590
+return 
+
+:BLOOD_16592
+Car.StorePos(88@, 161@, 162@, $TEMPVAR_FLOAT_3)
+94@ = 0 
+165@ = 99999.0 
+95@ = -1 
+
+:BLOOD_16630
+if 
+  16 > 94@ 
+jf @BLOOD_16779 
+if 
+803B:   not  88@ == 35@(94@,16i) // (int) 
+jf @BLOOD_16765 
+if 
+   not Car.Wrecked(35@(94@,16i))
+jf @BLOOD_16765 
+Car.StorePos(35@(94@,16i), 163@, 164@, $TEMPVAR_FLOAT_3)
+0509: 166@ = distance_between_XY 161@ 162@ and_XY 163@ 164@ 
+if 
+0025:   165@ > 166@ // (float) 
+jf @BLOOD_16765 
+0087: 165@ = 166@ // (float) 
+0085: 95@ = 35@(94@,16i) // (int) 
+
+:BLOOD_16765
+94@ += 1 
+jump @BLOOD_16630 
+
+:BLOOD_16779
+if 
+803B:   not  88@ == 34@ // (int) 
+jf @BLOOD_16864 
+Car.StorePos(34@, 163@, 164@, $TEMPVAR_FLOAT_3)
+0509: 166@ = distance_between_XY 161@ 162@ and_XY 163@ 164@ 
+if 
+0025:   165@ > 166@ // (float) 
+jf @BLOOD_16864 
+0087: 165@ = 166@ // (float) 
+0085: 95@ = 34@ // (int) 
+
+:BLOOD_16864
+return 
+
+:BLOOD_16866
+if 
+84A3:   not  $CURRENT_LANGUAGE == 4 // == constant 
+jf @BLOOD_16928 
+08D4: 110@ = create_panel_with_title 'BLOD_06' position 190.0 141.0 width 120.0 columns 2 interactive 0 background 1 alignment 1  // Results
+jump @BLOOD_16965 
+
+:BLOOD_16928
+08D4: 110@ = create_panel_with_title 'BLOD_06' position 190.0 141.0 width 150.0 columns 2 interactive 0 background 1 alignment 1  // Results
+
+:BLOOD_16965
+08DB: set_panel 110@ column 0 header 'DUMMY' data 'BLOD_07' 'BLOD_08' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // New Best Time (mins): // Cars Destroyed:
+08DB: set_panel 110@ column 1 header 'DUMMY' data 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 
+08EE: set_panel 110@ column 1 row 0 text_1number GXT 'BLOD_09' number $1940  // ~1~
+08EE: set_panel 110@ column 1 row 1 text_1number GXT 'BLOD_09' number 111@  // ~1~
+if 
+84A3:   not  $CURRENT_LANGUAGE == 4 // == constant 
+jf @BLOOD_17299 
+09DB: set_panel 110@ column 0 width 200 
+09DB: set_panel 110@ column 1 width 40 
+jump @BLOOD_17318 
+
+:BLOOD_17299
+09DB: set_panel 110@ column 0 width 260 
+09DB: set_panel 110@ column 1 width 40 
+
+:BLOOD_17318
+return 
+
+:BLOOD_17320
+if 
+  129@ == 0 
+jf @BLOOD_17383 
+0209: 128@ = random_int_in_ranges 8000 16000 
+0209: 130@ = random_int_in_ranges 1 19 
+03CF: load_wav 131@(130@,23i) as 4 
+33@ = 0 
+129@ = 1 
+
+:BLOOD_17383
+if 
+  129@ == 1 
+jf @BLOOD_17423 
+if 
+03D0:   wav 4 loaded 
+jf @BLOOD_17423 
+129@ = 2 
+
+:BLOOD_17423
+if 
+  129@ == 2 
+jf @BLOOD_17471 
+if 
+001D:   33@ > 128@ // (int) 
+jf @BLOOD_17471 
+03D1: play_wav 4 
+129@ = 3 
+
+:BLOOD_17471
+if 
+  129@ == 3 
+jf @BLOOD_17511 
+if 
+03D2:   wav 4 ended 
+jf @BLOOD_17511 
+129@ = 0 
+
+:BLOOD_17511
+return

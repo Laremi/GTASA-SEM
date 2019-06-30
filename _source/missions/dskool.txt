@@ -1,0 +1,7245 @@
+:DSKOOL
+thread 'DSKOOL' 
+gosub @DSKOOL_47 
+if 
+wasted_or_busted 
+jf @DSKOOL_38 
+gosub @DSKOOL_24457 
+
+:DSKOOL_38
+gosub @DSKOOL_24618 
+end_thread 
+
+:DSKOOL_47
+$ONMISSION = 1 
+if 
+  $MISSION_BACK_TO_SCHOOL_PASSED == 0 
+jf @DSKOOL_74 
+increment_mission_attempts 
+
+:DSKOOL_74
+054C: use_GXT_table 'DS' 
+if 
+  $ONMISSION == 0 
+jf @DSKOOL_291 
+$198 = Car.Create(#BANSHEE, $277, $278, $257)
+$196 = Car.Create(#BANSHEE, $277, $278, $257)
+$197 = Car.Create(#BANSHEE, $277, $278, $257)
+$201[20] = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$201[30] = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+57@ = Object.Create(#AD_JUMP, $277, $278, $257)
+58@ = Object.Create(#AD_JUMP, $277, $278, $257)
+59@ = Object.Create(#AD_JUMP, $277, $278, $257)
+0376: 55@ = create_random_actor_at 0.0 0.0 100.0 
+0376: 56@ = create_random_actor_at 0.0 0.0 100.0 
+
+:DSKOOL_291
+0169: set_fade_color_RGB 0 0 0 
+00BE: text_clear_all 
+0A0E: disable_text_with_style 1 
+wait 0 
+fade 0 500 
+
+:DSKOOL_316
+if 
+fading 
+jf @DSKOOL_340 
+wait 0 
+jump @DSKOOL_316 
+
+:DSKOOL_340
+34@ = 0 
+39@ = 0 
+43@ = 0 
+44@ = 0 
+54@ = 0 
+45@ = 0 
+46@ = 0 
+47@ = 0 
+48@ = 0 
+$247 = 1 
+50@ = 1 
+$307 = -2050.6 
+$308 = -130.0 
+$327 = -2031.2 
+$328 = -118.0 
+$329 = 1034.2 
+61@ = 0 
+62@ = 0 
+63@ = 0 
+64@ = 0 
+86@ = 0 
+87@ = 0 
+88@ = 0 
+89@ = 0 
+90@ = 0 
+60@ = 0 
+07E5: copy_decision_maker 65542 to 49@ 
+Model.Load(#INFERNUS)
+Model.Load(#BLISTAC)
+Model.Load(#BANSHEE)
+Model.Load(#COPCARSF)
+Model.Load(#SFPD1)
+Model.Load(#TRAFFICCONE)
+Model.Load(#TEMP_STINGER2)
+Model.Load(#GARYS_LUV_RAMP)
+Model.Load(#AD_JUMP)
+Model.Load(#AD_ROADMARK1)
+Model.Load(#AD_ROADMARK2)
+Model.Load(#AD_FINISH)
+Model.Load(#TAXI)
+Model.Load(#SUPERGT)
+0390: load_txd_dictionary 'LD_DRV' 
+038F: load_texture "BRONZE" as 1 // Load dictionary with 0390 first 
+038F: load_texture "SILVER" as 2 // Load dictionary with 0390 first 
+038F: load_texture "GOLD" as 3 // Load dictionary with 0390 first 
+038F: load_texture "RIBB" as 4 // Load dictionary with 0390 first 
+038F: load_texture "TVCORN" as 5 // Load dictionary with 0390 first 
+038F: load_texture "NAWARD" as 6 // Load dictionary with 0390 first 
+038F: load_texture "RIBBW" as 7 // Load dictionary with 0390 first 
+038F: load_texture "BLKDOT" as 8 // Load dictionary with 0390 first 
+038F: load_texture "TVBASE" as 9 // Load dictionary with 0390 first 
+038F: load_texture "NAWTXT" as 10 // Load dictionary with 0390 first 
+038B: load_requested_models 
+Camera.SetAtPos(-2031.1, -118.2, 1034.2)
+03D6: remove_styled_text 'FAR_1'  // Back to School
+09D2: set_cops_chase_criminals 0 
+01E8: create_forbidden_for_cars_cube_cornerA -2015.37 -76.08 10.0 cornerB -2078.3 -66.75 50.0 
+Player.ClearWantedLevel($PLAYER_CHAR)
+Garage.Deactivate('BODLAWN')
+Garage.Deactivate('MODLAST')
+Garage.Deactivate('MDSSFSE')
+if 
+  $1499 == 1 
+jf @DSKOOL_887 
+Garage.Deactivate('MDS1SFS')
+Garage.Deactivate('VECMOD')
+
+:DSKOOL_887
+0A14: disable_respray_garages 1 
+if 
+  $5187 == 0 
+jf @DSKOOL_1425 
+
+:DSKOOL_909
+if 
+  $5187 == 0 
+jf @DSKOOL_1425 
+wait 0 
+if 
+  39@ == 0 
+jf @DSKOOL_1228 
+$53 = 1 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Actor.PutAt($PLAYER_ACTOR, -2031.7, -116.4, 1034.2)
+Actor.Angle($PLAYER_ACTOR) = 86.9
+Model.Load(#WMYMECH)
+038B: load_requested_models 
+0395: clear_area 1 at -2033.2 -116.5 1034.2 radius 30.0 
+91@ = Actor.Create(Mission1, #WMYMECH, -2033.2, -116.5, 1034.2)
+0A09: set_actor 91@ muted 1 // versionB 
+060B: set_actor 91@ decision_maker_to 49@ 
+Actor.Angle(91@) = 270.0
+0568: set_actor 91@ untargetable 1 
+0961: set_actor 91@ keep_tasks_after_cleanup 1 
+05BA: AS_actor 91@ move_mouth -2 ms 
+Camera.SetPosition(-2030.7, -115.8, 1035.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-2033.9, -116.1, 1035.7, 2)
+61@ = 1 
+62@ = 0 
+gosub @DSKOOL_46093 
+if 
+   not Actor.Dead(91@)
+jf @DSKOOL_1200 
+0967: actor 91@ move_mouth 20000 ms 
+
+:DSKOOL_1200
+fade 1 1000 
+0707: start_scene_skip_to @DSKOOL_1264 
+32@ = 0 
+39@ = 1 
+
+:DSKOOL_1228
+if 
+  39@ == 1 
+jf @DSKOOL_1411 
+if 
+  61@ == 0 
+jf @DSKOOL_1411 
+
+:DSKOOL_1264
+0701: end_scene_skip 
+if 
+   not Actor.Dead(91@)
+jf @DSKOOL_1287 
+0968: actor 91@ stop_mouth 
+
+:DSKOOL_1287
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+61@ = 0 
+fade 0 500 
+
+:DSKOOL_1311
+if 
+fading 
+jf @DSKOOL_1335 
+wait 0 
+jump @DSKOOL_1311 
+
+:DSKOOL_1335
+00BE: text_clear_all 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+39@ = 0 
+$5187 = 1 
+fade 1 500 
+
+:DSKOOL_1380
+if 
+fading 
+jf @DSKOOL_1404 
+wait 0 
+jump @DSKOOL_1380 
+
+:DSKOOL_1404
+jump @DSKOOL_24457 
+
+:DSKOOL_1411
+gosub @DSKOOL_45998 
+jump @DSKOOL_909 
+
+:DSKOOL_1425
+Player.CanMove($PLAYER_CHAR) = False
+03E6: remove_text_box 
+00BE: text_clear_all 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+gosub @DSKOOL_30329 
+34@ = 0 
+39@ = 0 
+03F0: enable_text_draw 1 
+44@ = 255 
+43@ = 2 
+if 
+  17 > $53 
+jf @DSKOOL_1516 
+008A: $247 = 50@ // (int) 
+
+:DSKOOL_1516
+if 
+  $247 == 3 
+jf @DSKOOL_1541 
+$247 = 4 
+
+:DSKOOL_1541
+if 
+  $247 == 6 
+jf @DSKOOL_1566 
+$247 = 7 
+
+:DSKOOL_1566
+if 
+  $247 == 8 
+jf @DSKOOL_1591 
+$247 = 9 
+
+:DSKOOL_1591
+if 
+  $247 == 12 
+jf @DSKOOL_1616 
+$247 = 13 
+
+:DSKOOL_1616
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+Actor.PutAt($PLAYER_ACTOR, -2035.4, -119.1, 33.2)
+Camera.SetAtPos(-2035.4, -119.1, 33.2)
+03CF: load_wav 3800 as 3 
+
+:DSKOOL_1671
+if 
+83D0:   not wav 3 loaded 
+jf @DSKOOL_1697 
+wait 0 
+jump @DSKOOL_1671 
+
+:DSKOOL_1697
+03D1: play_wav 3 
+04FA: reset_sky_colors_with_fade 0 
+0826: enable_hud 0 
+0581: enable_radar 0 
+fade 1 500 
+gosub @DSKOOL_25654 
+
+:DSKOOL_1727
+if 
+fading 
+jf @DSKOOL_1758 
+wait 0 
+gosub @DSKOOL_25654 
+jump @DSKOOL_1727 
+
+:DSKOOL_1758
+gosub @DSKOOL_25654 
+
+:DSKOOL_1765
+wait 0 
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @DSKOOL_1791 
+jump @DSKOOL_24495 
+
+:DSKOOL_1791
+gosub @DSKOOL_25654 
+if 
+  39@ == 0 
+jf @DSKOOL_2755 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if or
+  -100 > $MOVE_AXIS_X 
+00E1:   player 0 pressed_key 10 
+jf @DSKOOL_2113 
+50@ -= 1 
+$247 -= 1 
+if 
+  50@ == 3 
+jf @DSKOOL_1895 
+50@ = 2 
+
+:DSKOOL_1895
+if 
+  50@ == 6 
+jf @DSKOOL_1920 
+50@ = 5 
+
+:DSKOOL_1920
+if 
+  50@ == 8 
+jf @DSKOOL_1945 
+50@ = 7 
+
+:DSKOOL_1945
+if 
+  50@ == 12 
+jf @DSKOOL_1970 
+50@ = 11 
+
+:DSKOOL_1970
+if 
+  $247 == 3 
+jf @DSKOOL_1995 
+$247 = 2 
+
+:DSKOOL_1995
+if 
+  $247 == 6 
+jf @DSKOOL_2020 
+$247 = 5 
+
+:DSKOOL_2020
+if 
+  $247 == 8 
+jf @DSKOOL_2045 
+$247 = 7 
+
+:DSKOOL_2045
+if 
+  $247 == 12 
+jf @DSKOOL_2070 
+$247 = 11 
+
+:DSKOOL_2070
+if 
+  $53 > 1 
+jf @DSKOOL_2113 
+if 
+  4 > 34@ 
+jf @DSKOOL_2113 
+34@ = 3 
+
+:DSKOOL_2113
+if or
+  $MOVE_AXIS_X > 100 
+00E1:   player 0 pressed_key 11 
+jf @DSKOOL_2394 
+50@ += 1 
+$247 += 1 
+if 
+  50@ == 3 
+jf @DSKOOL_2176 
+50@ = 4 
+
+:DSKOOL_2176
+if 
+  50@ == 6 
+jf @DSKOOL_2201 
+50@ = 7 
+
+:DSKOOL_2201
+if 
+  50@ == 8 
+jf @DSKOOL_2226 
+50@ = 9 
+
+:DSKOOL_2226
+if 
+  50@ == 12 
+jf @DSKOOL_2251 
+50@ = 13 
+
+:DSKOOL_2251
+if 
+  $247 == 3 
+jf @DSKOOL_2276 
+$247 = 4 
+
+:DSKOOL_2276
+if 
+  $247 == 6 
+jf @DSKOOL_2301 
+$247 = 7 
+
+:DSKOOL_2301
+if 
+  $247 == 8 
+jf @DSKOOL_2326 
+$247 = 9 
+
+:DSKOOL_2326
+if 
+  $247 == 12 
+jf @DSKOOL_2351 
+$247 = 13 
+
+:DSKOOL_2351
+if 
+  $53 > 1 
+jf @DSKOOL_2394 
+if 
+  4 > 34@ 
+jf @DSKOOL_2394 
+34@ = 3 
+
+:DSKOOL_2394
+if 
+  1 > $247 
+jf @DSKOOL_2428 
+0084: $247 = $53 // (int) 
+008B: 50@ = $53 // (int) 
+
+:DSKOOL_2428
+if 
+001C:   $247 > $53 // (int) 
+jf @DSKOOL_2461 
+$247 = 1 
+50@ = 1 
+
+:DSKOOL_2461
+if 
+  $53 > 1 
+jf @DSKOOL_2583 
+
+:DSKOOL_2479
+if 
+  -100 > $MOVE_AXIS_X 
+jf @DSKOOL_2531 
+wait 0 
+gosub @DSKOOL_25654 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @DSKOOL_2479 
+
+:DSKOOL_2531
+if 
+  $MOVE_AXIS_X > 100 
+jf @DSKOOL_2583 
+wait 0 
+gosub @DSKOOL_25654 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @DSKOOL_2531 
+
+:DSKOOL_2583
+if 
+00E1:   player 0 pressed_key 10 
+jf @DSKOOL_2618 
+wait 0 
+gosub @DSKOOL_25654 
+jump @DSKOOL_2583 
+
+:DSKOOL_2618
+if 
+00E1:   player 0 pressed_key 11 
+jf @DSKOOL_2653 
+wait 0 
+gosub @DSKOOL_25654 
+jump @DSKOOL_2618 
+
+:DSKOOL_2653
+if 
+00E1:   player 0 pressed_key 16 
+jf @DSKOOL_2755 
+if or
+  $247 == 4 
+  $247 == 7 
+  $247 == 9 
+  $247 == 13 
+jf @DSKOOL_2723 
+39@ = 1 
+jump @DSKOOL_2755 
+
+:DSKOOL_2723
+if 
+  4 > 34@ 
+jf @DSKOOL_2748 
+34@ = 3 
+
+:DSKOOL_2748
+jump @DSKOOL_3661 
+
+:DSKOOL_2755
+if 
+  39@ == 1 
+jf @DSKOOL_3135 
+if 
+  4 > 34@ 
+jf @DSKOOL_2798 
+34@ = 3 
+
+:DSKOOL_2798
+if 
+  34@ == 0 
+jf @DSKOOL_2823 
+34@ = 5 
+
+:DSKOOL_2823
+gosub @DSKOOL_30100 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 320.0 160.0 GXT 'DS1_59'  // Which course?
+gosub @DSKOOL_30100 
+0342: set_text_draw_centered 0 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 100.0 205.0 GXT 'DS1_60'  // ~k~~GO_LEFT~ Counterclockwise
+gosub @DSKOOL_30100 
+0342: set_text_draw_centered 0 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 101.0 231.0 GXT 'DS1_61'  // ~k~~GO_RIGHT~ Clockwise
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if or
+  -100 > $MOVE_AXIS_X 
+00E1:   player 0 pressed_key 10 
+jf @DSKOOL_3004 
+jump @DSKOOL_3661 
+
+:DSKOOL_3004
+if or
+  $MOVE_AXIS_X > 100 
+00E1:   player 0 pressed_key 11 
+jf @DSKOOL_3135 
+if 
+  $247 == 4 
+jf @DSKOOL_3053 
+$247 = 3 
+
+:DSKOOL_3053
+if 
+  $247 == 7 
+jf @DSKOOL_3078 
+$247 = 6 
+
+:DSKOOL_3078
+if 
+  $247 == 9 
+jf @DSKOOL_3103 
+$247 = 8 
+
+:DSKOOL_3103
+if 
+  $247 == 13 
+jf @DSKOOL_3128 
+$247 = 12 
+
+:DSKOOL_3128
+jump @DSKOOL_3661 
+
+:DSKOOL_3135
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @DSKOOL_3280 
+if 
+  $MISSION_BACK_TO_SCHOOL_PASSED == 0 
+jf @DSKOOL_3273 
+$107 = 100 
+$105 = 100 
+$98 = 100 
+$96 = 100 
+$94 = 100 
+$103 = 100 
+$91 = 100 
+$101 = 100 
+$92 = 100 
+$102 = 100 
+$100 = 100 
+$97 = 100 
+014C: set_parked_car_generator $5185 cars_to_generate_to 101 
+014C: set_parked_car_generator $5186 cars_to_generate_to 101 
+$MISSION_BACK_TO_SCHOOL_PASSED = 1 
+
+:DSKOOL_3273
+$53 = 16 
+
+:DSKOOL_3280
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_3647 
+gosub @DSKOOL_25654 
+fade 0 500 
+
+:DSKOOL_3311
+if 
+fading 
+jf @DSKOOL_3349 
+gosub @DSKOOL_25654 
+wait 0 
+gosub @DSKOOL_25654 
+jump @DSKOOL_3311 
+
+:DSKOOL_3349
+gosub @DSKOOL_25654 
+040D: unload_wav 3 
+00BE: text_clear_all 
+04FA: reset_sky_colors_with_fade 1 
+0860: link_actor $PLAYER_ACTOR to_interior 3 
+select_interior 3 
+04E4: refresh_game_renderer_at -2031.1 -118.2 
+Camera.SetAtPos(-2031.1, -118.2, 1034.2)
+Actor.PutAt($PLAYER_ACTOR, -2029.7, -115.5, 1034.2)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_3473 
+if 
+060E:   car $198 assigned_to_path 
+jf @DSKOOL_3473 
+05EC: release_car $198 from_path 
+
+:DSKOOL_3473
+Car.Destroy($198)
+0395: clear_area 1 at -2051.0 -174.0 34.0 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Actor.DestroyInstantly(55@)
+Actor.DestroyInstantly(56@)
+Car.Destroy($196)
+Car.Destroy($197)
+Object.Destroy(57@)
+Object.Destroy(58@)
+Object.Destroy(59@)
+0873: release_path 1 
+0873: release_path 2 
+0873: release_path 3 
+0873: release_path 4 
+0873: release_path 5 
+0873: release_path 7 
+0873: release_path 9 
+0873: release_path 10 
+0873: release_path 11 
+0873: release_path 13 
+0873: release_path 14 
+0873: release_path 15 
+0873: release_path 16 
+gosub @DSKOOL_35436 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+
+:DSKOOL_3616
+if 
+fading 
+jf @DSKOOL_3640 
+wait 0 
+jump @DSKOOL_3616 
+
+:DSKOOL_3640
+jump @DSKOOL_24457 
+
+:DSKOOL_3647
+gosub @DSKOOL_29081 
+jump @DSKOOL_1765 
+
+:DSKOOL_3661
+fade 0 500 
+
+:DSKOOL_3668
+if 
+fading 
+jf @DSKOOL_3699 
+wait 0 
+gosub @DSKOOL_25654 
+jump @DSKOOL_3668 
+
+:DSKOOL_3699
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_3720 
+05EC: release_car $198 from_path 
+
+:DSKOOL_3720
+040D: unload_wav 3 
+Car.Destroy($198)
+0395: clear_area 1 at $327 $328 $329 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Actor.DestroyInstantly(55@)
+Actor.DestroyInstantly(56@)
+Car.Destroy($196)
+Car.Destroy($197)
+Car.Destroy($198)
+Object.Destroy(57@)
+Object.Destroy(58@)
+Object.Destroy(59@)
+gosub @DSKOOL_35436 
+34@ = 5 
+0826: enable_hud 1 
+0581: enable_radar 1 
+if 
+  $247 == 1 
+jf @DSKOOL_5391 
+
+:DSKOOL_3836
+gosub @DSKOOL_30220 
+
+:DSKOOL_3843
+$258 = 180.0 
+$253 = 11000 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#INFERNUS, $255, $256, $257)
+Car.Angle($198) = 180.0
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_3997 
+Camera.SetPosition(-2028.3, -143.0, 38.4, 0.0, 0.0, 0.0)
+Camera.PointAt(-2052.3, -129.9, 34.2, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_3995 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_3995
+return 
+
+:DSKOOL_3997
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 0.0 0.0 0.0 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DS1_88' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ and ~k~~VEHICLE_BRAKE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_44' time 5000 flag 4  // ~s~Use the rear wheel drive car to do a burnout donut.
+gosub @DSKOOL_31041 
+
+:DSKOOL_4067
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_4102 
+$325 = 2 
+jump @DSKOOL_5329 
+
+:DSKOOL_4102
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_4134 
+jump @DSKOOL_24457 
+
+:DSKOOL_4134
+if 
+  $249 == 0 
+jf @DSKOOL_4216 
+if 
+   not $325 == 2 
+jf @DSKOOL_4202 
+00BA: show_text_styled GXT 'DS1_88' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ and ~k~~VEHICLE_BRAKE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_44' time 5000 flag 4  // ~s~Use the rear wheel drive car to do a burnout donut.
+
+:DSKOOL_4202
+gosub @DSKOOL_31215 
+jump @DSKOOL_5384 
+
+:DSKOOL_4216
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_5384 
+gosub @DSKOOL_31535 
+$258 = Car.Angle($198)
+if 
+  $274 == 0 
+jf @DSKOOL_4321 
+if 
+  $258 > 80.0 
+jf @DSKOOL_4321 
+if 
+  90.0 > $258 
+jf @DSKOOL_4321 
+$274 = 1 
+40@ = 1 
+
+:DSKOOL_4321
+if 
+  40@ == 1 
+jf @DSKOOL_4540 
+if 
+  $274 == 1 
+jf @DSKOOL_4406 
+if 
+  $258 > 350.0 
+jf @DSKOOL_4406 
+if 
+  360.0 > $258 
+jf @DSKOOL_4406 
+$274 = 2 
+
+:DSKOOL_4406
+if 
+  $274 == 2 
+jf @DSKOOL_4473 
+if 
+  $258 > 270.0 
+jf @DSKOOL_4473 
+if 
+  280.0 > $258 
+jf @DSKOOL_4473 
+$274 = 3 
+
+:DSKOOL_4473
+if 
+  $274 == 3 
+jf @DSKOOL_4540 
+if 
+  $258 > 170.0 
+jf @DSKOOL_4540 
+if 
+  180.0 > $258 
+jf @DSKOOL_4540 
+$274 = 4 
+
+:DSKOOL_4540
+if 
+  $274 == 0 
+jf @DSKOOL_4614 
+if 
+  $258 > 270.0 
+jf @DSKOOL_4614 
+if 
+  280.0 > $258 
+jf @DSKOOL_4614 
+40@ = 2 
+$274 = 1 
+
+:DSKOOL_4614
+if 
+  40@ == 2 
+jf @DSKOOL_4833 
+if 
+  $274 == 1 
+jf @DSKOOL_4699 
+if 
+  $258 > 350.0 
+jf @DSKOOL_4699 
+if 
+  360.0 > $258 
+jf @DSKOOL_4699 
+$274 = 2 
+
+:DSKOOL_4699
+if 
+  $274 == 2 
+jf @DSKOOL_4766 
+if 
+  $258 > 80.0 
+jf @DSKOOL_4766 
+if 
+  90.0 > $258 
+jf @DSKOOL_4766 
+$274 = 3 
+
+:DSKOOL_4766
+if 
+  $274 == 3 
+jf @DSKOOL_4833 
+if 
+  $258 > 170.0 
+jf @DSKOOL_4833 
+if 
+  180.0 > $258 
+jf @DSKOOL_4833 
+$274 = 4 
+
+:DSKOOL_4833
+if or
+80E1:   not player 0 pressed_key 16 
+80E1:   not player 0 pressed_key 14 
+  $253 == 0 
+jf @DSKOOL_5384 
+gosub @DSKOOL_31569 
+gosub @DSKOOL_31609 
+if 
+  $274 == 4 
+jf @DSKOOL_4902 
+$266 = 100 
+
+:DSKOOL_4902
+if 
+  $274 == 3 
+jf @DSKOOL_4927 
+$266 = 75 
+
+:DSKOOL_4927
+if 
+  $274 == 2 
+jf @DSKOOL_4952 
+$266 = 50 
+
+:DSKOOL_4952
+if 
+  $274 == 1 
+jf @DSKOOL_4977 
+$266 = 25 
+
+:DSKOOL_4977
+if 
+  $274 == 0 
+jf @DSKOOL_5002 
+$266 = 0 
+
+:DSKOOL_5002
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_5050 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_5050
+if 
+  $274 == 0 
+jf @DSKOOL_5075 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_5075
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $107 // (int) 
+jf @DSKOOL_5145 
+008B: 47@ = $107 // (int) 
+0084: $107 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_5152 
+
+:DSKOOL_5145
+45@ = 0 
+
+:DSKOOL_5152
+if 
+  $53 == 1 
+jf @DSKOOL_5216 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_5216 
+41@ = 2 
+$53 = 2 
+$325 = 2 
+50@ = 2 
+
+:DSKOOL_5216
+32@ = 0 
+
+:DSKOOL_5223
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_5283 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_5283 
+$325 = 2 
+jump @DSKOOL_5329 
+
+:DSKOOL_5283
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_5322 
+jump @DSKOOL_5329 
+
+:DSKOOL_5322
+jump @DSKOOL_5223 
+
+:DSKOOL_5329
+gosub @DSKOOL_35152 
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_5377 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_5384 
+
+:DSKOOL_5377
+jump @DSKOOL_3836 
+
+:DSKOOL_5384
+jump @DSKOOL_4067 
+
+:DSKOOL_5391
+if 
+  $247 == 2 
+jf @DSKOOL_6710 
+
+:DSKOOL_5409
+gosub @DSKOOL_30220 
+
+:DSKOOL_5416
+$258 = 0.0 
+$253 = 11000 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#BLISTAC, $255, $256, $257)
+Car.Angle($198) = 180.0
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_5570 
+Camera.SetPosition(-2060.2, -227.3, 36.6, 0.0, 0.0, 0.0)
+Camera.PointAt(-2049.5, -210.6, 34.0, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_5568 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_5568
+return 
+
+:DSKOOL_5570
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car $198 with_offset -2.0 82.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car $198 with_offset 2.0 88.0 0.0 
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 0.0 0.0 0.0 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_45' time 5000 flag 4  // ~s~To do a 180, accelerate to top speed, press ~k~~VEHICLE_HANDBRAKE~ to handbrake around the cone and then return.
+gosub @DSKOOL_31041 
+
+:DSKOOL_5698
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_5733 
+$325 = 2 
+jump @DSKOOL_6648 
+
+:DSKOOL_5733
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_5765 
+jump @DSKOOL_24457 
+
+:DSKOOL_5765
+if 
+  $249 == 0 
+jf @DSKOOL_5847 
+if 
+   not $325 == 2 
+jf @DSKOOL_5833 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_45' time 5000 flag 4  // ~s~To do a 180, accelerate to top speed, press ~k~~VEHICLE_HANDBRAKE~ to handbrake around the cone and then return.
+
+:DSKOOL_5833
+gosub @DSKOOL_31215 
+jump @DSKOOL_6703 
+
+:DSKOOL_5847
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_6703 
+gosub @DSKOOL_31535 
+if 
+  $274 == 0 
+jf @DSKOOL_5925 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @DSKOOL_5925 
+$274 = 1 
+
+:DSKOOL_5925
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_6703 
+gosub @DSKOOL_31569 
+gosub @DSKOOL_31609 
+if 
+  $274 == 0 
+jf @DSKOOL_5980 
+$267 = 0 
+
+:DSKOOL_5980
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_6028 
+$266 = 100 
+jump @DSKOOL_6321 
+
+:DSKOOL_6028
+if 
+  $252 == 360 
+jf @DSKOOL_6061 
+$266 = 100 
+jump @DSKOOL_6321 
+
+:DSKOOL_6061
+if 
+  $252 > 0 
+jf @DSKOOL_6104 
+if 
+  21 > $252 
+jf @DSKOOL_6104 
+$266 = 100 
+
+:DSKOOL_6104
+if 
+  $252 > 179 
+jf @DSKOOL_6191 
+if 
+  340 > $252 
+jf @DSKOOL_6191 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.62 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_6321 
+
+:DSKOOL_6191
+if 
+  $252 > 339 
+jf @DSKOOL_6236 
+if 
+  360 > $252 
+jf @DSKOOL_6236 
+$266 = 100 
+
+:DSKOOL_6236
+if 
+  $252 > 20 
+jf @DSKOOL_6321 
+if 
+  180 > $252 
+jf @DSKOOL_6321 
+008D: $276 = integer $252 to_float 
+$276 *= 0.62 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_6321 
+
+:DSKOOL_6321
+if 
+  1 > $266 
+jf @DSKOOL_6346 
+$266 = 0 
+
+:DSKOOL_6346
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_6394 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_6394
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $105 // (int) 
+jf @DSKOOL_6464 
+008B: 47@ = $105 // (int) 
+0084: $105 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_6471 
+
+:DSKOOL_6464
+45@ = 0 
+
+:DSKOOL_6471
+if 
+  $53 == 2 
+jf @DSKOOL_6535 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_6535 
+41@ = 2 
+$53 = 4 
+$325 = 2 
+50@ = 4 
+
+:DSKOOL_6535
+32@ = 0 
+
+:DSKOOL_6542
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_6602 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_6602 
+$325 = 2 
+jump @DSKOOL_6648 
+
+:DSKOOL_6602
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_6641 
+jump @DSKOOL_6648 
+
+:DSKOOL_6641
+jump @DSKOOL_6542 
+
+:DSKOOL_6648
+gosub @DSKOOL_35152 
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_6696 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_6703 
+
+:DSKOOL_6696
+jump @DSKOOL_5409 
+
+:DSKOOL_6703
+jump @DSKOOL_5698 
+
+:DSKOOL_6710
+if or
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_8322 
+
+:DSKOOL_6735
+gosub @DSKOOL_30220 
+
+:DSKOOL_6742
+$258 = 180.0 
+$253 = 6000 
+gosub @DSKOOL_30329 
+if 
+  $247 == 3 
+jf @DSKOOL_6795 
+$255 += 20.0 
+
+:DSKOOL_6795
+if 
+  $247 == 4 
+jf @DSKOOL_6823 
+$255 -= 20.0 
+
+:DSKOOL_6823
+$198 = Car.Create(#BANSHEE, $255, $256, $257)
+Car.Angle($198) = $258
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_6950 
+Camera.SetPosition(-2022.6, -173.4, 36.2, 0.0, 0.0, 0.0)
+Camera.PointAt(-2034.2, -165.4, 34.5, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_6948 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_6948
+return 
+
+:DSKOOL_6950
+if 
+  $247 == 3 
+jf @DSKOOL_7004 
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 40.0 37.0 0.0 
+jump @DSKOOL_7033 
+
+:DSKOOL_7004
+0407: store_coords_to $303 $304 $257 from_car $198 with_offset -40.0 37.0 0.0 
+
+:DSKOOL_7033
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_32' time 5000 flag 4  // ~s~Powerslide around a tight corner and stop in the allocated area.
+gosub @DSKOOL_31041 
+
+:DSKOOL_7074
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_7109 
+$325 = 2 
+jump @DSKOOL_8260 
+
+:DSKOOL_7109
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_7141 
+jump @DSKOOL_24457 
+
+:DSKOOL_7141
+if 
+  $249 == 0 
+jf @DSKOOL_7223 
+if 
+   not $325 == 2 
+jf @DSKOOL_7209 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_32' time 5000 flag 4  // ~s~Powerslide around a tight corner and stop in the allocated area.
+
+:DSKOOL_7209
+gosub @DSKOOL_31215 
+jump @DSKOOL_8315 
+
+:DSKOOL_7223
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_8315 
+gosub @DSKOOL_31535 
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_8315 
+gosub @DSKOOL_31569 
+if 
+  $247 == 3 
+jf @DSKOOL_7310 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+jump @DSKOOL_7326 
+
+:DSKOOL_7310
+0086: $255 = $303 // (float) 
+0086: $256 = $304 // (float) 
+
+:DSKOOL_7326
+gosub @DSKOOL_31609 
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_7381 
+$266 = 0 
+jump @DSKOOL_7933 
+
+:DSKOOL_7381
+if 
+  $252 == 360 
+jf @DSKOOL_7414 
+$266 = 0 
+jump @DSKOOL_7933 
+
+:DSKOOL_7414
+if 
+  $247 == 3 
+jf @DSKOOL_7683 
+if 
+  $252 == 90 
+jf @DSKOOL_7464 
+$266 = 100 
+jump @DSKOOL_7933 
+
+:DSKOOL_7464
+if 
+  $252 > 0 
+jf @DSKOOL_7533 
+if 
+  85 > $252 
+jf @DSKOOL_7533 
+008D: $276 = integer $252 to_float 
+$276 *= 1.16 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_7933 
+
+:DSKOOL_7533
+if 
+  $252 > 84 
+jf @DSKOOL_7576 
+if 
+  96 > $252 
+jf @DSKOOL_7576 
+$266 = 100 
+
+:DSKOOL_7576
+if 
+  $252 > 95 
+jf @DSKOOL_7676 
+if 
+  360 > $252 
+jf @DSKOOL_7676 
+0084: $273 = $252 // (int) 
+$273 -= 90 
+008D: $276 = integer $273 to_float 
+$276 *= 1.16 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_7933 
+
+:DSKOOL_7676
+jump @DSKOOL_7933 
+
+:DSKOOL_7683
+if 
+  $252 == 270 
+jf @DSKOOL_7716 
+$266 = 100 
+jump @DSKOOL_7933 
+
+:DSKOOL_7716
+if 
+  $252 > 0 
+jf @DSKOOL_7786 
+if 
+  265 > $252 
+jf @DSKOOL_7786 
+008D: $276 = integer $252 to_float 
+$276 *= 0.37 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_7933 
+
+:DSKOOL_7786
+if 
+  $252 > 264 
+jf @DSKOOL_7831 
+if 
+  276 > $252 
+jf @DSKOOL_7831 
+$266 = 100 
+
+:DSKOOL_7831
+if 
+  $252 > 275 
+jf @DSKOOL_7933 
+if 
+  360 > $252 
+jf @DSKOOL_7933 
+0084: $273 = $252 // (int) 
+$273 -= 270 
+008D: $276 = integer $273 to_float 
+$276 *= 1.16 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_7933 
+
+:DSKOOL_7933
+if 
+  1 > $266 
+jf @DSKOOL_7958 
+$266 = 0 
+
+:DSKOOL_7958
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_8006 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_8006
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $98 // (int) 
+jf @DSKOOL_8076 
+008B: 47@ = $98 // (int) 
+0084: $98 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_8083 
+
+:DSKOOL_8076
+45@ = 0 
+
+:DSKOOL_8083
+if 
+  $53 == 4 
+jf @DSKOOL_8147 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_8147 
+41@ = 2 
+$53 = 5 
+$325 = 2 
+50@ = 5 
+
+:DSKOOL_8147
+32@ = 0 
+
+:DSKOOL_8154
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_8214 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_8214 
+$325 = 2 
+jump @DSKOOL_8260 
+
+:DSKOOL_8214
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_8253 
+jump @DSKOOL_8260 
+
+:DSKOOL_8253
+jump @DSKOOL_8154 
+
+:DSKOOL_8260
+gosub @DSKOOL_35152 
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_8308 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_8315 
+
+:DSKOOL_8308
+jump @DSKOOL_6735 
+
+:DSKOOL_8315
+jump @DSKOOL_7074 
+
+:DSKOOL_8322
+if 
+  $247 == 5 
+jf @DSKOOL_9825 
+
+:DSKOOL_8340
+gosub @DSKOOL_30220 
+
+:DSKOOL_8347
+$258 = 180.0 
+$253 = 6000 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#COPCARSF, $255, $256, $257)
+Car.Angle($198) = $258
+0407: store_coords_to $255 $256 $257 from_car $198 with_offset 2.0 38.0 -0.5 
+0407: store_coords_to $277 $278 $257 from_car $198 with_offset -2.0 40.0 -0.5 
+59@ = Object.Create(#TEMP_STINGER2, -2050.8, -167.0, 34.6)
+Object.Angle(59@) = 90.0
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_8595 
+Camera.SetPosition(-2047.7, -243.3, 37.0, 0.0, 0.0, 0.0)
+Camera.PointAt(-2049.7, -227.4, 34.1, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_8593 
+55@ = Actor.CreateAsDriver(Mission2, #SFPD1, $198)
+
+:DSKOOL_8593
+return 
+
+:DSKOOL_8595
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 0.0 104.0 0.0 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_30' time 5000 flag 4  // ~s~Drive to the end of the track, a tire will blow out half way there.~n~For extra control, release the accelerator.
+gosub @DSKOOL_31041 
+
+:DSKOOL_8665
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_8700 
+$325 = 2 
+jump @DSKOOL_9758 
+
+:DSKOOL_8700
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_8732 
+jump @DSKOOL_24457 
+
+:DSKOOL_8732
+if 
+  $249 == 0 
+jf @DSKOOL_8814 
+if 
+   not $325 == 2 
+jf @DSKOOL_8800 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_30' time 5000 flag 4  // ~s~Drive to the end of the track, a tire will blow out half way there.~n~For extra control, release the accelerator.
+
+:DSKOOL_8800
+gosub @DSKOOL_31215 
+jump @DSKOOL_9818 
+
+:DSKOOL_8814
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_9818 
+gosub @DSKOOL_31535 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $255 $256 cornerB $277 $278 
+jf @DSKOOL_8892 
+if 
+8496:   not tire 3 on_car $198 deflated 
+jf @DSKOOL_8892 
+04FE: deflate_tire 3 on_car $198 
+
+:DSKOOL_8892
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_9818 
+gosub @DSKOOL_31569 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+Car.StorePos($198, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 1.0 
+jf @DSKOOL_9068 
+if 
+  10.0 > $259 
+jf @DSKOOL_9054 
+$259 -= 1.0 
+$259 *= 11.0 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @DSKOOL_9061 
+
+:DSKOOL_9054
+$267 = 0 
+
+:DSKOOL_9061
+jump @DSKOOL_9075 
+
+:DSKOOL_9068
+$267 = 100 
+
+:DSKOOL_9075
+if 
+8496:   not tire 3 on_car $198 deflated 
+jf @DSKOOL_9100 
+$267 = 0 
+
+:DSKOOL_9100
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_9148 
+$266 = 0 
+jump @DSKOOL_9431 
+
+:DSKOOL_9148
+if 
+  $252 == 180 
+jf @DSKOOL_9181 
+$266 = 100 
+jump @DSKOOL_9431 
+
+:DSKOOL_9181
+if 
+  $252 == 360 
+jf @DSKOOL_9214 
+$266 = 0 
+jump @DSKOOL_9431 
+
+:DSKOOL_9214
+if 
+  $252 > 0 
+jf @DSKOOL_9284 
+if 
+  175 > $252 
+jf @DSKOOL_9284 
+008D: $276 = integer $252 to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_9431 
+
+:DSKOOL_9284
+if 
+  $252 > 174 
+jf @DSKOOL_9329 
+if 
+  186 > $252 
+jf @DSKOOL_9329 
+$266 = 100 
+
+:DSKOOL_9329
+if 
+  $252 > 185 
+jf @DSKOOL_9431 
+if 
+  360 > $252 
+jf @DSKOOL_9431 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_9431 
+
+:DSKOOL_9431
+if 
+  1 > $266 
+jf @DSKOOL_9456 
+$266 = 0 
+
+:DSKOOL_9456
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_9504 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_9504
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $96 // (int) 
+jf @DSKOOL_9574 
+008B: 47@ = $96 // (int) 
+0084: $96 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_9581 
+
+:DSKOOL_9574
+45@ = 0 
+
+:DSKOOL_9581
+if 
+  $53 == 5 
+jf @DSKOOL_9645 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_9645 
+41@ = 2 
+$53 = 7 
+$325 = 2 
+50@ = 7 
+
+:DSKOOL_9645
+32@ = 0 
+
+:DSKOOL_9652
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_9712 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_9712 
+$325 = 2 
+jump @DSKOOL_9758 
+
+:DSKOOL_9712
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_9751 
+jump @DSKOOL_9758 
+
+:DSKOOL_9751
+jump @DSKOOL_9652 
+
+:DSKOOL_9758
+gosub @DSKOOL_35152 
+Object.Destroy(59@)
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_9811 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_9818 
+
+:DSKOOL_9811
+jump @DSKOOL_8340 
+
+:DSKOOL_9818
+jump @DSKOOL_8665 
+
+:DSKOOL_9825
+if or
+  $247 == 6 
+  $247 == 7 
+jf @DSKOOL_11927 
+
+:DSKOOL_9850
+gosub @DSKOOL_30220 
+
+:DSKOOL_9857
+$258 = 180.0 
+$253 = 0 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#BANSHEE, $255, $256, $257)
+Car.Angle($198) = $258
+gosub @DSKOOL_35490 
+if 
+  $247 == 6 
+jf @DSKOOL_10186 
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car $198 with_offset -4.0 50.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 44.0 0.0 
+0407: store_coords_to $313 $314 $TEMPVAR_Z_COORD from_car $198 with_offset 12.0 38.0 0.0 
+0407: store_coords_to $315 $316 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 44.0 0.0 
+0407: store_coords_to $317 $318 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 2.0 0.0 
+0407: store_coords_to $319 $320 $TEMPVAR_Z_COORD from_car $198 with_offset 12.0 -4.0 0.0 
+0407: store_coords_to $321 $322 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 2.0 0.0 
+0407: store_coords_to $323 $324 $TEMPVAR_Z_COORD from_car $198 with_offset -4.0 8.0 0.0 
+59@ = Object.Create(#AD_FINISH, -2050.5, -135.5, 34.35)
+
+:DSKOOL_10186
+if 
+  $247 == 7 
+jf @DSKOOL_10510 
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 44.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car $198 with_offset 12.0 50.0 0.0 
+0407: store_coords_to $313 $314 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 44.0 0.0 
+0407: store_coords_to $315 $316 $TEMPVAR_Z_COORD from_car $198 with_offset -4.0 38.0 0.0 
+0407: store_coords_to $317 $318 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 2.0 0.0 
+0407: store_coords_to $319 $320 $TEMPVAR_Z_COORD from_car $198 with_offset -4.0 -4.0 0.0 
+0407: store_coords_to $321 $322 $TEMPVAR_Z_COORD from_car $198 with_offset 4.0 2.0 0.0 
+0407: store_coords_to $323 $324 $TEMPVAR_Z_COORD from_car $198 with_offset 12.0 8.0 0.0 
+0407: store_coords_to $277 $278 $TEMPVAR_Z_COORD from_car $198 with_offset 8.0 0.0 0.0 
+59@ = Object.Create(#AD_FINISH, -2058.5, -135.5, 34.35)
+Car.PutAt($198, $277, $278, $TEMPVAR_Z_COORD)
+Car.Angle($198) = $258
+
+:DSKOOL_10510
+if 
+  34@ == 0 
+jf @DSKOOL_10605 
+Camera.SetPosition(-2054.6, -109.1, 36.4, 0.0, 0.0, 0.0)
+Camera.PointAt(-2054.6, -122.0, 34.2, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_10603 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_10603
+return 
+
+:DSKOOL_10605
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_29' time 5000 flag 4  // ~s~Do 5 laps in as quick a time as possible.~n~Target time is under 40 seconds.
+gosub @DSKOOL_31041 
+
+:DSKOOL_10646
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_10681 
+$325 = 2 
+jump @DSKOOL_11860 
+
+:DSKOOL_10681
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_10713 
+jump @DSKOOL_24457 
+
+:DSKOOL_10713
+if 
+  $249 == 0 
+jf @DSKOOL_10795 
+if 
+   not $325 == 2 
+jf @DSKOOL_10781 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_29' time 5000 flag 4  // ~s~Do 5 laps in as quick a time as possible.~n~Target time is under 40 seconds.
+
+:DSKOOL_10781
+gosub @DSKOOL_31215 
+jump @DSKOOL_11920 
+
+:DSKOOL_10795
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_11920 
+if 
+  $253 > 90000 
+jf @DSKOOL_10839 
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_10839
+if 
+  $273 == 0 
+jf @DSKOOL_10894 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @DSKOOL_10894 
+$273 = 1 
+
+:DSKOOL_10894
+if 
+  $273 == 1 
+jf @DSKOOL_10949 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $313 $314 cornerB $315 $316 
+jf @DSKOOL_10949 
+$273 = 2 
+
+:DSKOOL_10949
+if 
+  $273 == 2 
+jf @DSKOOL_11004 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $317 $318 cornerB $319 $320 
+jf @DSKOOL_11004 
+$273 = 3 
+
+:DSKOOL_11004
+if 
+  $273 == 3 
+jf @DSKOOL_11066 
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $321 $322 cornerB $323 $324 
+jf @DSKOOL_11066 
+$254 += 1 
+$273 = 0 
+
+:DSKOOL_11066
+00BE: text_clear_all 
+if 
+  4 > $254 
+jf @DSKOOL_11127 
+0084: $275 = $254 // (int) 
+$275 += 1 
+01E5: show_text_1number_highpriority GXT 'DS1_73' number $275 time 5000 flag 4  // Lap ~1~ of 5
+jump @DSKOOL_11143 
+
+:DSKOOL_11127
+00BC: show_text_highpriority GXT 'DS1_74' time 5000 flag 4  // Final Lap
+
+:DSKOOL_11143
+if or
+01C1:   car $198 stopped 
+  $254 == 5 
+jf @DSKOOL_11920 
+gosub @DSKOOL_31569 
+0084: $273 = $253 // (int) 
+0084: $301 = $273 // (int) 
+$301 /= 1000 
+0084: $302 = $301 // (int) 
+$302 *= 1000 
+0084: $274 = $273 // (int) 
+0060: $274 -= $302 // (int) 
+0084: $302 = $274 // (int) 
+$302 /= 10 
+$270 = 0 
+if 
+  5 > $254 
+jf @DSKOOL_11283 
+$270 = 0 
+jump @DSKOOL_11541 
+
+:DSKOOL_11283
+if 
+  36000 > $273 
+jf @DSKOOL_11311 
+$270 = 100 
+
+:DSKOOL_11311
+if 
+  $273 >= 36000 
+jf @DSKOOL_11412 
+if 
+  40000 > $273 
+jf @DSKOOL_11412 
+0084: $274 = $273 // (int) 
+$274 -= 35999 
+008D: $276 = integer $274 to_float 
+$276 *= 0.0075 
+008C: $273 = float $276 to_integer 
+$270 = 100 
+0060: $270 -= $273 // (int) 
+
+:DSKOOL_11412
+if 
+  $273 >= 40000 
+jf @DSKOOL_11513 
+if 
+  45000 > $273 
+jf @DSKOOL_11513 
+0084: $274 = $273 // (int) 
+$274 -= 39999 
+008D: $276 = integer $274 to_float 
+$276 *= 0.0138 
+008C: $273 = float $276 to_integer 
+$270 = 70 
+0060: $270 -= $273 // (int) 
+
+:DSKOOL_11513
+if 
+  $273 >= 45000 
+jf @DSKOOL_11541 
+$270 = 0 
+
+:DSKOOL_11541
+if 
+  1 > $270 
+jf @DSKOOL_11566 
+$270 = 0 
+
+:DSKOOL_11566
+if 
+  $270 > 99 
+jf @DSKOOL_11591 
+$270 = 100 
+
+:DSKOOL_11591
+0084: $CURRENT_FLIGHT_RECORD = $270 // (int) 
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $94 // (int) 
+jf @DSKOOL_11669 
+008B: 47@ = $94 // (int) 
+0084: $94 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_11676 
+
+:DSKOOL_11669
+45@ = 0 
+
+:DSKOOL_11676
+if 
+  $53 == 7 
+jf @DSKOOL_11740 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_11740 
+41@ = 2 
+$53 = 9 
+$325 = 2 
+50@ = 9 
+
+:DSKOOL_11740
+$254 = 6 
+32@ = 0 
+
+:DSKOOL_11754
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_11814 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_11814 
+$325 = 2 
+jump @DSKOOL_11860 
+
+:DSKOOL_11814
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_11853 
+jump @DSKOOL_11860 
+
+:DSKOOL_11853
+jump @DSKOOL_11754 
+
+:DSKOOL_11860
+gosub @DSKOOL_35152 
+Object.Destroy(59@)
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_11913 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_11920 
+
+:DSKOOL_11913
+jump @DSKOOL_9850 
+
+:DSKOOL_11920
+jump @DSKOOL_10646 
+
+:DSKOOL_11927
+if or
+  $247 == 8 
+  $247 == 9 
+jf @DSKOOL_13423 
+
+:DSKOOL_11952
+gosub @DSKOOL_30220 
+
+:DSKOOL_11959
+Model.Load(#BANSHEE)
+
+:DSKOOL_11964
+if 
+   not Model.Available(#BANSHEE)
+jf @DSKOOL_11991 
+wait 0 
+jump @DSKOOL_11964 
+
+:DSKOOL_11991
+$258 = 180.0 
+$253 = 11000 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#BANSHEE, $255, $256, $257)
+Car.Angle($198) = $258
+59@ = Object.Create(#AD_ROADMARK1, -2050.0, -172.5, 34.35)
+Object.Angle(59@) = 180.0
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_12176 
+Camera.SetPosition(-2042.1, -223.4, 36.3, 0.0, 0.0, 0.0)
+Camera.PointAt(-2049.1, -210.0, 34.8, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_12174 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_12174
+return 
+
+:DSKOOL_12176
+0400: store_coords_to $282 $283 $284 from_object $201[15] with_offset 0.0 5.0 0.0 
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 0.0 0.0 0.0 
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_36' time 5000 flag 4  // ~s~Weave through the cones quickly and then return to the start position.
+gosub @DSKOOL_31041 
+
+:DSKOOL_12275
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_12310 
+$325 = 2 
+jump @DSKOOL_13356 
+
+:DSKOOL_12310
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_12342 
+jump @DSKOOL_24457 
+
+:DSKOOL_12342
+if 
+  $249 == 0 
+jf @DSKOOL_12424 
+if 
+   not $325 == 2 
+jf @DSKOOL_12410 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_36' time 5000 flag 4  // ~s~Weave through the cones quickly and then return to the start position.
+
+:DSKOOL_12410
+gosub @DSKOOL_31215 
+jump @DSKOOL_13416 
+
+:DSKOOL_12424
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_13416 
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA -2042.0 -126.0 cornerB -2058.0 -220.0 
+jf @DSKOOL_12485 
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_12485
+if 
+  $254 == 0 
+jf @DSKOOL_12552 
+if 
+01AF:   car $198 sphere 1 in_sphere $282 $283 $284 radius 4.0 4.0 4.0 
+jf @DSKOOL_12552 
+$254 = 1 
+
+:DSKOOL_12552
+if 
+  $254 == 1 
+jf @DSKOOL_12619 
+if 
+01B0:   car $198 sphere 1 in_sphere $255 $256 $257 radius 4.0 4.0 4.0 stopped 
+jf @DSKOOL_12619 
+$254 = 2 
+
+:DSKOOL_12619
+gosub @DSKOOL_31535 
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_13416 
+gosub @DSKOOL_31569 
+if 
+  $254 > 0 
+jf @DSKOOL_12681 
+gosub @DSKOOL_31609 
+jump @DSKOOL_12688 
+
+:DSKOOL_12681
+$267 = 0 
+
+:DSKOOL_12688
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_12736 
+$266 = 100 
+jump @DSKOOL_13029 
+
+:DSKOOL_12736
+if 
+  $252 == 360 
+jf @DSKOOL_12769 
+$266 = 100 
+jump @DSKOOL_13029 
+
+:DSKOOL_12769
+if 
+  $252 > 0 
+jf @DSKOOL_12812 
+if 
+  21 > $252 
+jf @DSKOOL_12812 
+$266 = 100 
+
+:DSKOOL_12812
+if 
+  $252 > 179 
+jf @DSKOOL_12899 
+if 
+  340 > $252 
+jf @DSKOOL_12899 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.62 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_13029 
+
+:DSKOOL_12899
+if 
+  $252 > 339 
+jf @DSKOOL_12944 
+if 
+  360 > $252 
+jf @DSKOOL_12944 
+$266 = 100 
+
+:DSKOOL_12944
+if 
+  $252 > 20 
+jf @DSKOOL_13029 
+if 
+  180 > $252 
+jf @DSKOOL_13029 
+008D: $276 = integer $252 to_float 
+$276 *= 0.62 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_13029 
+
+:DSKOOL_13029
+if 
+  1 > $266 
+jf @DSKOOL_13054 
+$266 = 0 
+
+:DSKOOL_13054
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_13102 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_13102
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $103 // (int) 
+jf @DSKOOL_13172 
+008B: 47@ = $103 // (int) 
+0084: $103 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_13179 
+
+:DSKOOL_13172
+45@ = 0 
+
+:DSKOOL_13179
+if 
+  $53 == 9 
+jf @DSKOOL_13243 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_13243 
+41@ = 2 
+$53 = 10 
+$325 = 2 
+50@ = 10 
+
+:DSKOOL_13243
+32@ = 0 
+
+:DSKOOL_13250
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_13310 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_13310 
+$325 = 2 
+jump @DSKOOL_13356 
+
+:DSKOOL_13310
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_13349 
+jump @DSKOOL_13356 
+
+:DSKOOL_13349
+jump @DSKOOL_13250 
+
+:DSKOOL_13356
+gosub @DSKOOL_35152 
+Object.Destroy(59@)
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_13409 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_13416 
+
+:DSKOOL_13409
+jump @DSKOOL_11952 
+
+:DSKOOL_13416
+jump @DSKOOL_12275 
+
+:DSKOOL_13423
+if 
+  $247 == 10 
+jf @DSKOOL_15321 
+
+:DSKOOL_13441
+gosub @DSKOOL_30220 
+
+:DSKOOL_13448
+$258 = 270.0 
+$253 = 6000 
+gosub @DSKOOL_30329 
+0086: $277 = $255 // (float) 
+$277 += 6.0 
+0086: $278 = $256 // (float) 
+$278 -= 75.0 
+$196 = Car.Create(#BANSHEE, $277, $278, $257)
+Car.Angle($196) = $258
+Car.LockInCurrentPosition($196) = True
+0086: $277 = $255 // (float) 
+$277 -= 6.0 
+0086: $278 = $256 // (float) 
+$278 -= 75.0 
+$197 = Car.Create(#BANSHEE, $277, $278, $257)
+Car.Angle($197) = $258
+Car.LockInCurrentPosition($197) = True
+0086: $277 = $255 // (float) 
+0086: $278 = $256 // (float) 
+$198 = Car.Create(#BANSHEE, $277, $278, $257)
+Car.Angle($198) = 180.0
+if 
+  34@ == 0 
+jf @DSKOOL_13747 
+Camera.SetPosition(-2045.8, -210.5, 35.3, 0.0, 0.0, 0.0)
+Camera.PointAt(-2053.5, -198.1, 34.2, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_13745 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_13745
+return 
+
+:DSKOOL_13747
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_1' time 5000 flag 4  // ~s~To do a 90, slide the car sideways into the parking space within five seconds.
+gosub @DSKOOL_31041 
+
+:DSKOOL_13788
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_13823 
+$325 = 2 
+jump @DSKOOL_15256 
+
+:DSKOOL_13823
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_13855 
+jump @DSKOOL_24457 
+
+:DSKOOL_13855
+if 
+  $249 == 0 
+jf @DSKOOL_13937 
+if 
+   not $325 == 2 
+jf @DSKOOL_13923 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_1' time 5000 flag 4  // ~s~To do a 90, slide the car sideways into the parking space within five seconds.
+
+:DSKOOL_13923
+gosub @DSKOOL_31215 
+jump @DSKOOL_15314 
+
+:DSKOOL_13937
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_15314 
+gosub @DSKOOL_31535 
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_15314 
+gosub @DSKOOL_31569 
+$256 -= 75.0 
+Car.StorePos($198, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 0.5 
+jf @DSKOOL_14130 
+if 
+  5.0 > $259 
+jf @DSKOOL_14116 
+$259 -= 0.5 
+$259 *= 22.0 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @DSKOOL_14123 
+
+:DSKOOL_14116
+$267 = 0 
+
+:DSKOOL_14123
+jump @DSKOOL_14137 
+
+:DSKOOL_14130
+$267 = 100 
+
+:DSKOOL_14137
+0058: $CURRENT_FLIGHT_RECORD += $267 // (int) 
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_14193 
+$266 = 0 
+jump @DSKOOL_14737 
+
+:DSKOOL_14193
+if 
+  $252 == 90 
+jf @DSKOOL_14225 
+$266 = 100 
+jump @DSKOOL_14737 
+
+:DSKOOL_14225
+if 
+  $252 == 180 
+jf @DSKOOL_14258 
+$266 = 0 
+jump @DSKOOL_14737 
+
+:DSKOOL_14258
+if 
+  $252 == 270 
+jf @DSKOOL_14291 
+$266 = 100 
+jump @DSKOOL_14737 
+
+:DSKOOL_14291
+if 
+  $252 > 0 
+jf @DSKOOL_14360 
+if 
+  85 > $252 
+jf @DSKOOL_14360 
+008D: $276 = integer $252 to_float 
+$276 *= 1.16 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_14737 
+
+:DSKOOL_14360
+if 
+  $252 > 84 
+jf @DSKOOL_14403 
+if 
+  96 > $252 
+jf @DSKOOL_14403 
+$266 = 100 
+
+:DSKOOL_14403
+if 
+  $252 > 95 
+jf @DSKOOL_14503 
+if 
+  180 > $252 
+jf @DSKOOL_14503 
+0084: $273 = $252 // (int) 
+$273 -= 90 
+008D: $276 = integer $273 to_float 
+$276 *= 1.16 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_14737 
+
+:DSKOOL_14503
+if 
+  $252 > 180 
+jf @DSKOOL_14590 
+if 
+  265 > $252 
+jf @DSKOOL_14590 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 1.16 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_14737 
+
+:DSKOOL_14590
+if 
+  $252 > 264 
+jf @DSKOOL_14635 
+if 
+  276 > $252 
+jf @DSKOOL_14635 
+$266 = 100 
+
+:DSKOOL_14635
+if 
+  $252 > 275 
+jf @DSKOOL_14737 
+if 
+  360 > $252 
+jf @DSKOOL_14737 
+0084: $273 = $252 // (int) 
+$273 -= 270 
+008D: $276 = integer $273 to_float 
+$276 *= 1.16 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_14737 
+
+:DSKOOL_14737
+if 
+  1 > $266 
+jf @DSKOOL_14762 
+$266 = 0 
+
+:DSKOOL_14762
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_14810 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_14810
+gosub @DSKOOL_31763 
+$269 = 200 
+if 
+   not Car.Wrecked($196)
+jf @DSKOOL_14897 
+$261 = Car.Health($196)
+$264 = 1000 
+0060: $264 -= $261 // (int) 
+$264 /= 10 
+if 
+  $264 > 100 
+jf @DSKOOL_14897 
+$264 = 100 
+
+:DSKOOL_14897
+if 
+   not Car.Wrecked($197)
+jf @DSKOOL_14969 
+$262 = Car.Health($197)
+$265 = 1000 
+0060: $265 -= $262 // (int) 
+$265 /= 10 
+if 
+  $265 > 100 
+jf @DSKOOL_14969 
+$265 = 100 
+
+:DSKOOL_14969
+0084: $269 = $264 // (int) 
+0058: $269 += $265 // (int) 
+0084: $272 = $268 // (int) 
+0058: $272 += $269 // (int) 
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $91 // (int) 
+jf @DSKOOL_15072 
+008B: 47@ = $91 // (int) 
+0084: $91 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_15079 
+
+:DSKOOL_15072
+45@ = 0 
+
+:DSKOOL_15079
+if 
+  $53 == 10 
+jf @DSKOOL_15143 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_15143 
+41@ = 2 
+$53 = 11 
+$325 = 2 
+50@ = 11 
+
+:DSKOOL_15143
+32@ = 0 
+
+:DSKOOL_15150
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_15210 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_15210 
+$325 = 2 
+jump @DSKOOL_15256 
+
+:DSKOOL_15210
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_15249 
+jump @DSKOOL_15256 
+
+:DSKOOL_15249
+jump @DSKOOL_15150 
+
+:DSKOOL_15256
+gosub @DSKOOL_35152 
+Car.Destroy($196)
+Car.Destroy($197)
+if 
+  $325 == 2 
+jf @DSKOOL_15307 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_15314 
+
+:DSKOOL_15307
+jump @DSKOOL_13441 
+
+:DSKOOL_15314
+jump @DSKOOL_13788 
+
+:DSKOOL_15321
+if 
+  $247 == 11 
+jf @DSKOOL_16925 
+
+:DSKOOL_15339
+gosub @DSKOOL_30220 
+
+:DSKOOL_15346
+$258 = 180.0 
+$253 = 0 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#BANSHEE, $255, $256, $257)
+Car.Angle($198) = $258
+0086: $277 = $255 // (float) 
+$277 += 1.0 
+0086: $278 = $256 // (float) 
+$278 -= 25.0 
+$258 = 90.0 
+58@ = Object.Create(#GARYS_LUV_RAMP, $277, $278, $257)
+Object.Angle(58@) = 270.0
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car $198 with_offset -50.0 30.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car $198 with_offset 50.0 200.0 0.0 
+if 
+  34@ == 0 
+jf @DSKOOL_15621 
+Camera.SetPosition(-2052.6, -138.4, 34.9, 0.0, 0.0, 0.0)
+Camera.PointAt(-2044.2, -208.2, 37.1, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_15619 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_15619
+return 
+
+:DSKOOL_15621
+00BE: text_clear_all 
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 0.0 100.0 0.0 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_34' time 5000 flag 4  // ~s~Keep the car on two wheels until the end of the track.
+gosub @DSKOOL_31041 
+
+:DSKOOL_15691
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_15726 
+$325 = 2 
+jump @DSKOOL_16865 
+
+:DSKOOL_15726
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_15758 
+jump @DSKOOL_24457 
+
+:DSKOOL_15758
+if 
+  $249 == 0 
+jf @DSKOOL_15840 
+if 
+   not $325 == 2 
+jf @DSKOOL_15826 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_34' time 5000 flag 4  // ~s~Keep the car on two wheels until the end of the track.
+
+:DSKOOL_15826
+gosub @DSKOOL_31215 
+jump @DSKOOL_16918 
+
+:DSKOOL_15840
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_16918 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere $305 $306 $257 radius 4.0 4.0 4.0 
+jf @DSKOOL_15898 
+
+:DSKOOL_15898
+if 
+00B0:   car $198 sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @DSKOOL_15985 
+06BE: $276 = car $198 y_angle 
+if 
+  4.0 > $276 
+jf @DSKOOL_15985 
+if 
+  $276 > -4.0 
+jf @DSKOOL_15985 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+
+:DSKOOL_15985
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_16918 
+gosub @DSKOOL_31569 
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_16918 
+gosub @DSKOOL_31569 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+Car.StorePos($198, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 1.0 
+jf @DSKOOL_16184 
+if 
+  10.0 > $259 
+jf @DSKOOL_16170 
+$259 -= 1.0 
+$259 *= 11.0 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @DSKOOL_16177 
+
+:DSKOOL_16170
+$267 = 0 
+
+:DSKOOL_16177
+jump @DSKOOL_16191 
+
+:DSKOOL_16184
+$267 = 100 
+
+:DSKOOL_16191
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_16239 
+$266 = 0 
+jump @DSKOOL_16522 
+
+:DSKOOL_16239
+if 
+  $252 == 180 
+jf @DSKOOL_16272 
+$266 = 100 
+jump @DSKOOL_16522 
+
+:DSKOOL_16272
+if 
+  $252 == 360 
+jf @DSKOOL_16305 
+$266 = 0 
+jump @DSKOOL_16522 
+
+:DSKOOL_16305
+if 
+  $252 > 0 
+jf @DSKOOL_16375 
+if 
+  175 > $252 
+jf @DSKOOL_16375 
+008D: $276 = integer $252 to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_16522 
+
+:DSKOOL_16375
+if 
+  $252 > 174 
+jf @DSKOOL_16420 
+if 
+  186 > $252 
+jf @DSKOOL_16420 
+$266 = 100 
+
+:DSKOOL_16420
+if 
+  $252 > 185 
+jf @DSKOOL_16522 
+if 
+  360 > $252 
+jf @DSKOOL_16522 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_16522 
+
+:DSKOOL_16522
+if 
+  1 > $266 
+jf @DSKOOL_16547 
+$266 = 0 
+
+:DSKOOL_16547
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_16595 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_16595
+gosub @DSKOOL_31763 
+0084: $272 = $268 // (int) 
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $101 // (int) 
+jf @DSKOOL_16681 
+008B: 47@ = $101 // (int) 
+0084: $101 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_16688 
+
+:DSKOOL_16681
+45@ = 0 
+
+:DSKOOL_16688
+if 
+  $53 == 11 
+jf @DSKOOL_16752 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_16752 
+41@ = 2 
+$53 = 13 
+$325 = 2 
+50@ = 13 
+
+:DSKOOL_16752
+32@ = 0 
+
+:DSKOOL_16759
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_16819 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_16819 
+$325 = 2 
+jump @DSKOOL_16865 
+
+:DSKOOL_16819
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_16858 
+jump @DSKOOL_16865 
+
+:DSKOOL_16858
+jump @DSKOOL_16759 
+
+:DSKOOL_16865
+gosub @DSKOOL_35152 
+Object.Destroy(58@)
+if 
+  $325 == 2 
+jf @DSKOOL_16911 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_16918 
+
+:DSKOOL_16911
+jump @DSKOOL_15339 
+
+:DSKOOL_16918
+jump @DSKOOL_15691 
+
+:DSKOOL_16925
+if or
+  $247 == 12 
+  $247 == 13 
+jf @DSKOOL_18334 
+
+:DSKOOL_16950
+gosub @DSKOOL_30220 
+
+:DSKOOL_16957
+$258 = 0.0 
+$253 = 6000 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#TAXI, $255, $256, $257)
+Car.Angle($198) = $258
+08F3: set_car $198 contains_goodies 0 
+gosub @DSKOOL_35490 
+if 
+  34@ == 0 
+jf @DSKOOL_17116 
+Camera.SetPosition(-2051.9, -185.5, 37.8, 0.0, 0.0, 0.0)
+Camera.PointAt(-2052.2, -152.9, 34.3, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_17114 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_17114
+return 
+
+:DSKOOL_17116
+if 
+  $247 == 12 
+jf @DSKOOL_17170 
+0407: store_coords_to $305 $306 $257 from_car $198 with_offset 6.5 -40.0 0.0 
+jump @DSKOOL_17199 
+
+:DSKOOL_17170
+0407: store_coords_to $303 $304 $257 from_car $198 with_offset -6.5 -40.0 0.0 
+
+:DSKOOL_17199
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSREVE' time 5000 style 4  // Press ~k~~VEHICLE_BRAKE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_28' time 5000 flag 4  // ~s~Use the front wheel drive car to reverse then quickly spin around 180 degrees.~n~Press ~k~~VEHICLE_LOOKLEFT~ and ~k~~VEHICLE_LOOKRIGHT~ together to look behind.
+gosub @DSKOOL_31041 
+
+:DSKOOL_17240
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_17275 
+$325 = 2 
+jump @DSKOOL_18272 
+
+:DSKOOL_17275
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_17307 
+jump @DSKOOL_24457 
+
+:DSKOOL_17307
+if 
+  $249 == 0 
+jf @DSKOOL_17389 
+if 
+   not $325 == 2 
+jf @DSKOOL_17375 
+00BA: show_text_styled GXT 'DSREVE' time 5000 style 4  // Press ~k~~VEHICLE_BRAKE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_28' time 5000 flag 4  // ~s~Use the front wheel drive car to reverse then quickly spin around 180 degrees.~n~Press ~k~~VEHICLE_LOOKLEFT~ and ~k~~VEHICLE_LOOKRIGHT~ together to look behind.
+
+:DSKOOL_17375
+gosub @DSKOOL_31215 
+jump @DSKOOL_18327 
+
+:DSKOOL_17389
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_18327 
+gosub @DSKOOL_31535 
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_18327 
+gosub @DSKOOL_31569 
+if 
+  $247 == 12 
+jf @DSKOOL_17476 
+0086: $255 = $305 // (float) 
+0086: $256 = $306 // (float) 
+jump @DSKOOL_17492 
+
+:DSKOOL_17476
+0086: $255 = $303 // (float) 
+0086: $256 = $304 // (float) 
+
+:DSKOOL_17492
+gosub @DSKOOL_31609 
+if 
+  $247 == 12 
+jf @DSKOOL_17569 
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA -2046.9 -161.4 cornerB -2041.2 -174.5 
+jf @DSKOOL_17562 
+$267 = 0 
+
+:DSKOOL_17562
+jump @DSKOOL_17614 
+
+:DSKOOL_17569
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA -2054.2 -161.4 cornerB -2060.0 -174.5 
+jf @DSKOOL_17614 
+$267 = 0 
+
+:DSKOOL_17614
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_17662 
+$266 = 0 
+jump @DSKOOL_17945 
+
+:DSKOOL_17662
+if 
+  $252 == 180 
+jf @DSKOOL_17695 
+$266 = 100 
+jump @DSKOOL_17945 
+
+:DSKOOL_17695
+if 
+  $252 == 360 
+jf @DSKOOL_17728 
+$266 = 0 
+jump @DSKOOL_17945 
+
+:DSKOOL_17728
+if 
+  $252 > 0 
+jf @DSKOOL_17798 
+if 
+  175 > $252 
+jf @DSKOOL_17798 
+008D: $276 = integer $252 to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_17945 
+
+:DSKOOL_17798
+if 
+  $252 > 174 
+jf @DSKOOL_17843 
+if 
+  186 > $252 
+jf @DSKOOL_17843 
+$266 = 100 
+
+:DSKOOL_17843
+if 
+  $252 > 185 
+jf @DSKOOL_17945 
+if 
+  360 > $252 
+jf @DSKOOL_17945 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_17945 
+
+:DSKOOL_17945
+if 
+  1 > $266 
+jf @DSKOOL_17970 
+$266 = 0 
+
+:DSKOOL_17970
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_18018 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_18018
+gosub @DSKOOL_31853 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $92 // (int) 
+jf @DSKOOL_18088 
+008B: 47@ = $92 // (int) 
+0084: $92 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_18095 
+
+:DSKOOL_18088
+45@ = 0 
+
+:DSKOOL_18095
+if 
+  $53 == 13 
+jf @DSKOOL_18159 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_18159 
+41@ = 2 
+$53 = 14 
+$325 = 2 
+50@ = 14 
+
+:DSKOOL_18159
+32@ = 0 
+
+:DSKOOL_18166
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_18226 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_18226 
+$325 = 2 
+jump @DSKOOL_18272 
+
+:DSKOOL_18226
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_18265 
+jump @DSKOOL_18272 
+
+:DSKOOL_18265
+jump @DSKOOL_18166 
+
+:DSKOOL_18272
+gosub @DSKOOL_35152 
+gosub @DSKOOL_35436 
+if 
+  $325 == 2 
+jf @DSKOOL_18320 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_18327 
+
+:DSKOOL_18320
+jump @DSKOOL_16950 
+
+:DSKOOL_18327
+jump @DSKOOL_17240 
+
+:DSKOOL_18334
+if 
+  $247 == 14 
+jf @DSKOOL_20041 
+
+:DSKOOL_18352
+gosub @DSKOOL_30220 
+
+:DSKOOL_18359
+$258 = 180.0 
+$253 = 0 
+gosub @DSKOOL_30329 
+$198 = Car.Create(#COPCARSF, $255, $256, $257)
+Car.Angle($198) = $258
+08F3: set_car $198 contains_goodies 0 
+0086: $277 = $255 // (float) 
+0086: $278 = $256 // (float) 
+$278 -= 10.0 
+$196 = Car.Create(#COPCARSF, $277, $278, $257)
+Car.Angle($196) = $258
+0560: create_random_actor_in_car $196 handle_as 56@ 
+Car.SetMaxSpeed($196, 0.0)
+59@ = Object.Create(#AD_ROADMARK2, -2045.0, -177.5, 34.35)
+Object.Angle(59@) = 180.0
+57@ = Object.Create(#AD_ROADMARK2, -2057.0, -177.5, 34.35)
+0407: store_coords_to $309 $310 $TEMPVAR_Z_COORD from_car $198 with_offset -12.0 -4.0 0.0 
+0407: store_coords_to $311 $312 $TEMPVAR_Z_COORD from_car $198 with_offset 12.0 100.0 0.0 
+if 
+  34@ == 0 
+jf @DSKOOL_18698 
+Camera.SetPosition(-2047.0, -220.2, 36.0, 0.0, 0.0, 0.0)
+Camera.PointAt(-2050.2, -193.9, 32.5, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_18696 
+55@ = Actor.CreateAsDriver(Mission2, #SFPD1, $198)
+
+:DSKOOL_18696
+return 
+
+:DSKOOL_18698
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_35' time 5000 flag 4  // ~s~Perform a P.I.T. Maneuver to spin the other car around with minimum damage.~n~Finish as close to the other car as possible.
+gosub @DSKOOL_31041 
+
+:DSKOOL_18739
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_18774 
+$325 = 2 
+jump @DSKOOL_19966 
+
+:DSKOOL_18774
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_18806 
+jump @DSKOOL_24457 
+
+:DSKOOL_18806
+if 
+  $249 == 0 
+jf @DSKOOL_18888 
+if 
+   not $325 == 2 
+jf @DSKOOL_18874 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_35' time 5000 flag 4  // ~s~Perform a P.I.T. Maneuver to spin the other car around with minimum damage.~n~Finish as close to the other car as possible.
+
+:DSKOOL_18874
+gosub @DSKOOL_31215 
+jump @DSKOOL_20034 
+
+:DSKOOL_18888
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_20034 
+if 
+   not Car.Wrecked($196)
+jf @DSKOOL_20034 
+if 
+80B0:   not car $196 sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @DSKOOL_18964 
+Car.LockInCurrentPosition($196) = True
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_18964
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA $309 $310 cornerB $311 $312 
+jf @DSKOOL_19008 
+Car.LockInCurrentPosition($196) = True
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_19008
+$251 = Car.Angle($196)
+if or
+  $251 > 340.0 
+  20.0 > $251 
+jf @DSKOOL_19061 
+Car.LockInCurrentPosition($196) = True
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_19061
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_20034 
+Car.LockInCurrentPosition($196) = True
+gosub @DSKOOL_31569 
+Car.StorePos($196, $255, $256, $257)
+Car.StorePos($198, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 4.0 
+jf @DSKOOL_19242 
+if 
+  11.0 > $259 
+jf @DSKOOL_19228 
+$259 -= 4.0 
+$259 *= 14.14 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @DSKOOL_19235 
+
+:DSKOOL_19228
+$267 = 0 
+
+:DSKOOL_19235
+jump @DSKOOL_19249 
+
+:DSKOOL_19242
+$267 = 100 
+
+:DSKOOL_19249
+0058: $CURRENT_FLIGHT_RECORD += $267 // (int) 
+$251 = Car.Angle($196)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_19305 
+$266 = 100 
+jump @DSKOOL_19598 
+
+:DSKOOL_19305
+if 
+  $252 == 360 
+jf @DSKOOL_19338 
+$266 = 100 
+jump @DSKOOL_19598 
+
+:DSKOOL_19338
+if 
+  $252 > 0 
+jf @DSKOOL_19381 
+if 
+  21 > $252 
+jf @DSKOOL_19381 
+$266 = 100 
+
+:DSKOOL_19381
+if 
+  $252 > 179 
+jf @DSKOOL_19468 
+if 
+  340 > $252 
+jf @DSKOOL_19468 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.62 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_19598 
+
+:DSKOOL_19468
+if 
+  $252 > 339 
+jf @DSKOOL_19513 
+if 
+  360 > $252 
+jf @DSKOOL_19513 
+$266 = 100 
+
+:DSKOOL_19513
+if 
+  $252 > 20 
+jf @DSKOOL_19598 
+if 
+  180 > $252 
+jf @DSKOOL_19598 
+008D: $276 = integer $252 to_float 
+$276 *= 0.62 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_19598 
+
+:DSKOOL_19598
+if 
+  1 > $266 
+jf @DSKOOL_19623 
+$266 = 0 
+
+:DSKOOL_19623
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_19671 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_19671
+gosub @DSKOOL_31763 
+if 
+  3 > $268 
+jf @DSKOOL_19703 
+$268 = 0 
+
+:DSKOOL_19703
+0084: $272 = $268 // (int) 
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $102 // (int) 
+jf @DSKOOL_19782 
+008B: 47@ = $102 // (int) 
+0084: $102 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_19789 
+
+:DSKOOL_19782
+45@ = 0 
+
+:DSKOOL_19789
+if 
+  $53 == 14 
+jf @DSKOOL_19853 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_19853 
+41@ = 2 
+$53 = 15 
+$325 = 2 
+50@ = 15 
+
+:DSKOOL_19853
+32@ = 0 
+
+:DSKOOL_19860
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_19920 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_19920 
+$325 = 2 
+jump @DSKOOL_19966 
+
+:DSKOOL_19920
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_19959 
+jump @DSKOOL_19966 
+
+:DSKOOL_19959
+jump @DSKOOL_19860 
+
+:DSKOOL_19966
+gosub @DSKOOL_35152 
+Car.Destroy($196)
+Object.Destroy(59@)
+Object.Destroy(57@)
+Actor.DestroyInstantly(56@)
+if 
+  $325 == 2 
+jf @DSKOOL_20027 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_20034 
+
+:DSKOOL_20027
+jump @DSKOOL_18352 
+
+:DSKOOL_20034
+jump @DSKOOL_18739 
+
+:DSKOOL_20041
+if 
+  $247 == 15 
+jf @DSKOOL_22693 
+
+:DSKOOL_20059
+gosub @DSKOOL_30220 
+
+:DSKOOL_20066
+$258 = 180.0 
+$253 = 6000 
+gosub @DSKOOL_30329 
+0086: $278 = $256 // (float) 
+$278 += 20.0 
+$198 = Car.Create(#BANSHEE, $255, $278, $257)
+Car.Angle($198) = $258
+0852: set_car $198 damages_visible 0 
+0086: $277 = $255 // (float) 
+0086: $278 = $256 // (float) 
+$278 -= 55.0 
+$258 = 90.0 
+57@ = Object.Create(#AD_JUMP, $277, $278, $257)
+Object.Angle(57@) = 180.0
+0086: $278 = $256 // (float) 
+$278 -= 75.0 
+$196 = Car.Create(#INFERNUS, $277, $278, $257)
+Car.Angle($196) = $258
+Car.LockInCurrentPosition($196) = True
+0086: $278 = $256 // (float) 
+$278 -= 80.0 
+$197 = Car.Create(#INFERNUS, $277, $278, $257)
+Car.Angle($197) = $258
+Car.LockInCurrentPosition($197) = True
+if 
+  34@ == 0 
+jf @DSKOOL_20399 
+Camera.SetPosition(-2061.2, -158.9, 37.5, 0.0, 0.0, 0.0)
+Camera.PointAt(-2040.3, -197.0, 35.1, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_20397 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_20397
+return 
+
+:DSKOOL_20399
+00BE: text_clear_all 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_33' time 5000 flag 4  // ~s~Do a barrel roll in mid air and land it perfectly. While in the air, release the accelerate button and use ~k~~VEHICLE_STEERUP~ and ~k~~VEHICLE_STEERDOWN~ to adjust the car's pitch.
+gosub @DSKOOL_31041 
+
+:DSKOOL_20440
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_20475 
+$325 = 2 
+jump @DSKOOL_22623 
+
+:DSKOOL_20475
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_20507 
+jump @DSKOOL_24457 
+
+:DSKOOL_20507
+if 
+  $249 == 0 
+jf @DSKOOL_20589 
+if 
+   not $325 == 2 
+jf @DSKOOL_20575 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_33' time 5000 flag 4  // ~s~Do a barrel roll in mid air and land it perfectly. While in the air, release the accelerate button and use ~k~~VEHICLE_STEERUP~ and ~k~~VEHICLE_STEERDOWN~ to adjust the car's pitch.
+
+:DSKOOL_20575
+gosub @DSKOOL_31215 
+jump @DSKOOL_22686 
+
+:DSKOOL_20589
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_22686 
+gosub @DSKOOL_31535 
+if 
+  $254 == 0 
+jf @DSKOOL_20685 
+if 
+00B1:   car $198 sphere 0 in_cube_cornerA -2047.0 -186.0 37.2 cornerB -2054.0 -190.0 39.0 
+jf @DSKOOL_20685 
+$254 = 1 
+
+:DSKOOL_20685
+if 
+  $254 == 1 
+jf @DSKOOL_20765 
+Car.Health($198) = 1000
+if 
+81F3:   not car $198 in_air 
+jf @DSKOOL_20765 
+if 
+01F4:   car $198 flipped 
+jf @DSKOOL_20765 
+Car.Health($198) = 700
+0852: set_car $198 damages_visible 1 
+$254 = 2 
+
+:DSKOOL_20765
+if 
+81F3:   not car $198 in_air 
+jf @DSKOOL_20804 
+if 
+01F4:   car $198 flipped 
+jf @DSKOOL_20804 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+
+:DSKOOL_20804
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA -2042.0 -100.0 cornerB -2058.0 -280.0 
+jf @DSKOOL_20849 
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_20849
+$251 = Car.Angle($198)
+if or
+  $251 > 200.0 
+  160.0 > $251 
+jf @DSKOOL_20898 
+$276 = 1.0 
+
+:DSKOOL_20898
+06BE: 36@ = car $198 y_angle 
+if 
+  37@ == 0 
+jf @DSKOOL_20980 
+if 
+  36@ > 5.0 
+jf @DSKOOL_20952 
+38@ = 1 
+
+:DSKOOL_20952
+if 
+  -5.0 > 36@ 
+jf @DSKOOL_20980 
+38@ = 2 
+
+:DSKOOL_20980
+if 
+  38@ == 1 
+jf @DSKOOL_21319 
+if 
+  37@ == 0 
+jf @DSKOOL_21044 
+if 
+  36@ > 90.0 
+jf @DSKOOL_21044 
+37@ = 1 
+
+:DSKOOL_21044
+if 
+  37@ == 1 
+jf @DSKOOL_21090 
+if 
+  36@ > 170.0 
+jf @DSKOOL_21090 
+37@ = 2 
+
+:DSKOOL_21090
+if 
+  37@ == 2 
+jf @DSKOOL_21157 
+if 
+  0.0 > 36@ 
+jf @DSKOOL_21157 
+if 
+  36@ > -170.0 
+jf @DSKOOL_21157 
+37@ = 3 
+
+:DSKOOL_21157
+if 
+  37@ == 3 
+jf @DSKOOL_21252 
+if 
+  0.0 > 36@ 
+jf @DSKOOL_21224 
+if 
+  36@ > -90.0 
+jf @DSKOOL_21224 
+37@ = 4 
+
+:DSKOOL_21224
+if 
+  36@ > 10.0 
+jf @DSKOOL_21252 
+37@ = 0 
+
+:DSKOOL_21252
+if 
+  37@ == 4 
+jf @DSKOOL_21319 
+if 
+  0.0 > 36@ 
+jf @DSKOOL_21319 
+if 
+  36@ > -5.0 
+jf @DSKOOL_21319 
+37@ = 5 
+
+:DSKOOL_21319
+if 
+  38@ == 2 
+jf @DSKOOL_21658 
+if 
+  37@ == 0 
+jf @DSKOOL_21383 
+if 
+  -90.0 > 36@ 
+jf @DSKOOL_21383 
+37@ = 1 
+
+:DSKOOL_21383
+if 
+  37@ == 1 
+jf @DSKOOL_21429 
+if 
+  -170.0 > 36@ 
+jf @DSKOOL_21429 
+37@ = 2 
+
+:DSKOOL_21429
+if 
+  37@ == 2 
+jf @DSKOOL_21496 
+if 
+  36@ > 0.0 
+jf @DSKOOL_21496 
+if 
+  170.0 > 36@ 
+jf @DSKOOL_21496 
+37@ = 3 
+
+:DSKOOL_21496
+if 
+  37@ == 3 
+jf @DSKOOL_21591 
+if 
+  36@ > 0.0 
+jf @DSKOOL_21563 
+if 
+  90.0 > 36@ 
+jf @DSKOOL_21563 
+37@ = 4 
+
+:DSKOOL_21563
+if 
+  -10.0 > 36@ 
+jf @DSKOOL_21591 
+37@ = 0 
+
+:DSKOOL_21591
+if 
+  37@ == 4 
+jf @DSKOOL_21658 
+if 
+  36@ > 0.0 
+jf @DSKOOL_21658 
+if 
+  5.0 > 36@ 
+jf @DSKOOL_21658 
+37@ = 5 
+
+:DSKOOL_21658
+if 
+01C1:   car $198 stopped 
+jf @DSKOOL_22686 
+gosub @DSKOOL_31569 
+if 
+  37@ == 5 
+jf @DSKOOL_21706 
+$267 = 100 
+
+:DSKOOL_21706
+if 
+  37@ == 4 
+jf @DSKOOL_21731 
+$267 = 80 
+
+:DSKOOL_21731
+if 
+  37@ == 3 
+jf @DSKOOL_21756 
+$267 = 60 
+
+:DSKOOL_21756
+if 
+  37@ == 2 
+jf @DSKOOL_21781 
+$267 = 40 
+
+:DSKOOL_21781
+if 
+  37@ == 1 
+jf @DSKOOL_21806 
+$267 = 20 
+
+:DSKOOL_21806
+if 
+  37@ == 0 
+jf @DSKOOL_21831 
+$267 = 0 
+
+:DSKOOL_21831
+if 
+  $254 == 0 
+jf @DSKOOL_21856 
+$267 = 0 
+
+:DSKOOL_21856
+if 
+01F4:   car $198 flipped 
+jf @DSKOOL_21879 
+$267 = 0 
+
+:DSKOOL_21879
+if 
+80B0:   not car $198 sphere 0 in_rectangle_cornerA -2042.0 -215.0 cornerB -2058.0 -280.0 
+jf @DSKOOL_21924 
+$267 = 0 
+
+:DSKOOL_21924
+$251 = Car.Angle($198)
+008C: $252 = float $251 to_integer 
+if 
+  $252 == 0 
+jf @DSKOOL_21972 
+$266 = 0 
+jump @DSKOOL_22255 
+
+:DSKOOL_21972
+if 
+  $252 == 180 
+jf @DSKOOL_22005 
+$266 = 100 
+jump @DSKOOL_22255 
+
+:DSKOOL_22005
+if 
+  $252 == 360 
+jf @DSKOOL_22038 
+$266 = 0 
+jump @DSKOOL_22255 
+
+:DSKOOL_22038
+if 
+  $252 > 0 
+jf @DSKOOL_22108 
+if 
+  175 > $252 
+jf @DSKOOL_22108 
+008D: $276 = integer $252 to_float 
+$276 *= 0.56 
+008C: $266 = float $276 to_integer 
+jump @DSKOOL_22255 
+
+:DSKOOL_22108
+if 
+  $252 > 174 
+jf @DSKOOL_22153 
+if 
+  186 > $252 
+jf @DSKOOL_22153 
+$266 = 100 
+
+:DSKOOL_22153
+if 
+  $252 > 185 
+jf @DSKOOL_22255 
+if 
+  360 > $252 
+jf @DSKOOL_22255 
+0084: $273 = $252 // (int) 
+$273 -= 180 
+008D: $276 = integer $273 to_float 
+$276 *= 0.56 
+008C: $273 = float $276 to_integer 
+$266 = 100 
+0060: $266 -= $273 // (int) 
+jump @DSKOOL_22255 
+
+:DSKOOL_22255
+if 
+  1 > $266 
+jf @DSKOOL_22280 
+$266 = 0 
+
+:DSKOOL_22280
+0084: $CURRENT_FLIGHT_RECORD = $267 // (int) 
+0058: $CURRENT_FLIGHT_RECORD += $266 // (int) 
+$CURRENT_FLIGHT_RECORD /= 2 
+if 
+  $267 == 0 
+jf @DSKOOL_22328 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_22328
+gosub @DSKOOL_31763 
+if 
+  2 > $268 
+jf @DSKOOL_22360 
+$268 = 0 
+
+:DSKOOL_22360
+0084: $272 = $268 // (int) 
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $100 // (int) 
+jf @DSKOOL_22439 
+008B: 47@ = $100 // (int) 
+0084: $100 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_22446 
+
+:DSKOOL_22439
+45@ = 0 
+
+:DSKOOL_22446
+if 
+  $53 == 15 
+jf @DSKOOL_22510 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_22510 
+41@ = 2 
+$53 = 16 
+$325 = 2 
+50@ = 16 
+
+:DSKOOL_22510
+32@ = 0 
+
+:DSKOOL_22517
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_22577 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_22577 
+$325 = 2 
+jump @DSKOOL_22623 
+
+:DSKOOL_22577
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_22616 
+jump @DSKOOL_22623 
+
+:DSKOOL_22616
+jump @DSKOOL_22517 
+
+:DSKOOL_22623
+gosub @DSKOOL_35152 
+Car.Destroy($196)
+Car.Destroy($197)
+Object.Destroy(57@)
+if 
+  $325 == 2 
+jf @DSKOOL_22679 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_22686 
+
+:DSKOOL_22679
+jump @DSKOOL_20059 
+
+:DSKOOL_22686
+jump @DSKOOL_20440 
+
+:DSKOOL_22693
+if 
+  $247 == 16 
+jf @DSKOOL_24457 
+
+:DSKOOL_22711
+gosub @DSKOOL_30220 
+
+:DSKOOL_22718
+$258 = 180.0 
+$253 = 0 
+gosub @DSKOOL_30329 
+$255 = -2046.7 
+$256 = -90.2 
+$257 = 33.9 
+$282 = -1724.3 
+$283 = 1294.0 
+$284 = 6.0 
+$198 = Car.Create(#SUPERGT, $255, $256, $257)
+Car.Angle($198) = 0.0
+039C: set_car $198 watertight 1 
+if 
+  34@ == 0 
+jf @DSKOOL_22931 
+Camera.SetPosition(-2017.3, -45.0, 34.41, 0.0, 0.0, 0.0)
+Camera.PointAt(-2039.0, -100.3, 37.4, 2)
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_22929 
+0560: create_random_actor_in_car $198 handle_as 55@ 
+
+:DSKOOL_22929
+return 
+
+:DSKOOL_22931
+00BE: text_clear_all 
+01EB: set_traffic_density_multiplier_to 0.5 
+Camera.SetAtPos($255, $256, $257)
+018A: 35@ = create_checkpoint_at $282 $283 $284 
+06D5: 42@ = create_racing_checkpoint_at $282 $283 $284 point_to $255 $256 $257 type 0 radius 5.0 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_31' time 5000 flag 4  // ~s~Drive to the other side of the city and back without damaging the car.~n~The target time is UNDER 120 seconds (2 minutes).
+gosub @DSKOOL_31041 
+
+:DSKOOL_23034
+wait 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_23069 
+$325 = 2 
+jump @DSKOOL_24136 
+
+:DSKOOL_23069
+gosub @DSKOOL_31109 
+if 
+  $325 == 1 
+jf @DSKOOL_23101 
+jump @DSKOOL_24457 
+
+:DSKOOL_23101
+if 
+  $325 == 2 
+jf @DSKOOL_23126 
+jump @DSKOOL_24136 
+
+:DSKOOL_23126
+if 
+  $249 == 0 
+jf @DSKOOL_23208 
+if 
+   not $325 == 2 
+jf @DSKOOL_23194 
+00BA: show_text_styled GXT 'DSTART' time 5000 style 4  // Press and hold ~k~~VEHICLE_ACCELERATE~ to begin.
+00BC: show_text_highpriority GXT 'DS1_31' time 5000 flag 4  // ~s~Drive to the other side of the city and back without damaging the car.~n~The target time is UNDER 120 seconds (2 minutes).
+
+:DSKOOL_23194
+gosub @DSKOOL_31215 
+jump @DSKOOL_24450 
+
+:DSKOOL_23208
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_24450 
+if 
+  $253 > 260000 
+jf @DSKOOL_23252 
+Player.CanMove($PLAYER_CHAR) = False
+
+:DSKOOL_23252
+if 
+  $254 == 0 
+jf @DSKOOL_23373 
+if 
+01AF:   car $198 sphere 0 in_sphere $282 $283 $284 radius 4.0 4.0 4.0 
+jf @DSKOOL_23373 
+Marker.Disable(35@)
+018A: 35@ = create_checkpoint_at $255 $256 $257 
+06D6: disable_racing_checkpoint 42@ 
+06D5: 42@ = create_racing_checkpoint_at $255 $256 $257 point_to $255 $256 $257 type 1 radius 5.0 
+$254 = 1 
+
+:DSKOOL_23373
+if 
+  $254 == 1 
+jf @DSKOOL_23445 
+if 
+01AF:   car $198 sphere 0 in_sphere $255 $256 $257 radius 4.0 4.0 4.0 
+jf @DSKOOL_23445 
+Marker.Disable(35@)
+$254 = 2 
+
+:DSKOOL_23445
+00BE: text_clear_all 
+if or
+01C1:   car $198 stopped 
+  $254 == 2 
+02BF:   car $198 sunk 
+  $253 >= 140000 
+jf @DSKOOL_24450 
+gosub @DSKOOL_31569 
+06D6: disable_racing_checkpoint 42@ 
+0084: $273 = $253 // (int) 
+0084: $301 = $273 // (int) 
+$301 /= 1000 
+0084: $302 = $301 // (int) 
+$302 *= 1000 
+0084: $274 = $273 // (int) 
+0060: $274 -= $302 // (int) 
+0084: $302 = $274 // (int) 
+$302 /= 10 
+$270 = 0 
+if 
+  2 > $254 
+jf @DSKOOL_23607 
+$270 = 0 
+jump @DSKOOL_23865 
+
+:DSKOOL_23607
+if 
+  100000 > $273 
+jf @DSKOOL_23635 
+$270 = 100 
+
+:DSKOOL_23635
+if 
+  $273 >= 100000 
+jf @DSKOOL_23736 
+if 
+  120000 > $273 
+jf @DSKOOL_23736 
+0084: $274 = $273 // (int) 
+$274 -= 99999 
+008D: $276 = integer $274 to_float 
+$276 *= 0.0015 
+008C: $273 = float $276 to_integer 
+$270 = 100 
+0060: $270 -= $273 // (int) 
+
+:DSKOOL_23736
+if 
+  $273 >= 120000 
+jf @DSKOOL_23837 
+if 
+  140000 > $273 
+jf @DSKOOL_23837 
+0084: $274 = $273 // (int) 
+$274 -= 119999 
+008D: $276 = integer $274 to_float 
+$276 *= 0.0035 
+008C: $273 = float $276 to_integer 
+$270 = 70 
+0060: $270 -= $273 // (int) 
+
+:DSKOOL_23837
+if 
+  $273 >= 140000 
+jf @DSKOOL_23865 
+$270 = 0 
+
+:DSKOOL_23865
+if 
+  1 > $270 
+jf @DSKOOL_23890 
+$270 = 0 
+
+:DSKOOL_23890
+if 
+  $270 > 99 
+jf @DSKOOL_23915 
+$270 = 100 
+
+:DSKOOL_23915
+0084: $CURRENT_FLIGHT_RECORD = $270 // (int) 
+gosub @DSKOOL_31763 
+0084: $272 = $268 // (int) 
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+gosub @DSKOOL_32476 
+if 
+001C:   $CURRENT_FLIGHT_RECORD > $97 // (int) 
+jf @DSKOOL_24009 
+008B: 47@ = $97 // (int) 
+0084: $97 = $CURRENT_FLIGHT_RECORD // (int) 
+41@ = 1 
+gosub @DSKOOL_32958 
+jump @DSKOOL_24016 
+
+:DSKOOL_24009
+45@ = 0 
+
+:DSKOOL_24016
+$254 = 5 
+32@ = 0 
+
+:DSKOOL_24030
+wait 0 
+gosub @DSKOOL_32505 
+if 
+   not 41@ == 2 
+jf @DSKOOL_24090 
+if 
+00E1:   player 0 pressed_key 15 
+jf @DSKOOL_24090 
+$325 = 2 
+jump @DSKOOL_24136 
+
+:DSKOOL_24090
+gosub @DSKOOL_33258 
+gosub @DSKOOL_35069 
+if 
+  $326 == 1 
+jf @DSKOOL_24129 
+jump @DSKOOL_24136 
+
+:DSKOOL_24129
+jump @DSKOOL_24030 
+
+:DSKOOL_24136
+if 
+  $MISSION_BACK_TO_SCHOOL_PASSED == 0 
+jf @DSKOOL_24385 
+if 
+  $53 == 16 
+jf @DSKOOL_24385 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_24385 
+fade 0 500 
+
+:DSKOOL_24197
+if 
+fading 
+jf @DSKOOL_24221 
+wait 0 
+jump @DSKOOL_24197 
+
+:DSKOOL_24221
+select_interior 3 
+0860: link_actor $PLAYER_ACTOR to_interior 3 
+04FA: reset_sky_colors_with_fade 1 
+04E4: refresh_game_renderer_at -2031.1 -118.2 
+Camera.SetAtPos(-2031.1, -118.2, 1034.2)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Actor.PutAt($PLAYER_ACTOR, -2029.7, -115.5, 1034.2)
+Actor.Angle($PLAYER_ACTOR) = 0.0
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Car.Destroy($198)
+0395: clear_area 1 at -2051.0 -174.0 34.0 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+
+:DSKOOL_24354
+if 
+fading 
+jf @DSKOOL_24378 
+wait 0 
+jump @DSKOOL_24354 
+
+:DSKOOL_24378
+jump @DSKOOL_24495 
+
+:DSKOOL_24385
+gosub @DSKOOL_35152 
+Marker.Disable(35@)
+06D6: disable_racing_checkpoint 42@ 
+01EB: set_traffic_density_multiplier_to 1.0 
+if 
+  $325 == 2 
+jf @DSKOOL_24443 
+00BE: text_clear_all 
+jump @DSKOOL_1425 
+jump @DSKOOL_24450 
+
+:DSKOOL_24443
+jump @DSKOOL_22711 
+
+:DSKOOL_24450
+jump @DSKOOL_23034 
+
+:DSKOOL_24457
+00BE: text_clear_all 
+if 
+  $325 == 1 
+jf @DSKOOL_24493 
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+
+:DSKOOL_24493
+return 
+
+:DSKOOL_24495
+if 
+  $MISSION_BACK_TO_SCHOOL_PASSED == 0 
+jf @DSKOOL_24616 
+Marker.Disable($596)
+0570: $596 = create_asset_radar_marker_with_icon 36 at $X_DRIVING_SCHOOL $Y_DRIVING_SCHOOL $Z_DRIVING_SCHOOL 
+018B: set_marker $596 radar_mode 2 
+014C: set_parked_car_generator $5185 cars_to_generate_to 101 
+014C: set_parked_car_generator $5186 cars_to_generate_to 101 
+00BE: text_clear_all 
+01E3: show_text_1number_styled GXT 'DS_PASS' number 15 time 5000 style 1  // MISSION PASSED!~n~~w~DRIVING SKILL +
+0624: add 40.0 to_float_stat 160 
+0394: play_music 2 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0318: set_latest_mission_passed 'FAR_1'  // Back to School
+030C: progress_made = 1 
+$MISSION_BACK_TO_SCHOOL_PASSED = 1 
+
+:DSKOOL_24616
+return 
+
+:DSKOOL_24618
+if 
+  $7417 == 0 
+jf @DSKOOL_24866 
+if 
+  $107 >= 70 
+jf @DSKOOL_24866 
+if 
+  $105 >= 70 
+jf @DSKOOL_24866 
+if 
+  $98 >= 70 
+jf @DSKOOL_24866 
+if 
+  $96 >= 70 
+jf @DSKOOL_24866 
+if 
+  $94 >= 70 
+jf @DSKOOL_24866 
+if 
+  $103 >= 70 
+jf @DSKOOL_24866 
+if 
+  $91 >= 70 
+jf @DSKOOL_24866 
+if 
+  $101 >= 70 
+jf @DSKOOL_24866 
+if 
+  $92 >= 70 
+jf @DSKOOL_24866 
+if 
+  $102 >= 70 
+jf @DSKOOL_24866 
+if 
+  $100 >= 70 
+jf @DSKOOL_24866 
+if 
+  $97 >= 70 
+jf @DSKOOL_24866 
+014C: set_parked_car_generator $5178 cars_to_generate_to 101 
+$7417 = 1 
+
+:DSKOOL_24866
+if 
+  $7418 == 0 
+jf @DSKOOL_25114 
+if 
+  $107 >= 85 
+jf @DSKOOL_25114 
+if 
+  $105 >= 85 
+jf @DSKOOL_25114 
+if 
+  $98 >= 85 
+jf @DSKOOL_25114 
+if 
+  $96 >= 85 
+jf @DSKOOL_25114 
+if 
+  $94 >= 85 
+jf @DSKOOL_25114 
+if 
+  $103 >= 85 
+jf @DSKOOL_25114 
+if 
+  $91 >= 85 
+jf @DSKOOL_25114 
+if 
+  $101 >= 85 
+jf @DSKOOL_25114 
+if 
+  $92 >= 85 
+jf @DSKOOL_25114 
+if 
+  $102 >= 85 
+jf @DSKOOL_25114 
+if 
+  $100 >= 85 
+jf @DSKOOL_25114 
+if 
+  $97 >= 85 
+jf @DSKOOL_25114 
+014C: set_parked_car_generator $5183 cars_to_generate_to 101 
+$7418 = 1 
+
+:DSKOOL_25114
+if 
+  $7419 == 0 
+jf @DSKOOL_25362 
+if 
+  $107 == 100 
+jf @DSKOOL_25362 
+if 
+  $105 == 100 
+jf @DSKOOL_25362 
+if 
+  $98 == 100 
+jf @DSKOOL_25362 
+if 
+  $96 == 100 
+jf @DSKOOL_25362 
+if 
+  $94 == 100 
+jf @DSKOOL_25362 
+if 
+  $103 == 100 
+jf @DSKOOL_25362 
+if 
+  $91 == 100 
+jf @DSKOOL_25362 
+if 
+  $101 == 100 
+jf @DSKOOL_25362 
+if 
+  $92 == 100 
+jf @DSKOOL_25362 
+if 
+  $102 == 100 
+jf @DSKOOL_25362 
+if 
+  $100 == 100 
+jf @DSKOOL_25362 
+if 
+  $97 == 100 
+jf @DSKOOL_25362 
+014C: set_parked_car_generator $5184 cars_to_generate_to 101 
+$7419 = 1 
+
+:DSKOOL_25362
+014F: stop_timer $253 
+03F0: enable_text_draw 0 
+01B7: release_weather 
+Model.Destroy(#BANSHEE)
+Model.Destroy(#TAXI)
+Model.Destroy(#TRAFFICCONE)
+Model.Destroy(#WMYMECH)
+Model.Destroy(#BLISTAC)
+Model.Destroy(#INFERNUS)
+Model.Destroy(#SUPERGT)
+Model.Destroy(#COPCARSF)
+Model.Destroy(#SFPD1)
+Model.Destroy(#TEMP_STINGER2)
+Model.Destroy(#GARYS_LUV_RAMP)
+Model.Destroy(#AD_JUMP)
+Model.Destroy(#AD_ROADMARK1)
+Model.Destroy(#AD_ROADMARK2)
+Model.Destroy(#AD_FINISH)
+091D: remove_forbidden_for_boats_cube_cornerA -2015.37 -76.08 10.0 cornerB -2078.3 -66.75 50.0 
+09EC: set_garages_leave_camera_alone 0 
+097A: play_audio_at 0.0 0.0 0.0 event 1184 
+Garage.Activate('BODLAWN')
+Garage.Activate('MODLAST')
+Garage.Activate('MDSSFSE')
+if 
+  $1499 == 1 
+jf @DSKOOL_25576 
+Garage.Activate('MDS1SFS')
+Garage.Activate('VECMOD')
+
+:DSKOOL_25576
+0A14: disable_respray_garages 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DSKOOL_25603 
+0A09: set_actor $PLAYER_ACTOR muted 0 // versionB 
+
+:DSKOOL_25603
+09F5: disable_player_mutal_activities 0 
+0391: release_textures 
+01EB: set_traffic_density_multiplier_to 1.0 
+0826: enable_hud 1 
+0581: enable_radar 1 
+Marker.Disable(35@)
+06D6: disable_racing_checkpoint 42@ 
+09D2: set_cops_chase_criminals 1 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:DSKOOL_25654
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 225.0 size 612.0 438.0 RGBA 0 0 0 44@ 
+if 
+  43@ == 1 
+jf @DSKOOL_25776 
+if 
+  255 > 44@ 
+jf @DSKOOL_25769 
+44@ += 5 
+if 
+  44@ > 255 
+jf @DSKOOL_25762 
+44@ = 255 
+
+:DSKOOL_25762
+jump @DSKOOL_25776 
+
+:DSKOOL_25769
+43@ = 2 
+
+:DSKOOL_25776
+if 
+  43@ == 3 
+jf @DSKOOL_25858 
+if 
+  44@ > 0 
+jf @DSKOOL_25851 
+44@ -= 5 
+if 
+  0 > 44@ 
+jf @DSKOOL_25844 
+44@ = 0 
+
+:DSKOOL_25844
+jump @DSKOOL_25858 
+
+:DSKOOL_25851
+43@ = 0 
+
+:DSKOOL_25858
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 0.0 size 640.0 197.0 RGBA 0 0 0 255 
+gosub @DSKOOL_30158 
+0340: set_text_draw_RGBA 255 255 255 255 
+if 
+  $247 == 1 
+jf @DSKOOL_25970 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_P'  // The 360
+008B: 46@ = $107 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_25970
+if 
+  $247 == 2 
+jf @DSKOOL_26024 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_O'  // The 180
+008B: 46@ = $105 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26024
+if 
+  $247 == 3 
+jf @DSKOOL_26078 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_I'  // Whip and Terminate
+008B: 46@ = $98 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26078
+if 
+  $247 == 4 
+jf @DSKOOL_26132 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_I'  // Whip and Terminate
+008B: 46@ = $98 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26132
+if 
+  $247 == 5 
+jf @DSKOOL_26186 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_F'  // Pop and Control
+008B: 46@ = $96 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26186
+if 
+  $247 == 6 
+jf @DSKOOL_26240 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_E'  // Burn and Lap
+008B: 46@ = $94 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26240
+if 
+  $247 == 7 
+jf @DSKOOL_26294 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_E'  // Burn and Lap
+008B: 46@ = $94 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26294
+if 
+  $247 == 8 
+jf @DSKOOL_26348 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_N'  // Cone Coil
+008B: 46@ = $103 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26348
+if 
+  $247 == 9 
+jf @DSKOOL_26402 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_N'  // Cone Coil
+008B: 46@ = $103 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26402
+if 
+  $247 == 10 
+jf @DSKOOL_26456 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_A'  // The '90'
+008B: 46@ = $91 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26456
+if 
+  $247 == 11 
+jf @DSKOOL_26510 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_K'  // Wheelie Weave
+008B: 46@ = $101 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26510
+if 
+  $247 == 12 
+jf @DSKOOL_26564 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_C'  // Spin and Go
+008B: 46@ = $92 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26564
+if 
+  $247 == 13 
+jf @DSKOOL_26618 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_C'  // Spin and Go
+008B: 46@ = $92 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26618
+if 
+  $247 == 14 
+jf @DSKOOL_26672 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_L'  // P. I. T. Maneuver
+008B: 46@ = $102 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26672
+if 
+  $247 == 15 
+jf @DSKOOL_26726 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_J'  // Alley Oop
+008B: 46@ = $100 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26726
+if 
+  $247 == 16 
+jf @DSKOOL_26780 
+033E: set_draw_text_position 322.0 31.0 GXT 'DS_G'  // City Slicking
+008B: 46@ = $97 // (int) 
+gosub @DSKOOL_27923 
+
+:DSKOOL_26780
+gosub @DSKOOL_29980 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @DSKOOL_26875 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'DS1_53'  // Exit
+jump @DSKOOL_26908 
+
+:DSKOOL_26875
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'DS1_53'  // Exit
+
+:DSKOOL_26908
+if 
+   not 39@ == 1 
+jf @DSKOOL_27335 
+gosub @DSKOOL_29980 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @DSKOOL_27021 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'DS1_54'  // Start
+jump @DSKOOL_27054 
+
+:DSKOOL_27021
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'DS1_54'  // Start
+
+:DSKOOL_27054
+if 
+   not $53 == 1 
+jf @DSKOOL_27207 
+gosub @DSKOOL_29980 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @DSKOOL_27167 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'DS1_52'  // Navigate
+jump @DSKOOL_27200 
+
+:DSKOOL_27167
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'DS1_52'  // Navigate
+
+:DSKOOL_27200
+jump @DSKOOL_27335 
+
+:DSKOOL_27207
+gosub @DSKOOL_29980 
+0904: get_interface 8 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @DSKOOL_27302 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'DS1_52'  // Navigate
+jump @DSKOOL_27335 
+
+:DSKOOL_27302
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'DS1_52'  // Navigate
+
+:DSKOOL_27335
+gosub @DSKOOL_29980 
+033F: set_text_draw_letter_size 0.32 1.25 
+0904: get_interface 4 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 150.0 360.0 GXT 'DS1_63'  // ~k~~VEHICLE_ENTER_EXIT~
+if 
+   not 39@ == 1 
+jf @DSKOOL_27669 
+gosub @DSKOOL_29980 
+0904: get_interface 4 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 150.0 340.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+if 
+   not $53 == 1 
+jf @DSKOOL_27581 
+gosub @DSKOOL_29980 
+0904: get_interface 4 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'DS1_62'  // ~<~~>~
+
+:DSKOOL_27581
+if 
+  $53 == 1 
+jf @DSKOOL_27669 
+gosub @DSKOOL_29980 
+0904: get_interface 4 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'DS1_62'  // ~<~~>~
+
+:DSKOOL_27669
+033F: set_text_draw_letter_size 0.52 1.45 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 112.0 size 320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 317.0 size 320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 112.0 size -320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 317.0 size -320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 160.0 435.0 size 320.0 17.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 480.0 435.0 size -320.0 17.0 RGBA 150 150 150 255 
+return 
+
+:DSKOOL_27923
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 430.0 size 640.0 250.0 RGBA 0 0 0 255 
+if 
+  70 > 46@ 
+jf @DSKOOL_27985 
+45@ = 1 
+
+:DSKOOL_27985
+if 
+  46@ > 69 
+jf @DSKOOL_28028 
+if 
+  85 > 46@ 
+jf @DSKOOL_28028 
+45@ = 2 
+
+:DSKOOL_28028
+if 
+  46@ > 84 
+jf @DSKOOL_28071 
+if 
+  100 > 46@ 
+jf @DSKOOL_28071 
+45@ = 3 
+
+:DSKOOL_28071
+if 
+  46@ == 100 
+jf @DSKOOL_28096 
+45@ = 4 
+
+:DSKOOL_28096
+gosub @DSKOOL_29980 
+03E4: set_text_draw_align_right 0 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+if 
+  45@ > 1 
+jf @DSKOOL_28186 
+045A: draw_text_1number 217.0 75.0 GXT 'DS1_58' number 46@  // Record Score ~1~%
+jump @DSKOOL_28381 
+
+:DSKOOL_28186
+if 
+04A3:   $CURRENT_LANGUAGE == 0 // == constant 
+jf @DSKOOL_28225 
+033E: set_draw_text_position 175.0 75.0 GXT 'DS1_67'  // Get 70% or higher to pass
+
+:DSKOOL_28225
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @DSKOOL_28264 
+033E: set_draw_text_position 83.0 75.0 GXT 'DS1_67'  // Get 70% or higher to pass
+
+:DSKOOL_28264
+if 
+04A3:   $CURRENT_LANGUAGE == 2 // == constant 
+jf @DSKOOL_28303 
+033E: set_draw_text_position 89.0 75.0 GXT 'DS1_67'  // Get 70% or higher to pass
+
+:DSKOOL_28303
+if 
+04A3:   $CURRENT_LANGUAGE == 3 // == constant 
+jf @DSKOOL_28342 
+033E: set_draw_text_position 147.0 75.0 GXT 'DS1_67'  // Get 70% or higher to pass
+
+:DSKOOL_28342
+if 
+04A3:   $CURRENT_LANGUAGE == 4 // == constant 
+jf @DSKOOL_28381 
+033E: set_draw_text_position 65.0 75.0 GXT 'DS1_67'  // Get 70% or higher to pass
+
+:DSKOOL_28381
+if 
+  45@ > 1 
+jf @DSKOOL_28486 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+jump @DSKOOL_28566 
+
+:DSKOOL_28486
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+
+:DSKOOL_28566
+03E3: set_texture_to_be_drawn_antialiased 1 
+if 
+  45@ == 1 
+jf @DSKOOL_28743 
+if 
+04A3:   $CURRENT_LANGUAGE == 0 // == constant 
+jf @DSKOOL_28649 
+038D: draw_texture 6 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+jump @DSKOOL_28685 
+
+:DSKOOL_28649
+038D: draw_texture 10 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:DSKOOL_28685
+gosub @DSKOOL_29980 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 266.0 375.0 GXT 'DS1_68'  // NO AWARD
+
+:DSKOOL_28743
+if 
+  45@ == 2 
+jf @DSKOOL_28855 
+038D: draw_texture 1 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @DSKOOL_29980 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 280.0 375.0 GXT 'DS1_57'  // BRONZE
+
+:DSKOOL_28855
+if 
+  45@ == 3 
+jf @DSKOOL_28967 
+038D: draw_texture 2 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @DSKOOL_29980 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 283.0 375.0 GXT 'DS1_56'  // SILVER
+
+:DSKOOL_28967
+if 
+  45@ == 4 
+jf @DSKOOL_29079 
+038D: draw_texture 3 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @DSKOOL_29980 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 294.0 375.0 GXT 'DS1_55'  // GOLD
+
+:DSKOOL_29079
+return 
+
+:DSKOOL_29081
+if 
+  34@ == 0 
+jf @DSKOOL_29406 
+if 
+  $247 == 1 
+jf @DSKOOL_29124 
+gosub @DSKOOL_3843 
+
+:DSKOOL_29124
+if 
+  $247 == 2 
+jf @DSKOOL_29149 
+gosub @DSKOOL_5416 
+
+:DSKOOL_29149
+if 
+  $247 == 4 
+jf @DSKOOL_29174 
+gosub @DSKOOL_6742 
+
+:DSKOOL_29174
+if 
+  $247 == 5 
+jf @DSKOOL_29199 
+gosub @DSKOOL_8347 
+
+:DSKOOL_29199
+if 
+  $247 == 7 
+jf @DSKOOL_29224 
+gosub @DSKOOL_9857 
+
+:DSKOOL_29224
+if 
+  $247 == 9 
+jf @DSKOOL_29249 
+gosub @DSKOOL_11959 
+
+:DSKOOL_29249
+if 
+  $247 == 10 
+jf @DSKOOL_29274 
+gosub @DSKOOL_13448 
+
+:DSKOOL_29274
+if 
+  $247 == 11 
+jf @DSKOOL_29299 
+gosub @DSKOOL_15346 
+
+:DSKOOL_29299
+if 
+  $247 == 13 
+jf @DSKOOL_29324 
+gosub @DSKOOL_16957 
+
+:DSKOOL_29324
+if 
+  $247 == 14 
+jf @DSKOOL_29349 
+gosub @DSKOOL_18359 
+
+:DSKOOL_29349
+if 
+  $247 == 15 
+jf @DSKOOL_29374 
+gosub @DSKOOL_20066 
+
+:DSKOOL_29374
+if 
+  $247 == 16 
+jf @DSKOOL_29399 
+gosub @DSKOOL_22718 
+
+:DSKOOL_29399
+34@ = 1 
+
+:DSKOOL_29406
+if 
+  34@ == 1 
+jf @DSKOOL_29643 
+if 
+  $247 == 14 
+jf @DSKOOL_29577 
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_29570 
+if 
+87C1:   not path 14 available 
+jf @DSKOOL_29477 
+07C0: load_path 14 
+
+:DSKOOL_29477
+if 
+87C1:   not path 3 available 
+jf @DSKOOL_29496 
+07C0: load_path 3 
+
+:DSKOOL_29496
+if 
+07C1:   path 14 available 
+jf @DSKOOL_29570 
+if 
+07C1:   path 3 available 
+jf @DSKOOL_29570 
+05EB: assign_car $198 to_path 14 
+if 
+   not Car.Wrecked($196)
+jf @DSKOOL_29556 
+05EB: assign_car $196 to_path 3 
+
+:DSKOOL_29556
+43@ = 3 
+34@ = 2 
+
+:DSKOOL_29570
+jump @DSKOOL_29643 
+
+:DSKOOL_29577
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_29643 
+if 
+87C1:   not path $247 available 
+jf @DSKOOL_29621 
+07C0: load_path $247 
+jump @DSKOOL_29643 
+
+:DSKOOL_29621
+05EB: assign_car $198 to_path $247 
+43@ = 3 
+34@ = 2 
+
+:DSKOOL_29643
+if 
+  34@ == 2 
+jf @DSKOOL_29728 
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_29714 
+if 
+860E:   not car $198 assigned_to_path 
+jf @DSKOOL_29707 
+43@ = 1 
+34@ = 4 
+
+:DSKOOL_29707
+jump @DSKOOL_29728 
+
+:DSKOOL_29714
+43@ = 1 
+34@ = 4 
+
+:DSKOOL_29728
+if 
+  34@ == 3 
+jf @DSKOOL_29760 
+43@ = 1 
+34@ = 4 
+
+:DSKOOL_29760
+if 
+  34@ == 4 
+jf @DSKOOL_29978 
+if 
+  43@ == 2 
+jf @DSKOOL_29978 
+if 
+  $247 == 14 
+jf @DSKOOL_29835 
+if 
+   not Car.Wrecked($196)
+jf @DSKOOL_29835 
+05EC: release_car $196 from_path 
+
+:DSKOOL_29835
+05EC: release_car $198 from_path 
+Car.Destroy($198)
+0395: clear_area 1 at $327 $328 $329 radius 300.0 
+014F: stop_timer $253 
+0396: pause_timer 0 
+Actor.DestroyInstantly(55@)
+Actor.DestroyInstantly(56@)
+Car.Destroy($196)
+Car.Destroy($197)
+Car.Destroy($198)
+Object.Destroy(57@)
+Object.Destroy(58@)
+Object.Destroy(59@)
+0873: release_path 1 
+0873: release_path 2 
+0873: release_path 3 
+0873: release_path 4 
+0873: release_path 5 
+0873: release_path 7 
+0873: release_path 9 
+0873: release_path 10 
+0873: release_path 11 
+0873: release_path 13 
+0873: release_path 14 
+0873: release_path 15 
+0873: release_path 16 
+gosub @DSKOOL_35436 
+34@ = 0 
+
+:DSKOOL_29978
+return 
+
+:DSKOOL_29980
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:DSKOOL_30042
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:DSKOOL_30100
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.8 2.6 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+return 
+
+:DSKOOL_30158
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.2 4.0 
+060D: draw_text_shadow 3 rgba 0 0 0 255 
+0349: set_text_draw_font 3 
+return 
+
+:DSKOOL_30220
+fade 0 500 
+
+:DSKOOL_30227
+if 
+fading 
+jf @DSKOOL_30251 
+wait 0 
+jump @DSKOOL_30227 
+
+:DSKOOL_30251
+if 
+  $247 == 16 
+jf @DSKOOL_30290 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+jump @DSKOOL_30304 
+
+:DSKOOL_30290
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+
+:DSKOOL_30304
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+set_weather 6 
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+04FA: reset_sky_colors_with_fade 0 
+return 
+
+:DSKOOL_30329
+$309 = 0.0 
+$310 = 0.0 
+$311 = 0.0 
+$312 = 0.0 
+$313 = 0.0 
+$314 = 0.0 
+$315 = 0.0 
+$316 = 0.0 
+$317 = 0.0 
+$318 = 0.0 
+$319 = 0.0 
+$320 = 0.0 
+$321 = 0.0 
+$322 = 0.0 
+$323 = 0.0 
+$324 = 0.0 
+$12 = 0 
+$277 = 0.0 
+$278 = 0.0 
+$282 = 0.0 
+$283 = 0.0 
+$284 = 0.0 
+$285 = 10.0 
+$249 = 0 
+$280 = 0.0 
+$281 = 0.0 
+$330 = 0.0 
+$331 = 0.0 
+$332 = 0.0 
+$333 = 0 
+$261 = 0 
+$262 = 0 
+$303 = 0.0 
+$304 = 0.0 
+$305 = 0.0 
+$306 = 0.0 
+$326 = 0 
+$266 = 0 
+$250 = 0.0 
+$251 = 0.0 
+$252 = 0 
+$260 = 0 
+$325 = 0 
+$254 = 0 
+$286 = 0 
+$287 = 0 
+$289 = 0 
+$290 = 0 
+$292 = 0 
+$293 = 0 
+$295 = 0 
+$296 = 0 
+$298 = 0 
+$299 = 0 
+$288 = 0 
+$291 = 0 
+$294 = 0 
+$297 = 0 
+$300 = 0 
+$301 = 0 
+$302 = 0 
+$CURRENT_FLIGHT_RECORD = 0 
+$269 = 0 
+0086: $255 = $307 // (float) 
+0086: $256 = $308 // (float) 
+02CE: $257 = ground_z_at $255 $256 50.0 
+$268 = 0 
+$259 = 0.0 
+$267 = 0 
+$270 = 0 
+$263 = 0 
+$264 = 0 
+$265 = 0 
+$272 = 0 
+$273 = 0 
+$276 = 0.0 
+$274 = 0 
+$275 = 0 
+$279 = 0.0 
+36@ = 0.0 
+37@ = 0 
+38@ = 0 
+41@ = 0 
+40@ = 0 
+return 
+
+:DSKOOL_31041
+036A: put_actor $PLAYER_ACTOR in_car $198 
+Car.DoorStatus($198) = 4
+wait 0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+Player.ClearWantedLevel($PLAYER_CHAR)
+fade 1 500 
+
+:DSKOOL_31076
+if 
+fading 
+jf @DSKOOL_31100 
+wait 0 
+jump @DSKOOL_31076 
+
+:DSKOOL_31100
+Player.CanMove($PLAYER_CHAR) = True
+return 
+
+:DSKOOL_31109
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_31176 
+if 
+  $249 == 1 
+jf @DSKOOL_31169 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $198)
+jf @DSKOOL_31169 
+$325 = 1 
+
+:DSKOOL_31169
+jump @DSKOOL_31213 
+
+:DSKOOL_31176
+if 
+02BF:   car $198 sunk 
+jf @DSKOOL_31206 
+$325 = 2 
+jump @DSKOOL_31213 
+
+:DSKOOL_31206
+$325 = 1 
+
+:DSKOOL_31213
+return 
+
+:DSKOOL_31215
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_31258 
+if 
+   Actor.InCar($PLAYER_ACTOR, $198)
+jf @DSKOOL_31258 
+02E3: $250 = car $198 speed 
+
+:DSKOOL_31258
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @DSKOOL_31533 
+if 
+  $250 > 0.5 
+jf @DSKOOL_31533 
+00BE: text_clear_all 
+if or
+  $247 == 10 
+  $247 == 12 
+  $247 == 13 
+  $247 == 5 
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_31371 
+014E: start_timer_at $253 count_in_direction 1 // global_variable 
+0890: enable_sound_when_timer $253 reach 3 seconds // global_variable 
+
+:DSKOOL_31371
+if or
+  $247 == 15 
+  $247 == 8 
+  $247 == 9 
+  $247 == 2 
+  $247 == 1 
+jf @DSKOOL_31431 
+014E: start_timer_at $253 count_in_direction 1 // global_variable 
+0890: enable_sound_when_timer $253 reach 3 seconds // global_variable 
+
+:DSKOOL_31431
+if or
+  $247 == 6 
+  $247 == 7 
+  $247 == 16 
+jf @DSKOOL_31470 
+014E: start_timer_at $253 count_in_direction 0 // global_variable 
+
+:DSKOOL_31470
+if 
+  $247 == 14 
+jf @DSKOOL_31526 
+if 
+   not Car.Wrecked($196)
+jf @DSKOOL_31526 
+Car.SetSpeedInstantly($196, 6.0)
+Car.SetAnimation($196, 9, 864000000)
+
+:DSKOOL_31526
+$249 = 1 
+
+:DSKOOL_31533
+return 
+
+:DSKOOL_31535
+if 
+  $253 == 0 
+jf @DSKOOL_31567 
+Player.CanMove($PLAYER_CHAR) = False
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 1 
+
+:DSKOOL_31567
+return 
+
+:DSKOOL_31569
+Player.CanMove($PLAYER_CHAR) = False
+Car.LockInCurrentPosition($198) = True
+0396: pause_timer 1 
+097A: play_audio_at 0.0 0.0 0.0 event 1183 
+return 
+
+:DSKOOL_31609
+Car.StorePos($198, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $259 = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $255 $256 
+if 
+  $259 > 0.5 
+jf @DSKOOL_31746 
+if 
+  10.0 > $259 
+jf @DSKOOL_31732 
+$259 -= 0.5 
+$259 *= 10.42 
+008C: $273 = float $259 to_integer 
+$267 = 100 
+0060: $267 -= $273 // (int) 
+jump @DSKOOL_31739 
+
+:DSKOOL_31732
+$267 = 0 
+
+:DSKOOL_31739
+jump @DSKOOL_31753 
+
+:DSKOOL_31746
+$267 = 100 
+
+:DSKOOL_31753
+0058: $CURRENT_FLIGHT_RECORD += $267 // (int) 
+return 
+
+:DSKOOL_31763
+$260 = Car.Health($198)
+$268 = 1000 
+0060: $268 -= $260 // (int) 
+if 
+  $247 == 16 
+jf @DSKOOL_31819 
+$268 /= 10 
+jump @DSKOOL_31826 
+
+:DSKOOL_31819
+$268 /= 2 
+
+:DSKOOL_31826
+if 
+  $268 > 100 
+jf @DSKOOL_31851 
+$268 = 100 
+
+:DSKOOL_31851
+return 
+
+:DSKOOL_31853
+$272 = 0 
+$200 = 0 
+if 
+  $247 == 1 
+jf @DSKOOL_31944 
+
+:DSKOOL_31885
+if 
+  15 > $200 
+jf @DSKOOL_31944 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_31930 
+$272 += 10 
+
+:DSKOOL_31930
+$200 += 1 
+jump @DSKOOL_31885 
+
+:DSKOOL_31944
+if 
+  $247 == 2 
+jf @DSKOOL_32021 
+
+:DSKOOL_31962
+if 
+  25 > $200 
+jf @DSKOOL_32021 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32007 
+$272 += 10 
+
+:DSKOOL_32007
+$200 += 1 
+jump @DSKOOL_31962 
+
+:DSKOOL_32021
+if or
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_32105 
+
+:DSKOOL_32046
+if 
+  46 > $200 
+jf @DSKOOL_32105 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32091 
+$272 += 10 
+
+:DSKOOL_32091
+$200 += 1 
+jump @DSKOOL_32046 
+
+:DSKOOL_32105
+if 
+  $247 == 5 
+jf @DSKOOL_32182 
+
+:DSKOOL_32123
+if 
+  37 > $200 
+jf @DSKOOL_32182 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32168 
+$272 += 10 
+
+:DSKOOL_32168
+$200 += 1 
+jump @DSKOOL_32123 
+
+:DSKOOL_32182
+if or
+  $247 == 6 
+  $247 == 7 
+jf @DSKOOL_32266 
+
+:DSKOOL_32207
+if 
+  42 > $200 
+jf @DSKOOL_32266 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32252 
+$272 += 10 
+
+:DSKOOL_32252
+$200 += 1 
+jump @DSKOOL_32207 
+
+:DSKOOL_32266
+if or
+  $247 == 8 
+  $247 == 9 
+jf @DSKOOL_32350 
+
+:DSKOOL_32291
+if 
+  30 > $200 
+jf @DSKOOL_32350 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32336 
+$272 += 10 
+
+:DSKOOL_32336
+$200 += 1 
+jump @DSKOOL_32291 
+
+:DSKOOL_32350
+if or
+  $247 == 12 
+  $247 == 13 
+jf @DSKOOL_32434 
+
+:DSKOOL_32375
+if 
+  31 > $200 
+jf @DSKOOL_32434 
+if 
+0366:   object $201($200,46i) damaged 
+jf @DSKOOL_32420 
+$272 += 10 
+
+:DSKOOL_32420
+$200 += 1 
+jump @DSKOOL_32375 
+
+:DSKOOL_32434
+$272 *= 2 
+if 
+  $272 > 90 
+jf @DSKOOL_32466 
+$272 = 100 
+
+:DSKOOL_32466
+0060: $CURRENT_FLIGHT_RECORD -= $272 // (int) 
+return 
+
+:DSKOOL_32476
+if 
+  1 > $CURRENT_FLIGHT_RECORD 
+jf @DSKOOL_32501 
+$CURRENT_FLIGHT_RECORD = 0 
+
+:DSKOOL_32501
+00BE: text_clear_all 
+return 
+
+:DSKOOL_32505
+if 
+   not Car.Wrecked($198)
+jf @DSKOOL_32956 
+if 
+  $333 == 0 
+jf @DSKOOL_32701 
+Car.StorePos($198, $330, $331, $332)
+$332 += 5.0 
+0407: store_coords_to $330 $331 $TEMPVAR_FLOAT_3 from_car $198 with_offset 15.0 0.0 5.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+0A39: get_vehicle_camera_mode_to 60@ 
+if or
+  60@ == 1 
+  60@ == 2 
+  60@ == 3 
+jf @DSKOOL_32671 
+Camera.OnVehicle($198, 15, 1)
+jump @DSKOOL_32680 
+
+:DSKOOL_32671
+Camera.OnVehicle($198, 15, 2)
+
+:DSKOOL_32680
+0460: set_camera_transverse_delay 50.0 time 2000 
+09EC: set_garages_leave_camera_alone 1 
+$333 = 1 
+
+:DSKOOL_32701
+if 
+  32@ > 3000 
+jf @DSKOOL_32838 
+if 
+  6000 > 32@ 
+jf @DSKOOL_32838 
+if 
+  $333 == 1 
+jf @DSKOOL_32838 
+0407: store_coords_to $330 $331 $TEMPVAR_FLOAT_3 from_car $198 with_offset 0.0 15.0 5.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+Camera.OnVehicle($198, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+$333 = 2 
+
+:DSKOOL_32838
+if 
+  32@ > 6000 
+jf @DSKOOL_32956 
+if 
+  $333 == 2 
+jf @DSKOOL_32956 
+0407: store_coords_to $330 $331 $TEMPVAR_FLOAT_3 from_car $198 with_offset -15.0 0.0 5.0 
+Camera.SetPosition($330, $331, $332, 0.0, 0.0, 0.0)
+Camera.OnVehicle($198, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+$333 = 3 
+
+:DSKOOL_32956
+return 
+
+:DSKOOL_32958
+45@ = 0 
+if 
+  $CURRENT_FLIGHT_RECORD > 69 
+jf @DSKOOL_33067 
+if 
+  85 > $CURRENT_FLIGHT_RECORD 
+jf @DSKOOL_33067 
+if and
+  47@ > 69 
+  85 > 47@ 
+jf @DSKOOL_33040 
+45@ = 0 
+jump @DSKOOL_33067 
+
+:DSKOOL_33040
+097A: play_audio_at 0.0 0.0 0.0 event 1058 
+45@ = 2 
+
+:DSKOOL_33067
+if 
+  $CURRENT_FLIGHT_RECORD > 84 
+jf @DSKOOL_33169 
+if 
+  100 > $CURRENT_FLIGHT_RECORD 
+jf @DSKOOL_33169 
+if and
+  47@ > 84 
+  100 > 47@ 
+jf @DSKOOL_33142 
+45@ = 0 
+jump @DSKOOL_33169 
+
+:DSKOOL_33142
+097A: play_audio_at 0.0 0.0 0.0 event 1058 
+45@ = 3 
+
+:DSKOOL_33169
+if 
+  $CURRENT_FLIGHT_RECORD == 100 
+jf @DSKOOL_33256 
+if 
+  47@ == 100 
+jf @DSKOOL_33219 
+45@ = 0 
+jump @DSKOOL_33256 
+
+:DSKOOL_33219
+0624: add 30.0 to_float_stat 160 
+097A: play_audio_at 0.0 0.0 0.0 event 1058 
+45@ = 4 
+
+:DSKOOL_33256
+return 
+
+:DSKOOL_33258
+0826: enable_hud 0 
+0581: enable_radar 0 
+00BE: text_clear_all 
+014F: stop_timer $253 
+if 
+  2 > 45@ 
+jf @DSKOOL_33331 
+0937: text_draw_box_cornerA 160.0 220.0 cornerB 490.0 400.0 GXT_reference 'DS1_65' style 3  // Results
+jump @DSKOOL_33364 
+
+:DSKOOL_33331
+0937: text_draw_box_cornerA 160.0 200.0 cornerB 490.0 400.0 GXT_reference 'DUMMY' style 3 
+
+:DSKOOL_33364
+if or
+  $247 == 6 
+  $247 == 7 
+  $247 == 16 
+jf @DSKOOL_33672 
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 255.0 GXT 'DS1_72'  // Overall Time:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+if 
+  $302 > 9 
+jf @DSKOOL_33531 
+045B: draw_text_2numbers 450.0 255.0 GXT 'DS1_21' numbers $301 $302  // ~1~.~1~s
+jump @DSKOOL_33558 
+
+:DSKOOL_33531
+045B: draw_text_2numbers 450.0 255.0 GXT 'DS1_22' numbers $301 $302  // ~1~.0~1~s
+
+:DSKOOL_33558
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 275.0 GXT 'DS1_23'  // Final Time:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 450.0 275.0 GXT 'DS1_69' number $270  // ~1~%
+jump @DSKOOL_33886 
+
+:DSKOOL_33672
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 255.0 GXT 'DS1_5'  // Final Heading:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 450.0 255.0 GXT 'DS1_69' number $266  // ~1~%
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 275.0 GXT 'DS1_6'  // Final Position:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 450.0 275.0 GXT 'DS1_69' number $267  // ~1~%
+
+:DSKOOL_33886
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 295.0 GXT 'DS1_7'  // Damage Penalty:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0904: get_interface 0 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+045A: draw_text_1number 450.0 295.0 GXT 'DS1_70' number $272  // -~1~%
+gosub @DSKOOL_30042 
+0904: get_interface 3 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 315.0 GXT 'DS1_10'  // Overall Score:
+gosub @DSKOOL_30042 
+03E4: set_text_draw_align_right 1 
+0340: set_text_draw_RGBA 255 255 255 255 
+045A: draw_text_1number 450.0 315.0 GXT 'DS1_69' number $CURRENT_FLIGHT_RECORD  // ~1~%
+if or
+  41@ == 1 
+  41@ == 2 
+jf @DSKOOL_34476 
+if 
+  45@ > 0 
+jf @DSKOOL_34476 
+038D: draw_texture 4 position 250.0 199.0 size -60.0 60.0 RGBA 180 180 180 255 
+038D: draw_texture 4 position 392.0 199.0 size 60.0 60.0 RGBA 180 180 180 255 
+if 
+  45@ == 2 
+jf @DSKOOL_34285 
+038D: draw_texture 1 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:DSKOOL_34285
+if 
+  45@ == 3 
+jf @DSKOOL_34339 
+038D: draw_texture 2 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:DSKOOL_34339
+if 
+  45@ == 4 
+jf @DSKOOL_34393 
+038D: draw_texture 3 position 320.0 200.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:DSKOOL_34393
+gosub @DSKOOL_30158 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+033F: set_text_draw_letter_size 1.0 3.4 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 323.0 65.0 GXT 'DS1_47'  // NEW CERTIFICATE AWARDED
+
+:DSKOOL_34476
+if or
+  41@ == 1 
+  41@ == 2 
+jf @DSKOOL_34568 
+gosub @DSKOOL_30158 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+033F: set_text_draw_letter_size 1.0 3.4 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 323.0 110.0 GXT 'DS1_46'  // NEW RECORD
+
+:DSKOOL_34568
+if 
+   not 41@ == 2 
+jf @DSKOOL_34873 
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 340.0 345.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 345.0 GXT 'DS1_66'  // Continue
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 340.0 365.0 GXT 'DS1_63'  // ~k~~VEHICLE_ENTER_EXIT~
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 365.0 GXT 'DS1_53'  // Exit
+jump @DSKOOL_35067 
+
+:DSKOOL_34873
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 180.0 345.0 GXT 'DS1_71'  // NEW TEST AVAILABLE
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 340.0 365.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+gosub @DSKOOL_30042 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 51@ 52@ 53@ 54@ 
+0340: set_text_draw_RGBA 51@ 52@ 53@ 54@ 
+033E: set_draw_text_position 180.0 365.0 GXT 'DS1_66'  // Continue
+
+:DSKOOL_35067
+return 
+
+:DSKOOL_35069
+if 
+00E1:   player 0 pressed_key 16 
+jf @DSKOOL_35125 
+if 
+  $12 == 1 
+jf @DSKOOL_35118 
+$12 = 0 
+$326 = 1 
+
+:DSKOOL_35118
+jump @DSKOOL_35150 
+
+:DSKOOL_35125
+if 
+  $12 == 0 
+jf @DSKOOL_35150 
+$12 = 1 
+
+:DSKOOL_35150
+return 
+
+:DSKOOL_35152
+097A: play_audio_at 0.0 0.0 0.0 event 1184 
+00BE: text_clear_all 
+fade 0 500 
+
+:DSKOOL_35181
+if 
+fading 
+jf @DSKOOL_35205 
+wait 0 
+jump @DSKOOL_35181 
+
+:DSKOOL_35205
+00BE: text_clear_all 
+03D6: remove_styled_text 'DS1_46'  // NEW RECORD
+03D6: remove_styled_text 'DS1_47'  // NEW CERTIFICATE AWARDED
+09EC: set_garages_leave_camera_alone 0 
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+  $325 == 2 
+jf @DSKOOL_35323 
+00BE: text_clear_all 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DSKOOL_35302 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at $327 $328 $329 
+jump @DSKOOL_35316 
+
+:DSKOOL_35302
+Actor.PutAt($PLAYER_ACTOR, $327, $328, $329)
+
+:DSKOOL_35316
+jump @DSKOOL_35374 
+
+:DSKOOL_35323
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DSKOOL_35360 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at $327 $328 $329 
+jump @DSKOOL_35374 
+
+:DSKOOL_35360
+Actor.PutAt($PLAYER_ACTOR, $327, $328, $329)
+
+:DSKOOL_35374
+00BE: text_clear_all 
+wait 0 
+00BE: text_clear_all 
+Car.Destroy($198)
+0395: clear_area 1 at $327 $328 $329 radius 300.0 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+00BE: text_clear_all 
+wait 0 
+00BE: text_clear_all 
+014F: stop_timer $253 
+0396: pause_timer 0 
+0826: enable_hud 1 
+0581: enable_radar 1 
+return 
+
+:DSKOOL_35436
+00BE: text_clear_all 
+$200 = 0 
+
+:DSKOOL_35445
+if 
+  46 > $200 
+jf @DSKOOL_35488 
+00BE: text_clear_all 
+Object.Destroy($201($200,46i))
+$200 += 1 
+jump @DSKOOL_35445 
+
+:DSKOOL_35488
+return 
+
+:DSKOOL_35490
+$200 = 0 
+if 
+  $247 == 1 
+jf @DSKOOL_35574 
+
+:DSKOOL_35515
+if 
+  15 > $200 
+jf @DSKOOL_35574 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35515 
+
+:DSKOOL_35574
+if 
+  $247 == 2 
+jf @DSKOOL_35651 
+
+:DSKOOL_35592
+if 
+  25 > $200 
+jf @DSKOOL_35651 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35592 
+
+:DSKOOL_35651
+if or
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_35735 
+
+:DSKOOL_35676
+if 
+  46 > $200 
+jf @DSKOOL_35735 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35676 
+
+:DSKOOL_35735
+if 
+  $247 == 5 
+jf @DSKOOL_35812 
+
+:DSKOOL_35753
+if 
+  37 > $200 
+jf @DSKOOL_35812 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35753 
+
+:DSKOOL_35812
+if or
+  $247 == 6 
+  $247 == 7 
+jf @DSKOOL_35896 
+
+:DSKOOL_35837
+if 
+  42 > $200 
+jf @DSKOOL_35896 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35837 
+
+:DSKOOL_35896
+if or
+  $247 == 8 
+  $247 == 9 
+jf @DSKOOL_35980 
+
+:DSKOOL_35921
+if 
+  30 > $200 
+jf @DSKOOL_35980 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_35921 
+
+:DSKOOL_35980
+if or
+  $247 == 12 
+  $247 == 13 
+jf @DSKOOL_36064 
+
+:DSKOOL_36005
+if 
+  31 > $200 
+jf @DSKOOL_36064 
+$201($200,46i) = Object.Init(#TRAFFICCONE, 0.0, 0.0, 100.0)
+$200 += 1 
+jump @DSKOOL_36005 
+
+:DSKOOL_36064
+if 
+  $247 == 1 
+jf @DSKOOL_36768 
+$285 = 6.0 
+$279 = 0.0 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset 0.0 1.0 -0.5 
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_36157
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 0.0 
+jf @DSKOOL_36240 
+Object.PutAt($201[0], $282, $283, $284)
+
+:DSKOOL_36240
+if 
+  $279 == 24.0 
+jf @DSKOOL_36275 
+Object.PutAt($201[1], $282, $283, $284)
+
+:DSKOOL_36275
+if 
+  $279 == 48.0 
+jf @DSKOOL_36310 
+Object.PutAt($201[2], $282, $283, $284)
+
+:DSKOOL_36310
+if 
+  $279 == 72.0 
+jf @DSKOOL_36345 
+Object.PutAt($201[3], $282, $283, $284)
+
+:DSKOOL_36345
+if 
+  $279 == 96.0 
+jf @DSKOOL_36380 
+Object.PutAt($201[4], $282, $283, $284)
+
+:DSKOOL_36380
+if 
+  $279 == 120.0 
+jf @DSKOOL_36415 
+Object.PutAt($201[5], $282, $283, $284)
+
+:DSKOOL_36415
+if 
+  $279 == 144.0 
+jf @DSKOOL_36450 
+Object.PutAt($201[6], $282, $283, $284)
+
+:DSKOOL_36450
+if 
+  $279 == 168.0 
+jf @DSKOOL_36485 
+Object.PutAt($201[7], $282, $283, $284)
+
+:DSKOOL_36485
+if 
+  $279 == 192.0 
+jf @DSKOOL_36520 
+Object.PutAt($201[8], $282, $283, $284)
+
+:DSKOOL_36520
+if 
+  $279 == 216.0 
+jf @DSKOOL_36555 
+Object.PutAt($201[9], $282, $283, $284)
+
+:DSKOOL_36555
+if 
+  $279 == 240.0 
+jf @DSKOOL_36590 
+Object.PutAt($201[10], $282, $283, $284)
+
+:DSKOOL_36590
+if 
+  $279 == 264.0 
+jf @DSKOOL_36625 
+Object.PutAt($201[11], $282, $283, $284)
+
+:DSKOOL_36625
+if 
+  $279 == 288.0 
+jf @DSKOOL_36660 
+Object.PutAt($201[12], $282, $283, $284)
+
+:DSKOOL_36660
+if 
+  $279 == 312.0 
+jf @DSKOOL_36695 
+Object.PutAt($201[13], $282, $283, $284)
+
+:DSKOOL_36695
+if 
+  $279 == 336.0 
+jf @DSKOOL_36730 
+Object.PutAt($201[14], $282, $283, $284)
+
+:DSKOOL_36730
+$279 += 24.0 
+if 
+  360.0 > $279 
+jf @DSKOOL_36768 
+jump @DSKOOL_36157 
+
+:DSKOOL_36768
+if 
+  $247 == 2 
+jf @DSKOOL_37657 
+$285 = 6.0 
+$279 = 90.0 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset 0.0 86.0 -0.5 
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_36861
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 120.0 
+jf @DSKOOL_36944 
+Object.PutAt($201[0], $282, $283, $284)
+
+:DSKOOL_36944
+if 
+  $279 == 150.0 
+jf @DSKOOL_36979 
+Object.PutAt($201[1], $282, $283, $284)
+
+:DSKOOL_36979
+if 
+  $279 == 180.0 
+jf @DSKOOL_37014 
+Object.PutAt($201[2], $282, $283, $284)
+
+:DSKOOL_37014
+if 
+  $279 == 210.0 
+jf @DSKOOL_37049 
+Object.PutAt($201[3], $282, $283, $284)
+
+:DSKOOL_37049
+if 
+  $279 == 240.0 
+jf @DSKOOL_37084 
+Object.PutAt($201[4], $282, $283, $284)
+
+:DSKOOL_37084
+$279 += 30.0 
+if 
+  271.0 > $279 
+jf @DSKOOL_37122 
+jump @DSKOOL_36861 
+
+:DSKOOL_37122
+035C: place_object $201[7] relative_to_car $198 with_offset -7.0 74.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 7.0 74.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -7.0 78.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 7.0 78.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -7.0 82.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 7.0 82.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -7.0 86.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 7.0 86.0 -0.5 
+035C: place_object $201[15] relative_to_car $198 with_offset 0.0 82.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset -3.0 4.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset 3.0 4.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset -3.0 0.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset 3.0 0.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset -3.0 -4.0 -0.5 
+035C: place_object $201[21] relative_to_car $198 with_offset 3.0 -4.0 -0.5 
+035C: place_object $201[22] relative_to_car $198 with_offset 0.0 -4.0 -0.5 
+035C: place_object $201[23] relative_to_car $198 with_offset 0.0 74.0 -0.5 
+035C: place_object $201[24] relative_to_car $198 with_offset 0.0 78.0 -0.5 
+$200 = 7 
+
+:DSKOOL_37543
+if 
+  25 > $200 
+jf @DSKOOL_37657 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_37643 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_37643
+$200 += 1 
+jump @DSKOOL_37543 
+
+:DSKOOL_37657
+if or
+  $247 == 12 
+  $247 == 13 
+jf @DSKOOL_38148 
+035C: place_object $201[0] relative_to_car $198 with_offset 0.0 4.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset -3.0 4.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset 3.0 4.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset -3.0 0.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset 3.0 0.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset -3.0 -4.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset 3.0 -4.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset -3.0 -8.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 3.0 -8.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -3.0 -12.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 3.0 -12.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -3.0 -16.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 3.0 -16.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -3.0 -20.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 3.0 -20.0 -0.5 
+$200 = 0 
+
+:DSKOOL_38034
+if 
+  15 > $200 
+jf @DSKOOL_38148 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_38134 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_38134
+$200 += 1 
+jump @DSKOOL_38034 
+
+:DSKOOL_38148
+if 
+  $247 == 12 
+jf @DSKOOL_38655 
+035C: place_object $201[15] relative_to_car $198 with_offset -3.0 -24.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset 6.0 -22.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset 0.0 -28.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset 8.0 -24.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset 3.0 -30.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset 10.0 -26.0 -0.5 
+035C: place_object $201[21] relative_to_car $198 with_offset 4.0 -32.0 -0.5 
+035C: place_object $201[22] relative_to_car $198 with_offset 10.0 -30.0 -0.5 
+035C: place_object $201[23] relative_to_car $198 with_offset 9.0 -32.0 -0.5 
+035C: place_object $201[24] relative_to_car $198 with_offset 4.0 -36.0 -0.5 
+035C: place_object $201[25] relative_to_car $198 with_offset 9.0 -36.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset 4.0 -40.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset 9.0 -40.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset 4.0 -44.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset 9.0 -44.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset 6.5 -44.0 -0.5 
+$200 = 15 
+
+:DSKOOL_38541
+if 
+  31 > $200 
+jf @DSKOOL_38655 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_38641 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_38641
+$200 += 1 
+jump @DSKOOL_38541 
+
+:DSKOOL_38655
+if 
+  $247 == 13 
+jf @DSKOOL_39162 
+035C: place_object $201[15] relative_to_car $198 with_offset 3.0 -24.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset -6.0 -22.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset 0.0 -28.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset -8.0 -24.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset -3.0 -30.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset -10.0 -26.0 -0.5 
+035C: place_object $201[21] relative_to_car $198 with_offset -4.0 -32.0 -0.5 
+035C: place_object $201[22] relative_to_car $198 with_offset -10.0 -30.0 -0.5 
+035C: place_object $201[23] relative_to_car $198 with_offset -9.0 -32.0 -0.5 
+035C: place_object $201[24] relative_to_car $198 with_offset -4.0 -36.0 -0.5 
+035C: place_object $201[25] relative_to_car $198 with_offset -9.0 -36.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset -4.0 -40.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset -9.0 -40.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset -4.0 -44.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset -9.0 -44.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset -6.5 -44.0 -0.5 
+$200 = 15 
+
+:DSKOOL_39048
+if 
+  31 > $200 
+jf @DSKOOL_39162 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_39148 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_39148
+$200 += 1 
+jump @DSKOOL_39048 
+
+:DSKOOL_39162
+if or
+  $247 == 6 
+  $247 == 7 
+jf @DSKOOL_40865 
+035C: place_object $201[0] relative_to_car $198 with_offset -4.0 8.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset 4.0 8.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset -4.0 2.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset 4.0 2.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset -4.0 -4.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset -4.0 14.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset 4.0 14.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset -4.0 20.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 4.0 20.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -4.0 26.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 4.0 26.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -4.0 32.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 4.0 32.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -4.0 38.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 4.0 38.0 -0.5 
+035C: place_object $201[15] relative_to_car $198 with_offset -4.0 44.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset 4.0 44.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset -4.0 50.0 -0.5 
+$200 = 0 
+
+:DSKOOL_39608
+if 
+  18 > $200 
+jf @DSKOOL_39722 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_39708 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_39708
+$200 += 1 
+jump @DSKOOL_39608 
+
+:DSKOOL_39722
+$279 = 90.0 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset 4.0 50.0 -0.5 
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_39787
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 126.0 
+jf @DSKOOL_39870 
+Object.PutAt($201[18], $282, $283, $284)
+
+:DSKOOL_39870
+if 
+  $279 == 144.0 
+jf @DSKOOL_39905 
+Object.PutAt($201[19], $282, $283, $284)
+
+:DSKOOL_39905
+if 
+  $279 == 162.0 
+jf @DSKOOL_39940 
+Object.PutAt($201[20], $282, $283, $284)
+
+:DSKOOL_39940
+if 
+  $279 == 180.0 
+jf @DSKOOL_39975 
+Object.PutAt($201[21], $282, $283, $284)
+
+:DSKOOL_39975
+if 
+  $279 == 198.0 
+jf @DSKOOL_40010 
+Object.PutAt($201[22], $282, $283, $284)
+
+:DSKOOL_40010
+if 
+  $279 == 216.0 
+jf @DSKOOL_40045 
+Object.PutAt($201[23], $282, $283, $284)
+
+:DSKOOL_40045
+if 
+  $279 == 234.0 
+jf @DSKOOL_40080 
+Object.PutAt($201[24], $282, $283, $284)
+
+:DSKOOL_40080
+$279 += 18.0 
+if 
+  271.0 > $279 
+jf @DSKOOL_40118 
+jump @DSKOOL_39787 
+
+:DSKOOL_40118
+035C: place_object $201[25] relative_to_car $198 with_offset 12.0 8.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset 12.0 2.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset 12.0 -4.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset 12.0 14.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset 12.0 20.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset 12.0 26.0 -0.5 
+035C: place_object $201[31] relative_to_car $198 with_offset 12.0 32.0 -0.5 
+035C: place_object $201[32] relative_to_car $198 with_offset 12.0 38.0 -0.5 
+035C: place_object $201[33] relative_to_car $198 with_offset 12.0 44.0 -0.5 
+035C: place_object $201[34] relative_to_car $198 with_offset 12.0 50.0 -0.5 
+$200 = 25 
+
+:DSKOOL_40355
+if 
+  35 > $200 
+jf @DSKOOL_40469 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_40455 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_40455
+$200 += 1 
+jump @DSKOOL_40355 
+
+:DSKOOL_40469
+$279 = 270.0 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset 4.0 -4.0 -0.5 
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_40534
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 306.0 
+jf @DSKOOL_40617 
+Object.PutAt($201[35], $282, $283, $284)
+
+:DSKOOL_40617
+if 
+  $279 == 324.0 
+jf @DSKOOL_40652 
+Object.PutAt($201[36], $282, $283, $284)
+
+:DSKOOL_40652
+if 
+  $279 == 342.0 
+jf @DSKOOL_40687 
+Object.PutAt($201[37], $282, $283, $284)
+
+:DSKOOL_40687
+if 
+  $279 == 360.0 
+jf @DSKOOL_40722 
+Object.PutAt($201[38], $282, $283, $284)
+
+:DSKOOL_40722
+if 
+  $279 == 378.0 
+jf @DSKOOL_40757 
+Object.PutAt($201[39], $282, $283, $284)
+
+:DSKOOL_40757
+if 
+  $279 == 396.0 
+jf @DSKOOL_40792 
+Object.PutAt($201[40], $282, $283, $284)
+
+:DSKOOL_40792
+if 
+  $279 == 414.0 
+jf @DSKOOL_40827 
+Object.PutAt($201[41], $282, $283, $284)
+
+:DSKOOL_40827
+$279 += 18.0 
+if 
+  451.0 > $279 
+jf @DSKOOL_40865 
+jump @DSKOOL_40534 
+
+:DSKOOL_40865
+if 
+  $247 == 5 
+jf @DSKOOL_41855 
+035C: place_object $201[0] relative_to_car $198 with_offset 2.0 40.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset -2.0 40.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset 3.0 44.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset -3.0 44.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset 3.0 48.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset -3.0 48.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset 3.0 52.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset -3.0 52.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 3.0 56.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -3.0 56.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 4.0 60.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -2.0 60.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 5.0 64.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -1.0 64.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 6.0 68.0 -0.5 
+035C: place_object $201[15] relative_to_car $198 with_offset 0.0 68.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset 6.0 72.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset 0.0 72.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset 6.0 76.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset 0.0 76.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset 6.0 80.0 -0.5 
+035C: place_object $201[21] relative_to_car $198 with_offset 0.0 80.0 -0.5 
+035C: place_object $201[22] relative_to_car $198 with_offset 5.0 84.0 -0.5 
+035C: place_object $201[23] relative_to_car $198 with_offset -1.0 84.0 -0.5 
+035C: place_object $201[24] relative_to_car $198 with_offset 4.0 88.0 -0.5 
+035C: place_object $201[25] relative_to_car $198 with_offset -2.0 88.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset 3.0 92.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset -3.0 92.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset 3.0 96.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset -3.0 96.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset 3.0 100.0 -0.5 
+035C: place_object $201[31] relative_to_car $198 with_offset -3.0 100.0 -0.5 
+035C: place_object $201[32] relative_to_car $198 with_offset 3.0 104.0 -0.5 
+035C: place_object $201[33] relative_to_car $198 with_offset -3.0 104.0 -0.5 
+035C: place_object $201[34] relative_to_car $198 with_offset 3.0 108.0 -0.5 
+035C: place_object $201[35] relative_to_car $198 with_offset -3.0 108.0 -0.5 
+035C: place_object $201[36] relative_to_car $198 with_offset 0.0 108.0 -0.5 
+$200 = 0 
+
+:DSKOOL_41741
+if 
+  37 > $200 
+jf @DSKOOL_41855 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_41841 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_41841
+$200 += 1 
+jump @DSKOOL_41741 
+
+:DSKOOL_41855
+if or
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_42651 
+035C: place_object $201[0] relative_to_car $198 with_offset -4.0 4.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset 4.0 4.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset -4.0 0.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset 4.0 0.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset -4.0 -4.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset 4.0 -4.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset 0.0 -4.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset -4.0 8.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 4.0 8.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -4.0 12.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 4.0 12.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -4.0 16.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 4.0 16.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -4.0 20.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 4.0 20.0 -0.5 
+035C: place_object $201[15] relative_to_car $198 with_offset -4.0 24.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset 4.0 24.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset -4.0 28.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset 4.0 28.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset -4.0 32.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset 4.0 32.0 -0.5 
+$200 = 0 
+
+:DSKOOL_42370
+if 
+  21 > $200 
+jf @DSKOOL_42484 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_42470 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_42470
+$200 += 1 
+jump @DSKOOL_42370 
+
+:DSKOOL_42484
+$279 = 90.0 
+if 
+  $247 == 3 
+jf @DSKOOL_42548 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset 4.0 30.0 -0.5 
+jump @DSKOOL_42577 
+
+:DSKOOL_42548
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset -4.0 30.0 -0.5 
+
+:DSKOOL_42577
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_42603
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+
+:DSKOOL_42651
+if 
+  $247 == 3 
+jf @DSKOOL_42774 
+if 
+  $279 == 126.0 
+jf @DSKOOL_42704 
+Object.PutAt($201[21], $282, $283, $284)
+
+:DSKOOL_42704
+if 
+  $279 == 144.0 
+jf @DSKOOL_42739 
+Object.PutAt($201[22], $282, $283, $284)
+
+:DSKOOL_42739
+if 
+  $279 == 162.0 
+jf @DSKOOL_42774 
+Object.PutAt($201[23], $282, $283, $284)
+
+:DSKOOL_42774
+if 
+  $247 == 4 
+jf @DSKOOL_42897 
+if 
+  $279 == 198.0 
+jf @DSKOOL_42827 
+Object.PutAt($201[21], $282, $283, $284)
+
+:DSKOOL_42827
+if 
+  $279 == 216.0 
+jf @DSKOOL_42862 
+Object.PutAt($201[22], $282, $283, $284)
+
+:DSKOOL_42862
+if 
+  $279 == 234.0 
+jf @DSKOOL_42897 
+Object.PutAt($201[23], $282, $283, $284)
+
+:DSKOOL_42897
+if or
+  $247 == 3 
+  $247 == 4 
+jf @DSKOOL_43048 
+if 
+  $279 == 180.0 
+jf @DSKOOL_42957 
+Object.PutAt($201[24], $282, $283, $284)
+
+:DSKOOL_42957
+$279 += 18.0 
+if 
+  $247 == 3 
+jf @DSKOOL_43020 
+if 
+  181.0 > $279 
+jf @DSKOOL_43013 
+jump @DSKOOL_42603 
+
+:DSKOOL_43013
+jump @DSKOOL_43048 
+
+:DSKOOL_43020
+if 
+  235.0 > $279 
+jf @DSKOOL_43048 
+jump @DSKOOL_42603 
+
+:DSKOOL_43048
+if 
+  $247 == 3 
+jf @DSKOOL_43670 
+035C: place_object $201[25] relative_to_car $198 with_offset 8.0 40.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset 8.0 32.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset 12.0 40.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset 12.0 32.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset 16.0 40.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset 16.0 32.0 -0.5 
+035C: place_object $201[31] relative_to_car $198 with_offset 20.0 40.0 -0.5 
+035C: place_object $201[32] relative_to_car $198 with_offset 20.0 33.0 -0.5 
+035C: place_object $201[33] relative_to_car $198 with_offset 24.0 40.0 -0.5 
+035C: place_object $201[34] relative_to_car $198 with_offset 24.0 33.0 -0.5 
+035C: place_object $201[35] relative_to_car $198 with_offset 28.0 40.0 -0.5 
+035C: place_object $201[36] relative_to_car $198 with_offset 28.0 34.0 -0.5 
+035C: place_object $201[37] relative_to_car $198 with_offset 32.0 40.0 -0.5 
+035C: place_object $201[38] relative_to_car $198 with_offset 32.0 34.0 -0.5 
+035C: place_object $201[39] relative_to_car $198 with_offset 36.0 39.0 -0.5 
+035C: place_object $201[40] relative_to_car $198 with_offset 36.0 35.0 -0.5 
+035C: place_object $201[41] relative_to_car $198 with_offset 40.0 39.0 -0.5 
+035C: place_object $201[42] relative_to_car $198 with_offset 40.0 35.0 -0.5 
+035C: place_object $201[43] relative_to_car $198 with_offset 44.0 39.0 -0.5 
+035C: place_object $201[44] relative_to_car $198 with_offset 44.0 35.0 -0.5 
+035C: place_object $201[45] relative_to_car $198 with_offset 44.0 37.0 -0.5 
+$200 = 25 
+
+:DSKOOL_43556
+if 
+  46 > $200 
+jf @DSKOOL_43670 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_43656 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_43656
+$200 += 1 
+jump @DSKOOL_43556 
+
+:DSKOOL_43670
+if 
+  $247 == 4 
+jf @DSKOOL_44292 
+035C: place_object $201[25] relative_to_car $198 with_offset -8.0 40.0 -0.5 
+035C: place_object $201[26] relative_to_car $198 with_offset -8.0 32.0 -0.5 
+035C: place_object $201[27] relative_to_car $198 with_offset -12.0 40.0 -0.5 
+035C: place_object $201[28] relative_to_car $198 with_offset -12.0 32.0 -0.5 
+035C: place_object $201[29] relative_to_car $198 with_offset -16.0 40.0 -0.5 
+035C: place_object $201[30] relative_to_car $198 with_offset -16.0 32.0 -0.5 
+035C: place_object $201[31] relative_to_car $198 with_offset -20.0 40.0 -0.5 
+035C: place_object $201[32] relative_to_car $198 with_offset -20.0 33.0 -0.5 
+035C: place_object $201[33] relative_to_car $198 with_offset -24.0 40.0 -0.5 
+035C: place_object $201[34] relative_to_car $198 with_offset -24.0 33.0 -0.5 
+035C: place_object $201[35] relative_to_car $198 with_offset -28.0 40.0 -0.5 
+035C: place_object $201[36] relative_to_car $198 with_offset -28.0 34.0 -0.5 
+035C: place_object $201[37] relative_to_car $198 with_offset -32.0 40.0 -0.5 
+035C: place_object $201[38] relative_to_car $198 with_offset -32.0 34.0 -0.5 
+035C: place_object $201[39] relative_to_car $198 with_offset -36.0 39.0 -0.5 
+035C: place_object $201[40] relative_to_car $198 with_offset -36.0 35.0 -0.5 
+035C: place_object $201[41] relative_to_car $198 with_offset -40.0 39.0 -0.5 
+035C: place_object $201[42] relative_to_car $198 with_offset -40.0 35.0 -0.5 
+035C: place_object $201[43] relative_to_car $198 with_offset -44.0 39.0 -0.5 
+035C: place_object $201[44] relative_to_car $198 with_offset -44.0 35.0 -0.5 
+035C: place_object $201[45] relative_to_car $198 with_offset -44.0 37.0 -0.5 
+$200 = 25 
+
+:DSKOOL_44178
+if 
+  46 > $200 
+jf @DSKOOL_44292 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_44278 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_44278
+$200 += 1 
+jump @DSKOOL_44178 
+
+:DSKOOL_44292
+if 
+  $247 == 8 
+jf @DSKOOL_44776 
+035C: place_object $201[0] relative_to_car $198 with_offset -8.0 20.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset -6.0 20.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset -4.0 20.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset -2.0 20.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset 0.0 20.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset 7.0 40.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset 5.0 40.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset 3.0 40.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset 1.0 40.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset -1.0 40.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset -8.0 60.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset -6.0 60.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset -4.0 60.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset -2.0 60.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset 0.0 60.0 -0.5 
+$200 = 0 
+
+:DSKOOL_44662
+if 
+  15 > $200 
+jf @DSKOOL_44776 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_44762 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_44762
+$200 += 1 
+jump @DSKOOL_44662 
+
+:DSKOOL_44776
+if 
+  $247 == 9 
+jf @DSKOOL_45260 
+035C: place_object $201[0] relative_to_car $198 with_offset 7.0 20.0 -0.5 
+035C: place_object $201[1] relative_to_car $198 with_offset 5.0 20.0 -0.5 
+035C: place_object $201[2] relative_to_car $198 with_offset 3.0 20.0 -0.5 
+035C: place_object $201[3] relative_to_car $198 with_offset 1.0 20.0 -0.5 
+035C: place_object $201[4] relative_to_car $198 with_offset -1.0 20.0 -0.5 
+035C: place_object $201[5] relative_to_car $198 with_offset -8.0 40.0 -0.5 
+035C: place_object $201[6] relative_to_car $198 with_offset -6.0 40.0 -0.5 
+035C: place_object $201[7] relative_to_car $198 with_offset -4.0 40.0 -0.5 
+035C: place_object $201[8] relative_to_car $198 with_offset -2.0 40.0 -0.5 
+035C: place_object $201[9] relative_to_car $198 with_offset 0.0 40.0 -0.5 
+035C: place_object $201[10] relative_to_car $198 with_offset 7.0 60.0 -0.5 
+035C: place_object $201[11] relative_to_car $198 with_offset 5.0 60.0 -0.5 
+035C: place_object $201[12] relative_to_car $198 with_offset 3.0 60.0 -0.5 
+035C: place_object $201[13] relative_to_car $198 with_offset 1.0 60.0 -0.5 
+035C: place_object $201[14] relative_to_car $198 with_offset -1.0 60.0 -0.5 
+$200 = 0 
+
+:DSKOOL_45146
+if 
+  15 > $200 
+jf @DSKOOL_45260 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_45246 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_45246
+$200 += 1 
+jump @DSKOOL_45146 
+
+:DSKOOL_45260
+if or
+  $247 == 8 
+  $247 == 9 
+jf @DSKOOL_45996 
+$285 = 8.0 
+$279 = 90.0 
+0407: store_coords_to $280 $281 $284 from_car $198 with_offset -0.5 81.0 -0.5 
+02CE: $284 = ground_z_at $280 $281 40.0 
+$284 += 0.4 
+
+:DSKOOL_45360
+02F6: $282 = sine $279 // (float) 
+0069: $282 *= $285 // (float) 
+0059: $282 += $280 // (float) 
+02F7: $283 = cosine $279 // (float) 
+0069: $283 *= $285 // (float) 
+0059: $283 += $281 // (float) 
+if 
+  $279 == 90.0 
+jf @DSKOOL_45443 
+Object.PutAt($201[23], $282, $283, $284)
+
+:DSKOOL_45443
+if 
+  $279 == 120.0 
+jf @DSKOOL_45478 
+Object.PutAt($201[24], $282, $283, $284)
+
+:DSKOOL_45478
+if 
+  $279 == 150.0 
+jf @DSKOOL_45513 
+Object.PutAt($201[25], $282, $283, $284)
+
+:DSKOOL_45513
+if 
+  $279 == 180.0 
+jf @DSKOOL_45548 
+Object.PutAt($201[26], $282, $283, $284)
+
+:DSKOOL_45548
+if 
+  $279 == 210.0 
+jf @DSKOOL_45583 
+Object.PutAt($201[27], $282, $283, $284)
+
+:DSKOOL_45583
+if 
+  $279 == 240.0 
+jf @DSKOOL_45618 
+Object.PutAt($201[28], $282, $283, $284)
+
+:DSKOOL_45618
+if 
+  $279 == 270.0 
+jf @DSKOOL_45653 
+Object.PutAt($201[29], $282, $283, $284)
+
+:DSKOOL_45653
+$279 += 30.0 
+if 
+  271.0 > $279 
+jf @DSKOOL_45691 
+jump @DSKOOL_45360 
+
+:DSKOOL_45691
+035C: place_object $201[15] relative_to_car $198 with_offset 0.0 80.0 -0.5 
+035C: place_object $201[16] relative_to_car $198 with_offset -3.0 4.0 -0.5 
+035C: place_object $201[17] relative_to_car $198 with_offset 3.0 4.0 -0.5 
+035C: place_object $201[18] relative_to_car $198 with_offset -3.0 0.0 -0.5 
+035C: place_object $201[19] relative_to_car $198 with_offset 3.0 0.0 -0.5 
+035C: place_object $201[20] relative_to_car $198 with_offset -3.0 -4.0 -0.5 
+035C: place_object $201[21] relative_to_car $198 with_offset 3.0 -4.0 -0.5 
+035C: place_object $201[22] relative_to_car $198 with_offset 0.0 -4.0 -0.5 
+$200 = 15 
+
+:DSKOOL_45882
+if 
+  23 > $200 
+jf @DSKOOL_45996 
+if 
+03CA:   object $201($200,46i) exists 
+jf @DSKOOL_45982 
+Object.StorePos($201($200,46i), $282, $283, $284)
+02CE: $284 = ground_z_at $282 $283 40.0 
+$284 += 0.4 
+Object.PutAt($201($200,46i), $282, $283, $284)
+
+:DSKOOL_45982
+$200 += 1 
+jump @DSKOOL_45882 
+
+:DSKOOL_45996
+return 
+
+:DSKOOL_45998
+if 
+  61@ == 1 
+jf @DSKOOL_46091 
+if 
+001D:   86@ > 62@ // (int) 
+jf @DSKOOL_46063 
+gosub @DSKOOL_46259 
+gosub @DSKOOL_46366 
+gosub @DSKOOL_46520 
+jump @DSKOOL_46091 
+
+:DSKOOL_46063
+if 
+   not Actor.Dead(91@)
+jf @DSKOOL_46084 
+0968: actor 91@ stop_mouth 
+
+:DSKOOL_46084
+61@ = 0 
+
+:DSKOOL_46091
+return 
+
+:DSKOOL_46093
+if 
+  61@ == 1 
+jf @DSKOOL_46228 
+05AA: 65@s = 'MEC_D1' // @s = 'short'  // ~z~Welcome to the Advanced Driving School.
+05AA: 67@s = 'MEC_D2' // @s = 'short'  // ~z~To pass you must score BRONZE or higher in all 12 tests.
+05AA: 69@s = 'MEC_D3' // @s = 'short'  // ~z~To view a demonstration of each test, please use the TV over there.
+05AA: 71@s = 'MEC_D4' // @s = 'short'  // ~z~Passing a test will unlock the next test in the training program.
+05AA: 73@s = 'MEC_D5' // @s = 'short'  // ~z~You can come back and check your scores or take new tests at any time.
+04AF: 79@ = 26002 // = constant 
+04AF: 80@ = 26003 // = constant 
+04AF: 81@ = 26004 // = constant 
+04AF: 82@ = 26005 // = constant 
+04AF: 83@ = 26006 // = constant 
+86@ = 5 
+
+:DSKOOL_46228
+0085: 89@ = 62@ // (int) 
+87@ = 0 
+88@ = 0 
+90@ = 1 
+return 
+
+:DSKOOL_46259
+if 
+001D:   86@ > 89@ // (int) 
+jf @DSKOOL_46364 
+if 
+  87@ == 0 
+jf @DSKOOL_46321 
+03CF: load_wav 79@(89@,7i) as 1 
+89@ += 1 
+87@ = 1 
+
+:DSKOOL_46321
+if 
+  88@ == 0 
+jf @DSKOOL_46364 
+03CF: load_wav 79@(89@,7i) as 2 
+89@ += 1 
+88@ = 1 
+
+:DSKOOL_46364
+return 
+
+:DSKOOL_46366
+if 
+  90@ == 1 
+jf @DSKOOL_46442 
+if 
+  87@ == 1 
+jf @DSKOOL_46442 
+if 
+03D0:   wav 1 loaded 
+jf @DSKOOL_46442 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 65@(62@,7s) time 4500 flag 1 
+87@ = 2 
+
+:DSKOOL_46442
+if 
+  90@ == 2 
+jf @DSKOOL_46518 
+if 
+  88@ == 1 
+jf @DSKOOL_46518 
+if 
+03D0:   wav 2 loaded 
+jf @DSKOOL_46518 
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 65@(62@,7s) time 4500 flag 1 
+88@ = 2 
+
+:DSKOOL_46518
+return 
+
+:DSKOOL_46520
+if 
+  87@ == 2 
+jf @DSKOOL_46583 
+if 
+03D2:   wav 1 ended 
+jf @DSKOOL_46583 
+03D5: remove_text 65@(62@,7s) 
+62@ += 1 
+90@ = 2 
+87@ = 0 
+
+:DSKOOL_46583
+if 
+  88@ == 2 
+jf @DSKOOL_46646 
+if 
+03D2:   wav 2 ended 
+jf @DSKOOL_46646 
+03D5: remove_text 65@(62@,7s) 
+62@ += 1 
+90@ = 1 
+88@ = 0 
+
+:DSKOOL_46646
+return

@@ -1,0 +1,5581 @@
+:BOAT
+thread 'BOAT' 
+gosub @BOAT_140 
+if 
+wasted_or_busted 
+jf @BOAT_45 
+$11033 = 0 
+gosub @BOAT_38379 
+
+:BOAT_45
+gosub @BOAT_38504 
+end_thread 
+
+:BOAT_54
+if 
+  13 > 156@ 
+jf @BOAT_140 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+106@(156@,50i) = Object.Init(#WATERJUMP1, 0.0, 0.0, 150.0)
+156@ += 1 
+jump @BOAT_54 
+
+:BOAT_140
+$ONMISSION = 1 
+wait 0 
+054C: use_GXT_table 'BOAT' 
+if 
+  $ONMISSION == 0 
+jf @BOAT_445 
+if 
+  36@ == 13 
+jf @BOAT_445 
+37@ = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+46@ = Car.Create(#CHEETAH, 5.0, 5.0, 10.0)
+47@ = Actor.Create(Mission1, #SPECIAL05, 20.0, 20.0, 20.0)
+39@ = Actor.Create(Mission1, #SPECIAL05, 30.0, 30.0, 20.0)
+42@ = Actor.Create(Mission1, #SPECIAL05, 30.0, 30.0, 20.0)
+43@ = Actor.Create(Mission1, #SPECIAL05, 30.0, 30.0, 20.0)
+40@ = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+41@ = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+45@ = Actor.Create(Mission1, #SPECIAL01, 30.0, 30.0, 20.0)
+44@ = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+156@ = 0 
+
+:BOAT_445
+08F8: display_stat_update_box 0 
+09B9: show_entered_car_name 0 
+09BA: show_entered_zone_name 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BOAT_480 
+0501: set_player $PLAYER_CHAR driveby_mode 0 
+
+:BOAT_480
+wait 0 
+249@ = 0 
+251@ = 0 
+34@ = 0 
+35@ = 0 
+248@ = 0 
+36@ = 0 
+$8189 = 1 
+182@ = -2215.58 
+183@ = 2391.7 
+184@ = 3.965 
+174@ = -2185.335 
+175@ = 2410.409 
+176@ = 3.9752 
+177@ = 122.2585 
+178@ = -2216.327 
+179@ = 2393.209 
+180@ = 3.9 
+181@ = 238.0 
+55@ = 0 
+158@ = 0 
+159@ = 0 
+160@ = 0 
+161@ = 0 
+162@ = 0 
+$8195 = 0 
+$8196 = 0 
+169@ = 0 
+232@ = 0 
+192@ = 0.0 
+193@ = 0.0 
+194@ = 0.0 
+212@ = 12000 
+213@ = 12000 
+214@ = 10500 
+215@ = 9700 
+216@ = 40000 
+217@ = 40000 
+218@ = 37000 
+219@ = 33000 
+220@ = 120000 
+221@ = 120000 
+222@ = 85000 
+223@ = 80000 
+224@ = 55 
+225@ = 55 
+226@ = 63 
+227@ = 67 
+228@ = 180000 
+229@ = 180000 
+230@ = 150000 
+231@ = 130000 
+0169: set_fade_color_RGB 0 0 0 
+wait 0 
+Model.Load(#OMOBOAT)
+Model.Load(#DINGHY)
+Model.Load(#POLMAV)
+Model.Load(#COASTG)
+Model.Load(#MARQUIS)
+Model.Load(#TROPIC)
+Model.Load(#VORTEX)
+038B: load_requested_models 
+
+:BOAT_972
+if or
+   not Model.Available(#OMOBOAT)
+   not Model.Available(#DINGHY)
+   not Model.Available(#POLMAV)
+   not Model.Available(#COASTG)
+jf @BOAT_1014 
+wait 0 
+jump @BOAT_972 
+
+:BOAT_1014
+if or
+   not Model.Available(#MARQUIS)
+   not Model.Available(#TROPIC)
+   not Model.Available(#VORTEX)
+jf @BOAT_1051 
+wait 0 
+jump @BOAT_1014 
+
+:BOAT_1051
+0390: load_txd_dictionary 'LD_DRV' 
+038F: load_texture "BRBOAT" as 10 // Load dictionary with 0390 first 
+038F: load_texture "SILBOAT" as 11 // Load dictionary with 0390 first 
+038F: load_texture "GOBOAT" as 3 // Load dictionary with 0390 first 
+038F: load_texture "RIBB" as 4 // Load dictionary with 0390 first 
+038F: load_texture "TVCORN" as 5 // Load dictionary with 0390 first 
+038F: load_texture "NAWARD" as 6 // Load dictionary with 0390 first 
+038F: load_texture "RIBBW" as 7 // Load dictionary with 0390 first 
+038F: load_texture "BLKDOT" as 8 // Load dictionary with 0390 first 
+038F: load_texture "TVBASE" as 9 // Load dictionary with 0390 first 
+$MISSION_RUNNING_DOG_FAILED = 1 
+if 
+  $8190 == 0 
+jf @BOAT_1792 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+Actor.PutAt($PLAYER_ACTOR, -2194.331, 2410.932, 3.96)
+Actor.Angle($PLAYER_ACTOR) = 90.0
+04D8: set_actor $PLAYER_ACTOR drowns_in_water 0 
+38@ = Actor.Create(Mission1, #OMOBOAT, -2197.395, 2411.092, 3.97)
+Actor.Angle(38@) = 270.0
+0568: set_actor 38@ untargetable 1 
+05BA: AS_actor 38@ move_mouth -2 ms 
+Camera.SetPosition(-2193.3, 2410.3, 5.56, 0.0, 0.0, 0.0)
+Camera.PointAt(-2196.5, 2410.6, 5.46, 2)
+0967: actor 38@ move_mouth 20000 ms 
+074D: AS_actor 38@ turns_to_and_look_at_actor $PLAYER_ACTOR timelimit -1 
+fade 1 500 
+
+:BOAT_1373
+if 
+fading 
+jf @BOAT_1397 
+wait 0 
+jump @BOAT_1373 
+
+:BOAT_1397
+03CF: load_wav 6201 as 1 
+03CF: load_wav 6202 as 2 
+gosub @BOAT_39254 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'OMO_1' time 4000 flag 1  // ~z~Welcome to the Boat School
+gosub @BOAT_39286 
+03D5: remove_text 'OMO_1'  // ~z~Welcome to the Boat School
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'OMO_2' time 4000 flag 1  // ~z~To pass you must achieve BRONZE or higher in all 5 tests.
+gosub @BOAT_39318 
+03D5: remove_text 'OMO_2'  // ~z~To pass you must achieve BRONZE or higher in all 5 tests.
+03CF: load_wav 6203 as 1 
+03CF: load_wav 6204 as 2 
+gosub @BOAT_39254 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'OMO_3' time 4000 flag 1  // ~z~To view a demonstration of each test, please use the TV over there.
+gosub @BOAT_39286 
+03D5: remove_text 'OMO_3'  // ~z~To view a demonstration of each test, please use the TV over there.
+03D1: play_wav 2 
+00BC: show_text_highpriority GXT 'OMO_4' time 4000 flag 1  // ~z~Passing a test will unlock the next test.
+gosub @BOAT_39318 
+03D5: remove_text 'OMO_4'  // ~z~Passing a test will unlock the next test.
+03CF: load_wav 6205 as 1 
+03CF: load_wav 6202 as 2 
+gosub @BOAT_39254 
+03D1: play_wav 1 
+00BC: show_text_highpriority GXT 'OMO_5' time 4000 flag 1  // ~z~You can come back and check your scores or take new tests at any time.
+gosub @BOAT_39286 
+03D5: remove_text 'OMO_5'  // ~z~You can come back and check your scores or take new tests at any time.
+0968: actor 38@ stop_mouth 
+00BE: text_clear_all 
+040D: unload_wav 1 
+040D: unload_wav 2 
+fade 0 500 
+
+:BOAT_1672
+if 
+fading 
+jf @BOAT_1696 
+wait 0 
+jump @BOAT_1672 
+
+:BOAT_1696
+00BE: text_clear_all 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+Actor.PutAt($PLAYER_ACTOR, 174@, 175@, 176@)
+Actor.Angle($PLAYER_ACTOR) = 177@
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+$8190 = 1 
+Actor.DestroyInstantly(38@)
+Actor.RemoveReferences(38@)
+fade 1 500 
+
+:BOAT_1766
+if 
+fading 
+jf @BOAT_1790 
+wait 0 
+jump @BOAT_1766 
+
+:BOAT_1790
+return 
+
+:BOAT_1792
+if 
+  $MISSION_BOAT_SCHOOL_PASSED == 0 
+jf @BOAT_1812 
+increment_mission_attempts 
+
+:BOAT_1812
+38@ = Actor.Create(Mission1, #OMOBOAT, 178@, 179@, 180@)
+Actor.Angle(38@) = 181@
+0568: set_actor 38@ untargetable 1 
+Actor.PutAt($PLAYER_ACTOR, 174@, 175@, 176@)
+Actor.Angle($PLAYER_ACTOR) = 177@
+0826: enable_hud 0 
+0581: enable_radar 0 
+03E6: remove_text_box 
+00BE: text_clear_all 
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 0 
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+gosub @BOAT_20452 
+$8191 = 0 
+$8192 = 0 
+03F0: enable_text_draw 1 
+$8194 = 255 
+$8193 = 2 
+if 
+  6 > $1962 
+jf @BOAT_1974 
+0084: $8189 = $1962 // (int) 
+
+:BOAT_1974
+gosub @BOAT_25797 
+0826: enable_hud 0 
+0581: enable_radar 0 
+select_interior 0 
+fade 1 500 
+
+:BOAT_2000
+if 
+fading 
+jf @BOAT_2024 
+wait 0 
+jump @BOAT_2000 
+
+:BOAT_2024
+wait 0 
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 0 
+gosub @BOAT_25797 
+if 
+  34@ == 0 
+jf @BOAT_2081 
+03CF: load_wav 3800 as 3 
+34@ = 1 
+
+:BOAT_2081
+if 
+  34@ == 1 
+jf @BOAT_2121 
+if 
+03D0:   wav 3 loaded 
+jf @BOAT_2121 
+34@ = 2 
+
+:BOAT_2121
+if 
+  34@ == 2 
+jf @BOAT_2150 
+03D1: play_wav 3 
+34@ = 3 
+
+:BOAT_2150
+set_weather 13 
+00C0: set_current_time_hours_to 12 minutes_to 50 
+097A: play_audio_at 0.0 0.0 0.0 event 1000 
+if 
+  $8192 == 0 
+jf @BOAT_2712 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if or
+  -100 > $MOVE_AXIS_X 
+00E1:   player 0 pressed_key 10 
+jf @BOAT_2288 
+if 
+  $1962 > 1 
+jf @BOAT_2288 
+$8189 -= 1 
+if 
+  4 > $8191 
+jf @BOAT_2288 
+$8191 = 3 
+
+:BOAT_2288
+if or
+  $MOVE_AXIS_X > 100 
+00E1:   player 0 pressed_key 11 
+jf @BOAT_2362 
+if 
+  $1962 > 1 
+jf @BOAT_2362 
+$8189 += 1 
+if 
+  4 > $8191 
+jf @BOAT_2362 
+$8191 = 3 
+
+:BOAT_2362
+if 
+  1 > $8189 
+jf @BOAT_2388 
+0084: $8189 = $1962 // (int) 
+
+:BOAT_2388
+if 
+001C:   $8189 > $1962 // (int) 
+jf @BOAT_2414 
+$8189 = 1 
+
+:BOAT_2414
+if 
+  $1962 > 1 
+jf @BOAT_2606 
+
+:BOAT_2432
+if 
+  -100 > $MOVE_AXIS_X 
+jf @BOAT_2484 
+wait 0 
+gosub @BOAT_25797 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @BOAT_2432 
+
+:BOAT_2484
+if 
+  $MOVE_AXIS_X > 100 
+jf @BOAT_2536 
+wait 0 
+gosub @BOAT_25797 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+jump @BOAT_2484 
+
+:BOAT_2536
+if 
+00E1:   player 0 pressed_key 10 
+jf @BOAT_2571 
+wait 0 
+gosub @BOAT_25797 
+jump @BOAT_2536 
+
+:BOAT_2571
+if 
+00E1:   player 0 pressed_key 11 
+jf @BOAT_2606 
+wait 0 
+gosub @BOAT_25797 
+jump @BOAT_2571 
+
+:BOAT_2606
+if 
+00E1:   player 0 pressed_key 16 
+jf @BOAT_2666 
+if 
+  4 > $8191 
+jf @BOAT_2648 
+$8191 = 3 
+
+:BOAT_2648
+040D: unload_wav 3 
+34@ = 0 
+jump @BOAT_2726 
+
+:BOAT_2666
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @BOAT_2688 
+$1962 = 5 
+
+:BOAT_2688
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_2712 
+jump @BOAT_38379 
+
+:BOAT_2712
+gosub @BOAT_32875 
+jump @BOAT_2024 
+
+:BOAT_2726
+fade 0 500 
+
+:BOAT_2733
+if 
+fading 
+jf @BOAT_2764 
+wait 0 
+gosub @BOAT_25797 
+jump @BOAT_2733 
+
+:BOAT_2764
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_2785 
+05EC: release_car 37@ from_path 
+
+:BOAT_2785
+Camera.Restore_WithJumpCut
+Car.Destroy(37@)
+Car.Destroy(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(39@)
+gosub @BOAT_38313 
+$8191 = 5 
+0826: enable_hud 1 
+0581: enable_radar 1 
+if 
+  $8189 == 1 
+jf @BOAT_4407 
+
+:BOAT_2847
+gosub @BOAT_34708 
+
+:BOAT_2854
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 1 
+gosub @BOAT_20452 
+46@ = Car.Create(#POLMAV, -3303.627, 2105.29, 200.0)
+Actor.DestroyInstantly(47@)
+47@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 46@)
+248@ = 0 
+0687: clear_actor 47@ task 
+0825: set_helicopter 46@ instant_rotor_start 
+Car.SetMaxSpeed(46@, 250.0)
+04A2: set_heli 46@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+37@ = Car.Create(#COASTG, -2323.627, 2105.29, 0.0)
+0229: set_car 37@ primary_color_to 1 secondary_color_to 114 
+Car.Angle(37@) = 90.0
+39@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 37@)
+gosub @BOAT_34885 
+if 
+  $8191 == 0 
+jf @BOAT_3085 
+067A: put_camera_on_car 46@ with_offset 10.0 10.0 0.0 point_to_car 37@ tilt 0.0 switchstyle 2 
+return 
+
+:BOAT_3085
+gosub @BOAT_34293 
+03E5: show_text_box 'BOAT_H2'  // Press ~k~~VEHICLE_ENTER_EXIT~ to quit test.
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+53@ = Marker.CreateAboveObject(62@)
+54@ = Marker.CreateAboveObject(63@)
+Marker.SetColor(52@, 4)
+Marker.SetColor(51@, 4)
+Marker.SetColor(53@, 4)
+Marker.SetColor(54@, 4)
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_3241 
+Car.StorePos(37@, 185@, 186@, 187@)
+0087: 192@ = 185@ // (float) 
+192@ -= 195.0 
+0087: 193@ = 186@ // (float) 
+0087: 194@ = 187@ // (float) 
+
+:BOAT_3241
+wait 0 
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_3335 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_3335 
+Car.StorePos(37@, 185@, 186@, 187@)
+185@ -= 150.0 
+186@ -= 150.0 
+04A2: set_heli 46@ fly_to 185@ 186@ 187@ altitude_between 120.0 and 120.0 
+
+:BOAT_3335
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_3366 
+164@ = 2 
+jump @BOAT_4347 
+
+:BOAT_3366
+gosub @BOAT_21007 
+if 
+  164@ == 1 
+jf @BOAT_3398 
+jump @BOAT_38379 
+
+:BOAT_3398
+if 
+  158@ == 0 
+jf @BOAT_3575 
+00BC: show_text_highpriority GXT 'BOAT_A4' time 5000 flag 1  // ~s~Hold ~k~~VEHICLE_ACCELERATE~ to throttle forward and bring the boat to rest within the parallel ~y~buoys~s~ region.
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_3456 
+250@ = Car.Health(37@)
+
+:BOAT_3456
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BOAT_3575 
+0971: sync_water 
+0085: 211@ = 215@ // (int) 
+0085: 210@ = 214@ // (int) 
+0085: 209@ = 213@ // (int) 
+158@ = 1 
+$8197 = 0 
+014F: stop_timer $8197 
+03C3: set_timer_to $8197 type 0 GXT 'BOAT_T1' // global_variable  // time
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+32@ = 0 
+
+:BOAT_3575
+if 
+  158@ == 1 
+jf @BOAT_3871 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_3825 
+02E3: 49@ = car 37@ speed 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle -30.0 sphere 0 in_car 
+jf @BOAT_3714 
+00BC: show_text_highpriority GXT 'BOAT_32' time 4000 flag 1  // ~s~In stopping region
+if 
+  7.0 > 49@ 
+jf @BOAT_3714 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BOAT_33' time 4000 flag 1  // ~s~Finished!
+158@ = 99 
+
+:BOAT_3714
+if 
+  32@ > 4500 
+jf @BOAT_3770 
+if 
+85F8:   not actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle -30.0 sphere 0 in_car 
+jf @BOAT_3770 
+00BE: text_clear_all 
+
+:BOAT_3770
+if 
+  248@ == 0 
+jf @BOAT_3825 
+if 
+  32@ > 4500 
+jf @BOAT_3825 
+248@ = 1 
+03E5: show_text_box 'BOAT_A5'  // ~s~Hold ~k~~VEHICLE_BRAKE~ to apply reverse throttle.
+
+:BOAT_3825
+if 
+  $8197 > 60000 
+jf @BOAT_3871 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BOAT_34' time 4000 flag 1  // ~r~Time over!
+158@ = 99 
+
+:BOAT_3871
+if 
+  158@ == 99 
+jf @BOAT_4400 
+gosub @BOAT_20748 
+gosub @BOAT_21083 
+if 
+001E:   $1963 > 168@ // (int) 
+jf @BOAT_4109 
+008B: 169@ = $1963 // (int) 
+008A: $1963 = 168@ // (int) 
+167@ = 1 
+gosub @BOAT_21855 
+if 
+  $8195 == 4 
+jf @BOAT_4009 
+if 
+  $1972 == 0 
+jf @BOAT_4009 
+$1972 = 1 
+$1971 = 1 
+$1970 = 1 
+
+:BOAT_4009
+if 
+  $8195 == 3 
+jf @BOAT_4059 
+if 
+  $1971 == 0 
+jf @BOAT_4059 
+$1971 = 1 
+$1970 = 1 
+
+:BOAT_4059
+if 
+  $8195 == 2 
+jf @BOAT_4102 
+if 
+  $1970 == 0 
+jf @BOAT_4102 
+$1970 = 1 
+
+:BOAT_4102
+jump @BOAT_4116 
+
+:BOAT_4109
+$8195 = 0 
+
+:BOAT_4116
+if 
+  $1962 == 1 
+jf @BOAT_4194 
+if 
+001D:   212@ > 168@ // (int) 
+jf @BOAT_4194 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1097 
+167@ = 2 
+$1962 = 2 
+164@ = 2 
+
+:BOAT_4194
+32@ = 0 
+
+:BOAT_4201
+if 
+  32@ > -1 
+jf @BOAT_4347 
+wait 0 
+gosub @BOAT_21426 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_4281 
+164@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_4347 
+
+:BOAT_4281
+gosub @BOAT_22386 
+gosub @BOAT_20665 
+if 
+  165@ == 1 
+jf @BOAT_4340 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_4347 
+
+:BOAT_4340
+jump @BOAT_4201 
+
+:BOAT_4347
+gosub @BOAT_25533 
+gosub @BOAT_38313 
+if 
+  164@ == 2 
+jf @BOAT_4393 
+jump @BOAT_1792 
+jump @BOAT_4400 
+
+:BOAT_4393
+jump @BOAT_2847 
+
+:BOAT_4400
+jump @BOAT_3241 
+
+:BOAT_4407
+if 
+  $8189 == 2 
+jf @BOAT_7120 
+
+:BOAT_4425
+gosub @BOAT_34708 
+
+:BOAT_4432
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 1 
+gosub @BOAT_20452 
+46@ = Car.Create(#POLMAV, -2303.627, 2105.29, 200.0)
+Actor.DestroyInstantly(47@)
+47@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 46@)
+0687: clear_actor 47@ task 
+0825: set_helicopter 46@ instant_rotor_start 
+Car.SetMaxSpeed(46@, 250.0)
+04A2: set_heli 46@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+37@ = Car.Create(#COASTG, -2578.671, 2050.845, 0.0)
+0229: set_car 37@ primary_color_to 1 secondary_color_to 114 
+Car.Angle(37@) = 0.0
+39@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 37@)
+gosub @BOAT_34885 
+if 
+  $8191 == 0 
+jf @BOAT_4656 
+067A: put_camera_on_car 46@ with_offset 10.0 10.0 0.0 point_to_car 37@ tilt 0.0 switchstyle 2 
+return 
+
+:BOAT_4656
+gosub @BOAT_34293 
+03E5: show_text_box 'BOAT_H2'  // Press ~k~~VEHICLE_ENTER_EXIT~ to quit test.
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_4799 
+Car.StorePos(37@, 185@, 186@, 187@)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(56@)
+Marker.SetColor(52@, 4)
+51@ = Marker.CreateAboveObject(57@)
+Marker.SetColor(51@, 4)
+53@ = Marker.CreateAboveObject(58@)
+54@ = Marker.CreateAboveObject(59@)
+gosub @BOAT_34841 
+
+:BOAT_4799
+wait 0 
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_4893 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_4893 
+Car.StorePos(37@, 185@, 186@, 187@)
+185@ -= 150.0 
+186@ -= 150.0 
+04A2: set_heli 46@ fly_to 185@ 186@ 187@ altitude_between 200.0 and 200.0 
+
+:BOAT_4893
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_4924 
+164@ = 2 
+jump @BOAT_7060 
+
+:BOAT_4924
+gosub @BOAT_21007 
+if 
+  164@ == 1 
+jf @BOAT_4956 
+jump @BOAT_38379 
+
+:BOAT_4956
+if 
+  159@ == 0 
+jf @BOAT_5074 
+00BC: show_text_highpriority GXT 'BOAT_B4' time 4000 flag 1  // ~s~Navigate through each pair of ~y~buoys~s~. Throttle with ~k~~VEHICLE_ACCELERATE~ and use ~k~~VEHICLE_STEERLEFT~ and ~k~~VEHICLE_STEERRIGHT~ to steer.
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BOAT_5074 
+0971: sync_water 
+0085: 211@ = 219@ // (int) 
+0085: 210@ = 218@ // (int) 
+0085: 209@ = 217@ // (int) 
+159@ = 5 
+$8197 = 0 
+014F: stop_timer $8197 
+03C3: set_timer_to $8197 type 0 GXT 'BOAT_T1' // global_variable  // time
+
+:BOAT_5074
+if 
+  159@ > 0 
+jf @BOAT_5120 
+if 
+  $8197 > 600000 
+jf @BOAT_5120 
+159@ = 99 
+
+:BOAT_5120
+if 
+  159@ == 5 
+jf @BOAT_5326 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_5326 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_5326 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+03E6: remove_text_box 
+03E5: show_text_box 'BOAT_B5'  // ~s~Hold ~k~~VEHICLE_HANDBRAKE~ to perform a sharper turn.
+159@ = 10 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(58@, 198@, 199@, 200@)
+Object.StorePos(59@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(58@)
+51@ = Marker.CreateAboveObject(59@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(60@)
+54@ = Marker.CreateAboveObject(61@)
+gosub @BOAT_34841 
+
+:BOAT_5326
+if 
+  159@ == 10 
+jf @BOAT_5519 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_5519 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_5519 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 15 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(60@, 198@, 199@, 200@)
+Object.StorePos(61@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(60@)
+51@ = Marker.CreateAboveObject(61@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(62@)
+54@ = Marker.CreateAboveObject(63@)
+gosub @BOAT_34841 
+
+:BOAT_5519
+if 
+  159@ == 15 
+jf @BOAT_5712 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_5712 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_5712 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 20 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(62@, 198@, 199@, 200@)
+Object.StorePos(63@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(62@)
+51@ = Marker.CreateAboveObject(63@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(64@)
+54@ = Marker.CreateAboveObject(65@)
+gosub @BOAT_34841 
+
+:BOAT_5712
+if 
+  159@ == 20 
+jf @BOAT_5905 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_5905 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_5905 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 25 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(64@, 198@, 199@, 200@)
+Object.StorePos(65@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(64@)
+51@ = Marker.CreateAboveObject(65@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(66@)
+54@ = Marker.CreateAboveObject(67@)
+gosub @BOAT_34841 
+
+:BOAT_5905
+if 
+  159@ == 25 
+jf @BOAT_6098 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_6098 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_6098 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 30 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(66@, 198@, 199@, 200@)
+Object.StorePos(67@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(66@)
+51@ = Marker.CreateAboveObject(67@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(68@)
+54@ = Marker.CreateAboveObject(69@)
+gosub @BOAT_34841 
+
+:BOAT_6098
+if 
+  159@ == 30 
+jf @BOAT_6291 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_6291 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_6291 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 35 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(68@, 198@, 199@, 200@)
+Object.StorePos(69@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(68@)
+51@ = Marker.CreateAboveObject(69@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(70@)
+54@ = Marker.CreateAboveObject(71@)
+gosub @BOAT_34841 
+
+:BOAT_6291
+if 
+  159@ == 35 
+jf @BOAT_6468 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_6468 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_6468 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+159@ = 40 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(70@, 198@, 199@, 200@)
+Object.StorePos(71@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(70@)
+51@ = Marker.CreateAboveObject(71@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+gosub @BOAT_34841 
+
+:BOAT_6468
+if 
+  159@ == 40 
+jf @BOAT_6584 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_6584 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_6584 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_33' time 1000 flag 1  // ~s~Finished!
+159@ = 99 
+Marker.Disable(52@)
+Marker.Disable(51@)
+
+:BOAT_6584
+if 
+  159@ == 99 
+jf @BOAT_7113 
+gosub @BOAT_20748 
+gosub @BOAT_21083 
+if 
+001E:   $1964 > 168@ // (int) 
+jf @BOAT_6822 
+008B: 169@ = $1964 // (int) 
+008A: $1964 = 168@ // (int) 
+167@ = 1 
+gosub @BOAT_21855 
+if 
+  $8195 == 4 
+jf @BOAT_6722 
+if 
+  $1975 == 0 
+jf @BOAT_6722 
+$1975 = 1 
+$1974 = 1 
+$1973 = 1 
+
+:BOAT_6722
+if 
+  $8195 == 3 
+jf @BOAT_6772 
+if 
+  $1974 == 0 
+jf @BOAT_6772 
+$1974 = 1 
+$1973 = 1 
+
+:BOAT_6772
+if 
+  $8195 == 2 
+jf @BOAT_6815 
+if 
+  $1973 == 0 
+jf @BOAT_6815 
+$1973 = 1 
+
+:BOAT_6815
+jump @BOAT_6829 
+
+:BOAT_6822
+$8195 = 0 
+
+:BOAT_6829
+if 
+  $1962 == 2 
+jf @BOAT_6907 
+if 
+001D:   216@ > 168@ // (int) 
+jf @BOAT_6907 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1097 
+167@ = 2 
+$1962 = 3 
+164@ = 2 
+
+:BOAT_6907
+32@ = 0 
+
+:BOAT_6914
+if 
+  32@ > -1 
+jf @BOAT_7060 
+wait 0 
+gosub @BOAT_21426 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_6994 
+164@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_7060 
+
+:BOAT_6994
+gosub @BOAT_22386 
+gosub @BOAT_20665 
+if 
+  165@ == 1 
+jf @BOAT_7053 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_7060 
+
+:BOAT_7053
+jump @BOAT_6914 
+
+:BOAT_7060
+gosub @BOAT_25533 
+gosub @BOAT_38313 
+if 
+  164@ == 2 
+jf @BOAT_7106 
+jump @BOAT_1792 
+jump @BOAT_7113 
+
+:BOAT_7106
+jump @BOAT_4425 
+
+:BOAT_7113
+jump @BOAT_4799 
+
+:BOAT_7120
+if 
+  $8189 == 3 
+jf @BOAT_11537 
+
+:BOAT_7138
+gosub @BOAT_34708 
+
+:BOAT_7145
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 1 
+gosub @BOAT_20452 
+46@ = Car.Create(#POLMAV, -2303.627, 2105.29, 200.0)
+Actor.DestroyInstantly(47@)
+47@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 46@)
+0687: clear_actor 47@ task 
+0825: set_helicopter 46@ instant_rotor_start 
+Car.SetMaxSpeed(46@, 250.0)
+04A2: set_heli 46@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+37@ = Car.Create(#DINGHY, -2124.125, 2438.352, 0.0)
+0229: set_car 37@ primary_color_to 114 secondary_color_to 1 
+Car.Angle(37@) = 180.0
+39@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 37@)
+gosub @BOAT_34885 
+if 
+  $8191 == 0 
+jf @BOAT_7369 
+067A: put_camera_on_car 46@ with_offset 10.0 10.0 0.0 point_to_car 37@ tilt 0.0 switchstyle 2 
+return 
+
+:BOAT_7369
+gosub @BOAT_34293 
+03E5: show_text_box 'BOAT_H2'  // Press ~k~~VEHICLE_ENTER_EXIT~ to quit test.
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_7512 
+Car.StorePos(37@, 185@, 186@, 187@)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+Marker.SetColor(52@, 4)
+Marker.SetColor(51@, 4)
+53@ = Marker.CreateAboveObject(58@)
+54@ = Marker.CreateAboveObject(59@)
+gosub @BOAT_34841 
+
+:BOAT_7512
+35@ = 0 
+
+:BOAT_7519
+wait 0 
+if 
+  35@ == 0 
+jf @BOAT_7555 
+03CF: load_wav 6200 as 3 
+35@ = 1 
+
+:BOAT_7555
+if 
+  35@ == 1 
+jf @BOAT_7595 
+if 
+03D0:   wav 3 loaded 
+jf @BOAT_7595 
+35@ = 2 
+
+:BOAT_7595
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_7685 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_7685 
+Car.StorePos(37@, 185@, 186@, 187@)
+185@ -= 150.0 
+186@ -= 150.0 
+04A2: set_heli 46@ fly_to 185@ 186@ 187@ altitude_between 200.0 and 200.0 
+
+:BOAT_7685
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_7716 
+164@ = 2 
+jump @BOAT_11477 
+
+:BOAT_7716
+gosub @BOAT_21007 
+if 
+  164@ == 1 
+jf @BOAT_7748 
+jump @BOAT_38379 
+
+:BOAT_7748
+if 
+  160@ == 0 
+jf @BOAT_7882 
+00BC: show_text_highpriority GXT 'BOAT_C1' time 4000 flag 1  // ~s~Navigate through the center of each pair of ~y~buoys~s~ in as quick a time as possible.
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BOAT_7882 
+0971: sync_water 
+0085: 211@ = 223@ // (int) 
+0085: 210@ = 222@ // (int) 
+0085: 209@ = 221@ // (int) 
+097A: play_audio_at 198@ 199@ 200@ event 65535 
+160@ = 5 
+$8197 = 0 
+014F: stop_timer $8197 
+03C3: set_timer_to $8197 type 0 GXT 'BOAT_T1' // global_variable  // time
+
+:BOAT_7882
+if 
+  160@ > 0 
+jf @BOAT_7928 
+if 
+  $8197 > 600000 
+jf @BOAT_7928 
+160@ = 99 
+
+:BOAT_7928
+if 
+  160@ == 5 
+jf @BOAT_8121 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_8121 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_8121 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 10 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(58@, 198@, 199@, 200@)
+Object.StorePos(59@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(58@)
+51@ = Marker.CreateAboveObject(59@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(60@)
+54@ = Marker.CreateAboveObject(61@)
+gosub @BOAT_34841 
+
+:BOAT_8121
+if 
+  160@ == 10 
+jf @BOAT_8314 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_8314 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_8314 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 15 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(60@, 198@, 199@, 200@)
+Object.StorePos(61@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(60@)
+51@ = Marker.CreateAboveObject(61@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(62@)
+54@ = Marker.CreateAboveObject(63@)
+gosub @BOAT_34841 
+
+:BOAT_8314
+if 
+  160@ == 15 
+jf @BOAT_8595 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_8595 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_8595 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 20 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(62@, 198@, 199@, 200@)
+Object.StorePos(63@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(62@)
+51@ = Marker.CreateAboveObject(63@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(64@)
+54@ = Marker.CreateAboveObject(65@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(44@)
+jf @BOAT_8595 
+if 
+   not Actor.Dead(45@)
+jf @BOAT_8595 
+if 
+  35@ == 2 
+jf @BOAT_8561 
+03D1: play_wav 3 
+
+:BOAT_8561
+05D1: AS_actor 45@ drive_car 44@ to -2013.476 1748.499 0.0 speed 18.0 2 model #NULL 3 
+
+:BOAT_8595
+if 
+  160@ == 20 
+jf @BOAT_8788 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_8788 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_8788 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 25 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(64@, 198@, 199@, 200@)
+Object.StorePos(65@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(64@)
+51@ = Marker.CreateAboveObject(65@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(66@)
+54@ = Marker.CreateAboveObject(67@)
+gosub @BOAT_34841 
+
+:BOAT_8788
+if 
+  160@ == 25 
+jf @BOAT_8981 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_8981 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_8981 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 30 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(66@, 198@, 199@, 200@)
+Object.StorePos(67@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(66@)
+51@ = Marker.CreateAboveObject(67@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(68@)
+54@ = Marker.CreateAboveObject(69@)
+gosub @BOAT_34841 
+
+:BOAT_8981
+if 
+  160@ == 30 
+jf @BOAT_9174 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_9174 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_9174 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 35 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(68@, 198@, 199@, 200@)
+Object.StorePos(69@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(68@)
+51@ = Marker.CreateAboveObject(69@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(70@)
+54@ = Marker.CreateAboveObject(71@)
+gosub @BOAT_34841 
+
+:BOAT_9174
+if 
+  160@ == 35 
+jf @BOAT_9367 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_9367 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_9367 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 40 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(70@, 198@, 199@, 200@)
+Object.StorePos(71@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(70@)
+51@ = Marker.CreateAboveObject(71@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(72@)
+54@ = Marker.CreateAboveObject(73@)
+gosub @BOAT_34841 
+
+:BOAT_9367
+if 
+  160@ == 40 
+jf @BOAT_9560 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_9560 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_9560 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 45 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(72@, 198@, 199@, 200@)
+Object.StorePos(73@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(72@)
+51@ = Marker.CreateAboveObject(73@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(74@)
+54@ = Marker.CreateAboveObject(75@)
+gosub @BOAT_34841 
+
+:BOAT_9560
+if 
+  160@ == 45 
+jf @BOAT_9753 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_9753 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_9753 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 50 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(74@, 198@, 199@, 200@)
+Object.StorePos(75@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(74@)
+51@ = Marker.CreateAboveObject(75@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(76@)
+54@ = Marker.CreateAboveObject(77@)
+gosub @BOAT_34841 
+
+:BOAT_9753
+if 
+  160@ == 50 
+jf @BOAT_9946 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_9946 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_9946 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 55 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(76@, 198@, 199@, 200@)
+Object.StorePos(77@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(76@)
+51@ = Marker.CreateAboveObject(77@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(78@)
+54@ = Marker.CreateAboveObject(79@)
+gosub @BOAT_34841 
+
+:BOAT_9946
+if 
+  160@ == 55 
+jf @BOAT_10139 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_10139 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_10139 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 60 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(78@, 198@, 199@, 200@)
+Object.StorePos(79@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(78@)
+51@ = Marker.CreateAboveObject(79@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(80@)
+54@ = Marker.CreateAboveObject(81@)
+gosub @BOAT_34841 
+
+:BOAT_10139
+if 
+  160@ == 60 
+jf @BOAT_10420 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_10420 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_10420 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 65 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(80@, 198@, 199@, 200@)
+Object.StorePos(81@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(80@)
+51@ = Marker.CreateAboveObject(81@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(82@)
+54@ = Marker.CreateAboveObject(83@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(41@)
+jf @BOAT_10420 
+if 
+   not Actor.Dead(43@)
+jf @BOAT_10420 
+if 
+  35@ == 2 
+jf @BOAT_10386 
+03D1: play_wav 3 
+
+:BOAT_10386
+05D1: AS_actor 43@ drive_car 41@ to -2763.105 1954.129 0.0 speed 10.0 2 model #NULL 3 
+
+:BOAT_10420
+if 
+  160@ == 65 
+jf @BOAT_10701 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_10701 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_10701 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 70 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(82@, 198@, 199@, 200@)
+Object.StorePos(83@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(82@)
+51@ = Marker.CreateAboveObject(83@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(56@)
+54@ = Marker.CreateAboveObject(57@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_10701 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_10701 
+if 
+  35@ == 2 
+jf @BOAT_10667 
+03D1: play_wav 3 
+
+:BOAT_10667
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_10701
+if 
+  160@ == 70 
+jf @BOAT_10885 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_10885 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_10885 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+160@ = 80 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+Marker.SetColor(52@, 4)
+Marker.SetColor(51@, 4)
+Marker.Disable(53@)
+Marker.Disable(54@)
+
+:BOAT_10885
+if 
+  160@ == 80 
+jf @BOAT_11001 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_11001 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_11001 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_33' time 1000 flag 1  // ~s~Finished!
+160@ = 99 
+Marker.Disable(52@)
+Marker.Disable(51@)
+
+:BOAT_11001
+if 
+  160@ == 99 
+jf @BOAT_11530 
+gosub @BOAT_20748 
+gosub @BOAT_21083 
+if 
+001E:   $1965 > 168@ // (int) 
+jf @BOAT_11239 
+008B: 169@ = $1965 // (int) 
+008A: $1965 = 168@ // (int) 
+167@ = 1 
+gosub @BOAT_21855 
+if 
+  $8195 == 4 
+jf @BOAT_11139 
+if 
+  $1978 == 0 
+jf @BOAT_11139 
+$1978 = 1 
+$1977 = 1 
+$1976 = 1 
+
+:BOAT_11139
+if 
+  $8195 == 3 
+jf @BOAT_11189 
+if 
+  $1977 == 0 
+jf @BOAT_11189 
+$1977 = 1 
+$1976 = 1 
+
+:BOAT_11189
+if 
+  $8195 == 2 
+jf @BOAT_11232 
+if 
+  $1976 == 0 
+jf @BOAT_11232 
+$1976 = 1 
+
+:BOAT_11232
+jump @BOAT_11246 
+
+:BOAT_11239
+$8195 = 0 
+
+:BOAT_11246
+if 
+  $1962 == 3 
+jf @BOAT_11324 
+if 
+001D:   220@ > 168@ // (int) 
+jf @BOAT_11324 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1097 
+167@ = 2 
+$1962 = 4 
+164@ = 2 
+
+:BOAT_11324
+32@ = 0 
+
+:BOAT_11331
+if 
+  32@ > -1 
+jf @BOAT_11477 
+wait 0 
+gosub @BOAT_21426 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_11411 
+164@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_11477 
+
+:BOAT_11411
+gosub @BOAT_22386 
+gosub @BOAT_20665 
+if 
+  165@ == 1 
+jf @BOAT_11470 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_11477 
+
+:BOAT_11470
+jump @BOAT_11331 
+
+:BOAT_11477
+gosub @BOAT_25533 
+gosub @BOAT_38313 
+if 
+  164@ == 2 
+jf @BOAT_11523 
+jump @BOAT_1792 
+jump @BOAT_11530 
+
+:BOAT_11523
+jump @BOAT_7138 
+
+:BOAT_11530
+jump @BOAT_7519 
+
+:BOAT_11537
+if 
+  $8189 == 4 
+jf @BOAT_13431 
+
+:BOAT_11555
+gosub @BOAT_34708 
+
+:BOAT_11562
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 1 
+gosub @BOAT_20452 
+46@ = Car.Create(#POLMAV, -3303.627, 2105.29, 200.0)
+Actor.DestroyInstantly(47@)
+47@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 46@)
+0687: clear_actor 47@ task 
+0825: set_helicopter 46@ instant_rotor_start 
+Car.SetMaxSpeed(46@, 250.0)
+04A2: set_heli 46@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+37@ = Car.Create(#VORTEX, -2584.316, 2213.475, 0.0)
+0229: set_car 37@ primary_color_to 78 secondary_color_to 14 
+Car.Angle(37@) = 250.0
+39@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 37@)
+gosub @BOAT_34885 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_11782 
+Car.PutAt(37@, -2318.049, 2312.302, 10.0)
+Car.Angle(37@) = 174.6078
+
+:BOAT_11782
+if 
+  $8191 == 0 
+jf @BOAT_11832 
+067A: put_camera_on_car 46@ with_offset 10.0 10.0 0.0 point_to_car 37@ tilt 0.0 switchstyle 2 
+return 
+
+:BOAT_11832
+gosub @BOAT_34293 
+03E5: show_text_box 'BOAT_H2'  // Press ~k~~VEHICLE_ENTER_EXIT~ to quit test.
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_11940 
+192@ = 0.0 
+193@ = 0.0 
+194@ = 0.0 
+201@ = 0.0 
+202@ = 0.0 
+203@ = 0.0 
+
+:BOAT_11940
+wait 0 
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_12034 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_12034 
+Car.StorePos(37@, 185@, 186@, 187@)
+185@ -= 150.0 
+186@ -= 150.0 
+04A2: set_heli 46@ fly_to 185@ 186@ 187@ altitude_between 120.0 and 120.0 
+
+:BOAT_12034
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_12065 
+164@ = 2 
+jump @BOAT_13371 
+
+:BOAT_12065
+gosub @BOAT_21007 
+if 
+  164@ == 1 
+jf @BOAT_12097 
+jump @BOAT_38379 
+
+:BOAT_12097
+if 
+  161@ == 0 
+jf @BOAT_12302 
+00BC: show_text_highpriority GXT 'BOAT_D1' time 4000 flag 1  // ~s~ Power towards the jump ramp and land within the parallel ~y~buoys~s~ to register a valid jump.
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BOAT_12302 
+0971: sync_water 
+0085: 211@ = 227@ // (int) 
+0085: 210@ = 226@ // (int) 
+0085: 209@ = 225@ // (int) 
+014F: stop_timer $8197 
+$8197 = 46000 
+161@ = 1 
+03C3: set_timer_to $8197 type 1 GXT 'BOAT_T1' // global_variable  // time
+Marker.Disable(52@)
+Marker.Disable(51@)
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+Marker.SetColor(52@, 4)
+Marker.SetColor(51@, 4)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+097A: play_audio_at 198@ 199@ 200@ event 65535 
+
+:BOAT_12302
+if 
+  161@ == 1 
+jf @BOAT_12455 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_12455 
+if 
+05FE:   actor $PLAYER_ACTOR in_cube_fll_corner_at 198@ 199@ 1.0 fur_corner_at 195@ 196@ 3.0 depth 10.0 flag 0 in_car 
+jf @BOAT_12455 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+Marker.Disable(52@)
+Marker.Disable(51@)
+02E3: 49@ = car 37@ speed 
+161@ = 2 
+Object.StorePos(58@, 198@, 199@, 200@)
+Object.StorePos(59@, 195@, 196@, 197@)
+33@ = 0 
+
+:BOAT_12455
+if 
+  161@ == 2 
+jf @BOAT_12655 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_12655 
+if 
+  33@ > 1000 
+jf @BOAT_12655 
+Car.StorePos(37@, 192@, 193@, 194@)
+if 
+  1.0 > 194@ 
+jf @BOAT_12655 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 600.0 sphere 0 in_car 
+jf @BOAT_12606 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+161@ = 3 
+33@ = 0 
+
+:BOAT_12606
+if 
+85F8:   not actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 600.0 sphere 0 in_car 
+jf @BOAT_12655 
+161@ = 4 
+33@ = 0 
+
+:BOAT_12655
+if 
+  161@ == 3 
+jf @BOAT_12741 
+Object.StorePos(106@, 201@, 202@, 203@)
+0509: 246@ = distance_between_XY 201@ 202@ and_XY 192@ 193@ 
+
+:BOAT_12704
+if 
+  1000 > 33@ 
+jf @BOAT_12734 
+wait 0 
+jump @BOAT_12704 
+
+:BOAT_12734
+161@ = 99 
+
+:BOAT_12741
+if 
+  161@ == 4 
+jf @BOAT_12806 
+
+:BOAT_12759
+if 
+  1000 > 33@ 
+jf @BOAT_12789 
+wait 0 
+jump @BOAT_12759 
+
+:BOAT_12789
+246@ = 0.0 
+161@ = 99 
+
+:BOAT_12806
+if 
+  161@ > 0 
+jf @BOAT_12879 
+if 
+  1 > $8197 
+jf @BOAT_12879 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'BOAT_34' time 4000 flag 1  // ~r~Time over!
+161@ = 99 
+wait 3000 
+jump @BOAT_13371 
+
+:BOAT_12879
+if 
+  161@ == 99 
+jf @BOAT_13424 
+gosub @BOAT_20748 
+gosub @BOAT_21083 
+if or
+001F:   168@ > $1966 // (int) 
+001F:   168@ > $1966 // (int) 
+jf @BOAT_13125 
+008B: 169@ = $1966 // (int) 
+008A: $1966 = 168@ // (int) 
+167@ = 1 
+gosub @BOAT_21855 
+if 
+  $8195 == 4 
+jf @BOAT_13025 
+if 
+  $1981 == 0 
+jf @BOAT_13025 
+$1981 = 1 
+$1980 = 1 
+$1979 = 1 
+
+:BOAT_13025
+if 
+  $8195 == 3 
+jf @BOAT_13075 
+if 
+  $1980 == 0 
+jf @BOAT_13075 
+$1980 = 1 
+$1979 = 1 
+
+:BOAT_13075
+if 
+  $8195 == 2 
+jf @BOAT_13118 
+if 
+  $1979 == 0 
+jf @BOAT_13118 
+$1979 = 1 
+
+:BOAT_13118
+jump @BOAT_13132 
+
+:BOAT_13125
+$8195 = 0 
+
+:BOAT_13132
+if 
+  $1962 == 4 
+jf @BOAT_13218 
+if or
+001D:   168@ > 224@ // (int) 
+003B:   168@ == 224@ // (int) 
+jf @BOAT_13218 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1097 
+167@ = 2 
+$1962 = 5 
+164@ = 2 
+
+:BOAT_13218
+32@ = 0 
+
+:BOAT_13225
+if 
+  32@ > -1 
+jf @BOAT_13371 
+wait 0 
+gosub @BOAT_21426 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_13305 
+164@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_13371 
+
+:BOAT_13305
+gosub @BOAT_22386 
+gosub @BOAT_20665 
+if 
+  165@ == 1 
+jf @BOAT_13364 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_13371 
+
+:BOAT_13364
+jump @BOAT_13225 
+
+:BOAT_13371
+gosub @BOAT_25533 
+gosub @BOAT_38313 
+if 
+  164@ == 2 
+jf @BOAT_13417 
+jump @BOAT_1792 
+jump @BOAT_13424 
+
+:BOAT_13417
+jump @BOAT_11555 
+
+:BOAT_13424
+jump @BOAT_11940 
+
+:BOAT_13431
+if 
+  $8189 == 5 
+jf @BOAT_20452 
+
+:BOAT_13449
+gosub @BOAT_34708 
+
+:BOAT_13456
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 1 
+gosub @BOAT_20452 
+46@ = Car.Create(#POLMAV, -2303.627, 2105.29, 200.0)
+Actor.DestroyInstantly(47@)
+47@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 46@)
+0687: clear_actor 47@ task 
+0825: set_helicopter 46@ instant_rotor_start 
+Car.SetMaxSpeed(46@, 250.0)
+04A2: set_heli 46@ fly_to -2303.627 2105.29 200.0 altitude_between 200.0 and 200.0 
+37@ = Car.Create(#VORTEX, -2014.267, 2365.429, 6.0509)
+0229: set_car 37@ primary_color_to 6 secondary_color_to 2 
+Car.Angle(37@) = 111.0
+39@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 37@)
+gosub @BOAT_34885 
+if 
+  $8191 == 0 
+jf @BOAT_13680 
+067A: put_camera_on_car 46@ with_offset 10.0 10.0 0.0 point_to_car 37@ tilt 0.0 switchstyle 2 
+return 
+
+:BOAT_13680
+gosub @BOAT_34293 
+03E5: show_text_box 'BOAT_H2'  // Press ~k~~VEHICLE_ENTER_EXIT~ to quit test.
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_13816 
+Car.StorePos(37@, 185@, 186@, 187@)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+53@ = Marker.CreateAboveObject(58@)
+54@ = Marker.CreateAboveObject(59@)
+gosub @BOAT_34841 
+Car.LockInCurrentPosition(37@) = True
+
+:BOAT_13816
+35@ = 0 
+
+:BOAT_13823
+wait 0 
+if 
+  35@ == 0 
+jf @BOAT_13859 
+03CF: load_wav 6200 as 3 
+35@ = 1 
+
+:BOAT_13859
+if 
+  35@ == 1 
+jf @BOAT_13899 
+if 
+03D0:   wav 3 loaded 
+jf @BOAT_13899 
+35@ = 2 
+
+:BOAT_13899
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @BOAT_13921 
+162@ = 99 
+
+:BOAT_13921
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_14011 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_14011 
+Car.StorePos(37@, 185@, 186@, 187@)
+185@ -= 150.0 
+186@ -= 150.0 
+04A2: set_heli 46@ fly_to 185@ 186@ 187@ altitude_between 200.0 and 200.0 
+
+:BOAT_14011
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_14042 
+164@ = 2 
+jump @BOAT_20258 
+
+:BOAT_14042
+gosub @BOAT_21007 
+if 
+  164@ == 1 
+jf @BOAT_14074 
+jump @BOAT_38379 
+
+:BOAT_14074
+if 
+  162@ == 0 
+jf @BOAT_14215 
+00BC: show_text_highpriority GXT 'BOAT_C1' time 4000 flag 1  // ~s~Navigate through the center of each pair of ~y~buoys~s~ in as quick a time as possible.
+if or
+00E1:   player 0 pressed_key 16 
+00E1:   player 0 pressed_key 14 
+jf @BOAT_14215 
+0971: sync_water 
+0085: 211@ = 231@ // (int) 
+0085: 210@ = 230@ // (int) 
+0085: 209@ = 229@ // (int) 
+097A: play_audio_at 198@ 199@ 200@ event 65535 
+162@ = 5 
+$8197 = 0 
+014F: stop_timer $8197 
+03C3: set_timer_to $8197 type 0 GXT 'BOAT_T1' // global_variable  // time
+Car.LockInCurrentPosition(37@) = False
+
+:BOAT_14215
+if 
+  162@ > 0 
+jf @BOAT_14261 
+if 
+  $8197 > 600000 
+jf @BOAT_14261 
+162@ = 99 
+
+:BOAT_14261
+if 
+  162@ == 5 
+jf @BOAT_14454 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_14454 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_14454 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 10 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(58@, 198@, 199@, 200@)
+Object.StorePos(59@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(58@)
+51@ = Marker.CreateAboveObject(59@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(60@)
+54@ = Marker.CreateAboveObject(61@)
+gosub @BOAT_34841 
+
+:BOAT_14454
+if 
+  162@ == 10 
+jf @BOAT_14647 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_14647 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_14647 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 15 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(60@, 198@, 199@, 200@)
+Object.StorePos(61@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(60@)
+51@ = Marker.CreateAboveObject(61@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(62@)
+54@ = Marker.CreateAboveObject(63@)
+gosub @BOAT_34841 
+
+:BOAT_14647
+if 
+  162@ == 15 
+jf @BOAT_14840 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_14840 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_14840 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 20 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(62@, 198@, 199@, 200@)
+Object.StorePos(63@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(62@)
+51@ = Marker.CreateAboveObject(63@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(64@)
+54@ = Marker.CreateAboveObject(65@)
+gosub @BOAT_34841 
+
+:BOAT_14840
+if 
+  162@ == 20 
+jf @BOAT_15033 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15033 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15033 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 25 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(64@, 198@, 199@, 200@)
+Object.StorePos(65@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(64@)
+51@ = Marker.CreateAboveObject(65@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(66@)
+54@ = Marker.CreateAboveObject(67@)
+gosub @BOAT_34841 
+
+:BOAT_15033
+if 
+  162@ == 25 
+jf @BOAT_15226 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15226 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15226 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 30 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(66@, 198@, 199@, 200@)
+Object.StorePos(67@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(66@)
+51@ = Marker.CreateAboveObject(67@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(68@)
+54@ = Marker.CreateAboveObject(69@)
+gosub @BOAT_34841 
+
+:BOAT_15226
+if 
+  162@ == 30 
+jf @BOAT_15419 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15419 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15419 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 35 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(68@, 198@, 199@, 200@)
+Object.StorePos(69@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(68@)
+51@ = Marker.CreateAboveObject(69@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(70@)
+54@ = Marker.CreateAboveObject(71@)
+gosub @BOAT_34841 
+
+:BOAT_15419
+if 
+  162@ == 35 
+jf @BOAT_15612 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15612 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15612 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 40 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(70@, 198@, 199@, 200@)
+Object.StorePos(71@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(70@)
+51@ = Marker.CreateAboveObject(71@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(72@)
+54@ = Marker.CreateAboveObject(73@)
+gosub @BOAT_34841 
+
+:BOAT_15612
+if 
+  162@ == 40 
+jf @BOAT_15805 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15805 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15805 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 45 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(72@, 198@, 199@, 200@)
+Object.StorePos(73@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(72@)
+51@ = Marker.CreateAboveObject(73@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(74@)
+54@ = Marker.CreateAboveObject(75@)
+gosub @BOAT_34841 
+
+:BOAT_15805
+if 
+  162@ == 45 
+jf @BOAT_15998 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_15998 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_15998 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 50 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(74@, 198@, 199@, 200@)
+Object.StorePos(75@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(74@)
+51@ = Marker.CreateAboveObject(75@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(76@)
+54@ = Marker.CreateAboveObject(77@)
+gosub @BOAT_34841 
+
+:BOAT_15998
+if 
+  162@ == 50 
+jf @BOAT_16191 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_16191 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_16191 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 55 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(76@, 198@, 199@, 200@)
+Object.StorePos(77@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(76@)
+51@ = Marker.CreateAboveObject(77@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(78@)
+54@ = Marker.CreateAboveObject(79@)
+gosub @BOAT_34841 
+
+:BOAT_16191
+if 
+  162@ == 55 
+jf @BOAT_16384 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_16384 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_16384 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 60 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(78@, 198@, 199@, 200@)
+Object.StorePos(79@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(78@)
+51@ = Marker.CreateAboveObject(79@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(80@)
+54@ = Marker.CreateAboveObject(81@)
+gosub @BOAT_34841 
+
+:BOAT_16384
+if 
+  162@ == 60 
+jf @BOAT_16665 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_16665 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_16665 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 65 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(80@, 198@, 199@, 200@)
+Object.StorePos(81@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(80@)
+51@ = Marker.CreateAboveObject(81@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(82@)
+54@ = Marker.CreateAboveObject(83@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(41@)
+jf @BOAT_16665 
+if 
+   not Actor.Dead(43@)
+jf @BOAT_16665 
+if 
+  35@ == 2 
+jf @BOAT_16631 
+03D1: play_wav 3 
+
+:BOAT_16631
+05D1: AS_actor 43@ drive_car 41@ to -2763.105 1954.129 0.0 speed 10.0 2 model #NULL 3 
+
+:BOAT_16665
+if 
+  162@ == 65 
+jf @BOAT_16946 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_16946 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_16946 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 70 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(82@, 198@, 199@, 200@)
+Object.StorePos(83@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(82@)
+51@ = Marker.CreateAboveObject(83@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(84@)
+54@ = Marker.CreateAboveObject(85@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_16946 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_16946 
+if 
+  35@ == 2 
+jf @BOAT_16912 
+03D1: play_wav 3 
+
+:BOAT_16912
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_16946
+if 
+  162@ == 70 
+jf @BOAT_17205 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_17205 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_17205 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 75 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(84@, 198@, 199@, 200@)
+Object.StorePos(85@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(84@)
+51@ = Marker.CreateAboveObject(85@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(86@)
+54@ = Marker.CreateAboveObject(87@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_17205 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_17205 
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_17205
+if 
+  162@ == 75 
+jf @BOAT_17486 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_17486 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_17486 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 80 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(86@, 198@, 199@, 200@)
+Object.StorePos(87@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(86@)
+51@ = Marker.CreateAboveObject(87@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(88@)
+54@ = Marker.CreateAboveObject(89@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_17486 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_17486 
+if 
+  35@ == 2 
+jf @BOAT_17452 
+03D1: play_wav 3 
+
+:BOAT_17452
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_17486
+if 
+  162@ == 80 
+jf @BOAT_17745 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_17745 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_17745 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 82 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(88@, 198@, 199@, 200@)
+Object.StorePos(89@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(88@)
+51@ = Marker.CreateAboveObject(89@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(90@)
+54@ = Marker.CreateAboveObject(91@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_17745 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_17745 
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_17745
+if 
+  162@ == 82 
+jf @BOAT_18026 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_18026 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_18026 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 84 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(90@, 198@, 199@, 200@)
+Object.StorePos(91@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(90@)
+51@ = Marker.CreateAboveObject(91@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(92@)
+54@ = Marker.CreateAboveObject(93@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_18026 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_18026 
+if 
+  35@ == 2 
+jf @BOAT_17992 
+03D1: play_wav 3 
+
+:BOAT_17992
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_18026
+if 
+  162@ == 84 
+jf @BOAT_18285 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_18285 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_18285 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 86 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(92@, 198@, 199@, 200@)
+Object.StorePos(93@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(92@)
+51@ = Marker.CreateAboveObject(93@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(94@)
+54@ = Marker.CreateAboveObject(95@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_18285 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_18285 
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_18285
+if 
+  162@ == 86 
+jf @BOAT_18544 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_18544 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_18544 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 88 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(94@, 198@, 199@, 200@)
+Object.StorePos(95@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(94@)
+51@ = Marker.CreateAboveObject(95@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(96@)
+54@ = Marker.CreateAboveObject(97@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_18544 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_18544 
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_18544
+if 
+  162@ == 88 
+jf @BOAT_18803 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_18803 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_18803 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 90 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(96@, 198@, 199@, 200@)
+Object.StorePos(97@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(96@)
+51@ = Marker.CreateAboveObject(97@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(98@)
+54@ = Marker.CreateAboveObject(99@)
+gosub @BOAT_34841 
+if 
+   not Car.Wrecked(40@)
+jf @BOAT_18803 
+if 
+   not Actor.Dead(42@)
+jf @BOAT_18803 
+05D1: AS_actor 42@ drive_car 40@ to -2763.105 1954.129 0.0 speed 15.0 2 model #NULL 3 
+
+:BOAT_18803
+if 
+  162@ == 90 
+jf @BOAT_18980 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_18980 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_18980 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 91 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(98@, 198@, 199@, 200@)
+Object.StorePos(99@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(98@)
+51@ = Marker.CreateAboveObject(99@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+gosub @BOAT_34841 
+
+:BOAT_18980
+if 
+  162@ == 91 
+jf @BOAT_19096 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_19096 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_19096 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_33' time 1000 flag 1  // ~s~Finished!
+162@ = 99 
+Marker.Disable(52@)
+Marker.Disable(51@)
+
+:BOAT_19096
+if 
+  162@ == 92 
+jf @BOAT_19289 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_19289 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_19289 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 93 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(102@, 198@, 199@, 200@)
+Object.StorePos(103@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(102@)
+51@ = Marker.CreateAboveObject(103@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(104@)
+54@ = Marker.CreateAboveObject(105@)
+gosub @BOAT_34841 
+
+:BOAT_19289
+if 
+  162@ == 93 
+jf @BOAT_19482 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_19482 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_19482 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 94 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(104@, 198@, 199@, 200@)
+Object.StorePos(105@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(104@)
+51@ = Marker.CreateAboveObject(105@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+53@ = Marker.CreateAboveObject(56@)
+54@ = Marker.CreateAboveObject(57@)
+gosub @BOAT_34841 
+
+:BOAT_19482
+if 
+  162@ == 94 
+jf @BOAT_19659 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_19659 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_19659 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_31' time 1000 flag 1  // ~y~Checkpoint
+162@ = 97 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Object.StorePos(56@, 198@, 199@, 200@)
+Object.StorePos(57@, 195@, 196@, 197@)
+52@ = Marker.CreateAboveObject(56@)
+51@ = Marker.CreateAboveObject(57@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+gosub @BOAT_34841 
+
+:BOAT_19659
+if 
+  162@ == 97 
+jf @BOAT_19775 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_19775 
+if 
+05F8:   actor $PLAYER_ACTOR in_rectangle_ll_corner_at 198@ 199@ lr_corner_at 195@ 196@ angle 3.0 sphere 0 in_car 
+jf @BOAT_19775 
+097A: play_audio_at 198@ 199@ 200@ event 249@ 
+00BC: show_text_highpriority GXT 'BOAT_33' time 1000 flag 1  // ~s~Finished!
+162@ = 99 
+Marker.Disable(52@)
+Marker.Disable(51@)
+
+:BOAT_19775
+if 
+  162@ == 99 
+jf @BOAT_20445 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+gosub @BOAT_20748 
+gosub @BOAT_21083 
+if 
+001E:   $1967 > 168@ // (int) 
+jf @BOAT_20033 
+008B: 169@ = $1967 // (int) 
+008A: $1967 = 168@ // (int) 
+167@ = 1 
+gosub @BOAT_21855 
+if 
+  $8195 == 4 
+jf @BOAT_19933 
+if 
+  $1984 == 0 
+jf @BOAT_19933 
+$1984 = 1 
+$1983 = 1 
+$1982 = 1 
+
+:BOAT_19933
+if 
+  $8195 == 3 
+jf @BOAT_19983 
+if 
+  $1983 == 0 
+jf @BOAT_19983 
+$1983 = 1 
+$1982 = 1 
+
+:BOAT_19983
+if 
+  $8195 == 2 
+jf @BOAT_20026 
+if 
+  $1982 == 0 
+jf @BOAT_20026 
+$1982 = 1 
+
+:BOAT_20026
+jump @BOAT_20040 
+
+:BOAT_20033
+$8195 = 0 
+
+:BOAT_20040
+if 
+  $1962 == 5 
+jf @BOAT_20105 
+if 
+001D:   228@ > 168@ // (int) 
+jf @BOAT_20105 
+167@ = 2 
+$1962 = 5 
+251@ = 1 
+164@ = 2 
+
+:BOAT_20105
+32@ = 0 
+
+:BOAT_20112
+if 
+  32@ > -1 
+jf @BOAT_20258 
+wait 0 
+gosub @BOAT_21426 
+if 
+00E1:   player 0 pressed_key 15 
+jf @BOAT_20192 
+164@ = 2 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_20258 
+
+:BOAT_20192
+gosub @BOAT_22386 
+gosub @BOAT_20665 
+if 
+  165@ == 1 
+jf @BOAT_20251 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+jump @BOAT_20258 
+
+:BOAT_20251
+jump @BOAT_20112 
+
+:BOAT_20258
+gosub @BOAT_25533 
+gosub @BOAT_38313 
+if 
+  164@ == 2 
+jf @BOAT_20438 
+if 
+  251@ == 1 
+jf @BOAT_20424 
+if 
+  $MISSION_BOAT_SCHOOL_PASSED == 0 
+jf @BOAT_20424 
+fade 0 1000 
+
+:BOAT_20333
+if 
+fading 
+jf @BOAT_20357 
+wait 0 
+jump @BOAT_20333 
+
+:BOAT_20357
+Actor.Angle($PLAYER_ACTOR) = 177@
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Camera.SetAtPos(-2185.335, 2410.409, 3.9752)
+fade 1 2000 
+
+:BOAT_20393
+if 
+fading 
+jf @BOAT_20417 
+wait 0 
+jump @BOAT_20393 
+
+:BOAT_20417
+jump @BOAT_38419 
+
+:BOAT_20424
+jump @BOAT_1792 
+jump @BOAT_20445 
+
+:BOAT_20438
+jump @BOAT_13449 
+
+:BOAT_20445
+jump @BOAT_13823 
+
+:BOAT_20452
+158@ = 0 
+159@ = 0 
+160@ = 0 
+161@ = 0 
+162@ = 0 
+$8197 = 0 
+163@ = 0 
+164@ = 0 
+165@ = 0 
+166@ = 0 
+167@ = 0 
+168@ = 0 
+48@ = 1000 
+188@ = 0.0 
+189@ = 0.0 
+190@ = 0.0 
+191@ = 0 
+207@ = 0 
+208@ = 0 
+49@ = 0.0 
+211@ = 0 
+210@ = 0 
+209@ = 0 
+233@ = 0 
+192@ = 0.0 
+193@ = 0.0 
+194@ = 0.0 
+return 
+
+:BOAT_20665
+if 
+00E1:   player 0 pressed_key 16 
+jf @BOAT_20721 
+if 
+  166@ == 1 
+jf @BOAT_20714 
+166@ = 0 
+165@ = 1 
+
+:BOAT_20714
+jump @BOAT_20746 
+
+:BOAT_20721
+if 
+  166@ == 0 
+jf @BOAT_20746 
+166@ = 1 
+
+:BOAT_20746
+return 
+
+:BOAT_20748
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 1 
+if 
+  $8189 == 1 
+jf @BOAT_20822 
+0396: pause_timer 1 
+02D4: car 37@ turn_off_engine 
+Car.SetSpeedInstantly(37@, 0.0)
+Car.LockInCurrentPosition(37@) = False
+0323: enable_boat 37@ anchor 1 
+Car.LockInCurrentPosition(37@) = False
+
+:BOAT_20822
+if 
+  $8189 > 1 
+jf @BOAT_21005 
+0396: pause_timer 1 
+33@ = 0 
+
+:BOAT_20851
+if 
+  1000 > 33@ 
+jf @BOAT_20881 
+wait 0 
+jump @BOAT_20851 
+
+:BOAT_20881
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_21005 
+if 
+   not $8189 == 4 
+jf @BOAT_20938 
+if 
+   not $8189 == 5 
+jf @BOAT_20938 
+02D4: car 37@ turn_off_engine 
+
+:BOAT_20938
+Car.SetSpeedInstantly(37@, 0.0)
+Car.LockInCurrentPosition(37@) = False
+if 
+   not $8189 == 4 
+jf @BOAT_20998 
+if 
+   not $8189 == 5 
+jf @BOAT_20998 
+0323: enable_boat 37@ anchor 1 
+
+:BOAT_20998
+Car.LockInCurrentPosition(37@) = False
+
+:BOAT_21005
+return 
+
+:BOAT_21007
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_21074 
+if 
+  163@ == 1 
+jf @BOAT_21067 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 37@)
+jf @BOAT_21067 
+164@ = 1 
+
+:BOAT_21067
+jump @BOAT_21081 
+
+:BOAT_21074
+164@ = 1 
+
+:BOAT_21081
+return 
+
+:BOAT_21083
+if 
+   not $8189 == 4 
+jf @BOAT_21270 
+008B: 208@ = $8197 // (int) 
+233@ = 0 
+48@ = 1000 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_21148 
+250@ = Car.Health(37@)
+
+:BOAT_21148
+if 
+  $8189 == 5 
+jf @BOAT_21173 
+250@ += 120 
+
+:BOAT_21173
+if 
+  1000 > 250@ 
+jf @BOAT_21200 
+233@ = 5000 
+
+:BOAT_21200
+if 
+  995 > 250@ 
+jf @BOAT_21227 
+233@ = 7000 
+
+:BOAT_21227
+if 
+  990 > 250@ 
+jf @BOAT_21254 
+233@ = 10000 
+
+:BOAT_21254
+0085: 168@ = 208@ // (int) 
+005A: 168@ += 233@ // (int) 
+
+:BOAT_21270
+if 
+  $8189 == 4 
+jf @BOAT_21424 
+008B: 208@ = $8197 // (int) 
+233@ = 0 
+48@ = 1000 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_21335 
+250@ = Car.Health(37@)
+
+:BOAT_21335
+if 
+  995 > 250@ 
+jf @BOAT_21362 
+233@ = 5000 
+
+:BOAT_21362
+if 
+  990 > 250@ 
+jf @BOAT_21389 
+233@ = 10000 
+
+:BOAT_21389
+if 
+  985 > 250@ 
+jf @BOAT_21416 
+233@ = 15000 
+
+:BOAT_21416
+0092: 168@ = float 246@ to_integer 
+
+:BOAT_21424
+return 
+
+:BOAT_21426
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_21853 
+if 
+  191@ == 0 
+jf @BOAT_21565 
+Car.StorePos(37@, 188@, 189@, 190@)
+190@ += 5.0 
+0407: store_coords_to 188@ 189@ 190@ from_car 37@ with_offset 10.0 0.0 5.0 
+Camera.SetPosition(188@, 189@, 190@, 0.0, 0.0, 0.0)
+Camera.OnVehicle(37@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+191@ = 1 
+
+:BOAT_21565
+if 
+  32@ > 3000 
+jf @BOAT_21702 
+if 
+  6000 > 32@ 
+jf @BOAT_21702 
+if 
+  191@ == 1 
+jf @BOAT_21702 
+0407: store_coords_to 188@ 189@ 190@ from_car 37@ with_offset 0.0 10.0 5.0 
+Camera.SetPosition(188@, 189@, 190@, 0.0, 0.0, 0.0)
+Camera.OnVehicle(37@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+191@ = 2 
+
+:BOAT_21702
+if 
+  32@ > 6000 
+jf @BOAT_21820 
+if 
+  191@ == 2 
+jf @BOAT_21820 
+0407: store_coords_to 188@ 189@ 190@ from_car 37@ with_offset -10.0 0.0 5.0 
+Camera.SetPosition(188@, 189@, 190@, 0.0, 0.0, 0.0)
+Camera.OnVehicle(37@, 15, 1)
+0460: set_camera_transverse_delay 50.0 time 2000 
+191@ = 3 
+
+:BOAT_21820
+if 
+  32@ > 9000 
+jf @BOAT_21853 
+191@ = 1 
+32@ = 0 
+
+:BOAT_21853
+return 
+
+:BOAT_21855
+$8195 = 0 
+if 
+   not $8189 == 4 
+jf @BOAT_22111 
+if 
+001D:   209@ > 168@ // (int) 
+jf @BOAT_21966 
+if 
+001D:   168@ > 210@ // (int) 
+jf @BOAT_21966 
+if and
+001D:   209@ > 169@ // (int) 
+001D:   169@ > 210@ // (int) 
+jf @BOAT_21959 
+$8195 = 0 
+jump @BOAT_21966 
+
+:BOAT_21959
+$8195 = 2 
+
+:BOAT_21966
+if 
+001D:   210@ > 168@ // (int) 
+jf @BOAT_22052 
+if 
+001D:   168@ > 211@ // (int) 
+jf @BOAT_22052 
+if and
+001D:   210@ > 169@ // (int) 
+001D:   169@ > 211@ // (int) 
+jf @BOAT_22045 
+$8195 = 0 
+jump @BOAT_22052 
+
+:BOAT_22045
+$8195 = 3 
+
+:BOAT_22052
+if 
+001D:   211@ > 168@ // (int) 
+jf @BOAT_22111 
+if 
+001D:   211@ > 169@ // (int) 
+jf @BOAT_22104 
+$8195 = 0 
+jump @BOAT_22111 
+
+:BOAT_22104
+$8195 = 4 
+
+:BOAT_22111
+if 
+  $8189 == 4 
+jf @BOAT_22384 
+if or
+001D:   168@ > 209@ // (int) 
+003B:   168@ == 209@ // (int) 
+jf @BOAT_22223 
+if 
+001D:   210@ > 168@ // (int) 
+jf @BOAT_22223 
+if and
+001D:   169@ > 209@ // (int) 
+001D:   210@ > 169@ // (int) 
+jf @BOAT_22216 
+$8195 = 0 
+jump @BOAT_22223 
+
+:BOAT_22216
+$8195 = 2 
+
+:BOAT_22223
+if or
+001D:   168@ > 210@ // (int) 
+003B:   168@ == 210@ // (int) 
+jf @BOAT_22317 
+if 
+001D:   211@ > 168@ // (int) 
+jf @BOAT_22317 
+if and
+001D:   169@ > 210@ // (int) 
+001D:   211@ > 169@ // (int) 
+jf @BOAT_22310 
+$8195 = 0 
+jump @BOAT_22317 
+
+:BOAT_22310
+$8195 = 3 
+
+:BOAT_22317
+if or
+001D:   168@ > 211@ // (int) 
+003B:   168@ == 211@ // (int) 
+jf @BOAT_22384 
+if 
+001D:   169@ > 211@ // (int) 
+jf @BOAT_22377 
+$8195 = 0 
+jump @BOAT_22384 
+
+:BOAT_22377
+$8195 = 4 
+
+:BOAT_22384
+return 
+
+:BOAT_22386
+0826: enable_hud 0 
+0581: enable_radar 0 
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 0 
+if 
+  2 > $8195 
+jf @BOAT_22531 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_22491 
+0937: text_draw_box_cornerA 122.0 240.0 cornerB 520.0 400.0 GXT_reference 'BOAT_75' style 3  // Results
+jump @BOAT_22524 
+
+:BOAT_22491
+0937: text_draw_box_cornerA 152.0 240.0 cornerB 490.0 400.0 GXT_reference 'BOAT_75' style 3  // Results
+
+:BOAT_22524
+jump @BOAT_22629 
+
+:BOAT_22531
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_22596 
+0937: text_draw_box_cornerA 122.0 220.0 cornerB 520.0 400.0 GXT_reference 'DUMMY' style 3 
+jump @BOAT_22629 
+
+:BOAT_22596
+0937: text_draw_box_cornerA 152.0 220.0 cornerB 490.0 400.0 GXT_reference 'DUMMY' style 3 
+
+:BOAT_22629
+gosub @BOAT_34057 
+gosub @BOAT_34057 
+if 
+  48@ > 0 
+jf @BOAT_24938 
+00BE: text_clear_all 
+gosub @BOAT_34057 
+0345: enable_text_draw_background 0 
+0904: get_interface 3 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+241@ = 0.0 
+0093: 241@ = integer 208@ to_float 
+241@ /= 1000.0 
+if 
+   not $8189 == 4 
+jf @BOAT_22834 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_22808 
+07FC: text_draw_box_position_XY 145.0 275.0 GXT_reference 'BOAT_7' value 241@ flag 2  // Finish Time:
+jump @BOAT_22834 
+
+:BOAT_22808
+07FC: text_draw_box_position_XY 180.0 275.0 GXT_reference 'BOAT_7' value 241@ flag 2  // Finish Time:
+
+:BOAT_22834
+gosub @BOAT_34057 
+0904: get_interface 3 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+240@ = 0.0 
+0093: 240@ = integer 233@ to_float 
+240@ /= 1000.0 
+if 
+   not $8189 == 4 
+jf @BOAT_23001 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_22975 
+07FC: text_draw_box_position_XY 145.0 295.0 GXT_reference 'BOAT_9' value 240@ flag 2  // Damage Penalty:
+jump @BOAT_23001 
+
+:BOAT_22975
+07FC: text_draw_box_position_XY 180.0 295.0 GXT_reference 'BOAT_9' value 240@ flag 2  // Damage Penalty:
+
+:BOAT_23001
+gosub @BOAT_34057 
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_23070 
+0904: get_interface 3 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+jump @BOAT_23100 
+
+:BOAT_23070
+0904: get_interface 3 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+
+:BOAT_23100
+242@ = 0.0 
+0093: 242@ = integer 168@ to_float 
+242@ /= 1000.0 
+if 
+   not $8189 == 4 
+jf @BOAT_23230 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_23204 
+07FC: text_draw_box_position_XY 145.0 315.0 GXT_reference 'BOAT_10' value 242@ flag 2  // Overall Time:
+jump @BOAT_23230 
+
+:BOAT_23204
+07FC: text_draw_box_position_XY 180.0 315.0 GXT_reference 'BOAT_10' value 242@ flag 2  // Overall Time:
+
+:BOAT_23230
+if 
+  $8189 == 4 
+jf @BOAT_23514 
+if 
+  246@ > 0.0 
+jf @BOAT_23440 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_23327 
+07FC: text_draw_box_position_XY 145.0 315.0 GXT_reference 'BOAT_11' value 246@ flag 2  // Jump Distance:
+jump @BOAT_23433 
+
+:BOAT_23327
+if 
+  252@ == 3 
+jf @BOAT_23371 
+07FC: text_draw_box_position_XY 175.0 315.0 GXT_reference 'BOAT_11' value 246@ flag 2  // Jump Distance:
+
+:BOAT_23371
+if 
+   not 252@ == 3 
+jf @BOAT_23433 
+if 
+   not 252@ == 4 
+jf @BOAT_23433 
+07FC: text_draw_box_position_XY 180.0 315.0 GXT_reference 'BOAT_11' value 246@ flag 2  // Jump Distance:
+
+:BOAT_23433
+jump @BOAT_23514 
+
+:BOAT_23440
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_23493 
+033E: set_draw_text_position 145.0 315.0 GXT 'BOAT_12'  // Jump Invalid!
+jump @BOAT_23514 
+
+:BOAT_23493
+033E: set_draw_text_position 180.0 315.0 GXT 'BOAT_12'  // Jump Invalid!
+
+:BOAT_23514
+gosub @BOAT_34057 
+0340: set_text_draw_RGBA 255 255 255 255 
+241@ = 0.0 
+0093: 241@ = integer 208@ to_float 
+241@ /= 1000.0 
+if 
+   not $8189 == 4 
+jf @BOAT_23665 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_23639 
+07FC: text_draw_box_position_XY 425.0 275.0 GXT_reference 'BOAT_77' value 241@ flag 2  // ~1~:~1~s
+jump @BOAT_23665 
+
+:BOAT_23639
+07FC: text_draw_box_position_XY 390.0 275.0 GXT_reference 'BOAT_77' value 241@ flag 2  // ~1~:~1~s
+
+:BOAT_23665
+gosub @BOAT_34057 
+0904: get_interface 0 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+240@ = 0.0 
+0093: 240@ = integer 233@ to_float 
+240@ /= 1000.0 
+if 
+  240@ > 0.0 
+jf @BOAT_23788 
+0904: get_interface 0 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+jump @BOAT_23818 
+
+:BOAT_23788
+0904: get_interface 8 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+
+:BOAT_23818
+if 
+   not $8189 == 4 
+jf @BOAT_23920 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_23894 
+07FC: text_draw_box_position_XY 425.0 295.0 GXT_reference 'BOAT_77' value 240@ flag 2  // ~1~:~1~s
+jump @BOAT_23920 
+
+:BOAT_23894
+07FC: text_draw_box_position_XY 390.0 295.0 GXT_reference 'BOAT_77' value 240@ flag 2  // ~1~:~1~s
+
+:BOAT_23920
+gosub @BOAT_34057 
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_23973 
+0340: set_text_draw_RGBA 255 255 255 255 
+jump @BOAT_23987 
+
+:BOAT_23973
+0340: set_text_draw_RGBA 255 255 255 255 
+
+:BOAT_23987
+242@ = 0.0 
+0093: 242@ = integer 168@ to_float 
+242@ /= 1000.0 
+if 
+   not $8189 == 4 
+jf @BOAT_24117 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_24091 
+07FC: text_draw_box_position_XY 425.0 315.0 GXT_reference 'BOAT_77' value 242@ flag 2  // ~1~:~1~s
+jump @BOAT_24117 
+
+:BOAT_24091
+07FC: text_draw_box_position_XY 390.0 315.0 GXT_reference 'BOAT_77' value 242@ flag 2  // ~1~:~1~s
+
+:BOAT_24117
+if 
+  $8189 == 4 
+jf @BOAT_24247 
+if 
+  246@ > 0.0 
+jf @BOAT_24247 
+gosub @BOAT_38372 
+if 
+  252@ == 4 
+jf @BOAT_24214 
+07FC: text_draw_box_position_XY 425.0 315.0 GXT_reference 'BOAT_80' value 246@ flag 2  // ~1~:~1~m
+jump @BOAT_24240 
+
+:BOAT_24214
+07FC: text_draw_box_position_XY 390.0 315.0 GXT_reference 'BOAT_80' value 246@ flag 2  // ~1~:~1~m
+
+:BOAT_24240
+jump @BOAT_24247 
+
+:BOAT_24247
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+033E: set_draw_text_position 340.0 345.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+033E: set_draw_text_position 340.0 365.0 GXT 'BOAT_73'  // ~k~~VEHICLE_ENTER_EXIT~
+gosub @BOAT_34057 
+033F: set_text_draw_letter_size 0.52 1.45 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033E: set_draw_text_position 180.0 345.0 GXT 'BOAT_76'  // Continue
+gosub @BOAT_34057 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033E: set_draw_text_position 180.0 365.0 GXT 'BOAT_53'  // Exit
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_24584 
+gosub @BOAT_34173 
+033F: set_text_draw_letter_size 1.0 3.4 
+0340: set_text_draw_RGBA 255 255 255 255 
+033E: set_draw_text_position 323.0 110.0 GXT 'BOAT_46'  // new record!
+
+:BOAT_24584
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_24931 
+if 
+  $8195 > 0 
+jf @BOAT_24931 
+038D: draw_texture 4 position 250.0 219.0 size -60.0 60.0 RGBA 180 180 180 255 
+038D: draw_texture 4 position 392.0 219.0 size 60.0 60.0 RGBA 180 180 180 255 
+if 
+  $8195 == 2 
+jf @BOAT_24753 
+038D: draw_texture 10 position 320.0 220.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_24753
+if 
+  $8195 == 3 
+jf @BOAT_24807 
+038D: draw_texture 11 position 320.0 220.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_24807
+if 
+  $8195 == 4 
+jf @BOAT_24861 
+038D: draw_texture 3 position 320.0 220.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_24861
+gosub @BOAT_34173 
+033F: set_text_draw_letter_size 1.0 3.4 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033E: set_draw_text_position 323.0 65.0 GXT 'BOAT_47'  // new certificate awarded!
+
+:BOAT_24931
+jump @BOAT_25526 
+
+:BOAT_24938
+gosub @BOAT_34057 
+0340: set_text_draw_RGBA 134 155 184 255 
+241@ = 0.0 
+0093: 241@ = integer 208@ to_float 
+241@ /= 1000.0 
+07FC: text_draw_box_position_XY 30.0 55.0 GXT_reference 'BOAT_7' value 241@ flag 2  // Finish Time:
+gosub @BOAT_34057 
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_25064 
+0340: set_text_draw_RGBA 107 148 49 255 
+jump @BOAT_25078 
+
+:BOAT_25064
+0340: set_text_draw_RGBA 134 155 184 255 
+
+:BOAT_25078
+242@ = 0.0 
+0093: 242@ = integer 168@ to_float 
+242@ /= 1000.0 
+07FC: text_draw_box_position_XY 30.0 65.0 GXT_reference 'BOAT_10' value 242@ flag 2  // Overall Time:
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_25197 
+gosub @BOAT_34057 
+0340: set_text_draw_RGBA 107 148 49 255 
+033E: set_draw_text_position 260.0 65.0 GXT 'BOAT_46'  // new record!
+
+:BOAT_25197
+if or
+  167@ == 1 
+  167@ == 2 
+jf @BOAT_25526 
+if 
+  $8195 > 0 
+jf @BOAT_25526 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 68.0 145.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 210.0 145.0 size 60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+if 
+  $8195 == 2 
+jf @BOAT_25378 
+038D: draw_texture 10 position 138.0 145.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_25378
+if 
+  $8195 == 3 
+jf @BOAT_25432 
+038D: draw_texture 11 position 138.0 145.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_25432
+if 
+  $8195 == 4 
+jf @BOAT_25486 
+038D: draw_texture 3 position 138.0 145.0 size 110.0 95.0 RGBA 160 160 160 255 
+
+:BOAT_25486
+gosub @BOAT_34057 
+0340: set_text_draw_RGBA 107 148 49 255 
+033E: set_draw_text_position 260.0 172.0 GXT 'BOAT_47'  // new certificate awarded!
+
+:BOAT_25526
+014F: stop_timer $8197 
+return 
+
+:BOAT_25533
+fade 0 500 
+
+:BOAT_25540
+if 
+fading 
+jf @BOAT_25564 
+wait 0 
+jump @BOAT_25540 
+
+:BOAT_25564
+0826: enable_hud 1 
+0581: enable_radar 1 
+00BE: text_clear_all 
+03E6: remove_text_box 
+03D6: remove_styled_text 'BOAT_46'  // new record!
+03D6: remove_styled_text 'BOAT_47'  // new certificate awarded!
+0221: set_player $PLAYER_CHAR apply_brakes_to_car 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+  164@ == 2 
+jf @BOAT_25688 
+00BE: text_clear_all 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BOAT_25667 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 174@ 175@ 176@ 
+jump @BOAT_25681 
+
+:BOAT_25667
+Actor.PutAt($PLAYER_ACTOR, 174@, 175@, 176@)
+
+:BOAT_25681
+jump @BOAT_25739 
+
+:BOAT_25688
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BOAT_25725 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 174@ 175@ 176@ 
+jump @BOAT_25739 
+
+:BOAT_25725
+Actor.PutAt($PLAYER_ACTOR, 174@, 175@, 176@)
+
+:BOAT_25739
+wait 0 
+Car.Destroy(37@)
+Car.Destroy(46@)
+Actor.DestroyInstantly(39@)
+Marker.Disable(52@)
+Marker.Disable(51@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+wait 0 
+014F: stop_timer $8197 
+0396: pause_timer 0 
+return 
+
+:BOAT_25797
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 225.0 size 612.0 438.0 RGBA 0 0 0 $8194 
+if 
+  $8193 == 1 
+jf @BOAT_25919 
+if 
+  255 > $8194 
+jf @BOAT_25912 
+$8194 += 20 
+if 
+  $8194 > 255 
+jf @BOAT_25905 
+$8194 = 255 
+
+:BOAT_25905
+jump @BOAT_25919 
+
+:BOAT_25912
+$8193 = 2 
+
+:BOAT_25919
+if 
+  $8193 == 3 
+jf @BOAT_26001 
+if 
+  $8194 > 0 
+jf @BOAT_25994 
+$8194 -= 5 
+if 
+  0 > $8194 
+jf @BOAT_25987 
+$8194 = 0 
+
+:BOAT_25987
+jump @BOAT_26001 
+
+:BOAT_25994
+$8193 = 0 
+
+:BOAT_26001
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 0.0 size 640.0 197.0 RGBA 0 0 0 255 
+gosub @BOAT_34173 
+0340: set_text_draw_RGBA 255 255 255 255 
+if 
+  $8189 == 1 
+jf @BOAT_26113 
+033E: set_draw_text_position 322.0 31.0 GXT 'BOAT_A'  // basic seamanship
+0084: $8196 = $1963 // (int) 
+gosub @BOAT_27779 
+
+:BOAT_26113
+if 
+  $8189 == 2 
+jf @BOAT_26167 
+033E: set_draw_text_position 322.0 31.0 GXT 'BOAT_B'  // plot a course
+0084: $8196 = $1964 // (int) 
+gosub @BOAT_27779 
+
+:BOAT_26167
+if 
+  $8189 == 3 
+jf @BOAT_26221 
+033E: set_draw_text_position 322.0 31.0 GXT 'BOAT_C'  // fresh slalom
+0084: $8196 = $1965 // (int) 
+gosub @BOAT_27779 
+
+:BOAT_26221
+if 
+  $8189 == 4 
+jf @BOAT_26275 
+033E: set_draw_text_position 322.0 31.0 GXT 'BOAT_D'  // flying fish
+0084: $8196 = $1966 // (int) 
+gosub @BOAT_27779 
+
+:BOAT_26275
+if 
+  $8189 == 5 
+jf @BOAT_26329 
+033E: set_draw_text_position 322.0 31.0 GXT 'BOAT_E'  // land, sea and air
+0084: $8196 = $1967 // (int) 
+gosub @BOAT_27779 
+
+:BOAT_26329
+gosub @BOAT_33995 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+gosub @BOAT_38372 
+if 
+  252@ == 1 
+jf @BOAT_26431 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'BOAT_53'  // Exit
+jump @BOAT_26464 
+
+:BOAT_26431
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 360.0 GXT 'BOAT_53'  // Exit
+
+:BOAT_26464
+if 
+   not $8192 == 1 
+jf @BOAT_26930 
+gosub @BOAT_33995 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+gosub @BOAT_38372 
+if 
+  252@ == 1 
+jf @BOAT_26584 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'BOAT_54'  // Start
+jump @BOAT_26617 
+
+:BOAT_26584
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 70.0 340.0 GXT 'BOAT_54'  // Start
+
+:BOAT_26617
+if 
+   not $1962 == 1 
+jf @BOAT_26770 
+gosub @BOAT_33995 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+gosub @BOAT_38372 
+if 
+  252@ == 1 
+jf @BOAT_26737 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+jump @BOAT_26770 
+
+:BOAT_26737
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+
+:BOAT_26770
+if 
+  $1962 == 1 
+jf @BOAT_26923 
+gosub @BOAT_33995 
+0904: get_interface 8 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+gosub @BOAT_38372 
+if 
+  252@ == 1 
+jf @BOAT_26890 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+jump @BOAT_26923 
+
+:BOAT_26890
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+
+:BOAT_26923
+jump @BOAT_27065 
+
+:BOAT_26930
+gosub @BOAT_33995 
+0904: get_interface 6 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+gosub @BOAT_38372 
+if 
+  252@ == 1 
+jf @BOAT_27032 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+jump @BOAT_27065 
+
+:BOAT_27032
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 437.0 340.0 GXT 'BOAT_52'  // Navigate
+
+:BOAT_27065
+gosub @BOAT_33995 
+0340: set_text_draw_RGBA 248 211 7 255 
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 0.32 1.25 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033E: set_draw_text_position 150.0 360.0 GXT 'BOAT_73'  // ~k~~VEHICLE_ENTER_EXIT~
+if 
+   not $8192 == 1 
+jf @BOAT_27443 
+gosub @BOAT_33995 
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 150.0 340.0 GXT 'SCH_PRS'  // ~k~~PED_SPRINT~
+if 
+   not $1962 == 1 
+jf @BOAT_27336 
+gosub @BOAT_33995 
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 1.45 2.0 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BOAT_72'  // ~<~~>~
+
+:BOAT_27336
+if 
+  $1962 == 1 
+jf @BOAT_27436 
+gosub @BOAT_33995 
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 1.45 2.0 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BOAT_72'  // ~<~~>~
+
+:BOAT_27436
+jump @BOAT_27525 
+
+:BOAT_27443
+gosub @BOAT_33995 
+0904: get_interface 4 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+033F: set_text_draw_letter_size 1.45 2.0 
+033F: set_text_draw_letter_size 0.32 1.25 
+033E: set_draw_text_position 537.4 340.0 GXT 'BOAT_72'  // ~<~~>~
+
+:BOAT_27525
+033F: set_text_draw_letter_size 0.52 1.45 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 112.0 size 320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 160.0 317.0 size 320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 112.0 size -320.0 224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 5 position 480.0 317.0 size -320.0 -224.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 160.0 435.0 size 320.0 17.0 RGBA 150 150 150 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 9 position 480.0 435.0 size -320.0 17.0 RGBA 150 150 150 255 
+return 
+
+:BOAT_27779
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 8 position 320.0 430.0 size 640.0 250.0 RGBA 0 0 0 255 
+gosub @BOAT_33995 
+03E4: set_text_draw_align_right 0 
+0904: get_interface 3 color_RGBA_to 170@ 171@ 172@ 173@ 
+0340: set_text_draw_RGBA 170@ 171@ 172@ 173@ 
+if 
+  $8189 == 1 
+jf @BOAT_28600 
+if 
+001F:   212@ > $1963 // (int) 
+jf @BOAT_28164 
+239@ = 0.0 
+008F: 239@ = integer $8196 to_float 
+239@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_28157 jumps 0 @BOAT_27992 1 @BOAT_28025 2 @BOAT_28058 3 @BOAT_28091 4 @BOAT_28124 -1 @BOAT_28157 -1 @BOAT_28157 
+
+:BOAT_27992
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28157 
+
+:BOAT_28025
+07FC: text_draw_box_position_XY 200.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28157 
+
+:BOAT_28058
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28157 
+
+:BOAT_28091
+07FC: text_draw_box_position_XY 187.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28157 
+
+:BOAT_28124
+07FC: text_draw_box_position_XY 193.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28157 
+
+:BOAT_28157
+jump @BOAT_28458 
+
+:BOAT_28164
+247@ = 0 
+234@ = 0.0 
+0093: 234@ = integer 212@ to_float 
+234@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_28458 jumps 0 @BOAT_28269 1 @BOAT_28302 2 @BOAT_28335 3 @BOAT_28368 4 @BOAT_28401 -1 @BOAT_28458 -1 @BOAT_28458 
+
+:BOAT_28269
+07FC: text_draw_box_position_XY 137.0 75.0 GXT_reference 'BOAT_62' value 234@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_28458 
+
+:BOAT_28302
+07FC: text_draw_box_position_XY 77.0 75.0 GXT_reference 'BOAT_62' value 234@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_28458 
+
+:BOAT_28335
+07FC: text_draw_box_position_XY 77.0 75.0 GXT_reference 'BOAT_62' value 234@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_28458 
+
+:BOAT_28368
+07FC: text_draw_box_position_XY 97.0 75.0 GXT_reference 'BOAT_62' value 234@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_28458 
+
+:BOAT_28401
+033F: set_text_draw_letter_size 0.45 1.35 
+07FC: text_draw_box_position_XY 93.0 75.0 GXT_reference 'BOAT_62' value 234@ flag 1  // finish under ~1~ seconds to pass
+033F: set_text_draw_letter_size 0.52 1.45 
+jump @BOAT_28458 
+
+:BOAT_28458
+if 
+001E:   $8196 > 213@ // (int) 
+jf @BOAT_28484 
+$8195 = 1 
+
+:BOAT_28484
+if 
+001F:   213@ > $8196 // (int) 
+jf @BOAT_28529 
+if 
+001E:   $8196 > 214@ // (int) 
+jf @BOAT_28529 
+$8195 = 2 
+
+:BOAT_28529
+if 
+001F:   214@ > $8196 // (int) 
+jf @BOAT_28574 
+if 
+001E:   $8196 > 215@ // (int) 
+jf @BOAT_28574 
+$8195 = 3 
+
+:BOAT_28574
+if 
+001F:   215@ > $8196 // (int) 
+jf @BOAT_28600 
+$8195 = 4 
+
+:BOAT_28600
+if 
+  $8189 == 2 
+jf @BOAT_29336 
+if 
+001F:   216@ > $1964 // (int) 
+jf @BOAT_28907 
+239@ = 0.0 
+008F: 239@ = integer $8196 to_float 
+239@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_28900 jumps 0 @BOAT_28735 1 @BOAT_28768 2 @BOAT_28801 3 @BOAT_28834 4 @BOAT_28867 -1 @BOAT_28900 -1 @BOAT_28900 
+
+:BOAT_28735
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28900 
+
+:BOAT_28768
+07FC: text_draw_box_position_XY 200.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28900 
+
+:BOAT_28801
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28900 
+
+:BOAT_28834
+07FC: text_draw_box_position_XY 187.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28900 
+
+:BOAT_28867
+07FC: text_draw_box_position_XY 190.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_28900 
+
+:BOAT_28900
+jump @BOAT_29194 
+
+:BOAT_28907
+235@ = 0.0 
+0093: 235@ = integer 216@ to_float 
+235@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_29194 jumps 0 @BOAT_29005 1 @BOAT_29038 2 @BOAT_29071 3 @BOAT_29104 4 @BOAT_29137 -1 @BOAT_29194 -1 @BOAT_29194 
+
+:BOAT_29005
+07FC: text_draw_box_position_XY 137.0 75.0 GXT_reference 'BOAT_62' value 235@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_29194 
+
+:BOAT_29038
+07FC: text_draw_box_position_XY 77.0 75.0 GXT_reference 'BOAT_62' value 235@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_29194 
+
+:BOAT_29071
+07FC: text_draw_box_position_XY 77.0 75.0 GXT_reference 'BOAT_62' value 235@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_29194 
+
+:BOAT_29104
+07FC: text_draw_box_position_XY 97.0 75.0 GXT_reference 'BOAT_62' value 235@ flag 1  // finish under ~1~ seconds to pass
+jump @BOAT_29194 
+
+:BOAT_29137
+033F: set_text_draw_letter_size 0.45 1.35 
+07FC: text_draw_box_position_XY 88.0 75.0 GXT_reference 'BOAT_62' value 235@ flag 1  // finish under ~1~ seconds to pass
+033F: set_text_draw_letter_size 0.52 1.45 
+jump @BOAT_29194 
+
+:BOAT_29194
+if 
+001E:   $8196 > 217@ // (int) 
+jf @BOAT_29220 
+$8195 = 1 
+
+:BOAT_29220
+if 
+001F:   217@ > $8196 // (int) 
+jf @BOAT_29265 
+if 
+001E:   $8196 > 218@ // (int) 
+jf @BOAT_29265 
+$8195 = 2 
+
+:BOAT_29265
+if 
+001F:   218@ > $8196 // (int) 
+jf @BOAT_29310 
+if 
+001E:   $8196 > 219@ // (int) 
+jf @BOAT_29310 
+$8195 = 3 
+
+:BOAT_29310
+if 
+001F:   219@ > $8196 // (int) 
+jf @BOAT_29336 
+$8195 = 4 
+
+:BOAT_29336
+if 
+  $8189 == 3 
+jf @BOAT_30082 
+if 
+001F:   220@ > $1965 // (int) 
+jf @BOAT_29643 
+239@ = 0.0 
+008F: 239@ = integer $8196 to_float 
+239@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_29636 jumps 0 @BOAT_29471 1 @BOAT_29504 2 @BOAT_29537 3 @BOAT_29570 4 @BOAT_29603 -1 @BOAT_29636 -1 @BOAT_29636 
+
+:BOAT_29471
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_29636 
+
+:BOAT_29504
+07FC: text_draw_box_position_XY 200.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_29636 
+
+:BOAT_29537
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_29636 
+
+:BOAT_29570
+07FC: text_draw_box_position_XY 187.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_29636 
+
+:BOAT_29603
+07FC: text_draw_box_position_XY 190.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_29636 
+
+:BOAT_29636
+jump @BOAT_29940 
+
+:BOAT_29643
+236@ = 0.0 
+0093: 236@ = integer 220@ to_float 
+236@ /= 1000.0 
+236@ /= 60.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_29940 jumps 0 @BOAT_29751 1 @BOAT_29784 2 @BOAT_29817 3 @BOAT_29850 4 @BOAT_29883 -1 @BOAT_29940 -1 @BOAT_29940 
+
+:BOAT_29751
+07FC: text_draw_box_position_XY 142.0 75.0 GXT_reference 'BOAT_63' value 236@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_29940 
+
+:BOAT_29784
+07FC: text_draw_box_position_XY 87.0 75.0 GXT_reference 'BOAT_63' value 236@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_29940 
+
+:BOAT_29817
+07FC: text_draw_box_position_XY 83.0 75.0 GXT_reference 'BOAT_63' value 236@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_29940 
+
+:BOAT_29850
+07FC: text_draw_box_position_XY 112.0 75.0 GXT_reference 'BOAT_63' value 236@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_29940 
+
+:BOAT_29883
+033F: set_text_draw_letter_size 0.45 1.35 
+07FC: text_draw_box_position_XY 103.0 75.0 GXT_reference 'BOAT_63' value 236@ flag 1  // finish under ~1~ minutes to pass
+033F: set_text_draw_letter_size 0.52 1.45 
+jump @BOAT_29940 
+
+:BOAT_29940
+if 
+001E:   $8196 > 221@ // (int) 
+jf @BOAT_29966 
+$8195 = 1 
+
+:BOAT_29966
+if 
+001F:   221@ > $8196 // (int) 
+jf @BOAT_30011 
+if 
+001E:   $8196 > 222@ // (int) 
+jf @BOAT_30011 
+$8195 = 2 
+
+:BOAT_30011
+if 
+001F:   222@ > $8196 // (int) 
+jf @BOAT_30056 
+if 
+001E:   $8196 > 223@ // (int) 
+jf @BOAT_30056 
+$8195 = 3 
+
+:BOAT_30056
+if 
+001F:   223@ > $8196 // (int) 
+jf @BOAT_30082 
+$8195 = 4 
+
+:BOAT_30082
+if 
+  $8189 == 4 
+jf @BOAT_30798 
+if 
+001E:   $1966 > 224@ // (int) 
+jf @BOAT_30379 
+239@ = 0.0 
+008F: 239@ = integer $8196 to_float 
+239@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_30372 jumps 0 @BOAT_30217 1 @BOAT_30248 2 @BOAT_30279 3 @BOAT_30310 4 @BOAT_30341 -1 @BOAT_30372 -1 @BOAT_30372 
+
+:BOAT_30217
+045A: draw_text_1number 185.0 75.0 GXT 'BOAT_60' number $1966  // longest jump ~1~ meters
+jump @BOAT_30372 
+
+:BOAT_30248
+045A: draw_text_1number 167.0 75.0 GXT 'BOAT_60' number $1966  // longest jump ~1~ meters
+jump @BOAT_30372 
+
+:BOAT_30279
+045A: draw_text_1number 167.0 75.0 GXT 'BOAT_60' number $1966  // longest jump ~1~ meters
+jump @BOAT_30372 
+
+:BOAT_30310
+045A: draw_text_1number 177.0 75.0 GXT 'BOAT_60' number $1966  // longest jump ~1~ meters
+jump @BOAT_30372 
+
+:BOAT_30341
+045A: draw_text_1number 160.0 75.0 GXT 'BOAT_60' number $1966  // longest jump ~1~ meters
+jump @BOAT_30372 
+
+:BOAT_30372
+jump @BOAT_30632 
+
+:BOAT_30379
+237@ = 0.0 
+0093: 237@ = integer 224@ to_float 
+237@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_30632 jumps 0 @BOAT_30477 1 @BOAT_30508 2 @BOAT_30539 3 @BOAT_30570 4 @BOAT_30601 -1 @BOAT_30632 -1 @BOAT_30632 
+
+:BOAT_30477
+045A: draw_text_1number 153.0 75.0 GXT 'BOAT_61' number 224@  // jump over ~1~ meters to pass
+jump @BOAT_30632 
+
+:BOAT_30508
+045A: draw_text_1number 103.0 75.0 GXT 'BOAT_61' number 224@  // jump over ~1~ meters to pass
+jump @BOAT_30632 
+
+:BOAT_30539
+045A: draw_text_1number 93.0 75.0 GXT 'BOAT_61' number 224@  // jump over ~1~ meters to pass
+jump @BOAT_30632 
+
+:BOAT_30570
+045A: draw_text_1number 123.0 75.0 GXT 'BOAT_61' number 224@  // jump over ~1~ meters to pass
+jump @BOAT_30632 
+
+:BOAT_30601
+045A: draw_text_1number 103.0 75.0 GXT 'BOAT_61' number 224@  // jump over ~1~ meters to pass
+jump @BOAT_30632 
+
+:BOAT_30632
+if 
+001F:   225@ > $8196 // (int) 
+jf @BOAT_30658 
+$8195 = 1 
+
+:BOAT_30658
+if or
+001E:   $8196 > 225@ // (int) 
+003C:   $8196 == 225@ // (int) 
+jf @BOAT_30711 
+if 
+001F:   226@ > $8196 // (int) 
+jf @BOAT_30711 
+$8195 = 2 
+
+:BOAT_30711
+if or
+001E:   $8196 > 226@ // (int) 
+003C:   $8196 == 226@ // (int) 
+jf @BOAT_30764 
+if 
+001F:   227@ > $8196 // (int) 
+jf @BOAT_30764 
+$8195 = 3 
+
+:BOAT_30764
+if or
+001E:   $8196 > 227@ // (int) 
+003C:   $8196 == 227@ // (int) 
+jf @BOAT_30798 
+$8195 = 4 
+
+:BOAT_30798
+if 
+  $8189 == 5 
+jf @BOAT_31544 
+if 
+001F:   228@ > $1967 // (int) 
+jf @BOAT_31105 
+239@ = 0.0 
+008F: 239@ = integer $8196 to_float 
+239@ /= 1000.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_31098 jumps 0 @BOAT_30933 1 @BOAT_30966 2 @BOAT_30999 3 @BOAT_31032 4 @BOAT_31065 -1 @BOAT_31098 -1 @BOAT_31098 
+
+:BOAT_30933
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_31098 
+
+:BOAT_30966
+07FC: text_draw_box_position_XY 200.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_31098 
+
+:BOAT_30999
+07FC: text_draw_box_position_XY 217.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_31098 
+
+:BOAT_31032
+07FC: text_draw_box_position_XY 187.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_31098 
+
+:BOAT_31065
+07FC: text_draw_box_position_XY 190.0 75.0 GXT_reference 'BOAT_58' value 239@ flag 2  // record time ~1~:~1~s
+jump @BOAT_31098 
+
+:BOAT_31098
+jump @BOAT_31402 
+
+:BOAT_31105
+238@ = 0.0 
+0093: 238@ = integer 228@ to_float 
+238@ /= 1000.0 
+238@ /= 60.0 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_31402 jumps 0 @BOAT_31213 1 @BOAT_31246 2 @BOAT_31279 3 @BOAT_31312 4 @BOAT_31345 -1 @BOAT_31402 -1 @BOAT_31402 
+
+:BOAT_31213
+07FC: text_draw_box_position_XY 144.0 75.0 GXT_reference 'BOAT_63' value 238@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_31402 
+
+:BOAT_31246
+07FC: text_draw_box_position_XY 87.0 75.0 GXT_reference 'BOAT_63' value 238@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_31402 
+
+:BOAT_31279
+07FC: text_draw_box_position_XY 88.0 75.0 GXT_reference 'BOAT_63' value 238@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_31402 
+
+:BOAT_31312
+07FC: text_draw_box_position_XY 117.0 75.0 GXT_reference 'BOAT_63' value 238@ flag 1  // finish under ~1~ minutes to pass
+jump @BOAT_31402 
+
+:BOAT_31345
+033F: set_text_draw_letter_size 0.45 1.35 
+07FC: text_draw_box_position_XY 103.0 75.0 GXT_reference 'BOAT_63' value 238@ flag 1  // finish under ~1~ minutes to pass
+033F: set_text_draw_letter_size 0.52 1.45 
+jump @BOAT_31402 
+
+:BOAT_31402
+if 
+001E:   $8196 > 229@ // (int) 
+jf @BOAT_31428 
+$8195 = 1 
+
+:BOAT_31428
+if 
+001F:   229@ > $8196 // (int) 
+jf @BOAT_31473 
+if 
+001E:   $8196 > 230@ // (int) 
+jf @BOAT_31473 
+$8195 = 2 
+
+:BOAT_31473
+if 
+001F:   230@ > $8196 // (int) 
+jf @BOAT_31518 
+if 
+001E:   $8196 > 231@ // (int) 
+jf @BOAT_31518 
+$8195 = 3 
+
+:BOAT_31518
+if 
+001F:   231@ > $8196 // (int) 
+jf @BOAT_31544 
+$8195 = 4 
+
+:BOAT_31544
+if 
+  $8195 > 1 
+jf @BOAT_31649 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 4 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+jump @BOAT_31729 
+
+:BOAT_31649
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 250.0 306.0 size -60.0 60.0 RGBA 180 180 180 255 
+03E3: set_texture_to_be_drawn_antialiased 1 
+038D: draw_texture 7 position 395.0 306.0 size 60.0 60.0 RGBA 180 180 180 255 
+
+:BOAT_31729
+03E3: set_texture_to_be_drawn_antialiased 1 
+if 
+  $8195 == 1 
+jf @BOAT_32018 
+038D: draw_texture 6 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BOAT_33995 
+0340: set_text_draw_RGBA 166 202 240 255 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_32018 jumps 0 @BOAT_31878 1 @BOAT_31906 2 @BOAT_31934 3 @BOAT_31962 4 @BOAT_31990 -1 @BOAT_32018 -1 @BOAT_32018 
+
+:BOAT_31878
+033E: set_draw_text_position 266.0 375.0 GXT 'BOAT_64'  // NO AWARD
+jump @BOAT_32018 
+
+:BOAT_31906
+033E: set_draw_text_position 216.0 375.0 GXT 'BOAT_64'  // NO AWARD
+jump @BOAT_32018 
+
+:BOAT_31934
+033E: set_draw_text_position 233.0 375.0 GXT 'BOAT_64'  // NO AWARD
+jump @BOAT_32018 
+
+:BOAT_31962
+033E: set_draw_text_position 216.0 375.0 GXT 'BOAT_64'  // NO AWARD
+jump @BOAT_32018 
+
+:BOAT_31990
+033E: set_draw_text_position 216.0 375.0 GXT 'BOAT_64'  // NO AWARD
+jump @BOAT_32018 
+
+:BOAT_32018
+if 
+  $8195 == 2 
+jf @BOAT_32303 
+038D: draw_texture 10 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BOAT_33995 
+0340: set_text_draw_RGBA 166 202 240 255 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_32303 jumps 0 @BOAT_32163 1 @BOAT_32191 2 @BOAT_32219 3 @BOAT_32247 4 @BOAT_32275 -1 @BOAT_32303 -1 @BOAT_32303 
+
+:BOAT_32163
+033E: set_draw_text_position 280.0 375.0 GXT 'BOAT_57'  // BRONZE
+jump @BOAT_32303 
+
+:BOAT_32191
+033E: set_draw_text_position 280.0 375.0 GXT 'BOAT_57'  // BRONZE
+jump @BOAT_32303 
+
+:BOAT_32219
+033E: set_draw_text_position 280.0 375.0 GXT 'BOAT_57'  // BRONZE
+jump @BOAT_32303 
+
+:BOAT_32247
+033E: set_draw_text_position 280.0 375.0 GXT 'BOAT_57'  // BRONZE
+jump @BOAT_32303 
+
+:BOAT_32275
+033E: set_draw_text_position 280.0 375.0 GXT 'BOAT_57'  // BRONZE
+jump @BOAT_32303 
+
+:BOAT_32303
+if 
+  $8195 == 3 
+jf @BOAT_32588 
+038D: draw_texture 11 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BOAT_33995 
+0340: set_text_draw_RGBA 166 202 240 255 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_32588 jumps 0 @BOAT_32448 1 @BOAT_32476 2 @BOAT_32504 3 @BOAT_32532 4 @BOAT_32560 -1 @BOAT_32588 -1 @BOAT_32588 
+
+:BOAT_32448
+033E: set_draw_text_position 283.0 375.0 GXT 'BOAT_56'  // SILVER
+jump @BOAT_32588 
+
+:BOAT_32476
+033E: set_draw_text_position 278.0 375.0 GXT 'BOAT_56'  // SILVER
+jump @BOAT_32588 
+
+:BOAT_32504
+033E: set_draw_text_position 283.0 375.0 GXT 'BOAT_56'  // SILVER
+jump @BOAT_32588 
+
+:BOAT_32532
+033E: set_draw_text_position 273.0 375.0 GXT 'BOAT_56'  // SILVER
+jump @BOAT_32588 
+
+:BOAT_32560
+033E: set_draw_text_position 286.0 375.0 GXT 'BOAT_56'  // SILVER
+jump @BOAT_32588 
+
+:BOAT_32588
+if 
+  $8195 == 4 
+jf @BOAT_32873 
+038D: draw_texture 3 position 320.0 307.0 size 110.0 95.0 RGBA 160 160 160 255 
+gosub @BOAT_33995 
+0340: set_text_draw_RGBA 166 202 240 255 
+gosub @BOAT_38372 
+0871: init_jump_table 252@ total_jumps 5 default_jump 0 @BOAT_32873 jumps 0 @BOAT_32733 1 @BOAT_32761 2 @BOAT_32789 3 @BOAT_32817 4 @BOAT_32845 -1 @BOAT_32873 -1 @BOAT_32873 
+
+:BOAT_32733
+033E: set_draw_text_position 294.0 375.0 GXT 'BOAT_55'  // GOLD
+jump @BOAT_32873 
+
+:BOAT_32761
+033E: set_draw_text_position 307.0 375.0 GXT 'BOAT_55'  // GOLD
+jump @BOAT_32873 
+
+:BOAT_32789
+033E: set_draw_text_position 294.0 375.0 GXT 'BOAT_55'  // GOLD
+jump @BOAT_32873 
+
+:BOAT_32817
+033E: set_draw_text_position 300.0 375.0 GXT 'BOAT_55'  // GOLD
+jump @BOAT_32873 
+
+:BOAT_32845
+033E: set_draw_text_position 300.0 375.0 GXT 'BOAT_55'  // GOLD
+jump @BOAT_32873 
+
+:BOAT_32873
+return 
+
+:BOAT_32875
+if 
+  $8191 == 0 
+jf @BOAT_33025 
+if 
+  $8189 == 1 
+jf @BOAT_32918 
+gosub @BOAT_2854 
+
+:BOAT_32918
+if 
+  $8189 == 2 
+jf @BOAT_32943 
+gosub @BOAT_4432 
+
+:BOAT_32943
+if 
+  $8189 == 3 
+jf @BOAT_32968 
+gosub @BOAT_7145 
+
+:BOAT_32968
+if 
+  $8189 == 4 
+jf @BOAT_32993 
+gosub @BOAT_11562 
+
+:BOAT_32993
+if 
+  $8189 == 5 
+jf @BOAT_33018 
+gosub @BOAT_13456 
+
+:BOAT_33018
+$8191 = 1 
+
+:BOAT_33025
+if 
+  $8191 == 1 
+jf @BOAT_33505 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_33505 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_33107 
+Car.StorePos(37@, 204@, 205@, 206@)
+0395: clear_area 1 at 204@ 205@ 206@ radius 1000.0 
+
+:BOAT_33107
+if 
+  $8189 == 1 
+jf @BOAT_33177 
+if 
+87C1:   not path 752 available 
+jf @BOAT_33153 
+07C0: load_path 752 
+jump @BOAT_33177 
+
+:BOAT_33153
+0971: sync_water 
+05EB: assign_car 37@ to_path 752 
+$8193 = 3 
+$8191 = 2 
+
+:BOAT_33177
+if 
+  $8189 == 2 
+jf @BOAT_33247 
+if 
+87C1:   not path 755 available 
+jf @BOAT_33223 
+07C0: load_path 755 
+jump @BOAT_33247 
+
+:BOAT_33223
+0971: sync_water 
+05EB: assign_car 37@ to_path 755 
+$8193 = 3 
+$8191 = 2 
+
+:BOAT_33247
+if 
+  $8189 == 3 
+jf @BOAT_33317 
+if 
+87C1:   not path 757 available 
+jf @BOAT_33293 
+07C0: load_path 757 
+jump @BOAT_33317 
+
+:BOAT_33293
+0971: sync_water 
+05EB: assign_car 37@ to_path 757 
+$8193 = 3 
+$8191 = 2 
+
+:BOAT_33317
+if 
+  $8189 == 4 
+jf @BOAT_33435 
+if 
+87C1:   not path 759 available 
+jf @BOAT_33363 
+07C0: load_path 759 
+jump @BOAT_33435 
+
+:BOAT_33363
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_33411 
+Car.StorePos(37@, 204@, 205@, 206@)
+0395: clear_area 1 at 204@ 205@ 206@ radius 1000.0 
+
+:BOAT_33411
+0971: sync_water 
+05EB: assign_car 37@ to_path 759 
+$8193 = 3 
+$8191 = 2 
+
+:BOAT_33435
+if 
+  $8189 == 5 
+jf @BOAT_33505 
+if 
+87C1:   not path 760 available 
+jf @BOAT_33481 
+07C0: load_path 760 
+jump @BOAT_33505 
+
+:BOAT_33481
+0971: sync_water 
+05EB: assign_car 37@ to_path 760 
+$8193 = 3 
+$8191 = 2 
+
+:BOAT_33505
+if 
+  $8191 == 2 
+jf @BOAT_33826 
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_33812 
+if 
+   not Car.Wrecked(46@)
+jf @BOAT_33775 
+Car.StorePos(37@, 185@, 186@, 187@)
+if 
+  $8189 == 1 
+jf @BOAT_33607 
+185@ -= 35.0 
+186@ -= 30.0 
+
+:BOAT_33607
+if 
+  $8189 == 2 
+jf @BOAT_33645 
+185@ -= 15.0 
+186@ -= 30.0 
+
+:BOAT_33645
+if 
+  $8189 == 3 
+jf @BOAT_33683 
+185@ -= 13.0 
+186@ -= 13.0 
+
+:BOAT_33683
+if 
+  $8189 == 4 
+jf @BOAT_33721 
+185@ -= 10.0 
+186@ -= 20.0 
+
+:BOAT_33721
+if 
+  $8189 == 5 
+jf @BOAT_33759 
+185@ -= 10.0 
+186@ -= 20.0 
+
+:BOAT_33759
+Car.PutAt(46@, 185@, 186@, 10.0)
+
+:BOAT_33775
+if 
+860E:   not car 37@ assigned_to_path 
+jf @BOAT_33805 
+$8193 = 1 
+$8191 = 4 
+
+:BOAT_33805
+jump @BOAT_33826 
+
+:BOAT_33812
+$8193 = 1 
+$8191 = 4 
+
+:BOAT_33826
+if 
+  $8191 == 3 
+jf @BOAT_33858 
+$8193 = 1 
+$8191 = 4 
+
+:BOAT_33858
+if 
+  $8191 == 4 
+jf @BOAT_33993 
+if 
+  $8193 == 2 
+jf @BOAT_33993 
+05EC: release_car 37@ from_path 
+Camera.Restore_WithJumpCut
+014F: stop_timer $8197 
+0396: pause_timer 0 
+Car.Destroy(46@)
+Car.Destroy(37@)
+gosub @BOAT_38313 
+$8191 = 0 
+014F: stop_timer $8197 
+0396: pause_timer 0 
+Car.Destroy(37@)
+Car.Destroy(46@)
+Actor.DestroyInstantly(47@)
+Actor.DestroyInstantly(39@)
+Car.Destroy(40@)
+Car.Destroy(41@)
+Car.Destroy(44@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Actor.DestroyInstantly(45@)
+
+:BOAT_33993
+return 
+
+:BOAT_33995
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:BOAT_34057
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 0 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.52 1.45 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 0.8 2.6 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+return 
+
+:BOAT_34173
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+03E4: set_text_draw_align_right 0 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.2 4.0 
+060D: draw_text_shadow 3 rgba 0 0 0 255 
+0349: set_text_draw_font 3 
+return 
+03E0: draw_text_behind_textures 1 
+0341: set_text_draw_align_justify 1 
+0343: set_text_draw_linewidth 1000.0 
+0348: enable_text_draw_proportional 1 
+0342: set_text_draw_centered 1 
+0345: enable_text_draw_background 0 
+033F: set_text_draw_letter_size 1.0 3.8 
+060D: draw_text_shadow 2 rgba 0 0 0 255 
+0349: set_text_draw_font 2 
+return 
+
+:BOAT_34293
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 1 
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Car.Destroy(40@)
+Car.Destroy(41@)
+Car.Destroy(44@)
+Actor.DestroyInstantly(45@)
+014F: stop_timer $8197 
+40@ = Car.Create(#TROPIC, -2100.836, 2247.862, 0.0)
+Car.Angle(40@) = 122.0
+42@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 40@)
+41@ = Car.Create(#MARQUIS, -1996.127, 2125.169, 0.0)
+Car.Angle(41@) = 160.0
+43@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 41@)
+44@ = Car.Create(#TROPIC, -2251.171, 2129.291, 0.0)
+Car.Angle(44@) = 182.0
+45@ = Actor.CreateAsDriver(Mission2, #OMOBOAT, 44@)
+036A: put_actor $PLAYER_ACTOR in_car 37@ 
+Car.DoorStatus(37@) = 4
+wait 1000 
+fade 0 2000 
+
+:BOAT_34512
+if 
+fading 
+jf @BOAT_34536 
+wait 0 
+jump @BOAT_34512 
+
+:BOAT_34536
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+if 
+  $8189 == 4 
+jf @BOAT_34579 
+Camera.SetAtPos(-2318.049, 2312.302, 10.0)
+wait 0 
+
+:BOAT_34579
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_34627 
+Car.StorePos(37@, 204@, 205@, 206@)
+0395: clear_area 1 at 204@ 205@ 206@ radius 1000.0 
+
+:BOAT_34627
+fade 1 2000 
+
+:BOAT_34634
+if 
+fading 
+jf @BOAT_34658 
+wait 0 
+jump @BOAT_34634 
+
+:BOAT_34658
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_34706 
+Car.StorePos(37@, 204@, 205@, 206@)
+0395: clear_area 1 at 204@ 205@ 206@ radius 1000.0 
+
+:BOAT_34706
+return 
+
+:BOAT_34708
+fade 0 500 
+
+:BOAT_34715
+if 
+fading 
+jf @BOAT_34739 
+wait 0 
+jump @BOAT_34715 
+
+:BOAT_34739
+if 
+  $8189 == 16 
+jf @BOAT_34778 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+jump @BOAT_34792 
+
+:BOAT_34778
+01EB: set_traffic_density_multiplier_to 0.0 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+
+:BOAT_34792
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+set_weather 13 
+select_interior 0 
+Actor.DestroyInstantly(39@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Car.Destroy(40@)
+Car.Destroy(41@)
+Car.Destroy(44@)
+Actor.DestroyInstantly(45@)
+return 
+
+:BOAT_34841
+Marker.SetIconSize(53@, 1)
+Marker.SetIconSize(54@, 1)
+Marker.SetColor(52@, 4)
+Marker.SetColor(51@, 4)
+Marker.SetColor(53@, 4)
+Marker.SetColor(54@, 4)
+return 
+
+:BOAT_34885
+if 
+  $8189 == 1 
+jf @BOAT_35191 
+156@ = 0 
+
+:BOAT_34910
+if 
+  8 > 156@ 
+jf @BOAT_34991 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+Object.CollisionDetection(56@(156@,50i)) = True
+Object.ToggleInMovingList(56@(156@,50i)) = True
+156@ += 1 
+jump @BOAT_34910 
+
+:BOAT_34991
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_35191 
+035C: place_object 56@ relative_to_car 37@ with_offset 20.0 180.0 0.0 
+035C: place_object 57@ relative_to_car 37@ with_offset -20.0 180.0 0.0 
+035C: place_object 58@ relative_to_car 37@ with_offset 20.0 190.0 0.0 
+035C: place_object 59@ relative_to_car 37@ with_offset -20.0 190.0 0.0 
+035C: place_object 60@ relative_to_car 37@ with_offset 20.0 200.0 0.0 
+035C: place_object 61@ relative_to_car 37@ with_offset -20.0 200.0 0.0 
+035C: place_object 62@ relative_to_car 37@ with_offset 20.0 210.0 0.0 
+035C: place_object 63@ relative_to_car 37@ with_offset -20.0 210.0 0.0 
+
+:BOAT_35191
+if 
+  $8189 == 2 
+jf @BOAT_35681 
+156@ = 0 
+
+:BOAT_35216
+if 
+  16 > 156@ 
+jf @BOAT_35297 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+Object.CollisionDetection(56@(156@,50i)) = True
+Object.ToggleInMovingList(56@(156@,50i)) = True
+156@ += 1 
+jump @BOAT_35216 
+
+:BOAT_35297
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_35681 
+035C: place_object 56@ relative_to_car 37@ with_offset 0.0 80.0 0.0 
+035C: place_object 57@ relative_to_car 37@ with_offset 15.0 70.0 0.0 
+035C: place_object 58@ relative_to_car 37@ with_offset 55.0 145.0 0.0 
+035C: place_object 59@ relative_to_car 37@ with_offset 70.0 130.0 0.0 
+035C: place_object 60@ relative_to_car 37@ with_offset 150.0 110.0 0.0 
+035C: place_object 61@ relative_to_car 37@ with_offset 160.0 130.0 0.0 
+035C: place_object 62@ relative_to_car 37@ with_offset 250.0 80.0 0.0 
+035C: place_object 63@ relative_to_car 37@ with_offset 240.0 60.0 0.0 
+035C: place_object 64@ relative_to_car 37@ with_offset 300.0 0.0 0.0 
+035C: place_object 65@ relative_to_car 37@ with_offset 290.0 -20.0 0.0 
+035C: place_object 66@ relative_to_car 37@ with_offset 380.0 -150.0 0.0 
+035C: place_object 67@ relative_to_car 37@ with_offset 360.0 -150.0 0.0 
+035C: place_object 68@ relative_to_car 37@ with_offset 320.0 -300.0 0.0 
+035C: place_object 69@ relative_to_car 37@ with_offset 340.0 -325.0 0.0 
+035C: place_object 70@ relative_to_car 37@ with_offset 230.0 -280.0 0.0 
+035C: place_object 71@ relative_to_car 37@ with_offset 210.0 -300.0 0.0 
+
+:BOAT_35681
+if 
+  $8189 == 3 
+jf @BOAT_36447 
+156@ = 0 
+
+:BOAT_35706
+if 
+  28 > 156@ 
+jf @BOAT_35787 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+Object.CollisionDetection(56@(156@,50i)) = True
+Object.ToggleInMovingList(56@(156@,50i)) = True
+156@ += 1 
+jump @BOAT_35706 
+
+:BOAT_35787
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_36447 
+035C: place_object 56@ relative_to_car 37@ with_offset 0.0 100.0 0.0 
+035C: place_object 57@ relative_to_car 37@ with_offset 15.0 100.0 0.0 
+035C: place_object 58@ relative_to_car 37@ with_offset 40.0 200.0 0.0 
+035C: place_object 59@ relative_to_car 37@ with_offset 55.0 190.0 0.0 
+035C: place_object 60@ relative_to_car 37@ with_offset 0.0 300.0 0.0 
+035C: place_object 61@ relative_to_car 37@ with_offset -15.0 290.0 0.0 
+035C: place_object 62@ relative_to_car 37@ with_offset 140.0 320.0 0.0 
+035C: place_object 63@ relative_to_car 37@ with_offset 140.0 335.0 0.0 
+035C: place_object 64@ relative_to_car 37@ with_offset 220.0 370.0 0.0 
+035C: place_object 65@ relative_to_car 37@ with_offset 210.0 385.0 0.0 
+035C: place_object 66@ relative_to_car 37@ with_offset 210.0 470.0 0.0 
+035C: place_object 67@ relative_to_car 37@ with_offset 195.0 460.0 0.0 
+035C: place_object 68@ relative_to_car 37@ with_offset 195.0 570.0 0.0 
+035C: place_object 69@ relative_to_car 37@ with_offset 180.0 570.0 0.0 
+035C: place_object 70@ relative_to_car 37@ with_offset 95.0 570.0 0.0 
+035C: place_object 71@ relative_to_car 37@ with_offset 95.0 585.0 0.0 
+035C: place_object 72@ relative_to_car 37@ with_offset 15.0 500.0 0.0 
+035C: place_object 73@ relative_to_car 37@ with_offset 0.0 515.0 0.0 
+035C: place_object 74@ relative_to_car 37@ with_offset -90.0 585.0 0.0 
+035C: place_object 75@ relative_to_car 37@ with_offset -90.0 570.0 0.0 
+035C: place_object 76@ relative_to_car 37@ with_offset -160.0 500.0 0.0 
+035C: place_object 77@ relative_to_car 37@ with_offset -150.0 485.0 0.0 
+035C: place_object 78@ relative_to_car 37@ with_offset -240.0 430.0 0.0 
+035C: place_object 79@ relative_to_car 37@ with_offset -230.0 415.0 0.0 
+035C: place_object 80@ relative_to_car 37@ with_offset -140.0 330.0 0.0 
+035C: place_object 81@ relative_to_car 37@ with_offset -140.0 315.0 0.0 
+035C: place_object 82@ relative_to_car 37@ with_offset -30.0 220.0 0.0 
+035C: place_object 83@ relative_to_car 37@ with_offset -40.0 205.0 0.0 
+
+:BOAT_36447
+if 
+  $8189 == 4 
+jf @BOAT_37118 
+156@ = 0 
+
+:BOAT_36472
+if 
+  20 > 156@ 
+jf @BOAT_36553 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+Object.CollisionDetection(56@(156@,50i)) = True
+Object.ToggleInMovingList(56@(156@,50i)) = True
+156@ += 1 
+jump @BOAT_36472 
+
+:BOAT_36553
+157@ = 0 
+
+:BOAT_36560
+if 
+  1 > 157@ 
+jf @BOAT_36619 
+106@(157@,50i) = Object.Init(#WATERJUMPX2, 20.0, 20.0, 150.0)
+157@ += 1 
+jump @BOAT_36560 
+
+:BOAT_36619
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_37118 
+035C: place_object 56@ relative_to_car 37@ with_offset 91.0 480.0 0.0 
+035C: place_object 57@ relative_to_car 37@ with_offset 109.0 480.0 0.0 
+035C: place_object 106@ relative_to_car 37@ with_offset 100.0 480.0 0.0 
+035C: place_object 58@ relative_to_car 37@ with_offset 75.0 500.0 0.0 
+035C: place_object 59@ relative_to_car 37@ with_offset 125.0 500.0 0.0 
+035C: place_object 60@ relative_to_car 37@ with_offset 75.0 510.0 0.0 
+035C: place_object 61@ relative_to_car 37@ with_offset 125.0 510.0 0.0 
+035C: place_object 62@ relative_to_car 37@ with_offset 75.0 520.0 0.0 
+035C: place_object 63@ relative_to_car 37@ with_offset 125.0 520.0 0.0 
+035C: place_object 64@ relative_to_car 37@ with_offset 75.0 530.0 0.0 
+035C: place_object 65@ relative_to_car 37@ with_offset 125.0 530.0 0.0 
+035C: place_object 66@ relative_to_car 37@ with_offset 75.0 540.0 0.0 
+035C: place_object 67@ relative_to_car 37@ with_offset 125.0 540.0 0.0 
+035C: place_object 68@ relative_to_car 37@ with_offset 75.0 550.0 0.0 
+035C: place_object 69@ relative_to_car 37@ with_offset 125.0 550.0 0.0 
+035C: place_object 70@ relative_to_car 37@ with_offset 75.0 560.0 0.0 
+035C: place_object 71@ relative_to_car 37@ with_offset 125.0 560.0 0.0 
+035C: place_object 72@ relative_to_car 37@ with_offset 75.0 570.0 0.0 
+035C: place_object 73@ relative_to_car 37@ with_offset 125.0 570.0 0.0 
+035C: place_object 74@ relative_to_car 37@ with_offset 75.0 580.0 0.0 
+035C: place_object 75@ relative_to_car 37@ with_offset 125.0 580.0 0.0 
+
+:BOAT_37118
+if 
+  $8189 == 5 
+jf @BOAT_38311 
+156@ = 0 
+
+:BOAT_37143
+if 
+  44 > 156@ 
+jf @BOAT_37224 
+56@(156@,50i) = Object.Init(#BOUY, 0.0, 0.0, 100.0)
+Object.CollisionDetection(56@(156@,50i)) = True
+Object.ToggleInMovingList(56@(156@,50i)) = True
+156@ += 1 
+jump @BOAT_37143 
+
+:BOAT_37224
+157@ = 0 
+
+:BOAT_37231
+if 
+  3 > 157@ 
+jf @BOAT_37290 
+106@(157@,50i) = Object.Init(#WATERJUMPX2, 20.0, 20.0, 150.0)
+157@ += 1 
+jump @BOAT_37231 
+
+:BOAT_37290
+if 
+   not Car.Wrecked(37@)
+jf @BOAT_38311 
+035C: place_object 56@ relative_to_car 37@ with_offset 25.0 100.0 0.0 
+035C: place_object 57@ relative_to_car 37@ with_offset 10.0 100.0 0.0 
+035C: place_object 58@ relative_to_car 37@ with_offset -30.0 170.0 0.0 
+035C: place_object 59@ relative_to_car 37@ with_offset -50.0 160.0 0.0 
+035C: place_object 60@ relative_to_car 37@ with_offset -100.0 190.0 0.0 
+035C: place_object 61@ relative_to_car 37@ with_offset -120.0 170.0 0.0 
+035C: place_object 62@ relative_to_car 37@ with_offset -170.0 260.0 0.0 
+035C: place_object 63@ relative_to_car 37@ with_offset -188.0 260.0 0.0 
+035C: place_object 106@ relative_to_car 37@ with_offset -179.0 360.0 -6.509 
+035C: place_object 64@ relative_to_car 37@ with_offset -170.0 360.0 0.0 
+035C: place_object 65@ relative_to_car 37@ with_offset -188.0 360.0 0.0 
+035C: place_object 66@ relative_to_car 37@ with_offset -180.0 500.0 0.0 
+035C: place_object 67@ relative_to_car 37@ with_offset -195.0 500.0 0.0 
+035C: place_object 68@ relative_to_car 37@ with_offset -50.0 600.0 0.0 
+035C: place_object 69@ relative_to_car 37@ with_offset -30.0 600.0 0.0 
+Object.PutAt(107@, -2682.159, 1946.412, 0.9)
+Object.Angle(107@) = 180.0
+Object.PutAt(70@, -2689.573, 1944.864, 0.0)
+Object.PutAt(71@, -2674.354, 1944.607, 0.0)
+Object.PutAt(108@, -2681.746, 1608.794, 0.9)
+Object.Angle(108@) = 180.0
+Object.PutAt(72@, -2689.573, 1607.794, 0.0)
+Object.PutAt(73@, -2674.354, 1607.794, 0.0)
+Object.PutAt(74@, -2689.27, 1533.282, 0.0)
+Object.PutAt(75@, -2674.64, 1530.12, 0.0)
+Object.PutAt(76@, -2553.7, 1494.392, 0.0)
+Object.PutAt(77@, -2550.742, 1481.417, 0.0)
+Object.PutAt(78@, -2453.7, 1494.392, 0.0)
+Object.PutAt(79@, -2450.742, 1481.417, 0.0)
+Object.PutAt(80@, -2353.7, 1474.392, 0.0)
+Object.PutAt(81@, -2350.742, 1461.417, 0.0)
+Object.PutAt(82@, -2284.242, 1547.581, 0.0)
+Object.PutAt(83@, -2270.892, 1550.765, 0.0)
+Object.PutAt(84@, -2334.242, 1647.581, 0.0)
+Object.PutAt(85@, -2320.892, 1650.765, 0.0)
+Object.PutAt(86@, -2284.242, 1747.581, 0.0)
+Object.PutAt(87@, -2270.892, 1750.765, 0.0)
+Object.PutAt(88@, -2139.394, 1821.263, 0.0)
+Object.PutAt(89@, -2134.581, 1808.785, 0.0)
+Object.PutAt(90@, -2039.394, 1761.263, 0.0)
+Object.PutAt(91@, -2034.581, 1748.785, 0.0)
+Object.PutAt(92@, -1939.394, 1841.263, 0.0)
+Object.PutAt(93@, -1934.581, 1828.785, 0.0)
+Object.PutAt(94@, -1809.394, 1801.263, 0.0)
+Object.PutAt(95@, -1804.581, 1788.785, 0.0)
+Object.PutAt(96@, -1831.853, 1909.105, 0.0)
+Object.PutAt(97@, -1847.253, 1906.112, 0.0)
+Object.PutAt(98@, -1879.002, 2073.601, 0.0)
+Object.PutAt(99@, -1893.786, 2068.166, 0.0)
+
+:BOAT_38311
+return 
+
+:BOAT_38313
+156@ = 0 
+
+:BOAT_38320
+if 
+  50 > 156@ 
+jf @BOAT_38370 
+Object.Destroy(56@(156@,50i))
+Object.Destroy(106@(156@,50i))
+156@ += 1 
+jump @BOAT_38320 
+
+:BOAT_38370
+return 
+
+:BOAT_38372
+09FB: 252@ = current_language 
+return 
+
+:BOAT_38379
+0A0B: set_rendering_origin_at_3D_coord -2185.335 2410.409 3.9752 angle 122.2585 
+03E6: remove_text_box 
+00BE: text_clear_all 
+Actor.Angle($PLAYER_ACTOR) = 177@
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+return 
+
+:BOAT_38419
+if 
+  $MISSION_BOAT_SCHOOL_PASSED == 0 
+jf @BOAT_38502 
+040D: unload_wav 3 
+00BA: show_text_styled GXT 'BOAT_P2' time 5000 style 1  // BOAT SCHOOL PASSED!
+00BB: show_text_lowpriority GXT 'BOAT_P1' time 5000 flag 1  // ~s~Congratulations! You have passed all of the boat school tests!
+0394: play_music 2 
+Player.ClearWantedLevel($PLAYER_CHAR)
+030C: progress_made = 1 
+0595: mission_complete 
+014C: set_parked_car_generator $11064 cars_to_generate_to 101 
+$MISSION_BOAT_SCHOOL_PASSED = 1 
+
+:BOAT_38502
+return 
+
+:BOAT_38504
+097A: play_audio_at 0.0 0.0 0.0 event 1001 
+097A: play_audio_at -1000.0 -1000.0 -1000.0 event 1098 
+0501: set_player $PLAYER_CHAR driveby_mode 1 
+04D8: set_actor $PLAYER_ACTOR drowns_in_water 1 
+040D: unload_wav 3 
+0826: enable_hud 1 
+0581: enable_radar 1 
+09B9: show_entered_car_name 1 
+09BA: show_entered_zone_name 1 
+014F: stop_timer $8197 
+Marker.Disable(52@)
+Marker.Disable(51@)
+Marker.Disable(53@)
+Marker.Disable(54@)
+Model.Destroy(#OMOBOAT)
+Actor.RemoveReferences(39@)
+Actor.RemoveReferences(38@)
+Car.Destroy(37@)
+Car.Destroy(46@)
+Actor.DestroyInstantly(42@)
+Actor.DestroyInstantly(43@)
+Car.Destroy(40@)
+Car.Destroy(41@)
+Car.Destroy(44@)
+Actor.DestroyInstantly(45@)
+Model.Destroy(#DINGHY)
+Model.Destroy(#POLMAV)
+Model.Destroy(#COASTG)
+Model.Destroy(#MARQUIS)
+Model.Destroy(#TROPIC)
+Model.Destroy(#VORTEX)
+01B7: release_weather 
+0391: release_textures 
+$MISSION_RUNNING_DOG_FAILED = 1 
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+  $PARKED_JETMAX_EXISTS == 0 
+jf @BOAT_38847 
+if 
+  $1972 == 1 
+jf @BOAT_38847 
+if 
+  $1975 == 1 
+jf @BOAT_38847 
+if 
+  $1978 == 1 
+jf @BOAT_38847 
+if 
+  $1981 == 1 
+jf @BOAT_38847 
+if 
+  $1984 == 1 
+jf @BOAT_38847 
+$PARKED_JETMAX_EXISTS = 1 
+$PARKED_SQUALO_EXISTS = 99 
+$PARKED_MARQUIS_EXISTS = 99 
+
+:BOAT_38847
+if 
+  $PARKED_SQUALO_EXISTS == 0 
+jf @BOAT_38969 
+if 
+  $1971 == 1 
+jf @BOAT_38969 
+if 
+  $1974 == 1 
+jf @BOAT_38969 
+if 
+  $1977 == 1 
+jf @BOAT_38969 
+if 
+  $1980 == 1 
+jf @BOAT_38969 
+if 
+  $1983 == 1 
+jf @BOAT_38969 
+$PARKED_SQUALO_EXISTS = 1 
+$PARKED_MARQUIS_EXISTS = 99 
+
+:BOAT_38969
+if 
+  $PARKED_MARQUIS_EXISTS == 0 
+jf @BOAT_39084 
+if 
+  $1970 == 1 
+jf @BOAT_39084 
+if 
+  $1973 == 1 
+jf @BOAT_39084 
+if 
+  $1976 == 1 
+jf @BOAT_39084 
+if 
+  $1979 == 1 
+jf @BOAT_39084 
+if 
+  $1982 == 1 
+jf @BOAT_39084 
+$PARKED_MARQUIS_EXISTS = 1 
+
+:BOAT_39084
+if 
+  $PARKED_JETMAX_EXISTS == 1 
+jf @BOAT_39151 
+014C: set_parked_car_generator $PARKED_JETMAX cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_JETMAX to_player_owned 1 
+014C: set_parked_car_generator $PARKED_SQUALO cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_SQUALO to_player_owned 1 
+014C: set_parked_car_generator $PARKED_MARQUIS cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_MARQUIS to_player_owned 1 
+$PARKED_JETMAX_EXISTS = 2 
+
+:BOAT_39151
+if 
+  $PARKED_SQUALO_EXISTS == 1 
+jf @BOAT_39204 
+014C: set_parked_car_generator $PARKED_SQUALO cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_SQUALO to_player_owned 1 
+014C: set_parked_car_generator $PARKED_MARQUIS cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_MARQUIS to_player_owned 1 
+$PARKED_SQUALO_EXISTS = 2 
+
+:BOAT_39204
+if 
+  $PARKED_MARQUIS_EXISTS == 1 
+jf @BOAT_39243 
+014C: set_parked_car_generator $PARKED_MARQUIS cars_to_generate_to 101 
+0A17: set_parked_car_generator $PARKED_MARQUIS to_player_owned 1 
+$PARKED_MARQUIS_EXISTS = 2 
+
+:BOAT_39243
+$ONMISSION = 0 
+mission_cleanup 
+return 
+
+:BOAT_39254
+if or
+83D0:   not wav 1 loaded 
+83D0:   not wav 2 loaded 
+jf @BOAT_39284 
+wait 0 
+jump @BOAT_39254 
+
+:BOAT_39284
+return 
+
+:BOAT_39286
+if 
+83D2:   not wav 1 ended 
+jf @BOAT_39312 
+wait 0 
+jump @BOAT_39286 
+
+:BOAT_39312
+040D: unload_wav 1 
+return 
+
+:BOAT_39318
+if 
+83D2:   not wav 2 ended 
+jf @BOAT_39344 
+wait 0 
+jump @BOAT_39318 
+
+:BOAT_39344
+040D: unload_wav 2 
+return

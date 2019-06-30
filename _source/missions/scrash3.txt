@@ -1,0 +1,2911 @@
+:SCRASH3
+thread 'SCRASH3' 
+gosub @SCRASH3_94 
+if 
+wasted_or_busted 
+jf @SCRASH3_85 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+gosub @SCRASH3_18206 
+
+:SCRASH3_85
+gosub @SCRASH3_18418 
+end_thread 
+
+:SCRASH3_94
+03D5: remove_text 'M_FAIL'  // ~r~MISSION FAILED!
+$ONMISSION = 1 
+$1871 = 1 
+increment_mission_attempts 
+80@ = 1 
+81@ = 0 
+82@ = 0 
+65@ = 0 
+66@ = 0 
+84@ = 0 
+85@ = 0 
+08F4: set_max_group_members 0 
+054C: use_GXT_table 'VALET1' 
+0169: set_fade_color_RGB 0 0 0 
+end_thread_named 'VALET' 
+if 
+0500:   player $PLAYER_CHAR skin == "VALET" on_bodypart 17 
+jf @SCRASH3_245 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:SCRASH3_245
+select_interior 1 
+02E4: load_cutscene_data 'SCRASH1' 
+
+:SCRASH3_260
+if 
+86B9:   not cutscene_data_loaded 
+jf @SCRASH3_284 
+wait 0 
+jump @SCRASH3_260 
+
+:SCRASH3_284
+02E7: start_cutscene 
+0169: set_fade_color_RGB 0 0 0 
+fade 1 1000 
+
+:SCRASH3_301
+if 
+82E9:   not cutscene_reached_end 
+jf @SCRASH3_325 
+wait 0 
+jump @SCRASH3_301 
+
+:SCRASH3_325
+fade 0 0 
+
+:SCRASH3_331
+if 
+fading 
+jf @SCRASH3_355 
+wait 0 
+jump @SCRASH3_331 
+
+:SCRASH3_355
+02EA: end_cutscene 
+select_interior 0 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Model.Load(#CHEETAH)
+Model.Load(#WMYVA)
+Model.Load(#SWMYRI)
+
+:SCRASH3_390
+if or
+   not Model.Available(#WMYVA)
+   not Model.Available(#CHEETAH)
+   not Model.Available(#SWMYRI)
+jf @SCRASH3_427 
+wait 0 
+jump @SCRASH3_390 
+
+:SCRASH3_427
+01EB: set_traffic_density_multiplier_to 1.0 
+65@ = 0 
+if 
+  65@ == 20 
+jf @SCRASH3_638 
+018A: 57@ = create_checkpoint_at -1748.402 909.7514 23.8906 
+018A: 60@ = create_checkpoint_at -1748.402 909.7514 23.8906 
+018A: 59@ = create_checkpoint_at -1748.402 909.7514 23.8906 
+37@ = Actor.Create(Mission1, #WMYVA, 0.0, 0.0, 0.0)
+$1874[0] = Actor.Create(CivMale, #WMYVA, 0.0, 0.0, 0.0)
+$1877 = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+$1881 = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+$1867 = Car.Create(#CHEETAH, 0.0, 0.0, 0.0)
+
+:SCRASH3_638
+018A: 57@ = create_checkpoint_at -1748.402 909.7514 23.8906 
+wait 500 
+fade 1 1000 
+281@ = 0 
+00BB: show_text_lowpriority GXT 'VAL_5' time 10000 flag 1  // ~s~The D.A. is on his way to the ~y~Vank Hoff Hotel~s~ in downtown San Fierro. Get over there now.
+
+:SCRASH3_693
+wait 0 
+if 
+   Player.WantedLevel($PLAYER_CHAR) > 0
+jf @SCRASH3_729 
+94@ = 1 
+jump @SCRASH3_736 
+
+:SCRASH3_729
+94@ = 0 
+
+:SCRASH3_736
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @SCRASH3_765 
+gosub @SCRASH3_17452 
+jump @SCRASH3_18306 
+
+:SCRASH3_765
+if 
+0735:   is_keyboard_key_pressed 68 
+jf @SCRASH3_800 
+Actor.PutAt($PLAYER_ACTOR, -1755.088, 910.0911, 23.8906)
+
+:SCRASH3_800
+if 
+0735:   is_keyboard_key_pressed 70 
+jf @SCRASH3_878 
+Actor.PutAt($PLAYER_ACTOR, -1712.653, 985.0446, 16.5859)
+if 
+   not Actor.Dead($1874[2])
+jf @SCRASH3_878 
+Actor.PutAt($1874[2], -1700.77, 984.3545, 16.5936)
+0446: set_actor $1874[2] dismemberment_possible 0 
+
+:SCRASH3_878
+if 
+0735:   is_keyboard_key_pressed 71 
+jf @SCRASH3_913 
+Actor.PutAt($PLAYER_ACTOR, -1753.841, 960.2274, 23.8828)
+
+:SCRASH3_913
+if 
+0735:   is_keyboard_key_pressed 72 
+jf @SCRASH3_1104 
+if 
+   Actor.Dead(37@)
+jf @SCRASH3_969 
+37@ = Actor.Create(CivMale, #SWMYRI, -1611.454, 714.3873, 12.4715)
+
+:SCRASH3_969
+if 
+   not Model.Available(#MERIT)
+jf @SCRASH3_996 
+wait 0 
+jump @SCRASH3_969 
+
+:SCRASH3_996
+if 
+   Car.Wrecked($1867)
+jf @SCRASH3_1035 
+$1867 = Car.Create(#MERIT, -1753.961, 951.9568, 23.7422)
+
+:SCRASH3_1035
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_1081 
+Car.PutAt($1867, -1753.961, 951.9568, 23.7422)
+Car.Angle($1867) = 90.0
+
+:SCRASH3_1081
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_1104 
+106@ = 1 
+
+:SCRASH3_1104
+if 
+0735:   is_keyboard_key_pressed 74 
+jf @SCRASH3_1165 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_1165 
+Car.PutAt($1867, -2031.828, 179.5876, 27.8359)
+Car.Angle($1867) = 90.0
+
+:SCRASH3_1165
+if 
+0735:   is_keyboard_key_pressed 75 
+jf @SCRASH3_1216 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_1216 
+Car.PutAt($1867, -1779.759, 971.5197, 23.7344)
+
+:SCRASH3_1216
+if 
+0735:   is_keyboard_key_pressed 82 
+jf @SCRASH3_1245 
+65@ = 10 
+72@ = 90 
+
+:SCRASH3_1245
+if 
+  73@ == 1 
+jf @SCRASH3_1311 
+if 
+8500:   not player $PLAYER_CHAR skin == "VALET" on_bodypart 17 
+jf @SCRASH3_1311 
+00BB: show_text_lowpriority GXT 'VAL_B1' time 4000 flag 1  // ~r~You no longer have the valet uniform.
+jump @SCRASH3_18206 
+
+:SCRASH3_1311
+gosub @SCRASH3_15301 
+89@ = 0 
+if 
+  65@ > 1 
+jf @SCRASH3_1543 
+
+:SCRASH3_1343
+if 
+  2 > 89@ 
+jf @SCRASH3_1543 
+if 
+04A3:   $1892(89@,3i) == 6 // == constant 
+jf @SCRASH3_1529 
+if 
+056D:   actor $1874(89@,3i) defined 
+jf @SCRASH3_1529 
+Actor.StoreDeadActorPos($1874(89@,3i), $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  $TEMPVAR_FLOAT_1 > -1760.178 
+  $TEMPVAR_FLOAT_2 > 972.2405 
+  $TEMPVAR_FLOAT_3 > 16.1633 
+  -1679.605 > $TEMPVAR_FLOAT_1 
+  1064.293 > $TEMPVAR_FLOAT_2 
+  24.8629 > $TEMPVAR_FLOAT_3 
+jf @SCRASH3_1499 
+jump @SCRASH3_1529 
+
+:SCRASH3_1499
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_9' time 3000 flag 1  // ~r~You were spotted wasting the valet.
+jump @SCRASH3_18206 
+
+:SCRASH3_1529
+89@ += 1 
+jump @SCRASH3_1343 
+
+:SCRASH3_1543
+if 
+  $1901 == 1 
+jf @SCRASH3_1695 
+if 
+  68@ == 1 
+jf @SCRASH3_1611 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_1611 
+0987: get_car_blocking_car $1867 store_to $VALET_CAR 
+0084: $10754 = $VALET_CAR // (int) 
+
+:SCRASH3_1611
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_1695 
+03F3: get_car $1867 primary_color_to 90@ secondary_color_to 91@ 
+if or
+84A4:   not  90@ == 4 // == constant 
+84A4:   not  91@ == 4 // == constant 
+jf @SCRASH3_1695 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_A35' time 4000 flag 1  // ~r~You've resprayed the car. The D.A. may notice the difference!
+jump @SCRASH3_18206 
+
+:SCRASH3_1695
+if 
+  65@ == 0 
+jf @SCRASH3_1739 
+65@ = 1 
+70@ = 0 
+$1886 = 1 
+0732: random_car_generator_disable_model #MERIT 
+
+:SCRASH3_1739
+if 
+  65@ == 1 
+jf @SCRASH3_3046 
+if 
+  70@ == 0 
+jf @SCRASH3_1837 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 1 in_sphere -1748.402 909.7514 23.8906 radius 3.0 3.0 3.0 
+jf @SCRASH3_1837 
+Player.CanMove($PLAYER_CHAR) = False
+70@ = 1 
+
+:SCRASH3_1837
+if 
+  70@ == 1 
+jf @SCRASH3_1874 
+fade 0 1000 
+Model.Load(#ZR350)
+70@ = 2 
+
+:SCRASH3_1874
+if 
+  70@ == 2 
+jf @SCRASH3_2380 
+if and
+   not fading 
+   Model.Available(#ZR350)
+jf @SCRASH3_2380 
+Actor.DestroyInstantly($1874[0])
+Actor.DestroyInstantly($1874[1])
+Actor.DestroyInstantly($1874[2])
+$1872 = 1 
+08A9: load_external_script 72 (VALET) 
+0926: $SCRIPT_STATUS = external_script_status 72 (VALET) 
+if 
+  $SCRIPT_STATUS > 0 
+jf @SCRASH3_2011 
+$1873 = 1 
+
+:SCRASH3_1968
+if 
+  $SCRIPT_STATUS > 0 
+jf @SCRASH3_2004 
+wait 0 
+0926: $SCRIPT_STATUS = external_script_status 72 (VALET) 
+jump @SCRASH3_1968 
+
+:SCRASH3_2004
+$1873 = 0 
+
+:SCRASH3_2011
+if 
+88AB:   not external_script 72 (VALET) loaded 
+jf @SCRASH3_2037 
+wait 0 
+jump @SCRASH3_2011 
+
+:SCRASH3_2037
+0913: run_external_script 72 (VALET)  
+$1886 = 2 
+$1890 = 1 
+022B: create_forbidden_for_peds_cube_cornerA -1729.549 942.886 40.3585 cornerB -1742.773 937.7814 10.1928 
+022B: create_forbidden_for_peds_cube_cornerA -1768.524 938.887 40.7496 cornerB -1780.765 943.4574 10.0929 
+0395: clear_area 0 at -1722.675 935.279 23.75 radius 55.0 
+92@ = Car.Create(#ZR350, -1736.961, 946.0503, 23.7487)
+073B: unknown_car 92@ flag 0 
+Car.Angle(92@) = 19.0
+0560: create_random_actor_in_car 92@ handle_as 93@ 
+Actor.RemoveReferences(93@)
+Car.RemoveReferences(92@)
+Model.Destroy(#ZR350)
+if 
+   not Car.Wrecked(92@)
+jf @SCRASH3_2297 
+0615: define_AS_pack_begin 86@ 
+05D1: AS_actor -1 drive_car 92@ to -1753.968 952.9821 23.75 speed 15.0 0 model #NULL 3 
+05CD: AS_actor -1 exit_car 92@ 
+05C1: AS_actor -1 speak_from_audio_table 230 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 86@ 
+0618: assign_actor 93@ to_AS_pack 86@ 
+061B: remove_references_to_AS_pack 86@ 
+
+:SCRASH3_2297
+Marker.Disable(57@)
+02A3: enable_widescreen 1 
+Camera.SetPosition(-1763.482, 959.9526, 25.8866, 0.0, 0.0, 0.0)
+Camera.PointAt(-1762.601, 959.5414, 25.6518, 2)
+70@ = 3 
+0085: 71@ = 32@ // (int) 
+71@ += 3000 
+
+:SCRASH3_2380
+if 
+  70@ == 3 
+jf @SCRASH3_2523 
+if and
+04A3:   $1892[0] == 2 // == constant 
+04A3:   $1892[1] == 2 // == constant 
+04A3:   $1892[2] == 2 // == constant 
+jf @SCRASH3_2467 
+04AE: $1892[0] = 11 // = constant 
+04AE: $1892[1] = 11 // = constant 
+0085: 71@ = 32@ // (int) 
+71@ += 700 
+70@ = 4 
+
+:SCRASH3_2467
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_2523 
+04AE: $1892[0] = 11 // = constant 
+04AE: $1892[1] = 11 // = constant 
+0085: 71@ = 32@ // (int) 
+71@ += 700 
+70@ = 4 
+
+:SCRASH3_2523
+if 
+  70@ == 4 
+jf @SCRASH3_2574 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_2574 
+fade 1 700 
+70@ = 5 
+
+:SCRASH3_2574
+if 
+  70@ == 5 
+jf @SCRASH3_2644 
+if 
+   not fading 
+jf @SCRASH3_2644 
+00BC: show_text_highpriority GXT 'VAL_6' time 6000 flag 1  // This hotel operates a valet service. The D.A. will be dropping his car off here shortly.
+0085: 71@ = 32@ // (int) 
+71@ += 6000 
+70@ = 6 
+
+:SCRASH3_2644
+if 
+  70@ == 6 
+jf @SCRASH3_2708 
+if 
+08D0:   should_skip_cutscene 
+jf @SCRASH3_2682 
+70@ = 7 
+
+:SCRASH3_2682
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_2708 
+70@ = 7 
+
+:SCRASH3_2708
+if 
+  70@ == 7 
+jf @SCRASH3_3046 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH3_2779 
+Actor.PutAt($PLAYER_ACTOR, -1747.198, 909.9226, 23.8906)
+Actor.Angle($PLAYER_ACTOR) = 5.6727
+jump @SCRASH3_2813 
+
+:SCRASH3_2779
+0811: $VALET_CAR = actor $PLAYER_ACTOR used_car 
+if 
+   not Car.Wrecked($VALET_CAR)
+jf @SCRASH3_2813 
+Car.Angle($VALET_CAR) = 0.0
+
+:SCRASH3_2813
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+Player.CanMove($PLAYER_CHAR) = True
+00BC: show_text_highpriority GXT 'VAL_A25' time 6000 flag 1  // ~s~Follow the ~r~valet~s~ to the underground car park and waste him. Make sure no one is around.
+65@ = 2 
+$10932 = 1 
+if 
+   not Actor.Dead($1874[2])
+jf @SCRASH3_3046 
+63@ = Marker.CreateAboveActor($1874[2])
+if 
+   not Car.Wrecked(92@)
+jf @SCRASH3_3046 
+if 
+   not Actor.InCar($1874[2], 92@)
+jf @SCRASH3_3046 
+if 
+   not Actor.Dead(93@)
+jf @SCRASH3_3046 
+Actor.DestroyInstantly(93@)
+036A: put_actor $1874[2] in_car 92@ 
+0810: store_random_parkplace_in_cube_cornerA -1760.178 972.2405 16.1633 cornerB -1679.605 1064.293 24.8629 position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0086: $10942 = $TEMPVAR_FLOAT_1 // (float) 
+0086: $10943 = $TEMPVAR_FLOAT_2 // (float) 
+0086: $10944 = $TEMPVAR_FLOAT_3 // (float) 
+05D1: AS_actor $1874[2] drive_car 92@ to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 speed 15.0 1 model #NULL 0 
+04AE: $1892[2] = 8 // = constant 
+
+:SCRASH3_3046
+if 
+  65@ == 2 
+jf @SCRASH3_3808 
+if and
+  95@ == 0 
+  94@ == 1 
+jf @SCRASH3_3105 
+00BB: show_text_lowpriority GXT 'VAL_B3' time 5000 flag 1  // ~s~The cops are on to you. Clear the heat before following the valet in to the car park.
+
+:SCRASH3_3105
+if 
+  94@ == 1 
+jf @SCRASH3_3233 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if and
+  $TEMPVAR_FLOAT_1 > -1760.178 
+  $TEMPVAR_FLOAT_2 > 972.2405 
+  $TEMPVAR_FLOAT_3 > 16.1633 
+  -1679.605 > $TEMPVAR_FLOAT_1 
+  1064.293 > $TEMPVAR_FLOAT_2 
+  24.8629 > $TEMPVAR_FLOAT_3 
+jf @SCRASH3_3233 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_B4' time 5000 flag 1  // ~r~The cops saw you entering the car park.
+jump @SCRASH3_18206 
+
+:SCRASH3_3233
+0085: 95@ = 94@ // (int) 
+if 
+056D:   actor $1874[2] defined 
+jf @SCRASH3_3808 
+if 
+   not Actor.Dead($1874[2])
+jf @SCRASH3_3591 
+Actor.StorePos($1874[2], $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+04A3:   $1892[2] == 2 // == constant 
+jf @SCRASH3_3330 
+if 
+  $1881 == 0 
+jf @SCRASH3_3330 
+$10752 = 1 
+
+:SCRASH3_3330
+if 
+  $5286 == 0 
+jf @SCRASH3_3474 
+if 
+  94@ == 0 
+jf @SCRASH3_3467 
+if and
+  $TEMPVAR_FLOAT_1 > -1760.178 
+  $TEMPVAR_FLOAT_2 > 972.2405 
+  $TEMPVAR_FLOAT_3 > 16.1633 
+  -1679.605 > $TEMPVAR_FLOAT_1 
+  1064.293 > $TEMPVAR_FLOAT_2 
+  24.8629 > $TEMPVAR_FLOAT_3 
+jf @SCRASH3_3467 
+00BB: show_text_lowpriority GXT 'VAL_A22' time 5000 flag 1  // The valet is in the car park. Take ~r~him~s~ out while he's down there!
+$5286 = 1 
+03C7: set_sensitivity_to_crime -1.0 
+
+:SCRASH3_3467
+jump @SCRASH3_3591 
+
+:SCRASH3_3474
+if or
+  -1760.178 > $TEMPVAR_FLOAT_1 
+  972.2405 > $TEMPVAR_FLOAT_2 
+  16.1633 > $TEMPVAR_FLOAT_3 
+  $TEMPVAR_FLOAT_1 > -1679.605 
+  $TEMPVAR_FLOAT_2 > 1064.293 
+  $TEMPVAR_FLOAT_3 > 24.8629 
+jf @SCRASH3_3591 
+00BB: show_text_lowpriority GXT 'VAL_A23' time 4000 flag 1  // The ~r~valet's~s~ leaving the car park.
+00BB: show_text_lowpriority GXT 'VAL_A24' time 5000 flag 1  // Kill ~r~him~s~ when he gets back down with another car.
+$5286 = 0 
+03C7: set_sensitivity_to_crime 1.0 
+
+:SCRASH3_3591
+if 
+   Actor.Dead($1874[2])
+jf @SCRASH3_3808 
+Marker.Disable(63@)
+Actor.StoreDeadActorPos($1874[2], 96@, 97@, 98@)
+03C7: set_sensitivity_to_crime 1.0 
+if and
+  96@ > -1760.178 
+  97@ > 972.2405 
+  98@ > 16.1633 
+  -1679.605 > 96@ 
+  1064.293 > 97@ 
+  24.8629 > 98@ 
+jf @SCRASH3_3761 
+74@ = Pickup.Create(#CLOTHESP, 3, 96@, 97@, 98@)
+03DC: 64@ = create_marker_above_pickup 74@ 
+00BC: show_text_highpriority GXT 'VAL_8' time 5000 flag 1  // ~s~Pick up the ~g~valet's uniform~s~
+65@ = 3 
+jump @SCRASH3_3808 
+
+:SCRASH3_3761
+Marker.Disable(61@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BC: show_text_highpriority GXT 'VAL_9' time 5000 flag 1  // ~r~You were spotted wasting the valet.
+jump @SCRASH3_18206 
+
+:SCRASH3_3808
+if 
+  65@ == 3 
+jf @SCRASH3_3905 
+if 
+   Pickup.Picked_up(74@)
+jf @SCRASH3_3905 
+100@ = 1 
+043C: disable_sounds_after_fadeout 0 
+fade 0 1000 
+Pickup.Destroy(74@)
+Marker.Disable(64@)
+Model.Load(#WMYVA2)
+65@ = 41 
+0085: 71@ = 32@ // (int) 
+71@ += 2000 
+99@ = 0 
+
+:SCRASH3_3905
+if 
+  65@ == 41 
+jf @SCRASH3_4223 
+if 
+   not fading 
+jf @SCRASH3_4223 
+if 
+  99@ == 0 
+jf @SCRASH3_3985 
+04AF: 151@ = 20802 // = constant 
+0085: 153@ = 32@ // (int) 
+153@ += 500 
+99@ = 1 
+
+:SCRASH3_3985
+if 
+   Model.Available(#WMYVA2)
+jf @SCRASH3_4223 
+if 
+056D:   actor $1874[2] defined 
+jf @SCRASH3_4073 
+0889: store_actor $1874[2] center_of_body_position_to 96@ 97@ 98@ 
+Actor.StoreDeadActorPos($1874[2], 96@, 97@, 98@)
+if 
+09A8:   actor $1874[2] headshoted 
+jf @SCRASH3_4068 
+100@ = 1 
+
+:SCRASH3_4068
+Actor.DestroyInstantly($1874[2])
+
+:SCRASH3_4073
+101@ = Actor.Create(CivMale, #WMYVA2, 96@, 97@, 98@)
+Actor.PutAt(101@, 96@, 97@, 98@)
+03FE: set_actor 101@ money 0 
+Actor.RemoveReferences(101@)
+0489: set_actor 101@ muted 1 
+if 
+  100@ == 1 
+jf @SCRASH3_4148 
+0321: AS_actor 101@ die_headshotted 
+
+:SCRASH3_4148
+05BE: AS_actor 101@ die 
+Player.CanMove($PLAYER_CHAR) = False
+Player.SetClothes($PLAYER_CHAR, "VALET", "VALET", Special)
+73@ = 1 
+Player.Build($PLAYER_CHAR)
+Player.CanMove($PLAYER_CHAR) = True
+0085: 71@ = 32@ // (int) 
+71@ += 700 
+65@ = 40 
+
+:SCRASH3_4223
+if 
+  73@ == 1 
+jf @SCRASH3_4291 
+if 
+  94@ == 1 
+jf @SCRASH3_4291 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BC: show_text_highpriority GXT 'VAL_B5' time 5000 flag 1  // ~r~You're wanted by the cops. Now your cover's blown.
+jump @SCRASH3_18206 
+
+:SCRASH3_4291
+if 
+  65@ == 40 
+jf @SCRASH3_4360 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_4360 
+if 
+  151@ == 0 
+jf @SCRASH3_4360 
+fade 1 600 
+65@ = 42 
+
+:SCRASH3_4360
+if 
+  65@ == 42 
+jf @SCRASH3_4445 
+if 
+   not fading 
+jf @SCRASH3_4445 
+043C: disable_sounds_after_fadeout 1 
+00BE: text_clear_all 
+00BC: show_text_highpriority GXT 'VAL_A32' time 5000 flag 1  // ~s~Get to the valet ~y~car port~s~ and wait with the other valets.
+Marker.Disable(57@)
+018A: 57@ = create_checkpoint_at -1759.026 960.4122 23.8905 
+65@ = 4 
+
+:SCRASH3_4445
+if 
+  65@ == 4 
+jf @SCRASH3_4605 
+if 
+  102@ == 0 
+jf @SCRASH3_4543 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere -1759.026 960.4122 23.8905 radius 10.0 10.0 10.0 on_foot 
+jf @SCRASH3_4543 
+102@ = 1 
+281@ = 13 
+
+:SCRASH3_4543
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere -1757.054 960.1191 23.8906 radius 2.0 2.0 2.0 on_foot 
+jf @SCRASH3_4605 
+65@ = 5 
+72@ = 0 
+
+:SCRASH3_4605
+if 
+  65@ == 5 
+jf @SCRASH3_6125 
+if 
+  72@ == 0 
+jf @SCRASH3_4670 
+fade 0 1000 
+Model.Load(#MERIT)
+Model.Load(#BUFFALO)
+07C0: load_path 155 
+72@ = 1 
+
+:SCRASH3_4670
+if 
+  72@ == 1 
+jf @SCRASH3_4820 
+if 
+   not fading 
+jf @SCRASH3_4820 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-1584.371, 727.5854, 28.9622, 0.0, 0.0, 0.0)
+Camera.PointAt(-1585.114, 727.2239, 28.3981, 2)
+04E4: refresh_game_renderer_at -1585.114 727.2239 
+0A0B: set_rendering_origin_at_3D_coord -1584.371 727.5854 28.9622 angle 270.0 
+72@ = 2 
+0085: 71@ = 32@ // (int) 
+71@ += 1000 
+
+:SCRASH3_4820
+if 
+  72@ == 2 
+jf @SCRASH3_4871 
+if and
+   Model.Available(#MERIT)
+07C1:   path 155 available 
+jf @SCRASH3_4871 
+Marker.Disable(57@)
+72@ = 3 
+
+:SCRASH3_4871
+if 
+  72@ == 3 
+jf @SCRASH3_5346 
+if and
+001D:   32@ > 71@ // (int) 
+   Model.Available(#BUFFALO)
+   Model.Available(#MERIT)
+jf @SCRASH3_5336 
+Camera.SetPosition(-1621.481, 738.7783, 14.293, 0.0, 0.0, 0.0)
+Camera.PointAt(-1620.638, 738.2501, 14.3895, 2)
+$1867 = Car.Create(#MERIT, -1611.379, 725.24, 11.8774)
+0229: set_car $1867 primary_color_to 4 secondary_color_to 4 
+05EB: assign_car $1867 to_path 155 
+073B: unknown_car $1867 flag 0 
+37@ = Actor.Create(CivMale, #SWMYRI, -1611.454, 714.3873, 12.4715)
+Actor.Health(37@) = 200
+Actor.SetMaxHealth(37@, 200)
+Actor.Angle(37@) = 0.0
+0615: define_AS_pack_begin 86@ 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_5120 
+05D3: AS_actor -1 goto_point -1611.596 723.0802 12.2361 mode 4 time -2 ms // versionA 
+05CB: AS_actor -1 enter_car $1867 as_driver -2 ms 
+
+:SCRASH3_5120
+0616: define_AS_pack_end 86@ 
+0618: assign_actor 37@ to_AS_pack 86@ 
+061B: remove_references_to_AS_pack 86@ 
+0395: clear_area 0 at -1779.804 915.7557 23.7487 radius 25.0 
+92@ = Car.Create(#BUFFALO, -1779.804, 915.7557, 23.7487)
+073B: unknown_car 92@ flag 0 
+Car.Angle(92@) = 270.0
+0560: create_random_actor_in_car 92@ handle_as 93@ 
+Actor.RemoveReferences(93@)
+Car.RemoveReferences(92@)
+Model.Destroy(#BUFFALO)
+if 
+   not Car.Wrecked(92@)
+jf @SCRASH3_5315 
+0615: define_AS_pack_begin 86@ 
+05D1: AS_actor -1 drive_car 92@ to -1753.968 952.9821 23.75 speed 15.0 0 model #NULL 3 
+05CD: AS_actor -1 exit_car 92@ 
+05C1: AS_actor -1 speak_from_audio_table 230 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 86@ 
+0618: assign_actor 93@ to_AS_pack 86@ 
+061B: remove_references_to_AS_pack 86@ 
+
+:SCRASH3_5315
+fade 1 1000 
+72@ = 4 
+jump @SCRASH3_5346 
+
+:SCRASH3_5336
+Model.Load(#BUFFALO)
+Model.Load(#MERIT)
+
+:SCRASH3_5346
+if 
+  72@ == 4 
+jf @SCRASH3_5439 
+if 
+   not fading 
+jf @SCRASH3_5439 
+0707: start_scene_skip_to @SCRASH3_5793 
+00BC: show_text_highpriority GXT 'VAL_12' time 4000 flag 1  // ~s~The D.A. is driving a blue Merit. Remember it, you'll need to identify it correctly when it arrives.
+00BB: show_text_lowpriority GXT 'VAL_13' time 4000 flag 1  // ~s~Make sure none of the other valets service his car first.
+0085: 71@ = 32@ // (int) 
+71@ += 3500 
+72@ = 5 
+
+:SCRASH3_5439
+if 
+  72@ == 5 
+jf @SCRASH3_5483 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_5483 
+72@ = 6 
+
+:SCRASH3_5483
+if 
+  72@ == 6 
+jf @SCRASH3_5645 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_5645 
+if 
+   Actor.Driving(37@)
+jf @SCRASH3_5645 
+05EC: release_car $1867 from_path 
+if and
+   not Actor.Dead(37@)
+   not Car.Wrecked($1867)
+jf @SCRASH3_5622 
+0615: define_AS_pack_begin 86@ 
+05B9: AS_actor -1 stay_idle 800 ms 
+05D1: AS_actor -1 drive_car $1867 to -1571.425 725.7955 6.0391 speed 7.0 2 model #NULL 3 
+0616: define_AS_pack_end 86@ 
+0618: assign_actor 37@ to_AS_pack 86@ 
+061B: remove_references_to_AS_pack 86@ 
+
+:SCRASH3_5622
+72@ = 7 
+0085: 71@ = 32@ // (int) 
+71@ += 2000 
+
+:SCRASH3_5645
+if 
+  72@ == 7 
+jf @SCRASH3_5756 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_5756 
+Camera.SetPosition(-1587.974, 725.1835, 7.7383, 0.0, 0.0, 0.0)
+Camera.PointAt(-1588.891, 725.1658, 8.1361, 2)
+72@ = 8 
+0085: 71@ = 32@ // (int) 
+71@ += 3000 
+
+:SCRASH3_5756
+if 
+  72@ == 8 
+jf @SCRASH3_5809 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_5809 
+
+:SCRASH3_5793
+0701: end_scene_skip 
+fade 0 900 
+72@ = 9 
+
+:SCRASH3_5809
+if 
+  72@ == 9 
+jf @SCRASH3_6011 
+if 
+   not fading 
+jf @SCRASH3_6011 
+0873: release_path 155 
+01E7: remove_forbidden_for_cars_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+if and
+   not Car.Wrecked($1867)
+   not Actor.Dead(37@)
+jf @SCRASH3_5929 
+if 
+060E:   car $1867 assigned_to_path 
+jf @SCRASH3_5929 
+05EC: release_car $1867 from_path 
+Car.Destroy($1867)
+Actor.DestroyInstantly(37@)
+
+:SCRASH3_5929
+Actor.PutAt($PLAYER_ACTOR, -1759.631, 960.4594, 23.8905)
+Actor.Angle($PLAYER_ACTOR) = 194.1832
+04E4: refresh_game_renderer_at -1748.402 909.7514 
+Camera.SetAtPos(-1748.402, 909.7514, 23.8906)
+0085: 71@ = 32@ // (int) 
+71@ += 1000 
+72@ = 10 
+
+:SCRASH3_6011
+if 
+  72@ == 10 
+jf @SCRASH3_6125 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_6125 
+fade 1 900 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_A27' time 7000 flag 1  // ~s~Identify and enter the D.A.'s car when it arrives.
+04AE: $1892[0] = 2 // = constant 
+04AE: $1892[1] = 2 // = constant 
+0209: $10752 = random_int_in_ranges 1 3 
+56@ = 1 
+65@ = 6 
+
+:SCRASH3_6125
+if 
+  $1901 == 1 
+jf @SCRASH3_6191 
+if 
+   Car.Wrecked($1867)
+jf @SCRASH3_6191 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_40' time 4000 flag 1  // ~r~You destroyed the D.A.'s car!
+jump @SCRASH3_18206 
+
+:SCRASH3_6191
+if 
+  56@ == 1 
+jf @SCRASH3_7058 
+if 
+   not 107@ == 2 
+jf @SCRASH3_7058 
+if and
+84A3:   not  $1892[0] == 2 // == constant 
+84A3:   not  $1892[1] == 2 // == constant 
+jf @SCRASH3_6259 
+$10752 = 0 
+
+:SCRASH3_6259
+if 
+  56@ == 1 
+jf @SCRASH3_7058 
+if 
+  $10752 == 0 
+jf @SCRASH3_6820 
+if 
+  $1885 == 0 
+jf @SCRASH3_6820 
+if 
+  $1881 == 0 
+jf @SCRASH3_6820 
+if 
+  107@ == 0 
+jf @SCRASH3_6494 
+if 
+80C2:   not sphere_onscreen -1709.886 899.3372 23.7422 radius 5.0 
+jf @SCRASH3_6494 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -1709.886 899.3372 23.7422 cornerB 20.0 20.0 20.0 
+jf @SCRASH3_6494 
+0395: clear_area 0 at -1709.886 899.3372 23.7422 radius 5.0 
+$1867 = Car.Create(#MERIT, -1611.379, 725.24, 11.8774)
+Car.Angle($1867) = 0.0
+107@ = 1 
+
+:SCRASH3_6494
+if 
+  107@ == 0 
+jf @SCRASH3_6657 
+if 
+80C2:   not sphere_onscreen -1674.725 933.5232 23.7365 radius 5.0 
+jf @SCRASH3_6657 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -1674.725 933.5232 23.7365 cornerB 20.0 20.0 20.0 
+jf @SCRASH3_6657 
+0395: clear_area 0 at -1674.725 933.5232 23.7365 radius 5.0 
+$1867 = Car.Create(#MERIT, -1674.725, 933.5232, 23.7365)
+Car.Angle($1867) = 90.0
+107@ = 1 
+
+:SCRASH3_6657
+if 
+  107@ == 0 
+jf @SCRASH3_6820 
+if 
+80C2:   not sphere_onscreen -1791.158 877.27 23.75 radius 5.0 
+jf @SCRASH3_6820 
+if 
+80A4:   not actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -1791.158 877.27 23.75 cornerB 20.0 20.0 20.0 
+jf @SCRASH3_6820 
+0395: clear_area 0 at -1791.158 877.27 23.75 radius 5.0 
+$1867 = Car.Create(#MERIT, -1791.158, 877.27, 23.75)
+Car.Angle($1867) = 0.0
+107@ = 1 
+
+:SCRASH3_6820
+if 
+  107@ == 1 
+jf @SCRASH3_7058 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_7058 
+0229: set_car $1867 primary_color_to 4 secondary_color_to 4 
+073B: unknown_car $1867 flag 0 
+37@ = Actor.Create(CivMale, #SWMYRI, -1611.454, 714.3873, 12.4715)
+Actor.Health(37@) = 200
+Actor.SetMaxHealth(37@, 200)
+if 
+   not Actor.Driving(37@)
+jf @SCRASH3_6940 
+0792: disembark_instantly_actor 37@ 
+036A: put_actor 37@ in_car $1867 
+
+:SCRASH3_6940
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_7037 
+0615: define_AS_pack_begin 86@ 
+05B9: AS_actor -1 stay_idle 10000 ms 
+05D1: AS_actor -1 drive_car $1867 to -1758.877 952.744 23.7487 speed 15.0 0 model #NULL 0 
+05CD: AS_actor -1 exit_car $1867 
+05C1: AS_actor -1 speak_from_audio_table 230 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 86@ 
+0618: assign_actor 37@ to_AS_pack 86@ 
+061B: remove_references_to_AS_pack 86@ 
+
+:SCRASH3_7037
+68@ = 1 
+$1901 = 1 
+107@ = 2 
+
+:SCRASH3_7058
+if 
+  68@ == 1 
+jf @SCRASH3_7276 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_7228 
+if 
+   Actor.InCar(37@, $1867)
+jf @SCRASH3_7180 
+062E: get_actor 37@ task 1560 status_store_to 105@ // ret 7 if not found 
+if 
+04A4:   105@ == 1 // == constant 
+jf @SCRASH3_7173 
+0646: unknown_get_actor 37@ task_1560_status_store_to 105@ // similar to 062E 
+if 
+  105@ == 2 
+jf @SCRASH3_7173 
+106@ = 1 
+
+:SCRASH3_7173
+jump @SCRASH3_7228 
+
+:SCRASH3_7180
+if 
+   not 106@ == 1 
+jf @SCRASH3_7228 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_A1' time 4000 flag 1  // ~r~You've given yourself away.
+jump @SCRASH3_18206 
+
+:SCRASH3_7228
+if 
+   Actor.Dead(37@)
+jf @SCRASH3_7276 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_34' time 4000 flag 1  // ~r~You killed the D.A.!
+jump @SCRASH3_18206 
+
+:SCRASH3_7276
+if 
+  65@ > 6 
+jf @SCRASH3_7353 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_7353 
+if 
+80F2:   not actor $PLAYER_ACTOR near_actor 37@ radius 80.0 80.0 0 
+jf @SCRASH3_7353 
+Actor.DestroyInstantly(37@)
+68@ = 0 
+
+:SCRASH3_7353
+if 
+  65@ > 5 
+jf @SCRASH3_7526 
+if and
+  108@ == 0 
+  112@ == 0 
+jf @SCRASH3_7526 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_7526 
+046C: 79@ = car $1867 driver 
+if and
+803B:   not  79@ == 37@ // (int) 
+87D6:   not  79@ == $PLAYER_ACTOR // @ == $ (int) 
+   not 79@ == -1 
+jf @SCRASH3_7526 
+00BB: show_text_lowpriority GXT 'VAL_A28' time 4000 flag 1  // ~s~A valet has taken the D.A.'s car. Steal the ~r~car~s~ off him before he parks it.
+Marker.Disable(60@)
+60@ = Marker.CreateAboveCar($1867)
+Marker.Disable(57@)
+56@ = 0 
+108@ = 1 
+0089: 109@ = $10942 // (float) 
+0089: 110@ = $10943 // (float) 
+0089: 111@ = $10944 // (float) 
+
+:SCRASH3_7526
+if 
+  108@ == 1 
+jf @SCRASH3_7663 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_7663 
+if 
+01AF:   car $1867 sphere 0 in_sphere 109@ 110@ 111@ radius 4.0 4.0 4.0 
+jf @SCRASH3_7632 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_A29' time 4000 flag 1  // ~r~You were supposed to get to the D.A.'s car.
+jump @SCRASH3_18206 
+
+:SCRASH3_7632
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_7663 
+108@ = 2 
+Marker.Disable(60@)
+
+:SCRASH3_7663
+if 
+  65@ == 6 
+jf @SCRASH3_8460 
+if 
+  56@ == 1 
+jf @SCRASH3_7914 
+if 
+  69@ == 0 
+jf @SCRASH3_7836 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere -1759.026 960.4122 23.8905 radius 15.0 15.0 15.0 
+jf @SCRASH3_7836 
+00BE: text_clear_all 
+if or
+   not Actor.Dead($1874[1])
+   not Actor.Dead($1874[0])
+jf @SCRASH3_7804 
+00BC: show_text_highpriority GXT 'VAL_49' time 5000 flag 1  // ~s~Stay near the valet ~y~carport~s~.
+
+:SCRASH3_7804
+Marker.Disable(57@)
+018A: 57@ = create_checkpoint_at -1759.026 960.4122 23.8905 
+69@ = 1 
+
+:SCRASH3_7836
+if 
+  69@ == 1 
+jf @SCRASH3_7914 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere -1759.026 960.4122 23.8905 radius 2.0 2.0 2.0 on_foot 
+jf @SCRASH3_7914 
+Marker.Disable(57@)
+69@ = 0 
+
+:SCRASH3_7914
+if 
+  56@ == 1 
+jf @SCRASH3_8226 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere -1759.026 960.4122 23.8905 radius 15.0 15.0 15.0 
+jf @SCRASH3_8226 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_8226 
+if 
+01AF:   car $1867 sphere 0 in_sphere -1757.907 952.8868 25.9104 radius 20.0 20.0 15.0 
+jf @SCRASH3_8226 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_8226 
+if 
+   Actor.InCar(37@, $1867)
+jf @SCRASH3_8226 
+if 
+   not Actor.Dead($1874[1])
+jf @SCRASH3_8150 
+if 
+00FE:   actor $1874[1] sphere 0 in_sphere -1759.026 960.4122 23.8905 radius 10.0 10.0 10.0 
+jf @SCRASH3_8150 
+56@ = 2 
+
+:SCRASH3_8150
+if 
+   not Actor.Dead($1874[0])
+jf @SCRASH3_8221 
+if 
+00FE:   actor $1874[0] sphere 0 in_sphere -1759.026 960.4122 23.8905 radius 10.0 10.0 10.0 
+jf @SCRASH3_8221 
+56@ = 2 
+
+:SCRASH3_8221
+Marker.Disable(57@)
+
+:SCRASH3_8226
+if 
+  56@ == 2 
+jf @SCRASH3_8260 
+56@ = 3 
+00BE: text_clear_all 
+281@ = 14 
+
+:SCRASH3_8260
+if 
+  106@ == 1 
+jf @SCRASH3_8460 
+0811: 77@ = actor $PLAYER_ACTOR used_car 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_8460 
+0811: 78@ = actor 37@ used_car 
+if 
+803B:   not  77@ == 78@ // (int) 
+jf @SCRASH3_8460 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_8460 
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_8460 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_15' time 7000 flag 1  // ~s~You're in the D.A.'s car. Get over to ~y~the Garage~s~ where the drugs will be planted.
+65@ = 7 
+Marker.Disable(57@)
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -2045.252 178.7994 27.8359 
+Car.Health($1867) = 1000
+$7235 = 150000 
+03C3: set_timer_to $7235 type 1 GXT 'VAL_21' // global_variable  // ~s~Time
+67@ = 1 
+
+:SCRASH3_8460
+if 
+  65@ > 6 
+jf @SCRASH3_8689 
+if or
+  10 > 65@ 
+  65@ == 13 
+  65@ == 20 
+jf @SCRASH3_8689 
+if 
+   not 112@ == 1 
+jf @SCRASH3_8689 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_8689 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_8633 
+if 
+  85@ == 1 
+jf @SCRASH3_8633 
+85@ = 0 
+Marker.Disable(60@)
+60@ = Marker.CreateAboveCar($1867)
+07E0: set_marker 60@ type_to 1 
+018B: set_marker 59@ radar_mode 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_29' time 5000 flag 1  // ~s~Get back in the ~b~car.
+
+:SCRASH3_8633
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_8689 
+if 
+  85@ == 0 
+jf @SCRASH3_8689 
+85@ = 1 
+Marker.Disable(60@)
+018B: set_marker 59@ radar_mode 2 
+
+:SCRASH3_8689
+if 
+  65@ == 7 
+jf @SCRASH3_8842 
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -2033.626 178.856 27.8359 radius 3.0 3.0 3.0 sphere 1 in_car 
+jf @SCRASH3_8842 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_8842 
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_8842 
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -2045.947 178.5964 28.1397 
+018B: set_marker 59@ radar_mode 2 
+00BE: text_clear_all 
+Garage.Open('HBGDSFS')
+65@ = 80 
+
+:SCRASH3_8842
+if 
+  65@ == 80 
+jf @SCRASH3_9042 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_9042 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-2038.055, 186.7164, 31.0085, 0.0, 0.0, 0.0)
+Camera.PointAt(-2037.704, 185.8301, 30.7068, 2)
+Car.PutAt($1867, -2033.626, 178.856, 27.8359)
+Car.Angle($1867) = 90.0
+0615: define_AS_pack_begin 114@ 
+05B9: AS_actor -1 stay_idle 1000 ms 
+05D1: AS_actor -1 drive_car $1867 to -2047.517 178.5924 27.8359 speed 7.0 0 model #NULL 3 
+0633: AS_actor -1 exit_car 
+0616: define_AS_pack_end 114@ 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack 114@ 
+061B: remove_references_to_AS_pack 114@ 
+65@ = 81 
+
+:SCRASH3_9042
+if 
+  65@ == 81 
+jf @SCRASH3_9103 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to 105@ // ret 7 if not found 
+if 
+04A4:   105@ == 7 // == constant 
+jf @SCRASH3_9103 
+fade 0 700 
+65@ = 82 
+
+:SCRASH3_9103
+if 
+  65@ == 82 
+jf @SCRASH3_9168 
+if 
+   not fading 
+jf @SCRASH3_9168 
+Garage.Close('HBGDSFS')
+0085: 71@ = 32@ // (int) 
+71@ += 1000 
+65@ = 83 
+
+:SCRASH3_9168
+if 
+  65@ == 83 
+jf @SCRASH3_9481 
+if 
+001D:   32@ > 71@ // (int) 
+jf @SCRASH3_9481 
+if 
+   Garage.IsClosed('HBGDSFS')
+jf @SCRASH3_9481 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_9286 
+Car.StorePos($1867, 41@, 42@, 43@)
+50@ = Car.Angle($1867)
+03F3: get_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Destroy($1867)
+
+:SCRASH3_9286
+Model.Load(#MERIT)
+
+:SCRASH3_9291
+if 
+   not Model.Available(#MERIT)
+jf @SCRASH3_9318 
+wait 0 
+jump @SCRASH3_9291 
+
+:SCRASH3_9318
+$1867 = Car.Create(#MERIT, -2031.502, 178.6435, 27.8516)
+0229: set_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Angle($1867) = 270.0
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_9386 
+036A: put_actor $PLAYER_ACTOR in_car $1867 
+
+:SCRASH3_9386
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+fade 1 500 
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -1780.069 970.9553 23.75 
+018B: set_marker 59@ radar_mode 2 
+65@ = 8 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_20' time 5000 flag 1  // ~s~The drugs are planted. Take the car to the valet's ~y~car park~s~.
+00BB: show_text_lowpriority GXT 'VAL_A31' time 5000 flag 1  // ~s~Keep the car spotless or the D.A. will notice.
+Player.CanMove($PLAYER_CHAR) = True
+
+:SCRASH3_9481
+if 
+  65@ == 20 
+jf @SCRASH3_10061 
+if 
+80FE:   not actor $PLAYER_ACTOR sphere 0 in_sphere -2037.239 179.5294 28.316 radius 10.0 10.0 10.0 
+jf @SCRASH3_9597 
+65@ = 7 
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -2033.626 178.856 27.8359 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_51' time 5000 flag 1  // ~s~Get back to the garage.
+
+:SCRASH3_9597
+if 
+0100:   actor $PLAYER_ACTOR in_sphere -2045.947 178.5964 28.1397 radius 4.0 4.0 4.0 sphere 1 in_car 
+jf @SCRASH3_10061 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_10061 
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_10061 
+Player.CanMove($PLAYER_CHAR) = False
+06C7: AS_actor $PLAYER_ACTOR driver_of_car $1867 perform_action 6 timelimit 2000000 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_10061 
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_10061 
+fade 0 1000 
+
+:SCRASH3_9744
+if 
+fading 
+jf @SCRASH3_9768 
+wait 0 
+jump @SCRASH3_9744 
+
+:SCRASH3_9768
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_9827 
+Car.StorePos($1867, 41@, 42@, 43@)
+50@ = Car.Angle($1867)
+03F3: get_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Destroy($1867)
+
+:SCRASH3_9827
+Model.Load(#MERIT)
+
+:SCRASH3_9832
+if 
+   not Model.Available(#MERIT)
+jf @SCRASH3_9859 
+wait 0 
+jump @SCRASH3_9832 
+
+:SCRASH3_9859
+$1867 = Car.Create(#MERIT, -2031.502, 178.6435, 27.8516)
+0229: set_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Angle($1867) = 270.0
+Garage.SetToAcceptCar('HBGDSFS', $1867)
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_9941 
+036A: put_actor $PLAYER_ACTOR in_car $1867 
+
+:SCRASH3_9941
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+wait 1000 
+fade 1 500 
+
+:SCRASH3_9957
+if 
+fading 
+jf @SCRASH3_9981 
+wait 0 
+jump @SCRASH3_9957 
+
+:SCRASH3_9981
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -1780.069 970.9553 23.75 
+018B: set_marker 59@ radar_mode 2 
+65@ = 8 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_20' time 5000 flag 1  // ~s~The drugs are planted. Take the car to the valet's ~y~car park~s~.
+00BB: show_text_lowpriority GXT 'VAL_A31' time 5000 flag 1  // ~s~Keep the car spotless or the D.A. will notice.
+Player.CanMove($PLAYER_CHAR) = True
+
+:SCRASH3_10061
+if 
+  65@ == 8 
+jf @SCRASH3_10191 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_10191 
+if 
+01AF:   car $1867 sphere 1 in_sphere -1780.069 970.9553 23.75 radius 3.0 3.0 3.0 
+jf @SCRASH3_10191 
+00BB: show_text_lowpriority GXT 'VAL_32' time 5000 flag 1  // ~s~Park the car in the marked ~y~parking space~s~.
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -1688.214 987.1218 16.5855 
+65@ = 9 
+
+:SCRASH3_10191
+if 
+  67@ == 1 
+jf @SCRASH3_10259 
+if 
+  $7235 == 0 
+jf @SCRASH3_10259 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_47' time 5000 flag 1  // ~r~You ran out of time!
+jump @SCRASH3_18206 
+
+:SCRASH3_10259
+if 
+  65@ == 9 
+jf @SCRASH3_10695 
+if 
+  85@ == 1 
+jf @SCRASH3_10695 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_10695 
+if 
+01B0:   car $1867 sphere 1 in_sphere -1688.214 987.1218 16.5855 radius 3.0 3.0 3.0 stopped 
+jf @SCRASH3_10695 
+Player.CanMove($PLAYER_CHAR) = False
+0633: AS_actor $PLAYER_ACTOR exit_car 
+Car.DoorStatus($1867) = 3
+Marker.Disable(59@)
+Marker.Disable(60@)
+018A: 59@ = create_checkpoint_at -1742.3 940.8106 23.8972 
+018B: set_marker 59@ radar_mode 2 
+014F: stop_timer $7235 
+67@ = 0 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_A30' time 6000 flag 1  // ~s~A valet is coming to return the D.A.'s car. Get ~y~outside~s~ the valet car park and call the cops.
+65@ = 30 
+113@ = Actor.Create(Mission1, #WMYVA, -1772.808, 977.8892, 22.6614)
+02A9: set_actor 113@ immune_to_nonplayer 1 
+0615: define_AS_pack_begin 114@ 
+05F5: AS_actor -1 goto_point_using_paths -1710.667 985.5689 16.5936 mode 6 time -2 
+05CB: AS_actor -1 enter_car $1867 as_driver -2 ms 
+06C7: AS_actor -1 driver_of_car $1867 perform_action 14 timelimit 1400 
+05D1: AS_actor -1 drive_car $1867 to -1764.082 982.5382 21.1042 speed 15.0 0 model #NULL 0 
+05D1: AS_actor -1 drive_car $1867 to -1754.888 952.3113 23.7422 speed 15.0 0 model #NULL 0 
+0633: AS_actor -1 exit_car 
+05D3: AS_actor -1 goto_point -1754.117 959.0662 23.8828 mode 4 time -2 ms // versionA 
+05D4: AS_actor -1 rotate_angle 147.0 
+0616: define_AS_pack_end 114@ 
+073B: unknown_car $1867 flag 0 
+37@ = Actor.Create(Mission1, #SWMYRI, -1755.392, 946.9804, 23.8906)
+Actor.Angle(37@) = 0.0
+0618: assign_actor 113@ to_AS_pack 114@ 
+061B: remove_references_to_AS_pack 114@ 
+
+:SCRASH3_10695
+if 
+  65@ == 30 
+jf @SCRASH3_11163 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_11163 
+if 
+   not Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_10795 
+if 
+  112@ == 0 
+jf @SCRASH3_10795 
+Player.CanMove($PLAYER_CHAR) = True
+112@ = 1 
+Car.SetImmunities($1867, 1, 1, 1, 1, 1)
+
+:SCRASH3_10795
+if 
+00B1:   car $1867 sphere 0 in_cube_cornerA -1764.199 946.595 28.3546 cornerB -1744.086 957.879 22.6221 
+jf @SCRASH3_10934 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_10934 
+062E: get_actor 37@ task 1560 status_store_to 105@ // ret 7 if not found 
+if 
+04A4:   105@ == 7 // == constant 
+jf @SCRASH3_10934 
+0615: define_AS_pack_begin 114@ 
+05CB: AS_actor -1 enter_car $1867 as_driver -2 ms 
+05D2: AS_actor -1 run_to_and_hijack_car $1867 max_search_radius 15.0 traffic_behavior 0 
+0616: define_AS_pack_end 114@ 
+0618: assign_actor 37@ to_AS_pack 114@ 
+061B: remove_references_to_AS_pack 114@ 
+
+:SCRASH3_10934
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_11001 
+if 
+   Actor.InCar(37@, $1867)
+jf @SCRASH3_11001 
+00BE: text_clear_all 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_A34' time 5000 flag 1  // ~r~You were too slow. The D.A. picked up his car.
+jump @SCRASH3_18206 
+
+:SCRASH3_11001
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere -1742.3 940.8106 23.8972 radius 2.0 2.0 3.0 on_foot 
+jf @SCRASH3_11082 
+67@ = 0 
+Player.CanMove($PLAYER_CHAR) = False
+Marker.Disable(59@)
+65@ = 10 
+72@ = 90 
+
+:SCRASH3_11082
+if 
+03C9:   car $1867 damaged 
+jf @SCRASH3_11163 
+if 
+   not Actor.Dead(113@)
+jf @SCRASH3_11163 
+if 
+   not Actor.InCar(113@, $1867)
+jf @SCRASH3_11163 
+gosub @SCRASH3_17452 
+00BB: show_text_lowpriority GXT 'VAL_B2' time 4000 flag 1  // ~r~The car's visibly damaged. It's too late to get it fixed.
+jump @SCRASH3_18206 
+
+:SCRASH3_11163
+if 
+  65@ > 7 
+jf @SCRASH3_11279 
+if 
+  10 > 65@ 
+jf @SCRASH3_11279 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_11279 
+if 
+03C9:   car $1867 damaged 
+jf @SCRASH3_11279 
+65@ = 7 
+00BB: show_text_lowpriority GXT 'VAL_31' time 5000 flag 1  // ~s~The car's noticeably damaged. Take it back to ~y~the Garage~s~ to get it fixed up.
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -2045.252 178.7994 27.8359 
+
+:SCRASH3_11279
+if 
+  65@ == 10 
+jf @SCRASH3_14812 
+088D: set_objects_in_sphere -1741.792 939.731 23.8906 radius 2.5 with_model #LAMPPOST3 collision_detection 0 
+if 
+  72@ == 90 
+jf @SCRASH3_11361 
+Model.Load(#CELLPHONE)
+338@ = 1 
+72@ = 91 
+
+:SCRASH3_11361
+if 
+  72@ == 91 
+jf @SCRASH3_11584 
+if 
+   Model.Available(#CELLPHONE)
+jf @SCRASH3_11584 
+02A3: enable_widescreen 1 
+Camera.SetPosition(-1738.083, 938.6749, 25.0378, 0.0, 0.0, 0.0)
+Camera.PointAt(-1738.96, 939.1542, 25.0127, 2)
+0395: clear_area 0 at -1741.792 939.731 23.8906 radius 20.0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH3_11517 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1741.792 939.731 23.8906 
+jump @SCRASH3_11537 
+
+:SCRASH3_11517
+Actor.PutAt($PLAYER_ACTOR, -1741.792, 939.731, 23.8906)
+
+:SCRASH3_11537
+Actor.Angle($PLAYER_ACTOR) = 270.0
+$193 = 1 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+0085: 123@ = 32@ // (int) 
+123@ += 2500 
+72@ = 89 
+
+:SCRASH3_11584
+if 
+  72@ == 89 
+jf @SCRASH3_11642 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_11642 
+281@ = 1 
+282@ = 2 
+72@ = 88 
+
+:SCRASH3_11642
+if 
+  72@ == 88 
+jf @SCRASH3_11720 
+if and
+  281@ == 0 
+  282@ == 0 
+jf @SCRASH3_11720 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+$193 = 0 
+fade 0 1000 
+$1901 = 0 
+72@ = 87 
+
+:SCRASH3_11720
+if 
+  72@ == 87 
+jf @SCRASH3_11852 
+if 
+   not fading 
+jf @SCRASH3_11852 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_11772 
+Actor.DestroyInstantly(37@)
+
+:SCRASH3_11772
+72@ = 99 
+$1890 = 1 
+if 
+   not Car.Wrecked($1881)
+jf @SCRASH3_11807 
+Car.Destroy($1881)
+
+:SCRASH3_11807
+if 
+   not Car.Wrecked($1877)
+jf @SCRASH3_11828 
+Car.Destroy($1877)
+
+:SCRASH3_11828
+0395: clear_area 0 at -1741.792 939.731 23.0 radius 80.0 
+
+:SCRASH3_11852
+if 
+  72@ == 99 
+jf @SCRASH3_12083 
+03DE: set_pedestrians_density_multiplier_to 0.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+$10753 = 1 
+04E4: refresh_game_renderer_at -1759.449 954.4333 
+Camera.SetAtPos(-1759.449, 954.4333, 23.72)
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH3_11963 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at -1741.792 939.731 23.8906 
+jump @SCRASH3_11983 
+
+:SCRASH3_11963
+Actor.PutAt($PLAYER_ACTOR, -1741.792, 939.731, 23.8906)
+
+:SCRASH3_11983
+Actor.Angle($PLAYER_ACTOR) = 40.0
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+Camera.SetPosition(-1738.083, 938.6749, 25.0378, 0.0, 0.0, 0.0)
+Camera.PointAt(-1738.96, 939.1542, 25.0127, 2)
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_12076 
+Car.Destroy($1867)
+
+:SCRASH3_12076
+72@ = 98 
+
+:SCRASH3_12083
+if 
+  72@ == 98 
+jf @SCRASH3_12260 
+if and
+   Model.Available(#MERIT)
+   Model.Available(#COLT45)
+   Model.Available(#SWMYRI)
+04EE:   animation "POLICE" loaded 
+04EE:   animation "MISC" loaded 
+jf @SCRASH3_12227 
+if and
+   Model.Available(#SFPD1)
+07C1:   path 165 available 
+07C1:   path 166 available 
+   Model.Available(#COPCARSF)
+jf @SCRASH3_12200 
+72@ = 0 
+Model.Destroy(#CHEETAH)
+Model.Destroy(#WMYVA2)
+jump @SCRASH3_12220 
+
+:SCRASH3_12200
+Model.Load(#COPCARSF)
+07C0: load_path 166 
+07C0: load_path 165 
+Model.Load(#SFPD1)
+
+:SCRASH3_12220
+jump @SCRASH3_12260 
+
+:SCRASH3_12227
+04ED: load_animation "MISC" 
+04ED: load_animation "POLICE" 
+Model.Load(#SWMYRI)
+Model.Load(#COLT45)
+Model.Load(#MERIT)
+
+:SCRASH3_12260
+if 
+  72@ == 0 
+jf @SCRASH3_12723 
+fade 1 800 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+0395: clear_area 0 at -1759.449 954.4333 23.72 radius 50.0 
+01EB: set_traffic_density_multiplier_to 0.0 
+$1867 = Car.Create(#MERIT, -1759.449, 954.4333, 23.72)
+0229: set_car $1867 primary_color_to 4 secondary_color_to 4 
+115@ = Car.Create(#COPCARSF, -1711.399, 903.0281, 24.1296)
+116@ = Car.Create(#COPCARSF, -1711.016, 893.7642, 24.0975)
+0397: enable_car 115@ siren 1 
+0397: enable_car 116@ siren 1 
+121@ = Actor.CreateAsDriver(CivMale, #SFPD1, 115@)
+122@ = Actor.CreateAsDriver(CivMale, #SFPD1, 116@)
+Actor.GiveWeaponAndAmmo(121@, Pistol, 99999)
+Actor.GiveWeaponAndAmmo(122@, Pistol, 99999)
+37@ = Actor.Create(CivMale, #SWMYRI, -1763.276, 946.1676, 23.8905)
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_12514 
+036A: put_actor 37@ in_car $1867 
+
+:SCRASH3_12514
+0615: define_AS_pack_begin 117@ 
+05B9: AS_actor -1 stay_idle 6500 ms 
+0633: AS_actor -1 exit_car 
+05C4: AS_actor -1 hands_up 3000 ms 
+0616: define_AS_pack_end 117@ 
+0618: assign_actor 37@ to_AS_pack 117@ 
+061B: remove_references_to_AS_pack 117@ 
+Car.Angle($1867) = 90.0
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0812: AS_actor $PLAYER_ACTOR perform_animation "PLYRLEAN_LOOP" IFP "MISC" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 0 time -2 // versionB 
+Actor.StorePos($PLAYER_ACTOR, $7236, $7237, $TEMPVAR_Z_COORD)
+Camera.SetPosition(-1740.345, 939.6078, 25.3651, 0.0, 0.0, 0.0)
+Camera.PointAt(-1741.223, 940.0797, 25.2814, 2)
+0085: 325@ = 37@ // (int) 
+0085: 326@ = 121@ // (int) 
+0085: 327@ = 122@ // (int) 
+0085: 123@ = 32@ // (int) 
+123@ += 1000 
+72@ = 1 
+
+:SCRASH3_12723
+if 
+  72@ == 1 
+jf @SCRASH3_12767 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_12767 
+72@ = 2 
+
+:SCRASH3_12767
+if 
+  72@ == 2 
+jf @SCRASH3_12903 
+if and
+   not Car.Wrecked(115@)
+   not Car.Wrecked(116@)
+jf @SCRASH3_12880 
+if and
+07C1:   path 165 available 
+07C1:   path 166 available 
+jf @SCRASH3_12870 
+05EB: assign_car 115@ to_path 165 
+05EB: assign_car 116@ to_path 166 
+06FD: set_car 115@ speed_on_path_to 0.8 
+06FD: set_car 116@ speed_on_path_to 0.8 
+jump @SCRASH3_12880 
+
+:SCRASH3_12870
+07C0: load_path 165 
+07C0: load_path 166 
+
+:SCRASH3_12880
+0085: 123@ = 32@ // (int) 
+123@ += 3000 
+72@ = 3 
+
+:SCRASH3_12903
+if 
+  72@ == 3 
+jf @SCRASH3_12947 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_12947 
+72@ = 4 
+
+:SCRASH3_12947
+if 
+  72@ == 4 
+jf @SCRASH3_13165 
+00BE: text_clear_all 
+281@ = 3 
+282@ = 2 
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_13142 
+if 
+   not Actor.Dead(121@)
+jf @SCRASH3_13050 
+0615: define_AS_pack_begin 117@ 
+0633: AS_actor -1 exit_car 
+0635: AS_actor -1 aim_at_actor 37@ 3000 ms 
+0616: define_AS_pack_end 117@ 
+0618: assign_actor 121@ to_AS_pack 117@ 
+061B: remove_references_to_AS_pack 117@ 
+
+:SCRASH3_13050
+if 
+   not Actor.Dead(122@)
+jf @SCRASH3_13142 
+0615: define_AS_pack_begin 117@ 
+0633: AS_actor -1 exit_car 
+06C2: AS_actor -1 goto -1762.369 951.1278 23.7487 mode 4 turn_radius 1.0 stop_radius 1.0 actor 37@ with_offset 0.0 0.0 0.0 
+0616: define_AS_pack_end 117@ 
+0618: assign_actor 122@ to_AS_pack 117@ 
+061B: remove_references_to_AS_pack 117@ 
+
+:SCRASH3_13142
+0085: 123@ = 32@ // (int) 
+123@ += 6200 
+72@ = 5 
+
+:SCRASH3_13165
+if 
+  72@ == 5 
+jf @SCRASH3_13227 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_13227 
+if 
+  281@ == 0 
+jf @SCRASH3_13227 
+72@ = 6 
+
+:SCRASH3_13227
+if 
+  72@ == 6 
+jf @SCRASH3_13644 
+281@ = 5 
+282@ = 3 
+0085: 120@ = 32@ // (int) 
+120@ += 17333 
+0085: 119@ = 32@ // (int) 
+119@ += 17633 
+0085: 118@ = 32@ // (int) 
+118@ += 4313 
+if and
+   not Actor.Dead(121@)
+   not Actor.Dead(122@)
+jf @SCRASH3_13352 
+01B9: set_actor 121@ armed_weapon_to 0 
+01B9: set_actor 122@ armed_weapon_to 0 
+Actor.Angle(121@) = 0.0
+
+:SCRASH3_13352
+Camera.SetPosition(-1768.048, 955.8058, 25.1327, 0.0, 0.0, 0.0)
+Camera.PointAt(-1767.238, 955.2321, 25.0132, 2)
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_13424 
+04E1: open_and_freeze_car_trunk $1867 
+
+:SCRASH3_13424
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_13532 
+0792: disembark_instantly_actor 37@ 
+0619: enable_actor 37@ collision_detection 0 
+Actor.PutAt(37@, -1761.71, 952.9333, 23.79)
+Actor.Angle(37@) = 0.0
+Actor.LockInCurrentPosition(37@) = True
+0812: AS_actor 37@ perform_animation "CRM_DRGBST_01" IFP "POLICE" framedelta 1.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+
+:SCRASH3_13532
+Actor.PutAt(121@, -1761.724, 952.4515, 23.72)
+0792: disembark_instantly_actor 122@ 
+Actor.PutAt(122@, -1755.75, 953.9333, 23.72)
+0812: AS_actor 121@ perform_animation "PLC_DRGBST_01" IFP "POLICE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 0 time 25000 // versionB 
+0085: 123@ = 32@ // (int) 
+123@ += 7606 
+72@ = 7 
+
+:SCRASH3_13644
+if 
+  72@ == 7 
+jf @SCRASH3_13758 
+if 
+   not 118@ == 0 
+jf @SCRASH3_13714 
+if 
+001D:   32@ > 118@ // (int) 
+jf @SCRASH3_13714 
+09F1: play_audio_at_actor 37@ event 1009 
+118@ = 0 
+
+:SCRASH3_13714
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_13758 
+if 
+  281@ == 0 
+jf @SCRASH3_13758 
+72@ = 8 
+
+:SCRASH3_13758
+if 
+  72@ == 8 
+jf @SCRASH3_13933 
+281@ = 8 
+282@ = 2 
+Camera.SetPosition(-1757.747, 952.7751, 24.8666, 0.0, 0.0, 0.0)
+Camera.PointAt(-1756.909, 953.301, 25.0154, 2)
+if 
+   not Actor.Dead(122@)
+jf @SCRASH3_13910 
+Actor.Angle(122@) = 90.0
+0812: AS_actor 122@ perform_animation "PLC_DRGBST_02" IFP "POLICE" framedelta 1.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:SCRASH3_13910
+0085: 123@ = 32@ // (int) 
+123@ += 3267 
+72@ = 9 
+
+:SCRASH3_13933
+if 
+  72@ == 9 
+jf @SCRASH3_13995 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_13995 
+if 
+  281@ == 0 
+jf @SCRASH3_13995 
+72@ = 10 
+
+:SCRASH3_13995
+if 
+  72@ == 10 
+jf @SCRASH3_14101 
+281@ = 10 
+282@ = 3 
+Camera.SetPosition(-1768.048, 955.8058, 25.1327, 0.0, 0.0, 0.0)
+Camera.PointAt(-1767.238, 955.2321, 25.0132, 2)
+0085: 123@ = 32@ // (int) 
+123@ += 750 
+72@ = 80 
+
+:SCRASH3_14101
+if 
+  72@ == 80 
+jf @SCRASH3_14169 
+if 
+001D:   32@ > 120@ // (int) 
+jf @SCRASH3_14169 
+09F1: play_audio_at_actor 37@ event 1130 
+0085: 123@ = 32@ // (int) 
+123@ += 500 
+72@ = 81 
+
+:SCRASH3_14169
+if 
+  72@ == 81 
+jf @SCRASH3_14237 
+if 
+001D:   32@ > 119@ // (int) 
+jf @SCRASH3_14237 
+09F1: play_audio_at_actor 37@ event 1009 
+0085: 123@ = 32@ // (int) 
+123@ += 1900 
+72@ = 11 
+
+:SCRASH3_14237
+if and
+  72@ == 11 
+  281@ == 0 
+jf @SCRASH3_14526 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_14526 
+Camera.SetPosition(-1738.083, 938.6749, 25.0378, 0.0, 0.0, 0.0)
+Camera.PointAt(-1738.96, 939.1542, 25.0127, 2)
+if and
+   not Actor.Dead(121@)
+   not Actor.Dead(122@)
+   not Car.Wrecked(115@)
+   not Car.Wrecked(116@)
+   not Actor.Dead(37@)
+jf @SCRASH3_14503 
+036A: put_actor 121@ in_car 115@ 
+036A: put_actor 122@ in_car 116@ 
+Actor.LockInCurrentPosition(37@) = False
+0430: put_actor 37@ into_car 116@ passenger_seat 1 
+05D1: AS_actor 122@ drive_car 116@ to -1790.405 905.0311 25.0203 speed 20.0 2 model #NULL 3 
+0615: define_AS_pack_begin 117@ 
+06C7: AS_actor -1 driver_of_car 115@ perform_action 14 timelimit 800 
+05D1: AS_actor -1 drive_car 115@ to -1790.405 905.0311 25.0203 speed 20.0 2 model #NULL 3 
+0616: define_AS_pack_end 117@ 
+0618: assign_actor 121@ to_AS_pack 117@ 
+061B: remove_references_to_AS_pack 117@ 
+
+:SCRASH3_14503
+0085: 123@ = 32@ // (int) 
+123@ += 4000 
+72@ = 12 
+
+:SCRASH3_14526
+if 
+  72@ == 12 
+jf @SCRASH3_14812 
+if 
+001D:   32@ > 123@ // (int) 
+jf @SCRASH3_14812 
+72@ = 13 
+fade 0 1000 
+
+:SCRASH3_14577
+if 
+fading 
+jf @SCRASH3_14601 
+wait 0 
+jump @SCRASH3_14577 
+
+:SCRASH3_14601
+if 
+056D:   actor 113@ defined 
+jf @SCRASH3_14622 
+Actor.DestroyInstantly(113@)
+
+:SCRASH3_14622
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_14643 
+Car.RemoveReferences($1867)
+
+:SCRASH3_14643
+if and
+   not Actor.Dead(121@)
+   not Actor.Dead(122@)
+   not Car.Wrecked(115@)
+   not Car.Wrecked(116@)
+   not Actor.Dead(37@)
+jf @SCRASH3_14704 
+Actor.DestroyInstantly(121@)
+Actor.DestroyInstantly(122@)
+Car.Destroy(115@)
+Car.Destroy(116@)
+Actor.DestroyInstantly(37@)
+
+:SCRASH3_14704
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_14725 
+Car.Destroy($1867)
+
+:SCRASH3_14725
+if 
+0500:   player $PLAYER_CHAR skin == "VALET" on_bodypart 17 
+jf @SCRASH3_14766 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:SCRASH3_14766
+wait 1000 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+02A3: enable_widescreen 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Player.CanMove($PLAYER_CHAR) = True
+fade 1 1000 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+jump @SCRASH3_18306 
+
+:SCRASH3_14812
+if 
+  65@ == 13 
+jf @SCRASH3_15276 
+if 
+0103:   actor $PLAYER_ACTOR in_sphere -2045.252 178.7994 27.8359 radius 3.0 3.0 3.0 sphere 1 stopped_in_car 
+jf @SCRASH3_14878 
+
+:SCRASH3_14878
+if 
+01A7:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2042.943 167.5841 26.759 cornerB -2055.202 180.1328 32.3919 in_car 
+jf @SCRASH3_15276 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_15276 
+if 
+   Actor.InCar($PLAYER_ACTOR, $1867)
+jf @SCRASH3_15276 
+Player.CanMove($PLAYER_CHAR) = False
+fade 0 1000 
+
+:SCRASH3_14975
+if 
+fading 
+jf @SCRASH3_14999 
+wait 0 
+jump @SCRASH3_14975 
+
+:SCRASH3_14999
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_15058 
+Car.StorePos($1867, 41@, 42@, 43@)
+50@ = Car.Angle($1867)
+03F3: get_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Destroy($1867)
+
+:SCRASH3_15058
+Model.Load(#MERIT)
+
+:SCRASH3_15063
+if 
+   not Model.Available(#MERIT)
+jf @SCRASH3_15090 
+wait 0 
+jump @SCRASH3_15063 
+
+:SCRASH3_15090
+$1867 = Car.Create(#MERIT, -2031.502, 178.6435, 27.8516)
+0229: set_car $1867 primary_color_to 75@ secondary_color_to 76@ 
+Car.Angle($1867) = 270.0
+Garage.SetToAcceptCar('HBGDSFS', $1867)
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_15172 
+036A: put_actor $PLAYER_ACTOR in_car $1867 
+
+:SCRASH3_15172
+wait 1000 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+fade 1 500 
+
+:SCRASH3_15195
+if 
+fading 
+jf @SCRASH3_15219 
+wait 0 
+jump @SCRASH3_15195 
+
+:SCRASH3_15219
+Marker.Disable(59@)
+018A: 59@ = create_checkpoint_at -1780.069 970.9553 23.75 
+018B: set_marker 59@ radar_mode 2 
+65@ = 8 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 'VAL_33' time 5000 flag 1  // ~s~Good as new. Now get back to the ~y~car park~s~.
+
+:SCRASH3_15276
+if 
+  65@ == 11 
+jf @SCRASH3_15294 
+
+:SCRASH3_15294
+jump @SCRASH3_693 
+
+:SCRASH3_15301
+if 
+   not 151@ == 0 
+jf @SCRASH3_15492 
+if 
+  150@ == 0 
+jf @SCRASH3_15355 
+040D: unload_wav 3 
+03CF: load_wav 151@ as 3 
+150@ = 1 
+
+:SCRASH3_15355
+if 
+  150@ == 1 
+jf @SCRASH3_15418 
+if 
+03D0:   wav 3 loaded 
+jf @SCRASH3_15418 
+if 
+001D:   32@ > 153@ // (int) 
+jf @SCRASH3_15418 
+03D1: play_wav 3 
+150@ = 2 
+
+:SCRASH3_15418
+if 
+  150@ == 2 
+jf @SCRASH3_15492 
+if 
+03D2:   wav 3 ended 
+jf @SCRASH3_15492 
+040D: unload_wav 3 
+0085: 151@ = 152@ // (int) 
+152@ = 0 
+0085: 153@ = 154@ // (int) 
+154@ = 0 
+150@ = 0 
+
+:SCRASH3_15492
+if 
+   not 124@ == 0 
+jf @SCRASH3_15692 
+if 
+  125@ == 0 
+jf @SCRASH3_15570 
+125@ = 1 
+0085: 126@ = 32@ // (int) 
+127@ = 0 
+0085: 334@ = 126@ // (int) 
+005A: 334@ += 128@(127@,10i) // (int) 
+
+:SCRASH3_15570
+if 
+  125@ == 1 
+jf @SCRASH3_15692 
+if 
+001D:   32@ > 334@ // (int) 
+jf @SCRASH3_15692 
+0085: 281@ = 138@(127@,10i) // (int) 
+127@ += 1 
+148@ -= 1 
+if 
+  148@ == 0 
+jf @SCRASH3_15672 
+124@ = 0 
+125@ = 0 
+jump @SCRASH3_15692 
+
+:SCRASH3_15672
+0085: 334@ = 126@ // (int) 
+005A: 334@ += 128@(127@,10i) // (int) 
+
+:SCRASH3_15692
+if 
+  149@ == 1 
+jf @SCRASH3_15756 
+if 
+   not fading 
+jf @SCRASH3_15756 
+if or
+83D2:   not wav 1 ended 
+83D2:   not wav 2 ended 
+jf @SCRASH3_15756 
+149@ = 0 
+280@ = 5 
+
+:SCRASH3_15756
+0871: init_jump_table 280@ total_jumps 6 default_jump 0 @SCRASH3_17450 jumps 0 @SCRASH3_15819 1 @SCRASH3_16371 2 @SCRASH3_17105 3 @SCRASH3_17197 4 @SCRASH3_17255 5 @SCRASH3_17369 -1 @SCRASH3_17450 
+
+:SCRASH3_15819
+if 
+  280@ == 1 
+jf @SCRASH3_15887 
+332@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+336@ = Actor.Create(Gang2, #SPECIAL01, 2752.341, -1948.867, 16.3125)
+
+:SCRASH3_15887
+05AA: 157@s = 'SCR1_AA' // @s = 'short'  // ~z~Hello? This WE TIP?
+05AA: 159@s = 'SCR1_AB' // @s = 'short'  // ~z~I seen something highly suspicious you should come check out...
+05AA: 161@s = 'SCR1_AC' // @s = 'short'  // ~z~Police! Don't move!
+05AA: 163@s = 'SCR1_AD' // @s = 'short'  // ~z~Get outta the car with your hands in the air!
+05AA: 165@s = 'SCR1_AE' // @s = 'short'  // ~z~Do you know who you're fucking with here?
+05AA: 167@s = 'SCR1_AF' // @s = 'short'  // ~z~I'll have your badge you moron!
+05AA: 169@s = 'SCR1_AG' // @s = 'short'  // ~z~Shut up! You found anything back there?
+05AA: 171@s = 'SCR1_AH' // @s = 'short'  // ~z~Found anything? He's got half of Mexico in here!
+05AA: 173@s = 'SCR1_AJ' // @s = 'short'  // ~z~Must be two tons of Mary here!
+05AA: 175@s = 'SCR1_AK' // @s = 'short'  // ~z~What? But... but I've never seen... how could it be..?
+05AA: 177@s = 'SCR1_AL' // @s = 'short'  // ~z~Hell of a defense you got there, buddy.
+05AA: 179@s = 'SCR1_AM' // @s = 'short'  // ~z~Get in the car!
+05AA: 181@s = 'SCR1_BB' // @s = 'short'  // ~z~Ah, you must be the new boy. Get in line.
+05AA: 183@s = 'SCR1_BA' // @s = 'short'  // ~z~Hey that's the DA. He's a good tipper.
+04AF: 236@ = 34400 // = constant 
+04AF: 237@ = 34401 // = constant 
+04AF: 238@ = 34402 // = constant 
+04AF: 239@ = 34403 // = constant 
+04AF: 240@ = 34404 // = constant 
+04AF: 241@ = 34405 // = constant 
+04AF: 242@ = 34406 // = constant 
+04AF: 243@ = 34407 // = constant 
+04AF: 244@ = 34408 // = constant 
+04AF: 245@ = 34409 // = constant 
+04AF: 246@ = 34410 // = constant 
+04AF: 247@ = 34411 // = constant 
+04AF: 248@ = 34413 // = constant 
+04AF: 249@ = 34412 // = constant 
+284@ = 1 
+285@ = 1 
+286@ = 3 
+287@ = 3 
+288@ = 2 
+289@ = 2 
+290@ = 3 
+291@ = 4 
+292@ = 4 
+293@ = 2 
+294@ = 3 
+295@ = 3 
+296@ = 0 
+297@ = 0 
+008B: 324@ = $PLAYER_ACTOR // (int) 
+280@ = 1 
+03CF: load_wav 236@ as 1 
+03CF: load_wav 237@ as 2 
+276@ = 1 
+277@ = 2 
+jump @SCRASH3_17450 
+
+:SCRASH3_16371
+if 
+   not 281@ == 0 
+jf @SCRASH3_17098 
+if and
+03D2:   wav 1 ended 
+03D2:   wav 2 ended 
+jf @SCRASH3_17098 
+if 
+003B:   276@ == 281@ // (int) 
+jf @SCRASH3_16441 
+278@ = 1 
+jump @SCRASH3_16504 
+
+:SCRASH3_16441
+if 
+003B:   277@ == 281@ // (int) 
+jf @SCRASH3_16474 
+278@ = 2 
+jump @SCRASH3_16504 
+
+:SCRASH3_16474
+278@ = 1 
+0085: 276@ = 281@ // (int) 
+040D: unload_wav 1 
+03CF: load_wav 235@(281@,40i) as 1 
+
+:SCRASH3_16504
+if 
+03D0:   wav 278@ loaded 
+jf @SCRASH3_17086 
+0085: 331@ = 283@(281@,40i) // (int) 
+0085: 332@ = 323@(331@,7i) // (int) 
+if 
+   not 338@ == 1 
+jf @SCRASH3_16732 
+335@ = 1 
+337@ = 0 
+
+:SCRASH3_16576
+if 
+  7 > 335@ 
+jf @SCRASH3_16732 
+0085: 336@ = 323@(335@,7i) // (int) 
+if 
+   not 336@ == 0 
+jf @SCRASH3_16718 
+if 
+803B:   not  336@ == 332@ // (int) 
+jf @SCRASH3_16718 
+if 
+   not Actor.Dead(332@)
+jf @SCRASH3_16718 
+if 
+   not Actor.Dead(336@)
+jf @SCRASH3_16718 
+if 
+0104:   actor 332@ near_actor 336@ radius 10.0 10.0 10.0 sphere 0 
+jf @SCRASH3_16718 
+337@ += 1 
+
+:SCRASH3_16718
+335@ += 1 
+jump @SCRASH3_16576 
+
+:SCRASH3_16732
+if or
+  338@ == 1 
+  337@ > 0 
+  283@(281@,40i) == 0 
+jf @SCRASH3_17079 
+if 
+   not 283@(281@,40i) == 0 
+jf @SCRASH3_16859 
+if 
+   not Actor.Dead(332@)
+jf @SCRASH3_16859 
+0949: link_wav 278@ to_actor 332@ 
+if 
+894D:   not actor 332@ mutally_active 
+jf @SCRASH3_16852 
+330@ = 1 
+0967: actor 332@ move_mouth 15000 ms 
+jump @SCRASH3_16859 
+
+:SCRASH3_16852
+094E: set_actor 332@ mute_pain_audio 0 
+
+:SCRASH3_16859
+if 
+  283@(281@,40i) == 0 
+jf @SCRASH3_16888 
+330@ = 1 
+
+:SCRASH3_16888
+if 
+  330@ == 1 
+jf @SCRASH3_17079 
+03D1: play_wav 278@ 
+00BE: text_clear_all 
+00BB: show_text_lowpriority GXT 155@(281@,40s) time 10000 flag 1 
+280@ += 1 
+330@ = 0 
+281@ += 1 
+0085: 279@ = 281@ // (int) 
+if 
+   not 235@(281@,40i) == 0 
+jf @SCRASH3_17079 
+if 
+  278@ == 1 
+jf @SCRASH3_17041 
+if 
+803B:   not  277@ == 281@ // (int) 
+jf @SCRASH3_17034 
+03CF: load_wav 235@(281@,40i) as 2 
+0085: 277@ = 281@ // (int) 
+
+:SCRASH3_17034
+jump @SCRASH3_17079 
+
+:SCRASH3_17041
+if 
+803B:   not  276@ == 281@ // (int) 
+jf @SCRASH3_17079 
+03CF: load_wav 235@(281@,40i) as 1 
+0085: 276@ = 281@ // (int) 
+
+:SCRASH3_17079
+jump @SCRASH3_17098 
+
+:SCRASH3_17086
+03CF: load_wav 235@(281@,40i) as 278@ 
+
+:SCRASH3_17098
+jump @SCRASH3_17450 
+
+:SCRASH3_17105
+if 
+03D2:   wav 278@ ended 
+jf @SCRASH3_17135 
+280@ += 1 
+jump @SCRASH3_17190 
+
+:SCRASH3_17135
+if 
+056D:   actor 332@ defined 
+jf @SCRASH3_17174 
+if 
+   Actor.Dead(332@)
+jf @SCRASH3_17174 
+280@ += 1 
+
+:SCRASH3_17174
+if 
+   not Actor.Dead(332@)
+jf @SCRASH3_17190 
+
+:SCRASH3_17190
+jump @SCRASH3_17450 
+
+:SCRASH3_17197
+040D: unload_wav 278@ 
+275@(278@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(332@)
+jf @SCRASH3_17241 
+0968: actor 332@ stop_mouth 
+094F: enable_actor 332@ pain_audio 
+
+:SCRASH3_17241
+280@ += 1 
+jump @SCRASH3_17450 
+
+:SCRASH3_17255
+281@ += 1 
+if 
+   not 235@(281@,40i) == 0 
+jf @SCRASH3_17308 
+03CF: load_wav 235@(281@,40i) as 278@ 
+0085: 275@(278@,3i) = 281@ // (int) 
+
+:SCRASH3_17308
+282@ -= 1 
+if 
+   not 282@ > 0 
+jf @SCRASH3_17347 
+281@ = 0 
+jump @SCRASH3_17355 
+
+:SCRASH3_17347
+0085: 281@ = 279@ // (int) 
+
+:SCRASH3_17355
+280@ = 1 
+jump @SCRASH3_17450 
+
+:SCRASH3_17369
+280@ = 1 
+281@ = 0 
+282@ = 0 
+124@ = 0 
+148@ = 0 
+040D: unload_wav 278@ 
+275@(278@,3i) = 0 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(332@)
+jf @SCRASH3_17443 
+094F: enable_actor 332@ pain_audio 
+
+:SCRASH3_17443
+jump @SCRASH3_17450 
+
+:SCRASH3_17450
+return 
+
+:SCRASH3_17452
+00BE: text_clear_all 
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @SCRASH3_17474 
+Player.CanMove($PLAYER_CHAR) = False
+
+:SCRASH3_17474
+if 
+00A4:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA -2039.153 182.7238 20.8154 cornerB -2057.087 150.6935 34.1252 
+jf @SCRASH3_17870 
+if 
+0500:   player $PLAYER_CHAR skin == "VALET" on_bodypart 17 
+jf @SCRASH3_17863 
+fade 0 1000 
+
+:SCRASH3_17554
+if 
+fading 
+jf @SCRASH3_17578 
+wait 0 
+jump @SCRASH3_17554 
+
+:SCRASH3_17578
+$TEMPVAR_ACTOR_CAR = 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH3_17629 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 0.0 0.0 0.0 
+
+:SCRASH3_17629
+03BA: clear_cars_from_cube_cornerA -2039.056 182.7439 32.4018 cornerB -2057.341 150.5405 27.7805 
+042B: clear_peds_from_cube_cornerA -2039.056 182.7439 32.4018 cornerB -2057.341 150.5405 27.7805 
+0972: put_actor $PLAYER_ACTOR at -2037.886 178.9478 27.8359 no_offset 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_17760 
+if 
+   not Actor.Driving(37@)
+jf @SCRASH3_17760 
+Actor.DestroyInstantly(37@)
+
+:SCRASH3_17760
+Player.CanMove($PLAYER_CHAR) = False
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+$1868 = 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+fade 1 1000 
+
+:SCRASH3_17839
+if 
+fading 
+jf @SCRASH3_17863 
+wait 0 
+jump @SCRASH3_17839 
+
+:SCRASH3_17863
+jump @SCRASH3_18204 
+
+:SCRASH3_17870
+if 
+0500:   player $PLAYER_CHAR skin == "VALET" on_bodypart 17 
+jf @SCRASH3_18204 
+fade 0 1000 
+
+:SCRASH3_17902
+if 
+fading 
+jf @SCRASH3_17926 
+wait 0 
+jump @SCRASH3_17902 
+
+:SCRASH3_17926
+$TEMPVAR_ACTOR_CAR = 0 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @SCRASH3_17977 
+0811: $TEMPVAR_ACTOR_CAR = actor $PLAYER_ACTOR used_car 
+0362: remove_actor $PLAYER_ACTOR from_car_and_place_at 0.0 0.0 0.0 
+
+:SCRASH3_17977
+03BA: clear_cars_from_cube_cornerA -2039.056 182.7439 32.4018 cornerB -2057.341 150.5405 27.7805 
+042B: clear_peds_from_cube_cornerA -2039.056 182.7439 32.4018 cornerB -2057.341 150.5405 27.7805 
+if 
+   not Car.Wrecked($TEMPVAR_ACTOR_CAR)
+jf @SCRASH3_18072 
+036A: put_actor $PLAYER_ACTOR in_car $TEMPVAR_ACTOR_CAR 
+jump @SCRASH3_18120 
+
+:SCRASH3_18072
+if 
+   not $TEMPVAR_ACTOR_CAR == 0 
+jf @SCRASH3_18120 
+0972: put_actor $PLAYER_ACTOR at -2037.886 178.9478 27.8359 no_offset 
+Actor.Angle($PLAYER_ACTOR) = 270.0
+
+:SCRASH3_18120
+if 
+   not Actor.Dead(37@)
+jf @SCRASH3_18157 
+if 
+   not Actor.Driving(37@)
+jf @SCRASH3_18157 
+Actor.DestroyInstantly(37@)
+
+:SCRASH3_18157
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+fade 1 1000 
+
+:SCRASH3_18180
+if 
+fading 
+jf @SCRASH3_18204 
+wait 0 
+jump @SCRASH3_18180 
+
+:SCRASH3_18204
+return 
+
+:SCRASH3_18206
+if or
+   Actor.Dead($PLAYER_ACTOR)
+   Player.Wasted($PLAYER_CHAR)
+jf @SCRASH3_18274 
+$11033 = 1 
+$11029 = 180.0 
+$11032 = -2009.16 
+$11031 = 181.39 
+$11030 = 27.13 
+
+:SCRASH3_18274
+00BA: show_text_styled GXT 'M_FAIL' time 5000 style 1  // ~r~MISSION FAILED!
+$1868 = 1 
+$1872 = 0 
+return 
+
+:SCRASH3_18306
+0629: change_integer_stat 304 to 1 
+$1872 = 1 
+$1869 = 1 
+01E3: show_text_1number_styled GXT 'M_PASSD' number 0 time 5000 style 1  // MISSION PASSED!
+0629: change_integer_stat 336 to 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+0394: play_music 1 
+030C: progress_made = 1 
+$CRASH_SF_TOTAL_PASSED_MISSIONS += 1 
+$VALET_UNIFORM_AVAILABLE = 1 
+0318: set_latest_mission_passed 'SCRA_1'  // 555 WE TIP
+Marker.Disable($MARKER_TRIADS_SF_GARAGE)
+$MARKER_TRIADS_SF_GARAGE = Marker.CreateIconAndSphere(15, $X_SF_GARAGE, $Y_SF_GARAGE, $Z_SF_GARAGE)
+Marker.Disable($532)
+return 
+
+:SCRASH3_18418
+08F4: set_max_group_members 99 
+$1871 = 0 
+$1890 = 0 
+$1886 = 0 
+03C7: set_sensitivity_to_crime 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01E7: remove_forbidden_for_cars_cube_cornerA 2793.814 -1987.934 15.3045 cornerB 2754.324 -1900.369 9.8752 
+014F: stop_timer $7235 
+Marker.Disable(59@)
+Marker.Disable(60@)
+Marker.Disable(57@)
+Marker.Disable(61@)
+Marker.Disable(62@)
+Marker.Disable(63@)
+Marker.Disable(64@)
+088D: set_objects_in_sphere -1741.792 939.731 23.8906 radius 2.5 with_model #LAMPPOST3 collision_detection 1 
+0733: random_car_generator_enable_model #MERIT 
+091E: create_forbidden_for_boats_cube_cornerA -1729.549 942.886 40.3585 cornerB -1742.773 937.7814 10.1928 
+091E: create_forbidden_for_boats_cube_cornerA -1768.524 938.887 40.7496 cornerB -1780.765 943.4574 10.0929 
+Model.Destroy(#MTBIKE)
+Model.Destroy(#BANSHEE)
+Model.Destroy(#CHEETAH)
+Model.Destroy(#MERIT)
+Model.Destroy(#SWMYRI)
+Model.Destroy(#WMYVA2)
+Model.Destroy(#CELLPHONE)
+0873: release_path 155 
+Model.Destroy(#COPCARSF)
+Model.Destroy(#SFPD1)
+Model.Destroy(#COLT45)
+04EF: release_animation "POLICE" 
+04EF: release_animation "MISC" 
+0873: release_path 165 
+0873: release_path 166 
+if 
+   not Car.Wrecked($1867)
+jf @SCRASH3_18746 
+Car.SetImmunities($1867, 0, 0, 0, 0, 0)
+
+:SCRASH3_18746
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+$10753 = 0 
+$ONMISSION = 0 
+$1890 = 0 
+$1901 = 0 
+$10932 = 0 
+$5286 = 0 
+mission_cleanup 
+return
