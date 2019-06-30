@@ -1,0 +1,1016 @@
+:PARACH
+thread 'PARACH' 
+$8275 = 0 
+0209: 31@ = random_int_in_ranges 0 6 
+11@ = 10 
+17@ = 0 
+12@ = 0 
+$8289 = 0 
+if 
+  12@ == 100 
+jf @PARACH_122 
+0@ = Pickup.Create(#BRIEFCASE, 3, 32.1527, 2239.726, 125.672)
+8@ = Actor.Create(CivMale, #WMYPLT, 32.1527, 2239.726, 125.672)
+
+:PARACH_122
+if 
+   not Actor.Dead(8@)
+jf @PARACH_146 
+0819: 30@ = actor 8@ distance_from_ground 
+
+:PARACH_146
+wait 0 
+008A: $8290 = 17@ // (int) 
+if 
+  $8289 == 2 
+jf @PARACH_202 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_202 
+gosub @PARACH_6417 
+
+:PARACH_202
+if 
+   not 0@ == -1 
+jf @PARACH_293 
+if 
+  11@ == 10 
+jf @PARACH_293 
+if 
+   not 0@ == -1 
+jf @PARACH_286 
+if 
+   Pickup.Picked_up(0@)
+jf @PARACH_279 
+11@ = 0 
+
+:PARACH_279
+jump @PARACH_293 
+
+:PARACH_286
+11@ = 0 
+
+:PARACH_293
+if 
+  0@ == -1 
+jf @PARACH_336 
+if 
+  11@ == 10 
+jf @PARACH_336 
+11@ = 0 
+
+:PARACH_336
+if 
+  11@ == 0 
+jf @PARACH_384 
+04ED: load_animation "PARACHUTE" 
+Model.Load(#PARACHUTE)
+Model.Load(#PARA_PACK)
+11@ = 1 
+
+:PARACH_384
+if 
+  11@ == 1 
+jf @PARACH_443 
+if and
+04EE:   animation "PARACHUTE" loaded 
+   Model.Available(#PARACHUTE)
+   Model.Available(#PARA_PACK)
+jf @PARACH_443 
+11@ = 2 
+
+:PARACH_443
+if 
+  11@ == 2 
+jf @PARACH_654 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_491 
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+
+:PARACH_491
+9@ = Object.Create(#PARACHUTE, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+10@ = Object.Create(#PARA_PACK, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0750: set_object 9@ visibility 0 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_647 
+069B: attach_object 9@ to_actor 8@ with_offset 0.0 0.0 0.0 rotation 0.0 0.0 0.0 
+0453: set_object 10@ XYZ_rotation 90.0 90.0 90.0 
+070A: AS_actor 8@ attach_to_object 10@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+
+:PARACH_647
+11@ = 3 
+
+:PARACH_654
+if 
+  11@ == 3 
+jf @PARACH_6053 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_6053 
+if 
+  31@ == 0 
+jf @PARACH_756 
+0819: 30@ = actor 8@ distance_from_ground 
+if 
+  5.0 > 30@ 
+jf @PARACH_749 
+31@ = 2 
+jump @PARACH_756 
+
+:PARACH_749
+31@ = 5 
+
+:PARACH_756
+31@ -= 1 
+if 
+87D6:   not  8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_789 
+gosub @PARACH_6503 
+
+:PARACH_789
+if 
+   Actor.Driving(8@)
+jf @PARACH_819 
+$8302 = 1 
+jump @PARACH_826 
+
+:PARACH_819
+$8302 = 0 
+
+:PARACH_826
+if 
+   not Actor.Dead(8@)
+jf @PARACH_1186 
+if or
+0818:   actor 8@ in_air 
+  $8302 == 0 
+jf @PARACH_1186 
+if and
+  17@ == 0 
+  14@ == 0 
+  30@ > 5.0 
+jf @PARACH_1186 
+if 
+  $8302 == 0 
+jf @PARACH_988 
+02F6: $8303 = sine $8301 // (float) 
+0069: $8303 *= $8300 // (float) 
+$8303 *= -1.0 
+02F7: $8304 = cosine $8301 // (float) 
+0069: $8304 *= $8300 // (float) 
+083D: get_actor 8@ velocity_in_direction_XYZ $8276 $8276 $8276 
+083C: set_actor 8@ velocity_in_direction_XYZ $8303 $8304 $8276 
+
+:PARACH_988
+17@ = 1 
+$8275 = 1 
+0085: 18@ = 32@ // (int) 
+27@ = Actor.Angle(8@)
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_1071 
+$8297 = 3.0 
+$8298 = -2.0 
+16@ = 0 
+gosub @PARACH_6083 
+
+:PARACH_1071
+if 
+  7@ == 0 
+jf @PARACH_1141 
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+jump @PARACH_1186 
+
+:PARACH_1141
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE" IFP "PARACHUTE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+
+:PARACH_1186
+if 
+  17@ == 1 
+jf @PARACH_2838 
+if 
+04AD:   actor 8@ in_water 
+jf @PARACH_1268 
+0829: actor 8@ perform_animation "FALL_SKYDIVE_DIE" IFP_file "PARACHUTE" 1000.0 time 0 and_dies 
+17@ = 2 
+
+:PARACH_1268
+if 
+  3.0 > 30@ 
+jf @PARACH_1337 
+0829: actor 8@ perform_animation "FALL_SKYDIVE_DIE" IFP_file "PARACHUTE" 1000.0 time 0 and_dies 
+17@ = 2 
+
+:PARACH_1337
+083D: get_actor 8@ velocity_in_direction_XYZ $8276 $8276 $8277 
+if 
+0027:   1@ > $8277 // (float) 
+jf @PARACH_1378 
+0088: $8277 = 1@ // (float) 
+
+:PARACH_1378
+008A: $8282 = 32@ // (int) 
+0066: $8282 -= 18@ // (int) 
+008F: 28@ = integer $8282 to_float 
+28@ /= 2000.0 
+if 
+  28@ > 1.0 
+jf @PARACH_1443 
+28@ = 1.0 
+
+:PARACH_1443
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_1490 
+if 
+  1.0 >= 28@ 
+jf @PARACH_1490 
+gosub @PARACH_6307 
+
+:PARACH_1490
+if 
+  28@ == 1.0 
+jf @PARACH_2431 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_2413 
+0494: get_joystick 0 direction_offset_to $8282 $8283 $8284 $8284 
+008D: $8279 = integer $8282 to_float 
+$8279 /= 256.0 
+005D: 25@ += $8279 // (float) 
+0088: $8280 = 25@ // (float) 
+$8280 /= 30.0 
+if 
+  -1.6 > $8280 
+jf @PARACH_1621 
+$8280 = -1.6 
+
+:PARACH_1621
+if 
+  $8280 > 1.6 
+jf @PARACH_1652 
+$8280 = 1.6 
+
+:PARACH_1652
+0065: 27@ -= $8280 // (float) 
+if 
+  $8279 == 0.0 
+jf @PARACH_1712 
+if 
+   not 25@ == 0.0 
+jf @PARACH_1712 
+25@ *= 0.95 
+
+:PARACH_1712
+0088: $8278 = 26@ // (float) 
+$8278 *= 6.0 
+008D: $8281 = integer $8283 to_float 
+0061: $8281 -= $8278 // (float) 
+$8281 /= 256.0 
+005D: 26@ += $8281 // (float) 
+if 
+  -30.0 > 26@ 
+jf @PARACH_1795 
+26@ = -30.0 
+
+:PARACH_1795
+if 
+  26@ > 30.0 
+jf @PARACH_1826 
+26@ = 30.0 
+
+:PARACH_1826
+if 
+  $8281 == 0.0 
+jf @PARACH_1878 
+if 
+   not 26@ == 0.0 
+jf @PARACH_1878 
+26@ *= 0.97 
+
+:PARACH_1878
+02F6: $TEMPVAR_FLOAT_1 = sine 27@ // (float) 
+02F7: $TEMPVAR_FLOAT_2 = cosine 27@ // (float) 
+0088: $8279 = 26@ // (float) 
+$8279 /= -5.0 
+006D: $TEMPVAR_FLOAT_1 *= 2@ // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $8279 // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+006D: $TEMPVAR_FLOAT_2 *= 2@ // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8279 // (float) 
+083D: get_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8276 
+$TEMPVAR_FLOAT_1 *= -1.0 
+0059: $TEMPVAR_FLOAT_1 += $8278 // (float) 
+$TEMPVAR_FLOAT_1 *= 0.1 
+0061: $8278 -= $TEMPVAR_FLOAT_1 // (float) 
+$TEMPVAR_FLOAT_2 *= -1.0 
+0059: $TEMPVAR_FLOAT_2 += $8279 // (float) 
+$TEMPVAR_FLOAT_2 *= 0.1 
+0061: $8279 -= $TEMPVAR_FLOAT_2 // (float) 
+083C: set_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8277 
+083E: set_actor 8@ rotation 26@ 0.0 27@ while_in_air 
+if 
+  -100 > $8283 
+jf @PARACH_2171 
+if 
+   not 15@ == 4 
+jf @PARACH_2164 
+15@ = 4 
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE_ACCEL" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+
+:PARACH_2164
+jump @PARACH_2406 
+
+:PARACH_2171
+if and
+  $8282 == 0 
+   not 15@ == 0 
+jf @PARACH_2248 
+15@ = 0 
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+
+:PARACH_2248
+if and
+  0 > $8282 
+   not 15@ == -1 
+jf @PARACH_2327 
+15@ = -1 
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE_L" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+
+:PARACH_2327
+if and
+  $8282 > 0 
+   not 15@ == 1 
+jf @PARACH_2406 
+15@ = 1 
+0812: AS_actor 8@ perform_animation "FALL_SKYDIVE_R" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+
+:PARACH_2406
+jump @PARACH_2431 
+
+:PARACH_2413
+083C: set_actor 8@ velocity_in_direction_XYZ 0.0 0.0 1@ 
+
+:PARACH_2431
+if or
+00E1:   player 0 pressed_key 17 
+  $8299 == 1 
+jf @PARACH_2652 
+if 
+   not $8299 == 2 
+jf @PARACH_2652 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_2652 
+17@ = 0 
+15@ = 0 
+14@ = 1 
+0750: set_object 9@ visibility 1 
+wait 0 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_2652 
+0812: AS_actor 8@ perform_animation "PARA_OPEN" IFP "PARACHUTE" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_OPEN_O" IFP_file "PARACHUTE" 1000.0 lockF 0 loop 1 // IF AND SET 
+083D: get_actor 8@ velocity_in_direction_XYZ $8276 $8276 24@ 
+0088: $8288 = 24@ // (float) 
+$8288 += 5.0 
+
+:PARACH_2652
+if and
+  12@ == 1 
+87D6:   not  8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_2838 
+17@ = 0 
+15@ = 0 
+14@ = 1 
+0750: set_object 9@ visibility 1 
+wait 0 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_2838 
+0812: AS_actor 8@ perform_animation "PARA_OPEN" IFP "PARACHUTE" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_OPEN_O" IFP_file "PARACHUTE" 1000.0 lockF 0 loop 1 // IF AND SET 
+083D: get_actor 8@ velocity_in_direction_XYZ $8276 $8276 24@ 
+0088: $8288 = 24@ // (float) 
+$8288 += 5.0 
+
+:PARACH_2838
+if 
+  14@ == 1 
+jf @PARACH_3568 
+if 
+   not Actor.Dead(8@)
+jf @PARACH_3540 
+if 
+   Actor.Animation(8@) == "PARA_OPEN"
+jf @PARACH_3540 
+0613: $8274 = actor 8@ animation "PARA_OPEN" time 
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+$8274 *= 2.0 
+$8274 -= 0.5 
+if 
+  $8274 > 1.0 
+jf @PARACH_2983 
+$8274 = 1.0 
+
+:PARACH_2983
+if 
+  0.0 > $8274 
+jf @PARACH_3014 
+$8274 = 0.0 
+
+:PARACH_3014
+if and
+  0.25 >= $8274 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_3120 
+$8297 = -2.0 
+$8298 = -2.0 
+0089: 28@ = $8274 // (float) 
+28@ *= 4.0 
+if 
+  16@ == 1 
+jf @PARACH_3113 
+16@ = 2 
+gosub @PARACH_6083 
+
+:PARACH_3113
+gosub @PARACH_6307 
+
+:PARACH_3120
+if and
+  $8274 > 0.25 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_3236 
+$8297 = 5.0 
+$8298 = -5.0 
+0089: 28@ = $8274 // (float) 
+28@ -= 0.25 
+28@ *= 1.333 
+if 
+  16@ == 2 
+jf @PARACH_3229 
+16@ = 3 
+gosub @PARACH_6083 
+
+:PARACH_3229
+gosub @PARACH_6307 
+
+:PARACH_3236
+0086: $8276 = $8288 // (float) 
+0069: $8276 *= $8274 // (float) 
+$8276 *= -1.0 
+005F: $8276 += 24@ // (float) 
+083D: get_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8277 
+02F6: $TEMPVAR_FLOAT_1 = sine 27@ // (float) 
+02F7: $TEMPVAR_FLOAT_2 = cosine 27@ // (float) 
+006D: $TEMPVAR_FLOAT_1 *= 5@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+006D: $TEMPVAR_FLOAT_2 *= 5@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+0059: $TEMPVAR_FLOAT_1 += $8278 // (float) 
+$TEMPVAR_FLOAT_1 *= 0.01 
+0061: $8278 -= $TEMPVAR_FLOAT_1 // (float) 
+$TEMPVAR_FLOAT_2 *= -1.0 
+0059: $TEMPVAR_FLOAT_2 += $8279 // (float) 
+$TEMPVAR_FLOAT_2 *= 0.01 
+0061: $8279 -= $TEMPVAR_FLOAT_2 // (float) 
+083C: set_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8276 
+if 
+  $8274 == 1.0 
+jf @PARACH_3540 
+0812: AS_actor 8@ perform_animation "PARA_FLOAT" IFP "PARACHUTE" framedelta 2.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_FLOAT_O" IFP_file "PARACHUTE" 2.0 lockF 1 loop 1 // IF AND SET 
+14@ = 2 
+0089: 29@ = $8276 // (float) 
+25@ = 0.0 
+
+:PARACH_3540
+if 
+  3.0 > 30@ 
+jf @PARACH_3568 
+14@ = 3 
+
+:PARACH_3568
+if 
+  14@ == 2 
+jf @PARACH_5824 
+if and
+   not 13@ == 5 
+04AD:   actor 8@ in_water 
+jf @PARACH_3616 
+13@ = 4 
+
+:PARACH_3616
+if 
+  13@ == 0 
+jf @PARACH_4766 
+02F6: $TEMPVAR_FLOAT_1 = sine 27@ // (float) 
+02F7: $TEMPVAR_FLOAT_2 = cosine 27@ // (float) 
+$8284 = 0 
+$8285 = 0 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_3706 
+0494: get_joystick 0 direction_offset_to $8282 $8283 $8284 $8285 
+jump @PARACH_3728 
+
+:PARACH_3706
+008A: $8282 = 22@ // (int) 
+$8283 = 0 
+$8284 = 0 
+
+:PARACH_3728
+if and
+   not $8284 == 0 
+   not $8285 == 0 
+jf @PARACH_3753 
+
+:PARACH_3753
+if or
+  $8283 > 100 
+  12@ == 2 
+jf @PARACH_3811 
+006D: $TEMPVAR_FLOAT_1 *= 6@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+006D: $TEMPVAR_FLOAT_2 *= 6@ // (float) 
+jump @PARACH_3837 
+
+:PARACH_3811
+006D: $TEMPVAR_FLOAT_1 *= 5@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+006D: $TEMPVAR_FLOAT_2 *= 5@ // (float) 
+
+:PARACH_3837
+0084: $8285 = $8283 // (int) 
+083E: set_actor 8@ rotation 0.0 25@ 27@ while_in_air 
+if 
+  30@ > 3.0 
+jf @PARACH_4574 
+008D: $8281 = integer $8282 to_float 
+$8281 /= 128.0 
+005D: 25@ += $8281 // (float) 
+if 
+  25@ > 45.0 
+jf @PARACH_3939 
+25@ = 45.0 
+
+:PARACH_3939
+if 
+  -45.0 > 25@ 
+jf @PARACH_3970 
+25@ = -45.0 
+
+:PARACH_3970
+0088: $8280 = 25@ // (float) 
+$8280 /= 15.0 
+0065: 27@ -= $8280 // (float) 
+if 
+  $8281 == 0.0 
+jf @PARACH_4048 
+if 
+   not 25@ == 0.0 
+jf @PARACH_4048 
+25@ *= 0.95 
+
+:PARACH_4048
+083E: set_actor 8@ rotation 0.0 25@ 27@ while_in_air 
+if or
+  $8283 > 100 
+  12@ == 2 
+jf @PARACH_4211 
+0088: $TEMPVAR_FLOAT_3 = 4@ // (float) 
+if 
+   not 15@ == 4 
+jf @PARACH_4204 
+15@ = 4 
+0812: AS_actor 8@ perform_animation "PARA_DECEL" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_DECEL_O" IFP_file "PARACHUTE" 1.0 lockF 1 loop 1 // IF AND SET 
+
+:PARACH_4204
+jump @PARACH_4574 
+
+:PARACH_4211
+0088: $TEMPVAR_FLOAT_3 = 3@ // (float) 
+if and
+  $8281 == 0.0 
+   not 15@ == 0 
+jf @PARACH_4336 
+15@ = 0 
+0812: AS_actor 8@ perform_animation "PARA_FLOAT" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_FLOAT_O" IFP_file "PARACHUTE" 1.0 lockF 1 loop 1 // IF AND SET 
+
+:PARACH_4336
+if and
+  0.0 > $8281 
+   not 15@ == -1 
+jf @PARACH_4455 
+15@ = -1 
+0812: AS_actor 8@ perform_animation "PARA_STEERL" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_STEERL_O" IFP_file "PARACHUTE" 1.0 lockF 1 loop 1 // IF AND SET 
+
+:PARACH_4455
+if and
+  $8281 > 0.0 
+   not 15@ == 1 
+jf @PARACH_4574 
+15@ = 1 
+0812: AS_actor 8@ perform_animation "PARA_STEERR" IFP "PARACHUTE" framedelta 1.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_STEERR_O" IFP_file "PARACHUTE" 1.0 lockF 1 loop 1 // IF AND SET 
+
+:PARACH_4574
+083D: get_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8276 
+$TEMPVAR_FLOAT_1 *= -1.0 
+0059: $TEMPVAR_FLOAT_1 += $8278 // (float) 
+$TEMPVAR_FLOAT_1 *= 0.1 
+0061: $8278 -= $TEMPVAR_FLOAT_1 // (float) 
+$TEMPVAR_FLOAT_2 *= -1.0 
+0059: $TEMPVAR_FLOAT_2 += $8279 // (float) 
+$TEMPVAR_FLOAT_2 *= 0.1 
+0061: $8279 -= $TEMPVAR_FLOAT_2 // (float) 
+$TEMPVAR_FLOAT_3 *= -1.0 
+005F: $TEMPVAR_FLOAT_3 += 29@ // (float) 
+$TEMPVAR_FLOAT_3 *= 0.2 
+0088: $8276 = 29@ // (float) 
+0061: $8276 -= $TEMPVAR_FLOAT_3 // (float) 
+0089: 29@ = $8276 // (float) 
+083C: set_actor 8@ velocity_in_direction_XYZ $8278 $8279 $8276 
+0069: $8278 *= $8278 // (float) 
+0069: $8279 *= $8279 // (float) 
+0086: $8280 = $8278 // (float) 
+0059: $8280 += $8279 // (float) 
+01FB: $8280 = square_root $8280 
+
+:PARACH_4766
+if 
+  3.0 > 30@ 
+jf @PARACH_5104 
+Actor.Angle(8@) = 27@
+25@ = 0.0 
+02F6: $TEMPVAR_FLOAT_1 = sine 27@ // (float) 
+02F7: $TEMPVAR_FLOAT_2 = cosine 27@ // (float) 
+006D: $TEMPVAR_FLOAT_1 *= 6@ // (float) 
+$TEMPVAR_FLOAT_1 *= -1.0 
+006D: $TEMPVAR_FLOAT_2 *= 6@ // (float) 
+083C: set_actor 8@ velocity_in_direction_XYZ $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 -2.0 
+if 
+  13@ == 0 
+jf @PARACH_5012 
+13@ = 1 
+0812: AS_actor 8@ perform_animation "PARA_DECEL" IFP "PARACHUTE" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_DECEL_O" IFP_file "PARACHUTE" 4.0 lockF 1 loop 1 // IF AND SET 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_5012 
+0086: $8297 = $8292 // (float) 
+0086: $8298 = $8291 // (float) 
+gosub @PARACH_6083 
+
+:PARACH_5012
+if and
+  13@ == 1 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_5104 
+28@ = 3.0 
+0063: 28@ -= 30@ // (float) 
+28@ *= 0.75 
+if 
+  28@ > 1.0 
+jf @PARACH_5097 
+28@ = 1.0 
+
+:PARACH_5097
+gosub @PARACH_6307 
+
+:PARACH_5104
+if and
+  1.5 > 30@ 
+  13@ == 1 
+jf @PARACH_5219 
+13@ = 2 
+0812: AS_actor 8@ perform_animation "PARA_LAND" IFP "PARACHUTE" framedelta 1000.0 loopA 0 lockX 1 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_LAND_O" IFP_file "PARACHUTE" 1000.0 lockF 0 loop 1 // IF AND SET 
+
+:PARACH_5219
+if 
+  13@ == 2 
+jf @PARACH_5496 
+if 
+   Actor.Animation(8@) == "PARA_LAND"
+jf @PARACH_5496 
+0613: $8274 = actor 8@ animation "PARA_LAND" time 
+if 
+  $8274 == 1.0 
+jf @PARACH_5496 
+Object.Destroy(9@)
+Object.Destroy(10@)
+Actor.StoreDeadActorPos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+   not 0@ == -1 
+jf @PARACH_5351 
+Pickup.Destroy(0@)
+
+:PARACH_5351
+05B9: AS_actor 8@ stay_idle 1 ms 
+0792: disembark_instantly_actor 8@ 
+14@ = 3 
+083E: set_actor 8@ rotation 0.0 0.0 0.0 while_in_air 
+Actor.Angle(8@) = 27@
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_5438 
+$8289 = 1 
+
+:PARACH_5438
+if 
+  $ONMISSION == 1 
+jf @PARACH_5463 
+gosub @PARACH_6417 
+
+:PARACH_5463
+0@ = 0 
+0@ = Pickup.Create(#BRIEFCASE, 3, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+13@ = 3 
+
+:PARACH_5496
+if 
+  13@ == 4 
+jf @PARACH_5623 
+0812: AS_actor 8@ perform_animation "PARA_LAND_WATER" IFP "PARACHUTE" framedelta 1000.0 loopA 0 lockX 1 lockY 0 lockF 1 time -2 // versionB 
+075A: set_object 9@ animation "PARA_LAND_WATER_O" IFP_file "PARACHUTE" 1.0 lockF 0 loop 1 // IF AND SET 
+13@ = 5 
+$8274 = 0.0 
+
+:PARACH_5623
+if 
+  13@ == 5 
+jf @PARACH_5824 
+if 
+   Actor.Animation(8@) == "PARA_LAND_WATER"
+jf @PARACH_5699 
+0613: $8274 = actor 8@ animation "PARA_LAND_WATER" time 
+
+:PARACH_5699
+if 
+  $8274 == 1.0 
+jf @PARACH_5824 
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_5746 
+$8289 = 1 
+
+:PARACH_5746
+Object.Destroy(9@)
+Object.Destroy(10@)
+13@ = 3 
+05B9: AS_actor 8@ stay_idle 1 ms 
+0792: disembark_instantly_actor 8@ 
+14@ = 3 
+083E: set_actor 8@ rotation 0.0 0.0 0.0 while_in_air 
+Actor.Angle(8@) = 27@
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+
+:PARACH_5824
+if and
+  14@ == 3 
+  13@ == 0 
+jf @PARACH_5935 
+075A: set_object 9@ animation "PARA_LAND_O" IFP_file "PARACHUTE" 1.0 lockF 0 loop 1 // IF AND SET 
+0829: actor 8@ perform_animation "FALL_SKYDIVE_DIE" IFP_file "PARACHUTE" 1000.0 time 0 and_dies 
+13@ = 1 
+
+:PARACH_5935
+if 
+  14@ == 3 
+jf @PARACH_6053 
+if 
+   Pickup.Picked_up(0@)
+jf @PARACH_6004 
+11@ = 10 
+17@ = 0 
+14@ = 0 
+7@ = 0 
+13@ = 0 
+
+:PARACH_6004
+if 
+80FE:   not actor 8@ sphere 0 in_sphere $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD radius 50.0 50.0 50.0 
+jf @PARACH_6053 
+jump @PARACH_6417 
+
+:PARACH_6053
+if 
+   Actor.Dead(8@)
+jf @PARACH_6076 
+jump @PARACH_6417 
+
+:PARACH_6076
+jump @PARACH_146 
+
+:PARACH_6083
+068D: get_camera_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0086: $8278 = $TEMPVAR_X_COORD // (float) 
+0061: $8278 -= $TEMPVAR_FLOAT_1 // (float) 
+0086: $8279 = $TEMPVAR_Y_COORD // (float) 
+0061: $8279 -= $TEMPVAR_FLOAT_2 // (float) 
+0086: $8293 = $TEMPVAR_FLOAT_3 // (float) 
+0061: $8293 -= $TEMPVAR_Z_COORD // (float) 
+0086: $8276 = $8278 // (float) 
+0069: $8276 *= $8278 // (float) 
+0086: $8277 = $8279 // (float) 
+0069: $8277 *= $8279 // (float) 
+0086: $8294 = $8276 // (float) 
+0059: $8294 += $8277 // (float) 
+$8294 *= -1.0 
+01FB: $8294 = square_root $8294 
+0086: $8295 = $8297 // (float) 
+0061: $8295 -= $8293 // (float) 
+$8294 *= -1.0 
+0086: $8296 = $8298 // (float) 
+0061: $8296 -= $8294 // (float) 
+if 
+  16@ == 0 
+jf @PARACH_6305 
+16@ = 1 
+0086: $8291 = $8294 // (float) 
+0086: $8292 = $8293 // (float) 
+
+:PARACH_6305
+return 
+
+:PARACH_6307
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0088: $8278 = 28@ // (float) 
+$8278 *= 180.0 
+02F7: $8278 = cosine $8278 // (float) 
+$8278 -= 1.0 
+$8278 *= -0.5 
+0086: $TEMPVAR_FLOAT_3 = $8295 // (float) 
+0069: $TEMPVAR_FLOAT_3 *= $8278 // (float) 
+0059: $TEMPVAR_FLOAT_3 += $8293 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8296 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $8278 // (float) 
+0059: $TEMPVAR_FLOAT_2 += $8294 // (float) 
+return 
+
+:PARACH_6417
+04EF: release_animation "PARACHUTE" 
+Model.Destroy(#PARACHUTE)
+Model.Destroy(#PARA_PACK)
+if 
+   not 0@ == -1 
+jf @PARACH_6463 
+Pickup.Destroy(0@)
+
+:PARACH_6463
+Object.Destroy(9@)
+Object.Destroy(10@)
+if 
+07D6:   8@ == $PLAYER_ACTOR // @ == $ (int) 
+jf @PARACH_6499 
+$8299 = 0 
+
+:PARACH_6499
+end_thread 
+return 
+
+:PARACH_6503
+Actor.StorePos(8@, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0086: $TEMPVAR_FLOAT_1 = $8271 // (float) 
+0061: $TEMPVAR_FLOAT_1 -= $TEMPVAR_X_COORD // (float) 
+0086: $TEMPVAR_FLOAT_2 = $8272 // (float) 
+0061: $TEMPVAR_FLOAT_2 -= $TEMPVAR_Y_COORD // (float) 
+0086: $TEMPVAR_FLOAT_3 = $TEMPVAR_Z_COORD // (float) 
+0061: $TEMPVAR_FLOAT_3 -= $8273 // (float) 
+if 
+  17@ == 1 
+jf @PARACH_6683 
+0069: $TEMPVAR_FLOAT_1 *= $TEMPVAR_FLOAT_1 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $TEMPVAR_FLOAT_2 // (float) 
+0059: $TEMPVAR_FLOAT_1 += $TEMPVAR_FLOAT_2 // (float) 
+01FB: $TEMPVAR_FLOAT_1 = square_root $TEMPVAR_FLOAT_1 
+0086: $8276 = $TEMPVAR_FLOAT_3 // (float) 
+0071: $8276 /= $TEMPVAR_FLOAT_1 // (float) 
+0088: $8277 = 3@ // (float) 
+0075: $8277 /= 5@ // (float) 
+$8277 *= -1.2 
+if 
+0024:   $8277 > $8276 // (float) 
+jf @PARACH_6683 
+12@ = 1 
+
+:PARACH_6683
+if 
+  14@ == 2 
+jf @PARACH_7350 
+0604: get_Z_angle_for_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 store_to 20@ 
+19@ = Actor.Angle(8@)
+3@ -= 1.0 
+4@ -= 1.0 
+0087: 21@ = 20@ // (float) 
+0063: 21@ -= 19@ // (float) 
+if 
+001D:   32@ > 23@ // (int) 
+jf @PARACH_7137 
+0085: 23@ = 32@ // (int) 
+23@ += 3000 
+0208: $8286 = random_float_in_ranges -20.0 0.0 
+0208: $8287 = random_float_in_ranges 0.0 20.0 
+0069: $TEMPVAR_FLOAT_1 *= $TEMPVAR_FLOAT_1 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $TEMPVAR_FLOAT_2 // (float) 
+0059: $TEMPVAR_FLOAT_1 += $TEMPVAR_FLOAT_2 // (float) 
+01FB: $TEMPVAR_FLOAT_1 = square_root $TEMPVAR_FLOAT_1 
+0086: $8277 = $TEMPVAR_FLOAT_1 // (float) 
+0075: $8277 /= 5@ // (float) 
+0086: $8276 = $TEMPVAR_FLOAT_3 // (float) 
+0071: $8276 /= $8277 // (float) 
+0088: $8277 = 3@ // (float) 
+005F: $8277 += 4@ // (float) 
+$8277 /= 2.0 
+0088: $8278 = 3@ // (float) 
+0067: $8278 -= 4@ // (float) 
+$8278 /= 4.0 
+0059: $8278 += $8277 // (float) 
+0088: $8279 = 3@ // (float) 
+0067: $8279 -= 4@ // (float) 
+$8279 /= -4.0 
+0059: $8279 += $8277 // (float) 
+$8278 *= -1.0 
+$8279 *= -1.0 
+if and
+0024:   $8278 > $8276 // (float) 
+0024:   $8276 > $8279 // (float) 
+jf @PARACH_7085 
+0209: $8282 = random_int_in_ranges 0 2 
+if 
+  $8282 == 0 
+jf @PARACH_7060 
+12@ = 2 
+
+:PARACH_7060
+if 
+  $8282 == 1 
+jf @PARACH_7085 
+12@ = 0 
+
+:PARACH_7085
+if 
+0034:   $8276 >= $8278 // (float) 
+jf @PARACH_7111 
+12@ = 0 
+
+:PARACH_7111
+if 
+0034:   $8279 >= $8276 // (float) 
+jf @PARACH_7137 
+12@ = 2 
+
+:PARACH_7137
+if or
+0026:   $8286 > 21@ // (float) 
+0027:   21@ > $8287 // (float) 
+jf @PARACH_7323 
+if 
+  -180.0 > 21@ 
+jf @PARACH_7195 
+21@ += 360.0 
+
+:PARACH_7195
+if 
+  21@ > 180.0 
+jf @PARACH_7226 
+21@ -= 360.0 
+
+:PARACH_7226
+21@ /= 180.0 
+if 
+  21@ > 1.0 
+jf @PARACH_7267 
+21@ = 1.0 
+
+:PARACH_7267
+if 
+  -1.0 > 21@ 
+jf @PARACH_7298 
+21@ = -1.0 
+
+:PARACH_7298
+21@ *= -128.0 
+0092: 22@ = float 21@ to_integer 
+jump @PARACH_7330 
+
+:PARACH_7323
+22@ = 0 
+
+:PARACH_7330
+3@ += 1.0 
+4@ += 1.0 
+
+:PARACH_7350
+return 
+end_thread

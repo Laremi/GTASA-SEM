@@ -1,0 +1,1087 @@
+:GFMEET
+thread 'GFMEET' 
+5@ = 0 
+6@ = 0 
+7@ = 0 
+if 
+  7@ > 0 
+jf @GFMEET_106 
+15@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+17@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+18@ = Marker.CreateAboveActor(15@)
+
+:GFMEET_106
+gosub @GFMEET_3912 
+gosub @GFMEET_2883 
+
+:GFMEET_120
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GFMEET_325 
+if and
+   not Actor.Dead(15@)
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere 1@ 2@ 3@ radius 100.0 100.0 20.0 
+jf @GFMEET_311 
+if 
+051A:   actor 15@ damaged_by_actor $PLAYER_ACTOR 
+jf @GFMEET_227 
+08BD: set 7@ bit 2 
+5@ = 6 
+6@ = 0 
+
+:GFMEET_227
+if 
+  8@ == 1 
+jf @GFMEET_290 
+if or
+   Actor.Dead(17@)
+051A:   actor 17@ damaged_by_actor $PLAYER_ACTOR 
+jf @GFMEET_290 
+08BD: set 7@ bit 2 
+5@ = 6 
+6@ = 0 
+
+:GFMEET_290
+gosub @GFMEET_339 
+gosub @GFMEET_4873 
+jump @GFMEET_318 
+
+:GFMEET_311
+gosub @GFMEET_5627 
+
+:GFMEET_318
+jump @GFMEET_332 
+
+:GFMEET_325
+gosub @GFMEET_5627 
+
+:GFMEET_332
+jump @GFMEET_120 
+
+:GFMEET_339
+0871: init_jump_table 5@ total_jumps 6 default_jump 0 @GFMEET_486 jumps 1 @GFMEET_402 2 @GFMEET_416 3 @GFMEET_430 4 @GFMEET_444 5 @GFMEET_458 6 @GFMEET_472 -1 @GFMEET_486 
+
+:GFMEET_402
+gosub @GFMEET_488 
+jump @GFMEET_486 
+
+:GFMEET_416
+gosub @GFMEET_822 
+jump @GFMEET_486 
+
+:GFMEET_430
+gosub @GFMEET_1353 
+jump @GFMEET_486 
+
+:GFMEET_444
+gosub @GFMEET_1710 
+jump @GFMEET_486 
+
+:GFMEET_458
+gosub @GFMEET_1989 
+jump @GFMEET_486 
+
+:GFMEET_472
+gosub @GFMEET_2399 
+jump @GFMEET_486 
+
+:GFMEET_486
+return 
+
+:GFMEET_488
+0871: init_jump_table 6@ total_jumps 1 default_jump 0 @GFMEET_820 jumps 0 @GFMEET_551 -1 @GFMEET_820 -1 @GFMEET_820 -1 @GFMEET_820 -1 @GFMEET_820 -1 @GFMEET_820 -1 @GFMEET_820 
+
+:GFMEET_551
+if 
+089B:   unknown_is_actor_in_dialogue_mode 15@ 
+jf @GFMEET_813 
+if 
+88B6:   not test $GIRLS_GIFTS_BITMASK bit 0@ 
+jf @GFMEET_742 
+if 
+00F3:   actor $PLAYER_ACTOR near_actor 15@ radius 2.0 2.0 sphere 0 on_foot 
+jf @GFMEET_742 
+gosub @GFMEET_3967 
+if 
+  13@ == 1 
+jf @GFMEET_703 
+089C: unknown_actor 15@ unknown_check 1 
+if 
+071A:   actor 15@ current_dialogue_text == 19@s 
+jf @GFMEET_689 
+5@ = 2 
+6@ = 0 
+jump @GFMEET_696 
+
+:GFMEET_689
+089C: unknown_actor 15@ unknown_check 0 
+
+:GFMEET_696
+jump @GFMEET_742 
+
+:GFMEET_703
+if 
+88B7:   not test 7@ bit 1 
+jf @GFMEET_742 
+5@ = 3 
+6@ = 0 
+089C: unknown_actor 15@ unknown_check 0 
+
+:GFMEET_742
+062E: get_actor 15@ task 1655 status_store_to 13@ // ret 7 if not found 
+062E: get_actor 17@ task 1655 status_store_to 14@ // ret 7 if not found 
+if and
+04A4:   13@ == 7 // == constant 
+04A4:   14@ == 7 // == constant 
+jf @GFMEET_813 
+0677: AS_actor 15@ chat_with_actor 17@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 17@ chat_with_actor 15@ lead_speaker_flag 0 unknown_flag 1 
+
+:GFMEET_813
+jump @GFMEET_820 
+
+:GFMEET_820
+return 
+
+:GFMEET_822
+0871: init_jump_table 6@ total_jumps 4 default_jump 0 @GFMEET_1351 jumps 0 @GFMEET_885 1 @GFMEET_973 2 @GFMEET_1073 3 @GFMEET_1304 -1 @GFMEET_1351 -1 @GFMEET_1351 -1 @GFMEET_1351 
+
+:GFMEET_885
+33@ = 0 
+0639: AS_actor 15@ rotate_to_actor $PLAYER_ACTOR 
+if and
+  8@ == 1 
+   not Actor.Dead(17@)
+jf @GFMEET_959 
+062E: get_actor 17@ task 1466 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_959 
+05BA: AS_actor 17@ move_mouth -2 ms 
+
+:GFMEET_959
+6@ += 1 
+jump @GFMEET_1351 
+
+:GFMEET_973
+062E: get_actor 15@ task 1593 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1066 
+05BF: AS_actor 15@ look_at_actor $PLAYER_ACTOR -1 ms 
+062E: get_actor 15@ task 1466 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1048 
+05BA: AS_actor 15@ move_mouth -2 ms 
+
+:GFMEET_1048
+0512: show_permanent_text_box 'TALK_1'  // To reply negatively press ~k~~CONVERSATION_NO~~n~To reply positively press ~k~~CONVERSATION_YES~
+6@ += 1 
+
+:GFMEET_1066
+jump @GFMEET_1351 
+
+:GFMEET_1073
+if 
+071A:   actor 15@ current_dialogue_text == 23@s 
+jf @GFMEET_1175 
+03E6: remove_text_box 
+if 
+  33@ > 9000 
+jf @GFMEET_1175 
+$GIRL_PROGRESS(0@,6i) = 0 
+08C2: clear $GIRLS_GIFTS_BITMASK bit 0@ 
+if 
+075C:   marker 18@ enabled 
+jf @GFMEET_1153 
+Marker.Disable(18@)
+
+:GFMEET_1153
+03E6: remove_text_box 
+0647: AS_actor 15@ clear_look_task 
+6@ = 0 
+0085: 5@ = 8@ // (int) 
+
+:GFMEET_1175
+if 
+071A:   actor 15@ current_dialogue_text == 21@s 
+jf @GFMEET_1251 
+03E6: remove_text_box 
+if 
+88B6:   not test $GIRLS_GIFTS_BITMASK bit 0@ 
+jf @GFMEET_1223 
+08BC: set $GIRLS_GIFTS_BITMASK bit 0@ 
+
+:GFMEET_1223
+if 
+075C:   marker 18@ enabled 
+jf @GFMEET_1244 
+Marker.Disable(18@)
+
+:GFMEET_1244
+6@ += 1 
+
+:GFMEET_1251
+if and
+889B:   not unknown_is_actor_in_dialogue_mode 15@ 
+  33@ > 9000 
+jf @GFMEET_1297 
+03E6: remove_text_box 
+0647: AS_actor 15@ clear_look_task 
+6@ = 0 
+0085: 5@ = 8@ // (int) 
+
+:GFMEET_1297
+jump @GFMEET_1351 
+
+:GFMEET_1304
+if 
+876F:   not text_priority_displayed 
+jf @GFMEET_1344 
+gosub @GFMEET_3773 
+0647: AS_actor 15@ clear_look_task 
+6@ = 0 
+0085: 5@ = 8@ // (int) 
+
+:GFMEET_1344
+jump @GFMEET_1351 
+
+:GFMEET_1351
+return 
+
+:GFMEET_1353
+0871: init_jump_table 6@ total_jumps 4 default_jump 0 @GFMEET_1708 jumps 0 @GFMEET_1416 1 @GFMEET_1504 2 @GFMEET_1593 3 @GFMEET_1655 -1 @GFMEET_1708 -1 @GFMEET_1708 -1 @GFMEET_1708 
+
+:GFMEET_1416
+33@ = 0 
+0639: AS_actor 15@ rotate_to_actor $PLAYER_ACTOR 
+if and
+  8@ == 1 
+   not Actor.Dead(17@)
+jf @GFMEET_1490 
+062E: get_actor 17@ task 1466 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1490 
+05BA: AS_actor 17@ move_mouth -2 ms 
+
+:GFMEET_1490
+6@ += 1 
+jump @GFMEET_1708 
+
+:GFMEET_1504
+062E: get_actor 15@ task 1593 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1586 
+05BF: AS_actor 15@ look_at_actor $PLAYER_ACTOR -1 ms 
+062E: get_actor 15@ task 1466 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1579 
+05BA: AS_actor 15@ move_mouth -2 ms 
+
+:GFMEET_1579
+6@ += 1 
+
+:GFMEET_1586
+jump @GFMEET_1708 
+
+:GFMEET_1593
+if 
+08B7:   test 7@ bit 3 
+jf @GFMEET_1633 
+04AE: $1233 = 317 // = constant 
+08C3: clear 7@ bit 3 
+jump @GFMEET_1641 
+
+:GFMEET_1633
+04AE: $1233 = 316 // = constant 
+
+:GFMEET_1641
+6@ += 1 
+jump @GFMEET_1708 
+
+:GFMEET_1655
+if 
+  33@ > 6000 
+jf @GFMEET_1701 
+0647: AS_actor 15@ clear_look_task 
+08BD: set 7@ bit 1 
+6@ = 0 
+0085: 5@ = 8@ // (int) 
+
+:GFMEET_1701
+jump @GFMEET_1708 
+
+:GFMEET_1708
+return 
+
+:GFMEET_1710
+0871: init_jump_table 6@ total_jumps 1 default_jump 0 @GFMEET_1987 jumps 0 @GFMEET_1773 -1 @GFMEET_1987 -1 @GFMEET_1987 -1 @GFMEET_1987 -1 @GFMEET_1987 -1 @GFMEET_1987 -1 @GFMEET_1987 
+
+:GFMEET_1773
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 15@ radius 3.0 3.0 0 
+jf @GFMEET_1929 
+gosub @GFMEET_3967 
+if 
+  13@ == 1 
+jf @GFMEET_1890 
+089C: unknown_actor 15@ unknown_check 1 
+if 
+071A:   actor 15@ current_dialogue_text == 19@s 
+jf @GFMEET_1876 
+5@ = 2 
+6@ = 0 
+jump @GFMEET_1883 
+
+:GFMEET_1876
+089C: unknown_actor 15@ unknown_check 0 
+
+:GFMEET_1883
+jump @GFMEET_1929 
+
+:GFMEET_1890
+if 
+88B7:   not test 7@ bit 1 
+jf @GFMEET_1929 
+5@ = 3 
+6@ = 0 
+089C: unknown_actor 15@ unknown_check 0 
+
+:GFMEET_1929
+062E: get_actor 15@ task 1640 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_1980 
+0668: AS_actor 15@ rotate_and_shoot_at 264.0 -155.0 5.0 -1 ms 
+
+:GFMEET_1980
+jump @GFMEET_1987 
+
+:GFMEET_1987
+return 
+
+:GFMEET_1989
+0871: init_jump_table 6@ total_jumps 3 default_jump 0 @GFMEET_2397 jumps 0 @GFMEET_2052 1 @GFMEET_2133 2 @GFMEET_2323 -1 @GFMEET_2397 -1 @GFMEET_2397 -1 @GFMEET_2397 -1 @GFMEET_2397 
+
+:GFMEET_2052
+062E: get_actor 15@ task 1541 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2126 
+0605: actor 15@ perform_animation "TAI_CHI_IN" IFP "PARK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+6@ += 1 
+
+:GFMEET_2126
+jump @GFMEET_2397 
+
+:GFMEET_2133
+062E: get_actor 15@ task 1541 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2205 
+0605: actor 15@ perform_animation "TAI_CHI_LOOP" IFP "PARK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 1215752191 
+
+:GFMEET_2205
+if and
+089B:   unknown_is_actor_in_dialogue_mode 15@ 
+00F2:   actor $PLAYER_ACTOR near_actor 15@ radius 2.0 2.0 0 
+071A:   actor 15@ current_dialogue_text == 19@s 
+88B7:   not test 7@ bit 1 
+jf @GFMEET_2309 
+0605: actor 15@ perform_animation "TAI_CHI_OUT" IFP "PARK" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+6@ += 1 
+jump @GFMEET_2316 
+
+:GFMEET_2309
+089C: unknown_actor 15@ unknown_check 0 
+
+:GFMEET_2316
+jump @GFMEET_2397 
+
+:GFMEET_2323
+gosub @GFMEET_3967 
+if 
+  13@ == 1 
+jf @GFMEET_2376 
+089C: unknown_actor 15@ unknown_check 1 
+5@ = 2 
+6@ = 0 
+jump @GFMEET_2390 
+
+:GFMEET_2376
+5@ = 3 
+6@ = 0 
+
+:GFMEET_2390
+jump @GFMEET_2397 
+
+:GFMEET_2397
+return 
+
+:GFMEET_2399
+0871: init_jump_table 6@ total_jumps 2 default_jump 0 @GFMEET_2881 jumps 0 @GFMEET_2462 1 @GFMEET_2769 -1 @GFMEET_2881 -1 @GFMEET_2881 -1 @GFMEET_2881 -1 @GFMEET_2881 -1 @GFMEET_2881 
+
+:GFMEET_2462
+if 
+08B7:   test 7@ bit 2 
+jf @GFMEET_2762 
+$GIRL_PROGRESS(0@,6i) = 0 
+if 
+  0@ == 1 
+jf @GFMEET_2526 
+060B: set_actor 15@ decision_maker_to 65543 
+jump @GFMEET_2536 
+
+:GFMEET_2526
+060B: set_actor 15@ decision_maker_to 65539 
+
+:GFMEET_2536
+if 
+   not Actor.Dead(17@)
+jf @GFMEET_2562 
+060B: set_actor 17@ decision_maker_to 65543 
+
+:GFMEET_2562
+if 
+   Actor.HasWeapon(15@, 22)
+jf @GFMEET_2631 
+01B9: set_actor 15@ armed_weapon_to 22 
+062E: get_actor 15@ task 1506 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2624 
+05E2: AS_actor 15@ kill_actor $PLAYER_ACTOR 
+
+:GFMEET_2624
+jump @GFMEET_2667 
+
+:GFMEET_2631
+062E: get_actor 15@ task 1477 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2667 
+05C5: AS_actor 15@ cower -2 ms 
+
+:GFMEET_2667
+if 
+075C:   marker 18@ enabled 
+jf @GFMEET_2688 
+Marker.Disable(18@)
+
+:GFMEET_2688
+07D0: 13@ = weekday 
+13@ += 1 
+if 
+  13@ > 7 
+jf @GFMEET_2725 
+13@ = 1 
+
+:GFMEET_2725
+13@ += 22 
+08BC: set $383(0@,6i) bit 13@ 
+08BA: set $383(0@,6i) bit 31 
+6@ += 1 
+
+:GFMEET_2762
+jump @GFMEET_2881 
+
+:GFMEET_2769
+if 
+   Actor.HasWeapon(15@, 22)
+jf @GFMEET_2838 
+01B9: set_actor 15@ armed_weapon_to 22 
+062E: get_actor 15@ task 1506 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2831 
+05E2: AS_actor 15@ kill_actor $PLAYER_ACTOR 
+
+:GFMEET_2831
+jump @GFMEET_2874 
+
+:GFMEET_2838
+062E: get_actor 15@ task 1477 status_store_to 13@ // ret 7 if not found 
+if 
+04A4:   13@ == 7 // == constant 
+jf @GFMEET_2874 
+05C5: AS_actor 15@ cower -2 ms 
+
+:GFMEET_2874
+jump @GFMEET_2881 
+
+:GFMEET_2881
+return 
+
+:GFMEET_2883
+0871: init_jump_table 0@ total_jumps 4 default_jump 0 @GFMEET_3401 jumps 1 @GFMEET_2946 2 @GFMEET_3042 3 @GFMEET_3170 4 @GFMEET_3298 -1 @GFMEET_3401 -1 @GFMEET_3401 -1 @GFMEET_3401 
+
+:GFMEET_2946
+if 
+   not Model.Available(#MECGRL3)
+jf @GFMEET_2978 
+Model.Load(#MECGRL3)
+wait 0 
+jump @GFMEET_2946 
+
+:GFMEET_2978
+04AF: 13@ = 192 // = constant 
+05AA: 19@s = 'GF_1A' // @s = 'short'  // ~z~Hi there, I'm Michelle. Can I get your number?
+05AA: 21@s = 'GF_1C' // @s = 'short'  // ~z~Cool! I'll call you, we should hang out sometime!
+05AA: 23@s = 'GF_1B' // @s = 'short'  // ~z~Whatever, your loss, asshole!
+8@ = 1 
+jump @GFMEET_3401 
+
+:GFMEET_3042
+if 
+   not Model.Available(#GUNGRL3)
+jf @GFMEET_3074 
+Model.Load(#GUNGRL3)
+wait 0 
+jump @GFMEET_3042 
+
+:GFMEET_3074
+if 
+   not Model.Available(#COLT45)
+jf @GFMEET_3106 
+Model.Load(#COLT45)
+wait 0 
+jump @GFMEET_3074 
+
+:GFMEET_3106
+04AF: 13@ = 191 // = constant 
+05AA: 19@s = 'GF_2A' // @s = 'short'  // ~z~Err, you want to go out sometime, buddy?
+05AA: 21@s = 'GF_2C' // @s = 'short'  // ~z~Yeah, sure, I'd like to go out with you!
+05AA: 23@s = 'GF_2B' // @s = 'short'  // ~z~Oh, get out of here you awful nuisance!
+8@ = 4 
+jump @GFMEET_3401 
+
+:GFMEET_3170
+if 
+   not Model.Available(#COPGRL3)
+jf @GFMEET_3202 
+Model.Load(#COPGRL3)
+wait 0 
+jump @GFMEET_3170 
+
+:GFMEET_3202
+if 
+   not Model.Available(#COLT45)
+jf @GFMEET_3234 
+Model.Load(#COLT45)
+wait 0 
+jump @GFMEET_3202 
+
+:GFMEET_3234
+04AF: 13@ = 190 // = constant 
+05AA: 19@s = 'GF_3A' // @s = 'short'  // ~z~Hi, I'm divorced with two kids, you still interested?
+05AA: 21@s = 'GF_3C' // @s = 'short'  // ~z~Great, I'll give you a call. My name's Barbara by the way.
+05AA: 23@s = 'GF_3B' // @s = 'short'  // ~z~Another useless bastard!
+8@ = 1 
+jump @GFMEET_3401 
+
+:GFMEET_3298
+if 
+   not Model.Available(#NURGRL3)
+jf @GFMEET_3330 
+Model.Load(#NURGRL3)
+wait 0 
+jump @GFMEET_3298 
+
+:GFMEET_3330
+04AF: 13@ = 193 // = constant 
+05AA: 19@s = 'GF_4A' // @s = 'short'  // ~z~Hey, I'm Katie. Wanna go out sometime?
+05AA: 21@s = 'GF_4C' // @s = 'short'  // ~z~Oh great! I'll call you later!
+05AA: 23@s = 'GF_4B' // @s = 'short'  // ~z~Suit yourself, it's your loss, asshole!
+8@ = 5 
+6@ = 0 
+jump @GFMEET_3401 
+
+:GFMEET_3401
+15@ = Actor.Create(CivFemale, 13@, 1@, 2@, 3@)
+Actor.Angle(15@) = 4@
+if 
+  0@ == 2 
+jf @GFMEET_3465 
+Actor.GiveWeaponAndAmmo(15@, Pistol, 999999999)
+Actor.WeaponAccuracy(15@) = 100
+
+:GFMEET_3465
+if 
+  0@ == 3 
+jf @GFMEET_3509 
+Actor.GiveWeaponAndAmmo(15@, Pistol, 999999999)
+01B9: set_actor 15@ armed_weapon_to 0 
+Actor.WeaponAccuracy(15@) = 100
+
+:GFMEET_3509
+0350: set_actor 15@ maintain_position_when_attacked 1 
+0446: set_actor 15@ dismemberment_possible 0 
+0568: set_actor 15@ untargetable 1 
+Actor.SetImmunities(15@, 0, 0, 1, 1, 0)
+Actor.Health(15@) = 200
+05BA: AS_actor 15@ move_mouth -1 ms 
+0961: set_actor 15@ keep_tasks_after_cleanup 1 
+0717: assign_actor 15@ to_dialogue_mode 
+09A4: set_dialogue_classB_question_GXT 19@s answer_Y_GXT 21@s answer_N_GXT 23@s question_WAV 318 answer_Y_WAV 249 answer_N_WAV 250 
+09AA: set_dialogue_classB_end_GXT 21@s WAV 320 
+09AA: set_dialogue_classB_end_GXT 23@s WAV 319 
+0719: enable_dialogue_mode 
+089C: unknown_actor 15@ unknown_check 0 
+18@ = Marker.CreateAboveActor(15@)
+07E0: set_marker 18@ type_to 1 
+018B: set_marker 18@ radar_mode 1 
+if 
+  8@ == 1 
+jf @GFMEET_3756 
+04C4: store_coords_to 9@ 10@ 11@ from_actor 15@ with_offset 0.5 1.0 0.0 
+02CE: 11@ = ground_z_at 9@ 10@ 11@ 
+0376: 17@ = create_random_actor_at 9@ 10@ 11@ 
+4@ += 180.0 
+Actor.Angle(17@) = 4@
+0677: AS_actor 15@ chat_with_actor 17@ lead_speaker_flag 1 unknown_flag 1 
+0677: AS_actor 17@ chat_with_actor 15@ lead_speaker_flag 0 unknown_flag 1 
+
+:GFMEET_3756
+0085: 5@ = 8@ // (int) 
+6@ = 0 
+return 
+
+:GFMEET_3773
+03E6: remove_text_box 
+0871: init_jump_table 0@ total_jumps 4 default_jump 0 @GFMEET_3910 jumps 1 @GFMEET_3838 2 @GFMEET_3856 3 @GFMEET_3874 4 @GFMEET_3892 -1 @GFMEET_3910 -1 @GFMEET_3910 -1 @GFMEET_3910 
+
+:GFMEET_3838
+03E5: show_text_box 'GF_H001'  // Michelle is your girlfriend now.~N~Michelle can fix your car at her place Downtown for free.
+jump @GFMEET_3910 
+
+:GFMEET_3856
+03E5: show_text_box 'GF_H002'  // Helena is your girlfriend now.~N~Helena has a hidden stock of 'tools' you might like back at her place up at Flint Range.
+jump @GFMEET_3910 
+
+:GFMEET_3874
+03E5: show_text_box 'GF_H003'  // Barbara is your girlfriend now.~N~Barbara will get you out of jail for free. You can pick her up from the cop station in El Quebradas.
+jump @GFMEET_3910 
+
+:GFMEET_3892
+03E5: show_text_box 'GF_H004'  // Katie is your girlfriend now.~N~Katie will get you out of hospital for free. You can pick her up for dates from her place in Paradiso.
+jump @GFMEET_3910 
+
+:GFMEET_3910
+return 
+
+:GFMEET_3912
+04ED: load_animation "PARK" 
+
+:GFMEET_3920
+wait 0 
+if 
+04EE:   animation "PARK" loaded 
+jf @GFMEET_3952 
+return 
+jump @GFMEET_3967 
+
+:GFMEET_3952
+04ED: load_animation "PARK" 
+jump @GFMEET_3920 
+
+:GFMEET_3967
+13@ = 0 
+0652: 13@ = integer_stat 25 
+13@ /= 10 
+0652: 14@ = integer_stat 21 
+14@ /= 10 
+14@ /= 2 
+if 
+  14@ >= 25 
+jf @GFMEET_4093 
+if 
+08B4:   test $371(0@,6i) bit 2 
+jf @GFMEET_4064 
+005A: 13@ += 14@ // (int) 
+jump @GFMEET_4086 
+
+:GFMEET_4064
+0062: 13@ -= 14@ // (int) 
+08BD: set 7@ bit 3 
+08BD: set 7@ bit 11 
+
+:GFMEET_4086
+jump @GFMEET_4199 
+
+:GFMEET_4093
+if 
+08B4:   test $371(0@,6i) bit 2 
+jf @GFMEET_4144 
+0062: 13@ -= 14@ // (int) 
+08BD: set 7@ bit 3 
+08BD: set 7@ bit 10 
+jump @GFMEET_4199 
+
+:GFMEET_4144
+if 
+08B4:   test $371(0@,6i) bit 3 
+jf @GFMEET_4199 
+if 
+  14@ == 0 
+jf @GFMEET_4191 
+14@ = 5 
+
+:GFMEET_4191
+005A: 13@ += 14@ // (int) 
+
+:GFMEET_4199
+0652: 14@ = integer_stat 23 
+14@ /= 10 
+14@ /= 2 
+if 
+  14@ >= 20 
+jf @GFMEET_4326 
+if 
+08B4:   test $371(0@,6i) bit 1 
+jf @GFMEET_4275 
+005A: 13@ += 14@ // (int) 
+jump @GFMEET_4319 
+
+:GFMEET_4275
+if 
+08B4:   test $371(0@,6i) bit 3 
+jf @GFMEET_4319 
+0062: 13@ -= 14@ // (int) 
+08BD: set 7@ bit 3 
+08BD: set 7@ bit 12 
+
+:GFMEET_4319
+jump @GFMEET_4432 
+
+:GFMEET_4326
+if 
+08B4:   test $371(0@,6i) bit 1 
+jf @GFMEET_4377 
+0062: 13@ -= 14@ // (int) 
+08BD: set 7@ bit 3 
+08BD: set 7@ bit 11 
+jump @GFMEET_4432 
+
+:GFMEET_4377
+if 
+08B4:   test $371(0@,6i) bit 3 
+jf @GFMEET_4432 
+if 
+  14@ == 0 
+jf @GFMEET_4424 
+14@ = 5 
+
+:GFMEET_4424
+005A: 13@ += 14@ // (int) 
+
+:GFMEET_4432
+if 
+002F:   13@ >= $GIRL_DESIRED_SEXAPPEAL(0@,6i) // (int) 
+jf @GFMEET_4487 
+$GIRL_PROGRESS(0@,6i) = 15 
+gosub @GFMEET_4496 
+13@ = 1 
+jump @GFMEET_4494 
+
+:GFMEET_4487
+13@ = -1 
+
+:GFMEET_4494
+return 
+
+:GFMEET_4496
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFMEET_4871 jumps 0 @GFMEET_4559 1 @GFMEET_4611 2 @GFMEET_4663 3 @GFMEET_4715 4 @GFMEET_4767 5 @GFMEET_4819 -1 @GFMEET_4871 
+
+:GFMEET_4559
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4592 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4592
+0629: change_integer_stat 252 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4611
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4644 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4644
+0629: change_integer_stat 253 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4663
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4696 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4696
+0629: change_integer_stat 254 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4715
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4748 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4748
+0629: change_integer_stat 255 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4767
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4800 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4800
+0629: change_integer_stat 256 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4819
+if 
+  $GIRL_PROGRESS(0@,6i) > 100 
+jf @GFMEET_4852 
+$GIRL_PROGRESS(0@,6i) = 100 
+
+:GFMEET_4852
+0629: change_integer_stat 257 to $GIRL_PROGRESS(0@,6i) 
+jump @GFMEET_4871 
+
+:GFMEET_4871
+return 
+
+:GFMEET_4873
+0871: init_jump_table $1232 total_jumps 7 default_jump 0 @GFMEET_5405 jumps 0 @GFMEET_4936 1 @GFMEET_4968 2 @GFMEET_4980 3 @GFMEET_4994 4 @GFMEET_5263 5 @GFMEET_5363 6 @GFMEET_5172 
+
+:GFMEET_4936
+if 
+  $1233 > 0 
+jf @GFMEET_4961 
+$1232 = 3 
+
+:GFMEET_4961
+jump @GFMEET_5405 
+
+:GFMEET_4968
+094F: enable_actor 15@ pain_audio 
+jump @GFMEET_5405 
+
+:GFMEET_4980
+094E: set_actor 15@ mute_pain_audio 0 
+jump @GFMEET_5405 
+
+:GFMEET_4994
+if 
+894D:   not actor 15@ mutally_active 
+jf @GFMEET_5165 
+if 
+  $1233 > 0 
+jf @GFMEET_5105 
+09D5: play_sound_of_actor 15@ soundslot $1233 unknown_flags 0 1 0 as $1235 // extended 0947 
+gosub @GFMEET_5407 
+$1233 = -1 
+if 
+  $1234 > 0 
+jf @GFMEET_5091 
+$1232 = 6 
+jump @GFMEET_5098 
+
+:GFMEET_5091
+$1232 = 0 
+
+:GFMEET_5098
+jump @GFMEET_5165 
+
+:GFMEET_5105
+if 
+  $1233 == -2 
+jf @GFMEET_5144 
+$1233 = -1 
+$1232 = 6 
+jump @GFMEET_5165 
+
+:GFMEET_5144
+$1233 = -1 
+$1234 = -1 
+$1232 = 0 
+
+:GFMEET_5165
+jump @GFMEET_5405 
+
+:GFMEET_5172
+if and
+894D:   not actor $PLAYER_ACTOR mutally_active 
+894D:   not actor 15@ mutally_active 
+jf @GFMEET_5256 
+if 
+  $1234 > 0 
+jf @GFMEET_5249 
+09D5: play_sound_of_actor $PLAYER_ACTOR soundslot $1234 unknown_flags 0 1 0 as $1235 // extended 0947 
+$1234 = -1 
+$1232 = 0 
+jump @GFMEET_5256 
+
+:GFMEET_5249
+$1232 = 0 
+
+:GFMEET_5256
+jump @GFMEET_5405 
+
+:GFMEET_5263
+094E: set_actor 15@ mute_pain_audio 0 
+if 
+894D:   not actor 15@ mutally_active 
+jf @GFMEET_5356 
+if 
+  $1233 > 0 
+jf @GFMEET_5349 
+09D5: play_sound_of_actor 15@ soundslot $1233 unknown_flags 0 1 0 as $1235 // extended 0947 
+gosub @GFMEET_5407 
+$1233 = -1 
+$1232 = 5 
+jump @GFMEET_5356 
+
+:GFMEET_5349
+$1232 = 0 
+
+:GFMEET_5356
+jump @GFMEET_5405 
+
+:GFMEET_5363
+if 
+894D:   not actor 15@ mutally_active 
+jf @GFMEET_5398 
+094F: enable_actor 15@ pain_audio 
+$1233 = -1 
+$1232 = 0 
+
+:GFMEET_5398
+jump @GFMEET_5405 
+
+:GFMEET_5405
+return 
+
+:GFMEET_5407
+0871: init_jump_table $1233 total_jumps 2 default_jump 0 @GFMEET_5625 jumps 316 @GFMEET_5602 317 @GFMEET_5472 -1 @GFMEET_5625 -1 @GFMEET_5625 -1 @GFMEET_5625 -1 @GFMEET_5625 -1 @GFMEET_5625 
+
+:GFMEET_5472
+if 
+08B7:   test 7@ bit 10 
+jf @GFMEET_5513 
+00BC: show_text_highpriority GXT 'GF_0074' time 5000 flag 1  // You've got to eat more to impress this lady, skinny boy!
+jump @GFMEET_5625 
+
+:GFMEET_5513
+if 
+08B7:   test 7@ bit 11 
+jf @GFMEET_5554 
+00BC: show_text_highpriority GXT 'GF_0053' time 5000 flag 1  // What does she mean by, 'not fit'? What ever happened to 'a good sense of humor'?
+jump @GFMEET_5625 
+
+:GFMEET_5554
+if 
+08B7:   test 7@ bit 12 
+jf @GFMEET_5595 
+00BC: show_text_highpriority GXT 'GF_0075' time 5000 flag 1  // You have put on too much muscle! What did you have for breakfast, steroids?
+jump @GFMEET_5625 
+
+:GFMEET_5595
+jump @GFMEET_5625 
+
+:GFMEET_5602
+00BC: show_text_highpriority GXT 'GF_0052' time 5000 flag 1  // You need to show style to impress, dude!
+jump @GFMEET_5625 
+
+:GFMEET_5625
+return 
+
+:GFMEET_5627
+Actor.RemoveReferences(15@)
+Actor.RemoveReferences(17@)
+04EF: release_animation "PARK" 
+03E6: remove_text_box 
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFMEET_5782 jumps 0 @GFMEET_5710 1 @GFMEET_5722 2 @GFMEET_5734 3 @GFMEET_5746 4 @GFMEET_5758 5 @GFMEET_5770 -1 @GFMEET_5782 
+
+:GFMEET_5710
+Model.Destroy(#GANGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5722
+Model.Destroy(#MECGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5734
+Model.Destroy(#GUNGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5746
+Model.Destroy(#COPGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5758
+Model.Destroy(#NURGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5770
+Model.Destroy(#CROGRL3)
+jump @GFMEET_5782 
+
+:GFMEET_5782
+08ED: remove_actor 15@ from_dialogue_mode 
+if 
+075C:   marker 18@ enabled 
+jf @GFMEET_5808 
+Marker.Disable(18@)
+
+:GFMEET_5808
+08C0: clear $390 bit 20 
+end_thread 
+return 
+0662: printstring "I__________________________I" 
+0662: printstring "H" 
+0662: printstring "G" 
+0662: printstring "F" 
+0662: printstring "E" 
+0663: printint "GF_LIKES_PLAYER" $GIRL_PROGRESS(0@,6i) 
+0663: printint "DESIRED_SEX_APPEAL" $GIRL_DESIRED_SEXAPPEAL(0@,6i) 
+0663: printint "ISUBSTATESTATUS" 6@ 
+0871: init_jump_table 5@ total_jumps 5 default_jump 1 @GFMEET_6106 jumps 0 @GFMEET_6011 1 @GFMEET_6030 2 @GFMEET_6049 3 @GFMEET_6068 4 @GFMEET_6087 -1 @GFMEET_6135 -1 @GFMEET_6135 
+
+:GFMEET_6011
+0662: printstring "STATE0__" 
+jump @GFMEET_6135 
+
+:GFMEET_6030
+0662: printstring "STATE1__" 
+jump @GFMEET_6135 
+
+:GFMEET_6049
+0662: printstring "STATE2__" 
+jump @GFMEET_6135 
+
+:GFMEET_6068
+0662: printstring "STATE3__" 
+jump @GFMEET_6135 
+
+:GFMEET_6087
+0662: printstring "STATE4__" 
+jump @GFMEET_6135 
+
+:GFMEET_6106
+0662: printstring "UNTRAPPED_STATE___" 
+jump @GFMEET_6135 
+
+:GFMEET_6135
+0662: printstring "I__________________________I" 
+return 
+end_thread

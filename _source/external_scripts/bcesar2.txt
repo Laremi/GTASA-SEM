@@ -1,0 +1,1014 @@
+:BCESAR2
+thread 'BCESAR2' 
+if or
+  $WEEKDAY == 1 
+  $WEEKDAY == 3 
+  $WEEKDAY == 5 
+jf @BCESAR2_50 
+jump @BCESAR2_6142 
+
+:BCESAR2_50
+if 
+  $SYNDICATE_TOTAL_PASSED_MISSIONS >= 10 
+jf @BCESAR2_75 
+jump @BCESAR2_6142 
+
+:BCESAR2_75
+gosub @SUB_GET_TIME_FROM_LAST_CALL 
+if 
+  $TIME_FROM_LAST_CALL_GOT_FLAG == 0 
+jf @BCESAR2_107 
+jump @BCESAR2_6142 
+
+:BCESAR2_107
+set_wb_check_to 0 
+if 
+  $BCESAR2_PASSED_ONCE == 0 
+jf @BCESAR2_131 
+increment_mission_attempts 
+
+:BCESAR2_131
+$BCESAR2_SCRIPT_LAUNCHED = 1 
+$2204 = 1 
+wait 0 
+0@ = 0 
+1@ = 5 
+21@ = 0 
+3@ = 0 
+4@ = 0 
+23@ = 0 
+$8386 = 0 
+$8387 = 0 
+$8389 = 1 
+$8388 = 0 
+$8390 = 1 
+$8391 = 2 
+$8312 = 0 
+$8322[0] = 0 
+$8322[1] = 0 
+$8322[2] = 0 
+$8322[3] = 0 
+$8322[4] = 0 
+$8322[5] = 0 
+$8305[0] = 0 
+$8305[1] = 0 
+$8305[2] = 0 
+$8305[3] = 0 
+$8305[4] = 0 
+$8305[5] = 0 
+10@ = 0 
+11@ = 1 
+19@ = 1000 
+31@ = 40.0 
+0209: $8311 = random_int_in_ranges 0 2 
+if 
+  $8311 == 0 
+jf @BCESAR2_390 
+9@ = 114 
+
+:BCESAR2_390
+if 
+  $8311 == 1 
+jf @BCESAR2_415 
+9@ = 96 
+
+:BCESAR2_415
+if 
+  $8311 == 2 
+jf @BCESAR2_440 
+9@ = 115 
+
+:BCESAR2_440
+if 
+  $8311 == 0 
+jf @BCESAR2_489 
+0086: $8313 = $X_BCE2_PATRIOT_CHECKPOINTS[0] // (float) 
+0086: $8314 = $Y_BCE2_PATRIOT_CHECKPOINTS[0] // (float) 
+0086: $8315 = $Z_BCE2_PATRIOT_CHECKPOINTS[0] // (float) 
+jump @BCESAR2_562 
+
+:BCESAR2_489
+if 
+  $8311 == 1 
+jf @BCESAR2_538 
+0086: $8313 = $4532[0] // (float) 
+0086: $8314 = $4630[0] // (float) 
+0086: $8315 = $4728[0] // (float) 
+jump @BCESAR2_562 
+
+:BCESAR2_538
+0086: $8313 = $4826[0] // (float) 
+0086: $8314 = $4943[0] // (float) 
+0086: $8315 = $5060[0] // (float) 
+
+:BCESAR2_562
+Model.Load(#FAM3)
+Model.Load(#PATRIOT)
+Model.Load(#MICRO_UZI)
+Model.Load(#CELLPHONE)
+
+:BCESAR2_581
+if or
+   not Model.Available(#FAM3)
+   not Model.Available(#PATRIOT)
+   not Model.Available(#MICRO_UZI)
+   not Model.Available(#CELLPHONE)
+jf @BCESAR2_622 
+wait 0 
+jump @BCESAR2_581 
+
+:BCESAR2_622
+0506: set_car_model #PATRIOT next_variation 2 2 // first param is useless 
+0674: set_car_model #PATRIOT numberplate "_ASSMAN_" 
+26@ = Car.Create(#PATRIOT, $8313, $8314, $8315)
+0587: enable_car 26@ validate_position 0 
+25@ = Actor.CreateAsDriver(CivMale, #FAM3, 26@)
+0446: set_actor 25@ dismemberment_possible 0 
+Actor.SetImmunities(25@, 1, 1, 1, 0, 1)
+Car.SetImmunities(26@, 1, 1, 1, 0, 1)
+Car.SetMaxSpeed(26@, 40.0)
+072F: enable_car 26@ stuck_check_distance 2.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 2 // extended 03CC 
+Car.DoorStatus(26@) = 3
+05D1: AS_actor 25@ drive_car 26@ to $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Z_BCE2_PATRIOT_CHECKPOINTS(10@,116f) speed 31@ 0 model #NULL 2 
+27@ = Marker.CreateAboveCar(26@)
+Car.ImmuneToNonPlayer(26@) = True
+if 
+  $BCESAR2_TIMES_PASSED > 0 
+jf @BCESAR2_978 
+28@ = Actor.CreateAsPassenger(CivMale, #FAM3, 26@, 0)
+Actor.GiveWeaponAndAmmo(28@, MicroUzi, 16000)
+01B9: set_actor 28@ armed_weapon_to 28 
+Actor.WeaponAccuracy(28@) = 90
+if 
+  $BCESAR2_TIMES_PASSED > 1 
+jf @BCESAR2_978 
+29@ = Actor.CreateAsPassenger(CivMale, #FAM3, 26@, 1)
+Actor.GiveWeaponAndAmmo(29@, MicroUzi, 16000)
+01B9: set_actor 29@ armed_weapon_to 28 
+Actor.WeaponAccuracy(29@) = 90
+if 
+  $BCESAR2_TIMES_PASSED > 2 
+jf @BCESAR2_978 
+30@ = Actor.CreateAsPassenger(CivMale, #FAM3, 26@, 2)
+Actor.GiveWeaponAndAmmo(30@, MicroUzi, 16000)
+01B9: set_actor 30@ armed_weapon_to 28 
+Actor.WeaponAccuracy(30@) = 90
+
+:BCESAR2_978
+if 
+  10@ == 0 
+jf @BCESAR2_1022 
+039F: set_car 26@ race_to $X_BCE2_PATRIOT_CHECKPOINTS(11@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(11@,116f) 
+jump @BCESAR2_1041 
+
+:BCESAR2_1022
+039F: set_car 26@ race_to $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) 
+
+:BCESAR2_1041
+$8329[0] = -0.65 
+$8335[0] = -2.307 
+$8341[0] = 0.26 
+$8329[1] = -0.047 
+$8335[1] = -2.307 
+$8341[1] = 0.26 
+$8329[2] = 0.554 
+$8335[2] = -2.307 
+$8341[2] = 0.26 
+$8329[3] = 0.554 
+$8335[3] = -1.808 
+$8341[3] = 0.26 
+$8329[4] = -0.65 
+$8335[4] = -1.808 
+$8341[4] = 0.26 
+$8329[5] = -0.047 
+$8335[5] = -1.808 
+$8341[5] = 0.26 
+
+:BCESAR2_1221
+if 
+   not 0@ == 6 
+jf @BCESAR2_1471 
+wait 0 
+if 
+   not Car.Wrecked(26@)
+jf @BCESAR2_1464 
+if 
+  $8322(0@,6i) == 0 
+jf @BCESAR2_1457 
+0208: $8328 = random_float_in_ranges 0.0 19.9 
+if and
+  20.0 > $8328 
+  $8328 > 10.0 
+jf @BCESAR2_1337 
+$8328 += 340.0 
+
+:BCESAR2_1337
+$8316(0@,6i) = Object.Create(#CM_BOX, $8329(0@,6f), $8335(0@,6f), $8341(0@,6f))
+0681: attach_object $8316(0@,6i) to_car 26@ with_offset $8329(0@,6f) $8335(0@,6f) $8341(0@,6f) rotation 0.0 0.0 0.0 
+034D: rotate_object $8316(0@,6i) from_angle $8328 to_angle $8328 flag 1 
+Object.CollisionDetection($8316(0@,6i)) = False
+Object.ToggleInMovingList($8316(0@,6i)) = False
+
+:BCESAR2_1457
+0@ += 1 
+
+:BCESAR2_1464
+jump @BCESAR2_1221 
+
+:BCESAR2_1471
+01BD: 12@ = current_time_in_ms 
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCESAR2_1503 
+07B4: set_player $PLAYER_CHAR gang_recruitment_enabled 0 
+
+:BCESAR2_1503
+05A9: s$8347[1] = 'MCES07A' // s$  // ~z~'Sup.
+05A9: s$8347[2] = 'MCES07B' // s$  // ~z~The cash is leaving Los Santos again.
+05A9: s$8347[3] = 'MCES07C' // s$  // ~z~OK, I'm on it!
+05A9: s$8347[4] = 'MCES06A' // s$  // ~z~Hey Cesar. Whattup?
+05A9: s$8347[5] = 'MCES06B' // s$  // ~z~I got the low-down on Smoke's yay!
+05A9: s$8347[6] = 'MCES06C' // s$  // ~z~Word is, every Monday and Friday the cash leaves Los Santos for San Fierro.
+05A9: s$8347[7] = 'MCES06D' // s$  // ~z~Then every Wednesday and Saturday a courier takes the yay back to Big Smoke.
+05A9: s$8347[8] = 'MCES06E' // s$  // ~z~OK, I'll keep an eye out for them.
+05A9: s$8347[9] = 'MCES06F' // s$  // ~z~See if I can't spoil their little party.
+05A9: s$8347[10] = 'MCES06G' // s$  // ~z~A'ight man.
+05A9: s$8347[11] = 'MCES07D' // s$  // ~z~Gonna have to let this one slide, man, got too much shit on my plate.
+04AE: $8371[1] = 25280 // = constant 
+04AE: $8371[2] = 25281 // = constant 
+04AE: $8371[3] = 25282 // = constant 
+04AE: $8371[4] = 25273 // = constant 
+04AE: $8371[5] = 25274 // = constant 
+04AE: $8371[6] = 25275 // = constant 
+04AE: $8371[7] = 25276 // = constant 
+04AE: $8371[8] = 25277 // = constant 
+04AE: $8371[9] = 25278 // = constant 
+04AE: $8371[10] = 25279 // = constant 
+04AE: $8371[11] = 25283 // = constant 
+Model.Load(#CELLPHONE)
+038B: load_requested_models 
+03CF: load_wav 20804 as 3 
+
+:BCESAR2_1759
+if or
+   not Model.Available(#CELLPHONE)
+83D0:   not wav 3 loaded 
+jf @BCESAR2_1790 
+wait 0 
+jump @BCESAR2_1759 
+
+:BCESAR2_1790
+gosub @SUB_GET_TIME_FROM_LAST_CALL 
+if 
+  $TIME_FROM_LAST_CALL_GOT_FLAG == 0 
+jf @BCESAR2_1822 
+jump @BCESAR2_6142 
+
+:BCESAR2_1822
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+03D1: play_wav 3 
+wait 2000 
+040D: unload_wav 3 
+
+:BCESAR2_1842
+wait 0 
+if 
+   not $8387 == 0 
+jf @BCESAR2_2185 
+if 
+  $8386 == 0 
+jf @BCESAR2_1910 
+if 
+03D0:   wav $8391 loaded 
+jf @BCESAR2_1903 
+040D: unload_wav $8391 
+
+:BCESAR2_1903
+$8386 = 1 
+
+:BCESAR2_1910
+if 
+  $8386 == 1 
+jf @BCESAR2_1947 
+03CF: load_wav $8371($8387,12i) as $8390 
+$8386 = 2 
+
+:BCESAR2_1947
+if 
+  $8386 == 2 
+jf @BCESAR2_2007 
+if 
+03D0:   wav $8390 loaded 
+jf @BCESAR2_2007 
+03D1: play_wav $8390 
+00BC: show_text_highpriority GXT $8347($8387,12s) time 10000 flag 1 
+$8386 = 3 
+
+:BCESAR2_2007
+if 
+  $8386 == 3 
+jf @BCESAR2_2185 
+if 
+03D2:   wav $8390 ended 
+jf @BCESAR2_2124 
+03D5: remove_text $8347($8387,12s) 
+if 
+  $8390 == 1 
+jf @BCESAR2_2089 
+$8390 = 2 
+$8391 = 1 
+jump @BCESAR2_2103 
+
+:BCESAR2_2089
+$8390 = 1 
+$8391 = 2 
+
+:BCESAR2_2103
+$8387 = 0 
+$8386 = 0 
+jump @BCESAR2_2185 
+
+:BCESAR2_2124
+if 
+83D0:   not wav $8391 loaded 
+jf @BCESAR2_2185 
+if 
+  10 > $8387 
+jf @BCESAR2_2185 
+0084: $8389 = $8387 // (int) 
+$8389 += 1 
+03CF: load_wav $8371($8389,12i) as $8391 
+
+:BCESAR2_2185
+if 
+  $BCESAR2_TIMES_PASSED > 0 
+jf @BCESAR2_2676 
+if 
+  $8388 == 0 
+jf @BCESAR2_2258 
+if 
+  $8386 == 0 
+jf @BCESAR2_2258 
+$8387 = 1 
+$8388 = 1 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2258
+if 
+  $8388 == 1 
+jf @BCESAR2_2373 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_2373 
+if 
+  $8386 == 0 
+jf @BCESAR2_2373 
+$8387 = 2 
+$8388 = 2 
+$8312 = 0 
+01BD: $8385 = current_time_in_ms 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'TALK_1'  // To reply negatively press ~k~~CONVERSATION_NO~~n~To reply positively press ~k~~CONVERSATION_YES~
+
+:BCESAR2_2373
+if 
+  $8388 == 2 
+jf @BCESAR2_2443 
+if 
+00E1:   player 0 pressed_key 10 
+jf @BCESAR2_2417 
+03E6: remove_text_box 
+$8312 = 2 
+
+:BCESAR2_2417
+if 
+00E1:   player 0 pressed_key 11 
+jf @BCESAR2_2443 
+03E6: remove_text_box 
+$8312 = 1 
+
+:BCESAR2_2443
+if 
+  $8312 == 1 
+jf @BCESAR2_2556 
+if 
+  $8388 == 2 
+jf @BCESAR2_2556 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_2556 
+if 
+  $8386 == 0 
+jf @BCESAR2_2556 
+$8387 = 3 
+$8388 = 7 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2556
+if 
+  $8312 == 2 
+jf @BCESAR2_2669 
+if 
+  $8388 == 2 
+jf @BCESAR2_2669 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_2669 
+if 
+  $8386 == 0 
+jf @BCESAR2_2669 
+$8387 = 11 
+$8388 = 7 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2669
+jump @BCESAR2_3301 
+
+:BCESAR2_2676
+if 
+  $8388 == 0 
+jf @BCESAR2_2731 
+if 
+  $8386 == 0 
+jf @BCESAR2_2731 
+$8387 = 4 
+$8388 = 1 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2731
+if 
+  $8388 == 1 
+jf @BCESAR2_2826 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_2826 
+if 
+  $8386 == 0 
+jf @BCESAR2_2826 
+$8387 = 5 
+$8388 = 2 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2826
+if 
+  $8388 == 2 
+jf @BCESAR2_2921 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_2921 
+if 
+  $8386 == 0 
+jf @BCESAR2_2921 
+$8387 = 6 
+$8388 = 3 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_2921
+if 
+  $8388 == 3 
+jf @BCESAR2_3016 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_3016 
+if 
+  $8386 == 0 
+jf @BCESAR2_3016 
+$8387 = 7 
+$8388 = 4 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_3016
+if 
+  $8388 == 4 
+jf @BCESAR2_3111 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_3111 
+if 
+  $8386 == 0 
+jf @BCESAR2_3111 
+$8387 = 8 
+$8388 = 5 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_3111
+if 
+  $8388 == 5 
+jf @BCESAR2_3206 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_3206 
+if 
+  $8386 == 0 
+jf @BCESAR2_3206 
+$8387 = 9 
+$8388 = 6 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_3206
+if 
+  $8388 == 6 
+jf @BCESAR2_3301 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_3301 
+if 
+  $8386 == 0 
+jf @BCESAR2_3301 
+$8387 = 10 
+$8388 = 7 
+01BD: $8385 = current_time_in_ms 
+
+:BCESAR2_3301
+if or
+  $8388 == 7 
+  $8388 == 8 
+jf @BCESAR2_3475 
+01BD: $8384 = current_time_in_ms 
+0084: $8383 = $8384 // (int) 
+0060: $8383 -= $8385 // (int) 
+if 
+  $8383 > 1000 
+jf @BCESAR2_3475 
+if 
+  $8386 == 0 
+jf @BCESAR2_3475 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR2_3475 
+062E: get_actor $PLAYER_ACTOR task 1833 status_store_to 24@ // ret 7 if not found 
+if 
+84A4:   not  24@ == 7 // == constant 
+jf @BCESAR2_3436 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+
+:BCESAR2_3436
+if 
+  2 > $8312 
+jf @BCESAR2_3468 
+jump @BCESAR2_3531 
+jump @BCESAR2_3475 
+
+:BCESAR2_3468
+jump @BCESAR2_6142 
+
+:BCESAR2_3475
+if 
+00E1:   player 0 pressed_key 15 
+jf @BCESAR2_3524 
+if 
+  $BCESAR2_TIMES_PASSED > 0 
+jf @BCESAR2_3517 
+$8312 = 2 
+
+:BCESAR2_3517
+$8388 = 8 
+
+:BCESAR2_3524
+jump @BCESAR2_1842 
+
+:BCESAR2_3531
+wait 0 
+if 
+0736:   is_keyboard_key_just_pressed 98 
+jf @BCESAR2_3564 
+1@ = 0 
+3@ = 6 
+
+:BCESAR2_3564
+if 
+  $ONMISSION == 1 
+jf @BCESAR2_3596 
+1@ = 0 
+3@ = 6 
+
+:BCESAR2_3596
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCESAR2_3718 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR2_3718 
+if 
+  23@ == 0 
+jf @BCESAR2_3677 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR2_3677 
+22@ = Actor.CurrentCar($PLAYER_ACTOR)
+23@ = 1 
+
+:BCESAR2_3677
+if 
+  23@ == 1 
+jf @BCESAR2_3718 
+if 
+   not Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR2_3718 
+23@ = 0 
+
+:BCESAR2_3718
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCESAR2_5271 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR2_5264 
+if 
+  4@ == 0 
+jf @BCESAR2_3833 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $8313 $8314 $8315 radius 100.0 100.0 50.0 
+jf @BCESAR2_3833 
+00BC: show_text_highpriority GXT 'BCE2_02' time 5000 flag 1  // ~s~Ram the ~r~courier ~s~to get the cash.
+4@ = 1 
+
+:BCESAR2_3833
+if 
+   Car.Wrecked(26@)
+jf @BCESAR2_3856 
+jump @BCESAR2_6142 
+
+:BCESAR2_3856
+if 
+  $BCESAR2_TIMES_PASSED > 0 
+jf @BCESAR2_4174 
+if 
+   not Actor.Dead(28@)
+jf @BCESAR2_3962 
+062E: get_actor 28@ task 1811 status_store_to 5@ // ret 7 if not found 
+if 
+04A4:   5@ == 7 // == constant 
+jf @BCESAR2_3962 
+0713: actor 28@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 50.0 8 1 firing_rate 30 
+01B9: set_actor 28@ armed_weapon_to 28 
+
+:BCESAR2_3962
+if 
+  $BCESAR2_TIMES_PASSED > 1 
+jf @BCESAR2_4174 
+if 
+   not Actor.Dead(29@)
+jf @BCESAR2_4068 
+062E: get_actor 29@ task 1811 status_store_to 6@ // ret 7 if not found 
+if 
+04A4:   6@ == 7 // == constant 
+jf @BCESAR2_4068 
+0713: actor 29@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 50.0 8 1 firing_rate 30 
+01B9: set_actor 29@ armed_weapon_to 28 
+
+:BCESAR2_4068
+if 
+  $BCESAR2_TIMES_PASSED > 2 
+jf @BCESAR2_4174 
+if 
+   not Actor.Dead(30@)
+jf @BCESAR2_4174 
+062E: get_actor 30@ task 1811 status_store_to 7@ // ret 7 if not found 
+if 
+04A4:   7@ == 7 // == constant 
+jf @BCESAR2_4174 
+0713: actor 30@ driveby_actor $PLAYER_ACTOR car -1 point 0.0 0.0 0.0 radius 50.0 8 1 firing_rate 30 
+01B9: set_actor 30@ armed_weapon_to 28 
+
+:BCESAR2_4174
+if and
+   not Actor.Dead(25@)
+   not Car.Wrecked(26@)
+jf @BCESAR2_5264 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 26@ radius 15.0 15.0 15.0 flag 0 
+jf @BCESAR2_4269 
+if 
+  31@ > 30.0 
+jf @BCESAR2_4262 
+31@ -= 0.1 
+
+:BCESAR2_4262
+jump @BCESAR2_4300 
+
+:BCESAR2_4269
+if 
+  50.0 > 31@ 
+jf @BCESAR2_4300 
+31@ += 0.1 
+
+:BCESAR2_4300
+if 
+  4@ == 1 
+jf @BCESAR2_4361 
+if 
+8205:   not actor $PLAYER_ACTOR near_car 26@ radius 500.0 500.0 500.0 flag 0 
+jf @BCESAR2_4361 
+jump @BCESAR2_6142 
+
+:BCESAR2_4361
+Car.StorePos(26@, $8313, $8314, $8315)
+if 
+001D:   9@ > 10@ // (int) 
+jf @BCESAR2_4772 
+if 
+  $8311 == 0 
+jf @BCESAR2_4526 
+if 
+0100:   actor 25@ in_sphere $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Z_BCE2_PATRIOT_CHECKPOINTS(10@,116f) radius 20.0 20.0 20.0 sphere 0 in_car 
+jf @BCESAR2_4519 
+Car.SetMaxSpeed(26@, 31@)
+10@ += 1 
+05D1: AS_actor 25@ drive_car 26@ to $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Z_BCE2_PATRIOT_CHECKPOINTS(10@,116f) speed 31@ 0 model #NULL 2 
+
+:BCESAR2_4519
+jump @BCESAR2_4765 
+
+:BCESAR2_4526
+if 
+  $8311 == 1 
+jf @BCESAR2_4658 
+if 
+0100:   actor 25@ in_sphere $4532(10@,98f) $4630(10@,98f) $4728(10@,98f) radius 20.0 20.0 20.0 sphere 0 in_car 
+jf @BCESAR2_4651 
+Car.SetMaxSpeed(26@, 31@)
+10@ += 1 
+05D1: AS_actor 25@ drive_car 26@ to $4532(10@,98f) $4630(10@,98f) $4728(10@,98f) speed 31@ 0 model #NULL 2 
+
+:BCESAR2_4651
+jump @BCESAR2_4765 
+
+:BCESAR2_4658
+if 
+0100:   actor 25@ in_sphere $4826(10@,117f) $4943(10@,117f) $5060(10@,117f) radius 20.0 20.0 20.0 sphere 0 in_car 
+jf @BCESAR2_4765 
+Car.SetMaxSpeed(26@, 31@)
+10@ += 1 
+05D1: AS_actor 25@ drive_car 26@ to $4826(10@,117f) $4943(10@,117f) $5060(10@,117f) speed 31@ 0 model #NULL 2 
+
+:BCESAR2_4765
+jump @BCESAR2_5071 
+
+:BCESAR2_4772
+if 
+  $8311 == 0 
+jf @BCESAR2_4866 
+if 
+0100:   actor 25@ in_sphere $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Z_BCE2_PATRIOT_CHECKPOINTS(10@,116f) radius 8.0 8.0 8.0 sphere 0 in_car 
+jf @BCESAR2_4859 
+05D2: AS_actor 25@ run_to_and_hijack_car 26@ max_search_radius 50.0 traffic_behavior 2 
+
+:BCESAR2_4859
+jump @BCESAR2_5029 
+
+:BCESAR2_4866
+if 
+  $8311 == 1 
+jf @BCESAR2_4960 
+if 
+0100:   actor 25@ in_sphere $4532(10@,98f) $4630(10@,98f) $4728(10@,98f) radius 8.0 8.0 8.0 sphere 0 in_car 
+jf @BCESAR2_4953 
+05D2: AS_actor 25@ run_to_and_hijack_car 26@ max_search_radius 50.0 traffic_behavior 2 
+
+:BCESAR2_4953
+jump @BCESAR2_5029 
+
+:BCESAR2_4960
+if 
+0100:   actor 25@ in_sphere $4826(10@,117f) $4943(10@,117f) $5060(10@,117f) radius 8.0 8.0 8.0 sphere 0 in_car 
+jf @BCESAR2_5029 
+05D2: AS_actor 25@ run_to_and_hijack_car 26@ max_search_radius 50.0 traffic_behavior 2 
+
+:BCESAR2_5029
+if 
+003B:   10@ == 9@ // (int) 
+jf @BCESAR2_5071 
+if 
+82CA:   not car 26@ bounding_sphere_visible 
+jf @BCESAR2_5071 
+jump @BCESAR2_6142 
+
+:BCESAR2_5071
+062E: get_actor 25@ task 1489 status_store_to 8@ // ret 7 if not found 
+if 
+04A4:   8@ == 7 // == constant 
+jf @BCESAR2_5264 
+if 
+  $8311 == 0 
+jf @BCESAR2_5163 
+05D1: AS_actor 25@ drive_car 26@ to $X_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Y_BCE2_PATRIOT_CHECKPOINTS(10@,116f) $Z_BCE2_PATRIOT_CHECKPOINTS(10@,116f) speed 31@ 0 model #NULL 2 
+jump @BCESAR2_5264 
+
+:BCESAR2_5163
+if 
+  $8311 == 1 
+jf @BCESAR2_5226 
+05D1: AS_actor 25@ drive_car 26@ to $4532(10@,98f) $4630(10@,98f) $4728(10@,98f) speed 31@ 0 model #NULL 2 
+jump @BCESAR2_5264 
+
+:BCESAR2_5226
+05D1: AS_actor 25@ drive_car 26@ to $4826(10@,117f) $4943(10@,117f) $5060(10@,117f) speed 31@ 0 model #NULL 2 
+
+:BCESAR2_5264
+jump @BCESAR2_5278 
+
+:BCESAR2_5271
+jump @BCESAR2_6142 
+
+:BCESAR2_5278
+if 
+   not Car.Wrecked(26@)
+jf @BCESAR2_5759 
+01BD: 13@ = current_time_in_ms 
+0085: 14@ = 13@ // (int) 
+0062: 14@ -= 12@ // (int) 
+20@ = Car.Health(26@)
+if 
+  14@ > 1000 
+jf @BCESAR2_5759 
+if 
+001D:   19@ > 20@ // (int) 
+jf @BCESAR2_5759 
+if 
+  $8322(1@,6i) == 0 
+jf @BCESAR2_5751 
+if 
+0685:   object $8316(1@,6i) attached 
+jf @BCESAR2_5751 
+if 
+   not Car.Wrecked(26@)
+jf @BCESAR2_5751 
+if or
+81F4:   not car 26@ flipped 
+82BF:   not car 26@ sunk 
+jf @BCESAR2_5751 
+Object.StorePos($8316(1@,6i), $8329(1@,6f), $8335(1@,6f), $8341(1@,6f))
+$8341(1@,6f) += 0.5 
+Object.PutAt($8316(1@,6i), $8329(1@,6f), $8335(1@,6f), $8341(1@,6f))
+0682: detach_object $8316(1@,6i) 90.0 180.0 1.5 collision_detection 1 
+$8305(1@,6i) = Marker.CreateAboveObject($8316(1@,6i))
+038C: object $8316(1@,6i) scatter 0.0 -5.0 20.0 
+Object.CollisionDetection($8316(1@,6i)) = True
+Object.ToggleInMovingList($8316(1@,6i)) = True
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCESAR2_5662 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @BCESAR2_5662 
+if 
+   not Car.Wrecked(22@)
+jf @BCESAR2_5662 
+050E: set_object $8316(1@,6i) no_collision_with_car 22@ 
+
+:BCESAR2_5662
+01BD: 12@ = current_time_in_ms 
+00BC: show_text_highpriority GXT 'BCE2_03' time 5000 flag 1  // ~s~Pick up the ~g~cash~s~.
+$8322(1@,6i) = 2 
+if 
+  1@ > 0 
+jf @BCESAR2_5726 
+1@ -= 1 
+jump @BCESAR2_5751 
+
+:BCESAR2_5726
+if 
+  3@ == 6 
+jf @BCESAR2_5751 
+jump @BCESAR2_6142 
+
+:BCESAR2_5751
+0085: 19@ = 20@ // (int) 
+
+:BCESAR2_5759
+if 
+  1@ == 0 
+jf @BCESAR2_5802 
+if 
+  3@ == 6 
+jf @BCESAR2_5802 
+jump @BCESAR2_6142 
+
+:BCESAR2_5802
+2@ = 0 
+
+:BCESAR2_5809
+if 
+   not 2@ == 6 
+jf @BCESAR2_6135 
+wait 0 
+if 
+  $8322(2@,6i) == 2 
+jf @BCESAR2_6121 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BCESAR2_6121 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @BCESAR2_6121 
+Actor.StorePos($PLAYER_ACTOR, 16@, 17@, 18@)
+if 
+03CA:   object $8316(2@,6i) exists 
+jf @BCESAR2_6025 
+if 
+0474:   actor $PLAYER_ACTOR near_object_in_cube $8316(2@,6i) radius 3.0 3.0 3.0 sphere 0 
+jf @BCESAR2_6025 
+Marker.Disable($8305(2@,6i))
+Object.Destroy($8316(2@,6i))
+018C: play_sound 1058 at 16@ 17@ 18@ 
+Player.Money($PLAYER_CHAR) += 300
+21@ += 300 
+$8322(2@,6i) = 3 
+3@ += 1 
+
+:BCESAR2_6025
+if 
+03CA:   object $8316(2@,6i) exists 
+jf @BCESAR2_6121 
+if 
+8474:   not actor $PLAYER_ACTOR near_object_in_cube $8316(2@,6i) radius 75.0 75.0 75.0 sphere 0 
+jf @BCESAR2_6121 
+Marker.Disable($8305(2@,6i))
+Object.Destroy($8316(2@,6i))
+$8322(2@,6i) = 3 
+3@ += 1 
+
+:BCESAR2_6121
+2@ += 1 
+jump @BCESAR2_5809 
+
+:BCESAR2_6135
+jump @BCESAR2_3531 
+
+:BCESAR2_6142
+if 
+  $2204 == 1 
+jf @BCESAR2_6202 
+01E3: show_text_1number_styled GXT 'BCE2_04' number 21@ time 7500 style 5  // You stole $~1~ from the courier.
+00BC: show_text_highpriority GXT 'BCE2_05' time 7500 flag 1  // ~s~You can try again every Monday and Friday.
+$BCESAR2_TIMES_PASSED += 1 
+
+:BCESAR2_6202
+Marker.Disable(27@)
+Marker.Disable($8305[0])
+Marker.Disable($8305[1])
+Marker.Disable($8305[2])
+Marker.Disable($8305[3])
+Marker.Disable($8305[4])
+Marker.Disable($8305[5])
+Car.RemoveReferences(26@)
+Actor.RemoveReferences(25@)
+Actor.RemoveReferences(28@)
+Actor.RemoveReferences(29@)
+Actor.RemoveReferences(30@)
+Object.RemoveReferences($8316[0])
+Object.RemoveReferences($8316[1])
+Object.RemoveReferences($8316[2])
+Object.RemoveReferences($8316[3])
+Object.RemoveReferences($8316[4])
+Object.RemoveReferences($8316[5])
+Model.Destroy(#FAM3)
+Model.Destroy(#PATRIOT)
+Model.Destroy(#MICRO_UZI)
+Model.Destroy(#CELLPHONE)
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+03E6: remove_text_box 
+040D: unload_wav 3 
+01BD: $CURRENT_TIME_IN_MS = current_time_in_ms 
+if 
+  $2204 == 1 
+jf @BCESAR2_6372 
+if 
+  $BCESAR2_PASSED_ONCE == 0 
+jf @BCESAR2_6372 
+0595: mission_complete 
+$BCESAR2_PASSED_ONCE = 1 
+
+:BCESAR2_6372
+$2204 = 0 
+end_thread 
+end_thread

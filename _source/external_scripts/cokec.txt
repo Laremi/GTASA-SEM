@@ -1,0 +1,1206 @@
+:COKEC
+thread 'COKEC' 
+15@ = 0 
+0@ = 0 
+1@ = 0 
+12@ = 0 
+13@ = 0 
+14@ = 0 
+16@ = 0 
+$8392 = 0 
+$8393 = 0 
+
+:COKEC_74
+if or
+  $WEEKDAY == 1 
+  $WEEKDAY == 3 
+  $WEEKDAY == 5 
+jf @COKEC_120 
+jump @COKEC_5527 
+16@ = 1 
+
+:COKEC_120
+if 
+  $BCESAR2_TIMES_PASSED == 0 
+jf @COKEC_152 
+jump @COKEC_5527 
+16@ = 1 
+
+:COKEC_152
+if 
+  $SYNDICATE_TOTAL_PASSED_MISSIONS >= 10 
+jf @COKEC_184 
+jump @COKEC_5527 
+16@ = 1 
+
+:COKEC_184
+077E: get_active_interior_to $1444 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_333 
+if 
+  $1444 == 0 
+jf @COKEC_322 
+if and
+044B:   actor $PLAYER_ACTOR on_foot 
+8818:   not actor $PLAYER_ACTOR in_air 
+  $ONMISSION == 0 
+  $FREEFALL_STAGE == 0 
+jf @COKEC_304 
+if and
+84AD:   not actor $PLAYER_ACTOR in_water 
+82E0:   not actor $PLAYER_ACTOR firing_weapon 
+jf @COKEC_286 
+jump @COKEC_297 
+
+:COKEC_286
+wait 0 
+jump @COKEC_74 
+
+:COKEC_297
+jump @COKEC_315 
+
+:COKEC_304
+wait 0 
+jump @COKEC_74 
+
+:COKEC_315
+jump @COKEC_333 
+
+:COKEC_322
+wait 0 
+jump @COKEC_74 
+
+:COKEC_333
+gosub @SUB_GET_TIME_FROM_LAST_CALL 
+if 
+  $TIME_FROM_LAST_CALL_GOT_FLAG == 0 
+jf @COKEC_369 
+wait 0 
+jump @COKEC_74 
+
+:COKEC_369
+if 
+  $1515 == 0 
+jf @COKEC_389 
+increment_mission_attempts 
+
+:COKEC_389
+14@ = 1 
+$2204 = 1 
+
+:COKEC_403
+wait 0 
+01BD: 3@ = current_time_in_ms 
+0085: 2@ = 3@ // (int) 
+0062: 2@ -= 9@ // (int) 
+0085: 9@ = 3@ // (int) 
+077E: get_active_interior_to 27@ 
+if 
+  27@ == 0 
+jf @COKEC_475 
+005A: 10@ += 2@ // (int) 
+005A: 11@ += 2@ // (int) 
+
+:COKEC_475
+if 
+0736:   is_keyboard_key_just_pressed 98 
+jf @COKEC_497 
+jump @COKEC_5527 
+
+:COKEC_497
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @COKEC_519 
+jump @COKEC_5527 
+
+:COKEC_519
+if 
+  $ONMISSION == 1 
+jf @COKEC_551 
+16@ = 1 
+jump @COKEC_5527 
+
+:COKEC_551
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @COKEC_574 
+jump @COKEC_5527 
+
+:COKEC_574
+if 
+wasted_or_busted 
+jf @COKEC_601 
+16@ = 1 
+jump @COKEC_5527 
+
+:COKEC_601
+if 
+  0@ == 0 
+jf @COKEC_675 
+23@ = -1 
+21@ = 0 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+28@ = 0 
+0@ += 1 
+1@ = 0 
+
+:COKEC_675
+if 
+  0@ == 1 
+jf @COKEC_5520 
+if 
+  1@ == 0 
+jf @COKEC_806 
+Model.Load(#WMYBMX)
+Model.Load(#SANCHEZ)
+Model.Load(#COLT45)
+Model.Load(#CELLPHONE)
+07C0: load_path 556 
+03CF: load_wav 20804 as 3 
+
+:COKEC_742
+if or
+   not Model.Available(#WMYBMX)
+   not Model.Available(#SANCHEZ)
+   not Model.Available(#COLT45)
+   not Model.Available(#CELLPHONE)
+87C1:   not path 556 available 
+83D0:   not wav 3 loaded 
+jf @COKEC_792 
+wait 0 
+jump @COKEC_742 
+
+:COKEC_792
+060A: create_decision_maker_type 2 store_to 29@ // decision\allowed\m_.ped files 
+1@ += 1 
+
+:COKEC_806
+if 
+  1@ == 1 
+jf @COKEC_882 
+gosub @SUB_GET_TIME_FROM_LAST_CALL 
+if 
+  $TIME_FROM_LAST_CALL_GOT_FLAG == 1 
+jf @COKEC_882 
+03D1: play_wav 3 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 1 
+32@ = -1500 
+12@ = 0 
+1@ += 1 
+
+:COKEC_882
+if 
+  1@ >= 2 
+jf @COKEC_1565 
+if 
+  5 > 12@ 
+jf @COKEC_1565 
+if 
+00E1:   player 0 pressed_key 15 
+jf @COKEC_963 
+12@ = 4 
+$8392 = 3 
+$8393 = 2 
+16@ = 1 
+
+:COKEC_963
+if and
+  $8392 == 1 
+  $AUDIO_LINE_IS_ACTIVE == 0 
+876F:   not text_priority_displayed 
+jf @COKEC_1008 
+0512: show_permanent_text_box 'TALK_1'  // To reply negatively press ~k~~CONVERSATION_NO~~n~To reply positively press ~k~~CONVERSATION_YES~
+$8392 += 1 
+
+:COKEC_1008
+if 
+  $8392 == 2 
+jf @COKEC_1099 
+if 
+00E1:   player 0 pressed_key 11 
+jf @COKEC_1066 
+$8393 = 1 
+$8392 += 1 
+03E6: remove_text_box 
+jump @COKEC_1099 
+
+:COKEC_1066
+if 
+00E1:   player 0 pressed_key 10 
+jf @COKEC_1099 
+$8393 = 2 
+$8392 += 1 
+03E6: remove_text_box 
+
+:COKEC_1099
+if or
+  $8392 == 0 
+  $8392 == 3 
+jf @COKEC_1565 
+if and
+  $AUDIO_LINE_IS_ACTIVE == 0 
+  32@ > 1000 
+jf @COKEC_1565 
+0871: init_jump_table 12@ total_jumps 5 default_jump 0 @COKEC_1551 jumps 0 @COKEC_1213 1 @COKEC_1264 2 @COKEC_1312 3 @COKEC_1366 4 @COKEC_1480 -1 @COKEC_1551 -1 @COKEC_1551 
+
+:COKEC_1213
+040D: unload_wav 3 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MCES08A' // s$  // ~z~Hey, Cesar.
+04AE: $ACTOR_SPEECH_WAV_FILE = 25285 // = constant 
+create_thread @NONAME_5 -1 0 1 1 0 
+jump @COKEC_1551 
+
+:COKEC_1264
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MCES08B' // s$  // ~z~The yay leaving San Fierro, right?
+04AE: $ACTOR_SPEECH_WAV_FILE = 25286 // = constant 
+create_thread @NONAME_5 $PLAYER_ACTOR 0 1 1 0 
+jump @COKEC_1551 
+
+:COKEC_1312
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MCES08C' // s$  // ~z~Right. But they're using bikes, CJ, and they go cross country!
+04AE: $ACTOR_SPEECH_WAV_FILE = 25287 // = constant 
+create_thread @NONAME_5 -1 0 1 1 0 
+$8392 += 1 
+jump @COKEC_1551 
+
+:COKEC_1366
+if 
+  $8393 == 1 
+jf @COKEC_1432 
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'MCES08D' // s$  // ~z~OK, I'm gonna see what I can dig up.
+04AE: $ACTOR_SPEECH_WAV_FILE = 25288 // = constant 
+create_thread @NONAME_5 $PLAYER_ACTOR 0 1 1 0 
+jump @COKEC_1473 
+
+:COKEC_1432
+05A9: s$ACTOR_SPEECH_GXT_REFERENCE = 'VOFFE2N' // s$  // ~z~Not right now, I gotta check into some shit.
+04AE: $ACTOR_SPEECH_WAV_FILE = 21447 // = constant 
+create_thread @NONAME_5 $PLAYER_ACTOR 0 1 1 0 
+
+:COKEC_1473
+jump @COKEC_1551 
+
+:COKEC_1480
+create_thread @NONAME_6 
+040D: unload_wav 1 
+040D: unload_wav 2 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_1519 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+
+:COKEC_1519
+if 
+   not $8393 == 1 
+jf @COKEC_1544 
+jump @COKEC_5527 
+
+:COKEC_1544
+jump @COKEC_1551 
+
+:COKEC_1551
+12@ += 1 
+32@ = 0 
+
+:COKEC_1565
+if 
+  1@ == 2 
+jf @COKEC_2214 
+if 
+  15@ == 0 
+jf @COKEC_1991 
+0209: 26@ = random_int_in_ranges 0 60 
+
+:COKEC_1610
+if 
+  2@ == 0 
+jf @COKEC_1732 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_1725 
+if 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $X_BCE2_CHECKPOINTS(26@,85f) $Y_BCE2_CHECKPOINTS(26@,85f) $Z_BCE2_CHECKPOINTS(26@,85f) radius 150.0 150.0 150.0 
+jf @COKEC_1718 
+0209: 26@ = random_int_in_ranges 0 60 
+wait 0 
+jump @COKEC_1725 
+
+:COKEC_1718
+2@ = 1 
+
+:COKEC_1725
+jump @COKEC_1610 
+
+:COKEC_1732
+17@ = Car.Create(#SANCHEZ, $X_BCE2_CHECKPOINTS(26@,85f), $Y_BCE2_CHECKPOINTS(26@,85f), $Z_BCE2_CHECKPOINTS(26@,85f))
+18@ = Actor.Create(CivMale, #WMYBMX, $X_BCE2_CHECKPOINTS(26@,85f), $Y_BCE2_CHECKPOINTS(26@,85f), $Z_BCE2_CHECKPOINTS(26@,85f))
+22@ = Object.Create(#PARA_PACK, $X_BCE2_CHECKPOINTS(26@,85f), $Y_BCE2_CHECKPOINTS(26@,85f), $Z_BCE2_CHECKPOINTS(26@,85f))
+036A: put_actor 18@ in_car 17@ 
+070A: AS_actor 18@ attach_to_object 22@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+0587: enable_car 17@ validate_position 0 
+0085: 2@ = 26@ // (int) 
+2@ += 1 
+0086: $TEMPVAR_FLOAT_1 = $X_BCE2_CHECKPOINTS(2@,85f) // (float) 
+0061: $TEMPVAR_FLOAT_1 -= $X_BCE2_CHECKPOINTS(26@,85f) // (float) 
+0086: $TEMPVAR_FLOAT_2 = $Y_BCE2_CHECKPOINTS(2@,85f) // (float) 
+0061: $TEMPVAR_FLOAT_2 -= $Y_BCE2_CHECKPOINTS(26@,85f) // (float) 
+0604: get_Z_angle_for_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 store_to 5@ 
+Car.Angle(17@) = 5@
+0704: car 17@ drive_to $X_BCE2_CHECKPOINTS(26@,85f) $Y_BCE2_CHECKPOINTS(26@,85f) $Z_BCE2_CHECKPOINTS(26@,85f) 
+jump @COKEC_1991 
+
+:COKEC_1991
+02A9: set_actor 18@ immune_to_nonplayer 1 
+Actor.WeaponAccuracy(18@) = 95
+060B: set_actor 18@ decision_maker_to 29@ 
+0688: AS_actor 18@ unknown_toggle_ped_threat_scanner 0 0 1 
+Actor.GiveWeaponAndAmmo(18@, Pistol, 99999)
+Actor.SetMaxHealth(18@, 300)
+Actor.Health(18@) = 300
+Car.ImmuneToNonPlayer(17@) = True
+Car.SetMaxSpeed(17@, 25.0)
+00AE: set_car 17@ traffic_behaviour_to 2 
+072F: enable_car 17@ stuck_check_distance 2.0 time 2000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path 2 // extended 03CC 
+Actor.SetImmunities(18@, 1, 1, 1, 1, 1)
+Car.SetImmunities(17@, 1, 1, 1, 1, 1)
+04D8: set_actor 18@ drowns_in_water 0 
+08C6: set_actor 18@ stay_on_bike 1 
+Model.Destroy(#WMYBMX)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#COLT45)
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2179 
+19@ = Marker.CreateAboveActor(18@)
+
+:COKEC_2179
+24@ = 0 
+33@ = 0 
+11@ = 0 
+10@ = 0 
+1@ += 1 
+
+:COKEC_2214
+if 
+  1@ == 3 
+jf @COKEC_3295 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3295 
+if 
+  25@ == 0 
+jf @COKEC_2311 
+if 
+0736:   is_keyboard_key_just_pressed 67 
+jf @COKEC_2304 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2304 
+25@ = 1 
+
+:COKEC_2304
+jump @COKEC_2337 
+
+:COKEC_2311
+if 
+0736:   is_keyboard_key_just_pressed 67 
+jf @COKEC_2337 
+Camera.Restore_WithJumpCut
+Camera.SetBehindPlayer
+25@ = 0 
+
+:COKEC_2337
+if 
+  25@ == 1 
+jf @COKEC_2497 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2497 
+Actor.StorePos(18@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_1 += -15.0 
+$TEMPVAR_FLOAT_2 += 12.0 
+$TEMPVAR_FLOAT_3 += 15.0 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+Actor.StorePos(18@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 18@ with_offset 0.0 2.0 0.0 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 2)
+
+:COKEC_2497
+if 
+0736:   is_keyboard_key_just_pressed 70 
+jf @COKEC_2571 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2571 
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_2571 
+if 
+   Actor.InCar(18@, 17@)
+jf @COKEC_2571 
+0622: AS_actor 18@ bail_car 17@ 
+
+:COKEC_2571
+if 
+0736:   is_keyboard_key_just_pressed 74 
+jf @COKEC_2671 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2671 
+04C4: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_actor 18@ with_offset 0.0 -20.0 0.0 
+$TEMPVAR_FLOAT_3 += 10.0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_2671 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:COKEC_2671
+if 
+  15@ == 0 
+jf @COKEC_2891 
+if 
+  24@ == 0 
+jf @COKEC_2884 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_2884 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_2884 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 18@ radius 80.0 80.0 80.0 sphere 0 
+jf @COKEC_2856 
+08C6: set_actor 18@ stay_on_bike 0 
+Actor.SetImmunities(18@, 0, 0, 0, 0, 0)
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_2828 
+Car.SetImmunities(17@, 0, 0, 0, 0, 0)
+
+:COKEC_2828
+04D8: set_actor 18@ drowns_in_water 1 
+08C6: set_actor 18@ stay_on_bike 0 
+24@ = 1 
+jump @COKEC_2884 
+
+:COKEC_2856
+if 
+  11@ > 600000 
+jf @COKEC_2884 
+jump @COKEC_5527 
+
+:COKEC_2884
+jump @COKEC_2891 
+
+:COKEC_2891
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3042 
+if 
+  24@ == 1 
+jf @COKEC_3042 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_3042 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3000 
+if or
+00F2:   actor $PLAYER_ACTOR near_actor 18@ radius 100.0 100.0 0 
+02CB:   actor 18@ bounding_sphere_visible 
+jf @COKEC_3000 
+10@ = 0 
+
+:COKEC_3000
+if 
+  10@ > 20000 
+jf @COKEC_3042 
+00BB: show_text_lowpriority GXT 'BCR3_02' time 4000 flag 1  // ~s~You've lost the ~r~courier~s~.
+jump @COKEC_5527 
+
+:COKEC_3042
+if 
+  23@ == -1 
+jf @COKEC_3221 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_3214 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3214 
+if 
+051A:   actor 18@ damaged_by_actor $PLAYER_ACTOR 
+jf @COKEC_3214 
+if 
+03CA:   object 22@ exists 
+jf @COKEC_3184 
+066E: create_particle "COKE_TRAIL" attached_to_object 22@ with_offset 0.0 -0.2 -0.1 rotation 0.0 0.0 -1.0 flag 1 store_to 20@ 
+064C: make_particle 20@ visible 
+
+:COKEC_3184
+00BB: show_text_lowpriority GXT 'BCR3_04' time 5000 flag 1  // ~s~The ~r~courier~s~ is losing stuff, kill him before it's all lost.
+23@ = 1 
+32@ = 0 
+
+:COKEC_3214
+jump @COKEC_3272 
+
+:COKEC_3221
+if 
+  32@ > 180000 
+jf @COKEC_3272 
+if 
+  23@ > 0 
+jf @COKEC_3272 
+064E: stop_particle 20@ 
+23@ = 0 
+
+:COKEC_3272
+if 
+   Actor.Dead(18@)
+jf @COKEC_3295 
+1@ += 1 
+
+:COKEC_3295
+if 
+  1@ == 4 
+jf @COKEC_3554 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3554 
+if 
+   Actor.Dead(18@)
+jf @COKEC_3554 
+064E: stop_particle 20@ 
+0093: 5@ = integer 32@ to_float 
+if 
+  5@ > 180000.0 
+jf @COKEC_3389 
+5@ = 180000.0 
+
+:COKEC_3389
+5@ /= 180000.0 
+5@ -= 1.0 
+5@ *= -1.0 
+5@ *= 2000.0 
+0092: 23@ = float 5@ to_integer 
+Marker.Disable(19@)
+if 
+03CA:   object 22@ exists 
+jf @COKEC_3463 
+Object.Destroy(22@)
+
+:COKEC_3463
+Actor.StoreDeadActorPos(18@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+21@ = Pickup.Create(#PARA_PACK, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+018A: 19@ = create_checkpoint_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Marker.SetColor(19@, 1)
+00BC: show_text_highpriority GXT 'BCR3_05' time 4000 flag 1  // ~s~Pick up the ~g~stuff~s~.
+$8394 = 0 
+32@ = 0 
+1@ += 1 
+
+:COKEC_3554
+if 
+0736:   is_keyboard_key_just_pressed 85 
+jf @COKEC_3590 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_3590 
+05BE: AS_actor 18@ die 
+
+:COKEC_3590
+if 
+  $8394 == 0 
+jf @COKEC_3777 
+if 
+   not Pickup.Picked_up(21@)
+jf @COKEC_3777 
+065B: store_pickup 21@ position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_3777 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 50.0 50.0 
+jf @COKEC_3777 
+02CE: 5@ = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+0088: $TEMPVAR_FLOAT_3 = 5@ // (float) 
+$TEMPVAR_FLOAT_3 += 1.0 
+Pickup.Destroy(21@)
+Marker.Disable(19@)
+21@ = Pickup.Create(#PARA_PACK, 3, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+018A: 19@ = create_checkpoint_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Marker.SetColor(19@, 1)
+$8394 = 1 
+
+:COKEC_3777
+if 
+  1@ == 5 
+jf @COKEC_4019 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_4019 
+065B: store_pickup 21@ position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+00EC:   actor $PLAYER_ACTOR sphere 0 near_point $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 radius 300.0 300.0 
+jf @COKEC_4010 
+if 
+  180000 > 32@ 
+jf @COKEC_3994 
+if 
+   not 21@ == 0 
+jf @COKEC_3978 
+if 
+   Pickup.Picked_up(21@)
+jf @COKEC_3971 
+if 
+  23@ > 0 
+jf @COKEC_3948 
+00BE: text_clear_all 
+13@ = 1 
+jump @COKEC_3964 
+
+:COKEC_3948
+00BC: show_text_highpriority GXT 'BCR3_06' time 7500 flag 1  // ~s~All the stuff was lost during the chase!
+
+:COKEC_3964
+jump @COKEC_5527 
+
+:COKEC_3971
+jump @COKEC_3987 
+
+:COKEC_3978
+00BE: text_clear_all 
+jump @COKEC_5527 
+
+:COKEC_3987
+jump @COKEC_4003 
+
+:COKEC_3994
+00BE: text_clear_all 
+jump @COKEC_5527 
+
+:COKEC_4003
+jump @COKEC_4019 
+
+:COKEC_4010
+00BE: text_clear_all 
+jump @COKEC_5527 
+
+:COKEC_4019
+if 
+   not 24@ == 0 
+jf @COKEC_4226 
+if 
+  15@ == 0 
+jf @COKEC_4226 
+if 
+056E:   car 17@ defined 
+jf @COKEC_4219 
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_4219 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_4219 
+if 
+0205:   actor $PLAYER_ACTOR near_car 17@ radius 50.0 50.0 50.0 flag 0 
+jf @COKEC_4209 
+if 
+0205:   actor $PLAYER_ACTOR near_car 17@ radius 20.0 20.0 20.0 flag 0 
+jf @COKEC_4192 
+Car.SetMaxSpeed(17@, 45.0)
+jump @COKEC_4202 
+
+:COKEC_4192
+Car.SetMaxSpeed(17@, 30.0)
+
+:COKEC_4202
+jump @COKEC_4219 
+
+:COKEC_4209
+Car.SetMaxSpeed(17@, 20.0)
+
+:COKEC_4219
+jump @COKEC_4226 
+
+:COKEC_4226
+if 
+  15@ == 0 
+jf @COKEC_4613 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_4613 
+if 
+   not 26@ == -1 
+jf @COKEC_4613 
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_4613 
+if 
+   Actor.InCar(18@, 17@)
+jf @COKEC_4613 
+if 
+0100:   actor 18@ in_sphere $X_BCE2_CHECKPOINTS(26@,85f) $Y_BCE2_CHECKPOINTS(26@,85f) $Z_BCE2_CHECKPOINTS(26@,85f) radius 25.0 25.0 25.0 sphere 0 in_car 
+jf @COKEC_4468 
+26@ += 1 
+if 
+  85 > 26@ 
+jf @COKEC_4439 
+05D1: AS_actor 18@ drive_car 17@ to $X_BCE2_CHECKPOINTS(26@,85f) $Y_BCE2_CHECKPOINTS(26@,85f) $Z_BCE2_CHECKPOINTS(26@,85f) speed 25.0 3 model #CSPLAY 2 
+jump @COKEC_4461 
+
+:COKEC_4439
+05D2: AS_actor 18@ run_to_and_hijack_car 17@ max_search_radius 25.0 traffic_behavior 2 
+26@ = -1 
+
+:COKEC_4461
+jump @COKEC_4613 
+
+:COKEC_4468
+if 
+  85 > 26@ 
+jf @COKEC_4562 
+062E: get_actor 18@ task 1489 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_4555 
+05D1: AS_actor 18@ drive_car 17@ to $X_BCE2_CHECKPOINTS(26@,85f) $Y_BCE2_CHECKPOINTS(26@,85f) $Z_BCE2_CHECKPOINTS(26@,85f) speed 25.0 3 model #CSPLAY 2 
+
+:COKEC_4555
+jump @COKEC_4613 
+
+:COKEC_4562
+062E: get_actor 18@ task 1490 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_4613 
+05D2: AS_actor 18@ run_to_and_hijack_car 17@ max_search_radius 25.0 traffic_behavior 2 
+26@ = -1 
+
+:COKEC_4613
+if 
+   not Actor.Dead(18@)
+jf @COKEC_4728 
+if 
+83CA:   not object 22@ exists 
+jf @COKEC_4668 
+22@ = Object.Create(#PARA_PACK, 0.0, 0.0, 0.0)
+
+:COKEC_4668
+if 
+8737:   not actor 18@ lifting_object 22@ 
+jf @COKEC_4728 
+070A: AS_actor 18@ attach_to_object 22@ offset -0.11 -0.05 0.0 on_bone 1 16 perform_animation "NULL" IFP_file "NULL" time 0 
+
+:COKEC_4728
+if 
+   not 27@ == 0 
+jf @COKEC_4824 
+if 
+  28@ == 0 
+jf @COKEC_4817 
+if 
+056E:   car 17@ defined 
+jf @COKEC_4787 
+Car.LockInCurrentPosition(17@) = True
+
+:COKEC_4787
+if 
+056D:   actor 18@ defined 
+jf @COKEC_4810 
+Actor.LockInCurrentPosition(18@) = True
+
+:COKEC_4810
+28@ = 1 
+
+:COKEC_4817
+jump @COKEC_4895 
+
+:COKEC_4824
+if 
+  28@ == 1 
+jf @COKEC_4895 
+if 
+056E:   car 17@ defined 
+jf @COKEC_4865 
+Car.LockInCurrentPosition(17@) = False
+
+:COKEC_4865
+if 
+056D:   actor 18@ defined 
+jf @COKEC_4888 
+Actor.LockInCurrentPosition(18@) = False
+
+:COKEC_4888
+28@ = 0 
+
+:COKEC_4895
+if 
+056E:   car 17@ defined 
+jf @COKEC_5520 
+if 
+   not Actor.Dead(18@)
+jf @COKEC_5520 
+if 
+  24@ == 1 
+jf @COKEC_5477 
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_5395 
+if 
+   not Actor.InCar(18@, 17@)
+jf @COKEC_5388 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_5388 
+if 
+8105:   not actor $PLAYER_ACTOR near_actor 18@ radius 20.0 20.0 10.0 sphere 0 on_foot 
+jf @COKEC_5239 
+062E: get_actor 18@ task 1560 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_5121 
+0687: clear_actor 18@ task 
+0615: define_AS_pack_begin 8@ 
+0772: AS_actor -1 run_to_car 17@ 10000 ms stop_at_distance 5.0 
+05CB: AS_actor -1 enter_car 17@ as_driver 10000 ms 
+0616: define_AS_pack_end 8@ 
+0618: assign_actor 18@ to_AS_pack 8@ 
+061B: remove_references_to_AS_pack 8@ 
+jump @COKEC_5232 
+
+:COKEC_5121
+062E: get_actor 18@ task 1506 status_store_to 2@ // ret 7 if not found 
+if 
+84A4:   not  2@ == 7 // == constant 
+jf @COKEC_5232 
+062E: get_actor 18@ task 1560 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_5232 
+0687: clear_actor 18@ task 
+0615: define_AS_pack_begin 8@ 
+0772: AS_actor -1 run_to_car 17@ 10000 ms stop_at_distance 5.0 
+05CB: AS_actor -1 enter_car 17@ as_driver 10000 ms 
+0616: define_AS_pack_end 8@ 
+0618: assign_actor 18@ to_AS_pack 8@ 
+061B: remove_references_to_AS_pack 8@ 
+
+:COKEC_5232
+jump @COKEC_5388 
+
+:COKEC_5239
+if 
+  23@ == 1 
+jf @COKEC_5306 
+062E: get_actor 18@ task 1506 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_5299 
+0687: clear_actor 18@ task 
+05E2: AS_actor 18@ kill_actor $PLAYER_ACTOR 
+
+:COKEC_5299
+jump @COKEC_5388 
+
+:COKEC_5306
+062E: get_actor 18@ task 1560 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_5388 
+0687: clear_actor 18@ task 
+0615: define_AS_pack_begin 8@ 
+0772: AS_actor -1 run_to_car 17@ 10000 ms stop_at_distance 5.0 
+05CB: AS_actor -1 enter_car 17@ as_driver 10000 ms 
+0616: define_AS_pack_end 8@ 
+0618: assign_actor 18@ to_AS_pack 8@ 
+061B: remove_references_to_AS_pack 8@ 
+
+:COKEC_5388
+jump @COKEC_5470 
+
+:COKEC_5395
+062E: get_actor 18@ task 1560 status_store_to 2@ // ret 7 if not found 
+if 
+04A4:   2@ == 7 // == constant 
+jf @COKEC_5470 
+0615: define_AS_pack_begin 8@ 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_5452 
+05E2: AS_actor -1 kill_actor $PLAYER_ACTOR 
+
+:COKEC_5452
+0616: define_AS_pack_end 8@ 
+0618: assign_actor 18@ to_AS_pack 8@ 
+061B: remove_references_to_AS_pack 8@ 
+
+:COKEC_5470
+jump @COKEC_5520 
+
+:COKEC_5477
+if 
+   not Car.Wrecked(17@)
+jf @COKEC_5520 
+if 
+   not Actor.InCar(18@, 17@)
+jf @COKEC_5520 
+036A: put_actor 18@ in_car 17@ 
+
+:COKEC_5520
+jump @COKEC_403 
+
+:COKEC_5527
+if 
+  14@ == 1 
+jf @COKEC_5844 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_5568 
+0729: AS_actor $PLAYER_ACTOR hold_cellphone 0 
+
+:COKEC_5568
+create_thread @NONAME_6 
+040D: unload_wav 1 
+040D: unload_wav 2 
+wait 1 
+03E6: remove_text_box 
+if 
+  13@ == 0 
+jf @COKEC_5615 
+23@ = 0 
+
+:COKEC_5615
+if 
+  16@ == 0 
+jf @COKEC_5681 
+if 
+876F:   not text_priority_displayed 
+jf @COKEC_5662 
+00BC: show_text_highpriority GXT 'BCR3_08' time 7500 flag 1  // ~s~You can try again every Wednesday and Saturday.
+
+:COKEC_5662
+01E3: show_text_1number_styled GXT 'BCE2_04' number 23@ time 7500 style 5  // You stole $~1~ from the courier.
+
+:COKEC_5681
+if 
+  13@ == 1 
+jf @COKEC_5759 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_5723 
+Player.Money($PLAYER_CHAR) += 23@
+
+:COKEC_5723
+if 
+  $1515 == 0 
+jf @COKEC_5750 
+0595: mission_complete 
+$1515 += 1 
+
+:COKEC_5750
+0394: play_music 1 
+Player.ClearWantedLevel($PLAYER_CHAR)
+
+:COKEC_5759
+Actor.RemoveReferences(18@)
+Car.RemoveReferences(17@)
+Object.RemoveReferences(22@)
+Marker.Disable(19@)
+0650: destroy_particle 20@ 
+Pickup.Destroy(21@)
+065C: release_decision_maker 29@ 
+Model.Destroy(#WMYBMX)
+Model.Destroy(#SANCHEZ)
+Model.Destroy(#COLT45)
+Model.Destroy(#CELLPHONE)
+0873: release_path 556 
+03DE: set_pedestrians_density_multiplier_to 1.0 
+01EB: set_traffic_density_multiplier_to 1.0 
+Model.Destroy(#CELLPHONE)
+14@ = 0 
+
+:COKEC_5844
+$2204 = 0 
+end_thread 
+0084: $8396 = $BCE_CHECKPOINTS_INDEX // (int) 
+$8396 -= 2 
+0084: $8397 = $BCE_CHECKPOINTS_INDEX // (int) 
+$8397 += 2 
+if 
+  0 > $8396 
+jf @COKEC_5908 
+$8396 = 0 
+
+:COKEC_5908
+if 
+  $8397 > 84 
+jf @COKEC_5933 
+$8397 = 84 
+
+:COKEC_5933
+008B: 2@ = $8396 // (int) 
+
+:COKEC_5941
+if 
+001E:   $8397 > 2@ // (int) 
+jf @COKEC_6051 
+0085: 3@ = 2@ // (int) 
+3@ += 1 
+if 
+  85 > 3@ 
+jf @COKEC_6037 
+0052: NOP $X_BCE2_CHECKPOINTS(2@,85f) $Y_BCE2_CHECKPOINTS(2@,85f) $Z_BCE2_CHECKPOINTS(2@,85f) $X_BCE2_CHECKPOINTS(3@,85f) $Y_BCE2_CHECKPOINTS(3@,85f) $Z_BCE2_CHECKPOINTS(3@,85f) 
+
+:COKEC_6037
+2@ += 1 
+jump @COKEC_5941 
+
+:COKEC_6051
+if 
+0736:   is_keyboard_key_just_pressed 124 
+jf @COKEC_6122 
+$BCE_CHECKPOINTS_INDEX += 1 
+if 
+  $BCE_CHECKPOINTS_INDEX > 84 
+jf @COKEC_6098 
+$BCE_CHECKPOINTS_INDEX = 0 
+
+:COKEC_6098
+0663: printint "BCE_POINT_TO_EDIT" $BCE_CHECKPOINTS_INDEX 
+
+:COKEC_6122
+if 
+0736:   is_keyboard_key_just_pressed 127 
+jf @COKEC_6193 
+$BCE_CHECKPOINTS_INDEX -= 1 
+if 
+  0 > $BCE_CHECKPOINTS_INDEX 
+jf @COKEC_6169 
+$BCE_CHECKPOINTS_INDEX = 84 
+
+:COKEC_6169
+0663: printint "BCE_POINT_TO_EDIT" $BCE_CHECKPOINTS_INDEX 
+
+:COKEC_6193
+if 
+0736:   is_keyboard_key_just_pressed 131 
+jf @COKEC_6223 
+$Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += 0.5 
+
+:COKEC_6223
+if 
+0736:   is_keyboard_key_just_pressed 130 
+jf @COKEC_6253 
+$Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += -0.5 
+
+:COKEC_6253
+if 
+0736:   is_keyboard_key_just_pressed 128 
+jf @COKEC_6283 
+$X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += 0.5 
+
+:COKEC_6283
+if 
+0736:   is_keyboard_key_just_pressed 129 
+jf @COKEC_6313 
+$X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += -0.5 
+
+:COKEC_6313
+if 
+0736:   is_keyboard_key_just_pressed 145 
+jf @COKEC_6343 
+$Z_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += 0.5 
+
+:COKEC_6343
+if 
+0736:   is_keyboard_key_just_pressed 139 
+jf @COKEC_6373 
+$Z_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += -0.5 
+
+:COKEC_6373
+if 
+0736:   is_keyboard_key_just_pressed 87 
+jf @COKEC_6402 
+$Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += 10.0 
+
+:COKEC_6402
+if 
+0736:   is_keyboard_key_just_pressed 83 
+jf @COKEC_6431 
+$Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += -10.0 
+
+:COKEC_6431
+if 
+0736:   is_keyboard_key_just_pressed 68 
+jf @COKEC_6460 
+$X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += 10.0 
+
+:COKEC_6460
+if 
+0736:   is_keyboard_key_just_pressed 65 
+jf @COKEC_6489 
+$X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) += -10.0 
+
+:COKEC_6489
+if 
+0736:   is_keyboard_key_just_pressed 137 
+jf @COKEC_7511 
+03A9: save_newline_to_debug_file 
+05B6: 103 // COKE COURIER ROUTE - EDIT POINT -
+03A7: save_int_to_debug_file $BCE_CHECKPOINTS_INDEX 
+03A9: save_newline_to_debug_file 
+2@ = 0 
+
+:COKEC_6651
+if 
+  85 > 2@ 
+jf @COKEC_7511 
+05B6: 104 // BCE2_CHECKPOINTS_X[
+03A7: save_int_to_debug_file 2@ 
+05B6: 105 // ] = 
+03A8: save_float_to_debug_file $X_BCE2_CHECKPOINTS(2@,85f) 
+03A9: save_newline_to_debug_file 
+05B6: 106 // BCE2_CHECKPOINTS_Y[
+03A7: save_int_to_debug_file 2@ 
+05B6: 107 // ] = 
+03A8: save_float_to_debug_file $Y_BCE2_CHECKPOINTS(2@,85f) 
+03A9: save_newline_to_debug_file 
+05B6: 108 // BCE2_CHECKPOINTS_Z[
+03A7: save_int_to_debug_file 2@ 
+05B6: 109 // ] = 
+03A8: save_float_to_debug_file $Z_BCE2_CHECKPOINTS(2@,85f) 
+03A9: save_newline_to_debug_file 
+2@ += 1 
+jump @COKEC_6651 
+
+:COKEC_7511
+if 
+0736:   is_keyboard_key_just_pressed 97 
+jf @COKEC_7614 
+008B: 2@ = $BCE_CHECKPOINTS_INDEX // (int) 
+2@ -= 1 
+if 
+  0 > 2@ 
+jf @COKEC_7566 
+2@ = 0 
+
+:COKEC_7566
+0086: $X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) = $X_BCE2_CHECKPOINTS(2@,85f) // (float) 
+0086: $Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) = $Y_BCE2_CHECKPOINTS(2@,85f) // (float) 
+0086: $Z_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) = $Z_BCE2_CHECKPOINTS(2@,85f) // (float) 
+
+:COKEC_7614
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @COKEC_7716 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) $Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) $Z_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) radius 1.0 1.0 1.0 
+00FE:   actor $PLAYER_ACTOR sphere 0 in_sphere $X_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) $Y_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) $Z_BCE2_CHECKPOINTS($BCE_CHECKPOINTS_INDEX,85f) radius 0.5 0.5 0.5 
+
+:COKEC_7716
+return 
+end_thread

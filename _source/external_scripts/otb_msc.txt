@@ -1,0 +1,139 @@
+:OTB_MSC
+thread 'OTB_MSC' 
+1@ = 0 
+if 
+  1@ == -1 
+jf @OTB_MSC_58 
+0@ = Object.Create(#OTB_MACHINE, 0.0, 0.0, 0.0)
+
+:OTB_MSC_58
+wait 0 
+if 
+03CA:   object 0@ exists 
+jf @OTB_MSC_625 
+if 
+0977:   player_in_radius_of_object 0@ external_script_trigger 
+jf @OTB_MSC_589 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @OTB_MSC_555 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -1.0 0.0 0.0 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @OTB_MSC_521 
+if 
+00E1:   player 0 pressed_key 15 
+jf @OTB_MSC_478 
+if 
+  1@ == 1 
+jf @OTB_MSC_471 
+03E6: remove_text_box 
+1@ = 0 
+if 
+  $ONMISSION == 0 
+jf @OTB_MSC_455 
+if 
+88B4:   not test $390 bit 1 
+jf @OTB_MSC_432 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @OTB_MSC_425 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+fade 0 500 
+
+:OTB_MSC_298
+if 
+fading 
+jf @OTB_MSC_322 
+wait 0 
+jump @OTB_MSC_298 
+
+:OTB_MSC_322
+$VIDEO_GAME = 4 
+wait 0 
+wait 0 
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @OTB_MSC_425 
+if 
+  $ONMISSION == 0 
+jf @OTB_MSC_382 
+Player.CanMove($PLAYER_CHAR) = True
+
+:OTB_MSC_382
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -2.0 0.0 -1.0 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:OTB_MSC_425
+jump @OTB_MSC_448 
+
+:OTB_MSC_432
+00BC: show_text_highpriority GXT 'BUSY' time 3000 flag 1  // You look a bit busy, why don't you come back later.
+
+:OTB_MSC_448
+jump @OTB_MSC_471 
+
+:OTB_MSC_455
+00BC: show_text_highpriority GXT 'BUSY' time 3000 flag 1  // You look a bit busy, why don't you come back later.
+
+:OTB_MSC_471
+jump @OTB_MSC_514 
+
+:OTB_MSC_478
+if 
+  1@ == 0 
+jf @OTB_MSC_514 
+0512: show_permanent_text_box 'OTB_A'  // ~k~~VEHICLE_ENTER_EXIT~ Use ITB Machine
+1@ = 1 
+
+:OTB_MSC_514
+jump @OTB_MSC_548 
+
+:OTB_MSC_521
+if 
+  1@ == 1 
+jf @OTB_MSC_548 
+03E6: remove_text_box 
+1@ = 0 
+
+:OTB_MSC_548
+jump @OTB_MSC_582 
+
+:OTB_MSC_555
+if 
+  1@ == 1 
+jf @OTB_MSC_582 
+03E6: remove_text_box 
+1@ = 0 
+
+:OTB_MSC_582
+jump @OTB_MSC_618 
+
+:OTB_MSC_589
+if 
+  1@ == 1 
+jf @OTB_MSC_616 
+03E6: remove_text_box 
+1@ = 0 
+
+:OTB_MSC_616
+end_thread 
+
+:OTB_MSC_618
+jump @OTB_MSC_654 
+
+:OTB_MSC_625
+if 
+  1@ == 1 
+jf @OTB_MSC_652 
+03E6: remove_text_box 
+1@ = 0 
+
+:OTB_MSC_652
+end_thread 
+
+:OTB_MSC_654
+jump @OTB_MSC_58 
+end_thread

@@ -1,0 +1,1316 @@
+:GYMBENC
+thread 'GYMBENC' 
+$8737 = 0.0 
+$8747 = 0.0 
+$8743 = 2 
+$8744 = 0 
+23@ = 0 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+27@ = 0 
+$8741 = 0 
+$1824 = 0.0 
+$1825 = 0.0 
+$1826 = 0.0 
+$1827 = 0.0 
+21@ = 1 
+$8738 = 0 
+$8735 = 0 
+22@ = 0 
+29@ = 0 
+32@ = 0 
+33@ = 0 
+if 
+  29@ == 1 
+jf @GYMBENC_217 
+0@ = Object.Init(#BEACHTOWEL01, 0.0, 0.0, 0.0)
+
+:GYMBENC_217
+if 
+03CA:   object 0@ exists 
+jf @GYMBENC_277 
+Object.StorePos(0@, 5@, 6@, 7@)
+Object.StorePos(0@, 8@, 9@, 10@)
+11@ = Object.Angle(0@)
+3@ = Object.Angle(0@)
+
+:GYMBENC_277
+1@ = 0.0 
+2@ = 0.0 
+12@ = 0.0 
+13@ = 0.0 
+14@ = 0.0 
+21@ = 1 
+$8738 = 0 
+0087: 14@ = 7@ // (float) 
+14@ += 1.7 
+3@ -= 180.0 
+0087: 4@ = 3@ // (float) 
+4@ -= 270.0 
+02F6: 1@ = sine 4@ // (float) 
+02F7: 2@ = cosine 4@ // (float) 
+1@ *= 1.0 
+2@ *= 1.0 
+005B: 5@ += 2@ // (float) 
+005B: 6@ += 1@ // (float) 
+1@ *= 3.0 
+2@ *= 3.0 
+0087: 12@ = 5@ // (float) 
+005B: 12@ += 2@ // (float) 
+0087: 13@ = 6@ // (float) 
+005B: 13@ += 1@ // (float) 
+11@ += 90.0 
+02F6: 1@ = sine 11@ // (float) 
+02F7: 2@ = cosine 11@ // (float) 
+1@ *= 1.0 
+2@ *= 1.0 
+0063: 8@ -= 2@ // (float) 
+0063: 9@ -= 1@ // (float) 
+30@ = Object.Create(#KMB_BPRESS, 8@, 9@, 10@)
+069A: attach_object 30@ to_object 0@ with_offset -0.45 0.45 0.9 rotation 90.0 180.0 270.0 
+3@ -= 180.0 
+$GYM_GYMBIKE_LEVEL = 1 
+$1829 = 0 
+
+:GYMBENC_632
+wait 0 
+if 
+83CA:   not object 0@ exists 
+jf @GYMBENC_659 
+Object.Destroy(30@)
+end_thread 
+
+:GYMBENC_659
+if 
+8977:   not player_in_radius_of_object 0@ external_script_trigger 
+jf @GYMBENC_682 
+Object.Destroy(30@)
+end_thread 
+
+:GYMBENC_682
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GYMBENC_8093 
+if and
+  $1830 == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_1102 
+if and
+  23@ == 0 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @GYMBENC_1102 
+if 
+  27@ == 0 
+jf @GYMBENC_1061 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 5@ 6@ 7@ radius 1.2 1.2 4.0 on_foot 
+jf @GYMBENC_1027 
+if 
+  22@ == 0 
+jf @GYMBENC_840 
+0512: show_permanent_text_box 'GYM1_81'  // Press ~k~~VEHICLE_ENTER_EXIT~ to use this machine.
+22@ = 1 
+
+:GYMBENC_840
+if 
+00E1:   player 0 pressed_key 15 
+jf @GYMBENC_1020 
+if or
+  $ONMISSION == 0 
+  $ONMISSION_GYMFIGHT == 1 
+jf @GYMBENC_1004 
+0835: get_month_day_to $CURRENT_MONTH_DAY get_month_to $CURRENT_MONTH 
+if or
+001C:   $CURRENT_MONTH_DAY > $GYM_MONTH_DAY_WHEN_LIMIT_REACHED // (int) 
+001C:   $CURRENT_MONTH > $GYM_MONTH_WHEN_LIMIT_REACHED // (int) 
+jf @GYMBENC_981 
+23@ = 1 
+$1830 = 1 
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at 5@ 6@ 7@ dont_warp_gang 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Actor.Angle($PLAYER_ACTOR) = 3@
+$8714 = 0 
+jump @GYMBENC_997 
+
+:GYMBENC_981
+00BC: show_text_highpriority GXT 'GYM1_1A' time 4000 flag 1  // You have worked out enough for today, come back tomorrow!
+
+:GYMBENC_997
+jump @GYMBENC_1020 
+
+:GYMBENC_1004
+00BC: show_text_highpriority GXT 'GYM1_90' time 4000 flag 1  // ~s~You look a bit busy, why don't you come back later.
+
+:GYMBENC_1020
+jump @GYMBENC_1054 
+
+:GYMBENC_1027
+if 
+  22@ == 1 
+jf @GYMBENC_1054 
+03E6: remove_text_box 
+22@ = 0 
+
+:GYMBENC_1054
+jump @GYMBENC_1102 
+
+:GYMBENC_1061
+if 
+80ED:   not actor $PLAYER_ACTOR sphere 0 near_point 5@ 6@ radius 2.0 2.0 on_foot 
+jf @GYMBENC_1102 
+27@ = 0 
+
+:GYMBENC_1102
+if and
+  23@ == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_8093 
+if 
+  $1830 == 1 
+jf @GYMBENC_1221 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at 5@ 6@ 7@ dont_warp_gang 
+Camera.SetPosition(12@, 13@, 14@, 0.0, 0.0, 0.0)
+Actor.Angle($PLAYER_ACTOR) = 3@
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+$1830 = 2 
+
+:GYMBENC_1221
+if 
+  $1829 == 0 
+jf @GYMBENC_1311 
+04ED: load_animation "BENCHPRESS" 
+040D: unload_wav 4 
+03CF: load_wav 1820 as 4 
+
+:GYMBENC_1264
+if or
+84EE:   not animation "BENCHPRESS" loaded 
+83D0:   not wav 4 loaded 
+jf @GYMBENC_1304 
+wait 0 
+jump @GYMBENC_1264 
+
+:GYMBENC_1304
+$1829 = 1 
+
+:GYMBENC_1311
+if and
+  $1830 == 2 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2547 
+0512: show_permanent_text_box 'GYM1_71'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a weight.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+if or
+  $CURRENT_LANGUAGE == 4 
+  $CURRENT_LANGUAGE == 2 
+jf @GYMBENC_1538 
+08D4: $8734 = create_panel_with_title 'GYM1_E' position 31.0 180.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Bench
+08DB: set_panel $8734 column 0 header 'GYM1_72' data 'GYM1_8' 'GYM1_9' 'GYM1_10' 'GYM1_11' 'GYM1_12' 'GYM1_13' 'GYM1_14' 'GYM1_15' 'GYM1_16' 'GYM1_17' 'DUMMY' 'DUMMY'  // Weight // 40 lbs // 60 lbs // 80 lbs // 100 lbs // 120 lbs // 160 lbs // 200 lbs // 240 lbs // 280 lbs // 320 lbs
+jump @GYMBENC_1699 
+
+:GYMBENC_1538
+08D4: $8734 = create_panel_with_title 'GYM1_E' position 31.0 150.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Bench
+08DB: set_panel $8734 column 0 header 'GYM1_72' data 'GYM1_8' 'GYM1_9' 'GYM1_10' 'GYM1_11' 'GYM1_12' 'GYM1_13' 'GYM1_14' 'GYM1_15' 'GYM1_16' 'GYM1_17' 'DUMMY' 'DUMMY'  // Weight // 40 lbs // 60 lbs // 80 lbs // 100 lbs // 120 lbs // 160 lbs // 200 lbs // 240 lbs // 280 lbs // 320 lbs
+
+:GYMBENC_1699
+090E: set_panel $8734 active_row 0 
+
+:GYMBENC_1706
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_1824 
+wait 0 
+$8714 += 1 
+if and
+00E1:   player 0 pressed_key 15 
+  $8714 > 20 
+jf @GYMBENC_1771 
+03E6: remove_text_box 
+08DA: remove_panel $8734 
+jump @GYMBENC_7348 
+
+:GYMBENC_1771
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMBENC_1817 
+03E6: remove_text_box 
+08D7: 21@ = panel $8734 active_row 
+21@ += 1 
+08DA: remove_panel $8734 
+jump @GYMBENC_1824 
+
+:GYMBENC_1817
+jump @GYMBENC_1706 
+
+:GYMBENC_1824
+if 
+  21@ == 1 
+jf @GYMBENC_1862 
+$8736 = 1.0 
+20@ = 5.0 
+
+:GYMBENC_1862
+if 
+  21@ == 2 
+jf @GYMBENC_1900 
+20@ = 5.2 
+$8736 = 2.0 
+
+:GYMBENC_1900
+if 
+  21@ == 3 
+jf @GYMBENC_1938 
+20@ = 5.3 
+$8736 = 3.0 
+
+:GYMBENC_1938
+if 
+  21@ == 4 
+jf @GYMBENC_1976 
+20@ = 5.5 
+$8736 = 4.0 
+
+:GYMBENC_1976
+if 
+  21@ == 5 
+jf @GYMBENC_2014 
+20@ = 6.0 
+$8736 = 5.0 
+
+:GYMBENC_2014
+if 
+  21@ == 6 
+jf @GYMBENC_2052 
+20@ = 6.5 
+$8736 = 6.0 
+
+:GYMBENC_2052
+if 
+  21@ == 7 
+jf @GYMBENC_2090 
+20@ = 7.0 
+$8736 = 7.0 
+
+:GYMBENC_2090
+if 
+  21@ == 8 
+jf @GYMBENC_2128 
+20@ = 7.5 
+$8736 = 8.0 
+
+:GYMBENC_2128
+if 
+  21@ == 9 
+jf @GYMBENC_2166 
+20@ = 8.0 
+$8736 = 9.0 
+
+:GYMBENC_2166
+if 
+  21@ == 10 
+jf @GYMBENC_2204 
+20@ = 8.5 
+$8736 = 10.0 
+
+:GYMBENC_2204
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2266 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_GETON" IFP "BENCHPRESS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_2266
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2540 
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_GETON"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2540 
+0613: $1824 = actor $PLAYER_ACTOR animation "GYM_BP_GETON" time 
+
+:GYMBENC_2343
+if 
+   not $1824 > 0.75 
+jf @GYMBENC_2413 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2406 
+0613: $1824 = actor $PLAYER_ACTOR animation "GYM_BP_GETON" time 
+
+:GYMBENC_2406
+jump @GYMBENC_2343 
+
+:GYMBENC_2413
+if 
+03D0:   wav 4 loaded 
+jf @GYMBENC_2436 
+097B: play_audio_at_object 0@ event 1117 
+
+:GYMBENC_2436
+Object.KeepInMemory(30@) = False
+0682: detach_object 30@ 0.0 0.0 0.0 collision_detection 0 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_2526 
+070A: AS_actor $PLAYER_ACTOR attach_to_object 30@ offset 0.0 0.0 -0.1 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time -1 
+
+:GYMBENC_2526
+$1830 = 4 
+32@ = 0 
+
+:GYMBENC_2540
+$1830 = 4 
+
+:GYMBENC_2547
+if and
+  $1830 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_3225 
+if 
+  $8735 == 0 
+jf @GYMBENC_2608 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_37'  // ~w~To lift the weight alternate between pressing ~k~~PED_SPRINT~ and ~k~~PED_FIREWEAPON~.~n~This will increase your power.
+$8735 = 1 
+
+:GYMBENC_2608
+if and
+  32@ > 6000 
+  $8735 == 1 
+jf @GYMBENC_2654 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_25'  // Press ~k~~VEHICLE_ENTER_EXIT~ to exit.
+$8735 = 2 
+
+:GYMBENC_2654
+if and
+  32@ > 9000 
+  $8735 == 2 
+jf @GYMBENC_2689 
+03E6: remove_text_box 
+$8735 = 101 
+
+:GYMBENC_2689
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_GETON"
+jf @GYMBENC_2776 
+0613: $1816 = actor $PLAYER_ACTOR animation "GYM_BP_GETON" time 
+if 
+  $1816 == 1.0 
+jf @GYMBENC_2769 
+jump @GYMBENC_2830 
+
+:GYMBENC_2769
+jump @GYMBENC_3225 
+
+:GYMBENC_2776
+if and
+  $1814 == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_3225 
+$8738 = 0 
+$1818 = 0 
+0151: remove_status_text $8738 
+0151: remove_status_text $1818 
+jump @GYMBENC_2830 
+
+:GYMBENC_2830
+0653: $1817 = float_stat 23 
+$1817 /= 30.0 
+if 
+  0.0 > $1817 
+jf @GYMBENC_2878 
+$1817 = 0.0 
+
+:GYMBENC_2878
+0086: $8737 = $1817 // (float) 
+$8737 += 30.0 
+if 
+  $8737 > 75.0 
+jf @GYMBENC_2927 
+$8737 = 75.0 
+
+:GYMBENC_2927
+008F: 19@ = integer $8738 to_float 
+0086: $1823 = $8737 // (float) 
+0061: $1823 -= $8736 // (float) 
+if 
+  18.0 >= $1823 
+jf @GYMBENC_3017 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_B" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_3017
+if 
+  $1823 > 18.0 
+jf @GYMBENC_3104 
+if 
+  24.0 >= $1823 
+jf @GYMBENC_3104 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_A" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_3104
+if 
+  $1823 > 24.0 
+jf @GYMBENC_3175 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_SMOOTH" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_3175
+04F7: status_text $1818 type 1 line 1 GXT 'GYM1_1' // global_variable  // power
+04F7: status_text $8738 type 0 line 2 GXT 'GYM1_2' // global_variable  // reps
+$1813 = 1 
+$1830 = 5 
+
+:GYMBENC_3225
+if and
+  $1830 == 5 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6956 
+0653: $1817 = float_stat 23 
+$1817 /= 30.0 
+if 
+  0.0 > $1817 
+jf @GYMBENC_3296 
+$1817 = 0.0 
+
+:GYMBENC_3296
+0086: $8737 = $1817 // (float) 
+$8737 += 20.0 
+if 
+  $8737 > 75.0 
+jf @GYMBENC_3345 
+$8737 = 75.0 
+
+:GYMBENC_3345
+if 
+  $8735 == 0 
+jf @GYMBENC_3383 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_37'  // ~w~To lift the weight alternate between pressing ~k~~PED_SPRINT~ and ~k~~PED_FIREWEAPON~.~n~This will increase your power.
+$8735 = 1 
+
+:GYMBENC_3383
+if and
+  32@ > 6000 
+  $8735 == 1 
+jf @GYMBENC_3429 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_25'  // Press ~k~~VEHICLE_ENTER_EXIT~ to exit.
+$8735 = 2 
+
+:GYMBENC_3429
+if and
+  32@ > 9000 
+  $8735 == 2 
+jf @GYMBENC_3464 
+03E6: remove_text_box 
+$8735 = 101 
+
+:GYMBENC_3464
+if or
+  $1813 == 1 
+  $1813 == 3 
+jf @GYMBENC_3517 
+$8762 /= 2.0 
+0082: 18@ -= frame_delta_time * $8736 // (float) 
+$8762 *= 2.0 
+
+:GYMBENC_3517
+if 
+  $1813 == 4 
+jf @GYMBENC_3545 
+007F: 18@ -= frame_delta_time * 2.0 // (float) 
+
+:GYMBENC_3545
+if 
+80E1:   not player 0 pressed_key 16 
+jf @GYMBENC_3587 
+if 
+  26@ == 1 
+jf @GYMBENC_3587 
+26@ = 2 
+
+:GYMBENC_3587
+if 
+80E1:   not player 0 pressed_key 17 
+jf @GYMBENC_3629 
+if 
+  26@ == 3 
+jf @GYMBENC_3629 
+26@ = 0 
+
+:GYMBENC_3629
+if or
+  $1813 == 1 
+  $1813 == 3 
+jf @GYMBENC_3766 
+if and
+00E1:   player 0 pressed_key 16 
+80E1:   not player 0 pressed_key 17 
+jf @GYMBENC_3710 
+if 
+  26@ == 0 
+jf @GYMBENC_3710 
+005D: 18@ += $8737 // (float) 
+26@ = 1 
+
+:GYMBENC_3710
+if and
+00E1:   player 0 pressed_key 17 
+80E1:   not player 0 pressed_key 16 
+jf @GYMBENC_3766 
+if 
+  26@ == 2 
+jf @GYMBENC_3766 
+005D: 18@ += $8737 // (float) 
+26@ = 3 
+
+:GYMBENC_3766
+if 
+  0.0 > 18@ 
+jf @GYMBENC_3797 
+18@ = 0.0 
+
+:GYMBENC_3797
+if 
+  18@ > 25.0 
+jf @GYMBENC_3829 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 354 store_spoken_phrase_id_to $8745 
+
+:GYMBENC_3829
+if 
+  18@ >= 100.0 
+jf @GYMBENC_3885 
+18@ = 100.0 
+if 
+  $1813 == 1 
+jf @GYMBENC_3885 
+$1813 = 2 
+
+:GYMBENC_3885
+if and
+  $1813 == 2 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_3950 
+if 
+  $1819 == 1.0 
+jf @GYMBENC_3950 
+26@ = 0 
+$1813 = 3 
+33@ = 0 
+
+:GYMBENC_3950
+if and
+  $1813 == 3 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6050 
+0871: init_jump_table 21@ total_jumps 10 default_jump 0 @GYMBENC_4246 jumps 1 @GYMBENC_4101 2 @GYMBENC_4115 3 @GYMBENC_4129 4 @GYMBENC_4143 5 @GYMBENC_4157 6 @GYMBENC_4171 7 @GYMBENC_4186 
+0872: jump_table_jumps 8 @GYMBENC_4201 9 @GYMBENC_4216 10 @GYMBENC_4231 -1 @GYMBENC_4246 -1 @GYMBENC_4246 -1 @GYMBENC_4246 -1 @GYMBENC_4246 -1 @GYMBENC_4246 -1 @GYMBENC_4246 
+
+:GYMBENC_4101
+$GYM_BENCH_WEIGHT = 40 
+jump @GYMBENC_4246 
+
+:GYMBENC_4115
+$GYM_BENCH_WEIGHT = 60 
+jump @GYMBENC_4246 
+
+:GYMBENC_4129
+$GYM_BENCH_WEIGHT = 80 
+jump @GYMBENC_4246 
+
+:GYMBENC_4143
+$GYM_BENCH_WEIGHT = 100 
+jump @GYMBENC_4246 
+
+:GYMBENC_4157
+$GYM_BENCH_WEIGHT = 120 
+jump @GYMBENC_4246 
+
+:GYMBENC_4171
+$GYM_BENCH_WEIGHT = 160 
+jump @GYMBENC_4246 
+
+:GYMBENC_4186
+$GYM_BENCH_WEIGHT = 200 
+jump @GYMBENC_4246 
+
+:GYMBENC_4201
+$GYM_BENCH_WEIGHT = 240 
+jump @GYMBENC_4246 
+
+:GYMBENC_4216
+$GYM_BENCH_WEIGHT = 280 
+jump @GYMBENC_4246 
+
+:GYMBENC_4231
+$GYM_BENCH_WEIGHT = 320 
+jump @GYMBENC_4246 
+
+:GYMBENC_4246
+0652: $GYM_STAT_BENCH_HEAVIEST_WEIGHT = integer_stat 46 
+if 
+001C:   $GYM_BENCH_WEIGHT > $GYM_STAT_BENCH_HEAVIEST_WEIGHT // (int) 
+jf @GYMBENC_4279 
+0629: change_integer_stat 46 to $GYM_BENCH_WEIGHT 
+
+:GYMBENC_4279
+015B: shake_player_controller 0 time 200 intensity 200 
+if 
+   not $8738 >= 999999 
+jf @GYMBENC_4317 
+$8738 += 1 
+
+:GYMBENC_4317
+0653: $8747 = float_stat 23 
+if 
+  1000.0 > $8747 
+jf @GYMBENC_4625 
+if 
+  21@ == 1 
+jf @GYMBENC_4373 
+20@ = 1.0 
+
+:GYMBENC_4373
+if 
+  21@ == 2 
+jf @GYMBENC_4401 
+20@ = 1.2 
+
+:GYMBENC_4401
+if 
+  21@ == 3 
+jf @GYMBENC_4429 
+20@ = 1.3 
+
+:GYMBENC_4429
+if 
+  21@ == 4 
+jf @GYMBENC_4457 
+20@ = 1.5 
+
+:GYMBENC_4457
+if 
+  21@ == 5 
+jf @GYMBENC_4485 
+20@ = 2.0 
+
+:GYMBENC_4485
+if 
+  21@ == 6 
+jf @GYMBENC_4513 
+20@ = 2.5 
+
+:GYMBENC_4513
+if 
+  21@ == 7 
+jf @GYMBENC_4541 
+20@ = 3.0 
+
+:GYMBENC_4541
+if 
+  21@ == 8 
+jf @GYMBENC_4569 
+20@ = 4.0 
+
+:GYMBENC_4569
+if 
+  21@ == 9 
+jf @GYMBENC_4597 
+20@ = 5.0 
+
+:GYMBENC_4597
+if 
+  21@ == 10 
+jf @GYMBENC_4625 
+20@ = 6.0 
+
+:GYMBENC_4625
+if 
+  800.0 > $8747 
+jf @GYMBENC_4926 
+if 
+  21@ == 1 
+jf @GYMBENC_4674 
+20@ = 2.0 
+
+:GYMBENC_4674
+if 
+  21@ == 2 
+jf @GYMBENC_4702 
+20@ = 2.2 
+
+:GYMBENC_4702
+if 
+  21@ == 3 
+jf @GYMBENC_4730 
+20@ = 2.3 
+
+:GYMBENC_4730
+if 
+  21@ == 4 
+jf @GYMBENC_4758 
+20@ = 2.5 
+
+:GYMBENC_4758
+if 
+  21@ == 5 
+jf @GYMBENC_4786 
+20@ = 3.0 
+
+:GYMBENC_4786
+if 
+  21@ == 6 
+jf @GYMBENC_4814 
+20@ = 3.5 
+
+:GYMBENC_4814
+if 
+  21@ == 7 
+jf @GYMBENC_4842 
+20@ = 4.0 
+
+:GYMBENC_4842
+if 
+  21@ == 8 
+jf @GYMBENC_4870 
+20@ = 5.0 
+
+:GYMBENC_4870
+if 
+  21@ == 9 
+jf @GYMBENC_4898 
+20@ = 6.0 
+
+:GYMBENC_4898
+if 
+  21@ == 10 
+jf @GYMBENC_4926 
+20@ = 7.0 
+
+:GYMBENC_4926
+if 
+  600.0 > $8747 
+jf @GYMBENC_5227 
+if 
+  21@ == 1 
+jf @GYMBENC_4975 
+20@ = 3.0 
+
+:GYMBENC_4975
+if 
+  21@ == 2 
+jf @GYMBENC_5003 
+20@ = 3.2 
+
+:GYMBENC_5003
+if 
+  21@ == 3 
+jf @GYMBENC_5031 
+20@ = 3.3 
+
+:GYMBENC_5031
+if 
+  21@ == 4 
+jf @GYMBENC_5059 
+20@ = 3.5 
+
+:GYMBENC_5059
+if 
+  21@ == 5 
+jf @GYMBENC_5087 
+20@ = 4.0 
+
+:GYMBENC_5087
+if 
+  21@ == 6 
+jf @GYMBENC_5115 
+20@ = 4.5 
+
+:GYMBENC_5115
+if 
+  21@ == 7 
+jf @GYMBENC_5143 
+20@ = 5.0 
+
+:GYMBENC_5143
+if 
+  21@ == 8 
+jf @GYMBENC_5171 
+20@ = 6.0 
+
+:GYMBENC_5171
+if 
+  21@ == 9 
+jf @GYMBENC_5199 
+20@ = 7.0 
+
+:GYMBENC_5199
+if 
+  21@ == 10 
+jf @GYMBENC_5227 
+20@ = 8.0 
+
+:GYMBENC_5227
+if 
+  400.0 > $8747 
+jf @GYMBENC_5528 
+if 
+  21@ == 1 
+jf @GYMBENC_5276 
+20@ = 4.0 
+
+:GYMBENC_5276
+if 
+  21@ == 2 
+jf @GYMBENC_5304 
+20@ = 4.2 
+
+:GYMBENC_5304
+if 
+  21@ == 3 
+jf @GYMBENC_5332 
+20@ = 4.3 
+
+:GYMBENC_5332
+if 
+  21@ == 4 
+jf @GYMBENC_5360 
+20@ = 4.5 
+
+:GYMBENC_5360
+if 
+  21@ == 5 
+jf @GYMBENC_5388 
+20@ = 5.0 
+
+:GYMBENC_5388
+if 
+  21@ == 6 
+jf @GYMBENC_5416 
+20@ = 5.5 
+
+:GYMBENC_5416
+if 
+  21@ == 7 
+jf @GYMBENC_5444 
+20@ = 6.0 
+
+:GYMBENC_5444
+if 
+  21@ == 8 
+jf @GYMBENC_5472 
+20@ = 7.0 
+
+:GYMBENC_5472
+if 
+  21@ == 9 
+jf @GYMBENC_5500 
+20@ = 8.0 
+
+:GYMBENC_5500
+if 
+  21@ == 10 
+jf @GYMBENC_5528 
+20@ = 9.0 
+
+:GYMBENC_5528
+if 
+  200.0 > $8747 
+jf @GYMBENC_5829 
+if 
+  21@ == 1 
+jf @GYMBENC_5577 
+20@ = 5.0 
+
+:GYMBENC_5577
+if 
+  21@ == 2 
+jf @GYMBENC_5605 
+20@ = 5.2 
+
+:GYMBENC_5605
+if 
+  21@ == 3 
+jf @GYMBENC_5633 
+20@ = 5.3 
+
+:GYMBENC_5633
+if 
+  21@ == 4 
+jf @GYMBENC_5661 
+20@ = 5.5 
+
+:GYMBENC_5661
+if 
+  21@ == 5 
+jf @GYMBENC_5689 
+20@ = 6.0 
+
+:GYMBENC_5689
+if 
+  21@ == 6 
+jf @GYMBENC_5717 
+20@ = 6.5 
+
+:GYMBENC_5717
+if 
+  21@ == 7 
+jf @GYMBENC_5745 
+20@ = 7.0 
+
+:GYMBENC_5745
+if 
+  21@ == 8 
+jf @GYMBENC_5773 
+20@ = 7.5 
+
+:GYMBENC_5773
+if 
+  21@ == 9 
+jf @GYMBENC_5801 
+20@ = 8.0 
+
+:GYMBENC_5801
+if 
+  21@ == 10 
+jf @GYMBENC_5829 
+20@ = 8.5 
+
+:GYMBENC_5829
+if 
+  $8746 == 8 
+jf @GYMBENC_5876 
+$8746 = 0 
+0624: add 20@ to_float_stat 23 
+005F: $GYM_DAY_LIMIT += 20@ // (float) 
+jump @GYMBENC_5898 
+
+:GYMBENC_5876
+0A1F: increase_float_stat 23 by 20@ 
+$8746 += 1 
+005F: $GYM_DAY_LIMIT += 20@ // (float) 
+
+:GYMBENC_5898
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBENC_5943 
+0835: get_month_day_to $GYM_MONTH_DAY_WHEN_LIMIT_REACHED get_month_to $GYM_MONTH_WHEN_LIMIT_REACHED 
+00BC: show_text_highpriority GXT 'GYM1_1B' time 4000 flag 1  // You have reached your limit for today, come back tomorrow!
+
+:GYMBENC_5943
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  $GYM_STAT_FAT >= 1.0 
+jf @GYMBENC_5980 
+0626: decrease_float_stat 21 by 1.0 
+
+:GYMBENC_5980
+$1818 = 0 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 355 store_spoken_phrase_id_to $8745 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_DOWN" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+$1813 = 4 
+
+:GYMBENC_6050
+if and
+  $1813 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6390 
+if and
+  18@ == 0.0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6390 
+if 
+  $1819 == 0.0 
+jf @GYMBENC_6390 
+008F: 19@ = integer $8738 to_float 
+0086: $1823 = $8737 // (float) 
+0061: $1823 -= $8736 // (float) 
+if and
+  18.0 >= $1823 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6215 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_B" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_6215
+if and
+  $1823 > 18.0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6307 
+if 
+  24.0 >= $1823 
+jf @GYMBENC_6307 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_A" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_6307
+if and
+  $1823 > 24.0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6383 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_UP_SMOOTH" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMBENC_6383
+$1813 = 1 
+
+:GYMBENC_6390
+0088: $1820 = 18@ // (float) 
+$1820 /= 100.0 
+if and
+  $1813 > 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6769 
+0086: $1821 = $1820 // (float) 
+0061: $1821 -= $1819 // (float) 
+$1821 /= 2.0 
+if and
+  0.05 > $1821 
+  $1821 > -0.05 
+jf @GYMBENC_6503 
+0086: $1819 = $1820 // (float) 
+jump @GYMBENC_6511 
+
+:GYMBENC_6503
+0059: $1819 += $1821 // (float) 
+
+:GYMBENC_6511
+if and
+  $1813 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6609 
+$1822 = 1.0 
+0061: $1822 -= $1819 // (float) 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_DOWN"
+jf @GYMBENC_6602 
+0614: set_actor $PLAYER_ACTOR animation "GYM_BP_DOWN" progress_to $1822 // 0.0 to 1.0 
+
+:GYMBENC_6602
+jump @GYMBENC_6769 
+
+:GYMBENC_6609
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_UP_A"
+jf @GYMBENC_6659 
+0614: set_actor $PLAYER_ACTOR animation "GYM_BP_UP_A" progress_to $1819 // 0.0 to 1.0 
+
+:GYMBENC_6659
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_UP_B"
+jf @GYMBENC_6709 
+0614: set_actor $PLAYER_ACTOR animation "GYM_BP_UP_B" progress_to $1819 // 0.0 to 1.0 
+
+:GYMBENC_6709
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_UP_SMOOTH"
+jf @GYMBENC_6769 
+0614: set_actor $PLAYER_ACTOR animation "GYM_BP_UP_SMOOTH" progress_to $1819 // 0.0 to 1.0 
+
+:GYMBENC_6769
+0090: $1818 = float 18@ to_integer 
+if or
+00E1:   player 0 pressed_key 15 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBENC_6956 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6956 
+
+:GYMBENC_6820
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMBENC_6848 
+wait 0 
+jump @GYMBENC_6820 
+
+:GYMBENC_6848
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_6911 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_GETOFF" IFP "BENCHPRESS" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMBENC_6911
+$1818 = 0 
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBENC_6949 
+$GYM_DAY_LIMIT = 0.0 
+
+:GYMBENC_6949
+$1830 = 6 
+
+:GYMBENC_6956
+if and
+  $1830 == 6 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_8093 
+if 
+  $8738 > 4 
+jf @GYMBENC_7613 
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_GETOFF"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7606 
+0613: $1825 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7056
+if 
+   not $1825 > 0.26 
+jf @GYMBENC_7127 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7120 
+0613: $1825 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7120
+jump @GYMBENC_7056 
+
+:GYMBENC_7127
+if and
+03D0:   wav 4 loaded 
+  $8744 == 0 
+jf @GYMBENC_7164 
+097B: play_audio_at_object 0@ event 1117 
+$8744 = 1 
+
+:GYMBENC_7164
+070B: set_actor $PLAYER_ACTOR onbone_attached_object_operation 0 
+Object.KeepInMemory(30@) = True
+Object.Destroy(30@)
+30@ = Object.Create(#KMB_BPRESS, 8@, 9@, 10@)
+069A: attach_object 30@ to_object 0@ with_offset -0.45 0.45 0.9 rotation 90.0 180.0 270.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7277 
+0613: $1816 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7277
+if 
+  $1816 == 1.0 
+jf @GYMBENC_7606 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BP_CELEBRATE" IFP "BENCHPRESS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMBENC_7348
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7606 
+23@ = 0 
+$1813 = 0 
+27@ = 1 
+21@ = 1 
+$8738 = 0 
+$1818 = 0 
+$1823 = 0.0 
+$1830 = 0 
+18@ = 0.0 
+21@ = 1 
+$8738 = 0 
+0653: $1817 = float_stat 23 
+if 
+  $1817 >= 1000.0 
+jf @GYMBENC_7484 
+062A: change_float_stat 23 to 1000.0 
+
+:GYMBENC_7484
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMBENC_7521 
+062A: change_float_stat 21 to 0.0 
+
+:GYMBENC_7521
+$1824 = 0.0 
+$1825 = 0.0 
+0151: remove_status_text $8738 
+0151: remove_status_text $1818 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+04EF: release_animation "BENCHPRESS" 
+040D: unload_wav 4 
+03E6: remove_text_box 
+08DA: remove_panel $8734 
+$8735 = 0 
+$1829 = 0 
+
+:GYMBENC_7606
+jump @GYMBENC_8093 
+
+:GYMBENC_7613
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_8093 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BP_GETOFF"
+jf @GYMBENC_8093 
+0613: $1825 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7683
+if 
+   not $1825 > 0.26 
+jf @GYMBENC_7754 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7747 
+0613: $1825 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7747
+jump @GYMBENC_7683 
+
+:GYMBENC_7754
+if and
+03D0:   wav 4 loaded 
+  $8744 == 0 
+jf @GYMBENC_7791 
+097B: play_audio_at_object 0@ event 1117 
+$8744 = 1 
+
+:GYMBENC_7791
+070B: set_actor $PLAYER_ACTOR onbone_attached_object_operation 0 
+Object.KeepInMemory(30@) = True
+Object.Destroy(30@)
+30@ = Object.Create(#KMB_BPRESS, 8@, 9@, 10@)
+069A: attach_object 30@ to_object 0@ with_offset -0.45 0.45 0.9 rotation 90.0 180.0 270.0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBENC_7904 
+0613: $1816 = actor $PLAYER_ACTOR animation "GYM_BP_GETOFF" time 
+
+:GYMBENC_7904
+if 
+  $1816 == 1.0 
+jf @GYMBENC_8093 
+$1824 = 0.0 
+$1825 = 0.0 
+23@ = 0 
+$1813 = 0 
+27@ = 1 
+21@ = 1 
+$8738 = 0 
+$1818 = 0 
+$1823 = 0.0 
+$1830 = 0 
+18@ = 0.0 
+21@ = 1 
+$8738 = 0 
+0151: remove_status_text $8738 
+0151: remove_status_text $1818 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+04EF: release_animation "BENCHPRESS" 
+040D: unload_wav 4 
+03E6: remove_text_box 
+08DA: remove_panel $8734 
+$8735 = 0 
+$1829 = 0 
+
+:GYMBENC_8093
+jump @GYMBENC_632 
+end_thread

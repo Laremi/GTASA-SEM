@@ -1,0 +1,276 @@
+:VENDING
+thread 'VENDING' 
+1@ = 0 
+if 
+  1@ == 1 
+jf @VENDING_80 
+0@ = Object.Init(#VENDMACHFD, 0.0, 0.0, 0.0)
+3@ = Object.Init(#KB_BEER, 0.0, 0.0, 0.0)
+
+:VENDING_80
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+03CA:   object 0@ exists 
+jf @VENDING_1579 
+if 
+0977:   player_in_radius_of_object 0@ external_script_trigger 
+jf @VENDING_1484 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @VENDING_1391 
+if 
+  1@ == 0 
+jf @VENDING_173 
+04ED: load_animation "VENDING" 
+1@ += 1 
+
+:VENDING_173
+if 
+  1@ == 1 
+jf @VENDING_395 
+if 
+04EE:   animation "VENDING" loaded 
+jf @VENDING_384 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.0 -1.0 0.5 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @VENDING_377 
+if or
+   Object.Model(0@) == #VENDIN3
+   Object.Model(0@) == #CJ_CANDYVENDOR
+   Object.Model(0@) == #CJ_EXT_CANDY
+jf @VENDING_343 
+03CF: load_wav 42601 as 4 
+0512: show_permanent_text_box 'SLOT_04'  // ~k~~VEHICLE_ENTER_EXIT~ Buy Snack: $1
+jump @VENDING_363 
+
+:VENDING_343
+03CF: load_wav 42600 as 4 
+0512: show_permanent_text_box 'SLOT_05'  // ~k~~VEHICLE_ENTER_EXIT~ Buy Drink: $1
+
+:VENDING_363
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+1@ += 1 
+
+:VENDING_377
+jump @VENDING_395 
+
+:VENDING_384
+04ED: load_animation "VENDING" 
+
+:VENDING_395
+if 
+  1@ == 2 
+jf @VENDING_1210 
+if 
+04EE:   animation "VENDING" loaded 
+jf @VENDING_1199 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.0 -1.0 0.5 
+if or
+   Object.Model(0@) == #VENDIN3
+   Object.Model(0@) == #CJ_CANDYVENDOR
+   Object.Model(0@) == #CJ_EXT_CANDY
+jf @VENDING_512 
+03CF: load_wav 42601 as 4 
+jump @VENDING_521 
+
+:VENDING_512
+03CF: load_wav 42600 as 4 
+
+:VENDING_521
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @VENDING_1176 
+if 
+00E1:   player 0 pressed_key 15 
+jf @VENDING_1169 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @VENDING_1169 
+if 
+   Player.Money($PLAYER_CHAR) > 0
+jf @VENDING_1141 
+if 
+03D0:   wav 4 loaded 
+jf @VENDING_1134 
+$TEMPVAR_ANGLE = Object.Angle(0@)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.0 -0.2 0.6 
+3@ = Object.Init(#CJ_JUICE_CAN, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(0@)
+0615: define_AS_pack_begin $3395 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.2 -1.0 0.0 
+0804: AS_actor -1 walk_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 angle $TEMPVAR_ANGLE radius 0.4 animation "VEND_USE" IFP_file "VENDING" 4.0 LA 0 LX 0 LY 0 LF 1 LT 0 
+if or
+   Object.Model(0@) == #VENDIN3
+   Object.Model(0@) == #CJ_CANDYVENDOR
+   Object.Model(0@) == #CJ_EXT_CANDY
+jf @VENDING_859 
+0A1A: actor -1 perform_walk_animation "VEND_EAT_P" IFP "VENDING" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 -1 ms // versionC 
+jump @VENDING_1001 
+
+:VENDING_859
+07E4: get_model #CJ_JUICE_CAN dimensions_cornerA_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 dimensions_cornerB_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+$TEMPVAR_FLOAT_2 /= 2.0 
+$TEMPVAR_FLOAT_2 += 0.027 
+070A: AS_actor -1 attach_to_object 3@ offset 0.062 $TEMPVAR_FLOAT_2 0.0 on_bone 5 16 perform_animation "VEND_USE_PT2" IFP_file "VENDING" time 0 
+070A: AS_actor -1 attach_to_object 3@ offset 0.062 $TEMPVAR_FLOAT_2 0.0 on_bone 5 16 perform_animation "VEND_DRINK2_P" IFP_file "VENDING" time 0 
+
+:VENDING_1001
+0616: define_AS_pack_end $3395 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack $3395 
+061B: remove_references_to_AS_pack $3395 
+Player.Money($PLAYER_CHAR) += -1
+03E6: remove_text_box 
+if or
+   Object.Model(0@) == #VENDIN3
+   Object.Model(0@) == #CJ_CANDYVENDOR
+   Object.Model(0@) == #CJ_EXT_CANDY
+jf @VENDING_1076 
+03CF: load_wav 42601 as 4 
+jump @VENDING_1085 
+
+:VENDING_1076
+03CF: load_wav 42600 as 4 
+
+:VENDING_1085
+if 
+03D0:   wav 4 loaded 
+jf @VENDING_1111 
+0949: link_wav 4 to_actor $PLAYER_ACTOR 
+03D1: play_wav 4 
+
+:VENDING_1111
+008B: 2@ = $CURRENT_TIME_IN_MS2 // (int) 
+2@ += 3000 
+1@ += 1 
+
+:VENDING_1134
+jump @VENDING_1169 
+
+:VENDING_1141
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+018C: play_sound 1053 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+
+:VENDING_1169
+jump @VENDING_1192 
+
+:VENDING_1176
+03E6: remove_text_box 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+1@ = 1 
+
+:VENDING_1192
+jump @VENDING_1210 
+
+:VENDING_1199
+04ED: load_animation "VENDING" 
+
+:VENDING_1210
+if 
+  1@ == 3 
+jf @VENDING_1324 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @VENDING_1324 
+0623: add 5 to_integer_stat 245 
+$3396 = Actor.Health($PLAYER_ACTOR)
+$3396 += 30 
+Actor.Health($PLAYER_ACTOR) = $3396
+Object.RemoveReferences(3@)
+03E6: remove_text_box 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+008B: 2@ = $CURRENT_TIME_IN_MS2 // (int) 
+2@ += 1500 
+1@ += 1 
+
+:VENDING_1324
+if 
+  1@ == 4 
+jf @VENDING_1384 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 2@ // (int) 
+jf @VENDING_1384 
+0687: clear_actor $PLAYER_ACTOR task 
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:VENDING_1384
+jump @VENDING_1477 
+
+:VENDING_1391
+if 
+  1@ > 0 
+jf @VENDING_1477 
+if 
+  1@ > 1 
+jf @VENDING_1436 
+03E6: remove_text_box 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+
+:VENDING_1436
+if 
+  1@ > 2 
+jf @VENDING_1459 
+Object.RemoveReferences(3@)
+
+:VENDING_1459
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:VENDING_1477
+jump @VENDING_1572 
+
+:VENDING_1484
+if 
+  1@ > 0 
+jf @VENDING_1570 
+if 
+  1@ > 1 
+jf @VENDING_1529 
+03E6: remove_text_box 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+
+:VENDING_1529
+if 
+  1@ > 2 
+jf @VENDING_1552 
+Object.RemoveReferences(3@)
+
+:VENDING_1552
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:VENDING_1570
+end_thread 
+
+:VENDING_1572
+jump @VENDING_1667 
+
+:VENDING_1579
+if 
+  1@ > 0 
+jf @VENDING_1665 
+if 
+  1@ > 1 
+jf @VENDING_1624 
+03E6: remove_text_box 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+
+:VENDING_1624
+if 
+  1@ > 2 
+jf @VENDING_1647 
+Object.RemoveReferences(3@)
+
+:VENDING_1647
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:VENDING_1665
+end_thread 
+
+:VENDING_1667
+jump @VENDING_80 
+end_thread

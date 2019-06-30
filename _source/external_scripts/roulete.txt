@@ -1,0 +1,2899 @@
+:ROULETE
+thread 'ROULETE' 
+1@ = 0 
+if 
+  1@ == 1 
+jf @ROULETE_90 
+0@ = Object.Init(#ROULETTE_TBL, 0.0, 0.0, 0.0)
+$ROULETE_CHIPS($8549,151i) = Object.Init(#CHIP_STACK07, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0662: printstring "AAAAAAA" 
+
+:ROULETE_90
+4@ = 0 
+5@ = 0 
+8@ = 0 
+9@ = 0 
+7@ = 0 
+10@ = 500 
+11@ = 500 
+12@ = 0 
+13@ = 0 
+14@ = 0 
+15@ = 0 
+0653: 16@ = float_stat 81 
+0209: 18@ = random_int_in_ranges 0 19 
+$1523 += 1 
+if 
+  1.0 > 16@ 
+jf @ROULETE_252 
+if or
+  $1523 == 1 
+  $1523 == 5 
+jf @ROULETE_245 
+18@ = 0 
+
+:ROULETE_245
+jump @ROULETE_464 
+
+:ROULETE_252
+if 
+  10.0 > 16@ 
+jf @ROULETE_312 
+if or
+  $1523 == 1 
+  $1523 == 5 
+jf @ROULETE_305 
+18@ = 5 
+
+:ROULETE_305
+jump @ROULETE_464 
+
+:ROULETE_312
+if 
+  100.0 > 16@ 
+jf @ROULETE_372 
+if or
+  $1523 == 1 
+  $1523 == 5 
+jf @ROULETE_365 
+18@ = 10 
+
+:ROULETE_365
+jump @ROULETE_464 
+
+:ROULETE_372
+if 
+  1000.0 > 16@ 
+jf @ROULETE_432 
+if or
+  $1523 == 1 
+  $1523 == 5 
+jf @ROULETE_425 
+18@ = 14 
+
+:ROULETE_425
+jump @ROULETE_464 
+
+:ROULETE_432
+if or
+  $1523 == 1 
+  $1523 == 5 
+jf @ROULETE_464 
+18@ = 17 
+
+:ROULETE_464
+if or
+  18@ == 0 
+  18@ == 1 
+  18@ == 2 
+  18@ == 3 
+  18@ == 4 
+jf @ROULETE_525 
+17@ = 2 
+19@ = -340 
+
+:ROULETE_525
+if or
+  18@ == 5 
+  18@ == 6 
+  18@ == 7 
+  18@ == 8 
+  18@ == 9 
+jf @ROULETE_586 
+17@ = 20 
+19@ = -341 
+
+:ROULETE_586
+if or
+  18@ == 10 
+  18@ == 11 
+  18@ == 12 
+  18@ == 13 
+jf @ROULETE_641 
+17@ = 200 
+19@ = -342 
+
+:ROULETE_641
+if or
+  18@ == 14 
+  18@ == 15 
+  18@ == 16 
+jf @ROULETE_689 
+17@ = 2000 
+19@ = -343 
+
+:ROULETE_689
+if or
+  18@ == 17 
+  18@ == 18 
+jf @ROULETE_730 
+17@ = 20000 
+19@ = -344 
+
+:ROULETE_730
+18@ = 0 
+20@ = 0 
+0085: 21@ = 17@ // (int) 
+21@ *= 50 
+22@ = 0 
+0209: $3396 = random_int_in_ranges 0 2 
+if 
+  $3396 == 0 
+jf @ROULETE_807 
+04AF: 23@ = 11 // = constant 
+jump @ROULETE_815 
+
+:ROULETE_807
+04AF: 23@ = 172 // = constant 
+
+:ROULETE_815
+$8549 = 0 
+
+:ROULETE_822
+if 
+  151 > $8549 
+jf @ROULETE_866 
+$8398($8549,151i) = 0 
+$8549 += 1 
+jump @ROULETE_822 
+
+:ROULETE_866
+$ROULETE_CASH_WON = 0 
+$8551 = 0 
+if 
+  22@ == 1 
+jf @ROULETE_907 
+22@ = 0 
+return 
+
+:ROULETE_907
+24@ = 0.0 
+25@ = 0.0 
+
+:ROULETE_927
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+03CA:   object 0@ exists 
+jf @ROULETE_7879 
+if 
+0977:   player_in_radius_of_object 0@ external_script_trigger 
+jf @ROULETE_7735 
+if 
+  $PLAYER_IN_INTERIOR == 0 
+jf @ROULETE_7591 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @ROULETE_7456 
+if 
+  1@ == 0 
+jf @ROULETE_1032 
+Model.Load(23@)
+1@ += 1 
+
+:ROULETE_1032
+if 
+  1@ == 1 
+jf @ROULETE_1167 
+Model.Load(23@)
+if 
+   Model.Available(23@)
+jf @ROULETE_1167 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 1.208 0.571 -1.144 
+26@ = Actor.Create(CivFemale, 23@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle(0@)
+$TEMPVAR_ANGLE += 90.0 
+Actor.Angle(26@) = $TEMPVAR_ANGLE
+060B: set_actor 26@ decision_maker_to $INTERIOR_DECISION_MAKER_A 
+0A0A: unknown_object 0@ flag 1 
+1@ += 1 
+
+:ROULETE_1167
+if 
+  1@ == 2 
+jf @ROULETE_1269 
+if 
+0472:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 5.0 5.0 sphere 0 on_foot 
+jf @ROULETE_1269 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -0.215 1.34 -0.086 
+27@ = Object.Init(#WHEEL_WEE, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+1@ += 1 
+
+:ROULETE_1269
+if 
+  1@ == 3 
+jf @ROULETE_1592 
+if 
+0472:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 5.0 5.0 sphere 0 on_foot 
+jf @ROULETE_1592 
+if 
+  $9470 == 0 
+jf @ROULETE_1592 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -1.839 -2.4444 -0.6 
+0400: store_coords_to $3404 $3405 $3406 from_object 0@ with_offset 0.761 0.9556 0.6 
+if 
+01A6:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 cornerB $3404 $3405 $3406 on_foot 
+jf @ROULETE_1592 
+if 
+  17@ == 2 
+jf @ROULETE_1459 
+0512: show_permanent_text_box 'SLOT_06'  // ~k~~VEHICLE_ENTER_EXIT~ Play Roulette~n~Max Wager $100
+
+:ROULETE_1459
+if 
+  17@ == 20 
+jf @ROULETE_1488 
+0512: show_permanent_text_box 'SLOT_07'  // ~k~~VEHICLE_ENTER_EXIT~ Play Roulette~n~Max Wager $1,000
+
+:ROULETE_1488
+if 
+  17@ == 200 
+jf @ROULETE_1518 
+0512: show_permanent_text_box 'SLOT_08'  // ~k~~VEHICLE_ENTER_EXIT~ Play Roulette~n~Max Wager $10,000
+
+:ROULETE_1518
+if 
+  17@ == 2000 
+jf @ROULETE_1548 
+0512: show_permanent_text_box 'SLOT_09'  // ~k~~VEHICLE_ENTER_EXIT~ Play Roulette~n~Max Wager $100,000
+
+:ROULETE_1548
+if 
+  17@ == 20000 
+jf @ROULETE_1578 
+0512: show_permanent_text_box 'SLOT_10'  // ~k~~VEHICLE_ENTER_EXIT~ Play Roulette~n~Max Wager $1,000,000
+
+:ROULETE_1578
+03CF: load_wav 1813 as 4 
+1@ += 1 
+
+:ROULETE_1592
+if 
+  1@ == 4 
+jf @ROULETE_2950 
+if 
+  $3489 == 0 
+jf @ROULETE_2950 
+if 
+0472:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 5.0 5.0 sphere 0 on_foot 
+jf @ROULETE_2950 
+if 
+  $9470 == 0 
+jf @ROULETE_2941 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -1.839 -2.4444 -0.6 
+0400: store_coords_to $3404 $3405 $3406 from_object 0@ with_offset 0.761 0.9556 0.6 
+if 
+01A6:   actor $PLAYER_ACTOR sphere 0 in_cube_cornerA $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 cornerB $3404 $3405 $3406 on_foot 
+jf @ROULETE_2925 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @ROULETE_2918 
+if 
+00E1:   player 0 pressed_key 15 
+jf @ROULETE_2911 
+if 
+  9@ == 0 
+jf @ROULETE_2904 
+0652: $STAT_GAMBLING_SKILL = integer_stat 81 
+if 
+  17@ == 20 
+jf @ROULETE_1974 
+if 
+   not $STAT_GAMBLING_SKILL >= 1 
+jf @ROULETE_1974 
+00BC: show_text_highpriority GXT 'GAMBSTA' time 4000 flag 1  // ~s~Your ~h~Gambling Skill~s~ is not high enough to play on this table.
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_1967 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_1949 
+09D6: unknown_set_actor 26@ sound $3817($3400,3i) flags 1 1 0 
+jump @ROULETE_1967 
+
+:ROULETE_1949
+09D6: unknown_set_actor 26@ sound $3876($3400,3i) flags 1 1 0 
+
+:ROULETE_1967
+jump @ROULETE_927 
+
+:ROULETE_1974
+if 
+  17@ == 200 
+jf @ROULETE_2120 
+if 
+   not $STAT_GAMBLING_SKILL >= 10 
+jf @ROULETE_2120 
+00BC: show_text_highpriority GXT 'GAMBSTA' time 4000 flag 1  // ~s~Your ~h~Gambling Skill~s~ is not high enough to play on this table.
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_2113 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_2095 
+09D6: unknown_set_actor 26@ sound $3817($3400,3i) flags 1 1 0 
+jump @ROULETE_2113 
+
+:ROULETE_2095
+09D6: unknown_set_actor 26@ sound $3876($3400,3i) flags 1 1 0 
+
+:ROULETE_2113
+jump @ROULETE_927 
+
+:ROULETE_2120
+if 
+  17@ == 2000 
+jf @ROULETE_2266 
+if 
+   not $STAT_GAMBLING_SKILL >= 100 
+jf @ROULETE_2266 
+00BC: show_text_highpriority GXT 'GAMBSTA' time 4000 flag 1  // ~s~Your ~h~Gambling Skill~s~ is not high enough to play on this table.
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_2259 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_2241 
+09D6: unknown_set_actor 26@ sound $3817($3400,3i) flags 1 1 0 
+jump @ROULETE_2259 
+
+:ROULETE_2241
+09D6: unknown_set_actor 26@ sound $3876($3400,3i) flags 1 1 0 
+
+:ROULETE_2259
+jump @ROULETE_927 
+
+:ROULETE_2266
+if 
+  17@ == 20000 
+jf @ROULETE_2413 
+if 
+   not $STAT_GAMBLING_SKILL > 999 
+jf @ROULETE_2413 
+00BC: show_text_highpriority GXT 'GAMBSTA' time 4000 flag 1  // ~s~Your ~h~Gambling Skill~s~ is not high enough to play on this table.
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_2406 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_2388 
+09D6: unknown_set_actor 26@ sound $3817($3400,3i) flags 1 1 0 
+jump @ROULETE_2406 
+
+:ROULETE_2388
+09D6: unknown_set_actor 26@ sound $3876($3400,3i) flags 1 1 0 
+
+:ROULETE_2406
+jump @ROULETE_927 
+
+:ROULETE_2413
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+03F4: set_all_cars_apply_damage_rules 0 
+Object.StorePos(0@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+06BA: AS_actor $PLAYER_ACTOR turn_to_and_look_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+0A2B:   widescreen_option_enabled 
+jf @ROULETE_2578 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -0.632 -1.9669 1.9144 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -0.5003 -1.3914 1.1073 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 1)
+jump @ROULETE_2675 
+
+:ROULETE_2578
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -0.5689 -1.5476 1.8759 
+Camera.SetPosition($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 0.0, 0.0, 0.0)
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -0.4106 -1.0626 1.0159 
+Camera.PointAt($TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3, 1)
+
+:ROULETE_2675
+041D: set_camera_near_clip 0.1 
+03F0: enable_text_draw 1 
+0390: load_txd_dictionary 'LD_ROUL' 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_2783 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_2765 
+09D6: unknown_set_actor 26@ sound $3828($3400,2i) flags 1 1 0 
+jump @ROULETE_2783 
+
+:ROULETE_2765
+09D6: unknown_set_actor 26@ sound $3887($3400,2i) flags 1 1 0 
+
+:ROULETE_2783
+038F: load_texture "ROULBLA" as 1 // Load dictionary with 0390 first 
+038F: load_texture "ROULRED" as 2 // Load dictionary with 0390 first 
+038F: load_texture "ROULGRE" as 3 // Load dictionary with 0390 first 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset $3496 $3497 $3498 
+$TEMPVAR_FLOAT_3 += 0.01 
+$8552 = Object.Init(#ROULETTE_MARKER, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+09BD: allow_other_threads_to_display_text_boxes 1 
+$3489 = 1 
+28@ = 0 
+1@ += 1 
+9@ = 1 
+
+:ROULETE_2904
+jump @ROULETE_2918 
+
+:ROULETE_2911
+9@ = 0 
+
+:ROULETE_2918
+jump @ROULETE_2934 
+
+:ROULETE_2925
+03E6: remove_text_box 
+1@ = 3 
+
+:ROULETE_2934
+jump @ROULETE_2950 
+
+:ROULETE_2941
+03E6: remove_text_box 
+1@ = 3 
+
+:ROULETE_2950
+if 
+  1@ == 5 
+jf @ROULETE_7449 
+0581: enable_radar 0 
+if 
+  $3505 > 0 
+jf @ROULETE_3503 
+$3809 += 2.0 
+$3810 += 2.0 
+038D: draw_texture 1 position $3809 $3810 size 64.0 64.0 RGBA 0 0 0 255 
+$3809 -= 2.0 
+$3810 -= 2.0 
+if 
+  18@ == 0 
+jf @ROULETE_3116 
+038D: draw_texture 3 position $3809 $3810 size 64.0 64.0 RGBA 180 180 180 255 
+jump @ROULETE_3424 
+
+:ROULETE_3116
+if or
+  18@ == 1 
+  18@ == 3 
+  18@ == 5 
+  18@ == 7 
+  18@ == 9 
+  18@ == 12 
+jf @ROULETE_3208 
+038D: draw_texture 2 position $3809 $3810 size 64.0 64.0 RGBA 180 180 180 255 
+jump @ROULETE_3424 
+
+:ROULETE_3208
+if or
+  18@ == 14 
+  18@ == 16 
+  18@ == 18 
+  18@ == 19 
+  18@ == 21 
+  18@ == 23 
+jf @ROULETE_3300 
+038D: draw_texture 2 position $3809 $3810 size 64.0 64.0 RGBA 180 180 180 255 
+jump @ROULETE_3424 
+
+:ROULETE_3300
+if or
+  18@ == 25 
+  18@ == 27 
+  18@ == 30 
+  18@ == 32 
+  18@ == 34 
+  18@ == 36 
+jf @ROULETE_3392 
+038D: draw_texture 2 position $3809 $3810 size 64.0 64.0 RGBA 180 180 180 255 
+jump @ROULETE_3424 
+
+:ROULETE_3392
+038D: draw_texture 1 position $3809 $3810 size 64.0 64.0 RGBA 180 180 180 255 
+
+:ROULETE_3424
+0086: $8553 = $3809 // (float) 
+$8553 += -1.6679 
+0086: $8554 = $3810 // (float) 
+$8554 += -30.0255 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size 0.9423 4.2306 
+0342: set_text_draw_centered 1 
+045A: draw_text_1number $8553 $8554 GXT 'NUMBER' number 18@  // ~1~
+
+:ROULETE_3503
+0937: text_draw_box_cornerA $3479 $3483 cornerB $3480 $3484 GXT_reference 'ROUWAGE' style 2  // Wager
+gosub @ROULETE_18193 
+0340: set_text_draw_RGBA 134 155 184 255 
+if 
+04A3:   $CURRENT_LANGUAGE == 3 // == constant 
+jf @ROULETE_3579 
+033F: set_text_draw_letter_size 0.42 2.5077 
+
+:ROULETE_3579
+033E: set_draw_text_position $3477 $3481 GXT 'ROU_MAX'  // Max Wager
+0086: $8554 = $3481 // (float) 
+0059: $8554 += $3482 // (float) 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size $3486 $3488 
+045A: draw_text_1number $3477 $8554 GXT 'DOLLAR' number 21@  // $~1~
+0059: $8554 += $3478 // (float) 
+gosub @ROULETE_18193 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position $3477 $8554 GXT 'ROUYOUR'  // Total Wager
+0059: $8554 += $3482 // (float) 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size $3486 $3488 
+045A: draw_text_1number $3477 $8554 GXT 'DOLLAR' number $8551  // $~1~
+0059: $8554 += $3478 // (float) 
+gosub @ROULETE_18193 
+if 
+  $3505 > 0 
+jf @ROULETE_3850 
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position $3477 $8554 GXT 'ROU_WON'  // Payout
+0059: $8554 += $3482 // (float) 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size $3486 $3488 
+045A: draw_text_1number $3477 $8554 GXT 'DOLLAR' number $ROULETE_CASH_WON  // $~1~
+jump @ROULETE_3924 
+
+:ROULETE_3850
+0340: set_text_draw_RGBA 134 155 184 255 
+033E: set_draw_text_position $3477 $8554 GXT 'ROUTHIS'  // This Wager
+0059: $8554 += $3482 // (float) 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size $3486 $3488 
+045A: draw_text_1number $3477 $8554 GXT 'DOLLAR' number 20@  // $~1~
+
+:ROULETE_3924
+if 
+  $3505 == 0 
+jf @ROULETE_4536 
+0512: show_permanent_text_box 'ROUHELP'  // Use the movement controls to select spot.~n~~k~~PED_JUMPING~ Increase Wager~n~~k~~PED_FIREWEAPON~ Decrease Wager~n~~k~~PED_SPRINT~ Spin Wheel~n~~k~~VEHICLE_ENTER_EXIT~ Exit
+0750: set_object $8552 visibility 1 
+if 
+00E1:   player 0 pressed_key 16 
+jf @ROULETE_4238 
+if 
+  7@ == 0 
+jf @ROULETE_4231 
+if 
+  $8551 > 0 
+jf @ROULETE_4189 
+03CF: load_wav 1813 as 4 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_4106 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_4088 
+09D6: unknown_set_actor 26@ sound $3811($3400,3i) flags 1 1 0 
+jump @ROULETE_4106 
+
+:ROULETE_4088
+09D6: unknown_set_actor 26@ sound $3870($3400,3i) flags 1 1 0 
+
+:ROULETE_4106
+if 
+03D0:   wav 4 loaded 
+jf @ROULETE_4141 
+097A: play_audio_at 0.0 0.0 0.0 event 1086 
+
+:ROULETE_4141
+0623: add $8551 to_integer_stat 35 
+008D: $3401 = integer $8551 to_float 
+$3401 *= 0.001 
+03E6: remove_text_box 
+0624: add $3401 to_float_stat 81 
+$3505 += 1 
+jump @ROULETE_4224 
+
+:ROULETE_4189
+if 
+03D0:   wav 4 loaded 
+jf @ROULETE_4224 
+097A: play_audio_at 0.0 0.0 0.0 event 1085 
+
+:ROULETE_4224
+7@ += 1 
+
+:ROULETE_4231
+jump @ROULETE_4245 
+
+:ROULETE_4238
+7@ = 0 
+
+:ROULETE_4245
+if 
+00E1:   player 0 pressed_key 15 
+jf @ROULETE_4522 
+if 
+  9@ == 0 
+jf @ROULETE_4515 
+9@ += 1 
+$3505 = 0 
+1@ = 3 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_4387 
+0209: $3400 = random_int_in_ranges 0 2 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_4369 
+09D6: unknown_set_actor 26@ sound $3826($3400,2i) flags 1 1 0 
+jump @ROULETE_4387 
+
+:ROULETE_4369
+09D6: unknown_set_actor 26@ sound $3885($3400,2i) flags 1 1 0 
+
+:ROULETE_4387
+0581: enable_radar 1 
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+03F4: set_all_cars_apply_damage_rules 1 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03F0: enable_text_draw 0 
+0391: release_textures 
+03E6: remove_text_box 
+Object.Destroy($8552)
+Player.Money($PLAYER_CHAR) += $8551
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_4455
+if 
+  151 > $8549 
+jf @ROULETE_4497 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_4455 
+
+:ROULETE_4497
+09BD: allow_other_threads_to_display_text_boxes 0 
+$3489 = 0 
+jump @ROULETE_927 
+
+:ROULETE_4515
+jump @ROULETE_4529 
+
+:ROULETE_4522
+9@ = 0 
+
+:ROULETE_4529
+gosub @ROULETE_8023 
+
+:ROULETE_4536
+if 
+  $3505 == 1 
+jf @ROULETE_4625 
+0750: set_object $8552 visibility 0 
+0079: 24@ += frame_delta_time * 0.5 // (float) 
+if or
+  24@ > 20.0 
+  24@ == 20.0 
+jf @ROULETE_4625 
+0084: $3506 = $CURRENT_TIME_IN_MS2 // (int) 
+$3506 += 1500 
+$3505 += 1 
+
+:ROULETE_4625
+if 
+  $3505 == 2 
+jf @ROULETE_4803 
+if 
+001C:   $CURRENT_TIME_IN_MS2 > $3506 // (int) 
+jf @ROULETE_4803 
+007F: 24@ -= frame_delta_time * 0.08 // (float) 
+if or
+  0.0 > 24@ 
+  24@ == 0.0 
+jf @ROULETE_4803 
+0209: 18@ = random_int_in_ranges 0 37 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_4789 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_4771 
+09D6: unknown_set_actor 26@ sound $3830(18@,37i) flags 1 1 0 
+jump @ROULETE_4789 
+
+:ROULETE_4771
+09D6: unknown_set_actor 26@ sound $3889(18@,37i) flags 1 1 0 
+
+:ROULETE_4789
+gosub @ROULETE_9703 
+$3505 += 1 
+
+:ROULETE_4803
+if 
+  $3505 == 3 
+jf @ROULETE_5553 
+0512: show_permanent_text_box 'X_CONT'  // ~k~~PED_SPRINT~ Continue
+0084: $3396 = $ROULETE_CASH_WON // (int) 
+0060: $3396 -= $8551 // (int) 
+if 
+  $3396 == 0 
+jf @ROULETE_4934 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size 1.3 3.36 
+0342: set_text_draw_centered 1 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+0349: set_text_draw_font 3 
+033E: set_draw_text_position 320.0 180.333 GXT 'NOWIN'  // ~w~NO WIN!
+jump @ROULETE_5138 
+
+:ROULETE_4934
+if 
+  $3396 > 0 
+jf @ROULETE_5060 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size 1.3 3.36 
+0342: set_text_draw_centered 1 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+0349: set_text_draw_font 3 
+0904: get_interface 6 color_RGBA_to $COLOR_RED $COLOR_GREEN $GAMBLES_CASHWIN $3400 
+0340: set_text_draw_RGBA $COLOR_RED $COLOR_GREEN $GAMBLES_CASHWIN 255 
+045A: draw_text_1number 320.0 155.333 GXT 'WINNER' number $3396  // WINNER!~n~~w~$~1~
+0627: update_integer_stat 38 to $3396 
+jump @ROULETE_5138 
+
+:ROULETE_5060
+$3396 *= -1 
+gosub @ROULETE_18193 
+033F: set_text_draw_letter_size 1.3 3.36 
+0342: set_text_draw_centered 1 
+081C: draw_text_outline 2 RGBA 0 0 0 255 
+0349: set_text_draw_font 3 
+045A: draw_text_1number 320.0 155.333 GXT 'LOSER' number $3396  // ~r~LOSER!~n~~w~-$~1~
+0627: update_integer_stat 39 to $3396 
+
+:ROULETE_5138
+if 
+00E1:   player 0 pressed_key 16 
+jf @ROULETE_5546 
+if 
+  7@ == 0 
+jf @ROULETE_5539 
+008B: 7@ = $CURRENT_TIME_IN_MS2 // (int) 
+7@ += 999999 
+Player.Money($PLAYER_CHAR) += $ROULETE_CASH_WON
+0623: add $ROULETE_CASH_WON to_integer_stat 37 
+0084: $3396 = $ROULETE_CASH_WON // (int) 
+0060: $3396 -= $8551 // (int) 
+$9325 += 1 
+if 
+  $3396 > 0 
+jf @ROULETE_5425 
+0209: $3400 = random_int_in_ranges 0 3 
+if or
+  $3400 == 0 
+  $3400 == 1 
+jf @ROULETE_5408 
+if 
+  $9325 > 1 
+jf @ROULETE_5315 
+0209: $3400 = random_int_in_ranges 3 6 
+jump @ROULETE_5324 
+
+:ROULETE_5315
+0209: $3400 = random_int_in_ranges 0 3 
+
+:ROULETE_5324
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_5401 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_5383 
+09D6: unknown_set_actor 26@ sound $3820($3400,6i) flags 1 1 0 
+jump @ROULETE_5401 
+
+:ROULETE_5383
+09D6: unknown_set_actor 26@ sound $3879($3400,6i) flags 1 1 0 
+
+:ROULETE_5401
+jump @ROULETE_5418 
+
+:ROULETE_5408
+0947: actor $PLAYER_ACTOR speak_from_audio_table 100 store_spoken_phrase_id_to $GAMBLES_CASHWIN 
+
+:ROULETE_5418
+jump @ROULETE_5469 
+
+:ROULETE_5425
+0209: $COLOR_RED = random_int_in_ranges 0 2 
+if 
+  $COLOR_RED == 0 
+jf @ROULETE_5462 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 101 store_spoken_phrase_id_to $GAMBLES_CASHWIN 
+
+:ROULETE_5462
+$9325 = 0 
+
+:ROULETE_5469
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_5490
+if 
+  151 > $8549 
+jf @ROULETE_5532 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_5490 
+
+:ROULETE_5532
+$3505 = 0 
+
+:ROULETE_5539
+jump @ROULETE_5553 
+
+:ROULETE_5546
+7@ = 0 
+
+:ROULETE_5553
+if and
+  $3505 > 0 
+  3 > $3505 
+jf @ROULETE_5613 
+007B: 25@ += frame_delta_time * 24@ // (float) 
+0453: set_object 27@ XYZ_rotation 0.0 0.0 25@ 
+0209: 18@ = random_int_in_ranges 0 37 
+
+:ROULETE_5613
+0494: get_joystick 0 direction_offset_to $8555 $8556 $8557 $8558 
+if or
+00E1:   player 0 pressed_key 10 
+  -80 > $8555 
+jf @ROULETE_6087 
+if 
+  2@ == 0 
+jf @ROULETE_6054 
+008B: 12@ = $CURRENT_TIME_IN_MS2 // (int) 
+12@ += 80 
+if 
+  0.0 > $3499 
+jf @ROULETE_5804 
+if 
+   not $3500 == 2.0 
+jf @ROULETE_5797 
+if 
+   not $3499 == 0.0 
+jf @ROULETE_5797 
+if 
+  $3500 == -24.0 
+jf @ROULETE_5787 
+$3499 += 2.0 
+jump @ROULETE_5797 
+
+:ROULETE_5787
+$3499 += 1.0 
+
+:ROULETE_5797
+jump @ROULETE_6040 
+
+:ROULETE_5804
+if 
+  $3499 == 0.0 
+jf @ROULETE_5999 
+if and
+  2.0 > $3500 
+  $3500 > -7.0 
+jf @ROULETE_5883 
+$3499 += 2.0 
+$3500 = -3.0 
+jump @ROULETE_5992 
+
+:ROULETE_5883
+if and
+  -6.0 > $3500 
+  $3500 > -15.0 
+jf @ROULETE_5941 
+$3499 += 2.0 
+$3500 = -11.0 
+jump @ROULETE_5992 
+
+:ROULETE_5941
+if and
+  -14.0 > $3500 
+  $3500 > -24.0 
+jf @ROULETE_5992 
+$3499 += 2.0 
+$3500 = -19.0 
+
+:ROULETE_5992
+jump @ROULETE_6040 
+
+:ROULETE_5999
+if 
+  $3499 == 2.0 
+jf @ROULETE_6040 
+$3499 += 2.0 
+$3500 += 2.0 
+
+:ROULETE_6040
+2@ += 1 
+jump @ROULETE_6080 
+
+:ROULETE_6054
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 12@ // (int) 
+jf @ROULETE_6080 
+2@ = 0 
+
+:ROULETE_6080
+jump @ROULETE_6094 
+
+:ROULETE_6087
+2@ = 0 
+
+:ROULETE_6094
+if or
+00E1:   player 0 pressed_key 11 
+  $8555 > 80 
+jf @ROULETE_6521 
+if 
+  3@ == 0 
+jf @ROULETE_6488 
+008B: 13@ = $CURRENT_TIME_IN_MS2 // (int) 
+13@ += 80 
+if 
+  $3499 > -4.0 
+jf @ROULETE_6412 
+if 
+   not $3500 == 2.0 
+jf @ROULETE_6405 
+if 
+   not $3499 == -4.0 
+jf @ROULETE_6405 
+if or
+  $3500 == -24.0 
+  $3499 == 2.0 
+  $3499 == 4.0 
+jf @ROULETE_6395 
+if or
+  $3500 == -1.0 
+  $3500 == -5.0 
+jf @ROULETE_6296 
+$3500 = -3.0 
+
+:ROULETE_6296
+if or
+  $3500 == -9.0 
+  $3500 == -13.0 
+jf @ROULETE_6337 
+$3500 = -11.0 
+
+:ROULETE_6337
+if or
+  $3500 == -17.0 
+  $3500 == -21.0 
+jf @ROULETE_6378 
+$3500 = -19.0 
+
+:ROULETE_6378
+$3499 += -2.0 
+jump @ROULETE_6405 
+
+:ROULETE_6395
+$3499 += -1.0 
+
+:ROULETE_6405
+jump @ROULETE_6474 
+
+:ROULETE_6412
+if 
+  $3499 == -4.0 
+jf @ROULETE_6474 
+if and
+  $3500 > -23.0 
+  1.0 > $3500 
+jf @ROULETE_6474 
+$3499 += -1.0 
+
+:ROULETE_6474
+3@ += 1 
+jump @ROULETE_6514 
+
+:ROULETE_6488
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 13@ // (int) 
+jf @ROULETE_6514 
+3@ = 0 
+
+:ROULETE_6514
+jump @ROULETE_6528 
+
+:ROULETE_6521
+3@ = 0 
+
+:ROULETE_6528
+if or
+00E1:   player 0 pressed_key 8 
+  -80 > $8556 
+jf @ROULETE_6867 
+if 
+  4@ == 0 
+jf @ROULETE_6834 
+008B: 14@ = $CURRENT_TIME_IN_MS2 // (int) 
+14@ += 80 
+if 
+  0.0 > $3500 
+jf @ROULETE_6779 
+if 
+  $3500 == -24.0 
+jf @ROULETE_6644 
+$3500 += 2.0 
+jump @ROULETE_6772 
+
+:ROULETE_6644
+if 
+  $3499 == 2.0 
+jf @ROULETE_6703 
+if 
+   not $3500 == -3.0 
+jf @ROULETE_6696 
+$3500 += 8.0 
+
+:ROULETE_6696
+jump @ROULETE_6772 
+
+:ROULETE_6703
+if 
+  $3499 == 4.0 
+jf @ROULETE_6762 
+if 
+   not $3500 == -1.0 
+jf @ROULETE_6755 
+$3500 += 4.0 
+
+:ROULETE_6755
+jump @ROULETE_6772 
+
+:ROULETE_6762
+$3500 += 1.0 
+
+:ROULETE_6772
+jump @ROULETE_6820 
+
+:ROULETE_6779
+if 
+  $3500 == 0.0 
+jf @ROULETE_6820 
+$3500 += 2.0 
+$3499 = -2.0 
+
+:ROULETE_6820
+4@ += 1 
+jump @ROULETE_6860 
+
+:ROULETE_6834
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 14@ // (int) 
+jf @ROULETE_6860 
+4@ = 0 
+
+:ROULETE_6860
+jump @ROULETE_6874 
+
+:ROULETE_6867
+4@ = 0 
+
+:ROULETE_6874
+if or
+00E1:   player 0 pressed_key 9 
+  $8556 > 80 
+jf @ROULETE_7331 
+if 
+  5@ == 0 
+jf @ROULETE_7298 
+008B: 15@ = $CURRENT_TIME_IN_MS2 // (int) 
+15@ += 80 
+if 
+  $3500 > -22.0 
+jf @ROULETE_7125 
+if 
+  $3500 == 2.0 
+jf @ROULETE_6990 
+$3500 += -2.0 
+jump @ROULETE_7118 
+
+:ROULETE_6990
+if 
+  $3499 == 2.0 
+jf @ROULETE_7049 
+if 
+   not $3500 == -19.0 
+jf @ROULETE_7042 
+$3500 += -8.0 
+
+:ROULETE_7042
+jump @ROULETE_7118 
+
+:ROULETE_7049
+if 
+  $3499 == 4.0 
+jf @ROULETE_7108 
+if 
+   not $3500 == -21.0 
+jf @ROULETE_7101 
+$3500 += -4.0 
+
+:ROULETE_7101
+jump @ROULETE_7118 
+
+:ROULETE_7108
+$3500 += -1.0 
+
+:ROULETE_7118
+jump @ROULETE_7284 
+
+:ROULETE_7125
+if 
+  $3499 == -4.0 
+jf @ROULETE_7184 
+if 
+   not $3500 == -24.0 
+jf @ROULETE_7177 
+$3500 += -2.0 
+
+:ROULETE_7177
+jump @ROULETE_7284 
+
+:ROULETE_7184
+if 
+  $3499 == 0.0 
+jf @ROULETE_7243 
+if 
+   not $3500 == -24.0 
+jf @ROULETE_7236 
+$3500 += -2.0 
+
+:ROULETE_7236
+jump @ROULETE_7284 
+
+:ROULETE_7243
+if 
+   not $3500 == -24.0 
+jf @ROULETE_7284 
+$3499 = -2.0 
+$3500 += -2.0 
+
+:ROULETE_7284
+5@ += 1 
+jump @ROULETE_7324 
+
+:ROULETE_7298
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 15@ // (int) 
+jf @ROULETE_7324 
+5@ = 0 
+
+:ROULETE_7324
+jump @ROULETE_7338 
+
+:ROULETE_7331
+5@ = 0 
+
+:ROULETE_7338
+0086: $3503 = $3499 // (float) 
+0069: $3503 *= $3494 // (float) 
+0086: $3504 = $3500 // (float) 
+0069: $3504 *= $3495 // (float) 
+0086: $3501 = $3496 // (float) 
+0059: $3501 += $3503 // (float) 
+0086: $3502 = $3497 // (float) 
+0059: $3502 += $3504 // (float) 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset $3501 $3502 $3498 
+$TEMPVAR_FLOAT_3 += 0.01 
+Object.PutAt($8552, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:ROULETE_7449
+jump @ROULETE_7584 
+
+:ROULETE_7456
+if 
+  1@ > 0 
+jf @ROULETE_7584 
+if 
+  1@ > 3 
+jf @ROULETE_7494 
+03E6: remove_text_box 
+
+:ROULETE_7494
+Actor.DestroyInstantly(26@)
+Model.Destroy(23@)
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_7525
+if 
+  151 > $8549 
+jf @ROULETE_7567 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_7525 
+
+:ROULETE_7567
+Object.Destroy($8552)
+Object.Destroy(27@)
+1@ = 0 
+
+:ROULETE_7584
+jump @ROULETE_7728 
+
+:ROULETE_7591
+if 
+  1@ > 0 
+jf @ROULETE_7719 
+if 
+  1@ > 3 
+jf @ROULETE_7629 
+03E6: remove_text_box 
+
+:ROULETE_7629
+Actor.DestroyInstantly(26@)
+Model.Destroy(23@)
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_7660
+if 
+  151 > $8549 
+jf @ROULETE_7702 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_7660 
+
+:ROULETE_7702
+Object.Destroy($8552)
+Object.Destroy(27@)
+1@ = 0 
+
+:ROULETE_7719
+$1523 -= 1 
+end_thread 
+
+:ROULETE_7728
+jump @ROULETE_7872 
+
+:ROULETE_7735
+if 
+  1@ > 0 
+jf @ROULETE_7863 
+if 
+  1@ > 3 
+jf @ROULETE_7773 
+03E6: remove_text_box 
+
+:ROULETE_7773
+Actor.DestroyInstantly(26@)
+Model.Destroy(23@)
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_7804
+if 
+  151 > $8549 
+jf @ROULETE_7846 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_7804 
+
+:ROULETE_7846
+Object.Destroy($8552)
+Object.Destroy(27@)
+1@ = 0 
+
+:ROULETE_7863
+$1523 -= 1 
+end_thread 
+
+:ROULETE_7872
+jump @ROULETE_8016 
+
+:ROULETE_7879
+if 
+  1@ > 0 
+jf @ROULETE_8007 
+if 
+  1@ > 3 
+jf @ROULETE_7917 
+03E6: remove_text_box 
+
+:ROULETE_7917
+Actor.DestroyInstantly(26@)
+Model.Destroy(23@)
+22@ = 1 
+gosub @ROULETE_815 
+$8549 = 0 
+
+:ROULETE_7948
+if 
+  151 > $8549 
+jf @ROULETE_7990 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$8549 += 1 
+jump @ROULETE_7948 
+
+:ROULETE_7990
+Object.Destroy($8552)
+Object.Destroy(27@)
+1@ = 0 
+
+:ROULETE_8007
+$1523 -= 1 
+end_thread 
+
+:ROULETE_8016
+jump @ROULETE_927 
+
+:ROULETE_8023
+$8549 = 0 
+
+:ROULETE_8030
+if 
+  151 > $8549 
+jf @ROULETE_9701 
+if 
+0044:   $3499 == $3507($8549,151f) // (float) 
+jf @ROULETE_9687 
+if 
+0044:   $3500 == $3658($8549,151f) // (float) 
+jf @ROULETE_9687 
+008B: 20@ = $8398($8549,151i) // (int) 
+if 
+00E1:   player 0 pressed_key 14 
+jf @ROULETE_9317 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 8@ // (int) 
+jf @ROULETE_9310 
+$ROULETE_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+$ROULETE_PLAYER_CASH += 1 
+0652: $STAT_GAMBLING_SKILL = integer_stat 81 
+if 
+  $STAT_GAMBLING_SKILL > 999 
+jf @ROULETE_8338 
+008A: $GAMBLES_CASHWIN = 17@ // (int) 
+$GAMBLES_CASHWIN -= 1000000 
+if 
+  1 > $ROULETE_PLAYER_CASH 
+jf @ROULETE_8331 
+if 
+  28@ == 0 
+jf @ROULETE_8331 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_8324 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_8306 
+09D6: unknown_set_actor 26@ sound $3867($3400,3i) flags 1 1 0 
+jump @ROULETE_8324 
+
+:ROULETE_8306
+09D6: unknown_set_actor 26@ sound $3926($3400,3i) flags 1 1 0 
+
+:ROULETE_8324
+28@ = 1 
+
+:ROULETE_8331
+jump @ROULETE_8858 
+
+:ROULETE_8338
+if 
+  $STAT_GAMBLING_SKILL > 100 
+jf @ROULETE_8510 
+008A: $GAMBLES_CASHWIN = 17@ // (int) 
+$GAMBLES_CASHWIN -= 100000 
+if 
+  1 > $ROULETE_PLAYER_CASH 
+jf @ROULETE_8503 
+if 
+  28@ == 0 
+jf @ROULETE_8503 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_8496 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_8478 
+09D6: unknown_set_actor 26@ sound $3867($3400,3i) flags 1 1 0 
+jump @ROULETE_8496 
+
+:ROULETE_8478
+09D6: unknown_set_actor 26@ sound $3926($3400,3i) flags 1 1 0 
+
+:ROULETE_8496
+28@ = 1 
+
+:ROULETE_8503
+jump @ROULETE_8858 
+
+:ROULETE_8510
+if 
+  $STAT_GAMBLING_SKILL > 10 
+jf @ROULETE_8680 
+008A: $GAMBLES_CASHWIN = 17@ // (int) 
+$GAMBLES_CASHWIN -= 10000 
+if 
+  1 > $ROULETE_PLAYER_CASH 
+jf @ROULETE_8673 
+if 
+  28@ == 0 
+jf @ROULETE_8673 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_8666 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_8648 
+09D6: unknown_set_actor 26@ sound $3867($3400,3i) flags 1 1 0 
+jump @ROULETE_8666 
+
+:ROULETE_8648
+09D6: unknown_set_actor 26@ sound $3926($3400,3i) flags 1 1 0 
+
+:ROULETE_8666
+28@ = 1 
+
+:ROULETE_8673
+jump @ROULETE_8858 
+
+:ROULETE_8680
+if 
+  $STAT_GAMBLING_SKILL > 1 
+jf @ROULETE_8850 
+008A: $GAMBLES_CASHWIN = 17@ // (int) 
+$GAMBLES_CASHWIN -= 1000 
+if 
+  1 > $ROULETE_PLAYER_CASH 
+jf @ROULETE_8843 
+if 
+  28@ == 0 
+jf @ROULETE_8843 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_8836 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_8818 
+09D6: unknown_set_actor 26@ sound $3867($3400,3i) flags 1 1 0 
+jump @ROULETE_8836 
+
+:ROULETE_8818
+09D6: unknown_set_actor 26@ sound $3926($3400,3i) flags 1 1 0 
+
+:ROULETE_8836
+28@ = 1 
+
+:ROULETE_8843
+jump @ROULETE_8858 
+
+:ROULETE_8850
+008A: $GAMBLES_CASHWIN = 17@ // (int) 
+
+:ROULETE_8858
+if and
+001F:   21@ > $8551 // (int) 
+001C:   $ROULETE_PLAYER_CASH > $GAMBLES_CASHWIN // (int) 
+jf @ROULETE_9145 
+03CF: load_wav 1813 as 4 
+if 
+03D0:   wav 4 loaded 
+jf @ROULETE_8927 
+097A: play_audio_at 0.0 0.0 0.0 event 1083 
+
+:ROULETE_8927
+005A: 20@ += 17@ // (int) 
+008A: $ROULETE_PLAYER_CASH = 17@ // (int) 
+$ROULETE_PLAYER_CASH *= -1 
+Player.Money($PLAYER_CHAR) += $ROULETE_PLAYER_CASH
+005E: $8551 += 17@ // (int) 
+008A: $ROULETE_PLAYER_CASH = 17@ // (int) 
+$ROULETE_PLAYER_CASH *= 26 
+if 
+001E:   $ROULETE_PLAYER_CASH > 20@ // (int) 
+jf @ROULETE_9096 
+Object.StorePos($8552, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += -0.14 
+008A: $ROULETE_PLAYER_CASH = 20@ // (int) 
+0074: $ROULETE_PLAYER_CASH /= 17@ // (int) 
+008D: $3401 = integer $ROULETE_PLAYER_CASH to_float 
+$3401 *= 0.005 
+0059: $TEMPVAR_FLOAT_3 += $3401 // (float) 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+$ROULETE_CHIPS($8549,151i) = Object.Init(19@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:ROULETE_9096
+008B: 8@ = $CURRENT_TIME_IN_MS2 // (int) 
+005A: 8@ += 10@ // (int) 
+if 
+  10@ == 500 
+jf @ROULETE_9138 
+10@ = 80 
+
+:ROULETE_9138
+jump @ROULETE_9310 
+
+:ROULETE_9145
+if 
+002C:   $GAMBLES_CASHWIN >= $ROULETE_PLAYER_CASH // (int) 
+jf @ROULETE_9250 
+if 
+   not Actor.Dead(26@)
+jf @ROULETE_9250 
+0209: $3400 = random_int_in_ranges 0 3 
+if 
+04A4:   23@ == 11 // == constant 
+jf @ROULETE_9232 
+09D6: unknown_set_actor 26@ sound $3814($3400,3i) flags 1 1 0 
+jump @ROULETE_9250 
+
+:ROULETE_9232
+09D6: unknown_set_actor 26@ sound $3873($3400,3i) flags 1 1 0 
+
+:ROULETE_9250
+03CF: load_wav 1813 as 4 
+if 
+03D0:   wav 4 loaded 
+jf @ROULETE_9292 
+097A: play_audio_at 0.0 0.0 0.0 event 1085 
+
+:ROULETE_9292
+008B: 8@ = $CURRENT_TIME_IN_MS2 // (int) 
+8@ += 6000000 
+
+:ROULETE_9310
+jump @ROULETE_9675 
+
+:ROULETE_9317
+008B: 8@ = $CURRENT_TIME_IN_MS2 // (int) 
+10@ = 500 
+if 
+00E1:   player 0 pressed_key 17 
+jf @ROULETE_9659 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 6@ // (int) 
+jf @ROULETE_9652 
+if or
+001D:   20@ > 17@ // (int) 
+003B:   20@ == 17@ // (int) 
+jf @ROULETE_9610 
+03CF: load_wav 1813 as 4 
+if 
+03D0:   wav 4 loaded 
+jf @ROULETE_9438 
+097A: play_audio_at 0.0 0.0 0.0 event 1084 
+
+:ROULETE_9438
+0062: 20@ -= 17@ // (int) 
+0066: $8551 -= 17@ // (int) 
+Player.Money($PLAYER_CHAR) += 17@
+008A: $ROULETE_PLAYER_CASH = 17@ // (int) 
+$ROULETE_PLAYER_CASH *= 26 
+if 
+001E:   $ROULETE_PLAYER_CASH > 20@ // (int) 
+jf @ROULETE_9610 
+Object.StorePos($8552, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_FLOAT_3 += -0.14 
+008A: $ROULETE_PLAYER_CASH = 20@ // (int) 
+0074: $ROULETE_PLAYER_CASH /= 17@ // (int) 
+008D: $3401 = integer $ROULETE_PLAYER_CASH to_float 
+$3401 *= 0.005 
+0059: $TEMPVAR_FLOAT_3 += $3401 // (float) 
+Object.Destroy($ROULETE_CHIPS($8549,151i))
+if 
+  20@ > 0 
+jf @ROULETE_9610 
+$ROULETE_CHIPS($8549,151i) = Object.Init(19@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:ROULETE_9610
+008B: 6@ = $CURRENT_TIME_IN_MS2 // (int) 
+005A: 6@ += 11@ // (int) 
+if 
+  11@ == 500 
+jf @ROULETE_9652 
+11@ = 80 
+
+:ROULETE_9652
+jump @ROULETE_9675 
+
+:ROULETE_9659
+008B: 6@ = $CURRENT_TIME_IN_MS2 // (int) 
+11@ = 500 
+
+:ROULETE_9675
+008A: $8398($8549,151i) = 20@ // (int) 
+
+:ROULETE_9687
+$8549 += 1 
+jump @ROULETE_8030 
+
+:ROULETE_9701
+return 
+
+:ROULETE_9703
+if 
+  18@ == 0 
+jf @ROULETE_9743 
+$8398[0] *= 36 
+0058: $ROULETE_CASH_WON += $8398[0] // (int) 
+$8398[0] = 0 
+
+:ROULETE_9743
+if 
+  18@ == 1 
+jf @ROULETE_9926 
+$8398[1] *= 36 
+0058: $ROULETE_CASH_WON += $8398[1] // (int) 
+$8398[37] *= 18 
+0058: $ROULETE_CASH_WON += $8398[37] // (int) 
+$8398[61] *= 18 
+0058: $ROULETE_CASH_WON += $8398[61] // (int) 
+$8398[94] *= 12 
+0058: $ROULETE_CASH_WON += $8398[94] // (int) 
+$8398[106] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+
+:ROULETE_9926
+if 
+  18@ == 2 
+jf @ROULETE_10139 
+$8398[2] *= 36 
+0058: $ROULETE_CASH_WON += $8398[2] // (int) 
+$8398[37] *= 18 
+0058: $ROULETE_CASH_WON += $8398[37] // (int) 
+$8398[38] *= 18 
+0058: $ROULETE_CASH_WON += $8398[38] // (int) 
+$8398[62] *= 18 
+0058: $ROULETE_CASH_WON += $8398[62] // (int) 
+$8398[94] *= 12 
+0058: $ROULETE_CASH_WON += $8398[94] // (int) 
+$8398[106] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[107] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+
+:ROULETE_10139
+if 
+  18@ == 3 
+jf @ROULETE_10322 
+$8398[3] *= 36 
+0058: $ROULETE_CASH_WON += $8398[3] // (int) 
+$8398[38] *= 18 
+0058: $ROULETE_CASH_WON += $8398[38] // (int) 
+$8398[63] *= 18 
+0058: $ROULETE_CASH_WON += $8398[63] // (int) 
+$8398[94] *= 12 
+0058: $ROULETE_CASH_WON += $8398[94] // (int) 
+$8398[107] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+
+:ROULETE_10322
+if 
+  18@ == 4 
+jf @ROULETE_10550 
+$8398[4] *= 36 
+0058: $ROULETE_CASH_WON += $8398[4] // (int) 
+$8398[61] *= 18 
+0058: $ROULETE_CASH_WON += $8398[61] // (int) 
+$8398[39] *= 18 
+0058: $ROULETE_CASH_WON += $8398[39] // (int) 
+$8398[64] *= 18 
+0058: $ROULETE_CASH_WON += $8398[64] // (int) 
+$8398[95] *= 12 
+0058: $ROULETE_CASH_WON += $8398[95] // (int) 
+$8398[106] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[108] *= 9 
+0058: $ROULETE_CASH_WON += $8398[108] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+
+:ROULETE_10550
+if 
+  18@ == 5 
+jf @ROULETE_10823 
+$8398[5] *= 36 
+0058: $ROULETE_CASH_WON += $8398[5] // (int) 
+$8398[62] *= 18 
+0058: $ROULETE_CASH_WON += $8398[62] // (int) 
+$8398[39] *= 18 
+0058: $ROULETE_CASH_WON += $8398[39] // (int) 
+$8398[40] *= 18 
+0058: $ROULETE_CASH_WON += $8398[40] // (int) 
+$8398[65] *= 18 
+0058: $ROULETE_CASH_WON += $8398[65] // (int) 
+$8398[95] *= 12 
+0058: $ROULETE_CASH_WON += $8398[95] // (int) 
+$8398[106] *= 9 
+0058: $ROULETE_CASH_WON += $8398[106] // (int) 
+$8398[107] *= 9 
+0058: $ROULETE_CASH_WON += $8398[107] // (int) 
+$8398[108] *= 9 
+0058: $ROULETE_CASH_WON += $8398[108] // (int) 
+$8398[109] *= 9 
+0058: $ROULETE_CASH_WON += $8398[109] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+
+:ROULETE_10823
+if 
+  18@ == 6 
+jf @ROULETE_11051 
+$8398[6] *= 36 
+0058: $ROULETE_CASH_WON += $8398[6] // (int) 
+$8398[63] *= 18 
+0058: $ROULETE_CASH_WON += $8398[63] // (int) 
+$8398[40] *= 18 
+0058: $ROULETE_CASH_WON += $8398[40] // (int) 
+$8398[66] *= 18 
+0058: $ROULETE_CASH_WON += $8398[66] // (int) 
+$8398[95] *= 12 
+0058: $ROULETE_CASH_WON += $8398[95] // (int) 
+$8398[107] *= 9 
+0058: $ROULETE_CASH_WON += $8398[107] // (int) 
+$8398[109] *= 9 
+0058: $ROULETE_CASH_WON += $8398[109] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[140] *= 6 
+0058: $ROULETE_CASH_WON += $8398[140] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+
+:ROULETE_11051
+if 
+  18@ == 7 
+jf @ROULETE_11279 
+$8398[7] *= 36 
+0058: $ROULETE_CASH_WON += $8398[7] // (int) 
+$8398[64] *= 18 
+0058: $ROULETE_CASH_WON += $8398[64] // (int) 
+$8398[41] *= 18 
+0058: $ROULETE_CASH_WON += $8398[41] // (int) 
+$8398[67] *= 18 
+0058: $ROULETE_CASH_WON += $8398[67] // (int) 
+$8398[96] *= 12 
+0058: $ROULETE_CASH_WON += $8398[96] // (int) 
+$8398[108] *= 9 
+0058: $ROULETE_CASH_WON += $8398[108] // (int) 
+$8398[110] *= 9 
+0058: $ROULETE_CASH_WON += $8398[110] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+
+:ROULETE_11279
+if 
+  18@ == 8 
+jf @ROULETE_11552 
+$8398[8] *= 36 
+0058: $ROULETE_CASH_WON += $8398[8] // (int) 
+$8398[65] *= 18 
+0058: $ROULETE_CASH_WON += $8398[65] // (int) 
+$8398[41] *= 18 
+0058: $ROULETE_CASH_WON += $8398[41] // (int) 
+$8398[42] *= 18 
+0058: $ROULETE_CASH_WON += $8398[42] // (int) 
+$8398[68] *= 18 
+0058: $ROULETE_CASH_WON += $8398[68] // (int) 
+$8398[96] *= 12 
+0058: $ROULETE_CASH_WON += $8398[96] // (int) 
+$8398[108] *= 9 
+0058: $ROULETE_CASH_WON += $8398[108] // (int) 
+$8398[109] *= 9 
+0058: $ROULETE_CASH_WON += $8398[109] // (int) 
+$8398[110] *= 9 
+0058: $ROULETE_CASH_WON += $8398[110] // (int) 
+$8398[111] *= 9 
+0058: $ROULETE_CASH_WON += $8398[111] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+
+:ROULETE_11552
+if 
+  18@ == 9 
+jf @ROULETE_11780 
+$8398[9] *= 36 
+0058: $ROULETE_CASH_WON += $8398[9] // (int) 
+$8398[66] *= 18 
+0058: $ROULETE_CASH_WON += $8398[66] // (int) 
+$8398[42] *= 18 
+0058: $ROULETE_CASH_WON += $8398[42] // (int) 
+$8398[69] *= 18 
+0058: $ROULETE_CASH_WON += $8398[69] // (int) 
+$8398[96] *= 12 
+0058: $ROULETE_CASH_WON += $8398[96] // (int) 
+$8398[109] *= 9 
+0058: $ROULETE_CASH_WON += $8398[109] // (int) 
+$8398[111] *= 9 
+0058: $ROULETE_CASH_WON += $8398[111] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[141] *= 6 
+0058: $ROULETE_CASH_WON += $8398[141] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+
+:ROULETE_11780
+if 
+  18@ == 10 
+jf @ROULETE_12008 
+$8398[10] *= 36 
+0058: $ROULETE_CASH_WON += $8398[10] // (int) 
+$8398[67] *= 18 
+0058: $ROULETE_CASH_WON += $8398[67] // (int) 
+$8398[43] *= 18 
+0058: $ROULETE_CASH_WON += $8398[43] // (int) 
+$8398[70] *= 18 
+0058: $ROULETE_CASH_WON += $8398[70] // (int) 
+$8398[97] *= 12 
+0058: $ROULETE_CASH_WON += $8398[97] // (int) 
+$8398[110] *= 9 
+0058: $ROULETE_CASH_WON += $8398[110] // (int) 
+$8398[112] *= 9 
+0058: $ROULETE_CASH_WON += $8398[112] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+
+:ROULETE_12008
+if 
+  18@ == 11 
+jf @ROULETE_12281 
+$8398[11] *= 36 
+0058: $ROULETE_CASH_WON += $8398[11] // (int) 
+$8398[68] *= 18 
+0058: $ROULETE_CASH_WON += $8398[68] // (int) 
+$8398[43] *= 18 
+0058: $ROULETE_CASH_WON += $8398[43] // (int) 
+$8398[44] *= 18 
+0058: $ROULETE_CASH_WON += $8398[44] // (int) 
+$8398[71] *= 18 
+0058: $ROULETE_CASH_WON += $8398[71] // (int) 
+$8398[97] *= 12 
+0058: $ROULETE_CASH_WON += $8398[97] // (int) 
+$8398[110] *= 9 
+0058: $ROULETE_CASH_WON += $8398[110] // (int) 
+$8398[111] *= 9 
+0058: $ROULETE_CASH_WON += $8398[111] // (int) 
+$8398[112] *= 9 
+0058: $ROULETE_CASH_WON += $8398[112] // (int) 
+$8398[113] *= 9 
+0058: $ROULETE_CASH_WON += $8398[113] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+
+:ROULETE_12281
+if 
+  18@ == 12 
+jf @ROULETE_12509 
+$8398[12] *= 36 
+0058: $ROULETE_CASH_WON += $8398[12] // (int) 
+$8398[69] *= 18 
+0058: $ROULETE_CASH_WON += $8398[69] // (int) 
+$8398[44] *= 18 
+0058: $ROULETE_CASH_WON += $8398[44] // (int) 
+$8398[72] *= 18 
+0058: $ROULETE_CASH_WON += $8398[72] // (int) 
+$8398[97] *= 12 
+0058: $ROULETE_CASH_WON += $8398[97] // (int) 
+$8398[111] *= 9 
+0058: $ROULETE_CASH_WON += $8398[111] // (int) 
+$8398[113] *= 9 
+0058: $ROULETE_CASH_WON += $8398[113] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[131] *= 3 
+0058: $ROULETE_CASH_WON += $8398[131] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[142] *= 6 
+0058: $ROULETE_CASH_WON += $8398[142] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+
+:ROULETE_12509
+if 
+  18@ == 13 
+jf @ROULETE_12737 
+$8398[13] *= 36 
+0058: $ROULETE_CASH_WON += $8398[13] // (int) 
+$8398[70] *= 18 
+0058: $ROULETE_CASH_WON += $8398[70] // (int) 
+$8398[45] *= 18 
+0058: $ROULETE_CASH_WON += $8398[45] // (int) 
+$8398[73] *= 18 
+0058: $ROULETE_CASH_WON += $8398[73] // (int) 
+$8398[98] *= 12 
+0058: $ROULETE_CASH_WON += $8398[98] // (int) 
+$8398[112] *= 9 
+0058: $ROULETE_CASH_WON += $8398[112] // (int) 
+$8398[114] *= 9 
+0058: $ROULETE_CASH_WON += $8398[114] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+
+:ROULETE_12737
+if 
+  18@ == 14 
+jf @ROULETE_13010 
+$8398[14] *= 36 
+0058: $ROULETE_CASH_WON += $8398[14] // (int) 
+$8398[71] *= 18 
+0058: $ROULETE_CASH_WON += $8398[71] // (int) 
+$8398[45] *= 18 
+0058: $ROULETE_CASH_WON += $8398[45] // (int) 
+$8398[46] *= 18 
+0058: $ROULETE_CASH_WON += $8398[46] // (int) 
+$8398[74] *= 18 
+0058: $ROULETE_CASH_WON += $8398[74] // (int) 
+$8398[98] *= 12 
+0058: $ROULETE_CASH_WON += $8398[98] // (int) 
+$8398[112] *= 9 
+0058: $ROULETE_CASH_WON += $8398[112] // (int) 
+$8398[113] *= 9 
+0058: $ROULETE_CASH_WON += $8398[113] // (int) 
+$8398[114] *= 9 
+0058: $ROULETE_CASH_WON += $8398[114] // (int) 
+$8398[115] *= 9 
+0058: $ROULETE_CASH_WON += $8398[115] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+
+:ROULETE_13010
+if 
+  18@ == 15 
+jf @ROULETE_13238 
+$8398[15] *= 36 
+0058: $ROULETE_CASH_WON += $8398[15] // (int) 
+$8398[72] *= 18 
+0058: $ROULETE_CASH_WON += $8398[72] // (int) 
+$8398[46] *= 18 
+0058: $ROULETE_CASH_WON += $8398[46] // (int) 
+$8398[75] *= 18 
+0058: $ROULETE_CASH_WON += $8398[75] // (int) 
+$8398[98] *= 12 
+0058: $ROULETE_CASH_WON += $8398[98] // (int) 
+$8398[113] *= 9 
+0058: $ROULETE_CASH_WON += $8398[113] // (int) 
+$8398[115] *= 9 
+0058: $ROULETE_CASH_WON += $8398[115] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[143] *= 6 
+0058: $ROULETE_CASH_WON += $8398[143] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+
+:ROULETE_13238
+if 
+  18@ == 16 
+jf @ROULETE_13466 
+$8398[16] *= 36 
+0058: $ROULETE_CASH_WON += $8398[16] // (int) 
+$8398[73] *= 18 
+0058: $ROULETE_CASH_WON += $8398[73] // (int) 
+$8398[47] *= 18 
+0058: $ROULETE_CASH_WON += $8398[47] // (int) 
+$8398[76] *= 18 
+0058: $ROULETE_CASH_WON += $8398[76] // (int) 
+$8398[99] *= 12 
+0058: $ROULETE_CASH_WON += $8398[99] // (int) 
+$8398[114] *= 9 
+0058: $ROULETE_CASH_WON += $8398[114] // (int) 
+$8398[116] *= 9 
+0058: $ROULETE_CASH_WON += $8398[116] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+
+:ROULETE_13466
+if 
+  18@ == 17 
+jf @ROULETE_13739 
+$8398[17] *= 36 
+0058: $ROULETE_CASH_WON += $8398[17] // (int) 
+$8398[74] *= 18 
+0058: $ROULETE_CASH_WON += $8398[74] // (int) 
+$8398[47] *= 18 
+0058: $ROULETE_CASH_WON += $8398[47] // (int) 
+$8398[48] *= 18 
+0058: $ROULETE_CASH_WON += $8398[48] // (int) 
+$8398[77] *= 18 
+0058: $ROULETE_CASH_WON += $8398[77] // (int) 
+$8398[99] *= 12 
+0058: $ROULETE_CASH_WON += $8398[99] // (int) 
+$8398[114] *= 9 
+0058: $ROULETE_CASH_WON += $8398[114] // (int) 
+$8398[115] *= 9 
+0058: $ROULETE_CASH_WON += $8398[115] // (int) 
+$8398[116] *= 9 
+0058: $ROULETE_CASH_WON += $8398[116] // (int) 
+$8398[117] *= 9 
+0058: $ROULETE_CASH_WON += $8398[117] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+
+:ROULETE_13739
+if 
+  18@ == 18 
+jf @ROULETE_13967 
+$8398[18] *= 36 
+0058: $ROULETE_CASH_WON += $8398[18] // (int) 
+$8398[75] *= 18 
+0058: $ROULETE_CASH_WON += $8398[75] // (int) 
+$8398[48] *= 18 
+0058: $ROULETE_CASH_WON += $8398[48] // (int) 
+$8398[78] *= 18 
+0058: $ROULETE_CASH_WON += $8398[78] // (int) 
+$8398[99] *= 12 
+0058: $ROULETE_CASH_WON += $8398[99] // (int) 
+$8398[115] *= 9 
+0058: $ROULETE_CASH_WON += $8398[115] // (int) 
+$8398[117] *= 9 
+0058: $ROULETE_CASH_WON += $8398[117] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[134] *= 2 
+0058: $ROULETE_CASH_WON += $8398[134] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[144] *= 6 
+0058: $ROULETE_CASH_WON += $8398[144] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+
+:ROULETE_13967
+if 
+  18@ == 19 
+jf @ROULETE_14195 
+$8398[19] *= 36 
+0058: $ROULETE_CASH_WON += $8398[19] // (int) 
+$8398[76] *= 18 
+0058: $ROULETE_CASH_WON += $8398[76] // (int) 
+$8398[49] *= 18 
+0058: $ROULETE_CASH_WON += $8398[49] // (int) 
+$8398[79] *= 18 
+0058: $ROULETE_CASH_WON += $8398[79] // (int) 
+$8398[100] *= 12 
+0058: $ROULETE_CASH_WON += $8398[100] // (int) 
+$8398[116] *= 9 
+0058: $ROULETE_CASH_WON += $8398[116] // (int) 
+$8398[118] *= 9 
+0058: $ROULETE_CASH_WON += $8398[118] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+
+:ROULETE_14195
+if 
+  18@ == 20 
+jf @ROULETE_14468 
+$8398[20] *= 36 
+0058: $ROULETE_CASH_WON += $8398[20] // (int) 
+$8398[77] *= 18 
+0058: $ROULETE_CASH_WON += $8398[77] // (int) 
+$8398[49] *= 18 
+0058: $ROULETE_CASH_WON += $8398[49] // (int) 
+$8398[50] *= 18 
+0058: $ROULETE_CASH_WON += $8398[50] // (int) 
+$8398[80] *= 18 
+0058: $ROULETE_CASH_WON += $8398[80] // (int) 
+$8398[100] *= 12 
+0058: $ROULETE_CASH_WON += $8398[100] // (int) 
+$8398[116] *= 9 
+0058: $ROULETE_CASH_WON += $8398[116] // (int) 
+$8398[117] *= 9 
+0058: $ROULETE_CASH_WON += $8398[117] // (int) 
+$8398[118] *= 9 
+0058: $ROULETE_CASH_WON += $8398[118] // (int) 
+$8398[119] *= 9 
+0058: $ROULETE_CASH_WON += $8398[119] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+
+:ROULETE_14468
+if 
+  18@ == 21 
+jf @ROULETE_14696 
+$8398[21] *= 36 
+0058: $ROULETE_CASH_WON += $8398[21] // (int) 
+$8398[78] *= 18 
+0058: $ROULETE_CASH_WON += $8398[78] // (int) 
+$8398[50] *= 18 
+0058: $ROULETE_CASH_WON += $8398[50] // (int) 
+$8398[81] *= 18 
+0058: $ROULETE_CASH_WON += $8398[81] // (int) 
+$8398[100] *= 12 
+0058: $ROULETE_CASH_WON += $8398[100] // (int) 
+$8398[117] *= 9 
+0058: $ROULETE_CASH_WON += $8398[117] // (int) 
+$8398[119] *= 9 
+0058: $ROULETE_CASH_WON += $8398[119] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[145] *= 6 
+0058: $ROULETE_CASH_WON += $8398[145] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+
+:ROULETE_14696
+if 
+  18@ == 22 
+jf @ROULETE_14924 
+$8398[22] *= 36 
+0058: $ROULETE_CASH_WON += $8398[22] // (int) 
+$8398[79] *= 18 
+0058: $ROULETE_CASH_WON += $8398[79] // (int) 
+$8398[51] *= 18 
+0058: $ROULETE_CASH_WON += $8398[51] // (int) 
+$8398[82] *= 18 
+0058: $ROULETE_CASH_WON += $8398[82] // (int) 
+$8398[101] *= 12 
+0058: $ROULETE_CASH_WON += $8398[101] // (int) 
+$8398[118] *= 9 
+0058: $ROULETE_CASH_WON += $8398[118] // (int) 
+$8398[120] *= 9 
+0058: $ROULETE_CASH_WON += $8398[120] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+
+:ROULETE_14924
+if 
+  18@ == 23 
+jf @ROULETE_15197 
+$8398[23] *= 36 
+0058: $ROULETE_CASH_WON += $8398[23] // (int) 
+$8398[80] *= 18 
+0058: $ROULETE_CASH_WON += $8398[80] // (int) 
+$8398[51] *= 18 
+0058: $ROULETE_CASH_WON += $8398[51] // (int) 
+$8398[52] *= 18 
+0058: $ROULETE_CASH_WON += $8398[52] // (int) 
+$8398[83] *= 18 
+0058: $ROULETE_CASH_WON += $8398[83] // (int) 
+$8398[101] *= 12 
+0058: $ROULETE_CASH_WON += $8398[101] // (int) 
+$8398[118] *= 9 
+0058: $ROULETE_CASH_WON += $8398[118] // (int) 
+$8398[119] *= 9 
+0058: $ROULETE_CASH_WON += $8398[119] // (int) 
+$8398[120] *= 9 
+0058: $ROULETE_CASH_WON += $8398[120] // (int) 
+$8398[121] *= 9 
+0058: $ROULETE_CASH_WON += $8398[121] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+
+:ROULETE_15197
+if 
+  18@ == 24 
+jf @ROULETE_15425 
+$8398[24] *= 36 
+0058: $ROULETE_CASH_WON += $8398[24] // (int) 
+$8398[81] *= 18 
+0058: $ROULETE_CASH_WON += $8398[81] // (int) 
+$8398[52] *= 18 
+0058: $ROULETE_CASH_WON += $8398[52] // (int) 
+$8398[84] *= 18 
+0058: $ROULETE_CASH_WON += $8398[84] // (int) 
+$8398[101] *= 12 
+0058: $ROULETE_CASH_WON += $8398[101] // (int) 
+$8398[119] *= 9 
+0058: $ROULETE_CASH_WON += $8398[119] // (int) 
+$8398[121] *= 9 
+0058: $ROULETE_CASH_WON += $8398[121] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[132] *= 3 
+0058: $ROULETE_CASH_WON += $8398[132] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[146] *= 6 
+0058: $ROULETE_CASH_WON += $8398[146] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+
+:ROULETE_15425
+if 
+  18@ == 25 
+jf @ROULETE_15653 
+$8398[25] *= 36 
+0058: $ROULETE_CASH_WON += $8398[25] // (int) 
+$8398[82] *= 18 
+0058: $ROULETE_CASH_WON += $8398[82] // (int) 
+$8398[53] *= 18 
+0058: $ROULETE_CASH_WON += $8398[53] // (int) 
+$8398[85] *= 18 
+0058: $ROULETE_CASH_WON += $8398[85] // (int) 
+$8398[102] *= 12 
+0058: $ROULETE_CASH_WON += $8398[102] // (int) 
+$8398[120] *= 9 
+0058: $ROULETE_CASH_WON += $8398[120] // (int) 
+$8398[122] *= 9 
+0058: $ROULETE_CASH_WON += $8398[122] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+
+:ROULETE_15653
+if 
+  18@ == 26 
+jf @ROULETE_15926 
+$8398[26] *= 36 
+0058: $ROULETE_CASH_WON += $8398[26] // (int) 
+$8398[83] *= 18 
+0058: $ROULETE_CASH_WON += $8398[83] // (int) 
+$8398[53] *= 18 
+0058: $ROULETE_CASH_WON += $8398[53] // (int) 
+$8398[54] *= 18 
+0058: $ROULETE_CASH_WON += $8398[54] // (int) 
+$8398[86] *= 18 
+0058: $ROULETE_CASH_WON += $8398[86] // (int) 
+$8398[102] *= 12 
+0058: $ROULETE_CASH_WON += $8398[102] // (int) 
+$8398[120] *= 9 
+0058: $ROULETE_CASH_WON += $8398[120] // (int) 
+$8398[121] *= 9 
+0058: $ROULETE_CASH_WON += $8398[121] // (int) 
+$8398[122] *= 9 
+0058: $ROULETE_CASH_WON += $8398[122] // (int) 
+$8398[123] *= 9 
+0058: $ROULETE_CASH_WON += $8398[123] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+
+:ROULETE_15926
+if 
+  18@ == 27 
+jf @ROULETE_16154 
+$8398[27] *= 36 
+0058: $ROULETE_CASH_WON += $8398[27] // (int) 
+$8398[84] *= 18 
+0058: $ROULETE_CASH_WON += $8398[84] // (int) 
+$8398[54] *= 18 
+0058: $ROULETE_CASH_WON += $8398[54] // (int) 
+$8398[87] *= 18 
+0058: $ROULETE_CASH_WON += $8398[87] // (int) 
+$8398[102] *= 12 
+0058: $ROULETE_CASH_WON += $8398[102] // (int) 
+$8398[121] *= 9 
+0058: $ROULETE_CASH_WON += $8398[121] // (int) 
+$8398[123] *= 9 
+0058: $ROULETE_CASH_WON += $8398[123] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[147] *= 6 
+0058: $ROULETE_CASH_WON += $8398[147] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+
+:ROULETE_16154
+if 
+  18@ == 28 
+jf @ROULETE_16382 
+$8398[28] *= 36 
+0058: $ROULETE_CASH_WON += $8398[28] // (int) 
+$8398[85] *= 18 
+0058: $ROULETE_CASH_WON += $8398[85] // (int) 
+$8398[55] *= 18 
+0058: $ROULETE_CASH_WON += $8398[55] // (int) 
+$8398[88] *= 18 
+0058: $ROULETE_CASH_WON += $8398[88] // (int) 
+$8398[103] *= 12 
+0058: $ROULETE_CASH_WON += $8398[103] // (int) 
+$8398[122] *= 9 
+0058: $ROULETE_CASH_WON += $8398[122] // (int) 
+$8398[124] *= 9 
+0058: $ROULETE_CASH_WON += $8398[124] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+
+:ROULETE_16382
+if 
+  18@ == 29 
+jf @ROULETE_16655 
+$8398[29] *= 36 
+0058: $ROULETE_CASH_WON += $8398[29] // (int) 
+$8398[86] *= 18 
+0058: $ROULETE_CASH_WON += $8398[86] // (int) 
+$8398[55] *= 18 
+0058: $ROULETE_CASH_WON += $8398[55] // (int) 
+$8398[56] *= 18 
+0058: $ROULETE_CASH_WON += $8398[56] // (int) 
+$8398[89] *= 18 
+0058: $ROULETE_CASH_WON += $8398[89] // (int) 
+$8398[103] *= 12 
+0058: $ROULETE_CASH_WON += $8398[103] // (int) 
+$8398[122] *= 9 
+0058: $ROULETE_CASH_WON += $8398[122] // (int) 
+$8398[123] *= 9 
+0058: $ROULETE_CASH_WON += $8398[123] // (int) 
+$8398[124] *= 9 
+0058: $ROULETE_CASH_WON += $8398[124] // (int) 
+$8398[125] *= 9 
+0058: $ROULETE_CASH_WON += $8398[125] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+
+:ROULETE_16655
+if 
+  18@ == 30 
+jf @ROULETE_16883 
+$8398[30] *= 36 
+0058: $ROULETE_CASH_WON += $8398[30] // (int) 
+$8398[87] *= 18 
+0058: $ROULETE_CASH_WON += $8398[87] // (int) 
+$8398[56] *= 18 
+0058: $ROULETE_CASH_WON += $8398[56] // (int) 
+$8398[90] *= 18 
+0058: $ROULETE_CASH_WON += $8398[90] // (int) 
+$8398[103] *= 12 
+0058: $ROULETE_CASH_WON += $8398[103] // (int) 
+$8398[123] *= 9 
+0058: $ROULETE_CASH_WON += $8398[123] // (int) 
+$8398[125] *= 9 
+0058: $ROULETE_CASH_WON += $8398[125] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[148] *= 6 
+0058: $ROULETE_CASH_WON += $8398[148] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+
+:ROULETE_16883
+if 
+  18@ == 31 
+jf @ROULETE_17111 
+$8398[31] *= 36 
+0058: $ROULETE_CASH_WON += $8398[31] // (int) 
+$8398[88] *= 18 
+0058: $ROULETE_CASH_WON += $8398[88] // (int) 
+$8398[57] *= 18 
+0058: $ROULETE_CASH_WON += $8398[57] // (int) 
+$8398[91] *= 18 
+0058: $ROULETE_CASH_WON += $8398[91] // (int) 
+$8398[104] *= 12 
+0058: $ROULETE_CASH_WON += $8398[104] // (int) 
+$8398[124] *= 9 
+0058: $ROULETE_CASH_WON += $8398[124] // (int) 
+$8398[126] *= 9 
+0058: $ROULETE_CASH_WON += $8398[126] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_17111
+if 
+  18@ == 32 
+jf @ROULETE_17384 
+$8398[32] *= 36 
+0058: $ROULETE_CASH_WON += $8398[32] // (int) 
+$8398[89] *= 18 
+0058: $ROULETE_CASH_WON += $8398[89] // (int) 
+$8398[57] *= 18 
+0058: $ROULETE_CASH_WON += $8398[57] // (int) 
+$8398[58] *= 18 
+0058: $ROULETE_CASH_WON += $8398[58] // (int) 
+$8398[92] *= 18 
+0058: $ROULETE_CASH_WON += $8398[92] // (int) 
+$8398[104] *= 12 
+0058: $ROULETE_CASH_WON += $8398[104] // (int) 
+$8398[124] *= 9 
+0058: $ROULETE_CASH_WON += $8398[124] // (int) 
+$8398[125] *= 9 
+0058: $ROULETE_CASH_WON += $8398[125] // (int) 
+$8398[126] *= 9 
+0058: $ROULETE_CASH_WON += $8398[126] // (int) 
+$8398[127] *= 9 
+0058: $ROULETE_CASH_WON += $8398[127] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_17384
+if 
+  18@ == 33 
+jf @ROULETE_17612 
+$8398[33] *= 36 
+0058: $ROULETE_CASH_WON += $8398[33] // (int) 
+$8398[90] *= 18 
+0058: $ROULETE_CASH_WON += $8398[90] // (int) 
+$8398[58] *= 18 
+0058: $ROULETE_CASH_WON += $8398[58] // (int) 
+$8398[93] *= 18 
+0058: $ROULETE_CASH_WON += $8398[93] // (int) 
+$8398[104] *= 12 
+0058: $ROULETE_CASH_WON += $8398[104] // (int) 
+$8398[125] *= 9 
+0058: $ROULETE_CASH_WON += $8398[125] // (int) 
+$8398[127] *= 9 
+0058: $ROULETE_CASH_WON += $8398[127] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[149] *= 6 
+0058: $ROULETE_CASH_WON += $8398[149] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_17612
+if 
+  18@ == 34 
+jf @ROULETE_17795 
+$8398[34] *= 36 
+0058: $ROULETE_CASH_WON += $8398[34] // (int) 
+$8398[91] *= 18 
+0058: $ROULETE_CASH_WON += $8398[91] // (int) 
+$8398[59] *= 18 
+0058: $ROULETE_CASH_WON += $8398[59] // (int) 
+$8398[105] *= 12 
+0058: $ROULETE_CASH_WON += $8398[105] // (int) 
+$8398[126] *= 9 
+0058: $ROULETE_CASH_WON += $8398[126] // (int) 
+$8398[128] *= 3 
+0058: $ROULETE_CASH_WON += $8398[128] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_17795
+if 
+  18@ == 35 
+jf @ROULETE_18008 
+$8398[35] *= 36 
+0058: $ROULETE_CASH_WON += $8398[35] // (int) 
+$8398[92] *= 18 
+0058: $ROULETE_CASH_WON += $8398[92] // (int) 
+$8398[59] *= 18 
+0058: $ROULETE_CASH_WON += $8398[59] // (int) 
+$8398[60] *= 18 
+0058: $ROULETE_CASH_WON += $8398[60] // (int) 
+$8398[105] *= 12 
+0058: $ROULETE_CASH_WON += $8398[105] // (int) 
+$8398[126] *= 9 
+0058: $ROULETE_CASH_WON += $8398[126] // (int) 
+$8398[127] *= 9 
+0058: $ROULETE_CASH_WON += $8398[127] // (int) 
+$8398[129] *= 3 
+0058: $ROULETE_CASH_WON += $8398[129] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[137] *= 2 
+0058: $ROULETE_CASH_WON += $8398[137] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[139] *= 2 
+0058: $ROULETE_CASH_WON += $8398[139] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_18008
+if 
+  18@ == 36 
+jf @ROULETE_18191 
+$8398[36] *= 36 
+0058: $ROULETE_CASH_WON += $8398[36] // (int) 
+$8398[93] *= 18 
+0058: $ROULETE_CASH_WON += $8398[93] // (int) 
+$8398[60] *= 18 
+0058: $ROULETE_CASH_WON += $8398[60] // (int) 
+$8398[105] *= 12 
+0058: $ROULETE_CASH_WON += $8398[105] // (int) 
+$8398[127] *= 9 
+0058: $ROULETE_CASH_WON += $8398[127] // (int) 
+$8398[130] *= 3 
+0058: $ROULETE_CASH_WON += $8398[130] // (int) 
+$8398[133] *= 3 
+0058: $ROULETE_CASH_WON += $8398[133] // (int) 
+$8398[136] *= 2 
+0058: $ROULETE_CASH_WON += $8398[136] // (int) 
+$8398[135] *= 2 
+0058: $ROULETE_CASH_WON += $8398[135] // (int) 
+$8398[138] *= 2 
+0058: $ROULETE_CASH_WON += $8398[138] // (int) 
+$8398[150] *= 6 
+0058: $ROULETE_CASH_WON += $8398[150] // (int) 
+
+:ROULETE_18191
+return 
+
+:ROULETE_18193
+0340: set_text_draw_RGBA 180 180 180 255 
+033F: set_text_draw_letter_size $3485 $3487 
+03E4: set_text_draw_align_right 0 
+0341: set_text_draw_align_justify 0 
+0342: set_text_draw_centered 0 
+0343: set_text_draw_linewidth 640.0 
+0348: enable_text_draw_proportional 1 
+0345: enable_text_draw_background 0 
+return 
+end_thread

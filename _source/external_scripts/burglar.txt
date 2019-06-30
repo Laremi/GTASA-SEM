@@ -1,0 +1,670 @@
+:BURGLAR
+thread 'BURGLAR' 
+1@ = 0 
+5@ = 0 
+4@ = 0 
+7@ = 0 
+8@ = 0 
+14@ = 0 
+15@ = 0 
+if 
+  1@ == 1 
+jf @BURGLAR_132 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+0978: copy_decision_maker 65542 to $5350 
+0978: copy_decision_maker 65542 to $5351 
+0978: copy_decision_maker 65542 to $5352 
+
+:BURGLAR_132
+0209: 2@ = random_int_in_ranges 0 6 
+if 
+  2@ == 2 
+jf @BURGLAR_168 
+0209: 3@ = random_int_in_ranges 0 6 
+
+:BURGLAR_168
+wait 0 
+if and
+056D:   actor 0@ defined 
+  5@ == 0 
+jf @BURGLAR_5624 
+if and
+   Player.Defined($PLAYER_CHAR)
+   not Actor.Dead(0@)
+jf @BURGLAR_5610 
+if 
+  15@ == 0 
+jf @BURGLAR_550 
+089F: get_actor 0@ pedtype_to 13@ 
+14@ = 1 
+if 
+84A4:   not  13@ == 7 // == constant 
+jf @BURGLAR_527 
+if 
+84A4:   not  13@ == 9 // == constant 
+jf @BURGLAR_504 
+if 
+84A4:   not  13@ == 10 // == constant 
+jf @BURGLAR_481 
+if 
+84A4:   not  13@ == 11 // == constant 
+jf @BURGLAR_458 
+if 
+84A4:   not  13@ == 12 // == constant 
+jf @BURGLAR_435 
+if 
+84A4:   not  13@ == 13 // == constant 
+jf @BURGLAR_412 
+if 
+84A4:   not  13@ == 14 // == constant 
+jf @BURGLAR_389 
+14@ = 0 
+jump @BURGLAR_405 
+
+:BURGLAR_389
+09D5: play_sound_of_actor 0@ soundslot 7 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_405
+jump @BURGLAR_428 
+
+:BURGLAR_412
+09D5: play_sound_of_actor 0@ soundslot 5 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_428
+jump @BURGLAR_451 
+
+:BURGLAR_435
+09D5: play_sound_of_actor 0@ soundslot 6 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_451
+jump @BURGLAR_474 
+
+:BURGLAR_458
+09D5: play_sound_of_actor 0@ soundslot 8 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_474
+jump @BURGLAR_497 
+
+:BURGLAR_481
+09D5: play_sound_of_actor 0@ soundslot 2 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_497
+jump @BURGLAR_520 
+
+:BURGLAR_504
+09D5: play_sound_of_actor 0@ soundslot 3 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_520
+jump @BURGLAR_543 
+
+:BURGLAR_527
+09D5: play_sound_of_actor 0@ soundslot 1 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_543
+15@ = 1 
+
+:BURGLAR_550
+if 
+8737:   not actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_2056 
+if 
+   not 8@ == 1 
+jf @BURGLAR_2049 
+if 
+  14@ == 0 
+jf @BURGLAR_1686 
+if 
+03A3:   actor 0@ male 
+jf @BURGLAR_1221 
+065C: release_decision_maker $5350 
+0978: copy_decision_maker 65542 to $5350 
+if 
+   not $5350 == -1 
+jf @BURGLAR_661 
+060B: set_actor 0@ decision_maker_to $5350 
+
+:BURGLAR_661
+077A: set_actor 0@ acquaintance 3 to_actors_pedtype 0 // see ped.dat 
+0709: set_decision_maker $5350 on_event 37 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 37 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 31 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 31 taskID 413 respect 0.0 hate 100.0 like 40.0 dislike 40.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 251 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 427 respect 0.0 hate 100.0 like 70.0 dislike 70.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 11 taskID 600 respect 0.0 hate 100.0 like 100.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 415 respect 0.0 hate 100.0 like 50.0 dislike 50.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 1000 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 920 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 427 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+jump @BURGLAR_1679 
+
+:BURGLAR_1221
+065C: release_decision_maker $5351 
+0978: copy_decision_maker 65542 to $5351 
+if 
+   not $5351 == -1 
+jf @BURGLAR_1262 
+060B: set_actor 0@ decision_maker_to $5351 
+
+:BURGLAR_1262
+077A: set_actor 0@ acquaintance 3 to_actors_pedtype 0 // see ped.dat 
+0709: set_decision_maker $5351 on_event 37 taskID 427 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 37 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 601 respect 0.0 hate 100.0 like 50.0 dislike 50.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 413 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 427 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 36 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 36 taskID 427 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 251 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 60.0 dislike 60.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 427 respect 0.0 hate 100.0 like 40.0 dislike 40.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 11 taskID 600 respect 0.0 hate 100.0 like 40.0 dislike 40.0 in_car 1 on_foot 1 // see *.ped files 
+
+:BURGLAR_1679
+jump @BURGLAR_2042 
+
+:BURGLAR_1686
+065C: release_decision_maker $5352 
+0978: copy_decision_maker 65542 to $5352 
+if 
+   not $5352 == -1 
+jf @BURGLAR_1727 
+060B: set_actor 0@ decision_maker_to $5352 
+
+:BURGLAR_1727
+077A: set_actor 0@ acquaintance 3 to_actors_pedtype 0 // see ped.dat 
+0709: set_decision_maker $5352 on_event 37 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 31 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 36 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 9 taskID 251 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 11 taskID 600 respect 0.0 hate 100.0 like 100.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 15 taskID 1000 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+
+:BURGLAR_2042
+8@ = 1 
+
+:BURGLAR_2049
+jump @BURGLAR_3571 
+
+:BURGLAR_2056
+if 
+   not 8@ == 2 
+jf @BURGLAR_3571 
+if 
+  14@ == 0 
+jf @BURGLAR_3208 
+if 
+03A3:   actor 0@ male 
+jf @BURGLAR_2743 
+065C: release_decision_maker $5350 
+0978: copy_decision_maker 65542 to $5350 
+if 
+   not $5350 == -1 
+jf @BURGLAR_2149 
+060B: set_actor 0@ decision_maker_to $5350 
+
+:BURGLAR_2149
+0709: set_decision_maker $5350 on_event 37 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 37 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 31 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 31 taskID 413 respect 0.0 hate 100.0 like 40.0 dislike 40.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 36 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 251 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 9 taskID 427 respect 0.0 hate 100.0 like 60.0 dislike 60.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 11 taskID 600 respect 0.0 hate 100.0 like 50.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 415 respect 0.0 hate 100.0 like 50.0 dislike 50.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 920 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 15 taskID 427 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5350 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+077A: set_actor 0@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0709: set_decision_maker $5350 on_event 9 taskID 251 respect 0.0 hate 100.0 like 100.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+jump @BURGLAR_3201 
+
+:BURGLAR_2743
+065C: release_decision_maker $5351 
+0978: copy_decision_maker 65542 to $5351 
+if 
+   not $5351 == -1 
+jf @BURGLAR_2784 
+060B: set_actor 0@ decision_maker_to $5351 
+
+:BURGLAR_2784
+077A: set_actor 0@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+0709: set_decision_maker $5351 on_event 37 taskID 427 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 37 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 601 respect 0.0 hate 100.0 like 50.0 dislike 50.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 413 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 31 taskID 427 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 36 taskID 413 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 36 taskID 427 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 251 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 9 taskID 427 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 11 taskID 600 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5351 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+
+:BURGLAR_3201
+jump @BURGLAR_3564 
+
+:BURGLAR_3208
+065C: release_decision_maker $5352 
+0978: copy_decision_maker 65542 to $5352 
+if 
+   not $5352 == -1 
+jf @BURGLAR_3249 
+060B: set_actor 0@ decision_maker_to $5352 
+
+:BURGLAR_3249
+0709: set_decision_maker $5352 on_event 37 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 31 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 36 taskID 1000 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 36 taskID 1029 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 9 taskID 251 respect 0.0 hate 100.0 like 10.0 dislike 10.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 9 taskID 1000 respect 0.0 hate 100.0 like 30.0 dislike 30.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 11 taskID 600 respect 0.0 hate 100.0 like 50.0 dislike 0.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 15 taskID 1000 respect 0.0 hate 100.0 like 20.0 dislike 20.0 in_car 1 on_foot 1 // see *.ped files 
+0709: set_decision_maker $5352 on_event 62 taskID 935 respect 0.0 hate 100.0 like 0.0 dislike 0.0 in_car 0 on_foot 1 // see *.ped files 
+077A: set_actor 0@ acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+
+:BURGLAR_3564
+8@ = 2 
+
+:BURGLAR_3571
+if or
+074F:   actor 0@ ped_event == 36 
+074F:   actor 0@ ped_event == 15 
+074F:   actor 0@ ped_event == 9 
+074F:   actor 0@ ped_event == 37 
+  $BURGLARY_NOISE_I == 100 
+jf @BURGLAR_4393 
+if 
+  $BURGLARY_DETECTED_FLAG == 0 
+jf @BURGLAR_4393 
+if and
+  2@ == 4 
+  14@ == 0 
+jf @BURGLAR_3753 
+if 
+   not Model.Available(#CELLPHONE)
+jf @BURGLAR_3688 
+Model.Load(#CELLPHONE)
+jump @BURGLAR_3746 
+
+:BURGLAR_3688
+if 
+   not Actor.Dead(0@)
+jf @BURGLAR_3711 
+0729: AS_actor 0@ hold_cellphone 1 
+
+:BURGLAR_3711
+09D5: play_sound_of_actor 0@ soundslot 120 unknown_flags 1 0 0 as 13@ // extended 0947 
+01BD: 9@ = current_time_in_ms 
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+
+:BURGLAR_3746
+jump @BURGLAR_4393 
+
+:BURGLAR_3753
+if 
+  2@ == 2 
+jf @BURGLAR_4379 
+if 
+02D8:   actor 0@ current_weapon == 0 
+jf @BURGLAR_4305 
+if 
+  3@ == 1 
+jf @BURGLAR_3925 
+if 
+   not Model.Available(#BAT)
+jf @BURGLAR_3835 
+Model.Load(#BAT)
+jump @BURGLAR_3918 
+
+:BURGLAR_3835
+Actor.GiveWeaponAndAmmo(0@, BaseballBat, 0)
+01B9: set_actor 0@ armed_weapon_to 5 
+09D5: play_sound_of_actor 0@ soundslot 20 unknown_flags 1 0 0 as 13@ // extended 0947 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_3904 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:BURGLAR_3904
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+
+:BURGLAR_3918
+jump @BURGLAR_4298 
+
+:BURGLAR_3925
+if 
+  3@ == 3 
+jf @BURGLAR_4078 
+if 
+   not Model.Available(#COLT45)
+jf @BURGLAR_3971 
+Model.Load(#COLT45)
+jump @BURGLAR_4071 
+
+:BURGLAR_3971
+Actor.GiveWeaponAndAmmo(0@, Pistol, 40)
+01B9: set_actor 0@ armed_weapon_to 22 
+09D5: play_sound_of_actor 0@ soundslot 20 unknown_flags 1 0 0 as 13@ // extended 0947 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4040 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:BURGLAR_4040
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+09D5: play_sound_of_actor 0@ soundslot 176 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4071
+jump @BURGLAR_4298 
+
+:BURGLAR_4078
+if 
+  3@ == 5 
+jf @BURGLAR_4231 
+if 
+   not Model.Available(#SAWNOFF)
+jf @BURGLAR_4124 
+Model.Load(#SAWNOFF)
+jump @BURGLAR_4224 
+
+:BURGLAR_4124
+Actor.GiveWeaponAndAmmo(0@, Sawnoff, 40)
+01B9: set_actor 0@ armed_weapon_to 26 
+09D5: play_sound_of_actor 0@ soundslot 20 unknown_flags 1 0 0 as 13@ // extended 0947 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4193 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:BURGLAR_4193
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+09D5: play_sound_of_actor 0@ soundslot 182 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4224
+jump @BURGLAR_4298 
+
+:BURGLAR_4231
+09D5: play_sound_of_actor 0@ soundslot 89 unknown_flags 1 0 0 as 13@ // extended 0947 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4284 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:BURGLAR_4284
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+
+:BURGLAR_4298
+jump @BURGLAR_4372 
+
+:BURGLAR_4305
+09D5: play_sound_of_actor 0@ soundslot 89 unknown_flags 1 0 0 as 13@ // extended 0947 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4358 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:BURGLAR_4358
+7@ = 1 
+$BURGLARY_DETECTED_FLAG = 1 
+
+:BURGLAR_4372
+jump @BURGLAR_4393 
+
+:BURGLAR_4379
+$BURGLARY_DETECTED_FLAG = 1 
+7@ = 1 
+
+:BURGLAR_4393
+if or
+  7@ == 1 
+  7@ == 2 
+jf @BURGLAR_5603 
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_5196 
+if and
+874F:   not actor 0@ ped_event == 36 
+874F:   not actor 0@ ped_event == 15 
+874F:   not actor 0@ ped_event == 9 
+874F:   not actor 0@ ped_event == 37 
+jf @BURGLAR_5196 
+0871: init_jump_table 2@ total_jumps 5 default_jump 1 @BURGLAR_5092 jumps 0 @BURGLAR_4549 1 @BURGLAR_4608 2 @BURGLAR_4709 3 @BURGLAR_4769 4 @BURGLAR_4828 -1 @BURGLAR_5196 -1 @BURGLAR_5196 
+
+:BURGLAR_4549
+062E: get_actor 0@ task 1477 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4601 
+05C5: AS_actor 0@ cower -2 ms 
+09D5: play_sound_of_actor 0@ soundslot 85 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4601
+jump @BURGLAR_5196 
+
+:BURGLAR_4608
+062E: get_actor 0@ task 1476 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4702 
+05C4: AS_actor 0@ hands_up -2 ms 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_4686 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_4702 
+
+:BURGLAR_4686
+09D5: play_sound_of_actor 0@ soundslot 115 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4702
+jump @BURGLAR_5196 
+
+:BURGLAR_4709
+062E: get_actor 0@ task 1506 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4762 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+09D5: play_sound_of_actor 0@ soundslot 20 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4762
+jump @BURGLAR_5196 
+
+:BURGLAR_4769
+062E: get_actor 0@ task 1466 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_4821 
+05BA: AS_actor 0@ move_mouth -2 ms 
+09D5: play_sound_of_actor 0@ soundslot 114 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4821
+jump @BURGLAR_5196 
+
+:BURGLAR_4828
+if 
+  $ONMISSION_BURGLARY == 1 
+jf @BURGLAR_5085 
+if 
+  7@ == 1 
+jf @BURGLAR_4991 
+01BD: 10@ = current_time_in_ms 
+0085: 11@ = 10@ // (int) 
+0062: 11@ -= 9@ // (int) 
+if 
+  11@ > 8000 
+jf @BURGLAR_4984 
+if 
+   not Actor.Dead(0@)
+jf @BURGLAR_4984 
+062E: get_actor 0@ task 1833 status_store_to 12@ // ret 7 if not found 
+if 
+84A4:   not  12@ == 7 // == constant 
+jf @BURGLAR_4956 
+0729: AS_actor 0@ hold_cellphone 0 
+
+:BURGLAR_4956
+Model.Destroy(#CELLPHONE)
+7@ = 2 
+09D5: play_sound_of_actor 0@ soundslot 44 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_4984
+jump @BURGLAR_5085 
+
+:BURGLAR_4991
+062E: get_actor 0@ task 1476 status_store_to 12@ // ret 7 if not found 
+if 
+04A4:   12@ == 7 // == constant 
+jf @BURGLAR_5085 
+05C4: AS_actor 0@ hands_up -2 ms 
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_5069 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5085 
+
+:BURGLAR_5069
+09D5: play_sound_of_actor 0@ soundslot 115 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_5085
+jump @BURGLAR_5196 
+
+:BURGLAR_5092
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_5134 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5189 
+
+:BURGLAR_5134
+if 
+03A3:   actor 0@ male 
+jf @BURGLAR_5173 
+09D5: play_sound_of_actor 0@ soundslot 110 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5189 
+
+:BURGLAR_5173
+09D5: play_sound_of_actor 0@ soundslot 110 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_5189
+jump @BURGLAR_5196 
+
+:BURGLAR_5196
+0871: init_jump_table 2@ total_jumps 5 default_jump 1 @BURGLAR_5499 jumps 0 @BURGLAR_5259 1 @BURGLAR_5282 2 @BURGLAR_5347 3 @BURGLAR_5370 4 @BURGLAR_5393 -1 @BURGLAR_5603 -1 @BURGLAR_5603 
+
+:BURGLAR_5259
+09D5: play_sound_of_actor 0@ soundslot 85 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5603 
+
+:BURGLAR_5282
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_5324 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5340 
+
+:BURGLAR_5324
+09D5: play_sound_of_actor 0@ soundslot 115 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_5340
+jump @BURGLAR_5603 
+
+:BURGLAR_5347
+09D5: play_sound_of_actor 0@ soundslot 20 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5603 
+
+:BURGLAR_5370
+09D5: play_sound_of_actor 0@ soundslot 114 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5603 
+
+:BURGLAR_5393
+if 
+  7@ == 1 
+jf @BURGLAR_5434 
+09D5: play_sound_of_actor 0@ soundslot 44 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5492 
+
+:BURGLAR_5434
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_5476 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5492 
+
+:BURGLAR_5476
+09D5: play_sound_of_actor 0@ soundslot 115 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_5492
+jump @BURGLAR_5603 
+
+:BURGLAR_5499
+if 
+0737:   actor $PLAYER_ACTOR lifting_object -1 
+jf @BURGLAR_5541 
+09D5: play_sound_of_actor 0@ soundslot 145 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5596 
+
+:BURGLAR_5541
+if 
+03A3:   actor 0@ male 
+jf @BURGLAR_5580 
+09D5: play_sound_of_actor 0@ soundslot 110 unknown_flags 1 0 0 as 13@ // extended 0947 
+jump @BURGLAR_5596 
+
+:BURGLAR_5580
+09D5: play_sound_of_actor 0@ soundslot 110 unknown_flags 1 0 0 as 13@ // extended 0947 
+
+:BURGLAR_5596
+jump @BURGLAR_5603 
+
+:BURGLAR_5603
+jump @BURGLAR_5617 
+
+:BURGLAR_5610
+5@ = 1 
+
+:BURGLAR_5617
+jump @BURGLAR_5666 
+
+:BURGLAR_5624
+065C: release_decision_maker $5350 
+065C: release_decision_maker $5351 
+065C: release_decision_maker $5352 
+Actor.RemoveReferences(0@)
+Model.Destroy(#CELLPHONE)
+Model.Destroy(#BAT)
+Model.Destroy(#COLT45)
+Model.Destroy(#SAWNOFF)
+end_thread 
+
+:BURGLAR_5666
+jump @BURGLAR_168 
+end_thread

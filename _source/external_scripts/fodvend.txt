@@ -1,0 +1,186 @@
+:FODVEND
+thread 'FODVEND' 
+1@ = 0 
+if 
+  1@ == 1 
+jf @FODVEND_58 
+0@ = Object.Init(#ICESCART_PROP, 0.0, 0.0, 0.0)
+
+:FODVEND_58
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+03CA:   object 0@ exists 
+jf @FODVEND_1130 
+if 
+0977:   player_in_radius_of_object 0@ external_script_trigger 
+jf @FODVEND_1075 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @FODVEND_1022 
+if 
+895B:   not is_object_moveable 0@ 
+jf @FODVEND_924 
+if 
+  1@ == 0 
+jf @FODVEND_469 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset -1.0 0.0 -1.0 
+0086: $3404 = $TEMPVAR_FLOAT_1 // (float) 
+$3404 -= 0.5 
+0086: $3405 = $TEMPVAR_FLOAT_2 // (float) 
+$3405 -= 0.5 
+0086: $3406 = $TEMPVAR_FLOAT_3 // (float) 
+0086: $3401 = $TEMPVAR_FLOAT_1 // (float) 
+$3401 += 0.5 
+0086: $3402 = $TEMPVAR_FLOAT_2 // (float) 
+$3402 += 0.5 
+0086: $3403 = $TEMPVAR_FLOAT_3 // (float) 
+$3403 += 2.0 
+if 
+8339:   not anything_in_cube_cornerA $3404 $3405 $3406 cornerB $3401 $3402 $3403 solid 0 car 0 actor 1 object 0 particle 0 
+jf @FODVEND_462 
+if 
+80C2:   not sphere_onscreen $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 1.0 
+jf @FODVEND_455 
+Model.Load(#BMOCHIL)
+if 
+   Model.Available(#BMOCHIL)
+jf @FODVEND_455 
+2@ = Actor.Create(CivMale, #BMOCHIL, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0400: store_coords_to $3404 $3405 $3406 from_object 0@ with_offset 1.0 0.0 0.0 
+0061: $3404 -= $TEMPVAR_FLOAT_1 // (float) 
+0061: $3405 -= $TEMPVAR_FLOAT_2 // (float) 
+0604: get_Z_angle_for_point $3404 $3405 store_to $TEMPVAR_ANGLE 
+Actor.Angle(2@) = $TEMPVAR_ANGLE
+1@ += 1 
+
+:FODVEND_455
+jump @FODVEND_469 
+
+:FODVEND_462
+Model.Destroy(#BMOCHIL)
+end_thread 
+
+:FODVEND_469
+if 
+  1@ == 1 
+jf @FODVEND_742 
+if 
+0472:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 8.0 8.0 sphere 0 on_foot 
+jf @FODVEND_742 
+04ED: load_animation "VENDING" 
+if 
+04EE:   animation "VENDING" loaded 
+jf @FODVEND_742 
+if 
+   Player.Money($PLAYER_CHAR) > 0
+jf @FODVEND_742 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 1.0 0.0 0.0 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @FODVEND_742 
+$3396 = Actor.Health($PLAYER_ACTOR)
+$3396 += 50 
+Actor.Health($PLAYER_ACTOR) = $3396
+0A1A: actor $PLAYER_ACTOR perform_walk_animation "VEND_EAT1_P" IFP "VENDING" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 -1 ms // versionC 
+0623: add 10 to_integer_stat 245 
+008B: 3@ = $CURRENT_TIME_IN_MS2 // (int) 
+3@ += 3000 
+Player.Money($PLAYER_CHAR) += -1
+1@ += 1 
+
+:FODVEND_742
+if 
+  1@ == 2 
+jf @FODVEND_802 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 3@ // (int) 
+jf @FODVEND_802 
+008B: 3@ = $CURRENT_TIME_IN_MS2 // (int) 
+3@ += 27000 
+1@ += 1 
+
+:FODVEND_802
+if 
+  1@ == 3 
+jf @FODVEND_917 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 3@ // (int) 
+jf @FODVEND_917 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 1.0 0.0 0.0 
+if 
+80FF:   not actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @FODVEND_917 
+1@ = 1 
+
+:FODVEND_917
+jump @FODVEND_1015 
+
+:FODVEND_924
+if 
+  1@ > 0 
+jf @FODVEND_1008 
+Actor.RemoveReferences(2@)
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @FODVEND_990 
+if 
+   not Actor.Dead(2@)
+jf @FODVEND_990 
+07A5: AS_actor 2@ attack_actor $PLAYER_ACTOR time 10000 
+
+:FODVEND_990
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:FODVEND_1008
+Model.Destroy(#BMOCHIL)
+end_thread 
+
+:FODVEND_1015
+jump @FODVEND_1068 
+
+:FODVEND_1022
+if 
+  1@ > 0 
+jf @FODVEND_1063 
+Actor.RemoveReferences(2@)
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:FODVEND_1063
+Model.Destroy(#BMOCHIL)
+
+:FODVEND_1068
+jump @FODVEND_1123 
+
+:FODVEND_1075
+if 
+  1@ > 0 
+jf @FODVEND_1116 
+Actor.RemoveReferences(2@)
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:FODVEND_1116
+Model.Destroy(#BMOCHIL)
+end_thread 
+
+:FODVEND_1123
+jump @FODVEND_1178 
+
+:FODVEND_1130
+if 
+  1@ > 0 
+jf @FODVEND_1171 
+Actor.RemoveReferences(2@)
+04EF: release_animation "VENDING" 
+1@ = 0 
+
+:FODVEND_1171
+Model.Destroy(#BMOCHIL)
+end_thread 
+
+:FODVEND_1178
+jump @FODVEND_58 
+end_thread

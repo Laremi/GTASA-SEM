@@ -1,0 +1,909 @@
+:GYMTREA
+thread 'GYMTREA' 
+$8756 = 0 
+$8757 = 0 
+$8755 = 0 
+$8750 = 0 
+$8751 = 0 
+$8752 = 0 
+$8753 = 0 
+$8754 = 0 
+$1831 = 0 
+$1832 = 0 
+$1833 = 0 
+$1834 = 0 
+$1835 = 0 
+$1836 = 0 
+$1837 = 0 
+$1838 = 0 
+$1839 = 0 
+$1840 = 0 
+19@ = 1.0 
+$8750 = 1 
+$8752 = 1 
+$1830 = 0 
+$8753 = 0 
+22@ = 0.0 
+21@ = 0.0 
+$1829 = 0 
+$1840 = 1 
+27@ = 0 
+32@ = 0 
+33@ = 0 
+28@ = 0 
+if 
+  28@ == 1 
+jf @GYMTREA_278 
+0@ = Object.Init(#BEACHTOWEL03, 0.0, 0.0, 0.0)
+
+:GYMTREA_278
+if 
+03CA:   object 0@ exists 
+jf @GYMTREA_330 
+Object.StorePos(0@, 1@, 2@, 3@)
+Object.StorePos(0@, 7@, 8@, 9@)
+10@ = Object.Angle(0@)
+
+:GYMTREA_330
+19@ = 1.0 
+$8750 = 1 
+$8752 = 1 
+26@ = 1.0 
+0087: 6@ = 3@ // (float) 
+6@ += 1.5 
+0087: 9@ = 3@ // (float) 
+9@ += 0.75 
+0087: 11@ = 10@ // (float) 
+11@ -= 60.0 
+02F6: 12@ = sine 11@ // (float) 
+02F7: 13@ = cosine 11@ // (float) 
+12@ *= 3.0 
+13@ *= 3.0 
+0087: 4@ = 1@ // (float) 
+0063: 4@ -= 13@ // (float) 
+0087: 5@ = 2@ // (float) 
+0063: 5@ -= 12@ // (float) 
+0087: 11@ = 10@ // (float) 
+11@ += 90.0 
+02F6: 12@ = sine 11@ // (float) 
+02F7: 13@ = cosine 11@ // (float) 
+12@ *= 1.5 
+13@ *= 1.5 
+0063: 1@ -= 13@ // (float) 
+0063: 2@ -= 12@ // (float) 
+3@ += 0.1 
+$1829 = 0 
+
+:GYMTREA_573
+wait 0 
+if 
+83CA:   not object 0@ exists 
+jf @GYMTREA_595 
+end_thread 
+
+:GYMTREA_595
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GYMTREA_5900 
+if and
+  $1830 == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_979 
+if and
+  $1831 == 0 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @GYMTREA_979 
+if 
+  $1840 == 0 
+jf @GYMTREA_938 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 1@ 2@ 3@ radius 1.2 1.2 4.0 on_foot 
+jf @GYMTREA_904 
+if 
+  27@ == 0 
+jf @GYMTREA_753 
+0512: show_permanent_text_box 'GYM1_81'  // Press ~k~~VEHICLE_ENTER_EXIT~ to use this machine.
+27@ = 1 
+
+:GYMTREA_753
+if 
+00E1:   player 0 pressed_key 15 
+jf @GYMTREA_897 
+if or
+  $ONMISSION == 0 
+  $ONMISSION_GYMFIGHT == 1 
+jf @GYMTREA_881 
+0835: get_month_day_to $CURRENT_MONTH_DAY get_month_to $CURRENT_MONTH 
+if or
+001C:   $CURRENT_MONTH_DAY > $GYM_MONTH_DAY_WHEN_LIMIT_REACHED // (int) 
+001C:   $CURRENT_MONTH > $GYM_MONTH_WHEN_LIMIT_REACHED // (int) 
+jf @GYMTREA_858 
+$1831 = 1 
+$1830 = 1 
+$8714 = 0 
+jump @GYMTREA_874 
+
+:GYMTREA_858
+00BC: show_text_highpriority GXT 'GYM1_1A' time 4000 flag 1  // You have worked out enough for today, come back tomorrow!
+
+:GYMTREA_874
+jump @GYMTREA_897 
+
+:GYMTREA_881
+00BC: show_text_highpriority GXT 'GYM1_90' time 4000 flag 1  // ~s~You look a bit busy, why don't you come back later.
+
+:GYMTREA_897
+jump @GYMTREA_931 
+
+:GYMTREA_904
+if 
+  27@ == 1 
+jf @GYMTREA_931 
+03E6: remove_text_box 
+27@ = 0 
+
+:GYMTREA_931
+jump @GYMTREA_979 
+
+:GYMTREA_938
+if 
+80ED:   not actor $PLAYER_ACTOR sphere 0 near_point 1@ 2@ radius 2.0 2.0 on_foot 
+jf @GYMTREA_979 
+$1840 = 0 
+
+:GYMTREA_979
+if and
+  $1831 == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_5900 
+if and
+  $1830 == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_1114 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at 1@ 2@ 3@ dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = 10@
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Camera.SetPosition(4@, 5@, 6@, 0.0, 0.0, 0.0)
+Camera.PointAt(7@, 8@, 9@, 2)
+$1830 = 2 
+
+:GYMTREA_1114
+if 
+  $1829 == 0 
+jf @GYMTREA_1224 
+04ED: load_animation "GYMNASIUM" 
+
+:GYMTREA_1145
+if 
+84EE:   not animation "GYMNASIUM" loaded 
+jf @GYMTREA_1180 
+wait 0 
+jump @GYMTREA_1145 
+
+:GYMTREA_1180
+040D: unload_wav 4 
+03CF: load_wav 1820 as 4 
+
+:GYMTREA_1191
+if 
+83D0:   not wav 4 loaded 
+jf @GYMTREA_1217 
+wait 0 
+jump @GYMTREA_1191 
+
+:GYMTREA_1217
+$1829 = 1 
+
+:GYMTREA_1224
+if 
+  $1830 == 2 
+jf @GYMTREA_1944 
+0512: show_permanent_text_box 'GYM1_60'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select level.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+if or
+  $CURRENT_LANGUAGE == 4 
+  $CURRENT_LANGUAGE == 2 
+jf @GYMTREA_1446 
+08D4: $8748 = create_panel_with_title 'GYM1_F' position 31.0 180.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Treadmill
+08DB: set_panel $8748 column 0 header 'GYM1_89' data 'GYM1_61' 'GYM1_62' 'GYM1_63' 'GYM1_64' 'GYM1_65' 'GYM1_66' 'GYM1_67' 'GYM1_68' 'GYM1_69' 'GYM1_70' 'DUMMY' 'DUMMY'  // Level // Level 1 // Level 2 // Level 3 // Level 4 // Level 5 // Level 6 // Level 7 // Level 8 // Level 9 // Level 10
+jump @GYMTREA_1607 
+
+:GYMTREA_1446
+08D4: $8748 = create_panel_with_title 'GYM1_F' position 31.0 150.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Treadmill
+08DB: set_panel $8748 column 0 header 'GYM1_89' data 'GYM1_61' 'GYM1_62' 'GYM1_63' 'GYM1_64' 'GYM1_65' 'GYM1_66' 'GYM1_67' 'GYM1_68' 'GYM1_69' 'GYM1_70' 'DUMMY' 'DUMMY'  // Level // Level 1 // Level 2 // Level 3 // Level 4 // Level 5 // Level 6 // Level 7 // Level 8 // Level 9 // Level 10
+
+:GYMTREA_1607
+090E: set_panel $8748 active_row 0 
+
+:GYMTREA_1614
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_1739 
+wait 0 
+$8714 += 1 
+if and
+00E1:   player 0 pressed_key 15 
+  $8714 > 20 
+jf @GYMTREA_1679 
+03E6: remove_text_box 
+08DA: remove_panel $8748 
+jump @GYMTREA_5443 
+
+:GYMTREA_1679
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMTREA_1732 
+03E6: remove_text_box 
+08D7: $8750 = panel $8748 active_row 
+$8750 += 1 
+08DA: remove_panel $8748 
+32@ = 0 
+jump @GYMTREA_1739 
+
+:GYMTREA_1732
+jump @GYMTREA_1614 
+
+:GYMTREA_1739
+if 
+  $1815 == 0 
+jf @GYMTREA_1780 
+03E5: show_text_box 'GYM1_42'  // To begin running, press ~k~~PED_SPRINT~ rapidly.
+wait 4000 
+$1815 = 1 
+
+:GYMTREA_1780
+if 
+  $1815 == 1 
+jf @GYMTREA_1821 
+03E5: show_text_box 'GYM1_43'  // To change the level press ~k~~CONVERSATION_NO~ or ~k~~CONVERSATION_YES~ while on the treadmill.
+wait 5000 
+$1815 = 2 
+
+:GYMTREA_1821
+if 
+  $1815 == 2 
+jf @GYMTREA_1869 
+03E5: show_text_box 'GYM1_45'  // Do not allow your power bar to empty or you will fall off the treadmill.
+wait 4000 
+$1815 = 4 
+32@ = 0 
+
+:GYMTREA_1869
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_1933 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_GETON" IFP "GYMNASIUM" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMTREA_1933
+wait 0 
+$1830 = 3 
+
+:GYMTREA_1944
+if and
+  $1830 == 3 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_2164 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_GETON"
+jf @GYMTREA_2164 
+0613: 14@ = actor $PLAYER_ACTOR animation "GYM_TREAD_GETON" time 
+if 
+  14@ == 1.0 
+jf @GYMTREA_2164 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_WALK" IFP "GYMNASIUM" framedelta 8.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+04F7: status_text $8751 type 1 line 1 GXT 'GYM1_1' // global_variable  // power
+04F7: status_text $8750 type 0 line 2 GXT 'GYM1_4' // global_variable  // level
+04F7: status_text $8753 type 0 line 3 GXT 'GYM1_3' // global_variable  // distance
+17@ = 30.0 
+$1830 = 4 
+
+:GYMTREA_2164
+if and
+  $1830 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_5900 
+23@ /= 500.0 
+$1828 /= 750.0 
+005D: 23@ += $1828 // (float) 
+0087: 18@ = 20@ // (float) 
+005B: 18@ += 23@ // (float) 
+19@ /= 2.0 
+0081: 17@ -= frame_delta_time * 19@ // (float) 
+19@ *= 2.0 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMTREA_2309 
+if 
+  $1834 == 0 
+jf @GYMTREA_2309 
+005B: 17@ += 18@ // (float) 
+$1834 = 1 
+
+:GYMTREA_2309
+if 
+80E1:   not player 0 pressed_key 16 
+jf @GYMTREA_2351 
+if 
+  $1834 == 1 
+jf @GYMTREA_2351 
+$1834 = 0 
+
+:GYMTREA_2351
+if 
+  0.0 > 17@ 
+jf @GYMTREA_2382 
+17@ = 0.0 
+
+:GYMTREA_2382
+if 
+  17@ > 100.0 
+jf @GYMTREA_2413 
+17@ = 100.0 
+
+:GYMTREA_2413
+if 
+00E1:   player 0 pressed_key 8 
+jf @GYMTREA_2430 
+
+:GYMTREA_2430
+if 
+00E1:   player 0 pressed_key 9 
+jf @GYMTREA_2447 
+
+:GYMTREA_2447
+if 
+80E1:   not player 0 pressed_key 8 
+jf @GYMTREA_2489 
+if 
+  $1833 == 1 
+jf @GYMTREA_2489 
+$1833 = 0 
+
+:GYMTREA_2489
+if 
+80E1:   not player 0 pressed_key 9 
+jf @GYMTREA_2531 
+if 
+  $1833 == 2 
+jf @GYMTREA_2531 
+$1833 = 0 
+
+:GYMTREA_2531
+if 
+00E1:   player 0 pressed_key 11 
+jf @GYMTREA_2669 
+if 
+  $1835 == 0 
+jf @GYMTREA_2669 
+if and
+  $8750 > 0 
+  10 > $8750 
+jf @GYMTREA_2669 
+$8750 += 1 
+if 
+03D0:   wav 4 loaded 
+jf @GYMTREA_2621 
+097B: play_audio_at_object 0@ event 1116 
+
+:GYMTREA_2621
+17@ -= 10.0 
+if 
+  0.0 > 17@ 
+jf @GYMTREA_2662 
+17@ = 0.0 
+
+:GYMTREA_2662
+$1835 = 1 
+
+:GYMTREA_2669
+if 
+00E1:   player 0 pressed_key 10 
+jf @GYMTREA_2766 
+if 
+  $1835 == 0 
+jf @GYMTREA_2766 
+if and
+  $8750 > 1 
+  11 > $8750 
+jf @GYMTREA_2766 
+$8750 -= 1 
+if 
+03D0:   wav 4 loaded 
+jf @GYMTREA_2759 
+097B: play_audio_at_object 0@ event 1116 
+
+:GYMTREA_2759
+$1835 = 2 
+
+:GYMTREA_2766
+if 
+80E1:   not player 0 pressed_key 11 
+jf @GYMTREA_2808 
+if 
+  $1835 == 1 
+jf @GYMTREA_2808 
+$1835 = 0 
+
+:GYMTREA_2808
+if 
+80E1:   not player 0 pressed_key 10 
+jf @GYMTREA_2850 
+if 
+  $1835 == 2 
+jf @GYMTREA_2850 
+$1835 = 0 
+
+:GYMTREA_2850
+if 
+  $8750 == 1 
+jf @GYMTREA_2888 
+26@ = 1.0 
+20@ = 9.5 
+
+:GYMTREA_2888
+if 
+  $8750 == 2 
+jf @GYMTREA_2926 
+26@ = 2.0 
+20@ = 8.5 
+
+:GYMTREA_2926
+if 
+  $8750 == 3 
+jf @GYMTREA_2964 
+26@ = 3.0 
+20@ = 7.5 
+
+:GYMTREA_2964
+if 
+  $8750 == 4 
+jf @GYMTREA_3002 
+26@ = 4.0 
+20@ = 6.5 
+
+:GYMTREA_3002
+if 
+  $8750 == 5 
+jf @GYMTREA_3040 
+26@ = 5.0 
+20@ = 5.5 
+
+:GYMTREA_3040
+if 
+  $8750 == 6 
+jf @GYMTREA_3078 
+26@ = 6.0 
+20@ = 4.5 
+
+:GYMTREA_3078
+if 
+  $8750 == 7 
+jf @GYMTREA_3116 
+26@ = 7.0 
+20@ = 3.5 
+
+:GYMTREA_3116
+if 
+  $8750 == 8 
+jf @GYMTREA_3154 
+26@ = 8.0 
+20@ = 2.5 
+
+:GYMTREA_3154
+if 
+  $8750 == 9 
+jf @GYMTREA_3192 
+26@ = 9.0 
+20@ = 1.5 
+
+:GYMTREA_3192
+if 
+  $8750 == 10 
+jf @GYMTREA_3230 
+26@ = 10.0 
+20@ = 0.5 
+
+:GYMTREA_3230
+if 
+  $1836 == 0 
+jf @GYMTREA_3299 
+if 
+  17@ > 0.0 
+jf @GYMTREA_3299 
+018C: play_sound 65535 at 1@ 2@ 3@ 
+33@ = 0 
+$1836 = 1 
+
+:GYMTREA_3299
+if and
+  0.0 >= 17@ 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_3803 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_WALK"
+jf @GYMTREA_3406 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_WALK_FALLOFF" IFP "GYMNASIUM" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMTREA_3406
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_JOG"
+jf @GYMTREA_3485 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_JOG_FALLOFF" IFP "GYMNASIUM" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMTREA_3485
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_SPRINT"
+jf @GYMTREA_3569 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_FALLOFF" IFP "GYMNASIUM" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMTREA_3569
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMTREA_3606 
+062A: change_float_stat 21 to 0.0 
+
+:GYMTREA_3606
+$1831 = 0 
+$1832 = 0 
+$1833 = 0 
+$1834 = 0 
+$1835 = 0 
+$1836 = 0 
+$1837 = 0 
+$1838 = 0 
+$1839 = 0 
+$1840 = 0 
+19@ = 1.0 
+$8750 = 0 
+$8752 = 1 
+$1830 = 0 
+$8753 = 0 
+22@ = 0.0 
+21@ = 0.0 
+$1829 = 0 
+0151: remove_status_text $8751 
+0151: remove_status_text $8750 
+0151: remove_status_text $8753 
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+$1840 = 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+04EF: release_animation "GYMNASIUM" 
+040D: unload_wav 4 
+08DA: remove_panel $8748 
+03E6: remove_text_box 
+
+:GYMTREA_3803
+if 
+  $1831 == 1 
+jf @GYMTREA_4170 
+if and
+  $1837 == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_3937 
+if and
+  $8750 > 0 
+  3 > $8750 
+jf @GYMTREA_3937 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_WALK" IFP "GYMNASIUM" framedelta 100.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+$1837 = 1 
+$1838 = 0 
+$1839 = 0 
+
+:GYMTREA_3937
+if and
+  $1838 == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_4052 
+if and
+  $8750 > 2 
+  7 > $8750 
+jf @GYMTREA_4052 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_JOG" IFP "GYMNASIUM" framedelta 100.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+$1837 = 0 
+$1839 = 0 
+$1838 = 1 
+
+:GYMTREA_4052
+if and
+  $1839 == 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_4170 
+if and
+  $8750 > 6 
+  11 > $8750 
+jf @GYMTREA_4170 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_SPRINT" IFP "GYMNASIUM" framedelta 100.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+$1837 = 0 
+$1838 = 0 
+$1839 = 1 
+
+:GYMTREA_4170
+if 
+  17@ >= 0.0 
+jf @GYMTREA_4222 
+if 
+  10.0 >= 17@ 
+jf @GYMTREA_4222 
+15@ = 0.9 
+
+:GYMTREA_4222
+if 
+  17@ >= 11.0 
+jf @GYMTREA_4274 
+if 
+  20.0 >= 17@ 
+jf @GYMTREA_4274 
+15@ = 0.97 
+
+:GYMTREA_4274
+if 
+  17@ >= 21.0 
+jf @GYMTREA_4326 
+if 
+  30.0 >= 17@ 
+jf @GYMTREA_4326 
+15@ = 1.04 
+
+:GYMTREA_4326
+if 
+  17@ >= 31.0 
+jf @GYMTREA_4378 
+if 
+  40.0 >= 17@ 
+jf @GYMTREA_4378 
+15@ = 1.11 
+
+:GYMTREA_4378
+if 
+  17@ >= 41.0 
+jf @GYMTREA_4430 
+if 
+  50.0 >= 17@ 
+jf @GYMTREA_4430 
+15@ = 1.18 
+
+:GYMTREA_4430
+if 
+  17@ >= 51.0 
+jf @GYMTREA_4482 
+if 
+  60.0 >= 17@ 
+jf @GYMTREA_4482 
+15@ = 1.25 
+
+:GYMTREA_4482
+if 
+  17@ >= 61.0 
+jf @GYMTREA_4534 
+if 
+  70.0 >= 17@ 
+jf @GYMTREA_4534 
+15@ = 1.32 
+
+:GYMTREA_4534
+if 
+  17@ >= 71.0 
+jf @GYMTREA_4586 
+if 
+  80.0 >= 17@ 
+jf @GYMTREA_4586 
+15@ = 1.39 
+
+:GYMTREA_4586
+if 
+  17@ >= 81.0 
+jf @GYMTREA_4638 
+if 
+  90.0 >= 17@ 
+jf @GYMTREA_4638 
+15@ = 1.46 
+
+:GYMTREA_4638
+if 
+  17@ >= 91.0 
+jf @GYMTREA_4690 
+if 
+  100.0 >= 17@ 
+jf @GYMTREA_4690 
+15@ = 1.53 
+
+:GYMTREA_4690
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_4876 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_WALK"
+jf @GYMTREA_4762 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_WALK" at 15@ times_normal_rate 
+
+:GYMTREA_4762
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_JOG"
+jf @GYMTREA_4816 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_JOG" at 15@ times_normal_rate 
+
+:GYMTREA_4816
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_TREAD_SPRINT"
+jf @GYMTREA_4876 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_SPRINT" at 15@ times_normal_rate 
+
+:GYMTREA_4876
+if 
+03CA:   object 0@ exists 
+jf @GYMTREA_5001 
+if 
+03D0:   wav 4 loaded 
+jf @GYMTREA_5001 
+if 
+  17@ > 10.0 
+jf @GYMTREA_4968 
+if 
+  $8757 == 0 
+jf @GYMTREA_4961 
+097B: play_audio_at_object 0@ event 1118 
+$8757 = 1 
+
+:GYMTREA_4961
+jump @GYMTREA_5001 
+
+:GYMTREA_4968
+if 
+  $8757 == 1 
+jf @GYMTREA_5001 
+097B: play_audio_at_object 0@ event 1119 
+$8757 = 0 
+
+:GYMTREA_5001
+if 
+  33@ > 250 
+jf @GYMTREA_5320 
+33@ -= 250 
+0087: 21@ = 17@ // (float) 
+006B: 21@ *= 26@ // (float) 
+21@ /= 80.0 
+008D: $9 = integer $8750 to_float 
+$9 /= 10.0 
+$9 += 1.0 
+006D: $9 *= 21@ // (float) 
+0059: $7 += $9 // (float) 
+if 
+  $7 >= 170.0 
+jf @GYMTREA_5243 
+$7 -= 170.0 
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  $GYM_STAT_FAT >= 1.0 
+jf @GYMTREA_5166 
+0626: decrease_float_stat 21 by 8.0 
+
+:GYMTREA_5166
+if 
+  $8758 == 3 
+jf @GYMTREA_5217 
+$8758 = 0 
+0624: add 4.0 to_float_stat 22 
+$GYM_DAY_LIMIT += 4.0 
+jump @GYMTREA_5243 
+
+:GYMTREA_5217
+0A1F: increase_float_stat 22 by 4.0 
+$GYM_DAY_LIMIT += 4.0 
+$8758 += 1 
+
+:GYMTREA_5243
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMTREA_5288 
+0835: get_month_day_to $GYM_MONTH_DAY_WHEN_LIMIT_REACHED get_month_to $GYM_MONTH_WHEN_LIMIT_REACHED 
+00BC: show_text_highpriority GXT 'GYM1_1B' time 4000 flag 1  // You have reached your limit for today, come back tomorrow!
+
+:GYMTREA_5288
+008F: 25@ = integer $8752 to_float 
+006D: $9 *= 25@ // (float) 
+005B: 22@ += 21@ // (float) 
+0090: $8753 = float 22@ to_integer 
+
+:GYMTREA_5320
+if or
+00E1:   player 0 pressed_key 15 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMTREA_5796 
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMTREA_5378 
+$GYM_DAY_LIMIT = 0.0 
+
+:GYMTREA_5378
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_5796 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_TREAD_GETOFF" IFP "GYMNASIUM" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMTREA_5443
+015B: shake_player_controller 0 time 1 intensity 1 
+0623: add $8753 to_integer_stat 28 
+0085: 29@ = 32@ // (int) 
+29@ /= 1000 
+0623: add 29@ to_integer_stat 44 
+03E6: remove_text_box 
+08DA: remove_panel $8748 
+$1831 = 0 
+$1832 = 0 
+$1833 = 0 
+$1834 = 0 
+$1835 = 0 
+$1836 = 0 
+$1837 = 0 
+$1838 = 0 
+$1839 = 0 
+$1840 = 0 
+19@ = 1.0 
+$8750 = 1 
+$8752 = 1 
+$1830 = 0 
+$8753 = 0 
+22@ = 0.0 
+21@ = 0.0 
+$1829 = 0 
+0151: remove_status_text $8751 
+0151: remove_status_text $8750 
+0151: remove_status_text $8753 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMTREA_5668 
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:GYMTREA_5668
+04EF: release_animation "GYMNASIUM" 
+040D: unload_wav 4 
+Camera.Restore_WithJumpCut
+$1840 = 1 
+0653: $1817 = float_stat 23 
+if 
+  $1817 >= 1000.0 
+jf @GYMTREA_5731 
+062A: change_float_stat 23 to 1000.0 
+
+:GYMTREA_5731
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMTREA_5768 
+062A: change_float_stat 21 to 0.0 
+
+:GYMTREA_5768
+if 
+00E1:   player 0 pressed_key 15 
+jf @GYMTREA_5796 
+wait 0 
+jump @GYMTREA_5768 
+
+:GYMTREA_5796
+$8755 += 1 
+0084: $8756 = $8751 // (int) 
+$8756 -= 100 
+if 
+  $8756 > -40 
+jf @GYMTREA_5843 
+$8756 = -40 
+
+:GYMTREA_5843
+if 
+002C:   $8755 >= $8756 // (int) 
+jf @GYMTREA_5892 
+$8755 = 0 
+$8751 *= 12 
+$8751 /= 10 
+015B: shake_player_controller 0 time 100 intensity $8751 
+
+:GYMTREA_5892
+0090: $8751 = float 17@ to_integer 
+
+:GYMTREA_5900
+jump @GYMTREA_573 
+end_thread

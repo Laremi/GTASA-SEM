@@ -1,0 +1,1256 @@
+:GYMDUMB
+thread 'GYMDUMB' 
+$GYM_DUMBBELLS_PANEL_SELECTED_INDEX = 1 
+$8763 = 0 
+27@ = 0 
+$8769 = 0 
+$8779 = 0.0 
+32@ = 0 
+33@ = 0 
+23@ = 0 
+if 
+  23@ == 1 
+jf @GYMDUMB_111 
+0@ = Object.Init(#BEACHTOWEL04, 0.0, 0.0, 0.0)
+
+:GYMDUMB_111
+if 
+03CA:   object 0@ exists 
+jf @GYMDUMB_149 
+Object.StorePos(0@, 4@, 5@, 6@)
+12@ = Object.Angle(0@)
+
+:GYMDUMB_149
+0087: 2@ = 4@ // (float) 
+0087: 3@ = 5@ // (float) 
+0088: $8775 = 4@ // (float) 
+0088: $8776 = 5@ // (float) 
+0087: 9@ = 6@ // (float) 
+9@ += 1.7 
+0087: 13@ = 12@ // (float) 
+0087: 1@ = 12@ // (float) 
+1@ -= 90.0 
+0088: $8773 = 12@ // (float) 
+$8773 -= 90.0 
+0088: $8774 = 12@ // (float) 
+$8774 += 90.0 
+02F6: 10@ = sine 13@ // (float) 
+02F7: 11@ = cosine 13@ // (float) 
+10@ *= 0.95 
+11@ *= 0.95 
+0063: 4@ -= 11@ // (float) 
+0063: 5@ -= 10@ // (float) 
+10@ *= 3.5 
+11@ *= 3.5 
+0087: 7@ = 4@ // (float) 
+005B: 7@ += 11@ // (float) 
+0087: 8@ = 5@ // (float) 
+005B: 8@ += 10@ // (float) 
+02F6: 10@ = sine 13@ // (float) 
+02F7: 11@ = cosine 13@ // (float) 
+10@ *= 0.95 
+11@ *= 0.95 
+005F: $8775 += 11@ // (float) 
+005F: $8776 += 10@ // (float) 
+10@ *= 3.5 
+11@ *= 3.5 
+0086: $8777 = $8775 // (float) 
+0067: $8777 -= 11@ // (float) 
+0086: $8778 = $8776 // (float) 
+0067: $8778 -= 10@ // (float) 
+12@ += 180.0 
+0087: 13@ = 12@ // (float) 
+13@ += 90.0 
+02F6: 10@ = sine 13@ // (float) 
+02F7: 11@ = cosine 13@ // (float) 
+10@ *= 0.2 
+11@ *= 0.2 
+005B: 2@ += 11@ // (float) 
+005B: 3@ += 10@ // (float) 
+25@ = Object.Create(#KMB_DUMBBELL_R, 2@, 3@, 6@)
+069A: attach_object 25@ to_object 0@ with_offset 0.05 0.2 0.3 rotation 0.0 90.0 90.0 
+26@ = Object.Create(#KMB_DUMBBELL_L, 2@, 3@, 6@)
+069A: attach_object 26@ to_object 0@ with_offset 0.05 -0.2 0.3 rotation 0.0 90.0 90.0 
+6@ += 0.1 
+$GYM_GYMBIKE_LEVEL = 1 
+$1829 = 0 
+
+:GYMDUMB_683
+wait 0 
+if 
+83CA:   not object 0@ exists 
+jf @GYMDUMB_715 
+Object.Destroy(25@)
+Object.Destroy(26@)
+end_thread 
+
+:GYMDUMB_715
+if 
+8977:   not player_in_radius_of_object 0@ external_script_trigger 
+jf @GYMDUMB_743 
+Object.Destroy(25@)
+Object.Destroy(26@)
+end_thread 
+
+:GYMDUMB_743
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GYMDUMB_7917 
+if 
+  $1830 == 0 
+jf @GYMDUMB_1253 
+if and
+  17@ == 0 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @GYMDUMB_1253 
+if 
+  21@ == 0 
+jf @GYMDUMB_1189 
+if or
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 4@ 5@ 6@ radius 1.2 1.2 4.0 on_foot 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $8775 $8776 6@ radius 1.2 1.2 4.0 on_foot 
+jf @GYMDUMB_1155 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 4@ 5@ 6@ radius 1.2 1.2 4.0 on_foot 
+jf @GYMDUMB_947 
+$8772 = 0 
+jump @GYMDUMB_954 
+
+:GYMDUMB_947
+$8772 = 1 
+
+:GYMDUMB_954
+if 
+  27@ == 0 
+jf @GYMDUMB_990 
+0512: show_permanent_text_box 'GYM1_85'  // Press ~k~~VEHICLE_ENTER_EXIT~ to begin exercising.
+27@ = 1 
+
+:GYMDUMB_990
+if 
+00E1:   player 0 pressed_key 15 
+jf @GYMDUMB_1148 
+if or
+  $ONMISSION == 0 
+  $ONMISSION_GYMFIGHT == 1 
+jf @GYMDUMB_1132 
+0835: get_month_day_to $CURRENT_MONTH_DAY get_month_to $CURRENT_MONTH 
+if or
+001C:   $CURRENT_MONTH_DAY > $GYM_MONTH_DAY_WHEN_LIMIT_REACHED // (int) 
+001C:   $CURRENT_MONTH > $GYM_MONTH_WHEN_LIMIT_REACHED // (int) 
+jf @GYMDUMB_1109 
+17@ = 1 
+$1830 = 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Player.CanMove($PLAYER_CHAR) = False
+$8714 = 0 
+jump @GYMDUMB_1125 
+
+:GYMDUMB_1109
+00BC: show_text_highpriority GXT 'GYM1_1A' time 4000 flag 1  // You have worked out enough for today, come back tomorrow!
+
+:GYMDUMB_1125
+jump @GYMDUMB_1148 
+
+:GYMDUMB_1132
+00BC: show_text_highpriority GXT 'GYM1_90' time 4000 flag 1  // ~s~You look a bit busy, why don't you come back later.
+
+:GYMDUMB_1148
+jump @GYMDUMB_1182 
+
+:GYMDUMB_1155
+if 
+  27@ == 1 
+jf @GYMDUMB_1182 
+03E6: remove_text_box 
+27@ = 0 
+
+:GYMDUMB_1182
+jump @GYMDUMB_1253 
+
+:GYMDUMB_1189
+if or
+80ED:   not actor $PLAYER_ACTOR sphere 0 near_point 4@ 5@ radius 2.0 2.0 on_foot 
+80ED:   not actor $PLAYER_ACTOR sphere 0 near_point $8775 $8776 radius 2.0 2.0 on_foot 
+jf @GYMDUMB_1253 
+21@ = 0 
+
+:GYMDUMB_1253
+if 
+  17@ == 1 
+jf @GYMDUMB_7917 
+if and
+  $1830 == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_1459 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+if 
+  $8772 == 0 
+jf @GYMDUMB_1381 
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at 4@ 5@ 6@ dont_warp_gang 
+Camera.SetPosition(7@, 8@, 9@, 0.0, 0.0, 0.0)
+Actor.Angle($PLAYER_ACTOR) = $8773
+jump @GYMDUMB_1436 
+
+:GYMDUMB_1381
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at $8775 $8776 6@ dont_warp_gang 
+Camera.SetPosition($8777, $8778, 9@, 0.0, 0.0, 0.0)
+Actor.Angle($PLAYER_ACTOR) = $8774
+
+:GYMDUMB_1436
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+$1830 = 2 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+
+:GYMDUMB_1459
+if 
+  $1829 == 0 
+jf @GYMDUMB_1584 
+04ED: load_animation "FREEWEIGHTS" 
+054C: use_GXT_table 'GYM' 
+
+:GYMDUMB_1503
+if 
+84EE:   not animation "FREEWEIGHTS" loaded 
+jf @GYMDUMB_1540 
+wait 0 
+jump @GYMDUMB_1503 
+
+:GYMDUMB_1540
+040D: unload_wav 4 
+03CF: load_wav 1820 as 4 
+
+:GYMDUMB_1551
+if 
+83D0:   not wav 4 loaded 
+jf @GYMDUMB_1577 
+wait 0 
+jump @GYMDUMB_1551 
+
+:GYMDUMB_1577
+$1829 = 1 
+
+:GYMDUMB_1584
+if and
+  $1830 == 2 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2111 
+0512: show_permanent_text_box 'GYM1_71'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a weight.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+if or
+  $CURRENT_LANGUAGE == 4 
+  $CURRENT_LANGUAGE == 2 
+jf @GYMDUMB_1811 
+08D4: $GYM_DUMBBELLS_PANEL = create_panel_with_title 'GYM1_G' position 31.0 180.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Dumbbells
+08DB: set_panel $GYM_DUMBBELLS_PANEL column 0 header 'GYM1_72' data 'GYM1_26' 'GYM1_27' 'GYM1_28' 'GYM1_29' 'GYM1_30' 'GYM1_31' 'GYM1_32' 'GYM1_33' 'GYM1_34' 'GYM1_35' 'DUMMY' 'DUMMY'  // Weight // 20 lbs // 30 lbs // 40 lbs // 50 lbs // 60 lbs // 70 lbs // 80 lbs // 90 lbs // 100 lbs // 110 lbs
+jump @GYMDUMB_1972 
+
+:GYMDUMB_1811
+08D4: $GYM_DUMBBELLS_PANEL = create_panel_with_title 'GYM1_G' position 31.0 150.0 width 184.0 columns 1 interactive 1 background 1 alignment 0  // Dumbbells
+08DB: set_panel $GYM_DUMBBELLS_PANEL column 0 header 'GYM1_72' data 'GYM1_26' 'GYM1_27' 'GYM1_28' 'GYM1_29' 'GYM1_30' 'GYM1_31' 'GYM1_32' 'GYM1_33' 'GYM1_34' 'GYM1_35' 'DUMMY' 'DUMMY'  // Weight // 20 lbs // 30 lbs // 40 lbs // 50 lbs // 60 lbs // 70 lbs // 80 lbs // 90 lbs // 100 lbs // 110 lbs
+
+:GYMDUMB_1972
+090E: set_panel $GYM_DUMBBELLS_PANEL active_row 0 
+
+:GYMDUMB_1979
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2090 
+wait 0 
+$8714 += 1 
+if and
+00E1:   player 0 pressed_key 15 
+  $8714 > 20 
+jf @GYMDUMB_2044 
+03E6: remove_text_box 
+08DA: remove_panel $GYM_DUMBBELLS_PANEL 
+jump @GYMDUMB_7441 
+
+:GYMDUMB_2044
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMDUMB_2083 
+03E6: remove_text_box 
+08D7: $GYM_DUMBBELLS_PANEL_SELECTED_INDEX = panel $GYM_DUMBBELLS_PANEL active_row 
+08DA: remove_panel $GYM_DUMBBELLS_PANEL 
+jump @GYMDUMB_2090 
+
+:GYMDUMB_2083
+jump @GYMDUMB_1979 
+
+:GYMDUMB_2090
+19@ = 1 
+18@ = 1 
+$1830 = 3 
+
+:GYMDUMB_2111
+if and
+  $1830 == 3 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2868 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 0 
+jf @GYMDUMB_2172 
+$8762 = 1.0 
+$8768 = 5.0 
+
+:GYMDUMB_2172
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_2210 
+$8762 = 2.0 
+$8768 = 5.2 
+
+:GYMDUMB_2210
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_2248 
+$8762 = 3.0 
+$8768 = 5.3 
+
+:GYMDUMB_2248
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_2286 
+$8762 = 4.0 
+$8768 = 5.5 
+
+:GYMDUMB_2286
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_2324 
+$8762 = 5.0 
+$8768 = 6.0 
+
+:GYMDUMB_2324
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_2362 
+$8762 = 6.0 
+$8768 = 6.5 
+
+:GYMDUMB_2362
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_2400 
+$8762 = 7.0 
+$8768 = 7.0 
+
+:GYMDUMB_2400
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_2438 
+$8762 = 8.0 
+$8768 = 7.5 
+
+:GYMDUMB_2438
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_2476 
+$8762 = 9.0 
+$8768 = 8.0 
+
+:GYMDUMB_2476
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_2514 
+$8762 = 10.0 
+$8768 = 8.5 
+
+:GYMDUMB_2514
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2580 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_PICKUP" IFP "FREEWEIGHTS" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_2580
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2868 
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_PICKUP"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2868 
+0613: $1826 = actor $PLAYER_ACTOR animation "GYM_FREE_PICKUP" time 
+
+:GYMDUMB_2663
+if 
+   not $1826 > 0.7789 
+jf @GYMDUMB_2736 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2729 
+0613: $1826 = actor $PLAYER_ACTOR animation "GYM_FREE_PICKUP" time 
+
+:GYMDUMB_2729
+jump @GYMDUMB_2663 
+
+:GYMDUMB_2736
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2854 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_2854 
+070A: AS_actor $PLAYER_ACTOR attach_to_object 25@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time -1 
+09A0: actor $PLAYER_ACTOR attach_object 26@ with_offset 0.0 0.0 0.0 on_bone 5 16 perform_animation "NULL" IFP_file "NULL" time -1 
+
+:GYMDUMB_2854
+$1830 = 4 
+32@ = 0 
+
+:GYMDUMB_2868
+if and
+  $1830 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_3404 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_PICKUP"
+jf @GYMDUMB_3404 
+0613: $1816 = actor $PLAYER_ACTOR animation "GYM_FREE_PICKUP" time 
+if 
+  $1816 == 1.0 
+jf @GYMDUMB_3404 
+if 
+  $8761 == 0 
+jf @GYMDUMB_3006 
+0512: show_permanent_text_box 'GYM1_36'  // To lift the dumbbells alternate between pressing ~k~~PED_SPRINT~ and ~k~~PED_FIREWEAPON~.~n~This will increase your power.
+$8761 = 1 
+
+:GYMDUMB_3006
+0653: $1817 = float_stat 23 
+$1817 /= 30.0 
+if 
+  0.0 > $1817 
+jf @GYMDUMB_3054 
+$1817 = 0.0 
+
+:GYMDUMB_3054
+0086: $8765 = $1817 // (float) 
+$8765 += 30.0 
+if 
+  $8765 > 75.0 
+jf @GYMDUMB_3103 
+$8765 = 75.0 
+
+:GYMDUMB_3103
+008D: $8767 = integer $8763 to_float 
+0086: $1823 = $8765 // (float) 
+0061: $1823 -= $8762 // (float) 
+if 
+  18.0 >= $1823 
+jf @GYMDUMB_3193 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_B" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_3193
+if 
+  $1823 > 18.0 
+jf @GYMDUMB_3280 
+if 
+  24.0 >= $1823 
+jf @GYMDUMB_3280 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_A" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_3280
+if 
+  $1823 > 24.0 
+jf @GYMDUMB_3354 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_UP_SMOOTH" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_3354
+04F7: status_text $1818 type 1 line 1 GXT 'GYM1_1' // global_variable  // power
+04F7: status_text $8763 type 0 line 2 GXT 'GYM1_2' // global_variable  // reps
+$1813 = 1 
+$1830 = 5 
+
+:GYMDUMB_3404
+if and
+  $1830 == 5 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7053 
+if and
+  32@ > 4000 
+  $8761 == 1 
+jf @GYMDUMB_3473 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_25'  // Press ~k~~VEHICLE_ENTER_EXIT~ to exit.
+$8761 = 2 
+
+:GYMDUMB_3473
+if and
+  32@ > 8000 
+  $8761 == 2 
+jf @GYMDUMB_3508 
+03E6: remove_text_box 
+$8761 = 101 
+
+:GYMDUMB_3508
+0653: $1817 = float_stat 23 
+$1817 /= 30.0 
+if 
+  0.0 > $1817 
+jf @GYMDUMB_3556 
+$1817 = 0.0 
+
+:GYMDUMB_3556
+0086: $8765 = $1817 // (float) 
+$8765 += 20.0 
+if 
+  $8765 > 75.0 
+jf @GYMDUMB_3605 
+$8765 = 75.0 
+
+:GYMDUMB_3605
+if or
+  $1813 == 1 
+  $1813 == 3 
+jf @GYMDUMB_3658 
+$8762 /= 2.0 
+0080: $8766 -= frame_delta_time * $8762 // (float) 
+$8762 *= 2.0 
+
+:GYMDUMB_3658
+if 
+  $1813 == 4 
+jf @GYMDUMB_3686 
+007E: $8766 -= frame_delta_time * 2.0 // (float) 
+
+:GYMDUMB_3686
+if 
+80E1:   not player 0 pressed_key 17 
+jf @GYMDUMB_3728 
+if 
+  20@ == 3 
+jf @GYMDUMB_3728 
+20@ = 0 
+
+:GYMDUMB_3728
+if 
+80E1:   not player 0 pressed_key 16 
+jf @GYMDUMB_3770 
+if 
+  20@ == 1 
+jf @GYMDUMB_3770 
+20@ = 2 
+
+:GYMDUMB_3770
+if or
+  $1813 == 1 
+  $1813 == 3 
+jf @GYMDUMB_3907 
+if and
+00E1:   player 0 pressed_key 16 
+80E1:   not player 0 pressed_key 17 
+jf @GYMDUMB_3851 
+if 
+  20@ == 0 
+jf @GYMDUMB_3851 
+0059: $8766 += $8765 // (float) 
+20@ = 1 
+
+:GYMDUMB_3851
+if and
+00E1:   player 0 pressed_key 17 
+80E1:   not player 0 pressed_key 16 
+jf @GYMDUMB_3907 
+if 
+  20@ == 2 
+jf @GYMDUMB_3907 
+0059: $8766 += $8765 // (float) 
+20@ = 3 
+
+:GYMDUMB_3907
+if 
+  0.0 > $8766 
+jf @GYMDUMB_3938 
+$8766 = 0.0 
+
+:GYMDUMB_3938
+if 
+  $8766 >= 100.0 
+jf @GYMDUMB_3994 
+$8766 = 100.0 
+if 
+  $1813 == 1 
+jf @GYMDUMB_3994 
+$1813 = 2 
+
+:GYMDUMB_3994
+if 
+  $8766 > 25.0 
+jf @GYMDUMB_4026 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 354 store_spoken_phrase_id_to $8780 
+
+:GYMDUMB_4026
+if 
+  $1813 == 2 
+jf @GYMDUMB_4086 
+if 
+  $1819 == 1.0 
+jf @GYMDUMB_4086 
+20@ = 0 
+$1813 = 3 
+33@ = 0 
+
+:GYMDUMB_4086
+if and
+  $1813 == 3 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_6177 
+if 
+   not $8763 >= 999999 
+jf @GYMDUMB_4137 
+$8763 += 1 
+
+:GYMDUMB_4137
+0871: init_jump_table $GYM_DUMBBELLS_PANEL_SELECTED_INDEX total_jumps 10 default_jump 0 @GYMDUMB_4405 jumps 0 @GYMDUMB_4265 1 @GYMDUMB_4279 2 @GYMDUMB_4293 3 @GYMDUMB_4307 4 @GYMDUMB_4321 5 @GYMDUMB_4335 6 @GYMDUMB_4349 
+0872: jump_table_jumps 7 @GYMDUMB_4363 8 @GYMDUMB_4377 9 @GYMDUMB_4391 -1 @GYMDUMB_4405 -1 @GYMDUMB_4405 -1 @GYMDUMB_4405 -1 @GYMDUMB_4405 -1 @GYMDUMB_4405 -1 @GYMDUMB_4405 
+
+:GYMDUMB_4265
+$GYM_DUMBBELLS_WEIGHT = 20 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4279
+$GYM_DUMBBELLS_WEIGHT = 30 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4293
+$GYM_DUMBBELLS_WEIGHT = 40 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4307
+$GYM_DUMBBELLS_WEIGHT = 50 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4321
+$GYM_DUMBBELLS_WEIGHT = 60 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4335
+$GYM_DUMBBELLS_WEIGHT = 70 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4349
+$GYM_DUMBBELLS_WEIGHT = 80 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4363
+$GYM_DUMBBELLS_WEIGHT = 90 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4377
+$GYM_DUMBBELLS_WEIGHT = 100 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4391
+$GYM_DUMBBELLS_WEIGHT = 110 
+jump @GYMDUMB_4405 
+
+:GYMDUMB_4405
+0652: $GYM_STAT_DUMBBELLS_HEAVIEST_WEIGHT = integer_stat 47 
+if 
+001C:   $GYM_DUMBBELLS_WEIGHT > $GYM_STAT_DUMBBELLS_HEAVIEST_WEIGHT // (int) 
+jf @GYMDUMB_4438 
+0629: change_integer_stat 47 to $GYM_DUMBBELLS_WEIGHT 
+
+:GYMDUMB_4438
+0653: $8779 = float_stat 23 
+if 
+  1000.0 > $8779 
+jf @GYMDUMB_4746 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_4494 
+$8768 = 1.0 
+
+:GYMDUMB_4494
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_4522 
+$8768 = 1.2 
+
+:GYMDUMB_4522
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_4550 
+$8768 = 1.3 
+
+:GYMDUMB_4550
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_4578 
+$8768 = 1.5 
+
+:GYMDUMB_4578
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_4606 
+$8768 = 2.0 
+
+:GYMDUMB_4606
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_4634 
+$8768 = 2.5 
+
+:GYMDUMB_4634
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_4662 
+$8768 = 3.0 
+
+:GYMDUMB_4662
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_4690 
+$8768 = 4.0 
+
+:GYMDUMB_4690
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_4718 
+$8768 = 5.0 
+
+:GYMDUMB_4718
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 10 
+jf @GYMDUMB_4746 
+$8768 = 6.0 
+
+:GYMDUMB_4746
+if 
+  800.0 > $8779 
+jf @GYMDUMB_5047 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_4795 
+$8768 = 2.0 
+
+:GYMDUMB_4795
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_4823 
+$8768 = 2.2 
+
+:GYMDUMB_4823
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_4851 
+$8768 = 2.3 
+
+:GYMDUMB_4851
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_4879 
+$8768 = 2.5 
+
+:GYMDUMB_4879
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_4907 
+$8768 = 3.0 
+
+:GYMDUMB_4907
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_4935 
+$8768 = 3.5 
+
+:GYMDUMB_4935
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_4963 
+$8768 = 4.0 
+
+:GYMDUMB_4963
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_4991 
+$8768 = 5.0 
+
+:GYMDUMB_4991
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_5019 
+$8768 = 6.0 
+
+:GYMDUMB_5019
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 10 
+jf @GYMDUMB_5047 
+$8768 = 7.0 
+
+:GYMDUMB_5047
+if 
+  600.0 > $8779 
+jf @GYMDUMB_5348 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_5096 
+$8768 = 3.0 
+
+:GYMDUMB_5096
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_5124 
+$8768 = 3.2 
+
+:GYMDUMB_5124
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_5152 
+$8768 = 3.3 
+
+:GYMDUMB_5152
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_5180 
+$8768 = 3.5 
+
+:GYMDUMB_5180
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_5208 
+$8768 = 4.0 
+
+:GYMDUMB_5208
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_5236 
+$8768 = 4.5 
+
+:GYMDUMB_5236
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_5264 
+$8768 = 5.0 
+
+:GYMDUMB_5264
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_5292 
+$8768 = 6.0 
+
+:GYMDUMB_5292
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_5320 
+$8768 = 7.0 
+
+:GYMDUMB_5320
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 10 
+jf @GYMDUMB_5348 
+$8768 = 8.0 
+
+:GYMDUMB_5348
+if 
+  400.0 > $8779 
+jf @GYMDUMB_5649 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_5397 
+$8768 = 4.0 
+
+:GYMDUMB_5397
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_5425 
+$8768 = 4.2 
+
+:GYMDUMB_5425
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_5453 
+$8768 = 4.3 
+
+:GYMDUMB_5453
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_5481 
+$8768 = 4.5 
+
+:GYMDUMB_5481
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_5509 
+$8768 = 5.0 
+
+:GYMDUMB_5509
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_5537 
+$8768 = 5.5 
+
+:GYMDUMB_5537
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_5565 
+$8768 = 6.0 
+
+:GYMDUMB_5565
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_5593 
+$8768 = 7.0 
+
+:GYMDUMB_5593
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_5621 
+$8768 = 8.0 
+
+:GYMDUMB_5621
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 10 
+jf @GYMDUMB_5649 
+$8768 = 9.0 
+
+:GYMDUMB_5649
+if 
+  200.0 > $8779 
+jf @GYMDUMB_5950 
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 1 
+jf @GYMDUMB_5698 
+$8768 = 5.0 
+
+:GYMDUMB_5698
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 2 
+jf @GYMDUMB_5726 
+$8768 = 5.2 
+
+:GYMDUMB_5726
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 3 
+jf @GYMDUMB_5754 
+$8768 = 5.3 
+
+:GYMDUMB_5754
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 4 
+jf @GYMDUMB_5782 
+$8768 = 5.5 
+
+:GYMDUMB_5782
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 5 
+jf @GYMDUMB_5810 
+$8768 = 6.0 
+
+:GYMDUMB_5810
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 6 
+jf @GYMDUMB_5838 
+$8768 = 6.5 
+
+:GYMDUMB_5838
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 7 
+jf @GYMDUMB_5866 
+$8768 = 7.0 
+
+:GYMDUMB_5866
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 8 
+jf @GYMDUMB_5894 
+$8768 = 7.5 
+
+:GYMDUMB_5894
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 9 
+jf @GYMDUMB_5922 
+$8768 = 8.0 
+
+:GYMDUMB_5922
+if 
+  $GYM_DUMBBELLS_PANEL_SELECTED_INDEX == 10 
+jf @GYMDUMB_5950 
+$8768 = 8.5 
+
+:GYMDUMB_5950
+if 
+  $8781 == 8 
+jf @GYMDUMB_5997 
+$8781 = 0 
+0624: add $8768 to_float_stat 23 
+0059: $GYM_DAY_LIMIT += $8768 // (float) 
+jump @GYMDUMB_6019 
+
+:GYMDUMB_5997
+0A1F: increase_float_stat 23 by $8768 
+$8781 += 1 
+0059: $GYM_DAY_LIMIT += $8768 // (float) 
+
+:GYMDUMB_6019
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMDUMB_6064 
+0835: get_month_day_to $GYM_MONTH_DAY_WHEN_LIMIT_REACHED get_month_to $GYM_MONTH_WHEN_LIMIT_REACHED 
+00BC: show_text_highpriority GXT 'GYM1_1B' time 4000 flag 1  // You have reached your limit for today, come back tomorrow!
+
+:GYMDUMB_6064
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  $GYM_STAT_FAT >= 1.0 
+jf @GYMDUMB_6101 
+0626: decrease_float_stat 21 by 1.0 
+
+:GYMDUMB_6101
+015B: shake_player_controller 0 time 200 intensity 200 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 355 store_spoken_phrase_id_to $8780 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_DOWN" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+$1813 = 4 
+
+:GYMDUMB_6177
+if and
+  $1813 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_6500 
+if 
+  $8766 == 0.0 
+jf @GYMDUMB_6500 
+if 
+  $1819 == 0.0 
+jf @GYMDUMB_6500 
+008D: $8767 = integer $8763 to_float 
+0086: $1823 = $8765 // (float) 
+0061: $1823 -= $8762 // (float) 
+if 
+  18.0 >= $1823 
+jf @GYMDUMB_6332 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_B" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_6332
+if 
+  $1823 > 18.0 
+jf @GYMDUMB_6419 
+if 
+  24.0 >= $1823 
+jf @GYMDUMB_6419 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_A" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_6419
+if 
+  $1823 > 24.0 
+jf @GYMDUMB_6493 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_UP_SMOOTH" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+
+:GYMDUMB_6493
+$1813 = 1 
+
+:GYMDUMB_6500
+0086: $1820 = $8766 // (float) 
+$1820 /= 100.0 
+if and
+  $1813 > 0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_6878 
+0086: $1821 = $1820 // (float) 
+0061: $1821 -= $1819 // (float) 
+$1821 /= 2.0 
+if and
+  0.05 > $1821 
+  $1821 > -0.05 
+jf @GYMDUMB_6613 
+0086: $1819 = $1820 // (float) 
+jump @GYMDUMB_6621 
+
+:GYMDUMB_6613
+0059: $1819 += $1821 // (float) 
+
+:GYMDUMB_6621
+if 
+  $1813 == 4 
+jf @GYMDUMB_6718 
+$1822 = 1.0 
+0061: $1822 -= $1819 // (float) 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_DOWN"
+jf @GYMDUMB_6711 
+0614: set_actor $PLAYER_ACTOR animation "GYM_FREE_DOWN" progress_to $1822 // 0.0 to 1.0 
+
+:GYMDUMB_6711
+jump @GYMDUMB_6878 
+
+:GYMDUMB_6718
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_A"
+jf @GYMDUMB_6766 
+0614: set_actor $PLAYER_ACTOR animation "GYM_FREE_A" progress_to $1819 // 0.0 to 1.0 
+
+:GYMDUMB_6766
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_B"
+jf @GYMDUMB_6814 
+0614: set_actor $PLAYER_ACTOR animation "GYM_FREE_B" progress_to $1819 // 0.0 to 1.0 
+
+:GYMDUMB_6814
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_UP_SMOOTH"
+jf @GYMDUMB_6878 
+0614: set_actor $PLAYER_ACTOR animation "GYM_FREE_UP_SMOOTH" progress_to $1819 // 0.0 to 1.0 
+
+:GYMDUMB_6878
+008C: $1818 = float $8766 to_integer 
+if or
+00E1:   player 0 pressed_key 15 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMDUMB_7053 
+$1818 = 0 
+
+:GYMDUMB_6920
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMDUMB_6948 
+wait 0 
+jump @GYMDUMB_6920 
+
+:GYMDUMB_6948
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7015 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_PUTDOWN" IFP "FREEWEIGHTS" framedelta 100.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMDUMB_7015
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMDUMB_7046 
+$GYM_DAY_LIMIT = 0.0 
+
+:GYMDUMB_7046
+$1830 = 6 
+
+:GYMDUMB_7053
+if and
+  $1830 == 6 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7917 
+if 
+  $8763 >= 0 
+jf @GYMDUMB_7700 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_FREE_PUTDOWN"
+jf @GYMDUMB_7693 
+0613: $1827 = actor $PLAYER_ACTOR animation "GYM_FREE_PUTDOWN" time 
+
+:GYMDUMB_7154
+if 
+   not $1827 > 0.3 
+jf @GYMDUMB_7228 
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7221 
+0613: $1827 = actor $PLAYER_ACTOR animation "GYM_FREE_PUTDOWN" time 
+
+:GYMDUMB_7221
+jump @GYMDUMB_7154 
+
+:GYMDUMB_7228
+070B: set_actor $PLAYER_ACTOR onbone_attached_object_operation 0 
+09A1: set_actor $PLAYER_ACTOR onbone_attached_objectB_operation 0 
+069A: attach_object 25@ to_object 0@ with_offset 0.0 0.2 0.3 rotation 0.0 90.0 90.0 
+069A: attach_object 26@ to_object 0@ with_offset 0.0 -0.2 0.3 rotation 0.0 90.0 90.0 
+0613: $1816 = actor $PLAYER_ACTOR animation "GYM_FREE_PUTDOWN" time 
+if and
+  $1816 == 1.0 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7693 
+if 
+  $8763 > 4 
+jf @GYMDUMB_7441 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_FREE_CELEBRATE" IFP "FREEWEIGHTS" framedelta 8.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:GYMDUMB_7441
+17@ = 0 
+$1813 = 0 
+21@ = 1 
+$GYM_DUMBBELLS_PANEL_SELECTED_INDEX = 1 
+$8763 = 0 
+$1818 = 0 
+$1823 = 0.0 
+$1830 = 0 
+$8766 = 0.0 
+$GYM_DUMBBELLS_PANEL_SELECTED_INDEX = 1 
+$8763 = 0 
+$1816 = 0.0 
+$1826 = 0.0 
+0653: $1817 = float_stat 23 
+if 
+  $1817 >= 1000.0 
+jf @GYMDUMB_7581 
+062A: change_float_stat 23 to 1000.0 
+
+:GYMDUMB_7581
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMDUMB_7618 
+062A: change_float_stat 21 to 0.0 
+
+:GYMDUMB_7618
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMDUMB_7660 
+0151: remove_status_text $8763 
+0151: remove_status_text $1818 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:GYMDUMB_7660
+04EF: release_animation "FREEWEIGHTS" 
+040D: unload_wav 4 
+08DA: remove_panel $GYM_DUMBBELLS_PANEL 
+03E6: remove_text_box 
+$1829 = 0 
+
+:GYMDUMB_7693
+jump @GYMDUMB_7917 
+
+:GYMDUMB_7700
+17@ = 0 
+$1813 = 0 
+21@ = 1 
+$GYM_DUMBBELLS_PANEL_SELECTED_INDEX = 1 
+$8763 = 0 
+$1818 = 0 
+$1823 = 0.0 
+$1830 = 0 
+$8766 = 0.0 
+$GYM_DUMBBELLS_PANEL_SELECTED_INDEX = 1 
+$8763 = 0 
+$1816 = 0.0 
+$1826 = 0.0 
+0653: $1817 = float_stat 23 
+if 
+  $1817 >= 1000.0 
+jf @GYMDUMB_7840 
+062A: change_float_stat 23 to 1000.0 
+
+:GYMDUMB_7840
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMDUMB_7877 
+062A: change_float_stat 21 to 0.0 
+
+:GYMDUMB_7877
+0151: remove_status_text $8763 
+0151: remove_status_text $1818 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+08DA: remove_panel $GYM_DUMBBELLS_PANEL 
+03E6: remove_text_box 
+$1829 = 0 
+
+:GYMDUMB_7917
+jump @GYMDUMB_683 
+end_thread

@@ -1,0 +1,553 @@
+:HMLES
+thread 'HMLES' 
+$9454 = 0 
+$9456 = 0 
+$9455 = 0 
+2@ = 0 
+12@ = 0 
+13@ = 0 
+14@ = 0 
+11@ = 0 
+if 
+  $9454 == 1 
+jf @HMLES_109 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:HMLES_109
+0209: $9455 = random_int_in_ranges 0 4 
+$9455 = 3 
+if 
+   not $1787 == 0 
+jf @HMLES_159 
+12@ = 1 
+end_thread 
+jump @HMLES_236 
+
+:HMLES_159
+if 
+056D:   actor 0@ defined 
+jf @HMLES_229 
+if 
+   not Actor.Dead(0@)
+jf @HMLES_229 
+0792: disembark_instantly_actor 0@ 
+if 
+  $9455 == 2 
+jf @HMLES_229 
+Actor.SetWalkStyle(0@, "DRUNKMAN")
+
+:HMLES_229
+$1787 = 1 
+
+:HMLES_236
+wait 0 
+if and
+056D:   actor 0@ defined 
+  12@ == 0 
+jf @HMLES_3525 
+if and
+   Player.Defined($PLAYER_CHAR)
+   not Actor.Dead(0@)
+jf @HMLES_3518 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @HMLES_322 
+1@ = Actor.CurrentCar($PLAYER_ACTOR)
+2@ = 1 
+jump @HMLES_329 
+
+:HMLES_322
+2@ = 0 
+
+:HMLES_329
+if 
+  $9454 == 0 
+jf @HMLES_1945 
+if 
+  $9455 == 0 
+jf @HMLES_463 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 0@ radius 10.0 10.0 3.0 sphere 0 
+jf @HMLES_463 
+if 
+0364:   actor 0@ spotted_actor $PLAYER_ACTOR 
+jf @HMLES_463 
+0947: actor 0@ speak_from_audio_table 27 store_spoken_phrase_id_to 17@ 
+if 
+  2@ == 0 
+jf @HMLES_456 
+0859: AS_actor 0@ walk_alongisde_actor $PLAYER_ACTOR 
+
+:HMLES_456
+$9454 = 1 
+
+:HMLES_463
+if 
+  $9455 == 1 
+jf @HMLES_1012 
+if 
+  $9456 == 0 
+jf @HMLES_518 
+04ED: load_animation "SUNBATHE" 
+$9456 = 1 
+
+:HMLES_518
+if 
+  $9456 == 1 
+jf @HMLES_573 
+if 
+04EE:   animation "SUNBATHE" loaded 
+jf @HMLES_573 
+$9456 = 2 
+jump @HMLES_573 
+
+:HMLES_573
+if 
+  $9456 == 2 
+jf @HMLES_1012 
+if 
+04EE:   animation "SUNBATHE" loaded 
+jf @HMLES_1000 
+Actor.StorePos(0@, 7@, 8@, 9@)
+0615: define_AS_pack_begin 3@ 
+0605: actor -1 perform_animation "PARKSIT_M_IN" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_IDLEB" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_IDLEA" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_IDLEC" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_IDLEB" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_IDLEC" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PARKSIT_M_OUT" IFP "SUNBATHE" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 3@ 
+0618: assign_actor 0@ to_AS_pack 3@ 
+061B: remove_references_to_AS_pack 3@ 
+11@ = 0 
+$9454 = 1 
+$9456 = 3 
+jump @HMLES_1012 
+
+:HMLES_1000
+04ED: load_animation "SUNBATHE" 
+
+:HMLES_1012
+if 
+  $9455 == 2 
+jf @HMLES_1610 
+if 
+  $9456 == 0 
+jf @HMLES_1079 
+04ED: load_animation "FOOD" 
+04ED: load_animation "VENDING" 
+Model.Load(#CJ_JUICE_CAN)
+$9456 = 1 
+
+:HMLES_1079
+if 
+  $9456 == 1 
+jf @HMLES_1185 
+if and
+04EE:   animation "FOOD" loaded 
+04EE:   animation "VENDING" loaded 
+   Model.Available(#CJ_JUICE_CAN)
+jf @HMLES_1185 
+04C4: store_coords_to 7@ 8@ 9@ from_actor $PLAYER_ACTOR with_offset 0.0 1.3 0.0 
+19@ = Object.Create(#CJ_JUICE_CAN, 7@, 8@, 9@)
+$9456 = 2 
+
+:HMLES_1185
+if 
+  $9456 == 2 
+jf @HMLES_1610 
+if 
+04EE:   animation "VENDING" loaded 
+jf @HMLES_1599 
+if 
+04EE:   animation "FOOD" loaded 
+jf @HMLES_1584 
+Actor.StorePos(0@, 7@, 8@, 9@)
+0615: define_AS_pack_begin 3@ 
+070A: AS_actor -1 attach_to_object 19@ offset 0.1 0.1 0.0 on_bone 5 16 perform_animation "NULL" IFP_file "NULL" time -1 
+0605: actor -1 perform_animation "VEND_DRINK2_P" IFP "VENDING" framedelta 1004.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "WALK_DRUNK" IFP "PED" framedelta 1004.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0605: actor -1 perform_animation "VEND_DRINK_P" IFP "VENDING" framedelta 1004.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "WALK_DRUNK" IFP "PED" framedelta 1004.0 loop 0 lockX 1 lockY 1 lockF 0 time -1 
+0605: actor -1 perform_animation "VEND_DRINK2_P" IFP "VENDING" framedelta 1004.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "EAT_VOMIT_P" IFP "FOOD" framedelta 1004.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 3@ 
+0618: assign_actor 0@ to_AS_pack 3@ 
+061B: remove_references_to_AS_pack 3@ 
+$9454 = 1 
+$9456 = 3 
+jump @HMLES_1592 
+
+:HMLES_1584
+04ED: load_animation "FOOD" 
+
+:HMLES_1592
+jump @HMLES_1610 
+
+:HMLES_1599
+04ED: load_animation "VENDING" 
+
+:HMLES_1610
+if 
+  $9455 == 3 
+jf @HMLES_1945 
+if 
+  $9456 == 0 
+jf @HMLES_1665 
+04ED: load_animation "PAULNMAC" 
+$9456 = 1 
+
+:HMLES_1665
+if 
+  $9456 == 1 
+jf @HMLES_1713 
+if 
+04EE:   animation "PAULNMAC" loaded 
+jf @HMLES_1713 
+$9456 = 2 
+
+:HMLES_1713
+if 
+  $9456 == 2 
+jf @HMLES_1945 
+if 
+04EE:   animation "PAULNMAC" loaded 
+jf @HMLES_1933 
+Actor.StorePos(0@, 7@, 8@, 9@)
+0615: define_AS_pack_begin 3@ 
+0605: actor -1 perform_animation "PISS_IN" IFP "PAULNMAC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PISS_LOOP" IFP "PAULNMAC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+0605: actor -1 perform_animation "PISS_OUT" IFP "PAULNMAC" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+05DE: AS_actor -1 walk_around_ped_path 
+0616: define_AS_pack_end 3@ 
+0618: assign_actor 0@ to_AS_pack 3@ 
+061B: remove_references_to_AS_pack 3@ 
+$9454 = 1 
+$9456 = 3 
+jump @HMLES_1945 
+
+:HMLES_1933
+04ED: load_animation "PAULNMAC" 
+
+:HMLES_1945
+if 
+  $9454 == 1 
+jf @HMLES_2069 
+if 
+  $9455 == 0 
+jf @HMLES_1992 
+0947: actor 0@ speak_from_audio_table 192 store_spoken_phrase_id_to 17@ 
+
+:HMLES_1992
+if 
+  $9455 == 1 
+jf @HMLES_2021 
+0947: actor 0@ speak_from_audio_table 192 store_spoken_phrase_id_to 17@ 
+
+:HMLES_2021
+if 
+  $9455 == 2 
+jf @HMLES_2039 
+
+:HMLES_2039
+if 
+  $9455 == 3 
+jf @HMLES_2057 
+
+:HMLES_2057
+01BD: 4@ = current_time_in_ms 
+$9454 = 2 
+
+:HMLES_2069
+if 
+  $9454 == 2 
+jf @HMLES_2717 
+if 
+  $9455 == 0 
+jf @HMLES_2217 
+if 
+876F:   not text_priority_displayed 
+jf @HMLES_2217 
+01BD: 5@ = current_time_in_ms 
+0085: 6@ = 5@ // (int) 
+0062: 6@ -= 4@ // (int) 
+if and
+  6@ > 8000 
+  10000 > 6@ 
+jf @HMLES_2206 
+0947: actor 0@ speak_from_audio_table 198 store_spoken_phrase_id_to 17@ 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+$1787 = 0 
+12@ = 1 
+jump @HMLES_2217 
+
+:HMLES_2206
+0947: actor 0@ speak_from_audio_table 192 store_spoken_phrase_id_to 17@ 
+
+:HMLES_2217
+if 
+  $9455 == 1 
+jf @HMLES_2381 
+062E: get_actor 0@ task 1560 status_store_to 16@ // ret 7 if not found 
+if 
+04A4:   16@ == 1 // == constant 
+jf @HMLES_2381 
+0646: unknown_get_actor 0@ task_1560_status_store_to 16@ // similar to 062E 
+if 
+  16@ > 6 
+jf @HMLES_2381 
+if 
+  11@ == 0 
+jf @HMLES_2327 
+11@ = 1 
+01BD: 4@ = current_time_in_ms 
+jump @HMLES_2381 
+
+:HMLES_2327
+01BD: 5@ = current_time_in_ms 
+0085: 6@ = 5@ // (int) 
+0062: 6@ -= 4@ // (int) 
+if 
+  6@ > 15000 
+jf @HMLES_2381 
+$9454 = 0 
+$9456 = 0 
+
+:HMLES_2381
+if 
+  $9455 == 2 
+jf @HMLES_2553 
+062E: get_actor 0@ task 1560 status_store_to 16@ // ret 7 if not found 
+if 
+04A4:   16@ == 1 // == constant 
+jf @HMLES_2553 
+if 
+   Actor.Animation(0@) == "EAT_VOMIT_P"
+jf @HMLES_2553 
+04C4: store_coords_to 7@ 8@ 9@ from_actor 0@ with_offset 0.355 -0.116 0.048 
+0613: 10@ = actor 0@ animation "EAT_VOMIT_P" time 
+064B: 15@ = create_particle "PUKE" at 7@ 8@ 9@ type 1 
+10@ = 0.0 
+11@ = 0 
+$9454 = 3 
+
+:HMLES_2553
+if 
+  $9455 == 3 
+jf @HMLES_2717 
+062E: get_actor 0@ task 1560 status_store_to 16@ // ret 7 if not found 
+if 
+04A4:   16@ == 1 // == constant 
+jf @HMLES_2717 
+if 
+   Actor.Animation(0@) == "PISS_IN"
+jf @HMLES_2717 
+0613: 10@ = actor 0@ animation "PISS_IN" time 
+066A: 15@ = attach_particle "PETROLCAN" to_actor 0@ with_offset 0.0 0.58 -0.08 rotation 0.0 0.01 0.0 type 1 
+10@ = 0.0 
+11@ = 0 
+$9454 = 3 
+
+:HMLES_2717
+if 
+  $9454 == 3 
+jf @HMLES_3468 
+if 
+  $9455 == 0 
+jf @HMLES_2753 
+
+:HMLES_2753
+if 
+  $9455 == 1 
+jf @HMLES_2771 
+
+:HMLES_2771
+if 
+  $9455 == 2 
+jf @HMLES_2993 
+if 
+   not 10@ == 1.0 
+jf @HMLES_2969 
+if 
+   not Actor.Dead(0@)
+jf @HMLES_2883 
+if 
+   Actor.Animation(0@) == "EAT_VOMIT_P"
+jf @HMLES_2876 
+0613: 10@ = actor 0@ animation "EAT_VOMIT_P" time 
+
+:HMLES_2876
+jump @HMLES_2893 
+
+:HMLES_2883
+10@ = 1.0 
+
+:HMLES_2893
+if 
+  11@ == 0 
+jf @HMLES_2962 
+if 
+  10@ >= 0.5 
+jf @HMLES_2962 
+if 
+   not 15@ == -1 
+jf @HMLES_2955 
+064C: make_particle 15@ visible 
+
+:HMLES_2955
+11@ = 1 
+
+:HMLES_2962
+jump @HMLES_2993 
+
+:HMLES_2969
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+$1787 = 0 
+12@ = 1 
+
+:HMLES_2993
+if 
+  $9455 == 3 
+jf @HMLES_3468 
+if 
+  2 > 11@ 
+jf @HMLES_3199 
+062E: get_actor 0@ task 1560 status_store_to 16@ // ret 7 if not found 
+if 
+04A4:   16@ == 7 // == constant 
+jf @HMLES_3114 
+if 
+  11@ == 1 
+jf @HMLES_3093 
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+11@ = 2 
+
+:HMLES_3093
+$1787 = 0 
+12@ = 1 
+jump @HMLES_3199 
+
+:HMLES_3114
+if 
+04A4:   16@ == 1 // == constant 
+jf @HMLES_3182 
+0646: unknown_get_actor 0@ task_1560_status_store_to 16@ // similar to 062E 
+if 
+  16@ > 2 
+jf @HMLES_3175 
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+11@ = 2 
+
+:HMLES_3175
+jump @HMLES_3199 
+
+:HMLES_3182
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+11@ = 2 
+
+:HMLES_3199
+if 
+  11@ == 0 
+jf @HMLES_3368 
+if 
+   not Actor.Dead(0@)
+jf @HMLES_3282 
+if 
+   Actor.Animation(0@) == "PISS_IN"
+jf @HMLES_3275 
+0613: 10@ = actor 0@ animation "PISS_IN" time 
+
+:HMLES_3275
+jump @HMLES_3292 
+
+:HMLES_3282
+10@ = 1.0 
+
+:HMLES_3292
+if 
+  11@ == 0 
+jf @HMLES_3361 
+if 
+  10@ >= 0.6 
+jf @HMLES_3361 
+if 
+   not 15@ == -1 
+jf @HMLES_3354 
+064C: make_particle 15@ visible 
+
+:HMLES_3354
+11@ = 1 
+
+:HMLES_3361
+jump @HMLES_3468 
+
+:HMLES_3368
+if 
+  11@ == 1 
+jf @HMLES_3468 
+if 
+   Actor.Animation(0@) == "PISS_OUT"
+jf @HMLES_3468 
+0613: 10@ = actor 0@ animation "PISS_OUT" time 
+if 
+  10@ >= 0.42 
+jf @HMLES_3468 
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+11@ = 2 
+
+:HMLES_3468
+if 
+8104:   not actor $PLAYER_ACTOR near_actor 0@ radius 30.0 30.0 20.0 sphere 0 
+jf @HMLES_3518 
+$1787 = 0 
+12@ = 1 
+
+:HMLES_3518
+jump @HMLES_3539 
+
+:HMLES_3525
+$1787 = 0 
+12@ = 1 
+
+:HMLES_3539
+if 
+   Actor.Dead(0@)
+jf @HMLES_3569 
+12@ = 1 
+$1787 = 0 
+
+:HMLES_3569
+if 
+  12@ == 1 
+jf @HMLES_3694 
+if 
+056D:   actor 0@ defined 
+jf @HMLES_3624 
+if 
+   not Actor.Dead(0@)
+jf @HMLES_3624 
+05DE: AS_actor 0@ walk_around_ped_path 
+
+:HMLES_3624
+064E: stop_particle 15@ 
+0650: destroy_particle 15@ 
+Actor.RemoveReferences(0@)
+Model.Destroy(#CJ_JUICE_CAN)
+Object.RemoveReferences(19@)
+04EF: release_animation "FOOD" 
+04EF: release_animation "VENDING" 
+04EF: release_animation "SUNBATHE" 
+04EF: release_animation "PAULNMAC" 
+end_thread 
+
+:HMLES_3694
+jump @HMLES_236 
+end_thread

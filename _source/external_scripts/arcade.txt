@@ -1,0 +1,170 @@
+:ARCADE
+thread 'ARCADE' 
+1@ = 0 
+if 
+  1@ == -1 
+jf @ARCADE_58 
+0@ = Object.Create(#CJ_COIN_OP_2, 0.0, 0.0, 0.0)
+
+:ARCADE_58
+wait 0 
+if 
+03CA:   object 0@ exists 
+jf @ARCADE_749 
+if 
+0977:   player_in_radius_of_object 0@ external_script_trigger 
+jf @ARCADE_713 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @ARCADE_679 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.0 -1.0 1.0 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @ARCADE_645 
+if 
+00E1:   player 0 pressed_key 15 
+jf @ARCADE_602 
+if 
+  1@ == 1 
+jf @ARCADE_595 
+03E6: remove_text_box 
+1@ = 0 
+if 
+  $ONMISSION == 0 
+jf @ARCADE_563 
+if 
+88B4:   not test $390 bit 1 
+jf @ARCADE_524 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @ARCADE_517 
+Player.CanMove($PLAYER_CHAR) = False
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+fade 0 500 
+
+:ARCADE_298
+if 
+fading 
+jf @ARCADE_322 
+wait 0 
+jump @ARCADE_298 
+
+:ARCADE_322
+if 
+   Object.Model(0@) == #CJ_COIN_OP_2
+jf @ARCADE_354 
+$VIDEO_GAME = 1 
+jump @ARCADE_464 
+
+:ARCADE_354
+if or
+   Object.Model(0@) == #CJ_COIN_OP_3
+   Object.Model(0@) == #SWANK_CONSOLE
+jf @ARCADE_393 
+$VIDEO_GAME = 0 
+jump @ARCADE_464 
+
+:ARCADE_393
+if or
+   Object.Model(0@) == #CJ_COIN_OP_1
+   Object.Model(0@) == #SNESISH
+jf @ARCADE_432 
+$VIDEO_GAME = 3 
+jump @ARCADE_464 
+
+:ARCADE_432
+if or
+   Object.Model(0@) == #CJ_COIN_OP
+   Object.Model(0@) == #LOW_CONSOLE
+jf @ARCADE_464 
+$VIDEO_GAME = 2 
+
+:ARCADE_464
+wait 0 
+wait 0 
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @ARCADE_517 
+if 
+  $ONMISSION == 0 
+jf @ARCADE_517 
+Player.CanMove($PLAYER_CHAR) = True
+
+:ARCADE_517
+jump @ARCADE_556 
+
+:ARCADE_524
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @ARCADE_556 
+00BC: show_text_highpriority GXT 'BUSY' time 3000 flag 1  // You look a bit busy, why don't you come back later.
+
+:ARCADE_556
+jump @ARCADE_595 
+
+:ARCADE_563
+if 
+09E7:   player $PLAYER_CHAR not_frozen 
+jf @ARCADE_595 
+00BC: show_text_highpriority GXT 'BUSY' time 3000 flag 1  // You look a bit busy, why don't you come back later.
+
+:ARCADE_595
+jump @ARCADE_638 
+
+:ARCADE_602
+if 
+  1@ == 0 
+jf @ARCADE_638 
+0512: show_permanent_text_box 'DUAL_A'  // ~k~~VEHICLE_ENTER_EXIT~ Use Videogame
+1@ = 1 
+
+:ARCADE_638
+jump @ARCADE_672 
+
+:ARCADE_645
+if 
+  1@ == 1 
+jf @ARCADE_672 
+03E6: remove_text_box 
+1@ = 0 
+
+:ARCADE_672
+jump @ARCADE_706 
+
+:ARCADE_679
+if 
+  1@ == 1 
+jf @ARCADE_706 
+03E6: remove_text_box 
+1@ = 0 
+
+:ARCADE_706
+jump @ARCADE_742 
+
+:ARCADE_713
+if 
+  1@ == 1 
+jf @ARCADE_740 
+03E6: remove_text_box 
+1@ = 0 
+
+:ARCADE_740
+end_thread 
+
+:ARCADE_742
+jump @ARCADE_778 
+
+:ARCADE_749
+if 
+  1@ == 1 
+jf @ARCADE_776 
+03E6: remove_text_box 
+1@ = 0 
+
+:ARCADE_776
+end_thread 
+
+:ARCADE_778
+jump @ARCADE_58 
+end_thread

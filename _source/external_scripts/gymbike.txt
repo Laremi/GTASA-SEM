@@ -1,0 +1,1007 @@
+:GYMBIKE
+thread 'GYMBIKE' 
+$8732 = 0 
+$8723 = 0.0 
+$8731 = 0 
+$8722 = 0 
+$8727 = 0 
+5@ = 0.0 
+6@ = 0.0 
+7@ = 0.0 
+8@ = 0.0 
+9@ = 0.0 
+10@ = 0.0 
+11@ = 0.0 
+12@ = 0.0 
+13@ = 0.0 
+14@ = 0.0 
+15@ = 0.0 
+$8715 = 0.0 
+$8716 = 0.0 
+16@ = 0.0 
+17@ = 0.0 
+19@ = 0.0 
+$8725 = 0 
+20@ = 0 
+21@ = 0 
+22@ = 0 
+23@ = 0 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+27@ = 0 
+28@ = 0 
+$8715 = 0.0 
+$8716 = 0.0 
+$GYM_GYMBIKE_POWER = 0 
+$GYM_GYMBIKE_LEVEL = 0 
+$GYM_GYMBIKE_DISTANCE = 0 
+$8720 = 0.0 
+$8721 = 0.0 
+20@ = 0 
+21@ = 0 
+22@ = 0 
+23@ = 0 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+27@ = 0 
+28@ = 0 
+$GYM_GYMBIKE_LEVEL = 0 
+30@ = 0 
+29@ = 0 
+$8713 = 0 
+32@ = 0 
+33@ = 0 
+if 
+  30@ == 1 
+jf @GYMBIKE_486 
+0@ = Object.Init(#CM_BOX, 0.0, 0.0, 0.0)
+
+:GYMBIKE_486
+if 
+03CA:   object 0@ exists 
+jf @GYMBIKE_538 
+Object.StorePos(0@, 5@, 6@, 7@)
+Object.StorePos(0@, 11@, 12@, 13@)
+4@ = Object.Angle(0@)
+
+:GYMBIKE_538
+0088: $8730 = 7@ // (float) 
+$8730 += 0.15 
+0087: 3@ = 4@ // (float) 
+3@ -= 90.0 
+02F6: 1@ = sine 3@ // (float) 
+02F7: 2@ = cosine 3@ // (float) 
+1@ *= 0.05 
+2@ *= 0.05 
+0088: $8728 = 5@ // (float) 
+005F: $8728 += 2@ // (float) 
+0088: $8729 = 6@ // (float) 
+005F: $8729 += 1@ // (float) 
+$8724 = Object.Create(#PEDALS, $8728, $8729, $8730)
+Object.Angle($8724) = 4@
+0087: 10@ = 7@ // (float) 
+10@ += 0.9 
+0087: 3@ = 4@ // (float) 
+3@ -= 45.0 
+02F6: 1@ = sine 3@ // (float) 
+02F7: 2@ = cosine 3@ // (float) 
+1@ *= 2.8 
+2@ *= 2.8 
+0087: 8@ = 5@ // (float) 
+005B: 8@ += 2@ // (float) 
+0087: 9@ = 6@ // (float) 
+005B: 9@ += 1@ // (float) 
+4@ -= 180.0 
+3@ += 45.0 
+02F6: 1@ = sine 3@ // (float) 
+02F7: 2@ = cosine 3@ // (float) 
+1@ *= 0.5 
+2@ *= 0.5 
+005B: 5@ += 2@ // (float) 
+005B: 6@ += 1@ // (float) 
+0087: 3@ = 4@ // (float) 
+3@ -= 90.0 
+02F6: 1@ = sine 3@ // (float) 
+02F7: 2@ = cosine 3@ // (float) 
+1@ *= 0.5 
+2@ *= 0.5 
+0088: $8715 = 5@ // (float) 
+005F: $8715 += 2@ // (float) 
+0088: $8716 = 6@ // (float) 
+005F: $8716 += 1@ // (float) 
+7@ += 0.05 
+$GYM_GYMBIKE_POWER = 0 
+$GYM_GYMBIKE_DISTANCE = 0 
+$1829 = 0 
+
+:GYMBIKE_960
+wait 0 
+if 
+83CA:   not object 0@ exists 
+jf @GYMBIKE_987 
+Object.Destroy($8724)
+end_thread 
+
+:GYMBIKE_987
+if 
+8977:   not player_in_radius_of_object 0@ external_script_trigger 
+jf @GYMBIKE_1010 
+Object.Destroy($8724)
+end_thread 
+
+:GYMBIKE_1010
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GYMBIKE_6332 
+if 
+  20@ == 0 
+jf @GYMBIKE_1371 
+if and
+  28@ == 0 
+8A0C:   not player $PLAYER_CHAR on_jetpack 
+jf @GYMBIKE_1330 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere 5@ 6@ 7@ radius 1.2 1.2 4.0 on_foot 
+jf @GYMBIKE_1296 
+if 
+  29@ == 0 
+jf @GYMBIKE_1145 
+0512: show_permanent_text_box 'GYM1_81'  // Press ~k~~VEHICLE_ENTER_EXIT~ to use this machine.
+29@ = 1 
+
+:GYMBIKE_1145
+if 
+00E1:   player 0 pressed_key 15 
+jf @GYMBIKE_1289 
+if or
+  $ONMISSION == 0 
+  $ONMISSION_GYMFIGHT == 1 
+jf @GYMBIKE_1273 
+0835: get_month_day_to $CURRENT_MONTH_DAY get_month_to $CURRENT_MONTH 
+if or
+001C:   $CURRENT_MONTH_DAY > $GYM_MONTH_DAY_WHEN_LIMIT_REACHED // (int) 
+001C:   $CURRENT_MONTH > $GYM_MONTH_WHEN_LIMIT_REACHED // (int) 
+jf @GYMBIKE_1250 
+20@ = 1 
+$1830 = 1 
+$8714 = 0 
+jump @GYMBIKE_1266 
+
+:GYMBIKE_1250
+00BC: show_text_highpriority GXT 'GYM1_1A' time 4000 flag 1  // You have worked out enough for today, come back tomorrow!
+
+:GYMBIKE_1266
+jump @GYMBIKE_1289 
+
+:GYMBIKE_1273
+00BC: show_text_highpriority GXT 'GYM1_90' time 4000 flag 1  // ~s~You look a bit busy, why don't you come back later.
+
+:GYMBIKE_1289
+jump @GYMBIKE_1323 
+
+:GYMBIKE_1296
+if 
+  29@ == 1 
+jf @GYMBIKE_1323 
+03E6: remove_text_box 
+29@ = 0 
+
+:GYMBIKE_1323
+jump @GYMBIKE_1371 
+
+:GYMBIKE_1330
+if 
+80ED:   not actor $PLAYER_ACTOR sphere 0 near_point 5@ 6@ radius 2.0 2.0 on_foot 
+jf @GYMBIKE_1371 
+28@ = 0 
+
+:GYMBIKE_1371
+if 
+  20@ == 1 
+jf @GYMBIKE_6332 
+if and
+  $1830 == 1 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_1501 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Player.CanMove($PLAYER_CHAR) = False
+08C7: put_actor $PLAYER_ACTOR at $8715 $8716 7@ dont_warp_gang 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Actor.Angle($PLAYER_ACTOR) = 4@
+Camera.PointAt(11@, 12@, 10@, 2)
+$1830 = 2 
+
+:GYMBIKE_1501
+if 
+  $1829 == 0 
+jf @GYMBIKE_1611 
+04ED: load_animation "GYMNASIUM" 
+
+:GYMBIKE_1532
+if 
+84EE:   not animation "GYMNASIUM" loaded 
+jf @GYMBIKE_1567 
+wait 0 
+jump @GYMBIKE_1532 
+
+:GYMBIKE_1567
+040D: unload_wav 4 
+03CF: load_wav 1820 as 4 
+
+:GYMBIKE_1578
+if 
+83D0:   not wav 4 loaded 
+jf @GYMBIKE_1604 
+wait 0 
+jump @GYMBIKE_1578 
+
+:GYMBIKE_1604
+$1829 = 1 
+
+:GYMBIKE_1611
+if and
+  $1830 == 2 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_2197 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_GETON" IFP "GYMNASIUM" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+0512: show_permanent_text_box 'GYM1_60'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select level.~N~~k~~PED_SPRINT~ Select~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+if or
+  $CURRENT_LANGUAGE == 4 
+  $CURRENT_LANGUAGE == 2 
+jf @GYMBIKE_1890 
+08D4: $8712 = create_panel_with_title 'GYM1_D' position 31.0 180.0 width 178.0 columns 1 interactive 1 background 1 alignment 0  // Bike
+08DB: set_panel $8712 column 0 header 'GYM1_89' data 'GYM1_61' 'GYM1_62' 'GYM1_63' 'GYM1_64' 'GYM1_65' 'GYM1_66' 'GYM1_67' 'GYM1_68' 'GYM1_69' 'GYM1_70' 'DUMMY' 'DUMMY'  // Level // Level 1 // Level 2 // Level 3 // Level 4 // Level 5 // Level 6 // Level 7 // Level 8 // Level 9 // Level 10
+jump @GYMBIKE_2051 
+
+:GYMBIKE_1890
+08D4: $8712 = create_panel_with_title 'GYM1_D' position 31.0 150.0 width 178.0 columns 1 interactive 1 background 1 alignment 0  // Bike
+08DB: set_panel $8712 column 0 header 'GYM1_89' data 'GYM1_61' 'GYM1_62' 'GYM1_63' 'GYM1_64' 'GYM1_65' 'GYM1_66' 'GYM1_67' 'GYM1_68' 'GYM1_69' 'GYM1_70' 'DUMMY' 'DUMMY'  // Level // Level 1 // Level 2 // Level 3 // Level 4 // Level 5 // Level 6 // Level 7 // Level 8 // Level 9 // Level 10
+
+:GYMBIKE_2051
+090E: set_panel $8712 active_row 0 
+
+:GYMBIKE_2058
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_2183 
+wait 0 
+$8714 += 1 
+if and
+00E1:   player 0 pressed_key 15 
+  $8714 > 20 
+jf @GYMBIKE_2130 
+03E6: remove_text_box 
+08DA: remove_panel $8712 
+$GYM_GYMBIKE_LEVEL = 0 
+jump @GYMBIKE_5327 
+
+:GYMBIKE_2130
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMBIKE_2176 
+03E6: remove_text_box 
+08D7: $GYM_GYMBIKE_LEVEL = panel $8712 active_row 
+$GYM_GYMBIKE_LEVEL += 1 
+08DA: remove_panel $8712 
+jump @GYMBIKE_2183 
+
+:GYMBIKE_2176
+jump @GYMBIKE_2058 
+
+:GYMBIKE_2183
+$1830 = 3 
+33@ = 0 
+
+:GYMBIKE_2197
+if and
+  $1830 == 3 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_2388 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_GETON"
+jf @GYMBIKE_2388 
+0613: 15@ = actor $PLAYER_ACTOR animation "GYM_BIKE_GETON" time 
+if 
+  15@ == 1.0 
+jf @GYMBIKE_2388 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_SLOW" IFP "GYMNASIUM" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+075A: set_object $8724 animation "PEDALS_SLOW" IFP_file "GYMNASIUM" 4.0 lockF 1 loop -1 // IF AND SET 
+$1830 = 4 
+
+:GYMBIKE_2388
+if and
+  $1830 == 4 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_2583 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_SLOW"
+jf @GYMBIKE_2583 
+0613: 15@ = actor $PLAYER_ACTOR animation "GYM_BIKE_SLOW" time 
+if 
+  15@ == 0.0 
+jf @GYMBIKE_2583 
+0612: set_actor $PLAYER_ACTOR animation "GYM_BIKE_SLOW" paused 0 
+04F7: status_text $GYM_GYMBIKE_POWER type 1 line 1 GXT 'GYM1_1' // global_variable  // power
+04F7: status_text $GYM_GYMBIKE_LEVEL type 0 line 2 GXT 'GYM1_4' // global_variable  // level
+04F7: status_text $GYM_GYMBIKE_DISTANCE type 0 line 3 GXT 'GYM1_3' // global_variable  // distance
+21@ = 1 
+$1830 = 5 
+33@ = 0 
+
+:GYMBIKE_2583
+if and
+  $1830 == 5 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_6332 
+if 
+  $8713 == 0 
+jf @GYMBIKE_2642 
+0512: show_permanent_text_box 'GYM1_40'  // Press ~k~~PED_SPRINT~ rapidly to begin to pedal.
+$8713 = 1 
+
+:GYMBIKE_2642
+if and
+  33@ > 4000 
+  $8713 == 1 
+jf @GYMBIKE_2688 
+03E6: remove_text_box 
+0512: show_permanent_text_box 'GYM1_41'  // To change the level press ~k~~CONVERSATION_NO~ or ~k~~CONVERSATION_YES~.
+$8713 = 2 
+
+:GYMBIKE_2688
+if and
+  33@ > 8000 
+  $8713 == 2 
+jf @GYMBIKE_2723 
+03E6: remove_text_box 
+$8713 = 101 
+
+:GYMBIKE_2723
+0653: 19@ = float_stat 22 
+19@ /= 100.0 
+0087: 16@ = 17@ // (float) 
+005B: 16@ += 19@ // (float) 
+007F: 14@ -= frame_delta_time * 0.35 // (float) 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMBIKE_2816 
+if 
+  22@ == 0 
+jf @GYMBIKE_2816 
+005B: 14@ += 16@ // (float) 
+22@ = 1 
+
+:GYMBIKE_2816
+if 
+80E1:   not player 0 pressed_key 16 
+jf @GYMBIKE_2858 
+if 
+  22@ == 1 
+jf @GYMBIKE_2858 
+22@ = 0 
+
+:GYMBIKE_2858
+if 
+  0.0 > 14@ 
+jf @GYMBIKE_2889 
+14@ = 0.0 
+
+:GYMBIKE_2889
+if 
+  14@ > 100.0 
+jf @GYMBIKE_2920 
+14@ = 100.0 
+
+:GYMBIKE_2920
+if 
+  21@ == 1 
+jf @GYMBIKE_3053 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_SLOW"
+jf @GYMBIKE_3053 
+0612: set_actor $PLAYER_ACTOR animation "GYM_BIKE_SLOW" paused 1 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_SLOW" at 0.5 times_normal_rate 
+0836: set_object $8724 animation "PEDALS_SLOW" at 0.5 times_normal_rate 
+32@ = 0 
+21@ = 2 
+
+:GYMBIKE_3053
+if and
+  21@ == 2 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_6228 
+0653: 19@ = float_stat 22 
+19@ /= 200.0 
+if 
+  0.0 > 19@ 
+jf @GYMBIKE_3124 
+19@ = 0.0 
+
+:GYMBIKE_3124
+0090: $8725 = float 19@ to_integer 
+0084: $8726 = $GYM_GYMBIKE_LEVEL // (int) 
+0060: $8726 -= $8725 // (int) 
+if 
+  14@ == 0.0 
+jf @GYMBIKE_3301 
+if 
+  23@ == 0 
+jf @GYMBIKE_3301 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_STILL" IFP "GYMNASIUM" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+075A: set_object $8724 animation "PEDALS_STILL" IFP_file "GYMNASIUM" 4.0 lockF 1 loop -1 // IF AND SET 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+23@ = 1 
+
+:GYMBIKE_3301
+if 
+  24@ == 0 
+jf @GYMBIKE_3459 
+if and
+  3 > $8726 
+   not 14@ == 0.0 
+jf @GYMBIKE_3459 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_SLOW" IFP "GYMNASIUM" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+075A: set_object $8724 animation "PEDALS_SLOW" IFP_file "GYMNASIUM" 4.0 lockF 1 loop -1 // IF AND SET 
+24@ = 1 
+25@ = 0 
+26@ = 0 
+23@ = 0 
+
+:GYMBIKE_3459
+if 
+  25@ == 0 
+jf @GYMBIKE_3623 
+if and
+  $8726 > 2 
+  7 > $8726 
+   not 14@ == 0.0 
+jf @GYMBIKE_3623 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_FAST" IFP "GYMNASIUM" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+075A: set_object $8724 animation "PEDALS_MED" IFP_file "GYMNASIUM" 4.0 lockF 1 loop -1 // IF AND SET 
+24@ = 0 
+26@ = 0 
+25@ = 1 
+23@ = 0 
+
+:GYMBIKE_3623
+if 
+  26@ == 0 
+jf @GYMBIKE_3790 
+if and
+  $8726 > 6 
+  11 > $8726 
+   not 14@ == 0.0 
+jf @GYMBIKE_3790 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_FASTER" IFP "GYMNASIUM" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time -1 
+075A: set_object $8724 animation "PEDALS_FAST" IFP_file "GYMNASIUM" 4.0 lockF 1 loop -1 // IF AND SET 
+24@ = 0 
+25@ = 0 
+26@ = 1 
+23@ = 0 
+
+:GYMBIKE_3790
+if 
+00E1:   player 0 pressed_key 11 
+jf @GYMBIKE_3928 
+if 
+  27@ == 0 
+jf @GYMBIKE_3928 
+if and
+  $GYM_GYMBIKE_LEVEL > 0 
+  10 > $GYM_GYMBIKE_LEVEL 
+jf @GYMBIKE_3928 
+$GYM_GYMBIKE_LEVEL += 1 
+if 
+03D0:   wav 4 loaded 
+jf @GYMBIKE_3880 
+097B: play_audio_at_object 0@ event 1116 
+
+:GYMBIKE_3880
+14@ -= 20.0 
+if 
+  0.0 > 14@ 
+jf @GYMBIKE_3921 
+14@ = 0.0 
+
+:GYMBIKE_3921
+27@ = 1 
+
+:GYMBIKE_3928
+if 
+00E1:   player 0 pressed_key 10 
+jf @GYMBIKE_4025 
+if 
+  27@ == 0 
+jf @GYMBIKE_4025 
+if and
+  $GYM_GYMBIKE_LEVEL > 1 
+  11 > $GYM_GYMBIKE_LEVEL 
+jf @GYMBIKE_4025 
+$GYM_GYMBIKE_LEVEL -= 1 
+if 
+03D0:   wav 4 loaded 
+jf @GYMBIKE_4018 
+097B: play_audio_at_object 0@ event 1116 
+
+:GYMBIKE_4018
+27@ = 2 
+
+:GYMBIKE_4025
+if 
+80E1:   not player 0 pressed_key 11 
+jf @GYMBIKE_4067 
+if 
+  27@ == 1 
+jf @GYMBIKE_4067 
+27@ = 0 
+
+:GYMBIKE_4067
+if 
+80E1:   not player 0 pressed_key 10 
+jf @GYMBIKE_4109 
+if 
+  27@ == 2 
+jf @GYMBIKE_4109 
+27@ = 0 
+
+:GYMBIKE_4109
+if 
+  $GYM_GYMBIKE_LEVEL == 1 
+jf @GYMBIKE_4137 
+17@ = 6.5 
+
+:GYMBIKE_4137
+if 
+  $GYM_GYMBIKE_LEVEL == 2 
+jf @GYMBIKE_4165 
+17@ = 5.9 
+
+:GYMBIKE_4165
+if 
+  $GYM_GYMBIKE_LEVEL == 3 
+jf @GYMBIKE_4193 
+17@ = 5.0 
+
+:GYMBIKE_4193
+if 
+  $GYM_GYMBIKE_LEVEL == 4 
+jf @GYMBIKE_4221 
+17@ = 4.3 
+
+:GYMBIKE_4221
+if 
+  $GYM_GYMBIKE_LEVEL == 5 
+jf @GYMBIKE_4249 
+17@ = 3.7 
+
+:GYMBIKE_4249
+if 
+  $GYM_GYMBIKE_LEVEL == 6 
+jf @GYMBIKE_4277 
+17@ = 2.9 
+
+:GYMBIKE_4277
+if 
+  $GYM_GYMBIKE_LEVEL == 7 
+jf @GYMBIKE_4305 
+17@ = 2.2 
+
+:GYMBIKE_4305
+if 
+  $GYM_GYMBIKE_LEVEL == 8 
+jf @GYMBIKE_4333 
+17@ = 1.5 
+
+:GYMBIKE_4333
+if 
+  $GYM_GYMBIKE_LEVEL == 9 
+jf @GYMBIKE_4361 
+17@ = 1.1 
+
+:GYMBIKE_4361
+if 
+  $GYM_GYMBIKE_LEVEL == 10 
+jf @GYMBIKE_4389 
+17@ = 0.7 
+
+:GYMBIKE_4389
+if 
+  14@ >= 0.0 
+jf @GYMBIKE_4441 
+if 
+  10.0 >= 14@ 
+jf @GYMBIKE_4441 
+18@ = 0.9 
+
+:GYMBIKE_4441
+if 
+  14@ >= 11.0 
+jf @GYMBIKE_4493 
+if 
+  20.0 >= 14@ 
+jf @GYMBIKE_4493 
+18@ = 1.0 
+
+:GYMBIKE_4493
+if 
+  14@ >= 21.0 
+jf @GYMBIKE_4545 
+if 
+  30.0 >= 14@ 
+jf @GYMBIKE_4545 
+18@ = 1.1 
+
+:GYMBIKE_4545
+if 
+  14@ >= 31.0 
+jf @GYMBIKE_4597 
+if 
+  40.0 >= 14@ 
+jf @GYMBIKE_4597 
+18@ = 1.2 
+
+:GYMBIKE_4597
+if 
+  14@ >= 41.0 
+jf @GYMBIKE_4649 
+if 
+  50.0 >= 14@ 
+jf @GYMBIKE_4649 
+18@ = 1.3 
+
+:GYMBIKE_4649
+if 
+  14@ >= 51.0 
+jf @GYMBIKE_4701 
+if 
+  60.0 >= 14@ 
+jf @GYMBIKE_4701 
+18@ = 1.4 
+
+:GYMBIKE_4701
+if 
+  14@ >= 61.0 
+jf @GYMBIKE_4753 
+if 
+  70.0 >= 14@ 
+jf @GYMBIKE_4753 
+18@ = 1.5 
+
+:GYMBIKE_4753
+if 
+  14@ >= 71.0 
+jf @GYMBIKE_4805 
+if 
+  80.0 >= 14@ 
+jf @GYMBIKE_4805 
+18@ = 1.6 
+
+:GYMBIKE_4805
+if 
+  14@ >= 81.0 
+jf @GYMBIKE_4857 
+if 
+  90.0 >= 14@ 
+jf @GYMBIKE_4857 
+18@ = 1.7 
+
+:GYMBIKE_4857
+if 
+  14@ >= 91.0 
+jf @GYMBIKE_4909 
+if 
+  100.0 >= 14@ 
+jf @GYMBIKE_4909 
+18@ = 1.8 
+
+:GYMBIKE_4909
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_SLOW"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_4968 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_SLOW" at 18@ times_normal_rate 
+
+:GYMBIKE_4968
+if and
+0837:   object $8724 animation == "PEDALS_SLOW" 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5023 
+0836: set_object $8724 animation "PEDALS_SLOW" at 18@ times_normal_rate 
+
+:GYMBIKE_5023
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_FAST"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5082 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_FAST" at 18@ times_normal_rate 
+
+:GYMBIKE_5082
+if and
+0837:   object $8724 animation == "PEDALS_MED" 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5135 
+0836: set_object $8724 animation "PEDALS_MED" at 18@ times_normal_rate 
+
+:GYMBIKE_5135
+if and
+   Actor.Animation($PLAYER_ACTOR) == "GYM_BIKE_FASTER"
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5198 
+0393: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_FASTER" at 18@ times_normal_rate 
+
+:GYMBIKE_5198
+if and
+0837:   object $8724 animation == "PEDALS_FAST" 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5253 
+0836: set_object $8724 animation "PEDALS_FAST" at 18@ times_normal_rate 
+
+:GYMBIKE_5253
+if or
+00E1:   player 0 pressed_key 15 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBIKE_5787 
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBIKE_5311 
+$GYM_DAY_LIMIT = 0.0 
+
+:GYMBIKE_5311
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5787 
+
+:GYMBIKE_5327
+015B: shake_player_controller 0 time 1 intensity 1 
+0623: add $GYM_GYMBIKE_DISTANCE to_integer_stat 29 
+0085: 31@ = 33@ // (int) 
+31@ /= 1000 
+0623: add 31@ to_integer_stat 45 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5468 
+0605: actor $PLAYER_ACTOR perform_animation "GYM_BIKE_GETOFF" IFP "GYMNASIUM" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+075A: set_object $8724 animation "PEDALS_STILL" IFP_file "GYMNASIUM" 4.0 lockF 0 loop -1 // IF AND SET 
+
+:GYMBIKE_5468
+21@ = 0 
+22@ = 0 
+23@ = 0 
+24@ = 0 
+25@ = 0 
+26@ = 0 
+27@ = 0 
+20@ = 0 
+$1830 = 0 
+$GYM_GYMBIKE_LEVEL = 0 
+$GYM_GYMBIKE_DISTANCE = 0 
+$8721 = 0.0 
+$8720 = 0.0 
+$GYM_GYMBIKE_POWER = 0 
+14@ = 0.0 
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  0.0 >= $GYM_STAT_FAT 
+jf @GYMBIKE_5619 
+062A: change_float_stat 21 to 0.0 
+
+:GYMBIKE_5619
+if 
+03CA:   object 0@ exists 
+jf @GYMBIKE_5642 
+Object.CollisionDetection(0@) = True
+
+:GYMBIKE_5642
+$1813 = 0 
+$1814 = 0 
+$1829 = 0 
+04EF: release_animation "GYMNASIUM" 
+040D: unload_wav 4 
+0151: remove_status_text $GYM_GYMBIKE_POWER 
+0151: remove_status_text $GYM_GYMBIKE_LEVEL 
+0151: remove_status_text $GYM_GYMBIKE_DISTANCE 
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = False
+wait 0 
+if 
+   not Actor.Dead($PLAYER_ACTOR)
+jf @GYMBIKE_5731 
+Player.CanMove($PLAYER_CHAR) = True
+
+:GYMBIKE_5731
+28@ = 1 
+08DA: remove_panel $8712 
+03E6: remove_text_box 
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:GYMBIKE_5759
+if 
+00E1:   player 0 pressed_key 16 
+jf @GYMBIKE_5787 
+wait 0 
+jump @GYMBIKE_5759 
+
+:GYMBIKE_5787
+if 
+03CA:   object 0@ exists 
+jf @GYMBIKE_5912 
+if 
+03D0:   wav 4 loaded 
+jf @GYMBIKE_5912 
+if 
+  14@ > 10.0 
+jf @GYMBIKE_5879 
+if 
+  $8732 == 0 
+jf @GYMBIKE_5872 
+097B: play_audio_at_object 0@ event 1113 
+$8732 = 1 
+
+:GYMBIKE_5872
+jump @GYMBIKE_5912 
+
+:GYMBIKE_5879
+if 
+  $8732 == 1 
+jf @GYMBIKE_5912 
+097B: play_audio_at_object 0@ event 1114 
+$8732 = 0 
+
+:GYMBIKE_5912
+if 
+  32@ > 250 
+jf @GYMBIKE_6228 
+32@ -= 250 
+0088: $8720 = 14@ // (float) 
+$8720 /= 10.0 
+008D: $6 = integer $GYM_GYMBIKE_LEVEL to_float 
+$6 /= 10.0 
+$6 += 1.0 
+0069: $6 *= $8720 // (float) 
+0059: $4 += $6 // (float) 
+if 
+  $4 >= 400.0 
+jf @GYMBIKE_6146 
+$4 -= 400.0 
+0653: $GYM_STAT_FAT = float_stat 21 
+if 
+  $GYM_STAT_FAT >= 1.0 
+jf @GYMBIKE_6069 
+0626: decrease_float_stat 21 by 8.0 
+
+:GYMBIKE_6069
+if 
+  $8733 == 3 
+jf @GYMBIKE_6120 
+$8733 = 0 
+0624: add 4.0 to_float_stat 22 
+$GYM_DAY_LIMIT += 4.0 
+jump @GYMBIKE_6146 
+
+:GYMBIKE_6120
+0A1F: increase_float_stat 22 by 4.0 
+$GYM_DAY_LIMIT += 4.0 
+$8733 += 1 
+
+:GYMBIKE_6146
+if 
+  $GYM_DAY_LIMIT > 200.0 
+jf @GYMBIKE_6191 
+0835: get_month_day_to $GYM_MONTH_DAY_WHEN_LIMIT_REACHED get_month_to $GYM_MONTH_WHEN_LIMIT_REACHED 
+00BC: show_text_highpriority GXT 'GYM1_1B' time 4000 flag 1  // You have reached your limit for today, come back tomorrow!
+
+:GYMBIKE_6191
+if 
+   not $GYM_GYMBIKE_DISTANCE >= 999999 
+jf @GYMBIKE_6228 
+0059: $8721 += $8720 // (float) 
+008C: $GYM_GYMBIKE_DISTANCE = float $8721 to_integer 
+
+:GYMBIKE_6228
+$8722 += 1 
+0084: $8731 = $GYM_GYMBIKE_POWER // (int) 
+$8731 -= 100 
+if 
+  $8731 > -40 
+jf @GYMBIKE_6275 
+$8731 = -40 
+
+:GYMBIKE_6275
+if 
+002C:   $8722 >= $8731 // (int) 
+jf @GYMBIKE_6324 
+$8722 = 0 
+$GYM_GYMBIKE_POWER *= 12 
+$GYM_GYMBIKE_POWER /= 10 
+015B: shake_player_controller 0 time 100 intensity $GYM_GYMBIKE_POWER 
+
+:GYMBIKE_6324
+0090: $GYM_GYMBIKE_POWER = float 14@ to_integer 
+
+:GYMBIKE_6332
+jump @GYMBIKE_960 
+end_thread 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP 
+0000: NOP
