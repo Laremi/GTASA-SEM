@@ -1,0 +1,3090 @@
+:DANCE
+thread 'DANCE' 
+08BA: set $5295 bit 31 
+09BD: allow_other_threads_to_display_text_boxes 1 
+03F0: enable_text_draw 1 
+09EE: set_status_text_stay_on_screen 1 
+if 
+  13@ > 0 
+jf @DANCE_72 
+5@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:DANCE_72
+18@ = 5 
+23@ = 5 
+16@ = -1 
+24@ = -1 
+17@ = -1 
+13@ = 0 
+$DANCE_SCORE = 0 
+$9528 = 0 
+$9527 = -1 
+0209: $9529 = random_int_in_ranges 1 57 
+$636 = 0 
+22@ = 5 
+32@ = 10000 
+
+:DANCE_166
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DANCE_376 
+if 
+  6@ > 0 
+jf @DANCE_362 
+if 
+  $5298 == 1 
+jf @DANCE_254 
+if 
+   not 6@ == 2 
+jf @DANCE_254 
+6@ = 2 
+7@ = 0 
+
+:DANCE_254
+if 
+  5@ == -1 
+jf @DANCE_311 
+if 
+   not 22@ == 5 
+jf @DANCE_297 
+gosub @DANCE_9491 
+
+:DANCE_297
+gosub @DANCE_390 
+jump @DANCE_355 
+
+:DANCE_311
+if 
+   not Actor.Dead(5@)
+jf @DANCE_348 
+gosub @DANCE_9491 
+gosub @DANCE_390 
+jump @DANCE_355 
+
+:DANCE_348
+gosub @DANCE_16610 
+
+:DANCE_355
+jump @DANCE_369 
+
+:DANCE_362
+gosub @DANCE_390 
+
+:DANCE_369
+jump @DANCE_383 
+
+:DANCE_376
+gosub @DANCE_16610 
+
+:DANCE_383
+jump @DANCE_166 
+
+:DANCE_390
+0871: init_jump_table 6@ total_jumps 4 default_jump 0 @DANCE_509 jumps 0 @DANCE_453 1 @DANCE_467 2 @DANCE_481 3 @DANCE_495 -1 @DANCE_509 -1 @DANCE_509 -1 @DANCE_509 
+
+:DANCE_453
+gosub @DANCE_511 
+jump @DANCE_509 
+
+:DANCE_467
+gosub @DANCE_1099 
+jump @DANCE_509 
+
+:DANCE_481
+gosub @DANCE_2095 
+jump @DANCE_509 
+
+:DANCE_495
+gosub @DANCE_2421 
+jump @DANCE_509 
+
+:DANCE_509
+return 
+
+:DANCE_511
+0871: init_jump_table 7@ total_jumps 4 default_jump 0 @DANCE_1097 jumps 0 @DANCE_574 1 @DANCE_655 2 @DANCE_812 3 @DANCE_957 -1 @DANCE_1097 -1 @DANCE_1097 -1 @DANCE_1097 
+
+:DANCE_574
+Player.CanMove($PLAYER_CHAR) = False
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+03F4: set_all_cars_apply_damage_rules 0 
+0826: enable_hud 0 
+0581: enable_radar 0 
+if 
+   not 5@ == -1 
+jf @DANCE_634 
+0253: save_current_time 
+
+:DANCE_634
+fade 0 500 
+7@ += 1 
+jump @DANCE_1097 
+
+:DANCE_655
+if 
+   not fading 
+jf @DANCE_805 
+gosub @DANCE_2773 
+04ED: load_animation v$DANCE_ANIM_IFP 
+if 
+84EE:   not animation v$DANCE_ANIM_IFP loaded 
+jf @DANCE_703 
+jump @DANCE_1097 
+
+:DANCE_703
+if 
+   not 5@ == -1 
+jf @DANCE_727 
+00C0: set_current_time_hours_to 0 minutes_to 0 
+
+:DANCE_727
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 1 at 0@ 1@ 2@ radius 1.5 
+Actor.PutAt($PLAYER_ACTOR, 0@, 1@, 2@)
+Actor.Angle($PLAYER_ACTOR) = 3@
+gosub @DANCE_6895 
+gosub @DANCE_5840 
+17@ = 0 
+0952: load_soundtrack 4@ 
+7@ += 1 
+
+:DANCE_805
+jump @DANCE_1097 
+
+:DANCE_812
+0953: get_soundtrack_status_to 13@ 
+if 
+04A4:   13@ == 2 // == constant 
+jf @DANCE_950 
+0954: start_playing_loaded_soundtrack 
+0812: AS_actor $PLAYER_ACTOR perform_animation "DANCE_LOOP" IFP v$DANCE_ANIM_IFP framedelta 99.0 loopA 1 lockX 0 lockY 0 lockF 1 time 1215752191 // versionB 
+if 
+   not Actor.Dead(5@)
+jf @DANCE_929 
+0812: AS_actor 5@ perform_animation "DANCE_LOOP" IFP v$DANCE_ANIM_IFP framedelta 99.0 loopA 1 lockX 0 lockY 0 lockF 1 time 1215752191 // versionB 
+
+:DANCE_929
+fade 1 500 
+33@ = 0 
+7@ += 1 
+
+:DANCE_950
+jump @DANCE_1097 
+
+:DANCE_957
+if 
+   not fading 
+jf @DANCE_1090 
+if 
+  5@ == -1 
+jf @DANCE_1052 
+if 
+  33@ >= 10000 
+jf @DANCE_1045 
+create_thread @BDISPLY 
+03C4: set_status_text $DANCE_SCORE type 0 GXT 'DNC_001' // global_variable  // Score:
+6@ = 1 
+7@ = 1 
+
+:DANCE_1045
+jump @DANCE_1090 
+
+:DANCE_1052
+create_thread @BDISPLY 
+03C4: set_status_text $DANCE_SCORE type 0 GXT 'DNC_001' // global_variable  // Score:
+6@ = 1 
+7@ = 1 
+
+:DANCE_1090
+jump @DANCE_1097 
+
+:DANCE_1097
+return 
+
+:DANCE_1099
+0871: init_jump_table 7@ total_jumps 1 default_jump 0 @DANCE_2093 jumps 1 @DANCE_1162 -1 @DANCE_2093 -1 @DANCE_2093 -1 @DANCE_2093 -1 @DANCE_2093 -1 @DANCE_2093 -1 @DANCE_2093 
+
+:DANCE_1162
+gosub @DANCE_5704 
+gosub @DANCE_8080 
+gosub @DANCE_5735 
+gosub @DANCE_5516 
+gosub @DANCE_2941 
+if 
+  6@ == 3 
+jf @DANCE_1222 
+jump @DANCE_2093 
+
+:DANCE_1222
+gosub @DANCE_3671 
+gosub @DANCE_5379 
+gosub @DANCE_5840 
+gosub @DANCE_8964 
+gosub @DANCE_9574 
+if 
+  22@ == 3 
+jf @DANCE_1396 
+if 
+  99999999 > $DANCE_SCORE 
+jf @DANCE_1350 
+if 
+  29@ == 2 
+jf @DANCE_1343 
+30@ = 10 
+30@ *= 2 
+005E: $DANCE_SCORE += 30@ // (int) 
+jump @DANCE_1350 
+
+:DANCE_1343
+$DANCE_SCORE += 10 
+
+:DANCE_1350
+26@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1389 
+gosub @DANCE_4125 
+
+:DANCE_1389
+jump @DANCE_2093 
+
+:DANCE_1396
+if 
+  22@ == 1 
+jf @DANCE_1535 
+if 
+  99999999 > $DANCE_SCORE 
+jf @DANCE_1489 
+if 
+  29@ == 2 
+jf @DANCE_1482 
+30@ = 50 
+30@ *= 2 
+005E: $DANCE_SCORE += 30@ // (int) 
+jump @DANCE_1489 
+
+:DANCE_1482
+$DANCE_SCORE += 50 
+
+:DANCE_1489
+28@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1528 
+gosub @DANCE_4125 
+
+:DANCE_1528
+jump @DANCE_2093 
+
+:DANCE_1535
+if 
+  22@ == 2 
+jf @DANCE_1674 
+if 
+  99999999 > $DANCE_SCORE 
+jf @DANCE_1628 
+if 
+  29@ == 2 
+jf @DANCE_1621 
+30@ = 20 
+30@ *= 2 
+005E: $DANCE_SCORE += 30@ // (int) 
+jump @DANCE_1628 
+
+:DANCE_1621
+$DANCE_SCORE += 20 
+
+:DANCE_1628
+26@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1667 
+gosub @DANCE_4125 
+
+:DANCE_1667
+jump @DANCE_2093 
+
+:DANCE_1674
+if 
+  22@ == 0 
+jf @DANCE_1777 
+if 
+  $DANCE_SCORE > 0 
+jf @DANCE_1724 
+$DANCE_SCORE -= 0 
+jump @DANCE_1731 
+
+:DANCE_1724
+$DANCE_SCORE = 0 
+
+:DANCE_1731
+27@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1770 
+gosub @DANCE_4752 
+
+:DANCE_1770
+jump @DANCE_2093 
+
+:DANCE_1777
+if 
+  22@ == 4 
+jf @DANCE_1880 
+if 
+  $DANCE_SCORE > 0 
+jf @DANCE_1827 
+$DANCE_SCORE -= 0 
+jump @DANCE_1834 
+
+:DANCE_1827
+$DANCE_SCORE = 0 
+
+:DANCE_1834
+27@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1873 
+gosub @DANCE_4752 
+
+:DANCE_1873
+jump @DANCE_2093 
+
+:DANCE_1880
+if 
+  22@ == 10 
+jf @DANCE_1983 
+if 
+  $DANCE_SCORE > 0 
+jf @DANCE_1930 
+$DANCE_SCORE -= 0 
+jump @DANCE_1937 
+
+:DANCE_1930
+$DANCE_SCORE = 0 
+
+:DANCE_1937
+27@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_1976 
+gosub @DANCE_4752 
+
+:DANCE_1976
+jump @DANCE_2093 
+
+:DANCE_1983
+if 
+  22@ == 11 
+jf @DANCE_2086 
+if 
+  $DANCE_SCORE > 0 
+jf @DANCE_2033 
+$DANCE_SCORE -= 0 
+jump @DANCE_2040 
+
+:DANCE_2033
+$DANCE_SCORE = 0 
+
+:DANCE_2040
+27@ += 1 
+gosub @DANCE_8143 
+if 
+   not 31@ == -1 
+jf @DANCE_2079 
+gosub @DANCE_4752 
+
+:DANCE_2079
+jump @DANCE_2093 
+
+:DANCE_2086
+jump @DANCE_2093 
+
+:DANCE_2093
+return 
+
+:DANCE_2095
+0871: init_jump_table 7@ total_jumps 4 default_jump 0 @DANCE_2419 jumps 0 @DANCE_2158 1 @DANCE_2179 2 @DANCE_2231 3 @DANCE_2405 -1 @DANCE_2419 -1 @DANCE_2419 -1 @DANCE_2419 
+
+:DANCE_2158
+fade 0 500 
+7@ += 1 
+jump @DANCE_2419 
+
+:DANCE_2179
+if 
+   not fading 
+jf @DANCE_2224 
+0953: get_soundtrack_status_to 13@ 
+if 
+04A4:   13@ == 3 // == constant 
+jf @DANCE_2217 
+0955: end_playing_loaded_soundtrack 
+
+:DANCE_2217
+7@ += 1 
+
+:DANCE_2224
+jump @DANCE_2419 
+
+:DANCE_2231
+0151: remove_status_text $DANCE_SCORE 
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 0 
+03F4: set_all_cars_apply_damage_rules 1 
+0826: enable_hud 1 
+0581: enable_radar 1 
+03E6: remove_text_box 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0812: AS_actor $PLAYER_ACTOR perform_animation "DANCE_LOOP" IFP v$DANCE_ANIM_IFP framedelta 16.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+if 
+   not Actor.Dead(5@)
+jf @DANCE_2364 
+0792: disembark_instantly_actor 5@ 
+0812: AS_actor 5@ perform_animation "DANCE_LOOP" IFP v$DANCE_ANIM_IFP framedelta 16.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:DANCE_2364
+if 
+   not 5@ == -1 
+jf @DANCE_2384 
+0254: restore_current_time 
+
+:DANCE_2384
+fade 1 1500 
+7@ += 1 
+jump @DANCE_2419 
+
+:DANCE_2405
+gosub @DANCE_16610 
+jump @DANCE_2419 
+
+:DANCE_2419
+return 
+
+:DANCE_2421
+0871: init_jump_table 7@ total_jumps 2 default_jump 0 @DANCE_2771 jumps 0 @DANCE_2484 1 @DANCE_2576 -1 @DANCE_2771 -1 @DANCE_2771 -1 @DANCE_2771 -1 @DANCE_2771 -1 @DANCE_2771 
+
+:DANCE_2484
+0991: set_soundtrack_paused 1 
+if 
+   Actor.Animation($PLAYER_ACTOR) == v$DANCE_ANIM
+jf @DANCE_2517 
+0612: set_actor $PLAYER_ACTOR animation v$DANCE_ANIM paused 0 
+
+:DANCE_2517
+if 
+   not Actor.Dead(5@)
+jf @DANCE_2562 
+if 
+   Actor.Animation(5@) == v$5303
+jf @DANCE_2562 
+0612: set_actor 5@ animation v$5303 paused 0 
+
+:DANCE_2562
+7@ += 1 
+jump @DANCE_2771 
+
+:DANCE_2576
+gosub @DANCE_2941 
+if 
+  18@ == 100 
+jf @DANCE_2629 
+$DANCE_SCORE = 0 
+6@ = 2 
+7@ = 0 
+jump @DANCE_2771 
+
+:DANCE_2629
+if 
+  18@ == 99 
+jf @DANCE_2764 
+if 
+  6@ > 0 
+jf @DANCE_2764 
+0991: set_soundtrack_paused 0 
+if 
+   Actor.Animation($PLAYER_ACTOR) == v$DANCE_ANIM
+jf @DANCE_2698 
+0612: set_actor $PLAYER_ACTOR animation v$DANCE_ANIM paused 1 
+
+:DANCE_2698
+if 
+   not Actor.Dead(5@)
+jf @DANCE_2743 
+if 
+   Actor.Animation(5@) == v$5303
+jf @DANCE_2743 
+0612: set_actor 5@ animation v$5303 paused 1 
+
+:DANCE_2743
+6@ = 1 
+7@ = 1 
+jump @DANCE_2771 
+
+:DANCE_2764
+jump @DANCE_2771 
+
+:DANCE_2771
+return 
+
+:DANCE_2773
+0871: init_jump_table 4@ total_jumps 4 default_jump 1 @DANCE_2915 jumps 1 @DANCE_2836 2 @DANCE_2855 3 @DANCE_2874 4 @DANCE_2898 -1 @DANCE_2939 -1 @DANCE_2939 -1 @DANCE_2939 
+
+:DANCE_2836
+06D1: v$DANCE_ANIM_IFP = "GFUNK" // v$ = string 
+jump @DANCE_2939 
+
+:DANCE_2855
+06D1: v$DANCE_ANIM_IFP = "GFUNK" // v$ = string 
+jump @DANCE_2939 
+
+:DANCE_2874
+06D1: v$DANCE_ANIM_IFP = "RUNNINGMAN" // v$ = string 
+jump @DANCE_2939 
+
+:DANCE_2898
+06D1: v$DANCE_ANIM_IFP = "WOP" // v$ = string 
+jump @DANCE_2939 
+
+:DANCE_2915
+06D1: v$DANCE_ANIM_IFP = "WOP" // v$ = string 
+4@ = 4 
+jump @DANCE_2939 
+
+:DANCE_2939
+return 
+
+:DANCE_2941
+gosub @DANCE_16948 
+0871: init_jump_table 23@ total_jumps 7 default_jump 0 @DANCE_3669 jumps 1 @DANCE_3395 2 @DANCE_3349 3 @DANCE_3303 4 @DANCE_3257 5 @DANCE_3011 99 @DANCE_3441 100 @DANCE_3624 
+
+:DANCE_3011
+if 
+  $9534 == 10 
+jf @DANCE_3050 
+18@ = 4 
+23@ = 4 
+jump @DANCE_3669 
+
+:DANCE_3050
+if 
+  $9534 == 13 
+jf @DANCE_3089 
+18@ = 3 
+23@ = 3 
+jump @DANCE_3669 
+
+:DANCE_3089
+if 
+  $9534 == 9 
+jf @DANCE_3128 
+18@ = 2 
+23@ = 2 
+jump @DANCE_3669 
+
+:DANCE_3128
+if 
+  $9534 == 14 
+jf @DANCE_3167 
+18@ = 1 
+23@ = 1 
+jump @DANCE_3669 
+
+:DANCE_3167
+if 
+00E1:   player 0 pressed_key 15 
+jf @DANCE_3212 
+18@ = 99 
+23@ = 99 
+33@ = 0 
+jump @DANCE_3669 
+
+:DANCE_3212
+if 
+00E1:   player 0 pressed_key 16 
+jf @DANCE_3250 
+18@ = 100 
+23@ = 100 
+jump @DANCE_3669 
+
+:DANCE_3250
+jump @DANCE_3669 
+
+:DANCE_3257
+18@ = 5 
+if 
+  $9534 == 0 
+jf @DANCE_3296 
+23@ = 5 
+jump @DANCE_3669 
+
+:DANCE_3296
+jump @DANCE_3669 
+
+:DANCE_3303
+18@ = 5 
+if 
+  $9534 == 0 
+jf @DANCE_3342 
+23@ = 5 
+jump @DANCE_3669 
+
+:DANCE_3342
+jump @DANCE_3669 
+
+:DANCE_3349
+18@ = 5 
+if 
+  $9534 == 0 
+jf @DANCE_3388 
+23@ = 5 
+jump @DANCE_3669 
+
+:DANCE_3388
+jump @DANCE_3669 
+
+:DANCE_3395
+18@ = 5 
+if 
+  $9534 == 0 
+jf @DANCE_3434 
+23@ = 5 
+jump @DANCE_3669 
+
+:DANCE_3434
+jump @DANCE_3669 
+
+:DANCE_3441
+18@ = 5 
+if 
+80E1:   not player 0 pressed_key 15 
+jf @DANCE_3486 
+23@ = 5 
+jump @DANCE_3669 
+jump @DANCE_3617 
+
+:DANCE_3486
+if 
+  5@ == -1 
+jf @DANCE_3573 
+if 
+   not 22@ == 5 
+jf @DANCE_3566 
+if and
+   not 6@ == 3 
+  33@ >= 800 
+jf @DANCE_3566 
+03E6: remove_text_box 
+6@ = 3 
+7@ = 0 
+return 
+
+:DANCE_3566
+jump @DANCE_3617 
+
+:DANCE_3573
+if and
+   not 6@ == 3 
+  33@ >= 800 
+jf @DANCE_3617 
+03E6: remove_text_box 
+6@ = 3 
+7@ = 0 
+return 
+
+:DANCE_3617
+jump @DANCE_3669 
+
+:DANCE_3624
+18@ = 5 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @DANCE_3662 
+23@ = 5 
+jump @DANCE_3669 
+
+:DANCE_3662
+jump @DANCE_3669 
+
+:DANCE_3669
+return 
+
+:DANCE_3671
+07B1: unknown_get_dance_track 0 store_to 14@ 13@ 15@ 
+if 
+  14@ > 3000 
+jf @DANCE_3717 
+22@ = 5 
+jump @DANCE_4123 
+
+:DANCE_3717
+if 
+001D:   15@ > 16@ // (int) 
+jf @DANCE_4034 
+if 
+  18@ == 5 
+jf @DANCE_3797 
+if 
+  -132 > 14@ 
+jf @DANCE_3790 
+22@ = 0 
+0085: 16@ = 15@ // (int) 
+return 
+
+:DANCE_3790
+jump @DANCE_4027 
+
+:DANCE_3797
+$1043 = 1 
+if 
+003B:   18@ == 13@ // (int) 
+jf @DANCE_4010 
+if and
+  42 >= 14@ 
+  14@ >= -42 
+jf @DANCE_3879 
+22@ = 1 
+$1043 = 3 
+0085: 16@ = 15@ // (int) 
+return 
+jump @DANCE_4003 
+
+:DANCE_3879
+if and
+  72 >= 14@ 
+  14@ >= -72 
+jf @DANCE_3935 
+22@ = 2 
+$1043 = 2 
+0085: 16@ = 15@ // (int) 
+return 
+jump @DANCE_4003 
+
+:DANCE_3935
+if and
+  132 >= 14@ 
+  14@ >= -132 
+jf @DANCE_3986 
+22@ = 3 
+0085: 16@ = 15@ // (int) 
+return 
+jump @DANCE_4003 
+
+:DANCE_3986
+22@ = 11 
+0085: 16@ = 15@ // (int) 
+return 
+
+:DANCE_4003
+jump @DANCE_4027 
+
+:DANCE_4010
+22@ = 10 
+0085: 16@ = 15@ // (int) 
+return 
+
+:DANCE_4027
+jump @DANCE_4123 
+
+:DANCE_4034
+if or
+  22@ == 1 
+  22@ == 2 
+  22@ == 3 
+jf @DANCE_4075 
+22@ = 8 
+return 
+
+:DANCE_4075
+if or
+  22@ == 0 
+  22@ == 4 
+  22@ == 10 
+  22@ == 11 
+jf @DANCE_4123 
+22@ = 9 
+return 
+
+:DANCE_4123
+return 
+
+:DANCE_4125
+0871: init_jump_table 17@ total_jumps 15 default_jump 1 @DANCE_4253 jumps 2 @DANCE_4282 3 @DANCE_4311 4 @DANCE_4340 5 @DANCE_4369 6 @DANCE_4398 7 @DANCE_4427 8 @DANCE_4456 
+0872: jump_table_jumps 9 @DANCE_4485 10 @DANCE_4514 11 @DANCE_4544 12 @DANCE_4574 13 @DANCE_4604 14 @DANCE_4634 15 @DANCE_4664 16 @DANCE_4694 -1 @DANCE_4724 
+
+:DANCE_4253
+06D1: v$DANCE_ANIM = "DANCE_G1" // v$ = string 
+17@ = 2 
+jump @DANCE_4724 
+
+:DANCE_4282
+06D1: v$DANCE_ANIM = "DANCE_G2" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4311
+06D1: v$DANCE_ANIM = "DANCE_G3" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4340
+06D1: v$DANCE_ANIM = "DANCE_G4" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4369
+06D1: v$DANCE_ANIM = "DANCE_G5" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4398
+06D1: v$DANCE_ANIM = "DANCE_G6" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4427
+06D1: v$DANCE_ANIM = "DANCE_G7" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4456
+06D1: v$DANCE_ANIM = "DANCE_G8" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4485
+06D1: v$DANCE_ANIM = "DANCE_G9" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4514
+06D1: v$DANCE_ANIM = "DANCE_G10" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4544
+06D1: v$DANCE_ANIM = "DANCE_G11" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4574
+06D1: v$DANCE_ANIM = "DANCE_G12" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4604
+06D1: v$DANCE_ANIM = "DANCE_G13" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4634
+06D1: v$DANCE_ANIM = "DANCE_G14" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4664
+06D1: v$DANCE_ANIM = "DANCE_G15" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4694
+06D1: v$DANCE_ANIM = "DANCE_G16" // v$ = string 
+17@ += 1 
+jump @DANCE_4724 
+
+:DANCE_4724
+0812: AS_actor $PLAYER_ACTOR perform_animation v$DANCE_ANIM IFP v$DANCE_ANIM_IFP framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+return 
+
+:DANCE_4752
+0871: init_jump_table 17@ total_jumps 15 default_jump 1 @DANCE_4880 jumps 2 @DANCE_4909 3 @DANCE_4938 4 @DANCE_4967 5 @DANCE_4996 6 @DANCE_5025 7 @DANCE_5054 8 @DANCE_5083 
+0872: jump_table_jumps 9 @DANCE_5112 10 @DANCE_5141 11 @DANCE_5171 12 @DANCE_5201 13 @DANCE_5231 14 @DANCE_5261 15 @DANCE_5291 16 @DANCE_5321 -1 @DANCE_5351 
+
+:DANCE_4880
+06D1: v$DANCE_ANIM = "DANCE_B1" // v$ = string 
+17@ = 2 
+jump @DANCE_5351 
+
+:DANCE_4909
+06D1: v$DANCE_ANIM = "DANCE_B2" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_4938
+06D1: v$DANCE_ANIM = "DANCE_B3" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_4967
+06D1: v$DANCE_ANIM = "DANCE_B4" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_4996
+06D1: v$DANCE_ANIM = "DANCE_B5" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5025
+06D1: v$DANCE_ANIM = "DANCE_B6" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5054
+06D1: v$DANCE_ANIM = "DANCE_B7" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5083
+06D1: v$DANCE_ANIM = "DANCE_B8" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5112
+06D1: v$DANCE_ANIM = "DANCE_B9" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5141
+06D1: v$DANCE_ANIM = "DANCE_B10" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5171
+06D1: v$DANCE_ANIM = "DANCE_B11" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5201
+06D1: v$DANCE_ANIM = "DANCE_B12" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5231
+06D1: v$DANCE_ANIM = "DANCE_B13" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5261
+06D1: v$DANCE_ANIM = "DANCE_B14" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5291
+06D1: v$DANCE_ANIM = "DANCE_B15" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5321
+06D1: v$DANCE_ANIM = "DANCE_B16" // v$ = string 
+17@ += 1 
+jump @DANCE_5351 
+
+:DANCE_5351
+0812: AS_actor $PLAYER_ACTOR perform_animation v$DANCE_ANIM IFP v$DANCE_ANIM_IFP framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+return 
+
+:DANCE_5379
+if 
+   Actor.Animation($PLAYER_ACTOR) == v$DANCE_ANIM
+jf @DANCE_5505 
+061A: get_actor $PLAYER_ACTOR animation v$DANCE_ANIM total_time_to 12@ 
+0613: 11@ = actor $PLAYER_ACTOR animation v$DANCE_ANIM time 
+0093: 8@ = integer 21@ to_float 
+0087: 0@ = 8@ // (float) 
+0073: 0@ /= 12@ // (float) 
+005B: 11@ += 0@ // (float) 
+if 
+  11@ >= 1.0 
+jf @DANCE_5489 
+31@ = 1 
+return 
+jump @DANCE_5498 
+
+:DANCE_5489
+31@ = -1 
+return 
+
+:DANCE_5498
+jump @DANCE_5514 
+
+:DANCE_5505
+31@ = 0 
+return 
+
+:DANCE_5514
+return 
+
+:DANCE_5516
+if 
+  5@ > -1 
+jf @DANCE_5702 
+if 
+   Actor.Animation(5@) == v$5303
+jf @DANCE_5644 
+061A: get_actor 5@ animation v$5303 total_time_to 12@ 
+0613: 11@ = actor 5@ animation v$5303 time 
+0093: 8@ = integer 21@ to_float 
+0087: 0@ = 8@ // (float) 
+0073: 0@ /= 12@ // (float) 
+005B: 11@ += 0@ // (float) 
+if 
+  11@ >= 1.0 
+jf @DANCE_5637 
+gosub @DANCE_7078 
+return 
+
+:DANCE_5637
+jump @DANCE_5702 
+
+:DANCE_5644
+07B1: unknown_get_dance_track 0 store_to 14@ 13@ 15@ 
+if 
+  15@ == 0 
+jf @DANCE_5702 
+if 
+  25 >= 14@ 
+jf @DANCE_5702 
+gosub @DANCE_7078 
+return 
+
+:DANCE_5702
+return 
+
+:DANCE_5704
+01BD: 19@ = current_time_in_ms 
+0085: 21@ = 19@ // (int) 
+0062: 21@ -= 20@ // (int) 
+0085: 20@ = 19@ // (int) 
+return 
+
+:DANCE_5735
+gosub @DANCE_5379 
+if 
+  31@ == 1 
+jf @DANCE_5838 
+if or
+  22@ == 1 
+  22@ == 2 
+  22@ == 3 
+  22@ == 8 
+jf @DANCE_5822 
+gosub @DANCE_4125 
+31@ = -1 
+return 
+jump @DANCE_5838 
+
+:DANCE_5822
+gosub @DANCE_4752 
+31@ = -1 
+return 
+
+:DANCE_5838
+return 
+
+:DANCE_5840
+0871: init_jump_table 17@ total_jumps 5 default_jump 0 @DANCE_6893 jumps -1 @DANCE_5903 4 @DANCE_6101 8 @DANCE_6299 12 @DANCE_6497 16 @DANCE_6695 -1 @DANCE_6893 -1 @DANCE_6893 
+
+:DANCE_5903
+if and
+  5@ == -1 
+  $5315[0] > 0.0 
+jf @DANCE_5977 
+Camera.SetPosition($5315[0], $5320[0], $5325[0], 0.0, 0.0, 0.0)
+Camera.PointAt($5330[0], $5335[0], $5340[0], 2)
+jump @DANCE_6094 
+
+:DANCE_5977
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset -2.3176 0.9635 0.5141 
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset -1.3381 0.8235 0.6587 
+10@ -= 1.0 
+2@ -= 1.0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Camera.PointAt(0@, 1@, 2@, 2)
+
+:DANCE_6094
+jump @DANCE_6893 
+
+:DANCE_6101
+if and
+  5@ == -1 
+  $5315[1] > 0.0 
+jf @DANCE_6175 
+Camera.SetPosition($5315[1], $5320[1], $5325[1], 0.0, 0.0, 0.0)
+Camera.PointAt($5330[1], $5335[1], $5340[1], 2)
+jump @DANCE_6292 
+
+:DANCE_6175
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset 3.5814 0.8987 0.6651 
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset 2.6071 0.853 0.8857 
+10@ -= 1.0 
+2@ -= 1.0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Camera.PointAt(0@, 1@, 2@, 2)
+
+:DANCE_6292
+jump @DANCE_6893 
+
+:DANCE_6299
+if and
+  5@ == -1 
+  $5315[2] > 0.0 
+jf @DANCE_6373 
+Camera.SetPosition($5315[2], $5320[2], $5325[2], 0.0, 0.0, 0.0)
+Camera.PointAt($5330[2], $5335[2], $5340[2], 2)
+jump @DANCE_6490 
+
+:DANCE_6373
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset 0.3843 2.9502 1.8476 
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset 0.461 2.0089 1.5188 
+10@ -= 1.0 
+2@ -= 1.0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Camera.PointAt(0@, 1@, 2@, 2)
+
+:DANCE_6490
+jump @DANCE_6893 
+
+:DANCE_6497
+if and
+  5@ == -1 
+  $5315[3] > 0.0 
+jf @DANCE_6571 
+Camera.SetPosition($5315[3], $5320[3], $5325[3], 0.0, 0.0, 0.0)
+Camera.PointAt($5330[3], $5335[3], $5340[3], 2)
+jump @DANCE_6688 
+
+:DANCE_6571
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset -2.2621 0.1226 0.6863 
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset -1.2706 0.1649 0.8096 
+10@ -= 1.0 
+2@ -= 1.0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Camera.PointAt(0@, 1@, 2@, 2)
+
+:DANCE_6688
+jump @DANCE_6893 
+
+:DANCE_6695
+if and
+  5@ == -1 
+  $5315[4] > 0.0 
+jf @DANCE_6769 
+Camera.SetPosition($5315[4], $5320[4], $5325[4], 0.0, 0.0, 0.0)
+Camera.PointAt($5330[4], $5335[4], $5340[4], 2)
+jump @DANCE_6886 
+
+:DANCE_6769
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset -1.6647 1.7322 2.3217 
+04C4: store_coords_to 0@ 1@ 2@ from_actor $PLAYER_ACTOR with_offset -0.8677 1.3108 1.889 
+10@ -= 1.0 
+2@ -= 1.0 
+Camera.SetPosition(8@, 9@, 10@, 0.0, 0.0, 0.0)
+Camera.PointAt(0@, 1@, 2@, 2)
+
+:DANCE_6886
+jump @DANCE_6893 
+
+:DANCE_6893
+return 
+
+:DANCE_6895
+if 
+   not 5@ == -1 
+jf @DANCE_7076 
+04C4: store_coords_to 8@ 9@ 10@ from_actor $PLAYER_ACTOR with_offset 1.0 1.3 0.0 
+02CE: 10@ = ground_z_at 8@ 9@ 10@ 
+if 
+   Actor.Dead(5@)
+jf @DANCE_6986 
+gosub @DANCE_7721 
+jump @DANCE_7029 
+
+:DANCE_6986
+if 
+06EE:   actor 5@ in_group $PLAYER_GROUP 
+jf @DANCE_7010 
+06C9: remove_actor 5@ from_group 
+
+:DANCE_7010
+0792: disembark_instantly_actor 5@ 
+Actor.PutAt(5@, 8@, 9@, 10@)
+
+:DANCE_7029
+if and
+   not Actor.Dead(5@)
+   not Actor.Dead($PLAYER_ACTOR)
+jf @DANCE_7076 
+11@ = Actor.Angle($PLAYER_ACTOR)
+11@ += 180.0 
+Actor.Angle(5@) = 11@
+
+:DANCE_7076
+return 
+
+:DANCE_7078
+0871: init_jump_table 25@ total_jumps 15 default_jump 1 @DANCE_7206 jumps 2 @DANCE_7235 3 @DANCE_7264 4 @DANCE_7293 5 @DANCE_7322 6 @DANCE_7351 7 @DANCE_7380 8 @DANCE_7409 
+0872: jump_table_jumps 9 @DANCE_7438 10 @DANCE_7467 11 @DANCE_7497 12 @DANCE_7527 13 @DANCE_7557 14 @DANCE_7587 15 @DANCE_7617 16 @DANCE_7647 -1 @DANCE_7677 
+
+:DANCE_7206
+06D1: v$5303 = "DANCE_G1" // v$ = string 
+25@ = 2 
+jump @DANCE_7677 
+
+:DANCE_7235
+06D1: v$5303 = "DANCE_G2" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7264
+06D1: v$5303 = "DANCE_G3" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7293
+06D1: v$5303 = "DANCE_G4" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7322
+06D1: v$5303 = "DANCE_G5" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7351
+06D1: v$5303 = "DANCE_G6" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7380
+06D1: v$5303 = "DANCE_G7" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7409
+06D1: v$5303 = "DANCE_G8" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7438
+06D1: v$5303 = "DANCE_G9" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7467
+06D1: v$5303 = "DANCE_G10" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7497
+06D1: v$5303 = "DANCE_G11" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7527
+06D1: v$5303 = "DANCE_G12" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7557
+06D1: v$5303 = "DANCE_G13" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7587
+06D1: v$5303 = "DANCE_G14" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7617
+06D1: v$5303 = "DANCE_G15" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7647
+06D1: v$5303 = "DANCE_G16" // v$ = string 
+25@ += 1 
+jump @DANCE_7677 
+
+:DANCE_7677
+if 
+   not Actor.Dead(5@)
+jf @DANCE_7719 
+0812: AS_actor 5@ perform_animation v$5303 IFP v$DANCE_ANIM_IFP framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:DANCE_7719
+return 
+
+:DANCE_7721
+0209: 13@ = random_int_in_ranges 1 5 
+0871: init_jump_table 13@ total_jumps 5 default_jump 0 @DANCE_8078 jumps 1 @DANCE_7793 2 @DANCE_7850 3 @DANCE_7907 4 @DANCE_7964 5 @DANCE_8021 -1 @DANCE_8078 -1 @DANCE_8078 
+
+:DANCE_7793
+if 
+   not Model.Available(#BFYRI)
+jf @DANCE_7823 
+Model.Load(#BFYRI)
+wait 0 
+jump @DANCE_7793 
+
+:DANCE_7823
+5@ = Actor.Create(CivFemale, #BFYRI, 8@, 9@, 10@)
+return 
+jump @DANCE_8078 
+
+:DANCE_7850
+if 
+   not Model.Available(#OFYST)
+jf @DANCE_7880 
+Model.Load(#OFYST)
+wait 0 
+jump @DANCE_7850 
+
+:DANCE_7880
+5@ = Actor.Create(CivFemale, #OFYST, 8@, 9@, 10@)
+return 
+jump @DANCE_8078 
+
+:DANCE_7907
+if 
+   not Model.Available(#WFYST)
+jf @DANCE_7937 
+Model.Load(#WFYST)
+wait 0 
+jump @DANCE_7907 
+
+:DANCE_7937
+5@ = Actor.Create(CivFemale, #WFYST, 8@, 9@, 10@)
+return 
+jump @DANCE_8078 
+
+:DANCE_7964
+if 
+   not Model.Available(#HFYRI)
+jf @DANCE_7994 
+Model.Load(#HFYRI)
+wait 0 
+jump @DANCE_7964 
+
+:DANCE_7994
+5@ = Actor.Create(CivFemale, #HFYRI, 8@, 9@, 10@)
+return 
+jump @DANCE_8078 
+
+:DANCE_8021
+if 
+   not Model.Available(#WFYRI)
+jf @DANCE_8051 
+Model.Load(#WFYRI)
+wait 0 
+jump @DANCE_8021 
+
+:DANCE_8051
+5@ = Actor.Create(CivFemale, #WFYRI, 8@, 9@, 10@)
+return 
+jump @DANCE_8078 
+
+:DANCE_8078
+return 
+
+:DANCE_8080
+if 
+8846:   not string v$DANCE_ANIM empty // v$ 
+jf @DANCE_8141 
+07B1: unknown_get_dance_track 0 store_to 14@ 13@ 15@ 
+if 
+  13@ == 33 
+jf @DANCE_8141 
+6@ = 2 
+7@ = 0 
+
+:DANCE_8141
+return 
+
+:DANCE_8143
+0871: init_jump_table 24@ total_jumps 2 default_jump 1 @DANCE_8206 jumps 2 @DANCE_8458 3 @DANCE_8710 -1 @DANCE_8962 -1 @DANCE_8962 -1 @DANCE_8962 -1 @DANCE_8962 -1 @DANCE_8962 
+
+:DANCE_8206
+if 
+  22@ == 1 
+jf @DANCE_8240 
+00BA: show_text_styled GXT 'DNC_005' time 1000 style 5  // ~w~Great timing!
+
+:DANCE_8240
+if 
+  22@ == 2 
+jf @DANCE_8274 
+00BA: show_text_styled GXT 'DNC_006' time 1000 style 5  // ~w~Well done!
+
+:DANCE_8274
+if 
+  22@ == 3 
+jf @DANCE_8308 
+00BA: show_text_styled GXT 'DNC_007' time 1000 style 5  // ~w~Alright!
+
+:DANCE_8308
+if 
+  22@ == 0 
+jf @DANCE_8342 
+00BA: show_text_styled GXT 'DNC_008' time 1000 style 5  // ~w~Too late!
+
+:DANCE_8342
+if 
+  22@ == 4 
+jf @DANCE_8376 
+00BA: show_text_styled GXT 'DNC_009' time 1000 style 5  // ~w~Too early!
+
+:DANCE_8376
+if 
+  22@ == 10 
+jf @DANCE_8410 
+00BA: show_text_styled GXT 'DNC_010' time 1000 style 5  // ~w~Wrong!
+
+:DANCE_8410
+if 
+  22@ == 11 
+jf @DANCE_8444 
+00BA: show_text_styled GXT 'DNC_011' time 1000 style 5  // ~w~Bad timing!
+
+:DANCE_8444
+24@ = 2 
+jump @DANCE_8962 
+
+:DANCE_8458
+if 
+  22@ == 1 
+jf @DANCE_8492 
+00BA: show_text_styled GXT 'DNC_012' time 1000 style 5  // ~w~Synchronized!
+
+:DANCE_8492
+if 
+  22@ == 2 
+jf @DANCE_8526 
+00BA: show_text_styled GXT 'DNC_013' time 1000 style 5  // ~w~That's it!
+
+:DANCE_8526
+if 
+  22@ == 3 
+jf @DANCE_8560 
+00BA: show_text_styled GXT 'DNC_014' time 1000 style 5  // ~w~Keep going!
+
+:DANCE_8560
+if 
+  22@ == 0 
+jf @DANCE_8594 
+00BA: show_text_styled GXT 'DNC_015' time 1000 style 5  // ~w~Missed it!
+
+:DANCE_8594
+if 
+  22@ == 4 
+jf @DANCE_8628 
+00BA: show_text_styled GXT 'DNC_016' time 1000 style 5  // ~w~You're fast!
+
+:DANCE_8628
+if 
+  22@ == 10 
+jf @DANCE_8662 
+00BA: show_text_styled GXT 'DNC_017' time 1000 style 5  // ~w~Wrong move!
+
+:DANCE_8662
+if 
+  22@ == 11 
+jf @DANCE_8696 
+00BA: show_text_styled GXT 'DNC_018' time 1000 style 5  // ~w~Try again!
+
+:DANCE_8696
+24@ += 1 
+jump @DANCE_8962 
+
+:DANCE_8710
+if 
+  22@ == 1 
+jf @DANCE_8744 
+00BA: show_text_styled GXT 'DNC_019' time 1000 style 5  // ~w~The master!
+
+:DANCE_8744
+if 
+  22@ == 2 
+jf @DANCE_8778 
+00BA: show_text_styled GXT 'DNC_020' time 1000 style 5  // ~w~Got it!
+
+:DANCE_8778
+if 
+  22@ == 3 
+jf @DANCE_8812 
+00BA: show_text_styled GXT 'DNC_021' time 1000 style 5  // ~w~Acceptable!
+
+:DANCE_8812
+if 
+  22@ == 0 
+jf @DANCE_8846 
+00BA: show_text_styled GXT 'DNC_022' time 1000 style 5  // ~w~You're late!
+
+:DANCE_8846
+if 
+  22@ == 4 
+jf @DANCE_8880 
+00BA: show_text_styled GXT 'DNC_023' time 1000 style 5  // ~w~Slow down!
+
+:DANCE_8880
+if 
+  22@ == 10 
+jf @DANCE_8914 
+00BA: show_text_styled GXT 'DNC_024' time 1000 style 5  // ~w~Random!
+
+:DANCE_8914
+if 
+  22@ == 11 
+jf @DANCE_8948 
+00BA: show_text_styled GXT 'DNC_025' time 1000 style 5  // ~w~Not on time!
+
+:DANCE_8948
+24@ += 1 
+jump @DANCE_8962 
+
+:DANCE_8962
+return 
+
+:DANCE_8964
+0085: 13@ = 26@ // (int) 
+005A: 13@ += 27@ // (int) 
+005A: 13@ += 28@ // (int) 
+if 
+  13@ > 0 
+jf @DANCE_9489 
+if 
+  13@ >= 4 
+jf @DANCE_9489 
+if 
+  28@ == 4 
+jf @DANCE_9159 
+if or
+  29@ == 1 
+  29@ == 2 
+jf @DANCE_9113 
+$9527 = 2 
+32@ = 0 
+00BA: show_text_styled GXT 'DNC_002' time 50000 style 7  // ~y~PERFECT
+29@ = 2 
+jump @DANCE_9152 
+
+:DANCE_9113
+$9527 = 2 
+32@ = 0 
+00BA: show_text_styled GXT 'DNC_004' time 50000 style 7  // ~b~GOOD
+29@ = 1 
+
+:DANCE_9152
+jump @DANCE_9468 
+
+:DANCE_9159
+if 
+001D:   26@ > 27@ // (int) 
+jf @DANCE_9282 
+if 
+   not 29@ == 1 
+jf @DANCE_9217 
+$9527 = 4 
+32@ = 0 
+jump @DANCE_9250 
+
+:DANCE_9217
+if 
+  32@ >= 10000 
+jf @DANCE_9250 
+$9527 = 4 
+32@ = 0 
+
+:DANCE_9250
+00BA: show_text_styled GXT 'DNC_004' time 50000 style 7  // ~b~GOOD
+29@ = 1 
+jump @DANCE_9468 
+
+:DANCE_9282
+if 
+  29@ == 2 
+jf @DANCE_9346 
+$9527 = 3 
+32@ = 0 
+00BA: show_text_styled GXT 'DNC_004' time 50000 style 7  // ~b~GOOD
+29@ = 1 
+jump @DANCE_9468 
+
+:DANCE_9346
+if 
+  29@ == 1 
+jf @DANCE_9410 
+$9527 = 5 
+32@ = 0 
+00BA: show_text_styled GXT 'DNC_003' time 50000 style 7  // ~r~BAD
+29@ = 0 
+jump @DANCE_9468 
+
+:DANCE_9410
+if 
+  32@ >= 10000 
+jf @DANCE_9443 
+$9527 = 5 
+32@ = 0 
+
+:DANCE_9443
+00BA: show_text_styled GXT 'DNC_003' time 50000 style 7  // ~r~BAD
+29@ = 0 
+
+:DANCE_9468
+28@ = 0 
+26@ = 0 
+27@ = 0 
+
+:DANCE_9489
+return 
+
+:DANCE_9491
+if and
+  6@ == 3 
+88FE:   not text_box_displayed 
+jf @DANCE_9529 
+03E5: show_text_box 'DNC_H2'  // Are you sure? ~N~~k~~PED_SPRINT~ Confirm and quit.~N~~k~~VEHICLE_ENTER_EXIT~ Back to dance.
+jump @DANCE_9572 
+
+:DANCE_9529
+if and
+   not 6@ == 2 
+  $636 == 0 
+jf @DANCE_9572 
+03E5: show_text_box 'DNC_H1'  // ~k~~VEHICLE_ENTER_EXIT~ Hold to quit.
+$636 = 1 
+
+:DANCE_9572
+return 
+
+:DANCE_9574
+0871: init_jump_table $9528 total_jumps 6 default_jump 0 @DANCE_10000 jumps 0 @DANCE_9637 1 @DANCE_9960 6 @DANCE_9800 8 @DANCE_9840 9 @DANCE_9880 10 @DANCE_9920 -1 @DANCE_10000 
+
+:DANCE_9637
+if 
+  $9527 == 2 
+jf @DANCE_9676 
+$9528 = 6 
+$9527 = -1 
+jump @DANCE_10000 
+
+:DANCE_9676
+if 
+  $9527 == 3 
+jf @DANCE_9715 
+$9528 = 8 
+$9527 = -1 
+jump @DANCE_10000 
+
+:DANCE_9715
+if 
+  $9527 == 4 
+jf @DANCE_9754 
+$9528 = 9 
+$9527 = -1 
+jump @DANCE_10000 
+
+:DANCE_9754
+if 
+  $9527 == 5 
+jf @DANCE_9793 
+$9528 = 10 
+$9527 = -1 
+jump @DANCE_10000 
+
+:DANCE_9793
+jump @DANCE_10000 
+
+:DANCE_9800
+if 
+03D2:   wav 4 ended 
+jf @DANCE_9833 
+040D: unload_wav 4 
+gosub @DANCE_10002 
+$9528 = 1 
+
+:DANCE_9833
+jump @DANCE_10000 
+
+:DANCE_9840
+if 
+03D2:   wav 4 ended 
+jf @DANCE_9873 
+040D: unload_wav 4 
+gosub @DANCE_11654 
+$9528 = 1 
+
+:DANCE_9873
+jump @DANCE_10000 
+
+:DANCE_9880
+if 
+03D2:   wav 4 ended 
+jf @DANCE_9913 
+040D: unload_wav 4 
+gosub @DANCE_13306 
+$9528 = 1 
+
+:DANCE_9913
+jump @DANCE_10000 
+
+:DANCE_9920
+if 
+03D2:   wav 4 ended 
+jf @DANCE_9953 
+040D: unload_wav 4 
+gosub @DANCE_14958 
+$9528 = 1 
+
+:DANCE_9953
+jump @DANCE_10000 
+
+:DANCE_9960
+if 
+03D0:   wav 4 loaded 
+jf @DANCE_9993 
+0949: link_wav 4 to_actor $PLAYER_ACTOR 
+03D1: play_wav 4 
+$9528 = 0 
+
+:DANCE_9993
+jump @DANCE_10000 
+
+:DANCE_10000
+return 
+
+:DANCE_10002
+0871: init_jump_table $9529 total_jumps 56 default_jump 1 @DANCE_10455 jumps 1 @DANCE_10476 2 @DANCE_10497 3 @DANCE_10518 4 @DANCE_10539 5 @DANCE_10560 6 @DANCE_10581 7 @DANCE_10602 
+0872: jump_table_jumps 8 @DANCE_10623 9 @DANCE_10644 10 @DANCE_10665 11 @DANCE_10686 12 @DANCE_10707 13 @DANCE_10728 14 @DANCE_10749 15 @DANCE_10770 16 @DANCE_10791 
+0872: jump_table_jumps 17 @DANCE_10812 18 @DANCE_10833 19 @DANCE_10854 20 @DANCE_10875 21 @DANCE_10896 22 @DANCE_10917 23 @DANCE_10938 24 @DANCE_10959 25 @DANCE_10980 
+0872: jump_table_jumps 26 @DANCE_11001 27 @DANCE_11022 28 @DANCE_11043 29 @DANCE_11064 30 @DANCE_11085 31 @DANCE_11106 32 @DANCE_11127 33 @DANCE_11148 34 @DANCE_11169 
+0872: jump_table_jumps 35 @DANCE_11190 36 @DANCE_11211 37 @DANCE_11232 38 @DANCE_11253 39 @DANCE_11274 40 @DANCE_11295 41 @DANCE_11316 42 @DANCE_11337 43 @DANCE_11358 
+0872: jump_table_jumps 44 @DANCE_11379 45 @DANCE_11400 46 @DANCE_11421 47 @DANCE_11442 48 @DANCE_11463 49 @DANCE_11484 50 @DANCE_11505 51 @DANCE_11526 52 @DANCE_11547 
+0872: jump_table_jumps 53 @DANCE_11568 54 @DANCE_11589 55 @DANCE_11610 56 @DANCE_11631 -1 @DANCE_11652 -1 @DANCE_11652 -1 @DANCE_11652 -1 @DANCE_11652 -1 @DANCE_11652 
+
+:DANCE_10455
+03CF: load_wav 11455 as 4 
+$9529 = 1 
+jump @DANCE_11652 
+
+:DANCE_10476
+03CF: load_wav 11400 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10497
+03CF: load_wav 11401 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10518
+03CF: load_wav 11402 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10539
+03CF: load_wav 11403 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10560
+03CF: load_wav 11404 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10581
+03CF: load_wav 11405 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10602
+03CF: load_wav 11406 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10623
+03CF: load_wav 11407 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10644
+03CF: load_wav 11408 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10665
+03CF: load_wav 11409 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10686
+03CF: load_wav 11410 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10707
+03CF: load_wav 11411 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10728
+03CF: load_wav 11412 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10749
+03CF: load_wav 11413 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10770
+03CF: load_wav 11414 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10791
+03CF: load_wav 11415 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10812
+03CF: load_wav 11416 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10833
+03CF: load_wav 11417 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10854
+03CF: load_wav 11418 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10875
+03CF: load_wav 11419 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10896
+03CF: load_wav 11420 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10917
+03CF: load_wav 11421 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10938
+03CF: load_wav 11422 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10959
+03CF: load_wav 11423 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_10980
+03CF: load_wav 11424 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11001
+03CF: load_wav 11425 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11022
+03CF: load_wav 11426 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11043
+03CF: load_wav 11427 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11064
+03CF: load_wav 11428 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11085
+03CF: load_wav 11429 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11106
+03CF: load_wav 11430 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11127
+03CF: load_wav 11431 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11148
+03CF: load_wav 11432 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11169
+03CF: load_wav 11433 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11190
+03CF: load_wav 11434 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11211
+03CF: load_wav 11435 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11232
+03CF: load_wav 11436 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11253
+03CF: load_wav 11437 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11274
+03CF: load_wav 11438 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11295
+03CF: load_wav 11439 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11316
+03CF: load_wav 11440 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11337
+03CF: load_wav 11441 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11358
+03CF: load_wav 11442 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11379
+03CF: load_wav 11443 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11400
+03CF: load_wav 11444 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11421
+03CF: load_wav 11445 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11442
+03CF: load_wav 11446 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11463
+03CF: load_wav 11447 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11484
+03CF: load_wav 11448 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11505
+03CF: load_wav 11449 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11526
+03CF: load_wav 11450 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11547
+03CF: load_wav 11451 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11568
+03CF: load_wav 11452 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11589
+03CF: load_wav 11453 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11610
+03CF: load_wav 11454 as 4 
+$9529 += 1 
+jump @DANCE_11652 
+
+:DANCE_11631
+03CF: load_wav 11455 as 4 
+$9529 = 1 
+jump @DANCE_11652 
+
+:DANCE_11652
+return 
+
+:DANCE_11654
+0871: init_jump_table $9529 total_jumps 56 default_jump 1 @DANCE_12107 jumps 1 @DANCE_12128 2 @DANCE_12149 3 @DANCE_12170 4 @DANCE_12191 5 @DANCE_12212 6 @DANCE_12233 7 @DANCE_12254 
+0872: jump_table_jumps 8 @DANCE_12275 9 @DANCE_12296 10 @DANCE_12317 11 @DANCE_12338 12 @DANCE_12359 13 @DANCE_12380 14 @DANCE_12401 15 @DANCE_12422 16 @DANCE_12443 
+0872: jump_table_jumps 17 @DANCE_12464 18 @DANCE_12485 19 @DANCE_12506 20 @DANCE_12527 21 @DANCE_12548 22 @DANCE_12569 23 @DANCE_12590 24 @DANCE_12611 25 @DANCE_12632 
+0872: jump_table_jumps 26 @DANCE_12653 27 @DANCE_12674 28 @DANCE_12695 29 @DANCE_12716 30 @DANCE_12737 31 @DANCE_12758 32 @DANCE_12779 33 @DANCE_12800 34 @DANCE_12821 
+0872: jump_table_jumps 35 @DANCE_12842 36 @DANCE_12863 37 @DANCE_12884 38 @DANCE_12905 39 @DANCE_12926 40 @DANCE_12947 41 @DANCE_12968 42 @DANCE_12989 43 @DANCE_13010 
+0872: jump_table_jumps 44 @DANCE_13031 45 @DANCE_13052 46 @DANCE_13073 47 @DANCE_13094 48 @DANCE_13115 49 @DANCE_13136 50 @DANCE_13157 51 @DANCE_13178 52 @DANCE_13199 
+0872: jump_table_jumps 53 @DANCE_13220 54 @DANCE_13241 55 @DANCE_13262 56 @DANCE_13283 -1 @DANCE_13304 -1 @DANCE_13304 -1 @DANCE_13304 -1 @DANCE_13304 -1 @DANCE_13304 
+
+:DANCE_12107
+03CF: load_wav 11655 as 4 
+$9529 = 1 
+jump @DANCE_13304 
+
+:DANCE_12128
+03CF: load_wav 11600 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12149
+03CF: load_wav 11601 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12170
+03CF: load_wav 11602 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12191
+03CF: load_wav 11603 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12212
+03CF: load_wav 11604 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12233
+03CF: load_wav 11605 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12254
+03CF: load_wav 11606 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12275
+03CF: load_wav 11607 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12296
+03CF: load_wav 11608 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12317
+03CF: load_wav 11609 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12338
+03CF: load_wav 11610 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12359
+03CF: load_wav 11611 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12380
+03CF: load_wav 11612 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12401
+03CF: load_wav 11613 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12422
+03CF: load_wav 11614 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12443
+03CF: load_wav 11615 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12464
+03CF: load_wav 11616 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12485
+03CF: load_wav 11617 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12506
+03CF: load_wav 11618 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12527
+03CF: load_wav 11619 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12548
+03CF: load_wav 11620 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12569
+03CF: load_wav 11621 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12590
+03CF: load_wav 11622 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12611
+03CF: load_wav 11623 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12632
+03CF: load_wav 11624 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12653
+03CF: load_wav 11625 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12674
+03CF: load_wav 11626 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12695
+03CF: load_wav 11627 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12716
+03CF: load_wav 11628 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12737
+03CF: load_wav 11629 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12758
+03CF: load_wav 11630 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12779
+03CF: load_wav 11631 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12800
+03CF: load_wav 11632 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12821
+03CF: load_wav 11633 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12842
+03CF: load_wav 11634 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12863
+03CF: load_wav 11635 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12884
+03CF: load_wav 11636 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12905
+03CF: load_wav 11637 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12926
+03CF: load_wav 11638 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12947
+03CF: load_wav 11639 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12968
+03CF: load_wav 11640 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_12989
+03CF: load_wav 11641 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13010
+03CF: load_wav 11642 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13031
+03CF: load_wav 11643 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13052
+03CF: load_wav 11644 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13073
+03CF: load_wav 11645 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13094
+03CF: load_wav 11646 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13115
+03CF: load_wav 11647 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13136
+03CF: load_wav 11648 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13157
+03CF: load_wav 11649 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13178
+03CF: load_wav 11650 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13199
+03CF: load_wav 11651 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13220
+03CF: load_wav 11652 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13241
+03CF: load_wav 11653 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13262
+03CF: load_wav 11654 as 4 
+$9529 += 1 
+jump @DANCE_13304 
+
+:DANCE_13283
+03CF: load_wav 11655 as 4 
+$9529 = 1 
+jump @DANCE_13304 
+
+:DANCE_13304
+return 
+
+:DANCE_13306
+0871: init_jump_table $9529 total_jumps 56 default_jump 1 @DANCE_13759 jumps 1 @DANCE_13780 2 @DANCE_13801 3 @DANCE_13822 4 @DANCE_13843 5 @DANCE_13864 6 @DANCE_13885 7 @DANCE_13906 
+0872: jump_table_jumps 8 @DANCE_13927 9 @DANCE_13948 10 @DANCE_13969 11 @DANCE_13990 12 @DANCE_14011 13 @DANCE_14032 14 @DANCE_14053 15 @DANCE_14074 16 @DANCE_14095 
+0872: jump_table_jumps 17 @DANCE_14116 18 @DANCE_14137 19 @DANCE_14158 20 @DANCE_14179 21 @DANCE_14200 22 @DANCE_14221 23 @DANCE_14242 24 @DANCE_14263 25 @DANCE_14284 
+0872: jump_table_jumps 26 @DANCE_14305 27 @DANCE_14326 28 @DANCE_14347 29 @DANCE_14368 30 @DANCE_14389 31 @DANCE_14410 32 @DANCE_14431 33 @DANCE_14452 34 @DANCE_14473 
+0872: jump_table_jumps 35 @DANCE_14494 36 @DANCE_14515 37 @DANCE_14536 38 @DANCE_14557 39 @DANCE_14578 40 @DANCE_14599 41 @DANCE_14620 42 @DANCE_14641 43 @DANCE_14662 
+0872: jump_table_jumps 44 @DANCE_14683 45 @DANCE_14704 46 @DANCE_14725 47 @DANCE_14746 48 @DANCE_14767 49 @DANCE_14788 50 @DANCE_14809 51 @DANCE_14830 52 @DANCE_14851 
+0872: jump_table_jumps 53 @DANCE_14872 54 @DANCE_14893 55 @DANCE_14914 56 @DANCE_14935 -1 @DANCE_14956 -1 @DANCE_14956 -1 @DANCE_14956 -1 @DANCE_14956 -1 @DANCE_14956 
+
+:DANCE_13759
+03CF: load_wav 11855 as 4 
+$9529 = 1 
+jump @DANCE_14956 
+
+:DANCE_13780
+03CF: load_wav 11800 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13801
+03CF: load_wav 11801 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13822
+03CF: load_wav 11802 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13843
+03CF: load_wav 11803 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13864
+03CF: load_wav 11804 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13885
+03CF: load_wav 11805 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13906
+03CF: load_wav 11806 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13927
+03CF: load_wav 11807 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13948
+03CF: load_wav 11808 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13969
+03CF: load_wav 11809 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_13990
+03CF: load_wav 11810 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14011
+03CF: load_wav 11811 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14032
+03CF: load_wav 11812 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14053
+03CF: load_wav 11813 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14074
+03CF: load_wav 11814 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14095
+03CF: load_wav 11815 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14116
+03CF: load_wav 11816 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14137
+03CF: load_wav 11817 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14158
+03CF: load_wav 11818 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14179
+03CF: load_wav 11819 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14200
+03CF: load_wav 11820 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14221
+03CF: load_wav 11821 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14242
+03CF: load_wav 11822 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14263
+03CF: load_wav 11823 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14284
+03CF: load_wav 11824 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14305
+03CF: load_wav 11825 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14326
+03CF: load_wav 11826 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14347
+03CF: load_wav 11827 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14368
+03CF: load_wav 11828 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14389
+03CF: load_wav 11829 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14410
+03CF: load_wav 11830 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14431
+03CF: load_wav 11831 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14452
+03CF: load_wav 11832 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14473
+03CF: load_wav 11833 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14494
+03CF: load_wav 11834 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14515
+03CF: load_wav 11835 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14536
+03CF: load_wav 11836 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14557
+03CF: load_wav 11837 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14578
+03CF: load_wav 11838 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14599
+03CF: load_wav 11839 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14620
+03CF: load_wav 11840 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14641
+03CF: load_wav 11841 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14662
+03CF: load_wav 11842 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14683
+03CF: load_wav 11843 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14704
+03CF: load_wav 11844 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14725
+03CF: load_wav 11845 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14746
+03CF: load_wav 11846 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14767
+03CF: load_wav 11847 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14788
+03CF: load_wav 11848 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14809
+03CF: load_wav 11849 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14830
+03CF: load_wav 11850 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14851
+03CF: load_wav 11851 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14872
+03CF: load_wav 11852 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14893
+03CF: load_wav 11853 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14914
+03CF: load_wav 11854 as 4 
+$9529 += 1 
+jump @DANCE_14956 
+
+:DANCE_14935
+03CF: load_wav 11855 as 4 
+$9529 = 1 
+jump @DANCE_14956 
+
+:DANCE_14956
+return 
+
+:DANCE_14958
+0871: init_jump_table $9529 total_jumps 56 default_jump 1 @DANCE_15411 jumps 1 @DANCE_15432 2 @DANCE_15453 3 @DANCE_15474 4 @DANCE_15495 5 @DANCE_15516 6 @DANCE_15537 7 @DANCE_15558 
+0872: jump_table_jumps 8 @DANCE_15579 9 @DANCE_15600 10 @DANCE_15621 11 @DANCE_15642 12 @DANCE_15663 13 @DANCE_15684 14 @DANCE_15705 15 @DANCE_15726 16 @DANCE_15747 
+0872: jump_table_jumps 17 @DANCE_15768 18 @DANCE_15789 19 @DANCE_15810 20 @DANCE_15831 21 @DANCE_15852 22 @DANCE_15873 23 @DANCE_15894 24 @DANCE_15915 25 @DANCE_15936 
+0872: jump_table_jumps 26 @DANCE_15957 27 @DANCE_15978 28 @DANCE_15999 29 @DANCE_16020 30 @DANCE_16041 31 @DANCE_16062 32 @DANCE_16083 33 @DANCE_16104 34 @DANCE_16125 
+0872: jump_table_jumps 35 @DANCE_16146 36 @DANCE_16167 37 @DANCE_16188 38 @DANCE_16209 39 @DANCE_16230 40 @DANCE_16251 41 @DANCE_16272 42 @DANCE_16293 43 @DANCE_16314 
+0872: jump_table_jumps 44 @DANCE_16335 45 @DANCE_16356 46 @DANCE_16377 47 @DANCE_16398 48 @DANCE_16419 49 @DANCE_16440 50 @DANCE_16461 51 @DANCE_16482 52 @DANCE_16503 
+0872: jump_table_jumps 53 @DANCE_16524 54 @DANCE_16545 55 @DANCE_16566 56 @DANCE_16587 -1 @DANCE_16608 -1 @DANCE_16608 -1 @DANCE_16608 -1 @DANCE_16608 -1 @DANCE_16608 
+
+:DANCE_15411
+03CF: load_wav 12055 as 4 
+$9529 = 1 
+jump @DANCE_16608 
+
+:DANCE_15432
+03CF: load_wav 12000 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15453
+03CF: load_wav 12001 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15474
+03CF: load_wav 12002 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15495
+03CF: load_wav 12003 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15516
+03CF: load_wav 12004 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15537
+03CF: load_wav 12005 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15558
+03CF: load_wav 12006 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15579
+03CF: load_wav 12007 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15600
+03CF: load_wav 12008 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15621
+03CF: load_wav 12009 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15642
+03CF: load_wav 12010 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15663
+03CF: load_wav 12011 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15684
+03CF: load_wav 12012 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15705
+03CF: load_wav 12013 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15726
+03CF: load_wav 12014 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15747
+03CF: load_wav 12015 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15768
+03CF: load_wav 12016 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15789
+03CF: load_wav 12017 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15810
+03CF: load_wav 12018 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15831
+03CF: load_wav 12019 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15852
+03CF: load_wav 12020 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15873
+03CF: load_wav 12021 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15894
+03CF: load_wav 12022 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15915
+03CF: load_wav 12023 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15936
+03CF: load_wav 12024 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15957
+03CF: load_wav 12025 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15978
+03CF: load_wav 12026 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_15999
+03CF: load_wav 12027 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16020
+03CF: load_wav 12028 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16041
+03CF: load_wav 12029 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16062
+03CF: load_wav 12030 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16083
+03CF: load_wav 12031 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16104
+03CF: load_wav 12032 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16125
+03CF: load_wav 12033 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16146
+03CF: load_wav 12034 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16167
+03CF: load_wav 12035 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16188
+03CF: load_wav 12036 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16209
+03CF: load_wav 12037 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16230
+03CF: load_wav 12038 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16251
+03CF: load_wav 12039 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16272
+03CF: load_wav 12040 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16293
+03CF: load_wav 12041 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16314
+03CF: load_wav 12042 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16335
+03CF: load_wav 12043 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16356
+03CF: load_wav 12044 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16377
+03CF: load_wav 12045 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16398
+03CF: load_wav 12046 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16419
+03CF: load_wav 12047 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16440
+03CF: load_wav 12048 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16461
+03CF: load_wav 12049 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16482
+03CF: load_wav 12050 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16503
+03CF: load_wav 12051 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16524
+03CF: load_wav 12052 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16545
+03CF: load_wav 12053 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16566
+03CF: load_wav 12054 as 4 
+$9529 += 1 
+jump @DANCE_16608 
+
+:DANCE_16587
+03CF: load_wav 12055 as 4 
+$9529 = 1 
+jump @DANCE_16608 
+
+:DANCE_16608
+return 
+
+:DANCE_16610
+$1044 = 1 
+$5298 = 0 
+04EF: release_animation v$DANCE_ANIM_IFP 
+00BE: text_clear_all 
+if 
+   not Actor.Dead(5@)
+jf @DANCE_16724 
+if and
+   not Actor.Model(5@) == #GANGRL3
+   not Actor.Model(5@) == #MECGRL3
+   not Actor.Model(5@) == #GUNGRL3
+   not Actor.Model(5@) == #COPGRL3
+   not Actor.Model(5@) == #NURGRL3
+   not Actor.Model(5@) == #CROGRL3
+jf @DANCE_16724 
+0665: get_actor 5@ model_to 13@ 
+Model.Destroy(13@)
+Actor.DestroyInstantly(5@)
+
+:DANCE_16724
+0953: get_soundtrack_status_to 13@ 
+if 
+04A4:   13@ == 3 // == constant 
+jf @DANCE_16749 
+0955: end_playing_loaded_soundtrack 
+
+:DANCE_16749
+13@ = 0 
+
+:DANCE_16756
+$5315(13@,5f) = 0.0 
+$5320(13@,5f) = 0.0 
+$5325(13@,5f) = 0.0 
+$5330(13@,5f) = 0.0 
+$5335(13@,5f) = 0.0 
+$5340(13@,5f) = 0.0 
+13@ += 1 
+  13@ >= 5 
+jf @DANCE_16756 
+09EE: set_status_text_stay_on_screen 0 
+03F0: enable_text_draw 0 
+if 
+  $DANCE_SCORE >= 0 
+jf @DANCE_16922 
+0652: $10953 = integer_stat 156 
+if 
+001C:   $DANCE_SCORE > $10953 // (int) 
+jf @DANCE_16922 
+0629: change_integer_stat 156 to $DANCE_SCORE 
+
+:DANCE_16922
+040D: unload_wav 4 
+Player.CanMove($PLAYER_CHAR) = True
+08C0: clear $5295 bit 31 
+09BD: allow_other_threads_to_display_text_boxes 0 
+end_thread 
+return 
+
+:DANCE_16948
+0494: get_joystick 0 direction_offset_to $9530 $9531 $9532 $9533 
+008D: $9535 = integer $9530 to_float 
+0086: $9536 = $9535 // (float) 
+008D: $9535 = integer $9531 to_float 
+0086: $9537 = $9535 // (float) 
+0509: $9535 = distance_between_XY 0.0 0.0 and_XY $9536 $9537 
+$9534 = 0 
+if 
+  $9535 > 64.0 
+jf @DANCE_17309 
+05A4: get_angle_between_vectors_origin_to $9536 $9537 and_origin_to 0.0 -1.0 store_to $9535 
+if 
+  15.0 > $9535 
+jf @DANCE_17101 
+$9534 = 13 
+jump @DANCE_17309 
+
+:DANCE_17101
+if 
+  75.0 > $9535 
+jf @DANCE_17168 
+if 
+  $9530 > 0 
+jf @DANCE_17154 
+$9534 = 11 
+jump @DANCE_17161 
+
+:DANCE_17154
+$9534 = 15 
+
+:DANCE_17161
+jump @DANCE_17309 
+
+:DANCE_17168
+if 
+  105.0 > $9535 
+jf @DANCE_17235 
+if 
+  $9530 > 0 
+jf @DANCE_17221 
+$9534 = 10 
+jump @DANCE_17228 
+
+:DANCE_17221
+$9534 = 9 
+
+:DANCE_17228
+jump @DANCE_17309 
+
+:DANCE_17235
+if 
+  165.0 > $9535 
+jf @DANCE_17302 
+if 
+  $9530 > 0 
+jf @DANCE_17288 
+$9534 = 16 
+jump @DANCE_17295 
+
+:DANCE_17288
+$9534 = 12 
+
+:DANCE_17295
+jump @DANCE_17309 
+
+:DANCE_17302
+$9534 = 14 
+
+:DANCE_17309
+return 
+0662: printstring v$DANCE_ANIM 
+07B1: unknown_get_dance_track 1 store_to 13@ 13@ 13@ 
+0663: printint "NEXT_BEAT_NUMBER" 13@ 
+return 
+end_thread

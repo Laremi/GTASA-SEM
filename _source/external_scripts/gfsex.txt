@@ -1,0 +1,2199 @@
+:GFSEX
+thread 'GFSEX' 
+09BD: allow_other_threads_to_display_text_boxes 1 
+7@ = 0 
+8@ = 0 
+if 
+  1@ > 0 
+jf @GFSEX_61 
+$GFSEX_EXCITEMENT = 40 
+jump @GFSEX_68 
+
+:GFSEX_61
+$GFSEX_EXCITEMENT = 50 
+
+:GFSEX_68
+$GFSEX_POWER = 1 
+9@ = 0 
+if 
+  9@ > 0 
+jf @GFSEX_124 
+24@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:GFSEX_124
+gosub @GFSEX_7565 
+if 
+  $GF_CENSORE_FLAG == 0 
+jf @GFSEX_156 
+gosub @GFSEX_8036 
+
+:GFSEX_156
+wait 0 
+if and
+   not Actor.Dead($PLAYER_ACTOR)
+   not Actor.Dead(24@)
+   not $GIRL_PROGRESS(0@,6i) == -999 
+   not $GIRL_PROGRESS(0@,6i) == -100 
+   not $GIRL_PROGRESS(0@,6i) == -99 
+jf @GFSEX_243 
+gosub @GFSEX_257 
+gosub @GFSEX_514 
+gosub @GFSEX_12553 
+jump @GFSEX_250 
+
+:GFSEX_243
+gosub @GFSEX_13715 
+
+:GFSEX_250
+jump @GFSEX_156 
+
+:GFSEX_257
+if 
+88B7:   not test 9@ bit 1 
+jf @GFSEX_512 
+if 
+  $GF_CENSORE_FLAG == 1 
+jf @GFSEX_316 
+08BD: set 9@ bit 1 
+7@ = 9 
+8@ = 0 
+return 
+
+:GFSEX_316
+if 
+00E1:   player 0 pressed_key 17 
+jf @GFSEX_372 
+if 
+88B7:   not test 9@ bit 2 
+jf @GFSEX_365 
+gosub @GFSEX_9199 
+08BD: set 9@ bit 2 
+
+:GFSEX_365
+jump @GFSEX_379 
+
+:GFSEX_372
+08C3: clear 9@ bit 2 
+
+:GFSEX_379
+if 
+00E1:   player 0 pressed_key 14 
+jf @GFSEX_435 
+if 
+88B7:   not test 9@ bit 3 
+jf @GFSEX_428 
+gosub @GFSEX_9977 
+08BD: set 9@ bit 3 
+
+:GFSEX_428
+jump @GFSEX_442 
+
+:GFSEX_435
+08C3: clear 9@ bit 3 
+
+:GFSEX_442
+if 
+00E1:   player 0 pressed_key 15 
+jf @GFSEX_505 
+if 
+88B7:   not test 9@ bit 4 
+jf @GFSEX_498 
+7@ = 2 
+8@ = 0 
+08BD: set 9@ bit 4 
+
+:GFSEX_498
+jump @GFSEX_512 
+
+:GFSEX_505
+08C3: clear 9@ bit 4 
+
+:GFSEX_512
+return 
+
+:GFSEX_514
+0871: init_jump_table 7@ total_jumps 10 default_jump 0 @GFSEX_782 jumps 0 @GFSEX_642 1 @GFSEX_656 2 @GFSEX_670 3 @GFSEX_684 4 @GFSEX_698 5 @GFSEX_712 6 @GFSEX_726 
+0872: jump_table_jumps 7 @GFSEX_740 8 @GFSEX_754 9 @GFSEX_768 -1 @GFSEX_782 -1 @GFSEX_782 -1 @GFSEX_782 -1 @GFSEX_782 -1 @GFSEX_782 -1 @GFSEX_782 
+
+:GFSEX_642
+gosub @GFSEX_784 
+jump @GFSEX_782 
+
+:GFSEX_656
+gosub @GFSEX_958 
+jump @GFSEX_782 
+
+:GFSEX_670
+gosub @GFSEX_1707 
+jump @GFSEX_782 
+
+:GFSEX_684
+gosub @GFSEX_2013 
+jump @GFSEX_782 
+
+:GFSEX_698
+gosub @GFSEX_3126 
+jump @GFSEX_782 
+
+:GFSEX_712
+gosub @GFSEX_3555 
+jump @GFSEX_782 
+
+:GFSEX_726
+gosub @GFSEX_4116 
+jump @GFSEX_782 
+
+:GFSEX_740
+gosub @GFSEX_5343 
+jump @GFSEX_782 
+
+:GFSEX_754
+gosub @GFSEX_6084 
+jump @GFSEX_782 
+
+:GFSEX_768
+gosub @GFSEX_6686 
+jump @GFSEX_782 
+
+:GFSEX_782
+return 
+
+:GFSEX_784
+0871: init_jump_table 8@ total_jumps 2 default_jump 0 @GFSEX_956 jumps 0 @GFSEX_847 1 @GFSEX_874 -1 @GFSEX_956 -1 @GFSEX_956 -1 @GFSEX_956 -1 @GFSEX_956 -1 @GFSEX_956 
+
+:GFSEX_847
+08BD: set 9@ bit 1 
+fade 0 0 
+8@ += 1 
+jump @GFSEX_956 
+
+:GFSEX_874
+if 
+   not fading 
+jf @GFSEX_949 
+Player.CanMove($PLAYER_CHAR) = False
+06AB: set_actor $PLAYER_ACTOR all_weapons_hidden 1 
+06AB: set_actor 24@ all_weapons_hidden 1 
+0581: enable_radar 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+02A3: enable_widescreen 1 
+03F4: set_all_cars_apply_damage_rules 0 
+gosub @GFSEX_8178 
+0085: 7@ = 21@ // (int) 
+8@ = 0 
+
+:GFSEX_949
+jump @GFSEX_956 
+
+:GFSEX_956
+return 
+
+:GFSEX_958
+0871: init_jump_table 8@ total_jumps 6 default_jump 0 @GFSEX_1705 jumps 0 @GFSEX_1021 1 @GFSEX_1063 2 @GFSEX_1186 3 @GFSEX_1423 4 @GFSEX_1582 5 @GFSEX_1632 -1 @GFSEX_1705 
+
+:GFSEX_1021
+08BD: set 9@ bit 1 
+23@ = -1 
+gosub @GFSEX_9199 
+fade 1 1500 
+8@ += 1 
+jump @GFSEX_1705 
+
+:GFSEX_1063
+if 
+   not fading 
+jf @GFSEX_1179 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_COUCH_START_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_COUCH_START_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+8@ += 1 
+
+:GFSEX_1179
+jump @GFSEX_1705 
+
+:GFSEX_1186
+0613: 16@ = actor $PLAYER_ACTOR animation "BJ_COUCH_START_P" time 
+if and
+  16@ > 0.5 
+  1.0 > 16@ 
+jf @GFSEX_1277 
+if 
+08D0:   should_skip_cutscene 
+jf @GFSEX_1277 
+fade 0 500 
+8@ = 5 
+jump @GFSEX_1705 
+
+:GFSEX_1277
+if 
+  16@ == 1.0 
+jf @GFSEX_1416 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_COUCH_LOOP_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 6000 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_COUCH_LOOP_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 6000 // versionB 
+04AE: $1233 = 285 // = constant 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_1416
+jump @GFSEX_1705 
+
+:GFSEX_1423
+if 
+08D0:   should_skip_cutscene 
+jf @GFSEX_1457 
+fade 0 500 
+8@ = 5 
+jump @GFSEX_1575 
+
+:GFSEX_1457
+if 
+  33@ > 6000 
+jf @GFSEX_1575 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_COUCH_END_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_COUCH_END_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+8@ += 1 
+
+:GFSEX_1575
+jump @GFSEX_1705 
+
+:GFSEX_1582
+062E: get_actor 24@ task 2066 status_store_to 20@ // ret 7 if not found 
+if 
+04A4:   20@ == 7 // == constant 
+jf @GFSEX_1625 
+fade 0 500 
+8@ += 1 
+
+:GFSEX_1625
+jump @GFSEX_1705 
+
+:GFSEX_1632
+if 
+   not fading 
+jf @GFSEX_1698 
+if 
+  1@ > 0 
+jf @GFSEX_1684 
+7@ = 3 
+8@ = 0 
+jump @GFSEX_1698 
+
+:GFSEX_1684
+7@ = 6 
+8@ = 0 
+
+:GFSEX_1698
+jump @GFSEX_1705 
+
+:GFSEX_1705
+return 
+
+:GFSEX_1707
+0871: init_jump_table 8@ total_jumps 3 default_jump 0 @GFSEX_2011 jumps 0 @GFSEX_1770 1 @GFSEX_1791 2 @GFSEX_1984 -1 @GFSEX_2011 -1 @GFSEX_2011 -1 @GFSEX_2011 -1 @GFSEX_2011 
+
+:GFSEX_1770
+fade 0 1000 
+8@ += 1 
+jump @GFSEX_2011 
+
+:GFSEX_1791
+if 
+   not fading 
+jf @GFSEX_1977 
+gosub @GFSEX_8764 
+if 
+08B7:   test 9@ bit 13 
+jf @GFSEX_1841 
+0151: remove_status_text $GFSEX_EXCITEMENT 
+08C3: clear 9@ bit 13 
+
+:GFSEX_1841
+if 
+08B7:   test 9@ bit 9 
+jf @GFSEX_1871 
+0151: remove_status_text $GFSEX_POWER 
+08C3: clear 9@ bit 9 
+
+:GFSEX_1871
+03E6: remove_text_box 
+02A3: enable_widescreen 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+if 
+0500:   player $PLAYER_CHAR skin == "GIMPLEG" on_bodypart 17 
+jf @GFSEX_1938 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 17 
+Player.Build($PLAYER_CHAR)
+
+:GFSEX_1938
+if 
+  $GF_CENSORE_FLAG == 0 
+jf @GFSEX_1963 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+
+:GFSEX_1963
+fade 1 1000 
+8@ += 1 
+
+:GFSEX_1977
+jump @GFSEX_2011 
+
+:GFSEX_1984
+if 
+   not fading 
+jf @GFSEX_2004 
+gosub @GFSEX_13715 
+
+:GFSEX_2004
+jump @GFSEX_2011 
+
+:GFSEX_2011
+return 
+
+:GFSEX_2013
+0871: init_jump_table 8@ total_jumps 6 default_jump 0 @GFSEX_3124 jumps 0 @GFSEX_2076 1 @GFSEX_2294 2 @GFSEX_2489 3 @GFSEX_2706 4 @GFSEX_2948 5 @GFSEX_3055 -1 @GFSEX_3124 
+
+:GFSEX_2076
+if 
+   not fading 
+jf @GFSEX_2287 
+02A3: enable_widescreen 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 24@ 
+gosub @GFSEX_8852 
+Actor.PutAt($PLAYER_ACTOR, 10@, 12@, 14@)
+Actor.Angle($PLAYER_ACTOR) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.0 0.5 -1.0 
+16@ = Actor.Angle($PLAYER_ACTOR)
+Actor.PutAt(24@, 10@, 12@, 14@)
+Actor.Angle(24@) = 16@
+0512: show_permanent_text_box 'GF_0043'  // Press ~k~~PED_SPRINT~ when the power bar is full~n~~k~~PED_FIREWEAPON~ Change view~n~~k~~VEHICLE_ENTER_EXIT~ Quit
+04F7: status_text $GFSEX_EXCITEMENT type 1 line 1 GXT 'GF_0017' // global_variable  // Excitement:
+04F7: status_text $GFSEX_POWER type 1 line 3 GXT 'GF_0040' // global_variable  // Power:
+08BD: set 9@ bit 9 
+08BD: set 9@ bit 13 
+23@ = 1 
+gosub @GFSEX_9199 
+fade 1 1000 
+08C3: clear 9@ bit 1 
+8@ += 1 
+
+:GFSEX_2287
+jump @GFSEX_3124 
+
+:GFSEX_2294
+0812: AS_actor 24@ perform_animation "SPANKING_IDLEW" IFP "SNM" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SPANKING_IDLEP" IFP "SNM" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+08C3: clear 9@ bit 8 
+gosub @GFSEX_12387 
+if 
+  0 >= $GFSEX_EXCITEMENT 
+jf @GFSEX_2436 
+7@ = 4 
+8@ = 0 
+jump @GFSEX_3124 
+jump @GFSEX_2475 
+
+:GFSEX_2436
+if 
+  $GFSEX_EXCITEMENT >= 100 
+jf @GFSEX_2475 
+7@ = 5 
+8@ = 0 
+jump @GFSEX_3124 
+
+:GFSEX_2475
+8@ += 1 
+jump @GFSEX_3124 
+
+:GFSEX_2489
+gosub @GFSEX_12387 
+if 
+  $GFSEX_POWER >= 100 
+jf @GFSEX_2521 
+8@ += 1 
+
+:GFSEX_2521
+if 
+00E1:   player 0 pressed_key 16 
+jf @GFSEX_2607 
+if and
+88B7:   not test 9@ bit 8 
+   not Actor.Animation($PLAYER_ACTOR) == "SPANKINGP"
+jf @GFSEX_2600 
+08BD: set 9@ bit 8 
+gosub @GFSEX_11966 
+8@ = 4 
+jump @GFSEX_3124 
+
+:GFSEX_2600
+jump @GFSEX_2614 
+
+:GFSEX_2607
+08C3: clear 9@ bit 8 
+
+:GFSEX_2614
+if 
+  0 >= $GFSEX_EXCITEMENT 
+jf @GFSEX_2660 
+7@ = 4 
+8@ = 0 
+jump @GFSEX_3124 
+jump @GFSEX_2699 
+
+:GFSEX_2660
+if 
+  $GFSEX_EXCITEMENT == 100 
+jf @GFSEX_2699 
+7@ = 5 
+8@ = 0 
+jump @GFSEX_3124 
+
+:GFSEX_2699
+jump @GFSEX_3124 
+
+:GFSEX_2706
+gosub @GFSEX_12387 
+if 
+  $GFSEX_POWER >= 97 
+jf @GFSEX_2824 
+if 
+00E1:   player 0 pressed_key 16 
+jf @GFSEX_2817 
+if and
+88B7:   not test 9@ bit 8 
+   not Actor.Animation($PLAYER_ACTOR) == "SPANKINGP"
+jf @GFSEX_2810 
+08BD: set 9@ bit 8 
+gosub @GFSEX_11966 
+8@ = 4 
+jump @GFSEX_3124 
+
+:GFSEX_2810
+jump @GFSEX_2824 
+
+:GFSEX_2817
+08C3: clear 9@ bit 8 
+
+:GFSEX_2824
+if 
+  0 >= $GFSEX_POWER 
+jf @GFSEX_2856 
+gosub @GFSEX_11667 
+8@ -= 1 
+
+:GFSEX_2856
+if 
+  0 >= $GFSEX_EXCITEMENT 
+jf @GFSEX_2902 
+7@ = 4 
+8@ = 0 
+jump @GFSEX_3124 
+jump @GFSEX_2941 
+
+:GFSEX_2902
+if 
+  $GFSEX_EXCITEMENT == 100 
+jf @GFSEX_2941 
+7@ = 5 
+8@ = 0 
+jump @GFSEX_3124 
+
+:GFSEX_2941
+jump @GFSEX_3124 
+
+:GFSEX_2948
+gosub @GFSEX_12387 
+gosub @GFSEX_12007 
+0812: AS_actor 24@ perform_animation "SPANKINGW" IFP "SNM" framedelta 99.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SPANKINGP" IFP "SNM" framedelta 99.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+08C3: clear 9@ bit 5 
+8@ += 1 
+jump @GFSEX_3124 
+
+:GFSEX_3055
+gosub @GFSEX_12387 
+gosub @GFSEX_12057 
+if 
+08B7:   test 9@ bit 5 
+jf @GFSEX_3117 
+04AE: $1234 = 238 // = constant 
+09F1: play_audio_at_actor $PLAYER_ACTOR event 1190 
+gosub @GFSEX_12253 
+8@ = 1 
+
+:GFSEX_3117
+jump @GFSEX_3124 
+
+:GFSEX_3124
+return 
+
+:GFSEX_3126
+0871: init_jump_table 8@ total_jumps 3 default_jump 0 @GFSEX_3553 jumps 0 @GFSEX_3189 1 @GFSEX_3272 2 @GFSEX_3477 -1 @GFSEX_3553 -1 @GFSEX_3553 -1 @GFSEX_3553 -1 @GFSEX_3553 
+
+:GFSEX_3189
+if 
+08B7:   test 9@ bit 13 
+jf @GFSEX_3219 
+0151: remove_status_text $GFSEX_EXCITEMENT 
+08C3: clear 9@ bit 13 
+
+:GFSEX_3219
+if 
+08B7:   test 9@ bit 9 
+jf @GFSEX_3249 
+0151: remove_status_text $GFSEX_POWER 
+08C3: clear 9@ bit 9 
+
+:GFSEX_3249
+03E6: remove_text_box 
+fade 0 1000 
+8@ += 1 
+jump @GFSEX_3553 
+
+:GFSEX_3272
+if 
+   not fading 
+jf @GFSEX_3470 
+gosub @GFSEX_8852 
+Actor.PutAt($PLAYER_ACTOR, 10@, 12@, 14@)
+Actor.Angle($PLAYER_ACTOR) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.0 0.5 -1.0 
+16@ = Actor.Angle($PLAYER_ACTOR)
+Actor.PutAt(24@, 10@, 12@, 14@)
+Actor.Angle(24@) = 16@
+0812: AS_actor 24@ perform_animation "SPANKEDW" IFP "SNM" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 600000 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SPANKEDP" IFP "SNM" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 600000 // versionB 
+fade 1 1000 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_3470
+jump @GFSEX_3553 
+
+:GFSEX_3477
+if 
+   not fading 
+jf @GFSEX_3546 
+04AE: $1233 = 291 // = constant 
+04AE: $1234 = 237 // = constant 
+if 
+  33@ > 7000 
+jf @GFSEX_3546 
+08C0: clear $390 bit 4 
+7@ = 2 
+8@ = 0 
+
+:GFSEX_3546
+jump @GFSEX_3553 
+
+:GFSEX_3553
+return 
+
+:GFSEX_3555
+0871: init_jump_table 8@ total_jumps 4 default_jump 0 @GFSEX_4114 jumps 0 @GFSEX_3618 1 @GFSEX_3701 2 @GFSEX_4000 3 @GFSEX_4042 -1 @GFSEX_4114 -1 @GFSEX_4114 -1 @GFSEX_4114 
+
+:GFSEX_3618
+if 
+08B7:   test 9@ bit 13 
+jf @GFSEX_3648 
+0151: remove_status_text $GFSEX_EXCITEMENT 
+08C3: clear 9@ bit 13 
+
+:GFSEX_3648
+if 
+08B7:   test 9@ bit 9 
+jf @GFSEX_3678 
+0151: remove_status_text $GFSEX_POWER 
+08C3: clear 9@ bit 9 
+
+:GFSEX_3678
+03E6: remove_text_box 
+fade 0 1000 
+8@ += 1 
+jump @GFSEX_4114 
+
+:GFSEX_3701
+if 
+   not fading 
+jf @GFSEX_3993 
+gosub @GFSEX_8852 
+Actor.PutAt($PLAYER_ACTOR, 10@, 12@, 14@)
+Actor.Angle($PLAYER_ACTOR) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.0 0.5 -1.0 
+16@ = Actor.Angle($PLAYER_ACTOR)
+Actor.PutAt(24@, 10@, 12@, 14@)
+Actor.Angle(24@) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.707 3.136 -0.163 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 0.427 0.634 -0.5 
+Camera.SetPosition(10@, 12@, 14@, 0.0, 0.0, 0.0)
+Camera.PointAt(11@, 13@, 15@, 2)
+0812: AS_actor 24@ perform_animation "SPANKING_ENDW" IFP "SNM" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SPANKING_ENDP" IFP "SNM" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+fade 1 1000 
+8@ += 1 
+
+:GFSEX_3993
+jump @GFSEX_4114 
+
+:GFSEX_4000
+if 
+   not fading 
+jf @GFSEX_4035 
+04AE: $1233 = 289 // = constant 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_4035
+jump @GFSEX_4114 
+
+:GFSEX_4042
+0613: 16@ = actor $PLAYER_ACTOR animation "SPANKING_ENDP" time 
+if 
+  16@ == 1.0 
+jf @GFSEX_4107 
+08BA: set $390 bit 4 
+7@ = 2 
+8@ = 0 
+
+:GFSEX_4107
+jump @GFSEX_4114 
+
+:GFSEX_4114
+return 
+
+:GFSEX_4116
+0871: init_jump_table 8@ total_jumps 6 default_jump 0 @GFSEX_5341 jumps 0 @GFSEX_4179 1 @GFSEX_4373 2 @GFSEX_4954 3 @GFSEX_5070 4 @GFSEX_5180 5 @GFSEX_5278 -1 @GFSEX_5341 
+
+:GFSEX_4179
+if 
+   not fading 
+jf @GFSEX_4366 
+02A3: enable_widescreen 0 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 24@ 
+gosub @GFSEX_8852 
+Actor.PutAt($PLAYER_ACTOR, 10@, 12@, 14@)
+Actor.Angle($PLAYER_ACTOR) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.0 1.0 -1.0 
+16@ = Actor.Angle($PLAYER_ACTOR)
+16@ += 180.0 
+Actor.PutAt(24@, 10@, 12@, 14@)
+Actor.Angle(24@) = 16@
+03C4: set_status_text $GFSEX_EXCITEMENT type 1 GXT 'GF_0017' // global_variable  // Excitement:
+08BD: set 9@ bit 13 
+gosub @GFSEX_9199 
+0512: show_permanent_text_box 'GF_0020'  // Push ~k~~GO_FORWARD~ and ~k~~GO_BACK~ in rhythm~n~~k~~PED_FIREWEAPON~ Change view~n~~k~~PED_JUMPING~ Change position~n~~k~~VEHICLE_ENTER_EXIT~ Quit
+fade 1 500 
+08C3: clear 9@ bit 1 
+8@ += 1 
+
+:GFSEX_4366
+jump @GFSEX_5341 
+
+:GFSEX_4373
+33@ = 0 
+if 
+  22@ == 0 
+jf @GFSEX_4473 
+0812: AS_actor 24@ perform_animation "SEX_1_W" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_1_P" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+8@ += 1 
+
+:GFSEX_4473
+if 
+  22@ == 1 
+jf @GFSEX_4710 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SEX_1TO2_P"
+jf @GFSEX_4635 
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_1TO2_P" time 
+if 
+  16@ >= 1.0 
+jf @GFSEX_4628 
+0812: AS_actor 24@ perform_animation "SEX_2_W" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_2_P" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:GFSEX_4628
+jump @GFSEX_4703 
+
+:GFSEX_4635
+0812: AS_actor 24@ perform_animation "SEX_2_W" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_2_P" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:GFSEX_4703
+8@ += 1 
+
+:GFSEX_4710
+if 
+  22@ == 2 
+jf @GFSEX_4947 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SEX_2TO3_P"
+jf @GFSEX_4872 
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_2TO3_P" time 
+if 
+  16@ >= 1.0 
+jf @GFSEX_4865 
+0812: AS_actor 24@ perform_animation "SEX_3_W" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_3_P" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:GFSEX_4865
+jump @GFSEX_4940 
+
+:GFSEX_4872
+0812: AS_actor 24@ perform_animation "SEX_3_W" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_3_P" IFP "SEX" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+
+:GFSEX_4940
+8@ += 1 
+
+:GFSEX_4947
+jump @GFSEX_5341 
+
+:GFSEX_4954
+gosub @GFSEX_10324 
+gosub @GFSEX_10735 
+if 
+  $GFSEX_EXCITEMENT == 100 
+jf @GFSEX_5022 
+04AE: $1233 = 286 // = constant 
+Player.CanMove($PLAYER_CHAR) = False
+08BD: set 9@ bit 1 
+08BA: set $390 bit 4 
+8@ += 1 
+
+:GFSEX_5022
+if 
+  $GFSEX_EXCITEMENT == 0 
+jf @GFSEX_5063 
+08C0: clear $390 bit 4 
+03E6: remove_text_box 
+7@ = 8 
+8@ = 0 
+
+:GFSEX_5063
+jump @GFSEX_5341 
+
+:GFSEX_5070
+if 
+  22@ == 0 
+jf @GFSEX_5095 
+8@ += 1 
+
+:GFSEX_5095
+if 
+  22@ == 1 
+jf @GFSEX_5134 
+gosub @GFSEX_9199 
+22@ = 0 
+8@ += 1 
+
+:GFSEX_5134
+if 
+  22@ == 2 
+jf @GFSEX_5173 
+gosub @GFSEX_9199 
+22@ = 0 
+8@ += 1 
+
+:GFSEX_5173
+jump @GFSEX_5341 
+
+:GFSEX_5180
+0812: AS_actor 24@ perform_animation "SEX_1_CUM_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_1_CUM_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+04AE: $1233 = 289 // = constant 
+8@ += 1 
+jump @GFSEX_5341 
+
+:GFSEX_5278
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_1_CUM_P" time 
+if 
+  16@ == 1.0 
+jf @GFSEX_5334 
+7@ = 2 
+8@ = 0 
+
+:GFSEX_5334
+jump @GFSEX_5341 
+
+:GFSEX_5341
+return 
+
+:GFSEX_5343
+0871: init_jump_table 8@ total_jumps 6 default_jump 0 @GFSEX_6082 jumps 0 @GFSEX_5406 1 @GFSEX_5448 2 @GFSEX_5571 3 @GFSEX_5800 4 @GFSEX_5959 5 @GFSEX_6009 -1 @GFSEX_6082 
+
+:GFSEX_5406
+08BD: set 9@ bit 1 
+23@ = -1 
+gosub @GFSEX_9199 
+fade 1 1500 
+8@ += 1 
+jump @GFSEX_6082 
+
+:GFSEX_5448
+if 
+   not fading 
+jf @GFSEX_5564 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_STAND_START_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_STAND_START_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+8@ += 1 
+
+:GFSEX_5564
+jump @GFSEX_6082 
+
+:GFSEX_5571
+0613: 16@ = actor $PLAYER_ACTOR animation "BJ_STAND_START_P" time 
+if and
+  16@ > 0.5 
+  1.0 > 16@ 
+jf @GFSEX_5662 
+if 
+08D0:   should_skip_cutscene 
+jf @GFSEX_5662 
+fade 0 500 
+8@ = 5 
+jump @GFSEX_6082 
+
+:GFSEX_5662
+if 
+  16@ == 1.0 
+jf @GFSEX_5793 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_STAND_LOOP_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 6000 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_STAND_LOOP_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 1 time 6000 // versionB 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_5793
+jump @GFSEX_6082 
+
+:GFSEX_5800
+if 
+08D0:   should_skip_cutscene 
+jf @GFSEX_5834 
+fade 0 500 
+8@ = 5 
+jump @GFSEX_5952 
+
+:GFSEX_5834
+if 
+  33@ > 6000 
+jf @GFSEX_5952 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BJ_STAND_END_P" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor 24@ perform_animation "BJ_STAND_END_W" IFP "BLOWJOBZ" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+8@ += 1 
+
+:GFSEX_5952
+jump @GFSEX_6082 
+
+:GFSEX_5959
+062E: get_actor 24@ task 2066 status_store_to 20@ // ret 7 if not found 
+if 
+04A4:   20@ == 7 // == constant 
+jf @GFSEX_6002 
+fade 0 500 
+8@ += 1 
+
+:GFSEX_6002
+jump @GFSEX_6082 
+
+:GFSEX_6009
+if 
+   not fading 
+jf @GFSEX_6075 
+if 
+  1@ > 0 
+jf @GFSEX_6061 
+7@ = 3 
+8@ = 0 
+jump @GFSEX_6075 
+
+:GFSEX_6061
+7@ = 6 
+8@ = 0 
+
+:GFSEX_6075
+jump @GFSEX_6082 
+
+:GFSEX_6082
+return 
+
+:GFSEX_6084
+0871: init_jump_table 8@ total_jumps 2 default_jump 0 @GFSEX_6684 jumps 0 @GFSEX_6147 1 @GFSEX_6508 -1 @GFSEX_6684 -1 @GFSEX_6684 -1 @GFSEX_6684 -1 @GFSEX_6684 -1 @GFSEX_6684 
+
+:GFSEX_6147
+if 
+  22@ == 0 
+jf @GFSEX_6265 
+0812: AS_actor 24@ perform_animation "SEX_1_FAIL_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_1_FAIL_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+04AE: $1233 = 288 // = constant 
+8@ += 1 
+jump @GFSEX_6684 
+
+:GFSEX_6265
+if 
+  22@ == 1 
+jf @GFSEX_6383 
+0812: AS_actor 24@ perform_animation "SEX_2_FAIL_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_2_FAIL_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+04AE: $1233 = 288 // = constant 
+8@ += 1 
+jump @GFSEX_6684 
+
+:GFSEX_6383
+if 
+  22@ == 2 
+jf @GFSEX_6501 
+0812: AS_actor 24@ perform_animation "SEX_3_FAIL_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_3_FAIL_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time 0 // versionB 
+04AE: $1233 = 288 // = constant 
+8@ += 1 
+jump @GFSEX_6684 
+
+:GFSEX_6501
+jump @GFSEX_6684 
+
+:GFSEX_6508
+if 
+  22@ == 0 
+jf @GFSEX_6555 
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_1_FAIL_P" time 
+jump @GFSEX_6642 
+
+:GFSEX_6555
+if 
+  22@ == 1 
+jf @GFSEX_6602 
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_2_FAIL_P" time 
+jump @GFSEX_6642 
+
+:GFSEX_6602
+if 
+  22@ == 2 
+jf @GFSEX_6642 
+0613: 16@ = actor $PLAYER_ACTOR animation "SEX_3_FAIL_P" time 
+
+:GFSEX_6642
+if 
+  16@ == 1.0 
+jf @GFSEX_6677 
+7@ = 2 
+8@ = 0 
+
+:GFSEX_6677
+jump @GFSEX_6684 
+
+:GFSEX_6684
+return 
+
+:GFSEX_6686
+0871: init_jump_table 8@ total_jumps 8 default_jump 0 @GFSEX_7563 jumps 0 @GFSEX_6814 1 @GFSEX_6895 2 @GFSEX_7180 3 @GFSEX_7222 4 @GFSEX_7284 5 @GFSEX_7385 6 @GFSEX_7447 
+0872: jump_table_jumps 7 @GFSEX_7509 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 -1 @GFSEX_7563 
+
+:GFSEX_6814
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @GFSEX_6860 
+25@ = Actor.CurrentCar($PLAYER_ACTOR)
+Car.SetImmunities(25@, 1, 1, 1, 1, 1)
+jump @GFSEX_6875 
+
+:GFSEX_6860
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+
+:GFSEX_6875
+fade 0 0 
+8@ += 1 
+jump @GFSEX_7563 
+
+:GFSEX_6895
+if 
+   not fading 
+jf @GFSEX_7173 
+select_interior 0 
+0860: link_actor 24@ to_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @GFSEX_6964 
+Actor.PutAt($PLAYER_ACTOR, 3@, 4@, 5@)
+Actor.Angle($PLAYER_ACTOR) = 6@
+
+:GFSEX_6964
+Camera.SetAtPos(3@, 4@, 5@)
+04E4: refresh_game_renderer_at 3@ 4@ 
+0337: set_actor $PLAYER_ACTOR visibility 0 
+Player.CanMove($PLAYER_CHAR) = False
+02A3: enable_widescreen 1 
+0581: enable_radar 0 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 1 
+03F4: set_all_cars_apply_damage_rules 0 
+gosub @GFSEX_13248 
+Actor.PutAt(24@, 10@, 12@, 14@)
+0619: enable_actor 24@ collision_detection 0 
+0337: set_actor 24@ visibility 0 
+Camera.SetPosition(10@, 12@, 14@, 0.0, 0.0, 0.0)
+Camera.PointAt(11@, 13@, 15@, 2)
+099C: jiggle_camera type 5 timelimit 5000.0 intensity 10.0 
+00BF: 20@ = current_time_hours, 21@ = current_time_minutes 
+21@ += 30 
+if 
+  21@ > 60 
+jf @GFSEX_7151 
+21@ -= 60 
+20@ += 1 
+
+:GFSEX_7151
+00C0: set_current_time_hours_to 20@ minutes_to 21@ 
+fade 1 1000 
+8@ += 1 
+
+:GFSEX_7173
+jump @GFSEX_7563 
+
+:GFSEX_7180
+if 
+   not fading 
+jf @GFSEX_7215 
+04AE: $1233 = 284 // = constant 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_7215
+jump @GFSEX_7563 
+
+:GFSEX_7222
+if 
+  33@ > 3000 
+jf @GFSEX_7277 
+04AE: $1233 = 284 // = constant 
+33@ = 0 
+099C: jiggle_camera type 5 timelimit 3000.0 intensity 15.0 
+8@ += 1 
+
+:GFSEX_7277
+jump @GFSEX_7563 
+
+:GFSEX_7284
+if 
+  33@ > 3000 
+jf @GFSEX_7378 
+$1233 = -2 
+if 
+  1@ > 0 
+jf @GFSEX_7343 
+04AE: $1234 = 239 // = constant 
+jump @GFSEX_7350 
+
+:GFSEX_7343
+04AE: $1234 = 117 // = constant 
+
+:GFSEX_7350
+099C: jiggle_camera type 5 timelimit 3000.0 intensity 20.0 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_7378
+jump @GFSEX_7563 
+
+:GFSEX_7385
+if 
+  33@ > 3000 
+jf @GFSEX_7440 
+04AE: $1233 = 287 // = constant 
+099C: jiggle_camera type 5 timelimit 4000.0 intensity 30.0 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_7440
+jump @GFSEX_7563 
+
+:GFSEX_7447
+if 
+  33@ > 4000 
+jf @GFSEX_7502 
+04AE: $1233 = 290 // = constant 
+099C: jiggle_camera type 5 timelimit 3000.0 intensity 5.0 
+33@ = 0 
+8@ += 1 
+
+:GFSEX_7502
+jump @GFSEX_7563 
+
+:GFSEX_7509
+if 
+  33@ > 3000 
+jf @GFSEX_7556 
+08BA: set $390 bit 2 
+08BA: set $390 bit 4 
+7@ = 2 
+8@ = 0 
+
+:GFSEX_7556
+jump @GFSEX_7563 
+
+:GFSEX_7563
+return 
+
+:GFSEX_7565
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFSEX_7982 jumps 0 @GFSEX_7628 1 @GFSEX_7687 2 @GFSEX_7746 3 @GFSEX_7805 4 @GFSEX_7864 5 @GFSEX_7923 -1 @GFSEX_7982 
+
+:GFSEX_7628
+023C: load_special_actor 'GANGRL1' as 1 // models 290-299 
+
+:GFSEX_7641
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7680 
+wait 0 
+023C: load_special_actor 'GANGRL1' as 1 // models 290-299 
+jump @GFSEX_7641 
+
+:GFSEX_7680
+jump @GFSEX_7982 
+
+:GFSEX_7687
+023C: load_special_actor 'MECGRL1' as 1 // models 290-299 
+
+:GFSEX_7700
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7739 
+wait 0 
+023C: load_special_actor 'MECGRL1' as 1 // models 290-299 
+jump @GFSEX_7700 
+
+:GFSEX_7739
+jump @GFSEX_7982 
+
+:GFSEX_7746
+023C: load_special_actor 'GUNGRL1' as 1 // models 290-299 
+
+:GFSEX_7759
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7798 
+wait 0 
+023C: load_special_actor 'GUNGRL1' as 1 // models 290-299 
+jump @GFSEX_7759 
+
+:GFSEX_7798
+jump @GFSEX_7982 
+
+:GFSEX_7805
+023C: load_special_actor 'COPGRL1' as 1 // models 290-299 
+
+:GFSEX_7818
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7857 
+wait 0 
+023C: load_special_actor 'COPGRL1' as 1 // models 290-299 
+jump @GFSEX_7818 
+
+:GFSEX_7857
+jump @GFSEX_7982 
+
+:GFSEX_7864
+023C: load_special_actor 'NURGRL1' as 1 // models 290-299 
+
+:GFSEX_7877
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7916 
+wait 0 
+023C: load_special_actor 'NURGRL1' as 1 // models 290-299 
+jump @GFSEX_7877 
+
+:GFSEX_7916
+jump @GFSEX_7982 
+
+:GFSEX_7923
+023C: load_special_actor 'CROGRL1' as 1 // models 290-299 
+
+:GFSEX_7936
+if 
+823D:   not special_actor 1 loaded 
+jf @GFSEX_7975 
+wait 0 
+023C: load_special_actor 'CROGRL1' as 1 // models 290-299 
+jump @GFSEX_7936 
+
+:GFSEX_7975
+jump @GFSEX_7982 
+
+:GFSEX_7982
+24@ = Actor.Create(CivFemale, #SPECIAL01, 0.0, 0.0, 0.0)
+Actor.SetImmunities(24@, 1, 1, 1, 1, 1)
+0619: enable_actor 24@ collision_detection 0 
+Actor.RemoveFromMissionCleanupList(24@)
+return 
+
+:GFSEX_8036
+04ED: load_animation "BLOWJOBZ" 
+04ED: load_animation "KISSING" 
+04ED: load_animation "SEX" 
+04ED: load_animation "SNM" 
+
+:GFSEX_8073
+wait 0 
+if and
+04EE:   animation "BLOWJOBZ" loaded 
+04EE:   animation "SEX" loaded 
+04EE:   animation "KISSING" loaded 
+04EE:   animation "SNM" loaded 
+jf @GFSEX_8134 
+return 
+jump @GFSEX_8178 
+
+:GFSEX_8134
+04ED: load_animation "BLOWJOBZ" 
+04ED: load_animation "KISSING" 
+04ED: load_animation "SEX" 
+04ED: load_animation "SNM" 
+jump @GFSEX_8073 
+
+:GFSEX_8178
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFSEX_8607 jumps 0 @GFSEX_8241 1 @GFSEX_8302 2 @GFSEX_8363 3 @GFSEX_8424 4 @GFSEX_8485 5 @GFSEX_8546 -1 @GFSEX_8607 
+
+:GFSEX_8241
+10@ = 245.6252 
+12@ = 304.1411 
+14@ = 998.32 
+16@ = 0.0 
+20@ = 1 
+21@ = 1 
+jump @GFSEX_8607 
+
+:GFSEX_8302
+10@ = 306.1999 
+12@ = 305.1225 
+14@ = 1002.297 
+16@ = 90.0 
+20@ = 4 
+21@ = 1 
+jump @GFSEX_8607 
+
+:GFSEX_8363
+10@ = 288.7753 
+12@ = 308.4772 
+14@ = 998.1641 
+16@ = 213.8029 
+20@ = 3 
+21@ = 7 
+jump @GFSEX_8607 
+
+:GFSEX_8424
+10@ = 324.6405 
+12@ = 307.4622 
+14@ = 998.1558 
+16@ = 175.0 
+20@ = 5 
+21@ = 7 
+jump @GFSEX_8607 
+
+:GFSEX_8485
+10@ = 271.4699 
+12@ = 307.2668 
+14@ = 998.32 
+16@ = 265.0 
+20@ = 2 
+21@ = 1 
+jump @GFSEX_8607 
+
+:GFSEX_8546
+10@ = 345.6252 
+12@ = 304.1411 
+14@ = 998.25 
+16@ = 0.0 
+20@ = 6 
+21@ = 1 
+jump @GFSEX_8607 
+
+:GFSEX_8607
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0792: disembark_instantly_actor 24@ 
+0619: enable_actor 24@ collision_detection 0 
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Actor.PutAt($PLAYER_ACTOR, 10@, 12@, 14@)
+Actor.Angle($PLAYER_ACTOR) = 16@
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.0 1.0 -1.0 
+16@ = Actor.Angle($PLAYER_ACTOR)
+16@ += 180.0 
+Actor.PutAt(24@, 10@, 12@, 14@)
+Actor.Angle(24@) = 16@
+select_interior 20@ 
+0860: link_actor 24@ to_interior 20@ 
+0860: link_actor $PLAYER_ACTOR to_interior 20@ 
+Camera.SetAtPos(10@, 12@, 14@)
+04E4: refresh_game_renderer_at 10@ 12@ 
+return 
+
+:GFSEX_8764
+select_interior 0 
+0860: link_actor $PLAYER_ACTOR to_interior 0 
+0395: clear_area 1 at 3@ 4@ 5@ radius 3.0 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @GFSEX_8831 
+Actor.PutAt($PLAYER_ACTOR, 3@, 4@, 5@)
+Actor.Angle($PLAYER_ACTOR) = 6@
+
+:GFSEX_8831
+04E4: refresh_game_renderer_at 3@ 4@ 
+Camera.SetAtPos(3@, 4@, 5@)
+return 
+
+:GFSEX_8852
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFSEX_9197 jumps 0 @GFSEX_8915 1 @GFSEX_9009 2 @GFSEX_9056 3 @GFSEX_8962 4 @GFSEX_9103 5 @GFSEX_9150 -1 @GFSEX_9197 
+
+:GFSEX_8915
+10@ = 245.617 
+12@ = 301.507 
+14@ = 999.046 
+16@ = 0.0 
+jump @GFSEX_9197 
+
+:GFSEX_8962
+10@ = 318.4 
+12@ = 311.85 
+14@ = 998.8 
+16@ = 110.0 
+jump @GFSEX_9197 
+
+:GFSEX_9009
+10@ = 308.8862 
+12@ = 301.9657 
+14@ = 1003.0 
+16@ = 0.0 
+jump @GFSEX_9197 
+
+:GFSEX_9056
+10@ = 282.5775 
+12@ = 307.7573 
+14@ = 1002.391 
+16@ = 0.0 
+jump @GFSEX_9197 
+
+:GFSEX_9103
+10@ = 270.12 
+12@ = 307.737 
+14@ = 999.0204 
+16@ = 180.0 
+jump @GFSEX_9197 
+
+:GFSEX_9150
+10@ = 345.617 
+12@ = 301.507 
+14@ = 998.8 
+16@ = 0.0 
+jump @GFSEX_9197 
+
+:GFSEX_9197
+return 
+
+:GFSEX_9199
+0871: init_jump_table 23@ total_jumps 5 default_jump 1 @GFSEX_9803 jumps -1 @GFSEX_9262 0 @GFSEX_9327 1 @GFSEX_9446 2 @GFSEX_9565 3 @GFSEX_9684 -1 @GFSEX_9929 -1 @GFSEX_9929 
+
+:GFSEX_9262
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 1.8 2.9 0.353 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 1.0 0.8701 0.1828 
+jump @GFSEX_9929 
+
+:GFSEX_9327
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset -0.6375 2.3043 0.1065 
+if 
+  7@ == 3 
+jf @GFSEX_9410 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.3435 1.4278 -0.1 
+jump @GFSEX_9439 
+
+:GFSEX_9410
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.3435 1.4278 -0.2746 
+
+:GFSEX_9439
+jump @GFSEX_9929 
+
+:GFSEX_9446
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 1.5989 0.7828 -0.2044 
+if 
+  7@ == 3 
+jf @GFSEX_9529 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 0.6223 0.6748 -0.2 
+jump @GFSEX_9558 
+
+:GFSEX_9529
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 0.6223 0.6748 -0.3904 
+
+:GFSEX_9558
+jump @GFSEX_9929 
+
+:GFSEX_9565
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset 0.9748 -0.1026 0.7511 
+if 
+  7@ == 3 
+jf @GFSEX_9648 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 0.4155 0.3026 0.01 
+jump @GFSEX_9677 
+
+:GFSEX_9648
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset 0.4155 0.3026 0.0279 
+
+:GFSEX_9677
+jump @GFSEX_9929 
+
+:GFSEX_9684
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset -1.3103 1.6396 -0.6208 
+if 
+  7@ == 3 
+jf @GFSEX_9767 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.49 1.0874 -0.2 
+jump @GFSEX_9796 
+
+:GFSEX_9767
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.49 1.0874 -0.4726 
+
+:GFSEX_9796
+jump @GFSEX_9929 
+
+:GFSEX_9803
+23@ = 0 
+04C4: store_coords_to 10@ 12@ 14@ from_actor $PLAYER_ACTOR with_offset -0.6375 2.3043 0.1065 
+if 
+  7@ == 3 
+jf @GFSEX_9893 
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.3435 1.4278 0.0 
+jump @GFSEX_9922 
+
+:GFSEX_9893
+04C4: store_coords_to 11@ 13@ 15@ from_actor $PLAYER_ACTOR with_offset -0.3435 1.4278 -0.2746 
+
+:GFSEX_9922
+jump @GFSEX_9929 
+
+:GFSEX_9929
+Camera.SetPosition(10@, 12@, 14@, 0.0, 0.0, 0.0)
+Camera.PointAt(11@, 13@, 15@, 2)
+23@ += 1 
+return 
+
+:GFSEX_9977
+if 
+  7@ == 6 
+jf @GFSEX_10322 
+22@ += 1 
+0871: init_jump_table 22@ total_jumps 3 default_jump 0 @GFSEX_10315 jumps 1 @GFSEX_10065 2 @GFSEX_10146 3 @GFSEX_10227 -1 @GFSEX_10315 -1 @GFSEX_10315 -1 @GFSEX_10315 -1 @GFSEX_10315 
+
+:GFSEX_10065
+0812: AS_actor 24@ perform_animation "SEX_1TO2_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_1TO2_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+jump @GFSEX_10315 
+
+:GFSEX_10146
+0812: AS_actor 24@ perform_animation "SEX_2TO3_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_2TO3_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+jump @GFSEX_10315 
+
+:GFSEX_10227
+22@ = 0 
+0812: AS_actor 24@ perform_animation "SEX_3TO1_W" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation "SEX_3TO1_P" IFP "SEX" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time 0 // versionB 
+jump @GFSEX_10315 
+
+:GFSEX_10315
+8@ = 1 
+
+:GFSEX_10322
+return 
+
+:GFSEX_10324
+008B: 20@ = $GFSEX_EXCITEMENT // (int) 
+20@ /= 10 
+if 
+  3 > 20@ 
+jf @GFSEX_10364 
+20@ = 0 
+
+:GFSEX_10364
+0871: init_jump_table 20@ total_jumps 8 default_jump 0 @GFSEX_10733 jumps 0 @GFSEX_10492 3 @GFSEX_10523 4 @GFSEX_10554 5 @GFSEX_10585 6 @GFSEX_10616 7 @GFSEX_10647 8 @GFSEX_10678 
+0872: jump_table_jumps 9 @GFSEX_10709 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 -1 @GFSEX_10733 
+
+:GFSEX_10492
+16@ = 0.035 
+08C3: clear 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10523
+16@ = 0.045 
+08C3: clear 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10554
+16@ = 0.05 
+08C3: clear 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10585
+16@ = 0.055 
+08C3: clear 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10616
+16@ = 0.055 
+08C3: clear 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10647
+16@ = 0.08 
+08BD: set 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10678
+16@ = 0.08 
+08BD: set 9@ bit 6 
+08C3: clear 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10709
+16@ = 0.09 
+08BD: set 9@ bit 7 
+jump @GFSEX_10733 
+
+:GFSEX_10733
+return 
+
+:GFSEX_10735
+0871: init_jump_table 22@ total_jumps 3 default_jump 0 @GFSEX_11167 jumps 0 @GFSEX_10798 1 @GFSEX_10921 2 @GFSEX_11044 -1 @GFSEX_11167 -1 @GFSEX_11167 -1 @GFSEX_11167 -1 @GFSEX_11167 
+
+:GFSEX_10798
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SEX_1_P"
+jf @GFSEX_10856 
+0612: set_actor $PLAYER_ACTOR animation "SEX_1_P" paused 0 
+0614: set_actor $PLAYER_ACTOR animation "SEX_1_P" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_10856
+if 
+   Actor.Animation(24@) == "SEX_1_W"
+jf @GFSEX_10914 
+0612: set_actor 24@ animation "SEX_1_W" paused 0 
+0614: set_actor 24@ animation "SEX_1_W" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_10914
+jump @GFSEX_11167 
+
+:GFSEX_10921
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SEX_2_P"
+jf @GFSEX_10979 
+0612: set_actor $PLAYER_ACTOR animation "SEX_2_P" paused 0 
+0614: set_actor $PLAYER_ACTOR animation "SEX_2_P" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_10979
+if 
+   Actor.Animation(24@) == "SEX_2_W"
+jf @GFSEX_11037 
+0612: set_actor 24@ animation "SEX_2_W" paused 0 
+0614: set_actor 24@ animation "SEX_2_W" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_11037
+jump @GFSEX_11167 
+
+:GFSEX_11044
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SEX_3_P"
+jf @GFSEX_11102 
+0612: set_actor $PLAYER_ACTOR animation "SEX_3_P" paused 0 
+0614: set_actor $PLAYER_ACTOR animation "SEX_3_P" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_11102
+if 
+   Actor.Animation(24@) == "SEX_3_W"
+jf @GFSEX_11160 
+0612: set_actor 24@ animation "SEX_3_W" paused 0 
+0614: set_actor 24@ animation "SEX_3_W" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_11160
+jump @GFSEX_11167 
+
+:GFSEX_11167
+if 
+08B7:   test 9@ bit 5 
+jf @GFSEX_11200 
+0067: $GF_ANIM_TIME -= 16@ // (float) 
+jump @GFSEX_11208 
+
+:GFSEX_11200
+005F: $GF_ANIM_TIME += 16@ // (float) 
+
+:GFSEX_11208
+if 
+  0.0 >= $GF_ANIM_TIME 
+jf @GFSEX_11253 
+$GF_ANIM_TIME = 0.01 
+08C3: clear 9@ bit 5 
+gosub @GFSEX_11328 
+
+:GFSEX_11253
+if 
+  $GF_ANIM_TIME >= 1.0 
+jf @GFSEX_11298 
+$GF_ANIM_TIME = 0.99 
+08BD: set 9@ bit 5 
+gosub @GFSEX_11328 
+
+:GFSEX_11298
+if 
+  $GF_ANIM_TIME == 0.5 
+jf @GFSEX_11326 
+gosub @GFSEX_11328 
+
+:GFSEX_11326
+return 
+
+:GFSEX_11328
+0494: get_joystick 0 direction_offset_to $1213 $1214 $1215 $1216 
+008F: 17@ = integer $1214 to_float 
+17@ /= 128.0 
+if 
+  $GF_ANIM_TIME == 0.5 
+jf @GFSEX_11427 
+if 
+  0.0 > 17@ 
+jf @GFSEX_11418 
+gosub @GFSEX_11562 
+jump @GFSEX_11427 
+
+:GFSEX_11418
+gosub @GFSEX_11667 
+return 
+
+:GFSEX_11427
+if 
+08B7:   test 9@ bit 5 
+jf @GFSEX_11518 
+015B: shake_player_controller 0 time 200 intensity 100 
+04AE: $1233 = 283 // = constant 
+04AE: $1234 = 116 // = constant 
+if 
+  -0.8 > 17@ 
+jf @GFSEX_11504 
+gosub @GFSEX_11562 
+jump @GFSEX_11511 
+
+:GFSEX_11504
+gosub @GFSEX_11667 
+
+:GFSEX_11511
+jump @GFSEX_11560 
+
+:GFSEX_11518
+if 
+  17@ > 0.8 
+jf @GFSEX_11553 
+gosub @GFSEX_11562 
+jump @GFSEX_11560 
+
+:GFSEX_11553
+gosub @GFSEX_11667 
+
+:GFSEX_11560
+return 
+
+:GFSEX_11562
+if 
+  100 > $GFSEX_EXCITEMENT 
+jf @GFSEX_11658 
+if 
+08B7:   test 9@ bit 6 
+jf @GFSEX_11612 
+$GFSEX_EXCITEMENT += 5 
+jump @GFSEX_11651 
+
+:GFSEX_11612
+if 
+08B7:   test 9@ bit 7 
+jf @GFSEX_11644 
+$GFSEX_EXCITEMENT += 10 
+jump @GFSEX_11651 
+
+:GFSEX_11644
+$GFSEX_EXCITEMENT += 1 
+
+:GFSEX_11651
+jump @GFSEX_11665 
+
+:GFSEX_11658
+$GFSEX_EXCITEMENT = 100 
+
+:GFSEX_11665
+return 
+
+:GFSEX_11667
+if 
+  33@ > 5000 
+jf @GFSEX_11764 
+if 
+  $GFSEX_EXCITEMENT > 0 
+jf @GFSEX_11757 
+if and
+  $GFSEX_EXCITEMENT > 10 
+88B7:   not test 9@ bit 6 
+jf @GFSEX_11743 
+$GFSEX_EXCITEMENT -= 5 
+jump @GFSEX_11750 
+
+:GFSEX_11743
+$GFSEX_EXCITEMENT -= 1 
+
+:GFSEX_11750
+jump @GFSEX_11764 
+
+:GFSEX_11757
+$GFSEX_EXCITEMENT = 0 
+
+:GFSEX_11764
+return 
+
+:GFSEX_11766
+if 
+  18@ > 90.0 
+jf @GFSEX_11797 
+18@ = 0.0 
+
+:GFSEX_11797
+02F6: 19@ = sine 18@ // (float) 
+19@ *= 13.5 
+0092: 20@ = float 19@ to_integer 
+005C: 20@ += $GFSEX_POWER // (int) 
+if 
+  20@ >= 100 
+jf @GFSEX_11863 
+$GFSEX_POWER = 100 
+jump @GFSEX_11871 
+
+:GFSEX_11863
+008A: $GFSEX_POWER = 20@ // (int) 
+
+:GFSEX_11871
+18@ += 1.0 
+return 
+
+:GFSEX_11883
+18@ = 0.0 
+if 
+  $GFSEX_POWER >= 97 
+jf @GFSEX_11925 
+$GFSEX_POWER -= 3 
+jump @GFSEX_11964 
+
+:GFSEX_11925
+if 
+  7 >= $GFSEX_POWER 
+jf @GFSEX_11957 
+$GFSEX_POWER = 0 
+jump @GFSEX_11964 
+
+:GFSEX_11957
+$GFSEX_POWER -= 7 
+
+:GFSEX_11964
+return 
+
+:GFSEX_11966
+if 
+  $GFSEX_POWER >= 97 
+jf @GFSEX_11998 
+08BD: set 9@ bit 10 
+jump @GFSEX_12005 
+
+:GFSEX_11998
+08C3: clear 9@ bit 10 
+
+:GFSEX_12005
+return 
+
+:GFSEX_12007
+16@ = 0.025 
+if 
+08B7:   test 9@ bit 10 
+jf @GFSEX_12045 
+16@ += 0.015 
+
+:GFSEX_12045
+$GF_ANIM_TIME = 0.01 
+return 
+
+:GFSEX_12057
+if 
+   Actor.Animation($PLAYER_ACTOR) == "SPANKINGP"
+jf @GFSEX_12121 
+0612: set_actor $PLAYER_ACTOR animation "SPANKINGP" paused 0 
+0614: set_actor $PLAYER_ACTOR animation "SPANKINGP" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_12121
+if 
+   Actor.Animation(24@) == "SPANKINGW"
+jf @GFSEX_12185 
+0612: set_actor 24@ animation "SPANKINGW" paused 0 
+0614: set_actor 24@ animation "SPANKINGW" progress_to $GF_ANIM_TIME // 0.0 to 1.0 
+
+:GFSEX_12185
+if 
+88B7:   not test 9@ bit 5 
+jf @GFSEX_12211 
+005F: $GF_ANIM_TIME += 16@ // (float) 
+
+:GFSEX_12211
+if 
+  $GF_ANIM_TIME >= 1.0 
+jf @GFSEX_12251 
+$GF_ANIM_TIME = 0.99 
+08BD: set 9@ bit 5 
+return 
+
+:GFSEX_12251
+return 
+
+:GFSEX_12253
+if 
+08B7:   test 9@ bit 10 
+jf @GFSEX_12325 
+04AE: $1233 = 286 // = constant 
+if 
+  100 >= $GFSEX_EXCITEMENT 
+jf @GFSEX_12311 
+$GFSEX_EXCITEMENT += 10 
+jump @GFSEX_12318 
+
+:GFSEX_12311
+$GFSEX_EXCITEMENT = 100 
+
+:GFSEX_12318
+jump @GFSEX_12364 
+
+:GFSEX_12325
+if 
+  $GFSEX_EXCITEMENT >= 10 
+jf @GFSEX_12357 
+$GFSEX_EXCITEMENT -= 10 
+jump @GFSEX_12364 
+
+:GFSEX_12357
+$GFSEX_EXCITEMENT = 0 
+
+:GFSEX_12364
+08C3: clear 9@ bit 10 
+08C3: clear 9@ bit 11 
+08C3: clear 9@ bit 12 
+return 
+
+:GFSEX_12387
+if and
+  100 > $GFSEX_POWER 
+  $GFSEX_POWER > 0 
+08B7:   test 9@ bit 14 
+jf @GFSEX_12428 
+gosub @GFSEX_11883 
+return 
+
+:GFSEX_12428
+if and
+  100 > $GFSEX_POWER 
+  $GFSEX_POWER > 0 
+88B7:   not test 9@ bit 14 
+jf @GFSEX_12469 
+gosub @GFSEX_11766 
+return 
+
+:GFSEX_12469
+if 
+  $GFSEX_POWER >= 100 
+jf @GFSEX_12510 
+$GFSEX_POWER = 100 
+08BD: set 9@ bit 14 
+gosub @GFSEX_11883 
+return 
+
+:GFSEX_12510
+if 
+  0 >= $GFSEX_POWER 
+jf @GFSEX_12551 
+$GFSEX_POWER = 0 
+08C3: clear 9@ bit 14 
+gosub @GFSEX_11766 
+return 
+
+:GFSEX_12551
+return 
+
+:GFSEX_12553
+0871: init_jump_table $1232 total_jumps 7 default_jump 0 @GFSEX_13085 jumps 0 @GFSEX_12616 1 @GFSEX_12648 2 @GFSEX_12660 3 @GFSEX_12674 4 @GFSEX_12943 5 @GFSEX_13043 6 @GFSEX_12852 
+
+:GFSEX_12616
+if 
+  $1233 > 0 
+jf @GFSEX_12641 
+$1232 = 3 
+
+:GFSEX_12641
+jump @GFSEX_13085 
+
+:GFSEX_12648
+094F: enable_actor 24@ pain_audio 
+jump @GFSEX_13085 
+
+:GFSEX_12660
+094E: set_actor 24@ mute_pain_audio 0 
+jump @GFSEX_13085 
+
+:GFSEX_12674
+if 
+894D:   not actor 24@ mutally_active 
+jf @GFSEX_12845 
+if 
+  $1233 > 0 
+jf @GFSEX_12785 
+09D5: play_sound_of_actor 24@ soundslot $1233 unknown_flags 1 1 1 as $1235 // extended 0947 
+gosub @GFSEX_13087 
+$1233 = -1 
+if 
+  $1234 > 0 
+jf @GFSEX_12771 
+$1232 = 6 
+jump @GFSEX_12778 
+
+:GFSEX_12771
+$1232 = 0 
+
+:GFSEX_12778
+jump @GFSEX_12845 
+
+:GFSEX_12785
+if 
+  $1233 == -2 
+jf @GFSEX_12824 
+$1233 = -1 
+$1232 = 6 
+jump @GFSEX_12845 
+
+:GFSEX_12824
+$1233 = -1 
+$1234 = -1 
+$1232 = 0 
+
+:GFSEX_12845
+jump @GFSEX_13085 
+
+:GFSEX_12852
+if and
+894D:   not actor $PLAYER_ACTOR mutally_active 
+894D:   not actor 24@ mutally_active 
+jf @GFSEX_12936 
+if 
+  $1234 > 0 
+jf @GFSEX_12929 
+09D5: play_sound_of_actor $PLAYER_ACTOR soundslot $1234 unknown_flags 1 1 1 as $1235 // extended 0947 
+$1234 = -1 
+$1232 = 0 
+jump @GFSEX_12936 
+
+:GFSEX_12929
+$1232 = 0 
+
+:GFSEX_12936
+jump @GFSEX_13085 
+
+:GFSEX_12943
+094E: set_actor 24@ mute_pain_audio 0 
+if 
+894D:   not actor 24@ mutally_active 
+jf @GFSEX_13036 
+if 
+  $1233 > 0 
+jf @GFSEX_13029 
+09D5: play_sound_of_actor 24@ soundslot $1233 unknown_flags 1 1 1 as $1235 // extended 0947 
+gosub @GFSEX_13087 
+$1233 = -1 
+$1232 = 5 
+jump @GFSEX_13036 
+
+:GFSEX_13029
+$1232 = 0 
+
+:GFSEX_13036
+jump @GFSEX_13085 
+
+:GFSEX_13043
+if 
+894D:   not actor 24@ mutally_active 
+jf @GFSEX_13078 
+094F: enable_actor 24@ pain_audio 
+$1233 = -1 
+$1232 = 0 
+
+:GFSEX_13078
+jump @GFSEX_13085 
+
+:GFSEX_13085
+return 
+
+:GFSEX_13087
+0871: init_jump_table $1233 total_jumps 4 default_jump 0 @GFSEX_13246 jumps 286 @GFSEX_13154 288 @GFSEX_13177 289 @GFSEX_13200 291 @GFSEX_13223 -1 @GFSEX_13246 -1 @GFSEX_13246 -1 @GFSEX_13246 
+
+:GFSEX_13154
+00BC: show_text_highpriority GXT 'GF_0019' time 5000 flag 1  // That's the spot! Remember; nice guys finish last!
+jump @GFSEX_13246 
+
+:GFSEX_13177
+00BC: show_text_highpriority GXT 'GF_0067' time 5000 flag 1  // Failure to satisfy a woman is a CRIME!
+jump @GFSEX_13246 
+
+:GFSEX_13200
+00BC: show_text_highpriority GXT 'GF_0042' time 5000 flag 1  // You the man! Oh yeah! You the man!
+jump @GFSEX_13246 
+
+:GFSEX_13223
+00BC: show_text_highpriority GXT 'GF_0067' time 5000 flag 1  // Failure to satisfy a woman is a CRIME!
+jump @GFSEX_13246 
+
+:GFSEX_13246
+return 
+
+:GFSEX_13248
+0871: init_jump_table 0@ total_jumps 6 default_jump 0 @GFSEX_13713 jumps 0 @GFSEX_13311 1 @GFSEX_13445 2 @GFSEX_13512 3 @GFSEX_13378 4 @GFSEX_13579 5 @GFSEX_13646 -1 @GFSEX_13713 
+
+:GFSEX_13311
+10@ = 2394.408 
+12@ = -1728.215 
+14@ = 14.2715 
+11@ = 2395.066 
+13@ = -1727.465 
+15@ = 14.2063 
+jump @GFSEX_13713 
+
+:GFSEX_13378
+10@ = -1401.494 
+12@ = 2640.099 
+14@ = 59.3883 
+11@ = -1400.704 
+13@ = 2639.641 
+15@ = 58.9806 
+jump @GFSEX_13713 
+
+:GFSEX_13445
+10@ = -1799.737 
+12@ = 1192.863 
+14@ = 29.6868 
+11@ = -1799.472 
+13@ = 1193.683 
+15@ = 29.1813 
+jump @GFSEX_13713 
+
+:GFSEX_13512
+10@ = -383.3153 
+12@ = -1435.266 
+14@ = 26.695 
+11@ = -382.5756 
+13@ = -1435.887 
+15@ = 26.4366 
+jump @GFSEX_13713 
+
+:GFSEX_13579
+10@ = -2582.293 
+12@ = 1147.762 
+14@ = 59.6235 
+11@ = -2581.406 
+13@ = 1147.768 
+15@ = 59.1605 
+jump @GFSEX_13713 
+
+:GFSEX_13646
+10@ = 2032.235 
+12@ = 2734.541 
+14@ = 13.3226 
+11@ = 2032.744 
+13@ = 2733.714 
+15@ = 13.0817 
+jump @GFSEX_13713 
+
+:GFSEX_13713
+return 
+
+:GFSEX_13715
+04EF: release_animation "SNM" 
+04EF: release_animation "SEX" 
+04EF: release_animation "BLOWJOBZ" 
+04EF: release_animation "KISSING" 
+0296: unload_special_actor 1 
+Actor.DestroyInstantly(24@)
+if 
+   not Car.Wrecked(25@)
+jf @GFSEX_13797 
+Car.SetImmunities(25@, 0, 0, 0, 0, 0)
+Car.RemoveReferences(25@)
+
+:GFSEX_13797
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @GFSEX_13851 
+0337: set_actor $PLAYER_ACTOR visibility 1 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+0687: clear_actor $PLAYER_ACTOR task 
+Player.CanMove($PLAYER_CHAR) = True
+02A3: enable_widescreen 0 
+
+:GFSEX_13851
+0581: enable_radar 1 
+08BA: set $390 bit 21 
+08C0: clear $390 bit 5 
+09BD: allow_other_threads_to_display_text_boxes 0 
+end_thread 
+return 
+0662: printstring "I__________________________I" 
+0662: printstring "H" 
+0662: printstring "G" 
+0664: printfloat "STICK_POSITION" 17@ 
+0663: printint "SHAGGIN_POSITION" 22@ 
+0663: printint "I_EXCITEMENT" $GFSEX_EXCITEMENT 
+0664: printfloat "ANIM_TIME" $GF_ANIM_TIME 
+0663: printint "SUBSTATESTATUS" 8@ 
+0871: init_jump_table 7@ total_jumps 5 default_jump 1 @GFSEX_14177 jumps 0 @GFSEX_14082 1 @GFSEX_14101 2 @GFSEX_14120 3 @GFSEX_14139 4 @GFSEX_14158 -1 @GFSEX_14206 -1 @GFSEX_14206 
+
+:GFSEX_14082
+0662: printstring "STATE0__" 
+jump @GFSEX_14206 
+
+:GFSEX_14101
+0662: printstring "STATE1__" 
+jump @GFSEX_14206 
+
+:GFSEX_14120
+0662: printstring "STATE2__" 
+jump @GFSEX_14206 
+
+:GFSEX_14139
+0662: printstring "STATE3__" 
+jump @GFSEX_14206 
+
+:GFSEX_14158
+0662: printstring "STATE4__" 
+jump @GFSEX_14206 
+
+:GFSEX_14177
+0662: printstring "UNTRAPPED_STATE___" 
+jump @GFSEX_14206 
+
+:GFSEX_14206
+0662: printstring "I__________________________I" 
+return 
+end_thread

@@ -1,0 +1,757 @@
+:DEBT
+thread 'DEBT' 
+0@ = 0 
+1@ = 0 
+2@ = 0 
+3@ = 0 
+4@ = 0 
+5@ = 0 
+6@ = 0 
+7@ = 0 
+8@ = 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 50 
+008B: 10@ = $CURRENT_TIME_IN_MS2 // (int) 
+10@ -= 10 
+
+:DEBT_109
+wait 250 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+  0@ == 0 
+jf @DEBT_644 
+if 
+  $ONMISSION == 0 
+jf @DEBT_607 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_600 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DEBT_563 
+077E: get_active_interior_to 11@ 
+if 
+  11@ == 0 
+jf @DEBT_519 
+if 
+   not Player.WantedLevel($PLAYER_CHAR) > 1
+jf @DEBT_475 
+if 
+84C8:   not actor $PLAYER_ACTOR driving_flying_vehicle 
+jf @DEBT_431 
+if 
+04A3:   $CURRENT_TOWN_NUMBER == 3 // == constant 
+jf @DEBT_387 
+11@ = Player.Money($PLAYER_CHAR)
+if 
+  11@ > -1 
+jf @DEBT_291 
+
+:DEBT_291
+if 
+  -5000 > 11@ 
+jf @DEBT_317 
+1@ = 1 
+
+:DEBT_317
+if 
+  -50000 > 11@ 
+jf @DEBT_345 
+1@ = 2 
+
+:DEBT_345
+if 
+  -500000 > 11@ 
+jf @DEBT_373 
+1@ = 3 
+
+:DEBT_373
+0@ += 1 
+jump @DEBT_424 
+
+:DEBT_387
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_424 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+
+:DEBT_424
+jump @DEBT_468 
+
+:DEBT_431
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_468 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 60000 
+
+:DEBT_468
+jump @DEBT_512 
+
+:DEBT_475
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_512 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 60000 
+
+:DEBT_512
+jump @DEBT_556 
+
+:DEBT_519
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_556 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 60000 
+
+:DEBT_556
+jump @DEBT_600 
+
+:DEBT_563
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_600 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+
+:DEBT_600
+jump @DEBT_644 
+
+:DEBT_607
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 9@ // (int) 
+jf @DEBT_644 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+
+:DEBT_644
+if 
+  0@ == 1 
+jf @DEBT_977 
+
+:DEBT_662
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DEBT_945 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_FLOAT_3)
+0086: $TEMPVAR_FLOAT_1 = $TEMPVAR_X_COORD // (float) 
+$TEMPVAR_FLOAT_1 -= 200.0 
+$TEMPVAR_X_COORD += 200.0 
+0208: $TEMPVAR_FLOAT_1 = random_float_in_ranges $TEMPVAR_FLOAT_1 $TEMPVAR_X_COORD 
+0086: $TEMPVAR_FLOAT_2 = $TEMPVAR_Y_COORD // (float) 
+$TEMPVAR_FLOAT_2 -= 200.0 
+$TEMPVAR_Y_COORD += 200.0 
+0208: $TEMPVAR_FLOAT_2 = random_float_in_ranges $TEMPVAR_FLOAT_2 $TEMPVAR_Y_COORD 
+03D3: get_route_nearest_for $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 Z_angle_to $TEMPVAR_ANGLE 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0509: $DISTANCE_BETWEEN_POINTS = distance_between_XY $TEMPVAR_X_COORD $TEMPVAR_Y_COORD and_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 
+if 
+  1.0 > $TEMPVAR_FLOAT_3 
+jf @DEBT_861 
+wait 0 
+jump @DEBT_662 
+
+:DEBT_861
+if 
+  50.0 > $DISTANCE_BETWEEN_POINTS 
+jf @DEBT_893 
+wait 0 
+jump @DEBT_662 
+
+:DEBT_893
+if 
+00C2:   sphere_onscreen $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 4.0 
+jf @DEBT_931 
+wait 0 
+jump @DEBT_662 
+
+:DEBT_931
+0@ += 1 
+jump @DEBT_977 
+
+:DEBT_945
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+0@ = 0 
+
+:DEBT_977
+if 
+  0@ == 2 
+jf @DEBT_1916 
+if and
+   Model.Available(#SENTINEL)
+   Model.Available(#VMAFF1)
+   Model.Available(#VMAFF2)
+   Model.Available(#VMAFF3)
+   Model.Available(#VMAFF4)
+   Model.Available(#MICRO_UZI)
+jf @DEBT_1728 
+if 
+   Model.Available(#AK47)
+jf @DEBT_1693 
+12@ = Car.Create(#SENTINEL, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.Angle(12@) = $TEMPVAR_ANGLE
+0229: set_car 12@ primary_color_to 0 secondary_color_to 0 
+Car.Health(12@) = 1500
+00AE: set_car 12@ traffic_behaviour_to 2 
+072F: enable_car 12@ stuck_check_distance 4.0 time 4000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path -1 // extended 03CC 
+if 
+  2@ == 1 
+jf @DEBT_1148 
+Model.Destroy(#SENTINEL)
+2@ = 0 
+
+:DEBT_1148
+13@ = Actor.CreateAsDriver(Mission2, #VMAFF1, 12@)
+if 
+  3@ == 1 
+jf @DEBT_1189 
+Model.Destroy(#VMAFF1)
+3@ = 0 
+
+:DEBT_1189
+if 
+  1@ > 0 
+jf @DEBT_1409 
+062F: 17@ = create_group_type 0 
+0630: put_actor 13@ in_group 17@ as_leader 
+07E6: copy_group_decision_maker -1 to 18@ 
+0749: reset_group_decision_maker 18@ event 41 
+06AD: set_group 17@ group_decision_maker_to 18@ 
+14@ = Actor.CreateAsPassenger(Mission2, #VMAFF2, 12@, 0)
+if 
+  4@ == 1 
+jf @DEBT_1287 
+Model.Destroy(#VMAFF2)
+4@ = 0 
+
+:DEBT_1287
+if 
+  1@ > 1 
+jf @DEBT_1348 
+15@ = Actor.CreateAsPassenger(Mission2, #VMAFF3, 12@, 1)
+if 
+  5@ == 1 
+jf @DEBT_1348 
+Model.Destroy(#VMAFF3)
+5@ = 0 
+
+:DEBT_1348
+if 
+  1@ > 2 
+jf @DEBT_1409 
+16@ = Actor.CreateAsPassenger(Mission2, #VMAFF4, 12@, 2)
+if 
+  6@ == 1 
+jf @DEBT_1409 
+Model.Destroy(#VMAFF4)
+6@ = 0 
+
+:DEBT_1409
+07E5: copy_decision_maker -1 to 19@ 
+0708: reset_decision_maker 19@ event 41 
+$3400 = 0 
+
+:DEBT_1430
+if 
+  4 > $3400 
+jf @DEBT_1619 
+if 
+   not Actor.Dead(13@($3400,4i))
+jf @DEBT_1605 
+060B: set_actor 13@($3400,4i) decision_maker_to 19@ 
+02A9: set_actor 13@($3400,4i) immune_to_nonplayer 1 
+077A: set_actor 13@($3400,4i) acquaintance 4 to_actors_pedtype 0 // see ped.dat 
+03FE: set_actor 13@($3400,4i) money 10000 
+0961: set_actor 13@($3400,4i) keep_tasks_after_cleanup 1 
+if or
+  $3400 == 0 
+  $3400 == 2 
+jf @DEBT_1566 
+Actor.GiveWeaponAndAmmo(13@($3400,4i), MicroUzi, 9999)
+
+:DEBT_1566
+if or
+  $3400 == 1 
+  $3400 == 3 
+jf @DEBT_1605 
+Actor.GiveWeaponAndAmmo(13@($3400,4i), AK47, 9999)
+
+:DEBT_1605
+$3400 += 1 
+jump @DEBT_1430 
+
+:DEBT_1619
+if 
+  7@ == 1 
+jf @DEBT_1649 
+Model.Destroy(#MICRO_UZI)
+7@ = 0 
+
+:DEBT_1649
+if 
+  8@ == 1 
+jf @DEBT_1679 
+Model.Destroy(#AK47)
+8@ = 0 
+
+:DEBT_1679
+0@ += 1 
+jump @DEBT_1721 
+
+:DEBT_1693
+if 
+   not Model.Available(#AK47)
+jf @DEBT_1721 
+Model.Load(#AK47)
+8@ = 1 
+
+:DEBT_1721
+jump @DEBT_1916 
+
+:DEBT_1728
+if 
+   not Model.Available(#SENTINEL)
+jf @DEBT_1756 
+Model.Load(#SENTINEL)
+2@ = 1 
+
+:DEBT_1756
+if 
+   not Model.Available(#VMAFF1)
+jf @DEBT_1782 
+Model.Load(#VMAFF1)
+3@ = 1 
+
+:DEBT_1782
+if 
+   not Model.Available(#VMAFF2)
+jf @DEBT_1808 
+Model.Load(#VMAFF2)
+4@ = 1 
+
+:DEBT_1808
+if 
+   not Model.Available(#VMAFF3)
+jf @DEBT_1834 
+Model.Load(#VMAFF3)
+5@ = 1 
+
+:DEBT_1834
+if 
+   not Model.Available(#VMAFF4)
+jf @DEBT_1860 
+Model.Load(#VMAFF4)
+6@ = 1 
+
+:DEBT_1860
+if 
+   not Model.Available(#MICRO_UZI)
+jf @DEBT_1888 
+Model.Load(#MICRO_UZI)
+7@ = 1 
+
+:DEBT_1888
+if 
+   not Model.Available(#AK47)
+jf @DEBT_1916 
+Model.Load(#AK47)
+8@ = 1 
+
+:DEBT_1916
+if 
+  0@ == 3 
+jf @DEBT_3777 
+if 
+  $ONMISSION == 0 
+jf @DEBT_3682 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @DEBT_3643 
+if 
+   not Player.Money($PLAYER_CHAR) > -1
+jf @DEBT_3620 
+077E: get_active_interior_to 11@ 
+if 
+  11@ == 0 
+jf @DEBT_3581 
+if 
+   not Actor.Dead(13@)
+jf @DEBT_3154 
+if 
+00F2:   actor $PLAYER_ACTOR near_actor 13@ radius 500.0 500.0 0 
+jf @DEBT_3115 
+if 
+0449:   actor 13@ in_a_car 
+jf @DEBT_2675 
+if 
+   not Car.Wrecked(12@)
+jf @DEBT_2663 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 10@ // (int) 
+jf @DEBT_2334 
+if 
+   Actor.Driving($PLAYER_ACTOR)
+jf @DEBT_2299 
+0209: 11@ = random_int_in_ranges 0 4 
+$TEMPVAR_ACTOR_CAR = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+  11@ == 0 
+jf @DEBT_2178 
+06E1: AS_actor 13@ using_car 12@ target_car $TEMPVAR_ACTOR_CAR with_order 15 max_speed 100.0 traffic_flag 2 
+
+:DEBT_2178
+if 
+  11@ == 1 
+jf @DEBT_2216 
+06E1: AS_actor 13@ using_car 12@ target_car $TEMPVAR_ACTOR_CAR with_order 19 max_speed 100.0 traffic_flag 2 
+
+:DEBT_2216
+if 
+  11@ == 2 
+jf @DEBT_2254 
+06E1: AS_actor 13@ using_car 12@ target_car $TEMPVAR_ACTOR_CAR with_order 29 max_speed 100.0 traffic_flag 2 
+
+:DEBT_2254
+if 
+  11@ == 3 
+jf @DEBT_2292 
+06E1: AS_actor 13@ using_car 12@ target_car $TEMPVAR_ACTOR_CAR with_order 30 max_speed 100.0 traffic_flag 2 
+
+:DEBT_2292
+jump @DEBT_2318 
+
+:DEBT_2299
+06E1: AS_actor 13@ using_car 12@ target_car -1 with_order 2 max_speed 100.0 traffic_flag 2 
+
+:DEBT_2318
+008B: 10@ = $CURRENT_TIME_IN_MS2 // (int) 
+10@ += 8000 
+
+:DEBT_2334
+06AC: $DISTANCE_BETWEEN_POINTS = actor $PLAYER_ACTOR movement_speed 
+if or
+044B:   actor $PLAYER_ACTOR on_foot 
+  5.0 > $DISTANCE_BETWEEN_POINTS 
+jf @DEBT_2543 
+if 
+00F2:   actor 13@ near_actor $PLAYER_ACTOR radius 15.0 15.0 0 
+jf @DEBT_2543 
+062E: get_actor 13@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_2543 
+0615: define_AS_pack_begin 20@ 
+0209: 11@ = random_int_in_ranges 0 2 
+if 
+  11@ == 0 
+jf @DEBT_2491 
+06C7: AS_actor -1 driver_of_car 12@ perform_action 7 timelimit 200 
+06C7: AS_actor -1 driver_of_car 12@ perform_action 4 timelimit 1000 
+jump @DEBT_2515 
+
+:DEBT_2491
+06C7: AS_actor -1 driver_of_car 12@ perform_action 8 timelimit 200 
+06C7: AS_actor -1 driver_of_car 12@ perform_action 5 timelimit 1000 
+
+:DEBT_2515
+07A5: AS_actor -1 attack_actor $PLAYER_ACTOR time 5000 
+0616: define_AS_pack_end 20@ 
+0618: assign_actor 13@ to_AS_pack 20@ 
+061B: remove_references_to_AS_pack 20@ 
+
+:DEBT_2543
+if and
+03CE:   car 12@ stuck 
+  15.0 > $DISTANCE_BETWEEN_POINTS 
+jf @DEBT_2656 
+if 
+0202:   actor $PLAYER_ACTOR near_car 12@ radius 30.0 30.0 sphere 0 
+jf @DEBT_2656 
+if 
+02CA:   car 12@ bounding_sphere_visible 
+jf @DEBT_2656 
+062E: get_actor 13@ task 1957 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_2656 
+07A5: AS_actor 13@ attack_actor $PLAYER_ACTOR time 5000 
+
+:DEBT_2656
+jump @DEBT_2668 
+
+:DEBT_2663
+Car.RemoveReferences(12@)
+
+:DEBT_2668
+jump @DEBT_3108 
+
+:DEBT_2675
+if 
+00F2:   actor 13@ near_actor $PLAYER_ACTOR radius 30.0 30.0 0 
+jf @DEBT_2753 
+062E: get_actor 13@ task 1957 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_2746 
+07A5: AS_actor 13@ attack_actor $PLAYER_ACTOR time 5000 
+
+:DEBT_2746
+jump @DEBT_3108 
+
+:DEBT_2753
+if 
+   not Car.Wrecked(12@)
+jf @DEBT_2854 
+062E: get_actor 13@ task 1560 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_2847 
+0615: define_AS_pack_begin 20@ 
+0772: AS_actor -1 run_to_car 12@ 99999 ms stop_at_distance 5.0 
+05CB: AS_actor -1 enter_car 12@ as_driver -2 ms 
+0616: define_AS_pack_end 20@ 
+0618: assign_actor 13@ to_AS_pack 20@ 
+061B: remove_references_to_AS_pack 20@ 
+
+:DEBT_2847
+jump @DEBT_3108 
+
+:DEBT_2854
+Car.RemoveReferences(12@)
+if 
+80F2:   not actor $PLAYER_ACTOR near_actor 13@ radius 60.0 60.0 0 
+jf @DEBT_3068 
+Actor.StorePos(13@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+03D3: get_route_nearest_for $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 store_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 Z_angle_to $TEMPVAR_ANGLE 
+if 
+838A:   not any_car_in_cube_cornerA $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 cornerB 4.0 4.0 4.0 
+jf @DEBT_3061 
+if 
+80C2:   not sphere_onscreen $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 4.0 
+jf @DEBT_3061 
+12@ = Car.Create(#SENTINEL, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Car.Angle(12@) = $TEMPVAR_ANGLE
+0229: set_car 12@ primary_color_to 75 secondary_color_to 0 
+Car.Health(12@) = 1500
+00AE: set_car 12@ traffic_behaviour_to 2 
+072F: enable_car 12@ stuck_check_distance 4.0 time 4000 and_restore_if stuck 1 flipped 1 unk_place_on_road_properly 1 to_path -1 // extended 03CC 
+
+:DEBT_3061
+jump @DEBT_3108 
+
+:DEBT_3068
+062E: get_actor 13@ task 1957 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_3108 
+07A5: AS_actor 13@ attack_actor $PLAYER_ACTOR time 5000 
+
+:DEBT_3108
+jump @DEBT_3147 
+
+:DEBT_3115
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 60000 
+0@ = 0 
+
+:DEBT_3147
+jump @DEBT_3333 
+
+:DEBT_3154
+0623: add 1 to_integer_stat 155 
+Actor.RemoveReferences(13@)
+$3400 = 1 
+
+:DEBT_3173
+if 
+  4 > $3400 
+jf @DEBT_3333 
+if 
+   not Actor.Dead(13@($3400,4i))
+jf @DEBT_3303 
+if 
+07FD:   group 17@ alive 
+jf @DEBT_3296 
+if 
+06EE:   actor 13@($3400,4i) in_group 17@ 
+jf @DEBT_3296 
+if 
+06EF:   actor 13@($3400,4i) leading_group 17@ 
+jf @DEBT_3296 
+0085: 13@ = 13@($3400,4i) // (int) 
+13@($3400,4i) = -1 
+
+:DEBT_3296
+jump @DEBT_3319 
+
+:DEBT_3303
+0623: add 1 to_integer_stat 155 
+Actor.RemoveReferences(13@($3400,4i))
+
+:DEBT_3319
+$3400 += 1 
+jump @DEBT_3173 
+
+:DEBT_3333
+$3400 = 1 
+
+:DEBT_3340
+if 
+  4 > $3400 
+jf @DEBT_3574 
+if 
+   not Actor.Dead(13@)
+jf @DEBT_3560 
+if 
+   not Actor.Dead(13@($3400,4i))
+jf @DEBT_3551 
+if 
+07FD:   group 17@ alive 
+jf @DEBT_3544 
+if 
+86EE:   not actor 13@($3400,4i) in_group 17@ 
+jf @DEBT_3544 
+if 
+00F2:   actor 13@($3400,4i) near_actor 13@ radius 30.0 30.0 0 
+jf @DEBT_3487 
+0631: put_actor 13@($3400,4i) in_group 17@ 
+jump @DEBT_3544 
+
+:DEBT_3487
+062E: get_actor 13@($3400,4i) task 1957 status_store_to $416 // ret 7 if not found 
+if 
+04A3:   $416 == 7 // == constant 
+jf @DEBT_3544 
+Actor.RemoveReferences(13@($3400,4i))
+07A5: AS_actor 13@($3400,4i) attack_actor $PLAYER_ACTOR time 5000 
+
+:DEBT_3544
+jump @DEBT_3560 
+
+:DEBT_3551
+Actor.RemoveReferences(13@($3400,4i))
+
+:DEBT_3560
+$3400 += 1 
+jump @DEBT_3340 
+
+:DEBT_3574
+jump @DEBT_3613 
+
+:DEBT_3581
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 60000 
+0@ = 0 
+
+:DEBT_3613
+jump @DEBT_3636 
+
+:DEBT_3620
+gosub @DEBT_3800 
+$1376 = 0 
+end_thread 
+
+:DEBT_3636
+jump @DEBT_3675 
+
+:DEBT_3643
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+0@ = 0 
+
+:DEBT_3675
+jump @DEBT_3714 
+
+:DEBT_3682
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+0@ = 0 
+
+:DEBT_3714
+if and
+   Actor.Dead(13@)
+   Actor.Dead(14@)
+   Actor.Dead(15@)
+   Actor.Dead(16@)
+jf @DEBT_3777 
+gosub @DEBT_3800 
+008B: 9@ = $CURRENT_TIME_IN_MS2 // (int) 
+9@ += 120000 
+0@ = 0 
+
+:DEBT_3777
+jump @DEBT_109 
+if 
+82CA:   not car 12@ bounding_sphere_visible 
+jf @DEBT_3800 
+
+:DEBT_3800
+Actor.RemoveReferences(13@)
+Actor.RemoveReferences(14@)
+Actor.RemoveReferences(15@)
+Actor.RemoveReferences(16@)
+Car.RemoveReferences(12@)
+065C: release_decision_maker 19@ 
+065C: release_decision_maker 18@ 
+0632: release_group 17@ 
+if 
+  2@ == 1 
+jf @DEBT_3870 
+Model.Destroy(#SENTINEL)
+2@ = 0 
+
+:DEBT_3870
+if 
+  3@ == 1 
+jf @DEBT_3899 
+Model.Destroy(#VMAFF1)
+3@ = 0 
+
+:DEBT_3899
+if 
+  4@ == 1 
+jf @DEBT_3928 
+Model.Destroy(#VMAFF2)
+4@ = 0 
+
+:DEBT_3928
+if 
+  5@ == 1 
+jf @DEBT_3957 
+Model.Destroy(#VMAFF3)
+5@ = 0 
+
+:DEBT_3957
+if 
+  6@ == 1 
+jf @DEBT_3986 
+Model.Destroy(#VMAFF4)
+6@ = 0 
+
+:DEBT_3986
+if 
+  7@ == 1 
+jf @DEBT_4016 
+Model.Destroy(#MICRO_UZI)
+7@ = 0 
+
+:DEBT_4016
+if 
+  8@ == 1 
+jf @DEBT_4046 
+Model.Destroy(#AK47)
+8@ = 0 
+
+:DEBT_4046
+return 
+end_thread

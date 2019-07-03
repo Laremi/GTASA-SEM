@@ -1,0 +1,188 @@
+:TRAINS
+thread 'TRAINS' 
+$TRAINS_TRAIN_SPEED = 0.0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @TRAINS_44 
+jump @TRAINS_768 
+
+:TRAINS_44
+set_wb_check_to 0 
+
+:TRAINS_48
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @TRAINS_754 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRAINS_740 
+if 
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAKC)
+jf @TRAINS_726 
+$TRAINS_TRAIN_HANDLE = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+  $TRAINS_TEXT_SHOWN == 0 
+jf @TRAINS_181 
+02E3: $TRAINS_TRAIN_SPEED = car $TRAINS_TRAIN_HANDLE speed 
+if 
+  $TRAINS_TRAIN_SPEED > 0.0 
+jf @TRAINS_181 
+00BC: show_text_highpriority GXT 'TRAINS' time 20000 flag 1  // Press ~k~~VEHICLE_ACCELERATE~ to skip to the next station.
+$TRAINS_TEXT_SHOWN = 1 
+
+:TRAINS_181
+if 
+  $TRAINS_TEXT_SHOWN == 1 
+jf @TRAINS_619 
+if 
+0A06:   train $TRAINS_TRAIN_HANDLE next_station_unlocked 
+jf @TRAINS_429 
+if 
+00E1:   player 0 pressed_key 16 
+jf @TRAINS_422 
+fade 0 1000 
+
+:TRAINS_239
+if 
+fading 
+jf @TRAINS_286 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @TRAINS_279 
+jump @TRAINS_768 
+
+:TRAINS_279
+jump @TRAINS_239 
+
+:TRAINS_286
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @TRAINS_361 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRAINS_361 
+if 
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAKC)
+jf @TRAINS_361 
+$TRAINS_TRAIN_HANDLE = Actor.CurrentCar($PLAYER_ACTOR)
+0A07: put_train $TRAINS_TRAIN_HANDLE at_next_station 
+03D5: remove_text 'TRAINS'  // Press ~k~~VEHICLE_ACCELERATE~ to skip to the next station.
+
+:TRAINS_361
+fade 1 1000 
+
+:TRAINS_368
+if 
+fading 
+jf @TRAINS_415 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @TRAINS_408 
+jump @TRAINS_768 
+
+:TRAINS_408
+jump @TRAINS_368 
+
+:TRAINS_415
+$TRAINS_TEXT_SHOWN = 2 
+
+:TRAINS_422
+jump @TRAINS_619 
+
+:TRAINS_429
+fade 0 1000 
+
+:TRAINS_436
+if 
+fading 
+jf @TRAINS_483 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @TRAINS_476 
+jump @TRAINS_768 
+
+:TRAINS_476
+jump @TRAINS_436 
+
+:TRAINS_483
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @TRAINS_558 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRAINS_558 
+if 
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAKC)
+jf @TRAINS_558 
+$TRAINS_TRAIN_HANDLE = Actor.CurrentCar($PLAYER_ACTOR)
+0A07: put_train $TRAINS_TRAIN_HANDLE at_next_station 
+03D5: remove_text 'TRAINS'  // Press ~k~~VEHICLE_ACCELERATE~ to skip to the next station.
+
+:TRAINS_558
+fade 1 1000 
+
+:TRAINS_565
+if 
+fading 
+jf @TRAINS_612 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @TRAINS_605 
+jump @TRAINS_768 
+
+:TRAINS_605
+jump @TRAINS_565 
+
+:TRAINS_612
+$TRAINS_TEXT_SHOWN = 2 
+
+:TRAINS_619
+if 
+  $TRAINS_TEXT_SHOWN == 2 
+jf @TRAINS_719 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @TRAINS_719 
+if 
+0449:   actor $PLAYER_ACTOR in_a_car 
+jf @TRAINS_719 
+if 
+   Actor.DrivingVehicleType($PLAYER_ACTOR, #STREAKC)
+jf @TRAINS_719 
+$TRAINS_TRAIN_HANDLE = Actor.CurrentCar($PLAYER_ACTOR)
+if 
+01C1:   car $TRAINS_TRAIN_HANDLE stopped 
+jf @TRAINS_719 
+$TRAINS_TEXT_SHOWN = 0 
+
+:TRAINS_719
+jump @TRAINS_733 
+
+:TRAINS_726
+jump @TRAINS_768 
+
+:TRAINS_733
+jump @TRAINS_747 
+
+:TRAINS_740
+jump @TRAINS_768 
+
+:TRAINS_747
+jump @TRAINS_761 
+
+:TRAINS_754
+jump @TRAINS_768 
+
+:TRAINS_761
+jump @TRAINS_48 
+
+:TRAINS_768
+$TRAINS_TEXT_SHOWN = 0 
+03D5: remove_text 'TRAINS'  // Press ~k~~VEHICLE_ACCELERATE~ to skip to the next station.
+end_thread 
+end_thread

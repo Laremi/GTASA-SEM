@@ -1,0 +1,384 @@
+:COPSIT
+thread 'COPSIT' 
+2@ = 0 
+if 
+  2@ == 1 
+jf @COPSIT_60 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:COPSIT_60
+04ED: load_animation "INT_OFFICE" 
+
+:COPSIT_74
+if 
+84EE:   not animation "INT_OFFICE" loaded 
+jf @COPSIT_110 
+wait 0 
+jump @COPSIT_74 
+
+:COPSIT_110
+9@ = 0.0 
+3@ = 0 
+if 
+  1@ == 0 
+jf @COPSIT_166 
+5@ = 0 
+4@ = 1 
+jump @COPSIT_180 
+
+:COPSIT_166
+5@ = -2 
+4@ = 2 
+
+:COPSIT_180
+7@ = 0 
+if 
+   not Actor.Dead(0@)
+jf @COPSIT_236 
+0446: set_actor 0@ dismemberment_possible 0 
+0978: copy_decision_maker 65537 to $9539 
+060B: set_actor 0@ decision_maker_to $9539 
+6@ = 15000 
+
+:COPSIT_236
+wait 0 
+if and
+   not Actor.Dead(0@)
+   Player.Defined($PLAYER_CHAR)
+  $PLAYER_IN_INTERIOR == 0 
+jf @COPSIT_345 
+if 
+09C5:   unknown_actor 0@ 
+jf @COPSIT_331 
+if 
+051A:   actor 0@ damaged_by_actor $PLAYER_ACTOR 
+jf @COPSIT_317 
+jump @COPSIT_2273 
+jump @COPSIT_324 
+
+:COPSIT_317
+gosub @COPSIT_359 
+
+:COPSIT_324
+jump @COPSIT_338 
+
+:COPSIT_331
+gosub @COPSIT_2220 
+
+:COPSIT_338
+jump @COPSIT_352 
+
+:COPSIT_345
+gosub @COPSIT_2220 
+
+:COPSIT_352
+jump @COPSIT_236 
+
+:COPSIT_359
+0871: init_jump_table 4@ total_jumps 5 default_jump 0 @COPSIT_492 jumps 1 @COPSIT_422 2 @COPSIT_436 3 @COPSIT_450 4 @COPSIT_464 5 @COPSIT_478 -1 @COPSIT_492 -1 @COPSIT_492 
+
+:COPSIT_422
+gosub @COPSIT_494 
+jump @COPSIT_492 
+
+:COPSIT_436
+gosub @COPSIT_724 
+jump @COPSIT_492 
+
+:COPSIT_450
+gosub @COPSIT_1824 
+jump @COPSIT_492 
+
+:COPSIT_464
+gosub @COPSIT_2220 
+jump @COPSIT_492 
+
+:COPSIT_478
+gosub @COPSIT_2127 
+jump @COPSIT_492 
+
+:COPSIT_492
+return 
+
+:COPSIT_494
+0871: init_jump_table 5@ total_jumps 2 default_jump 0 @COPSIT_722 jumps 0 @COPSIT_557 1 @COPSIT_622 -1 @COPSIT_722 -1 @COPSIT_722 -1 @COPSIT_722 -1 @COPSIT_722 -1 @COPSIT_722 
+
+:COPSIT_557
+0812: AS_actor 0@ perform_animation "OFF_SIT_IN" IFP "INT_OFFICE" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+3@ = 1 
+5@ += 1 
+jump @COPSIT_722 
+
+:COPSIT_622
+9@ = 0.0 
+if 
+   Actor.Animation(0@) == "OFF_SIT_IN"
+jf @COPSIT_680 
+0613: 9@ = actor 0@ animation "OFF_SIT_IN" time 
+
+:COPSIT_680
+if 
+  9@ == 1.0 
+jf @COPSIT_715 
+5@ = 0 
+4@ += 1 
+
+:COPSIT_715
+jump @COPSIT_722 
+
+:COPSIT_722
+return 
+
+:COPSIT_724
+0871: init_jump_table 5@ total_jumps 5 default_jump 0 @COPSIT_1822 jumps -2 @COPSIT_787 0 @COPSIT_1017 1 @COPSIT_1249 2 @COPSIT_1510 3 @COPSIT_1588 -1 @COPSIT_1822 -1 @COPSIT_1822 
+
+:COPSIT_787
+0209: 8@ = random_int_in_ranges 0 100 
+if 
+  8@ > 66 
+jf @COPSIT_949 
+if 
+  8@ > 33 
+jf @COPSIT_893 
+0812: AS_actor 0@ perform_animation "OFF_SIT_TYPE_LOOP" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+jump @COPSIT_942 
+
+:COPSIT_893
+0812: AS_actor 0@ perform_animation "OFF_SIT_READ" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_942
+jump @COPSIT_1003 
+
+:COPSIT_949
+0812: AS_actor 0@ perform_animation "OFF_SIT_IDLE_LOOP" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_1003
+5@ = 1 
+jump @COPSIT_1822 
+
+:COPSIT_1017
+0209: 8@ = random_int_in_ranges 0 100 
+if 
+  8@ > 66 
+jf @COPSIT_1185 
+if 
+  8@ > 33 
+jf @COPSIT_1123 
+0812: AS_actor 0@ perform_animation "OFF_SIT_TYPE_LOOP" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+jump @COPSIT_1178 
+
+:COPSIT_1123
+0812: AS_actor 0@ perform_animation "OFF_SIT_BORED_LOOP" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_1178
+jump @COPSIT_1235 
+
+:COPSIT_1185
+0812: AS_actor 0@ perform_animation "OFF_SIT_WATCH" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_1235
+5@ += 1 
+jump @COPSIT_1822 
+
+:COPSIT_1249
+Actor.StorePos(0@, 13@, 14@, 15@)
+15@ -= 1.04 
+04C4: store_coords_to 16@ 17@ 18@ from_actor 0@ with_offset 0.5 -0.5 0.0 
+04C4: store_coords_to 19@ 20@ 21@ from_actor 0@ with_offset -0.5 -1.0 0.0 
+04C4: store_coords_to 10@ 11@ 12@ from_actor 0@ with_offset 0.0 1.0 -1.0 
+0985: set_objects_in_sphere 13@ 14@ 15@ radius 1.5 with_model -365 solid 0 for_actor 0@ 
+if or
+   Actor.Animation(0@) == "OFF_SIT_TYPE_LOOP"
+   Actor.Animation(0@) == "OFF_SIT_BORED_LOOP"
+   Actor.Animation(0@) == "OFF_SIT_IDLE_LOOP"
+jf @COPSIT_1503 
+Actor.PutAt(0@, 10@, 11@, 12@)
+Actor.LockInCurrentPosition(0@) = True
+33@ = 0 
+5@ += 1 
+
+:COPSIT_1503
+jump @COPSIT_1822 
+
+:COPSIT_1510
+if 
+051A:   actor 0@ damaged_by_actor $PLAYER_ACTOR 
+jf @COPSIT_1555 
+054E: clear_actor 0@ damage 
+4@ = 5 
+5@ = 0 
+jump @COPSIT_1822 
+
+:COPSIT_1555
+if 
+001D:   33@ > 6@ // (int) 
+jf @COPSIT_1581 
+5@ += 1 
+
+:COPSIT_1581
+jump @COPSIT_1822 
+
+:COPSIT_1588
+0209: 8@ = random_int_in_ranges 0 100 
+if 
+  8@ > 66 
+jf @COPSIT_1751 
+if 
+  8@ > 33 
+jf @COPSIT_1694 
+0812: AS_actor 0@ perform_animation "OFF_SIT_TYPE_LOOP" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+jump @COPSIT_1744 
+
+:COPSIT_1694
+0812: AS_actor 0@ perform_animation "OFF_SIT_CRASH" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_1744
+jump @COPSIT_1801 
+
+:COPSIT_1751
+0812: AS_actor 0@ perform_animation "OFF_SIT_DRINK" IFP "INT_OFFICE" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time 50000000 // versionB 
+
+:COPSIT_1801
+33@ = 0 
+5@ -= 1 
+jump @COPSIT_1822 
+
+:COPSIT_1822
+return 
+
+:COPSIT_1824
+0871: init_jump_table 5@ total_jumps 3 default_jump 0 @COPSIT_2125 jumps 0 @COPSIT_1887 1 @COPSIT_1952 2 @COPSIT_1987 -1 @COPSIT_2125 -1 @COPSIT_2125 -1 @COPSIT_2125 -1 @COPSIT_2125 
+
+:COPSIT_1887
+0812: AS_actor 0@ perform_animation "OFF_SIT_2IDLE_180" IFP "INT_OFFICE" framedelta 99.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+5@ += 1 
+jump @COPSIT_2125 
+
+:COPSIT_1952
+Actor.PutAt(0@, 13@, 14@, 15@)
+Actor.LockInCurrentPosition(0@) = False
+5@ += 1 
+jump @COPSIT_2125 
+
+:COPSIT_1987
+9@ = 0.0 
+if 
+   Actor.Animation(0@) == "OFF_SIT_2IDLE_180"
+jf @COPSIT_2118 
+0613: 9@ = actor 0@ animation "OFF_SIT_2IDLE_180" time 
+if 
+  9@ == 1.0 
+jf @COPSIT_2118 
+0985: set_objects_in_sphere 13@ 14@ 15@ radius 1.5 with_model -365 solid 1 for_actor 0@ 
+5@ = 0 
+4@ += 1 
+
+:COPSIT_2118
+jump @COPSIT_2125 
+
+:COPSIT_2125
+return 
+
+:COPSIT_2127
+0871: init_jump_table 5@ total_jumps 1 default_jump 0 @COPSIT_2218 jumps 0 @COPSIT_2190 -1 @COPSIT_2218 -1 @COPSIT_2218 -1 @COPSIT_2218 -1 @COPSIT_2218 -1 @COPSIT_2218 -1 @COPSIT_2218 
+
+:COPSIT_2190
+4@ = 3 
+5@ = 0 
+gosub @COPSIT_2273 
+jump @COPSIT_2218 
+
+:COPSIT_2218
+return 
+
+:COPSIT_2220
+04EF: release_animation "INT_OFFICE" 
+065C: release_decision_maker $9539 
+if 
+   not Actor.Dead(0@)
+jf @COPSIT_2269 
+Actor.LockInCurrentPosition(0@) = False
+0446: set_actor 0@ dismemberment_possible 1 
+
+:COPSIT_2269
+end_thread 
+return 
+
+:COPSIT_2273
+wait 0 
+if and
+8844:   not string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+  $PLAYER_IN_INTERIOR == 0 
+jf @COPSIT_2616 
+if and
+   not Actor.Dead(0@)
+   Player.Defined($PLAYER_CHAR)
+jf @COPSIT_2609 
+0871: init_jump_table 4@ total_jumps 5 default_jump 1 @COPSIT_2595 jumps 1 @COPSIT_2384 2 @COPSIT_2467 3 @COPSIT_2516 4 @COPSIT_2530 5 @COPSIT_2581 -1 @COPSIT_2609 -1 @COPSIT_2609 
+
+:COPSIT_2384
+if 
+  5@ > 1 
+jf @COPSIT_2416 
+gosub @COPSIT_359 
+jump @COPSIT_2460 
+
+:COPSIT_2416
+062E: get_actor 0@ task 1506 status_store_to 7@ // ret 7 if not found 
+if 
+04A4:   7@ == 7 // == constant 
+jf @COPSIT_2460 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+gosub @COPSIT_2220 
+
+:COPSIT_2460
+jump @COPSIT_2609 
+
+:COPSIT_2467
+if 
+  5@ == 2 
+jf @COPSIT_2502 
+0209: 6@ = random_int_in_ranges 0 5 
+6@ *= 500 
+
+:COPSIT_2502
+gosub @COPSIT_359 
+jump @COPSIT_2609 
+
+:COPSIT_2516
+gosub @COPSIT_359 
+jump @COPSIT_2609 
+
+:COPSIT_2530
+062E: get_actor 0@ task 1506 status_store_to 7@ // ret 7 if not found 
+if 
+04A4:   7@ == 7 // == constant 
+jf @COPSIT_2574 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+gosub @COPSIT_2220 
+
+:COPSIT_2574
+jump @COPSIT_2609 
+
+:COPSIT_2581
+gosub @COPSIT_359 
+jump @COPSIT_2609 
+
+:COPSIT_2595
+gosub @COPSIT_2220 
+jump @COPSIT_2609 
+
+:COPSIT_2609
+jump @COPSIT_2623 
+
+:COPSIT_2616
+gosub @COPSIT_2220 
+
+:COPSIT_2623
+jump @COPSIT_2273 
+0663: printint "PEDSTATE" 4@ 
+0663: printint "SUBSTATESTATUS" 5@ 
+0663: printint "TIMERB" 33@ 
+0663: printint "TIMERA" 32@ 
+return 
+end_thread

@@ -1,0 +1,2211 @@
+:JFUD
+$JFUD_X_OFFSET = 0.0 
+$JFUD_Y_OFFSET = 0.0 
+$JFUD_Z_OFFSET = 0.0 
+$10064 = 0.0 
+$JFUD_X_CAMERA = 0.0 
+$JFUD_Y_CAMERA = 0.0 
+$JFUD_Z_CAMERA = 0.0 
+$JFUD_X_AIM_CAMERA = 0.0 
+$JFUD_Y_AIM_CAMERA = 0.0 
+$JFUD_Z_AIM_CAMERA = 0.0 
+$10075 = 0.0 
+$10076 = 0.0 
+$10077 = 0.0 
+$10078 = 0.0 
+$10079 = 0.0 
+$10080 = 0.0 
+$10056 = 0 
+$10055 = 0.0 
+$2751 = 0 
+$10049 = 0.0 
+$10050 = 0.0 
+$10051 = 0.0 
+$10041 = 0 
+$675 = 0 
+$10035 = 0 
+$10045 = 0 
+$10047 = 0 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 0 
+$10052 = 0.0 
+$SHOW_SHOP_SPHERE = 1 
+$2418 = 0 
+$2422 = 0 
+$2544 = 0 
+$190 = 2221 
+$191 = 2223 
+$192 = 2222 
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+jf @JFUD_383 
+04AE: $SELLER_MODEL = 155 // = constant 
+$JFUD_LOW_FOOD_MODEL = 2218 
+$JFUD_MED_FOOD_MODEL = 2219 
+$JFUD_HIGH_FOOD_MODEL = 2220 
+$JFUD_HEALTHY_FOOD_MODEL = 2335 
+
+:JFUD_383
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDCHICK' // s$ == short  // Cluckin' Bell
+jf @JFUD_448 
+04AE: $SELLER_MODEL = 167 // = constant 
+$JFUD_LOW_FOOD_MODEL = 2215 
+$JFUD_MED_FOOD_MODEL = 2216 
+$JFUD_HIGH_FOOD_MODEL = 2217 
+$JFUD_HEALTHY_FOOD_MODEL = 2353 
+
+:JFUD_448
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDBURG' // s$ == short  // Burger Shot
+jf @JFUD_513 
+04AE: $SELLER_MODEL = 205 // = constant 
+$JFUD_LOW_FOOD_MODEL = 2213 
+$JFUD_MED_FOOD_MODEL = 2214 
+$JFUD_HIGH_FOOD_MODEL = 2212 
+$JFUD_HEALTHY_FOOD_MODEL = 2354 
+
+:JFUD_513
+Model.Load(1249)
+Model.Load($190)
+Model.Load($191)
+Model.Load($192)
+Model.Load($JFUD_LOW_FOOD_MODEL)
+Model.Load($JFUD_MED_FOOD_MODEL)
+Model.Load($JFUD_HIGH_FOOD_MODEL)
+Model.Load($JFUD_HEALTHY_FOOD_MODEL)
+03CF: load_wav 1828 as 4 
+Model.Load($SELLER_MODEL)
+038B: load_requested_models 
+set_wb_check_to 0 
+if 
+  $10041 == 1000000 
+jf @JFUD_609 
+$JFUD_SELECTED_FOOD = Object.Create($SELECTED_MENU_ITEM, $X_START_ANIM_FOOD, $Y_START_ANIM_FOOD, $Z_START_ANIM_FOOD)
+
+:JFUD_609
+thread 'JFUD' 
+
+:JFUD_620
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_10181 
+if 
+8844:   not string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @JFUD_10167 
+if 
+  $JFUD_STAGE > 0 
+jf @JFUD_718 
+if 
+0A0F:   new_language_set 
+jf @JFUD_718 
+03E6: remove_text_box 
+08DA: remove_panel $2417 
+08DA: remove_panel $2421 
+$2418 = 0 
+$2422 = 0 
+09FB: $CURRENT_LANGUAGE = current_language 
+
+:JFUD_718
+if 
+  $JFUD_STAGE == 0 
+jf @JFUD_1051 
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+jf @JFUD_841 
+075F: store_shopping_data_entries_number_to $10036 
+$JFUD_X_OFFSET = 0.0 
+$JFUD_Y_OFFSET = 0.0 
+$JFUD_Z_OFFSET = 0.0 
+$10064 = 0.0 
+$684 = 0.0 
+$685 = 2.5 
+05A9: s$10043 = s$CURRENT_SHOP_GXT_NAME // s$ 
+$JFUD_STAGE = 1 
+
+:JFUD_841
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDCHICK' // s$ == short  // Cluckin' Bell
+jf @JFUD_946 
+075F: store_shopping_data_entries_number_to $10036 
+$JFUD_X_OFFSET = -5.211 
+$JFUD_Y_OFFSET = 112.784 
+$JFUD_Z_OFFSET = 0.3 
+$10064 = 0.0 
+$684 = 0.0 
+$685 = 2.5 
+05A9: s$10043 = s$CURRENT_SHOP_GXT_NAME // s$ 
+$JFUD_STAGE = 1 
+
+:JFUD_946
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDBURG' // s$ == short  // Burger Shot
+jf @JFUD_1051 
+075F: store_shopping_data_entries_number_to $10036 
+$684 = 0.0 
+$685 = 2.5 
+$JFUD_X_OFFSET = 1.566 
+$JFUD_Y_OFFSET = 51.419 
+$JFUD_Z_OFFSET = 0.1 
+$10064 = 0.0 
+05A9: s$10043 = s$CURRENT_SHOP_GXT_NAME // s$ 
+$JFUD_STAGE = 1 
+
+:JFUD_1051
+if 
+  $JFUD_STAGE == 1 
+jf @JFUD_1473 
+03F0: enable_text_draw 1 
+08F8: display_stat_update_box 0 
+$JFUD_X_FOOD_SELLER = 374.0 
+0059: $JFUD_X_FOOD_SELLER += $JFUD_X_OFFSET // (float) 
+$JFUD_Y_FOOD_SELLER = -117.141 
+0059: $JFUD_Y_FOOD_SELLER += $JFUD_Y_OFFSET // (float) 
+$JFUD_Z_FOOD_SELLER = 1000.539 
+0059: $JFUD_Z_FOOD_SELLER += $JFUD_Z_OFFSET // (float) 
+$JFUD_FOOD_SELLER_ANGLE = 180.0 
+0059: $JFUD_FOOD_SELLER_ANGLE += $10064 // (float) 
+$JFUD_X_CAMERA = 374.0 
+0059: $JFUD_X_CAMERA += $JFUD_X_OFFSET // (float) 
+$JFUD_Y_CAMERA = -119.1869 
+0059: $JFUD_Y_CAMERA += $JFUD_Y_OFFSET // (float) 
+$JFUD_Z_CAMERA = 1002.019 
+0059: $JFUD_Z_CAMERA += $JFUD_Z_OFFSET // (float) 
+$JFUD_X_AIM_CAMERA = 373.9532 
+0059: $JFUD_X_AIM_CAMERA += $JFUD_X_OFFSET // (float) 
+$JFUD_Y_AIM_CAMERA = -118.189 
+0059: $JFUD_Y_AIM_CAMERA += $JFUD_Y_OFFSET // (float) 
+$JFUD_Z_AIM_CAMERA = 1001.975 
+0059: $JFUD_Z_AIM_CAMERA += $JFUD_Z_OFFSET // (float) 
+$10075 = 374.717 
+0059: $10075 += $JFUD_X_OFFSET // (float) 
+$10076 = -122.55 
+0059: $10076 += $JFUD_Y_OFFSET // (float) 
+$10077 = 1002.572 
+0059: $10077 += $JFUD_Z_OFFSET // (float) 
+$10078 = 374.599 
+0059: $10078 += $JFUD_X_OFFSET // (float) 
+$10079 = -121.608 
+0059: $10079 += $JFUD_Y_OFFSET // (float) 
+$10080 = 1002.256 
+0059: $10080 += $JFUD_Z_OFFSET // (float) 
+if 
+  $FOOD_SELLER_EXISTS == 0 
+jf @JFUD_1466 
+$FOOD_SELLER = Actor.Create(CivMale, $SELLER_MODEL, $JFUD_X_FOOD_SELLER, $JFUD_Y_FOOD_SELLER, $JFUD_Z_FOOD_SELLER)
+Actor.Angle($FOOD_SELLER) = $JFUD_FOOD_SELLER_ANGLE
+02A9: set_actor $FOOD_SELLER immune_to_nonplayer 1 
+060B: set_actor $FOOD_SELLER decision_maker_to 65542 
+04C4: store_coords_to $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER from_actor $FOOD_SELLER with_offset $684 $685 0.0 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 0 
+$FOOD_SELLER_EXISTS = 1 
+
+:JFUD_1466
+$JFUD_STAGE = 2 
+
+:JFUD_1473
+if 
+  $JFUD_STAGE == 2 
+jf @JFUD_2131 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_1522 
+gosub @JFUD_10392 
+
+:JFUD_1522
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_2086 
+if 
+  $FLAG_PLAYER_ATTACK_FOOD_SELLER == 0 
+jf @JFUD_2023 
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+0457:   player $PLAYER_CHAR aiming_at_actor $FOOD_SELLER 
+031D:   actor $FOOD_SELLER hit_by_weapon 57 
+  $FOOD_PLAYER_AGGRESSIVE_FLAG == 1 
+jf @JFUD_1622 
+05C4: AS_actor $FOOD_SELLER hands_up -2 ms 
+$FOOD_PLAYER_AGGRESSIVE_FLAG = 1 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 1 
+jump @JFUD_2016 
+
+:JFUD_1622
+if 
+0102:   actor $PLAYER_ACTOR in_sphere $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER radius 1.0 1.0 4.0 sphere $SHOW_SHOP_SPHERE stopped_on_foot 
+jf @JFUD_1811 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @JFUD_1811 
+if 
+  $FLAG_PLAYER_ATTACK_FOOD_SELLER == 0 
+jf @JFUD_2023 
+if 
+  11 > $TOTAL_FOOD_EATEN 
+jf @JFUD_1818 
+$SHOW_SHOP_SPHERE = 1 
+0947: actor $FOOD_SELLER speak_from_audio_table 333 store_spoken_phrase_id_to $2563 
+$SHOPS_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+if 
+  2 > $88 
+jf @JFUD_1804 
+if 
+  $169 == 1 
+jf @JFUD_1804 
+if 
+  2 > $SHOPS_PLAYER_CASH 
+jf @JFUD_1804 
+Player.Money($PLAYER_CHAR) += 2
+
+:JFUD_1804
+$JFUD_STAGE = 3 
+
+:JFUD_1811
+jump @JFUD_2016 
+
+:JFUD_1818
+if 
+  $10045 == 0 
+jf @JFUD_1843 
+jump @JFUD_1862 
+
+:JFUD_1843
+if 
+  33@ > 5000 
+jf @JFUD_1985 
+
+:JFUD_1862
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_1933 
+0947: actor $FOOD_SELLER speak_from_audio_table 322 store_spoken_phrase_id_to $2563 
+00BC: show_text_highpriority GXT 'FOOD1' time 5000 flag 1  // ~s~You cannot buy any more food at the moment, you will be unwell!
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1055 
+33@ = 0 
+jump @JFUD_1978 
+
+:JFUD_1933
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_1971 
+gosub @JFUD_10392 
+
+:JFUD_1971
+jump @JFUD_620 
+
+:JFUD_1978
+$10045 = 1 
+
+:JFUD_1985
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2016 
+gosub @JFUD_10392 
+
+:JFUD_2016
+jump @JFUD_2079 
+
+:JFUD_2023
+0947: actor $FOOD_SELLER speak_from_audio_table 327 store_spoken_phrase_id_to $2563 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2072 
+gosub @JFUD_10392 
+
+:JFUD_2072
+jump @JFUD_620 
+
+:JFUD_2079
+jump @JFUD_2131 
+
+:JFUD_2086
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2124 
+gosub @JFUD_10392 
+
+:JFUD_2124
+jump @JFUD_620 
+
+:JFUD_2131
+if 
+  $JFUD_STAGE == 3 
+jf @JFUD_4564 
+Player.CanMove($PLAYER_CHAR) = False
+$30 = 1 
+09BD: allow_other_threads_to_display_text_boxes 1 
+09BC: put_actor $PLAYER_ACTOR at $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER no_offset_and_dont_warp_gang 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+Actor.Angle($PLAYER_ACTOR) = $10055
+$JFUD_PLAYER_HEALTH = Actor.Health($PLAYER_ACTOR)
+0653: $JFUD_STAT_FAT = float_stat 21 
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 1 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD radius 1.0 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_2434 
+04C4: store_coords_to $X_START_ANIM_FOOD $Y_START_ANIM_FOOD $Z_START_ANIM_FOOD from_actor $FOOD_SELLER with_offset 0.0 0.8 0.1 
+if 
+   not Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_2366 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_IN" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+
+:JFUD_2366
+0947: actor $FOOD_SELLER speak_from_audio_table 333 store_spoken_phrase_id_to $10081 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_IN"
+jf @JFUD_2427 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_IN" time 
+
+:JFUD_2427
+jump @JFUD_2479 
+
+:JFUD_2434
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2472 
+gosub @JFUD_10392 
+
+:JFUD_2472
+jump @JFUD_620 
+
+:JFUD_2479
+32@ = 0 
+
+:JFUD_2486
+if 
+  32@ >= 600 
+jf @JFUD_2664 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_2539 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_2539
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_2607 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2593 
+gosub @JFUD_10392 
+
+:JFUD_2593
+jump @JFUD_620 
+jump @JFUD_2657 
+
+:JFUD_2607
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_IN"
+jf @JFUD_2657 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_IN" time 
+
+:JFUD_2657
+jump @JFUD_2486 
+
+:JFUD_2664
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_2733 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Camera.SetPosition($JFUD_X_CAMERA, $JFUD_Y_CAMERA, $JFUD_Z_CAMERA, 0.0, 0.0, 0.0)
+Camera.PointAt($JFUD_X_AIM_CAMERA, $JFUD_Y_AIM_CAMERA, $JFUD_Z_AIM_CAMERA, 2)
+jump @JFUD_2747 
+
+:JFUD_2733
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_2747
+if 
+   not Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_2958 
+
+:JFUD_2778
+if 
+   not $10052 == 1.0 
+jf @JFUD_2958 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_2833 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_2833
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_2901 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_2887 
+gosub @JFUD_10392 
+
+:JFUD_2887
+jump @JFUD_620 
+jump @JFUD_2951 
+
+:JFUD_2901
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_IN"
+jf @JFUD_2951 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_IN" time 
+
+:JFUD_2951
+jump @JFUD_2778 
+
+:JFUD_2958
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_3086 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_POSE" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_3079 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_POSE" time 
+
+:JFUD_3079
+jump @JFUD_3131 
+
+:JFUD_3086
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_3124 
+gosub @JFUD_10392 
+
+:JFUD_3124
+jump @JFUD_620 
+
+:JFUD_3131
+if 
+   not $10052 == 1.0 
+jf @JFUD_3315 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_3186 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_3186
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_3254 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_3240 
+gosub @JFUD_10392 
+
+:JFUD_3240
+jump @JFUD_620 
+jump @JFUD_3308 
+
+:JFUD_3254
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_3308 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_POSE" time 
+
+:JFUD_3308
+jump @JFUD_3131 
+
+:JFUD_3315
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_3452 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT_IN" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_IN"
+jf @JFUD_3445 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_IN" time 
+
+:JFUD_3445
+jump @JFUD_3497 
+
+:JFUD_3452
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_3490 
+gosub @JFUD_10392 
+
+:JFUD_3490
+jump @JFUD_620 
+
+:JFUD_3497
+if 
+   not $10052 == 1.0 
+jf @JFUD_3687 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_3552 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_3552
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_3620 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_3606 
+gosub @JFUD_10392 
+
+:JFUD_3606
+jump @JFUD_620 
+jump @JFUD_3680 
+
+:JFUD_3620
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_IN"
+jf @JFUD_3680 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_IN" time 
+
+:JFUD_3680
+jump @JFUD_3497 
+
+:JFUD_3687
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1145 
+$10042 = 0 
+$10038 = 0 
+0760: store_shopping_data_index $10042 textureCRC_to $SELECTED_MENU_ITEM 
+$JFUD_SELECTED_FOOD = Object.Create($SELECTED_MENU_ITEM, $X_START_ANIM_FOOD, $Y_START_ANIM_FOOD, $Z_START_ANIM_FOOD)
+0761: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM price_to $10034 
+if and
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+  $2202 == 1 
+jf @JFUD_3792 
+$10034 /= 2 
+0094: make $10034 absolute_integer 
+
+:JFUD_3792
+078C: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM nametag_to s$10039 // 8-byte string 
+0084: $2751 = $10034 // (int) 
+05A9: s$2752 = s$10039 // s$ 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_4140 
+if or
+   Object.Model($JFUD_SELECTED_FOOD) == 2221
+   Object.Model($JFUD_SELECTED_FOOD) == 2222
+   Object.Model($JFUD_SELECTED_FOOD) == 2223
+jf @JFUD_3980 
+$5 = Object.Create(1429, $X_START_ANIM_FOOD, $Y_START_ANIM_FOOD, $Z_START_ANIM_FOOD)
+08D2: object $JFUD_SELECTED_FOOD scale_model 0.85 
+069A: attach_object $JFUD_SELECTED_FOOD to_object $5 with_offset 0.0 0.0 0.0 rotation 0.0 0.0 82.0 
+070A: AS_actor $FOOD_SELLER attach_to_object $5 offset 0.3 0.2 0.006 on_bone 5 1 perform_animation "NULL" IFP_file "NULL" time 0 
+jump @JFUD_4021 
+
+:JFUD_3980
+070A: AS_actor $FOOD_SELLER attach_to_object $JFUD_SELECTED_FOOD offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 0 
+
+:JFUD_4021
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+$10038 = 1 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT"
+jf @JFUD_4133 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT" time 
+
+:JFUD_4133
+jump @JFUD_4185 
+
+:JFUD_4140
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_4178 
+gosub @JFUD_10392 
+
+:JFUD_4178
+jump @JFUD_620 
+
+:JFUD_4185
+if 
+   not $10052 == 1.0 
+jf @JFUD_4369 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_4240 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_4240
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_4308 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_4294 
+gosub @JFUD_10392 
+
+:JFUD_4294
+jump @JFUD_620 
+jump @JFUD_4362 
+
+:JFUD_4308
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT"
+jf @JFUD_4362 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT" time 
+
+:JFUD_4362
+jump @JFUD_4185 
+
+:JFUD_4369
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_4512 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT_LOOP" IFP "FOOD" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_LOOP"
+jf @JFUD_4505 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_LOOP" time 
+
+:JFUD_4505
+jump @JFUD_4557 
+
+:JFUD_4512
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_4550 
+gosub @JFUD_10392 
+
+:JFUD_4550
+jump @JFUD_620 
+
+:JFUD_4557
+$JFUD_STAGE = 4 
+
+:JFUD_4564
+if 
+  $JFUD_STAGE == 4 
+jf @JFUD_10160 
+if 
+  $10045 == 0 
+jf @JFUD_10153 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+if or
+  -100 > $MOVE_AXIS_X 
+00E1:   player 0 pressed_key 10 
+jf @JFUD_4828 
+if 
+  $2418 == 1 
+jf @JFUD_4672 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_4672
+$2544 = 0 
+$10042 -= 1 
+32@ = 0 
+
+:JFUD_4693
+if 
+  150 > 32@ 
+jf @JFUD_4814 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_4746 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_4746
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_4807 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_4800 
+gosub @JFUD_10392 
+
+:JFUD_4800
+jump @JFUD_620 
+
+:JFUD_4807
+jump @JFUD_4693 
+
+:JFUD_4814
+$10047 = 0 
+$10038 = 0 
+
+:JFUD_4828
+if or
+  $MOVE_AXIS_X > 100 
+00E1:   player 0 pressed_key 11 
+jf @JFUD_5040 
+if 
+  $2418 == 1 
+jf @JFUD_4884 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_4884
+$2544 = 0 
+$10042 += 1 
+32@ = 0 
+
+:JFUD_4905
+if 
+  150 > 32@ 
+jf @JFUD_5026 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_4958 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_4958
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_5019 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_5012 
+gosub @JFUD_10392 
+
+:JFUD_5012
+jump @JFUD_620 
+
+:JFUD_5019
+jump @JFUD_4905 
+
+:JFUD_5026
+$10038 = 0 
+$10047 = 0 
+
+:JFUD_5040
+if 
+  0 > $10042 
+jf @JFUD_5073 
+0084: $10042 = $10036 // (int) 
+$10042 -= 1 
+
+:JFUD_5073
+if 
+003A:   $10042 == $10036 // (int) 
+jf @JFUD_5099 
+$10042 = 0 
+
+:JFUD_5099
+if 
+  $10038 == 0 
+jf @JFUD_6347 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_5251 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_RETURN" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_5244 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_5244
+jump @JFUD_5296 
+
+:JFUD_5251
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_5289 
+gosub @JFUD_10392 
+
+:JFUD_5289
+jump @JFUD_620 
+
+:JFUD_5296
+if 
+   not $10052 == 1.0 
+jf @JFUD_5484 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_5351 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_5351
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_5419 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_5405 
+gosub @JFUD_10392 
+
+:JFUD_5405
+jump @JFUD_620 
+jump @JFUD_5477 
+
+:JFUD_5419
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_5477 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_5477
+jump @JFUD_5296 
+
+:JFUD_5484
+gosub @JFUD_13525 
+0760: store_shopping_data_index $10042 textureCRC_to $SELECTED_MENU_ITEM 
+$JFUD_SELECTED_FOOD = Object.Create($SELECTED_MENU_ITEM, $X_START_ANIM_FOOD, $Y_START_ANIM_FOOD, $Z_START_ANIM_FOOD)
+0761: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM price_to $10034 
+if and
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+  $2202 == 1 
+jf @JFUD_5568 
+$10034 /= 2 
+0094: make $10034 absolute_integer 
+
+:JFUD_5568
+078C: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM nametag_to s$10039 // 8-byte string 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1145 
+0084: $2751 = $10034 // (int) 
+05A9: s$2752 = s$10039 // s$ 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_5923 
+if or
+   Object.Model($JFUD_SELECTED_FOOD) == 2221
+   Object.Model($JFUD_SELECTED_FOOD) == 2222
+   Object.Model($JFUD_SELECTED_FOOD) == 2223
+jf @JFUD_5770 
+$5 = Object.Create(1249, $X_START_ANIM_FOOD, $Y_START_ANIM_FOOD, $Z_START_ANIM_FOOD)
+08D2: object $JFUD_SELECTED_FOOD scale_model 0.85 
+069A: attach_object $JFUD_SELECTED_FOOD to_object $5 with_offset 0.0 0.0 0.0 rotation 0.0 0.0 82.0 
+070A: AS_actor $FOOD_SELLER attach_to_object $5 offset 0.3 0.2 0.006 on_bone 5 1 perform_animation "NULL" IFP_file "NULL" time 0 
+jump @JFUD_5811 
+
+:JFUD_5770
+070A: AS_actor $FOOD_SELLER attach_to_object $JFUD_SELECTED_FOOD offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 0 
+
+:JFUD_5811
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT"
+jf @JFUD_5916 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT" time 
+
+:JFUD_5916
+jump @JFUD_5968 
+
+:JFUD_5923
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_5961 
+gosub @JFUD_10392 
+
+:JFUD_5961
+jump @JFUD_620 
+
+:JFUD_5968
+if 
+   not $10052 == 1.0 
+jf @JFUD_6152 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_6023 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_6023
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_6091 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_6077 
+gosub @JFUD_10392 
+
+:JFUD_6077
+jump @JFUD_620 
+jump @JFUD_6145 
+
+:JFUD_6091
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT"
+jf @JFUD_6145 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT" time 
+
+:JFUD_6145
+jump @JFUD_5968 
+
+:JFUD_6152
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_6295 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT_LOOP" IFP "FOOD" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_LOOP"
+jf @JFUD_6288 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_LOOP" time 
+
+:JFUD_6288
+jump @JFUD_6340 
+
+:JFUD_6295
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_6333 
+gosub @JFUD_10392 
+
+:JFUD_6333
+jump @JFUD_620 
+
+:JFUD_6340
+$10038 = 1 
+
+:JFUD_6347
+if 
+  $10045 == 0 
+jf @JFUD_6372 
+gosub @JFUD_12884 
+
+:JFUD_6372
+if 
+00E1:   player 0 pressed_key 16 
+jf @JFUD_10153 
+
+:JFUD_6389
+if 
+00E1:   player 0 pressed_key 16 
+jf @JFUD_6508 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_6440 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_6440
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_6501 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_6494 
+gosub @JFUD_10392 
+
+:JFUD_6494
+jump @JFUD_620 
+
+:JFUD_6501
+jump @JFUD_6389 
+
+:JFUD_6508
+$2544 = 0 
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'FOOD1'  // ~s~You cannot buy any more food at the moment, you will be unwell!
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_6568 
+$SHOPS_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+jump @JFUD_6582 
+
+:JFUD_6568
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_6582
+if 
+002C:   $SHOPS_PLAYER_CASH >= $10034 // (int) 
+jf @JFUD_10019 
+if 
+  11 > $TOTAL_FOOD_EATEN 
+jf @JFUD_7475 
+if and
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+  $2202 == 1 
+jf @JFUD_6680 
+$10034 *= -1 
+Player.Money($PLAYER_CHAR) += $10034
+$10034 *= -1 
+jump @JFUD_6685 
+
+:JFUD_6680
+0790: charge_money_for_shopping_item_with_textureCRC $SELECTED_MENU_ITEM 
+
+:JFUD_6685
+$10047 = 1 
+if 
+03D0:   wav 4 loaded 
+jf @JFUD_6730 
+if 
+03D2:   wav 4 ended 
+jf @JFUD_6730 
+09F1: play_audio_at_actor $PLAYER_ACTOR event 1168 
+
+:JFUD_6730
+if 
+  $672 == 0 
+jf @JFUD_6760 
+01BD: $5285 = current_time_in_ms 
+$672 = 1 
+
+:JFUD_6760
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1054 
+$TOTAL_FOOD_EATEN += 1 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_6815 
+0947: actor $FOOD_SELLER speak_from_audio_table 323 store_spoken_phrase_id_to $2563 
+jump @JFUD_6860 
+
+:JFUD_6815
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_6853 
+gosub @JFUD_10392 
+
+:JFUD_6853
+jump @JFUD_620 
+
+:JFUD_6860
+32@ = 0 
+if 
+  $2418 == 1 
+jf @JFUD_6899 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_6899
+if 
+  $2422 == 0 
+jf @JFUD_7267 
+08D4: $2421 = create_panel_with_title 'FOODCHO' position 29.0 25.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+08D6: set_panel $2421 column 0 alignment 1 
+08DB: set_panel $2421 column 0 header 'MEAL' data 'BOUGHT' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Meal // Purchased
+08D6: set_panel $2421 column 1 alignment 2 
+08DB: set_panel $2421 column 1 header 'COST' data 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Cost
+08EE: set_panel $2421 column 1 row 0 text_1number GXT 'DOLLAR' number $10034  // $~1~
+09DB: set_panel $2421 column 0 width 140 
+09DB: set_panel $2421 column 1 width 46 
+$2422 = 1 
+
+:JFUD_7267
+if 
+  1000 >= 32@ 
+jf @JFUD_7388 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_7320 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_7320
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_7381 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_7374 
+gosub @JFUD_10392 
+
+:JFUD_7374
+jump @JFUD_620 
+
+:JFUD_7381
+jump @JFUD_7267 
+
+:JFUD_7388
+if 
+  $2422 == 1 
+jf @JFUD_7418 
+08DA: remove_panel $2421 
+$2422 = 0 
+
+:JFUD_7418
+if 
+  $2418 == 0 
+jf @JFUD_7443 
+gosub @JFUD_12884 
+
+:JFUD_7443
+if 
+  $88 == 1 
+jf @JFUD_7468 
+$88 = 2 
+
+:JFUD_7468
+jump @JFUD_10012 
+
+:JFUD_7475
+if 
+  $10045 == 0 
+jf @JFUD_10012 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_7557 
+0947: actor $FOOD_SELLER speak_from_audio_table 322 store_spoken_phrase_id_to $2563 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1055 
+00BC: show_text_highpriority GXT 'FOOD1' time 5000 flag 1  // ~s~You cannot buy any more food at the moment, you will be unwell!
+jump @JFUD_7602 
+
+:JFUD_7557
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_7595 
+gosub @JFUD_10392 
+
+:JFUD_7595
+jump @JFUD_620 
+
+:JFUD_7602
+if 
+  $2418 == 1 
+jf @JFUD_7634 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_7634
+if 
+  $2422 == 1 
+jf @JFUD_7666 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:JFUD_7666
+if 
+  $88 == 2 
+jf @JFUD_7792 
+0169: set_fade_color_RGB 0 0 0 
+043C: disable_sounds_after_fadeout 0 
+fade 0 0 
+gosub @JFUD_13525 
+Actor.DestroyInstantly($FOOD_SELLER)
+$88 = 3 
+$2418 = 0 
+$2422 = 0 
+$2544 = 0 
+$10038 = 0 
+$10042 = 0 
+$JFUD_STAGE = 2 
+Actor.Health($PLAYER_ACTOR) = $JFUD_PLAYER_HEALTH
+062A: change_float_stat 21 to $JFUD_STAT_FAT 
+$28 = 1 
+jump @JFUD_620 
+
+:JFUD_7792
+if 
+  $TOTAL_FOOD_EATEN >= 11 
+jf @JFUD_8594 
+gosub @JFUD_10195 
+gosub @JFUD_13525 
+if 
+  10 > $JFUD_PLAYER_HEALTH 
+jf @JFUD_7857 
+0084: $JFUD_PLAYER_HEALTH = $JFUD_PLAYER_HEALTH // (int) 
+jump @JFUD_7889 
+
+:JFUD_7857
+$JFUD_PLAYER_HEALTH -= 10 
+if 
+  10 > $JFUD_PLAYER_HEALTH 
+jf @JFUD_7889 
+$JFUD_PLAYER_HEALTH = 10 
+
+:JFUD_7889
+Actor.Health($PLAYER_ACTOR) = $JFUD_PLAYER_HEALTH
+062A: change_float_stat 21 to $JFUD_STAT_FAT 
+Camera.SetPosition($10075, $10076, $10077, 0.0, 0.0, 0.0)
+Camera.PointAt($10078, $10079, $10080, 2)
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_8116 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0086: $10049 = $TEMPVAR_X_COORD // (float) 
+$10049 += 0.355 
+0086: $10050 = $TEMPVAR_Y_COORD // (float) 
+$10050 -= 0.116 
+0086: $10051 = $TEMPVAR_Z_COORD // (float) 
+$10051 -= 0.048 
+064B: $10048 = create_particle "PUKE" at $10049 $10050 $10051 type 1 
+0812: AS_actor $PLAYER_ACTOR perform_animation "EAT_VOMIT_P" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+$10052 = 0.0 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 353 store_spoken_phrase_id_to $2563 
+jump @JFUD_8130 
+
+:JFUD_8116
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_8130
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_8204 
+0812: AS_actor $FOOD_SELLER perform_animation "EAT_VOMIT_SK" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0947: actor $FOOD_SELLER speak_from_audio_table 325 store_spoken_phrase_id_to $2563 
+jump @JFUD_8249 
+
+:JFUD_8204
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_8242 
+gosub @JFUD_10392 
+
+:JFUD_8242
+jump @JFUD_620 
+
+:JFUD_8249
+if 
+   Actor.Animation($PLAYER_ACTOR) == "EAT_VOMIT_P"
+jf @JFUD_8299 
+0613: $10052 = actor $PLAYER_ACTOR animation "EAT_VOMIT_P" time 
+
+:JFUD_8299
+if 
+   not $10052 == 1.0 
+jf @JFUD_8577 
+wait 0 
+if 
+  $10056 == 0 
+jf @JFUD_8393 
+if 
+  $10052 >= 0.463 
+jf @JFUD_8393 
+if 
+03D0:   wav 4 loaded 
+jf @JFUD_8386 
+09F1: play_audio_at_actor $PLAYER_ACTOR event 1169 
+
+:JFUD_8386
+$10056 = 1 
+
+:JFUD_8393
+if 
+  $10056 == 1 
+jf @JFUD_8444 
+if 
+  $10052 >= 0.52 
+jf @JFUD_8444 
+064C: make_particle $10048 visible 
+$10056 = 2 
+
+:JFUD_8444
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_8488 
+0613: $10052 = actor $PLAYER_ACTOR animation "EAT_VOMIT_P" time 
+jump @JFUD_8502 
+
+:JFUD_8488
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_8502
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_8525 
+jump @JFUD_8570 
+
+:JFUD_8525
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_8563 
+gosub @JFUD_10392 
+
+:JFUD_8563
+jump @JFUD_620 
+
+:JFUD_8570
+jump @JFUD_8299 
+
+:JFUD_8577
+064E: stop_particle $10048 
+0650: destroy_particle $10048 
+jump @JFUD_9345 
+
+:JFUD_8594
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_8728 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_RETURN" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_8721 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_8721
+jump @JFUD_8773 
+
+:JFUD_8728
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_8766 
+gosub @JFUD_10392 
+
+:JFUD_8766
+jump @JFUD_620 
+
+:JFUD_8773
+if 
+   not $10052 == 1.0 
+jf @JFUD_8961 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_8828 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_8828
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_8896 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_8882 
+gosub @JFUD_10392 
+
+:JFUD_8882
+jump @JFUD_620 
+jump @JFUD_8954 
+
+:JFUD_8896
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_8954 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_8954
+jump @JFUD_8773 
+
+:JFUD_8961
+gosub @JFUD_13525 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_9108 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT_OUT" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_OUT"
+jf @JFUD_9101 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_OUT" time 
+
+:JFUD_9101
+jump @JFUD_9153 
+
+:JFUD_9108
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_9146 
+gosub @JFUD_10392 
+
+:JFUD_9146
+jump @JFUD_620 
+
+:JFUD_9153
+if 
+   not $10052 == 1.0 
+jf @JFUD_9345 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_9208 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_9208
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_9276 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_9262 
+gosub @JFUD_10392 
+
+:JFUD_9262
+jump @JFUD_620 
+jump @JFUD_9338 
+
+:JFUD_9276
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_OUT"
+jf @JFUD_9338 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_OUT" time 
+
+:JFUD_9338
+jump @JFUD_9153 
+
+:JFUD_9345
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_9473 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_POSE" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_9466 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_POSE" time 
+
+:JFUD_9466
+jump @JFUD_9518 
+
+:JFUD_9473
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_9511 
+gosub @JFUD_10392 
+
+:JFUD_9511
+jump @JFUD_620 
+
+:JFUD_9518
+if 
+   not $10052 == 1.0 
+jf @JFUD_9709 
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @JFUD_9566 
+jump @JFUD_9580 
+
+:JFUD_9566
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_9580
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_9657 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_9650 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_POSE" time 
+
+:JFUD_9650
+jump @JFUD_9702 
+
+:JFUD_9657
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_9695 
+gosub @JFUD_10392 
+
+:JFUD_9695
+jump @JFUD_620 
+
+:JFUD_9702
+jump @JFUD_9518 
+
+:JFUD_9709
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+09BD: allow_other_threads_to_display_text_boxes 0 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:JFUD_9731
+if 
+00FF:   actor $PLAYER_ACTOR sphere 0 in_sphere $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER radius 1.0 1.0 4.0 on_foot 
+jf @JFUD_9970 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_9807 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_9807
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_9875 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_9861 
+gosub @JFUD_10392 
+
+:JFUD_9861
+jump @JFUD_620 
+jump @JFUD_9963 
+
+:JFUD_9875
+if 
+  $FLAG_PLAYER_ATTACK_FOOD_SELLER == 0 
+jf @JFUD_9963 
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+0457:   player $PLAYER_CHAR aiming_at_actor $FOOD_SELLER 
+031D:   actor $FOOD_SELLER hit_by_weapon 57 
+  $FOOD_PLAYER_AGGRESSIVE_FLAG == 1 
+jf @JFUD_9963 
+0947: actor $FOOD_SELLER speak_from_audio_table 327 store_spoken_phrase_id_to $2563 
+05C4: AS_actor $FOOD_SELLER hands_up -2 ms 
+$FOOD_PLAYER_AGGRESSIVE_FLAG = 1 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 1 
+
+:JFUD_9963
+jump @JFUD_9731 
+
+:JFUD_9970
+$2418 = 0 
+$2422 = 0 
+$10038 = 0 
+$10042 = 0 
+$JFUD_STAGE = 2 
+$10045 = 1 
+
+:JFUD_10012
+jump @JFUD_10153 
+
+:JFUD_10019
+if 
+  $2544 == 0 
+jf @JFUD_10153 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_10101 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1055 
+0947: actor $FOOD_SELLER speak_from_audio_table 324 store_spoken_phrase_id_to $10081 
+00BC: show_text_highpriority GXT 'SHOPNO' time 5000 flag 1  // ~s~You don't have enough money to buy this item.
+jump @JFUD_10146 
+
+:JFUD_10101
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_10139 
+gosub @JFUD_10392 
+
+:JFUD_10139
+jump @JFUD_620 
+
+:JFUD_10146
+$2544 = 1 
+
+:JFUD_10153
+gosub @JFUD_10657 
+
+:JFUD_10160
+jump @JFUD_10174 
+
+:JFUD_10167
+gosub @JFUD_10392 
+
+:JFUD_10174
+jump @JFUD_10188 
+
+:JFUD_10181
+gosub @JFUD_10392 
+
+:JFUD_10188
+jump @JFUD_620 
+
+:JFUD_10195
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'FOOD1'  // ~s~You cannot buy any more food at the moment, you will be unwell!
+if 
+  $2418 == 1 
+jf @JFUD_10249 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_10249
+if 
+  $2422 == 1 
+jf @JFUD_10281 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:JFUD_10281
+$10038 = 0 
+$10042 = 0 
+$10047 = 0 
+$2418 = 0 
+$2422 = 0 
+$JFUD_STAGE = 2 
+$2544 = 0 
+Model.Destroy(1249)
+Model.Destroy($190)
+Model.Destroy($191)
+Model.Destroy($192)
+Model.Destroy($JFUD_LOW_FOOD_MODEL)
+Model.Destroy($JFUD_MED_FOOD_MODEL)
+Model.Destroy($JFUD_HIGH_FOOD_MODEL)
+Model.Destroy($JFUD_HEALTHY_FOOD_MODEL)
+if 
+  $FOOD_SELLER_EXISTS == 1 
+jf @JFUD_10390 
+03E6: remove_text_box 
+
+:JFUD_10390
+return 
+
+:JFUD_10392
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'FOOD1'  // ~s~You cannot buy any more food at the moment, you will be unwell!
+if 
+  $FOOD_SELLER_EXISTS == 1 
+jf @JFUD_10434 
+03E6: remove_text_box 
+
+:JFUD_10434
+if 
+  $2418 == 1 
+jf @JFUD_10466 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_10466
+if 
+  $2422 == 1 
+jf @JFUD_10498 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:JFUD_10498
+$FOOD_SELLER_EXISTS = 0 
+$10035 = 0 
+$10042 = 0 
+$10038 = 0 
+$10045 = 0 
+$10047 = 0 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 0 
+$10056 = 0 
+$2418 = 0 
+$2422 = 0 
+$JFUD_STAGE = 0 
+$2544 = 0 
+0650: destroy_particle $10048 
+Actor.DestroyInstantly($FOOD_SELLER)
+Model.Destroy($SELLER_MODEL)
+Model.Destroy(1249)
+Model.Destroy($190)
+Model.Destroy($191)
+Model.Destroy($192)
+Model.Destroy($JFUD_LOW_FOOD_MODEL)
+Model.Destroy($JFUD_MED_FOOD_MODEL)
+Model.Destroy($JFUD_HIGH_FOOD_MODEL)
+Model.Destroy($JFUD_HEALTHY_FOOD_MODEL)
+03F0: enable_text_draw 0 
+08F8: display_stat_update_box 1 
+09BD: allow_other_threads_to_display_text_boxes 0 
+040D: unload_wav 4 
+end_thread 
+return 
+
+:JFUD_10657
+if 
+00E1:   player 0 pressed_key 15 
+jf @JFUD_12882 
+if 
+  $2418 == 1 
+jf @JFUD_10706 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:JFUD_10706
+if 
+  $2422 == 1 
+jf @JFUD_10738 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:JFUD_10738
+if 
+00E1:   player 0 pressed_key 15 
+jf @JFUD_10857 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_10789 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_10789
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_10850 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_10843 
+gosub @JFUD_10392 
+
+:JFUD_10843
+jump @JFUD_620 
+
+:JFUD_10850
+jump @JFUD_10738 
+
+:JFUD_10857
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'FOOD1'  // ~s~You cannot buy any more food at the moment, you will be unwell!
+if 
+  $88 == 2 
+jf @JFUD_10979 
+0169: set_fade_color_RGB 0 0 0 
+fade 0 0 
+gosub @JFUD_13525 
+Actor.DestroyInstantly($FOOD_SELLER)
+$88 = 3 
+$10038 = 0 
+$10042 = 0 
+$2418 = 0 
+$2422 = 0 
+$JFUD_STAGE = 2 
+$2544 = 0 
+jump @JFUD_12882 
+
+:JFUD_10979
+$SHOW_SHOP_SPHERE = 0 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+  $10047 == 1 
+jf @JFUD_11212 
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDBURG' // s$ == short  // Burger Shot
+jf @JFUD_11079 
+0605: actor $PLAYER_ACTOR perform_animation "EAT_BURGER" IFP "FOOD" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @JFUD_11212 
+
+:JFUD_11079
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDPIZA' // s$ == short  // Pizza Stack
+jf @JFUD_11148 
+0605: actor $PLAYER_ACTOR perform_animation "EAT_PIZZA" IFP "FOOD" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+jump @JFUD_11212 
+
+:JFUD_11148
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'FDCHICK' // s$ == short  // Cluckin' Bell
+jf @JFUD_11212 
+0605: actor $PLAYER_ACTOR perform_animation "EAT_CHICKEN" IFP "FOOD" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+
+:JFUD_11212
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_11357 
+0947: actor $FOOD_SELLER speak_from_audio_table 331 store_spoken_phrase_id_to $10081 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_RETURN" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_11350 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_11350
+jump @JFUD_11402 
+
+:JFUD_11357
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_11395 
+gosub @JFUD_10392 
+
+:JFUD_11395
+jump @JFUD_620 
+
+:JFUD_11402
+if 
+   not $10052 == 1.0 
+jf @JFUD_11590 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_11457 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_11457
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_11525 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_11511 
+gosub @JFUD_10392 
+
+:JFUD_11511
+jump @JFUD_620 
+jump @JFUD_11583 
+
+:JFUD_11525
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_RETURN"
+jf @JFUD_11583 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_RETURN" time 
+
+:JFUD_11583
+jump @JFUD_11402 
+
+:JFUD_11590
+gosub @JFUD_13525 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_11737 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_LIFT_OUT" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_OUT"
+jf @JFUD_11730 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_OUT" time 
+
+:JFUD_11730
+jump @JFUD_11782 
+
+:JFUD_11737
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_11775 
+gosub @JFUD_10392 
+
+:JFUD_11775
+jump @JFUD_620 
+
+:JFUD_11782
+if 
+   not $10052 == 1.0 
+jf @JFUD_11974 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_11837 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_11837
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_11905 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_11891 
+gosub @JFUD_10392 
+
+:JFUD_11891
+jump @JFUD_620 
+jump @JFUD_11967 
+
+:JFUD_11905
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_LIFT_OUT"
+jf @JFUD_11967 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_LIFT_OUT" time 
+
+:JFUD_11967
+jump @JFUD_11782 
+
+:JFUD_11974
+if 
+  $10047 == 1 
+jf @JFUD_12030 
+if 
+03D0:   wav 4 loaded 
+jf @JFUD_12030 
+if 
+03D2:   wav 4 ended 
+jf @JFUD_12030 
+09F1: play_audio_at_actor $PLAYER_ACTOR event 1168 
+
+:JFUD_12030
+$10038 = 0 
+$10042 = 0 
+$JFUD_STAGE = 2 
+$2418 = 0 
+$2422 = 0 
+$10047 = 0 
+Player.CanMove($PLAYER_CHAR) = True
+$30 = 0 
+Camera.Restore_WithJumpCut
+if 
+  $FOOD_SELLER_EXISTS == 1 
+jf @JFUD_12108 
+03E6: remove_text_box 
+
+:JFUD_12108
+gosub @JFUD_13525 
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_12242 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_THANK" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+0947: actor $FOOD_SELLER speak_from_audio_table 331 store_spoken_phrase_id_to $10081 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_THANK"
+jf @JFUD_12235 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_THANK" time 
+
+:JFUD_12235
+jump @JFUD_12287 
+
+:JFUD_12242
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_12280 
+gosub @JFUD_10392 
+
+:JFUD_12280
+jump @JFUD_620 
+
+:JFUD_12287
+if 
+   not $10052 == 1.0 
+jf @JFUD_12463 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_12342 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_12342
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_12410 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_12396 
+gosub @JFUD_10392 
+
+:JFUD_12396
+jump @JFUD_620 
+jump @JFUD_12456 
+
+:JFUD_12410
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_THANK"
+jf @JFUD_12456 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_THANK" time 
+
+:JFUD_12456
+jump @JFUD_12287 
+
+:JFUD_12463
+if 
+   not Actor.Dead($FOOD_SELLER)
+jf @JFUD_12591 
+0812: AS_actor $FOOD_SELLER perform_animation "SHP_TRAY_POSE" IFP "FOOD" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$10052 = 0.0 
+if 
+   Actor.Animation($FOOD_SELLER) == "SHP_TRAY_POSE"
+jf @JFUD_12584 
+0613: $10052 = actor $FOOD_SELLER animation "SHP_TRAY_POSE" time 
+
+:JFUD_12584
+jump @JFUD_12636 
+
+:JFUD_12591
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_12629 
+gosub @JFUD_10392 
+
+:JFUD_12629
+jump @JFUD_620 
+
+:JFUD_12636
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER radius 1.0 1.0 4.0 on_foot 
+jf @JFUD_12875 
+wait 0 
+if 
+   not Player.Defined($PLAYER_CHAR)
+jf @JFUD_12712 
+gosub @JFUD_10392 
+jump @JFUD_620 
+
+:JFUD_12712
+if 
+   Actor.Dead($FOOD_SELLER)
+jf @JFUD_12780 
+gosub @JFUD_10195 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$10043 // s$ == short 
+jf @JFUD_12766 
+gosub @JFUD_10392 
+
+:JFUD_12766
+jump @JFUD_620 
+jump @JFUD_12868 
+
+:JFUD_12780
+if 
+  $FLAG_PLAYER_ATTACK_FOOD_SELLER == 0 
+jf @JFUD_12868 
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+0457:   player $PLAYER_CHAR aiming_at_actor $FOOD_SELLER 
+031D:   actor $FOOD_SELLER hit_by_weapon 57 
+  $FOOD_PLAYER_AGGRESSIVE_FLAG == 1 
+jf @JFUD_12868 
+0947: actor $FOOD_SELLER speak_from_audio_table 327 store_spoken_phrase_id_to $2563 
+05C4: AS_actor $FOOD_SELLER hands_up -2 ms 
+$FOOD_PLAYER_AGGRESSIVE_FLAG = 1 
+$FLAG_PLAYER_ATTACK_FOOD_SELLER = 1 
+
+:JFUD_12868
+jump @JFUD_12636 
+
+:JFUD_12875
+$SHOW_SHOP_SPHERE = 1 
+
+:JFUD_12882
+return 
+
+:JFUD_12884
+if 
+  $2418 == 0 
+jf @JFUD_13523 
+0512: show_permanent_text_box 'FOOD_H'  // Use ~k~~GO_LEFT~ or ~k~~GO_RIGHT~ to select a meal.~N~~k~~PED_SPRINT~ Buy~N~~k~~VEHICLE_ENTER_EXIT~ Quit
+if 
+04A3:   $CURRENT_LANGUAGE == 0 // == constant 
+jf @JFUD_12975 
+08D4: $2417 = create_panel_with_title 'FOODCHO' position 29.0 145.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+jump @JFUD_13216 
+
+:JFUD_12975
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @JFUD_13037 
+08D4: $2417 = create_panel_with_title 'FOODCHO' position 29.0 145.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+jump @JFUD_13216 
+
+:JFUD_13037
+if 
+04A3:   $CURRENT_LANGUAGE == 2 // == constant 
+jf @JFUD_13099 
+08D4: $2417 = create_panel_with_title 'FOODCHO' position 29.0 165.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+jump @JFUD_13216 
+
+:JFUD_13099
+if 
+04A3:   $CURRENT_LANGUAGE == 3 // == constant 
+jf @JFUD_13161 
+08D4: $2417 = create_panel_with_title 'FOODCHO' position 29.0 145.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+jump @JFUD_13216 
+
+:JFUD_13161
+if 
+04A3:   $CURRENT_LANGUAGE == 4 // == constant 
+jf @JFUD_13216 
+08D4: $2417 = create_panel_with_title 'FOODCHO' position 29.0 145.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Food
+
+:JFUD_13216
+08D6: set_panel $2417 column 0 alignment 1 
+08DB: set_panel $2417 column 0 header 'MEAL' data s$2752 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Meal
+08D6: set_panel $2417 column 1 alignment 2 
+08DB: set_panel $2417 column 1 header 'COST' data 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Cost
+08EE: set_panel $2417 column 1 row 0 text_1number GXT 'DOLLAR' number $2751  // $~1~
+09DB: set_panel $2417 column 0 width 140 
+09DB: set_panel $2417 column 1 width 46 
+$2418 = 1 
+
+:JFUD_13523
+return 
+
+:JFUD_13525
+Object.Destroy($JFUD_SELECTED_FOOD)
+return 
+end_thread

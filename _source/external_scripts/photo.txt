@@ -1,0 +1,341 @@
+:PHOTO
+thread 'PHOTO' 
+2@ = 0 
+if 
+  2@ == 1 
+jf @PHOTO_60 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:PHOTO_60
+04ED: load_animation "CAMERA" 
+Model.Load(#CAMERA)
+
+:PHOTO_75
+if 
+   not Model.Available(#CAMERA)
+jf @PHOTO_117 
+04ED: load_animation "CAMERA" 
+Model.Load(#CAMERA)
+wait 0 
+jump @PHOTO_75 
+
+:PHOTO_117
+if 
+84EE:   not animation "CAMERA" loaded 
+jf @PHOTO_164 
+04ED: load_animation "CAMERA" 
+Model.Load(#CAMERA)
+wait 0 
+jump @PHOTO_117 
+
+:PHOTO_164
+3@ = 1 
+4@ = 0 
+if 
+   not Actor.Dead(0@)
+jf @PHOTO_204 
+Actor.GiveWeaponAndAmmo(0@, Camera, 1000)
+
+:PHOTO_204
+wait 0 
+if and
+   not Actor.Dead(0@)
+   Player.Defined($PLAYER_CHAR)
+jf @PHOTO_306 
+if 
+09C5:   unknown_actor 0@ 
+jf @PHOTO_292 
+if 
+051A:   actor 0@ damaged_by_actor $PLAYER_ACTOR 
+jf @PHOTO_278 
+jump @PHOTO_2447 
+jump @PHOTO_285 
+
+:PHOTO_278
+gosub @PHOTO_320 
+
+:PHOTO_285
+jump @PHOTO_299 
+
+:PHOTO_292
+gosub @PHOTO_2405 
+
+:PHOTO_299
+jump @PHOTO_313 
+
+:PHOTO_306
+gosub @PHOTO_2405 
+
+:PHOTO_313
+jump @PHOTO_204 
+
+:PHOTO_320
+0871: init_jump_table 3@ total_jumps 1 default_jump 0 @PHOTO_397 jumps 1 @PHOTO_383 -1 @PHOTO_397 -1 @PHOTO_397 -1 @PHOTO_397 -1 @PHOTO_397 -1 @PHOTO_397 -1 @PHOTO_397 
+
+:PHOTO_383
+gosub @PHOTO_399 
+jump @PHOTO_397 
+
+:PHOTO_397
+return 
+
+:PHOTO_399
+0871: init_jump_table 4@ total_jumps 13 default_jump 0 @PHOTO_2403 jumps 0 @PHOTO_527 1 @PHOTO_587 2 @PHOTO_744 3 @PHOTO_912 4 @PHOTO_1047 5 @PHOTO_1172 6 @PHOTO_1414 
+0872: jump_table_jumps 7 @PHOTO_1540 8 @PHOTO_1704 9 @PHOTO_1777 10 @PHOTO_1902 11 @PHOTO_2144 12 @PHOTO_2277 -1 @PHOTO_2403 -1 @PHOTO_2403 -1 @PHOTO_2403 
+
+:PHOTO_527
+0605: actor 0@ perform_animation "CAMSTND_IDLELOOP" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ += 1 
+jump @PHOTO_2403 
+
+:PHOTO_587
+if 
+   Actor.Animation(0@) == "CAMSTND_IDLELOOP"
+jf @PHOTO_737 
+0613: 7@ = actor 0@ animation "CAMSTND_IDLELOOP" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_737 
+0209: 2@ = random_int_in_ranges 5000 8000 
+0605: actor 0@ perform_animation "CAMSTND_LKABT" IFP "CAMERA" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time 2@ 
+33@ = 0 
+4@ += 1 
+
+:PHOTO_737
+jump @PHOTO_2403 
+
+:PHOTO_744
+if 
+002D:   33@ >= 2@ // (int) 
+jf @PHOTO_905 
+0209: 2@ = random_int_in_ranges 0 100 
+if 
+  2@ > 50 
+jf @PHOTO_852 
+0605: actor 0@ perform_animation "CAMSTND_TO_CAMCRCH" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ = 7 
+jump @PHOTO_905 
+
+:PHOTO_852
+0605: actor 0@ perform_animation "CAMSTND_IDLELOOP" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ = 3 
+
+:PHOTO_905
+jump @PHOTO_2403 
+
+:PHOTO_912
+if 
+   Actor.Animation(0@) == "CAMSTND_IDLELOOP"
+jf @PHOTO_1040 
+0613: 7@ = actor 0@ animation "CAMSTND_IDLELOOP" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_1040 
+0605: actor 0@ perform_animation "PICSTND_IN" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ += 1 
+
+:PHOTO_1040
+jump @PHOTO_2403 
+
+:PHOTO_1047
+if 
+   Actor.Animation(0@) == "PICSTND_IN"
+jf @PHOTO_1165 
+0613: 7@ = actor 0@ animation "PICSTND_IN" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_1165 
+0605: actor 0@ perform_animation "PICSTND_TAKE" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ += 1 
+
+:PHOTO_1165
+jump @PHOTO_2403 
+
+:PHOTO_1172
+if 
+   Actor.Animation(0@) == "PICSTND_TAKE"
+jf @PHOTO_1407 
+0613: 7@ = actor 0@ animation "PICSTND_TAKE" time 
+if and
+  7@ > 0.5 
+  1.0 > 7@ 
+  6@ == 0 
+jf @PHOTO_1331 
+04C4: store_coords_to 8@ 9@ 10@ from_actor 0@ with_offset 0.0 0.5 0.0 
+09E5: create_flash_light_at 8@ 9@ 10@ RGB_mask 255 255 255 radius 50.0 
+09F1: play_audio_at_actor 0@ event 1132 
+6@ = 1 
+
+:PHOTO_1331
+if 
+  7@ >= 1.0 
+jf @PHOTO_1407 
+0605: actor 0@ perform_animation "PICSTND_OUT" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+6@ = 0 
+4@ += 1 
+
+:PHOTO_1407
+jump @PHOTO_2403 
+
+:PHOTO_1414
+if 
+   Actor.Animation(0@) == "PICSTND_OUT"
+jf @PHOTO_1533 
+0613: 7@ = actor 0@ animation "PICSTND_OUT" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_1533 
+0209: 2@ = random_int_in_ranges 0 100 
+if 
+  2@ > 50 
+jf @PHOTO_1526 
+4@ = 0 
+jump @PHOTO_1533 
+
+:PHOTO_1526
+gosub @PHOTO_2405 
+
+:PHOTO_1533
+jump @PHOTO_2403 
+
+:PHOTO_1540
+if 
+   Actor.Animation(0@) == "CAMSTND_TO_CAMCRCH"
+jf @PHOTO_1697 
+0613: 7@ = actor 0@ animation "CAMSTND_TO_CAMCRCH" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_1697 
+0209: 2@ = random_int_in_ranges 5000 8000 
+0605: actor 0@ perform_animation "CAMCRCH_IDLELOOP" IFP "CAMERA" framedelta 4.0 loop 1 lockX 0 lockY 0 lockF 1 time 2@ 
+33@ = 0 
+4@ += 1 
+
+:PHOTO_1697
+jump @PHOTO_2403 
+
+:PHOTO_1704
+if 
+002D:   33@ >= 2@ // (int) 
+jf @PHOTO_1770 
+0605: actor 0@ perform_animation "PICCRCH_IN" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ += 1 
+
+:PHOTO_1770
+jump @PHOTO_2403 
+
+:PHOTO_1777
+if 
+   Actor.Animation(0@) == "PICCRCH_IN"
+jf @PHOTO_1895 
+0613: 7@ = actor 0@ animation "PICCRCH_IN" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_1895 
+0605: actor 0@ perform_animation "PICCRCH_TAKE" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+4@ += 1 
+
+:PHOTO_1895
+jump @PHOTO_2403 
+
+:PHOTO_1902
+if 
+   Actor.Animation(0@) == "PICCRCH_TAKE"
+jf @PHOTO_2137 
+0613: 7@ = actor 0@ animation "PICCRCH_TAKE" time 
+if and
+  7@ > 0.5 
+  1.0 > 7@ 
+  6@ == 0 
+jf @PHOTO_2061 
+04C4: store_coords_to 8@ 9@ 10@ from_actor 0@ with_offset 0.0 0.6 0.0 
+09E5: create_flash_light_at 8@ 9@ 10@ RGB_mask 255 255 255 radius 50.0 
+09F1: play_audio_at_actor 0@ event 1132 
+6@ = 1 
+
+:PHOTO_2061
+if 
+  7@ >= 1.0 
+jf @PHOTO_2137 
+0605: actor 0@ perform_animation "PICCRCH_OUT" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 1 time -1 
+6@ = 0 
+4@ += 1 
+
+:PHOTO_2137
+jump @PHOTO_2403 
+
+:PHOTO_2144
+if 
+   Actor.Animation(0@) == "PICCRCH_OUT"
+jf @PHOTO_2270 
+0613: 7@ = actor 0@ animation "PICCRCH_OUT" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_2270 
+0605: actor 0@ perform_animation "CAMCRCH_TO_CAMSTND" IFP "CAMERA" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+4@ += 1 
+
+:PHOTO_2270
+jump @PHOTO_2403 
+
+:PHOTO_2277
+if 
+   Actor.Animation(0@) == "PICCRCH_OUT"
+jf @PHOTO_2396 
+0613: 7@ = actor 0@ animation "PICCRCH_OUT" time 
+if 
+  7@ >= 1.0 
+jf @PHOTO_2396 
+0209: 2@ = random_int_in_ranges 0 100 
+if 
+  2@ > 50 
+jf @PHOTO_2389 
+4@ = 0 
+jump @PHOTO_2396 
+
+:PHOTO_2389
+gosub @PHOTO_2405 
+
+:PHOTO_2396
+jump @PHOTO_2403 
+
+:PHOTO_2403
+return 
+
+:PHOTO_2405
+04EF: release_animation "CAMERA" 
+if 
+   not Actor.Dead(0@)
+jf @PHOTO_2438 
+0555: remove_weapon 43 from_actor 0@ 
+
+:PHOTO_2438
+Model.Destroy(#CAMERA)
+end_thread 
+return 
+
+:PHOTO_2447
+wait 0 
+if 
+   not Actor.Dead(0@)
+jf @PHOTO_2511 
+062E: get_actor 0@ task 1506 status_store_to 5@ // ret 7 if not found 
+if 
+04A4:   5@ == 7 // == constant 
+jf @PHOTO_2504 
+05E2: AS_actor 0@ kill_actor $PLAYER_ACTOR 
+
+:PHOTO_2504
+jump @PHOTO_2518 
+
+:PHOTO_2511
+gosub @PHOTO_2405 
+
+:PHOTO_2518
+jump @PHOTO_2447 
+0663: printint "PEDSTATE" 3@ 
+0663: printint "SUBSTATESTATUS" 4@ 
+0663: printint "LOOP_TIMER" 33@ 
+0663: printint "SCRIPT_TIMER" 32@ 
+return 
+end_thread

@@ -1,0 +1,917 @@
+:CRANE2
+thread 'CRANE2' 
+0@ = 0 
+if 
+  0@ == 1 
+jf @CRANE2_102 
+$2727 = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+$2728 = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+$CRANE_MAGNET = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+
+:CRANE2_102
+$10491 = 0 
+$10509 = 33.7 
+$2738 = 15.0 
+28@ = 0 
+27@ = 1 
+$1919 = 0 
+
+:CRANE2_150
+wait 0 
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_4720 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE2_4713 
+if 
+  $10493 == 0 
+jf @CRANE2_4713 
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle $2727 radius 100.0 100.0 sphere 0 
+jf @CRANE2_4711 
+if 
+  $1911 == 1 
+jf @CRANE2_260 
+gosub @CRANE2_4736 
+
+:CRANE2_260
+if and
+   Player.Defined($PLAYER_CHAR)
+  $1912 == 0 
+jf @CRANE2_4704 
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle $2727 radius 100.0 100.0 sphere 0 
+jf @CRANE2_4679 
+if 
+  $FLAG_PLAYER_IN_CRANE == 2 
+jf @CRANE2_339 
+gosub @CRANE2_4736 
+
+:CRANE2_339
+if 
+  0@ == 0 
+jf @CRANE2_393 
+0400: store_coords_to 1@ 2@ 3@ from_object $2727 with_offset -1.7837 2.4699 -24.1519 
+0@ += 1 
+
+:CRANE2_393
+if 
+  0@ == 1 
+jf @CRANE2_691 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere 1@ 2@ 3@ radius 1.2 1.2 1.5 on_foot 
+jf @CRANE2_538 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CRANE2_531 
+if 
+  $10491 == 0 
+jf @CRANE2_505 
+03E5: show_text_box 'CR_2'  // ~k~~VEHICLE_ENTER_EXIT~ Enter Crane
+$10491 = 1 
+
+:CRANE2_505
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE2_531 
+03E6: remove_text_box 
+0@ += 1 
+
+:CRANE2_531
+jump @CRANE2_565 
+
+:CRANE2_538
+if 
+   not $10491 == 0 
+jf @CRANE2_565 
+03E6: remove_text_box 
+$10491 = 0 
+
+:CRANE2_565
+if 
+  15.0 > $2738 
+jf @CRANE2_628 
+$2738 = 15.0 
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_628 
+0453: set_object $CRANE_MAGNET XYZ_rotation $2738 0.0 $2737 
+
+:CRANE2_628
+if 
+  $2738 > 30.0 
+jf @CRANE2_691 
+$2738 = 30.0 
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_691 
+0453: set_object $CRANE_MAGNET XYZ_rotation $2738 0.0 $2737 
+
+:CRANE2_691
+if 
+  0@ == 2 
+jf @CRANE2_1309 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_733 
+097B: play_audio_at_object $2728 event 1019 
+
+:CRANE2_733
+Player.CanMove($PLAYER_CHAR) = False
+09BD: allow_other_threads_to_display_text_boxes 1 
+$FLAG_PLAYER_IN_CRANE = 2 
+fade 0 500 
+
+:CRANE2_758
+if 
+fading 
+jf @CRANE2_782 
+wait 0 
+jump @CRANE2_758 
+
+:CRANE2_782
+079D: unknown_set_game_controller_to_steer_object_MagnoCrane_03 // originally SF docks magnocrane 
+0A44: override_text_block 1 
+$2736 = Object.Angle($2728)
+$2737 = Object.Angle($CRANE_MAGNET)
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_882 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE2_882 
+Object.StorePos($2727, $2733, $2734, $2735)
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object $2727 offset_from_object_origin 0.0 0.0 2.0 orientation 0 both_side_angle_limit 360.0 lock_weapon 0 
+
+:CRANE2_882
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE2_948 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+0337: set_actor $PLAYER_ACTOR visibility 0 
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+$10515 = 0 
+
+:CRANE2_948
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_978 
+Object.StorePos($2727, 21@, 22@, $TEMPVAR_FLOAT_3)
+
+:CRANE2_978
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_1002 
+25@ = Object.Angle($CRANE_MAGNET)
+
+:CRANE2_1002
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_1204 
+0400: store_coords_to $10503 $10504 $10505 from_object $CRANE_MAGNET with_offset 0.0 $10509 -3.0 
+0796: get_crane_magnet $CRANE_MAGNET magnet_lane_length_to 4@ // float 
+4@ += -1.0 
+4@ *= -1.0 
+4@ *= 50.0 
+0067: $10505 -= 4@ // (float) 
+0086: $TEMPVAR_FLOAT_1 = $10503 // (float) 
+0061: $TEMPVAR_FLOAT_1 -= $2733 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $10504 // (float) 
+0061: $TEMPVAR_FLOAT_2 -= $2734 // (float) 
+0509: 4@ = distance_between_XY $10503 $10504 and_XY $2733 $2734 
+0075: $TEMPVAR_FLOAT_1 /= 4@ // (float) 
+0075: $TEMPVAR_FLOAT_2 /= 4@ // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $10509 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $10509 // (float) 
+0086: $10503 = $2733 // (float) 
+0059: $10503 += $TEMPVAR_FLOAT_1 // (float) 
+0086: $10504 = $2734 // (float) 
+0059: $10504 += $TEMPVAR_FLOAT_2 // (float) 
+
+:CRANE2_1204
+0089: 10@ = $10503 // (float) 
+0089: 11@ = $10504 // (float) 
+$10510 = 0.0 
+$10511 = 0.0 
+$10512 = 0.3 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+gosub @CRANE2_4736 
+fade 1 500 
+
+:CRANE2_1271
+if 
+fading 
+jf @CRANE2_1302 
+wait 0 
+gosub @CRANE2_4736 
+jump @CRANE2_1271 
+
+:CRANE2_1302
+0@ += 1 
+
+:CRANE2_1309
+if 
+  0@ == 3 
+jf @CRANE2_4430 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE2_4430 
+if 
+0735:   is_keyboard_key_pressed 131 
+jf @CRANE2_1369 
+$10509 += 0.1 
+
+:CRANE2_1369
+if 
+0735:   is_keyboard_key_pressed 130 
+jf @CRANE2_1395 
+$10509 += -0.1 
+
+:CRANE2_1395
+if 
+  $FLAG_PLAYER_IN_CRANE == 2 
+jf @CRANE2_3930 
+if or
+00E1:   player 0 pressed_key 0 
+00E1:   player 0 pressed_key 1 
+jf @CRANE2_2947 
+if 
+   not $10515 == 1 
+jf @CRANE2_1485 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_1478 
+097B: play_audio_at_object $2728 event 1020 
+
+:CRANE2_1478
+$10515 = 1 
+
+:CRANE2_1485
+if 
+  $1918 == 0 
+jf @CRANE2_2940 
+28@ = 1 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 6@ = integer $MOVE_AXIS_X to_float 
+008F: 7@ = integer $MOVE_AXIS_Y to_float 
+6@ /= 128.0 
+7@ /= 128.0 
+6@ *= 0.15 
+7@ *= 0.15 
+0089: 12@ = $10506 // (float) 
+0089: 13@ = $10507 // (float) 
+0087: 15@ = 13@ // (float) 
+0087: 16@ = 12@ // (float) 
+16@ *= -1.0 
+006B: 12@ *= 7@ // (float) 
+006B: 13@ *= 7@ // (float) 
+12@ *= -1.0 
+13@ *= -1.0 
+007B: 10@ += frame_delta_time * 12@ // (float) 
+007B: 11@ += frame_delta_time * 13@ // (float) 
+006B: 15@ *= 6@ // (float) 
+006B: 16@ *= 6@ // (float) 
+007B: 10@ += frame_delta_time * 15@ // (float) 
+007B: 11@ += frame_delta_time * 16@ // (float) 
+0509: 4@ = distance_between_XY 10@ 11@ and_XY $10500 $10501 
+if 
+  4@ > 0.3 
+jf @CRANE2_1846 
+0088: $TEMPVAR_FLOAT_1 = 10@ // (float) 
+0061: $TEMPVAR_FLOAT_1 -= $10500 // (float) 
+0088: $TEMPVAR_FLOAT_2 = 11@ // (float) 
+0061: $TEMPVAR_FLOAT_2 -= $10501 // (float) 
+0075: $TEMPVAR_FLOAT_1 /= 4@ // (float) 
+0075: $TEMPVAR_FLOAT_2 /= 4@ // (float) 
+$TEMPVAR_FLOAT_1 *= 0.3 
+$TEMPVAR_FLOAT_2 *= 0.3 
+0089: 10@ = $10500 // (float) 
+005D: 10@ += $TEMPVAR_FLOAT_1 // (float) 
+0089: 11@ = $10501 // (float) 
+005D: 11@ += $TEMPVAR_FLOAT_2 // (float) 
+
+:CRANE2_1846
+$TEMPVAR_FLOAT_3 = 0.0 
+0088: $TEMPVAR_FLOAT_2 = 11@ // (float) 
+0086: $TEMPVAR_FLOAT_1 = $TEMPVAR_FLOAT_2 // (float) 
+$TEMPVAR_FLOAT_1 -= 1671.5 
+0087: 8@ = 10@ // (float) 
+0087: 9@ = 8@ // (float) 
+9@ += 1671.5 
+005F: $TEMPVAR_FLOAT_1 += 8@ // (float) 
+005F: $TEMPVAR_FLOAT_2 += 9@ // (float) 
+$TEMPVAR_FLOAT_1 /= 2.0 
+$TEMPVAR_FLOAT_2 /= 2.0 
+if 
+  -1648.057 > $TEMPVAR_FLOAT_1 
+jf @CRANE2_2116 
+0509: 4@ = distance_between_XY -1648.057 23.852 and_XY 10@ 11@ 
+if 
+0027:   4@ > $10509 // (float) 
+jf @CRANE2_2109 
+0087: 12@ = 10@ // (float) 
+12@ += 1648.057 
+0087: 13@ = 11@ // (float) 
+13@ -= 23.852 
+0073: 12@ /= 4@ // (float) 
+0073: 13@ /= 4@ // (float) 
+006F: 12@ *= $10509 // (float) 
+006F: 13@ *= $10509 // (float) 
+10@ = -1648.057 
+005B: 10@ += 12@ // (float) 
+11@ = 23.852 
+005B: 11@ += 13@ // (float) 
+
+:CRANE2_2109
+jump @CRANE2_2420 
+
+:CRANE2_2116
+if 
+  $TEMPVAR_FLOAT_1 > -1532.742 
+jf @CRANE2_2288 
+0509: 4@ = distance_between_XY -1532.742 138.719 and_XY 10@ 11@ 
+if 
+0027:   4@ > $10509 // (float) 
+jf @CRANE2_2281 
+0087: 12@ = 10@ // (float) 
+12@ += 1532.742 
+0087: 13@ = 11@ // (float) 
+13@ -= 138.719 
+0073: 12@ /= 4@ // (float) 
+0073: 13@ /= 4@ // (float) 
+006F: 12@ *= $10509 // (float) 
+006F: 13@ *= $10509 // (float) 
+10@ = -1532.742 
+005B: 10@ += 12@ // (float) 
+11@ = 138.719 
+005B: 11@ += 13@ // (float) 
+
+:CRANE2_2281
+jump @CRANE2_2420 
+
+:CRANE2_2288
+0509: 4@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 10@ 11@ 
+if 
+0027:   4@ > $10509 // (float) 
+jf @CRANE2_2420 
+0087: 12@ = 10@ // (float) 
+0065: 12@ -= $TEMPVAR_FLOAT_1 // (float) 
+0087: 13@ = 11@ // (float) 
+0065: 13@ -= $TEMPVAR_FLOAT_2 // (float) 
+0073: 12@ /= 4@ // (float) 
+0073: 13@ /= 4@ // (float) 
+006F: 12@ *= $10509 // (float) 
+006F: 13@ *= $10509 // (float) 
+0089: 10@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 10@ += 12@ // (float) 
+0089: 11@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 11@ += 13@ // (float) 
+
+:CRANE2_2420
+0509: 18@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 10@ 11@ 
+0089: 4@ = $10509 // (float) 
+006F: 4@ *= $10509 // (float) 
+0087: 5@ = 18@ // (float) 
+006B: 5@ *= 18@ // (float) 
+0087: 19@ = 4@ // (float) 
+0063: 19@ -= 5@ // (float) 
+0087: 20@ = 19@ // (float) 
+20@ /= 2.0 
+01FB: 20@ = square_root 20@ 
+0089: 21@ = $TEMPVAR_FLOAT_1 // (float) 
+0063: 21@ -= 20@ // (float) 
+0089: 22@ = $TEMPVAR_FLOAT_2 // (float) 
+0063: 22@ -= 20@ // (float) 
+0089: 23@ = $TEMPVAR_FLOAT_1 // (float) 
+005B: 23@ += 20@ // (float) 
+0089: 24@ = $TEMPVAR_FLOAT_2 // (float) 
+005B: 24@ += 20@ // (float) 
+26@ = 0 
+if and
+  -1532.742 > 21@ 
+  21@ > -1648.057 
+jf @CRANE2_2620 
+26@ += 1 
+
+:CRANE2_2620
+if and
+  -1532.742 > 23@ 
+  23@ > -1648.057 
+jf @CRANE2_2658 
+26@ += 2 
+
+:CRANE2_2658
+if 
+   not 26@ == 0 
+jf @CRANE2_2881 
+if 
+  26@ == 1 
+jf @CRANE2_2694 
+
+:CRANE2_2694
+if 
+  26@ == 2 
+jf @CRANE2_2728 
+0087: 21@ = 23@ // (float) 
+0087: 22@ = 24@ // (float) 
+
+:CRANE2_2728
+if 
+  26@ == 3 
+jf @CRANE2_2831 
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_2831 
+0509: 4@ = distance_between_XY $2733 $2734 and_XY 21@ 22@ 
+0509: 5@ = distance_between_XY $2733 $2734 and_XY 23@ 24@ 
+if 
+0025:   4@ > 5@ // (float) 
+jf @CRANE2_2831 
+0087: 21@ = 23@ // (float) 
+0087: 22@ = 24@ // (float) 
+
+:CRANE2_2831
+0087: 12@ = 10@ // (float) 
+0063: 12@ -= 21@ // (float) 
+0087: 13@ = 11@ // (float) 
+0063: 13@ -= 22@ // (float) 
+0604: get_Z_angle_for_point 12@ 13@ store_to 25@ 
+jump @CRANE2_2940 
+
+:CRANE2_2881
+0089: 21@ = $2733 // (float) 
+0089: 22@ = $2734 // (float) 
+0087: 12@ = 10@ // (float) 
+0065: 12@ -= $2733 // (float) 
+0087: 13@ = 11@ // (float) 
+0065: 13@ -= $2734 // (float) 
+0604: get_Z_angle_for_point 12@ 13@ store_to 25@ 
+
+:CRANE2_2940
+jump @CRANE2_3246 
+
+:CRANE2_2947
+if 
+   not $10515 == 0 
+jf @CRANE2_2996 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_2989 
+097B: play_audio_at_object $2728 event 1021 
+
+:CRANE2_2989
+$10515 = 0 
+
+:CRANE2_2996
+if 
+   not 28@ == 0 
+jf @CRANE2_3246 
+if 
+  28@ == 1 
+jf @CRANE2_3107 
+0086: $TEMPVAR_FLOAT_1 = $10503 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $10504 // (float) 
+0089: 12@ = $TEMPVAR_FLOAT_1 // (float) 
+0065: 12@ -= $2733 // (float) 
+0089: 13@ = $TEMPVAR_FLOAT_2 // (float) 
+0065: 13@ -= $2734 // (float) 
+0604: get_Z_angle_for_point 12@ 13@ store_to 25@ 
+0089: 12@ = $10513 // (float) 
+0089: 13@ = $10514 // (float) 
+
+:CRANE2_3107
+if 
+  $10510 > 0.0 
+jf @CRANE2_3246 
+$10511 = -0.007 
+007A: $10510 += frame_delta_time * $10511 // (float) 
+if 
+  0.0 > $10510 
+jf @CRANE2_3191 
+$10510 = 0.0 
+28@ = 0 
+jump @CRANE2_3198 
+
+:CRANE2_3191
+28@ = 2 
+
+:CRANE2_3198
+0086: $TEMPVAR_FLOAT_1 = $10510 // (float) 
+006D: $TEMPVAR_FLOAT_1 *= 12@ // (float) 
+0086: $TEMPVAR_FLOAT_2 = $10510 // (float) 
+006D: $TEMPVAR_FLOAT_2 *= 13@ // (float) 
+0059: $2733 += $TEMPVAR_FLOAT_1 // (float) 
+0059: $2734 += $TEMPVAR_FLOAT_2 // (float) 
+
+:CRANE2_3246
+if 
+  28@ == 1 
+jf @CRANE2_3530 
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_3530 
+0509: 4@ = distance_between_XY $2733 $2734 and_XY 21@ 22@ 
+if 
+  4@ > 0.01 
+jf @CRANE2_3366 
+0088: $10513 = 21@ // (float) 
+0061: $10513 -= $2733 // (float) 
+0088: $10514 = 22@ // (float) 
+0061: $10514 -= $2734 // (float) 
+0075: $10513 /= 4@ // (float) 
+0075: $10514 /= 4@ // (float) 
+
+:CRANE2_3366
+if 
+  4@ > 0.01 
+jf @CRANE2_3530 
+$10511 = 0.003 
+007A: $10510 += frame_delta_time * $10511 // (float) 
+if 
+0024:   $10510 > $10512 // (float) 
+jf @CRANE2_3432 
+0086: $10510 = $10512 // (float) 
+
+:CRANE2_3432
+0089: 12@ = $10513 // (float) 
+0089: 13@ = $10514 // (float) 
+if 
+0027:   4@ > $10510 // (float) 
+jf @CRANE2_3490 
+006F: 12@ *= $10510 // (float) 
+006F: 13@ *= $10510 // (float) 
+jump @CRANE2_3514 
+
+:CRANE2_3490
+006B: 12@ *= 4@ // (float) 
+006B: 13@ *= 4@ // (float) 
+0088: $10510 = 4@ // (float) 
+
+:CRANE2_3514
+005F: $2733 += 12@ // (float) 
+005F: $2734 += 13@ // (float) 
+
+:CRANE2_3530
+if 
+  28@ == 1 
+jf @CRANE2_3888 
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_3888 
+if 
+  25@ > 180.0 
+jf @CRANE2_3595 
+25@ += -360.0 
+
+:CRANE2_3595
+if 
+  -180.0 > 25@ 
+jf @CRANE2_3626 
+25@ += 360.0 
+
+:CRANE2_3626
+0086: $TEMPVAR_ANGLE = $2737 // (float) 
+if 
+  $TEMPVAR_ANGLE > 180.0 
+jf @CRANE2_3665 
+$TEMPVAR_ANGLE += -360.0 
+
+:CRANE2_3665
+if 
+  -180.0 > $TEMPVAR_ANGLE 
+jf @CRANE2_3696 
+$TEMPVAR_ANGLE += 360.0 
+
+:CRANE2_3696
+0087: 4@ = 25@ // (float) 
+0065: 4@ -= $TEMPVAR_ANGLE // (float) 
+if 
+  4@ > 180.0 
+jf @CRANE2_3743 
+4@ += -360.0 
+
+:CRANE2_3743
+if 
+  -180.0 > 4@ 
+jf @CRANE2_3774 
+4@ += 360.0 
+
+:CRANE2_3774
+if 
+  4@ >= 0.0 
+jf @CRANE2_3833 
+if 
+  4@ > 0.2 
+jf @CRANE2_3826 
+4@ = 0.2 
+
+:CRANE2_3826
+jump @CRANE2_3864 
+
+:CRANE2_3833
+if 
+  -0.2 > 4@ 
+jf @CRANE2_3864 
+4@ = -0.2 
+
+:CRANE2_3864
+007D: $TEMPVAR_ANGLE += frame_delta_time * 4@ // (float) 
+0086: $2736 = $TEMPVAR_ANGLE // (float) 
+0086: $2737 = $TEMPVAR_ANGLE // (float) 
+
+:CRANE2_3888
+if 
+  $1913 == 0 
+jf @CRANE2_3930 
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE2_3930 
+0@ += 1 
+
+:CRANE2_3930
+if and
+  -1532.742 > $2733 
+  $2733 > -1648.057 
+jf @CRANE2_3998 
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_3991 
+0815: put_object $2727 at $2733 $2734 $2735 and_keep_rotation 
+
+:CRANE2_3991
+jump @CRANE2_4028 
+
+:CRANE2_3998
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_4028 
+Object.StorePos($2727, $2733, $2734, $2735)
+
+:CRANE2_4028
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_4104 
+if 
+03CA:   object $2730 exists 
+jf @CRANE2_4104 
+Object.StorePos($2727, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle($2727)
+Object.PutAt($2730, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle($2730) = $TEMPVAR_ANGLE
+
+:CRANE2_4104
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_4255 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_4195 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2727 with_offset 0.0 0.0 0.0 
+Object.Angle($2728) = $2736
+0815: put_object $2728 at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_keep_rotation 
+Actor.Angle($PLAYER_ACTOR) = $2736
+
+:CRANE2_4195
+if 
+03CA:   object $2731 exists 
+jf @CRANE2_4255 
+Object.StorePos($2728, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle($2728)
+Object.PutAt($2731, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle($2731) = $TEMPVAR_ANGLE
+
+:CRANE2_4255
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_4430 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_4354 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2728 with_offset 0.0 -2.185 8.51 
+$2737 = Object.Angle($2728)
+0815: put_object $CRANE_MAGNET at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_keep_rotation 
+0453: set_object $CRANE_MAGNET XYZ_rotation $2738 0.0 $2737 
+
+:CRANE2_4354
+if 
+03CA:   object $2732 exists 
+jf @CRANE2_4430 
+Object.StorePos($CRANE_MAGNET, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+$TEMPVAR_ANGLE = Object.Angle($CRANE_MAGNET)
+Object.PutAt($2732, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.Angle($2732) = $TEMPVAR_ANGLE
+0453: set_object $2732 XYZ_rotation $2738 0.0 $2737 
+
+:CRANE2_4430
+if or
+  0@ == 4 
+  $1915 == 1 
+jf @CRANE2_4672 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE2_4672 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_4509 
+097B: play_audio_at_object $2728 event 1022 
+
+:CRANE2_4509
+03E6: remove_text_box 
+079F: unknown_set_game_controller_to_steer_no_crane_objects 
+09BD: allow_other_threads_to_display_text_boxes 0 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object $2727 with_offset 2.0 -4.0 0.0 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+0337: set_actor $PLAYER_ACTOR visibility 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+Player.CanMove($PLAYER_CHAR) = True
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+$FLAG_PLAYER_IN_CRANE = 0 
+$1915 = 0 
+0@ = 0 
+Object.Throw($2727, 0.0, 0.0, 0.0)
+
+:CRANE2_4672
+jump @CRANE2_4704 
+
+:CRANE2_4679
+if 
+   not 0@ == 0 
+jf @CRANE2_4704 
+0@ = 0 
+
+:CRANE2_4704
+jump @CRANE2_4713 
+
+:CRANE2_4711
+end_thread 
+
+:CRANE2_4713
+jump @CRANE2_4729 
+
+:CRANE2_4720
+0@ = 0 
+end_thread 
+
+:CRANE2_4729
+jump @CRANE2_150 
+
+:CRANE2_4736
+if 
+00E1:   player 0 pressed_key 13 
+jf @CRANE2_4825 
+if 
+  29@ == 0 
+jf @CRANE2_4818 
+27@ += 1 
+if 
+  27@ > 2 
+jf @CRANE2_4803 
+27@ = 0 
+
+:CRANE2_4803
+008A: $1919 = 27@ // (int) 
+29@ += 1 
+
+:CRANE2_4818
+jump @CRANE2_4850 
+
+:CRANE2_4825
+if 
+   not 29@ == 0 
+jf @CRANE2_4850 
+29@ = 0 
+
+:CRANE2_4850
+if 
+  $FLAG_PLAYER_IN_CRANE == 2 
+jf @CRANE2_4901 
+if 
+  $1911 == 1 
+jf @CRANE2_4901 
+008B: 27@ = $1919 // (int) 
+$1911 = 0 
+
+:CRANE2_4901
+if 
+803C:   not  $1919 == 27@ // (int) 
+jf @CRANE2_4928 
+008A: $1919 = 27@ // (int) 
+
+:CRANE2_4928
+if 
+  27@ == 0 
+jf @CRANE2_4998 
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_4991 
+0400: store_coords_to $10497 $10498 $10499 from_object $2728 with_offset 6.1 15.0 5.1 
+
+:CRANE2_4991
+jump @CRANE2_5113 
+
+:CRANE2_4998
+if 
+  27@ == 1 
+jf @CRANE2_5068 
+if 
+03CA:   object $2727 exists 
+jf @CRANE2_5061 
+0400: store_coords_to $10497 $10498 $10499 from_object $2727 with_offset -4.0 17.3 35.0 
+
+:CRANE2_5061
+jump @CRANE2_5113 
+
+:CRANE2_5068
+if 
+03CA:   object $2728 exists 
+jf @CRANE2_5113 
+0400: store_coords_to $10497 $10498 $10499 from_object $2728 with_offset 3.0 45.0 0.0 
+
+:CRANE2_5113
+if 
+03CA:   object $CRANE_MAGNET exists 
+jf @CRANE2_5750 
+0400: store_coords_to $10500 $10501 $10502 from_object $CRANE_MAGNET with_offset 0.0 $10509 -3.0 
+0796: get_crane_magnet $CRANE_MAGNET magnet_lane_length_to 4@ // float 
+4@ += -1.0 
+4@ *= -1.0 
+4@ *= 50.0 
+0067: $10502 -= 4@ // (float) 
+0086: $TEMPVAR_FLOAT_1 = $10500 // (float) 
+0061: $TEMPVAR_FLOAT_1 -= $2733 // (float) 
+0086: $TEMPVAR_FLOAT_2 = $10501 // (float) 
+0061: $TEMPVAR_FLOAT_2 -= $2734 // (float) 
+0509: 4@ = distance_between_XY $10500 $10501 and_XY $2733 $2734 
+0075: $TEMPVAR_FLOAT_1 /= 4@ // (float) 
+0075: $TEMPVAR_FLOAT_2 /= 4@ // (float) 
+0069: $TEMPVAR_FLOAT_1 *= $10509 // (float) 
+0069: $TEMPVAR_FLOAT_2 *= $10509 // (float) 
+0086: $10500 = $2733 // (float) 
+0059: $10500 += $TEMPVAR_FLOAT_1 // (float) 
+0086: $10501 = $2734 // (float) 
+0059: $10501 += $TEMPVAR_FLOAT_2 // (float) 
+050A: 4@ = distance_between_XYZ $10500 $10501 $10502 and_XYZ $10503 $10504 $10505 
+if 
+  4@ > 0.3 
+jf @CRANE2_5461 
+0086: $10506 = $10500 // (float) 
+0061: $10506 -= $10503 // (float) 
+0086: $10507 = $10501 // (float) 
+0061: $10507 -= $10504 // (float) 
+0086: $10508 = $10502 // (float) 
+0061: $10508 -= $10505 // (float) 
+$10506 *= 0.05 
+$10507 *= 0.05 
+$10508 *= 0.05 
+0059: $10503 += $10506 // (float) 
+0059: $10504 += $10507 // (float) 
+0059: $10505 += $10508 // (float) 
+
+:CRANE2_5461
+068D: get_camera_position_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+if 
+  $1912 == 0 
+jf @CRANE2_5616 
+0089: 12@ = $10497 // (float) 
+0065: 12@ -= $TEMPVAR_FLOAT_1 // (float) 
+0089: 13@ = $10498 // (float) 
+0065: 13@ -= $TEMPVAR_FLOAT_2 // (float) 
+0089: 14@ = $10499 // (float) 
+0065: 14@ -= $TEMPVAR_FLOAT_3 // (float) 
+12@ *= 0.2 
+13@ *= 0.2 
+14@ *= 0.2 
+0086: $10497 = $TEMPVAR_FLOAT_1 // (float) 
+005F: $10497 += 12@ // (float) 
+0086: $10498 = $TEMPVAR_FLOAT_2 // (float) 
+005F: $10498 += 13@ // (float) 
+0086: $10499 = $TEMPVAR_FLOAT_3 // (float) 
+005F: $10499 += 14@ // (float) 
+
+:CRANE2_5616
+Camera.SetPosition($10497, $10498, $10499, 0.0, 0.0, 0.0)
+Camera.PointAt($10503, $10504, $10505, 2)
+0086: $10506 = $10503 // (float) 
+0061: $10506 -= $10497 // (float) 
+0086: $10507 = $10504 // (float) 
+0061: $10507 -= $10498 // (float) 
+0086: $10508 = $10505 // (float) 
+0061: $10508 -= $10499 // (float) 
+050A: 4@ = distance_between_XYZ $10497 $10498 $10499 and_XYZ $10503 $10504 $10505 
+0075: $10506 /= 4@ // (float) 
+0075: $10507 /= 4@ // (float) 
+0075: $10508 /= 4@ // (float) 
+
+:CRANE2_5750
+return 
+end_thread

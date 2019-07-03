@@ -1,0 +1,564 @@
+:CRANE1
+thread 'CRANE1' 
+5@ = 0 
+if 
+  5@ == 1 
+jf @CRANE1_102 
+0@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+1@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+2@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+
+:CRANE1_102
+if 
+03CA:   object 0@ exists 
+jf @CRANE1_328 
+if 
+04E5:   object 0@ near_point -2080.441 256.015 radius 10.0 10.0 sphere 0 
+jf @CRANE1_188 
+008B: 1@ = $2723 // (int) 
+008B: 2@ = $2724 // (int) 
+008B: 3@ = $2726 // (int) 
+008B: 4@ = $2725 // (int) 
+
+:CRANE1_188
+if 
+04E5:   object 0@ near_point 2399.202 1879.139 radius 10.0 10.0 sphere 0 
+jf @CRANE1_258 
+008B: 1@ = $2744 // (int) 
+008B: 2@ = $2745 // (int) 
+008B: 3@ = $2747 // (int) 
+008B: 4@ = $2746 // (int) 
+
+:CRANE1_258
+if 
+04E5:   object 0@ near_point 1238.38 -1258.27 radius 10.0 10.0 sphere 0 
+jf @CRANE1_328 
+008B: 1@ = $11009 // (int) 
+008B: 2@ = $11008 // (int) 
+008B: 3@ = $11006 // (int) 
+008B: 4@ = $11007 // (int) 
+
+:CRANE1_328
+$10490 = 0 
+21@ = 0 
+
+:CRANE1_342
+wait 0 
+if 
+03CA:   object 0@ exists 
+jf @CRANE1_2566 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_2559 
+if 
+  $10493 == 0 
+jf @CRANE1_2559 
+if 
+  $1911 == 1 
+jf @CRANE1_421 
+gosub @CRANE1_2582 
+
+:CRANE1_421
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 100.0 100.0 sphere 0 
+jf @CRANE1_2557 
+if 
+  $FLAG_PLAYER_IN_CRANE == 1 
+jf @CRANE1_477 
+gosub @CRANE1_2582 
+
+:CRANE1_477
+if 
+  5@ == 0 
+jf @CRANE1_531 
+0400: store_coords_to 9@ 10@ 11@ from_object 0@ with_offset 0.0 -7.2092 -31.7581 
+5@ += 1 
+
+:CRANE1_531
+if 
+  5@ == 1 
+jf @CRANE1_716 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere 9@ 10@ 11@ radius 1.2 1.2 1.5 on_foot 
+jf @CRANE1_689 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CRANE1_682 
+if 
+  $10490 == 0 
+jf @CRANE1_643 
+03E5: show_text_box 'CR_2'  // ~k~~VEHICLE_ENTER_EXIT~ Enter Crane
+$10490 = 1 
+
+:CRANE1_643
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE1_682 
+5@ += 1 
+32@ = 6000 
+$10490 = 0 
+
+:CRANE1_682
+jump @CRANE1_716 
+
+:CRANE1_689
+if 
+   not $10490 == 0 
+jf @CRANE1_716 
+03E6: remove_text_box 
+$10490 = 0 
+
+:CRANE1_716
+if 
+  5@ == 2 
+jf @CRANE1_1138 
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_758 
+097B: play_audio_at_object 1@ event 1019 
+
+:CRANE1_758
+Player.CanMove($PLAYER_CHAR) = False
+09BD: allow_other_threads_to_display_text_boxes 1 
+fade 0 500 
+
+:CRANE1_776
+if 
+fading 
+jf @CRANE1_800 
+wait 0 
+jump @CRANE1_776 
+
+:CRANE1_800
+if 
+07D6:   1@ == $2723 // @ == $ (int) 
+jf @CRANE1_828 
+079E: unknown_set_game_controller_to_steer_object_TWRCRANE_M_02 // originally SF site ballcrane 
+jump @CRANE1_830 
+
+:CRANE1_828
+07FA: set_game_controller_to_steer_object_TWRCRANE_M_02 // originally LV site magnocrane 
+
+:CRANE1_830
+0A44: override_text_block 1 
+7@ = Object.Angle(1@)
+Object.StorePos(1@, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+Object.StorePos(2@, 12@, 13@, 14@)
+0509: 8@ = distance_between_XY $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 and_XY 12@ 13@ 
+if 
+  8@ > 47.5 
+jf @CRANE1_918 
+8@ = 47.5 
+
+:CRANE1_918
+if 
+  10.0 > 8@ 
+jf @CRANE1_949 
+8@ = 10.0 
+
+:CRANE1_949
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_1013 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_1013 
+04F4: put_actor $PLAYER_ACTOR into_turret_on_object 0@ offset_from_object_origin 0.0 0.0 34.5 orientation 0 both_side_angle_limit 360.0 lock_weapon 0 
+
+:CRANE1_1013
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_1086 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+0337: set_actor $PLAYER_ACTOR visibility 0 
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+$FLAG_PLAYER_IN_CRANE = 1 
+22@ = 0 
+
+:CRANE1_1086
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+gosub @CRANE1_2582 
+fade 1 500 
+
+:CRANE1_1107
+if 
+fading 
+jf @CRANE1_1131 
+wait 0 
+jump @CRANE1_1107 
+
+:CRANE1_1131
+5@ += 1 
+
+:CRANE1_1138
+if 
+  5@ == 3 
+jf @CRANE1_2347 
+if 
+  32@ > 6000 
+jf @CRANE1_1538 
+$10490 += 1 
+if 
+  7 > $10490 
+jf @CRANE1_1531 
+0871: init_jump_table $10490 total_jumps 6 default_jump 0 @CRANE1_1531 jumps 1 @CRANE1_1263 2 @CRANE1_1320 3 @CRANE1_1377 4 @CRANE1_1434 5 @CRANE1_1491 6 @CRANE1_1511 -1 @CRANE1_1531 
+
+:CRANE1_1263
+03E6: remove_text_box 
+if 
+07D6:   1@ == $2723 // @ == $ (int) 
+jf @CRANE1_1302 
+0512: show_permanent_text_box 'CONS_1'  // Push ~k~~GO_LEFT~ and ~k~~GO_RIGHT~ to rotate the wrecker ball crane.
+jump @CRANE1_1313 
+
+:CRANE1_1302
+0512: show_permanent_text_box 'CONS_1B'  // Use ~k~~GO_LEFT~ and ~k~~GO_RIGHT~ to rotate the crane.
+
+:CRANE1_1313
+jump @CRANE1_1531 
+
+:CRANE1_1320
+03E6: remove_text_box 
+if 
+07D6:   1@ == $2723 // @ == $ (int) 
+jf @CRANE1_1359 
+0512: show_permanent_text_box 'CONS_2'  // Push ~k~~GO_BACK~ to move the wrecker ball closer or ~k~~GO_FORWARD~ to move it further away.
+jump @CRANE1_1370 
+
+:CRANE1_1359
+0512: show_permanent_text_box 'CONS_2B'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to move the magnet closer or further away.
+
+:CRANE1_1370
+jump @CRANE1_1531 
+
+:CRANE1_1377
+03E6: remove_text_box 
+if 
+07D6:   1@ == $2723 // @ == $ (int) 
+jf @CRANE1_1416 
+0512: show_permanent_text_box 'CONS_3'  // Press ~k~~PED_JUMPING~ to raise the wrecker ball.
+jump @CRANE1_1427 
+
+:CRANE1_1416
+0512: show_permanent_text_box 'CONS_3B'  // Press ~k~~PED_JUMPING~ to raise the magnet.
+
+:CRANE1_1427
+jump @CRANE1_1531 
+
+:CRANE1_1434
+03E6: remove_text_box 
+if 
+07D6:   1@ == $2723 // @ == $ (int) 
+jf @CRANE1_1473 
+0512: show_permanent_text_box 'CONS_4'  // Press ~k~~PED_SPRINT~ to lower the wrecker ball.
+jump @CRANE1_1484 
+
+:CRANE1_1473
+0512: show_permanent_text_box 'CONS_4B'  // Press ~k~~PED_SPRINT~ to lower the magnet.
+
+:CRANE1_1484
+jump @CRANE1_1531 
+
+:CRANE1_1491
+03E6: remove_text_box 
+0512: show_permanent_text_box 'CONS_5'  // Press ~k~~CAMERA_CHANGE_VIEW_ALL_SITUATIONS~ to change camera view.
+jump @CRANE1_1531 
+
+:CRANE1_1511
+03E6: remove_text_box 
+03E5: show_text_box 'CR_3'  // ~k~~VEHICLE_ENTER_EXIT~ Exit Crane
+jump @CRANE1_1531 
+
+:CRANE1_1531
+32@ = 0 
+
+:CRANE1_1538
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_2347 
+if 
+0735:   is_keyboard_key_pressed 81 
+jf @CRANE1_1579 
+$10487 += 0.1 
+
+:CRANE1_1579
+if 
+0735:   is_keyboard_key_pressed 65 
+jf @CRANE1_1604 
+$10487 += -0.1 
+
+:CRANE1_1604
+if 
+0735:   is_keyboard_key_pressed 87 
+jf @CRANE1_1629 
+$10488 += 0.1 
+
+:CRANE1_1629
+if 
+0735:   is_keyboard_key_pressed 83 
+jf @CRANE1_1654 
+$10488 += -0.1 
+
+:CRANE1_1654
+if 
+0735:   is_keyboard_key_pressed 69 
+jf @CRANE1_1679 
+$10489 += 0.1 
+
+:CRANE1_1679
+if 
+0735:   is_keyboard_key_pressed 68 
+jf @CRANE1_1704 
+$10489 += -0.1 
+
+:CRANE1_1704
+if 
+00E1:   player 0 pressed_key 0 
+jf @CRANE1_1819 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 6@ = integer $MOVE_AXIS_X to_float 
+6@ /= 500.0 
+0081: 7@ -= frame_delta_time * 6@ // (float) 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_1812 
+if 
+   not 22@ == 1 
+jf @CRANE1_1812 
+097B: play_audio_at_object 1@ event 1020 
+22@ = 1 
+
+:CRANE1_1812
+jump @CRANE1_1868 
+
+:CRANE1_1819
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_1868 
+if 
+   not 22@ == 0 
+jf @CRANE1_1868 
+097B: play_audio_at_object 1@ event 1021 
+22@ = 0 
+
+:CRANE1_1868
+if 
+00E1:   player 0 pressed_key 1 
+jf @CRANE1_2070 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 6@ = integer $MOVE_AXIS_Y to_float 
+6@ /= 128.0 
+if or
+  6@ > 0.6 
+  -0.6 > 6@ 
+jf @CRANE1_2063 
+6@ *= 0.15 
+0081: 8@ -= frame_delta_time * 6@ // (float) 
+if 
+  8@ > 47.5 
+jf @CRANE1_1999 
+8@ = 47.5 
+
+:CRANE1_1999
+if 
+  10.0 > 8@ 
+jf @CRANE1_2030 
+8@ = 10.0 
+
+:CRANE1_2030
+if 
+   not 23@ == 1 
+jf @CRANE1_2063 
+097B: play_audio_at_object 2@ event 1020 
+23@ = 1 
+
+:CRANE1_2063
+jump @CRANE1_2103 
+
+:CRANE1_2070
+if 
+   not 23@ == 0 
+jf @CRANE1_2103 
+097B: play_audio_at_object 2@ event 1021 
+23@ = 0 
+
+:CRANE1_2103
+if 
+03CA:   object 2@ exists 
+jf @CRANE1_2141 
+if 
+00E1:   player 0 pressed_key 16 
+jf @CRANE1_2141 
+0799: set_crane_magnet 2@ release_stuff_from_magnet 
+
+:CRANE1_2141
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_2242 
+if 
+03CA:   object 0@ exists 
+jf @CRANE1_2242 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 0.0 0.0 32.521 
+Object.Angle(1@) = 7@
+if 
+03CA:   object 3@ exists 
+jf @CRANE1_2234 
+Object.Angle(3@) = 7@
+
+:CRANE1_2234
+Actor.Angle($PLAYER_ACTOR) = 7@
+
+:CRANE1_2242
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_2323 
+if 
+03CA:   object 2@ exists 
+jf @CRANE1_2323 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 1@ with_offset 0.0 8@ 3.453 
+0815: put_object 2@ at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_keep_rotation 
+Object.Angle(2@) = 7@
+
+:CRANE1_2323
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE1_2347 
+5@ += 1 
+
+:CRANE1_2347
+if 
+  5@ == 4 
+jf @CRANE1_2550 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE1_2550 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_2419 
+097B: play_audio_at_object 1@ event 1022 
+
+:CRANE1_2419
+03E6: remove_text_box 
+079F: unknown_set_game_controller_to_steer_no_crane_objects 
+09BD: allow_other_threads_to_display_text_boxes 0 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 0@ with_offset 2.0 -7.0 0.0 
+02CE: $TEMPVAR_FLOAT_3 = ground_z_at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 
+Actor.PutAt($PLAYER_ACTOR, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+0465: remove_actor $PLAYER_ACTOR from_turret_mode 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+0337: set_actor $PLAYER_ACTOR visibility 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+Player.CanMove($PLAYER_CHAR) = True
+Camera.Restore_WithJumpCut
+$FLAG_PLAYER_IN_CRANE = 0 
+5@ = 0 
+end_thread 
+
+:CRANE1_2550
+jump @CRANE1_2559 
+
+:CRANE1_2557
+end_thread 
+
+:CRANE1_2559
+jump @CRANE1_2575 
+
+:CRANE1_2566
+5@ = 0 
+end_thread 
+
+:CRANE1_2575
+jump @CRANE1_342 
+
+:CRANE1_2582
+if 
+  $10494 == 0 
+jf @CRANE1_3144 
+if 
+00E1:   player 0 pressed_key 13 
+jf @CRANE1_2689 
+if 
+  24@ == 0 
+jf @CRANE1_2682 
+21@ += 1 
+if 
+  21@ > 2 
+jf @CRANE1_2667 
+21@ = 0 
+
+:CRANE1_2667
+008A: $10495 = 21@ // (int) 
+24@ += 1 
+
+:CRANE1_2682
+jump @CRANE1_2714 
+
+:CRANE1_2689
+if 
+   not 24@ == 0 
+jf @CRANE1_2714 
+24@ = 0 
+
+:CRANE1_2714
+if 
+  $FLAG_PLAYER_IN_CRANE == 1 
+jf @CRANE1_2765 
+if 
+  $1911 == 1 
+jf @CRANE1_2765 
+0084: $10495 = $10495 // (int) 
+$1911 = 0 
+
+:CRANE1_2765
+if 
+  21@ == 0 
+jf @CRANE1_2828 
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_2828 
+0400: store_coords_to 15@ 16@ 17@ from_object 1@ with_offset -7.18 -6.42 15.79 
+
+:CRANE1_2828
+if 
+  21@ == 1 
+jf @CRANE1_2990 
+if 
+03CA:   object 1@ exists 
+jf @CRANE1_2990 
+0400: store_coords_to 15@ 16@ 17@ from_object 2@ with_offset 0.0 -4.5 20.1999 
+if 
+03CA:   object 2@ exists 
+jf @CRANE1_2990 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 2@ with_offset 0.0 0.0 20.1999 
+0796: get_crane_magnet 2@ magnet_lane_length_to 6@ // float 
+6@ += -1.0 
+6@ *= -1.0 
+6@ *= 72.0 
+0067: $TEMPVAR_FLOAT_3 -= 6@ // (float) 
+0089: 17@ = $TEMPVAR_FLOAT_3 // (float) 
+
+:CRANE1_2990
+if 
+03CA:   object 2@ exists 
+jf @CRANE1_3105 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 2@ with_offset 0.0 0.0 2.0 
+0796: get_crane_magnet 2@ magnet_lane_length_to 6@ // float 
+6@ += -1.0 
+6@ *= -1.0 
+6@ *= 72.0 
+0067: $TEMPVAR_FLOAT_3 -= 6@ // (float) 
+0089: 18@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 19@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 20@ = $TEMPVAR_FLOAT_3 // (float) 
+
+:CRANE1_3105
+Camera.SetPosition(15@, 16@, 17@, 0.0, 0.0, 0.0)
+Camera.PointAt(18@, 19@, 20@, 2)
+
+:CRANE1_3144
+return 
+end_thread

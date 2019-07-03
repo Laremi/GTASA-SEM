@@ -1,0 +1,1351 @@
+:BARB
+$9758 = 0.0 
+$9759 = 0.0 
+$9760 = 0.0 
+$9761 = 0.0 
+$9762 = 0.0 
+$9763 = 0.0 
+$9764 = 0.0 
+$9765 = 0.0 
+$9766 = 0.0 
+$9767 = 0.0 
+$9768 = 0.0 
+$9769 = 0.0 
+$9770 = 0.0 
+$9771 = 0.0 
+$9772 = 0.0 
+$9773 = 0.0 
+$9774 = 0.0 
+$9775 = 0.0 
+$9776 = 0.0 
+$9777 = 0.0 
+$9778 = 0.0 
+$9779 = 0.0 
+$9780 = 0.0 
+$9781 = 0.0 
+$9782 = 0.0 
+$9783 = 0.0 
+$9784 = 0.0 
+$9785 = 0.0 
+$9786 = 0.0 
+$9787 = 0.0 
+$9753 = 0.0 
+$9752 = 0 
+$9788 = 0.0 
+$9789 = 0.0 
+$9790 = 0.0 
+$9791 = 0.0 
+$9792 = 0.0 
+$9793 = 0.0 
+$9750 = 0 
+$9734 = 0 
+$9738 = 0.0 
+$9739 = 0 
+$9744 = 0 
+$9745 = 0.0 
+$9746 = 0.0 
+$9747 = 0.0 
+$9748 = 0.0 
+$9749 = 0 
+$2751 = 0 
+$2545 = 0 
+$2544 = 0 
+$9797 = 0 
+$9800 = 0 
+$9801 = 0 
+$9802 = 0 
+$9804 = 0 
+$9805 = 0 
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBERS' // s$ == short  // Barber
+jf @BARB_558 
+04AE: $SELLER_MODEL = 156 // = constant 
+
+:BARB_558
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER2' // s$ == short  // Barber
+jf @BARB_591 
+04AE: $SELLER_MODEL = 177 // = constant 
+
+:BARB_591
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER3' // s$ == short  // Barber
+jf @BARB_624 
+04AE: $SELLER_MODEL = 176 // = constant 
+
+:BARB_624
+Model.Load($SELLER_MODEL)
+03CF: load_wav 4400 as 4 
+038B: load_requested_models 
+set_wb_check_to 0 
+thread 'BARB' 
+
+:BARB_653
+wait 0 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @BARB_7278 
+if 
+8844:   not string s$CURRENT_SHOP_GXT_NAME empty // s$ 
+jf @BARB_7264 
+if 
+  $9744 > 0 
+jf @BARB_751 
+if 
+0A0F:   new_language_set 
+jf @BARB_751 
+03E6: remove_text_box 
+08DA: remove_panel $2417 
+08DA: remove_panel $2419 
+$2418 = 0 
+$2420 = 0 
+09FB: $CURRENT_LANGUAGE = current_language 
+
+:BARB_751
+if 
+  $9744 == 0 
+jf @BARB_1015 
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBERS' // s$ == short  // Barber
+jf @BARB_851 
+$9794 = 0.0 
+$9795 = 0.0 
+$9796 = 0.0 
+05A9: s$9740 = s$CURRENT_SHOP_GXT_NAME // s$ 
+075F: store_shopping_data_entries_number_to $9729 
+$9797 = 0 
+$9744 = 1 
+
+:BARB_851
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER2' // s$ == short  // Barber
+jf @BARB_933 
+$9794 = 6.987 
+$9795 = -61.401 
+$9796 = 0.0 
+05A9: s$9740 = s$CURRENT_SHOP_GXT_NAME // s$ 
+075F: store_shopping_data_entries_number_to $9729 
+$9797 = 0 
+$9744 = 1 
+
+:BARB_933
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER3' // s$ == short  // Barber
+jf @BARB_1015 
+$9794 = 0.371 
+$9795 = -31.421 
+$9796 = 0.0 
+05A9: s$9740 = s$CURRENT_SHOP_GXT_NAME // s$ 
+075F: store_shopping_data_entries_number_to $9729 
+$9797 = 0 
+$9744 = 1 
+
+:BARB_1015
+if 
+  $9744 == 1 
+jf @BARB_2030 
+03F0: enable_text_draw 1 
+08F8: display_stat_update_box 0 
+0793: save_player_clothes 
+$X_BUY_MARKER = 414.3 
+0059: $X_BUY_MARKER += $9794 // (float) 
+$Y_BUY_MARKER = -19.9 
+0059: $Y_BUY_MARKER += $9795 // (float) 
+$Z_BUY_MARKER = 1000.806 
+0059: $Z_BUY_MARKER += $9796 // (float) 
+$9753 = 90.0 
+$9745 = 414.3 
+$9745 -= 0.027 
+0059: $9745 += $9794 // (float) 
+$9746 = -19.9 
+$9746 += 1.898 
+0059: $9746 += $9795 // (float) 
+$9747 = 1000.86 
+$9748 = 180.0 
+$9758 = 412.0009 
+0059: $9758 += $9794 // (float) 
+$9759 = -19.8018 
+0059: $9759 += $9795 // (float) 
+$9760 = 1001.765 
+0059: $9760 += $9796 // (float) 
+$9761 = 412.8502 
+0059: $9761 += $9794 // (float) 
+$9762 = -19.2749 
+0059: $9762 += $9795 // (float) 
+$9763 = 1001.797 
+0059: $9763 += $9796 // (float) 
+$9764 = 414.9329 
+0059: $9764 += $9794 // (float) 
+$9765 = -18.4475 
+0059: $9765 += $9795 // (float) 
+$9766 = 1002.286 
+0059: $9766 += $9796 // (float) 
+$9767 = 414.0564 
+0059: $9767 += $9794 // (float) 
+$9768 = -18.7965 
+0059: $9768 += $9795 // (float) 
+$9769 = 1001.955 
+0059: $9769 += $9796 // (float) 
+$9770 = 412.649 
+0059: $9770 += $9794 // (float) 
+$9771 = -19.7078 
+0059: $9771 += $9795 // (float) 
+$9772 = 1001.992 
+0059: $9772 += $9796 // (float) 
+$9773 = 413.3581 
+0059: $9773 += $9794 // (float) 
+$9774 = -19.0046 
+0059: $9774 += $9795 // (float) 
+$9775 = 1002.043 
+0059: $9775 += $9796 // (float) 
+$9776 = 414.5509 
+0059: $9776 += $9794 // (float) 
+$9777 = -20.8773 
+0059: $9777 += $9795 // (float) 
+$9778 = 1001.405 
+0059: $9778 += $9796 // (float) 
+$9779 = 414.0572 
+0059: $9779 += $9794 // (float) 
+$9780 = -20.025 
+0059: $9780 += $9795 // (float) 
+$9781 = 1001.578 
+0059: $9781 += $9796 // (float) 
+$9782 = 412.5159 
+0059: $9782 += $9794 // (float) 
+$9783 = -21.7447 
+0059: $9783 += $9795 // (float) 
+$9784 = 1001.946 
+0059: $9784 += $9796 // (float) 
+$9785 = 412.9438 
+0059: $9785 += $9794 // (float) 
+$9786 = -20.8411 
+0059: $9786 += $9795 // (float) 
+$9787 = 1001.963 
+0059: $9787 += $9796 // (float) 
+$9788 = 411.957 
+0059: $9788 += $9794 // (float) 
+$9789 = -19.779 
+0059: $9789 += $9795 // (float) 
+$9790 = 1000.836 
+0059: $9790 += $9796 // (float) 
+$9791 = 411.795 
+0059: $9791 += $9794 // (float) 
+$9792 = -23.3 
+0059: $9792 += $9795 // (float) 
+$9793 = 1000.836 
+0059: $9793 += $9796 // (float) 
+$9731 = Actor.Create(CivMale, $SELLER_MODEL, $9745, $9746, $9747)
+Actor.Angle($9731) = $9748
+060B: set_actor $9731 decision_maker_to 65542 
+02A9: set_actor $9731 immune_to_nonplayer 1 
+0615: define_AS_pack_begin $9737 
+0812: AS_actor -1 perform_animation "BRB_IN" IFP "HAIRCUTS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0812: AS_actor -1 perform_animation "BRB_LOOP" IFP "HAIRCUTS" framedelta 4.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0616: define_AS_pack_end $9737 
+0615: define_AS_pack_begin $9751 
+05D3: AS_actor -1 goto_point $9788 $9789 $9790 mode 4 time 8000 ms // versionA 
+05D3: AS_actor -1 goto_point $9791 $9792 $9793 mode 4 time 8000 ms // versionA 
+05D4: AS_actor -1 rotate_angle 180.0 
+0616: define_AS_pack_end $9751 
+$9797 = 0 
+$9744 = 2 
+
+:BARB_2030
+if 
+  $9744 == 2 
+jf @BARB_2439 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_2079 
+gosub @BARB_7498 
+
+:BARB_2079
+if 
+   not Actor.Dead($9731)
+jf @BARB_2394 
+if 
+  $2749 == 0 
+jf @BARB_2342 
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+0457:   player $PLAYER_CHAR aiming_at_actor $9731 
+031D:   actor $9731 hit_by_weapon 57 
+jf @BARB_2181 
+0647: AS_actor $9731 clear_look_task 
+0947: actor $9731 speak_from_audio_table 327 store_spoken_phrase_id_to $10081 
+05C4: AS_actor $9731 hands_up -2 ms 
+$2749 = 1 
+jump @BARB_2335 
+
+:BARB_2181
+if 
+  $9802 == 0 
+jf @BARB_2250 
+077E: get_active_interior_to $9803 
+if 
+   not $9803 == 0 
+jf @BARB_2250 
+05BF: AS_actor $9731 look_at_actor $PLAYER_ACTOR -2 ms 
+0947: actor $9731 speak_from_audio_table 330 store_spoken_phrase_id_to $10081 
+$9802 = 1 
+
+:BARB_2250
+$SHOW_SHOP_SPHERE = 1 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER radius 1.0 1.0 4.0 sphere $SHOW_SHOP_SPHERE stopped_on_foot 
+jf @BARB_2335 
+if 
+   Player.Controllable($PLAYER_CHAR)
+jf @BARB_2335 
+0647: AS_actor $9731 clear_look_task 
+$9797 = 0 
+$9744 = 3 
+
+:BARB_2335
+jump @BARB_2387 
+
+:BARB_2342
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_2380 
+gosub @BARB_7498 
+
+:BARB_2380
+jump @BARB_653 
+
+:BARB_2387
+jump @BARB_2439 
+
+:BARB_2394
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_2432 
+gosub @BARB_7498 
+
+:BARB_2432
+jump @BARB_653 
+
+:BARB_2439
+if 
+  $9744 == 3 
+jf @BARB_2537 
+Player.CanMove($PLAYER_CHAR) = False
+09BD: allow_other_threads_to_display_text_boxes 1 
+0581: enable_radar 0 
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 0 
+Actor.StorePos($PLAYER_ACTOR, $TEMPVAR_X_COORD, $TEMPVAR_Y_COORD, $TEMPVAR_Z_COORD)
+0792: disembark_instantly_actor $PLAYER_ACTOR 
+0395: clear_area 1 at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD radius 1.0 
+32@ = 0 
+$9797 = 0 
+$9744 = 4 
+
+:BARB_2537
+if 
+  $9744 == 4 
+jf @BARB_2925 
+if 
+   Actor.Dead($9731)
+jf @BARB_2616 
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_2609 
+gosub @BARB_7498 
+
+:BARB_2609
+jump @BARB_653 
+
+:BARB_2616
+if 
+  32@ >= 300 
+jf @BARB_2925 
+Actor.StorePos($9731, $2755, $2756, $2757)
+if or
+8044:   not  $2755 == $9745 // (float) 
+8044:   not  $2756 == $9746 // (float) 
+8044:   not  $2757 == $9747 // (float) 
+jf @BARB_2706 
+Actor.PutAt($9731, $9745, $9746, $9747)
+Actor.Angle($9731) = $9748
+
+:BARB_2706
+08C7: put_actor $PLAYER_ACTOR at $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER dont_warp_gang 
+Actor.Angle($PLAYER_ACTOR) = $9753
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 1 textureCRC_to $2542 modelCRC_to $2543 
+Camera.SetPosition($9758, $9759, $9760, 0.0, 0.0, 0.0)
+Camera.PointAt($9761, $9762, $9763, 2)
+$9738 = 0.0 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BRB_SIT_IN" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$SHOPS_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+if 
+  $676 == 0 
+jf @BARB_2903 
+if 
+  $169 == 1 
+jf @BARB_2903 
+if 
+  50 > $SHOPS_PLAYER_CASH 
+jf @BARB_2903 
+Player.Money($PLAYER_CHAR) += 52
+
+:BARB_2903
+0618: assign_actor $9731 to_AS_pack $9737 
+$9797 = 0 
+$9744 = 5 
+
+:BARB_2925
+if 
+  $9744 == 5 
+jf @BARB_3194 
+if 
+   Actor.Dead($9731)
+jf @BARB_3004 
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_2997 
+gosub @BARB_7498 
+
+:BARB_2997
+jump @BARB_653 
+
+:BARB_3004
+if 
+   Actor.Animation($PLAYER_ACTOR) == "BRB_SIT_IN"
+jf @BARB_3052 
+0613: $9738 = actor $PLAYER_ACTOR animation "BRB_SIT_IN" time 
+
+:BARB_3052
+if 
+  $9738 == 1.0 
+jf @BARB_3194 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BRB_SIT_LOOP" IFP "HAIRCUTS" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+Camera.SetPosition($9764, $9765, $9766, 0.0, 0.0, 0.0)
+Camera.PointAt($9767, $9768, $9769, 2)
+0947: actor $9731 speak_from_audio_table 333 store_spoken_phrase_id_to $10081 
+08F7: get_player $PLAYER_CHAR bodypart 1 textureCRC_to $2542 modelCRC_to $2543 
+$9797 = 0 
+$9744 = 6 
+
+:BARB_3194
+if 
+  $9744 == 6 
+jf @BARB_5429 
+if 
+   Actor.Dead($9731)
+jf @BARB_3273 
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_3266 
+gosub @BARB_7498 
+
+:BARB_3266
+jump @BARB_653 
+
+:BARB_3273
+if 
+  1 > $9797 
+jf @BARB_3323 
+if 
+  $2420 == 0 
+jf @BARB_3323 
+gosub @BARB_8410 
+gosub @BARB_8698 
+
+:BARB_3323
+if 
+  $9797 == 0 
+jf @BARB_3389 
+if 
+00E1:   player 0 pressed_key 16 
+jf @BARB_3365 
+$9797 = 10 
+
+:BARB_3365
+if 
+00E1:   player 0 pressed_key 15 
+jf @BARB_3389 
+$9797 = 1 
+
+:BARB_3389
+if 
+  $9797 == 1 
+jf @BARB_3559 
+if 
+80E1:   not player 0 pressed_key 15 
+jf @BARB_3559 
+if 
+  $2418 == 1 
+jf @BARB_3456 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:BARB_3456
+if 
+  $2422 == 1 
+jf @BARB_3488 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:BARB_3488
+if 
+  $2420 == 1 
+jf @BARB_3520 
+03E6: remove_text_box 
+08DA: remove_panel $2419 
+$2420 = 0 
+
+:BARB_3520
+if 
+  $9750 == 1 
+jf @BARB_3552 
+$9797 = 2 
+jump @BARB_3559 
+
+:BARB_3552
+$9797 = 5 
+
+:BARB_3559
+if 
+  $9797 == 2 
+jf @BARB_3640 
+0812: AS_actor $9731 perform_animation "BRB_CUT_IN" IFP "HAIRCUTS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+03D1: play_wav 4 
+$9738 = 0.0 
+$9797 = 3 
+
+:BARB_3640
+if 
+  $9797 == 3 
+jf @BARB_3900 
+if 
+   Actor.Animation($9731) == "BRB_CUT_IN"
+jf @BARB_3706 
+0613: $9738 = actor $9731 animation "BRB_CUT_IN" time 
+
+:BARB_3706
+if 
+  $9738 == 1.0 
+jf @BARB_3800 
+if 
+  $9805 == 0 
+jf @BARB_3800 
+0812: AS_actor $9731 perform_animation "BRB_CUT" IFP "HAIRCUTS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+0794: restore_player_clothes 
+Player.Build($PLAYER_CHAR)
+0793: save_player_clothes 
+$9805 = 1 
+
+:BARB_3800
+if 
+  $9805 == 1 
+jf @BARB_3900 
+if 
+03D2:   wav 4 ended 
+jf @BARB_3900 
+0812: AS_actor $9731 perform_animation "BRB_CUT_OUT" IFP "HAIRCUTS" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$9738 = 0.0 
+$9797 = 4 
+$9805 = 0 
+
+:BARB_3900
+if 
+  $9797 == 4 
+jf @BARB_3996 
+if 
+   Actor.Animation($9731) == "BRB_CUT_OUT"
+jf @BARB_3968 
+0613: $9738 = actor $9731 animation "BRB_CUT_OUT" time 
+
+:BARB_3968
+if 
+  $9738 == 1.0 
+jf @BARB_3996 
+$9797 = 5 
+
+:BARB_3996
+if 
+  $9797 == 5 
+jf @BARB_4162 
+0812: AS_actor $PLAYER_ACTOR perform_animation "BRB_SIT_OUT" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+$9738 = 0.0 
+0812: AS_actor $9731 perform_animation "BRB_OUT" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+05BF: AS_actor $9731 look_at_actor $PLAYER_ACTOR -2 ms 
+Camera.SetPosition($9776, $9777, $9778, 0.0, 0.0, 0.0)
+Camera.PointAt($9779, $9780, $9781, 2)
+$9797 = 6 
+
+:BARB_4162
+if 
+  $9797 == 6 
+jf @BARB_4323 
+if 
+   Actor.Animation($PLAYER_ACTOR) == "BRB_SIT_OUT"
+jf @BARB_4230 
+0613: $9738 = actor $PLAYER_ACTOR animation "BRB_SIT_OUT" time 
+
+:BARB_4230
+if 
+  $9738 >= 0.8 
+jf @BARB_4323 
+0618: assign_actor $PLAYER_ACTOR to_AS_pack $9751 
+0947: actor $9731 speak_from_audio_table 331 store_spoken_phrase_id_to $10081 
+Camera.SetPosition($9782, $9783, $9784, 0.0, 0.0, 0.0)
+Camera.PointAt($9785, $9786, $9787, 2)
+32@ = 0 
+$9797 = 7 
+
+:BARB_4323
+if 
+  $9797 == 7 
+jf @BARB_4463 
+if 
+  $9804 == 0 
+jf @BARB_4389 
+if 
+  32@ >= 1500 
+jf @BARB_4389 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+$9804 = 1 
+
+:BARB_4389
+if 
+  $9744 > 2 
+jf @BARB_4409 
+03E6: remove_text_box 
+
+:BARB_4409
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $9752 // ret 7 if not found 
+if 
+84A3:   not  $9752 == 7 // == constant 
+jf @BARB_4456 
+062E: get_actor $PLAYER_ACTOR task 1560 status_store_to $9752 // ret 7 if not found 
+jump @BARB_4463 
+
+:BARB_4456
+$9797 = 8 
+
+:BARB_4463
+if 
+  $9797 == 8 
+jf @BARB_4529 
+0647: AS_actor $9731 clear_look_task 
+Actor.Angle($PLAYER_ACTOR) = 180.0
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+Player.CanMove($PLAYER_CHAR) = True
+09BD: allow_other_threads_to_display_text_boxes 0 
+0581: enable_radar 1 
+$9804 = 0 
+$9797 = 9 
+
+:BARB_4529
+if 
+  $9797 == 9 
+jf @BARB_4719 
+if 
+80FF:   not actor $PLAYER_ACTOR sphere 1 in_sphere $X_BUY_MARKER $Y_BUY_MARKER $Z_BUY_MARKER radius 1.0 1.0 4.0 on_foot 
+jf @BARB_4645 
+$9730 = 0 
+$9749 = 0 
+$9750 = 0 
+$2545 = 0 
+$2544 = 0 
+$9804 = 0 
+$9797 = 0 
+$9744 = 2 
+
+:BARB_4645
+if 
+  $2749 == 0 
+jf @BARB_4719 
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+0457:   player $PLAYER_CHAR aiming_at_actor $9731 
+031D:   actor $9731 hit_by_weapon 57 
+jf @BARB_4719 
+0947: actor $9731 speak_from_audio_table 327 store_spoken_phrase_id_to $10081 
+05C4: AS_actor $9731 hands_up -2 ms 
+$2749 = 1 
+
+:BARB_4719
+if 
+  $9797 == 10 
+jf @BARB_5013 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @BARB_5013 
+08D8: $9734 = panel $2419 selected_row 
+if 
+  0 > $9734 
+jf @BARB_4787 
+$9734 = 0 
+
+:BARB_4787
+if 
+  $2420 == 1 
+jf @BARB_4819 
+03E6: remove_text_box 
+08DA: remove_panel $2419 
+$2420 = 0 
+
+:BARB_4819
+0760: store_shopping_data_index $9734 textureCRC_to $9733 
+078C: get_shopping_item_with_textureCRC $9733 nametag_to s$9742 // 8-byte string 
+0761: get_shopping_item_with_textureCRC $9733 price_to $9732 
+0783: get_shopping_item_with_textureCRC $9733 flag 0 store_to $9735 
+0783: get_shopping_item_with_textureCRC $9733 flag 1 store_to $9736 
+0084: $2751 = $9732 // (int) 
+05A9: s$2752 = s$9742 // s$ 
+Camera.SetPosition($9764, $9765, $9766, 0.0, 0.0, 0.0)
+Camera.PointAt($9767, $9768, $9769, 2)
+0812: AS_actor $9731 perform_animation "BRB_CUT_IN" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+08F7: get_player $PLAYER_CHAR bodypart 1 textureCRC_to $9798 modelCRC_to $9799 
+if 
+803A:   not  $9798 == $9733 // (int) 
+jf @BARB_4996 
+03D1: play_wav 4 
+
+:BARB_4996
+$9738 = 0.0 
+$9797 = 11 
+
+:BARB_5013
+if 
+  $9797 == 11 
+jf @BARB_5183 
+if 
+   Actor.Animation($9731) == "BRB_CUT_IN"
+jf @BARB_5079 
+0613: $9738 = actor $9731 animation "BRB_CUT_IN" time 
+
+:BARB_5079
+if 
+  $9738 == 1.0 
+jf @BARB_5183 
+0812: AS_actor $9731 perform_animation "BRB_CUT" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0784: set_player $PLAYER_CHAR textureCRC 0 modelCRC 0 bodypart 16 
+0784: set_player $PLAYER_CHAR textureCRC $9733 modelCRC $9735 bodypart $9736 
+Player.Build($PLAYER_CHAR)
+$9750 = 1 
+$9797 = 12 
+
+:BARB_5183
+if 
+  $9797 == 12 
+jf @BARB_5276 
+if 
+03D2:   wav 4 ended 
+jf @BARB_5276 
+0812: AS_actor $9731 perform_animation "BRB_CUT_OUT" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$9738 = 0.0 
+$9797 = 13 
+
+:BARB_5276
+if 
+  $9797 == 13 
+jf @BARB_5429 
+if 
+   Actor.Animation($9731) == "BRB_CUT_OUT"
+jf @BARB_5344 
+0613: $9738 = actor $9731 animation "BRB_CUT_OUT" time 
+
+:BARB_5344
+if 
+  $9738 == 1.0 
+jf @BARB_5429 
+0812: AS_actor $9731 perform_animation "BRB_LOOP" IFP "HAIRCUTS" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+$9738 = 0.0 
+$9797 = 0 
+$9744 = 7 
+
+:BARB_5429
+if 
+  $9744 == 7 
+jf @BARB_7257 
+if 
+   Actor.Dead($9731)
+jf @BARB_5508 
+gosub @BARB_7292 
+07B0: get_active_shop_name_to s$CURRENT_SHOP_GXT_NAME // s$ 
+if 
+85AD:   not  s$CURRENT_SHOP_GXT_NAME == s$9740 // s$ == short 
+jf @BARB_5501 
+gosub @BARB_7498 
+
+:BARB_5501
+jump @BARB_653 
+
+:BARB_5508
+if 
+  $2418 == 0 
+jf @BARB_5551 
+if 
+  1 > $9797 
+jf @BARB_5551 
+gosub @BARB_7769 
+
+:BARB_5551
+if 
+  $9797 == 0 
+jf @BARB_5675 
+if 
+00E1:   player 0 pressed_key 16 
+jf @BARB_5629 
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'BARBNO'  // ~s~You have already bought this!
+$2544 = 0 
+$2545 = 0 
+$9797 = 2 
+
+:BARB_5629
+if 
+00E1:   player 0 pressed_key 15 
+jf @BARB_5675 
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'BARBNO'  // ~s~You have already bought this!
+$9797 = 1 
+
+:BARB_5675
+if 
+  $9797 == 1 
+jf @BARB_5788 
+if 
+80E1:   not player 0 pressed_key 15 
+jf @BARB_5788 
+if 
+  $2418 == 1 
+jf @BARB_5742 
+03E6: remove_text_box 
+08DA: remove_panel $2417 
+$2418 = 0 
+
+:BARB_5742
+if 
+  $2420 == 0 
+jf @BARB_5774 
+gosub @BARB_8410 
+gosub @BARB_8698 
+
+:BARB_5774
+$9797 = 0 
+$9744 = 6 
+
+:BARB_5788
+if 
+  $9797 == 2 
+jf @BARB_6912 
+if 
+80E1:   not player 0 pressed_key 16 
+jf @BARB_6912 
+$2545 = 0 
+$2544 = 0 
+$SHOPS_PLAYER_CASH = Player.Money($PLAYER_CHAR)
+if 
+002C:   $SHOPS_PLAYER_CASH >= $9732 // (int) 
+jf @BARB_6839 
+if 
+803A:   not  $2542 == $9733 // (int) 
+jf @BARB_6759 
+if 
+  $2418 == 1 
+jf @BARB_5915 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:BARB_5915
+0947: actor $9731 speak_from_audio_table 323 store_spoken_phrase_id_to $10081 
+0790: charge_money_for_shopping_item_with_textureCRC $9733 
+$9749 = 1 
+$9750 = 0 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1054 
+0793: save_player_clothes 
+08F7: get_player $PLAYER_CHAR bodypart 1 textureCRC_to $2542 modelCRC_to $2543 
+Camera.SetPosition($9770, $9771, $9772, 0.0, 0.0, 0.0)
+Camera.PointAt($9773, $9774, $9775, 2)
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBERS' // s$ == short  // Barber
+jf @BARB_6284 
+if or
+05AD:   s$9742 == 'TASH' // s$ == short  // Cesar & 'stash
+05AD:   s$9742 == 'GOATEE' // s$ == short  // Cesar & Goatee
+05AD:   s$9742 == 'BEARD' // s$ == short  // Cesar & Beard
+05AD:   s$9742 == 'AFROT' // s$ == short  // Afro & 'stash
+05AD:   s$9742 == 'AFROB' // s$ == short  // Afro & Beard
+05AD:   s$9742 == 'AFROGOT' // s$ == short  // Afro & Goatee
+jf @BARB_6159 
+06D1: v$9754 = "BRB_BEARD_01" // v$ = string 
+jump @BARB_6284 
+
+:BARB_6159
+if 
+  $9739 > 1 
+jf @BARB_6184 
+$9739 = 0 
+
+:BARB_6184
+if 
+  0 > $9739 
+jf @BARB_6209 
+$9739 = 0 
+
+:BARB_6209
+if 
+  $9739 == 0 
+jf @BARB_6259 
+06D1: v$9754 = "BRB_HAIR_01" // v$ = string 
+$9739 += 1 
+jump @BARB_6284 
+
+:BARB_6259
+06D1: v$9754 = "BRB_HAIR_02" // v$ = string 
+$9739 -= 1 
+
+:BARB_6284
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER2' // s$ == short  // Barber
+jf @BARB_6434 
+if 
+  $9739 > 1 
+jf @BARB_6334 
+$9739 = 0 
+
+:BARB_6334
+if 
+  0 > $9739 
+jf @BARB_6359 
+$9739 = 0 
+
+:BARB_6359
+if 
+  $9739 == 0 
+jf @BARB_6409 
+06D1: v$9754 = "BRB_HAIR_01" // v$ = string 
+$9739 += 1 
+jump @BARB_6434 
+
+:BARB_6409
+06D1: v$9754 = "BRB_HAIR_02" // v$ = string 
+$9739 -= 1 
+
+:BARB_6434
+if 
+05AD:   s$CURRENT_SHOP_GXT_NAME == 'BARBER3' // s$ == short  // Barber
+jf @BARB_6663 
+if or
+05AD:   s$9742 == 'BLADBEA' // s$ == short  // Bald & Beard
+05AD:   s$9742 == 'BALDTSH' // s$ == short  // Bald & 'stash
+05AD:   s$9742 == 'BALDGOT' // s$ == short  // Bald & Goatee
+jf @BARB_6538 
+06D1: v$9754 = "BRB_BEARD_01" // v$ = string 
+jump @BARB_6663 
+
+:BARB_6538
+if 
+  $9739 > 1 
+jf @BARB_6563 
+$9739 = 0 
+
+:BARB_6563
+if 
+  0 > $9739 
+jf @BARB_6588 
+$9739 = 0 
+
+:BARB_6588
+if 
+  $9739 == 0 
+jf @BARB_6638 
+06D1: v$9754 = "BRB_HAIR_01" // v$ = string 
+$9739 += 1 
+jump @BARB_6663 
+
+:BARB_6638
+06D1: v$9754 = "BRB_HAIR_02" // v$ = string 
+$9739 -= 1 
+
+:BARB_6663
+0812: AS_actor $9731 perform_animation "BRB_BUY" IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor $PLAYER_ACTOR perform_animation v$9754 IFP "HAIRCUTS" framedelta 1000.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+$9738 = 0.0 
+$9797 = 3 
+jump @BARB_6832 
+
+:BARB_6759
+if 
+  $2545 == 0 
+jf @BARB_6832 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1055 
+0947: actor $9731 speak_from_audio_table 322 store_spoken_phrase_id_to $10081 
+00BC: show_text_highpriority GXT 'BARBNO' time 5000 flag 1  // ~s~You have already bought this!
+$9797 = 0 
+$2545 = 1 
+
+:BARB_6832
+jump @BARB_6912 
+
+:BARB_6839
+if 
+  $2544 == 0 
+jf @BARB_6912 
+097A: play_audio_at $TEMPVAR_X_COORD $TEMPVAR_Y_COORD $TEMPVAR_Z_COORD event 1055 
+0947: actor $9731 speak_from_audio_table 324 store_spoken_phrase_id_to $10081 
+00BC: show_text_highpriority GXT 'SHOPNO' time 5000 flag 1  // ~s~You don't have enough money to buy this item.
+$9797 = 0 
+$2544 = 1 
+
+:BARB_6912
+if 
+  $9797 == 3 
+jf @BARB_7257 
+if 
+   Actor.Animation($PLAYER_ACTOR) == v$9754
+jf @BARB_6960 
+0613: $9738 = actor $PLAYER_ACTOR animation v$9754 time 
+
+:BARB_6960
+if 
+  $9738 == 1.0 
+jf @BARB_7257 
+if 
+  $2422 == 1 
+jf @BARB_7013 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:BARB_7013
+if 
+  $2418 == 1 
+jf @BARB_7045 
+03E6: remove_text_box 
+08DA: remove_panel $2417 
+$2418 = 0 
+
+:BARB_7045
+0812: AS_actor $PLAYER_ACTOR perform_animation "BRB_SIT_LOOP" IFP "HAIRCUTS" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+0812: AS_actor $9731 perform_animation "BRB_LOOP" IFP "HAIRCUTS" framedelta 1000.0 loopA 1 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+if 
+  $676 == 0 
+jf @BARB_7172 
+if 
+  $ONMISSION == 1 
+jf @BARB_7172 
+$676 = 1 
+
+:BARB_7172
+Camera.SetPosition($9764, $9765, $9766, 0.0, 0.0, 0.0)
+Camera.PointAt($9767, $9768, $9769, 2)
+if 
+  $2420 == 0 
+jf @BARB_7243 
+gosub @BARB_8410 
+gosub @BARB_8698 
+
+:BARB_7243
+$9797 = 0 
+$9744 = 6 
+
+:BARB_7257
+jump @BARB_7271 
+
+:BARB_7264
+gosub @BARB_7498 
+
+:BARB_7271
+jump @BARB_7285 
+
+:BARB_7278
+gosub @BARB_7498 
+
+:BARB_7285
+jump @BARB_653 
+
+:BARB_7292
+if 
+  $9744 > 0 
+jf @BARB_7312 
+03E6: remove_text_box 
+
+:BARB_7312
+if 
+  $2418 == 1 
+jf @BARB_7344 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:BARB_7344
+if 
+  $2422 == 1 
+jf @BARB_7376 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:BARB_7376
+if 
+  $2420 == 1 
+jf @BARB_7408 
+03E6: remove_text_box 
+08DA: remove_panel $2419 
+$2420 = 0 
+
+:BARB_7408
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'BARBNO'  // ~s~You have already bought this!
+$9744 = 2 
+$9804 = 0 
+$9730 = 0 
+$9749 = 0 
+$9738 = 0.0 
+$9750 = 0 
+$2545 = 0 
+$2544 = 0 
+$9805 = 0 
+return 
+
+:BARB_7498
+03D5: remove_text 'SHOPNO'  // ~s~You don't have enough money to buy this item.
+03D5: remove_text 'BARBNO'  // ~s~You have already bought this!
+if 
+  $9744 > 0 
+jf @BARB_7540 
+03E6: remove_text_box 
+
+:BARB_7540
+if 
+  $2418 == 1 
+jf @BARB_7572 
+08DA: remove_panel $2417 
+03E6: remove_text_box 
+$2418 = 0 
+
+:BARB_7572
+if 
+  $2422 == 1 
+jf @BARB_7604 
+08DA: remove_panel $2421 
+03E6: remove_text_box 
+$2422 = 0 
+
+:BARB_7604
+if 
+  $2420 == 1 
+jf @BARB_7636 
+03E6: remove_text_box 
+08DA: remove_panel $2419 
+$2420 = 0 
+
+:BARB_7636
+$9802 = 0 
+$9730 = 0 
+$2749 = 0 
+$9744 = 0 
+$9749 = 0 
+$9738 = 0.0 
+$9750 = 0 
+$2545 = 0 
+$2544 = 0 
+$9804 = 0 
+061B: remove_references_to_AS_pack $9737 
+061B: remove_references_to_AS_pack $9751 
+Model.Destroy($SELLER_MODEL)
+0391: release_textures 
+$MISSION_RUNNING_DOG_FAILED = 1 
+Actor.DestroyInstantly($9731)
+0581: enable_radar 1 
+03F0: enable_text_draw 0 
+08F8: display_stat_update_box 1 
+09BD: allow_other_threads_to_display_text_boxes 0 
+040D: unload_wav 4 
+$9805 = 0 
+end_thread 
+return 
+
+:BARB_7769
+if 
+  $2418 == 0 
+jf @BARB_8408 
+0512: show_permanent_text_box 'BARB_H2'  // ~k~~PED_SPRINT~ = Buy~N~~k~~VEHICLE_ENTER_EXIT~ = Back
+if 
+04A3:   $CURRENT_LANGUAGE == 0 // == constant 
+jf @BARB_7860 
+08D4: $2417 = create_panel_with_title 'HAIRCHO' position 29.0 95.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Barbers
+jump @BARB_8101 
+
+:BARB_7860
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BARB_7922 
+08D4: $2417 = create_panel_with_title 'HAIRCHO' position 29.0 95.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Barbers
+jump @BARB_8101 
+
+:BARB_7922
+if 
+04A3:   $CURRENT_LANGUAGE == 2 // == constant 
+jf @BARB_7984 
+08D4: $2417 = create_panel_with_title 'HAIRCHO' position 29.0 95.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Barbers
+jump @BARB_8101 
+
+:BARB_7984
+if 
+04A3:   $CURRENT_LANGUAGE == 3 // == constant 
+jf @BARB_8046 
+08D4: $2417 = create_panel_with_title 'HAIRCHO' position 29.0 95.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Barbers
+jump @BARB_8101 
+
+:BARB_8046
+if 
+04A3:   $CURRENT_LANGUAGE == 4 // == constant 
+jf @BARB_8101 
+08D4: $2417 = create_panel_with_title 'HAIRCHO' position 29.0 95.0 width 93.0 columns 2 interactive 0 background 1 alignment 1  // Barbers
+
+:BARB_8101
+08D6: set_panel $2417 column 0 alignment 1 
+08DB: set_panel $2417 column 0 header 'HAIRSTY' data s$9742 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Hairstyle
+08D6: set_panel $2417 column 1 alignment 2 
+08DB: set_panel $2417 column 1 header 'COST' data 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Cost
+08EE: set_panel $2417 column 1 row 0 text_1number GXT 'DOLLAR' number $9732  // $~1~
+09DB: set_panel $2417 column 0 width 140 
+09DB: set_panel $2417 column 1 width 46 
+$2418 = 1 
+
+:BARB_8408
+return 
+
+:BARB_8410
+$9800 = 0 
+$9801 = 0 
+
+:BARB_8424
+if 
+001C:   $9729 > $9800 // (int) 
+jf @BARB_8616 
+0760: store_shopping_data_index $9800 textureCRC_to $SELECTED_MENU_ITEM 
+0783: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM flag 0 store_to $SHOPPINGITEM_MODELCRC 
+0783: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM flag 1 store_to $SHOPPINGITEM_BODYPART 
+0084: $2438($9801,12i) = $SELECTED_MENU_ITEM // (int) 
+078C: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM nametag_to s$9742 // 8-byte string 
+0761: get_shopping_item_with_textureCRC $SELECTED_MENU_ITEM price_to $9732 
+0084: $2426($9801,12i) = $9732 // (int) 
+05A9: $2450($9801,12s) = s$9742 // s$ 
+0084: $2474($9801,12i) = $SHOPPINGITEM_MODELCRC // (int) 
+0084: $2486($9801,12i) = $SHOPPINGITEM_BODYPART // (int) 
+if 
+003A:   $2542 == $SELECTED_MENU_ITEM // (int) 
+jf @BARB_8584 
+$2498($9801,12i) = 0 
+jump @BARB_8595 
+
+:BARB_8584
+$2498($9801,12i) = 1 
+
+:BARB_8595
+$9801 += 1 
+$9800 += 1 
+jump @BARB_8424 
+
+:BARB_8616
+0084: $2515 = $9801 // (int) 
+
+:BARB_8624
+if 
+  12 > $2515 
+jf @BARB_8696 
+$2438($2515,12i) = -1 
+$2426($2515,12i) = 0 
+05A9: $2450($2515,12s) = 'DUMMY' // s$ 
+$2515 += 1 
+jump @BARB_8624 
+
+:BARB_8696
+return 
+
+:BARB_8698
+if 
+  $2420 == 0 
+jf @BARB_9371 
+0512: show_permanent_text_box 'BARB_H1'  // Use ~k~~GO_FORWARD~ and ~k~~GO_BACK~ to select a haircut.~n~~k~~PED_SPRINT~ = View~n~~k~~VEHICLE_ENTER_EXIT~ = Quit
+if 
+04A3:   $CURRENT_LANGUAGE == 0 // == constant 
+jf @BARB_8789 
+08D4: $2419 = create_panel_with_title 'HAIRCHO' position 29.0 145.0 width 93.0 columns 2 interactive 1 background 1 alignment 1  // Barbers
+jump @BARB_9030 
+
+:BARB_8789
+if 
+04A3:   $CURRENT_LANGUAGE == 1 // == constant 
+jf @BARB_8851 
+08D4: $2419 = create_panel_with_title 'HAIRCHO' position 29.0 145.0 width 93.0 columns 2 interactive 1 background 1 alignment 1  // Barbers
+jump @BARB_9030 
+
+:BARB_8851
+if 
+04A3:   $CURRENT_LANGUAGE == 2 // == constant 
+jf @BARB_8913 
+08D4: $2419 = create_panel_with_title 'HAIRCHO' position 29.0 165.0 width 93.0 columns 2 interactive 1 background 1 alignment 1  // Barbers
+jump @BARB_9030 
+
+:BARB_8913
+if 
+04A3:   $CURRENT_LANGUAGE == 3 // == constant 
+jf @BARB_8975 
+08D4: $2419 = create_panel_with_title 'HAIRCHO' position 29.0 145.0 width 93.0 columns 2 interactive 1 background 1 alignment 1  // Barbers
+jump @BARB_9030 
+
+:BARB_8975
+if 
+04A3:   $CURRENT_LANGUAGE == 4 // == constant 
+jf @BARB_9030 
+08D4: $2419 = create_panel_with_title 'HAIRCHO' position 29.0 165.0 width 93.0 columns 2 interactive 1 background 1 alignment 1  // Barbers
+
+:BARB_9030
+08D6: set_panel $2419 column 0 alignment 1 
+08DB: set_panel $2419 column 0 header 'HAIRSTY' data s$2450[0] s$2450[1] s$2450[2] s$2450[3] s$2450[4] s$2450[5] s$2450[6] s$2450[7] s$2450[8] s$2450[9] s$2450[10] s$2450[11]  // Hairstyle
+08D6: set_panel $2419 column 1 alignment 2 
+08DB: set_panel $2419 column 1 header 'COST' data 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'  // Cost
+$2515 = 0 
+
+:BARB_9231
+if 
+001C:   $9801 > $2515 // (int) 
+jf @BARB_9290 
+08EE: set_panel $2419 column 1 row $2515 text_1number GXT 'DOLLAR' number $2426($2515,12i)  // $~1~
+$2515 += 1 
+jump @BARB_9231 
+
+:BARB_9290
+$2515 = 0 
+
+:BARB_9297
+if 
+001C:   $9801 > $2515 // (int) 
+jf @BARB_9345 
+08D9: set_panel $2419 row $2515 enable $2498($2515,12i) 
+$2515 += 1 
+jump @BARB_9297 
+
+:BARB_9345
+09DB: set_panel $2419 column 0 width 140 
+09DB: set_panel $2419 column 1 width 46 
+$2420 = 1 
+
+:BARB_9371
+return 
+end_thread

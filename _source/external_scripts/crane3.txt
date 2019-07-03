@@ -1,0 +1,314 @@
+:CRANE3
+thread 'CRANE3' 
+3@ = 0 
+if 
+  3@ == 1 
+jf @CRANE3_124 
+0@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+1@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+2@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+3@ = Object.Init(#WOODENBOX, 0.0, 0.0, 0.0)
+
+:CRANE3_124
+$10492 = 0 
+
+:CRANE3_131
+wait 0 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_1554 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE3_1547 
+if 
+  $10493 == 0 
+jf @CRANE3_1547 
+if 
+0471:   actor $PLAYER_ACTOR near_object_in_rectangle 0@ radius 100.0 100.0 sphere 0 
+jf @CRANE3_1538 
+if 
+  3@ == 0 
+jf @CRANE3_270 
+0400: store_coords_to 5@ 6@ 7@ from_object 0@ with_offset 3.0899 2.9792 0.0081 
+3@ += 1 
+
+:CRANE3_270
+if 
+  3@ == 1 
+jf @CRANE3_440 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere 5@ 6@ 7@ radius 1.2 1.2 1.5 on_foot 
+jf @CRANE3_413 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CRANE3_406 
+if 
+  $10492 == 0 
+jf @CRANE3_382 
+03E5: show_text_box 'CR_2'  // ~k~~VEHICLE_ENTER_EXIT~ Enter Crane
+$10492 = 1 
+
+:CRANE3_382
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE3_406 
+3@ += 1 
+
+:CRANE3_406
+jump @CRANE3_440 
+
+:CRANE3_413
+if 
+   not $10492 == 0 
+jf @CRANE3_440 
+03E6: remove_text_box 
+$10492 = 0 
+
+:CRANE3_440
+if 
+  3@ == 2 
+jf @CRANE3_719 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_482 
+097B: play_audio_at_object 0@ event 1019 
+
+:CRANE3_482
+Player.CanMove($PLAYER_CHAR) = False
+09BD: allow_other_threads_to_display_text_boxes 1 
+fade 0 500 
+
+:CRANE3_500
+if 
+fading 
+jf @CRANE3_524 
+wait 0 
+jump @CRANE3_500 
+
+:CRANE3_524
+07F9: set_game_controller_to_steer_object_QUARRY_CRANEARM // originally DS quarry magnocrane 
+0A44: override_text_block 1 
+4@ = Object.Angle(1@)
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_570 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE3_570 
+
+:CRANE3_570
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE3_656 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = True
+Actor.PutAt($PLAYER_ACTOR, 713.5652, 906.2935, -18.0674)
+0337: set_actor $PLAYER_ACTOR visibility 0 
+Player.CanMove($PLAYER_CHAR) = True
+0619: enable_actor $PLAYER_ACTOR collision_detection 0 
+Actor.SetImmunities($PLAYER_ACTOR, 1, 1, 1, 1, 1)
+15@ = 0 
+
+:CRANE3_656
+0512: show_permanent_text_box 'QUAR_1'  // The movement controls rotate the crane.~N~~k~~PED_JUMPING~ Raise winch.~N~~k~~PED_SPRINT~ Lower winch.~N~~k~~PED_FIREWEAPON~ Release objects.
+gosub @CRANE3_1570 
+03BF: set_player $PLAYER_CHAR ignored_by_everyone 0 
+fade 1 500 
+
+:CRANE3_688
+if 
+fading 
+jf @CRANE3_712 
+wait 0 
+jump @CRANE3_688 
+
+:CRANE3_712
+3@ += 1 
+
+:CRANE3_719
+if 
+  3@ == 3 
+jf @CRANE3_1383 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE3_1383 
+gosub @CRANE3_1570 
+if 
+00E1:   player 0 pressed_key 0 
+jf @CRANE3_875 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 8@ = integer $MOVE_AXIS_X to_float 
+8@ /= 500.0 
+0081: 4@ -= frame_delta_time * 8@ // (float) 
+if 
+   not 15@ == 1 
+jf @CRANE3_868 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_868 
+097B: play_audio_at_object 0@ event 1020 
+15@ = 1 
+
+:CRANE3_868
+jump @CRANE3_924 
+
+:CRANE3_875
+if 
+   not 15@ == 0 
+jf @CRANE3_924 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_924 
+097B: play_audio_at_object 0@ event 1021 
+15@ = 0 
+
+:CRANE3_924
+if 
+00E1:   player 0 pressed_key 1 
+jf @CRANE3_1187 
+0494: get_joystick 0 direction_offset_to $MOVE_AXIS_X $MOVE_AXIS_Y $SPECIAL_AXIS_X $SPECIAL_AXIS_Y 
+008F: 8@ = integer $MOVE_AXIS_Y to_float 
+8@ /= 1000.0 
+8@ *= 1.5 
+0083: $2739 -= frame_delta_time * 8@ // (float) 
+
+:CRANE3_993
+if 
+  0.0 > $2739 
+jf @CRANE3_1031 
+$2739 += 360.0 
+jump @CRANE3_993 
+
+:CRANE3_1031
+if 
+  $2739 > 360.0 
+jf @CRANE3_1069 
+$2739 += -360.0 
+jump @CRANE3_1031 
+
+:CRANE3_1069
+if 
+  $2739 > 70.0 
+jf @CRANE3_1100 
+$2739 = 70.0 
+
+:CRANE3_1100
+if 
+  10.0 > $2739 
+jf @CRANE3_1131 
+$2739 = 10.0 
+
+:CRANE3_1131
+if 
+   not 16@ == 1 
+jf @CRANE3_1180 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_1180 
+097B: play_audio_at_object 2@ event 1020 
+16@ = 1 
+
+:CRANE3_1180
+jump @CRANE3_1236 
+
+:CRANE3_1187
+if 
+   not 16@ == 0 
+jf @CRANE3_1236 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_1236 
+097B: play_audio_at_object 2@ event 1021 
+16@ = 0 
+
+:CRANE3_1236
+if 
+03CA:   object 1@ exists 
+jf @CRANE3_1268 
+Object.Angle(1@) = 4@
+Actor.Angle($PLAYER_ACTOR) = 4@
+
+:CRANE3_1268
+if 
+03CA:   object 2@ exists 
+jf @CRANE3_1359 
+if 
+03CA:   object 1@ exists 
+jf @CRANE3_1359 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 1@ with_offset 0.0 0.0 1.0206 
+0815: put_object 2@ at $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 and_keep_rotation 
+0453: set_object 2@ XYZ_rotation 0.0 $2739 4@ 
+
+:CRANE3_1359
+if 
+00E1:   player 0 pressed_key 15 
+jf @CRANE3_1383 
+3@ += 1 
+
+:CRANE3_1383
+if 
+  3@ == 4 
+jf @CRANE3_1531 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CRANE3_1531 
+03E6: remove_text_box 
+if 
+03CA:   object 0@ exists 
+jf @CRANE3_1443 
+097B: play_audio_at_object 0@ event 1022 
+
+:CRANE3_1443
+079F: unknown_set_game_controller_to_steer_no_crane_objects 
+09BD: allow_other_threads_to_display_text_boxes 0 
+Actor.LockInCurrentPosition($PLAYER_ACTOR) = False
+0337: set_actor $PLAYER_ACTOR visibility 1 
+0619: enable_actor $PLAYER_ACTOR collision_detection 1 
+Actor.SetImmunities($PLAYER_ACTOR, 0, 0, 0, 0, 0)
+Player.CanMove($PLAYER_CHAR) = True
+Actor.PutAt($PLAYER_ACTOR, 706.2595, 918.6275, -19.6407)
+Actor.Angle($PLAYER_ACTOR) = 127.184
+Camera.Restore_WithJumpCut
+3@ = 0 
+
+:CRANE3_1531
+jump @CRANE3_1547 
+
+:CRANE3_1538
+3@ = 0 
+end_thread 
+
+:CRANE3_1547
+jump @CRANE3_1563 
+
+:CRANE3_1554
+3@ = 0 
+end_thread 
+
+:CRANE3_1563
+jump @CRANE3_131 
+
+:CRANE3_1570
+if 
+03CA:   object 1@ exists 
+jf @CRANE3_1615 
+0400: store_coords_to 9@ 10@ 11@ from_object 1@ with_offset -9.0 -6.8 6.0 
+
+:CRANE3_1615
+if 
+03CA:   object 2@ exists 
+jf @CRANE3_1730 
+0400: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_object 2@ with_offset 0.0 0.0 59.0 
+0796: get_crane_magnet 2@ magnet_lane_length_to 8@ // float 
+8@ += -1.0 
+8@ *= -1.0 
+8@ *= 72.0 
+0067: $TEMPVAR_FLOAT_3 -= 8@ // (float) 
+0089: 12@ = $TEMPVAR_FLOAT_1 // (float) 
+0089: 13@ = $TEMPVAR_FLOAT_2 // (float) 
+0089: 14@ = $TEMPVAR_FLOAT_3 // (float) 
+
+:CRANE3_1730
+Camera.SetPosition(9@, 10@, 11@, 0.0, 0.0, 0.0)
+Camera.PointAt(12@, 13@, 14@, 2)
+return 
+end_thread

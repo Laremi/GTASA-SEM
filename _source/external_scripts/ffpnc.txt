@@ -1,0 +1,74 @@
+:FFPNC
+thread 'FFPNC' 
+2@ = 0 
+if 
+  2@ == 1 
+jf @FFPNC_60 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+
+:FFPNC_60
+if 
+   not Actor.Dead(0@)
+jf @FFPNC_84 
+060B: set_actor 0@ decision_maker_to $INTERIOR_DECISION_MAKER_A 
+
+:FFPNC_84
+wait 0 
+if and
+   Player.Defined($PLAYER_CHAR)
+  $PLAYER_IN_INTERIOR == 0 
+jf @FFPNC_308 
+09E8: $1250 = actor $PLAYER_ACTOR active_interior 
+if or
+  $1250 == 0 
+  $PLAYER_IN_INTERIOR == 1 
+jf @FFPNC_151 
+gosub @FFPNC_322 
+
+:FFPNC_151
+if 
+   not Actor.Dead(0@)
+jf @FFPNC_294 
+0085: 2@ = 1@ // (int) 
+2@ /= 2 
+2@ *= 2 
+if 
+001D:   1@ > 2@ // (int) 
+jf @FFPNC_251 
+062E: get_actor 0@ task 1477 status_store_to 3@ // ret 7 if not found 
+if 
+04A4:   3@ == 7 // == constant 
+jf @FFPNC_244 
+05C5: AS_actor 0@ cower -2 ms 
+
+:FFPNC_244
+jump @FFPNC_287 
+
+:FFPNC_251
+062E: get_actor 0@ task 1476 status_store_to 3@ // ret 7 if not found 
+if 
+04A4:   3@ == 7 // == constant 
+jf @FFPNC_287 
+05C4: AS_actor 0@ hands_up -2 ms 
+
+:FFPNC_287
+jump @FFPNC_301 
+
+:FFPNC_294
+gosub @FFPNC_322 
+
+:FFPNC_301
+jump @FFPNC_315 
+
+:FFPNC_308
+gosub @FFPNC_322 
+
+:FFPNC_315
+jump @FFPNC_84 
+
+:FFPNC_322
+Actor.RemoveReferences(0@)
+090F: end_external_script 37 (CUSTOMER_PANIC) 
+end_thread 
+return 
+end_thread

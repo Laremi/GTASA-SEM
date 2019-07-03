@@ -1,0 +1,284 @@
+:SKBRAIN
+thread 'SKBRAIN' 
+2@ = 0 
+if 
+  2@ == 1 
+jf @SKBRAIN_114 
+0@ = Actor.Create(CivFemale, #NULL, 0.0, 0.0, 0.0)
+061D: create_AS_origin_at 0.0 0.0 0.0 Z_angle 0.0 unknown_angle 0.0 AS_pack -1 handle_as 1@ 
+6@ = Object.Create(#NULL, 0.0, 0.0, 0.0)
+
+:SKBRAIN_114
+if 
+   not Actor.Dead(0@)
+jf @SKBRAIN_138 
+060B: set_actor 0@ decision_maker_to $INTERIOR_DECISION_MAKER_B 
+
+:SKBRAIN_138
+04ED: load_animation "FOOD" 
+Model.Load(2220)
+
+:SKBRAIN_151
+if or
+84EE:   not animation "FOOD" loaded 
+   not Model.Available(2220)
+jf @SKBRAIN_186 
+wait 0 
+jump @SKBRAIN_151 
+
+:SKBRAIN_186
+3@ = 1 
+4@ = 0 
+5@ = 0 
+7@ = 0 
+
+:SKBRAIN_214
+wait 0 
+if and
+   not Actor.Dead(0@)
+   Player.Defined($PLAYER_CHAR)
+  $PLAYER_IN_INTERIOR == 0 
+jf @SKBRAIN_387 
+09E8: $1250 = actor $PLAYER_ACTOR active_interior 
+if or
+  $1250 == 0 
+  $PLAYER_IN_INTERIOR == 1 
+jf @SKBRAIN_293 
+gosub @SKBRAIN_1563 
+jump @SKBRAIN_380 
+
+:SKBRAIN_293
+if or
+0457:   player $PLAYER_CHAR aiming_at_actor 0@ 
+051A:   actor 0@ damaged_by_actor $PLAYER_ACTOR 
+jf @SKBRAIN_341 
+if 
+03CA:   object 6@ exists 
+jf @SKBRAIN_341 
+Object.Destroy(6@)
+
+:SKBRAIN_341
+if 
+  $FOOD_PLAYER_AGGRESSIVE_FLAG == 0 
+jf @SKBRAIN_373 
+gosub @SKBRAIN_401 
+jump @SKBRAIN_380 
+
+:SKBRAIN_373
+jump @SKBRAIN_1606 
+
+:SKBRAIN_380
+jump @SKBRAIN_394 
+
+:SKBRAIN_387
+gosub @SKBRAIN_1563 
+
+:SKBRAIN_394
+jump @SKBRAIN_214 
+
+:SKBRAIN_401
+0871: init_jump_table 3@ total_jumps 3 default_jump 0 @SKBRAIN_506 jumps 1 @SKBRAIN_464 2 @SKBRAIN_478 3 @SKBRAIN_492 -1 @SKBRAIN_506 -1 @SKBRAIN_506 -1 @SKBRAIN_506 -1 @SKBRAIN_506 
+
+:SKBRAIN_464
+gosub @SKBRAIN_508 
+jump @SKBRAIN_506 
+
+:SKBRAIN_478
+gosub @SKBRAIN_852 
+jump @SKBRAIN_506 
+
+:SKBRAIN_492
+gosub @SKBRAIN_1196 
+jump @SKBRAIN_506 
+
+:SKBRAIN_506
+return 
+
+:SKBRAIN_508
+0871: init_jump_table 4@ total_jumps 2 default_jump 0 @SKBRAIN_850 jumps 0 @SKBRAIN_571 1 @SKBRAIN_748 -1 @SKBRAIN_850 -1 @SKBRAIN_850 -1 @SKBRAIN_850 -1 @SKBRAIN_850 -1 @SKBRAIN_850 
+
+:SKBRAIN_571
+04C4: store_coords_to 13@ 14@ 15@ from_actor 0@ with_offset 0.0 3.0 3.0 
+091C: get_actor_in_sphere 13@ 14@ 15@ radius 20.0 model #CJ_FF_TILL_QUE external_script_named "PCUSTOM" handle_as 2@ 
+if 
+  2@ > -1 
+jf @SKBRAIN_741 
+04C4: store_coords_to 10@ 11@ 12@ from_actor 0@ with_offset -5.0 -5.0 -5.0 
+6@ = Object.Create(2220, 10@, 11@, 12@)
+0605: actor 0@ perform_animation "SHP_TRAY_IN" IFP "FOOD" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time -1 
+4@ += 1 
+
+:SKBRAIN_741
+jump @SKBRAIN_850 
+
+:SKBRAIN_748
+9@ = 0.0 
+if 
+   Actor.Animation(0@) == "SHP_TRAY_IN"
+jf @SKBRAIN_843 
+0613: 9@ = actor 0@ animation "SHP_TRAY_IN" time 
+if 
+  9@ == 1.0 
+jf @SKBRAIN_843 
+4@ = 0 
+3@ += 1 
+
+:SKBRAIN_843
+jump @SKBRAIN_850 
+
+:SKBRAIN_850
+return 
+
+:SKBRAIN_852
+0871: init_jump_table 4@ total_jumps 3 default_jump 0 @SKBRAIN_1194 jumps 0 @SKBRAIN_915 1 @SKBRAIN_1055 2 @SKBRAIN_1154 -1 @SKBRAIN_1194 -1 @SKBRAIN_1194 -1 @SKBRAIN_1194 -1 @SKBRAIN_1194 
+
+:SKBRAIN_915
+if 
+03CA:   object 6@ exists 
+jf @SKBRAIN_1034 
+070A: AS_actor 0@ attach_to_object 6@ offset 0.0 0.0 0.0 on_bone 6 16 perform_animation "NULL" IFP_file "NULL" time 0 
+0812: AS_actor 0@ perform_animation "SHP_TRAY_LIFT" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 1 time -1 // versionB 
+33@ = 0 
+4@ += 1 
+jump @SKBRAIN_1048 
+
+:SKBRAIN_1034
+4@ = 0 
+3@ += 1 
+
+:SKBRAIN_1048
+jump @SKBRAIN_1194 
+
+:SKBRAIN_1055
+9@ = 0.0 
+if 
+   Actor.Animation(0@) == "SHP_TRAY_LIFT"
+jf @SKBRAIN_1147 
+0613: 9@ = actor 0@ animation "SHP_TRAY_LIFT" time 
+if 
+  9@ == 1.0 
+jf @SKBRAIN_1147 
+4@ += 1 
+
+:SKBRAIN_1147
+jump @SKBRAIN_1194 
+
+:SKBRAIN_1154
+if 
+  33@ > 2000 
+jf @SKBRAIN_1187 
+4@ = 0 
+3@ += 1 
+
+:SKBRAIN_1187
+jump @SKBRAIN_1194 
+
+:SKBRAIN_1194
+return 
+
+:SKBRAIN_1196
+0871: init_jump_table 4@ total_jumps 4 default_jump 0 @SKBRAIN_1561 jumps 0 @SKBRAIN_1259 1 @SKBRAIN_1351 2 @SKBRAIN_1408 3 @SKBRAIN_1540 -1 @SKBRAIN_1561 -1 @SKBRAIN_1561 -1 @SKBRAIN_1561 
+
+:SKBRAIN_1259
+04C4: store_coords_to 13@ 14@ 15@ from_actor 0@ with_offset 0.0 3.0 3.0 
+091C: get_actor_in_sphere 13@ 14@ 15@ radius 20.0 model #CJ_FF_TILL_QUE external_script_named "PCUSTOM" handle_as 2@ 
+if 
+  2@ == -1 
+jf @SKBRAIN_1344 
+4@ += 1 
+
+:SKBRAIN_1344
+jump @SKBRAIN_1561 
+
+:SKBRAIN_1351
+0812: AS_actor 0@ perform_animation "SHP_TRAY_RETURN" IFP "FOOD" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 time -1 // versionB 
+4@ += 1 
+jump @SKBRAIN_1561 
+
+:SKBRAIN_1408
+9@ = 0.0 
+if 
+   Actor.Animation(0@) == "SHP_TRAY_RETURN"
+jf @SKBRAIN_1533 
+0613: 9@ = actor 0@ animation "SHP_TRAY_RETURN" time 
+if 
+  9@ == 1.0 
+jf @SKBRAIN_1533 
+if 
+03CA:   object 6@ exists 
+jf @SKBRAIN_1518 
+Object.Destroy(6@)
+
+:SKBRAIN_1518
+074C: AS_actor 0@ goto_AS_origin 1@ 
+4@ += 1 
+
+:SKBRAIN_1533
+jump @SKBRAIN_1561 
+
+:SKBRAIN_1540
+4@ = 0 
+3@ = 1 
+jump @SKBRAIN_1561 
+
+:SKBRAIN_1561
+return 
+
+:SKBRAIN_1563
+04EF: release_animation "FOOD" 
+Model.Destroy(2220)
+Object.RemoveReferences(6@)
+if 
+   not Actor.Dead(0@)
+jf @SKBRAIN_1602 
+0792: disembark_instantly_actor 0@ 
+
+:SKBRAIN_1602
+end_thread 
+return 
+
+:SKBRAIN_1606
+wait 0 
+if and
+   Player.Defined($PLAYER_CHAR)
+  $PLAYER_IN_INTERIOR == 0 
+jf @SKBRAIN_1778 
+09E8: $1250 = actor $PLAYER_ACTOR active_interior 
+if or
+  $1250 == 0 
+  $PLAYER_IN_INTERIOR == 1 
+jf @SKBRAIN_1680 
+gosub @SKBRAIN_1563 
+jump @SKBRAIN_1771 
+
+:SKBRAIN_1680
+if 
+   not Actor.Dead(0@)
+jf @SKBRAIN_1771 
+062E: get_actor 0@ task 1476 status_store_to 7@ // ret 7 if not found 
+if 
+04A4:   7@ == 7 // == constant 
+jf @SKBRAIN_1771 
+05C4: AS_actor 0@ hands_up -2 ms 
+if 
+0737:   actor 0@ lifting_object -1 
+jf @SKBRAIN_1771 
+if 
+03CA:   object 6@ exists 
+jf @SKBRAIN_1771 
+Object.Destroy(6@)
+
+:SKBRAIN_1771
+jump @SKBRAIN_1785 
+
+:SKBRAIN_1778
+gosub @SKBRAIN_1563 
+
+:SKBRAIN_1785
+jump @SKBRAIN_1606 
+0663: printint "PEDSTATE" 3@ 
+0663: printint "SUBSTATESTATUS" 4@ 
+0663: printint "LOOP_TIMER" 33@ 
+0663: printint "SCRIPT_TIMER" 32@ 
+return 
+end_thread

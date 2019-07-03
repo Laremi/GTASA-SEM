@@ -1,0 +1,131 @@
+:HOTDOGV
+thread 'HOTDOGV' 
+2@ = 0 
+if 
+  2@ == 1 
+jf @HOTDOGV_77 
+0@ = Actor.Create(CivMale, #MALE01, 0.0, 0.0, 0.0)
+1@ = Car.Create(#HOTDOG, $TEMPVAR_FLOAT_1, $TEMPVAR_FLOAT_2, $TEMPVAR_FLOAT_3)
+
+:HOTDOGV_77
+wait 0 
+01BD: $CURRENT_TIME_IN_MS2 = current_time_in_ms 
+if 
+   not Actor.Dead(0@)
+jf @HOTDOGV_802 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @HOTDOGV_777 
+if 
+0A32:   actor 0@ on_turret_of_car 
+jf @HOTDOGV_752 
+0A33: get_car_ped_is_attached_to 0@ store_to 1@ 
+if 
+   not Actor.InCar($PLAYER_ACTOR, 1@)
+jf @HOTDOGV_720 
+if 
+  2@ == 0 
+jf @HOTDOGV_538 
+if 
+0203:   actor $PLAYER_ACTOR near_car 1@ radius 12.0 12.0 flag 0 on_foot 
+jf @HOTDOGV_538 
+04ED: load_animation "VENDING" 
+if 
+04EE:   animation "VENDING" loaded 
+jf @HOTDOGV_538 
+if 
+   Player.Money($PLAYER_CHAR) > 1
+jf @HOTDOGV_538 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 1@ with_offset 2.0 0.0 0.0 
+if 
+   not Actor.Dead(0@)
+jf @HOTDOGV_538 
+if 
+851A:   not actor 0@ damaged_by_actor $PLAYER_ACTOR 
+jf @HOTDOGV_538 
+if 
+00FF:   actor $PLAYER_ACTOR sphere 1 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @HOTDOGV_529 
+0512: show_permanent_text_box 'SLOT_03' 
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 0 
+if 
+00E1:   player 0 pressed_key 15 
+jf @HOTDOGV_538 
+03E6: remove_text_box 
+0624: add 2.0 to_float_stat 20 
+0624: add 2.0 to_float_stat 62 
+$3396 = Actor.Health($PLAYER_ACTOR)
+$3396 += 50 
+Actor.Health($PLAYER_ACTOR) = $3396
+0A1A: actor $PLAYER_ACTOR perform_walk_animation "VEND_EAT1_P" IFP "VENDING" framedelta 4.0 loopA 0 lockX 0 lockY 0 lockF 0 -1 ms // versionC 
+wait 500 
+0623: add 10 to_integer_stat 245 
+008B: 3@ = $CURRENT_TIME_IN_MS2 // (int) 
+3@ += 3000 
+Player.Money($PLAYER_CHAR) += -2
+2@ += 1 
+
+:HOTDOGV_529
+07CC: set_player $PLAYER_CHAR can_enter_exit_vehicles 1 
+03E6: remove_text_box 
+
+:HOTDOGV_538
+if 
+  2@ == 1 
+jf @HOTDOGV_598 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 3@ // (int) 
+jf @HOTDOGV_598 
+008B: 3@ = $CURRENT_TIME_IN_MS2 // (int) 
+3@ += 27000 
+2@ += 1 
+
+:HOTDOGV_598
+if 
+  2@ == 2 
+jf @HOTDOGV_713 
+if 
+001E:   $CURRENT_TIME_IN_MS2 > 3@ // (int) 
+jf @HOTDOGV_713 
+0407: store_coords_to $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 from_car 1@ with_offset 1.0 0.0 0.0 
+if 
+80FF:   not actor $PLAYER_ACTOR sphere 0 in_sphere $TEMPVAR_FLOAT_1 $TEMPVAR_FLOAT_2 $TEMPVAR_FLOAT_3 radius 0.6 0.6 1.0 on_foot 
+jf @HOTDOGV_713 
+2@ = 0 
+
+:HOTDOGV_713
+jump @HOTDOGV_745 
+
+:HOTDOGV_720
+Actor.RemoveReferences(0@)
+05C5: AS_actor 0@ cower -2 ms 
+04EF: release_animation "VENDING" 
+end_thread 
+
+:HOTDOGV_745
+jump @HOTDOGV_770 
+
+:HOTDOGV_752
+Actor.RemoveReferences(0@)
+04EF: release_animation "VENDING" 
+end_thread 
+
+:HOTDOGV_770
+jump @HOTDOGV_795 
+
+:HOTDOGV_777
+Actor.RemoveReferences(0@)
+04EF: release_animation "VENDING" 
+end_thread 
+
+:HOTDOGV_795
+jump @HOTDOGV_820 
+
+:HOTDOGV_802
+Actor.RemoveReferences(0@)
+04EF: release_animation "VENDING" 
+end_thread 
+
+:HOTDOGV_820
+jump @HOTDOGV_77 
+end_thread

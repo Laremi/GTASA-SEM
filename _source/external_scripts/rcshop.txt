@@ -1,0 +1,97 @@
+:RCSHOP
+thread 'RCSHOP' 
+$9526 = 0 
+2@ = -2237.291 
+3@ = 128.5856 
+4@ = 1034.422 
+5@ = 0.0 
+6@ = 360.0 
+04AF: 10@ = 217 // = constant 
+Model.Load(10@)
+
+:RCSHOP_81
+if 
+   not Model.Available(10@)
+jf @RCSHOP_108 
+wait 0 
+jump @RCSHOP_81 
+
+:RCSHOP_108
+0615: define_AS_pack_begin 7@ 
+0638: AS_actor -1 stay_put 1 
+05BA: AS_actor -1 move_mouth -2 ms 
+0616: define_AS_pack_end 7@ 
+061D: create_AS_origin_at 2@ 3@ 4@ Z_angle 5@ unknown_angle 6@ AS_pack 7@ handle_as 8@ 
+0621: create_actor_pedtype 4 model 10@ at_AS_origin 8@ task 1466 handle_as 9@ 
+
+:RCSHOP_169
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @RCSHOP_509 
+09E8: $1250 = actor $PLAYER_ACTOR active_interior 
+if or
+  $1250 == 0 
+  $PLAYER_IN_INTERIOR == 1 
+jf @RCSHOP_225 
+gosub @RCSHOP_520 
+
+:RCSHOP_225
+if and
+  $ZERO_TOTAL_PASSED_MISSIONS == 3 
+  $ONMISSION == 0 
+jf @RCSHOP_305 
+if 
+0102:   actor $PLAYER_ACTOR in_sphere -2219.287 133.8895 1034.641 radius 1.5 1.5 1.5 sphere 1 stopped_on_foot 
+jf @RCSHOP_305 
+$VIDEO_GAME = 7 
+
+:RCSHOP_305
+if or
+02E0:   actor $PLAYER_ACTOR firing_weapon 
+   Player.WantedLevel($PLAYER_CHAR) > $PLAYER_WANTED_LEVEL
+jf @RCSHOP_336 
+$9526 = 1 
+
+:RCSHOP_336
+if 
+   not Actor.Dead(9@)
+jf @RCSHOP_418 
+if and
+0457:   player $PLAYER_CHAR aiming_at_actor 9@ 
+82D8:   not actor $PLAYER_ACTOR current_weapon == 56 
+jf @RCSHOP_392 
+$9526 = 1 
+jump @RCSHOP_418 
+
+:RCSHOP_392
+if 
+051A:   actor 9@ damaged_by_actor $PLAYER_ACTOR 
+jf @RCSHOP_418 
+$9526 = 1 
+
+:RCSHOP_418
+if 
+  $9526 == 1 
+jf @RCSHOP_509 
+Actor.StorePos($PLAYER_ACTOR, 2@, 3@, 4@)
+08E5: get_actor_in_sphere 2@ 3@ 4@ radius 20.0 handle_as 0@ 
+if 
+  0@ > -1 
+jf @RCSHOP_509 
+1@ += 1 
+0913: run_external_script 37 (CUSTOMER_PANIC) 0@ 1@  
+08A9: load_external_script 37 (CUSTOMER_PANIC) 
+
+:RCSHOP_509
+wait 0 
+jump @RCSHOP_169 
+
+:RCSHOP_520
+$9526 = 0 
+Actor.RemoveReferences(9@)
+Model.Destroy(10@)
+Actor.DestroyInstantly(9@)
+061E: remove_references_to_AS_origin 8@ 
+061B: remove_references_to_AS_pack 7@ 
+end_thread 
+end_thread

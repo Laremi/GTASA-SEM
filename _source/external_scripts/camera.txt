@@ -1,0 +1,734 @@
+:CAMERA
+thread 'CAMERA' 
+if 
+  0@ == -100 
+jf @CAMERA_53 
+8@ = Actor.Create(CivMale, #NULL, 0.0, 0.0, 0.0)
+
+:CAMERA_53
+3@ = 0 
+2@ = 0 
+1@ = 0 
+12@ = 0.0 
+13@ = 25.0 
+14@ = -25.0 
+0A2F: show_first_person_view 0 
+
+:CAMERA_108
+wait 3@ 
+if 
+   Player.Defined($PLAYER_CHAR)
+jf @CAMERA_819 
+if 
+   Actor.HasWeapon($PLAYER_ACTOR, 43)
+jf @CAMERA_722 
+gosub @CAMERA_3382 
+if 
+  11@ == 1 
+jf @CAMERA_557 
+if 
+   Actor.Stopped($PLAYER_ACTOR)
+jf @CAMERA_473 
+if 
+02D8:   actor $PLAYER_ACTOR current_weapon == 43 
+jf @CAMERA_385 
+if 
+00E1:   player 0 pressed_key 6 
+jf @CAMERA_306 
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_247 
+03E6: remove_text_box 
+
+:CAMERA_247
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_271 
+03E6: remove_text_box 
+
+:CAMERA_271
+3@ = 0 
+2@ = 0 
+4@ = 0 
+gosub @CAMERA_833 
+jump @CAMERA_378 
+
+:CAMERA_306
+1@ = 0 
+if 
+88B4:   not test $390 bit 1 
+jf @CAMERA_338 
+gosub @CAMERA_1963 
+
+:CAMERA_338
+if 
+  2@ > 0 
+jf @CAMERA_370 
+3@ = 0 
+jump @CAMERA_378 
+
+:CAMERA_370
+3@ = 500 
+
+:CAMERA_378
+jump @CAMERA_466 
+
+:CAMERA_385
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_409 
+03E6: remove_text_box 
+
+:CAMERA_409
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_433 
+03E6: remove_text_box 
+
+:CAMERA_433
+0A2F: show_first_person_view 0 
+3@ = 500 
+1@ = 0 
+2@ = 0 
+4@ = 0 
+
+:CAMERA_466
+jump @CAMERA_550 
+
+:CAMERA_473
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_497 
+03E6: remove_text_box 
+
+:CAMERA_497
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_521 
+03E6: remove_text_box 
+
+:CAMERA_521
+3@ = 500 
+1@ = 0 
+2@ = 0 
+4@ = 0 
+
+:CAMERA_550
+jump @CAMERA_715 
+
+:CAMERA_557
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_581 
+03E6: remove_text_box 
+
+:CAMERA_581
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_605 
+03E6: remove_text_box 
+
+:CAMERA_605
+0A2F: show_first_person_view 0 
+3@ = 500 
+1@ = 0 
+2@ = 0 
+4@ = 0 
+if 
+  2@ >= 3 
+jf @CAMERA_715 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_715 
+Actor.LockInCurrentPosition(8@) = False
+0337: set_actor 8@ visibility 1 
+if and
+  $ONMISSION == 0 
+  5@ == 0 
+jf @CAMERA_715 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:CAMERA_715
+jump @CAMERA_812 
+
+:CAMERA_722
+if 
+  2@ >= 3 
+jf @CAMERA_805 
+Model.Load(#CAMERA)
+3@ = 0 
+gosub @CAMERA_3382 
+if 
+  11@ == 1 
+jf @CAMERA_791 
+gosub @CAMERA_1963 
+jump @CAMERA_798 
+
+:CAMERA_791
+gosub @CAMERA_3556 
+
+:CAMERA_798
+jump @CAMERA_812 
+
+:CAMERA_805
+gosub @CAMERA_3556 
+
+:CAMERA_812
+jump @CAMERA_826 
+
+:CAMERA_819
+gosub @CAMERA_3556 
+
+:CAMERA_826
+jump @CAMERA_108 
+
+:CAMERA_833
+0871: init_jump_table 1@ total_jumps 5 default_jump 0 @CAMERA_1961 jumps 0 @CAMERA_896 1 @CAMERA_998 2 @CAMERA_1361 3 @CAMERA_1542 4 @CAMERA_1730 -1 @CAMERA_1961 -1 @CAMERA_1961 
+
+:CAMERA_896
+07F6: get_group $PLAYER_GROUP number_of_leaders_to 6@ number_of_members_to 7@ 
+if 
+  7@ > 0 
+jf @CAMERA_991 
+if 
+  7@ > 3 
+jf @CAMERA_950 
+7@ = 3 
+
+:CAMERA_950
+6@ = 0 
+7@ -= 1 
+15@ = 3.0 
+15@ += 0.2 
+1@ += 1 
+
+:CAMERA_991
+jump @CAMERA_1961 
+
+:CAMERA_998
+Actor.StorePos($PLAYER_ACTOR, 19@, 20@, 21@)
+04C4: store_coords_to 16@ 17@ 18@ from_actor $PLAYER_ACTOR with_offset 0.0 3.0 0.0 
+02CE: 18@ = ground_z_at 16@ 17@ 18@ 
+0063: 21@ -= 18@ // (float) 
+if or
+  21@ > 2.5 
+  -2.5 > 21@ 
+jf @CAMERA_1108 
+1@ = -1 
+jump @CAMERA_1961 
+
+:CAMERA_1108
+Actor.StorePos($PLAYER_ACTOR, 19@, 20@, 21@)
+04C4: store_coords_to 16@ 17@ 18@ from_actor $PLAYER_ACTOR with_offset 0.0 6.0 0.0 
+02CE: 18@ = ground_z_at 16@ 17@ 18@ 
+0063: 21@ -= 18@ // (float) 
+if or
+  21@ > 2.5 
+  -2.5 > 21@ 
+jf @CAMERA_1218 
+1@ = -1 
+jump @CAMERA_1961 
+
+:CAMERA_1218
+04C4: store_coords_to 16@ 17@ 18@ from_actor $PLAYER_ACTOR with_offset 0.5 0.0 0.0 
+04C4: store_coords_to 19@ 20@ 21@ from_actor $PLAYER_ACTOR with_offset -0.5 0.0 0.0 
+if 
+872D:   not is_flamethrower_fired_in_angled_area_2d 16@ 17@ to 19@ 20@ angle 7.0 sphere 0 
+jf @CAMERA_1340 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 335 store_spoken_phrase_id_to 6@ 
+6@ = 0 
+1@ += 1 
+jump @CAMERA_1354 
+
+:CAMERA_1340
+1@ = -1 
+jump @CAMERA_1961 
+
+:CAMERA_1354
+jump @CAMERA_1961 
+
+:CAMERA_1361
+if 
+001D:   6@ > 7@ // (int) 
+jf @CAMERA_1408 
+6@ = 0 
+10@ = 0 
+1@ += 1 
+jump @CAMERA_1535 
+
+:CAMERA_1408
+092B: 8@ = group $PLAYER_GROUP member 6@ 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_1528 
+if and
+874F:   not actor 8@ ped_event == 36 
+874F:   not actor 8@ ped_event == 37 
+82E0:   not actor 8@ firing_weapon 
+jf @CAMERA_1528 
+if 
+  3 > 6@ 
+jf @CAMERA_1511 
+06A8: AS_actor 8@ run_to_and_look_at_actor $PLAYER_ACTOR timelimit 20000 approach_distance 15@ approach_angle 12@(6@,3f) 
+jump @CAMERA_1528 
+
+:CAMERA_1511
+06A8: AS_actor 8@ run_to_and_look_at_actor $PLAYER_ACTOR timelimit 20000 approach_distance 15@ approach_angle 12@ 
+
+:CAMERA_1528
+6@ += 1 
+
+:CAMERA_1535
+jump @CAMERA_1961 
+
+:CAMERA_1542
+if 
+001D:   6@ > 7@ // (int) 
+jf @CAMERA_1615 
+6@ = 0 
+if 
+001D:   10@ > 7@ // (int) 
+jf @CAMERA_1608 
+6@ = 0 
+10@ = 0 
+1@ += 1 
+
+:CAMERA_1608
+jump @CAMERA_1723 
+
+:CAMERA_1615
+092B: 8@ = group $PLAYER_GROUP member 6@ 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_1716 
+if and
+874F:   not actor 8@ ped_event == 36 
+874F:   not actor 8@ ped_event == 37 
+82E0:   not actor 8@ firing_weapon 
+jf @CAMERA_1716 
+062E: get_actor 8@ task 1704 status_store_to 9@ // ret 7 if not found 
+if 
+04A4:   9@ == 7 // == constant 
+jf @CAMERA_1716 
+05BA: AS_actor 8@ move_mouth 5000 ms 
+10@ += 1 
+
+:CAMERA_1716
+6@ += 1 
+
+:CAMERA_1723
+jump @CAMERA_1961 
+
+:CAMERA_1730
+if 
+001D:   6@ > 7@ // (int) 
+jf @CAMERA_1770 
+6@ = 0 
+1@ = -1 
+jump @CAMERA_1954 
+
+:CAMERA_1770
+092B: 8@ = group $PLAYER_GROUP member 6@ 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_1947 
+if 
+02CB:   actor 8@ bounding_sphere_visible 
+jf @CAMERA_1947 
+if or
+   Actor.Model(8@) == #GANGRL3
+   Actor.Model(8@) == #MECGRL3
+   Actor.Model(8@) == #GUNGRL3
+   Actor.Model(8@) == #COPGRL3
+   Actor.Model(8@) == #NURGRL3
+   Actor.Model(8@) == #CROGRL3
+jf @CAMERA_1939 
+if 
+04EE:   animation "KISSING" loaded 
+jf @CAMERA_1932 
+0605: actor 8@ perform_animation "GFWAVE2" IFP "KISSING" framedelta 4.0 loop 0 lockX 0 lockY 0 lockF 0 time 0 
+
+:CAMERA_1932
+jump @CAMERA_1947 
+
+:CAMERA_1939
+0A1D: AS_actor 8@ rotate_to_and_look_at_actor $PLAYER_ACTOR 
+
+:CAMERA_1947
+6@ += 1 
+
+:CAMERA_1954
+jump @CAMERA_1961 
+
+:CAMERA_1961
+return 
+
+:CAMERA_1963
+0871: init_jump_table 2@ total_jumps 8 default_jump 0 @CAMERA_3380 jumps 0 @CAMERA_2091 1 @CAMERA_2155 2 @CAMERA_2310 3 @CAMERA_2445 4 @CAMERA_2569 5 @CAMERA_2820 6 @CAMERA_3231 
+0872: jump_table_jumps 7 @CAMERA_3261 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 -1 @CAMERA_3380 
+
+:CAMERA_2091
+07F6: get_group $PLAYER_GROUP number_of_leaders_to 6@ number_of_members_to 7@ 
+if 
+  7@ > 0 
+jf @CAMERA_2148 
+6@ = 0 
+7@ -= 1 
+2@ += 1 
+3@ = 0 
+
+:CAMERA_2148
+jump @CAMERA_3380 
+
+:CAMERA_2155
+if 
+001D:   6@ > 7@ // (int) 
+jf @CAMERA_2188 
+6@ = 0 
+jump @CAMERA_2303 
+
+:CAMERA_2188
+092B: 8@ = group $PLAYER_GROUP member 6@ 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_2296 
+if 
+0104:   actor $PLAYER_ACTOR near_actor 8@ radius 1.5 1.5 1.5 sphere 0 
+jf @CAMERA_2296 
+if and
+88FE:   not text_box_displayed 
+  4@ == 0 
+jf @CAMERA_2289 
+03E5: show_text_box 'CAM_001'  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+4@ = 1 
+
+:CAMERA_2289
+2@ += 1 
+
+:CAMERA_2296
+6@ += 1 
+
+:CAMERA_2303
+jump @CAMERA_3380 
+
+:CAMERA_2310
+if and
+   not Actor.Dead(8@)
+06EE:   actor 8@ in_group $PLAYER_GROUP 
+jf @CAMERA_2431 
+if and
+0104:   actor $PLAYER_ACTOR near_actor 8@ radius 2.5 2.5 2.5 sphere 0 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CAMERA_2417 
+if 
+00E1:   player 0 pressed_key 4 
+jf @CAMERA_2410 
+0947: actor $PLAYER_ACTOR speak_from_audio_table 334 store_spoken_phrase_id_to 6@ 
+2@ += 1 
+
+:CAMERA_2410
+jump @CAMERA_2424 
+
+:CAMERA_2417
+2@ = 0 
+
+:CAMERA_2424
+jump @CAMERA_2438 
+
+:CAMERA_2431
+2@ = 0 
+
+:CAMERA_2438
+jump @CAMERA_3380 
+
+:CAMERA_2445
+if and
+   not Actor.Dead(8@)
+06EE:   actor 8@ in_group $PLAYER_GROUP 
+jf @CAMERA_2555 
+if and
+0104:   actor $PLAYER_ACTOR near_actor 8@ radius 2.5 2.5 2.5 sphere 0 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CAMERA_2541 
+if 
+80E1:   not player 0 pressed_key 4 
+jf @CAMERA_2534 
+2@ += 1 
+
+:CAMERA_2534
+jump @CAMERA_2548 
+
+:CAMERA_2541
+2@ = 0 
+
+:CAMERA_2548
+jump @CAMERA_2562 
+
+:CAMERA_2555
+2@ = 0 
+
+:CAMERA_2562
+jump @CAMERA_3380 
+
+:CAMERA_2569
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_2806 
+if and
+0104:   actor $PLAYER_ACTOR near_actor 8@ radius 3.0 3.0 2.0 sphere 0 
+044B:   actor $PLAYER_ACTOR on_foot 
+06EE:   actor 8@ in_group $PLAYER_GROUP 
+jf @CAMERA_2792 
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_2658 
+03E6: remove_text_box 
+
+:CAMERA_2658
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_2682 
+03E6: remove_text_box 
+
+:CAMERA_2682
+00BE: text_clear_all 
+Actor.LockInCurrentPosition(8@) = True
+0337: set_actor 8@ visibility 0 
+Actor.StorePos(8@, 16@, 17@, 18@)
+18@ += 0.8 
+Camera.SetPosition(16@, 17@, 18@, 0.0, 0.2, 0.0)
+Camera.OnPed($PLAYER_ACTOR, 15, 2)
+0A2F: show_first_person_view 1 
+041A: 10@ = actor $PLAYER_ACTOR weapon 43 ammo 
+0555: remove_weapon 43 from_actor $PLAYER_ACTOR 
+2@ += 1 
+jump @CAMERA_2799 
+
+:CAMERA_2792
+2@ = 0 
+
+:CAMERA_2799
+jump @CAMERA_2813 
+
+:CAMERA_2806
+2@ = 0 
+
+:CAMERA_2813
+jump @CAMERA_3380 
+
+:CAMERA_2820
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_3098 
+if and
+06EE:   actor 8@ in_group $PLAYER_GROUP 
+0104:   actor $PLAYER_ACTOR near_actor 8@ radius 6.0 6.0 2.0 sphere 0 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CAMERA_2951 
+0512: show_permanent_text_box 'CAM_002'  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+if 
+00E1:   player 0 pressed_key 4 
+jf @CAMERA_2920 
+2@ += 1 
+
+:CAMERA_2920
+if 
+00E1:   player 0 pressed_key 15 
+jf @CAMERA_2944 
+2@ = 7 
+
+:CAMERA_2944
+jump @CAMERA_3091 
+
+:CAMERA_2951
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_2975 
+03E6: remove_text_box 
+
+:CAMERA_2975
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_2999 
+03E6: remove_text_box 
+
+:CAMERA_2999
+Actor.LockInCurrentPosition(8@) = False
+0337: set_actor 8@ visibility 1 
+0A2F: show_first_person_view 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Camera, 10@)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 43 
+068D: get_camera_position_to 19@ 20@ 21@ 
+if and
+0045:   19@ == 16@ // (float) 
+0045:   20@ == 17@ // (float) 
+0045:   21@ == 18@ // (float) 
+jf @CAMERA_3084 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:CAMERA_3084
+2@ = 0 
+
+:CAMERA_3091
+jump @CAMERA_3224 
+
+:CAMERA_3098
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_3122 
+03E6: remove_text_box 
+
+:CAMERA_3122
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_3146 
+03E6: remove_text_box 
+
+:CAMERA_3146
+068D: get_camera_position_to 19@ 20@ 21@ 
+if and
+0045:   19@ == 16@ // (float) 
+0045:   20@ == 17@ // (float) 
+0045:   21@ == 18@ // (float) 
+jf @CAMERA_3196 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:CAMERA_3196
+0A2F: show_first_person_view 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Camera, 10@)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 43 
+2@ = 0 
+
+:CAMERA_3224
+jump @CAMERA_3380 
+
+:CAMERA_3231
+03E6: remove_text_box 
+00BE: text_clear_all 
+0A2F: show_first_person_view 0 
+0A1E: dump_screen 1 
+wait 100 
+2@ += 1 
+jump @CAMERA_3380 
+
+:CAMERA_3261
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_3285 
+03E6: remove_text_box 
+
+:CAMERA_3285
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_3309 
+03E6: remove_text_box 
+
+:CAMERA_3309
+00BE: text_clear_all 
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_3341 
+Actor.LockInCurrentPosition(8@) = False
+0337: set_actor 8@ visibility 1 
+
+:CAMERA_3341
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+0A2F: show_first_person_view 0 
+Actor.GiveWeaponAndAmmo($PLAYER_ACTOR, Camera, 10@)
+01B9: set_actor $PLAYER_ACTOR armed_weapon_to 43 
+2@ = 0 
+jump @CAMERA_3380 
+
+:CAMERA_3380
+return 
+
+:CAMERA_3382
+11@ = 0 
+if 
+  $ONMISSION == 0 
+jf @CAMERA_3554 
+if 
+  $PHONE_RINGING_FLAG == 0 
+jf @CAMERA_3554 
+if 
+  $FREEFALL_STAGE == 0 
+jf @CAMERA_3554 
+if 
+88B4:   not test $390 bit 20 
+jf @CAMERA_3554 
+if 
+89BE:   not are_text_boxes_locked_to_any_thread 
+jf @CAMERA_3554 
+if 
+044B:   actor $PLAYER_ACTOR on_foot 
+jf @CAMERA_3554 
+if 
+8A03:   not unknown_gang_war_in_progress 
+jf @CAMERA_3554 
+if 
+   not fading 
+jf @CAMERA_3554 
+if 
+  $1250 == 0 
+jf @CAMERA_3554 
+if 
+86B9:   not cutscene_data_loaded 
+jf @CAMERA_3554 
+11@ = 1 
+
+:CAMERA_3554
+return 
+
+:CAMERA_3556
+if 
+0A2A:   text_box 'CAM_001' displayed  // Press ~k~~PED_ANSWER_PHONE~ to have your picture taken.
+jf @CAMERA_3580 
+03E6: remove_text_box 
+
+:CAMERA_3580
+if 
+0A2A:   text_box 'CAM_002' displayed  // Press ~k~~PED_ANSWER_PHONE~ to take the picture.~n~~k~~VEHICLE_ENTER_EXIT~ To get the camera back.
+jf @CAMERA_3604 
+03E6: remove_text_box 
+
+:CAMERA_3604
+if 
+   not Actor.Dead(8@)
+jf @CAMERA_3634 
+Actor.LockInCurrentPosition(8@) = False
+0337: set_actor 8@ visibility 1 
+
+:CAMERA_3634
+if 
+  $ONMISSION == 0 
+jf @CAMERA_3731 
+if 
+  2@ >= 3 
+jf @CAMERA_3727 
+068D: get_camera_position_to 19@ 20@ 21@ 
+if and
+0045:   19@ == 16@ // (float) 
+0045:   20@ == 17@ // (float) 
+0045:   21@ == 18@ // (float) 
+jf @CAMERA_3720 
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:CAMERA_3720
+jump @CAMERA_3731 
+
+:CAMERA_3727
+Camera.SetBehindPlayer
+Camera.Restore_WithJumpCut
+
+:CAMERA_3731
+0A2F: show_first_person_view 0 
+Model.Destroy(#CAMERA)
+end_thread 
+return 
+return 
+end_thread
